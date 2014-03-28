@@ -1,0 +1,107 @@
+<?php
+
+/**
+* ownCloud - Tasks
+*
+* @author Raimund Schlüßler
+* @copyright 2013 Raimund Schlüßler raimund.schluessler@googlemail.com
+*
+* This library is free software; you can redistribute it and/or
+* modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
+* License as published by the Free Software Foundation; either
+* version 3 of the License, or any later version.
+*
+* This library is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU AFFERO GENERAL PUBLIC LICENSE for more details.
+*
+* You should have received a copy of the GNU Affero General Public
+* License along with this library.  If not, see <http://www.gnu.org/licenses/>.
+*
+*/
+
+namespace OCA\Tasks_enhanced\Db;
+
+use \OCA\AppFramework\Core\API;
+use \OCA\AppFramework\Db\Mapper;
+use \OCA\AppFramework\Db\Entity;
+
+class TasksMapper extends Mapper implements IMapper {
+
+	public function __construct(API $api) {
+		parent::__construct($api, 'tasks');
+	}
+
+	public function find($id, $userId){
+		// $sql = 'SELECT * FROM `*PREFIX*news_folders` ' .
+		// 	'WHERE `id` = ? ' .
+		// 	'AND `user_id` = ?';
+
+		// $row = $this->findOneQuery($sql, array($id, $userId));
+		// $folder = new Folder();
+		// $folder->fromRow($row);
+
+		// return $folder;
+	}
+
+	public function getAllTasks($userId){
+		$calendars = $this->api->getAllCalendars($userId);
+		$user_timezone = $this->api->getTimezone($userId);
+
+		$tasks = array();
+		foreach( $calendars as $calendar ) {
+			$calendar_tasks = $this->api->getAllTasks($calendar['id']);
+			foreach( $calendar_tasks as $task ) {
+				if($task['objecttype']!='VTODO') {
+					continue;
+				}
+				if(is_null($task['summary'])) {
+					continue;
+				}
+				$vtodo = $this->api->parseVTODO($task['calendardata']);
+				try {
+					$task_data = $this->api->arrayForJSON($task['id'], $vtodo, $user_timezone);
+					$task_data['calendarid'] = $calendar['id'];
+					$tasks[] = $task_data;
+				} catch(\Exception $e) {
+					\OCP\Util::writeLog('tasks_enhanced', $e->getMessage(), \OCP\Util::ERROR);
+				}
+			}
+		}
+		return $tasks;
+	}
+
+	public function getInitialTasks($userId){
+		$calendars = $this->api->getAllCalendars($userId);
+		$user_timezone = $this->api->getTimezone($userId);
+
+		$tasks = array();
+		foreach( $calendars as $calendar ) {
+			$calendar_tasks = $this->api->getAllTasks($calendar['id']);
+			foreach( $calendar_tasks as $task ) {
+				if($task['objecttype']!='VTODO') {
+					continue;
+				}
+				if(is_null($task['summary'])) {
+					continue;
+				}
+				$vtodo = $this->api->parseVTODO($task['calendardata']);
+				if(!$vtodo->COMPLETED){
+					try {
+						$task_data = $this->api->arrayForJSON($task['id'], $vtodo, $user_timezone);
+						$task_data['calendarid'] = $calendar['id'];
+						$tasks[] = $task_data;
+					} catch(\Exception $e) {
+						\OCP\Util::writeLog('tasks_enhanced', $e->getMessage(), \OCP\Util::ERROR);
+					}
+				}
+			}
+		}
+		return $tasks;
+	}
+
+	public function findByID($taskID){
+		return $this->api->getVCalendar($taskID);
+	}
+}

@@ -1,0 +1,34 @@
+{
+  "name": "task",
+  "description": "ownCloud Task App",
+  "version": "0.1",
+  "author": {
+    "name": "Raimund Schlüßler",
+    "email": "raimund.schluessler@googlemail.com"
+  },
+  "private": true,
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:owncloud/tast.git"
+  },
+  "bugs": "https://github.com/owncloud/task/issues",
+  "contributors": [],
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-cli": "~0.1.6",
+    "coffee-script": "~1.4.0",
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-contrib-less": "~0.6.4",
+    "grunt-contrib-concat": "~0.1.2",
+    "grunt-contrib-watch": "~0.2.0",
+    "grunt-coffeelint": "0.0.6",
+    "grunt-wrap": "~0.2.0",
+    "phantomjs": "~1.8.1-3",
+    "grunt-phpunit": "0.2.0",
+    "gruntacular": "~0.3.0",
+    "grunt-karma": "~0.4.5"
+  },
+  "engine": "node >= 0.8"
+}
