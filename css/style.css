@@ -7,10 +7,10 @@
 #content {
   overflow: hidden;
   color: #423E3E;
-  background: url("%appswebroot%/tasks_enhanced/img/bgLinenBig.jpg") repeat scroll 0 0 #000000;
+  background: url("../img/bgLinenBig.jpg") repeat scroll 0 0 #000000;
 }
 #content .icon {
-  background-image: url("%appswebroot%/tasks_enhanced/img/sprites.svg");
+  background-image: url("../img/sprites.svg");
   height: 20px;
   width: 20px;
   display: inline-block;
@@ -175,7 +175,7 @@
 }
 #content li.task-item .task-body {
   -moz-box-sizing: border-box;
-  background: url("%appswebroot%/tasks_enhanced/img/bgTask.png") repeat-x scroll 0 0 #f8f8f8;
+  background: url("../img/bgTask.png") repeat-x scroll 0 0 #f8f8f8;
   border-radius: 2px 2px 2px 2px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.08);
   height: 34px;
@@ -245,7 +245,7 @@
   color: #B3312D;
 }
 #task-lists {
-  background: url("%appswebroot%/tasks_enhanced/img/bgTasks.png") repeat scroll 0 0 #eeeeee;
+  background: url("../img/bgTasks.png") repeat scroll 0 0 #eeeeee;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -333,7 +333,7 @@
   background-size: 20px 20px;
 }
 #task-lists div.header #loading span.done {
-  background: url("%appswebroot%/tasks_enhanced/img/sprites.svg") repeat-x scroll center bottom transparent;
+  background: url("../img/sprites.svg") repeat-x scroll center bottom transparent;
   background-position: 0 0;
 }
 #task-lists div.footer {
@@ -378,7 +378,7 @@
 }
 #task-lists .addlist,
 #task-lists li a {
-  background: url("%appswebroot%/tasks_enhanced/img/divider.svg") repeat-x scroll center bottom transparent;
+  background: url("../img/divider.svg") repeat-x scroll center bottom transparent;
   display: block;
   -moz-box-sizing: border-box;
   -o-box-sizing: border-box;
@@ -417,7 +417,7 @@
   margin-top: -2px;
 }
 #task-lists li.active a {
-  background: url("%appswebroot%/tasks_enhanced/img/bgTasksActive.png") repeat scroll 0 0 transparent;
+  background: url("../img/bgTasksActive.png") repeat scroll 0 0 transparent;
   border-bottom: 1px solid transparent;
   color: white;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
@@ -606,7 +606,7 @@
   right: 0;
 }
 #task-details > div {
-  background: url("%appswebroot%/tasks_enhanced/img/bgTaskDetail.png") repeat scroll 0 0 #f8f8f8;
+  background: url("../img/bgTaskDetail.png") repeat scroll 0 0 #f8f8f8;
   border-radius: 5px 0px 0px 5px;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
   height: 100%;
@@ -808,7 +808,7 @@
   padding-bottom: 32px;
 }
 #task-details .body .section {
-  background: url("%appswebroot%/tasks_enhanced/img/divider.svg") repeat-x scroll center bottom transparent;
+  background: url("../img/divider.svg") repeat-x scroll center bottom transparent;
   height: 28px;
   padding: 9px 20px 9px 55px;
   position: relative;
@@ -964,13 +964,13 @@ textarea {
   margin-top: -4px;
 }
 .ui-datepicker .ui-icon-circle-triangle-w {
-  background-image: url("%appswebroot%/tasks_enhanced/img/sprites.svg");
+  background-image: url("../img/sprites.svg");
   background-position: -20px -60px;
   height: 10px;
   width: 10px;
 }
 .ui-datepicker .ui-icon-circle-triangle-e {
-  background-image: url("%appswebroot%/tasks_enhanced/img/sprites.svg");
+  background-image: url("../img/sprites.svg");
   background-position: -30px -60px;
   height: 10px;
   width: 10px;

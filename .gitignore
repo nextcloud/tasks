@@ -219,4 +219,15 @@ pip-log.txt
 Node.js
 #######
 node_modules
+
+#######
+Sublime Text
+#######
+*.sublime-project
+*.sublime-workspace
+
+#######
+Various
+#######
 *.ai
+*.bat
