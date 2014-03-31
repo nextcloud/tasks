@@ -49,7 +49,7 @@ if(\OCP\App::isEnabled('appframework') && \OCP\App::isEnabled('calendar')){
 
     // the title of your application. This will be used in the
     // navigation or on the settings page of your app
-    'name' => $api->getTrans()->t('Tasks 2')
+    'name' => $api->getTrans()->t('Tasks')
 
   ));
 

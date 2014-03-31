@@ -60,7 +60,7 @@ angular.module('Tasks').factory 'Persistence',
 				routeParams:
 					request: which
 
-			@_request.get 'getLists', params
+			@_request.get '/apps/tasks_enhanced/lists', params
 
 		addList: (list, onSuccess=null, onFailure=null) ->
 			onSuccess or= ->
@@ -73,7 +73,7 @@ angular.module('Tasks').factory 'Persistence',
 				onSuccess: onSuccess
 				onFailure: onFailure
 
-			@_request.post 'list_add', params
+			@_request.post '/apps/tasks_enhanced/lists/add/{name}', params
 
 		setListName: (list) ->
 			params =
@@ -82,14 +82,14 @@ angular.module('Tasks').factory 'Persistence',
 				data:
 					name: list.displayname
 
-			@_request.post 'list_name', params
+			@_request.post '/apps/tasks_enhanced/lists/{listID}/name', params
 
 		deleteList: (listID) ->
 			params =
 				routeParams:
 					listID: listID
 
-			@_request.post 'list_delete', params
+			@_request.post '/apps/tasks_enhanced/lists/{listID}/delete', params
 
 		getTasks: (onSuccess, showLoading=true) ->
 			onSuccess or= ->
@@ -110,35 +110,35 @@ angular.module('Tasks').factory 'Persistence',
 				onSuccess: successCallbackWrapper
 				onFailure: failureCallbackWrapper
 
-			@_request.get 'getTasks', params
+			@_request.get '/apps/tasks_enhanced/tasks', params
 
 		starTask: (taskID) ->
 			params =
 				routeParams:
 					taskID: taskID
 
-			@_request.post 'task_star', params
+			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/star', params
 
 		unstarTask: (taskID) ->
 			params =
 				routeParams:
 					taskID: taskID
 
-			@_request.post 'task_unstar', params
+			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/unstar', params
 
 		completeTask: (taskID) ->
 			params =
 				routeParams:
 					taskID: taskID
 
-			@_request.post 'task_complete', params
+			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/complete', params
 
 		uncompleteTask: (taskID) ->
 			params =
 				routeParams:
 					taskID: taskID
 
-			@_request.post 'task_uncomplete', params
+			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/uncomplete', params
 
 		addTask: (task, onSuccess=null, onFailure=null) ->
 			onSuccess or= ->
@@ -154,14 +154,14 @@ angular.module('Tasks').factory 'Persistence',
 				onSuccess: onSuccess
 				onFailure: onFailure
 
-			@_request.post 'task_add', params
+			@_request.post '/apps/tasks_enhanced/tasks/add/{calendarID}/{name}', params
 
 		deleteTask: (taskID) ->
 			params =
 				routeParams:
 					taskID: taskID
 
-			@_request.post 'task_delete', params
+			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/delete', params
 
 		setDueDate: (taskID, due) ->
 			params =
@@ -170,7 +170,7 @@ angular.module('Tasks').factory 'Persistence',
 				data:
 					due: due
 
-			@_request.post 'task_due', params
+			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/due', params
 
 		setReminderDate: (taskID, reminder) ->
 			params =
@@ -179,7 +179,7 @@ angular.module('Tasks').factory 'Persistence',
 				data:
 					reminder: reminder
 
-			@_request.post 'task_reminder', params
+			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/reminder', params
 
 		changeCalendarId: (taskID, calendarID) ->
 			params =
@@ -188,7 +188,7 @@ angular.module('Tasks').factory 'Persistence',
 				data:
 					calendarID: calendarID
 
-			@_request.post 'task_calendar', params
+			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/calendar', params
 
 		setTaskName: (taskID, name) ->
 			params =
@@ -197,7 +197,7 @@ angular.module('Tasks').factory 'Persistence',
 				data:
 					name: name
 
-			@_request.post 'task_name', params
+			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/name', params
 
 		setTaskNote: (taskID, note) ->
 			params =
@@ -206,7 +206,7 @@ angular.module('Tasks').factory 'Persistence',
 				data:
 					note: note
 
-			@_request.post 'task_note', params
+			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/note', params
 
 	return new Persistence(Request, Loading, $rootScope)
 

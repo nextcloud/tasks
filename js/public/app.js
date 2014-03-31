@@ -1475,7 +1475,7 @@
               request: which
             }
           };
-          return this._request.get('getLists', params);
+          return this._request.get('/apps/tasks_enhanced/lists', params);
         };
 
         Persistence.prototype.addList = function(list, onSuccess, onFailure) {
@@ -1498,7 +1498,7 @@
             onSuccess: onSuccess,
             onFailure: onFailure
           };
-          return this._request.post('list_add', params);
+          return this._request.post('/apps/tasks_enhanced/lists/add/{name}', params);
         };
 
         Persistence.prototype.setListName = function(list) {
@@ -1511,7 +1511,7 @@
               name: list.displayname
             }
           };
-          return this._request.post('list_name', params);
+          return this._request.post('/apps/tasks_enhanced/lists/{listID}/name', params);
         };
 
         Persistence.prototype.deleteList = function(listID) {
@@ -1521,7 +1521,7 @@
               listID: listID
             }
           };
-          return this._request.post('list_delete', params);
+          return this._request.post('/apps/tasks_enhanced/lists/{listID}/delete', params);
         };
 
         Persistence.prototype.getTasks = function(onSuccess, showLoading) {
@@ -1550,7 +1550,7 @@
             onSuccess: successCallbackWrapper,
             onFailure: failureCallbackWrapper
           };
-          return this._request.get('getTasks', params);
+          return this._request.get('/apps/tasks_enhanced/tasks', params);
         };
 
         Persistence.prototype.starTask = function(taskID) {
@@ -1560,7 +1560,7 @@
               taskID: taskID
             }
           };
-          return this._request.post('task_star', params);
+          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/star', params);
         };
 
         Persistence.prototype.unstarTask = function(taskID) {
@@ -1570,7 +1570,7 @@
               taskID: taskID
             }
           };
-          return this._request.post('task_unstar', params);
+          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/unstar', params);
         };
 
         Persistence.prototype.completeTask = function(taskID) {
@@ -1580,7 +1580,7 @@
               taskID: taskID
             }
           };
-          return this._request.post('task_complete', params);
+          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/complete', params);
         };
 
         Persistence.prototype.uncompleteTask = function(taskID) {
@@ -1590,7 +1590,7 @@
               taskID: taskID
             }
           };
-          return this._request.post('task_uncomplete', params);
+          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/uncomplete', params);
         };
 
         Persistence.prototype.addTask = function(task, onSuccess, onFailure) {
@@ -1616,7 +1616,7 @@
             onSuccess: onSuccess,
             onFailure: onFailure
           };
-          return this._request.post('task_add', params);
+          return this._request.post('/apps/tasks_enhanced/tasks/add/{calendarID}/{name}', params);
         };
 
         Persistence.prototype.deleteTask = function(taskID) {
@@ -1626,7 +1626,7 @@
               taskID: taskID
             }
           };
-          return this._request.post('task_delete', params);
+          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/delete', params);
         };
 
         Persistence.prototype.setDueDate = function(taskID, due) {
@@ -1639,7 +1639,7 @@
               due: due
             }
           };
-          return this._request.post('task_due', params);
+          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/due', params);
         };
 
         Persistence.prototype.setReminderDate = function(taskID, reminder) {
@@ -1652,7 +1652,7 @@
               reminder: reminder
             }
           };
-          return this._request.post('task_reminder', params);
+          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/reminder', params);
         };
 
         Persistence.prototype.changeCalendarId = function(taskID, calendarID) {
@@ -1665,7 +1665,7 @@
               calendarID: calendarID
             }
           };
-          return this._request.post('task_calendar', params);
+          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/calendar', params);
         };
 
         Persistence.prototype.setTaskName = function(taskID, name) {
@@ -1678,7 +1678,7 @@
               name: name
             }
           };
-          return this._request.post('task_name', params);
+          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/name', params);
         };
 
         Persistence.prototype.setTaskNote = function(taskID, note) {
@@ -1691,7 +1691,7 @@
               note: note
             }
           };
-          return this._request.post('task_note', params);
+          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/note', params);
         };
 
         return Persistence;

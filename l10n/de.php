@@ -1,7 +1,7 @@
 <?php $TRANSLATIONS = array(
 "Invalid date/time" => "Ungültige Datums-/Zeitangabe",
 "Search..." => "Suche...",
-"Tasks 2" => "Aufgaben 2",
+"Tasks" => "Aufgaben",
 "Today" => "Heute",
 "Important" => "Wichtig",
 "Done" => "Erledigt",
