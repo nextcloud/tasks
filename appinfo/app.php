@@ -22,38 +22,46 @@
 */
 namespace OCA\Tasks_enhanced;
 
-use \OCA\AppFramework\Core\API;
+use \OC\AppFramework\Core\API;
 
 // dont break owncloud when the appframework is not enabled
-if(\OCP\App::isEnabled('appframework') && \OCP\App::isEnabled('calendar')){
+if(\OCP\App::isEnabled('calendar')){
 
-	$api = new API('tasks_enhanced');
+	// $api = new API('tasks_enhanced');
 
-  $api->addNavigationEntry(array(
+//   $api->addNavigationEntry(array(
 
-    // the string under which your app will be referenced in owncloud
-    'id' => $api->getAppName(),
+//     // the string under which your app will be referenced in owncloud
+//     'id' => $api->getAppName(),
 
-    // sorting weight for the navigation. The higher the number, the higher
-    // will it be listed in the navigation
-    'order' => 100,
+//     // sorting weight for the navigation. The higher the number, the higher
+//     // will it be listed in the navigation
+//     'order' => 100,
 
-    // the route that will be shown on startup
-    'href' => $api->linkToRoute('tasks_enhanced_index'),
+//     // the route that will be shown on startup
+//     'href' => $api->linkToRoute('tasks_enhanced_index'),
 
-    // the icon that will be shown in the navigation
-    // this file needs to exist in img/example.png
-    'icon' => $api->imagePath('tasks.svg'),
+//     // the icon that will be shown in the navigation
+//     // this file needs to exist in img/example.png
+//     'icon' => $api->imagePath('tasks.svg'),
   
-//	  'icon' => $api->imagePath('core', 'places/music.svg'),
+// //	  'icon' => $api->imagePath('core', 'places/music.svg'),
 
-    // the title of your application. This will be used in the
-    // navigation or on the settings page of your app
-    'name' => $api->getTrans()->t('Tasks')
+//     // the title of your application. This will be used in the
+//     // navigation or on the settings page of your app
+//     'name' => $api->getTrans()->t('Tasks')
 
-  ));
+//   ));
+  \OC::$server->getNavigationManager()->add(array(
+    'id' => 'tasks_enhanced',
+    'order' => 100,
+    'href' => \OCP\Util::linkToRoute('tasks_enhanced_index'),
+    'icon' => \OCP\Util::imagePath( 'tasks_enhanced', 'tasks.svg' ),
+    'name' => \OCP\Util::getL10N('tasks_enhanced')->t('Tasks')
+    )
+  );
 
 } else {
-  $msg = 'Can not enable the Tasks app because the App Framework App or the Calendar App is disabled.';
+  $msg = 'Can not enable the Tasks app because the Calendar App is disabled.';
   \OCP\Util::writeLog('tasks_enhanced', $msg, \OCP\Util::ERROR);
 }

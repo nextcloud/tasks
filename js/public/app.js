@@ -22,8 +22,6 @@
       $routeProvider.when('/lists/:listID', {}).when('/lists/:listID/edit/:listparameter', {}).when('/lists/:listID/tasks/:taskID', {}).when('/lists/:listID/tasks/:taskID/edit/:parameter', {}).when('/search/:searchString', {}).when('/search/:searchString/tasks/:taskID', {}).when('/search/:searchString/tasks/:taskID/edit/:parameter', {}).otherwise({
         redirectTo: '/lists/all'
       });
-      $interpolateProvider.startSymbol('[[');
-      $interpolateProvider.endSymbol(']]');
       /*
       	overwrite angular's directive ngSwitchWhen
         	to handle ng-switch-when="value1 || value2 || value3

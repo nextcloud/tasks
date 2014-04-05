@@ -1,10 +1,9 @@
 <?php
-
 /**
- * ownCloud - Music app
+ * ownCloud - Utility class for VObject properties
  *
- * @author Morris Jobke
- * @copyright 2013 Morris Jobke <morris.jobke@gmail.com>
+ * @author Thomas Tanghus
+ * @copyright 2013-2014 Thomas Tanghus (thomas@tanghus.net)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -21,14 +20,13 @@
  *
  */
 
+namespace OCA\Tasks_enhanced;
 
-namespace OCA\Tasks_enhanced\Core;
+// use OCA\Tasks_enhanced\App;
 
-use \OCA\AppFramework\Core\API as BaseAPI;
+Class helper {
 
-class API extends BaseAPI {
-
-	public function parseVTODO($data) {
+	public static function parseVTODO($data) {
 		$object = \OC_VObject::parse($data);
 		$vtodo = $object->VTODO;
 		return $vtodo;
@@ -90,61 +88,6 @@ class API extends BaseAPI {
 		return $task;
 	}
 
-	public static function getAllCalendars($userId){
-		return \OC_Calendar_Calendar::allCalendars($userId, true);
-	}
-
-	public static function deleteCalendar($calendarId){
-		return \OC_Calendar_Calendar::deleteCalendar($calendarId);
-	}
-
-	public static function addCalendar($userId,$listName,$color){
-		return \OC_Calendar_Calendar::addCalendar($userId, strip_tags($listName), 'VEVENT,VTODO,VJOURNAL', null, 0, $color);
-	}
-
-	public static function setCalendarActive($calendarId){
-		return \OC_Calendar_Calendar::setCalendarActive($calendarId, 1);
-	}
-
-	public static function editCalendar($calendarId,$listName,$color) {
-		return \OC_Calendar_Calendar::editCalendar($calendarId, strip_tags($listName), null, null, null, $color);
-	}
-
-	public static function findCalendar($calendarId){
-		return \OC_Calendar_Calendar::find($calendarId);
-	}
-
-	public static function getTimezone(){
-		return \OC_Calendar_App::getTimezone();
-	}
-
-	public static function getVCalendar($taskId){
-		return \OC_Calendar_App::getVCalendar($taskId);
-	}
-
-	public static function getEventObject($taskID){
-		return \OC_Calendar_App::getEventObject($taskID);
-	}
-
-	public static function getAllTasks($calendarId){
-		return \OC_Calendar_Object::all($calendarId);
-	}
-
-	public static function editCalendarObject($taskId, $vcalendar){
-		return \OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
-	}
-
-	public static function moveToCalendar($taskId, $calendarId){
-		return \OC_Calendar_Object::moveToCalendar($taskId, $calendarId);
-	}
-
-	public static function addCalendarObject($calendarId, $vcalendar){
-		return \OC_Calendar_Object::add($calendarId, $vcalendar->serialize());
-	}
-
-	public static function deleteCalendarObject($taskID){
-		return \OC_Calendar_Object::delete($taskID);
-	}
 
 	public static function createVCalendarFromRequest($request){
 		$vcalendar = new \OC_VObject('VCALENDAR');
@@ -184,6 +127,4 @@ class API extends BaseAPI {
 
 		return $vcalendar;
 	}
-
-
 }

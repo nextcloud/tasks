@@ -38,8 +38,6 @@ angular.module('Tasks',['OC','ngRoute'])
 		redirectTo: '/lists/all'
 	})
 
-	$interpolateProvider.startSymbol('[[')
-	$interpolateProvider.endSymbol(']]')
 	###
 	overwrite angular's directive ngSwitchWhen
    	to handle ng-switch-when="value1 || value2 || value3

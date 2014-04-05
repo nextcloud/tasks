@@ -7,10 +7,10 @@
         </a>
     	<div class="title">
         	<span class="title-text" ng-class="{'strike-through':task.completed}" ng-click="editName()" stop-event="click"
-            ng-hide="route.parameter=='name'" oc-click-focus="{selector: '#editName', timeout: 0}">[[ task.name ]]</span>
+            ng-hide="route.parameter=='name'" oc-click-focus="{selector: '#editName', timeout: 0}">{{ task.name }}</span>
             <div class="expandable-container" ng-show="route.parameter=='name'" stop-event="click">
             	<div class="expandingArea active">
-                    <pre><span>[[ task.name ]]</span><br /></pre>
+                    <pre><span>{{ task.name }}</span><br /></pre>
                     <textarea id="editName" maxlength="200" ng-model="task.name" ng-keydown="endName($event)"></textarea>
             	</div>
             </div>
@@ -20,14 +20,14 @@
             oc-click-focus="{selector: 'div.detail-date input.datepicker-input', timeout: 0}">
             	<span class="icon detail-date" ng-class="{'overdue':isOverDue(task.due)}"></span>
                 <div class="section-title" ng-class="{'overdue':isOverDue(task.due)}" ng-hide="route.parameter=='duedate'">
-                    <text>[[ task.due | dateDetails ]]</text>
+                    <text>{{ task.due | dateDetails }}</text>
                 </div>
                 <a class="detail-delete" ng-click="deleteDueDate()" stop-event="click">
                 	<span class="icon detail-delete"></span>
                 </a>
                 <span class="icon detail-save" ng-click="endEdit()" stop-event="click"></span>
                 <div class="section-edit" ng-show="route.parameter=='duedate'">
-    				<input class="datepicker-input medium focus" type="text" key-value="" value="[[ task.due | dateTaskList ]]" datepicker="due">
+    				<input class="datepicker-input medium focus" type="text" key-value="" value="{{ task.due | dateTaskList }}" datepicker="due">
                 </div>
             </div>
             <!--
@@ -35,15 +35,15 @@
             oc-click-focus="{selector: 'div.detail-reminder input.datepicker-input', timeout: 0}">
             	<span class="icon detail-reminder" ng-class="{'overdue':isOverDue(task.reminder)}"></span>
                 <div class="section-title" ng-class="{'overdue':isOverDue(task.reminder)}" ng-hide="route.parameter=='reminder'">
-    				<text rel="">[[ task.reminder | timeDetails ]]</text>
+    				<text rel="">{{ task.reminder | timeDetails }}</text>
     			</div>
-                <div class="section-description">[[ task.reminder | dateDetailsShort ]]</div>
+                <div class="section-description">{{ task.reminder | dateDetailsShort }}</div>
                 <a class="detail-delete" ng-click="deleteReminder()" stop-event="click">
     				<span class="icon detail-delete"></span>
     			</a>
                 <span class="icon detail-save" ng-click="endEdit()" stop-event="click"></span>
                 <div class="section-edit" ng-show="route.parameter=='reminder'">
-                    <input class="datepicker-input medium focus" type="text" key-value="" value="[[ task.reminder | dateTaskList ]]" datepicker="reminder">
+                    <input class="datepicker-input medium focus" type="text" key-value="" value="{{ task.reminder | dateTaskList }}" datepicker="reminder">
                 </div>
             </div>
             <ul class="subtasks buffer">
@@ -57,10 +57,10 @@
                     </a>
                     -->
                     <div class="content-fakeable">
-                    	<div class="display-view" ng-hide="route.parameter=='note'">[[ task.note ]]</div>
+                    	<div class="display-view" ng-hide="route.parameter=='note'">{{ task.note }}</div>
                         <div class="edit-view" ng-show="route.parameter=='note'">
                             <div class="expandingArea active">
-                            	<pre><span>[[ task.note ]]</span><br /><br /></pre>
+                            	<pre><span>{{ task.note }}</span><br /><br /></pre>
                             	<textarea ng-model="task.note"></textarea>
                             </div>
                         </div>
