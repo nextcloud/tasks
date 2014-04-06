@@ -1114,8 +1114,8 @@ li.ui-draggable-dragging{
 }
 
 .ng-enter, 
-.ng-leave
-{ 
+.ng-leave,
+.ng-move { 
     -webkit-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
     -moz-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
     -ms-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
@@ -1125,13 +1125,15 @@ li.ui-draggable-dragging{
     display: block;
 } 
 
-.ng-enter.ng-enter-active, 
+.ng-enter.ng-enter-active,
+.ng-move.ng-move-active, 
 .ng-leave {
     opacity: 1;
     height: 37px !important;
 }
 
 .ng-leave.ng-leave-active,
+.ng-move,
 .ng-enter {
     opacity: 0;
     height: 0px !important;
