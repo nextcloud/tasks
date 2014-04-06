@@ -12,7 +12,7 @@
 
 
 (function() {
-  angular.module('Tasks', ['OC', 'ngRoute']).config([
+  angular.module('Tasks', ['OC', 'ngRoute', 'ngAnimate']).config([
     '$provide', '$routeProvider', '$interpolateProvider', function($provide, $routeProvider, $interpolateProvider) {
       var config;
       $provide.value('Config', config = {

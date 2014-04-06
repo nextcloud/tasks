@@ -27,10 +27,12 @@ class PageController extends Controller {
 		if (defined('DEBUG') && DEBUG) {
 			\OCP\Util::addScript('tasks_enhanced', 'vendor/angularjs/angular');
 			\OCP\Util::addScript('tasks_enhanced', 'vendor/angularjs/angular-route');
+			\OCP\Util::addScript('tasks_enhanced', 'vendor/angularjs/angular-animate');
 			\OCP\Util::addScript('tasks_enhanced', 'vendor/momentjs/moment');
 		} else {
 			\OCP\Util::addScript('tasks_enhanced', 'vendor/angularjs/angular.min');
 			\OCP\Util::addScript('tasks_enhanced', 'vendor/angularjs/angular-route.min');
+			\OCP\Util::addScript('tasks_enhanced', 'vendor/angularjs/angular-animate.min');
 			\OCP\Util::addScript('tasks_enhanced', 'vendor/momentjs/moment.min');
 		}
 		\OCP\Util::addScript('tasks_enhanced', 'public/app');

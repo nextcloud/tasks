@@ -19,7 +19,7 @@ You should have received a copy of the GNU Affero General Public
 License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 ###
-angular.module('Tasks',['OC','ngRoute'])
+angular.module('Tasks',['OC','ngRoute','ngAnimate'])
 .config ['$provide','$routeProvider', '$interpolateProvider',
 ($provide, $routeProvider, $interpolateProvider) ->
 	$provide.value 'Config', config =

@@ -1113,8 +1113,8 @@ li.ui-draggable-dragging{
 	}
 }
 
-.animate-enter, 
-.animate-leave
+.ng-enter, 
+.ng-leave
 { 
     -webkit-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
     -moz-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
@@ -1125,14 +1125,14 @@ li.ui-draggable-dragging{
     display: block;
 } 
 
-.animate-enter.animate-enter-active, 
-.animate-leave {
+.ng-enter.ng-enter-active, 
+.ng-leave {
     opacity: 1;
     height: 37px !important;
 }
 
-.animate-leave.animate-leave-active,
-.animate-enter {
+.ng-leave.ng-leave-active,
+.ng-enter {
     opacity: 0;
     height: 0px !important;
 }
