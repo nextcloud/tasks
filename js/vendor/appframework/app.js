@@ -1553,6 +1553,24 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
           this._shelveRequest(route, defaultData);
           return;
         }
+        if(angular.isUndefined(OC.generateUrl)){
+          OC.generateUrl = function(url, params) {
+            var _build = function (text, vars) {
+              return text.replace(/{([^{}]*)}/g,
+                function (a, b) {
+                  var r = vars[b];
+                  return typeof r === 'string' || typeof r === 'number' ? r : a;
+                }
+                );
+            };
+            if (url.charAt(0) !== '/') {
+              url = '/' + url;
+            }
+            return OC.webroot + '/index.php' + _build(url, params);
+          }
+        }
+
+
         url = OC.generateUrl(route, defaultData.routeParams);
         defaultConfig = {
           url: url,

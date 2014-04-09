@@ -28,7 +28,7 @@ $this->create('tasks_enhanced_index', '/')
 	->get()
 	->action(
 		function($params){
-			\OC::$session->close();
+			session_write_close();
 			$dispatcher = new Dispatcher($params);
 			$dispatcher->dispatch('PageController', 'index');
 		}
@@ -41,7 +41,7 @@ $this->create('getLists', '/lists')
 	->get()
 	->action(
 		function($params){
-			\OC::$session->close();
+			session_write_close();
 			$dispatcher = new Dispatcher($params);
 			$dispatcher->dispatch('ListsController', 'getLists');
 		}
@@ -51,7 +51,7 @@ $this->create('list_add', '/lists/add/{name}')
 	->post()
 	->action(
 		function($params){
-			\OC::$session->close();
+			session_write_close();
 			$dispatcher = new Dispatcher($params);
 			$dispatcher->dispatch('ListsController', 'addList');
 		}
@@ -61,7 +61,7 @@ $this->create('list_delete', '/lists/{listID}/delete')
 	->post()
 	->action(
 		function($params){
-			\OC::$session->close();
+			session_write_close();
 			$dispatcher = new Dispatcher($params);
 			$dispatcher->dispatch('ListsController', 'deleteList');
 		}
@@ -71,7 +71,7 @@ $this->create('list_name', '/lists/{listID}/name')
 	->post()
 	->action(
 		function($params){
-			\OC::$session->close();
+			session_write_close();
 			$dispatcher = new Dispatcher($params);
 			$dispatcher->dispatch('ListsController', 'setListName');
 		}
@@ -84,7 +84,7 @@ $this->create('getTasks', '/tasks')
 	->get()
 	->action(
 		function($params){
-			\OC::$session->close();
+			session_write_close();
 			$dispatcher = new Dispatcher($params);
 			$dispatcher->dispatch('TasksController', 'getTasks');
 		}
@@ -95,7 +95,7 @@ $this->create('task_star', '/tasks/{taskID}/star')
 	->post()
 	->action(
 		function($params){
-			\OC::$session->close();
+			session_write_close();
 			$dispatcher = new Dispatcher($params);
 			$dispatcher->dispatch('TasksController', 'starTask');
 		}
@@ -105,7 +105,7 @@ $this->create('task_unstar', '/tasks/{taskID}/unstar')
 	->post()
 	->action(
 		function($params){
-			\OC::$session->close();
+			session_write_close();
 			$dispatcher = new Dispatcher($params);
 			$dispatcher->dispatch('TasksController', 'unstarTask');
 		}
@@ -115,7 +115,7 @@ $this->create('task_complete', '/tasks/{taskID}/complete')
 	->post()
 	->action(
 		function($params){
-			\OC::$session->close();
+			session_write_close();
 			$dispatcher = new Dispatcher($params);
 			$dispatcher->dispatch('TasksController', 'completeTask');
 		}
@@ -125,7 +125,7 @@ $this->create('task_uncomplete', '/tasks/{taskID}/uncomplete')
 	->post()
 	->action(
 		function($params){
-			\OC::$session->close();
+			session_write_close();
 			$dispatcher = new Dispatcher($params);
 			$dispatcher->dispatch('TasksController', 'uncompleteTask');
 		}
@@ -135,7 +135,7 @@ $this->create('task_add', '/tasks/add/{calendarID}/{name}')
 	->post()
 	->action(
 		function($params){
-			\OC::$session->close();
+			session_write_close();
 			$dispatcher = new Dispatcher($params);
 			$dispatcher->dispatch('TasksController', 'addTask');
 		}
@@ -145,7 +145,7 @@ $this->create('task_delete', '/tasks/{taskID}/delete')
 	->post()
 	->action(
 		function($params){
-			\OC::$session->close();
+			session_write_close();
 			$dispatcher = new Dispatcher($params);
 			$dispatcher->dispatch('TasksController', 'deleteTask');
 		}
@@ -155,7 +155,7 @@ $this->create('task_name', '/tasks/{taskID}/name')
 	->post()
 	->action(
 		function($params){
-			\OC::$session->close();
+			session_write_close();
 			$dispatcher = new Dispatcher($params);
 			$dispatcher->dispatch('TasksController', 'setTaskName');
 		}
@@ -165,7 +165,7 @@ $this->create('task_calendar', '/tasks/{taskID}/calendar')
 	->post()
 	->action(
 		function($params){
-			\OC::$session->close();
+			session_write_close();
 			$dispatcher = new Dispatcher($params);
 			$dispatcher->dispatch('TasksController', 'setTaskCalendar');
 		}
@@ -175,7 +175,7 @@ $this->create('task_note', '/tasks/{taskID}/note')
 	->post()
 	->action(
 		function($params){
-			\OC::$session->close();
+			session_write_close();
 			$dispatcher = new Dispatcher($params);
 			$dispatcher->dispatch('TasksController', 'setTaskNote');
 		}
@@ -185,7 +185,7 @@ $this->create('task_due', '/tasks/{taskID}/due')
 	->post()
 	->action(
 		function($params){
-			\OC::$session->close();
+			session_write_close();
 			$dispatcher = new Dispatcher($params);
 			$dispatcher->dispatch('TasksController', 'setDueDate');
 		}
@@ -195,7 +195,7 @@ $this->create('task_reminder', '/tasks/{taskID}/reminder')
 	->post()
 	->action(
 		function($params){
-			\OC::$session->close();
+			session_write_close();
 			$dispatcher = new Dispatcher($params);
 			$dispatcher->dispatch('TasksController', 'setReminderDate');
 		}
