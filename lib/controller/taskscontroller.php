@@ -30,9 +30,7 @@ use OCA\Tasks_enhanced\Controller,
 class TasksController extends Controller {
 
 	/**
-	 * @IsAdminExemption
-	 * @IsSubAdminExemption
-	 * @Ajax
+	 * @NoAdminRequired
 	 */
 	public function getTasks(){
 		$userId = $this->api->getUserId();
@@ -87,9 +85,7 @@ class TasksController extends Controller {
 	}
 
 	/**
-	 * @IsAdminExemption
-	 * @IsSubAdminExemption
-	 * @Ajax
+	 * @NoAdminRequired
 	 */
 	public function starTask(){
 		$response = new JSONResponse();
@@ -103,9 +99,7 @@ class TasksController extends Controller {
 	}
 
 	/**
-	 * @IsAdminExemption
-	 * @IsSubAdminExemption
-	 * @Ajax
+	 * @NoAdminRequired
 	 */
 	public function unstarTask(){
 		$response = new JSONResponse();
@@ -153,9 +147,7 @@ class TasksController extends Controller {
 	}
 
 	/**
-	 * @IsAdminExemption
-	 * @IsSubAdminExemption
-	 * @Ajax
+	 * @NoAdminRequired
 	 */
 	public function completeTask(){
 		$response = new JSONResponse();
@@ -169,9 +161,7 @@ class TasksController extends Controller {
 	}
 
 	/**
-	 * @IsAdminExemption
-	 * @IsSubAdminExemption
-	 * @Ajax
+	 * @NoAdminRequired
 	 */
 	public function uncompleteTask(){
 		$response = new JSONResponse();
@@ -185,9 +175,7 @@ class TasksController extends Controller {
 	}
 
 	/**
-	 * @IsAdminExemption
-	 * @IsSubAdminExemption
-	 * @Ajax
+	 * @NoAdminRequired
 	 */
 	public function addTask(){
 		$taskName = $this->params('name');
@@ -223,9 +211,7 @@ class TasksController extends Controller {
 	}
 
 	/**
-	 * @IsAdminExemption
-	 * @IsSubAdminExemption
-	 * @Ajax
+	 * @NoAdminRequired
 	 */
 	public function deleteTask(){
 		$response = new JSONResponse();
@@ -236,9 +222,7 @@ class TasksController extends Controller {
 	}
 
 	/**
-	 * @IsAdminExemption
-	 * @IsSubAdminExemption
-	 * @Ajax
+	 * @NoAdminRequired
 	 */
 	public function setTaskName(){
 		$taskId = (int) $this->params('taskID');
@@ -256,9 +240,7 @@ class TasksController extends Controller {
 	}
 
 	/**
-	 * @IsAdminExemption
-	 * @IsSubAdminExemption
-	 * @Ajax
+	 * @NoAdminRequired
 	 */
 	public function setTaskCalendar(){
 		$taskId = $this->params('taskID');
@@ -276,9 +258,7 @@ class TasksController extends Controller {
 	}
 
 	/**
-	 * @IsAdminExemption
-	 * @IsSubAdminExemption
-	 * @Ajax
+	 * @NoAdminRequired
 	 */
 	public function setTaskNote(){
 		$taskId = $this->params('taskID');
@@ -296,9 +276,7 @@ class TasksController extends Controller {
 	}
 
 	/**
-	 * @IsAdminExemption
-	 * @IsSubAdminExemption
-	 * @Ajax
+	 * @NoAdminRequired
 	 */
 	public function setDueDate(){
 		$taskId = $this->params('taskID');
@@ -329,9 +307,7 @@ class TasksController extends Controller {
 	}
 
 	/**
-	 * @IsAdminExemption
-	 * @IsSubAdminExemption
-	 * @Ajax
+	 * @NoAdminRequired
 	 */
 	public function setReminderDate(){
 		$taskID = $this->params('taskID');
@@ -344,9 +320,7 @@ class TasksController extends Controller {
 	}
 
 	/**
-	 * @IsAdminExemption
-	 * @IsSubAdminExemption
-	 * @Ajax
+	 * @NoAdminRequired
 	 */
 	public function setCategories($taskId, $categories){
 		$taskId = $this->params('taskID');
@@ -364,9 +338,7 @@ class TasksController extends Controller {
 	}
 
 	/**
-	 * @IsAdminExemption
-	 * @IsSubAdminExemption
-	 * @Ajax
+	 * @NoAdminRequired
 	 */
 	public function setLocation($taskId, $location){
 		$taskId = $this->params('taskID');

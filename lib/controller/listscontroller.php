@@ -29,9 +29,7 @@ use OCA\Tasks_enhanced\Controller,
 class ListsController extends Controller {
 
 	/**
-	 * @IsAdminExemption
-	 * @IsSubAdminExemption
-	 * @Ajax
+	 * @NoAdminRequired
 	 */
 	public function getLists(){
 		$userId = $this->api->getUserId();
@@ -48,9 +46,7 @@ class ListsController extends Controller {
 	}
 
 	/**
-	 * @IsAdminExemption
-	 * @IsSubAdminExemption
-	 * @Ajax
+	 * @NoAdminRequired
 	 */
 	public function addList(){
 		$listName = $this->params('name');
@@ -84,9 +80,7 @@ class ListsController extends Controller {
 	}
 
 	/**
-	 * @IsAdminExemption
-	 * @IsSubAdminExemption
-	 * @Ajax
+	 * @NoAdminRequired
 	 */
 	public function deleteList(){
 		$listId = $this->params('listID');
@@ -108,9 +102,7 @@ class ListsController extends Controller {
 	}
 
 	/**
-	 * @IsAdminExemption
-	 * @IsSubAdminExemption
-	 * @Ajax
+	 * @NoAdminRequired
 	 */
 	public function setListName(){
 		$listId = (int) $this->params('listID');
