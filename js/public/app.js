@@ -1487,16 +1487,14 @@
           onSuccess || (onSuccess = function() {});
           onFailure || (onFailure = function() {});
           params = {
-            routeParams: {
-              name: list.displayname
-            },
             data: {
+              name: list.displayname,
               tmpID: list.tmpID
             },
             onSuccess: onSuccess,
             onFailure: onFailure
           };
-          return this._request.post('/apps/tasks_enhanced/lists/add/{name}', params);
+          return this._request.post('/apps/tasks_enhanced/lists/add', params);
         };
 
         Persistence.prototype.setListName = function(list) {
@@ -1602,11 +1600,9 @@
           onSuccess || (onSuccess = function() {});
           onFailure || (onFailure = function() {});
           params = {
-            routeParams: {
-              name: task.name,
-              calendarID: task.calendarID
-            },
             data: {
+              name: task.name,
+              calendarID: task.calendarID,
               starred: task.starred,
               due: task.due,
               tmpID: task.tmpID
@@ -1614,7 +1610,7 @@
             onSuccess: onSuccess,
             onFailure: onFailure
           };
-          return this._request.post('/apps/tasks_enhanced/tasks/add/{calendarID}/{name}', params);
+          return this._request.post('/apps/tasks_enhanced/tasks/add', params);
         };
 
         Persistence.prototype.deleteTask = function(taskID) {

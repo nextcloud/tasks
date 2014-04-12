@@ -66,14 +66,13 @@ angular.module('Tasks').factory 'Persistence',
 			onSuccess or= ->
 			onFailure or= ->
 			params =
-				routeParams:
-					name:	list.displayname
 				data:
+					name:	list.displayname
 					tmpID:	list.tmpID
 				onSuccess: onSuccess
 				onFailure: onFailure
 
-			@_request.post '/apps/tasks_enhanced/lists/add/{name}', params
+			@_request.post '/apps/tasks_enhanced/lists/add', params
 
 		setListName: (list) ->
 			params =
@@ -144,17 +143,19 @@ angular.module('Tasks').factory 'Persistence',
 			onSuccess or= ->
 			onFailure or= ->
 			params =
-				routeParams:
-					name:	task.name
-					calendarID: task.calendarID
+				# routeParams:
+				# 	name:	task.name
+				# 	calendarID: task.calendarID
 				data:
+					name:		task.name
+					calendarID:	task.calendarID
 					starred:	task.starred
 					due:		task.due
 					tmpID:		task.tmpID
 				onSuccess: onSuccess
 				onFailure: onFailure
 
-			@_request.post '/apps/tasks_enhanced/tasks/add/{calendarID}/{name}', params
+			@_request.post '/apps/tasks_enhanced/tasks/add', params
 
 		deleteTask: (taskID) ->
 			params =

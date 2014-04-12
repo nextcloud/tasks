@@ -47,7 +47,7 @@ $this->create('getLists', '/lists')
 		}
 	);
 
-$this->create('list_add', '/lists/add/{name}')
+$this->create('list_add', '/lists/add')
 	->post()
 	->action(
 		function($params){
@@ -131,7 +131,7 @@ $this->create('task_uncomplete', '/tasks/{taskID}/uncomplete')
 		}
 	);
 
-$this->create('task_add', '/tasks/add/{calendarID}/{name}')
+$this->create('task_add', '/tasks/add')
 	->post()
 	->action(
 		function($params){
