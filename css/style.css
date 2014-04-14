@@ -890,13 +890,19 @@
 #task-details .body .section.date .section-title.repeat {
   margin-top: -2px;
 }
-#task-details .body .section .section-description {
+#task-details .body .section.detail-reminder .section-description {
   display: none;
   font-size: 11px;
   margin-top: -6px;
 }
-#task-details .body .section .section-description.repeat {
+#task-details .body .section.detail-reminder .section-description.repeat {
   display: block;
+}
+#task-details .body .section.detail-reminder.date .section-description {
+  display: block;
+}
+#task-details .body .section.detail-reminder.date .section-title {
+  margin-top: -2px;
 }
 input,
 textarea {

@@ -910,12 +910,22 @@
 					}
 				}
 			}
-			.section-description{
-				display: none;
-				font-size: 11px;
-				margin-top:-6px;
-				&.repeat{
-					display:block;
+			&.detail-reminder{
+				.section-description{
+					display: none;
+					font-size: 11px;
+					margin-top:-6px;
+					&.repeat{
+						display:block;
+					}
+				}
+				&.date{
+					.section-description{
+						display: block;
+					}
+					.section-title{
+						margin-top:-2px;
+					}
 				}
 			}
 		}

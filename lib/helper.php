@@ -22,6 +22,7 @@
 
 namespace OCA\Tasks_enhanced;
 
+use Sabre\VObject;
 // use OCA\Tasks_enhanced\App;
 
 Class helper {
@@ -38,6 +39,19 @@ Class helper {
 		$task['note'] = $vtodo->getAsString('DESCRIPTION');
 		$task['location'] = $vtodo->getAsString('LOCATION');
 		$task['categories'] = $vtodo->getAsArray('CATEGORIES');
+		$start = $vtodo->DTSTART;
+		if ($start) {
+			try {
+				$start = $start->getDateTime();
+				$start->setTimezone(new \DateTimeZone($user_timezone));
+				$task['start'] = $start->format('Ymd\THis');
+			} catch(\Exception $e) {
+				$task['start'] = 'undefined';
+				\OCP\Util::writeLog('tasks_enhanced', $e->getMessage(), \OCP\Util::ERROR);
+			}
+		} else {
+			$task['start'] = 'undefined';
+		}
 		$due = $vtodo->DUE;
 		if ($due) {
 			try {
@@ -51,12 +65,34 @@ Class helper {
 		} else {
 			$task['due'] = 'undefined';
 		}
-		$reminder = $vtodo->REMINDER;
+		$reminder = $vtodo->VALARM;
 		if($reminder) {
 			try {
-				$reminder = $reminder->getDateTime();
-				$reminder->setTimezone(new \DateTimeZone($user_timezone));
-				$task['reminder'] = $reminder->format('Ymd\THis');
+
+				$reminderType = $reminder->TRIGGER['VALUE']->value;
+				$reminderTrigger = $reminder->TRIGGER->value;
+				$reminderAction = $reminder->ACTION->value;
+
+				if($reminderType == 'DATE-TIME'){
+					$reminderDate = $reminder->TRIGGER->getDateTime();
+					$reminderDate->setTimezone(new \DateTimeZone($user_timezone));
+					$reminderDate = $reminderDate->format('Ymd\THis');
+				} elseif ($reminderType == 'DURATION' && $start) {
+					$parsed = VObject\DateTimeParser::parseDuration($reminder->TRIGGER,true);
+					// Calculate the reminder date from duration and start date
+					$reminderDate = $start->modify($parsed)->format('Ymd\THis');
+				} else {
+					$reminderDate = 'undefined';
+				}
+				
+				
+				$task['reminder'] = array(
+					'type' 		=> $reminderType,
+					'trigger'	=> $reminderTrigger,
+					'action'	=> $reminderAction,
+					'date'		=> $reminderDate
+					);
+
 			} catch(\Exception $e) {
 				$task['reminder'] = 'undefined';
 				\OCP\Util::writeLog('tasks_enhanced', $e->getMessage(), \OCP\Util::ERROR);
