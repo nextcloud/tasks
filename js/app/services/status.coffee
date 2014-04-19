@@ -29,6 +29,7 @@ angular.module('Tasks').factory 'Status',
 				showhidden: true
 				searchActive: false
 				addingList: false
+				focusTaskInput: false
 			}
 
 		getStatus: () ->

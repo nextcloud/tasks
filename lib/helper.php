@@ -153,12 +153,21 @@ Class helper {
 
 		$due = $request['due'];
 		if ($due) {
-			$timezone = self::getTimezone();
+			$timezone = \OC_Calendar_App::getTimezone();
 			$timezone = new \DateTimeZone($timezone);
 			$due = new \DateTime($due, $timezone);
 			$vtodo->setDateTime('DUE', $due);
 		} else {
 			unset($vtodo->DUE);
+		}
+		$start = $request['start'];
+		if ($start) {
+			$timezone = \OC_Calendar_App::getTimezone();
+			$timezone = new \DateTimeZone($timezone);
+			$start = new \DateTime($start, $timezone);
+			$vtodo->setDateTime('DTSTART', $start);
+		} else {
+			unset($vtodo->DTSTART);
 		}
 
 		return $vcalendar;

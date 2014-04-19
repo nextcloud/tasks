@@ -1,4 +1,4 @@
-<div ng-switch-when="starred || completed || all || today">
+<div ng-switch-when="starred || completed || all || today || current">
     <div ng-repeat="list in lists | filter:filterLists()" class="grouped-tasks ui-droppable" rel="{{ list.id }}" oc-drop-task>
         <h2 class="heading">
             <text>{{ list.displayname }}</text>

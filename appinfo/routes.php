@@ -191,6 +191,16 @@ $this->create('task_due', '/tasks/{taskID}/due')
 		}
 	);
 
+$this->create('task_start', '/tasks/{taskID}/start')
+	->post()
+	->action(
+		function($params){
+			session_write_close();
+			$dispatcher = new Dispatcher($params);
+			$dispatcher->dispatch('TasksController', 'setStartDate');
+		}
+	);
+
 $this->create('task_reminder', '/tasks/{taskID}/reminder')
 	->post()
 	->action(

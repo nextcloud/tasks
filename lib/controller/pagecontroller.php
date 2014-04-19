@@ -40,11 +40,15 @@ class PageController extends Controller {
 		\OCP\Util::addScript('tasks_enhanced', 'vendor/timepicker/jquery.ui.timepicker');
 		\OCP\Util::addStyle('tasks_enhanced', 'style');
 
+		$date = new \DateTimeZone(\OC_Calendar_App::getTimezone());
+		$day = new \DateTime('today', $date);
+		$day = $day->format('d');
+
 		// TODO: Make a HTMLTemplateResponse class
 		$response = new TemplateResponse('tasks_enhanced', 'main');
-		/*$response->setParams(array(
-			'var' => $var,
-		));*/
+		$response->setParams(array(
+			'DOM' => $day
+		));
 
 		return $response;
 	}

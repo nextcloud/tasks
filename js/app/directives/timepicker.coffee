@@ -19,10 +19,20 @@ You should have received a copy of the GNU Affero General Public
 License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 ###
-angular.module('Tasks').filter 'timeDetails', () ->
-	(reminder) ->
-		if moment(reminder, "YYYYMMDDTHHmmss").isValid()
-			return moment(reminder, "YYYYMMDDTHHmmss").
-				format('['+t('tasks_enhanced','Remind me at')+'] HH:mm A')
-		else
-			return t('tasks_enhanced', 'Remind me')
+angular.module('Tasks').directive 'timepicker', ->
+	restrict: 'A'
+	link: (scope, elm, attr) ->
+		elm.timepicker({
+				onSelect: (date, inst) ->
+					scope['set'+attr.timepicker](date)
+					scope.$apply()
+				myPosition: 'center top'
+				atPosition: 'center bottom'
+				# beforeShowDay: (date) ->
+				# 	if (moment(date).startOf('day')
+				# 	.diff(moment(scope.task[attr.datepicker], "YYYYMMDDTHHmmss")
+				# 	.startOf('day'),'days') == 0)
+				# 		return [1,"selected"]
+				# 	else
+				# 		return [1,""]
+		})

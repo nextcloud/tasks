@@ -38,6 +38,8 @@ CollectionsModel, TasksBusinessLayer, $location) ->
 
 			@_$scope.isAddingTask = false
 
+			@_$scope.focusInputField = false
+
 			@_$scope.TasksModel = @_$tasksmodel
 
 			@_$scope.TasksBusinessLayer = @_tasksbusinesslayer
@@ -53,13 +55,16 @@ CollectionsModel, TasksBusinessLayer, $location) ->
 							return t('tasks_enhanced','Add an item due today in "%s"...')
 							.replace('%s',list.displayname)
 						when 'all'
-							return t('tasks_enhanced','Add an Entry in "%s"...')
+							return t('tasks_enhanced','Add an entry in "%s"...')
+							.replace('%s',list.displayname)
+						when 'current'
+							return t('tasks_enhanced','Add a current entry in "%s"...')
 							.replace('%s',list.displayname)
 						when 'completed', 'week'
 							return null
 						else
 							if angular.isDefined(_$listsmodel.getById(_$scope.route.listID))
-								return t('tasks_enhanced','Add an Entry in "%s"...')
+								return t('tasks_enhanced','Add an entry in "%s"...')
 								.replace('%s',
 								_$listsmodel.getById(_$scope.route.listID).displayname)
 
@@ -69,6 +74,9 @@ CollectionsModel, TasksBusinessLayer, $location) ->
 					return false
 				else
 					return true
+
+			@_$scope.focusInput = () ->
+				_$scope.status.focusTaskInput = true
 
 			@_$scope.openDetails = (id) ->
 				if _$scope.status.searchActive
@@ -101,10 +109,12 @@ CollectionsModel, TasksBusinessLayer, $location) ->
 							return task.completed == true
 						when 'all'
 							return task.completed == false
+						when 'current'
+							return (task.completed == false && _$tasksmodel.current(task.start))
 						when 'starred'
-							return (task.starred == true && task.completed == false)
+							return (task.completed == false && task.starred == true)
 						when 'today'
-							return (_$tasksmodel.today(task.due) && task.completed == false)
+							return (task.completed == false && _$tasksmodel.today(task.due))
 
 			@_$scope.filterLists = () ->
 				return (list) ->
@@ -123,16 +133,19 @@ CollectionsModel, TasksBusinessLayer, $location) ->
 					name:		taskName
 					starred:	false
 					due:		false
+					start:		false
 					completed:	false
 				}
 
 				if (_$scope.route.listID in
-				['starred', 'today', 'week', 'all', 'completed'])
+				['starred', 'today', 'week', 'all', 'completed', 'current'])
 					task.calendarID = _$listsmodel.getStandardList()
 					if _$scope.route.listID == 'starred'
 						task.starred = true
 					if _$scope.route.listID == 'today'
 						task.due = moment().startOf('day').format("YYYYMMDDTHHmmss")
+					if _$scope.route.listID == 'current'
+						task.start = moment().format("YYYYMMDDTHHmmss")
 				else
 					task.calendarID = _$scope.route.listID
 
@@ -144,12 +157,14 @@ CollectionsModel, TasksBusinessLayer, $location) ->
 				, =>
 					_$scope.isAddingTask = false
 
+				_$scope.status.focusTaskInput = false
 				_$scope.taskName = ''
 
 			@_$scope.checkTaskInput = (event) ->
 				if(event.keyCode == 27)
 					$('#target').blur()
 					_$scope.taskName = ""
+					_$scope.status.focusTaskInput = false
 
 			@_$scope.dayHasEntry = () ->
 				return (date) ->

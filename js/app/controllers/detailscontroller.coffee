@@ -66,6 +66,14 @@ $timeout, $routeParams) ->
 					_$location.path('/lists/'+_$scope.route.listID +
 					'/tasks/' + _$scope.route.taskID + '/edit/duedate')
 
+			@_$scope.editStart = () ->
+				if _$scope.status.searchActive
+					_$location.path('/search/'+_$scope.route.searchString +
+					'/tasks/' + _$scope.route.taskID + '/edit/startdate')
+				else
+					_$location.path('/lists/'+_$scope.route.listID +
+					'/tasks/' + _$scope.route.taskID + '/edit/startdate')
+
 			@_$scope.editReminder = () ->
 				if _$scope.status.searchActive
 					_$location.path('/search/'+_$scope.route.searchString +
@@ -98,11 +106,15 @@ $timeout, $routeParams) ->
 					_$scope.endEdit()
 
 			@_$scope.deleteDueDate = () ->
-				_tasksbusinesslayer.setDueDate(_$scope.route.taskID, undefined)
+				_tasksbusinesslayer.deleteDueDate(_$scope.route.taskID, undefined)
 				_$scope.endEdit()
 
 			@_$scope.deleteReminder = () ->
 				_tasksbusinesslayer.setReminderDate(_$scope.route.taskID, undefined)
+				_$scope.endEdit()
+
+			@_$scope.deleteStartDate = () ->
+				_tasksbusinesslayer.setStartDate(_$scope.route.taskID, undefined)
 				_$scope.endEdit()
 
 			@_$scope.toggleCompleted = (taskID) ->
@@ -142,9 +154,21 @@ $timeout, $routeParams) ->
 						,5000)
 			,true)
 
-			@_$scope.setdue = (date) ->
-				_tasksbusinesslayer.setDueDate(_$scope.route.taskID,
-				moment(date,'MM/DD/YYYY').format('YYYYMMDDTHHmmss'))
+			@_$scope.setStartDay = (date) ->
+				_tasksbusinesslayer.setStartDay(_$scope.route.taskID,
+				moment(date,'MM/DD/YYYY'))
+
+			@_$scope.setStartTime = (date) ->
+				_tasksbusinesslayer.setStartTime(_$scope.route.taskID,
+				moment(date,'HH:mm'))
+
+			@_$scope.setDueDay = (date) ->
+				_tasksbusinesslayer.setDueDay(_$scope.route.taskID,
+				moment(date,'MM/DD/YYYY'))
+
+			@_$scope.setDueTime = (date) ->
+				_tasksbusinesslayer.setDueTime(_$scope.route.taskID,
+				moment(date,'HH:mm'))
 
 			@_$scope.setreminder = (date) ->
 				_tasksbusinesslayer.setReminderDate(_$scope.route.taskID,

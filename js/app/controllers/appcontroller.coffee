@@ -52,6 +52,7 @@ $routeParams, Loading) ->
 					_$location.path('/lists/'+_$scope.route.listID)
 
 				_$scope.status.addingList = false
+				_$scope.status.focusTaskInput = false
 				_$scope.status.newListName = ""
 
 			@_$scope.isLoading = () ->

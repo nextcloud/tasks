@@ -182,6 +182,7 @@ class TasksController extends Controller {
 		$calendarId = $this->params('calendarID');
 		$starred = $this->params('starred');
 		$due = $this->params('due');
+		$start = $this->params('start');
 		$response = new JSONResponse();
 		$userId = $this->api->getUserId();
 		$calendars = \OC_Calendar_Calendar::allCalendars($userId, true);
@@ -192,6 +193,7 @@ class TasksController extends Controller {
 				'priority'			=> $starred,
 				'location' 			=> null,
 				'due'				=> $due,
+				'start'				=> $start,
 				'description'		=> null
 			);
 		$vcalendar = Helper::createVCalendarFromRequest($request);
@@ -282,7 +284,6 @@ class TasksController extends Controller {
 		$taskId = $this->params('taskID');
 		$due = $this->params('due');
 		$response = new JSONResponse();
-		$date = 1;
 		try{
 			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
 			$vtodo = $vcalendar->VTODO;
@@ -294,9 +295,9 @@ class TasksController extends Controller {
 				$due = new \DateTime('@'.$due);
 				$due->setTimezone($timezone);
 				$type = \Sabre\VObject\Property\DateTime::LOCALTZ;
-				if ($due_date_only) {
-					$type = \Sabre\VObject\Property\DateTime::DATE;
-				}
+				// if ($due_date_only) {
+				// 	$type = \Sabre\VObject\Property\DateTime::DATE;
+				// }
 			}
 		} catch (\Exception $e) {
 
@@ -309,12 +310,69 @@ class TasksController extends Controller {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function setReminderDate(){
-		$taskID = $this->params('taskID');
-		$reminder = $this->params('reminder');
+	public function setStartDate(){
+		$taskId = $this->params('taskID');
+		$start = $this->params('start');
 		$response = new JSONResponse();
-		//TODO
 
+		try{
+			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
+			$vtodo = $vcalendar->VTODO;
+			$type = null;
+			if ($start != 'false') {
+				$timezone = \OC_Calendar_App::getTimezone();
+				$timezone = new \DateTimeZone($timezone);
+
+				$start = new \DateTime('@'.$start);
+				$start->setTimezone($timezone);
+				$type = \Sabre\VObject\Property\DateTime::LOCALTZ;
+				// if ($due_date_only) {
+				// 	$type = \Sabre\VObject\Property\DateTime::DATE;
+				// }
+			}
+		} catch (\Exception $e) {
+
+		}
+		$vtodo->setDateTime('DTSTART', $start, $type);
+		\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
+		return $response;
+	}
+
+	/**
+	 * @NoAdminRequired
+	 */
+	public function setReminderDate(){
+		$taskId = $this->params('taskID');
+		$reminder = $this->params('reminder');
+		$remindertype = $this->params('reminder_type');
+		$response = new JSONResponse();
+		try{
+			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
+			$vtodo = $vcalendar->VTODO;
+			$valarm = $vtodo->VALARM;
+			if ($reminder != 'false'){
+				if($valarm == null) {
+					$valarm = new OC_VObject('VALARM');
+					
+					$valarm->setString('ACTION', $remindertype);
+					$valarm->setString('DESCRIPTION', 'Default Event Notification');
+					$valarm->setString('');
+					
+					$vevent->add($valarm);
+				} else {
+					unset($valarm->TRIGGER);
+				}
+				
+				$valarm->addProperty('TRIGGER', $reminder, array('VALUE' => 'DURATION'));
+
+			} else {
+				if($valarm != null) {
+					unset($vevent->VALARM);
+				}
+			}
+		} catch (\Exception $e) {
+
+		}
 
 		return $response;
 	}

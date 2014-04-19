@@ -19,10 +19,9 @@ You should have received a copy of the GNU Affero General Public
 License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 ###
-angular.module('Tasks').filter 'timeDetails', () ->
-	(reminder) ->
-		if moment(reminder, "YYYYMMDDTHHmmss").isValid()
-			return moment(reminder, "YYYYMMDDTHHmmss").
-				format('['+t('tasks_enhanced','Remind me at')+'] HH:mm A')
+angular.module('Tasks').filter 'dayTaskList', () ->
+	(due) ->
+		if moment(due, "YYYYMMDDTHHmmss").isValid()
+			return moment(due, "YYYYMMDDTHHmmss").lang('tasks').calendar()
 		else
-			return t('tasks_enhanced', 'Remind me')
+			return ''

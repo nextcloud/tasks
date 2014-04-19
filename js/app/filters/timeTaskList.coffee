@@ -19,9 +19,9 @@ You should have received a copy of the GNU Affero General Public
 License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 ###
-angular.module('Tasks').filter 'dateTaskList', () ->
+angular.module('Tasks').filter 'timeTaskList', () ->
 	(due) ->
 		if moment(due, "YYYYMMDDTHHmmss").isValid()
-			return moment(due, "YYYYMMDDTHHmmss").lang('tasks').calendar()
+			return moment(due, "YYYYMMDDTHHmmss").format('HH:mm')
 		else
 			return ''

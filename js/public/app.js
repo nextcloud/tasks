@@ -74,12 +74,28 @@
       })();
       moment.lang('details', {
         calendar: {
-          lastDay: '[' + t('tasks_enhanced', 'Due Yesterday') + ']',
-          sameDay: '[' + t('tasks_enhanced', 'Due Today') + ']',
-          nextDay: '[' + t('tasks_enhanced', 'Due Tomorrow') + ']',
-          lastWeek: '[' + t('tasks_enhanced', 'Due on') + '] MMM DD, YYYY',
-          nextWeek: '[' + t('tasks_enhanced', 'Due on') + '] MMM DD, YYYY',
-          sameElse: '[' + t('tasks_enhanced', 'Due on') + '] MMM DD, YYYY'
+          lastDay: '[' + t('tasks_enhanced', 'Due Yesterday') + '], HH:mm',
+          sameDay: '[' + t('tasks_enhanced', 'Due Today') + '], HH:mm',
+          nextDay: '[' + t('tasks_enhanced', 'Due Tomorrow') + '], HH:mm',
+          lastWeek: '[' + t('tasks_enhanced', 'Due on') + '] MMM DD, YYYY, HH:mm',
+          nextWeek: '[' + t('tasks_enhanced', 'Due on') + '] MMM DD, YYYY, HH:mm',
+          sameElse: '[' + t('tasks_enhanced', 'Due on') + '] MMM DD, YYYY, HH:mm'
+        }
+      });
+      moment.lang('start', {
+        calendar: {
+          lastDay: '[' + t('tasks_enhanced', 'Started Yesterday') + '], HH:mm',
+          sameDay: '[' + t('tasks_enhanced', 'Starts Today') + '], HH:mm',
+          nextDay: '[' + t('tasks_enhanced', 'Starts Tomorrow') + '], HH:mm',
+          lastWeek: '[' + t('tasks_enhanced', 'Started on') + '] MMM DD, YYYY, HH:mm',
+          nextWeek: '[' + t('tasks_enhanced', 'Starts on') + '] MMM DD, YYYY, HH:mm',
+          sameElse: function() {
+            if (this.diff(moment()) > 0) {
+              return '[' + t('tasks_enhanced', 'Starts on') + '] MMM DD, YYYY, HH:mm';
+            } else {
+              return '[' + t('tasks_enhanced', 'Started on') + '] MMM DD, YYYY, HH:mm';
+            }
+          }
         }
       });
       moment.lang('tasks', {
@@ -122,7 +138,7 @@
     return {
       restrict: 'A',
       link: function(scope, elm, attr) {
-        elm.datepicker({
+        return elm.datepicker({
           onSelect: function(date, inst) {
             scope['set' + attr.datepicker](date);
             return scope.$apply();
@@ -134,7 +150,7 @@
             dp.css({
               'margin-left': marginLeft
             });
-            return $(".popover:before").css({
+            return $("div.ui-datepicker:before").css({
               'left': 100 + 'px'
             });
           },
@@ -146,7 +162,6 @@
             }
           }
         });
-        return elm.datepicker('widget').addClass('popover');
       }
     };
   });
@@ -217,6 +232,25 @@
 }).call(this);
 
 (function() {
+  angular.module('Tasks').directive('timepicker', function() {
+    return {
+      restrict: 'A',
+      link: function(scope, elm, attr) {
+        return elm.timepicker({
+          onSelect: function(date, inst) {
+            scope['set' + attr.timepicker](date);
+            return scope.$apply();
+          },
+          myPosition: 'center top',
+          atPosition: 'center bottom'
+        });
+      }
+    };
+  });
+
+}).call(this);
+
+(function() {
   angular.module('Tasks').directive('watchTop', function() {
     return {
       restrict: 'A',
@@ -266,6 +300,7 @@
               _$location.path('/lists/' + _$scope.route.listID);
             }
             _$scope.status.addingList = false;
+            _$scope.status.focusTaskInput = false;
             return _$scope.status.newListName = "";
           };
           this._$scope.isLoading = function() {
@@ -327,6 +362,13 @@
               return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/duedate');
             }
           };
+          this._$scope.editStart = function() {
+            if (_$scope.status.searchActive) {
+              return _$location.path('/search/' + _$scope.route.searchString + '/tasks/' + _$scope.route.taskID + '/edit/startdate');
+            } else {
+              return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/startdate');
+            }
+          };
           this._$scope.editReminder = function() {
             if (_$scope.status.searchActive) {
               return _$location.path('/search/' + _$scope.route.searchString + '/tasks/' + _$scope.route.taskID + '/edit/reminder');
@@ -358,11 +400,15 @@
             }
           };
           this._$scope.deleteDueDate = function() {
-            _tasksbusinesslayer.setDueDate(_$scope.route.taskID, void 0);
+            _tasksbusinesslayer.deleteDueDate(_$scope.route.taskID, void 0);
             return _$scope.endEdit();
           };
           this._$scope.deleteReminder = function() {
             _tasksbusinesslayer.setReminderDate(_$scope.route.taskID, void 0);
+            return _$scope.endEdit();
+          };
+          this._$scope.deleteStartDate = function() {
+            _tasksbusinesslayer.setStartDate(_$scope.route.taskID, void 0);
             return _$scope.endEdit();
           };
           this._$scope.toggleCompleted = function(taskID) {
@@ -407,8 +453,17 @@
               }
             }
           }, true);
-          this._$scope.setdue = function(date) {
-            return _tasksbusinesslayer.setDueDate(_$scope.route.taskID, moment(date, 'MM/DD/YYYY').format('YYYYMMDDTHHmmss'));
+          this._$scope.setStartDay = function(date) {
+            return _tasksbusinesslayer.setStartDay(_$scope.route.taskID, moment(date, 'MM/DD/YYYY'));
+          };
+          this._$scope.setStartTime = function(date) {
+            return _tasksbusinesslayer.setStartTime(_$scope.route.taskID, moment(date, 'HH:mm'));
+          };
+          this._$scope.setDueDay = function(date) {
+            return _tasksbusinesslayer.setDueDay(_$scope.route.taskID, moment(date, 'MM/DD/YYYY'));
+          };
+          this._$scope.setDueTime = function(date) {
+            return _tasksbusinesslayer.setDueTime(_$scope.route.taskID, moment(date, 'HH:mm'));
           };
           this._$scope.setreminder = function(date) {
             return _tasksbusinesslayer.setReminderDate(_$scope.route.taskID, moment(date, 'MM/DD/YYYY').format('YYYYMMDDTHHmmss'));
@@ -625,6 +680,7 @@
           this._$scope.lists = this._$listsmodel.getAll();
           this._$scope.days = [0, 1, 2, 3, 4, 5, 6];
           this._$scope.isAddingTask = false;
+          this._$scope.focusInputField = false;
           this._$scope.TasksModel = this._$tasksmodel;
           this._$scope.TasksBusinessLayer = this._tasksbusinesslayer;
           this._$scope.getAddString = function() {
@@ -636,13 +692,15 @@
                 case 'today':
                   return t('tasks_enhanced', 'Add an item due today in "%s"...').replace('%s', list.displayname);
                 case 'all':
-                  return t('tasks_enhanced', 'Add an Entry in "%s"...').replace('%s', list.displayname);
+                  return t('tasks_enhanced', 'Add an entry in "%s"...').replace('%s', list.displayname);
+                case 'current':
+                  return t('tasks_enhanced', 'Add a current entry in "%s"...').replace('%s', list.displayname);
                 case 'completed':
                 case 'week':
                   return null;
                 default:
                   if (angular.isDefined(_$listsmodel.getById(_$scope.route.listID))) {
-                    return t('tasks_enhanced', 'Add an Entry in "%s"...').replace('%s', _$listsmodel.getById(_$scope.route.listID).displayname);
+                    return t('tasks_enhanced', 'Add an entry in "%s"...').replace('%s', _$listsmodel.getById(_$scope.route.listID).displayname);
                   }
               }
             }
@@ -654,6 +712,9 @@
             } else {
               return true;
             }
+          };
+          this._$scope.focusInput = function() {
+            return _$scope.status.focusTaskInput = true;
           };
           this._$scope.openDetails = function(id) {
             var listID, searchString;
@@ -690,10 +751,12 @@
                   return task.completed === true;
                 case 'all':
                   return task.completed === false;
+                case 'current':
+                  return task.completed === false && _$tasksmodel.current(task.start);
                 case 'starred':
-                  return task.starred === true && task.completed === false;
+                  return task.completed === false && task.starred === true;
                 case 'today':
-                  return _$tasksmodel.today(task.due) && task.completed === false;
+                  return task.completed === false && _$tasksmodel.today(task.due);
               }
             };
           };
@@ -715,15 +778,19 @@
               name: taskName,
               starred: false,
               due: false,
+              start: false,
               completed: false
             };
-            if (((_ref = _$scope.route.listID) === 'starred' || _ref === 'today' || _ref === 'week' || _ref === 'all' || _ref === 'completed')) {
+            if (((_ref = _$scope.route.listID) === 'starred' || _ref === 'today' || _ref === 'week' || _ref === 'all' || _ref === 'completed' || _ref === 'current')) {
               task.calendarID = _$listsmodel.getStandardList();
               if (_$scope.route.listID === 'starred') {
                 task.starred = true;
               }
               if (_$scope.route.listID === 'today') {
                 task.due = moment().startOf('day').format("YYYYMMDDTHHmmss");
+              }
+              if (_$scope.route.listID === 'current') {
+                task.start = moment().format("YYYYMMDDTHHmmss");
               }
             } else {
               task.calendarID = _$scope.route.listID;
@@ -734,12 +801,14 @@
             }, function() {
               return _$scope.isAddingTask = false;
             });
+            _$scope.status.focusTaskInput = false;
             return _$scope.taskName = '';
           };
           this._$scope.checkTaskInput = function(event) {
             if (event.keyCode === 27) {
               $('#target').blur();
-              return _$scope.taskName = "";
+              _$scope.taskName = "";
+              return _$scope.status.focusTaskInput = false;
             }
           };
           this._$scope.dayHasEntry = function() {
@@ -880,11 +949,69 @@
           return this._persistence.deleteTask(taskID);
         };
 
-        TasksBusinessLayer.prototype.setDueDate = function(taskID, due) {
+        TasksBusinessLayer.prototype.setDueDay = function(taskID, day) {
+          var due;
+          due = moment(this._$tasksmodel.getById(taskID).due, "YYYYMMDDTHHmmss");
+          if (moment(due).isValid()) {
+            due.year(day.year()).month(day.month()).day(day.day());
+          } else {
+            due = day.add('h', 12);
+          }
+          this._$tasksmodel.setDueDate(taskID, due.format('YYYYMMDDTHHmmss'));
+          return this._persistence.setDueDate(taskID, due.isValid() ? due.unix() : false);
+        };
+
+        TasksBusinessLayer.prototype.setDueTime = function(taskID, time) {
+          var due;
+          due = moment(this._$tasksmodel.getById(taskID).due, "YYYYMMDDTHHmmss");
+          if (moment(due).isValid()) {
+            due.hour(time.hour()).minute(time.minute());
+          } else {
+            due = time;
+          }
+          this._$tasksmodel.setDueDate(taskID, due.format('YYYYMMDDTHHmmss'));
+          return this._persistence.setDueDate(taskID, due.isValid() ? due.unix() : false);
+        };
+
+        TasksBusinessLayer.prototype.deleteDueDate = function(taskID) {
+          this._$tasksmodel.setDueDate(taskID, void 0);
+          return this._persistence.setDueDate(taskID, false);
+        };
+
+        TasksBusinessLayer.prototype.setStartDay = function(taskID, day) {
+          var start;
+          start = moment(this._$tasksmodel.getById(taskID).start, "YYYYMMDDTHHmmss");
+          if (moment(start).isValid()) {
+            start.year(day.year()).month(day.month()).day(day.day());
+          } else {
+            start = day.add('h', 12);
+          }
+          this._$tasksmodel.setStartDate(taskID, start.format('YYYYMMDDTHHmmss'));
+          return this._persistence.setStartDate(taskID, start.isValid() ? start.unix() : false);
+        };
+
+        TasksBusinessLayer.prototype.setStartTime = function(taskID, time) {
+          var start;
+          start = moment(this._$tasksmodel.getById(taskID).start, "YYYYMMDDTHHmmss");
+          if (moment(start).isValid()) {
+            start.hour(time.hour()).minute(time.minute());
+          } else {
+            start = time;
+          }
+          this._$tasksmodel.setStartDate(taskID, start.format('YYYYMMDDTHHmmss'));
+          return this._persistence.setStartDate(taskID, start.isValid() ? start.unix() : false);
+        };
+
+        TasksBusinessLayer.prototype.deleteStartDate = function(taskID) {
+          this._$tasksmodel.setStartDate(taskID, void 0);
+          return this._persistence.setStartDate(taskID, false);
+        };
+
+        TasksBusinessLayer.prototype.setStartDate = function(taskID, start) {
           var date;
-          this._$tasksmodel.setDueDate(taskID, due);
-          date = moment(due, "YYYYMMDDTHHmmss");
-          return this._persistence.setDueDate(taskID, date.isValid() ? date.unix() : false);
+          this._$tasksmodel.setStartDate(taskID, start);
+          date = moment(start, "YYYYMMDDTHHmmss");
+          return this._persistence.setStartDate(taskID, date.isValid() ? date.unix() : false);
         };
 
         TasksBusinessLayer.prototype.setReminderDate = function(taskID, reminder) {
@@ -970,6 +1097,9 @@
               id: "all",
               displayname: t('tasks_enhanced', 'All')
             }, {
+              id: "current",
+              displayname: t('tasks_enhanced', 'Current')
+            }, {
               id: "completed",
               displayname: t('tasks_enhanced', 'Done')
             }
@@ -993,7 +1123,7 @@
         };
 
         CollectionsModel.prototype.getCount = function(collectionID) {
-          var count, task, tasks, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m;
+          var count, task, tasks, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _len5, _m, _n;
           count = 0;
           tasks = this._$tasksmodel.getAll();
           switch (collectionID) {
@@ -1021,9 +1151,15 @@
                 count += !task.completed;
               }
               break;
-            case 'completed':
+            case 'current':
               for (_m = 0, _len4 = tasks.length; _m < _len4; _m++) {
                 task = tasks[_m];
+                count += !task.completed && this._$tasksmodel.current(task.start);
+              }
+              break;
+            case 'completed':
+              for (_n = 0, _len5 = tasks.length; _n < _len5; _n++) {
+                task = tasks[_n];
                 count += task.completed;
               }
           }
@@ -1159,7 +1295,7 @@
         };
 
         ListsModel.prototype.getCount = function(listID, type) {
-          var count, task, tasks, _i, _j, _k, _l, _len, _len1, _len2, _len3;
+          var count, task, tasks, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m;
           count = 0;
           tasks = this._$tasksmodel.getAll();
           switch (type) {
@@ -1169,21 +1305,27 @@
                 count += task.calendarid === listID && !task.completed;
               }
               return count;
-            case 'completed':
+            case 'current':
               for (_j = 0, _len1 = tasks.length; _j < _len1; _j++) {
                 task = tasks[_j];
+                count += task.calendarid === listID && !task.completed && this._$tasksmodel.current(task.start);
+              }
+              return count;
+            case 'completed':
+              for (_k = 0, _len2 = tasks.length; _k < _len2; _k++) {
+                task = tasks[_k];
                 count += task.calendarid === listID && task.completed;
               }
               return count;
             case 'starred':
-              for (_k = 0, _len2 = tasks.length; _k < _len2; _k++) {
-                task = tasks[_k];
+              for (_l = 0, _len3 = tasks.length; _l < _len3; _l++) {
+                task = tasks[_l];
                 count += task.calendarid === listID && !task.completed && task.starred;
               }
               return count;
             case 'today':
-              for (_l = 0, _len3 = tasks.length; _l < _len3; _l++) {
-                task = tasks[_l];
+              for (_m = 0, _len4 = tasks.length; _m < _len4; _m++) {
+                task = tasks[_m];
                 count += task.calendarid === listID && !task.completed && this._$tasksmodel.today(task.due);
               }
               return count;
@@ -1375,7 +1517,16 @@
         TasksModel.prototype.setReminderDate = function(taskID, date) {
           return this.update({
             id: taskID,
-            reminder: date
+            reminder: {
+              date: date
+            }
+          });
+        };
+
+        TasksModel.prototype.setStartDate = function(taskID, date) {
+          return this.update({
+            id: taskID,
+            start: date
           });
         };
 
@@ -1393,6 +1544,10 @@
 
         TasksModel.prototype.week = function(due) {
           return moment(due, "YYYYMMDDTHHmmss").isValid() && moment(due, "YYYYMMDDTHHmmss").diff(moment().startOf('day'), 'days', true) < 7;
+        };
+
+        TasksModel.prototype.current = function(start) {
+          return !moment(start, "YYYYMMDDTHHmmss").isValid() || moment(start, "YYYYMMDDTHHmmss").diff(moment(), 'days', true) < 0;
         };
 
         TasksModel.prototype.changeCalendarId = function(taskID, calendarID) {
@@ -1605,6 +1760,7 @@
               calendarID: task.calendarID,
               starred: task.starred,
               due: task.due,
+              start: task.start,
               tmpID: task.tmpID
             },
             onSuccess: onSuccess,
@@ -1634,6 +1790,19 @@
             }
           };
           return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/due', params);
+        };
+
+        Persistence.prototype.setStartDate = function(taskID, start) {
+          var params;
+          params = {
+            routeParams: {
+              taskID: taskID
+            },
+            data: {
+              start: start
+            }
+          };
+          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/start', params);
         };
 
         Persistence.prototype.setReminderDate = function(taskID, reminder) {
@@ -1731,7 +1900,8 @@
           this._$status = {
             showhidden: true,
             searchActive: false,
-            addingList: false
+            addingList: false,
+            focusTaskInput: false
           };
         }
 
@@ -1806,6 +1976,32 @@
 }).call(this);
 
 (function() {
+  angular.module('Tasks').filter('dayTaskList', function() {
+    return function(due) {
+      if (moment(due, "YYYYMMDDTHHmmss").isValid()) {
+        return moment(due, "YYYYMMDDTHHmmss").lang('tasks').calendar();
+      } else {
+        return '';
+      }
+    };
+  });
+
+}).call(this);
+
+(function() {
+  angular.module('Tasks').filter('startDetails', function() {
+    return function(due) {
+      if (moment(due, "YYYYMMDDTHHmmss").isValid()) {
+        return moment(due, "YYYYMMDDTHHmmss").lang('start').calendar();
+      } else {
+        return t('tasks_enhanced', 'Set start date');
+      }
+    };
+  });
+
+}).call(this);
+
+(function() {
   angular.module('Tasks').filter('taskAtDay', function() {
     return function(tasks, date) {
       var diff, due, ret, task, _i, _len;
@@ -1832,9 +2028,22 @@
   angular.module('Tasks').filter('timeDetails', function() {
     return function(reminder) {
       if (moment(reminder, "YYYYMMDDTHHmmss").isValid()) {
-        return moment(reminder, "YYYYMMDDTHHmmss").format('[' + t('tasks_enhanced', 'Remind me at') + '] h:mm A');
+        return moment(reminder, "YYYYMMDDTHHmmss").format('[' + t('tasks_enhanced', 'Remind me at') + '] HH:mm A');
       } else {
         return t('tasks_enhanced', 'Remind me');
+      }
+    };
+  });
+
+}).call(this);
+
+(function() {
+  angular.module('Tasks').filter('timeTaskList', function() {
+    return function(due) {
+      if (moment(due, "YYYYMMDDTHHmmss").isValid()) {
+        return moment(due, "YYYYMMDDTHHmmss").format('HH:mm');
+      } else {
+        return '';
       }
     };
   });

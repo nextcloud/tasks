@@ -78,12 +78,26 @@ angular.module('Tasks').run ['Config', '$timeout',
 
 	moment.lang('details', {
 		calendar: {
-			lastDay  : 	'['+t('tasks_enhanced','Due Yesterday')+']'
-			sameDay  : 	'['+t('tasks_enhanced','Due Today')+']'
-			nextDay  : 	'['+t('tasks_enhanced','Due Tomorrow')+']'
-			lastWeek : 	'['+t('tasks_enhanced', 'Due on')+'] MMM DD, YYYY'
-			nextWeek : 	'['+t('tasks_enhanced', 'Due on')+'] MMM DD, YYYY'
-			sameElse :	'['+t('tasks_enhanced', 'Due on')+'] MMM DD, YYYY'
+			lastDay  : 	'['+t('tasks_enhanced','Due Yesterday')+'], HH:mm'
+			sameDay  : 	'['+t('tasks_enhanced','Due Today')+'], HH:mm'
+			nextDay  : 	'['+t('tasks_enhanced','Due Tomorrow')+'], HH:mm'
+			lastWeek : 	'['+t('tasks_enhanced', 'Due on')+'] MMM DD, YYYY, HH:mm'
+			nextWeek : 	'['+t('tasks_enhanced', 'Due on')+'] MMM DD, YYYY, HH:mm'
+			sameElse :	'['+t('tasks_enhanced', 'Due on')+'] MMM DD, YYYY, HH:mm'
+		}
+	})
+	moment.lang('start', {
+		calendar: {
+			lastDay  : 	'['+t('tasks_enhanced','Started Yesterday')+'], HH:mm'
+			sameDay  : 	'['+t('tasks_enhanced','Starts Today')+'], HH:mm'
+			nextDay  : 	'['+t('tasks_enhanced','Starts Tomorrow')+'], HH:mm'
+			lastWeek : 	'['+t('tasks_enhanced', 'Started on')+'] MMM DD, YYYY, HH:mm'
+			nextWeek : 	'['+t('tasks_enhanced', 'Starts on')+'] MMM DD, YYYY, HH:mm'
+			sameElse :	() ->
+				if this.diff(moment()) > 0
+					'['+t('tasks_enhanced', 'Starts on')+'] MMM DD, YYYY, HH:mm'
+				else
+					'['+t('tasks_enhanced', 'Started on')+'] MMM DD, YYYY, HH:mm'
 		}
 	})
 	moment.lang('tasks', {

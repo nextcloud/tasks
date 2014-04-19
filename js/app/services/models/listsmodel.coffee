@@ -101,6 +101,11 @@ angular.module('Tasks').factory 'ListsModel',
 					for task in tasks
 						count += (task.calendarid==listID && !task.completed)
 					return count
+				when 'current'
+					for task in tasks
+						count += (task.calendarid==listID && !task.completed &&
+							@_$tasksmodel.current(task.start))
+					return count
 				when 'completed'
 					for task in tasks
 						count += (task.calendarid==listID && task.completed)
@@ -112,7 +117,7 @@ angular.module('Tasks').factory 'ListsModel',
 				when 'today'
 					for task in tasks
 						count += (task.calendarid==listID && !task.completed &&
-						@_$tasksmodel.today(task.due))
+							@_$tasksmodel.today(task.due))
 					return count
 
 	return new ListsModel(TasksModel, Utils)

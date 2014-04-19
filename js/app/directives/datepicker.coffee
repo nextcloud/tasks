@@ -30,7 +30,8 @@ angular.module('Tasks').directive 'datepicker', ->
 					dp = $(inst).datepicker('widget')
 					marginLeft = -Math.abs($(input).outerWidth()-dp.outerWidth())/2+'px'
 					dp.css({'margin-left':marginLeft})
-					$(".popover:before").css({'left':100+'px'})
+					$("div.ui-datepicker:before").css({'left':100+'px'})
+
 				beforeShowDay: (date) ->
 					if (moment(date).startOf('day')
 					.diff(moment(scope.task[attr.datepicker], "YYYYMMDDTHHmmss")
@@ -39,4 +40,3 @@ angular.module('Tasks').directive 'datepicker', ->
 					else
 						return [1,""]
 		})
-		elm.datepicker('widget').addClass('popover')

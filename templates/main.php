@@ -22,7 +22,7 @@
             	<li ng-repeat="collection in collections" id="collection_{{ collection.id }}" rel="{{ collection.id }}"
                     ng-class="{'animate-up': getCollectionCount(collection.id)<1, active: collection.id==route.listID}" oc-drop-task>
                 	<a href="#/lists/{{ collection.id }}">
-                		<span class="icon collection-{{ collection.id }}"><text ng-show="collection.id=='today'">{{ DOM }}</text></span>
+                		<span class="icon collection-{{ collection.id }}"><text ng-show="collection.id=='today'"><?php p($_['DOM']); ?></text></span>
                         <span class="count">{{ getCollectionString(collection.id) }}</span>
                 		<span class="title"><text>{{ collection.displayname }}</text></span>
                     </a>
@@ -30,7 +30,7 @@
             </ul>
             <ul id="collection_lists">
                 <li ng-repeat="list in lists" id="list_{{ list.id }}" rel="{{ list.id }}" ng-class="{active: list.id==route.listID}" oc-drop-task>
-                    <a href="#/lists/{{ list.id }}">
+                    <a href="#/lists/{{ list.id }}" style="border-right: 4px solid {{ list.calendarcolor }};">
                         <span class="icon list-list"></span>
                         <span class="count"><text ng-show="getListCount(list.id,'all')">{{ getListCount(list.id,'all') }}</text></span>
                         <span class="title"><text ng-dblclick="editName(list.id)" oc-click-focus="{selector: 'input.edit', timeout: 0}">{{ list.displayname }}</text></span>
@@ -54,7 +54,7 @@
     </div>
 
     <div id="task-tasks" ng-controller="TasksController" ng-class="{'details-visible':route.taskID}">
-    	<div id="add-task" class="add-task" ng-show="showInput()" >
+    	<div id="add-task" class="add-task" ng-show="showInput()" ng-class="{'focus':status.focusTaskInput}" stop-event="click" >
             <a class="input-star">
                 <span class="icon input-star "></span>
             </a>
@@ -62,7 +62,7 @@
                 <span class="icon input-date"></span>
             </a>
             <form ng-submit="addTask(taskName)" name="addTaskForm">
-                <input id="target" ng-disabled="isAddingTask"  class="transparent" placeholder="{{ getAddString() }}" ng-model="taskName"
+                <input id="target" ng-disabled="isAddingTask" ng-click="focusInput()" class="transparent" placeholder="{{ getAddString() }}" ng-model="taskName"
                 ng-keydown="checkTaskInput($event)"/>
             </form>
         </div>

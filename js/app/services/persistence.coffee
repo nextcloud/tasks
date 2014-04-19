@@ -151,6 +151,7 @@ angular.module('Tasks').factory 'Persistence',
 					calendarID:	task.calendarID
 					starred:	task.starred
 					due:		task.due
+					start:		task.start
 					tmpID:		task.tmpID
 				onSuccess: onSuccess
 				onFailure: onFailure
@@ -172,6 +173,15 @@ angular.module('Tasks').factory 'Persistence',
 					due: due
 
 			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/due', params
+
+		setStartDate: (taskID, start) ->
+			params =
+				routeParams:
+					taskID: taskID
+				data:
+					start: start
+
+			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/start', params
 
 		setReminderDate: (taskID, reminder) ->
 			params =

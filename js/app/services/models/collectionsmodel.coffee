@@ -45,6 +45,10 @@ angular.module('Tasks').factory 'CollectionsModel',
 					displayname: t('tasks_enhanced', 'All')
 				},
 				{
+					id: "current",
+					displayname: t('tasks_enhanced', 'Current')
+				},
+				{
 					id: "completed"
 					displayname: t('tasks_enhanced', 'Done')
 				}
@@ -74,6 +78,9 @@ angular.module('Tasks').factory 'CollectionsModel',
 				when 'all'
 					for task in tasks
 						count += !task.completed
+				when 'current'
+					for task in tasks
+						count += (!task.completed && @_$tasksmodel.current(task.start))
 				when 'completed'
 					for task in tasks
 						count += task.completed

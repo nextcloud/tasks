@@ -16,8 +16,23 @@
             </div>
         </div>
         <div class="body" watch-top ng-style="{top:divTop}">
-            <div class="section detail-date" ng-class="{'date':isDue(task.due), 'editing':route.parameter=='duedate'}" ng-click="editDueDate()" stop-event="click"
-            oc-click-focus="{selector: 'div.detail-date input.datepicker-input', timeout: 0}">
+            <div class="section detail-start" ng-class="{'date':isDue(task.start), 'editing':route.parameter=='startdate'}" ng-click="editStart()" stop-event="click">
+            <!-- oc-click-focus="{selector: 'div.detail-start input.datepicker-input', timeout: 0}" -->
+                <span class="icon detail-start" ng-class="{'overdue':isOverDue(task.start)}"></span>
+                <div class="section-title" ng-class="{'overdue':isOverDue(task.start)}" ng-hide="route.parameter=='startdate'">
+                    <text>{{ task.start | startDetails }}</text>
+                </div>
+                <a class="detail-delete" ng-click="deleteStartDate()" stop-event="click">
+                    <span class="icon detail-delete"></span>
+                </a>
+                <span class="icon detail-save" ng-click="endEdit()" stop-event="click"></span>
+                <div class="section-edit" ng-show="route.parameter=='startdate'">
+                    <input class="datepicker-input medium focus" type="text" key-value="" placeholder="dd.mm.yyyy" value="{{ task.start | dateTaskList }}" datepicker="StartDay">
+                    <input class="timepicker-input medium focus" type="text" key-value="" placeholder="hh:mm" value="{{ task.start | timeTaskList }}" timepicker="StartTime" stop-event="click">
+                </div>
+            </div>
+            <div class="section detail-date" ng-class="{'date':isDue(task.due), 'editing':route.parameter=='duedate'}" ng-click="editDueDate()" stop-event="click">
+            <!-- oc-click-focus="{selector: 'div.detail-date input.datepicker-input', timeout: 0}" -->
             	<span class="icon detail-date" ng-class="{'overdue':isOverDue(task.due)}"></span>
                 <div class="section-title" ng-class="{'overdue':isOverDue(task.due)}" ng-hide="route.parameter=='duedate'">
                     <text>{{ task.due | dateDetails }}</text>
@@ -27,16 +42,17 @@
                 </a>
                 <span class="icon detail-save" ng-click="endEdit()" stop-event="click"></span>
                 <div class="section-edit" ng-show="route.parameter=='duedate'">
-    				<input class="datepicker-input medium focus" type="text" key-value="" value="{{ task.due | dateTaskList }}" datepicker="due">
+    				<input class="datepicker-input medium focus" type="text" key-value="" placeholder="dd.mm.yyyy" value="{{ task.due | dateTaskList }}" datepicker="DueDay">
+                    <input class="timepicker-input medium focus" type="text" key-value="" placeholder="hh:mm" value="{{ task.due | timeTaskList }}" timepicker="DueTime" stop-event="click">
                 </div>
             </div>
-            <div class="section detail-reminder" ng-class="{'date':isDue(task.reminder.date), 'editing':route.parameter=='reminder'}" ng-click="editReminder()" stop-event="click"
-            oc-click-focus="{selector: 'div.detail-reminder input.datepicker-input', timeout: 0}">
+            <div class="section detail-reminder" ng-class="{'date':isDue(task.reminder.date), 'editing':route.parameter=='reminder'}" ng-click="editReminder()" stop-event="click">
+            <!-- oc-click-focus="{selector: 'div.detail-reminder input.datepicker-input', timeout: 0}" -->
             	<span class="icon detail-reminder" ng-class="{'overdue':isOverDue(task.reminder.date)}"></span>
                 <div class="section-title" ng-class="{'overdue':isOverDue(task.reminder.date)}" ng-hide="route.parameter=='reminder'">
     				<text rel="">{{ task.reminder.date | timeDetails }}</text>
     			</div>
-                <div class="section-description">{{ task.reminder.date | dateDetailsShort }}</div>
+                <div class="section-description" ng-hide="route.parameter=='reminder'">{{ task.reminder.date | dateDetailsShort }}</div>
                 <a class="detail-delete" ng-click="deleteReminder()" stop-event="click">
     				<span class="icon detail-delete"></span>
     			</a>
@@ -45,8 +61,7 @@
                     <input class="datepicker-input medium focus" type="text" key-value="" value="{{ task.reminder.date | dateTaskList }}" datepicker="reminder">
                 </div>
             </div>
-            <ul class="subtasks buffer">
-            </ul>
+            <!-- <ul class="subtasks buffer"></ul> -->
             <div class="note">
             	<div class="note-body selectable" ng-click="editNote()" stop-event="click" oc-click-focus="{selector: '.expandingArea textarea', timeout: 0}">
                     <!--
