@@ -140,7 +140,7 @@ CollectionsModel, ListsBusinessLayer, $location) ->
 
 			@_$scope.showDelete = (listID) ->
 				return _$scope.route.listID not in
-				['starred', 'today', 'completed', 'week', 'all']
+				['starred', 'today', 'completed', 'week', 'all', 'current']
 
 			@_$scope.update = () ->
 				if not _$scope.isLoading()

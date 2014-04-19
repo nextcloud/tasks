@@ -596,7 +596,7 @@
           };
           this._$scope.showDelete = function(listID) {
             var _ref;
-            return (_ref = _$scope.route.listID) !== 'starred' && _ref !== 'today' && _ref !== 'completed' && _ref !== 'week' && _ref !== 'all';
+            return (_ref = _$scope.route.listID) !== 'starred' && _ref !== 'today' && _ref !== 'completed' && _ref !== 'week' && _ref !== 'all' && _ref !== 'current';
           };
           this._$scope.update = function() {
             if (!_$scope.isLoading()) {
