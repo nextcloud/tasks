@@ -950,64 +950,70 @@ input.timepicker-input {
 .ui-widget-content {
   border: none;
 }
-.ui-datepicker {
+td.ui-timepicker-hours table {
+  border-right: 1px solid #CCCCCC;
+}
+.ui-datepicker,
+.ui-timepicker {
   width: 185px;
 }
-.ui-datepicker .ui-widget-header {
+.ui-datepicker .ui-widget-header,
+.ui-timepicker .ui-widget-header {
   background: none repeat scroll 0 0 transparent;
   border: none;
   color: #423E3E;
   font-weight: 600;
   font-size: 12px;
 }
+.ui-datepicker .ui-timepicker-title,
+.ui-timepicker .ui-timepicker-title {
+  text-align: center;
+}
 .ui-datepicker .ui-datepicker-next,
-.ui-datepicker .ui-datepicker-next-hover {
+.ui-timepicker .ui-datepicker-next,
+.ui-datepicker .ui-datepicker-next-hover,
+.ui-timepicker .ui-datepicker-next-hover {
   right: 2px;
   top: 2px;
   background: none;
   border: none;
 }
 .ui-datepicker .ui-datepicker-prev,
-.ui-datepicker .ui-datepicker-prev-hover {
+.ui-timepicker .ui-datepicker-prev,
+.ui-datepicker .ui-datepicker-prev-hover,
+.ui-timepicker .ui-datepicker-prev-hover {
   left: 2px;
   top: 2px;
   background: none;
   border: none;
 }
 .ui-datepicker .ui-datepicker-prev span,
-.ui-datepicker .ui-datepicker-next span {
+.ui-timepicker .ui-datepicker-prev span,
+.ui-datepicker .ui-datepicker-next span,
+.ui-timepicker .ui-datepicker-next span {
   margin-left: -4px;
   margin-top: -4px;
 }
-.ui-datepicker .ui-icon-circle-triangle-w {
+.ui-datepicker .ui-icon-circle-triangle-w,
+.ui-timepicker .ui-icon-circle-triangle-w {
   background-image: url("../img/sprites.svg");
   background-position: -20px -60px;
   height: 10px;
   width: 10px;
 }
-.ui-datepicker .ui-icon-circle-triangle-e {
+.ui-datepicker .ui-icon-circle-triangle-e,
+.ui-timepicker .ui-icon-circle-triangle-e {
   background-image: url("../img/sprites.svg");
   background-position: -30px -60px;
   height: 10px;
   width: 10px;
 }
-.ui-datepicker .ui-state-default,
-.ui-datepicker .ui-widget-content .ui-state-default,
-.ui-datepicker .ui-widget-header .ui-state-default {
-  color: #423E3E;
-  background: none repeat scroll 0 0 #F8F8F8;
-  border: none;
-  font-weight: bold;
-}
-.ui-datepicker .ui-state-default.hover,
-.ui-datepicker .ui-widget-content .ui-state-default.hover,
-.ui-datepicker .ui-widget-header .ui-state-default.hover {
-  border: none;
-}
-.ui-datepicker table {
+.ui-datepicker table,
+.ui-timepicker table {
   width: 100%;
 }
-.ui-datepicker table thead th {
+.ui-datepicker table thead th,
+.ui-timepicker table thead th {
   color: #A3A3A3;
   font-size: 9px;
   height: auto;
@@ -1015,20 +1021,27 @@ input.timepicker-input {
   text-align: center;
   text-transform: uppercase;
 }
-.ui-datepicker table tr {
+.ui-datepicker table tr,
+.ui-timepicker table tr {
   line-height: 15px;
 }
-.ui-datepicker table tr:hover {
+.ui-datepicker table tr:hover,
+.ui-timepicker table tr:hover {
   background: none repeat scroll 0 0 transparent;
 }
-.ui-datepicker table td {
+.ui-datepicker table td,
+.ui-timepicker table td {
   width: 14%;
   padding: 0;
 }
-.ui-datepicker table td.ui-datepicker-today a {
+.ui-datepicker table td.ui-datepicker-today a,
+.ui-timepicker table td.ui-datepicker-today a {
   color: #2289DA;
 }
-.ui-datepicker table td.selected a {
+.ui-datepicker table td.selected a,
+.ui-timepicker table td.selected a,
+.ui-datepicker table td a.ui-state-active,
+.ui-timepicker table td a.ui-state-active {
   background: -moz-linear-gradient(center top, #33a3ef, #168ad4) repeat scroll 0 0 transparent !important;
   border-radius: 3px 3px 3px 3px;
   color: white;
@@ -1036,7 +1049,9 @@ input.timepicker-input {
   position: relative;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
 }
-.ui-datepicker table a.ui-state-default {
+.ui-datepicker table a.ui-state-default,
+.ui-timepicker table a.ui-state-default {
+  border: none;
   background: none repeat scroll 0 0 transparent;
   color: #737272;
   border-radius: 3px 3px 3px 3px;
@@ -1048,7 +1063,9 @@ input.timepicker-input {
   margin: 1px;
   text-align: center;
 }
-.ui-datepicker table a.ui-state-default:hover {
+.ui-datepicker table a.ui-state-default:hover,
+.ui-timepicker table a.ui-state-default:hover {
+  border: none;
   background: none repeat scroll 0 0 #EAEAEA;
 }
 div.ui-datepicker,

@@ -140,7 +140,7 @@
       link: function(scope, elm, attr) {
         return elm.datepicker({
           onSelect: function(date, inst) {
-            scope['set' + attr.datepicker](date);
+            scope['set' + attr.datepicker + 'day'](date);
             return scope.$apply();
           },
           beforeShow: function(input, inst) {
@@ -238,11 +238,13 @@
       link: function(scope, elm, attr) {
         return elm.timepicker({
           onSelect: function(date, inst) {
-            scope['set' + attr.timepicker](date);
+            scope['set' + attr.timepicker + 'time'](date);
             return scope.$apply();
           },
           myPosition: 'center top',
-          atPosition: 'center bottom'
+          atPosition: 'center bottom',
+          hourText: t('tasks_enhanced', 'Hours'),
+          minuteText: t('tasks_enhanced', 'Minutes')
         });
       }
     };
@@ -453,16 +455,16 @@
               }
             }
           }, true);
-          this._$scope.setStartDay = function(date) {
+          this._$scope.setstartday = function(date) {
             return _tasksbusinesslayer.setStartDay(_$scope.route.taskID, moment(date, 'MM/DD/YYYY'));
           };
-          this._$scope.setStartTime = function(date) {
+          this._$scope.setstarttime = function(date) {
             return _tasksbusinesslayer.setStartTime(_$scope.route.taskID, moment(date, 'HH:mm'));
           };
-          this._$scope.setDueDay = function(date) {
+          this._$scope.setdueday = function(date) {
             return _tasksbusinesslayer.setDueDay(_$scope.route.taskID, moment(date, 'MM/DD/YYYY'));
           };
-          this._$scope.setDueTime = function(date) {
+          this._$scope.setduetime = function(date) {
             return _tasksbusinesslayer.setDueTime(_$scope.route.taskID, moment(date, 'HH:mm'));
           };
           this._$scope.setreminder = function(date) {

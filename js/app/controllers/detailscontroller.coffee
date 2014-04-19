@@ -154,19 +154,19 @@ $timeout, $routeParams) ->
 						,5000)
 			,true)
 
-			@_$scope.setStartDay = (date) ->
+			@_$scope.setstartday = (date) ->
 				_tasksbusinesslayer.setStartDay(_$scope.route.taskID,
 				moment(date,'MM/DD/YYYY'))
 
-			@_$scope.setStartTime = (date) ->
+			@_$scope.setstarttime = (date) ->
 				_tasksbusinesslayer.setStartTime(_$scope.route.taskID,
 				moment(date,'HH:mm'))
 
-			@_$scope.setDueDay = (date) ->
+			@_$scope.setdueday = (date) ->
 				_tasksbusinesslayer.setDueDay(_$scope.route.taskID,
 				moment(date,'MM/DD/YYYY'))
 
-			@_$scope.setDueTime = (date) ->
+			@_$scope.setduetime = (date) ->
 				_tasksbusinesslayer.setDueTime(_$scope.route.taskID,
 				moment(date,'HH:mm'))
 

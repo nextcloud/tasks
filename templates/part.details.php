@@ -27,8 +27,8 @@
                 </a>
                 <span class="icon detail-save" ng-click="endEdit()" stop-event="click"></span>
                 <div class="section-edit" ng-show="route.parameter=='startdate'">
-                    <input class="datepicker-input medium focus" type="text" key-value="" placeholder="dd.mm.yyyy" value="{{ task.start | dateTaskList }}" datepicker="StartDay">
-                    <input class="timepicker-input medium focus" type="text" key-value="" placeholder="hh:mm" value="{{ task.start | timeTaskList }}" timepicker="StartTime" stop-event="click">
+                    <input class="datepicker-input medium focus" type="text" key-value="" placeholder="dd.mm.yyyy" value="{{ task.start | dateTaskList }}" datepicker="start">
+                    <input class="timepicker-input medium focus" type="text" key-value="" placeholder="hh:mm" value="{{ task.start | timeTaskList }}" timepicker="start" stop-event="click">
                 </div>
             </div>
             <div class="section detail-date" ng-class="{'date':isDue(task.due), 'editing':route.parameter=='duedate'}" ng-click="editDueDate()" stop-event="click">
@@ -42,8 +42,8 @@
                 </a>
                 <span class="icon detail-save" ng-click="endEdit()" stop-event="click"></span>
                 <div class="section-edit" ng-show="route.parameter=='duedate'">
-    				<input class="datepicker-input medium focus" type="text" key-value="" placeholder="dd.mm.yyyy" value="{{ task.due | dateTaskList }}" datepicker="DueDay">
-                    <input class="timepicker-input medium focus" type="text" key-value="" placeholder="hh:mm" value="{{ task.due | timeTaskList }}" timepicker="DueTime" stop-event="click">
+    				<input class="datepicker-input medium focus" type="text" key-value="" placeholder="dd.mm.yyyy" value="{{ task.due | dateTaskList }}" datepicker="due">
+                    <input class="timepicker-input medium focus" type="text" key-value="" placeholder="hh:mm" value="{{ task.due | timeTaskList }}" timepicker="due" stop-event="click">
                 </div>
             </div>
             <div class="section detail-reminder" ng-class="{'date':isDue(task.reminder.date), 'editing':route.parameter=='reminder'}" ng-click="editReminder()" stop-event="click">

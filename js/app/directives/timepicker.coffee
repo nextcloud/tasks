@@ -24,10 +24,12 @@ angular.module('Tasks').directive 'timepicker', ->
 	link: (scope, elm, attr) ->
 		elm.timepicker({
 				onSelect: (date, inst) ->
-					scope['set'+attr.timepicker](date)
+					scope['set'+attr.timepicker+'time'](date)
 					scope.$apply()
 				myPosition: 'center top'
 				atPosition: 'center bottom'
+				hourText:	t('tasks_enhanced','Hours')
+				minuteText:	t('tasks_enhanced','Minutes')
 				# beforeShowDay: (date) ->
 				# 	if (moment(date).startOf('day')
 				# 	.diff(moment(scope.task[attr.datepicker], "YYYYMMDDTHHmmss")

@@ -24,7 +24,7 @@ angular.module('Tasks').directive 'datepicker', ->
 	link: (scope, elm, attr) ->
 		elm.datepicker({
 				onSelect: (date, inst) ->
-					scope['set'+attr.datepicker](date)
+					scope['set'+attr.datepicker+'day'](date)
 					scope.$apply()
 				beforeShow: (input, inst) ->
 					dp = $(inst).datepicker('widget')

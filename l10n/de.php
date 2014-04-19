@@ -7,6 +7,8 @@
 "Done" => "Erledigt",
 "All" => "Alle",
 "Current" => "Aktuell",
+"Hours" => "Stunden",
+"Minutes" => "Minuten",
 "Week" => "Woche",
 "Add Task" => "Task hinzufügen",
 "Set due date" => "Fälligkeitsdatum auswählen",
