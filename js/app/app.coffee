@@ -78,9 +78,9 @@ angular.module('Tasks').run ['Config', '$timeout',
 
 	moment.lang('details', {
 		calendar: {
-			lastDay  : 	'['+t('tasks_enhanced','Due Yesterday')+'], HH:mm'
-			sameDay  : 	'['+t('tasks_enhanced','Due Today')+'], HH:mm'
-			nextDay  : 	'['+t('tasks_enhanced','Due Tomorrow')+'], HH:mm'
+			lastDay  : 	'['+t('tasks_enhanced','Due yesterday')+'], HH:mm'
+			sameDay  : 	'['+t('tasks_enhanced','Due today')+'], HH:mm'
+			nextDay  : 	'['+t('tasks_enhanced','Due tomorrow')+'], HH:mm'
 			lastWeek : 	'['+t('tasks_enhanced', 'Due on')+'] MMM DD, YYYY, HH:mm'
 			nextWeek : 	'['+t('tasks_enhanced', 'Due on')+'] MMM DD, YYYY, HH:mm'
 			sameElse :	'['+t('tasks_enhanced', 'Due on')+'] MMM DD, YYYY, HH:mm'
@@ -88,9 +88,9 @@ angular.module('Tasks').run ['Config', '$timeout',
 	})
 	moment.lang('start', {
 		calendar: {
-			lastDay  : 	'['+t('tasks_enhanced','Started Yesterday')+'], HH:mm'
-			sameDay  : 	'['+t('tasks_enhanced','Starts Today')+'], HH:mm'
-			nextDay  : 	'['+t('tasks_enhanced','Starts Tomorrow')+'], HH:mm'
+			lastDay  : 	'['+t('tasks_enhanced','Started yesterday')+'], HH:mm'
+			sameDay  : 	'['+t('tasks_enhanced','Starts today')+'], HH:mm'
+			nextDay  : 	'['+t('tasks_enhanced','Starts tomorrow')+'], HH:mm'
 			lastWeek : 	'['+t('tasks_enhanced', 'Started on')+'] MMM DD, YYYY, HH:mm'
 			nextWeek : 	'['+t('tasks_enhanced', 'Starts on')+'] MMM DD, YYYY, HH:mm'
 			sameElse :	() ->
@@ -98,6 +98,16 @@ angular.module('Tasks').run ['Config', '$timeout',
 					'['+t('tasks_enhanced', 'Starts on')+'] MMM DD, YYYY, HH:mm'
 				else
 					'['+t('tasks_enhanced', 'Started on')+'] MMM DD, YYYY, HH:mm'
+		}
+	})
+	moment.lang('reminder', {
+		calendar: {
+			lastDay  : 	t('tasks_enhanced', '[Remind me yesterday at ]HH:mm')
+			sameDay  : 	t('tasks_enhanced', '[Remind me today at ]HH:mm')
+			nextDay  : 	t('tasks_enhanced', '[Remind me tomorrow at ]HH:mm')
+			lastWeek : 	t('tasks_enhanced', '[Remind me on ]MMM DD, YYYY,[ at ]HH:mm')
+			nextWeek : 	t('tasks_enhanced', '[Remind me on ]MMM DD, YYYY,[ at ]HH:mm')
+			sameElse :	t('tasks_enhanced', '[Remind me on ]MMM DD, YYYY,[ at ]HH:mm')
 		}
 	})
 	moment.lang('tasks', {

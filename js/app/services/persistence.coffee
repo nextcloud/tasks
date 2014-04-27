@@ -183,12 +183,30 @@ angular.module('Tasks').factory 'Persistence',
 
 			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/start', params
 
-		setReminderDate: (taskID, reminder) ->
-			params =
-				routeParams:
-					taskID: taskID
-				data:
-					reminder: reminder
+		setReminder: (taskID, reminder) ->
+			if reminder == false
+				params =
+					routeParams:
+						taskID: taskID
+					data:
+						type:	false
+			else if reminder.type == 'DATE-TIME'
+				params =
+					routeParams:
+						taskID: taskID
+					data:
+						type:	reminder.type
+						action:	reminder.action
+						date:	moment(reminder.date, 'YYYYMMDDTHHmmss').unix()
+			else if reminder.type == 'DURATION'
+				params =
+					routeParams:
+						taskID: taskID
+					data:
+						type:		reminder.type
+						action:		reminder.action
+						duration:	reminder.duration
+			else return
 
 			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/reminder', params
 

@@ -19,10 +19,21 @@ You should have received a copy of the GNU Affero General Public
 License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 ###
-angular.module('Tasks').filter 'timeDetails', () ->
-	(reminder) ->
-		if moment(reminder, "YYYYMMDDTHHmmss").isValid()
-			return moment(reminder, "YYYYMMDDTHHmmss").
-				format('['+t('tasks_enhanced','Remind me at')+'] HH:mm A')
+angular.module('Tasks').filter 'reminderDetails', () ->
+	(reminder,scope) ->
+		if !(angular.isUndefined(reminder) || reminder == null)
+			if reminder.type == 'DATE-TIME' &&
+			moment(reminder.date, "YYYYMMDDTHHmmss").isValid()
+				return moment(reminder.date, "YYYYMMDDTHHmmss").lang('reminder').calendar()
+			else if reminder.type == 'DURATION'
+				ds = t('tasks_enhanced', 'Remind me')
+				for token in scope.durations
+					if reminder.duration[token.abbr]
+						ds+=' '+reminder.duration[token.abbr]+' '+t('tasks_enhanced',token.name)
+				if reminder.duration.invert
+					ds+= ' '+t('tasks_enhanced','before')
+				else
+					ds+= ' '+t('tasks_enhanced','after')
+				return ds
 		else
 			return t('tasks_enhanced', 'Remind me')

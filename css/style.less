@@ -871,6 +871,14 @@
 					box-shadow: 0 0 4px rgba(43, 136, 217, 0.32), 0 1px 1px rgba(255, 255, 255, 0.43), 0 2px 4px rgba(43, 136, 217, 0.12) inset, 0 0 4px rgba(43, 136, 217, 0.2) inset;
 				}
 			}
+			select{
+				background-color: rgba(0, 0, 0, 0);
+				border-radius: 0px;
+				border: 1px solid #CCC;
+				padding:0;
+				width: 100px;
+				font-weight: normal;
+			}
 			.icon{
 				left: 16px;
 				position: absolute;
@@ -947,7 +955,7 @@
 						display: block;
 					}
 					.section-title{
-						margin-top:-2px;
+						// margin-top:-2px;
 					}
 				}
 			}
@@ -1000,6 +1008,16 @@ input.timepicker-input{
 }
 td.ui-timepicker-hours table{
 	border-right: 1px solid #CCCCCC;
+}
+.ui-timepicker{
+	table td a.ui-state-active{
+		background: -moz-linear-gradient(center top , #33A3EF, #168AD4) repeat scroll 0 0 transparent !important;
+		border-radius: 3px 3px 3px 3px;
+		color: white;
+		opacity: 1;
+		position: relative;
+		text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+	}
 }
 .ui-datepicker, .ui-timepicker {
 	width: 185px;
@@ -1074,7 +1092,7 @@ td.ui-timepicker-hours table{
 					color:#2289DA;
 				}
 			}
-			&.selected a, a.ui-state-active{
+			&.selected a{
 				background: -moz-linear-gradient(center top , #33A3EF, #168AD4) repeat scroll 0 0 transparent !important;
 				border-radius: 3px 3px 3px 3px;
 				color: white;

@@ -19,15 +19,9 @@ You should have received a copy of the GNU Affero General Public
 License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 ###
-angular.module('Tasks').directive 'timepicker', ->
-	restrict: 'A'
-	link: (scope, elm, attr) ->
-		elm.timepicker({
-				onSelect: (date, inst) ->
-					scope['set'+attr.timepicker+'time'](date)
-					scope.$apply()
-				myPosition: 'center top'
-				atPosition: 'center bottom'
-				hourText:	t('tasks_enhanced','Hours')
-				minuteText:	t('tasks_enhanced','Minutes')
-		})
+angular.module('Tasks').filter 'dateTaskList', () ->
+	(due) ->
+		if moment(due, "YYYYMMDDTHHmmss").isValid()
+			return moment(due, "YYYYMMDDTHHmmss").lang('tasks').calendar()
+		else
+			return ''

@@ -46,11 +46,11 @@ Class helper {
 				$start->setTimezone(new \DateTimeZone($user_timezone));
 				$task['start'] = $start->format('Ymd\THis');
 			} catch(\Exception $e) {
-				$task['start'] = 'undefined';
+				$task['start'] = null;
 				\OCP\Util::writeLog('tasks_enhanced', $e->getMessage(), \OCP\Util::ERROR);
 			}
 		} else {
-			$task['start'] = 'undefined';
+			$task['start'] = null;
 		}
 		$due = $vtodo->DUE;
 		if ($due) {
@@ -59,11 +59,11 @@ Class helper {
 				$due->setTimezone(new \DateTimeZone($user_timezone));
 				$task['due'] = $due->format('Ymd\THis');
 			} catch(\Exception $e) {
-				$task['due'] = 'undefined';
+				$task['due'] = null;
 				\OCP\Util::writeLog('tasks_enhanced', $e->getMessage(), \OCP\Util::ERROR);
 			}
 		} else {
-			$task['due'] = 'undefined';
+			$task['due'] = null;
 		}
 		$reminder = $vtodo->VALARM;
 		if($reminder) {
@@ -72,17 +72,19 @@ Class helper {
 				$reminderType = $reminder->TRIGGER['VALUE']->value;
 				$reminderTrigger = $reminder->TRIGGER->value;
 				$reminderAction = $reminder->ACTION->value;
+				$parsed1 = null;
 
 				if($reminderType == 'DATE-TIME'){
 					$reminderDate = $reminder->TRIGGER->getDateTime();
 					$reminderDate->setTimezone(new \DateTimeZone($user_timezone));
 					$reminderDate = $reminderDate->format('Ymd\THis');
 				} elseif ($reminderType == 'DURATION' && $start) {
+					$parsed_complete = VObject\DateTimeParser::parseDuration($reminder->TRIGGER);
 					$parsed = VObject\DateTimeParser::parseDuration($reminder->TRIGGER,true);
 					// Calculate the reminder date from duration and start date
 					$reminderDate = $start->modify($parsed)->format('Ymd\THis');
 				} else {
-					$reminderDate = 'undefined';
+					$reminderDate = null;
 				}
 				
 				
@@ -90,15 +92,16 @@ Class helper {
 					'type' 		=> $reminderType,
 					'trigger'	=> $reminderTrigger,
 					'action'	=> $reminderAction,
-					'date'		=> $reminderDate
+					'date'		=> $reminderDate,
+					'duration' 	=> $parsed_complete
 					);
 
 			} catch(\Exception $e) {
-				$task['reminder'] = 'undefined';
+				$task['reminder'] = null;
 				\OCP\Util::writeLog('tasks_enhanced', $e->getMessage(), \OCP\Util::ERROR);
 			}
 		} else {
-			$task['reminder'] = 'undefined';
+			$task['reminder'] = null;
 		}
 		$starred = $vtodo->getAsString('PRIORITY');
 		if($starred){

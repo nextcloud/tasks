@@ -129,7 +129,7 @@ CollectionsModel, TasksBusinessLayer, $location) ->
 
 				task = {
 					tmpID:		'newTask' + Date.now()
-					calendarID:	undefined
+					calendarID:	null
 					name:		taskName
 					starred:	false
 					due:		false

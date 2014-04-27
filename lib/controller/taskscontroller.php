@@ -343,35 +343,45 @@ class TasksController extends Controller {
 	 */
 	public function setReminderDate(){
 		$taskId = $this->params('taskID');
-		$reminder = $this->params('reminder');
-		$remindertype = $this->params('reminder_type');
+		$type = $this->params('type');
+		$action = $this->params('action');
+		// $date = $this->params('date');
 		$response = new JSONResponse();
-		try{
-			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
-			$vtodo = $vcalendar->VTODO;
-			$valarm = $vtodo->VALARM;
-			if ($reminder != 'false'){
+
+		$types = array('DATE-TIME','DURATION');
+
+		$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
+		$vtodo = $vcalendar->VTODO;
+		$valarm = $vtodo->VALARM;
+
+		if ($type == false){
+			unset($vtodo->VALARM);
+			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
+		}
+		elseif (in_array($type,$types)) {
+			try{
 				if($valarm == null) {
-					$valarm = new OC_VObject('VALARM');
-					
-					$valarm->setString('ACTION', $remindertype);
+					$valarm = new \OC_VObject('VALARM');
+					$valarm->setString('ACTION', $action);
 					$valarm->setString('DESCRIPTION', 'Default Event Notification');
 					$valarm->setString('');
-					
-					$vevent->add($valarm);
+					$vtodo->add($valarm);
 				} else {
 					unset($valarm->TRIGGER);
 				}
-				
-				$valarm->addProperty('TRIGGER', $reminder, array('VALUE' => 'DURATION'));
-
-			} else {
-				if($valarm != null) {
-					unset($vevent->VALARM);
+				$triggervalue = '';
+				if ($type == 'DATE-TIME') {
+					$date = new \DateTime('@'.$this->params('date'));
+					$triggervalue = $date->format('Ymd\THis\Z');
+				} elseif ($type == 'DURATION') {
+					// TODO
+					$triggervalue = '-PT5M';
 				}
-			}
-		} catch (\Exception $e) {
+				$valarm->addProperty('TRIGGER', $triggervalue, array('VALUE' => $type));
+				\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
+			} catch (\Exception $e) {
 
+			}
 		}
 
 		return $response;

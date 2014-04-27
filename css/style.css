@@ -837,6 +837,14 @@
   border: 1px solid rgba(43, 136, 217, 0.65);
   box-shadow: 0 0 4px rgba(43, 136, 217, 0.32), 0 1px 1px rgba(255, 255, 255, 0.43), 0 2px 4px rgba(43, 136, 217, 0.12) inset, 0 0 4px rgba(43, 136, 217, 0.2) inset;
 }
+#task-details .body .section select {
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 0px;
+  border: 1px solid #CCC;
+  padding: 0;
+  width: 100px;
+  font-weight: normal;
+}
 #task-details .body .section .icon {
   left: 16px;
   position: absolute;
@@ -907,9 +915,6 @@
 #task-details .body .section.detail-reminder.date .section-description {
   display: block;
 }
-#task-details .body .section.detail-reminder.date .section-title {
-  margin-top: -2px;
-}
 input,
 textarea {
   -moz-user-select: text;
@@ -952,6 +957,14 @@ input.timepicker-input {
 }
 td.ui-timepicker-hours table {
   border-right: 1px solid #CCCCCC;
+}
+.ui-timepicker table td a.ui-state-active {
+  background: -moz-linear-gradient(center top, #33a3ef, #168ad4) repeat scroll 0 0 transparent !important;
+  border-radius: 3px 3px 3px 3px;
+  color: white;
+  opacity: 1;
+  position: relative;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
 }
 .ui-datepicker,
 .ui-timepicker {
@@ -1039,9 +1052,7 @@ td.ui-timepicker-hours table {
   color: #2289DA;
 }
 .ui-datepicker table td.selected a,
-.ui-timepicker table td.selected a,
-.ui-datepicker table td a.ui-state-active,
-.ui-timepicker table td a.ui-state-active {
+.ui-timepicker table td.selected a {
   background: -moz-linear-gradient(center top, #33a3ef, #168ad4) repeat scroll 0 0 transparent !important;
   border-radius: 3px 3px 3px 3px;
   color: white;

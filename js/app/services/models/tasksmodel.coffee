@@ -122,13 +122,13 @@ angular.module('Tasks').factory 'TasksModel',
 
 		uncomplete: (taskID) ->
 			@update({id:taskID,completed:false,
-			completed_date:undefined})
+			completed_date:null})
 
 		setDueDate: (taskID,date) ->
 			@update({id:taskID,due:date})
 
-		setReminderDate: (taskID,date) ->
-			@update({id:taskID,reminder:{date:date}})
+		setReminderDate: (taskID,reminder) ->
+			@update({id:taskID,reminder:reminder})
 
 		setStartDate: (taskID,date) ->
 			@update({id:taskID,start:date})

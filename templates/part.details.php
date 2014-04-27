@@ -50,15 +50,22 @@
             <!-- oc-click-focus="{selector: 'div.detail-reminder input.datepicker-input', timeout: 0}" -->
             	<span class="icon detail-reminder" ng-class="{'overdue':isOverDue(task.reminder.date)}"></span>
                 <div class="section-title" ng-class="{'overdue':isOverDue(task.reminder.date)}" ng-hide="route.parameter=='reminder'">
-    				<text rel="">{{ task.reminder.date | timeDetails }}</text>
+    				<text rel="">{{ task.reminder | reminderDetails:this }}</text>
     			</div>
-                <div class="section-description" ng-hide="route.parameter=='reminder'">{{ task.reminder.date | dateDetailsShort }}</div>
+                <!-- <div class="section-description" ng-hide="route.parameter=='reminder'">{{ task.reminder.date | dateDetailsShort }}</div> -->
                 <a class="detail-delete" ng-click="deleteReminder()" stop-event="click">
     				<span class="icon detail-delete"></span>
     			</a>
                 <span class="icon detail-save" ng-click="endEdit()" stop-event="click"></span>
-                <div class="section-edit" ng-show="route.parameter=='reminder'">
-                    <input class="datepicker-input medium focus" type="text" key-value="" value="{{ task.reminder.date | dateTaskList }}" datepicker="reminder">
+                <div class="section-edit" ng-show="route.parameter=='reminder'" ng-switch='reminderType(task)'>
+                    <div ng-switch-when="DATE-TIME">
+                        <input class="datepicker-input medium focus" type="text" key-value="" placeholder="dd.mm.yyyy" value="{{ task.reminder.date | dateTaskList }}" datepicker="reminder">
+                        <input class="timepicker-input medium focus" type="text" key-value="" placeholder="hh:mm" value="{{ task.reminder.date | timeTaskList }}" timepicker="reminder" stop-event="click">
+                    </div>
+                    <div ng-switch-when="DURATION">
+                        <input class="datepicker-input medium focus" type="text" key-value="" placeholder="" value="">
+                        <select ng-model="duration" ng-options="duration.name for duration in durations"></select>
+                    </div>
                 </div>
             </div>
             <!-- <ul class="subtasks buffer"></ul> -->

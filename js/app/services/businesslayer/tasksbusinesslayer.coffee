@@ -62,65 +62,87 @@ angular.module('Tasks').factory 'TasksBusinessLayer',
 			@_$tasksmodel.removeById(taskID)
 			@_persistence.deleteTask(taskID)
 
-		setDueDay: (taskID, day) ->
+		setDue: (taskID, date, type='day') ->
 			due = moment(@_$tasksmodel.getById(taskID).due, "YYYYMMDDTHHmmss")
-			if moment(due).isValid()
-				due.year(day.year()).month(day.month()).day(day.day())
+			if type=='day'
+				if moment(due).isValid()
+					due.year(date.year()).month(date.month()).date(date.date())
+				else
+					due = date.add('h',12)
+			else if type == 'time'
+				if moment(due).isValid()
+					due.hour(date.hour()).minute(date.minute())
+				else
+					due = date
 			else
-				due = day.add('h',12)
-
-			@_$tasksmodel.setDueDate(taskID,due.format('YYYYMMDDTHHmmss'))
-			@_persistence.setDueDate(taskID,
-				if due.isValid() then due.unix() else false)
-
-		setDueTime: (taskID, time) ->
-			due = moment(@_$tasksmodel.getById(taskID).due, "YYYYMMDDTHHmmss")
-			if moment(due).isValid()
-				due.hour(time.hour()).minute(time.minute())
-			else
-				due = time
+				return
 			@_$tasksmodel.setDueDate(taskID,due.format('YYYYMMDDTHHmmss'))
 			@_persistence.setDueDate(taskID,
 				if due.isValid() then due.unix() else false)
 
 		deleteDueDate: (taskID) ->
-			@_$tasksmodel.setDueDate(taskID, undefined)
+			@_$tasksmodel.setDueDate(taskID, null)
 			@_persistence.setDueDate(taskID, false)
 
-		setStartDay: (taskID, day) ->
+		setStart: (taskID, date, type='day') ->
 			start = moment(@_$tasksmodel.getById(taskID).start, "YYYYMMDDTHHmmss")
-			if moment(start).isValid()
-				start.year(day.year()).month(day.month()).day(day.day())
+			if type == 'day'
+				if moment(start).isValid()
+					start.year(date.year()).month(date.month()).date(date.date())
+				else
+					start = date.add('h',12)
+			else if type == 'time'
+				if moment(start).isValid()
+					start.hour(date.hour()).minute(date.minute())
+				else
+					start = date
 			else
-				start = day.add('h',12)
-
-			@_$tasksmodel.setStartDate(taskID,start.format('YYYYMMDDTHHmmss'))
-			@_persistence.setStartDate(taskID,
-				if start.isValid() then start.unix() else false)
-
-		setStartTime: (taskID, time) ->
-			start = moment(@_$tasksmodel.getById(taskID).start, "YYYYMMDDTHHmmss")
-			if moment(start).isValid()
-				start.hour(time.hour()).minute(time.minute())
-			else
-				start = time
+				return
 			@_$tasksmodel.setStartDate(taskID,start.format('YYYYMMDDTHHmmss'))
 			@_persistence.setStartDate(taskID,
 				if start.isValid() then start.unix() else false)
 
 		deleteStartDate: (taskID) ->
-			@_$tasksmodel.setStartDate(taskID, undefined)
+			@_$tasksmodel.setStartDate(taskID, null)
 			@_persistence.setStartDate(taskID, false)
 
+		setReminder: (taskID, date, type='day') ->
+			reminder = @_$tasksmodel.getById(taskID).reminder
+			newreminder = {
+				type:		'DATE-TIME',
+				action:		'DISPLAY',
+				duration:	null,
+				trigger: 	null
+			}
+			if type == 'day'
+				if !(angular.isUndefined(reminder) || reminder == null)
+					reminderdate = moment(reminder.date, "YYYYMMDDTHHmmss")
+					newreminder.action = reminder.action
+					if (reminderdate.isValid() && reminder.type == 'DATE-TIME')
+						reminderdate.year(date.year()).month(date.month()).date(date.date())
+					else
+						reminderdate = date.add('h',12)
+				else
+					reminderdate = date.add('h',12)
+			else if type == 'time'
+				if !(angular.isUndefined(reminder) || reminder == null)
+					reminderdate = moment(reminder.date, "YYYYMMDDTHHmmss")
+					newreminder.action = reminder.action
+					if (reminderdate.isValid() && reminder.type == 'DATE-TIME')
+						reminderdate.hour(date.hour()).minute(date.minute())
+					else
+						reminderdate = date
+				else
+					reminderdate = date
+			else
+				return
+			newreminder.date = reminderdate.format('YYYYMMDDTHHmmss')
+			@_$tasksmodel.setReminderDate(taskID,newreminder)
+			@_persistence.setReminder(taskID,newreminder)
 
-		setStartDate: (taskID, start) ->
-			@_$tasksmodel.setStartDate(taskID,start)
-			date = moment(start, "YYYYMMDDTHHmmss")
-			@_persistence.setStartDate(taskID,
-				if date.isValid() then date.unix() else false)
-
-		setReminderDate: (taskID, reminder) ->
-			@_$tasksmodel.setReminderDate(taskID,reminder)
+		deleteReminderDate: (taskID) ->
+			@_$tasksmodel.setReminderDate(taskID, null)
+			@_persistence.setReminder(taskID,false)
 
 		changeCalendarId: (taskID, calendarID) ->
 			@_$tasksmodel.changeCalendarId(taskID, calendarID)

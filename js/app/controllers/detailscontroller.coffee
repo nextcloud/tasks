@@ -37,6 +37,17 @@ $timeout, $routeParams) ->
 				_$scope.task = _$tasksmodel.getById(_$scope.route.taskID)
 			)
 
+			@_$scope.durations = [
+				{name:	t('tasks_enhanced','years'),	abbr: 'y'},
+				{name:	t('tasks_enhanced','months'),	abbr: 'm'},
+				{name:	t('tasks_enhanced','days'),		abbr: 'd'},
+				{name:	t('tasks_enhanced','hours'),	abbr: 'h'},
+				{name:	t('tasks_enhanced','minutes'),	abbr: 'i'},
+				{name:	t('tasks_enhanced','seconds'),	abbr: 's'}
+			]
+
+			@_$scope.duration = _$scope.durations[1]
+
 			@_$scope.closeDetails = () ->
 				if _$scope.status.searchActive
 					_$location.path('/search/'+_$scope.route.searchString)
@@ -106,15 +117,15 @@ $timeout, $routeParams) ->
 					_$scope.endEdit()
 
 			@_$scope.deleteDueDate = () ->
-				_tasksbusinesslayer.deleteDueDate(_$scope.route.taskID, undefined)
-				_$scope.endEdit()
-
-			@_$scope.deleteReminder = () ->
-				_tasksbusinesslayer.setReminderDate(_$scope.route.taskID, undefined)
+				_tasksbusinesslayer.deleteDueDate(_$scope.route.taskID)
 				_$scope.endEdit()
 
 			@_$scope.deleteStartDate = () ->
-				_tasksbusinesslayer.setStartDate(_$scope.route.taskID, undefined)
+				_tasksbusinesslayer.deleteStartDate(_$scope.route.taskID)
+				_$scope.endEdit()
+
+			@_$scope.deleteReminder = () ->
+				_tasksbusinesslayer.deleteReminderDate(_$scope.route.taskID)
 				_$scope.endEdit()
 
 			@_$scope.toggleCompleted = (taskID) ->
@@ -155,24 +166,38 @@ $timeout, $routeParams) ->
 			,true)
 
 			@_$scope.setstartday = (date) ->
-				_tasksbusinesslayer.setStartDay(_$scope.route.taskID,
-				moment(date,'MM/DD/YYYY'))
+				_tasksbusinesslayer.setStart(_$scope.route.taskID,
+				moment(date,'MM/DD/YYYY'),'day')
 
 			@_$scope.setstarttime = (date) ->
-				_tasksbusinesslayer.setStartTime(_$scope.route.taskID,
-				moment(date,'HH:mm'))
+				_tasksbusinesslayer.setStart(_$scope.route.taskID,
+				moment(date,'HH:mm'),'time')
 
 			@_$scope.setdueday = (date) ->
-				_tasksbusinesslayer.setDueDay(_$scope.route.taskID,
-				moment(date,'MM/DD/YYYY'))
+				_tasksbusinesslayer.setDue(_$scope.route.taskID,
+				moment(date,'MM/DD/YYYY'),'day')
 
 			@_$scope.setduetime = (date) ->
-				_tasksbusinesslayer.setDueTime(_$scope.route.taskID,
-				moment(date,'HH:mm'))
+				_tasksbusinesslayer.setDue(_$scope.route.taskID,
+				moment(date,'HH:mm'),'time')
 
-			@_$scope.setreminder = (date) ->
-				_tasksbusinesslayer.setReminderDate(_$scope.route.taskID,
-				moment(date,'MM/DD/YYYY').format('YYYYMMDDTHHmmss'))
+			@_$scope.setreminderday = (date) ->
+				_tasksbusinesslayer.setReminder(_$scope.route.taskID,
+				moment(date,'MM/DD/YYYY'),'day')
+
+			@_$scope.setremindertime = (date) ->
+				_tasksbusinesslayer.setReminder(_$scope.route.taskID,
+				moment(date,'HH:mm'),'time')
+
+			@_$scope.reminderType = (task) ->
+				if !angular.isUndefined(task)
+					if task.reminder == null
+						if moment(task.start, "YYYYMMDDTHHmmss").isValid()
+							return 'DURATION'
+						else
+							return 'DATE-TIME'
+					else
+						return task.reminder.type
 
 	return new DetailsController($scope, $window, TasksModel,
 		TasksBusinessLayer, $route, $location, $timeout, $routeParams)
