@@ -4,7 +4,7 @@
             <text>{{ day | day  }}</text>
         </h2>
         <ol class="tasks">
-            <li ng-animate="'animate'" ng-repeat="task in tasks | taskAtDay:day | filter:{'completed':'false'} | orderBy:'due' | orderBy:'starred':true"
+            <li ng-animate="'animate'" ng-repeat="task in tasks | taskAtDay:day | filter:{'completed':'false'} | orderBy:sortDue | orderBy:'starred':true"
             class="task-item ui-draggable" rel="{{ task.id }}" ng-click="openDetails(task.id)" ng-class="{done: task.completed}" oc-drag-task stop-event="click">
                 <div class="task-body">
                     <a class="task-checkbox" name="toggleCompleted" ng-click="toggleCompleted(task.id)" stop-event="click">

@@ -173,6 +173,12 @@ CollectionsModel, TasksBusinessLayer, $location) ->
 			@_$scope.loadMore = () ->
 				console.log('TODO')
 
+			@_$scope.sortDue = (task) ->
+				if task.due == null
+					return 'last'
+				else
+					return task.due
+
 	return new TasksController($scope, $window, $routeParams,
 		TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location)
 ]

@@ -869,6 +869,13 @@
           this._$scope.loadMore = function() {
             return console.log('TODO');
           };
+          this._$scope.sortDue = function(task) {
+            if (task.due === null) {
+              return 'last';
+            } else {
+              return task.due;
+            }
+          };
         }
 
         return TasksController;

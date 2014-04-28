@@ -1,7 +1,7 @@
 <div ng-switch-default>
     <div class="grouped-tasks">
         <ol class="tasks" rel="uncompleted" oc-drop-task>
-            <li ng-repeat="(id, task) in tasks | filter:{'calendarid':route.listID} | filter:{'completed':'false'} | filter:route.searchString | orderBy:'due' | orderBy:'starred':true"
+            <li ng-repeat="(id, task) in tasks | filter:{'calendarid':route.listID} | filter:{'completed':'false'} | filter:route.searchString | orderBy:sortDue | orderBy:'starred':true"
             class="task-item ui-draggable" rel="{{ task.id }}" ng-click="openDetails(task.id)" ng-class="{done: task.completed}" oc-drag-task stop-event="click">
                 <div class="task-body">
                     <a class="task-checkbox" name="toggleCompleted" ng-click="toggleCompleted(task.id)" stop-event="click">
