@@ -13,7 +13,7 @@
 'An empty name ist not allowed.' => 'Un nombre vacio no es valido',
 "before" => "antes",
 "Completed Tasks" => "Tareas completadas",
-"Current" => "Aktuell",
+"Current" => "Actual",
 "days" => "dias",
 "Done" => "Completo",
 "Due on" => "Debido para",
