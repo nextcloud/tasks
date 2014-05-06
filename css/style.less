@@ -851,6 +851,7 @@
 			padding: 9px 20px 9px 55px;
 			position: relative;
 			text-shadow: 0 1px 0 white;
+			border-top:none;
 			input{
 				-moz-box-sizing: border-box;
 				background: none repeat scroll 0 0 white;
@@ -876,7 +877,8 @@
 				border-radius: 0px;
 				border: 1px solid #CCC;
 				padding:0;
-				width: 100px;
+				width: 98px;
+				margin:0;
 				font-weight: normal;
 			}
 			.icon{
@@ -898,6 +900,14 @@
 				}
 				&.detail-date, &.detail-start  {
 					background-position: -220px -80px;
+				}
+				&.detail-remindertype{
+					display: none;
+					left: 38px;
+					opacity: 0.4;
+					&:hover{
+						opacity: 0.8;
+					}
 				}
 			}
 			.section-title{
@@ -940,6 +950,14 @@
 						margin-top: -2px;
 					}
 				}
+			}
+			&.editing{
+				.icon.detail-remindertype{
+					display: block;
+				}
+			}
+			.icon.detail-remindertype{
+				background-position: -260px -40px;
 			}
 			&.detail-reminder{
 				.section-description{
@@ -991,6 +1009,10 @@ input.datepicker-input{
 }
 input.timepicker-input{
 	width: 80px;
+}
+input.duration-input{
+	margin: 2px 0 0 0.3em;
+	width: 35px;
 }
 .ui-widget-content{
 	color: #423E3E;

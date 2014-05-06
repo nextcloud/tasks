@@ -816,6 +816,7 @@
   padding: 9px 20px 9px 55px;
   position: relative;
   text-shadow: 0 1px 0 white;
+  border-top: none;
 }
 #task-details .body .section input {
   -moz-box-sizing: border-box;
@@ -842,7 +843,8 @@
   border-radius: 0px;
   border: 1px solid #CCC;
   padding: 0;
-  width: 100px;
+  width: 98px;
+  margin: 0;
   font-weight: normal;
 }
 #task-details .body .section .icon {
@@ -866,6 +868,14 @@
 #task-details .body .section .icon.detail-date,
 #task-details .body .section .icon.detail-start {
   background-position: -220px -80px;
+}
+#task-details .body .section .icon.detail-remindertype {
+  display: none;
+  left: 38px;
+  opacity: 0.4;
+}
+#task-details .body .section .icon.detail-remindertype:hover {
+  opacity: 0.8;
 }
 #task-details .body .section .section-title {
   color: #9FA2A6;
@@ -903,6 +913,12 @@
 }
 #task-details .body .section.date .section-title.repeat {
   margin-top: -2px;
+}
+#task-details .body .section.editing .icon.detail-remindertype {
+  display: block;
+}
+#task-details .body .section .icon.detail-remindertype {
+  background-position: -260px -40px;
 }
 #task-details .body .section.detail-reminder .section-description {
   display: none;
@@ -942,6 +958,10 @@ input.datepicker-input {
 }
 input.timepicker-input {
   width: 80px;
+}
+input.duration-input {
+  margin: 2px 0 0 0.3em;
+  width: 35px;
 }
 .ui-widget-content {
   background: none repeat scroll 0 0 #F9F9F9;

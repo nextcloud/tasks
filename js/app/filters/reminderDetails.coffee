@@ -25,15 +25,34 @@ angular.module('Tasks').filter 'reminderDetails', () ->
 			if reminder.type == 'DATE-TIME' &&
 			moment(reminder.date, "YYYYMMDDTHHmmss").isValid()
 				return moment(reminder.date, "YYYYMMDDTHHmmss").lang('reminder').calendar()
-			else if reminder.type == 'DURATION'
+			else if reminder.type == 'DURATION' && reminder.duration
 				ds = t('tasks_enhanced', 'Remind me')
 				for token in scope.durations
-					if reminder.duration[token.abbr]
-						ds+=' '+reminder.duration[token.abbr]+' '+t('tasks_enhanced',token.name)
-				if reminder.duration.invert
-					ds+= ' '+t('tasks_enhanced','before')
+					if +reminder.duration[token.id]
+						time = 1
+						ds+=' '+reminder.duration[token.id]+' '
+						if +reminder.duration[token.id] == 1
+							ds+=token.name
+						else
+							ds+=token.names
+				if !time
+					if reminder.duration.params.related == 'END'
+						ds+= ' '+t('tasks_enhanced','at the end')
+					else
+						ds+= ' '+t('tasks_enhanced','at the beginning')
 				else
-					ds+= ' '+t('tasks_enhanced','after')
+					if reminder.duration.params.invert
+						if reminder.duration.params.related == 'END'
+							ds+= ' '+t('tasks_enhanced','before end')
+						else
+							ds+= ' '+t('tasks_enhanced','before beginning')
+					else
+						if reminder.duration.params.related == 'END'
+							ds+= ' '+t('tasks_enhanced','after end')
+						else
+							ds+= ' '+t('tasks_enhanced','after beginning')
 				return ds
+			else
+				return t('tasks_enhanced', 'Remind me')
 		else
 			return t('tasks_enhanced', 'Remind me')

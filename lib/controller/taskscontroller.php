@@ -356,6 +356,8 @@ class TasksController extends Controller {
 
 		if ($type == false){
 			unset($vtodo->VALARM);
+			$vtodo->setDateTime('LAST-MODIFIED', 'now', \Sabre\VObject\Property\DateTime::UTC);
+			$vtodo->setDateTime('DTSTAMP', 'now', \Sabre\VObject\Property\DateTime::UTC);
 			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
 		}
 		elseif (in_array($type,$types)) {
@@ -369,20 +371,59 @@ class TasksController extends Controller {
 				} else {
 					unset($valarm->TRIGGER);
 				}
-				$triggervalue = '';
+				$tv = '';
+				$related = null;
 				if ($type == 'DATE-TIME') {
 					$date = new \DateTime('@'.$this->params('date'));
-					$triggervalue = $date->format('Ymd\THis\Z');
+					$tv = $date->format('Ymd\THis\Z');
 				} elseif ($type == 'DURATION') {
-					// TODO
-					$triggervalue = '-PT5M';
+					$invert = $this->params('invert');
+					$related= $this->params('related');
+					$week 	= (int)$this->params('week');
+					$day 	= (int)$this->params('day');
+					$hour 	= (int)$this->params('hour');
+					$minute = (int)$this->params('minute');
+					$second = (int)$this->params('second');
+
+					// Create duration string
+					if($week || $day || $hour || $minute || $second) {
+						if ($invert){
+							$tv.='-';
+						}
+						$tv.='P';
+						if ($week){
+							$tv.=$week.'W';
+						}
+						if ($day){
+							$tv.=$day.'D';
+						}
+						$tv.='T';
+						if ($hour){
+							$tv.=$hour.'H';
+						}
+						if ($minute){
+							$tv.=$minute.'M';
+						}
+						if ($second){
+							$tv.=$second.'S';
+						}
+					}else{
+						$tv = 'PT0S';
+					}
 				}
-				$valarm->addProperty('TRIGGER', $triggervalue, array('VALUE' => $type));
+				if($related == 'END'){
+					$valarm->addProperty('TRIGGER', $tv, array('VALUE' => $type, 'RELATED' => $related));
+				} else {
+					$valarm->addProperty('TRIGGER', $tv, array('VALUE' => $type));
+				}
+				$vtodo->setDateTime('LAST-MODIFIED', 'now', \Sabre\VObject\Property\DateTime::UTC);
+				$vtodo->setDateTime('DTSTAMP', 'now', \Sabre\VObject\Property\DateTime::UTC);
 				\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
 			} catch (\Exception $e) {
 
 			}
 		}
+
 
 		return $response;
 	}

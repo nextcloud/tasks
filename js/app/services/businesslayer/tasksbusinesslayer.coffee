@@ -62,6 +62,11 @@ angular.module('Tasks').factory 'TasksBusinessLayer',
 			@_$tasksmodel.removeById(taskID)
 			@_persistence.deleteTask(taskID)
 
+		initDueDate: (taskID) ->
+			due = moment(@_$tasksmodel.getById(taskID).due, "YYYYMMDDTHHmmss")
+			if !due.isValid()
+				@setDue(taskID, moment().startOf('hour').add('h',1),'time')
+
 		setDue: (taskID, date, type='day') ->
 			due = moment(@_$tasksmodel.getById(taskID).due, "YYYYMMDDTHHmmss")
 			if type=='day'
@@ -77,12 +82,22 @@ angular.module('Tasks').factory 'TasksBusinessLayer',
 			else
 				return
 			@_$tasksmodel.setDueDate(taskID,due.format('YYYYMMDDTHHmmss'))
+			@checkReminderDate(taskID)
 			@_persistence.setDueDate(taskID,
 				if due.isValid() then due.unix() else false)
 
 		deleteDueDate: (taskID) ->
+			reminder = @_$tasksmodel.getById(taskID).reminder
+			if (reminder != null && reminder.type == 'DURATION' &&
+			reminder.duration.params.related == 'END')
+				@deleteReminderDate(taskID)
 			@_$tasksmodel.setDueDate(taskID, null)
 			@_persistence.setDueDate(taskID, false)
+
+		initStartDate: (taskID) ->
+			start = moment(@_$tasksmodel.getById(taskID).start, "YYYYMMDDTHHmmss")
+			if !start.isValid()
+				@setStart(taskID, moment().startOf('hour').add('h',1),'time')
 
 		setStart: (taskID, date, type='day') ->
 			start = moment(@_$tasksmodel.getById(taskID).start, "YYYYMMDDTHHmmss")
@@ -99,23 +114,59 @@ angular.module('Tasks').factory 'TasksBusinessLayer',
 			else
 				return
 			@_$tasksmodel.setStartDate(taskID,start.format('YYYYMMDDTHHmmss'))
+			@checkReminderDate(taskID)
 			@_persistence.setStartDate(taskID,
 				if start.isValid() then start.unix() else false)
 
 		deleteStartDate: (taskID) ->
+			reminder = @_$tasksmodel.getById(taskID).reminder
+			if (reminder != null && reminder.type == 'DURATION' &&
+			reminder.duration.params.related == 'START')
+				@deleteReminderDate(taskID)
 			@_$tasksmodel.setStartDate(taskID, null)
 			@_persistence.setStartDate(taskID, false)
 
-		setReminder: (taskID, date, type='day') ->
+		initReminder: (taskID) ->
+			if !@checkReminderDate(taskID)
+				task = @_$tasksmodel.getById(taskID)
+				task.reminder = {
+					type:		'DURATION',
+					action:		'DISPLAY',
+					duration:	{
+						token:	'week',
+						week:	0,
+						day:	0,
+						hour:	0,
+						minute:	0,
+						second:	0,
+						params: {
+							invert: true
+						}
+					}
+				}
+				if moment(task.start, "YYYYMMDDTHHmmss").isValid()
+					p = task.reminder.duration.params
+					p.related = 'START'
+					p.id = '10'
+				else if	moment(task.due, "YYYYMMDDTHHmmss").isValid()
+					p = task.reminder.duration.params
+					p.related = 'END'
+					p.id = '11'
+				else
+					task.reminder.type = 'DATE-TIME'
+					task.reminder.date = moment().startOf('hour').add('h',1)
+					.format('YYYYMMDDTHHmmss')
+			@setReminder(taskID)
+
+		setReminderDate: (taskID, date, type='day') ->
 			reminder = @_$tasksmodel.getById(taskID).reminder
 			newreminder = {
 				type:		'DATE-TIME',
 				action:		'DISPLAY',
-				duration:	null,
-				trigger: 	null
+				duration:	null
 			}
 			if type == 'day'
-				if !(angular.isUndefined(reminder) || reminder == null)
+				if (@checkReminderDate(taskID) || reminder == null)
 					reminderdate = moment(reminder.date, "YYYYMMDDTHHmmss")
 					newreminder.action = reminder.action
 					if (reminderdate.isValid() && reminder.type == 'DATE-TIME')
@@ -125,7 +176,7 @@ angular.module('Tasks').factory 'TasksBusinessLayer',
 				else
 					reminderdate = date.add('h',12)
 			else if type == 'time'
-				if !(angular.isUndefined(reminder) || reminder == null)
+				if (@checkReminderDate(taskID) || reminder == null)
 					reminderdate = moment(reminder.date, "YYYYMMDDTHHmmss")
 					newreminder.action = reminder.action
 					if (reminderdate.isValid() && reminder.type == 'DATE-TIME')
@@ -137,11 +188,105 @@ angular.module('Tasks').factory 'TasksBusinessLayer',
 			else
 				return
 			newreminder.date = reminderdate.format('YYYYMMDDTHHmmss')
-			@_$tasksmodel.setReminderDate(taskID,newreminder)
+			@_$tasksmodel.setReminder(taskID,newreminder)
 			@_persistence.setReminder(taskID,newreminder)
 
+		setReminder: (taskID) ->
+			if @checkReminderDate(taskID)
+				reminder = @_$tasksmodel.getById(taskID).reminder
+				@_persistence.setReminder(taskID,reminder)
+
+		checkReminderDate: (taskID) ->
+			task = @_$tasksmodel.getById(taskID)
+			reminder = task.reminder
+			if(reminder != null && reminder.type == 'DURATION')
+				if !reminder.duration
+					return false
+				else if reminder.duration.params.related == 'START'
+					token = 'start'
+				else if reminder.duration.params.related == 'END'
+					token = 'due'
+				else
+					return false
+				date = moment(task[token], "YYYYMMDDTHHmmss")
+				duration = reminder.duration
+				d = {
+					w:	duration.week,
+					d:	duration.day,
+					h:	duration.hour,
+					m:	duration.minute,
+					s:	duration.second
+				}
+				if duration.params.invert
+					date = date.subtract(d)
+				else
+					date = date.add(d)
+				task.reminder.date = date.format('YYYYMMDDTHHmmss')
+			else if(reminder != null && reminder.type == 'DATE-TIME')
+				duration = reminder.duration
+				date = moment(reminder.date, "YYYYMMDDTHHmmss")
+				if !date.isValid()
+					return false
+				if duration
+					if duration.params.related == 'START'
+						related = moment(task.start, "YYYYMMDDTHHmmss")
+					else
+						related = moment(task.due, "YYYYMMDDTHHmmss")
+					seg = @secondsToSegments(date.diff(related, 'seconds'))
+					duration.params.invert = seg.invert
+					duration.token 	= 'week'
+					duration.week 	= seg.week
+					duration.day 	= seg.day
+					duration.hour 	= seg.hour
+					duration.minute = seg.minute
+					duration.second = seg.second
+				else
+					if task.start
+						related = moment(task.start, "YYYYMMDDTHHmmss")
+						rel = 'START'
+						d = 0
+					else if task.due
+						related = moment(task.due, "YYYYMMDDTHHmmss")
+						rel = 'END'
+						d = 1
+					else
+						return true
+					seg = @secondsToSegments(date.diff(related, 'seconds'))
+					reminder.duration = {
+						token: 'week'
+						params: {
+							related:	rel
+							invert:		seg.invert
+							id:			+seg.invert+''+d
+						}
+						week:	seg.week
+						day:	seg.day
+						hour:	seg.hour
+						minute:	seg.minute
+						second:	seg.second
+					}
+			else
+				return false
+			return true
+
+		secondsToSegments: (s) ->
+			if s<0
+				s *= -1
+				i = true
+			else
+				i = false
+			w = Math.floor(s/604800)
+			s -= w*604800
+			d = Math.floor(s/86400)
+			s -= d*86400
+			h = Math.floor(s/3600)
+			s -= h*3600
+			m = Math.floor(s/60)
+			s -= m*60
+			return {week:w, day:d, hour:h, minute:m, second:s, invert: i}
+
 		deleteReminderDate: (taskID) ->
-			@_$tasksmodel.setReminderDate(taskID, null)
+			@_$tasksmodel.setReminder(taskID, null)
 			@_persistence.setReminder(taskID,false)
 
 		changeCalendarId: (taskID, calendarID) ->

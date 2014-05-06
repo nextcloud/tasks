@@ -49,6 +49,7 @@
             <div class="section detail-reminder" ng-class="{'date':isDue(task.reminder.date), 'editing':route.parameter=='reminder'}" ng-click="editReminder()" stop-event="click">
             <!-- oc-click-focus="{selector: 'div.detail-reminder input.datepicker-input', timeout: 0}" -->
             	<span class="icon detail-reminder" ng-class="{'overdue':isOverDue(task.reminder.date)}"></span>
+                <span class="icon detail-remindertype" ng-click="changeReminderType(task)" ng-show="task.due || task.start"></span>
                 <div class="section-title" ng-class="{'overdue':isOverDue(task.reminder.date)}" ng-hide="route.parameter=='reminder'">
     				<text rel="">{{ task.reminder | reminderDetails:this }}</text>
     			</div>
@@ -63,8 +64,9 @@
                         <input class="timepicker-input medium focus" type="text" key-value="" placeholder="hh:mm" value="{{ task.reminder.date | timeTaskList }}" timepicker="reminder" stop-event="click">
                     </div>
                     <div ng-switch-when="DURATION">
-                        <input class="datepicker-input medium focus" type="text" key-value="" placeholder="" value="">
-                        <select ng-model="duration" ng-options="duration.name for duration in durations"></select>
+                        <input ng-change="setReminderDuration(task.id)" class="duration-input medium focus" type="number" key-value="" placeholder="" ng-model="task.reminder.duration[task.reminder.duration.token]">
+                        <select ng-model="task.reminder.duration.token" ng-options="duration.id as duration.names for duration in durations"></select>
+                        <select ng-change="setReminderDuration(task.id)" ng-model="task.reminder.duration.params" ng-options="param as param.name for param in params(task) track by param.id"></select>
                     </div>
                 </div>
             </div>

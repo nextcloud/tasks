@@ -38,22 +38,63 @@ $timeout, $routeParams) ->
 			)
 
 			@_$scope.durations = [
-				{name:	t('tasks_enhanced','years'),	abbr: 'y'},
-				{name:	t('tasks_enhanced','months'),	abbr: 'm'},
-				{name:	t('tasks_enhanced','days'),		abbr: 'd'},
-				{name:	t('tasks_enhanced','hours'),	abbr: 'h'},
-				{name:	t('tasks_enhanced','minutes'),	abbr: 'i'},
-				{name:	t('tasks_enhanced','seconds'),	abbr: 's'}
+				{
+					name:	t('tasks_enhanced','week'),
+					names:	t('tasks_enhanced','weeks'),
+					id:		'week'},
+				{
+					name:	t('tasks_enhanced','day'),
+					names:	t('tasks_enhanced','days'),
+					id:		'day'},
+				{
+					name:	t('tasks_enhanced','hour'),
+					names:	t('tasks_enhanced','hours'),
+					id:		'hour'},
+				{
+					name:	t('tasks_enhanced','minute'),
+					names:	t('tasks_enhanced','minutes'),
+					id:		'minute'},
+				{
+					name:	t('tasks_enhanced','second'),
+					names:	t('tasks_enhanced','seconds'),
+					id:		'second'}
 			]
 
-			@_$scope.duration = _$scope.durations[1]
+			@_$scope.params = (task) ->
+				params = [
+						{
+							name:	t('tasks_enhanced','before beginning'),
+							invert:	true
+							related:'START',
+							id:		"10"},
+						{
+							name:	t('tasks_enhanced','after beginning'),
+							invert:	false
+							related:'START',
+							id:		"00"},
+						{
+							name:	t('tasks_enhanced','before end'),
+							invert:	true
+							related:'END',
+							id:		"11"},
+						{
+							name:	t('tasks_enhanced','after end'),
+							invert:	false
+							related:'END',
+							id:		"01"}
+					]
+				if task.due && task.start
+					return params
+				else if task.start
+					return params.slice(0,2)
+				else
+					return params.slice(2)
 
 			@_$scope.closeDetails = () ->
 				if _$scope.status.searchActive
 					_$location.path('/search/'+_$scope.route.searchString)
 				else
 					_$location.path('/lists/'+_$scope.route.listID)
-
 
 			@_$scope.deleteTask = (taskID) ->
 				_$scope.closeDetails()
@@ -76,6 +117,7 @@ $timeout, $routeParams) ->
 				else
 					_$location.path('/lists/'+_$scope.route.listID +
 					'/tasks/' + _$scope.route.taskID + '/edit/duedate')
+				_tasksbusinesslayer.initDueDate(_$scope.route.taskID)
 
 			@_$scope.editStart = () ->
 				if _$scope.status.searchActive
@@ -84,6 +126,7 @@ $timeout, $routeParams) ->
 				else
 					_$location.path('/lists/'+_$scope.route.listID +
 					'/tasks/' + _$scope.route.taskID + '/edit/startdate')
+				_tasksbusinesslayer.initStartDate(_$scope.route.taskID)
 
 			@_$scope.editReminder = () ->
 				if _$scope.status.searchActive
@@ -92,6 +135,7 @@ $timeout, $routeParams) ->
 				else
 					_$location.path('/lists/'+_$scope.route.listID +
 					'/tasks/' + _$scope.route.taskID + '/edit/reminder')
+				_tasksbusinesslayer.initReminder(_$scope.route.taskID)
 
 			@_$scope.editNote = () ->
 				if _$scope.status.searchActive
@@ -182,22 +226,41 @@ $timeout, $routeParams) ->
 				moment(date,'HH:mm'),'time')
 
 			@_$scope.setreminderday = (date) ->
-				_tasksbusinesslayer.setReminder(_$scope.route.taskID,
+				_tasksbusinesslayer.setReminderDate(_$scope.route.taskID,
 				moment(date,'MM/DD/YYYY'),'day')
 
 			@_$scope.setremindertime = (date) ->
-				_tasksbusinesslayer.setReminder(_$scope.route.taskID,
+				_tasksbusinesslayer.setReminderDate(_$scope.route.taskID,
 				moment(date,'HH:mm'),'time')
 
 			@_$scope.reminderType = (task) ->
 				if !angular.isUndefined(task)
 					if task.reminder == null
-						if moment(task.start, "YYYYMMDDTHHmmss").isValid()
+						if moment(task.start, "YYYYMMDDTHHmmss").isValid() ||
+						moment(task.due, "YYYYMMDDTHHmmss").isValid()
 							return 'DURATION'
 						else
 							return 'DATE-TIME'
 					else
 						return task.reminder.type
+
+			@_$scope.changeReminderType = (task) ->
+				_tasksbusinesslayer.checkReminderDate(task.id)
+				if @reminderType(task) == 'DURATION'
+					if task.reminder
+						task.reminder.type = 'DATE-TIME'
+					else
+						task.reminder = {type:'DATE-TIME'}
+				else
+					if task.reminder
+						task.reminder.type = 'DURATION'
+					else
+						task.reminder = {type:'DURATION'}
+				_tasksbusinesslayer.setReminder(task.id)
+
+
+			@_$scope.setReminderDuration = (taskID) ->
+				_tasksbusinesslayer.setReminder(_$scope.route.taskID)
 
 	return new DetailsController($scope, $window, TasksModel,
 		TasksBusinessLayer, $route, $location, $timeout, $routeParams)

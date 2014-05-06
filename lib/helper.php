@@ -36,6 +36,7 @@ Class helper {
 	public static function arrayForJSON($id, $vtodo, $user_timezone){
 		$task = array( 'id' => $id );
 		$task['name'] = $vtodo->getAsString('SUMMARY');
+		$task['created'] = $vtodo->getAsString('CREATED');
 		$task['note'] = $vtodo->getAsString('DESCRIPTION');
 		$task['location'] = $vtodo->getAsString('LOCATION');
 		$task['categories'] = $vtodo->getAsArray('CATEGORIES');
@@ -70,30 +71,68 @@ Class helper {
 			try {
 
 				$reminderType = $reminder->TRIGGER['VALUE']->value;
-				$reminderTrigger = $reminder->TRIGGER->value;
 				$reminderAction = $reminder->ACTION->value;
-				$parsed1 = null;
+
 
 				if($reminderType == 'DATE-TIME'){
 					$reminderDate = $reminder->TRIGGER->getDateTime();
 					$reminderDate->setTimezone(new \DateTimeZone($user_timezone));
 					$reminderDate = $reminderDate->format('Ymd\THis');
-				} elseif ($reminderType == 'DURATION' && $start) {
-					$parsed_complete = VObject\DateTimeParser::parseDuration($reminder->TRIGGER);
+				} elseif ($reminderType == 'DURATION' && ($start || $due)) {
+
 					$parsed = VObject\DateTimeParser::parseDuration($reminder->TRIGGER,true);
 					// Calculate the reminder date from duration and start date
-					$reminderDate = $start->modify($parsed)->format('Ymd\THis');
+					if($reminder->TRIGGER['RELATED']->value == 'END' && $due){
+						$reminderDate = $due->modify($parsed)->format('Ymd\THis');
+					} elseif ($start) {
+						$reminderDate = $start->modify($parsed)->format('Ymd\THis');
+					} else{
+						throw new \Exception('Reminder duration related to not available date.');
+					}
+					$result = preg_match('/^(?P<plusminus>\+|-)?P((?P<week>\d+)W)?((?P<day>\d+)D)?(T((?P<hour>\d+)H)?((?P<minute>\d+)M)?((?P<second>\d+)S)?)?$/', $reminder->TRIGGER, $matches);
+		            $invert = false;
+		            if ($matches['plusminus']==='-') {
+		                $invert = true;
+		            }
+
+		            $parts = array(
+		                'week',
+		                'day',
+		                'hour',
+		                'minute',
+		                'second',
+		            );
+
+		            $reminderDuration = array(
+		            	'token' => null
+		            	);
+		            foreach($parts as $part) {
+		                $matches[$part] = isset($matches[$part])&&$matches[$part]?(int)$matches[$part]:0;
+		                $reminderDuration[$part] = $matches[$part];
+		                if($matches[$part] && !$reminderDuration['token']){
+		                	$reminderDuration['token'] = $part;
+		                }
+		            }
+		            if($reminderDuration['token'] == null){
+		            	$reminderDuration['token'] = $parts[0];
+		            }
+
+					$reminderDuration['params'] = array(
+							'id'	=> (int)$invert.(int)($reminder->TRIGGER['RELATED']->value == 'END'),
+							'related'=> $reminder->TRIGGER['RELATED']->value?$reminder->TRIGGER['RELATED']->value:'START',
+							'invert'=>	$invert
+							);
+
 				} else {
 					$reminderDate = null;
+					$reminderDuration = null;
 				}
-				
 				
 				$task['reminder'] = array(
 					'type' 		=> $reminderType,
-					'trigger'	=> $reminderTrigger,
 					'action'	=> $reminderAction,
 					'date'		=> $reminderDate,
-					'duration' 	=> $parsed_complete
+					'duration'	=> $reminderDuration
 					);
 
 			} catch(\Exception $e) {

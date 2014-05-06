@@ -205,7 +205,14 @@ angular.module('Tasks').factory 'Persistence',
 					data:
 						type:		reminder.type
 						action:		reminder.action
-						duration:	reminder.duration
+						week:		reminder.duration.week
+						day:		reminder.duration.day
+						hour:		reminder.duration.hour
+						minute:		reminder.duration.minute
+						second:		reminder.duration.second
+						invert:		reminder.duration.params.invert
+						related:	reminder.duration.params.related
+
 			else return
 
 			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/reminder', params

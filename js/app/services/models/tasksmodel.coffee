@@ -127,7 +127,7 @@ angular.module('Tasks').factory 'TasksModel',
 		setDueDate: (taskID,date) ->
 			@update({id:taskID,due:date})
 
-		setReminderDate: (taskID,reminder) ->
+		setReminder: (taskID,reminder) ->
 			@update({id:taskID,reminder:reminder})
 
 		setStartDate: (taskID,date) ->
@@ -136,7 +136,7 @@ angular.module('Tasks').factory 'TasksModel',
 		overdue: (due) ->
 			return (moment(due, "YYYYMMDDTHHmmss").isValid() &&
 				moment(due, "YYYYMMDDTHHmmss").
-				diff(moment().startOf('day'), 'days', true) < 0)
+				diff(moment()) < 0)
 
 		due: (due) ->
 			return moment(due, 'YYYYMMDDTHHmmss').isValid()

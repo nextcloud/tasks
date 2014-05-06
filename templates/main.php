@@ -5,7 +5,7 @@
             	<a id="search" ng-click="openSearch()" oc-click-focus="{selector: '#search-toolbar input', timeout: 0}">
                 	<span class="icon search"></span>
                 </a>
-                <a id="loading" ng-click="update()">
+                <a id="loading" ng-click="update()" stop-event="click">
                     <span class="loading" ng-class="{'done':!isLoading()}"></span>
                 </a>
             </div>
