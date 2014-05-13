@@ -2,10 +2,10 @@
 <info>
 	<id>tasks_enhanced</id>
 	<name>tasks_enhanced</name>
-	<version>0.2</version>
+	<version>0.2.1</version>
 	<licence>AGPL</licence>
 	<author>Raimund Schlüßler</author>
-	<require>6.0.3</require>
+	<require>6.0.0</require>
 	<shipped>true</shipped>
 	<description>Enhanced Task App for Calender TODOs</description>
 </info>

@@ -72,6 +72,8 @@ Class helper {
 
 				$reminderType = $reminder->TRIGGER['VALUE']->value;
 				$reminderAction = $reminder->ACTION->value;
+				$reminderDate = null;
+				$reminderDuration = null;
 
 
 				if($reminderType == 'DATE-TIME'){
@@ -82,10 +84,14 @@ Class helper {
 
 					$parsed = VObject\DateTimeParser::parseDuration($reminder->TRIGGER,true);
 					// Calculate the reminder date from duration and start date
-					if($reminder->TRIGGER['RELATED']->value == 'END' && $due){
-						$reminderDate = $due->modify($parsed)->format('Ymd\THis');
-					} elseif ($start) {
-						$reminderDate = $start->modify($parsed)->format('Ymd\THis');
+					$related = null;
+					if(is_object($reminder->TRIGGER['RELATED'])){
+						$related = $reminder->TRIGGER['RELATED']->value;
+						if(is_object($reminder->TRIGGER['RELATED']) && $reminder->TRIGGER['RELATED']->value == 'END' && $due){
+							$reminderDate = $due->modify($parsed)->format('Ymd\THis');
+						} elseif ($start) {
+							$reminderDate = $start->modify($parsed)->format('Ymd\THis');
+						}
 					} else{
 						throw new \Exception('Reminder duration related to not available date.');
 					}
@@ -118,8 +124,8 @@ Class helper {
 		            }
 
 					$reminderDuration['params'] = array(
-							'id'	=> (int)$invert.(int)($reminder->TRIGGER['RELATED']->value == 'END'),
-							'related'=> $reminder->TRIGGER['RELATED']->value?$reminder->TRIGGER['RELATED']->value:'START',
+							'id'	=> (int)$invert.(int)($related == 'END'),
+							'related'=> $related?$related:'START',
 							'invert'=>	$invert
 							);
 
