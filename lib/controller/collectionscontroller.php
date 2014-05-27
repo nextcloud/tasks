@@ -62,7 +62,7 @@ class CollectionsController extends Controller {
 		foreach ($collections as $key => $collection){
 			try{
 				$tmp = (int)\OCP\Config::getUserValue($this->api->getUserId(), 'tasks_enhanced','show_'.$collection['id']);
-				if (!in_array($tmp, array(0,1,2) || $tmp==null)) {
+				if (!in_array($tmp, array(0,1,2)) || $tmp === null) {
 					$tmp = 2;
 					\OCP\Config::setUserValue($this->api->getUserId(), 'tasks_enhanced','show_'.$collection['id'],$tmp);
 				}
