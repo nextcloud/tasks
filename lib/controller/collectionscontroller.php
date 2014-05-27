@@ -62,7 +62,7 @@ class CollectionsController extends Controller {
 		foreach ($collections as $key => $collection){
 			try{
 				$tmp = (int)\OCP\Config::getUserValue($this->api->getUserId(), 'tasks_enhanced','show_'.$collection['id']);
-				if (!in_array($tmp, array(0,1,2))) {
+				if (!in_array($tmp, array(0,1,2) || $tmp==null)) {
 					$tmp = 2;
 					\OCP\Config::setUserValue($this->api->getUserId(), 'tasks_enhanced','show_'.$collection['id'],$tmp);
 				}
@@ -81,6 +81,9 @@ class CollectionsController extends Controller {
 		return $response;
 	}
 
+	/**
+	 * @NoAdminRequired
+	 */
 	public function setVisibility(){
 		$collectionId = (string) $this->params('collectionID');
 		$vis = (int) $this->params('visibility');
