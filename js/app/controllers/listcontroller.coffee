@@ -132,6 +132,16 @@ CollectionsModel, ListsBusinessLayer, $location) ->
 			@_$scope.getCollectionCount = (collectionID) ->
 				return _$collectionsmodel.getCount(collectionID)
 
+			@_$scope.hideCollection = (collectionID) ->
+				collection = _$collectionsmodel.getById(collectionID)
+				switch collection.show
+					when 0
+						return true
+					when 1
+						return false
+					when 2
+						return (@getCollectionCount(collectionID) < 1)
+
 			@_$scope.getCollectionString = (collectionID) ->
 				return _$collectionsmodel.getCountString(collectionID)
 
@@ -144,6 +154,7 @@ CollectionsModel, ListsBusinessLayer, $location) ->
 
 			@_$scope.update = () ->
 				if not _$scope.isLoading()
+					# _$collectionsbusinesslayer.updateModel()
 					_$tasksbusinesslayer.updateModel()
 					_$listsbusinesslayer.updateModel()
 

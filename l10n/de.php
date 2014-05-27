@@ -1,6 +1,12 @@
 <?php $TRANSLATIONS = array(
 "Invalid date/time" => "Ungültige Datums-/Zeitangabe",
 "Search..." => "Suche...",
+"Settings" => "Einstellungen",
+"General" => "Allgemein",
+"Visible" => "Sichtbar",
+"Hidden" => "Versteckt",
+"Automatic" => "Automatisch",
+"Visibility of Smart Collections" => "Sichtbarkeit der Smart-Collections",
 "Tasks" => "Aufgaben",
 "Today" => "Heute",
 "Important" => "Wichtig",

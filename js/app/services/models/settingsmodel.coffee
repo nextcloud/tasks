@@ -19,21 +19,24 @@ You should have received a copy of the GNU Affero General Public
 License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 ###
-angular.module('Tasks').factory 'Status',
-[ () ->
 
-	class Status
+angular.module('Tasks').factory 'SettingsModel',
+['_Model',
+(_Model) ->
+	class SettingsModel extends _Model
 
 		constructor: () ->
-			@_$status = {
-				searchActive: false
-				addingList: false
-				focusTaskInput: false
-			}
+			@_nameCache = {}
+			super()
 
-		getStatus: () ->
-			@_$status
+		add: (data, clearCache=true) ->
+			@_nameCache[data.displayname] = data
+			if angular.isDefined(data.id)
+				super(data, clearCache)
 
-	return new Status()
+		toggle: (type, setting) ->
+			set = @getById(type)
+			@getById(type)[setting] = !set[setting]
 
+	return new SettingsModel()
 ]

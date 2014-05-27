@@ -115,6 +115,11 @@
 			transition: opacity 100ms ease 0s;
 			opacity:0.6;
 		}
+		&.detail-settings{
+			background-position: -200px -40px;
+			transition: opacity 100ms ease 0s;
+			opacity:0.6;
+		}
 		&.search {
 			background-position: -80px -20px;
 			transition: opacity 100ms ease 0s;
@@ -382,6 +387,9 @@
 			padding:10px;
 			height:20px;
 			line-height:20px;
+			&.settings{
+				right:0;
+			}
 		}
 	}
 	div.scroll{
@@ -981,11 +989,63 @@
 	}
 }
 
+#modal-wrapper{
+	position: absolute;
+	width:100%;
+	height: 100%;
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0.25);
+}
+
+#settings_modal{
+    background: url("../img/bgBig.png") repeat scroll 0 0 #f3f3f3;
+    border-radius: 6px;
+	.header{
+		h2{
+				font-size: 17px;
+				padding: 10px;
+				text-align: center;
+			}
+		.button{
+			position: absolute;
+			top:3px;
+			right:5px;
+		}
+	}
+	.navbar{
+		border-color: #ccc;
+		border-style: solid;
+		border-width: 1px 0;
+		height: 50px;
+	}
+	.content{
+		min-height:100px;
+	}
+}
+.button{
+    background-image: -moz-linear-gradient(center top , #5cb6e7 0px, #317cd7 100%);
+    border-color: #0c67a5;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+    line-height: 14px;
+    margin-right: 8px;
+    padding: 6px 10px 5px;
+    position: relative;
+    float:right;
+    &:hover{
+    	color:#CCCCCC;
+    }
+}
+
 input, textarea {
 	-moz-user-select: text;
 }
 #content a:hover .icon{
 	&.detail-trash{
+		opacity:1;
+	}
+	&.detail-settings{
 		opacity:1;
 	}
 	&.search{

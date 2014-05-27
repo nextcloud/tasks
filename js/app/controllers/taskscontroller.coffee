@@ -22,14 +22,16 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 angular.module('Tasks').controller 'TasksController',
 ['$scope', '$window', '$routeParams', 'TasksModel', 'ListsModel',
 'CollectionsModel', 'TasksBusinessLayer', '$location',
+'SettingsBusinessLayer',
 ($scope, $window, $routeParams, TasksModel, ListsModel,
-CollectionsModel, TasksBusinessLayer, $location) ->
+CollectionsModel, TasksBusinessLayer, $location,
+SettingsBusinessLayer) ->
 
 	class TasksController
 
 		constructor: (@_$scope,@_$window,@_$routeParams,
 					@_$tasksmodel,@_$listsmodel,@_$collectionsmodel,
-					@_tasksbusinesslayer, @$location) ->
+					@_tasksbusinesslayer, @$location, @_settingsbusinesslayer) ->
 
 			@_$scope.tasks = @_$tasksmodel.getAll()
 			@_$scope.lists = @_$listsmodel.getAll()
@@ -100,7 +102,7 @@ CollectionsModel, TasksBusinessLayer, $location) ->
 					_tasksbusinesslayer.starTask(taskID)
 
 			@_$scope.toggleHidden = () ->
-				_$scope.status.showhidden = !_$scope.status.showhidden
+				_settingsbusinesslayer.toggle('various','showHidden')
 
 			@_$scope.filterTasks = () ->
 				return (task) ->
@@ -180,5 +182,6 @@ CollectionsModel, TasksBusinessLayer, $location) ->
 					return task.due
 
 	return new TasksController($scope, $window, $routeParams,
-		TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location)
+		TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location,
+		SettingsBusinessLayer)
 ]

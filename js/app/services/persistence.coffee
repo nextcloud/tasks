@@ -34,10 +34,75 @@ angular.module('Tasks').factory 'Persistence',
 			successCallback = =>
 				@deferred.resolve()
 
+			@getCollections()
+			@getSettings()
 			@getLists()
 			@getTasks(successCallback)
 
 			@deferred.promise
+
+		getCollections: (onSuccess, showLoading=true) ->
+			onSuccess or= ->
+
+			if showLoading
+				@_Loading.increase()
+				successCallbackWrapper = (data) =>
+					onSuccess()
+					@_Loading.decrease()
+				failureCallbackWrapper = (data) =>
+					@_Loading.decrease()
+			else
+				successCallbackWrapper = (data) =>
+					onSuccess()
+				failureCallbackWrapper = (data) =>
+			
+			params =
+				onSuccess: successCallbackWrapper
+				onFailure: failureCallbackWrapper
+
+			@_request.get '/apps/tasks_enhanced/collections', params
+
+		getSettings: (onSuccess, showLoading=true) ->
+			onSuccess or= ->
+
+			if showLoading
+				@_Loading.increase()
+				successCallbackWrapper = (data) =>
+					onSuccess()
+					@_Loading.decrease()
+				failureCallbackWrapper = (data) =>
+					@_Loading.decrease()
+			else
+				successCallbackWrapper = (data) =>
+					onSuccess()
+				failureCallbackWrapper = (data) =>
+			
+			params =
+				onSuccess: successCallbackWrapper
+				onFailure: failureCallbackWrapper
+
+			@_request.get '/apps/tasks_enhanced/settings', params
+
+		setVisibility: (collectionID, visibility) ->
+			params =
+				routeParams:
+					collectionID: collectionID
+					visibility: visibility
+
+			@_request.post '/apps/tasks_enhanced/collection/
+			{collectionID}/visibility/{visibility}', params
+
+		setting: (type, setting, value) ->
+			params =
+				routeParams:
+					type: type
+					setting: setting
+					value: +value
+
+			@_request.post '/apps/tasks_enhanced/settings/
+			{type}/{setting}/{value}', params
+
+
 
 		getLists: (onSuccess, showLoading=true, which='all') ->
 			onSuccess or= ->
@@ -243,6 +308,14 @@ angular.module('Tasks').factory 'Persistence',
 					note: note
 
 			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/note', params
+
+		setShowHidden: (showHidden) ->
+			params =
+				routeParams:
+					showHidden: +showHidden
+
+			@_request.post '/apps/tasks_enhanced/settings/showhidden/{showHidden}',
+			params
 
 	return new Persistence(Request, Loading, $rootScope)
 

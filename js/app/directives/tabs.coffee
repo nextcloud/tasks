@@ -1,6 +1,6 @@
 ###
 
-ownCloud - Tasks
+ownCloud - Music
 
 @author Raimund Schlüßler
 @copyright 2013
@@ -19,21 +19,18 @@ You should have received a copy of the GNU Affero General Public
 License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 ###
-angular.module('Tasks').factory 'Status',
-[ () ->
 
-	class Status
-
-		constructor: () ->
-			@_$status = {
-				searchActive: false
-				addingList: false
-				focusTaskInput: false
-			}
-
-		getStatus: () ->
-			@_$status
-
-	return new Status()
-
-]
+angular.module('Tasks').directive 'tabs', ->
+    directive =
+        restrict: 'E',
+        scope: {},
+        controller: ($scope, $element) ->
+        	panes = $scope.panes = []
+        	$scope.select = (pane) ->
+        		angular.forEach(panes, (pane) ->
+        			pane.selected = false
+        			)
+        		pane.selected = true
+        	this.addPane = (pane) ->
+        		$scope.select(pane) if (panes.length == 0)
+        		panes.push(pane)

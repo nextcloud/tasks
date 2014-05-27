@@ -79,6 +79,8 @@ angular.module('Tasks').factory 'TasksBusinessLayer',
 					due.hour(date.hour()).minute(date.minute())
 				else
 					due = date
+			else if type == 'all'
+				due = date
 			else
 				return
 			@_$tasksmodel.setDueDate(taskID,due.format('YYYYMMDDTHHmmss'))
@@ -308,7 +310,7 @@ angular.module('Tasks').factory 'TasksBusinessLayer',
 				when 'uncompleted'
 					@uncompleteTask(taskID)
 				when 'today'
-					@setDueDate(taskID,moment().format("YYYYMMDDTHHmmss"))
+					@setDue(taskID,moment().startOf('day').add('h',12),'all')
 				when 'week', 'all'
 				else
 					@changeCalendarId(taskID,listID)
@@ -318,6 +320,9 @@ angular.module('Tasks').factory 'TasksBusinessLayer',
 			success = () =>
 				@_$tasksmodel.removeVoid()
 			@_persistence.getTasks(success, true)
+
+		setShowHidden: (showHidden) ->
+			@_persistence.setShowHidden(showHidden)
 
 
 	return new TasksBusinessLayer(TasksModel, Persistence)

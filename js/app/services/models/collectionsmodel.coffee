@@ -21,41 +21,13 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 ###
 
 angular.module('Tasks').factory 'CollectionsModel',
-['TasksModel', '_Model', '_EqualQuery', 'Utils',
-(TasksModel, _Model, _EqualQuery, Utils) ->
+['TasksModel', '_Model',
+(TasksModel, _Model) ->
 	class CollectionsModel extends _Model
 
-		constructor: (@_$tasksmodel, @_utils) ->
+		constructor: (@_$tasksmodel) ->
 			@_nameCache = {}
-			@_$collections = [
-				{
-					id: "starred"
-					displayname: t('tasks_enhanced','Important')
-				},
-				{
-					id: "today"
-					displayname: t('tasks_enhanced', 'Today')
-				},
-				{
-					id: "week"
-					displayname: t('tasks_enhanced', 'Week')
-				},
-				{
-					id: "all",
-					displayname: t('tasks_enhanced', 'All')
-				},
-				{
-					id: "current",
-					displayname: t('tasks_enhanced', 'Current')
-				},
-				{
-					id: "completed"
-					displayname: t('tasks_enhanced', 'Done')
-				}
-			]
 			super()
-			for collection in @_$collections
-				@add(collection)
 
 		add: (data, clearCache=true) ->
 			@_nameCache[data.displayname] = data
@@ -92,5 +64,5 @@ angular.module('Tasks').factory 'CollectionsModel',
 			else
 				return ''
 
-	return new CollectionsModel(TasksModel, Utils)
+	return new CollectionsModel(TasksModel)
 ]

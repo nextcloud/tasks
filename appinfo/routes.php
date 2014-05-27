@@ -33,6 +33,28 @@ $this->create('tasks_enhanced_index', '/')
 			$dispatcher->dispatch('PageController', 'index');
 		}
 	);
+/*
+ * Collections
+ */
+$this->create('getCollections', '/collections')
+	->get()
+	->action(
+		function($params){
+			session_write_close();
+			$dispatcher = new Dispatcher($params);
+			$dispatcher->dispatch('CollectionsController', 'getCollections');
+		}
+	);
+
+$this->create('setVisibility', '/collection/{collectionID}/visibility/{visibility}')
+	->post()
+	->action(
+		function($params){
+			session_write_close();
+			$dispatcher = new Dispatcher($params);
+			$dispatcher->dispatch('CollectionsController', 'setVisibility');
+		}
+	);
 
 /*
  * Lists
@@ -208,5 +230,28 @@ $this->create('task_reminder', '/tasks/{taskID}/reminder')
 			session_write_close();
 			$dispatcher = new Dispatcher($params);
 			$dispatcher->dispatch('TasksController', 'setReminderDate');
+		}
+	);
+
+/*
+ * Settings
+ */
+$this->create('getSettings', '/settings')
+	->get()
+	->action(
+		function($params){
+			session_write_close();
+			$dispatcher = new Dispatcher($params);
+			$dispatcher->dispatch('SettingsController', 'getSettings');
+		}
+	);
+
+$this->create('showHidden', '/settings/{type}/{setting}/{value}')
+	->post()
+	->action(
+		function($params){
+			session_write_close();
+			$dispatcher = new Dispatcher($params);
+			$dispatcher->dispatch('SettingsController', 'set');
 		}
 	);

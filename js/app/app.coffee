@@ -19,7 +19,7 @@ You should have received a copy of the GNU Affero General Public
 License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 ###
-angular.module('Tasks',['OC','ngRoute','ngAnimate'])
+angular.module('Tasks',['OC','ngRoute','ngAnimate','ui.bootstrap'])
 .config ['$provide','$routeProvider', '$interpolateProvider',
 ($provide, $routeProvider, $interpolateProvider) ->
 	$provide.value 'Config', config =
@@ -30,6 +30,7 @@ angular.module('Tasks',['OC','ngRoute','ngAnimate'])
 	.when('/lists/:listID',{})
 	.when('/lists/:listID/edit/:listparameter',{})
 	.when('/lists/:listID/tasks/:taskID',{})
+	.when('/lists/:listID/tasks/:taskID/settings',{})
 	.when('/lists/:listID/tasks/:taskID/edit/:parameter',{})
 	.when('/search/:searchString',{})
 	.when('/search/:searchString/tasks/:taskID',{})
@@ -71,6 +72,7 @@ angular.module('Tasks').run ['Config', '$timeout',
 		timeOutUpdate = ->
 			$timeout update, Config.taskUpdateInterval
 		if init
+			# CollectionsBusinessLayer.updateModel()
 			ListsBusinessLayer.updateModel()
 			TasksBusinessLayer.updateModel()
 		init = true

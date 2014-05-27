@@ -12,14 +12,14 @@
 
 
 (function() {
-  angular.module('Tasks', ['OC', 'ngRoute', 'ngAnimate']).config([
+  angular.module('Tasks', ['OC', 'ngRoute', 'ngAnimate', 'ui.bootstrap']).config([
     '$provide', '$routeProvider', '$interpolateProvider', function($provide, $routeProvider, $interpolateProvider) {
       var config;
       $provide.value('Config', config = {
         markReadTimeout: 500,
         taskUpdateInterval: 1000 * 600
       });
-      $routeProvider.when('/lists/:listID', {}).when('/lists/:listID/edit/:listparameter', {}).when('/lists/:listID/tasks/:taskID', {}).when('/lists/:listID/tasks/:taskID/edit/:parameter', {}).when('/search/:searchString', {}).when('/search/:searchString/tasks/:taskID', {}).when('/search/:searchString/tasks/:taskID/edit/:parameter', {}).otherwise({
+      $routeProvider.when('/lists/:listID', {}).when('/lists/:listID/edit/:listparameter', {}).when('/lists/:listID/tasks/:taskID', {}).when('/lists/:listID/tasks/:taskID/settings', {}).when('/lists/:listID/tasks/:taskID/edit/:parameter', {}).when('/search/:searchString', {}).when('/search/:searchString/tasks/:taskID', {}).when('/search/:searchString/tasks/:taskID/edit/:parameter', {}).otherwise({
         redirectTo: '/lists/all'
       });
       /*
@@ -228,6 +228,26 @@
 }).call(this);
 
 (function() {
+  angular.module('Tasks').directive('pane', function() {
+    var directive;
+    return directive = {
+      scope: {
+        title: '@'
+      },
+      require: '^tabs',
+      restrict: 'E',
+      transclude: true,
+      replace: true,
+      link: function(scope, element, attrs, tabsCtrl) {
+        return tabsCtrl.addPane(scope);
+      },
+      template: '<div class="tab-pane" ng-class="{active: selected}"' + 'ng-transclude>[[ ]]</div>'
+    };
+  });
+
+}).call(this);
+
+(function() {
   angular.module('Tasks').directive('stopEvent', function() {
     return {
       restrict: 'A',
@@ -235,6 +255,33 @@
         return element.bind(attr.stopEvent, function(e) {
           return e.stopPropagation();
         });
+      }
+    };
+  });
+
+}).call(this);
+
+(function() {
+  angular.module('Tasks').directive('tabs', function() {
+    var directive;
+    return directive = {
+      restrict: 'E',
+      scope: {},
+      controller: function($scope, $element) {
+        var panes;
+        panes = $scope.panes = [];
+        $scope.select = function(pane) {
+          angular.forEach(panes, function(pane) {
+            return pane.selected = false;
+          });
+          return pane.selected = true;
+        };
+        return this.addPane = function(pane) {
+          if (panes.length === 0) {
+            $scope.select(pane);
+          }
+          return panes.push(pane);
+        };
       }
     };
   });
@@ -283,10 +330,10 @@
 
 (function() {
   angular.module('Tasks').controller('AppController', [
-    '$scope', 'Persistence', '$route', 'Status', '$timeout', '$location', '$routeParams', 'Loading', function($scope, Persistence, $route, status, $timeout, $location, $routeParams, Loading) {
+    '$scope', 'Persistence', '$route', 'Status', '$timeout', '$location', '$routeParams', 'Loading', '$modal', 'SettingsModel', function($scope, Persistence, $route, status, $timeout, $location, $routeParams, Loading, $modal, SettingsModel) {
       var AppController;
       AppController = (function() {
-        function AppController(_$scope, _persistence, _$route, _$status, _$timeout, _$location, _$routeparams, _Loading) {
+        function AppController(_$scope, _persistence, _$route, _$status, _$timeout, _$location, _$routeparams, _Loading, _$modal, _$settingsmodel) {
           var successCallback,
             _this = this;
           this._$scope = _$scope;
@@ -297,10 +344,13 @@
           this._$location = _$location;
           this._$routeparams = _$routeparams;
           this._Loading = _Loading;
+          this._$modal = _$modal;
+          this._$settingsmodel = _$settingsmodel;
           this._$scope.initialized = false;
           this._$scope.status = this._$status.getStatus();
           this._$scope.route = this._$routeparams;
           this._$scope.status.newListName = "";
+          this._$scope.settingsmodel = this._$settingsmodel;
           successCallback = function() {
             return _this._$scope.initialized = true;
           };
@@ -318,12 +368,20 @@
           this._$scope.isLoading = function() {
             return _Loading.isLoading();
           };
+          this._$scope.showSettings = function() {
+            return _$scope.modalInstance = _$modal.open({
+              templateUrl: 'part.settings.html',
+              controller: 'SettingsController',
+              backdrop: true,
+              windowClass: 'test'
+            });
+          };
         }
 
         return AppController;
 
       })();
-      return new AppController($scope, Persistence, $route, status, $timeout, $location, $routeParams, Loading);
+      return new AppController($scope, Persistence, $route, status, $timeout, $location, $routeParams, Loading, $modal, SettingsModel);
     }
   ]);
 
@@ -699,6 +757,18 @@
           this._$scope.getCollectionCount = function(collectionID) {
             return _$collectionsmodel.getCount(collectionID);
           };
+          this._$scope.hideCollection = function(collectionID) {
+            var collection;
+            collection = _$collectionsmodel.getById(collectionID);
+            switch (collection.show) {
+              case 0:
+                return true;
+              case 1:
+                return false;
+              case 2:
+                return this.getCollectionCount(collectionID) < 1;
+            }
+          };
           this._$scope.getCollectionString = function(collectionID) {
             return _$collectionsmodel.getCountString(collectionID);
           };
@@ -774,11 +844,58 @@
 }).call(this);
 
 (function() {
+  angular.module('Tasks').controller('SettingsController', [
+    '$scope', '$window', 'Status', '$location', '$modalInstance', 'CollectionsModel', 'SettingsBusinessLayer', function($scope, $window, Status, $location, $modalInstance, CollectionsModel, SettingsBusinessLayer) {
+      var SettingsController;
+      SettingsController = (function() {
+        function SettingsController(_$scope, _$window, _$status, _$location, _$modalInstance, _$collectionsmodel, _$settingsbusinesslayer) {
+          var _this = this;
+          this._$scope = _$scope;
+          this._$window = _$window;
+          this._$status = _$status;
+          this._$location = _$location;
+          this._$modalInstance = _$modalInstance;
+          this._$collectionsmodel = _$collectionsmodel;
+          this._$settingsbusinesslayer = _$settingsbusinesslayer;
+          this._$scope.status = this._$status.getStatus();
+          this._$scope.collections = this._$collectionsmodel.getAll();
+          this._$scope.collectionOptions = [
+            {
+              id: 0,
+              name: t('tasks_enhanced', 'Hidden')
+            }, {
+              id: 1,
+              name: t('tasks_enhanced', 'Visible')
+            }, {
+              id: 2,
+              name: t('tasks_enhanced', 'Automatic')
+            }
+          ];
+          this._$scope.ok = function() {
+            return $modalInstance.close();
+          };
+          this._$scope.setVisibility = function(collectionID) {
+            var collection;
+            collection = _$collectionsmodel.getById(collectionID);
+            return _$settingsbusinesslayer.setVisibility(collectionID, collection.show);
+          };
+        }
+
+        return SettingsController;
+
+      })();
+      return new SettingsController($scope, $window, Status, $location, $modalInstance, CollectionsModel, SettingsBusinessLayer);
+    }
+  ]);
+
+}).call(this);
+
+(function() {
   angular.module('Tasks').controller('TasksController', [
-    '$scope', '$window', '$routeParams', 'TasksModel', 'ListsModel', 'CollectionsModel', 'TasksBusinessLayer', '$location', function($scope, $window, $routeParams, TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location) {
+    '$scope', '$window', '$routeParams', 'TasksModel', 'ListsModel', 'CollectionsModel', 'TasksBusinessLayer', '$location', 'SettingsBusinessLayer', function($scope, $window, $routeParams, TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location, SettingsBusinessLayer) {
       var TasksController;
       TasksController = (function() {
-        function TasksController(_$scope, _$window, _$routeParams, _$tasksmodel, _$listsmodel, _$collectionsmodel, _tasksbusinesslayer, $location) {
+        function TasksController(_$scope, _$window, _$routeParams, _$tasksmodel, _$listsmodel, _$collectionsmodel, _tasksbusinesslayer, $location, _settingsbusinesslayer) {
           this._$scope = _$scope;
           this._$window = _$window;
           this._$routeParams = _$routeParams;
@@ -787,6 +904,7 @@
           this._$collectionsmodel = _$collectionsmodel;
           this._tasksbusinesslayer = _tasksbusinesslayer;
           this.$location = $location;
+          this._settingsbusinesslayer = _settingsbusinesslayer;
           this._$scope.tasks = this._$tasksmodel.getAll();
           this._$scope.lists = this._$listsmodel.getAll();
           this._$scope.days = [0, 1, 2, 3, 4, 5, 6];
@@ -853,7 +971,7 @@
             }
           };
           this._$scope.toggleHidden = function() {
-            return _$scope.status.showhidden = !_$scope.status.showhidden;
+            return _settingsbusinesslayer.toggle('various', 'showHidden');
           };
           this._$scope.filterTasks = function() {
             return function(task) {
@@ -942,7 +1060,7 @@
         return TasksController;
 
       })();
-      return new TasksController($scope, $window, $routeParams, TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location);
+      return new TasksController($scope, $window, $routeParams, TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location, SettingsBusinessLayer);
     }
   ]);
 
@@ -1005,6 +1123,43 @@
 
       })();
       return new ListsBusinessLayer(ListsModel, Persistence, TasksModel);
+    }
+  ]);
+
+}).call(this);
+
+(function() {
+  angular.module('Tasks').factory('SettingsBusinessLayer', [
+    'Persistence', 'SettingsModel', function(Persistence, SettingsModel) {
+      var SettingsBusinessLayer;
+      SettingsBusinessLayer = (function() {
+        function SettingsBusinessLayer(_persistence, _$settingsmodel) {
+          this._persistence = _persistence;
+          this._$settingsmodel = _$settingsmodel;
+        }
+
+        SettingsBusinessLayer.prototype.updateModel = function() {
+          var success,
+            _this = this;
+          success = function() {};
+          return this._persistence.getCollections(success, true);
+        };
+
+        SettingsBusinessLayer.prototype.setVisibility = function(collectionID, visibility) {
+          return this._persistence.setVisibility(collectionID, visibility);
+        };
+
+        SettingsBusinessLayer.prototype.toggle = function(type, setting) {
+          var value;
+          this._$settingsmodel.toggle(type, setting);
+          value = this._$settingsmodel.getById(type)[setting];
+          return this._persistence.setting(type, setting, value);
+        };
+
+        return SettingsBusinessLayer;
+
+      })();
+      return new SettingsBusinessLayer(Persistence, SettingsModel);
     }
   ]);
 
@@ -1093,6 +1248,8 @@
             } else {
               due = date;
             }
+          } else if (type === 'all') {
+            due = date;
           } else {
             return;
           }
@@ -1376,7 +1533,7 @@
             case 'uncompleted':
               return this.uncompleteTask(taskID);
             case 'today':
-              return this.setDueDate(taskID, moment().format("YYYYMMDDTHHmmss"));
+              return this.setDue(taskID, moment().startOf('day').add('h', 12), 'all');
             case 'week':
             case 'all':
               break;
@@ -1395,6 +1552,10 @@
           return this._persistence.getTasks(success, true);
         };
 
+        TasksBusinessLayer.prototype.setShowHidden = function(showHidden) {
+          return this._persistence.setShowHidden(showHidden);
+        };
+
         return TasksBusinessLayer;
 
       })();
@@ -1409,43 +1570,15 @@
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
   angular.module('Tasks').factory('CollectionsModel', [
-    'TasksModel', '_Model', '_EqualQuery', 'Utils', function(TasksModel, _Model, _EqualQuery, Utils) {
+    'TasksModel', '_Model', function(TasksModel, _Model) {
       var CollectionsModel;
       CollectionsModel = (function(_super) {
         __extends(CollectionsModel, _super);
 
-        function CollectionsModel(_$tasksmodel, _utils) {
-          var collection, _i, _len, _ref;
+        function CollectionsModel(_$tasksmodel) {
           this._$tasksmodel = _$tasksmodel;
-          this._utils = _utils;
           this._nameCache = {};
-          this._$collections = [
-            {
-              id: "starred",
-              displayname: t('tasks_enhanced', 'Important')
-            }, {
-              id: "today",
-              displayname: t('tasks_enhanced', 'Today')
-            }, {
-              id: "week",
-              displayname: t('tasks_enhanced', 'Week')
-            }, {
-              id: "all",
-              displayname: t('tasks_enhanced', 'All')
-            }, {
-              id: "current",
-              displayname: t('tasks_enhanced', 'Current')
-            }, {
-              id: "completed",
-              displayname: t('tasks_enhanced', 'Done')
-            }
-          ];
           CollectionsModel.__super__.constructor.call(this);
-          _ref = this._$collections;
-          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-            collection = _ref[_i];
-            this.add(collection);
-          }
         }
 
         CollectionsModel.prototype.add = function(data, clearCache) {
@@ -1513,7 +1646,7 @@
         return CollectionsModel;
 
       })(_Model);
-      return new CollectionsModel(TasksModel, Utils);
+      return new CollectionsModel(TasksModel);
     }
   ]);
 
@@ -1672,6 +1805,46 @@
 
       })(_Model);
       return new ListsModel(TasksModel, Utils);
+    }
+  ]);
+
+}).call(this);
+
+(function() {
+  var __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  angular.module('Tasks').factory('SettingsModel', [
+    '_Model', function(_Model) {
+      var SettingsModel;
+      SettingsModel = (function(_super) {
+        __extends(SettingsModel, _super);
+
+        function SettingsModel() {
+          this._nameCache = {};
+          SettingsModel.__super__.constructor.call(this);
+        }
+
+        SettingsModel.prototype.add = function(data, clearCache) {
+          if (clearCache == null) {
+            clearCache = true;
+          }
+          this._nameCache[data.displayname] = data;
+          if (angular.isDefined(data.id)) {
+            return SettingsModel.__super__.add.call(this, data, clearCache);
+          }
+        };
+
+        SettingsModel.prototype.toggle = function(type, setting) {
+          var set;
+          set = this.getById(type);
+          return this.getById(type)[setting] = !set[setting];
+        };
+
+        return SettingsModel;
+
+      })(_Model);
+      return new SettingsModel();
     }
   ]);
 
@@ -1925,9 +2098,94 @@
           successCallback = function() {
             return _this.deferred.resolve();
           };
+          this.getCollections();
+          this.getSettings();
           this.getLists();
           this.getTasks(successCallback);
           return this.deferred.promise;
+        };
+
+        Persistence.prototype.getCollections = function(onSuccess, showLoading) {
+          var failureCallbackWrapper, params, successCallbackWrapper,
+            _this = this;
+          if (showLoading == null) {
+            showLoading = true;
+          }
+          onSuccess || (onSuccess = function() {});
+          if (showLoading) {
+            this._Loading.increase();
+            successCallbackWrapper = function(data) {
+              onSuccess();
+              return _this._Loading.decrease();
+            };
+            failureCallbackWrapper = function(data) {
+              return _this._Loading.decrease();
+            };
+          } else {
+            successCallbackWrapper = function(data) {
+              return onSuccess();
+            };
+            failureCallbackWrapper = function(data) {};
+          }
+          params = {
+            onSuccess: successCallbackWrapper,
+            onFailure: failureCallbackWrapper
+          };
+          return this._request.get('/apps/tasks_enhanced/collections', params);
+        };
+
+        Persistence.prototype.getSettings = function(onSuccess, showLoading) {
+          var failureCallbackWrapper, params, successCallbackWrapper,
+            _this = this;
+          if (showLoading == null) {
+            showLoading = true;
+          }
+          onSuccess || (onSuccess = function() {});
+          if (showLoading) {
+            this._Loading.increase();
+            successCallbackWrapper = function(data) {
+              onSuccess();
+              return _this._Loading.decrease();
+            };
+            failureCallbackWrapper = function(data) {
+              return _this._Loading.decrease();
+            };
+          } else {
+            successCallbackWrapper = function(data) {
+              return onSuccess();
+            };
+            failureCallbackWrapper = function(data) {};
+          }
+          params = {
+            onSuccess: successCallbackWrapper,
+            onFailure: failureCallbackWrapper
+          };
+          return this._request.get('/apps/tasks_enhanced/settings', params);
+        };
+
+        Persistence.prototype.setVisibility = function(collectionID, visibility) {
+          var params;
+          params = {
+            routeParams: {
+              collectionID: collectionID,
+              visibility: visibility
+            }
+          };
+          return this._request.post('/apps/tasks_enhanced/collection/\
+			{collectionID}/visibility/{visibility}', params);
+        };
+
+        Persistence.prototype.setting = function(type, setting, value) {
+          var params;
+          params = {
+            routeParams: {
+              type: type,
+              setting: setting,
+              value: +value
+            }
+          };
+          return this._request.post('/apps/tasks_enhanced/settings/\
+			{type}/{setting}/{value}', params);
         };
 
         Persistence.prototype.getLists = function(onSuccess, showLoading, which) {
@@ -2223,6 +2481,16 @@
           return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/note', params);
         };
 
+        Persistence.prototype.setShowHidden = function(showHidden) {
+          var params;
+          params = {
+            routeParams: {
+              showHidden: +showHidden
+            }
+          };
+          return this._request.post('/apps/tasks_enhanced/settings/showhidden/{showHidden}', params);
+        };
+
         return Persistence;
 
       })();
@@ -2246,9 +2514,11 @@
   ]);
 
   angular.module('Tasks').factory('Publisher', [
-    '_Publisher', 'ListsModel', 'TasksModel', function(_Publisher, ListsModel, TasksModel) {
+    '_Publisher', 'ListsModel', 'TasksModel', 'CollectionsModel', 'SettingsModel', function(_Publisher, ListsModel, TasksModel, CollectionsModel, SettingsModel) {
       var publisher;
       publisher = new _Publisher();
+      publisher.subscribeObjectTo(CollectionsModel, 'collections');
+      publisher.subscribeObjectTo(SettingsModel, 'settings');
       publisher.subscribeObjectTo(ListsModel, 'lists');
       publisher.subscribeObjectTo(TasksModel, 'tasks');
       return publisher;
@@ -2264,7 +2534,6 @@
       Status = (function() {
         function Status() {
           this._$status = {
-            showhidden: true,
             searchActive: false,
             addingList: false,
             focusTaskInput: false

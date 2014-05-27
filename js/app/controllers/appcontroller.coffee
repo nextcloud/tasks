@@ -23,14 +23,15 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 angular.module('Tasks').controller 'AppController',
 ['$scope', 'Persistence', '$route', 'Status', '$timeout',
-'$location', '$routeParams', 'Loading',
+'$location', '$routeParams', 'Loading','$modal','SettingsModel',
 ($scope, Persistence, $route, status, $timeout, $location,
-$routeParams, Loading) ->
+$routeParams, Loading, $modal, SettingsModel) ->
 
 	class AppController
 
 		constructor: (@_$scope, @_persistence, @_$route, @_$status,
-			@_$timeout, @_$location, @_$routeparams, @_Loading) ->
+			@_$timeout, @_$location, @_$routeparams, @_Loading,
+			@_$modal,@_$settingsmodel) ->
 
 			@_$scope.initialized = false
 
@@ -39,6 +40,8 @@ $routeParams, Loading) ->
 			@_$scope.route = @_$routeparams
 
 			@_$scope.status.newListName = ""
+
+			@_$scope.settingsmodel = @_$settingsmodel
 
 			successCallback = =>
 				@_$scope.initialized = true
@@ -58,7 +61,15 @@ $routeParams, Loading) ->
 			@_$scope.isLoading = () ->
 				return _Loading.isLoading()
 
+			@_$scope.showSettings = () ->
+				_$scope.modalInstance = _$modal.open({
+					templateUrl: 'part.settings.html',
+					controller: 'SettingsController',
+					backdrop: true,
+					windowClass: 'test'
+				})
+
 	return new AppController($scope, Persistence, $route, status, $timeout,
-	$location, $routeParams, Loading)
+	$location, $routeParams, Loading, $modal, SettingsModel)
 
 ]

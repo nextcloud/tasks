@@ -13,8 +13,10 @@ namespace OCA\Tasks_enhanced;
 use OCP\AppFramework\App as MainApp,
 	OCP\AppFramework\IAppContainer,
 	OCA\Tasks_enhanced\Controller\PageController,
+	OCA\Tasks_enhanced\Controller\CollectionsController,
 	OCA\Tasks_enhanced\Controller\ListsController,
-	OCA\Tasks_enhanced\Controller\TasksController;
+	OCA\Tasks_enhanced\Controller\TasksController,
+	OCA\Tasks_enhanced\Controller\SettingsController;
 
 /**
  * This class manages our app actions
@@ -38,11 +40,17 @@ class Dispatcher extends MainApp {
 		$this->container->registerService('PageController', function(IAppContainer $container) {
 			return new PageController($container);
 		});
+		$this->container->registerService('CollectionsController', function(IAppContainer $container) {
+			return new CollectionsController($container);
+		});
 		$this->container->registerService('ListsController', function(IAppContainer $container) {
 			return new ListsController($container);
 		});
 		$this->container->registerService('TasksController', function(IAppContainer $container) {
 			return new TasksController($container);
+		});
+		$this->container->registerService('SettingsController', function(IAppContainer $container) {
+			return new SettingsController($container);
 		});
 	}
 

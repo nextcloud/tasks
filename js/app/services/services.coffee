@@ -37,11 +37,13 @@ angular.module('Tasks').factory 'Loading', ['_Loading', (_Loading) ->
 # ]
 
 angular.module('Tasks').factory 'Publisher',
-['_Publisher', 'ListsModel', 'TasksModel',
-(_Publisher, ListsModel, TasksModel) ->
+['_Publisher', 'ListsModel', 'TasksModel', 'CollectionsModel', 'SettingsModel',
+(_Publisher, ListsModel, TasksModel, CollectionsModel, SettingsModel) ->
 
 	# register items at publisher to automatically add incoming items
 	publisher = new _Publisher()
+	publisher.subscribeObjectTo(CollectionsModel, 'collections')
+	publisher.subscribeObjectTo(SettingsModel, 'settings')
 	publisher.subscribeObjectTo(ListsModel, 'lists')
 	publisher.subscribeObjectTo(TasksModel, 'tasks')
 

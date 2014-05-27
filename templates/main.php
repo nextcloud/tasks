@@ -1,4 +1,4 @@
-<div ng-app="Tasks" ng-cloak ng-controller="AppController" ng-click="closeAll()">
+<div ng-app="Tasks" ng-cloak ng-controller="AppController" ng-click="closeAll()" id="tasks_enhanced_wrapper">
      <div id="task-lists" ng-controller="ListController">
     	<div id="task_lists_header" class="header" ng-class="{'search': status.searchActive}" ng-controller="SearchController">
         	<div id="main-toolbar">
@@ -20,7 +20,7 @@
     	<div id="task_lists_scroll" class="scroll">
         	<ul id="collection_filters">
             	<li ng-repeat="collection in collections" id="collection_{{ collection.id }}" rel="{{ collection.id }}"
-                    ng-class="{'animate-up': getCollectionCount(collection.id)<1, active: collection.id==route.listID}" oc-drop-task>
+                    ng-class="{'animate-up': hideCollection(collection.id), active: collection.id==route.listID}" oc-drop-task>
                 	<a href="#/lists/{{ collection.id }}">
                 		<span class="icon collection-{{ collection.id }}"><text ng-show="collection.id=='today'"><?php p($_['DOM']); ?></text></span>
                         <span class="count">{{ getCollectionString(collection.id) }}</span>
@@ -50,6 +50,9 @@
         	<a class="delete" ng-click="deleteList(route.listID)" ng-show="showDelete(route.listID)">
             	<span class="icon detail-trash"></span>
             </a>
+            <a class="settings" ng-click="showSettings()" stop-event="click">
+                <span class="icon detail-settings"></span>
+            </a>
         </div>
     </div>
 
@@ -66,12 +69,14 @@
                 ng-keydown="checkTaskInput($event)"/>
             </form>
         </div>
-        <div class="task-list" ng-class="{'completed-hidden':!status.showhidden}" ng-switch="route.listID">
+        <div class="task-list" ng-class="{'completed-hidden':!settingsmodel.getById('various').showHidden}" ng-switch="route.listID">
             <?php print_unescaped($this->inc('part.tasklist')); ?>
             <?php print_unescaped($this->inc('part.collectionall')); ?>
             <?php print_unescaped($this->inc('part.collectionweek')); ?>
         </div>
     </div>
-
     <div id="task-details" ng-include="'templates/part.details.php'" ng-class="{'details-visible':route.taskID}"></div>
+    <script type="text/ng-template" id="part.settings.html">
+        <?php print_unescaped($this->inc('part.settings')); ?>
+    </script>
 </div>
