@@ -55,6 +55,6 @@
 +"General" => "Общи",
 +"Visible" => "Видимо",
 +"Hidden" => "Скрито",
-+"Automatic" => "Автиматично",
++"Automatic" => "Автоматично",
 +"Visibility of Smart Collections" => "Видимост на умните колекции",
 );
