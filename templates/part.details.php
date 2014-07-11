@@ -70,6 +70,16 @@
                 </div>
             </div>
         </div>
+        <div class="section detail-complete">
+            <div class="section-title" ng-class="{'overdue':isOverDue(task.reminder.date)}">
+                <text rel="">Percent completed</text>
+                <select ng-init='percents = ["0","5","10","15","20","25","30","25","30","35","40","45","50","55","60","65","70","75","80","85","90","95","100"]' 
+                    ng-change="setPercentComplete(task.complete)" 
+                    ng-model="task.complete" 
+                    ng-options="percent for percent in percents">
+                </select>
+            </div>
+        </div>
         <!-- <ul class="subtasks buffer"></ul> -->
         <div class="note">
         	<div class="note-body selectable" ng-click="editNote()" stop-event="click" oc-click-focus="{selector: '.expandingArea textarea', timeout: 0}">

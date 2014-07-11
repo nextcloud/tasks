@@ -1233,3 +1233,9 @@ li.ui-draggable-dragging .duedate {
   opacity: 0;
   height: 0px !important;
 }
+div.percentdone {
+  height: 3px;
+  margin-bottom: -3px;
+  background-color: green;
+  border-radius: 2px 2px 2px 2px;
+}

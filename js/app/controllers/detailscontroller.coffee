@@ -209,6 +209,10 @@ $timeout, $routeParams) ->
 						,5000)
 			,true)
 
+			@_$scope.setPercentComplete = (percentComplete) ->
+				_tasksbusinesslayer.setPercentComplete(_$scope.route.taskID,
+				percentComplete)
+
 			@_$scope.setstartday = (date) ->
 				_tasksbusinesslayer.setStart(_$scope.route.taskID,
 				moment(date,'MM/DD/YYYY'),'day')

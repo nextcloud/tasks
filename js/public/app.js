@@ -582,6 +582,9 @@
               }
             }
           }, true);
+          this._$scope.setPercentComplete = function(percentComplete) {
+            return _tasksbusinesslayer.setPercentComplete(_$scope.route.taskID, percentComplete);
+          };
           this._$scope.setstartday = function(date) {
             return _tasksbusinesslayer.setStart(_$scope.route.taskID, moment(date, 'MM/DD/YYYY'), 'day');
           };
@@ -1210,6 +1213,11 @@
         TasksBusinessLayer.prototype.completeTask = function(taskID) {
           this._$tasksmodel.complete(taskID);
           return this._persistence.completeTask(taskID);
+        };
+
+        TasksBusinessLayer.prototype.setPercentComplete = function(taskID, percentComplete) {
+          this._$tasksmodel.setPercentComplete(taskID, percentComplete);
+          return this._persistence.setPercentComplete(taskID, percentComplete);
         };
 
         TasksBusinessLayer.prototype.uncompleteTask = function(taskID) {
@@ -2016,6 +2024,13 @@
           });
         };
 
+        TasksModel.prototype.setPercentComplete = function(taskID, complete) {
+          return this.update({
+            id: taskID,
+            complete: complete
+          });
+        };
+
         TasksModel.prototype.setDueDate = function(taskID, date) {
           return this.update({
             id: taskID,
@@ -2324,6 +2339,19 @@
             }
           };
           return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/complete', params);
+        };
+
+        Persistence.prototype.setPercentComplete = function(taskID, complete) {
+          var params;
+          params = {
+            routeParams: {
+              taskID: taskID
+            },
+            data: {
+              complete: complete
+            }
+          };
+          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/percentcomplete', params);
         };
 
         Persistence.prototype.uncompleteTask = function(taskID) {

@@ -197,6 +197,15 @@ angular.module('Tasks').factory 'Persistence',
 
 			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/complete', params
 
+		setPercentComplete: (taskID, complete) ->
+			params =
+				routeParams:
+					taskID: taskID
+				data:
+					complete: complete
+
+			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/percentcomplete', params
+
 		uncompleteTask: (taskID) ->
 			params =
 				routeParams:
