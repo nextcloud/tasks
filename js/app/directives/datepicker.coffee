@@ -39,4 +39,5 @@ angular.module('Tasks').directive 'datepicker', ->
 						return [1,"selected"]
 					else
 						return [1,""]
+				minDate: null
 		})

@@ -170,7 +170,8 @@
             } else {
               return [1, ""];
             }
-          }
+          },
+          minDate: null
         });
       }
     };
