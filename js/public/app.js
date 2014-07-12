@@ -512,6 +512,13 @@
               return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/note');
             }
           };
+          this._$scope.editPercent = function() {
+            if (_$scope.status.searchActive) {
+              return _$location.path('/search/' + _$scope.route.searchString + '/tasks/' + _$scope.route.taskID + '/edit/percent');
+            } else {
+              return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/percent');
+            }
+          };
           this._$scope.endEdit = function() {
             if (_$scope.status.searchActive) {
               return _$location.path('/search/' + _$scope.route.searchString + '/tasks/' + _$scope.route.taskID);
@@ -530,6 +537,10 @@
           };
           this._$scope.deleteDueDate = function() {
             _tasksbusinesslayer.deleteDueDate(_$scope.route.taskID);
+            return _$scope.endEdit();
+          };
+          this._$scope.deletePercent = function() {
+            _tasksbusinesslayer.setPercentComplete(_$scope.route.taskID, 0);
             return _$scope.endEdit();
           };
           this._$scope.deleteStartDate = function() {
@@ -576,15 +587,20 @@
                 if (_$scope.notetimer) {
                   $timeout.cancel(_$scope.notetimer);
                 }
-                return _$scope.notetimer = $timeout(function() {
+                _$scope.notetimer = $timeout(function() {
                   return _tasksbusinesslayer.setTaskNote(_$scope.task.id, _$scope.task.note);
                 }, 5000);
               }
+              if (newVal.complete !== oldVal.complete) {
+                if (_$scope.completetimer) {
+                  $timeout.cancel(_$scope.completetimer);
+                }
+                return _$scope.completetimer = $timeout(function() {
+                  return _tasksbusinesslayer.setPercentComplete(_$scope.task.id, _$scope.task.complete);
+                }, 2000);
+              }
             }
           }, true);
-          this._$scope.setPercentComplete = function(percentComplete) {
-            return _tasksbusinesslayer.setPercentComplete(_$scope.route.taskID, percentComplete);
-          };
           this._$scope.setstartday = function(date) {
             return _tasksbusinesslayer.setStart(_$scope.route.taskID, moment(date, 'MM/DD/YYYY'), 'day');
           };
@@ -2646,6 +2662,15 @@
       } else {
         return '';
       }
+    };
+  });
+
+}).call(this);
+
+(function() {
+  angular.module('Tasks').filter('percentDetails', function() {
+    return function(percent) {
+      return t('tasks_enhanced', '%s % completed').replace('%s', percent);
     };
   });
 

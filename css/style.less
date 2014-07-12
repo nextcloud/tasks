@@ -144,6 +144,9 @@
 			height: 20px;
 			width: 20px;
 		}
+		&.detail-percent{
+			background-position: -260px -60px;
+		}
 		&.task-checked, &.detail-checked {
 			background-position: -60px -20px;
 			height: 20px;
@@ -879,6 +882,13 @@
 					border: 1px solid rgba(43, 136, 217, 0.65);
 					box-shadow: 0 0 4px rgba(43, 136, 217, 0.32), 0 1px 1px rgba(255, 255, 255, 0.43), 0 2px 4px rgba(43, 136, 217, 0.12) inset, 0 0 4px rgba(43, 136, 217, 0.2) inset;
 				}
+				&[type="range"]{
+					border: medium none;
+					box-shadow: none;
+					padding-top: 10px;
+					width: 200px;
+					margin: 0px;
+				}
 			}
 			select{
 				background-color: rgba(0, 0, 0, 0);
@@ -888,6 +898,7 @@
 				width: 98px;
 				margin:0;
 				font-weight: normal;
+				height:19px;
 			}
 			.icon{
 				left: 16px;
@@ -938,6 +949,9 @@
 						&.overdue{
 							background-position: -220px -60px;
 						}
+					}
+					&.detail-percent{
+						background-position: -260px -80px;
 					}
 					&.detail-reminder{
 						background-position: -40px -60px;
@@ -1073,6 +1087,10 @@ input.timepicker-input{
 input.duration-input{
 	margin: 2px 0 0 0.3em;
 	width: 35px;
+}
+input.percent-input{
+	width: 35px;
+	margin-top: 0px;
 }
 .ui-widget-content{
 	color: #423E3E;

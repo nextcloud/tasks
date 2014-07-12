@@ -70,14 +70,18 @@
                 </div>
             </div>
         </div>
-        <div class="section detail-complete">
-            <div class="section-title" ng-class="{'overdue':isOverDue(task.reminder.date)}">
-                <text rel="">Percent completed</text>
-                <select ng-init='percents = ["0","5","10","15","20","25","30","25","30","35","40","45","50","55","60","65","70","75","80","85","90","95","100"]' 
-                    ng-change="setPercentComplete(task.complete)" 
-                    ng-model="task.complete" 
-                    ng-options="percent for percent in percents">
-                </select>
+        <div class="section detail-complete" ng-class="{'editing':route.parameter=='percent', 'date':task.complete>0}"  ng-click="editPercent()" stop-event="click">
+            <span class="icon detail-percent"></span>
+            <div class="section-title" ng-hide="route.parameter=='percent'">
+                <text rel="">{{ task.complete | percentDetails}}</text>
+            </div>
+            <a class="detail-delete" ng-click="deletePercent()" stop-event="click">
+                <span class="icon detail-delete"></span>
+            </a>
+            <span class="icon detail-save" ng-click="endEdit()" stop-event="click"></span>
+            <div class="section-edit" ng-show="route.parameter=='percent'">
+                <input class="percent-input" type="text" ng-model="task.complete">
+                <input type="range" ng-model="task.complete" min="0" max="100" step ="1">
             </div>
         </div>
         <!-- <ul class="subtasks buffer"></ul> -->

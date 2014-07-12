@@ -76,4 +76,5 @@
 'The name "%s" is already used.' => 'Der Name "%s" ist bereits vergeben.',
 'An empty name ist not allowed.' => 'Ein leerer Name ist nicht gestattet.',
 'Load more completed tasks' => 'Weitere erledigte Tasks laden',
+"%s % completed" => "Zu %s % abgeschlossen",
 );

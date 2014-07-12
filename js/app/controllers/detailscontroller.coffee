@@ -145,6 +145,14 @@ $timeout, $routeParams) ->
 					_$location.path('/lists/'+_$scope.route.listID +
 					'/tasks/' + _$scope.route.taskID + '/edit/note')
 
+			@_$scope.editPercent = () ->
+				if _$scope.status.searchActive
+					_$location.path('/search/'+_$scope.route.searchString +
+					'/tasks/' + _$scope.route.taskID + '/edit/percent')
+				else
+					_$location.path('/lists/'+_$scope.route.listID +
+					'/tasks/' + _$scope.route.taskID + '/edit/percent')
+
 			@_$scope.endEdit = () ->
 				if _$scope.status.searchActive
 					_$location.path('/search/'+_$scope.route.searchString +
@@ -162,6 +170,10 @@ $timeout, $routeParams) ->
 
 			@_$scope.deleteDueDate = () ->
 				_tasksbusinesslayer.deleteDueDate(_$scope.route.taskID)
+				_$scope.endEdit()
+
+			@_$scope.deletePercent = () ->
+				_tasksbusinesslayer.setPercentComplete(_$scope.route.taskID,0)
 				_$scope.endEdit()
 
 			@_$scope.deleteStartDate = () ->
@@ -207,11 +219,14 @@ $timeout, $routeParams) ->
 						_$scope.notetimer = $timeout( () ->
 							_tasksbusinesslayer.setTaskNote(_$scope.task.id,_$scope.task.note)
 						,5000)
+					if newVal.complete != oldVal.complete
+						if _$scope.completetimer
+							$timeout.cancel(_$scope.completetimer)
+						_$scope.completetimer = $timeout( () ->
+							_tasksbusinesslayer.setPercentComplete(_$scope.task.id,
+							_$scope.task.complete)
+						,2000)
 			,true)
-
-			@_$scope.setPercentComplete = (percentComplete) ->
-				_tasksbusinesslayer.setPercentComplete(_$scope.route.taskID,
-				percentComplete)
 
 			@_$scope.setstartday = (date) ->
 				_tasksbusinesslayer.setStart(_$scope.route.taskID,
