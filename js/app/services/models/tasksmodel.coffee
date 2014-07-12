@@ -124,6 +124,9 @@ angular.module('Tasks').factory 'TasksModel',
 			@update({id:taskID,completed:false,
 			completed_date:null})
 
+		setPercentComplete: (taskID, complete) ->
+			@update({id:taskID,complete:complete})
+
 		setDueDate: (taskID,date) ->
 			@update({id:taskID,due:date})
 

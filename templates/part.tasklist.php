@@ -4,6 +4,7 @@
             <li ng-repeat="(id, task) in tasks | filter:{'calendarid':route.listID} | filter:{'completed':'false'} | filter:route.searchString | orderBy:sortDue | orderBy:'starred':true"
             class="task-item ui-draggable" rel="{{ task.id }}" ng-click="openDetails(task.id)" ng-class="{done: task.completed}" oc-drag-task stop-event="click">
                 <div class="task-body">
+                    <div class="percentdone" style="width:{{ task.complete }}%; background-color:{{task.calendarcolor}};"></div>
                     <a class="task-checkbox" name="toggleCompleted" ng-click="toggleCompleted(task.id)" stop-event="click">
                         <span class="icon task-checkbox" ng-class="{'task-checked': task.completed}"></span>
                     </a>
@@ -29,6 +30,7 @@
             class="task-item" rel="{{ task.id }}" ng-click="openDetails(task.id)"
             ng-class="{done: task.completed}" oc-drag-task stop-event="click">
                 <div class="task-body">
+                    <div class="percentdone" style="width:{{ task.complete }}%; background-color:{{task.calendarcolor}};"></div>
                     <a class="task-checkbox" name="toggleCompleted" ng-click="toggleCompleted(task.id)" stop-event="click">
                         <span class="icon task-checkbox" ng-class="{'task-checked': task.completed}"></span>
                     </a>

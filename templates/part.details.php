@@ -70,6 +70,20 @@
                 </div>
             </div>
         </div>
+        <div class="section detail-complete" ng-class="{'editing':route.parameter=='percent', 'date':task.complete>0}"  ng-click="editPercent()" stop-event="click">
+            <span class="icon detail-percent"></span>
+            <div class="section-title" ng-hide="route.parameter=='percent'">
+                <text rel="">{{ task.complete | percentDetails}}</text>
+            </div>
+            <a class="detail-delete" ng-click="deletePercent()" stop-event="click">
+                <span class="icon detail-delete"></span>
+            </a>
+            <span class="icon detail-save" ng-click="endEdit()" stop-event="click"></span>
+            <div class="section-edit" ng-show="route.parameter=='percent'">
+                <input class="percent-input" type="text" ng-model="task.complete">
+                <input type="range" ng-model="task.complete" min="0" max="100" step ="1">
+            </div>
+        </div>
         <!-- <ul class="subtasks buffer"></ul> -->
         <div class="note">
         	<div class="note-body selectable" ng-click="editNote()" stop-event="click" oc-click-focus="{selector: '.expandingArea textarea', timeout: 0}">

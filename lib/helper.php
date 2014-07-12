@@ -168,7 +168,7 @@ Class helper {
 		} else {
 			$task['completed'] = false;
 		}
-		$task['complete'] = $vtodo->getAsString('PERCENT-COMPLETE');
+		$task['complete'] = $vtodo->getAsString('PERCENT-COMPLETE')==''?'0':$vtodo->getAsString('PERCENT-COMPLETE');
 		return $task;
 	}
 
@@ -198,6 +198,7 @@ Class helper {
 		$vtodo->setString('DESCRIPTION', $request['description']);
 		$vtodo->setString('CATEGORIES', $request["categories"]);
 		$vtodo->setString('PRIORITY', $request['priority']);
+		$vtodo->setString('PERCENT-COMPLETE', $request['complete']);
 
 		$due = $request['due'];
 		if ($due) {

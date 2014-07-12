@@ -223,6 +223,16 @@ $this->create('task_start', '/tasks/{taskID}/start')
 		}
 	);
 
+$this->create('task_percentcomplete', '/tasks/{taskID}/percentcomplete')
+	->post()
+	->action(
+		function($params){
+			session_write_close();
+			$dispatcher = new Dispatcher($params);
+			$dispatcher->dispatch('TasksController', 'percentComplete');
+		}
+	);
+
 $this->create('task_reminder', '/tasks/{taskID}/reminder')
 	->post()
 	->action(

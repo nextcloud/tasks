@@ -7,6 +7,7 @@
             <li ng-animate="'animate'" ng-repeat="task in tasks | filter:{'calendarid':list.id} | filter:filterTasks(task) | orderBy:sortDue | orderBy:'starred':true"
             class="task-item ui-draggable" rel="{{ task.id }}" ng-click="openDetails(task.id)" ng-class="{done: task.completed}" oc-drag-task stop-event="click">
                 <div class="task-body">
+                    <div class="percentdone" style="width:{{ task.complete }}%; background-color:{{list.calendarcolor}};"></div>
                     <a class="task-checkbox" name="toggleCompleted" ng-click="toggleCompleted(task.id)" stop-event="click">
                         <span class="icon task-checkbox" ng-class="{'task-checked': task.completed}"></span>
                     </a>

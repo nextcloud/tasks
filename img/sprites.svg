@@ -1584,4 +1584,64 @@
 		</g>
 	</g>
 </g>
+<g>
+	<g>
+		<defs>
+			<rect id="SVGID_219_" x="260" y="60" width="20" height="20"/>
+		</defs>
+		<clipPath id="SVGID_220_">
+			<use xlink:href="#SVGID_219_"  overflow="visible"/>
+		</clipPath>
+		<g clip-path="url(#SVGID_220_)">
+			<defs>
+				<rect id="SVGID_221_" x="260" y="60" width="20" height="20"/>
+			</defs>
+			<clipPath id="SVGID_222_">
+				<use xlink:href="#SVGID_221_"  overflow="visible"/>
+			</clipPath>
+			
+				<line clip-path="url(#SVGID_222_)" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" x1="274.054" y1="65.01" x2="265.923" y2="76.621"/>
+			
+				<circle clip-path="url(#SVGID_222_)" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="square" stroke-miterlimit="10" cx="266.787" cy="66.245" r="2.078"/>
+			
+				<circle clip-path="url(#SVGID_222_)" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="square" stroke-miterlimit="10" cx="273.213" cy="75.422" r="2.078"/>
+			
+				<line clip-path="url(#SVGID_222_)" fill="none" stroke="#B0B0B0" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" x1="274.065" y1="64.194" x2="265.935" y2="75.806"/>
+			
+				<circle clip-path="url(#SVGID_222_)" fill="none" stroke="#B0B0B0" stroke-width="1.5" stroke-linecap="square" stroke-miterlimit="10" cx="266.799" cy="65.429" r="2.078"/>
+			
+				<circle clip-path="url(#SVGID_222_)" fill="none" stroke="#B0B0B0" stroke-width="1.5" stroke-linecap="square" stroke-miterlimit="10" cx="273.225" cy="74.605" r="2.078"/>
+		</g>
+	</g>
+</g>
+<g>
+	<g>
+		<defs>
+			<rect id="SVGID_223_" x="260" y="80" width="20" height="20"/>
+		</defs>
+		<clipPath id="SVGID_224_">
+			<use xlink:href="#SVGID_223_"  overflow="visible"/>
+		</clipPath>
+		<g clip-path="url(#SVGID_224_)">
+			<defs>
+				<rect id="SVGID_225_" x="260" y="80" width="20" height="20"/>
+			</defs>
+			<clipPath id="SVGID_226_">
+				<use xlink:href="#SVGID_225_"  overflow="visible"/>
+			</clipPath>
+			
+				<line clip-path="url(#SVGID_226_)" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" x1="274.054" y1="85.01" x2="265.923" y2="96.621"/>
+			
+				<circle clip-path="url(#SVGID_226_)" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="square" stroke-miterlimit="10" cx="266.787" cy="86.245" r="2.078"/>
+			
+				<circle clip-path="url(#SVGID_226_)" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="square" stroke-miterlimit="10" cx="273.213" cy="95.422" r="2.078"/>
+			
+				<line clip-path="url(#SVGID_226_)" fill="none" stroke="#4372A7" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" x1="274.065" y1="84.194" x2="265.935" y2="95.806"/>
+			
+				<circle clip-path="url(#SVGID_226_)" fill="none" stroke="#4372A7" stroke-width="1.5" stroke-linecap="square" stroke-miterlimit="10" cx="266.799" cy="85.429" r="2.078"/>
+			
+				<circle clip-path="url(#SVGID_226_)" fill="none" stroke="#4372A7" stroke-width="1.5" stroke-linecap="square" stroke-miterlimit="10" cx="273.225" cy="94.605" r="2.078"/>
+		</g>
+	</g>
+</g>
 </svg>

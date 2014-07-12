@@ -122,6 +122,9 @@
   height: 20px;
   width: 20px;
 }
+#content .icon.detail-percent {
+  background-position: -260px -60px;
+}
 #content .icon.task-checked,
 #content .icon.detail-checked {
   background-position: -60px -20px;
@@ -846,6 +849,13 @@
   border: 1px solid rgba(43, 136, 217, 0.65);
   box-shadow: 0 0 4px rgba(43, 136, 217, 0.32), 0 1px 1px rgba(255, 255, 255, 0.43), 0 2px 4px rgba(43, 136, 217, 0.12) inset, 0 0 4px rgba(43, 136, 217, 0.2) inset;
 }
+#task-details .body .section input[type="range"] {
+  border: medium none;
+  box-shadow: none;
+  padding-top: 10px;
+  width: 200px;
+  margin: 0px;
+}
 #task-details .body .section select {
   background-color: rgba(0, 0, 0, 0);
   border-radius: 0px;
@@ -854,6 +864,7 @@
   width: 98px;
   margin: 0;
   font-weight: normal;
+  height: 19px;
 }
 #task-details .body .section .icon {
   left: 16px;
@@ -903,6 +914,9 @@
 #task-details .body .section.date .icon.detail-date.overdue,
 #task-details .body .section.date .icon.detail-start.overdue {
   background-position: -220px -60px;
+}
+#task-details .body .section.date .icon.detail-percent {
+  background-position: -260px -80px;
 }
 #task-details .body .section.date .icon.detail-reminder {
   background-position: -40px -60px;
@@ -1018,6 +1032,10 @@ input.timepicker-input {
 input.duration-input {
   margin: 2px 0 0 0.3em;
   width: 35px;
+}
+input.percent-input {
+  width: 35px;
+  margin-top: 0px;
 }
 .ui-widget-content {
   background: none repeat scroll 0 0 #F9F9F9;
@@ -1232,4 +1250,10 @@ li.ui-draggable-dragging .duedate {
 .task-item.ng-enter {
   opacity: 0;
   height: 0px !important;
+}
+div.percentdone {
+  height: 3px;
+  margin-bottom: -3px;
+  background-color: green;
+  border-radius: 2px 2px 2px 2px;
 }

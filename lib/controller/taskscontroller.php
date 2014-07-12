@@ -51,6 +51,7 @@ class TasksController extends Controller {
 				try {
 					$task_data = Helper::arrayForJSON($task['id'], $vtodo, $user_timezone);
 					$task_data['calendarid'] = $calendar['id'];
+					$task_data['calendarcolor'] = $calendar['calendarcolor'];
 					$tasks[] = $task_data;
 				} catch(\Exception $e) {
 					\OCP\Util::writeLog('tasks_enhanced', $e->getMessage(), \OCP\Util::ERROR);
@@ -112,9 +113,8 @@ class TasksController extends Controller {
 		}
 	}
 
-	private function setCompleted($isCompleted){
+	private function setPercentComplete($percent_complete){
 		$taskId = (int) $this->params('taskID');
-		$percent_complete = $isCompleted ? '100' : '0';
 		$isCompleted = null;
 		try {
 			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
@@ -146,13 +146,29 @@ class TasksController extends Controller {
 		}
 	}
 
+        /**
+         * @NoAdminRequired
+         */
+	public function percentComplete( $percentCompete ){
+		$response = new JSONResponse();
+		try{
+                        $percent_complete = $this->params('complete');
+			$this->setPercentComplete( $percent_complete );
+			return $response;
+		}catch(\Exception $e) {
+                        return $response;
+                        // return $this->renderJSON(array(), $e->getMessage());
+                }
+        }
+
+
 	/**
 	 * @NoAdminRequired
 	 */
 	public function completeTask(){
 		$response = new JSONResponse();
 		try {
-			$this->setCompleted(true);
+			$this->setPercentComplete(100);
 			return $response;
 		} catch(\Exception $e) {
 			return $response;
@@ -166,7 +182,7 @@ class TasksController extends Controller {
 	public function uncompleteTask(){
 		$response = new JSONResponse();
 		try {
-			$this->setCompleted(false);
+			$this->setPercentComplete(0);
 			return $response;
 		} catch(\Exception $e) {
 			return $response;
