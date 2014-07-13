@@ -558,9 +558,11 @@
           };
           this._$scope.toggleCompleted = function(taskID) {
             if (_$tasksmodel.completed(taskID)) {
-              return _tasksbusinesslayer.uncompleteTask(taskID);
+              _tasksbusinesslayer.uncompleteTask(taskID);
+              return _tasksbusinesslayer.setPercentComplete(taskID, 0);
             } else {
-              return _tasksbusinesslayer.completeTask(taskID);
+              _tasksbusinesslayer.completeTask(taskID);
+              return _tasksbusinesslayer.setPercentComplete(taskID, 100);
             }
           };
           this._$scope.toggleStarred = function(taskID) {
