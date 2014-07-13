@@ -42,6 +42,9 @@ angular.module('Tasks').factory 'SettingsBusinessLayer',
 			value = @_$settingsmodel.getById(type)[setting]
 			@_persistence.setting(type, setting, value)
 
+		set: (type, setting, value) ->
+			@_persistence.setting(type, setting, value)
+
 	return new SettingsBusinessLayer(Persistence, SettingsModel)
 
 ]

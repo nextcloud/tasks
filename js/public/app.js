@@ -147,6 +147,7 @@
   angular.module('Tasks').directive('datepicker', function() {
     return {
       restrict: 'A',
+      scope: false,
       link: function(scope, elm, attr) {
         return elm.datepicker({
           onSelect: function(date, inst) {
@@ -160,9 +161,10 @@
             dp.css({
               'margin-left': marginLeft
             });
-            return $("div.ui-datepicker:before").css({
+            $("div.ui-datepicker:before").css({
               'left': 100 + 'px'
             });
+            return $('.hasDatepicker').datepicker("option", "firstDay", scope.settingsmodel.getById('various').startOfWeek);
           },
           beforeShowDay: function(date) {
             if (moment(date).startOf('day').diff(moment(scope.task[attr.datepicker], "YYYYMMDDTHHmmss").startOf('day'), 'days') === 0) {
@@ -390,10 +392,10 @@
 
 (function() {
   angular.module('Tasks').controller('DetailsController', [
-    '$scope', '$window', 'TasksModel', 'TasksBusinessLayer', '$route', '$location', '$timeout', '$routeParams', function($scope, $window, TasksModel, TasksBusinessLayer, $route, $location, $timeout, $routeParams) {
+    '$scope', '$window', 'TasksModel', 'TasksBusinessLayer', '$route', '$location', '$timeout', '$routeParams', 'SettingsModel', function($scope, $window, TasksModel, TasksBusinessLayer, $route, $location, $timeout, $routeParams, SettingsModel) {
       var DetailsController;
       DetailsController = (function() {
-        function DetailsController(_$scope, _$window, _$tasksmodel, _tasksbusinesslayer, _$route, _$location, _$timeout, _$routeparams) {
+        function DetailsController(_$scope, _$window, _$tasksmodel, _tasksbusinesslayer, _$route, _$location, _$timeout, _$routeparams, _$settingsmodel) {
           this._$scope = _$scope;
           this._$window = _$window;
           this._$tasksmodel = _$tasksmodel;
@@ -402,10 +404,12 @@
           this._$location = _$location;
           this._$timeout = _$timeout;
           this._$routeparams = _$routeparams;
+          this._$settingsmodel = _$settingsmodel;
           this._$scope.task = _$tasksmodel.getById(_$scope.route.taskID);
           this._$scope.$on('$routeChangeSuccess', function() {
             return _$scope.task = _$tasksmodel.getById(_$scope.route.taskID);
           });
+          this._$scope.settingsmodel = this._$settingsmodel;
           this._$scope.durations = [
             {
               name: t('tasks_enhanced', 'week'),
@@ -662,7 +666,7 @@
         return DetailsController;
 
       })();
-      return new DetailsController($scope, $window, TasksModel, TasksBusinessLayer, $route, $location, $timeout, $routeParams);
+      return new DetailsController($scope, $window, TasksModel, TasksBusinessLayer, $route, $location, $timeout, $routeParams, SettingsModel);
     }
   ]);
 
@@ -865,10 +869,10 @@
 
 (function() {
   angular.module('Tasks').controller('SettingsController', [
-    '$scope', '$window', 'Status', '$location', '$modalInstance', 'CollectionsModel', 'SettingsBusinessLayer', function($scope, $window, Status, $location, $modalInstance, CollectionsModel, SettingsBusinessLayer) {
+    '$scope', '$window', 'Status', '$location', '$modalInstance', 'CollectionsModel', 'SettingsBusinessLayer', 'SettingsModel', function($scope, $window, Status, $location, $modalInstance, CollectionsModel, SettingsBusinessLayer, SettingsModel) {
       var SettingsController;
       SettingsController = (function() {
-        function SettingsController(_$scope, _$window, _$status, _$location, _$modalInstance, _$collectionsmodel, _$settingsbusinesslayer) {
+        function SettingsController(_$scope, _$window, _$status, _$location, _$modalInstance, _$collectionsmodel, _$settingsbusinesslayer, _$settingsmodel) {
           var _this = this;
           this._$scope = _$scope;
           this._$window = _$window;
@@ -877,8 +881,10 @@
           this._$modalInstance = _$modalInstance;
           this._$collectionsmodel = _$collectionsmodel;
           this._$settingsbusinesslayer = _$settingsbusinesslayer;
+          this._$settingsmodel = _$settingsmodel;
           this._$scope.status = this._$status.getStatus();
           this._$scope.collections = this._$collectionsmodel.getAll();
+          this._$scope.settingsmodel = this._$settingsmodel;
           this._$scope.collectionOptions = [
             {
               id: 0,
@@ -891,6 +897,30 @@
               name: t('tasks_enhanced', 'Automatic')
             }
           ];
+          this._$scope.startOfWeekOptions = [
+            {
+              id: 0,
+              name: t('tasks_enhanced', 'Sunday')
+            }, {
+              id: 1,
+              name: t('tasks_enhanced', 'Monday')
+            }, {
+              id: 2,
+              name: t('tasks_enhanced', 'Tuesday')
+            }, {
+              id: 3,
+              name: t('tasks_enhanced', 'Wednesday')
+            }, {
+              id: 4,
+              name: t('tasks_enhanced', 'Thursday')
+            }, {
+              id: 5,
+              name: t('tasks_enhanced', 'Friday')
+            }, {
+              id: 6,
+              name: t('tasks_enhanced', 'Saturday')
+            }
+          ];
           this._$scope.ok = function() {
             return $modalInstance.close();
           };
@@ -899,12 +929,15 @@
             collection = _$collectionsmodel.getById(collectionID);
             return _$settingsbusinesslayer.setVisibility(collectionID, collection.show);
           };
+          this._$scope.setStartOfWeek = function() {
+            return _$settingsbusinesslayer.set('various', 'startOfWeek', _$settingsmodel.getById('various').startOfWeek);
+          };
         }
 
         return SettingsController;
 
       })();
-      return new SettingsController($scope, $window, Status, $location, $modalInstance, CollectionsModel, SettingsBusinessLayer);
+      return new SettingsController($scope, $window, Status, $location, $modalInstance, CollectionsModel, SettingsBusinessLayer, SettingsModel);
     }
   ]);
 
@@ -977,9 +1010,11 @@
           };
           this._$scope.toggleCompleted = function(taskID) {
             if (_$tasksmodel.completed(taskID)) {
-              return _tasksbusinesslayer.uncompleteTask(taskID);
+              _tasksbusinesslayer.uncompleteTask(taskID);
+              return _tasksbusinesslayer.setPercentComplete(taskID, 0);
             } else {
-              return _tasksbusinesslayer.completeTask(taskID);
+              _tasksbusinesslayer.completeTask(taskID);
+              return _tasksbusinesslayer.setPercentComplete(taskID, 100);
             }
           };
           this._$scope.toggleStarred = function(taskID) {
@@ -1173,6 +1208,10 @@
           var value;
           this._$settingsmodel.toggle(type, setting);
           value = this._$settingsmodel.getById(type)[setting];
+          return this._persistence.setting(type, setting, value);
+        };
+
+        SettingsBusinessLayer.prototype.set = function(type, setting, value) {
           return this._persistence.setting(type, setting, value);
         };
 

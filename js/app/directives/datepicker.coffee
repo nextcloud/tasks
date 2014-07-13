@@ -21,6 +21,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 ###
 angular.module('Tasks').directive 'datepicker', ->
 	restrict: 'A'
+	scope: false
 	link: (scope, elm, attr) ->
 		elm.datepicker({
 				onSelect: (date, inst) ->
@@ -31,7 +32,8 @@ angular.module('Tasks').directive 'datepicker', ->
 					marginLeft = -Math.abs($(input).outerWidth()-dp.outerWidth())/2+'px'
 					dp.css({'margin-left':marginLeft})
 					$("div.ui-datepicker:before").css({'left':100+'px'})
-
+					$('.hasDatepicker').datepicker("option", "firstDay",
+					scope.settingsmodel.getById('various').startOfWeek)
 				beforeShowDay: (date) ->
 					if (moment(date).startOf('day')
 					.diff(moment(scope.task[attr.datepicker], "YYYYMMDDTHHmmss")

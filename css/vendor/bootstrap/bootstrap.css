@@ -161,6 +161,7 @@ ul.nav-tabs{
   padding: 0;
   width: 98px;
   float:right;
+  height:19px;
 }
 .tab-pane li{
   padding: 10px 0;

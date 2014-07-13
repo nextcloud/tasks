@@ -146,20 +146,20 @@ class TasksController extends Controller {
 		}
 	}
 
-        /**
-         * @NoAdminRequired
-         */
+	/**
+	 * @NoAdminRequired
+	 */
 	public function percentComplete( $percentCompete ){
 		$response = new JSONResponse();
 		try{
-                        $percent_complete = $this->params('complete');
+			$percent_complete = $this->params('complete');
 			$this->setPercentComplete( $percent_complete );
 			return $response;
-		}catch(\Exception $e) {
-                        return $response;
-                        // return $this->renderJSON(array(), $e->getMessage());
-                }
-        }
+		} catch(\Exception $e) {
+			return $response;
+			// return $this->renderJSON(array(), $e->getMessage());
+		}
+	}
 
 
 	/**

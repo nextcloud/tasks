@@ -22,20 +22,23 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 angular.module('Tasks').controller 'DetailsController',
 ['$scope', '$window', 'TasksModel', 'TasksBusinessLayer',
 '$route', '$location', '$timeout', '$routeParams',
+'SettingsModel',
 ($scope, $window, TasksModel, TasksBusinessLayer, $route, $location,
-$timeout, $routeParams) ->
+$timeout, $routeParams, SettingsModel) ->
 
 	class DetailsController
 
 		constructor: (@_$scope, @_$window, @_$tasksmodel,
 			@_tasksbusinesslayer, @_$route, @_$location, @_$timeout,
-			@_$routeparams) ->
+			@_$routeparams, @_$settingsmodel) ->
 
 			@_$scope.task = _$tasksmodel.getById(_$scope.route.taskID)
 
 			@_$scope.$on('$routeChangeSuccess', () ->
 				_$scope.task = _$tasksmodel.getById(_$scope.route.taskID)
 			)
+
+			@_$scope.settingsmodel = @_$settingsmodel
 
 			@_$scope.durations = [
 				{
@@ -59,6 +62,8 @@ $timeout, $routeParams) ->
 					names:	t('tasks_enhanced','seconds'),
 					id:		'second'}
 			]
+
+			# console.log(_$settingsmodel.getById('various').firstDay)
 
 			@_$scope.params = (task) ->
 				params = [
@@ -282,5 +287,6 @@ $timeout, $routeParams) ->
 				_tasksbusinesslayer.setReminder(_$scope.route.taskID)
 
 	return new DetailsController($scope, $window, TasksModel,
-		TasksBusinessLayer, $route, $location, $timeout, $routeParams)
+		TasksBusinessLayer, $route, $location, $timeout, $routeParams,
+		SettingsModel)
 ]

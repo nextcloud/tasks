@@ -21,19 +21,21 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 ###
 angular.module('Tasks').controller 'SettingsController',
 ['$scope', '$window', 'Status', '$location','$modalInstance',
-'CollectionsModel', 'SettingsBusinessLayer',
+'CollectionsModel', 'SettingsBusinessLayer', 'SettingsModel'
 ($scope, $window, Status, $location, $modalInstance,CollectionsModel,
-	SettingsBusinessLayer) ->
+	SettingsBusinessLayer, SettingsModel) ->
 
 	class SettingsController
 
 		constructor: (@_$scope, @_$window, @_$status,
 		@_$location, @_$modalInstance, @_$collectionsmodel,
-		@_$settingsbusinesslayer) ->
+		@_$settingsbusinesslayer, @_$settingsmodel) ->
 
 			@_$scope.status = @_$status.getStatus()
 
 			@_$scope.collections = @_$collectionsmodel.getAll()
+
+			@_$scope.settingsmodel = @_$settingsmodel
 
 			@_$scope.collectionOptions = [
 				{
@@ -47,6 +49,30 @@ angular.module('Tasks').controller 'SettingsController',
 					name: t('tasks_enhanced','Automatic')}
 			]
 
+			@_$scope.startOfWeekOptions = [
+				{
+					id: 0,
+					name: t('tasks_enhanced','Sunday')},
+				{
+					id: 1,
+					name: t('tasks_enhanced','Monday')},
+				{
+					id: 2,
+					name: t('tasks_enhanced','Tuesday')},
+				{
+					id: 3,
+					name: t('tasks_enhanced','Wednesday')},
+				{
+					id: 4,
+					name: t('tasks_enhanced','Thursday')},
+				{
+					id: 5,
+					name: t('tasks_enhanced','Friday')},
+				{
+					id: 6,
+					name: t('tasks_enhanced','Saturday')}
+			]
+
 			@_$scope.ok = () =>
 				$modalInstance.close()
 
@@ -54,7 +80,12 @@ angular.module('Tasks').controller 'SettingsController',
 				collection = _$collectionsmodel.getById(collectionID)
 				_$settingsbusinesslayer.setVisibility(collectionID,collection.show)
 
+			@_$scope.setStartOfWeek = () =>
+				_$settingsbusinesslayer.set('various','startOfWeek',
+				_$settingsmodel.getById('various').startOfWeek)
+
 
 	return new SettingsController($scope, $window, Status, $location,
-		$modalInstance, CollectionsModel, SettingsBusinessLayer)
+		$modalInstance, CollectionsModel, SettingsBusinessLayer,
+		SettingsModel)
 ]

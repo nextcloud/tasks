@@ -77,4 +77,13 @@
 'An empty name ist not allowed.' => 'Ein leerer Name ist nicht gestattet.',
 'Load more completed tasks' => 'Weitere erledigte Tasks laden',
 "%s % completed" => "Zu %s % abgeschlossen",
+"General Settings" => "Allgemeine Einstellungen",
+"Start of week" => "Erster Tag der Woche",
+"Monday" => "Montag",
+"Tuesday" => "Dienstag",
+"Wednesday" => "Mittwoch",
+"Thursday" => "Donnerstag",
+"Friday" => "Freitag",
+"Saturday" => "Samstag",
+"Sunday" => "Sonntag",
 );
