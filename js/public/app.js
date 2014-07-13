@@ -604,7 +604,7 @@
                 }
                 return _$scope.completetimer = $timeout(function() {
                   return _tasksbusinesslayer.setPercentComplete(_$scope.task.id, _$scope.task.complete);
-                }, 2000);
+                }, 1000);
               }
             }
           }, true);
@@ -1275,7 +1275,12 @@
 
         TasksBusinessLayer.prototype.setPercentComplete = function(taskID, percentComplete) {
           this._$tasksmodel.setPercentComplete(taskID, percentComplete);
-          return this._persistence.setPercentComplete(taskID, percentComplete);
+          this._persistence.setPercentComplete(taskID, percentComplete);
+          if (percentComplete < 100) {
+            return this.uncompleteTask(taskID);
+          } else {
+            return this.completeTask(taskID);
+          }
         };
 
         TasksBusinessLayer.prototype.uncompleteTask = function(taskID) {

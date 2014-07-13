@@ -57,6 +57,10 @@ angular.module('Tasks').factory 'TasksBusinessLayer',
 		setPercentComplete: (taskID, percentComplete) ->
 			@_$tasksmodel.setPercentComplete(taskID, percentComplete)
 			@_persistence.setPercentComplete(taskID, percentComplete)
+			if percentComplete < 100
+				@uncompleteTask(taskID)
+			else
+				@completeTask(taskID)
 
 		uncompleteTask: (taskID) ->
 			@_$tasksmodel.uncomplete(taskID)

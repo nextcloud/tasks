@@ -232,7 +232,7 @@ $timeout, $routeParams, SettingsModel) ->
 						_$scope.completetimer = $timeout( () ->
 							_tasksbusinesslayer.setPercentComplete(_$scope.task.id,
 							_$scope.task.complete)
-						,2000)
+						,1000)
 			,true)
 
 			@_$scope.setstartday = (date) ->
