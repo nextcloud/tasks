@@ -1277,9 +1277,9 @@
           this._$tasksmodel.setPercentComplete(taskID, percentComplete);
           this._persistence.setPercentComplete(taskID, percentComplete);
           if (percentComplete < 100) {
-            return this.uncompleteTask(taskID);
+            return this._$tasksmodel.uncomplete(taskID);
           } else {
-            return this.completeTask(taskID);
+            return this._$tasksmodel.complete(taskID);
           }
         };
 
