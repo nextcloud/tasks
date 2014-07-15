@@ -61,12 +61,12 @@ class CollectionsController extends Controller {
 		);
 		foreach ($collections as $key => $collection){
 			try{
-				$tmp = (int)\OCP\Config::getUserValue($this->api->getUserId(), 'tasks_enhanced','show_'.$collection['id']);
-				if (!in_array($tmp, array(0,1,2)) || $tmp === null) {
+				$tmp = \OCP\Config::getUserValue($this->api->getUserId(), 'tasks_enhanced','show_'.$collection['id']);
+				if (!in_array((int)$tmp, array(0,1,2)) || $tmp === null) {
 					$tmp = 2;
 					\OCP\Config::setUserValue($this->api->getUserId(), 'tasks_enhanced','show_'.$collection['id'],$tmp);
 				}
-				$collections[$key]['show'] = $tmp;
+				$collections[$key]['show'] = (int)$tmp;
 			}catch(\Exception $e) {
 					\OCP\Util::writeLog('tasks_enhanced', $e->getMessage(), \OCP\Util::ERROR);
 			}
