@@ -288,6 +288,9 @@ $timeout, $routeParams, SettingsModel) ->
 			@_$scope.setReminderDuration = (taskID) ->
 				_tasksbusinesslayer.setReminder(_$scope.route.taskID)
 
+			@_$scope.addComment = () ->
+				_tasksbusinesslayer.addComment(_$scope.route.taskID,'test')
+
 	return new DetailsController($scope, $window, TasksModel,
 		TasksBusinessLayer, $route, $location, $timeout, $routeParams,
 		SettingsModel)

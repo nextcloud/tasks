@@ -243,6 +243,16 @@ $this->create('task_reminder', '/tasks/{taskID}/reminder')
 		}
 	);
 
+$this->create('task_comment', '/tasks/{taskID}/comment')
+	->post()
+	->action(
+		function($params){
+			session_write_close();
+			$dispatcher = new Dispatcher($params);
+			$dispatcher->dispatch('TasksController', 'addComment');
+		}
+	);
+
 /*
  * Settings
  */

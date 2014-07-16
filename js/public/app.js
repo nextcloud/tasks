@@ -663,6 +663,9 @@
           this._$scope.setReminderDuration = function(taskID) {
             return _tasksbusinesslayer.setReminder(_$scope.route.taskID);
           };
+          this._$scope.addComment = function() {
+            return _tasksbusinesslayer.addComment(_$scope.route.taskID, 'test');
+          };
         }
 
         return DetailsController;
@@ -1627,6 +1630,10 @@
           return this._persistence.setShowHidden(showHidden);
         };
 
+        TasksBusinessLayer.prototype.addComment = function(taskID, comment) {
+          return this._persistence.addComment(taskID, comment);
+        };
+
         return TasksBusinessLayer;
 
       })();
@@ -2580,6 +2587,19 @@
             }
           };
           return this._request.post('/apps/tasks_enhanced/settings/showhidden/{showHidden}', params);
+        };
+
+        Persistence.prototype.addComment = function(taskID, comment) {
+          var params;
+          params = {
+            routeParams: {
+              taskID: taskID
+            },
+            data: {
+              comment: comment
+            }
+          };
+          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/comment', params);
         };
 
         return Persistence;

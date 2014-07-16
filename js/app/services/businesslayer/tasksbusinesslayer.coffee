@@ -332,6 +332,9 @@ angular.module('Tasks').factory 'TasksBusinessLayer',
 		setShowHidden: (showHidden) ->
 			@_persistence.setShowHidden(showHidden)
 
+		addComment: (taskID, comment) ->
+			@_persistence.addComment(taskID, comment)
+
 
 	return new TasksBusinessLayer(TasksModel, Persistence)
 

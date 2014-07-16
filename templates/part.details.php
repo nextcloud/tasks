@@ -111,5 +111,6 @@
         <a class="detail-close" ng-click="closeDetails()" stop-event="click">
         	<span class="icon detail-close"></span>
         </a>
+        <a ng-click="addComment()">Comment</a>
     </div>
 </div>

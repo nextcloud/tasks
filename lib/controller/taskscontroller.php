@@ -149,7 +149,7 @@ class TasksController extends Controller {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function percentComplete( $percentCompete ){
+	public function percentComplete(){
 		$response = new JSONResponse();
 		try{
 			$percent_complete = $this->params('complete');
@@ -447,7 +447,7 @@ class TasksController extends Controller {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function setCategories($taskId, $categories){
+	public function setCategories(){
 		$taskId = $this->params('taskID');
 		$categories = $this->params('categories');
 		$response = new JSONResponse();
@@ -465,7 +465,7 @@ class TasksController extends Controller {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function setLocation($taskId, $location){
+	public function setLocation(){
 		$taskId = $this->params('taskID');
 		$location = $this->params('location');
 		$response = new JSONResponse();
@@ -477,6 +477,37 @@ class TasksController extends Controller {
 		} catch(\Exception $e) {
 			// throw new BusinessLayerException($e->getMessage());
 		}
+		return $response;
+	}
+
+	/**
+	 * @NoAdminRequired
+	 */
+	public function addComment(){
+		$taskId = $this->params('taskID');
+		$comment = $this->params('comment');
+		$response = new JSONResponse();
+		try {
+			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
+			$vtodo = $vcalendar->VTODO;
+			// $vtodo->setString('COMMENT', 'haha');
+			// $vtodo->setString('COMMENT', 'haha2');
+			// $vtodo->setString('COMMENT', 'haha3');
+			// $vtodo->offsetSet('USERID','offsetSet');
+			// $vtodo->addProperty('COMMENT','haha4');
+			$tmp = $vtodo->addProperty('COMMENT','haha6');
+			$tmp->offsetSet('USERID','offsetSet');
+			// unset($vtodo->COMMENT);
+			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
+
+			$test = $vtodo->getAsArray('COMMENT');
+			$test = $vtodo->COMMENT['USERID']->value;
+			$response->setData($test);
+
+		} catch(\Exception $e) {
+			// throw new BusinessLayerException($e->getMessage());
+		}
+
 		return $response;
 	}
 
