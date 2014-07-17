@@ -486,30 +486,70 @@ class TasksController extends Controller {
 	public function addComment(){
 		$taskId = $this->params('taskID');
 		$comment = $this->params('comment');
+		$userId = $this->api->getUserId();
 		$response = new JSONResponse();
 		try {
 			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
 			$vtodo = $vcalendar->VTODO;
-			// $vtodo->setString('COMMENT', 'haha');
-			// $vtodo->setString('COMMENT', 'haha2');
-			// $vtodo->setString('COMMENT', 'haha3');
-			// $vtodo->offsetSet('USERID','offsetSet');
-			// $vtodo->addProperty('COMMENT','haha4');
-			$tmp = $vtodo->addProperty('COMMENT','haha6');
-			$tmp->offsetSet('USERID','offsetSet');
-			// unset($vtodo->COMMENT);
-			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
 
-			$test = $vtodo->getAsArray('COMMENT');
-			$test = $vtodo->COMMENT['USERID']->value;
-			$response->setData($test);
+			// Determine new commentId by looping through all comments
+			$commentIds = array();
+			foreach($vtodo->COMMENT as $com) {
+				$commentIds[] = (int)$com['ID']->value;
+			}
+			$commentId = 1+max($commentIds);
+
+			$now = 	new \DateTime();
+			$now = $now->format('Ymd\THis\Z');
+			$tmp = $vtodo->addProperty('COMMENT',$comment,
+				array(
+					'ID' => $commentId,
+					'USERID' => $userId,
+					'DATE-TIME' => $now
+					)
+				);
+			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
+			$response->setData();
 
 		} catch(\Exception $e) {
 			// throw new BusinessLayerException($e->getMessage());
 		}
-
 		return $response;
 	}
 
+	/**
+	 * @NoAdminRequired
+	 */
+	public function deleteCommentById(){
+		$taskId = $this->params('taskID');
+		$commentId = $this->params('commentID');
+		$userId = $this->api->getUserId();
+		$response = new JSONResponse();
+		$test = array();
+		try {
+			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
+			$vtodo = $vcalendar->VTODO;
+			$commentIndex = $this->getCommentById($vtodo,$commentId);
+			unset($vtodo->children[$commentIndex]);
+			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
+		} catch(\Exception $e) {
+			// throw new BusinessLayerException($e->getMessage());
+		}
+		$response->setData($test);
+		return $response;
+	}
 
+	/**
+	 * @NoAdminRequired
+	 */
+	public function getCommentById($vtodo,$commentId) {
+		$idx = 0;
+		foreach ($vtodo->children as $i => &$property) {
+			if ( $property->name == 'COMMENT' && $property['ID']->value == $commentId ) {
+				return $idx;
+			}
+			$idx += 1;
+		}
+		throw new \Exception('Commment not found.');
+	}
 }
