@@ -540,12 +540,16 @@ class TasksController extends Controller {
 			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
 			$vtodo = $vcalendar->VTODO;
 			$commentIndex = $this->getCommentById($vtodo,$commentId);
-			unset($vtodo->children[$commentIndex]);
-			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
+			$comment = $vtodo->children[$commentIndex];
+			if($comment['USERID'] == $userId){
+				unset($vtodo->children[$commentIndex]);
+				\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
+			}else{
+				throw new \Exception('Not allowed.');
+			}
 		} catch(\Exception $e) {
 			// throw new BusinessLayerException($e->getMessage());
 		}
-		$response->setData();
 		return $response;
 	}
 
