@@ -144,6 +144,21 @@
 }).call(this);
 
 (function() {
+  angular.module('Tasks').directive('avatar', function() {
+    return {
+      restrict: 'A',
+      scope: false,
+      link: function(scope, elm, attr) {
+        return attr.$observe('userID', function() {
+          return elm.avatar(attr.userid, attr.size);
+        });
+      }
+    };
+  });
+
+}).call(this);
+
+(function() {
   angular.module('Tasks').directive('datepicker', function() {
     return {
       restrict: 'A',

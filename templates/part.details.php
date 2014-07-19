@@ -108,7 +108,7 @@
         <div class="section detail-comments">
             <ul>
                 <li ng-repeat="comment in task.comments" class="comment-item" rel=" {{ comment.id }} ">
-                    <div class="avatar"><img src=""></div>
+                    <div class="avatar" avatar userID="{{ comment.userID }}" size="32"></div>
                     <a class="detail-delete" ng-click="deleteComment(comment.id)" stop-event="click">
                         <span class="icon detail-delete"></span>
                     </a>

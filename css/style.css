@@ -991,7 +991,7 @@
   height: auto;
 }
 #task-details .body .section.detail-comments .comment-item {
-  padding: 5px 60px 0;
+  padding: 5px 55px 0;
   position: relative;
 }
 #task-details .body .section.detail-comments .comment-item .icon.detail-delete {
@@ -1001,8 +1001,8 @@
   display: block;
 }
 #task-details .body .section.detail-comments .comment-item .avatar {
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   position: absolute;
   left: 10px;
   top: 10px;
