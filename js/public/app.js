@@ -410,6 +410,7 @@
             return _$scope.task = _$tasksmodel.getById(_$scope.route.taskID);
           });
           this._$scope.settingsmodel = this._$settingsmodel;
+          this._$scope.isAddingComment = false;
           this._$scope.durations = [
             {
               name: t('tasks_enhanced', 'week'),
@@ -663,8 +664,26 @@
           this._$scope.setReminderDuration = function(taskID) {
             return _tasksbusinesslayer.setReminder(_$scope.route.taskID);
           };
-          this._$scope.addComment = function() {
-            return _tasksbusinesslayer.addComment(_$scope.route.taskID, 'test');
+          this._$scope.addComment = function(CommentContent) {
+            var comment,
+              _this = this;
+            _$scope.isAddingComment = true;
+            comment = {
+              tmpID: 'newComment' + Date.now(),
+              comment: CommentContent,
+              taskID: _$scope.route.taskID,
+              time: moment().format('YYYYMMDDTHHmmss')
+            };
+            _tasksbusinesslayer.addComment(comment, function(data) {
+              _$tasksmodel.updateComment(data.comment);
+              return _$scope.isAddingComment = false;
+            }, function() {
+              return _$scope.isAddingComment = false;
+            });
+            return _$scope.CommentContent = '';
+          };
+          this._$scope.deleteComment = function(commentID) {
+            return _tasksbusinesslayer.deleteComment(_$scope.route.taskID, commentID);
           };
         }
 
@@ -1630,8 +1649,31 @@
           return this._persistence.setShowHidden(showHidden);
         };
 
-        TasksBusinessLayer.prototype.addComment = function(taskID, comment) {
-          return this._persistence.addComment(taskID, comment);
+        TasksBusinessLayer.prototype.addComment = function(comment, onSuccess, onFailure) {
+          var success,
+            _this = this;
+          if (onSuccess == null) {
+            onSuccess = null;
+          }
+          if (onFailure == null) {
+            onFailure = null;
+          }
+          onSuccess || (onSuccess = function() {});
+          onFailure || (onFailure = function() {});
+          this._$tasksmodel.addComment(comment);
+          success = function(response) {
+            if (response.status === 'error') {
+              return onFailure();
+            } else {
+              return onSuccess(response.data);
+            }
+          };
+          return this._persistence.addComment(comment, success);
+        };
+
+        TasksBusinessLayer.prototype.deleteComment = function(taskID, commentID) {
+          this._$tasksmodel.deleteComment(taskID, commentID);
+          return this._persistence.deleteComment(taskID, commentID);
         };
 
         return TasksBusinessLayer;
@@ -2156,6 +2198,46 @@
           });
         };
 
+        TasksModel.prototype.addComment = function(comment) {
+          var task;
+          task = this.getById(comment.taskID);
+          return task.comments.push(comment);
+        };
+
+        TasksModel.prototype.updateComment = function(comment) {
+          var com, i, task, _i, _len, _ref, _results;
+          task = this.getById(comment.taskID);
+          i = 0;
+          _ref = task.comments;
+          _results = [];
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            com = _ref[_i];
+            if (com.tmpID === comment.tmpID) {
+              task.comments[i] = comment;
+              break;
+            }
+            _results.push(i++);
+          }
+          return _results;
+        };
+
+        TasksModel.prototype.deleteComment = function(taskID, commentID) {
+          var comment, i, task, _i, _len, _ref, _results;
+          task = this.getById(taskID);
+          i = 0;
+          _ref = task.comments;
+          _results = [];
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            comment = _ref[_i];
+            if (comment.id === commentID) {
+              task.comments.splice(i, 1);
+              break;
+            }
+            _results.push(i++);
+          }
+          return _results;
+        };
+
         return TasksModel;
 
       })(_Model);
@@ -2589,17 +2671,38 @@
           return this._request.post('/apps/tasks_enhanced/settings/showhidden/{showHidden}', params);
         };
 
-        Persistence.prototype.addComment = function(taskID, comment) {
+        Persistence.prototype.addComment = function(comment, onSuccess, onFailure) {
+          var params;
+          if (onSuccess == null) {
+            onSuccess = null;
+          }
+          if (onFailure == null) {
+            onFailure = null;
+          }
+          params = {
+            routeParams: {
+              taskID: comment.taskID
+            },
+            data: {
+              comment: comment.comment,
+              tmpID: comment.tmpID
+            },
+            onSuccess: onSuccess,
+            onFailure: onFailure
+          };
+          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/comment', params);
+        };
+
+        Persistence.prototype.deleteComment = function(taskID, commentID) {
           var params;
           params = {
             routeParams: {
-              taskID: taskID
-            },
-            data: {
-              comment: comment
+              taskID: taskID,
+              commentID: commentID
             }
           };
-          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/comment', params);
+          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/comment/\
+			{commentID}/delete', params);
         };
 
         return Persistence;

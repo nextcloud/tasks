@@ -636,7 +636,7 @@
   border-top: 1px solid #D3D3D3;
   bottom: 0;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
-  height: 35px;
+  height: 65px;
   left: 0;
   position: absolute;
   right: 0;
@@ -647,8 +647,33 @@
 }
 #task-details div.footer .icon {
   position: absolute;
-  top: 8px;
+  bottom: 7px;
   left: 8px;
+}
+#task-details div.footer .detail-addcomment {
+  padding: 4px 10px 0;
+}
+#task-details div.footer .detail-addcomment input {
+  background: none repeat scroll 0 0 white;
+  border: 1px solid #bdbcbb;
+  border-radius: 0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+  box-sizing: border-box;
+  color: #423e3e;
+  font-family: "Helvetica Neue", "Helvetica", "Arial", Sans-Serif;
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 2px;
+  outline: medium none;
+  padding: 4px;
+  transition: all 0.2s ease-in-out 0s;
+}
+#task-details div.footer .detail-addcomment input[type="text"] {
+  width: 260px;
+}
+#task-details div.footer .detail-addcomment input[type="button"] {
+  float: right;
+  margin-right: 0;
 }
 #task-details.completed .body .section .section-title {
   color: #9FA2A6 !important;
@@ -723,7 +748,7 @@
   position: relative;
 }
 #task-details .body {
-  bottom: 36px;
+  bottom: 65px;
   left: 0;
   overflow: auto;
   position: absolute;
@@ -742,7 +767,7 @@
   border-color: #CFCFCF;
   font-size: 13px;
   line-height: 26px;
-  margin: 20px;
+  margin: 0 20px;
   padding: 5px 15px;
   cursor: text;
 }
@@ -955,6 +980,53 @@
 }
 #task-details .body .section.detail-reminder.date .section-description {
   display: block;
+}
+#task-details .body .section.detail-note {
+  padding: 20px 0;
+  height: auto;
+}
+#task-details .body .section.detail-comments {
+  background: none;
+  padding: 10px 0;
+  height: auto;
+}
+#task-details .body .section.detail-comments .comment-item {
+  padding: 5px 60px 0;
+  position: relative;
+}
+#task-details .body .section.detail-comments .comment-item .icon.detail-delete {
+  top: 5px;
+}
+#task-details .body .section.detail-comments .comment-item:hover .icon.detail-delete {
+  display: block;
+}
+#task-details .body .section.detail-comments .comment-item .avatar {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+#task-details .body .section.detail-comments .comment-item .avatar img {
+  height: 100%;
+  width: 100%;
+}
+#task-details .body .section.detail-comments .comment-item .username {
+  display: inline-block;
+  font-weight: bold;
+}
+#task-details .body .section.detail-comments .comment-item .time {
+  color: #9fa2a6;
+  font-size: 11px;
+}
+#task-details .body .section.detail-addcomment {
+  background: url("../img/divider.svg") repeat-x scroll center top transparent;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
 }
 #modal-wrapper {
   position: absolute;

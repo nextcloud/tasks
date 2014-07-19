@@ -40,6 +40,8 @@ $timeout, $routeParams, SettingsModel) ->
 
 			@_$scope.settingsmodel = @_$settingsmodel
 
+			@_$scope.isAddingComment = false
+
 			@_$scope.durations = [
 				{
 					name:	t('tasks_enhanced','week'),
@@ -288,8 +290,28 @@ $timeout, $routeParams, SettingsModel) ->
 			@_$scope.setReminderDuration = (taskID) ->
 				_tasksbusinesslayer.setReminder(_$scope.route.taskID)
 
-			@_$scope.addComment = () ->
-				_tasksbusinesslayer.addComment(_$scope.route.taskID,'test')
+			@_$scope.addComment = (CommentContent) ->
+				_$scope.isAddingComment = true
+
+				comment = {
+					tmpID:		'newComment' + Date.now()
+					comment:	CommentContent
+					taskID:		_$scope.route.taskID
+					time:		moment().format('YYYYMMDDTHHmmss')
+				}
+
+				_tasksbusinesslayer.addComment comment
+				, (data) =>
+					_$tasksmodel.updateComment(data.comment)
+					_$scope.isAddingComment = false
+				, =>
+					_$scope.isAddingComment = false
+
+				_$scope.CommentContent = ''
+
+			@_$scope.deleteComment = (commentID) ->
+				_tasksbusinesslayer.deleteComment(_$scope.route.taskID, commentID)
+
 
 	return new DetailsController($scope, $window, TasksModel,
 		TasksBusinessLayer, $route, $location, $timeout, $routeParams,

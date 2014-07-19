@@ -439,8 +439,6 @@ class TasksController extends Controller {
 
 			}
 		}
-
-
 		return $response;
 	}
 
@@ -500,17 +498,30 @@ class TasksController extends Controller {
 			$commentId = 1+max($commentIds);
 
 			$now = 	new \DateTime();
-			$now = $now->format('Ymd\THis\Z');
-			$tmp = $vtodo->addProperty('COMMENT',$comment,
+			$vtodo->addProperty('COMMENT',$comment,
 				array(
 					'ID' => $commentId,
 					'USERID' => $userId,
-					'DATE-TIME' => $now
+					'DATE-TIME' => $now->format('Ymd\THis\Z')
 					)
 				);
 			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
-			$response->setData();
-
+			$user_timezone = \OC_Calendar_App::getTimezone();
+			$now->setTimezone(new \DateTimeZone($user_timezone));
+			$comment = array(
+				'taskID' => $taskId,
+				'id' => $commentId,
+				'tmpID' => $this->params('tmpID'),
+				'userID' => $userId,
+				'comment' => $comment,
+				'time' => $now->format('Ymd\THis')
+				);
+			$result = array(
+				'data' => array(
+					'comment' => $comment
+					)
+				);
+			$response->setData($result);
 		} catch(\Exception $e) {
 			// throw new BusinessLayerException($e->getMessage());
 		}
@@ -520,12 +531,11 @@ class TasksController extends Controller {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function deleteCommentById(){
+	public function deleteComment(){
 		$taskId = $this->params('taskID');
 		$commentId = $this->params('commentID');
 		$userId = $this->api->getUserId();
 		$response = new JSONResponse();
-		$test = array();
 		try {
 			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
 			$vtodo = $vcalendar->VTODO;
@@ -535,7 +545,7 @@ class TasksController extends Controller {
 		} catch(\Exception $e) {
 			// throw new BusinessLayerException($e->getMessage());
 		}
-		$response->setData($test);
+		$response->setData();
 		return $response;
 	}
 

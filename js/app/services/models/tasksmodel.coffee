@@ -165,5 +165,27 @@ angular.module('Tasks').factory 'TasksModel',
 		setNote: (taskID, note) ->
 			@update({id:taskID,note:note})
 
+		addComment: (comment) ->
+			task = @getById(comment.taskID)
+			task.comments.push(comment)
+
+		updateComment: (comment) ->
+			task = @getById(comment.taskID)
+			i = 0
+			for com in task.comments
+				if com.tmpID == comment.tmpID
+					task.comments[i] = comment
+					break
+				i++
+
+		deleteComment: (taskID, commentID) ->
+			task = @getById(taskID)
+			i = 0
+			for comment in task.comments
+				if comment.id == commentID
+					task.comments.splice(i,1)
+					break
+				i++
+
 	return new TasksModel(Utils)
 ]

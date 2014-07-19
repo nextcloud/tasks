@@ -86,4 +86,5 @@
 "Friday" => "Freitag",
 "Saturday" => "Samstag",
 "Sunday" => "Sonntag",
+"Add Comment" => "Kommentar hinzufügen",
 );
