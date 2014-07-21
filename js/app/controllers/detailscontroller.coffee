@@ -315,9 +315,14 @@ $timeout, $routeParams, SettingsModel) ->
 				if (event.keyCode == 13)
 					_$scope.addComment()
 
-
 			@_$scope.deleteComment = (commentID) ->
 				_tasksbusinesslayer.deleteComment(_$scope.route.taskID, commentID)
+
+			@_$scope.commentStrings = () ->
+				{
+					button: t('tasks_enhanced','Comment'),
+					input:	t('tasks_enhanced','Add a comment')
+				}
 
 
 	return new DetailsController($scope, $window, TasksModel,

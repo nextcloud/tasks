@@ -727,6 +727,12 @@
           this._$scope.deleteComment = function(commentID) {
             return _tasksbusinesslayer.deleteComment(_$scope.route.taskID, commentID);
           };
+          this._$scope.commentStrings = function() {
+            return {
+              button: t('tasks_enhanced', 'Comment'),
+              input: t('tasks_enhanced', 'Add a comment')
+            };
+          };
         }
 
         return DetailsController;

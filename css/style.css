@@ -672,7 +672,7 @@
   transition: all 0.2s ease-in-out 0s;
 }
 #task-details div.footer .detail-addcomment input[type="text"] {
-  width: 260px;
+  width: 230px;
 }
 #task-details div.footer .detail-addcomment input[type="button"] {
   float: right;

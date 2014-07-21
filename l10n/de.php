@@ -100,4 +100,6 @@
 "%d months" => "%d Monaten",
 "a year" => "einem Jahr",
 "%d years" => "%d Jahren",
+"Add a comment" => "Kommentar hinzufügen",
+"Comment" => "Kommentieren"
 );
