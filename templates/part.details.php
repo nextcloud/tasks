@@ -114,7 +114,7 @@
                     </a>
                     <span class="username">{{ comment.name }}</span>
                     <div class="comment">{{ comment.comment }}</div>
-                    <span class="time"> {{ comment.time}} </span>
+                    <span class="time"> {{ comment.time | dateFromNow }} </span>
                 </li>
             </ul>
         </div>

@@ -128,7 +128,7 @@
           sameElse: 'MMM DD, YYYY'
         }
       });
-      return moment.lang('list_week', {
+      moment.lang('list_week', {
         calendar: {
           lastDay: '[' + t('tasks_enhanced', 'Yesterday') + ']',
           sameDay: '[' + t('tasks_enhanced', 'Today') + '], MMM. DD',
@@ -136,6 +136,23 @@
           lastWeek: 'ddd, MMM. DD',
           nextWeek: 'ddd, MMM. DD',
           sameElse: 'ddd, MMM. DD'
+        }
+      });
+      return moment.lang('en', {
+        relativeTime: {
+          future: t('tasks_enhanced', "in %s"),
+          past: t('tasks_enhanced', "%s ago"),
+          s: t('tasks_enhanced', "seconds"),
+          m: t('tasks_enhanced', "a minute"),
+          mm: t('tasks_enhanced', "%d minutes"),
+          h: t('tasks_enhanced', "an hour"),
+          hh: t('tasks_enhanced', "%d hours"),
+          d: t('tasks_enhanced', "a day"),
+          dd: t('tasks_enhanced', "%d days"),
+          M: t('tasks_enhanced', "a month"),
+          MM: t('tasks_enhanced', "%d months"),
+          y: t('tasks_enhanced', "a year"),
+          yy: t('tasks_enhanced', "%d years")
         }
       });
     }
@@ -2803,6 +2820,19 @@
     return function(reminder) {
       if (moment(reminder, "YYYYMMDDTHHmmss").isValid()) {
         return moment(reminder, "YYYYMMDDTHHmmss").lang('details_short').calendar();
+      } else {
+        return '';
+      }
+    };
+  });
+
+}).call(this);
+
+(function() {
+  angular.module('Tasks').filter('dateFromNow', function() {
+    return function(due) {
+      if (moment(due, "YYYYMMDDTHHmmss").isValid()) {
+        return moment(due, "YYYYMMDDTHHmmss").fromNow();
       } else {
         return '';
       }
