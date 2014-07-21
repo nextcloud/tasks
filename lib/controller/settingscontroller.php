@@ -36,7 +36,9 @@ class SettingsController extends Controller {
 			array(
 				'id' => 'various',
 				'showHidden' => (int)\OCP\Config::getUserValue($this->api->getUserId(), 'tasks_enhanced','various_showHidden'),
-				'startOfWeek' => (int)\OCP\Config::getUserValue($this->api->getUserId(), 'tasks_enhanced','various_startOfWeek')
+				'startOfWeek' => (int)\OCP\Config::getUserValue($this->api->getUserId(), 'tasks_enhanced','various_startOfWeek'),
+				'userID' => $this->api->getUserId()
+
 			)
 		);
 		$result = array(

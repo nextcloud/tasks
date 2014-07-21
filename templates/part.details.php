@@ -109,7 +109,7 @@
             <ul>
                 <li ng-repeat="comment in task.comments" class="comment-item" rel=" {{ comment.id }} ">
                     <div class="avatar" avatar userID="{{ comment.userID }}" size="32"></div>
-                    <a class="detail-delete" ng-click="deleteComment(comment.id)" stop-event="click">
+                    <a class="detail-delete" ng-click="deleteComment(comment.id)" stop-event="click" ng-show="settingsmodel.getById('various').userID == comment.userID">
                         <span class="icon detail-delete"></span>
                     </a>
                     <span class="username">{{ comment.name }}</span>
