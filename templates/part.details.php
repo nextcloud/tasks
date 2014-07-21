@@ -121,8 +121,8 @@
     </div>
     <div class="footer">
         <div class="detail-addcomment">
-            <input type="text" placeholder="Add comment" ng-model="CommentContent">
-            <input type="button" ng-click="addComment(CommentContent)" name="addComment" value="Comment">
+            <input type="text" placeholder="Add comment" ng-model="CommentContent" ng-keydown="sendComment($event)">
+            <input type="button" ng-click="addComment()" name="addComment" value="Comment">
         </div>
     	<a class="detail-trash" ng-click="deleteTask(task.id)" stop-event="click">
         	<span class="icon detail-trash"></span>

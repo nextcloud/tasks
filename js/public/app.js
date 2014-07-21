@@ -698,24 +698,31 @@
           this._$scope.setReminderDuration = function(taskID) {
             return _tasksbusinesslayer.setReminder(_$scope.route.taskID);
           };
-          this._$scope.addComment = function(CommentContent) {
+          this._$scope.addComment = function() {
             var comment,
               _this = this;
-            _$scope.isAddingComment = true;
-            comment = {
-              tmpID: 'newComment' + Date.now(),
-              comment: CommentContent,
-              taskID: _$scope.route.taskID,
-              time: moment().format('YYYYMMDDTHHmmss'),
-              name: $('#expandDisplayName').text()
-            };
-            _tasksbusinesslayer.addComment(comment, function(data) {
-              _$tasksmodel.updateComment(data.comment);
-              return _$scope.isAddingComment = false;
-            }, function() {
-              return _$scope.isAddingComment = false;
-            });
-            return _$scope.CommentContent = '';
+            if (_$scope.CommentContent) {
+              _$scope.isAddingComment = true;
+              comment = {
+                tmpID: 'newComment' + Date.now(),
+                comment: _$scope.CommentContent,
+                taskID: _$scope.route.taskID,
+                time: moment().format('YYYYMMDDTHHmmss'),
+                name: $('#expandDisplayName').text()
+              };
+              _tasksbusinesslayer.addComment(comment, function(data) {
+                _$tasksmodel.updateComment(data.comment);
+                return _$scope.isAddingComment = false;
+              }, function() {
+                return _$scope.isAddingComment = false;
+              });
+              return _$scope.CommentContent = '';
+            }
+          };
+          this._$scope.sendComment = function(event) {
+            if (event.keyCode === 13) {
+              return _$scope.addComment();
+            }
           };
           this._$scope.deleteComment = function(commentID) {
             return _tasksbusinesslayer.deleteComment(_$scope.route.taskID, commentID);

@@ -290,25 +290,31 @@ $timeout, $routeParams, SettingsModel) ->
 			@_$scope.setReminderDuration = (taskID) ->
 				_tasksbusinesslayer.setReminder(_$scope.route.taskID)
 
-			@_$scope.addComment = (CommentContent) ->
-				_$scope.isAddingComment = true
+			@_$scope.addComment = () ->
+				if _$scope.CommentContent
+					_$scope.isAddingComment = true
 
-				comment = {
-					tmpID:		'newComment' + Date.now()
-					comment:	CommentContent
-					taskID:		_$scope.route.taskID
-					time:		moment().format('YYYYMMDDTHHmmss')
-					name:		$('#expandDisplayName').text()
-				}
+					comment = {
+						tmpID:		'newComment' + Date.now()
+						comment:	_$scope.CommentContent
+						taskID:		_$scope.route.taskID
+						time:		moment().format('YYYYMMDDTHHmmss')
+						name:		$('#expandDisplayName').text()
+					}
 
-				_tasksbusinesslayer.addComment comment
-				, (data) =>
-					_$tasksmodel.updateComment(data.comment)
-					_$scope.isAddingComment = false
-				, =>
-					_$scope.isAddingComment = false
+					_tasksbusinesslayer.addComment comment
+					, (data) =>
+						_$tasksmodel.updateComment(data.comment)
+						_$scope.isAddingComment = false
+					, =>
+						_$scope.isAddingComment = false
 
-				_$scope.CommentContent = ''
+					_$scope.CommentContent = ''
+
+			@_$scope.sendComment = (event) ->
+				if (event.keyCode == 13)
+					_$scope.addComment()
+
 
 			@_$scope.deleteComment = (commentID) ->
 				_tasksbusinesslayer.deleteComment(_$scope.route.taskID, commentID)
