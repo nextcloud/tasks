@@ -332,6 +332,26 @@ angular.module('Tasks').factory 'TasksBusinessLayer',
 		setShowHidden: (showHidden) ->
 			@_persistence.setShowHidden(showHidden)
 
+		# addComment: (taskID, comment) ->
+			# @_persistence.addComment(taskID, comment)
+
+		addComment: (comment, onSuccess=null, onFailure=null) ->
+			onSuccess or= ->
+			onFailure or= ->
+
+			@_$tasksmodel.addComment(comment)
+
+			success = (response) =>
+				if response.status == 'error'
+					onFailure()
+				else
+					onSuccess(response.data)
+			@_persistence.addComment(comment, success)
+
+		deleteComment: (taskID, commentID) ->
+			@_$tasksmodel.deleteComment(taskID, commentID)
+			@_persistence.deleteComment(taskID, commentID)
+
 
 	return new TasksBusinessLayer(TasksModel, Persistence)
 

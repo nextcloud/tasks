@@ -326,6 +326,28 @@ angular.module('Tasks').factory 'Persistence',
 			@_request.post '/apps/tasks_enhanced/settings/showhidden/{showHidden}',
 			params
 
+		addComment: (comment, onSuccess=null, onFailure=null) ->
+			params =
+				routeParams:
+					taskID: comment.taskID
+				data:
+					comment: comment.comment
+					tmpID: comment.tmpID
+				onSuccess: onSuccess
+				onFailure: onFailure
+
+			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/comment',
+			params
+
+		deleteComment: (taskID, commentID) ->
+			params =
+				routeParams:
+					taskID: taskID
+					commentID: commentID
+
+			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/comment/
+			{commentID}/delete', params
+
 	return new Persistence(Request, Loading, $rootScope)
 
 ]

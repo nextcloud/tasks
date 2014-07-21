@@ -142,4 +142,21 @@ angular.module('Tasks').run ['Config', '$timeout',
 			sameElse : 'ddd, MMM. DD'
 		}
 	})
+	moment.lang('en', {
+		relativeTime: {
+			future:	t('tasks_enhanced', "in %s")
+			past:	t('tasks_enhanced', "%s ago")
+			s:		t('tasks_enhanced', "seconds")
+			m:		t('tasks_enhanced', "a minute")
+			mm:		t('tasks_enhanced', "%d minutes")
+			h:		t('tasks_enhanced', "an hour")
+			hh:		t('tasks_enhanced', "%d hours")
+			d:		t('tasks_enhanced', "a day")
+			dd:		t('tasks_enhanced', "%d days")
+			M:		t('tasks_enhanced', "a month")
+			MM:		t('tasks_enhanced', "%d months")
+			y:		t('tasks_enhanced', "a year")
+			yy:		t('tasks_enhanced', "%d years")
+		}
+	})
 ]

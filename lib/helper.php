@@ -169,6 +169,23 @@ Class helper {
 			$task['completed'] = false;
 		}
 		$task['complete'] = $vtodo->getAsString('PERCENT-COMPLETE')==''?'0':$vtodo->getAsString('PERCENT-COMPLETE');
+		$comments = $vtodo->COMMENT;
+		if($comments){
+			$comments_parsed = array();
+			foreach($comments as $com) {
+				$time = new \DateTime($com['DATE-TIME']->value);
+				$time->setTimezone(new \DateTimeZone($user_timezone));
+				$time = $time->format('Ymd\THis');
+				$comments_parsed[] = array(
+					'id' => (int)$com['ID']->value,
+					'userID' => $com['USERID']->value,
+					'name' => \OCP\USER::getDisplayName($com['USERID']->value),
+					'comment' => $com->value,
+					'time' => $time
+					);
+			}
+		}
+		$task['comments'] = $comments_parsed;
 		return $task;
 	}
 

@@ -149,7 +149,7 @@ class TasksController extends Controller {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function percentComplete( $percentCompete ){
+	public function percentComplete(){
 		$response = new JSONResponse();
 		try{
 			$percent_complete = $this->params('complete');
@@ -439,15 +439,13 @@ class TasksController extends Controller {
 
 			}
 		}
-
-
 		return $response;
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
-	public function setCategories($taskId, $categories){
+	public function setCategories(){
 		$taskId = $this->params('taskID');
 		$categories = $this->params('categories');
 		$response = new JSONResponse();
@@ -465,7 +463,7 @@ class TasksController extends Controller {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function setLocation($taskId, $location){
+	public function setLocation(){
 		$taskId = $this->params('taskID');
 		$location = $this->params('location');
 		$response = new JSONResponse();
@@ -480,5 +478,93 @@ class TasksController extends Controller {
 		return $response;
 	}
 
+	/**
+	 * @NoAdminRequired
+	 */
+	public function addComment(){
+		$taskId = $this->params('taskID');
+		$comment = $this->params('comment');
+		$userId = $this->api->getUserId();
+		$response = new JSONResponse();
+		try {
+			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
+			$vtodo = $vcalendar->VTODO;
 
+			// Determine new commentId by looping through all comments
+			$commentIds = array();
+			foreach($vtodo->COMMENT as $com) {
+				$commentIds[] = (int)$com['ID']->value;
+			}
+			$commentId = 1+max($commentIds);
+
+			$now = 	new \DateTime();
+			$vtodo->addProperty('COMMENT',$comment,
+				array(
+					'ID' => $commentId,
+					'USERID' => $userId,
+					'DATE-TIME' => $now->format('Ymd\THis\Z')
+					)
+				);
+			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
+			$user_timezone = \OC_Calendar_App::getTimezone();
+			$now->setTimezone(new \DateTimeZone($user_timezone));
+			$comment = array(
+				'taskID' => $taskId,
+				'id' => $commentId,
+				'tmpID' => $this->params('tmpID'),
+				'name' => \OCP\USER::getDisplayName(),
+				'userID' => $userId,
+				'comment' => $comment,
+				'time' => $now->format('Ymd\THis')
+				);
+			$result = array(
+				'data' => array(
+					'comment' => $comment
+					)
+				);
+			$response->setData($result);
+		} catch(\Exception $e) {
+			// throw new BusinessLayerException($e->getMessage());
+		}
+		return $response;
+	}
+
+	/**
+	 * @NoAdminRequired
+	 */
+	public function deleteComment(){
+		$taskId = $this->params('taskID');
+		$commentId = $this->params('commentID');
+		$userId = $this->api->getUserId();
+		$response = new JSONResponse();
+		try {
+			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
+			$vtodo = $vcalendar->VTODO;
+			$commentIndex = $this->getCommentById($vtodo,$commentId);
+			$comment = $vtodo->children[$commentIndex];
+			if($comment['USERID'] == $userId){
+				unset($vtodo->children[$commentIndex]);
+				\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
+			}else{
+				throw new \Exception('Not allowed.');
+			}
+		} catch(\Exception $e) {
+			// throw new BusinessLayerException($e->getMessage());
+		}
+		return $response;
+	}
+
+	/**
+	 * @NoAdminRequired
+	 */
+	public function getCommentById($vtodo,$commentId) {
+		$idx = 0;
+		foreach ($vtodo->children as $i => &$property) {
+			if ( $property->name == 'COMMENT' && $property['ID']->value == $commentId ) {
+				return $idx;
+			}
+			$idx += 1;
+		}
+		throw new \Exception('Commment not found.');
+	}
 }

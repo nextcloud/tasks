@@ -85,26 +85,45 @@
             </div>
         </div>
         <!-- <ul class="subtasks buffer"></ul> -->
-        <div class="note">
-        	<div class="note-body selectable" ng-click="editNote()" stop-event="click" oc-click-focus="{selector: '.expandingArea textarea', timeout: 0}">
-                <!--
-                <a class="open-fullscreen-note">
-                	<span class="icon note-fullscreen"></span>
-                </a>
-                -->
-                <div class="content-fakeable">
-                	<div class="display-view" ng-hide="route.parameter=='note'">{{ task.note }}</div>
-                    <div class="edit-view" ng-show="route.parameter=='note'">
-                        <div class="expandingArea active">
-                        	<pre><span>{{ task.note }}</span><br /><br /></pre>
-                        	<textarea ng-model="task.note"></textarea>
+        <div class="section detail-note">
+            <div class="note">
+            	<div class="note-body selectable" ng-click="editNote()" stop-event="click" oc-click-focus="{selector: '.expandingArea textarea', timeout: 0}">
+                    <!--
+                    <a class="open-fullscreen-note">
+                    	<span class="icon note-fullscreen"></span>
+                    </a>
+                    -->
+                    <div class="content-fakeable">
+                    	<div class="display-view" ng-hide="route.parameter=='note'">{{ task.note }}</div>
+                        <div class="edit-view" ng-show="route.parameter=='note'">
+                            <div class="expandingArea active">
+                            	<pre><span>{{ task.note }}</span><br /><br /></pre>
+                            	<textarea ng-model="task.note"></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="section detail-comments">
+            <ul>
+                <li ng-repeat="comment in task.comments" class="comment-item" rel=" {{ comment.id }} ">
+                    <div class="avatar" avatar userID="{{ comment.userID }}" size="32"></div>
+                    <a class="detail-delete" ng-click="deleteComment(comment.id)" stop-event="click" ng-show="settingsmodel.getById('various').userID == comment.userID">
+                        <span class="icon detail-delete"></span>
+                    </a>
+                    <span class="username">{{ comment.name }}</span>
+                    <div class="comment">{{ comment.comment }}</div>
+                    <span class="time"> {{ comment.time | dateFromNow }} </span>
+                </li>
+            </ul>
+        </div>
     </div>
     <div class="footer">
+        <div class="detail-addcomment">
+            <input type="text" placeholder="{{ commentStrings().input }}" ng-model="CommentContent" ng-keydown="sendComment($event)">
+            <input type="button" ng-click="addComment()" name="addComment" value="{{ commentStrings().button }}" ng-class="{'active':CommentContent}">
+        </div>
     	<a class="detail-trash" ng-click="deleteTask(task.id)" stop-event="click">
         	<span class="icon detail-trash"></span>
         </a>

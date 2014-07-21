@@ -187,6 +187,9 @@
   text-decoration: line-through;
   text-shadow: none;
 }
+#content li.task-item:last-child {
+  height: 39px;
+}
 #content li.task-item:last-child .task-body {
   border-width: 1px;
 }
@@ -636,7 +639,7 @@
   border-top: 1px solid #D3D3D3;
   bottom: 0;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
-  height: 35px;
+  height: 65px;
   left: 0;
   position: absolute;
   right: 0;
@@ -647,8 +650,45 @@
 }
 #task-details div.footer .icon {
   position: absolute;
-  top: 8px;
+  bottom: 7px;
   left: 8px;
+}
+#task-details div.footer .detail-addcomment {
+  padding: 4px 10px 0;
+}
+#task-details div.footer .detail-addcomment input {
+  background: none repeat scroll 0 0 white;
+  border: 1px solid #bdbcbb;
+  border-radius: 0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+  box-sizing: border-box;
+  color: #423e3e;
+  font-family: "Helvetica Neue", "Helvetica", "Arial", Sans-Serif;
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 2px;
+  outline: medium none;
+  padding: 4px;
+  transition: all 0.2s ease-in-out 0s;
+}
+#task-details div.footer .detail-addcomment input[type="text"] {
+  width: 230px;
+}
+#task-details div.footer .detail-addcomment input[type="button"] {
+  float: right;
+  margin-right: 0;
+  color: #BBB;
+  cursor: default;
+}
+#task-details div.footer .detail-addcomment input[type="button"].active {
+  color: #fff;
+  background: -webkit-linear-gradient(top, #5cb6e7 0%, #317cd7 100%) repeat scroll 0 0 transparent;
+  background: -moz-linear-gradient(center top, #5cb6e7 0%, #317cd7 100%) repeat scroll 0 0 transparent;
+  background: -ms-linear-gradient(center top, #5cb6e7 0%, #317cd7 100%) repeat scroll 0 0 transparent;
+  background: -o-linear-gradient(center top, #5cb6e7 0%, #317cd7 100%) repeat scroll 0 0 transparent;
+  background: linear-gradient(top, #5cb6e7 0%, #317cd7 100%) repeat scroll 0 0 transparent;
+  transition: none;
+  cursor: pointer;
 }
 #task-details.completed .body .section .section-title {
   color: #9FA2A6 !important;
@@ -723,7 +763,7 @@
   position: relative;
 }
 #task-details .body {
-  bottom: 36px;
+  bottom: 65px;
   left: 0;
   overflow: auto;
   position: absolute;
@@ -742,7 +782,7 @@
   border-color: #CFCFCF;
   font-size: 13px;
   line-height: 26px;
-  margin: 20px;
+  margin: 0 20px;
   padding: 5px 15px;
   cursor: text;
 }
@@ -956,6 +996,53 @@
 #task-details .body .section.detail-reminder.date .section-description {
   display: block;
 }
+#task-details .body .section.detail-note {
+  padding: 20px 0;
+  height: auto;
+}
+#task-details .body .section.detail-comments {
+  background: none;
+  padding: 10px 0;
+  height: auto;
+}
+#task-details .body .section.detail-comments .comment-item {
+  padding: 5px 55px 0;
+  position: relative;
+}
+#task-details .body .section.detail-comments .comment-item .icon.detail-delete {
+  top: 5px;
+}
+#task-details .body .section.detail-comments .comment-item:hover .icon.detail-delete {
+  display: block;
+}
+#task-details .body .section.detail-comments .comment-item .avatar {
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+#task-details .body .section.detail-comments .comment-item .avatar img {
+  height: 100%;
+  width: 100%;
+}
+#task-details .body .section.detail-comments .comment-item .username {
+  display: inline-block;
+  font-weight: bold;
+}
+#task-details .body .section.detail-comments .comment-item .time {
+  color: #9fa2a6;
+  font-size: 11px;
+}
+#task-details .body .section.detail-addcomment {
+  background: url("../img/divider.svg") repeat-x scroll center top transparent;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+}
 #modal-wrapper {
   position: absolute;
   width: 100%;
@@ -986,7 +1073,11 @@
   min-height: 100px;
 }
 .button {
-  background-image: -moz-linear-gradient(center top, #5cb6e7 0px, #317cd7 100%);
+  background: -webkit-linear-gradient(top, #5cb6e7 0%, #317cd7 100%) repeat scroll 0 0 transparent;
+  background: -moz-linear-gradient(center top, #5cb6e7 0%, #317cd7 100%) repeat scroll 0 0 transparent;
+  background: -ms-linear-gradient(center top, #5cb6e7 0%, #317cd7 100%) repeat scroll 0 0 transparent;
+  background: -o-linear-gradient(center top, #5cb6e7 0%, #317cd7 100%) repeat scroll 0 0 transparent;
+  background: linear-gradient(top, #5cb6e7 0%, #317cd7 100%) repeat scroll 0 0 transparent;
   border-color: #0c67a5;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset;
   color: #fff;
@@ -1057,6 +1148,11 @@ td.ui-timepicker-hours table {
 }
 .ui-timepicker table td a.ui-state-active {
   background: -moz-linear-gradient(center top, #33a3ef, #168ad4) repeat scroll 0 0 transparent !important;
+  background: -webkit-linear-gradient(top, #33a3ef 0%, #168ad4 100%) repeat scroll 0 0 transparent;
+  background: -moz-linear-gradient(center top, #33a3ef 0%, #168ad4 100%) repeat scroll 0 0 transparent;
+  background: -ms-linear-gradient(center top, #33a3ef 0%, #168ad4 100%) repeat scroll 0 0 transparent;
+  background: -o-linear-gradient(center top, #33a3ef 0%, #168ad4 100%) repeat scroll 0 0 transparent;
+  background: linear-gradient(top, #33a3ef 0%, #168ad4 100%) repeat scroll 0 0 transparent;
   border-radius: 3px 3px 3px 3px;
   color: white;
   opacity: 1;

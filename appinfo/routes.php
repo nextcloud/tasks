@@ -243,6 +243,26 @@ $this->create('task_reminder', '/tasks/{taskID}/reminder')
 		}
 	);
 
+$this->create('task_comment', '/tasks/{taskID}/comment')
+	->post()
+	->action(
+		function($params){
+			session_write_close();
+			$dispatcher = new Dispatcher($params);
+			$dispatcher->dispatch('TasksController', 'addComment');
+		}
+	);
+
+$this->create('task_deletecomment', '/tasks/{taskID}/comment/{commentID}/delete')
+	->post()
+	->action(
+		function($params){
+			session_write_close();
+			$dispatcher = new Dispatcher($params);
+			$dispatcher->dispatch('TasksController', 'deleteComment');
+		}
+	);
+
 /*
  * Settings
  */

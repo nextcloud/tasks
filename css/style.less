@@ -209,8 +209,11 @@
 					text-shadow: none;
 				}
 			}
-			&:last-child .task-body{
-				border-width: 1px;
+			&:last-child{
+				height: 39px;
+				.task-body{
+					border-width: 1px;
+				}
 			}
 			.task-body{
 				-moz-box-sizing: border-box;
@@ -674,12 +677,11 @@
 		position: relative;
 	}
 	div.footer{
-		// background: none repeat scroll 0 0 #f1f1f1;
 		background: url("../img/bgTask.png") repeat scroll 0 0 #FFFFFF;
 		border-top: 1px solid #D3D3D3;
 		bottom: 0;
 		box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
-		height: 35px;
+		height: 65px;
 		left: 0;
 		position: absolute;
 		right: 0;
@@ -689,8 +691,41 @@
 		}
 		.icon{
 			position:absolute;
-			top:8px;
+			bottom:7px;
 			left:8px;
+		}
+		.detail-addcomment{
+			padding: 4px 10px 0;
+			input{
+				background: none repeat scroll 0 0 white;
+				border: 1px solid #bdbcbb;
+				border-radius: 0;
+				box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+				box-sizing: border-box;
+				color: #423e3e;
+				font-family: "Helvetica Neue","Helvetica","Arial",Sans-Serif;
+				font-size: 13px;
+				font-weight: 500;
+				margin-top: 2px;
+				outline: medium none;
+				padding: 4px;
+				transition: all 0.2s ease-in-out 0s;
+				&[type="text"]{
+					width: 230px;
+				}
+				&[type="button"]{
+					float: right;
+					margin-right: 0;
+					color: #BBB;
+					cursor: default;
+					&.active{
+						color: #fff;
+						.background-gradient(#5cb6e7,#317cd7);
+						transition: none;
+						cursor: pointer;
+					}
+				}
+			}
 		}
 	}
 	&.completed{
@@ -772,7 +807,7 @@
 		}
 	}
 	.body{
-		bottom: 36px;
+		bottom: 65px;
 		left: 0;
 		overflow: auto;
 		position: absolute;
@@ -786,7 +821,7 @@
 			// box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 1px 0 #F8F5DB inset;
 			font-size: 13px;
 			line-height: 26px;
-			margin: 20px;
+			margin: 0 20px;
 			padding: 5px 15px;
 			cursor:text;
 			.expandingArea{
@@ -1002,6 +1037,56 @@
 					}
 				}
 			}
+			&.detail-note{
+				padding: 20px 0;
+				height:auto;
+			}
+			&.detail-comments{
+				background: none;
+				padding: 10px 0;
+				height: auto;
+				.comment-item{
+					padding: 5px 55px 0;
+					position: relative;
+					.icon.detail-delete{
+						top: 5px;
+					}
+					&:hover{
+						.icon.detail-delete{
+							display: block;
+						}
+					}
+					.avatar{
+						width: 32px;
+						height: 32px;
+						position: absolute;
+						left: 10px;
+						top: 10px;
+						border-radius: 2px;
+						overflow: hidden;
+						img{
+							height: 100%;
+							width: 100%;
+						}
+					}
+					.username{
+						display: inline-block;
+						font-weight: bold;
+					}
+					.comment{}
+					.time{
+						color: #9fa2a6;
+						font-size: 11px;
+					}
+				}
+			}
+			&.detail-addcomment{
+				background: url("../img/divider.svg") repeat-x scroll center top transparent;
+				bottom: 0;
+				left: 0;
+				position: absolute;
+				right: 0;
+			}
 		}
 	}
 }
@@ -1039,7 +1124,8 @@
 	}
 }
 .button{
-    background-image: -moz-linear-gradient(center top , #5cb6e7 0px, #317cd7 100%);
+    // background-image: linear-gradient(center top , #5cb6e7 0px, #317cd7 100%);
+    .background-gradient(#5cb6e7, #317cd7);
     border-color: #0c67a5;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset;
     color: #fff;
@@ -1115,6 +1201,7 @@ td.ui-timepicker-hours table{
 .ui-timepicker{
 	table td a.ui-state-active{
 		background: -moz-linear-gradient(center top , #33A3EF, #168AD4) repeat scroll 0 0 transparent !important;
+		.background-gradient( #33A3EF, #168AD4);
 		border-radius: 3px 3px 3px 3px;
 		color: white;
 		opacity: 1;
