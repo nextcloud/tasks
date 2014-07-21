@@ -298,6 +298,7 @@ $timeout, $routeParams, SettingsModel) ->
 					comment:	CommentContent
 					taskID:		_$scope.route.taskID
 					time:		moment().format('YYYYMMDDTHHmmss')
+					name:		$('#expandDisplayName').text()
 				}
 
 				_tasksbusinesslayer.addComment comment

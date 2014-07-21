@@ -112,7 +112,7 @@
                     <a class="detail-delete" ng-click="deleteComment(comment.id)" stop-event="click">
                         <span class="icon detail-delete"></span>
                     </a>
-                    <span class="username">{{ comment.userID }}</span>
+                    <span class="username">{{ comment.name }}</span>
                     <div class="comment">{{ comment.comment }}</div>
                     <span class="time"> {{ comment.time}} </span>
                 </li>

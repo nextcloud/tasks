@@ -512,6 +512,7 @@ class TasksController extends Controller {
 				'taskID' => $taskId,
 				'id' => $commentId,
 				'tmpID' => $this->params('tmpID'),
+				'name' => \OCP\USER::getDisplayName(),
 				'userID' => $userId,
 				'comment' => $comment,
 				'time' => $now->format('Ymd\THis')

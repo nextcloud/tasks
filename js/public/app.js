@@ -150,7 +150,9 @@
       scope: false,
       link: function(scope, elm, attr) {
         return attr.$observe('userID', function() {
-          return elm.avatar(attr.userid, attr.size);
+          if (attr.userid) {
+            return elm.avatar(attr.userid, attr.size);
+          }
         });
       }
     };
@@ -687,7 +689,8 @@
               tmpID: 'newComment' + Date.now(),
               comment: CommentContent,
               taskID: _$scope.route.taskID,
-              time: moment().format('YYYYMMDDTHHmmss')
+              time: moment().format('YYYYMMDDTHHmmss'),
+              name: $('#expandDisplayName').text()
             };
             _tasksbusinesslayer.addComment(comment, function(data) {
               _$tasksmodel.updateComment(data.comment);

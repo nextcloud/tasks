@@ -179,6 +179,7 @@ Class helper {
 				$comments_parsed[] = array(
 					'id' => (int)$com['ID']->value,
 					'userID' => $com['USERID']->value,
+					'name' => \OCP\USER::getDisplayName($com['USERID']->value),
 					'comment' => $com->value,
 					'time' => $time
 					);
