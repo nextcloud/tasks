@@ -167,7 +167,10 @@ angular.module('Tasks').factory 'TasksModel',
 
 		addComment: (comment) ->
 			task = @getById(comment.taskID)
-			task.comments.push(comment)
+			if task.comments
+				task.comments.push(comment)
+			else
+				task.comments = [comment]
 
 		updateComment: (comment) ->
 			task = @getById(comment.taskID)

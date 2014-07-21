@@ -2243,7 +2243,11 @@
         TasksModel.prototype.addComment = function(comment) {
           var task;
           task = this.getById(comment.taskID);
-          return task.comments.push(comment);
+          if (task.comments) {
+            return task.comments.push(comment);
+          } else {
+            return task.comments = [comment];
+          }
         };
 
         TasksModel.prototype.updateComment = function(comment) {
