@@ -209,8 +209,11 @@
 					text-shadow: none;
 				}
 			}
-			&:last-child .task-body{
-				border-width: 1px;
+			&:last-child{
+				height: 39px;
+				.task-body{
+					border-width: 1px;
+				}
 			}
 			.task-body{
 				-moz-box-sizing: border-box;
@@ -713,6 +716,14 @@
 				&[type="button"]{
 					float: right;
 					margin-right: 0;
+					color: #BBB;
+					cursor: default;
+					&.active{
+						color: #fff;
+						.background-gradient(#5cb6e7,#317cd7);
+						transition: none;
+						cursor: pointer;
+					}
 				}
 			}
 		}
@@ -1113,7 +1124,8 @@
 	}
 }
 .button{
-    background-image: -moz-linear-gradient(center top , #5cb6e7 0px, #317cd7 100%);
+    // background-image: linear-gradient(center top , #5cb6e7 0px, #317cd7 100%);
+    .background-gradient(#5cb6e7, #317cd7);
     border-color: #0c67a5;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset;
     color: #fff;
@@ -1189,6 +1201,7 @@ td.ui-timepicker-hours table{
 .ui-timepicker{
 	table td a.ui-state-active{
 		background: -moz-linear-gradient(center top , #33A3EF, #168AD4) repeat scroll 0 0 transparent !important;
+		.background-gradient( #33A3EF, #168AD4);
 		border-radius: 3px 3px 3px 3px;
 		color: white;
 		opacity: 1;

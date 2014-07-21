@@ -187,6 +187,9 @@
   text-decoration: line-through;
   text-shadow: none;
 }
+#content li.task-item:last-child {
+  height: 39px;
+}
 #content li.task-item:last-child .task-body {
   border-width: 1px;
 }
@@ -674,6 +677,18 @@
 #task-details div.footer .detail-addcomment input[type="button"] {
   float: right;
   margin-right: 0;
+  color: #BBB;
+  cursor: default;
+}
+#task-details div.footer .detail-addcomment input[type="button"].active {
+  color: #fff;
+  background: -webkit-linear-gradient(top, #5cb6e7 0%, #317cd7 100%) repeat scroll 0 0 transparent;
+  background: -moz-linear-gradient(center top, #5cb6e7 0%, #317cd7 100%) repeat scroll 0 0 transparent;
+  background: -ms-linear-gradient(center top, #5cb6e7 0%, #317cd7 100%) repeat scroll 0 0 transparent;
+  background: -o-linear-gradient(center top, #5cb6e7 0%, #317cd7 100%) repeat scroll 0 0 transparent;
+  background: linear-gradient(top, #5cb6e7 0%, #317cd7 100%) repeat scroll 0 0 transparent;
+  transition: none;
+  cursor: pointer;
 }
 #task-details.completed .body .section .section-title {
   color: #9FA2A6 !important;
@@ -1058,7 +1073,11 @@
   min-height: 100px;
 }
 .button {
-  background-image: -moz-linear-gradient(center top, #5cb6e7 0px, #317cd7 100%);
+  background: -webkit-linear-gradient(top, #5cb6e7 0%, #317cd7 100%) repeat scroll 0 0 transparent;
+  background: -moz-linear-gradient(center top, #5cb6e7 0%, #317cd7 100%) repeat scroll 0 0 transparent;
+  background: -ms-linear-gradient(center top, #5cb6e7 0%, #317cd7 100%) repeat scroll 0 0 transparent;
+  background: -o-linear-gradient(center top, #5cb6e7 0%, #317cd7 100%) repeat scroll 0 0 transparent;
+  background: linear-gradient(top, #5cb6e7 0%, #317cd7 100%) repeat scroll 0 0 transparent;
   border-color: #0c67a5;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset;
   color: #fff;
@@ -1129,6 +1148,11 @@ td.ui-timepicker-hours table {
 }
 .ui-timepicker table td a.ui-state-active {
   background: -moz-linear-gradient(center top, #33a3ef, #168ad4) repeat scroll 0 0 transparent !important;
+  background: -webkit-linear-gradient(top, #33a3ef 0%, #168ad4 100%) repeat scroll 0 0 transparent;
+  background: -moz-linear-gradient(center top, #33a3ef 0%, #168ad4 100%) repeat scroll 0 0 transparent;
+  background: -ms-linear-gradient(center top, #33a3ef 0%, #168ad4 100%) repeat scroll 0 0 transparent;
+  background: -o-linear-gradient(center top, #33a3ef 0%, #168ad4 100%) repeat scroll 0 0 transparent;
+  background: linear-gradient(top, #33a3ef 0%, #168ad4 100%) repeat scroll 0 0 transparent;
   border-radius: 3px 3px 3px 3px;
   color: white;
   opacity: 1;
