@@ -184,8 +184,8 @@ Class helper {
 					'time' => $time
 					);
 			}
+			$task['comments'] = $comments_parsed;
 		}
-		$task['comments'] = $comments_parsed;
 		return $task;
 	}
 
