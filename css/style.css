@@ -265,7 +265,7 @@
 #content li.task-item .task-body .duedate.overdue {
   color: #B3312D;
 }
-#task-lists {
+#app-navigation {
   background: url("../img/bgTasks.png") repeat scroll 0 0 #e3e3e3;
   position: absolute;
   top: 0;
@@ -276,7 +276,7 @@
   border-right: 1px solid #CFCFCF;
   font-size: 13px;
 }
-#task-lists div.header {
+#app-navigation div.header {
   height: 37px;
   border-bottom: 1px solid #AFAFAF;
   background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%) repeat scroll 0 0 transparent;
@@ -285,7 +285,7 @@
   background: -o-linear-gradient(center top, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%) repeat scroll 0 0 transparent;
   background: linear-gradient(top, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%) repeat scroll 0 0 transparent;
 }
-#task-lists div.header a {
+#app-navigation div.header a {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -294,22 +294,22 @@
   height: 20px;
   line-height: 20px;
 }
-#task-lists div.header.search #search-toolbar {
+#app-navigation div.header.search #search-toolbar {
   display: block;
 }
-#task-lists div.header.search #main-toolbar {
+#app-navigation div.header.search #main-toolbar {
   display: none;
 }
-#task-lists div.header #search-toolbar {
+#app-navigation div.header #search-toolbar {
   display: none;
 }
-#task-lists div.header #search-toolbar .icon.menu-search {
+#app-navigation div.header #search-toolbar .icon.menu-search {
   left: 41px;
   position: absolute;
   top: 9px;
   z-index: 100;
 }
-#task-lists div.header #search-toolbar input {
+#app-navigation div.header #search-toolbar input {
   border-radius: 15px 15px 15px 15px;
   left: 36px;
   padding: 4px 4px 4px 25px;
@@ -323,13 +323,13 @@
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
   margin: 0;
 }
-#task-lists div.header #search-toolbar input:focus {
+#app-navigation div.header #search-toolbar input:focus {
   background-color: #F8F8F8;
   border: 1px solid rgba(43, 136, 217, 0.65);
   box-shadow: 0 0 4px rgba(43, 136, 217, 0.32), 0 1px 1px rgba(255, 255, 255, 0.43), 0 2px 4px rgba(43, 136, 217, 0.12) inset, 0 0 4px rgba(43, 136, 217, 0.2) inset;
 }
-#task-lists div.header #search,
-#task-lists div.header #cancel-search {
+#app-navigation div.header #search,
+#app-navigation div.header #cancel-search {
   position: absolute;
   right: 0;
   top: 0;
@@ -337,7 +337,7 @@
   padding: 8px;
   display: block;
 }
-#task-lists div.header #loading {
+#app-navigation div.header #loading {
   position: absolute;
   left: 0;
   top: 0;
@@ -345,7 +345,7 @@
   padding: 10px;
   display: block;
 }
-#task-lists div.header #loading span {
+#app-navigation div.header #loading span {
   height: 20px;
   width: 20px;
   display: inline-block;
@@ -353,18 +353,18 @@
   vertical-align: middle;
   background-size: 20px 20px;
 }
-#task-lists div.header #loading span.done {
+#app-navigation div.header #loading span.done {
   background: url("../img/sprites.svg") repeat-x scroll center bottom transparent;
   background-position: 0 0;
 }
-#task-lists div.footer {
+#app-navigation div.footer {
   height: 40px;
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
 }
-#task-lists div.footer a {
+#app-navigation div.footer a {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -373,10 +373,10 @@
   height: 20px;
   line-height: 20px;
 }
-#task-lists div.footer a.settings {
+#app-navigation div.footer a.settings {
   right: 0;
 }
-#task-lists div.scroll {
+#app-navigation div.scroll {
   position: absolute;
   top: 37px;
   bottom: 40px;
@@ -384,24 +384,24 @@
   left: 0;
   overflow: auto;
 }
-#task-lists a.addlist {
+#app-navigation a.addlist {
   background: none repeat scroll 0 0 transparent;
 }
-#task-lists .count {
+#app-navigation .count {
   color: #909090;
   float: right;
 }
-#task-lists .addlist:hover .title {
+#app-navigation .addlist:hover .title {
   color: #625F5F;
 }
-#task-lists .addlist:hover .detail-add {
+#app-navigation .addlist:hover .detail-add {
   opacity: 1;
 }
-#task-lists .addlist .title {
+#app-navigation .addlist .title {
   color: #909090;
 }
-#task-lists .addlist,
-#task-lists li a {
+#app-navigation .addlist,
+#app-navigation li a {
   background: url("../img/divider.svg") repeat-x scroll center bottom transparent;
   display: block;
   -moz-box-sizing: border-box;
@@ -414,11 +414,13 @@
   color: #413D3F;
   font-weight: bold;
   text-shadow: 0 1px 0 white;
+  white-space: normal;
+  line-height: 20px;
 }
-#task-lists #collection_lists li a {
+#app-navigation #collection_lists li a {
   padding-right: 8px;
 }
-#task-lists input.edit {
+#app-navigation input.edit {
   border: 1px solid #3F84B3;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1) inset;
   font-family: "Helvetica Neue", "Helvetica", "Arial", Sans-Serif;
@@ -433,62 +435,62 @@
   margin: 0;
   border-radius: 0;
 }
-#task-lists li {
+#app-navigation li {
   height: 34px;
   overflow: hidden;
   position: relative;
   transition: height 300ms ease 0s !important;
 }
-#task-lists li.active {
+#app-navigation li.active {
   border-top: 2px solid #ECECEC;
   margin-top: -2px;
 }
-#task-lists li.active a {
+#app-navigation li.active a {
   background: url("../img/bgTasksActive.png") repeat scroll 0 0 transparent;
   border-bottom: 1px solid transparent;
   color: white;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
 }
-#task-lists li.active a .count {
+#app-navigation li.active a .count {
   color: white;
 }
-#task-lists li.active .icon.collection-all {
+#app-navigation li.active .icon.collection-all {
   background-position: -200px -20px;
 }
-#task-lists li.active .icon.collection-current {
+#app-navigation li.active .icon.collection-current {
   background-position: -240px -100px;
 }
-#task-lists li.active .icon.list-list {
+#app-navigation li.active .icon.list-list {
   background-position: -40px -20px;
 }
-#task-lists li.active .icon.collection-starred {
+#app-navigation li.active .icon.collection-starred {
   background-position: -20px -20px;
 }
-#task-lists li.active .icon.collection-today {
+#app-navigation li.active .icon.collection-today {
   background-position: -240px -40px;
   color: white;
   text-shadow: 0 1px 0 #336692;
 }
-#task-lists li.active .icon.collection-week {
+#app-navigation li.active .icon.collection-week {
   background-position: -220px -20px;
 }
-#task-lists li.active .icon.collection-completed {
+#app-navigation li.active .icon.collection-completed {
   background-position: -100px -20px;
 }
-#task-lists li.dragOver a {
+#app-navigation li.dragOver a {
   border: 2px solid #2b88d9;
   padding: 6px 10px 6px 6px;
 }
-#task-lists li.dragOver a .title {
+#app-navigation li.dragOver a .title {
   left: 38px;
   right: 28px;
   top: 6px;
 }
-#task-lists li.animate-up {
+#app-navigation li.animate-up {
   height: 0px !important;
   border-bottom: 0;
 }
-#task-lists li input.edit {
+#app-navigation li input.edit {
   border: 1px solid #3F84B3;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1) inset;
   font-family: "Helvetica Neue", "Helvetica", "Arial", Sans-Serif;
@@ -503,7 +505,7 @@
   margin: 0;
   border-radius: 0;
 }
-#task-lists .title {
+#app-navigation .title {
   position: absolute;
   left: 40px;
   right: 30px;
@@ -512,24 +514,27 @@
   overflow: hidden;
   white-space: nowrap;
 }
-#task-tasks {
+#app-content {
   -webkit-transition: right 0.4s ease-in-out;
   -moz-transition: right 0.4s ease-in-out;
   -ms-transition: right 0.4s ease-in-out;
   -o-transition: right 0.4s ease-in-out;
   transition: right 0.4s ease-in-out;
+  background: url("../img/bgBig.png") repeat scroll 0 0 #f3f3f3;
   position: absolute;
   left: 250px;
   right: 0;
   top: 0;
   bottom: 0;
   overflow-x: hidden;
+}
+#app-content div.content-wrapper {
   padding: 6px 17px 15px 17px;
 }
-#task-tasks.details-visible {
+#app-content.details-visible {
   right: 370px;
 }
-#task-tasks h2 {
+#app-content h2 {
   font-weight: bold;
   color: #909090;
   font-size: 12px;
@@ -538,27 +543,27 @@
   text-shadow: 0 1px 0 #ffffff;
   word-wrap: break-word;
 }
-#task-tasks #add-task {
+#app-content #add-task {
   margin: 12px 0;
   padding: 6px 12px;
   position: relative;
   border: 1px solid #CCCCCC;
   background: none repeat scroll 0 0 #EEEEEE;
 }
-#task-tasks #add-task.focus {
+#app-content #add-task.focus {
   background-color: #FFFFFF;
 }
-#task-tasks #add-task.focus .icon.input-date {
+#app-content #add-task.focus .icon.input-date {
   display: block;
 }
-#task-tasks #add-task.focus .icon.input-star {
+#app-content #add-task.focus .icon.input-star {
   display: block;
 }
-#task-tasks #add-task .icon {
+#app-content #add-task .icon {
   position: absolute;
   top: 6px;
 }
-#task-tasks #add-task input {
+#app-content #add-task input {
   -moz-box-sizing: border-box;
   font-size: 13px;
   font-weight: bold;
@@ -573,43 +578,43 @@
   margin: 0;
   cursor: text;
 }
-#task-tasks div.task-list h2.heading text,
-#task-tasks div.task-list h2.heading-hiddentasks text {
+#app-content div.task-list h2.heading text,
+#app-content div.task-list h2.heading-hiddentasks text {
   cursor: pointer;
 }
-#task-tasks div.task-list h2.heading .icon.toggle-completed-tasks,
-#task-tasks div.task-list h2.heading-hiddentasks .icon.toggle-completed-tasks {
+#app-content div.task-list h2.heading .icon.toggle-completed-tasks,
+#app-content div.task-list h2.heading-hiddentasks .icon.toggle-completed-tasks {
   float: right;
 }
-#task-tasks div.task-list .loadmore {
+#app-content div.task-list .loadmore {
   font-size: 11px;
   margin-top: 10px;
   text-align: center;
 }
-#task-tasks div.task-list .loadmore span:hover {
+#app-content div.task-list .loadmore span:hover {
   color: #A0A0A0;
   cursor: pointer;
 }
-#task-tasks div.task-list.completed-hidden ol.completed-tasks {
+#app-content div.task-list.completed-hidden ol.completed-tasks {
   display: none;
 }
-#task-tasks div.task-list.completed-hidden h2.heading-hiddentasks text {
+#app-content div.task-list.completed-hidden h2.heading-hiddentasks text {
   opacity: 0.7;
 }
-#task-tasks div.task-list.completed-hidden h2.heading-hiddentasks .icon.toggle-completed-tasks {
+#app-content div.task-list.completed-hidden h2.heading-hiddentasks .icon.toggle-completed-tasks {
   opacity: 0.5;
   background-position: -120px -20px;
 }
-#task-tasks div.task-list.completed-hidden h2.heading-hiddentasks:hover text {
+#app-content div.task-list.completed-hidden h2.heading-hiddentasks:hover text {
   opacity: 1;
 }
-#task-tasks div.task-list.completed-hidden h2.heading-hiddentasks:hover .icon.toggle-completed-tasks {
+#app-content div.task-list.completed-hidden h2.heading-hiddentasks:hover .icon.toggle-completed-tasks {
   opacity: 0.7;
 }
-#task-tasks div.task-list.completed-hidden div.loadmore {
+#app-content div.task-list.completed-hidden div.loadmore {
   display: none;
 }
-#task-tasks div.task-list .grouped-tasks {
+#app-content div.task-list .grouped-tasks {
   position: relative;
 }
 #task-details {
@@ -622,19 +627,24 @@
   right: -400px;
   bottom: 0;
   top: 0;
-  padding: 18px 10px 10px 0;
-  width: 360px;
+  width: 380px;
+  max-width: 100%;
+  padding: 18px 0;
 }
 #task-details.details-visible {
   right: 0;
 }
-#task-details > div {
+#task-details div.content-wrapper {
+  padding: 0 10px;
+  height: 100%;
+}
+#task-details div.content-wrapper > div {
   background: url("../img/bgTaskDetail.png") repeat scroll 0 0 #ffffff;
   border: 1px solid #CCCCCC;
   height: 100%;
   position: relative;
 }
-#task-details div.footer {
+#task-details div.content-wrapper div.footer {
   background: url("../img/bgTask.png") repeat scroll 0 0 #ffffff;
   border-top: 1px solid #D3D3D3;
   bottom: 0;
@@ -644,19 +654,19 @@
   position: absolute;
   right: 0;
 }
-#task-details div.footer .detail-close .icon {
+#task-details div.content-wrapper div.footer .detail-close .icon {
   left: auto;
   right: 8px;
 }
-#task-details div.footer .icon {
+#task-details div.content-wrapper div.footer .icon {
   position: absolute;
   bottom: 7px;
   left: 8px;
 }
-#task-details div.footer .detail-addcomment {
+#task-details div.content-wrapper div.footer .detail-addcomment {
   padding: 4px 10px 0;
 }
-#task-details div.footer .detail-addcomment input {
+#task-details div.content-wrapper div.footer .detail-addcomment input {
   background: none repeat scroll 0 0 white;
   border: 1px solid #bdbcbb;
   border-radius: 0;
@@ -671,16 +681,16 @@
   padding: 4px;
   transition: all 0.2s ease-in-out 0s;
 }
-#task-details div.footer .detail-addcomment input[type="text"] {
+#task-details div.content-wrapper div.footer .detail-addcomment input[type="text"] {
   width: 230px;
 }
-#task-details div.footer .detail-addcomment input[type="button"] {
+#task-details div.content-wrapper div.footer .detail-addcomment input[type="button"] {
   float: right;
   margin-right: 0;
   color: #BBB;
   cursor: default;
 }
-#task-details div.footer .detail-addcomment input[type="button"].active {
+#task-details div.content-wrapper div.footer .detail-addcomment input[type="button"].active {
   color: #fff;
   background: -webkit-linear-gradient(top, #5cb6e7 0%, #317cd7 100%) repeat scroll 0 0 transparent;
   background: -moz-linear-gradient(center top, #5cb6e7 0%, #317cd7 100%) repeat scroll 0 0 transparent;
@@ -690,16 +700,16 @@
   transition: none;
   cursor: pointer;
 }
-#task-details.completed .body .section .section-title {
+#task-details div.content-wrapper.completed .body .section .section-title {
   color: #9FA2A6 !important;
 }
-#task-details.completed .body .section .icon.detail-date {
+#task-details div.content-wrapper.completed .body .section .icon.detail-date {
   background-position: -100px -40px !important;
 }
-#task-details.completed .body .section .icon.detail-reminder {
+#task-details div.content-wrapper.completed .body .section .icon.detail-reminder {
   background-position: -40px -40px !important;
 }
-#task-details .title {
+#task-details div.content-wrapper .title {
   background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.05) 100%) repeat scroll 0 0 transparent;
   background: -moz-linear-gradient(center top, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.05) 100%) repeat scroll 0 0 transparent;
   background: -ms-linear-gradient(center top, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.05) 100%) repeat scroll 0 0 transparent;
@@ -714,15 +724,15 @@
   text-shadow: 0 1px 0 white;
   word-wrap: break-word;
 }
-#task-details .title .title-text {
+#task-details div.content-wrapper .title .title-text {
   cursor: text;
 }
-#task-details .title .title-text.strike-through {
+#task-details div.content-wrapper .title .title-text.strike-through {
   text-decoration: line-through;
   text-shadow: none;
 }
-#task-details .title textarea,
-#task-details .title pre {
+#task-details div.content-wrapper .title textarea,
+#task-details div.content-wrapper .title pre {
   box-shadow: none;
   font-size: 16px;
   font-weight: bold;
@@ -734,7 +744,7 @@
   white-space: pre-wrap;
   word-wrap: break-word;
 }
-#task-details .title pre {
+#task-details div.content-wrapper .title pre {
   border: 0 none !important;
   display: block;
   margin: 0;
@@ -742,7 +752,7 @@
   padding: 0 !important;
   visibility: hidden;
 }
-#task-details .title textarea {
+#task-details div.content-wrapper .title textarea {
   margin: 0;
   border-radius: 0;
   height: 100%;
@@ -753,16 +763,16 @@
   top: 0;
   width: 100%;
 }
-#task-details .title .expandable-container {
+#task-details div.content-wrapper .title .expandable-container {
   background: none repeat scroll 0 0 #FFFFFF;
   border: 1px solid #AAAAAA;
   margin: -1px -4px -1px -7px;
   padding: 0 5px;
 }
-#task-details .title .expandable-container .expandingArea {
+#task-details div.content-wrapper .title .expandable-container .expandingArea {
   position: relative;
 }
-#task-details .body {
+#task-details div.content-wrapper .body {
   bottom: 65px;
   left: 0;
   overflow: auto;
@@ -770,7 +780,7 @@
   right: 0;
   top: 55px;
 }
-#task-details .body .note {
+#task-details div.content-wrapper .body .note {
   background: -webkit-linear-gradient(bottom, #dee2d0 1px, transparent 1px) repeat scroll 0 0 / 100% 26px #f5f5f5;
   background: -moz-linear-gradient(center bottom, #dee2d0 1px, transparent 1px) repeat scroll 0 0 / 100% 26px #f5f5f5;
   background: -ms-linear-gradient(center bottom, #dee2d0 1px, transparent 1px) repeat scroll 0 0 / 100% 26px #f5f5f5;
@@ -786,12 +796,12 @@
   padding: 5px 15px;
   cursor: text;
 }
-#task-details .body .note .expandingArea {
+#task-details div.content-wrapper .body .note .expandingArea {
   position: relative;
   margin-left: -1px;
 }
-#task-details .body .note .expandingArea textarea,
-#task-details .body .note .expandingArea pre {
+#task-details div.content-wrapper .body .note .expandingArea textarea,
+#task-details div.content-wrapper .body .note .expandingArea pre {
   box-shadow: none;
   background: none repeat scroll 0 0 transparent;
   border: medium none;
@@ -802,7 +812,7 @@
   white-space: pre-wrap;
   word-wrap: break-word;
 }
-#task-details .body .note .expandingArea pre {
+#task-details div.content-wrapper .body .note .expandingArea pre {
   border: 0 none !important;
   display: block;
   margin: 0;
@@ -810,7 +820,7 @@
   padding: 0 !important;
   visibility: hidden;
 }
-#task-details .body .note .expandingArea textarea {
+#task-details div.content-wrapper .body .note .expandingArea textarea {
   margin: 0;
   border-radius: 0;
   height: 100%;
@@ -824,29 +834,29 @@
   font-weight: 500;
   outline: medium none;
 }
-#task-details .body .note .note-body,
-#task-details .body .note .note-edit {
+#task-details div.content-wrapper .body .note .note-body,
+#task-details div.content-wrapper .body .note .note-edit {
   cursor: text;
   min-height: 140px;
   word-wrap: break-word;
 }
-#task-details .body .note .note-body a,
-#task-details .body .note .note-edit a {
+#task-details div.content-wrapper .body .note .note-body a,
+#task-details div.content-wrapper .body .note .note-edit a {
   cursor: text;
 }
-#task-details .body .note .note-body .content-fakeable,
-#task-details .body .note .note-edit .content-fakeable,
-#task-details .body .note .note-body .edit-view,
-#task-details .body .note .note-edit .edit-view,
-#task-details .body .note .note-body .display-view,
-#task-details .body .note .note-edit .display-view {
+#task-details div.content-wrapper .body .note .note-body .content-fakeable,
+#task-details div.content-wrapper .body .note .note-edit .content-fakeable,
+#task-details div.content-wrapper .body .note .note-body .edit-view,
+#task-details div.content-wrapper .body .note .note-edit .edit-view,
+#task-details div.content-wrapper .body .note .note-body .display-view,
+#task-details div.content-wrapper .body .note .note-edit .display-view {
   cursor: text !important;
 }
-#task-details .body .note .note-body .display-view,
-#task-details .body .note .note-edit .display-view {
+#task-details div.content-wrapper .body .note .note-body .display-view,
+#task-details div.content-wrapper .body .note .note-edit .display-view {
   white-space: pre-wrap;
 }
-#task-details .body .note .open-fullscreen-note {
+#task-details div.content-wrapper .body .note .open-fullscreen-note {
   margin-top: -2px;
   padding-bottom: 10px;
   padding-left: 10px;
@@ -854,17 +864,17 @@
   right: 23px;
   z-index: 9999;
 }
-#task-details .body .subtasks {
+#task-details div.content-wrapper .body .subtasks {
   background: none repeat scroll 0 0 white;
   border: 1px solid #C9C8BD;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
   margin: 20px;
   position: relative;
 }
-#task-details .body .subtasks.buffer {
+#task-details div.content-wrapper .body .subtasks.buffer {
   padding-bottom: 32px;
 }
-#task-details .body .section {
+#task-details div.content-wrapper .body .section {
   background: url("../img/divider.svg") repeat-x scroll center bottom transparent;
   height: 28px;
   padding: 9px 20px 9px 55px;
@@ -872,7 +882,7 @@
   text-shadow: 0 1px 0 white;
   border-top: none;
 }
-#task-details .body .section input {
+#task-details div.content-wrapper .body .section input {
   -moz-box-sizing: border-box;
   background: none repeat scroll 0 0 white;
   border: 1px solid #BDBCBB;
@@ -887,19 +897,19 @@
   padding: 4px;
   transition: all 0.2s ease-in-out 0s;
 }
-#task-details .body .section input.focus {
+#task-details div.content-wrapper .body .section input.focus {
   background-color: #F8F8F8;
   border: 1px solid rgba(43, 136, 217, 0.65);
   box-shadow: 0 0 4px rgba(43, 136, 217, 0.32), 0 1px 1px rgba(255, 255, 255, 0.43), 0 2px 4px rgba(43, 136, 217, 0.12) inset, 0 0 4px rgba(43, 136, 217, 0.2) inset;
 }
-#task-details .body .section input[type="range"] {
+#task-details div.content-wrapper .body .section input[type="range"] {
   border: medium none;
   box-shadow: none;
   padding-top: 10px;
   width: 200px;
   margin: 0px;
 }
-#task-details .body .section select {
+#task-details div.content-wrapper .body .section select {
   background-color: rgba(0, 0, 0, 0);
   border-radius: 0px;
   border: 1px solid #CCC;
@@ -909,113 +919,113 @@
   font-weight: normal;
   height: 19px;
 }
-#task-details .body .section .icon {
+#task-details div.content-wrapper .body .section .icon {
   left: 16px;
   position: absolute;
   top: 13px;
 }
-#task-details .body .section .icon.detail-delete {
+#task-details div.content-wrapper .body .section .icon.detail-delete {
   display: none;
   left: auto;
   right: 22px;
 }
-#task-details .body .section .icon.detail-delete:hover {
+#task-details div.content-wrapper .body .section .icon.detail-delete:hover {
   opacity: 0.8;
 }
-#task-details .body .section .icon.detail-save {
+#task-details div.content-wrapper .body .section .icon.detail-save {
   display: none;
   left: auto;
   right: 40px;
 }
-#task-details .body .section .icon.detail-date,
-#task-details .body .section .icon.detail-start {
+#task-details div.content-wrapper .body .section .icon.detail-date,
+#task-details div.content-wrapper .body .section .icon.detail-start {
   background-position: -220px -80px;
 }
-#task-details .body .section .icon.detail-remindertype {
+#task-details div.content-wrapper .body .section .icon.detail-remindertype {
   display: none;
   left: 38px;
   opacity: 0.4;
 }
-#task-details .body .section .icon.detail-remindertype:hover {
+#task-details div.content-wrapper .body .section .icon.detail-remindertype:hover {
   opacity: 0.8;
 }
-#task-details .body .section .section-title {
+#task-details div.content-wrapper .body .section .section-title {
   color: #9FA2A6;
   font-weight: bold;
   margin-top: 3px;
 }
-#task-details .body .section.date.editing .icon.detail-save {
+#task-details div.content-wrapper .body .section.date.editing .icon.detail-save {
   display: inline-block;
 }
-#task-details .body .section.date.editing .icon.detail-delete {
+#task-details div.content-wrapper .body .section.date.editing .icon.detail-delete {
   display: block;
 }
-#task-details .body .section.date .icon.detail-date,
-#task-details .body .section.date .icon.detail-start {
+#task-details div.content-wrapper .body .section.date .icon.detail-date,
+#task-details div.content-wrapper .body .section.date .icon.detail-start {
   background-position: -220px -40px;
 }
-#task-details .body .section.date .icon.detail-date.overdue,
-#task-details .body .section.date .icon.detail-start.overdue {
+#task-details div.content-wrapper .body .section.date .icon.detail-date.overdue,
+#task-details div.content-wrapper .body .section.date .icon.detail-start.overdue {
   background-position: -220px -60px;
 }
-#task-details .body .section.date .icon.detail-percent {
+#task-details div.content-wrapper .body .section.date .icon.detail-percent {
   background-position: -260px -80px;
 }
-#task-details .body .section.date .icon.detail-reminder {
+#task-details div.content-wrapper .body .section.date .icon.detail-reminder {
   background-position: -40px -60px;
 }
-#task-details .body .section.date .icon.detail-reminder.overdue {
+#task-details div.content-wrapper .body .section.date .icon.detail-reminder.overdue {
   background-position: -40px -80px;
 }
-#task-details .body .section.date:hover .icon.detail-delete {
+#task-details div.content-wrapper .body .section.date:hover .icon.detail-delete {
   display: block;
 }
-#task-details .body .section.date .section-title {
+#task-details div.content-wrapper .body .section.date .section-title {
   color: #4271A6;
 }
-#task-details .body .section.date .section-title.overdue {
+#task-details div.content-wrapper .body .section.date .section-title.overdue {
   color: #B3312D;
 }
-#task-details .body .section.date .section-title.repeat {
+#task-details div.content-wrapper .body .section.date .section-title.repeat {
   margin-top: -2px;
 }
-#task-details .body .section.editing .icon.detail-remindertype {
+#task-details div.content-wrapper .body .section.editing .icon.detail-remindertype {
   display: block;
 }
-#task-details .body .section .icon.detail-remindertype {
+#task-details div.content-wrapper .body .section .icon.detail-remindertype {
   background-position: -260px -40px;
 }
-#task-details .body .section.detail-reminder .section-description {
+#task-details div.content-wrapper .body .section.detail-reminder .section-description {
   display: none;
   font-size: 11px;
   margin-top: -6px;
 }
-#task-details .body .section.detail-reminder .section-description.repeat {
+#task-details div.content-wrapper .body .section.detail-reminder .section-description.repeat {
   display: block;
 }
-#task-details .body .section.detail-reminder.date .section-description {
+#task-details div.content-wrapper .body .section.detail-reminder.date .section-description {
   display: block;
 }
-#task-details .body .section.detail-note {
+#task-details div.content-wrapper .body .section.detail-note {
   padding: 20px 0;
   height: auto;
 }
-#task-details .body .section.detail-comments {
+#task-details div.content-wrapper .body .section.detail-comments {
   background: none;
   padding: 10px 0;
   height: auto;
 }
-#task-details .body .section.detail-comments .comment-item {
+#task-details div.content-wrapper .body .section.detail-comments .comment-item {
   padding: 5px 55px 0;
   position: relative;
 }
-#task-details .body .section.detail-comments .comment-item .icon.detail-delete {
+#task-details div.content-wrapper .body .section.detail-comments .comment-item .icon.detail-delete {
   top: 5px;
 }
-#task-details .body .section.detail-comments .comment-item:hover .icon.detail-delete {
+#task-details div.content-wrapper .body .section.detail-comments .comment-item:hover .icon.detail-delete {
   display: block;
 }
-#task-details .body .section.detail-comments .comment-item .avatar {
+#task-details div.content-wrapper .body .section.detail-comments .comment-item .avatar {
   width: 32px;
   height: 32px;
   position: absolute;
@@ -1024,19 +1034,19 @@
   border-radius: 2px;
   overflow: hidden;
 }
-#task-details .body .section.detail-comments .comment-item .avatar img {
+#task-details div.content-wrapper .body .section.detail-comments .comment-item .avatar img {
   height: 100%;
   width: 100%;
 }
-#task-details .body .section.detail-comments .comment-item .username {
+#task-details div.content-wrapper .body .section.detail-comments .comment-item .username {
   display: inline-block;
   font-weight: bold;
 }
-#task-details .body .section.detail-comments .comment-item .time {
+#task-details div.content-wrapper .body .section.detail-comments .comment-item .time {
   color: #9fa2a6;
   font-size: 11px;
 }
-#task-details .body .section.detail-addcomment {
+#task-details div.content-wrapper .body .section.detail-addcomment {
   background: url("../img/divider.svg") repeat-x scroll center top transparent;
   bottom: 0;
   left: 0;

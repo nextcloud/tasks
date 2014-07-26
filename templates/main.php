@@ -1,5 +1,5 @@
 <div ng-app="Tasks" ng-cloak ng-controller="AppController" ng-click="closeAll()" id="tasks_enhanced_wrapper">
-     <div id="task-lists" ng-controller="ListController">
+    <div id="app-navigation" ng-controller="ListController">
     	<div id="task_lists_header" class="header" ng-class="{'search': status.searchActive}" ng-controller="SearchController">
         	<div id="main-toolbar">
             	<a id="search" ng-click="openSearch()" oc-click-focus="{selector: '#search-toolbar input', timeout: 0}">
@@ -56,26 +56,31 @@
         </div>
     </div>
 
-    <div id="task-tasks" ng-controller="TasksController" ng-class="{'details-visible':route.taskID}">
-    	<div id="add-task" class="add-task" ng-show="showInput()" ng-class="{'focus':status.focusTaskInput}" stop-event="click" >
-            <a class="input-star">
-                <span class="icon input-star "></span>
-            </a>
-            <a class="input-date">
-                <span class="icon input-date"></span>
-            </a>
-            <form ng-submit="addTask(taskName)" name="addTaskForm">
-                <input id="target" ng-disabled="isAddingTask" ng-click="focusInput()" class="transparent" placeholder="{{ getAddString() }}" ng-model="taskName"
-                ng-keydown="checkTaskInput($event)"/>
-            </form>
-        </div>
-        <div class="task-list" ng-class="{'completed-hidden':!settingsmodel.getById('various').showHidden}" ng-switch="route.listID">
-            <?php print_unescaped($this->inc('part.tasklist')); ?>
-            <?php print_unescaped($this->inc('part.collectionall')); ?>
-            <?php print_unescaped($this->inc('part.collectionweek')); ?>
+    <div id="app-content" ng-controller="TasksController" ng-class="{'details-visible':route.taskID}">
+        <div class="content-wrapper">
+        	<div id="add-task" class="add-task" ng-show="showInput()" ng-class="{'focus':status.focusTaskInput}" stop-event="click" >
+                <a class="input-star">
+                    <span class="icon input-star "></span>
+                </a>
+                <a class="input-date">
+                    <span class="icon input-date"></span>
+                </a>
+                <form ng-submit="addTask(taskName)" name="addTaskForm">
+                    <input id="target" ng-disabled="isAddingTask" ng-click="focusInput()" class="transparent" placeholder="{{ getAddString() }}" ng-model="taskName"
+                    ng-keydown="checkTaskInput($event)"/>
+                </form>
+            </div>
+            <div class="task-list" ng-class="{'completed-hidden':!settingsmodel.getById('various').showHidden}" ng-switch="route.listID">
+                <?php print_unescaped($this->inc('part.tasklist')); ?>
+                <?php print_unescaped($this->inc('part.collectionall')); ?>
+                <?php print_unescaped($this->inc('part.collectionweek')); ?>
+            </div>
         </div>
     </div>
-    <div id="task-details" ng-include="'templates/part.details.php'" ng-class="{'details-visible':route.taskID}"></div>
+    <div id="task-details" ng-class="{'details-visible':route.taskID}">
+        <div class="content-wrapper" ng-include="'templates/part.details.php'">
+        </div>
+    </div>
     <script type="text/ng-template" id="part.settings.html">
         <?php print_unescaped($this->inc('part.settings')); ?>
     </script>
