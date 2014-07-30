@@ -74,45 +74,45 @@
       })();
       moment.lang('details', {
         calendar: {
-          lastDay: '[' + t('tasks_enhanced', 'Due yesterday') + '], HH:mm',
-          sameDay: '[' + t('tasks_enhanced', 'Due today') + '], HH:mm',
-          nextDay: '[' + t('tasks_enhanced', 'Due tomorrow') + '], HH:mm',
-          lastWeek: '[' + t('tasks_enhanced', 'Due on') + '] MMM DD, YYYY, HH:mm',
-          nextWeek: '[' + t('tasks_enhanced', 'Due on') + '] MMM DD, YYYY, HH:mm',
-          sameElse: '[' + t('tasks_enhanced', 'Due on') + '] MMM DD, YYYY, HH:mm'
+          lastDay: '[' + t('tasks', 'Due yesterday') + '], HH:mm',
+          sameDay: '[' + t('tasks', 'Due today') + '], HH:mm',
+          nextDay: '[' + t('tasks', 'Due tomorrow') + '], HH:mm',
+          lastWeek: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY, HH:mm',
+          nextWeek: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY, HH:mm',
+          sameElse: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY, HH:mm'
         }
       });
       moment.lang('start', {
         calendar: {
-          lastDay: '[' + t('tasks_enhanced', 'Started yesterday') + '], HH:mm',
-          sameDay: '[' + t('tasks_enhanced', 'Starts today') + '], HH:mm',
-          nextDay: '[' + t('tasks_enhanced', 'Starts tomorrow') + '], HH:mm',
-          lastWeek: '[' + t('tasks_enhanced', 'Started on') + '] MMM DD, YYYY, HH:mm',
-          nextWeek: '[' + t('tasks_enhanced', 'Starts on') + '] MMM DD, YYYY, HH:mm',
+          lastDay: '[' + t('tasks', 'Started yesterday') + '], HH:mm',
+          sameDay: '[' + t('tasks', 'Starts today') + '], HH:mm',
+          nextDay: '[' + t('tasks', 'Starts tomorrow') + '], HH:mm',
+          lastWeek: '[' + t('tasks', 'Started on') + '] MMM DD, YYYY, HH:mm',
+          nextWeek: '[' + t('tasks', 'Starts on') + '] MMM DD, YYYY, HH:mm',
           sameElse: function() {
             if (this.diff(moment()) > 0) {
-              return '[' + t('tasks_enhanced', 'Starts on') + '] MMM DD, YYYY, HH:mm';
+              return '[' + t('tasks', 'Starts on') + '] MMM DD, YYYY, HH:mm';
             } else {
-              return '[' + t('tasks_enhanced', 'Started on') + '] MMM DD, YYYY, HH:mm';
+              return '[' + t('tasks', 'Started on') + '] MMM DD, YYYY, HH:mm';
             }
           }
         }
       });
       moment.lang('reminder', {
         calendar: {
-          lastDay: t('tasks_enhanced', '[Remind me yesterday at ]HH:mm'),
-          sameDay: t('tasks_enhanced', '[Remind me today at ]HH:mm'),
-          nextDay: t('tasks_enhanced', '[Remind me tomorrow at ]HH:mm'),
-          lastWeek: t('tasks_enhanced', '[Remind me on ]MMM DD, YYYY,[ at ]HH:mm'),
-          nextWeek: t('tasks_enhanced', '[Remind me on ]MMM DD, YYYY,[ at ]HH:mm'),
-          sameElse: t('tasks_enhanced', '[Remind me on ]MMM DD, YYYY,[ at ]HH:mm')
+          lastDay: t('tasks', '[Remind me yesterday at ]HH:mm'),
+          sameDay: t('tasks', '[Remind me today at ]HH:mm'),
+          nextDay: t('tasks', '[Remind me tomorrow at ]HH:mm'),
+          lastWeek: t('tasks', '[Remind me on ]MMM DD, YYYY,[ at ]HH:mm'),
+          nextWeek: t('tasks', '[Remind me on ]MMM DD, YYYY,[ at ]HH:mm'),
+          sameElse: t('tasks', '[Remind me on ]MMM DD, YYYY,[ at ]HH:mm')
         }
       });
       moment.lang('tasks', {
         calendar: {
-          lastDay: '[' + t('tasks_enhanced', 'Yesterday') + ']',
-          sameDay: '[' + t('tasks_enhanced', 'Today') + ']',
-          nextDay: '[' + t('tasks_enhanced', 'Tomorrow') + ']',
+          lastDay: '[' + t('tasks', 'Yesterday') + ']',
+          sameDay: '[' + t('tasks', 'Today') + ']',
+          nextDay: '[' + t('tasks', 'Tomorrow') + ']',
           lastWeek: 'DD.MM.YYYY',
           nextWeek: 'DD.MM.YYYY',
           sameElse: 'DD.MM.YYYY'
@@ -120,9 +120,9 @@
       });
       moment.lang('details_short', {
         calendar: {
-          lastDay: '[' + t('tasks_enhanced', 'Yesterday') + ']',
-          sameDay: '[' + t('tasks_enhanced', 'Today') + ']',
-          nextDay: '[' + t('tasks_enhanced', 'Tomorrow') + ']',
+          lastDay: '[' + t('tasks', 'Yesterday') + ']',
+          sameDay: '[' + t('tasks', 'Today') + ']',
+          nextDay: '[' + t('tasks', 'Tomorrow') + ']',
           lastWeek: 'MMM DD, YYYY',
           nextWeek: 'MMM DD, YYYY',
           sameElse: 'MMM DD, YYYY'
@@ -130,9 +130,9 @@
       });
       moment.lang('list_week', {
         calendar: {
-          lastDay: '[' + t('tasks_enhanced', 'Yesterday') + ']',
-          sameDay: '[' + t('tasks_enhanced', 'Today') + '], MMM. DD',
-          nextDay: '[' + t('tasks_enhanced', 'Tomorrow') + '], MMM. DD',
+          lastDay: '[' + t('tasks', 'Yesterday') + ']',
+          sameDay: '[' + t('tasks', 'Today') + '], MMM. DD',
+          nextDay: '[' + t('tasks', 'Tomorrow') + '], MMM. DD',
           lastWeek: 'ddd, MMM. DD',
           nextWeek: 'ddd, MMM. DD',
           sameElse: 'ddd, MMM. DD'
@@ -140,19 +140,19 @@
       });
       return moment.lang('en', {
         relativeTime: {
-          future: t('tasks_enhanced', "in %s"),
-          past: t('tasks_enhanced', "%s ago"),
-          s: t('tasks_enhanced', "seconds"),
-          m: t('tasks_enhanced', "a minute"),
-          mm: t('tasks_enhanced', "%d minutes"),
-          h: t('tasks_enhanced', "an hour"),
-          hh: t('tasks_enhanced', "%d hours"),
-          d: t('tasks_enhanced', "a day"),
-          dd: t('tasks_enhanced', "%d days"),
-          M: t('tasks_enhanced', "a month"),
-          MM: t('tasks_enhanced', "%d months"),
-          y: t('tasks_enhanced', "a year"),
-          yy: t('tasks_enhanced', "%d years")
+          future: t('tasks', "in %s"),
+          past: t('tasks', "%s ago"),
+          s: t('tasks', "seconds"),
+          m: t('tasks', "a minute"),
+          mm: t('tasks', "%d minutes"),
+          h: t('tasks', "an hour"),
+          hh: t('tasks', "%d hours"),
+          d: t('tasks', "a day"),
+          dd: t('tasks', "%d days"),
+          M: t('tasks', "a month"),
+          MM: t('tasks', "%d months"),
+          y: t('tasks', "a year"),
+          yy: t('tasks', "%d years")
         }
       });
     }
@@ -337,8 +337,8 @@
           },
           myPosition: 'center top',
           atPosition: 'center bottom',
-          hourText: t('tasks_enhanced', 'Hours'),
-          minuteText: t('tasks_enhanced', 'Minutes')
+          hourText: t('tasks', 'Hours'),
+          minuteText: t('tasks', 'Minutes')
         });
       }
     };
@@ -447,24 +447,24 @@
           this._$scope.isAddingComment = false;
           this._$scope.durations = [
             {
-              name: t('tasks_enhanced', 'week'),
-              names: t('tasks_enhanced', 'weeks'),
+              name: t('tasks', 'week'),
+              names: t('tasks', 'weeks'),
               id: 'week'
             }, {
-              name: t('tasks_enhanced', 'day'),
-              names: t('tasks_enhanced', 'days'),
+              name: t('tasks', 'day'),
+              names: t('tasks', 'days'),
               id: 'day'
             }, {
-              name: t('tasks_enhanced', 'hour'),
-              names: t('tasks_enhanced', 'hours'),
+              name: t('tasks', 'hour'),
+              names: t('tasks', 'hours'),
               id: 'hour'
             }, {
-              name: t('tasks_enhanced', 'minute'),
-              names: t('tasks_enhanced', 'minutes'),
+              name: t('tasks', 'minute'),
+              names: t('tasks', 'minutes'),
               id: 'minute'
             }, {
-              name: t('tasks_enhanced', 'second'),
-              names: t('tasks_enhanced', 'seconds'),
+              name: t('tasks', 'second'),
+              names: t('tasks', 'seconds'),
               id: 'second'
             }
           ];
@@ -472,22 +472,22 @@
             var params;
             params = [
               {
-                name: t('tasks_enhanced', 'before beginning'),
+                name: t('tasks', 'before beginning'),
                 invert: true,
                 related: 'START',
                 id: "10"
               }, {
-                name: t('tasks_enhanced', 'after beginning'),
+                name: t('tasks', 'after beginning'),
                 invert: false,
                 related: 'START',
                 id: "00"
               }, {
-                name: t('tasks_enhanced', 'before end'),
+                name: t('tasks', 'before end'),
                 invert: true,
                 related: 'END',
                 id: "11"
               }, {
-                name: t('tasks_enhanced', 'after end'),
+                name: t('tasks', 'after end'),
                 invert: false,
                 related: 'END',
                 id: "01"
@@ -729,8 +729,8 @@
           };
           this._$scope.commentStrings = function() {
             return {
-              button: t('tasks_enhanced', 'Comment'),
-              input: t('tasks_enhanced', 'Add a comment')
+              button: t('tasks', 'Comment'),
+              input: t('tasks', 'Add a comment')
             };
           };
         }
@@ -764,7 +764,7 @@
           this._$scope.status.listNameBackup = '';
           this._$scope.deleteList = function(listID) {
             var really;
-            really = confirm(t('tasks_enhanced', 'This will delete the Calendar "%s" and all of its entries.').replace('%s', _$listsmodel.getById(_$scope.route.listID).displayname));
+            really = confirm(t('tasks', 'This will delete the Calendar "%s" and all of its entries.').replace('%s', _$listsmodel.getById(_$scope.route.listID).displayname));
             if (really) {
               _$listsbusinesslayer.deleteList(listID);
               return $location.path('/lists/' + _$listsmodel.getStandardList());
@@ -807,10 +807,10 @@
                 });
                 return _$scope.status.newListName = '';
               } else {
-                return alert(t('tasks_enhanced', 'The name "%s" is already used.').replace('%s', _$scope.status.newListName));
+                return alert(t('tasks', 'The name "%s" is already used.').replace('%s', _$scope.status.newListName));
               }
             } else {
-              return alert(t('tasks_enhanced', 'An empty name ist not allowed.'));
+              return alert(t('tasks', 'An empty name ist not allowed.'));
             }
           };
           this._$scope.editName = function(listID) {
@@ -838,10 +838,10 @@
                 _$listsbusinesslayer.setListName(_$scope.route.listID);
                 return _$scope.endEditList();
               } else {
-                return alert(t('tasks_enhanced', 'The name "%s" is already used.').replace('%s', name));
+                return alert(t('tasks', 'The name "%s" is already used.').replace('%s', name));
               }
             } else {
-              return alert(t('tasks_enhanced', 'An empty name ist not allowed.'));
+              return alert(t('tasks', 'An empty name ist not allowed.'));
             }
           };
           this._$scope.endEditList = function() {
@@ -960,37 +960,37 @@
           this._$scope.collectionOptions = [
             {
               id: 0,
-              name: t('tasks_enhanced', 'Hidden')
+              name: t('tasks', 'Hidden')
             }, {
               id: 1,
-              name: t('tasks_enhanced', 'Visible')
+              name: t('tasks', 'Visible')
             }, {
               id: 2,
-              name: t('tasks_enhanced', 'Automatic')
+              name: t('tasks', 'Automatic')
             }
           ];
           this._$scope.startOfWeekOptions = [
             {
               id: 0,
-              name: t('tasks_enhanced', 'Sunday')
+              name: t('tasks', 'Sunday')
             }, {
               id: 1,
-              name: t('tasks_enhanced', 'Monday')
+              name: t('tasks', 'Monday')
             }, {
               id: 2,
-              name: t('tasks_enhanced', 'Tuesday')
+              name: t('tasks', 'Tuesday')
             }, {
               id: 3,
-              name: t('tasks_enhanced', 'Wednesday')
+              name: t('tasks', 'Wednesday')
             }, {
               id: 4,
-              name: t('tasks_enhanced', 'Thursday')
+              name: t('tasks', 'Thursday')
             }, {
               id: 5,
-              name: t('tasks_enhanced', 'Friday')
+              name: t('tasks', 'Friday')
             }, {
               id: 6,
-              name: t('tasks_enhanced', 'Saturday')
+              name: t('tasks', 'Saturday')
             }
           ];
           this._$scope.ok = function() {
@@ -1042,19 +1042,19 @@
             if (angular.isDefined(list = _$listsmodel.getById(_$listsmodel.getStandardList()))) {
               switch (_$scope.route.listID) {
                 case 'starred':
-                  return t('tasks_enhanced', 'Add an important item in "%s"...').replace('%s', list.displayname);
+                  return t('tasks', 'Add an important item in "%s"...').replace('%s', list.displayname);
                 case 'today':
-                  return t('tasks_enhanced', 'Add an item due today in "%s"...').replace('%s', list.displayname);
+                  return t('tasks', 'Add an item due today in "%s"...').replace('%s', list.displayname);
                 case 'all':
-                  return t('tasks_enhanced', 'Add an entry in "%s"...').replace('%s', list.displayname);
+                  return t('tasks', 'Add an entry in "%s"...').replace('%s', list.displayname);
                 case 'current':
-                  return t('tasks_enhanced', 'Add a current entry in "%s"...').replace('%s', list.displayname);
+                  return t('tasks', 'Add a current entry in "%s"...').replace('%s', list.displayname);
                 case 'completed':
                 case 'week':
                   return null;
                 default:
                   if (angular.isDefined(_$listsmodel.getById(_$scope.route.listID))) {
-                    return t('tasks_enhanced', 'Add an entry in "%s"...').replace('%s', _$listsmodel.getById(_$scope.route.listID).displayname);
+                    return t('tasks', 'Add an entry in "%s"...').replace('%s', _$listsmodel.getById(_$scope.route.listID).displayname);
                   }
               }
             }
@@ -2350,7 +2350,7 @@
             onSuccess: successCallbackWrapper,
             onFailure: failureCallbackWrapper
           };
-          return this._request.get('/apps/tasks_enhanced/collections', params);
+          return this._request.get('/apps/tasks/collections', params);
         };
 
         Persistence.prototype.getSettings = function(onSuccess, showLoading) {
@@ -2379,7 +2379,7 @@
             onSuccess: successCallbackWrapper,
             onFailure: failureCallbackWrapper
           };
-          return this._request.get('/apps/tasks_enhanced/settings', params);
+          return this._request.get('/apps/tasks/settings', params);
         };
 
         Persistence.prototype.setVisibility = function(collectionID, visibility) {
@@ -2390,7 +2390,7 @@
               visibility: visibility
             }
           };
-          return this._request.post('/apps/tasks_enhanced/collection/\
+          return this._request.post('/apps/tasks/collection/\
 			{collectionID}/visibility/{visibility}', params);
         };
 
@@ -2403,7 +2403,7 @@
               value: +value
             }
           };
-          return this._request.post('/apps/tasks_enhanced/settings/\
+          return this._request.post('/apps/tasks/settings/\
 			{type}/{setting}/{value}', params);
         };
 
@@ -2439,7 +2439,7 @@
               request: which
             }
           };
-          return this._request.get('/apps/tasks_enhanced/lists', params);
+          return this._request.get('/apps/tasks/lists', params);
         };
 
         Persistence.prototype.addList = function(list, onSuccess, onFailure) {
@@ -2460,7 +2460,7 @@
             onSuccess: onSuccess,
             onFailure: onFailure
           };
-          return this._request.post('/apps/tasks_enhanced/lists/add', params);
+          return this._request.post('/apps/tasks/lists/add', params);
         };
 
         Persistence.prototype.setListName = function(list) {
@@ -2473,7 +2473,7 @@
               name: list.displayname
             }
           };
-          return this._request.post('/apps/tasks_enhanced/lists/{listID}/name', params);
+          return this._request.post('/apps/tasks/lists/{listID}/name', params);
         };
 
         Persistence.prototype.deleteList = function(listID) {
@@ -2483,7 +2483,7 @@
               listID: listID
             }
           };
-          return this._request.post('/apps/tasks_enhanced/lists/{listID}/delete', params);
+          return this._request.post('/apps/tasks/lists/{listID}/delete', params);
         };
 
         Persistence.prototype.getTasks = function(onSuccess, showLoading) {
@@ -2512,7 +2512,7 @@
             onSuccess: successCallbackWrapper,
             onFailure: failureCallbackWrapper
           };
-          return this._request.get('/apps/tasks_enhanced/tasks', params);
+          return this._request.get('/apps/tasks/tasks', params);
         };
 
         Persistence.prototype.starTask = function(taskID) {
@@ -2522,7 +2522,7 @@
               taskID: taskID
             }
           };
-          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/star', params);
+          return this._request.post('/apps/tasks/tasks/{taskID}/star', params);
         };
 
         Persistence.prototype.unstarTask = function(taskID) {
@@ -2532,7 +2532,7 @@
               taskID: taskID
             }
           };
-          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/unstar', params);
+          return this._request.post('/apps/tasks/tasks/{taskID}/unstar', params);
         };
 
         Persistence.prototype.completeTask = function(taskID) {
@@ -2542,7 +2542,7 @@
               taskID: taskID
             }
           };
-          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/complete', params);
+          return this._request.post('/apps/tasks/tasks/{taskID}/complete', params);
         };
 
         Persistence.prototype.setPercentComplete = function(taskID, complete) {
@@ -2555,7 +2555,7 @@
               complete: complete
             }
           };
-          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/percentcomplete', params);
+          return this._request.post('/apps/tasks/tasks/{taskID}/percentcomplete', params);
         };
 
         Persistence.prototype.uncompleteTask = function(taskID) {
@@ -2565,7 +2565,7 @@
               taskID: taskID
             }
           };
-          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/uncomplete', params);
+          return this._request.post('/apps/tasks/tasks/{taskID}/uncomplete', params);
         };
 
         Persistence.prototype.addTask = function(task, onSuccess, onFailure) {
@@ -2590,7 +2590,7 @@
             onSuccess: onSuccess,
             onFailure: onFailure
           };
-          return this._request.post('/apps/tasks_enhanced/tasks/add', params);
+          return this._request.post('/apps/tasks/tasks/add', params);
         };
 
         Persistence.prototype.deleteTask = function(taskID) {
@@ -2600,7 +2600,7 @@
               taskID: taskID
             }
           };
-          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/delete', params);
+          return this._request.post('/apps/tasks/tasks/{taskID}/delete', params);
         };
 
         Persistence.prototype.setDueDate = function(taskID, due) {
@@ -2613,7 +2613,7 @@
               due: due
             }
           };
-          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/due', params);
+          return this._request.post('/apps/tasks/tasks/{taskID}/due', params);
         };
 
         Persistence.prototype.setStartDate = function(taskID, start) {
@@ -2626,7 +2626,7 @@
               start: start
             }
           };
-          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/start', params);
+          return this._request.post('/apps/tasks/tasks/{taskID}/start', params);
         };
 
         Persistence.prototype.setReminder = function(taskID, reminder) {
@@ -2671,7 +2671,7 @@
           } else {
             return;
           }
-          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/reminder', params);
+          return this._request.post('/apps/tasks/tasks/{taskID}/reminder', params);
         };
 
         Persistence.prototype.changeCalendarId = function(taskID, calendarID) {
@@ -2684,7 +2684,7 @@
               calendarID: calendarID
             }
           };
-          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/calendar', params);
+          return this._request.post('/apps/tasks/tasks/{taskID}/calendar', params);
         };
 
         Persistence.prototype.setTaskName = function(taskID, name) {
@@ -2697,7 +2697,7 @@
               name: name
             }
           };
-          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/name', params);
+          return this._request.post('/apps/tasks/tasks/{taskID}/name', params);
         };
 
         Persistence.prototype.setTaskNote = function(taskID, note) {
@@ -2710,7 +2710,7 @@
               note: note
             }
           };
-          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/note', params);
+          return this._request.post('/apps/tasks/tasks/{taskID}/note', params);
         };
 
         Persistence.prototype.setShowHidden = function(showHidden) {
@@ -2720,7 +2720,7 @@
               showHidden: +showHidden
             }
           };
-          return this._request.post('/apps/tasks_enhanced/settings/showhidden/{showHidden}', params);
+          return this._request.post('/apps/tasks/settings/showhidden/{showHidden}', params);
         };
 
         Persistence.prototype.addComment = function(comment, onSuccess, onFailure) {
@@ -2742,7 +2742,7 @@
             onSuccess: onSuccess,
             onFailure: onFailure
           };
-          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/comment', params);
+          return this._request.post('/apps/tasks/tasks/{taskID}/comment', params);
         };
 
         Persistence.prototype.deleteComment = function(taskID, commentID) {
@@ -2753,7 +2753,7 @@
               commentID: commentID
             }
           };
-          return this._request.post('/apps/tasks_enhanced/tasks/{taskID}/comment/\
+          return this._request.post('/apps/tasks/tasks/{taskID}/comment/\
 			{commentID}/delete', params);
         };
 
@@ -2825,7 +2825,7 @@
       if (moment(due, "YYYYMMDDTHHmmss").isValid()) {
         return moment(due, "YYYYMMDDTHHmmss").lang('details').calendar();
       } else {
-        return t('tasks_enhanced', 'Set due date');
+        return t('tasks', 'Set due date');
       }
     };
   });
@@ -2905,7 +2905,7 @@
 (function() {
   angular.module('Tasks').filter('percentDetails', function() {
     return function(percent) {
-      return t('tasks_enhanced', '%s % completed').replace('%s', percent);
+      return t('tasks', '%s % completed').replace('%s', percent);
     };
   });
 
@@ -2919,7 +2919,7 @@
         if (reminder.type === 'DATE-TIME' && moment(reminder.date, "YYYYMMDDTHHmmss").isValid()) {
           return moment(reminder.date, "YYYYMMDDTHHmmss").lang('reminder').calendar();
         } else if (reminder.type === 'DURATION' && reminder.duration) {
-          ds = t('tasks_enhanced', 'Remind me');
+          ds = t('tasks', 'Remind me');
           _ref = scope.durations;
           for (_i = 0, _len = _ref.length; _i < _len; _i++) {
             token = _ref[_i];
@@ -2935,31 +2935,31 @@
           }
           if (!time) {
             if (reminder.duration.params.related === 'END') {
-              ds += ' ' + t('tasks_enhanced', 'at the end');
+              ds += ' ' + t('tasks', 'at the end');
             } else {
-              ds += ' ' + t('tasks_enhanced', 'at the beginning');
+              ds += ' ' + t('tasks', 'at the beginning');
             }
           } else {
             if (reminder.duration.params.invert) {
               if (reminder.duration.params.related === 'END') {
-                ds += ' ' + t('tasks_enhanced', 'before end');
+                ds += ' ' + t('tasks', 'before end');
               } else {
-                ds += ' ' + t('tasks_enhanced', 'before beginning');
+                ds += ' ' + t('tasks', 'before beginning');
               }
             } else {
               if (reminder.duration.params.related === 'END') {
-                ds += ' ' + t('tasks_enhanced', 'after end');
+                ds += ' ' + t('tasks', 'after end');
               } else {
-                ds += ' ' + t('tasks_enhanced', 'after beginning');
+                ds += ' ' + t('tasks', 'after beginning');
               }
             }
           }
           return ds;
         } else {
-          return t('tasks_enhanced', 'Remind me');
+          return t('tasks', 'Remind me');
         }
       } else {
-        return t('tasks_enhanced', 'Remind me');
+        return t('tasks', 'Remind me');
       }
     };
   });
@@ -2972,7 +2972,7 @@
       if (moment(due, "YYYYMMDDTHHmmss").isValid()) {
         return moment(due, "YYYYMMDDTHHmmss").lang('start').calendar();
       } else {
-        return t('tasks_enhanced', 'Set start date');
+        return t('tasks', 'Set start date');
       }
     };
   });

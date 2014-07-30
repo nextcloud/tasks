@@ -28,6 +28,6 @@ angular.module('Tasks').directive 'timepicker', ->
 					scope.$apply()
 				myPosition: 'center top'
 				atPosition: 'center bottom'
-				hourText:	t('tasks_enhanced','Hours')
-				minuteText:	t('tasks_enhanced','Minutes')
+				hourText:	t('tasks','Hours')
+				minuteText:	t('tasks','Minutes')
 		})

@@ -44,24 +44,24 @@ $timeout, $routeParams, SettingsModel) ->
 
 			@_$scope.durations = [
 				{
-					name:	t('tasks_enhanced','week'),
-					names:	t('tasks_enhanced','weeks'),
+					name:	t('tasks','week'),
+					names:	t('tasks','weeks'),
 					id:		'week'},
 				{
-					name:	t('tasks_enhanced','day'),
-					names:	t('tasks_enhanced','days'),
+					name:	t('tasks','day'),
+					names:	t('tasks','days'),
 					id:		'day'},
 				{
-					name:	t('tasks_enhanced','hour'),
-					names:	t('tasks_enhanced','hours'),
+					name:	t('tasks','hour'),
+					names:	t('tasks','hours'),
 					id:		'hour'},
 				{
-					name:	t('tasks_enhanced','minute'),
-					names:	t('tasks_enhanced','minutes'),
+					name:	t('tasks','minute'),
+					names:	t('tasks','minutes'),
 					id:		'minute'},
 				{
-					name:	t('tasks_enhanced','second'),
-					names:	t('tasks_enhanced','seconds'),
+					name:	t('tasks','second'),
+					names:	t('tasks','seconds'),
 					id:		'second'}
 			]
 
@@ -70,22 +70,22 @@ $timeout, $routeParams, SettingsModel) ->
 			@_$scope.params = (task) ->
 				params = [
 						{
-							name:	t('tasks_enhanced','before beginning'),
+							name:	t('tasks','before beginning'),
 							invert:	true
 							related:'START',
 							id:		"10"},
 						{
-							name:	t('tasks_enhanced','after beginning'),
+							name:	t('tasks','after beginning'),
 							invert:	false
 							related:'START',
 							id:		"00"},
 						{
-							name:	t('tasks_enhanced','before end'),
+							name:	t('tasks','before end'),
 							invert:	true
 							related:'END',
 							id:		"11"},
 						{
-							name:	t('tasks_enhanced','after end'),
+							name:	t('tasks','after end'),
 							invert:	false
 							related:'END',
 							id:		"01"}
@@ -320,8 +320,8 @@ $timeout, $routeParams, SettingsModel) ->
 
 			@_$scope.commentStrings = () ->
 				{
-					button: t('tasks_enhanced','Comment'),
-					input:	t('tasks_enhanced','Add a comment')
+					button: t('tasks','Comment'),
+					input:	t('tasks','Add a comment')
 				}
 
 

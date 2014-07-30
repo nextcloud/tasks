@@ -20,10 +20,10 @@
  *
  */
 
-namespace OCA\Tasks_enhanced;
+namespace OCA\Tasks;
 
 use Sabre\VObject;
-// use OCA\Tasks_enhanced\App;
+// use OCA\Tasks\App;
 
 Class helper {
 
@@ -48,7 +48,7 @@ Class helper {
 				$task['start'] = $start->format('Ymd\THis');
 			} catch(\Exception $e) {
 				$task['start'] = null;
-				\OCP\Util::writeLog('tasks_enhanced', $e->getMessage(), \OCP\Util::ERROR);
+				\OCP\Util::writeLog('tasks', $e->getMessage(), \OCP\Util::ERROR);
 			}
 		} else {
 			$task['start'] = null;
@@ -61,7 +61,7 @@ Class helper {
 				$task['due'] = $due->format('Ymd\THis');
 			} catch(\Exception $e) {
 				$task['due'] = null;
-				\OCP\Util::writeLog('tasks_enhanced', $e->getMessage(), \OCP\Util::ERROR);
+				\OCP\Util::writeLog('tasks', $e->getMessage(), \OCP\Util::ERROR);
 			}
 		} else {
 			$task['due'] = null;
@@ -143,7 +143,7 @@ Class helper {
 
 			} catch(\Exception $e) {
 				$task['reminder'] = null;
-				\OCP\Util::writeLog('tasks_enhanced', $e->getMessage(), \OCP\Util::ERROR);
+				\OCP\Util::writeLog('tasks', $e->getMessage(), \OCP\Util::ERROR);
 			}
 		} else {
 			$task['reminder'] = null;
@@ -163,7 +163,7 @@ Class helper {
 				$task['completed'] = true;
 			} catch(\Exception $e) {
 				$task['completed'] = false;
-				\OCP\Util::writeLog('tasks_enhanced', $e->getMessage(), \OCP\Util::ERROR);
+				\OCP\Util::writeLog('tasks', $e->getMessage(), \OCP\Util::ERROR);
 			}
 		} else {
 			$task['completed'] = false;

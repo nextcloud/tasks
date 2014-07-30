@@ -43,7 +43,7 @@ CollectionsModel, ListsBusinessLayer, $location) ->
 
 
 			@_$scope.deleteList = (listID) ->
-				really = confirm(t('tasks_enhanced',
+				really = confirm(t('tasks',
 				'This will delete the Calendar "%s" and all of its entries.')
 				.replace('%s',_$listsmodel.getById(_$scope.route.listID).displayname))
 				if really
@@ -85,11 +85,11 @@ CollectionsModel, ListsBusinessLayer, $location) ->
 
 						_$scope.status.newListName = ''
 					else
-						alert(t('tasks_enhanced',
+						alert(t('tasks',
 						'The name "%s" is already used.')
 						.replace('%s',_$scope.status.newListName))
 				else
-					alert(t('tasks_enhanced',
+					alert(t('tasks',
 					'An empty name ist not allowed.'))
 
 			@_$scope.editName = (listID) ->
@@ -116,11 +116,11 @@ CollectionsModel, ListsBusinessLayer, $location) ->
 						_$listsbusinesslayer.setListName(_$scope.route.listID)
 						_$scope.endEditList()
 					else
-						alert(t('tasks_enhanced',
+						alert(t('tasks',
 						'The name "%s" is already used.')
 						.replace('%s',name))
 				else
-					alert(t('tasks_enhanced',
+					alert(t('tasks',
 					'An empty name ist not allowed.'))
 
 			@_$scope.endEditList = () ->

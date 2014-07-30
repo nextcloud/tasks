@@ -60,7 +60,7 @@ angular.module('Tasks').factory 'Persistence',
 				onSuccess: successCallbackWrapper
 				onFailure: failureCallbackWrapper
 
-			@_request.get '/apps/tasks_enhanced/collections', params
+			@_request.get '/apps/tasks/collections', params
 
 		getSettings: (onSuccess, showLoading=true) ->
 			onSuccess or= ->
@@ -81,7 +81,7 @@ angular.module('Tasks').factory 'Persistence',
 				onSuccess: successCallbackWrapper
 				onFailure: failureCallbackWrapper
 
-			@_request.get '/apps/tasks_enhanced/settings', params
+			@_request.get '/apps/tasks/settings', params
 
 		setVisibility: (collectionID, visibility) ->
 			params =
@@ -89,7 +89,7 @@ angular.module('Tasks').factory 'Persistence',
 					collectionID: collectionID
 					visibility: visibility
 
-			@_request.post '/apps/tasks_enhanced/collection/
+			@_request.post '/apps/tasks/collection/
 			{collectionID}/visibility/{visibility}', params
 
 		setting: (type, setting, value) ->
@@ -99,7 +99,7 @@ angular.module('Tasks').factory 'Persistence',
 					setting: setting
 					value: +value
 
-			@_request.post '/apps/tasks_enhanced/settings/
+			@_request.post '/apps/tasks/settings/
 			{type}/{setting}/{value}', params
 
 
@@ -125,7 +125,7 @@ angular.module('Tasks').factory 'Persistence',
 				routeParams:
 					request: which
 
-			@_request.get '/apps/tasks_enhanced/lists', params
+			@_request.get '/apps/tasks/lists', params
 
 		addList: (list, onSuccess=null, onFailure=null) ->
 			onSuccess or= ->
@@ -137,7 +137,7 @@ angular.module('Tasks').factory 'Persistence',
 				onSuccess: onSuccess
 				onFailure: onFailure
 
-			@_request.post '/apps/tasks_enhanced/lists/add', params
+			@_request.post '/apps/tasks/lists/add', params
 
 		setListName: (list) ->
 			params =
@@ -146,14 +146,14 @@ angular.module('Tasks').factory 'Persistence',
 				data:
 					name: list.displayname
 
-			@_request.post '/apps/tasks_enhanced/lists/{listID}/name', params
+			@_request.post '/apps/tasks/lists/{listID}/name', params
 
 		deleteList: (listID) ->
 			params =
 				routeParams:
 					listID: listID
 
-			@_request.post '/apps/tasks_enhanced/lists/{listID}/delete', params
+			@_request.post '/apps/tasks/lists/{listID}/delete', params
 
 		getTasks: (onSuccess, showLoading=true) ->
 			onSuccess or= ->
@@ -174,28 +174,28 @@ angular.module('Tasks').factory 'Persistence',
 				onSuccess: successCallbackWrapper
 				onFailure: failureCallbackWrapper
 
-			@_request.get '/apps/tasks_enhanced/tasks', params
+			@_request.get '/apps/tasks/tasks', params
 
 		starTask: (taskID) ->
 			params =
 				routeParams:
 					taskID: taskID
 
-			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/star', params
+			@_request.post '/apps/tasks/tasks/{taskID}/star', params
 
 		unstarTask: (taskID) ->
 			params =
 				routeParams:
 					taskID: taskID
 
-			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/unstar', params
+			@_request.post '/apps/tasks/tasks/{taskID}/unstar', params
 
 		completeTask: (taskID) ->
 			params =
 				routeParams:
 					taskID: taskID
 
-			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/complete', params
+			@_request.post '/apps/tasks/tasks/{taskID}/complete', params
 
 		setPercentComplete: (taskID, complete) ->
 			params =
@@ -204,14 +204,14 @@ angular.module('Tasks').factory 'Persistence',
 				data:
 					complete: complete
 
-			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/percentcomplete', params
+			@_request.post '/apps/tasks/tasks/{taskID}/percentcomplete', params
 
 		uncompleteTask: (taskID) ->
 			params =
 				routeParams:
 					taskID: taskID
 
-			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/uncomplete', params
+			@_request.post '/apps/tasks/tasks/{taskID}/uncomplete', params
 
 		addTask: (task, onSuccess=null, onFailure=null) ->
 			onSuccess or= ->
@@ -230,14 +230,14 @@ angular.module('Tasks').factory 'Persistence',
 				onSuccess: onSuccess
 				onFailure: onFailure
 
-			@_request.post '/apps/tasks_enhanced/tasks/add', params
+			@_request.post '/apps/tasks/tasks/add', params
 
 		deleteTask: (taskID) ->
 			params =
 				routeParams:
 					taskID: taskID
 
-			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/delete', params
+			@_request.post '/apps/tasks/tasks/{taskID}/delete', params
 
 		setDueDate: (taskID, due) ->
 			params =
@@ -246,7 +246,7 @@ angular.module('Tasks').factory 'Persistence',
 				data:
 					due: due
 
-			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/due', params
+			@_request.post '/apps/tasks/tasks/{taskID}/due', params
 
 		setStartDate: (taskID, start) ->
 			params =
@@ -255,7 +255,7 @@ angular.module('Tasks').factory 'Persistence',
 				data:
 					start: start
 
-			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/start', params
+			@_request.post '/apps/tasks/tasks/{taskID}/start', params
 
 		setReminder: (taskID, reminder) ->
 			if reminder == false
@@ -289,7 +289,7 @@ angular.module('Tasks').factory 'Persistence',
 
 			else return
 
-			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/reminder', params
+			@_request.post '/apps/tasks/tasks/{taskID}/reminder', params
 
 		changeCalendarId: (taskID, calendarID) ->
 			params =
@@ -298,7 +298,7 @@ angular.module('Tasks').factory 'Persistence',
 				data:
 					calendarID: calendarID
 
-			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/calendar', params
+			@_request.post '/apps/tasks/tasks/{taskID}/calendar', params
 
 		setTaskName: (taskID, name) ->
 			params =
@@ -307,7 +307,7 @@ angular.module('Tasks').factory 'Persistence',
 				data:
 					name: name
 
-			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/name', params
+			@_request.post '/apps/tasks/tasks/{taskID}/name', params
 
 		setTaskNote: (taskID, note) ->
 			params =
@@ -316,14 +316,14 @@ angular.module('Tasks').factory 'Persistence',
 				data:
 					note: note
 
-			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/note', params
+			@_request.post '/apps/tasks/tasks/{taskID}/note', params
 
 		setShowHidden: (showHidden) ->
 			params =
 				routeParams:
 					showHidden: +showHidden
 
-			@_request.post '/apps/tasks_enhanced/settings/showhidden/{showHidden}',
+			@_request.post '/apps/tasks/settings/showhidden/{showHidden}',
 			params
 
 		addComment: (comment, onSuccess=null, onFailure=null) ->
@@ -336,7 +336,7 @@ angular.module('Tasks').factory 'Persistence',
 				onSuccess: onSuccess
 				onFailure: onFailure
 
-			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/comment',
+			@_request.post '/apps/tasks/tasks/{taskID}/comment',
 			params
 
 		deleteComment: (taskID, commentID) ->
@@ -345,7 +345,7 @@ angular.module('Tasks').factory 'Persistence',
 					taskID: taskID
 					commentID: commentID
 
-			@_request.post '/apps/tasks_enhanced/tasks/{taskID}/comment/
+			@_request.post '/apps/tasks/tasks/{taskID}/comment/
 			{commentID}/delete', params
 
 	return new Persistence(Request, Loading, $rootScope)

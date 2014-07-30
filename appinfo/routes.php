@@ -19,12 +19,12 @@
 * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 *
 */
-namespace OCA\Tasks_enhanced;
+namespace OCA\Tasks;
 
-use OCA\Tasks_enhanced\Dispatcher;
+use OCA\Tasks\Dispatcher;
 
 //define the routes
-$this->create('tasks_enhanced_index', '/')
+$this->create('tasks_index', '/')
 	->get()
 	->action(
 		function($params){

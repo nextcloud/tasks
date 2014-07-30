@@ -21,9 +21,9 @@
 *
 */
 
-namespace OCA\Tasks_enhanced\Controller;
+namespace OCA\Tasks\Controller;
 
-use OCA\Tasks_enhanced\Controller,
+use OCA\Tasks\Controller,
 	OCP\AppFramework\Http\JSONResponse;
 
 class CollectionsController extends Controller {
@@ -32,7 +32,7 @@ class CollectionsController extends Controller {
 	 * @NoAdminRequired
 	 */
 	public function getCollections(){
-		$l = \OCP\Util::getL10N('tasks_enhanced');
+		$l = \OCP\Util::getL10N('tasks');
 		$collections = array(
 			array(
 				'id' => "starred",
@@ -61,14 +61,14 @@ class CollectionsController extends Controller {
 		);
 		foreach ($collections as $key => $collection){
 			try{
-				$tmp = \OCP\Config::getUserValue($this->api->getUserId(), 'tasks_enhanced','show_'.$collection['id']);
+				$tmp = \OCP\Config::getUserValue($this->api->getUserId(), 'tasks','show_'.$collection['id']);
 				if (!in_array((int)$tmp, array(0,1,2)) || $tmp === null) {
 					$tmp = 2;
-					\OCP\Config::setUserValue($this->api->getUserId(), 'tasks_enhanced','show_'.$collection['id'],$tmp);
+					\OCP\Config::setUserValue($this->api->getUserId(), 'tasks','show_'.$collection['id'],$tmp);
 				}
 				$collections[$key]['show'] = (int)$tmp;
 			}catch(\Exception $e) {
-					\OCP\Util::writeLog('tasks_enhanced', $e->getMessage(), \OCP\Util::ERROR);
+					\OCP\Util::writeLog('tasks', $e->getMessage(), \OCP\Util::ERROR);
 			}
 		}
 		$result = array(
@@ -88,7 +88,7 @@ class CollectionsController extends Controller {
 		$collectionId = (string) $this->params('collectionID');
 		$vis = (int) $this->params('visibility');
 		if (in_array($vis, array(0,1,2))){
-			\OCP\Config::setUserValue($this->api->getUserId(), 'tasks_enhanced','show_'.$collectionId,$vis);
+			\OCP\Config::setUserValue($this->api->getUserId(), 'tasks','show_'.$collectionId,$vis);
 		}
 		$response = new JSONResponse();
 		return $response;

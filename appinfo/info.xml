@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <info>
-	<id>tasks_enhanced</id>
+	<id>tasks</id>
 	<name>Tasks</name>
 	<version>0.4.1</version>
 	<licence>AGPL</licence>
 	<author>Raimund Schlüßler</author>
 	<require>6.0.0</require>
 	<shipped>true</shipped>
-	<description>Enhanced Task App for Calender TODOs</description>
+	<description>Task App for Calender TODOs</description>
 </info>

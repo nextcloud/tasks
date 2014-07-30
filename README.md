@@ -1,4 +1,4 @@
-tasks_enhanced
+tasks
 ==============
 
-Enhanced task app for ownCloud
+Task app for ownCloud

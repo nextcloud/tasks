@@ -21,9 +21,9 @@
 *
 */
 
-namespace OCA\Tasks_enhanced\Controller;
+namespace OCA\Tasks\Controller;
 
-use OCA\Tasks_enhanced\Controller,
+use OCA\Tasks\Controller,
 	OCP\AppFramework\Http\JSONResponse;
 
 class SettingsController extends Controller {
@@ -35,8 +35,8 @@ class SettingsController extends Controller {
 		$settings = array(
 			array(
 				'id' => 'various',
-				'showHidden' => (int)\OCP\Config::getUserValue($this->api->getUserId(), 'tasks_enhanced','various_showHidden'),
-				'startOfWeek' => (int)\OCP\Config::getUserValue($this->api->getUserId(), 'tasks_enhanced','various_startOfWeek'),
+				'showHidden' => (int)\OCP\Config::getUserValue($this->api->getUserId(), 'tasks','various_showHidden'),
+				'startOfWeek' => (int)\OCP\Config::getUserValue($this->api->getUserId(), 'tasks','various_startOfWeek'),
 				'userID' => $this->api->getUserId()
 
 			)
@@ -55,7 +55,7 @@ class SettingsController extends Controller {
 	 * @NoAdminRequired
 	 */
 	public function set(){
-		\OCP\Config::setUserValue($this->api->getUserId(), 'tasks_enhanced',$this->params('type').'_'.$this->params('setting'), $this->params('value'));
+		\OCP\Config::setUserValue($this->api->getUserId(), 'tasks',$this->params('type').'_'.$this->params('setting'), $this->params('value'));
 		$response = new JSONResponse();
 		$response->setData();
 		return $response;

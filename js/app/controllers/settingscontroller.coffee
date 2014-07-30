@@ -40,37 +40,37 @@ angular.module('Tasks').controller 'SettingsController',
 			@_$scope.collectionOptions = [
 				{
 					id: 0,
-					name: t('tasks_enhanced','Hidden')},
+					name: t('tasks','Hidden')},
 				{
 					id: 1,
-					name: t('tasks_enhanced','Visible')},
+					name: t('tasks','Visible')},
 				{
 					id: 2,
-					name: t('tasks_enhanced','Automatic')}
+					name: t('tasks','Automatic')}
 			]
 
 			@_$scope.startOfWeekOptions = [
 				{
 					id: 0,
-					name: t('tasks_enhanced','Sunday')},
+					name: t('tasks','Sunday')},
 				{
 					id: 1,
-					name: t('tasks_enhanced','Monday')},
+					name: t('tasks','Monday')},
 				{
 					id: 2,
-					name: t('tasks_enhanced','Tuesday')},
+					name: t('tasks','Tuesday')},
 				{
 					id: 3,
-					name: t('tasks_enhanced','Wednesday')},
+					name: t('tasks','Wednesday')},
 				{
 					id: 4,
-					name: t('tasks_enhanced','Thursday')},
+					name: t('tasks','Thursday')},
 				{
 					id: 5,
-					name: t('tasks_enhanced','Friday')},
+					name: t('tasks','Friday')},
 				{
 					id: 6,
-					name: t('tasks_enhanced','Saturday')}
+					name: t('tasks','Saturday')}
 			]
 
 			@_$scope.ok = () =>

@@ -8,9 +8,9 @@
  * See the COPYING-README file.
  */
 
-namespace OCA\Tasks_enhanced\Controller;
+namespace OCA\Tasks\Controller;
 
-use OCA\Tasks_enhanced\Controller,
+use OCA\Tasks\Controller,
 	OCP\AppFramework\Http\TemplateResponse;
 
 
@@ -25,30 +25,30 @@ class PageController extends Controller {
 	 */
 	public function index() {
 		if (defined('DEBUG') && DEBUG) {
-			\OCP\Util::addScript('tasks_enhanced', 'vendor/angularjs/angular');
-			\OCP\Util::addScript('tasks_enhanced', 'vendor/angularjs/angular-route');
-			\OCP\Util::addScript('tasks_enhanced', 'vendor/angularjs/angular-animate');
-			\OCP\Util::addScript('tasks_enhanced', 'vendor/momentjs/moment');
-			\OCP\Util::addScript('tasks_enhanced', 'vendor/bootstrap/ui-bootstrap-custom-tpls-0.10.0');
+			\OCP\Util::addScript('tasks', 'vendor/angularjs/angular');
+			\OCP\Util::addScript('tasks', 'vendor/angularjs/angular-route');
+			\OCP\Util::addScript('tasks', 'vendor/angularjs/angular-animate');
+			\OCP\Util::addScript('tasks', 'vendor/momentjs/moment');
+			\OCP\Util::addScript('tasks', 'vendor/bootstrap/ui-bootstrap-custom-tpls-0.10.0');
 		} else {
-			\OCP\Util::addScript('tasks_enhanced', 'vendor/angularjs/angular.min');
-			\OCP\Util::addScript('tasks_enhanced', 'vendor/angularjs/angular-route.min');
-			\OCP\Util::addScript('tasks_enhanced', 'vendor/angularjs/angular-animate.min');
-			\OCP\Util::addScript('tasks_enhanced', 'vendor/momentjs/moment.min');
-			\OCP\Util::addScript('tasks_enhanced', 'vendor/bootstrap/ui-bootstrap-custom-tpls-0.10.0.min');
+			\OCP\Util::addScript('tasks', 'vendor/angularjs/angular.min');
+			\OCP\Util::addScript('tasks', 'vendor/angularjs/angular-route.min');
+			\OCP\Util::addScript('tasks', 'vendor/angularjs/angular-animate.min');
+			\OCP\Util::addScript('tasks', 'vendor/momentjs/moment.min');
+			\OCP\Util::addScript('tasks', 'vendor/bootstrap/ui-bootstrap-custom-tpls-0.10.0.min');
 		}
-		\OCP\Util::addScript('tasks_enhanced', 'public/app');
-		\OCP\Util::addScript('tasks_enhanced', 'vendor/appframework/app');
-		\OCP\Util::addScript('tasks_enhanced', 'vendor/timepicker/jquery.ui.timepicker');
-		\OCP\Util::addStyle('tasks_enhanced', 'style');
-		\OCP\Util::addStyle('tasks_enhanced', 'vendor/bootstrap/bootstrap');
+		\OCP\Util::addScript('tasks', 'public/app');
+		\OCP\Util::addScript('tasks', 'vendor/appframework/app');
+		\OCP\Util::addScript('tasks', 'vendor/timepicker/jquery.ui.timepicker');
+		\OCP\Util::addStyle('tasks', 'style');
+		\OCP\Util::addStyle('tasks', 'vendor/bootstrap/bootstrap');
 
 		$date = new \DateTimeZone(\OC_Calendar_App::getTimezone());
 		$day = new \DateTime('today', $date);
 		$day = $day->format('d');
 
 		// TODO: Make a HTMLTemplateResponse class
-		$response = new TemplateResponse('tasks_enhanced', 'main');
+		$response = new TemplateResponse('tasks', 'main');
 		$response->setParams(array(
 			'DOM' => $day
 		));

@@ -80,43 +80,43 @@ angular.module('Tasks').run ['Config', '$timeout',
 
 	moment.lang('details', {
 		calendar: {
-			lastDay  : 	'['+t('tasks_enhanced','Due yesterday')+'], HH:mm'
-			sameDay  : 	'['+t('tasks_enhanced','Due today')+'], HH:mm'
-			nextDay  : 	'['+t('tasks_enhanced','Due tomorrow')+'], HH:mm'
-			lastWeek : 	'['+t('tasks_enhanced', 'Due on')+'] MMM DD, YYYY, HH:mm'
-			nextWeek : 	'['+t('tasks_enhanced', 'Due on')+'] MMM DD, YYYY, HH:mm'
-			sameElse :	'['+t('tasks_enhanced', 'Due on')+'] MMM DD, YYYY, HH:mm'
+			lastDay  : 	'['+t('tasks','Due yesterday')+'], HH:mm'
+			sameDay  : 	'['+t('tasks','Due today')+'], HH:mm'
+			nextDay  : 	'['+t('tasks','Due tomorrow')+'], HH:mm'
+			lastWeek : 	'['+t('tasks', 'Due on')+'] MMM DD, YYYY, HH:mm'
+			nextWeek : 	'['+t('tasks', 'Due on')+'] MMM DD, YYYY, HH:mm'
+			sameElse :	'['+t('tasks', 'Due on')+'] MMM DD, YYYY, HH:mm'
 		}
 	})
 	moment.lang('start', {
 		calendar: {
-			lastDay  : 	'['+t('tasks_enhanced','Started yesterday')+'], HH:mm'
-			sameDay  : 	'['+t('tasks_enhanced','Starts today')+'], HH:mm'
-			nextDay  : 	'['+t('tasks_enhanced','Starts tomorrow')+'], HH:mm'
-			lastWeek : 	'['+t('tasks_enhanced', 'Started on')+'] MMM DD, YYYY, HH:mm'
-			nextWeek : 	'['+t('tasks_enhanced', 'Starts on')+'] MMM DD, YYYY, HH:mm'
+			lastDay  : 	'['+t('tasks','Started yesterday')+'], HH:mm'
+			sameDay  : 	'['+t('tasks','Starts today')+'], HH:mm'
+			nextDay  : 	'['+t('tasks','Starts tomorrow')+'], HH:mm'
+			lastWeek : 	'['+t('tasks', 'Started on')+'] MMM DD, YYYY, HH:mm'
+			nextWeek : 	'['+t('tasks', 'Starts on')+'] MMM DD, YYYY, HH:mm'
 			sameElse :	() ->
 				if this.diff(moment()) > 0
-					'['+t('tasks_enhanced', 'Starts on')+'] MMM DD, YYYY, HH:mm'
+					'['+t('tasks', 'Starts on')+'] MMM DD, YYYY, HH:mm'
 				else
-					'['+t('tasks_enhanced', 'Started on')+'] MMM DD, YYYY, HH:mm'
+					'['+t('tasks', 'Started on')+'] MMM DD, YYYY, HH:mm'
 		}
 	})
 	moment.lang('reminder', {
 		calendar: {
-			lastDay  : 	t('tasks_enhanced', '[Remind me yesterday at ]HH:mm')
-			sameDay  : 	t('tasks_enhanced', '[Remind me today at ]HH:mm')
-			nextDay  : 	t('tasks_enhanced', '[Remind me tomorrow at ]HH:mm')
-			lastWeek : 	t('tasks_enhanced', '[Remind me on ]MMM DD, YYYY,[ at ]HH:mm')
-			nextWeek : 	t('tasks_enhanced', '[Remind me on ]MMM DD, YYYY,[ at ]HH:mm')
-			sameElse :	t('tasks_enhanced', '[Remind me on ]MMM DD, YYYY,[ at ]HH:mm')
+			lastDay  : 	t('tasks', '[Remind me yesterday at ]HH:mm')
+			sameDay  : 	t('tasks', '[Remind me today at ]HH:mm')
+			nextDay  : 	t('tasks', '[Remind me tomorrow at ]HH:mm')
+			lastWeek : 	t('tasks', '[Remind me on ]MMM DD, YYYY,[ at ]HH:mm')
+			nextWeek : 	t('tasks', '[Remind me on ]MMM DD, YYYY,[ at ]HH:mm')
+			sameElse :	t('tasks', '[Remind me on ]MMM DD, YYYY,[ at ]HH:mm')
 		}
 	})
 	moment.lang('tasks', {
 		calendar: {
-			lastDay : '['+t('tasks_enhanced','Yesterday')+']'
-			sameDay : '['+t('tasks_enhanced','Today')+']'
-			nextDay : '['+t('tasks_enhanced','Tomorrow')+']'
+			lastDay : '['+t('tasks','Yesterday')+']'
+			sameDay : '['+t('tasks','Today')+']'
+			nextDay : '['+t('tasks','Tomorrow')+']'
 			lastWeek : 'DD.MM.YYYY'
 			nextWeek : 'DD.MM.YYYY'
 			sameElse : 'DD.MM.YYYY'
@@ -124,9 +124,9 @@ angular.module('Tasks').run ['Config', '$timeout',
 	})
 	moment.lang('details_short', {
 		calendar: {
-			lastDay : '['+t('tasks_enhanced','Yesterday')+']'
-			sameDay : '['+t('tasks_enhanced','Today')+']'
-			nextDay : '['+t('tasks_enhanced','Tomorrow')+']'
+			lastDay : '['+t('tasks','Yesterday')+']'
+			sameDay : '['+t('tasks','Today')+']'
+			nextDay : '['+t('tasks','Tomorrow')+']'
 			lastWeek : 'MMM DD, YYYY'
 			nextWeek : 'MMM DD, YYYY'
 			sameElse : 'MMM DD, YYYY'
@@ -134,9 +134,9 @@ angular.module('Tasks').run ['Config', '$timeout',
 	})
 	moment.lang('list_week', {
 		calendar: {
-			lastDay  : '['+t('tasks_enhanced','Yesterday')+']'
-			sameDay  : '['+t('tasks_enhanced','Today')+'], MMM. DD'
-			nextDay  : '['+t('tasks_enhanced','Tomorrow')+'], MMM. DD'
+			lastDay  : '['+t('tasks','Yesterday')+']'
+			sameDay  : '['+t('tasks','Today')+'], MMM. DD'
+			nextDay  : '['+t('tasks','Tomorrow')+'], MMM. DD'
 			lastWeek : 'ddd, MMM. DD'
 			nextWeek : 'ddd, MMM. DD'
 			sameElse : 'ddd, MMM. DD'
@@ -144,19 +144,19 @@ angular.module('Tasks').run ['Config', '$timeout',
 	})
 	moment.lang('en', {
 		relativeTime: {
-			future:	t('tasks_enhanced', "in %s")
-			past:	t('tasks_enhanced', "%s ago")
-			s:		t('tasks_enhanced', "seconds")
-			m:		t('tasks_enhanced', "a minute")
-			mm:		t('tasks_enhanced', "%d minutes")
-			h:		t('tasks_enhanced', "an hour")
-			hh:		t('tasks_enhanced', "%d hours")
-			d:		t('tasks_enhanced', "a day")
-			dd:		t('tasks_enhanced', "%d days")
-			M:		t('tasks_enhanced', "a month")
-			MM:		t('tasks_enhanced', "%d months")
-			y:		t('tasks_enhanced', "a year")
-			yy:		t('tasks_enhanced', "%d years")
+			future:	t('tasks', "in %s")
+			past:	t('tasks', "%s ago")
+			s:		t('tasks', "seconds")
+			m:		t('tasks', "a minute")
+			mm:		t('tasks', "%d minutes")
+			h:		t('tasks', "an hour")
+			hh:		t('tasks', "%d hours")
+			d:		t('tasks', "a day")
+			dd:		t('tasks', "%d days")
+			M:		t('tasks', "a month")
+			MM:		t('tasks', "%d months")
+			y:		t('tasks', "a year")
+			yy:		t('tasks', "%d years")
 		}
 	})
 ]

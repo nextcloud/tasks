@@ -21,4 +21,4 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 ###
 angular.module('Tasks').filter 'percentDetails', () ->
 	(percent) ->
-		t('tasks_enhanced', '%s % completed').replace('%s',percent)
+		t('tasks', '%s % completed').replace('%s',percent)

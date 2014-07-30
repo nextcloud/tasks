@@ -226,7 +226,7 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.transition'])
 
       function removeModalWindow(modalInstance) {
 
-        var body = $document.find('#tasks_enhanced_wrapper').eq(0);
+        var body = $document.find('#tasks_wrapper').eq(0);
         var modalWindow = openedWindows.get(modalInstance).value;
 
         //clean up the stack
@@ -304,7 +304,7 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.transition'])
           keyboard: modal.keyboard
         });
 
-        var body = $document.find('#tasks_enhanced_wrapper').eq(0),
+        var body = $document.find('#tasks_wrapper').eq(0),
             currBackdropIndex = backdropIndex();
 
         if (currBackdropIndex >= 0 && !backdropDomEl) {

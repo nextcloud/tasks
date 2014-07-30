@@ -8,15 +8,15 @@
  * See the COPYING-README file.
  */
 
-namespace OCA\Tasks_enhanced;
+namespace OCA\Tasks;
 
 use OCP\AppFramework\App as MainApp,
 	OCP\AppFramework\IAppContainer,
-	OCA\Tasks_enhanced\Controller\PageController,
-	OCA\Tasks_enhanced\Controller\CollectionsController,
-	OCA\Tasks_enhanced\Controller\ListsController,
-	OCA\Tasks_enhanced\Controller\TasksController,
-	OCA\Tasks_enhanced\Controller\SettingsController;
+	OCA\Tasks\Controller\PageController,
+	OCA\Tasks\Controller\CollectionsController,
+	OCA\Tasks\Controller\ListsController,
+	OCA\Tasks\Controller\TasksController,
+	OCA\Tasks\Controller\SettingsController;
 
 /**
  * This class manages our app actions
@@ -31,7 +31,7 @@ class Dispatcher extends MainApp {
 	protected $app;
 
 	public function __construct($params) {
-		parent::__construct('tasks_enhanced', $params);
+		parent::__construct('tasks', $params);
 		$this->container = $this->getContainer();
 		$this->registerServices();
 	}

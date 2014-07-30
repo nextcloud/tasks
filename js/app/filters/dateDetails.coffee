@@ -24,4 +24,4 @@ angular.module('Tasks').filter 'dateDetails', () ->
 		if moment(due, "YYYYMMDDTHHmmss").isValid()
 			return moment(due, "YYYYMMDDTHHmmss").lang('details').calendar()
 		else
-			return t('tasks_enhanced', 'Set due date')
+			return t('tasks', 'Set due date')

@@ -1,4 +1,4 @@
-<div ng-app="Tasks" ng-cloak ng-controller="AppController" ng-click="closeAll()" id="tasks_enhanced_wrapper">
+<div ng-app="Tasks" ng-cloak ng-controller="AppController" ng-click="closeAll()" id="tasks_wrapper">
     <div id="app-navigation" ng-controller="ListController">
     	<div id="task_lists_header" class="header" ng-class="{'search': status.searchActive}" ng-controller="SearchController">
         	<div id="main-toolbar">

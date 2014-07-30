@@ -20,14 +20,14 @@
 * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 *
 */
-namespace OCA\Tasks_enhanced;
+namespace OCA\Tasks;
 
 use \OC\AppFramework\Core\API;
 
 // dont break owncloud when the appframework is not enabled
 if(\OCP\App::isEnabled('calendar')){
 
-	// $api = new API('tasks_enhanced');
+	// $api = new API('tasks');
 
 //   $api->addNavigationEntry(array(
 
@@ -39,7 +39,7 @@ if(\OCP\App::isEnabled('calendar')){
 //     'order' => 100,
 
 //     // the route that will be shown on startup
-//     'href' => $api->linkToRoute('tasks_enhanced_index'),
+//     'href' => $api->linkToRoute('tasks_index'),
 
 //     // the icon that will be shown in the navigation
 //     // this file needs to exist in img/example.png
@@ -53,15 +53,15 @@ if(\OCP\App::isEnabled('calendar')){
 
 //   ));
   \OC::$server->getNavigationManager()->add(array(
-    'id' => 'tasks_enhanced',
+    'id' => 'tasks',
     'order' => 100,
-    'href' => \OCP\Util::linkToRoute('tasks_enhanced_index'),
-    'icon' => \OCP\Util::imagePath( 'tasks_enhanced', 'tasks.svg' ),
-    'name' => \OCP\Util::getL10N('tasks_enhanced')->t('Tasks')
+    'href' => \OCP\Util::linkToRoute('tasks_index'),
+    'icon' => \OCP\Util::imagePath( 'tasks', 'tasks.svg' ),
+    'name' => \OCP\Util::getL10N('tasks')->t('Tasks')
     )
   );
 
 } else {
   $msg = 'Can not enable the Tasks app because the Calendar App is disabled.';
-  \OCP\Util::writeLog('tasks_enhanced', $msg, \OCP\Util::ERROR);
+  \OCP\Util::writeLog('tasks', $msg, \OCP\Util::ERROR);
 }

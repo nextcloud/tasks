@@ -9,7 +9,7 @@
  * See the COPYING-README file.
  */
 
-namespace OCA\Tasks_enhanced;
+namespace OCA\Tasks;
 
 use OCP\AppFramework\IAppContainer,
 	OCP\AppFramework\Controller as  BaseController,

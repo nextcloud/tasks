@@ -21,10 +21,10 @@
 *
 */
 
-namespace OCA\Tasks_enhanced\Controller;
+namespace OCA\Tasks\Controller;
 
-use OCA\Tasks_enhanced\Controller,
-	OCA\Tasks_enhanced\Helper,
+use OCA\Tasks\Controller,
+	OCA\Tasks\Helper,
 	OCP\AppFramework\Http\JSONResponse;
 
 class TasksController extends Controller {
@@ -54,7 +54,7 @@ class TasksController extends Controller {
 					$task_data['calendarcolor'] = $calendar['calendarcolor'];
 					$tasks[] = $task_data;
 				} catch(\Exception $e) {
-					\OCP\Util::writeLog('tasks_enhanced', $e->getMessage(), \OCP\Util::ERROR);
+					\OCP\Util::writeLog('tasks', $e->getMessage(), \OCP\Util::ERROR);
 				}
 			}
 		}

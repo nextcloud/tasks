@@ -21,9 +21,9 @@
 *
 */
 
-namespace OCA\Tasks_enhanced\Controller;
+namespace OCA\Tasks\Controller;
 
-use OCA\Tasks_enhanced\Controller,
+use OCA\Tasks\Controller,
 	OCP\AppFramework\Http\JSONResponse;
 
 class ListsController extends Controller {
