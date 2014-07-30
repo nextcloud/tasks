@@ -94,7 +94,7 @@ class ListsController extends Controller {
 			}else{
 				$result = array('error'=>'dberror');
 			}
-		} catch(Exception $e) {
+		} catch(\Exception $e) {
 			$result = array('message'=>$e->getMessage());
 		}
 		$response->setData($result);
