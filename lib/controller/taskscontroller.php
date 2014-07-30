@@ -201,6 +201,7 @@ class TasksController extends Controller {
 		$start = $this->params('start');
 		$response = new JSONResponse();
 		$userId = $this->api->getUserId();
+		$calendars = \OC_Calendar_Calendar::allCalendars($userId, true);
 		$user_timezone = \OC_Calendar_App::getTimezone();
 		$request = array(
 				'summary'			=> $taskName,
@@ -233,6 +234,7 @@ class TasksController extends Controller {
 	public function deleteTask(){
 		$response = new JSONResponse();
 		$taskId = $this->params('taskID');
+		$task = \OC_Calendar_App::getEventObject($taskId);
 		\OC_Calendar_Object::delete($taskId);
 		return $response;
 	}
