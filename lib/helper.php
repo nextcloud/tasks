@@ -95,7 +95,7 @@ Class helper {
 					} else{
 						throw new \Exception('Reminder duration related to not available date.');
 					}
-					$result = preg_match('/^(?P<plusminus>\+|-)?P((?P<week>\d+)W)?((?P<day>\d+)D)?(T((?P<hour>\d+)H)?((?P<minute>\d+)M)?((?P<second>\d+)S)?)?$/', $reminder->TRIGGER, $matches);
+					preg_match('/^(?P<plusminus>\+|-)?P((?P<week>\d+)W)?((?P<day>\d+)D)?(T((?P<hour>\d+)H)?((?P<minute>\d+)M)?((?P<second>\d+)S)?)?$/', $reminder->TRIGGER, $matches);
 		            $invert = false;
 		            if ($matches['plusminus']==='-') {
 		                $invert = true;
