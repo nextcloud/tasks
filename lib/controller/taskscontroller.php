@@ -263,7 +263,7 @@ class TasksController extends Controller {
 		$response = new JSONResponse();
 		try {
 			$data = \OC_Calendar_App::getEventObject($taskId);
-			if ($data['calendarid'] != $calendar) {
+			if ($data['calendarid'] != $calendarId) {
 				\OC_Calendar_Object::moveToCalendar($taskId, $calendarId);
 			}
 		} catch(\Exception $e) {
@@ -312,11 +312,11 @@ class TasksController extends Controller {
 				// 	$type = \Sabre\VObject\Property\DateTime::DATE;
 				// }
 			}
+			$vtodo->setDateTime('DUE', $due, $type);
+			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
 		} catch (\Exception $e) {
 
 		}
-		$vtodo->setDateTime('DUE', $due, $type);
-		\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
 		return $response;
 	}
 
@@ -343,11 +343,11 @@ class TasksController extends Controller {
 				// 	$type = \Sabre\VObject\Property\DateTime::DATE;
 				// }
 			}
+			$vtodo->setDateTime('DTSTART', $start, $type);
+			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
 		} catch (\Exception $e) {
 
 		}
-		$vtodo->setDateTime('DTSTART', $start, $type);
-		\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
 		return $response;
 	}
 
