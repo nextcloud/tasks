@@ -10,13 +10,13 @@
 
 namespace OCA\Tasks;
 
-use OCP\AppFramework\App as MainApp,
-	OCP\AppFramework\IAppContainer,
-	OCA\Tasks\Controller\PageController,
-	OCA\Tasks\Controller\CollectionsController,
-	OCA\Tasks\Controller\ListsController,
-	OCA\Tasks\Controller\TasksController,
-	OCA\Tasks\Controller\SettingsController;
+use OCP\AppFramework\App as MainApp;
+use OCP\AppFramework\IAppContainer;
+use OCA\Tasks\Controller\PageController;
+use OCA\Tasks\Controller\CollectionsController;
+use OCA\Tasks\Controller\ListsController;
+use OCA\Tasks\Controller\TasksController;
+use OCA\Tasks\Controller\SettingsController;
 
 /**
  * This class manages our app actions

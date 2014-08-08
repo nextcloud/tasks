@@ -23,9 +23,9 @@
 
 namespace OCA\Tasks\Controller;
 
-use OCA\Tasks\Controller,
-	OCA\Tasks\Helper,
-	OCP\AppFramework\Http\JSONResponse;
+use OCA\Tasks\Controller;
+use OCA\Tasks\Helper;
+use OCP\AppFramework\Http\JSONResponse;
 
 class TasksController extends Controller {
 
@@ -69,6 +69,9 @@ class TasksController extends Controller {
 		return $response;
 	}
 
+	/**
+	 * @param boolean $isStarred
+	 */
 	private function setStarred($isStarred){
 		$taskId = (int) $this->params('taskID');
 		try {
