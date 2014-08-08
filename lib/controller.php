@@ -11,9 +11,9 @@
 
 namespace OCA\Tasks;
 
-use OCP\AppFramework\IAppContainer,
-	OCP\AppFramework\Controller as  BaseController,
-	OCP\IRequest;
+use OCP\AppFramework\IAppContainer;
+use OCP\AppFramework\Controller as BaseController;
+use OCP\IRequest;
 
 /**
  * Base Controller class for Issues App

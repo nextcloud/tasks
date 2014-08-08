@@ -23,8 +23,8 @@
 
 namespace OCA\Tasks\Controller;
 
-use OCA\Tasks\Controller,
-	OCP\AppFramework\Http\JSONResponse;
+use OCA\Tasks\Controller;
+use OCP\AppFramework\Http\JSONResponse;
 
 class SettingsController extends Controller {
 

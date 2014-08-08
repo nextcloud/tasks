@@ -10,8 +10,8 @@
 
 namespace OCA\Tasks\Controller;
 
-use OCA\Tasks\Controller,
-	OCP\AppFramework\Http\TemplateResponse;
+use OCA\Tasks\Controller;
+use OCP\AppFramework\Http\TemplateResponse;
 
 
 /**
