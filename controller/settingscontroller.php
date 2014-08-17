@@ -23,21 +23,30 @@
 
 namespace OCA\Tasks\Controller;
 
-use OCA\Tasks\Controller;
-use OCP\AppFramework\Http\JSONResponse;
+use \OCP\AppFramework\Controller;
+use \OCP\AppFramework\Http\JSONResponse;
 
 class SettingsController extends Controller {
+
+	private $userId;
+	private $settings;
+
+	public function __construct($appName, IRequest $request, $userId, IConfig $settings){
+		parent::__construct($appName, $request);
+		$this->userId = $userId;
+		$this->settings = $settings;
+	}
 
 	/**
 	 * @NoAdminRequired
 	 */
-	public function getSettings(){
+	public function get(){
 		$settings = array(
 			array(
 				'id' => 'various',
-				'showHidden' => (int)\OCP\Config::getUserValue($this->api->getUserId(), 'tasks','various_showHidden'),
-				'startOfWeek' => (int)\OCP\Config::getUserValue($this->api->getUserId(), 'tasks','various_startOfWeek'),
-				'userID' => $this->api->getUserId()
+				'showHidden' => (int)$this->settings->getUserValue($this->userId, $this->appName,'various_showHidden'),
+				'startOfWeek' => (int)$this->settings->getUserValue($this->userId, $this->appName,'various_startOfWeek'),
+				'userID' => $this->userId
 
 			)
 		);
@@ -55,7 +64,7 @@ class SettingsController extends Controller {
 	 * @NoAdminRequired
 	 */
 	public function set(){
-		\OCP\Config::setUserValue($this->api->getUserId(), 'tasks',$this->params('type').'_'.$this->params('setting'), $this->params('value'));
+		$this->settings->setUserValue($this->userId, $this->appName, $this->params('type').'_'.$this->params('setting'), $this->params('value'));
 		$response = new JSONResponse();
 		$response->setData();
 		return $response;

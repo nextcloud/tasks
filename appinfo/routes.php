@@ -19,269 +19,48 @@
 * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 *
 */
+
 namespace OCA\Tasks;
 
-use OCA\Tasks\Dispatcher;
+// use \OCP\AppFramework\App;
+use \OCA\Tasks\AppInfo\Application;
 
-//define the routes
-$this->create('tasks_index', '/')
-	->get()
-	->action(
-		function($params){
-			session_write_close();
-			$dispatcher = new Dispatcher($params);
-			$dispatcher->dispatch('PageController', 'index');
-		}
-	);
-/*
- * Collections
- */
-$this->create('getCollections', '/collections')
-	->get()
-	->action(
-		function($params){
-			session_write_close();
-			$dispatcher = new Dispatcher($params);
-			$dispatcher->dispatch('CollectionsController', 'getCollections');
-		}
-	);
+$application = new Application();
 
-$this->create('setVisibility', '/collection/{collectionID}/visibility/{visibility}')
-	->post()
-	->action(
-		function($params){
-			session_write_close();
-			$dispatcher = new Dispatcher($params);
-			$dispatcher->dispatch('CollectionsController', 'setVisibility');
-		}
-	);
+$application->registerRoutes($this, array('routes' => array(
+	// page
+	array('name' => 'page#index', 'url' => '/', 'verb' => 'GET'),
 
-/*
- * Lists
- */
-$this->create('getLists', '/lists')
-	->get()
-	->action(
-		function($params){
-			session_write_close();
-			$dispatcher = new Dispatcher($params);
-			$dispatcher->dispatch('ListsController', 'getLists');
-		}
-	);
+	// collections
+	array('name' => 'collections#getCollections',	'url' => '/collections',										'verb' => 'GET'),
+	array('name' => 'collections#setVisibility',	'url' => '/collection/{collectionID}/visibility/{visibility}',	'verb' => 'POST'),
 
-$this->create('list_add', '/lists/add')
-	->post()
-	->action(
-		function($params){
-			session_write_close();
-			$dispatcher = new Dispatcher($params);
-			$dispatcher->dispatch('ListsController', 'addList');
-		}
-	);
+	// lists
+	array('name' => 'lists#getLists',	'url' => '/lists',					'verb' => 'GET'),
+	array('name' => 'lists#addList',	'url' => '/lists/add',				'verb' => 'POST'),
+	array('name' => 'lists#deleteList',	'url' => '/lists/{listID}/delete',	'verb' => 'POST'),
+	array('name' => 'lists#setListName','url' => '/lists/{listID}/name',	'verb' => 'POST'),
 
-$this->create('list_delete', '/lists/{listID}/delete')
-	->post()
-	->action(
-		function($params){
-			session_write_close();
-			$dispatcher = new Dispatcher($params);
-			$dispatcher->dispatch('ListsController', 'deleteList');
-		}
-	);
+	// tasks
+	array('name' => 'tasks#getTasks',		'url' => '/tasks',						'verb' => 'GET'),
+	array('name' => 'tasks#starTask',		'url' => '/tasks/{taskID}/star',		'verb' => 'POST'),
+	array('name' => 'tasks#unstarTask',		'url' => '/tasks/{taskID}/unstar',		'verb' => 'POST'),
+	array('name' => 'tasks#completeTask',	'url' => '/tasks/{taskID}/complete',	'verb' => 'POST'),
+	array('name' => 'tasks#uncompleteTask',	'url' => '/tasks/{taskID}/uncomplete',	'verb' => 'POST'),
+	array('name' => 'tasks#addTask',		'url' => '/tasks/add',					'verb' => 'POST'),
+	array('name' => 'tasks#deleteTask',		'url' => '/tasks/{taskID}/delete',		'verb' => 'POST'),
+	array('name' => 'tasks#setTaskName',	'url' => '/tasks/{taskID}/name',		'verb' => 'POST'),
+	array('name' => 'tasks#setTaskCalendar','url' => '/tasks/{taskID}/calendar',	'verb' => 'POST'),
+	array('name' => 'tasks#setTaskNote',	'url' => '/tasks/{taskID}/note',		'verb' => 'POST'),
+	array('name' => 'tasks#setDueDate',		'url' => '/tasks/{taskID}/due',			'verb' => 'POST'),
+	array('name' => 'tasks#setStartDate',	'url' => '/tasks/{taskID}/start',		'verb' => 'POST'),
 
-$this->create('list_name', '/lists/{listID}/name')
-	->post()
-	->action(
-		function($params){
-			session_write_close();
-			$dispatcher = new Dispatcher($params);
-			$dispatcher->dispatch('ListsController', 'setListName');
-		}
-	);
+	array('name' => 'tasks#percentComplete','url' => '/tasks/{taskID}/percentcomplete',	'verb' => 'POST'),
+	array('name' => 'tasks#setReminderDate','url' => '/tasks/{taskID}/reminder',		'verb' => 'POST'),
+	array('name' => 'tasks#addComment',		'url' => '/tasks/{taskID}/comment',			'verb' => 'POST'),
+	array('name' => 'tasks#deleteComment',	'url' => '/tasks/{taskID}/comment/{commentID}/delete',	'verb' => 'POST'),
 
-/*
- * Tasks
- */
-$this->create('getTasks', '/tasks')
-	->get()
-	->action(
-		function($params){
-			session_write_close();
-			$dispatcher = new Dispatcher($params);
-			$dispatcher->dispatch('TasksController', 'getTasks');
-		}
-	);
-
-
-$this->create('task_star', '/tasks/{taskID}/star')
-	->post()
-	->action(
-		function($params){
-			session_write_close();
-			$dispatcher = new Dispatcher($params);
-			$dispatcher->dispatch('TasksController', 'starTask');
-		}
-	);
-
-$this->create('task_unstar', '/tasks/{taskID}/unstar')
-	->post()
-	->action(
-		function($params){
-			session_write_close();
-			$dispatcher = new Dispatcher($params);
-			$dispatcher->dispatch('TasksController', 'unstarTask');
-		}
-	);
-
-$this->create('task_complete', '/tasks/{taskID}/complete')
-	->post()
-	->action(
-		function($params){
-			session_write_close();
-			$dispatcher = new Dispatcher($params);
-			$dispatcher->dispatch('TasksController', 'completeTask');
-		}
-	);
-
-$this->create('task_uncomplete', '/tasks/{taskID}/uncomplete')
-	->post()
-	->action(
-		function($params){
-			session_write_close();
-			$dispatcher = new Dispatcher($params);
-			$dispatcher->dispatch('TasksController', 'uncompleteTask');
-		}
-	);
-
-$this->create('task_add', '/tasks/add')
-	->post()
-	->action(
-		function($params){
-			session_write_close();
-			$dispatcher = new Dispatcher($params);
-			$dispatcher->dispatch('TasksController', 'addTask');
-		}
-	);
-
-$this->create('task_delete', '/tasks/{taskID}/delete')
-	->post()
-	->action(
-		function($params){
-			session_write_close();
-			$dispatcher = new Dispatcher($params);
-			$dispatcher->dispatch('TasksController', 'deleteTask');
-		}
-	);
-
-$this->create('task_name', '/tasks/{taskID}/name')
-	->post()
-	->action(
-		function($params){
-			session_write_close();
-			$dispatcher = new Dispatcher($params);
-			$dispatcher->dispatch('TasksController', 'setTaskName');
-		}
-	);
-
-$this->create('task_calendar', '/tasks/{taskID}/calendar')
-	->post()
-	->action(
-		function($params){
-			session_write_close();
-			$dispatcher = new Dispatcher($params);
-			$dispatcher->dispatch('TasksController', 'setTaskCalendar');
-		}
-	);
-
-$this->create('task_note', '/tasks/{taskID}/note')
-	->post()
-	->action(
-		function($params){
-			session_write_close();
-			$dispatcher = new Dispatcher($params);
-			$dispatcher->dispatch('TasksController', 'setTaskNote');
-		}
-	);
-
-$this->create('task_due', '/tasks/{taskID}/due')
-	->post()
-	->action(
-		function($params){
-			session_write_close();
-			$dispatcher = new Dispatcher($params);
-			$dispatcher->dispatch('TasksController', 'setDueDate');
-		}
-	);
-
-$this->create('task_start', '/tasks/{taskID}/start')
-	->post()
-	->action(
-		function($params){
-			session_write_close();
-			$dispatcher = new Dispatcher($params);
-			$dispatcher->dispatch('TasksController', 'setStartDate');
-		}
-	);
-
-$this->create('task_percentcomplete', '/tasks/{taskID}/percentcomplete')
-	->post()
-	->action(
-		function($params){
-			session_write_close();
-			$dispatcher = new Dispatcher($params);
-			$dispatcher->dispatch('TasksController', 'percentComplete');
-		}
-	);
-
-$this->create('task_reminder', '/tasks/{taskID}/reminder')
-	->post()
-	->action(
-		function($params){
-			session_write_close();
-			$dispatcher = new Dispatcher($params);
-			$dispatcher->dispatch('TasksController', 'setReminderDate');
-		}
-	);
-
-$this->create('task_comment', '/tasks/{taskID}/comment')
-	->post()
-	->action(
-		function($params){
-			session_write_close();
-			$dispatcher = new Dispatcher($params);
-			$dispatcher->dispatch('TasksController', 'addComment');
-		}
-	);
-
-$this->create('task_deletecomment', '/tasks/{taskID}/comment/{commentID}/delete')
-	->post()
-	->action(
-		function($params){
-			session_write_close();
-			$dispatcher = new Dispatcher($params);
-			$dispatcher->dispatch('TasksController', 'deleteComment');
-		}
-	);
-
-/*
- * Settings
- */
-$this->create('getSettings', '/settings')
-	->get()
-	->action(
-		function($params){
-			session_write_close();
-			$dispatcher = new Dispatcher($params);
-			$dispatcher->dispatch('SettingsController', 'getSettings');
-		}
-	);
-
-$this->create('showHidden', '/settings/{type}/{setting}/{value}')
-	->post()
-	->action(
-		function($params){
-			session_write_close();
-			$dispatcher = new Dispatcher($params);
-			$dispatcher->dispatch('SettingsController', 'set');
-		}
-	);
+	// settings
+	array('name' => 'settings#get',	'url' => '/settings', 'verb' => 'GET'),
+	array('name' => 'settings#set', 'url' => '/settings/{type}/{setting}/{value}', 'verb' => 'POST'),
+)));

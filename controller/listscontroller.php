@@ -23,18 +23,24 @@
 
 namespace OCA\Tasks\Controller;
 
-use OCA\Tasks\Controller;
-use OCP\AppFramework\Http\JSONResponse;
+use \OCP\AppFramework\Controller;
+use \OCP\AppFramework\Http\JSONResponse;
 
 class ListsController extends Controller {
+
+	private $userId;
+
+	public function __construct($appName, IRequest $request, $userId){
+		parent::__construct($appName, $request);
+		$this->userId = $userId;
+	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function getLists(){
-		$userId = $this->api->getUserId();
 		$calendar = new \OC_Calendar_Calendar();
-		$lists = $calendar::allCalendars($userId, true);
+		$lists = $calendar::allCalendars($this->userId, true);
 		$result = array(
 			'data' => array(
 				'lists' => $lists
@@ -50,13 +56,12 @@ class ListsController extends Controller {
 	 */
 	public function addList(){
 		$listName = $this->params('name');
-		$userId = $this->api->getUserId();
 
 		if(trim($listName) == '') {
 			// OCP\JSON::error(array('message'=>'empty'));
 			exit;
 		}
-		$calendars = \OC_Calendar_Calendar::allCalendars($userId, true);
+		$calendars = \OC_Calendar_Calendar::allCalendars($this->userId, true);
 		foreach($calendars as $cal) {
 			if($cal['displayname'] == $listName) {
 				// OCP\JSON::error(array('message'=>'namenotavailable'));
@@ -64,7 +69,7 @@ class ListsController extends Controller {
 			}
 		}
 		$color = '#CCCCCC';
-		$calendarId = \OC_Calendar_Calendar::addCalendar($userId, strip_tags($listName), 'VEVENT,VTODO,VJOURNAL', null, 0, $color);
+		$calendarId = \OC_Calendar_Calendar::addCalendar($this->userId, strip_tags($listName), 'VEVENT,VTODO,VJOURNAL', null, 0, $color);
 		\OC_Calendar_Calendar::setCalendarActive($calendarId, 1);
 		$list = \OC_Calendar_Calendar::find($calendarId);
 
@@ -107,15 +112,14 @@ class ListsController extends Controller {
 	public function setListName(){
 		$listId = (int) $this->params('listID');
 		$listName = $this->params('name');
-		$userId = $this->api->getUserId();
 		$response = new JSONResponse();
 		if(trim($listName) == '') {
 			// OCP\JSON::error(array('message'=>'empty'));
 			exit;
 		}
-		$calendars = \OC_Calendar_Calendar::allCalendars($userId, true);
+		$calendars = \OC_Calendar_Calendar::allCalendars($this->userId, true);
 		foreach($calendars as $cal) {
-			if($cal['userid'] != $userId){
+			if($cal['userid'] != $this->userId){
 				continue;
 			}
 			if($cal['displayname'] == $listName && $cal['id'] != $listId) {

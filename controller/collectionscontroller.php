@@ -23,52 +23,62 @@
 
 namespace OCA\Tasks\Controller;
 
-use OCA\Tasks\Controller;
-use OCP\AppFramework\Http\JSONResponse;
+use \OCP\AppFramework\Controller;
+use \OCP\AppFramework\Http\JSONResponse;
 
 class CollectionsController extends Controller {
+
+	private $userId;
+	private $l10n;
+	private $settings;
+
+	public function __construct($appName, IRequest $request, $userId, $l10n, IConfig $settings){
+		parent::__construct($appName, $request);
+		$this->l10n = $l10n;
+		$this->userId = $userId;
+		$this->settings = $settings;
+	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function getCollections(){
-		$l = \OCP\Util::getL10N('tasks');
 		$collections = array(
 			array(
 				'id' => "starred",
-				'displayname' => (string)$l->t('Important'),
+				'displayname' => (string)$this->l10n->t('Important'),
 				'show' => 2),
 			array(
 				'id' => "today",
-				'displayname' => (string)$l->t('Today'),
+				'displayname' => (string)$this->l10n->t('Today'),
 				'show' => 2),
 			array(
 				'id' => "week",
-				'displayname' => (string)$l->t('Week'),
+				'displayname' => (string)$this->l10n->t('Week'),
 				'show' => 2),
 			array(
 				'id' => "all",
-				'displayname' => (string)$l->t('All'),
+				'displayname' => (string)$this->l10n->t('All'),
 				'show' => 2),
 			array(
 				'id' => "current",
-				'displayname' => (string)$l->t('Current'),
+				'displayname' => (string)$this->l10n->t('Current'),
 				'show' => 2),
 			array(
 				'id' => "completed",
-				'displayname' => (string)$l->t('Done'),
+				'displayname' => (string)$this->l10n->t('Done'),
 				'show' => 2)
 		);
 		foreach ($collections as $key => $collection){
 			try{
-				$tmp = \OCP\Config::getUserValue($this->api->getUserId(), 'tasks','show_'.$collection['id']);
+				$tmp = $this->settings->getUserValue($this->userId, $this->appName,'show_'.$collection['id']);
 				if (!in_array((int)$tmp, array(0,1,2)) || $tmp === null) {
 					$tmp = 2;
-					\OCP\Config::setUserValue($this->api->getUserId(), 'tasks','show_'.$collection['id'],$tmp);
+					$this->settings->setUserValue($this->userId, $this->appName,'show_'.$collection['id'],$tmp);
 				}
 				$collections[$key]['show'] = (int)$tmp;
 			}catch(\Exception $e) {
-					\OCP\Util::writeLog('tasks', $e->getMessage(), \OCP\Util::ERROR);
+					\OCP\Util::writeLog($this->appName, $e->getMessage(), \OCP\Util::ERROR);
 			}
 		}
 		$result = array(
@@ -88,7 +98,7 @@ class CollectionsController extends Controller {
 		$collectionId = (string) $this->params('collectionID');
 		$vis = (int) $this->params('visibility');
 		if (in_array($vis, array(0,1,2))){
-			\OCP\Config::setUserValue($this->api->getUserId(), 'tasks','show_'.$collectionId,$vis);
+			$this->settings->setUserValue($this->userId, $this->appName,'show_'.$collectionId,$vis);
 		}
 		$response = new JSONResponse();
 		return $response;

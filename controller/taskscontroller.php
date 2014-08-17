@@ -23,18 +23,24 @@
 
 namespace OCA\Tasks\Controller;
 
-use OCA\Tasks\Controller;
-use OCA\Tasks\Helper;
-use OCP\AppFramework\Http\JSONResponse;
+use \OCP\AppFramework\Controller;
+use \OCP\AppFramework\Http\JSONResponse;
+use \OCA\Tasks\Controller\Helper;
 
 class TasksController extends Controller {
+
+	private $userId;
+
+	public function __construct($appName, IRequest $request, $userId){
+		parent::__construct($appName, $request);
+		$this->userId = $userId;
+	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function getTasks(){
-		$userId = $this->api->getUserId();
-		$calendars = \OC_Calendar_Calendar::allCalendars($userId, true);
+		$calendars = \OC_Calendar_Calendar::allCalendars($this->userId, true);
 		$user_timezone = \OC_Calendar_App::getTimezone();
 
 		$tasks = array();
@@ -484,7 +490,6 @@ class TasksController extends Controller {
 	public function addComment(){
 		$taskId = $this->params('taskID');
 		$comment = $this->params('comment');
-		$userId = $this->api->getUserId();
 		$response = new JSONResponse();
 		try {
 			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
@@ -501,7 +506,7 @@ class TasksController extends Controller {
 			$vtodo->addProperty('COMMENT',$comment,
 				array(
 					'ID' => $commentId,
-					'USERID' => $userId,
+					'USERID' => $this->userId,
 					'DATE-TIME' => $now->format('Ymd\THis\Z')
 					)
 				);
@@ -512,8 +517,8 @@ class TasksController extends Controller {
 				'taskID' => $taskId,
 				'id' => $commentId,
 				'tmpID' => $this->params('tmpID'),
-				'name' => \OCP\USER::getDisplayName(),
-				'userID' => $userId,
+				'name' => \OCP\User::getDisplayName(),
+				'userID' => $this->userId,
 				'comment' => $comment,
 				'time' => $now->format('Ymd\THis')
 				);
@@ -535,14 +540,13 @@ class TasksController extends Controller {
 	public function deleteComment(){
 		$taskId = $this->params('taskID');
 		$commentId = $this->params('commentID');
-		$userId = $this->api->getUserId();
 		$response = new JSONResponse();
 		try {
 			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
 			$vtodo = $vcalendar->VTODO;
 			$commentIndex = $this->getCommentById($vtodo,$commentId);
 			$comment = $vtodo->children[$commentIndex];
-			if($comment['USERID'] == $userId){
+			if($comment['USERID'] == $this->userId){
 				unset($vtodo->children[$commentIndex]);
 				\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
 			}else{
