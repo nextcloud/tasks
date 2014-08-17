@@ -20,48 +20,22 @@
 * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 *
 */
-namespace OCA\Tasks;
+namespace OCA\Tasks\AppInfo;
 
-use \OC\AppFramework\Core\API;
+if(\OCP\App::isEnabled('calendar')) {
+	\OCP\App::addNavigationEntry(array(
+		// the string under which your app will be referenced in owncloud
+		'id' => 'tasks',
 
-// dont break owncloud when the appframework is not enabled
-if(\OCP\App::isEnabled('calendar')){
+		'order' => 100,
 
-	// $api = new API('tasks');
+		'href' => \OCP\Util::linkToRoute('tasks.page.index'),
 
-//   $api->addNavigationEntry(array(
+		'icon' => \OCP\Util::imagePath('tasks', 'tasks.svg'),
 
-//     // the string under which your app will be referenced in owncloud
-//     'id' => $api->getAppName(),
-
-//     // sorting weight for the navigation. The higher the number, the higher
-//     // will it be listed in the navigation
-//     'order' => 100,
-
-//     // the route that will be shown on startup
-//     'href' => $api->linkToRoute('tasks_index'),
-
-//     // the icon that will be shown in the navigation
-//     // this file needs to exist in img/example.png
-//     'icon' => $api->imagePath('tasks.svg'),
-  
-// //	  'icon' => $api->imagePath('core', 'places/music.svg'),
-
-//     // the title of your application. This will be used in the
-//     // navigation or on the settings page of your app
-//     'name' => $api->getTrans()->t('Tasks')
-
-//   ));
-  \OC::$server->getNavigationManager()->add(array(
-    'id' => 'tasks',
-    'order' => 100,
-    'href' => \OCP\Util::linkToRoute('tasks_index'),
-    'icon' => \OCP\Util::imagePath( 'tasks', 'tasks.svg' ),
-    'name' => \OCP\Util::getL10N('tasks')->t('Tasks')
-    )
-  );
-
+		'name' => \OC_L10N::get('tasks')->t('Tasks')
+	));
 } else {
-  $msg = 'Can not enable the Tasks app because the Calendar App is disabled.';
-  \OCP\Util::writeLog('tasks', $msg, \OCP\Util::ERROR);
+	$msg = 'Can not enable the Tasks app because the Calendar App is disabled.';
+	\OCP\Util::writeLog('tasks', $msg, \OCP\Util::ERROR);
 }
