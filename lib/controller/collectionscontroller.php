@@ -56,7 +56,7 @@ class CollectionsController extends Controller {
 				'show' => 2),
 			array(
 				'id' => "completed",
-				'displayname' => (string)$l->t('Done'),
+				'displayname' => (string)$l->t('Completed'),
 				'show' => 2)
 		);
 		foreach ($collections as $key => $collection){

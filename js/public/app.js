@@ -1046,15 +1046,15 @@
                 case 'today':
                   return t('tasks', 'Add an item due today in "%s"...').replace('%s', list.displayname);
                 case 'all':
-                  return t('tasks', 'Add an entry in "%s"...').replace('%s', list.displayname);
+                  return t('tasks', 'Add an item in "%s"...').replace('%s', list.displayname);
                 case 'current':
-                  return t('tasks', 'Add a current entry in "%s"...').replace('%s', list.displayname);
+                  return t('tasks', 'Add a current item in "%s"...').replace('%s', list.displayname);
                 case 'completed':
                 case 'week':
                   return null;
                 default:
                   if (angular.isDefined(_$listsmodel.getById(_$scope.route.listID))) {
-                    return t('tasks', 'Add an entry in "%s"...').replace('%s', _$listsmodel.getById(_$scope.route.listID).displayname);
+                    return t('tasks', 'Add an item in "%s"...').replace('%s', _$listsmodel.getById(_$scope.route.listID).displayname);
                   }
               }
             }

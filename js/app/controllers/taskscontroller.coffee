@@ -57,16 +57,16 @@ SettingsBusinessLayer) ->
 							return t('tasks','Add an item due today in "%s"...')
 							.replace('%s',list.displayname)
 						when 'all'
-							return t('tasks','Add an entry in "%s"...')
+							return t('tasks','Add an item in "%s"...')
 							.replace('%s',list.displayname)
 						when 'current'
-							return t('tasks','Add a current entry in "%s"...')
+							return t('tasks','Add a current item in "%s"...')
 							.replace('%s',list.displayname)
 						when 'completed', 'week'
 							return null
 						else
 							if angular.isDefined(_$listsmodel.getById(_$scope.route.listID))
-								return t('tasks','Add an entry in "%s"...')
+								return t('tasks','Add an item in "%s"...')
 								.replace('%s',
 								_$listsmodel.getById(_$scope.route.listID).displayname)
 
