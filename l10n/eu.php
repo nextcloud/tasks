@@ -1,7 +1,7 @@
 <?php
 $TRANSLATIONS = array(
 "Tasks" => "Zereginak",
-"Due yesterday" => "Epe muga atzo",
+"Due yesterday" => "Epemuga atzo",
 "Due today" => "Epemuga gaur",
 "Due tomorrow" => "Epemuga bihar",
 "Due on" => "Epemuga",
