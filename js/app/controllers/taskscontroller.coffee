@@ -127,6 +127,10 @@ SettingsBusinessLayer) ->
 			@_$scope.getCount = (listID,type) ->
 				return _$listsmodel.getCount(listID,type)
 
+			@_$scope.getCountString = (listID,type) ->
+				return n('tasks', '%n Completed Task', '%n Completed Tasks',
+				_$listsmodel.getCount(listID,type))
+
 			@_$scope.addTask = (taskName) ->
 
 				_$scope.isAddingTask = true
