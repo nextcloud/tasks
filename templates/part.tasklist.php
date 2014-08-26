@@ -20,10 +20,9 @@
                 </div>
             </li>
         </ol>
-        <h2 class="heading-hiddentasks" ng-show="getCount(route.listID,'completed')" ng-switch="getCount(route.listID,'completed')">
+        <h2 class="heading-hiddentasks" ng-show="getCount(route.listID,'completed')">
             <span class="icon toggle-completed-tasks" ng-click="toggleHidden()"></span>
-            <text ng-switch-when="1" ng-click="toggleHidden()"><?php p($l->t('1 Completed Task')); ?></text>
-            <text ng-switch-default ng-click="toggleHidden()">{{ getCount(route.listID,'completed') }} <?php p($l->t('Completed Tasks')); ?></text>
+            <text ng-click="toggleHidden()">{{ getCountString(route.listID,'completed') }}</text>
         </h2>
         <ol class="completed-tasks" rel="completed" oc-drop-task>
             <li ng-repeat="task in tasks | filter:{'calendarid':route.listID} | filter:{'completed':'true'} | filter:route.searchString | orderBy:'completed_date':true"
