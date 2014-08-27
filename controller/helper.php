@@ -20,12 +20,12 @@
  *
  */
 
-namespace OCA\Tasks;
+namespace OCA\Tasks\Controller;
 
 use Sabre\VObject;
 // use OCA\Tasks\App;
 
-Class helper {
+Class Helper {
 
 	public static function parseVTODO($data) {
 		$object = \OC_VObject::parse($data);
@@ -179,7 +179,7 @@ Class helper {
 				$comments_parsed[] = array(
 					'id' => (int)$com['ID']->value,
 					'userID' => $com['USERID']->value,
-					'name' => \OCP\USER::getDisplayName($com['USERID']->value),
+					'name' => \OCP\User::getDisplayName($com['USERID']->value),
 					'comment' => $com->value,
 					'time' => $time
 					);
