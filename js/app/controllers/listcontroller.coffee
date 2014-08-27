@@ -90,7 +90,7 @@ CollectionsModel, ListsBusinessLayer, $location) ->
 						.replace('%s',_$scope.status.newListName))
 				else
 					alert(t('tasks',
-					'An empty name ist not allowed.'))
+					'An empty name is not allowed.'))
 
 			@_$scope.editName = (listID) ->
 				_$scope.status.listNameBackup = _$listsmodel.getById(listID).displayname
@@ -121,7 +121,7 @@ CollectionsModel, ListsBusinessLayer, $location) ->
 						.replace('%s',name))
 				else
 					alert(t('tasks',
-					'An empty name ist not allowed.'))
+					'An empty name is not allowed.'))
 
 			@_$scope.endEditList = () ->
 				$location.path('/lists/'+_$scope.route.listID)

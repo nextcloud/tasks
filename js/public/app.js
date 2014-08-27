@@ -810,7 +810,7 @@
                 return alert(t('tasks', 'The name "%s" is already used.').replace('%s', _$scope.status.newListName));
               }
             } else {
-              return alert(t('tasks', 'An empty name ist not allowed.'));
+              return alert(t('tasks', 'An empty name is not allowed.'));
             }
           };
           this._$scope.editName = function(listID) {
@@ -841,7 +841,7 @@
                 return alert(t('tasks', 'The name "%s" is already used.').replace('%s', name));
               }
             } else {
-              return alert(t('tasks', 'An empty name ist not allowed.'));
+              return alert(t('tasks', 'An empty name is not allowed.'));
             }
           };
           this._$scope.endEditList = function() {
