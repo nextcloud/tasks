@@ -1124,6 +1124,9 @@
           this._$scope.getCount = function(listID, type) {
             return _$listsmodel.getCount(listID, type);
           };
+          this._$scope.getCountString = function(listID, type) {
+            return n('tasks', '%n Completed Task', '%n Completed Tasks', _$listsmodel.getCount(listID, type));
+          };
           this._$scope.addTask = function(taskName) {
             var task, _ref,
               _this = this;
