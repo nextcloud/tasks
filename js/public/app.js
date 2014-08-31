@@ -1116,6 +1116,11 @@
               }
             };
           };
+          this._$scope.filterTasksByCalendar = function(task, listID) {
+            return function(task) {
+              return '' + task.calendarid === '' + listID;
+            };
+          };
           this._$scope.filterLists = function() {
             return function(list) {
               return _$scope.getCount(list.id, _$scope.route.listID);

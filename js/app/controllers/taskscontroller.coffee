@@ -120,6 +120,11 @@ SettingsBusinessLayer) ->
 						when 'today'
 							return (task.completed == false && _$tasksmodel.today(task.due))
 
+			@_$scope.filterTasksByCalendar = (task, listID) ->
+				return (task) ->
+					return ''+task.calendarid == ''+listID
+					# return false
+
 			@_$scope.filterLists = () ->
 				return (list) ->
 					return _$scope.getCount(list.id,_$scope.route.listID)
