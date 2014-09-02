@@ -54,6 +54,7 @@ $TRANSLATIONS = array(
 "Add a comment" => "Tilføj en kommentar",
 "This will delete the Calendar \"%s\" and all of its entries." => "Dette vil slette kalenderen \"%s\" og alle dens poster.",
 "The name \"%s\" is already used." => "Navnet \"%s\" er allerede i brug.",
+"An empty name is not allowed." => "Et tomt navn er ikke tilladt.",
 "Hidden" => "Skjult",
 "Visible" => "Synlig",
 "Automatic" => "Automatisk",
