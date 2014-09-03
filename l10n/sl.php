@@ -42,6 +42,7 @@ $TRANSLATIONS = array(
 "Add a comment" => "Dodaj opombo",
 "This will delete the Calendar \"%s\" and all of its entries." => "Izbrisan bo koledar \"%s\" in vsi vpisani vnosi.",
 "The name \"%s\" is already used." => "Ime \"%s\" je že v uporabi.",
+"An empty name is not allowed." => "Prazno polje imena ni dovoljeno.",
 "Hidden" => "Skrito",
 "Visible" => "Vidno",
 "Automatic" => "Samodejno",
@@ -52,6 +53,8 @@ $TRANSLATIONS = array(
 "Thursday" => "četrtek",
 "Friday" => "petek",
 "Saturday" => "sobota",
+"Add an item in \"%s\"..." => "Dodaj predmet v \"%s\" ...",
+"Add a current item in \"%s\"..." => "Dodaj trenutni predmet v \"%s\" ...",
 "_%n Completed Task_::_%n Completed Tasks_" => array("","","",""),
 "Set due date" => "Nastavi datum preteka",
 "%s %% completed" => "%s %% končano",
@@ -67,6 +70,8 @@ $TRANSLATIONS = array(
 "General" => "Splošno",
 "General Settings" => "Splošne nastavitve",
 "Start of week" => "Začetek tedna",
+"Smart Collections" => "Pametne zbirke",
+"Visibility of Smart Collections" => "Vidnost pametnih zbirk",
 "Load more completed tasks" => "Naloži več končanih nalog"
 );
 $PLURAL_FORMS = "nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);";
