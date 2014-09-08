@@ -47,7 +47,6 @@ class SettingsController extends Controller {
 				'showHidden' => (int)$this->settings->getUserValue($this->userId, $this->appName,'various_showHidden'),
 				'startOfWeek' => (int)$this->settings->getUserValue($this->userId, $this->appName,'various_startOfWeek'),
 				'userID' => $this->userId
-
 			)
 		);
 		$result = array(
@@ -66,7 +65,6 @@ class SettingsController extends Controller {
 	public function set(){
 		$this->settings->setUserValue($this->userId, $this->appName, $this->params('type').'_'.$this->params('setting'), $this->params('value'));
 		$response = new JSONResponse();
-		$response->setData();
 		return $response;
 	}
 }
