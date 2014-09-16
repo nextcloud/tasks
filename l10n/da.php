@@ -1,7 +1,7 @@
 <?php
 $TRANSLATIONS = array(
 "Tasks" => "Opgaver",
-"Important" => "vigtigt",
+"Important" => "Vigtigt",
 "Today" => "I dag",
 "Week" => "Uge",
 "All" => "Alle",
