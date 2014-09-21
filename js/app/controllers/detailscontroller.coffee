@@ -35,7 +35,9 @@ $timeout, $routeParams, SettingsModel) ->
 			@_$scope.task = _$tasksmodel.getById(_$scope.route.taskID)
 
 			@_$scope.$on('$routeChangeSuccess', () ->
-				_$scope.task = _$tasksmodel.getById(_$scope.route.taskID)
+				task = _$tasksmodel.getById(_$scope.route.taskID)
+				if !(angular.isUndefined(task) || task == null)
+					_$scope.task = task
 			)
 
 			@_$scope.settingsmodel = @_$settingsmodel

@@ -441,7 +441,11 @@
           this._$settingsmodel = _$settingsmodel;
           this._$scope.task = _$tasksmodel.getById(_$scope.route.taskID);
           this._$scope.$on('$routeChangeSuccess', function() {
-            return _$scope.task = _$tasksmodel.getById(_$scope.route.taskID);
+            var task;
+            task = _$tasksmodel.getById(_$scope.route.taskID);
+            if (!(angular.isUndefined(task) || task === null)) {
+              return _$scope.task = task;
+            }
           });
           this._$scope.settingsmodel = this._$settingsmodel;
           this._$scope.isAddingComment = false;
