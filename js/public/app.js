@@ -598,11 +598,9 @@
           };
           this._$scope.toggleCompleted = function(taskID) {
             if (_$tasksmodel.completed(taskID)) {
-              _tasksbusinesslayer.uncompleteTask(taskID);
-              return _tasksbusinesslayer.setPercentComplete(taskID, 0);
+              return _tasksbusinesslayer.uncompleteTask(taskID);
             } else {
-              _tasksbusinesslayer.completeTask(taskID);
-              return _tasksbusinesslayer.setPercentComplete(taskID, 100);
+              return _tasksbusinesslayer.completeTask(taskID);
             }
           };
           this._$scope.toggleStarred = function(taskID) {
@@ -1087,11 +1085,9 @@
           };
           this._$scope.toggleCompleted = function(taskID) {
             if (_$tasksmodel.completed(taskID)) {
-              _tasksbusinesslayer.uncompleteTask(taskID);
-              return _tasksbusinesslayer.setPercentComplete(taskID, 0);
+              return _tasksbusinesslayer.uncompleteTask(taskID);
             } else {
-              _tasksbusinesslayer.completeTask(taskID);
-              return _tasksbusinesslayer.setPercentComplete(taskID, 100);
+              return _tasksbusinesslayer.completeTask(taskID);
             }
           };
           this._$scope.toggleStarred = function(taskID) {
@@ -1352,23 +1348,21 @@
         };
 
         TasksBusinessLayer.prototype.completeTask = function(taskID) {
-          this._$tasksmodel.complete(taskID);
-          return this._persistence.completeTask(taskID);
+          return this.setPercentComplete(taskID, 100);
         };
 
         TasksBusinessLayer.prototype.setPercentComplete = function(taskID, percentComplete) {
           this._$tasksmodel.setPercentComplete(taskID, percentComplete);
-          this._persistence.setPercentComplete(taskID, percentComplete);
           if (percentComplete < 100) {
-            return this._$tasksmodel.uncomplete(taskID);
+            this._$tasksmodel.uncomplete(taskID);
           } else {
-            return this._$tasksmodel.complete(taskID);
+            this._$tasksmodel.complete(taskID);
           }
+          return this._persistence.setPercentComplete(taskID, percentComplete);
         };
 
         TasksBusinessLayer.prototype.uncompleteTask = function(taskID) {
-          this._$tasksmodel.uncomplete(taskID);
-          return this._persistence.uncompleteTask(taskID);
+          return this.setPercentComplete(taskID, 0);
         };
 
         TasksBusinessLayer.prototype.deleteTask = function(taskID) {
@@ -2548,16 +2542,6 @@
           return this._request.post('/apps/tasks/tasks/{taskID}/unstar', params);
         };
 
-        Persistence.prototype.completeTask = function(taskID) {
-          var params;
-          params = {
-            routeParams: {
-              taskID: taskID
-            }
-          };
-          return this._request.post('/apps/tasks/tasks/{taskID}/complete', params);
-        };
-
         Persistence.prototype.setPercentComplete = function(taskID, complete) {
           var params;
           params = {
@@ -2569,16 +2553,6 @@
             }
           };
           return this._request.post('/apps/tasks/tasks/{taskID}/percentcomplete', params);
-        };
-
-        Persistence.prototype.uncompleteTask = function(taskID) {
-          var params;
-          params = {
-            routeParams: {
-              taskID: taskID
-            }
-          };
-          return this._request.post('/apps/tasks/tasks/{taskID}/uncomplete', params);
         };
 
         Persistence.prototype.addTask = function(task, onSuccess, onFailure) {

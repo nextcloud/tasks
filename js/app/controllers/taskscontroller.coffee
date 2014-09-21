@@ -91,10 +91,8 @@ SettingsBusinessLayer) ->
 			@_$scope.toggleCompleted = (taskID) ->
 				if _$tasksmodel.completed(taskID)
 					_tasksbusinesslayer.uncompleteTask(taskID)
-					_tasksbusinesslayer.setPercentComplete(taskID,0)
 				else
 					_tasksbusinesslayer.completeTask(taskID)
-					_tasksbusinesslayer.setPercentComplete(taskID,100)
 
 			@_$scope.toggleStarred = (taskID) ->
 				if _$tasksmodel.starred(taskID)
