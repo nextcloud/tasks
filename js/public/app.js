@@ -449,6 +449,7 @@
           });
           this._$scope.settingsmodel = this._$settingsmodel;
           this._$scope.isAddingComment = false;
+          this._$scope.timers = [];
           this._$scope.durations = [
             {
               name: t('tasks', 'week'),
@@ -622,27 +623,27 @@
 
             } else {
               if (newVal.name !== oldVal.name) {
-                if (_$scope.nametimer) {
-                  $timeout.cancel(_$scope.nametimer);
+                if (_$scope.timers['task' + newVal.id + 'name']) {
+                  $timeout.cancel(_$scope.timers['task' + newVal.id + 'name']);
                 }
-                _$scope.nametimer = $timeout(function() {
-                  return _tasksbusinesslayer.setTaskName(_$scope.task.id, _$scope.task.name);
-                }, 2000);
+                _$scope.timers['task' + newVal.id + 'name'] = $timeout(function() {
+                  return _tasksbusinesslayer.setTaskName(newVal.id, newVal.name);
+                }, 3000);
               }
               if (newVal.note !== oldVal.note) {
-                if (_$scope.notetimer) {
-                  $timeout.cancel(_$scope.notetimer);
+                if (_$scope.timers['task' + newVal.id + 'note']) {
+                  $timeout.cancel(_$scope.timers['task' + newVal.id + 'note']);
                 }
-                _$scope.notetimer = $timeout(function() {
-                  return _tasksbusinesslayer.setTaskNote(_$scope.task.id, _$scope.task.note);
+                _$scope.timers['task' + newVal.id + 'note'] = $timeout(function() {
+                  return _tasksbusinesslayer.setTaskNote(newVal.id, newVal.note);
                 }, 5000);
               }
               if (newVal.complete !== oldVal.complete) {
-                if (_$scope.completetimer) {
-                  $timeout.cancel(_$scope.completetimer);
+                if (_$scope.timers['task' + newVal.id + 'complete']) {
+                  $timeout.cancel(_$scope.timers['task' + newVal.id + 'complete']);
                 }
-                return _$scope.completetimer = $timeout(function() {
-                  return _tasksbusinesslayer.setPercentComplete(_$scope.task.id, _$scope.task.complete);
+                return _$scope.timers['task' + newVal.id + 'complete'] = $timeout(function() {
+                  return _tasksbusinesslayer.setPercentComplete(newVal.id, newVal.complete);
                 }, 1000);
               }
             }
