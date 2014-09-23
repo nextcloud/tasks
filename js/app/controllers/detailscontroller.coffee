@@ -35,12 +35,16 @@ $timeout, $routeParams, SettingsModel) ->
 			@_$scope.task = _$tasksmodel.getById(_$scope.route.taskID)
 
 			@_$scope.$on('$routeChangeSuccess', () ->
-				_$scope.task = _$tasksmodel.getById(_$scope.route.taskID)
+				task = _$tasksmodel.getById(_$scope.route.taskID)
+				if !(angular.isUndefined(task) || task == null)
+					_$scope.task = task
 			)
 
 			@_$scope.settingsmodel = @_$settingsmodel
 
 			@_$scope.isAddingComment = false
+
+			@_$scope.timers = []
 
 			@_$scope.durations = [
 				{
@@ -194,10 +198,8 @@ $timeout, $routeParams, SettingsModel) ->
 			@_$scope.toggleCompleted = (taskID) ->
 				if _$tasksmodel.completed(taskID)
 					_tasksbusinesslayer.uncompleteTask(taskID)
-					_tasksbusinesslayer.setPercentComplete(taskID,0)
 				else
 					_tasksbusinesslayer.completeTask(taskID)
-					_tasksbusinesslayer.setPercentComplete(taskID,100)
 
 			@_$scope.toggleStarred = (taskID) ->
 				if _$tasksmodel.starred(taskID)
@@ -217,23 +219,23 @@ $timeout, $routeParams, SettingsModel) ->
 					return
 				else
 					if newVal.name != oldVal.name
-						if _$scope.nametimer
-							$timeout.cancel(_$scope.nametimer)
-						_$scope.nametimer = $timeout( () ->
-							_tasksbusinesslayer.setTaskName(_$scope.task.id,_$scope.task.name)
-						,2000)
+						if _$scope.timers['task'+newVal.id+'name']
+							$timeout.cancel(_$scope.timers['task'+newVal.id+'name'])
+						_$scope.timers['task'+newVal.id+'name'] = $timeout( () ->
+							_tasksbusinesslayer.setTaskName(newVal.id,newVal.name)
+						,3000)
 					if newVal.note != oldVal.note
-						if _$scope.notetimer
-							$timeout.cancel(_$scope.notetimer)
-						_$scope.notetimer = $timeout( () ->
-							_tasksbusinesslayer.setTaskNote(_$scope.task.id,_$scope.task.note)
+						if _$scope.timers['task'+newVal.id+'note']
+							$timeout.cancel(_$scope.timers['task'+newVal.id+'note'])
+						_$scope.timers['task'+newVal.id+'note'] = $timeout( () ->
+							_tasksbusinesslayer.setTaskNote(newVal.id,newVal.note)
 						,5000)
 					if newVal.complete != oldVal.complete
-						if _$scope.completetimer
-							$timeout.cancel(_$scope.completetimer)
-						_$scope.completetimer = $timeout( () ->
-							_tasksbusinesslayer.setPercentComplete(_$scope.task.id,
-							_$scope.task.complete)
+						if _$scope.timers['task'+newVal.id+'complete']
+							$timeout.cancel(_$scope.timers['task'+newVal.id+'complete'])
+						_$scope.timers['task'+newVal.id+'complete'] = $timeout( () ->
+							_tasksbusinesslayer.setPercentComplete(newVal.id,
+							newVal.complete)
 						,1000)
 			,true)
 

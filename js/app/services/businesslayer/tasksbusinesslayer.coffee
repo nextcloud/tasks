@@ -51,20 +51,18 @@ angular.module('Tasks').factory 'TasksBusinessLayer',
 			@_persistence.unstarTask(taskID)
 
 		completeTask: (taskID) ->
-			@_$tasksmodel.complete(taskID)
-			@_persistence.completeTask(taskID)
+			@setPercentComplete(taskID,100)
 
 		setPercentComplete: (taskID, percentComplete) ->
 			@_$tasksmodel.setPercentComplete(taskID, percentComplete)
-			@_persistence.setPercentComplete(taskID, percentComplete)
 			if percentComplete < 100
 				@_$tasksmodel.uncomplete(taskID)
 			else
 				@_$tasksmodel.complete(taskID)
+			@_persistence.setPercentComplete(taskID, percentComplete)
 
 		uncompleteTask: (taskID) ->
-			@_$tasksmodel.uncomplete(taskID)
-			@_persistence.uncompleteTask(taskID)
+			@setPercentComplete(taskID,0)
 
 		deleteTask: (taskID) ->
 			@_$tasksmodel.removeById(taskID)

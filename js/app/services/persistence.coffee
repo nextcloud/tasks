@@ -190,13 +190,6 @@ angular.module('Tasks').factory 'Persistence',
 
 			@_request.post '/apps/tasks/tasks/{taskID}/unstar', params
 
-		completeTask: (taskID) ->
-			params =
-				routeParams:
-					taskID: taskID
-
-			@_request.post '/apps/tasks/tasks/{taskID}/complete', params
-
 		setPercentComplete: (taskID, complete) ->
 			params =
 				routeParams:
@@ -205,13 +198,6 @@ angular.module('Tasks').factory 'Persistence',
 					complete: complete
 
 			@_request.post '/apps/tasks/tasks/{taskID}/percentcomplete', params
-
-		uncompleteTask: (taskID) ->
-			params =
-				routeParams:
-					taskID: taskID
-
-			@_request.post '/apps/tasks/tasks/{taskID}/uncomplete', params
 
 		addTask: (task, onSuccess=null, onFailure=null) ->
 			onSuccess or= ->
