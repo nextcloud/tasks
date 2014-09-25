@@ -10,6 +10,7 @@ $TRANSLATIONS = array(
 "Due yesterday" => "Со вчера",
 "Due today" => "Сегодня",
 "Due tomorrow" => "Завтра",
+"Due on" => "Срок",
 "Started yesterday" => "Начато вчера",
 "Starts today" => "Начато сегодня",
 "Starts tomorrow" => "Начнется завтра",
