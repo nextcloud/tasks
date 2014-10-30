@@ -7,6 +7,8 @@ $TRANSLATIONS = array(
 "All" => "すべて",
 "Current" => "現在",
 "Completed" => "完了",
+"Due yesterday" => "昨日まで",
+"Due today" => "今日まで",
 "Due tomorrow" => "明日まで",
 "Started yesterday" => "昨日開始",
 "Starts today" => "本日開始",
@@ -66,6 +68,7 @@ $TRANSLATIONS = array(
 "General" => "一般",
 "General Settings" => "一般設定",
 "Start of week" => "週の初め",
+"Smart Collections" => "スマートコレクション",
 "Load more completed tasks" => "その他の完了済みタスク"
 );
 $PLURAL_FORMS = "nplurals=1; plural=0;";
