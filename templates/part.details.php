@@ -94,7 +94,7 @@
                     </a>
                     -->
                     <div class="content-fakeable">
-                    	<div class="display-view" ng-hide="route.parameter=='note'">{{ task.note }}</div>
+                    	<div class="display-view" clickableurl="task.note" ng-hide="route.parameter=='note'"></div>
                         <div class="edit-view" ng-show="route.parameter=='note'">
                             <div class="expandingArea active">
                             	<pre><span>{{ task.note }}</span><br /><br /></pre>
