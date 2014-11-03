@@ -178,6 +178,74 @@
 }).call(this);
 
 (function() {
+  angular.module('Tasks').directive('clickableurl', [
+    '$compile', function($compile) {
+      return {
+        restrict: 'A',
+        scope: {
+          clickableurl: '='
+        },
+        link: function(scope, element, attr, task) {
+          return scope.$watch('clickableurl', function(clickableurl) {
+            var a, index, link, mail_regex, match, matchs, text, url_regex, _i, _len;
+            if (!angular.isUndefined(clickableurl)) {
+              url_regex = /(\s|^)+((https?):\/\/)?(([\da-z\.\-]+\.)([a-z\.]{2,}\.?)([\/\w\.\-]*)*\/?(\?[\da-z\-=]*)?)(\s|$)+/gi;
+              mail_regex = /(\s|^)+(([\w.!$%&'\*\+-\/=\?^`\{\|\}~#])+([@]){1}([\da-z\.\-]+\.)([a-z\.]{2,}\.?))(\s|$)+/gi;
+              matchs = new Array();
+              while ((match = url_regex.exec(clickableurl))) {
+                matchs.push(match);
+                url_regex.lastIndex--;
+              }
+              while ((match = mail_regex.exec(clickableurl))) {
+                matchs.push(match);
+                mail_regex.lastIndex--;
+              }
+              matchs.sort(function(a, b) {
+                if (a.index < b.index) {
+                  return -1;
+                }
+                if (a.index > b.index) {
+                  return 1;
+                }
+                return 0;
+              });
+              element.empty();
+              index = 0;
+              for (_i = 0, _len = matchs.length; _i < _len; _i++) {
+                link = matchs[_i];
+                if (link.index) {
+                  element.append(document.createTextNode(clickableurl.substring(index, link.index + 1)));
+                }
+                index = link.index + link[0].length;
+                text = link.index ? link[0].substring(1) : link[0];
+                if (link[4] === '@') {
+                  a = $compile('<a href="mailto:' + link[2] + '"\
+							stop-event="click"></a>')(scope);
+                  a.text(text);
+                  element.append(a);
+                  continue;
+                }
+                if (angular.isUndefined(link[3])) {
+                  link[3] = 'http';
+                }
+                a = $compile('<a href="' + link[3] + '://' + link[4] + '"\
+						target="_blank" stop-event="click"></a>')(scope);
+                a.text(text);
+                element.append(a);
+              }
+              if (index < clickableurl.length) {
+                return element.append(document.createTextNode(clickableurl.substring(index)));
+              }
+            }
+          });
+        }
+      };
+    }
+  ]);
+
+}).call(this);
+
+(function() {
   angular.module('Tasks').directive('datepicker', function() {
     return {
       restrict: 'A',
@@ -2862,15 +2930,6 @@
   angular.module('Tasks').filter('day', function() {
     return function(i) {
       return moment().add('days', i).lang('list_week').calendar();
-    };
-  });
-
-}).call(this);
-
-(function() {
-  angular.module('Tasks').filter('dayHasEntry', function() {
-    return function(date) {
-      return _$tasksmodel.dayHasEntry(date);
     };
   });
 

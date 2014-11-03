@@ -742,7 +742,6 @@
   line-height: 24px;
   background: none repeat scroll 0 0 transparent;
   border: medium none;
-  font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
   padding: 0;
   white-space: pre-wrap;
   word-wrap: break-word;
@@ -808,7 +807,6 @@
   box-shadow: none;
   background: none repeat scroll 0 0 transparent;
   border: medium none;
-  font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
   font-size: 13px;
   line-height: 26px;
   padding: 0;
@@ -824,7 +822,7 @@
   visibility: hidden;
 }
 #task-details div.content-wrapper .body .note .expandingArea textarea {
-  margin: 0;
+  margin: 0 0 0 1px;
   border-radius: 0;
   height: 100%;
   left: 0;
@@ -858,6 +856,11 @@
 #task-details div.content-wrapper .body .note .note-body .display-view,
 #task-details div.content-wrapper .body .note .note-edit .display-view {
   white-space: pre-wrap;
+}
+#task-details div.content-wrapper .body .note .note-body .display-view a,
+#task-details div.content-wrapper .body .note .note-edit .display-view a {
+  cursor: pointer;
+  text-decoration: underline;
 }
 #task-details div.content-wrapper .body .note .open-fullscreen-note {
   margin-top: -2px;
