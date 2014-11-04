@@ -189,8 +189,8 @@
           return scope.$watch('clickableurl', function(clickableurl) {
             var a, index, link, mail_regex, match, matchs, text, url_regex, _i, _len;
             if (!angular.isUndefined(clickableurl)) {
-              url_regex = /(\s|^)+((https?):\/\/)?(([\da-z\.\-]+\.)([a-z\.]{2,}\.?)([\/\w\.\-]*)*\/?(\?[\da-z\-=]*)?)(\s|$)+/gi;
-              mail_regex = /(\s|^)+(([\w.!$%&'\*\+-\/=\?^`\{\|\}~#])+([@]){1}([\da-z\.\-]+\.)([a-z\.]{2,}\.?))(\s|$)+/gi;
+              url_regex = /(?:\s|^)+(https?:\/\/)?(([\da-z\-]+\.{1})+[a-z]{2,}\.?[\.\d\/\w\-\%=&+\?~#]*)(?:\s|$)+/gi;
+              mail_regex = /(?:\s|^)+(([\w.!$%&'\*\+-\/=\?^`\{\|\}~#])+([@]){1}([\da-z\-]+\.{1})+[a-z]{2,}\.?)(?:\s|$)+/gi;
               matchs = new Array();
               while ((match = url_regex.exec(clickableurl))) {
                 matchs.push(match);
@@ -218,17 +218,17 @@
                 }
                 index = link.index + link[0].length;
                 text = link.index ? link[0].substring(1) : link[0];
-                if (link[4] === '@') {
-                  a = $compile('<a href="mailto:' + link[2] + '"\
+                if (link[3] === '@') {
+                  a = $compile('<a href="mailto:' + link[1] + '"\
 							stop-event="click"></a>')(scope);
                   a.text(text);
                   element.append(a);
                   continue;
                 }
-                if (angular.isUndefined(link[3])) {
-                  link[3] = 'http';
+                if (angular.isUndefined(link[1])) {
+                  link[1] = 'http://';
                 }
-                a = $compile('<a href="' + link[3] + '://' + link[4] + '"\
+                a = $compile('<a href="' + link[1] + link[2] + '"\
 						target="_blank" stop-event="click"></a>')(scope);
                 a.text(text);
                 element.append(a);

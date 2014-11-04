@@ -30,22 +30,23 @@ angular.module('Tasks').directive 'clickableurl', [ '$compile',
 		scope.$watch('clickableurl', (clickableurl) ->
 			if !angular.isUndefined(clickableurl)
 				url_regex = ///
-					(\s|^)+				# start with a white-space or start of line (to exclude email)
-					((https?)://)?		# protocol: http or https
-					(([\da-z\.\-]+\.)	# domain-name
-					([a-z\.]{2,}\.?)	# top level domain with optional root label
-					([/\w\.\-]*)*/?		# url-path
-					(\?[\da-z\-=]*)?)	# query string
-					(\s|$)+				# end with white-space
+					(?:\s|^)+				# start with a white-space or start of line (exclude mail)
+					(https?://)?			# protocol: http or https
+					(([\da-z\-]+\.{1})+		# domain-name
+					[a-z]{2,}\.?			# top level domain with optional root label
+					[\.\d/\w\-\%=&+\?~#]*)	# url-path
+					(?:\s|$)+				# end with white-space
 				///gi
+
 				mail_regex = ///
-					(\s|^)+								# start with a white-space or start of line
+					(?:\s|^)+								# start with a white-space or start of line
 					(([\w.!$%&'\*\+-/=\?^`\{\|\}~#])+	# local part
 					([@]){1}							# @
-					([\da-z\.\-]+\.)					# domain-name
-					([a-z\.]{2,}\.?))					# top level domain with optional root label
-					(\s|$)+								# end with white-space
+					([\da-z\-]+\.{1})+					# domain-name
+					[a-z]{2,}\.?)						# top level domain with optional root label
+					(?:\s|$)+								# end with white-space
 				///gi
+
 				matchs = new Array()
 
 				# find URLs
@@ -77,19 +78,19 @@ angular.module('Tasks').directive 'clickableurl', [ '$compile',
 					text = if link.index then link[0].substring(1) else link[0]
 
 					# check if email address
-					if link[4] == '@'
-						a = $compile('<a href="mailto:' + link[2] + '"
+					if link[3] == '@'
+						a = $compile('<a href="mailto:' + link[1] + '"
 							stop-event="click"></a>')(scope)
 						a.text(text)
 						element.append(a)
 						continue
 
 					# check for defined protocol
-					if angular.isUndefined(link[3])
-						link[3] = 'http'
+					if angular.isUndefined(link[1])
+						link[1] = 'http://'
 
-					a = $compile('<a href="' + link[3] + '://' +
-						link[4] + '"
+					a = $compile('<a href="' + link[1] +
+						link[2] + '"
 						target="_blank" stop-event="click"></a>')(scope)
 					a.text(text)
 					element.append(a)
