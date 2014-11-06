@@ -181,8 +181,11 @@ SettingsBusinessLayer) ->
 				return (date) ->
 					return _$tasksmodel.dayHasEntry(date)
 
-			@_$scope.loadMore = () ->
-				console.log('TODO')
+			@_$scope.getCompletedTasks = (listID) ->
+				_tasksbusinesslayer.getCompletedTasks(listID)
+
+			@_$scope.loadedAll = (listID) ->
+				return _$listsmodel.loadedAll(listID)
 
 			@_$scope.sortDue = (task) ->
 				if task.due == null

@@ -23,5 +23,8 @@
                 </div>
             </li>
         </ol>
+        <div class="loadmore" ng-hide="loadedAll(list.id) || route.listID != 'completed'">
+            <span ng-click="getCompletedTasks(list.id)" stop-event="click"> <?php p($l->t('Load remaining completed tasks.')); ?> </span>
+        </div>
     </div>
 </div>

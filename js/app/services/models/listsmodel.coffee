@@ -109,7 +109,7 @@ angular.module('Tasks').factory 'ListsModel',
 				when 'completed'
 					for task in tasks
 						count += (task.calendarid==listID && task.completed)
-					return count
+					return count + @notLoaded(listID)
 				when 'starred'
 					for task in tasks
 						count += (task.calendarid==listID && !task.completed && task.starred)
@@ -119,6 +119,15 @@ angular.module('Tasks').factory 'ListsModel',
 						count += (task.calendarid==listID && !task.completed &&
 							@_$tasksmodel.today(task.due))
 					return count
+
+		notLoaded: (listID) ->
+			if angular.isUndefined(@getById(listID))
+				return 0
+			else
+				return @getById(listID).notLoaded
+
+		loadedAll: (listID) ->
+			return !@notLoaded(listID)
 
 	return new ListsModel(TasksModel, Utils)
 ]

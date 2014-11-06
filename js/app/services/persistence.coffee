@@ -37,7 +37,7 @@ angular.module('Tasks').factory 'Persistence',
 			@getCollections()
 			@getSettings()
 			@getLists()
-			@getTasks(successCallback)
+			@getTasks('all', 'all', successCallback)
 
 			@deferred.promise
 
@@ -155,7 +155,7 @@ angular.module('Tasks').factory 'Persistence',
 
 			@_request.post '/apps/tasks/lists/{listID}/delete', params
 
-		getTasks: (onSuccess, showLoading=true) ->
+		getTasks: (listID='all', type='all', onSuccess, showLoading=true) ->
 			onSuccess or= ->
 
 			if showLoading
@@ -173,8 +173,11 @@ angular.module('Tasks').factory 'Persistence',
 			params =
 				onSuccess: successCallbackWrapper
 				onFailure: failureCallbackWrapper
+				routeParams:
+					listID: listID
+					type:	type
 
-			@_request.get '/apps/tasks/tasks', params
+			@_request.get '/apps/tasks/tasks/{type}/{listID}', params
 
 		starTask: (taskID) ->
 			params =
@@ -203,9 +206,6 @@ angular.module('Tasks').factory 'Persistence',
 			onSuccess or= ->
 			onFailure or= ->
 			params =
-				# routeParams:
-				# 	name:	task.name
-				# 	calendarID: task.calendarID
 				data:
 					name:		task.name
 					calendarID:	task.calendarID

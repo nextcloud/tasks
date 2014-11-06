@@ -39,13 +39,20 @@ class TasksController extends Controller {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function getTasks(){
+	public function getTasks($listID = 'all', $type = 'all'){
 		$calendars = \OC_Calendar_Calendar::allCalendars($this->userId, true);
 		$user_timezone = \OC_Calendar_App::getTimezone();
 
 		$tasks = array();
+		$lists = array();
 		foreach( $calendars as $calendar ) {
+			if ($listID != 'all' && $calendar['id'] != $listID){
+				continue;
+			}
+
 			$calendar_tasks = \OC_Calendar_Object::all($calendar['id']);
+			$nrCompleted = 0;
+			$notLoaded = 0;
 			foreach( $calendar_tasks as $task ) {
 				if($task['objecttype']!='VTODO') {
 					continue;
@@ -58,16 +65,37 @@ class TasksController extends Controller {
 					$task_data = Helper::arrayForJSON($task['id'], $vtodo, $user_timezone);
 					$task_data['calendarid'] = $calendar['id'];
 					$task_data['calendarcolor'] = $calendar['calendarcolor'];
+
+					switch($type){
+						case 'all':
+							if ($task_data['completed']){
+								$nrCompleted++;
+								if ($nrCompleted > 5){
+									$notLoaded++;
+									continue 2;
+								}
+							}
+							break;
+						case 'completed':
+							if (!$task_data['completed']){
+								continue 2;
+							}
+							break;
+					}
 					$tasks[] = $task_data;
 				} catch(\Exception $e) {
 					\OCP\Util::writeLog('tasks', $e->getMessage(), \OCP\Util::ERROR);
 				}
 			}
+			$lists[] = array(
+				'id' 		=> $calendar['id'],
+				'notLoaded' => $notLoaded
+				);
 		}
-
 		$result = array(
 			'data' => array(
-				'tasks' => $tasks
+				'tasks' => $tasks,
+				'lists' => $lists
 				)
 			);
 		$response = new JSONResponse();
