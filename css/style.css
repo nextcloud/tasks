@@ -594,9 +594,15 @@
   margin-top: 10px;
   text-align: center;
 }
-#app-content div.task-list .loadmore span:hover {
+#app-content div.task-list .loadmore span {
   color: #A0A0A0;
+  background-color: #e9e9e9;
+  border-radius: 10px;
+  padding: 3px 6px;
+}
+#app-content div.task-list .loadmore span:hover {
   cursor: pointer;
+  color: #555;
 }
 #app-content div.task-list.completed-hidden ol.completed-tasks {
   display: none;

@@ -1249,8 +1249,11 @@
               return _$tasksmodel.dayHasEntry(date);
             };
           };
-          this._$scope.loadMore = function() {
-            return console.log('TODO');
+          this._$scope.getCompletedTasks = function(listID) {
+            return _tasksbusinesslayer.getCompletedTasks(listID);
+          };
+          this._$scope.loadedAll = function(listID) {
+            return _$listsmodel.loadedAll(listID);
           };
           this._$scope.sortDue = function(task) {
             if (task.due === null) {
@@ -1765,7 +1768,7 @@
           success = function() {
             return _this._$tasksmodel.removeVoid();
           };
-          return this._persistence.getTasks(success, true);
+          return this._persistence.getTasks('init', 'all', success, true);
         };
 
         TasksBusinessLayer.prototype.setShowHidden = function(showHidden) {
@@ -1797,6 +1800,10 @@
         TasksBusinessLayer.prototype.deleteComment = function(taskID, commentID) {
           this._$tasksmodel.deleteComment(taskID, commentID);
           return this._persistence.deleteComment(taskID, commentID);
+        };
+
+        TasksBusinessLayer.prototype.getCompletedTasks = function(listID) {
+          return this._persistence.getTasks('completed', listID);
         };
 
         return TasksBusinessLayer;
@@ -2028,7 +2035,7 @@
                 task = tasks[_k];
                 count += task.calendarid === listID && task.completed;
               }
-              return count;
+              return count + this.notLoaded(listID);
             case 'starred':
               for (_l = 0, _len3 = tasks.length; _l < _len3; _l++) {
                 task = tasks[_l];
@@ -2042,6 +2049,18 @@
               }
               return count;
           }
+        };
+
+        ListsModel.prototype.notLoaded = function(listID) {
+          if (angular.isUndefined(this.getById(listID))) {
+            return 0;
+          } else {
+            return this.getById(listID).notLoaded;
+          }
+        };
+
+        ListsModel.prototype.loadedAll = function(listID) {
+          return !this.notLoaded(listID);
         };
 
         return ListsModel;
@@ -2395,7 +2414,7 @@
           this.getCollections();
           this.getSettings();
           this.getLists();
-          this.getTasks(successCallback);
+          this.getTasks('init', 'all', successCallback);
           return this.deferred.promise;
         };
 
@@ -2561,9 +2580,15 @@
           return this._request.post('/apps/tasks/lists/{listID}/delete', params);
         };
 
-        Persistence.prototype.getTasks = function(onSuccess, showLoading) {
+        Persistence.prototype.getTasks = function(type, listID, onSuccess, showLoading) {
           var failureCallbackWrapper, params, successCallbackWrapper,
             _this = this;
+          if (type == null) {
+            type = 'init';
+          }
+          if (listID == null) {
+            listID = 'all';
+          }
           if (showLoading == null) {
             showLoading = true;
           }
@@ -2585,9 +2610,13 @@
           }
           params = {
             onSuccess: successCallbackWrapper,
-            onFailure: failureCallbackWrapper
+            onFailure: failureCallbackWrapper,
+            routeParams: {
+              listID: listID,
+              type: type
+            }
           };
-          return this._request.get('/apps/tasks/tasks', params);
+          return this._request.get('/apps/tasks/tasks/{type}/{listID}', params);
         };
 
         Persistence.prototype.starTask = function(taskID) {

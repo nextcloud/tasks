@@ -45,8 +45,8 @@
                 </div>
             </li>
         </ol>
-        <div class="loadmore">
-            <!-- <span ng-click="loadMore()" stop-event="click"> <?php p($l->t('Load more completed tasks')); ?> </span> -->
+        <div class="loadmore" ng-hide="loadedAll(route.listID)">
+            <span ng-click="getCompletedTasks(route.listID)" stop-event="click"> <?php p($l->t('Load remaining completed tasks.')); ?> </span>
         </div>
     </div>
 </div>

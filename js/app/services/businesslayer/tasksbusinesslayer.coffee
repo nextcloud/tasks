@@ -325,13 +325,10 @@ angular.module('Tasks').factory 'TasksBusinessLayer',
 			@_$tasksmodel.voidAll()
 			success = () =>
 				@_$tasksmodel.removeVoid()
-			@_persistence.getTasks(success, true)
+			@_persistence.getTasks('init', 'all', success, true)
 
 		setShowHidden: (showHidden) ->
 			@_persistence.setShowHidden(showHidden)
-
-		# addComment: (taskID, comment) ->
-			# @_persistence.addComment(taskID, comment)
 
 		addComment: (comment, onSuccess=null, onFailure=null) ->
 			onSuccess or= ->
@@ -350,6 +347,8 @@ angular.module('Tasks').factory 'TasksBusinessLayer',
 			@_$tasksmodel.deleteComment(taskID, commentID)
 			@_persistence.deleteComment(taskID, commentID)
 
+		getCompletedTasks: (listID) ->
+			@_persistence.getTasks('completed', listID)
 
 	return new TasksBusinessLayer(TasksModel, Persistence)
 

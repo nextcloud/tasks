@@ -39,14 +39,22 @@ class TasksController extends Controller {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function getTasks(){
-		$calendars = \OC_Calendar_Calendar::allCalendars($this->userId, true);
+	public function getTasks($listID = 'all', $type = 'all'){
+		
 		$user_timezone = \OC_Calendar_App::getTimezone();
+		if ($listID == 'all'){
+			$calendars = \OC_Calendar_Calendar::allCalendars($this->userId, true);
+		} else {
+			$calendar = \OC_Calendar_App::getCalendar($listID, true, false);
+			$calendars = array($calendar);
+		}
 
 		$tasks = array();
+		$lists = array();
 		foreach( $calendars as $calendar ) {
-			$calendar_tasks = \OC_Calendar_Object::all($calendar['id']);
-			foreach( $calendar_tasks as $task ) {
+			$calendar_entries = \OC_Calendar_Object::all($calendar['id']);
+			$tasks_selected = array();
+			foreach( $calendar_entries as $task ) {
 				if($task['objecttype']!='VTODO') {
 					continue;
 				}
@@ -58,21 +66,67 @@ class TasksController extends Controller {
 					$task_data = Helper::arrayForJSON($task['id'], $vtodo, $user_timezone);
 					$task_data['calendarid'] = $calendar['id'];
 					$task_data['calendarcolor'] = $calendar['calendarcolor'];
-					$tasks[] = $task_data;
+
+					switch($type){
+						case 'all':
+							$tasks[] = $task_data;
+							break;
+						case 'init':
+							if (!$task_data['completed']){
+								$tasks[] = $task_data;
+							} else {
+								$tasks_selected[] = $task_data;
+							}
+							break;
+						case 'completed':
+							if ($task_data['completed']){
+								$tasks[] = $task_data;
+							}
+							break;
+						case 'uncompleted':
+							if (!$task_data['completed']){
+								$tasks[] = $task_data;
+							}
+							break;
+					}
 				} catch(\Exception $e) {
 					\OCP\Util::writeLog('tasks', $e->getMessage(), \OCP\Util::ERROR);
 				}
 			}
+			$nrCompleted = 0;
+			$notLoaded = 0;
+			usort($tasks_selected, array($this, 'sort_completed'));
+			foreach( $tasks_selected as $task_selected){
+				$nrCompleted++;
+				if ($nrCompleted > 5){
+					$notLoaded++;
+					continue;
+				}
+				$tasks[] = $task_selected;
+			}
+			$lists[] = array(
+				'id' 		=> $calendar['id'],
+				'notLoaded' => $notLoaded
+				);
 		}
-
 		$result = array(
 			'data' => array(
-				'tasks' => $tasks
+				'tasks' => $tasks,
+				'lists' => $lists
 				)
 			);
 		$response = new JSONResponse();
 		$response->setData($result);
 		return $response;
+	}
+
+	private static function sort_completed($a, $b){
+		$t1 = \DateTime::createFromFormat('Ymd\THis', $a['completed_date']);
+		$t2 = \DateTime::createFromFormat('Ymd\THis', $b['completed_date']);
+		if ($t1 == $t2) {
+			return 0;
+		}
+		return $t1 < $t2 ? 1 : -1;
 	}
 
 	/**

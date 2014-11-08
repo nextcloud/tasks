@@ -4,7 +4,7 @@
             <text>{{ list.displayname }}</text>
         </h2>
         <ol class="tasks">
-            <li ng-animate="'animate'" ng-repeat="task in tasks | filter:filterTasksByCalendar(task,list.id) | filter:filterTasks(task) | orderBy:sortDue | orderBy:'starred':true"
+            <li ng-animate="'animate'" ng-repeat="task in tasks | filter:filterTasksByCalendar(task,list.id) | filter:filterTasks(task) | orderBy:sortDue | orderBy:'starred':true | orderBy:'completed_date':true"
             class="task-item ui-draggable" rel="{{ task.id }}" ng-click="openDetails(task.id)" ng-class="{done: task.completed}" oc-drag-task stop-event="click">
                 <div class="task-body">
                     <div class="percentdone" style="width:{{ task.complete }}%; background-color:{{list.calendarcolor}};"></div>
@@ -23,5 +23,8 @@
                 </div>
             </li>
         </ol>
+        <div class="loadmore" ng-hide="loadedAll(list.id) || route.listID != 'completed'">
+            <span ng-click="getCompletedTasks(list.id)" stop-event="click"> <?php p($l->t('Load remaining completed tasks.')); ?> </span>
+        </div>
     </div>
 </div>
