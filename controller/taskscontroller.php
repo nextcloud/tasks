@@ -65,7 +65,6 @@ class TasksController extends Controller {
 				try {
 					$task_data = Helper::arrayForJSON($task['id'], $vtodo, $user_timezone);
 					$task_data['calendarid'] = $calendar['id'];
-					$task_data['calendarcolor'] = $calendar['calendarcolor'];
 
 					switch($type){
 						case 'all':

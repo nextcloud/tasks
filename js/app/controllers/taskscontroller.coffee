@@ -193,6 +193,9 @@ SettingsBusinessLayer) ->
 				else
 					return task.due
 
+			@_$scope.getTaskColor = (listID) ->
+				return _$listsmodel.getColor(listID)
+
 	return new TasksController($scope, $window, $routeParams,
 		TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location,
 		SettingsBusinessLayer)

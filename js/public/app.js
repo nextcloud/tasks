@@ -1262,6 +1262,9 @@
               return task.due;
             }
           };
+          this._$scope.getTaskColor = function(listID) {
+            return _$listsmodel.getColor(listID);
+          };
         }
 
         return TasksController;
@@ -2061,6 +2064,14 @@
 
         ListsModel.prototype.loadedAll = function(listID) {
           return !this.notLoaded(listID);
+        };
+
+        ListsModel.prototype.getColor = function(listID) {
+          if (angular.isUndefined(this.getById(listID))) {
+            return '#CCCCCC';
+          } else {
+            return this.getById(listID).calendarcolor;
+          }
         };
 
         return ListsModel;

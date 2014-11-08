@@ -129,5 +129,11 @@ angular.module('Tasks').factory 'ListsModel',
 		loadedAll: (listID) ->
 			return !@notLoaded(listID)
 
+		getColor: (listID) ->
+			if angular.isUndefined(@getById(listID))
+				return '#CCCCCC'
+			else
+				return @getById(listID).calendarcolor
+
 	return new ListsModel(TasksModel, Utils)
 ]
