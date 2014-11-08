@@ -37,7 +37,7 @@ angular.module('Tasks').factory 'Persistence',
 			@getCollections()
 			@getSettings()
 			@getLists()
-			@getTasks('all', 'all', successCallback)
+			@getTasks('init', 'all', successCallback)
 
 			@deferred.promise
 
@@ -155,7 +155,7 @@ angular.module('Tasks').factory 'Persistence',
 
 			@_request.post '/apps/tasks/lists/{listID}/delete', params
 
-		getTasks: (listID='all', type='all', onSuccess, showLoading=true) ->
+		getTasks: (type='init', listID='all', onSuccess, showLoading=true) ->
 			onSuccess or= ->
 
 			if showLoading

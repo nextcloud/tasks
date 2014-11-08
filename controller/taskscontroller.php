@@ -40,20 +40,21 @@ class TasksController extends Controller {
 	 * @NoAdminRequired
 	 */
 	public function getTasks($listID = 'all', $type = 'all'){
-		$calendars = \OC_Calendar_Calendar::allCalendars($this->userId, true);
+		
 		$user_timezone = \OC_Calendar_App::getTimezone();
+		if ($listID == 'all'){
+			$calendars = \OC_Calendar_Calendar::allCalendars($this->userId, true);
+		} else {
+			$calendar = \OC_Calendar_App::getCalendar($listID, true, false);
+			$calendars = array($calendar);
+		}
 
 		$tasks = array();
 		$lists = array();
 		foreach( $calendars as $calendar ) {
-			if ($listID != 'all' && $calendar['id'] != $listID){
-				continue;
-			}
-
-			$calendar_tasks = \OC_Calendar_Object::all($calendar['id']);
-			$nrCompleted = 0;
-			$notLoaded = 0;
-			foreach( $calendar_tasks as $task ) {
+			$calendar_entries = \OC_Calendar_Object::all($calendar['id']);
+			$tasks_selected = array();
+			foreach( $calendar_entries as $task ) {
 				if($task['objecttype']!='VTODO') {
 					continue;
 				}
@@ -68,24 +69,40 @@ class TasksController extends Controller {
 
 					switch($type){
 						case 'all':
-							if ($task_data['completed']){
-								$nrCompleted++;
-								if ($nrCompleted > 5){
-									$notLoaded++;
-									continue 2;
-								}
+							$tasks[] = $task_data;
+							break;
+						case 'init':
+							if (!$task_data['completed']){
+								$tasks[] = $task_data;
+							} else {
+								$tasks_selected[] = $task_data;
 							}
 							break;
 						case 'completed':
+							if ($task_data['completed']){
+								$tasks[] = $task_data;
+							}
+							break;
+						case 'uncompleted':
 							if (!$task_data['completed']){
-								continue 2;
+								$tasks[] = $task_data;
 							}
 							break;
 					}
-					$tasks[] = $task_data;
 				} catch(\Exception $e) {
 					\OCP\Util::writeLog('tasks', $e->getMessage(), \OCP\Util::ERROR);
 				}
+			}
+			$nrCompleted = 0;
+			$notLoaded = 0;
+			usort($tasks_selected, array($this, 'sort_completed'));
+			foreach( $tasks_selected as $task_selected){
+				$nrCompleted++;
+				if ($nrCompleted > 5){
+					$notLoaded++;
+					continue;
+				}
+				$tasks[] = $task_selected;
 			}
 			$lists[] = array(
 				'id' 		=> $calendar['id'],
@@ -101,6 +118,15 @@ class TasksController extends Controller {
 		$response = new JSONResponse();
 		$response->setData($result);
 		return $response;
+	}
+
+	private static function sort_completed($a, $b){
+		$t1 = \DateTime::createFromFormat('Ymd\THis', $a['completed_date']);
+		$t2 = \DateTime::createFromFormat('Ymd\THis', $b['completed_date']);
+		if ($t1 == $t2) {
+			return 0;
+		}
+		return $t1 < $t2 ? 1 : -1;
 	}
 
 	/**
