@@ -16,6 +16,7 @@
                         <span class="icon task-star faded" ng-class="{'task-starred': task.starred}"></span>
                     </a>
                     <a class="duedate" ng-class="{overdue: TasksModel.overdue(task.due)}">{{ task.due | dateTaskList }}</a>
+                    <a class="listname" >{{ getTaskList(task.calendarid) }}</a>
                     <div class="title-wrapper"  ng-class="{attachment: task.note!=''}">
                         <span class="title">{{ task.name }}</span>
                         <span class="icon task-attachment"></span>

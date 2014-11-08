@@ -196,6 +196,9 @@ SettingsBusinessLayer) ->
 			@_$scope.getTaskColor = (listID) ->
 				return _$listsmodel.getColor(listID)
 
+			@_$scope.getTaskList = (listID) ->
+				return _$listsmodel.getName(listID)
+
 	return new TasksController($scope, $window, $routeParams,
 		TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location,
 		SettingsBusinessLayer)

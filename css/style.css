@@ -265,6 +265,13 @@
 #content li.task-item .task-body .duedate.overdue {
   color: #B3312D;
 }
+#content li.task-item .task-body .listname {
+  color: #888;
+  float: right;
+  font-size: 11px;
+  line-height: 14px;
+  margin: 11px 3px 0 7px;
+}
 #app-navigation {
   background: url("../img/bgTasks.png") repeat scroll 0 0 #e3e3e3;
   position: absolute;
