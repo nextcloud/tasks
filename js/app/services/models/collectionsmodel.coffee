@@ -37,25 +37,9 @@ angular.module('Tasks').factory 'CollectionsModel',
 		getCount: (collectionID) ->
 			count = 0
 			tasks = @_$tasksmodel.getAll()
-			switch collectionID
-				when 'starred'
-					for task in tasks
-						count += (task.starred && !task.completed)
-				when 'today'
-					for task in tasks
-						count += (!task.completed && @_$tasksmodel.today(task.due))
-				when 'week'
-					for task in tasks
-						count += (!task.completed && @_$tasksmodel.week(task.due))
-				when 'all'
-					for task in tasks
-						count += !task.completed
-				when 'current'
-					for task in tasks
-						count += (!task.completed && @_$tasksmodel.current(task.start))
-				when 'completed'
-					for task in tasks
-						count += task.completed
+			
+			for task in tasks
+				count += @_$tasksmodel.filterTasks(task, collectionID)
 			return count
 
 		getCountString: (collectionID) ->

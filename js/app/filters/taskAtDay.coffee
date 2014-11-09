@@ -23,11 +23,22 @@ angular.module('Tasks').filter 'taskAtDay', () ->
 	return (tasks, date) ->
 		ret = []
 		for task in tasks
+			start = moment(task.start, "YYYYMMDDTHHmmss")
+			if start.isValid()
+				diff = start.diff(moment().startOf('day'), 'days', true)
+				if !date && diff < date+1
+					ret.push(task)
+					continue
+				else if diff < date+1 && diff >= date
+					ret.push(task)
+					continue
 			due = moment(task.due, "YYYYMMDDTHHmmss")
 			if due.isValid()
 				diff = due.diff(moment().startOf('day'), 'days', true)
 				if !date && diff < date+1
 					ret.push(task)
+					continue
 				else if diff < date+1 && diff >= date
 					ret.push(task)
+					continue
 		return ret

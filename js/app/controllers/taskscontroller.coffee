@@ -106,22 +106,11 @@ SettingsBusinessLayer) ->
 
 			@_$scope.filterTasks = () ->
 				return (task) ->
-					switch _$scope.route.listID
-						when 'completed'
-							return task.completed == true
-						when 'all'
-							return task.completed == false
-						when 'current'
-							return (task.completed == false && _$tasksmodel.current(task.start))
-						when 'starred'
-							return (task.completed == false && task.starred == true)
-						when 'today'
-							return (task.completed == false && _$tasksmodel.today(task.due))
+					return _$tasksmodel.filterTasks(task, _$scope.route.listID)
 
 			@_$scope.filterTasksByCalendar = (task, listID) ->
 				return (task) ->
 					return ''+task.calendarid == ''+listID
-					# return false
 
 			@_$scope.filterLists = () ->
 				return (list) ->

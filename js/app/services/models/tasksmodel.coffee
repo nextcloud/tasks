@@ -93,6 +93,15 @@ angular.module('Tasks').factory 'TasksModel',
 			for task in tasks
 				if task.completed
 					continue
+				start = moment(task.start, "YYYYMMDDTHHmmss")
+				if start.isValid()
+					diff = start.diff(moment().startOf('day'), 'days', true)
+					if !date && diff < date+1
+						ret = true
+						break
+					else if diff < date+1 && diff >= date
+						ret = true
+						break
 				due = moment(task.due, "YYYYMMDDTHHmmss")
 				if due.isValid()
 					diff = due.diff(moment().startOf('day'), 'days', true)
@@ -103,6 +112,23 @@ angular.module('Tasks').factory 'TasksModel',
 						ret = true
 						break
 			return ret
+
+		filterTasks: (task, collectionID) ->
+			switch collectionID
+				when 'completed'
+					return task.completed == true
+				when 'all'
+					return task.completed == false
+				when 'current'
+					return (task.completed == false && @current(task.start))
+				when 'starred'
+					return (task.completed == false && task.starred == true)
+				when 'today'
+					return (task.completed == false && (@today(task.start) ||
+					@today(task.due)))
+				when 'week'
+					return (task.completed == false && (@week(task.start) ||
+					@week(task.due)))
 
 		starred: (taskID) ->
 			return @getById(taskID).starred

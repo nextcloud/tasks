@@ -1171,18 +1171,7 @@
           };
           this._$scope.filterTasks = function() {
             return function(task) {
-              switch (_$scope.route.listID) {
-                case 'completed':
-                  return task.completed === true;
-                case 'all':
-                  return task.completed === false;
-                case 'current':
-                  return task.completed === false && _$tasksmodel.current(task.start);
-                case 'starred':
-                  return task.completed === false && task.starred === true;
-                case 'today':
-                  return task.completed === false && _$tasksmodel.today(task.due);
-              }
+              return _$tasksmodel.filterTasks(task, _$scope.route.listID);
             };
           };
           this._$scope.filterTasksByCalendar = function(task, listID) {
@@ -1848,45 +1837,12 @@
         };
 
         CollectionsModel.prototype.getCount = function(collectionID) {
-          var count, task, tasks, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _len5, _m, _n;
+          var count, task, tasks, _i, _len;
           count = 0;
           tasks = this._$tasksmodel.getAll();
-          switch (collectionID) {
-            case 'starred':
-              for (_i = 0, _len = tasks.length; _i < _len; _i++) {
-                task = tasks[_i];
-                count += task.starred && !task.completed;
-              }
-              break;
-            case 'today':
-              for (_j = 0, _len1 = tasks.length; _j < _len1; _j++) {
-                task = tasks[_j];
-                count += !task.completed && this._$tasksmodel.today(task.due);
-              }
-              break;
-            case 'week':
-              for (_k = 0, _len2 = tasks.length; _k < _len2; _k++) {
-                task = tasks[_k];
-                count += !task.completed && this._$tasksmodel.week(task.due);
-              }
-              break;
-            case 'all':
-              for (_l = 0, _len3 = tasks.length; _l < _len3; _l++) {
-                task = tasks[_l];
-                count += !task.completed;
-              }
-              break;
-            case 'current':
-              for (_m = 0, _len4 = tasks.length; _m < _len4; _m++) {
-                task = tasks[_m];
-                count += !task.completed && this._$tasksmodel.current(task.start);
-              }
-              break;
-            case 'completed':
-              for (_n = 0, _len5 = tasks.length; _n < _len5; _n++) {
-                task = tasks[_n];
-                count += task.completed;
-              }
+          for (_i = 0, _len = tasks.length; _i < _len; _i++) {
+            task = tasks[_i];
+            count += this._$tasksmodel.filterTasks(task, collectionID);
           }
           return count;
         };
@@ -2239,13 +2195,24 @@
         };
 
         TasksModel.prototype.dayHasEntry = function(date) {
-          var diff, due, ret, task, tasks, _i, _len;
+          var diff, due, ret, start, task, tasks, _i, _len;
           tasks = this.getAll();
           ret = false;
           for (_i = 0, _len = tasks.length; _i < _len; _i++) {
             task = tasks[_i];
             if (task.completed) {
               continue;
+            }
+            start = moment(task.start, "YYYYMMDDTHHmmss");
+            if (start.isValid()) {
+              diff = start.diff(moment().startOf('day'), 'days', true);
+              if (!date && diff < date + 1) {
+                ret = true;
+                break;
+              } else if (diff < date + 1 && diff >= date) {
+                ret = true;
+                break;
+              }
             }
             due = moment(task.due, "YYYYMMDDTHHmmss");
             if (due.isValid()) {
@@ -2260,6 +2227,23 @@
             }
           }
           return ret;
+        };
+
+        TasksModel.prototype.filterTasks = function(task, collectionID) {
+          switch (collectionID) {
+            case 'completed':
+              return task.completed === true;
+            case 'all':
+              return task.completed === false;
+            case 'current':
+              return task.completed === false && this.current(task.start);
+            case 'starred':
+              return task.completed === false && task.starred === true;
+            case 'today':
+              return task.completed === false && (this.today(task.start) || this.today(task.due));
+            case 'week':
+              return task.completed === false && (this.week(task.start) || this.week(task.due));
+          }
         };
 
         TasksModel.prototype.starred = function(taskID) {
@@ -3079,17 +3063,30 @@
 (function() {
   angular.module('Tasks').filter('taskAtDay', function() {
     return function(tasks, date) {
-      var diff, due, ret, task, _i, _len;
+      var diff, due, ret, start, task, _i, _len;
       ret = [];
       for (_i = 0, _len = tasks.length; _i < _len; _i++) {
         task = tasks[_i];
+        start = moment(task.start, "YYYYMMDDTHHmmss");
+        if (start.isValid()) {
+          diff = start.diff(moment().startOf('day'), 'days', true);
+          if (!date && diff < date + 1) {
+            ret.push(task);
+            continue;
+          } else if (diff < date + 1 && diff >= date) {
+            ret.push(task);
+            continue;
+          }
+        }
         due = moment(task.due, "YYYYMMDDTHHmmss");
         if (due.isValid()) {
           diff = due.diff(moment().startOf('day'), 'days', true);
           if (!date && diff < date + 1) {
             ret.push(task);
+            continue;
           } else if (diff < date + 1 && diff >= date) {
             ret.push(task);
+            continue;
           }
         }
       }
