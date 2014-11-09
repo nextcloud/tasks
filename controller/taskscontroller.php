@@ -363,7 +363,7 @@ class TasksController extends Controller {
 			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
 			$vtodo = $vcalendar->VTODO;
 			$type = null;
-			if ($due != 'false') {
+			if ($due != false) {
 				$timezone = \OC_Calendar_App::getTimezone();
 				$timezone = new \DateTimeZone($timezone);
 
@@ -373,8 +373,10 @@ class TasksController extends Controller {
 				// if ($due_date_only) {
 				// 	$type = \Sabre\VObject\Property\DateTime::DATE;
 				// }
+				$vtodo->setDateTime('DUE', $due, $type);
+			} else {
+				unset($vtodo->DUE);
 			}
-			$vtodo->setDateTime('DUE', $due, $type);
 			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
 		} catch (\Exception $e) {
 
@@ -394,7 +396,7 @@ class TasksController extends Controller {
 			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
 			$vtodo = $vcalendar->VTODO;
 			$type = null;
-			if ($start != 'false') {
+			if ($start != false) {
 				$timezone = \OC_Calendar_App::getTimezone();
 				$timezone = new \DateTimeZone($timezone);
 
@@ -404,8 +406,10 @@ class TasksController extends Controller {
 				// if ($due_date_only) {
 				// 	$type = \Sabre\VObject\Property\DateTime::DATE;
 				// }
+				$vtodo->setDateTime('DTSTART', $start, $type);
+			} else {
+				unset($vtodo->DTSTART);
 			}
-			$vtodo->setDateTime('DTSTART', $start, $type);
 			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
 		} catch (\Exception $e) {
 
