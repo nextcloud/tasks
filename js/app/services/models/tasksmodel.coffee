@@ -87,22 +87,48 @@ angular.module('Tasks').factory 'TasksModel',
 			for id in taskIDs
 				@removeById(id)
 
-		dayHasEntry: (date) ->
-			tasks = @getAll()
-			ret = false
-			for task in tasks
-				if task.completed
-					continue
-				due = moment(task.due, "YYYYMMDDTHHmmss")
-				if due.isValid()
-					diff = due.diff(moment().startOf('day'), 'days', true)
-					if !date && diff < date+1
-						ret = true
-						break
-					else if diff < date+1 && diff >= date
-						ret = true
-						break
-			return ret
+		taskAtDay: (task, date) ->
+			start = moment(task.start, "YYYYMMDDTHHmmss")
+			due = moment(task.due, "YYYYMMDDTHHmmss")
+			if start.isValid() && !due.isValid()
+				diff = start.diff(moment().startOf('day'), 'days', true)
+				if !date && diff < date+1
+					return true
+				else if diff < date+1 && diff >= date
+					return true
+			if due.isValid() && !start.isValid()
+				diff = due.diff(moment().startOf('day'), 'days', true)
+				if !date && diff < date+1
+					return true
+				else if diff < date+1 && diff >= date
+					return true
+			if start.isValid() && due.isValid()
+				startdiff = start.diff(moment().startOf('day'), 'days', true)
+				duediff = due.diff(moment().startOf('day'), 'days', true)
+				if !date && (startdiff < date+1 || duediff < date+1)
+					return true
+				else if startdiff < date+1 && startdiff >= date && duediff >= date
+					return true
+				else if duediff < date+1 && duediff >= date && startdiff >= date
+					return true
+			return false
+
+		filterTasks: (task, collectionID) ->
+			switch collectionID
+				when 'completed'
+					return task.completed == true
+				when 'all'
+					return task.completed == false
+				when 'current'
+					return (task.completed == false && @current(task.start))
+				when 'starred'
+					return (task.completed == false && task.starred == true)
+				when 'today'
+					return (task.completed == false && (@today(task.start) ||
+					@today(task.due)))
+				when 'week'
+					return (task.completed == false && (@week(task.start) ||
+					@week(task.due)))
 
 		starred: (taskID) ->
 			return @getById(taskID).starred

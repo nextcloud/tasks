@@ -106,22 +106,29 @@ SettingsBusinessLayer) ->
 
 			@_$scope.filterTasks = () ->
 				return (task) ->
-					switch _$scope.route.listID
-						when 'completed'
-							return task.completed == true
-						when 'all'
-							return task.completed == false
-						when 'current'
-							return (task.completed == false && _$tasksmodel.current(task.start))
-						when 'starred'
-							return (task.completed == false && task.starred == true)
-						when 'today'
-							return (task.completed == false && _$tasksmodel.today(task.due))
+					return _$tasksmodel.filterTasks(task, _$scope.route.listID)
+
+			@_$scope.dayHasEntry = () ->
+				return (date) ->
+					tasks = _$tasksmodel.getAll()
+					for task in tasks
+						if task.completed
+							continue
+						if _$tasksmodel.taskAtDay(task, date)
+							return true
+					return false
+
+			@_$scope.getTasksAtDay = (tasks, day) ->
+				ret = []
+				for task in tasks
+					if _$tasksmodel.taskAtDay(task, day)
+						ret.push(task)
+				return ret
+
 
 			@_$scope.filterTasksByCalendar = (task, listID) ->
 				return (task) ->
 					return ''+task.calendarid == ''+listID
-					# return false
 
 			@_$scope.filterLists = () ->
 				return (list) ->
@@ -176,10 +183,6 @@ SettingsBusinessLayer) ->
 					$('#target').blur()
 					_$scope.taskName = ""
 					_$scope.status.focusTaskInput = false
-
-			@_$scope.dayHasEntry = () ->
-				return (date) ->
-					return _$tasksmodel.dayHasEntry(date)
 
 			@_$scope.getCompletedTasks = (listID) ->
 				_tasksbusinesslayer.getCompletedTasks(listID)
