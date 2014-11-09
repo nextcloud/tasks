@@ -2257,7 +2257,7 @@
             case 'all':
               return task.completed === false;
             case 'current':
-              return task.completed === false && this.current(task.start);
+              return task.completed === false && this.current(task.start, task.due);
             case 'starred':
               return task.completed === false && task.starred === true;
             case 'today':
@@ -2349,8 +2349,8 @@
           return moment(due, "YYYYMMDDTHHmmss").isValid() && moment(due, "YYYYMMDDTHHmmss").diff(moment().startOf('day'), 'days', true) < 7;
         };
 
-        TasksModel.prototype.current = function(start) {
-          return !moment(start, "YYYYMMDDTHHmmss").isValid() || moment(start, "YYYYMMDDTHHmmss").diff(moment(), 'days', true) < 0;
+        TasksModel.prototype.current = function(start, due) {
+          return !moment(start, "YYYYMMDDTHHmmss").isValid() || moment(start, "YYYYMMDDTHHmmss").diff(moment(), 'days', true) < 0 || moment(due, "YYYYMMDDTHHmmss").diff(moment(), 'days', true) < 0;
         };
 
         TasksModel.prototype.changeCalendarId = function(taskID, calendarID) {

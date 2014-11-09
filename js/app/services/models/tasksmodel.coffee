@@ -120,7 +120,7 @@ angular.module('Tasks').factory 'TasksModel',
 				when 'all'
 					return task.completed == false
 				when 'current'
-					return (task.completed == false && @current(task.start))
+					return (task.completed == false && @current(task.start, task.due))
 				when 'starred'
 					return (task.completed == false && task.starred == true)
 				when 'today'
@@ -180,9 +180,11 @@ angular.module('Tasks').factory 'TasksModel',
 				moment(due, "YYYYMMDDTHHmmss").
 				diff(moment().startOf('day'), 'days', true) < 7)
 
-		current: (start) ->
+		current: (start, due) ->
 			return (!moment(start, "YYYYMMDDTHHmmss").isValid() ||
 				moment(start, "YYYYMMDDTHHmmss").
+				diff(moment(), 'days', true) < 0 ||
+				moment(due, "YYYYMMDDTHHmmss").
 				diff(moment(), 'days', true) < 0)
 
 		changeCalendarId: (taskID, calendarID) ->
