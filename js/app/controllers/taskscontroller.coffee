@@ -125,7 +125,6 @@ SettingsBusinessLayer) ->
 						ret.push(task)
 				return ret
 
-
 			@_$scope.filterTasksByCalendar = (task, listID) ->
 				return (task) ->
 					return ''+task.calendarid == ''+listID

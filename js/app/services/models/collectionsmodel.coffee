@@ -42,11 +42,5 @@ angular.module('Tasks').factory 'CollectionsModel',
 				count += @_$tasksmodel.filterTasks(task, collectionID)
 			return count
 
-		getCountString: (collectionID) ->
-			if collectionID != 'completed'
-				return @getCount(collectionID)
-			else
-				return ''
-
 	return new CollectionsModel(TasksModel)
 ]

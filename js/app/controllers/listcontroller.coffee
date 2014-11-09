@@ -143,7 +143,10 @@ CollectionsModel, ListsBusinessLayer, $location) ->
 						return (@getCollectionCount(collectionID) < 1)
 
 			@_$scope.getCollectionString = (collectionID) ->
-				return _$collectionsmodel.getCountString(collectionID)
+				if collectionID != 'completed'
+					return _$collectionsmodel.getCount(collectionID)
+				else
+					return ''
 
 			@_$scope.getListCount = (listID,type) ->
 				return _$listsmodel.getCount(listID,type)

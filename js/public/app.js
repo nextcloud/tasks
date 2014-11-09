@@ -937,7 +937,11 @@
             }
           };
           this._$scope.getCollectionString = function(collectionID) {
-            return _$collectionsmodel.getCountString(collectionID);
+            if (collectionID !== 'completed') {
+              return _$collectionsmodel.getCount(collectionID);
+            } else {
+              return '';
+            }
           };
           this._$scope.getListCount = function(listID, type) {
             return _$listsmodel.getCount(listID, type);
@@ -1869,14 +1873,6 @@
           return count;
         };
 
-        CollectionsModel.prototype.getCountString = function(collectionID) {
-          if (collectionID !== 'completed') {
-            return this.getCount(collectionID);
-          } else {
-            return '';
-          }
-        };
-
         return CollectionsModel;
 
       })(_Model);
@@ -1997,42 +1993,15 @@
           return ret;
         };
 
-        ListsModel.prototype.getCount = function(listID, type) {
-          var count, task, tasks, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m;
+        ListsModel.prototype.getCount = function(listID, collectionID) {
+          var count, task, tasks, _i, _len;
           count = 0;
           tasks = this._$tasksmodel.getAll();
-          switch (type) {
-            case 'all':
-              for (_i = 0, _len = tasks.length; _i < _len; _i++) {
-                task = tasks[_i];
-                count += task.calendarid === listID && !task.completed;
-              }
-              return count;
-            case 'current':
-              for (_j = 0, _len1 = tasks.length; _j < _len1; _j++) {
-                task = tasks[_j];
-                count += task.calendarid === listID && !task.completed && this._$tasksmodel.current(task.start);
-              }
-              return count;
-            case 'completed':
-              for (_k = 0, _len2 = tasks.length; _k < _len2; _k++) {
-                task = tasks[_k];
-                count += task.calendarid === listID && task.completed;
-              }
-              return count + this.notLoaded(listID);
-            case 'starred':
-              for (_l = 0, _len3 = tasks.length; _l < _len3; _l++) {
-                task = tasks[_l];
-                count += task.calendarid === listID && !task.completed && task.starred;
-              }
-              return count;
-            case 'today':
-              for (_m = 0, _len4 = tasks.length; _m < _len4; _m++) {
-                task = tasks[_m];
-                count += task.calendarid === listID && !task.completed && this._$tasksmodel.today(task.due);
-              }
-              return count;
+          for (_i = 0, _len = tasks.length; _i < _len; _i++) {
+            task = tasks[_i];
+            count += this._$tasksmodel.filterTasks(task, collectionID) && task.calendarid === listID;
           }
+          return count;
         };
 
         ListsModel.prototype.notLoaded = function(listID) {
