@@ -1174,6 +1174,33 @@
               return _$tasksmodel.filterTasks(task, _$scope.route.listID);
             };
           };
+          this._$scope.dayHasEntry = function() {
+            return function(date) {
+              var task, tasks, _i, _len;
+              tasks = _$tasksmodel.getAll();
+              for (_i = 0, _len = tasks.length; _i < _len; _i++) {
+                task = tasks[_i];
+                if (task.completed) {
+                  continue;
+                }
+                if (_$tasksmodel.taskAtDay(task, date)) {
+                  return true;
+                }
+              }
+              return false;
+            };
+          };
+          this._$scope.getTasksAtDay = function(tasks, day) {
+            var ret, task, _i, _len;
+            ret = [];
+            for (_i = 0, _len = tasks.length; _i < _len; _i++) {
+              task = tasks[_i];
+              if (_$tasksmodel.taskAtDay(task, day)) {
+                ret.push(task);
+              }
+            }
+            return ret;
+          };
           this._$scope.filterTasksByCalendar = function(task, listID) {
             return function(task) {
               return '' + task.calendarid === '' + listID;
@@ -1232,11 +1259,6 @@
               _$scope.taskName = "";
               return _$scope.status.focusTaskInput = false;
             }
-          };
-          this._$scope.dayHasEntry = function() {
-            return function(date) {
-              return _$tasksmodel.dayHasEntry(date);
-            };
           };
           this._$scope.getCompletedTasks = function(listID) {
             return _tasksbusinesslayer.getCompletedTasks(listID);
@@ -2194,39 +2216,38 @@
           return _results;
         };
 
-        TasksModel.prototype.dayHasEntry = function(date) {
-          var diff, due, ret, start, task, tasks, _i, _len;
-          tasks = this.getAll();
-          ret = false;
-          for (_i = 0, _len = tasks.length; _i < _len; _i++) {
-            task = tasks[_i];
-            if (task.completed) {
-              continue;
-            }
-            start = moment(task.start, "YYYYMMDDTHHmmss");
-            if (start.isValid()) {
-              diff = start.diff(moment().startOf('day'), 'days', true);
-              if (!date && diff < date + 1) {
-                ret = true;
-                break;
-              } else if (diff < date + 1 && diff >= date) {
-                ret = true;
-                break;
-              }
-            }
-            due = moment(task.due, "YYYYMMDDTHHmmss");
-            if (due.isValid()) {
-              diff = due.diff(moment().startOf('day'), 'days', true);
-              if (!date && diff < date + 1) {
-                ret = true;
-                break;
-              } else if (diff < date + 1 && diff >= date) {
-                ret = true;
-                break;
-              }
+        TasksModel.prototype.taskAtDay = function(task, date) {
+          var diff, due, duediff, start, startdiff;
+          start = moment(task.start, "YYYYMMDDTHHmmss");
+          due = moment(task.due, "YYYYMMDDTHHmmss");
+          if (start.isValid() && !due.isValid()) {
+            diff = start.diff(moment().startOf('day'), 'days', true);
+            if (!date && diff < date + 1) {
+              return true;
+            } else if (diff < date + 1 && diff >= date) {
+              return true;
             }
           }
-          return ret;
+          if (due.isValid() && !start.isValid()) {
+            diff = due.diff(moment().startOf('day'), 'days', true);
+            if (!date && diff < date + 1) {
+              return true;
+            } else if (diff < date + 1 && diff >= date) {
+              return true;
+            }
+          }
+          if (start.isValid() && due.isValid()) {
+            startdiff = start.diff(moment().startOf('day'), 'days', true);
+            duediff = due.diff(moment().startOf('day'), 'days', true);
+            if (!date && (startdiff < date + 1 || duediff < date + 1)) {
+              return true;
+            } else if (startdiff < date + 1 && startdiff >= date && duediff >= date) {
+              return true;
+            } else if (duediff < date + 1 && duediff >= date && startdiff >= date) {
+              return true;
+            }
+          }
+          return false;
         };
 
         TasksModel.prototype.filterTasks = function(task, collectionID) {
@@ -3055,42 +3076,6 @@
       } else {
         return t('tasks', 'Set start date');
       }
-    };
-  });
-
-}).call(this);
-
-(function() {
-  angular.module('Tasks').filter('taskAtDay', function() {
-    return function(tasks, date) {
-      var diff, due, ret, start, task, _i, _len;
-      ret = [];
-      for (_i = 0, _len = tasks.length; _i < _len; _i++) {
-        task = tasks[_i];
-        start = moment(task.start, "YYYYMMDDTHHmmss");
-        if (start.isValid()) {
-          diff = start.diff(moment().startOf('day'), 'days', true);
-          if (!date && diff < date + 1) {
-            ret.push(task);
-            continue;
-          } else if (diff < date + 1 && diff >= date) {
-            ret.push(task);
-            continue;
-          }
-        }
-        due = moment(task.due, "YYYYMMDDTHHmmss");
-        if (due.isValid()) {
-          diff = due.diff(moment().startOf('day'), 'days', true);
-          if (!date && diff < date + 1) {
-            ret.push(task);
-            continue;
-          } else if (diff < date + 1 && diff >= date) {
-            ret.push(task);
-            continue;
-          }
-        }
-      }
-      return ret;
     };
   });
 
