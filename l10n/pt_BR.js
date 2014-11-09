@@ -86,7 +86,6 @@ OC.L10N.register(
     "General Settings" : "Configuração Geral",
     "Start of week" : "Começo da semana",
     "Smart Collections" : "Coleções Inteligentes",
-    "Visibility of Smart Collections" : "Visibilidade das Coleções Inteligentes",
-    "Load more completed tasks" : "Carregar mais tarefas concluídas"
+    "Visibility of Smart Collections" : "Visibilidade das Coleções Inteligentes"
 },
 "nplurals=2; plural=(n > 1);");

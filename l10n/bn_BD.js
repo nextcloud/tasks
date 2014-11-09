@@ -86,7 +86,6 @@ OC.L10N.register(
     "General Settings" : "সাধারণ নিয়ামকসমূহ",
     "Start of week" : "সপ্তাহ আরম্ভ",
     "Smart Collections" : "চটপট সংগ্রহ",
-    "Visibility of Smart Collections" : "চটপট সংগ্রহের দর্শনযোগ্যতা",
-    "Load more completed tasks" : "আরো সুসম্পন্ন কাজ লোড কর"
+    "Visibility of Smart Collections" : "চটপট সংগ্রহের দর্শনযোগ্যতা"
 },
 "nplurals=2; plural=(n != 1);");

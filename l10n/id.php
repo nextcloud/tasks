@@ -85,7 +85,6 @@ $TRANSLATIONS = array(
 "General Settings" => "Pengaturan Umum",
 "Start of week" => "Mulai minggu",
 "Smart Collections" => "Koleksi Cerdas",
-"Visibility of Smart Collections" => "Visibilitas Koleksi Cerdas",
-"Load more completed tasks" => "Muat lebih banyak tugas terselesaikan"
+"Visibility of Smart Collections" => "Visibilitas Koleksi Cerdas"
 );
 $PLURAL_FORMS = "nplurals=1; plural=0;";

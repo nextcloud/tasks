@@ -85,7 +85,6 @@ $TRANSLATIONS = array(
 "General Settings" => "一般設定",
 "Start of week" => "週の初め",
 "Smart Collections" => "スマートコレクション",
-"Visibility of Smart Collections" => "スマートコレクションの表示",
-"Load more completed tasks" => "その他の完了済みタスク"
+"Visibility of Smart Collections" => "スマートコレクションの表示"
 );
 $PLURAL_FORMS = "nplurals=1; plural=0;";

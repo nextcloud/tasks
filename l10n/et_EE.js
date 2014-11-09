@@ -86,7 +86,6 @@ OC.L10N.register(
     "General Settings" : "Üldised seaded",
     "Start of week" : "Nädala algus",
     "Smart Collections" : "Nutikad kollektsioonid",
-    "Visibility of Smart Collections" : "Nutikate kollektsioonide nähtavus",
-    "Load more completed tasks" : "Laadi rohkem lõpetatud ülesandeid"
+    "Visibility of Smart Collections" : "Nutikate kollektsioonide nähtavus"
 },
 "nplurals=2; plural=(n != 1);");

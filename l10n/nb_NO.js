@@ -86,7 +86,6 @@ OC.L10N.register(
     "General Settings" : "Vanlige innstillinger",
     "Start of week" : "Start på uke",
     "Smart Collections" : "Smarte samlinger",
-    "Visibility of Smart Collections" : "Synlighet for smarte samlinger",
-    "Load more completed tasks" : "Last flere avsluttede oppgaver"
+    "Visibility of Smart Collections" : "Synlighet for smarte samlinger"
 },
 "nplurals=2; plural=(n != 1);");

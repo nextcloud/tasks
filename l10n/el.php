@@ -85,7 +85,6 @@ $TRANSLATIONS = array(
 "General Settings" => "Γενικές ρυθμίσεις",
 "Start of week" => "Αρχή της εβδομάδας",
 "Smart Collections" => "Έξυπνες Συλλογές",
-"Visibility of Smart Collections" => "Ορατότητα Έξυπνων Συλλογών",
-"Load more completed tasks" => "Φόρτωση περισσότερων ολοκληρωμένων εργασιών"
+"Visibility of Smart Collections" => "Ορατότητα Έξυπνων Συλλογών"
 );
 $PLURAL_FORMS = "nplurals=2; plural=(n != 1);";

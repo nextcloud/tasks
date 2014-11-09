@@ -86,7 +86,6 @@ OC.L10N.register(
     "General Settings" : "General Settings",
     "Start of week" : "Start of week",
     "Smart Collections" : "Smart Collections",
-    "Visibility of Smart Collections" : "Visibility of Smart Collections",
-    "Load more completed tasks" : "Load more completed tasks"
+    "Visibility of Smart Collections" : "Visibility of Smart Collections"
 },
 "nplurals=2; plural=(n != 1);");

@@ -86,7 +86,6 @@ OC.L10N.register(
     "General Settings" : "Všeobecné nastavenia",
     "Start of week" : "Začiatok týždňa",
     "Smart Collections" : "Inteligentné kolekcie",
-    "Visibility of Smart Collections" : "Viditeľnosť inteligentných kolekcií",
-    "Load more completed tasks" : "Načítať viac ukončených úloh"
+    "Visibility of Smart Collections" : "Viditeľnosť inteligentných kolekcií"
 },
 "nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;");

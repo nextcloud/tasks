@@ -85,7 +85,6 @@ $TRANSLATIONS = array(
 "General Settings" => "Загальні Налаштування",
 "Start of week" => "Початок тижня",
 "Smart Collections" => "Smart Колекції",
-"Visibility of Smart Collections" => "Видимість Smart-колекції",
-"Load more completed tasks" => "Більше завершених завданнь"
+"Visibility of Smart Collections" => "Видимість Smart-колекції"
 );
 $PLURAL_FORMS = "nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);";

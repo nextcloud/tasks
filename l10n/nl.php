@@ -85,7 +85,6 @@ $TRANSLATIONS = array(
 "General Settings" => "Algemene instellingen",
 "Start of week" => "Begin van de week",
 "Smart Collections" => "Slimme Verzamelingen",
-"Visibility of Smart Collections" => "Zichtbaarheid van Slimme Verzamelingen",
-"Load more completed tasks" => "Laad meer afgeronde taken"
+"Visibility of Smart Collections" => "Zichtbaarheid van Slimme Verzamelingen"
 );
 $PLURAL_FORMS = "nplurals=2; plural=(n != 1);";

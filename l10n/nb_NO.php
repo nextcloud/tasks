@@ -85,7 +85,6 @@ $TRANSLATIONS = array(
 "General Settings" => "Vanlige innstillinger",
 "Start of week" => "Start på uke",
 "Smart Collections" => "Smarte samlinger",
-"Visibility of Smart Collections" => "Synlighet for smarte samlinger",
-"Load more completed tasks" => "Last flere avsluttede oppgaver"
+"Visibility of Smart Collections" => "Synlighet for smarte samlinger"
 );
 $PLURAL_FORMS = "nplurals=2; plural=(n != 1);";

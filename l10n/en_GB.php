@@ -85,7 +85,6 @@ $TRANSLATIONS = array(
 "General Settings" => "General Settings",
 "Start of week" => "Start of week",
 "Smart Collections" => "Smart Collections",
-"Visibility of Smart Collections" => "Visibility of Smart Collections",
-"Load more completed tasks" => "Load more completed tasks"
+"Visibility of Smart Collections" => "Visibility of Smart Collections"
 );
 $PLURAL_FORMS = "nplurals=2; plural=(n != 1);";

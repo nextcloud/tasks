@@ -79,7 +79,6 @@ $TRANSLATIONS = array(
 "General Settings" => "Yleisasetukset",
 "Start of week" => "Viikon alku",
 "Smart Collections" => "Älykkäät kokoelmat",
-"Visibility of Smart Collections" => "Älykkäiden kokoelmien näkyvyys",
-"Load more completed tasks" => "Lataa lisää valmistuneita tehtäviä"
+"Visibility of Smart Collections" => "Älykkäiden kokoelmien näkyvyys"
 );
 $PLURAL_FORMS = "nplurals=2; plural=(n != 1);";

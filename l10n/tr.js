@@ -86,7 +86,6 @@ OC.L10N.register(
     "General Settings" : "Genel Ayarlar",
     "Start of week" : "Hafta başlangıcı",
     "Smart Collections" : "Akıllı Koleksiyonlar",
-    "Visibility of Smart Collections" : "Akıllı Koleksiyon Görünürlüğü",
-    "Load more completed tasks" : "Daha fazla tamamlanmış görev yükle"
+    "Visibility of Smart Collections" : "Akıllı Koleksiyon Görünürlüğü"
 },
 "nplurals=2; plural=(n > 1);");

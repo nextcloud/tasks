@@ -86,7 +86,6 @@ OC.L10N.register(
     "General Settings" : "Ezarpen orokorrak",
     "Start of week" : "Astearen hasiera",
     "Smart Collections" : "Bilduma argiak",
-    "Visibility of Smart Collections" : "Bilduma argien ikusgarritasuna",
-    "Load more completed tasks" : "Kargatu betetako zeregin gehiago"
+    "Visibility of Smart Collections" : "Bilduma argien ikusgarritasuna"
 },
 "nplurals=2; plural=(n != 1);");

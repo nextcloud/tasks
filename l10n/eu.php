@@ -85,7 +85,6 @@ $TRANSLATIONS = array(
 "General Settings" => "Ezarpen orokorrak",
 "Start of week" => "Astearen hasiera",
 "Smart Collections" => "Bilduma argiak",
-"Visibility of Smart Collections" => "Bilduma argien ikusgarritasuna",
-"Load more completed tasks" => "Kargatu betetako zeregin gehiago"
+"Visibility of Smart Collections" => "Bilduma argien ikusgarritasuna"
 );
 $PLURAL_FORMS = "nplurals=2; plural=(n != 1);";

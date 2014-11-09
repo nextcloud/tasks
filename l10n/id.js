@@ -86,7 +86,6 @@ OC.L10N.register(
     "General Settings" : "Pengaturan Umum",
     "Start of week" : "Mulai minggu",
     "Smart Collections" : "Koleksi Cerdas",
-    "Visibility of Smart Collections" : "Visibilitas Koleksi Cerdas",
-    "Load more completed tasks" : "Muat lebih banyak tugas terselesaikan"
+    "Visibility of Smart Collections" : "Visibilitas Koleksi Cerdas"
 },
 "nplurals=1; plural=0;");
