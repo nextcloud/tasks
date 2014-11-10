@@ -2001,6 +2001,9 @@
             task = tasks[_i];
             count += this._$tasksmodel.filterTasks(task, collectionID) && task.calendarid === listID;
           }
+          if (collectionID === 'completed') {
+            count += this.notLoaded(listID);
+          }
           return count;
         };
 
