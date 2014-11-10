@@ -80,6 +80,7 @@ OC.L10N.register(
     "Search..." : "検索...",
     "Add List..." : "リスト追加...",
     "New List" : "新規リスト",
+    "Load remaining completed tasks." : "残りの完了済みタスクをロード",
     "Settings" : "設定",
     "Done" : "完了",
     "General" : "一般",

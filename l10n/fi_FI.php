@@ -14,6 +14,7 @@ $TRANSLATIONS = array(
 "Started yesterday" => "Alkoi eilen",
 "Starts today" => "Alkaa tänään",
 "Starts tomorrow" => "Alkaa huomenna",
+"Started on" => "Aloitettu",
 "Starts on" => "Alkaa",
 "[Remind me yesterday at ]HH:mm" => "[Muistuta minua klo ]HH:mm",
 "[Remind me today at ]HH:mm" => "[Muistuta minua tänään klo ]HH:mm",
