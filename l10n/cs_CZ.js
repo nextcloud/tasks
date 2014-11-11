@@ -80,6 +80,7 @@ OC.L10N.register(
     "Search..." : "Hledat...",
     "Add List..." : "Přidat seznam...",
     "New List" : "Nový seznam",
+    "Load remaining completed tasks." : "Načíst zbývající dokončené úkoly.",
     "Settings" : "Nastavení",
     "Done" : "Dokončeno",
     "General" : "Hlavní",

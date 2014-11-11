@@ -79,6 +79,7 @@ $TRANSLATIONS = array(
 "Search..." => "Rechercher...",
 "Add List..." => "Ajouter une liste...",
 "New List" => "Nouvelle liste",
+"Load remaining completed tasks." => "Charger le reste des tâches terminées.",
 "Settings" => "Paramètres",
 "Done" => "Terminé",
 "General" => "Général",
