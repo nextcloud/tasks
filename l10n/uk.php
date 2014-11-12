@@ -79,6 +79,7 @@ $TRANSLATIONS = array(
 "Search..." => "Пошук...",
 "Add List..." => "Додати список...",
 "New List" => "Новий список",
+"Load remaining completed tasks." => "Завантажити решту виконаних завдань.",
 "Settings" => "Налаштування",
 "Done" => "Готово",
 "General" => "Загалом",

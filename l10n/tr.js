@@ -80,6 +80,7 @@ OC.L10N.register(
     "Search..." : "Ara...",
     "Add List..." : "Listeye Ekle...",
     "New List" : "Yeni Liste",
+    "Load remaining completed tasks." : "Geri kalan tamamlanmış görevleri yükle.",
     "Settings" : "Ayarlar",
     "Done" : "Bitti",
     "General" : "Genel",

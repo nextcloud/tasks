@@ -80,6 +80,7 @@ OC.L10N.register(
     "Search..." : "Otsi..",
     "Add List..." : "Lisa nimekirja...",
     "New List" : "Uus nimekiri",
+    "Load remaining completed tasks." : "Laadi ülejäänud lõpetatud ülesanded",
     "Settings" : "Seaded",
     "Done" : "Valmis",
     "General" : "Üldine",
