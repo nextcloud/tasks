@@ -79,6 +79,7 @@ $TRANSLATIONS = array(
 "Search..." => "Poišči ...",
 "Add List..." => "Dodaj seznam ...",
 "New List" => "Nov seznam",
+"Load remaining completed tasks." => "Naloži preostale končane naloge.",
 "Settings" => "Nastavitve",
 "Done" => "Končano",
 "General" => "Splošno",
