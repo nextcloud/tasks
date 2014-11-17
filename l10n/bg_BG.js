@@ -80,6 +80,7 @@ OC.L10N.register(
     "Search..." : "Търси...",
     "Add List..." : "Добави Списък...",
     "New List" : "Нов Списък",
+    "Load remaining completed tasks." : "Зареди останалите завършени задачи.",
     "Settings" : "Настройки",
     "Done" : "Завършен",
     "General" : "Общи",
