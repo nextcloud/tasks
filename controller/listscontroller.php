@@ -23,6 +23,8 @@
 
 namespace OCA\Tasks\Controller;
 
+use \OCP\IRequest;
+
 use \OCP\AppFramework\Controller;
 use \OCP\AppFramework\Http\JSONResponse;
 

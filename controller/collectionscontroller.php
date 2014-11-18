@@ -23,6 +23,9 @@
 
 namespace OCA\Tasks\Controller;
 
+use \OCP\IRequest;
+use \OCP\IConfig;
+
 use \OCP\AppFramework\Controller;
 use \OCP\AppFramework\Http\JSONResponse;
 
