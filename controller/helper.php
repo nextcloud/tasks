@@ -173,13 +173,13 @@ Class Helper {
 		if($comments){
 			$comments_parsed = array();
 			foreach($comments as $com) {
-				$time = new \DateTime($com['DATE-TIME']->value);
+				$time = new \DateTime($com['X-OC-DATE-TIME']->value);
 				$time->setTimezone(new \DateTimeZone($user_timezone));
 				$time = $time->format('Ymd\THis');
 				$comments_parsed[] = array(
-					'id' => (int)$com['ID']->value,
-					'userID' => $com['USERID']->value,
-					'name' => \OCP\User::getDisplayName($com['USERID']->value),
+					'id' => (int)$com['X-OC-ID']->value,
+					'userID' => $com['X-OC-USERID']->value,
+					'name' => \OCP\User::getDisplayName($com['X-OC-USERID']->value),
 					'comment' => $com->value,
 					'time' => $time
 					);
