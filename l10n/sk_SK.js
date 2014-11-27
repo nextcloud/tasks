@@ -70,7 +70,7 @@ OC.L10N.register(
     "Add an item due today in \"%s\"..." : "Pridať položku do dnes do \"%s\"...",
     "Add an item in \"%s\"..." : "Pridať položku do \"%s\"...",
     "Add a current item in \"%s\"..." : "Pridať túto položku do \"%s\"...",
-    "_%n Completed Task_::_%n Completed Tasks_" : ["%n dokončená úloha","%n dokončené úlohy","%n dokončených úloh"],
+    "%n Completed Task::%n Completed Tasks" : ["%n dokončená úloha","%n dokončené úlohy","%n dokončených úloh"],
     "Set due date" : "Nastaviť do dátumu",
     "%s %% completed" : "%s %% ukončené",
     "Remind me" : "Pripomenúť mi",

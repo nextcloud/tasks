@@ -70,7 +70,7 @@ OC.L10N.register(
     "Add an item due today in \"%s\"..." : "Add an item due today in \"%s\"...",
     "Add an item in \"%s\"..." : "Add an item in \"%s\"...",
     "Add a current item in \"%s\"..." : "Add a current item in \"%s\"...",
-    "_%n Completed Task_::_%n Completed Tasks_" : ["%n Completed Task","%n Completed Tasks"],
+    "%n Completed Task::%n Completed Tasks" : ["%n Completed Task","%n Completed Tasks"],
     "Set due date" : "Set due date",
     "%s %% completed" : "%s %% completed",
     "Remind me" : "Remind me",

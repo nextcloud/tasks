@@ -68,7 +68,7 @@
     "Add an item due today in \"%s\"..." : "Dodaj element na dzisiaj w \"%s\" ...",
     "Add an item in \"%s\"..." : "Dodaj element w \"%s\" ...",
     "Add a current item in \"%s\"..." : "Dodaj aktualny element w \"%s\" ...",
-    "_%n Completed Task_::_%n Completed Tasks_" : ["%n zakończone zadanie","%n zakończonych zadań","%n zakończonych zadań"],
+    "%n Completed Task::%n Completed Tasks" : ["%n zakończone zadanie","%n zakończonych zadań","%n zakończonych zadań"],
     "Set due date" : "Ustaw datę wydarzenia",
     "%s %% completed" : "ukończono %s %%",
     "Remind me" : "Przypomnij mi",

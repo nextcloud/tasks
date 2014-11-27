@@ -70,7 +70,7 @@ OC.L10N.register(
     "Add an item due today in \"%s\"..." : "Ajouter un élément échéant aujourd'hui dans \"%s\"...",
     "Add an item in \"%s\"..." : "Ajouter un élément dans \"%s\"...",
     "Add a current item in \"%s\"..." : "Ajouter l'élément courant dans \"%s\"...",
-    "_%n Completed Task_::_%n Completed Tasks_" : ["%n tâche terminée","%n tâches terminées"],
+    "%n Completed Task::%n Completed Tasks" : ["%n tâche terminée","%n tâches terminées"],
     "Set due date" : "Spécifier la date d'échéance",
     "%s %% completed" : "%s %% terminé",
     "Remind me" : "Rappel",

@@ -70,7 +70,7 @@ OC.L10N.register(
     "Add an item due today in \"%s\"..." : "Gehitu gertaera bat gaur \"%s\" epemuga duena...",
     "Add an item in \"%s\"..." : "Gehitu gertaera bat \"%s\"-an...",
     "Add a current item in \"%s\"..." : "Gehitu uneko gertaera bat \"%s\"-an",
-    "_%n Completed Task_::_%n Completed Tasks_" : ["Zeregin bete %n","%n Zeregin Beteak"],
+    "%n Completed Task::%n Completed Tasks" : ["Zeregin bete %n","%n Zeregin Beteak"],
     "Set due date" : "Ezarri epemuga",
     "%s %% completed" : "%% %s  betea",
     "Remind me" : "Gogorarazi",

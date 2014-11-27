@@ -65,7 +65,7 @@ OC.L10N.register(
     "Thursday" : "torstai",
     "Friday" : "perjantai",
     "Saturday" : "lauantai",
-    "_%n Completed Task_::_%n Completed Tasks_" : ["%n valmistunut tehtävä","%n valmistunutta tehtävää"],
+    "%n Completed Task::%n Completed Tasks" : ["%n valmistunut tehtävä","%n valmistunutta tehtävää"],
     "Set due date" : "Aseta eräpäivä",
     "%s %% completed" : "%s %% valmiina",
     "Remind me" : "Muistuta minua",

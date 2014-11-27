@@ -68,7 +68,7 @@
     "Add an item due today in \"%s\"..." : "Lisa tänase tähtajaga kirje nimekirja \"%s\"...",
     "Add an item in \"%s\"..." : "Lisa kirje nimekirja \"%s\"...",
     "Add a current item in \"%s\"..." : "Lisa praegune kirje nimekirja \"%s\"...",
-    "_%n Completed Task_::_%n Completed Tasks_" : ["%n lõpetatud ülesanne","%n lõpetatud ülesannet"],
+    "%n Completed Task::%n Completed Tasks" : ["%n lõpetatud ülesanne","%n lõpetatud ülesannet"],
     "Set due date" : "Määra tähtaeg",
     "%s %% completed" : "%s %% valmis",
     "Remind me" : "Tuleta meelde",

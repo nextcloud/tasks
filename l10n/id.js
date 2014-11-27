@@ -70,7 +70,7 @@ OC.L10N.register(
     "Add an item due today in \"%s\"..." : "Tambah item jatuh tempo hari ini dalam \"%s\"...",
     "Add an item in \"%s\"..." : "Tambah item dalam \"%s\"...",
     "Add a current item in \"%s\"..." : "Tambah item terbaru dalam \"%s\"...",
-    "_%n Completed Task_::_%n Completed Tasks_" : ["%n Tugas Diselesaikan"],
+    "%n Completed Task::%n Completed Tasks" : ["%n Tugas Diselesaikan"],
     "Set due date" : "Atur tanggal jatuh tempo",
     "%s %% completed" : "%s %% selesai",
     "Remind me" : "Ingatkan saya",

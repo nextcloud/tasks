@@ -66,7 +66,7 @@ OC.L10N.register(
     "Thursday" : "csütörtök",
     "Friday" : "péntek",
     "Saturday" : "szombat",
-    "_%n Completed Task_::_%n Completed Tasks_" : ["%n befejezett feladat","%n befejezett feladat"],
+    "%n Completed Task::%n Completed Tasks" : ["%n befejezett feladat","%n befejezett feladat"],
     "Remind me" : "Emlékeztess",
     "at the end" : "a végénél",
     "at the beginning" : "az elején",
