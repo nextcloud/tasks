@@ -87,11 +87,13 @@ Class Helper {
 					$related = null;
 					if(is_object($reminder->TRIGGER['RELATED'])){
 						$related = $reminder->TRIGGER['RELATED']->value;
-						if(is_object($reminder->TRIGGER['RELATED']) && $reminder->TRIGGER['RELATED']->value == 'END' && $due){
+						if($related == 'END' && $due){
 							$reminderDate = $due->modify($parsed)->format('Ymd\THis');
-						} elseif ($start) {
-							$reminderDate = $start->modify($parsed)->format('Ymd\THis');
+						} else {
+							throw new \Exception('Reminder duration related to not available date.');
 						}
+					} elseif ($start) {
+						$reminderDate = $start->modify($parsed)->format('Ymd\THis');
 					} else{
 						throw new \Exception('Reminder duration related to not available date.');
 					}
