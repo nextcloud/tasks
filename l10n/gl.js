@@ -80,6 +80,7 @@ OC.L10N.register(
     "Search..." : "Buscar...",
     "Add List..." : "Engadir unha lista...",
     "New List" : "Lista nova",
+    "Load remaining completed tasks." : "Cargar as tarefas completadas restantes.",
     "Settings" : "Axustes",
     "Done" : "Feito",
     "General" : "Xeral",
