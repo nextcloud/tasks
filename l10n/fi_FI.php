@@ -22,6 +22,7 @@ $TRANSLATIONS = array(
 "[Remind me on ]MMM DD, YYYY,[ at ]HH:mm" => "[Muistuta minua ]MMM DD, YYYY [ klo ]HH:mm",
 "Yesterday" => "Eilen",
 "Tomorrow" => "Huomenna",
+"in %s" => "polussa %s",
 "%s ago" => "%s sitten",
 "seconds" => "sekuntia",
 "a minute" => "minuutti",
