@@ -79,6 +79,7 @@ $TRANSLATIONS = array(
 "Search..." => "Αναζήτηση",
 "Add List..." => "Προσθήκη Λίστας...",
 "New List" => "Νέα λίστα",
+"Load remaining completed tasks." => "Φόρτωση περισσότερων ολοκληρωμένων εργασιών",
 "Settings" => "Ρυθμίσεις",
 "Done" => "Ολοκληρώθηκε",
 "General" => "Γενικά",
