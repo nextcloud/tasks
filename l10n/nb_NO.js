@@ -80,6 +80,7 @@ OC.L10N.register(
     "Search..." : "Søk...",
     "Add List..." : "Legg til liste...",
     "New List" : "Ny liste",
+    "Load remaining completed tasks." : "Last gjenværende avsluttede oppgaver.",
     "Settings" : "Innstillinger",
     "Done" : "Ferdig",
     "General" : "Generelt",
