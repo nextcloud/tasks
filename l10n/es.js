@@ -56,7 +56,7 @@ OC.L10N.register(
     "This will delete the Calendar \"%s\" and all of its entries." : "Esto eliminará el calendario \"%s\" y todas sus entradas.",
     "The name \"%s\" is already used." : "El nombre \"%s\" ya está en uso.",
     "An empty name is not allowed." : "No se puede dejar el nombre en blanco.",
-    "Hidden" : "Escondido",
+    "Hidden" : "Oculto",
     "Visible" : "Visible",
     "Automatic" : "Automático",
     "Sunday" : "Domingo",
