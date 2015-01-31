@@ -3,7 +3,7 @@
 /**
  * ownCloud Task App - v0.1
  *
- * Copyright (c) 2014 - Raimund Schlüßler <raimund.schluessler@googlemail.com>
+ * Copyright (c) 2015 - Raimund Schlüßler <raimund.schluessler@googlemail.com>
  *
  * This file is licensed under the Affero General Public License version 3 or later.
  * See the COPYING file
@@ -1207,7 +1207,11 @@
           };
           this._$scope.filterTasksByCalendar = function(task, listID) {
             return function(task) {
-              return '' + task.calendarid === '' + listID;
+              if (_$scope.status.searchActive) {
+                return true;
+              } else {
+                return '' + task.calendarid === '' + listID;
+              }
             };
           };
           this._$scope.filterLists = function() {
@@ -1216,10 +1220,18 @@
             };
           };
           this._$scope.getCount = function(listID, type) {
-            return _$listsmodel.getCount(listID, type);
+            if (_$scope.status.searchActive) {
+              return true;
+            } else {
+              return _$listsmodel.getCount(listID, type);
+            }
           };
           this._$scope.getCountString = function(listID, type) {
-            return n('tasks', '%n Completed Task', '%n Completed Tasks', _$listsmodel.getCount(listID, type));
+            if (_$scope.status.searchActive) {
+              return t('tasks', 'Completed Task');
+            } else {
+              return n('tasks', '%n Completed Task', '%n Completed Tasks', _$listsmodel.getCount(listID, type));
+            }
           };
           this._$scope.addTask = function(taskName) {
             var task, _ref,

@@ -127,18 +127,27 @@ SettingsBusinessLayer) ->
 
 			@_$scope.filterTasksByCalendar = (task, listID) ->
 				return (task) ->
-					return ''+task.calendarid == ''+listID
+					if _$scope.status.searchActive
+						return true
+					else
+						return ''+task.calendarid == ''+listID
 
 			@_$scope.filterLists = () ->
 				return (list) ->
 					return _$scope.getCount(list.id,_$scope.route.listID)
 
 			@_$scope.getCount = (listID,type) ->
-				return _$listsmodel.getCount(listID,type)
+				if _$scope.status.searchActive
+					return true
+				else
+					return _$listsmodel.getCount(listID,type)
 
 			@_$scope.getCountString = (listID,type) ->
-				return n('tasks', '%n Completed Task', '%n Completed Tasks',
-				_$listsmodel.getCount(listID,type))
+				if _$scope.status.searchActive
+					return t('tasks', 'Completed Task')
+				else
+					return n('tasks', '%n Completed Task', '%n Completed Tasks',
+						_$listsmodel.getCount(listID,type))
 
 			@_$scope.addTask = (taskName) ->
 
