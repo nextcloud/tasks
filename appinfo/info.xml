@@ -2,7 +2,7 @@
 <info>
 	<id>tasks</id>
 	<name>Tasks</name>
-	<version>0.5</version>
+	<version>0.5.1</version>
 	<licence>AGPL</licence>
 	<author>Raimund Schlüßler</author>
 	<require>6.0.0</require>
