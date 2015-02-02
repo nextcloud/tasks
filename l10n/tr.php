@@ -69,6 +69,7 @@ $TRANSLATIONS = array(
 "Add an item due today in \"%s\"..." => "\"%s\" içerisine bugün biten bir öge ekle...",
 "Add an item in \"%s\"..." => "\"%s\" içerisine bir öge ekle...",
 "Add a current item in \"%s\"..." => "Geçerli ögeyi \"%s\" içerisine ekle...",
+"Completed Task" => "Tamamlanmış Görev",
 "%n Completed Task::%n Completed Tasks" => array("%n Tamamlanmış Görev","%n Tamamlanmış Görev"),
 "Set due date" => "Bitiş tarihini ayarla",
 "%s %% completed" => "%% %s tamamlandı",

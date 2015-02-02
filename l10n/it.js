@@ -70,6 +70,7 @@ OC.L10N.register(
     "Add an item due today in \"%s\"..." : "Aggiungi un elemento che scade oggi in \"%s\"...",
     "Add an item in \"%s\"..." : "Aggiungi un elemento in \"%s\"...",
     "Add a current item in \"%s\"..." : "Aggiungi un elemento corrente in \"%s\"...",
+    "Completed Task" : "Attività completate",
     "%n Completed Task::%n Completed Tasks" : ["%n attività completata","%n attività completate"],
     "Set due date" : "Imposta data di scadenza",
     "%s %% completed" : "%s %% completato",

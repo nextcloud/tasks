@@ -69,6 +69,7 @@ $TRANSLATIONS = array(
 "Add an item due today in \"%s\"..." => "Agregar un elemento para hoy en \"%s\"...",
 "Add an item in \"%s\"..." => "Agregar un elemento en \"%s\"...",
 "Add a current item in \"%s\"..." => "Agregar un elemento actual en \"%s\"...",
+"Completed Task" => "Tarea completada",
 "%n Completed Task::%n Completed Tasks" => array("%n tarea completada","%n tareas completadas"),
 "Set due date" => "Fijar fecha límite",
 "%s %% completed" => "%s %% completado",

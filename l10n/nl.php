@@ -69,6 +69,7 @@ $TRANSLATIONS = array(
 "Add an item due today in \"%s\"..." => "Toevoegen taak die vandaag vervalt in \"%s\"...",
 "Add an item in \"%s\"..." => "Toevoegen taak in \"%s\"...",
 "Add a current item in \"%s\"..." => "Voeg een actuele taak toe aan \"%s\"...",
+"Completed Task" => "Afgeronde taak",
 "%n Completed Task::%n Completed Tasks" => array("%n afgeronde taak","%n afgeronde taken"),
 "Set due date" => "Stel vervaldatum in",
 "%s %% completed" => "%s %% gereed",
