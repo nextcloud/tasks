@@ -69,6 +69,7 @@ $TRANSLATIONS = array(
 "Add an item due today in \"%s\"..." => "Add an item due today in \"%s\"...",
 "Add an item in \"%s\"..." => "Add an item in \"%s\"...",
 "Add a current item in \"%s\"..." => "Add a current item in \"%s\"...",
+"Completed Task" => "Completed Task",
 "%n Completed Task::%n Completed Tasks" => array("%n Completed Task","%n Completed Tasks"),
 "Set due date" => "Set due date",
 "%s %% completed" => "%s %% completed",
