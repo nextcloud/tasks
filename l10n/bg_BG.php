@@ -69,6 +69,7 @@ $TRANSLATIONS = array(
 "Add an item due today in \"%s\"..." => "Добави точка с краен срок днес в \"%s\"...",
 "Add an item in \"%s\"..." => "Добави точка в \"%s\"...",
 "Add a current item in \"%s\"..." => "Добави текущa точка в \"%s\"...",
+"Completed Task" => "Завършена Задача",
 "%n Completed Task::%n Completed Tasks" => array("%n Завършена Задача","%n Завършени Задачи"),
 "Set due date" => "Сложи крайна дата",
 "%s %% completed" => "%s %% завършени",
