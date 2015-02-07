@@ -51,29 +51,25 @@ class SearchController extends \OCP\Search\Provider {
 				$vtodo = Helper::parseVTODO($object['calendardata']);
 				$id = $object['id'];
 				$calendarId = $object['calendarid'];
-				// check the task summary
-				$summary = $vtodo->getAsString('SUMMARY');
-				if (stripos($summary, $query) !== false) {
-					$results[] = new \OCA\Tasks\Controller\Task($id,$calendarId,$vtodo,'summary',$query);
-					continue;
+				
+				// check these properties
+				$properties = ['SUMMARY', 'DESCRIPTION', 'LOCATION', 'CATEGORIES'];
+
+				foreach ($properties as $property) {
+					$string = $vtodo->getAsString($property);
+					if (stripos($string, $query) !== false) {
+						$results[] = new \OCA\Tasks\Controller\Task($id,$calendarId,$vtodo,$property,$query);
+						continue 2;
+					}
 				}
-				// check the task note
-				$note = $vtodo->getAsString('DESCRIPTION');
-				if (stripos($note, $query) !== false) {
-					$results[] = new \OCA\Tasks\Controller\Task($id,$calendarId,$vtodo,'note',$query);
-					continue;
-				}
-				// check the task location
-				$location = $vtodo->getAsString('LOCATION');
-				if (stripos($location, $query) !== false) {
-					$results[] = new \OCA\Tasks\Controller\Task($id,$calendarId,$vtodo,'location',$query);
-					continue;
-				}
-				// check the task categorie
-				$categories = $vtodo->getAsString('CATEGORIES');
-				if (stripos($categories, $query) !== false) {
-					$results[] = new \OCA\Tasks\Controller\Task($id,$calendarId,$vtodo,'categories',$query);
-					continue;
+				$comments = $vtodo->COMMENT;
+				if($comments) {
+					foreach($comments as $com) {
+						if (stripos($com->value, $query) !== false) {
+							$results[] = new \OCA\Tasks\Controller\Task($id,$calendarId,$vtodo,'COMMENTS',$query);
+							continue 2;
+						}
+					}
 				}
 			}
 		}

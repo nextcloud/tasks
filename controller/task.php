@@ -74,17 +74,20 @@ class Task extends \OCP\Search\Result {
 		$this->link = \OCP\Util::linkToRoute('tasks.page.index') . '#/lists/' . $calendarId . '/tasks/' . $taskId;
 		$l = new \OC_l10n('tasks');
 		switch($reason){
-			case 'summary':
+			case 'SUMMARY':
 				$this->text = '"' . $query .'" '. $l->t('found in task title.');
 				break;
-			case 'note':
+			case 'DESCRIPTION':
 				$this->text = '"' . $query .'" '. $l->t('found in task note.');
 				break;
-			case 'location':
+			case 'LOCATION':
 				$this->text = '"' . $query .'" '. $l->t('found in task location.');
 				break;
-			case 'categories':
+			case 'CATEGORIES':
 				$this->text = '"' . $query .'" '. $l->t('found in task categories.');
+				break;
+			case 'COMMENTS':
+				$this->text = '"' . $query .'" '. $l->t('found in task comments.');
 				break;
 			default:
 				$this->text = '';
