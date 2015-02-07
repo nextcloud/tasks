@@ -73,6 +73,16 @@ class SearchController extends \OCP\Search\Provider {
 				}
 			}
 		}
+		usort($results, array($this, 'sort_completed'));
 		return $results;
+	}
+
+	private static function sort_completed($a, $b){
+		$t1 = $a->completed;
+		$t2 = $b->completed;
+		if ($t1 == $t2) {
+			return 0;
+		}
+		return $t1 > $t2 ? 1 : -1;
 	}
 }

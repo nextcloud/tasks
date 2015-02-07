@@ -40,6 +40,13 @@ class Task extends \OCP\Search\Result {
 	public $calendarID;
 
 	/**
+	 * Is Task completed
+	 *
+	 * @var string
+	 */
+	public $completed;
+
+	/**
 	 * Used by the client JS to display additional information under the event summary
 	 *
 	 * @var string
@@ -71,6 +78,7 @@ class Task extends \OCP\Search\Result {
 		$this->id = $taskId;
 		$this->calendarID = $calendarId;
 		$this->name = $vtodo->getAsString('SUMMARY');
+		$this->completed = $vtodo->COMPLETED ? true : false;
 		$this->link = \OCP\Util::linkToRoute('tasks.page.index') . '#/lists/' . $calendarId . '/tasks/' . $taskId;
 		$l = new \OC_l10n('tasks');
 		switch($reason){
