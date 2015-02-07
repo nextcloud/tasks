@@ -42,7 +42,7 @@ class Task extends \OCP\Search\Result {
 	/**
 	 * Is Task completed
 	 *
-	 * @var string
+	 * @var boolean
 	 */
 	public $completed;
 
@@ -73,7 +73,7 @@ class Task extends \OCP\Search\Result {
 	 * @param array $data
 	 * @return \OCA\Tasks\Controller\Task
 	 */
-	public function __construct($taskId, $calendarId, array $vtodo = null, $reason, $query) {
+	public function __construct($taskId, $calendarId, $vtodo, $reason, $query) {
 		// set default properties
 		$this->id = $taskId;
 		$this->calendarID = $calendarId;
