@@ -494,10 +494,10 @@
 
 (function() {
   angular.module('Tasks').controller('DetailsController', [
-    '$scope', '$window', 'TasksModel', 'TasksBusinessLayer', '$route', '$location', '$timeout', '$routeParams', 'SettingsModel', function($scope, $window, TasksModel, TasksBusinessLayer, $route, $location, $timeout, $routeParams, SettingsModel) {
+    '$scope', '$window', 'TasksModel', 'TasksBusinessLayer', '$route', '$location', '$timeout', '$routeParams', 'SettingsModel', 'Loading', function($scope, $window, TasksModel, TasksBusinessLayer, $route, $location, $timeout, $routeParams, SettingsModel, Loading) {
       var DetailsController;
       DetailsController = (function() {
-        function DetailsController(_$scope, _$window, _$tasksmodel, _tasksbusinesslayer, _$route, _$location, _$timeout, _$routeparams, _$settingsmodel) {
+        function DetailsController(_$scope, _$window, _$tasksmodel, _tasksbusinesslayer, _$route, _$location, _$timeout, _$routeparams, _$settingsmodel, _Loading) {
           this._$scope = _$scope;
           this._$window = _$window;
           this._$tasksmodel = _$tasksmodel;
@@ -507,12 +507,21 @@
           this._$timeout = _$timeout;
           this._$routeparams = _$routeparams;
           this._$settingsmodel = _$settingsmodel;
+          this._Loading = _Loading;
           this._$scope.task = _$tasksmodel.getById(_$scope.route.taskID);
+          this._$scope.found = true;
           this._$scope.$on('$routeChangeSuccess', function() {
-            var task;
+            var task,
+              _this = this;
             task = _$tasksmodel.getById(_$scope.route.taskID);
             if (!(angular.isUndefined(task) || task === null)) {
-              return _$scope.task = task;
+              _$scope.task = task;
+              return _$scope.found = true;
+            } else if (_$scope.route.taskID !== void 0) {
+              _$scope.found = false;
+              return _tasksbusinesslayer.getTask(_$scope.route.taskID, function(data) {
+                return _$scope.loadTask(_$scope.route.taskID);
+              });
             }
           });
           this._$scope.settingsmodel = this._$settingsmodel;
@@ -541,6 +550,25 @@
               id: 'second'
             }
           ];
+          this._$scope.loadTask = function(taskID) {
+            var task;
+            task = _$tasksmodel.getById(_$scope.route.taskID);
+            if (!(angular.isUndefined(task) || task === null)) {
+              _$scope.task = task;
+              return _$scope.found = true;
+            }
+          };
+          this._$scope.TaskState = function() {
+            if (_$scope.found) {
+              return 'found';
+            } else {
+              if (_Loading.isLoading()) {
+                return 'loading';
+              } else {
+                return null;
+              }
+            }
+          };
           this._$scope.params = function(task) {
             var params;
             params = [
@@ -809,7 +837,7 @@
         return DetailsController;
 
       })();
-      return new DetailsController($scope, $window, TasksModel, TasksBusinessLayer, $route, $location, $timeout, $routeParams, SettingsModel);
+      return new DetailsController($scope, $window, TasksModel, TasksBusinessLayer, $route, $location, $timeout, $routeParams, SettingsModel, Loading);
     }
   ]);
 
@@ -1439,6 +1467,17 @@
             }
           };
           return this._persistence.addTask(task, success);
+        };
+
+        TasksBusinessLayer.prototype.getTask = function(taskID, onSuccess, onFailure) {
+          if (onSuccess == null) {
+            onSuccess = null;
+          }
+          if (onFailure == null) {
+            onFailure = null;
+          }
+          onSuccess || (onSuccess = function() {});
+          return this._persistence.getTask(taskID, onSuccess, true);
         };
 
         TasksBusinessLayer.prototype.starTask = function(taskID) {
@@ -2628,6 +2667,38 @@
             }
           };
           return this._request.get('/apps/tasks/tasks/{type}/{listID}', params);
+        };
+
+        Persistence.prototype.getTask = function(taskID, onSuccess, showLoading) {
+          var failureCallbackWrapper, params, successCallbackWrapper,
+            _this = this;
+          if (showLoading == null) {
+            showLoading = true;
+          }
+          onSuccess || (onSuccess = function() {});
+          if (showLoading) {
+            this._Loading.increase();
+            successCallbackWrapper = function() {
+              onSuccess();
+              return _this._Loading.decrease();
+            };
+            failureCallbackWrapper = function() {
+              return _this._Loading.decrease();
+            };
+          } else {
+            successCallbackWrapper = function() {
+              return onSuccess();
+            };
+            failureCallbackWrapper = function() {};
+          }
+          params = {
+            onSuccess: successCallbackWrapper,
+            onFailure: failureCallbackWrapper,
+            routeParams: {
+              taskID: taskID
+            }
+          };
+          return this._request.get('/apps/tasks/task/{taskID}', params);
         };
 
         Persistence.prototype.starTask = function(taskID) {

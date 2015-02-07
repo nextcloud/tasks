@@ -42,6 +42,11 @@ angular.module('Tasks').factory 'TasksBusinessLayer',
 					onSuccess(response.data)
 			@_persistence.addTask(task, success)
 
+		getTask: (taskID, onSuccess=null, onFailure=null) ->
+			onSuccess or= ->
+
+			@_persistence.getTask(taskID, onSuccess, true)
+
 		starTask: (taskID) ->
 			@_$tasksmodel.star(taskID)
 			@_persistence.starTask(taskID)

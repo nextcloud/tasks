@@ -78,7 +78,8 @@
         </div>
     </div>
     <div id="task-details" ng-class="{'details-visible':route.taskID}">
-        <div class="content-wrapper" ng-include="'templates/part.details.php'">
+        <div class="content-wrapper">
+            <?php print_unescaped($this->inc('part.details')); ?>
         </div>
     </div>
     <script type="text/ng-template" id="part.settings.html">

@@ -43,6 +43,7 @@ $application->registerRoutes($this, array('routes' => array(
 
 	// tasks
 	array('name' => 'tasks#getTasks',		'url' => '/tasks/{type}/{listID}',		'verb' => 'GET'),
+	array('name' => 'tasks#getTask',		'url' => '/task/{taskID}',				'verb' => 'GET'),
 	array('name' => 'tasks#starTask',		'url' => '/tasks/{taskID}/star',		'verb' => 'POST'),
 	array('name' => 'tasks#unstarTask',		'url' => '/tasks/{taskID}/unstar',		'verb' => 'POST'),
 	array('name' => 'tasks#completeTask',	'url' => '/tasks/{taskID}/complete',	'verb' => 'POST'),

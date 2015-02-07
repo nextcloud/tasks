@@ -179,6 +179,28 @@ angular.module('Tasks').factory 'Persistence',
 
 			@_request.get '/apps/tasks/tasks/{type}/{listID}', params
 
+		getTask: (taskID, onSuccess, showLoading=true) ->
+			onSuccess or= ->
+
+			if showLoading
+				@_Loading.increase()
+				successCallbackWrapper = () =>
+					onSuccess()
+					@_Loading.decrease()
+				failureCallbackWrapper = () =>
+					@_Loading.decrease()
+			else
+				successCallbackWrapper = () =>
+					onSuccess()
+				failureCallbackWrapper = () =>	
+			params =
+				onSuccess: successCallbackWrapper
+				onFailure: failureCallbackWrapper
+				routeParams:
+					taskID: taskID
+
+			@_request.get '/apps/tasks/task/{taskID}', params
+
 		starTask: (taskID) ->
 			params =
 				routeParams:
