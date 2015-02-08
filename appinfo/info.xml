@@ -5,7 +5,6 @@
 	<version>0.5</version>
 	<licence>AGPL</licence>
 	<author>Raimund Schlüßler</author>
-	<require>6.0.0</require>
-	<shipped>true</shipped>
+	<require>8</require>
 	<description>Task App for Calender TODOs</description>
 </info>

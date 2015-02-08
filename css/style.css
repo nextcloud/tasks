@@ -9,6 +9,9 @@
   color: #423E3E;
   background: url("../img/bgBig.png") repeat scroll 0 0 #f3f3f3;
 }
+#content #tasks_wrapper {
+  height: 100%;
+}
 #content .icon {
   background-image: url("../img/sprites.svg");
   height: 20px;
@@ -274,14 +277,10 @@
 }
 #app-navigation {
   background: url("../img/bgTasks.png") repeat scroll 0 0 #e3e3e3;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 250px;
   font-family: "Helvetica Neue", "Helvetica", "Arial", Sans-Serif;
   border-right: 1px solid #CFCFCF;
   font-size: 13px;
+  padding-bottom: 77px !important;
 }
 #app-navigation div.header {
   height: 37px;
@@ -293,9 +292,6 @@
   background: linear-gradient(top, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%) repeat scroll 0 0 transparent;
 }
 #app-navigation div.header a {
-  position: absolute;
-  top: 0;
-  bottom: 0;
   cursor: pointer;
   padding: 10px;
   height: 20px;
@@ -337,19 +333,14 @@
 }
 #app-navigation div.header #search,
 #app-navigation div.header #cancel-search {
-  position: absolute;
-  right: 0;
-  top: 0;
   cursor: pointer;
   padding: 8px;
   display: block;
+  float: right;
 }
 #app-navigation div.header #loading {
-  position: absolute;
-  left: 0;
-  top: 0;
   cursor: pointer;
-  padding: 10px;
+  padding: 8px;
   display: block;
 }
 #app-navigation div.header #loading span {
@@ -366,29 +357,19 @@
 }
 #app-navigation div.footer {
   height: 40px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
 }
 #app-navigation div.footer a {
-  position: absolute;
-  top: 0;
-  bottom: 0;
   cursor: pointer;
   padding: 10px;
   height: 20px;
   line-height: 20px;
+  float: left;
 }
 #app-navigation div.footer a.settings {
-  right: 0;
+  float: right;
 }
 #app-navigation div.scroll {
-  position: absolute;
-  top: 37px;
-  bottom: 40px;
-  right: 0;
-  left: 0;
+  height: 100%;
   overflow: auto;
 }
 #app-navigation a.addlist {
@@ -417,12 +398,12 @@
   -ms-box-sizing: border-box;
   position: relative;
   height: 34px;
-  padding: 6px 12px 8px 8px;
+  padding: 6px 12px 8px 8px !important;
   color: #413D3F;
   font-weight: bold;
   text-shadow: 0 1px 0 white;
-  white-space: normal;
-  line-height: 20px;
+  white-space: normal !important;
+  line-height: 20px !important;
 }
 #app-navigation #collection_lists li a {
   padding-right: 8px;
@@ -447,10 +428,6 @@
   overflow: hidden;
   position: relative;
   transition: height 300ms ease 0s !important;
-}
-#app-navigation li.active {
-  border-top: 2px solid #ECECEC;
-  margin-top: -2px;
 }
 #app-navigation li.active a {
   background: url("../img/bgTasksActive.png") repeat scroll 0 0 transparent;
@@ -522,24 +499,26 @@
   white-space: nowrap;
 }
 #app-content {
-  -webkit-transition: right 0.4s ease-in-out;
-  -moz-transition: right 0.4s ease-in-out;
-  -ms-transition: right 0.4s ease-in-out;
-  -o-transition: right 0.4s ease-in-out;
-  transition: right 0.4s ease-in-out;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
   background: url("../img/bgBig.png") repeat scroll 0 0 #f3f3f3;
-  position: absolute;
-  left: 250px;
-  right: 0;
-  top: 0;
-  bottom: 0;
   overflow-x: hidden;
 }
 #app-content div.content-wrapper {
-  padding: 6px 17px 15px 17px;
+  padding: 6px 17px 75px;
+  box-sizing: border-box;
+  height: 100%;
+  overflow: hidden;
+}
+#app-content div.content-wrapper .task-list {
+  height: 100%;
+  overflow-y: auto;
 }
 #app-content.details-visible {
-  right: 370px;
+  padding-right: 370px;
 }
 #app-content h2 {
   font-weight: bold;
@@ -634,24 +613,24 @@
   position: relative;
 }
 #task-details {
-  -webkit-transition: right 0.4s ease-in-out;
-  -moz-transition: right 0.4s ease-in-out;
-  -ms-transition: right 0.4s ease-in-out;
-  -o-transition: right 0.4s ease-in-out;
-  transition: right 0.4s ease-in-out;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
   position: absolute;
   right: -400px;
   bottom: 0;
   top: 0;
-  width: 380px;
+  width: 370px;
   max-width: 100%;
-  padding: 18px 0;
+  padding: 18px 0 17px;
 }
 #task-details.details-visible {
   right: 0;
 }
 #task-details div.content-wrapper {
-  padding: 0 10px;
+  padding: 0 10px 2px 0;
   height: 100%;
 }
 #task-details div.content-wrapper > div {

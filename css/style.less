@@ -32,6 +32,9 @@
 	overflow:hidden;
 	color: #423E3E;
 	background:url("../img/bgBig.png") repeat scroll 0 0 #F3F3F3;
+	#tasks_wrapper{
+		height: 100%;
+	}
 	.icon{
 		background-image: url("../img/sprites.svg");
 		height:20px;
@@ -218,8 +221,6 @@
 			.task-body{
 				-moz-box-sizing: border-box;
 				background: url("../img/bgTask.png") repeat-x scroll 0 0 #FFFFFF;
-				// border-radius: 2px 2px 2px 2px;
-				// box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.08);
 				height: 37px;
 				list-style: none outside none;
 				margin: 0;
@@ -302,23 +303,15 @@
 }
 #app-navigation{	
 	background:url("../img/bgTasks.png") repeat scroll 0 0 #E3E3E3;
-	position:absolute;
-	top:0;
-	bottom:0;
-	left:0;
-	width:250px;
 	font-family: "Helvetica Neue","Helvetica","Arial",Sans-Serif;
 	border-right: 1px solid #CFCFCF;
 	font-size:13px;
+	padding-bottom: 77px !important;
 	div.header{
 		height:37px;
 		border-bottom: 1px solid #AFAFAF;
-		// box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 		.background-gradient();
 		a{
-			position:absolute;
-			top:0;
-			bottom:0;
 			cursor:pointer;
 			padding:10px;
 			height:20px;
@@ -361,19 +354,14 @@
 			}
 		}
 		#search, #cancel-search{
-			position:absolute;
-			right:0;
-			top:0;
 			cursor:pointer;
 			padding: 8px;
 			display:block;
+			float: right;
 		}
 		#loading{
-			position:absolute;
-			left:0;
-			top:0;
 			cursor:pointer;
-			padding: 10px;
+			padding: 8px;
 			display:block;
 			span{
 				height:20px;
@@ -391,29 +379,19 @@
 	}
 	div.footer{
 		height:40px;
-		position:absolute;
-		bottom:0;
-		left:0;
-		right:0;
 		a{
-			position:absolute;
-			top:0;
-			bottom:0;
 			cursor:pointer;
 			padding:10px;
 			height:20px;
 			line-height:20px;
+			float: left;
 			&.settings{
-				right:0;
+				float: right;
 			}
 		}
 	}
 	div.scroll{
-		position:absolute;
-		top:37px;
-		bottom:40px;
-		right:0;
-		left:0;
+		height: 100%;
 		overflow:auto;
 	}
 	a.addlist{
@@ -445,12 +423,12 @@
 		-ms-box-sizing:border-box;
 		position:relative;
 		height:34px;
-		padding:6px 12px 8px 8px;
+		padding:6px 12px 8px 8px !important;
 		color: #413D3F;
 		font-weight: bold;
 		text-shadow: 0 1px 0 white;
-		white-space: normal;
-		line-height: 20px;
+		white-space: normal !important;
+		line-height: 20px !important;
 	}
 	#collection_lists li a{
 		padding-right: 8px;
@@ -476,8 +454,6 @@
 		position:relative;
 		transition: height 300ms ease 0s !important;
 		&.active{
-			border-top: 2px solid #ECECEC;
-			margin-top: -2px;
 			a{
 				background: url("../img/bgTasksActive.png") repeat scroll 0 0 transparent;
 				border-bottom: 1px solid transparent;
@@ -555,19 +531,21 @@
 	}	
 }
 #app-content{
-	.transition-custom(right,0.4s);
+	.transition-custom(all,0.5s);
 	background: url("../img/bgBig.png") repeat scroll 0 0 #f3f3f3;
-	position:absolute;
-	left:250px;
-	right:0;
-	top:0;
-	bottom:0;
 	overflow-x:hidden;
 	div.content-wrapper{
-		padding: 6px 17px 15px 17px;
+		padding: 6px 17px 75px;
+		box-sizing: border-box;
+		height: 100%;
+		overflow: hidden;
+		.task-list{
+			height: 100%;
+			overflow-y: auto;
+		}
 	}
 	&.details-visible{
-		right: 370px;
+		padding-right: 370px;
 	}
 	h2{
 		font-weight:bold;
@@ -582,17 +560,12 @@
 		}
 	}
 	#add-task{
-		// .background-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
-		// border-radius: 4px 4px 4px 4px;
-		// border-top: 1px solid rgba(0, 0, 0, 0.4);
-		// box-shadow: 0 0 4px rgba(0, 0, 0, 0.4) inset, 0 1px 0 rgba(255, 255, 255, 0.4);
 		margin: 12px 0;
 		padding: 6px 12px;
 		position: relative;
 		border:1px solid #CCCCCC;
 		background: none repeat scroll 0 0 #EEEEEE;
 		&.focus{
-			// box-shadow: 0 0 4px rgba(0,0,0,0.4) inset, 0 1px 0 rgba(255,255,255,0.1), 0 0 5px rgba(255,255,255,0.7);
 			background-color: #FFFFFF;
 
 			.icon.input-date {
@@ -613,7 +586,6 @@
 			padding-right: 60px;
 			width: 100%;
 			color: #505050;
-			// text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
 			background: none repeat scroll 0 0 transparent !important;
 			border: medium none !important;
 			border-radius: 0 0 0 0 !important;
@@ -647,7 +619,6 @@
 			font-size: 11px;
 			margin-top: 10px;
 			text-align: center;
-			// text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
 		}
 		&.completed-hidden{
 			ol.completed-tasks{
@@ -680,24 +651,23 @@
 	}
 }
 #task-details{
-	.transition-custom(right,0.4s);
+	.transition-custom(all,0.5s);
 	position:absolute;
 	right: -400px;
 	bottom: 0;
 	top: 0;
-	width: 380px;
+	width: 370px;
 	max-width: 100%;
-	padding: 18px 0;
+	padding: 18px 0 17px;
 	&.details-visible{
 		right: 0;
 	}
 	div.content-wrapper{
-		padding: 0 10px;
+		padding: 0 10px 2px 0;
 		height: 100%;
 		&>div{
 			background: url("../img/bgTaskDetail.png") repeat scroll 0 0 #FFFFFF;
 			border:1px solid #CCCCCC;
-			// box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
 			height: 100%;
 			position: relative;
 		}
@@ -773,8 +743,6 @@
 		.title {
 			.background-gradient(rgba(255, 255, 255, 0.1),rgba(0, 0, 0, 0.05));
 			border-bottom: 1px solid rgba(0, 0, 0, 0.24);
-			// border-radius: 5px 5px 0 0;
-			// box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 			font-size: 16px;
 			font-weight: bold;
 			line-height: 24px;
@@ -797,7 +765,6 @@
 				word-wrap: break-word;
 				background: none repeat scroll 0 0 transparent;
 				border: medium none;
-				// font-family: "Helvetica Neue","Helvetica",Arial,sans-serif;
 				padding: 0;
 				white-space: pre-wrap;
 				word-wrap: break-word;
@@ -843,7 +810,6 @@
 				border-width: 1px 1px 1px 1px;
 				border-style: solid;
 				border-color: #CFCFCF;
-				// box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 1px 0 #F8F5DB inset;
 				font-size: 13px;
 				line-height: 26px;
 				margin: 0 20px;
@@ -856,7 +822,6 @@
 						box-shadow: none;
 						background: none repeat scroll 0 0 transparent;
 						border: medium none;
-						// font-family: "Helvetica Neue","Helvetica",Arial,sans-serif;
 						font-size: 13px;
 						line-height: 26px;
 						padding: 0;
@@ -1061,9 +1026,6 @@
 						.section-description{
 							display: block;
 						}
-						.section-title{
-							// margin-top:-2px;
-						}
 					}
 				}
 				&.detail-note{
@@ -1154,7 +1116,6 @@
 	}
 }
 .button{
-    // background-image: linear-gradient(center top , #5cb6e7 0px, #317cd7 100%);
     .background-gradient(#5cb6e7, #317cd7);
     border-color: #0c67a5;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset;
@@ -1216,7 +1177,6 @@ input.percent-input{
 	background: none repeat scroll 0 0 #F9F9F9;
 	border-radius: 4px 4px 4px 4px;
 	color: #423E3E;
-	// display: none;
 	max-width: 304px;
 	min-height: 15px;
 	min-width: 150px;
@@ -1279,13 +1239,6 @@ td.ui-timepicker-hours table{
 		height: 10px;
 		width: 10px;
 	}
-	// .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-	// 	color: #423E3E;
-	// 	background: none repeat scroll 0 0 #F8F8F8;
-	// 	font-weight: bold;
-	// 	&.hover{
-	// 	}
-	// }
 	table{
 		width:100%;
 		thead{
