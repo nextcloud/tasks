@@ -22,24 +22,32 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 angular.module('Tasks').controller 'DetailsController',
 ['$scope', '$window', 'TasksModel', 'TasksBusinessLayer',
 '$route', '$location', '$timeout', '$routeParams',
-'SettingsModel',
+'SettingsModel', 'Loading',
 ($scope, $window, TasksModel, TasksBusinessLayer, $route, $location,
-$timeout, $routeParams, SettingsModel) ->
+$timeout, $routeParams, SettingsModel, Loading) ->
 
 	class DetailsController
 
 		constructor: (@_$scope, @_$window, @_$tasksmodel,
 			@_tasksbusinesslayer, @_$route, @_$location, @_$timeout,
-			@_$routeparams, @_$settingsmodel) ->
+			@_$routeparams, @_$settingsmodel, @_Loading) ->
 
 			@_$scope.task = _$tasksmodel.getById(_$scope.route.taskID)
+
+			@_$scope.found = true
 
 			@_$scope.$on('$routeChangeSuccess', () ->
 				task = _$tasksmodel.getById(_$scope.route.taskID)
 				if !(angular.isUndefined(task) || task == null)
 					_$scope.task = task
+					_$scope.found = true
+				else if (_$scope.route.taskID != undefined)
+					_$scope.found = false
+					_tasksbusinesslayer.getTask _$scope.route.taskID
+						, (data) =>
+							_$scope.loadTask(_$scope.route.taskID)
 			)
-
+			
 			@_$scope.settingsmodel = @_$settingsmodel
 
 			@_$scope.isAddingComment = false
@@ -69,7 +77,20 @@ $timeout, $routeParams, SettingsModel) ->
 					id:		'second'}
 			]
 
-			# console.log(_$settingsmodel.getById('various').firstDay)
+			@_$scope.loadTask = (taskID) ->
+				task = _$tasksmodel.getById(_$scope.route.taskID)
+				if !(angular.isUndefined(task) || task == null)
+					_$scope.task = task
+					_$scope.found = true
+
+			@_$scope.TaskState = () ->
+				if _$scope.found
+					return 'found'
+				else
+					if _Loading.isLoading()
+						return 'loading'
+					else
+						return null
 
 			@_$scope.params = (task) ->
 				params = [
@@ -329,5 +350,5 @@ $timeout, $routeParams, SettingsModel) ->
 
 	return new DetailsController($scope, $window, TasksModel,
 		TasksBusinessLayer, $route, $location, $timeout, $routeParams,
-		SettingsModel)
+		SettingsModel, Loading)
 ]

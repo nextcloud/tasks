@@ -101,6 +101,8 @@ class Application extends App {
 		$container->registerService('Settings', function($c) {
 			return $c->query('ServerContainer')->getConfig();
 		});
+
+		\OC::$server->getSearch()->registerProvider('OCA\Tasks\Controller\SearchController', array('apps' => array('tasks')));
 		
 	}
 

@@ -660,6 +660,14 @@
   height: 100%;
   position: relative;
 }
+#task-details div.content-wrapper div.notice {
+  color: #888;
+  font-size: 16px;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  width: 100%;
+}
 #task-details div.content-wrapper div.footer {
   background: url("../img/bgTask.png") repeat scroll 0 0 #ffffff;
   border-top: 1px solid #D3D3D3;

@@ -121,6 +121,30 @@ class TasksController extends Controller {
 		return $response;
 	}
 
+	public function getTask($taskID){
+		$object = \OC_Calendar_App::getEventObject($taskID);
+		$user_timezone = \OC_Calendar_App::getTimezone();
+		$task = array();
+		if($object['objecttype']=='VTODO' && !is_null($object['summary'])) {
+			$vtodo = Helper::parseVTODO($object['calendardata']);
+			try {
+				$task_data = Helper::arrayForJSON($object['id'], $vtodo, $user_timezone);
+				$task_data['calendarid'] = $object['calendarid'];
+				$task[] = $task_data;
+			} catch(\Exception $e) {
+				\OCP\Util::writeLog('tasks', $e->getMessage(), \OCP\Util::ERROR);
+			}	
+		}
+		$result = array(
+			'data' => array(
+				'tasks' => $task
+				)
+			);
+		$response = new JSONResponse();
+		$response->setData($result);
+		return $response;
+	}
+
 	private static function sort_completed($a, $b){
 		$t1 = \DateTime::createFromFormat('Ymd\THis', $a['completed_date']);
 		$t2 = \DateTime::createFromFormat('Ymd\THis', $b['completed_date']);
