@@ -69,6 +69,7 @@ $TRANSLATIONS = array(
 "Add an item due today in \"%s\"..." => "\"%s\"에 오늘 끝나는 항목 추가 중...",
 "Add an item in \"%s\"..." => "\"%s\"에 항목 추가 중...",
 "Add a current item in \"%s\"..." => "\"%s\"에 현재 항목 추가 중...",
+"Completed Task" => "완료된 작업",
 "%n Completed Task::%n Completed Tasks" => array("완료된 작업 %n개"),
 "Set due date" => "만료 기한 설정",
 "%s %% completed" => "%s%% 완료됨",
