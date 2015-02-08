@@ -28,13 +28,11 @@ class PageController extends Controller {
 			\OCP\Util::addScript('tasks', 'vendor/angularjs/angular');
 			\OCP\Util::addScript('tasks', 'vendor/angularjs/angular-route');
 			\OCP\Util::addScript('tasks', 'vendor/angularjs/angular-animate');
-			\OCP\Util::addScript('tasks', 'vendor/momentjs/moment');
 			\OCP\Util::addScript('tasks', 'vendor/bootstrap/ui-bootstrap-custom-tpls-0.10.0');
 		} else {
 			\OCP\Util::addScript('tasks', 'vendor/angularjs/angular.min');
 			\OCP\Util::addScript('tasks', 'vendor/angularjs/angular-route.min');
 			\OCP\Util::addScript('tasks', 'vendor/angularjs/angular-animate.min');
-			\OCP\Util::addScript('tasks', 'vendor/momentjs/moment.min');
 			\OCP\Util::addScript('tasks', 'vendor/bootstrap/ui-bootstrap-custom-tpls-0.10.0.min');
 		}
 		\OCP\Util::addScript('tasks', 'public/app');
