@@ -57,7 +57,7 @@
   ]);
 
   angular.module('Tasks').run([
-    'Config', '$timeout', 'ListsBusinessLayer', 'TasksBusinessLayer', function(Config, $timeout, TasksBusinessLayer, ListsBusinessLayer) {
+    'Config', '$timeout', 'ListsBusinessLayer', 'TasksBusinessLayer', 'SearchBusinessLayer', function(Config, $timeout, TasksBusinessLayer, ListsBusinessLayer, SearchBusinessLayer) {
       var init, update;
       init = false;
       (update = function() {
@@ -72,6 +72,7 @@
         init = true;
         return timeOutUpdate();
       })();
+      OCA.Search.tasks = SearchBusinessLayer;
       moment.lang('details', {
         calendar: {
           lastDay: '[' + t('tasks', 'Due yesterday') + '], HH:mm',
