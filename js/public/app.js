@@ -1104,7 +1104,7 @@
                     _ref = task.comments;
                     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
                       comment = _ref[_i];
-                      if (comment.comment.indexOf(filter) !== -1) {
+                      if (comment.comment.toLowerCase().indexOf(filter) !== -1) {
                         return true;
                       }
                     }
@@ -1112,11 +1112,11 @@
                     _ref1 = task.categories;
                     for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
                       category = _ref1[_j];
-                      if (category.indexOf(filter) !== -1) {
+                      if (category.toLowerCase().indexOf(filter) !== -1) {
                         return true;
                       }
                     }
-                  } else if (value.indexOf(filter) !== -1) {
+                  } else if (value.toLowerCase().indexOf(filter) !== -1) {
                     return true;
                   }
                 }

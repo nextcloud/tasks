@@ -86,13 +86,13 @@ SettingsBusinessLayer, SearchBusinessLayer) ->
 						if key in keys
 							if key == 'comments'
 								for comment in task.comments
-									if comment.comment.indexOf(filter) !=-1
+									if comment.comment.toLowerCase().indexOf(filter) !=-1
 										return true
 							else if key == 'categories'
 								for category in task.categories
-									if category.indexOf(filter) !=-1
+									if category.toLowerCase().indexOf(filter) !=-1
 										return true
-							else if value.indexOf(filter) !=-1
+							else if value.toLowerCase().indexOf(filter) !=-1
 								return true
 					return false
 
