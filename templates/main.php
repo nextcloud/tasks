@@ -64,7 +64,7 @@
                 <?php print_unescaped($this->inc('part.tasklist')); ?>
                 <?php print_unescaped($this->inc('part.collectionall')); ?>
                 <?php print_unescaped($this->inc('part.collectionweek')); ?>
-                <!-- <div id="searchresults" stop-event="click"></div> -->
+                <div id="searchresults" stop-event="click"></div>
             </div>
         </div>
         <div id="task-details" ng-class="{'details-visible':route.taskID}">
