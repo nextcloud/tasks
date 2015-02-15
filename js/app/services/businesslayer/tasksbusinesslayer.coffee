@@ -1,9 +1,9 @@
 ###
 
-ownCloud - News
+ownCloud - Tasks
 
-@author Bernhard Posselt
-@copyright 2012 Bernhard Posselt dev@bernhard-posselt.com
+@author Raimund Schlüßler
+@copyright 2015
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE

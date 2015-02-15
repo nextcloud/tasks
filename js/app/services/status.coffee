@@ -26,7 +26,6 @@ angular.module('Tasks').factory 'Status',
 
 		constructor: () ->
 			@_$status = {
-				searchActive: false
 				addingList: false
 				focusTaskInput: false
 			}

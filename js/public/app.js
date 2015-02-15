@@ -57,7 +57,7 @@
   ]);
 
   angular.module('Tasks').run([
-    'Config', '$timeout', 'ListsBusinessLayer', 'TasksBusinessLayer', function(Config, $timeout, TasksBusinessLayer, ListsBusinessLayer) {
+    'Config', '$timeout', 'ListsBusinessLayer', 'TasksBusinessLayer', 'SearchBusinessLayer', function(Config, $timeout, TasksBusinessLayer, ListsBusinessLayer, SearchBusinessLayer) {
       var init, update;
       init = false;
       (update = function() {
@@ -72,6 +72,7 @@
         init = true;
         return timeOutUpdate();
       })();
+      OCA.Search.tasks = SearchBusinessLayer;
       moment.lang('details', {
         calendar: {
           lastDay: '[' + t('tasks', 'Due yesterday') + '], HH:mm',
@@ -461,11 +462,7 @@
           };
           this._persistence.init().then(successCallback);
           this._$scope.closeAll = function() {
-            if (_$scope.status.searchActive) {
-              _$location.path('/search/' + _$scope.route.searchString);
-            } else {
-              _$location.path('/lists/' + _$scope.route.listID);
-            }
+            _$location.path('/lists/' + _$scope.route.listID);
             _$scope.status.addingList = false;
             _$scope.status.focusTaskInput = false;
             return _$scope.status.newListName = "";
@@ -603,11 +600,7 @@
             }
           };
           this._$scope.closeDetails = function() {
-            if (_$scope.status.searchActive) {
-              return _$location.path('/search/' + _$scope.route.searchString);
-            } else {
-              return _$location.path('/lists/' + _$scope.route.listID);
-            }
+            return _$location.path('/lists/' + _$scope.route.listID);
           };
           this._$scope.deleteTask = function(taskID) {
             _$scope.closeDetails();
@@ -616,56 +609,28 @@
             }, 500);
           };
           this._$scope.editName = function() {
-            if (_$scope.status.searchActive) {
-              return _$location.path('/search/' + _$scope.route.searchString + '/tasks/' + _$scope.route.taskID + '/edit/name');
-            } else {
-              return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/name');
-            }
+            return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/name');
           };
           this._$scope.editDueDate = function() {
-            if (_$scope.status.searchActive) {
-              _$location.path('/search/' + _$scope.route.searchString + '/tasks/' + _$scope.route.taskID + '/edit/duedate');
-            } else {
-              _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/duedate');
-            }
+            _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/duedate');
             return _tasksbusinesslayer.initDueDate(_$scope.route.taskID);
           };
           this._$scope.editStart = function() {
-            if (_$scope.status.searchActive) {
-              _$location.path('/search/' + _$scope.route.searchString + '/tasks/' + _$scope.route.taskID + '/edit/startdate');
-            } else {
-              _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/startdate');
-            }
+            _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/startdate');
             return _tasksbusinesslayer.initStartDate(_$scope.route.taskID);
           };
           this._$scope.editReminder = function() {
-            if (_$scope.status.searchActive) {
-              _$location.path('/search/' + _$scope.route.searchString + '/tasks/' + _$scope.route.taskID + '/edit/reminder');
-            } else {
-              _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/reminder');
-            }
+            _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/reminder');
             return _tasksbusinesslayer.initReminder(_$scope.route.taskID);
           };
           this._$scope.editNote = function() {
-            if (_$scope.status.searchActive) {
-              return _$location.path('/search/' + _$scope.route.searchString + '/tasks/' + _$scope.route.taskID + '/edit/note');
-            } else {
-              return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/note');
-            }
+            return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/note');
           };
           this._$scope.editPercent = function() {
-            if (_$scope.status.searchActive) {
-              return _$location.path('/search/' + _$scope.route.searchString + '/tasks/' + _$scope.route.taskID + '/edit/percent');
-            } else {
-              return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/percent');
-            }
+            return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/percent');
           };
           this._$scope.endEdit = function() {
-            if (_$scope.status.searchActive) {
-              return _$location.path('/search/' + _$scope.route.searchString + '/tasks/' + _$scope.route.taskID);
-            } else {
-              return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID);
-            }
+            return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID);
           };
           this._$scope.endName = function(event) {
             if (event.keyCode === 13) {
@@ -996,53 +961,6 @@
 }).call(this);
 
 (function() {
-  angular.module('Tasks').controller('SearchController', [
-    '$scope', '$window', 'Status', '$location', function($scope, $window, Status, $location) {
-      var SearchController;
-      SearchController = (function() {
-        function SearchController(_$scope, _$window, _$status, _$location) {
-          var _this = this;
-          this._$scope = _$scope;
-          this._$window = _$window;
-          this._$status = _$status;
-          this._$location = _$location;
-          this._$scope.searchString = '';
-          this._$scope.searchBuffer = '/lists/all';
-          this._$scope.status = this._$status.getStatus();
-          this._$scope.$on('$routeChangeSuccess', function() {
-            if (_$scope.route.searchString !== void 0) {
-              return _$scope.status.searchActive = true;
-            }
-          });
-          this._$scope.openSearch = function() {
-            _$scope.searchBuffer = _$location.path();
-            _$location.path('/search/');
-            return _$scope.status.searchActive = true;
-          };
-          this._$scope.closeSearch = function() {
-            _$scope.searchString = '';
-            _$location.path(_$scope.searchBuffer);
-            return _$scope.status.searchActive = false;
-          };
-          this._$scope.trySearch = function(event) {
-            if (event.keyCode === 27) {
-              return _$scope.closeSearch();
-            } else {
-              return _$location.path('/search/' + _$scope.searchString);
-            }
-          };
-        }
-
-        return SearchController;
-
-      })();
-      return new SearchController($scope, $window, Status, $location);
-    }
-  ]);
-
-}).call(this);
-
-(function() {
   angular.module('Tasks').controller('SettingsController', [
     '$scope', '$window', 'Status', '$location', '$modalInstance', 'CollectionsModel', 'SettingsBusinessLayer', 'SettingsModel', function($scope, $window, Status, $location, $modalInstance, CollectionsModel, SettingsBusinessLayer, SettingsModel) {
       var SettingsController;
@@ -1119,11 +1037,14 @@
 }).call(this);
 
 (function() {
+  var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+
   angular.module('Tasks').controller('TasksController', [
-    '$scope', '$window', '$routeParams', 'TasksModel', 'ListsModel', 'CollectionsModel', 'TasksBusinessLayer', '$location', 'SettingsBusinessLayer', function($scope, $window, $routeParams, TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location, SettingsBusinessLayer) {
+    '$scope', '$window', '$routeParams', 'TasksModel', 'ListsModel', 'CollectionsModel', 'TasksBusinessLayer', '$location', 'SettingsBusinessLayer', 'SearchBusinessLayer', function($scope, $window, $routeParams, TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location, SettingsBusinessLayer, SearchBusinessLayer) {
       var TasksController;
       TasksController = (function() {
-        function TasksController(_$scope, _$window, _$routeParams, _$tasksmodel, _$listsmodel, _$collectionsmodel, _tasksbusinesslayer, $location, _settingsbusinesslayer) {
+        function TasksController(_$scope, _$window, _$routeParams, _$tasksmodel, _$listsmodel, _$collectionsmodel, _tasksbusinesslayer, $location, _settingsbusinesslayer, _searchbusinesslayer) {
+          var _this = this;
           this._$scope = _$scope;
           this._$window = _$window;
           this._$routeParams = _$routeParams;
@@ -1133,6 +1054,7 @@
           this._tasksbusinesslayer = _tasksbusinesslayer;
           this.$location = $location;
           this._settingsbusinesslayer = _settingsbusinesslayer;
+          this._searchbusinesslayer = _searchbusinesslayer;
           this._$scope.tasks = this._$tasksmodel.getAll();
           this._$scope.lists = this._$listsmodel.getAll();
           this._$scope.days = [0, 1, 2, 3, 4, 5, 6];
@@ -1164,24 +1086,51 @@
           };
           this._$scope.showInput = function() {
             var _ref;
-            if (((_ref = _$scope.route.listID) === 'completed' || _ref === 'week') || _$scope.status.searchActive) {
+            if ((_ref = _$scope.route.listID) === 'completed' || _ref === 'week') {
               return false;
             } else {
               return true;
             }
           };
+          this._$scope.filterByString = function() {
+            return function(task) {
+              var category, comment, filter, key, keys, value, _i, _j, _len, _len1, _ref, _ref1;
+              keys = ['name', 'note', 'location', 'categories', 'comments'];
+              filter = _searchbusinesslayer.getFilter().toLowerCase();
+              for (key in task) {
+                value = task[key];
+                if (__indexOf.call(keys, key) >= 0) {
+                  if (key === 'comments') {
+                    _ref = task.comments;
+                    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+                      comment = _ref[_i];
+                      if (comment.comment.indexOf(filter) !== -1) {
+                        return true;
+                      }
+                    }
+                  } else if (key === 'categories') {
+                    _ref1 = task.categories;
+                    for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+                      category = _ref1[_j];
+                      if (category.indexOf(filter) !== -1) {
+                        return true;
+                      }
+                    }
+                  } else if (value.indexOf(filter) !== -1) {
+                    return true;
+                  }
+                }
+              }
+              return false;
+            };
+          };
           this._$scope.focusInput = function() {
             return _$scope.status.focusTaskInput = true;
           };
           this._$scope.openDetails = function(id) {
-            var listID, searchString;
-            if (_$scope.status.searchActive) {
-              searchString = _$scope.route.searchString;
-              return $location.path('/search/' + searchString + '/tasks/' + id);
-            } else {
-              listID = _$scope.route.listID;
-              return $location.path('/lists/' + listID + '/tasks/' + id);
-            }
+            var listID;
+            listID = _$scope.route.listID;
+            return $location.path('/lists/' + listID + '/tasks/' + id);
           };
           this._$scope.toggleCompleted = function(taskID) {
             if (_$tasksmodel.completed(taskID)) {
@@ -1235,11 +1184,7 @@
           };
           this._$scope.filterTasksByCalendar = function(task, listID) {
             return function(task) {
-              if (_$scope.status.searchActive) {
-                return true;
-              } else {
-                return '' + task.calendarid === '' + listID;
-              }
+              return '' + task.calendarid === '' + listID;
             };
           };
           this._$scope.filterLists = function() {
@@ -1248,18 +1193,10 @@
             };
           };
           this._$scope.getCount = function(listID, type) {
-            if (_$scope.status.searchActive) {
-              return true;
-            } else {
-              return _$listsmodel.getCount(listID, type);
-            }
+            return _$listsmodel.getCount(listID, type);
           };
           this._$scope.getCountString = function(listID, type) {
-            if (_$scope.status.searchActive) {
-              return t('tasks', 'Completed Task');
-            } else {
-              return n('tasks', '%n Completed Task', '%n Completed Tasks', _$listsmodel.getCount(listID, type));
-            }
+            return n('tasks', '%n Completed Task', '%n Completed Tasks', _$listsmodel.getCount(listID, type));
           };
           this._$scope.addTask = function(taskName) {
             var task, _ref,
@@ -1328,7 +1265,7 @@
         return TasksController;
 
       })();
-      return new TasksController($scope, $window, $routeParams, TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location, SettingsBusinessLayer);
+      return new TasksController($scope, $window, $routeParams, TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location, SettingsBusinessLayer, SearchBusinessLayer);
     }
   ]);
 
@@ -1391,6 +1328,62 @@
 
       })();
       return new ListsBusinessLayer(ListsModel, Persistence, TasksModel);
+    }
+  ]);
+
+}).call(this);
+
+(function() {
+  var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+  angular.module('Tasks').factory('SearchBusinessLayer', [
+    'ListsModel', 'Persistence', 'TasksModel', '$rootScope', function(ListsModel, Persistence, TasksModel, $rootScope) {
+      var SearchBusinessLayer;
+      SearchBusinessLayer = (function() {
+        function SearchBusinessLayer(_$listsmodel, _persistence, _$tasksmodel, _$rootScope) {
+          this._$listsmodel = _$listsmodel;
+          this._persistence = _persistence;
+          this._$tasksmodel = _$tasksmodel;
+          this._$rootScope = _$rootScope;
+          this.getFilter = __bind(this.getFilter, this);
+          this.setFilter = __bind(this.setFilter, this);
+          this.attach = __bind(this.attach, this);
+          this.initialize();
+          this._$searchString = '';
+        }
+
+        SearchBusinessLayer.prototype.attach = function(search) {
+          var _this = this;
+          search.setFilter('tasks', function(query) {
+            return _this._$rootScope.$apply(_this.setFilter(query));
+          });
+          search.setRenderer('task', this.renderTaskResult.bind(this));
+          return search.setHandler('task', this.handleTaskClick.bind(this));
+        };
+
+        SearchBusinessLayer.prototype.setFilter = function(query) {
+          return this._$searchString = query;
+        };
+
+        SearchBusinessLayer.prototype.getFilter = function() {
+          return this._$searchString;
+        };
+
+        SearchBusinessLayer.prototype.initialize = function() {
+          var _this = this;
+          this.handleTaskClick = function($row, result, event) {
+            return console.log('Search result clicked');
+          };
+          this.renderTaskResult = function($row, result) {
+            return $row;
+          };
+          return OC.Plugins.register('OCA.Search', this);
+        };
+
+        return SearchBusinessLayer;
+
+      })();
+      return new SearchBusinessLayer(ListsModel, Persistence, TasksModel, $rootScope);
     }
   ]);
 
@@ -2966,7 +2959,6 @@
       Status = (function() {
         function Status() {
           this._$status = {
-            searchActive: false,
             addingList: false,
             focusTaskInput: false
           };

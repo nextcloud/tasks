@@ -192,7 +192,7 @@ angular.module('Tasks').factory 'Persistence',
 			else
 				successCallbackWrapper = () =>
 					onSuccess()
-				failureCallbackWrapper = () =>	
+				failureCallbackWrapper = () =>
 			params =
 				onSuccess: successCallbackWrapper
 				onFailure: failureCallbackWrapper

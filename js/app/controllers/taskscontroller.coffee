@@ -22,16 +22,17 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 angular.module('Tasks').controller 'TasksController',
 ['$scope', '$window', '$routeParams', 'TasksModel', 'ListsModel',
 'CollectionsModel', 'TasksBusinessLayer', '$location',
-'SettingsBusinessLayer',
+'SettingsBusinessLayer', 'SearchBusinessLayer'
 ($scope, $window, $routeParams, TasksModel, ListsModel,
 CollectionsModel, TasksBusinessLayer, $location,
-SettingsBusinessLayer) ->
+SettingsBusinessLayer, SearchBusinessLayer) ->
 
 	class TasksController
 
 		constructor: (@_$scope,@_$window,@_$routeParams,
 					@_$tasksmodel,@_$listsmodel,@_$collectionsmodel,
-					@_tasksbusinesslayer, @$location, @_settingsbusinesslayer) ->
+					@_tasksbusinesslayer, @$location, @_settingsbusinesslayer,
+					@_searchbusinesslayer) ->
 
 			@_$scope.tasks = @_$tasksmodel.getAll()
 			@_$scope.lists = @_$listsmodel.getAll()
@@ -71,22 +72,36 @@ SettingsBusinessLayer) ->
 								_$listsmodel.getById(_$scope.route.listID).displayname)
 
 			@_$scope.showInput = () ->
-				if _$scope.route.listID in ['completed', 'week'] ||
-				_$scope.status.searchActive
+				if _$scope.route.listID in ['completed', 'week']
 					return false
 				else
 					return true
+
+			@_$scope.filterByString = () =>
+				return (task) ->
+					keys = ['name', 'note', 'location',
+							'categories', 'comments']
+					filter = _searchbusinesslayer.getFilter().toLowerCase()
+					for key,value of task
+						if key in keys
+							if key == 'comments'
+								for comment in task.comments
+									if comment.comment.indexOf(filter) !=-1
+										return true
+							else if key == 'categories'
+								for category in task.categories
+									if category.indexOf(filter) !=-1
+										return true
+							else if value.indexOf(filter) !=-1
+								return true
+					return false
 
 			@_$scope.focusInput = () ->
 				_$scope.status.focusTaskInput = true
 
 			@_$scope.openDetails = (id) ->
-				if _$scope.status.searchActive
-					searchString = _$scope.route.searchString
-					$location.path('/search/'+searchString+'/tasks/'+id)
-				else
-					listID = _$scope.route.listID
-					$location.path('/lists/'+listID+'/tasks/'+id)
+				listID = _$scope.route.listID
+				$location.path('/lists/'+listID+'/tasks/'+id)
 
 			@_$scope.toggleCompleted = (taskID) ->
 				if _$tasksmodel.completed(taskID)
@@ -127,26 +142,17 @@ SettingsBusinessLayer) ->
 
 			@_$scope.filterTasksByCalendar = (task, listID) ->
 				return (task) ->
-					if _$scope.status.searchActive
-						return true
-					else
-						return ''+task.calendarid == ''+listID
+					return ''+task.calendarid == ''+listID
 
 			@_$scope.filterLists = () ->
 				return (list) ->
 					return _$scope.getCount(list.id,_$scope.route.listID)
 
 			@_$scope.getCount = (listID,type) ->
-				if _$scope.status.searchActive
-					return true
-				else
-					return _$listsmodel.getCount(listID,type)
+				return _$listsmodel.getCount(listID,type)
 
 			@_$scope.getCountString = (listID,type) ->
-				if _$scope.status.searchActive
-					return t('tasks', 'Completed Task')
-				else
-					return n('tasks', '%n Completed Task', '%n Completed Tasks',
+				return n('tasks', '%n Completed Task', '%n Completed Tasks',
 						_$listsmodel.getCount(listID,type))
 
 			@_$scope.addTask = (taskName) ->
@@ -212,5 +218,5 @@ SettingsBusinessLayer) ->
 
 	return new TasksController($scope, $window, $routeParams,
 		TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location,
-		SettingsBusinessLayer)
+		SettingsBusinessLayer, SearchBusinessLayer)
 ]

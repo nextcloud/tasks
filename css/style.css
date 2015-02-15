@@ -342,6 +342,7 @@
   cursor: pointer;
   padding: 8px;
   display: block;
+  width: 20px;
 }
 #app-navigation div.header #loading span {
   height: 20px;

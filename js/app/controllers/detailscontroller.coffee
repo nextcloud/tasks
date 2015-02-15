@@ -123,10 +123,7 @@ $timeout, $routeParams, SettingsModel, Loading) ->
 					return params.slice(2)
 
 			@_$scope.closeDetails = () ->
-				if _$scope.status.searchActive
-					_$location.path('/search/'+_$scope.route.searchString)
-				else
-					_$location.path('/lists/'+_$scope.route.listID)
+				_$location.path('/lists/'+_$scope.route.listID)
 
 			@_$scope.deleteTask = (taskID) ->
 				_$scope.closeDetails()
@@ -135,62 +132,34 @@ $timeout, $routeParams, SettingsModel, Loading) ->
 				,500)
 
 			@_$scope.editName = () ->
-				if _$scope.status.searchActive
-					_$location.path('/search/'+_$scope.route.searchString +
-					'/tasks/' + _$scope.route.taskID + '/edit/name')
-				else
-					_$location.path('/lists/'+_$scope.route.listID +
+				_$location.path('/lists/'+_$scope.route.listID +
 					'/tasks/' + _$scope.route.taskID + '/edit/name')
 
 			@_$scope.editDueDate = () ->
-				if _$scope.status.searchActive
-					_$location.path('/search/'+_$scope.route.searchString +
-					'/tasks/' + _$scope.route.taskID + '/edit/duedate')
-				else
-					_$location.path('/lists/'+_$scope.route.listID +
+				_$location.path('/lists/'+_$scope.route.listID +
 					'/tasks/' + _$scope.route.taskID + '/edit/duedate')
 				_tasksbusinesslayer.initDueDate(_$scope.route.taskID)
 
 			@_$scope.editStart = () ->
-				if _$scope.status.searchActive
-					_$location.path('/search/'+_$scope.route.searchString +
-					'/tasks/' + _$scope.route.taskID + '/edit/startdate')
-				else
-					_$location.path('/lists/'+_$scope.route.listID +
+				_$location.path('/lists/'+_$scope.route.listID +
 					'/tasks/' + _$scope.route.taskID + '/edit/startdate')
 				_tasksbusinesslayer.initStartDate(_$scope.route.taskID)
 
 			@_$scope.editReminder = () ->
-				if _$scope.status.searchActive
-					_$location.path('/search/'+_$scope.route.searchString +
-					'/tasks/' + _$scope.route.taskID + '/edit/reminder')
-				else
-					_$location.path('/lists/'+_$scope.route.listID +
+				_$location.path('/lists/'+_$scope.route.listID +
 					'/tasks/' + _$scope.route.taskID + '/edit/reminder')
 				_tasksbusinesslayer.initReminder(_$scope.route.taskID)
 
 			@_$scope.editNote = () ->
-				if _$scope.status.searchActive
-					_$location.path('/search/'+_$scope.route.searchString +
-					'/tasks/' + _$scope.route.taskID + '/edit/note')
-				else
-					_$location.path('/lists/'+_$scope.route.listID +
+				_$location.path('/lists/'+_$scope.route.listID +
 					'/tasks/' + _$scope.route.taskID + '/edit/note')
 
 			@_$scope.editPercent = () ->
-				if _$scope.status.searchActive
-					_$location.path('/search/'+_$scope.route.searchString +
-					'/tasks/' + _$scope.route.taskID + '/edit/percent')
-				else
-					_$location.path('/lists/'+_$scope.route.listID +
+				_$location.path('/lists/'+_$scope.route.listID +
 					'/tasks/' + _$scope.route.taskID + '/edit/percent')
 
 			@_$scope.endEdit = () ->
-				if _$scope.status.searchActive
-					_$location.path('/search/'+_$scope.route.searchString +
-					'/tasks/' + _$scope.route.taskID)
-				else
-					_$location.path('/lists/'+_$scope.route.listID +
+				_$location.path('/lists/'+_$scope.route.listID +
 					'/tasks/' + _$scope.route.taskID)
 
 			@_$scope.endName = (event) ->

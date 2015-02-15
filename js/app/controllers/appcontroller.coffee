@@ -49,10 +49,7 @@ $routeParams, Loading, $modal, SettingsModel) ->
 			@_persistence.init().then(successCallback)
 
 			@_$scope.closeAll = () ->
-				if _$scope.status.searchActive
-					_$location.path('/search/'+_$scope.route.searchString)
-				else
-					_$location.path('/lists/'+_$scope.route.listID)
+				_$location.path('/lists/'+_$scope.route.listID)
 
 				_$scope.status.addingList = false
 				_$scope.status.focusTaskInput = false

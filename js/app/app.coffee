@@ -64,8 +64,9 @@ angular.module('Tasks',['OC','ngRoute','ngAnimate','ui.bootstrap'])
 ]
 
 angular.module('Tasks').run ['Config', '$timeout',
-'ListsBusinessLayer', 'TasksBusinessLayer',
-(Config, $timeout,TasksBusinessLayer, ListsBusinessLayer) ->
+'ListsBusinessLayer', 'TasksBusinessLayer', 'SearchBusinessLayer'
+(Config, $timeout,TasksBusinessLayer, ListsBusinessLayer,
+	SearchBusinessLayer) ->
 
 	init = false
 	do update = ->
@@ -77,6 +78,8 @@ angular.module('Tasks').run ['Config', '$timeout',
 			TasksBusinessLayer.updateModel()
 		init = true
 		timeOutUpdate()
+
+	OCA.Search.tasks = SearchBusinessLayer
 
 	moment.lang('details', {
 		calendar: {

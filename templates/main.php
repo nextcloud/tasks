@@ -1,19 +1,9 @@
 <div ng-app="Tasks" ng-cloak ng-controller="AppController" ng-click="closeAll()" id="tasks_wrapper">
     <div id="app-navigation" ng-controller="ListController">
-    	<div id="task_lists_header" class="header" ng-class="{'search': status.searchActive}" ng-controller="SearchController">
+    	<div id="task_lists_header" class="header">
         	<div id="main-toolbar">
-            	<a id="search" ng-click="openSearch()" oc-click-focus="{selector: '#search-toolbar input', timeout: 0}">
-                	<span class="icon search"></span>
-                </a>
                 <a id="loading" ng-click="update()" stop-event="click">
                     <span class="loading" ng-class="{'done':!isLoading()}"></span>
-                </a>
-            </div>
-            <div id="search-toolbar">
-                <span class="icon menu-search"></span>
-                <input type="text" key-placeholder="placeholder_search" placeholder="<?php p($l->t('Search...')); ?>" ng-model="searchString" ng-keyup="trySearch($event)" >
-            	<a id="cancel-search" ng-click="closeSearch()">
-                	<span class="icon detail-delete"></span>
                 </a>
             </div>
         </div>
@@ -74,6 +64,7 @@
                 <?php print_unescaped($this->inc('part.tasklist')); ?>
                 <?php print_unescaped($this->inc('part.collectionall')); ?>
                 <?php print_unescaped($this->inc('part.collectionweek')); ?>
+                <!-- <div id="searchresults" stop-event="click"></div> -->
             </div>
         </div>
         <div id="task-details" ng-class="{'details-visible':route.taskID}">
