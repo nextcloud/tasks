@@ -76,7 +76,6 @@ $TRANSLATIONS = array(
 "at the end" => "vid slutet",
 "at the beginning" => "vid början",
 "Set start date" => "Sätt startdatum",
-"Search..." => "Söker ...",
 "Add List..." => "Lägg till lista ...",
 "New List" => "Ny lista",
 "Load remaining completed tasks." => "Ladda återstående slutförda uppgifter.",

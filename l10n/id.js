@@ -77,7 +77,6 @@ OC.L10N.register(
     "at the end" : "di akhir",
     "at the beginning" : "di awal",
     "Set start date" : "Atur tanggal mulai",
-    "Search..." : "Penelusuran...",
     "Add List..." : "Tambah Daftar...",
     "New List" : "Daftar Baru",
     "Settings" : "Pengaturan",

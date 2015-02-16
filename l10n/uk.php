@@ -76,7 +76,6 @@ $TRANSLATIONS = array(
 "at the end" => "в кінці",
 "at the beginning" => "на початку",
 "Set start date" => "Встановити дату початку",
-"Search..." => "Пошук...",
 "Add List..." => "Додати список...",
 "New List" => "Новий список",
 "Load remaining completed tasks." => "Завантажити решту виконаних завдань.",

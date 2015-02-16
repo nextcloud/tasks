@@ -72,7 +72,6 @@ $TRANSLATIONS = array(
 "at the end" => "a végénél",
 "at the beginning" => "az elején",
 "Set start date" => "Kezdő dátum beállítása",
-"Search..." => "Keresés...",
 "Add List..." => "Lista hozzáadása",
 "New List" => "Új lista",
 "Settings" => "Beállítások",

@@ -76,7 +76,6 @@ $TRANSLATIONS = array(
 "at the end" => "na koncu",
 "at the beginning" => "na začetku",
 "Set start date" => "Nastavi datum začetka",
-"Search..." => "Poišči ...",
 "Add List..." => "Dodaj seznam ...",
 "New List" => "Nov seznam",
 "Load remaining completed tasks." => "Naloži preostale končane naloge.",

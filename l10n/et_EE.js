@@ -77,7 +77,6 @@ OC.L10N.register(
     "at the end" : "lõpus",
     "at the beginning" : "alguses",
     "Set start date" : "Määra alguse kuupäev",
-    "Search..." : "Otsi..",
     "Add List..." : "Lisa nimekirja...",
     "New List" : "Uus nimekiri",
     "Load remaining completed tasks." : "Laadi ülejäänud lõpetatud ülesanded",

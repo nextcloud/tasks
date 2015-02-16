@@ -76,7 +76,6 @@ $TRANSLATIONS = array(
 "at the end" => "শেষে",
 "at the beginning" => "শুরুতে",
 "Set start date" => "আরম্ভের তারিখ নির্ধারণ করুন",
-"Search..." => "অনুসন্ধান ....",
 "Add List..." => "তালিকা সংযুক্ত করুন....",
 "New List" => "নতুন তালিকা",
 "Settings" => "নিয়ামকসমূহ",
