@@ -1037,8 +1037,6 @@
 }).call(this);
 
 (function() {
-  var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
-
   angular.module('Tasks').controller('TasksController', [
     '$scope', '$window', '$routeParams', 'TasksModel', 'ListsModel', 'CollectionsModel', 'TasksBusinessLayer', '$location', 'SettingsBusinessLayer', 'SearchBusinessLayer', function($scope, $window, $routeParams, TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location, SettingsBusinessLayer, SearchBusinessLayer) {
       var TasksController;
@@ -1092,38 +1090,6 @@
               return true;
             }
           };
-          this._$scope.filterByString = function() {
-            return function(task) {
-              var category, comment, filter, key, keys, value, _i, _j, _len, _len1, _ref, _ref1;
-              keys = ['name', 'note', 'location', 'categories', 'comments'];
-              filter = _searchbusinesslayer.getFilter().toLowerCase();
-              for (key in task) {
-                value = task[key];
-                if (__indexOf.call(keys, key) >= 0) {
-                  if (key === 'comments') {
-                    _ref = task.comments;
-                    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-                      comment = _ref[_i];
-                      if (comment.comment.toLowerCase().indexOf(filter) !== -1) {
-                        return true;
-                      }
-                    }
-                  } else if (key === 'categories') {
-                    _ref1 = task.categories;
-                    for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
-                      category = _ref1[_j];
-                      if (category.toLowerCase().indexOf(filter) !== -1) {
-                        return true;
-                      }
-                    }
-                  } else if (value.toLowerCase().indexOf(filter) !== -1) {
-                    return true;
-                  }
-                }
-              }
-              return false;
-            };
-          };
           this._$scope.focusInput = function() {
             return _$scope.status.focusTaskInput = true;
           };
@@ -1150,9 +1116,16 @@
           this._$scope.toggleHidden = function() {
             return _settingsbusinesslayer.toggle('various', 'showHidden');
           };
-          this._$scope.filterTasks = function() {
+          this._$scope.filterTasks = function(task, filter) {
             return function(task) {
-              return _$tasksmodel.filterTasks(task, _$scope.route.listID);
+              return _$tasksmodel.filterTasks(task, filter);
+            };
+          };
+          this._$scope.filterTasksByString = function(task) {
+            return function(task) {
+              var filter;
+              filter = _searchbusinesslayer.getFilter().toLowerCase();
+              return _$tasksmodel.filterTasksByString(task, filter);
             };
           };
           this._$scope.dayHasEntry = function() {
@@ -1181,11 +1154,6 @@
               }
             }
             return ret;
-          };
-          this._$scope.filterTasksByCalendar = function(task, listID) {
-            return function(task) {
-              return '' + task.calendarid === '' + listID;
-            };
           };
           this._$scope.filterLists = function() {
             return function(list) {
@@ -1337,14 +1305,15 @@
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   angular.module('Tasks').factory('SearchBusinessLayer', [
-    'ListsModel', 'Persistence', 'TasksModel', '$rootScope', function(ListsModel, Persistence, TasksModel, $rootScope) {
+    'ListsModel', 'Persistence', 'TasksModel', '$rootScope', '$routeParams', function(ListsModel, Persistence, TasksModel, $rootScope, $routeParams) {
       var SearchBusinessLayer;
       SearchBusinessLayer = (function() {
-        function SearchBusinessLayer(_$listsmodel, _persistence, _$tasksmodel, _$rootScope) {
+        function SearchBusinessLayer(_$listsmodel, _persistence, _$tasksmodel, _$rootScope, _$routeparams) {
           this._$listsmodel = _$listsmodel;
           this._persistence = _persistence;
           this._$tasksmodel = _$tasksmodel;
           this._$rootScope = _$rootScope;
+          this._$routeparams = _$routeparams;
           this.getFilter = __bind(this.getFilter, this);
           this.setFilter = __bind(this.setFilter, this);
           this.attach = __bind(this.attach, this);
@@ -1375,7 +1344,11 @@
             return console.log('Search result clicked');
           };
           this.renderTaskResult = function($row, result) {
-            return $row;
+            if (!_this._$tasksmodel.filterTasks(result, _this._$routeparams.listID) || !_this._$tasksmodel.isLoaded(result)) {
+              return $row;
+            } else {
+              return null;
+            }
           };
           return OC.Plugins.register('OCA.Search', this);
         };
@@ -1383,7 +1356,7 @@
         return SearchBusinessLayer;
 
       })();
-      return new SearchBusinessLayer(ListsModel, Persistence, TasksModel, $rootScope);
+      return new SearchBusinessLayer(ListsModel, Persistence, TasksModel, $rootScope, $routeParams);
     }
   ]);
 
@@ -2130,7 +2103,8 @@
 
 (function() {
   var __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+    __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   angular.module('Tasks').factory('TasksModel', [
     '_Model', '_EqualQuery', 'Utils', function(_Model, _EqualQuery, Utils) {
@@ -2266,8 +2240,16 @@
           return false;
         };
 
-        TasksModel.prototype.filterTasks = function(task, collectionID) {
-          switch (collectionID) {
+        TasksModel.prototype.isLoaded = function(task) {
+          if (this.getById(task.id)) {
+            return true;
+          } else {
+            return false;
+          }
+        };
+
+        TasksModel.prototype.filterTasks = function(task, filter) {
+          switch (filter) {
             case 'completed':
               return task.completed === true;
             case 'all':
@@ -2280,7 +2262,39 @@
               return task.completed === false && (this.today(task.start) || this.today(task.due));
             case 'week':
               return task.completed === false && (this.week(task.start) || this.week(task.due));
+            default:
+              return '' + task.calendarid === '' + filter;
           }
+        };
+
+        TasksModel.prototype.filterTasksByString = function(task, filter) {
+          var category, comment, key, keys, value, _i, _j, _len, _len1, _ref, _ref1;
+          keys = ['name', 'note', 'location', 'categories', 'comments'];
+          for (key in task) {
+            value = task[key];
+            if (__indexOf.call(keys, key) >= 0) {
+              if (key === 'comments') {
+                _ref = task.comments;
+                for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+                  comment = _ref[_i];
+                  if (comment.comment.toLowerCase().indexOf(filter) !== -1) {
+                    return true;
+                  }
+                }
+              } else if (key === 'categories') {
+                _ref1 = task.categories;
+                for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+                  category = _ref1[_j];
+                  if (category.toLowerCase().indexOf(filter) !== -1) {
+                    return true;
+                  }
+                }
+              } else if (value.toLowerCase().indexOf(filter) !== -1) {
+                return true;
+              }
+            }
+          }
+          return false;
         };
 
         TasksModel.prototype.starred = function(taskID) {

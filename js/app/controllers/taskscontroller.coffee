@@ -77,25 +77,6 @@ SettingsBusinessLayer, SearchBusinessLayer) ->
 				else
 					return true
 
-			@_$scope.filterByString = () =>
-				return (task) ->
-					keys = ['name', 'note', 'location',
-							'categories', 'comments']
-					filter = _searchbusinesslayer.getFilter().toLowerCase()
-					for key,value of task
-						if key in keys
-							if key == 'comments'
-								for comment in task.comments
-									if comment.comment.toLowerCase().indexOf(filter) !=-1
-										return true
-							else if key == 'categories'
-								for category in task.categories
-									if category.toLowerCase().indexOf(filter) !=-1
-										return true
-							else if value.toLowerCase().indexOf(filter) !=-1
-								return true
-					return false
-
 			@_$scope.focusInput = () ->
 				_$scope.status.focusTaskInput = true
 
@@ -119,9 +100,14 @@ SettingsBusinessLayer, SearchBusinessLayer) ->
 			@_$scope.toggleHidden = () ->
 				_settingsbusinesslayer.toggle('various','showHidden')
 
-			@_$scope.filterTasks = () ->
+			@_$scope.filterTasks = (task, filter) ->
 				return (task) ->
-					return _$tasksmodel.filterTasks(task, _$scope.route.listID)
+					return _$tasksmodel.filterTasks(task, filter)
+
+			@_$scope.filterTasksByString = (task) =>
+				return (task) ->
+					filter = _searchbusinesslayer.getFilter().toLowerCase()
+					return _$tasksmodel.filterTasksByString(task, filter)
 
 			@_$scope.dayHasEntry = () ->
 				return (date) ->
@@ -139,10 +125,6 @@ SettingsBusinessLayer, SearchBusinessLayer) ->
 					if _$tasksmodel.taskAtDay(task, day)
 						ret.push(task)
 				return ret
-
-			@_$scope.filterTasksByCalendar = (task, listID) ->
-				return (task) ->
-					return ''+task.calendarid == ''+listID
 
 			@_$scope.filterLists = () ->
 				return (list) ->

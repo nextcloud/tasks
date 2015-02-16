@@ -113,8 +113,11 @@ angular.module('Tasks').factory 'TasksModel',
 					return true
 			return false
 
-		filterTasks: (task, collectionID) ->
-			switch collectionID
+		isLoaded: (task) ->
+			return if @getById(task.id) then true else false
+
+		filterTasks: (task, filter) ->
+			switch filter
 				when 'completed'
 					return task.completed == true
 				when 'all'
@@ -129,6 +132,25 @@ angular.module('Tasks').factory 'TasksModel',
 				when 'week'
 					return (task.completed == false && (@week(task.start) ||
 					@week(task.due)))
+				else
+					return ''+task.calendarid == ''+filter
+
+		filterTasksByString: (task, filter) ->
+				keys = ['name', 'note', 'location',
+						'categories', 'comments']
+				for key,value of task
+					if key in keys
+						if key == 'comments'
+							for comment in task.comments
+								if comment.comment.toLowerCase().indexOf(filter) !=-1
+									return true
+						else if key == 'categories'
+							for category in task.categories
+								if category.toLowerCase().indexOf(filter) !=-1
+									return true
+						else if value.toLowerCase().indexOf(filter) !=-1
+							return true
+				return false
 
 		starred: (taskID) ->
 			return @getById(taskID).starred

@@ -23,12 +23,14 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 angular.module('Tasks').factory 'SearchBusinessLayer',
 ['ListsModel', 'Persistence', 'TasksModel', '$rootScope',
-(ListsModel, Persistence, TasksModel, $rootScope) ->
+'$routeParams',
+(ListsModel, Persistence, TasksModel, $rootScope,
+$routeParams) ->
 
 	class SearchBusinessLayer
 
 		constructor: (@_$listsmodel, @_persistence,
-		@_$tasksmodel, @_$rootScope) ->
+		@_$tasksmodel, @_$rootScope, @_$routeparams) ->
 			@initialize()
 			@_$searchString = ''
 
@@ -37,13 +39,6 @@ angular.module('Tasks').factory 'SearchBusinessLayer',
 				@_$rootScope.$apply(
 					@setFilter(query)
 					)
-				# if (self.fileAppLoaded())
-					# self.fileList.setFilter(query)
-					# if (query.length > 2)
-					# 	# //search is not started until 500msec have passed
-					# 	window.setTimeout(() =>
-					# 		$('.nofilterresults').addClass('hidden')
-					# 	, 500)
 			)
 			search.setRenderer('task', @renderTaskResult.bind(@))
 			search.setHandler('task',  @handleTaskClick.bind(@))
@@ -59,14 +54,16 @@ angular.module('Tasks').factory 'SearchBusinessLayer',
 				console.log('Search result clicked')
 
 			@renderTaskResult = ($row, result) =>
-				# console.log('Render result')
-				# console.log($row)
-				# console.log(result)
-				return $row
+				if !@_$tasksmodel.filterTasks(result,@_$routeparams.listID) ||
+				!@_$tasksmodel.isLoaded(result)
+					return $row
+				else
+					return null
+
 			OC.Plugins.register('OCA.Search', @)
 
 
 	return new SearchBusinessLayer(ListsModel, Persistence,
-		TasksModel, $rootScope)
+		TasksModel, $rootScope, $routeParams)
 
 ]

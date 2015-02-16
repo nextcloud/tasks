@@ -1,7 +1,7 @@
 <div ng-switch-default>
     <div class="grouped-tasks">
         <ol class="tasks" rel="uncompleted" oc-drop-task>
-            <li ng-repeat="(id, task) in tasks | filter:filterTasksByCalendar(task,route.listID) | filter:{'completed':'false'} | filter:filterByString(task) | orderBy:sortDue | orderBy:'starred':true"
+            <li ng-repeat="(id, task) in tasks | filter:filterTasks(task,route.listID) | filter:{'completed':'false'} | filter:filterTasksByString(task) | orderBy:sortDue | orderBy:'starred':true"
             class="task-item ui-draggable" rel="{{ task.id }}" ng-click="openDetails(task.id)" ng-class="{done: task.completed}" oc-drag-task stop-event="click">
                 <div class="task-body">
                     <div class="percentdone" style="width:{{ task.complete }}%; background-color:{{ getTaskColor(task.calendarid) }};"></div>
@@ -25,7 +25,7 @@
             <text ng-click="toggleHidden()">{{ getCountString(route.listID,'completed') }}</text>
         </h2>
         <ol class="completed-tasks" rel="completed" oc-drop-task>
-            <li ng-repeat="task in tasks | filter:filterTasksByCalendar(task,route.listID) | filter:{'completed':'true'} | filter:filterByString(task) | orderBy:'completed_date':true"
+            <li ng-repeat="task in tasks | filter:filterTasks(task,route.listID) | filter:{'completed':'true'} | filter:filterTasksByString(task) | orderBy:'completed_date':true"
             class="task-item" rel="{{ task.id }}" ng-click="openDetails(task.id)"
             ng-class="{done: task.completed}" oc-drag-task stop-event="click">
                 <div class="task-body">

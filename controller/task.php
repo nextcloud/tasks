@@ -54,18 +54,25 @@ class Task extends \OCP\Search\Result {
 	public $text = '';
 
 	/**
-	 * Start time for the event
+	 * Start time for the task
 	 *
 	 * @var string human-readable string in RFC2822 format
 	 */
-	public $start_time;
+	public $start;
 
 	/**
-	 * End time for the event
+	 * Due time for the task
 	 *
 	 * @var string human-readable string in RFC2822 format
 	 */
-	public $end_time;
+	public $due;
+
+	/**
+	 * Is Task starred
+	 *
+	 * @var boolean human-readable string in RFC2822 format
+	 */
+	public $starred;
 
 	/**
 	 * Constructor
@@ -73,12 +80,39 @@ class Task extends \OCP\Search\Result {
 	 * @param array $data
 	 * @return \OCA\Tasks\Controller\Task
 	 */
-	public function __construct($taskId, $calendarId, $vtodo, $reason, $query) {
+	public function __construct($taskId, $calendarId, $vtodo, $reason, $query, $user_timezone) {
 		// set default properties
 		$this->id = $taskId;
-		$this->calendarID = $calendarId;
+		$this->calendarid = $calendarId;
 		$this->name = $vtodo->getAsString('SUMMARY');
 		$this->completed = $vtodo->COMPLETED ? true : false;
+		$start = $vtodo->DTSTART;
+		if ($start) {
+			try {
+				$start = $start->getDateTime();
+				$start->setTimezone(new \DateTimeZone($user_timezone));
+				$this->start = $start->format('Ymd\THis');
+			} catch(\Exception $e) {
+				$this->start = null;
+				\OCP\Util::writeLog('tasks', $e->getMessage(), \OCP\Util::ERROR);
+			}
+		} else {
+			$this->start = null;
+		}
+		$due = $vtodo->DUE;
+		if ($due) {
+			try {
+				$due = $due->getDateTime();
+				$due->setTimezone(new \DateTimeZone($user_timezone));
+				$this->due = $due->format('Ymd\THis');
+			} catch(\Exception $e) {
+				$this->due = null;
+				\OCP\Util::writeLog('tasks', $e->getMessage(), \OCP\Util::ERROR);
+			}
+		} else {
+			$this->due = null;
+		}
+		$this->starred = $vtodo->getAsString('PRIORITY') ? true : false;
 		$this->link = \OCP\Util::linkToRoute('tasks.page.index') . '#/lists/' . $calendarId . '/tasks/' . $taskId;
 		$l = new \OC_l10n('tasks');
 		switch($reason){

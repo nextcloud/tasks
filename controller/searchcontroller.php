@@ -33,6 +33,7 @@ class SearchController extends \OCP\Search\Provider {
 	 */
 	function search($query) {
 		$calendars = \OC_Calendar_Calendar::allCalendars(\OCP\USER::getUser(), true);
+		$user_timezone = \OC_Calendar_App::getTimezone();
 		// check if the calenar is enabled
 		if (count($calendars) == 0 || !\OCP\App::isEnabled('tasks')) {
 			return array();
@@ -58,7 +59,7 @@ class SearchController extends \OCP\Search\Provider {
 				foreach ($properties as $property) {
 					$string = $vtodo->getAsString($property);
 					if (stripos($string, $query) !== false) {
-						$results[] = new \OCA\Tasks\Controller\Task($id,$calendarId,$vtodo,$property,$query);
+						$results[] = new \OCA\Tasks\Controller\Task($id,$calendarId,$vtodo,$property,$query,$user_timezone);
 						continue 2;
 					}
 				}
@@ -66,7 +67,7 @@ class SearchController extends \OCP\Search\Provider {
 				if($comments) {
 					foreach($comments as $com) {
 						if (stripos($com->value, $query) !== false) {
-							$results[] = new \OCA\Tasks\Controller\Task($id,$calendarId,$vtodo,'COMMENTS',$query);
+							$results[] = new \OCA\Tasks\Controller\Task($id,$calendarId,$vtodo,'COMMENTS',$query,$user_timezone);
 							continue 2;
 						}
 					}
