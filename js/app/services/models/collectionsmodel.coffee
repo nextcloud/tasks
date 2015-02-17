@@ -34,12 +34,13 @@ angular.module('Tasks').factory 'CollectionsModel',
 			if angular.isDefined(data.id)
 				super(data, clearCache)
 
-		getCount: (collectionID) ->
+		getCount: (collectionID, filter='') ->
 			count = 0
 			tasks = @_$tasksmodel.getAll()
 			
 			for task in tasks
-				count += @_$tasksmodel.filterTasks(task, collectionID)
+				count += (@_$tasksmodel.filterTasks(task, collectionID) &&
+					@_$tasksmodel.filterTasksByString(task, filter))
 			return count
 
 	return new CollectionsModel(TasksModel)

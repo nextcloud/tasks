@@ -106,7 +106,7 @@ SettingsBusinessLayer, SearchBusinessLayer) ->
 
 			@_$scope.filterTasksByString = (task) =>
 				return (task) ->
-					filter = _searchbusinesslayer.getFilter().toLowerCase()
+					filter = _searchbusinesslayer.getFilter()
 					return _$tasksmodel.filterTasksByString(task, filter)
 
 			@_$scope.dayHasEntry = () ->
@@ -131,11 +131,13 @@ SettingsBusinessLayer, SearchBusinessLayer) ->
 					return _$scope.getCount(list.id,_$scope.route.listID)
 
 			@_$scope.getCount = (listID,type) ->
-				return _$listsmodel.getCount(listID,type)
+				filter = _searchbusinesslayer.getFilter()
+				return _$listsmodel.getCount(listID,type,filter)
 
 			@_$scope.getCountString = (listID,type) ->
+				filter = _searchbusinesslayer.getFilter()
 				return n('tasks', '%n Completed Task', '%n Completed Tasks',
-						_$listsmodel.getCount(listID,type))
+						_$listsmodel.getCount(listID,type,filter))
 
 			@_$scope.addTask = (taskName) ->
 

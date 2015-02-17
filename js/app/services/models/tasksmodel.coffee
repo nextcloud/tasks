@@ -138,6 +138,7 @@ angular.module('Tasks').factory 'TasksModel',
 		filterTasksByString: (task, filter) ->
 				keys = ['name', 'note', 'location',
 						'categories', 'comments']
+				filter = filter.toLowerCase()
 				for key,value of task
 					if key in keys
 						if key == 'comments'

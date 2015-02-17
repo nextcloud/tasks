@@ -810,10 +810,10 @@
 
 (function() {
   angular.module('Tasks').controller('ListController', [
-    '$scope', '$window', '$routeParams', 'ListsModel', 'TasksBusinessLayer', 'CollectionsModel', 'ListsBusinessLayer', '$location', function($scope, $window, $routeParams, ListsModel, TasksBusinessLayer, CollectionsModel, ListsBusinessLayer, $location) {
+    '$scope', '$window', '$routeParams', 'ListsModel', 'TasksBusinessLayer', 'CollectionsModel', 'ListsBusinessLayer', '$location', 'SearchBusinessLayer', function($scope, $window, $routeParams, ListsModel, TasksBusinessLayer, CollectionsModel, ListsBusinessLayer, $location, SearchBusinessLayer) {
       var ListController;
       ListController = (function() {
-        function ListController(_$scope, _$window, _$routeParams, _$listsmodel, _$tasksbusinesslayer, _$collectionsmodel, _$listsbusinesslayer, $location) {
+        function ListController(_$scope, _$window, _$routeParams, _$listsmodel, _$tasksbusinesslayer, _$collectionsmodel, _$listsbusinesslayer, $location, _$searchbusinesslayer) {
           this._$scope = _$scope;
           this._$window = _$window;
           this._$routeParams = _$routeParams;
@@ -822,6 +822,7 @@
           this._$collectionsmodel = _$collectionsmodel;
           this._$listsbusinesslayer = _$listsbusinesslayer;
           this.$location = $location;
+          this._$searchbusinesslayer = _$searchbusinesslayer;
           this._$scope.collections = this._$collectionsmodel.getAll();
           this._$scope.lists = this._$listsmodel.getAll();
           this._$scope.TasksBusinessLayer = this._$tasksbusinesslayer;
@@ -915,7 +916,9 @@
             return _$listsbusinesslayer.setListName(listID(listName));
           };
           this._$scope.getCollectionCount = function(collectionID) {
-            return _$collectionsmodel.getCount(collectionID);
+            var filter;
+            filter = _$searchbusinesslayer.getFilter();
+            return _$collectionsmodel.getCount(collectionID, filter);
           };
           this._$scope.hideCollection = function(collectionID) {
             var collection;
@@ -930,14 +933,18 @@
             }
           };
           this._$scope.getCollectionString = function(collectionID) {
+            var filter;
             if (collectionID !== 'completed') {
-              return _$collectionsmodel.getCount(collectionID);
+              filter = _$searchbusinesslayer.getFilter();
+              return _$collectionsmodel.getCount(collectionID, filter);
             } else {
               return '';
             }
           };
           this._$scope.getListCount = function(listID, type) {
-            return _$listsmodel.getCount(listID, type);
+            var filter;
+            filter = _$searchbusinesslayer.getFilter();
+            return _$listsmodel.getCount(listID, type, filter);
           };
           this._$scope.showDelete = function(listID) {
             var _ref;
@@ -954,7 +961,7 @@
         return ListController;
 
       })();
-      return new ListController($scope, $window, $routeParams, ListsModel, TasksBusinessLayer, CollectionsModel, ListsBusinessLayer, $location);
+      return new ListController($scope, $window, $routeParams, ListsModel, TasksBusinessLayer, CollectionsModel, ListsBusinessLayer, $location, SearchBusinessLayer);
     }
   ]);
 
@@ -1124,7 +1131,7 @@
           this._$scope.filterTasksByString = function(task) {
             return function(task) {
               var filter;
-              filter = _searchbusinesslayer.getFilter().toLowerCase();
+              filter = _searchbusinesslayer.getFilter();
               return _$tasksmodel.filterTasksByString(task, filter);
             };
           };
@@ -1161,10 +1168,14 @@
             };
           };
           this._$scope.getCount = function(listID, type) {
-            return _$listsmodel.getCount(listID, type);
+            var filter;
+            filter = _searchbusinesslayer.getFilter();
+            return _$listsmodel.getCount(listID, type, filter);
           };
           this._$scope.getCountString = function(listID, type) {
-            return n('tasks', '%n Completed Task', '%n Completed Tasks', _$listsmodel.getCount(listID, type));
+            var filter;
+            filter = _searchbusinesslayer.getFilter();
+            return n('tasks', '%n Completed Task', '%n Completed Tasks', _$listsmodel.getCount(listID, type, filter));
           };
           this._$scope.addTask = function(taskName) {
             var task, _ref,
@@ -1879,13 +1890,16 @@
           }
         };
 
-        CollectionsModel.prototype.getCount = function(collectionID) {
+        CollectionsModel.prototype.getCount = function(collectionID, filter) {
           var count, task, tasks, _i, _len;
+          if (filter == null) {
+            filter = '';
+          }
           count = 0;
           tasks = this._$tasksmodel.getAll();
           for (_i = 0, _len = tasks.length; _i < _len; _i++) {
             task = tasks[_i];
-            count += this._$tasksmodel.filterTasks(task, collectionID);
+            count += this._$tasksmodel.filterTasks(task, collectionID) && this._$tasksmodel.filterTasksByString(task, filter);
           }
           return count;
         };
@@ -2010,15 +2024,18 @@
           return ret;
         };
 
-        ListsModel.prototype.getCount = function(listID, collectionID) {
+        ListsModel.prototype.getCount = function(listID, collectionID, filter) {
           var count, task, tasks, _i, _len;
+          if (filter == null) {
+            filter = '';
+          }
           count = 0;
           tasks = this._$tasksmodel.getAll();
           for (_i = 0, _len = tasks.length; _i < _len; _i++) {
             task = tasks[_i];
-            count += this._$tasksmodel.filterTasks(task, collectionID) && task.calendarid === listID;
+            count += this._$tasksmodel.filterTasks(task, collectionID) && task.calendarid === listID && this._$tasksmodel.filterTasksByString(task, filter);
           }
-          if (collectionID === 'completed') {
+          if (collectionID === 'completed' && filter === '') {
             count += this.notLoaded(listID);
           }
           return count;
@@ -2270,6 +2287,7 @@
         TasksModel.prototype.filterTasksByString = function(task, filter) {
           var category, comment, key, keys, value, _i, _j, _len, _len1, _ref, _ref1;
           keys = ['name', 'note', 'location', 'categories', 'comments'];
+          filter = filter.toLowerCase();
           for (key in task) {
             value = task[key];
             if (__indexOf.call(keys, key) >= 0) {
