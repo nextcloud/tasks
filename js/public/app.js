@@ -1316,15 +1316,16 @@
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   angular.module('Tasks').factory('SearchBusinessLayer', [
-    'ListsModel', 'Persistence', 'TasksModel', '$rootScope', '$routeParams', function(ListsModel, Persistence, TasksModel, $rootScope, $routeParams) {
+    'ListsModel', 'Persistence', 'TasksModel', '$rootScope', '$routeParams', '$location', function(ListsModel, Persistence, TasksModel, $rootScope, $routeParams, $location) {
       var SearchBusinessLayer;
       SearchBusinessLayer = (function() {
-        function SearchBusinessLayer(_$listsmodel, _persistence, _$tasksmodel, _$rootScope, _$routeparams) {
+        function SearchBusinessLayer(_$listsmodel, _persistence, _$tasksmodel, _$rootScope, _$routeparams, _$location) {
           this._$listsmodel = _$listsmodel;
           this._persistence = _persistence;
           this._$tasksmodel = _$tasksmodel;
           this._$rootScope = _$rootScope;
           this._$routeparams = _$routeparams;
+          this._$location = _$location;
           this.getFilter = __bind(this.getFilter, this);
           this.setFilter = __bind(this.setFilter, this);
           this.attach = __bind(this.attach, this);
@@ -1352,7 +1353,7 @@
         SearchBusinessLayer.prototype.initialize = function() {
           var _this = this;
           this.handleTaskClick = function($row, result, event) {
-            return console.log('Search result clicked');
+            return _this._$location.path('/lists/' + result.calendarid + '/tasks/' + result.id);
           };
           this.renderTaskResult = function($row, result) {
             if (!_this._$tasksmodel.filterTasks(result, _this._$routeparams.listID) || !_this._$tasksmodel.isLoaded(result)) {
@@ -1367,7 +1368,7 @@
         return SearchBusinessLayer;
 
       })();
-      return new SearchBusinessLayer(ListsModel, Persistence, TasksModel, $rootScope, $routeParams);
+      return new SearchBusinessLayer(ListsModel, Persistence, TasksModel, $rootScope, $routeParams, $location);
     }
   ]);
 

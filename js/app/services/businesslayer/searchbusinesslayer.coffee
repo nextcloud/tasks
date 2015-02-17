@@ -23,14 +23,14 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 angular.module('Tasks').factory 'SearchBusinessLayer',
 ['ListsModel', 'Persistence', 'TasksModel', '$rootScope',
-'$routeParams',
+'$routeParams', '$location',
 (ListsModel, Persistence, TasksModel, $rootScope,
-$routeParams) ->
+$routeParams, $location) ->
 
 	class SearchBusinessLayer
 
 		constructor: (@_$listsmodel, @_persistence,
-		@_$tasksmodel, @_$rootScope, @_$routeparams) ->
+		@_$tasksmodel, @_$rootScope, @_$routeparams, @_$location) ->
 			@initialize()
 			@_$searchString = ''
 
@@ -51,7 +51,8 @@ $routeParams) ->
 
 		initialize: () ->
 			@handleTaskClick = ($row, result, event) =>
-				console.log('Search result clicked')
+				@_$location.path('/lists/'+ result.calendarid +
+				'/tasks/' + result.id)
 
 			@renderTaskResult = ($row, result) =>
 				if !@_$tasksmodel.filterTasks(result,@_$routeparams.listID) ||
@@ -64,6 +65,6 @@ $routeParams) ->
 
 
 	return new SearchBusinessLayer(ListsModel, Persistence,
-		TasksModel, $rootScope, $routeParams)
+		TasksModel, $rootScope, $routeParams, $location)
 
 ]
