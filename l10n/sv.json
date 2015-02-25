@@ -68,7 +68,7 @@
     "Add an item due today in \"%s\"..." : "Lägg till en post som förfaller idag i \"%s\" ...",
     "Add an item in \"%s\"..." : "Lägg till en post i \"%s\" ...",
     "Add a current item in \"%s\"..." : "Lägg till en nuvarande post i \"%s\" ...",
-    "%n Completed Task::%n Completed Tasks" : ["%n slutförda uppgifter","%n slutförda uppgifter"],
+    "_%n Completed Task_::_%n Completed Tasks_" : ["%n slutförda uppgifter","%n slutförda uppgifter"],
     "Set due date" : "Sätt slutdatum",
     "%s %% completed" : "%s %% slutfört",
     "Remind me" : "Påminn mig",

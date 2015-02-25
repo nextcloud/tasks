@@ -75,7 +75,7 @@ OC.L10N.register(
     "Add an item due today in \"%s\"..." : "Tilføj et element som forfalder i dag i \"%s\"...",
     "Add an item in \"%s\"..." : "Tilføj et element i \"%s\"...",
     "Add a current item in \"%s\"..." : "Tilføj et nuværende element i \"%s\"...",
-    "%n Completed Task::%n Completed Tasks" : ["%n fuldført opgave","%n fuldførte opgaver"],
+    "_%n Completed Task_::_%n Completed Tasks_" : ["%n fuldført opgave","%n fuldførte opgaver"],
     "Set due date" : "Angiv en forfaldsdato",
     "%s %% completed" : "%s %% er fuldført",
     "Remind me" : "Påmind mig",

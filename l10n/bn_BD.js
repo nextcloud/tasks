@@ -70,7 +70,7 @@ OC.L10N.register(
     "Add an item due today in \"%s\"..." : "আজ করণীয় আইটেম \"%s\" এ যুক্ত করুন ....",
     "Add an item in \"%s\"..." : "যেকোন আইটেম \"%s\" এ যুক্ত করুন ....",
     "Add a current item in \"%s\"..." : "চলতি কোন আইটেম \"%s\" এযুক্ত করুন ....",
-    "%n Completed Task::%n Completed Tasks" : ["%n সুসম্পন্ন কাজ","%n সুসম্পন্ন কাজ"],
+    "_%n Completed Task_::_%n Completed Tasks_" : ["%n সুসম্পন্ন কাজ","%n সুসম্পন্ন কাজ"],
     "Set due date" : "কার্যকারিতার তারিখ নির্ধারণ করুন",
     "%s %% completed" : "%s %% সুসম্পন্ন",
     "Remind me" : "স্মরণ করিয়ে দাও",
