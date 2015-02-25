@@ -57,6 +57,23 @@ $routeParams, $location) ->
 			@renderTaskResult = ($row, result) =>
 				if !@_$tasksmodel.filterTasks(result,@_$routeparams.listID) ||
 				!@_$tasksmodel.isLoaded(result)
+					$template = $('div.task-item.template')
+					$template = $template.clone()
+					$row = $('<tr class="result"></tr>')
+					.append($template.removeClass('template'))
+					$row.data('result', result)
+					$row.find('span.title').text(result.name)
+					if result.starred
+						$row.find('span.task-star').addClass('task-starred')
+					if result.completed
+						$row.find('div.task-item').addClass('done')
+						$row.find('span.task-checkbox').addClass('task-checked')
+					if result.complete
+						$row.find('div.percentdone').css({'width':result.complete+'%',
+						'background-color':''+@_$listsmodel.getColor(result.calendarid)})
+					if result.note
+						$row.find('div.title-wrapper').addClass('attachment')
+
 					return $row
 				else
 					return null

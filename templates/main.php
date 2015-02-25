@@ -65,6 +65,23 @@
                 <?php print_unescaped($this->inc('part.collectionall')); ?>
                 <?php print_unescaped($this->inc('part.collectionweek')); ?>
                 <div id="searchresults" stop-event="click"></div>
+                <div class="task-item template">
+                    <div class="task-body">
+                        <div class="percentdone"></div>
+                        <a class="task-checkbox" name="toggleCompleted" ng-click="toggleCompleted()" stop-event="click">
+                            <span class="icon task-checkbox"></span>
+                        </a>
+                        <a class="icon task-separator"></a>
+                        <a class="task-star" ng-click="toggleStarred(task.id)" stop-event="click">
+                            <span class="icon task-star faded"></span>
+                        </a>
+                        <a class="duedate" ng-class="{overdue: TasksModel.overdue(task.due)}">{{ task.due | dateTaskList }}</a>
+                        <div class="title-wrapper">
+                            <span class="title"></span>
+                            <span class="icon task-attachment"></span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div id="task-details" ng-class="{'details-visible':route.taskID}">

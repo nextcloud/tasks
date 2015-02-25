@@ -65,9 +65,7 @@ class TasksController extends Controller {
 				}
 				$vtodo = Helper::parseVTODO($task['calendardata']);
 				try {
-					$task_data = Helper::arrayForJSON($task['id'], $vtodo, $user_timezone);
-					$task_data['calendarid'] = $calendar['id'];
-
+					$task_data = Helper::arrayForJSON($task['id'], $vtodo, $user_timezone, $calendar['id']);
 					switch($type){
 						case 'all':
 							$tasks[] = $task_data;

@@ -126,14 +126,14 @@
 			transition: opacity 100ms ease 0s;
 			opacity:0.6;
 		}
-		&.search {
-			background-position: -80px -20px;
-			transition: opacity 100ms ease 0s;
-			opacity:0.6;
-		}
-		&.menu-search{
-			background-position: -80px -20px;
-		}
+		// &.search {
+		// 	background-position: -80px -20px;
+		// 	transition: opacity 100ms ease 0s;
+		// 	opacity:0.6;
+		// }
+		// &.menu-search{
+		// 	background-position: -80px -20px;
+		// }
 		&.detail-close{
 			background-position: -260px -20px;
 			opacity:0.6;
@@ -198,7 +198,19 @@
 			}
 		}
 	}
-	li{
+	tr:last-child .task-item{
+		height: 39px;
+	 	div.task-body{
+			border-width: 1px;
+		}
+	}
+	li.task-item:last-child{
+		height: 39px;
+		.task-body{
+			border-width: 1px;
+		}
+	}
+	li, div{
 		&.task-item{
 			cursor:default;
 			height: 37px;
@@ -210,12 +222,6 @@
 				.title {
 					text-decoration: line-through;
 					text-shadow: none;
-				}
-			}
-			&:last-child{
-				height: 39px;
-				.task-body{
-					border-width: 1px;
 				}
 			}
 			.task-body{
@@ -317,48 +323,48 @@
 			height:20px;
 			line-height:20px;
 		}
-		&.search{
-			#search-toolbar{
-				display: block;
-			}
-			#main-toolbar{
-				display: none;
-			}
-		}
-		#search-toolbar{
-			display:none;
-			.icon.menu-search{
-				left: 41px;
-				position: absolute;
-				top: 9px;
-				z-index: 100;
-			}
-			input{
-				border-radius: 15px 15px 15px 15px;
-				left: 36px;
-				padding: 4px 4px 4px 25px;
-				position: absolute;
-				right: 36px;
-				top: 6px;
-				width: 210px;
-				-moz-box-sizing: border-box;
-				background: none repeat scroll 0 0 white;
-				border: 1px solid #BDBCBB;
-				box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
-				margin:0;
-				&:focus{
-					background-color: #F8F8F8;
-					border: 1px solid rgba(43, 136, 217, 0.65);
-					box-shadow: 0 0 4px rgba(43, 136, 217, 0.32), 0 1px 1px rgba(255, 255, 255, 0.43), 0 2px 4px rgba(43, 136, 217, 0.12) inset, 0 0 4px rgba(43, 136, 217, 0.2) inset;
-				}
-			}
-		}
-		#search, #cancel-search{
-			cursor:pointer;
-			padding: 8px;
-			display:block;
-			float: right;
-		}
+		// &.search{
+		// 	#search-toolbar{
+		// 		display: block;
+		// 	}
+		// 	#main-toolbar{
+		// 		display: none;
+		// 	}
+		// }
+		// #search-toolbar{
+		// 	display:none;
+		// 	.icon.menu-search{
+		// 		left: 41px;
+		// 		position: absolute;
+		// 		top: 9px;
+		// 		z-index: 100;
+		// 	}
+		// 	input{
+		// 		border-radius: 15px 15px 15px 15px;
+		// 		left: 36px;
+		// 		padding: 4px 4px 4px 25px;
+		// 		position: absolute;
+		// 		right: 36px;
+		// 		top: 6px;
+		// 		width: 210px;
+		// 		-moz-box-sizing: border-box;
+		// 		background: none repeat scroll 0 0 white;
+		// 		border: 1px solid #BDBCBB;
+		// 		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+		// 		margin:0;
+		// 		&:focus{
+		// 			background-color: #F8F8F8;
+		// 			border: 1px solid rgba(43, 136, 217, 0.65);
+		// 			box-shadow: 0 0 4px rgba(43, 136, 217, 0.32), 0 1px 1px rgba(255, 255, 255, 0.43), 0 2px 4px rgba(43, 136, 217, 0.12) inset, 0 0 4px rgba(43, 136, 217, 0.2) inset;
+		// 		}
+		// 	}
+		// }
+		// #search, #cancel-search{
+		// 	cursor:pointer;
+		// 	padding: 8px;
+		// 	display:block;
+		// 	float: right;
+		// }
 		#loading{
 			cursor:pointer;
 			padding: 8px;
@@ -433,6 +439,9 @@
 	}
 	#collection_lists li a{
 		padding-right: 8px;
+	}
+	#collection_filters li a{
+		padding-right: 16px !important;
 	}
 	input.edit{
 		border: 1px solid #3F84B3;
@@ -551,7 +560,7 @@
 	h2{
 		font-weight:bold;
 		color: #909090;
-		font-size: 12px;
+		font-size: 13px;
 		margin-bottom: 10px;
 		margin-top: 20px !important;
 		text-shadow: 0 1px 0 rgba(255, 255, 255, 1);
@@ -1151,9 +1160,9 @@ input, textarea {
 	&.detail-settings{
 		opacity:1;
 	}
-	&.search{
-		opacity:1;
-	}
+	// &.search{
+	// 	opacity:1;
+	// }
 	&.detail-delete{
 		opacity:0.8;
 	}
@@ -1385,4 +1394,34 @@ div.percentdone{
         margin-bottom:-3px;
         background-color: #CCC;
         border-radius: 2px 2px 2px 2px;
+}
+#searchresults{
+	padding-top: 0px !important;
+	margin-top: 20px;
+	background-color: transparent !important;
+	#status{
+		padding: 10px 0px 18px !important;
+		height: 22px !important;
+		background-color: transparent !important;
+		font-weight:bold;
+		color: #909090;
+		font-size: 13px !important;
+		text-shadow: 0 1px 0 rgba(255, 255, 255, 1);
+	}
+	span{
+		&.icon.task-checkbox{
+			background-position: -260px -20px;
+			opacity: 0.6;
+			&.task-checked{
+				background-position: -260px -20px;
+			}
+		}
+		&.icon.task-star:hover{
+			background-position: -140px 0 !important;
+		}
+	}
+
+}
+.template{
+	display: none;
 }

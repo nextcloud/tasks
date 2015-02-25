@@ -45,7 +45,7 @@ class SearchController extends \OCP\Search\Provider {
 			// $date = strtotime($query);
 		// 	// search all calendar objects, one by one
 			foreach ($objects as $object) {
-				// skip non-events
+				// skip non-todos
 				if ($object['objecttype'] != 'VTODO') {
 					continue;
 				}
@@ -59,7 +59,8 @@ class SearchController extends \OCP\Search\Provider {
 				foreach ($properties as $property) {
 					$string = $vtodo->getAsString($property);
 					if (stripos($string, $query) !== false) {
-						$results[] = new \OCA\Tasks\Controller\Task($id,$calendarId,$vtodo,$property,$query,$user_timezone);
+						// $results[] = new \OCA\Tasks\Controller\Task($id,$calendarId,$vtodo,$property,$query,$user_timezone);
+						$results[] = Helper::arrayForJSON($id, $vtodo, $user_timezone, $calendarId);
 						continue 2;
 					}
 				}
@@ -67,7 +68,8 @@ class SearchController extends \OCP\Search\Provider {
 				if($comments) {
 					foreach($comments as $com) {
 						if (stripos($com->value, $query) !== false) {
-							$results[] = new \OCA\Tasks\Controller\Task($id,$calendarId,$vtodo,'COMMENTS',$query,$user_timezone);
+							// $results[] = new \OCA\Tasks\Controller\Task($id,$calendarId,$vtodo,'COMMENTS',$query,$user_timezone);
+							$results[] = Helper::arrayForJSON($id, $vtodo, $user_timezone, $calendarId);
 							continue 2;
 						}
 					}
@@ -79,8 +81,8 @@ class SearchController extends \OCP\Search\Provider {
 	}
 
 	private static function sort_completed($a, $b){
-		$t1 = $a->completed;
-		$t2 = $b->completed;
+		$t1 = $a['completed'];
+		$t2 = $b['completed'];
 		if ($t1 == $t2) {
 			return 0;
 		}

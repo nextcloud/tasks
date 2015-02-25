@@ -33,8 +33,10 @@ Class Helper {
 		return $vtodo;
 	}
 
-	public static function arrayForJSON($id, $vtodo, $user_timezone){
+	public static function arrayForJSON($id, $vtodo, $user_timezone, $calendarId){
 		$task = array( 'id' => $id );
+		$task['calendarid'] = $calendarId;
+		$task['type'] = 'task';
 		$task['name'] = $vtodo->getAsString('SUMMARY');
 		$task['created'] = $vtodo->getAsString('CREATED');
 		$task['note'] = $vtodo->getAsString('DESCRIPTION');
