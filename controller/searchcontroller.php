@@ -54,7 +54,7 @@ class SearchController extends \OCP\Search\Provider {
 				$calendarId = $object['calendarid'];
 				
 				// check these properties
-				$properties = ['SUMMARY', 'DESCRIPTION', 'LOCATION', 'CATEGORIES'];
+				$properties = array('SUMMARY', 'DESCRIPTION', 'LOCATION', 'CATEGORIES');
 
 				foreach ($properties as $property) {
 					$string = $vtodo->getAsString($property);
