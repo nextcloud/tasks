@@ -13,7 +13,6 @@ namespace OCA\Tasks\Controller;
 use \OCP\AppFramework\Controller;
 use \OCP\AppFramework\Http\TemplateResponse;
 
-
 /**
  * Controller class for main page.
  */
