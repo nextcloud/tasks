@@ -126,8 +126,7 @@ class TasksController extends Controller {
 		if($object['objecttype']=='VTODO' && !is_null($object['summary'])) {
 			$vtodo = Helper::parseVTODO($object['calendardata']);
 			try {
-				$task_data = Helper::arrayForJSON($object['id'], $vtodo, $user_timezone);
-				$task_data['calendarid'] = $object['calendarid'];
+				$task_data = Helper::arrayForJSON($object['id'], $vtodo, $user_timezone, $object['calendarid']);
 				$task[] = $task_data;
 			} catch(\Exception $e) {
 				\OCP\Util::writeLog('tasks', $e->getMessage(), \OCP\Util::ERROR);
@@ -299,8 +298,7 @@ class TasksController extends Controller {
 		$vcalendar = Helper::createVCalendarFromRequest($request);
 		$taskId = \OC_Calendar_Object::add($calendarId, $vcalendar->serialize());
 
-		$task = Helper::arrayForJSON($taskId, $vcalendar->VTODO, $user_timezone);
-		$task['calendarid'] = $calendarId;
+		$task = Helper::arrayForJSON($taskId, $vcalendar->VTODO, $user_timezone, $calendarId);
 
 		$task['tmpID'] = $this->params('tmpID');
 		$result = array(
