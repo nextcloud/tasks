@@ -6,7 +6,7 @@ OC.L10N.register(
     "Today" : "Hoje",
     "Week" : "Semana",
     "All" : "Todos",
-    "Current" : "Actualmente",
+    "Current" : "Atual",
     "Completed" : "Concluído",
     "Due yesterday" : "Devido ontem",
     "Due today" : "Devido hoje",
