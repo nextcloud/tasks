@@ -200,7 +200,6 @@ class TasksController extends Controller {
 
 	private function setPercentComplete($percent_complete){
 		$taskId = (int) $this->params('taskID');
-		$isCompleted = null;
 		try {
 			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
 			$vtodo = $vcalendar->VTODO;
@@ -209,20 +208,14 @@ class TasksController extends Controller {
 			}else{
 				$vtodo->__unset('PERCENT-COMPLETE');
 			}
-
 			if ($percent_complete == 100) {
-				if (!$isCompleted) {
-					$isCompleted = 'now';
-				}
-			} else {
-				$isCompleted = null;
-			}
-			if ($isCompleted) {
-				$timezone = \OC_Calendar_App::getTimezone();
-				$timezone = new \DateTimeZone($timezone);
-				$isCompleted = new \DateTime($isCompleted, $timezone);
-				$vtodo->setDateTime('COMPLETED', $isCompleted);
-			} else {
+				$vtodo->setString('STATUS', 'COMPLETED');
+				$vtodo->setDateTime('COMPLETED', 'now', \Sabre\VObject\Property\DateTime::UTC);
+			} elseif ($percent_complete != 0) {
+				$vtodo->setString('STATUS', 'IN-PROCESS');
+				unset($vtodo->COMPLETED);
+			} else{
+				$vtodo->setString('STATUS', 'NEEDS-ACTION');
 				unset($vtodo->COMPLETED);
 			}
 			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
