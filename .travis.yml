@@ -9,7 +9,7 @@ php:
 branches:
   only:
     - master
-    - stable7
+    - /^stable\d*$/
 
 script:
   # Test lint
