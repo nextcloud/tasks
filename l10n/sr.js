@@ -27,6 +27,7 @@ OC.L10N.register(
     "seconds" : "сек.",
     "a minute" : "минут",
     "%d minutes" : "%d минута",
+    "days" : "дана",
     "second" : "други",
     "before beginning" : "пре почетка",
     "after beginning" : "након почетка",
