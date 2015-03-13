@@ -119,6 +119,9 @@ class TasksController extends Controller {
 		return $response;
 	}
 
+	/**
+	 * @NoAdminRequired
+	 */
 	public function getTask($taskID){
 		$object = \OC_Calendar_App::getEventObject($taskID);
 		$user_timezone = \OC_Calendar_App::getTimezone();
