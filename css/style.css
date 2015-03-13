@@ -378,6 +378,7 @@
   text-shadow: 0 1px 0 white;
   white-space: normal !important;
   line-height: 20px !important;
+  min-height: 34px !important;
 }
 #app-navigation #collection_lists li a {
   padding-right: 8px;
