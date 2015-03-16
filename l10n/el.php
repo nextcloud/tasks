@@ -79,6 +79,7 @@ $TRANSLATIONS = array(
 "Add List..." => "Προσθήκη Λίστας...",
 "New List" => "Νέα Λίστα",
 "Load remaining completed tasks." => "Φόρτωση απομένοντων ολοκληρωμένων εργασιών",
+"Loading the task..." => "Φόρτωση της εργασίας...",
 "Task not found!" => "Δεν βρέθηκε εργασία!",
 "Settings" => "Ρυθμίσεις",
 "Done" => "Ολοκληρώθηκε",
