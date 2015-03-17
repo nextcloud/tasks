@@ -80,6 +80,8 @@ OC.L10N.register(
     "Add List..." : "Legg til liste...",
     "New List" : "Ny liste",
     "Load remaining completed tasks." : "Last gjenværende avsluttede oppgaver.",
+    "Loading the task..." : "Laster oppgave...",
+    "Task not found!" : "Oppgaven ble ikke funnet!",
     "Settings" : "Innstillinger",
     "Done" : "Ferdig",
     "General" : "Generelt",
