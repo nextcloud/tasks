@@ -31,7 +31,7 @@ OC.L10N.register(
     "an hour" : "сат",
     "%d hours" : "%d сати",
     "a day" : "дан",
-    "%d days" : "%d дани",
+    "%d days" : "%d дана",
     "a month" : "месец",
     "%d months" : "%d месеци",
     "a year" : "година",
