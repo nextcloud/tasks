@@ -10,9 +10,9 @@
   "homepage": "",
   "repository": {
     "type": "git",
-    "url": "git@github.com:owncloud/tast.git"
+    "url": "git@github.com:owncloud/tasks.git"
   },
-  "bugs": "https://github.com/owncloud/task/issues",
+  "bugs": "https://github.com/owncloud/tasks/issues",
   "contributors": [],
   "dependencies": {},
   "devDependencies": {
