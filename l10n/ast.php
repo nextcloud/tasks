@@ -63,7 +63,6 @@ $TRANSLATIONS = array(
 "Thursday" => "Xueves",
 "Friday" => "Vienres",
 "Saturday" => "Sábadu",
-"_%n Completed Task_::_%n Completed Tasks_" => array("",""),
 "Settings" => "Axustes",
 "General" => "Xeneral",
 "General Settings" => "Axustes xenerales"
