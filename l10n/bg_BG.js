@@ -80,6 +80,8 @@ OC.L10N.register(
     "Add List..." : "Добави Списък...",
     "New List" : "Нов Списък",
     "Load remaining completed tasks." : "Зареди останалите завършени задачи.",
+    "Loading the task..." : "Зареждане на задачата...",
+    "Task not found!" : "Задачата не е намерена!",
     "Settings" : "Настройки",
     "Done" : "Завършен",
     "General" : "Общи",
