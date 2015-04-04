@@ -80,6 +80,8 @@ OC.L10N.register(
     "Add List..." : "Dodaj seznam ...",
     "New List" : "Nov seznam",
     "Load remaining completed tasks." : "Naloži preostale končane naloge.",
+    "Loading the task..." : "Poteka nalaganje naloge ...",
+    "Task not found!" : "Naloge ni mogoče najti!",
     "Settings" : "Nastavitve",
     "Done" : "Končano",
     "General" : "Splošno",
