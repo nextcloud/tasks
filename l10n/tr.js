@@ -46,7 +46,7 @@ OC.L10N.register(
     "hours" : "saat",
     "minute" : "dakika",
     "minutes" : "dakika",
-    "second" : "ikinci",
+    "second" : "saniye",
     "before beginning" : "başlamadan önce",
     "after beginning" : "başladıktan sonra",
     "before end" : "bitmeden önce",
