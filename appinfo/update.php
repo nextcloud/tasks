@@ -24,7 +24,7 @@ if ( version_compare($installedVersionTasksEnhanced, '0.4.1', '<=') && version_c
 				if($task['objecttype']!='VTODO') {
 					continue;
 				}
-				$vcalendar = \OC_VObject::parse($task['calendardata']);
+				$vcalendar = \Sabre\VObject\Reader::read($task['calendardata']);
 				$vtodo = $vcalendar->VTODO;
 				$children = $vtodo->children;
 				$taskId = $task['id'];
@@ -53,7 +53,7 @@ if ( version_compare($installedVersionTasksEnhanced, '0.4.1', '<=') && version_c
 					$data = $vcalendar->serialize();
 					$oldobject = \OC_Calendar_Object::find($taskId);
 
-					$object = \OC_VObject::parse($data);
+					$object = \Sabre\VObject\Reader::read($data);
 
 					$type = 'VTODO';
 					$startdate = null;

@@ -212,8 +212,8 @@ class TasksController extends Controller {
 				$vtodo->__unset('PERCENT-COMPLETE');
 			}
 			if ($percent_complete == 100) {
-				$vtodo->setString('STATUS', 'COMPLETED');
-				$vtodo->setDateTime('COMPLETED', 'now', \Sabre\VObject\Property\DateTime::UTC);
+				$vtodo->STATUS = 'COMPLETED';
+				$vtodo->COMPLETED = new \DateTime('now', new \DateTimeZone('UTC'));
 			} elseif ($percent_complete != 0) {
 				$vtodo->setString('STATUS', 'IN-PROCESS');
 				unset($vtodo->COMPLETED);
@@ -386,8 +386,7 @@ class TasksController extends Controller {
 
 				$due = new \DateTime('@'.$due);
 				$due->setTimezone($timezone);
-				$type = \Sabre\VObject\Property\DateTime::LOCALTZ;
-				$vtodo->setDateTime('DUE', $due, $type);
+				$vtodo->DUE = $due;
 			} else {
 				unset($vtodo->DUE);
 			}
@@ -415,8 +414,7 @@ class TasksController extends Controller {
 
 				$start = new \DateTime('@'.$start);
 				$start->setTimezone($timezone);
-				$type = \Sabre\VObject\Property\DateTime::LOCALTZ;
-				$vtodo->setDateTime('DTSTART', $start, $type);
+				$vtodo->DTSTART = $start;
 			} else {
 				unset($vtodo->DTSTART);
 			}
@@ -444,14 +442,14 @@ class TasksController extends Controller {
 
 		if ($type == false){
 			unset($vtodo->VALARM);
-			$vtodo->setDateTime('LAST-MODIFIED', 'now', \Sabre\VObject\Property\DateTime::UTC);
-			$vtodo->setDateTime('DTSTAMP', 'now', \Sabre\VObject\Property\DateTime::UTC);
+			$vtodo->__get('LAST-MODIFIED')->setValue(new \DateTime('now', new \DateTimeZone('UTC')));
+			$vtodo->DTSTAMP = new \DateTime('now', new \DateTimeZone('UTC'));
 			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
 		}
 		elseif (in_array($type,$types)) {
 			try{
 				if($valarm == null) {
-					$valarm = new \OC_VObject('VALARM');
+					$valarm = $vcalendar->createComponent('VALARM');
 					$valarm->setString('ACTION', $action);
 					$valarm->setString('DESCRIPTION', 'Default Event Notification');
 					$valarm->setString('');
@@ -504,8 +502,8 @@ class TasksController extends Controller {
 				} else {
 					$valarm->addProperty('TRIGGER', $tv, array('VALUE' => $type));
 				}
-				$vtodo->setDateTime('LAST-MODIFIED', 'now', \Sabre\VObject\Property\DateTime::UTC);
-				$vtodo->setDateTime('DTSTAMP', 'now', \Sabre\VObject\Property\DateTime::UTC);
+				$vtodo->__get('LAST-MODIFIED')->setValue(new \DateTime('now', new \DateTimeZone('UTC')));
+				$vtodo->DTSTAMP = new \DateTime('now', new \DateTimeZone('UTC'));
 				\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
 			} catch (\Exception $e) {
 
