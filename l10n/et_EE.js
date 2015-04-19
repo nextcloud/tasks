@@ -80,6 +80,8 @@ OC.L10N.register(
     "Add List..." : "Lisa nimekirja...",
     "New List" : "Uus nimekiri",
     "Load remaining completed tasks." : "Laadi ülejäänud lõpetatud ülesanded",
+    "Loading the task..." : "Ülesande laadimine...",
+    "Task not found!" : "Ülesannet ei leitud!",
     "Settings" : "Seaded",
     "Done" : "Valmis",
     "General" : "Üldine",
