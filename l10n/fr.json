@@ -70,7 +70,7 @@
     "Add a current item in \"%s\"..." : "Ajouter un élément courant dans \"%s\"...",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n tâche terminée","%n tâches terminées"],
     "Set due date" : "Spécifier la date d'échéance",
-    "%s %% completed" : "%s %% terminé",
+    "%s %% completed" : "complétée à %s %%",
     "Remind me" : "Rappel",
     "at the end" : "à la fin",
     "at the beginning" : "au début",
