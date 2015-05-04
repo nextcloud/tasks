@@ -69,7 +69,7 @@ $TRANSLATIONS = array(
 "Add an item due today in \"%s\"..." => "Добавить элемент сегодня в \"%s\"...",
 "Add an item in \"%s\"..." => "Добавить элемент в \"%s\"...",
 "Add a current item in \"%s\"..." => "Добавить текущий элемент в \"%s\"...",
-"_%n Completed Task_::_%n Completed Tasks_" => array("%n Завершенное Задание","%n Завершенных Задания","%n Завершенных Заданий"),
+"_%n Completed Task_::_%n Completed Tasks_" => array("%n Завершенное Задание","%n Завершенных Задания","%n Завершенных Заданий","%n Завершенных Заданий"),
 "Set due date" => "Установить срок исполнения",
 "%s %% completed" => "%s %% завершено",
 "Remind me" => "Напомнить мне",
@@ -89,4 +89,4 @@ $TRANSLATIONS = array(
 "Smart Collections" => "Умные Коллекции",
 "Visibility of Smart Collections" => "Доступность Умных Коллекций"
 );
-$PLURAL_FORMS = "nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);";
+$PLURAL_FORMS = "nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);";
