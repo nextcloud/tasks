@@ -906,6 +906,7 @@
   font-weight: 500;
   outline: medium none;
   padding: 4px;
+  transition: all 0.2s ease-in-out 0s;
 }
 #task-details div.content-wrapper .body .section input.focus {
   background-color: #F8F8F8;

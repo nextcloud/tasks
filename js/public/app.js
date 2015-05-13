@@ -26,7 +26,7 @@
   ]);
 
   angular.module('Tasks').run([
-    'Config', '$timeout', 'ListsBusinessLayer', 'TasksBusinessLayer', 'SearchBusinessLayer', function(Config, $timeout, TasksBusinessLayer, ListsBusinessLayer, SearchBusinessLayer) {
+    '$document', '$rootScope', 'Config', '$timeout', 'ListsBusinessLayer', 'TasksBusinessLayer', 'SearchBusinessLayer', function($document, $rootScope, Config, $timeout, TasksBusinessLayer, ListsBusinessLayer, SearchBusinessLayer) {
       var init, update;
       init = false;
       (update = function() {
@@ -42,6 +42,9 @@
         return timeOutUpdate();
       })();
       OCA.Search.tasks = SearchBusinessLayer;
+      $document.click(function(event) {
+        $rootScope.$broadcast('documentClicked', event);
+      });
       moment.lang('details', {
         calendar: {
           lastDay: '[' + t('tasks', 'Due yesterday') + '], HH:mm',
@@ -127,6 +130,29 @@
       });
     }
   ]);
+
+}).call(this);
+
+(function() {
+  angular.module('Tasks').directive('appNavigationEntryUtils', function() {
+    'use strict';
+    return {
+      restrict: 'C',
+      link: function(scope, elm) {
+        var button, menu;
+        menu = elm.siblings('.app-navigation-entry-menu');
+        button = $(elm).find('.app-navigation-entry-utils-menu-button button');
+        button.click(function() {
+          menu.toggleClass('open');
+        });
+        scope.$on('documentClicked', function(scope, event) {
+          if (event.target !== button[0]) {
+            menu.removeClass('open');
+          }
+        });
+      }
+    };
+  });
 
 }).call(this);
 
