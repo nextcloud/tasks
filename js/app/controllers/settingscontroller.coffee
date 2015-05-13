@@ -20,15 +20,15 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 ###
 angular.module('Tasks').controller 'SettingsController',
-['$scope', '$window', 'Status', '$location','$modalInstance',
+['$scope', '$window', 'Status', '$location',
 'CollectionsModel', 'SettingsBusinessLayer', 'SettingsModel'
-($scope, $window, Status, $location, $modalInstance,CollectionsModel,
+($scope, $window, Status, $location, CollectionsModel,
 	SettingsBusinessLayer, SettingsModel) ->
 
 	class SettingsController
 
 		constructor: (@_$scope, @_$window, @_$status,
-		@_$location, @_$modalInstance, @_$collectionsmodel,
+		@_$location, @_$collectionsmodel,
 		@_$settingsbusinesslayer, @_$settingsmodel) ->
 
 			@_$scope.status = @_$status.getStatus()
@@ -73,9 +73,6 @@ angular.module('Tasks').controller 'SettingsController',
 					name: t('tasks','Saturday')}
 			]
 
-			@_$scope.ok = () =>
-				$modalInstance.close()
-
 			@_$scope.setVisibility = (collectionID) =>
 				collection = _$collectionsmodel.getById(collectionID)
 				_$settingsbusinesslayer.setVisibility(collectionID,collection.show)
@@ -86,6 +83,5 @@ angular.module('Tasks').controller 'SettingsController',
 
 
 	return new SettingsController($scope, $window, Status, $location,
-		$modalInstance, CollectionsModel, SettingsBusinessLayer,
-		SettingsModel)
+		CollectionsModel, SettingsBusinessLayer, SettingsModel)
 ]

@@ -38,16 +38,21 @@
                 </a>
             <li>
         </ul>
-        <div id="app-settings">
+        <div id="app-settings" ng-controller="SettingsController">
             <div id="app-settings-header">
                 <button class="settings-button" data-apps-slide-toggle="#app-settings-content"></button>
             </div>
             <div id="app-settings-content">
                 <h2><label for="startOfWeek"><?php p($l->t('Start of week')); ?></label></h2>
                 <select id="startOfWeek" ng-change="setStartOfWeek()" ng-model="settingsmodel.getById('various').startOfWeek" ng-options="startOfWeekOption.id as startOfWeekOption.name for startOfWeekOption in startOfWeekOptions"></select>
-                <a class="settings" ng-click="showSettings()" stop-event="click">
-                    More Settings
-                </a>
+                <h2 class="bold"><?php p($l->t('Visibility of Smart Collections')); ?></h2>
+                <ul>
+                    <li ng-repeat="collection in collections">
+                        <span class="icon collection-{{ collection.id }}"><text ng-show="collection.id=='today'"><?php p($_['DOM']); ?></text></span>
+                        <label for="visibilityCollection-{{collection.id}}" class="title"><text>{{ collection.displayname }}</text></label>
+                        <select id="visibilityCollection-{{collection.id}}" ng-change="setVisibility(collection.id)" ng-model="collection.show" ng-options="collectionOption.id as collectionOption.name for collectionOption in collectionOptions"></select>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -96,7 +101,4 @@
             </div>
         </div>
     </div>
-    <script type="text/ng-template" id="part.settings.html">
-        <?php print_unescaped($this->inc('part.settings')); ?>
-    </script>
 </div>

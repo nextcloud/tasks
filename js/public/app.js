@@ -429,10 +429,10 @@
 
 (function() {
   angular.module('Tasks').controller('AppController', [
-    '$scope', 'Persistence', '$route', 'Status', '$timeout', '$location', '$routeParams', 'Loading', '$modal', 'SettingsModel', function($scope, Persistence, $route, status, $timeout, $location, $routeParams, Loading, $modal, SettingsModel) {
+    '$scope', 'Persistence', '$route', 'Status', '$timeout', '$location', '$routeParams', 'Loading', 'SettingsModel', function($scope, Persistence, $route, status, $timeout, $location, $routeParams, Loading, SettingsModel) {
       var AppController;
       AppController = (function() {
-        function AppController(_$scope, _persistence, _$route, _$status, _$timeout, _$location, _$routeparams, _Loading, _$modal, _$settingsmodel) {
+        function AppController(_$scope, _persistence, _$route, _$status, _$timeout, _$location, _$routeparams, _Loading, _$settingsmodel) {
           var successCallback,
             _this = this;
           this._$scope = _$scope;
@@ -443,7 +443,6 @@
           this._$location = _$location;
           this._$routeparams = _$routeparams;
           this._Loading = _Loading;
-          this._$modal = _$modal;
           this._$settingsmodel = _$settingsmodel;
           this._$scope.initialized = false;
           this._$scope.status = this._$status.getStatus();
@@ -467,20 +466,12 @@
           this._$scope.isLoading = function() {
             return _Loading.isLoading();
           };
-          this._$scope.showSettings = function() {
-            return _$scope.modalInstance = _$modal.open({
-              templateUrl: 'part.settings.html',
-              controller: 'SettingsController',
-              backdrop: true,
-              windowClass: 'test'
-            });
-          };
         }
 
         return AppController;
 
       })();
-      return new AppController($scope, Persistence, $route, status, $timeout, $location, $routeParams, Loading, $modal, SettingsModel);
+      return new AppController($scope, Persistence, $route, status, $timeout, $location, $routeParams, Loading, SettingsModel);
     }
   ]);
 
@@ -1004,16 +995,15 @@
 
 (function() {
   angular.module('Tasks').controller('SettingsController', [
-    '$scope', '$window', 'Status', '$location', '$modalInstance', 'CollectionsModel', 'SettingsBusinessLayer', 'SettingsModel', function($scope, $window, Status, $location, $modalInstance, CollectionsModel, SettingsBusinessLayer, SettingsModel) {
+    '$scope', '$window', 'Status', '$location', 'CollectionsModel', 'SettingsBusinessLayer', 'SettingsModel', function($scope, $window, Status, $location, CollectionsModel, SettingsBusinessLayer, SettingsModel) {
       var SettingsController;
       SettingsController = (function() {
-        function SettingsController(_$scope, _$window, _$status, _$location, _$modalInstance, _$collectionsmodel, _$settingsbusinesslayer, _$settingsmodel) {
+        function SettingsController(_$scope, _$window, _$status, _$location, _$collectionsmodel, _$settingsbusinesslayer, _$settingsmodel) {
           var _this = this;
           this._$scope = _$scope;
           this._$window = _$window;
           this._$status = _$status;
           this._$location = _$location;
-          this._$modalInstance = _$modalInstance;
           this._$collectionsmodel = _$collectionsmodel;
           this._$settingsbusinesslayer = _$settingsbusinesslayer;
           this._$settingsmodel = _$settingsmodel;
@@ -1056,9 +1046,6 @@
               name: t('tasks', 'Saturday')
             }
           ];
-          this._$scope.ok = function() {
-            return $modalInstance.close();
-          };
           this._$scope.setVisibility = function(collectionID) {
             var collection;
             collection = _$collectionsmodel.getById(collectionID);
@@ -1072,7 +1059,7 @@
         return SettingsController;
 
       })();
-      return new SettingsController($scope, $window, Status, $location, $modalInstance, CollectionsModel, SettingsBusinessLayer, SettingsModel);
+      return new SettingsController($scope, $window, Status, $location, CollectionsModel, SettingsBusinessLayer, SettingsModel);
     }
   ]);
 
