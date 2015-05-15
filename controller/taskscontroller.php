@@ -163,7 +163,7 @@ class TasksController extends Controller {
 			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
 			$vtodo = $vcalendar->VTODO;
 			if($isStarred){
-				$vtodo->setString('PRIORITY',1);
+				$vtodo->PRIORITY = 1;
 			}else{
 				$vtodo->__unset('PRIORITY');
 			}
@@ -207,7 +207,7 @@ class TasksController extends Controller {
 			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
 			$vtodo = $vcalendar->VTODO;
 			if (!empty($percent_complete)) {
-				$vtodo->setString('PERCENT-COMPLETE', $percent_complete);
+				$vtodo->{'PERCENT-COMPLETE'} = $percent_complete;
 			}else{
 				$vtodo->__unset('PERCENT-COMPLETE');
 			}
@@ -215,10 +215,10 @@ class TasksController extends Controller {
 				$vtodo->STATUS = 'COMPLETED';
 				$vtodo->COMPLETED = new \DateTime('now', new \DateTimeZone('UTC'));
 			} elseif ($percent_complete != 0) {
-				$vtodo->setString('STATUS', 'IN-PROCESS');
+				$vtodo->STATUS = 'IN-PROCESS';
 				unset($vtodo->COMPLETED);
 			} else{
-				$vtodo->setString('STATUS', 'NEEDS-ACTION');
+				$vtodo->STATUS = 'NEEDS-ACTION';
 				unset($vtodo->COMPLETED);
 			}
 			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
@@ -326,7 +326,7 @@ class TasksController extends Controller {
 		try {
 			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
 			$vtodo = $vcalendar->VTODO;
-			$vtodo->setString('SUMMARY', $taskName);
+			$vtodo->SUMMARY = $taskName;
 			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
 		} catch(\Exception $e) {
 			// throw new BusinessLayerException($e->getMessage());
@@ -362,7 +362,7 @@ class TasksController extends Controller {
 		try {
 			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
 			$vtodo = $vcalendar->VTODO;
-			$vtodo->setString('DESCRIPTION', $note);
+			$vtodo->DESCRIPTION = $note;
 			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
 		} catch(\Exception $e) {
 			// throw new BusinessLayerException($e->getMessage());
@@ -450,9 +450,8 @@ class TasksController extends Controller {
 			try{
 				if($valarm == null) {
 					$valarm = $vcalendar->createComponent('VALARM');
-					$valarm->setString('ACTION', $action);
-					$valarm->setString('DESCRIPTION', 'Default Event Notification');
-					$valarm->setString('');
+					$valarm->ACTION = $action;
+					$valarm->DESCRIPTION = 'Default Event Notification';
 					$vtodo->add($valarm);
 				} else {
 					unset($valarm->TRIGGER);
@@ -522,7 +521,7 @@ class TasksController extends Controller {
 		try {
 			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
 			$vtodo = $vcalendar->VTODO;
-			$vtodo->setString('CATEGORIES', $categories);
+			$vtodo->CATEGORIES = $categories;
 			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
 		} catch(\Exception $e) {
 			// throw new BusinessLayerException($e->getMessage());
@@ -540,7 +539,7 @@ class TasksController extends Controller {
 		try {
 			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
 			$vtodo = $vcalendar->VTODO;
-			$vtodo->setString('LOCATION', $location);
+			$vtodo->LOCATION = $location;
 			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
 		} catch(\Exception $e) {
 			// throw new BusinessLayerException($e->getMessage());
