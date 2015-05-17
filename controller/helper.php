@@ -37,10 +37,10 @@ Class Helper {
 		$task = array( 'id' => $id );
 		$task['calendarid'] = $calendarId;
 		$task['type'] = 'task';
-		$task['name'] = $vtodo->SUMMARY;
-		$task['created'] = $vtodo->CREATED;
-		$task['note'] = $vtodo->DESCRIPTION;
-		$task['location'] = $vtodo->LOCATION;
+		$task['name'] = (string) $vtodo->SUMMARY;
+		$task['created'] = (string) $vtodo->CREATED;
+		$task['note'] = (string) $vtodo->DESCRIPTION;
+		$task['location'] = (string) $vtodo->LOCATION;
 		$task['categories'] = $vtodo->CATEGORIES->getParts();
 		$start = $vtodo->DTSTART;
 		if ($start) {
