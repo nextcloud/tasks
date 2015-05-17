@@ -497,9 +497,9 @@ class TasksController extends Controller {
 					}
 				}
 				if($related == 'END'){
-					$valarm->addProperty('TRIGGER', $tv, array('VALUE' => $type, 'RELATED' => $related));
+					$valarm->add('TRIGGER', $tv, array('VALUE' => $type, 'RELATED' => $related));
 				} else {
-					$valarm->addProperty('TRIGGER', $tv, array('VALUE' => $type));
+					$valarm->add('TRIGGER', $tv, array('VALUE' => $type));
 				}
 				$vtodo->__get('LAST-MODIFIED')->setValue(new \DateTime('now', new \DateTimeZone('UTC')));
 				$vtodo->DTSTAMP = new \DateTime('now', new \DateTimeZone('UTC'));
