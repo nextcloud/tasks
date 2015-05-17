@@ -41,7 +41,10 @@ Class Helper {
 		$task['created'] = (string) $vtodo->CREATED;
 		$task['note'] = (string) $vtodo->DESCRIPTION;
 		$task['location'] = (string) $vtodo->LOCATION;
-		$task['categories'] = $vtodo->CATEGORIES->getParts();
+		$categories = $vtodo->CATEGORIES;
+		if ($categories){
+			$task['categories'] = $categories->getParts();
+		}
 		$start = $vtodo->DTSTART;
 		if ($start) {
 			try {
@@ -72,8 +75,8 @@ Class Helper {
 		if($reminder) {
 			try {
 
-				$reminderType = $reminder->TRIGGER['VALUE']->value;
-				$reminderAction = $reminder->ACTION->value;
+				$reminderType = $reminder->TRIGGER['VALUE']->getValue();
+				$reminderAction = $reminder->ACTION->getValue();
 				$reminderDate = null;
 				$reminderDuration = null;
 
@@ -88,7 +91,7 @@ Class Helper {
 					// Calculate the reminder date from duration and start date
 					$related = null;
 					if(is_object($reminder->TRIGGER['RELATED'])){
-						$related = $reminder->TRIGGER['RELATED']->value;
+						$related = $reminder->TRIGGER['RELATED']->getValue();
 						if($related == 'END' && $due){
 							$reminderDate = $due->modify($parsed)->format('Ymd\THis');
 						} else {
@@ -172,20 +175,42 @@ Class Helper {
 		} else {
 			$task['completed'] = false;
 		}
-		$percentComplete = $vtodo->__get('PERCENT-COMPLETE')->getValue();
-		$task['complete'] = $percentComplete === '' ? '0' : $percentComplete;
+
+
+		$percentComplete = $vtodo->__get('PERCENT-COMPLETE');
+		if($percentComplete){
+			$task['complete'] = $percentComplete->getValue();
+		} else {
+			$task['complete'] = '0';
+		}
+
+
 		$comments = $vtodo->COMMENT;
 		if($comments){
 			$comments_parsed = array();
 			foreach($comments as $com) {
-				$time = new \DateTime($com['X-OC-DATE-TIME']->value);
-				$time->setTimezone(new \DateTimeZone($user_timezone));
-				$time = $time->format('Ymd\THis');
+				// parse time
+				$time = $com['X-OC-DATE-TIME'];
+				if ($time) {
+					$time = new \DateTime($time);
+					$time->setTimezone(new \DateTimeZone($user_timezone));
+					$time = $time->format('Ymd\THis');
+				}
+				// parse comment ID
+				$comID = $com['X-OC-ID'];
+				if ($comID) {
+					$comID = $com['X-OC-ID']->getValue();
+				}
+				// parse user ID
+				$userID = $com['X-OC-USERID'];
+				if ($userID) {
+					$userID = (string) $com['X-OC-USERID']->getValue();
+				}
 				$comments_parsed[] = array(
-					'id' => (int)$com['X-OC-ID']->value,
-					'userID' => $com['X-OC-USERID']->value,
-					'name' => \OCP\User::getDisplayName($com['X-OC-USERID']->value),
-					'comment' => $com->value,
+					'id' => $comID,
+					'userID' => $userID,
+					'name' => \OCP\User::getDisplayName($userID),
+					'comment' => $com->getValue(),
 					'time' => $time
 					);
 			}
