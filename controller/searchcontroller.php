@@ -67,7 +67,7 @@ class SearchController extends \OCP\Search\Provider {
 				$comments = $vtodo->COMMENT;
 				if($comments) {
 					foreach($comments as $com) {
-						if (stripos($com->value, $query) !== false) {
+						if (stripos($com->getValue(), $query) !== false) {
 							// $results[] = new \OCA\Tasks\Controller\Task($id,$calendarId,$vtodo,'COMMENTS',$query,$user_timezone);
 							$results[] = Helper::arrayForJSON($id, $vtodo, $user_timezone, $calendarId);
 							continue 2;
