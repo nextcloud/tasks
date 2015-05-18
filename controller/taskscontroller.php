@@ -558,12 +558,17 @@ class TasksController extends Controller {
 			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
 			$vtodo = $vcalendar->VTODO;
 
-			// Determine new commentId by looping through all comments
-			$commentIds = array();
-			foreach($vtodo->COMMENT as $com) {
-				$commentIds[] = (int)$com['X-OC-ID']->getValue();
+			if($vtodo->COMMENT == "") {
+				// if this is the first comment set the id to 0
+				$commentId = 0;
+			} else {
+				// Determine new commentId by looping through all comments
+				$commentIds = array();
+				foreach($vtodo->COMMENT as $com) {
+					$commentIds[] = (int)$com['X-OC-ID']->getValue();
+				}
+				$commentId = 1+max($commentIds);
 			}
-			$commentId = 1+max($commentIds);
 
 			$now = 	new \DateTime();
 			$vtodo->add('COMMENT',$comment,
