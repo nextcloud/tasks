@@ -28,7 +28,7 @@ use Sabre\VObject;
 Class Helper {
 
 	public static function parseVTODO($data) {
-		$object = \OC_VObject::parse($data);
+		$object = \Sabre\VObject\Reader::read($data);
 		$vtodo = $object->VTODO;
 		return $vtodo;
 	}
@@ -37,11 +37,14 @@ Class Helper {
 		$task = array( 'id' => $id );
 		$task['calendarid'] = $calendarId;
 		$task['type'] = 'task';
-		$task['name'] = $vtodo->getAsString('SUMMARY');
-		$task['created'] = $vtodo->getAsString('CREATED');
-		$task['note'] = $vtodo->getAsString('DESCRIPTION');
-		$task['location'] = $vtodo->getAsString('LOCATION');
-		$task['categories'] = $vtodo->getAsArray('CATEGORIES');
+		$task['name'] = (string) $vtodo->SUMMARY;
+		$task['created'] = (string) $vtodo->CREATED;
+		$task['note'] = (string) $vtodo->DESCRIPTION;
+		$task['location'] = (string) $vtodo->LOCATION;
+		$categories = $vtodo->CATEGORIES;
+		if ($categories){
+			$task['categories'] = $categories->getParts();
+		}
 		$start = $vtodo->DTSTART;
 		if ($start) {
 			try {
@@ -72,8 +75,8 @@ Class Helper {
 		if($reminder) {
 			try {
 
-				$reminderType = $reminder->TRIGGER['VALUE']->value;
-				$reminderAction = $reminder->ACTION->value;
+				$reminderType = $reminder->TRIGGER['VALUE']->getValue();
+				$reminderAction = $reminder->ACTION->getValue();
 				$reminderDate = null;
 				$reminderDuration = null;
 
@@ -88,7 +91,7 @@ Class Helper {
 					// Calculate the reminder date from duration and start date
 					$related = null;
 					if(is_object($reminder->TRIGGER['RELATED'])){
-						$related = $reminder->TRIGGER['RELATED']->value;
+						$related = $reminder->TRIGGER['RELATED']->getValue();
 						if($related == 'END' && $due){
 							$reminderDate = $due->modify($parsed)->format('Ymd\THis');
 						} else {
@@ -152,7 +155,7 @@ Class Helper {
 		} else {
 			$task['reminder'] = null;
 		}
-		$starred = $vtodo->getAsString('PRIORITY');
+		$starred = $vtodo->PRIORITY;
 		if($starred){
 			$task['starred'] = true;
 		} else {
@@ -172,19 +175,42 @@ Class Helper {
 		} else {
 			$task['completed'] = false;
 		}
-		$task['complete'] = $vtodo->getAsString('PERCENT-COMPLETE')==''?'0':$vtodo->getAsString('PERCENT-COMPLETE');
+
+
+		$percentComplete = $vtodo->__get('PERCENT-COMPLETE');
+		if($percentComplete){
+			$task['complete'] = $percentComplete->getValue();
+		} else {
+			$task['complete'] = '0';
+		}
+
+
 		$comments = $vtodo->COMMENT;
 		if($comments){
 			$comments_parsed = array();
 			foreach($comments as $com) {
-				$time = new \DateTime($com['X-OC-DATE-TIME']->value);
-				$time->setTimezone(new \DateTimeZone($user_timezone));
-				$time = $time->format('Ymd\THis');
+				// parse time
+				$time = $com['X-OC-DATE-TIME'];
+				if ($time) {
+					$time = new \DateTime($time);
+					$time->setTimezone(new \DateTimeZone($user_timezone));
+					$time = $time->format('Ymd\THis');
+				}
+				// parse comment ID
+				$comID = $com['X-OC-ID'];
+				if ($comID) {
+					$comID = $com['X-OC-ID']->getValue();
+				}
+				// parse user ID
+				$userID = $com['X-OC-USERID'];
+				if ($userID) {
+					$userID = (string) $com['X-OC-USERID']->getValue();
+				}
 				$comments_parsed[] = array(
-					'id' => (int)$com['X-OC-ID']->value,
-					'userID' => $com['X-OC-USERID']->value,
-					'name' => \OCP\User::getDisplayName($com['X-OC-USERID']->value),
-					'comment' => $com->value,
+					'id' => $comID,
+					'userID' => $userID,
+					'name' => \OCP\User::getDisplayName($userID),
+					'comment' => $com->getValue(),
 					'time' => $time
 					);
 			}
@@ -195,38 +221,50 @@ Class Helper {
 
 
 	public static function createVCalendarFromRequest($request){
-		$vcalendar = new \OC_VObject('VCALENDAR');
-		$vcalendar->add('PRODID', 'ownCloud Calendar');
-		$vcalendar->add('VERSION', '2.0');
+		$vcalendar = new \Sabre\VObject\Component\VCalendar();
+		$vcalendar->PRODID = 'ownCloud Calendar';
+		$vcalendar->VERSION = '2.0';
 
-		$vtodo = new \OC_VObject('VTODO');
+		$vtodo = $vcalendar->createComponent('VTODO');
 		$vcalendar->add($vtodo);
 
-		$vtodo->setDateTime('CREATED', 'now', \Sabre\VObject\Property\DateTime::UTC);
+		$vtodo->CREATED = new \DateTime('now', new \DateTimeZone('UTC'));
 
-		$vtodo->setUID();
+		$vtodo->UID = \Sabre\VObject\UUIDUtil::getUUID();
 		return self::updateVCalendarFromRequest($request, $vcalendar);
 	}
 
 	public static function updateVCalendarFromRequest($request, $vcalendar){
 		$vtodo = $vcalendar->VTODO;
 
-		$vtodo->setDateTime('LAST-MODIFIED', 'now', \Sabre\VObject\Property\DateTime::UTC);
-		$vtodo->setDateTime('DTSTAMP', 'now', \Sabre\VObject\Property\DateTime::UTC);
-		$vtodo->setString('SUMMARY', $request['summary']);
+		$lastModified = $vtodo->__get('LAST-MODIFIED');
+		if(is_null($lastModified)) {
+			$lastModified = $vtodo->add('LAST-MODIFIED');
+		}
+		$lastModified->setValue(new \DateTime('now', new \DateTimeZone('UTC')));
+		$vtodo->DTSTAMP = new \DateTime('now', new \DateTimeZone('UTC'));
+		$vtodo->SUMMARY = $request['summary'];
 
-		$vtodo->setString('LOCATION', $request['location']);
-		$vtodo->setString('DESCRIPTION', $request['description']);
-		$vtodo->setString('CATEGORIES', $request["categories"]);
-		$vtodo->setString('PRIORITY', $request['priority']);
-		$vtodo->setString('PERCENT-COMPLETE', $request['complete']);
+		$vtodo->LOCATION = $request['location'];
+		$vtodo->DESCRIPTION = $request['description'];
+		$vtodo->CATEGORIES = $request["categories"];
+		$vtodo->PRIORITY = $request['priority'];
+		$percentComplete = $vtodo->__get('PERCENT-COMPLETE');
+		if (is_null($percentComplete)) {
+			$percentComplete = $vtodo->add('PERCENT-COMPLETE');
+		}
+		if (isset($request['complete'])) {
+			$percentComplete->setValue($request['complete']);
+		} else {
+			$percentComplete->setValue('0');
+		}
 
 		$due = $request['due'];
 		if ($due) {
 			$timezone = \OC_Calendar_App::getTimezone();
 			$timezone = new \DateTimeZone($timezone);
 			$due = new \DateTime($due, $timezone);
-			$vtodo->setDateTime('DUE', $due);
+			$vtodo->DUE = $due;
 		} else {
 			unset($vtodo->DUE);
 		}
@@ -235,7 +273,7 @@ Class Helper {
 			$timezone = \OC_Calendar_App::getTimezone();
 			$timezone = new \DateTimeZone($timezone);
 			$start = new \DateTime($start, $timezone);
-			$vtodo->setDateTime('DTSTART', $start);
+			$vtodo->DTSTART = $start;
 		} else {
 			unset($vtodo->DTSTART);
 		}

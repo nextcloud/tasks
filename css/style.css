@@ -1349,7 +1349,7 @@ div.percentdone {
 }
 #searchresults {
   padding-top: 0px !important;
-  margin-top: 20px;
+  margin-top: 20px !important;
   background-color: transparent !important;
 }
 #searchresults #status {

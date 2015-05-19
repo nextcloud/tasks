@@ -163,7 +163,7 @@ class TasksController extends Controller {
 			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
 			$vtodo = $vcalendar->VTODO;
 			if($isStarred){
-				$vtodo->setString('PRIORITY',1);
+				$vtodo->PRIORITY = 1;
 			}else{
 				$vtodo->__unset('PRIORITY');
 			}
@@ -207,18 +207,18 @@ class TasksController extends Controller {
 			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
 			$vtodo = $vcalendar->VTODO;
 			if (!empty($percent_complete)) {
-				$vtodo->setString('PERCENT-COMPLETE', $percent_complete);
+				$vtodo->{'PERCENT-COMPLETE'} = $percent_complete;
 			}else{
 				$vtodo->__unset('PERCENT-COMPLETE');
 			}
 			if ($percent_complete == 100) {
-				$vtodo->setString('STATUS', 'COMPLETED');
-				$vtodo->setDateTime('COMPLETED', 'now', \Sabre\VObject\Property\DateTime::UTC);
+				$vtodo->STATUS = 'COMPLETED';
+				$vtodo->COMPLETED = new \DateTime('now', new \DateTimeZone('UTC'));
 			} elseif ($percent_complete != 0) {
-				$vtodo->setString('STATUS', 'IN-PROCESS');
+				$vtodo->STATUS = 'IN-PROCESS';
 				unset($vtodo->COMPLETED);
 			} else{
-				$vtodo->setString('STATUS', 'NEEDS-ACTION');
+				$vtodo->STATUS = 'NEEDS-ACTION';
 				unset($vtodo->COMPLETED);
 			}
 			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
@@ -326,7 +326,7 @@ class TasksController extends Controller {
 		try {
 			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
 			$vtodo = $vcalendar->VTODO;
-			$vtodo->setString('SUMMARY', $taskName);
+			$vtodo->SUMMARY = $taskName;
 			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
 		} catch(\Exception $e) {
 			// throw new BusinessLayerException($e->getMessage());
@@ -362,7 +362,7 @@ class TasksController extends Controller {
 		try {
 			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
 			$vtodo = $vcalendar->VTODO;
-			$vtodo->setString('DESCRIPTION', $note);
+			$vtodo->DESCRIPTION = $note;
 			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
 		} catch(\Exception $e) {
 			// throw new BusinessLayerException($e->getMessage());
@@ -386,8 +386,7 @@ class TasksController extends Controller {
 
 				$due = new \DateTime('@'.$due);
 				$due->setTimezone($timezone);
-				$type = \Sabre\VObject\Property\DateTime::LOCALTZ;
-				$vtodo->setDateTime('DUE', $due, $type);
+				$vtodo->DUE = $due;
 			} else {
 				unset($vtodo->DUE);
 			}
@@ -415,8 +414,7 @@ class TasksController extends Controller {
 
 				$start = new \DateTime('@'.$start);
 				$start->setTimezone($timezone);
-				$type = \Sabre\VObject\Property\DateTime::LOCALTZ;
-				$vtodo->setDateTime('DTSTART', $start, $type);
+				$vtodo->DTSTART = $start;
 			} else {
 				unset($vtodo->DTSTART);
 			}
@@ -444,17 +442,16 @@ class TasksController extends Controller {
 
 		if ($type == false){
 			unset($vtodo->VALARM);
-			$vtodo->setDateTime('LAST-MODIFIED', 'now', \Sabre\VObject\Property\DateTime::UTC);
-			$vtodo->setDateTime('DTSTAMP', 'now', \Sabre\VObject\Property\DateTime::UTC);
+			$vtodo->__get('LAST-MODIFIED')->setValue(new \DateTime('now', new \DateTimeZone('UTC')));
+			$vtodo->DTSTAMP = new \DateTime('now', new \DateTimeZone('UTC'));
 			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
 		}
 		elseif (in_array($type,$types)) {
 			try{
 				if($valarm == null) {
-					$valarm = new \OC_VObject('VALARM');
-					$valarm->setString('ACTION', $action);
-					$valarm->setString('DESCRIPTION', 'Default Event Notification');
-					$valarm->setString('');
+					$valarm = $vcalendar->createComponent('VALARM');
+					$valarm->ACTION = $action;
+					$valarm->DESCRIPTION = 'Default Event Notification';
 					$vtodo->add($valarm);
 				} else {
 					unset($valarm->TRIGGER);
@@ -500,12 +497,12 @@ class TasksController extends Controller {
 					}
 				}
 				if($related == 'END'){
-					$valarm->addProperty('TRIGGER', $tv, array('VALUE' => $type, 'RELATED' => $related));
+					$valarm->add('TRIGGER', $tv, array('VALUE' => $type, 'RELATED' => $related));
 				} else {
-					$valarm->addProperty('TRIGGER', $tv, array('VALUE' => $type));
+					$valarm->add('TRIGGER', $tv, array('VALUE' => $type));
 				}
-				$vtodo->setDateTime('LAST-MODIFIED', 'now', \Sabre\VObject\Property\DateTime::UTC);
-				$vtodo->setDateTime('DTSTAMP', 'now', \Sabre\VObject\Property\DateTime::UTC);
+				$vtodo->__get('LAST-MODIFIED')->setValue(new \DateTime('now', new \DateTimeZone('UTC')));
+				$vtodo->DTSTAMP = new \DateTime('now', new \DateTimeZone('UTC'));
 				\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
 			} catch (\Exception $e) {
 
@@ -524,7 +521,7 @@ class TasksController extends Controller {
 		try {
 			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
 			$vtodo = $vcalendar->VTODO;
-			$vtodo->setString('CATEGORIES', $categories);
+			$vtodo->CATEGORIES = $categories;
 			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
 		} catch(\Exception $e) {
 			// throw new BusinessLayerException($e->getMessage());
@@ -542,7 +539,7 @@ class TasksController extends Controller {
 		try {
 			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
 			$vtodo = $vcalendar->VTODO;
-			$vtodo->setString('LOCATION', $location);
+			$vtodo->LOCATION = $location;
 			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
 		} catch(\Exception $e) {
 			// throw new BusinessLayerException($e->getMessage());
@@ -561,15 +558,20 @@ class TasksController extends Controller {
 			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
 			$vtodo = $vcalendar->VTODO;
 
-			// Determine new commentId by looping through all comments
-			$commentIds = array();
-			foreach($vtodo->COMMENT as $com) {
-				$commentIds[] = (int)$com['X-OC-ID']->value;
+			if($vtodo->COMMENT == "") {
+				// if this is the first comment set the id to 0
+				$commentId = 0;
+			} else {
+				// Determine new commentId by looping through all comments
+				$commentIds = array();
+				foreach($vtodo->COMMENT as $com) {
+					$commentIds[] = (int)$com['X-OC-ID']->getValue();
+				}
+				$commentId = 1+max($commentIds);
 			}
-			$commentId = 1+max($commentIds);
 
 			$now = 	new \DateTime();
-			$vtodo->addProperty('COMMENT',$comment,
+			$vtodo->add('COMMENT',$comment,
 				array(
 					'X-OC-ID' => $commentId,
 					'X-OC-USERID' => $this->userId,
@@ -612,7 +614,7 @@ class TasksController extends Controller {
 			$vtodo = $vcalendar->VTODO;
 			$commentIndex = $this->getCommentById($vtodo,$commentId);
 			$comment = $vtodo->children[$commentIndex];
-			if($comment['X-OC-USERID'] == $this->userId){
+			if($comment['X-OC-USERID']->getValue() == $this->userId){
 				unset($vtodo->children[$commentIndex]);
 				\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
 			}else{
@@ -630,7 +632,7 @@ class TasksController extends Controller {
 	public function getCommentById($vtodo,$commentId) {
 		$idx = 0;
 		foreach ($vtodo->children as $i => &$property) {
-			if ( $property->name == 'COMMENT' && $property['X-OC-ID']->value == $commentId ) {
+			if ( $property->name == 'COMMENT' && $property['X-OC-ID']->getValue() == $commentId ) {
 				return $idx;
 			}
 			$idx += 1;
