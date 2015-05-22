@@ -1,7 +1,7 @@
 (function(angular, $, moment, undefined){
 
 /**
- * ownCloud Task App - v0.1
+ * ownCloud Task App - v0.6.0
  *
  * Copyright (c) 2015 - Raimund Schlüßler <raimund.schluessler@googlemail.com>
  *
@@ -2982,8 +2982,8 @@
 
 (function() {
   angular.module('Tasks').factory('Request', [
-    '_Request', '$http', 'Publisher', 'Router', function(_Request, $http, Publisher, Router) {
-      return new _Request($http, Publisher, Router);
+    '_Request', '$http', 'Publisher', function(_Request, $http, Publisher) {
+      return new _Request($http, Publisher);
     }
   ]);
 
