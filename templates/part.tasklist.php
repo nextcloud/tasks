@@ -1,4 +1,5 @@
-<div ng-switch-default>
+<!-- <div ng-switch-default> -->
+<div ng-if="route.listID != 'week' && route.listID != 'starred' && route.listID != 'completed' && route.listID != 'all' && route.listID != 'today' && route.listID != 'current'">
     <div class="grouped-tasks">
         <ol class="tasks" rel="uncompleted" oc-drop-task>
             <li ng-repeat="(id, task) in tasks | filter:filterTasks(task,route.listID) | filter:{'completed':'false'} | filter:filterTasksByString(task) | orderBy:sortDue | orderBy:'starred':true"

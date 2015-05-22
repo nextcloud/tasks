@@ -39,27 +39,6 @@ angular.module('Tasks',['OC','ngRoute','ngAnimate','ui.bootstrap'])
 		redirectTo: '/lists/all'
 	})
 
-	###
-	overwrite angular's directive ngSwitchWhen
-   	to handle ng-switch-when="value1 || value2 || value3
-   	see
-	http://docs.angularjs.org/api/ng.directive:ngSwitch
-	###
-	$provide.decorator 'ngSwitchWhenDirective', ($delegate) ->
-		$delegate[0].compile = (element, attrs, transclude) ->
-			return (scope, element, attr, ctrl) ->
-				subCases = [attrs.ngSwitchWhen]
-				if(attrs.ngSwitchWhen && attrs.ngSwitchWhen.length > 0 &&
-				attrs.ngSwitchWhen.indexOf('||') != -1)
-					subCases = attrs.ngSwitchWhen.split('||')
-				i = 0
-				len = subCases.length
-				while(i<len)
-			        casee = $.trim(subCases[i++])
-			        ctrl.cases['!' + casee] = (ctrl.cases['!' + casee] || [])
-			        ctrl.cases['!' + casee]
-			        .push({ transclude: transclude, element: element })
-		return $delegate
 	return
 ]
 

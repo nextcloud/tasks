@@ -22,37 +22,6 @@
       $routeProvider.when('/lists/:listID', {}).when('/lists/:listID/edit/:listparameter', {}).when('/lists/:listID/tasks/:taskID', {}).when('/lists/:listID/tasks/:taskID/settings', {}).when('/lists/:listID/tasks/:taskID/edit/:parameter', {}).when('/search/:searchString', {}).when('/search/:searchString/tasks/:taskID', {}).when('/search/:searchString/tasks/:taskID/edit/:parameter', {}).otherwise({
         redirectTo: '/lists/all'
       });
-      /*
-      	overwrite angular's directive ngSwitchWhen
-        	to handle ng-switch-when="value1 || value2 || value3
-        	see
-      	http://docs.angularjs.org/api/ng.directive:ngSwitch
-      */
-
-      $provide.decorator('ngSwitchWhenDirective', function($delegate) {
-        $delegate[0].compile = function(element, attrs, transclude) {
-          return function(scope, element, attr, ctrl) {
-            var casee, i, len, subCases, _results;
-            subCases = [attrs.ngSwitchWhen];
-            if (attrs.ngSwitchWhen && attrs.ngSwitchWhen.length > 0 && attrs.ngSwitchWhen.indexOf('||') !== -1) {
-              subCases = attrs.ngSwitchWhen.split('||');
-            }
-            i = 0;
-            len = subCases.length;
-            _results = [];
-            while (i < len) {
-              casee = $.trim(subCases[i++]);
-              ctrl.cases['!' + casee] = ctrl.cases['!' + casee] || [];
-              _results.push(ctrl.cases['!' + casee].push({
-                transclude: transclude,
-                element: element
-              }));
-            }
-            return _results;
-          };
-        };
-        return $delegate;
-      });
     }
   ]);
 

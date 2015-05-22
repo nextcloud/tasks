@@ -1,4 +1,4 @@
-<div ng-switch-when="week">
+<div ng-if="route.listID=='week'">
     <div ng-repeat="day in days | filter:dayHasEntry(day)" class="grouped-tasks ui-droppable" rel="{{ list.id }}">
         <h2 class="heading">
             <text>{{ day | day  }}</text>
