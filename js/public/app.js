@@ -136,7 +136,7 @@
       restrict: 'A',
       scope: false,
       link: function(scope, elm, attr) {
-        return attr.$observe('userID', function() {
+        return attr.$observe('userid', function() {
           if (attr.userid) {
             return elm.avatar(attr.userid, attr.size);
           }
