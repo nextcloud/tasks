@@ -6,10 +6,10 @@
         <a class="detail-star" ng-click="toggleStarred(task.id)">
         	<span class="icon detail-star" ng-class="{'detail-starred':task.starred}"></span>
         </a>
-    	<div class="title">
+    	<div class="title" ng-class="{'editing':route.parameter=='name'}">
         	<span class="title-text" ng-class="{'strike-through':task.completed}" ng-click="editName()" stop-event="click"
-            ng-hide="route.parameter=='name'" oc-click-focus="{selector: '#editName', timeout: 0}">{{ task.name }}</span>
-            <div class="expandable-container" ng-show="route.parameter=='name'" stop-event="click">
+            oc-click-focus="{selector: '#editName', timeout: 0}">{{ task.name }}</span>
+            <div class="expandable-container" stop-event="click">
             	<div class="expandingArea active">
                     <pre><span>{{ task.name }}</span><br /></pre>
                     <textarea id="editName" maxlength="200" ng-model="task.name" ng-keydown="endName($event)"></textarea>
@@ -20,14 +20,14 @@
             <div class="section detail-start" ng-class="{'date':isDue(task.start), 'editing':route.parameter=='startdate'}" ng-click="editStart()" stop-event="click">
             <!-- oc-click-focus="{selector: 'div.detail-start input.datepicker-input', timeout: 0}" -->
                 <span class="icon detail-start" ng-class="{'overdue':isOverDue(task.start)}"></span>
-                <div class="section-title" ng-class="{'overdue':isOverDue(task.start)}" ng-hide="route.parameter=='startdate'">
+                <div class="section-title" ng-class="{'overdue':isOverDue(task.start)}">
                     <text>{{ task.start | startDetails }}</text>
                 </div>
                 <a class="detail-delete" ng-click="deleteStartDate()" stop-event="click">
                     <span class="icon detail-delete"></span>
                 </a>
                 <span class="icon detail-save" ng-click="endEdit()" stop-event="click"></span>
-                <div class="section-edit" ng-show="route.parameter=='startdate'">
+                <div class="section-edit">
                     <input class="datepicker-input medium focus" type="text" key-value="" placeholder="dd.mm.yyyy" value="{{ task.start | dateTaskList }}" datepicker="start">
                     <input class="timepicker-input medium focus" type="text" key-value="" placeholder="hh:mm" value="{{ task.start | timeTaskList }}" timepicker="start" stop-event="click">
                 </div>
@@ -35,14 +35,14 @@
             <div class="section detail-date" ng-class="{'date':isDue(task.due), 'editing':route.parameter=='duedate'}" ng-click="editDueDate()" stop-event="click">
             <!-- oc-click-focus="{selector: 'div.detail-date input.datepicker-input', timeout: 0}" -->
             	<span class="icon detail-date" ng-class="{'overdue':isOverDue(task.due)}"></span>
-                <div class="section-title" ng-class="{'overdue':isOverDue(task.due)}" ng-hide="route.parameter=='duedate'">
+                <div class="section-title" ng-class="{'overdue':isOverDue(task.due)}">
                     <text>{{ task.due | dateDetails }}</text>
                 </div>
                 <a class="detail-delete" ng-click="deleteDueDate()" stop-event="click">
                 	<span class="icon detail-delete"></span>
                 </a>
                 <span class="icon detail-save" ng-click="endEdit()" stop-event="click"></span>
-                <div class="section-edit" ng-show="route.parameter=='duedate'">
+                <div class="section-edit">
     				<input class="datepicker-input medium focus" type="text" key-value="" placeholder="dd.mm.yyyy" value="{{ task.due | dateTaskList }}" datepicker="due">
                     <input class="timepicker-input medium focus" type="text" key-value="" placeholder="hh:mm" value="{{ task.due | timeTaskList }}" timepicker="due" stop-event="click">
                 </div>
@@ -51,7 +51,7 @@
             <!-- oc-click-focus="{selector: 'div.detail-reminder input.datepicker-input', timeout: 0}" -->
             	<span class="icon detail-reminder" ng-class="{'overdue':isOverDue(task.reminder.date)}"></span>
                 <span class="icon detail-remindertype" ng-click="changeReminderType(task)" ng-show="task.due || task.start"></span>
-                <div class="section-title" ng-class="{'overdue':isOverDue(task.reminder.date)}" ng-hide="route.parameter=='reminder'">
+                <div class="section-title" ng-class="{'overdue':isOverDue(task.reminder.date)}">
     				<text rel="">{{ task.reminder | reminderDetails:this }}</text>
     			</div>
                 <!-- <div class="section-description" ng-hide="route.parameter=='reminder'">{{ task.reminder.date | dateDetailsShort }}</div> -->
@@ -59,7 +59,7 @@
     				<span class="icon detail-delete"></span>
     			</a>
                 <span class="icon detail-save" ng-click="endEdit()" stop-event="click"></span>
-                <div class="section-edit" ng-show="route.parameter=='reminder'" ng-switch='reminderType(task)'>
+                <div class="section-edit" ng-switch='reminderType(task)'>
                     <div ng-switch-when="DATE-TIME">
                         <input class="datepicker-input medium focus" type="text" key-value="" placeholder="dd.mm.yyyy" value="{{ task.reminder.date | dateTaskList }}" datepicker="reminder">
                         <input class="timepicker-input medium focus" type="text" key-value="" placeholder="hh:mm" value="{{ task.reminder.date | timeTaskList }}" timepicker="reminder" stop-event="click">
@@ -73,14 +73,14 @@
             </div>
             <div class="section detail-complete" ng-class="{'editing':route.parameter=='percent', 'date':task.complete>0}"  ng-click="editPercent()" stop-event="click">
                 <span class="icon detail-percent"></span>
-                <div class="section-title" ng-hide="route.parameter=='percent'">
+                <div class="section-title">
                     <text rel="">{{ task.complete | percentDetails}}</text>
                 </div>
                 <a class="detail-delete" ng-click="deletePercent()" stop-event="click">
                     <span class="icon detail-delete"></span>
                 </a>
                 <span class="icon detail-save" ng-click="endEdit()" stop-event="click"></span>
-                <div class="section-edit" ng-show="route.parameter=='percent'">
+                <div class="section-edit">
                     <input class="percent-input" type="text" ng-model="task.complete">
                     <input type="range" ng-model="task.complete" min="0" max="100" step ="1">
                 </div>
@@ -94,9 +94,9 @@
                         	<span class="icon note-fullscreen"></span>
                         </a>
                         -->
-                        <div class="content-fakeable">
-                        	<div class="display-view" clickableurl="task.note" ng-hide="route.parameter=='note'"></div>
-                            <div class="edit-view" ng-show="route.parameter=='note'">
+                        <div class="content-fakeable" ng-class="{'editing':route.parameter=='note'}">
+                        	<div class="display-view" clickableurl="task.note"></div>
+                            <div class="edit-view">
                                 <div class="expandingArea active">
                                 	<pre><span>{{ task.note }}</span><br /><br /></pre>
                                 	<textarea ng-model="task.note"></textarea>

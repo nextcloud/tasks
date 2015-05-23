@@ -771,6 +771,7 @@
 			word-wrap: break-word;
 			.title-text{
 				cursor:text;
+				display:block;
 				&.strike-through{
 					text-decoration: line-through;
 					text-shadow: none;
@@ -810,10 +811,19 @@
 			.expandable-container{
 				background: none repeat scroll 0 0 #FFFFFF;
 				border: 1px solid #AAAAAA;
-				margin: -1px -4px -1px -7px;
+				margin: -1px -4px -1px -6px;
 				padding: 0 5px;
+				display:none !important;
 				.expandingArea{
 					position: relative;
+				}
+			}
+			&.editing{
+				.title-text{
+					display:none !important;
+				}
+				.expandable-container{
+					display:block !important;
 				}
 			}
 		}
@@ -879,6 +889,22 @@
 					}
 					.content-fakeable, .edit-view, .display-view{
 						cursor:text !important;
+					}
+					.content-fakeable{
+						.display-view{
+							display: block;
+						}
+						.edit-view{
+							display: none !important;
+						}
+						&.editing{
+							.display-view{
+								display: none !important;
+							}
+							.edit-view{
+								display: block !important;
+							}
+						}
 					}
 					.display-view{
 						white-space:pre-wrap;
@@ -984,6 +1010,10 @@
 					color: #9FA2A6;
 					font-weight: bold;
 					margin-top: 3px;
+					display: block;
+				}
+				.section-edit{
+					display: none;
 				}
 				&.date{
 					&.editing{
@@ -992,6 +1022,12 @@
 						}
 						.icon.detail-delete{
 							display:block;
+						}
+						.section-title{
+							display: none;
+						}
+						.section-edit{
+							display: block;
 						}
 					}
 					.icon{

@@ -707,6 +707,7 @@
 }
 #task-details div.content-wrapper .title .title-text {
   cursor: text;
+  display: block;
 }
 #task-details div.content-wrapper .title .title-text.strike-through {
   text-decoration: line-through;
@@ -746,11 +747,18 @@
 #task-details div.content-wrapper .title .expandable-container {
   background: none repeat scroll 0 0 #FFFFFF;
   border: 1px solid #AAAAAA;
-  margin: -1px -4px -1px -7px;
+  margin: -1px -4px -1px -6px;
   padding: 0 5px;
+  display: none !important;
 }
 #task-details div.content-wrapper .title .expandable-container .expandingArea {
   position: relative;
+}
+#task-details div.content-wrapper .title.editing .title-text {
+  display: none !important;
+}
+#task-details div.content-wrapper .title.editing .expandable-container {
+  display: block !important;
 }
 #task-details div.content-wrapper .body {
   bottom: 65px;
@@ -830,6 +838,22 @@
 #task-details div.content-wrapper .body .note .note-body .display-view,
 #task-details div.content-wrapper .body .note .note-edit .display-view {
   cursor: text !important;
+}
+#task-details div.content-wrapper .body .note .note-body .content-fakeable .display-view,
+#task-details div.content-wrapper .body .note .note-edit .content-fakeable .display-view {
+  display: block;
+}
+#task-details div.content-wrapper .body .note .note-body .content-fakeable .edit-view,
+#task-details div.content-wrapper .body .note .note-edit .content-fakeable .edit-view {
+  display: none !important;
+}
+#task-details div.content-wrapper .body .note .note-body .content-fakeable.editing .display-view,
+#task-details div.content-wrapper .body .note .note-edit .content-fakeable.editing .display-view {
+  display: none !important;
+}
+#task-details div.content-wrapper .body .note .note-body .content-fakeable.editing .edit-view,
+#task-details div.content-wrapper .body .note .note-edit .content-fakeable.editing .edit-view {
+  display: block !important;
 }
 #task-details div.content-wrapper .body .note .note-body .display-view,
 #task-details div.content-wrapper .body .note .note-edit .display-view {
@@ -937,11 +961,21 @@
   color: #9FA2A6;
   font-weight: bold;
   margin-top: 3px;
+  display: block;
+}
+#task-details div.content-wrapper .body .section .section-edit {
+  display: none;
 }
 #task-details div.content-wrapper .body .section.date.editing .icon.detail-save {
   display: inline-block;
 }
 #task-details div.content-wrapper .body .section.date.editing .icon.detail-delete {
+  display: block;
+}
+#task-details div.content-wrapper .body .section.date.editing .section-title {
+  display: none;
+}
+#task-details div.content-wrapper .body .section.date.editing .section-edit {
   display: block;
 }
 #task-details div.content-wrapper .body .section.date .icon.detail-date,
