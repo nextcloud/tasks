@@ -966,16 +966,16 @@
 #task-details div.content-wrapper .body .section .section-edit {
   display: none;
 }
-#task-details div.content-wrapper .body .section.date.editing .icon.detail-save {
+#task-details div.content-wrapper .body .section.editing .icon.detail-save {
   display: inline-block;
 }
-#task-details div.content-wrapper .body .section.date.editing .icon.detail-delete {
+#task-details div.content-wrapper .body .section.editing .icon.detail-delete {
   display: block;
 }
-#task-details div.content-wrapper .body .section.date.editing .section-title {
+#task-details div.content-wrapper .body .section.editing .section-title {
   display: none;
 }
-#task-details div.content-wrapper .body .section.date.editing .section-edit {
+#task-details div.content-wrapper .body .section.editing .section-edit {
   display: block;
 }
 #task-details div.content-wrapper .body .section.date .icon.detail-date,
