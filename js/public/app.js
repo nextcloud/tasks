@@ -535,37 +535,40 @@
               }
             }
           };
-          this._$scope.params = function(task) {
-            var params;
-            params = [
-              {
-                name: t('tasks', 'before beginning'),
-                invert: true,
-                related: 'START',
-                id: "10"
-              }, {
-                name: t('tasks', 'after beginning'),
-                invert: false,
-                related: 'START',
-                id: "00"
-              }, {
-                name: t('tasks', 'before end'),
-                invert: true,
-                related: 'END',
-                id: "11"
-              }, {
-                name: t('tasks', 'after end'),
-                invert: false,
-                related: 'END',
-                id: "01"
+          this._$scope.params = [
+            {
+              name: t('tasks', 'before beginning'),
+              invert: true,
+              related: 'START',
+              id: "10"
+            }, {
+              name: t('tasks', 'after beginning'),
+              invert: false,
+              related: 'START',
+              id: "00"
+            }, {
+              name: t('tasks', 'before end'),
+              invert: true,
+              related: 'END',
+              id: "11"
+            }, {
+              name: t('tasks', 'after end'),
+              invert: false,
+              related: 'END',
+              id: "01"
+            }
+          ];
+          this._$scope.filterParams = function(params) {
+            var task;
+            task = _$tasksmodel.getById(_$scope.route.taskID);
+            if (!(angular.isUndefined(task) || task === null)) {
+              if (task.due && task.start) {
+                return params;
+              } else if (task.start) {
+                return params.slice(0, 2);
+              } else {
+                return params.slice(2);
               }
-            ];
-            if (task.due && task.start) {
-              return params;
-            } else if (task.start) {
-              return params.slice(0, 2);
-            } else {
-              return params.slice(2);
             }
           };
           this._$scope.closeDetails = function() {
@@ -1603,8 +1606,8 @@
               task.reminder.type = 'DATE-TIME';
               task.reminder.date = moment().startOf('hour').add('h', 1).format('YYYYMMDDTHHmmss');
             }
+            return this.setReminder(taskID);
           }
-          return this.setReminder(taskID);
         };
 
         TasksBusinessLayer.prototype.setReminderDate = function(taskID, date, type) {

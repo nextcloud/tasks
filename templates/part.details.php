@@ -67,7 +67,7 @@
                     <div ng-switch-when="DURATION">
                         <input ng-change="setReminderDuration(task.id)" class="duration-input medium focus" type="number" key-value="" placeholder="" ng-model="task.reminder.duration[task.reminder.duration.token]">
                         <select ng-model="task.reminder.duration.token" ng-options="duration.id as duration.names for duration in durations"></select>
-                        <select ng-change="setReminderDuration(task.id)" ng-model="task.reminder.duration.params" ng-options="param as param.name for param in params(task) track by param.id"></select>
+                        <select ng-change="setReminderDuration(task.id)" ng-model="task.reminder.duration.params" ng-options="param as param.name for param in filterParams(params) track by param.id"></select>
                     </div>
                 </div>
             </div>

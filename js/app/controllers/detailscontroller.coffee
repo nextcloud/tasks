@@ -92,8 +92,7 @@ $timeout, $routeParams, SettingsModel, Loading) ->
 					else
 						return null
 
-			@_$scope.params = (task) ->
-				params = [
+			@_$scope.params = [
 						{
 							name:	t('tasks','before beginning'),
 							invert:	true
@@ -114,13 +113,17 @@ $timeout, $routeParams, SettingsModel, Loading) ->
 							invert:	false
 							related:'END',
 							id:		"01"}
-					]
-				if task.due && task.start
-					return params
-				else if task.start
-					return params.slice(0,2)
-				else
-					return params.slice(2)
+			]
+
+			@_$scope.filterParams = (params) ->
+				task = _$tasksmodel.getById(_$scope.route.taskID)
+				if !(angular.isUndefined(task) || task == null)
+					if task.due && task.start
+						return params
+					else if task.start
+						return params.slice(0,2)
+					else
+						return params.slice(2)
 
 			@_$scope.closeDetails = () ->
 				_$location.path('/lists/'+_$scope.route.listID)

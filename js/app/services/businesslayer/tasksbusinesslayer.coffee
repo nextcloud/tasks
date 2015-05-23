@@ -169,7 +169,7 @@ angular.module('Tasks').factory 'TasksBusinessLayer',
 					task.reminder.type = 'DATE-TIME'
 					task.reminder.date = moment().startOf('hour').add('h',1)
 					.format('YYYYMMDDTHHmmss')
-			@setReminder(taskID)
+				@setReminder(taskID)
 
 		setReminderDate: (taskID, date, type='day') ->
 			reminder = @_$tasksmodel.getById(taskID).reminder
