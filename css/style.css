@@ -903,7 +903,6 @@
   font-weight: 500;
   outline: medium none;
   padding: 4px;
-  transition: all 0.2s ease-in-out 0s;
 }
 #task-details div.content-wrapper .body .section input.focus {
   background-color: #F8F8F8;
@@ -1023,6 +1022,9 @@
 }
 #task-details div.content-wrapper .body .section.detail-reminder.date .section-description {
   display: block;
+}
+#task-details div.content-wrapper .body .section.detail-categories {
+  height: auto;
 }
 #task-details div.content-wrapper .body .section.detail-note {
   padding: 20px 0;

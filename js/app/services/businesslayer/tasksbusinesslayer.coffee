@@ -355,6 +355,12 @@ angular.module('Tasks').factory 'TasksBusinessLayer',
 		getCompletedTasks: (listID) ->
 			@_persistence.getTasks('completed', listID)
 
+		addCategory: (taskID, category) ->
+			@_persistence.addCategory(taskID, category)
+
+		removeCategory: (taskID, category) ->
+			@_persistence.removeCategory(taskID, category)
+
 	return new TasksBusinessLayer(TasksModel, Persistence)
 
 ]

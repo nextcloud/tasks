@@ -27,11 +27,15 @@ class PageController extends Controller {
 			\OCP\Util::addScript('tasks', 'vendor/angularjs/angular');
 			\OCP\Util::addScript('tasks', 'vendor/angularjs/angular-route');
 			\OCP\Util::addScript('tasks', 'vendor/angularjs/angular-animate');
+			\OCP\Util::addScript('tasks', 'vendor/angularjs/angular-sanitize');
+			\OCP\Util::addScript('tasks', 'vendor/angularui/ui-select/select');
 			\OCP\Util::addScript('tasks', 'vendor/bootstrap/ui-bootstrap-custom-tpls-0.10.0');
 		} else {
 			\OCP\Util::addScript('tasks', 'vendor/angularjs/angular.min');
 			\OCP\Util::addScript('tasks', 'vendor/angularjs/angular-route.min');
 			\OCP\Util::addScript('tasks', 'vendor/angularjs/angular-animate.min');
+			\OCP\Util::addScript('tasks', 'vendor/angularjs/angular-sanitize.min');
+			\OCP\Util::addScript('tasks', 'vendor/angularui/ui-select/select.min');
 			\OCP\Util::addScript('tasks', 'vendor/bootstrap/ui-bootstrap-custom-tpls-0.10.0.min');
 		}
 		\OCP\Util::addScript('tasks', 'public/app');
@@ -39,6 +43,7 @@ class PageController extends Controller {
 		\OCP\Util::addScript('tasks', 'vendor/timepicker/jquery.ui.timepicker');
 		\OCP\Util::addStyle('tasks', 'style');
 		\OCP\Util::addStyle('tasks', 'vendor/bootstrap/bootstrap');
+		\OCP\Util::addStyle('tasks', 'vendor/angularui/ui-select/select2');
 
 		$date = new \DateTimeZone(\OC_Calendar_App::getTimezone());
 		$day = new \DateTime('today', $date);

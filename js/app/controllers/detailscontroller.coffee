@@ -319,6 +319,13 @@ $timeout, $routeParams, SettingsModel, Loading) ->
 					input:	t('tasks','Add a comment')
 				}
 
+			@_$scope.availableCategories = []
+
+			@_$scope.addCategory = (category, model) ->
+				_tasksbusinesslayer.addCategory(_$scope.route.taskID, category)
+
+			@_$scope.removeCategory = (category, model) ->
+				_tasksbusinesslayer.removeCategory(_$scope.route.taskID, category)
 
 	return new DetailsController($scope, $window, TasksModel,
 		TasksBusinessLayer, $route, $location, $timeout, $routeParams,

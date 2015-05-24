@@ -514,14 +514,53 @@ class TasksController extends Controller {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function setCategories(){
+	public function addCategory(){
 		$taskId = $this->params('taskID');
-		$categories = $this->params('categories');
+		$category = $this->params('category');
 		$response = new JSONResponse();
 		try {
 			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
 			$vtodo = $vcalendar->VTODO;
-			$vtodo->CATEGORIES = $categories;
+			// fetch categories from TODO
+			$categories = $vtodo->CATEGORIES;
+			if ($categories){
+				$taskcategories = $categories->getParts();
+			}
+			// add category
+			if (!in_array($category, $taskcategories)){
+				$taskcategories[] = $category;
+			} else {
+			}
+			$vtodo->CATEGORIES = $taskcategories;
+			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
+		} catch(\Exception $e) {
+			// throw new BusinessLayerException($e->getMessage());
+		}
+		return $response;
+	}
+
+	/**
+	 * @NoAdminRequired
+	 */
+	public function removeCategory(){
+		$taskId = $this->params('taskID');
+		$category = $this->params('category');
+		$response = new JSONResponse();
+		try {
+			$vcalendar = \OC_Calendar_App::getVCalendar($taskId);
+			$vtodo = $vcalendar->VTODO;
+			// fetch categories from TODO
+			$categories = $vtodo->CATEGORIES;
+			if ($categories){
+				$taskcategories = $categories->getParts();
+			}
+			// remove category
+			$key = array_search($category, $taskcategories);
+			if ($key !== null && $key !== false){
+				unset($taskcategories[$key]);
+			} else {
+			}
+			$vtodo->CATEGORIES = $taskcategories;
 			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
 		} catch(\Exception $e) {
 			// throw new BusinessLayerException($e->getMessage());

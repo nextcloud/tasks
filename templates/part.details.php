@@ -86,6 +86,16 @@
                 </div>
             </div>
             <!-- <ul class="subtasks buffer"></ul> -->
+            <div class="section detail-categories">
+            <!-- Edit line 1080 to show placeholder -->
+                <ui-select multiple tagging tagging-label="<?php p($l->t('(New category)')); ?> " ng-model="task.categories" theme="select2" ng-disabled="disabled" style="width: 100%;"
+                 on-remove="removeCategory($item, $model)" on-select="addCategory($item, $model)">
+                    <ui-select-match placeholder="<?php p($l->t('Select categories...')); ?>">{{$item}}</ui-select-match>
+                    <ui-select-choices repeat="category in availableCategories">
+                      {{category}}
+                    </ui-select-choices>
+                </ui-select>
+            </div>
             <div class="section detail-note">
                 <div class="note">
                 	<div class="note-body selectable" ng-click="editNote()" stop-event="click" oc-click-focus="{selector: '.expandingArea textarea', timeout: 0}">

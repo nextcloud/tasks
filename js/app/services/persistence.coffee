@@ -356,6 +356,24 @@ angular.module('Tasks').factory 'Persistence',
 			@_request.post '/apps/tasks/tasks/{taskID}/comment/
 			{commentID}/delete', params
 
+		addCategory: (taskID, category) ->
+			params =
+				routeParams:
+					taskID: taskID
+				data:
+					category: category
+
+			@_request.post '/apps/tasks/tasks/{taskID}/category/add', params
+
+		removeCategory: (taskID, category) ->
+			params =
+				routeParams:
+					taskID: taskID
+				data:
+					category: category
+
+			@_request.post '/apps/tasks/tasks/{taskID}/category/remove', params
+
 	return new Persistence(Request, Loading, $rootScope)
 
 ]

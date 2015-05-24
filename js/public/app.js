@@ -12,7 +12,7 @@
 
 
 (function() {
-  angular.module('Tasks', ['OC', 'ngRoute', 'ngAnimate', 'ui.bootstrap']).config([
+  angular.module('Tasks', ['OC', 'ngRoute', 'ngAnimate', 'ui.bootstrap', 'ui.select', 'ngSanitize']).config([
     '$provide', '$routeProvider', '$interpolateProvider', function($provide, $routeProvider, $interpolateProvider) {
       var config;
       $provide.value('Config', config = {
@@ -768,6 +768,13 @@
               button: t('tasks', 'Comment'),
               input: t('tasks', 'Add a comment')
             };
+          };
+          this._$scope.availableCategories = [];
+          this._$scope.addCategory = function(category, model) {
+            return _tasksbusinesslayer.addCategory(_$scope.route.taskID, category);
+          };
+          this._$scope.removeCategory = function(category, model) {
+            return _tasksbusinesslayer.removeCategory(_$scope.route.taskID, category);
           };
         }
 
@@ -1848,6 +1855,14 @@
 
         TasksBusinessLayer.prototype.getCompletedTasks = function(listID) {
           return this._persistence.getTasks('completed', listID);
+        };
+
+        TasksBusinessLayer.prototype.addCategory = function(taskID, category) {
+          return this._persistence.addCategory(taskID, category);
+        };
+
+        TasksBusinessLayer.prototype.removeCategory = function(taskID, category) {
+          return this._persistence.removeCategory(taskID, category);
         };
 
         return TasksBusinessLayer;
@@ -2941,6 +2956,32 @@
           };
           return this._request.post('/apps/tasks/tasks/{taskID}/comment/\
 			{commentID}/delete', params);
+        };
+
+        Persistence.prototype.addCategory = function(taskID, category) {
+          var params;
+          params = {
+            routeParams: {
+              taskID: taskID
+            },
+            data: {
+              category: category
+            }
+          };
+          return this._request.post('/apps/tasks/tasks/{taskID}/category/add', params);
+        };
+
+        Persistence.prototype.removeCategory = function(taskID, category) {
+          var params;
+          params = {
+            routeParams: {
+              taskID: taskID
+            },
+            data: {
+              category: category
+            }
+          };
+          return this._request.post('/apps/tasks/tasks/{taskID}/category/remove', params);
         };
 
         return Persistence;
