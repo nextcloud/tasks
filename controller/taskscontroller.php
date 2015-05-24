@@ -529,10 +529,9 @@ class TasksController extends Controller {
 			// add category
 			if (!in_array($category, $taskcategories)){
 				$taskcategories[] = $category;
-			} else {
+				$vtodo->CATEGORIES = $taskcategories;
+				\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
 			}
-			$vtodo->CATEGORIES = $taskcategories;
-			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
 		} catch(\Exception $e) {
 			// throw new BusinessLayerException($e->getMessage());
 		}
@@ -558,10 +557,9 @@ class TasksController extends Controller {
 			$key = array_search($category, $taskcategories);
 			if ($key !== null && $key !== false){
 				unset($taskcategories[$key]);
-			} else {
+				$vtodo->CATEGORIES = $taskcategories;
+				\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
 			}
-			$vtodo->CATEGORIES = $taskcategories;
-			\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
 		} catch(\Exception $e) {
 			// throw new BusinessLayerException($e->getMessage());
 		}
