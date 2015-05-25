@@ -17,6 +17,11 @@
                     <div class="title-wrapper"  ng-class="{attachment: task.note!=''}">
                         <span class="title">{{ task.name }}</span>
                         <span class="icon task-attachment"></span>
+                        <span class="categories-list">
+                            <ul>
+                            <li ng-repeat="category in task.categories"><span>{{ category }}</span></li>
+                            </ul>
+                        </span>
                     </div>
                 </div>
             </li>
@@ -42,6 +47,11 @@
                     <div class="title-wrapper"  ng-class="{attachment: task.note!=''}">
                         <span class="title">{{ task.name }}</span>
                         <span class="icon task-attachment"></span>
+                        <span class="categories-list">
+                            <ul>
+                            <li ng-repeat="category in task.categories"><span>{{ category }}</span></li>
+                            </ul>
+                        </span>
                     </div>
                 </div>
             </li>
