@@ -92,7 +92,7 @@
                 <ui-select multiple tagging tagging-label="<?php p($l->t('(New category)')); ?> " ng-model="task.categories" theme="select2" ng-disabled="disabled" style="width: 100%;"
                  on-remove="removeCategory($item, $model)" on-select="addCategory($item, $model)">
                     <ui-select-match placeholder="<?php p($l->t('Select categories...')); ?>">{{$item}}</ui-select-match>
-                    <ui-select-choices repeat="category in availableCategories">
+                    <ui-select-choices repeat="category in settingsmodel.getById('various').categories">
                       {{category}}
                     </ui-select-choices>
                 </ui-select>

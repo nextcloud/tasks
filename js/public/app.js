@@ -491,6 +491,10 @@
             }
           });
           this._$scope.settingsmodel = this._$settingsmodel;
+          this._$scope.settingsmodel.add({
+            'id': 'various',
+            'categories': []
+          });
           this._$scope.isAddingComment = false;
           this._$scope.timers = [];
           this._$scope.durations = [
@@ -769,7 +773,6 @@
               input: t('tasks', 'Add a comment')
             };
           };
-          this._$scope.availableCategories = [];
           this._$scope.addCategory = function(category, model) {
             return _tasksbusinesslayer.addCategory(_$scope.route.taskID, category);
           };
@@ -2110,6 +2113,8 @@
           this._nameCache[data.displayname] = data;
           if (angular.isDefined(data.id)) {
             return SettingsModel.__super__.add.call(this, data, clearCache);
+          } else {
+            return this._data.push(data);
           }
         };
 

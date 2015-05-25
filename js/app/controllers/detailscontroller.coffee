@@ -50,6 +50,13 @@ $timeout, $routeParams, SettingsModel, Loading) ->
 			
 			@_$scope.settingsmodel = @_$settingsmodel
 
+			# workaroung till https://github.com/angular-ui/ui-select/issues/587
+			# is resolved
+			@_$scope.settingsmodel.add({
+					'id':			'various',
+					'categories': 	[]
+				})
+
 			@_$scope.isAddingComment = false
 
 			@_$scope.timers = []
@@ -318,8 +325,6 @@ $timeout, $routeParams, SettingsModel, Loading) ->
 					button: t('tasks','Comment'),
 					input:	t('tasks','Add a comment')
 				}
-
-			@_$scope.availableCategories = []
 
 			@_$scope.addCategory = (category, model) ->
 				_tasksbusinesslayer.addCategory(_$scope.route.taskID, category)
