@@ -1644,4 +1644,32 @@
 		</g>
 	</g>
 </g>
+<g>
+	<g>
+		<defs>
+			<rect id="SVGID_227_" x="180" y="40" width="20" height="20"/>
+		</defs>
+		<clipPath id="SVGID_228_">
+			<use xlink:href="#SVGID_227_"  overflow="visible"/>
+		</clipPath>
+		<rect x="186.5" y="49.5" clip-path="url(#SVGID_228_)" fill="#B0B0B0" width="12" height="9"/>
+		<polygon clip-path="url(#SVGID_228_)" fill="#B0B0B0" points="186,49 186,54.5 184,54.5 184,45.5 196,45.5 196,49 		"/>
+		<polygon clip-path="url(#SVGID_228_)" fill="#B0B0B0" points="183.5,45 183.5,50.5 181.5,50.5 181.5,41.5 193.5,41.5 193.5,45 		
+			"/>
+	</g>
+</g>
+<g>
+	<g>
+		<defs>
+			<rect id="SVGID_229_" x="180" y="60" width="20" height="20"/>
+		</defs>
+		<clipPath id="SVGID_230_">
+			<use xlink:href="#SVGID_229_"  overflow="visible"/>
+		</clipPath>
+		<rect x="186.5" y="69.5" clip-path="url(#SVGID_230_)" fill="#4372A7" width="12" height="9"/>
+		<polygon clip-path="url(#SVGID_230_)" fill="#4372A7" points="186,69 186,74.5 184,74.5 184,65.5 196,65.5 196,69 		"/>
+		<polygon clip-path="url(#SVGID_230_)" fill="#4372A7" points="183.5,65 183.5,70.5 181.5,70.5 181.5,61.5 193.5,61.5 193.5,65 		
+			"/>
+	</g>
+</g>
 </svg>

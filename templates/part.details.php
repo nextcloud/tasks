@@ -86,7 +86,8 @@
                 </div>
             </div>
             <!-- <ul class="subtasks buffer"></ul> -->
-            <div class="section detail-categories">
+            <div class="section detail-categories" ng-class="{'active':task.categories.length>0}">
+                <span class="icon detail-categories"></span>
             <!-- Edit line 1080 to show placeholder -->
                 <ui-select multiple tagging tagging-label="<?php p($l->t('(New category)')); ?> " ng-model="task.categories" theme="select2" ng-disabled="disabled" style="width: 100%;"
                  on-remove="removeCategory($item, $model)" on-select="addCategory($item, $model)">

@@ -123,6 +123,9 @@
 #content .icon.detail-percent {
   background-position: -260px -60px;
 }
+#content .icon.detail-categories {
+  background-position: -180px -40px;
+}
 #content .icon.task-checked,
 #content .icon.detail-checked {
   background-position: -60px -20px;
@@ -916,6 +919,13 @@
   width: 200px;
   margin: 0px;
 }
+#task-details div.content-wrapper .body .section .select2-search-field input {
+  border: 0 none;
+  box-shadow: none;
+  font-weight: bold;
+  margin-top: 0px;
+  font-family: inherit;
+}
 #task-details div.content-wrapper .body .section select {
   background-color: rgba(0, 0, 0, 0);
   border-radius: 0px;
@@ -1006,6 +1016,12 @@
 #task-details div.content-wrapper .body .section.date .section-title.repeat {
   margin-top: -2px;
 }
+#task-details div.content-wrapper .body .section.active .detail-categories {
+  background-position: -180px -60px;
+}
+#task-details div.content-wrapper .body .section.active .select2-search-field input {
+  color: #4271a6;
+}
 #task-details div.content-wrapper .body .section.editing .icon.detail-remindertype {
   display: block;
 }
@@ -1025,6 +1041,7 @@
 }
 #task-details div.content-wrapper .body .section.detail-categories {
   height: auto;
+  padding-left: 50px;
 }
 #task-details div.content-wrapper .body .section.detail-note {
   padding: 20px 0;
@@ -1414,4 +1431,26 @@ div.percentdone {
   #app-content.details-visible {
     left: -370px !important;
   }
+}
+.detail-categories .select2-container-multi .select2-choices {
+  border: 1px solid transparent;
+}
+.detail-categories .select2-container-multi .select2-choices .select2-search-choice {
+  color: #4271a6;
+  font-weight: bold;
+  line-height: 14px;
+  margin: 2px 0 3px 5px;
+  background-image: none;
+  background-color: #f5f5f5;
+  box-shadow: none;
+  border-color: #cfcfcf;
+}
+.detail-categories .select2-container-multi .select2-choices .select2-search-choice a.select2-search-choice-close {
+  background-image: url("../img/sprites.svg");
+  background-position: -4px -44px;
+  opacity: 0.4;
+}
+.detail-categories .select2-container-multi .select2-choices .select2-search-choice a.select2-search-choice-close:hover {
+  background-position: -4px -44px;
+  opacity: 0.8;
 }
