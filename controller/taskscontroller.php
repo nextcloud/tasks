@@ -557,7 +557,11 @@ class TasksController extends Controller {
 			$key = array_search($category, $taskcategories);
 			if ($key !== null && $key !== false){
 				unset($taskcategories[$key]);
-				$vtodo->CATEGORIES = $taskcategories;
+				if(count($taskcategories)){
+					$vtodo->CATEGORIES = $taskcategories;
+				} else{
+					$vtodo->__unset('CATEGORIES');
+				}
 				\OC_Calendar_Object::edit($taskId, $vcalendar->serialize());
 			}
 		} catch(\Exception $e) {
