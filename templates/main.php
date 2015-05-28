@@ -5,14 +5,19 @@
                     ng-class="{'animate-up': hideCollection(collection.id), active: collection.id==route.listID}" oc-drop-task>
                 <a href="#/lists/{{ collection.id }}">
                         <span class="icon collection-{{ collection.id }}"><text ng-show="collection.id=='today'"><?php p($_['DOM']); ?></text></span>
-                        <span class="count">{{ getCollectionString(collection.id) }}</span>
-                        <span class="title"><text>{{ collection.displayname }}</text></span>
+                        <span class="title">{{ collection.displayname }}</span>
                 </a>
+                <div class="app-navigation-entry-utils">
+                    <ul>
+                        <li class="app-navigation-entry-utils-counter">{{ getCollectionString(collection.id) }}</li>
+                    </ul>
+                </div>
             </li>
             <li ng-repeat="list in lists" id="list_{{ list.id }}" rel="{{ list.id }}" class="with-menu" ng-class="{active: list.id==route.listID}" oc-drop-task>
                 <a href="#/lists/{{ list.id }}" style="border-right: 4px solid {{ list.calendarcolor }};">
                     <span class="icon list-list"></span>
-                    <span class="title"><text ng-dblclick="editName(list.id)" oc-click-focus="{selector: 'input.edit', timeout: 0}">{{ list.displayname }}</text></span>
+                    <span class="title"><text ng-dblclick="editName(list.id)" oc-click-focus="{selector: 'input.edit', timeout: 0}" ng-hide="route.listparameter=='name' && route.listID == list.id">{{ list.displayname }}</text></span>
+                    <input ng-model="list.displayname" class="edit handler" type="text" ng-show="route.listparameter=='name' && route.listID == list.id" ng-keydown="checkName($event)">
                 </a>
                 <div class="app-navigation-entry-utils">
                     <ul>
@@ -26,8 +31,6 @@
                         <li><button class="icon-delete svg" title="delete" ng-click="deleteList(list.id)" ng-show="showDelete(list.id)"></button></li>
                     </ul>
                 </div>
-                <input ng-model="list.displayname" class="edit handler" type="text" ng-show="route.listparameter=='name' && route.listID == list.id" stop-event="click"
-                    ng-keydown="checkName($event)">
             </li>
             <li>
                 <a class="addlist handler" ng-click="startAddingList()" stop-event="click" oc-click-focus="{selector: '#newList', timeout: 0}">
