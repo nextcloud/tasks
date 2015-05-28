@@ -342,6 +342,9 @@ $timeout, $routeParams, SettingsModel, Loading) ->
 
 			@_$scope.addCategory = (category, model) ->
 				_tasksbusinesslayer.addCategory(_$scope.route.taskID, category)
+				categories = _$scope.settingsmodel.getById('various').categories
+				if !(categories.indexOf(category) > -1)
+					categories.push(category)
 
 			@_$scope.removeCategory = (category, model) ->
 				_tasksbusinesslayer.removeCategory(_$scope.route.taskID, category)

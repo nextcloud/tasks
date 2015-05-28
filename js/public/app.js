@@ -795,7 +795,12 @@
             };
           };
           this._$scope.addCategory = function(category, model) {
-            return _tasksbusinesslayer.addCategory(_$scope.route.taskID, category);
+            var categories;
+            _tasksbusinesslayer.addCategory(_$scope.route.taskID, category);
+            categories = _$scope.settingsmodel.getById('various').categories;
+            if (!(categories.indexOf(category) > -1)) {
+              return categories.push(category);
+            }
           };
           this._$scope.removeCategory = function(category, model) {
             _tasksbusinesslayer.removeCategory(_$scope.route.taskID, category);
