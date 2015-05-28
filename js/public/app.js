@@ -190,7 +190,7 @@
                 text = link.index ? link[0].substring(1) : link[0];
                 if (link[3] === '@') {
                   a = $compile('<a href="mailto:' + link[1] + '"\
-							stop-event="click"></a>')(scope);
+							class="handled end-edit"></a>')(scope);
                   a.text(text);
                   element.append(a);
                   continue;
@@ -199,7 +199,7 @@
                   link[1] = 'http://';
                 }
                 a = $compile('<a href="' + link[1] + link[2] + '"\
-						target="_blank" stop-event="click"></a>')(scope);
+						target="_blank" class="handled end-edit"></a>')(scope);
                 a.text(text);
                 element.append(a);
               }
@@ -327,9 +327,7 @@
     return {
       restrict: 'A',
       link: function(scope, element, attr) {
-        return element.bind(attr.stopEvent, function(e) {
-          return e.stopPropagation();
-        });
+        return element.bind(attr.stopEvent, function(e) {});
       }
     };
   });
@@ -430,11 +428,15 @@
             return _this._$scope.initialized = true;
           };
           this._persistence.init().then(successCallback);
-          this._$scope.closeAll = function() {
-            _$location.path('/lists/' + _$scope.route.listID);
-            _$scope.status.addingList = false;
-            _$scope.status.focusTaskInput = false;
-            return _$scope.status.newListName = "";
+          this._$scope.closeAll = function($event) {
+            if ($($event.target).closest('.close-all').length || $($event.currentTarget).is($($event.target).closest('.handler'))) {
+              _$location.path('/lists/' + _$scope.route.listID);
+              _$scope.status.addingList = false;
+              _$scope.status.focusTaskInput = false;
+              return _$scope.status.newListName = "";
+            } else {
+
+            }
           };
           this._$scope.isLoading = function() {
             return _Loading.isLoading();
@@ -575,11 +577,7 @@
               }
             }
           };
-          this._$scope.closeDetails = function() {
-            return _$location.path('/lists/' + _$scope.route.listID);
-          };
           this._$scope.deleteTask = function(taskID) {
-            _$scope.closeDetails();
             return _$timeout(function() {
               return _tasksbusinesslayer.deleteTask(taskID);
             }, 500);
@@ -587,51 +585,74 @@
           this._$scope.editName = function() {
             return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/name');
           };
-          this._$scope.editDueDate = function() {
-            _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/duedate');
-            return _tasksbusinesslayer.initDueDate(_$scope.route.taskID);
+          this._$scope.editDueDate = function($event) {
+            if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+              _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/duedate');
+              return _tasksbusinesslayer.initDueDate(_$scope.route.taskID);
+            } else {
+
+            }
           };
-          this._$scope.editStart = function() {
-            _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/startdate');
-            return _tasksbusinesslayer.initStartDate(_$scope.route.taskID);
+          this._$scope.editStart = function($event) {
+            if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+              _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/startdate');
+              return _tasksbusinesslayer.initStartDate(_$scope.route.taskID);
+            } else {
+
+            }
           };
-          this._$scope.editReminder = function() {
-            _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/reminder');
-            return _tasksbusinesslayer.initReminder(_$scope.route.taskID);
+          this._$scope.editReminder = function($event) {
+            if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+              _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/reminder');
+              return _tasksbusinesslayer.initReminder(_$scope.route.taskID);
+            } else {
+
+            }
           };
-          this._$scope.editNote = function() {
-            return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/note');
+          this._$scope.editNote = function($event) {
+            if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+              return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/note');
+            } else {
+
+            }
           };
-          this._$scope.editPercent = function() {
-            return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/percent');
+          this._$scope.editPercent = function($event) {
+            if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+              return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/percent');
+            } else {
+
+            }
           };
-          this._$scope.endEdit = function() {
+          this._$scope.endEdit = function($event) {
+            if ($($event.target).closest('.end-edit').length || $($event.currentTarget).is($($event.target).closest('.handler'))) {
+              return _$scope.resetRoute();
+            } else {
+
+            }
+          };
+          this._$scope.endName = function($event) {
+            if ($event.keyCode === 13) {
+              $event.preventDefault();
+              _$scope.resetRoute();
+            }
+            if ($event.keyCode === 27) {
+              return _$scope.resetRoute();
+            }
+          };
+          this._$scope.resetRoute = function() {
             return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID);
           };
-          this._$scope.endName = function(event) {
-            if (event.keyCode === 13) {
-              event.preventDefault();
-              _$scope.endEdit();
-            }
-            if (event.keyCode === 27) {
-              return _$scope.endEdit();
-            }
-          };
           this._$scope.deleteDueDate = function() {
-            _tasksbusinesslayer.deleteDueDate(_$scope.route.taskID);
-            return _$scope.endEdit();
+            return _tasksbusinesslayer.deleteDueDate(_$scope.route.taskID);
           };
           this._$scope.deletePercent = function() {
-            _tasksbusinesslayer.setPercentComplete(_$scope.route.taskID, 0);
-            return _$scope.endEdit();
+            return _tasksbusinesslayer.setPercentComplete(_$scope.route.taskID, 0);
           };
           this._$scope.deleteStartDate = function() {
-            _tasksbusinesslayer.deleteStartDate(_$scope.route.taskID);
-            return _$scope.endEdit();
+            return _tasksbusinesslayer.deleteStartDate(_$scope.route.taskID);
           };
           this._$scope.deleteReminder = function() {
-            _tasksbusinesslayer.deleteReminderDate(_$scope.route.taskID);
-            return _$scope.endEdit();
+            return _tasksbusinesslayer.deleteReminderDate(_$scope.route.taskID);
           };
           this._$scope.toggleCompleted = function(taskID) {
             if (_$tasksmodel.completed(taskID)) {
@@ -777,7 +798,8 @@
             return _tasksbusinesslayer.addCategory(_$scope.route.taskID, category);
           };
           this._$scope.removeCategory = function(category, model) {
-            return _tasksbusinesslayer.removeCategory(_$scope.route.taskID, category);
+            _tasksbusinesslayer.removeCategory(_$scope.route.taskID, category);
+            return _$scope.resetRoute();
           };
         }
 

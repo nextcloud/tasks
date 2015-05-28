@@ -80,7 +80,7 @@ angular.module('Tasks').directive 'clickableurl', [ '$compile',
 					# check if email address
 					if link[3] == '@'
 						a = $compile('<a href="mailto:' + link[1] + '"
-							stop-event="click"></a>')(scope)
+							class="handled end-edit"></a>')(scope)
 						a.text(text)
 						element.append(a)
 						continue
@@ -91,7 +91,7 @@ angular.module('Tasks').directive 'clickableurl', [ '$compile',
 
 					a = $compile('<a href="' + link[1] +
 						link[2] + '"
-						target="_blank" stop-event="click"></a>')(scope)
+						target="_blank" class="handled end-edit"></a>')(scope)
 					a.text(text)
 					element.append(a)
 

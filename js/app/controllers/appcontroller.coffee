@@ -48,12 +48,15 @@ $routeParams, Loading, $modal, SettingsModel) ->
 
 			@_persistence.init().then(successCallback)
 
-			@_$scope.closeAll = () ->
-				_$location.path('/lists/'+_$scope.route.listID)
-
-				_$scope.status.addingList = false
-				_$scope.status.focusTaskInput = false
-				_$scope.status.newListName = ""
+			@_$scope.closeAll = ($event) ->
+				if $($event.target).closest('.close-all').length ||
+				$($event.currentTarget).is($($event.target).closest('.handler'))
+					_$location.path('/lists/'+_$scope.route.listID)
+					_$scope.status.addingList = false
+					_$scope.status.focusTaskInput = false
+					_$scope.status.newListName = ""
+				else
+					return
 
 			@_$scope.isLoading = () ->
 				return _Loading.isLoading()

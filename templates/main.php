@@ -1,8 +1,8 @@
-<div ng-app="Tasks" ng-cloak ng-controller="AppController" ng-click="closeAll()" id="tasks_wrapper">
+<div ng-app="Tasks" ng-cloak ng-controller="AppController" ng-click="closeAll($event)" id="tasks_wrapper" class="handler">
     <div id="app-navigation" ng-controller="ListController">
     	<div id="task_lists_header" class="header">
         	<div id="main-toolbar">
-                <a id="loading" ng-click="update()" stop-event="click">
+                <a id="loading" class="handler" ng-click="update()">
                     <span class="loading" ng-class="{'done':!isLoading()}"></span>
                 </a>
             </div>
@@ -23,24 +23,26 @@
                     <a href="#/lists/{{ list.id }}" style="border-right: 4px solid {{ list.calendarcolor }};">
                         <span class="icon list-list"></span>
                         <span class="count"><text ng-show="getListCount(list.id,'all')">{{ getListCount(list.id,'all') }}</text></span>
-                        <span class="title"><text ng-dblclick="editName(list.id)" oc-click-focus="{selector: 'input.edit', timeout: 0}">{{ list.displayname }}</text></span>
+                        <span class="title">
+                            <text ng-dblclick="editName(list.id)" oc-click-focus="{selector: 'input.edit', timeout: 0}">{{ list.displayname }}</text>
+                        </span>
                     </a>
-                    <input ng-model="list.displayname" class="edit" type="text" ng-show="route.listparameter=='name' && route.listID == list.id" stop-event="click"
+                    <input ng-model="list.displayname" class="edit handler" type="text" ng-show="route.listparameter=='name' && route.listID == list.id"
                     ng-keydown="checkName($event)">
                 </li>
             </ul>
-            <a class="addlist" ng-click="startAddingList()" stop-event="click" oc-click-focus="{selector: '#newList', timeout: 0}">
+            <a class="addlist handler" ng-click="startAddingList()" oc-click-focus="{selector: '#newList', timeout: 0}">
                 <span class="icon detail-add"></span>
                 <span class="title"><text><?php p($l->t('Add List...')); ?></text></span>
                 <input id="newList" ng-model="status.newListName" class="edit" type="text" ng-disabled="isAddingList" ng-show="status.addingList"
-                stop-event="click" placeholder="<?php p($l->t('New List')); ?>" ng-keydown="checkListInput($event)" />
+                placeholder="<?php p($l->t('New List')); ?>" ng-keydown="checkListInput($event)" />
             </a>
         </div>
         <div id="task_lists_footer" class="footer">
         	<a class="delete" ng-click="deleteList(route.listID)" ng-show="showDelete(route.listID)">
             	<span class="icon detail-trash"></span>
             </a>
-            <a class="settings" ng-click="showSettings()" stop-event="click">
+            <a class="settings" ng-click="showSettings()">
                 <span class="icon detail-settings"></span>
             </a>
         </div>
@@ -48,7 +50,7 @@
 
     <div id="app-content" ng-controller="TasksController" ng-class="{'details-visible':route.taskID}">
         <div class="content-wrapper">
-        	<div id="add-task" class="add-task" ng-show="showInput()" ng-class="{'focus':status.focusTaskInput}" stop-event="click" >
+        	<div id="add-task" class="add-task handler" ng-show="showInput()" ng-class="{'focus':status.focusTaskInput}">
                 <a class="input-star">
                     <span class="icon input-star "></span>
                 </a>
@@ -64,15 +66,15 @@
                 <?php print_unescaped($this->inc('part.tasklist')); ?>
                 <?php print_unescaped($this->inc('part.collectionall')); ?>
                 <?php print_unescaped($this->inc('part.collectionweek')); ?>
-                <div id="searchresults" stop-event="click"></div>
+                <div id="searchresults"></div>
                 <div class="task-item template">
                     <div class="task-body">
                         <div class="percentdone"></div>
-                        <a class="task-checkbox" name="toggleCompleted" ng-click="toggleCompleted()" stop-event="click">
+                        <a class="task-checkbox" name="toggleCompleted" ng-click="toggleCompleted()">
                             <span class="icon task-checkbox"></span>
                         </a>
                         <a class="icon task-separator"></a>
-                        <a class="task-star" ng-click="toggleStarred(task.id)" stop-event="click">
+                        <a class="task-star" ng-click="toggleStarred(task.id)">
                             <span class="icon task-star faded"></span>
                         </a>
                         <a class="duedate" ng-class="{overdue: TasksModel.overdue(task.due)}">{{ task.due | dateTaskList }}</a>
