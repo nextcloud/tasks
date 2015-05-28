@@ -46,7 +46,7 @@
                 <button class="settings-button" data-apps-slide-toggle="#app-settings-content"></button>
             </div>
             <div id="app-settings-content">
-                <h2><label for="startOfWeek"><?php p($l->t('Start of week')); ?></label></h2>
+                <label for="startOfWeek"><?php p($l->t('Start of week')); ?></label>
                 <select id="startOfWeek" ng-change="setStartOfWeek()" ng-model="settingsmodel.getById('various').startOfWeek" ng-options="startOfWeekOption.id as startOfWeekOption.name for startOfWeekOption in startOfWeekOptions"></select>
                 <h2 class="bold"><?php p($l->t('Visibility of Smart Collections')); ?></h2>
                 <ul>

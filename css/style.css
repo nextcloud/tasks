@@ -4,6 +4,15 @@
   padding: 0;
   text-decoration: none;
 }
+#app-navigation li {
+  transition: max-height 300ms ease 0s;
+  max-height: 100px;
+}
+#app-navigation li.animate-up {
+  max-height: 0px;
+  border-bottom: 0;
+  overflow: hidden;
+}
 #content {
   overflow: hidden;
   color: #423E3E;
