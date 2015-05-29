@@ -49,7 +49,8 @@ class SettingsController extends Controller {
 				'id' => 'various',
 				'showHidden' => (int)$this->settings->getUserValue($this->userId, $this->appName,'various_showHidden'),
 				'startOfWeek' => (int)$this->settings->getUserValue($this->userId, $this->appName,'various_startOfWeek'),
-				'userID' => $this->userId
+				'userID' => $this->userId,
+				'categories' => \OC_Calendar_App::getCategoryOptions()
 			)
 		);
 		$result = array(

@@ -1,4 +1,4 @@
-<div id="settings_modal" stop-event="click">
+<div id="settings_modal" class="handler">
     <div class="header">
         <h2><?php p($l->t('Settings')); ?></h2>
         <div class="button" ng-click="ok()">

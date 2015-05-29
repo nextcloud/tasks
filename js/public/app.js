@@ -1,7 +1,7 @@
 (function(angular, $, moment, undefined){
 
 /**
- * ownCloud Task App - v0.1
+ * ownCloud Task App - v0.6.0
  *
  * Copyright (c) 2015 - Raimund Schlüßler <raimund.schluessler@googlemail.com>
  *
@@ -12,7 +12,7 @@
 
 
 (function() {
-  angular.module('Tasks', ['OC', 'ngRoute', 'ngAnimate', 'ui.bootstrap']).config([
+  angular.module('Tasks', ['OC', 'ngRoute', 'ngAnimate', 'ui.bootstrap', 'ui.select', 'ngSanitize']).config([
     '$provide', '$routeProvider', '$interpolateProvider', function($provide, $routeProvider, $interpolateProvider) {
       var config;
       $provide.value('Config', config = {
@@ -21,37 +21,6 @@
       });
       $routeProvider.when('/lists/:listID', {}).when('/lists/:listID/edit/:listparameter', {}).when('/lists/:listID/tasks/:taskID', {}).when('/lists/:listID/tasks/:taskID/settings', {}).when('/lists/:listID/tasks/:taskID/edit/:parameter', {}).when('/search/:searchString', {}).when('/search/:searchString/tasks/:taskID', {}).when('/search/:searchString/tasks/:taskID/edit/:parameter', {}).otherwise({
         redirectTo: '/lists/all'
-      });
-      /*
-      	overwrite angular's directive ngSwitchWhen
-        	to handle ng-switch-when="value1 || value2 || value3
-        	see
-      	http://docs.angularjs.org/api/ng.directive:ngSwitch
-      */
-
-      $provide.decorator('ngSwitchWhenDirective', function($delegate) {
-        $delegate[0].compile = function(element, attrs, transclude) {
-          return function(scope, element, attr, ctrl) {
-            var casee, i, len, subCases, _results;
-            subCases = [attrs.ngSwitchWhen];
-            if (attrs.ngSwitchWhen && attrs.ngSwitchWhen.length > 0 && attrs.ngSwitchWhen.indexOf('||') !== -1) {
-              subCases = attrs.ngSwitchWhen.split('||');
-            }
-            i = 0;
-            len = subCases.length;
-            _results = [];
-            while (i < len) {
-              casee = $.trim(subCases[i++]);
-              ctrl.cases['!' + casee] = ctrl.cases['!' + casee] || [];
-              _results.push(ctrl.cases['!' + casee].push({
-                transclude: transclude,
-                element: element
-              }));
-            }
-            return _results;
-          };
-        };
-        return $delegate;
       });
     }
   ]);
@@ -167,7 +136,7 @@
       restrict: 'A',
       scope: false,
       link: function(scope, elm, attr) {
-        return attr.$observe('userID', function() {
+        return attr.$observe('userid', function() {
           if (attr.userid) {
             return elm.avatar(attr.userid, attr.size);
           }
@@ -221,7 +190,7 @@
                 text = link.index ? link[0].substring(1) : link[0];
                 if (link[3] === '@') {
                   a = $compile('<a href="mailto:' + link[1] + '"\
-							stop-event="click"></a>')(scope);
+							class="handled end-edit"></a>')(scope);
                   a.text(text);
                   element.append(a);
                   continue;
@@ -230,7 +199,7 @@
                   link[1] = 'http://';
                 }
                 a = $compile('<a href="' + link[1] + link[2] + '"\
-						target="_blank" stop-event="click"></a>')(scope);
+						target="_blank" class="handled end-edit"></a>')(scope);
                 a.text(text);
                 element.append(a);
               }
@@ -358,9 +327,7 @@
     return {
       restrict: 'A',
       link: function(scope, element, attr) {
-        return element.bind(attr.stopEvent, function(e) {
-          return e.stopPropagation();
-        });
+        return element.bind(attr.stopEvent, function(e) {});
       }
     };
   });
@@ -461,11 +428,15 @@
             return _this._$scope.initialized = true;
           };
           this._persistence.init().then(successCallback);
-          this._$scope.closeAll = function() {
-            _$location.path('/lists/' + _$scope.route.listID);
-            _$scope.status.addingList = false;
-            _$scope.status.focusTaskInput = false;
-            return _$scope.status.newListName = "";
+          this._$scope.closeAll = function($event) {
+            if ($($event.target).closest('.close-all').length || $($event.currentTarget).is($($event.target).closest('.handler'))) {
+              _$location.path('/lists/' + _$scope.route.listID);
+              _$scope.status.addingList = false;
+              _$scope.status.focusTaskInput = false;
+              return _$scope.status.newListName = "";
+            } else {
+
+            }
           };
           this._$scope.isLoading = function() {
             return _Loading.isLoading();
@@ -522,6 +493,10 @@
             }
           });
           this._$scope.settingsmodel = this._$settingsmodel;
+          this._$scope.settingsmodel.add({
+            'id': 'various',
+            'categories': []
+          });
           this._$scope.isAddingComment = false;
           this._$scope.timers = [];
           this._$scope.durations = [
@@ -566,44 +541,43 @@
               }
             }
           };
-          this._$scope.params = function(task) {
-            var params;
-            params = [
-              {
-                name: t('tasks', 'before beginning'),
-                invert: true,
-                related: 'START',
-                id: "10"
-              }, {
-                name: t('tasks', 'after beginning'),
-                invert: false,
-                related: 'START',
-                id: "00"
-              }, {
-                name: t('tasks', 'before end'),
-                invert: true,
-                related: 'END',
-                id: "11"
-              }, {
-                name: t('tasks', 'after end'),
-                invert: false,
-                related: 'END',
-                id: "01"
+          this._$scope.params = [
+            {
+              name: t('tasks', 'before beginning'),
+              invert: true,
+              related: 'START',
+              id: "10"
+            }, {
+              name: t('tasks', 'after beginning'),
+              invert: false,
+              related: 'START',
+              id: "00"
+            }, {
+              name: t('tasks', 'before end'),
+              invert: true,
+              related: 'END',
+              id: "11"
+            }, {
+              name: t('tasks', 'after end'),
+              invert: false,
+              related: 'END',
+              id: "01"
+            }
+          ];
+          this._$scope.filterParams = function(params) {
+            var task;
+            task = _$tasksmodel.getById(_$scope.route.taskID);
+            if (!(angular.isUndefined(task) || task === null)) {
+              if (task.due && task.start) {
+                return params;
+              } else if (task.start) {
+                return params.slice(0, 2);
+              } else {
+                return params.slice(2);
               }
-            ];
-            if (task.due && task.start) {
-              return params;
-            } else if (task.start) {
-              return params.slice(0, 2);
-            } else {
-              return params.slice(2);
             }
           };
-          this._$scope.closeDetails = function() {
-            return _$location.path('/lists/' + _$scope.route.listID);
-          };
           this._$scope.deleteTask = function(taskID) {
-            _$scope.closeDetails();
             return _$timeout(function() {
               return _tasksbusinesslayer.deleteTask(taskID);
             }, 500);
@@ -611,51 +585,74 @@
           this._$scope.editName = function() {
             return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/name');
           };
-          this._$scope.editDueDate = function() {
-            _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/duedate');
-            return _tasksbusinesslayer.initDueDate(_$scope.route.taskID);
+          this._$scope.editDueDate = function($event) {
+            if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+              _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/duedate');
+              return _tasksbusinesslayer.initDueDate(_$scope.route.taskID);
+            } else {
+
+            }
           };
-          this._$scope.editStart = function() {
-            _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/startdate');
-            return _tasksbusinesslayer.initStartDate(_$scope.route.taskID);
+          this._$scope.editStart = function($event) {
+            if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+              _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/startdate');
+              return _tasksbusinesslayer.initStartDate(_$scope.route.taskID);
+            } else {
+
+            }
           };
-          this._$scope.editReminder = function() {
-            _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/reminder');
-            return _tasksbusinesslayer.initReminder(_$scope.route.taskID);
+          this._$scope.editReminder = function($event) {
+            if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+              _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/reminder');
+              return _tasksbusinesslayer.initReminder(_$scope.route.taskID);
+            } else {
+
+            }
           };
-          this._$scope.editNote = function() {
-            return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/note');
+          this._$scope.editNote = function($event) {
+            if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+              return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/note');
+            } else {
+
+            }
           };
-          this._$scope.editPercent = function() {
-            return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/percent');
+          this._$scope.editPercent = function($event) {
+            if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+              return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/percent');
+            } else {
+
+            }
           };
-          this._$scope.endEdit = function() {
+          this._$scope.endEdit = function($event) {
+            if ($($event.target).closest('.end-edit').length || $($event.currentTarget).is($($event.target).closest('.handler'))) {
+              return _$scope.resetRoute();
+            } else {
+
+            }
+          };
+          this._$scope.endName = function($event) {
+            if ($event.keyCode === 13) {
+              $event.preventDefault();
+              _$scope.resetRoute();
+            }
+            if ($event.keyCode === 27) {
+              return _$scope.resetRoute();
+            }
+          };
+          this._$scope.resetRoute = function() {
             return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID);
           };
-          this._$scope.endName = function(event) {
-            if (event.keyCode === 13) {
-              event.preventDefault();
-              _$scope.endEdit();
-            }
-            if (event.keyCode === 27) {
-              return _$scope.endEdit();
-            }
-          };
           this._$scope.deleteDueDate = function() {
-            _tasksbusinesslayer.deleteDueDate(_$scope.route.taskID);
-            return _$scope.endEdit();
+            return _tasksbusinesslayer.deleteDueDate(_$scope.route.taskID);
           };
           this._$scope.deletePercent = function() {
-            _tasksbusinesslayer.setPercentComplete(_$scope.route.taskID, 0);
-            return _$scope.endEdit();
+            return _tasksbusinesslayer.setPercentComplete(_$scope.route.taskID, 0);
           };
           this._$scope.deleteStartDate = function() {
-            _tasksbusinesslayer.deleteStartDate(_$scope.route.taskID);
-            return _$scope.endEdit();
+            return _tasksbusinesslayer.deleteStartDate(_$scope.route.taskID);
           };
           this._$scope.deleteReminder = function() {
-            _tasksbusinesslayer.deleteReminderDate(_$scope.route.taskID);
-            return _$scope.endEdit();
+            return _tasksbusinesslayer.deleteReminderDate(_$scope.route.taskID);
           };
           this._$scope.toggleCompleted = function(taskID) {
             if (_$tasksmodel.completed(taskID)) {
@@ -796,6 +793,18 @@
               button: t('tasks', 'Comment'),
               input: t('tasks', 'Add a comment')
             };
+          };
+          this._$scope.addCategory = function(category, model) {
+            var categories;
+            _tasksbusinesslayer.addCategory(_$scope.route.taskID, category);
+            categories = _$scope.settingsmodel.getById('various').categories;
+            if (!(categories.indexOf(category) > -1)) {
+              return categories.push(category);
+            }
+          };
+          this._$scope.removeCategory = function(category, model) {
+            _tasksbusinesslayer.removeCategory(_$scope.route.taskID, category);
+            return _$scope.resetRoute();
           };
         }
 
@@ -1634,8 +1643,8 @@
               task.reminder.type = 'DATE-TIME';
               task.reminder.date = moment().startOf('hour').add('h', 1).format('YYYYMMDDTHHmmss');
             }
+            return this.setReminder(taskID);
           }
-          return this.setReminder(taskID);
         };
 
         TasksBusinessLayer.prototype.setReminderDate = function(taskID, date, type) {
@@ -1876,6 +1885,14 @@
 
         TasksBusinessLayer.prototype.getCompletedTasks = function(listID) {
           return this._persistence.getTasks('completed', listID);
+        };
+
+        TasksBusinessLayer.prototype.addCategory = function(taskID, category) {
+          return this._persistence.addCategory(taskID, category);
+        };
+
+        TasksBusinessLayer.prototype.removeCategory = function(taskID, category) {
+          return this._persistence.removeCategory(taskID, category);
         };
 
         return TasksBusinessLayer;
@@ -2123,6 +2140,8 @@
           this._nameCache[data.displayname] = data;
           if (angular.isDefined(data.id)) {
             return SettingsModel.__super__.add.call(this, data, clearCache);
+          } else {
+            return this._data.push(data);
           }
         };
 
@@ -2971,6 +2990,32 @@
 			{commentID}/delete', params);
         };
 
+        Persistence.prototype.addCategory = function(taskID, category) {
+          var params;
+          params = {
+            routeParams: {
+              taskID: taskID
+            },
+            data: {
+              category: category
+            }
+          };
+          return this._request.post('/apps/tasks/tasks/{taskID}/category/add', params);
+        };
+
+        Persistence.prototype.removeCategory = function(taskID, category) {
+          var params;
+          params = {
+            routeParams: {
+              taskID: taskID
+            },
+            data: {
+              category: category
+            }
+          };
+          return this._request.post('/apps/tasks/tasks/{taskID}/category/remove', params);
+        };
+
         return Persistence;
 
       })();
@@ -2982,8 +3027,8 @@
 
 (function() {
   angular.module('Tasks').factory('Request', [
-    '_Request', '$http', 'Publisher', 'Router', function(_Request, $http, Publisher, Router) {
-      return new _Request($http, Publisher, Router);
+    '_Request', '$http', 'Publisher', function(_Request, $http, Publisher) {
+      return new _Request($http, Publisher);
     }
   ]);
 

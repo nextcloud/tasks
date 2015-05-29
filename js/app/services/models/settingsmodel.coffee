@@ -33,6 +33,8 @@ angular.module('Tasks').factory 'SettingsModel',
 			@_nameCache[data.displayname] = data
 			if angular.isDefined(data.id)
 				super(data, clearCache)
+			else
+				@_data.push(data)
 
 		toggle: (type, setting) ->
 			set = @getById(type)

@@ -23,9 +23,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 # request related stuff
 angular.module('Tasks').factory 'Request',
-['_Request', '$http', 'Publisher', 'Router',
-(_Request, $http, Publisher, Router) ->
-	return new _Request($http, Publisher, Router)
+['_Request', '$http', 'Publisher',
+(_Request, $http, Publisher) ->
+	return new _Request($http, Publisher)
 ]
 
 angular.module('Tasks').factory 'Loading', ['_Loading', (_Loading) ->

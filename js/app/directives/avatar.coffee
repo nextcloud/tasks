@@ -23,7 +23,7 @@ angular.module('Tasks').directive 'avatar', ->
 	restrict: 'A'
 	scope: false
 	link: (scope, elm, attr) ->
-		attr.$observe('userID', () ->
+		attr.$observe('userid', () ->
 			if(attr.userid)
 				elm.avatar(attr.userid,attr.size)
 		)

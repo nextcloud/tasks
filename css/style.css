@@ -123,6 +123,9 @@
 #content .icon.detail-percent {
   background-position: -260px -60px;
 }
+#content .icon.detail-categories {
+  background-position: -180px -40px;
+}
 #content .icon.task-checked,
 #content .icon.detail-checked {
   background-position: -60px -20px;
@@ -707,6 +710,7 @@
 }
 #task-details div.content-wrapper .title .title-text {
   cursor: text;
+  display: block;
 }
 #task-details div.content-wrapper .title .title-text.strike-through {
   text-decoration: line-through;
@@ -746,11 +750,18 @@
 #task-details div.content-wrapper .title .expandable-container {
   background: none repeat scroll 0 0 #FFFFFF;
   border: 1px solid #AAAAAA;
-  margin: -1px -4px -1px -7px;
+  margin: -1px -4px -1px -6px;
   padding: 0 5px;
+  display: none !important;
 }
 #task-details div.content-wrapper .title .expandable-container .expandingArea {
   position: relative;
+}
+#task-details div.content-wrapper .title.editing .title-text {
+  display: none !important;
+}
+#task-details div.content-wrapper .title.editing .expandable-container {
+  display: block !important;
 }
 #task-details div.content-wrapper .body {
   bottom: 65px;
@@ -831,6 +842,22 @@
 #task-details div.content-wrapper .body .note .note-edit .display-view {
   cursor: text !important;
 }
+#task-details div.content-wrapper .body .note .note-body .content-fakeable .display-view,
+#task-details div.content-wrapper .body .note .note-edit .content-fakeable .display-view {
+  display: block;
+}
+#task-details div.content-wrapper .body .note .note-body .content-fakeable .edit-view,
+#task-details div.content-wrapper .body .note .note-edit .content-fakeable .edit-view {
+  display: none !important;
+}
+#task-details div.content-wrapper .body .note .note-body .content-fakeable.editing .display-view,
+#task-details div.content-wrapper .body .note .note-edit .content-fakeable.editing .display-view {
+  display: none !important;
+}
+#task-details div.content-wrapper .body .note .note-body .content-fakeable.editing .edit-view,
+#task-details div.content-wrapper .body .note .note-edit .content-fakeable.editing .edit-view {
+  display: block !important;
+}
 #task-details div.content-wrapper .body .note .note-body .display-view,
 #task-details div.content-wrapper .body .note .note-edit .display-view {
   white-space: pre-wrap;
@@ -879,7 +906,6 @@
   font-weight: 500;
   outline: medium none;
   padding: 4px;
-  transition: all 0.2s ease-in-out 0s;
 }
 #task-details div.content-wrapper .body .section input.focus {
   background-color: #F8F8F8;
@@ -892,6 +918,13 @@
   padding-top: 10px;
   width: 200px;
   margin: 0px;
+}
+#task-details div.content-wrapper .body .section .select2-search-field input {
+  border: 0 none;
+  box-shadow: none;
+  font-weight: bold;
+  margin-top: 0px;
+  font-family: inherit;
 }
 #task-details div.content-wrapper .body .section select {
   background-color: rgba(0, 0, 0, 0);
@@ -937,11 +970,21 @@
   color: #9FA2A6;
   font-weight: bold;
   margin-top: 3px;
+  display: block;
 }
-#task-details div.content-wrapper .body .section.date.editing .icon.detail-save {
+#task-details div.content-wrapper .body .section .section-edit {
+  display: none;
+}
+#task-details div.content-wrapper .body .section.editing .icon.detail-save {
   display: inline-block;
 }
-#task-details div.content-wrapper .body .section.date.editing .icon.detail-delete {
+#task-details div.content-wrapper .body .section.editing .icon.detail-delete {
+  display: block;
+}
+#task-details div.content-wrapper .body .section.editing .section-title {
+  display: none;
+}
+#task-details div.content-wrapper .body .section.editing .section-edit {
   display: block;
 }
 #task-details div.content-wrapper .body .section.date .icon.detail-date,
@@ -973,6 +1016,12 @@
 #task-details div.content-wrapper .body .section.date .section-title.repeat {
   margin-top: -2px;
 }
+#task-details div.content-wrapper .body .section.active .detail-categories {
+  background-position: -180px -60px;
+}
+#task-details div.content-wrapper .body .section.active .select2-search-field input {
+  color: #4271a6;
+}
 #task-details div.content-wrapper .body .section.editing .icon.detail-remindertype {
   display: block;
 }
@@ -989,6 +1038,10 @@
 }
 #task-details div.content-wrapper .body .section.detail-reminder.date .section-description {
   display: block;
+}
+#task-details div.content-wrapper .body .section.detail-categories {
+  height: auto;
+  padding-left: 50px;
 }
 #task-details div.content-wrapper .body .section.detail-note {
   padding: 20px 0;
@@ -1378,4 +1431,40 @@ div.percentdone {
   #app-content.details-visible {
     left: -370px !important;
   }
+}
+.detail-categories .select2-container-multi .select2-choices {
+  border: 1px solid transparent;
+}
+.detail-categories .select2-container-multi .select2-choices .select2-search-choice {
+  color: #4271a6;
+  font-weight: bold;
+  line-height: 14px;
+  margin: 2px 0 3px 5px;
+  background-image: none;
+  background-color: #f5f5f5;
+  box-shadow: none;
+  border-color: #cfcfcf;
+}
+.detail-categories .select2-container-multi .select2-choices .select2-search-choice a.select2-search-choice-close {
+  background-image: url("../img/sprites.svg");
+  background-position: -4px -44px;
+  opacity: 0.4;
+}
+.detail-categories .select2-container-multi .select2-choices .select2-search-choice a.select2-search-choice-close:hover {
+  background-position: -4px -44px;
+  opacity: 0.8;
+}
+.categories-list {
+  display: inline-block;
+  vertical-align: middle;
+}
+.categories-list li {
+  background-color: #f5f5f5;
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  color: #9fa2a6;
+  float: left;
+  font-weight: bold;
+  margin: -5px 4px 0;
+  padding: 2px 5px;
 }

@@ -60,6 +60,8 @@ $application->registerRoutes($this, array('routes' => array(
 	array('name' => 'tasks#setReminderDate','url' => '/tasks/{taskID}/reminder',		'verb' => 'POST'),
 	array('name' => 'tasks#addComment',		'url' => '/tasks/{taskID}/comment',			'verb' => 'POST'),
 	array('name' => 'tasks#deleteComment',	'url' => '/tasks/{taskID}/comment/{commentID}/delete',	'verb' => 'POST'),
+	array('name' => 'tasks#addCategory',	'url' => '/tasks/{taskID}/category/add',	'verb' => 'POST'),
+	array('name' => 'tasks#removeCategory',	'url' => '/tasks/{taskID}/category/remove',	'verb' => 'POST'),
 
 	// settings
 	array('name' => 'settings#get',	'url' => '/settings', 'verb' => 'GET'),
