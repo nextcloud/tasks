@@ -76,6 +76,8 @@ OC.L10N.register(
     "Add List..." : "Lisää luettelo...",
     "New List" : "Uusi luettelo",
     "Load remaining completed tasks." : "Lataa loput valmistuneet tehtävät.",
+    "(New category)" : "(Uusi luokka)",
+    "Select categories..." : "Valitse luokat...",
     "Loading the task..." : "Ladataan tehtävää...",
     "Task not found!" : "Tehtävää ei löytynyt!",
     "Settings" : "Asetukset",

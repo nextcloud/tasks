@@ -80,6 +80,8 @@ OC.L10N.register(
     "Add List..." : "Toevoegen lijst...",
     "New List" : "Nieuwe lijst",
     "Load remaining completed tasks." : "Laad overige afgeronde taken",
+    "(New category)" : "(Nieuwe categorie)",
+    "Select categories..." : "Kies categorieën...",
     "Loading the task..." : "Laden van de taak...",
     "Task not found!" : "Taak niet gevonden!",
     "Settings" : "Instellingen",

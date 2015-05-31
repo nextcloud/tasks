@@ -80,6 +80,8 @@ OC.L10N.register(
     "Add List..." : "Ajouter une liste...",
     "New List" : "Nouvelle liste",
     "Load remaining completed tasks." : "Charger le reste des tâches terminées.",
+    "(New category)" : "(Nouvelle catégorie)",
+    "Select categories..." : "Sélectionner des catégories...",
     "Loading the task..." : "Chargement de la tâche…",
     "Task not found!" : "Tâche non trouvée !",
     "Settings" : "Paramètres",

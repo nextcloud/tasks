@@ -80,6 +80,8 @@ OC.L10N.register(
     "Add List..." : "Přidat seznam...",
     "New List" : "Nový seznam",
     "Load remaining completed tasks." : "Načíst zbývající dokončené úkoly.",
+    "(New category)" : "(Nová kategorie)",
+    "Select categories..." : "Vybrat kategorie...",
     "Loading the task..." : "Nahrávám úkol...",
     "Task not found!" : "Úkol nenalezen!",
     "Settings" : "Nastavení",
