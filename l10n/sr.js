@@ -80,6 +80,8 @@ OC.L10N.register(
     "Add List..." : "Додај листу...",
     "New List" : "Нова листа",
     "Load remaining completed tasks." : "Учитај преостале довршене задатке.",
+    "(New category)" : "(Нова категорија)",
+    "Select categories..." : "Изаберите категорије...",
     "Loading the task..." : "Учитавам задатке...",
     "Task not found!" : "Задатак није пронађен!",
     "Settings" : "Поставке",
