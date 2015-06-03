@@ -80,6 +80,8 @@ OC.L10N.register(
     "Add List..." : "Προσθήκη Λίστας...",
     "New List" : "Νέα Λίστα",
     "Load remaining completed tasks." : "Φόρτωση απομένοντων ολοκληρωμένων εργασιών",
+    "(New category)" : "(Νέα κατηγορία)",
+    "Select categories..." : "Επιλογή κατηγοριών...",
     "Loading the task..." : "Φόρτωση της εργασίας...",
     "Task not found!" : "Δεν βρέθηκε εργασία!",
     "Settings" : "Ρυθμίσεις",
