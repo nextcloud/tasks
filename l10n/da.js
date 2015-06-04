@@ -80,6 +80,8 @@ OC.L10N.register(
     "Add List..." : "Tilføj liste...",
     "New List" : "Ny liste",
     "Load remaining completed tasks." : "Indlæs resten af de fuldførte opgaver.",
+    "(New category)" : "(Ny kategori)",
+    "Select categories..." : "Vælg kategorier...",
     "Loading the task..." : "Indlæser opgaven ...",
     "Task not found!" : "Opgaven blev ikke fundet!",
     "Settings" : "Indstillinger",
