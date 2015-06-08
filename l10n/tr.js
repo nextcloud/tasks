@@ -80,6 +80,8 @@ OC.L10N.register(
     "Add List..." : "Listeye Ekle...",
     "New List" : "Yeni Liste",
     "Load remaining completed tasks." : "Geri kalan tamamlanmış görevleri yükle.",
+    "(New category)" : "(Yeni kategori)",
+    "Select categories..." : "Kategorileri seçin...",
     "Loading the task..." : "Görev yükleniyor...",
     "Task not found!" : "Görev bulunamadı!",
     "Settings" : "Ayarlar",
