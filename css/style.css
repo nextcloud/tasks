@@ -4,10 +4,18 @@
   padding: 0;
   text-decoration: none;
 }
+#app-navigation li {
+  transition: max-height 300ms ease 0s;
+  max-height: 100px;
+}
+#app-navigation li.animate-up {
+  max-height: 0px;
+  border-bottom: 0;
+  overflow: hidden;
+}
 #content {
   overflow: hidden;
   color: #423E3E;
-  background: url("../img/bgBig.png") repeat scroll 0 0 #f3f3f3;
 }
 #content #tasks_wrapper {
   height: 100%;
@@ -292,200 +300,12 @@
   line-height: 14px;
   margin: 11px 3px 0 7px;
 }
-#app-navigation {
-  background: url("../img/bgTasks.png") repeat scroll 0 0 #e3e3e3;
-  font-family: "Helvetica Neue", "Helvetica", "Arial", Sans-Serif;
-  border-right: 1px solid #CFCFCF;
-  font-size: 13px;
-  padding-bottom: 77px !important;
-}
-#app-navigation div.header {
-  height: 37px;
-  border-bottom: 1px solid #AFAFAF;
-  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%) repeat scroll 0 0 transparent;
-  background: -moz-linear-gradient(center top, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center top, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%) repeat scroll 0 0 transparent;
-  background: -o-linear-gradient(center top, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%) repeat scroll 0 0 transparent;
-  background: linear-gradient(top, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%) repeat scroll 0 0 transparent;
-}
-#app-navigation div.header a {
-  cursor: pointer;
-  padding: 10px;
-  height: 20px;
-  line-height: 20px;
-}
-#app-navigation div.header #loading {
-  cursor: pointer;
-  padding: 8px;
-  display: block;
-  width: 20px;
-}
-#app-navigation div.header #loading span {
-  height: 20px;
-  width: 20px;
-  display: inline-block;
-  cursor: pointer;
-  vertical-align: middle;
-  background-size: 20px 20px;
-}
-#app-navigation div.header #loading span.done {
-  background: url("../img/sprites.svg") repeat-x scroll center bottom transparent;
-  background-position: 0 0;
-}
-#app-navigation div.footer {
-  height: 40px;
-}
-#app-navigation div.footer a {
-  cursor: pointer;
-  padding: 10px;
-  height: 20px;
-  line-height: 20px;
-  float: left;
-}
-#app-navigation div.footer a.settings {
-  float: right;
-}
-#app-navigation div.scroll {
-  height: 100%;
-  overflow: auto;
-}
-#app-navigation a.addlist {
-  background: none repeat scroll 0 0 transparent;
-}
-#app-navigation .count {
-  color: #909090;
-  float: right;
-}
-#app-navigation .addlist:hover .title {
-  color: #625F5F;
-}
-#app-navigation .addlist:hover .detail-add {
-  opacity: 1;
-}
-#app-navigation .addlist .title {
-  color: #909090;
-}
-#app-navigation .addlist,
-#app-navigation li a {
-  background: url("../img/divider.svg") repeat-x scroll center bottom transparent;
-  display: block;
-  -moz-box-sizing: border-box;
-  -o-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  position: relative;
-  height: 34px;
-  padding: 6px 12px 8px 8px !important;
-  color: #413D3F;
-  font-weight: bold;
-  text-shadow: 0 1px 0 white;
-  white-space: normal !important;
-  line-height: 20px !important;
-  min-height: 34px !important;
-}
-#app-navigation #collection_lists li a {
-  padding-right: 8px;
-}
-#app-navigation #collection_filters li a {
-  padding-right: 16px !important;
-}
-#app-navigation input.edit {
-  border: 1px solid #3F84B3;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1) inset;
-  font-family: "Helvetica Neue", "Helvetica", "Arial", Sans-Serif;
-  font-weight: bold;
-  font-size: 13px;
-  left: 34px;
-  padding: 4px;
-  position: absolute;
-  right: 46px;
-  top: 5px;
-  width: auto;
-  margin: 0;
-  border-radius: 0;
-}
-#app-navigation li {
-  height: 34px;
-  overflow: hidden;
-  position: relative;
-  transition: height 300ms ease 0s !important;
-}
-#app-navigation li.active a {
-  background: url("../img/bgTasksActive.png") repeat scroll 0 0 transparent;
-  border-bottom: 1px solid transparent;
-  color: white;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
-}
-#app-navigation li.active a .count {
-  color: white;
-}
-#app-navigation li.active .icon.collection-all {
-  background-position: -200px -20px;
-}
-#app-navigation li.active .icon.collection-current {
-  background-position: -240px -100px;
-}
-#app-navigation li.active .icon.list-list {
-  background-position: -40px -20px;
-}
-#app-navigation li.active .icon.collection-starred {
-  background-position: -20px -20px;
-}
-#app-navigation li.active .icon.collection-today {
-  background-position: -240px -40px;
-  color: white;
-  text-shadow: 0 1px 0 #336692;
-}
-#app-navigation li.active .icon.collection-week {
-  background-position: -220px -20px;
-}
-#app-navigation li.active .icon.collection-completed {
-  background-position: -100px -20px;
-}
-#app-navigation li.dragOver a {
-  border: 2px solid #2b88d9;
-  padding: 6px 10px 6px 6px;
-}
-#app-navigation li.dragOver a .title {
-  left: 38px;
-  right: 28px;
-  top: 6px;
-}
-#app-navigation li.animate-up {
-  height: 0px !important;
-  border-bottom: 0;
-}
-#app-navigation li input.edit {
-  border: 1px solid #3F84B3;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1) inset;
-  font-family: "Helvetica Neue", "Helvetica", "Arial", Sans-Serif;
-  font-weight: bold;
-  font-size: 13px;
-  left: 34px;
-  padding: 4px;
-  position: absolute;
-  right: 46px;
-  top: 5px;
-  width: auto;
-  margin: 0;
-  border-radius: 0;
-}
-#app-navigation .title {
-  position: absolute;
-  left: 40px;
-  right: 30px;
-  top: 6px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-}
 #app-content {
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
   -ms-transition: all 0.5s ease-in-out;
   -o-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
-  background: url("../img/bgBig.png") repeat scroll 0 0 #f3f3f3;
   overflow-x: hidden;
 }
 #app-content div.content-wrapper {
@@ -906,6 +726,7 @@
   font-weight: 500;
   outline: medium none;
   padding: 4px;
+  transition: all 0.2s ease-in-out 0s;
 }
 #task-details div.content-wrapper .body .section input.focus {
   background-color: #F8F8F8;
@@ -1097,7 +918,6 @@
   background: none repeat scroll 0 0 rgba(0, 0, 0, 0.25);
 }
 #settings_modal {
-  background: url("../img/bgBig.png") repeat scroll 0 0 #f3f3f3;
   border-radius: 6px;
 }
 #settings_modal .header h2 {

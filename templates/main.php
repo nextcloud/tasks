@@ -1,50 +1,62 @@
 <div ng-app="Tasks" ng-cloak ng-controller="AppController" ng-click="closeAll($event)" id="tasks_wrapper" class="handler">
     <div id="app-navigation" ng-controller="ListController">
-    	<div id="task_lists_header" class="header">
-        	<div id="main-toolbar">
-                <a id="loading" class="handler" ng-click="update()">
-                    <span class="loading" ng-class="{'done':!isLoading()}"></span>
-                </a>
-            </div>
-        </div>
-    	<div id="task_lists_scroll" class="scroll">
-        	<ul id="collection_filters">
-            	<li ng-repeat="collection in collections" id="collection_{{ collection.id }}" rel="{{ collection.id }}"
+        <ul id="collections">
+            <li ng-repeat="collection in collections" id="collection_{{ collection.id }}" rel="{{ collection.id }}"
                     ng-class="{'animate-up': hideCollection(collection.id), active: collection.id==route.listID}" oc-drop-task>
-                	<a href="#/lists/{{ collection.id }}">
-                		<span class="icon collection-{{ collection.id }}"><text ng-show="collection.id=='today'"><?php p($_['DOM']); ?></text></span>
-                        <span class="count">{{ getCollectionString(collection.id) }}</span>
-                		<span class="title"><text>{{ collection.displayname }}</text></span>
-                    </a>
-                </li>
-            </ul>
-            <ul id="collection_lists">
-                <li ng-repeat="list in lists" id="list_{{ list.id }}" rel="{{ list.id }}" ng-class="{active: list.id==route.listID}" oc-drop-task>
-                    <a href="#/lists/{{ list.id }}" style="border-right: 4px solid {{ list.calendarcolor }};">
-                        <span class="icon list-list"></span>
-                        <span class="count"><text ng-show="getListCount(list.id,'all')">{{ getListCount(list.id,'all') }}</text></span>
-                        <span class="title">
-                            <text ng-dblclick="editName(list.id)" oc-click-focus="{selector: 'input.edit', timeout: 0}">{{ list.displayname }}</text>
-                        </span>
-                    </a>
-                    <input ng-model="list.displayname" class="edit handler" type="text" ng-show="route.listparameter=='name' && route.listID == list.id"
-                    ng-keydown="checkName($event)">
-                </li>
-            </ul>
-            <a class="addlist handler" ng-click="startAddingList()" oc-click-focus="{selector: '#newList', timeout: 0}">
-                <span class="icon detail-add"></span>
-                <span class="title"><text><?php p($l->t('Add List...')); ?></text></span>
-                <input id="newList" ng-model="status.newListName" class="edit" type="text" ng-disabled="isAddingList" ng-show="status.addingList"
-                placeholder="<?php p($l->t('New List')); ?>" ng-keydown="checkListInput($event)" />
-            </a>
-        </div>
-        <div id="task_lists_footer" class="footer">
-        	<a class="delete" ng-click="deleteList(route.listID)" ng-show="showDelete(route.listID)">
-            	<span class="icon detail-trash"></span>
-            </a>
-            <a class="settings" ng-click="showSettings()">
-                <span class="icon detail-settings"></span>
-            </a>
+                <a href="#/lists/{{ collection.id }}">
+                        <span class="icon collection-{{ collection.id }}"><text ng-show="collection.id=='today'"><?php p($_['DOM']); ?></text></span>
+                        <span class="title">{{ collection.displayname }}</span>
+                </a>
+                <div class="app-navigation-entry-utils">
+                    <ul>
+                        <li class="app-navigation-entry-utils-counter">{{ getCollectionString(collection.id) }}</li>
+                    </ul>
+                </div>
+            </li>
+            <li ng-repeat="list in lists" id="list_{{ list.id }}" rel="{{ list.id }}" class="with-menu" ng-class="{active: list.id==route.listID}" oc-drop-task>
+                <a href="#/lists/{{ list.id }}" style="border-right: 4px solid {{ list.calendarcolor }};">
+                    <span class="icon list-list"></span>
+                    <span class="title"><text ng-dblclick="editName(list.id)" oc-click-focus="{selector: 'input.edit', timeout: 0}" ng-hide="route.listparameter=='name' && route.listID == list.id">{{ list.displayname }}</text></span>
+                    <input ng-model="list.displayname" class="edit handler" type="text" ng-show="route.listparameter=='name' && route.listID == list.id" ng-keydown="checkName($event)">
+                </a>
+                <div class="app-navigation-entry-utils">
+                    <ul>
+                        <li class="app-navigation-entry-utils-counter"><text ng-show="getListCount(list.id,'all')">{{ getListCount(list.id,'all') }}</text></li>
+                        <li class="app-navigation-entry-utils-menu-button svg"><button></button></li>
+                    </ul>
+                </div>
+                <div class="app-navigation-entry-menu">
+                    <ul>
+                        <li><button class="icon-rename svg" title="rename" ng-click="editName(list.id)"></button></li>
+                        <li><button class="icon-delete svg" title="delete" ng-click="deleteList(list.id)" ng-show="showDelete(list.id)"></button></li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <a class="addlist handler" ng-click="startAddingList()" stop-event="click" oc-click-focus="{selector: '#newList', timeout: 0}">
+                    <span class="icon detail-add"></span>
+                    <span class="title"><text><?php p($l->t('Add List...')); ?></text></span>
+                    <input id="newList" ng-model="status.newListName" class="edit" type="text" ng-disabled="isAddingList" ng-show="status.addingList"
+                        stop-event="click" placeholder="<?php p($l->t('New List')); ?>" ng-keydown="checkListInput($event)" />
+                </a>
+            <li>
+        </ul>
+        <div id="app-settings" ng-controller="SettingsController">
+            <div id="app-settings-header">
+                <button class="settings-button" data-apps-slide-toggle="#app-settings-content"></button>
+            </div>
+            <div id="app-settings-content">
+                <label for="startOfWeek"><?php p($l->t('Start of week')); ?></label>
+                <select id="startOfWeek" ng-change="setStartOfWeek()" ng-model="settingsmodel.getById('various').startOfWeek" ng-options="startOfWeekOption.id as startOfWeekOption.name for startOfWeekOption in startOfWeekOptions"></select>
+                <h2 class="bold"><?php p($l->t('Visibility of Smart Collections')); ?></h2>
+                <ul>
+                    <li ng-repeat="collection in collections">
+                        <span class="icon collection-{{ collection.id }}"><text ng-show="collection.id=='today'"><?php p($_['DOM']); ?></text></span>
+                        <label for="visibilityCollection-{{collection.id}}" class="title"><text>{{ collection.displayname }}</text></label>
+                        <select id="visibilityCollection-{{collection.id}}" ng-change="setVisibility(collection.id)" ng-model="collection.show" ng-options="collectionOption.id as collectionOption.name for collectionOption in collectionOptions"></select>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 
@@ -52,14 +64,14 @@
         <div class="content-wrapper">
         	<div id="add-task" class="add-task handler" ng-show="showInput()" ng-class="{'focus':status.focusTaskInput}">
                 <a class="input-star">
-                    <span class="icon input-star "></span>
+                    <span class="icon input-star"></span>
                 </a>
                 <a class="input-date">
                     <span class="icon input-date"></span>
                 </a>
                 <form ng-submit="addTask(taskName)" name="addTaskForm">
                     <input id="target" ng-disabled="isAddingTask" ng-click="focusInput()" class="transparent" placeholder="{{ getAddString() }}" ng-model="taskName"
-                    ng-keydown="checkTaskInput($event)"/>
+                        ng-keydown="checkTaskInput($event)"/>
                 </form>
             </div>
             <div class="task-list" ng-class="{'completed-hidden':!settingsmodel.getById('various').showHidden}">
@@ -92,7 +104,4 @@
             </div>
         </div>
     </div>
-    <script type="text/ng-template" id="part.settings.html">
-        <?php print_unescaped($this->inc('part.settings')); ?>
-    </script>
 </div>

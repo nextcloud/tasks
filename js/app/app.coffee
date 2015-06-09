@@ -43,9 +43,9 @@ angular.module('Tasks',['OC','ngRoute','ngAnimate','ui.bootstrap','ui.select',
 	return
 ]
 
-angular.module('Tasks').run ['Config', '$timeout',
+angular.module('Tasks').run ['$document', '$rootScope', 'Config', '$timeout',
 'ListsBusinessLayer', 'TasksBusinessLayer', 'SearchBusinessLayer'
-(Config, $timeout,TasksBusinessLayer, ListsBusinessLayer,
+($document, $rootScope, Config, $timeout,TasksBusinessLayer, ListsBusinessLayer,
 	SearchBusinessLayer) ->
 
 	init = false
@@ -60,6 +60,10 @@ angular.module('Tasks').run ['Config', '$timeout',
 		timeOutUpdate()
 
 	OCA.Search.tasks = SearchBusinessLayer
+
+	$document.click (event) ->
+		$rootScope.$broadcast 'documentClicked', event
+		return
 
 	moment.lang('details', {
 		calendar: {
