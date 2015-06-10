@@ -27,8 +27,8 @@
                 </div>
                 <div class="app-navigation-entry-menu">
                     <ul>
-                        <li><button class="icon-rename svg" title="rename" ng-click="editName(list.id)"></button></li>
-                        <li><button class="icon-delete svg" title="delete" ng-click="deleteList(list.id)" ng-show="showDelete(list.id)"></button></li>
+                        <li><button class="icon-rename svg" title="<?php p($l->t('rename')); ?>" ng-click="editName(list.id)"></button></li>
+                        <li><button class="icon-delete svg" title="<?php p($l->t('delete')); ?>" ng-click="deleteList(list.id)" ng-show="showDelete(list.id)"></button></li>
                     </ul>
                 </div>
             </li>
