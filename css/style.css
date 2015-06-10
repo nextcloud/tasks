@@ -8,6 +8,12 @@
   transition: max-height 300ms ease 0s;
   max-height: 100px;
 }
+#app-navigation li a > span.icon {
+  margin-top: -3px;
+}
+#app-navigation li a > span.title {
+  margin-left: 9px;
+}
 #app-navigation li.animate-up {
   max-height: 0px;
   border-bottom: 0;
