@@ -79,15 +79,10 @@ OC.L10N.register(
     "Set start date" : "Nastavi datum začetka",
     "Add List..." : "Dodaj seznam ...",
     "New List" : "Nov seznam",
+    "Start of week" : "Začetek tedna",
+    "Visibility of Smart Collections" : "Vidnost pametnih zbirk",
     "Load remaining completed tasks." : "Naloži preostale končane naloge.",
     "Loading the task..." : "Poteka nalaganje naloge ...",
-    "Task not found!" : "Naloge ni mogoče najti!",
-    "Settings" : "Nastavitve",
-    "Done" : "Končano",
-    "General" : "Splošno",
-    "General Settings" : "Splošne nastavitve",
-    "Start of week" : "Začetek tedna",
-    "Smart Collections" : "Pametne zbirke",
-    "Visibility of Smart Collections" : "Vidnost pametnih zbirk"
+    "Task not found!" : "Naloge ni mogoče najti!"
 },
 "nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);");

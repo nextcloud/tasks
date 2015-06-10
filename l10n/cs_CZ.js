@@ -79,17 +79,12 @@ OC.L10N.register(
     "Set start date" : "Nastavit počáteční datum",
     "Add List..." : "Přidat seznam...",
     "New List" : "Nový seznam",
+    "Start of week" : "Začátek týdne",
+    "Visibility of Smart Collections" : "Viditelnost Chytrých kolekcí",
     "Load remaining completed tasks." : "Načíst zbývající dokončené úkoly.",
     "(New category)" : "(Nová kategorie)",
     "Select categories..." : "Vybrat kategorie...",
     "Loading the task..." : "Nahrávám úkol...",
-    "Task not found!" : "Úkol nenalezen!",
-    "Settings" : "Nastavení",
-    "Done" : "Dokončeno",
-    "General" : "Hlavní",
-    "General Settings" : "Obecná nastavení",
-    "Start of week" : "Začátek týdne",
-    "Smart Collections" : "Chytré kolekce",
-    "Visibility of Smart Collections" : "Viditelnost Chytrých kolekcí"
+    "Task not found!" : "Úkol nenalezen!"
 },
 "nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;");

@@ -78,17 +78,12 @@ $TRANSLATIONS = array(
 "Set start date" => "วันที่เริ่มต้นการตั้งค่า",
 "Add List..." => "เพิ่มรายชื่อ ...",
 "New List" => "รายชื่อใหม่",
+"Start of week" => "จุดเริ่มต้นของสัปดาห์",
+"Visibility of Smart Collections" => "การแสดงผลของสมาร์ทคอลเลกชัน",
 "Load remaining completed tasks." => "โหลดงานที่เสร็จสมบูรณ์ที่เหลืออยู่",
 "(New category)" => "(หมวดหมู่ใหม่)",
 "Select categories..." => "เลือกหมวดหมู่ ...",
 "Loading the task..." => "กำลังโหลดงาน ...",
-"Task not found!" => "ไม่พบงาน!",
-"Settings" => "ตั้งค่า",
-"Done" => "เสร็จสิ้น",
-"General" => "ทั่วไป",
-"General Settings" => "การตั้งค่าทั่วไป",
-"Start of week" => "จุดเริ่มต้นของสัปดาห์",
-"Smart Collections" => "สมาร์ทคอลเลกชัน",
-"Visibility of Smart Collections" => "การแสดงผลของสมาร์ทคอลเลกชัน"
+"Task not found!" => "ไม่พบงาน!"
 );
 $PLURAL_FORMS = "nplurals=1; plural=0;";

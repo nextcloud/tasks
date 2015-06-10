@@ -79,15 +79,10 @@ OC.L10N.register(
     "Set start date" : "Uzstādīt sākuma datumu",
     "Add List..." : "Pievienot sarakstu",
     "New List" : "Jauns saraksts",
+    "Start of week" : "Nedēļas sākums",
+    "Visibility of Smart Collections" : "Viedo kolekciju redzamība",
     "Load remaining completed tasks." : "Ielādēt pārējos pabeigtos uzdevumus.",
     "Loading the task..." : "Ielādē uzdevumu...",
-    "Task not found!" : "Uzdevums nav atrasts!",
-    "Settings" : "Iestatījumi",
-    "Done" : "Pabeigts",
-    "General" : "Vispārīgi",
-    "General Settings" : "Vispārīgi iestatījumi",
-    "Start of week" : "Nedēļas sākums",
-    "Smart Collections" : "Viedās kolekcijas",
-    "Visibility of Smart Collections" : "Viedo kolekciju redzamība"
+    "Task not found!" : "Uzdevums nav atrasts!"
 },
 "nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);");

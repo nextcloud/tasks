@@ -79,17 +79,12 @@ OC.L10N.register(
     "Set start date" : "Instellen begindatum",
     "Add List..." : "Toevoegen lijst...",
     "New List" : "Nieuwe lijst",
+    "Start of week" : "Begin van de week",
+    "Visibility of Smart Collections" : "Zichtbaarheid van Slimme Verzamelingen",
     "Load remaining completed tasks." : "Laad overige afgeronde taken",
     "(New category)" : "(Nieuwe categorie)",
     "Select categories..." : "Kies categorieën...",
     "Loading the task..." : "Laden van de taak...",
-    "Task not found!" : "Taak niet gevonden!",
-    "Settings" : "Instellingen",
-    "Done" : "Gedaan",
-    "General" : "Algemeen",
-    "General Settings" : "Algemene instellingen",
-    "Start of week" : "Begin van de week",
-    "Smart Collections" : "Slimme Verzamelingen",
-    "Visibility of Smart Collections" : "Zichtbaarheid van Slimme Verzamelingen"
+    "Task not found!" : "Taak niet gevonden!"
 },
 "nplurals=2; plural=(n != 1);");

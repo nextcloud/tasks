@@ -79,17 +79,12 @@ OC.L10N.register(
     "Set start date" : "Angiv startdato",
     "Add List..." : "Tilføj liste...",
     "New List" : "Ny liste",
+    "Start of week" : "Ugens start",
+    "Visibility of Smart Collections" : "Synlighed for smarte samlinger",
     "Load remaining completed tasks." : "Indlæs resten af de fuldførte opgaver.",
     "(New category)" : "(Ny kategori)",
     "Select categories..." : "Vælg kategorier...",
     "Loading the task..." : "Indlæser opgaven ...",
-    "Task not found!" : "Opgaven blev ikke fundet!",
-    "Settings" : "Indstillinger",
-    "Done" : "Færdig",
-    "General" : "Generelt",
-    "General Settings" : "Generelle indstillinger",
-    "Start of week" : "Ugens start",
-    "Smart Collections" : "Smarte samlinger",
-    "Visibility of Smart Collections" : "Synlighed for smarte samlinger"
+    "Task not found!" : "Opgaven blev ikke fundet!"
 },
 "nplurals=2; plural=(n != 1);");

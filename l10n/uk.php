@@ -78,15 +78,10 @@ $TRANSLATIONS = array(
 "Set start date" => "Встановити дату початку",
 "Add List..." => "Додати список...",
 "New List" => "Новий список",
+"Start of week" => "Початок тижня",
+"Visibility of Smart Collections" => "Видимість Smart-колекції",
 "Load remaining completed tasks." => "Завантажити решту виконаних завдань.",
 "Loading the task..." => "Завантаження завдання ...",
-"Task not found!" => "Завдання не знайдене!",
-"Settings" => "Налаштування",
-"Done" => "Готово",
-"General" => "Загалом",
-"General Settings" => "Загальні Налаштування",
-"Start of week" => "Початок тижня",
-"Smart Collections" => "Smart Колекції",
-"Visibility of Smart Collections" => "Видимість Smart-колекції"
+"Task not found!" => "Завдання не знайдене!"
 );
 $PLURAL_FORMS = "nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);";
