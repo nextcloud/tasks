@@ -860,6 +860,7 @@
             }
           };
           this._$scope.startAddingList = function() {
+            $location.path('/lists/' + _$scope.route.listID);
             return _$scope.status.addingList = true;
           };
           this._$scope.endAddingList = function() {
@@ -903,6 +904,7 @@
             }
           };
           this._$scope.editName = function(listID) {
+            _$scope.status.addingList = false;
             _$scope.status.listNameBackup = _$listsmodel.getById(listID).displayname;
             return $location.path('/lists/' + _$scope.route.listID + '/edit/name');
           };

@@ -45,8 +45,8 @@ angular.module('Tasks',['OC','ngRoute','ngAnimate','ui.bootstrap','ui.select',
 
 angular.module('Tasks').run ['$document', '$rootScope', 'Config', '$timeout',
 'ListsBusinessLayer', 'TasksBusinessLayer', 'SearchBusinessLayer'
-($document, $rootScope, Config, $timeout,TasksBusinessLayer, ListsBusinessLayer,
-	SearchBusinessLayer) ->
+($document, $rootScope, Config, $timeout,TasksBusinessLayer,
+	ListsBusinessLayer, SearchBusinessLayer) ->
 
 	init = false
 	do update = ->
