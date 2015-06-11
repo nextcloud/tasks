@@ -17,9 +17,6 @@
   overflow: hidden;
   color: #423E3E;
 }
-#content #tasks_wrapper {
-  height: 100%;
-}
 #content .icon {
   background-image: url("../img/sprites.svg");
   height: 20px;
