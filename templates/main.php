@@ -34,7 +34,7 @@
 		<div class="app-navigation-entry-edit" ng-if="route.listparameter == 'name' && route.listID == list.id">
                     <form>
                         <input ng-model="list.displayname" class="edit" type="text" ng-keydown="checkName($event)" autofocus-on-insert>
-                        <input type="submit" value="" class="action icon-checkmark svg">
+                        <input type="submit" value="" class="action icon-checkmark svg" ng-click="submitNewName()">
                     </form>
                 </div>
             </li>
