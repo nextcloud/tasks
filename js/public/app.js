@@ -157,6 +157,16 @@
 }).call(this);
 
 (function() {
+  angular.module('Tasks').directive('autofocusOnInsert', function() {
+    'use strict';
+    return function(scope, elm) {
+      return elm.focus();
+    };
+  });
+
+}).call(this);
+
+(function() {
   angular.module('Tasks').directive('avatar', function() {
     return {
       restrict: 'A',
@@ -343,18 +353,6 @@
         return tabsCtrl.addPane(scope);
       },
       template: '<div class="tab-pane" ng-class="{active: selected}"' + 'ng-transclude>[[ ]]</div>'
-    };
-  });
-
-}).call(this);
-
-(function() {
-  angular.module('Tasks').directive('stopEvent', function() {
-    return {
-      restrict: 'A',
-      link: function(scope, element, attr) {
-        return element.bind(attr.stopEvent, function(e) {});
-      }
     };
   });
 
