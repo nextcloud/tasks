@@ -8,6 +8,17 @@
   transition: max-height 300ms ease 0s;
   max-height: 100px;
 }
+#app-navigation li.edit > a,
+#app-navigation li.edit .app-navigation-entry-utils,
+#app-navigation li.edit .app-navigation-entry-menu {
+  display: none;
+}
+#app-navigation li.edit .app-navigation-entry-edit {
+  display: inline-block;
+}
+#app-navigation li .app-navigation-entry-edit {
+  display: none;
+}
 #app-navigation li a > span.icon {
   margin-top: -3px;
 }
@@ -22,9 +33,6 @@
 #content {
   overflow: hidden;
   color: #423E3E;
-}
-#content #tasks_wrapper {
-  height: 100%;
 }
 #content .icon {
   background-image: url("../img/sprites.svg");
@@ -709,7 +717,7 @@
 }
 #task-details div.content-wrapper .body .section {
   background: url("../img/divider.svg") repeat-x scroll center bottom transparent;
-  height: 28px;
+  height: 46px;
   padding: 9px 20px 9px 55px;
   position: relative;
   text-shadow: 0 1px 0 white;

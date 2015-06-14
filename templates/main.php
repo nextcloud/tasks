@@ -1,4 +1,4 @@
-<div ng-app="Tasks" ng-cloak ng-controller="AppController" ng-click="closeAll($event)" id="tasks_wrapper" class="handler">
+<div ng-app="Tasks" ng-cloak ng-controller="AppController" ng-click="closeAll($event)" id="app" class="handler">
     <div id="app-navigation" ng-controller="ListController">
         <ul id="collections">
             <li ng-repeat="collection in collections" id="collection_{{ collection.id }}" rel="{{ collection.id }}"
@@ -13,15 +13,15 @@
                     </ul>
                 </div>
             </li>
-            <li ng-repeat="list in lists" id="list_{{ list.id }}" rel="{{ list.id }}" class="with-menu" ng-class="{active: list.id==route.listID}" oc-drop-task>
-                <a href="#/lists/{{ list.id }}" style="border-right: 4px solid {{ list.calendarcolor }};">
+           <li ng-repeat="list in lists" id="list_{{ list.id }}" rel="{{ list.id }}" class="with-menu handler"
+                    ng-class="{active: list.id==route.listID, edit:route.listparameter == 'name' && route.listID == list.id}" oc-drop-task>
+                <a href="#/lists/{{ list.id }}" style="border-right: 4px solid {{ list.calendarcolor }};" ng-dblclick="editName(list.id)">
                     <span class="icon list-list"></span>
-                    <span class="title"><text ng-dblclick="editName(list.id)" oc-click-focus="{selector: 'input.edit', timeout: 0}" ng-hide="route.listparameter=='name' && route.listID == list.id">{{ list.displayname }}</text></span>
-                    <input ng-model="list.displayname" class="edit handler" type="text" ng-show="route.listparameter=='name' && route.listID == list.id" ng-keydown="checkName($event)">
+                    <span class="title">{{ list.displayname }}</span>
                 </a>
                 <div class="app-navigation-entry-utils">
                     <ul>
-                        <li class="app-navigation-entry-utils-counter"><text ng-show="getListCount(list.id,'all')">{{ getListCount(list.id,'all') }}</text></li>
+                        <li class="app-navigation-entry-utils-counter">{{ getListCount(list.id,'all') }}</li>
                         <li class="app-navigation-entry-utils-menu-button svg"><button></button></li>
                     </ul>
                 </div>
@@ -31,15 +31,26 @@
                         <li><button class="icon-delete svg" title="<?php p($l->t('delete')); ?>" ng-click="deleteList(list.id)" ng-show="showDelete(list.id)"></button></li>
                     </ul>
                 </div>
+                <div class="app-navigation-entry-edit">
+                    <form>
+                        <input ng-model="list.displayname" class="edit" type="text" ng-keydown="checkName($event)" autofocus-on-insert>
+                        <input type="submit" value="" class="action icon-checkmark svg" ng-click="submitNewName()">
+                    </form>
+                </div>
             </li>
-            <li>
-                <a class="addlist handler" ng-click="startAddingList()" stop-event="click" oc-click-focus="{selector: '#newList', timeout: 0}">
+            <li class="newList handler" ng-class="{edit: status.addingList}">
+                <a class="addlist" ng-click="startAddingList()" oc-click-focus="{selector: '#newList', timeout: 0}">
                     <span class="icon detail-add"></span>
-                    <span class="title"><text><?php p($l->t('Add List...')); ?></text></span>
-                    <input id="newList" ng-model="status.newListName" class="edit" type="text" ng-disabled="isAddingList" ng-show="status.addingList"
-                        stop-event="click" placeholder="<?php p($l->t('New List')); ?>" ng-keydown="checkListInput($event)" />
+                    <span class="title"><?php p($l->t('Add List...')); ?></span>
                 </a>
-            <li>
+                <div class="app-navigation-entry-edit">
+                    <form ng-disabled="isAddingList">
+                        <input id="newList" ng-model="status.newListName" class="edit" type="text" autofocus-on-insert
+                        placeholder="<?php p($l->t('New List')); ?>" ng-keydown="checkListInput($event)" >
+                        <input type="submit" value="" class="action icon-checkmark svg" ng-click="submitNewList($event)">
+                    </form>
+                </div>
+            </li>
         </ul>
         <div id="app-settings" ng-controller="SettingsController">
             <div id="app-settings-header">
@@ -54,7 +65,7 @@
                 <ul>
                     <li ng-repeat="collection in collections">
                         <span class="icon collection-{{ collection.id }}"><text ng-show="collection.id=='today'"><?php p($_['DOM']); ?></text></span>
-                        <label for="visibilityCollection-{{collection.id}}" class="title"><text>{{ collection.displayname }}</text></label>
+                        <label for="visibilityCollection-{{collection.id}}" class="title">{{ collection.displayname }}</label>
                         <select id="visibilityCollection-{{collection.id}}" ng-change="setVisibility(collection.id)" ng-model="collection.show" ng-options="collectionOption.id as collectionOption.name for collectionOption in collectionOptions"></select>
                     </li>
                 </ul>

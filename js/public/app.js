@@ -157,6 +157,16 @@
 }).call(this);
 
 (function() {
+  angular.module('Tasks').directive('autofocusOnInsert', function() {
+    'use strict';
+    return function(scope, elm) {
+      return elm.focus();
+    };
+  });
+
+}).call(this);
+
+(function() {
   angular.module('Tasks').directive('avatar', function() {
     return {
       restrict: 'A',
@@ -349,18 +359,6 @@
 }).call(this);
 
 (function() {
-  angular.module('Tasks').directive('stopEvent', function() {
-    return {
-      restrict: 'A',
-      link: function(scope, element, attr) {
-        return element.bind(attr.stopEvent, function(e) {});
-      }
-    };
-  });
-
-}).call(this);
-
-(function() {
   angular.module('Tasks').directive('tabs', function() {
     var directive;
     return directive = {
@@ -458,6 +456,10 @@
               _$location.path('/lists/' + _$scope.route.listID);
               _$scope.status.addingList = false;
               _$scope.status.focusTaskInput = false;
+              _$scope.status.newListName = "";
+            }
+            if (!$($event.target).closest('.newList').length) {
+              _$scope.status.addingList = false;
               return _$scope.status.newListName = "";
             } else {
 
@@ -862,6 +864,7 @@
             }
           };
           this._$scope.startAddingList = function() {
+            $location.path('/lists/' + _$scope.route.listID);
             return _$scope.status.addingList = true;
           };
           this._$scope.endAddingList = function() {
@@ -905,6 +908,7 @@
             }
           };
           this._$scope.editName = function(listID) {
+            _$scope.status.addingList = false;
             _$scope.status.listNameBackup = _$listsmodel.getById(listID).displayname;
             return $location.path('/lists/' + _$scope.route.listID + '/edit/name');
           };

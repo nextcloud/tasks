@@ -51,6 +51,7 @@ CollectionsModel, ListsBusinessLayer, $location, SearchBusinessLayer) ->
 					$location.path('/lists/'+_$listsmodel.getStandardList())
 
 			@_$scope.startAddingList = () ->
+				$location.path('/lists/'+_$scope.route.listID)
 				_$scope.status.addingList = true
 
 			@_$scope.endAddingList = () ->
@@ -93,6 +94,7 @@ CollectionsModel, ListsBusinessLayer, $location, SearchBusinessLayer) ->
 					'An empty name is not allowed.'))
 
 			@_$scope.editName = (listID) ->
+				_$scope.status.addingList = false
 				_$scope.status.listNameBackup = _$listsmodel.getById(listID).displayname
 				$location.path('/lists/'+_$scope.route.listID+'/edit/name')
 

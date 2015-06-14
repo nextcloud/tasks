@@ -55,6 +55,9 @@ $routeParams, Loading, SettingsModel) ->
 					_$scope.status.addingList = false
 					_$scope.status.focusTaskInput = false
 					_$scope.status.newListName = ""
+				if !$($event.target).closest('.newList').length
+					_$scope.status.addingList = false
+					_$scope.status.newListName = ""
 				else
 					return
 
