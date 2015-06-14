@@ -38,7 +38,7 @@
                     </form>
                 </div>
             </li>
-            <li class="handler">
+            <li class="newList handler">
                 <a class="addlist" ng-click="startAddingList()" oc-click-focus="{selector: '#newList', timeout: 0}" ng-hide="status.addingList">
                     <span class="icon detail-add"></span>
                     <span class="title"><?php p($l->t('Add List...')); ?></span>
