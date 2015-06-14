@@ -457,6 +457,9 @@
               _$scope.status.addingList = false;
               _$scope.status.focusTaskInput = false;
               return _$scope.status.newListName = "";
+            } else if ($($event.target).closest('.close-new').length) {
+              _$scope.status.addingList = false;
+              return _$scope.status.newListName = "";
             } else {
 
             }
