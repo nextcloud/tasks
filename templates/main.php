@@ -13,7 +13,7 @@
                     </ul>
                 </div>
             </li>
-	    <li ng-repeat="list in lists" id="list_{{ list.id }}" rel="{{ list.id }}" class="with-menu handler"
+           <li ng-repeat="list in lists" id="list_{{ list.id }}" rel="{{ list.id }}" class="with-menu handler"
                     ng-class="{active: list.id==route.listID}" oc-drop-task>
                 <a href="#/lists/{{ list.id }}" style="border-right: 4px solid {{ list.calendarcolor }};" ng-dblclick="editName(list.id)" ng-if-start="route.listparameter != 'name' || route.listID != list.id">
                     <span class="icon list-list"></span>
@@ -31,7 +31,7 @@
                         <li><button class="icon-delete svg" title="delete" ng-click="deleteList(list.id)" ng-show="showDelete(list.id)"></button></li>
                     </ul>
                 </div>
-		<div class="app-navigation-entry-edit" ng-if="route.listparameter == 'name' && route.listID == list.id">
+                <div class="app-navigation-entry-edit" ng-if="route.listparameter == 'name' && route.listID == list.id">
                     <form>
                         <input ng-model="list.displayname" class="edit" type="text" ng-keydown="checkName($event)" autofocus-on-insert>
                         <input type="submit" value="" class="action icon-checkmark svg" ng-click="submitNewName()">
