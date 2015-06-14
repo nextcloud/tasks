@@ -8,6 +8,17 @@
   transition: max-height 300ms ease 0s;
   max-height: 100px;
 }
+#app-navigation li.edit > a,
+#app-navigation li.edit .app-navigation-entry-utils,
+#app-navigation li.edit .app-navigation-entry-menu {
+  display: none;
+}
+#app-navigation li.edit .app-navigation-entry-edit {
+  display: inline-block;
+}
+#app-navigation li .app-navigation-entry-edit {
+  display: none;
+}
 #app-navigation li.animate-up {
   max-height: 0px;
   border-bottom: 0;

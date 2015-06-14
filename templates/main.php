@@ -14,8 +14,8 @@
                 </div>
             </li>
            <li ng-repeat="list in lists" id="list_{{ list.id }}" rel="{{ list.id }}" class="with-menu handler close-new"
-                    ng-class="{active: list.id==route.listID}" oc-drop-task>
-                <a href="#/lists/{{ list.id }}" style="border-right: 4px solid {{ list.calendarcolor }};" ng-dblclick="editName(list.id)" ng-if-start="route.listparameter != 'name' || route.listID != list.id">
+                    ng-class="{active: list.id==route.listID, edit:route.listparameter == 'name' && route.listID == list.id}" oc-drop-task>
+                <a href="#/lists/{{ list.id }}" style="border-right: 4px solid {{ list.calendarcolor }};" ng-dblclick="editName(list.id)">
                     <span class="icon list-list"></span>
                     <span class="title">{{ list.displayname }}</span>
                 </a>
@@ -25,25 +25,25 @@
                         <li class="app-navigation-entry-utils-menu-button svg"><button></button></li>
                     </ul>
                 </div>
-                <div class="app-navigation-entry-menu" ng-if-end>
+                <div class="app-navigation-entry-menu">
                     <ul>
                         <li><button class="icon-rename svg" title="rename" ng-click="editName(list.id)"></button></li>
                         <li><button class="icon-delete svg" title="delete" ng-click="deleteList(list.id)" ng-show="showDelete(list.id)"></button></li>
                     </ul>
                 </div>
-                <div class="app-navigation-entry-edit" ng-if="route.listparameter == 'name' && route.listID == list.id">
+                <div class="app-navigation-entry-edit">
                     <form>
                         <input ng-model="list.displayname" class="edit" type="text" ng-keydown="checkName($event)" autofocus-on-insert>
                         <input type="submit" value="" class="action icon-checkmark svg" ng-click="submitNewName()">
                     </form>
                 </div>
             </li>
-            <li class="newList handler">
-                <a class="addlist" ng-click="startAddingList()" oc-click-focus="{selector: '#newList', timeout: 0}" ng-hide="status.addingList">
+            <li class="newList handler" ng-class="{edit: status.addingList}">
+                <a class="addlist" ng-click="startAddingList()" oc-click-focus="{selector: '#newList', timeout: 0}">
                     <span class="icon detail-add"></span>
                     <span class="title"><?php p($l->t('Add List...')); ?></span>
                 </a>
-                <div class="app-navigation-entry-edit" ng-show="status.addingList">
+                <div class="app-navigation-entry-edit">
                     <form ng-disabled="isAddingList">
                         <input id="newList" ng-model="status.newListName" class="edit" type="text" autofocus-on-insert
                         placeholder="<?php p($l->t('New List')); ?>" ng-keydown="checkListInput($event)" >

@@ -32,6 +32,18 @@
 	li {
 		transition: max-height 300ms ease 0s;
 		max-height: 100px;
+		&.edit{
+			& > a, .app-navigation-entry-utils, .app-navigation-entry-menu{
+				display:none;
+			}
+			.app-navigation-entry-edit{
+				display:inline-block;
+			}
+
+		}
+		.app-navigation-entry-edit{
+			display: none;
+		}
 		&.animate-up {
 			max-height: 0px;
 			border-bottom: 0;
