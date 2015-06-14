@@ -39,12 +39,17 @@
                 </div>
             </li>
             <li class="handler">
-                <a class="addlist" ng-click="startAddingList()" oc-click-focus="{selector: '#newList', timeout: 0}">
+                <a class="addlist" ng-click="startAddingList()" oc-click-focus="{selector: '#newList', timeout: 0}" ng-hide="status.addingList">
                     <span class="icon detail-add"></span>
-                    <span class="title" ng-hide="status.addingList"><?php p($l->t('Add List...')); ?></span>
-                    <input id="newList" ng-model="status.newListName" class="edit" type="text" ng-disabled="isAddingList" ng-show="status.addingList"
-                        placeholder="<?php p($l->t('New List')); ?>" ng-keydown="checkListInput($event)" />
+                    <span class="title"><?php p($l->t('Add List...')); ?></span>
                 </a>
+                <div class="app-navigation-entry-edit" ng-show="status.addingList">
+                    <form ng-disabled="isAddingList">
+                        <input id="newList" ng-model="status.newListName" class="edit" type="text" autofocus-on-insert
+                        placeholder="<?php p($l->t('New List')); ?>" ng-keydown="checkListInput($event)" >
+                        <input type="submit" value="" class="action icon-checkmark svg" ng-click="submitNewList($event)">
+                    </form>
+                </div>
             </li>
         </ul>
         <div id="app-settings" ng-controller="SettingsController">
