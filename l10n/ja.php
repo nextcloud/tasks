@@ -78,15 +78,10 @@ $TRANSLATIONS = array(
 "Set start date" => "開始日を設定",
 "Add List..." => "リスト追加...",
 "New List" => "新規リスト",
+"Start of week" => "週の初め",
+"Visibility of Smart Collections" => "スマートコレクションの表示",
 "Load remaining completed tasks." => "残りの完了済みタスクをロード",
 "Loading the task..." => "タスクの読み込み中...",
-"Task not found!" => "タスクがありません！",
-"Settings" => "設定",
-"Done" => "完了",
-"General" => "一般",
-"General Settings" => "一般設定",
-"Start of week" => "週の初め",
-"Smart Collections" => "スマートコレクション",
-"Visibility of Smart Collections" => "スマートコレクションの表示"
+"Task not found!" => "タスクがありません！"
 );
 $PLURAL_FORMS = "nplurals=1; plural=0;";

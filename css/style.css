@@ -19,6 +19,12 @@
 #app-navigation li .app-navigation-entry-edit {
   display: none;
 }
+#app-navigation li a > span.icon {
+  margin-top: -3px;
+}
+#app-navigation li a > span.title {
+  margin-left: 9px;
+}
 #app-navigation li.animate-up {
   max-height: 0px;
   border-bottom: 0;
@@ -522,11 +528,7 @@
   background-position: -40px -40px !important;
 }
 #task-details div.content-wrapper .title {
-  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.05) 100%) repeat scroll 0 0 transparent;
-  background: -moz-linear-gradient(center top, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.05) 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center top, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.05) 100%) repeat scroll 0 0 transparent;
-  background: -o-linear-gradient(center top, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.05) 100%) repeat scroll 0 0 transparent;
-  background: linear-gradient(top, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.05) 100%) repeat scroll 0 0 transparent;
+  background-color: #f5f5f5;
   border-bottom: 1px solid rgba(0, 0, 0, 0.24);
   font-size: 16px;
   font-weight: bold;

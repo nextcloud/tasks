@@ -78,13 +78,8 @@ $TRANSLATIONS = array(
 "Set start date" => "Sätt startdatum",
 "Add List..." => "Lägg till lista ...",
 "New List" => "Ny lista",
-"Load remaining completed tasks." => "Ladda återstående slutförda uppgifter.",
-"Settings" => "Inställningar",
-"Done" => "Färdig",
-"General" => "Allmänt",
-"General Settings" => "Generella inställningar",
 "Start of week" => "Början av vecka",
-"Smart Collections" => "Smarta samlingar",
-"Visibility of Smart Collections" => "Synlighet av smarta samlingar"
+"Visibility of Smart Collections" => "Synlighet av smarta samlingar",
+"Load remaining completed tasks." => "Ladda återstående slutförda uppgifter."
 );
 $PLURAL_FORMS = "nplurals=2; plural=(n != 1);";

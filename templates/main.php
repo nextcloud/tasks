@@ -27,8 +27,8 @@
                 </div>
                 <div class="app-navigation-entry-menu">
                     <ul>
-                        <li><button class="icon-rename svg" title="rename" ng-click="editName(list.id)"></button></li>
-                        <li><button class="icon-delete svg" title="delete" ng-click="deleteList(list.id)" ng-show="showDelete(list.id)"></button></li>
+                        <li><button class="icon-rename svg" title="<?php p($l->t('rename')); ?>" ng-click="editName(list.id)"></button></li>
+                        <li><button class="icon-delete svg" title="<?php p($l->t('delete')); ?>" ng-click="deleteList(list.id)" ng-show="showDelete(list.id)"></button></li>
                     </ul>
                 </div>
                 <div class="app-navigation-entry-edit">
@@ -54,7 +54,9 @@
         </ul>
         <div id="app-settings" ng-controller="SettingsController">
             <div id="app-settings-header">
-                <button class="settings-button" data-apps-slide-toggle="#app-settings-content"></button>
+                <button class="settings-button" data-apps-slide-toggle="#app-settings-content">
+                    <span><?php p($l->t('Settings')); ?></span>
+                </button>
             </div>
             <div id="app-settings-content">
                 <label for="startOfWeek"><?php p($l->t('Start of week')); ?></label>

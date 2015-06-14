@@ -78,15 +78,10 @@ $TRANSLATIONS = array(
 "Set start date" => "Başlanğıc tarixini işə sal",
 "Add List..." => "Siyahını əlavə et...",
 "New List" => "Yeni Siyahı",
+"Start of week" => "Həftə başlanğıcı",
+"Visibility of Smart Collections" => "Ağıllı yiğımların görünməsi",
 "Load remaining completed tasks." => "Gözləmədə olan bitmiş taöşırıqları yüklə.",
 "Loading the task..." => "Tapşırıq yüklkənir...",
-"Task not found!" => "Tapşırıq tapılmadı!",
-"Settings" => "Quraşdırmalar",
-"Done" => "Edildi",
-"General" => "Ümumi",
-"General Settings" => "Ümumi quraşdırmalar",
-"Start of week" => "Həftə başlanğıcı",
-"Smart Collections" => "Ağıllı yığmalar",
-"Visibility of Smart Collections" => "Ağıllı yiğımların görünməsi"
+"Task not found!" => "Tapşırıq tapılmadı!"
 );
 $PLURAL_FORMS = "nplurals=2; plural=(n != 1);";

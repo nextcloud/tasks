@@ -78,17 +78,12 @@ $TRANSLATIONS = array(
 "Set start date" => "Başlangıç tarihini ayarla",
 "Add List..." => "Listeye Ekle...",
 "New List" => "Yeni Liste",
+"Start of week" => "Hafta başlangıcı",
+"Visibility of Smart Collections" => "Akıllı Koleksiyon Görünürlüğü",
 "Load remaining completed tasks." => "Geri kalan tamamlanmış görevleri yükle.",
 "(New category)" => "(Yeni kategori)",
 "Select categories..." => "Kategorileri seçin...",
 "Loading the task..." => "Görev yükleniyor...",
-"Task not found!" => "Görev bulunamadı!",
-"Settings" => "Ayarlar",
-"Done" => "Bitti",
-"General" => "Genel",
-"General Settings" => "Genel Ayarlar",
-"Start of week" => "Hafta başlangıcı",
-"Smart Collections" => "Akıllı Koleksiyonlar",
-"Visibility of Smart Collections" => "Akıllı Koleksiyon Görünürlüğü"
+"Task not found!" => "Görev bulunamadı!"
 );
 $PLURAL_FORMS = "nplurals=2; plural=(n > 1);";

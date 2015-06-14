@@ -78,17 +78,12 @@ $TRANSLATIONS = array(
 "Set start date" => "Sett startdato",
 "Add List..." => "Legg til liste...",
 "New List" => "Ny liste",
+"Start of week" => "Start på uke",
+"Visibility of Smart Collections" => "Synlighet for smarte samlinger",
 "Load remaining completed tasks." => "Last gjenværende avsluttede oppgaver.",
 "(New category)" => "(Ny kategori)",
 "Select categories..." => "Velg kategorier..",
 "Loading the task..." => "Laster oppgave...",
-"Task not found!" => "Oppgaven ble ikke funnet!",
-"Settings" => "Innstillinger",
-"Done" => "Ferdig",
-"General" => "Generelt",
-"General Settings" => "Vanlige innstillinger",
-"Start of week" => "Start på uke",
-"Smart Collections" => "Smarte samlinger",
-"Visibility of Smart Collections" => "Synlighet for smarte samlinger"
+"Task not found!" => "Oppgaven ble ikke funnet!"
 );
 $PLURAL_FORMS = "nplurals=2; plural=(n != 1);";

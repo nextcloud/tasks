@@ -77,15 +77,10 @@
     "Set start date" : "Сложи начална дата",
     "Add List..." : "Добави Списък...",
     "New List" : "Нов Списък",
+    "Start of week" : "Начало на седмица",
+    "Visibility of Smart Collections" : "Видимост на Smart Колекции",
     "Load remaining completed tasks." : "Зареди останалите завършени задачи.",
     "Loading the task..." : "Зареждане на задачата...",
-    "Task not found!" : "Задачата не е намерена!",
-    "Settings" : "Настройки",
-    "Done" : "Завършен",
-    "General" : "Общи",
-    "General Settings" : "Общи Настройки",
-    "Start of week" : "Начало на седмица",
-    "Smart Collections" : "Smart Колекции",
-    "Visibility of Smart Collections" : "Видимост на Smart Колекции"
+    "Task not found!" : "Задачата не е намерена!"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

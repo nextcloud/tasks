@@ -75,11 +75,6 @@ OC.L10N.register(
     "Set start date" : "Kezdő dátum beállítása",
     "Add List..." : "Lista hozzáadása",
     "New List" : "Új lista",
-    "Settings" : "Beállítások",
-    "Done" : "Kész",
-    "General" : "Általános",
-    "General Settings" : "Általános beállítások",
-    "Start of week" : "A hét első napja",
-    "Smart Collections" : "Okos gyüjtemény"
+    "Start of week" : "A hét első napja"
 },
 "nplurals=2; plural=(n != 1);");

@@ -78,15 +78,10 @@ $TRANSLATIONS = array(
 "Set start date" => "Ustaw datę rozpoczęcia",
 "Add List..." => "Dodaj listę...",
 "New List" => "Nowa lista",
+"Start of week" => "Początek tygodnia",
+"Visibility of Smart Collections" => "Widoczność Smart Collections",
 "Load remaining completed tasks." => "Załaduj pozostałe ukończone zadania.",
 "Loading the task..." => "Ładowanie zadania...",
-"Task not found!" => "Nie znaleziono zadania!",
-"Settings" => "Ustawienia",
-"Done" => "Ukończono",
-"General" => "Ogólne",
-"General Settings" => "Ustawienia ogólne",
-"Start of week" => "Początek tygodnia",
-"Smart Collections" => "Smart Collections",
-"Visibility of Smart Collections" => "Widoczność Smart Collections"
+"Task not found!" => "Nie znaleziono zadania!"
 );
 $PLURAL_FORMS = "nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);";

@@ -78,17 +78,12 @@ $TRANSLATIONS = array(
 "Set start date" => "Set start date",
 "Add List..." => "Add List...",
 "New List" => "New List",
+"Start of week" => "Start of week",
+"Visibility of Smart Collections" => "Visibility of Smart Collections",
 "Load remaining completed tasks." => "Load remaining completed tasks.",
 "(New category)" => "(New category)",
 "Select categories..." => "Select categories...",
 "Loading the task..." => "Loading the task...",
-"Task not found!" => "Task not found!",
-"Settings" => "Settings",
-"Done" => "Done",
-"General" => "General",
-"General Settings" => "General Settings",
-"Start of week" => "Start of week",
-"Smart Collections" => "Smart Collections",
-"Visibility of Smart Collections" => "Visibility of Smart Collections"
+"Task not found!" => "Task not found!"
 );
 $PLURAL_FORMS = "nplurals=2; plural=(n != 1);";

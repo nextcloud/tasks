@@ -78,13 +78,8 @@ $TRANSLATIONS = array(
 "Set start date" => "Ezarri hasteko eguna",
 "Add List..." => "Gehitu zerrenda...",
 "New List" => "Zerrenda berria",
-"Load remaining completed tasks." => "Kargatu betetako  beste zereginak",
-"Settings" => "Ezarpenak",
-"Done" => "Egina",
-"General" => "Orokorra",
-"General Settings" => "Ezarpen orokorrak",
 "Start of week" => "Astearen hasiera",
-"Smart Collections" => "Bilduma argiak",
-"Visibility of Smart Collections" => "Bilduma argien ikusgarritasuna"
+"Visibility of Smart Collections" => "Bilduma argien ikusgarritasuna",
+"Load remaining completed tasks." => "Kargatu betetako  beste zereginak"
 );
 $PLURAL_FORMS = "nplurals=2; plural=(n != 1);";

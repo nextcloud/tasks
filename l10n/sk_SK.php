@@ -78,15 +78,10 @@ $TRANSLATIONS = array(
 "Set start date" => "Nastaviť dátum začatia",
 "Add List..." => "Pridať zoznam",
 "New List" => "Nový zoznam",
+"Start of week" => "Začiatok týždňa",
+"Visibility of Smart Collections" => "Viditeľnosť inteligentných kolekcií",
 "Load remaining completed tasks." => "Načítať zostávajúce dokončené úlohy.",
 "Loading the task..." => "Nahrávam úlohu...",
-"Task not found!" => "Úloha nebola nájdená!",
-"Settings" => "Nastavenia",
-"Done" => "Hotovo",
-"General" => "Všeobecné",
-"General Settings" => "Všeobecné nastavenia",
-"Start of week" => "Začiatok týždňa",
-"Smart Collections" => "Inteligentné kolekcie",
-"Visibility of Smart Collections" => "Viditeľnosť inteligentných kolekcií"
+"Task not found!" => "Úloha nebola nájdená!"
 );
 $PLURAL_FORMS = "nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;";

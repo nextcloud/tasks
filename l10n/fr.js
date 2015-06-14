@@ -79,17 +79,12 @@ OC.L10N.register(
     "Set start date" : "Spécifier la date de début",
     "Add List..." : "Ajouter une liste...",
     "New List" : "Nouvelle liste",
+    "Start of week" : "Début de semaine",
+    "Visibility of Smart Collections" : "Visibilité des collections Smart",
     "Load remaining completed tasks." : "Charger le reste des tâches terminées.",
     "(New category)" : "(Nouvelle catégorie)",
     "Select categories..." : "Sélectionner des catégories...",
     "Loading the task..." : "Chargement de la tâche…",
-    "Task not found!" : "Tâche non trouvée !",
-    "Settings" : "Paramètres",
-    "Done" : "Terminé",
-    "General" : "Général",
-    "General Settings" : "Paramètres généraux",
-    "Start of week" : "Début de semaine",
-    "Smart Collections" : "Collections Smart",
-    "Visibility of Smart Collections" : "Visibilité des collections Smart"
+    "Task not found!" : "Tâche non trouvée !"
 },
 "nplurals=2; plural=(n > 1);");

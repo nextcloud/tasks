@@ -77,15 +77,10 @@
     "Set start date" : "Määra alguse kuupäev",
     "Add List..." : "Lisa nimekirja...",
     "New List" : "Uus nimekiri",
+    "Start of week" : "Nädala algus",
+    "Visibility of Smart Collections" : "Nutikate kollektsioonide nähtavus",
     "Load remaining completed tasks." : "Laadi ülejäänud lõpetatud ülesanded",
     "Loading the task..." : "Ülesande laadimine...",
-    "Task not found!" : "Ülesannet ei leitud!",
-    "Settings" : "Seaded",
-    "Done" : "Valmis",
-    "General" : "Üldine",
-    "General Settings" : "Üldised seaded",
-    "Start of week" : "Nädala algus",
-    "Smart Collections" : "Nutikad kollektsioonid",
-    "Visibility of Smart Collections" : "Nutikate kollektsioonide nähtavus"
+    "Task not found!" : "Ülesannet ei leitud!"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

@@ -79,12 +79,7 @@ OC.L10N.register(
     "Set start date" : "Atur tanggal mulai",
     "Add List..." : "Tambah Daftar...",
     "New List" : "Daftar Baru",
-    "Settings" : "Pengaturan",
-    "Done" : "Selesai",
-    "General" : "Umum",
-    "General Settings" : "Pengaturan Umum",
     "Start of week" : "Mulai minggu",
-    "Smart Collections" : "Koleksi Cerdas",
     "Visibility of Smart Collections" : "Visibilitas Koleksi Cerdas"
 },
 "nplurals=1; plural=0;");

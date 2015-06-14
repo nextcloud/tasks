@@ -79,17 +79,12 @@ OC.L10N.register(
     "Set start date" : "Постави датум почетка",
     "Add List..." : "Додај листу...",
     "New List" : "Нова листа",
+    "Start of week" : "Почетак недеље",
+    "Visibility of Smart Collections" : "Видљивост паметних збирки",
     "Load remaining completed tasks." : "Учитај преостале довршене задатке.",
     "(New category)" : "(Нова категорија)",
     "Select categories..." : "Изаберите категорије...",
     "Loading the task..." : "Учитавам задатке...",
-    "Task not found!" : "Задатак није пронађен!",
-    "Settings" : "Поставке",
-    "Done" : "Завршено",
-    "General" : "Опште",
-    "General Settings" : "Опште поставке",
-    "Start of week" : "Почетак недеље",
-    "Smart Collections" : "Паметне збирке",
-    "Visibility of Smart Collections" : "Видљивост паметних збирки"
+    "Task not found!" : "Задатак није пронађен!"
 },
 "nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);");

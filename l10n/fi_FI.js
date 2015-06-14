@@ -75,17 +75,12 @@ OC.L10N.register(
     "Set start date" : "Aseta aloituspäivä",
     "Add List..." : "Lisää luettelo...",
     "New List" : "Uusi luettelo",
+    "Start of week" : "Viikon alku",
+    "Visibility of Smart Collections" : "Älykkäiden kokoelmien näkyvyys",
     "Load remaining completed tasks." : "Lataa loput valmistuneet tehtävät.",
     "(New category)" : "(Uusi luokka)",
     "Select categories..." : "Valitse luokat...",
     "Loading the task..." : "Ladataan tehtävää...",
-    "Task not found!" : "Tehtävää ei löytynyt!",
-    "Settings" : "Asetukset",
-    "Done" : "Valmis",
-    "General" : "Yleiset",
-    "General Settings" : "Yleisasetukset",
-    "Start of week" : "Viikon alku",
-    "Smart Collections" : "Älykkäät kokoelmat",
-    "Visibility of Smart Collections" : "Älykkäiden kokoelmien näkyvyys"
+    "Task not found!" : "Tehtävää ei löytynyt!"
 },
 "nplurals=2; plural=(n != 1);");
