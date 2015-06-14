@@ -13,7 +13,7 @@
                     </ul>
                 </div>
             </li>
-           <li ng-repeat="list in lists" id="list_{{ list.id }}" rel="{{ list.id }}" class="with-menu handler close-new"
+           <li ng-repeat="list in lists" id="list_{{ list.id }}" rel="{{ list.id }}" class="with-menu handler"
                     ng-class="{active: list.id==route.listID, edit:route.listparameter == 'name' && route.listID == list.id}" oc-drop-task>
                 <a href="#/lists/{{ list.id }}" style="border-right: 4px solid {{ list.calendarcolor }};" ng-dblclick="editName(list.id)">
                     <span class="icon list-list"></span>
