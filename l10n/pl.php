@@ -76,11 +76,16 @@ $TRANSLATIONS = array(
 "at the end" => "na końcu",
 "at the beginning" => "na początku",
 "Set start date" => "Ustaw datę rozpoczęcia",
+"rename" => "zmiana nazwy",
+"delete" => "skasuj",
 "Add List..." => "Dodaj listę...",
 "New List" => "Nowa lista",
+"Settings" => "Ustawienia",
 "Start of week" => "Początek tygodnia",
 "Visibility of Smart Collections" => "Widoczność Smart Collections",
 "Load remaining completed tasks." => "Załaduj pozostałe ukończone zadania.",
+"(New category)" => "(Nowa kategoria)",
+"Select categories..." => "Wybierz kategorie...",
 "Loading the task..." => "Ładowanie zadania...",
 "Task not found!" => "Nie znaleziono zadania!"
 );
