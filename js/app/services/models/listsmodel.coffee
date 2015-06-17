@@ -110,6 +110,13 @@ angular.module('Tasks').factory 'ListsModel',
 			else
 				return @getById(listID).notLoaded
 
+		notLoadedAll: () ->
+			lists = @getAll()
+			count = 0
+			for list in lists
+				count += @notLoaded(list.id)
+			return count
+
 		loadedAll: (listID) ->
 			return !@notLoaded(listID)
 
