@@ -339,53 +339,6 @@
 }).call(this);
 
 (function() {
-  angular.module('Tasks').directive('pane', function() {
-    var directive;
-    return directive = {
-      scope: {
-        title: '@'
-      },
-      require: '^tabs',
-      restrict: 'E',
-      transclude: true,
-      replace: true,
-      link: function(scope, element, attrs, tabsCtrl) {
-        return tabsCtrl.addPane(scope);
-      },
-      template: '<div class="tab-pane" ng-class="{active: selected}"' + 'ng-transclude>[[ ]]</div>'
-    };
-  });
-
-}).call(this);
-
-(function() {
-  angular.module('Tasks').directive('tabs', function() {
-    var directive;
-    return directive = {
-      restrict: 'E',
-      scope: {},
-      controller: function($scope, $element) {
-        var panes;
-        panes = $scope.panes = [];
-        $scope.select = function(pane) {
-          angular.forEach(panes, function(pane) {
-            return pane.selected = false;
-          });
-          return pane.selected = true;
-        };
-        return this.addPane = function(pane) {
-          if (panes.length === 0) {
-            $scope.select(pane);
-          }
-          return panes.push(pane);
-        };
-      }
-    };
-  });
-
-}).call(this);
-
-(function() {
   angular.module('Tasks').directive('timepicker', function() {
     return {
       restrict: 'A',
