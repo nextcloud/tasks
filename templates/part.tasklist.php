@@ -1,6 +1,6 @@
 <!-- <div ng-switch-default> -->
 <div ng-if="route.listID != 'week' && route.listID != 'starred' && route.listID != 'completed' && route.listID != 'all' && route.listID != 'today' && route.listID != 'current'">
-    <div class="grouped-tasks">
+    <div class="grouped-tasks" ng-class="{'completed-hidden':!settingsmodel.getById('various').showHidden}">
         <ol class="tasks" rel="uncompleted" oc-drop-task>
             <li ng-repeat="(id, task) in tasks | filter:filterTasks(task,route.listID) | filter:{'completed':'false'} | filter:filterTasksByString(task) | orderBy:sortDue | orderBy:'starred':true"
             class="task-item ui-draggable handler" rel="{{ task.id }}" ng-click="openDetails(task.id)" ng-class="{done: task.completed}" oc-drag-task>

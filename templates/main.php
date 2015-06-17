@@ -87,7 +87,7 @@
                         ng-keydown="checkTaskInput($event)"/>
                 </form>
             </div>
-            <div class="task-list" ng-class="{'completed-hidden':!settingsmodel.getById('various').showHidden}">
+            <div class="task-list">
                 <?php print_unescaped($this->inc('part.tasklist')); ?>
                 <?php print_unescaped($this->inc('part.collectionall')); ?>
                 <?php print_unescaped($this->inc('part.collectionweek')); ?>
