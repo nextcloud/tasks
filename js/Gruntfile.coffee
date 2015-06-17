@@ -32,6 +32,7 @@ module.exports = (grunt) ->
 	grunt.loadNpmTasks('grunt-phpunit')
 	grunt.loadNpmTasks('grunt-karma')
 	grunt.loadNpmTasks('grunt-concurrent')
+	grunt.loadNpmTasks('grunt-newer')
 
 	grunt.initConfig
 
@@ -145,8 +146,8 @@ module.exports = (grunt) ->
 
 	grunt.registerTask('ci', ['karma:continuous'])
 
-	grunt.registerTask('js', ['coffeelint', 'coffee', 'concat', 'wrap'])
-	grunt.registerTask('css', ['less'])
+	grunt.registerTask('js', ['newer:coffeelint', 'newer:coffee', 'concat', 'wrap'])
+	grunt.registerTask('css', ['newer:less'])
 
 	grunt.registerTask('dev', ['js', 'css'])
 
