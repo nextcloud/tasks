@@ -79,6 +79,7 @@ OC.L10N.register(
     "Set start date" : "Defina data de inicio ",
     "Add List..." : "Adicionar Lista...",
     "New List" : "Nova Lista",
+    "Settings" : "Definições",
     "Start of week" : "Inicio da semana",
     "Visibility of Smart Collections" : "Visibilidade das Coleções Inteligentes",
     "Load remaining completed tasks." : "Carregar as tarefas concluídas restantes.",
