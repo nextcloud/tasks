@@ -1,38 +1,20 @@
-# News CoffeeScript/JavaScript development
+# JS & CSS development
+You need grunt installed to compile the coffeescript and less files.
+To compile all files run `grunt dev`.
 
-You will need node.js version >= 0.8
-
-## Compile coffeescript
+## JS
 To compile the coffeescript run:
+`grunt js`
 
-    make
-    
-If you want to autocompile on change run:
+## CSS
+To compile the less files run:
+`grunt css`
 
-    make watch
-
-## Running unittests
-Unittests are run with the testacular:
-
-	make testacular
-
-afterwards the watch command can be run in a new terminal:
-
-	make watch
-
-This will automatically execute unittests when a coffeescript file has been changed and saved.
-
-### PHPUnit
-To run phpunittests once a file changed, simply run
-
-    make phpunit
-
-## Clear compiled folder
-To clear the build/ folder run:
-
-    make clean
-
-## Run js unittests
-To run js unittests with the ci server, use 
-
-	make test
+## Watch Tasks
+Instead of executing the command everytime you change a file, grunt can watch for changes.
+Use the following commands instead:
+```
+grunt watch:dev
+grunt watch:js
+grunt watch:css
+```
