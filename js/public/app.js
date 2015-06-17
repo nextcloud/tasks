@@ -1928,14 +1928,13 @@
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
   angular.module('Tasks').factory('ListsModel', [
-    'TasksModel', '_Model', '_EqualQuery', 'Utils', function(TasksModel, _Model, _EqualQuery, Utils) {
+    'TasksModel', '_Model', function(TasksModel, _Model) {
       var ListsModel;
       ListsModel = (function(_super) {
         __extends(ListsModel, _super);
 
-        function ListsModel(_$tasksmodel, _utils) {
+        function ListsModel(_$tasksmodel) {
           this._$tasksmodel = _$tasksmodel;
-          this._utils = _utils;
           this._tmpIdCache = {};
           ListsModel.__super__.constructor.call(this);
         }
@@ -2093,7 +2092,7 @@
         return ListsModel;
 
       })(_Model);
-      return new ListsModel(TasksModel, Utils);
+      return new ListsModel(TasksModel);
     }
   ]);
 
@@ -2147,13 +2146,12 @@
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   angular.module('Tasks').factory('TasksModel', [
-    '_Model', '_EqualQuery', 'Utils', function(_Model, _EqualQuery, Utils) {
+    '_Model', function(_Model) {
       var TasksModel;
       TasksModel = (function(_super) {
         __extends(TasksModel, _super);
 
-        function TasksModel(_utils) {
-          this._utils = _utils;
+        function TasksModel() {
           this._tmpIdCache = {};
           TasksModel.__super__.constructor.call(this);
         }
@@ -2485,7 +2483,7 @@
         return TasksModel;
 
       })(_Model);
-      return new TasksModel(Utils);
+      return new TasksModel();
     }
   ]);
 

@@ -20,11 +20,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 ###
 angular.module('Tasks').factory 'TasksModel',
-['_Model', '_EqualQuery', 'Utils',
-(_Model, _EqualQuery, Utils) ->
+['_Model',
+(_Model) ->
 	class TasksModel extends _Model
 
-		constructor: (@_utils) ->
+		constructor: () ->
 			@_tmpIdCache = {}
 			super()
 
@@ -241,5 +241,5 @@ angular.module('Tasks').factory 'TasksModel',
 					break
 				i++
 
-	return new TasksModel(Utils)
+	return new TasksModel()
 ]
