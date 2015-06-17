@@ -105,11 +105,8 @@ module.exports = (grunt) ->
 
 
 		watch:
-			coffeescript:
-				files: ['app/**/*.coffee']
-				tasks: 'coffee'
 			js:
-				files: ['app/**/*.js']
+				files: ['app/**/*.coffee']
 				tasks: 'js'
 			css:
 				files: ['../css/*.less']
