@@ -28,9 +28,11 @@ module.exports = (grunt) ->
 	grunt.loadNpmTasks('grunt-contrib-coffee')
 	grunt.loadNpmTasks('grunt-contrib-less')
 	grunt.loadNpmTasks('grunt-coffeelint')
-	grunt.loadNpmTasks('grunt-wrap');
-	grunt.loadNpmTasks('grunt-phpunit');
-	grunt.loadNpmTasks('grunt-karma');
+	grunt.loadNpmTasks('grunt-wrap')
+	grunt.loadNpmTasks('grunt-phpunit')
+	grunt.loadNpmTasks('grunt-karma')
+	grunt.loadNpmTasks('grunt-concurrent')
+	grunt.loadNpmTasks('grunt-newer')
 
 	grunt.initConfig
 
@@ -67,7 +69,7 @@ module.exports = (grunt) ->
 				ext: ".css"
 
 		concat:
-			app:
+			default:
 				options:
 					banner: '<%= meta.banner %>\n'
 					stripBanners:
@@ -81,7 +83,7 @@ module.exports = (grunt) ->
 					]
 				dest: '<%= meta.production %>app.js'
 		wrap:
-			app:
+			default:
 				src: '<%= meta.production %>app.js'
 				dest: ''
 				wrapper: [
@@ -90,7 +92,7 @@ module.exports = (grunt) ->
 				]
 
 		coffeelint:
-			app: [
+			default: [
 				'app/**/*.coffee'
 				'tests/**/*.coffee'
 			]
@@ -104,18 +106,21 @@ module.exports = (grunt) ->
 
 
 		watch:
-			coffeescript:
+			js:
 				files: ['app/**/*.coffee']
-				tasks: 'coffee'
-			concat:
-				files: [
-					'<%= meta.build %>app/**/*.js'
-					'<%= meta.build %>tests/**/*.js'
-				]
-				tasks: 'compile'
-			less:
+				tasks: 'js'
+			css:
 				files: ['../css/*.less']
-				tasks: 'less'
+				tasks: 'css'
+
+		concurrent:
+			dev:
+				tasks: [
+					'watch:js'
+					'watch:css'
+				]
+				options:
+					logConcurrentOutput: true
 
 		karma:
 			unit:
@@ -139,8 +144,13 @@ module.exports = (grunt) ->
 				colors: true
 
 
-	grunt.registerTask('run', ['watch:concat'])
-	grunt.registerTask('compile', ['concat', 'wrap', 'coffeelint'])
 	grunt.registerTask('ci', ['karma:continuous'])
-	grunt.registerTask('testphp', ['watch:phpunit'])
-	# grunt.registerTask('default', 'watch')
+
+	grunt.registerTask('js', ['newer:coffeelint', 'newer:coffee', 'concat', 'wrap'])
+	grunt.registerTask('css', ['newer:less'])
+
+	grunt.registerTask('dev', ['js', 'css'])
+
+	# overwrite watch:all to simplify naming
+	grunt.registerTask('watch:dev', ['concurrent:dev'])
+	grunt.registerTask('default', 'dev')
