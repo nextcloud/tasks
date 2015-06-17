@@ -155,8 +155,8 @@ Class Helper {
 		} else {
 			$task['reminder'] = null;
 		}
-		$starred = $vtodo->PRIORITY;
-		if($starred){
+		$priority = $vtodo->PRIORITY;
+		if(isset($priority) && $priority->getValue() > 0){
 			$task['starred'] = true;
 		} else {
 			$task['starred'] = false;
@@ -248,7 +248,11 @@ Class Helper {
 		$vtodo->LOCATION = $request['location'];
 		$vtodo->DESCRIPTION = $request['description'];
 		$vtodo->CATEGORIES = $request["categories"];
-		$vtodo->PRIORITY = $request['priority'];
+		if($request['priority']) {
+			$vtodo->PRIORITY = 5; // prio: medium
+		} else {
+			$vtodo->PRIORITY = 0; // prio: undefined
+		}
 		$percentComplete = $vtodo->__get('PERCENT-COMPLETE');
 		if (is_null($percentComplete)) {
 			$percentComplete = $vtodo->add('PERCENT-COMPLETE');
