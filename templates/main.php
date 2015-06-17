@@ -9,7 +9,7 @@
                 </a>
                 <div class="app-navigation-entry-utils">
                     <ul>
-                        <li class="app-navigation-entry-utils-counter">{{ getCollectionString(collection.id) }}</li>
+                        <li class="app-navigation-entry-utils-counter">{{ getCollectionString(collection.id) | counterFormatter }}</li>
                     </ul>
                 </div>
             </li>
@@ -21,7 +21,7 @@
                 </a>
                 <div class="app-navigation-entry-utils">
                     <ul>
-                        <li class="app-navigation-entry-utils-counter">{{ getListCount(list.id,'all') }}</li>
+                        <li class="app-navigation-entry-utils-counter">{{ getListCount(list.id,'all') | counterFormatter }}</li>
                         <li class="app-navigation-entry-utils-menu-button svg"><button></button></li>
                     </ul>
                 </div>

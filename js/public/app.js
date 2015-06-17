@@ -964,12 +964,8 @@
           };
           this._$scope.getCollectionString = function(collectionID) {
             var filter;
-            if (collectionID !== 'completed') {
-              filter = _$searchbusinesslayer.getFilter();
-              return _$collectionsmodel.getCount(collectionID, filter);
-            } else {
-              return '';
-            }
+            filter = _$searchbusinesslayer.getFilter();
+            return _$collectionsmodel.getCount(collectionID, filter);
           };
           this._$scope.getListCount = function(listID, type) {
             var filter;
@@ -3091,6 +3087,19 @@
       return new Status();
     }
   ]);
+
+}).call(this);
+
+(function() {
+  angular.module('Tasks').filter('counterFormatter', function() {
+    return function(count) {
+      if (count > 999) {
+        return '999+';
+      } else {
+        return count;
+      }
+    };
+  });
 
 }).call(this);
 

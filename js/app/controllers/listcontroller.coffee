@@ -146,11 +146,8 @@ CollectionsModel, ListsBusinessLayer, $location, SearchBusinessLayer) ->
 						return (@getCollectionCount(collectionID) < 1)
 
 			@_$scope.getCollectionString = (collectionID) ->
-				if collectionID != 'completed'
-					filter = _$searchbusinesslayer.getFilter()
-					return _$collectionsmodel.getCount(collectionID,filter)
-				else
-					return ''
+				filter = _$searchbusinesslayer.getFilter()
+				return _$collectionsmodel.getCount(collectionID,filter)
 
 			@_$scope.getListCount = (listID,type) ->
 				filter = _$searchbusinesslayer.getFilter()
