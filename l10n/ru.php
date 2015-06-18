@@ -76,11 +76,16 @@ $TRANSLATIONS = array(
 "at the end" => "в конце",
 "at the beginning" => "в начале",
 "Set start date" => "Установить начальную дату",
+"rename" => "переименовать",
+"delete" => "удалить",
 "Add List..." => "Добавить Список...",
 "New List" => "Новый список",
+"Settings" => "Настройки",
 "Start of week" => "Начало недели",
 "Visibility of Smart Collections" => "Доступность Умных Коллекций",
 "Load remaining completed tasks." => "Загрузить оставшиеся завершённые задачи.",
+"(New category)" => "(Новая категория)",
+"Select categories..." => "Выбрать категории...",
 "Loading the task..." => "Загрузка задачи...",
 "Task not found!" => "Задача не найдена!"
 );
