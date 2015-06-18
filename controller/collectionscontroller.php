@@ -74,11 +74,11 @@ class CollectionsController extends Controller {
 		foreach ($collections as $key => $collection){
 			try{
 				$tmp = $this->settings->getUserValue($this->userId, $this->appName,'show_'.$collection['id']);
-				if (!in_array((int)$tmp, array(0,1,2)) || $tmp === null) {
-					$tmp = 2;
-					$this->settings->setUserValue($this->userId, $this->appName,'show_'.$collection['id'],$tmp);
+				if (!in_array($tmp, array('0','1','2'))) {
+					$this->settings->setUserValue($this->userId, $this->appName,'show_'.$collection['id'],$collections[$key]['show']);
+				}else{
+					$collections[$key]['show'] = (int)$tmp;
 				}
-				$collections[$key]['show'] = (int)$tmp;
 			}catch(\Exception $e) {
 					\OCP\Util::writeLog($this->appName, $e->getMessage(), \OCP\Util::ERROR);
 			}
