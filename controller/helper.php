@@ -156,9 +156,14 @@ Class Helper {
 			$task['reminder'] = null;
 		}
 		$priority = $vtodo->PRIORITY;
-		if(isset($priority) && $priority->getValue() > 0){
-			$task['starred'] = true;
+		if(isset($priority)){
+			$priority = (10 - $priority->getValue()) % 10;
+			$task['priority'] = (string) $priority;
+			if($priority > 5){
+				$task['starred'] = true;
+			}
 		} else {
+			$task['priority'] = '0';
 			$task['starred'] = false;
 		}
 		$completed = $vtodo->COMPLETED;

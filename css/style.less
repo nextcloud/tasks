@@ -180,8 +180,11 @@
 		&.detail-percent{
 			background-position: -260px -60px;
 		}
+		&.detail-priority{
+			background-position: -160px -80px;
+		}
 		&.detail-categories{
-			background-position: -180px -40px;
+			background-position: -200px -60px;
 		}
 		&.task-checked, &.detail-checked {
 			background-position: -60px -20px;
@@ -195,18 +198,18 @@
 			background-position: -60px -40px;
 			height: 60px;
 			width: 30px;
+			&.low{
+				background-position: -90px -100px !important;
+			}
+			&.medium{
+				background-position: -60px -100px !important;
+			}
+			&.high{
+				background-position: -120px -40px !important;
+			}
 			&:hover {
 				background-position: -90px -40px;
 			}
-		}
-		&.detail-starred{
-			top: -2px !important;
-			position: absolute;
-			right: 15px;
-			top: -2px;
-			background-position: -120px -40px !important;
-			height: 60px;
-			width: 30px;
 		}
 		&.detail-save{
 			background-position: -20px -40px;
@@ -283,12 +286,15 @@
 						&:hover{
 							background-position: -160px 0;
 						}
-					}
-					&.task-starred, &.task-starred:hover{
-						background-position: -180px 0;
-						margin-left: 5px;
-						margin-right: 8px;
-						margin-top: 0;
+						&.high{
+							background-position: -180px 0 !important;
+						}
+						&.medium{
+							background-position: -160px -40px !important;
+						}
+						&.low{
+							background-position: -180px -40px !important;
+						}
 					}
 				}
 				.title-wrapper {
@@ -861,9 +867,33 @@
 						}
 					}
 				}
+				&.high{
+					.icon.detail-priority{
+						background-position: -180px -80px;
+					}
+					.section-title{
+						color: #B3312D;
+					}
+				}
+				&.medium{
+					.icon.detail-priority{
+						background-position: -160px -100px;
+					}
+					.section-title{
+						color: #FFDD00;
+					}
+				}
+				&.low{
+					.icon.detail-priority{
+						background-position: -180px -100px;
+					}
+					.section-title{
+						color: #4271A6;
+					}
+				}
 				&.active{
 					.detail-categories{
-						background-position: -180px -60px;
+						background-position: -200px -80px;
 					}
 					.select2-search-field input{
 						color: #4271a6;
@@ -1035,7 +1065,7 @@ input.duration-input{
 	margin: 2px 0 0 0.3em;
 	width: 35px;
 }
-input.percent-input{
+input.percent-input, input.priority-input{
 	width: 35px;
 	margin-top: 0px;
 }

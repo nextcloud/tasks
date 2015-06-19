@@ -5,7 +5,7 @@
             <text>{{ list.displayname }}</text>
         </h2>
         <ol class="tasks">
-            <li ng-animate="'animate'" ng-repeat="task in tasks | filter:filterTasks(task,list.id) | filter:filterTasks(task,route.listID) | filter:filterTasksByString(task) | orderBy:sortDue | orderBy:'starred':true | orderBy:'completed_date':true"
+            <li ng-animate="'animate'" ng-repeat="task in tasks | filter:filterTasks(task,list.id) | filter:filterTasks(task,route.listID) | filter:filterTasksByString(task) | orderBy:sortDue | orderBy:'priority':true | orderBy:'completed_date':true"
             class="task-item ui-draggable handler" rel="{{ task.id }}" ng-click="openDetails(task.id,$event)" ng-class="{done: task.completed}" oc-drag-task>
                 <div class="task-body">
                     <div class="percentdone" style="width:{{ task.complete }}%; background-color:{{list.calendarcolor}};"></div>
@@ -14,7 +14,7 @@
                     </a>
                     <a class="icon task-separator"></a>
                     <a class="task-star handler" ng-click="toggleStarred(task.id)">
-                        <span class="icon task-star faded" ng-class="{'task-starred': task.starred}"></span>
+                        <span class="icon task-star faded" ng-class="{'high':task.priority>5,'medium':task.priority==5,'low':task.priority > 0 && task.priority < 5}"></span>
                     </a>
                     <a class="duedate" ng-class="{overdue: TasksModel.overdue(task.due)}">{{ task.due | dateTaskList }}</a>
                     <div class="title-wrapper"  ng-class="{attachment: task.note!=''}">

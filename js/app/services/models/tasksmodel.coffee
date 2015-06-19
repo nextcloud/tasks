@@ -162,6 +162,9 @@ angular.module('Tasks').factory 'TasksModel',
 		unstar: (taskID) ->
 			@update({id:taskID,starred:false})
 
+		setPriority: (taskID, priority) ->
+			@update({id:taskID,priority:priority})
+
 		completed: (taskID) ->
 			return @getById(taskID).completed
 

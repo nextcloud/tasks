@@ -172,6 +172,13 @@ $timeout, $routeParams, SettingsModel, Loading) ->
 				else
 					return
 
+			@_$scope.editPriority = ($event) ->
+				if $($event.currentTarget).is($($event.target).closest('.handler'))
+					_$location.path('/lists/'+_$scope.route.listID +
+						'/tasks/' + _$scope.route.taskID + '/edit/priority')
+				else
+					return
+
 			@_$scope.editPercent = ($event) ->
 				if $($event.currentTarget).is($($event.target).closest('.handler'))
 					_$location.path('/lists/'+_$scope.route.listID +
@@ -221,6 +228,9 @@ $timeout, $routeParams, SettingsModel, Loading) ->
 				else
 					_tasksbusinesslayer.starTask(taskID)
 
+			@_$scope.deletePriority = () ->
+				_tasksbusinesslayer.unstarTask(_$scope.route.taskID)
+
 			@_$scope.isDue = (date) ->
 				return _$tasksmodel.due(date)
 
@@ -250,6 +260,13 @@ $timeout, $routeParams, SettingsModel, Loading) ->
 						_$scope.timers['task'+newVal.id+'complete'] = $timeout( () ->
 							_tasksbusinesslayer.setPercentComplete(newVal.id,
 							newVal.complete)
+						,1000)
+					if newVal.priority != oldVal.priority
+						if _$scope.timers['task'+newVal.id+'priority']
+							$timeout.cancel(_$scope.timers['task'+newVal.id+'priority'])
+						_$scope.timers['task'+newVal.id+'priority'] = $timeout( () ->
+							_tasksbusinesslayer.setPriority(newVal.id,
+							newVal.priority)
 						,1000)
 			,true)
 

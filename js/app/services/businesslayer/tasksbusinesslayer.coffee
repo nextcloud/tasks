@@ -47,16 +47,19 @@ angular.module('Tasks').factory 'TasksBusinessLayer',
 
 			@_persistence.getTask(taskID, onSuccess, true)
 
+		setPriority: (taskID, priority) ->
+			@_$tasksmodel.setPriority(taskID, priority)
+			if +priority in [6,7,8,9]
+				@_$tasksmodel.star(taskID)
+			else
+				@_$tasksmodel.unstar(taskID)
+			@_persistence.setPriority(taskID, priority)
+
 		starTask: (taskID) ->
-			@_$tasksmodel.star(taskID)
-			@_persistence.starTask(taskID)
+			@setPriority(taskID, '9')
 
 		unstarTask: (taskID) ->
-			@_$tasksmodel.unstar(taskID)
-			@_persistence.unstarTask(taskID)
-
-		completeTask: (taskID) ->
-			@setPercentComplete(taskID,100)
+			@setPriority(taskID, '0')
 
 		setPercentComplete: (taskID, percentComplete) ->
 			@_$tasksmodel.setPercentComplete(taskID, percentComplete)
@@ -65,6 +68,9 @@ angular.module('Tasks').factory 'TasksBusinessLayer',
 			else
 				@_$tasksmodel.complete(taskID)
 			@_persistence.setPercentComplete(taskID, percentComplete)
+
+		completeTask: (taskID) ->
+			@setPercentComplete(taskID,100)
 
 		uncompleteTask: (taskID) ->
 			@setPercentComplete(taskID,0)

@@ -44,10 +44,6 @@ $application->registerRoutes($this, array('routes' => array(
 	// tasks
 	array('name' => 'tasks#getTasks',		'url' => '/tasks/{type}/{listID}',		'verb' => 'GET'),
 	array('name' => 'tasks#getTask',		'url' => '/task/{taskID}',				'verb' => 'GET'),
-	array('name' => 'tasks#starTask',		'url' => '/tasks/{taskID}/star',		'verb' => 'POST'),
-	array('name' => 'tasks#unstarTask',		'url' => '/tasks/{taskID}/unstar',		'verb' => 'POST'),
-	array('name' => 'tasks#completeTask',	'url' => '/tasks/{taskID}/complete',	'verb' => 'POST'),
-	array('name' => 'tasks#uncompleteTask',	'url' => '/tasks/{taskID}/uncomplete',	'verb' => 'POST'),
 	array('name' => 'tasks#addTask',		'url' => '/tasks/add',					'verb' => 'POST'),
 	array('name' => 'tasks#deleteTask',		'url' => '/tasks/{taskID}/delete',		'verb' => 'POST'),
 	array('name' => 'tasks#setTaskName',	'url' => '/tasks/{taskID}/name',		'verb' => 'POST'),
@@ -57,6 +53,7 @@ $application->registerRoutes($this, array('routes' => array(
 	array('name' => 'tasks#setStartDate',	'url' => '/tasks/{taskID}/start',		'verb' => 'POST'),
 
 	array('name' => 'tasks#percentComplete','url' => '/tasks/{taskID}/percentcomplete',	'verb' => 'POST'),
+	array('name' => 'tasks#setPriority',	'url' => '/tasks/{taskID}/priority',		'verb' => 'POST'),
 	array('name' => 'tasks#setReminderDate','url' => '/tasks/{taskID}/reminder',		'verb' => 'POST'),
 	array('name' => 'tasks#addComment',		'url' => '/tasks/{taskID}/comment',			'verb' => 'POST'),
 	array('name' => 'tasks#deleteComment',	'url' => '/tasks/{taskID}/comment/{commentID}/delete',	'verb' => 'POST'),
