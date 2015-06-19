@@ -917,8 +917,12 @@
           };
           this._$scope.getCollectionString = function(collectionID) {
             var filter;
-            filter = _$searchbusinesslayer.getFilter();
-            return _$collectionsmodel.getCount(collectionID, filter);
+            if (collectionID !== 'completed') {
+              filter = _$searchbusinesslayer.getFilter();
+              return _$collectionsmodel.getCount(collectionID, filter);
+            } else {
+              return '';
+            }
           };
           this._$scope.getListCount = function(listID, type) {
             var filter;
@@ -1875,14 +1879,13 @@
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
   angular.module('Tasks').factory('CollectionsModel', [
-    'TasksModel', 'ListsModel', '_Model', function(TasksModel, ListsModel, _Model) {
+    'TasksModel', '_Model', function(TasksModel, _Model) {
       var CollectionsModel;
       CollectionsModel = (function(_super) {
         __extends(CollectionsModel, _super);
 
-        function CollectionsModel(_$tasksmodel, _$listsmodel) {
+        function CollectionsModel(_$tasksmodel) {
           this._$tasksmodel = _$tasksmodel;
-          this._$listsmodel = _$listsmodel;
           this._nameCache = {};
           CollectionsModel.__super__.constructor.call(this);
         }
@@ -1908,16 +1911,13 @@
             task = tasks[_i];
             count += this._$tasksmodel.filterTasks(task, collectionID) && this._$tasksmodel.filterTasksByString(task, filter);
           }
-          if (collectionID === 'completed' && filter === '') {
-            count += this._$listsmodel.notLoadedAll();
-          }
           return count;
         };
 
         return CollectionsModel;
 
       })(_Model);
-      return new CollectionsModel(TasksModel, ListsModel);
+      return new CollectionsModel(TasksModel);
     }
   ]);
 
@@ -2056,17 +2056,6 @@
           } else {
             return this.getById(listID).notLoaded;
           }
-        };
-
-        ListsModel.prototype.notLoadedAll = function() {
-          var count, list, lists, _i, _len;
-          lists = this.getAll();
-          count = 0;
-          for (_i = 0, _len = lists.length; _i < _len; _i++) {
-            list = lists[_i];
-            count += this.notLoaded(list.id);
-          }
-          return count;
         };
 
         ListsModel.prototype.loadedAll = function(listID) {
@@ -3147,6 +3136,23 @@
   angular.module('Tasks').filter('percentDetails', function() {
     return function(percent) {
       return t('tasks', '%s %% completed').replace('%s', percent).replace('%%', '%');
+    };
+  });
+
+}).call(this);
+
+(function() {
+  angular.module('Tasks').filter('priorityDetails', function() {
+    return function(priority) {
+      if (+priority === 1 || +priority === 2 || +priority === 3 || +priority === 4) {
+        return t('tasks', 'high priority');
+      } else if (+priority === 5) {
+        return t('tasks', 'medium priority');
+      } else if (+priority === 6 || +priority === 7 || +priority === 8 || +priority === 9) {
+        return t('tasks', 'low priority');
+      } else {
+        return t('tasks', 'no priority assigned');
+      }
     };
   });
 

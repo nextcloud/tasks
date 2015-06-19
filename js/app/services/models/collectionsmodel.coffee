@@ -21,11 +21,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 ###
 
 angular.module('Tasks').factory 'CollectionsModel',
-['TasksModel', 'ListsModel', '_Model',
-(TasksModel, ListsModel, _Model) ->
+['TasksModel', '_Model',
+(TasksModel, _Model) ->
 	class CollectionsModel extends _Model
 
-		constructor: (@_$tasksmodel, @_$listsmodel) ->
+		constructor: (@_$tasksmodel) ->
 			@_nameCache = {}
 			super()
 
@@ -41,9 +41,7 @@ angular.module('Tasks').factory 'CollectionsModel',
 			for task in tasks
 				count += (@_$tasksmodel.filterTasks(task, collectionID) &&
 					@_$tasksmodel.filterTasksByString(task, filter))
-			if (collectionID == 'completed' && filter == '')
-				count += @_$listsmodel.notLoadedAll()
 			return count
 
-	return new CollectionsModel(TasksModel, ListsModel)
+	return new CollectionsModel(TasksModel)
 ]
