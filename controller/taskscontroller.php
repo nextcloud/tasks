@@ -57,9 +57,7 @@ class TasksController extends Controller {
 	public function getTask($taskID){
 		$result = $this->tasksService->get($taskID);
 		$response = array(
-			'data' => array(
-				'task' => $result
-			)
+			'data' => $result
 		);
 		return (new JSONResponse())->setData($response);
 	}

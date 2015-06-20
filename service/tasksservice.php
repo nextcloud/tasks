@@ -108,9 +108,9 @@ class TasksService {
 				$task[] = $task_data;
 			} catch(\Exception $e) {
 				\OCP\Util::writeLog('tasks', $e->getMessage(), \OCP\Util::ERROR);
-			}	
+			}
 		}
-		$result = array(
+		return array(
 			'tasks' => $task
 		);
 	}
