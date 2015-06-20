@@ -76,11 +76,16 @@ $TRANSLATIONS = array(
 "at the end" => "na koncu",
 "at the beginning" => "na začetku",
 "Set start date" => "Nastavi datum začetka",
+"rename" => "preimenuj",
+"delete" => "izbriši",
 "Add List..." => "Dodaj seznam ...",
 "New List" => "Nov seznam",
+"Settings" => "Nastavitve",
 "Start of week" => "Začetek tedna",
 "Visibility of Smart Collections" => "Vidnost pametnih zbirk",
 "Load remaining completed tasks." => "Naloži preostale končane naloge.",
+"(New category)" => "(nova kategorija)",
+"Select categories..." => "Izbor kategorije ...",
 "Loading the task..." => "Poteka nalaganje naloge ...",
 "Task not found!" => "Naloge ni mogoče najti!"
 );
