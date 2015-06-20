@@ -28,6 +28,7 @@ use \OCA\Tasks\Controller\CollectionsController;
 use \OCA\Tasks\Controller\ListsController;
 use \OCA\Tasks\Controller\SettingsController;
 use \OCA\Tasks\Controller\TasksController;
+use \OCA\Tasks\Service\TasksService;
 
 class Application extends App {
 
@@ -79,6 +80,17 @@ class Application extends App {
 			return new TasksController(
 				$c->query('AppName'), 
 				$c->query('Request'),
+				$c->query('TasksService'),
+				$c->query('UserId')
+			);
+		});
+
+
+		/**
+		 * Services
+		 */
+		$container->registerService('TasksService', function($c) {
+			return new TasksService(
 				$c->query('UserId')
 			);
 		});
