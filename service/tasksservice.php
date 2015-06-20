@@ -143,7 +143,9 @@ class TasksService {
 		$task = Helper::arrayForJSON($taskID, $vcalendar->VTODO, $user_timezone, $calendarId);
 
 		$task['tmpID'] = $tmpID;
-		return $task;
+		return array(
+			'task' => $task
+		);
 	}
 
 	/**

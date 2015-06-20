@@ -123,8 +123,8 @@ class TasksController extends Controller {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function addTask($taskName, $calendarId, $starred, $due, $start, $tmpID){
-		$result = $this->tasksService->add($taskName, $calendarId, $starred, $due, $start, $tmpID);
+	public function addTask($name, $calendarID, $starred, $due, $start, $tmpID){
+		$result = $this->tasksService->add($name, $calendarID, $starred, $due, $start, $tmpID);
 		$response = array(
 			'data' => $result
 		);
