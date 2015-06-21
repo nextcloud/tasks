@@ -4,7 +4,7 @@
         	<span class="icon detail-checkbox" ng-class="{'detail-checked':task.completed}"></span>
         </a>
         <a class="detail-star" ng-click="toggleStarred(task.id)">
-        	<span class="icon detail-star" ng-class="{'detail-starred':task.starred}"></span>
+        	<span class="icon detail-star" ng-class="{'high':task.priority>5,'medium':task.priority==5,'low':task.priority > 0 && task.priority < 5}"></span>
         </a>
     	<div class="title" ng-class="{'editing':route.parameter=='name'}">
         	<span class="title-text handler" ng-class="{'strike-through':task.completed}" ng-click="editName()"
@@ -71,10 +71,24 @@
                     </div>
                 </div>
             </div>
+            <div class="section detail-priority handler" ng-class="{'editing':route.parameter=='priority','high':task.priority>5,'medium':task.priority==5,'low':task.priority > 0 && task.priority < 5}"  ng-click="editPriority($event)">
+                <span class="icon detail-priority"></span>
+                <div class="section-title">
+                    <text>{{ task.priority | priorityDetails}}</text>
+                </div>
+                <a class="detail-delete handler end-edit" ng-click="deletePriority()">
+                    <span class="icon detail-delete"></span>
+                </a>
+                <span class="icon detail-save handler end-edit"></span>
+                <div class="section-edit">
+                    <input class="priority-input" type="text" ng-model="task.priority">
+                    <input type="range" ng-model="task.priority" min="0" max="9" step ="1">
+                </div>
+            </div>
             <div class="section detail-complete handler" ng-class="{'editing':route.parameter=='percent', 'date':task.complete>0}"  ng-click="editPercent($event)">
                 <span class="icon detail-percent"></span>
                 <div class="section-title">
-                    <text rel="">{{ task.complete | percentDetails}}</text>
+                    <text>{{ task.complete | percentDetails}}</text>
                 </div>
                 <a class="detail-delete handler end-edit" ng-click="deletePercent()">
                     <span class="icon detail-delete"></span>

@@ -65,19 +65,8 @@ class TasksController extends Controller {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function starTask($taskID){
-		$result = $this->tasksService->setStarred($taskID, true);
-		$response = array(
-			'data' => $result
-		);
-		return (new JSONResponse())->setData($response);
-	}
-
-	/**
-	 * @NoAdminRequired
-	 */
-	public function unstarTask($taskID){
-		$result = $this->tasksService->setStarred($taskID, false);
+	public function setPriority($taskID,$priority){
+		$result = $this->tasksService->setPriority($taskID, $priority);
 		$response = array(
 			'data' => $result
 		);
@@ -89,29 +78,6 @@ class TasksController extends Controller {
 	 */
 	public function percentComplete($taskID, $complete){
 		$result = $this->tasksService->setPercentComplete($taskID, $complete);
-		$response = array(
-			'data' => $result
-		);
-		return (new JSONResponse())->setData($response);
-	}
-
-
-	/**
-	 * @NoAdminRequired
-	 */
-	public function completeTask(){
-		$result = $this->tasksService->setPercentComplete($taskID, 100);
-		$response = array(
-			'data' => $result
-		);
-		return (new JSONResponse())->setData($response);
-	}
-
-	/**
-	 * @NoAdminRequired
-	 */
-	public function uncompleteTask(){
-		$result = $this->tasksService->setPercentComplete($taskID, 0);
 		$response = array(
 			'data' => $result
 		);

@@ -201,27 +201,6 @@ class TasksService {
 	}
 
 	/**
-	 * star or unstar task by id
-	 * 
-	 * @param int    $taskID
-	 * @param bool   $isStarred
-	 */
-	public function setStarred($taskID, $isStarred) {
-		try {
-			$vcalendar = \OC_Calendar_App::getVCalendar($taskID);
-			$vtodo = $vcalendar->VTODO;
-			if($isStarred) {
-				$vtodo->PRIORITY = 5; // prio: medium
-			} else {
-				$vtodo->PRIORITY = 0;
-			}
-			return \OC_Calendar_Object::edit($taskID, $vcalendar->serialize());
-		} catch(\Exception $e) {
-			return false;
-		}
-	}
-
-	/**
 	 * set completeness of task in percent by id
 	 * 
 	 * @param  int    $taskID
@@ -246,6 +225,28 @@ class TasksService {
 			} else{
 				$vtodo->STATUS = 'NEEDS-ACTION';
 				unset($vtodo->COMPLETED);
+			}
+			return \OC_Calendar_Object::edit($taskID, $vcalendar->serialize());
+		} catch(\Exception $e) {
+			return false;// throw new BusinessLayerException($e->getMessage());
+		}
+	}
+
+	/**
+	 * set priority of task by id
+	 * 
+	 * @param  int    $taskID
+	 * @param  int    $priority
+	 * @return bool
+	 */
+	public function setPriority($taskID, $priority){
+		try {
+			$vcalendar = \OC_Calendar_App::getVCalendar($taskID);
+			$vtodo = $vcalendar->VTODO;
+			if($priority){
+				$vtodo->PRIORITY = (10 - $priority) % 10;
+			}else{
+				$vtodo->__unset('PRIORITY');
 			}
 			return \OC_Calendar_Object::edit($taskID, $vcalendar->serialize());
 		} catch(\Exception $e) {

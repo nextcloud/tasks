@@ -588,6 +588,13 @@
 
             }
           };
+          this._$scope.editPriority = function($event) {
+            if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+              return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/priority');
+            } else {
+
+            }
+          };
           this._$scope.editPercent = function($event) {
             if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
               return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/percent');
@@ -640,6 +647,9 @@
               return _tasksbusinesslayer.starTask(taskID);
             }
           };
+          this._$scope.deletePriority = function() {
+            return _tasksbusinesslayer.unstarTask(_$scope.route.taskID);
+          };
           this._$scope.isDue = function(date) {
             return _$tasksmodel.due(date);
           };
@@ -670,8 +680,16 @@
                 if (_$scope.timers['task' + newVal.id + 'complete']) {
                   $timeout.cancel(_$scope.timers['task' + newVal.id + 'complete']);
                 }
-                return _$scope.timers['task' + newVal.id + 'complete'] = $timeout(function() {
+                _$scope.timers['task' + newVal.id + 'complete'] = $timeout(function() {
                   return _tasksbusinesslayer.setPercentComplete(newVal.id, newVal.complete);
+                }, 1000);
+              }
+              if (newVal.priority !== oldVal.priority) {
+                if (_$scope.timers['task' + newVal.id + 'priority']) {
+                  $timeout.cancel(_$scope.timers['task' + newVal.id + 'priority']);
+                }
+                return _$scope.timers['task' + newVal.id + 'priority'] = $timeout(function() {
+                  return _tasksbusinesslayer.setPriority(newVal.id, newVal.priority);
                 }, 1000);
               }
             }
@@ -1461,18 +1479,22 @@
           return this._persistence.getTask(taskID, onSuccess, true);
         };
 
+        TasksBusinessLayer.prototype.setPriority = function(taskID, priority) {
+          this._$tasksmodel.setPriority(taskID, priority);
+          if (+priority === 6 || +priority === 7 || +priority === 8 || +priority === 9) {
+            this._$tasksmodel.star(taskID);
+          } else {
+            this._$tasksmodel.unstar(taskID);
+          }
+          return this._persistence.setPriority(taskID, priority);
+        };
+
         TasksBusinessLayer.prototype.starTask = function(taskID) {
-          this._$tasksmodel.star(taskID);
-          return this._persistence.starTask(taskID);
+          return this.setPriority(taskID, '9');
         };
 
         TasksBusinessLayer.prototype.unstarTask = function(taskID) {
-          this._$tasksmodel.unstar(taskID);
-          return this._persistence.unstarTask(taskID);
-        };
-
-        TasksBusinessLayer.prototype.completeTask = function(taskID) {
-          return this.setPercentComplete(taskID, 100);
+          return this.setPriority(taskID, '0');
         };
 
         TasksBusinessLayer.prototype.setPercentComplete = function(taskID, percentComplete) {
@@ -1483,6 +1505,10 @@
             this._$tasksmodel.complete(taskID);
           }
           return this._persistence.setPercentComplete(taskID, percentComplete);
+        };
+
+        TasksBusinessLayer.prototype.completeTask = function(taskID) {
+          return this.setPercentComplete(taskID, 100);
         };
 
         TasksBusinessLayer.prototype.uncompleteTask = function(taskID) {
@@ -2345,6 +2371,13 @@
           });
         };
 
+        TasksModel.prototype.setPriority = function(taskID, priority) {
+          return this.update({
+            id: taskID,
+            priority: priority
+          });
+        };
+
         TasksModel.prototype.completed = function(taskID) {
           return this.getById(taskID).completed;
         };
@@ -2738,26 +2771,6 @@
           return this._request.get('/apps/tasks/task/{taskID}', params);
         };
 
-        Persistence.prototype.starTask = function(taskID) {
-          var params;
-          params = {
-            routeParams: {
-              taskID: taskID
-            }
-          };
-          return this._request.post('/apps/tasks/tasks/{taskID}/star', params);
-        };
-
-        Persistence.prototype.unstarTask = function(taskID) {
-          var params;
-          params = {
-            routeParams: {
-              taskID: taskID
-            }
-          };
-          return this._request.post('/apps/tasks/tasks/{taskID}/unstar', params);
-        };
-
         Persistence.prototype.setPercentComplete = function(taskID, complete) {
           var params;
           params = {
@@ -2769,6 +2782,19 @@
             }
           };
           return this._request.post('/apps/tasks/tasks/{taskID}/percentcomplete', params);
+        };
+
+        Persistence.prototype.setPriority = function(taskID, priority) {
+          var params;
+          params = {
+            routeParams: {
+              taskID: taskID
+            },
+            data: {
+              priority: priority
+            }
+          };
+          return this._request.post('/apps/tasks/tasks/{taskID}/priority', params);
         };
 
         Persistence.prototype.addTask = function(task, onSuccess, onFailure) {
@@ -3146,12 +3172,14 @@
 (function() {
   angular.module('Tasks').filter('priorityDetails', function() {
     return function(priority) {
-      if (+priority === 1 || +priority === 2 || +priority === 3 || +priority === 4) {
-        return t('tasks', 'high priority');
+      var string;
+      string = t('tasks', 'priority %s: ').replace('%s', priority);
+      if (+priority === 6 || +priority === 7 || +priority === 8 || +priority === 9) {
+        return string + ' ' + t('tasks', 'high');
       } else if (+priority === 5) {
-        return t('tasks', 'medium priority');
-      } else if (+priority === 6 || +priority === 7 || +priority === 8 || +priority === 9) {
-        return t('tasks', 'low priority');
+        return string + ' ' + t('tasks', 'medium');
+      } else if (+priority === 1 || +priority === 2 || +priority === 3 || +priority === 4) {
+        return string + ' ' + t('tasks', 'low');
       } else {
         return t('tasks', 'no priority assigned');
       }
