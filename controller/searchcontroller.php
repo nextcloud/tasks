@@ -49,7 +49,9 @@ class SearchController extends \OCP\Search\Provider {
 				if ($object['objecttype'] != 'VTODO') {
 					continue;
 				}
-				$vtodo = Helper::parseVTODO($object['calendardata']);
+				if(!($vtodo = Helper::parseVTODO($object))){
+					continue;
+				}
 				$id = $object['id'];
 				$calendarId = $object['calendarid'];
 				
