@@ -80,9 +80,10 @@ SettingsBusinessLayer, SearchBusinessLayer) ->
 			@_$scope.focusInput = () ->
 				_$scope.status.focusTaskInput = true
 
-			@_$scope.openDetails = (id) ->
-				listID = _$scope.route.listID
-				$location.path('/lists/'+listID+'/tasks/'+id)
+			@_$scope.openDetails = (id,$event) ->
+				if $($event.currentTarget).is($($event.target).closest('.handler'))
+					listID = _$scope.route.listID
+					$location.path('/lists/'+listID+'/tasks/'+id)
 
 			@_$scope.toggleCompleted = (taskID) ->
 				if _$tasksmodel.completed(taskID)

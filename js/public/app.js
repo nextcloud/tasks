@@ -1079,10 +1079,12 @@
           this._$scope.focusInput = function() {
             return _$scope.status.focusTaskInput = true;
           };
-          this._$scope.openDetails = function(id) {
+          this._$scope.openDetails = function(id, $event) {
             var listID;
-            listID = _$scope.route.listID;
-            return $location.path('/lists/' + listID + '/tasks/' + id);
+            if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+              listID = _$scope.route.listID;
+              return $location.path('/lists/' + listID + '/tasks/' + id);
+            }
           };
           this._$scope.toggleCompleted = function(taskID) {
             if (_$tasksmodel.completed(taskID)) {

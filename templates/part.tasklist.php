@@ -3,14 +3,14 @@
     <div class="grouped-tasks" ng-class="{'completed-hidden':!settingsmodel.getById('various').showHidden}">
         <ol class="tasks" rel="uncompleted" oc-drop-task>
             <li ng-repeat="(id, task) in tasks | filter:filterTasks(task,route.listID) | filter:{'completed':'false'} | filter:filterTasksByString(task) | orderBy:sortDue | orderBy:'starred':true"
-            class="task-item ui-draggable handler" rel="{{ task.id }}" ng-click="openDetails(task.id)" ng-class="{done: task.completed}" oc-drag-task>
+            class="task-item ui-draggable handler" rel="{{ task.id }}" ng-click="openDetails(task.id,$event)" ng-class="{done: task.completed}" oc-drag-task>
                 <div class="task-body">
                     <div class="percentdone" style="width:{{ task.complete }}%; background-color:{{ getTaskColor(task.calendarid) }};"></div>
-                    <a class="task-checkbox" name="toggleCompleted" ng-click="toggleCompleted(task.id)">
+                    <a class="task-checkbox handler" name="toggleCompleted" ng-click="toggleCompleted(task.id)">
                         <span class="icon task-checkbox" ng-class="{'task-checked': task.completed}"></span>
                     </a>
                     <a class="icon task-separator"></a>
-                    <a class="task-star" ng-click="toggleStarred(task.id)">
+                    <a class="task-star handler" ng-click="toggleStarred(task.id)">
                         <span class="icon task-star faded" ng-class="{'task-starred': task.starred}"></span>
                     </a>
                     <a class="duedate" ng-class="{overdue: TasksModel.overdue(task.due)}">{{ task.due | dateTaskList }}</a>
@@ -32,15 +32,15 @@
         </h2>
         <ol class="completed-tasks" rel="completed" oc-drop-task>
             <li ng-repeat="task in tasks | filter:filterTasks(task,route.listID) | filter:{'completed':'true'} | filter:filterTasksByString(task) | orderBy:'completed_date':true"
-            class="task-item handler" rel="{{ task.id }}" ng-click="openDetails(task.id)"
+            class="task-item handler" rel="{{ task.id }}" ng-click="openDetails(task.id,$event)"
             ng-class="{done: task.completed}" oc-drag-task>
                 <div class="task-body">
                     <div class="percentdone" style="width:{{ task.complete }}%; background-color:{{ getTaskColor(task.calendarid) }};"></div>
-                    <a class="task-checkbox" name="toggleCompleted" ng-click="toggleCompleted(task.id)">
+                    <a class="task-checkbox handler" name="toggleCompleted" ng-click="toggleCompleted(task.id)">
                         <span class="icon task-checkbox" ng-class="{'task-checked': task.completed}"></span>
                     </a>
                     <a class="icon task-separator"></a>
-                    <a class="task-star" ng-click="toggleStarred(task.id)">
+                    <a class="task-star handler" ng-click="toggleStarred(task.id)">
                         <span class="icon task-star faded" ng-class="{'task-starred': task.starred}"></span>
                     </a>
                     <a class="duedate" ng-class="{overdue: TasksModel.overdue(task.due)}">{{ task.due | dateTaskList }}</a>
