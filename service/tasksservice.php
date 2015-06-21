@@ -171,7 +171,7 @@ class TasksService {
 		try {
 			$vcalendar = \OC_Calendar_App::getVCalendar($taskID);
 			$vtodo = $vcalendar->VTODO;
-			$vtodo->SUMMARY = $taskName;
+			$vtodo->SUMMARY = $name;
 			return \OC_Calendar_Object::edit($taskID, $vcalendar->serialize());
 		} catch(\Exception $e) {
 			// throw new BusinessLayerException($e->getMessage());
