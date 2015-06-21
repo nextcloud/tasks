@@ -363,12 +363,6 @@
 #app-content #add-task.focus {
   background-color: #FFFFFF;
 }
-#app-content #add-task.focus .icon.input-date {
-  display: block;
-}
-#app-content #add-task.focus .icon.input-star {
-  display: block;
-}
 #app-content #add-task .icon {
   position: absolute;
   top: 6px;
