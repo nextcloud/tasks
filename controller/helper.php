@@ -27,8 +27,19 @@ use Sabre\VObject;
 
 Class Helper {
 
-	public static function parseVTODO($data) {
-		$object = \Sabre\VObject\Reader::read($data);
+	public static function parseVTODO($task) {
+		$object = \Sabre\VObject\Reader::read($task['calendardata']);
+		if(!$object) {
+			return false;
+		}
+		$sharedAccessClassPermissions = \OC_Calendar_Object::getAccessClassPermissions($object);
+		if(\OC_Calendar_Object::getowner($task['id']) !== \OCP\User::getUser()){
+			if (!($sharedAccessClassPermissions & \OCP\PERMISSION_READ)) {
+				return false;
+			}
+		}
+		$object = \OC_Calendar_Object::cleanByAccessClass($task['id'], $object);
+			
 		$vtodo = $object->VTODO;
 		return $vtodo;
 	}
