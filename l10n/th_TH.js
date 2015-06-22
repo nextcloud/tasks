@@ -73,6 +73,7 @@ OC.L10N.register(
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n งานเสร็จสมบูรณ์"],
     "Set due date" : "ระบุวันครบกำหนด",
     "%s %% completed" : "%s %% เสร็จสมบูรณ์",
+    "no priority assigned" : "ไม่มีมีความสำคัญ",
     "Remind me" : "เตือนฉัน",
     "at the end" : "ที่จุดสิ้นสุด",
     "at the beginning" : "ที่จุดเริ่มต้น",
