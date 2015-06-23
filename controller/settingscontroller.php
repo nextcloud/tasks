@@ -23,52 +23,39 @@
 
 namespace OCA\Tasks\Controller;
 
+use \OCA\Tasks\Service\SettingsService;
 use \OCP\IRequest;
-use \OCP\IConfig;
-
 use \OCP\AppFramework\Controller;
 use \OCP\AppFramework\Http\JSONResponse;
 
 class SettingsController extends Controller {
 
-	private $userId;
-	private $settings;
+	private $settingsService;
 
-	public function __construct($appName, IRequest $request, $userId, IConfig $settings){
+	public function __construct($appName, IRequest $request, SettingsService $settingsService){
 		parent::__construct($appName, $request);
-		$this->userId = $userId;
-		$this->settings = $settings;
+		$this->settingsService = $settingsService;
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function get(){
-		$settings = array(
-			array(
-				'id' => 'various',
-				'showHidden' => (int)$this->settings->getUserValue($this->userId, $this->appName,'various_showHidden'),
-				'startOfWeek' => (int)$this->settings->getUserValue($this->userId, $this->appName,'various_startOfWeek'),
-				'userID' => $this->userId,
-				'categories' => \OC_Calendar_App::getCategoryOptions()
-			)
-		);
-		$result = array(
+		$result = $this->settingsService->get();
+		$response = array(
 			'data' => array(
-				'settings' => $settings
+				'settings' => $result
 			)
 		);
-		$response = new JSONResponse();
-		$response->setData($result);
-		return $response;
+		return (new JSONResponse())->setData($response);
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
-	public function set(){
-		$this->settings->setUserValue($this->userId, $this->appName, $this->params('type').'_'.$this->params('setting'), $this->params('value'));
-		$response = new JSONResponse();
-		return $response;
+	public function set($setting, $type, $value){
+		$result = $this->settingsService->set($setting, $type, $value);
+		$response = array();
+		return (new JSONResponse())->setData($response);
 	}
 }

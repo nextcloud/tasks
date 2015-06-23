@@ -23,120 +23,63 @@
 
 namespace OCA\Tasks\Controller;
 
+use \OCA\Tasks\Service\ListsService;
 use \OCP\IRequest;
-
 use \OCP\AppFramework\Controller;
 use \OCP\AppFramework\Http\JSONResponse;
 
 class ListsController extends Controller {
 
-	private $userId;
+	private $listsService;
 
-	public function __construct($appName, IRequest $request, $userId){
+	public function __construct($appName, IRequest $request, ListsService $listsService){
 		parent::__construct($appName, $request);
-		$this->userId = $userId;
+		$this->listsService = $listsService;
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function getLists(){
-		$calendar = new \OC_Calendar_Calendar();
-		$lists = $calendar::allCalendars($this->userId, true);
-		$result = array(
+		$result = $this->listsService->getAll();
+		$response = array(
 			'data' => array(
-				'lists' => $lists
+				'lists' => $result
 			)
 		);
-		$response = new JSONResponse();
-		$response->setData($result);
-		return $response;
+		return (new JSONResponse())->setData($response);
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
-	public function addList(){
-		$listName = $this->params('name');
-
-		if(trim($listName) == '') {
-			// OCP\JSON::error(array('message'=>'empty'));
-			exit;
-		}
-		$calendars = \OC_Calendar_Calendar::allCalendars($this->userId, true);
-		foreach($calendars as $cal) {
-			if($cal['displayname'] == $listName) {
-				// OCP\JSON::error(array('message'=>'namenotavailable'));
-				exit;
-			}
-		}
-		$color = '#CCCCCC';
-		$calendarId = \OC_Calendar_Calendar::addCalendar($this->userId, strip_tags($listName), 'VEVENT,VTODO,VJOURNAL', null, 0, $color);
-		\OC_Calendar_Calendar::setCalendarActive($calendarId, 1);
-		$list = \OC_Calendar_Calendar::find($calendarId);
-
-		$list['tmpID'] = $this->params('tmpID');
-		$result = array(
+	public function addList($name, $tmpID){
+		$result = $this->listsService->add($name, $tmpID);
+		$response = array(
 			'data' => array(
-				'list' => $list
+				'list' => $result
 			)
 		);
-		$response = new JSONResponse();
-		$response->setData($result);
-		return $response;
+		return (new JSONResponse())->setData($response);
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
-	public function deleteList(){
-		$listId = $this->params('listID');
-		$response = new JSONResponse();
-		try {
-			$del = \OC_Calendar_Calendar::deleteCalendar($listId);
-			if($del == true) {
-				$result = array(
-					'data' => array()
-				);
-			}else{
-				$result = array('error'=>'dberror');
-			}
-		} catch(\Exception $e) {
-			$result = array('message'=>$e->getMessage());
-		}
-		$response->setData($result);
-		return $response;
+	public function deleteList($listID){
+		$result = $this->listsService->delete($listID);
+		$response = $result;
+		return (new JSONResponse())->setData($response);
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
-	public function setListName(){
-		$listId = (int) $this->params('listID');
-		$listName = $this->params('name');
-		$response = new JSONResponse();
-		if(trim($listName) == '') {
-			// OCP\JSON::error(array('message'=>'empty'));
-			exit;
-		}
-		$calendars = \OC_Calendar_Calendar::allCalendars($this->userId, true);
-		foreach($calendars as $cal) {
-			if($cal['userid'] != $this->userId){
-				continue;
-			}
-			if($cal['displayname'] == $listName && $cal['id'] != $listId) {
-				// OCP\JSON::error(array('message'=>'namenotavailable'));
-				exit;
-			}
-		}
-
-		$color = '#CCCCCC';
-		\OC_Calendar_Calendar::editCalendar($listId, strip_tags($listName), null, null, null, $color);
-
-		$result = array(
-			'data' => array()
+	public function setListName($listID, $name){
+		$result = $this->listsService->setName($listID, $name);
+		$response = array(
+			'data' => $result
 		);
-		$response->setData($result);
-		return $response;
+		return (new JSONResponse())->setData($response);
 	}
 }

@@ -189,8 +189,8 @@ class TasksService {
 	public function setCalendarId($taskID, $calendarID) {
 		try {
 			$data = \OC_Calendar_App::getEventObject($taskID);
-			if ($data['calendarid'] != $calendarId) {
-				return \OC_Calendar_Object::moveToCalendar($taskID, $calendarId);
+			if ($data['calendarid'] != $calendarID) {
+				return \OC_Calendar_Object::moveToCalendar($taskID, $calendarID);
 			} else {
 				return true;
 			}
@@ -341,7 +341,7 @@ class TasksService {
 				}
 				$tv = '';
 				if ($type == 'DATE-TIME') {
-					$date = new \DateTime('@'.$this->params('date'));
+					$date = new \DateTime('@'.$date);
 					$tv = $date->format('Ymd\THis\Z');
 				} elseif ($type == 'DURATION') {
 					// Create duration string
@@ -391,13 +391,12 @@ class TasksService {
 	 * @return bool
 	 */
 	public function addCategory($taskID, $category){
-		$taskID = $this->params('taskID');
-		$category = $this->params('category');
 		try {
 			$vcalendar = \OC_Calendar_App::getVCalendar($taskID);
 			$vtodo = $vcalendar->VTODO;
 			// fetch categories from TODO
 			$categories = $vtodo->CATEGORIES;
+			$taskcategories = array();
 			if ($categories){
 				$taskcategories = $categories->getParts();
 			}
