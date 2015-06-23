@@ -7,7 +7,10 @@
 	<category>productivity</category>
 	<licence>AGPL</licence>
 	<author>Raimund Schlüßler</author>
-	<requiremin>8</requiremin>
+	<requiremin>8.1</requiremin>
 	<description>Task App for Calender TODOs</description>
 	<ocsid>164356</ocsid>
+    <dependencies>
+        <owncloud min-version="8.1" max-version="8.1"/>
+    </dependencies>
 </info>
