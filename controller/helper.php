@@ -261,9 +261,15 @@ Class Helper {
 		$vtodo->DTSTAMP = new \DateTime('now', new \DateTimeZone('UTC'));
 		$vtodo->SUMMARY = $request['summary'];
 
-		$vtodo->LOCATION = $request['location'];
-		$vtodo->DESCRIPTION = $request['description'];
-		$vtodo->CATEGORIES = $request["categories"];
+		if($request['location']){
+			$vtodo->LOCATION = $request['location'];
+		}
+		if ($request['description']){
+			$vtodo->DESCRIPTION = $request['description'];
+		}
+		if($request["categories"]){
+			$vtodo->CATEGORIES = $request["categories"];
+		}
 		if($request['priority']) {
 			$vtodo->PRIORITY = 5; // prio: medium
 		} else {
