@@ -29,6 +29,9 @@ use \OCA\Tasks\Controller\ListsController;
 use \OCA\Tasks\Controller\SettingsController;
 use \OCA\Tasks\Controller\TasksController;
 use \OCA\Tasks\Service\TasksService;
+use \OCA\Tasks\Service\ListsService;
+use \OCA\Tasks\Service\CollectionsService;
+use \OCA\Tasks\Service\SettingsService;
 
 class Application extends App {
 
@@ -43,7 +46,7 @@ class Application extends App {
 		 */
 		$container->registerService('PageController', function($c) {
 			return new PageController(
-				$c->query('AppName'), 
+				$c->query('AppName'),
 				$c->query('Request'),
 				$c->query('UserId')
 			);
@@ -51,37 +54,33 @@ class Application extends App {
 
 		$container->registerService('CollectionsController', function($c) {
 			return new CollectionsController(
-				$c->query('AppName'), 
+				$c->query('AppName'),
 				$c->query('Request'),
-				$c->query('UserId'),
-				$c->query('L10N'),
-				$c->query('Settings')
+				$c->query('CollectionsService')
 			);
 		});
 
 		$container->registerService('ListsController', function($c) {
 			return new ListsController(
-				$c->query('AppName'), 
+				$c->query('AppName'),
 				$c->query('Request'),
-				$c->query('UserId')
+				$c->query('ListsService')
 			);
 		});
 
 		$container->registerService('SettingsController', function($c) {
 			return new SettingsController(
-				$c->query('AppName'), 
+				$c->query('AppName'),
 				$c->query('Request'),
-				$c->query('UserId'),
-				$c->query('Settings')
+				$c->query('SettingsService')
 			);
 		});
 
 		$container->registerService('TasksController', function($c) {
 			return new TasksController(
-				$c->query('AppName'), 
+				$c->query('AppName'),
 				$c->query('Request'),
-				$c->query('TasksService'),
-				$c->query('UserId')
+				$c->query('TasksService')
 			);
 		});
 
@@ -95,6 +94,28 @@ class Application extends App {
 			);
 		});
 
+		$container->registerService('ListsService', function($c) {
+			return new ListsService(
+				$c->query('UserId')
+			);
+		});
+
+		$container->registerService('CollectionsService', function($c) {
+			return new CollectionsService(
+				$c->query('UserId'),
+				$c->query('L10N'),
+				$c->query('Settings'),
+				$c->query('AppName')
+			);
+		});
+
+		$container->registerService('SettingsService', function($c) {
+			return new SettingsService(
+				$c->query('UserId'),
+				$c->query('Settings'),
+				$c->query('AppName')
+			);
+		});
 
 		/**
 		 * Core

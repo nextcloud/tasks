@@ -23,21 +23,19 @@
 
 namespace OCA\Tasks\Controller;
 
+use \OCA\Tasks\Service\TasksService;
 use \OCP\IRequest;
-
 use \OCP\AppFramework\Controller;
 use \OCP\AppFramework\Http\JSONResponse;
-use \OCA\Tasks\Controller\Helper;
+
 
 class TasksController extends Controller {
 
-	private $userId;
 	private $tasksService;
 
-	public function __construct($appName, IRequest $request, TasksService $tasksService, $userId){
+	public function __construct($appName, IRequest $request, TasksService $tasksService){
 		parent::__construct($appName, $request);
 		$this->tasksService = $tasksService;
-		$this->userId = $userId;		
 	}
 
 	/**
@@ -165,7 +163,7 @@ class TasksController extends Controller {
 	 * @NoAdminRequired
 	 */
 	public function setReminderDate($taskID, $type, $action, $date, $invert, $related = null, $week, $day, $hour, $minute, $second){
-		$result = $this->tasksService->setReminderDate($taskID, $type, $action, $date, $invert, $related = null, $week, $day, $hour, $minute, $second);
+		$result = $this->tasksService->setReminderDate($taskID, $type, $action, $date, $invert, $related, $week, $day, $hour, $minute, $second);
 		$response = array(
 			'data' => $result
 		);
@@ -209,7 +207,7 @@ class TasksController extends Controller {
 	 * @NoAdminRequired
 	 */
 	public function addComment($taskID, $comment, $tmpID){
-		$result = $this->tasksService->addComment($taskID, $comment);
+		$result = $this->tasksService->addComment($taskID, $comment, $tmpID);
 		$response = array(
 			'data' => array(
 				'comment' => $result
