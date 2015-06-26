@@ -193,7 +193,7 @@ Class Helper {
 		}
 
 
-		$percentComplete = $vtodo->__get('PERCENT-COMPLETE');
+		$percentComplete = $vtodo->{'PERCENT-COMPLETE'};
 		if($percentComplete){
 			$task['complete'] = $percentComplete->getValue();
 		} else {
@@ -253,7 +253,7 @@ Class Helper {
 	public static function updateVCalendarFromRequest($request, $vcalendar){
 		$vtodo = $vcalendar->VTODO;
 
-		$lastModified = $vtodo->__get('LAST-MODIFIED');
+		$lastModified = $vtodo->LAST-MODIFIED;
 		if(is_null($lastModified)) {
 			$lastModified = $vtodo->add('LAST-MODIFIED');
 		}
@@ -275,7 +275,7 @@ Class Helper {
 		} else {
 			$vtodo->PRIORITY = 0; // prio: undefined
 		}
-		$percentComplete = $vtodo->__get('PERCENT-COMPLETE');
+		$percentComplete = $vtodo->{'PERCENT-COMPLETE'};
 		if (is_null($percentComplete)) {
 			$percentComplete = $vtodo->add('PERCENT-COMPLETE');
 		}

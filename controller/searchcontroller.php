@@ -59,7 +59,7 @@ class SearchController extends \OCP\Search\Provider {
 				$properties = array('SUMMARY', 'DESCRIPTION', 'LOCATION', 'CATEGORIES');
 
 				foreach ($properties as $property) {
-					$string = $vtodo->__get($property);
+					$string = $vtodo->{$property};
 					if (stripos($string, $query) !== false) {
 						// $results[] = new \OCA\Tasks\Controller\Task($id,$calendarId,$vtodo,$property,$query,$user_timezone);
 						$results[] = Helper::arrayForJSON($id, $vtodo, $user_timezone, $calendarId);
