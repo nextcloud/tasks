@@ -214,7 +214,7 @@ class TasksService {
 			if (!empty($percent_complete)) {
 				$vtodo->{'PERCENT-COMPLETE'} = $percent_complete;
 			}else{
-				$vtodo->__unset('PERCENT-COMPLETE');
+				unset($vtodo->{'PERCENT-COMPLETE'});
 			}
 			if ($percent_complete == 100) {
 				$vtodo->STATUS = 'COMPLETED';
@@ -246,7 +246,7 @@ class TasksService {
 			if($priority){
 				$vtodo->PRIORITY = (10 - $priority) % 10;
 			}else{
-				$vtodo->__unset('PRIORITY');
+				unset($vtodo->{'PRIORITY'});
 			}
 			return \OC_Calendar_Object::edit($taskID, $vcalendar->serialize());
 		} catch(\Exception $e) {
@@ -325,7 +325,7 @@ class TasksService {
 
 		if ($type == false){
 			unset($vtodo->VALARM);
-			$vtodo->__get('LAST-MODIFIED')->setValue(new \DateTime('now', new \DateTimeZone('UTC')));
+			$vtodo->{'LAST-MODIFIED'}->setValue(new \DateTime('now', new \DateTimeZone('UTC')));
 			$vtodo->DTSTAMP = new \DateTime('now', new \DateTimeZone('UTC'));
 			return \OC_Calendar_Object::edit($taskID, $vcalendar->serialize());
 		}
@@ -375,7 +375,7 @@ class TasksService {
 				} else {
 					$valarm->add('TRIGGER', $tv, array('VALUE' => $type));
 				}
-				$vtodo->__get('LAST-MODIFIED')->setValue(new \DateTime('now', new \DateTimeZone('UTC')));
+				$vtodo->{'LAST-MODIFIED'}->setValue(new \DateTime('now', new \DateTimeZone('UTC')));
 				$vtodo->DTSTAMP = new \DateTime('now', new \DateTimeZone('UTC'));
 				return \OC_Calendar_Object::edit($taskID, $vcalendar->serialize());
 			} catch (\Exception $e) {
@@ -436,7 +436,7 @@ class TasksService {
 				if(count($taskcategories)){
 					$vtodo->CATEGORIES = $taskcategories;
 				} else{
-					$vtodo->__unset('CATEGORIES');
+					unset($vtodo->{'CATEGORIES'});
 				}
 				return \OC_Calendar_Object::edit($taskID, $vcalendar->serialize());
 			}
