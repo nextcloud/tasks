@@ -169,7 +169,7 @@ SettingsBusinessLayer, SearchBusinessLayer) ->
 
 				_tasksbusinesslayer.addTask task
 				, (data) =>
-					_$tasksmodel.add(data.task)
+					_$tasksmodel.add(data)
 					_$scope.isAddingTask = false
 				, =>
 					_$scope.isAddingTask = false
