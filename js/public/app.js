@@ -762,7 +762,7 @@
                 name: $('#expandDisplayName').text()
               };
               _tasksbusinesslayer.addComment(comment, function(data) {
-                _$tasksmodel.updateComment(data.comment);
+                _$tasksmodel.updateComment(data);
                 return _$scope.isAddingComment = false;
               }, function() {
                 return _$scope.isAddingComment = false;
@@ -1204,7 +1204,7 @@
               task.calendarID = _$scope.route.listID;
             }
             _tasksbusinesslayer.addTask(task, function(data) {
-              _$tasksmodel.add(data.task);
+              _$tasksmodel.add(data);
               return _$scope.isAddingTask = false;
             }, function() {
               return _$scope.isAddingTask = false;

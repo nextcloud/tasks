@@ -337,7 +337,7 @@ $timeout, $routeParams, SettingsModel, Loading) ->
 
 					_tasksbusinesslayer.addComment comment
 					, (data) =>
-						_$tasksmodel.updateComment(data.comment)
+						_$tasksmodel.updateComment(data)
 						_$scope.isAddingComment = false
 					, =>
 						_$scope.isAddingComment = false

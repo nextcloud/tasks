@@ -26,12 +26,13 @@ namespace OCA\Tasks\Controller;
 use \OCA\Tasks\Service\TasksService;
 use \OCP\IRequest;
 use \OCP\AppFramework\Controller;
-use \OCP\AppFramework\Http\JSONResponse;
 
 
 class TasksController extends Controller {
 
 	private $tasksService;
+
+	use Response;
 
 	public function __construct($appName, IRequest $request, TasksService $tasksService){
 		parent::__construct($appName, $request);
@@ -42,190 +43,152 @@ class TasksController extends Controller {
 	 * @NoAdminRequired
 	 */
 	public function getTasks($listID = 'all', $type = 'all'){
-		$result = $this->tasksService->getAll($listID, $type);
-		$response = array(
-			'data' => $result
-		);
-		return (new JSONResponse())->setData($response);
+		return $this->generateResponse(function () use ($listID, $type) {
+			return $this->tasksService->getAll($listID, $type);
+		});
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function getTask($taskID){
-		$result = $this->tasksService->get($taskID);
-		$response = array(
-			'data' => $result
-		);
-		return (new JSONResponse())->setData($response);
+		return $this->generateResponse(function () use ($taskID) {
+			return $this->tasksService->get($taskID);
+		});
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function setPriority($taskID,$priority){
-		$result = $this->tasksService->setPriority($taskID, $priority);
-		$response = array(
-			'data' => $result
-		);
-		return (new JSONResponse())->setData($response);
+		return $this->generateResponse(function () use ($taskID, $priority) {
+			return $this->tasksService->setPriority($taskID, $priority);
+		});
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function percentComplete($taskID, $complete){
-		$result = $this->tasksService->setPercentComplete($taskID, $complete);
-		$response = array(
-			'data' => $result
-		);
-		return (new JSONResponse())->setData($response);
+		return $this->generateResponse(function () use ($taskID, $complete) {
+			return $this->tasksService->setPercentComplete($taskID, $complete);
+		});
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function addTask($name, $calendarID, $starred, $due, $start, $tmpID){
-		$result = $this->tasksService->add($name, $calendarID, $starred, $due, $start, $tmpID);
-		$response = array(
-			'data' => $result
-		);
-		return (new JSONResponse())->setData($response);
+		return $this->generateResponse(function () use ($name, $calendarID, $starred, $due, $start, $tmpID) {
+			return $this->tasksService->add($name, $calendarID, $starred, $due, $start, $tmpID);
+		});
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function deleteTask($taskID){
-		$result = $this->tasksService->delete($taskID);
-		$response = array(
-			'data' => $result
-		);
-		return (new JSONResponse())->setData($response);
+		return $this->generateResponse(function () use ($taskID) {
+			return $this->tasksService->delete($taskID);
+		});
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function setTaskName($taskID, $name){
-		$result = $this->tasksService->setName($taskID, $name);
-		$response = array(
-			'data' => $result
-		);
-		return (new JSONResponse())->setData($response);
+		return $this->generateResponse(function () use ($taskID, $name) {
+			return $this->tasksService->setName($taskID, $name);
+		});
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function setTaskCalendar($taskID, $calendarID){
-		$result = $this->tasksService->setCalendarId($taskID, $calendarID);
-		$response = array(
-			'data' => $result
-		);
-		return (new JSONResponse())->setData($response);
+		return $this->generateResponse(function () use ($taskID, $calendarID) {
+			return $this->tasksService->setCalendarId($taskID, $calendarID);
+		});
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function setTaskNote($taskID, $note){
-		$result = $this->tasksService->setDescription($taskID, $note);
-		$response = array(
-			'data' => $result
-		);
-		return (new JSONResponse())->setData($response);
+		return $this->generateResponse(function () use ($taskID, $note) {
+			return $this->tasksService->setDescription($taskID, $note);
+		});
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function setDueDate($taskID, $due){
-		$result = $this->tasksService->setDueDate($taskID, $due);
-		$response = array(
-			'data' => $result
-		);
-		return (new JSONResponse())->setData($response);
+		return $this->generateResponse(function () use ($taskID, $due) {
+			return $this->tasksService->setDueDate($taskID, $due);
+		});
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function setStartDate($taskID, $start){
-		$result = $this->tasksService->setStartDate($taskID, $start);
-		$response = array(
-			'data' => $result
-		);
-		return (new JSONResponse())->setData($response);
+		return $this->generateResponse(function () use ($taskID, $start) {
+			return $this->tasksService->setStartDate($taskID, $start);
+		});
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function setReminderDate($taskID, $type, $action, $date, $invert, $related = null, $week, $day, $hour, $minute, $second){
-		$result = $this->tasksService->setReminderDate($taskID, $type, $action, $date, $invert, $related, $week, $day, $hour, $minute, $second);
-		$response = array(
-			'data' => $result
-		);
-		return (new JSONResponse())->setData($response);
+		return $this->generateResponse(function () use ($taskID, $type, $action, $date, $invert, $related, $week, $day, $hour, $minute, $second) {
+			return $this->tasksService->setReminderDate($taskID, $type, $action, $date, $invert, $related, $week, $day, $hour, $minute, $second);
+		});
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function addCategory($taskID, $category){
-		$result = $this->tasksService->addCategory($taskID, $category);
-		$response = array(
-			'data' => $result
-		);
-		return (new JSONResponse())->setData($response);
+		return $this->generateResponse(function () use ($taskID, $category) {
+			return $this->tasksService->addCategory($taskID, $category);
+		});
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function removeCategory($taskID, $category){
-		$result = $this->tasksService->removeCategory($taskID, $category);
-		$response = array(
-			'data' => $result
-		);
-		return (new JSONResponse())->setData($response);
+		return $this->generateResponse(function () use ($taskID, $category) {
+			return $this->tasksService->removeCategory($taskID, $category);
+		});
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function setLocation($taskID, $location){
-		$result = $this->tasksService->setLocation($taskID, $location);
-		$response = array(
-			'data' => $result
-		);
-		return (new JSONResponse())->setData($response);
+		return $this->generateResponse(function () use ($taskID, $location) {
+			return $this->tasksService->setLocation($taskID, $location);
+		});
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function addComment($taskID, $comment, $tmpID){
-		$result = $this->tasksService->addComment($taskID, $comment, $tmpID);
-		$response = array(
-			'data' => array(
-				'comment' => $result
-			)
-		);
-		return (new JSONResponse())->setData($response);
+		return $this->generateResponse(function () use ($taskID, $comment, $tmpID) {
+			return $this->tasksService->addComment($taskID, $comment, $tmpID);
+		});
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function deleteComment($taskID, $commentID){
-		$result = $this->tasksService->deleteComment($taskID, $commentID);
-		$response = array(
-			'data' => array(
-				'comment' => $result
-			)
-		);
-		return (new JSONResponse())->setData($response);
+		return $this->generateResponse(function () use ($taskID, $commentID) {
+			return $this->tasksService->deleteComment($taskID, $commentID);
+		});
 	}
 }
