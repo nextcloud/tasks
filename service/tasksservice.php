@@ -107,7 +107,9 @@ class TasksService {
 				$task[] = $task_data;
 			}
 		}
-		return $task;
+		return array(
+			'tasks' => $task
+		);
 	}
 
 	/**
