@@ -344,7 +344,6 @@
 	}
 }
 #app-content{
-	.transition-custom(all,0.5s);
 	overflow-x:hidden;
 	div.content-wrapper{
 		padding: 6px 17px 75px;
@@ -462,7 +461,7 @@
 	}
 }
 #task-details{
-	.transition-custom(all,0.5s);
+	.transition-custom(all,0.2s);
 	position:absolute;
 	right: -400px;
 	bottom: 0;
@@ -1240,32 +1239,6 @@ li.ui-draggable-dragging{
 	.duedate{
 		display:none;
 	}
-}
-
-.task-item.ng-enter, 
-.task-item.ng-leave,
-.task-item.ng-move { 
-	-webkit-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-	-moz-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-	-ms-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-	-o-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-	transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-	position: relative;
-	display: block;
-} 
-
-.task-item.ng-enter.ng-enter-active,
-.task-item.ng-move.ng-move-active, 
-.task-item.ng-leave {
-	opacity: 1;
-	height: 37px !important;
-}
-
-.task-item.ng-leave.ng-leave-active,
-.task-item.ng-move,
-.task-item.ng-enter {
-	opacity: 0;
-	height: 0px !important;
 }
 div.percentdone{
         height:3px;
