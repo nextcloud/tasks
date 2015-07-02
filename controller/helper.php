@@ -253,7 +253,7 @@ Class Helper {
 	public static function updateVCalendarFromRequest($request, $vcalendar){
 		$vtodo = $vcalendar->VTODO;
 
-		$lastModified = $vtodo->LAST-MODIFIED;
+		$lastModified = $vtodo->{'LAST-MODIFIED'};
 		if(is_null($lastModified)) {
 			$lastModified = $vtodo->add('LAST-MODIFIED');
 		}
