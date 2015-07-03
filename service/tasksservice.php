@@ -474,7 +474,7 @@ class TasksService {
 			'taskID' => $taskID,
 			'id' => $commentId,
 			'tmpID' => $tmpID,
-			'name' => \OCP\User::getDisplayName(),
+			'name' => \OC::$server->getUserManager()->get($this->userId)->getDisplayName(),
 			'userID' => $this->userId,
 			'comment' => $comment,
 			'time' => $now->format('Ymd\THis')
