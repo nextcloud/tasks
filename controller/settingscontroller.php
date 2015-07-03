@@ -26,11 +26,12 @@ namespace OCA\Tasks\Controller;
 use \OCA\Tasks\Service\SettingsService;
 use \OCP\IRequest;
 use \OCP\AppFramework\Controller;
-use \OCP\AppFramework\Http\JSONResponse;
 
 class SettingsController extends Controller {
 
 	private $settingsService;
+
+	use Response;
 
 	public function __construct($appName, IRequest $request, SettingsService $settingsService){
 		parent::__construct($appName, $request);
@@ -41,21 +42,17 @@ class SettingsController extends Controller {
 	 * @NoAdminRequired
 	 */
 	public function get(){
-		$result = $this->settingsService->get();
-		$response = array(
-			'data' => array(
-				'settings' => $result
-			)
-		);
-		return (new JSONResponse())->setData($response);
+		return $this->generateResponse(function () {
+			return ['settings' => $this->settingsService->get()];
+		});
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function set($setting, $type, $value){
-		$result = $this->settingsService->set($setting, $type, $value);
-		$response = array();
-		return (new JSONResponse())->setData($response);
+		return $this->generateResponse(function () use ($setting, $type, $value) {
+			return $this->settingsService->set($setting, $type, $value);
+		});
 	}
 }
