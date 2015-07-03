@@ -79,6 +79,7 @@ OC.L10N.register(
     "Completed" : "Завършено",
     "Add List..." : "Добави Списък...",
     "New List" : "Нов Списък",
+    "Settings" : "Настройки",
     "Start of week" : "Начало на седмица",
     "Visibility of Smart Collections" : "Видимост на Smart Колекции",
     "Load remaining completed tasks." : "Зареди останалите завършени задачи.",
