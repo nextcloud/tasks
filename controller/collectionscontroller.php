@@ -26,11 +26,12 @@ namespace OCA\Tasks\Controller;
 use \OCA\Tasks\Service\CollectionsService;
 use \OCP\IRequest;
 use \OCP\AppFramework\Controller;
-use \OCP\AppFramework\Http\JSONResponse;
 
 class CollectionsController extends Controller {
 
 	private $collectionsService;
+
+	use Response;
 
 	public function __construct($appName, IRequest $request, CollectionsService $collectionsService){
 		parent::__construct($appName, $request);
@@ -41,21 +42,17 @@ class CollectionsController extends Controller {
 	 * @NoAdminRequired
 	 */
 	public function getCollections(){
-		$result = $this->collectionsService->getAll();
-		$response = array(
-			'data' => array(
-				'collections' => $result
-			)
-		);
-		return (new JSONResponse())->setData($response);
+		return $this->generateResponse(function () {
+			return ['collections' => $this->collectionsService->getAll()];
+		});
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function setVisibility($collectionID, $visibility){
-		$result = $this->collectionsService->setVisibility($collectionID, $visibility);
-		$response = array();
-		return (new JSONResponse())->setData($response);
+		return $this->generateResponse(function () use ($collectionID, $visibility) {
+			return $this->collectionsService->setVisibility($collectionID, $visibility);
+		});
 	}
 }
