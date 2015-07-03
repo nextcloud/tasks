@@ -11,6 +11,6 @@
 	<description>Task App for Calender TODOs</description>
 	<ocsid>164356</ocsid>
     <dependencies>
-        <owncloud min-version="8.1" max-version="8.1"/>
+        <owncloud min-version="8.1" max-version="8.2"/>
     </dependencies>
 </info>
