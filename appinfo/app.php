@@ -23,15 +23,15 @@
 namespace OCA\Tasks\AppInfo;
 
 if(\OCP\App::isEnabled('calendar')) {
-	\OCP\App::addNavigationEntry(array(
+	\OC::$server->getNavigationManager()->add(array(
 		// the string under which your app will be referenced in owncloud
 		'id' => 'tasks',
 
 		'order' => 100,
 
-		'href' => \OCP\Util::linkToRoute('tasks.page.index'),
+		'href' => \OC::$server->getURLGenerator()->linkToRoute('tasks.page.index'),
 
-		'icon' => \OCP\Util::imagePath('tasks', 'tasks.svg'),
+		'icon' => \OC::$server->getURLGenerator()->imagePath('tasks', 'tasks.svg'),
 
 		'name' => \OC_L10N::get('tasks')->t('Tasks')
 	));

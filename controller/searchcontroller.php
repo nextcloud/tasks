@@ -32,7 +32,7 @@ class SearchController extends \OCP\Search\Provider {
 	 * @return array list of \OCA\Tasks\Controller\Task
 	 */
 	function search($query) {
-		$calendars = \OC_Calendar_Calendar::allCalendars(\OCP\USER::getUser(), true);
+		$calendars = \OC_Calendar_Calendar::allCalendars(\OC::$server->getUserSession()->getUser()->getUID(), true);
 		$user_timezone = \OC_Calendar_App::getTimezone();
 		// check if the calenar is enabled
 		if (count($calendars) == 0 || !\OCP\App::isEnabled('tasks')) {

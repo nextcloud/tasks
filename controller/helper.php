@@ -33,8 +33,8 @@ Class Helper {
 			return false;
 		}
 		$sharedAccessClassPermissions = \OC_Calendar_Object::getAccessClassPermissions($object);
-		if(\OC_Calendar_Object::getowner($task['id']) !== \OCP\User::getUser()){
-			if (!($sharedAccessClassPermissions & \OCP\PERMISSION_READ)) {
+		if(\OC_Calendar_Object::getowner($task['id']) !== \OC::$server->getUserSession()->getUser()->getUID()){
+			if (!($sharedAccessClassPermissions & \OCP\Constants::PERMISSION_READ)) {
 				return false;
 			}
 		}
@@ -225,7 +225,7 @@ Class Helper {
 				$comments_parsed[] = array(
 					'id' => $comID,
 					'userID' => $userID,
-					'name' => \OCP\User::getDisplayName($userID),
+					'name' => \OC::$server->getUserManager()->get($userID)->getDisplayName(),
 					'comment' => $com->getValue(),
 					'time' => $time
 					);

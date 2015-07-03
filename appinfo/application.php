@@ -121,7 +121,7 @@ class Application extends App {
 		 * Core
 		 */
 		$container->registerService('UserId', function() {
-			return \OCP\User::getUser();
+			return \OC::$server->getUserSession()->getUser()->getUID();
 		});	
 
 		$container->registerService('L10N', function($c) {
