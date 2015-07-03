@@ -89,6 +89,7 @@ OC.L10N.register(
     "Start of week" : "週の初め",
     "Visibility of Smart Collections" : "スマートコレクションの表示",
     "Load remaining completed tasks." : "残りの完了済みタスクをロード",
+    "(New category)" : "(新しいカテゴリ)",
     "Loading the task..." : "タスクの読み込み中...",
     "Task not found!" : "タスクがありません！"
 },

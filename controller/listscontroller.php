@@ -26,11 +26,12 @@ namespace OCA\Tasks\Controller;
 use \OCA\Tasks\Service\ListsService;
 use \OCP\IRequest;
 use \OCP\AppFramework\Controller;
-use \OCP\AppFramework\Http\JSONResponse;
 
 class ListsController extends Controller {
 
 	private $listsService;
+
+	use Response;
 
 	public function __construct($appName, IRequest $request, ListsService $listsService){
 		parent::__construct($appName, $request);
@@ -41,45 +42,35 @@ class ListsController extends Controller {
 	 * @NoAdminRequired
 	 */
 	public function getLists(){
-		$result = $this->listsService->getAll();
-		$response = array(
-			'data' => array(
-				'lists' => $result
-			)
-		);
-		return (new JSONResponse())->setData($response);
+		return $this->generateResponse(function () {
+			return ['lists' => $this->listsService->getAll()];
+		});
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function addList($name, $tmpID){
-		$result = $this->listsService->add($name, $tmpID);
-		$response = array(
-			'data' => array(
-				'list' => $result
-			)
-		);
-		return (new JSONResponse())->setData($response);
+		return $this->generateResponse(function () use ($name, $tmpID) {
+			return ['list' => $this->listsService->add($name, $tmpID)];
+		});
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function deleteList($listID){
-		$result = $this->listsService->delete($listID);
-		$response = $result;
-		return (new JSONResponse())->setData($response);
+		return $this->generateResponse(function () use ($listID) {
+			return $this->listsService->delete($listID);
+		});
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function setListName($listID, $name){
-		$result = $this->listsService->setName($listID, $name);
-		$response = array(
-			'data' => $result
-		);
-		return (new JSONResponse())->setData($response);
+		return $this->generateResponse(function () use ($listID, $name) {
+			return $this->listsService->setName($listID, $name);
+		});
 	}
 }
