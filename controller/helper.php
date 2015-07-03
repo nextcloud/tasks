@@ -222,10 +222,15 @@ Class Helper {
 				if ($userID) {
 					$userID = (string) $com['X-OC-USERID']->getValue();
 				}
+				$user = \OC::$server->getUserManager()->get($userID);
+				$userName = $userID;
+				if ($user){
+					$userName = $user->getDisplayName();
+				}
 				$comments_parsed[] = array(
 					'id' => $comID,
 					'userID' => $userID,
-					'name' => \OC::$server->getUserManager()->get($userID)->getDisplayName(),
+					'name' => $userName,
 					'comment' => $com->getValue(),
 					'time' => $time
 					);
