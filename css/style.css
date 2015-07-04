@@ -321,11 +321,6 @@
   margin: 11px 3px 0 7px;
 }
 #app-content {
-  -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-  -ms-transition: all 0.5s ease-in-out;
-  -o-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
   overflow-x: hidden;
 }
 #app-content div.content-wrapper {
@@ -428,11 +423,11 @@
   position: relative;
 }
 #task-details {
-  -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-  -ms-transition: all 0.5s ease-in-out;
-  -o-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
   position: absolute;
   right: -400px;
   bottom: 0;
@@ -1218,29 +1213,6 @@ li.ui-draggable-dragging {
 }
 li.ui-draggable-dragging .duedate {
   display: none;
-}
-.task-item.ng-enter,
-.task-item.ng-leave,
-.task-item.ng-move {
-  -webkit-transition: 200ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
-  -moz-transition: 200ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
-  -ms-transition: 200ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
-  -o-transition: 200ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
-  transition: 200ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
-  position: relative;
-  display: block;
-}
-.task-item.ng-enter.ng-enter-active,
-.task-item.ng-move.ng-move-active,
-.task-item.ng-leave {
-  opacity: 1;
-  height: 37px !important;
-}
-.task-item.ng-leave.ng-leave-active,
-.task-item.ng-move,
-.task-item.ng-enter {
-  opacity: 0;
-  height: 0px !important;
 }
 div.percentdone {
   height: 3px;
