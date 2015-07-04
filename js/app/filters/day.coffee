@@ -21,4 +21,4 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 ###
 angular.module('Tasks').filter 'day', () ->
 	(i) ->
-		return moment().add('days', i).lang('list_week').calendar()
+		return moment().add('days', i).locale('list_week').calendar()

@@ -65,7 +65,7 @@ angular.module('Tasks').run ['$document', '$rootScope', 'Config', '$timeout',
 		$rootScope.$broadcast 'documentClicked', event
 		return
 
-	moment.lang('details', {
+	moment.locale('details', {
 		calendar: {
 			lastDay  : 	'['+t('tasks','Due yesterday')+'], HH:mm'
 			sameDay  : 	'['+t('tasks','Due today')+'], HH:mm'
@@ -75,7 +75,7 @@ angular.module('Tasks').run ['$document', '$rootScope', 'Config', '$timeout',
 			sameElse :	'['+t('tasks', 'Due on')+'] MMM DD, YYYY, HH:mm'
 		}
 	})
-	moment.lang('start', {
+	moment.locale('start', {
 		calendar: {
 			lastDay  : 	'['+t('tasks','Started yesterday')+'], HH:mm'
 			sameDay  : 	'['+t('tasks','Starts today')+'], HH:mm'
@@ -89,7 +89,7 @@ angular.module('Tasks').run ['$document', '$rootScope', 'Config', '$timeout',
 					'['+t('tasks', 'Started on')+'] MMM DD, YYYY, HH:mm'
 		}
 	})
-	moment.lang('reminder', {
+	moment.locale('reminder', {
 		calendar: {
 			lastDay  : 	t('tasks', '[Remind me yesterday at ]HH:mm')
 			sameDay  : 	t('tasks', '[Remind me today at ]HH:mm')
@@ -99,7 +99,7 @@ angular.module('Tasks').run ['$document', '$rootScope', 'Config', '$timeout',
 			sameElse :	t('tasks', '[Remind me on ]MMM DD, YYYY,[ at ]HH:mm')
 		}
 	})
-	moment.lang('tasks', {
+	moment.locale('tasks', {
 		calendar: {
 			lastDay : '['+t('tasks','Yesterday')+']'
 			sameDay : '['+t('tasks','Today')+']'
@@ -109,7 +109,7 @@ angular.module('Tasks').run ['$document', '$rootScope', 'Config', '$timeout',
 			sameElse : 'DD.MM.YYYY'
 		}
 	})
-	moment.lang('details_short', {
+	moment.locale('details_short', {
 		calendar: {
 			lastDay : '['+t('tasks','Yesterday')+']'
 			sameDay : '['+t('tasks','Today')+']'
@@ -119,7 +119,7 @@ angular.module('Tasks').run ['$document', '$rootScope', 'Config', '$timeout',
 			sameElse : 'MMM DD, YYYY'
 		}
 	})
-	moment.lang('list_week', {
+	moment.locale('list_week', {
 		calendar: {
 			lastDay  : '['+t('tasks','Yesterday')+']'
 			sameDay  : '['+t('tasks','Today')+'], MMM. DD'
@@ -129,7 +129,7 @@ angular.module('Tasks').run ['$document', '$rootScope', 'Config', '$timeout',
 			sameElse : 'ddd, MMM. DD'
 		}
 	})
-	moment.lang('en', {
+	moment.locale('en', {
 		relativeTime: {
 			future:	t('tasks', "in %s")
 			past:	t('tasks', "%s ago")

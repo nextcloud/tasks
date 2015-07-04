@@ -22,6 +22,6 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 angular.module('Tasks').filter 'dateDetails', () ->
 	(due) ->
 		if moment(due, "YYYYMMDDTHHmmss").isValid()
-			return moment(due, "YYYYMMDDTHHmmss").lang('details').calendar()
+			return moment(due, "YYYYMMDDTHHmmss").locale('details').calendar()
 		else
 			return t('tasks', 'Set due date')

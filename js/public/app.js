@@ -45,7 +45,7 @@
       $document.click(function(event) {
         $rootScope.$broadcast('documentClicked', event);
       });
-      moment.lang('details', {
+      moment.locale('details', {
         calendar: {
           lastDay: '[' + t('tasks', 'Due yesterday') + '], HH:mm',
           sameDay: '[' + t('tasks', 'Due today') + '], HH:mm',
@@ -55,7 +55,7 @@
           sameElse: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY, HH:mm'
         }
       });
-      moment.lang('start', {
+      moment.locale('start', {
         calendar: {
           lastDay: '[' + t('tasks', 'Started yesterday') + '], HH:mm',
           sameDay: '[' + t('tasks', 'Starts today') + '], HH:mm',
@@ -71,7 +71,7 @@
           }
         }
       });
-      moment.lang('reminder', {
+      moment.locale('reminder', {
         calendar: {
           lastDay: t('tasks', '[Remind me yesterday at ]HH:mm'),
           sameDay: t('tasks', '[Remind me today at ]HH:mm'),
@@ -81,7 +81,7 @@
           sameElse: t('tasks', '[Remind me on ]MMM DD, YYYY,[ at ]HH:mm')
         }
       });
-      moment.lang('tasks', {
+      moment.locale('tasks', {
         calendar: {
           lastDay: '[' + t('tasks', 'Yesterday') + ']',
           sameDay: '[' + t('tasks', 'Today') + ']',
@@ -91,7 +91,7 @@
           sameElse: 'DD.MM.YYYY'
         }
       });
-      moment.lang('details_short', {
+      moment.locale('details_short', {
         calendar: {
           lastDay: '[' + t('tasks', 'Yesterday') + ']',
           sameDay: '[' + t('tasks', 'Today') + ']',
@@ -101,7 +101,7 @@
           sameElse: 'MMM DD, YYYY'
         }
       });
-      moment.lang('list_week', {
+      moment.locale('list_week', {
         calendar: {
           lastDay: '[' + t('tasks', 'Yesterday') + ']',
           sameDay: '[' + t('tasks', 'Today') + '], MMM. DD',
@@ -111,7 +111,7 @@
           sameElse: 'ddd, MMM. DD'
         }
       });
-      return moment.lang('en', {
+      return moment.locale('en', {
         relativeTime: {
           future: t('tasks', "in %s"),
           past: t('tasks', "%s ago"),
@@ -1524,7 +1524,7 @@
           var due;
           due = moment(this._$tasksmodel.getById(taskID).due, "YYYYMMDDTHHmmss");
           if (!due.isValid()) {
-            return this.setDue(taskID, moment().startOf('hour').add('h', 1), 'time');
+            return this.setDue(taskID, moment().startOf('hour').add(1, 'h'), 'time');
           }
         };
 
@@ -1538,7 +1538,7 @@
             if (moment(due).isValid()) {
               due.year(date.year()).month(date.month()).date(date.date());
             } else {
-              due = date.add('h', 12);
+              due = date.add(12, 'h');
             }
           } else if (type === 'time') {
             if (moment(due).isValid()) {
@@ -1570,7 +1570,7 @@
           var start;
           start = moment(this._$tasksmodel.getById(taskID).start, "YYYYMMDDTHHmmss");
           if (!start.isValid()) {
-            return this.setStart(taskID, moment().startOf('hour').add('h', 1), 'time');
+            return this.setStart(taskID, moment().startOf('hour').add(1, 'h'), 'time');
           }
         };
 
@@ -1584,7 +1584,7 @@
             if (moment(start).isValid()) {
               start.year(date.year()).month(date.month()).date(date.date());
             } else {
-              start = date.add('h', 12);
+              start = date.add(12, 'h');
             }
           } else if (type === 'time') {
             if (moment(start).isValid()) {
@@ -1639,7 +1639,7 @@
               p.id = '11';
             } else {
               task.reminder.type = 'DATE-TIME';
-              task.reminder.date = moment().startOf('hour').add('h', 1).format('YYYYMMDDTHHmmss');
+              task.reminder.date = moment().startOf('hour').add(1, 'h').format('YYYYMMDDTHHmmss');
             }
             return this.setReminder(taskID);
           }
@@ -1663,10 +1663,10 @@
               if (reminderdate.isValid() && reminder.type === 'DATE-TIME') {
                 reminderdate.year(date.year()).month(date.month()).date(date.date());
               } else {
-                reminderdate = date.add('h', 12);
+                reminderdate = date.add(12, 'h');
               }
             } else {
-              reminderdate = date.add('h', 12);
+              reminderdate = date.add(12, 'h');
             }
           } else if (type === 'time') {
             if (this.checkReminderDate(taskID) || reminder === null) {
@@ -1831,7 +1831,7 @@
             case 'uncompleted':
               return this.uncompleteTask(taskID);
             case 'today':
-              return this.setDue(taskID, moment().startOf('day').add('h', 12), 'all');
+              return this.setDue(taskID, moment().startOf('day').add(12, 'h'), 'all');
             case 'week':
             case 'all':
               break;
@@ -3090,7 +3090,7 @@
   angular.module('Tasks').filter('dateDetails', function() {
     return function(due) {
       if (moment(due, "YYYYMMDDTHHmmss").isValid()) {
-        return moment(due, "YYYYMMDDTHHmmss").lang('details').calendar();
+        return moment(due, "YYYYMMDDTHHmmss").locale('details').calendar();
       } else {
         return t('tasks', 'Set due date');
       }
@@ -3103,7 +3103,7 @@
   angular.module('Tasks').filter('dateDetailsShort', function() {
     return function(reminder) {
       if (moment(reminder, "YYYYMMDDTHHmmss").isValid()) {
-        return moment(reminder, "YYYYMMDDTHHmmss").lang('details_short').calendar();
+        return moment(reminder, "YYYYMMDDTHHmmss").locale('details_short').calendar();
       } else {
         return '';
       }
@@ -3129,7 +3129,7 @@
   angular.module('Tasks').filter('dateTaskList', function() {
     return function(due) {
       if (moment(due, "YYYYMMDDTHHmmss").isValid()) {
-        return moment(due, "YYYYMMDDTHHmmss").lang('tasks').calendar();
+        return moment(due, "YYYYMMDDTHHmmss").locale('tasks').calendar();
       } else {
         return '';
       }
@@ -3141,7 +3141,7 @@
 (function() {
   angular.module('Tasks').filter('day', function() {
     return function(i) {
-      return moment().add('days', i).lang('list_week').calendar();
+      return moment().add('days', i).locale('list_week').calendar();
     };
   });
 
@@ -3151,7 +3151,7 @@
   angular.module('Tasks').filter('dayTaskList', function() {
     return function(due) {
       if (moment(due, "YYYYMMDDTHHmmss").isValid()) {
-        return moment(due, "YYYYMMDDTHHmmss").lang('tasks').calendar();
+        return moment(due, "YYYYMMDDTHHmmss").locale('tasks').calendar();
       } else {
         return '';
       }
@@ -3194,7 +3194,7 @@
       var ds, time, token, _i, _len, _ref;
       if (!(angular.isUndefined(reminder) || reminder === null)) {
         if (reminder.type === 'DATE-TIME' && moment(reminder.date, "YYYYMMDDTHHmmss").isValid()) {
-          return moment(reminder.date, "YYYYMMDDTHHmmss").lang('reminder').calendar();
+          return moment(reminder.date, "YYYYMMDDTHHmmss").locale('reminder').calendar();
         } else if (reminder.type === 'DURATION' && reminder.duration) {
           ds = t('tasks', 'Remind me');
           _ref = scope.durations;
@@ -3247,7 +3247,7 @@
   angular.module('Tasks').filter('startDetails', function() {
     return function(due) {
       if (moment(due, "YYYYMMDDTHHmmss").isValid()) {
-        return moment(due, "YYYYMMDDTHHmmss").lang('start').calendar();
+        return moment(due, "YYYYMMDDTHHmmss").locale('start').calendar();
       } else {
         return t('tasks', 'Set start date');
       }

@@ -82,7 +82,7 @@ angular.module('Tasks').factory 'TasksBusinessLayer',
 		initDueDate: (taskID) ->
 			due = moment(@_$tasksmodel.getById(taskID).due, "YYYYMMDDTHHmmss")
 			if !due.isValid()
-				@setDue(taskID, moment().startOf('hour').add('h',1),'time')
+				@setDue(taskID, moment().startOf('hour').add(1, 'h'),'time')
 
 		setDue: (taskID, date, type='day') ->
 			due = moment(@_$tasksmodel.getById(taskID).due, "YYYYMMDDTHHmmss")
@@ -90,7 +90,7 @@ angular.module('Tasks').factory 'TasksBusinessLayer',
 				if moment(due).isValid()
 					due.year(date.year()).month(date.month()).date(date.date())
 				else
-					due = date.add('h',12)
+					due = date.add(12, 'h')
 			else if type == 'time'
 				if moment(due).isValid()
 					due.hour(date.hour()).minute(date.minute())
@@ -116,7 +116,7 @@ angular.module('Tasks').factory 'TasksBusinessLayer',
 		initStartDate: (taskID) ->
 			start = moment(@_$tasksmodel.getById(taskID).start, "YYYYMMDDTHHmmss")
 			if !start.isValid()
-				@setStart(taskID, moment().startOf('hour').add('h',1),'time')
+				@setStart(taskID, moment().startOf('hour').add(1, 'h'),'time')
 
 		setStart: (taskID, date, type='day') ->
 			start = moment(@_$tasksmodel.getById(taskID).start, "YYYYMMDDTHHmmss")
@@ -124,7 +124,7 @@ angular.module('Tasks').factory 'TasksBusinessLayer',
 				if moment(start).isValid()
 					start.year(date.year()).month(date.month()).date(date.date())
 				else
-					start = date.add('h',12)
+					start = date.add(12, 'h')
 			else if type == 'time'
 				if moment(start).isValid()
 					start.hour(date.hour()).minute(date.minute())
@@ -173,7 +173,7 @@ angular.module('Tasks').factory 'TasksBusinessLayer',
 					p.id = '11'
 				else
 					task.reminder.type = 'DATE-TIME'
-					task.reminder.date = moment().startOf('hour').add('h',1)
+					task.reminder.date = moment().startOf('hour').add(1, 'h')
 					.format('YYYYMMDDTHHmmss')
 				@setReminder(taskID)
 
@@ -191,9 +191,9 @@ angular.module('Tasks').factory 'TasksBusinessLayer',
 					if (reminderdate.isValid() && reminder.type == 'DATE-TIME')
 						reminderdate.year(date.year()).month(date.month()).date(date.date())
 					else
-						reminderdate = date.add('h',12)
+						reminderdate = date.add(12, 'h')
 				else
-					reminderdate = date.add('h',12)
+					reminderdate = date.add(12, 'h')
 			else if type == 'time'
 				if (@checkReminderDate(taskID) || reminder == null)
 					reminderdate = moment(reminder.date, "YYYYMMDDTHHmmss")
@@ -327,7 +327,7 @@ angular.module('Tasks').factory 'TasksBusinessLayer',
 				when 'uncompleted'
 					@uncompleteTask(taskID)
 				when 'today'
-					@setDue(taskID,moment().startOf('day').add('h',12),'all')
+					@setDue(taskID,moment().startOf('day').add(12, 'h'),'all')
 				when 'week', 'all'
 				else
 					@changeCalendarId(taskID,listID)
