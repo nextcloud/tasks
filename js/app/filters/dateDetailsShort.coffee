@@ -22,6 +22,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 angular.module('Tasks').filter 'dateDetailsShort', () ->
 	(reminder) ->
 		if moment(reminder, "YYYYMMDDTHHmmss").isValid()
-			return moment(reminder, "YYYYMMDDTHHmmss").lang('details_short').calendar()
+			return moment(reminder, "YYYYMMDDTHHmmss")
+				.locale('details_short').calendar()
 		else
 			return ''

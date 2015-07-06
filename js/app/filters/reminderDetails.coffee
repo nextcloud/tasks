@@ -24,7 +24,8 @@ angular.module('Tasks').filter 'reminderDetails', () ->
 		if !(angular.isUndefined(reminder) || reminder == null)
 			if reminder.type == 'DATE-TIME' &&
 			moment(reminder.date, "YYYYMMDDTHHmmss").isValid()
-				return moment(reminder.date, "YYYYMMDDTHHmmss").lang('reminder').calendar()
+				return moment(reminder.date, "YYYYMMDDTHHmmss")
+					.locale('reminder').calendar()
 			else if reminder.type == 'DURATION' && reminder.duration
 				ds = t('tasks', 'Remind me')
 				for token in scope.durations
