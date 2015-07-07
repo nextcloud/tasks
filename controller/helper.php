@@ -85,9 +85,17 @@ Class Helper {
 		$reminder = $vtodo->VALARM;
 		if($reminder) {
 			try {
-
-				$reminderType = $reminder->TRIGGER['VALUE']->getValue();
-				$reminderAction = $reminder->ACTION->getValue();
+				
+				if ($reminder->TRIGGER['VALUE']){
+					$reminderType = $reminder->TRIGGER['VALUE']->getValue();	
+				} else {
+					throw new \Exception('Reminder type not specified.');
+				}
+				if ($reminder->ACTION) {
+					$reminderAction = $reminder->ACTION->getValue();
+				} else {
+					throw new \Exception('Reminder action not specified.');	
+				}
 				$reminderDate = null;
 				$reminderDuration = null;
 
