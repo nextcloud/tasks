@@ -41,7 +41,7 @@ OC.L10N.register(
     "hours" : "heures",
     "minute" : "minute",
     "minutes" : "minutes",
-    "second" : "deuxième",
+    "second" : "seconde",
     "before beginning" : "avant le début",
     "after beginning" : "après le début",
     "before end" : "avant la fin",
