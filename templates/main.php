@@ -59,10 +59,14 @@
                 </button>
             </div>
             <div id="app-settings-content">
-                <label for="startOfWeek"><?php p($l->t('Start of week')); ?></label>
-                <select id="startOfWeek" ng-change="setStartOfWeek()" ng-model="settingsmodel.getById('various').startOfWeek" ng-options="startOfWeekOption.id as startOfWeekOption.name for startOfWeekOption in startOfWeekOptions"></select>
-                <h2 class="bold"><?php p($l->t('Visibility of Smart Collections')); ?></h2>
                 <ul>
+                    <li>
+                        <label for="startOfWeek"><?php p($l->t('Start of week')); ?></label>
+                        <select id="startOfWeek" ng-change="setStartOfWeek()" ng-model="settingsmodel.getById('various').startOfWeek" ng-options="startOfWeekOption.id as startOfWeekOption.name for startOfWeekOption in startOfWeekOptions"></select>
+                    </li>
+                    <li class="headline">
+                        <?php p($l->t('Visibility of Smart Collections')); ?>
+                    </li>
                     <li ng-repeat="collection in collections">
                         <span class="icon collection-{{ collection.id }}"><text ng-show="collection.id=='today'"><?php p($_['DOM']); ?></text></span>
                         <label for="visibilityCollection-{{collection.id}}" class="title">{{ collection.displayname }}</label>

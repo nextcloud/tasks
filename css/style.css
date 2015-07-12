@@ -1290,3 +1290,17 @@ div.percentdone {
   padding: 2px 5px;
   min-height: 22px;
 }
+#app-settings-content li {
+  line-height: 3em;
+}
+#app-settings-content li.headline {
+  font-weight: bold;
+  line-height: 1.5em;
+}
+#app-settings-content .icon {
+  margin-top: -3px;
+}
+#app-settings-content select {
+  float: right;
+  min-width: 105px;
+}
