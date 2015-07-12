@@ -23,18 +23,20 @@
 namespace OCA\Tasks\AppInfo;
 
 if(\OCP\App::isEnabled('calendar')) {
-	\OC::$server->getNavigationManager()->add(array(
-		// the string under which your app will be referenced in owncloud
-		'id' => 'tasks',
+	\OC::$server->getNavigationManager()->add(function () {
+		$urlGenerator = \OC::$server->getURLGenerator();
+	    return [
+			'id' => 'tasks',
 
-		'order' => 100,
+			'order' => 100,
 
-		'href' => \OC::$server->getURLGenerator()->linkToRoute('tasks.page.index'),
+			'href' => $urlGenerator->linkToRoute('tasks.page.index'),
 
-		'icon' => \OC::$server->getURLGenerator()->imagePath('tasks', 'tasks.svg'),
+			'icon' => $urlGenerator->imagePath('tasks', 'tasks.svg'),
 
-		'name' => \OC_L10N::get('tasks')->t('Tasks')
-	));
+			'name' => \OC::$server->getL10N('tasks')->t('Tasks'),
+		];
+	});
 } else {
 	$msg = 'Can not enable the Tasks app because the Calendar App is disabled.';
 	\OCP\Util::writeLog('tasks', $msg, \OCP\Util::ERROR);
