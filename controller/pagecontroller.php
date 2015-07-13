@@ -42,7 +42,6 @@ class PageController extends Controller {
 		\OCP\Util::addScript('tasks', 'vendor/appframework/app');
 		\OCP\Util::addScript('tasks', 'vendor/timepicker/jquery.ui.timepicker');
 		\OCP\Util::addStyle('tasks', 'style');
-		\OCP\Util::addStyle('tasks', 'vendor/bootstrap/bootstrap');
 		\OCP\Util::addStyle('tasks', 'vendor/angularui/ui-select/select2');
 
 		$date = new \DateTimeZone(\OC_Calendar_App::getTimezone());
