@@ -1,11 +1,19 @@
 <div ng-app="Tasks" ng-cloak ng-controller="AppController" ng-click="closeAll($event)" id="app" class="handler">
     <div id="app-navigation" ng-controller="ListController">
         <ul id="collections">
-            <li ng-repeat="collection in collections" id="collection_{{ collection.id }}" rel="{{ collection.id }}"
-                    ng-class="{'animate-up': hideCollection(collection.id), active: collection.id==route.listID}" oc-drop-task>
+            <li id="collection_{{ collection.id }}"
+                class="collection"
+                collectionID="{{collection.id}}"
+                ng-repeat="collection in collections"
+                ng-class="{'animate-up': hideCollection(collection.id), active: collection.id==route.listID}"
+                dnd-list="draggedTasks"
+                dnd-drop="dropCollection(event, item, index)"
+                dnd-dragover="dragoverCollection(event, item, index)">
                 <a href="#/lists/{{ collection.id }}">
-                        <span class="icon collection-{{ collection.id }}"><text ng-show="collection.id=='today'"><?php p($_['DOM']); ?></text></span>
-                        <span class="title">{{ collection.displayname }}</span>
+                    <span class="icon collection-{{ collection.id }}">
+                        <text ng-show="collection.id=='today'"><?php p($_['DOM']); ?></text>
+                    </span>
+                    <span class="title">{{ collection.displayname }}</span>
                 </a>
                 <div class="app-navigation-entry-utils">
                     <ul>
@@ -13,8 +21,14 @@
                     </ul>
                 </div>
             </li>
-           <li ng-repeat="list in lists" id="list_{{ list.id }}" rel="{{ list.id }}" class="with-menu handler"
-                    ng-class="{active: list.id==route.listID, edit:route.listparameter == 'name' && route.listID == list.id}" oc-drop-task>
+            <li class="list with-menu handler"
+                id="list_{{ list.id }}"
+                listID="{{list.id}}"
+                ng-repeat="list in lists"
+                ng-class="{active: list.id==route.listID, edit:route.listparameter == 'name' && route.listID == list.id}"
+                dnd-list="draggedTasks"
+                dnd-drop="dropList(event, item, index)"
+                dnd-dragover="dragoverList(event, item, index)">
                 <a href="#/lists/{{ list.id }}" style="border-right: 4px solid {{ list.calendarcolor }};" ng-dblclick="editName(list.id)">
                     <span class="icon list-list"></span>
                     <span class="title">{{ list.displayname }}</span>
@@ -86,8 +100,8 @@
                 <a class="input-date">
                     <span class="icon input-date"></span>
                 </a>
-                <form ng-submit="addTask(taskName)" name="addTaskForm">
-                    <input id="target" ng-disabled="isAddingTask" ng-click="focusInput()" class="transparent" placeholder="{{ getAddString() }}" ng-model="taskName"
+                <form ng-submit="addTask(status.taskName)" name="addTaskForm">
+                    <input id="target" ng-disabled="isAddingTask" ng-click="focusTaskInput()" class="transparent" placeholder="{{ getAddString() }}" ng-model="status.taskName"
                         ng-keydown="checkTaskInput($event)"/>
                 </form>
             </div>
@@ -121,4 +135,7 @@
             </div>
         </div>
     </div>
+    <script type="text/ng-template" id="part.taskbody">
+        <?php print_unescaped($this->inc('part.taskbody')); ?>
+    </script>
 </div>

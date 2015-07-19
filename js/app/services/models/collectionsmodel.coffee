@@ -36,11 +36,11 @@ angular.module('Tasks').factory 'CollectionsModel',
 
 		getCount: (collectionID, filter='') ->
 			count = 0
-			tasks = @_$tasksmodel.getAll()
+			tasks = @_$tasksmodel.filteredTasks(filter)
 			
 			for task in tasks
 				count += (@_$tasksmodel.filterTasks(task, collectionID) &&
-					@_$tasksmodel.filterTasksByString(task, filter))
+					!task.related)
 			return count
 
 	return new CollectionsModel(TasksModel)

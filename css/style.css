@@ -4,6 +4,13 @@
   padding: 0;
   text-decoration: none;
 }
+.visibility-hidden {
+  visibility: hidden;
+}
+.task-body.changeParent {
+  border-color: blue !important;
+  z-index: 100 !important;
+}
 #app-navigation li {
   transition: max-height 300ms ease 0s;
   max-height: 100px;
@@ -115,6 +122,11 @@
 }
 #content .icon.task-attachment {
   background-position: 0 -60px;
+  display: none;
+}
+#content .icon.subtasks {
+  display: none;
+  background-position: -220px -100px;
 }
 #content .icon.detail-trash {
   background-position: -260px 0px;
@@ -202,28 +214,61 @@
 #content tr:last-child .task-item div.task-body {
   border-width: 1px;
 }
-#content li.task-item:last-child {
-  height: 39px;
+#content li.task-item:first-child {
+  margin-top: 0;
 }
-#content li.task-item:last-child .task-body {
+#content li.task-item:first-child .task-body {
   border-width: 1px;
 }
 #content li.task-item,
 #content div.task-item {
   cursor: default;
-  height: 37px;
+  min-height: 37px;
   list-style: none outside none;
   overflow: hidden;
-  z-index: 100 !important;
+  margin-top: -1px;
 }
-#content li.task-item.done,
-#content div.task-item.done {
+#content li.task-item .subtasks-container,
+#content div.task-item .subtasks-container {
+  margin-left: 35px;
+}
+#content li.task-item .subtasks-container.subtaskshidden li.subtask,
+#content div.task-item .subtasks-container.subtaskshidden li.subtask {
+  display: none;
+}
+#content li.task-item.add-subtask,
+#content div.task-item.add-subtask {
+  background: #ffffff;
+  border: 1px solid #cccccc;
+  padding: 6px 12px;
+}
+#content li.task-item.add-subtask input,
+#content div.task-item.add-subtask input {
+  background: transparent none repeat scroll 0 0 !important;
+  border: medium none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  box-sizing: border-box;
+  color: #505050;
+  cursor: text;
+  font-size: 13px;
+  font-weight: bold;
+  margin: 0;
+  padding: 0 60px 0 0;
+  width: 100%;
+}
+#content li.task-item.done .task-body,
+#content div.task-item.done .task-body {
   opacity: 0.6;
 }
-#content li.task-item.done .title,
-#content div.task-item.done .title {
+#content li.task-item.done .task-body .title,
+#content div.task-item.done .task-body .title {
   text-decoration: line-through;
   text-shadow: none;
+}
+#content li.task-item .subtasks-container .task-item,
+#content div.task-item .subtasks-container .task-item {
+  margin-top: -1px;
 }
 #content li.task-item .task-body,
 #content div.task-item .task-body {
@@ -234,7 +279,7 @@
   margin: 0;
   position: relative;
   border-style: solid;
-  border-width: 1px 1px 0;
+  border-width: 1px;
   border-color: #CCCCCC;
 }
 #content li.task-item .task-body .icon.task-separator,
@@ -271,6 +316,18 @@
 #content div.task-item .task-body .icon.task-star.low {
   background-position: -180px -40px !important;
 }
+#content li.task-item .task-body .icon.addsubtask,
+#content div.task-item .task-body .icon.addsubtask {
+  background-position: 0 -80px;
+  float: right;
+  margin: 0 2px 0 5px;
+  height: 34px;
+  width: 20px;
+}
+#content li.task-item .task-body .icon.addsubtask:hover,
+#content div.task-item .task-body .icon.addsubtask:hover {
+  background-position: -20px -80px;
+}
 #content li.task-item .task-body .title-wrapper,
 #content div.task-item .task-body .title-wrapper {
   cursor: pointer;
@@ -293,11 +350,17 @@
 #content div.task-item .task-body .title-wrapper.attachment .task-attachment {
   display: inline-block;
 }
-#content li.task-item .task-body .title-wrapper .task-attachment,
-#content div.task-item .task-body .title-wrapper .task-attachment {
-  display: none;
-  height: 20px;
-  margin-top: -3px;
+#content li.task-item .task-body .title-wrapper.subtasks .subtasks,
+#content div.task-item .task-body .title-wrapper.subtasks .subtasks {
+  display: inline-block;
+}
+#content li.task-item .task-body .title-wrapper.subtasks.subtaskshidden .subtasks,
+#content div.task-item .task-body .title-wrapper.subtasks.subtaskshidden .subtasks {
+  background-position: -260px -100px;
+}
+#content li.task-item .task-body .title-wrapper.subtasks.subtaskshidden .subtasks:hover,
+#content div.task-item .task-body .title-wrapper.subtasks.subtaskshidden .subtasks:hover {
+  background-position: -220px -100px;
 }
 #content li.task-item .task-body .duedate,
 #content div.task-item .task-body .duedate {
@@ -1211,6 +1274,7 @@ div.ui-timepicker:before {
 }
 li.ui-draggable-dragging {
   width: 300px;
+  z-index: 101 !important;
 }
 li.ui-draggable-dragging .duedate {
   display: none;
@@ -1225,6 +1289,7 @@ div.percentdone {
   padding-top: 0px !important;
   margin-top: 20px !important;
   background-color: transparent !important;
+  min-height: 150px;
 }
 #searchresults #status {
   padding: 10px 0px 18px !important;
@@ -1234,6 +1299,9 @@ div.percentdone {
   color: #909090;
   font-size: 13px !important;
   text-shadow: 0 1px 0 #ffffff;
+}
+#searchresults #status.emptycontent {
+  position: relative;
 }
 #searchresults span.icon.task-checkbox {
   background-position: -260px -20px;
@@ -1299,4 +1367,20 @@ div.percentdone {
 #app-settings-content select {
   float: right;
   min-width: 105px;
+}
+ol[dnd-list] .dndDraggingSource {
+  display: none;
+}
+/**
+ * An element with .dndPlaceholder class will be
+ * added to the dnd-list while the user is dragging
+ * over it.
+ */
+ol[dnd-list] .dndPlaceholder {
+  display: block;
+  background-color: #ddd;
+  min-height: 37px;
+}
+.dropzone-visible > ol[dnd-list] {
+  min-height: 50px;
 }

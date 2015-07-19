@@ -40,6 +40,7 @@ class PageController extends Controller {
 			\OCP\Util::addScript('tasks', 'vendor/angularjs/angular-route');
 			\OCP\Util::addScript('tasks', 'vendor/angularjs/angular-animate');
 			\OCP\Util::addScript('tasks', 'vendor/angularjs/angular-sanitize');
+			\OCP\Util::addScript('tasks', 'vendor/angular-draganddrop/angular-drag-and-drop-lists');
 			\OCP\Util::addScript('tasks', 'vendor/angularui/ui-select/select');
 			\OCP\Util::addScript('tasks', 'vendor/bootstrap/ui-bootstrap-custom-tpls-0.10.0');
 		} else {
@@ -47,6 +48,7 @@ class PageController extends Controller {
 			\OCP\Util::addScript('tasks', 'vendor/angularjs/angular-route.min');
 			\OCP\Util::addScript('tasks', 'vendor/angularjs/angular-animate.min');
 			\OCP\Util::addScript('tasks', 'vendor/angularjs/angular-sanitize.min');
+			\OCP\Util::addScript('tasks', 'vendor/angular-draganddrop/angular-drag-and-drop-lists.min');
 			\OCP\Util::addScript('tasks', 'vendor/angularui/ui-select/select.min');
 			\OCP\Util::addScript('tasks', 'vendor/bootstrap/ui-bootstrap-custom-tpls-0.10.0.min');
 		}

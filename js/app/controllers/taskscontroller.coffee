@@ -35,6 +35,7 @@ SettingsBusinessLayer, SearchBusinessLayer) ->
 					@_searchbusinesslayer) ->
 
 			@_$scope.tasks = @_$tasksmodel.getAll()
+			@_$scope.draggedTasks = []
 			@_$scope.lists = @_$listsmodel.getAll()
 
 			@_$scope.days = [0,1,2,3,4,5,6]
@@ -71,14 +72,24 @@ SettingsBusinessLayer, SearchBusinessLayer) ->
 								.replace('%s',
 								_$listsmodel.getById(_$scope.route.listID).displayname)
 
+			@_$scope.getSubAddString = (taskname) ->
+				return t('tasks','Add a subtask to "%s"...')
+								.replace('%s', taskname)
+
+			@_$scope.showSubtaskInput = (uid) ->
+				_$scope.status.addSubtaskTo = uid
+
 			@_$scope.showInput = () ->
 				if _$scope.route.listID in ['completed', 'week']
 					return false
 				else
 					return true
 
-			@_$scope.focusInput = () ->
+			@_$scope.focusTaskInput = () ->
 				_$scope.status.focusTaskInput = true
+
+			@_$scope.focusSubtaskInput = () ->
+				_$scope.status.focusSubtaskInput = true
 
 			@_$scope.openDetails = (id,$event) ->
 				if $($event.currentTarget).is($($event.target).closest('.handler'))
@@ -105,27 +116,49 @@ SettingsBusinessLayer, SearchBusinessLayer) ->
 				return (task) ->
 					return _$tasksmodel.filterTasks(task, filter)
 
+			@_$scope.getSubTasks = (tasks,parent) ->
+				ret = []
+				for task in tasks
+					if task.related == parent.uid
+						ret.push(task)
+				return ret
+
+			@_$scope.hasNoParent = (task) ->
+				return (task) ->
+					return _$tasksmodel.hasNoParent(task)
+
+			@_$scope.hasSubtasks = (task) ->
+				return _$tasksmodel.hasSubtasks(task.uid)
+
+			@_$scope.toggleSubtasks = (taskID) ->
+				if _$tasksmodel.hideSubtasks(taskID)
+					_tasksbusinesslayer.unhideSubtasks(taskID)
+				else
+					_tasksbusinesslayer.hideSubtasks(taskID)
+
 			@_$scope.filterTasksByString = (task) =>
 				return (task) ->
 					filter = _searchbusinesslayer.getFilter()
 					return _$tasksmodel.filterTasksByString(task, filter)
 
+			@_$scope.filteredTasks = () ->
+				filter = _searchbusinesslayer.getFilter()
+				return _$tasksmodel.filteredTasks(filter)
+
 			@_$scope.dayHasEntry = () ->
 				return (date) ->
-					tasks = _$tasksmodel.getAll()
+					filter = _searchbusinesslayer.getFilter()
+					tasks = _$tasksmodel.filteredTasks(filter)
 					for task in tasks
-						if task.completed
+						if task.completed || !_$tasksmodel.hasNoParent(task)
 							continue
 						if _$tasksmodel.taskAtDay(task, date)
 							return true
 					return false
 
-			@_$scope.getTasksAtDay = (tasks, day) ->
-				ret = []
-				for task in tasks
-					if _$tasksmodel.taskAtDay(task, day)
-						ret.push(task)
-				return ret
+			@_$scope.taskAtDay = (task, day) =>
+				return (task) ->
+					_$tasksmodel.taskAtDay(task, day)
 
 			@_$scope.filterLists = () ->
 				return (list) ->
@@ -140,23 +173,28 @@ SettingsBusinessLayer, SearchBusinessLayer) ->
 				return n('tasks', '%n Completed Task', '%n Completed Tasks',
 						_$listsmodel.getCount(listID,type,filter))
 
-			@_$scope.addTask = (taskName) ->
+			@_$scope.addTask = (taskName,related='') ->
 
 				_$scope.isAddingTask = true
 
 				task = {
 					tmpID:		'newTask' + Date.now()
-					calendarID:	null
+					id:			'newTask' + Date.now()
+					calendarid:	null
+					related:	related
 					name:		taskName
 					starred:	false
 					due:		false
 					start:		false
+					reminder:	null
 					completed:	false
+					complete:	'0'
+					note:		false
 				}
 
 				if (_$scope.route.listID in
 				['starred', 'today', 'week', 'all', 'completed', 'current'])
-					task.calendarID = _$listsmodel.getStandardList()
+					task.calendarid = _$listsmodel.getStandardList()
 					if _$scope.route.listID == 'starred'
 						task.starred = true
 					if _$scope.route.listID == 'today'
@@ -164,8 +202,7 @@ SettingsBusinessLayer, SearchBusinessLayer) ->
 					if _$scope.route.listID == 'current'
 						task.start = moment().format("YYYYMMDDTHHmmss")
 				else
-					task.calendarID = _$scope.route.listID
-
+					task.calendarid = _$scope.route.listID
 
 				_tasksbusinesslayer.addTask task
 				, (data) =>
@@ -175,13 +212,19 @@ SettingsBusinessLayer, SearchBusinessLayer) ->
 					_$scope.isAddingTask = false
 
 				_$scope.status.focusTaskInput = false
-				_$scope.taskName = ''
+				_$scope.status.focusSubtaskInput = false
+				_$scope.status.addSubtaskTo = ''
+				_$scope.status.taskName = ''
+				_$scope.status.subtaskName = ''
 
-			@_$scope.checkTaskInput = (event) ->
-				if(event.keyCode == 27)
-					$('#target').blur()
-					_$scope.taskName = ""
+			@_$scope.checkTaskInput = ($event) ->
+				if($event.keyCode == 27)
+					$($event.currentTarget).blur()
+					_$scope.status.taskName = ''
+					_$scope.status.subtaskName = ''
+					_$scope.status.addSubtaskTo = ''
 					_$scope.status.focusTaskInput = false
+					_$scope.status.focusSubtaskInput = false
 
 			@_$scope.getCompletedTasks = (listID) ->
 				_tasksbusinesslayer.getCompletedTasks(listID)
@@ -200,6 +243,41 @@ SettingsBusinessLayer, SearchBusinessLayer) ->
 
 			@_$scope.getTaskList = (listID) ->
 				return _$listsmodel.getName(listID)
+
+			@_$scope.dropCallback = ($event, item, index) ->
+				taskID = item.id
+				$('.subtasks-container').removeClass('dropzone-visible')
+				parentID = $('li.dndPlaceholder').closest('.task-item').attr('taskID')
+				parentID = parentID || ""
+				# Sometimes the detection of the parentID by the dndPlaceholder goes wrong
+				# (unclear why, atm). This catches the problem for now.
+				if parentID == taskID
+					parentID = ""
+				collectionID = $('li.dndPlaceholder').closest('ol[dnd-list]')
+				.attr('collectionID')
+				if collectionID
+					_tasksbusinesslayer.changeCollection(taskID, collectionID)
+				listID = $('li.dndPlaceholder').closest('ol[dnd-list]')
+				.attr('listID')
+				if listID
+					_tasksbusinesslayer.changeCalendarId(taskID,listID)
+				_tasksbusinesslayer.changeParent(taskID, parentID, collectionID)
+				return true
+
+			@_$scope.dragover = ($event, item, index) ->
+				# remove this in favour of @_$scope.dragleave()
+				$('.subtasks-container').removeClass('dropzone-visible')
+				#
+				$($event.target).closest('.task-item')
+				.children('.subtasks-container')
+				.addClass('dropzone-visible')
+				return true
+
+			# This should be used when angular dnd supports dnd-dragleave callback
+			# @_$scope.dragleave = ($event, item, index) ->
+			# 	$($event.target).closest('.task-item')
+			# 	.children('.subtasks-container').removeClass('dropzone-visible')
+			# 	return true
 
 	return new TasksController($scope, $window, $routeParams,
 		TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location,
