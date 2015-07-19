@@ -1,14 +1,43 @@
 <?php
+/**
+ * ownCloud - Tasks
+ *
+ * @author Raimund Schlüßler
+ * @copyright 2015 Raimund Schlüßler raimund.schluessler@googlemail.com
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU AFFERO GENERAL PUBLIC LICENSE for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public
+ * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+
 namespace OCA\Tasks\Service;
 
-use \OCA\Tasks\Controller\Helper;
+use \OCA\Tasks\Service\Helper;
+use \OCA\Tasks\Service\TaskParser;
+use \OCA\Tasks\Db\TasksMapper;
 
 class TasksService {
 
 	private $userId;
+	private $tasksMapper;
+	private $helper;
+	private $taskParser;
 
-	public function __construct($userId){
+	public function __construct($userId, TasksMapper $tasksMapper, Helper $helper, TaskParser $taskParser){
 		$this->userId = $userId;
+		$this->tasksMapper = $tasksMapper;
+		$this->helper = $helper;
+		$this->taskParser = $taskParser;
 	}
 
 	/**
@@ -21,7 +50,6 @@ class TasksService {
 	 */
 	public function getAll($listID = 'all', $type = 'all'){
 		
-		$user_timezone = \OC_Calendar_App::getTimezone();
 		if ($listID == 'all'){
 			$calendars = \OC_Calendar_Calendar::allCalendars($this->userId, true);
 		} else {
@@ -32,62 +60,43 @@ class TasksService {
 		$tasks = array();
 		$lists = array();
 		foreach( $calendars as $calendar ) {
-			$calendar_entries = \OC_Calendar_Object::all($calendar['id']);
-			$tasks_selected = array();
-			foreach( $calendar_entries as $task ) {
-				if($task['objecttype']!='VTODO') {
-					continue;
-				}
-				if(is_null($task['summary'])) {
-					continue;
-				}
-				if(!($vtodo = Helper::parseVTODO($task))){
-					continue;
-				}
-				$task_data = Helper::arrayForJSON($task['id'], $vtodo, $user_timezone, $calendar['id']);
-				switch($type){
-					case 'all':
-						$tasks[] = $task_data;
-						break;
-					case 'init':
-						if (!$task_data['completed']){
-							$tasks[] = $task_data;
-						} else {
-							$tasks_selected[] = $task_data;
-						}
-						break;
-					case 'completed':
-						if ($task_data['completed']){
-							$tasks[] = $task_data;
-						}
-						break;
-					case 'uncompleted':
-						if (!$task_data['completed']){
-							$tasks[] = $task_data;
-						}
-						break;
-				}
-			}
-			$nrCompleted = 0;
-			$notLoaded = 0;
-			usort($tasks_selected, array($this, 'sort_completed'));
-			foreach( $tasks_selected as $task_selected){
-				$nrCompleted++;
-				if ($nrCompleted > 5){
-					$notLoaded++;
-					continue;
-				}
-				$tasks[] = $task_selected;
-			}
-			$lists[] = array(
-				'id' 		=> $calendar['id'],
-				'notLoaded' => $notLoaded
-				);
+			$calendar_entries = $this->tasksMapper->findAllVTODOs($calendar['id']);
+
+			list($lists[], $tasks_calendar) = $this->getTasks($calendar_entries, $type, $calendar['id']);
+
+			$tasks = array_merge($tasks, $tasks_calendar);
 		}
 		return array(
 			'tasks' => $tasks,
 			'lists' => $lists
 		);
+	}
+
+	/**
+	 * get tasks
+	 *
+	 * @param array  $calendar_entries
+	 * @param string $type
+	 * @param string $calendarID
+	 * @return array
+	*/
+	public function getTasks($calendar_entries, $type, $calendarID) {
+		$list = array(
+			'id' 		=> $calendarID,
+			'notLoaded' => 0
+			);
+		$host = $this;
+		$VTODOs = array_map(function($task) use ($host) {
+			return $host->helper->checkTask($task);
+		}, $calendar_entries);
+		$VTODOs = array_filter($VTODOs);
+
+		$tasks = array_map(function($task) use ($host, $calendarID) {
+    		return $host->taskParser->parseTask($task, $calendarID);
+		},$VTODOs);
+
+		list($list['notLoaded'], $tasks) = $this->helper->selectTasks($tasks, $type);
+		return array($list, $tasks);
 	}
 
 	/**
@@ -97,19 +106,43 @@ class TasksService {
 	 * @return array
 	 * @throws \Exception
 	 */
-	public function get($taskID){
-		$object = \OC_Calendar_App::getEventObject($taskID);
-		$user_timezone = \OC_Calendar_App::getTimezone();
+	public function getTask($taskID){
+		$calendar_entry = $this->tasksMapper->findVTODOById($taskID);
 		$task = array();
-		if($object['objecttype']=='VTODO' && !is_null($object['summary'])) {
-			if($vtodo = Helper::parseVTODO($object)){
-				$task_data = Helper::arrayForJSON($object['id'], $vtodo, $user_timezone, $object['calendarid']);
-				$task[] = $task_data;
-			}
+		$vtodo = $this->helper->checkTask($calendar_entry);
+		if($vtodo){
+			$task_data = $this->taskParser->parseTask($vtodo, $calendar_entry->getCalendarid());
+			$task[] = $task_data;
 		}
 		return array(
 			'tasks' => $task
 		);
+	}
+
+	/**
+	 * Search for query in tasks
+	 *
+	 * @param string $query
+	 * @return array
+	 */
+	public function search($query) {
+		$calendars = \OC_Calendar_Calendar::allCalendars($this->userId, true);
+		$results = array();
+		foreach ($calendars as $calendar) {
+			$calendar_entries = $this->tasksMapper->findAllVTODOs($calendar['id']);
+		 	// search all calendar objects, one by one
+			foreach ($calendar_entries as $calendar_entry) {
+				$vtodo = $this->helper->checkTask($calendar_entry);
+				if(!$vtodo){
+					continue;
+				}
+				if($this->helper->checkTaskByQuery($vtodo, $query)) {
+					$results[] = $this->taskParser->parseTask($vtodo, $calendar_entry->getCalendarid());
+				}
+			}
+		}
+		usort($results, array($this->helper, 'sortCompleted'));
+		return $results;
 	}
 
 	/**
@@ -124,20 +157,17 @@ class TasksService {
 	 * @return array
 	 */
 	public function add($taskName, $calendarId, $starred, $due, $start, $tmpID){
-		$user_timezone = \OC_Calendar_App::getTimezone();
 		$request = array(
 				'summary'			=> $taskName,
-				'categories'		=> null,
-				'priority'			=> $starred,
-				'location' 			=> null,
+				'starred'			=> $starred,
 				'due'				=> $due,
 				'start'				=> $start,
-				'description'		=> null
 			);
-		$vcalendar = Helper::createVCalendarFromRequest($request);
-		$taskID = \OC_Calendar_Object::add($calendarId, $vcalendar->serialize());
+		$vcalendar = $this->helper->createVCalendar($request);
+		$vtodo = $vcalendar->VTODO;
+		$vtodo->ID = \OC_Calendar_Object::add($calendarId, $vcalendar->serialize());
 
-		$task = Helper::arrayForJSON($taskID, $vcalendar->VTODO, $user_timezone, $calendarId);
+		$task = $this->taskParser->parseTask($vtodo, $calendarId);
 
 		$task['tmpID'] = $tmpID;
 		return $task;
@@ -161,10 +191,7 @@ class TasksService {
 	 * @throws \Exception
 	 */
 	public function setName($taskID, $name) {
-		$vcalendar = \OC_Calendar_App::getVCalendar($taskID);
-		$vtodo = $vcalendar->VTODO;
-		$vtodo->SUMMARY = $name;
-		return \OC_Calendar_Object::edit($taskID, $vcalendar->serialize());
+		return $this->helper->setProperty($taskID,'SUMMARY',$name);
 	}
 
 	/**
@@ -210,7 +237,7 @@ class TasksService {
 			$vtodo->STATUS = 'NEEDS-ACTION';
 			unset($vtodo->COMPLETED);
 		}
-		return \OC_Calendar_Object::edit($taskID, $vcalendar->serialize());
+		return $this->helper->editVCalendar($vcalendar, $taskID);
 	}
 
 	/**
@@ -222,14 +249,8 @@ class TasksService {
 	 * @throws \Exception
 	 */
 	public function setPriority($taskID, $priority){
-		$vcalendar = \OC_Calendar_App::getVCalendar($taskID);
-		$vtodo = $vcalendar->VTODO;
-		if($priority){
-			$vtodo->PRIORITY = (10 - $priority) % 10;
-		}else{
-			unset($vtodo->{'PRIORITY'});
-		}
-		return \OC_Calendar_Object::edit($taskID, $vcalendar->serialize());
+		$priority = (10 - $priority) % 10;
+		return $this->helper->setProperty($taskID,'PRIORITY',$priority);
 	}
 
 	/**
@@ -241,115 +262,19 @@ class TasksService {
 	 * @throws \Exception
 	 */
 	public function setDueDate($taskID, $dueDate) {
-		$vcalendar = \OC_Calendar_App::getVCalendar($taskID);
-		$vtodo = $vcalendar->VTODO;
-		if ($dueDate != false) {
-			$timezone = \OC_Calendar_App::getTimezone();
-			$timezone = new \DateTimeZone($timezone);
-
-			$dueDate = new \DateTime('@'.$dueDate);
-			$dueDate->setTimezone($timezone);
-			$vtodo->DUE = $dueDate;
-		} else {
-			unset($vtodo->DUE);
-		}
-		return \OC_Calendar_Object::edit($taskID, $vcalendar->serialize());
-	}
-
-	public function setStartDate($taskID, $startDate) {
-		$vcalendar = \OC_Calendar_App::getVCalendar($taskID);
-		$vtodo = $vcalendar->VTODO;
-		if ($startDate != false) {
-			$timezone = \OC_Calendar_App::getTimezone();
-			$timezone = new \DateTimeZone($timezone);
-
-			$startDate = new \DateTime('@'.$startDate);
-			$startDate->setTimezone($timezone);
-			$vtodo->DTSTART = $startDate;
-		} else {
-			unset($vtodo->DTSTART);
-		}
-		return \OC_Calendar_Object::edit($taskID, $vcalendar->serialize());
+		return $this->helper->setProperty($taskID, 'DUE', $this->helper->createDateFromUNIX($dueDate));
 	}
 
 	/**
-	 * set reminder date of task by id
+	 * set start date of task by id
+	 * 
 	 * @param  int    $taskID
-	 * @param  string $type
-	 * @param  mixed  $action
-	 * @param  mixed  $date
-	 * @param  bool   $invert
-	 * @param  string $related
-	 * @param  mixed  $week
-	 * @param  mixed  $day
-	 * @param  mixed  $hour
-	 * @param  mixed  $minute
-	 * @param  mixed  $second
+	 * @param  mixed  $startDate
 	 * @return bool
 	 * @throws \Exception
 	 */
-	public function setReminderDate($taskID, $type, $action, $date, $invert, $related = null, $week, $day, $hour, $minute, $second){
-		$types = array('DATE-TIME','DURATION');
-
-		$vcalendar = \OC_Calendar_App::getVCalendar($taskID);
-		$vtodo = $vcalendar->VTODO;
-		$valarm = $vtodo->VALARM;
-
-		if ($type == false){
-			unset($vtodo->VALARM);
-			$vtodo->{'LAST-MODIFIED'}->setValue(new \DateTime('now', new \DateTimeZone('UTC')));
-			$vtodo->DTSTAMP = new \DateTime('now', new \DateTimeZone('UTC'));
-			return \OC_Calendar_Object::edit($taskID, $vcalendar->serialize());
-		}
-		elseif (in_array($type,$types)) {
-			if($valarm == null) {
-				$valarm = $vcalendar->createComponent('VALARM');
-				$valarm->ACTION = $action;
-				$valarm->DESCRIPTION = 'Default Event Notification';
-				$vtodo->add($valarm);
-			} else {
-				unset($valarm->TRIGGER);
-			}
-			$tv = '';
-			if ($type == 'DATE-TIME') {
-				$date = new \DateTime('@'.$date);
-				$tv = $date->format('Ymd\THis\Z');
-			} elseif ($type == 'DURATION') {
-				// Create duration string
-				if($week || $day || $hour || $minute || $second) {
-					if ($invert){
-						$tv.='-';
-					}
-					$tv.='P';
-					if ($week){
-						$tv.=$week.'W';
-					}
-					if ($day){
-						$tv.=$day.'D';
-					}
-					$tv.='T';
-					if ($hour){
-						$tv.=$hour.'H';
-					}
-					if ($minute){
-						$tv.=$minute.'M';
-					}
-					if ($second){
-						$tv.=$second.'S';
-					}
-				}else{
-					$tv = 'PT0S';
-				}
-			}
-			if($related == 'END'){
-				$valarm->add('TRIGGER', $tv, array('VALUE' => $type, 'RELATED' => $related));
-			} else {
-				$valarm->add('TRIGGER', $tv, array('VALUE' => $type));
-			}
-			$vtodo->{'LAST-MODIFIED'}->setValue(new \DateTime('now', new \DateTimeZone('UTC')));
-			$vtodo->DTSTAMP = new \DateTime('now', new \DateTimeZone('UTC'));
-			return \OC_Calendar_Object::edit($taskID, $vcalendar->serialize());
-		}
+	public function setStartDate($taskID, $startDate) {
+		return $this->helper->setProperty($taskID, 'DTSTART', $this->helper->createDateFromUNIX($startDate));
 	}
 
 	/**
@@ -372,7 +297,7 @@ class TasksService {
 		if (!in_array($category, $taskcategories)){
 			$taskcategories[] = $category;
 			$vtodo->CATEGORIES = $taskcategories;
-			return \OC_Calendar_Object::edit($taskID, $vcalendar->serialize());
+			return $this->helper->editVCalendar($vcalendar, $taskID);
 		} else {
 			return true;
 		}
@@ -392,18 +317,19 @@ class TasksService {
 		$categories = $vtodo->CATEGORIES;
 		if ($categories){
 			$taskcategories = $categories->getParts();
-		}
-		// remove category
-		$key = array_search($category, $taskcategories);
-		if ($key !== null && $key !== false){
-			unset($taskcategories[$key]);
-			if(count($taskcategories)){
-				$vtodo->CATEGORIES = $taskcategories;
-			} else{
-				unset($vtodo->{'CATEGORIES'});
+			// remove category
+			$key = array_search($category, $taskcategories);
+			if ($key !== null && $key !== false){
+				unset($taskcategories[$key]);
+				if(count($taskcategories)){
+					$vtodo->CATEGORIES = $taskcategories;
+				} else{
+					unset($vtodo->{'CATEGORIES'});
+				}
+				return $this->helper->editVCalendar($vcalendar, $taskID);
 			}
-			return \OC_Calendar_Object::edit($taskID, $vcalendar->serialize());
 		}
+		return true;
 	}
 
 	/**
@@ -414,10 +340,7 @@ class TasksService {
 	 * @throws \Exception
 	 */
 	public function setLocation($taskID, $location){
-		$vcalendar = \OC_Calendar_App::getVCalendar($taskID);
-		$vtodo = $vcalendar->VTODO;
-		$vtodo->LOCATION = $location;
-		return \OC_Calendar_Object::edit($taskID, $vcalendar->serialize());
+		return $this->helper->setProperty($taskID,'LOCATION',$location);
 	}
 
 	/**
@@ -429,98 +352,6 @@ class TasksService {
 	 * @throws \Exception
 	 */
 	public function setDescription($taskID, $description){
-		$vcalendar = \OC_Calendar_App::getVCalendar($taskID);
-		$vtodo = $vcalendar->VTODO;
-		$vtodo->DESCRIPTION = $description;
-		return \OC_Calendar_Object::edit($taskID, $vcalendar->serialize());
+		return $this->helper->setProperty($taskID,'DESCRIPTION',$description);
 	}
-
-	/**
-	 * add comment to task by id
-	 * @param  int    $taskID
-	 * @param  string $comment
-	 * @param  int    $tmpID
-	 * @return array
-	 * @throws \Exception
-	 */
-	public function addComment($taskID, $comment, $tmpID){
-		$vcalendar = \OC_Calendar_App::getVCalendar($taskID);
-		$vtodo = $vcalendar->VTODO;
-
-		if($vtodo->COMMENT == "") {
-			// if this is the first comment set the id to 0
-			$commentId = 0;
-		} else {
-			// Determine new commentId by looping through all comments
-			$commentIds = array();
-			foreach($vtodo->COMMENT as $com) {
-				$commentIds[] = (int)$com['X-OC-ID']->getValue();
-			}
-			$commentId = 1+max($commentIds);
-		}
-
-		$now = 	new \DateTime();
-		$vtodo->add('COMMENT',$comment,
-			array(
-				'X-OC-ID' => $commentId,
-				'X-OC-USERID' => $this->userId,
-				'X-OC-DATE-TIME' => $now->format('Ymd\THis\Z')
-				)
-			);
-		\OC_Calendar_Object::edit($taskID, $vcalendar->serialize());
-		$user_timezone = \OC_Calendar_App::getTimezone();
-		$now->setTimezone(new \DateTimeZone($user_timezone));
-		$comment = array(
-			'taskID' => $taskID,
-			'id' => $commentId,
-			'tmpID' => $tmpID,
-			'name' => \OC::$server->getUserManager()->get($this->userId)->getDisplayName(),
-			'userID' => $this->userId,
-			'comment' => $comment,
-			'time' => $now->format('Ymd\THis')
-			);
-		return $comment;
-	}
-
-	/**
-	 * delete comment of task by id
-	 * @param  int   $taskID
-	 * @param  int   $commentID
-	 * @return bool
-	 * @throws \Exception
-	 */
-	public function deleteComment($taskID, $commentID){
-		$vcalendar = \OC_Calendar_App::getVCalendar($taskID);
-		$vtodo = $vcalendar->VTODO;
-		$commentIndex = $this->getCommentById($vtodo,$commentID);
-		$comment = $vtodo->children[$commentIndex];
-		if($comment['X-OC-USERID']->getValue() == $this->userId){
-			unset($vtodo->children[$commentIndex]);
-			return \OC_Calendar_Object::edit($taskID, $vcalendar->serialize());
-		} else {
-			throw new \Exception('Not allowed.');
-		}
-	}
-
-
-	private static function sort_completed($a, $b) {
-		$t1 = \DateTime::createFromFormat('Ymd\THis', $a['completed_date']);
-		$t2 = \DateTime::createFromFormat('Ymd\THis', $b['completed_date']);
-		if ($t1 == $t2) {
-			return 0;
-		}
-		return $t1 < $t2 ? 1 : -1;
-	}
-
-	private function getCommentById($vtodo,$commentId) {
-		$idx = 0;
-		foreach ($vtodo->children as $i => &$property) {
-			if ( $property->name == 'COMMENT' && $property['X-OC-ID']->getValue() == $commentId ) {
-				return $idx;
-			}
-			$idx += 1;
-		}
-		throw new \Exception('Commment not found.');
-	}
-
 }

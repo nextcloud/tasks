@@ -22,36 +22,30 @@
 
 namespace OCA\Tasks\Controller;
 
-use \OCA\Tasks\Service\CollectionsService;
-use \OCP\IRequest;
-use \OCP\AppFramework\Controller;
+use OCA\Tasks\AppInfo\Application;
 
-class CollectionsController extends Controller {
+/**
+ * Tasks search provider
+ */
+class SearchProvider extends \OCP\Search\Provider {
 
-	private $collectionsService;
+	private $tasksService;
 
-	use Response;
-
-	public function __construct($appName, IRequest $request, CollectionsService $collectionsService){
-		parent::__construct($appName, $request);
-		$this->collectionsService = $collectionsService;
+	public function __construct() {
+		$app = new Application();
+		$container = $app->getContainer();
+		$this->app = $app;
+		$this->tasksService = $container->query('TasksService');
 	}
 
-	/**
-	 * @NoAdminRequired
-	 */
-	public function getCollections(){
-		return $this->generateResponse(function () {
-			return ['collections' => $this->collectionsService->getAll()];
-		});
-	}
 
 	/**
-	 * @NoAdminRequired
+	 * Search for query in tasks
+	 *
+	 * @param string $query
+	 * @return array
 	 */
-	public function setVisibility($collectionID, $visibility){
-		return $this->generateResponse(function () use ($collectionID, $visibility) {
-			return $this->collectionsService->setVisibility($collectionID, $visibility);
-		});
+	public function search($query) {
+		return $this->tasksService->search($query);
 	}
 }

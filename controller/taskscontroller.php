@@ -1,29 +1,30 @@
 <?php
-
 /**
-* ownCloud - Tasks
-*
-* @author Raimund Schlüßler
-* @copyright 2013 Raimund Schlüßler raimund.schluessler@googlemail.com
-*
-* This library is free software; you can redistribute it and/or
-* modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
-* License as published by the Free Software Foundation; either
-* version 3 of the License, or any later version.
-*
-* This library is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU AFFERO GENERAL PUBLIC LICENSE for more details.
-*
-* You should have received a copy of the GNU Affero General Public
-* License along with this library.  If not, see <http://www.gnu.org/licenses/>.
-*
-*/
+ * ownCloud - Tasks
+ *
+ * @author Raimund Schlüßler
+ * @copyright 2015 Raimund Schlüßler raimund.schluessler@googlemail.com
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU AFFERO GENERAL PUBLIC LICENSE for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public
+ * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
 
 namespace OCA\Tasks\Controller;
 
 use \OCA\Tasks\Service\TasksService;
+use \OCA\Tasks\Service\ReminderService;
+use \OCA\Tasks\Service\CommentsService;
 use \OCP\IRequest;
 use \OCP\AppFramework\Controller;
 
@@ -31,12 +32,16 @@ use \OCP\AppFramework\Controller;
 class TasksController extends Controller {
 
 	private $tasksService;
+	private $reminderService;
+	private $commentsService;
 
 	use Response;
 
-	public function __construct($appName, IRequest $request, TasksService $tasksService){
+	public function __construct($appName, IRequest $request, TasksService $tasksService, ReminderService $reminderService, CommentsService $commentsService){
 		parent::__construct($appName, $request);
 		$this->tasksService = $tasksService;
+		$this->reminderService = $reminderService;
+		$this->commentsService = $commentsService;
 	}
 
 	/**
@@ -53,7 +58,7 @@ class TasksController extends Controller {
 	 */
 	public function getTask($taskID){
 		return $this->generateResponse(function () use ($taskID) {
-			return $this->tasksService->get($taskID);
+			return $this->tasksService->getTask($taskID);
 		});
 	}
 
@@ -143,7 +148,7 @@ class TasksController extends Controller {
 	 */
 	public function setReminderDate($taskID, $type, $action, $date, $invert, $related = null, $week, $day, $hour, $minute, $second){
 		return $this->generateResponse(function () use ($taskID, $type, $action, $date, $invert, $related, $week, $day, $hour, $minute, $second) {
-			return $this->tasksService->setReminderDate($taskID, $type, $action, $date, $invert, $related, $week, $day, $hour, $minute, $second);
+			return $this->reminderService->createReminder($taskID, $type, $action, $date, $invert, $related, $week, $day, $hour, $minute, $second);
 		});
 	}
 
@@ -179,7 +184,7 @@ class TasksController extends Controller {
 	 */
 	public function addComment($taskID, $comment, $tmpID){
 		return $this->generateResponse(function () use ($taskID, $comment, $tmpID) {
-			return $this->tasksService->addComment($taskID, $comment, $tmpID);
+			return $this->commentsService->addComment($taskID, $comment, $tmpID);
 		});
 	}
 
@@ -188,7 +193,7 @@ class TasksController extends Controller {
 	 */
 	public function deleteComment($taskID, $commentID){
 		return $this->generateResponse(function () use ($taskID, $commentID) {
-			return $this->tasksService->deleteComment($taskID, $commentID);
+			return $this->commentsService->deleteComment($taskID, $commentID);
 		});
 	}
 }

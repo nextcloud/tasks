@@ -20,38 +20,24 @@
  *
  */
 
-namespace OCA\Tasks\Controller;
+namespace OCA\Tasks\Db;
 
-use \OCA\Tasks\Service\SettingsService;
-use \OCP\IRequest;
-use \OCP\AppFramework\Controller;
+use OCP\IDb;
+use OCP\AppFramework\Db\Mapper;
 
-class SettingsController extends Controller {
+class TasksMapper extends Mapper {
 
-	private $settingsService;
-
-	use Response;
-
-	public function __construct($appName, IRequest $request, SettingsService $settingsService){
-		parent::__construct($appName, $request);
-		$this->settingsService = $settingsService;
+	public function __construct(IDb $db) {
+		parent::__construct($db, 'tasks_tasks', '\OCA\Tasks\Db\Tasks');
 	}
 
-	/**
-	 * @NoAdminRequired
-	 */
-	public function get(){
-		return $this->generateResponse(function () {
-			return ['settings' => $this->settingsService->get()];
-		});
+	public function findAllVTODOs($calendarID, $limit=null, $offset=null) {
+		$sql = 'SELECT * FROM `*PREFIX*clndr_objects` WHERE `calendarid` = ? AND `objecttype`= ?';
+		return $this->findEntities($sql, array($calendarID, 'VTODO'), $limit, $offset);
 	}
 
-	/**
-	 * @NoAdminRequired
-	 */
-	public function set($setting, $type, $value){
-		return $this->generateResponse(function () use ($setting, $type, $value) {
-			return $this->settingsService->set($setting, $type, $value);
-		});
+	public function findVTODOById($taskID, $limit=null, $offset=null) {
+		$sql = 'SELECT * FROM `*PREFIX*clndr_objects` WHERE `id` = ? AND `objecttype`= ?';
+		return $this->findEntity($sql, array($taskID, 'VTODO'), $limit, $offset);
 	}
 }

@@ -3,7 +3,7 @@
 * ownCloud - Tasks
 *
 * @author Raimund Schlüßler
-* @copyright 2014 Raimund Schlüßler raimund.schluessler@googlemail.com
+* @copyright 2015 Raimund Schlüßler raimund.schluessler@googlemail.com
 *
 * This library is free software; you can redistribute it and/or
 * modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -29,9 +29,15 @@ use \OCA\Tasks\Controller\ListsController;
 use \OCA\Tasks\Controller\SettingsController;
 use \OCA\Tasks\Controller\TasksController;
 use \OCA\Tasks\Service\TasksService;
+use \OCA\Tasks\Service\SearchService;
 use \OCA\Tasks\Service\ListsService;
 use \OCA\Tasks\Service\CollectionsService;
 use \OCA\Tasks\Service\SettingsService;
+use \OCA\Tasks\Service\Helper;
+use \OCA\Tasks\Service\TaskParser;
+use \OCA\Tasks\Service\ReminderService;
+use \OCA\Tasks\Service\CommentsService;
+use \OCA\Tasks\Db\TasksMapper;
 
 class Application extends App {
 
@@ -80,7 +86,9 @@ class Application extends App {
 			return new TasksController(
 				$c->query('AppName'),
 				$c->query('Request'),
-				$c->query('TasksService')
+				$c->query('TasksService'),
+				$c->query('ReminderService'),
+				$c->query('CommentsService')
 			);
 		});
 
@@ -90,7 +98,10 @@ class Application extends App {
 		 */
 		$container->registerService('TasksService', function($c) {
 			return new TasksService(
-				$c->query('UserId')
+				$c->query('UserId'),
+				$c->query('TasksMapper'),
+				$c->query('Helper'),
+				$c->query('TaskParser')
 			);
 		});
 
@@ -117,6 +128,39 @@ class Application extends App {
 			);
 		});
 
+		$container->registerService('SearchService', function($c) {
+			return new SearchService(
+				$c->query('TasksMapper'),
+				$c->query('Helper'),
+				$c->query('TaskParser')
+			);
+		});
+
+		$container->registerService('TaskParser', function($c) {
+			return new TaskParser(
+				$c->query('ReminderService'),
+				$c->query('Helper')
+			);
+		});
+
+		$container->registerService('ReminderService', function($c) {
+			return new ReminderService(
+				$c->query('Helper')
+			);
+		});
+
+		$container->registerService('CommentsService', function($c) {
+			return new CommentsService(
+				$c->query('UserId'),
+				$c->query('Helper')
+			);
+		});
+
+		$container->registerService('Helper', function() {
+			return new Helper(
+			);
+		});
+
 		/**
 		 * Core
 		 */
@@ -132,7 +176,16 @@ class Application extends App {
 			return $c->query('ServerContainer')->getConfig();
 		});
 
-		\OC::$server->getSearch()->registerProvider('OCA\Tasks\Controller\SearchController', array('apps' => array('tasks')));
+		\OC::$server->getSearch()->registerProvider('OCA\Tasks\Controller\SearchProvider', array('apps' => array('tasks')));
+
+		/**
+		 * Database Layer
+		 */
+		$container->registerService('TasksMapper', function($c) {
+			return new TasksMapper(
+				$c->query('ServerContainer')->getDb()
+			);
+		});
 		
 	}
 
