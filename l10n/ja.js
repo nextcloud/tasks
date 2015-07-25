@@ -72,6 +72,7 @@ OC.L10N.register(
     "high" : "高い",
     "medium" : "中間",
     "low" : "低い",
+    "no priority assigned" : "優先度未割り当て",
     "Remind me" : "リマインド",
     "at the end" : "終了時",
     "at the beginning" : "開始時",
@@ -90,6 +91,7 @@ OC.L10N.register(
     "Visibility of Smart Collections" : "スマートコレクションの表示",
     "Load remaining completed tasks." : "残りの完了済みタスクをロード",
     "(New category)" : "(新しいカテゴリ)",
+    "Select categories..." : "カテゴリーの選択...",
     "Loading the task..." : "タスクの読み込み中...",
     "Task not found!" : "タスクがありません！"
 },
