@@ -20,38 +20,23 @@
  *
  */
 
-namespace OCA\Tasks\Controller;
+namespace OCA\Tasks\Db;
 
-use \OCA\Tasks\Service\SettingsService;
-use \OCP\IRequest;
-use \OCP\AppFramework\Controller;
+use \OCP\AppFramework\Db\Entity;
 
-class SettingsController extends Controller {
+class Tasks extends Entity {
 
-	private $settingsService;
+	public $calendarid;
+	public $objecttype;
+	public $startdate;
+	public $enddate;
+	public $repeating;
+	public $summary;
+	public $calendardata;
+	public $uri;
+	public $lastmodified;
 
-	use Response;
-
-	public function __construct($appName, IRequest $request, SettingsService $settingsService){
-		parent::__construct($appName, $request);
-		$this->settingsService = $settingsService;
-	}
-
-	/**
-	 * @NoAdminRequired
-	 */
-	public function get(){
-		return $this->generateResponse(function () {
-			return ['settings' => $this->settingsService->get()];
-		});
-	}
-
-	/**
-	 * @NoAdminRequired
-	 */
-	public function set($setting, $type, $value){
-		return $this->generateResponse(function () use ($setting, $type, $value) {
-			return $this->settingsService->set($setting, $type, $value);
-		});
+	public function __construct() {
+		$this->addType('calendarid', 'integer');
 	}
 }

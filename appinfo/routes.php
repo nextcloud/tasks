@@ -3,7 +3,7 @@
 * ownCloud - Tasks
 *
 * @author Raimund Schlüßler
-* @copyright 2014 Raimund Schlüßler raimund.schluessler@googlemail.com
+* @copyright 2015 Raimund Schlüßler raimund.schluessler@googlemail.com
 *
 * This library is free software; you can redistribute it and/or
 * modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
