@@ -56,7 +56,12 @@ Class TaskParser {
 		$task['due'] 			= $this->helper->parseDateObject($vtodo->DUE);
 		$task['completed_date'] = $this->helper->parseDateObject($vtodo->COMPLETED);
 		$task['completed'] = (bool) $task['completed_date'];
-		$task['reminder']  = $this->reminderService->parseReminder($vtodo->VALARM, $vtodo->DTSTART, $vtodo->DUE);
+		try {
+			$task['reminder']  = $this->reminderService->parseReminder($vtodo->VALARM, $vtodo->DTSTART, $vtodo->DUE);
+		} catch(\Exception $e) {
+			\OCP\Util::writeLog('tasks', 'TaskID '.$vtodo->ID.': '.$e->getMessage(), \OCP\Util::DEBUG);
+			$task['reminder'] = false;
+		}
 		$task['priority']  = $this->parsePriority($vtodo->PRIORITY);
 		$task['starred']   = $this->parseStarred($task['priority']);
 		$task['complete']  = $this->parsePercentCompleted($vtodo->{'PERCENT-COMPLETE'});
