@@ -45,7 +45,7 @@ Class TaskParser {
 	 */
 	public function parseTask($vtodo, $calendarID){
 		$task = array( 'id' => (string) $vtodo->ID);
-		$task['calendarid'] = $calendarID;
+		$task['calendarid'] = (string) $calendarID;
 		$task['type'] 		= 'task';
 		$task['name'] 		= (string) $vtodo->SUMMARY;
 		$task['created'] 	= (string) $vtodo->CREATED;
