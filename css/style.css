@@ -717,6 +717,7 @@
   position: relative;
   text-shadow: 0 1px 0 white;
   border-top: none;
+  margin-bottom: 0px;
 }
 #task-details div.content-wrapper .body .section input {
   -moz-box-sizing: border-box;
