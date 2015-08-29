@@ -26,12 +26,10 @@ module.exports = (grunt) ->
 	grunt.loadNpmTasks('grunt-contrib-concat')
 	grunt.loadNpmTasks('grunt-contrib-watch')
 	grunt.loadNpmTasks('grunt-contrib-coffee')
-	grunt.loadNpmTasks('grunt-contrib-less')
 	grunt.loadNpmTasks('grunt-coffeelint')
 	grunt.loadNpmTasks('grunt-wrap')
 	grunt.loadNpmTasks('grunt-phpunit')
 	grunt.loadNpmTasks('grunt-karma')
-	grunt.loadNpmTasks('grunt-concurrent')
 	grunt.loadNpmTasks('grunt-newer')
 
 	grunt.initConfig
@@ -59,14 +57,6 @@ module.exports = (grunt) ->
 				src: ["**/*.coffee"]
 				dest: "./build/app"
 				ext: ".js"
-
-		less:
-			default:
-				expand: true
-				cwd: "../css"
-				src: ["**/*.less"]
-				dest: "../css"
-				ext: ".css"
 
 		concat:
 			default:
@@ -109,18 +99,6 @@ module.exports = (grunt) ->
 			js:
 				files: ['app/**/*.coffee']
 				tasks: 'js'
-			css:
-				files: ['../css/*.less']
-				tasks: 'css'
-
-		concurrent:
-			dev:
-				tasks: [
-					'watch:js'
-					'watch:css'
-				]
-				options:
-					logConcurrentOutput: true
 
 		karma:
 			unit:
@@ -147,10 +125,5 @@ module.exports = (grunt) ->
 	grunt.registerTask('ci', ['karma:continuous'])
 
 	grunt.registerTask('js', ['newer:coffeelint', 'newer:coffee', 'concat', 'wrap'])
-	grunt.registerTask('css', ['newer:less'])
 
-	grunt.registerTask('dev', ['js', 'css'])
-
-	# overwrite watch:all to simplify naming
-	grunt.registerTask('watch:dev', ['concurrent:dev'])
-	grunt.registerTask('default', 'dev')
+	grunt.registerTask('default', 'js')
