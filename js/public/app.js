@@ -1,7 +1,7 @@
 (function(angular, $, moment, undefined){
 
 /**
- * ownCloud Task App - v0.6.0
+ * ownCloud Task App - v0.7.1
  *
  * Copyright (c) 2015 - Raimund Schlüßler <raimund.schluessler@googlemail.com>
  *
@@ -3076,10 +3076,13 @@
 (function() {
   angular.module('Tasks').filter('counterFormatter', function() {
     return function(count) {
-      if (count > 999) {
-        return '999+';
-      } else {
-        return count;
+      switch (false) {
+        case count !== 0:
+          return '';
+        case !(count > 999):
+          return '999+';
+        default:
+          return count;
       }
     };
   });
