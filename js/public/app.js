@@ -1,7 +1,7 @@
 (function(angular, $, moment, undefined){
 
 /**
- * ownCloud Task App - v0.6.0
+ * ownCloud Task App - v0.7.1
  *
  * Copyright (c) 2015 - Raimund Schlüßler <raimund.schluessler@googlemail.com>
  *
@@ -860,7 +860,8 @@
                 _$scope.isAddingList = true;
                 list = {
                   tmpID: 'newList' + Date.now(),
-                  displayname: _$scope.status.newListName
+                  displayname: _$scope.status.newListName,
+                  notLoaded: 0
                 };
                 _$listsbusinesslayer.addList(list, function(data) {
                   _$listsmodel.add(data.list);

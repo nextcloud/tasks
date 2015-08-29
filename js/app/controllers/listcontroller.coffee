@@ -74,6 +74,7 @@ CollectionsModel, ListsBusinessLayer, $location, SearchBusinessLayer) ->
 						list = {
 							tmpID:		'newList' + Date.now()
 							displayname:		_$scope.status.newListName
+							notLoaded:	0
 						}
 						_$listsbusinesslayer.addList list
 						, (data) =>
