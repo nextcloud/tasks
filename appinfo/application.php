@@ -164,8 +164,10 @@ class Application extends App {
 		/**
 		 * Core
 		 */
-		$container->registerService('UserId', function() {
-			return \OC::$server->getUserSession()->getUser()->getUID();
+		$container->registerService('UserId', function($c) {
+			$user = $c->query('ServerContainer')->getUserSession()->getUser();
+
+			return ($user) ? $user->getUID() : '';
 		});	
 
 		$container->registerService('L10N', function($c) {
