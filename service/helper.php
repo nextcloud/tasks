@@ -289,6 +289,10 @@ Class Helper {
 		if ($start) {
 			$vtodo->DTSTART = new \DateTime($start, $timezone);
 		}
+		$related = $request['related'];
+		if ($related) {
+			$vtodo->{'RELATED-TO'} = $related;
+		}
 
 		return $vcalendar;
 	}

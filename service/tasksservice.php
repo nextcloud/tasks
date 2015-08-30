@@ -25,17 +25,20 @@ namespace OCA\Tasks\Service;
 use \OCA\Tasks\Service\Helper;
 use \OCA\Tasks\Service\TaskParser;
 use \OCA\Tasks\Db\TasksMapper;
+use \OCA\Tasks\Service\MapperHelper;
 
 class TasksService {
 
 	private $userId;
 	private $tasksMapper;
+	private $mapperHelper;
 	private $helper;
 	private $taskParser;
 
-	public function __construct($userId, TasksMapper $tasksMapper, Helper $helper, TaskParser $taskParser){
+	public function __construct($userId, TasksMapper $tasksMapper, MapperHelper $mapperHelper, Helper $helper, TaskParser $taskParser){
 		$this->userId = $userId;
 		$this->tasksMapper = $tasksMapper;
+		$this->mapperHelper = $mapperHelper;
 		$this->helper = $helper;
 		$this->taskParser = $taskParser;
 	}
@@ -60,43 +63,20 @@ class TasksService {
 		$tasks = array();
 		$lists = array();
 		foreach( $calendars as $calendar ) {
-			$calendar_entries = $this->tasksMapper->findAllVTODOs($calendar['id']);
+			$tasksMap = $this->mapperHelper->createTasksMap($calendar['id']);
 
-			list($lists[], $tasks_calendar) = $this->getTasks($calendar_entries, $type, $calendar['id']);
+			list($lists[], $rootTasks) = $this->mapperHelper->getRootTasks($tasksMap, $type, $calendar['id']);
 
-			$tasks = array_merge($tasks, $tasks_calendar);
+			$tasks = array_merge($tasks, $rootTasks);
+
+			foreach($rootTasks as $rootTask) {
+				$tasks = array_merge($tasks, $this->mapperHelper->getChildTasks($rootTask['uid'], $tasksMap, true));
+			}
 		}
 		return array(
-			'tasks' => $tasks,
+			'tasks' => array_values($tasks),
 			'lists' => $lists
 		);
-	}
-
-	/**
-	 * get tasks
-	 *
-	 * @param array  $calendar_entries
-	 * @param string $type
-	 * @param string $calendarID
-	 * @return array
-	*/
-	public function getTasks($calendar_entries, $type, $calendarID) {
-		$list = array(
-			'id' 		=> $calendarID,
-			'notLoaded' => 0
-			);
-		$host = $this;
-		$VTODOs = array_map(function($task) use ($host) {
-			return $host->helper->checkTask($task);
-		}, $calendar_entries);
-		$VTODOs = array_filter($VTODOs);
-
-		$tasks = array_map(function($task) use ($host, $calendarID) {
-    		return $host->taskParser->parseTask($task, $calendarID);
-		},$VTODOs);
-
-		list($list['notLoaded'], $tasks) = $this->helper->selectTasks($tasks, $type);
-		return array($list, $tasks);
 	}
 
 	/**
@@ -107,15 +87,18 @@ class TasksService {
 	 * @throws \Exception
 	 */
 	public function getTask($taskID){
+		$tasks = array();
 		$calendar_entry = $this->tasksMapper->findVTODOById($taskID);
-		$task = array();
-		$vtodo = $this->helper->checkTask($calendar_entry);
-		if($vtodo){
-			$task_data = $this->taskParser->parseTask($vtodo, $calendar_entry->getCalendarid());
-			$task[] = $task_data;
+		$tasksMap = $this->mapperHelper->createTasksMap($calendar_entry->getCalendarid());
+		$rootUID = $this->mapperHelper->findRootUID($this->mapperHelper->getUIDbyID($taskID, $tasksMap), $tasksMap);
+
+		$rootTask = $this->mapperHelper->getTaskByUID($rootUID, $tasksMap);
+		if ($rootTask) {
+			$tasks = array_merge(array($rootTask), $this->mapperHelper->getChildTasks($rootUID, $tasksMap, true));
 		}
+
 		return array(
-			'tasks' => $task
+			'tasks' => $tasks
 		);
 	}
 
@@ -156,9 +139,10 @@ class TasksService {
 	 * @param  int    $tmpID
 	 * @return array
 	 */
-	public function add($taskName, $calendarId, $starred, $due, $start, $tmpID){
+	public function add($taskName, $related, $calendarId, $starred, $due, $start, $tmpID){
 		$request = array(
 				'summary'			=> $taskName,
+				'related'			=> $related,
 				'starred'			=> $starred,
 				'due'				=> $due,
 				'start'				=> $start,
@@ -251,6 +235,28 @@ class TasksService {
 	public function setPriority($taskID, $priority){
 		$priority = (10 - $priority) % 10;
 		return $this->helper->setProperty($taskID,'PRIORITY',$priority);
+	}
+
+	/**
+	 * set view state of subtasks
+	 * 
+	 * @param  int    $taskID
+	 * @param  int    $show
+	 * @return bool
+	 */
+	public function hideSubtasks($taskID, $show){
+		return $this->helper->setProperty($taskID,'X-OC-HIDESUBTASKS',$show);
+	}
+
+	/**
+	 * set parent of subtask
+	 * 
+	 * @param  int    $taskID
+	 * @param  int    $related
+	 * @return bool
+	 */
+	public function parent($taskID, $related){
+		return $this->helper->setProperty($taskID,'RELATED-TO',$related);
 	}
 
 	/**

@@ -12,7 +12,7 @@
 
 
 (function() {
-  angular.module('Tasks', ['OC', 'ngRoute', 'ngAnimate', 'ui.bootstrap', 'ui.select', 'ngSanitize']).config([
+  angular.module('Tasks', ['OC', 'ngRoute', 'ngAnimate', 'ui.bootstrap', 'ui.select', 'ngSanitize', 'dndLists']).config([
     '$provide', '$routeProvider', '$interpolateProvider', function($provide, $routeProvider, $interpolateProvider) {
       var config;
       $provide.value('Config', config = {
@@ -413,7 +413,11 @@
             }
             if (!$($event.target).closest('.newList').length) {
               _$scope.status.addingList = false;
-              return _$scope.status.newListName = "";
+              _$scope.status.newListName = "";
+            }
+            if (!$($event.target).closest('.add-subtask').length) {
+              _$scope.status.addSubtaskTo = '';
+              return _$scope.status.focusSubtaskInput = false;
             } else {
 
             }
@@ -824,6 +828,7 @@
           this._$searchbusinesslayer = _$searchbusinesslayer;
           this._$scope.collections = this._$collectionsmodel.getAll();
           this._$scope.lists = this._$listsmodel.getAll();
+          this._$scope.draggedTasks = [];
           this._$scope.TasksBusinessLayer = this._$tasksbusinesslayer;
           this._$scope.status.listNameBackup = '';
           this._$scope.deleteList = function(listID) {
@@ -958,6 +963,29 @@
               return _$listsbusinesslayer.updateModel();
             }
           };
+          this._$scope.dragoverList = function($event, item, index) {
+            return true;
+          };
+          this._$scope.dropList = function($event, item, index) {
+            var listID, taskID;
+            taskID = item.id;
+            listID = $($event.target).closest('li.list').attr('listID');
+            _$tasksbusinesslayer.changeCalendarId(taskID, listID);
+            return true;
+          };
+          this._$scope.dragoverCollection = function($event, item, index) {
+            var collectionID;
+            collectionID = $($event.target).closest('li.collection').attr('collectionID');
+            return collectionID === 'starred' || collectionID === 'completed' || collectionID === 'today';
+          };
+          this._$scope.dropCollection = function($event, item, index) {
+            var collectionID, taskID;
+            taskID = item.id;
+            collectionID = $($event.target).closest('li.collection').attr('collectionID');
+            console.log(taskID, collectionID);
+            _$tasksbusinesslayer.changeCollection(taskID, collectionID);
+            return true;
+          };
         }
 
         return ListController;
@@ -1059,6 +1087,7 @@
           this._settingsbusinesslayer = _settingsbusinesslayer;
           this._searchbusinesslayer = _searchbusinesslayer;
           this._$scope.tasks = this._$tasksmodel.getAll();
+          this._$scope.draggedTasks = [];
           this._$scope.lists = this._$listsmodel.getAll();
           this._$scope.days = [0, 1, 2, 3, 4, 5, 6];
           this._$scope.isAddingTask = false;
@@ -1087,6 +1116,12 @@
               }
             }
           };
+          this._$scope.getSubAddString = function(taskname) {
+            return t('tasks', 'Add a subtask to "%s"...').replace('%s', taskname);
+          };
+          this._$scope.showSubtaskInput = function(uid) {
+            return _$scope.status.addSubtaskTo = uid;
+          };
           this._$scope.showInput = function() {
             var _ref;
             if ((_ref = _$scope.route.listID) === 'completed' || _ref === 'week') {
@@ -1095,8 +1130,11 @@
               return true;
             }
           };
-          this._$scope.focusInput = function() {
+          this._$scope.focusTaskInput = function() {
             return _$scope.status.focusTaskInput = true;
+          };
+          this._$scope.focusSubtaskInput = function() {
+            return _$scope.status.focusSubtaskInput = true;
           };
           this._$scope.openDetails = function(id, $event) {
             var listID;
@@ -1128,6 +1166,32 @@
               return _$tasksmodel.filterTasks(task, filter);
             };
           };
+          this._$scope.getSubTasks = function(tasks, parent) {
+            var ret, task, _i, _len;
+            ret = [];
+            for (_i = 0, _len = tasks.length; _i < _len; _i++) {
+              task = tasks[_i];
+              if (task.related === parent.uid) {
+                ret.push(task);
+              }
+            }
+            return ret;
+          };
+          this._$scope.hasNoParent = function(task) {
+            return function(task) {
+              return _$tasksmodel.hasNoParent(task);
+            };
+          };
+          this._$scope.hasSubtasks = function(task) {
+            return _$tasksmodel.hasSubtasks(task.uid);
+          };
+          this._$scope.toggleSubtasks = function(taskID) {
+            if (_$tasksmodel.hideSubtasks(taskID)) {
+              return _tasksbusinesslayer.unhideSubtasks(taskID);
+            } else {
+              return _tasksbusinesslayer.hideSubtasks(taskID);
+            }
+          };
           this._$scope.filterTasksByString = function(task) {
             return function(task) {
               var filter;
@@ -1135,13 +1199,19 @@
               return _$tasksmodel.filterTasksByString(task, filter);
             };
           };
+          this._$scope.filteredTasks = function() {
+            var filter;
+            filter = _searchbusinesslayer.getFilter();
+            return _$tasksmodel.filteredTasks(filter);
+          };
           this._$scope.dayHasEntry = function() {
             return function(date) {
-              var task, tasks, _i, _len;
-              tasks = _$tasksmodel.getAll();
+              var filter, task, tasks, _i, _len;
+              filter = _searchbusinesslayer.getFilter();
+              tasks = _$tasksmodel.filteredTasks(filter);
               for (_i = 0, _len = tasks.length; _i < _len; _i++) {
                 task = tasks[_i];
-                if (task.completed) {
+                if (task.completed || !_$tasksmodel.hasNoParent(task)) {
                   continue;
                 }
                 if (_$tasksmodel.taskAtDay(task, date)) {
@@ -1151,16 +1221,10 @@
               return false;
             };
           };
-          this._$scope.getTasksAtDay = function(tasks, day) {
-            var ret, task, _i, _len;
-            ret = [];
-            for (_i = 0, _len = tasks.length; _i < _len; _i++) {
-              task = tasks[_i];
-              if (_$tasksmodel.taskAtDay(task, day)) {
-                ret.push(task);
-              }
-            }
-            return ret;
+          this._$scope.taskAtDay = function(task, day) {
+            return function(task) {
+              return _$tasksmodel.taskAtDay(task, day);
+            };
           };
           this._$scope.filterLists = function() {
             return function(list) {
@@ -1177,21 +1241,29 @@
             filter = _searchbusinesslayer.getFilter();
             return n('tasks', '%n Completed Task', '%n Completed Tasks', _$listsmodel.getCount(listID, type, filter));
           };
-          this._$scope.addTask = function(taskName) {
+          this._$scope.addTask = function(taskName, related) {
             var task, _ref,
               _this = this;
+            if (related == null) {
+              related = '';
+            }
             _$scope.isAddingTask = true;
             task = {
               tmpID: 'newTask' + Date.now(),
-              calendarID: null,
+              id: 'newTask' + Date.now(),
+              calendarid: null,
+              related: related,
               name: taskName,
               starred: false,
               due: false,
               start: false,
-              completed: false
+              reminder: null,
+              completed: false,
+              complete: '0',
+              note: false
             };
             if (((_ref = _$scope.route.listID) === 'starred' || _ref === 'today' || _ref === 'week' || _ref === 'all' || _ref === 'completed' || _ref === 'current')) {
-              task.calendarID = _$listsmodel.getStandardList();
+              task.calendarid = _$listsmodel.getStandardList();
               if (_$scope.route.listID === 'starred') {
                 task.starred = true;
               }
@@ -1202,7 +1274,7 @@
                 task.start = moment().format("YYYYMMDDTHHmmss");
               }
             } else {
-              task.calendarID = _$scope.route.listID;
+              task.calendarid = _$scope.route.listID;
             }
             _tasksbusinesslayer.addTask(task, function(data) {
               _$tasksmodel.add(data);
@@ -1211,13 +1283,19 @@
               return _$scope.isAddingTask = false;
             });
             _$scope.status.focusTaskInput = false;
-            return _$scope.taskName = '';
+            _$scope.status.focusSubtaskInput = false;
+            _$scope.status.addSubtaskTo = '';
+            _$scope.status.taskName = '';
+            return _$scope.status.subtaskName = '';
           };
-          this._$scope.checkTaskInput = function(event) {
-            if (event.keyCode === 27) {
-              $('#target').blur();
-              _$scope.taskName = "";
-              return _$scope.status.focusTaskInput = false;
+          this._$scope.checkTaskInput = function($event) {
+            if ($event.keyCode === 27) {
+              $($event.currentTarget).blur();
+              _$scope.status.taskName = '';
+              _$scope.status.subtaskName = '';
+              _$scope.status.addSubtaskTo = '';
+              _$scope.status.focusTaskInput = false;
+              return _$scope.status.focusSubtaskInput = false;
             }
           };
           this._$scope.getCompletedTasks = function(listID) {
@@ -1238,6 +1316,31 @@
           };
           this._$scope.getTaskList = function(listID) {
             return _$listsmodel.getName(listID);
+          };
+          this._$scope.dropCallback = function($event, item, index) {
+            var collectionID, listID, parentID, taskID;
+            taskID = item.id;
+            $('.subtasks-container').removeClass('dropzone-visible');
+            parentID = $('li.dndPlaceholder').closest('.task-item').attr('taskID');
+            parentID = parentID || "";
+            if (parentID === taskID) {
+              parentID = "";
+            }
+            collectionID = $('li.dndPlaceholder').closest('ol[dnd-list]').attr('collectionID');
+            if (collectionID) {
+              _tasksbusinesslayer.changeCollection(taskID, collectionID);
+            }
+            listID = $('li.dndPlaceholder').closest('ol[dnd-list]').attr('listID');
+            if (listID) {
+              _tasksbusinesslayer.changeCalendarId(taskID, listID);
+            }
+            _tasksbusinesslayer.changeParent(taskID, parentID, collectionID);
+            return true;
+          };
+          this._$scope.dragover = function($event, item, index) {
+            $('.subtasks-container').removeClass('dropzone-visible');
+            $($event.target).closest('.task-item').children('.subtasks-container').addClass('dropzone-visible');
+            return true;
           };
         }
 
@@ -1448,7 +1551,7 @@
         }
 
         TasksBusinessLayer.prototype.addTask = function(task, onSuccess, onFailure) {
-          var success,
+          var parentID, success,
             _this = this;
           if (onSuccess == null) {
             onSuccess = null;
@@ -1459,6 +1562,11 @@
           onSuccess || (onSuccess = function() {});
           onFailure || (onFailure = function() {});
           this._$tasksmodel.add(task);
+          this.uncompleteParents(task.related);
+          parentID = this._$tasksmodel.getIdByUid(task.related);
+          if (parentID) {
+            this.unhideSubtasks(parentID);
+          }
           success = function(response) {
             if (response.status === 'error') {
               return onFailure();
@@ -1499,24 +1607,66 @@
         };
 
         TasksBusinessLayer.prototype.setPercentComplete = function(taskID, percentComplete) {
+          var task;
           this._$tasksmodel.setPercentComplete(taskID, percentComplete);
           if (percentComplete < 100) {
             this._$tasksmodel.uncomplete(taskID);
+            task = this._$tasksmodel.getById(taskID);
+            this.uncompleteParents(task.related);
           } else {
             this._$tasksmodel.complete(taskID);
+            this.completeChildren(taskID);
           }
           return this._persistence.setPercentComplete(taskID, percentComplete);
         };
 
         TasksBusinessLayer.prototype.completeTask = function(taskID) {
-          return this.setPercentComplete(taskID, 100);
+          this.setPercentComplete(taskID, 100);
+          return this.hideSubtasks(taskID);
         };
 
         TasksBusinessLayer.prototype.uncompleteTask = function(taskID) {
           return this.setPercentComplete(taskID, 0);
         };
 
+        TasksBusinessLayer.prototype.completeChildren = function(taskID) {
+          var childID, childrenID, _i, _len, _results;
+          childrenID = this._$tasksmodel.getChildrenID(taskID);
+          _results = [];
+          for (_i = 0, _len = childrenID.length; _i < _len; _i++) {
+            childID = childrenID[_i];
+            _results.push(this.setPercentComplete(childID, 100));
+          }
+          return _results;
+        };
+
+        TasksBusinessLayer.prototype.uncompleteParents = function(uid) {
+          var parentID;
+          if (uid) {
+            parentID = this._$tasksmodel.getIdByUid(uid);
+            if (this._$tasksmodel.completed(parentID)) {
+              return this.setPercentComplete(parentID, 0);
+            }
+          }
+        };
+
+        TasksBusinessLayer.prototype.unhideSubtasks = function(taskID) {
+          this._$tasksmodel.setHideSubtasks(taskID, false);
+          return this._persistence.setHideSubtasks(taskID, false);
+        };
+
+        TasksBusinessLayer.prototype.hideSubtasks = function(taskID) {
+          this._$tasksmodel.setHideSubtasks(taskID, true);
+          return this._persistence.setHideSubtasks(taskID, true);
+        };
+
         TasksBusinessLayer.prototype.deleteTask = function(taskID) {
+          var childID, childrenID, _i, _len;
+          childrenID = this._$tasksmodel.getChildrenID(taskID);
+          for (_i = 0, _len = childrenID.length; _i < _len; _i++) {
+            childID = childrenID[_i];
+            this.deleteTask(childID);
+          }
           this._$tasksmodel.removeById(taskID);
           return this._persistence.deleteTask(taskID);
         };
@@ -1811,8 +1961,25 @@
         };
 
         TasksBusinessLayer.prototype.changeCalendarId = function(taskID, calendarID) {
+          var child, childID, childrenID, parent, parentID, task, _i, _len;
           this._$tasksmodel.changeCalendarId(taskID, calendarID);
-          return this._persistence.changeCalendarId(taskID, calendarID);
+          this._persistence.changeCalendarId(taskID, calendarID);
+          childrenID = this._$tasksmodel.getChildrenID(taskID);
+          task = this._$tasksmodel.getById(taskID);
+          for (_i = 0, _len = childrenID.length; _i < _len; _i++) {
+            childID = childrenID[_i];
+            child = this._$tasksmodel.getById(childID);
+            if (child.calendarid !== task.calendarid) {
+              this.changeCalendarId(childID, task.calendarid);
+            }
+          }
+          if (!this._$tasksmodel.hasNoParent(task)) {
+            parentID = this._$tasksmodel.getIdByUid(task.related);
+            parent = this._$tasksmodel.getById(parentID);
+            if (parent.calendarid !== task.calendarid) {
+              return this.changeParent(taskID, '', '');
+            }
+          }
         };
 
         TasksBusinessLayer.prototype.setTaskNote = function(taskID, note) {
@@ -1823,8 +1990,8 @@
           return this._persistence.setTaskName(taskID, name);
         };
 
-        TasksBusinessLayer.prototype.changeList = function(listID, taskID) {
-          switch (listID) {
+        TasksBusinessLayer.prototype.changeCollection = function(taskID, collectionID) {
+          switch (collectionID) {
             case 'starred':
               return this.starTask(taskID);
             case 'completed':
@@ -1835,10 +2002,33 @@
               return this.setDue(taskID, moment().startOf('day').add(12, 'h'), 'all');
             case 'week':
             case 'all':
-              break;
+              return false;
             default:
-              return this.changeCalendarId(taskID, listID);
+              return false;
           }
+        };
+
+        TasksBusinessLayer.prototype.changeParent = function(taskID, parentID, collectionID) {
+          var parent, related, task;
+          task = this._$tasksmodel.getById(taskID);
+          if (parentID) {
+            parent = this._$tasksmodel.getById(parentID);
+            this.unhideSubtasks(parentID);
+            related = parent.uid;
+            if (parent.completed && !task.completed) {
+              this.uncompleteTask(parentID);
+            }
+            if (parent.calendarid !== task.calendarid) {
+              this.changeCalendarId(taskID, parent.calendarid);
+            }
+          } else {
+            related = "";
+            if (collectionID !== "completed" && task.completed) {
+              this.uncompleteTask(taskID);
+            }
+          }
+          this._$tasksmodel.changeParent(taskID, related);
+          return this._persistence.changeParent(taskID, related);
         };
 
         TasksBusinessLayer.prototype.updateModel = function() {
@@ -1935,10 +2125,10 @@
             filter = '';
           }
           count = 0;
-          tasks = this._$tasksmodel.getAll();
+          tasks = this._$tasksmodel.filteredTasks(filter);
           for (_i = 0, _len = tasks.length; _i < _len; _i++) {
             task = tasks[_i];
-            count += this._$tasksmodel.filterTasks(task, collectionID) && this._$tasksmodel.filterTasksByString(task, filter);
+            count += this._$tasksmodel.filterTasks(task, collectionID) && !task.related;
           }
           return count;
         };
@@ -2068,10 +2258,10 @@
             filter = '';
           }
           count = 0;
-          tasks = this._$tasksmodel.getAll();
+          tasks = this._$tasksmodel.filteredTasks(filter);
           for (_i = 0, _len = tasks.length; _i < _len; _i++) {
             task = tasks[_i];
-            count += this._$tasksmodel.filterTasks(task, collectionID) && task.calendarid === listID && this._$tasksmodel.filterTasksByString(task, filter);
+            count += this._$tasksmodel.filterTasks(task, collectionID) && task.calendarid === listID && !task.related;
           }
           if (collectionID === 'completed' && filter === '') {
             count += this.notLoaded(listID);
@@ -2181,11 +2371,11 @@
           }
           tmptask = this._tmpIdCache[task.tmpID];
           updateById = angular.isDefined(task.id) && angular.isDefined(this.getById(task.id));
-          updateByTmpId = angular.isDefined(tmptask) && angular.isUndefined(tmptask.id);
+          updateByTmpId = angular.isDefined(tmptask);
           if (updateById || updateByTmpId) {
             return this.update(task, clearCache);
           } else {
-            if (angular.isDefined(task.id)) {
+            if (angular.isDefined(task.id) && angular.isUndefined(task.tmpID)) {
               return TasksModel.__super__.add.call(this, task, clearCache);
             } else {
               this._tmpIdCache[task.tmpID] = task;
@@ -2203,7 +2393,7 @@
             clearCache = true;
           }
           tmptask = this._tmpIdCache[task.tmpID];
-          if (angular.isDefined(task.id) && angular.isDefined(tmptask) && angular.isUndefined(tmptask.id)) {
+          if (angular.isDefined(task.id) && angular.isDefined(tmptask)) {
             tmptask.id = task.id;
             this._dataMap[task.id] = tmptask;
           }
@@ -2304,6 +2494,60 @@
           }
         };
 
+        TasksModel.prototype.hasSubtasks = function(uid) {
+          var task, tasks, _i, _len;
+          tasks = this.getAll();
+          for (_i = 0, _len = tasks.length; _i < _len; _i++) {
+            task = tasks[_i];
+            if (task.related === uid) {
+              return true;
+            }
+          }
+          return false;
+        };
+
+        TasksModel.prototype.hasNoParent = function(task) {
+          var t, tasks, _i, _len;
+          if (!task.related) {
+            return true;
+          } else {
+            tasks = this.getAll();
+            for (_i = 0, _len = tasks.length; _i < _len; _i++) {
+              t = tasks[_i];
+              if (task.related === t.uid) {
+                return false;
+              }
+            }
+            return true;
+          }
+        };
+
+        TasksModel.prototype.getIdByUid = function(uid) {
+          var task, tasks, _i, _len;
+          tasks = this.getAll();
+          for (_i = 0, _len = tasks.length; _i < _len; _i++) {
+            task = tasks[_i];
+            if (task.uid === uid) {
+              return task.id;
+            }
+          }
+          return false;
+        };
+
+        TasksModel.prototype.getChildrenID = function(taskID) {
+          var childrenID, t, task, tasks, _i, _len;
+          task = this.getById(taskID);
+          tasks = this.getAll();
+          childrenID = [];
+          for (_i = 0, _len = tasks.length; _i < _len; _i++) {
+            t = tasks[_i];
+            if (t.related === task.uid) {
+              childrenID.push(t.id);
+            }
+          }
+          return childrenID;
+        };
+
         TasksModel.prototype.filterTasks = function(task, filter) {
           switch (filter) {
             case 'completed':
@@ -2321,6 +2565,63 @@
             default:
               return '' + task.calendarid === '' + filter;
           }
+        };
+
+        TasksModel.prototype.filteredTasks = function(needle) {
+          var ancestors, parentID, ret, task, tasks, _i, _len;
+          ret = [];
+          tasks = this.getAll();
+          if (!needle) {
+            ret = tasks;
+          } else {
+            for (_i = 0, _len = tasks.length; _i < _len; _i++) {
+              task = tasks[_i];
+              if (this.filterTasksByString(task, needle)) {
+                if (this.objectExists(task, ret)) {
+                  continue;
+                }
+                ret.push(task);
+                parentID = this.getIdByUid(task.related);
+                ancestors = this.getAncestor(parentID, ret);
+                if (ancestors) {
+                  ret = ret.concat(ancestors);
+                }
+              }
+            }
+          }
+          return ret;
+        };
+
+        TasksModel.prototype.objectExists = function(task, ret) {
+          var re, _i, _len;
+          for (_i = 0, _len = ret.length; _i < _len; _i++) {
+            re = ret[_i];
+            if (re.id === task.id) {
+              return true;
+            }
+          }
+          return false;
+        };
+
+        TasksModel.prototype.getAncestor = function(taskID, ret) {
+          var ancestors, parentID, task, tasks;
+          tasks = [];
+          task = this.getById(taskID);
+          if (task) {
+            if (this.objectExists(task, ret)) {
+              return tasks;
+            }
+            tasks.push(task);
+            if (this.hasNoParent(task)) {
+              return tasks;
+            }
+            parentID = this.getIdByUid(task.related);
+            ancestors = this.getAncestor(parentID, ret);
+            if (ancestors) {
+              tasks = tasks.concat(ancestors);
+            }
+          }
+          return tasks;
         };
 
         TasksModel.prototype.filterTasksByString = function(task, filter) {
@@ -2352,6 +2653,17 @@
             }
           }
           return false;
+        };
+
+        TasksModel.prototype.hideSubtasks = function(taskID) {
+          return this.getById(taskID).hidesubtasks;
+        };
+
+        TasksModel.prototype.setHideSubtasks = function(taskID, hide) {
+          return this.update({
+            id: taskID,
+            hidesubtasks: hide
+          });
         };
 
         TasksModel.prototype.starred = function(taskID) {
@@ -2451,6 +2763,13 @@
           return this.update({
             id: taskID,
             calendarid: calendarID
+          });
+        };
+
+        TasksModel.prototype.changeParent = function(taskID, related) {
+          return this.update({
+            id: taskID,
+            related: related
           });
         };
 
@@ -2798,6 +3117,19 @@
           return this._request.post('/apps/tasks/tasks/{taskID}/priority', params);
         };
 
+        Persistence.prototype.setHideSubtasks = function(taskID, hide) {
+          var params;
+          params = {
+            routeParams: {
+              taskID: taskID
+            },
+            data: {
+              hide: hide
+            }
+          };
+          return this._request.post('/apps/tasks/tasks/{taskID}/hidesubtasks', params);
+        };
+
         Persistence.prototype.addTask = function(task, onSuccess, onFailure) {
           var params;
           if (onSuccess == null) {
@@ -2811,7 +3143,8 @@
           params = {
             data: {
               name: task.name,
-              calendarID: task.calendarID,
+              related: task.related,
+              calendarID: task.calendarid,
               starred: task.starred,
               due: task.due,
               start: task.start,
@@ -2915,6 +3248,19 @@
             }
           };
           return this._request.post('/apps/tasks/tasks/{taskID}/calendar', params);
+        };
+
+        Persistence.prototype.changeParent = function(taskID, related) {
+          var params;
+          params = {
+            routeParams: {
+              taskID: taskID
+            },
+            data: {
+              related: related
+            }
+          };
+          return this._request.post('/apps/tasks/tasks/{taskID}/parent', params);
         };
 
         Persistence.prototype.setTaskName = function(taskID, name) {

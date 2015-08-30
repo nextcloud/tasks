@@ -35,13 +35,13 @@ angular.module('Tasks').factory 'TasksModel',
 			updateById = angular.isDefined(task.id) and
 			angular.isDefined(@getById(task.id))
 
-			updateByTmpId = angular.isDefined(tmptask) and
-			angular.isUndefined(tmptask.id)
+			updateByTmpId = angular.isDefined(tmptask)
 
 			if updateById or updateByTmpId
 				@update(task, clearCache)
 			else
-				if angular.isDefined(task.id)
+				if angular.isDefined(task.id) and
+				angular.isUndefined(task.tmpID)
 					super(task, clearCache)
 				else
 					@_tmpIdCache[task.tmpID] = task
@@ -53,8 +53,7 @@ angular.module('Tasks').factory 'TasksModel',
 			tmptask = @_tmpIdCache[task.tmpID]
 
 			if angular.isDefined(task.id) and
-			angular.isDefined(tmptask) and
-			angular.isUndefined(tmptask.id)
+			angular.isDefined(tmptask)
 				tmptask.id = task.id
 				@_dataMap[task.id] = tmptask
 			
@@ -116,6 +115,40 @@ angular.module('Tasks').factory 'TasksModel',
 		isLoaded: (task) ->
 			return if @getById(task.id) then true else false
 
+		hasSubtasks: (uid) ->
+			tasks = @getAll()
+			for task in tasks
+				if task.related == uid
+					return true
+			return false
+
+		hasNoParent: (task) ->
+			if !task.related
+				return true
+			else
+				tasks = @getAll()
+				for t in tasks
+					if task.related == t.uid
+						return false
+				return true
+
+		# TODO: store UID by ID in tasksmodel to speed things up
+		getIdByUid: (uid) ->
+			tasks = @getAll()
+			for task in tasks
+				if task.uid == uid
+					return task.id
+			return false
+
+		getChildrenID: (taskID) ->
+			task = @getById(taskID)
+			tasks = @getAll()
+			childrenID = []
+			for t in tasks
+				if t.related == task.uid
+					childrenID.push t.id
+			return childrenID
+
 		filterTasks: (task, filter) ->
 			switch filter
 				when 'completed'
@@ -135,23 +168,67 @@ angular.module('Tasks').factory 'TasksModel',
 				else
 					return ''+task.calendarid == ''+filter
 
+		filteredTasks: (needle) ->
+			ret = []
+			tasks = @getAll()
+			if !needle
+				ret = tasks
+			else
+				for task in tasks
+					if @filterTasksByString(task, needle)
+						if (@objectExists(task,ret))
+							continue
+						ret.push(task)
+						parentID = @getIdByUid(task.related)
+						ancestors = @getAncestor(parentID, ret)
+						if ancestors
+							ret = ret.concat(ancestors)
+			return ret
+
+		objectExists: (task, ret) ->
+			for re in ret
+				if re.id == task.id
+					return true
+			return false
+
+		getAncestor: (taskID, ret) ->
+			tasks = []
+			task = @getById(taskID)
+			if task
+				if (@objectExists(task,ret))
+					return tasks
+				tasks.push(task)
+				if (@hasNoParent(task))
+					return tasks
+				parentID = @getIdByUid(task.related)
+				ancestors = @getAncestor(parentID, ret)
+				if ancestors
+					tasks = tasks.concat(ancestors)
+			return tasks
+
 		filterTasksByString: (task, filter) ->
-				keys = ['name', 'note', 'location',
-						'categories', 'comments']
-				filter = filter.toLowerCase()
-				for key,value of task
-					if key in keys
-						if key == 'comments'
-							for comment in task.comments
-								if comment.comment.toLowerCase().indexOf(filter) !=-1
-									return true
-						else if key == 'categories'
-							for category in task.categories
-								if category.toLowerCase().indexOf(filter) !=-1
-									return true
-						else if value.toLowerCase().indexOf(filter) !=-1
-							return true
-				return false
+			keys = ['name', 'note', 'location',
+					'categories', 'comments']
+			filter = filter.toLowerCase()
+			for key,value of task
+				if key in keys
+					if key == 'comments'
+						for comment in task.comments
+							if comment.comment.toLowerCase().indexOf(filter) !=-1
+								return true
+					else if key == 'categories'
+						for category in task.categories
+							if category.toLowerCase().indexOf(filter) !=-1
+								return true
+					else if value.toLowerCase().indexOf(filter) !=-1
+						return true
+			return false
+
+		hideSubtasks: (taskID) ->
+			return @getById(taskID).hidesubtasks
+
+		setHideSubtasks: (taskID,hide) ->
+			@update({id:taskID,hidesubtasks:hide})
 
 		starred: (taskID) ->
 			return @getById(taskID).starred
@@ -215,6 +292,9 @@ angular.module('Tasks').factory 'TasksModel',
 
 		changeCalendarId: (taskID, calendarID) ->
 			@update({id:taskID,calendarid:calendarID})
+
+		changeParent: (taskID, related) ->
+			@update({id:taskID,related:related})
 
 		setNote: (taskID, note) ->
 			@update({id:taskID,note:note})

@@ -1,25 +1,48 @@
 <!-- <div ng-switch-default> -->
 <div ng-if="route.listID != 'week' && route.listID != 'starred' && route.listID != 'completed' && route.listID != 'all' && route.listID != 'today' && route.listID != 'current'">
-    <div class="grouped-tasks" ng-class="{'completed-hidden':!settingsmodel.getById('various').showHidden}">
-        <ol class="tasks" rel="uncompleted" oc-drop-task>
-            <li ng-repeat="(id, task) in tasks | filter:filterTasks(task,route.listID) | filter:{'completed':'false'} | filter:filterTasksByString(task) | orderBy:sortDue | orderBy:'priority':true"
-            class="task-item ui-draggable handler" rel="{{ task.id }}" ng-click="openDetails(task.id,$event)" ng-class="{done: task.completed}" oc-drag-task>
+    <div class="grouped-tasks"
+         ng-class="{'completed-hidden':!settingsmodel.getById('various').showHidden}">
+        <ol class="tasks"
+            listID="{{route.listID}}"
+            collectionID="uncompleted"
+            type="list"
+            dnd-list="draggedTasks"
+            dnd-drop="dropCallback(event, item, index)"
+            dnd-dragover="dragover(event, item, index)">
+            <li class="task-item ui-draggable handler"
+                taskID="{{ task.id }}"
+                ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,route.listID) | filter:{'completed':'false'} | orderBy:'1*id':true | orderBy:sortDue | orderBy:'priority':true"
+                ng-click="openDetails(task.id,$event)"
+                ng-class="{done: task.completed}"
+                dnd-draggable="task"
+                dnd-effect-allowed="move">
                 <?php print_unescaped($this->inc('part.taskbody')); ?>
             </li>
         </ol>
-        <h2 class="heading-hiddentasks" ng-show="getCount(route.listID,'completed')">
+        <h2 class="heading-hiddentasks"
+            ng-show="getCount(route.listID,'completed')">
             <span class="icon toggle-completed-tasks handler" ng-click="toggleHidden()"></span>
             <text class="handler" ng-click="toggleHidden()">{{ getCountString(route.listID,'completed') }}</text>
         </h2>
-        <ol class="completed-tasks" rel="completed" oc-drop-task>
-            <li ng-repeat="task in tasks | filter:filterTasks(task,route.listID) | filter:{'completed':'true'} | filter:filterTasksByString(task) | orderBy:'completed_date':true"
-            class="task-item handler" rel="{{ task.id }}" ng-click="openDetails(task.id,$event)"
-            ng-class="{done: task.completed}" oc-drag-task>
+        <ol class="completed-tasks"
+            listID="{{route.listID}}"
+            collectionID="completed"
+            type="list"
+            dnd-list="draggedTasks"
+            dnd-drop="dropCallback(event, item, index)"
+            dnd-dragover="dragover(event, item, index)">
+            <li class="task-item handler"
+                taskID="{{ task.id }}"
+                ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,route.listID) | filter:{'completed':'true'} | orderBy:'completed_date':true"
+                ng-click="openDetails(task.id,$event)"
+                ng-class="{done: task.completed}"
+                dnd-draggable="task"
+                dnd-effect-allowed="move">
                 <?php print_unescaped($this->inc('part.taskbody')); ?>
             </li>
         </ol>
         <div class="loadmore handler" ng-hide="loadedAll(route.listID)">
-            <span ng-click="getCompletedTasks(route.listID)"> <?php p($l->t('Load remaining completed tasks.')); ?> </span>
+            <span ng-click="getCompletedTasks(route.listID)"><?php p($l->t('Load remaining completed tasks.')); ?></span>
         </div>
     </div>
 </div>

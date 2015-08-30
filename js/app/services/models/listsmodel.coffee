@@ -95,11 +95,11 @@ angular.module('Tasks').factory 'ListsModel',
 
 		getCount: (listID,collectionID,filter='') ->
 			count = 0
-			tasks = @_$tasksmodel.getAll()
+			tasks = @_$tasksmodel.filteredTasks(filter)
 			for task in tasks
 				count += (@_$tasksmodel.filterTasks(task, collectionID) &&
 					task.calendarid == listID &&
-					@_$tasksmodel.filterTasksByString(task, filter))
+					!task.related)
 			if (collectionID == 'completed' && filter == '')
 				count += @notLoaded(listID)
 			return count

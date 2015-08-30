@@ -58,6 +58,9 @@ $routeParams, Loading, SettingsModel) ->
 				if !$($event.target).closest('.newList').length
 					_$scope.status.addingList = false
 					_$scope.status.newListName = ""
+				if !$($event.target).closest('.add-subtask').length
+					_$scope.status.addSubtaskTo = ''
+					_$scope.status.focusSubtaskInput = false
 				else
 					return
 

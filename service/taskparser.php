@@ -62,6 +62,9 @@ Class TaskParser {
 			\OCP\Util::writeLog('tasks', 'TaskID '.$vtodo->ID.': '.$e->getMessage(), \OCP\Util::DEBUG);
 			$task['reminder'] = false;
 		}
+		$task['uid'] 		= (string) $vtodo->UID;
+		$task['related'] 	= (string) $vtodo->{'RELATED-TO'};
+		$task['hidesubtasks'] 	= $this->parseHideSubtasks((string) $vtodo->{'X-OC-HIDESUBTASKS'});
 		$task['priority']  = $this->parsePriority($vtodo->PRIORITY);
 		$task['starred']   = $this->parseStarred($task['priority']);
 		$task['complete']  = $this->parsePercentCompleted($vtodo->{'PERCENT-COMPLETE'});
@@ -108,6 +111,21 @@ Class TaskParser {
 			return $categories->getParts();
 		} else {
 			return array();
+		}
+	}
+
+	/**
+	 * parse hiding subtasks
+	 *
+	 * @param mixed $hidesubtasks
+	 * @return bool
+	 */
+	private function parseHideSubtasks($hidesubtasks) {
+		// show subtasks on default
+		if ($hidesubtasks == '1'){
+			return true;
+		} else {
+			return false;
 		}
 	}
 

@@ -36,6 +36,7 @@ CollectionsModel, ListsBusinessLayer, $location, SearchBusinessLayer) ->
 			@_$scope.collections = @_$collectionsmodel.getAll()
 
 			@_$scope.lists = @_$listsmodel.getAll()
+			@_$scope.draggedTasks = []
 
 			@_$scope.TasksBusinessLayer = @_$tasksbusinesslayer
 
@@ -166,6 +167,28 @@ CollectionsModel, ListsBusinessLayer, $location, SearchBusinessLayer) ->
 					# _$collectionsbusinesslayer.updateModel()
 					_$tasksbusinesslayer.updateModel()
 					_$listsbusinesslayer.updateModel()
+
+			@_$scope.dragoverList = ($event, item, index) ->
+				return true
+
+			@_$scope.dropList = ($event, item, index) ->
+				taskID = item.id
+				listID = $($event.target).closest('li.list').attr('listID')
+				_$tasksbusinesslayer.changeCalendarId(taskID,listID)
+				return true
+
+			@_$scope.dragoverCollection = ($event, item, index) ->
+				collectionID = $($event.target).closest('li.collection')
+				.attr('collectionID')
+				return collectionID in ['starred', 'completed', 'today']
+
+			@_$scope.dropCollection = ($event, item, index) ->
+				taskID = item.id
+				collectionID = $($event.target).closest('li.collection')
+				.attr('collectionID')
+				console.log(taskID, collectionID)
+				_$tasksbusinesslayer.changeCollection(taskID, collectionID)
+				return true
 
 
 	return new ListController($scope, $window, $routeParams,

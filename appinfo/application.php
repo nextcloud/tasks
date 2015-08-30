@@ -29,11 +29,11 @@ use \OCA\Tasks\Controller\ListsController;
 use \OCA\Tasks\Controller\SettingsController;
 use \OCA\Tasks\Controller\TasksController;
 use \OCA\Tasks\Service\TasksService;
-use \OCA\Tasks\Service\SearchService;
 use \OCA\Tasks\Service\ListsService;
 use \OCA\Tasks\Service\CollectionsService;
 use \OCA\Tasks\Service\SettingsService;
 use \OCA\Tasks\Service\Helper;
+use \OCA\Tasks\Service\MapperHelper;
 use \OCA\Tasks\Service\TaskParser;
 use \OCA\Tasks\Service\ReminderService;
 use \OCA\Tasks\Service\CommentsService;
@@ -100,6 +100,7 @@ class Application extends App {
 			return new TasksService(
 				$c->query('UserId'),
 				$c->query('TasksMapper'),
+				$c->query('MapperHelper'),
 				$c->query('Helper'),
 				$c->query('TaskParser')
 			);
@@ -128,8 +129,8 @@ class Application extends App {
 			);
 		});
 
-		$container->registerService('SearchService', function($c) {
-			return new SearchService(
+		$container->registerService('MapperHelper', function($c) {
+			return new MapperHelper(
 				$c->query('TasksMapper'),
 				$c->query('Helper'),
 				$c->query('TaskParser')
