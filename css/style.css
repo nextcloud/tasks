@@ -406,15 +406,18 @@
 }
 #app-content h2 {
   font-weight: bold;
-  color: #909090;
   font-size: 13px;
   margin-bottom: 10px;
   margin-top: 20px !important;
   text-shadow: 0 1px 0 #ffffff;
   word-wrap: break-word;
+  opacity: .5;
 }
 #app-content h2.heading-hiddentasks {
-  height: 21px;
+  display: inline-block;
+  padding-right: 16px;
+  background-position-x: right;
+  cursor: pointer;
 }
 #app-content #add-task {
   margin: 12px 0;
@@ -443,14 +446,6 @@
   padding: 0 60px 0 32px;
   margin: 0;
   cursor: text;
-}
-#app-content div.task-list h2.heading text,
-#app-content div.task-list h2.heading-hiddentasks text {
-  cursor: pointer;
-}
-#app-content div.task-list h2.heading .icon.toggle-completed-tasks,
-#app-content div.task-list h2.heading-hiddentasks .icon.toggle-completed-tasks {
-  float: right;
 }
 #app-content div.task-list .loadmore {
   font-size: 11px;
