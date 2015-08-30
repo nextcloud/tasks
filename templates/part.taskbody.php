@@ -1,4 +1,4 @@
-<div class="task-body" type="task" taskID="{{ task.id }}">
+<div class="task-body" type="task" taskID="{{ task.id }}" ng-class="{active: route.taskID==task.id}">
     <div class="percentdone" style="width:{{ task.complete }}%; background-color:{{ getTaskColor(task.calendarid) }};"></div>
     <a class="task-checkbox handler" name="toggleCompleted" ng-click="toggleCompleted(task.id)">
         <span class="icon task-checkbox" ng-class="{'task-checked': task.completed}"></span>

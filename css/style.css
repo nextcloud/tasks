@@ -272,7 +272,7 @@
 #content li.task-item .task-body,
 #content div.task-item .task-body {
   -moz-box-sizing: border-box;
-  background: url("../img/bgTask.png") repeat-x scroll 0 0 #ffffff;
+  background-color: #ffffff;
   height: 37px;
   list-style: none outside none;
   margin: 0;
@@ -280,6 +280,12 @@
   border-style: solid;
   border-width: 1px;
   border-color: #CCCCCC;
+}
+#content li.task-item .task-body:hover,
+#content li.task-item .task-body.active,
+#content div.task-item .task-body:hover,
+#content div.task-item .task-body.active {
+    background-color: #f8f8f8;
 }
 #content li.task-item .task-body .icon.task-separator,
 #content div.task-item .task-body .icon.task-separator {
