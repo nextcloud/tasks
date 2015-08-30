@@ -252,9 +252,8 @@
   color: #505050;
   cursor: text;
   font-size: 13px;
-  font-weight: bold;
   margin: 0;
-  padding: 0 60px 0 0;
+  padding: 0 60px 0 32px;
   width: 100%;
 }
 #content li.task-item.done .task-body,
@@ -428,7 +427,6 @@
 #app-content #add-task input {
   -moz-box-sizing: border-box;
   font-size: 13px;
-  font-weight: bold;
   padding-right: 60px;
   width: 100%;
   color: #505050;
@@ -436,7 +434,7 @@
   border: medium none !important;
   border-radius: 0 0 0 0 !important;
   box-shadow: none !important;
-  padding: 0 60px 0 0;
+  padding: 0 60px 0 32px;
   margin: 0;
   cursor: text;
 }
