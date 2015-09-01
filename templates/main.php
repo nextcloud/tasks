@@ -41,8 +41,14 @@
                 </div>
                 <div class="app-navigation-entry-menu">
                     <ul>
-                        <li><button class="icon-rename svg" title="<?php p($l->t('rename')); ?>" ng-click="editName(list.id)"></button></li>
-                        <li><button class="icon-delete svg" title="<?php p($l->t('delete')); ?>" ng-click="deleteList(list.id)" ng-show="showDelete(list.id)"></button></li>
+                        <li title="<?php p($l->t('rename')); ?>" ng-click="editName(list.id)" >
+                            <img class="icon-rename svg" src="<?php p(image_path('core', 'actions/rename.svg'))?>"/>
+                            <span><?php p($l->t('rename')); ?></span>
+                        </li>
+                        <li title="<?php p($l->t('delete')); ?>" ng-click="deleteList(list.id)" ng-show="showDelete(list.id)" >
+                            <img class="icon-delete svg" src="<?php p(image_path('core', 'actions/delete.svg'))?>"/>
+                            <span><?php p($l->t('delete')); ?></span>
+                        </li>
                     </ul>
                 </div>
                 <div class="app-navigation-entry-edit">

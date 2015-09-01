@@ -11,6 +11,10 @@
   border-color: blue !important;
   z-index: 100 !important;
 }
+
+/*
+  app navigation
+*/
 #app-navigation li {
   transition: max-height 300ms ease 0s;
   max-height: 100px;
@@ -19,6 +23,27 @@
 #app-navigation li.edit .app-navigation-entry-utils,
 #app-navigation li.edit .app-navigation-entry-menu {
   display: none;
+}
+#app-navigation .app-navigation-entry-menu li {
+  float: inherit;
+  width: auto !important;
+  padding: 10px;
+  opacity: 0.5;
+  cursor: pointer;
+}
+#app-navigation .app-navigation-entry-menu li img,
+#app-navigation .app-navigation-entry-menu li span{
+  cursor: pointer;
+}
+#app-navigation .app-navigation-entry-menu li:hover {
+  opacity: 1 !important;
+}
+#app-navigation .app-navigation-entry-menu li img{
+  margin-right: 5px;
+  vertical-align: text-bottom;
+}
+#app-navigation .app-navigation-entry-menu li button{
+  float: inherit;
 }
 #app-navigation li.edit .app-navigation-entry-edit {
   display: inline-block;
