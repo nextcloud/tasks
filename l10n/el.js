@@ -65,6 +65,7 @@ OC.L10N.register(
     "Add an item due today in \"%s\"..." : "Προσθήκη ενός στοιχείου με σημερινή προθεσμία στο \"%s\"...",
     "Add an item in \"%s\"..." : "Προσθήκη ενός στοιχείου στο \"%s\"...",
     "Add a current item in \"%s\"..." : "Προσθήκη ενός τρέχοντος στοιχείου στο \"%s\"...",
+    "Add a subtask to \"%s\"..." : "Προσθήκη υποέργου σε \"%s\"...",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n Ολοκληρωμένη Εργασία","%n Ολοκληρωμένες Εργασίες"],
     "Set due date" : "Ορισμός προθεσμίας",
     "%s %% completed" : "%s %% ολοκληρωμένες",
@@ -93,6 +94,7 @@ OC.L10N.register(
     "(New category)" : "(Νέα κατηγορία)",
     "Select categories..." : "Επιλογή κατηγοριών...",
     "Loading the task..." : "Φόρτωση της εργασίας...",
-    "Task not found!" : "Δεν βρέθηκε εργασία!"
+    "Task not found!" : "Δεν βρέθηκε εργασία!",
+    "add a subtask to" : "προσθήκη υποέργου σε"
 },
 "nplurals=2; plural=(n != 1);");

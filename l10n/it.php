@@ -64,6 +64,7 @@ $TRANSLATIONS = array(
 "Add an item due today in \"%s\"..." => "Aggiungi un elemento che scade oggi in \"%s\"...",
 "Add an item in \"%s\"..." => "Aggiungi un elemento in \"%s\"...",
 "Add a current item in \"%s\"..." => "Aggiungi un elemento corrente in \"%s\"...",
+"Add a subtask to \"%s\"..." => "Aggiungi una sottoattività a \"%s\"...",
 "_%n Completed Task_::_%n Completed Tasks_" => array("%n attività completata","%n attività completate"),
 "Set due date" => "Imposta data di scadenza",
 "%s %% completed" => "%s %% completato",
@@ -92,6 +93,7 @@ $TRANSLATIONS = array(
 "(New category)" => "(Nuova categoria)",
 "Select categories..." => "Seleziona le categorie...",
 "Loading the task..." => "Caricamento attività in corso...",
-"Task not found!" => "Attività non trovata!"
+"Task not found!" => "Attività non trovata!",
+"add a subtask to" => "aggiungi una sottoattività a"
 );
 $PLURAL_FORMS = "nplurals=2; plural=(n != 1);";

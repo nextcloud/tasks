@@ -65,6 +65,7 @@ OC.L10N.register(
     "Add an item due today in \"%s\"..." : "\"%s\" içerisine bugün biten bir öge ekle...",
     "Add an item in \"%s\"..." : "\"%s\" içerisine bir öge ekle...",
     "Add a current item in \"%s\"..." : "Geçerli ögeyi \"%s\" içerisine ekle...",
+    "Add a subtask to \"%s\"..." : "\"%s\" için bir alt görev ekle...",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n Tamamlanmış Görev","%n Tamamlanmış Görev"],
     "Set due date" : "Bitiş tarihini ayarla",
     "%s %% completed" : "%% %s tamamlandı",
@@ -93,6 +94,7 @@ OC.L10N.register(
     "(New category)" : "(Yeni kategori)",
     "Select categories..." : "Kategorileri seçin...",
     "Loading the task..." : "Görev yükleniyor...",
-    "Task not found!" : "Görev bulunamadı!"
+    "Task not found!" : "Görev bulunamadı!",
+    "add a subtask to" : "bir alt görev ekle"
 },
 "nplurals=2; plural=(n > 1);");

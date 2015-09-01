@@ -65,6 +65,7 @@ OC.L10N.register(
     "Add an item due today in \"%s\"..." : "Ajouter un élément échéant aujourd'hui dans \"%s\"...",
     "Add an item in \"%s\"..." : "Ajouter un élément dans \"%s\"...",
     "Add a current item in \"%s\"..." : "Ajouter un élément courant dans \"%s\"...",
+    "Add a subtask to \"%s\"..." : "Ajouter une sous-tâche à \"%s\"...",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n tâche terminée","%n tâches terminées"],
     "Set due date" : "Spécifier la date d'échéance",
     "%s %% completed" : "complétée à %s %%",
@@ -93,6 +94,7 @@ OC.L10N.register(
     "(New category)" : "(Nouvelle catégorie)",
     "Select categories..." : "Sélectionner des catégories...",
     "Loading the task..." : "Chargement de la tâche…",
-    "Task not found!" : "Tâche non trouvée !"
+    "Task not found!" : "Tâche non trouvée !",
+    "add a subtask to" : "ajouter une sous-tâche à"
 },
 "nplurals=2; plural=(n > 1);");

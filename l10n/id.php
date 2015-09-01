@@ -64,6 +64,7 @@ $TRANSLATIONS = array(
 "Add an item due today in \"%s\"..." => "Tambah item jatuh tempo hari ini dalam \"%s\"...",
 "Add an item in \"%s\"..." => "Tambah item dalam \"%s\"...",
 "Add a current item in \"%s\"..." => "Tambah item terbaru dalam \"%s\"...",
+"Add a subtask to \"%s\"..." => "Tambah sub tugas ke \"%s\"...",
 "_%n Completed Task_::_%n Completed Tasks_" => array("%n Tugas Diselesaikan"),
 "Set due date" => "Atur tanggal jatuh tempo",
 "%s %% completed" => "%s %% selesai",
@@ -92,6 +93,7 @@ $TRANSLATIONS = array(
 "(New category)" => "(Kategori baru)",
 "Select categories..." => "Pilih kategori...",
 "Loading the task..." => "Memuat tugas...",
-"Task not found!" => "Tugas tidak ditemukan!"
+"Task not found!" => "Tugas tidak ditemukan!",
+"add a subtask to" => "tambah sub tugas ke"
 );
 $PLURAL_FORMS = "nplurals=1; plural=0;";
