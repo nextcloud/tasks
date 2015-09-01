@@ -1,21 +1,28 @@
-<div class="task-body" type="task" taskID="{{ task.id }}" ng-class="{active: route.taskID==task.id}">
+<div class="task-body"
+    type="task"
+    taskID="{{ task.id }}"
+    ng-class="{active: route.taskID==task.id, subtasks: hasSubtasks(task), subtaskshidden: task.hidesubtasks, attachment: task.note!=''}">
     <div class="percentdone" style="width:{{ task.complete }}%; background-color:{{ getTaskColor(task.calendarid) }};"></div>
     <a class="task-checkbox handler" name="toggleCompleted" ng-click="toggleCompleted(task.id)">
         <span class="icon task-checkbox" ng-class="{'task-checked': task.completed}"></span>
     </a>
     <a class="icon task-separator"></a>
     <a class="task-star handler" ng-click="toggleStarred(task.id)">
-        <span class="icon task-star faded" ng-class="{'high':task.priority>5,'medium':task.priority==5,'low':task.priority > 0 && task.priority < 5}"></span>
+        <span class="icon large task-star faded" ng-class="{'high':task.priority>5,'medium':task.priority==5,'low':task.priority > 0 && task.priority < 5}"></span>
     </a>
     <a class="task-addsubtask handler add-subtask" ng-click="showSubtaskInput(task.uid)" oc-click-focus="{selector: '.add-subtask input', timeout: 0}">
-        <span class="icon addsubtask" title="<?php p($l->t('add a subtask to')); ?> {{ task.name }}"></span>
+        <span class="icon large addsubtask" title="<?php p($l->t('add a subtask to')); ?> {{ task.name }}"></span>
+    </a>
+    <a class="handler"  ng-click="toggleSubtasks(task.id)">
+        <span class="icon large subtasks"></span>
+    </a>
+    <a>
+        <span class="icon large task-attachment"></span>
     </a>
     <a class="duedate" ng-class="{overdue: TasksModel.overdue(task.due)}">{{ task.due | dateTaskList }}</a>
     <a ng-show="route.listID=='week'" class="listname" >{{ getTaskList(task.calendarid) }}</a>
-    <div class="title-wrapper"  ng-class="{attachment: task.note!='', subtasks: hasSubtasks(task), subtaskshidden: task.hidesubtasks}">
+    <div class="title-wrapper">
         <span class="title">{{ task.name }}</span>
-        <span class="icon task-attachment"></span>
-        <span class="icon subtasks handler" ng-click="toggleSubtasks(task.id)"></span>
         <span class="categories-list">
             <ul>
                 <li ng-repeat="category in task.categories"><span>{{ category }}</span></li>

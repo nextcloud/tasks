@@ -121,11 +121,11 @@
   top: 7px;
 }
 #content .icon.task-attachment {
-  background-position: 0 -60px;
+  background-position: 0 -120px;
   display: none;
 }
 #content .icon.subtasks {
-  display: none;
+  float:right;
   background-position: -220px -100px;
 }
 #content .icon.detail-trash {
@@ -269,6 +269,10 @@
 #content div.task-item .subtasks-container .task-item {
   margin-top: -1px;
 }
+#content li.task-item .task-body .icon.large,
+#content div.task-item .task-body .icon.large{
+  height: 34px;
+}
 #content li.task-item .task-body,
 #content div.task-item .task-body {
   -moz-box-sizing: border-box;
@@ -351,20 +355,25 @@
 #content div.task-item .task-body .title-wrapper .title {
   cursor: text;
 }
-#content li.task-item .task-body .title-wrapper.attachment .task-attachment,
-#content div.task-item .task-body .title-wrapper.attachment .task-attachment {
+#content li.task-item .task-body.attachment .icon.task-attachment,
+#content div.task-item .task-body.attachment .icon.task-attachment {
+  display: inline-block;
+  float: right;
+}
+#content li.task-item .task-body .icon.subtasks,
+#content div.task-item .task-body .icon.subtasks {
+  display: none;
+}
+#content li.task-item .task-body.subtasks .icon.subtasks,
+#content div.task-item .task-body.subtasks .icon.subtasks {
   display: inline-block;
 }
-#content li.task-item .task-body .title-wrapper.subtasks .subtasks,
-#content div.task-item .task-body .title-wrapper.subtasks .subtasks {
-  display: inline-block;
-}
-#content li.task-item .task-body .title-wrapper.subtasks.subtaskshidden .subtasks,
-#content div.task-item .task-body .title-wrapper.subtasks.subtaskshidden .subtasks {
+#content li.task-item .task-body.subtasks.subtaskshidden .icon.subtasks,
+#content div.task-item .task-body.subtasks.subtaskshidden .icon.subtasks {
   background-position: -260px -100px;
 }
-#content li.task-item .task-body .title-wrapper.subtasks.subtaskshidden .subtasks:hover,
-#content div.task-item .task-body .title-wrapper.subtasks.subtaskshidden .subtasks:hover {
+#content li.task-item .task-body.subtasks.subtaskshidden .icon.subtasks:hover,
+#content div.task-item .task-body.subtasks.subtaskshidden .icon.subtasks:hover {
   background-position: -220px -100px;
 }
 #content li.task-item .task-body .duedate,
