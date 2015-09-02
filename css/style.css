@@ -276,7 +276,7 @@
   box-sizing: border-box;
   color: #505050;
   cursor: text;
-  font-size: 13px;
+  font-size: 100%;
   margin: 0;
   padding: 0 60px 0 32px;
   width: 100%;
