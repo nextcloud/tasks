@@ -65,6 +65,7 @@ OC.L10N.register(
     "Add an item due today in \"%s\"..." : "Tilføj et element som forfalder i dag i \"%s\"...",
     "Add an item in \"%s\"..." : "Tilføj et element i \"%s\"...",
     "Add a current item in \"%s\"..." : "Tilføj et nuværende element i \"%s\"...",
+    "Add a subtask to \"%s\"..." : "Tilføj en delopgave til \"%s\"...",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n fuldført opgave","%n fuldførte opgaver"],
     "Set due date" : "Angiv en forfaldsdato",
     "%s %% completed" : "%s %% er fuldført",
@@ -93,6 +94,7 @@ OC.L10N.register(
     "(New category)" : "(Ny kategori)",
     "Select categories..." : "Vælg kategorier...",
     "Loading the task..." : "Indlæser opgaven ...",
-    "Task not found!" : "Opgaven blev ikke fundet!"
+    "Task not found!" : "Opgaven blev ikke fundet!",
+    "add a subtask to" : "tilføj en delopgave til"
 },
 "nplurals=2; plural=(n != 1);");
