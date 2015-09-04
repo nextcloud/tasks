@@ -290,55 +290,6 @@
 }).call(this);
 
 (function() {
-  angular.module('Tasks').directive('ocDragTask', function() {
-    return {
-      link: function(scope, elm, attr) {
-        return elm.draggable({
-          helper: "clone",
-          appendTo: $('#content'),
-          cursorAt: {
-            left: 150,
-            top: 15
-          },
-          distance: 4,
-          start: function(event, ui) {
-            return $(this).css('visibility', 'hidden');
-          },
-          stop: function(event, ui) {
-            return $(this).css('visibility', 'visible');
-          }
-        });
-      }
-    };
-  });
-
-}).call(this);
-
-(function() {
-  angular.module('Tasks').directive('ocDropTask', function() {
-    return {
-      link: function(scope, elm, attr) {
-        return elm.droppable({
-          over: function(event, ui) {
-            return $(this).addClass('dragOver');
-          },
-          out: function(event, ui) {
-            return $(this).removeClass('dragOver');
-          },
-          deactivate: function(event, ui) {
-            return $(this).removeClass('dragOver');
-          },
-          drop: function(event, ui) {
-            return scope.$apply(scope.TasksBusinessLayer.changeList($(this).attr('rel'), ui.helper.attr('rel')));
-          }
-        });
-      }
-    };
-  });
-
-}).call(this);
-
-(function() {
   angular.module('Tasks').directive('timepicker', function() {
     return {
       restrict: 'A',
