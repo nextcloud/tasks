@@ -65,6 +65,7 @@ OC.L10N.register(
     "Add an item due today in \"%s\"..." : "Toevoegen taak die vandaag vervalt in \"%s\"...",
     "Add an item in \"%s\"..." : "Toevoegen taak in \"%s\"...",
     "Add a current item in \"%s\"..." : "Voeg een actuele taak toe aan \"%s\"...",
+    "Add a subtask to \"%s\"..." : "Voeg een subtaak toe aan \"%s\"...",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n afgeronde taak","%n afgeronde taken"],
     "Set due date" : "Stel vervaldatum in",
     "%s %% completed" : "%s %% gereed",
@@ -93,6 +94,7 @@ OC.L10N.register(
     "(New category)" : "(Nieuwe categorie)",
     "Select categories..." : "Kies categorieën...",
     "Loading the task..." : "Laden van de taak...",
-    "Task not found!" : "Taak niet gevonden!"
+    "Task not found!" : "Taak niet gevonden!",
+    "add a subtask to" : "voeg een subtaak toe aan"
 },
 "nplurals=2; plural=(n != 1);");

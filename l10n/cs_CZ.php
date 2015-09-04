@@ -64,6 +64,7 @@ $TRANSLATIONS = array(
 "Add an item due today in \"%s\"..." => "Přidat položku s vypršením ke dnešku do \"%s\"...",
 "Add an item in \"%s\"..." => "Přidat položku do \"%s\"...",
 "Add a current item in \"%s\"..." => "Přidat současnou položku do \"%s\"...",
+"Add a subtask to \"%s\"..." => "Přidat podúkol k \"%s\"...",
 "_%n Completed Task_::_%n Completed Tasks_" => array("%n dokončený úkol","%n dokončené úkoly","%n dokončených úkolů"),
 "Set due date" => "Nastavit datum vypršení",
 "%s %% completed" => "%s %% dokončeno",
@@ -92,6 +93,7 @@ $TRANSLATIONS = array(
 "(New category)" => "(Nová kategorie)",
 "Select categories..." => "Vybrat kategorie...",
 "Loading the task..." => "Nahrávám úkol...",
-"Task not found!" => "Úkol nenalezen!"
+"Task not found!" => "Úkol nenalezen!",
+"add a subtask to" => "přidat podúkol k"
 );
 $PLURAL_FORMS = "nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;";

@@ -65,6 +65,7 @@ OC.L10N.register(
     "Add an item due today in \"%s\"..." : "เพิ่มรายการที่ครบกำหนดวันนี้ใน \"%s\" ...",
     "Add an item in \"%s\"..." : "เพิ่มรายการใน \"%s\" ...",
     "Add a current item in \"%s\"..." : "เพิ่มรายการปัจจุบันใน \"%s\" ...",
+    "Add a subtask to \"%s\"..." : "เพิ่ม subtask ไปยัง \"%s\"...",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n งานเสร็จสมบูรณ์"],
     "Set due date" : "ระบุวันครบกำหนด",
     "%s %% completed" : "%s %% เสร็จสมบูรณ์",
@@ -93,6 +94,7 @@ OC.L10N.register(
     "(New category)" : "(หมวดหมู่ใหม่)",
     "Select categories..." : "เลือกหมวดหมู่ ...",
     "Loading the task..." : "กำลังโหลดงาน ...",
-    "Task not found!" : "ไม่พบงาน!"
+    "Task not found!" : "ไม่พบงาน!",
+    "add a subtask to" : "เพิ่ม subtask ไปยัง"
 },
 "nplurals=1; plural=0;");
