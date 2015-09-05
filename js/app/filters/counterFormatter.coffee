@@ -21,7 +21,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 ###
 angular.module('Tasks').filter 'counterFormatter', () ->
 	(count) ->
-		return switch 
+		return switch
 			when count == 0  then ''
 			when count > 999 then '999+'
 			else count

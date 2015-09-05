@@ -61,6 +61,9 @@ angular.module('Tasks').run ['$document', '$rootScope', 'Config', '$timeout',
 
 	OCA.Search.tasks = SearchBusinessLayer
 
+	$('link[rel="shortcut icon"]')
+	.attr('href', OC.filePath('tasks', 'img', 'favicon.png'))
+
 	$document.click (event) ->
 		$rootScope.$broadcast 'documentClicked', event
 		return

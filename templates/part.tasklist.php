@@ -19,10 +19,8 @@
                 <?php print_unescaped($this->inc('part.taskbody')); ?>
             </li>
         </ol>
-        <h2 class="heading-hiddentasks"
-            ng-show="getCount(route.listID,'completed')">
-            <span class="icon toggle-completed-tasks handler" ng-click="toggleHidden()"></span>
-            <text class="handler" ng-click="toggleHidden()">{{ getCountString(route.listID,'completed') }}</text>
+        <h2 class="heading-hiddentasks icon-triangle-s handler" ng-show="getCount(route.listID,'completed')" ng-click="toggleHidden()">
+            {{ getCountString(route.listID,'completed') }}
         </h2>
         <ol class="completed-tasks"
             listID="{{route.listID}}"
