@@ -12,13 +12,14 @@
 
 
 (function() {
-  angular.module('Tasks', ['OC', 'ngRoute', 'ngAnimate', 'ui.bootstrap', 'ui.select', 'ngSanitize', 'dndLists']).config([
-    '$provide', '$routeProvider', '$interpolateProvider', function($provide, $routeProvider, $interpolateProvider) {
+  angular.module('Tasks', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'ui.select', 'ngSanitize', 'dndLists']).config([
+    '$provide', '$routeProvider', '$interpolateProvider', '$httpProvider', function($provide, $routeProvider, $interpolateProvider, $httpProvider) {
       var config;
       $provide.value('Config', config = {
         markReadTimeout: 500,
         taskUpdateInterval: 1000 * 600
       });
+      $httpProvider.defaults.headers.common['requesttoken'] = oc_requesttoken;
       $routeProvider.when('/lists/:listID', {}).when('/lists/:listID/edit/:listparameter', {}).when('/lists/:listID/tasks/:taskID', {}).when('/lists/:listID/tasks/:taskID/settings', {}).when('/lists/:listID/tasks/:taskID/edit/:parameter', {}).when('/search/:searchString', {}).when('/search/:searchString/tasks/:taskID', {}).when('/search/:searchString/tasks/:taskID/edit/:parameter', {}).otherwise({
         redirectTo: '/lists/all'
       });
@@ -287,6 +288,29 @@
       }
     };
   });
+
+}).call(this);
+
+(function() {
+  angular.module('Tasks').directive('ocClickFocus', [
+    '$timeout', function($timeout) {
+      return function(scope, elm, attr) {
+        var options;
+        options = scope.$eval(attr.ocClickFocus);
+        if (angular.isDefined(options) && angular.isDefined(options.selector)) {
+          return elm.click(function() {
+            if (angular.isDefined(options.timeout)) {
+              return $timeout(function() {
+                return $(options.selector).focus();
+              }, options.timeout);
+            } else {
+              return $(options.selector).focus();
+            }
+          });
+        }
+      };
+    }
+  ]);
 
 }).call(this);
 
@@ -2046,6 +2070,157 @@
 }).call(this);
 
 (function() {
+  angular.module('Tasks').factory('Loading', [
+    function() {
+      var Loading;
+      Loading = (function() {
+        function Loading() {
+          this.count = 0;
+        }
+
+        Loading.prototype.increase = function() {
+          return this.count += 1;
+        };
+
+        Loading.prototype.decrease = function() {
+          return this.count -= 1;
+        };
+
+        Loading.prototype.getCount = function() {
+          return this.count;
+        };
+
+        Loading.prototype.isLoading = function() {
+          return this.count > 0;
+        };
+
+        return Loading;
+
+      })();
+      return new Loading();
+    }
+  ]);
+
+}).call(this);
+
+(function() {
+  angular.module('Tasks').factory('_Model', [
+    function() {
+      var Model;
+      Model = (function() {
+        function Model() {
+          this._data = [];
+          this._dataMap = {};
+          this._filterCache = {};
+        }
+
+        Model.prototype.handle = function(data) {
+          var item, _i, _len, _results;
+          _results = [];
+          for (_i = 0, _len = data.length; _i < _len; _i++) {
+            item = data[_i];
+            _results.push(this.add(item));
+          }
+          return _results;
+        };
+
+        Model.prototype.add = function(data, clearCache) {
+          if (clearCache == null) {
+            clearCache = true;
+          }
+          if (clearCache) {
+            this._invalidateCache();
+          }
+          if (angular.isDefined(this._dataMap[data.id])) {
+            return this.update(data, clearCache);
+          } else {
+            this._data.push(data);
+            return this._dataMap[data.id] = data;
+          }
+        };
+
+        Model.prototype.update = function(data, clearCache) {
+          var entry, key, value, _results;
+          if (clearCache == null) {
+            clearCache = true;
+          }
+          if (clearCache) {
+            this._invalidateCache();
+          }
+          entry = this.getById(data.id);
+          _results = [];
+          for (key in data) {
+            value = data[key];
+            if (key === 'id') {
+              continue;
+            } else {
+              _results.push(entry[key] = value);
+            }
+          }
+          return _results;
+        };
+
+        Model.prototype.getById = function(id) {
+          return this._dataMap[id];
+        };
+
+        Model.prototype.getAll = function() {
+          return this._data;
+        };
+
+        Model.prototype.removeById = function(id, clearCache) {
+          var counter, data, entry, _i, _len, _ref;
+          if (clearCache == null) {
+            clearCache = true;
+          }
+          _ref = this._data;
+          for (counter = _i = 0, _len = _ref.length; _i < _len; counter = ++_i) {
+            entry = _ref[counter];
+            if (entry.id === id) {
+              this._data.splice(counter, 1);
+              data = this._dataMap[id];
+              delete this._dataMap[id];
+              if (clearCache) {
+                this._invalidateCache();
+              }
+              return data;
+            }
+          }
+        };
+
+        Model.prototype.clear = function() {
+          this._data.length = 0;
+          this._dataMap = {};
+          return this._invalidateCache();
+        };
+
+        Model.prototype._invalidateCache = function() {
+          return this._filterCache = {};
+        };
+
+        Model.prototype.get = function(query) {
+          var hash;
+          hash = query.hashCode();
+          if (!angular.isDefined(this._filterCache[hash])) {
+            this._filterCache[hash] = query.exec(this._data);
+          }
+          return this._filterCache[hash];
+        };
+
+        Model.prototype.size = function() {
+          return this._data.length;
+        };
+
+        return Model;
+
+      })();
+      return Model;
+    }
+  ]);
+
+}).call(this);
+
+(function() {
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -3321,27 +3496,168 @@
 }).call(this);
 
 (function() {
-  angular.module('Tasks').factory('Request', [
-    '_Request', '$http', 'Publisher', function(_Request, $http, Publisher) {
-      return new _Request($http, Publisher);
-    }
-  ]);
-
-  angular.module('Tasks').factory('Loading', [
-    '_Loading', function(_Loading) {
-      return new _Loading();
-    }
-  ]);
-
   angular.module('Tasks').factory('Publisher', [
-    '_Publisher', 'ListsModel', 'TasksModel', 'CollectionsModel', 'SettingsModel', function(_Publisher, ListsModel, TasksModel, CollectionsModel, SettingsModel) {
-      var publisher;
-      publisher = new _Publisher();
-      publisher.subscribeObjectTo(CollectionsModel, 'collections');
-      publisher.subscribeObjectTo(SettingsModel, 'settings');
-      publisher.subscribeObjectTo(ListsModel, 'lists');
-      publisher.subscribeObjectTo(TasksModel, 'tasks');
-      return publisher;
+    'ListsModel', 'TasksModel', 'CollectionsModel', 'SettingsModel', function(ListsModel, TasksModel, CollectionsModel, SettingsModel) {
+      var Publisher;
+      Publisher = (function() {
+        function Publisher(_$listsmodel, _$tasksmodel, _$collectionsmodel, _$settingsmodel) {
+          this._$listsmodel = _$listsmodel;
+          this._$tasksmodel = _$tasksmodel;
+          this._$collectionsmodel = _$collectionsmodel;
+          this._$settingsmodel = _$settingsmodel;
+          this._subscriptions = {};
+          this.subscribeObjectTo(this._$collectionsmodel, 'collections');
+          this.subscribeObjectTo(this._$settingsmodel, 'settings');
+          this.subscribeObjectTo(this._$listsmodel, 'lists');
+          this.subscribeObjectTo(this._$tasksmodel, 'tasks');
+        }
+
+        Publisher.prototype.subscribeObjectTo = function(object, name) {
+          var base;
+          (base = this._subscriptions)[name] || (base[name] = []);
+          return this._subscriptions[name].push(object);
+        };
+
+        Publisher.prototype.publishDataTo = function(data, name) {
+          var ref, results, subscriber, _i, _len;
+          ref = this._subscriptions[name] || [];
+          results = [];
+          for (_i = 0, _len = ref.length; _i < _len; _i++) {
+            subscriber = ref[_i];
+            results.push(subscriber.handle(data));
+          }
+          return results;
+        };
+
+        return Publisher;
+
+      })();
+      return new Publisher(ListsModel, TasksModel, CollectionsModel, SettingsModel);
+    }
+  ]);
+
+}).call(this);
+
+(function() {
+  angular.module('Tasks').factory('Request', [
+    '$http', 'Publisher', function($http, Publisher) {
+      var Request;
+      Request = (function() {
+        function Request($http, publisher) {
+          this.$http = $http;
+          this.publisher = publisher;
+          this.count = 0;
+          this.initialized = false;
+          this.shelvedRequests = [];
+          this.initialized = true;
+          this._executeShelvedRequests();
+        }
+
+        Request.prototype.request = function(route, data) {
+          var defaultConfig, defaultData, url;
+          if (data === null) {
+            data = {};
+          }
+          defaultData = {
+            routeParams: {},
+            data: {},
+            onSuccess: function() {
+              return {};
+            },
+            onFailure: function() {
+              return {};
+            },
+            config: {}
+          };
+          angular.extend(defaultData, data);
+          if (!this.initialized) {
+            this._shelveRequest(route, defaultData);
+            return;
+          }
+          url = OC.generateUrl(route, defaultData.routeParams);
+          defaultConfig = {
+            url: url,
+            data: defaultData.data
+          };
+          angular.extend(defaultConfig, defaultData.config);
+          if (defaultConfig.method === 'GET') {
+            defaultConfig.params = defaultConfig.data;
+          }
+          return this.$http(defaultConfig).success((function(_this) {
+            return function(data, status, headers, config) {
+              var name, ref, value;
+              ref = data.data;
+              for (name in ref) {
+                value = ref[name];
+                _this.publisher.publishDataTo(value, name);
+              }
+              return defaultData.onSuccess(data, status, headers, config);
+            };
+          })(this)).error(function(data, status, headers, config) {
+            return defaultData.onFailure(data, status, headers, config);
+          });
+        };
+
+        Request.prototype.post = function(route, data) {
+          if (data === null) {
+            data = {};
+          }
+          data.config || (data.config = {});
+          data.config.method = 'POST';
+          return this.request(route, data);
+        };
+
+        Request.prototype.get = function(route, data) {
+          if (data === null) {
+            data = {};
+          }
+          data.config || (data.config = {});
+          data.config.method = 'GET';
+          return this.request(route, data);
+        };
+
+        Request.prototype.put = function(route, data) {
+          if (data === null) {
+            data = {};
+          }
+          data.config || (data.config = {});
+          data.config.method = 'PUT';
+          return this.request(route, data);
+        };
+
+        Request.prototype["delete"] = function(route, data) {
+          if (data === null) {
+            data = {};
+          }
+          data.config || (data.config = {});
+          data.config.method = 'DELETE';
+          return this.request(route, data);
+        };
+
+        Request.prototype._shelveRequest = function(route, data) {
+          var request;
+          request = {
+            route: route,
+            data: data
+          };
+          return this.shelvedRequests.push(request);
+        };
+
+        Request.prototype._executeShelvedRequests = function() {
+          var r, ref, results, _i, _len;
+          ref = this.shelvedRequests;
+          results = [];
+          for (_i = 0, _len = ref.length; _i < _len; _i++) {
+            r = ref[_i];
+            results.push(this.request(r.route, r.data));
+          }
+          return results;
+        };
+
+        return Request;
+
+      })();
+      return new Request($http, Publisher);
     }
   ]);
 
