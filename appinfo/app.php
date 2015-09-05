@@ -39,5 +39,6 @@ if(\OCP\App::isEnabled('calendar')) {
 	});
 } else {
 	$msg = 'Can not enable the Tasks app because the Calendar App is disabled.';
+	\OCP\Util::addScript('tasks', 'calendar-missing');
 	\OCP\Util::writeLog('tasks', $msg, \OCP\Util::ERROR);
 }
