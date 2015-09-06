@@ -1391,7 +1391,9 @@
         SearchBusinessLayer.prototype.attach = function(search) {
           var _this = this;
           search.setFilter('tasks', function(query) {
-            return _this._$rootScope.$apply(_this.setFilter(query));
+            return _this._$rootScope.$apply(function() {
+              return _this.setFilter(query);
+            });
           });
           search.setRenderer('task', this.renderTaskResult.bind(this));
           return search.setHandler('task', this.handleTaskClick.bind(this));

@@ -36,9 +36,9 @@ $routeParams, $location) ->
 
 		attach: (search) =>
 			search.setFilter('tasks', (query) =>
-				@_$rootScope.$apply(
+				@_$rootScope.$apply( () =>
 					@setFilter(query)
-					)
+				)
 			)
 			search.setRenderer('task', @renderTaskResult.bind(@))
 			search.setHandler('task',  @handleTaskClick.bind(@))
