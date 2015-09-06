@@ -19,13 +19,15 @@ You should have received a copy of the GNU Affero General Public
 License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 ###
-angular.module('Tasks',['OC','ngRoute','ngAnimate','ui.bootstrap','ui.select',
+angular.module('Tasks',['ngRoute','ngAnimate','ui.bootstrap','ui.select',
 	'ngSanitize', 'dndLists'])
-.config ['$provide','$routeProvider', '$interpolateProvider',
-($provide, $routeProvider, $interpolateProvider) ->
+.config ['$provide','$routeProvider', '$interpolateProvider', '$httpProvider'
+($provide, $routeProvider, $interpolateProvider, $httpProvider) ->
 	$provide.value 'Config', config =
 		markReadTimeout: 500
 		taskUpdateInterval: 1000*600
+
+	$httpProvider.defaults.headers.common['requesttoken'] = oc_requesttoken
 
 	$routeProvider
 	.when('/lists/:listID',{})

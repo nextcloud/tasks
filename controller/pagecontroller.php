@@ -53,7 +53,6 @@ class PageController extends Controller {
 			\OCP\Util::addScript('tasks', 'vendor/bootstrap/ui-bootstrap-custom-tpls-0.10.0.min');
 		}
 		\OCP\Util::addScript('tasks', 'public/app');
-		\OCP\Util::addScript('tasks', 'vendor/appframework/app');
 		\OCP\Util::addScript('tasks', 'vendor/timepicker/jquery.ui.timepicker');
 		\OCP\Util::addStyle('tasks', 'style');
 		\OCP\Util::addStyle('tasks', 'vendor/angularui/ui-select/select2');
