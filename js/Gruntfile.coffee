@@ -31,6 +31,7 @@ module.exports = (grunt) ->
 	grunt.loadNpmTasks('grunt-phpunit')
 	grunt.loadNpmTasks('grunt-karma')
 	grunt.loadNpmTasks('grunt-newer')
+	grunt.loadNpmTasks('grunt-phpdocumentor')
 
 	grunt.initConfig
 
@@ -120,6 +121,12 @@ module.exports = (grunt) ->
 				dir: '../tests'
 			options:
 				colors: true
+
+		phpdocumentor:
+			default:
+				options:
+					directory : '../appinfo,../db,../controllers,../service'
+					target : '../docs'
 
 
 	grunt.registerTask('ci', ['karma:continuous'])
