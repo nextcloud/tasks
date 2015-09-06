@@ -94,7 +94,7 @@ Class TaskParser {
 	 */
 	private function parsePriority($priority) {
 		if(isset($priority)){
-			return (string) (10 - $priority->getValue()) % 10;
+			return (string) ((10 - $priority->getValue()) % 10);
 		} else {
 			return '0';
 		}
