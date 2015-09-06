@@ -184,6 +184,7 @@ SettingsBusinessLayer, SearchBusinessLayer) ->
 					related:	related
 					name:		taskName
 					starred:	false
+					priority:	'0'
 					due:		false
 					start:		false
 					reminder:	null
