@@ -827,9 +827,12 @@
 #task-details div.content-wrapper .body .section input[type="range"] {
   border: medium none;
   box-shadow: none;
-  padding-top: 10px;
-  width: 200px;
-  margin: 0px;
+  width: 190px;
+  margin: 5px 36px 0 0;
+  height: 17px;
+}
+#task-details div.content-wrapper .body .section input[type="text"] {
+  float: left;  
 }
 #task-details div.content-wrapper .body .section .select2-search-field input {
   border: 0 none;
