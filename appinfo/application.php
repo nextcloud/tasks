@@ -179,8 +179,6 @@ class Application extends App {
 			return $c->query('ServerContainer')->getConfig();
 		});
 
-		\OC::$server->getSearch()->registerProvider('OCA\Tasks\Controller\SearchProvider', array('apps' => array('tasks')));
-
 		/**
 		 * Database Layer
 		 */
