@@ -173,7 +173,7 @@ SettingsBusinessLayer, SearchBusinessLayer) ->
 				return n('tasks', '%n Completed Task', '%n Completed Tasks',
 						_$listsmodel.getCount(listID,type,filter))
 
-			@_$scope.addTask = (taskName,related='') ->
+			@_$scope.addTask = (taskName,related='',calendarid='') ->
 
 				_$scope.isAddingTask = true
 
@@ -195,7 +195,10 @@ SettingsBusinessLayer, SearchBusinessLayer) ->
 
 				if (_$scope.route.listID in
 				['starred', 'today', 'week', 'all', 'completed', 'current'])
-					task.calendarid = _$listsmodel.getStandardList()
+					if related
+						task.calendarid = calendarid
+					else
+						task.calendarid = _$listsmodel.getStandardList()
 					if _$scope.route.listID == 'starred'
 						task.starred = true
 					if _$scope.route.listID == 'today'

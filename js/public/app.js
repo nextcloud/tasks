@@ -1217,11 +1217,14 @@
             filter = _searchbusinesslayer.getFilter();
             return n('tasks', '%n Completed Task', '%n Completed Tasks', _$listsmodel.getCount(listID, type, filter));
           };
-          this._$scope.addTask = function(taskName, related) {
+          this._$scope.addTask = function(taskName, related, calendarid) {
             var task, _ref,
               _this = this;
             if (related == null) {
               related = '';
+            }
+            if (calendarid == null) {
+              calendarid = '';
             }
             _$scope.isAddingTask = true;
             task = {
@@ -1240,7 +1243,11 @@
               note: false
             };
             if (((_ref = _$scope.route.listID) === 'starred' || _ref === 'today' || _ref === 'week' || _ref === 'all' || _ref === 'completed' || _ref === 'current')) {
-              task.calendarid = _$listsmodel.getStandardList();
+              if (related) {
+                task.calendarid = calendarid;
+              } else {
+                task.calendarid = _$listsmodel.getStandardList();
+              }
               if (_$scope.route.listID === 'starred') {
                 task.starred = true;
               }

@@ -37,7 +37,7 @@
         dnd-dragover="dragover(event, item, index)">
         <li class="task-item ui-draggable handler add-subtask"
             ng-show="status.addSubtaskTo == task.uid">
-            <form ng-submit="addTask(status.subtaskName,task.uid)" name="addTaskForm">
+            <form ng-submit="addTask(status.subtaskName,task.uid,task.calendarid)" name="addTaskForm">
                 <input class="transparent"
                     placeholder="{{ getSubAddString(task.name) }}"
                     ng-disabled="isAddingTask"
