@@ -213,7 +213,7 @@ Class Helper {
 	 * @return array
 	*/
 	public function sortCompletedDate($a, $b) {
-		return $this->sort(\DateTime::createFromFormat('Ymd\THis', $a['completed_date']), \DateTime::createFromFormat('Ymd\THis', $b['completed_date']));
+		return $this->sort(\DateTime::createFromFormat('Ymd\THis', $b['completed_date']), \DateTime::createFromFormat('Ymd\THis', $a['completed_date']));
 	}
 
 
