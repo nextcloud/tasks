@@ -1,5 +1,6 @@
 { "translations": {
     "Tasks" : "Tarefas",
+    "Tasks app is unavailable because the calendar is not installed" : "O aplicativo de tarefas não está disponível porque o calendário não está instalado",
     "Due yesterday" : "Programada para ontem",
     "Due today" : "Programada para hoje",
     "Due tomorrow" : "Programada para amanhã",

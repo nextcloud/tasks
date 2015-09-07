@@ -2,6 +2,7 @@ OC.L10N.register(
     "tasks",
     {
     "Tasks" : "Tehtävät",
+    "Tasks app is unavailable because the calendar is not installed" : "Tehtäväsovellus ei ole käytettävissä, koska kalenteria ei ole asennettu",
     "Due yesterday" : "Eräpäivä eilen",
     "Due today" : "Eräpäivä tänään",
     "Due tomorrow" : "Eräpäivä huomenna",
