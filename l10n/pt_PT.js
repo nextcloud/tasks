@@ -19,7 +19,7 @@ OC.L10N.register(
     "Today" : "Hoje",
     "Tomorrow" : "Amanhã",
     "in %s" : "em %s",
-    "%s ago" : "%s atrás",
+    "%s ago" : "há %s",
     "seconds" : "segundos",
     "a minute" : "um minuto",
     "%d minutes" : "%d minutos",
@@ -92,6 +92,7 @@ OC.L10N.register(
     "(New category)" : "(Nova categoria)",
     "Select categories..." : "Seleccione categorias...",
     "Loading the task..." : "A carregar a tarefa...",
-    "Task not found!" : "Tarefa não encontrada!"
+    "Task not found!" : "Tarefa não encontrada!",
+    "add a subtask to" : "adicionar uma subtarefa a"
 },
 "nplurals=2; plural=(n != 1);");

@@ -1,6 +1,7 @@
 <?php
 $TRANSLATIONS = array(
 "Tasks" => "Opgaver",
+"Tasks app is unavailable because the calendar is not installed" => "Opgaveprogrammet er utilgængeligt, da kalenderprogrammet ikke er installeret",
 "Due yesterday" => "Forfaldsdato var i går",
 "Due today" => "Forfaldsdato er i dag",
 "Due tomorrow" => "Forfaldsdato er i morgen",
