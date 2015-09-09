@@ -1,6 +1,7 @@
 <?php
 $TRANSLATIONS = array(
 "Tasks" => "งาน",
+"Tasks app is unavailable because the calendar is not installed" => "งานของแอพฯยังไม่พร้อมใช้งาน เพราะไม่ได้ติดตั้งปฏิทิน",
 "Due yesterday" => "ครบกำหนดเมื่อวานนี้",
 "Due today" => "ครบกำหนดวันนี้",
 "Due tomorrow" => "ครบกำหนดเมื่อวานนี้",
