@@ -2,7 +2,7 @@
 <info>
 	<id>tasks</id>
 	<name>Tasks</name>
-	<version>0.7.1</version>
+	<version>0.8</version>
 	<namespace>Tasks</namespace>
 	<category>productivity</category>
 	<licence>AGPL</licence>
