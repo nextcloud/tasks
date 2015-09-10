@@ -1,6 +1,7 @@
 <?php
 $TRANSLATIONS = array(
 "Tasks" => "Attività",
+"Tasks app is unavailable because the calendar is not installed" => "L'applicazione Attività non è disponibile poiché il calendario non è installato",
 "Due yesterday" => "Scaduta ieri",
 "Due today" => "Scade oggi",
 "Due tomorrow" => "Scade domani",
