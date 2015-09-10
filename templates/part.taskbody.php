@@ -48,7 +48,7 @@
         </li>
         <li taskID="{{ task.id }}"
             class="task-item ui-draggable handler subtask"
-            ng-repeat="task in getSubTasks(filtered,task) | orderBy:'1*id':true | orderBy:'priority':true"
+            ng-repeat="task in getSubTasks(filtered,task) | orderBy:'1*id':true | orderBy:'priority':true | orderBy:'completed':false"
             ng-click="openDetails(task.id,$event)"
             ng-class="{done: task.completed}"
             ng-include="'part.taskbody'"
