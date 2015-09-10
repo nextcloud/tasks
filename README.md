@@ -15,4 +15,4 @@ Once enabled, a new `Tasks` menu will appear in your owncloud apps menu. From th
 
 ### Screenshot
 
-![](https://i.imgur.com/EP9LleI.png)
+![tasks](https://cloud.githubusercontent.com/assets/2496460/9783697/ab337634-57a6-11e5-9633-b8f950b1e28e.png)
