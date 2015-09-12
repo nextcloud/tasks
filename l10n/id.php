@@ -1,6 +1,7 @@
 <?php
 $TRANSLATIONS = array(
 "Tasks" => "Tugas",
+"Tasks app is unavailable because the calendar is not installed" => "Aplikasi tugas tidak tersedia karena kalender belum terpasang",
 "Due yesterday" => "Jatuh tempo kemarin",
 "Due today" => "Jatuh tempo hari ini",
 "Due tomorrow" => "Jatuh tempo besok",

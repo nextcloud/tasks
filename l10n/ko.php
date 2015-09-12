@@ -1,6 +1,7 @@
 <?php
 $TRANSLATIONS = array(
 "Tasks" => "작업",
+"Tasks app is unavailable because the calendar is not installed" => "달력 앱이 설치되어 있지 않아서 작업 앱을 사용할 수 없습니다",
 "Due yesterday" => "어제 끝남",
 "Due today" => "오늘 끝남",
 "Due tomorrow" => "내일 끝남",
@@ -64,6 +65,7 @@ $TRANSLATIONS = array(
 "Add an item due today in \"%s\"..." => "\"%s\"에 오늘 끝나는 항목 추가 중...",
 "Add an item in \"%s\"..." => "\"%s\"에 항목 추가 중...",
 "Add a current item in \"%s\"..." => "\"%s\"에 현재 항목 추가 중...",
+"Add a subtask to \"%s\"..." => "\"%s\"에 하위 작업 추가...",
 "_%n Completed Task_::_%n Completed Tasks_" => array("완료된 작업 %n개"),
 "Set due date" => "만료 기한 설정",
 "%s %% completed" => "%s%% 완료됨",
@@ -92,6 +94,7 @@ $TRANSLATIONS = array(
 "(New category)" => "(새 분류)",
 "Select categories..." => "분류 선택...",
 "Loading the task..." => "작업 불러오는 중...",
-"Task not found!" => "작업을 찾을 수 없습니다!"
+"Task not found!" => "작업을 찾을 수 없습니다!",
+"add a subtask to" => "다음에 하위 작업 추가"
 );
 $PLURAL_FORMS = "nplurals=1; plural=0;";
