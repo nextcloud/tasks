@@ -2,6 +2,7 @@ OC.L10N.register(
     "tasks",
     {
     "Tasks" : "Oppgaver",
+    "Tasks app is unavailable because the calendar is not installed" : "Oppgaver-appen er utilgjengelig fordi kalenderen ikke er installert",
     "Due yesterday" : "Forfalt i går",
     "Due today" : "Forfaller i dag",
     "Due tomorrow" : "Forfaller i morgen",
@@ -65,6 +66,7 @@ OC.L10N.register(
     "Add an item due today in \"%s\"..." : "Legg til en oppgave med forfall i dag i \"%s\"...",
     "Add an item in \"%s\"..." : "Legg til en oppgave i \"%s\"...",
     "Add a current item in \"%s\"..." : "Legg til en nåværende oppgave i \"%s\"...",
+    "Add a subtask to \"%s\"..." : "Legg en underoppgave til \"%s\"...",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n utført oppgave","%n avsluttede oppgaver"],
     "Set due date" : "Sett forfallsdato",
     "%s %% completed" : "%s %% utført",
@@ -93,6 +95,7 @@ OC.L10N.register(
     "(New category)" : "(Ny kategori)",
     "Select categories..." : "Velg kategorier..",
     "Loading the task..." : "Laster oppgave...",
-    "Task not found!" : "Oppgaven ble ikke funnet!"
+    "Task not found!" : "Oppgaven ble ikke funnet!",
+    "add a subtask to" : "legg en underoppgave til"
 },
 "nplurals=2; plural=(n != 1);");
