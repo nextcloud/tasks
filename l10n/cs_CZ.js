@@ -2,6 +2,7 @@ OC.L10N.register(
     "tasks",
     {
     "Tasks" : "Úkoly",
+    "Tasks app is unavailable because the calendar is not installed" : "Aplikace úkolů není dostupná, protože není nainstalován kalendář",
     "Due yesterday" : "Vypršelo včera",
     "Due today" : "Vyprší dnes",
     "Due tomorrow" : "Vyprší zítra",
