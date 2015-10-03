@@ -2,6 +2,7 @@ OC.L10N.register(
     "tasks",
     {
     "Tasks" : "Užduotys",
+    "Tasks app is unavailable because the calendar is not installed" : "Užduočių įskiepis negalimas, nes nėra kalendoriaus.",
     "Due yesterday" : "Pasibaigė vakar",
     "Due today" : "pasibaigia šiandien",
     "Due tomorrow" : "Pasibaigs rytoj",
@@ -65,6 +66,7 @@ OC.L10N.register(
     "Add an item due today in \"%s\"..." : "Pridėti elementą atliktiną iki šiandien į „%s“...",
     "Add an item in \"%s\"..." : "Pridėti elementą į „%s“...",
     "Add a current item in \"%s\"..." : "Pridėti dabartinį elementą į „%s“...",
+    "Add a subtask to \"%s\"..." : "Pridėti užduotį į \"%s\"...",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n atlikta užduotis","%n atliktos užduotys","%n atliktų užduočių"],
     "Set due date" : "Nustatyti atlikimo terminą",
     "%s %% completed" : "%s %% atlikta",
@@ -93,6 +95,7 @@ OC.L10N.register(
     "(New category)" : "(Nauja kategorija)",
     "Select categories..." : "Pasirinkite kategorijas...",
     "Loading the task..." : "Įkeliama užduotis...",
-    "Task not found!" : "Užduotis nerasta!"
+    "Task not found!" : "Užduotis nerasta!",
+    "add a subtask to" : "Pridėti užduotį į"
 },
 "nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);");

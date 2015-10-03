@@ -1,6 +1,7 @@
 <?php
 $TRANSLATIONS = array(
 "Tasks" => "Feladatok",
+"Tasks app is unavailable because the calendar is not installed" => "A Feladatok alkalmazás nem elérhető, mert a naptár nincs telepítve",
 "Due yesterday" => "Tegnapi teendök",
 "Due today" => "Mai teendök",
 "Due tomorrow" => "Holnapi teendök",
@@ -64,6 +65,7 @@ $TRANSLATIONS = array(
 "Add an item due today in \"%s\"..." => "Elem hozzáadása ma ebben: %s...",
 "Add an item in \"%s\"..." => "Elem hozzáadása ebben: %s...",
 "Add a current item in \"%s\"..." => "Jelenlegi elem hozzáadása ebben: %s...",
+"Add a subtask to \"%s\"..." => "Részfeladat hozzáadás ehhez: \"%s\"...",
 "_%n Completed Task_::_%n Completed Tasks_" => array("%n befejezett feladat","%n befejezett feladat"),
 "Set due date" => "Lejárati dátum beállítása",
 "%s %% completed" => "%s %% befejezve",
@@ -92,6 +94,7 @@ $TRANSLATIONS = array(
 "(New category)" => "(Új kategória)",
 "Select categories..." => "Kategória kiválasztása...",
 "Loading the task..." => "Feladat betöltése...",
-"Task not found!" => "Feladat nem található!"
+"Task not found!" => "Feladat nem található!",
+"add a subtask to" => "részfeladat hozzáadás ehhez"
 );
 $PLURAL_FORMS = "nplurals=2; plural=(n != 1);";
