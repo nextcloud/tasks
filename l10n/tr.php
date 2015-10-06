@@ -1,6 +1,7 @@
 <?php
 $TRANSLATIONS = array(
 "Tasks" => "Görevler",
+"Tasks app is unavailable because the calendar is not installed" => "Takvim yüklü olmadığı için görevler uygulaması kullanılamıyor",
 "Due yesterday" => "Dün biten",
 "Due today" => "Bugün biten",
 "Due tomorrow" => "Yarın biten",
