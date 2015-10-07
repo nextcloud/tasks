@@ -1,6 +1,7 @@
 <?php
 $TRANSLATIONS = array(
 "Tasks" => "Задачи",
+"Tasks app is unavailable because the calendar is not installed" => "Приложение задач не доступно, так как календарь не установлен",
 "Due yesterday" => "Вчера",
 "Due today" => "Сегодня",
 "Due tomorrow" => "Завтра",
@@ -64,6 +65,7 @@ $TRANSLATIONS = array(
 "Add an item due today in \"%s\"..." => "Добавить элемент сегодня в \"%s\"...",
 "Add an item in \"%s\"..." => "Добавить элемент в \"%s\"...",
 "Add a current item in \"%s\"..." => "Добавить текущий элемент в \"%s\"...",
+"Add a subtask to \"%s\"..." => "Добавить подзадачу в \"%s\"...",
 "_%n Completed Task_::_%n Completed Tasks_" => array("%n Завершенное Задание","%n Завершенных Задания","%n Завершенных Заданий","%n Завершенных Заданий"),
 "Set due date" => "Установить срок исполнения",
 "%s %% completed" => "%s %% завершено",
@@ -92,6 +94,7 @@ $TRANSLATIONS = array(
 "(New category)" => "(Новая категория)",
 "Select categories..." => "Выбрать категории...",
 "Loading the task..." => "Загрузка задачи...",
-"Task not found!" => "Задача не найдена!"
+"Task not found!" => "Задача не найдена!",
+"add a subtask to" => "добавить подзадачу в"
 );
 $PLURAL_FORMS = "nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);";
