@@ -1,6 +1,7 @@
 <?php
 $TRANSLATIONS = array(
 "Tasks" => "Задаци",
+"Tasks app is unavailable because the calendar is not installed" => "Апликација Задаци није доступна јер Календар није инсталиран",
 "Due yesterday" => "до јуче",
 "Due today" => "до данас",
 "Due tomorrow" => "до сутра",
@@ -64,6 +65,7 @@ $TRANSLATIONS = array(
 "Add an item due today in \"%s\"..." => "Додај рок ставке за данас у „%s“...",
 "Add an item in \"%s\"..." => "Додај ставку у „%s“...",
 "Add a current item in \"%s\"..." => "Додај тренутну ставку у „%s“...",
+"Add a subtask to \"%s\"..." => "Додај подзадатак у „%s“...",
 "_%n Completed Task_::_%n Completed Tasks_" => array("%n завршен задатак","%n завршена задатка","%n завршених задатака"),
 "Set due date" => "Постави датум рока",
 "%s %% completed" => "%s %% завршено",
@@ -92,6 +94,7 @@ $TRANSLATIONS = array(
 "(New category)" => "(Нова категорија)",
 "Select categories..." => "Изаберите категорије...",
 "Loading the task..." => "Учитавам задатке...",
-"Task not found!" => "Задатак није пронађен!"
+"Task not found!" => "Задатак није пронађен!",
+"add a subtask to" => "додај подзадатак"
 );
 $PLURAL_FORMS = "nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);";
