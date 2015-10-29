@@ -78,6 +78,7 @@ $TRANSLATIONS = array(
 "Completed" => "Pabeigts",
 "Add List..." => "Pievienot sarakstu",
 "New List" => "Jauns saraksts",
+"Settings" => "Iestatījumi",
 "Start of week" => "Nedēļas sākums",
 "Visibility of Smart Collections" => "Viedo kolekciju redzamība",
 "Load remaining completed tasks." => "Ielādēt pārējos pabeigtos uzdevumus.",
