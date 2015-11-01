@@ -65,6 +65,7 @@ $TRANSLATIONS = array(
 "Add an item due today in \"%s\"..." => "今日期限のアイテムを \"%s\" に追加...",
 "Add an item in \"%s\"..." => "アイテムを \"%s\" に追加...",
 "Add a current item in \"%s\"..." => "現在のアイテムを \"%s\" に追加...",
+"Add a subtask to \"%s\"..." => "サブタスク \"%s\" を追加...",
 "_%n Completed Task_::_%n Completed Tasks_" => array("完了済みタスク %n"),
 "Set due date" => "期限を設定",
 "%s %% completed" => "%s %% 完了",
@@ -93,6 +94,7 @@ $TRANSLATIONS = array(
 "(New category)" => "(新しいカテゴリ)",
 "Select categories..." => "カテゴリーの選択...",
 "Loading the task..." => "タスクの読み込み中...",
-"Task not found!" => "タスクがありません！"
+"Task not found!" => "タスクがありません！",
+"add a subtask to" => "サブタスクを次に追加"
 );
 $PLURAL_FORMS = "nplurals=1; plural=0;";
