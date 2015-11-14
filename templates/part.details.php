@@ -120,7 +120,7 @@
                         </a>
                         -->
                         <div class="content-fakeable" ng-class="{'editing':route.parameter=='note'}">
-                        	<div class="display-view" clickableurl="task.note"></div>
+                        	<div class="display-view" ng-bind-html="task.note | linky:'_blank':{rel: 'nofollow'}"></div>
                             <div class="edit-view">
                                 <div class="expandingArea active">
                                 	<pre><span>{{ task.note }}</span><br /><br /></pre>
