@@ -139,7 +139,7 @@
                             <span class="icon detail-delete"></span>
                         </a>
                         <span class="username">{{ comment.name }}</span>
-                        <div class="comment">{{ comment.comment }}</div>
+                        <div class="comment" ng-bind-html="comment.comment | linky:'_blank':{rel: 'nofollow'}"></div>
                         <span class="time"> {{ comment.time | dateFromNow }} </span>
                     </li>
                 </ul>

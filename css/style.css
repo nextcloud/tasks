@@ -773,6 +773,8 @@
 #task-details div.content-wrapper .body .note .note-edit .display-view {
   white-space: pre-wrap;
 }
+
+#task-details div.content-wrapper .body .detail-comments .comment a,
 #task-details div.content-wrapper .body .note .note-body .display-view a,
 #task-details div.content-wrapper .body .note .note-edit .display-view a {
   cursor: pointer;
