@@ -773,8 +773,13 @@
 #task-details div.content-wrapper .body .note .note-edit .display-view {
   white-space: pre-wrap;
 }
+
+#task-details div.content-wrapper .body .detail-comments .comment a,
 #task-details div.content-wrapper .body .note .note-body .display-view a,
-#task-details div.content-wrapper .body .note .note-edit .display-view a {
+#task-details div.content-wrapper .body .note .note-edit .display-view a,
+#task-details div.content-wrapper .title .title-text a,
+#task-details div.content-wrapper .task-list .task-body .title-wrapper .title a,
+#app-content div.content-wrapper .task-body .title-wrapper span.title a {
   cursor: pointer;
   text-decoration: underline;
 }

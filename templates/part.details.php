@@ -7,8 +7,8 @@
         	<span class="icon detail-star" ng-class="{'high':task.priority>5,'medium':task.priority==5,'low':task.priority > 0 && task.priority < 5}"></span>
         </a>
     	<div class="title" ng-class="{'editing':route.parameter=='name'}">
-        	<span class="title-text handler" ng-class="{'strike-through':task.completed}" ng-click="editName()"
-            oc-click-focus="{selector: '#editName', timeout: 0}">{{ task.name }}</span>
+        	<span class="title-text handler" ng-class="{'strike-through':task.completed}" ng-click="editName($event)"
+            oc-click-focus="{selector: '#editName', timeout: 0}" ng-bind-html="task.name | linky:'_blank':{rel: 'nofollow'}"></span>
             <div class="expandable-container handler">
             	<div class="expandingArea active">
                     <pre><span>{{ task.name }}</span><br /></pre>
@@ -120,7 +120,7 @@
                         </a>
                         -->
                         <div class="content-fakeable" ng-class="{'editing':route.parameter=='note'}">
-                        	<div class="display-view" clickableurl="task.note"></div>
+                        	<div class="display-view" ng-bind-html="task.note | linky:'_blank':{rel: 'nofollow'}"></div>
                             <div class="edit-view">
                                 <div class="expandingArea active">
                                 	<pre><span>{{ task.note }}</span><br /><br /></pre>
@@ -139,7 +139,7 @@
                             <span class="icon detail-delete"></span>
                         </a>
                         <span class="username">{{ comment.name }}</span>
-                        <div class="comment">{{ comment.comment }}</div>
+                        <div class="comment" ng-bind-html="comment.comment | linky:'_blank':{rel: 'nofollow'}"></div>
                         <span class="time"> {{ comment.time | dateFromNow }} </span>
                     </li>
                 </ul>

@@ -534,8 +534,13 @@
               return _tasksbusinesslayer.deleteTask(taskID);
             }, 500);
           };
-          this._$scope.editName = function() {
-            return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/name');
+          this._$scope.editName = function($event) {
+            if ($($event.target).is('a')) {
+
+            } else {
+              console.log('open edit page');
+              return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/name');
+            }
           };
           this._$scope.editDueDate = function($event) {
             if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
@@ -563,7 +568,11 @@
           };
           this._$scope.editNote = function($event) {
             if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
-              return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/note');
+              if ($($event.target).is('a')) {
+
+              } else {
+                return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/note');
+              }
             } else {
 
             }
