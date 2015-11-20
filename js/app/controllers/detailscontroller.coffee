@@ -137,9 +137,13 @@ $timeout, $routeParams, SettingsModel, Loading) ->
 					_tasksbusinesslayer.deleteTask taskID
 				,500)
 
-			@_$scope.editName = () ->
-				_$location.path('/lists/'+_$scope.route.listID +
-					'/tasks/' + _$scope.route.taskID + '/edit/name')
+			@_$scope.editName = ($event) ->
+				if $($event.target).is('a')
+					return
+				else
+					console.log('open edit page')
+					_$location.path('/lists/'+_$scope.route.listID +
+						'/tasks/' + _$scope.route.taskID + '/edit/name')
 
 			@_$scope.editDueDate = ($event) ->
 				if $($event.currentTarget).is($($event.target).closest('.handler'))
@@ -167,8 +171,11 @@ $timeout, $routeParams, SettingsModel, Loading) ->
 
 			@_$scope.editNote = ($event) ->
 				if $($event.currentTarget).is($($event.target).closest('.handler'))
-					_$location.path('/lists/'+_$scope.route.listID +
-						'/tasks/' + _$scope.route.taskID + '/edit/note')
+					if $($event.target).is('a')
+						return
+					else
+						_$location.path('/lists/'+_$scope.route.listID +
+							'/tasks/' + _$scope.route.taskID + '/edit/note')
 				else
 					return
 

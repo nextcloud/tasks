@@ -7,7 +7,7 @@
         	<span class="icon detail-star" ng-class="{'high':task.priority>5,'medium':task.priority==5,'low':task.priority > 0 && task.priority < 5}"></span>
         </a>
     	<div class="title" ng-class="{'editing':route.parameter=='name'}">
-        	<span class="title-text handler" ng-class="{'strike-through':task.completed}" ng-click="editName()"
+        	<span class="title-text handler" ng-class="{'strike-through':task.completed}" ng-click="editName($event)"
             oc-click-focus="{selector: '#editName', timeout: 0}" ng-bind-html="task.name | linky:'_blank':{rel: 'nofollow'}"></span>
             <div class="expandable-container handler">
             	<div class="expandingArea active">
