@@ -22,7 +22,7 @@
     <a class="duedate" ng-class="{overdue: TasksModel.overdue(task.due)}">{{ task.due | dateTaskList }}</a>
     <a ng-show="route.listID=='week'" class="listname" >{{ getTaskList(task.calendarid) }}</a>
     <div class="title-wrapper">
-        <span class="title">{{ task.name }}</span>
+        <span class="title" ng-bind-html="task.name | linky:'_blank':{rel: 'nofollow'}"></span>
         <span class="categories-list">
             <ul>
                 <li ng-repeat="category in task.categories"><span>{{ category }}</span></li>

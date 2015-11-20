@@ -8,7 +8,7 @@
         </a>
     	<div class="title" ng-class="{'editing':route.parameter=='name'}">
         	<span class="title-text handler" ng-class="{'strike-through':task.completed}" ng-click="editName()"
-            oc-click-focus="{selector: '#editName', timeout: 0}">{{ task.name }}</span>
+            oc-click-focus="{selector: '#editName', timeout: 0}" ng-bind-html="task.name | linky:'_blank':{rel: 'nofollow'}"></span>
             <div class="expandable-container handler">
             	<div class="expandingArea active">
                     <pre><span>{{ task.name }}</span><br /></pre>
