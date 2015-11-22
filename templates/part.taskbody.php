@@ -31,7 +31,7 @@
     </div>
 </div>
 <div class="subtasks-container"
-     ng-class="{subtaskshidden: task.hidesubtasks}">
+     ng-class="{subtaskshidden: hideSubtasks(task)}">
     <ol dnd-list="draggedTasks"
         dnd-drop="dropCallback(event, item, index)"
         dnd-dragover="dragover(event, item, index)">

@@ -79,6 +79,15 @@ SettingsBusinessLayer, SearchBusinessLayer) ->
 			@_$scope.showSubtaskInput = (uid) ->
 				_$scope.status.addSubtaskTo = uid
 
+			@_$scope.hideSubtasks = (task) ->
+				descendants = _$tasksmodel.getDescendantID(task.id)
+				if  task.id == _$scope.route.taskID
+					return false
+				else if _$scope.route.taskID in descendants
+					return false
+				else
+					return  task.hidesubtasks
+
 			@_$scope.showInput = () ->
 				if _$scope.route.listID in ['completed', 'week']
 					return false

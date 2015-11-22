@@ -987,6 +987,8 @@
 }).call(this);
 
 (function() {
+  var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+
   angular.module('Tasks').controller('TasksController', [
     '$scope', '$window', '$routeParams', 'TasksModel', 'ListsModel', 'CollectionsModel', 'TasksBusinessLayer', '$location', 'SettingsBusinessLayer', 'SearchBusinessLayer', function($scope, $window, $routeParams, TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location, SettingsBusinessLayer, SearchBusinessLayer) {
       var TasksController;
@@ -1038,6 +1040,17 @@
           };
           this._$scope.showSubtaskInput = function(uid) {
             return _$scope.status.addSubtaskTo = uid;
+          };
+          this._$scope.hideSubtasks = function(task) {
+            var descendants, _ref;
+            descendants = _$tasksmodel.getDescendantID(task.id);
+            if (task.id === _$scope.route.taskID) {
+              return false;
+            } else if (_ref = _$scope.route.taskID, __indexOf.call(descendants, _ref) >= 0) {
+              return false;
+            } else {
+              return task.hidesubtasks;
+            }
           };
           this._$scope.showInput = function() {
             var _ref;
@@ -2624,6 +2637,18 @@
             }
           }
           return childrenID;
+        };
+
+        TasksModel.prototype.getDescendantID = function(taskID) {
+          var childID, childrenID, descendantID, _i, _len;
+          childrenID = this.getChildrenID(taskID);
+          descendantID = [];
+          descendantID = descendantID.concat(childrenID);
+          for (_i = 0, _len = childrenID.length; _i < _len; _i++) {
+            childID = childrenID[_i];
+            descendantID = descendantID.concat(this.getDescendantID(childID));
+          }
+          return descendantID;
         };
 
         TasksModel.prototype.filterTasks = function(task, filter) {

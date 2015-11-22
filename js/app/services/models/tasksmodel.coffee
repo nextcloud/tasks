@@ -149,6 +149,14 @@ angular.module('Tasks').factory 'TasksModel',
 					childrenID.push t.id
 			return childrenID
 
+		getDescendantID: (taskID) ->
+			childrenID = @getChildrenID(taskID)
+			descendantID = []
+			descendantID = descendantID.concat childrenID
+			for childID in childrenID
+				descendantID = descendantID.concat @getDescendantID(childID)
+			return descendantID
+
 		filterTasks: (task, filter) ->
 			switch filter
 				when 'completed'
