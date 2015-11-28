@@ -2,6 +2,7 @@ OC.L10N.register(
     "tasks",
     {
     "Tasks" : "Aufgaben",
+    "Tasks app is unavailable because the calendar is not installed" : "Die Task App ist nicht verfügbar, da die Kalender App nicht installiert ist.",
     "Due yesterday" : "Gestern fällig",
     "Due today" : "Heute fällig",
     "Due tomorrow" : "Morgen fällig",
