@@ -79,6 +79,7 @@ OC.L10N.register(
     "Completed" : "Slutförande",
     "Add List..." : "Lägg till lista ...",
     "New List" : "Ny lista",
+    "Settings" : "Inställningar",
     "Start of week" : "Början av vecka",
     "Visibility of Smart Collections" : "Synlighet av smarta samlingar",
     "Load remaining completed tasks." : "Ladda återstående slutförda uppgifter."
