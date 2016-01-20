@@ -1,6 +1,7 @@
 <?php
 $TRANSLATIONS = array(
 "Tasks" => "Naloge",
+"Tasks app is unavailable because the calendar is not installed" => "Vstavek Tasks ni na voljo, ker ni nameščen vstavek koledarja.",
 "Due yesterday" => "Preteklo včeraj",
 "Due today" => "Preteče danes",
 "Due tomorrow" => "Preteče jutri",
@@ -64,9 +65,15 @@ $TRANSLATIONS = array(
 "Add an item due today in \"%s\"..." => "Dodaj opomnik, ki poteče danes v \"%s\" ...",
 "Add an item in \"%s\"..." => "Dodaj predmet v \"%s\" ...",
 "Add a current item in \"%s\"..." => "Dodaj trenutni predmet v \"%s\" ...",
+"Add a subtask to \"%s\"..." => "Dodaj podrejeno nalogo \"%s\"...",
 "_%n Completed Task_::_%n Completed Tasks_" => array("%n končana naloga","%n končani nalogi","%n končane naloge","%n končanih nalog"),
 "Set due date" => "Nastavi datum preteka",
 "%s %% completed" => "%s %% končano",
+"priority %s: " => "prednost %s: ",
+"high" => "visoka",
+"medium" => "srednja",
+"low" => "nizka",
+"no priority assigned" => "prednost ni določena",
 "Remind me" => "Opomni me",
 "at the end" => "na koncu",
 "at the beginning" => "na začetku",
@@ -87,6 +94,7 @@ $TRANSLATIONS = array(
 "(New category)" => "(nova kategorija)",
 "Select categories..." => "Izbor kategorije ...",
 "Loading the task..." => "Poteka nalaganje naloge ...",
-"Task not found!" => "Naloge ni mogoče najti!"
+"Task not found!" => "Naloge ni mogoče najti!",
+"add a subtask to" => "dodaj podrejeno nalogo"
 );
 $PLURAL_FORMS = "nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);";
