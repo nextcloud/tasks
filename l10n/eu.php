@@ -78,6 +78,7 @@ $TRANSLATIONS = array(
 "Completed" => "Betea",
 "Add List..." => "Gehitu zerrenda...",
 "New List" => "Zerrenda berria",
+"Settings" => "Ezarpenak",
 "Start of week" => "Astearen hasiera",
 "Visibility of Smart Collections" => "Bilduma argien ikusgarritasuna",
 "Load remaining completed tasks." => "Kargatu betetako  beste zereginak"
