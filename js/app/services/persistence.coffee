@@ -21,12 +21,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 ###
 
 angular.module('Tasks').factory 'Persistence',
-['Request', 'Loading', '$rootScope', '$q',
-(Request, Loading, $rootScope, $q) ->
+['Request', 'Loading', '$rootScope', '$q', 'CalendarService'
+(Request, Loading, $rootScope, $q, CalendarService) ->
 
 	class Persistence
 
-		constructor: (@_request, @_Loading, @_$rootScope) ->
+		constructor: (@_request, @_Loading, @_$rootScope, @_CalendarService) ->
 
 		init: ->
 			@deferred = $q.defer()
@@ -37,6 +37,7 @@ angular.module('Tasks').factory 'Persistence',
 			@getCollections()
 			@getSettings()
 			@getLists()
+			@_CalendarService.getAll()
 			@getTasks('init', 'all', successCallback)
 
 			@deferred.promise
@@ -388,6 +389,6 @@ angular.module('Tasks').factory 'Persistence',
 
 			@_request.post '/apps/tasks/tasks/{taskID}/category/remove', params
 
-	return new Persistence(Request, Loading, $rootScope)
+	return new Persistence(Request, Loading, $rootScope, CalendarService)
 
 ]

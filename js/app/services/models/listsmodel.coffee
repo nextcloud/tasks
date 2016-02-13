@@ -29,6 +29,15 @@ angular.module('Tasks').factory 'ListsModel',
 			@_tmpIdCache = {}
 			super()
 
+		insert: (url, props) ->
+			calendar =
+				id:	'1'
+				displayname: props['{DAV:}displayname'] || 'Unnamed'
+				color: props['{http://apple.com/ns/ical/}calendar-color'] || '#1d2d44'
+				order: parseInt(props['{http://apple.com/ns/ical/}calendar-order']) || 0
+			console.log(calendar)
+			@add(calendar)
+
 		add: (list, clearCache=true) ->
 
 			tmplist = @_tmpIdCache[list.tmpID]
