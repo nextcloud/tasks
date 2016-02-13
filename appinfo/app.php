@@ -22,24 +22,18 @@
 
 namespace OCA\Tasks\AppInfo;
 
-if(\OCP\App::isEnabled('calendar')) {
-	\OC::$server->getNavigationManager()->add(function () {
-		$urlGenerator = \OC::$server->getURLGenerator();
-	    return [
-			'id' => 'tasks',
+\OC::$server->getNavigationManager()->add(function () {
+	$urlGenerator = \OC::$server->getURLGenerator();
+    return [
+		'id' => 'tasks',
 
-			'order' => 100,
+		'order' => 100,
 
-			'href' => $urlGenerator->linkToRoute('tasks.page.index'),
+		'href' => $urlGenerator->linkToRoute('tasks.page.index'),
 
-			'icon' => $urlGenerator->imagePath('tasks', 'tasks.svg'),
+		'icon' => $urlGenerator->imagePath('tasks', 'tasks.svg'),
 
-			'name' => \OC::$server->getL10N('tasks')->t('Tasks'),
-		];
-	});
-	\OC::$server->getSearch()->registerProvider('OCA\Tasks\Controller\SearchProvider', array('apps' => array('tasks')));
-} else {
-	$msg = 'Can not enable the Tasks app because the Calendar App is disabled.';
-	\OCP\Util::addScript('tasks', 'calendar-missing');
-	\OCP\Util::writeLog('tasks', $msg, \OCP\Util::ERROR);
-}
+		'name' => \OC::$server->getL10N('tasks')->t('Tasks'),
+	];
+});
+\OC::$server->getSearch()->registerProvider('OCA\Tasks\Controller\SearchProvider', array('apps' => array('tasks')));

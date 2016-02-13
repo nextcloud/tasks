@@ -19,7 +19,7 @@ You should have received a copy of the GNU Affero General Public
 License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 ###
-angular.module('Tasks',['ngRoute','ngAnimate','ui.bootstrap','ui.select',
+angular.module('Tasks',['ngRoute','ngAnimate','ui.select',
 	'ngSanitize', 'dndLists'])
 .config ['$provide','$routeProvider', '$interpolateProvider', '$httpProvider'
 ($provide, $routeProvider, $interpolateProvider, $httpProvider) ->

@@ -1,9 +1,9 @@
 (function(angular, $, moment, undefined){
 
 /**
- * ownCloud Task App - v0.8.1
+ * ownCloud Task App - v0.9.0
  *
- * Copyright (c) 2015 - Raimund Schlüßler <raimund.schluessler@googlemail.com>
+ * Copyright (c) 2016 - Raimund Schlüßler <raimund.schluessler@googlemail.com>
  *
  * This file is licensed under the Affero General Public License version 3 or later.
  * See the COPYING file
@@ -12,7 +12,7 @@
 
 
 (function() {
-  angular.module('Tasks', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'ui.select', 'ngSanitize', 'dndLists']).config([
+  angular.module('Tasks', ['ngRoute', 'ngAnimate', 'ui.select', 'ngSanitize', 'dndLists']).config([
     '$provide', '$routeProvider', '$interpolateProvider', '$httpProvider', function($provide, $routeProvider, $interpolateProvider, $httpProvider) {
       var config;
       $provide.value('Config', config = {

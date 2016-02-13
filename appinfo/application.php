@@ -25,19 +25,9 @@ namespace OCA\Tasks\AppInfo;
 use \OCP\AppFramework\App;
 use \OCA\Tasks\Controller\PageController;
 use \OCA\Tasks\Controller\CollectionsController;
-use \OCA\Tasks\Controller\ListsController;
 use \OCA\Tasks\Controller\SettingsController;
-use \OCA\Tasks\Controller\TasksController;
-use \OCA\Tasks\Service\TasksService;
-use \OCA\Tasks\Service\ListsService;
 use \OCA\Tasks\Service\CollectionsService;
 use \OCA\Tasks\Service\SettingsService;
-use \OCA\Tasks\Service\Helper;
-use \OCA\Tasks\Service\MapperHelper;
-use \OCA\Tasks\Service\TaskParser;
-use \OCA\Tasks\Service\ReminderService;
-use \OCA\Tasks\Service\CommentsService;
-use \OCA\Tasks\Db\TasksMapper;
 
 class Application extends App {
 
@@ -66,14 +56,6 @@ class Application extends App {
 			);
 		});
 
-		$container->registerService('ListsController', function($c) {
-			return new ListsController(
-				$c->query('AppName'),
-				$c->query('Request'),
-				$c->query('ListsService')
-			);
-		});
-
 		$container->registerService('SettingsController', function($c) {
 			return new SettingsController(
 				$c->query('AppName'),
@@ -82,35 +64,9 @@ class Application extends App {
 			);
 		});
 
-		$container->registerService('TasksController', function($c) {
-			return new TasksController(
-				$c->query('AppName'),
-				$c->query('Request'),
-				$c->query('TasksService'),
-				$c->query('ReminderService'),
-				$c->query('CommentsService')
-			);
-		});
-
-
 		/**
 		 * Services
 		 */
-		$container->registerService('TasksService', function($c) {
-			return new TasksService(
-				$c->query('UserId'),
-				$c->query('TasksMapper'),
-				$c->query('MapperHelper'),
-				$c->query('Helper'),
-				$c->query('TaskParser')
-			);
-		});
-
-		$container->registerService('ListsService', function($c) {
-			return new ListsService(
-				$c->query('UserId')
-			);
-		});
 
 		$container->registerService('CollectionsService', function($c) {
 			return new CollectionsService(
@@ -126,39 +82,6 @@ class Application extends App {
 				$c->query('UserId'),
 				$c->query('Settings'),
 				$c->query('AppName')
-			);
-		});
-
-		$container->registerService('MapperHelper', function($c) {
-			return new MapperHelper(
-				$c->query('TasksMapper'),
-				$c->query('Helper'),
-				$c->query('TaskParser')
-			);
-		});
-
-		$container->registerService('TaskParser', function($c) {
-			return new TaskParser(
-				$c->query('ReminderService'),
-				$c->query('Helper')
-			);
-		});
-
-		$container->registerService('ReminderService', function($c) {
-			return new ReminderService(
-				$c->query('Helper')
-			);
-		});
-
-		$container->registerService('CommentsService', function($c) {
-			return new CommentsService(
-				$c->query('UserId'),
-				$c->query('Helper')
-			);
-		});
-
-		$container->registerService('Helper', function() {
-			return new Helper(
 			);
 		});
 
@@ -178,17 +101,5 @@ class Application extends App {
 		$container->registerService('Settings', function($c) {
 			return $c->query('ServerContainer')->getConfig();
 		});
-
-		/**
-		 * Database Layer
-		 */
-		$container->registerService('TasksMapper', function($c) {
-			return new TasksMapper(
-				$c->query('ServerContainer')->getDb()
-			);
-		});
-		
 	}
-
-
 }
