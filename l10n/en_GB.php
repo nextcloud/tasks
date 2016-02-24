@@ -1,6 +1,7 @@
 <?php
 $TRANSLATIONS = array(
 "Tasks" => "Tasks",
+"Tasks app is unavailable because the calendar is not installed" => "Tasks app is unavailable because the calendar is not installed",
 "Due yesterday" => "Due yesterday",
 "Due today" => "Due today",
 "Due tomorrow" => "Due tomorrow",
@@ -64,9 +65,15 @@ $TRANSLATIONS = array(
 "Add an item due today in \"%s\"..." => "Add an item due today in \"%s\"...",
 "Add an item in \"%s\"..." => "Add an item in \"%s\"...",
 "Add a current item in \"%s\"..." => "Add a current item in \"%s\"...",
+"Add a subtask to \"%s\"..." => "Add a subtask to \"%s\"...",
 "_%n Completed Task_::_%n Completed Tasks_" => array("%n Completed Task","%n Completed Tasks"),
 "Set due date" => "Set due date",
 "%s %% completed" => "%s %% completed",
+"priority %s: " => "priority %s: ",
+"high" => "high",
+"medium" => "medium",
+"low" => "low",
+"no priority assigned" => "no priority assigned",
 "Remind me" => "Remind me",
 "at the end" => "at the end",
 "at the beginning" => "at the beginning",
@@ -76,14 +83,18 @@ $TRANSLATIONS = array(
 "All" => "All",
 "Current" => "Current",
 "Completed" => "Completed",
+"rename" => "rename",
+"delete" => "delete",
 "Add List..." => "Add List...",
 "New List" => "New List",
+"Settings" => "Settings",
 "Start of week" => "Start of week",
 "Visibility of Smart Collections" => "Visibility of Smart Collections",
 "Load remaining completed tasks." => "Load remaining completed tasks.",
 "(New category)" => "(New category)",
 "Select categories..." => "Select categories...",
 "Loading the task..." => "Loading the task...",
-"Task not found!" => "Task not found!"
+"Task not found!" => "Task not found!",
+"add a subtask to" => "add a subtask to"
 );
 $PLURAL_FORMS = "nplurals=2; plural=(n != 1);";

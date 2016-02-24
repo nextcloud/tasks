@@ -1,6 +1,7 @@
 <?php
 $TRANSLATIONS = array(
 "Tasks" => "Завдання",
+"Tasks app is unavailable because the calendar is not installed" => "Додаток управління завданнями недоступний тому, що не встановлено календар",
 "Due yesterday" => "Вчора",
 "Due today" => "Сьогодні",
 "Due tomorrow" => "Завтра",
@@ -64,10 +65,15 @@ $TRANSLATIONS = array(
 "Add an item due today in \"%s\"..." => "Додати пункт за сьгодні в \"%s\"...",
 "Add an item in \"%s\"..." => "Додати елемент в \"%s\"...",
 "Add a current item in \"%s\"..." => "Додати поточний елемент в \"%s\"...",
+"Add a subtask to \"%s\"..." => "Додати підзавдання до \"%s\"...",
 "_%n Completed Task_::_%n Completed Tasks_" => array("%n завершене завданя","%n завершених завдань","%n завершених завдань"),
 "Set due date" => "Встановіть термін",
 "%s %% completed" => "%s %% завершено",
 "priority %s: " => "приорітет %s:",
+"high" => "високий",
+"medium" => "середній",
+"low" => "низький",
+"no priority assigned" => "пріоритет на завдано",
 "Remind me" => "Нагадати",
 "at the end" => "в кінці",
 "at the beginning" => "на початку",
@@ -88,6 +94,7 @@ $TRANSLATIONS = array(
 "(New category)" => "(Нова категория)",
 "Select categories..." => "Обрати категорії...",
 "Loading the task..." => "Завантаження завдання ...",
-"Task not found!" => "Завдання не знайдене!"
+"Task not found!" => "Завдання не знайдене!",
+"add a subtask to" => "додати підзавдання до"
 );
 $PLURAL_FORMS = "nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);";

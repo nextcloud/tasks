@@ -94,6 +94,7 @@ OC.L10N.register(
     "(New category)" : "(Neue Kategorie)",
     "Select categories..." : "Kategorien auswählen...",
     "Loading the task..." : "Laden der Aufgabe…",
-    "Task not found!" : "Aufgabe nicht gefunden!"
+    "Task not found!" : "Aufgabe nicht gefunden!",
+    "add a subtask to" : "fügen Sie eine Teilaufgabe hinzu"
 },
 "nplurals=2; plural=(n != 1);");
