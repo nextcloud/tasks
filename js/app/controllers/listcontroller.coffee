@@ -34,13 +34,20 @@ CollectionsModel, ListsBusinessLayer, $location, SearchBusinessLayer) ->
 
 
 			@_$scope.collections = @_$collectionsmodel.getAll()
+			console.log(@_$scope.collections)
 
-			@_$scope.lists = @_$listsmodel.getAll()
+			# @_$scope.lists = @_$listsmodel.getAll()
 			@_$scope.draggedTasks = []
 
 			@_$scope.TasksBusinessLayer = @_$tasksbusinesslayer
 
 			@_$scope.status.listNameBackup = ''
+
+			@_$listsbusinesslayer.init().then((calendars) ->
+				$scope.calendars = calendars
+				console.log($scope.calendars)
+				# $scope.$apply()
+				)
 
 
 			@_$scope.deleteList = (listID) ->
@@ -77,14 +84,20 @@ CollectionsModel, ListsBusinessLayer, $location, SearchBusinessLayer) ->
 							displayname:		_$scope.status.newListName
 							notLoaded:	0
 						}
-						_$listsbusinesslayer.addList list
-						, (data) =>
-							_$listsmodel.add(data.list)
-							$location.path('/lists/'+data.list.id)
-							_$scope.isAddingList = false
-						, =>
-							_$scope.status.addingList = false
-							_$scope.isAddingList = false
+						_$listsbusinesslayer.addList(_$scope.status.newListName)
+							.then((calendar) ->
+								$scope.calendars.push(calendar)
+								$scope.$apply()
+							)
+
+						#  list
+						# , (data) =>
+						# 	_$listsmodel.add(data.list)
+						# 	$location.path('/lists/'+data.list.id)
+						# 	_$scope.isAddingList = false
+						# , =>
+						# 	_$scope.status.addingList = false
+						# 	_$scope.isAddingList = false
 
 						_$scope.status.newListName = ''
 					else

@@ -20,18 +20,15 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 ###
 angular.module('Tasks').factory 'Publisher',
-['ListsModel', 'TasksModel', 'CollectionsModel', 'SettingsModel',
-(ListsModel, TasksModel, CollectionsModel, SettingsModel) ->
+['CollectionsModel', 'SettingsModel',
+(CollectionsModel, SettingsModel) ->
 
 	class Publisher
 
-		constructor: (@_$listsmodel,@_$tasksmodel,@_$collectionsmodel,
-			@_$settingsmodel) ->
+		constructor: (@_$collectionsmodel, @_$settingsmodel) ->
 			@_subscriptions = {}
 			@subscribeObjectTo(@_$collectionsmodel, 'collections')
 			@subscribeObjectTo(@_$settingsmodel, 'settings')
-			@subscribeObjectTo(@_$listsmodel, 'lists')
-			@subscribeObjectTo(@_$tasksmodel, 'tasks')
 
 		subscribeObjectTo: (object, name) ->
 			(base = @_subscriptions)[name] || (base[name] = [])
@@ -44,7 +41,6 @@ angular.module('Tasks').factory 'Publisher',
 				results.push(subscriber.handle(data))
 			return results
 
-	return new Publisher(ListsModel, TasksModel,
-		CollectionsModel, SettingsModel)
+	return new Publisher(CollectionsModel, SettingsModel)
 
 ]

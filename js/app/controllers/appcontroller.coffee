@@ -22,16 +22,16 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 
 angular.module('Tasks').controller 'AppController',
-['$scope', 'Persistence', '$route', 'Status', '$timeout',
-'$location', '$routeParams', 'Loading','SettingsModel',
-($scope, Persistence, $route, status, $timeout, $location,
-$routeParams, Loading, SettingsModel) ->
+['$scope', 'ListsBusinessLayer', '$route', 'Status', '$timeout',
+'$location', '$routeParams', 'Loading', 'SettingsModel', 'Persistence',
+($scope, ListsBusinessLayer, $route, status, $timeout, $location,
+$routeParams, Loading, SettingsModel, Persistence) ->
 
 	class AppController
 
-		constructor: (@_$scope, @_persistence, @_$route, @_$status,
+		constructor: (@_$scope, @_$listsbusinesslayer, @_$route, @_$status,
 			@_$timeout, @_$location, @_$routeparams, @_Loading,
-			@_$settingsmodel) ->
+			@_$settingsmodel, @_persistence) ->
 
 			@_$scope.initialized = false
 
@@ -43,10 +43,19 @@ $routeParams, Loading, SettingsModel) ->
 
 			@_$scope.settingsmodel = @_$settingsmodel
 
-			successCallback = =>
-				@_$scope.initialized = true
+			@_persistence.init()
 
-			@_persistence.init().then(successCallback)
+			# successCallback = =>
+			# 	@_$scope.initialized = true
+			# 	@_$scope.$apply()
+			# 	console.log('initialized')
+
+			# @_$listsbusinesslayer.init().then((calendars) ->
+			# 	$scope.calendars = calendars
+			# 	console.log($scope.calendars)
+			# 	$scope.$apply()
+			# 	)
+			# console.log($scope.calendars)
 
 			@_$scope.closeAll = ($event) ->
 				if $($event.target).closest('.close-all').length ||
@@ -67,7 +76,7 @@ $routeParams, Loading, SettingsModel) ->
 			@_$scope.isLoading = () ->
 				return _Loading.isLoading()
 
-	return new AppController($scope, Persistence, $route, status, $timeout,
-	$location, $routeParams, Loading, SettingsModel)
+	return new AppController($scope, ListsBusinessLayer, $route, status, $timeout,
+	$location, $routeParams, Loading, SettingsModel, Persistence)
 
 ]

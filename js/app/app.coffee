@@ -54,10 +54,10 @@ angular.module('Tasks').run ['$document', '$rootScope', 'Config', '$timeout',
 	do update = ->
 		timeOutUpdate = ->
 			$timeout update, Config.taskUpdateInterval
-		if init
+		# if init
 			# CollectionsBusinessLayer.updateModel()
-			ListsBusinessLayer.updateModel()
-			TasksBusinessLayer.updateModel()
+			# ListsBusinessLayer.updateModel()
+			# TasksBusinessLayer.updateModel()
 		init = true
 		timeOutUpdate()
 

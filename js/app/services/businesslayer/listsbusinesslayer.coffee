@@ -22,29 +22,35 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 
 angular.module('Tasks').factory 'ListsBusinessLayer',
-['ListsModel', 'Persistence', 'TasksModel',
-(ListsModel, Persistence, TasksModel) ->
+['ListsModel', 'Persistence', 'TasksBusinessLayer', 'CalendarService',
+(ListsModel, Persistence, TasksBusinessLayer, CalendarService) ->
 
 	class ListsBusinessLayer
 
 		constructor: (@_$listsmodel, @_persistence,
-		@_$tasksmodel) ->
+		@_$tasksbusinesslayer, @_$calendarservice) ->
+
+		init: () ->
+			@_$calendarservice.getAll().then((calendars) ->
+				return calendars
+			)
 
 		addList: (list, onSuccess=null, onFailure=null) ->
-			onSuccess or= ->
-			onFailure or= ->
+			@_$calendarservice.create(list, '#FF7A66', ['vtodo'])
+			# onSuccess or= ->
+			# onFailure or= ->
 
-			@_$listsmodel.add(list)
+			# @_$listsmodel.add(list)
 
-			success = (response) =>
-				if response.status == 'error'
-					onFailure()
-				else
-					onSuccess(response.data)
-			@_persistence.addList(list, success)
+			# success = (response) =>
+			# 	if response.status == 'error'
+			# 		onFailure()
+			# 	else
+			# 		onSuccess(response.data)
+			# @_persistence.addList(list, success)
 
 		deleteList: (listID) ->
-			@_$tasksmodel.removeByList(listID)
+			# @_$tasksmodel.removeByList(listID)
 			@_$listsmodel.removeById(listID)
 			@_persistence.deleteList(listID)
 
@@ -58,6 +64,6 @@ angular.module('Tasks').factory 'ListsBusinessLayer',
 			@_persistence.getLists(success, true)
 
 	return new ListsBusinessLayer(ListsModel, Persistence,
-		TasksModel)
+		TasksBusinessLayer, CalendarService)
 
 ]

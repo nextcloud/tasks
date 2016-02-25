@@ -35,10 +35,6 @@
         timeOutUpdate = function() {
           return $timeout(update, Config.taskUpdateInterval);
         };
-        if (init) {
-          ListsBusinessLayer.updateModel();
-          TasksBusinessLayer.updateModel();
-        }
         init = true;
         return timeOutUpdate();
       })();
@@ -288,14 +284,12 @@
 
 (function() {
   angular.module('Tasks').controller('AppController', [
-    '$scope', 'Persistence', '$route', 'Status', '$timeout', '$location', '$routeParams', 'Loading', 'SettingsModel', function($scope, Persistence, $route, status, $timeout, $location, $routeParams, Loading, SettingsModel) {
+    '$scope', 'ListsBusinessLayer', '$route', 'Status', '$timeout', '$location', '$routeParams', 'Loading', 'SettingsModel', 'Persistence', function($scope, ListsBusinessLayer, $route, status, $timeout, $location, $routeParams, Loading, SettingsModel, Persistence) {
       var AppController;
       AppController = (function() {
-        function AppController(_$scope, _persistence, _$route, _$status, _$timeout, _$location, _$routeparams, _Loading, _$settingsmodel) {
-          var successCallback,
-            _this = this;
+        function AppController(_$scope, _$listsbusinesslayer, _$route, _$status, _$timeout, _$location, _$routeparams, _Loading, _$settingsmodel, _persistence) {
           this._$scope = _$scope;
-          this._persistence = _persistence;
+          this._$listsbusinesslayer = _$listsbusinesslayer;
           this._$route = _$route;
           this._$status = _$status;
           this._$timeout = _$timeout;
@@ -303,15 +297,13 @@
           this._$routeparams = _$routeparams;
           this._Loading = _Loading;
           this._$settingsmodel = _$settingsmodel;
+          this._persistence = _persistence;
           this._$scope.initialized = false;
           this._$scope.status = this._$status.getStatus();
           this._$scope.route = this._$routeparams;
           this._$scope.status.newListName = "";
           this._$scope.settingsmodel = this._$settingsmodel;
-          successCallback = function() {
-            return _this._$scope.initialized = true;
-          };
-          this._persistence.init().then(successCallback);
+          this._persistence.init();
           this._$scope.closeAll = function($event) {
             if ($($event.target).closest('.close-all').length || $($event.currentTarget).is($($event.target).closest('.handler'))) {
               _$location.path('/lists/' + _$scope.route.listID);
@@ -338,7 +330,7 @@
         return AppController;
 
       })();
-      return new AppController($scope, Persistence, $route, status, $timeout, $location, $routeParams, Loading, SettingsModel);
+      return new AppController($scope, ListsBusinessLayer, $route, status, $timeout, $location, $routeParams, Loading, SettingsModel, Persistence);
     }
   ]);
 
@@ -744,10 +736,14 @@
           this.$location = $location;
           this._$searchbusinesslayer = _$searchbusinesslayer;
           this._$scope.collections = this._$collectionsmodel.getAll();
-          this._$scope.lists = this._$listsmodel.getAll();
+          console.log(this._$scope.collections);
           this._$scope.draggedTasks = [];
           this._$scope.TasksBusinessLayer = this._$tasksbusinesslayer;
           this._$scope.status.listNameBackup = '';
+          this._$listsbusinesslayer.init().then(function(calendars) {
+            $scope.calendars = calendars;
+            return console.log($scope.calendars);
+          });
           this._$scope.deleteList = function(listID) {
             var really;
             really = confirm(t('tasks', 'This will delete the Calendar "%s" and all of its entries.').replace('%s', _$listsmodel.getById(_$scope.route.listID).displayname));
@@ -774,8 +770,7 @@
             }
           };
           this._$scope.submitNewList = function() {
-            var list,
-              _this = this;
+            var list;
             if (_$scope.status.newListName) {
               if (_$listsmodel.checkName(_$scope.status.newListName)) {
                 _$scope.status.addingList = false;
@@ -785,13 +780,9 @@
                   displayname: _$scope.status.newListName,
                   notLoaded: 0
                 };
-                _$listsbusinesslayer.addList(list, function(data) {
-                  _$listsmodel.add(data.list);
-                  $location.path('/lists/' + data.list.id);
-                  return _$scope.isAddingList = false;
-                }, function() {
-                  _$scope.status.addingList = false;
-                  return _$scope.isAddingList = false;
+                _$listsbusinesslayer.addList(_$scope.status.newListName).then(function(calendar) {
+                  $scope.calendars.push(calendar);
+                  return $scope.$apply();
                 });
                 return _$scope.status.newListName = '';
               } else {
@@ -1293,39 +1284,33 @@
 
 (function() {
   angular.module('Tasks').factory('ListsBusinessLayer', [
-    'ListsModel', 'Persistence', 'TasksModel', function(ListsModel, Persistence, TasksModel) {
+    'ListsModel', 'Persistence', 'TasksBusinessLayer', 'CalendarService', function(ListsModel, Persistence, TasksBusinessLayer, CalendarService) {
       var ListsBusinessLayer;
       ListsBusinessLayer = (function() {
-        function ListsBusinessLayer(_$listsmodel, _persistence, _$tasksmodel) {
+        function ListsBusinessLayer(_$listsmodel, _persistence, _$tasksbusinesslayer, _$calendarservice) {
           this._$listsmodel = _$listsmodel;
           this._persistence = _persistence;
-          this._$tasksmodel = _$tasksmodel;
+          this._$tasksbusinesslayer = _$tasksbusinesslayer;
+          this._$calendarservice = _$calendarservice;
         }
 
+        ListsBusinessLayer.prototype.init = function() {
+          return this._$calendarservice.getAll().then(function(calendars) {
+            return calendars;
+          });
+        };
+
         ListsBusinessLayer.prototype.addList = function(list, onSuccess, onFailure) {
-          var success,
-            _this = this;
           if (onSuccess == null) {
             onSuccess = null;
           }
           if (onFailure == null) {
             onFailure = null;
           }
-          onSuccess || (onSuccess = function() {});
-          onFailure || (onFailure = function() {});
-          this._$listsmodel.add(list);
-          success = function(response) {
-            if (response.status === 'error') {
-              return onFailure();
-            } else {
-              return onSuccess(response.data);
-            }
-          };
-          return this._persistence.addList(list, success);
+          return this._$calendarservice.create(list, '#FF7A66', ['vtodo']);
         };
 
         ListsBusinessLayer.prototype.deleteList = function(listID) {
-          this._$tasksmodel.removeByList(listID);
           this._$listsmodel.removeById(listID);
           return this._persistence.deleteList(listID);
         };
@@ -1347,7 +1332,7 @@
         return ListsBusinessLayer;
 
       })();
-      return new ListsBusinessLayer(ListsModel, Persistence, TasksModel);
+      return new ListsBusinessLayer(ListsModel, Persistence, TasksBusinessLayer, CalendarService);
     }
   ]);
 
@@ -1516,6 +1501,8 @@
           };
           return this._persistence.addTask(task, success);
         };
+
+        TasksBusinessLayer.prototype.getAll = function(calendar) {};
 
         TasksBusinessLayer.prototype.getTask = function(taskID, onSuccess, onFailure) {
           if (onSuccess == null) {
@@ -2033,7 +2020,7 @@
 
 }).call(this);
 
-angular.module('Tasks').service('CalendarService', ['DavClient', 'ListsModel', function(DavClient, ListsModel){
+angular.module('Tasks').service('CalendarService', ['DavClient', 'Calendar', function(DavClient, Calendar){
 	'use strict';
 
 	var _this = this;
@@ -2046,9 +2033,6 @@ angular.module('Tasks').service('CalendarService', ['DavClient', 'ListsModel', f
 
 	this._PROPERTIES = [
 		'{' + DavClient.NS_DAV + '}displayname',
-		'{' + DavClient.NS_DAV + '}id',
-		'{' + DavClient.NS_IETF + '}id',
-		'{' + DavClient.NS_APPLE + '}id',
 		'{' + DavClient.NS_IETF + '}calendar-description',
 		'{' + DavClient.NS_IETF + '}calendar-timezone',
 		'{' + DavClient.NS_APPLE + '}calendar-order',
@@ -2119,25 +2103,27 @@ angular.module('Tasks').service('CalendarService', ['DavClient', 'ListsModel', f
 					continue;
 				}
 
-				var doesSupportVEvent = false;
+				var doesSupportVTodo = false;
 				var components = body.propStat[0].properties['{urn:ietf:params:xml:ns:caldav}supported-calendar-component-set'];
 				if (components) {
 					for (var j=0; j < components.length; j++) {
 						var name = components[j].attributes.getNamedItem('name').textContent.toLowerCase();
-						if (name === 'vevent') {
-							doesSupportVEvent = true;
+						if (name === 'vtodo') {
+							doesSupportVTodo = true;
 						}
 					}
 				}
 
-				if (!doesSupportVEvent) {
+				if (!doesSupportVTodo) {
 					continue;
 				}
 
 				_this._getACLFromResponse(body);
 
-				ListsModel.insert(body.href, body.propStat[0].properties);
-				// calendars.push(calendar);
+				var uri = body.href.substr(_this._CALENDAR_HOME.length).replace(/[^\w\-]+/g, '');
+
+				var calendar = new Calendar(body.href, body.propStat[0].properties, uri);
+				calendars.push(calendar);
 			}
 
 			return calendars;
@@ -2166,7 +2152,9 @@ angular.module('Tasks').service('CalendarService', ['DavClient', 'ListsModel', f
 
 			_this._getACLFromResponse(body);
 
-			return '';//new Calendar(body.href, body.propStat[0].properties);
+			var uri = body.href.substr(_this._CALENDAR_HOME.length).replace(/[^\w\-]+/g, '');
+
+			return new Calendar(body.href, body.propStat[0].properties, uri);
 		});
 	};
 
@@ -2178,7 +2166,7 @@ angular.module('Tasks').service('CalendarService', ['DavClient', 'ListsModel', f
 		}
 
 		if (typeof components === 'undefined') {
-			components = ['vevent'];
+			components = ['vtodo'];
 		}
 
 		var xmlDoc = document.implementation.createDocument('', '', null);
@@ -2468,37 +2456,38 @@ angular.module('Tasks').service('CalendarService', ['DavClient', 'ListsModel', f
 
 }]);
 
-angular.module('Tasks').service('DavClient', function() {
-	'use strict';
+(function() {
+  angular.module('Tasks').service('DavClient', [
+    function() {
+      var client;
+      client = new dav.Client({
+        baseUrl: OC.linkToRemote('dav/calendars'),
+        xmlNamespaces: {
+          'DAV:': 'd',
+          'urn:ietf:params:xml:ns:caldav': 'c',
+          'http://apple.com/ns/ical/': 'aapl',
+          'http://owncloud.org/ns': 'oc',
+          'http://calendarserver.org/ns/': 'cs'
+        }
+      });
+      angular.extend(client, {
+        NS_DAV: 'DAV:',
+        NS_IETF: 'urn:ietf:params:xml:ns:caldav',
+        NS_APPLE: 'http://apple.com/ns/ical/',
+        NS_OWNCLOUD: 'http://owncloud.org/ns',
+        NS_CALENDARSERVER: 'http://calendarserver.org/ns/',
+        buildUrl: function(path) {
+          return window.location.protocol + '//' + window.location.host + path;
+        },
+        wasRequestSuccessful: function(status) {
+          return status >= 200 && status <= 299;
+        }
+      });
+      return client;
+    }
+  ]);
 
-	var client = new dav.Client({
-		baseUrl: OC.linkToRemote('dav/calendars'),
-		xmlNamespaces: {
-			'DAV:': 'd',
-			'urn:ietf:params:xml:ns:caldav': 'c',
-			'http://apple.com/ns/ical/': 'aapl',
-			'http://owncloud.org/ns': 'oc',
-			'http://calendarserver.org/ns/': 'cs'
-		}
-	});
-
-	angular.extend(client, {
-		NS_DAV: 'DAV:',
-		NS_IETF: 'urn:ietf:params:xml:ns:caldav',
-		NS_APPLE: 'http://apple.com/ns/ical/',
-		NS_OWNCLOUD: 'http://owncloud.org/ns',
-		NS_CALENDARSERVER: 'http://calendarserver.org/ns/',
-
-		buildUrl: function(path) {
-			return window.location.protocol + '//' + window.location.host + path;
-		},
-		wasRequestSuccessful: function(status) {
-			return (status >= 200 && status <= 299);
-		}
-	});
-
-	return client;
-});
+}).call(this);
 
 (function() {
   angular.module('Tasks').factory('Loading', [
@@ -2651,6 +2640,241 @@ angular.module('Tasks').service('DavClient', function() {
 
 }).call(this);
 
+angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($rootScope, $filter) {
+	'use strict';
+
+	function Calendar(url, props, uri) {
+		var _this = this;
+
+		angular.extend(this, {
+			_propertiesBackup: {},
+			_properties: {
+				url: url,
+				uri: uri,
+				enabled: props['{http://owncloud.org/ns}calendar-enabled'] === '1',
+				displayname: props['{DAV:}displayname'] || 'Unnamed',
+				color: props['{http://apple.com/ns/ical/}calendar-color'] || '#1d2d44',
+				order: parseInt(props['{http://apple.com/ns/ical/}calendar-order']) || 0,
+				components: {
+					vevent: false,
+					vjournal: false,
+					vtodo: false
+				},
+				writable: props.canWrite,
+				shareable: props.canWrite,
+				sharedWith: {
+					users: [],
+					groups: []
+				},
+				owner: ''
+			},
+			_updatedProperties: []
+		});
+
+		angular.extend(this, {
+			tmpId: null,
+			fcEventSource: {
+				events: function (start, end, timezone, callback) {
+					// console.log('querying events ...');
+					// TimezoneService.get(timezone).then(function(tz) {
+					// 	_this.list.loading = true;
+					// 	$rootScope.$broadcast('reloadCalendarList');
+
+					// 	VEventService.getAll(_this, start, end).then(function(events) {
+					// 		var vevents = [];
+					// 		for (var i = 0; i < events.length; i++) {
+					// 			vevents = vevents.concat(events[i].getFcEvent(start, end, tz));
+					// 		}
+
+					// 		callback(vevents);
+
+					// 		_this.list.loading = false;
+					// 		$rootScope.$broadcast('reloadCalendarList');
+					// 	});
+					// });
+				},
+				editable: this._properties.writable,
+				calendar: this
+			},
+			list: {
+				edit: false,
+				loading: this.enabled,
+				locked: false,
+				editingShares: false
+			}
+		});
+
+		var components = props['{urn:ietf:params:xml:ns:caldav}supported-calendar-component-set'];
+		for (var i=0; i < components.length; i++) {
+			var name = components[i].attributes.getNamedItem('name').textContent.toLowerCase();
+			if (this._properties.components.hasOwnProperty(name)) {
+				this._properties.components[name] = true;
+			}
+		}
+
+		var shares = props['{http://owncloud.org/ns}invite'];
+		if (typeof shares !== 'undefined') {
+			for (var j=0; j < shares.length; j++) {
+				var href = shares[j].getElementsByTagNameNS('DAV:', 'href');
+				if (href.length === 0) {
+					continue;
+				}
+				href = href[0].textContent;
+
+				var access = shares[j].getElementsByTagNameNS('http://owncloud.org/ns', 'access');
+				if (access.length === 0) {
+					continue;
+				}
+				access = access[0];
+
+				var readWrite = access.getElementsByTagNameNS('http://owncloud.org/ns', 'read-write');
+				readWrite = readWrite.length !== 0;
+
+				if (href.startsWith('principal:principals/users/')) {
+					this._properties.sharedWith.users.push({
+						id: href.substr(27),
+						displayname: href.substr(27),
+						writable: readWrite
+					});
+				} else if (href.startsWith('principal:principals/groups/')) {
+					this._properties.sharedWith.groups.push({
+						id: href.substr(28),
+						displayname: href.substr(28),
+						writable: readWrite
+					});
+				}
+			}
+		}
+
+		var owner = props['{DAV:}owner'];
+		if (typeof owner !== 'undefined' && owner.length !== 0) {
+			owner = owner[0].textContent.slice(0, -1);
+			if (owner.startsWith('/remote.php/dav/principals/users/')) {
+				this._properties.owner = owner.substr(33);
+			}
+		}
+
+		// this.tmpId = RandomStringService.generate();
+	}
+
+	Calendar.prototype = {
+		get url() {
+			return this._properties.url;
+		},
+		get enabled() {
+			return this._properties.enabled;
+		},
+		get components() {
+			return this._properties.components;
+		},
+		set enabled(enabled) {
+			this._properties.enabled = enabled;
+			this._setUpdated('enabled');
+		},
+		get displayname() {
+			return this._properties.displayname;
+		},
+		set displayname(displayname) {
+			this._properties.displayname = displayname;
+			this._setUpdated('displayname');
+		},
+		get color() {
+			return this._properties.color;
+		},
+		set color(color) {
+			this._properties.color = color;
+			this._setUpdated('color');
+		},
+		get sharedWith() {
+			return this._properties.sharedWith;
+		},
+		set sharedWith(sharedWith) {
+			this._properties.sharedWith = sharedWith;
+		},
+		get textColor() {
+			var color = this.color;
+			var fallbackColor = '#fff';
+			var c;
+			switch (color.length) {
+				case 4:
+					c = color.match(/^#([0-9a-f]{3})$/i)[1];
+					if (c) {
+						return this._generateTextColor(
+							parseInt(c.charAt(0),16)*0x11,
+							parseInt(c.charAt(1),16)*0x11,
+							parseInt(c.charAt(2),16)*0x11
+						);
+					}
+					return fallbackColor;
+
+				case 7:
+				case 9:
+					var regex = new RegExp('^#([0-9a-f]{' + (color.length - 1) + '})$', 'i');
+					c = color.match(regex)[1];
+					if (c) {
+						return this._generateTextColor(
+							parseInt(c.substr(0,2),16),
+							parseInt(c.substr(2,2),16),
+							parseInt(c.substr(4,2),16)
+						);
+					}
+					return fallbackColor;
+
+				default:
+					return fallbackColor;
+			}
+		},
+		get order() {
+			return this._properties.order;
+		},
+		set order(order) {
+			this._properties.order = order;
+			this._setUpdated('order');
+		},
+		get writable() {
+			return this._properties.writable;
+		},
+		get shareable() {
+			return this._properties.shareable;
+		},
+		get owner() {
+			return this._properties.owner;
+		},
+		_setUpdated: function(propName) {
+			if (this._updatedProperties.indexOf(propName) === -1) {
+				this._updatedProperties.push(propName);
+			}
+		},
+		get updatedProperties() {
+			return this._updatedProperties;
+		},
+		resetUpdatedProperties: function() {
+			this._updatedProperties = [];
+		},
+		prepareUpdate: function() {
+			this.list.edit = true;
+			this._propertiesBackup = angular.copy(this._properties);
+		},
+		resetToPreviousState: function() {
+			this._properties = angular.copy(this._propertiesBackup);
+			this.list.edit = false;
+			this._propertiesBackup = {};
+		},
+		dropPreviousState: function() {
+			this._propertiesBackup = {};
+		},
+		toggleSharesEditor: function() {
+			this.list.editingShares = !this.list.editingShares;
+		},
+		_generateTextColor: function(r,g,b) {
+			var brightness = (((r * 299) + (g * 587) + (b * 114)) / 1000);
+			return (brightness > 130) ? '#000000' : '#FAFAFA';
+		}
+	};
+
+	return Calendar;
+}]);
+
 (function() {
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -2716,16 +2940,76 @@ angular.module('Tasks').service('DavClient', function() {
           ListsModel.__super__.constructor.call(this);
         }
 
-        ListsModel.prototype.insert = function(url, props) {
-          var calendar;
+        ListsModel.prototype.insert = function(cal) {
+          var access, calendar, component, components, href, name, owner, readWrite, share, shares, _i, _j, _len, _len1;
           calendar = {
-            id: '1',
-            displayname: props['{DAV:}displayname'] || 'Unnamed',
-            color: props['{http://apple.com/ns/ical/}calendar-color'] || '#1d2d44',
-            order: parseInt(props['{http://apple.com/ns/ical/}calendar-order']) || 0
+            id: this.size(),
+            url: cal.url,
+            enabled: cal.props['{http://owncloud.org/ns}calendar-enabled'] === '1',
+            displayname: cal.props['{DAV:}displayname'] || 'Unnamed',
+            color: cal.props['{http://apple.com/ns/ical/}calendar-color'] || '#1d2d44',
+            order: parseInt(cal.props['{http://apple.com/ns/ical/}calendar-order']) || 0,
+            components: {
+              vevent: false,
+              vjournal: false,
+              vtodo: false
+            },
+            writable: cal.props.canWrite,
+            shareable: cal.props.canWrite,
+            sharedWith: {
+              users: [],
+              groups: []
+            },
+            owner: ''
           };
-          console.log(calendar);
-          return this.add(calendar);
+          components = cal.props['{urn:ietf:params:xml:ns:caldav}' + 'supported-calendar-component-set'];
+          for (_i = 0, _len = components.length; _i < _len; _i++) {
+            component = components[_i];
+            name = component.attributes.getNamedItem('name').textContent.toLowerCase();
+            if (calendar.components.hasOwnProperty(name)) {
+              calendar.components[name] = true;
+            }
+          }
+          shares = cal.props['{http://owncloud.org/ns}invite'];
+          if (typeof shares !== 'undefined') {
+            for (_j = 0, _len1 = shares.length; _j < _len1; _j++) {
+              share = shares[_j];
+              href = share.getElementsByTagNameNS('DAV:', 'href');
+              if (href.length === 0) {
+                continue;
+              }
+              href = href[0].textContent;
+              access = share.getElementsByTagNameNS('http://owncloud.org/ns', 'access');
+              if (access.length === 0) {
+                continue;
+              }
+              access = access[0];
+              readWrite = access.getElementsByTagNameNS('http://owncloud.org/ns', 'read-write');
+              readWrite = readWrite.length !== 0;
+              if (href.startsWith('principal:principals/users/')) {
+                this.sharedWith.users.push({
+                  id: href.substr(27),
+                  displayname: href.substr(27),
+                  writable: readWrite
+                });
+              } else if (href.startsWith('principal:principals/groups/')) {
+                this.sharedWith.groups.push({
+                  id: href.substr(28),
+                  displayname: href.substr(28),
+                  writable: readWrite
+                });
+              }
+            }
+          }
+          owner = cal.props['{DAV:}owner'];
+          if (typeof owner !== 'undefined' && owner.length !== 0) {
+            owner = owner[0].textContent.slice(0, -1);
+            if (owner.startsWith('/remote.php/dav/principals/users/')) {
+              this.owner = owner.substr(33);
+            }
+          }
+          this.add(calendar);
+          return calendar;
         };
 
         ListsModel.prototype.add = function(list, clearCache) {
@@ -3436,9 +3720,6 @@ angular.module('Tasks').service('DavClient', function() {
           };
           this.getCollections();
           this.getSettings();
-          this.getLists();
-          this._CalendarService.getAll();
-          this.getTasks('init', 'all', successCallback);
           return this.deferred.promise;
         };
 
@@ -3468,6 +3749,7 @@ angular.module('Tasks').service('DavClient', function() {
             onSuccess: successCallbackWrapper,
             onFailure: failureCallbackWrapper
           };
+          console.log('Test');
           return this._request.get('/apps/tasks/collections', params);
         };
 
@@ -3954,19 +4236,15 @@ angular.module('Tasks').service('DavClient', function() {
 
 (function() {
   angular.module('Tasks').factory('Publisher', [
-    'ListsModel', 'TasksModel', 'CollectionsModel', 'SettingsModel', function(ListsModel, TasksModel, CollectionsModel, SettingsModel) {
+    'CollectionsModel', 'SettingsModel', function(CollectionsModel, SettingsModel) {
       var Publisher;
       Publisher = (function() {
-        function Publisher(_$listsmodel, _$tasksmodel, _$collectionsmodel, _$settingsmodel) {
-          this._$listsmodel = _$listsmodel;
-          this._$tasksmodel = _$tasksmodel;
+        function Publisher(_$collectionsmodel, _$settingsmodel) {
           this._$collectionsmodel = _$collectionsmodel;
           this._$settingsmodel = _$settingsmodel;
           this._subscriptions = {};
           this.subscribeObjectTo(this._$collectionsmodel, 'collections');
           this.subscribeObjectTo(this._$settingsmodel, 'settings');
-          this.subscribeObjectTo(this._$listsmodel, 'lists');
-          this.subscribeObjectTo(this._$tasksmodel, 'tasks');
         }
 
         Publisher.prototype.subscribeObjectTo = function(object, name) {
@@ -3989,7 +4267,7 @@ angular.module('Tasks').service('DavClient', function() {
         return Publisher;
 
       })();
-      return new Publisher(ListsModel, TasksModel, CollectionsModel, SettingsModel);
+      return new Publisher(CollectionsModel, SettingsModel);
     }
   ]);
 

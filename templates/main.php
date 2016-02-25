@@ -22,30 +22,30 @@
                 </div>
             </li>
             <li class="list with-menu handler"
-                id="list_{{ list.id }}"
-                listID="{{list.id}}"
-                ng-repeat="list in lists"
-                ng-class="{active: list.id==route.listID, edit:route.listparameter == 'name' && route.listID == list.id}"
+                id="list_{{ calendar._properties.uri }}"
+                listID="{{calendar._properties.uri}}"
+                ng-repeat="calendar in calendars"
+                ng-class="{active: calendar._properties.uri==route.listID, edit:route.listparameter == 'name' && route.listID == calendar._properties.uri}"
                 dnd-list="draggedTasks"
                 dnd-drop="dropList(event, item, index)"
                 dnd-dragover="dragoverList(event, item, index)">
-                <a href="#/lists/{{ list.id }}" style="border-right: 4px solid {{ list.calendarcolor }};" ng-dblclick="editName(list.id)">
+                <a href="#/lists/{{ calendar._properties.uri }}" style="border-right: 4px solid {{ calendar._properties.calendarcolor }};" ng-dblclick="editName(calendar._properties.uri)">
                     <span class="icon list-list"></span>
-                    <span class="title">{{ list.displayname }}</span>
+                    <span class="title">{{ calendar._properties.displayname }}</span>
                 </a>
                 <div class="app-navigation-entry-utils">
                     <ul>
-                        <li class="app-navigation-entry-utils-counter">{{ getListCount(list.id,'all') | counterFormatter }}</li>
+                        <li class="app-navigation-entry-utils-counter">{{ getListCount(calendar._properties.uri,'all') | counterFormatter }}</li>
                         <li class="app-navigation-entry-utils-menu-button svg"><button></button></li>
                     </ul>
                 </div>
                 <div class="app-navigation-entry-menu">
                     <ul>
-                        <li title="<?php p($l->t('rename')); ?>" ng-click="editName(list.id)" >
+                        <li title="<?php p($l->t('rename')); ?>" ng-click="editName(calendar._properties.uri)" >
                             <img class="icon-rename svg" src="<?php p(image_path('core', 'actions/rename.svg'))?>"/>
                             <span><?php p($l->t('rename')); ?></span>
                         </li>
-                        <li title="<?php p($l->t('delete')); ?>" ng-click="deleteList(list.id)" ng-show="showDelete(list.id)" >
+                        <li title="<?php p($l->t('delete')); ?>" ng-click="deleteList(calendar._properties.uri)" ng-show="showDelete(calendar._properties.uri)" >
                             <img class="icon-delete svg" src="<?php p(image_path('core', 'actions/delete.svg'))?>"/>
                             <span><?php p($l->t('delete')); ?></span>
                         </li>
@@ -53,7 +53,7 @@
                 </div>
                 <div class="app-navigation-entry-edit">
                     <form>
-                        <input ng-model="list.displayname" class="edit" type="text" ng-keydown="checkName($event)" autofocus-on-insert>
+                        <input ng-model="calendar._properties.displayname" class="edit" type="text" ng-keydown="checkName($event)" autofocus-on-insert>
                         <input type="submit" value="" class="action icon-checkmark svg" ng-click="submitNewName()">
                     </form>
                 </div>

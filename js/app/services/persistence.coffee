@@ -36,10 +36,9 @@ angular.module('Tasks').factory 'Persistence',
 
 			@getCollections()
 			@getSettings()
-			@getLists()
-			@_CalendarService.getAll()
-			@getTasks('init', 'all', successCallback)
-
+			# @getLists()
+			# @_CalendarService.getAll()
+			# @getTasks('init', 'all', successCallback)
 			@deferred.promise
 
 		getCollections: (onSuccess, showLoading=true) ->
@@ -61,6 +60,7 @@ angular.module('Tasks').factory 'Persistence',
 				onSuccess: successCallbackWrapper
 				onFailure: failureCallbackWrapper
 
+			console.log('Test')
 			@_request.get '/apps/tasks/collections', params
 
 		getSettings: (onSuccess, showLoading=true) ->

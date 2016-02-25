@@ -3,7 +3,7 @@
 ownCloud - Tasks
 
 @author Raimund Schlüßler
-@copyright 2013
+@copyright 2016
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -29,14 +29,72 @@ angular.module('Tasks').factory 'ListsModel',
 			@_tmpIdCache = {}
 			super()
 
-		insert: (url, props) ->
+		insert: (cal) ->
 			calendar =
-				id:	'1'
-				displayname: props['{DAV:}displayname'] || 'Unnamed'
-				color: props['{http://apple.com/ns/ical/}calendar-color'] || '#1d2d44'
-				order: parseInt(props['{http://apple.com/ns/ical/}calendar-order']) || 0
-			console.log(calendar)
+				id: @size()
+				url: cal.url
+				enabled: cal.props['{http://owncloud.org/ns}calendar-enabled']=='1'
+				displayname: cal.props['{DAV:}displayname'] || 'Unnamed'
+				color: cal.props['{http://apple.com/ns/ical/}calendar-color'] || '#1d2d44'
+				order: parseInt(
+					cal.props['{http://apple.com/ns/ical/}calendar-order'])	|| 0
+				components:
+					vevent: false
+					vjournal: false
+					vtodo: false
+				writable: cal.props.canWrite
+				shareable: cal.props.canWrite
+				sharedWith:
+					users: []
+					groups: []
+				owner: ''
+
+			components = cal.props['{urn:ietf:params:xml:ns:caldav}'+
+			'supported-calendar-component-set']
+			for component in components
+				name = component.attributes.getNamedItem('name').textContent.toLowerCase()
+				if (calendar.components.hasOwnProperty(name))
+					calendar.components[name] = true
+
+
+			shares = cal.props['{http://owncloud.org/ns}invite']
+			if (typeof shares != 'undefined')
+				for share in shares
+					href = share.getElementsByTagNameNS('DAV:', 'href')
+					if (href.length == 0)
+						continue
+					href = href[0].textContent
+
+					access = share.getElementsByTagNameNS('http://owncloud.org/ns', 'access')
+					if (access.length == 0)
+						continue
+					access = access[0]
+
+					readWrite = access
+						.getElementsByTagNameNS('http://owncloud.org/ns', 'read-write')
+					readWrite = readWrite.length != 0
+
+					if (href.startsWith('principal:principals/users/'))
+						this.sharedWith.users.push(
+							id: href.substr(27)
+							displayname: href.substr(27)
+							writable: readWrite
+						)
+					else if (href.startsWith('principal:principals/groups/'))
+						this.sharedWith.groups.push(
+							id: href.substr(28)
+							displayname: href.substr(28)
+							writable: readWrite
+						)
+
+			owner = cal.props['{DAV:}owner']
+			if (typeof owner != 'undefined' && owner.length != 0)
+				owner = owner[0].textContent.slice(0, -1)
+				if (owner.startsWith('/remote.php/dav/principals/users/'))
+					this.owner = owner.substr(33)
+
 			@add(calendar)
+			return calendar
 
 		add: (list, clearCache=true) ->
 

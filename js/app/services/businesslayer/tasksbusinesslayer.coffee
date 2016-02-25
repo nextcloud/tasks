@@ -47,6 +47,9 @@ angular.module('Tasks').factory 'TasksBusinessLayer',
 					onSuccess(response.data)
 			@_persistence.addTask(task, success)
 
+		getAll: (calendar) ->
+			# console.log(calendar)
+
 		getTask: (taskID, onSuccess=null, onFailure=null) ->
 			onSuccess or= ->
 
