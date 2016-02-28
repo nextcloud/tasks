@@ -55,23 +55,23 @@ SettingsBusinessLayer, SearchBusinessLayer) ->
 						switch _$scope.route.collectionID
 							when 'starred'
 								return t('tasks','Add an important item in "%s"...')
-								.replace('%s',calendar._properties.displayname)
+								.replace('%s',calendar.displayname)
 							when 'today'
 								return t('tasks','Add an item due today in "%s"...')
-								.replace('%s',calendar._properties.displayname)
+								.replace('%s',calendar.displayname)
 							when 'all'
 								return t('tasks','Add an item in "%s"...')
-								.replace('%s',calendar._properties.displayname)
+								.replace('%s',calendar.displayname)
 							when 'current'
 								return t('tasks','Add a current item in "%s"...')
-								.replace('%s',calendar._properties.displayname)
+								.replace('%s',calendar.displayname)
 							when 'completed', 'week'
 								return null
 					else
 						if angular.isDefined(_$listsmodel.getByUri(_$scope.route.calendarID))
 							return t('tasks','Add an item in "%s"...')
 							.replace('%s',
-							_$listsmodel.getByUri(_$scope.route.calendarID)._properties.displayname)
+							_$listsmodel.getByUri(_$scope.route.calendarID).displayname)
 
 			@_$scope.getSubAddString = (taskname) ->
 				return t('tasks','Add a subtask to "%s"...')

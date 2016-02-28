@@ -46,11 +46,11 @@ CalendarService) ->
 			@_$scope.deleteList = (calendar) ->
 				really = confirm(t('tasks',
 				'This will delete the Calendar "%s" and all of its entries.')
-				.replace('%s',calendar._properties.displayname))
+				.replace('%s',calendar.displayname))
 				if really
 					_$listsbusinesslayer.delete(calendar).then(()->
 						$location.path('/calendars/'+
-						_$listsmodel.getStandardList()._properties.uri)
+						_$listsmodel.getStandardList().uri)
 						$scope.$apply()
 					)
 
@@ -82,7 +82,7 @@ CalendarService) ->
 						}
 						_$listsbusinesslayer.add(_$scope.status.newListName)
 							.then((calendar) ->
-								$location.path('/calendars/'+calendar._properties.uri)
+								$location.path('/calendars/'+calendar.uri)
 								$scope.$apply()
 							)
 

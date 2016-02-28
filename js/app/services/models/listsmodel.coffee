@@ -99,20 +99,20 @@ angular.module('Tasks').factory 'ListsModel',
 			return calendar
 
 		add: (calendar, clearCache=true) ->
-			updateByUri = angular.isDefined(calendar._properties.uri) and
-			angular.isDefined(@getByUri(calendar._properties.uri))
+			updateByUri = angular.isDefined(calendar.uri) and
+			angular.isDefined(@getByUri(calendar.uri))
 
 			if updateByUri
 				@update(calendar, clearCache)
 			else
-				if angular.isDefined(calendar._properties.uri)
+				if angular.isDefined(calendar.uri)
 					if (clearCache)
 						@_invalidateCache()
-					if (angular.isDefined(@_dataMap[calendar._properties.uri]))
+					if (angular.isDefined(@_dataMap[calendar.uri]))
 						# return @update(data, clearCache)
 					else
 						@_data.push(calendar)
-						return @_dataMap[calendar._properties.uri] = calendar
+						return @_dataMap[calendar.uri] = calendar
 
 		getByUri: (uri) ->
 			return @_dataMap[uri]
@@ -133,8 +133,8 @@ angular.module('Tasks').factory 'ListsModel',
 			for entry, counter in @_data
 				if entry == calendar
 					@_data.splice(counter, 1)
-					data = @_dataMap[calendar._properties.uri]
-					delete @_dataMap[calendar._properties.uri]
+					data = @_dataMap[calendar.uri]
+					delete @_dataMap[calendar.uri]
 					if clearCache
 						@_invalidateCache()
 					return data

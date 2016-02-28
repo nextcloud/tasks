@@ -750,10 +750,10 @@
           this._$scope.status.listNameBackup = '';
           this._$scope.deleteList = function(calendar) {
             var really;
-            really = confirm(t('tasks', 'This will delete the Calendar "%s" and all of its entries.').replace('%s', calendar._properties.displayname));
+            really = confirm(t('tasks', 'This will delete the Calendar "%s" and all of its entries.').replace('%s', calendar.displayname));
             if (really) {
               return _$listsbusinesslayer["delete"](calendar).then(function() {
-                $location.path('/calendars/' + _$listsmodel.getStandardList()._properties.uri);
+                $location.path('/calendars/' + _$listsmodel.getStandardList().uri);
                 return $scope.$apply();
               });
             }
@@ -786,7 +786,7 @@
                   notLoaded: 0
                 };
                 _$listsbusinesslayer.add(_$scope.status.newListName).then(function(calendar) {
-                  $location.path('/calendars/' + calendar._properties.uri);
+                  $location.path('/calendars/' + calendar.uri);
                   return $scope.$apply();
                 });
                 return _$scope.status.newListName = '';
@@ -1015,20 +1015,20 @@
               if (angular.isDefined(_$scope.route.collectionID)) {
                 switch (_$scope.route.collectionID) {
                   case 'starred':
-                    return t('tasks', 'Add an important item in "%s"...').replace('%s', calendar._properties.displayname);
+                    return t('tasks', 'Add an important item in "%s"...').replace('%s', calendar.displayname);
                   case 'today':
-                    return t('tasks', 'Add an item due today in "%s"...').replace('%s', calendar._properties.displayname);
+                    return t('tasks', 'Add an item due today in "%s"...').replace('%s', calendar.displayname);
                   case 'all':
-                    return t('tasks', 'Add an item in "%s"...').replace('%s', calendar._properties.displayname);
+                    return t('tasks', 'Add an item in "%s"...').replace('%s', calendar.displayname);
                   case 'current':
-                    return t('tasks', 'Add a current item in "%s"...').replace('%s', calendar._properties.displayname);
+                    return t('tasks', 'Add a current item in "%s"...').replace('%s', calendar.displayname);
                   case 'completed':
                   case 'week':
                     return null;
                 }
               } else {
                 if (angular.isDefined(_$listsmodel.getByUri(_$scope.route.calendarID))) {
-                  return t('tasks', 'Add an item in "%s"...').replace('%s', _$listsmodel.getByUri(_$scope.route.calendarID)._properties.displayname);
+                  return t('tasks', 'Add an item in "%s"...').replace('%s', _$listsmodel.getByUri(_$scope.route.calendarID).displayname);
                 }
               }
             }
@@ -3030,19 +3030,19 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
           if (clearCache == null) {
             clearCache = true;
           }
-          updateByUri = angular.isDefined(calendar._properties.uri) && angular.isDefined(this.getByUri(calendar._properties.uri));
+          updateByUri = angular.isDefined(calendar.uri) && angular.isDefined(this.getByUri(calendar.uri));
           if (updateByUri) {
             return this.update(calendar, clearCache);
           } else {
-            if (angular.isDefined(calendar._properties.uri)) {
+            if (angular.isDefined(calendar.uri)) {
               if (clearCache) {
                 this._invalidateCache();
               }
-              if (angular.isDefined(this._dataMap[calendar._properties.uri])) {
+              if (angular.isDefined(this._dataMap[calendar.uri])) {
 
               } else {
                 this._data.push(calendar);
-                return this._dataMap[calendar._properties.uri] = calendar;
+                return this._dataMap[calendar.uri] = calendar;
               }
             }
           }
@@ -3076,8 +3076,8 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
             entry = _ref[counter];
             if (entry === calendar) {
               this._data.splice(counter, 1);
-              data = this._dataMap[calendar._properties.uri];
-              delete this._dataMap[calendar._properties.uri];
+              data = this._dataMap[calendar.uri];
+              delete this._dataMap[calendar.uri];
               if (clearCache) {
                 this._invalidateCache();
               }
