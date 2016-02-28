@@ -2772,6 +2772,9 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 		get enabled() {
 			return this._properties.enabled;
 		},
+		get uri() {
+			return this._properties.uri;
+		},
 		get components() {
 			return this._properties.components;
 		},
