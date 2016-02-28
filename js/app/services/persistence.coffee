@@ -60,7 +60,6 @@ angular.module('Tasks').factory 'Persistence',
 				onSuccess: successCallbackWrapper
 				onFailure: failureCallbackWrapper
 
-			console.log('Test')
 			@_request.get '/apps/tasks/collections', params
 
 		getSettings: (onSuccess, showLoading=true) ->

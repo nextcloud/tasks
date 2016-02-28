@@ -26,8 +26,10 @@ angular.module('Tasks').factory 'ListsModel',
 	class ListsModel extends _Model
 
 		constructor: (@_$tasksmodel) ->
-			@_tmpIdCache = {}
-			super()
+			@_tmpUriCache = {}
+			@_data = []
+			@_dataMap = {}
+			@_filterCache = {}
 
 		insert: (cal) ->
 			calendar =
@@ -96,26 +98,24 @@ angular.module('Tasks').factory 'ListsModel',
 			@add(calendar)
 			return calendar
 
-		add: (list, clearCache=true) ->
+		add: (calendar, clearCache=true) ->
+			updateByUri = angular.isDefined(calendar._properties.uri) and
+			angular.isDefined(@getByUri(calendar._properties.uri))
 
-			tmplist = @_tmpIdCache[list.tmpID]
-
-			updateById = angular.isDefined(list.id) and
-			angular.isDefined(@getById(list.id))
-
-			updateByTmpId = angular.isDefined(tmplist) and
-			angular.isUndefined(tmplist.id)
-
-			if updateById or updateByTmpId
-				@update(list, clearCache)
+			if updateByUri
+				@update(calendar, clearCache)
 			else
-				if angular.isDefined(list.id)
-					super(list, clearCache)
-				else
-					@_tmpIdCache[list.tmpID] = list
-					@_data.push(list)
-					if clearCache
+				if angular.isDefined(calendar._properties.uri)
+					if (clearCache)
 						@_invalidateCache()
+					if (angular.isDefined(@_dataMap[calendar._properties.uri]))
+						# return @update(data, clearCache)
+					else
+						@_data.push(calendar)
+						return @_dataMap[calendar._properties.uri] = calendar
+
+		getByUri: (uri) ->
+			return @_dataMap[uri]
 
 		update: (list, clearCache=true) ->
 			tmplist = @_tmpIdCache[list.tmpID]
@@ -129,8 +129,15 @@ angular.module('Tasks').factory 'ListsModel',
 			list.void = false
 			super(list, clearCache)
 
-		removeById: (listID) ->
-			super(listID)
+		delete: (calendar, clearCache=true) ->
+			for entry, counter in @_data
+				if entry == calendar
+					@_data.splice(counter, 1)
+					data = @_dataMap[calendar._properties.uri]
+					delete @_dataMap[calendar._properties.uri]
+					if clearCache
+						@_invalidateCache()
+					return data
 
 		voidAll: () ->
 			lists = @getAll()
@@ -148,8 +155,8 @@ angular.module('Tasks').factory 'ListsModel',
 
 		getStandardList: () ->
 			if @size()
-				lists = @getAll()
-				return lists[0].id
+				calendars = @getAll()
+				return calendars[0]
 
 		checkName: (listName, listID=undefined) ->
 			lists = @getAll()

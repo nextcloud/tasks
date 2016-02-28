@@ -5,11 +5,11 @@
                 class="collection"
                 collectionID="{{collection.id}}"
                 ng-repeat="collection in collections"
-                ng-class="{'animate-up': hideCollection(collection.id), active: collection.id==route.listID}"
+                ng-class="{'animate-up': hideCollection(collection.id), active: collection.id==route.collectionID}"
                 dnd-list="draggedTasks"
                 dnd-drop="dropCollection(event, item, index)"
                 dnd-dragover="dragoverCollection(event, item, index)">
-                <a href="#/lists/{{ collection.id }}">
+                <a href="#/collections/{{ collection.id }}">
                     <span class="icon collection-{{ collection.id }}">
                         <text ng-show="collection.id=='today'"><?php p($_['DOM']); ?></text>
                     </span>
@@ -23,13 +23,13 @@
             </li>
             <li class="list with-menu handler"
                 id="list_{{ calendar._properties.uri }}"
-                listID="{{calendar._properties.uri}}"
+                calendarID="{{calendar._properties.uri}}"
                 ng-repeat="calendar in calendars"
-                ng-class="{active: calendar._properties.uri==route.listID, edit:route.listparameter == 'name' && route.listID == calendar._properties.uri}"
+                ng-class="{active: calendar._properties.uri==route.calendarID, edit:route.listparameter == 'name' && route.calendarID == calendar._properties.uri}"
                 dnd-list="draggedTasks"
                 dnd-drop="dropList(event, item, index)"
                 dnd-dragover="dragoverList(event, item, index)">
-                <a href="#/lists/{{ calendar._properties.uri }}" style="border-right: 4px solid {{ calendar._properties.calendarcolor }};" ng-dblclick="editName(calendar._properties.uri)">
+                <a href="#/calendars/{{ calendar._properties.uri }}" style="border-right: 4px solid {{ calendar._properties.calendarcolor }};" ng-dblclick="editName(calendar._properties.uri)">
                     <span class="icon list-list"></span>
                     <span class="title">{{ calendar._properties.displayname }}</span>
                 </a>
@@ -45,7 +45,7 @@
                             <img class="icon-rename svg" src="<?php p(image_path('core', 'actions/rename.svg'))?>"/>
                             <span><?php p($l->t('rename')); ?></span>
                         </li>
-                        <li title="<?php p($l->t('delete')); ?>" ng-click="deleteList(calendar._properties.uri)" ng-show="showDelete(calendar._properties.uri)" >
+                        <li title="<?php p($l->t('delete')); ?>" ng-click="deleteList(calendar)" ng-show="showDelete(calendar._properties.uri)" >
                             <img class="icon-delete svg" src="<?php p(image_path('core', 'actions/delete.svg'))?>"/>
                             <span><?php p($l->t('delete')); ?></span>
                         </li>

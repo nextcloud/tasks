@@ -3,7 +3,7 @@
 ownCloud - Tasks
 
 @author Raimund Schlüßler
-@copyright 2013
+@copyright 2016
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -22,44 +22,40 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 angular.module('Tasks').controller 'ListController',
 ['$scope', '$window', '$routeParams', 'ListsModel',
 'TasksBusinessLayer', 'CollectionsModel', 'ListsBusinessLayer',
-'$location', 'SearchBusinessLayer',
+'$location', 'SearchBusinessLayer', 'CalendarService'
 ($scope, $window, $routeParams, ListsModel, TasksBusinessLayer,
-CollectionsModel, ListsBusinessLayer, $location, SearchBusinessLayer) ->
+CollectionsModel, ListsBusinessLayer, $location, SearchBusinessLayer,
+CalendarService) ->
 
 	class ListController
 
 		constructor: (@_$scope,@_$window,@_$routeParams,
 		@_$listsmodel, @_$tasksbusinesslayer, @_$collectionsmodel,
-		@_$listsbusinesslayer, @$location, @_$searchbusinesslayer) ->
-
+		@_$listsbusinesslayer, @$location, @_$searchbusinesslayer,
+		@_$calendarservice) ->
 
 			@_$scope.collections = @_$collectionsmodel.getAll()
-			console.log(@_$scope.collections)
+			@_$scope.calendars = @_$listsmodel.getAll()
 
-			# @_$scope.lists = @_$listsmodel.getAll()
 			@_$scope.draggedTasks = []
 
 			@_$scope.TasksBusinessLayer = @_$tasksbusinesslayer
 
 			@_$scope.status.listNameBackup = ''
 
-			@_$listsbusinesslayer.init().then((calendars) ->
-				$scope.calendars = calendars
-				console.log($scope.calendars)
-				# $scope.$apply()
-				)
-
-
-			@_$scope.deleteList = (listID) ->
+			@_$scope.deleteList = (calendar) ->
 				really = confirm(t('tasks',
 				'This will delete the Calendar "%s" and all of its entries.')
-				.replace('%s',_$listsmodel.getById(_$scope.route.listID).displayname))
+				.replace('%s',calendar._properties.displayname))
 				if really
-					_$listsbusinesslayer.deleteList listID
-					$location.path('/lists/'+_$listsmodel.getStandardList())
+					_$listsbusinesslayer.delete(calendar).then(()->
+						$location.path('/calendars/'+
+						_$listsmodel.getStandardList()._properties.uri)
+						$scope.$apply()
+					)
 
 			@_$scope.startAddingList = () ->
-				$location.path('/lists/'+_$scope.route.listID)
+				# $location.path('/calendars/'+_$scope.route.calendarID)
 				_$scope.status.addingList = true
 
 			@_$scope.endAddingList = () ->
@@ -84,9 +80,9 @@ CollectionsModel, ListsBusinessLayer, $location, SearchBusinessLayer) ->
 							displayname:		_$scope.status.newListName
 							notLoaded:	0
 						}
-						_$listsbusinesslayer.addList(_$scope.status.newListName)
+						_$listsbusinesslayer.add(_$scope.status.newListName)
 							.then((calendar) ->
-								$scope.calendars.push(calendar)
+								$location.path('/calendars/'+calendar._properties.uri)
 								$scope.$apply()
 							)
 
@@ -206,5 +202,6 @@ CollectionsModel, ListsBusinessLayer, $location, SearchBusinessLayer) ->
 
 	return new ListController($scope, $window, $routeParams,
 		ListsModel, TasksBusinessLayer, CollectionsModel,
-		ListsBusinessLayer, $location, SearchBusinessLayer)
+		ListsBusinessLayer, $location, SearchBusinessLayer,
+		CalendarService)
 ]

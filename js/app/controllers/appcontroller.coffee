@@ -43,6 +43,10 @@ $routeParams, Loading, SettingsModel, Persistence) ->
 
 			@_$scope.settingsmodel = @_$settingsmodel
 
+			@_$listsbusinesslayer.init().then(()->
+				$scope.$apply()
+			)
+
 			@_persistence.init()
 
 			# successCallback = =>
@@ -60,7 +64,12 @@ $routeParams, Loading, SettingsModel, Persistence) ->
 			@_$scope.closeAll = ($event) ->
 				if $($event.target).closest('.close-all').length ||
 				$($event.currentTarget).is($($event.target).closest('.handler'))
-					_$location.path('/lists/'+_$scope.route.listID)
+					if not angular.isUndefined(_$scope.route.calendarID)
+						_$location.path('/calendars/'+_$scope.route.calendarID)
+					else if not angular.isUndefined(_$scope.route.collectionID)
+						_$location.path('/collections/'+_$scope.route.collectionID)
+					else
+						_$location.path('/collections/all')
 					_$scope.status.addingList = false
 					_$scope.status.focusTaskInput = false
 					_$scope.status.newListName = ""

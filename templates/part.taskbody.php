@@ -46,13 +46,13 @@
                     ng-keydown="checkTaskInput($event)"/>
             </form>
         </li>
-        <li taskID="{{ task.id }}"
+<!--         <li taskID="{{ task.id }}"
             class="task-item ui-draggable handler subtask"
             ng-repeat="task in getSubTasks(filtered,task) | orderBy:'1*id':true | orderBy:'priority':true | orderBy:'completed':false"
             ng-click="openDetails(task.id,$event)"
             ng-class="{done: task.completed}"
             ng-include="'part.taskbody'"
             dnd-draggable="task"
-            dnd-effect-allowed="move"></li>
+            dnd-effect-allowed="move"></li> -->
     </ol>
 </div>

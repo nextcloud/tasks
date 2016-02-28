@@ -20,9 +20,7 @@
         taskUpdateInterval: 1000 * 600
       });
       $httpProvider.defaults.headers.common['requesttoken'] = oc_requesttoken;
-      $routeProvider.when('/lists/:listID', {}).when('/lists/:listID/edit/:listparameter', {}).when('/lists/:listID/tasks/:taskID', {}).when('/lists/:listID/tasks/:taskID/settings', {}).when('/lists/:listID/tasks/:taskID/edit/:parameter', {}).when('/search/:searchString', {}).when('/search/:searchString/tasks/:taskID', {}).when('/search/:searchString/tasks/:taskID/edit/:parameter', {}).otherwise({
-        redirectTo: '/lists/all'
-      });
+      $routeProvider.when('/calendars/:calendarID', {}).when('/calendars/:calendarID/edit/:listparameter', {}).when('/calendars/:calendarID/tasks/:taskID', {}).when('/calendars/:calendarID/tasks/:taskID/settings', {}).when('/calendars/:calendarID/tasks/:taskID/edit/:parameter', {}).when('/collections/:collectionID', {}).when('/search/:searchString', {}).when('/search/:searchString/tasks/:taskID', {}).when('/search/:searchString/tasks/:taskID/edit/:parameter', {});
     }
   ]);
 
@@ -303,10 +301,19 @@
           this._$scope.route = this._$routeparams;
           this._$scope.status.newListName = "";
           this._$scope.settingsmodel = this._$settingsmodel;
+          this._$listsbusinesslayer.init().then(function() {
+            return $scope.$apply();
+          });
           this._persistence.init();
           this._$scope.closeAll = function($event) {
             if ($($event.target).closest('.close-all').length || $($event.currentTarget).is($($event.target).closest('.handler'))) {
-              _$location.path('/lists/' + _$scope.route.listID);
+              if (!angular.isUndefined(_$scope.route.calendarID)) {
+                _$location.path('/calendars/' + _$scope.route.calendarID);
+              } else if (!angular.isUndefined(_$scope.route.collectionID)) {
+                _$location.path('/collections/' + _$scope.route.collectionID);
+              } else {
+                _$location.path('/collections/all');
+              }
               _$scope.status.addingList = false;
               _$scope.status.focusTaskInput = false;
               _$scope.status.newListName = "";
@@ -722,10 +729,10 @@
 
 (function() {
   angular.module('Tasks').controller('ListController', [
-    '$scope', '$window', '$routeParams', 'ListsModel', 'TasksBusinessLayer', 'CollectionsModel', 'ListsBusinessLayer', '$location', 'SearchBusinessLayer', function($scope, $window, $routeParams, ListsModel, TasksBusinessLayer, CollectionsModel, ListsBusinessLayer, $location, SearchBusinessLayer) {
+    '$scope', '$window', '$routeParams', 'ListsModel', 'TasksBusinessLayer', 'CollectionsModel', 'ListsBusinessLayer', '$location', 'SearchBusinessLayer', 'CalendarService', function($scope, $window, $routeParams, ListsModel, TasksBusinessLayer, CollectionsModel, ListsBusinessLayer, $location, SearchBusinessLayer, CalendarService) {
       var ListController;
       ListController = (function() {
-        function ListController(_$scope, _$window, _$routeParams, _$listsmodel, _$tasksbusinesslayer, _$collectionsmodel, _$listsbusinesslayer, $location, _$searchbusinesslayer) {
+        function ListController(_$scope, _$window, _$routeParams, _$listsmodel, _$tasksbusinesslayer, _$collectionsmodel, _$listsbusinesslayer, $location, _$searchbusinesslayer, _$calendarservice) {
           this._$scope = _$scope;
           this._$window = _$window;
           this._$routeParams = _$routeParams;
@@ -735,25 +742,23 @@
           this._$listsbusinesslayer = _$listsbusinesslayer;
           this.$location = $location;
           this._$searchbusinesslayer = _$searchbusinesslayer;
+          this._$calendarservice = _$calendarservice;
           this._$scope.collections = this._$collectionsmodel.getAll();
-          console.log(this._$scope.collections);
+          this._$scope.calendars = this._$listsmodel.getAll();
           this._$scope.draggedTasks = [];
           this._$scope.TasksBusinessLayer = this._$tasksbusinesslayer;
           this._$scope.status.listNameBackup = '';
-          this._$listsbusinesslayer.init().then(function(calendars) {
-            $scope.calendars = calendars;
-            return console.log($scope.calendars);
-          });
-          this._$scope.deleteList = function(listID) {
+          this._$scope.deleteList = function(calendar) {
             var really;
-            really = confirm(t('tasks', 'This will delete the Calendar "%s" and all of its entries.').replace('%s', _$listsmodel.getById(_$scope.route.listID).displayname));
+            really = confirm(t('tasks', 'This will delete the Calendar "%s" and all of its entries.').replace('%s', calendar._properties.displayname));
             if (really) {
-              _$listsbusinesslayer.deleteList(listID);
-              return $location.path('/lists/' + _$listsmodel.getStandardList());
+              return _$listsbusinesslayer["delete"](calendar).then(function() {
+                $location.path('/calendars/' + _$listsmodel.getStandardList()._properties.uri);
+                return $scope.$apply();
+              });
             }
           };
           this._$scope.startAddingList = function() {
-            $location.path('/lists/' + _$scope.route.listID);
             return _$scope.status.addingList = true;
           };
           this._$scope.endAddingList = function() {
@@ -780,8 +785,8 @@
                   displayname: _$scope.status.newListName,
                   notLoaded: 0
                 };
-                _$listsbusinesslayer.addList(_$scope.status.newListName).then(function(calendar) {
-                  $scope.calendars.push(calendar);
+                _$listsbusinesslayer.add(_$scope.status.newListName).then(function(calendar) {
+                  $location.path('/calendars/' + calendar._properties.uri);
                   return $scope.$apply();
                 });
                 return _$scope.status.newListName = '';
@@ -899,7 +904,7 @@
         return ListController;
 
       })();
-      return new ListController($scope, $window, $routeParams, ListsModel, TasksBusinessLayer, CollectionsModel, ListsBusinessLayer, $location, SearchBusinessLayer);
+      return new ListController($scope, $window, $routeParams, ListsModel, TasksBusinessLayer, CollectionsModel, ListsBusinessLayer, $location, SearchBusinessLayer, CalendarService);
     }
   ]);
 
@@ -1005,24 +1010,26 @@
           this._$scope.TasksModel = this._$tasksmodel;
           this._$scope.TasksBusinessLayer = this._tasksbusinesslayer;
           this._$scope.getAddString = function() {
-            var list;
-            if (angular.isDefined(list = _$listsmodel.getById(_$listsmodel.getStandardList()))) {
-              switch (_$scope.route.listID) {
-                case 'starred':
-                  return t('tasks', 'Add an important item in "%s"...').replace('%s', list.displayname);
-                case 'today':
-                  return t('tasks', 'Add an item due today in "%s"...').replace('%s', list.displayname);
-                case 'all':
-                  return t('tasks', 'Add an item in "%s"...').replace('%s', list.displayname);
-                case 'current':
-                  return t('tasks', 'Add a current item in "%s"...').replace('%s', list.displayname);
-                case 'completed':
-                case 'week':
-                  return null;
-                default:
-                  if (angular.isDefined(_$listsmodel.getById(_$scope.route.listID))) {
-                    return t('tasks', 'Add an item in "%s"...').replace('%s', _$listsmodel.getById(_$scope.route.listID).displayname);
-                  }
+            var calendar;
+            if (angular.isDefined(calendar = _$listsmodel.getStandardList())) {
+              if (angular.isDefined(_$scope.route.collectionID)) {
+                switch (_$scope.route.collectionID) {
+                  case 'starred':
+                    return t('tasks', 'Add an important item in "%s"...').replace('%s', calendar._properties.displayname);
+                  case 'today':
+                    return t('tasks', 'Add an item due today in "%s"...').replace('%s', calendar._properties.displayname);
+                  case 'all':
+                    return t('tasks', 'Add an item in "%s"...').replace('%s', calendar._properties.displayname);
+                  case 'current':
+                    return t('tasks', 'Add a current item in "%s"...').replace('%s', calendar._properties.displayname);
+                  case 'completed':
+                  case 'week':
+                    return null;
+                }
+              } else {
+                if (angular.isDefined(_$listsmodel.getByUri(_$scope.route.calendarID))) {
+                  return t('tasks', 'Add an item in "%s"...').replace('%s', _$listsmodel.getByUri(_$scope.route.calendarID)._properties.displayname);
+                }
               }
             }
           };
@@ -1296,37 +1303,37 @@
 
         ListsBusinessLayer.prototype.init = function() {
           return this._$calendarservice.getAll().then(function(calendars) {
-            return calendars;
+            var calendar, _i, _len, _results;
+            _results = [];
+            for (_i = 0, _len = calendars.length; _i < _len; _i++) {
+              calendar = calendars[_i];
+              _results.push(ListsModel.add(calendar));
+            }
+            return _results;
           });
         };
 
-        ListsBusinessLayer.prototype.addList = function(list, onSuccess, onFailure) {
+        ListsBusinessLayer.prototype.add = function(calendar, onSuccess, onFailure) {
           if (onSuccess == null) {
             onSuccess = null;
           }
           if (onFailure == null) {
             onFailure = null;
           }
-          return this._$calendarservice.create(list, '#FF7A66', ['vtodo']);
+          return this._$calendarservice.create(calendar, '#FF7A66', ['vtodo']).then(function(calendar) {
+            ListsModel.add(calendar);
+            return calendar;
+          });
         };
 
-        ListsBusinessLayer.prototype.deleteList = function(listID) {
-          this._$listsmodel.removeById(listID);
-          return this._persistence.deleteList(listID);
+        ListsBusinessLayer.prototype["delete"] = function(calendar) {
+          return this._$calendarservice["delete"](calendar).then(function() {
+            return ListsModel["delete"](calendar);
+          });
         };
 
-        ListsBusinessLayer.prototype.setListName = function(listID) {
+        ListsBusinessLayer.prototype.rename = function(calendar) {
           return this._persistence.setListName(this._$listsmodel.getById(listID));
-        };
-
-        ListsBusinessLayer.prototype.updateModel = function() {
-          var success,
-            _this = this;
-          this._$listsmodel.voidAll();
-          success = function() {
-            return _this._$listsmodel.removeVoid();
-          };
-          return this._persistence.getLists(success, true);
         };
 
         return ListsBusinessLayer;
@@ -2083,7 +2090,7 @@ angular.module('Tasks').service('CalendarService', ['DavClient', 'Calendar', fun
 			});
 		}
 
-		return DavClient.propFind(DavClient.buildUrl(this._CALENDAR_HOME), this._PROPERTIES, 1).then(function(response) {
+		var prom = DavClient.propFind(DavClient.buildUrl(this._CALENDAR_HOME), this._PROPERTIES, 1).then(function(response) {
 			var calendars = [];
 
 			if (!DavClient.wasRequestSuccessful(response.status)) {
@@ -2125,9 +2132,13 @@ angular.module('Tasks').service('CalendarService', ['DavClient', 'Calendar', fun
 				var calendar = new Calendar(body.href, body.propStat[0].properties, uri);
 				calendars.push(calendar);
 			}
+			// console.log(prom);
+			// prom.resolve();
+			// console.log(prom);
 
 			return calendars;
 		});
+		return prom;
 	};
 
 	this.get = function(url) {
@@ -2652,7 +2663,7 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 				url: url,
 				uri: uri,
 				enabled: props['{http://owncloud.org/ns}calendar-enabled'] === '1',
-				displayname: props['{DAV:}displayname'] || 'Unnamed',
+				displayname: props['{DAV:}displayname'] || t('tasks','Unnamed'),
 				color: props['{http://apple.com/ns/ical/}calendar-color'] || '#1d2d44',
 				order: parseInt(props['{http://apple.com/ns/ical/}calendar-order']) || 0,
 				components: {
@@ -2936,8 +2947,10 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 
         function ListsModel(_$tasksmodel) {
           this._$tasksmodel = _$tasksmodel;
-          this._tmpIdCache = {};
-          ListsModel.__super__.constructor.call(this);
+          this._tmpUriCache = {};
+          this._data = [];
+          this._dataMap = {};
+          this._filterCache = {};
         }
 
         ListsModel.prototype.insert = function(cal) {
@@ -3012,27 +3025,31 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
           return calendar;
         };
 
-        ListsModel.prototype.add = function(list, clearCache) {
-          var tmplist, updateById, updateByTmpId;
+        ListsModel.prototype.add = function(calendar, clearCache) {
+          var updateByUri;
           if (clearCache == null) {
             clearCache = true;
           }
-          tmplist = this._tmpIdCache[list.tmpID];
-          updateById = angular.isDefined(list.id) && angular.isDefined(this.getById(list.id));
-          updateByTmpId = angular.isDefined(tmplist) && angular.isUndefined(tmplist.id);
-          if (updateById || updateByTmpId) {
-            return this.update(list, clearCache);
+          updateByUri = angular.isDefined(calendar._properties.uri) && angular.isDefined(this.getByUri(calendar._properties.uri));
+          if (updateByUri) {
+            return this.update(calendar, clearCache);
           } else {
-            if (angular.isDefined(list.id)) {
-              return ListsModel.__super__.add.call(this, list, clearCache);
-            } else {
-              this._tmpIdCache[list.tmpID] = list;
-              this._data.push(list);
+            if (angular.isDefined(calendar._properties.uri)) {
               if (clearCache) {
-                return this._invalidateCache();
+                this._invalidateCache();
+              }
+              if (angular.isDefined(this._dataMap[calendar._properties.uri])) {
+
+              } else {
+                this._data.push(calendar);
+                return this._dataMap[calendar._properties.uri] = calendar;
               }
             }
           }
+        };
+
+        ListsModel.prototype.getByUri = function(uri) {
+          return this._dataMap[uri];
         };
 
         ListsModel.prototype.update = function(list, clearCache) {
@@ -3049,8 +3066,24 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
           return ListsModel.__super__.update.call(this, list, clearCache);
         };
 
-        ListsModel.prototype.removeById = function(listID) {
-          return ListsModel.__super__.removeById.call(this, listID);
+        ListsModel.prototype["delete"] = function(calendar, clearCache) {
+          var counter, data, entry, _i, _len, _ref;
+          if (clearCache == null) {
+            clearCache = true;
+          }
+          _ref = this._data;
+          for (counter = _i = 0, _len = _ref.length; _i < _len; counter = ++_i) {
+            entry = _ref[counter];
+            if (entry === calendar) {
+              this._data.splice(counter, 1);
+              data = this._dataMap[calendar._properties.uri];
+              delete this._dataMap[calendar._properties.uri];
+              if (clearCache) {
+                this._invalidateCache();
+              }
+              return data;
+            }
+          }
         };
 
         ListsModel.prototype.voidAll = function() {
@@ -3083,10 +3116,10 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
         };
 
         ListsModel.prototype.getStandardList = function() {
-          var lists;
+          var calendars;
           if (this.size()) {
-            lists = this.getAll();
-            return lists[0].id;
+            calendars = this.getAll();
+            return calendars[0];
           }
         };
 
@@ -3749,7 +3782,6 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
             onSuccess: successCallbackWrapper,
             onFailure: failureCallbackWrapper
           };
-          console.log('Test');
           return this._request.get('/apps/tasks/collections', params);
         };
 

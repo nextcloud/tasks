@@ -32,36 +32,31 @@ angular.module('Tasks').factory 'ListsBusinessLayer',
 
 		init: () ->
 			@_$calendarservice.getAll().then((calendars) ->
-				return calendars
+				for calendar in calendars
+					ListsModel.add(calendar)
 			)
 
-		addList: (list, onSuccess=null, onFailure=null) ->
-			@_$calendarservice.create(list, '#FF7A66', ['vtodo'])
-			# onSuccess or= ->
-			# onFailure or= ->
+		add: (calendar, onSuccess=null, onFailure=null) ->
+			@_$calendarservice.create(calendar, '#FF7A66', ['vtodo'])
+			.then((calendar) ->
+				ListsModel.add(calendar)
+				return calendar
+			)
 
-			# @_$listsmodel.add(list)
+		delete: (calendar) ->
+			@_$calendarservice.delete(calendar)
+			.then(()->
+				ListsModel.delete(calendar)
+			)
 
-			# success = (response) =>
-			# 	if response.status == 'error'
-			# 		onFailure()
-			# 	else
-			# 		onSuccess(response.data)
-			# @_persistence.addList(list, success)
-
-		deleteList: (listID) ->
-			# @_$tasksmodel.removeByList(listID)
-			@_$listsmodel.removeById(listID)
-			@_persistence.deleteList(listID)
-
-		setListName: (listID) ->
+		rename: (calendar) ->
 			@_persistence.setListName(@_$listsmodel.getById(listID))
 
-		updateModel: () ->
-			@_$listsmodel.voidAll()
-			success = () =>
-				@_$listsmodel.removeVoid()
-			@_persistence.getLists(success, true)
+		# updateModel: () ->
+		# 	@_$listsmodel.voidAll()
+		# 	success = () =>
+		# 		@_$listsmodel.removeVoid()
+		# 	@_persistence.getLists(success, true)
 
 	return new ListsBusinessLayer(ListsModel, Persistence,
 		TasksBusinessLayer, CalendarService)

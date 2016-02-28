@@ -30,17 +30,18 @@ angular.module('Tasks',['ngRoute','ngAnimate','ui.select',
 	$httpProvider.defaults.headers.common['requesttoken'] = oc_requesttoken
 
 	$routeProvider
-	.when('/lists/:listID',{})
-	.when('/lists/:listID/edit/:listparameter',{})
-	.when('/lists/:listID/tasks/:taskID',{})
-	.when('/lists/:listID/tasks/:taskID/settings',{})
-	.when('/lists/:listID/tasks/:taskID/edit/:parameter',{})
+	.when('/calendars/:calendarID',{})
+	.when('/calendars/:calendarID/edit/:listparameter',{})
+	.when('/calendars/:calendarID/tasks/:taskID',{})
+	.when('/calendars/:calendarID/tasks/:taskID/settings',{})
+	.when('/calendars/:calendarID/tasks/:taskID/edit/:parameter',{})
+	.when('/collections/:collectionID',{})
 	.when('/search/:searchString',{})
 	.when('/search/:searchString/tasks/:taskID',{})
 	.when('/search/:searchString/tasks/:taskID/edit/:parameter',{})
-	.otherwise({
-		redirectTo: '/lists/all'
-	})
+	# .otherwise({
+		# redirectTo: '/collections/all'
+	# })
 
 	return
 ]

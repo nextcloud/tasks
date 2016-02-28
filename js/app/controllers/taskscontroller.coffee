@@ -49,28 +49,29 @@ SettingsBusinessLayer, SearchBusinessLayer) ->
 			@_$scope.TasksBusinessLayer = @_tasksbusinesslayer
 
 			@_$scope.getAddString = () ->
-				if angular.isDefined(list =
-				_$listsmodel.getById(_$listsmodel.getStandardList()))
-					switch _$scope.route.listID
-						when 'starred'
-							return t('tasks','Add an important item in "%s"...')
-							.replace('%s',list.displayname)
-						when 'today'
-							return t('tasks','Add an item due today in "%s"...')
-							.replace('%s',list.displayname)
-						when 'all'
-							return t('tasks','Add an item in "%s"...')
-							.replace('%s',list.displayname)
-						when 'current'
-							return t('tasks','Add a current item in "%s"...')
-							.replace('%s',list.displayname)
-						when 'completed', 'week'
-							return null
-						else
-							if angular.isDefined(_$listsmodel.getById(_$scope.route.listID))
+				if angular.isDefined(calendar =
+					_$listsmodel.getStandardList())
+					if angular.isDefined(_$scope.route.collectionID)
+						switch _$scope.route.collectionID
+							when 'starred'
+								return t('tasks','Add an important item in "%s"...')
+								.replace('%s',calendar._properties.displayname)
+							when 'today'
+								return t('tasks','Add an item due today in "%s"...')
+								.replace('%s',calendar._properties.displayname)
+							when 'all'
 								return t('tasks','Add an item in "%s"...')
-								.replace('%s',
-								_$listsmodel.getById(_$scope.route.listID).displayname)
+								.replace('%s',calendar._properties.displayname)
+							when 'current'
+								return t('tasks','Add a current item in "%s"...')
+								.replace('%s',calendar._properties.displayname)
+							when 'completed', 'week'
+								return null
+					else
+						if angular.isDefined(_$listsmodel.getByUri(_$scope.route.calendarID))
+							return t('tasks','Add an item in "%s"...')
+							.replace('%s',
+							_$listsmodel.getByUri(_$scope.route.calendarID)._properties.displayname)
 
 			@_$scope.getSubAddString = (taskname) ->
 				return t('tasks','Add a subtask to "%s"...')
