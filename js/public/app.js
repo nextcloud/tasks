@@ -577,178 +577,157 @@
 
 }).call(this);
 
-(function() {
-  angular.module('Tasks').controller('ListController', [
+angular.module('Tasks').controller('ListController', [
 	'$scope', '$window', '$routeParams', 'ListsModel', 'TasksBusinessLayer', 'CollectionsModel', 'ListsBusinessLayer', '$location', 'SearchBusinessLayer', 'CalendarService', function($scope, $window, $routeParams, ListsModel, TasksBusinessLayer, CollectionsModel, ListsBusinessLayer, $location, SearchBusinessLayer, CalendarService) {
 	  var ListController;
 	  ListController = (function() {
 		function ListController(_$scope, _$window, _$routeParams, _$listsmodel, _$tasksbusinesslayer, _$collectionsmodel, _$listsbusinesslayer, $location, _$searchbusinesslayer, _$calendarservice) {
-		  this._$scope = _$scope;
-		  this._$window = _$window;
-		  this._$routeParams = _$routeParams;
-		  this._$listsmodel = _$listsmodel;
-		  this._$tasksbusinesslayer = _$tasksbusinesslayer;
-		  this._$collectionsmodel = _$collectionsmodel;
-		  this._$listsbusinesslayer = _$listsbusinesslayer;
-		  this.$location = $location;
-		  this._$searchbusinesslayer = _$searchbusinesslayer;
-		  this._$calendarservice = _$calendarservice;
-		  this._$scope.collections = this._$collectionsmodel.getAll();
-		  this._$scope.calendars = this._$listsmodel.getAll();
-		  this._$scope.draggedTasks = [];
-		  this._$scope.TasksBusinessLayer = this._$tasksbusinesslayer;
-		  this._$scope.status.listNameBackup = '';
-		  this._$scope.deleteList = function(calendar) {
-			var really;
-			really = confirm(t('tasks', 'This will delete the Calendar "%s" and all of its entries.').replace('%s', calendar.displayname));
-			if (really) {
-			  return _$listsbusinesslayer["delete"](calendar).then(function() {
-				$location.path('/calendars/' + _$listsmodel.getStandardList().uri);
-				return $scope.$apply();
-			  });
-			}
-		  };
-		  this._$scope.startAddingList = function() {
-			return _$scope.status.addingList = true;
-		  };
-		  this._$scope.endAddingList = function() {
-			_$scope.status.addingList = false;
-			return _$scope.status.newListName = "";
-		  };
-		  this._$scope.checkListInput = function(event) {
-			if (event.keyCode === 13) {
-			  event.preventDefault();
-			  _$scope.submitNewList();
-			}
-			if (event.keyCode === 27) {
-			  return _$scope.endAddingList();
-			}
-		  };
-		  this._$scope.submitNewList = function() {
-			var list;
-			if (_$scope.status.newListName) {
-			  if (_$listsmodel.checkName(_$scope.status.newListName)) {
+		
+			this._$scope = _$scope;
+			this._$window = _$window;
+			this._$routeParams = _$routeParams;
+			this._$listsmodel = _$listsmodel;
+			this._$tasksbusinesslayer = _$tasksbusinesslayer;
+			this._$collectionsmodel = _$collectionsmodel;
+			this._$listsbusinesslayer = _$listsbusinesslayer;
+			this.$location = $location;
+			this._$searchbusinesslayer = _$searchbusinesslayer;
+			this._$calendarservice = _$calendarservice;
+			this._$scope.collections = this._$collectionsmodel.getAll();
+			this._$scope.calendars = this._$listsmodel.getAll();
+			this._$scope.draggedTasks = [];
+			this._$scope.TasksBusinessLayer = this._$tasksbusinesslayer;
+			this._$scope.status.listNameBackup = '';
+
+			this._$scope["delete"] = function(calendar) {
+				var really;
+				really = confirm(t('tasks', 'This will delete the Calendar "%s" and all of its entries.').replace('%s', calendar.displayname));
+				if (really) {
+					return _$listsbusinesslayer["delete"](calendar).then(function() {
+						$location.path('/calendars/' + _$listsmodel.getStandardList().uri);
+						return $scope.$apply();
+					});
+				}
+			};
+
+			this._$scope.startCreate = function() {
+				return _$scope.status.addingList = true;
+			};
+
+			this._$scope.cancelCreate = function(event) {
+				if (event.keyCode === 27) {
+					_$scope.status.addingList = false;
+					return _$scope.status.newListName = "";
+				}
+			};
+
+			this._$scope.create = function() {
+				if (_$scope.status.newListName) {
+					if (!_$listsmodel.isNameAlreadyTaken(_$scope.status.newListName)) {
+						_$scope.status.addingList = false;
+						_$scope.isAddingList = true;
+						_$listsbusinesslayer.add(_$scope.status.newListName).then(function(calendar) {
+							$location.path('/calendars/' + calendar.uri);
+							return $scope.$apply();
+						});
+						return _$scope.status.newListName = '';
+					} else {
+						return alert(t('tasks', 'The name "%s" is already used.').replace('%s', _$scope.status.newListName));
+				 	}
+				} else {
+					return alert(t('tasks', 'An empty name is not allowed.'));
+				}
+			};
+
+			this._$scope.startRename = function(calendar) {
 				_$scope.status.addingList = false;
-				_$scope.isAddingList = true;
-				list = {
-				  tmpID: 'newList' + Date.now(),
-				  displayname: _$scope.status.newListName,
-				  notLoaded: 0
-				};
-				_$listsbusinesslayer.add(_$scope.status.newListName).then(function(calendar) {
-				  $location.path('/calendars/' + calendar.uri);
-				  return $scope.$apply();
-				});
-				return _$scope.status.newListName = '';
-			  } else {
-				return alert(t('tasks', 'The name "%s" is already used.').replace('%s', _$scope.status.newListName));
-			  }
-			} else {
-			  return alert(t('tasks', 'An empty name is not allowed.'));
-			}
-		  };
-		  this._$scope.editName = function(listID) {
-			_$scope.status.addingList = false;
-			_$scope.status.listNameBackup = _$listsmodel.getById(listID).displayname;
-			return $location.path('/lists/' + _$scope.route.listID + '/edit/name');
-		  };
-		  this._$scope.checkName = function(event) {
-			if (!_$scope.status.listNameBackup) {
-			  _$scope.status.listNameBackup = _$listsmodel.getById(_$scope.route.listID).displayname;
-			}
-			if (event.keyCode === 13) {
-			  event.preventDefault();
-			  _$scope.submitNewName();
-			}
-			if (event.keyCode === 27) {
-			  _$listsmodel.getById(_$scope.route.listID).displayname = _$scope.status.listNameBackup;
-			  return _$scope.endEditList();
-			}
-		  };
-		  this._$scope.submitNewName = function() {
-			var name;
-			name = _$listsmodel.getById(_$scope.route.listID).displayname;
-			if (name) {
-			  if (_$listsmodel.checkName(name, _$scope.route.listID)) {
-				_$listsbusinesslayer.setListName(_$scope.route.listID);
-				return _$scope.endEditList();
-			  } else {
-				return alert(t('tasks', 'The name "%s" is already used.').replace('%s', name));
-			  }
-			} else {
-			  return alert(t('tasks', 'An empty name is not allowed.'));
-			}
-		  };
-		  this._$scope.endEditList = function() {
-			return $location.path('/lists/' + _$scope.route.listID);
-		  };
-		  this._$scope.setListName = function(listID, listName) {
-			return _$listsbusinesslayer.setListName(listID(listName));
-		  };
-		  this._$scope.getCollectionCount = function(collectionID) {
-			var filter;
-			filter = _$searchbusinesslayer.getFilter();
-			return _$collectionsmodel.getCount(collectionID, filter);
-		  };
-		  this._$scope.hideCollection = function(collectionID) {
-			var collection;
-			collection = _$collectionsmodel.getById(collectionID);
-			switch (collection.show) {
-			  case 0:
+				calendar.prepareUpdate();
+				return $location.path('/calendars/' + _$scope.route.calendarID + '/edit/name');
+			};
+
+			this._$scope.cancelRename = function(event,calendar) {
+				if (event.keyCode === 27) {
+					event.preventDefault();
+					calendar.resetToPreviousState();
+					$location.path('/calendars/' + _$scope.route.calendarID);
+				}
+			};
+
+			this._$scope.rename = function(calendar) {
+				var name = calendar.displayname;
+				if (name) {
+					if (!_$listsmodel.isNameAlreadyTaken(calendar.displayname, calendar.uri)) {
+						_$listsbusinesslayer.rename(calendar);
+						$location.path('/calendars/' + _$scope.route.calendarID);
+					} else {
+						return alert(t('tasks', 'The name "%s" is already used.').replace('%s', name));
+					}
+				} else {
+					return alert(t('tasks', 'An empty name is not allowed.'));
+				}
+			};
+
+			this._$scope.getCollectionCount = function(collectionID) {
+				var filter;
+				filter = _$searchbusinesslayer.getFilter();
+				return _$collectionsmodel.getCount(collectionID, filter);
+			};
+
+			this._$scope.hideCollection = function(collectionID) {
+				var collection;
+				collection = _$collectionsmodel.getById(collectionID);
+				switch (collection.show) {
+					case 0:
+						return true;
+					case 1:
+						return false;
+					case 2:
+						return this.getCollectionCount(collectionID) < 1;
+				}
+			};
+
+			this._$scope.getCollectionString = function(collectionID) {
+				var filter;
+				if (collectionID !== 'completed') {
+					filter = _$searchbusinesslayer.getFilter();
+					return _$collectionsmodel.getCount(collectionID, filter);
+				} else {
+					return '';
+				}
+			};
+
+			this._$scope.getListCount = function(listID, type) {
+				var filter;
+				filter = _$searchbusinesslayer.getFilter();
+				return _$listsmodel.getCount(listID, type, filter);
+			};
+
+			this._$scope.dragoverList = function($event, item, index) {
 				return true;
-			  case 1:
-				return false;
-			  case 2:
-				return this.getCollectionCount(collectionID) < 1;
-			}
-		  };
-		  this._$scope.getCollectionString = function(collectionID) {
-			var filter;
-			if (collectionID !== 'completed') {
-			  filter = _$searchbusinesslayer.getFilter();
-			  return _$collectionsmodel.getCount(collectionID, filter);
-			} else {
-			  return '';
-			}
-		  };
-		  this._$scope.getListCount = function(listID, type) {
-			var filter;
-			filter = _$searchbusinesslayer.getFilter();
-			return _$listsmodel.getCount(listID, type, filter);
-		  };
-		  this._$scope.showDelete = function(listID) {
-			var _ref;
-			return (_ref = _$scope.route.listID) !== 'starred' && _ref !== 'today' && _ref !== 'completed' && _ref !== 'week' && _ref !== 'all' && _ref !== 'current';
-		  };
-		  this._$scope.update = function() {
-			if (!_$scope.isLoading()) {
-			  _$tasksbusinesslayer.updateModel();
-			  return _$listsbusinesslayer.updateModel();
-			}
-		  };
-		  this._$scope.dragoverList = function($event, item, index) {
-			return true;
-		  };
-		  this._$scope.dropList = function($event, item, index) {
-			var listID, taskID;
-			taskID = item.id;
-			listID = $($event.target).closest('li.list').attr('listID');
-			_$tasksbusinesslayer.changeCalendarId(taskID, listID);
-			return true;
-		  };
-		  this._$scope.dragoverCollection = function($event, item, index) {
-			var collectionID;
-			collectionID = $($event.target).closest('li.collection').attr('collectionID');
-			return collectionID === 'starred' || collectionID === 'completed' || collectionID === 'today';
-		  };
-		  this._$scope.dropCollection = function($event, item, index) {
-			var collectionID, taskID;
-			taskID = item.id;
-			collectionID = $($event.target).closest('li.collection').attr('collectionID');
-			console.log(taskID, collectionID);
-			_$tasksbusinesslayer.changeCollection(taskID, collectionID);
-			return true;
-		  };
+			};
+
+			this._$scope.dropList = function($event, item, index) {
+				var listID, taskID;
+				taskID = item.id;
+				listID = $($event.target).closest('li.list').attr('calendarID');
+				_$tasksbusinesslayer.changeCalendarId(taskID, listID);
+				return true;
+			};
+
+			this._$scope.dragoverCollection = function($event, item, index) {
+				var collectionID;
+				collectionID = $($event.target).closest('li.collection').attr('collectionID');
+				return collectionID === 'starred' || collectionID === 'completed' || collectionID === 'today';
+			};
+
+			this._$scope.dropCollection = function($event, item, index) {
+				var collectionID, taskID;
+				taskID = item.id;
+				collectionID = $($event.target).closest('li.collection').attr('collectionID');
+				console.log(taskID, collectionID);
+				_$tasksbusinesslayer.changeCollection(taskID, collectionID);
+				return true;
+			};
 		}
 
 		return ListController;
@@ -756,9 +735,7 @@
 	  })();
 	  return new ListController($scope, $window, $routeParams, ListsModel, TasksBusinessLayer, CollectionsModel, ListsBusinessLayer, $location, SearchBusinessLayer, CalendarService);
 	}
-  ]);
-
-}).call(this);
+]);
 
 (function() {
   angular.module('Tasks').controller('SettingsController', [
@@ -1488,7 +1465,9 @@ angular.module('Tasks').filter('timeTaskList', function() {
 		};
 
 		ListsBusinessLayer.prototype.rename = function(calendar) {
-		  return this._persistence.setListName(this._$listsmodel.getById(listID));
+			this._$calendarservice.update(calendar).then(function(calendar) {
+				calendar.dropPreviousState();
+			});
 		};
 
 		return ListsBusinessLayer;
@@ -3018,12 +2997,10 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 			this._updatedProperties = [];
 		},
 		prepareUpdate: function() {
-			this.list.edit = true;
 			this._propertiesBackup = angular.copy(this._properties);
 		},
 		resetToPreviousState: function() {
 			this._properties = angular.copy(this._propertiesBackup);
-			this.list.edit = false;
 			this._propertiesBackup = {};
 		},
 		dropPreviousState: function() {
@@ -3107,78 +3084,6 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 		  this._dataMap = {};
 		  this._filterCache = {};
 		}
-
-		ListsModel.prototype.insert = function(cal) {
-		  var access, calendar, component, components, href, name, owner, readWrite, share, shares, _i, _j, _len, _len1;
-		  calendar = {
-			id: this.size(),
-			url: cal.url,
-			enabled: cal.props['{http://owncloud.org/ns}calendar-enabled'] === '1',
-			displayname: cal.props['{DAV:}displayname'] || 'Unnamed',
-			color: cal.props['{http://apple.com/ns/ical/}calendar-color'] || '#1d2d44',
-			order: parseInt(cal.props['{http://apple.com/ns/ical/}calendar-order']) || 0,
-			components: {
-			  vevent: false,
-			  vjournal: false,
-			  vtodo: false
-			},
-			writable: cal.props.canWrite,
-			shareable: cal.props.canWrite,
-			sharedWith: {
-			  users: [],
-			  groups: []
-			},
-			owner: ''
-		  };
-		  components = cal.props['{urn:ietf:params:xml:ns:caldav}' + 'supported-calendar-component-set'];
-		  for (_i = 0, _len = components.length; _i < _len; _i++) {
-			component = components[_i];
-			name = component.attributes.getNamedItem('name').textContent.toLowerCase();
-			if (calendar.components.hasOwnProperty(name)) {
-			  calendar.components[name] = true;
-			}
-		  }
-		  shares = cal.props['{http://owncloud.org/ns}invite'];
-		  if (typeof shares !== 'undefined') {
-			for (_j = 0, _len1 = shares.length; _j < _len1; _j++) {
-			  share = shares[_j];
-			  href = share.getElementsByTagNameNS('DAV:', 'href');
-			  if (href.length === 0) {
-				continue;
-			  }
-			  href = href[0].textContent;
-			  access = share.getElementsByTagNameNS('http://owncloud.org/ns', 'access');
-			  if (access.length === 0) {
-				continue;
-			  }
-			  access = access[0];
-			  readWrite = access.getElementsByTagNameNS('http://owncloud.org/ns', 'read-write');
-			  readWrite = readWrite.length !== 0;
-			  if (href.startsWith('principal:principals/users/')) {
-				this.sharedWith.users.push({
-				  id: href.substr(27),
-				  displayname: href.substr(27),
-				  writable: readWrite
-				});
-			  } else if (href.startsWith('principal:principals/groups/')) {
-				this.sharedWith.groups.push({
-				  id: href.substr(28),
-				  displayname: href.substr(28),
-				  writable: readWrite
-				});
-			  }
-			}
-		  }
-		  owner = cal.props['{DAV:}owner'];
-		  if (typeof owner !== 'undefined' && owner.length !== 0) {
-			owner = owner[0].textContent.slice(0, -1);
-			if (owner.startsWith('/remote.php/dav/principals/users/')) {
-			  this.owner = owner.substr(33);
-			}
-		  }
-		  this.add(calendar);
-		  return calendar;
-		};
 
 		ListsModel.prototype.add = function(calendar, clearCache) {
 		  var updateByUri;
@@ -3278,20 +3183,17 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 		  }
 		};
 
-		ListsModel.prototype.checkName = function(listName, listID) {
-		  var list, lists, ret, _i, _len;
-		  if (listID == null) {
-			listID = void 0;
-		  }
-		  lists = this.getAll();
-		  ret = true;
-		  for (_i = 0, _len = lists.length; _i < _len; _i++) {
-			list = lists[_i];
-			if (list.displayname === listName && listID !== list.id) {
-			  ret = false;
+		ListsModel.prototype.isNameAlreadyTaken = function(displayname, uri) {
+			var calendar, calendars, ret, _i, _len;
+			calendars = this.getAll();
+			ret = false;
+			for (_i = 0, _len = calendars.length; _i < _len; _i++) {
+				calendar = calendars[_i];
+				if (calendar.displayname === displayname && calendar.uri !== uri) {
+					ret = true;
+				}
 			}
-		  }
-		  return ret;
+			return ret;
 		};
 
 		ListsModel.prototype.getCount = function(listID, collectionID, filter) {

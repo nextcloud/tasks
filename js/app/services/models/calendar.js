@@ -238,12 +238,10 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 			this._updatedProperties = [];
 		},
 		prepareUpdate: function() {
-			this.list.edit = true;
 			this._propertiesBackup = angular.copy(this._properties);
 		},
 		resetToPreviousState: function() {
 			this._properties = angular.copy(this._propertiesBackup);
-			this.list.edit = false;
 			this._propertiesBackup = {};
 		},
 		dropPreviousState: function() {

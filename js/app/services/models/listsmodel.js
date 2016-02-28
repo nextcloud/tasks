@@ -37,78 +37,6 @@
 		  this._filterCache = {};
 		}
 
-		ListsModel.prototype.insert = function(cal) {
-		  var access, calendar, component, components, href, name, owner, readWrite, share, shares, _i, _j, _len, _len1;
-		  calendar = {
-			id: this.size(),
-			url: cal.url,
-			enabled: cal.props['{http://owncloud.org/ns}calendar-enabled'] === '1',
-			displayname: cal.props['{DAV:}displayname'] || 'Unnamed',
-			color: cal.props['{http://apple.com/ns/ical/}calendar-color'] || '#1d2d44',
-			order: parseInt(cal.props['{http://apple.com/ns/ical/}calendar-order']) || 0,
-			components: {
-			  vevent: false,
-			  vjournal: false,
-			  vtodo: false
-			},
-			writable: cal.props.canWrite,
-			shareable: cal.props.canWrite,
-			sharedWith: {
-			  users: [],
-			  groups: []
-			},
-			owner: ''
-		  };
-		  components = cal.props['{urn:ietf:params:xml:ns:caldav}' + 'supported-calendar-component-set'];
-		  for (_i = 0, _len = components.length; _i < _len; _i++) {
-			component = components[_i];
-			name = component.attributes.getNamedItem('name').textContent.toLowerCase();
-			if (calendar.components.hasOwnProperty(name)) {
-			  calendar.components[name] = true;
-			}
-		  }
-		  shares = cal.props['{http://owncloud.org/ns}invite'];
-		  if (typeof shares !== 'undefined') {
-			for (_j = 0, _len1 = shares.length; _j < _len1; _j++) {
-			  share = shares[_j];
-			  href = share.getElementsByTagNameNS('DAV:', 'href');
-			  if (href.length === 0) {
-				continue;
-			  }
-			  href = href[0].textContent;
-			  access = share.getElementsByTagNameNS('http://owncloud.org/ns', 'access');
-			  if (access.length === 0) {
-				continue;
-			  }
-			  access = access[0];
-			  readWrite = access.getElementsByTagNameNS('http://owncloud.org/ns', 'read-write');
-			  readWrite = readWrite.length !== 0;
-			  if (href.startsWith('principal:principals/users/')) {
-				this.sharedWith.users.push({
-				  id: href.substr(27),
-				  displayname: href.substr(27),
-				  writable: readWrite
-				});
-			  } else if (href.startsWith('principal:principals/groups/')) {
-				this.sharedWith.groups.push({
-				  id: href.substr(28),
-				  displayname: href.substr(28),
-				  writable: readWrite
-				});
-			  }
-			}
-		  }
-		  owner = cal.props['{DAV:}owner'];
-		  if (typeof owner !== 'undefined' && owner.length !== 0) {
-			owner = owner[0].textContent.slice(0, -1);
-			if (owner.startsWith('/remote.php/dav/principals/users/')) {
-			  this.owner = owner.substr(33);
-			}
-		  }
-		  this.add(calendar);
-		  return calendar;
-		};
-
 		ListsModel.prototype.add = function(calendar, clearCache) {
 		  var updateByUri;
 		  if (clearCache == null) {
@@ -207,20 +135,17 @@
 		  }
 		};
 
-		ListsModel.prototype.checkName = function(listName, listID) {
-		  var list, lists, ret, _i, _len;
-		  if (listID == null) {
-			listID = void 0;
-		  }
-		  lists = this.getAll();
-		  ret = true;
-		  for (_i = 0, _len = lists.length; _i < _len; _i++) {
-			list = lists[_i];
-			if (list.displayname === listName && listID !== list.id) {
-			  ret = false;
+		ListsModel.prototype.isNameAlreadyTaken = function(displayname, uri) {
+			var calendar, calendars, ret, _i, _len;
+			calendars = this.getAll();
+			ret = false;
+			for (_i = 0, _len = calendars.length; _i < _len; _i++) {
+				calendar = calendars[_i];
+				if (calendar.displayname === displayname && calendar.uri !== uri) {
+					ret = true;
+				}
 			}
-		  }
-		  return ret;
+			return ret;
 		};
 
 		ListsModel.prototype.getCount = function(listID, collectionID, filter) {

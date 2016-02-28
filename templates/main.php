@@ -29,23 +29,23 @@
                 dnd-list="draggedTasks"
                 dnd-drop="dropList(event, item, index)"
                 dnd-dragover="dragoverList(event, item, index)">
-                <a href="#/calendars/{{ calendar.uri }}" style="border-right: 4px solid {{ calendar.color }};" ng-dblclick="editName(calendar.uri)">
+                <a href="#/calendars/{{ calendar.uri }}" style="border-right: 4px solid {{ calendar.color }};" ng-dblclick="startRename(calendar)">
                     <span class="icon list-list"></span>
                     <span class="title">{{ calendar.displayname }}</span>
                 </a>
                 <div class="app-navigation-entry-utils">
                     <ul>
                         <li class="app-navigation-entry-utils-counter">{{ getListCount(calendar.uri,'all') | counterFormatter }}</li>
-                        <li class="app-navigation-entry-utils-menu-button svg"><button></button></li>
+                        <li class="app-navigation-entry-utils-menu-button svg" ng-show="calendar.writable"><button></button></li>
                     </ul>
                 </div>
-                <div class="app-navigation-entry-menu">
+                <div class="app-navigation-entry-menu" ng-show="calendar.writable">
                     <ul>
-                        <li title="<?php p($l->t('rename')); ?>" ng-click="editName(calendar.uri)" >
+                        <li title="<?php p($l->t('rename')); ?>" ng-click="startRename(calendar)" >
                             <img class="icon-rename svg" src="<?php p(image_path('core', 'actions/rename.svg'))?>"/>
                             <span><?php p($l->t('rename')); ?></span>
                         </li>
-                        <li title="<?php p($l->t('delete')); ?>" ng-click="deleteList(calendar)" ng-show="showDelete(calendar.uri)" >
+                        <li title="<?php p($l->t('delete')); ?>" ng-click="deleteList(calendar)">
                             <img class="icon-delete svg" src="<?php p(image_path('core', 'actions/delete.svg'))?>"/>
                             <span><?php p($l->t('delete')); ?></span>
                         </li>
@@ -53,21 +53,21 @@
                 </div>
                 <div class="app-navigation-entry-edit">
                     <form>
-                        <input ng-model="calendar.displayname" class="edit" type="text" ng-keydown="checkName($event)" autofocus-on-insert>
-                        <input type="submit" value="" class="action icon-checkmark svg" ng-click="submitNewName()">
+                        <input ng-model="calendar.displayname" class="edit" type="text" ng-keydown="cancelRename($event,calendar)" autofocus-on-insert>
+                        <input type="submit" value="" class="action icon-checkmark svg" ng-click="rename(calendar)">
                     </form>
                 </div>
             </li>
             <li class="newList handler" ng-class="{edit: status.addingList}">
-                <a class="addlist" ng-click="startAddingList()" oc-click-focus="{selector: '#newList', timeout: 0}">
+                <a class="addlist" ng-click="startCreate()" oc-click-focus="{selector: '#newList', timeout: 0}">
                     <span class="icon detail-add"></span>
                     <span class="title"><?php p($l->t('Add List...')); ?></span>
                 </a>
                 <div class="app-navigation-entry-edit">
                     <form ng-disabled="isAddingList">
                         <input id="newList" ng-model="status.newListName" class="edit" type="text" autofocus-on-insert
-                        placeholder="<?php p($l->t('New List')); ?>" ng-keydown="checkListInput($event)" >
-                        <input type="submit" value="" class="action icon-checkmark svg" ng-click="submitNewList($event)">
+                        placeholder="<?php p($l->t('New List')); ?>" ng-keydown="cancelCreate($event)" >
+                        <input type="submit" value="" class="action icon-checkmark svg" ng-click="create($event)">
                     </form>
                 </div>
             </li>

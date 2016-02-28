@@ -63,7 +63,9 @@
 		};
 
 		ListsBusinessLayer.prototype.rename = function(calendar) {
-		  return this._persistence.setListName(this._$listsmodel.getById(listID));
+			this._$calendarservice.update(calendar).then(function(calendar) {
+				calendar.dropPreviousState();
+			});
 		};
 
 		return ListsBusinessLayer;
