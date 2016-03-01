@@ -19,42 +19,22 @@
  *
  */
 
-(function() {
-  angular.module('Tasks').factory('TasksBusinessLayer', [
-	'TasksModel', 'Persistence', function(TasksModel, Persistence) {
-	  var TasksBusinessLayer;
-	  TasksBusinessLayer = (function() {
-		function TasksBusinessLayer(_$tasksmodel, _persistence) {
-		  this._$tasksmodel = _$tasksmodel;
-		  this._persistence = _persistence;
-		}
-
-		TasksBusinessLayer.prototype.addTask = function(task, onSuccess, onFailure) {
-		  var parentID, success,
-			_this = this;
-		  if (onSuccess == null) {
-			onSuccess = null;
-		  }
-		  if (onFailure == null) {
-			onFailure = null;
-		  }
-		  onSuccess || (onSuccess = function() {});
-		  onFailure || (onFailure = function() {});
-		  this._$tasksmodel.add(task);
-		  this.uncompleteParents(task.related);
-		  parentID = this._$tasksmodel.getIdByUid(task.related);
-		  if (parentID) {
-			this.unhideSubtasks(parentID);
-		  }
-		  success = function(response) {
-			if (response.status === 'error') {
-			  return onFailure();
-			} else {
-			  return onSuccess(response.data);
+angular.module('Tasks').factory('TasksBusinessLayer', [
+	'TasksModel', 'Persistence', 'VTodoService', function(TasksModel, Persistence, VTodoService) {
+		var TasksBusinessLayer;
+		TasksBusinessLayer = (function() {
+			function TasksBusinessLayer(_$tasksmodel, _persistence, _$vtodoservice) {
+			this._$tasksmodel = _$tasksmodel;
+			this._persistence = _persistence;
+			this._$vtodoservice = _$vtodoservice;
 			}
-		  };
-		  return this._persistence.addTask(task, success);
-		};
+
+			TasksBusinessLayer.prototype.add = function(task) {
+				return this._$vtodoservice.create(task.calendar, task.data).then(function(task) {
+					// TasksModel.add(task);
+					return task;
+				});
+			};
 
 		TasksBusinessLayer.prototype.getAll = function(calendar) {};
 
@@ -568,8 +548,6 @@
 		return TasksBusinessLayer;
 
 	  })();
-	  return new TasksBusinessLayer(TasksModel, Persistence);
+	  return new TasksBusinessLayer(TasksModel, Persistence, VTodoService);
 	}
-  ]);
-
-}).call(this);
+]);

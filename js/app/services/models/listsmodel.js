@@ -98,35 +98,6 @@
 		  }
 		};
 
-		ListsModel.prototype.voidAll = function() {
-		  var list, lists, _i, _len, _results;
-		  lists = this.getAll();
-		  _results = [];
-		  for (_i = 0, _len = lists.length; _i < _len; _i++) {
-			list = lists[_i];
-			_results.push(list["void"] = true);
-		  }
-		  return _results;
-		};
-
-		ListsModel.prototype.removeVoid = function() {
-		  var id, list, listIDs, lists, _i, _j, _len, _len1, _results;
-		  lists = this.getAll();
-		  listIDs = [];
-		  for (_i = 0, _len = lists.length; _i < _len; _i++) {
-			list = lists[_i];
-			if (list["void"]) {
-			  listIDs.push(list.id);
-			}
-		  }
-		  _results = [];
-		  for (_j = 0, _len1 = listIDs.length; _j < _len1; _j++) {
-			id = listIDs[_j];
-			_results.push(this.removeById(id));
-		  }
-		  return _results;
-		};
-
 		ListsModel.prototype.getStandardList = function() {
 		  var calendars;
 		  if (this.size()) {

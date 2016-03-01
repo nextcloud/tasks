@@ -39,7 +39,6 @@ angular.module('Tasks').controller('ListController', [
 			this._$scope.calendars = this._$listsmodel.getAll();
 			this._$scope.draggedTasks = [];
 			this._$scope.TasksBusinessLayer = this._$tasksbusinesslayer;
-			this._$scope.status.listNameBackup = '';
 
 			this._$scope["delete"] = function(calendar) {
 				var really;

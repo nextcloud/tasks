@@ -597,7 +597,6 @@ angular.module('Tasks').controller('ListController', [
 			this._$scope.calendars = this._$listsmodel.getAll();
 			this._$scope.draggedTasks = [];
 			this._$scope.TasksBusinessLayer = this._$tasksbusinesslayer;
-			this._$scope.status.listNameBackup = '';
 
 			this._$scope["delete"] = function(calendar) {
 				var really;
@@ -813,29 +812,88 @@ angular.module('Tasks').controller('ListController', [
   var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   angular.module('Tasks').controller('TasksController', [
-	'$scope', '$window', '$routeParams', 'TasksModel', 'ListsModel', 'CollectionsModel', 'TasksBusinessLayer', '$location', 'SettingsBusinessLayer', 'SearchBusinessLayer', function($scope, $window, $routeParams, TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location, SettingsBusinessLayer, SearchBusinessLayer) {
+	'$scope', '$window', '$routeParams', 'TasksModel', 'ListsModel', 'CollectionsModel', 'TasksBusinessLayer', '$location', 'SettingsBusinessLayer', 'SearchBusinessLayer', 'VTodo', function($scope, $window, $routeParams, TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location, SettingsBusinessLayer, SearchBusinessLayer, VTodo) {
 	  var TasksController;
 	  TasksController = (function() {
-		function TasksController(_$scope, _$window, _$routeParams, _$tasksmodel, _$listsmodel, _$collectionsmodel, _tasksbusinesslayer, $location, _settingsbusinesslayer, _searchbusinesslayer) {
-		  var _this = this;
-		  this._$scope = _$scope;
-		  this._$window = _$window;
-		  this._$routeParams = _$routeParams;
-		  this._$tasksmodel = _$tasksmodel;
-		  this._$listsmodel = _$listsmodel;
-		  this._$collectionsmodel = _$collectionsmodel;
-		  this._tasksbusinesslayer = _tasksbusinesslayer;
-		  this.$location = $location;
-		  this._settingsbusinesslayer = _settingsbusinesslayer;
-		  this._searchbusinesslayer = _searchbusinesslayer;
-		  this._$scope.tasks = this._$tasksmodel.getAll();
-		  this._$scope.draggedTasks = [];
-		  this._$scope.lists = this._$listsmodel.getAll();
-		  this._$scope.days = [0, 1, 2, 3, 4, 5, 6];
-		  this._$scope.isAddingTask = false;
-		  this._$scope.focusInputField = false;
-		  this._$scope.TasksModel = this._$tasksmodel;
-		  this._$scope.TasksBusinessLayer = this._tasksbusinesslayer;
+		function TasksController(_$scope, _$window, _$routeParams, _$tasksmodel, _$listsmodel, _$collectionsmodel, _tasksbusinesslayer, $location, _settingsbusinesslayer, _searchbusinesslayer, vtodo) {
+			var _this = this;
+			this._$scope = _$scope;
+			this._$window = _$window;
+			this._$routeParams = _$routeParams;
+			this._$tasksmodel = _$tasksmodel;
+			this._$listsmodel = _$listsmodel;
+			this._$collectionsmodel = _$collectionsmodel;
+			this._tasksbusinesslayer = _tasksbusinesslayer;
+			this.$location = $location;
+			this._settingsbusinesslayer = _settingsbusinesslayer;
+			this._searchbusinesslayer = _searchbusinesslayer;
+			this._vtodo = vtodo;
+			this._$scope.tasks = this._$tasksmodel.getAll();
+			this._$scope.draggedTasks = [];
+			this._$scope.lists = this._$listsmodel.getAll();
+			this._$scope.days = [0, 1, 2, 3, 4, 5, 6];
+			this._$scope.isAddingTask = false;
+			this._$scope.focusInputField = false;
+			this._$scope.TasksModel = this._$tasksmodel;
+			this._$scope.TasksBusinessLayer = this._tasksbusinesslayer;
+
+			this._$scope.addTask = function(taskName, related, calendar) {
+				var task;
+				var task, _ref,
+				  _this = this;
+				if (related == null) {
+				  related = '';
+				}
+				if (calendar == null) {
+				  calendar = '';
+				}
+				_$scope.isAddingTask = true;
+				task = {
+				  // tmpID: 'newTask' + Date.now(),
+				  // id: 'newTask' + Date.now(),
+				  calendar: null,
+				  related: related,
+				  name: taskName,
+				  starred: false,
+				  priority: '0',
+				  due: false,
+				  start: false,
+				  reminder: null,
+				  completed: false,
+				  complete: '0',
+				  note: false
+				};
+				if (((_ref = _$scope.route.listID) === 'starred' || _ref === 'today' || _ref === 'week' || _ref === 'all' || _ref === 'completed' || _ref === 'current')) {
+				  if (related) {
+					task.calendar = calendar;
+				  } else {
+					task.calendarid = _$listsmodel.getStandardList();
+				  }
+				  if (_$scope.route.listID === 'starred') {
+					task.starred = true;
+				  }
+				  if (_$scope.route.listID === 'today') {
+					task.due = moment().startOf('day').format("YYYYMMDDTHHmmss");
+				  }
+				  if (_$scope.route.listID === 'current') {
+					task.start = moment().format("YYYYMMDDTHHmmss");
+				  }
+				} else {
+				  task.calendar = _$listsmodel.getByUri(_$scope.route.calendarID);
+				}
+				console.log(task);
+				task = VTodo.create(task);
+				// console.log(task);
+				_tasksbusinesslayer.add(task).then(function(task) {
+					_$scope.isAddingTask = false;
+				});
+				_$scope.status.focusTaskInput = false;
+				_$scope.status.focusSubtaskInput = false;
+				_$scope.status.addSubtaskTo = '';
+				_$scope.status.taskName = '';
+				return _$scope.status.subtaskName = '';
+			};
+
 		  this._$scope.getAddString = function() {
 			var calendar;
 			if (angular.isDefined(calendar = _$listsmodel.getStandardList())) {
@@ -996,61 +1054,6 @@ angular.module('Tasks').controller('ListController', [
 			filter = _searchbusinesslayer.getFilter();
 			return n('tasks', '%n Completed Task', '%n Completed Tasks', _$listsmodel.getCount(listID, type, filter));
 		  };
-		  this._$scope.addTask = function(taskName, related, calendarid) {
-			var task, _ref,
-			  _this = this;
-			if (related == null) {
-			  related = '';
-			}
-			if (calendarid == null) {
-			  calendarid = '';
-			}
-			_$scope.isAddingTask = true;
-			task = {
-			  tmpID: 'newTask' + Date.now(),
-			  id: 'newTask' + Date.now(),
-			  calendarid: null,
-			  related: related,
-			  name: taskName,
-			  starred: false,
-			  priority: '0',
-			  due: false,
-			  start: false,
-			  reminder: null,
-			  completed: false,
-			  complete: '0',
-			  note: false
-			};
-			if (((_ref = _$scope.route.listID) === 'starred' || _ref === 'today' || _ref === 'week' || _ref === 'all' || _ref === 'completed' || _ref === 'current')) {
-			  if (related) {
-				task.calendarid = calendarid;
-			  } else {
-				task.calendarid = _$listsmodel.getStandardList();
-			  }
-			  if (_$scope.route.listID === 'starred') {
-				task.starred = true;
-			  }
-			  if (_$scope.route.listID === 'today') {
-				task.due = moment().startOf('day').format("YYYYMMDDTHHmmss");
-			  }
-			  if (_$scope.route.listID === 'current') {
-				task.start = moment().format("YYYYMMDDTHHmmss");
-			  }
-			} else {
-			  task.calendarid = _$scope.route.listID;
-			}
-			_tasksbusinesslayer.addTask(task, function(data) {
-			  _$tasksmodel.add(data);
-			  return _$scope.isAddingTask = false;
-			}, function() {
-			  return _$scope.isAddingTask = false;
-			});
-			_$scope.status.focusTaskInput = false;
-			_$scope.status.focusSubtaskInput = false;
-			_$scope.status.addSubtaskTo = '';
-			_$scope.status.taskName = '';
-			return _$scope.status.subtaskName = '';
-		  };
 		  this._$scope.checkTaskInput = function($event) {
 			if ($event.keyCode === 27) {
 			  $($event.currentTarget).blur();
@@ -1110,7 +1113,7 @@ angular.module('Tasks').controller('ListController', [
 		return TasksController;
 
 	  })();
-	  return new TasksController($scope, $window, $routeParams, TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location, SettingsBusinessLayer, SearchBusinessLayer);
+	  return new TasksController($scope, $window, $routeParams, TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location, SettingsBusinessLayer, SearchBusinessLayer, VTodo);
 	}
   ]);
 
@@ -1421,63 +1424,54 @@ angular.module('Tasks').filter('timeTaskList', function() {
 	};
 });
 
-(function() {
-  angular.module('Tasks').factory('ListsBusinessLayer', [
+angular.module('Tasks').factory('ListsBusinessLayer', [
 	'ListsModel', 'Persistence', 'TasksBusinessLayer', 'CalendarService', function(ListsModel, Persistence, TasksBusinessLayer, CalendarService) {
-	  var ListsBusinessLayer;
-	  ListsBusinessLayer = (function() {
-		function ListsBusinessLayer(_$listsmodel, _persistence, _$tasksbusinesslayer, _$calendarservice) {
-		  this._$listsmodel = _$listsmodel;
-		  this._persistence = _persistence;
-		  this._$tasksbusinesslayer = _$tasksbusinesslayer;
-		  this._$calendarservice = _$calendarservice;
-		}
-
-		ListsBusinessLayer.prototype.init = function() {
-		  return this._$calendarservice.getAll().then(function(calendars) {
-			var calendar, _i, _len, _results;
-			_results = [];
-			for (_i = 0, _len = calendars.length; _i < _len; _i++) {
-			  calendar = calendars[_i];
-			  _results.push(ListsModel.add(calendar));
+		var ListsBusinessLayer;
+		ListsBusinessLayer = (function() {
+			function ListsBusinessLayer(_$listsmodel, _persistence, _$tasksbusinesslayer, _$calendarservice) {
+				this._$listsmodel = _$listsmodel;
+				this._persistence = _persistence;
+				this._$tasksbusinesslayer = _$tasksbusinesslayer;
+				this._$calendarservice = _$calendarservice;
 			}
-			return _results;
-		  });
-		};
 
-		ListsBusinessLayer.prototype.add = function(calendar, onSuccess, onFailure) {
-		  if (onSuccess == null) {
-			onSuccess = null;
-		  }
-		  if (onFailure == null) {
-			onFailure = null;
-		  }
-		  return this._$calendarservice.create(calendar, '#FF7A66', ['vtodo']).then(function(calendar) {
-			ListsModel.add(calendar);
-			return calendar;
-		  });
-		};
+			ListsBusinessLayer.prototype.init = function() {
+				return this._$calendarservice.getAll().then(function(calendars) {
+					var calendar, _i, _len, _results;
+					_results = [];
+					for (_i = 0, _len = calendars.length; _i < _len; _i++) {
+						calendar = calendars[_i];
+						_results.push(ListsModel.add(calendar));
+					}
+					return _results;
+				});
+			};
 
-		ListsBusinessLayer.prototype["delete"] = function(calendar) {
-		  return this._$calendarservice["delete"](calendar).then(function() {
-			return ListsModel["delete"](calendar);
-		  });
-		};
+			ListsBusinessLayer.prototype.add = function(calendar) {
+				return this._$calendarservice.create(calendar, '#FF7A66', ['vtodo']).then(function(calendar) {
+					ListsModel.add(calendar);
+					return calendar;
+				});
+			};
 
-		ListsBusinessLayer.prototype.rename = function(calendar) {
-			this._$calendarservice.update(calendar).then(function(calendar) {
-				calendar.dropPreviousState();
-			});
-		};
+			ListsBusinessLayer.prototype["delete"] = function(calendar) {
+				return this._$calendarservice["delete"](calendar).then(function() {
+					return ListsModel["delete"](calendar);
+				});
+			};
 
-		return ListsBusinessLayer;
+			ListsBusinessLayer.prototype.rename = function(calendar) {
+				this._$calendarservice.update(calendar).then(function(calendar) {
+					calendar.dropPreviousState();
+				});
+			};
 
-	  })();
-	  return new ListsBusinessLayer(ListsModel, Persistence, TasksBusinessLayer, CalendarService);
+			return ListsBusinessLayer;
+
+		})();
+		return new ListsBusinessLayer(ListsModel, Persistence, TasksBusinessLayer, CalendarService);
 	}
-  ]);
-
-}).call(this);
+]);
 
 (function() {
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
@@ -1606,42 +1600,22 @@ angular.module('Tasks').filter('timeTaskList', function() {
 
 }).call(this);
 
-(function() {
-  angular.module('Tasks').factory('TasksBusinessLayer', [
-	'TasksModel', 'Persistence', function(TasksModel, Persistence) {
-	  var TasksBusinessLayer;
-	  TasksBusinessLayer = (function() {
-		function TasksBusinessLayer(_$tasksmodel, _persistence) {
-		  this._$tasksmodel = _$tasksmodel;
-		  this._persistence = _persistence;
-		}
-
-		TasksBusinessLayer.prototype.addTask = function(task, onSuccess, onFailure) {
-		  var parentID, success,
-			_this = this;
-		  if (onSuccess == null) {
-			onSuccess = null;
-		  }
-		  if (onFailure == null) {
-			onFailure = null;
-		  }
-		  onSuccess || (onSuccess = function() {});
-		  onFailure || (onFailure = function() {});
-		  this._$tasksmodel.add(task);
-		  this.uncompleteParents(task.related);
-		  parentID = this._$tasksmodel.getIdByUid(task.related);
-		  if (parentID) {
-			this.unhideSubtasks(parentID);
-		  }
-		  success = function(response) {
-			if (response.status === 'error') {
-			  return onFailure();
-			} else {
-			  return onSuccess(response.data);
+angular.module('Tasks').factory('TasksBusinessLayer', [
+	'TasksModel', 'Persistence', 'VTodoService', function(TasksModel, Persistence, VTodoService) {
+		var TasksBusinessLayer;
+		TasksBusinessLayer = (function() {
+			function TasksBusinessLayer(_$tasksmodel, _persistence, _$vtodoservice) {
+			this._$tasksmodel = _$tasksmodel;
+			this._persistence = _persistence;
+			this._$vtodoservice = _$vtodoservice;
 			}
-		  };
-		  return this._persistence.addTask(task, success);
-		};
+
+			TasksBusinessLayer.prototype.add = function(task) {
+				return this._$vtodoservice.create(task.calendar, task.data).then(function(task) {
+					// TasksModel.add(task);
+					return task;
+				});
+			};
 
 		TasksBusinessLayer.prototype.getAll = function(calendar) {};
 
@@ -2155,11 +2129,9 @@ angular.module('Tasks').filter('timeTaskList', function() {
 		return TasksBusinessLayer;
 
 	  })();
-	  return new TasksBusinessLayer(TasksModel, Persistence);
+	  return new TasksBusinessLayer(TasksModel, Persistence, VTodoService);
 	}
-  ]);
-
-}).call(this);
+]);
 
 angular.module('Tasks').service('CalendarService', ['DavClient', 'Calendar', function(DavClient, Calendar){
 	'use strict';
@@ -2631,6 +2603,24 @@ angular.module('Tasks').service('CalendarService', ['DavClient', 'Calendar', fun
 
 }).call(this);
 
+angular.module('Tasks').service('ICalFactory', [
+	function() {
+		'use strict';
+
+		// creates a new ICAL root element with a product id property
+		return {
+			new: function() {
+				var root = new ICAL.Component(['vcalendar', [], []]);
+
+				var version = angular.element('#app').attr('data-appVersion');
+				root.updatePropertyWithValue('prodid', '-//ownCloud tasks v' + version);
+
+				return root;
+			}
+		};
+	}
+]);
+
 (function() {
   angular.module('Tasks').factory('Loading', [
 	function() {
@@ -2813,38 +2803,38 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 			_updatedProperties: []
 		});
 
-		angular.extend(this, {
-			tmpId: null,
-			fcEventSource: {
-				events: function (start, end, timezone, callback) {
-					// console.log('querying events ...');
-					// TimezoneService.get(timezone).then(function(tz) {
-					// 	_this.list.loading = true;
-					// 	$rootScope.$broadcast('reloadCalendarList');
+		// angular.extend(this, {
+		// 	tmpId: null,
+		// 	fcEventSource: {
+		// 		events: function (start, end, timezone, callback) {
+		// 			// console.log('querying events ...');
+		// 			// TimezoneService.get(timezone).then(function(tz) {
+		// 			// 	_this.list.loading = true;
+		// 			// 	$rootScope.$broadcast('reloadCalendarList');
 
-					// 	VEventService.getAll(_this, start, end).then(function(events) {
-					// 		var vevents = [];
-					// 		for (var i = 0; i < events.length; i++) {
-					// 			vevents = vevents.concat(events[i].getFcEvent(start, end, tz));
-					// 		}
+		// 			// 	VEventService.getAll(_this, start, end).then(function(events) {
+		// 			// 		var vevents = [];
+		// 			// 		for (var i = 0; i < events.length; i++) {
+		// 			// 			vevents = vevents.concat(events[i].getFcEvent(start, end, tz));
+		// 			// 		}
 
-					// 		callback(vevents);
+		// 			// 		callback(vevents);
 
-					// 		_this.list.loading = false;
-					// 		$rootScope.$broadcast('reloadCalendarList');
-					// 	});
-					// });
-				},
-				editable: this._properties.writable,
-				calendar: this
-			},
-			list: {
-				edit: false,
-				loading: this.enabled,
-				locked: false,
-				editingShares: false
-			}
-		});
+		// 			// 		_this.list.loading = false;
+		// 			// 		$rootScope.$broadcast('reloadCalendarList');
+		// 			// 	});
+		// 			// });
+		// 		},
+		// 		editable: this._properties.writable,
+		// 		calendar: this
+		// 	},
+		// 	list: {
+		// 		edit: false,
+		// 		loading: this.enabled,
+		// 		locked: false,
+		// 		editingShares: false
+		// 	}
+		// });
 
 		var components = props['{urn:ietf:params:xml:ns:caldav}supported-calendar-component-set'];
 		for (var i=0; i < components.length; i++) {
@@ -3144,35 +3134,6 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 			  return data;
 			}
 		  }
-		};
-
-		ListsModel.prototype.voidAll = function() {
-		  var list, lists, _i, _len, _results;
-		  lists = this.getAll();
-		  _results = [];
-		  for (_i = 0, _len = lists.length; _i < _len; _i++) {
-			list = lists[_i];
-			_results.push(list["void"] = true);
-		  }
-		  return _results;
-		};
-
-		ListsModel.prototype.removeVoid = function() {
-		  var id, list, listIDs, lists, _i, _j, _len, _len1, _results;
-		  lists = this.getAll();
-		  listIDs = [];
-		  for (_i = 0, _len = lists.length; _i < _len; _i++) {
-			list = lists[_i];
-			if (list["void"]) {
-			  listIDs.push(list.id);
-			}
-		  }
-		  _results = [];
-		  for (_j = 0, _len1 = listIDs.length; _j < _len1; _j++) {
-			id = listIDs[_j];
-			_results.push(this.removeById(id));
-		  }
-		  return _results;
 		};
 
 		ListsModel.prototype.getStandardList = function() {
@@ -3789,6 +3750,386 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 
 }).call(this);
 
+angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStringService', function($filter, icalfactory, RandomStringService) {
+	'use strict';
+
+	// /**
+	//  * check if vevent is the one described in event
+	//  * @param {String} recurrenceId
+	//  * @param {Object} vevent
+	//  * @returns {boolean}
+	//  */
+	// function isCorrectEvent(recurrenceId, vevent) {
+	// 	if (recurrenceId === null) {
+	// 		if (!vevent.hasProperty('recurrence-id')) {
+	// 			return true;
+	// 		}
+	// 	} else {
+	// 		if (recurrenceId === vevent.getFirstPropertyValue('recurrence-id').toICALString()) {
+	// 			return true;
+	// 		}
+	// 	}
+
+	// 	return false;
+	// }
+
+	// /**
+	//  * get DTEND from vevent
+	//  * @param {object} vevent
+	//  * @returns {ICAL.Time}
+	//  */
+	// function calculateDTEnd(vevent) {
+	// 	if (vevent.hasProperty('dtend')) {
+	// 		return vevent.getFirstPropertyValue('dtend');
+	// 	} else if (vevent.hasProperty('duration')) {
+	// 		var dtstart = vevent.getFirstPropertyValue('dtstart').clone();
+	// 		dtstart.addDuration(vevent.getFirstPropertyValue('duration'));
+	// 		return dtstart;
+	// 	} else {
+	// 		return vevent.getFirstPropertyValue('dtstart').clone();
+	// 	}
+	// }
+
+
+	// /**
+	//  * register timezones from ical response
+	//  * @param components
+	//  */
+	// function registerTimezones(components) {
+	// 	var vtimezones = components.getAllSubcomponents('vtimezone');
+	// 	angular.forEach(vtimezones, function (vtimezone) {
+	// 		var timezone = new ICAL.Timezone(vtimezone);
+	// 		ICAL.TimezoneService.register(timezone.tzid, timezone);
+	// 	});
+	// }
+
+	// /**
+	//  * check if we need to convert the timezone of either dtstart or dtend
+	//  * @param dt
+	//  * @returns {boolean}
+	//  */
+	// function isTimezoneConversionNecessary(dt) {
+	// 	return (dt.icaltype !== 'date' &&
+	// 	dt.zone !== ICAL.Timezone.utcTimezone &&
+	// 	dt.zone !== ICAL.Timezone.localTimezone);
+	// }
+
+	// /**
+	//  * check if dtstart and dtend are both of type date
+	//  * @param dtstart
+	//  * @param dtend
+	//  * @returns {boolean}
+	//  */
+	// function isEventAllDay(dtstart, dtend) {
+	// 	return (dtstart.icaltype === 'date' && dtend.icaltype === 'date');
+	// }
+
+	// *
+	//  * parse an recurring event
+	//  * @param vevent
+	//  * @param start
+	//  * @param end
+	//  * @param timezone
+	//  * @return []
+	 
+	// function parseTimeForRecurringEvent(vevent, start, end, timezone) {
+	// 	var dtstart = vevent.getFirstPropertyValue('dtstart');
+	// 	var dtend = calculateDTEnd(vevent);
+	// 	var duration = dtend.subtractDate(dtstart);
+	// 	var fcDataContainer = [];
+
+	// 	var iterator = new ICAL.RecurExpansion({
+	// 		component: vevent,
+	// 		dtstart: dtstart
+	// 	});
+
+	// 	var next;
+	// 	while ((next = iterator.next())) {
+	// 		if (next.compare(start) < 0) {
+	// 			continue;
+	// 		}
+	// 		if (next.compare(end) > 0) {
+	// 			break;
+	// 		}
+
+	// 		var dtstartOfRecurrence = next.clone();
+	// 		var dtendOfRecurrence = next.clone();
+	// 		dtendOfRecurrence.addDuration(duration);
+
+	// 		if (isTimezoneConversionNecessary(dtstartOfRecurrence) && timezone) {
+	// 			dtstartOfRecurrence = dtstartOfRecurrence.convertToZone(timezone);
+	// 		}
+	// 		if (isTimezoneConversionNecessary(dtendOfRecurrence) && timezone) {
+	// 			dtendOfRecurrence = dtendOfRecurrence.convertToZone(timezone);
+	// 		}
+
+	// 		fcDataContainer.push({
+	// 			allDay: isEventAllDay(dtstartOfRecurrence, dtendOfRecurrence),
+	// 			start: dtstartOfRecurrence.toJSDate(),
+	// 			end: dtendOfRecurrence.toJSDate(),
+	// 			repeating: true
+	// 		});
+	// 	}
+
+	// 	return fcDataContainer;
+	// }
+
+	// /**
+	//  * parse a single event
+	//  * @param vevent
+	//  * @param timezone
+	//  * @returns {object}
+	//  */
+	// function parseTimeForSingleEvent(vevent, timezone) {
+	// 	var dtstart = vevent.getFirstPropertyValue('dtstart');
+	// 	var dtend = calculateDTEnd(vevent);
+
+	// 	if (isTimezoneConversionNecessary(dtstart) && timezone) {
+	// 		dtstart = dtstart.convertToZone(timezone);
+	// 	}
+	// 	if (isTimezoneConversionNecessary(dtend) && timezone) {
+	// 		dtend = dtend.convertToZone(timezone);
+	// 	}
+
+	// 	return {
+	// 		allDay: isEventAllDay(dtstart, dtend),
+	// 		start: dtstart.toJSDate(),
+	// 		end: dtend.toJSDate(),
+	// 		repeating: false
+	// 	};
+	// }
+
+	function VTodo(calendar, props, uri) {
+		var _this = this;
+
+		angular.extend(this, {
+			calendar: calendar,
+			data: props['{urn:ietf:params:xml:ns:caldav}calendar-data'],
+			uri: uri,
+			etag: props['{DAV:}getetag'] || null
+		});
+
+		this.jCal = ICAL.parse(this.data);
+		this.components = new ICAL.Component(this.jCal);
+
+		if (this.components.jCal.length === 0) {
+			throw "invalid calendar";
+		}
+
+		// angular.extend(this, {
+		// 	getFcEvent: function(start, end, timezone) {
+		// 		var iCalStart = new ICAL.Time();
+		// 		iCalStart.fromUnixTime(start.format('X'));
+		// 		var iCalEnd = new ICAL.Time();
+		// 		iCalEnd.fromUnixTime(end.format('X'));
+
+		// 		if (_this.components.jCal.length === 0) {
+		// 			return [];
+		// 		}
+
+		// 		registerTimezones(_this.components);
+
+		// 		var vevents = _this.components.getAllSubcomponents('vevent');
+		// 		var renderedEvents = [];
+
+		// 		angular.forEach(vevents, function (vevent) {
+		// 			var event = new ICAL.Event(vevent);
+		// 			var fcData;
+
+		// 			try {
+		// 				if (!vevent.hasProperty('dtstart')) {
+		// 					return;
+		// 				}
+		// 				if (event.isRecurring()) {
+		// 					fcData = parseTimeForRecurringEvent(vevent, iCalStart, iCalEnd, timezone.jCal);
+		// 				} else {
+		// 					fcData = [];
+		// 					fcData.push(parseTimeForSingleEvent(vevent, timezone.jCal));
+		// 				}
+		// 			} catch(e) {
+		// 				console.log(e);
+		// 			}
+
+		// 			if (typeof fcData === 'undefined') {
+		// 				return;
+		// 			}
+
+		// 			for (var i = 0, length = fcData.length; i < length; i++) {
+		// 				// add information about calendar
+		// 				fcData[i].calendar = _this.calendar;
+		// 				fcData[i].editable = calendar.writable;
+		// 				fcData[i].backgroundColor = calendar.color;
+		// 				fcData[i].borderColor = calendar.color;
+		// 				fcData[i].textColor = calendar.textColor;
+		// 				fcData[i].className = 'fcCalendar-id-' + calendar.tmpId;
+
+		// 				// add information about actual event
+		// 				fcData[i].uri = _this.uri;
+		// 				fcData[i].etag = _this.etag;
+		// 				fcData[i].title = vevent.getFirstPropertyValue('summary');
+
+		// 				if (event.isRecurrenceException()) {
+		// 					fcData[i].recurrenceId = vevent
+		// 						.getFirstPropertyValue('recurrence-id')
+		// 						.toICALString();
+		// 					fcData[i].id = _this.uri + event.recurrenceId;
+		// 				} else {
+		// 					fcData[i].recurrenceId = null;
+		// 					fcData[i].id = _this.uri;
+		// 				}
+
+		// 				fcData[i].event = _this;
+
+		// 				renderedEvents.push(fcData[i]);
+		// 			}
+		// 		});
+
+		// 		return renderedEvents;
+		// 	},
+		// 	getSimpleData: function(recurrenceId) {
+		// 		var vevents = _this.components.getAllSubcomponents('vevent');
+
+		// 		for (var i = 0; i < vevents.length; i++) {
+		// 			if (!isCorrectEvent(recurrenceId, vevents[i])) {
+		// 				continue;
+		// 			}
+
+		// 			return objectConverter.parse(vevents[i]);
+		// 		}
+		// 	},
+		// 	drop: function(recurrenceId, delta) {
+		// 		var vevents = _this.components.getAllSubcomponents('vevent');
+		// 		var foundEvent = false;
+		// 		var deltaAsSeconds = delta.asSeconds();
+		// 		var duration = new ICAL.Duration().fromSeconds(deltaAsSeconds);
+		// 		var propertyToUpdate = null;
+
+		// 		for (var i = 0; i < vevents.length; i++) {
+		// 			if (!isCorrectEvent(recurrenceId, vevents[i])) {
+		// 				continue;
+		// 			}
+
+		// 			if (vevents[i].hasProperty('dtstart')) {
+		// 				propertyToUpdate = vevents[i].getFirstPropertyValue('dtstart');
+		// 				propertyToUpdate.addDuration(duration);
+		// 				vevents[i].updatePropertyWithValue('dtstart', propertyToUpdate);
+		// 			}
+
+		// 			if (vevents[i].hasProperty('dtend')) {
+		// 				propertyToUpdate = vevents[i].getFirstPropertyValue('dtend');
+		// 				propertyToUpdate.addDuration(duration);
+		// 				vevents[i].updatePropertyWithValue('dtend', propertyToUpdate);
+		// 			}
+
+		// 			foundEvent = true;
+		// 		}
+
+		// 		if (!foundEvent) {
+		// 			return false;
+		// 		}
+		// 		_this.data = _this.components.toString();
+		// 		return true;
+		// 	},
+		// 	resize: function(recurrenceId, delta) {
+		// 		var vevents = _this.components.getAllSubcomponents('vevent');
+		// 		var foundEvent = false;
+		// 		var deltaAsSeconds = delta.asSeconds();
+		// 		var duration = new ICAL.Duration().fromSeconds(deltaAsSeconds);
+		// 		var propertyToUpdate = null;
+
+		// 		for (var i = 0; i < vevents.length; i++) {
+		// 			if (!isCorrectEvent(recurrenceId, vevents[i])) {
+		// 				continue;
+		// 			}
+
+		// 			if (vevents[i].hasProperty('duration')) {
+		// 				propertyToUpdate = vevents[i].getFirstPropertyValue('duration');
+		// 				duration.fromSeconds((duration.toSeconds() + propertyToUpdate.toSeconds()));
+		// 				vevents[i].updatePropertyWithValue('duration', duration);
+		// 			} else if (vevents[i].hasProperty('dtend')) {
+		// 				propertyToUpdate = vevents[i].getFirstPropertyValue('dtend');
+		// 				propertyToUpdate.addDuration(duration);
+		// 				vevents[i].updatePropertyWithValue('dtend', propertyToUpdate);
+		// 			} else if (vevents[i].hasProperty('dtstart')) {
+		// 				propertyToUpdate = vevents[i].getFirstPropertyValue('dtstart').clone();
+		// 				propertyToUpdate.addDuration(duration);
+		// 				vevents[i].addPropertyWithValue('dtend', propertyToUpdate);
+		// 			} else {
+		// 				continue;
+		// 			}
+
+		// 			foundEvent = true;
+		// 		}
+
+		// 		if (!foundEvent) {
+		// 			return false;
+		// 		}
+
+		// 		_this.data = _this.components.toString();
+		// 		return true;
+		// 	},
+		// 	patch: function(recurrenceId, newSimpleData) {
+		// 		var vevents = _this.components.getAllSubcomponents('vevent');
+		// 		var vevent = null;
+
+		// 		for (var i = 0; i < vevents.length; i++) {
+		// 			if (!isCorrectEvent(recurrenceId, vevents[i])) {
+		// 				continue;
+		// 			}
+
+		// 			vevent = vevents[i];
+		// 		}
+
+		// 		if (!vevent) {
+		// 			return false;
+		// 		}
+
+		// 		objectConverter.patch(vevent, this.getSimpleData(recurrenceId), newSimpleData);
+		// 		vevent.updatePropertyWithValue('last-modified', ICAL.Time.now());
+		// 		_this.data = _this.components.toString();
+		// 	}
+		// });
+	}
+
+	VTodo.create = function(task) {
+		// console.log(start, end, timezone);
+		var comp = icalfactory.new();
+
+		var vtodo = new ICAL.Component('vtodo');
+		comp.addSubcomponent(vtodo);
+		vtodo.updatePropertyWithValue('created', ICAL.Time.now());
+		vtodo.updatePropertyWithValue('dtstamp', ICAL.Time.now());
+		vtodo.updatePropertyWithValue('last-modified', ICAL.Time.now());
+		vtodo.updatePropertyWithValue('uid', RandomStringService.generate());
+		vtodo.updatePropertyWithValue('summary', task.name);
+
+		// objectConverter.patch(vevent, {}, {
+		// 	allDay: !start.hasTime() && !end.hasTime(),
+		// 	dtstart: {
+		// 		type: start.hasTime() ? 'datetime' : 'date',
+		// 		value: start,
+		// 		parameters: {
+		// 			zone: timezone
+		// 		}
+		// 	},
+		// 	dtend: {
+		// 		type: end.hasTime() ? 'datetime' : 'date',
+		// 		value: end,
+		// 		parameters: {
+		// 			zone: timezone
+		// 		}
+		// 	}
+		// });
+
+		return new VTodo(task.calendar, {
+			'{urn:ietf:params:xml:ns:caldav}calendar-data': comp.toString(),
+			'{DAV:}getetag': null
+		}, null);
+	};
+
+	return VTodo;
+}]);
+
 (function() {
   angular.module('Tasks').factory('Persistence', [
 	'Request', 'Loading', '$rootScope', '$q', 'CalendarService', function(Request, Loading, $rootScope, $q, CalendarService) {
@@ -3894,85 +4235,6 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 		  };
 		  return this._request.post('/apps/tasks/settings/\
 			{type}/{setting}/{value}', params);
-		};
-
-		Persistence.prototype.getLists = function(onSuccess, showLoading, which) {
-		  var failureCallbackWrapper, params, successCallbackWrapper,
-			_this = this;
-		  if (showLoading == null) {
-			showLoading = true;
-		  }
-		  if (which == null) {
-			which = 'all';
-		  }
-		  onSuccess || (onSuccess = function() {});
-		  if (showLoading) {
-			this._Loading.increase();
-			successCallbackWrapper = function(data) {
-			  onSuccess();
-			  return _this._Loading.decrease();
-			};
-			failureCallbackWrapper = function(data) {
-			  return _this._Loading.decrease();
-			};
-		  } else {
-			successCallbackWrapper = function(data) {
-			  return onSuccess();
-			};
-			failureCallbackWrapper = function(data) {};
-		  }
-		  params = {
-			onSuccess: successCallbackWrapper,
-			onFailure: failureCallbackWrapper,
-			routeParams: {
-			  request: which
-			}
-		  };
-		  return this._request.get('/apps/tasks/lists', params);
-		};
-
-		Persistence.prototype.addList = function(list, onSuccess, onFailure) {
-		  var params;
-		  if (onSuccess == null) {
-			onSuccess = null;
-		  }
-		  if (onFailure == null) {
-			onFailure = null;
-		  }
-		  onSuccess || (onSuccess = function() {});
-		  onFailure || (onFailure = function() {});
-		  params = {
-			data: {
-			  name: list.displayname,
-			  tmpID: list.tmpID
-			},
-			onSuccess: onSuccess,
-			onFailure: onFailure
-		  };
-		  return this._request.post('/apps/tasks/lists/add', params);
-		};
-
-		Persistence.prototype.setListName = function(list) {
-		  var params;
-		  params = {
-			routeParams: {
-			  listID: list.id
-			},
-			data: {
-			  name: list.displayname
-			}
-		  };
-		  return this._request.post('/apps/tasks/lists/{listID}/name', params);
-		};
-
-		Persistence.prototype.deleteList = function(listID) {
-		  var params;
-		  params = {
-			routeParams: {
-			  listID: listID
-			}
-		  };
-		  return this._request.post('/apps/tasks/lists/{listID}/delete', params);
 		};
 
 		Persistence.prototype.getTasks = function(type, listID, onSuccess, showLoading) {
@@ -4362,6 +4624,16 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 
 }).call(this);
 
+angular.module('Tasks').factory('RandomStringService', function () {
+	'use strict';
+
+	return {
+		generate: function() {
+			return Math.random().toString(36).substr(2);
+		}
+	};
+});
+
 (function() {
   angular.module('Tasks').factory('Request', [
 	'$http', 'Publisher', function($http, Publisher) {
@@ -4487,29 +4759,171 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 
 }).call(this);
 
-(function() {
-  angular.module('Tasks').factory('Status', [
+angular.module('Tasks').factory('Status', [
 	function() {
-	  var Status;
-	  Status = (function() {
-		function Status() {
-		  this._$status = {
-			addingList: false,
-			focusTaskInput: false
-		  };
-		}
+		var Status;
+		Status = (function() {
+			function Status() {
+				this._$status = {
+					addingList: false,
+				focusTaskInput: false
+				};
+			}
 
 		Status.prototype.getStatus = function() {
-		  return this._$status;
+			return this._$status;
 		};
 
 		return Status;
 
-	  })();
-	  return new Status();
+		})();
+		return new Status();
 	}
-  ]);
+]);
 
-}).call(this);
+angular.module('Tasks').service('VTodoService', ['DavClient', 'VTodo', 'RandomStringService', function(DavClient, VTodo, RandomStringService) {
+	'use strict';
+
+	var _this = this;
+
+	this.getAll = function(calendar, start, end) {
+		var xmlDoc = document.implementation.createDocument('', '', null);
+		var cCalQuery = xmlDoc.createElement('c:calendar-query');
+		cCalQuery.setAttribute('xmlns:c', 'urn:ietf:params:xml:ns:caldav');
+		cCalQuery.setAttribute('xmlns:d', 'DAV:');
+		cCalQuery.setAttribute('xmlns:a', 'http://apple.com/ns/ical/');
+		cCalQuery.setAttribute('xmlns:o', 'http://owncloud.org/ns');
+		xmlDoc.appendChild(cCalQuery);
+
+		var dProp = xmlDoc.createElement('d:prop');
+		cCalQuery.appendChild(dProp);
+
+		var dGetEtag = xmlDoc.createElement('d:getetag');
+		dProp.appendChild(dGetEtag);
+
+		var cCalendarData = xmlDoc.createElement('c:calendar-data');
+		dProp.appendChild(cCalendarData);
+
+		var cFilter = xmlDoc.createElement('c:filter');
+		cCalQuery.appendChild(cFilter);
+
+		var cCompFilterVCal = xmlDoc.createElement('c:comp-filter');
+		cCompFilterVCal.setAttribute('name', 'VCALENDAR');
+		cFilter.appendChild(cCompFilterVCal);
+
+		var cCompFilterVTodo = xmlDoc.createElement('c:comp-filter');
+		cCompFilterVTodo.setAttribute('name', 'VTODO');
+		cCompFilterVCal.appendChild(cCompFilterVTodo);
+
+		// var cTimeRange = xmlDoc.createElement('c:time-range');
+		// cTimeRange.setAttribute('start', this._getTimeRangeStamp(start));
+		// cTimeRange.setAttribute('end', this._getTimeRangeStamp(end));
+		// cCompFilterVTodo.appendChild(cTimeRange);
+
+		var url = calendar.url;
+		var headers = {
+			'Content-Type': 'application/xml; charset=utf-8',
+			'Depth': 1,
+			'requesttoken': OC.requestToken
+		};
+		var body = cCalQuery.outerHTML;
+
+		return DavClient.request('REPORT', url, headers, body).then(function(response) {
+			if (!DavClient.wasRequestSuccessful(response.status)) {
+				//TODO - something went wrong
+				return;
+			}
+
+			var vTodos = [];
+
+			for (var i in response.body) {
+				var object = response.body[i];
+				var properties = object.propStat[0].properties;
+
+				var uri = object.href.substr(object.href.lastIndexOf('/') + 1);
+
+				var vTodo = new VTodo(calendar, properties, uri);
+				vTodos.push(vTodo);
+			}
+
+			return vTodos;
+		});
+	};
+
+	this.get = function(calendar, uri) {
+		var url = calendar.url + uri;
+		return DavClient.request('GET', url, {'requesttoken' : OC.requestToken}, '').then(function(response) {
+			return new VTodo(calendar, {
+				'{urn:ietf:params:xml:ns:caldav}calendar-data': response.body,
+				'{DAV:}getetag': response.xhr.getResponseHeader('ETag')
+			}, uri);
+		});
+	};
+
+	this.create = function(calendar, data, returnTodo) {
+		if (typeof returnTodo === 'undefined') {
+			returnTodo = true;
+		}
+
+		var headers = {
+			'Content-Type': 'text/calendar; charset=utf-8',
+			'requesttoken': OC.requestToken
+		};
+		var uri = this._generateRandomUri();
+		var url = calendar.url + uri;
+
+		return DavClient.request('PUT', url, headers, data).then(function(response) {
+			if (!DavClient.wasRequestSuccessful(response.status)) {
+				console.log(response);
+				return false;
+				// TODO - something went wrong, do smth about it
+			}
+
+			return returnTodo ?
+				_this.get(calendar, uri) :
+				true;
+		});
+	};
+
+	this.update = function(task) {
+		var url = task.calendar.url + task.uri;
+		var headers = {
+			'Content-Type': 'text/calendar; charset=utf-8',
+			'If-Match': task.etag,
+			'requesttoken': OC.requestToken
+		};
+
+		return DavClient.request('PUT', url, headers, task.data).then(function(response) {
+			task.etag = response.xhr.getResponseHeader('ETag');
+			return DavClient.wasRequestSuccessful(response.status);
+		});
+	};
+
+	this.delete = function(task) {
+		var url = task.calendar.url + task.uri;
+		var headers = {
+			'If-Match': task.etag,
+			'requesttoken': OC.requestToken
+		};
+
+		return DavClient.request('DELETE', url, headers, '').then(function(response) {
+			return DavClient.wasRequestSuccessful(response.status);
+		});
+	};
+
+	this._generateRandomUri = function() {
+		var uri = 'ownCloud-';
+		uri += RandomStringService.generate();
+		uri += RandomStringService.generate();
+		uri += '.ics';
+
+		return uri;
+	};
+
+	// this._getTimeRangeStamp = function(momentObject) {
+	// 	return momentObject.format('YYYYMMDD') + 'T' + momentObject.format('HHmmss') + 'Z';
+	// };
+
+}]);
 
 })(window.angular, window.jQuery, oc_requesttoken);

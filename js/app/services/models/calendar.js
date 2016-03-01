@@ -54,38 +54,38 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 			_updatedProperties: []
 		});
 
-		angular.extend(this, {
-			tmpId: null,
-			fcEventSource: {
-				events: function (start, end, timezone, callback) {
-					// console.log('querying events ...');
-					// TimezoneService.get(timezone).then(function(tz) {
-					// 	_this.list.loading = true;
-					// 	$rootScope.$broadcast('reloadCalendarList');
+		// angular.extend(this, {
+		// 	tmpId: null,
+		// 	fcEventSource: {
+		// 		events: function (start, end, timezone, callback) {
+		// 			// console.log('querying events ...');
+		// 			// TimezoneService.get(timezone).then(function(tz) {
+		// 			// 	_this.list.loading = true;
+		// 			// 	$rootScope.$broadcast('reloadCalendarList');
 
-					// 	VEventService.getAll(_this, start, end).then(function(events) {
-					// 		var vevents = [];
-					// 		for (var i = 0; i < events.length; i++) {
-					// 			vevents = vevents.concat(events[i].getFcEvent(start, end, tz));
-					// 		}
+		// 			// 	VEventService.getAll(_this, start, end).then(function(events) {
+		// 			// 		var vevents = [];
+		// 			// 		for (var i = 0; i < events.length; i++) {
+		// 			// 			vevents = vevents.concat(events[i].getFcEvent(start, end, tz));
+		// 			// 		}
 
-					// 		callback(vevents);
+		// 			// 		callback(vevents);
 
-					// 		_this.list.loading = false;
-					// 		$rootScope.$broadcast('reloadCalendarList');
-					// 	});
-					// });
-				},
-				editable: this._properties.writable,
-				calendar: this
-			},
-			list: {
-				edit: false,
-				loading: this.enabled,
-				locked: false,
-				editingShares: false
-			}
-		});
+		// 			// 		_this.list.loading = false;
+		// 			// 		$rootScope.$broadcast('reloadCalendarList');
+		// 			// 	});
+		// 			// });
+		// 		},
+		// 		editable: this._properties.writable,
+		// 		calendar: this
+		// 	},
+		// 	list: {
+		// 		edit: false,
+		// 		loading: this.enabled,
+		// 		locked: false,
+		// 		editingShares: false
+		// 	}
+		// });
 
 		var components = props['{urn:ietf:params:xml:ns:caldav}supported-calendar-component-set'];
 		for (var i=0; i < components.length; i++) {

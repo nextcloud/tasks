@@ -1,4 +1,4 @@
-<div ng-app="Tasks" ng-cloak ng-controller="AppController" ng-click="closeAll($event)" id="app" class="handler">
+<div ng-app="Tasks" ng-cloak ng-controller="AppController" ng-click="closeAll($event)" id="app" class="handler" data-appVersion="<?php p($_['appVersion']); ?>">
     <div id="app-navigation" ng-controller="ListController">
         <ul id="collections">
             <li id="collection_{{ collection.id }}"

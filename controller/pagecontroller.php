@@ -31,6 +31,19 @@ use \OCP\AppFramework\Http\TemplateResponse;
 class PageController extends Controller {
 
 	/**
+	 * @param string $appName
+	 * @param IConfig $config
+	 */
+	public function __construct($appName, IRequest $request,
+								$userId, IConfig $config) {
+		parent::__construct($appName, $request);
+		$this->config = $config;
+		$this->userId = $userId;
+		$this->userSession = $userSession;
+	}
+
+
+	/**
 	 * @NoAdminRequired
 	 * @NoCSRFRequired
 	 */
@@ -62,10 +75,10 @@ class PageController extends Controller {
 		$day = new \DateTime('today');
 		$day = $day->format('d');
 
-		// TODO: Make a HTMLTemplateResponse class
+		$appVersion = $this->config->getAppValue($this->appName, 'installed_version');
 		$response = new TemplateResponse('tasks', 'main');
 		$response->setParams(array(
-			'DOM' => $day
+			'appVersion' => $appVersion
 		));
 
 		return $response;

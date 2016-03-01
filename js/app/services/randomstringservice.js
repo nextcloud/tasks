@@ -1,8 +1,10 @@
 /**
- * ownCloud - Tasks
+ * ownCloud - Calendar App
  *
- * @author Raimund Schlüßler
- * @copyright 2016 Raimund Schlüßler <raimund.schluessler@googlemail.com>
+ * @author Raghu Nayyar
+ * @author Georg Ehrke
+ * @copyright 2016 Raghu Nayyar <beingminimal@gmail.com>
+ * @copyright 2016 Georg Ehrke <oc.list@georgehrke.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -18,25 +20,12 @@
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+angular.module('Tasks').factory('RandomStringService', function () {
+	'use strict';
 
-angular.module('Tasks').factory('Status', [
-	function() {
-		var Status;
-		Status = (function() {
-			function Status() {
-				this._$status = {
-					addingList: false,
-				focusTaskInput: false
-				};
-			}
-
-		Status.prototype.getStatus = function() {
-			return this._$status;
-		};
-
-		return Status;
-
-		})();
-		return new Status();
-	}
-]);
+	return {
+		generate: function() {
+			return Math.random().toString(36).substr(2);
+		}
+	};
+});

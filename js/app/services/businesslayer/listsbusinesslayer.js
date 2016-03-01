@@ -19,60 +19,51 @@
  *
  */
 
-(function() {
-  angular.module('Tasks').factory('ListsBusinessLayer', [
+angular.module('Tasks').factory('ListsBusinessLayer', [
 	'ListsModel', 'Persistence', 'TasksBusinessLayer', 'CalendarService', function(ListsModel, Persistence, TasksBusinessLayer, CalendarService) {
-	  var ListsBusinessLayer;
-	  ListsBusinessLayer = (function() {
-		function ListsBusinessLayer(_$listsmodel, _persistence, _$tasksbusinesslayer, _$calendarservice) {
-		  this._$listsmodel = _$listsmodel;
-		  this._persistence = _persistence;
-		  this._$tasksbusinesslayer = _$tasksbusinesslayer;
-		  this._$calendarservice = _$calendarservice;
-		}
-
-		ListsBusinessLayer.prototype.init = function() {
-		  return this._$calendarservice.getAll().then(function(calendars) {
-			var calendar, _i, _len, _results;
-			_results = [];
-			for (_i = 0, _len = calendars.length; _i < _len; _i++) {
-			  calendar = calendars[_i];
-			  _results.push(ListsModel.add(calendar));
+		var ListsBusinessLayer;
+		ListsBusinessLayer = (function() {
+			function ListsBusinessLayer(_$listsmodel, _persistence, _$tasksbusinesslayer, _$calendarservice) {
+				this._$listsmodel = _$listsmodel;
+				this._persistence = _persistence;
+				this._$tasksbusinesslayer = _$tasksbusinesslayer;
+				this._$calendarservice = _$calendarservice;
 			}
-			return _results;
-		  });
-		};
 
-		ListsBusinessLayer.prototype.add = function(calendar, onSuccess, onFailure) {
-		  if (onSuccess == null) {
-			onSuccess = null;
-		  }
-		  if (onFailure == null) {
-			onFailure = null;
-		  }
-		  return this._$calendarservice.create(calendar, '#FF7A66', ['vtodo']).then(function(calendar) {
-			ListsModel.add(calendar);
-			return calendar;
-		  });
-		};
+			ListsBusinessLayer.prototype.init = function() {
+				return this._$calendarservice.getAll().then(function(calendars) {
+					var calendar, _i, _len, _results;
+					_results = [];
+					for (_i = 0, _len = calendars.length; _i < _len; _i++) {
+						calendar = calendars[_i];
+						_results.push(ListsModel.add(calendar));
+					}
+					return _results;
+				});
+			};
 
-		ListsBusinessLayer.prototype["delete"] = function(calendar) {
-		  return this._$calendarservice["delete"](calendar).then(function() {
-			return ListsModel["delete"](calendar);
-		  });
-		};
+			ListsBusinessLayer.prototype.add = function(calendar) {
+				return this._$calendarservice.create(calendar, '#FF7A66', ['vtodo']).then(function(calendar) {
+					ListsModel.add(calendar);
+					return calendar;
+				});
+			};
 
-		ListsBusinessLayer.prototype.rename = function(calendar) {
-			this._$calendarservice.update(calendar).then(function(calendar) {
-				calendar.dropPreviousState();
-			});
-		};
+			ListsBusinessLayer.prototype["delete"] = function(calendar) {
+				return this._$calendarservice["delete"](calendar).then(function() {
+					return ListsModel["delete"](calendar);
+				});
+			};
 
-		return ListsBusinessLayer;
+			ListsBusinessLayer.prototype.rename = function(calendar) {
+				this._$calendarservice.update(calendar).then(function(calendar) {
+					calendar.dropPreviousState();
+				});
+			};
 
-	  })();
-	  return new ListsBusinessLayer(ListsModel, Persistence, TasksBusinessLayer, CalendarService);
+			return ListsBusinessLayer;
+
+		})();
+		return new ListsBusinessLayer(ListsModel, Persistence, TasksBusinessLayer, CalendarService);
 	}
-  ]);
-
-}).call(this);
+]);

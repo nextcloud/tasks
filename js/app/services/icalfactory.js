@@ -1,7 +1,11 @@
 /**
  * ownCloud - Tasks
  *
+ * @author Raghu Nayyar
+ * @author Georg Ehrke
  * @author Raimund Schlüßler
+ * @copyright 2016 Raghu Nayyar <beingminimal@gmail.com>
+ * @copyright 2016 Georg Ehrke <oc.list@georgehrke.com>
  * @copyright 2016 Raimund Schlüßler <raimund.schluessler@googlemail.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -19,24 +23,20 @@
  *
  */
 
-angular.module('Tasks').factory('Status', [
+angular.module('Tasks').service('ICalFactory', [
 	function() {
-		var Status;
-		Status = (function() {
-			function Status() {
-				this._$status = {
-					addingList: false,
-				focusTaskInput: false
-				};
+		'use strict';
+
+		// creates a new ICAL root element with a product id property
+		return {
+			new: function() {
+				var root = new ICAL.Component(['vcalendar', [], []]);
+
+				var version = angular.element('#app').attr('data-appVersion');
+				root.updatePropertyWithValue('prodid', '-//ownCloud tasks v' + version);
+
+				return root;
 			}
-
-		Status.prototype.getStatus = function() {
-			return this._$status;
 		};
-
-		return Status;
-
-		})();
-		return new Status();
 	}
 ]);
