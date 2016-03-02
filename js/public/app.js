@@ -830,7 +830,7 @@ angular.module('Tasks').controller('ListController', [
 			this._vtodo = vtodo;
 			this._$scope.tasks = this._$tasksmodel.getAll();
 			this._$scope.draggedTasks = [];
-			this._$scope.lists = this._$listsmodel.getAll();
+			this._$scope.calendars = this._$listsmodel.getAll();
 			this._$scope.days = [0, 1, 2, 3, 4, 5, 6];
 			this._$scope.isAddingTask = false;
 			this._$scope.focusInputField = false;
@@ -853,7 +853,7 @@ angular.module('Tasks').controller('ListController', [
 				  // id: 'newTask' + Date.now(),
 				  calendar: null,
 				  related: related,
-				  name: taskName,
+				  summary: taskName,
 				  starred: false,
 				  priority: '0',
 				  due: false,
@@ -861,7 +861,7 @@ angular.module('Tasks').controller('ListController', [
 				  reminder: null,
 				  completed: false,
 				  complete: '0',
-				  note: false
+				  note: ''
 				};
 				if (((_ref = _$scope.route.listID) === 'starred' || _ref === 'today' || _ref === 'week' || _ref === 'all' || _ref === 'completed' || _ref === 'current')) {
 				  if (related) {
@@ -881,11 +881,11 @@ angular.module('Tasks').controller('ListController', [
 				} else {
 				  task.calendar = _$listsmodel.getByUri(_$scope.route.calendarID);
 				}
-				console.log(task);
 				task = VTodo.create(task);
 				// console.log(task);
 				_tasksbusinesslayer.add(task).then(function(task) {
 					_$scope.isAddingTask = false;
+					return $scope.$apply();
 				});
 				_$scope.status.focusTaskInput = false;
 				_$scope.status.focusSubtaskInput = false;
@@ -925,15 +925,15 @@ angular.module('Tasks').controller('ListController', [
 			return _$scope.status.addSubtaskTo = uid;
 		  };
 		  this._$scope.hideSubtasks = function(task) {
-			var descendants, _ref;
-			descendants = _$tasksmodel.getDescendantID(task.id);
-			if (task.id === _$scope.route.taskID) {
-			  return false;
-			} else if (_ref = _$scope.route.taskID, __indexOf.call(descendants, _ref) >= 0) {
-			  return false;
-			} else {
-			  return task.hidesubtasks;
-			}
+			// var descendants, _ref;
+			// descendants = _$tasksmodel.getDescendantID(task.id);
+			// if (task.id === _$scope.route.taskID) {
+			//   return false;
+			// } else if (_ref = _$scope.route.taskID, __indexOf.call(descendants, _ref) >= 0) {
+			//   return false;
+			// } else {
+			//   return task.hidesubtasks;
+			// }
 		  };
 		  this._$scope.showInput = function() {
 			var _ref;
@@ -975,9 +975,10 @@ angular.module('Tasks').controller('ListController', [
 			return _settingsbusinesslayer.toggle('various', 'showHidden');
 		  };
 		  this._$scope.filterTasks = function(task, filter) {
-			return function(task) {
-			  return _$tasksmodel.filterTasks(task, filter);
-			};
+		  	return task;
+			// return function(task) {
+			  // return _$tasksmodel.filterTasks(task, filter);
+			// };
 		  };
 		  this._$scope.getSubTasks = function(tasks, parent) {
 			var ret, task, _i, _len;
@@ -991,9 +992,10 @@ angular.module('Tasks').controller('ListController', [
 			return ret;
 		  };
 		  this._$scope.hasNoParent = function(task) {
-			return function(task) {
-			  return _$tasksmodel.hasNoParent(task);
-			};
+		  	return true;
+			// return function(task) {
+			  // return _$tasksmodel.hasNoParent(task);
+			// };
 		  };
 		  this._$scope.hasSubtasks = function(task) {
 			return _$tasksmodel.hasSubtasks(task.uid);
@@ -1013,9 +1015,10 @@ angular.module('Tasks').controller('ListController', [
 			};
 		  };
 		  this._$scope.filteredTasks = function() {
-			var filter;
-			filter = _searchbusinesslayer.getFilter();
-			return _$tasksmodel.filteredTasks(filter);
+		  	return _$tasksmodel.getAll();
+			// var filter;
+			// filter = _searchbusinesslayer.getFilter();
+			// return _$tasksmodel.filteredTasks(filter);
 		  };
 		  this._$scope.dayHasEntry = function() {
 			return function(date) {
@@ -1442,6 +1445,7 @@ angular.module('Tasks').factory('ListsBusinessLayer', [
 					for (_i = 0, _len = calendars.length; _i < _len; _i++) {
 						calendar = calendars[_i];
 						_results.push(ListsModel.add(calendar));
+						TasksBusinessLayer.init(calendar);
 					}
 					return _results;
 				});
@@ -1605,19 +1609,29 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 		var TasksBusinessLayer;
 		TasksBusinessLayer = (function() {
 			function TasksBusinessLayer(_$tasksmodel, _persistence, _$vtodoservice) {
-			this._$tasksmodel = _$tasksmodel;
-			this._persistence = _persistence;
-			this._$vtodoservice = _$vtodoservice;
+				this._$tasksmodel = _$tasksmodel;
+				this._persistence = _persistence;
+				this._$vtodoservice = _$vtodoservice;
 			}
 
-			TasksBusinessLayer.prototype.add = function(task) {
-				return this._$vtodoservice.create(task.calendar, task.data).then(function(task) {
-					// TasksModel.add(task);
-					return task;
+			TasksBusinessLayer.prototype.init = function(calendar) {
+				return this._$vtodoservice.getAll(calendar).then(function(tasks) {
+					var task, _i, _len, _results;
+					_results = [];
+					for (_i = 0, _len = tasks.length; _i < _len; _i++) {
+						task = tasks[_i];
+						_results.push(TasksModel.ad(task));
+					}
+					return _results;
 				});
 			};
 
-		TasksBusinessLayer.prototype.getAll = function(calendar) {};
+			TasksBusinessLayer.prototype.add = function(task) {
+				return this._$vtodoservice.create(task.calendar, task.data).then(function(task) {
+					TasksModel.ad(task);
+					return task;
+				});
+			};
 
 		TasksBusinessLayer.prototype.getTask = function(taskID, onSuccess, onFailure) {
 		  if (onSuccess == null) {
@@ -3260,14 +3274,40 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 
   angular.module('Tasks').factory('TasksModel', [
 	'_Model', function(_Model) {
-	  var TasksModel;
-	  TasksModel = (function(_super) {
-		__extends(TasksModel, _super);
+		var TasksModel;
+		TasksModel = (function(_super) {
+			__extends(TasksModel, _super);
 
-		function TasksModel() {
-		  this._tmpIdCache = {};
-		  TasksModel.__super__.constructor.call(this);
-		}
+			function TasksModel() {
+				this._tmpIdCache = {};
+				TasksModel.__super__.constructor.call(this);
+			}
+
+			TasksModel.prototype.ad = function(task, clearCache) {
+				if (clearCache == null) {
+					clearCache = true;
+				}
+				var updateByUri = angular.isDefined(task.uri) && angular.isDefined(this.getByUri(task.uri));
+				if (updateByUri) {
+					return this.update(task, clearCache);
+				} else {
+					if (angular.isDefined(task.uri)) {
+						if (clearCache) {
+							this._invalidateCache();
+						}
+						if (angular.isDefined(this._dataMap[task.uri])) {
+
+						} else {
+							this._data.push(task);
+							return this._dataMap[task.uri] = task;
+						}
+					}
+				}
+			};
+
+			TasksModel.prototype.getByUri = function(uri) {
+				return this._dataMap[uri];
+			};
 
 		TasksModel.prototype.add = function(task, clearCache) {
 		  var tmptask, updateById, updateByTmpId;
@@ -4091,6 +4131,38 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		// });
 	}
 
+	VTodo.prototype = {
+		get summary() {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			return vtodos[0].getFirstPropertyValue('summary');
+		},
+		set summary(summary) {
+			// return this.name = name;
+		},
+		get priority() {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			return vtodos[0].getFirstPropertyValue('priority');
+		},
+		get complete() {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			return vtodos[0].getFirstPropertyValue('complete') || 0;
+		},
+		get note() {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			return vtodos[0].getFirstPropertyValue('note') || '';
+		},
+		// get enabled() {
+		// 	return this._properties.enabled;
+		// },
+		// get components() {
+		// 	return this._properties.components;
+		// },
+		// set enabled(enabled) {
+		// 	this._properties.enabled = enabled;
+		// 	this._setUpdated('enabled');
+		// }
+	}
+
 	VTodo.create = function(task) {
 		// console.log(start, end, timezone);
 		var comp = icalfactory.new();
@@ -4101,7 +4173,31 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		vtodo.updatePropertyWithValue('dtstamp', ICAL.Time.now());
 		vtodo.updatePropertyWithValue('last-modified', ICAL.Time.now());
 		vtodo.updatePropertyWithValue('uid', RandomStringService.generate());
-		vtodo.updatePropertyWithValue('summary', task.name);
+		vtodo.updatePropertyWithValue('summary', task.summary);
+		vtodo.updatePropertyWithValue('priority', task.priority);
+		vtodo.updatePropertyWithValue('complete', task.complete);
+		// vtodo.updatePropertyWithValue('completed', task.completed);
+		vtodo.updatePropertyWithValue('x-oc-hidesubtasks', 0);
+		vtodo.updatePropertyWithValue('relatd-to', task.related);
+		vtodo.updatePropertyWithValue('note', task.note);
+
+// RELATED-TO:d2e8f180-7675-4ae4-90b2-ecb0187b148f
+// PERCENT-COMPLETE:100
+// STATUS:COMPLETED
+// COMPLETED:20160301T093848Z
+// X-OC-HIDESUBTASKS:1
+
+				  // calendar: null,
+				  // related: related,
+				  // summary: taskName,
+				  // starred: false,
+				  // priority: '0',
+				  // due: false,
+				  // start: false,
+				  // reminder: null,
+				  // completed: false,
+				  // complete: '0',
+				  // note: false
 
 		// objectConverter.patch(vevent, {}, {
 		// 	allDay: !start.hasTime() && !end.hasTime(),
@@ -4786,7 +4882,7 @@ angular.module('Tasks').service('VTodoService', ['DavClient', 'VTodo', 'RandomSt
 
 	var _this = this;
 
-	this.getAll = function(calendar, start, end) {
+	this.getAll = function(calendar) {
 		var xmlDoc = document.implementation.createDocument('', '', null);
 		var cCalQuery = xmlDoc.createElement('c:calendar-query');
 		cCalQuery.setAttribute('xmlns:c', 'urn:ietf:params:xml:ns:caldav');

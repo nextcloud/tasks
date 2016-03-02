@@ -24,19 +24,29 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 		var TasksBusinessLayer;
 		TasksBusinessLayer = (function() {
 			function TasksBusinessLayer(_$tasksmodel, _persistence, _$vtodoservice) {
-			this._$tasksmodel = _$tasksmodel;
-			this._persistence = _persistence;
-			this._$vtodoservice = _$vtodoservice;
+				this._$tasksmodel = _$tasksmodel;
+				this._persistence = _persistence;
+				this._$vtodoservice = _$vtodoservice;
 			}
 
-			TasksBusinessLayer.prototype.add = function(task) {
-				return this._$vtodoservice.create(task.calendar, task.data).then(function(task) {
-					// TasksModel.add(task);
-					return task;
+			TasksBusinessLayer.prototype.init = function(calendar) {
+				return this._$vtodoservice.getAll(calendar).then(function(tasks) {
+					var task, _i, _len, _results;
+					_results = [];
+					for (_i = 0, _len = tasks.length; _i < _len; _i++) {
+						task = tasks[_i];
+						_results.push(TasksModel.ad(task));
+					}
+					return _results;
 				});
 			};
 
-		TasksBusinessLayer.prototype.getAll = function(calendar) {};
+			TasksBusinessLayer.prototype.add = function(task) {
+				return this._$vtodoservice.create(task.calendar, task.data).then(function(task) {
+					TasksModel.ad(task);
+					return task;
+				});
+			};
 
 		TasksBusinessLayer.prototype.getTask = function(taskID, onSuccess, onFailure) {
 		  if (onSuccess == null) {

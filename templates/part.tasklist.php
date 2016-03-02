@@ -11,13 +11,21 @@
             dnd-dragover="dragover(event, item, index)">
             <li class="task-item ui-draggable handler"
                 taskID="{{ task.id }}"
-                ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,route.calendarID) | filter:{'completed':'false'} | orderBy:'1*id':true | orderBy:sortDue | orderBy:'priority':true"
-                ng-click="openDetails(task.id,$event)"
+                ng-repeat="task in tasks"
                 ng-class="{done: task.completed}"
                 dnd-draggable="task"
                 dnd-effect-allowed="move">
                 <?php print_unescaped($this->inc('part.taskbody')); ?>
             </li>
+<!--             <li class="task-item ui-draggable handler"
+                taskID="{{ task.id }}"
+                ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,route.calendarID) | filter:{'completed':'false'} | orderBy:'1*id':true | orderBy:sortDue | orderBy:'priority':true"
+                ng-click="openDetails(task.id,$event)"
+                ng-class="{done: task.completed}"
+                dnd-draggable="task"
+                dnd-effect-allowed="move">
+                <?php // print_unescaped($this->inc('part.taskbody')); ?>
+            </li> -->
         </ol>
         <h2 class="heading-hiddentasks icon-triangle-s handler" ng-show="getCount(route.calendarID,'completed')" ng-click="toggleHidden()">
             {{ getCountString(route.calendarID,'completed') }}

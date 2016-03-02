@@ -41,7 +41,7 @@
 			this._vtodo = vtodo;
 			this._$scope.tasks = this._$tasksmodel.getAll();
 			this._$scope.draggedTasks = [];
-			this._$scope.lists = this._$listsmodel.getAll();
+			this._$scope.calendars = this._$listsmodel.getAll();
 			this._$scope.days = [0, 1, 2, 3, 4, 5, 6];
 			this._$scope.isAddingTask = false;
 			this._$scope.focusInputField = false;
@@ -64,7 +64,7 @@
 				  // id: 'newTask' + Date.now(),
 				  calendar: null,
 				  related: related,
-				  name: taskName,
+				  summary: taskName,
 				  starred: false,
 				  priority: '0',
 				  due: false,
@@ -72,7 +72,7 @@
 				  reminder: null,
 				  completed: false,
 				  complete: '0',
-				  note: false
+				  note: ''
 				};
 				if (((_ref = _$scope.route.listID) === 'starred' || _ref === 'today' || _ref === 'week' || _ref === 'all' || _ref === 'completed' || _ref === 'current')) {
 				  if (related) {
@@ -92,11 +92,11 @@
 				} else {
 				  task.calendar = _$listsmodel.getByUri(_$scope.route.calendarID);
 				}
-				console.log(task);
 				task = VTodo.create(task);
 				// console.log(task);
 				_tasksbusinesslayer.add(task).then(function(task) {
 					_$scope.isAddingTask = false;
+					return $scope.$apply();
 				});
 				_$scope.status.focusTaskInput = false;
 				_$scope.status.focusSubtaskInput = false;
@@ -136,15 +136,15 @@
 			return _$scope.status.addSubtaskTo = uid;
 		  };
 		  this._$scope.hideSubtasks = function(task) {
-			var descendants, _ref;
-			descendants = _$tasksmodel.getDescendantID(task.id);
-			if (task.id === _$scope.route.taskID) {
-			  return false;
-			} else if (_ref = _$scope.route.taskID, __indexOf.call(descendants, _ref) >= 0) {
-			  return false;
-			} else {
-			  return task.hidesubtasks;
-			}
+			// var descendants, _ref;
+			// descendants = _$tasksmodel.getDescendantID(task.id);
+			// if (task.id === _$scope.route.taskID) {
+			//   return false;
+			// } else if (_ref = _$scope.route.taskID, __indexOf.call(descendants, _ref) >= 0) {
+			//   return false;
+			// } else {
+			//   return task.hidesubtasks;
+			// }
 		  };
 		  this._$scope.showInput = function() {
 			var _ref;
@@ -186,9 +186,10 @@
 			return _settingsbusinesslayer.toggle('various', 'showHidden');
 		  };
 		  this._$scope.filterTasks = function(task, filter) {
-			return function(task) {
-			  return _$tasksmodel.filterTasks(task, filter);
-			};
+		  	return task;
+			// return function(task) {
+			  // return _$tasksmodel.filterTasks(task, filter);
+			// };
 		  };
 		  this._$scope.getSubTasks = function(tasks, parent) {
 			var ret, task, _i, _len;
@@ -202,9 +203,10 @@
 			return ret;
 		  };
 		  this._$scope.hasNoParent = function(task) {
-			return function(task) {
-			  return _$tasksmodel.hasNoParent(task);
-			};
+		  	return true;
+			// return function(task) {
+			  // return _$tasksmodel.hasNoParent(task);
+			// };
 		  };
 		  this._$scope.hasSubtasks = function(task) {
 			return _$tasksmodel.hasSubtasks(task.uid);
@@ -224,9 +226,10 @@
 			};
 		  };
 		  this._$scope.filteredTasks = function() {
-			var filter;
-			filter = _searchbusinesslayer.getFilter();
-			return _$tasksmodel.filteredTasks(filter);
+		  	return _$tasksmodel.getAll();
+			// var filter;
+			// filter = _searchbusinesslayer.getFilter();
+			// return _$tasksmodel.filteredTasks(filter);
 		  };
 		  this._$scope.dayHasEntry = function() {
 			return function(date) {

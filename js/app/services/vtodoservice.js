@@ -28,7 +28,7 @@ angular.module('Tasks').service('VTodoService', ['DavClient', 'VTodo', 'RandomSt
 
 	var _this = this;
 
-	this.getAll = function(calendar, start, end) {
+	this.getAll = function(calendar) {
 		var xmlDoc = document.implementation.createDocument('', '', null);
 		var cCalQuery = xmlDoc.createElement('c:calendar-query');
 		cCalQuery.setAttribute('xmlns:c', 'urn:ietf:params:xml:ns:caldav');

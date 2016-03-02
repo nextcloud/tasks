@@ -362,6 +362,38 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		// });
 	}
 
+	VTodo.prototype = {
+		get summary() {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			return vtodos[0].getFirstPropertyValue('summary');
+		},
+		set summary(summary) {
+			// return this.name = name;
+		},
+		get priority() {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			return vtodos[0].getFirstPropertyValue('priority');
+		},
+		get complete() {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			return vtodos[0].getFirstPropertyValue('complete') || 0;
+		},
+		get note() {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			return vtodos[0].getFirstPropertyValue('note') || '';
+		},
+		// get enabled() {
+		// 	return this._properties.enabled;
+		// },
+		// get components() {
+		// 	return this._properties.components;
+		// },
+		// set enabled(enabled) {
+		// 	this._properties.enabled = enabled;
+		// 	this._setUpdated('enabled');
+		// }
+	}
+
 	VTodo.create = function(task) {
 		// console.log(start, end, timezone);
 		var comp = icalfactory.new();
@@ -372,7 +404,31 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		vtodo.updatePropertyWithValue('dtstamp', ICAL.Time.now());
 		vtodo.updatePropertyWithValue('last-modified', ICAL.Time.now());
 		vtodo.updatePropertyWithValue('uid', RandomStringService.generate());
-		vtodo.updatePropertyWithValue('summary', task.name);
+		vtodo.updatePropertyWithValue('summary', task.summary);
+		vtodo.updatePropertyWithValue('priority', task.priority);
+		vtodo.updatePropertyWithValue('complete', task.complete);
+		// vtodo.updatePropertyWithValue('completed', task.completed);
+		vtodo.updatePropertyWithValue('x-oc-hidesubtasks', 0);
+		vtodo.updatePropertyWithValue('relatd-to', task.related);
+		vtodo.updatePropertyWithValue('note', task.note);
+
+// RELATED-TO:d2e8f180-7675-4ae4-90b2-ecb0187b148f
+// PERCENT-COMPLETE:100
+// STATUS:COMPLETED
+// COMPLETED:20160301T093848Z
+// X-OC-HIDESUBTASKS:1
+
+				  // calendar: null,
+				  // related: related,
+				  // summary: taskName,
+				  // starred: false,
+				  // priority: '0',
+				  // due: false,
+				  // start: false,
+				  // reminder: null,
+				  // completed: false,
+				  // complete: '0',
+				  // note: false
 
 		// objectConverter.patch(vevent, {}, {
 		// 	allDay: !start.hasTime() && !end.hasTime(),

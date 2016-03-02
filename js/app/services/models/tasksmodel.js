@@ -26,14 +26,40 @@
 
   angular.module('Tasks').factory('TasksModel', [
 	'_Model', function(_Model) {
-	  var TasksModel;
-	  TasksModel = (function(_super) {
-		__extends(TasksModel, _super);
+		var TasksModel;
+		TasksModel = (function(_super) {
+			__extends(TasksModel, _super);
 
-		function TasksModel() {
-		  this._tmpIdCache = {};
-		  TasksModel.__super__.constructor.call(this);
-		}
+			function TasksModel() {
+				this._tmpIdCache = {};
+				TasksModel.__super__.constructor.call(this);
+			}
+
+			TasksModel.prototype.ad = function(task, clearCache) {
+				if (clearCache == null) {
+					clearCache = true;
+				}
+				var updateByUri = angular.isDefined(task.uri) && angular.isDefined(this.getByUri(task.uri));
+				if (updateByUri) {
+					return this.update(task, clearCache);
+				} else {
+					if (angular.isDefined(task.uri)) {
+						if (clearCache) {
+							this._invalidateCache();
+						}
+						if (angular.isDefined(this._dataMap[task.uri])) {
+
+						} else {
+							this._data.push(task);
+							return this._dataMap[task.uri] = task;
+						}
+					}
+				}
+			};
+
+			TasksModel.prototype.getByUri = function(uri) {
+				return this._dataMap[uri];
+			};
 
 		TasksModel.prototype.add = function(task, clearCache) {
 		  var tmptask, updateById, updateByTmpId;
