@@ -63,6 +63,7 @@ $TRANSLATIONS = array(
 "Saturday" => "lauantai",
 "Add an important item in \"%s\"..." => "Lisää tärkeä tietue kohteeseen \"%s\"...",
 "Add an item in \"%s\"..." => "Lisää tietue kohteeseen \"%s\"...",
+"Add a current item in \"%s\"..." => "Lisää %s:ään...",
 "Add a subtask to \"%s\"..." => "Lisää alitehtävä kohteeseen \"%s\"...",
 "_%n Completed Task_::_%n Completed Tasks_" => array("%n valmistunut tehtävä","%n valmistunutta tehtävää"),
 "Set due date" => "Aseta eräpäivä",
@@ -92,6 +93,7 @@ $TRANSLATIONS = array(
 "(New category)" => "(Uusi luokka)",
 "Select categories..." => "Valitse luokat...",
 "Loading the task..." => "Ladataan tehtävää...",
-"Task not found!" => "Tehtävää ei löytynyt!"
+"Task not found!" => "Tehtävää ei löytynyt!",
+"add a subtask to" => "lisää alitehtävä tehtävälle"
 );
 $PLURAL_FORMS = "nplurals=2; plural=(n != 1);";
