@@ -100,7 +100,7 @@
 				});
 				_$scope.status.focusTaskInput = false;
 				_$scope.status.focusSubtaskInput = false;
-				_$scope.status.addSubtaskTo = '';
+				_$scope.status.addSubtaskTo = null;
 				_$scope.status.taskName = '';
 				return _$scope.status.subtaskName = '';
 			};
@@ -273,7 +273,7 @@
 			  $($event.currentTarget).blur();
 			  _$scope.status.taskName = '';
 			  _$scope.status.subtaskName = '';
-			  _$scope.status.addSubtaskTo = '';
+			  _$scope.status.addSubtaskTo = null;
 			  _$scope.status.focusTaskInput = false;
 			  return _$scope.status.focusSubtaskInput = false;
 			}

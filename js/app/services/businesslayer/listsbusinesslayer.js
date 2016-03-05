@@ -36,8 +36,8 @@ angular.module('Tasks').factory('ListsBusinessLayer', [
 					_results = [];
 					for (_i = 0, _len = calendars.length; _i < _len; _i++) {
 						calendar = calendars[_i];
-						_results.push(ListsModel.add(calendar));
-						TasksBusinessLayer.init(calendar);
+						ListsModel.add(calendar);
+						_results.push(TasksBusinessLayer.init(calendar));
 					}
 					return _results;
 				});

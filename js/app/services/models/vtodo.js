@@ -382,6 +382,10 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 			var vtodos = this.components.getAllSubcomponents('vtodo');
 			return vtodos[0].getFirstPropertyValue('note') || '';
 		},
+		get uid() {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			return vtodos[0].getFirstPropertyValue('uid') || '';
+		},
 		// get enabled() {
 		// 	return this._properties.enabled;
 		// },

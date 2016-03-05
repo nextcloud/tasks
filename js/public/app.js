@@ -129,69 +129,65 @@
 
 }).call(this);
 
-(function() {
-  angular.module('Tasks').controller('AppController', [
+angular.module('Tasks').controller('AppController', [
 	'$scope', 'ListsBusinessLayer', '$route', 'Status', '$timeout', '$location', '$routeParams', 'Loading', 'SettingsModel', 'Persistence', function($scope, ListsBusinessLayer, $route, status, $timeout, $location, $routeParams, Loading, SettingsModel, Persistence) {
-	  var AppController;
-	  AppController = (function() {
-		function AppController(_$scope, _$listsbusinesslayer, _$route, _$status, _$timeout, _$location, _$routeparams, _Loading, _$settingsmodel, _persistence) {
-		  this._$scope = _$scope;
-		  this._$listsbusinesslayer = _$listsbusinesslayer;
-		  this._$route = _$route;
-		  this._$status = _$status;
-		  this._$timeout = _$timeout;
-		  this._$location = _$location;
-		  this._$routeparams = _$routeparams;
-		  this._Loading = _Loading;
-		  this._$settingsmodel = _$settingsmodel;
-		  this._persistence = _persistence;
-		  this._$scope.initialized = false;
-		  this._$scope.status = this._$status.getStatus();
-		  this._$scope.route = this._$routeparams;
-		  this._$scope.status.newListName = "";
-		  this._$scope.settingsmodel = this._$settingsmodel;
-		  this._$listsbusinesslayer.init().then(function() {
-			return $scope.$apply();
-		  });
+		var AppController;
+		AppController = (function() {
+			function AppController(_$scope, _$listsbusinesslayer, _$route, _$status, _$timeout, _$location, _$routeparams, _Loading, _$settingsmodel, _persistence) {
+				this._$scope = _$scope;
+				this._$listsbusinesslayer = _$listsbusinesslayer;
+				this._$route = _$route;
+				this._$status = _$status;
+				this._$timeout = _$timeout;
+				this._$location = _$location;
+				this._$routeparams = _$routeparams;
+				this._Loading = _Loading;
+				this._$settingsmodel = _$settingsmodel;
+				this._persistence = _persistence;
+				this._$scope.status = this._$status.getStatus();
+				this._$scope.route = this._$routeparams;
+				this._$scope.status.newListName = "";
+				this._$scope.settingsmodel = this._$settingsmodel;
 
-		  this._persistence.init();
-		  this._$scope.closeAll = function($event) {
-			if ($($event.target).closest('.close-all').length || $($event.currentTarget).is($($event.target).closest('.handler'))) {
-			  if (!angular.isUndefined(_$scope.route.calendarID)) {
-				_$location.path('/calendars/' + _$scope.route.calendarID);
-			  } else if (!angular.isUndefined(_$scope.route.collectionID)) {
-				_$location.path('/collections/' + _$scope.route.collectionID);
-			  } else {
-				_$location.path('/collections/all');
-			  }
-			  _$scope.status.addingList = false;
-			  _$scope.status.focusTaskInput = false;
-			  _$scope.status.newListName = "";
+				this._$listsbusinesslayer.init().then(function(results) {
+					Promise.all(results).then(function() {
+						$scope.$apply();
+					})
+				});
+
+				this._persistence.init();
+
+				this._$scope.closeAll = function($event) {
+					if ($($event.target).closest('.close-all').length || $($event.currentTarget).is($($event.target).closest('.handler'))) {
+						if (!angular.isUndefined(_$scope.route.calendarID)) {
+							_$location.path('/calendars/' + _$scope.route.calendarID);
+						} else if (!angular.isUndefined(_$scope.route.collectionID)) {
+							_$location.path('/collections/' + _$scope.route.collectionID);
+						} else {
+							_$location.path('/collections/all');
+						}
+						_$scope.status.addingList = false;
+						_$scope.status.focusTaskInput = false;
+						_$scope.status.newListName = "";
+					}
+					if (!$($event.target).closest('.newList').length) {
+						_$scope.status.addingList = false;
+						_$scope.status.newListName = "";
+					}
+					if (!$($event.target).closest('.add-subtask').length) {
+						_$scope.status.addSubtaskTo = null;
+						return _$scope.status.focusSubtaskInput = false;
+					}
+				};
+				this._$scope.isLoading = function() {
+					return _Loading.isLoading();
+				};
 			}
-			if (!$($event.target).closest('.newList').length) {
-			  _$scope.status.addingList = false;
-			  _$scope.status.newListName = "";
-			}
-			if (!$($event.target).closest('.add-subtask').length) {
-			  _$scope.status.addSubtaskTo = '';
-			  return _$scope.status.focusSubtaskInput = false;
-			} else {
-
-			}
-		  };
-		  this._$scope.isLoading = function() {
-			return _Loading.isLoading();
-		  };
-		}
-
-		return AppController;
-
-	  })();
-	  return new AppController($scope, ListsBusinessLayer, $route, status, $timeout, $location, $routeParams, Loading, SettingsModel, Persistence);
+			return AppController;
+		})();
+		return new AppController($scope, ListsBusinessLayer, $route, status, $timeout, $location, $routeParams, Loading, SettingsModel, Persistence);
 	}
-  ]);
-
-}).call(this);
+]);
 
 (function() {
   angular.module('Tasks').controller('DetailsController', [
@@ -889,7 +885,7 @@ angular.module('Tasks').controller('ListController', [
 				});
 				_$scope.status.focusTaskInput = false;
 				_$scope.status.focusSubtaskInput = false;
-				_$scope.status.addSubtaskTo = '';
+				_$scope.status.addSubtaskTo = null;
 				_$scope.status.taskName = '';
 				return _$scope.status.subtaskName = '';
 			};
@@ -1062,7 +1058,7 @@ angular.module('Tasks').controller('ListController', [
 			  $($event.currentTarget).blur();
 			  _$scope.status.taskName = '';
 			  _$scope.status.subtaskName = '';
-			  _$scope.status.addSubtaskTo = '';
+			  _$scope.status.addSubtaskTo = null;
 			  _$scope.status.focusTaskInput = false;
 			  return _$scope.status.focusSubtaskInput = false;
 			}
@@ -1444,8 +1440,8 @@ angular.module('Tasks').factory('ListsBusinessLayer', [
 					_results = [];
 					for (_i = 0, _len = calendars.length; _i < _len; _i++) {
 						calendar = calendars[_i];
-						_results.push(ListsModel.add(calendar));
-						TasksBusinessLayer.init(calendar);
+						ListsModel.add(calendar);
+						_results.push(TasksBusinessLayer.init(calendar));
 					}
 					return _results;
 				});
@@ -4150,6 +4146,10 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		get note() {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
 			return vtodos[0].getFirstPropertyValue('note') || '';
+		},
+		get uid() {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			return vtodos[0].getFirstPropertyValue('uid') || '';
 		},
 		// get enabled() {
 		// 	return this._properties.enabled;
