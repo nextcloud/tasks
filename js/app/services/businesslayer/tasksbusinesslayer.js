@@ -20,10 +20,11 @@
  */
 
 angular.module('Tasks').factory('TasksBusinessLayer', [
-	'TasksModel', 'Persistence', 'VTodoService', function(TasksModel, Persistence, VTodoService) {
+	'TasksModel', 'Persistence', 'VTodoService', 'VTodo',
+	function(TasksModel, Persistence, VTodoService, VTodo) {
 		var TasksBusinessLayer;
 		TasksBusinessLayer = (function() {
-			function TasksBusinessLayer(_$tasksmodel, _persistence, _$vtodoservice) {
+			function TasksBusinessLayer(_$tasksmodel, _persistence, _$vtodoservice, _$vtodo) {
 				this._$tasksmodel = _$tasksmodel;
 				this._persistence = _persistence;
 				this._$vtodoservice = _$vtodoservice;
@@ -35,7 +36,8 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 					_results = [];
 					for (_i = 0, _len = tasks.length; _i < _len; _i++) {
 						task = tasks[_i];
-						_results.push(TasksModel.ad(task));
+						var vTodo = new VTodo(task.calendar, task.properties, task.uri)
+						_results.push(TasksModel.ad(vTodo));
 					}
 					return _results;
 				});
@@ -48,25 +50,18 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				});
 			};
 
-		TasksBusinessLayer.prototype.getTask = function(taskID, onSuccess, onFailure) {
-		  if (onSuccess == null) {
-			onSuccess = null;
-		  }
-		  if (onFailure == null) {
-			onFailure = null;
-		  }
-		  onSuccess || (onSuccess = function() {});
-		  return this._persistence.getTask(taskID, onSuccess, true);
-		};
-
-			TasksBusinessLayer.prototype.setPriority = function(task, priority) {
-				task.priority = priority;
-				this._$vtodoservice.update(task).then(function(task) {
+			TasksBusinessLayer.prototype.getTask = function(calendar, uri) {
+				return this._$vtodoservice.get(calendar, uri).then(function(task) {
+					TasksModel.ad(task);
+					return task;
 				});
 			};
 
+			TasksBusinessLayer.prototype.setPriority = function(task, priority) {
+				task.priority = priority;
+			};
+
 			TasksBusinessLayer.prototype.setPercentComplete = function(task, percentComplete) {
-				task.complete = percentComplete;
 				if (percentComplete < 100) {
 					task.completed = null;
 					if (percentComplete === 0) {
@@ -80,8 +75,7 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 					task.status = 'COMPLETED';
 					this.completeChildren(task);
 				}
-				this._$vtodoservice.update(task).then(function(task) {
-				});
+				task.complete = percentComplete;
 			};
 
 			TasksBusinessLayer.prototype.completeChildren = function(task) {
@@ -437,10 +431,6 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 		  return this._persistence.setTaskNote(taskID, note);
 		};
 
-		TasksBusinessLayer.prototype.setTaskName = function(taskID, name) {
-		  return this._persistence.setTaskName(taskID, name);
-		};
-
 		TasksBusinessLayer.prototype.changeCollection = function(taskID, collectionID) {
 		  switch (collectionID) {
 			case 'starred':
@@ -538,6 +528,6 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 		return TasksBusinessLayer;
 
 	  })();
-	  return new TasksBusinessLayer(TasksModel, Persistence, VTodoService);
+	  return new TasksBusinessLayer(TasksModel, Persistence, VTodoService, VTodo);
 	}
 ]);

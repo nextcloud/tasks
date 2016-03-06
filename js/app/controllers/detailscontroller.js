@@ -19,192 +19,175 @@
  *
  */
 
-(function() {
-  angular.module('Tasks').controller('DetailsController', [
-	'$scope', '$window', 'TasksModel', 'TasksBusinessLayer', '$route', '$location', '$timeout', '$routeParams', 'SettingsModel', 'Loading', function($scope, $window, TasksModel, TasksBusinessLayer, $route, $location, $timeout, $routeParams, SettingsModel, Loading) {
+angular.module('Tasks').controller('DetailsController', [
+	'$scope', '$window', 'TasksModel', 'TasksBusinessLayer', '$route', '$location', '$timeout', '$routeParams', 'SettingsModel', 'Loading', 'ListsModel',
+	function($scope, $window, TasksModel, TasksBusinessLayer, $route, $location, $timeout, $routeParams, SettingsModel, Loading, ListsModel) {
 	  var DetailsController;
 	  DetailsController = (function() {
-		function DetailsController(_$scope, _$window, _$tasksmodel, _tasksbusinesslayer, _$route, _$location, _$timeout, _$routeparams, _$settingsmodel, _Loading) {
-		  this._$scope = _$scope;
-		  this._$window = _$window;
-		  this._$tasksmodel = _$tasksmodel;
-		  this._tasksbusinesslayer = _tasksbusinesslayer;
-		  this._$route = _$route;
-		  this._$location = _$location;
-		  this._$timeout = _$timeout;
-		  this._$routeparams = _$routeparams;
-		  this._$settingsmodel = _$settingsmodel;
-		  this._Loading = _Loading;
-		  this._$scope.task = _$tasksmodel.getById(_$scope.route.taskID);
-		  this._$scope.found = true;
-		  this._$scope.$on('$routeChangeSuccess', function() {
-			var task,
-			  _this = this;
-			task = _$tasksmodel.getById(_$scope.route.taskID);
-			if (!(angular.isUndefined(task) || task === null)) {
-			  _$scope.task = task;
-			  return _$scope.found = true;
-			} else if (_$scope.route.taskID !== void 0) {
-			  _$scope.found = false;
-			  return _tasksbusinesslayer.getTask(_$scope.route.taskID, function(data) {
-				return _$scope.loadTask(_$scope.route.taskID);
-			  });
-			}
-		  });
-		  this._$scope.settingsmodel = this._$settingsmodel;
-		  this._$scope.settingsmodel.add({
-			'id': 'various',
-			'categories': []
-		  });
-		  this._$scope.isAddingComment = false;
-		  this._$scope.timers = [];
-		  this._$scope.durations = [
-			{
-			  name: t('tasks', 'week'),
-			  names: t('tasks', 'weeks'),
-			  id: 'week'
-			}, {
-			  name: t('tasks', 'day'),
-			  names: t('tasks', 'days'),
-			  id: 'day'
-			}, {
-			  name: t('tasks', 'hour'),
-			  names: t('tasks', 'hours'),
-			  id: 'hour'
-			}, {
-			  name: t('tasks', 'minute'),
-			  names: t('tasks', 'minutes'),
-			  id: 'minute'
-			}, {
-			  name: t('tasks', 'second'),
-			  names: t('tasks', 'seconds'),
-			  id: 'second'
-			}
-		  ];
-		  this._$scope.loadTask = function(taskID) {
-			var task;
-			task = _$tasksmodel.getById(_$scope.route.taskID);
-			if (!(angular.isUndefined(task) || task === null)) {
-			  _$scope.task = task;
-			  return _$scope.found = true;
-			}
-		  };
-		  this._$scope.TaskState = function() {
-			if (_$scope.found) {
-			  return 'found';
-			} else {
-			  if (_Loading.isLoading()) {
-				return 'loading';
-			  } else {
-				return null;
-			  }
-			}
-		  };
-		  this._$scope.params = [
-			{
-			  name: t('tasks', 'before beginning'),
-			  invert: true,
-			  related: 'START',
-			  id: "10"
-			}, {
-			  name: t('tasks', 'after beginning'),
-			  invert: false,
-			  related: 'START',
-			  id: "00"
-			}, {
-			  name: t('tasks', 'before end'),
-			  invert: true,
-			  related: 'END',
-			  id: "11"
-			}, {
-			  name: t('tasks', 'after end'),
-			  invert: false,
-			  related: 'END',
-			  id: "01"
-			}
-		  ];
-		  this._$scope.filterParams = function(params) {
-			var task;
-			task = _$tasksmodel.getById(_$scope.route.taskID);
-			if (!(angular.isUndefined(task) || task === null)) {
-			  if (task.due && task.start) {
-				return params;
-			  } else if (task.start) {
-				return params.slice(0, 2);
-			  } else {
-				return params.slice(2);
-			  }
-			}
-		  };
-		  this._$scope.deleteTask = function(taskID) {
-			return _$timeout(function() {
-			  return _tasksbusinesslayer.deleteTask(taskID);
-			}, 500);
-		  };
-		  this._$scope.editName = function($event) {
-			if ($($event.target).is('a')) {
+		function DetailsController(_$scope, _$window, _$tasksmodel,
+		_tasksbusinesslayer, _$route, _$location, _$timeout, _$routeparams, _$settingsmodel, _Loading, _$listsmodel) {
+			this._$scope = _$scope;
+			this._$window = _$window;
+			this._$tasksmodel = _$tasksmodel;
+			this._$listsmodel = _$listsmodel;
+			this._tasksbusinesslayer = _tasksbusinesslayer;
+			this._$route = _$route;
+			this._$location = _$location;
+			this._$timeout = _$timeout;
+			this._$routeparams = _$routeparams;
+			this._$settingsmodel = _$settingsmodel;
+			this._Loading = _Loading;
+			this._$scope.task = _$tasksmodel.getById(_$scope.route.taskID);
+			this._$scope.found = true;
+			this._$scope.$on('$routeChangeSuccess', function() {
+				var task = _$tasksmodel.getByUri(_$scope.route.taskID);
 
-			} else {
-			  console.log('open edit page');
-			  return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/name');
-			}
-		  };
-		  this._$scope.editDueDate = function($event) {
-			if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
-			  _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/duedate');
-			  return _tasksbusinesslayer.initDueDate(_$scope.route.taskID);
-			} else {
+				if (!(angular.isUndefined(task) || task === null)) {
+					_$scope.task = task;
+					return _$scope.found = true;
+				}  else if (_$scope.route.taskID !== void 0) {
+					_$scope.found = false;
+					// var calendar = _$listsmodel.getByUri(_$scope.route.calendarID);
+					// return _tasksbusinesslayer.getTask(calendar, _$scope.route.taskID).then(function(task) {
+					// 	_$scope.task = task;
+					// 	_$scope.found = true;
+					// });
+				}
+			});
 
-			}
-		  };
-		  this._$scope.editStart = function($event) {
-			if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
-			  _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/startdate');
-			  return _tasksbusinesslayer.initStartDate(_$scope.route.taskID);
-			} else {
-
-			}
-		  };
-		  this._$scope.editReminder = function($event) {
-			if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
-			  _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/reminder');
-			  return _tasksbusinesslayer.initReminder(_$scope.route.taskID);
-			} else {
-
-			}
-		  };
-		  this._$scope.editNote = function($event) {
-			if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
-			  if ($($event.target).is('a')) {
-
-			  } else {
-				return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/note');
-			  }
-			} else {
-
-			}
-		  };
-		  this._$scope.editPriority = function($event) {
-			if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
-			  return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/priority');
-			} else {
-
-			}
-		  };
-		  this._$scope.editPercent = function($event) {
-			if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
-			  return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID + '/edit/percent');
-			} else {
-
-			}
-		  };
-		  this._$scope.endEdit = function($event) {
-			if ($($event.target).closest('.end-edit').length || $($event.currentTarget).is($($event.target).closest('.handler'))) {
-			  return _$scope.resetRoute();
-			} else {
-
-			}
-		  };
+			this._$scope.settingsmodel = this._$settingsmodel;
+			this._$scope.settingsmodel.add({
+				'id': 'various',
+				'categories': []
+			});
+			this._$scope.isAddingComment = false;
+			this._$scope.timers = [];
+			this._$scope.durations = [{
+					name: t('tasks', 'week'),
+					names: t('tasks', 'weeks'),
+					id: 'week'
+				}, {
+					name: t('tasks', 'day'),
+					names: t('tasks', 'days'),
+					id: 'day'
+				}, {
+					name: t('tasks', 'hour'),
+					names: t('tasks', 'hours'),
+					id: 'hour'
+				}, {
+					name: t('tasks', 'minute'),
+					names: t('tasks', 'minutes'),
+					id: 'minute'
+				}, {
+					name: t('tasks', 'second'),
+					names: t('tasks', 'seconds'),
+					id: 'second'
+				}
+			];
+			this._$scope.loadTask = function(taskID) {
+				var task = _$tasksmodel.getByUri(_$scope.route.taskID);
+				if (!(angular.isUndefined(task) || task === null)) {
+					_$scope.task = task;
+					return _$scope.found = true;
+				}
+			};
+			this._$scope.TaskState = function() {
+				if (_$scope.found) {
+					return 'found';
+				} else {
+					if (_Loading.isLoading()) {
+						return 'loading';
+					} else {
+						return null;
+					}
+				}
+			};
+			this._$scope.params = [
+				{
+					name: t('tasks', 'before beginning'),
+					invert: true,
+					related: 'START',
+					id: "10"
+				}, {
+					name: t('tasks', 'after beginning'),
+					invert: false,
+					related: 'START',
+					id: "00"
+				}, {
+					name: t('tasks', 'before end'),
+					invert: true,
+					related: 'END',
+					id: "11"
+				}, {
+					name: t('tasks', 'after end'),
+					invert: false,
+					related: 'END',
+					id: "01"
+				}
+			];
+			this._$scope.filterParams = function(params) {
+				var task;
+				task = _$tasksmodel.getById(_$scope.route.taskID);
+				if (!(angular.isUndefined(task) || task === null)) {
+				  if (task.due && task.start) {
+					return params;
+				  } else if (task.start) {
+					return params.slice(0, 2);
+				  } else {
+					return params.slice(2);
+				  }
+				}
+			};
+			this._$scope.deleteTask = function(taskID) {
+				return _$timeout(function() {
+					return _tasksbusinesslayer.deleteTask(taskID);
+				}, 500);
+			};
+			this._$scope.editName = function($event) {
+				if (!$($event.target).is('a')) {
+					_$scope.setEditRoute('name');
+				}
+			};
+			this._$scope.editDueDate = function($event) {
+				if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+					_$scope.setEditRoute('duedate');
+					return _tasksbusinesslayer.initDueDate(_$scope.route.taskID);
+				}
+			};
+			this._$scope.editStart = function($event) {
+				if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+					_$scope.setEditRoute('startdate');
+					return _tasksbusinesslayer.initStartDate(_$scope.route.taskID);
+				}
+			};
+			this._$scope.editReminder = function($event) {
+				if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+					_$scope.setEditRoute('reminer');
+					return _tasksbusinesslayer.initReminder(_$scope.route.taskID);
+				}
+			};
+			this._$scope.editNote = function($event) {
+				if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+					if (!$($event.target).is('a')) {
+						_$scope.setEditRoute('note');
+					}
+				}
+			};
+			this._$scope.editPriority = function($event) {
+				if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+					_$scope.setEditRoute('priority');
+				}
+			};
+			this._$scope.editPercent = function($event) {
+				if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+					_$scope.setEditRoute('percent');
+				}
+			};
+			this._$scope.endEdit = function($event) {
+				if ($($event.target).closest('.end-edit').length || $($event.currentTarget).is($($event.target).closest('.handler'))) {
+					_$scope.resetRoute();
+				}
+			};
 		  this._$scope.endName = function($event) {
 			if ($event.keyCode === 13) {
 			  $event.preventDefault();
@@ -214,6 +197,17 @@
 			  return _$scope.resetRoute();
 			}
 		  };
+
+		  	this._$scope.setEditRoute = function(type) {
+				var calendarID;
+				var collectionID;
+				if (calendarID = _$scope.route.calendarID) {
+					$location.path('/calendars/' + calendarID + '/tasks/' + _$scope.route.taskID + '/edit/' + type);
+				} else if (collectionID = _$scope.route.collectionID) {
+					$location.path('/collections/' + collectionID + '/tasks/' + _$scope.route.taskID + '/edit/' + type);
+				}
+		  	}
+
 			this._$scope.resetRoute = function() {
 				var calendarID;
 				var collectionID;
@@ -261,44 +255,6 @@
 		  this._$scope.isOverDue = function(date) {
 			return _$tasksmodel.overdue(date);
 		  };
-		 //  this._$scope.$watch('task', function(newVal, oldVal) {
-			// if (newVal === oldVal || (void 0 === newVal || void 0 === oldVal) || newVal.id !== oldVal.id) {
-
-			// } else {
-			//   if (newVal.name !== oldVal.name) {
-			// 	if (_$scope.timers['task' + newVal.id + 'name']) {
-			// 	  $timeout.cancel(_$scope.timers['task' + newVal.id + 'name']);
-			// 	}
-			// 	_$scope.timers['task' + newVal.id + 'name'] = $timeout(function() {
-			// 	  return _tasksbusinesslayer.setTaskName(newVal.id, newVal.name);
-			// 	}, 3000);
-			//   }
-			//   if (newVal.note !== oldVal.note) {
-			// 	if (_$scope.timers['task' + newVal.id + 'note']) {
-			// 	  $timeout.cancel(_$scope.timers['task' + newVal.id + 'note']);
-			// 	}
-			// 	_$scope.timers['task' + newVal.id + 'note'] = $timeout(function() {
-			// 	  return _tasksbusinesslayer.setTaskNote(newVal.id, newVal.note);
-			// 	}, 5000);
-			//   }
-			//   if (newVal.complete !== oldVal.complete) {
-			// 	if (_$scope.timers['task' + newVal.id + 'complete']) {
-			// 	  $timeout.cancel(_$scope.timers['task' + newVal.id + 'complete']);
-			// 	}
-			// 	_$scope.timers['task' + newVal.id + 'complete'] = $timeout(function() {
-			// 	  return _tasksbusinesslayer.setPercentComplete(newVal.id, newVal.complete);
-			// 	}, 1000);
-			//   }
-			//   if (newVal.priority !== oldVal.priority) {
-			// 	if (_$scope.timers['task' + newVal.id + 'priority']) {
-			// 	  $timeout.cancel(_$scope.timers['task' + newVal.id + 'priority']);
-			// 	}
-			// 	return _$scope.timers['task' + newVal.id + 'priority'] = $timeout(function() {
-			// 	  return _tasksbusinesslayer.setPriority(newVal.id, newVal.priority);
-			// 	}, 1000);
-			//   }
-			// }
-		 //  }, true);
 		  this._$scope.setstartday = function(date) {
 			return _tasksbusinesslayer.setStart(_$scope.route.taskID, moment(date, 'MM/DD/YYYY'), 'day');
 		  };
@@ -406,8 +362,6 @@
 		return DetailsController;
 
 	  })();
-	  return new DetailsController($scope, $window, TasksModel, TasksBusinessLayer, $route, $location, $timeout, $routeParams, SettingsModel, Loading);
+	  return new DetailsController($scope, $window, TasksModel, TasksBusinessLayer, $route, $location, $timeout, $routeParams, SettingsModel, Loading, ListsModel);
 	}
-  ]);
-
-}).call(this);
+]);

@@ -23,7 +23,7 @@
  *
  */
 
-angular.module('Tasks').service('VTodoService', ['DavClient', 'VTodo', 'RandomStringService', function(DavClient, VTodo, RandomStringService) {
+angular.module('Tasks').service('VTodoService', ['DavClient', 'RandomStringService', function(DavClient, RandomStringService) {
 	'use strict';
 
 	var _this = this;
@@ -84,7 +84,11 @@ angular.module('Tasks').service('VTodoService', ['DavClient', 'VTodo', 'RandomSt
 
 				var uri = object.href.substr(object.href.lastIndexOf('/') + 1);
 
-				var vTodo = new VTodo(calendar, properties, uri);
+				var vTodo = {
+					calendar: calendar,
+					properties: properties,
+					uri: uri
+				};
 				vTodos.push(vTodo);
 			}
 
@@ -95,10 +99,14 @@ angular.module('Tasks').service('VTodoService', ['DavClient', 'VTodo', 'RandomSt
 	this.get = function(calendar, uri) {
 		var url = calendar.url + uri;
 		return DavClient.request('GET', url, {'requesttoken' : OC.requestToken}, '').then(function(response) {
-			return new VTodo(calendar, {
-				'{urn:ietf:params:xml:ns:caldav}calendar-data': response.body,
-				'{DAV:}getetag': response.xhr.getResponseHeader('ETag')
-			}, uri);
+			var vTodo = {
+				calendar: calendar,
+				properties: {
+					'{urn:ietf:params:xml:ns:caldav}calendar-data': response.body,
+					'{DAV:}getetag': response.xhr.getResponseHeader('ETag')},
+				uri: uri
+			};
+			return vTodo;
 		});
 	};
 

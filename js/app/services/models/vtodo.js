@@ -21,7 +21,8 @@
  *
  */
 
-angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStringService', function($filter, icalfactory, RandomStringService) {
+angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStringService', '$timeout', 'VTodoService',
+	function($filter, icalfactory, RandomStringService, $timeout, _$vtodoservice) {
 	'use strict';
 
 	// /**
@@ -177,7 +178,8 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 			calendar: calendar,
 			data: props['{urn:ietf:params:xml:ns:caldav}calendar-data'],
 			uri: uri,
-			etag: props['{DAV:}getetag'] || null
+			etag: props['{DAV:}getetag'] || null,
+			timers: []
 		});
 
 		this.jCal = ICAL.parse(this.data);
@@ -374,6 +376,12 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 			var vtodos = this.components.getAllSubcomponents('vtodo');
 			vtodos[0].updatePropertyWithValue('summary', summary);
 			this.data = this.components.toString();
+			if (this.timers['summary']) {
+				$timeout.cancel(this.timers['summary']);
+			}
+			this.timers['summary'] = $timeout(function(task) {
+				_$vtodoservice.update(task);
+			}, 3000, true, this);
 		},
 		get priority() {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
@@ -384,6 +392,12 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 			var vtodos = this.components.getAllSubcomponents('vtodo');
 			vtodos[0].updatePropertyWithValue('priority', (10 - priority) % 10);
 			this.data = this.components.toString();
+			if (this.timers['priority']) {
+				$timeout.cancel(this.timers['priority']);
+			}
+			this.timers['priority'] = $timeout(function(task) {
+				_$vtodoservice.update(task);
+			}, 1000, true, this);
 		},
 		get complete() {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
@@ -393,6 +407,12 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 			var vtodos = this.components.getAllSubcomponents('vtodo');
 			vtodos[0].updatePropertyWithValue('percent-complete', complete);
 			this.data = this.components.toString();
+			if (this.timers['percent-complete']) {
+				$timeout.cancel(this.timers['percent-complete']);
+			}
+			this.timers['percent-complete'] = $timeout(function(task) {
+				_$vtodoservice.update(task);
+			}, 1000, true, this);
 		},
 		get completed() {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
@@ -432,7 +452,18 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		},
 		get note() {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
-			return vtodos[0].getFirstPropertyValue('note') || '';
+			return vtodos[0].getFirstPropertyValue('description') || '';
+		},
+		set note(note) {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			vtodos[0].updatePropertyWithValue('description', note);
+			this.data = this.components.toString();
+			if (this.timers['description']) {
+				$timeout.cancel(this.timers['description']);
+			}
+			this.timers['description'] = $timeout(function(task) {
+				_$vtodoservice.update(task);
+			}, 3000, true, this);
 		},
 		get uid() {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
@@ -495,7 +526,7 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 			vtodo.updatePropertyWithValue('related-to', task.related);
 		}
 		if (task.note) {
-			vtodo.updatePropertyWithValue('note', task.note);
+			vtodo.updatePropertyWithValue('description', task.note);
 		}
 
 		// objectConverter.patch(vevent, {}, {
