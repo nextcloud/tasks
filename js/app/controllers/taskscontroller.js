@@ -164,14 +164,14 @@
 			  return $location.path('/lists/' + listID + '/tasks/' + id);
 			}
 		  };
-		  this._$scope.toggleCompleted = function(taskID) {
-			if (_$tasksmodel.completed(taskID)) {
-			  return _tasksbusinesslayer.uncompleteTask(taskID);
-			} else {
-			  return _tasksbusinesslayer.completeTask(taskID);
-			}
-		  };
-		  
+			this._$scope.toggleCompleted = function(task) {
+				if (task.completed) {
+					_tasksbusinesslayer.setPercentComplete(task, 0);
+				} else {
+					_tasksbusinesslayer.setPercentComplete(task, 100);
+				}
+			};
+
 			this._$scope.toggleStarred = function(task) {
 				if (task.priority > 5) {
 					_tasksbusinesslayer.setPriority(task, 0);

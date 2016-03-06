@@ -3,7 +3,7 @@
     taskID="{{ task.uri }}"
     ng-class="{active: route.taskID==task.uri, subtasks: hasSubtasks(task), subtaskshidden: task.hidesubtasks, attachment: task.note!=''}">
     <div class="percentdone" style="width:{{ task.complete }}%; background-color:{{ getTaskColor(task.calendarid) }};"></div>
-    <a class="task-checkbox handler" name="toggleCompleted" ng-click="toggleCompleted(task.uri)">
+    <a class="task-checkbox handler" name="toggleCompleted" ng-click="toggleCompleted(task)">
         <span class="icon task-checkbox" ng-class="{'task-checked': task.completed}"></span>
     </a>
     <a class="icon task-separator"></a>

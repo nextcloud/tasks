@@ -65,28 +65,26 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				});
 			};
 
-		TasksBusinessLayer.prototype.setPercentComplete = function(taskID, percentComplete) {
-		  var task;
-		  this._$tasksmodel.setPercentComplete(taskID, percentComplete);
-		  if (percentComplete < 100) {
-			this._$tasksmodel.uncomplete(taskID);
-			task = this._$tasksmodel.getById(taskID);
-			this.uncompleteParents(task.related);
-		  } else {
-			this._$tasksmodel.complete(taskID);
-			this.completeChildren(taskID);
-		  }
-		  return this._persistence.setPercentComplete(taskID, percentComplete);
-		};
-
-		TasksBusinessLayer.prototype.completeTask = function(taskID) {
-		  this.setPercentComplete(taskID, 100);
-		  return this.hideSubtasks(taskID);
-		};
-
-		TasksBusinessLayer.prototype.uncompleteTask = function(taskID) {
-		  return this.setPercentComplete(taskID, 0);
-		};
+			TasksBusinessLayer.prototype.setPercentComplete = function(task, percentComplete) {
+				var task;
+				task.complete = percentComplete;
+				if (percentComplete < 100) {
+					task.completed = null;
+					if (percentComplete == 0) {
+						task.status = 'NEEDS-ACTION';
+					} else {
+						task.status = 'IN-PROCESS';
+					}
+					// this.uncompleteParents(task.related);
+				} else {
+					task.completed = ICAL.Time.now();
+					task.status = 'COMPLETED';
+					// this.completeChildren(task);
+				}
+				console.log(task);
+				this._$vtodoservice.update(task).then(function(task) {
+				});
+			};
 
 		TasksBusinessLayer.prototype.completeChildren = function(taskID) {
 		  var childID, childrenID, _i, _len, _results;

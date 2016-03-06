@@ -375,58 +375,6 @@
 		  });
 		};
 
-		TasksModel.prototype.starred = function(taskID) {
-		  return this.getById(taskID).starred;
-		};
-
-		TasksModel.prototype.star = function(taskID) {
-		  return this.update({
-			id: taskID,
-			starred: true
-		  });
-		};
-
-		TasksModel.prototype.unstar = function(taskID) {
-		  return this.update({
-			id: taskID,
-			starred: false
-		  });
-		};
-
-		TasksModel.prototype.setPriority = function(taskID, priority) {
-		  return this.update({
-			id: taskID,
-			priority: priority
-		  });
-		};
-
-		TasksModel.prototype.completed = function(taskID) {
-		  return this.getById(taskID).completed;
-		};
-
-		TasksModel.prototype.complete = function(taskID) {
-		  return this.update({
-			id: taskID,
-			completed: true,
-			completed_date: moment().format("YYYYMMDDTHHmmss")
-		  });
-		};
-
-		TasksModel.prototype.uncomplete = function(taskID) {
-		  return this.update({
-			id: taskID,
-			completed: false,
-			completed_date: null
-		  });
-		};
-
-		TasksModel.prototype.setPercentComplete = function(taskID, complete) {
-		  return this.update({
-			id: taskID,
-			complete: complete
-		  });
-		};
-
 		TasksModel.prototype.setDueDate = function(taskID, date) {
 		  return this.update({
 			id: taskID,

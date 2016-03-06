@@ -949,14 +949,14 @@ angular.module('Tasks').controller('ListController', [
 			  return $location.path('/lists/' + listID + '/tasks/' + id);
 			}
 		  };
-		  this._$scope.toggleCompleted = function(taskID) {
-			if (_$tasksmodel.completed(taskID)) {
-			  return _tasksbusinesslayer.uncompleteTask(taskID);
-			} else {
-			  return _tasksbusinesslayer.completeTask(taskID);
-			}
-		  };
-		  
+			this._$scope.toggleCompleted = function(task) {
+				if (task.completed) {
+					_tasksbusinesslayer.setPercentComplete(task, 0);
+				} else {
+					_tasksbusinesslayer.setPercentComplete(task, 100);
+				}
+			};
+
 			this._$scope.toggleStarred = function(task) {
 				if (task.priority > 5) {
 					_tasksbusinesslayer.setPriority(task, 0);
@@ -1644,28 +1644,26 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				});
 			};
 
-		TasksBusinessLayer.prototype.setPercentComplete = function(taskID, percentComplete) {
-		  var task;
-		  this._$tasksmodel.setPercentComplete(taskID, percentComplete);
-		  if (percentComplete < 100) {
-			this._$tasksmodel.uncomplete(taskID);
-			task = this._$tasksmodel.getById(taskID);
-			this.uncompleteParents(task.related);
-		  } else {
-			this._$tasksmodel.complete(taskID);
-			this.completeChildren(taskID);
-		  }
-		  return this._persistence.setPercentComplete(taskID, percentComplete);
-		};
-
-		TasksBusinessLayer.prototype.completeTask = function(taskID) {
-		  this.setPercentComplete(taskID, 100);
-		  return this.hideSubtasks(taskID);
-		};
-
-		TasksBusinessLayer.prototype.uncompleteTask = function(taskID) {
-		  return this.setPercentComplete(taskID, 0);
-		};
+			TasksBusinessLayer.prototype.setPercentComplete = function(task, percentComplete) {
+				var task;
+				task.complete = percentComplete;
+				if (percentComplete < 100) {
+					task.completed = null;
+					if (percentComplete == 0) {
+						task.status = 'NEEDS-ACTION';
+					} else {
+						task.status = 'IN-PROCESS';
+					}
+					// this.uncompleteParents(task.related);
+				} else {
+					task.completed = ICAL.Time.now();
+					task.status = 'COMPLETED';
+					// this.completeChildren(task);
+				}
+				console.log(task);
+				this._$vtodoservice.update(task).then(function(task) {
+				});
+			};
 
 		TasksBusinessLayer.prototype.completeChildren = function(taskID) {
 		  var childID, childrenID, _i, _len, _results;
@@ -3605,58 +3603,6 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 		  });
 		};
 
-		TasksModel.prototype.starred = function(taskID) {
-		  return this.getById(taskID).starred;
-		};
-
-		TasksModel.prototype.star = function(taskID) {
-		  return this.update({
-			id: taskID,
-			starred: true
-		  });
-		};
-
-		TasksModel.prototype.unstar = function(taskID) {
-		  return this.update({
-			id: taskID,
-			starred: false
-		  });
-		};
-
-		TasksModel.prototype.setPriority = function(taskID, priority) {
-		  return this.update({
-			id: taskID,
-			priority: priority
-		  });
-		};
-
-		TasksModel.prototype.completed = function(taskID) {
-		  return this.getById(taskID).completed;
-		};
-
-		TasksModel.prototype.complete = function(taskID) {
-		  return this.update({
-			id: taskID,
-			completed: true,
-			completed_date: moment().format("YYYYMMDDTHHmmss")
-		  });
-		};
-
-		TasksModel.prototype.uncomplete = function(taskID) {
-		  return this.update({
-			id: taskID,
-			completed: false,
-			completed_date: null
-		  });
-		};
-
-		TasksModel.prototype.setPercentComplete = function(taskID, complete) {
-		  return this.update({
-			id: taskID,
-			complete: complete
-		  });
-		};
-
 		TasksModel.prototype.setDueDate = function(taskID, date) {
 		  return this.update({
 			id: taskID,
@@ -4136,7 +4082,39 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		},
 		get complete() {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
-			return vtodos[0].getFirstPropertyValue('complete') || 0;
+			return vtodos[0].getFirstPropertyValue('percent-complete') || 0;
+		},
+		set complete(complete) {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			vtodos[0].updatePropertyWithValue('percent-complete', complete);
+			this.data = this.components.toString();
+		},
+		get completed() {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			var comp = vtodos[0].getFirstPropertyValue('completed');
+			if (comp) {
+				return comp.toJSDate();
+			} else {
+				return false;
+			}
+		},
+		set completed(completed) {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			if (completed) {
+				vtodos[0].updatePropertyWithValue('completed', completed);
+			} else {
+				vtodos[0].removeProperty('completed');
+			}
+			this.data = this.components.toString();
+		},
+		get status() {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			return vtodos[0].getFirstPropertyValue('status');
+		},
+		set status(status) {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			vtodos[0].updatePropertyWithValue('status', status);
+			this.data = this.components.toString();
 		},
 		get note() {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
@@ -4173,8 +4151,7 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		vtodo.updatePropertyWithValue('uid', RandomStringService.generate());
 		vtodo.updatePropertyWithValue('summary', task.summary);
 		vtodo.updatePropertyWithValue('priority', task.priority);
-		vtodo.updatePropertyWithValue('complete', task.complete);
-		// vtodo.updatePropertyWithValue('completed', task.completed);
+		vtodo.updatePropertyWithValue('percent-complete', task.complete);
 		vtodo.updatePropertyWithValue('x-oc-hidesubtasks', 0);
 		if (task.related) {
 			vtodo.updatePropertyWithValue('related-to', task.related);
@@ -4182,24 +4159,6 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		if (task.note) {
 			vtodo.updatePropertyWithValue('note', task.note);
 		}
-
-// RELATED-TO:d2e8f180-7675-4ae4-90b2-ecb0187b148f
-// PERCENT-COMPLETE:100
-// STATUS:COMPLETED
-// COMPLETED:20160301T093848Z
-// X-OC-HIDESUBTASKS:1
-
-				  // calendar: null,
-				  // related: related,
-				  // summary: taskName,
-				  // starred: false,
-				  // priority: '0',
-				  // due: false,
-				  // start: false,
-				  // reminder: null,
-				  // completed: false,
-				  // complete: '0',
-				  // note: false
 
 		// objectConverter.patch(vevent, {}, {
 		// 	allDay: !start.hasTime() && !end.hasTime(),

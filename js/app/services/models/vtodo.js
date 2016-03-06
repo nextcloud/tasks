@@ -385,7 +385,39 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		},
 		get complete() {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
-			return vtodos[0].getFirstPropertyValue('complete') || 0;
+			return vtodos[0].getFirstPropertyValue('percent-complete') || 0;
+		},
+		set complete(complete) {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			vtodos[0].updatePropertyWithValue('percent-complete', complete);
+			this.data = this.components.toString();
+		},
+		get completed() {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			var comp = vtodos[0].getFirstPropertyValue('completed');
+			if (comp) {
+				return comp.toJSDate();
+			} else {
+				return false;
+			}
+		},
+		set completed(completed) {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			if (completed) {
+				vtodos[0].updatePropertyWithValue('completed', completed);
+			} else {
+				vtodos[0].removeProperty('completed');
+			}
+			this.data = this.components.toString();
+		},
+		get status() {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			return vtodos[0].getFirstPropertyValue('status');
+		},
+		set status(status) {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			vtodos[0].updatePropertyWithValue('status', status);
+			this.data = this.components.toString();
 		},
 		get note() {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
@@ -422,8 +454,7 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		vtodo.updatePropertyWithValue('uid', RandomStringService.generate());
 		vtodo.updatePropertyWithValue('summary', task.summary);
 		vtodo.updatePropertyWithValue('priority', task.priority);
-		vtodo.updatePropertyWithValue('complete', task.complete);
-		// vtodo.updatePropertyWithValue('completed', task.completed);
+		vtodo.updatePropertyWithValue('percent-complete', task.complete);
 		vtodo.updatePropertyWithValue('x-oc-hidesubtasks', 0);
 		if (task.related) {
 			vtodo.updatePropertyWithValue('related-to', task.related);
@@ -431,24 +462,6 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		if (task.note) {
 			vtodo.updatePropertyWithValue('note', task.note);
 		}
-
-// RELATED-TO:d2e8f180-7675-4ae4-90b2-ecb0187b148f
-// PERCENT-COMPLETE:100
-// STATUS:COMPLETED
-// COMPLETED:20160301T093848Z
-// X-OC-HIDESUBTASKS:1
-
-				  // calendar: null,
-				  // related: related,
-				  // summary: taskName,
-				  // starred: false,
-				  // priority: '0',
-				  // due: false,
-				  // start: false,
-				  // reminder: null,
-				  // completed: false,
-				  // complete: '0',
-				  // note: false
 
 		// objectConverter.patch(vevent, {}, {
 		// 	allDay: !start.hasTime() && !end.hasTime(),
