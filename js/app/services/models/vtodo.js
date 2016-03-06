@@ -442,6 +442,15 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 			var vtodos = this.components.getAllSubcomponents('vtodo');
 			return vtodos[0].getFirstPropertyValue('related-to') || null;
 		},
+		get hideSubtasks() {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			return +vtodos[0].getFirstPropertyValue('x-oc-hidesubtasks') || 0;
+		},
+		set hideSubtasks(hide) {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			vtodos[0].updatePropertyWithValue('x-oc-hidesubtasks', +hide);
+			this.data = this.components.toString();
+		},
 		get reminder() {
 			return null;
 		},

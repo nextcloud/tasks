@@ -1,8 +1,8 @@
 <div class="task-body"
     type="task"
     taskID="{{ task.uri }}"
-    ng-class="{active: route.taskID==task.uri, subtasks: hasSubtasks(task), subtaskshidden: task.hidesubtasks, attachment: task.note!=''}">
-    <div class="percentdone" style="width:{{ task.complete }}%; background-color:{{ getTaskColor(task.calendarid) }};"></div>
+    ng-class="{active: route.taskID==task.uri, subtasks: hasSubtasks(task), subtaskshidden: task.hideSubtasks, attachment: task.note!=''}">
+    <div class="percentdone" style="width:{{ task.complete }}%; background-color:{{ task.calendar.color }};"></div>
     <a class="task-checkbox handler" name="toggleCompleted" ng-click="toggleCompleted(task)">
         <span class="icon task-checkbox" ng-class="{'task-checked': task.completed}"></span>
     </a>
@@ -13,7 +13,7 @@
     <a class="task-addsubtask handler add-subtask" ng-click="showSubtaskInput(task.uid)" oc-click-focus="{selector: '.add-subtask input', timeout: 0}">
         <span class="icon large addsubtask" title="<?php p($l->t('add a subtask to')); ?> {{ task.summary }}"></span>
     </a>
-    <a class="handler"  ng-click="toggleSubtasks(task.uri)">
+    <a class="handler"  ng-click="toggleSubtasks(task)">
         <span class="icon large subtasks"></span>
     </a>
     <a>
@@ -46,13 +46,14 @@
                     ng-keydown="checkTaskInput($event)"/>
             </form>
         </li>
-<!--         <li taskID="{{ task.uri }}"
+        <li taskID="{{ task.uri }}"
             class="task-item ui-draggable handler subtask"
             ng-repeat="task in getSubTasks(filtered,task) | orderBy:'1*id':true | orderBy:'priority':true | orderBy:'completed':false"
             ng-click="openDetails(task.uri,$event)"
             ng-class="{done: task.completed}"
             ng-include="'part.taskbody'"
             dnd-draggable="task"
-            dnd-effect-allowed="move"></li> -->
+            dnd-effect-allowed="move">
+        </li>
     </ol>
 </div>

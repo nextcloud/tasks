@@ -231,31 +231,30 @@
 		  return false;
 		};
 
-		TasksModel.prototype.getChildrenID = function(taskID) {
-		  var childrenID, t, task, tasks, _i, _len;
-		  task = this.getById(taskID);
-		  tasks = this.getAll();
-		  childrenID = [];
-		  for (_i = 0, _len = tasks.length; _i < _len; _i++) {
-			t = tasks[_i];
-			if (t.related === task.uid) {
-			  childrenID.push(t.id);
-			}
-		  }
-		  return childrenID;
-		};
+			TasksModel.prototype.getChildren = function(task) {
+				var children, t, tasks, _i, _len;
+				tasks = this.getAll();
+				children = [];
+				for (_i = 0, _len = tasks.length; _i < _len; _i++) {
+					t = tasks[_i];
+					if (t.related === task.uid) {
+						children.push(t);
+					}
+				}
+				return children;
+			};
 
-		TasksModel.prototype.getDescendantID = function(taskID) {
-		  var childID, childrenID, descendantID, _i, _len;
-		  childrenID = this.getChildrenID(taskID);
-		  descendantID = [];
-		  descendantID = descendantID.concat(childrenID);
-		  for (_i = 0, _len = childrenID.length; _i < _len; _i++) {
-			childID = childrenID[_i];
-			descendantID = descendantID.concat(this.getDescendantID(childID));
-		  }
-		  return descendantID;
-		};
+			TasksModel.prototype.getDescendantIDs = function(task) {
+				var child, children, descendantIDs, _i, _len;
+				children = this.getChildren(task);
+				descendantIDs = [];
+				for (_i = 0, _len = children.length; _i < _len; _i++) {
+					child = children[_i];
+					descendantIDs = descendantIDs.concat(child.uri);
+					descendantIDs = descendantIDs.concat(this.getDescendantIDs(child));
+				}
+				return descendantIDs;
+			};
 
 			TasksModel.prototype.filterTasks = function(task, filter) {
 					switch (filter) {

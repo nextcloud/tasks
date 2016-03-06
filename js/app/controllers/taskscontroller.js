@@ -49,48 +49,43 @@
 			this._$scope.TasksBusinessLayer = this._tasksbusinesslayer;
 
 			this._$scope.addTask = function(taskName, related, calendar) {
-				var task;
-				var task, _ref,
-				  _this = this;
+				var _ref, _this = this;
 				if (calendar == null) {
 				  calendar = '';
 				}
 				_$scope.isAddingTask = true;
-				task = {
-				  // tmpID: 'newTask' + Date.now(),
-				  // id: 'newTask' + Date.now(),
-				  calendar: null,
-				  related: related,
-				  summary: taskName,
-				  starred: false,
-				  priority: '0',
-				  due: false,
-				  start: false,
-				  reminder: null,
-				  completed: false,
-				  complete: '0',
-				  note: ''
+				var task = {
+					calendar: null,
+					related: related,
+					summary: taskName,
+					starred: false,
+					priority: '0',
+					due: false,
+					start: false,
+					reminder: null,
+					completed: false,
+					complete: '0',
+					note: ''
 				};
 				if (((_ref = _$scope.route.listID) === 'starred' || _ref === 'today' || _ref === 'week' || _ref === 'all' || _ref === 'completed' || _ref === 'current')) {
-				  if (related) {
-					task.calendar = calendar;
-				  } else {
-					task.calendarid = _$listsmodel.getStandardList();
-				  }
-				  if (_$scope.route.listID === 'starred') {
-					task.starred = true;
-				  }
-				  if (_$scope.route.listID === 'today') {
-					task.due = moment().startOf('day').format("YYYYMMDDTHHmmss");
-				  }
-				  if (_$scope.route.listID === 'current') {
-					task.start = moment().format("YYYYMMDDTHHmmss");
-				  }
+					if (related) {
+						task.calendar = calendar;
+					} else {
+						task.calendarid = _$listsmodel.getStandardList();
+					}
+					if (_$scope.route.listID === 'starred') {
+						task.starred = true;
+					}
+					if (_$scope.route.listID === 'today') {
+						task.due = moment().startOf('day').format("YYYYMMDDTHHmmss");
+					}
+					if (_$scope.route.listID === 'current') {
+						task.start = moment().format("YYYYMMDDTHHmmss");
+					}
 				} else {
-				  task.calendar = _$listsmodel.getByUri(_$scope.route.calendarID);
+					task.calendar = _$listsmodel.getByUri(_$scope.route.calendarID);
 				}
 				task = VTodo.create(task);
-				// console.log(task);
 				_tasksbusinesslayer.add(task).then(function(task) {
 					_$scope.isAddingTask = false;
 					return $scope.$apply();
@@ -102,47 +97,50 @@
 				return _$scope.status.subtaskName = '';
 			};
 
-		  this._$scope.getAddString = function() {
-			var calendar;
-			if (angular.isDefined(calendar = _$listsmodel.getStandardList())) {
-			  if (angular.isDefined(_$scope.route.collectionID)) {
-				switch (_$scope.route.collectionID) {
-				  case 'starred':
-					return t('tasks', 'Add an important item in "%s"...').replace('%s', calendar.displayname);
-				  case 'today':
-					return t('tasks', 'Add an item due today in "%s"...').replace('%s', calendar.displayname);
-				  case 'all':
-					return t('tasks', 'Add an item in "%s"...').replace('%s', calendar.displayname);
-				  case 'current':
-					return t('tasks', 'Add a current item in "%s"...').replace('%s', calendar.displayname);
-				  case 'completed':
-				  case 'week':
-					return null;
+			this._$scope.getAddString = function() {
+				var calendar = _$listsmodel.getStandardList();
+				if (angular.isDefined(calendar)) {
+					if (angular.isDefined(_$scope.route.collectionID)) {
+						switch (_$scope.route.collectionID) {
+							case 'starred':
+								return t('tasks', 'Add an important item in "%s"...').replace('%s', calendar.displayname);
+							case 'today':
+								return t('tasks', 'Add an item due today in "%s"...').replace('%s', calendar.displayname);
+							case 'all':
+								return t('tasks', 'Add an item in "%s"...').replace('%s', calendar.displayname);
+							case 'current':
+								return t('tasks', 'Add a current item in "%s"...').replace('%s', calendar.displayname);
+							case 'completed':
+							case 'week':
+								return null;
+						}
+					} else {
+						if (angular.isDefined(_$listsmodel.getByUri(_$scope.route.calendarID))) {
+							return t('tasks', 'Add an item in "%s"...').replace('%s', _$listsmodel.getByUri(_$scope.route.calendarID).displayname);
+						}
+					}
 				}
-			  } else {
-				if (angular.isDefined(_$listsmodel.getByUri(_$scope.route.calendarID))) {
-				  return t('tasks', 'Add an item in "%s"...').replace('%s', _$listsmodel.getByUri(_$scope.route.calendarID).displayname);
+			};
+
+			this._$scope.getSubAddString = function(taskname) {
+				return t('tasks', 'Add a subtask to "%s"...').replace('%s', taskname);
+			};
+
+			this._$scope.showSubtaskInput = function(uid) {
+				return _$scope.status.addSubtaskTo = uid;
+			};
+
+			this._$scope.hideSubtasks = function(task) {
+				var taskID = _$scope.route.taskID;
+				var descendantIDs = _$tasksmodel.getDescendantIDs(task);
+				if (task.uri === taskID) {
+					return false;
+				} else if (__indexOf.call(descendantIDs, taskID) >= 0) {
+					return false;
+				} else {
+					return task.hideSubtasks;
 				}
-			  }
-			}
-		  };
-		  this._$scope.getSubAddString = function(taskname) {
-			return t('tasks', 'Add a subtask to "%s"...').replace('%s', taskname);
-		  };
-		  this._$scope.showSubtaskInput = function(uid) {
-			return _$scope.status.addSubtaskTo = uid;
-		  };
-		  this._$scope.hideSubtasks = function(task) {
-			// var descendants, _ref;
-			// descendants = _$tasksmodel.getDescendantID(task.id);
-			// if (task.id === _$scope.route.taskID) {
-			//   return false;
-			// } else if (_ref = _$scope.route.taskID, __indexOf.call(descendants, _ref) >= 0) {
-			//   return false;
-			// } else {
-			//   return task.hidesubtasks;
-			// }
-		  };
+			};
 		  this._$scope.showInput = function() {
 			var _ref;
 			if ((_ref = _$scope.route.listID) === 'completed' || _ref === 'week') {
@@ -186,25 +184,27 @@
 				}
 			};
 
-		  this._$scope.toggleHidden = function() {
-			return _settingsbusinesslayer.toggle('various', 'showHidden');
-		  };
-		  this._$scope.filterTasks = function(task, filter) {
-			return function(task) {
-			  return _$tasksmodel.filterTasks(task, filter);
+			this._$scope.toggleHidden = function() {
+				return _settingsbusinesslayer.toggle('various', 'showHidden');
 			};
-		  };
-		  this._$scope.getSubTasks = function(tasks, parent) {
-			var ret, task, _i, _len;
-			ret = [];
-			for (_i = 0, _len = tasks.length; _i < _len; _i++) {
-			  task = tasks[_i];
-			  if (task.related === parent.uid) {
-				ret.push(task);
-			  }
-			}
-			return ret;
-		  };
+
+			this._$scope.filterTasks = function(task, filter) {
+				return function(task) {
+					return _$tasksmodel.filterTasks(task, filter);
+				};
+			};
+
+			this._$scope.getSubTasks = function(tasks, parent) {
+				var ret, task, _i, _len;
+				ret = [];
+				for (_i = 0, _len = tasks.length; _i < _len; _i++) {
+					task = tasks[_i];
+					if (task.related === parent.uid) {
+						ret.push(task);
+					}
+				}
+				return ret;
+			};
 
 			this._$scope.hasNoParent = function(task) {
 				return function(task) {
@@ -212,23 +212,20 @@
 				};
 			};
 
-		  this._$scope.hasSubtasks = function(task) {
-			return _$tasksmodel.hasSubtasks(task.uid);
-		  };
-		  this._$scope.toggleSubtasks = function(taskID) {
-			if (_$tasksmodel.hideSubtasks(taskID)) {
-			  return _tasksbusinesslayer.unhideSubtasks(taskID);
-			} else {
-			  return _tasksbusinesslayer.hideSubtasks(taskID);
-			}
-		  };
-		  this._$scope.filterTasksByString = function(task) {
-			return function(task) {
-			  var filter;
-			  filter = _searchbusinesslayer.getFilter();
-			  return _$tasksmodel.filterTasksByString(task, filter);
+			this._$scope.hasSubtasks = function(task) {
+				return _$tasksmodel.hasSubtasks(task.uid);
 			};
-		  };
+
+			this._$scope.toggleSubtasks = function(task) {
+				_tasksbusinesslayer.setHideSubtasks(task, !task.hideSubtasks);
+			};
+
+			this._$scope.filterTasksByString = function(task) {
+				return function(task) {
+					var filter = _searchbusinesslayer.getFilter();
+					return _$tasksmodel.filterTasksByString(task, filter);
+				};
+			};
 
 			this._$scope.filteredTasks = function() {
 				var filter;
@@ -293,9 +290,6 @@
 			} else {
 			  return task.due;
 			}
-		  };
-		  this._$scope.getTaskColor = function(listID) {
-			return _$listsmodel.getColor(listID);
 		  };
 		  this._$scope.getTaskList = function(listID) {
 			return _$listsmodel.getName(listID);

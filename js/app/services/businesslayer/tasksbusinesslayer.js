@@ -105,15 +105,11 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 		  }
 		};
 
-		TasksBusinessLayer.prototype.unhideSubtasks = function(taskID) {
-		  this._$tasksmodel.setHideSubtasks(taskID, false);
-		  return this._persistence.setHideSubtasks(taskID, false);
-		};
-
-		TasksBusinessLayer.prototype.hideSubtasks = function(taskID) {
-		  this._$tasksmodel.setHideSubtasks(taskID, true);
-		  return this._persistence.setHideSubtasks(taskID, true);
-		};
+			TasksBusinessLayer.prototype.setHideSubtasks = function(task, hide) {
+				task.hideSubtasks = hide;
+				this._$vtodoservice.update(task).then(function(task) {
+				});
+			};
 
 		TasksBusinessLayer.prototype.deleteTask = function(taskID) {
 		  var childID, childrenID, _i, _len;
