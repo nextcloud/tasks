@@ -59,23 +59,11 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 		  return this._persistence.getTask(taskID, onSuccess, true);
 		};
 
-		TasksBusinessLayer.prototype.setPriority = function(taskID, priority) {
-		  this._$tasksmodel.setPriority(taskID, priority);
-		  if (+priority === 6 || +priority === 7 || +priority === 8 || +priority === 9) {
-			this._$tasksmodel.star(taskID);
-		  } else {
-			this._$tasksmodel.unstar(taskID);
-		  }
-		  return this._persistence.setPriority(taskID, priority);
-		};
-
-		TasksBusinessLayer.prototype.starTask = function(taskID) {
-		  return this.setPriority(taskID, '9');
-		};
-
-		TasksBusinessLayer.prototype.unstarTask = function(taskID) {
-		  return this.setPriority(taskID, '0');
-		};
+			TasksBusinessLayer.prototype.setPriority = function(task, priority) {
+				task.priority = priority;
+				this._$vtodoservice.update(task).then(function(task) {
+				});
+			};
 
 		TasksBusinessLayer.prototype.setPercentComplete = function(taskID, percentComplete) {
 		  var task;

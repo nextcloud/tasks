@@ -52,9 +52,6 @@
 				var task;
 				var task, _ref,
 				  _this = this;
-				if (related == null) {
-				  related = '';
-				}
 				if (calendar == null) {
 				  calendar = '';
 				}
@@ -174,14 +171,15 @@
 			  return _tasksbusinesslayer.completeTask(taskID);
 			}
 		  };
-		  this._$scope.toggleStarred = function(taskID) {
-			if (_$tasksmodel.starred(taskID)) {
-			  return _tasksbusinesslayer.unstarTask(taskID);
-			} else {
-				_$tasksmodel.star(taskID);
-				return _tasksbusinesslayer.starTask(taskID);
-			}
-		  };
+		  
+			this._$scope.toggleStarred = function(task) {
+				if (task.priority > 5) {
+					_tasksbusinesslayer.setPriority(task, 0);
+				} else {
+					_tasksbusinesslayer.setPriority(task, 9);
+				}
+			};
+
 		  this._$scope.toggleHidden = function() {
 			return _settingsbusinesslayer.toggle('various', 'showHidden');
 		  };

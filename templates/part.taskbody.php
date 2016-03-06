@@ -7,7 +7,7 @@
         <span class="icon task-checkbox" ng-class="{'task-checked': task.completed}"></span>
     </a>
     <a class="icon task-separator"></a>
-    <a class="task-star handler" ng-click="toggleStarred(task.uri)">
+    <a class="task-star handler" ng-click="toggleStarred(task)">
         <span class="icon large task-star faded" ng-class="{'high':task.priority>5,'medium':task.priority==5,'low':task.priority > 0 && task.priority < 5}"></span>
     </a>
     <a class="task-addsubtask handler add-subtask" ng-click="showSubtaskInput(task.uid)" oc-click-focus="{selector: '.add-subtask input', timeout: 0}">

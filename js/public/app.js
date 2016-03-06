@@ -837,9 +837,6 @@ angular.module('Tasks').controller('ListController', [
 				var task;
 				var task, _ref,
 				  _this = this;
-				if (related == null) {
-				  related = '';
-				}
 				if (calendar == null) {
 				  calendar = '';
 				}
@@ -959,14 +956,15 @@ angular.module('Tasks').controller('ListController', [
 			  return _tasksbusinesslayer.completeTask(taskID);
 			}
 		  };
-		  this._$scope.toggleStarred = function(taskID) {
-			if (_$tasksmodel.starred(taskID)) {
-			  return _tasksbusinesslayer.unstarTask(taskID);
-			} else {
-				_$tasksmodel.star(taskID);
-				return _tasksbusinesslayer.starTask(taskID);
-			}
-		  };
+		  
+			this._$scope.toggleStarred = function(task) {
+				if (task.priority > 5) {
+					_tasksbusinesslayer.setPriority(task, 0);
+				} else {
+					_tasksbusinesslayer.setPriority(task, 9);
+				}
+			};
+
 		  this._$scope.toggleHidden = function() {
 			return _settingsbusinesslayer.toggle('various', 'showHidden');
 		  };
@@ -1640,23 +1638,11 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 		  return this._persistence.getTask(taskID, onSuccess, true);
 		};
 
-		TasksBusinessLayer.prototype.setPriority = function(taskID, priority) {
-		  this._$tasksmodel.setPriority(taskID, priority);
-		  if (+priority === 6 || +priority === 7 || +priority === 8 || +priority === 9) {
-			this._$tasksmodel.star(taskID);
-		  } else {
-			this._$tasksmodel.unstar(taskID);
-		  }
-		  return this._persistence.setPriority(taskID, priority);
-		};
-
-		TasksBusinessLayer.prototype.starTask = function(taskID) {
-		  return this.setPriority(taskID, '9');
-		};
-
-		TasksBusinessLayer.prototype.unstarTask = function(taskID) {
-		  return this.setPriority(taskID, '0');
-		};
+			TasksBusinessLayer.prototype.setPriority = function(task, priority) {
+				task.priority = priority;
+				this._$vtodoservice.update(task).then(function(task) {
+				});
+			};
 
 		TasksBusinessLayer.prototype.setPercentComplete = function(taskID, percentComplete) {
 		  var task;
@@ -4133,11 +4119,20 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 			return vtodos[0].getFirstPropertyValue('summary');
 		},
 		set summary(summary) {
-			// return this.name = name;
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			vtodos[0].updatePropertyWithValue('summary', summary);
+			this.data = this.components.toString();
 		},
 		get priority() {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
-			return vtodos[0].getFirstPropertyValue('priority');
+			var priority = vtodos[0].getFirstPropertyValue('priority');
+			return (10 - priority) % 10;
+		},
+		set priority(priority) {
+			console.log(priority);
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			vtodos[0].updatePropertyWithValue('priority', (10 - priority) % 10);
+			this.data = this.components.toString();
 		},
 		get complete() {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
@@ -4150,6 +4145,10 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		get uid() {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
 			return vtodos[0].getFirstPropertyValue('uid') || '';
+		},
+		get related() {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			return vtodos[0].getFirstPropertyValue('related-to') || null;
 		},
 		// get enabled() {
 		// 	return this._properties.enabled;
@@ -4164,7 +4163,6 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 	}
 
 	VTodo.create = function(task) {
-		// console.log(start, end, timezone);
 		var comp = icalfactory.new();
 
 		var vtodo = new ICAL.Component('vtodo');
@@ -4178,8 +4176,12 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		vtodo.updatePropertyWithValue('complete', task.complete);
 		// vtodo.updatePropertyWithValue('completed', task.completed);
 		vtodo.updatePropertyWithValue('x-oc-hidesubtasks', 0);
-		vtodo.updatePropertyWithValue('relatd-to', task.related);
-		vtodo.updatePropertyWithValue('note', task.note);
+		if (task.related) {
+			vtodo.updatePropertyWithValue('related-to', task.related);
+		}
+		if (task.note) {
+			vtodo.updatePropertyWithValue('note', task.note);
+		}
 
 // RELATED-TO:d2e8f180-7675-4ae4-90b2-ecb0187b148f
 // PERCENT-COMPLETE:100
