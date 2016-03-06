@@ -20,7 +20,19 @@
 		taskUpdateInterval: 1000 * 600
 	  });
 	  $httpProvider.defaults.headers.common['requesttoken'] = oc_requesttoken;
-	  $routeProvider.when('/calendars/:calendarID', {}).when('/calendars/:calendarID/edit/:listparameter', {}).when('/calendars/:calendarID/tasks/:taskID', {}).when('/calendars/:calendarID/tasks/:taskID/settings', {}).when('/calendars/:calendarID/tasks/:taskID/edit/:parameter', {}).when('/collections/:collectionID', {}).when('/search/:searchString', {}).when('/search/:searchString/tasks/:taskID', {}).when('/search/:searchString/tasks/:taskID/edit/:parameter', {});
+	  $routeProvider
+	  .when('/calendars/:calendarID', {})
+	  .when('/calendars/:calendarID/edit/:listparameter', {})
+	  .when('/calendars/:calendarID/tasks/:taskID', {})
+	  .when('/calendars/:calendarID/tasks/:taskID/settings', {})
+	  .when('/calendars/:calendarID/tasks/:taskID/edit/:parameter', {})
+	  .when('/collections/:collectionID/tasks/:taskID', {})
+	  .when('/collections/:collectionID/tasks/:taskID/settings', {})
+	  .when('/collections/:collectionID/tasks/:taskID/edit/:parameter', {})
+	  .when('/collections/:collectionID', {})
+	  .when('/search/:searchString', {})
+	  .when('/search/:searchString/tasks/:taskID', {})
+	  .when('/search/:searchString/tasks/:taskID/edit/:parameter', {});
 	}
   ]);
 
@@ -384,9 +396,15 @@ angular.module('Tasks').controller('AppController', [
 			  return _$scope.resetRoute();
 			}
 		  };
-		  this._$scope.resetRoute = function() {
-			return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID);
-		  };
+			this._$scope.resetRoute = function() {
+				var calendarID;
+				var collectionID;
+				if (calendarID = _$scope.route.calendarID) {
+					$location.path('/calendars/' + calendarID + '/tasks/' + _$scope.route.taskID);
+				} else if (collectionID = _$scope.route.collectionID) {
+					$location.path('/collections/' + collectionID + '/tasks/' + _$scope.route.taskID);
+				}
+			};
 		  this._$scope.deleteDueDate = function() {
 			return _tasksbusinesslayer.deleteDueDate(_$scope.route.taskID);
 		  };
@@ -399,20 +417,23 @@ angular.module('Tasks').controller('AppController', [
 		  this._$scope.deleteReminder = function() {
 			return _tasksbusinesslayer.deleteReminderDate(_$scope.route.taskID);
 		  };
-		  this._$scope.toggleCompleted = function(taskID) {
-			if (_$tasksmodel.completed(taskID)) {
-			  return _tasksbusinesslayer.uncompleteTask(taskID);
-			} else {
-			  return _tasksbusinesslayer.completeTask(taskID);
-			}
-		  };
-		  this._$scope.toggleStarred = function(taskID) {
-			if (_$tasksmodel.starred(taskID)) {
-			  return _tasksbusinesslayer.unstarTask(taskID);
-			} else {
-			  return _tasksbusinesslayer.starTask(taskID);
-			}
-		  };
+
+			this._$scope.toggleCompleted = function(task) {
+				if (task.completed) {
+					_tasksbusinesslayer.setPercentComplete(task, 0);
+				} else {
+					_tasksbusinesslayer.setPercentComplete(task, 100);
+				}
+			};
+
+			this._$scope.toggleStarred = function(task) {
+				if (task.priority > 5) {
+					_tasksbusinesslayer.setPriority(task, 0);
+				} else {
+					_tasksbusinesslayer.setPriority(task, 9);
+				}
+			};
+
 		  this._$scope.deletePriority = function() {
 			return _tasksbusinesslayer.unstarTask(_$scope.route.taskID);
 		  };
@@ -422,44 +443,44 @@ angular.module('Tasks').controller('AppController', [
 		  this._$scope.isOverDue = function(date) {
 			return _$tasksmodel.overdue(date);
 		  };
-		  this._$scope.$watch('task', function(newVal, oldVal) {
-			if (newVal === oldVal || (void 0 === newVal || void 0 === oldVal) || newVal.id !== oldVal.id) {
+		 //  this._$scope.$watch('task', function(newVal, oldVal) {
+			// if (newVal === oldVal || (void 0 === newVal || void 0 === oldVal) || newVal.id !== oldVal.id) {
 
-			} else {
-			  if (newVal.name !== oldVal.name) {
-				if (_$scope.timers['task' + newVal.id + 'name']) {
-				  $timeout.cancel(_$scope.timers['task' + newVal.id + 'name']);
-				}
-				_$scope.timers['task' + newVal.id + 'name'] = $timeout(function() {
-				  return _tasksbusinesslayer.setTaskName(newVal.id, newVal.name);
-				}, 3000);
-			  }
-			  if (newVal.note !== oldVal.note) {
-				if (_$scope.timers['task' + newVal.id + 'note']) {
-				  $timeout.cancel(_$scope.timers['task' + newVal.id + 'note']);
-				}
-				_$scope.timers['task' + newVal.id + 'note'] = $timeout(function() {
-				  return _tasksbusinesslayer.setTaskNote(newVal.id, newVal.note);
-				}, 5000);
-			  }
-			  if (newVal.complete !== oldVal.complete) {
-				if (_$scope.timers['task' + newVal.id + 'complete']) {
-				  $timeout.cancel(_$scope.timers['task' + newVal.id + 'complete']);
-				}
-				_$scope.timers['task' + newVal.id + 'complete'] = $timeout(function() {
-				  return _tasksbusinesslayer.setPercentComplete(newVal.id, newVal.complete);
-				}, 1000);
-			  }
-			  if (newVal.priority !== oldVal.priority) {
-				if (_$scope.timers['task' + newVal.id + 'priority']) {
-				  $timeout.cancel(_$scope.timers['task' + newVal.id + 'priority']);
-				}
-				return _$scope.timers['task' + newVal.id + 'priority'] = $timeout(function() {
-				  return _tasksbusinesslayer.setPriority(newVal.id, newVal.priority);
-				}, 1000);
-			  }
-			}
-		  }, true);
+			// } else {
+			//   if (newVal.name !== oldVal.name) {
+			// 	if (_$scope.timers['task' + newVal.id + 'name']) {
+			// 	  $timeout.cancel(_$scope.timers['task' + newVal.id + 'name']);
+			// 	}
+			// 	_$scope.timers['task' + newVal.id + 'name'] = $timeout(function() {
+			// 	  return _tasksbusinesslayer.setTaskName(newVal.id, newVal.name);
+			// 	}, 3000);
+			//   }
+			//   if (newVal.note !== oldVal.note) {
+			// 	if (_$scope.timers['task' + newVal.id + 'note']) {
+			// 	  $timeout.cancel(_$scope.timers['task' + newVal.id + 'note']);
+			// 	}
+			// 	_$scope.timers['task' + newVal.id + 'note'] = $timeout(function() {
+			// 	  return _tasksbusinesslayer.setTaskNote(newVal.id, newVal.note);
+			// 	}, 5000);
+			//   }
+			//   if (newVal.complete !== oldVal.complete) {
+			// 	if (_$scope.timers['task' + newVal.id + 'complete']) {
+			// 	  $timeout.cancel(_$scope.timers['task' + newVal.id + 'complete']);
+			// 	}
+			// 	_$scope.timers['task' + newVal.id + 'complete'] = $timeout(function() {
+			// 	  return _tasksbusinesslayer.setPercentComplete(newVal.id, newVal.complete);
+			// 	}, 1000);
+			//   }
+			//   if (newVal.priority !== oldVal.priority) {
+			// 	if (_$scope.timers['task' + newVal.id + 'priority']) {
+			// 	  $timeout.cancel(_$scope.timers['task' + newVal.id + 'priority']);
+			// 	}
+			// 	return _$scope.timers['task' + newVal.id + 'priority'] = $timeout(function() {
+			// 	  return _tasksbusinesslayer.setPriority(newVal.id, newVal.priority);
+			// 	}, 1000);
+			//   }
+			// }
+		 //  }, true);
 		  this._$scope.setstartday = function(date) {
 			return _tasksbusinesslayer.setStart(_$scope.route.taskID, moment(date, 'MM/DD/YYYY'), 'day');
 		  };
@@ -942,13 +963,19 @@ angular.module('Tasks').controller('ListController', [
 		  this._$scope.focusSubtaskInput = function() {
 			return _$scope.status.focusSubtaskInput = true;
 		  };
-		  this._$scope.openDetails = function(id, $event) {
-			var listID;
-			if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
-			  listID = _$scope.route.listID;
-			  return $location.path('/lists/' + listID + '/tasks/' + id);
-			}
-		  };
+		  
+			this._$scope.openDetails = function(id, $event) {
+				var calendarID;
+				var collectionID;
+				if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+					if (calendarID = _$scope.route.calendarID) {
+						$location.path('/calendars/' + calendarID + '/tasks/' + id);
+					} else if (collectionID = _$scope.route.collectionID) {
+						$location.path('/collections/' + collectionID + '/tasks/' + id);
+					}
+				}
+			};
+
 			this._$scope.toggleCompleted = function(task) {
 				if (task.completed) {
 					_tasksbusinesslayer.setPercentComplete(task, 0);
@@ -969,10 +996,9 @@ angular.module('Tasks').controller('ListController', [
 			return _settingsbusinesslayer.toggle('various', 'showHidden');
 		  };
 		  this._$scope.filterTasks = function(task, filter) {
-		  	return task;
-			// return function(task) {
-			  // return _$tasksmodel.filterTasks(task, filter);
-			// };
+			return function(task) {
+			  return _$tasksmodel.filterTasks(task, filter);
+			};
 		  };
 		  this._$scope.getSubTasks = function(tasks, parent) {
 			var ret, task, _i, _len;
@@ -985,12 +1011,13 @@ angular.module('Tasks').controller('ListController', [
 			}
 			return ret;
 		  };
-		  this._$scope.hasNoParent = function(task) {
-		  	return true;
-			// return function(task) {
-			  // return _$tasksmodel.hasNoParent(task);
-			// };
-		  };
+
+			this._$scope.hasNoParent = function(task) {
+				return function(task) {
+					return _$tasksmodel.hasNoParent(task);
+				};
+			};
+
 		  this._$scope.hasSubtasks = function(task) {
 			return _$tasksmodel.hasSubtasks(task.uid);
 		  };
@@ -1008,12 +1035,13 @@ angular.module('Tasks').controller('ListController', [
 			  return _$tasksmodel.filterTasksByString(task, filter);
 			};
 		  };
-		  this._$scope.filteredTasks = function() {
-		  	return _$tasksmodel.getAll();
-			// var filter;
-			// filter = _searchbusinesslayer.getFilter();
-			// return _$tasksmodel.filteredTasks(filter);
-		  };
+
+			this._$scope.filteredTasks = function() {
+				var filter;
+				filter = _searchbusinesslayer.getFilter();
+				return _$tasksmodel.filteredTasks(filter);
+			};
+
 		  this._$scope.dayHasEntry = function() {
 			return function(date) {
 			  var filter, task, tasks, _i, _len;
@@ -1037,20 +1065,18 @@ angular.module('Tasks').controller('ListController', [
 			};
 		  };
 		  this._$scope.filterLists = function() {
-			return function(list) {
-			  return _$scope.getCount(list.id, _$scope.route.listID);
+			return function(calendar) {
+			  return _$scope.getCount(calendar.uri, _$scope.route.collectionID);
 			};
 		  };
-		  this._$scope.getCount = function(listID, type) {
-			var filter;
-			filter = _searchbusinesslayer.getFilter();
-			return _$listsmodel.getCount(listID, type, filter);
-		  };
-		  this._$scope.getCountString = function(listID, type) {
-			var filter;
-			filter = _searchbusinesslayer.getFilter();
-			return n('tasks', '%n Completed Task', '%n Completed Tasks', _$listsmodel.getCount(listID, type, filter));
-		  };
+			this._$scope.getCount = function(calendarID, type) {
+				var filter = _searchbusinesslayer.getFilter();
+				return _$listsmodel.getCount(calendarID, type, filter);
+			};
+			this._$scope.getCountString = function(calendarID, type) {
+				var filter = _searchbusinesslayer.getFilter();
+				return n('tasks', '%n Completed Task', '%n Completed Tasks', _$listsmodel.getCount(calendarID, type, filter));
+			};
 		  this._$scope.checkTaskInput = function($event) {
 			if ($event.keyCode === 27) {
 			  $($event.currentTarget).blur();
@@ -1645,11 +1671,10 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 			};
 
 			TasksBusinessLayer.prototype.setPercentComplete = function(task, percentComplete) {
-				var task;
 				task.complete = percentComplete;
 				if (percentComplete < 100) {
 					task.completed = null;
-					if (percentComplete == 0) {
+					if (percentComplete === 0) {
 						task.status = 'NEEDS-ACTION';
 					} else {
 						task.status = 'IN-PROCESS';
@@ -1660,7 +1685,6 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 					task.status = 'COMPLETED';
 					// this.completeChildren(task);
 				}
-				console.log(task);
 				this._$vtodoservice.update(task).then(function(task) {
 				});
 			};
@@ -3151,7 +3175,7 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 			return ret;
 		};
 
-		ListsModel.prototype.getCount = function(listID, collectionID, filter) {
+		ListsModel.prototype.getCount = function(calendarID, collectionID, filter) {
 		  var count, task, tasks, _i, _len;
 		  if (filter == null) {
 			filter = '';
@@ -3160,10 +3184,10 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 		  tasks = this._$tasksmodel.filteredTasks(filter);
 		  for (_i = 0, _len = tasks.length; _i < _len; _i++) {
 			task = tasks[_i];
-			count += this._$tasksmodel.filterTasks(task, collectionID) && task.calendarid === listID && !task.related;
+			count += this._$tasksmodel.filterTasks(task, collectionID) && task.calendaruri === calendarID && !task.related;
 		  }
 		  if (collectionID === 'completed' && filter === '') {
-			count += this.notLoaded(listID);
+			// count += this.notLoaded(calendarID);
 		  }
 		  return count;
 		};
@@ -3485,24 +3509,24 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 		  return descendantID;
 		};
 
-		TasksModel.prototype.filterTasks = function(task, filter) {
-		  switch (filter) {
-			case 'completed':
-			  return task.completed === true;
-			case 'all':
-			  return task.completed === false;
-			case 'current':
-			  return task.completed === false && this.current(task.start, task.due);
-			case 'starred':
-			  return task.completed === false && task.starred === true;
-			case 'today':
-			  return task.completed === false && (this.today(task.start) || this.today(task.due));
-			case 'week':
-			  return task.completed === false && (this.week(task.start) || this.week(task.due));
-			default:
-			  return '' + task.calendarid === '' + filter;
-		  }
-		};
+			TasksModel.prototype.filterTasks = function(task, filter) {
+					switch (filter) {
+					case 'completed':
+						return task.completed === true;
+					case 'all':
+						return task.completed === false;
+					case 'current':
+						return task.completed === false && this.current(task.start, task.due);
+					case 'starred':
+						return task.completed === false && task.priority > 5;
+					case 'today':
+						return task.completed === false && (this.today(task.start) || this.today(task.due));
+					case 'week':
+						return task.completed === false && (this.week(task.start) || this.week(task.due));
+					default:
+						return '' + task.calendaruri === '' + filter;
+				}
+			};
 
 		TasksModel.prototype.filteredTasks = function(needle) {
 		  var ancestors, parentID, ret, task, tasks, _i, _len;
@@ -4060,6 +4084,9 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 	}
 
 	VTodo.prototype = {
+		get calendaruri() {
+			return this.calendar.uri;
+		},
 		get summary() {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
 			return vtodos[0].getFirstPropertyValue('summary');
@@ -4075,7 +4102,6 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 			return (10 - priority) % 10;
 		},
 		set priority(priority) {
-			console.log(priority);
 			var vtodos = this.components.getAllSubcomponents('vtodo');
 			vtodos[0].updatePropertyWithValue('priority', (10 - priority) % 10);
 			this.data = this.components.toString();
@@ -4093,7 +4119,7 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 			var vtodos = this.components.getAllSubcomponents('vtodo');
 			var comp = vtodos[0].getFirstPropertyValue('completed');
 			if (comp) {
-				return comp.toJSDate();
+				return true;
 			} else {
 				return false;
 			}
@@ -4106,6 +4132,15 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 				vtodos[0].removeProperty('completed');
 			}
 			this.data = this.components.toString();
+		},
+		get completed_date() {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			var comp = vtodos[0].getFirstPropertyValue('completed');
+			if (comp) {
+				return comp.toJSDate();
+			} else {
+				return null;
+			}
 		},
 		get status() {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
@@ -4127,6 +4162,21 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		get related() {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
 			return vtodos[0].getFirstPropertyValue('related-to') || null;
+		},
+		get reminder() {
+			return null;
+		},
+		get categories() {
+			return null;
+		},
+		get start() {
+			return null;
+		},
+		get due() {
+			return null;
+		},
+		get comments() {
+			return null;
 		},
 		// get enabled() {
 		// 	return this._properties.enabled;

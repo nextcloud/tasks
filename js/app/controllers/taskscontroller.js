@@ -157,13 +157,19 @@
 		  this._$scope.focusSubtaskInput = function() {
 			return _$scope.status.focusSubtaskInput = true;
 		  };
-		  this._$scope.openDetails = function(id, $event) {
-			var listID;
-			if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
-			  listID = _$scope.route.listID;
-			  return $location.path('/lists/' + listID + '/tasks/' + id);
-			}
-		  };
+		  
+			this._$scope.openDetails = function(id, $event) {
+				var calendarID;
+				var collectionID;
+				if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+					if (calendarID = _$scope.route.calendarID) {
+						$location.path('/calendars/' + calendarID + '/tasks/' + id);
+					} else if (collectionID = _$scope.route.collectionID) {
+						$location.path('/collections/' + collectionID + '/tasks/' + id);
+					}
+				}
+			};
+
 			this._$scope.toggleCompleted = function(task) {
 				if (task.completed) {
 					_tasksbusinesslayer.setPercentComplete(task, 0);
@@ -184,10 +190,9 @@
 			return _settingsbusinesslayer.toggle('various', 'showHidden');
 		  };
 		  this._$scope.filterTasks = function(task, filter) {
-		  	return task;
-			// return function(task) {
-			  // return _$tasksmodel.filterTasks(task, filter);
-			// };
+			return function(task) {
+			  return _$tasksmodel.filterTasks(task, filter);
+			};
 		  };
 		  this._$scope.getSubTasks = function(tasks, parent) {
 			var ret, task, _i, _len;
@@ -200,12 +205,13 @@
 			}
 			return ret;
 		  };
-		  this._$scope.hasNoParent = function(task) {
-		  	return true;
-			// return function(task) {
-			  // return _$tasksmodel.hasNoParent(task);
-			// };
-		  };
+
+			this._$scope.hasNoParent = function(task) {
+				return function(task) {
+					return _$tasksmodel.hasNoParent(task);
+				};
+			};
+
 		  this._$scope.hasSubtasks = function(task) {
 			return _$tasksmodel.hasSubtasks(task.uid);
 		  };
@@ -223,12 +229,13 @@
 			  return _$tasksmodel.filterTasksByString(task, filter);
 			};
 		  };
-		  this._$scope.filteredTasks = function() {
-		  	return _$tasksmodel.getAll();
-			// var filter;
-			// filter = _searchbusinesslayer.getFilter();
-			// return _$tasksmodel.filteredTasks(filter);
-		  };
+
+			this._$scope.filteredTasks = function() {
+				var filter;
+				filter = _searchbusinesslayer.getFilter();
+				return _$tasksmodel.filteredTasks(filter);
+			};
+
 		  this._$scope.dayHasEntry = function() {
 			return function(date) {
 			  var filter, task, tasks, _i, _len;
@@ -252,20 +259,18 @@
 			};
 		  };
 		  this._$scope.filterLists = function() {
-			return function(list) {
-			  return _$scope.getCount(list.id, _$scope.route.listID);
+			return function(calendar) {
+			  return _$scope.getCount(calendar.uri, _$scope.route.collectionID);
 			};
 		  };
-		  this._$scope.getCount = function(listID, type) {
-			var filter;
-			filter = _searchbusinesslayer.getFilter();
-			return _$listsmodel.getCount(listID, type, filter);
-		  };
-		  this._$scope.getCountString = function(listID, type) {
-			var filter;
-			filter = _searchbusinesslayer.getFilter();
-			return n('tasks', '%n Completed Task', '%n Completed Tasks', _$listsmodel.getCount(listID, type, filter));
-		  };
+			this._$scope.getCount = function(calendarID, type) {
+				var filter = _searchbusinesslayer.getFilter();
+				return _$listsmodel.getCount(calendarID, type, filter);
+			};
+			this._$scope.getCountString = function(calendarID, type) {
+				var filter = _searchbusinesslayer.getFilter();
+				return n('tasks', '%n Completed Task', '%n Completed Tasks', _$listsmodel.getCount(calendarID, type, filter));
+			};
 		  this._$scope.checkTaskInput = function($event) {
 			if ($event.keyCode === 27) {
 			  $($event.currentTarget).blur();

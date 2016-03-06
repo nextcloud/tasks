@@ -28,7 +28,19 @@
 		taskUpdateInterval: 1000 * 600
 	  });
 	  $httpProvider.defaults.headers.common['requesttoken'] = oc_requesttoken;
-	  $routeProvider.when('/calendars/:calendarID', {}).when('/calendars/:calendarID/edit/:listparameter', {}).when('/calendars/:calendarID/tasks/:taskID', {}).when('/calendars/:calendarID/tasks/:taskID/settings', {}).when('/calendars/:calendarID/tasks/:taskID/edit/:parameter', {}).when('/collections/:collectionID', {}).when('/search/:searchString', {}).when('/search/:searchString/tasks/:taskID', {}).when('/search/:searchString/tasks/:taskID/edit/:parameter', {});
+	  $routeProvider
+	  .when('/calendars/:calendarID', {})
+	  .when('/calendars/:calendarID/edit/:listparameter', {})
+	  .when('/calendars/:calendarID/tasks/:taskID', {})
+	  .when('/calendars/:calendarID/tasks/:taskID/settings', {})
+	  .when('/calendars/:calendarID/tasks/:taskID/edit/:parameter', {})
+	  .when('/collections/:collectionID/tasks/:taskID', {})
+	  .when('/collections/:collectionID/tasks/:taskID/settings', {})
+	  .when('/collections/:collectionID/tasks/:taskID/edit/:parameter', {})
+	  .when('/collections/:collectionID', {})
+	  .when('/search/:searchString', {})
+	  .when('/search/:searchString/tasks/:taskID', {})
+	  .when('/search/:searchString/tasks/:taskID/edit/:parameter', {});
 	}
   ]);
 

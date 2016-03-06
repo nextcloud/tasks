@@ -363,6 +363,9 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 	}
 
 	VTodo.prototype = {
+		get calendaruri() {
+			return this.calendar.uri;
+		},
 		get summary() {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
 			return vtodos[0].getFirstPropertyValue('summary');
@@ -378,7 +381,6 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 			return (10 - priority) % 10;
 		},
 		set priority(priority) {
-			console.log(priority);
 			var vtodos = this.components.getAllSubcomponents('vtodo');
 			vtodos[0].updatePropertyWithValue('priority', (10 - priority) % 10);
 			this.data = this.components.toString();
@@ -396,7 +398,7 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 			var vtodos = this.components.getAllSubcomponents('vtodo');
 			var comp = vtodos[0].getFirstPropertyValue('completed');
 			if (comp) {
-				return comp.toJSDate();
+				return true;
 			} else {
 				return false;
 			}
@@ -409,6 +411,15 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 				vtodos[0].removeProperty('completed');
 			}
 			this.data = this.components.toString();
+		},
+		get completed_date() {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			var comp = vtodos[0].getFirstPropertyValue('completed');
+			if (comp) {
+				return comp.toJSDate();
+			} else {
+				return null;
+			}
 		},
 		get status() {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
@@ -430,6 +441,21 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		get related() {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
 			return vtodos[0].getFirstPropertyValue('related-to') || null;
+		},
+		get reminder() {
+			return null;
+		},
+		get categories() {
+			return null;
+		},
+		get start() {
+			return null;
+		},
+		get due() {
+			return null;
+		},
+		get comments() {
+			return null;
 		},
 		// get enabled() {
 		// 	return this._properties.enabled;

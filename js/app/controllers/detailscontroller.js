@@ -214,9 +214,15 @@
 			  return _$scope.resetRoute();
 			}
 		  };
-		  this._$scope.resetRoute = function() {
-			return _$location.path('/lists/' + _$scope.route.listID + '/tasks/' + _$scope.route.taskID);
-		  };
+			this._$scope.resetRoute = function() {
+				var calendarID;
+				var collectionID;
+				if (calendarID = _$scope.route.calendarID) {
+					$location.path('/calendars/' + calendarID + '/tasks/' + _$scope.route.taskID);
+				} else if (collectionID = _$scope.route.collectionID) {
+					$location.path('/collections/' + collectionID + '/tasks/' + _$scope.route.taskID);
+				}
+			};
 		  this._$scope.deleteDueDate = function() {
 			return _tasksbusinesslayer.deleteDueDate(_$scope.route.taskID);
 		  };
@@ -229,20 +235,23 @@
 		  this._$scope.deleteReminder = function() {
 			return _tasksbusinesslayer.deleteReminderDate(_$scope.route.taskID);
 		  };
-		  this._$scope.toggleCompleted = function(taskID) {
-			if (_$tasksmodel.completed(taskID)) {
-			  return _tasksbusinesslayer.uncompleteTask(taskID);
-			} else {
-			  return _tasksbusinesslayer.completeTask(taskID);
-			}
-		  };
-		  this._$scope.toggleStarred = function(taskID) {
-			if (_$tasksmodel.starred(taskID)) {
-			  return _tasksbusinesslayer.unstarTask(taskID);
-			} else {
-			  return _tasksbusinesslayer.starTask(taskID);
-			}
-		  };
+
+			this._$scope.toggleCompleted = function(task) {
+				if (task.completed) {
+					_tasksbusinesslayer.setPercentComplete(task, 0);
+				} else {
+					_tasksbusinesslayer.setPercentComplete(task, 100);
+				}
+			};
+
+			this._$scope.toggleStarred = function(task) {
+				if (task.priority > 5) {
+					_tasksbusinesslayer.setPriority(task, 0);
+				} else {
+					_tasksbusinesslayer.setPriority(task, 9);
+				}
+			};
+
 		  this._$scope.deletePriority = function() {
 			return _tasksbusinesslayer.unstarTask(_$scope.route.taskID);
 		  };
@@ -252,44 +261,44 @@
 		  this._$scope.isOverDue = function(date) {
 			return _$tasksmodel.overdue(date);
 		  };
-		  this._$scope.$watch('task', function(newVal, oldVal) {
-			if (newVal === oldVal || (void 0 === newVal || void 0 === oldVal) || newVal.id !== oldVal.id) {
+		 //  this._$scope.$watch('task', function(newVal, oldVal) {
+			// if (newVal === oldVal || (void 0 === newVal || void 0 === oldVal) || newVal.id !== oldVal.id) {
 
-			} else {
-			  if (newVal.name !== oldVal.name) {
-				if (_$scope.timers['task' + newVal.id + 'name']) {
-				  $timeout.cancel(_$scope.timers['task' + newVal.id + 'name']);
-				}
-				_$scope.timers['task' + newVal.id + 'name'] = $timeout(function() {
-				  return _tasksbusinesslayer.setTaskName(newVal.id, newVal.name);
-				}, 3000);
-			  }
-			  if (newVal.note !== oldVal.note) {
-				if (_$scope.timers['task' + newVal.id + 'note']) {
-				  $timeout.cancel(_$scope.timers['task' + newVal.id + 'note']);
-				}
-				_$scope.timers['task' + newVal.id + 'note'] = $timeout(function() {
-				  return _tasksbusinesslayer.setTaskNote(newVal.id, newVal.note);
-				}, 5000);
-			  }
-			  if (newVal.complete !== oldVal.complete) {
-				if (_$scope.timers['task' + newVal.id + 'complete']) {
-				  $timeout.cancel(_$scope.timers['task' + newVal.id + 'complete']);
-				}
-				_$scope.timers['task' + newVal.id + 'complete'] = $timeout(function() {
-				  return _tasksbusinesslayer.setPercentComplete(newVal.id, newVal.complete);
-				}, 1000);
-			  }
-			  if (newVal.priority !== oldVal.priority) {
-				if (_$scope.timers['task' + newVal.id + 'priority']) {
-				  $timeout.cancel(_$scope.timers['task' + newVal.id + 'priority']);
-				}
-				return _$scope.timers['task' + newVal.id + 'priority'] = $timeout(function() {
-				  return _tasksbusinesslayer.setPriority(newVal.id, newVal.priority);
-				}, 1000);
-			  }
-			}
-		  }, true);
+			// } else {
+			//   if (newVal.name !== oldVal.name) {
+			// 	if (_$scope.timers['task' + newVal.id + 'name']) {
+			// 	  $timeout.cancel(_$scope.timers['task' + newVal.id + 'name']);
+			// 	}
+			// 	_$scope.timers['task' + newVal.id + 'name'] = $timeout(function() {
+			// 	  return _tasksbusinesslayer.setTaskName(newVal.id, newVal.name);
+			// 	}, 3000);
+			//   }
+			//   if (newVal.note !== oldVal.note) {
+			// 	if (_$scope.timers['task' + newVal.id + 'note']) {
+			// 	  $timeout.cancel(_$scope.timers['task' + newVal.id + 'note']);
+			// 	}
+			// 	_$scope.timers['task' + newVal.id + 'note'] = $timeout(function() {
+			// 	  return _tasksbusinesslayer.setTaskNote(newVal.id, newVal.note);
+			// 	}, 5000);
+			//   }
+			//   if (newVal.complete !== oldVal.complete) {
+			// 	if (_$scope.timers['task' + newVal.id + 'complete']) {
+			// 	  $timeout.cancel(_$scope.timers['task' + newVal.id + 'complete']);
+			// 	}
+			// 	_$scope.timers['task' + newVal.id + 'complete'] = $timeout(function() {
+			// 	  return _tasksbusinesslayer.setPercentComplete(newVal.id, newVal.complete);
+			// 	}, 1000);
+			//   }
+			//   if (newVal.priority !== oldVal.priority) {
+			// 	if (_$scope.timers['task' + newVal.id + 'priority']) {
+			// 	  $timeout.cancel(_$scope.timers['task' + newVal.id + 'priority']);
+			// 	}
+			// 	return _$scope.timers['task' + newVal.id + 'priority'] = $timeout(function() {
+			// 	  return _tasksbusinesslayer.setPriority(newVal.id, newVal.priority);
+			// 	}, 1000);
+			//   }
+			// }
+		 //  }, true);
 		  this._$scope.setstartday = function(date) {
 			return _tasksbusinesslayer.setStart(_$scope.route.taskID, moment(date, 'MM/DD/YYYY'), 'day');
 		  };

@@ -66,11 +66,10 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 			};
 
 			TasksBusinessLayer.prototype.setPercentComplete = function(task, percentComplete) {
-				var task;
 				task.complete = percentComplete;
 				if (percentComplete < 100) {
 					task.completed = null;
-					if (percentComplete == 0) {
+					if (percentComplete === 0) {
 						task.status = 'NEEDS-ACTION';
 					} else {
 						task.status = 'IN-PROCESS';
@@ -81,7 +80,6 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 					task.status = 'COMPLETED';
 					// this.completeChildren(task);
 				}
-				console.log(task);
 				this._$vtodoservice.update(task).then(function(task) {
 				});
 			};

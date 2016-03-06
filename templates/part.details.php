@@ -1,18 +1,18 @@
 <div ng-controller="DetailsController" ng-click="endEdit($event)" class="handler">
     <div ng-show="TaskState()=='found'">
-        <a class="detail-checkbox" ng-click="toggleCompleted(task.id)">
+        <a class="detail-checkbox" ng-click="toggleCompleted(task)">
         	<span class="icon detail-checkbox" ng-class="{'detail-checked':task.completed}"></span>
         </a>
-        <a class="detail-star" ng-click="toggleStarred(task.id)">
+        <a class="detail-star" ng-click="toggleStarred(task)">
         	<span class="icon detail-star" ng-class="{'high':task.priority>5,'medium':task.priority==5,'low':task.priority > 0 && task.priority < 5}"></span>
         </a>
     	<div class="title" ng-class="{'editing':route.parameter=='name'}">
         	<span class="title-text handler" ng-class="{'strike-through':task.completed}" ng-click="editName($event)"
-            oc-click-focus="{selector: '#editName', timeout: 0}" ng-bind-html="task.name | linky:'_blank':{rel: 'nofollow'}"></span>
+            oc-click-focus="{selector: '#editName', timeout: 0}" ng-bind-html="task.summary | linky:'_blank':{rel: 'nofollow'}"></span>
             <div class="expandable-container handler">
             	<div class="expandingArea active">
-                    <pre><span>{{ task.name }}</span><br /></pre>
-                    <textarea id="editName" maxlength="200" ng-model="task.name" ng-keydown="endName($event)"></textarea>
+                    <pre><span>{{ task.summary }}</span><br /></pre>
+                    <textarea id="editName" maxlength="200" ng-model="task.summary" ng-keydown="endName($event)"></textarea>
             	</div>
             </div>
         </div>
@@ -65,9 +65,9 @@
                         <input class="timepicker-input medium focus" type="text" key-value="" placeholder="hh:mm" value="{{ task.reminder.date | timeTaskList }}" timepicker="reminder">
                     </div>
                     <div ng-switch-when="DURATION">
-                        <input ng-change="setReminderDuration(task.id)" class="duration-input medium focus" type="number" key-value="" placeholder="" ng-model="task.reminder.duration[task.reminder.duration.token]">
+                        <input ng-change="setReminderDuration(task)" class="duration-input medium focus" type="number" key-value="" placeholder="" ng-model="task.reminder.duration[task.reminder.duration.token]">
                         <select ng-model="task.reminder.duration.token" ng-options="duration.id as duration.names for duration in durations"></select>
-                        <select ng-change="setReminderDuration(task.id)" ng-model="task.reminder.duration.params" ng-options="param as param.name for param in filterParams(params) track by param.id"></select>
+                        <select ng-change="setReminderDuration(task)" ng-model="task.reminder.duration.params" ng-options="param as param.name for param in filterParams(params) track by param.id"></select>
                     </div>
                 </div>
             </div>
@@ -105,7 +105,7 @@
             <!-- Edit line 1080 to show placeholder -->
 <!--                 <ui-select multiple tagging tagging-label="<?php p($l->t('(New category)')); ?> " ng-model="task.categories" theme="select2" ng-disabled="disabled" style="width: 100%;"
                  on-remove="removeCategory($item, $model)" on-select="addCategory($item, $model)">
-                    <ui-select-match placeholder="<?php p($l->t('Select categories...')); ?>">{{$item}}</ui-select-match>
+                    <ui-select-match placeholder="<?php //p($l->t('Select categories...')); ?>">{{$item}}</ui-select-match>
                     <ui-select-choices repeat="category in settingsmodel.getById('various').categories | filter:$select.search">
                       {{category}}
                     </ui-select-choices>
@@ -150,7 +150,7 @@
                 <input type="text" placeholder="{{ commentStrings().input }}" ng-model="CommentContent" ng-keydown="sendComment($event)">
                 <input type="button" ng-click="addComment()" name="addComment" value="{{ commentStrings().button }}" ng-class="{'active':CommentContent}">
             </div>
-        	<a class="detail-trash handler close-all" ng-click="deleteTask(task.id)">
+        	<a class="detail-trash handler close-all" ng-click="deleteTask(task)">
             	<span class="icon detail-trash"></span>
             </a>
             <a class="detail-close handler close-all">

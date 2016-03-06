@@ -119,7 +119,7 @@
 			return ret;
 		};
 
-		ListsModel.prototype.getCount = function(listID, collectionID, filter) {
+		ListsModel.prototype.getCount = function(calendarID, collectionID, filter) {
 		  var count, task, tasks, _i, _len;
 		  if (filter == null) {
 			filter = '';
@@ -128,10 +128,10 @@
 		  tasks = this._$tasksmodel.filteredTasks(filter);
 		  for (_i = 0, _len = tasks.length; _i < _len; _i++) {
 			task = tasks[_i];
-			count += this._$tasksmodel.filterTasks(task, collectionID) && task.calendarid === listID && !task.related;
+			count += this._$tasksmodel.filterTasks(task, collectionID) && task.calendaruri === calendarID && !task.related;
 		  }
 		  if (collectionID === 'completed' && filter === '') {
-			count += this.notLoaded(listID);
+			// count += this.notLoaded(calendarID);
 		  }
 		  return count;
 		};

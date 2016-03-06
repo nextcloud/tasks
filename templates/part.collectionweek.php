@@ -1,11 +1,11 @@
-<div ng-if="route.listID=='week'">
+<div ng-if="route.collectionID=='week'">
     <div ng-repeat="day in days | filter:dayHasEntry(day)" class="grouped-tasks ui-droppable">
         <h2 class="heading">
             <text>{{ day | day  }}</text>
         </h2>
         <ol class="tasks"
             listID=""
-            collectionID="{{route.listID}}"
+            collectionID="{{route.collectionID}}"
             type="list"
             dnd-list="draggedTasks"
             dnd-drop="dropCallback(event, item, index)"
@@ -14,7 +14,7 @@
                 taskID="{{task.id}}"
                 ng-animate="'animate'"
                 ng-repeat="task in filtered = filteredTasks() | filter:taskAtDay(task,day) | filter:hasNoParent(task) | filter:{'completed':'false'} | orderBy:sortDue | orderBy:'priority':true"
-                ng-click="openDetails(task.id,$event)"
+                ng-click="openDetails(task.uri,$event)"
                 ng-class="{done: task.completed}"
                 dnd-draggable="task"
                 dnd-effect-allowed="move">

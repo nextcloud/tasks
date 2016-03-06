@@ -257,24 +257,24 @@
 		  return descendantID;
 		};
 
-		TasksModel.prototype.filterTasks = function(task, filter) {
-		  switch (filter) {
-			case 'completed':
-			  return task.completed === true;
-			case 'all':
-			  return task.completed === false;
-			case 'current':
-			  return task.completed === false && this.current(task.start, task.due);
-			case 'starred':
-			  return task.completed === false && task.starred === true;
-			case 'today':
-			  return task.completed === false && (this.today(task.start) || this.today(task.due));
-			case 'week':
-			  return task.completed === false && (this.week(task.start) || this.week(task.due));
-			default:
-			  return '' + task.calendarid === '' + filter;
-		  }
-		};
+			TasksModel.prototype.filterTasks = function(task, filter) {
+					switch (filter) {
+					case 'completed':
+						return task.completed === true;
+					case 'all':
+						return task.completed === false;
+					case 'current':
+						return task.completed === false && this.current(task.start, task.due);
+					case 'starred':
+						return task.completed === false && task.priority > 5;
+					case 'today':
+						return task.completed === false && (this.today(task.start) || this.today(task.due));
+					case 'week':
+						return task.completed === false && (this.week(task.start) || this.week(task.due));
+					default:
+						return '' + task.calendaruri === '' + filter;
+				}
+			};
 
 		TasksModel.prototype.filteredTasks = function(needle) {
 		  var ancestors, parentID, ret, task, tasks, _i, _len;
