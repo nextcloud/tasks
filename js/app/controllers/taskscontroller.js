@@ -141,14 +141,18 @@
 					return task.hideSubtasks;
 				}
 			};
-		  this._$scope.showInput = function() {
-			var _ref;
-			if ((_ref = _$scope.route.listID) === 'completed' || _ref === 'week') {
-			  return false;
-			} else {
-			  return true;
-			}
-		  };
+			this._$scope.showInput = function() {
+				var collectionID = _$scope.route.collectionID;
+				var calendar = _$listsmodel.getByUri(_$scope.route.calendarID);
+				if (collectionID === 'completed' || collectionID === 'week') {
+					return false;
+				}
+				if (angular.isDefined(calendar)) {
+					return calendar.writable;
+				} else {
+					return true;
+				}
+			};
 		  this._$scope.focusTaskInput = function() {
 			return _$scope.status.focusTaskInput = true;
 		  };
