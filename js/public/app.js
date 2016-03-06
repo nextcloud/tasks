@@ -1606,8 +1606,9 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 
 			TasksBusinessLayer.prototype.add = function(task) {
 				return this._$vtodoservice.create(task.calendar, task.data).then(function(task) {
-					TasksModel.ad(task);
-					return task;
+					var vTodo = new VTodo(task.calendar, task.properties, task.uri);
+					TasksModel.ad(vTodo);
+					return vTodo;
 				});
 			};
 
