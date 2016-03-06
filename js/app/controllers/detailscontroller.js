@@ -138,9 +138,11 @@ angular.module('Tasks').controller('DetailsController', [
 				  }
 				}
 			};
-			this._$scope.deleteTask = function(taskID) {
+			this._$scope.deleteTask = function(task) {
 				return _$timeout(function() {
-					return _tasksbusinesslayer.deleteTask(taskID);
+					return _tasksbusinesslayer.deleteTask(task).then(function () {
+						return $scope.$apply();
+					});
 				}, 500);
 			};
 			this._$scope.editName = function($event) {

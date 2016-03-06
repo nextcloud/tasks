@@ -45,7 +45,7 @@
                             <img class="icon-rename svg" src="<?php p(image_path('core', 'actions/rename.svg'))?>"/>
                             <span><?php p($l->t('rename')); ?></span>
                         </li>
-                        <li title="<?php p($l->t('delete')); ?>" ng-click="deleteList(calendar)">
+                        <li title="<?php p($l->t('delete')); ?>" ng-click="delete(calendar)">
                             <img class="icon-delete svg" src="<?php p(image_path('core', 'actions/delete.svg'))?>"/>
                             <span><?php p($l->t('delete')); ?></span>
                         </li>

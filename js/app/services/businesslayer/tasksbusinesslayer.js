@@ -105,16 +105,17 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				});
 			};
 
-		TasksBusinessLayer.prototype.deleteTask = function(taskID) {
-		  var childID, childrenID, _i, _len;
-		  childrenID = this._$tasksmodel.getChildrenID(taskID);
-		  for (_i = 0, _len = childrenID.length; _i < _len; _i++) {
-			childID = childrenID[_i];
-			this.deleteTask(childID);
-		  }
-		  this._$tasksmodel.removeById(taskID);
-		  return this._persistence.deleteTask(taskID);
-		};
+			TasksBusinessLayer.prototype.deleteTask = function(task) {
+				var child, children, _i, _len;
+				children = this._$tasksmodel.getChildren(task);
+				for (_i = 0, _len = children.length; _i < _len; _i++) {
+					child = children[_i];
+					this.deleteTask(child);
+				}
+				return this._$vtodoservice["delete"](task).then(function() {
+					return TasksModel["delete"](task);
+				});
+			};
 
 		TasksBusinessLayer.prototype.initDueDate = function(taskID) {
 		  var due;
@@ -425,10 +426,6 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 			  return this.changeParent(taskID, '', '');
 			}
 		  }
-		};
-
-		TasksBusinessLayer.prototype.setTaskNote = function(taskID, note) {
-		  return this._persistence.setTaskNote(taskID, note);
 		};
 
 		TasksBusinessLayer.prototype.changeCollection = function(taskID, collectionID) {

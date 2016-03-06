@@ -320,9 +320,11 @@ angular.module('Tasks').controller('DetailsController', [
 				  }
 				}
 			};
-			this._$scope.deleteTask = function(taskID) {
+			this._$scope.deleteTask = function(task) {
 				return _$timeout(function() {
-					return _tasksbusinesslayer.deleteTask(taskID);
+					return _tasksbusinesslayer.deleteTask(task).then(function () {
+						return $scope.$apply();
+					});
 				}, 500);
 			};
 			this._$scope.editName = function($event) {
@@ -1664,16 +1666,17 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				});
 			};
 
-		TasksBusinessLayer.prototype.deleteTask = function(taskID) {
-		  var childID, childrenID, _i, _len;
-		  childrenID = this._$tasksmodel.getChildrenID(taskID);
-		  for (_i = 0, _len = childrenID.length; _i < _len; _i++) {
-			childID = childrenID[_i];
-			this.deleteTask(childID);
-		  }
-		  this._$tasksmodel.removeById(taskID);
-		  return this._persistence.deleteTask(taskID);
-		};
+			TasksBusinessLayer.prototype.deleteTask = function(task) {
+				var child, children, _i, _len;
+				children = this._$tasksmodel.getChildren(task);
+				for (_i = 0, _len = children.length; _i < _len; _i++) {
+					child = children[_i];
+					this.deleteTask(child);
+				}
+				return this._$vtodoservice["delete"](task).then(function() {
+					return TasksModel["delete"](task);
+				});
+			};
 
 		TasksBusinessLayer.prototype.initDueDate = function(taskID) {
 		  var due;
@@ -1984,10 +1987,6 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 			  return this.changeParent(taskID, '', '');
 			}
 		  }
-		};
-
-		TasksBusinessLayer.prototype.setTaskNote = function(taskID, note) {
-		  return this._persistence.setTaskNote(taskID, note);
 		};
 
 		TasksBusinessLayer.prototype.changeCollection = function(taskID, collectionID) {
@@ -3292,6 +3291,28 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 
 		TasksModel.prototype.removeById = function(taskID) {
 		  return TasksModel.__super__.removeById.call(this, taskID);
+		};
+
+		TasksModel.prototype["delete"] = function(task, clearCache) {
+		  var counter, data, entry, _i, _len, _ref;
+		  if (clearCache == null) {
+			clearCache = true;
+		  }
+		  _ref = this._data;
+		  for (counter = _i = 0, _len = _ref.length; _i < _len; counter = ++_i) {
+			entry = _ref[counter];
+			if (entry === task) {
+			  this._data.splice(counter, 1);
+			  data = this._dataMap[task.uri];
+			  delete this._dataMap[task.uri];
+			  if (clearCache) {
+				this._invalidateCache();
+			  }
+			console.log('delete from model');
+			console.log(task);
+			  return data;
+			}
+		  }
 		};
 
 		TasksModel.prototype.voidAll = function() {

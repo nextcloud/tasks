@@ -102,6 +102,28 @@
 		  return TasksModel.__super__.removeById.call(this, taskID);
 		};
 
+		TasksModel.prototype["delete"] = function(task, clearCache) {
+		  var counter, data, entry, _i, _len, _ref;
+		  if (clearCache == null) {
+			clearCache = true;
+		  }
+		  _ref = this._data;
+		  for (counter = _i = 0, _len = _ref.length; _i < _len; counter = ++_i) {
+			entry = _ref[counter];
+			if (entry === task) {
+			  this._data.splice(counter, 1);
+			  data = this._dataMap[task.uri];
+			  delete this._dataMap[task.uri];
+			  if (clearCache) {
+				this._invalidateCache();
+			  }
+			console.log('delete from model');
+			console.log(task);
+			  return data;
+			}
+		  }
+		};
+
 		TasksModel.prototype.voidAll = function() {
 		  var task, tasks, _i, _len, _results;
 		  tasks = this.getAll();
