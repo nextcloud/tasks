@@ -117,8 +117,6 @@
 			  if (clearCache) {
 				this._invalidateCache();
 			  }
-			console.log('delete from model');
-			console.log(task);
 			  return data;
 			}
 		  }
