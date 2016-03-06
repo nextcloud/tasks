@@ -219,17 +219,29 @@
 		  }
 		};
 
-		TasksModel.prototype.getIdByUid = function(uid) {
-		  var task, tasks, _i, _len;
-		  tasks = this.getAll();
-		  for (_i = 0, _len = tasks.length; _i < _len; _i++) {
-			task = tasks[_i];
-			if (task.uid === uid) {
-			  return task.id;
-			}
-		  }
-		  return false;
-		};
+			TasksModel.prototype.getIdByUid = function(uid) {
+				var task, tasks, _i, _len;
+				tasks = this.getAll();
+				for (_i = 0, _len = tasks.length; _i < _len; _i++) {
+					task = tasks[_i];
+					if (task.uid === uid) {
+						return task.id;
+					}
+				}
+				return false;
+			};
+
+			TasksModel.prototype.getByUid = function(uid) {
+				var task, tasks, _i, _len;
+				tasks = this.getAll();
+				for (_i = 0, _len = tasks.length; _i < _len; _i++) {
+					task = tasks[_i];
+					if (task.uid === uid) {
+						return task;
+					}
+				}
+				return null;
+			};
 
 			TasksModel.prototype.getChildren = function(task) {
 				var children, t, tasks, _i, _len;

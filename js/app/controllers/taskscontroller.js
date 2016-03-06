@@ -141,6 +141,7 @@
 					return task.hideSubtasks;
 				}
 			};
+
 			this._$scope.showInput = function() {
 				var collectionID = _$scope.route.collectionID;
 				var calendar = _$listsmodel.getByUri(_$scope.route.calendarID);
@@ -153,6 +154,7 @@
 					return true;
 				}
 			};
+			
 		  this._$scope.focusTaskInput = function() {
 			return _$scope.status.focusTaskInput = true;
 		  };

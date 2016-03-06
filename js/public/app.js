@@ -947,6 +947,7 @@ angular.module('Tasks').controller('ListController', [
 					return task.hideSubtasks;
 				}
 			};
+
 			this._$scope.showInput = function() {
 				var collectionID = _$scope.route.collectionID;
 				var calendar = _$listsmodel.getByUri(_$scope.route.calendarID);
@@ -959,6 +960,7 @@ angular.module('Tasks').controller('ListController', [
 					return true;
 				}
 			};
+			
 		  this._$scope.focusTaskInput = function() {
 			return _$scope.status.focusTaskInput = true;
 		  };
@@ -1677,36 +1679,36 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 					} else {
 						task.status = 'IN-PROCESS';
 					}
-					// this.uncompleteParents(task.related);
+					this.uncompleteParents(task.related);
 				} else {
 					task.completed = ICAL.Time.now();
 					task.status = 'COMPLETED';
-					// this.completeChildren(task);
+					this.completeChildren(task);
 				}
 				this._$vtodoservice.update(task).then(function(task) {
 				});
 			};
 
-		TasksBusinessLayer.prototype.completeChildren = function(taskID) {
-		  var childID, childrenID, _i, _len, _results;
-		  childrenID = this._$tasksmodel.getChildrenID(taskID);
-		  _results = [];
-		  for (_i = 0, _len = childrenID.length; _i < _len; _i++) {
-			childID = childrenID[_i];
-			_results.push(this.setPercentComplete(childID, 100));
-		  }
-		  return _results;
-		};
+			TasksBusinessLayer.prototype.completeChildren = function(task) {
+				var child, _i, _len;
+				var children = this._$tasksmodel.getChildren(task);
+				var _results = [];
+				for (_i = 0, _len = children.length; _i < _len; _i++) {
+					child = children[_i];
+					_results.push(this.setPercentComplete(child, 100));
+				}
+				return _results;
+			};
 
-		TasksBusinessLayer.prototype.uncompleteParents = function(uid) {
-		  var parentID;
-		  if (uid) {
-			parentID = this._$tasksmodel.getIdByUid(uid);
-			if (this._$tasksmodel.completed(parentID)) {
-			  return this.setPercentComplete(parentID, 0);
-			}
-		  }
-		};
+			TasksBusinessLayer.prototype.uncompleteParents = function(uid) {
+				var parent;
+				if (uid) {
+					parent = this._$tasksmodel.getByUid(uid);
+					if (parent.completed) {
+						return this.setPercentComplete(parent, 0);
+					}
+				}
+			};
 
 			TasksBusinessLayer.prototype.setHideSubtasks = function(task, hide) {
 				task.hideSubtasks = hide;
@@ -3465,17 +3467,29 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 		  }
 		};
 
-		TasksModel.prototype.getIdByUid = function(uid) {
-		  var task, tasks, _i, _len;
-		  tasks = this.getAll();
-		  for (_i = 0, _len = tasks.length; _i < _len; _i++) {
-			task = tasks[_i];
-			if (task.uid === uid) {
-			  return task.id;
-			}
-		  }
-		  return false;
-		};
+			TasksModel.prototype.getIdByUid = function(uid) {
+				var task, tasks, _i, _len;
+				tasks = this.getAll();
+				for (_i = 0, _len = tasks.length; _i < _len; _i++) {
+					task = tasks[_i];
+					if (task.uid === uid) {
+						return task.id;
+					}
+				}
+				return false;
+			};
+
+			TasksModel.prototype.getByUid = function(uid) {
+				var task, tasks, _i, _len;
+				tasks = this.getAll();
+				for (_i = 0, _len = tasks.length; _i < _len; _i++) {
+					task = tasks[_i];
+					if (task.uid === uid) {
+						return task;
+					}
+				}
+				return null;
+			};
 
 			TasksModel.prototype.getChildren = function(task) {
 				var children, t, tasks, _i, _len;
