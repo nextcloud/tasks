@@ -404,8 +404,8 @@ angular.module('Tasks').controller('DetailsController', [
 		  this._$scope.deleteDueDate = function() {
 			return _tasksbusinesslayer.deleteDueDate(_$scope.route.taskID);
 		  };
-		  this._$scope.deletePercent = function() {
-			return _tasksbusinesslayer.setPercentComplete(_$scope.route.taskID, 0);
+		  this._$scope.deletePercent = function(task) {
+			return _tasksbusinesslayer.setPercentComplete(task, 0);
 		  };
 		  this._$scope.deleteStartDate = function() {
 			return _tasksbusinesslayer.deleteStartDate(_$scope.route.taskID);
@@ -430,8 +430,8 @@ angular.module('Tasks').controller('DetailsController', [
 				}
 			};
 
-		  this._$scope.deletePriority = function() {
-			return _tasksbusinesslayer.unstarTask(_$scope.route.taskID);
+		  this._$scope.deletePriority = function(task) {
+			return _tasksbusinesslayer.setPriority(task, 0);
 		  };
 		  this._$scope.isDue = function(date) {
 			return _$tasksmodel.due(date);

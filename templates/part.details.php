@@ -71,12 +71,12 @@
                     </div>
                 </div>
             </div>
-            <div class="section detail-priority handler" ng-class="{'editing':route.parameter=='priority','high':task.priority>5,'medium':task.priority==5,'low':task.priority > 0 && task.priority < 5}"  ng-click="editPriority($event)">
+            <div class="section detail-priority handler" ng-class="{'editing':route.parameter=='priority','high':task.priority>5,'medium':task.priority==5,'low':task.priority > 0 && task.priority < 5, 'date':task.priority>0}"  ng-click="editPriority($event)">
                 <span class="icon detail-priority"></span>
                 <div class="section-title">
                     <text>{{ task.priority | priorityDetails}}</text>
                 </div>
-                <a class="detail-delete handler end-edit" ng-click="deletePriority()">
+                <a class="detail-delete handler end-edit" ng-click="deletePriority(task)">
                     <span class="icon detail-delete"></span>
                 </a>
                 <span class="icon detail-save handler end-edit"></span>
@@ -90,7 +90,7 @@
                 <div class="section-title">
                     <text>{{ task.complete | percentDetails}}</text>
                 </div>
-                <a class="detail-delete handler end-edit" ng-click="deletePercent()">
+                <a class="detail-delete handler end-edit" ng-click="deletePercent(task)">
                     <span class="icon detail-delete"></span>
                 </a>
                 <span class="icon detail-save handler end-edit"></span>
