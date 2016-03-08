@@ -23,6 +23,7 @@
 namespace OCA\Tasks\AppInfo;
 
 use \OCP\AppFramework\App;
+use \OCP\AppFramework\IAppContainer;
 use \OCA\Tasks\Controller\PageController;
 use \OCA\Tasks\Controller\CollectionsController;
 use \OCA\Tasks\Controller\SettingsController;
@@ -40,7 +41,7 @@ class Application extends App {
 		/**
 		 * Controllers
 		 */
-		$container->registerService('PageController', function($c) {
+		$container->registerService('PageController', function(IAppContainer $c) {
 			return new PageController(
 				$c->query('AppName'),
 				$c->query('Request'),
@@ -49,7 +50,7 @@ class Application extends App {
 			);
 		});
 
-		$container->registerService('CollectionsController', function($c) {
+		$container->registerService('CollectionsController', function(IAppContainer $c) {
 			return new CollectionsController(
 				$c->query('AppName'),
 				$c->query('Request'),
@@ -57,7 +58,7 @@ class Application extends App {
 			);
 		});
 
-		$container->registerService('SettingsController', function($c) {
+		$container->registerService('SettingsController', function(IAppContainer $c) {
 			return new SettingsController(
 				$c->query('AppName'),
 				$c->query('Request'),
@@ -69,7 +70,7 @@ class Application extends App {
 		 * Services
 		 */
 
-		$container->registerService('CollectionsService', function($c) {
+		$container->registerService('CollectionsService', function(IAppContainer $c) {
 			return new CollectionsService(
 				$c->query('UserId'),
 				$c->query('L10N'),
@@ -78,7 +79,7 @@ class Application extends App {
 			);
 		});
 
-		$container->registerService('SettingsService', function($c) {
+		$container->registerService('SettingsService', function(IAppContainer $c) {
 			return new SettingsService(
 				$c->query('UserId'),
 				$c->query('Settings'),
@@ -89,17 +90,17 @@ class Application extends App {
 		/**
 		 * Core
 		 */
-		$container->registerService('UserId', function($c) {
+		$container->registerService('UserId', function(IAppContainer $c) {
 			$user = $c->query('ServerContainer')->getUserSession()->getUser();
 
 			return ($user) ? $user->getUID() : '';
 		});	
 
-		$container->registerService('L10N', function($c) {
+		$container->registerService('L10N', function(IAppContainer $c) {
 			return $c->query('ServerContainer')->getL10N($c->query('AppName'));
 		});
 
-		$container->registerService('Settings', function($c) {
+		$container->registerService('Settings', function(IAppContainer $c) {
 			return $c->query('ServerContainer')->getConfig();
 		});
 	}

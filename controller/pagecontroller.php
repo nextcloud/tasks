@@ -24,6 +24,8 @@ namespace OCA\Tasks\Controller;
 
 use \OCP\AppFramework\Controller;
 use \OCP\AppFramework\Http\TemplateResponse;
+use \OCP\IRequest;
+use \OCP\IConfig;
 
 /**
  * Controller class for main page.
