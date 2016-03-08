@@ -23,6 +23,7 @@
 namespace OCA\Tasks\Service;
 
 use OCP\IConfig;
+use OCP\IL10N;
 
 class CollectionsService {
 
@@ -31,7 +32,7 @@ class CollectionsService {
 	private $settings;
 	private $appName;
 
-	public function __construct($userId, \OC_L10N $l10n, IConfig $settings, $appName) {
+	public function __construct($userId, IL10N $l10n, IConfig $settings, $appName) {
 		$this->userId = $userId;
 		$this->l10n = $l10n;
 		$this->settings = $settings;

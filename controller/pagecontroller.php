@@ -41,7 +41,6 @@ class PageController extends Controller {
 		parent::__construct($appName, $request);
 		$this->config = $config;
 		$this->userId = $userId;
-		$this->userSession = $userSession;
 	}
 
 
@@ -80,7 +79,8 @@ class PageController extends Controller {
 		$appVersion = $this->config->getAppValue($this->appName, 'installed_version');
 		$response = new TemplateResponse('tasks', 'main');
 		$response->setParams(array(
-			'appVersion' => $appVersion
+			'appVersion' => $appVersion,
+			'DOM' => $day
 		));
 
 		return $response;
