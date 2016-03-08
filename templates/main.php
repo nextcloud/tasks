@@ -1,3 +1,19 @@
+<?php
+    script('tasks', 'vendor/angular/angular.min');
+    script('tasks', 'vendor/angular-route/angular-route.min');
+    script('tasks', 'vendor/angular-animate/angular-animate.min');
+    script('tasks', 'vendor/angular-sanitize/angular-sanitize.min');
+    script('tasks', 'vendor/angular-draganddrop/angular-drag-and-drop-lists.min');
+    script('tasks', 'vendor/angular-ui-select/dist/select.min');
+    script('tasks', 'vendor/jstzdetect/jstz.min');
+    script('tasks', 'public/app');
+    script('tasks', 'vendor/jquery-timepicker/jquery.ui.timepicker');
+    script('tasks', 'vendor/davclient.js/lib/client');
+    script('tasks', 'vendor/ical.js/build/ical');
+    style('tasks', 'style'); 
+    style('tasks', 'vendor/angularui/ui-select/select2');
+?>
+
 <div ng-app="Tasks" ng-cloak ng-controller="AppController" ng-click="closeAll($event)" id="app" class="handler" data-appVersion="<?php p($_['appVersion']); ?>">
     <div id="app-navigation" ng-controller="ListController">
         <ul id="collections">

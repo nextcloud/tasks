@@ -49,29 +49,6 @@ class PageController extends Controller {
 	 * @NoCSRFRequired
 	 */
 	public function index() {
-		if (defined('DEBUG') && DEBUG) {
-			script('tasks', 'vendor/angular/angular');
-			script('tasks', 'vendor/angular-route/angular-route');
-			script('tasks', 'vendor/angular-animate/angular-animate');
-			script('tasks', 'vendor/angular-sanitize/angular-sanitize');
-			script('tasks', 'vendor/angular-draganddrop/angular-drag-and-drop-lists');
-			script('tasks', 'vendor/angular-ui-select/dist/select');
-			script('tasks', 'vendor/jstzdetect/jstz');
-		} else {
-			script('tasks', 'vendor/angular/angular.min');
-			script('tasks', 'vendor/angular-route/angular-route.min');
-			script('tasks', 'vendor/angular-animate/angular-animate.min');
-			script('tasks', 'vendor/angular-sanitize/angular-sanitize.min');
-			script('tasks', 'vendor/angular-draganddrop/angular-drag-and-drop-lists.min');
-			script('tasks', 'vendor/angular-ui-select/dist/select.min');
-			script('tasks', 'vendor/jstzdetect/jstz.min');
-		}
-		script('tasks', 'public/app');
-		script('tasks', 'vendor/jquery-timepicker/jquery.ui.timepicker');
-		script('tasks', 'vendor/davclient.js/lib/client');
-		script('tasks', 'vendor/ical.js/build/ical');
-		style('tasks', 'style');	
-		style('tasks', 'vendor/angularui/ui-select/select2');
 
 		$day = new \DateTime('today');
 		$day = $day->format('d');
