@@ -226,6 +226,8 @@ angular.module('Tasks').controller('DetailsController', [
 
 				if (!(angular.isUndefined(task) || task === null)) {
 					_$scope.task = task;
+					// Bind categories to task.cats as angular.ui/ui-select seems to have problems with Getter/Setter
+					_$scope.task.cats = task.categories;
 					return _$scope.found = true;
 				}  else if (_$scope.route.taskID !== void 0) {
 					_$scope.found = false;
@@ -529,18 +531,16 @@ angular.module('Tasks').controller('DetailsController', [
 			  input: t('tasks', 'Add a comment')
 			};
 		  };
-		  this._$scope.addCategory = function(category, model) {
-			var categories;
-			_tasksbusinesslayer.addCategory(_$scope.route.taskID, category);
-			categories = _$scope.settingsmodel.getById('various').categories;
-			if (!(categories.indexOf(category) > -1)) {
-			  return categories.push(category);
-			}
-		  };
-		  this._$scope.removeCategory = function(category, model) {
-			_tasksbusinesslayer.removeCategory(_$scope.route.taskID, category);
-			return _$scope.resetRoute();
-		  };
+			this._$scope.addCategory = function(category, model) {
+				_$scope.task.categories = _$scope.task.cats;
+				var default_categories = _$scope.settingsmodel.getById('various').categories;
+				if (!(default_categories.indexOf(category) > -1)) {
+					return default_categories.push(category);
+				}
+			};
+			this._$scope.removeCategory = function(category, model) {
+				_$scope.task.categories = _$scope.task.cats;
+			};
 		}
 
 		return DetailsController;
@@ -4178,7 +4178,30 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 			return null;
 		},
 		get categories() {
-			return null;
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			var categories = vtodos[0].getFirstProperty('categories');
+			if (categories) {
+				return categories.getValues();
+			} else {
+				return [];
+			}
+		},
+		set categories(cats) {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			var categories = vtodos[0].getFirstProperty('categories');
+			if (cats.length > 0) {
+				if (categories) {
+					categories.setValues(cats);
+				} else {
+					var prop = new ICAL.Property('categories');
+					prop.setValues(cats);
+					categories = vtodos[0].addProperty(prop);
+				}
+			} else {
+				vtodos[0].removeProperty('categories');
+			}
+			this.data = this.components.toString();
+			_$vtodoservice.update(this);
 		},
 		get start() {
 			return null;

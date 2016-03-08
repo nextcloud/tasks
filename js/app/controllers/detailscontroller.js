@@ -44,6 +44,8 @@ angular.module('Tasks').controller('DetailsController', [
 
 				if (!(angular.isUndefined(task) || task === null)) {
 					_$scope.task = task;
+					// Bind categories to task.cats as angular.ui/ui-select seems to have problems with Getter/Setter
+					_$scope.task.cats = task.categories;
 					return _$scope.found = true;
 				}  else if (_$scope.route.taskID !== void 0) {
 					_$scope.found = false;
@@ -347,18 +349,16 @@ angular.module('Tasks').controller('DetailsController', [
 			  input: t('tasks', 'Add a comment')
 			};
 		  };
-		  this._$scope.addCategory = function(category, model) {
-			var categories;
-			_tasksbusinesslayer.addCategory(_$scope.route.taskID, category);
-			categories = _$scope.settingsmodel.getById('various').categories;
-			if (!(categories.indexOf(category) > -1)) {
-			  return categories.push(category);
-			}
-		  };
-		  this._$scope.removeCategory = function(category, model) {
-			_tasksbusinesslayer.removeCategory(_$scope.route.taskID, category);
-			return _$scope.resetRoute();
-		  };
+			this._$scope.addCategory = function(category, model) {
+				_$scope.task.categories = _$scope.task.cats;
+				var default_categories = _$scope.settingsmodel.getById('various').categories;
+				if (!(default_categories.indexOf(category) > -1)) {
+					return default_categories.push(category);
+				}
+			};
+			this._$scope.removeCategory = function(category, model) {
+				_$scope.task.categories = _$scope.task.cats;
+			};
 		}
 
 		return DetailsController;

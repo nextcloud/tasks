@@ -486,7 +486,30 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 			return null;
 		},
 		get categories() {
-			return null;
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			var categories = vtodos[0].getFirstProperty('categories');
+			if (categories) {
+				return categories.getValues();
+			} else {
+				return [];
+			}
+		},
+		set categories(cats) {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			var categories = vtodos[0].getFirstProperty('categories');
+			if (cats.length > 0) {
+				if (categories) {
+					categories.setValues(cats);
+				} else {
+					var prop = new ICAL.Property('categories');
+					prop.setValues(cats);
+					categories = vtodos[0].addProperty(prop);
+				}
+			} else {
+				vtodos[0].removeProperty('categories');
+			}
+			this.data = this.components.toString();
+			_$vtodoservice.update(this);
 		},
 		get start() {
 			return null;
