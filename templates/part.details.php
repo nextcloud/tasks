@@ -17,13 +17,13 @@
             </div>
         </div>
         <div class="body" watch-top ng-style="{top:divTop}">
-            <div class="section detail-start handler" ng-class="{'date':isDue(task.start), 'editing':route.parameter=='startdate'}" ng-click="editStart($event)">
+            <div class="section detail-start handler" ng-class="{'date':isDue(task.start), 'editing':route.parameter=='startdate'}" ng-click="editStart($event, task)">
             <!-- oc-click-focus="{selector: 'div.detail-start input.datepicker-input', timeout: 0}" -->
                 <span class="icon detail-start" ng-class="{'overdue':isOverDue(task.start)}"></span>
                 <div class="section-title" ng-class="{'overdue':isOverDue(task.start)}">
                     <text>{{ task.start | startDetails }}</text>
                 </div>
-                <a class="detail-delete handler end-edit" ng-click="deleteStartDate()">
+                <a class="detail-delete handler end-edit" ng-click="deleteStartDate(task)">
                     <span class="icon detail-delete"></span>
                 </a>
                 <span class="icon detail-save handler end-edit"></span>
@@ -32,13 +32,13 @@
                     <input class="timepicker-input medium focus handler" type="text" key-value="" placeholder="hh:mm" value="{{ task.start | timeTaskList }}" timepicker="start">
                 </div>
             </div>
-            <div class="section detail-date handler" ng-class="{'date':isDue(task.due), 'editing':route.parameter=='duedate'}" ng-click="editDueDate($event)">
+            <div class="section detail-date handler" ng-class="{'date':isDue(task.due), 'editing':route.parameter=='duedate'}" ng-click="editDueDate($event, task)">
             <!-- oc-click-focus="{selector: 'div.detail-date input.datepicker-input', timeout: 0}" -->
             	<span class="icon detail-date" ng-class="{'overdue':isOverDue(task.due)}"></span>
                 <div class="section-title" ng-class="{'overdue':isOverDue(task.due)}">
                     <text>{{ task.due | dateDetails }}</text>
                 </div>
-                <a class="detail-delete handler end-edit" ng-click="deleteDueDate()">
+                <a class="detail-delete handler end-edit" ng-click="deleteDueDate(task)">
                 	<span class="icon detail-delete"></span>
                 </a>
                 <span class="icon detail-save handler end-edit"></span>

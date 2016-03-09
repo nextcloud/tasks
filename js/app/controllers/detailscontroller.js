@@ -152,16 +152,16 @@ angular.module('Tasks').controller('DetailsController', [
 					_$scope.setEditRoute('name');
 				}
 			};
-			this._$scope.editDueDate = function($event) {
+			this._$scope.editDueDate = function($event, task) {
 				if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
 					_$scope.setEditRoute('duedate');
-					return _tasksbusinesslayer.initDueDate(_$scope.route.taskID);
+					_tasksbusinesslayer.initDueDate(task);
 				}
 			};
-			this._$scope.editStart = function($event) {
+			this._$scope.editStart = function($event, task) {
 				if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
 					_$scope.setEditRoute('startdate');
-					return _tasksbusinesslayer.initStartDate(_$scope.route.taskID);
+					_tasksbusinesslayer.initStartDate(task);
 				}
 			};
 			this._$scope.editReminder = function($event) {
@@ -221,14 +221,8 @@ angular.module('Tasks').controller('DetailsController', [
 					$location.path('/collections/' + collectionID + '/tasks/' + _$scope.route.taskID);
 				}
 			};
-		  this._$scope.deleteDueDate = function() {
-			return _tasksbusinesslayer.deleteDueDate(_$scope.route.taskID);
-		  };
 		  this._$scope.deletePercent = function(task) {
 			return _tasksbusinesslayer.setPercentComplete(task, 0);
-		  };
-		  this._$scope.deleteStartDate = function() {
-			return _tasksbusinesslayer.deleteStartDate(_$scope.route.taskID);
 		  };
 		  this._$scope.deleteReminder = function() {
 			return _tasksbusinesslayer.deleteReminderDate(_$scope.route.taskID);
@@ -259,18 +253,27 @@ angular.module('Tasks').controller('DetailsController', [
 		  this._$scope.isOverDue = function(date) {
 			return _$tasksmodel.overdue(date);
 		  };
-		  this._$scope.setstartday = function(date) {
-			return _tasksbusinesslayer.setStart(_$scope.route.taskID, moment(date, 'MM/DD/YYYY'), 'day');
-		  };
-		  this._$scope.setstarttime = function(date) {
-			return _tasksbusinesslayer.setStart(_$scope.route.taskID, moment(date, 'HH:mm'), 'time');
-		  };
-		  this._$scope.setdueday = function(date) {
-			return _tasksbusinesslayer.setDue(_$scope.route.taskID, moment(date, 'MM/DD/YYYY'), 'day');
-		  };
-		  this._$scope.setduetime = function(date) {
-			return _tasksbusinesslayer.setDue(_$scope.route.taskID, moment(date, 'HH:mm'), 'time');
-		  };
+
+			this._$scope.setstartday = function(date) {
+				return _tasksbusinesslayer.setStart(_$scope.task, moment(date, 'MM/DD/YYYY'), 'day');
+			};
+			this._$scope.setstarttime = function(date) {
+				return _tasksbusinesslayer.setStart(_$scope.task, moment(date, 'HH:mm'), 'time');
+			};
+			this._$scope.deleteStartDate = function(task) {
+				_tasksbusinesslayer.deleteStartDate(task);
+			};
+
+			this._$scope.setdueday = function(date) {
+				return _tasksbusinesslayer.setDue(_$scope.task, moment(date, 'MM/DD/YYYY'), 'day');
+			};
+			this._$scope.setduetime = function(date) {
+				return _tasksbusinesslayer.setDue(_$scope.task, moment(date, 'HH:mm'), 'time');
+			};
+			this._$scope.deleteDueDate = function(task) {
+				_tasksbusinesslayer.deleteDueDate(task);
+			};
+
 		  this._$scope.setreminderday = function(date) {
 			return _tasksbusinesslayer.setReminderDate(_$scope.route.taskID, moment(date, 'MM/DD/YYYY'), 'day');
 		  };

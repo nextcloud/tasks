@@ -406,12 +406,12 @@
 		  });
 		};
 
-		TasksModel.prototype.setDueDate = function(taskID, date) {
-		  return this.update({
-			id: taskID,
-			due: date
-		  });
-		};
+		// TasksModel.prototype.setDueDate = function(taskID, date) {
+		//   return this.update({
+		// 	id: taskID,
+		// 	due: date
+		//   });
+		// };
 
 		TasksModel.prototype.setReminder = function(taskID, reminder) {
 		  return this.update({
@@ -420,12 +420,12 @@
 		  });
 		};
 
-		TasksModel.prototype.setStartDate = function(taskID, date) {
-		  return this.update({
-			id: taskID,
-			start: date
-		  });
-		};
+		// TasksModel.prototype.setStartDate = function(taskID, date) {
+		//   return this.update({
+		// 	id: taskID,
+		// 	start: date
+		//   });
+		// };
 
 		TasksModel.prototype.overdue = function(due) {
 		  return moment(due, "YYYYMMDDTHHmmss").isValid() && moment(due, "YYYYMMDDTHHmmss").diff(moment()) < 0;

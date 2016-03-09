@@ -118,95 +118,85 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				});
 			};
 
-		TasksBusinessLayer.prototype.initDueDate = function(taskID) {
-		  var due;
-		  due = moment(this._$tasksmodel.getById(taskID).due, "YYYYMMDDTHHmmss");
-		  if (!due.isValid()) {
-			return this.setDue(taskID, moment().startOf('hour').add(1, 'h'), 'time');
-		  }
-		};
+			TasksBusinessLayer.prototype.initDueDate = function(task) {
+				var due = moment(task.due, "YYYY-MM-DDTHH:mm:ss");
+				if (!due.isValid()) {
+					return this.setDue(task, moment().startOf('hour').add(1, 'h'), 'time');
+				}
+			};
 
-		TasksBusinessLayer.prototype.setDue = function(taskID, date, type) {
-		  var due;
-		  if (type == null) {
-			type = 'day';
-		  }
-		  due = moment(this._$tasksmodel.getById(taskID).due, "YYYYMMDDTHHmmss");
-		  if (type === 'day') {
-			if (moment(due).isValid()) {
-			  due.year(date.year()).month(date.month()).date(date.date());
-			} else {
-			  due = date.add(12, 'h');
-			}
-		  } else if (type === 'time') {
-			if (moment(due).isValid()) {
-			  due.hour(date.hour()).minute(date.minute());
-			} else {
-			  due = date;
-			}
-		  } else if (type === 'all') {
-			due = date;
-		  } else {
-			return;
-		  }
-		  this._$tasksmodel.setDueDate(taskID, due.format('YYYYMMDDTHHmmss'));
-		  this.checkReminderDate(taskID);
-		  return this._persistence.setDueDate(taskID, due.isValid() ? due.unix() : false);
-		};
+			TasksBusinessLayer.prototype.setDue = function(task, date, type) {
+				if (type == null) {
+					type = 'day';
+				}
+				var due = moment(task.due, "YYYY-MM-DDTHH:mm:ss");
+				if (type === 'day') {
+					if (moment(due).isValid()) {
+						due.year(date.year()).month(date.month()).date(date.date());
+					} else {
+						due = date.add(12, 'h');
+					}
+				} else if (type === 'time') {
+					if (moment(due).isValid()) {
+						due.hour(date.hour()).minute(date.minute());
+					} else {
+						due = date;
+					}
+				} else if (type === 'all') {
+					due = date;
+				} else {
+					return;
+				}
+				task.due = due.format('YYYY-MM-DDTHH:mm:ss');
+				// this.checkReminderDate(task);
+			};
 
-		TasksBusinessLayer.prototype.deleteDueDate = function(taskID) {
-		  var reminder;
-		  reminder = this._$tasksmodel.getById(taskID).reminder;
-		  if (reminder !== null && reminder.type === 'DURATION' && reminder.duration.params.related === 'END') {
-			this.deleteReminderDate(taskID);
-		  }
-		  this._$tasksmodel.setDueDate(taskID, null);
-		  return this._persistence.setDueDate(taskID, false);
-		};
+			TasksBusinessLayer.prototype.deleteDueDate = function(task) {
+				// var reminder = task.reminder;
+				//  if (reminder !== null && reminder.type === 'DURATION' && reminder.duration.params.related === 'END') {
+				// this.deleteReminderDate(task);
+				//  }
+				task.due = null;
+			};
 
-		TasksBusinessLayer.prototype.initStartDate = function(taskID) {
-		  var start;
-		  start = moment(this._$tasksmodel.getById(taskID).start, "YYYYMMDDTHHmmss");
-		  if (!start.isValid()) {
-			return this.setStart(taskID, moment().startOf('hour').add(1, 'h'), 'time');
-		  }
-		};
+			TasksBusinessLayer.prototype.initStartDate = function(task) {
+				var start = moment(task.start, "YYYY-MM-DDTHH:mm:ss");
+				if (!start.isValid()) {
+					return this.setStart(task, moment().startOf('hour').add(1, 'h'), 'time');
+				}
+			};
 
-		TasksBusinessLayer.prototype.setStart = function(taskID, date, type) {
-		  var start;
-		  if (type == null) {
-			type = 'day';
-		  }
-		  start = moment(this._$tasksmodel.getById(taskID).start, "YYYYMMDDTHHmmss");
-		  if (type === 'day') {
-			if (moment(start).isValid()) {
-			  start.year(date.year()).month(date.month()).date(date.date());
-			} else {
-			  start = date.add(12, 'h');
-			}
-		  } else if (type === 'time') {
-			if (moment(start).isValid()) {
-			  start.hour(date.hour()).minute(date.minute());
-			} else {
-			  start = date;
-			}
-		  } else {
-			return;
-		  }
-		  this._$tasksmodel.setStartDate(taskID, start.format('YYYYMMDDTHHmmss'));
-		  this.checkReminderDate(taskID);
-		  return this._persistence.setStartDate(taskID, start.isValid() ? start.unix() : false);
-		};
+			TasksBusinessLayer.prototype.setStart = function(task, date, type) {
+				if (type == null) {
+					type = 'day';
+				}
+				var start = moment(task.start, "YYYY-MM-DDTHH:mm:ss");
+				if (type === 'day') {
+					if (moment(start).isValid()) {
+						start.year(date.year()).month(date.month()).date(date.date());
+					} else {
+						start = date.add(12, 'h');
+					}
+				} else if (type === 'time') {
+					if (moment(start).isValid()) {
+						start.hour(date.hour()).minute(date.minute());
+					} else {
+						start = date;
+					}
+				} else {
+					return;
+				}
+				task.start = start.format('YYYY-MM-DDTHH:mm:ss');
+				// this.checkReminderDate(taskID);
+			};
 
-		TasksBusinessLayer.prototype.deleteStartDate = function(taskID) {
-		  var reminder;
-		  reminder = this._$tasksmodel.getById(taskID).reminder;
-		  if (reminder !== null && reminder.type === 'DURATION' && reminder.duration.params.related === 'START') {
-			this.deleteReminderDate(taskID);
-		  }
-		  this._$tasksmodel.setStartDate(taskID, null);
-		  return this._persistence.setStartDate(taskID, false);
-		};
+			TasksBusinessLayer.prototype.deleteStartDate = function(task) {
+				// var reminder = task.reminder;
+				// if (reminder !== null && reminder.type === 'DURATION' && reminder.duration.params.related === 'START') {
+					// this.deleteReminderDate(task);
+				// }
+				task.start = null;
+			};
 
 		TasksBusinessLayer.prototype.initReminder = function(taskID) {
 		  var p, task;
