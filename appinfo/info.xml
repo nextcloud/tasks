@@ -7,7 +7,6 @@
 	<category>productivity</category>
 	<licence>AGPL</licence>
 	<author>Raimund Schlüßler</author>
-	<requiremin>9.0</requiremin>
 	<description>Task App for Calender TODOs</description>
 	<ocsid>164356</ocsid>
     <dependencies>
