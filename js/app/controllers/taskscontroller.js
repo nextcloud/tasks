@@ -23,10 +23,14 @@
   var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   angular.module('Tasks').controller('TasksController', [
-	'$scope', '$window', '$routeParams', 'TasksModel', 'ListsModel', 'CollectionsModel', 'TasksBusinessLayer', '$location', 'SettingsBusinessLayer', 'SearchBusinessLayer', 'VTodo', function($scope, $window, $routeParams, TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location, SettingsBusinessLayer, SearchBusinessLayer, VTodo) {
+	'$scope', '$window', '$routeParams', 'TasksModel', 'ListsModel', 'CollectionsModel', 'TasksBusinessLayer', '$location',
+	'SettingsBusinessLayer', 'SearchBusinessLayer', 'VTodo',
+	function($scope, $window, $routeParams, TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location,
+		SettingsBusinessLayer, SearchBusinessLayer, VTodo) {
 	  var TasksController;
 	  TasksController = (function() {
-		function TasksController(_$scope, _$window, _$routeParams, _$tasksmodel, _$listsmodel, _$collectionsmodel, _tasksbusinesslayer, $location, _settingsbusinesslayer, _searchbusinesslayer, vtodo) {
+		function TasksController(_$scope, _$window, _$routeParams, _$tasksmodel, _$listsmodel, _$collectionsmodel, _tasksbusinesslayer, $location,
+			_settingsbusinesslayer, _searchbusinesslayer, vtodo) {
 			var _this = this;
 			this._$scope = _$scope;
 			this._$window = _$window;
@@ -67,11 +71,11 @@
 					complete: '0',
 					note: ''
 				};
-				if (((_ref = _$scope.route.listID) === 'starred' || _ref === 'today' || _ref === 'week' || _ref === 'all' || _ref === 'completed' || _ref === 'current')) {
+				if (((_ref = _$scope.route.collectionID) === 'starred' || _ref === 'today' || _ref === 'week' || _ref === 'all' || _ref === 'completed' || _ref === 'current')) {
 					if (related) {
 						task.calendar = calendar;
 					} else {
-						task.calendarid = _$listsmodel.getStandardList();
+						task.calendar = _$listsmodel.getStandardList();
 					}
 					if (_$scope.route.listID === 'starred') {
 						task.starred = true;
@@ -323,7 +327,7 @@
 				$('.subtasks-container').removeClass('dropzone-visible');
 				return true;
 			};
-			
+
 			this._$scope.dragover = function($event, item, index) {
 				$('.subtasks-container').removeClass('dropzone-visible');
 				$($event.target).closest('.task-item').children('.subtasks-container').addClass('dropzone-visible');
