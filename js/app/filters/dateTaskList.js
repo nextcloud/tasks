@@ -20,6 +20,7 @@
  */
 
 angular.module('Tasks').filter('dateTaskList', function() {
+	'use strict';
 	return function(due) {
 		if (moment(due, "YYYYMMDDTHHmmss").isValid()) {
 			return moment(due, "YYYYMMDDTHHmmss").locale('tasks').calendar();

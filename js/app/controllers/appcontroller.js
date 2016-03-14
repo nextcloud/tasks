@@ -21,8 +21,8 @@
 
 angular.module('Tasks').controller('AppController', [
 	'$scope', 'ListsBusinessLayer', '$route', 'Status', '$timeout', '$location', '$routeParams', 'Loading', 'SettingsModel', 'Persistence', function($scope, ListsBusinessLayer, $route, status, $timeout, $location, $routeParams, Loading, SettingsModel, Persistence) {
-		var AppController;
-		AppController = (function() {
+		'use strict';
+		var AppController = (function() {
 			function AppController(_$scope, _$listsbusinesslayer, _$route, _$status, _$timeout, _$location, _$routeparams, _Loading, _$settingsmodel, _persistence) {
 				this._$scope = _$scope;
 				this._$listsbusinesslayer = _$listsbusinesslayer;
@@ -42,7 +42,7 @@ angular.module('Tasks').controller('AppController', [
 				this._$listsbusinesslayer.init().then(function(results) {
 					Promise.all(results).then(function() {
 						$scope.$apply();
-					})
+					});
 				});
 
 				this._persistence.init();
@@ -66,7 +66,7 @@ angular.module('Tasks').controller('AppController', [
 					}
 					if (!$($event.target).closest('.add-subtask').length) {
 						_$scope.status.addSubtaskTo = null;
-						return _$scope.status.focusSubtaskInput = false;
+						_$scope.status.focusSubtaskInput = false;
 					}
 				};
 				this._$scope.isLoading = function() {

@@ -19,74 +19,77 @@
  *
  */
 
-(function() {
-  angular.module('Tasks', ['ngRoute', 'ngAnimate', 'ui.select', 'ngSanitize', 'dndLists']).config([
-	'$provide', '$routeProvider', '$interpolateProvider', '$httpProvider', function($provide, $routeProvider, $interpolateProvider, $httpProvider) {
-	  var config;
-	  $provide.value('Config', config = {
-		markReadTimeout: 500,
-		taskUpdateInterval: 1000 * 600
-	  });
-	  $httpProvider.defaults.headers.common['requesttoken'] = oc_requesttoken;
-	  $routeProvider
-	  .when('/calendars/:calendarID', {})
-	  .when('/calendars/:calendarID/edit/:listparameter', {})
-	  .when('/calendars/:calendarID/tasks/:taskID', {})
-	  .when('/calendars/:calendarID/tasks/:taskID/settings', {})
-	  .when('/calendars/:calendarID/tasks/:taskID/edit/:parameter', {})
-	  .when('/collections/:collectionID/tasks/:taskID', {})
-	  .when('/collections/:collectionID/tasks/:taskID/settings', {})
-	  .when('/collections/:collectionID/tasks/:taskID/edit/:parameter', {})
-	  .when('/collections/:collectionID', {})
-	  .when('/search/:searchString', {})
-	  .when('/search/:searchString/tasks/:taskID', {})
-	  .when('/search/:searchString/tasks/:taskID/edit/:parameter', {});
+angular.module('Tasks', ['ngRoute', 'ngAnimate', 'ui.select', 'ngSanitize', 'dndLists']).config([
+	'$provide', '$routeProvider', '$interpolateProvider', '$httpProvider',
+	function($provide, $routeProvider, $interpolateProvider, $httpProvider) {
+		'use strict';
+		var config;
+		$provide.value('Config', config = {
+			markReadTimeout: 500,
+			taskUpdateInterval: 1000 * 600
+		});
+		$httpProvider.defaults.headers.common.requesttoken = oc_requesttoken;
+		$routeProvider
+		.when('/calendars/:calendarID', {})
+		.when('/calendars/:calendarID/edit/:listparameter', {})
+		.when('/calendars/:calendarID/tasks/:taskID', {})
+		.when('/calendars/:calendarID/tasks/:taskID/settings', {})
+		.when('/calendars/:calendarID/tasks/:taskID/edit/:parameter', {})
+		.when('/collections/:collectionID/tasks/:taskID', {})
+		.when('/collections/:collectionID/tasks/:taskID/settings', {})
+		.when('/collections/:collectionID/tasks/:taskID/edit/:parameter', {})
+		.when('/collections/:collectionID', {})
+		.when('/search/:searchString', {})
+		.when('/search/:searchString/tasks/:taskID', {})
+		.when('/search/:searchString/tasks/:taskID/edit/:parameter', {});
 	}
-  ]);
+]);
 
-  angular.module('Tasks').run([
-	'$document', '$rootScope', 'Config', '$timeout', 'ListsBusinessLayer', 'TasksBusinessLayer', 'SearchBusinessLayer', function($document, $rootScope, Config, $timeout, TasksBusinessLayer, ListsBusinessLayer, SearchBusinessLayer) {
-	  var init, update;
-	  init = false;
-	  (update = function() {
-		var timeOutUpdate;
-		timeOutUpdate = function() {
-		  return $timeout(update, Config.taskUpdateInterval);
-		};
-		init = true;
-		return timeOutUpdate();
-	  })();
-	  OCA.Search.tasks = SearchBusinessLayer;
-	  $('link[rel="shortcut icon"]').attr('href', OC.filePath('tasks', 'img', 'favicon.png'));
-	  $document.click(function(event) {
-		$rootScope.$broadcast('documentClicked', event);
-	  });
-	  moment.locale('details', {
-		calendar: {
-		  lastDay: '[' + t('tasks', 'Due yesterday') + '], HH:mm',
-		  sameDay: '[' + t('tasks', 'Due today') + '], HH:mm',
-		  nextDay: '[' + t('tasks', 'Due tomorrow') + '], HH:mm',
-		  lastWeek: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY, HH:mm',
-		  nextWeek: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY, HH:mm',
-		  sameElse: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY, HH:mm'
-		}
-	  });
-	  moment.locale('start', {
-		calendar: {
-		  lastDay: '[' + t('tasks', 'Started yesterday') + '], HH:mm',
-		  sameDay: '[' + t('tasks', 'Starts today') + '], HH:mm',
-		  nextDay: '[' + t('tasks', 'Starts tomorrow') + '], HH:mm',
-		  lastWeek: '[' + t('tasks', 'Started on') + '] MMM DD, YYYY, HH:mm',
-		  nextWeek: '[' + t('tasks', 'Starts on') + '] MMM DD, YYYY, HH:mm',
-		  sameElse: function() {
-			if (this.diff(moment()) > 0) {
-			  return '[' + t('tasks', 'Starts on') + '] MMM DD, YYYY, HH:mm';
-			} else {
-			  return '[' + t('tasks', 'Started on') + '] MMM DD, YYYY, HH:mm';
+angular.module('Tasks').run([
+	'$document', '$rootScope', 'Config', '$timeout', 'ListsBusinessLayer', 'TasksBusinessLayer', 'SearchBusinessLayer',
+	function($document, $rootScope, Config, $timeout, TasksBusinessLayer, ListsBusinessLayer, SearchBusinessLayer) {
+		'use strict';
+		var update;
+		var init = false;
+		(update = function() {
+			var timeOutUpdate;
+			timeOutUpdate = function() {
+				return $timeout(update, Config.taskUpdateInterval);
+			};
+			init = true;
+			return timeOutUpdate();
+		}).call();
+		OCA.Search.tasks = SearchBusinessLayer;
+		$('link[rel="shortcut icon"]').attr('href', OC.filePath('tasks', 'img', 'favicon.png'));
+		$document.click(function(event) {
+			$rootScope.$broadcast('documentClicked', event);
+		});
+		moment.locale('details', {
+			calendar: {
+				lastDay: '[' + t('tasks', 'Due yesterday') + '], HH:mm',
+				sameDay: '[' + t('tasks', 'Due today') + '], HH:mm',
+				nextDay: '[' + t('tasks', 'Due tomorrow') + '], HH:mm',
+				lastWeek: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY, HH:mm',
+				nextWeek: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY, HH:mm',
+				sameElse: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY, HH:mm'
 			}
-		  }
-		}
-	  });
+		});
+		moment.locale('start', {
+			calendar: {
+				lastDay: '[' + t('tasks', 'Started yesterday') + '], HH:mm',
+				sameDay: '[' + t('tasks', 'Starts today') + '], HH:mm',
+				nextDay: '[' + t('tasks', 'Starts tomorrow') + '], HH:mm',
+				lastWeek: '[' + t('tasks', 'Started on') + '] MMM DD, YYYY, HH:mm',
+				nextWeek: '[' + t('tasks', 'Starts on') + '] MMM DD, YYYY, HH:mm',
+				sameElse: function() {
+					if (this.diff(moment()) > 0) {
+						return '[' + t('tasks', 'Starts on') + '] MMM DD, YYYY, HH:mm';
+					} else {
+						return '[' + t('tasks', 'Started on') + '] MMM DD, YYYY, HH:mm';
+					}
+				}
+			}
+		});
 	  moment.locale('reminder', {
 		calendar: {
 		  lastDay: t('tasks', '[Remind me yesterday at ]HH:mm'),
@@ -145,6 +148,4 @@
 		}
 	  });
 	}
-  ]);
-
-}).call(this);
+]);

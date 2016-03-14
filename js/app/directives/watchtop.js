@@ -20,6 +20,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 angular.module('Tasks').directive('watchTop', function() {
+	'use strict';
 	return {
 		restrict: 'A',
 		link: function(scope, element, attr) {
@@ -29,7 +30,7 @@ angular.module('Tasks').directive('watchTop', function() {
 				}
 			});
 			return scope.$watch(function() {
-				return scope.divTop = element.prev().outerHeight(true);
+				scope.divTop = element.prev().outerHeight(true);
 			});
 		}
 	};

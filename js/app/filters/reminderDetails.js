@@ -19,8 +19,8 @@
  *
  */
 
-(function() {
-  angular.module('Tasks').filter('reminderDetails', function() {
+angular.module('Tasks').filter('reminderDetails', function() {
+  	'use strict';
 	return function(reminder, scope) {
 	  var ds, time, token, _i, _len, _ref;
 	  if (!(angular.isUndefined(reminder) || reminder === null)) {
@@ -70,6 +70,4 @@
 		return t('tasks', 'Remind me');
 	  }
 	};
-  });
-
-}).call(this);
+});

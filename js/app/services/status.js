@@ -21,6 +21,7 @@
 
 angular.module('Tasks').factory('Status', [
 	function() {
+		'use strict';
 		var Status;
 		Status = (function() {
 			function Status() {

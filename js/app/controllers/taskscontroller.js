@@ -20,6 +20,7 @@
  */
 
 (function() {
+	'use strict';
   var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   angular.module('Tasks').controller('TasksController', [
@@ -54,7 +55,7 @@
 
 			this._$scope.addTask = function(taskName, related, calendar) {
 				var _ref, _this = this;
-				if (calendar == null) {
+				if (calendar === null) {
 				  calendar = '';
 				}
 				_$scope.isAddingTask = true;
@@ -98,7 +99,7 @@
 				_$scope.status.focusSubtaskInput = false;
 				_$scope.status.addSubtaskTo = null;
 				_$scope.status.taskName = '';
-				return _$scope.status.subtaskName = '';
+				_$scope.status.subtaskName = '';
 			};
 
 			this._$scope.getAddString = function() {
@@ -131,7 +132,7 @@
 			};
 
 			this._$scope.showSubtaskInput = function(uid) {
-				return _$scope.status.addSubtaskTo = uid;
+				_$scope.status.addSubtaskTo = uid;
 			};
 
 			this._$scope.hideSubtasks = function(task) {
@@ -160,19 +161,19 @@
 			};
 			
 		  this._$scope.focusTaskInput = function() {
-			return _$scope.status.focusTaskInput = true;
+			_$scope.status.focusTaskInput = true;
 		  };
 		  this._$scope.focusSubtaskInput = function() {
-			return _$scope.status.focusSubtaskInput = true;
+			_$scope.status.focusSubtaskInput = true;
 		  };
 		  
 			this._$scope.openDetails = function(id, $event) {
-				var calendarID;
-				var collectionID;
+				var calendarID = _$scope.route.calendarID;
+				var collectionID = _$scope.route.collectionID;
 				if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
-					if (calendarID = _$scope.route.calendarID) {
+					if (calendarID) {
 						$location.path('/calendars/' + calendarID + '/tasks/' + id);
-					} else if (collectionID = _$scope.route.collectionID) {
+					} else if (collectionID) {
 						$location.path('/collections/' + collectionID + '/tasks/' + id);
 					}
 				}
@@ -285,7 +286,7 @@
 			  _$scope.status.subtaskName = '';
 			  _$scope.status.addSubtaskTo = null;
 			  _$scope.status.focusTaskInput = false;
-			  return _$scope.status.focusSubtaskInput = false;
+			  _$scope.status.focusSubtaskInput = false;
 			}
 		  };
 		  this._$scope.getCompletedTasks = function(listID) {

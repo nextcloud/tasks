@@ -19,43 +19,39 @@
  *
  */
 
-(function() {
-  angular.module('Tasks').factory('SettingsBusinessLayer', [
+angular.module('Tasks').factory('SettingsBusinessLayer', [
 	'Persistence', 'SettingsModel', function(Persistence, SettingsModel) {
-	  var SettingsBusinessLayer;
-	  SettingsBusinessLayer = (function() {
-		function SettingsBusinessLayer(_persistence, _$settingsmodel) {
-		  this._persistence = _persistence;
-		  this._$settingsmodel = _$settingsmodel;
-		}
+		'use strict';
+		var SettingsBusinessLayer = (function() {
+			function SettingsBusinessLayer(_persistence, _$settingsmodel) {
+				this._persistence = _persistence;
+				this._$settingsmodel = _$settingsmodel;
+			}
 
-		SettingsBusinessLayer.prototype.updateModel = function() {
-		  var success,
-			_this = this;
-		  success = function() {};
-		  return this._persistence.getCollections(success, true);
-		};
+			SettingsBusinessLayer.prototype.updateModel = function() {
+				var success, _this = this;
+				success = function() {};
+				return this._persistence.getCollections(success, true);
+			};
 
-		SettingsBusinessLayer.prototype.setVisibility = function(collectionID, visibility) {
-		  return this._persistence.setVisibility(collectionID, visibility);
-		};
+			SettingsBusinessLayer.prototype.setVisibility = function(collectionID, visibility) {
+				return this._persistence.setVisibility(collectionID, visibility);
+			};
 
-		SettingsBusinessLayer.prototype.toggle = function(type, setting) {
-		  var value;
-		  this._$settingsmodel.toggle(type, setting);
-		  value = this._$settingsmodel.getById(type)[setting];
-		  return this._persistence.setting(type, setting, value);
-		};
+			SettingsBusinessLayer.prototype.toggle = function(type, setting) {
+				var value;
+				this._$settingsmodel.toggle(type, setting);
+				value = this._$settingsmodel.getById(type)[setting];
+				return this._persistence.setting(type, setting, value);
+			};
 
-		SettingsBusinessLayer.prototype.set = function(type, setting, value) {
-		  return this._persistence.setting(type, setting, value);
-		};
+			SettingsBusinessLayer.prototype.set = function(type, setting, value) {
+				return this._persistence.setting(type, setting, value);
+			};
 
-		return SettingsBusinessLayer;
+			return SettingsBusinessLayer;
 
-	  })();
-	  return new SettingsBusinessLayer(Persistence, SettingsModel);
+		})();
+		return new SettingsBusinessLayer(Persistence, SettingsModel);
 	}
-  ]);
-
-}).call(this);
+]);

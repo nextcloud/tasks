@@ -11,74 +11,77 @@
  */
 
 
-(function() {
-  angular.module('Tasks', ['ngRoute', 'ngAnimate', 'ui.select', 'ngSanitize', 'dndLists']).config([
-	'$provide', '$routeProvider', '$interpolateProvider', '$httpProvider', function($provide, $routeProvider, $interpolateProvider, $httpProvider) {
-	  var config;
-	  $provide.value('Config', config = {
-		markReadTimeout: 500,
-		taskUpdateInterval: 1000 * 600
-	  });
-	  $httpProvider.defaults.headers.common['requesttoken'] = oc_requesttoken;
-	  $routeProvider
-	  .when('/calendars/:calendarID', {})
-	  .when('/calendars/:calendarID/edit/:listparameter', {})
-	  .when('/calendars/:calendarID/tasks/:taskID', {})
-	  .when('/calendars/:calendarID/tasks/:taskID/settings', {})
-	  .when('/calendars/:calendarID/tasks/:taskID/edit/:parameter', {})
-	  .when('/collections/:collectionID/tasks/:taskID', {})
-	  .when('/collections/:collectionID/tasks/:taskID/settings', {})
-	  .when('/collections/:collectionID/tasks/:taskID/edit/:parameter', {})
-	  .when('/collections/:collectionID', {})
-	  .when('/search/:searchString', {})
-	  .when('/search/:searchString/tasks/:taskID', {})
-	  .when('/search/:searchString/tasks/:taskID/edit/:parameter', {});
+angular.module('Tasks', ['ngRoute', 'ngAnimate', 'ui.select', 'ngSanitize', 'dndLists']).config([
+	'$provide', '$routeProvider', '$interpolateProvider', '$httpProvider',
+	function($provide, $routeProvider, $interpolateProvider, $httpProvider) {
+		'use strict';
+		var config;
+		$provide.value('Config', config = {
+			markReadTimeout: 500,
+			taskUpdateInterval: 1000 * 600
+		});
+		$httpProvider.defaults.headers.common.requesttoken = oc_requesttoken;
+		$routeProvider
+		.when('/calendars/:calendarID', {})
+		.when('/calendars/:calendarID/edit/:listparameter', {})
+		.when('/calendars/:calendarID/tasks/:taskID', {})
+		.when('/calendars/:calendarID/tasks/:taskID/settings', {})
+		.when('/calendars/:calendarID/tasks/:taskID/edit/:parameter', {})
+		.when('/collections/:collectionID/tasks/:taskID', {})
+		.when('/collections/:collectionID/tasks/:taskID/settings', {})
+		.when('/collections/:collectionID/tasks/:taskID/edit/:parameter', {})
+		.when('/collections/:collectionID', {})
+		.when('/search/:searchString', {})
+		.when('/search/:searchString/tasks/:taskID', {})
+		.when('/search/:searchString/tasks/:taskID/edit/:parameter', {});
 	}
-  ]);
+]);
 
-  angular.module('Tasks').run([
-	'$document', '$rootScope', 'Config', '$timeout', 'ListsBusinessLayer', 'TasksBusinessLayer', 'SearchBusinessLayer', function($document, $rootScope, Config, $timeout, TasksBusinessLayer, ListsBusinessLayer, SearchBusinessLayer) {
-	  var init, update;
-	  init = false;
-	  (update = function() {
-		var timeOutUpdate;
-		timeOutUpdate = function() {
-		  return $timeout(update, Config.taskUpdateInterval);
-		};
-		init = true;
-		return timeOutUpdate();
-	  })();
-	  OCA.Search.tasks = SearchBusinessLayer;
-	  $('link[rel="shortcut icon"]').attr('href', OC.filePath('tasks', 'img', 'favicon.png'));
-	  $document.click(function(event) {
-		$rootScope.$broadcast('documentClicked', event);
-	  });
-	  moment.locale('details', {
-		calendar: {
-		  lastDay: '[' + t('tasks', 'Due yesterday') + '], HH:mm',
-		  sameDay: '[' + t('tasks', 'Due today') + '], HH:mm',
-		  nextDay: '[' + t('tasks', 'Due tomorrow') + '], HH:mm',
-		  lastWeek: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY, HH:mm',
-		  nextWeek: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY, HH:mm',
-		  sameElse: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY, HH:mm'
-		}
-	  });
-	  moment.locale('start', {
-		calendar: {
-		  lastDay: '[' + t('tasks', 'Started yesterday') + '], HH:mm',
-		  sameDay: '[' + t('tasks', 'Starts today') + '], HH:mm',
-		  nextDay: '[' + t('tasks', 'Starts tomorrow') + '], HH:mm',
-		  lastWeek: '[' + t('tasks', 'Started on') + '] MMM DD, YYYY, HH:mm',
-		  nextWeek: '[' + t('tasks', 'Starts on') + '] MMM DD, YYYY, HH:mm',
-		  sameElse: function() {
-			if (this.diff(moment()) > 0) {
-			  return '[' + t('tasks', 'Starts on') + '] MMM DD, YYYY, HH:mm';
-			} else {
-			  return '[' + t('tasks', 'Started on') + '] MMM DD, YYYY, HH:mm';
+angular.module('Tasks').run([
+	'$document', '$rootScope', 'Config', '$timeout', 'ListsBusinessLayer', 'TasksBusinessLayer', 'SearchBusinessLayer',
+	function($document, $rootScope, Config, $timeout, TasksBusinessLayer, ListsBusinessLayer, SearchBusinessLayer) {
+		'use strict';
+		var update;
+		var init = false;
+		(update = function() {
+			var timeOutUpdate;
+			timeOutUpdate = function() {
+				return $timeout(update, Config.taskUpdateInterval);
+			};
+			init = true;
+			return timeOutUpdate();
+		}).call();
+		OCA.Search.tasks = SearchBusinessLayer;
+		$('link[rel="shortcut icon"]').attr('href', OC.filePath('tasks', 'img', 'favicon.png'));
+		$document.click(function(event) {
+			$rootScope.$broadcast('documentClicked', event);
+		});
+		moment.locale('details', {
+			calendar: {
+				lastDay: '[' + t('tasks', 'Due yesterday') + '], HH:mm',
+				sameDay: '[' + t('tasks', 'Due today') + '], HH:mm',
+				nextDay: '[' + t('tasks', 'Due tomorrow') + '], HH:mm',
+				lastWeek: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY, HH:mm',
+				nextWeek: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY, HH:mm',
+				sameElse: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY, HH:mm'
 			}
-		  }
-		}
-	  });
+		});
+		moment.locale('start', {
+			calendar: {
+				lastDay: '[' + t('tasks', 'Started yesterday') + '], HH:mm',
+				sameDay: '[' + t('tasks', 'Starts today') + '], HH:mm',
+				nextDay: '[' + t('tasks', 'Starts tomorrow') + '], HH:mm',
+				lastWeek: '[' + t('tasks', 'Started on') + '] MMM DD, YYYY, HH:mm',
+				nextWeek: '[' + t('tasks', 'Starts on') + '] MMM DD, YYYY, HH:mm',
+				sameElse: function() {
+					if (this.diff(moment()) > 0) {
+						return '[' + t('tasks', 'Starts on') + '] MMM DD, YYYY, HH:mm';
+					} else {
+						return '[' + t('tasks', 'Started on') + '] MMM DD, YYYY, HH:mm';
+					}
+				}
+			}
+		});
 	  moment.locale('reminder', {
 		calendar: {
 		  lastDay: t('tasks', '[Remind me yesterday at ]HH:mm'),
@@ -137,14 +140,12 @@
 		}
 	  });
 	}
-  ]);
-
-}).call(this);
+]);
 
 angular.module('Tasks').controller('AppController', [
 	'$scope', 'ListsBusinessLayer', '$route', 'Status', '$timeout', '$location', '$routeParams', 'Loading', 'SettingsModel', 'Persistence', function($scope, ListsBusinessLayer, $route, status, $timeout, $location, $routeParams, Loading, SettingsModel, Persistence) {
-		var AppController;
-		AppController = (function() {
+		'use strict';
+		var AppController = (function() {
 			function AppController(_$scope, _$listsbusinesslayer, _$route, _$status, _$timeout, _$location, _$routeparams, _Loading, _$settingsmodel, _persistence) {
 				this._$scope = _$scope;
 				this._$listsbusinesslayer = _$listsbusinesslayer;
@@ -164,7 +165,7 @@ angular.module('Tasks').controller('AppController', [
 				this._$listsbusinesslayer.init().then(function(results) {
 					Promise.all(results).then(function() {
 						$scope.$apply();
-					})
+					});
 				});
 
 				this._persistence.init();
@@ -188,7 +189,7 @@ angular.module('Tasks').controller('AppController', [
 					}
 					if (!$($event.target).closest('.add-subtask').length) {
 						_$scope.status.addSubtaskTo = null;
-						return _$scope.status.focusSubtaskInput = false;
+						_$scope.status.focusSubtaskInput = false;
 					}
 				};
 				this._$scope.isLoading = function() {
@@ -204,356 +205,351 @@ angular.module('Tasks').controller('AppController', [
 angular.module('Tasks').controller('DetailsController', [
 	'$scope', '$window', 'TasksModel', 'TasksBusinessLayer', '$route', '$location', '$timeout', '$routeParams', 'SettingsModel', 'Loading', 'ListsModel',
 	function($scope, $window, TasksModel, TasksBusinessLayer, $route, $location, $timeout, $routeParams, SettingsModel, Loading, ListsModel) {
-	  var DetailsController;
-	  DetailsController = (function() {
-		function DetailsController(_$scope, _$window, _$tasksmodel,
-		_tasksbusinesslayer, _$route, _$location, _$timeout, _$routeparams, _$settingsmodel, _Loading, _$listsmodel) {
-			this._$scope = _$scope;
-			this._$window = _$window;
-			this._$tasksmodel = _$tasksmodel;
-			this._$listsmodel = _$listsmodel;
-			this._tasksbusinesslayer = _tasksbusinesslayer;
-			this._$route = _$route;
-			this._$location = _$location;
-			this._$timeout = _$timeout;
-			this._$routeparams = _$routeparams;
-			this._$settingsmodel = _$settingsmodel;
-			this._Loading = _Loading;
-			this._$scope.task = _$tasksmodel.getById(_$scope.route.taskID);
-			this._$scope.found = true;
-			this._$scope.$on('$routeChangeSuccess', function() {
-				var task = _$tasksmodel.getByUri(_$scope.route.taskID);
+		'use strict';
+		var DetailsController = (function() {
+			function DetailsController(_$scope, _$window, _$tasksmodel,
+			_tasksbusinesslayer, _$route, _$location, _$timeout, _$routeparams, _$settingsmodel, _Loading, _$listsmodel) {
+				this._$scope = _$scope;
+				this._$window = _$window;
+				this._$tasksmodel = _$tasksmodel;
+				this._$listsmodel = _$listsmodel;
+				this._tasksbusinesslayer = _tasksbusinesslayer;
+				this._$route = _$route;
+				this._$location = _$location;
+				this._$timeout = _$timeout;
+				this._$routeparams = _$routeparams;
+				this._$settingsmodel = _$settingsmodel;
+				this._Loading = _Loading;
+				this._$scope.task = _$tasksmodel.getById(_$scope.route.taskID);
+				this._$scope.found = true;
+				this._$scope.$on('$routeChangeSuccess', function() {
+					var task = _$tasksmodel.getByUri(_$scope.route.taskID);
 
-				if (!(angular.isUndefined(task) || task === null)) {
-					_$scope.task = task;
-					// Bind categories to task.cats as angular.ui/ui-select seems to have problems with Getter/Setter
-					_$scope.task.cats = task.categories;
-					return _$scope.found = true;
-				}  else if (_$scope.route.taskID !== void 0) {
-					_$scope.found = false;
-					// var calendar = _$listsmodel.getByUri(_$scope.route.calendarID);
-					// return _tasksbusinesslayer.getTask(calendar, _$scope.route.taskID).then(function(task) {
-					// 	_$scope.task = task;
-					// 	_$scope.found = true;
-					// });
-				}
-			});
+					if (!(angular.isUndefined(task) || task === null)) {
+						_$scope.task = task;
+						// Bind categories to task.cats as angular.ui/ui-select seems to have problems with Getter/Setter
+						_$scope.task.cats = task.categories;
+						_$scope.found = true;
+					}  else if (_$scope.route.taskID !== void 0) {
+						_$scope.found = false;
+					}
+				});
 
-			this._$scope.settingsmodel = this._$settingsmodel;
-			this._$scope.settingsmodel.add({
-				'id': 'various',
-				'categories': []
-			});
-			this._$scope.isAddingComment = false;
-			this._$scope.timers = [];
-			this._$scope.durations = [{
-					name: t('tasks', 'week'),
-					names: t('tasks', 'weeks'),
-					id: 'week'
-				}, {
-					name: t('tasks', 'day'),
-					names: t('tasks', 'days'),
-					id: 'day'
-				}, {
-					name: t('tasks', 'hour'),
-					names: t('tasks', 'hours'),
-					id: 'hour'
-				}, {
-					name: t('tasks', 'minute'),
-					names: t('tasks', 'minutes'),
-					id: 'minute'
-				}, {
-					name: t('tasks', 'second'),
-					names: t('tasks', 'seconds'),
-					id: 'second'
-				}
-			];
-			this._$scope.loadTask = function(taskID) {
-				var task = _$tasksmodel.getByUri(_$scope.route.taskID);
-				if (!(angular.isUndefined(task) || task === null)) {
-					_$scope.task = task;
-					return _$scope.found = true;
-				}
-			};
-			this._$scope.TaskState = function() {
-				if (_$scope.found) {
-					return 'found';
-				} else {
-					if (_Loading.isLoading()) {
-						return 'loading';
+				this._$scope.settingsmodel = this._$settingsmodel;
+				this._$scope.settingsmodel.add({
+					'id': 'various',
+					'categories': []
+				});
+				this._$scope.isAddingComment = false;
+				this._$scope.timers = [];
+				this._$scope.durations = [{
+						name: t('tasks', 'week'),
+						names: t('tasks', 'weeks'),
+						id: 'week'
+					}, {
+						name: t('tasks', 'day'),
+						names: t('tasks', 'days'),
+						id: 'day'
+					}, {
+						name: t('tasks', 'hour'),
+						names: t('tasks', 'hours'),
+						id: 'hour'
+					}, {
+						name: t('tasks', 'minute'),
+						names: t('tasks', 'minutes'),
+						id: 'minute'
+					}, {
+						name: t('tasks', 'second'),
+						names: t('tasks', 'seconds'),
+						id: 'second'
+					}
+				];
+				this._$scope.loadTask = function(taskID) {
+					var task = _$tasksmodel.getByUri(_$scope.route.taskID);
+					if (!(angular.isUndefined(task) || task === null)) {
+						_$scope.task = task;
+						_$scope.found = true;
+					}
+				};
+				this._$scope.TaskState = function() {
+					if (_$scope.found) {
+						return 'found';
 					} else {
-						return null;
+						if (_Loading.isLoading()) {
+							return 'loading';
+						} else {
+							return null;
+						}
 					}
-				}
-			};
-			this._$scope.params = [
-				{
-					name: t('tasks', 'before beginning'),
-					invert: true,
-					related: 'START',
-					id: "10"
-				}, {
-					name: t('tasks', 'after beginning'),
-					invert: false,
-					related: 'START',
-					id: "00"
-				}, {
-					name: t('tasks', 'before end'),
-					invert: true,
-					related: 'END',
-					id: "11"
-				}, {
-					name: t('tasks', 'after end'),
-					invert: false,
-					related: 'END',
-					id: "01"
-				}
-			];
-			this._$scope.filterParams = function(params) {
-				var task;
-				task = _$tasksmodel.getById(_$scope.route.taskID);
-				if (!(angular.isUndefined(task) || task === null)) {
-				  if (task.due && task.start) {
-					return params;
-				  } else if (task.start) {
-					return params.slice(0, 2);
-				  } else {
-					return params.slice(2);
-				  }
-				}
-			};
-			this._$scope.deleteTask = function(task) {
-				return _$timeout(function() {
-					return _tasksbusinesslayer.deleteTask(task).then(function () {
-						return $scope.$apply();
-					});
-				}, 500);
-			};
-			this._$scope.triggerUpdate = function(task) {
-				_tasksbusinesslayer.triggerUpdate(task);
-			}
-			this._$scope.editName = function($event) {
-				if (!$($event.target).is('a')) {
-					_$scope.setEditRoute('name');
-				}
-			};
-			this._$scope.editDueDate = function($event, task) {
-				if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
-					_$scope.setEditRoute('duedate');
-					_tasksbusinesslayer.initDueDate(task);
-				}
-			};
-			this._$scope.editStart = function($event, task) {
-				if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
-					_$scope.setEditRoute('startdate');
-					_tasksbusinesslayer.initStartDate(task);
-				}
-			};
-			this._$scope.editReminder = function($event) {
-				if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
-					_$scope.setEditRoute('reminer');
-					return _tasksbusinesslayer.initReminder(_$scope.route.taskID);
-				}
-			};
-			this._$scope.editNote = function($event) {
-				if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+				};
+				this._$scope.params = [
+					{
+						name: t('tasks', 'before beginning'),
+						invert: true,
+						related: 'START',
+						id: "10"
+					}, {
+						name: t('tasks', 'after beginning'),
+						invert: false,
+						related: 'START',
+						id: "00"
+					}, {
+						name: t('tasks', 'before end'),
+						invert: true,
+						related: 'END',
+						id: "11"
+					}, {
+						name: t('tasks', 'after end'),
+						invert: false,
+						related: 'END',
+						id: "01"
+					}
+				];
+				this._$scope.filterParams = function(params) {
+					var task;
+					task = _$tasksmodel.getById(_$scope.route.taskID);
+					if (!(angular.isUndefined(task) || task === null)) {
+					  if (task.due && task.start) {
+						return params;
+					  } else if (task.start) {
+						return params.slice(0, 2);
+					  } else {
+						return params.slice(2);
+					  }
+					}
+				};
+				this._$scope.deleteTask = function(task) {
+					return _$timeout(function() {
+						return _tasksbusinesslayer.deleteTask(task).then(function () {
+							return $scope.$apply();
+						});
+					}, 500);
+				};
+				this._$scope.triggerUpdate = function(task) {
+					_tasksbusinesslayer.triggerUpdate(task);
+				};
+				this._$scope.editName = function($event) {
 					if (!$($event.target).is('a')) {
-						_$scope.setEditRoute('note');
+						_$scope.setEditRoute('name');
 					}
-				}
-			};
-			this._$scope.editPriority = function($event) {
-				if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
-					_$scope.setEditRoute('priority');
-				}
-			};
-			this._$scope.editPercent = function($event) {
-				if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
-					_$scope.setEditRoute('percent');
-				}
-			};
-			this._$scope.endEdit = function($event) {
-				if ($($event.target).closest('.end-edit').length || $($event.currentTarget).is($($event.target).closest('.handler'))) {
-					_$scope.resetRoute();
-				}
-			};
-		  this._$scope.endName = function($event) {
-			if ($event.keyCode === 13) {
-			  $event.preventDefault();
-			  _$scope.resetRoute();
-			}
-			if ($event.keyCode === 27) {
-			  return _$scope.resetRoute();
-			}
-		  };
-
-		  	this._$scope.setEditRoute = function(type) {
-				var calendarID;
-				var collectionID;
-				if (calendarID = _$scope.route.calendarID) {
-					$location.path('/calendars/' + calendarID + '/tasks/' + _$scope.route.taskID + '/edit/' + type);
-				} else if (collectionID = _$scope.route.collectionID) {
-					$location.path('/collections/' + collectionID + '/tasks/' + _$scope.route.taskID + '/edit/' + type);
-				}
-		  	}
-
-			this._$scope.resetRoute = function() {
-				var calendarID;
-				var collectionID;
-				if (calendarID = _$scope.route.calendarID) {
-					$location.path('/calendars/' + calendarID + '/tasks/' + _$scope.route.taskID);
-				} else if (collectionID = _$scope.route.collectionID) {
-					$location.path('/collections/' + collectionID + '/tasks/' + _$scope.route.taskID);
-				}
-			};
-		  this._$scope.deletePercent = function(task) {
-			return _tasksbusinesslayer.setPercentComplete(task, 0);
-		  };
-		  this._$scope.deleteReminder = function() {
-			return _tasksbusinesslayer.deleteReminderDate(_$scope.route.taskID);
-		  };
-
-			this._$scope.toggleCompleted = function(task) {
-				if (task.completed) {
-					_tasksbusinesslayer.setPercentComplete(task, 0);
-				} else {
-					_tasksbusinesslayer.setPercentComplete(task, 100);
-				}
-			};
-
-			this._$scope.setPercentComplete = function(task, complete) {
-				_tasksbusinesslayer.setPercentComplete(task, complete);
-			};
-
-			this._$scope.toggleStarred = function(task) {
-				if (task.priority > 5) {
-					_tasksbusinesslayer.setPriority(task, 0);
-				} else {
-					_tasksbusinesslayer.setPriority(task, 9);
-				}
-			};
-
-		  this._$scope.deletePriority = function(task) {
-			return _tasksbusinesslayer.setPriority(task, 0);
-		  };
-		  this._$scope.isDue = function(date) {
-			return _$tasksmodel.due(date);
-		  };
-		  this._$scope.isOverDue = function(date) {
-			return _$tasksmodel.overdue(date);
-		  };
-
-			this._$scope.setstartday = function(date) {
-				return _tasksbusinesslayer.setStart(_$scope.task, moment(date, 'MM/DD/YYYY'), 'day');
-			};
-			this._$scope.setstarttime = function(date) {
-				return _tasksbusinesslayer.setStart(_$scope.task, moment(date, 'HH:mm'), 'time');
-			};
-			this._$scope.deleteStartDate = function(task) {
-				_tasksbusinesslayer.deleteStartDate(task);
-			};
-
-			this._$scope.setdueday = function(date) {
-				return _tasksbusinesslayer.setDue(_$scope.task, moment(date, 'MM/DD/YYYY'), 'day');
-			};
-			this._$scope.setduetime = function(date) {
-				return _tasksbusinesslayer.setDue(_$scope.task, moment(date, 'HH:mm'), 'time');
-			};
-			this._$scope.deleteDueDate = function(task) {
-				_tasksbusinesslayer.deleteDueDate(task);
-			};
-
-		  this._$scope.setreminderday = function(date) {
-			return _tasksbusinesslayer.setReminderDate(_$scope.route.taskID, moment(date, 'MM/DD/YYYY'), 'day');
-		  };
-		  this._$scope.setremindertime = function(date) {
-			return _tasksbusinesslayer.setReminderDate(_$scope.route.taskID, moment(date, 'HH:mm'), 'time');
-		  };
-		  this._$scope.reminderType = function(task) {
-			if (!angular.isUndefined(task)) {
-			  if (task.reminder === null) {
-				if (moment(task.start, "YYYYMMDDTHHmmss").isValid() || moment(task.due, "YYYYMMDDTHHmmss").isValid()) {
-				  return 'DURATION';
-				} else {
-				  return 'DATE-TIME';
-				}
-			  } else {
-				return task.reminder.type;
-			  }
-			}
-		  };
-		  this._$scope.changeReminderType = function(task) {
-			_tasksbusinesslayer.checkReminderDate(task.id);
-			if (this.reminderType(task) === 'DURATION') {
-			  if (task.reminder) {
-				task.reminder.type = 'DATE-TIME';
-			  } else {
-				task.reminder = {
-				  type: 'DATE-TIME'
 				};
-			  }
-			} else {
-			  if (task.reminder) {
-				task.reminder.type = 'DURATION';
-			  } else {
-				task.reminder = {
-				  type: 'DURATION'
+				this._$scope.editDueDate = function($event, task) {
+					if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+						_$scope.setEditRoute('duedate');
+						_tasksbusinesslayer.initDueDate(task);
+					}
 				};
-			  }
+				this._$scope.editStart = function($event, task) {
+					if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+						_$scope.setEditRoute('startdate');
+						_tasksbusinesslayer.initStartDate(task);
+					}
+				};
+				this._$scope.editReminder = function($event) {
+					if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+						_$scope.setEditRoute('reminer');
+						return _tasksbusinesslayer.initReminder(_$scope.route.taskID);
+					}
+				};
+				this._$scope.editNote = function($event) {
+					if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+						if (!$($event.target).is('a')) {
+							_$scope.setEditRoute('note');
+						}
+					}
+				};
+				this._$scope.editPriority = function($event) {
+					if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+						_$scope.setEditRoute('priority');
+					}
+				};
+				this._$scope.editPercent = function($event) {
+					if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+						_$scope.setEditRoute('percent');
+					}
+				};
+				this._$scope.endEdit = function($event) {
+					if ($($event.target).closest('.end-edit').length || $($event.currentTarget).is($($event.target).closest('.handler'))) {
+						_$scope.resetRoute();
+					}
+				};
+				this._$scope.endName = function($event) {
+					if ($event.keyCode === 13) {
+						$event.preventDefault();
+						_$scope.resetRoute();
+					}
+					if ($event.keyCode === 27) {
+						return _$scope.resetRoute();
+					}
+				};
+
+			  	this._$scope.setEditRoute = function(type) {
+					var calendarID = _$scope.route.calendarID;
+					var collectionID = _$scope.route.collectionID;
+					if (calendarID) {
+						$location.path('/calendars/' + calendarID + '/tasks/' + _$scope.route.taskID + '/edit/' + type);
+					} else if (collectionID) {
+						$location.path('/collections/' + collectionID + '/tasks/' + _$scope.route.taskID + '/edit/' + type);
+					}
+			  	};
+
+				this._$scope.resetRoute = function() {
+					var calendarID = _$scope.route.calendarID;
+					var collectionID = _$scope.route.collectionID;
+					if (calendarID) {
+						$location.path('/calendars/' + calendarID + '/tasks/' + _$scope.route.taskID);
+					} else if (collectionID) {
+						$location.path('/collections/' + collectionID + '/tasks/' + _$scope.route.taskID);
+					}
+				};
+				this._$scope.deletePercent = function(task) {
+					return _tasksbusinesslayer.setPercentComplete(task, 0);
+				};
+				this._$scope.deleteReminder = function() {
+					return _tasksbusinesslayer.deleteReminderDate(_$scope.route.taskID);
+				};
+
+				this._$scope.toggleCompleted = function(task) {
+					if (task.completed) {
+						_tasksbusinesslayer.setPercentComplete(task, 0);
+					} else {
+						_tasksbusinesslayer.setPercentComplete(task, 100);
+					}
+				};
+
+				this._$scope.setPercentComplete = function(task, complete) {
+					_tasksbusinesslayer.setPercentComplete(task, complete);
+				};
+
+				this._$scope.toggleStarred = function(task) {
+					if (task.priority > 5) {
+						_tasksbusinesslayer.setPriority(task, 0);
+					} else {
+						_tasksbusinesslayer.setPriority(task, 9);
+					}
+				};
+
+				this._$scope.deletePriority = function(task) {
+					return _tasksbusinesslayer.setPriority(task, 0);
+				};
+				this._$scope.isDue = function(date) {
+					return _$tasksmodel.due(date);
+				};
+				this._$scope.isOverDue = function(date) {
+					return _$tasksmodel.overdue(date);
+				};
+
+				this._$scope.setstartday = function(date) {
+					return _tasksbusinesslayer.setStart(_$scope.task, moment(date, 'MM/DD/YYYY'), 'day');
+				};
+				this._$scope.setstarttime = function(date) {
+					return _tasksbusinesslayer.setStart(_$scope.task, moment(date, 'HH:mm'), 'time');
+				};
+				this._$scope.deleteStartDate = function(task) {
+					_tasksbusinesslayer.deleteStartDate(task);
+				};
+
+				this._$scope.setdueday = function(date) {
+					return _tasksbusinesslayer.setDue(_$scope.task, moment(date, 'MM/DD/YYYY'), 'day');
+				};
+				this._$scope.setduetime = function(date) {
+					return _tasksbusinesslayer.setDue(_$scope.task, moment(date, 'HH:mm'), 'time');
+				};
+				this._$scope.deleteDueDate = function(task) {
+					_tasksbusinesslayer.deleteDueDate(task);
+				};
+
+				  this._$scope.setreminderday = function(date) {
+					return _tasksbusinesslayer.setReminderDate(_$scope.route.taskID, moment(date, 'MM/DD/YYYY'), 'day');
+				  };
+				  this._$scope.setremindertime = function(date) {
+					return _tasksbusinesslayer.setReminderDate(_$scope.route.taskID, moment(date, 'HH:mm'), 'time');
+				  };
+				  this._$scope.reminderType = function(task) {
+					if (!angular.isUndefined(task)) {
+					  if (task.reminder === null) {
+						if (moment(task.start, "YYYYMMDDTHHmmss").isValid() || moment(task.due, "YYYYMMDDTHHmmss").isValid()) {
+						  return 'DURATION';
+						} else {
+						  return 'DATE-TIME';
+						}
+					  } else {
+						return task.reminder.type;
+					  }
+					}
+				  };
+				  this._$scope.changeReminderType = function(task) {
+					_tasksbusinesslayer.checkReminderDate(task.id);
+					if (this.reminderType(task) === 'DURATION') {
+					  if (task.reminder) {
+						task.reminder.type = 'DATE-TIME';
+					  } else {
+						task.reminder = {
+						  type: 'DATE-TIME'
+						};
+					  }
+					} else {
+					  if (task.reminder) {
+						task.reminder.type = 'DURATION';
+					  } else {
+						task.reminder = {
+						  type: 'DURATION'
+						};
+					  }
+					}
+					return _tasksbusinesslayer.setReminder(task.id);
+				  };
+				  this._$scope.setReminderDuration = function(taskID) {
+					return _tasksbusinesslayer.setReminder(_$scope.route.taskID);
+				  };
+				  this._$scope.addComment = function() {
+					var comment,
+					  _this = this;
+					if (_$scope.CommentContent) {
+					  _$scope.isAddingComment = true;
+					  comment = {
+						tmpID: 'newComment' + Date.now(),
+						comment: _$scope.CommentContent,
+						taskID: _$scope.route.taskID,
+						time: moment().format('YYYYMMDDTHHmmss'),
+						name: $('#expandDisplayName').text()
+					  };
+					  _tasksbusinesslayer.addComment(comment, function(data) {
+						_$tasksmodel.updateComment(data);
+						_$scope.isAddingComment = false;
+					  }, function() {
+						_$scope.isAddingComment = false;
+					  });
+					  _$scope.CommentContent = '';
+					}
+				  };
+				  this._$scope.sendComment = function(event) {
+					if (event.keyCode === 13) {
+					  return _$scope.addComment();
+					}
+				  };
+				  this._$scope.deleteComment = function(commentID) {
+					return _tasksbusinesslayer.deleteComment(_$scope.route.taskID, commentID);
+				  };
+				  this._$scope.commentStrings = function() {
+					return {
+					  button: t('tasks', 'Comment'),
+					  input: t('tasks', 'Add a comment')
+					};
+				  };
+				this._$scope.addCategory = function(category, model) {
+					_$scope.task.categories = _$scope.task.cats;
+					var default_categories = _$scope.settingsmodel.getById('various').categories;
+					if (default_categories.indexOf(category) < 0) {
+						default_categories.push(category);
+					}
+					_tasksbusinesslayer.doUpdate(_$scope.task);
+				};
+				this._$scope.removeCategory = function(category, model) {
+					_$scope.task.categories = _$scope.task.cats;
+					_tasksbusinesslayer.doUpdate(_$scope.task);
+				};
 			}
-			return _tasksbusinesslayer.setReminder(task.id);
-		  };
-		  this._$scope.setReminderDuration = function(taskID) {
-			return _tasksbusinesslayer.setReminder(_$scope.route.taskID);
-		  };
-		  this._$scope.addComment = function() {
-			var comment,
-			  _this = this;
-			if (_$scope.CommentContent) {
-			  _$scope.isAddingComment = true;
-			  comment = {
-				tmpID: 'newComment' + Date.now(),
-				comment: _$scope.CommentContent,
-				taskID: _$scope.route.taskID,
-				time: moment().format('YYYYMMDDTHHmmss'),
-				name: $('#expandDisplayName').text()
-			  };
-			  _tasksbusinesslayer.addComment(comment, function(data) {
-				_$tasksmodel.updateComment(data);
-				return _$scope.isAddingComment = false;
-			  }, function() {
-				return _$scope.isAddingComment = false;
-			  });
-			  return _$scope.CommentContent = '';
-			}
-		  };
-		  this._$scope.sendComment = function(event) {
-			if (event.keyCode === 13) {
-			  return _$scope.addComment();
-			}
-		  };
-		  this._$scope.deleteComment = function(commentID) {
-			return _tasksbusinesslayer.deleteComment(_$scope.route.taskID, commentID);
-		  };
-		  this._$scope.commentStrings = function() {
-			return {
-			  button: t('tasks', 'Comment'),
-			  input: t('tasks', 'Add a comment')
-			};
-		  };
-			this._$scope.addCategory = function(category, model) {
-				_$scope.task.categories = _$scope.task.cats;
-				var default_categories = _$scope.settingsmodel.getById('various').categories;
-				if (!(default_categories.indexOf(category) > -1)) {
-					default_categories.push(category);
-				}
-				_tasksbusinesslayer.doUpdate(_$scope.task);
-			};
-			this._$scope.removeCategory = function(category, model) {
-				_$scope.task.categories = _$scope.task.cats;
-				_tasksbusinesslayer.doUpdate(_$scope.task);
-			};
-		}
 
 		return DetailsController;
 
@@ -567,6 +563,7 @@ angular.module('Tasks').controller('ListController', [
 	'SearchBusinessLayer', 'CalendarService', 'TasksModel',
 	function($scope, $window, $routeParams, ListsModel, TasksBusinessLayer, CollectionsModel, ListsBusinessLayer, $location,
 		SearchBusinessLayer, CalendarService, TasksModel) {
+		'use strict';
 	  var ListController;
 	  ListController = (function() {
 		function ListController(_$scope, _$window, _$routeParams, _$listsmodel, _$tasksbusinesslayer, _$collectionsmodel, _$listsbusinesslayer, $location,
@@ -600,13 +597,13 @@ angular.module('Tasks').controller('ListController', [
 			};
 
 			this._$scope.startCreate = function() {
-				return _$scope.status.addingList = true;
+				_$scope.status.addingList = true;
 			};
 
 			this._$scope.cancelCreate = function(event) {
 				if (event.keyCode === 27) {
 					_$scope.status.addingList = false;
-					return _$scope.status.newListName = "";
+					_$scope.status.newListName = "";
 				}
 			};
 
@@ -619,12 +616,12 @@ angular.module('Tasks').controller('ListController', [
 							$location.path('/calendars/' + calendar.uri);
 							return $scope.$apply();
 						});
-						return _$scope.status.newListName = '';
+						_$scope.status.newListName = '';
 					} else {
-						return alert(t('tasks', 'The name "%s" is already used.').replace('%s', _$scope.status.newListName));
+						alert(t('tasks', 'The name "%s" is already used.').replace('%s', _$scope.status.newListName));
 				 	}
 				} else {
-					return alert(t('tasks', 'An empty name is not allowed.'));
+					alert(t('tasks', 'An empty name is not allowed.'));
 				}
 			};
 
@@ -729,9 +726,9 @@ angular.module('Tasks').controller('ListController', [
 	}
 ]);
 
-(function() {
-  angular.module('Tasks').controller('SettingsController', [
+angular.module('Tasks').controller('SettingsController', [
     '$scope', '$window', 'Status', '$location', 'CollectionsModel', 'SettingsBusinessLayer', 'SettingsModel', function($scope, $window, Status, $location, CollectionsModel, SettingsBusinessLayer, SettingsModel) {
+      'use strict';
       var SettingsController;
       SettingsController = (function() {
         function SettingsController(_$scope, _$window, _$status, _$location, _$collectionsmodel, _$settingsbusinesslayer, _$settingsmodel) {
@@ -799,9 +796,8 @@ angular.module('Tasks').controller('ListController', [
     }
   ]);
 
-}).call(this);
-
 (function() {
+	'use strict';
   var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   angular.module('Tasks').controller('TasksController', [
@@ -836,7 +832,7 @@ angular.module('Tasks').controller('ListController', [
 
 			this._$scope.addTask = function(taskName, related, calendar) {
 				var _ref, _this = this;
-				if (calendar == null) {
+				if (calendar === null) {
 				  calendar = '';
 				}
 				_$scope.isAddingTask = true;
@@ -880,7 +876,7 @@ angular.module('Tasks').controller('ListController', [
 				_$scope.status.focusSubtaskInput = false;
 				_$scope.status.addSubtaskTo = null;
 				_$scope.status.taskName = '';
-				return _$scope.status.subtaskName = '';
+				_$scope.status.subtaskName = '';
 			};
 
 			this._$scope.getAddString = function() {
@@ -913,7 +909,7 @@ angular.module('Tasks').controller('ListController', [
 			};
 
 			this._$scope.showSubtaskInput = function(uid) {
-				return _$scope.status.addSubtaskTo = uid;
+				_$scope.status.addSubtaskTo = uid;
 			};
 
 			this._$scope.hideSubtasks = function(task) {
@@ -942,19 +938,19 @@ angular.module('Tasks').controller('ListController', [
 			};
 			
 		  this._$scope.focusTaskInput = function() {
-			return _$scope.status.focusTaskInput = true;
+			_$scope.status.focusTaskInput = true;
 		  };
 		  this._$scope.focusSubtaskInput = function() {
-			return _$scope.status.focusSubtaskInput = true;
+			_$scope.status.focusSubtaskInput = true;
 		  };
 		  
 			this._$scope.openDetails = function(id, $event) {
-				var calendarID;
-				var collectionID;
+				var calendarID = _$scope.route.calendarID;
+				var collectionID = _$scope.route.collectionID;
 				if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
-					if (calendarID = _$scope.route.calendarID) {
+					if (calendarID) {
 						$location.path('/calendars/' + calendarID + '/tasks/' + id);
-					} else if (collectionID = _$scope.route.collectionID) {
+					} else if (collectionID) {
 						$location.path('/collections/' + collectionID + '/tasks/' + id);
 					}
 				}
@@ -1067,7 +1063,7 @@ angular.module('Tasks').controller('ListController', [
 			  _$scope.status.subtaskName = '';
 			  _$scope.status.addSubtaskTo = null;
 			  _$scope.status.focusTaskInput = false;
-			  return _$scope.status.focusSubtaskInput = false;
+			  _$scope.status.focusSubtaskInput = false;
 			}
 		  };
 		  this._$scope.getCompletedTasks = function(listID) {
@@ -1154,6 +1150,7 @@ angular.module('Tasks').directive('autofocusOnInsert', function() {
 });
 
 angular.module('Tasks').directive('avatar', function() {
+	'use strict';
 	return {
 		restrict: 'A',
 		scope: false,
@@ -1167,8 +1164,8 @@ angular.module('Tasks').directive('avatar', function() {
 	};
 });
 
-(function() {
-  angular.module('Tasks').directive('datepicker', function() {
+angular.module('Tasks').directive('datepicker', function() {
+	'use strict';
 	return {
 	  restrict: 'A',
 	  scope: false,
@@ -1201,13 +1198,11 @@ angular.module('Tasks').directive('avatar', function() {
 		});
 	  }
 	};
-  });
+});
 
-}).call(this);
-
-(function() {
-  angular.module('Tasks').directive('ocClickFocus', [
+angular.module('Tasks').directive('ocClickFocus', [
 	'$timeout', function($timeout) {
+		'use strict';
 	  return function(scope, elm, attr) {
 		var options;
 		options = scope.$eval(attr.ocClickFocus);
@@ -1224,12 +1219,10 @@ angular.module('Tasks').directive('avatar', function() {
 		}
 	  };
 	}
-  ]);
+]);
 
-}).call(this);
-
-(function() {
-  angular.module('Tasks').directive('timepicker', function() {
+angular.module('Tasks').directive('timepicker', function() {
+	'use strict';
 	return {
 	  restrict: 'A',
 	  link: function(scope, elm, attr) {
@@ -1245,11 +1238,10 @@ angular.module('Tasks').directive('avatar', function() {
 		});
 	  }
 	};
-  });
-
-}).call(this);
+});
 
 angular.module('Tasks').directive('watchTop', function() {
+	'use strict';
 	return {
 		restrict: 'A',
 		link: function(scope, element, attr) {
@@ -1259,18 +1251,19 @@ angular.module('Tasks').directive('watchTop', function() {
 				}
 			});
 			return scope.$watch(function() {
-				return scope.divTop = element.prev().outerHeight(true);
+				scope.divTop = element.prev().outerHeight(true);
 			});
 		}
 	};
 });
 
 angular.module('Tasks').filter('counterFormatter', function() {
+	'use strict';
 	return function(count) {
 		switch (false) {
 			case count !== 0:
 				return '';
-			case !(count > 999):
+			case count < 999:
 				return '999+';
 			default:
 				return count;
@@ -1279,6 +1272,7 @@ angular.module('Tasks').filter('counterFormatter', function() {
 });
 
 angular.module('Tasks').filter('dateDetails', function() {
+	'use strict';
 	return function(due) {
 		if (moment(due, "YYYYMMDDTHHmmss").isValid()) {
 			return moment(due, "YYYYMMDDTHHmmss").locale('details').calendar();
@@ -1289,6 +1283,7 @@ angular.module('Tasks').filter('dateDetails', function() {
 });
 
 angular.module('Tasks').filter('dateDetailsShort', function() {
+	'use strict';
 	return function(reminder) {
 		if (moment(reminder, "YYYYMMDDTHHmmss").isValid()) {
 			return moment(reminder, "YYYYMMDDTHHmmss").locale('details_short').calendar();
@@ -1299,6 +1294,7 @@ angular.module('Tasks').filter('dateDetailsShort', function() {
 });
 
 angular.module('Tasks').filter('dateFromNow', function() {
+	'use strict';
 	return function(due) {
 		if (moment(due, "YYYYMMDDTHHmmss").isValid()) {
 			return moment(due, "YYYYMMDDTHHmmss").fromNow();
@@ -1309,6 +1305,7 @@ angular.module('Tasks').filter('dateFromNow', function() {
 });
 
 angular.module('Tasks').filter('dateTaskList', function() {
+	'use strict';
 	return function(due) {
 		if (moment(due, "YYYYMMDDTHHmmss").isValid()) {
 			return moment(due, "YYYYMMDDTHHmmss").locale('tasks').calendar();
@@ -1319,12 +1316,14 @@ angular.module('Tasks').filter('dateTaskList', function() {
 });
 
 angular.module('Tasks').filter('day', function() {
+	'use strict';
 	return function(i) {
 		return moment().add('days', i).locale('list_week').calendar();
 	};
 });
 
 angular.module('Tasks').filter('dayTaskList', function() {
+	'use strict';
 	return function(due) {
 		if (moment(due, "YYYYMMDDTHHmmss").isValid()) {
 			return moment(due, "YYYYMMDDTHHmmss").locale('tasks').calendar();
@@ -1335,12 +1334,14 @@ angular.module('Tasks').filter('dayTaskList', function() {
 });
 
 angular.module('Tasks').filter('percentDetails', function() {
+	'use strict';
 	return function(percent) {
 		return t('tasks', '%s %% completed').replace('%s', percent).replace('%%', '%');
 	};
 });
 
 angular.module('Tasks').filter('priorityDetails', function() {
+	'use strict';
 	return function(priority) {
 		var string;
 		string = t('tasks', 'priority %s: ').replace('%s', priority);
@@ -1356,8 +1357,8 @@ angular.module('Tasks').filter('priorityDetails', function() {
 	};
 });
 
-(function() {
-  angular.module('Tasks').filter('reminderDetails', function() {
+angular.module('Tasks').filter('reminderDetails', function() {
+  	'use strict';
 	return function(reminder, scope) {
 	  var ds, time, token, _i, _len, _ref;
 	  if (!(angular.isUndefined(reminder) || reminder === null)) {
@@ -1407,11 +1408,10 @@ angular.module('Tasks').filter('priorityDetails', function() {
 		return t('tasks', 'Remind me');
 	  }
 	};
-  });
-
-}).call(this);
+});
 
 angular.module('Tasks').filter('startDetails', function() {
+	'use strict';
 	return function(due) {
 		if (moment(due, "YYYYMMDDTHHmmss").isValid()) {
 			return moment(due, "YYYYMMDDTHHmmss").locale('start').calendar();
@@ -1422,6 +1422,7 @@ angular.module('Tasks').filter('startDetails', function() {
 });
 
 angular.module('Tasks').filter('timeTaskList', function() {
+	'use strict';
 	return function(due) {
 		if (moment(due, "YYYYMMDDTHHmmss").isValid()) {
 			return moment(due, "YYYYMMDDTHHmmss").format('HH:mm');
@@ -1433,6 +1434,7 @@ angular.module('Tasks').filter('timeTaskList', function() {
 
 angular.module('Tasks').factory('ListsBusinessLayer', [
 	'ListsModel', 'Persistence', 'TasksBusinessLayer', 'CalendarService', function(ListsModel, Persistence, TasksBusinessLayer, CalendarService) {
+		'use strict';
 		var ListsBusinessLayer;
 		ListsBusinessLayer = (function() {
 			function ListsBusinessLayer(_$listsmodel, _persistence, _$tasksbusinesslayer, _$calendarservice) {
@@ -1482,6 +1484,7 @@ angular.module('Tasks').factory('ListsBusinessLayer', [
 ]);
 
 (function() {
+	'use strict';
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   angular.module('Tasks').factory('SearchBusinessLayer', [
@@ -1514,7 +1517,7 @@ angular.module('Tasks').factory('ListsBusinessLayer', [
 		};
 
 		SearchBusinessLayer.prototype.setFilter = function(query) {
-		  return this._$searchString = query;
+			this._$searchString = query;
 		};
 
 		SearchBusinessLayer.prototype.getFilter = function() {
@@ -1567,50 +1570,47 @@ angular.module('Tasks').factory('ListsBusinessLayer', [
 
 }).call(this);
 
-(function() {
-  angular.module('Tasks').factory('SettingsBusinessLayer', [
+angular.module('Tasks').factory('SettingsBusinessLayer', [
 	'Persistence', 'SettingsModel', function(Persistence, SettingsModel) {
-	  var SettingsBusinessLayer;
-	  SettingsBusinessLayer = (function() {
-		function SettingsBusinessLayer(_persistence, _$settingsmodel) {
-		  this._persistence = _persistence;
-		  this._$settingsmodel = _$settingsmodel;
-		}
+		'use strict';
+		var SettingsBusinessLayer = (function() {
+			function SettingsBusinessLayer(_persistence, _$settingsmodel) {
+				this._persistence = _persistence;
+				this._$settingsmodel = _$settingsmodel;
+			}
 
-		SettingsBusinessLayer.prototype.updateModel = function() {
-		  var success,
-			_this = this;
-		  success = function() {};
-		  return this._persistence.getCollections(success, true);
-		};
+			SettingsBusinessLayer.prototype.updateModel = function() {
+				var success, _this = this;
+				success = function() {};
+				return this._persistence.getCollections(success, true);
+			};
 
-		SettingsBusinessLayer.prototype.setVisibility = function(collectionID, visibility) {
-		  return this._persistence.setVisibility(collectionID, visibility);
-		};
+			SettingsBusinessLayer.prototype.setVisibility = function(collectionID, visibility) {
+				return this._persistence.setVisibility(collectionID, visibility);
+			};
 
-		SettingsBusinessLayer.prototype.toggle = function(type, setting) {
-		  var value;
-		  this._$settingsmodel.toggle(type, setting);
-		  value = this._$settingsmodel.getById(type)[setting];
-		  return this._persistence.setting(type, setting, value);
-		};
+			SettingsBusinessLayer.prototype.toggle = function(type, setting) {
+				var value;
+				this._$settingsmodel.toggle(type, setting);
+				value = this._$settingsmodel.getById(type)[setting];
+				return this._persistence.setting(type, setting, value);
+			};
 
-		SettingsBusinessLayer.prototype.set = function(type, setting, value) {
-		  return this._persistence.setting(type, setting, value);
-		};
+			SettingsBusinessLayer.prototype.set = function(type, setting, value) {
+				return this._persistence.setting(type, setting, value);
+			};
 
-		return SettingsBusinessLayer;
+			return SettingsBusinessLayer;
 
-	  })();
-	  return new SettingsBusinessLayer(Persistence, SettingsModel);
+		})();
+		return new SettingsBusinessLayer(Persistence, SettingsModel);
 	}
-  ]);
-
-}).call(this);
+]);
 
 angular.module('Tasks').factory('TasksBusinessLayer', [
 	'TasksModel', 'Persistence', 'VTodoService', 'VTodo', '$timeout',
 	function(TasksModel, Persistence, VTodoService, VTodo, $timeout) {
+		'use strict';
 		var TasksBusinessLayer;
 		TasksBusinessLayer = (function() {
 			function TasksBusinessLayer(_$tasksmodel, _persistence, _$vtodoservice, _$vtodo, $timeout) {
@@ -1625,7 +1625,7 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 					_results = [];
 					for (_i = 0, _len = tasks.length; _i < _len; _i++) {
 						task = tasks[_i];
-						var vTodo = new VTodo(task.calendar, task.properties, task.uri)
+						var vTodo = new VTodo(task.calendar, task.properties, task.uri);
 						_results.push(TasksModel.ad(vTodo));
 					}
 					return _results;
@@ -1666,10 +1666,10 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				if (!duration) {
 					duration = 1000;
 				}
-				if (task.timers['update']) {
-					$timeout.cancel(task.timers['update']);
+				if (task.timers.update) {
+					$timeout.cancel(task.timers.update);
 				}
-				task.timers['update'] = $timeout(function(task) {
+				task.timers.update = $timeout(function(task) {
 					VTodoService.update(task);
 				}, duration, true, task);
 			};
@@ -1723,7 +1723,7 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 			};
 
 			TasksBusinessLayer.prototype.setDue = function(task, date, type) {
-				if (type == null) {
+				if (type === null) {
 					type = 'day';
 				}
 				var due = moment(task.due, "YYYY-MM-DDTHH:mm:ss");
@@ -1766,7 +1766,7 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 			};
 
 			TasksBusinessLayer.prototype.setStart = function(task, date, type) {
-				if (type == null) {
+				if (type === null) {
 					type = 'day';
 				}
 				var start = moment(task.start, "YYYY-MM-DDTHH:mm:ss");
@@ -1799,204 +1799,204 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				this.doUpdate(task);
 			};
 
-		TasksBusinessLayer.prototype.initReminder = function(taskID) {
-		  var p, task;
-		  if (!this.checkReminderDate(taskID)) {
-			task = this._$tasksmodel.getById(taskID);
-			task.reminder = {
-			  type: 'DURATION',
-			  action: 'DISPLAY',
-			  duration: {
-				token: 'week',
-				week: 0,
-				day: 0,
-				hour: 0,
-				minute: 0,
-				second: 0,
-				params: {
-				  invert: true
+			TasksBusinessLayer.prototype.initReminder = function(taskID) {
+				var p, task;
+				if (!this.checkReminderDate(taskID)) {
+					task = this._$tasksmodel.getById(taskID);
+					task.reminder = {
+						type: 'DURATION',
+						action: 'DISPLAY',
+						duration: {
+							token: 'week',
+							week: 0,
+							day: 0,
+							hour: 0,
+							minute: 0,
+							second: 0,
+							params: {
+							  invert: true
+						}
+					}
+				};
+				if (moment(task.start, "YYYYMMDDTHHmmss").isValid()) {
+					p = task.reminder.duration.params;
+					p.related = 'START';
+					p.id = '10';
+				} else if (moment(task.due, "YYYYMMDDTHHmmss").isValid()) {
+					p = task.reminder.duration.params;
+					p.related = 'END';
+					p.id = '11';
+				} else {
+					task.reminder.type = 'DATE-TIME';
+					task.reminder.date = moment().startOf('hour').add(1, 'h').format('YYYYMMDDTHHmmss');
 				}
-			  }
+				return this.setReminder(taskID);
+				}
 			};
-			if (moment(task.start, "YYYYMMDDTHHmmss").isValid()) {
-			  p = task.reminder.duration.params;
-			  p.related = 'START';
-			  p.id = '10';
-			} else if (moment(task.due, "YYYYMMDDTHHmmss").isValid()) {
-			  p = task.reminder.duration.params;
-			  p.related = 'END';
-			  p.id = '11';
-			} else {
-			  task.reminder.type = 'DATE-TIME';
-			  task.reminder.date = moment().startOf('hour').add(1, 'h').format('YYYYMMDDTHHmmss');
-			}
-			return this.setReminder(taskID);
-		  }
-		};
 
-		TasksBusinessLayer.prototype.setReminderDate = function(taskID, date, type) {
-		  var newreminder, reminder, reminderdate;
-		  if (type == null) {
-			type = 'day';
-		  }
-		  reminder = this._$tasksmodel.getById(taskID).reminder;
-		  newreminder = {
-			type: 'DATE-TIME',
-			action: 'DISPLAY',
-			duration: null
-		  };
-		  if (type === 'day') {
-			if (this.checkReminderDate(taskID) || reminder === null) {
-			  reminderdate = moment(reminder.date, "YYYYMMDDTHHmmss");
-			  newreminder.action = reminder.action;
-			  if (reminderdate.isValid() && reminder.type === 'DATE-TIME') {
-				reminderdate.year(date.year()).month(date.month()).date(date.date());
-			  } else {
-				reminderdate = date.add(12, 'h');
-			  }
-			} else {
-			  reminderdate = date.add(12, 'h');
-			}
-		  } else if (type === 'time') {
-			if (this.checkReminderDate(taskID) || reminder === null) {
-			  reminderdate = moment(reminder.date, "YYYYMMDDTHHmmss");
-			  newreminder.action = reminder.action;
-			  if (reminderdate.isValid() && reminder.type === 'DATE-TIME') {
-				reminderdate.hour(date.hour()).minute(date.minute());
-			  } else {
-				reminderdate = date;
-			  }
-			} else {
-			  reminderdate = date;
-			}
-		  } else {
-			return;
-		  }
-		  newreminder.date = reminderdate.format('YYYYMMDDTHHmmss');
-		  this._$tasksmodel.setReminder(taskID, newreminder);
-		  return this._persistence.setReminder(taskID, newreminder);
-		};
-
-		TasksBusinessLayer.prototype.setReminder = function(taskID) {
-		  var reminder;
-		  if (this.checkReminderDate(taskID)) {
-			reminder = this._$tasksmodel.getById(taskID).reminder;
-			return this._persistence.setReminder(taskID, reminder);
-		  }
-		};
-
-		TasksBusinessLayer.prototype.checkReminderDate = function(taskID) {
-		  var d, date, duration, rel, related, reminder, seg, task, token;
-		  task = this._$tasksmodel.getById(taskID);
-		  reminder = task.reminder;
-		  if (reminder !== null && reminder.type === 'DURATION') {
-			if (!reminder.duration) {
-			  return false;
-			} else if (reminder.duration.params.related === 'START') {
-			  token = 'start';
-			} else if (reminder.duration.params.related === 'END') {
-			  token = 'due';
-			} else {
-			  return false;
-			}
-			date = moment(task[token], "YYYYMMDDTHHmmss");
-			duration = reminder.duration;
-			d = {
-			  w: duration.week,
-			  d: duration.day,
-			  h: duration.hour,
-			  m: duration.minute,
-			  s: duration.second
+			TasksBusinessLayer.prototype.setReminderDate = function(taskID, date, type) {
+				var newreminder, reminder, reminderdate;
+				if (type === null) {
+					type = 'day';
+				}
+				reminder = this._$tasksmodel.getById(taskID).reminder;
+				newreminder = {
+					type: 'DATE-TIME',
+					action: 'DISPLAY',
+					duration: null
+				};
+				if (type === 'day') {
+					if (this.checkReminderDate(taskID) || reminder === null) {
+						reminderdate = moment(reminder.date, "YYYYMMDDTHHmmss");
+						newreminder.action = reminder.action;
+						if (reminderdate.isValid() && reminder.type === 'DATE-TIME') {
+							reminderdate.year(date.year()).month(date.month()).date(date.date());
+						} else {
+							reminderdate = date.add(12, 'h');
+						}
+					} else {
+						reminderdate = date.add(12, 'h');
+					}
+				} else if (type === 'time') {
+					if (this.checkReminderDate(taskID) || reminder === null) {
+						reminderdate = moment(reminder.date, "YYYYMMDDTHHmmss");
+						newreminder.action = reminder.action;
+						if (reminderdate.isValid() && reminder.type === 'DATE-TIME') {
+							reminderdate.hour(date.hour()).minute(date.minute());
+						} else {
+							reminderdate = date;
+						}
+					} else {
+						reminderdate = date;
+					}
+				} else {
+					return;
+				}
+				newreminder.date = reminderdate.format('YYYYMMDDTHHmmss');
+				this._$tasksmodel.setReminder(taskID, newreminder);
+				return this._persistence.setReminder(taskID, newreminder);
 			};
-			if (duration.params.invert) {
-			  date = date.subtract(d);
-			} else {
-			  date = date.add(d);
-			}
-			task.reminder.date = date.format('YYYYMMDDTHHmmss');
-		  } else if (reminder !== null && reminder.type === 'DATE-TIME') {
-			duration = reminder.duration;
-			date = moment(reminder.date, "YYYYMMDDTHHmmss");
-			if (!date.isValid()) {
-			  return false;
-			}
-			if (duration) {
-			  if (duration.params.related === 'START') {
-				related = moment(task.start, "YYYYMMDDTHHmmss");
-			  } else {
-				related = moment(task.due, "YYYYMMDDTHHmmss");
-			  }
-			  seg = this.secondsToSegments(date.diff(related, 'seconds'));
-			  duration.params.invert = seg.invert;
-			  duration.token = 'week';
-			  duration.week = seg.week;
-			  duration.day = seg.day;
-			  duration.hour = seg.hour;
-			  duration.minute = seg.minute;
-			  duration.second = seg.second;
-			} else {
-			  if (task.start) {
-				related = moment(task.start, "YYYYMMDDTHHmmss");
-				rel = 'START';
-				d = 0;
-			  } else if (task.due) {
-				related = moment(task.due, "YYYYMMDDTHHmmss");
-				rel = 'END';
-				d = 1;
-			  } else {
+
+			TasksBusinessLayer.prototype.setReminder = function(taskID) {
+				var reminder;
+				if (this.checkReminderDate(taskID)) {
+					reminder = this._$tasksmodel.getById(taskID).reminder;
+					return this._persistence.setReminder(taskID, reminder);
+				}
+			};
+
+			TasksBusinessLayer.prototype.checkReminderDate = function(taskID) {
+				var d, date, duration, rel, related, reminder, seg, task, token;
+				task = this._$tasksmodel.getById(taskID);
+				reminder = task.reminder;
+				if (reminder !== null && reminder.type === 'DURATION') {
+					if (!reminder.duration) {
+						return false;
+					} else if (reminder.duration.params.related === 'START') {
+						token = 'start';
+					} else if (reminder.duration.params.related === 'END') {
+						token = 'due';
+					} else {
+						return false;
+					}
+					date = moment(task[token], "YYYYMMDDTHHmmss");
+					duration = reminder.duration;
+					d = {
+						w: duration.week,
+						d: duration.day,
+						h: duration.hour,
+						m: duration.minute,
+						s: duration.second
+					};
+					if (duration.params.invert) {
+						date = date.subtract(d);
+					} else {
+						date = date.add(d);
+					}
+					task.reminder.date = date.format('YYYYMMDDTHHmmss');
+				} else if (reminder !== null && reminder.type === 'DATE-TIME') {
+					duration = reminder.duration;
+					date = moment(reminder.date, "YYYYMMDDTHHmmss");
+					if (!date.isValid()) {
+						return false;
+					}
+					if (duration) {
+						if (duration.params.related === 'START') {
+							related = moment(task.start, "YYYYMMDDTHHmmss");
+						} else {
+							related = moment(task.due, "YYYYMMDDTHHmmss");
+						}
+						seg = this.secondsToSegments(date.diff(related, 'seconds'));
+						duration.params.invert = seg.invert;
+						duration.token = 'week';
+						duration.week = seg.week;
+						duration.day = seg.day;
+						duration.hour = seg.hour;
+						duration.minute = seg.minute;
+						duration.second = seg.second;
+					} else {
+						if (task.start) {
+							related = moment(task.start, "YYYYMMDDTHHmmss");
+							rel = 'START';
+							d = 0;
+						} else if (task.due) {
+							related = moment(task.due, "YYYYMMDDTHHmmss");
+							rel = 'END';
+							d = 1;
+						} else {
+							return true;
+						}
+						seg = this.secondsToSegments(date.diff(related, 'seconds'));
+						reminder.duration = {
+							token: 'week',
+							params: {
+								related: rel,
+								invert: seg.invert,
+								id: +seg.invert + '' + d
+							},
+							week: seg.week,
+							day: seg.day,
+							hour: seg.hour,
+							minute: seg.minute,
+							second: seg.second
+						};
+					}
+				} else {
+					return false;
+				}
 				return true;
-			  }
-			  seg = this.secondsToSegments(date.diff(related, 'seconds'));
-			  reminder.duration = {
-				token: 'week',
-				params: {
-				  related: rel,
-				  invert: seg.invert,
-				  id: +seg.invert + '' + d
-				},
-				week: seg.week,
-				day: seg.day,
-				hour: seg.hour,
-				minute: seg.minute,
-				second: seg.second
-			  };
-			}
-		  } else {
-			return false;
-		  }
-		  return true;
-		};
+			};
 
-		TasksBusinessLayer.prototype.secondsToSegments = function(s) {
-		  var d, h, i, m, w;
-		  if (s < 0) {
-			s *= -1;
-			i = true;
-		  } else {
-			i = false;
-		  }
-		  w = Math.floor(s / 604800);
-		  s -= w * 604800;
-		  d = Math.floor(s / 86400);
-		  s -= d * 86400;
-		  h = Math.floor(s / 3600);
-		  s -= h * 3600;
-		  m = Math.floor(s / 60);
-		  s -= m * 60;
-		  return {
-			week: w,
-			day: d,
-			hour: h,
-			minute: m,
-			second: s,
-			invert: i
-		  };
-		};
+			TasksBusinessLayer.prototype.secondsToSegments = function(s) {
+				var d, h, i, m, w;
+				if (s < 0) {
+					s *= -1;
+					i = true;
+				} else {
+					i = false;
+				}
+				w = Math.floor(s / 604800);
+				s -= w * 604800;
+				d = Math.floor(s / 86400);
+				s -= d * 86400;
+				h = Math.floor(s / 3600);
+				s -= h * 3600;
+				m = Math.floor(s / 60);
+				s -= m * 60;
+				return {
+					week: w,
+					day: d,
+					hour: h,
+					minute: m,
+					second: s,
+					invert: i
+				};
+			};
 
-		TasksBusinessLayer.prototype.deleteReminderDate = function(taskID) {
-		  this._$tasksmodel.setReminder(taskID, null);
-		  return this._persistence.setReminder(taskID, false);
-		};
+			TasksBusinessLayer.prototype.deleteReminderDate = function(taskID) {
+				this._$tasksmodel.setReminder(taskID, null);
+				return this._persistence.setReminder(taskID, false);
+			};
 
 			TasksBusinessLayer.prototype.changeCalendar = function(task, newCalendar) {
 				if(task.calendar !== newCalendar) {
@@ -2044,6 +2044,7 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 						} else {
 							return false;
 						}
+						break;
 					case 'today':
 						return this.setDue(task, moment().startOf('day').add(12, 'h'), 'all');
 					case 'week':
@@ -2082,34 +2083,32 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 					requests.push(this.doUpdate(task));
 				}
 				return requests;
-			}
+			};
 
-		TasksBusinessLayer.prototype.addComment = function(comment, onSuccess, onFailure) {
-		  var success,
-			_this = this;
-		  if (onSuccess == null) {
-			onSuccess = null;
-		  }
-		  if (onFailure == null) {
-			onFailure = null;
-		  }
-		  onSuccess || (onSuccess = function() {});
-		  onFailure || (onFailure = function() {});
-		  this._$tasksmodel.addComment(comment);
-		  success = function(response) {
-			if (response.status === 'error') {
-			  return onFailure();
-			} else {
-			  return onSuccess(response.data);
-			}
-		  };
-		  return this._persistence.addComment(comment, success);
-		};
+			TasksBusinessLayer.prototype.addComment = function(comment, onSuccess, onFailure) {
+				var success,
+				_this = this;
+				if (!onSuccess) {
+					onSuccess = function() {};
+				}
+				if (!onFailure) {
+					onFailure = function() {};
+				}
+				this._$tasksmodel.addComment(comment);
+				success = function(response) {
+					if (response.status === 'error') {
+						return onFailure();
+					} else {
+						return onSuccess(response.data);
+					}
+				};
+				return this._persistence.addComment(comment, success);
+			};
 
-		TasksBusinessLayer.prototype.deleteComment = function(taskID, commentID) {
-		  this._$tasksmodel.deleteComment(taskID, commentID);
-		  return this._persistence.deleteComment(taskID, commentID);
-		};
+			TasksBusinessLayer.prototype.deleteComment = function(taskID, commentID) {
+				this._$tasksmodel.deleteComment(taskID, commentID);
+				return this._persistence.deleteComment(taskID, commentID);
+			};
 
 		return TasksBusinessLayer;
 
@@ -2555,38 +2554,36 @@ angular.module('Tasks').service('CalendarService', ['DavClient', 'Calendar', fun
 
 }]);
 
-(function() {
-  angular.module('Tasks').service('DavClient', [
+angular.module('Tasks').service('DavClient', [
 	function() {
-	  var client;
-	  client = new dav.Client({
-		baseUrl: OC.linkToRemote('dav/calendars'),
-		xmlNamespaces: {
-		  'DAV:': 'd',
-		  'urn:ietf:params:xml:ns:caldav': 'c',
-		  'http://apple.com/ns/ical/': 'aapl',
-		  'http://owncloud.org/ns': 'oc',
-		  'http://calendarserver.org/ns/': 'cs'
-		}
-	  });
-	  angular.extend(client, {
-		NS_DAV: 'DAV:',
-		NS_IETF: 'urn:ietf:params:xml:ns:caldav',
-		NS_APPLE: 'http://apple.com/ns/ical/',
-		NS_OWNCLOUD: 'http://owncloud.org/ns',
-		NS_CALENDARSERVER: 'http://calendarserver.org/ns/',
-		buildUrl: function(path) {
-		  return window.location.protocol + '//' + window.location.host + path;
-		},
-		wasRequestSuccessful: function(status) {
-		  return status >= 200 && status <= 299;
-		}
-	  });
-	  return client;
+		'use strict';
+		var client;
+		client = new dav.Client({
+			baseUrl: OC.linkToRemote('dav/calendars'),
+			xmlNamespaces: {
+				'DAV:': 'd',
+				'urn:ietf:params:xml:ns:caldav': 'c',
+				'http://apple.com/ns/ical/': 'aapl',
+				'http://owncloud.org/ns': 'oc',
+				'http://calendarserver.org/ns/': 'cs'
+			}
+		});
+		angular.extend(client, {
+			NS_DAV: 'DAV:',
+			NS_IETF: 'urn:ietf:params:xml:ns:caldav',
+			NS_APPLE: 'http://apple.com/ns/ical/',
+			NS_OWNCLOUD: 'http://owncloud.org/ns',
+			NS_CALENDARSERVER: 'http://calendarserver.org/ns/',
+			buildUrl: function(path) {
+				return window.location.protocol + '//' + window.location.host + path;
+			},
+			wasRequestSuccessful: function(status) {
+				return status >= 200 && status <= 299;
+			}
+		});
+		return client;
 	}
-  ]);
-
-}).call(this);
+]);
 
 angular.module('Tasks').service('ICalFactory', [
 	function() {
@@ -2606,41 +2603,39 @@ angular.module('Tasks').service('ICalFactory', [
 	}
 ]);
 
-(function() {
-  angular.module('Tasks').factory('Loading', [
+angular.module('Tasks').factory('Loading', [
 	function() {
-	  var Loading;
-	  Loading = (function() {
-		function Loading() {
-		  this.count = 0;
-		}
+		'use strict';
+		var Loading = (function() {
+			function Loading() {
+				this.count = 0;
+			}
 
-		Loading.prototype.increase = function() {
-		  return this.count += 1;
-		};
+			Loading.prototype.increase = function() {
+				return this.count += 1;
+			};
 
-		Loading.prototype.decrease = function() {
-		  return this.count -= 1;
-		};
+			Loading.prototype.decrease = function() {
+				return this.count -= 1;
+			};
 
-		Loading.prototype.getCount = function() {
-		  return this.count;
-		};
+			Loading.prototype.getCount = function() {
+				return this.count;
+			};
 
-		Loading.prototype.isLoading = function() {
-		  return this.count > 0;
-		};
+			Loading.prototype.isLoading = function() {
+				return this.count > 0;
+			};
 
-		return Loading;
+			return Loading;
 
-	  })();
-	  return new Loading();
+		})();
+		return new Loading();
 	}
-  ]);
-
-}).call(this);
+]);
 
 (function() {
+	'use strict';
   angular.module('Tasks').factory('_Model', [
 	function() {
 	  var Model;
@@ -2662,7 +2657,7 @@ angular.module('Tasks').service('ICalFactory', [
 		};
 
 		Model.prototype.add = function(data, clearCache) {
-		  if (clearCache == null) {
+		  if (clearCache === null) {
 			clearCache = true;
 		  }
 		  if (clearCache) {
@@ -2672,13 +2667,13 @@ angular.module('Tasks').service('ICalFactory', [
 			return this.update(data, clearCache);
 		  } else {
 			this._data.push(data);
-			return this._dataMap[data.id] = data;
+			this._dataMap[data.id] = data;
 		  }
 		};
 
 		Model.prototype.update = function(data, clearCache) {
 		  var entry, key, value, _results;
-		  if (clearCache == null) {
+		  if (clearCache === null) {
 			clearCache = true;
 		  }
 		  if (clearCache) {
@@ -2707,7 +2702,7 @@ angular.module('Tasks').service('ICalFactory', [
 
 		Model.prototype.removeById = function(id, clearCache) {
 		  var counter, data, entry, _i, _len, _ref;
-		  if (clearCache == null) {
+		  if (clearCache === null) {
 			clearCache = true;
 		  }
 		  _ref = this._data;
@@ -2732,7 +2727,7 @@ angular.module('Tasks').service('ICalFactory', [
 		};
 
 		Model.prototype._invalidateCache = function() {
-		  return this._filterCache = {};
+		  this._filterCache = {};
 		};
 
 		Model.prototype.get = function(query) {
@@ -2994,6 +2989,7 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 }]);
 
 (function() {
+	'use strict';
   var __hasProp = {}.hasOwnProperty,
 	__extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -3010,7 +3006,7 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 		}
 
 		CollectionsModel.prototype.add = function(data, clearCache) {
-		  if (clearCache == null) {
+		  if (clearCache === null) {
 			clearCache = true;
 		  }
 		  this._nameCache[data.displayname] = data;
@@ -3021,7 +3017,7 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 
 		CollectionsModel.prototype.getCount = function(collectionID, filter) {
 		  var count, task, tasks, _i, _len;
-		  if (filter == null) {
+		  if (filter === null) {
 			filter = '';
 		  }
 		  count = 0;
@@ -3043,6 +3039,7 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 }).call(this);
 
 (function() {
+	'use strict';
   var __hasProp = {}.hasOwnProperty,
 	__extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -3062,7 +3059,7 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 
 		ListsModel.prototype.add = function(calendar, clearCache) {
 		  var updateByUri;
-		  if (clearCache == null) {
+		  if (clearCache === null) {
 			clearCache = true;
 		  }
 		  updateByUri = angular.isDefined(calendar.uri) && angular.isDefined(this.getByUri(calendar.uri));
@@ -3073,11 +3070,9 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 			  if (clearCache) {
 				this._invalidateCache();
 			  }
-			  if (angular.isDefined(this._dataMap[calendar.uri])) {
-
-			  } else {
+			  if (!angular.isDefined(this._dataMap[calendar.uri])) {
 				this._data.push(calendar);
-				return this._dataMap[calendar.uri] = calendar;
+				this._dataMap[calendar.uri] = calendar;
 			  }
 			}
 		  }
@@ -3089,7 +3084,7 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 
 		ListsModel.prototype.update = function(list, clearCache) {
 		  var tmplist;
-		  if (clearCache == null) {
+		  if (clearCache === null) {
 			clearCache = true;
 		  }
 		  tmplist = this._tmpIdCache[list.tmpID];
@@ -3103,7 +3098,7 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 
 		ListsModel.prototype["delete"] = function(calendar, clearCache) {
 		  var counter, data, entry, _i, _len, _ref;
-		  if (clearCache == null) {
+		  if (clearCache === null) {
 			clearCache = true;
 		  }
 		  _ref = this._data;
@@ -3144,7 +3139,7 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 
 		ListsModel.prototype.getCount = function(calendarID, collectionID, filter) {
 		  var count, task, tasks, _i, _len;
-		  if (filter == null) {
+		  if (filter === null) {
 			filter = '';
 		  }
 		  count = 0;
@@ -3153,9 +3148,9 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 			task = tasks[_i];
 			count += this._$tasksmodel.filterTasks(task, collectionID) && task.calendaruri === calendarID && !task.related;
 		  }
-		  if (collectionID === 'completed' && filter === '') {
+		 //  if (collectionID === 'completed' && filter === '') {
 			// count += this.notLoaded(calendarID);
-		  }
+		 //  }
 		  return count;
 		};
 
@@ -3197,6 +3192,7 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 }).call(this);
 
 (function() {
+	'use strict';
   var __hasProp = {}.hasOwnProperty,
 	__extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -3212,7 +3208,7 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 		}
 
 		SettingsModel.prototype.add = function(data, clearCache) {
-		  if (clearCache == null) {
+		  if (clearCache === null) {
 			clearCache = true;
 		  }
 		  this._nameCache[data.displayname] = data;
@@ -3226,7 +3222,7 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 		SettingsModel.prototype.toggle = function(type, setting) {
 		  var set;
 		  set = this.getById(type);
-		  return this.getById(type)[setting] = !set[setting];
+		  this.getById(type)[setting] = !set[setting];
 		};
 
 		return SettingsModel;
@@ -3239,14 +3235,14 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 }).call(this);
 
 (function() {
+	'use strict';
   var __hasProp = {}.hasOwnProperty,
 	__extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
 	__indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   angular.module('Tasks').factory('TasksModel', [
 	'_Model', function(_Model) {
-		var TasksModel;
-		TasksModel = (function(_super) {
+		var TasksModel = (function(_super) {
 			__extends(TasksModel, _super);
 
 			function TasksModel() {
@@ -3255,7 +3251,7 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 			}
 
 			TasksModel.prototype.ad = function(task, clearCache) {
-				if (clearCache == null) {
+				if (clearCache === null) {
 					clearCache = true;
 				}
 				var updateByUri = angular.isDefined(task.uri) && angular.isDefined(this.getByUri(task.uri));
@@ -3266,11 +3262,9 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 						if (clearCache) {
 							this._invalidateCache();
 						}
-						if (angular.isDefined(this._dataMap[task.uri])) {
-
-						} else {
+						if (!angular.isDefined(this._dataMap[task.uri])) {
 							this._data.push(task);
-							return this._dataMap[task.uri] = task;
+							this._dataMap[task.uri] = task;
 						}
 					}
 				}
@@ -3280,32 +3274,9 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 				return this._dataMap[uri];
 			};
 
-		TasksModel.prototype.add = function(task, clearCache) {
-		  var tmptask, updateById, updateByTmpId;
-		  if (clearCache == null) {
-			clearCache = true;
-		  }
-		  tmptask = this._tmpIdCache[task.tmpID];
-		  updateById = angular.isDefined(task.id) && angular.isDefined(this.getById(task.id));
-		  updateByTmpId = angular.isDefined(tmptask);
-		  if (updateById || updateByTmpId) {
-			return this.update(task, clearCache);
-		  } else {
-			if (angular.isDefined(task.id) && angular.isUndefined(task.tmpID)) {
-			  return TasksModel.__super__.add.call(this, task, clearCache);
-			} else {
-			  this._tmpIdCache[task.tmpID] = task;
-			  this._data.push(task);
-			  if (clearCache) {
-				return this._invalidateCache();
-			  }
-			}
-		  }
-		};
-
 		TasksModel.prototype.update = function(task, clearCache) {
 		  var tmptask;
-		  if (clearCache == null) {
+		  if (clearCache === null) {
 			clearCache = true;
 		  }
 		  tmptask = this._tmpIdCache[task.tmpID];
@@ -3323,7 +3294,7 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 
 		TasksModel.prototype["delete"] = function(task, clearCache) {
 		  var counter, data, entry, _i, _len, _ref;
-		  if (clearCache == null) {
+		  if (clearCache === null) {
 			clearCache = true;
 		  }
 		  _ref = this._data;
@@ -3339,35 +3310,6 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 			  return data;
 			}
 		  }
-		};
-
-		TasksModel.prototype.voidAll = function() {
-		  var task, tasks, _i, _len, _results;
-		  tasks = this.getAll();
-		  _results = [];
-		  for (_i = 0, _len = tasks.length; _i < _len; _i++) {
-			task = tasks[_i];
-			_results.push(task["void"] = true);
-		  }
-		  return _results;
-		};
-
-		TasksModel.prototype.removeVoid = function() {
-		  var id, task, taskIDs, tasks, _i, _j, _len, _len1, _results;
-		  tasks = this.getAll();
-		  taskIDs = [];
-		  for (_i = 0, _len = tasks.length; _i < _len; _i++) {
-			task = tasks[_i];
-			if (task["void"]) {
-			  taskIDs.push(task.id);
-			}
-		  }
-		  _results = [];
-		  for (_j = 0, _len1 = taskIDs.length; _j < _len1; _j++) {
-			id = taskIDs[_j];
-			_results.push(this.removeById(id));
-		  }
-		  return _results;
 		};
 
 		TasksModel.prototype.removeByList = function(listID) {
@@ -3562,27 +3504,6 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 		  return false;
 		};
 
-		// TasksModel.prototype.getAncestor = function(taskID, ret) {
-		//   var ancestors, parentID, task, tasks;
-		//   tasks = [];
-		//   task = this.getByUri(taskID);
-		//   if (task) {
-		// 	if (this.objectExists(task, ret)) {
-		// 	  return tasks;
-		// 	}
-		// 	tasks.push(task);
-		// 	if (this.hasNoParent(task)) {
-		// 	  return tasks;
-		// 	}
-		// 	parentID = this.getIdByUid(task.related);
-		// 	ancestors = this.getAncestor(parentID, ret);
-		// 	if (ancestors) {
-		// 	  tasks = tasks.concat(ancestors);
-		// 	}
-		//   }
-		//   return tasks;
-		// };
-
 		TasksModel.prototype.filterTasksByString = function(task, filter) {
 		  var category, comment, key, keys, value, _i, _j, _len, _len1, _ref, _ref1;
 		  keys = ['name', 'note', 'location', 'categories', 'comments'];
@@ -3614,37 +3535,12 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 		  return false;
 		};
 
-		// TasksModel.prototype.hideSubtasks = function(taskID) {
-		//   return this.getById(taskID).hidesubtasks;
-		// };
-
-		// TasksModel.prototype.setHideSubtasks = function(taskID, hide) {
-		//   return this.update({
-		// 	id: taskID,
-		// 	hidesubtasks: hide
-		//   });
-		// };
-
-		// TasksModel.prototype.setDueDate = function(taskID, date) {
-		//   return this.update({
-		// 	id: taskID,
-		// 	due: date
-		//   });
-		// };
-
 		TasksModel.prototype.setReminder = function(taskID, reminder) {
 		  return this.update({
 			id: taskID,
 			reminder: reminder
 		  });
 		};
-
-		// TasksModel.prototype.setStartDate = function(taskID, date) {
-		//   return this.update({
-		// 	id: taskID,
-		// 	start: date
-		//   });
-		// };
 
 		TasksModel.prototype.overdue = function(due) {
 		  return moment(due, "YYYYMMDDTHHmmss").isValid() && moment(due, "YYYYMMDDTHHmmss").diff(moment()) < 0;
@@ -3666,27 +3562,13 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 		  return !moment(start, "YYYYMMDDTHHmmss").isValid() || moment(start, "YYYYMMDDTHHmmss").diff(moment(), 'days', true) < 0 || moment(due, "YYYYMMDDTHHmmss").diff(moment(), 'days', true) < 0;
 		};
 
-		// TasksModel.prototype.changeParent = function(taskID, related) {
-		//   return this.update({
-		// 	id: taskID,
-		// 	related: related
-		//   });
-		// };
-
-		// TasksModel.prototype.setNote = function(taskID, note) {
-		//   return this.update({
-		// 	id: taskID,
-		// 	note: note
-		//   });
-		// };
-
 		TasksModel.prototype.addComment = function(comment) {
 		  var task;
 		  task = this.getById(comment.taskID);
 		  if (task.comments) {
-			return task.comments.push(comment);
+			task.comments.push(comment);
 		  } else {
-			return task.comments = [comment];
+			task.comments = [comment];
 		  }
 		};
 
@@ -3927,7 +3809,7 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		get comments() {
 			return null;
 		},
-	}
+	};
 
 	VTodo.create = function(task) {
 		var comp = icalfactory.new();
@@ -3958,499 +3840,152 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 	return VTodo;
 }]);
 
-(function() {
-  angular.module('Tasks').factory('Persistence', [
+angular.module('Tasks').factory('Persistence', [
 	'Request', 'Loading', '$rootScope', '$q', 'CalendarService', function(Request, Loading, $rootScope, $q, CalendarService) {
-	  var Persistence;
-	  Persistence = (function() {
-		function Persistence(_request, _Loading, _$rootScope, _CalendarService) {
-		  this._request = _request;
-		  this._Loading = _Loading;
-		  this._$rootScope = _$rootScope;
-		  this._CalendarService = _CalendarService;
-		}
+		'use strict';
+		var Persistence = (function() {
+			function Persistence(_request, _Loading, _$rootScope, _CalendarService) {
+				this._request = _request;
+				this._Loading = _Loading;
+				this._$rootScope = _$rootScope;
+				this._CalendarService = _CalendarService;
+			}
 
-		Persistence.prototype.init = function() {
-		  var successCallback,
-			_this = this;
-		  this.deferred = $q.defer();
-		  successCallback = function() {
-			return _this.deferred.resolve();
-		  };
-		  this.getCollections();
-		  this.getSettings();
-		  return this.deferred.promise;
-		};
-
-		Persistence.prototype.getCollections = function(onSuccess, showLoading) {
-		  var failureCallbackWrapper, params, successCallbackWrapper,
-			_this = this;
-		  if (showLoading == null) {
-			showLoading = true;
-		  }
-		  onSuccess || (onSuccess = function() {});
-		  if (showLoading) {
-			this._Loading.increase();
-			successCallbackWrapper = function(data) {
-			  onSuccess();
-			  return _this._Loading.decrease();
+			Persistence.prototype.init = function() {
+				var successCallback,
+				_this = this;
+				this.deferred = $q.defer();
+				successCallback = function() {
+					return _this.deferred.resolve();
+				};
+				this.getCollections();
+				this.getSettings();
+				return this.deferred.promise;
 			};
-			failureCallbackWrapper = function(data) {
-			  return _this._Loading.decrease();
+
+			Persistence.prototype.getCollections = function(onSuccess, showLoading) {
+				var failureCallbackWrapper, params, successCallbackWrapper,
+				_this = this;
+				if (showLoading === null) {
+					showLoading = true;
+				}
+				if (!onSuccess) {
+					onSuccess = function() {};
+				}
+				if (showLoading) {
+					this._Loading.increase();
+					successCallbackWrapper = function(data) {
+						onSuccess();
+						return _this._Loading.decrease();
+					};
+					failureCallbackWrapper = function(data) {
+						return _this._Loading.decrease();
+					};
+				} else {
+					successCallbackWrapper = function(data) {
+						return onSuccess();
+					};
+					failureCallbackWrapper = function(data) {};
+				}
+				params = {
+					onSuccess: successCallbackWrapper,
+					onFailure: failureCallbackWrapper
+				};
+				return this._request.get('/apps/tasks/collections', params);
 			};
-		  } else {
-			successCallbackWrapper = function(data) {
-			  return onSuccess();
+
+			Persistence.prototype.getSettings = function(onSuccess, showLoading) {
+				var failureCallbackWrapper, params, successCallbackWrapper,
+				_this = this;
+				if (showLoading === null) {
+					showLoading = true;
+				}
+				if (!onSuccess) {
+					onSuccess = function() {};
+				}
+				if (showLoading) {
+					this._Loading.increase();
+					successCallbackWrapper = function(data) {
+						onSuccess();
+						return _this._Loading.decrease();
+					};
+					failureCallbackWrapper = function(data) {
+						return _this._Loading.decrease();
+					};
+				} else {
+					successCallbackWrapper = function(data) {
+						return onSuccess();
+					};
+					failureCallbackWrapper = function(data) {};
+				}
+				params = {
+					onSuccess: successCallbackWrapper,
+					onFailure: failureCallbackWrapper
+				};
+				return this._request.get('/apps/tasks/settings', params);
 			};
-			failureCallbackWrapper = function(data) {};
-		  }
-		  params = {
-			onSuccess: successCallbackWrapper,
-			onFailure: failureCallbackWrapper
-		  };
-		  return this._request.get('/apps/tasks/collections', params);
-		};
 
-		Persistence.prototype.getSettings = function(onSuccess, showLoading) {
-		  var failureCallbackWrapper, params, successCallbackWrapper,
-			_this = this;
-		  if (showLoading == null) {
-			showLoading = true;
-		  }
-		  onSuccess || (onSuccess = function() {});
-		  if (showLoading) {
-			this._Loading.increase();
-			successCallbackWrapper = function(data) {
-			  onSuccess();
-			  return _this._Loading.decrease();
+			Persistence.prototype.setVisibility = function(collectionID, visibility) {
+				var params = {
+					routeParams: {
+						collectionID: collectionID,
+						visibility: visibility
+					}
+				};
+				return this._request.post('/apps/tasks/collection/{collectionID}/visibility/{visibility}', params);
 			};
-			failureCallbackWrapper = function(data) {
-			  return _this._Loading.decrease();
+
+			Persistence.prototype.setting = function(type, setting, value) {
+				var params = {
+					routeParams: {
+						type: type,
+						setting: setting,
+						value: +value
+					}
+				};
+				return this._request.post('/apps/tasks/settings/{type}/{setting}/{value}', params);
 			};
-		  } else {
-			successCallbackWrapper = function(data) {
-			  return onSuccess();
-			};
-			failureCallbackWrapper = function(data) {};
-		  }
-		  params = {
-			onSuccess: successCallbackWrapper,
-			onFailure: failureCallbackWrapper
-		  };
-		  return this._request.get('/apps/tasks/settings', params);
-		};
-
-		Persistence.prototype.setVisibility = function(collectionID, visibility) {
-		  var params;
-		  params = {
-			routeParams: {
-			  collectionID: collectionID,
-			  visibility: visibility
-			}
-		  };
-		  return this._request.post('/apps/tasks/collection/\
-			{collectionID}/visibility/{visibility}', params);
-		};
-
-		Persistence.prototype.setting = function(type, setting, value) {
-		  var params;
-		  params = {
-			routeParams: {
-			  type: type,
-			  setting: setting,
-			  value: +value
-			}
-		  };
-		  return this._request.post('/apps/tasks/settings/\
-			{type}/{setting}/{value}', params);
-		};
-
-		Persistence.prototype.getTasks = function(type, listID, onSuccess, showLoading) {
-		  var failureCallbackWrapper, params, successCallbackWrapper,
-			_this = this;
-		  if (type == null) {
-			type = 'init';
-		  }
-		  if (listID == null) {
-			listID = 'all';
-		  }
-		  if (showLoading == null) {
-			showLoading = true;
-		  }
-		  onSuccess || (onSuccess = function() {});
-		  if (showLoading) {
-			this._Loading.increase();
-			successCallbackWrapper = function(data) {
-			  onSuccess();
-			  return _this._Loading.decrease();
-			};
-			failureCallbackWrapper = function(data) {
-			  return _this._Loading.decrease();
-			};
-		  } else {
-			successCallbackWrapper = function(data) {
-			  return onSuccess();
-			};
-			failureCallbackWrapper = function(data) {};
-		  }
-		  params = {
-			onSuccess: successCallbackWrapper,
-			onFailure: failureCallbackWrapper,
-			routeParams: {
-			  listID: listID,
-			  type: type
-			}
-		  };
-		  return this._request.get('/apps/tasks/tasks/{type}/{listID}', params);
-		};
-
-		Persistence.prototype.getTask = function(taskID, onSuccess, showLoading) {
-		  var failureCallbackWrapper, params, successCallbackWrapper,
-			_this = this;
-		  if (showLoading == null) {
-			showLoading = true;
-		  }
-		  onSuccess || (onSuccess = function() {});
-		  if (showLoading) {
-			this._Loading.increase();
-			successCallbackWrapper = function() {
-			  onSuccess();
-			  return _this._Loading.decrease();
-			};
-			failureCallbackWrapper = function() {
-			  return _this._Loading.decrease();
-			};
-		  } else {
-			successCallbackWrapper = function() {
-			  return onSuccess();
-			};
-			failureCallbackWrapper = function() {};
-		  }
-		  params = {
-			onSuccess: successCallbackWrapper,
-			onFailure: failureCallbackWrapper,
-			routeParams: {
-			  taskID: taskID
-			}
-		  };
-		  return this._request.get('/apps/tasks/task/{taskID}', params);
-		};
-
-		Persistence.prototype.setPercentComplete = function(taskID, complete) {
-		  var params;
-		  params = {
-			routeParams: {
-			  taskID: taskID
-			},
-			data: {
-			  complete: complete
-			}
-		  };
-		  return this._request.post('/apps/tasks/tasks/{taskID}/percentcomplete', params);
-		};
-
-		Persistence.prototype.setPriority = function(taskID, priority) {
-		  var params;
-		  params = {
-			routeParams: {
-			  taskID: taskID
-			},
-			data: {
-			  priority: priority
-			}
-		  };
-		  return this._request.post('/apps/tasks/tasks/{taskID}/priority', params);
-		};
-
-		Persistence.prototype.setHideSubtasks = function(taskID, hide) {
-		  var params;
-		  params = {
-			routeParams: {
-			  taskID: taskID
-			},
-			data: {
-			  hide: hide
-			}
-		  };
-		  return this._request.post('/apps/tasks/tasks/{taskID}/hidesubtasks', params);
-		};
-
-		Persistence.prototype.addTask = function(task, onSuccess, onFailure) {
-		  var params;
-		  if (onSuccess == null) {
-			onSuccess = null;
-		  }
-		  if (onFailure == null) {
-			onFailure = null;
-		  }
-		  onSuccess || (onSuccess = function() {});
-		  onFailure || (onFailure = function() {});
-		  params = {
-			data: {
-			  name: task.name,
-			  related: task.related,
-			  calendarID: task.calendarid,
-			  starred: task.starred,
-			  due: task.due,
-			  start: task.start,
-			  tmpID: task.tmpID
-			},
-			onSuccess: onSuccess,
-			onFailure: onFailure
-		  };
-		  return this._request.post('/apps/tasks/tasks/add', params);
-		};
-
-		Persistence.prototype.deleteTask = function(taskID) {
-		  var params;
-		  params = {
-			routeParams: {
-			  taskID: taskID
-			}
-		  };
-		  return this._request.post('/apps/tasks/tasks/{taskID}/delete', params);
-		};
-
-		Persistence.prototype.setDueDate = function(taskID, due) {
-		  var params;
-		  params = {
-			routeParams: {
-			  taskID: taskID
-			},
-			data: {
-			  due: due
-			}
-		  };
-		  return this._request.post('/apps/tasks/tasks/{taskID}/due', params);
-		};
-
-		Persistence.prototype.setStartDate = function(taskID, start) {
-		  var params;
-		  params = {
-			routeParams: {
-			  taskID: taskID
-			},
-			data: {
-			  start: start
-			}
-		  };
-		  return this._request.post('/apps/tasks/tasks/{taskID}/start', params);
-		};
-
-		Persistence.prototype.setReminder = function(taskID, reminder) {
-		  var params;
-		  if (reminder === false) {
-			params = {
-			  routeParams: {
-				taskID: taskID
-			  },
-			  data: {
-				type: false
-			  }
-			};
-		  } else if (reminder.type === 'DATE-TIME') {
-			params = {
-			  routeParams: {
-				taskID: taskID
-			  },
-			  data: {
-				type: reminder.type,
-				action: reminder.action,
-				date: moment(reminder.date, 'YYYYMMDDTHHmmss').unix()
-			  }
-			};
-		  } else if (reminder.type === 'DURATION') {
-			params = {
-			  routeParams: {
-				taskID: taskID
-			  },
-			  data: {
-				type: reminder.type,
-				action: reminder.action,
-				week: reminder.duration.week,
-				day: reminder.duration.day,
-				hour: reminder.duration.hour,
-				minute: reminder.duration.minute,
-				second: reminder.duration.second,
-				invert: reminder.duration.params.invert,
-				related: reminder.duration.params.related
-			  }
-			};
-		  } else {
-			return;
-		  }
-		  return this._request.post('/apps/tasks/tasks/{taskID}/reminder', params);
-		};
-
-		Persistence.prototype.changeCalendarId = function(taskID, calendarID) {
-		  var params;
-		  params = {
-			routeParams: {
-			  taskID: taskID
-			},
-			data: {
-			  calendarID: calendarID
-			}
-		  };
-		  return this._request.post('/apps/tasks/tasks/{taskID}/calendar', params);
-		};
-
-		Persistence.prototype.changeParent = function(taskID, related) {
-		  var params;
-		  params = {
-			routeParams: {
-			  taskID: taskID
-			},
-			data: {
-			  related: related
-			}
-		  };
-		  return this._request.post('/apps/tasks/tasks/{taskID}/parent', params);
-		};
-
-		Persistence.prototype.setTaskName = function(taskID, name) {
-		  var params;
-		  params = {
-			routeParams: {
-			  taskID: taskID
-			},
-			data: {
-			  name: name
-			}
-		  };
-		  return this._request.post('/apps/tasks/tasks/{taskID}/name', params);
-		};
-
-		Persistence.prototype.setTaskNote = function(taskID, note) {
-		  var params;
-		  params = {
-			routeParams: {
-			  taskID: taskID
-			},
-			data: {
-			  note: note
-			}
-		  };
-		  return this._request.post('/apps/tasks/tasks/{taskID}/note', params);
-		};
-
-		Persistence.prototype.setShowHidden = function(showHidden) {
-		  var params;
-		  params = {
-			routeParams: {
-			  showHidden: +showHidden
-			}
-		  };
-		  return this._request.post('/apps/tasks/settings/showhidden/{showHidden}', params);
-		};
-
-		Persistence.prototype.addComment = function(comment, onSuccess, onFailure) {
-		  var params;
-		  if (onSuccess == null) {
-			onSuccess = null;
-		  }
-		  if (onFailure == null) {
-			onFailure = null;
-		  }
-		  params = {
-			routeParams: {
-			  taskID: comment.taskID
-			},
-			data: {
-			  comment: comment.comment,
-			  tmpID: comment.tmpID
-			},
-			onSuccess: onSuccess,
-			onFailure: onFailure
-		  };
-		  return this._request.post('/apps/tasks/tasks/{taskID}/comment', params);
-		};
-
-		Persistence.prototype.deleteComment = function(taskID, commentID) {
-		  var params;
-		  params = {
-			routeParams: {
-			  taskID: taskID,
-			  commentID: commentID
-			}
-		  };
-		  return this._request.post('/apps/tasks/tasks/{taskID}/comment/\
-			{commentID}/delete', params);
-		};
-
-		Persistence.prototype.addCategory = function(taskID, category) {
-		  var params;
-		  params = {
-			routeParams: {
-			  taskID: taskID
-			},
-			data: {
-			  category: category
-			}
-		  };
-		  return this._request.post('/apps/tasks/tasks/{taskID}/category/add', params);
-		};
-
-		Persistence.prototype.removeCategory = function(taskID, category) {
-		  var params;
-		  params = {
-			routeParams: {
-			  taskID: taskID
-			},
-			data: {
-			  category: category
-			}
-		  };
-		  return this._request.post('/apps/tasks/tasks/{taskID}/category/remove', params);
-		};
-
 		return Persistence;
-
 	  })();
 	  return new Persistence(Request, Loading, $rootScope, CalendarService);
 	}
-  ]);
+]);
 
-}).call(this);
-
-(function() {
-  angular.module('Tasks').factory('Publisher', [
+angular.module('Tasks').factory('Publisher', [
 	'CollectionsModel', 'SettingsModel', function(CollectionsModel, SettingsModel) {
-	  var Publisher;
-	  Publisher = (function() {
-		function Publisher(_$collectionsmodel, _$settingsmodel) {
-		  this._$collectionsmodel = _$collectionsmodel;
-		  this._$settingsmodel = _$settingsmodel;
-		  this._subscriptions = {};
-		  this.subscribeObjectTo(this._$collectionsmodel, 'collections');
-		  this.subscribeObjectTo(this._$settingsmodel, 'settings');
-		}
+		'use strict';
+		var Publisher = (function() {
+			function Publisher(_$collectionsmodel, _$settingsmodel) {
+				this._$collectionsmodel = _$collectionsmodel;
+				this._$settingsmodel = _$settingsmodel;
+				this._subscriptions = {};
+				this.subscribeObjectTo(this._$collectionsmodel, 'collections');
+				this.subscribeObjectTo(this._$settingsmodel, 'settings');
+			}
 
-		Publisher.prototype.subscribeObjectTo = function(object, name) {
-		  var base;
-		  (base = this._subscriptions)[name] || (base[name] = []);
-		  return this._subscriptions[name].push(object);
-		};
+			Publisher.prototype.subscribeObjectTo = function(object, name) {
+				var base = this._subscriptions;
+				if (!base[name]) {
+					base[name] = [];
+				}
+				return this._subscriptions[name].push(object);
+			};
 
-		Publisher.prototype.publishDataTo = function(data, name) {
-		  var ref, results, subscriber, _i, _len;
-		  ref = this._subscriptions[name] || [];
-		  results = [];
-		  for (_i = 0, _len = ref.length; _i < _len; _i++) {
-			subscriber = ref[_i];
-			results.push(subscriber.handle(data));
-		  }
-		  return results;
-		};
-
-		return Publisher;
-
-	  })();
-	  return new Publisher(CollectionsModel, SettingsModel);
+			Publisher.prototype.publishDataTo = function(data, name) {
+				var ref, results, subscriber, _i, _len;
+				ref = this._subscriptions[name] || [];
+				results = [];
+				for (_i = 0, _len = ref.length; _i < _len; _i++) {
+					subscriber = ref[_i];
+					results.push(subscriber.handle(data));
+				}
+				return results;
+			};
+			return Publisher;
+		})();
+		return new Publisher(CollectionsModel, SettingsModel);
 	}
-  ]);
-
-}).call(this);
+]);
 
 angular.module('Tasks').factory('RandomStringService', function () {
 	'use strict';
@@ -4462,133 +3997,136 @@ angular.module('Tasks').factory('RandomStringService', function () {
 	};
 });
 
-(function() {
-  angular.module('Tasks').factory('Request', [
+angular.module('Tasks').factory('Request', [
 	'$http', 'Publisher', function($http, Publisher) {
-	  var Request;
-	  Request = (function() {
-		function Request($http, publisher) {
-		  this.$http = $http;
-		  this.publisher = publisher;
-		  this.count = 0;
-		  this.initialized = false;
-		  this.shelvedRequests = [];
-		  this.initialized = true;
-		  this._executeShelvedRequests();
-		}
+		'use strict';
+		var Request = (function() {
+			function Request($http, publisher) {
+				this.$http = $http;
+				this.publisher = publisher;
+				this.count = 0;
+				this.initialized = false;
+				this.shelvedRequests = [];
+				this.initialized = true;
+				this._executeShelvedRequests();
+			}
 
-		Request.prototype.request = function(route, data) {
-		  var defaultConfig, defaultData, url;
-		  if (data === null) {
-			data = {};
-		  }
-		  defaultData = {
-			routeParams: {},
-			data: {},
-			onSuccess: function() {
-			  return {};
-			},
-			onFailure: function() {
-			  return {};
-			},
-			config: {}
-		  };
-		  angular.extend(defaultData, data);
-		  if (!this.initialized) {
-			this._shelveRequest(route, defaultData);
-			return;
-		  }
-		  url = OC.generateUrl(route, defaultData.routeParams);
-		  defaultConfig = {
-			url: url,
-			data: defaultData.data
-		  };
-		  angular.extend(defaultConfig, defaultData.config);
-		  if (defaultConfig.method === 'GET') {
-			defaultConfig.params = defaultConfig.data;
-		  }
-		  return this.$http(defaultConfig).success((function(_this) {
-			return function(data, status, headers, config) {
-			  var name, ref, value;
-			  ref = data.data;
-			  for (name in ref) {
-				value = ref[name];
-				_this.publisher.publishDataTo(value, name);
-			  }
-			  return defaultData.onSuccess(data, status, headers, config);
+			Request.prototype.request = function(route, data) {
+				var defaultConfig, defaultData, url;
+				if (data === null) {
+					data = {};
+				}
+				defaultData = {
+					routeParams: {},
+					data: {},
+					onSuccess: function() {
+						return {};
+					},
+					onFailure: function() {
+						return {};
+					},
+					config: {}
+				};
+				angular.extend(defaultData, data);
+				if (!this.initialized) {
+					this._shelveRequest(route, defaultData);
+					return;
+				}
+				url = OC.generateUrl(route, defaultData.routeParams);
+				defaultConfig = {
+					url: url,
+					data: defaultData.data
+				};
+				angular.extend(defaultConfig, defaultData.config);
+				if (defaultConfig.method === 'GET') {
+					defaultConfig.params = defaultConfig.data;
+				}
+				return this.$http(defaultConfig).success((function(_this) {
+					return function(data, status, headers, config) {
+						var name, ref, value;
+						ref = data.data;
+						for (name in ref) {
+							value = ref[name];
+							_this.publisher.publishDataTo(value, name);
+						}
+						return defaultData.onSuccess(data, status, headers, config);
+					};
+				})(this)).error(function(data, status, headers, config) {
+					return defaultData.onFailure(data, status, headers, config);
+				});
 			};
-		  })(this)).error(function(data, status, headers, config) {
-			return defaultData.onFailure(data, status, headers, config);
-		  });
-		};
 
-		Request.prototype.post = function(route, data) {
-		  if (data === null) {
-			data = {};
-		  }
-		  data.config || (data.config = {});
-		  data.config.method = 'POST';
-		  return this.request(route, data);
-		};
+			Request.prototype.post = function(route, data) {
+				if (data === null) {
+					data = {};
+				}
+				if (!data.config) {
+					data.config = {};
+				}
+				data.config.method = 'POST';
+				return this.request(route, data);
+			};
 
-		Request.prototype.get = function(route, data) {
-		  if (data === null) {
-			data = {};
-		  }
-		  data.config || (data.config = {});
-		  data.config.method = 'GET';
-		  return this.request(route, data);
-		};
+			Request.prototype.get = function(route, data) {
+				if (data === null) {
+					data = {};
+				}
+				if (!data.config) {
+					data.config = {};
+				}
+				data.config.method = 'GET';
+				return this.request(route, data);
+			};
 
-		Request.prototype.put = function(route, data) {
-		  if (data === null) {
-			data = {};
-		  }
-		  data.config || (data.config = {});
-		  data.config.method = 'PUT';
-		  return this.request(route, data);
-		};
+			Request.prototype.put = function(route, data) {
+				if (data === null) {
+					data = {};
+				}
+				if (!data.config) {
+					data.config = {};
+				}
+				data.config.method = 'PUT';
+				return this.request(route, data);
+			};
 
-		Request.prototype["delete"] = function(route, data) {
-		  if (data === null) {
-			data = {};
-		  }
-		  data.config || (data.config = {});
-		  data.config.method = 'DELETE';
-		  return this.request(route, data);
-		};
+			Request.prototype["delete"] = function(route, data) {
+				if (data === null) {
+					data = {};
+				}
+				if (!data.config) {
+					data.config = {};
+				}
+				data.config.method = 'DELETE';
+				return this.request(route, data);
+			};
 
-		Request.prototype._shelveRequest = function(route, data) {
-		  var request;
-		  request = {
-			route: route,
-			data: data
-		  };
-		  return this.shelvedRequests.push(request);
-		};
+			Request.prototype._shelveRequest = function(route, data) {
+				var request = {
+					route: route,
+					data: data
+				};
+				return this.shelvedRequests.push(request);
+			};
 
-		Request.prototype._executeShelvedRequests = function() {
-		  var r, ref, results, _i, _len;
-		  ref = this.shelvedRequests;
-		  results = [];
-		  for (_i = 0, _len = ref.length; _i < _len; _i++) {
-			r = ref[_i];
-			results.push(this.request(r.route, r.data));
-		  }
-		  return results;
-		};
-
-		return Request;
-
-	  })();
-	  return new Request($http, Publisher);
+			Request.prototype._executeShelvedRequests = function() {
+				var r, ref, results, _i, _len;
+				ref = this.shelvedRequests;
+				results = [];
+				for (_i = 0, _len = ref.length; _i < _len; _i++) {
+					r = ref[_i];
+					results.push(this.request(r.route, r.data));
+				}
+				return results;
+			};
+			return Request;
+		})();
+	return new Request($http, Publisher);
 	}
-  ]);
-
-}).call(this);
+]);
 
 angular.module('Tasks').factory('Status', [
 	function() {
+		'use strict';
 		var Status;
 		Status = (function() {
 			function Status() {
@@ -4728,7 +4266,7 @@ angular.module('Tasks').service('VTodoService', ['DavClient', 'RandomStringServi
 			'If-Match': task.etag,
 			'requesttoken': OC.requestToken
 		};
-		$timeout.cancel(task.timers['update']);
+		$timeout.cancel(task.timers.update);
 		return DavClient.request('PUT', url, headers, task.data).then(function(response) {
 			task.etag = response.xhr.getResponseHeader('ETag');
 			return DavClient.wasRequestSuccessful(response.status);

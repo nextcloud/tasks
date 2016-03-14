@@ -20,14 +20,14 @@
  */
 
 (function() {
+	'use strict';
   var __hasProp = {}.hasOwnProperty,
 	__extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
 	__indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   angular.module('Tasks').factory('TasksModel', [
 	'_Model', function(_Model) {
-		var TasksModel;
-		TasksModel = (function(_super) {
+		var TasksModel = (function(_super) {
 			__extends(TasksModel, _super);
 
 			function TasksModel() {
@@ -36,7 +36,7 @@
 			}
 
 			TasksModel.prototype.ad = function(task, clearCache) {
-				if (clearCache == null) {
+				if (clearCache === null) {
 					clearCache = true;
 				}
 				var updateByUri = angular.isDefined(task.uri) && angular.isDefined(this.getByUri(task.uri));
@@ -47,11 +47,9 @@
 						if (clearCache) {
 							this._invalidateCache();
 						}
-						if (angular.isDefined(this._dataMap[task.uri])) {
-
-						} else {
+						if (!angular.isDefined(this._dataMap[task.uri])) {
 							this._data.push(task);
-							return this._dataMap[task.uri] = task;
+							this._dataMap[task.uri] = task;
 						}
 					}
 				}
@@ -61,32 +59,9 @@
 				return this._dataMap[uri];
 			};
 
-		TasksModel.prototype.add = function(task, clearCache) {
-		  var tmptask, updateById, updateByTmpId;
-		  if (clearCache == null) {
-			clearCache = true;
-		  }
-		  tmptask = this._tmpIdCache[task.tmpID];
-		  updateById = angular.isDefined(task.id) && angular.isDefined(this.getById(task.id));
-		  updateByTmpId = angular.isDefined(tmptask);
-		  if (updateById || updateByTmpId) {
-			return this.update(task, clearCache);
-		  } else {
-			if (angular.isDefined(task.id) && angular.isUndefined(task.tmpID)) {
-			  return TasksModel.__super__.add.call(this, task, clearCache);
-			} else {
-			  this._tmpIdCache[task.tmpID] = task;
-			  this._data.push(task);
-			  if (clearCache) {
-				return this._invalidateCache();
-			  }
-			}
-		  }
-		};
-
 		TasksModel.prototype.update = function(task, clearCache) {
 		  var tmptask;
-		  if (clearCache == null) {
+		  if (clearCache === null) {
 			clearCache = true;
 		  }
 		  tmptask = this._tmpIdCache[task.tmpID];
@@ -104,7 +79,7 @@
 
 		TasksModel.prototype["delete"] = function(task, clearCache) {
 		  var counter, data, entry, _i, _len, _ref;
-		  if (clearCache == null) {
+		  if (clearCache === null) {
 			clearCache = true;
 		  }
 		  _ref = this._data;
@@ -120,35 +95,6 @@
 			  return data;
 			}
 		  }
-		};
-
-		TasksModel.prototype.voidAll = function() {
-		  var task, tasks, _i, _len, _results;
-		  tasks = this.getAll();
-		  _results = [];
-		  for (_i = 0, _len = tasks.length; _i < _len; _i++) {
-			task = tasks[_i];
-			_results.push(task["void"] = true);
-		  }
-		  return _results;
-		};
-
-		TasksModel.prototype.removeVoid = function() {
-		  var id, task, taskIDs, tasks, _i, _j, _len, _len1, _results;
-		  tasks = this.getAll();
-		  taskIDs = [];
-		  for (_i = 0, _len = tasks.length; _i < _len; _i++) {
-			task = tasks[_i];
-			if (task["void"]) {
-			  taskIDs.push(task.id);
-			}
-		  }
-		  _results = [];
-		  for (_j = 0, _len1 = taskIDs.length; _j < _len1; _j++) {
-			id = taskIDs[_j];
-			_results.push(this.removeById(id));
-		  }
-		  return _results;
 		};
 
 		TasksModel.prototype.removeByList = function(listID) {
@@ -343,27 +289,6 @@
 		  return false;
 		};
 
-		// TasksModel.prototype.getAncestor = function(taskID, ret) {
-		//   var ancestors, parentID, task, tasks;
-		//   tasks = [];
-		//   task = this.getByUri(taskID);
-		//   if (task) {
-		// 	if (this.objectExists(task, ret)) {
-		// 	  return tasks;
-		// 	}
-		// 	tasks.push(task);
-		// 	if (this.hasNoParent(task)) {
-		// 	  return tasks;
-		// 	}
-		// 	parentID = this.getIdByUid(task.related);
-		// 	ancestors = this.getAncestor(parentID, ret);
-		// 	if (ancestors) {
-		// 	  tasks = tasks.concat(ancestors);
-		// 	}
-		//   }
-		//   return tasks;
-		// };
-
 		TasksModel.prototype.filterTasksByString = function(task, filter) {
 		  var category, comment, key, keys, value, _i, _j, _len, _len1, _ref, _ref1;
 		  keys = ['name', 'note', 'location', 'categories', 'comments'];
@@ -395,37 +320,12 @@
 		  return false;
 		};
 
-		// TasksModel.prototype.hideSubtasks = function(taskID) {
-		//   return this.getById(taskID).hidesubtasks;
-		// };
-
-		// TasksModel.prototype.setHideSubtasks = function(taskID, hide) {
-		//   return this.update({
-		// 	id: taskID,
-		// 	hidesubtasks: hide
-		//   });
-		// };
-
-		// TasksModel.prototype.setDueDate = function(taskID, date) {
-		//   return this.update({
-		// 	id: taskID,
-		// 	due: date
-		//   });
-		// };
-
 		TasksModel.prototype.setReminder = function(taskID, reminder) {
 		  return this.update({
 			id: taskID,
 			reminder: reminder
 		  });
 		};
-
-		// TasksModel.prototype.setStartDate = function(taskID, date) {
-		//   return this.update({
-		// 	id: taskID,
-		// 	start: date
-		//   });
-		// };
 
 		TasksModel.prototype.overdue = function(due) {
 		  return moment(due, "YYYYMMDDTHHmmss").isValid() && moment(due, "YYYYMMDDTHHmmss").diff(moment()) < 0;
@@ -447,27 +347,13 @@
 		  return !moment(start, "YYYYMMDDTHHmmss").isValid() || moment(start, "YYYYMMDDTHHmmss").diff(moment(), 'days', true) < 0 || moment(due, "YYYYMMDDTHHmmss").diff(moment(), 'days', true) < 0;
 		};
 
-		// TasksModel.prototype.changeParent = function(taskID, related) {
-		//   return this.update({
-		// 	id: taskID,
-		// 	related: related
-		//   });
-		// };
-
-		// TasksModel.prototype.setNote = function(taskID, note) {
-		//   return this.update({
-		// 	id: taskID,
-		// 	note: note
-		//   });
-		// };
-
 		TasksModel.prototype.addComment = function(comment) {
 		  var task;
 		  task = this.getById(comment.taskID);
 		  if (task.comments) {
-			return task.comments.push(comment);
+			task.comments.push(comment);
 		  } else {
-			return task.comments = [comment];
+			task.comments = [comment];
 		  }
 		};
 

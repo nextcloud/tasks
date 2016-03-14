@@ -20,6 +20,7 @@
  */
 
 (function() {
+	'use strict';
   var __hasProp = {}.hasOwnProperty,
 	__extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -39,7 +40,7 @@
 
 		ListsModel.prototype.add = function(calendar, clearCache) {
 		  var updateByUri;
-		  if (clearCache == null) {
+		  if (clearCache === null) {
 			clearCache = true;
 		  }
 		  updateByUri = angular.isDefined(calendar.uri) && angular.isDefined(this.getByUri(calendar.uri));
@@ -50,11 +51,9 @@
 			  if (clearCache) {
 				this._invalidateCache();
 			  }
-			  if (angular.isDefined(this._dataMap[calendar.uri])) {
-
-			  } else {
+			  if (!angular.isDefined(this._dataMap[calendar.uri])) {
 				this._data.push(calendar);
-				return this._dataMap[calendar.uri] = calendar;
+				this._dataMap[calendar.uri] = calendar;
 			  }
 			}
 		  }
@@ -66,7 +65,7 @@
 
 		ListsModel.prototype.update = function(list, clearCache) {
 		  var tmplist;
-		  if (clearCache == null) {
+		  if (clearCache === null) {
 			clearCache = true;
 		  }
 		  tmplist = this._tmpIdCache[list.tmpID];
@@ -80,7 +79,7 @@
 
 		ListsModel.prototype["delete"] = function(calendar, clearCache) {
 		  var counter, data, entry, _i, _len, _ref;
-		  if (clearCache == null) {
+		  if (clearCache === null) {
 			clearCache = true;
 		  }
 		  _ref = this._data;
@@ -121,7 +120,7 @@
 
 		ListsModel.prototype.getCount = function(calendarID, collectionID, filter) {
 		  var count, task, tasks, _i, _len;
-		  if (filter == null) {
+		  if (filter === null) {
 			filter = '';
 		  }
 		  count = 0;
@@ -130,9 +129,9 @@
 			task = tasks[_i];
 			count += this._$tasksmodel.filterTasks(task, collectionID) && task.calendaruri === calendarID && !task.related;
 		  }
-		  if (collectionID === 'completed' && filter === '') {
+		 //  if (collectionID === 'completed' && filter === '') {
 			// count += this.notLoaded(calendarID);
-		  }
+		 //  }
 		  return count;
 		};
 

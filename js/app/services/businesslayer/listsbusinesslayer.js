@@ -21,6 +21,7 @@
 
 angular.module('Tasks').factory('ListsBusinessLayer', [
 	'ListsModel', 'Persistence', 'TasksBusinessLayer', 'CalendarService', function(ListsModel, Persistence, TasksBusinessLayer, CalendarService) {
+		'use strict';
 		var ListsBusinessLayer;
 		ListsBusinessLayer = (function() {
 			function ListsBusinessLayer(_$listsmodel, _persistence, _$tasksbusinesslayer, _$calendarservice) {

@@ -19,127 +19,129 @@
  *
  */
 
-(function() {
-  angular.module('Tasks').factory('Request', [
+angular.module('Tasks').factory('Request', [
 	'$http', 'Publisher', function($http, Publisher) {
-	  var Request;
-	  Request = (function() {
-		function Request($http, publisher) {
-		  this.$http = $http;
-		  this.publisher = publisher;
-		  this.count = 0;
-		  this.initialized = false;
-		  this.shelvedRequests = [];
-		  this.initialized = true;
-		  this._executeShelvedRequests();
-		}
+		'use strict';
+		var Request = (function() {
+			function Request($http, publisher) {
+				this.$http = $http;
+				this.publisher = publisher;
+				this.count = 0;
+				this.initialized = false;
+				this.shelvedRequests = [];
+				this.initialized = true;
+				this._executeShelvedRequests();
+			}
 
-		Request.prototype.request = function(route, data) {
-		  var defaultConfig, defaultData, url;
-		  if (data === null) {
-			data = {};
-		  }
-		  defaultData = {
-			routeParams: {},
-			data: {},
-			onSuccess: function() {
-			  return {};
-			},
-			onFailure: function() {
-			  return {};
-			},
-			config: {}
-		  };
-		  angular.extend(defaultData, data);
-		  if (!this.initialized) {
-			this._shelveRequest(route, defaultData);
-			return;
-		  }
-		  url = OC.generateUrl(route, defaultData.routeParams);
-		  defaultConfig = {
-			url: url,
-			data: defaultData.data
-		  };
-		  angular.extend(defaultConfig, defaultData.config);
-		  if (defaultConfig.method === 'GET') {
-			defaultConfig.params = defaultConfig.data;
-		  }
-		  return this.$http(defaultConfig).success((function(_this) {
-			return function(data, status, headers, config) {
-			  var name, ref, value;
-			  ref = data.data;
-			  for (name in ref) {
-				value = ref[name];
-				_this.publisher.publishDataTo(value, name);
-			  }
-			  return defaultData.onSuccess(data, status, headers, config);
+			Request.prototype.request = function(route, data) {
+				var defaultConfig, defaultData, url;
+				if (data === null) {
+					data = {};
+				}
+				defaultData = {
+					routeParams: {},
+					data: {},
+					onSuccess: function() {
+						return {};
+					},
+					onFailure: function() {
+						return {};
+					},
+					config: {}
+				};
+				angular.extend(defaultData, data);
+				if (!this.initialized) {
+					this._shelveRequest(route, defaultData);
+					return;
+				}
+				url = OC.generateUrl(route, defaultData.routeParams);
+				defaultConfig = {
+					url: url,
+					data: defaultData.data
+				};
+				angular.extend(defaultConfig, defaultData.config);
+				if (defaultConfig.method === 'GET') {
+					defaultConfig.params = defaultConfig.data;
+				}
+				return this.$http(defaultConfig).success((function(_this) {
+					return function(data, status, headers, config) {
+						var name, ref, value;
+						ref = data.data;
+						for (name in ref) {
+							value = ref[name];
+							_this.publisher.publishDataTo(value, name);
+						}
+						return defaultData.onSuccess(data, status, headers, config);
+					};
+				})(this)).error(function(data, status, headers, config) {
+					return defaultData.onFailure(data, status, headers, config);
+				});
 			};
-		  })(this)).error(function(data, status, headers, config) {
-			return defaultData.onFailure(data, status, headers, config);
-		  });
-		};
 
-		Request.prototype.post = function(route, data) {
-		  if (data === null) {
-			data = {};
-		  }
-		  data.config || (data.config = {});
-		  data.config.method = 'POST';
-		  return this.request(route, data);
-		};
+			Request.prototype.post = function(route, data) {
+				if (data === null) {
+					data = {};
+				}
+				if (!data.config) {
+					data.config = {};
+				}
+				data.config.method = 'POST';
+				return this.request(route, data);
+			};
 
-		Request.prototype.get = function(route, data) {
-		  if (data === null) {
-			data = {};
-		  }
-		  data.config || (data.config = {});
-		  data.config.method = 'GET';
-		  return this.request(route, data);
-		};
+			Request.prototype.get = function(route, data) {
+				if (data === null) {
+					data = {};
+				}
+				if (!data.config) {
+					data.config = {};
+				}
+				data.config.method = 'GET';
+				return this.request(route, data);
+			};
 
-		Request.prototype.put = function(route, data) {
-		  if (data === null) {
-			data = {};
-		  }
-		  data.config || (data.config = {});
-		  data.config.method = 'PUT';
-		  return this.request(route, data);
-		};
+			Request.prototype.put = function(route, data) {
+				if (data === null) {
+					data = {};
+				}
+				if (!data.config) {
+					data.config = {};
+				}
+				data.config.method = 'PUT';
+				return this.request(route, data);
+			};
 
-		Request.prototype["delete"] = function(route, data) {
-		  if (data === null) {
-			data = {};
-		  }
-		  data.config || (data.config = {});
-		  data.config.method = 'DELETE';
-		  return this.request(route, data);
-		};
+			Request.prototype["delete"] = function(route, data) {
+				if (data === null) {
+					data = {};
+				}
+				if (!data.config) {
+					data.config = {};
+				}
+				data.config.method = 'DELETE';
+				return this.request(route, data);
+			};
 
-		Request.prototype._shelveRequest = function(route, data) {
-		  var request;
-		  request = {
-			route: route,
-			data: data
-		  };
-		  return this.shelvedRequests.push(request);
-		};
+			Request.prototype._shelveRequest = function(route, data) {
+				var request = {
+					route: route,
+					data: data
+				};
+				return this.shelvedRequests.push(request);
+			};
 
-		Request.prototype._executeShelvedRequests = function() {
-		  var r, ref, results, _i, _len;
-		  ref = this.shelvedRequests;
-		  results = [];
-		  for (_i = 0, _len = ref.length; _i < _len; _i++) {
-			r = ref[_i];
-			results.push(this.request(r.route, r.data));
-		  }
-		  return results;
-		};
-
-		return Request;
-
-	  })();
-	  return new Request($http, Publisher);
+			Request.prototype._executeShelvedRequests = function() {
+				var r, ref, results, _i, _len;
+				ref = this.shelvedRequests;
+				results = [];
+				for (_i = 0, _len = ref.length; _i < _len; _i++) {
+					r = ref[_i];
+					results.push(this.request(r.route, r.data));
+				}
+				return results;
+			};
+			return Request;
+		})();
+	return new Request($http, Publisher);
 	}
-  ]);
-
-}).call(this);
+]);

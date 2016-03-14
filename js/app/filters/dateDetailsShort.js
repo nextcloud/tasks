@@ -20,6 +20,7 @@
  */
 
 angular.module('Tasks').filter('dateDetailsShort', function() {
+	'use strict';
 	return function(reminder) {
 		if (moment(reminder, "YYYYMMDDTHHmmss").isValid()) {
 			return moment(reminder, "YYYYMMDDTHHmmss").locale('details_short').calendar();

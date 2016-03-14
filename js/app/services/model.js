@@ -20,6 +20,7 @@
  */
 
 (function() {
+	'use strict';
   angular.module('Tasks').factory('_Model', [
 	function() {
 	  var Model;
@@ -41,7 +42,7 @@
 		};
 
 		Model.prototype.add = function(data, clearCache) {
-		  if (clearCache == null) {
+		  if (clearCache === null) {
 			clearCache = true;
 		  }
 		  if (clearCache) {
@@ -51,13 +52,13 @@
 			return this.update(data, clearCache);
 		  } else {
 			this._data.push(data);
-			return this._dataMap[data.id] = data;
+			this._dataMap[data.id] = data;
 		  }
 		};
 
 		Model.prototype.update = function(data, clearCache) {
 		  var entry, key, value, _results;
-		  if (clearCache == null) {
+		  if (clearCache === null) {
 			clearCache = true;
 		  }
 		  if (clearCache) {
@@ -86,7 +87,7 @@
 
 		Model.prototype.removeById = function(id, clearCache) {
 		  var counter, data, entry, _i, _len, _ref;
-		  if (clearCache == null) {
+		  if (clearCache === null) {
 			clearCache = true;
 		  }
 		  _ref = this._data;
@@ -111,7 +112,7 @@
 		};
 
 		Model.prototype._invalidateCache = function() {
-		  return this._filterCache = {};
+		  this._filterCache = {};
 		};
 
 		Model.prototype.get = function(query) {

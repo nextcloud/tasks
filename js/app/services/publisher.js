@@ -19,41 +19,38 @@
  *
  */
 
-(function() {
-  angular.module('Tasks').factory('Publisher', [
+angular.module('Tasks').factory('Publisher', [
 	'CollectionsModel', 'SettingsModel', function(CollectionsModel, SettingsModel) {
-	  var Publisher;
-	  Publisher = (function() {
-		function Publisher(_$collectionsmodel, _$settingsmodel) {
-		  this._$collectionsmodel = _$collectionsmodel;
-		  this._$settingsmodel = _$settingsmodel;
-		  this._subscriptions = {};
-		  this.subscribeObjectTo(this._$collectionsmodel, 'collections');
-		  this.subscribeObjectTo(this._$settingsmodel, 'settings');
-		}
+		'use strict';
+		var Publisher = (function() {
+			function Publisher(_$collectionsmodel, _$settingsmodel) {
+				this._$collectionsmodel = _$collectionsmodel;
+				this._$settingsmodel = _$settingsmodel;
+				this._subscriptions = {};
+				this.subscribeObjectTo(this._$collectionsmodel, 'collections');
+				this.subscribeObjectTo(this._$settingsmodel, 'settings');
+			}
 
-		Publisher.prototype.subscribeObjectTo = function(object, name) {
-		  var base;
-		  (base = this._subscriptions)[name] || (base[name] = []);
-		  return this._subscriptions[name].push(object);
-		};
+			Publisher.prototype.subscribeObjectTo = function(object, name) {
+				var base = this._subscriptions;
+				if (!base[name]) {
+					base[name] = [];
+				}
+				return this._subscriptions[name].push(object);
+			};
 
-		Publisher.prototype.publishDataTo = function(data, name) {
-		  var ref, results, subscriber, _i, _len;
-		  ref = this._subscriptions[name] || [];
-		  results = [];
-		  for (_i = 0, _len = ref.length; _i < _len; _i++) {
-			subscriber = ref[_i];
-			results.push(subscriber.handle(data));
-		  }
-		  return results;
-		};
-
-		return Publisher;
-
-	  })();
-	  return new Publisher(CollectionsModel, SettingsModel);
+			Publisher.prototype.publishDataTo = function(data, name) {
+				var ref, results, subscriber, _i, _len;
+				ref = this._subscriptions[name] || [];
+				results = [];
+				for (_i = 0, _len = ref.length; _i < _len; _i++) {
+					subscriber = ref[_i];
+					results.push(subscriber.handle(data));
+				}
+				return results;
+			};
+			return Publisher;
+		})();
+		return new Publisher(CollectionsModel, SettingsModel);
 	}
-  ]);
-
-}).call(this);
+]);

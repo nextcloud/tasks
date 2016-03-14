@@ -19,8 +19,8 @@
  *
  */
 
-(function() {
-  angular.module('Tasks').directive('datepicker', function() {
+angular.module('Tasks').directive('datepicker', function() {
+	'use strict';
 	return {
 	  restrict: 'A',
 	  scope: false,
@@ -53,6 +53,4 @@
 		});
 	  }
 	};
-  });
-
-}).call(this);
+});

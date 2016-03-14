@@ -19,9 +19,9 @@
  *
  */
 
-(function() {
-  angular.module('Tasks').controller('SettingsController', [
+angular.module('Tasks').controller('SettingsController', [
     '$scope', '$window', 'Status', '$location', 'CollectionsModel', 'SettingsBusinessLayer', 'SettingsModel', function($scope, $window, Status, $location, CollectionsModel, SettingsBusinessLayer, SettingsModel) {
+      'use strict';
       var SettingsController;
       SettingsController = (function() {
         function SettingsController(_$scope, _$window, _$status, _$location, _$collectionsmodel, _$settingsbusinesslayer, _$settingsmodel) {
@@ -88,5 +88,3 @@
       return new SettingsController($scope, $window, Status, $location, CollectionsModel, SettingsBusinessLayer, SettingsModel);
     }
   ]);
-
-}).call(this);

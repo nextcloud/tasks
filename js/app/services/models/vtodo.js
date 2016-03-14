@@ -215,7 +215,7 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		get comments() {
 			return null;
 		},
-	}
+	};
 
 	VTodo.create = function(task) {
 		var comp = icalfactory.new();

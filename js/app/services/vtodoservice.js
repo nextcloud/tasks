@@ -142,7 +142,7 @@ angular.module('Tasks').service('VTodoService', ['DavClient', 'RandomStringServi
 			'If-Match': task.etag,
 			'requesttoken': OC.requestToken
 		};
-		$timeout.cancel(task.timers['update']);
+		$timeout.cancel(task.timers.update);
 		return DavClient.request('PUT', url, headers, task.data).then(function(response) {
 			task.etag = response.xhr.getResponseHeader('ETag');
 			return DavClient.wasRequestSuccessful(response.status);

@@ -20,11 +20,12 @@
  */
 
 angular.module('Tasks').filter('counterFormatter', function() {
+	'use strict';
 	return function(count) {
 		switch (false) {
 			case count !== 0:
 				return '';
-			case !(count > 999):
+			case count < 999:
 				return '999+';
 			default:
 				return count;

@@ -20,6 +20,7 @@
  */
 
 angular.module('Tasks').directive('avatar', function() {
+	'use strict';
 	return {
 		restrict: 'A',
 		scope: false,

@@ -19,36 +19,33 @@
  *
  */
 
-(function() {
   angular.module('Tasks').factory('Loading', [
 	function() {
-	  var Loading;
-	  Loading = (function() {
-		function Loading() {
-		  this.count = 0;
-		}
+		'use strict';
+		var Loading = (function() {
+			function Loading() {
+				this.count = 0;
+			}
 
-		Loading.prototype.increase = function() {
-		  return this.count += 1;
-		};
+			Loading.prototype.increase = function() {
+				return this.count += 1;
+			};
 
-		Loading.prototype.decrease = function() {
-		  return this.count -= 1;
-		};
+			Loading.prototype.decrease = function() {
+				return this.count -= 1;
+			};
 
-		Loading.prototype.getCount = function() {
-		  return this.count;
-		};
+			Loading.prototype.getCount = function() {
+				return this.count;
+			};
 
-		Loading.prototype.isLoading = function() {
-		  return this.count > 0;
-		};
+			Loading.prototype.isLoading = function() {
+				return this.count > 0;
+			};
 
-		return Loading;
+			return Loading;
 
-	  })();
-	  return new Loading();
+		})();
+		return new Loading();
 	}
-  ]);
-
-}).call(this);
+]);

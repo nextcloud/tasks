@@ -20,6 +20,7 @@
  */
 
 (function() {
+	'use strict';
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   angular.module('Tasks').factory('SearchBusinessLayer', [
@@ -52,7 +53,7 @@
 		};
 
 		SearchBusinessLayer.prototype.setFilter = function(query) {
-		  return this._$searchString = query;
+			this._$searchString = query;
 		};
 
 		SearchBusinessLayer.prototype.getFilter = function() {

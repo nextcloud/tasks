@@ -20,6 +20,7 @@
  */
 
 angular.module('Tasks').filter('day', function() {
+	'use strict';
 	return function(i) {
 		return moment().add('days', i).locale('list_week').calendar();
 	};

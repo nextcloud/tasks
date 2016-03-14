@@ -21,6 +21,7 @@
 
 
 angular.module('Tasks').filter('priorityDetails', function() {
+	'use strict';
 	return function(priority) {
 		var string;
 		string = t('tasks', 'priority %s: ').replace('%s', priority);

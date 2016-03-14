@@ -19,8 +19,8 @@
  *
  */
 
-(function() {
-  angular.module('Tasks').directive('timepicker', function() {
+angular.module('Tasks').directive('timepicker', function() {
+	'use strict';
 	return {
 	  restrict: 'A',
 	  link: function(scope, elm, attr) {
@@ -36,6 +36,4 @@
 		});
 	  }
 	};
-  });
-
-}).call(this);
+});

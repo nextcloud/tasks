@@ -24,6 +24,7 @@ angular.module('Tasks').controller('ListController', [
 	'SearchBusinessLayer', 'CalendarService', 'TasksModel',
 	function($scope, $window, $routeParams, ListsModel, TasksBusinessLayer, CollectionsModel, ListsBusinessLayer, $location,
 		SearchBusinessLayer, CalendarService, TasksModel) {
+		'use strict';
 	  var ListController;
 	  ListController = (function() {
 		function ListController(_$scope, _$window, _$routeParams, _$listsmodel, _$tasksbusinesslayer, _$collectionsmodel, _$listsbusinesslayer, $location,
@@ -57,13 +58,13 @@ angular.module('Tasks').controller('ListController', [
 			};
 
 			this._$scope.startCreate = function() {
-				return _$scope.status.addingList = true;
+				_$scope.status.addingList = true;
 			};
 
 			this._$scope.cancelCreate = function(event) {
 				if (event.keyCode === 27) {
 					_$scope.status.addingList = false;
-					return _$scope.status.newListName = "";
+					_$scope.status.newListName = "";
 				}
 			};
 
@@ -76,12 +77,12 @@ angular.module('Tasks').controller('ListController', [
 							$location.path('/calendars/' + calendar.uri);
 							return $scope.$apply();
 						});
-						return _$scope.status.newListName = '';
+						_$scope.status.newListName = '';
 					} else {
-						return alert(t('tasks', 'The name "%s" is already used.').replace('%s', _$scope.status.newListName));
+						alert(t('tasks', 'The name "%s" is already used.').replace('%s', _$scope.status.newListName));
 				 	}
 				} else {
-					return alert(t('tasks', 'An empty name is not allowed.'));
+					alert(t('tasks', 'An empty name is not allowed.'));
 				}
 			};
 

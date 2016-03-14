@@ -22,6 +22,7 @@
 angular.module('Tasks').factory('TasksBusinessLayer', [
 	'TasksModel', 'Persistence', 'VTodoService', 'VTodo', '$timeout',
 	function(TasksModel, Persistence, VTodoService, VTodo, $timeout) {
+		'use strict';
 		var TasksBusinessLayer;
 		TasksBusinessLayer = (function() {
 			function TasksBusinessLayer(_$tasksmodel, _persistence, _$vtodoservice, _$vtodo, $timeout) {
@@ -36,7 +37,7 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 					_results = [];
 					for (_i = 0, _len = tasks.length; _i < _len; _i++) {
 						task = tasks[_i];
-						var vTodo = new VTodo(task.calendar, task.properties, task.uri)
+						var vTodo = new VTodo(task.calendar, task.properties, task.uri);
 						_results.push(TasksModel.ad(vTodo));
 					}
 					return _results;
@@ -77,10 +78,10 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				if (!duration) {
 					duration = 1000;
 				}
-				if (task.timers['update']) {
-					$timeout.cancel(task.timers['update']);
+				if (task.timers.update) {
+					$timeout.cancel(task.timers.update);
 				}
-				task.timers['update'] = $timeout(function(task) {
+				task.timers.update = $timeout(function(task) {
 					VTodoService.update(task);
 				}, duration, true, task);
 			};
@@ -134,7 +135,7 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 			};
 
 			TasksBusinessLayer.prototype.setDue = function(task, date, type) {
-				if (type == null) {
+				if (type === null) {
 					type = 'day';
 				}
 				var due = moment(task.due, "YYYY-MM-DDTHH:mm:ss");
@@ -177,7 +178,7 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 			};
 
 			TasksBusinessLayer.prototype.setStart = function(task, date, type) {
-				if (type == null) {
+				if (type === null) {
 					type = 'day';
 				}
 				var start = moment(task.start, "YYYY-MM-DDTHH:mm:ss");
@@ -210,204 +211,204 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				this.doUpdate(task);
 			};
 
-		TasksBusinessLayer.prototype.initReminder = function(taskID) {
-		  var p, task;
-		  if (!this.checkReminderDate(taskID)) {
-			task = this._$tasksmodel.getById(taskID);
-			task.reminder = {
-			  type: 'DURATION',
-			  action: 'DISPLAY',
-			  duration: {
-				token: 'week',
-				week: 0,
-				day: 0,
-				hour: 0,
-				minute: 0,
-				second: 0,
-				params: {
-				  invert: true
+			TasksBusinessLayer.prototype.initReminder = function(taskID) {
+				var p, task;
+				if (!this.checkReminderDate(taskID)) {
+					task = this._$tasksmodel.getById(taskID);
+					task.reminder = {
+						type: 'DURATION',
+						action: 'DISPLAY',
+						duration: {
+							token: 'week',
+							week: 0,
+							day: 0,
+							hour: 0,
+							minute: 0,
+							second: 0,
+							params: {
+							  invert: true
+						}
+					}
+				};
+				if (moment(task.start, "YYYYMMDDTHHmmss").isValid()) {
+					p = task.reminder.duration.params;
+					p.related = 'START';
+					p.id = '10';
+				} else if (moment(task.due, "YYYYMMDDTHHmmss").isValid()) {
+					p = task.reminder.duration.params;
+					p.related = 'END';
+					p.id = '11';
+				} else {
+					task.reminder.type = 'DATE-TIME';
+					task.reminder.date = moment().startOf('hour').add(1, 'h').format('YYYYMMDDTHHmmss');
 				}
-			  }
+				return this.setReminder(taskID);
+				}
 			};
-			if (moment(task.start, "YYYYMMDDTHHmmss").isValid()) {
-			  p = task.reminder.duration.params;
-			  p.related = 'START';
-			  p.id = '10';
-			} else if (moment(task.due, "YYYYMMDDTHHmmss").isValid()) {
-			  p = task.reminder.duration.params;
-			  p.related = 'END';
-			  p.id = '11';
-			} else {
-			  task.reminder.type = 'DATE-TIME';
-			  task.reminder.date = moment().startOf('hour').add(1, 'h').format('YYYYMMDDTHHmmss');
-			}
-			return this.setReminder(taskID);
-		  }
-		};
 
-		TasksBusinessLayer.prototype.setReminderDate = function(taskID, date, type) {
-		  var newreminder, reminder, reminderdate;
-		  if (type == null) {
-			type = 'day';
-		  }
-		  reminder = this._$tasksmodel.getById(taskID).reminder;
-		  newreminder = {
-			type: 'DATE-TIME',
-			action: 'DISPLAY',
-			duration: null
-		  };
-		  if (type === 'day') {
-			if (this.checkReminderDate(taskID) || reminder === null) {
-			  reminderdate = moment(reminder.date, "YYYYMMDDTHHmmss");
-			  newreminder.action = reminder.action;
-			  if (reminderdate.isValid() && reminder.type === 'DATE-TIME') {
-				reminderdate.year(date.year()).month(date.month()).date(date.date());
-			  } else {
-				reminderdate = date.add(12, 'h');
-			  }
-			} else {
-			  reminderdate = date.add(12, 'h');
-			}
-		  } else if (type === 'time') {
-			if (this.checkReminderDate(taskID) || reminder === null) {
-			  reminderdate = moment(reminder.date, "YYYYMMDDTHHmmss");
-			  newreminder.action = reminder.action;
-			  if (reminderdate.isValid() && reminder.type === 'DATE-TIME') {
-				reminderdate.hour(date.hour()).minute(date.minute());
-			  } else {
-				reminderdate = date;
-			  }
-			} else {
-			  reminderdate = date;
-			}
-		  } else {
-			return;
-		  }
-		  newreminder.date = reminderdate.format('YYYYMMDDTHHmmss');
-		  this._$tasksmodel.setReminder(taskID, newreminder);
-		  return this._persistence.setReminder(taskID, newreminder);
-		};
-
-		TasksBusinessLayer.prototype.setReminder = function(taskID) {
-		  var reminder;
-		  if (this.checkReminderDate(taskID)) {
-			reminder = this._$tasksmodel.getById(taskID).reminder;
-			return this._persistence.setReminder(taskID, reminder);
-		  }
-		};
-
-		TasksBusinessLayer.prototype.checkReminderDate = function(taskID) {
-		  var d, date, duration, rel, related, reminder, seg, task, token;
-		  task = this._$tasksmodel.getById(taskID);
-		  reminder = task.reminder;
-		  if (reminder !== null && reminder.type === 'DURATION') {
-			if (!reminder.duration) {
-			  return false;
-			} else if (reminder.duration.params.related === 'START') {
-			  token = 'start';
-			} else if (reminder.duration.params.related === 'END') {
-			  token = 'due';
-			} else {
-			  return false;
-			}
-			date = moment(task[token], "YYYYMMDDTHHmmss");
-			duration = reminder.duration;
-			d = {
-			  w: duration.week,
-			  d: duration.day,
-			  h: duration.hour,
-			  m: duration.minute,
-			  s: duration.second
+			TasksBusinessLayer.prototype.setReminderDate = function(taskID, date, type) {
+				var newreminder, reminder, reminderdate;
+				if (type === null) {
+					type = 'day';
+				}
+				reminder = this._$tasksmodel.getById(taskID).reminder;
+				newreminder = {
+					type: 'DATE-TIME',
+					action: 'DISPLAY',
+					duration: null
+				};
+				if (type === 'day') {
+					if (this.checkReminderDate(taskID) || reminder === null) {
+						reminderdate = moment(reminder.date, "YYYYMMDDTHHmmss");
+						newreminder.action = reminder.action;
+						if (reminderdate.isValid() && reminder.type === 'DATE-TIME') {
+							reminderdate.year(date.year()).month(date.month()).date(date.date());
+						} else {
+							reminderdate = date.add(12, 'h');
+						}
+					} else {
+						reminderdate = date.add(12, 'h');
+					}
+				} else if (type === 'time') {
+					if (this.checkReminderDate(taskID) || reminder === null) {
+						reminderdate = moment(reminder.date, "YYYYMMDDTHHmmss");
+						newreminder.action = reminder.action;
+						if (reminderdate.isValid() && reminder.type === 'DATE-TIME') {
+							reminderdate.hour(date.hour()).minute(date.minute());
+						} else {
+							reminderdate = date;
+						}
+					} else {
+						reminderdate = date;
+					}
+				} else {
+					return;
+				}
+				newreminder.date = reminderdate.format('YYYYMMDDTHHmmss');
+				this._$tasksmodel.setReminder(taskID, newreminder);
+				return this._persistence.setReminder(taskID, newreminder);
 			};
-			if (duration.params.invert) {
-			  date = date.subtract(d);
-			} else {
-			  date = date.add(d);
-			}
-			task.reminder.date = date.format('YYYYMMDDTHHmmss');
-		  } else if (reminder !== null && reminder.type === 'DATE-TIME') {
-			duration = reminder.duration;
-			date = moment(reminder.date, "YYYYMMDDTHHmmss");
-			if (!date.isValid()) {
-			  return false;
-			}
-			if (duration) {
-			  if (duration.params.related === 'START') {
-				related = moment(task.start, "YYYYMMDDTHHmmss");
-			  } else {
-				related = moment(task.due, "YYYYMMDDTHHmmss");
-			  }
-			  seg = this.secondsToSegments(date.diff(related, 'seconds'));
-			  duration.params.invert = seg.invert;
-			  duration.token = 'week';
-			  duration.week = seg.week;
-			  duration.day = seg.day;
-			  duration.hour = seg.hour;
-			  duration.minute = seg.minute;
-			  duration.second = seg.second;
-			} else {
-			  if (task.start) {
-				related = moment(task.start, "YYYYMMDDTHHmmss");
-				rel = 'START';
-				d = 0;
-			  } else if (task.due) {
-				related = moment(task.due, "YYYYMMDDTHHmmss");
-				rel = 'END';
-				d = 1;
-			  } else {
+
+			TasksBusinessLayer.prototype.setReminder = function(taskID) {
+				var reminder;
+				if (this.checkReminderDate(taskID)) {
+					reminder = this._$tasksmodel.getById(taskID).reminder;
+					return this._persistence.setReminder(taskID, reminder);
+				}
+			};
+
+			TasksBusinessLayer.prototype.checkReminderDate = function(taskID) {
+				var d, date, duration, rel, related, reminder, seg, task, token;
+				task = this._$tasksmodel.getById(taskID);
+				reminder = task.reminder;
+				if (reminder !== null && reminder.type === 'DURATION') {
+					if (!reminder.duration) {
+						return false;
+					} else if (reminder.duration.params.related === 'START') {
+						token = 'start';
+					} else if (reminder.duration.params.related === 'END') {
+						token = 'due';
+					} else {
+						return false;
+					}
+					date = moment(task[token], "YYYYMMDDTHHmmss");
+					duration = reminder.duration;
+					d = {
+						w: duration.week,
+						d: duration.day,
+						h: duration.hour,
+						m: duration.minute,
+						s: duration.second
+					};
+					if (duration.params.invert) {
+						date = date.subtract(d);
+					} else {
+						date = date.add(d);
+					}
+					task.reminder.date = date.format('YYYYMMDDTHHmmss');
+				} else if (reminder !== null && reminder.type === 'DATE-TIME') {
+					duration = reminder.duration;
+					date = moment(reminder.date, "YYYYMMDDTHHmmss");
+					if (!date.isValid()) {
+						return false;
+					}
+					if (duration) {
+						if (duration.params.related === 'START') {
+							related = moment(task.start, "YYYYMMDDTHHmmss");
+						} else {
+							related = moment(task.due, "YYYYMMDDTHHmmss");
+						}
+						seg = this.secondsToSegments(date.diff(related, 'seconds'));
+						duration.params.invert = seg.invert;
+						duration.token = 'week';
+						duration.week = seg.week;
+						duration.day = seg.day;
+						duration.hour = seg.hour;
+						duration.minute = seg.minute;
+						duration.second = seg.second;
+					} else {
+						if (task.start) {
+							related = moment(task.start, "YYYYMMDDTHHmmss");
+							rel = 'START';
+							d = 0;
+						} else if (task.due) {
+							related = moment(task.due, "YYYYMMDDTHHmmss");
+							rel = 'END';
+							d = 1;
+						} else {
+							return true;
+						}
+						seg = this.secondsToSegments(date.diff(related, 'seconds'));
+						reminder.duration = {
+							token: 'week',
+							params: {
+								related: rel,
+								invert: seg.invert,
+								id: +seg.invert + '' + d
+							},
+							week: seg.week,
+							day: seg.day,
+							hour: seg.hour,
+							minute: seg.minute,
+							second: seg.second
+						};
+					}
+				} else {
+					return false;
+				}
 				return true;
-			  }
-			  seg = this.secondsToSegments(date.diff(related, 'seconds'));
-			  reminder.duration = {
-				token: 'week',
-				params: {
-				  related: rel,
-				  invert: seg.invert,
-				  id: +seg.invert + '' + d
-				},
-				week: seg.week,
-				day: seg.day,
-				hour: seg.hour,
-				minute: seg.minute,
-				second: seg.second
-			  };
-			}
-		  } else {
-			return false;
-		  }
-		  return true;
-		};
+			};
 
-		TasksBusinessLayer.prototype.secondsToSegments = function(s) {
-		  var d, h, i, m, w;
-		  if (s < 0) {
-			s *= -1;
-			i = true;
-		  } else {
-			i = false;
-		  }
-		  w = Math.floor(s / 604800);
-		  s -= w * 604800;
-		  d = Math.floor(s / 86400);
-		  s -= d * 86400;
-		  h = Math.floor(s / 3600);
-		  s -= h * 3600;
-		  m = Math.floor(s / 60);
-		  s -= m * 60;
-		  return {
-			week: w,
-			day: d,
-			hour: h,
-			minute: m,
-			second: s,
-			invert: i
-		  };
-		};
+			TasksBusinessLayer.prototype.secondsToSegments = function(s) {
+				var d, h, i, m, w;
+				if (s < 0) {
+					s *= -1;
+					i = true;
+				} else {
+					i = false;
+				}
+				w = Math.floor(s / 604800);
+				s -= w * 604800;
+				d = Math.floor(s / 86400);
+				s -= d * 86400;
+				h = Math.floor(s / 3600);
+				s -= h * 3600;
+				m = Math.floor(s / 60);
+				s -= m * 60;
+				return {
+					week: w,
+					day: d,
+					hour: h,
+					minute: m,
+					second: s,
+					invert: i
+				};
+			};
 
-		TasksBusinessLayer.prototype.deleteReminderDate = function(taskID) {
-		  this._$tasksmodel.setReminder(taskID, null);
-		  return this._persistence.setReminder(taskID, false);
-		};
+			TasksBusinessLayer.prototype.deleteReminderDate = function(taskID) {
+				this._$tasksmodel.setReminder(taskID, null);
+				return this._persistence.setReminder(taskID, false);
+			};
 
 			TasksBusinessLayer.prototype.changeCalendar = function(task, newCalendar) {
 				if(task.calendar !== newCalendar) {
@@ -455,6 +456,7 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 						} else {
 							return false;
 						}
+						break;
 					case 'today':
 						return this.setDue(task, moment().startOf('day').add(12, 'h'), 'all');
 					case 'week':
@@ -493,34 +495,32 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 					requests.push(this.doUpdate(task));
 				}
 				return requests;
-			}
+			};
 
-		TasksBusinessLayer.prototype.addComment = function(comment, onSuccess, onFailure) {
-		  var success,
-			_this = this;
-		  if (onSuccess == null) {
-			onSuccess = null;
-		  }
-		  if (onFailure == null) {
-			onFailure = null;
-		  }
-		  onSuccess || (onSuccess = function() {});
-		  onFailure || (onFailure = function() {});
-		  this._$tasksmodel.addComment(comment);
-		  success = function(response) {
-			if (response.status === 'error') {
-			  return onFailure();
-			} else {
-			  return onSuccess(response.data);
-			}
-		  };
-		  return this._persistence.addComment(comment, success);
-		};
+			TasksBusinessLayer.prototype.addComment = function(comment, onSuccess, onFailure) {
+				var success,
+				_this = this;
+				if (!onSuccess) {
+					onSuccess = function() {};
+				}
+				if (!onFailure) {
+					onFailure = function() {};
+				}
+				this._$tasksmodel.addComment(comment);
+				success = function(response) {
+					if (response.status === 'error') {
+						return onFailure();
+					} else {
+						return onSuccess(response.data);
+					}
+				};
+				return this._persistence.addComment(comment, success);
+			};
 
-		TasksBusinessLayer.prototype.deleteComment = function(taskID, commentID) {
-		  this._$tasksmodel.deleteComment(taskID, commentID);
-		  return this._persistence.deleteComment(taskID, commentID);
-		};
+			TasksBusinessLayer.prototype.deleteComment = function(taskID, commentID) {
+				this._$tasksmodel.deleteComment(taskID, commentID);
+				return this._persistence.deleteComment(taskID, commentID);
+			};
 
 		return TasksBusinessLayer;
 

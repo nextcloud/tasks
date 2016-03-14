@@ -20,6 +20,7 @@
  */
 
 angular.module('Tasks').filter('percentDetails', function() {
+	'use strict';
 	return function(percent) {
 		return t('tasks', '%s %% completed').replace('%s', percent).replace('%%', '%');
 	};
