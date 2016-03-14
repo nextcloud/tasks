@@ -47,14 +47,12 @@
                     <input class="timepicker-input medium focus" type="text" key-value="" placeholder="hh:mm" value="{{ task.due | timeTaskList }}" timepicker="due">
                 </div>
             </div>
-            <div class="section detail-reminder handler" ng-class="{'date':isDue(task.reminder.date), 'editing':route.parameter=='reminder'}" ng-click="editReminder($event)">
-            <!-- oc-click-focus="{selector: 'div.detail-reminder input.datepicker-input', timeout: 0}" -->
+<!--             <div class="section detail-reminder handler" ng-class="{'date':isDue(task.reminder.date), 'editing':route.parameter=='reminder'}" ng-click="editReminder($event)">
             	<span class="icon detail-reminder" ng-class="{'overdue':isOverDue(task.reminder.date)}"></span>
                 <span class="icon detail-remindertype" ng-click="changeReminderType(task)" ng-show="task.due || task.start"></span>
                 <div class="section-title" ng-class="{'overdue':isOverDue(task.reminder.date)}">
     				<text rel="">{{ task.reminder | reminderDetails:this }}</text>
     			</div>
-                <!-- <div class="section-description" ng-hide="route.parameter=='reminder'">{{ task.reminder.date | dateDetailsShort }}</div> -->
                 <a class="detail-delete handler end-edit" ng-click="deleteReminder()">
     				<span class="icon detail-delete"></span>
     			</a>
@@ -70,7 +68,7 @@
                         <select ng-change="setReminderDuration(task)" ng-model="task.reminder.duration.params" ng-options="param as param.name for param in filterParams(params) track by param.id"></select>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="section detail-priority handler" ng-class="{'editing':route.parameter=='priority','high':task.priority>5,'medium':task.priority==5,'low':task.priority > 0 && task.priority < 5, 'date':task.priority>0}"  ng-click="editPriority($event)">
                 <span class="icon detail-priority"></span>
                 <div class="section-title">
@@ -131,7 +129,7 @@
                     </div>
                 </div>
             </div>
-            <div class="section detail-comments">
+<!--             <div class="section detail-comments">
                 <ul>
                     <li ng-repeat="comment in task.comments" class="comment-item" rel=" {{ comment.id }} ">
                         <div class="avatar" avatar userID="{{ comment.userID }}" size="32"></div>
@@ -143,13 +141,13 @@
                         <span class="time"> {{ comment.time | dateFromNow }} </span>
                     </li>
                 </ul>
-            </div>
+            </div> -->
         </div>
         <div class="footer">
-            <div class="detail-addcomment">
+<!--             <div class="detail-addcomment">
                 <input type="text" placeholder="{{ commentStrings().input }}" ng-model="CommentContent" ng-keydown="sendComment($event)">
                 <input type="button" ng-click="addComment()" name="addComment" value="{{ commentStrings().button }}" ng-class="{'active':CommentContent}">
-            </div>
+            </div> -->
         	<a class="detail-trash handler close-all" ng-click="deleteTask(task)">
             	<span class="icon detail-trash"></span>
             </a>
