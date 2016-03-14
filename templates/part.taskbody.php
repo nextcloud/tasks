@@ -20,7 +20,7 @@
         <span class="icon large task-attachment"></span>
     </a>
     <a class="duedate" ng-class="{overdue: TasksModel.overdue(task.due)}">{{ task.due | dateTaskList }}</a>
-    <a ng-show="route.calendarID=='week'" class="listname" >{{ getTaskList(task.calendaruri) }}</a>
+    <a ng-show="route.collectionID=='week'" class="listname" >{{ task.calendar.displayname }}</a>
     <div class="title-wrapper">
         <span class="title" ng-bind-html="task.summary | linky:'_blank':{rel: 'nofollow'}"></span>
         <span class="categories-list">

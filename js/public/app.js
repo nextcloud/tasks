@@ -1079,9 +1079,6 @@ angular.module('Tasks').controller('SettingsController', [
 			  return task.due;
 			}
 		  };
-		  this._$scope.getTaskList = function(listID) {
-			return _$listsmodel.getName(listID);
-		  };
 
 		  	this._$scope.dropAsSubtask = function($event, item, index) {
 				var parentID = $('li.dndPlaceholder').closest('.task-item').attr('taskID');
