@@ -20,7 +20,7 @@
         <span class="icon large task-attachment"></span>
     </a>
     <a class="duedate" ng-class="{overdue: TasksModel.overdue(task.due)}">{{ task.due | dateTaskList }}</a>
-    <a ng-show="route.listID=='week'" class="listname" >{{ getTaskList(task.calendarid) }}</a>
+    <a ng-show="route.calendarID=='week'" class="listname" >{{ getTaskList(task.calendaruri) }}</a>
     <div class="title-wrapper">
         <span class="title" ng-bind-html="task.summary | linky:'_blank':{rel: 'nofollow'}"></span>
         <span class="categories-list">
@@ -33,7 +33,7 @@
 <div class="subtasks-container"
      ng-class="{subtaskshidden: hideSubtasks(task)}">
     <ol dnd-list="draggedTasks"
-        dnd-drop="dropCallback(event, item, index)"
+        dnd-drop="dropAsSubtask(event, item, index)"
         dnd-dragover="dragover(event, item, index)">
         <li class="task-item ui-draggable handler add-subtask"
             ng-show="status.addSubtaskTo == task.uid">

@@ -300,31 +300,35 @@
 		  this._$scope.getTaskList = function(listID) {
 			return _$listsmodel.getName(listID);
 		  };
-		  this._$scope.dropCallback = function($event, item, index) {
-			var collectionID, listID, parentID, taskID;
-			taskID = item.id;
-			$('.subtasks-container').removeClass('dropzone-visible');
-			parentID = $('li.dndPlaceholder').closest('.task-item').attr('taskID');
-			parentID = parentID || "";
-			if (parentID === taskID) {
-			  parentID = "";
-			}
-			collectionID = $('li.dndPlaceholder').closest('ol[dnd-list]').attr('collectionID');
-			if (collectionID) {
-			  _tasksbusinesslayer.changeCollection(taskID, collectionID);
-			}
-			listID = $('li.dndPlaceholder').closest('ol[dnd-list]').attr('listID');
-			if (listID) {
-			  _tasksbusinesslayer.changeCalendarId(taskID, listID);
-			}
-			_tasksbusinesslayer.changeParent(taskID, parentID, collectionID);
-			return true;
-		  };
-		  this._$scope.dragover = function($event, item, index) {
-			$('.subtasks-container').removeClass('dropzone-visible');
-			$($event.target).closest('.task-item').children('.subtasks-container').addClass('dropzone-visible');
-			return true;
-		  };
+
+		  	this._$scope.dropAsSubtask = function($event, item, index) {
+				var parentID = $('li.dndPlaceholder').closest('.task-item').attr('taskID');
+				var task = _$tasksmodel.getByUri(item.uri);
+				var parent = _$tasksmodel.getByUri(parentID);
+				_tasksbusinesslayer.changeParent(task, parent);
+				$('.subtasks-container').removeClass('dropzone-visible');
+				return true;
+
+		  	};
+
+			this._$scope.dropAsRootTask = function($event, item, index) {
+				var task = _$tasksmodel.getByUri(item.uri);
+				var collectionID = $('li.dndPlaceholder').closest('ol[dnd-list]').attr('collectionID');
+				var calendarID = $('li.dndPlaceholder').closest('ol[dnd-list]').attr('calendarID');
+				var newCalendar = _$listsmodel.getByUri(calendarID);
+				var queries = _tasksbusinesslayer.makeRootTask(task, newCalendar, collectionID);
+				Promise.all(queries).then(function() {	
+					$scope.$apply();
+				});
+				$('.subtasks-container').removeClass('dropzone-visible');
+				return true;
+			};
+			
+			this._$scope.dragover = function($event, item, index) {
+				$('.subtasks-container').removeClass('dropzone-visible');
+				$($event.target).closest('.task-item').children('.subtasks-container').addClass('dropzone-visible');
+				return true;
+			};
 		}
 
 		return TasksController;

@@ -147,6 +147,9 @@ angular.module('Tasks').controller('DetailsController', [
 					});
 				}, 500);
 			};
+			this._$scope.triggerUpdate = function(task) {
+				_tasksbusinesslayer.triggerUpdate(task);
+			}
 			this._$scope.editName = function($event) {
 				if (!$($event.target).is('a')) {
 					_$scope.setEditRoute('name');
@@ -234,6 +237,10 @@ angular.module('Tasks').controller('DetailsController', [
 				} else {
 					_tasksbusinesslayer.setPercentComplete(task, 100);
 				}
+			};
+
+			this._$scope.setPercentComplete = function(task, complete) {
+				_tasksbusinesslayer.setPercentComplete(task, complete);
 			};
 
 			this._$scope.toggleStarred = function(task) {
@@ -356,11 +363,13 @@ angular.module('Tasks').controller('DetailsController', [
 				_$scope.task.categories = _$scope.task.cats;
 				var default_categories = _$scope.settingsmodel.getById('various').categories;
 				if (!(default_categories.indexOf(category) > -1)) {
-					return default_categories.push(category);
+					default_categories.push(category);
 				}
+				_tasksbusinesslayer.doUpdate(_$scope.task);
 			};
 			this._$scope.removeCategory = function(category, model) {
 				_$scope.task.categories = _$scope.task.cats;
+				_tasksbusinesslayer.doUpdate(_$scope.task);
 			};
 		}
 

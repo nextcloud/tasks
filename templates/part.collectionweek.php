@@ -8,10 +8,10 @@
             collectionID="{{route.collectionID}}"
             type="list"
             dnd-list="draggedTasks"
-            dnd-drop="dropCallback(event, item, index)"
+            dnd-drop="dropAsRootTask(event, item, index)"
             dnd-dragover="dragover(event, item, index)">
             <li class="task-item ui-draggable handler"
-                taskID="{{task.id}}"
+                taskID="{{task.uri}}"
                 ng-animate="'animate'"
                 ng-repeat="task in filtered = filteredTasks() | filter:taskAtDay(task,day) | filter:hasNoParent(task) | filter:{'completed':'false'} | orderBy:sortDue | orderBy:'priority':true"
                 ng-click="openDetails(task.uri,$event)"

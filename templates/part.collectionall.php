@@ -9,7 +9,7 @@
             collectionID="{{route.collectionID}}"
             type="list"
             dnd-list="draggedTasks"
-            dnd-drop="dropCallback(event, item, index)"
+            dnd-drop="dropAsRootTask(event, item, index)"
             dnd-dragover="dragover(event, item, index)">
             <li class="task-item ui-draggable handler"
                 taskID="{{task.uri}}"

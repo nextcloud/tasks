@@ -20,15 +20,20 @@
  */
 
 angular.module('Tasks').controller('ListController', [
-	'$scope', '$window', '$routeParams', 'ListsModel', 'TasksBusinessLayer', 'CollectionsModel', 'ListsBusinessLayer', '$location', 'SearchBusinessLayer', 'CalendarService', function($scope, $window, $routeParams, ListsModel, TasksBusinessLayer, CollectionsModel, ListsBusinessLayer, $location, SearchBusinessLayer, CalendarService) {
+	'$scope', '$window', '$routeParams', 'ListsModel', 'TasksBusinessLayer', 'CollectionsModel', 'ListsBusinessLayer', '$location',
+	'SearchBusinessLayer', 'CalendarService', 'TasksModel',
+	function($scope, $window, $routeParams, ListsModel, TasksBusinessLayer, CollectionsModel, ListsBusinessLayer, $location,
+		SearchBusinessLayer, CalendarService, TasksModel) {
 	  var ListController;
 	  ListController = (function() {
-		function ListController(_$scope, _$window, _$routeParams, _$listsmodel, _$tasksbusinesslayer, _$collectionsmodel, _$listsbusinesslayer, $location, _$searchbusinesslayer, _$calendarservice) {
+		function ListController(_$scope, _$window, _$routeParams, _$listsmodel, _$tasksbusinesslayer, _$collectionsmodel, _$listsbusinesslayer, $location,
+		_$searchbusinesslayer, _$calendarservice, _$tasksmodel) {
 		
 			this._$scope = _$scope;
 			this._$window = _$window;
 			this._$routeParams = _$routeParams;
 			this._$listsmodel = _$listsmodel;
+			this._$tasksmodel = _$tasksmodel;
 			this._$tasksbusinesslayer = _$tasksbusinesslayer;
 			this._$collectionsmodel = _$collectionsmodel;
 			this._$listsbusinesslayer = _$listsbusinesslayer;
@@ -144,14 +149,19 @@ angular.module('Tasks').controller('ListController', [
 			};
 
 			this._$scope.dragoverList = function($event, item, index) {
-				return true;
+				var calendarID = $($event.target).closest('li.list').attr('calendarID');
+				var calendar = _$listsmodel.getByUri(calendarID);
+				return calendar.writable;
 			};
 
 			this._$scope.dropList = function($event, item, index) {
-				var listID, taskID;
-				taskID = item.id;
-				listID = $($event.target).closest('li.list').attr('calendarID');
-				_$tasksbusinesslayer.changeCalendarId(taskID, listID);
+				// we can't simply use item as task, since the directive seems to not copy all properties --> task.calendar.uri == undefined
+				var task = _$tasksmodel.getByUri(item.uri);
+				var calendarID = $($event.target).closest('li.list').attr('calendarID');
+				var calendar = _$listsmodel.getByUri(calendarID);
+				_$tasksbusinesslayer.changeCalendar(task, calendar).then(function() {
+					_$scope.$apply();
+				});
 				return true;
 			};
 
@@ -162,11 +172,8 @@ angular.module('Tasks').controller('ListController', [
 			};
 
 			this._$scope.dropCollection = function($event, item, index) {
-				var collectionID, taskID;
-				taskID = item.id;
-				collectionID = $($event.target).closest('li.collection').attr('collectionID');
-				console.log(taskID, collectionID);
-				_$tasksbusinesslayer.changeCollection(taskID, collectionID);
+				var collectionID = $($event.target).closest('li.collection').attr('collectionID');
+				_$tasksbusinesslayer.changeCollection(item.uri, collectionID);
 				return true;
 			};
 		}
@@ -174,6 +181,7 @@ angular.module('Tasks').controller('ListController', [
 		return ListController;
 
 	  })();
-	  return new ListController($scope, $window, $routeParams, ListsModel, TasksBusinessLayer, CollectionsModel, ListsBusinessLayer, $location, SearchBusinessLayer, CalendarService);
+	  return new ListController($scope, $window, $routeParams, ListsModel, TasksBusinessLayer, CollectionsModel, ListsBusinessLayer, $location,
+	  	SearchBusinessLayer, CalendarService, TasksModel);
 	}
 ]);

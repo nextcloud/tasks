@@ -23,7 +23,7 @@
  *
  */
 
-angular.module('Tasks').service('VTodoService', ['DavClient', 'RandomStringService', function(DavClient, RandomStringService) {
+angular.module('Tasks').service('VTodoService', ['DavClient', 'RandomStringService', '$timeout', function(DavClient, RandomStringService, $timeout) {
 	'use strict';
 
 	var _this = this;
@@ -142,7 +142,7 @@ angular.module('Tasks').service('VTodoService', ['DavClient', 'RandomStringServi
 			'If-Match': task.etag,
 			'requesttoken': OC.requestToken
 		};
-
+		$timeout.cancel(task.timers['update']);
 		return DavClient.request('PUT', url, headers, task.data).then(function(response) {
 			task.etag = response.xhr.getResponseHeader('ETag');
 			return DavClient.wasRequestSuccessful(response.status);

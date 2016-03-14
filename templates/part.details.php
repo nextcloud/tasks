@@ -12,7 +12,7 @@
             <div class="expandable-container handler">
             	<div class="expandingArea active">
                     <pre><span>{{ task.summary }}</span><br /></pre>
-                    <textarea id="editName" maxlength="200" ng-model="task.summary" ng-keydown="endName($event)"></textarea>
+                    <textarea id="editName" maxlength="200" ng-model="task.summary" ng-keydown="endName($event)" ng-change="triggerUpdate(task)"></textarea>
             	</div>
             </div>
         </div>
@@ -81,8 +81,8 @@
                 </a>
                 <span class="icon detail-save handler end-edit"></span>
                 <div class="section-edit">
-                    <input class="priority-input" type="text" ng-model="task.priority">
-                    <input type="range" ng-model="task.priority" min="0" max="9" step ="1">
+                    <input class="priority-input" type="text" ng-model="task.priority" ng-change="triggerUpdate(task)">
+                    <input type="range" ng-model="task.priority" min="0" max="9" step ="1" ng-change="triggerUpdate(task)">
                 </div>
             </div>
             <div class="section detail-complete handler" ng-class="{'editing':route.parameter=='percent', 'date':task.complete>0}"  ng-click="editPercent($event)">
@@ -95,8 +95,8 @@
                 </a>
                 <span class="icon detail-save handler end-edit"></span>
                 <div class="section-edit">
-                    <input class="percent-input" type="text" ng-model="task.complete">
-                    <input type="range" ng-model="task.complete" min="0" max="100" step ="1">
+                    <input class="percent-input" type="text" ng-model="task.complete" ng-change="setPercentComplete(task, task.complete)">
+                    <input type="range" ng-model="task.complete" min="0" max="100" step ="1" ng-change="setPercentComplete(task, task.complete)">
                 </div>
             </div>
             <!-- <ul class="subtasks buffer"></ul> -->
@@ -124,7 +124,7 @@
                             <div class="edit-view">
                                 <div class="expandingArea active">
                                 	<pre><span>{{ task.note }}</span><br /><br /></pre>
-                                	<textarea ng-model="task.note"></textarea>
+                                	<textarea ng-model="task.note" ng-change="triggerUpdate(task)"></textarea>
                                 </div>
                             </div>
                         </div>

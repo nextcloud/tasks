@@ -343,26 +343,26 @@
 		  return false;
 		};
 
-		TasksModel.prototype.getAncestor = function(taskID, ret) {
-		  var ancestors, parentID, task, tasks;
-		  tasks = [];
-		  task = this.getById(taskID);
-		  if (task) {
-			if (this.objectExists(task, ret)) {
-			  return tasks;
-			}
-			tasks.push(task);
-			if (this.hasNoParent(task)) {
-			  return tasks;
-			}
-			parentID = this.getIdByUid(task.related);
-			ancestors = this.getAncestor(parentID, ret);
-			if (ancestors) {
-			  tasks = tasks.concat(ancestors);
-			}
-		  }
-		  return tasks;
-		};
+		// TasksModel.prototype.getAncestor = function(taskID, ret) {
+		//   var ancestors, parentID, task, tasks;
+		//   tasks = [];
+		//   task = this.getByUri(taskID);
+		//   if (task) {
+		// 	if (this.objectExists(task, ret)) {
+		// 	  return tasks;
+		// 	}
+		// 	tasks.push(task);
+		// 	if (this.hasNoParent(task)) {
+		// 	  return tasks;
+		// 	}
+		// 	parentID = this.getIdByUid(task.related);
+		// 	ancestors = this.getAncestor(parentID, ret);
+		// 	if (ancestors) {
+		// 	  tasks = tasks.concat(ancestors);
+		// 	}
+		//   }
+		//   return tasks;
+		// };
 
 		TasksModel.prototype.filterTasksByString = function(task, filter) {
 		  var category, comment, key, keys, value, _i, _j, _len, _len1, _ref, _ref1;
@@ -395,16 +395,16 @@
 		  return false;
 		};
 
-		TasksModel.prototype.hideSubtasks = function(taskID) {
-		  return this.getById(taskID).hidesubtasks;
-		};
+		// TasksModel.prototype.hideSubtasks = function(taskID) {
+		//   return this.getById(taskID).hidesubtasks;
+		// };
 
-		TasksModel.prototype.setHideSubtasks = function(taskID, hide) {
-		  return this.update({
-			id: taskID,
-			hidesubtasks: hide
-		  });
-		};
+		// TasksModel.prototype.setHideSubtasks = function(taskID, hide) {
+		//   return this.update({
+		// 	id: taskID,
+		// 	hidesubtasks: hide
+		//   });
+		// };
 
 		// TasksModel.prototype.setDueDate = function(taskID, date) {
 		//   return this.update({
@@ -447,26 +447,19 @@
 		  return !moment(start, "YYYYMMDDTHHmmss").isValid() || moment(start, "YYYYMMDDTHHmmss").diff(moment(), 'days', true) < 0 || moment(due, "YYYYMMDDTHHmmss").diff(moment(), 'days', true) < 0;
 		};
 
-		TasksModel.prototype.changeCalendarId = function(taskID, calendarID) {
-		  return this.update({
-			id: taskID,
-			calendarid: calendarID
-		  });
-		};
+		// TasksModel.prototype.changeParent = function(taskID, related) {
+		//   return this.update({
+		// 	id: taskID,
+		// 	related: related
+		//   });
+		// };
 
-		TasksModel.prototype.changeParent = function(taskID, related) {
-		  return this.update({
-			id: taskID,
-			related: related
-		  });
-		};
-
-		TasksModel.prototype.setNote = function(taskID, note) {
-		  return this.update({
-			id: taskID,
-			note: note
-		  });
-		};
+		// TasksModel.prototype.setNote = function(taskID, note) {
+		//   return this.update({
+		// 	id: taskID,
+		// 	note: note
+		//   });
+		// };
 
 		TasksModel.prototype.addComment = function(comment) {
 		  var task;
