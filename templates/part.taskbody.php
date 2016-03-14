@@ -10,7 +10,7 @@
     <a class="task-star handler" ng-click="toggleStarred(task)">
         <span class="icon large task-star faded" ng-class="{'high':task.priority>5,'medium':task.priority==5,'low':task.priority > 0 && task.priority < 5}"></span>
     </a>
-    <a class="task-addsubtask handler add-subtask" ng-click="showSubtaskInput(task.uid)" oc-click-focus="{selector: '.add-subtask input', timeout: 0}">
+    <a class="task-addsubtask handler add-subtask" ng-show="task.calendar.writable" ng-click="showSubtaskInput(task.uid)" oc-click-focus="{selector: '.add-subtask input', timeout: 0}">
         <span class="icon large addsubtask" title="<?php p($l->t('add a subtask to')); ?> {{ task.summary }}"></span>
     </a>
     <a class="handler"  ng-click="toggleSubtasks(task)">

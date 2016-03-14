@@ -60,18 +60,22 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 			};
 
 			TasksBusinessLayer.prototype.setPriority = function(task, priority) {
-				task.priority = priority;
-				this.doUpdate(task);
+				if (task.calendar.writable) {
+					task.priority = priority;
+					this.doUpdate(task);
+				}
 			};
 
 			TasksBusinessLayer.prototype.setPercentComplete = function(task, percentComplete) {
-				if (percentComplete < 100) {
-					this.uncompleteParents(task.related);
-				} else {
-					this.completeChildren(task);
+				if (task.calendar.writable) {
+					if (percentComplete < 100) {
+						this.uncompleteParents(task.related);
+					} else {
+						this.completeChildren(task);
+					}
+					task.complete = percentComplete;
+					this.triggerUpdate(task);
 				}
-				task.complete = percentComplete;
-				this.triggerUpdate(task);
 			};
 
 			TasksBusinessLayer.prototype.triggerUpdate = function(task, duration) {
@@ -112,7 +116,9 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 
 			TasksBusinessLayer.prototype.setHideSubtasks = function(task, hide) {
 				task.hideSubtasks = hide;
-				this.doUpdate(task);
+				if (task.calendar.writable) {
+					this.doUpdate(task);
+				}
 			};
 
 			TasksBusinessLayer.prototype.deleteTask = function(task) {

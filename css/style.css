@@ -145,6 +145,9 @@
   position: absolute;
   top: 7px;
 }
+#content .icon.task-checkbox.disabled {
+  cursor: not-allowed;
+}
 #content .icon.task-attachment {
   background-position: 0 -120px;
   display: none;
@@ -173,6 +176,9 @@
   position: absolute;
   top: 17px;
   background-position: -60px 0px;
+}
+#content .disabled .icon.detail-checkbox {
+  cursor: not-allowed;
 }
 #content .icon.detail-reminder {
   background-position: -40px -40px;
@@ -213,6 +219,10 @@
 }
 #content .icon.detail-star:hover {
   background-position: -90px -40px;
+}
+#content .disabled .icon.detail-star:hover {
+  background-position: -60px -40px;
+  cursor: not-allowed;
 }
 #content .icon.detail-save {
   background-position: -20px -40px;
@@ -337,6 +347,11 @@
 #content li.task-item .task-body .icon.task-star:hover,
 #content div.task-item .task-body .icon.task-star:hover {
   background-position: -160px 0;
+}
+#content li.task-item .task-body .icon.task-star.disabled:hover,
+#content div.task-item .task-body .icon.task-star.disabled:hover {
+  background-position: -140px 0;
+  cursor: not-allowed;
 }
 #content li.task-item .task-body .icon.task-star.high,
 #content div.task-item .task-body .icon.task-star.high {
@@ -846,6 +861,10 @@
   margin-top: 0px;
   font-family: inherit;
 }
+#task-details div.content-wrapper .disabled .body .section .select2-search-field input {
+  width: auto;
+  display: block !important;
+}
 #task-details div.content-wrapper .body .section select {
   background-color: rgba(0, 0, 0, 0);
   border-radius: 0px;
@@ -926,6 +945,9 @@
 }
 #task-details div.content-wrapper .body .section.date:hover .icon.detail-delete {
   display: block;
+}
+#task-details div.content-wrapper .disabled .body .section.date:hover .icon.detail-delete {
+  display: none;
 }
 #task-details div.content-wrapper .body .section.date .section-title {
   color: #4271A6;
@@ -1349,6 +1371,12 @@ div.percentdone {
 }
 .detail-categories .select2-container-multi .select2-choices {
   border: 1px solid transparent;
+}
+.detail-categories .select2-container-multi.select2-container-disabled .select2-choices {
+  background-color: #fff;
+  background-image: none;
+  border: none;
+  cursor: default;
 }
 .detail-categories .select2-container-multi .select2-choices .select2-search-choice {
   color: #4271a6;

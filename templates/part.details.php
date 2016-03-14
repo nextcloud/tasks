@@ -1,13 +1,13 @@
 <div ng-controller="DetailsController" ng-click="endEdit($event)" class="handler">
-    <div ng-show="TaskState()=='found'">
+    <div ng-show="TaskState()=='found'" ng-class="{'disabled': !task.calendar.writable}">
         <a class="detail-checkbox" ng-click="toggleCompleted(task)">
-        	<span class="icon detail-checkbox" ng-class="{'detail-checked':task.completed}"></span>
+        	<span class="icon detail-checkbox" ng-class="{'detail-checked':task.completed, 'disabled': !task.calendar.writable}"></span>
         </a>
         <a class="detail-star" ng-click="toggleStarred(task)">
-        	<span class="icon detail-star" ng-class="{'high':task.priority>5,'medium':task.priority==5,'low':task.priority > 0 && task.priority < 5}"></span>
+        	<span class="icon detail-star" ng-class="{'high':task.priority>5,'medium':task.priority==5,'low':task.priority > 0 && task.priority < 5, 'disabled': !task.calendar.writable}"></span>
         </a>
     	<div class="title" ng-class="{'editing':route.parameter=='name'}">
-        	<span class="title-text handler" ng-class="{'strike-through':task.completed}" ng-click="editName($event)"
+        	<span class="title-text handler" ng-class="{'strike-through':task.completed}" ng-click="editName($event, task)"
             oc-click-focus="{selector: '#editName', timeout: 0}" ng-bind-html="task.summary | linky:'_blank':{rel: 'nofollow'}"></span>
             <div class="expandable-container handler">
             	<div class="expandingArea active">
@@ -47,7 +47,7 @@
                     <input class="timepicker-input medium focus" type="text" key-value="" placeholder="hh:mm" value="{{ task.due | timeTaskList }}" timepicker="due">
                 </div>
             </div>
-<!--             <div class="section detail-reminder handler" ng-class="{'date':isDue(task.reminder.date), 'editing':route.parameter=='reminder'}" ng-click="editReminder($event)">
+<!--             <div class="section detail-reminder handler" ng-class="{'date':isDue(task.reminder.date), 'editing':route.parameter=='reminder'}" ng-click="editReminder($event, task)">
             	<span class="icon detail-reminder" ng-class="{'overdue':isOverDue(task.reminder.date)}"></span>
                 <span class="icon detail-remindertype" ng-click="changeReminderType(task)" ng-show="task.due || task.start"></span>
                 <div class="section-title" ng-class="{'overdue':isOverDue(task.reminder.date)}">
@@ -69,7 +69,7 @@
                     </div>
                 </div>
             </div> -->
-            <div class="section detail-priority handler" ng-class="{'editing':route.parameter=='priority','high':task.priority>5,'medium':task.priority==5,'low':task.priority > 0 && task.priority < 5, 'date':task.priority>0}"  ng-click="editPriority($event)">
+            <div class="section detail-priority handler" ng-class="{'editing':route.parameter=='priority','high':task.priority>5,'medium':task.priority==5,'low':task.priority > 0 && task.priority < 5, 'date':task.priority>0}"  ng-click="editPriority($event, task)">
                 <span class="icon detail-priority"></span>
                 <div class="section-title">
                     <text>{{ task.priority | priorityDetails}}</text>
@@ -83,7 +83,7 @@
                     <input type="range" ng-model="task.priority" min="0" max="9" step ="1" ng-change="triggerUpdate(task)">
                 </div>
             </div>
-            <div class="section detail-complete handler" ng-class="{'editing':route.parameter=='percent', 'date':task.complete>0}"  ng-click="editPercent($event)">
+            <div class="section detail-complete handler" ng-class="{'editing':route.parameter=='percent', 'date':task.complete>0}"  ng-click="editPercent($event, task)">
                 <span class="icon detail-percent"></span>
                 <div class="section-title">
                     <text>{{ task.complete | percentDetails}}</text>
@@ -101,7 +101,7 @@
             <div class="section detail-categories" ng-class="{'active':task.cats.length>0}">
                 <span class="icon detail-categories"></span>
             <!-- Edit line 1080 to show placeholder -->
-                <ui-select multiple tagging tagging-label="<?php p($l->t('(New category)')); ?> " ng-model="task.cats" theme="select2" ng-disabled="disabled" style="width: 100%;"
+                <ui-select multiple tagging tagging-label="<?php p($l->t('(New category)')); ?> " ng-model="task.cats" theme="select2" ng-disabled="!task.calendar.writable" style="width: 100%;"
                  on-remove="removeCategory($item, $model)" on-select="addCategory($item, $model)">
                     <ui-select-match placeholder="<?php p($l->t('Select categories...')); ?>">{{$item}}</ui-select-match>
                     <ui-select-choices repeat="category in settingsmodel.getById('various').categories | filter:$select.search">
@@ -111,7 +111,7 @@
             </div>
             <div class="section detail-note">
                 <div class="note">
-                	<div class="note-body selectable handler" ng-click="editNote($event)" oc-click-focus="{selector: '.expandingArea textarea', timeout: 0}">
+                	<div class="note-body selectable handler" ng-click="editNote($event, task)" oc-click-focus="{selector: '.expandingArea textarea', timeout: 0}">
                         <!--
                         <a class="open-fullscreen-note">
                         	<span class="icon note-fullscreen"></span>
@@ -148,7 +148,7 @@
                 <input type="text" placeholder="{{ commentStrings().input }}" ng-model="CommentContent" ng-keydown="sendComment($event)">
                 <input type="button" ng-click="addComment()" name="addComment" value="{{ commentStrings().button }}" ng-class="{'active':CommentContent}">
             </div> -->
-        	<a class="detail-trash handler close-all" ng-click="deleteTask(task)">
+        	<a class="detail-trash handler close-all" ng-click="deleteTask(task)" ng-show="task.calendar.writable">
             	<span class="icon detail-trash"></span>
             </a>
             <a class="detail-close handler close-all">

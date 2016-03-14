@@ -328,44 +328,58 @@ angular.module('Tasks').controller('DetailsController', [
 				this._$scope.triggerUpdate = function(task) {
 					_tasksbusinesslayer.triggerUpdate(task);
 				};
-				this._$scope.editName = function($event) {
-					if (!$($event.target).is('a')) {
-						_$scope.setEditRoute('name');
-					}
-				};
-				this._$scope.editDueDate = function($event, task) {
-					if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
-						_$scope.setEditRoute('duedate');
-						_tasksbusinesslayer.initDueDate(task);
-					}
-				};
-				this._$scope.editStart = function($event, task) {
-					if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
-						_$scope.setEditRoute('startdate');
-						_tasksbusinesslayer.initStartDate(task);
-					}
-				};
-				this._$scope.editReminder = function($event) {
-					if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
-						_$scope.setEditRoute('reminer');
-						return _tasksbusinesslayer.initReminder(_$scope.route.taskID);
-					}
-				};
-				this._$scope.editNote = function($event) {
-					if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+				this._$scope.editName = function($event, task) {
+					if (task.calendar.writable) {
 						if (!$($event.target).is('a')) {
-							_$scope.setEditRoute('note');
+							_$scope.setEditRoute('name');
 						}
 					}
 				};
-				this._$scope.editPriority = function($event) {
-					if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
-						_$scope.setEditRoute('priority');
+				this._$scope.editDueDate = function($event, task) {
+					if (task.calendar.writable) {
+						if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+							_$scope.setEditRoute('duedate');
+							_tasksbusinesslayer.initDueDate(task);
+						}
 					}
 				};
-				this._$scope.editPercent = function($event) {
-					if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
-						_$scope.setEditRoute('percent');
+				this._$scope.editStart = function($event, task) {
+					if (task.calendar.writable) {
+						if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+							_$scope.setEditRoute('startdate');
+							_tasksbusinesslayer.initStartDate(task);
+						}
+					}
+				};
+				this._$scope.editReminder = function($event, task) {
+					if (task.calendar.writable) {
+						if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+							_$scope.setEditRoute('reminer');
+							return _tasksbusinesslayer.initReminder(_$scope.route.taskID);
+						}
+					}
+				};
+				this._$scope.editNote = function($event, task) {
+					if (task.calendar.writable) {
+						if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+							if (!$($event.target).is('a')) {
+								_$scope.setEditRoute('note');
+							}
+						}
+					}
+				};
+				this._$scope.editPriority = function($event, task) {
+					if (task.calendar.writable) {
+						if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+							_$scope.setEditRoute('priority');
+						}
+					}
+				};
+				this._$scope.editPercent = function($event, task) {
+					if (task.calendar.writable) {
+						if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+							_$scope.setEditRoute('percent');
+						}
 					}
 				};
 				this._$scope.endEdit = function($event) {
@@ -1645,18 +1659,22 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 			};
 
 			TasksBusinessLayer.prototype.setPriority = function(task, priority) {
-				task.priority = priority;
-				this.doUpdate(task);
+				if (task.calendar.writable) {
+					task.priority = priority;
+					this.doUpdate(task);
+				}
 			};
 
 			TasksBusinessLayer.prototype.setPercentComplete = function(task, percentComplete) {
-				if (percentComplete < 100) {
-					this.uncompleteParents(task.related);
-				} else {
-					this.completeChildren(task);
+				if (task.calendar.writable) {
+					if (percentComplete < 100) {
+						this.uncompleteParents(task.related);
+					} else {
+						this.completeChildren(task);
+					}
+					task.complete = percentComplete;
+					this.triggerUpdate(task);
 				}
-				task.complete = percentComplete;
-				this.triggerUpdate(task);
 			};
 
 			TasksBusinessLayer.prototype.triggerUpdate = function(task, duration) {
@@ -1697,7 +1715,9 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 
 			TasksBusinessLayer.prototype.setHideSubtasks = function(task, hide) {
 				task.hideSubtasks = hide;
-				this.doUpdate(task);
+				if (task.calendar.writable) {
+					this.doUpdate(task);
+				}
 			};
 
 			TasksBusinessLayer.prototype.deleteTask = function(task) {
