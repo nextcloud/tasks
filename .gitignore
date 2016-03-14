@@ -229,3 +229,5 @@ Various
 *.ai
 *.bat
 *.rej
+
+build/
