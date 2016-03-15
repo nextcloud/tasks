@@ -35,7 +35,7 @@
     <ol dnd-list="draggedTasks"
         calendarID="{{task.calendar.uri}}"
         dnd-drop="dropAsSubtask(event, item, index)"
-        dnd-dragover="dragover(event, item, index)">
+        dnd-dragover="dragover(event, index)">
         <li class="task-item ui-draggable handler add-subtask"
             ng-show="status.addSubtaskTo == task.uid">
             <form ng-submit="addTask(status.subtaskName,task.uid,task.calendarid)" name="addTaskForm">

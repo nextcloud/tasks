@@ -9,7 +9,7 @@
             type="list"
             dnd-list="draggedTasks"
             dnd-drop="dropAsRootTask(event, item, index)"
-            dnd-dragover="dragover(event, item, index)">
+            dnd-dragover="dragover(event, index)">
             <li class="task-item ui-draggable handler"
                 taskID="{{task.uri}}"
                 ng-animate="'animate'"

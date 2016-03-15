@@ -8,7 +8,7 @@
             type="list"
             dnd-list="draggedTasks"
             dnd-drop="dropAsRootTask(event, item, index)"
-            dnd-dragover="dragover(event, item, index)">
+            dnd-dragover="dragover(event, index)">
             <li class="task-item ui-draggable handler"
                 taskID="{{ task.uri }}"
                 ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,route.calendarID) | filter:{'completed':'false'} | orderBy:'1*id':true | orderBy:sortDue | orderBy:'priority':true"
@@ -28,7 +28,7 @@
             type="list"
             dnd-list="draggedTasks"
             dnd-drop="dropAsRootTask(event, item, index)"
-            dnd-dragover="dragover(event, item, index)">
+            dnd-dragover="dragover(event, index)">
             <li class="task-item handler"
                 taskID="{{ task.uri }}"
                 ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,route.calendarID) | filter:{'completed':true} | orderBy:'completed_date':true"

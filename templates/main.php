@@ -24,7 +24,7 @@
                 ng-class="{'animate-up': hideCollection(collection.id), active: collection.id==route.collectionID}"
                 dnd-list="draggedTasks"
                 dnd-drop="dropCollection(event, item, index)"
-                dnd-dragover="dragoverCollection(event, item, index)">
+                dnd-dragover="dragoverCollection(event, index)">
                 <a href="#/collections/{{ collection.id }}">
                     <span class="icon collection-{{ collection.id }}">
                         <text ng-show="collection.id=='today'"><?php p($_['DOM']); ?></text>
@@ -44,7 +44,7 @@
                 ng-class="{active: calendar.uri==route.calendarID, edit:route.listparameter == 'name' && route.calendarID == calendar.uri}"
                 dnd-list="draggedTasks"
                 dnd-drop="dropList(event, item, index)"
-                dnd-dragover="dragoverList(event, item, index)">
+                dnd-dragover="dragoverList(event, index)">
                 <a href="#/calendars/{{ calendar.uri }}" style="border-right: 4px solid {{ calendar.color }};" ng-dblclick="startRename(calendar)">
                     <span class="icon list-list"></span>
                     <span class="title">{{ calendar.displayname }}</span>

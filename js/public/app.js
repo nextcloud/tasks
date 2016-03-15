@@ -1095,7 +1095,7 @@ angular.module('Tasks').controller('SettingsController', [
 		  };
 
 		  	this._$scope.dropAsSubtask = function($event, item, index) {
-				var parentID = $('li.dndPlaceholder').closest('.task-item').attr('taskID');
+				var parentID = $($event.target).closest('.task-item').attr('taskID');
 				var task = _$tasksmodel.getByUri(item.uri);
 				var parent = _$tasksmodel.getByUri(parentID);
 				_tasksbusinesslayer.changeParent(task, parent);
@@ -1106,8 +1106,8 @@ angular.module('Tasks').controller('SettingsController', [
 
 			this._$scope.dropAsRootTask = function($event, item, index) {
 				var task = _$tasksmodel.getByUri(item.uri);
-				var collectionID = $('li.dndPlaceholder').closest('ol[dnd-list]').attr('collectionID');
-				var calendarID = $('li.dndPlaceholder').closest('ol[dnd-list]').attr('calendarID');
+				var collectionID = $($event.target).closest('ol[dnd-list]').attr('collectionID');
+				var calendarID = $($event.target).closest('ol[dnd-list]').attr('calendarID');
 				var newCalendar = _$listsmodel.getByUri(calendarID);
 				var queries = _tasksbusinesslayer.makeRootTask(task, newCalendar, collectionID);
 				Promise.all(queries).then(function() {	
@@ -1119,7 +1119,7 @@ angular.module('Tasks').controller('SettingsController', [
 
 			this._$scope.dragover = function($event, item, index) {
 				$('.subtasks-container').removeClass('dropzone-visible');
-				var calendarID = $('li.dndPlaceholder').closest('ol[dnd-list]').attr('calendarID');
+				var calendarID = $($event.target).closest('ol[dnd-list]').attr('calendarID');
 				var calendar = _$listsmodel.getByUri(calendarID);
 				if (calendar.writable) {
 					$($event.target).closest('.task-item').children('.subtasks-container').addClass('dropzone-visible');
