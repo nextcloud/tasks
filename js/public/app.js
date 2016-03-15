@@ -2023,7 +2023,7 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 			};
 
 			TasksBusinessLayer.prototype.changeCalendar = function(task, newCalendar) {
-				if(task.calendar !== newCalendar) {
+				if(task.calendar !== newCalendar && newCalendar.writable) {
 					var newTask = angular.copy(task);
 					newTask.calendar = newCalendar;
 					if (!TasksModel.hasNoParent(newTask)) {
@@ -2080,33 +2080,37 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 			};
 
 			TasksBusinessLayer.prototype.changeParent = function(task, parent) {
-				task.related = parent.uid;
-				parent.hideSubtasks = 0;
-				if (parent.completed && !task.completed) {
-					this.setPercentComplete(parent, 0);
-				} else {
-					this.doUpdate(parent);
-				}
-				if (parent.calendaruri !== task.calendaruri) {
-					this.changeCalendar(task, parent.calendar);
-				} else {
-					this.doUpdate(task);
+				if (parent.calendar.writable) {
+					task.related = parent.uid;
+					parent.hideSubtasks = 0;
+					if (parent.completed && !task.completed) {
+						this.setPercentComplete(parent, 0);
+					} else {
+						this.doUpdate(parent);
+					}
+					if (parent.calendaruri !== task.calendaruri) {
+						this.changeCalendar(task, parent.calendar);
+					} else {
+						this.doUpdate(task);
+					}
 				}
 			};
 
 			TasksBusinessLayer.prototype.makeRootTask = function(task, newCalendar, collectionID) {
-				var requests = [];
-				task.related = null;
-				if (collectionID !== "completed" && task.completed) {
-					task.complete = 0;
+				if (newCalendar.writable) {
+					var requests = [];
+					task.related = null;
+					if (collectionID !== "completed" && task.completed) {
+						task.complete = 0;
+					}
+					requests.push(this.changeCollection(task.uri, collectionID));
+					if (task.calendar !== newCalendar) {
+						requests.push(this.changeCalendar(task, newCalendar));
+					} else {
+						requests.push(this.doUpdate(task));
+					}
+					return requests;
 				}
-				requests.push(this.changeCollection(task.uri, collectionID));
-				if (task.calendar !== newCalendar) {
-					requests.push(this.changeCalendar(task, newCalendar));
-				} else {
-					requests.push(this.doUpdate(task));
-				}
-				return requests;
 			};
 
 			TasksBusinessLayer.prototype.addComment = function(comment, onSuccess, onFailure) {
