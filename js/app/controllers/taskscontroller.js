@@ -210,7 +210,7 @@
 				ret = [];
 				for (_i = 0, _len = tasks.length; _i < _len; _i++) {
 					task = tasks[_i];
-					if (task.related === parent.uid) {
+					if (task.related === parent.uid && task !== parent) {
 						ret.push(task);
 					}
 				}

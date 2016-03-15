@@ -1001,7 +1001,7 @@ angular.module('Tasks').controller('SettingsController', [
 				ret = [];
 				for (_i = 0, _len = tasks.length; _i < _len; _i++) {
 					task = tasks[_i];
-					if (task.related === parent.uid) {
+					if (task.related === parent.uid && task !== parent) {
 						ret.push(task);
 					}
 				}
@@ -3416,7 +3416,7 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 			tasks = this.getAll();
 			for (_i = 0, _len = tasks.length; _i < _len; _i++) {
 			  t = tasks[_i];
-			  if (task.related === t.uid) {
+			  if (task.related === t.uid && task !== t) {
 				return false;
 			  }
 			}
@@ -3454,7 +3454,7 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 				children = [];
 				for (_i = 0, _len = tasks.length; _i < _len; _i++) {
 					t = tasks[_i];
-					if (t.related === task.uid) {
+					if (t.related === task.uid && t !== task) {
 						children.push(t);
 					}
 				}

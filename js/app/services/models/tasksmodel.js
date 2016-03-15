@@ -177,7 +177,7 @@
 			tasks = this.getAll();
 			for (_i = 0, _len = tasks.length; _i < _len; _i++) {
 			  t = tasks[_i];
-			  if (task.related === t.uid) {
+			  if (task.related === t.uid && task !== t) {
 				return false;
 			  }
 			}
@@ -215,7 +215,7 @@
 				children = [];
 				for (_i = 0, _len = tasks.length; _i < _len; _i++) {
 					t = tasks[_i];
-					if (t.related === task.uid) {
+					if (t.related === task.uid && t !== task) {
 						children.push(t);
 					}
 				}
