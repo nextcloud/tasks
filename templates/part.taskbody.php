@@ -33,6 +33,7 @@
 <div class="subtasks-container"
      ng-class="{subtaskshidden: hideSubtasks(task)}">
     <ol dnd-list="draggedTasks"
+        calendarID="{{task.calendar.uri}}"
         dnd-drop="dropAsSubtask(event, item, index)"
         dnd-dragover="dragover(event, item, index)">
         <li class="task-item ui-draggable handler add-subtask"

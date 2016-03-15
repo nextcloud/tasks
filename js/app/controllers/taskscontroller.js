@@ -328,15 +328,22 @@
 
 			this._$scope.dragover = function($event, item, index) {
 				$('.subtasks-container').removeClass('dropzone-visible');
-				$($event.target).closest('.task-item').children('.subtasks-container').addClass('dropzone-visible');
-				return true;
+				var calendarID = $('li.dndPlaceholder').closest('ol[dnd-list]').attr('calendarID');
+				var calendar = _$listsmodel.getByUri(calendarID);
+				if (calendar.writable) {
+					$($event.target).closest('.task-item').children('.subtasks-container').addClass('dropzone-visible');
+					return true;
+				} else {
+					return false;
+				}
 			};
 		}
 
 		return TasksController;
 
 	  })();
-	  return new TasksController($scope, $window, $routeParams, TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location, SettingsBusinessLayer, SearchBusinessLayer, VTodo);
+	  return new TasksController($scope, $window, $routeParams, TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location, SettingsBusinessLayer,
+	  	SearchBusinessLayer, VTodo);
 	}
   ]);
 
