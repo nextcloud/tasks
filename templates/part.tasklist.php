@@ -15,7 +15,7 @@
                 ng-click="openDetails(task.uri,$event)"
                 ng-class="{done: task.completed}"
                 dnd-draggable="task"
-                dnd-effect-allowed="move">
+                dnd-effect-allowed="{{ allow(task) }}">
                 <?php print_unescaped($this->inc('part.taskbody')); ?>
             </li>
         </ol>
@@ -35,7 +35,7 @@
                 ng-click="openDetails(task.uri,$event)"
                 ng-class="{done: task.completed}"
                 dnd-draggable="task"
-                dnd-effect-allowed="move">
+                dnd-effect-allowed="{{ allow(task) }}">
                 <?php print_unescaped($this->inc('part.taskbody')); ?>
             </li>
         </ol>

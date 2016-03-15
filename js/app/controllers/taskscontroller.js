@@ -337,6 +337,14 @@
 					return false;
 				}
 			};
+
+			this._$scope.allow = function(task) {
+				if (task.calendar.writable) {
+					return "copyMove";
+				} else {
+					return "copy";
+				}
+			}
 		}
 
 		return TasksController;
