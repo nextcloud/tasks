@@ -23,7 +23,7 @@
                 ng-repeat="collection in collections"
                 ng-class="{'animate-up': hideCollection(collection.id), active: collection.id==route.collectionID}"
                 dnd-list="draggedTasks"
-                dnd-drop="dropCollection(event, item, index)"
+                dnd-drop="dropCollection(event, index, item)"
                 dnd-dragover="dragoverCollection(event, index)">
                 <a href="#/collections/{{ collection.id }}">
                     <span class="icon collection-{{ collection.id }}">
@@ -43,7 +43,7 @@
                 ng-repeat="calendar in calendars"
                 ng-class="{active: calendar.uri==route.calendarID, edit:route.listparameter == 'name' && route.calendarID == calendar.uri}"
                 dnd-list="draggedTasks"
-                dnd-drop="dropList(event, item, index)"
+                dnd-drop="dropList(event, index, item)"
                 dnd-dragover="dragoverList(event, index)">
                 <a href="#/calendars/{{ calendar.uri }}" style="border-right: 4px solid {{ calendar.color }};" ng-dblclick="startRename(calendar)">
                     <span class="icon list-list"></span>

@@ -722,6 +722,9 @@ angular.module('Tasks').controller('ListController', [
 			};
 
 			this._$scope.dragoverCollection = function($event, item, index) {
+				if ($event.dataTransfer.effectAllowed === 'copy' || ($event.dataTransfer.effectAllowed === 'copyMove' && $event.ctrlKey)) {
+					return false;
+				}
 				var collectionID;
 				collectionID = $($event.target).closest('li.collection').attr('collectionID');
 				return collectionID === 'starred' || collectionID === 'completed' || collectionID === 'today';
