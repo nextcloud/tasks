@@ -2076,6 +2076,8 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 							return Promise.all(queries);
 						});
 					});
+				} else {
+					return Promise.resolve(true);
 				}
 			};
 
