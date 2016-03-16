@@ -304,24 +304,28 @@
 		  };
 
 		  	this._$scope.dropAsSubtask = function($event, item, index) {
-				var parentID = $($event.target).closest('.task-item').attr('taskID');
-				var task = _$tasksmodel.getByUri(item.uri);
-				var parent = _$tasksmodel.getByUri(parentID);
-				_tasksbusinesslayer.changeParent(task, parent);
+				if ($event.dataTransfer.dropEffect === 'move') {
+					var parentID = $($event.target).closest('.task-item').attr('taskID');
+					var task = _$tasksmodel.getByUri(item.uri);
+					var parent = _$tasksmodel.getByUri(parentID);
+					_tasksbusinesslayer.changeParent(task, parent);
+				}
 				$('.subtasks-container').removeClass('dropzone-visible');
 				return true;
 
 		  	};
 
 			this._$scope.dropAsRootTask = function($event, item, index) {
-				var task = _$tasksmodel.getByUri(item.uri);
-				var collectionID = $($event.target).closest('ol[dnd-list]').attr('collectionID');
-				var calendarID = $($event.target).closest('ol[dnd-list]').attr('calendarID');
-				var newCalendar = _$listsmodel.getByUri(calendarID);
-				var queries = _tasksbusinesslayer.makeRootTask(task, newCalendar, collectionID);
-				Promise.all(queries).then(function() {	
-					$scope.$apply();
-				});
+				if ($event.dataTransfer.dropEffect === 'move') {
+					var task = _$tasksmodel.getByUri(item.uri);
+					var collectionID = $($event.target).closest('ol[dnd-list]').attr('collectionID');
+					var calendarID = $($event.target).closest('ol[dnd-list]').attr('calendarID');
+					var newCalendar = _$listsmodel.getByUri(calendarID);
+					var queries = _tasksbusinesslayer.makeRootTask(task, newCalendar, collectionID);
+					Promise.all(queries).then(function() {	
+						$scope.$apply();
+					});
+				}
 				$('.subtasks-container').removeClass('dropzone-visible');
 				return true;
 			};

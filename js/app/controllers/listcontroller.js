@@ -156,13 +156,15 @@ angular.module('Tasks').controller('ListController', [
 			};
 
 			this._$scope.dropList = function($event, item, index) {
-				// we can't simply use item as task, since the directive seems to not copy all properties --> task.calendar.uri == undefined
-				var task = _$tasksmodel.getByUri(item.uri);
-				var calendarID = $($event.target).closest('li.list').attr('calendarID');
-				var calendar = _$listsmodel.getByUri(calendarID);
-				_$tasksbusinesslayer.changeCalendar(task, calendar).then(function() {
-					_$scope.$apply();
-				});
+				if ($event.dataTransfer.dropEffect === 'move') {
+					// we can't simply use item as task, since the directive seems to not copy all properties --> task.calendar.uri == undefined
+					var task = _$tasksmodel.getByUri(item.uri);
+					var calendarID = $($event.target).closest('li.list').attr('calendarID');
+					var calendar = _$listsmodel.getByUri(calendarID);
+					_$tasksbusinesslayer.changeCalendar(task, calendar).then(function() {
+						_$scope.$apply();
+					});
+				}
 				return true;
 			};
 
@@ -173,8 +175,10 @@ angular.module('Tasks').controller('ListController', [
 			};
 
 			this._$scope.dropCollection = function($event, item, index) {
-				var collectionID = $($event.target).closest('li.collection').attr('collectionID');
-				_$tasksbusinesslayer.changeCollection(item.uri, collectionID);
+				if ($event.dataTransfer.dropEffect === 'move') {
+					var collectionID = $($event.target).closest('li.collection').attr('collectionID');
+					_$tasksbusinesslayer.changeCollection(item.uri, collectionID);
+				}
 				return true;
 			};
 		}
