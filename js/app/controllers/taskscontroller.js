@@ -344,7 +344,17 @@
 				} else {
 					return "copy";
 				}
-			}
+			};
+
+			this._$scope.dragStart = function($event) {
+				if ($event.dataTransfer.effectAllowed === 'copy' || ($event.dataTransfer.effectAllowed === 'copyMove' && $event.ctrlKey)) {
+					$($event.target).addClass('copy');
+				}				
+			};
+
+			this._$scope.dragEnd = function($event) {
+				$($event.target).removeClass('copy');
+			};
 		}
 
 		return TasksController;

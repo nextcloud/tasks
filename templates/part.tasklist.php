@@ -15,6 +15,8 @@
                 ng-click="openDetails(task.uri,$event)"
                 ng-class="{done: task.completed}"
                 dnd-draggable="task"
+                dnd-dragstart="dragStart(event)"
+                dnd-dragend="dragEnd(event)"
                 dnd-effect-allowed="{{ allow(task) }}">
                 <?php print_unescaped($this->inc('part.taskbody')); ?>
             </li>
@@ -35,6 +37,8 @@
                 ng-click="openDetails(task.uri,$event)"
                 ng-class="{done: task.completed}"
                 dnd-draggable="task"
+                dnd-dragstart="dragStart(event)"
+                dnd-dragend="dragEnd(event)"
                 dnd-effect-allowed="{{ allow(task) }}">
                 <?php print_unescaped($this->inc('part.taskbody')); ?>
             </li>

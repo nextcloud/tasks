@@ -1430,6 +1430,9 @@ div.percentdone {
 ol[dnd-list] .dndDraggingSource {
   display: none;
 }
+ol[dnd-list] .copy.dndDraggingSource {
+  display: block;
+}
 /**
  * An element with .dndPlaceholder class will be
  * added to the dnd-list while the user is dragging

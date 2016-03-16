@@ -54,6 +54,8 @@
             ng-class="{done: task.completed}"
             ng-include="'part.taskbody'"
             dnd-draggable="task"
+            dnd-dragstart="dragStart(event)"
+            dnd-dragend="dragEnd(event)"
             dnd-effect-allowed="{{ allow(task) }}">
         </li>
     </ol>
