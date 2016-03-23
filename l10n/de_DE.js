@@ -66,6 +66,7 @@ OC.L10N.register(
     "Add an item due today in \"%s\"..." : "Einen heute fälligen Eintrag in „%s“ hinzufügen…",
     "Add an item in \"%s\"..." : "Einen Eintrag in „%s“ hinzufügen…",
     "Add a current item in \"%s\"..." : "Einen aktuellen Eintrag in „%s“ hinzufügen…",
+    "Add a subtask to \"%s\"..." : "Fügt eine Teileaufgabe zu \"%s\"...",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n erledigte Aufgabe","%n erledigte Aufgaben"],
     "Set due date" : "Ablaufdatum setzen",
     "%s %% completed" : "%s %% fertiggestellt",
