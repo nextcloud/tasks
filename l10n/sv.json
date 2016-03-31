@@ -1,5 +1,6 @@
 { "translations": {
     "Tasks" : "Uppgifter",
+    "Tasks app is unavailable because the calendar is not installed" : "Tasks applikationen är inte tillgänglig eftersom calendar inte är installerad.",
     "Due yesterday" : "Förföll igår",
     "Due today" : "Förfaller idag",
     "Due tomorrow" : "Förfaller imorgon",
@@ -63,9 +64,15 @@
     "Add an item due today in \"%s\"..." : "Lägg till en post som förfaller idag i \"%s\" ...",
     "Add an item in \"%s\"..." : "Lägg till en post i \"%s\" ...",
     "Add a current item in \"%s\"..." : "Lägg till en nuvarande post i \"%s\" ...",
+    "Add a subtask to \"%s\"..." : "Lägg till en under-anteckning i \"%s\"...",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n slutförda uppgifter","%n slutförda uppgifter"],
     "Set due date" : "Sätt slutdatum",
     "%s %% completed" : "%s %% slutfört",
+    "priority %s: " : "Prioritet %s:",
+    "high" : "Hög",
+    "medium" : "medium",
+    "low" : "Låg",
+    "no priority assigned" : "ingen prioritet tilldelad",
     "Remind me" : "Påminn mig",
     "at the end" : "vid slutet",
     "at the beginning" : "vid början",
@@ -75,11 +82,18 @@
     "All" : "Alla",
     "Current" : "Nuvarande",
     "Completed" : "Slutförande",
+    "rename" : "byt namn",
+    "delete" : "radera",
     "Add List..." : "Lägg till lista ...",
     "New List" : "Ny lista",
     "Settings" : "Inställningar",
     "Start of week" : "Början av vecka",
     "Visibility of Smart Collections" : "Synlighet av smarta samlingar",
-    "Load remaining completed tasks." : "Ladda återstående slutförda uppgifter."
+    "Load remaining completed tasks." : "Ladda återstående slutförda uppgifter.",
+    "(New category)" : "(Ny kategori)",
+    "Select categories..." : "Välj kategorier...",
+    "Loading the task..." : "Laddar uppgiften",
+    "Task not found!" : "Uppgift ej hittad!",
+    "add a subtask to" : "Lägg till en under-anteckning till"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
