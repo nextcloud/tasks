@@ -4240,6 +4240,23 @@ angular.module('Tasks').service('VTodoService', ['DavClient', 'RandomStringServi
 		cCompFilterVTodo.setAttribute('name', 'VTODO');
 		cCompFilterVCal.appendChild(cCompFilterVTodo);
 
+		var cPropFilterCompleted = xmlDoc.createElement('c:prop-filter');
+		cPropFilterCompleted.setAttribute('name', 'COMPLETED');
+		cCompFilterVTodo.appendChild(cPropFilterCompleted);
+
+		var cIsNotDefined = xmlDoc.createElement('c:is-not-defined');
+		cPropFilterCompleted.appendChild(cIsNotDefined);
+
+		// var cPropFilterStatus = xmlDoc.createElement('c:prop-filter');
+		// cPropFilterStatus.setAttribute('name', 'STATUS');
+		// cCompFilterVTodo.appendChild(cPropFilterStatus);
+
+		// var cTextMatch = xmlDoc.createElement('c:text-match');
+		// cTextMatch.setAttribute('negate-condition', 'yes');
+		// var cTextMatchValue = xmlDoc.createTextNode('CANCELLED');
+		// cTextMatch.appendChild(cTextMatchValue);
+		// cPropFilterStatus.appendChild(cTextMatch);
+
 		// var cTimeRange = xmlDoc.createElement('c:time-range');
 		// cTimeRange.setAttribute('start', this._getTimeRangeStamp(start));
 		// cTimeRange.setAttribute('end', this._getTimeRangeStamp(end));
