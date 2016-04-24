@@ -46,7 +46,7 @@ OC.L10N.register(
     "before beginning" : "ก่อนเริ่มต้น",
     "after beginning" : "หลังจากเริ่มต้น",
     "before end" : "ก่อนจบ",
-    "after end" : "หลังจบ",
+    "after end" : "หลังจากจบ",
     "Comment" : "แสดงความคิดเห็น",
     "Add a comment" : "เพิ่มความคิดเห็น",
     "This will delete the Calendar \"%s\" and all of its entries." : "นี้จะลบปฏิทิน \"%s\" และรายการทั้งหมด",
