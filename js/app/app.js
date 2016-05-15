@@ -41,7 +41,10 @@ angular.module('Tasks', ['ngRoute', 'ngAnimate', 'ui.select', 'ngSanitize', 'dnd
 		.when('/collections/:collectionID', {})
 		.when('/search/:searchString', {})
 		.when('/search/:searchString/tasks/:taskID', {})
-		.when('/search/:searchString/tasks/:taskID/edit/:parameter', {});
+		.when('/search/:searchString/tasks/:taskID/edit/:parameter', {})
+		.otherwise({
+			redirectTo: '/collections/all'
+		});
 	}
 ]);
 
