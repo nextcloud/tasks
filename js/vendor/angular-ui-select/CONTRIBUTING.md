@@ -1,7 +1,38 @@
 We are excited to have you working on the project and cordially request that you follow the Guidelines:
 
+ - [Got a question or problem?](#question)
+ - [You think you've found a bug?](#bug)
  - [Code Style Guidelines](#rules)
  - [Commit Message Guidelines](#commit)
+ 
+## <a name="question"></a> Got a question or problem?
+ 
+ Firstly, please go over our FAQ: https://github.com/angular-ui/ui-select/wiki/FAQs
+ 
+ Please, do not open issues for the general support questions as we want to keep GitHub issues for bug reports and feature requests. You've got much better chances of getting your question answered on [StackOverflow](http://stackoverflow.com/questions/tagged/angular-ui-select) where maintainers are looking at questions tagged with `angular-ui-select`.
+ 
+ StackOverflow is a much better place to ask questions since:
+ * there are hundreds of people willing to help on StackOverflow
+ * questions and answers stay available for public viewing so your question / answer might help someone else
+ * SO voting system assures that the best answers are prominently visible.
+ 
+ To save your and our time we will be systematically closing all the issues that are requests for general support and redirecting people to StackOverflow.
+ 
+## <a name="bug"></a> You think you've found a bug?
+ 
+ Oh, we are ashamed and want to fix it asap! But before fixing a bug we need to reproduce and confirm it. In order to reproduce bugs we will systematically ask you to provide a _minimal_ reproduce scenario using http://plnkr.co/. Having a live reproduce scenario gives us wealth of important information without going back & forth to you with additional questions like:
+ * version of AngularJS used
+ * version of this library that you are using
+ * 3rd-party libraries used, if any
+ * and most importantly - a use-case that fails
+ 
+ A minimal reproduce scenario using http://plnkr.co/ allows us to quickly confirm a bug (or point out coding problem) as well as confirm that we are fixing the right problem.
+ 
+ We will be insisting on a minimal reproduce scenario in order to save maintainers time and ultimately be able to fix more bugs. Interestingly, from our experience users often find coding problems themselves while preparing a minimal plunk. We understand that sometimes it might be hard to extract essentials bits of code from a larger code-base but we really need to isolate the problem before we can fix it.
+ 
+ The best part is that you don't need to create plunks from scratch - you can use one from our [demo page](http://plnkr.co/edit/a3KlK8dKH3wwiiksDSn2?p=preview).
+ 
+ Unfortunately we are not able to investigate / fix bugs without a minimal reproduce scenario using http://plnkr.co/, so if we don't hear back from you we are going to close an issue that don't have enough info to be reproduced.
  
 ## <a name="rules"></a> Coding Rules
 To ensure consistency throughout the source code, keep these rules in mind as you are working:
@@ -17,26 +48,28 @@ We have very precise rules over how our git commit messages can be formatted for
 readable messages** that are easy to follow when looking through the **project history**.  But also,
 we use the git commit messages to **generate the change log**.
 
+## Development
+
+### Prepare your environment
+* Install [Node.js](http://nodejs.org/) and NPM (should come with)
+* Install global dev dependencies: `npm install -g bower gulp`
+* Install local dev dependencies: `npm install && bower install` in repository directory
+
+### Development Commands
+
+* `gulp` to jshint, build and test
+* `gulp build` to jshint and build
+* `gulp test` for one-time test with karma (also build and jshint)
+* `gulp watch` to watch src files to jshint, build and test when changed
 
 ## Recommended workflow
 
 1. Make changes
-2. Run `gulp` or `gulp test` to run Karma tests.
-3. If tests pass, commit those changes using the conventions below.
-4. Run `gulp bump` to update the version in package.json, add a git tag and generate the updated CHANGELOG.md.
-5. `conventionalChangelog` (see https://github.com/ajoslin/conventional-changelog)
-6. Commit updated `package.json` and `CHANGELOG.md` files
-7. Push
-8. Create PR
-
-The reason why you should commit and tag after `conventionalChangelog` is that the CHANGELOG should be included in the new release, hence `gitRawCommitsOpts.from` defaults to the latest semver tag.
-
-This process is automated with gulp, including determining the type of version to bump (major, minor or patch). To use Gulp, follow these steps:
-
-1. Complete a feature or bug
-2. Commit the changes
-3. Run `gulp bump` (this will bump the version in package.json, run conventional-changelog to update the changelog and tag the version.
-4. Push
+2. Run `gulp` or `gulp test` to run Karma tests and ensure they pass.
+3. Reset all `dist/*` files
+4. Commit changes using the commit message conventions below.
+5. Push
+6. Create PR
 
 ### Commit Message Format
 Each commit message consists of a **header**, a **body** and a **footer**.  The header has a special
