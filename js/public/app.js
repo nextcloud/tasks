@@ -896,7 +896,9 @@ angular.module('Tasks').controller('SettingsController', [
 					_$scope.isAddingTask = false;
 					return $scope.$apply();
 				});
-				_tasksbusinesslayer.setHideSubtasks(parent, 0);
+				if (parent) {
+					_tasksbusinesslayer.setHideSubtasks(parent, 0);
+				}
 				_$scope.status.focusTaskInput = false;
 				_$scope.status.focusSubtaskInput = false;
 				_$scope.status.addSubtaskTo = null;
