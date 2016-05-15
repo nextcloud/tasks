@@ -975,6 +975,10 @@ angular.module('Tasks').controller('SettingsController', [
 				var calendarID = _$scope.route.calendarID;
 				var collectionID = _$scope.route.collectionID;
 				if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+					var task = _$tasksmodel.getByUri(id);
+					_tasksbusinesslayer.getCompletedByParent(task).then(function() {
+						$scope.$apply();
+					});
 					if (calendarID) {
 						$location.path('/calendars/' + calendarID + '/tasks/' + id);
 					} else if (collectionID) {
@@ -1710,9 +1714,18 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				});
 			};
 
-			TasksBusinessLayer.prototype.getCompletedTasks = function(calendarID) {
-				return true;
-			}
+			TasksBusinessLayer.prototype.getCompletedByParent = function(task) {
+				return this._$vtodoservice.getAll(task.calendar, true, task).then(function(tasks) {
+					var task, _i, _len, _results;
+					_results = [];
+					for (_i = 0, _len = tasks.length; _i < _len; _i++) {
+						task = tasks[_i];
+						var vTodo = new VTodo(task.calendar, task.properties, task.uri);
+						_results.push(TasksModel.ad(vTodo));
+					}
+					return _results;
+				});
+			};
 
 			TasksBusinessLayer.prototype.setPriority = function(task, priority) {
 				if (task.calendar.writable) {
@@ -4238,9 +4251,12 @@ angular.module('Tasks').service('VTodoService', ['DavClient', 'RandomStringServi
 
 	var _this = this;
 
-	this.getAll = function(calendar, completed) {
+	this.getAll = function(calendar, completed, parent) {
 		if (completed === null) {
 			completed = false;
+		}
+		if (parent === null) {
+			parent = false;
 		}
 		var xmlDoc = document.implementation.createDocument('', '', null);
 		var cCalQuery = xmlDoc.createElement('c:calendar-query');
@@ -4277,6 +4293,18 @@ angular.module('Tasks').service('VTodoService', ['DavClient', 'RandomStringServi
 		if (!completed) {
 			var cIsNotDefined = xmlDoc.createElement('c:is-not-defined');
 			cPropFilterCompleted.appendChild(cIsNotDefined);
+		}
+
+		if (parent) {
+			console.log('parent');
+			var cPropFilterRelated = xmlDoc.createElement('c:prop-filter');
+			cPropFilterRelated.setAttribute('name', 'RELATED-TO');
+			cCompFilterVTodo.appendChild(cPropFilterRelated);
+			var cTextMatch = xmlDoc.createElement('c:text-match');
+			// cTextMatch.setAttribute('negate-condition', 'yes');
+			var cTextMatchValue = xmlDoc.createTextNode(parent.uid);
+			cTextMatch.appendChild(cTextMatchValue);
+			cPropFilterRelated.appendChild(cTextMatch);
 		}
 
 		// var cPropFilterStatus = xmlDoc.createElement('c:prop-filter');

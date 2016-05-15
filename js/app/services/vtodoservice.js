@@ -28,9 +28,12 @@ angular.module('Tasks').service('VTodoService', ['DavClient', 'RandomStringServi
 
 	var _this = this;
 
-	this.getAll = function(calendar, completed) {
+	this.getAll = function(calendar, completed, parent) {
 		if (completed === null) {
 			completed = false;
+		}
+		if (parent === null) {
+			parent = false;
 		}
 		var xmlDoc = document.implementation.createDocument('', '', null);
 		var cCalQuery = xmlDoc.createElement('c:calendar-query');
@@ -67,6 +70,18 @@ angular.module('Tasks').service('VTodoService', ['DavClient', 'RandomStringServi
 		if (!completed) {
 			var cIsNotDefined = xmlDoc.createElement('c:is-not-defined');
 			cPropFilterCompleted.appendChild(cIsNotDefined);
+		}
+
+		if (parent) {
+			console.log('parent');
+			var cPropFilterRelated = xmlDoc.createElement('c:prop-filter');
+			cPropFilterRelated.setAttribute('name', 'RELATED-TO');
+			cCompFilterVTodo.appendChild(cPropFilterRelated);
+			var cTextMatch = xmlDoc.createElement('c:text-match');
+			// cTextMatch.setAttribute('negate-condition', 'yes');
+			var cTextMatchValue = xmlDoc.createTextNode(parent.uid);
+			cTextMatch.appendChild(cTextMatchValue);
+			cPropFilterRelated.appendChild(cTextMatch);
 		}
 
 		// var cPropFilterStatus = xmlDoc.createElement('c:prop-filter');
