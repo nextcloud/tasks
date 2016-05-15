@@ -135,31 +135,31 @@
 		  return count;
 		};
 
-		ListsModel.prototype.notLoaded = function(listID) {
-		  if (angular.isUndefined(this.getById(listID))) {
-			return 0;
-		  } else {
-			return this.getById(listID).notLoaded;
-		  }
+		ListsModel.prototype.loadedCompleted = function(calendarID) {
+			if (angular.isUndefined(this.getById(calendarID))) {
+				return false;
+			} else {
+				return this.getById(calendarID).loadedCompleted;
+			}
 		};
 
-		ListsModel.prototype.loadedAll = function(listID) {
-		  return !this.notLoaded(listID);
+		ListsModel.prototype.setLoadedCompleted = function(calendarID) {
+			this.getById(calendarID).loadedCompleted = true;
 		};
 
-		ListsModel.prototype.getColor = function(listID) {
-		  if (angular.isUndefined(this.getById(listID))) {
+		ListsModel.prototype.getColor = function(calendarID) {
+		  if (angular.isUndefined(this.getById(calendarID))) {
 			return '#CCCCCC';
 		  } else {
-			return this.getById(listID).calendarcolor;
+			return this.getById(calendarID).calendarcolor;
 		  }
 		};
 
-		ListsModel.prototype.getName = function(listID) {
-		  if (angular.isUndefined(this.getById(listID))) {
+		ListsModel.prototype.getName = function(calendarID) {
+		  if (angular.isUndefined(this.getById(calendarID))) {
 			return '';
 		  } else {
-			return this.getById(listID).displayname;
+			return this.getById(calendarID).displayname;
 		  }
 		};
 

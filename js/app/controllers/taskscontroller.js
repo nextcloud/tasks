@@ -274,30 +274,40 @@
 			  return _$scope.getCount(calendar.uri, _$scope.route.collectionID);
 			};
 		  };
+
 			this._$scope.getCount = function(calendarID, type) {
 				var filter = _searchbusinesslayer.getFilter();
 				return _$listsmodel.getCount(calendarID, type, filter);
 			};
+
 			this._$scope.getCountString = function(calendarID, type) {
 				var filter = _searchbusinesslayer.getFilter();
 				return n('tasks', '%n Completed Task', '%n Completed Tasks', _$listsmodel.getCount(calendarID, type, filter));
 			};
-		  this._$scope.checkTaskInput = function($event) {
-			if ($event.keyCode === 27) {
-			  $($event.currentTarget).blur();
-			  _$scope.status.taskName = '';
-			  _$scope.status.subtaskName = '';
-			  _$scope.status.addSubtaskTo = null;
-			  _$scope.status.focusTaskInput = false;
-			  _$scope.status.focusSubtaskInput = false;
-			}
-		  };
-		  this._$scope.getCompletedTasks = function(listID) {
-			return _tasksbusinesslayer.getCompletedTasks(listID);
-		  };
-		  this._$scope.loadedAll = function(listID) {
-			return _$listsmodel.loadedAll(listID);
-		  };
+
+			this._$scope.checkTaskInput = function($event) {
+				if ($event.keyCode === 27) {
+					$($event.currentTarget).blur();
+					_$scope.status.taskName = '';
+					_$scope.status.subtaskName = '';
+					_$scope.status.addSubtaskTo = null;
+					_$scope.status.focusTaskInput = false;
+					_$scope.status.focusSubtaskInput = false;
+				}
+			};
+
+			this._$scope.getCompletedTasks = function(calendarID) {
+				var calendar = _$listsmodel.getById(calendarID);
+				_tasksbusinesslayer.getAll(calendar, true).then(function() {
+					_$listsmodel.setLoadedCompleted(calendarID);
+					$scope.$apply();
+				});
+			};
+
+			this._$scope.loadedCompleted = function(calendarID) {
+				return _$listsmodel.loadedCompleted(calendarID);
+			};
+
 		  this._$scope.sortDue = function(task) {
 			if (task.due === null) {
 			  return 'last';

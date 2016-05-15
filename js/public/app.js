@@ -1075,30 +1075,40 @@ angular.module('Tasks').controller('SettingsController', [
 			  return _$scope.getCount(calendar.uri, _$scope.route.collectionID);
 			};
 		  };
+
 			this._$scope.getCount = function(calendarID, type) {
 				var filter = _searchbusinesslayer.getFilter();
 				return _$listsmodel.getCount(calendarID, type, filter);
 			};
+
 			this._$scope.getCountString = function(calendarID, type) {
 				var filter = _searchbusinesslayer.getFilter();
 				return n('tasks', '%n Completed Task', '%n Completed Tasks', _$listsmodel.getCount(calendarID, type, filter));
 			};
-		  this._$scope.checkTaskInput = function($event) {
-			if ($event.keyCode === 27) {
-			  $($event.currentTarget).blur();
-			  _$scope.status.taskName = '';
-			  _$scope.status.subtaskName = '';
-			  _$scope.status.addSubtaskTo = null;
-			  _$scope.status.focusTaskInput = false;
-			  _$scope.status.focusSubtaskInput = false;
-			}
-		  };
-		  this._$scope.getCompletedTasks = function(listID) {
-			return _tasksbusinesslayer.getCompletedTasks(listID);
-		  };
-		  this._$scope.loadedAll = function(listID) {
-			return _$listsmodel.loadedAll(listID);
-		  };
+
+			this._$scope.checkTaskInput = function($event) {
+				if ($event.keyCode === 27) {
+					$($event.currentTarget).blur();
+					_$scope.status.taskName = '';
+					_$scope.status.subtaskName = '';
+					_$scope.status.addSubtaskTo = null;
+					_$scope.status.focusTaskInput = false;
+					_$scope.status.focusSubtaskInput = false;
+				}
+			};
+
+			this._$scope.getCompletedTasks = function(calendarID) {
+				var calendar = _$listsmodel.getById(calendarID);
+				_tasksbusinesslayer.getAll(calendar, true).then(function() {
+					_$listsmodel.setLoadedCompleted(calendarID);
+					$scope.$apply();
+				});
+			};
+
+			this._$scope.loadedCompleted = function(calendarID) {
+				return _$listsmodel.loadedCompleted(calendarID);
+			};
+
 		  this._$scope.sortDue = function(task) {
 			if (task.due === null) {
 			  return 'last';
@@ -1504,7 +1514,7 @@ angular.module('Tasks').factory('ListsBusinessLayer', [
 					for (_i = 0, _len = calendars.length; _i < _len; _i++) {
 						calendar = calendars[_i];
 						ListsModel.add(calendar);
-						_results.push(TasksBusinessLayer.init(calendar));
+						_results.push(TasksBusinessLayer.getAll(calendar));
 					}
 					return _results;
 				});
@@ -1672,8 +1682,8 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				this._$vtodoservice = _$vtodoservice;
 			}
 
-			TasksBusinessLayer.prototype.init = function(calendar) {
-				return this._$vtodoservice.getAll(calendar).then(function(tasks) {
+			TasksBusinessLayer.prototype.getAll = function(calendar, completed) {
+				return this._$vtodoservice.getAll(calendar, completed).then(function(tasks) {
 					var task, _i, _len, _results;
 					_results = [];
 					for (_i = 0, _len = tasks.length; _i < _len; _i++) {
@@ -1699,6 +1709,10 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 					return task;
 				});
 			};
+
+			TasksBusinessLayer.prototype.getCompletedTasks = function(calendarID) {
+				return true;
+			}
 
 			TasksBusinessLayer.prototype.setPriority = function(task, priority) {
 				if (task.calendar.writable) {
@@ -2843,7 +2857,8 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 					users: [],
 					groups: []
 				},
-				owner: ''
+				owner: '',
+				loadedCompleted: false
 			},
 			_updatedProperties: []
 		});
@@ -3019,6 +3034,12 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 		},
 		get owner() {
 			return this._properties.owner;
+		},
+		get loadedCompleted() {
+			return this._properties.loadedCompleted;
+		},
+		set loadedCompleted(loadedCompleted) {
+			this._properties.loadedCompleted = loadedCompleted;
 		},
 		_setUpdated: function(propName) {
 			if (this._updatedProperties.indexOf(propName) === -1) {
@@ -3219,31 +3240,31 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 		  return count;
 		};
 
-		ListsModel.prototype.notLoaded = function(listID) {
-		  if (angular.isUndefined(this.getById(listID))) {
-			return 0;
-		  } else {
-			return this.getById(listID).notLoaded;
-		  }
+		ListsModel.prototype.loadedCompleted = function(calendarID) {
+			if (angular.isUndefined(this.getById(calendarID))) {
+				return false;
+			} else {
+				return this.getById(calendarID).loadedCompleted;
+			}
 		};
 
-		ListsModel.prototype.loadedAll = function(listID) {
-		  return !this.notLoaded(listID);
+		ListsModel.prototype.setLoadedCompleted = function(calendarID) {
+			this.getById(calendarID).loadedCompleted = true;
 		};
 
-		ListsModel.prototype.getColor = function(listID) {
-		  if (angular.isUndefined(this.getById(listID))) {
+		ListsModel.prototype.getColor = function(calendarID) {
+		  if (angular.isUndefined(this.getById(calendarID))) {
 			return '#CCCCCC';
 		  } else {
-			return this.getById(listID).calendarcolor;
+			return this.getById(calendarID).calendarcolor;
 		  }
 		};
 
-		ListsModel.prototype.getName = function(listID) {
-		  if (angular.isUndefined(this.getById(listID))) {
+		ListsModel.prototype.getName = function(calendarID) {
+		  if (angular.isUndefined(this.getById(calendarID))) {
 			return '';
 		  } else {
-			return this.getById(listID).displayname;
+			return this.getById(calendarID).displayname;
 		  }
 		};
 
@@ -4217,7 +4238,10 @@ angular.module('Tasks').service('VTodoService', ['DavClient', 'RandomStringServi
 
 	var _this = this;
 
-	this.getAll = function(calendar) {
+	this.getAll = function(calendar, completed) {
+		if (completed === null) {
+			completed = false;
+		}
 		var xmlDoc = document.implementation.createDocument('', '', null);
 		var cCalQuery = xmlDoc.createElement('c:calendar-query');
 		cCalQuery.setAttribute('xmlns:c', 'urn:ietf:params:xml:ns:caldav');
@@ -4250,8 +4274,10 @@ angular.module('Tasks').service('VTodoService', ['DavClient', 'RandomStringServi
 		cPropFilterCompleted.setAttribute('name', 'COMPLETED');
 		cCompFilterVTodo.appendChild(cPropFilterCompleted);
 
-		var cIsNotDefined = xmlDoc.createElement('c:is-not-defined');
-		cPropFilterCompleted.appendChild(cIsNotDefined);
+		if (!completed) {
+			var cIsNotDefined = xmlDoc.createElement('c:is-not-defined');
+			cPropFilterCompleted.appendChild(cIsNotDefined);
+		}
 
 		// var cPropFilterStatus = xmlDoc.createElement('c:prop-filter');
 		// cPropFilterStatus.setAttribute('name', 'STATUS');

@@ -43,7 +43,7 @@
                 <?php print_unescaped($this->inc('part.taskbody')); ?>
             </li>
         </ol>
-        <div class="loadmore handler" ng-hide="loadedAll(route.calendarID)">
+        <div class="loadmore handler" ng-hide="loadedCompleted(route.calendarID)">
             <span ng-click="getCompletedTasks(route.calendarID)"><?php p($l->t('Load remaining completed tasks.')); ?></span>
         </div>
     </div>

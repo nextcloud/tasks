@@ -49,7 +49,8 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 					users: [],
 					groups: []
 				},
-				owner: ''
+				owner: '',
+				loadedCompleted: false
 			},
 			_updatedProperties: []
 		});
@@ -225,6 +226,12 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 		},
 		get owner() {
 			return this._properties.owner;
+		},
+		get loadedCompleted() {
+			return this._properties.loadedCompleted;
+		},
+		set loadedCompleted(loadedCompleted) {
+			this._properties.loadedCompleted = loadedCompleted;
 		},
 		_setUpdated: function(propName) {
 			if (this._updatedProperties.indexOf(propName) === -1) {

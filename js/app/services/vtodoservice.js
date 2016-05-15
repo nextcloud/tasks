@@ -28,7 +28,10 @@ angular.module('Tasks').service('VTodoService', ['DavClient', 'RandomStringServi
 
 	var _this = this;
 
-	this.getAll = function(calendar) {
+	this.getAll = function(calendar, completed) {
+		if (completed === null) {
+			completed = false;
+		}
 		var xmlDoc = document.implementation.createDocument('', '', null);
 		var cCalQuery = xmlDoc.createElement('c:calendar-query');
 		cCalQuery.setAttribute('xmlns:c', 'urn:ietf:params:xml:ns:caldav');
@@ -61,8 +64,10 @@ angular.module('Tasks').service('VTodoService', ['DavClient', 'RandomStringServi
 		cPropFilterCompleted.setAttribute('name', 'COMPLETED');
 		cCompFilterVTodo.appendChild(cPropFilterCompleted);
 
-		var cIsNotDefined = xmlDoc.createElement('c:is-not-defined');
-		cPropFilterCompleted.appendChild(cIsNotDefined);
+		if (!completed) {
+			var cIsNotDefined = xmlDoc.createElement('c:is-not-defined');
+			cPropFilterCompleted.appendChild(cIsNotDefined);
+		}
 
 		// var cPropFilterStatus = xmlDoc.createElement('c:prop-filter');
 		// cPropFilterStatus.setAttribute('name', 'STATUS');
