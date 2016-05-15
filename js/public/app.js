@@ -851,7 +851,7 @@ angular.module('Tasks').controller('SettingsController', [
 			this._$scope.TasksModel = this._$tasksmodel;
 			this._$scope.TasksBusinessLayer = this._tasksbusinesslayer;
 
-			this._$scope.addTask = function(taskName, related, calendar) {
+			this._$scope.addTask = function(taskName, related, calendar, parent) {
 				var _ref, _this = this;
 				if (calendar === null) {
 				  calendar = '';
@@ -893,6 +893,7 @@ angular.module('Tasks').controller('SettingsController', [
 					_$scope.isAddingTask = false;
 					return $scope.$apply();
 				});
+				_tasksbusinesslayer.setHideSubtasks(parent, 0);
 				_$scope.status.focusTaskInput = false;
 				_$scope.status.focusSubtaskInput = false;
 				_$scope.status.addSubtaskTo = null;
