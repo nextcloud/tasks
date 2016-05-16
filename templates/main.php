@@ -1,15 +1,31 @@
-<div ng-app="Tasks" ng-cloak ng-controller="AppController" ng-click="closeAll($event)" id="app" class="handler">
+<?php
+    script('tasks', 'vendor/angular/angular.min');
+    script('tasks', 'vendor/angular-route/angular-route.min');
+    script('tasks', 'vendor/angular-animate/angular-animate.min');
+    script('tasks', 'vendor/angular-sanitize/angular-sanitize.min');
+    script('tasks', 'vendor/angular-draganddrop/angular-drag-and-drop-lists.min');
+    script('tasks', 'vendor/angular-ui-select/dist/select.min');
+    script('tasks', 'vendor/jstzdetect/jstz.min');
+    script('tasks', 'public/app');
+    script('tasks', 'vendor/jquery-timepicker/jquery.ui.timepicker');
+    script('tasks', 'vendor/davclient.js/lib/client');
+    script('tasks', 'vendor/ical.js/build/ical');
+    style('tasks', 'style'); 
+    style('tasks', 'vendor/angularui/ui-select/select2');
+?>
+
+<div ng-app="Tasks" ng-cloak ng-controller="AppController" ng-click="closeAll($event)" id="app" class="handler" data-appVersion="<?php p($_['appVersion']); ?>">
     <div id="app-navigation" ng-controller="ListController">
         <ul id="collections">
             <li id="collection_{{ collection.id }}"
                 class="collection"
                 collectionID="{{collection.id}}"
                 ng-repeat="collection in collections"
-                ng-class="{'animate-up': hideCollection(collection.id), active: collection.id==route.listID}"
+                ng-class="{'animate-up': hideCollection(collection.id), active: collection.id==route.collectionID}"
                 dnd-list="draggedTasks"
-                dnd-drop="dropCollection(event, item, index)"
-                dnd-dragover="dragoverCollection(event, item, index)">
-                <a href="#/lists/{{ collection.id }}">
+                dnd-drop="dropCollection(event, index, item)"
+                dnd-dragover="dragoverCollection(event, index)">
+                <a href="#/collections/{{ collection.id }}">
                     <span class="icon collection-{{ collection.id }}">
                         <text ng-show="collection.id=='today'"><?php p($_['DOM']); ?></text>
                     </span>
@@ -22,30 +38,30 @@
                 </div>
             </li>
             <li class="list with-menu handler"
-                id="list_{{ list.id }}"
-                listID="{{list.id}}"
-                ng-repeat="list in lists"
-                ng-class="{active: list.id==route.listID, edit:route.listparameter == 'name' && route.listID == list.id}"
+                id="list_{{ calendar.uri }}"
+                calendarID="{{calendar.uri}}"
+                ng-repeat="calendar in calendars"
+                ng-class="{active: calendar.uri==route.calendarID, edit:route.listparameter == 'name' && route.calendarID == calendar.uri}"
                 dnd-list="draggedTasks"
-                dnd-drop="dropList(event, item, index)"
-                dnd-dragover="dragoverList(event, item, index)">
-                <a href="#/lists/{{ list.id }}" style="border-right: 4px solid {{ list.calendarcolor }};" ng-dblclick="editName(list.id)">
+                dnd-drop="dropList(event, index, item)"
+                dnd-dragover="dragoverList(event, index)">
+                <a href="#/calendars/{{ calendar.uri }}" style="border-right: 4px solid {{ calendar.color }};" ng-dblclick="startRename(calendar)">
                     <span class="icon list-list"></span>
-                    <span class="title">{{ list.displayname }}</span>
+                    <span class="title">{{ calendar.displayname }}</span>
                 </a>
                 <div class="app-navigation-entry-utils">
                     <ul>
-                        <li class="app-navigation-entry-utils-counter">{{ getListCount(list.id,'all') | counterFormatter }}</li>
-                        <li class="app-navigation-entry-utils-menu-button svg"><button></button></li>
+                        <li class="app-navigation-entry-utils-counter">{{ getListCount(calendar.uri,'all') | counterFormatter }}</li>
+                        <li class="app-navigation-entry-utils-menu-button svg" ng-show="calendar.writable"><button></button></li>
                     </ul>
                 </div>
-                <div class="app-navigation-entry-menu">
+                <div class="app-navigation-entry-menu" ng-show="calendar.writable">
                     <ul>
-                        <li title="<?php p($l->t('rename')); ?>" ng-click="editName(list.id)" >
+                        <li title="<?php p($l->t('rename')); ?>" ng-click="startRename(calendar)" >
                             <img class="icon-rename svg" src="<?php p(image_path('core', 'actions/rename.svg'))?>"/>
                             <span><?php p($l->t('rename')); ?></span>
                         </li>
-                        <li title="<?php p($l->t('delete')); ?>" ng-click="deleteList(list.id)" ng-show="showDelete(list.id)" >
+                        <li title="<?php p($l->t('delete')); ?>" ng-click="delete(calendar)">
                             <img class="icon-delete svg" src="<?php p(image_path('core', 'actions/delete.svg'))?>"/>
                             <span><?php p($l->t('delete')); ?></span>
                         </li>
@@ -53,21 +69,21 @@
                 </div>
                 <div class="app-navigation-entry-edit">
                     <form>
-                        <input ng-model="list.displayname" class="edit" type="text" ng-keydown="checkName($event)" autofocus-on-insert>
-                        <input type="submit" value="" class="action icon-checkmark svg" ng-click="submitNewName()">
+                        <input ng-model="calendar.displayname" class="edit" type="text" ng-keydown="cancelRename($event,calendar)" autofocus-on-insert>
+                        <input type="submit" value="" class="action icon-checkmark svg" ng-click="rename(calendar)">
                     </form>
                 </div>
             </li>
             <li class="newList handler" ng-class="{edit: status.addingList}">
-                <a class="addlist" ng-click="startAddingList()" oc-click-focus="{selector: '#newList', timeout: 0}">
+                <a class="addlist" ng-click="startCreate()" oc-click-focus="{selector: '#newList', timeout: 0}">
                     <span class="icon detail-add"></span>
                     <span class="title"><?php p($l->t('Add List...')); ?></span>
                 </a>
                 <div class="app-navigation-entry-edit">
                     <form ng-disabled="isAddingList">
                         <input id="newList" ng-model="status.newListName" class="edit" type="text" autofocus-on-insert
-                        placeholder="<?php p($l->t('New List')); ?>" ng-keydown="checkListInput($event)" >
-                        <input type="submit" value="" class="action icon-checkmark svg" ng-click="submitNewList($event)">
+                        placeholder="<?php p($l->t('New List')); ?>" ng-keydown="cancelCreate($event)" >
+                        <input type="submit" value="" class="action icon-checkmark svg" ng-click="create($event)">
                     </form>
                 </div>
             </li>

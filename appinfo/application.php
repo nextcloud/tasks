@@ -23,21 +23,12 @@
 namespace OCA\Tasks\AppInfo;
 
 use \OCP\AppFramework\App;
+use \OCP\AppFramework\IAppContainer;
 use \OCA\Tasks\Controller\PageController;
 use \OCA\Tasks\Controller\CollectionsController;
-use \OCA\Tasks\Controller\ListsController;
 use \OCA\Tasks\Controller\SettingsController;
-use \OCA\Tasks\Controller\TasksController;
-use \OCA\Tasks\Service\TasksService;
-use \OCA\Tasks\Service\ListsService;
 use \OCA\Tasks\Service\CollectionsService;
 use \OCA\Tasks\Service\SettingsService;
-use \OCA\Tasks\Service\Helper;
-use \OCA\Tasks\Service\MapperHelper;
-use \OCA\Tasks\Service\TaskParser;
-use \OCA\Tasks\Service\ReminderService;
-use \OCA\Tasks\Service\CommentsService;
-use \OCA\Tasks\Db\TasksMapper;
 
 class Application extends App {
 
@@ -50,15 +41,16 @@ class Application extends App {
 		/**
 		 * Controllers
 		 */
-		$container->registerService('PageController', function($c) {
+		$container->registerService('PageController', function(IAppContainer $c) {
 			return new PageController(
 				$c->query('AppName'),
 				$c->query('Request'),
-				$c->query('UserId')
+				$c->query('UserId'),
+				$c->query('ServerContainer')->getConfig()
 			);
 		});
 
-		$container->registerService('CollectionsController', function($c) {
+		$container->registerService('CollectionsController', function(IAppContainer $c) {
 			return new CollectionsController(
 				$c->query('AppName'),
 				$c->query('Request'),
@@ -66,15 +58,7 @@ class Application extends App {
 			);
 		});
 
-		$container->registerService('ListsController', function($c) {
-			return new ListsController(
-				$c->query('AppName'),
-				$c->query('Request'),
-				$c->query('ListsService')
-			);
-		});
-
-		$container->registerService('SettingsController', function($c) {
+		$container->registerService('SettingsController', function(IAppContainer $c) {
 			return new SettingsController(
 				$c->query('AppName'),
 				$c->query('Request'),
@@ -82,37 +66,11 @@ class Application extends App {
 			);
 		});
 
-		$container->registerService('TasksController', function($c) {
-			return new TasksController(
-				$c->query('AppName'),
-				$c->query('Request'),
-				$c->query('TasksService'),
-				$c->query('ReminderService'),
-				$c->query('CommentsService')
-			);
-		});
-
-
 		/**
 		 * Services
 		 */
-		$container->registerService('TasksService', function($c) {
-			return new TasksService(
-				$c->query('UserId'),
-				$c->query('TasksMapper'),
-				$c->query('MapperHelper'),
-				$c->query('Helper'),
-				$c->query('TaskParser')
-			);
-		});
 
-		$container->registerService('ListsService', function($c) {
-			return new ListsService(
-				$c->query('UserId')
-			);
-		});
-
-		$container->registerService('CollectionsService', function($c) {
+		$container->registerService('CollectionsService', function(IAppContainer $c) {
 			return new CollectionsService(
 				$c->query('UserId'),
 				$c->query('L10N'),
@@ -121,7 +79,7 @@ class Application extends App {
 			);
 		});
 
-		$container->registerService('SettingsService', function($c) {
+		$container->registerService('SettingsService', function(IAppContainer $c) {
 			return new SettingsService(
 				$c->query('UserId'),
 				$c->query('Settings'),
@@ -129,66 +87,21 @@ class Application extends App {
 			);
 		});
 
-		$container->registerService('MapperHelper', function($c) {
-			return new MapperHelper(
-				$c->query('TasksMapper'),
-				$c->query('Helper'),
-				$c->query('TaskParser')
-			);
-		});
-
-		$container->registerService('TaskParser', function($c) {
-			return new TaskParser(
-				$c->query('ReminderService'),
-				$c->query('Helper')
-			);
-		});
-
-		$container->registerService('ReminderService', function($c) {
-			return new ReminderService(
-				$c->query('Helper')
-			);
-		});
-
-		$container->registerService('CommentsService', function($c) {
-			return new CommentsService(
-				$c->query('UserId'),
-				$c->query('Helper')
-			);
-		});
-
-		$container->registerService('Helper', function() {
-			return new Helper(
-			);
-		});
-
 		/**
 		 * Core
 		 */
-		$container->registerService('UserId', function($c) {
+		$container->registerService('UserId', function(IAppContainer $c) {
 			$user = $c->query('ServerContainer')->getUserSession()->getUser();
 
 			return ($user) ? $user->getUID() : '';
 		});	
 
-		$container->registerService('L10N', function($c) {
+		$container->registerService('L10N', function(IAppContainer $c) {
 			return $c->query('ServerContainer')->getL10N($c->query('AppName'));
 		});
 
-		$container->registerService('Settings', function($c) {
+		$container->registerService('Settings', function(IAppContainer $c) {
 			return $c->query('ServerContainer')->getConfig();
 		});
-
-		/**
-		 * Database Layer
-		 */
-		$container->registerService('TasksMapper', function($c) {
-			return new TasksMapper(
-				$c->query('ServerContainer')->getDb()
-			);
-		});
-		
 	}
-
-
 }

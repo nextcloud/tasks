@@ -1,7 +1,7 @@
 {
   "name": "task",
   "description": "ownCloud Task App",
-  "version": "0.8.1",
+  "version": "0.9.0",
   "author": {
     "name": "Raimund Schlüßler",
     "email": "raimund.schluessler@googlemail.com"
@@ -16,12 +16,12 @@
   "contributors": [],
   "dependencies": {},
   "devDependencies": {
-    "coffee-script": "~1.4.0",
+    "bower": "*",
     "grunt": "~0.4.1",
     "grunt-cli": "~0.1.6",
-    "grunt-coffeelint": "0.0.6",
+    "grunt-contrib-jshint": "*",
+    "jshint-stylish": "^2.1.0",
     "grunt-concurrent": "~1.0.0",
-    "grunt-contrib-coffee": "~0.7.0",
     "grunt-contrib-concat": "~0.1.2",
     "grunt-contrib-less": "~0.6.4",
     "grunt-contrib-watch": "~0.2.0",

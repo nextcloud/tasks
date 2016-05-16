@@ -1,0 +1,34 @@
+{
+  "name": "ownCloud Task App",
+  "version": "0.9.0",
+  "dependencies": {
+    "angular": "",
+    "angular-route": "",
+    "angular-animate": "",
+    "angular-sanitize": "",
+    "angular-ui-select": "https://github.com/angular-ui/ui-select.git",
+    "angular-draganddrop": "https://github.com/marceljuenemann/angular-drag-and-drop-lists.git",
+    "jquery-timepicker": "",
+    "ical.js": "~1.1.2",
+    "jstzdetect": "",
+    "davclient.js": "https://github.com/evert/davclient.js.git"
+  },
+  "devDependencies": {},
+  "homepage": "https://github.com/owncloud/tasks",
+  "authors": [
+    "Raimund Schlüßler <raimund.schluessler@googlemail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "AGPLv3",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "core/vendor",
+    "test",
+    "tests"
+  ]
+}

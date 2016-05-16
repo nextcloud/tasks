@@ -29,13 +29,13 @@ use OCA\Tasks\AppInfo\Application;
  */
 class SearchProvider extends \OCP\Search\Provider {
 
-	private $tasksService;
+	// private $tasksService;
 
 	public function __construct() {
 		$app = new Application();
 		$container = $app->getContainer();
 		$this->app = $app;
-		$this->tasksService = $container->query('TasksService');
+		// $this->tasksService = $container->query('TasksService');
 	}
 
 
@@ -46,6 +46,6 @@ class SearchProvider extends \OCP\Search\Provider {
 	 * @return array
 	 */
 	public function search($query) {
-		return $this->tasksService->search($query);
+		// return $this->tasksService->search($query);
 	}
 }
