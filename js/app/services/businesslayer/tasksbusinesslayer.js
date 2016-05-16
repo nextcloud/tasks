@@ -31,8 +31,8 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				this._$vtodoservice = _$vtodoservice;
 			}
 
-			TasksBusinessLayer.prototype.getAll = function(calendar, completed) {
-				return this._$vtodoservice.getAll(calendar, completed).then(function(tasks) {
+			TasksBusinessLayer.prototype.getAll = function(calendar, completed, parent) {
+				return this._$vtodoservice.getAll(calendar, completed, parent).then(function(tasks) {
 					var task, _i, _len, _results;
 					_results = [];
 					for (_i = 0, _len = tasks.length; _i < _len; _i++) {
@@ -56,19 +56,6 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				return this._$vtodoservice.get(calendar, uri).then(function(task) {
 					TasksModel.ad(task);
 					return task;
-				});
-			};
-
-			TasksBusinessLayer.prototype.getCompletedByParent = function(task) {
-				return this._$vtodoservice.getAll(task.calendar, true, task).then(function(tasks) {
-					var task, _i, _len, _results;
-					_results = [];
-					for (_i = 0, _len = tasks.length; _i < _len; _i++) {
-						task = tasks[_i];
-						var vTodo = new VTodo(task.calendar, task.properties, task.uri);
-						_results.push(TasksModel.ad(vTodo));
-					}
-					return _results;
 				});
 			};
 

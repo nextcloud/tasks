@@ -73,12 +73,10 @@ angular.module('Tasks').service('VTodoService', ['DavClient', 'RandomStringServi
 		}
 
 		if (parent) {
-			console.log('parent');
 			var cPropFilterRelated = xmlDoc.createElement('c:prop-filter');
 			cPropFilterRelated.setAttribute('name', 'RELATED-TO');
 			cCompFilterVTodo.appendChild(cPropFilterRelated);
 			var cTextMatch = xmlDoc.createElement('c:text-match');
-			// cTextMatch.setAttribute('negate-condition', 'yes');
 			var cTextMatchValue = xmlDoc.createTextNode(parent.uid);
 			cTextMatch.appendChild(cTextMatchValue);
 			cPropFilterRelated.appendChild(cTextMatch);

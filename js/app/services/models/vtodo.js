@@ -33,7 +33,8 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 			data: props['{urn:ietf:params:xml:ns:caldav}calendar-data'],
 			uri: uri,
 			etag: props['{DAV:}getetag'] || null,
-			timers: []
+			timers: [],
+			loaded: false
 		});
 
 		this.jCal = ICAL.parse(this.data);
@@ -215,6 +216,12 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		get comments() {
 			return null;
 		},
+		get loadedCompleted () {
+			return this.loaded;
+		},
+		set loadedCompleted (loadedCompleted) {
+			this.loaded = loadedCompleted;
+		}
 	};
 
 	VTodo.create = function(task) {

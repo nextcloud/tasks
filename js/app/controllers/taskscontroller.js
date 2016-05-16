@@ -174,10 +174,13 @@
 				var calendarID = _$scope.route.calendarID;
 				var collectionID = _$scope.route.collectionID;
 				if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
-					var task = _$tasksmodel.getByUri(id);
-					_tasksbusinesslayer.getCompletedByParent(task).then(function() {
-						$scope.$apply();
-					});
+					var parent = _$tasksmodel.getByUri(id);
+					if (!parent.loadedCompleted) {
+						_tasksbusinesslayer.getAll(parent.calendar, true, parent).then(function() {
+							parent.loadedCompleted = true;
+							$scope.$apply();
+						});
+					}
 					if (calendarID) {
 						$location.path('/calendars/' + calendarID + '/tasks/' + id);
 					} else if (collectionID) {

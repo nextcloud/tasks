@@ -975,10 +975,13 @@ angular.module('Tasks').controller('SettingsController', [
 				var calendarID = _$scope.route.calendarID;
 				var collectionID = _$scope.route.collectionID;
 				if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
-					var task = _$tasksmodel.getByUri(id);
-					_tasksbusinesslayer.getCompletedByParent(task).then(function() {
-						$scope.$apply();
-					});
+					var parent = _$tasksmodel.getByUri(id);
+					if (!parent.loadedCompleted) {
+						_tasksbusinesslayer.getAll(parent.calendar, true, parent).then(function() {
+							parent.loadedCompleted = true;
+							$scope.$apply();
+						});
+					}
 					if (calendarID) {
 						$location.path('/calendars/' + calendarID + '/tasks/' + id);
 					} else if (collectionID) {
@@ -1686,8 +1689,8 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				this._$vtodoservice = _$vtodoservice;
 			}
 
-			TasksBusinessLayer.prototype.getAll = function(calendar, completed) {
-				return this._$vtodoservice.getAll(calendar, completed).then(function(tasks) {
+			TasksBusinessLayer.prototype.getAll = function(calendar, completed, parent) {
+				return this._$vtodoservice.getAll(calendar, completed, parent).then(function(tasks) {
 					var task, _i, _len, _results;
 					_results = [];
 					for (_i = 0, _len = tasks.length; _i < _len; _i++) {
@@ -1711,19 +1714,6 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				return this._$vtodoservice.get(calendar, uri).then(function(task) {
 					TasksModel.ad(task);
 					return task;
-				});
-			};
-
-			TasksBusinessLayer.prototype.getCompletedByParent = function(task) {
-				return this._$vtodoservice.getAll(task.calendar, true, task).then(function(tasks) {
-					var task, _i, _len, _results;
-					_results = [];
-					for (_i = 0, _len = tasks.length; _i < _len; _i++) {
-						task = tasks[_i];
-						var vTodo = new VTodo(task.calendar, task.properties, task.uri);
-						_results.push(TasksModel.ad(vTodo));
-					}
-					return _results;
 				});
 			};
 
@@ -3726,7 +3716,8 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 			data: props['{urn:ietf:params:xml:ns:caldav}calendar-data'],
 			uri: uri,
 			etag: props['{DAV:}getetag'] || null,
-			timers: []
+			timers: [],
+			loaded: false
 		});
 
 		this.jCal = ICAL.parse(this.data);
@@ -3908,6 +3899,12 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		get comments() {
 			return null;
 		},
+		get loadedCompleted () {
+			return this.loaded;
+		},
+		set loadedCompleted (loadedCompleted) {
+			this.loaded = loadedCompleted;
+		}
 	};
 
 	VTodo.create = function(task) {
@@ -4296,12 +4293,10 @@ angular.module('Tasks').service('VTodoService', ['DavClient', 'RandomStringServi
 		}
 
 		if (parent) {
-			console.log('parent');
 			var cPropFilterRelated = xmlDoc.createElement('c:prop-filter');
 			cPropFilterRelated.setAttribute('name', 'RELATED-TO');
 			cCompFilterVTodo.appendChild(cPropFilterRelated);
 			var cTextMatch = xmlDoc.createElement('c:text-match');
-			// cTextMatch.setAttribute('negate-condition', 'yes');
 			var cTextMatchValue = xmlDoc.createTextNode(parent.uid);
 			cTextMatch.appendChild(cTextMatchValue);
 			cPropFilterRelated.appendChild(cTextMatch);
