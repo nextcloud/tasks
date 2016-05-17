@@ -1,7 +1,6 @@
 <?php
 $TRANSLATIONS = array(
 "Tasks" => "งาน",
-"Tasks app is unavailable because the calendar is not installed" => "งานของแอพฯยังไม่พร้อมใช้งาน เพราะไม่ได้ติดตั้งปฏิทิน",
 "Due yesterday" => "ครบกำหนดเมื่อวานนี้",
 "Due today" => "ครบกำหนดวันนี้",
 "Due tomorrow" => "ครบกำหนดเมื่อวานนี้",
@@ -31,8 +30,6 @@ $TRANSLATIONS = array(
 "%d months" => "%d เดือน",
 "a year" => "หนึ่งปี",
 "%d years" => "%d ปี",
-"Hours" => "ชั่วโมง",
-"Minutes" => "นาที",
 "week" => "สัปดาห์",
 "weeks" => "สัปดาห์",
 "day" => "วัน",
@@ -67,6 +64,8 @@ $TRANSLATIONS = array(
 "Add a current item in \"%s\"..." => "เพิ่มรายการปัจจุบันใน \"%s\" ...",
 "Add a subtask to \"%s\"..." => "เพิ่ม subtask ไปยัง \"%s\"...",
 "_%n Completed Task_::_%n Completed Tasks_" => array("%n งานเสร็จสมบูรณ์"),
+"Hours" => "ชั่วโมง",
+"Minutes" => "นาที",
 "Set due date" => "ระบุวันครบกำหนด",
 "%s %% completed" => "%s %% เสร็จสมบูรณ์",
 "priority %s: " => "ลำดับความสำคัญ %s:",

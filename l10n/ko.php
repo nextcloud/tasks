@@ -1,7 +1,6 @@
 <?php
 $TRANSLATIONS = array(
 "Tasks" => "작업",
-"Tasks app is unavailable because the calendar is not installed" => "달력 앱이 설치되어 있지 않아서 작업 앱을 사용할 수 없습니다",
 "Due yesterday" => "어제 끝남",
 "Due today" => "오늘 끝남",
 "Due tomorrow" => "내일 끝남",
@@ -31,8 +30,6 @@ $TRANSLATIONS = array(
 "%d months" => "%d개월",
 "a year" => "1년",
 "%d years" => "%d년",
-"Hours" => "시간",
-"Minutes" => "분",
 "week" => "주",
 "weeks" => "주",
 "day" => "일",
@@ -67,6 +64,8 @@ $TRANSLATIONS = array(
 "Add a current item in \"%s\"..." => "\"%s\"에 현재 항목 추가 중...",
 "Add a subtask to \"%s\"..." => "\"%s\"에 하위 작업 추가...",
 "_%n Completed Task_::_%n Completed Tasks_" => array("완료된 작업 %n개"),
+"Hours" => "시간",
+"Minutes" => "분",
 "Set due date" => "만료 기한 설정",
 "%s %% completed" => "%s%% 완료됨",
 "priority %s: " => "%s 우선 순위: ",

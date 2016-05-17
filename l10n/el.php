@@ -1,7 +1,6 @@
 <?php
 $TRANSLATIONS = array(
 "Tasks" => "Εργασίες",
-"Tasks app is unavailable because the calendar is not installed" => "Η εφαρμογή εργασιών δεν είναι διαθέσιμη γιατί δεν είναι εγκατεστημένο το ημερολόγιο",
 "Due yesterday" => "Προθεσμία χθες",
 "Due today" => "Προθεσμία σήμερα",
 "Due tomorrow" => "Προθεσμία αύριο",
@@ -31,8 +30,6 @@ $TRANSLATIONS = array(
 "%d months" => "%d μήνες",
 "a year" => "ένα έτος",
 "%d years" => "%d έτη",
-"Hours" => "Ώρες",
-"Minutes" => "Λεπτά",
 "week" => "εβδομάδα",
 "weeks" => "εβδομάδες",
 "day" => "ημέρα",
@@ -67,6 +64,8 @@ $TRANSLATIONS = array(
 "Add a current item in \"%s\"..." => "Προσθήκη ενός τρέχοντος στοιχείου στο \"%s\"...",
 "Add a subtask to \"%s\"..." => "Προσθήκη υποέργου σε \"%s\"...",
 "_%n Completed Task_::_%n Completed Tasks_" => array("%n Ολοκληρωμένη Εργασία","%n Ολοκληρωμένες Εργασίες"),
+"Hours" => "Ώρες",
+"Minutes" => "Λεπτά",
 "Set due date" => "Ορισμός προθεσμίας",
 "%s %% completed" => "%s %% ολοκληρωμένες",
 "priority %s: " => "προτεραιότητα %s:",

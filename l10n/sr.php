@@ -1,7 +1,6 @@
 <?php
 $TRANSLATIONS = array(
 "Tasks" => "Задаци",
-"Tasks app is unavailable because the calendar is not installed" => "Апликација Задаци није доступна јер Календар није инсталиран",
 "Due yesterday" => "до јуче",
 "Due today" => "до данас",
 "Due tomorrow" => "до сутра",
@@ -31,8 +30,6 @@ $TRANSLATIONS = array(
 "%d months" => "%d мес.",
 "a year" => "година",
 "%d years" => "%d год.",
-"Hours" => "сати",
-"Minutes" => "минути",
 "week" => "седмица",
 "weeks" => "седмица",
 "day" => "дан",
@@ -67,6 +64,8 @@ $TRANSLATIONS = array(
 "Add a current item in \"%s\"..." => "Додај тренутну ставку у „%s“...",
 "Add a subtask to \"%s\"..." => "Додај подзадатак у „%s“...",
 "_%n Completed Task_::_%n Completed Tasks_" => array("%n завршен задатак","%n завршена задатка","%n завршених задатака"),
+"Hours" => "сати",
+"Minutes" => "минути",
 "Set due date" => "Постави датум рока",
 "%s %% completed" => "%s %% завршено",
 "priority %s: " => "приоритет %s:",

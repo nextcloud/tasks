@@ -1,7 +1,6 @@
 <?php
 $TRANSLATIONS = array(
 "Tasks" => "Tareas",
-"Tasks app is unavailable because the calendar is not installed" => "La aplicación de tareas no está disponible porque el calendario no está instalado",
 "Due yesterday" => "Venció ayer",
 "Due today" => "Vence hoy",
 "Due tomorrow" => "Vence mañana",
@@ -30,8 +29,6 @@ $TRANSLATIONS = array(
 "%d months" => "%d meses",
 "a year" => "un año",
 "%d years" => "%d años",
-"Hours" => "Horas",
-"Minutes" => "Minutos",
 "week" => "semana",
 "weeks" => "semanas",
 "day" => "día",
@@ -61,6 +58,8 @@ $TRANSLATIONS = array(
 "Friday" => "Viernes",
 "Saturday" => "Sábado",
 "Add an important item in \"%s\"..." => "Agregar un elemento importante en \"%s\"...",
+"Hours" => "Horas",
+"Minutes" => "Minutos",
 "high" => "alta",
 "medium" => "media",
 "low" => "baja",

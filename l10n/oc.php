@@ -1,7 +1,6 @@
 <?php
 $TRANSLATIONS = array(
 "Tasks" => "Prètzfaches",
-"Tasks app is unavailable because the calendar is not installed" => "L'aplicacion \"Prètzfaches\" es pas disponibla perque l'aplicacion \"Calendièr\" es pas installada.",
 "Due yesterday" => "Per ièr",
 "Due today" => "Per uèi",
 "Due tomorrow" => "Per deman",
@@ -31,8 +30,6 @@ $TRANSLATIONS = array(
 "%d months" => "%d meses",
 "a year" => "un an",
 "%d years" => "%d ans",
-"Hours" => "Oras",
-"Minutes" => "Minutas",
 "week" => "setmana",
 "weeks" => "setmanas",
 "day" => "jorn",
@@ -67,6 +64,8 @@ $TRANSLATIONS = array(
 "Add a current item in \"%s\"..." => "Apondre un element corrent dins \"%s\"...",
 "Add a subtask to \"%s\"..." => "Apondre un sosprètzfach a \"%s\"...",
 "_%n Completed Task_::_%n Completed Tasks_" => array("%n prètzfach acabat","%n prètzfaches acabats"),
+"Hours" => "Oras",
+"Minutes" => "Minutas",
 "Set due date" => "Especificar la data d'escasença",
 "%s %% completed" => "completada a %s %%",
 "priority %s: " => "prioritat %s :",

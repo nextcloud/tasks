@@ -1,7 +1,6 @@
 <?php
 $TRANSLATIONS = array(
 "Tasks" => "Užduotys",
-"Tasks app is unavailable because the calendar is not installed" => "Užduočių įskiepis negalimas, nes nėra kalendoriaus.",
 "Due yesterday" => "Pasibaigė vakar",
 "Due today" => "pasibaigia šiandien",
 "Due tomorrow" => "Pasibaigs rytoj",
@@ -31,8 +30,6 @@ $TRANSLATIONS = array(
 "%d months" => "%d mėn.",
 "a year" => "metai",
 "%d years" => "%d metai",
-"Hours" => "Valandos",
-"Minutes" => "Minutės",
 "week" => "savaitė",
 "weeks" => "savaitės",
 "day" => "diena",
@@ -67,6 +64,8 @@ $TRANSLATIONS = array(
 "Add a current item in \"%s\"..." => "Pridėti dabartinį elementą į „%s“...",
 "Add a subtask to \"%s\"..." => "Pridėti užduotį į \"%s\"...",
 "_%n Completed Task_::_%n Completed Tasks_" => array("%n atlikta užduotis","%n atliktos užduotys","%n atliktų užduočių"),
+"Hours" => "Valandos",
+"Minutes" => "Minutės",
 "Set due date" => "Nustatyti atlikimo terminą",
 "%s %% completed" => "%s %% atlikta",
 "priority %s: " => "prioritetas %s: ",

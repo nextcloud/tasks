@@ -1,7 +1,6 @@
 <?php
 $TRANSLATIONS = array(
 "Tasks" => "Завдання",
-"Tasks app is unavailable because the calendar is not installed" => "Додаток управління завданнями недоступний тому, що не встановлено календар",
 "Due yesterday" => "Вчора",
 "Due today" => "Сьогодні",
 "Due tomorrow" => "Завтра",
@@ -31,8 +30,6 @@ $TRANSLATIONS = array(
 "%d months" => "%d місяців",
 "a year" => "рік",
 "%d years" => "%d років",
-"Hours" => "Годин",
-"Minutes" => "Хвилин",
 "week" => "тиждень",
 "weeks" => "тижнів",
 "day" => "день",
@@ -67,6 +64,8 @@ $TRANSLATIONS = array(
 "Add a current item in \"%s\"..." => "Додати поточний елемент в \"%s\"...",
 "Add a subtask to \"%s\"..." => "Додати підзавдання до \"%s\"...",
 "_%n Completed Task_::_%n Completed Tasks_" => array("%n завершене завданя","%n завершених завдань","%n завершених завдань"),
+"Hours" => "Годин",
+"Minutes" => "Хвилин",
 "Set due date" => "Встановіть термін",
 "%s %% completed" => "%s %% завершено",
 "priority %s: " => "приорітет %s:",

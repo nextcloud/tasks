@@ -1,7 +1,6 @@
 <?php
 $TRANSLATIONS = array(
 "Tasks" => "Sarcini",
-"Tasks app is unavailable because the calendar is not installed" => "Aplicația pentru sarcini nu este disponibilă deoarece calendarul nu este instalat",
 "Due yesterday" => "Până ieri",
 "Due today" => "Până azi",
 "Due tomorrow" => "Până mâine",
@@ -31,8 +30,6 @@ $TRANSLATIONS = array(
 "%d months" => "%d luni",
 "a year" => "un an",
 "%d years" => "%d ani",
-"Hours" => "Ore",
-"Minutes" => "Minute",
 "week" => "săptămână",
 "weeks" => "săptămâni",
 "day" => "zi",
@@ -67,6 +64,8 @@ $TRANSLATIONS = array(
 "Add a current item in \"%s\"..." => "Adaugă o sarcină curentă în \"%s\"...",
 "Add a subtask to \"%s\"..." => "Adaugă o sub-sarcină pentru \"%s\"...",
 "_%n Completed Task_::_%n Completed Tasks_" => array("%n sarcină realizată","%n sarcini realizate","%n sarcini realizate"),
+"Hours" => "Ore",
+"Minutes" => "Minute",
 "Set due date" => "Setează termenul limită",
 "%s %% completed" => "%s %% efectuat",
 "priority %s: " => "prioritate %s: ",

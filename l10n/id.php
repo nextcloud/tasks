@@ -1,7 +1,6 @@
 <?php
 $TRANSLATIONS = array(
 "Tasks" => "Tugas",
-"Tasks app is unavailable because the calendar is not installed" => "Aplikasi tugas tidak tersedia karena kalender belum terpasang",
 "Due yesterday" => "Jatuh tempo kemarin",
 "Due today" => "Jatuh tempo hari ini",
 "Due tomorrow" => "Jatuh tempo besok",
@@ -31,8 +30,6 @@ $TRANSLATIONS = array(
 "%d months" => "%d bulan",
 "a year" => "setahun",
 "%d years" => "%d tahun",
-"Hours" => "Jam",
-"Minutes" => "Menit",
 "week" => "minggu",
 "weeks" => "minggu",
 "day" => "hari",
@@ -67,6 +64,8 @@ $TRANSLATIONS = array(
 "Add a current item in \"%s\"..." => "Tambah item terbaru dalam \"%s\"...",
 "Add a subtask to \"%s\"..." => "Tambah sub tugas ke \"%s\"...",
 "_%n Completed Task_::_%n Completed Tasks_" => array("%n Tugas Diselesaikan"),
+"Hours" => "Jam",
+"Minutes" => "Menit",
 "Set due date" => "Atur tanggal jatuh tempo",
 "%s %% completed" => "%s %% selesai",
 "priority %s: " => "prioritas %s:",
