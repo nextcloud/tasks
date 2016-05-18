@@ -151,7 +151,7 @@
                 </div>
             </div>
         </div>
-        <div id="task-details" ng-class="{'details-visible':route.taskID}">
+        <div id="app-sidebar" ng-class="{'details-visible':route.taskID}">
             <div class="content-wrapper">
                 <?php print_unescaped($this->inc('part.details')); ?>
             </div>

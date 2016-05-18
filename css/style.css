@@ -557,34 +557,27 @@
 #app-content div.task-list .grouped-tasks {
   position: relative;
 }
-#task-details {
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -ms-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
+#app-sidebar {
   transition: all 0.2s ease-in-out;
-  position: absolute;
   right: -400px;
-  bottom: 0;
-  top: 0;
   width: 370px;
   max-width: 100%;
-  padding: 18px 0 17px;
+  border-left: none;
 }
-#task-details.details-visible {
+#app-sidebar.details-visible {
   right: 0;
 }
-#task-details div.content-wrapper {
-  padding: 0 10px 2px 0;
+#app-sidebar div.content-wrapper {
+  padding: 0;
   height: 100%;
 }
-#task-details div.content-wrapper > div {
+#app-sidebar div.content-wrapper > div {
   background: url("../img/bgTaskDetail.png") repeat scroll 0 0 #ffffff;
   border: 1px solid #CCCCCC;
   height: 100%;
   position: relative;
 }
-#task-details div.content-wrapper div.notice {
+#app-sidebar div.content-wrapper div.notice {
   color: #888;
   font-size: 16px;
   position: absolute;
@@ -592,7 +585,7 @@
   top: 50%;
   width: 100%;
 }
-#task-details div.content-wrapper div.footer {
+#app-sidebar div.content-wrapper div.footer {
   background: url("../img/bgTask.png") repeat scroll 0 0 #ffffff;
   border-top: 1px solid #D3D3D3;
   bottom: 0;
@@ -602,19 +595,19 @@
   position: absolute;
   right: 0;
 }
-#task-details div.content-wrapper div.footer .detail-close .icon {
+#app-sidebar div.content-wrapper div.footer .detail-close .icon {
   left: auto;
   right: 8px;
 }
-#task-details div.content-wrapper div.footer .icon {
+#app-sidebar div.content-wrapper div.footer .icon {
   position: absolute;
   bottom: 7px;
   left: 8px;
 }
-#task-details div.content-wrapper div.footer .detail-addcomment {
+#app-sidebar div.content-wrapper div.footer .detail-addcomment {
   padding: 4px 10px 0;
 }
-#task-details div.content-wrapper div.footer .detail-addcomment input {
+#app-sidebar div.content-wrapper div.footer .detail-addcomment input {
   background: none repeat scroll 0 0 white;
   border: 1px solid #bdbcbb;
   border-radius: 0;
@@ -629,16 +622,16 @@
   padding: 4px;
   transition: all 0.2s ease-in-out 0s;
 }
-#task-details div.content-wrapper div.footer .detail-addcomment input[type="text"] {
+#app-sidebar div.content-wrapper div.footer .detail-addcomment input[type="text"] {
   width: 230px;
 }
-#task-details div.content-wrapper div.footer .detail-addcomment input[type="button"] {
+#app-sidebar div.content-wrapper div.footer .detail-addcomment input[type="button"] {
   float: right;
   margin-right: 0;
   color: #BBB;
   cursor: default;
 }
-#task-details div.content-wrapper div.footer .detail-addcomment input[type="button"].active {
+#app-sidebar div.content-wrapper div.footer .detail-addcomment input[type="button"].active {
   color: #fff;
   background: -webkit-linear-gradient(top, #5cb6e7 0%, #317cd7 100%) repeat scroll 0 0 transparent;
   background: -moz-linear-gradient(center top, #5cb6e7 0%, #317cd7 100%) repeat scroll 0 0 transparent;
@@ -648,16 +641,16 @@
   transition: none;
   cursor: pointer;
 }
-#task-details div.content-wrapper.completed .body .section .section-title {
+#app-sidebar div.content-wrapper.completed .body .section .section-title {
   color: #9FA2A6 !important;
 }
-#task-details div.content-wrapper.completed .body .section .icon.detail-date {
+#app-sidebar div.content-wrapper.completed .body .section .icon.detail-date {
   background-position: -100px -40px !important;
 }
-#task-details div.content-wrapper.completed .body .section .icon.detail-reminder {
+#app-sidebar div.content-wrapper.completed .body .section .icon.detail-reminder {
   background-position: -40px -40px !important;
 }
-#task-details div.content-wrapper .title {
+#app-sidebar div.content-wrapper .title {
   background-color: #f5f5f5;
   border-bottom: 1px solid rgba(0, 0, 0, 0.24);
   font-size: 16px;
@@ -668,16 +661,16 @@
   text-shadow: 0 1px 0 white;
   word-wrap: break-word;
 }
-#task-details div.content-wrapper .title .title-text {
+#app-sidebar div.content-wrapper .title .title-text {
   cursor: text;
   display: block;
 }
-#task-details div.content-wrapper .title .title-text.strike-through {
+#app-sidebar div.content-wrapper .title .title-text.strike-through {
   text-decoration: line-through;
   text-shadow: none;
 }
-#task-details div.content-wrapper .title textarea,
-#task-details div.content-wrapper .title pre {
+#app-sidebar div.content-wrapper .title textarea,
+#app-sidebar div.content-wrapper .title pre {
   box-shadow: none;
   font-size: 16px;
   font-weight: bold;
@@ -688,7 +681,7 @@
   white-space: pre-wrap;
   word-wrap: break-word;
 }
-#task-details div.content-wrapper .title pre {
+#app-sidebar div.content-wrapper .title pre {
   border: 0 none !important;
   display: block;
   margin: 0;
@@ -696,7 +689,7 @@
   padding: 0 !important;
   visibility: hidden;
 }
-#task-details div.content-wrapper .title textarea {
+#app-sidebar div.content-wrapper .title textarea {
   margin: 0;
   border-radius: 0;
   height: 100%;
@@ -707,23 +700,23 @@
   top: 0;
   width: 100%;
 }
-#task-details div.content-wrapper .title .expandable-container {
+#app-sidebar div.content-wrapper .title .expandable-container {
   background: none repeat scroll 0 0 #FFFFFF;
   border: 1px solid #AAAAAA;
   margin: -1px -4px -1px -6px;
   padding: 0 5px;
   display: none !important;
 }
-#task-details div.content-wrapper .title .expandable-container .expandingArea {
+#app-sidebar div.content-wrapper .title .expandable-container .expandingArea {
   position: relative;
 }
-#task-details div.content-wrapper .title.editing .title-text {
+#app-sidebar div.content-wrapper .title.editing .title-text {
   display: none !important;
 }
-#task-details div.content-wrapper .title.editing .expandable-container {
+#app-sidebar div.content-wrapper .title.editing .expandable-container {
   display: block !important;
 }
-#task-details div.content-wrapper .body {
+#app-sidebar div.content-wrapper .body {
   bottom: 65px;
   left: 0;
   overflow: auto;
@@ -731,7 +724,7 @@
   right: 0;
   top: 55px;
 }
-#task-details div.content-wrapper .body .note {
+#app-sidebar div.content-wrapper .body .note {
   background: -webkit-linear-gradient(bottom, #dee2d0 1px, transparent 1px) repeat scroll 0 0 / 100% 26px #f5f5f5;
   background: -moz-linear-gradient(center bottom, #dee2d0 1px, transparent 1px) repeat scroll 0 0 / 100% 26px #f5f5f5;
   background: -ms-linear-gradient(center bottom, #dee2d0 1px, transparent 1px) repeat scroll 0 0 / 100% 26px #f5f5f5;
@@ -747,12 +740,12 @@
   padding: 5px 15px;
   cursor: text;
 }
-#task-details div.content-wrapper .body .note .expandingArea {
+#app-sidebar div.content-wrapper .body .note .expandingArea {
   position: relative;
   margin-left: -1px;
 }
-#task-details div.content-wrapper .body .note .expandingArea textarea,
-#task-details div.content-wrapper .body .note .expandingArea pre {
+#app-sidebar div.content-wrapper .body .note .expandingArea textarea,
+#app-sidebar div.content-wrapper .body .note .expandingArea pre {
   box-shadow: none;
   background: none repeat scroll 0 0 transparent;
   border: medium none;
@@ -762,7 +755,7 @@
   white-space: pre-wrap;
   word-wrap: break-word;
 }
-#task-details div.content-wrapper .body .note .expandingArea pre {
+#app-sidebar div.content-wrapper .body .note .expandingArea pre {
   border: 0 none !important;
   display: block;
   margin: 0;
@@ -770,7 +763,7 @@
   padding: 0 !important;
   visibility: hidden;
 }
-#task-details div.content-wrapper .body .note .expandingArea textarea {
+#app-sidebar div.content-wrapper .body .note .expandingArea textarea {
   margin: 0 0 0 1px;
   border-radius: 0;
   height: 100%;
@@ -784,55 +777,55 @@
   font-weight: 500;
   outline: medium none;
 }
-#task-details div.content-wrapper .body .note .note-body,
-#task-details div.content-wrapper .body .note .note-edit {
+#app-sidebar div.content-wrapper .body .note .note-body,
+#app-sidebar div.content-wrapper .body .note .note-edit {
   cursor: text;
   min-height: 140px;
   word-wrap: break-word;
 }
-#task-details div.content-wrapper .body .note .note-body a,
-#task-details div.content-wrapper .body .note .note-edit a {
+#app-sidebar div.content-wrapper .body .note .note-body a,
+#app-sidebar div.content-wrapper .body .note .note-edit a {
   cursor: text;
 }
-#task-details div.content-wrapper .body .note .note-body .content-fakeable,
-#task-details div.content-wrapper .body .note .note-edit .content-fakeable,
-#task-details div.content-wrapper .body .note .note-body .edit-view,
-#task-details div.content-wrapper .body .note .note-edit .edit-view,
-#task-details div.content-wrapper .body .note .note-body .display-view,
-#task-details div.content-wrapper .body .note .note-edit .display-view {
+#app-sidebar div.content-wrapper .body .note .note-body .content-fakeable,
+#app-sidebar div.content-wrapper .body .note .note-edit .content-fakeable,
+#app-sidebar div.content-wrapper .body .note .note-body .edit-view,
+#app-sidebar div.content-wrapper .body .note .note-edit .edit-view,
+#app-sidebar div.content-wrapper .body .note .note-body .display-view,
+#app-sidebar div.content-wrapper .body .note .note-edit .display-view {
   cursor: text !important;
 }
-#task-details div.content-wrapper .body .note .note-body .content-fakeable .display-view,
-#task-details div.content-wrapper .body .note .note-edit .content-fakeable .display-view {
+#app-sidebar div.content-wrapper .body .note .note-body .content-fakeable .display-view,
+#app-sidebar div.content-wrapper .body .note .note-edit .content-fakeable .display-view {
   display: block;
 }
-#task-details div.content-wrapper .body .note .note-body .content-fakeable .edit-view,
-#task-details div.content-wrapper .body .note .note-edit .content-fakeable .edit-view {
+#app-sidebar div.content-wrapper .body .note .note-body .content-fakeable .edit-view,
+#app-sidebar div.content-wrapper .body .note .note-edit .content-fakeable .edit-view {
   display: none !important;
 }
-#task-details div.content-wrapper .body .note .note-body .content-fakeable.editing .display-view,
-#task-details div.content-wrapper .body .note .note-edit .content-fakeable.editing .display-view {
+#app-sidebar div.content-wrapper .body .note .note-body .content-fakeable.editing .display-view,
+#app-sidebar div.content-wrapper .body .note .note-edit .content-fakeable.editing .display-view {
   display: none !important;
 }
-#task-details div.content-wrapper .body .note .note-body .content-fakeable.editing .edit-view,
-#task-details div.content-wrapper .body .note .note-edit .content-fakeable.editing .edit-view {
+#app-sidebar div.content-wrapper .body .note .note-body .content-fakeable.editing .edit-view,
+#app-sidebar div.content-wrapper .body .note .note-edit .content-fakeable.editing .edit-view {
   display: block !important;
 }
-#task-details div.content-wrapper .body .note .note-body .display-view,
-#task-details div.content-wrapper .body .note .note-edit .display-view {
+#app-sidebar div.content-wrapper .body .note .note-body .display-view,
+#app-sidebar div.content-wrapper .body .note .note-edit .display-view {
   white-space: pre-wrap;
 }
 
-#task-details div.content-wrapper .body .detail-comments .comment a,
-#task-details div.content-wrapper .body .note .note-body .display-view a,
-#task-details div.content-wrapper .body .note .note-edit .display-view a,
-#task-details div.content-wrapper .title .title-text a,
-#task-details div.content-wrapper .task-list .task-body .title-wrapper .title a,
+#app-sidebar div.content-wrapper .body .detail-comments .comment a,
+#app-sidebar div.content-wrapper .body .note .note-body .display-view a,
+#app-sidebar div.content-wrapper .body .note .note-edit .display-view a,
+#app-sidebar div.content-wrapper .title .title-text a,
+#app-sidebar div.content-wrapper .task-list .task-body .title-wrapper .title a,
 #app-content div.content-wrapper .task-body .title-wrapper span.title a {
   cursor: pointer;
   text-decoration: underline;
 }
-#task-details div.content-wrapper .body .note .open-fullscreen-note {
+#app-sidebar div.content-wrapper .body .note .open-fullscreen-note {
   margin-top: -2px;
   padding-bottom: 10px;
   padding-left: 10px;
@@ -840,17 +833,17 @@
   right: 23px;
   z-index: 9999;
 }
-#task-details div.content-wrapper .body .subtasks {
+#app-sidebar div.content-wrapper .body .subtasks {
   background: none repeat scroll 0 0 white;
   border: 1px solid #C9C8BD;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
   margin: 20px;
   position: relative;
 }
-#task-details div.content-wrapper .body .subtasks.buffer {
+#app-sidebar div.content-wrapper .body .subtasks.buffer {
   padding-bottom: 32px;
 }
-#task-details div.content-wrapper .body .section {
+#app-sidebar div.content-wrapper .body .section {
   background: url("../img/divider.svg") repeat-x scroll center bottom transparent;
   height: 46px;
   padding: 9px 20px 9px 55px;
@@ -859,7 +852,7 @@
   border-top: none;
   margin-bottom: 0px;
 }
-#task-details div.content-wrapper .body .section input {
+#app-sidebar div.content-wrapper .body .section input {
   -moz-box-sizing: border-box;
   background: none repeat scroll 0 0 white;
   border: 1px solid #BDBCBB;
@@ -873,33 +866,33 @@
   outline: medium none;
   padding: 4px;
 }
-#task-details div.content-wrapper .body .section input.focus {
+#app-sidebar div.content-wrapper .body .section input.focus {
   background-color: #F8F8F8;
   border: 1px solid rgba(43, 136, 217, 0.65);
   box-shadow: 0 0 4px rgba(43, 136, 217, 0.32), 0 1px 1px rgba(255, 255, 255, 0.43), 0 2px 4px rgba(43, 136, 217, 0.12) inset, 0 0 4px rgba(43, 136, 217, 0.2) inset;
 }
-#task-details div.content-wrapper .body .section input[type="range"] {
+#app-sidebar div.content-wrapper .body .section input[type="range"] {
   border: medium none;
   box-shadow: none;
   width: 190px;
   margin: 5px 36px 0 0;
   height: 17px;
 }
-#task-details div.content-wrapper .body .section input[type="text"] {
+#app-sidebar div.content-wrapper .body .section input[type="text"] {
   float: left;  
 }
-#task-details div.content-wrapper .body .section .select2-search-field input {
+#app-sidebar div.content-wrapper .body .section .select2-search-field input {
   border: 0 none;
   box-shadow: none;
   font-weight: bold;
   margin-top: 0px;
   font-family: inherit;
 }
-#task-details div.content-wrapper .disabled .body .section .select2-search-field input {
+#app-sidebar div.content-wrapper .disabled .body .section .select2-search-field input {
   width: auto;
   display: block !important;
 }
-#task-details div.content-wrapper .body .section select {
+#app-sidebar div.content-wrapper .body .section select {
   background-color: rgba(0, 0, 0, 0);
   border-radius: 0px;
   border: 1px solid #CCC;
@@ -909,154 +902,154 @@
   font-weight: normal;
   height: 19px;
 }
-#task-details div.content-wrapper .body .section .icon {
+#app-sidebar div.content-wrapper .body .section .icon {
   left: 16px;
   position: absolute;
   top: 13px;
 }
-#task-details div.content-wrapper .body .section .icon.detail-delete {
+#app-sidebar div.content-wrapper .body .section .icon.detail-delete {
   display: none;
   left: auto;
   right: 22px;
 }
-#task-details div.content-wrapper .body .section .icon.detail-delete:hover {
+#app-sidebar div.content-wrapper .body .section .icon.detail-delete:hover {
   opacity: 0.8;
 }
-#task-details div.content-wrapper .body .section .icon.detail-save {
+#app-sidebar div.content-wrapper .body .section .icon.detail-save {
   display: none;
   left: auto;
   right: 40px;
 }
-#task-details div.content-wrapper .body .section .icon.detail-date,
-#task-details div.content-wrapper .body .section .icon.detail-start {
+#app-sidebar div.content-wrapper .body .section .icon.detail-date,
+#app-sidebar div.content-wrapper .body .section .icon.detail-start {
   background-position: -220px -80px;
 }
-#task-details div.content-wrapper .body .section .icon.detail-remindertype {
+#app-sidebar div.content-wrapper .body .section .icon.detail-remindertype {
   display: none;
   left: 38px;
   opacity: 0.4;
 }
-#task-details div.content-wrapper .body .section .icon.detail-remindertype:hover {
+#app-sidebar div.content-wrapper .body .section .icon.detail-remindertype:hover {
   opacity: 0.8;
 }
-#task-details div.content-wrapper .body .section .section-title {
+#app-sidebar div.content-wrapper .body .section .section-title {
   color: #9FA2A6;
   font-weight: bold;
   margin-top: 3px;
   display: block;
 }
-#task-details div.content-wrapper .body .section .section-edit {
+#app-sidebar div.content-wrapper .body .section .section-edit {
   display: none;
 }
-#task-details div.content-wrapper .body .section.editing .icon.detail-save {
+#app-sidebar div.content-wrapper .body .section.editing .icon.detail-save {
   display: inline-block;
 }
-#task-details div.content-wrapper .body .section.editing .icon.detail-delete {
+#app-sidebar div.content-wrapper .body .section.editing .icon.detail-delete {
   display: block;
 }
-#task-details div.content-wrapper .body .section.editing .section-title {
+#app-sidebar div.content-wrapper .body .section.editing .section-title {
   display: none;
 }
-#task-details div.content-wrapper .body .section.editing .section-edit {
+#app-sidebar div.content-wrapper .body .section.editing .section-edit {
   display: block;
 }
-#task-details div.content-wrapper .body .section.date .icon.detail-date,
-#task-details div.content-wrapper .body .section.date .icon.detail-start {
+#app-sidebar div.content-wrapper .body .section.date .icon.detail-date,
+#app-sidebar div.content-wrapper .body .section.date .icon.detail-start {
   background-position: -220px -40px;
 }
-#task-details div.content-wrapper .body .section.date .icon.detail-date.overdue,
-#task-details div.content-wrapper .body .section.date .icon.detail-start.overdue {
+#app-sidebar div.content-wrapper .body .section.date .icon.detail-date.overdue,
+#app-sidebar div.content-wrapper .body .section.date .icon.detail-start.overdue {
   background-position: -220px -60px;
 }
-#task-details div.content-wrapper .body .section.date .icon.detail-percent {
+#app-sidebar div.content-wrapper .body .section.date .icon.detail-percent {
   background-position: -260px -80px;
 }
-#task-details div.content-wrapper .body .section.date .icon.detail-reminder {
+#app-sidebar div.content-wrapper .body .section.date .icon.detail-reminder {
   background-position: -40px -60px;
 }
-#task-details div.content-wrapper .body .section.date .icon.detail-reminder.overdue {
+#app-sidebar div.content-wrapper .body .section.date .icon.detail-reminder.overdue {
   background-position: -40px -80px;
 }
-#task-details div.content-wrapper .body .section.date:hover .icon.detail-delete {
+#app-sidebar div.content-wrapper .body .section.date:hover .icon.detail-delete {
   display: block;
 }
-#task-details div.content-wrapper .disabled .body .section.date:hover .icon.detail-delete {
+#app-sidebar div.content-wrapper .disabled .body .section.date:hover .icon.detail-delete {
   display: none;
 }
-#task-details div.content-wrapper .body .section.date .section-title {
+#app-sidebar div.content-wrapper .body .section.date .section-title {
   color: #4271A6;
 }
-#task-details div.content-wrapper .body .section.date .section-title.overdue {
+#app-sidebar div.content-wrapper .body .section.date .section-title.overdue {
   color: #B3312D;
 }
-#task-details div.content-wrapper .body .section.date .section-title.repeat {
+#app-sidebar div.content-wrapper .body .section.date .section-title.repeat {
   margin-top: -2px;
 }
-#task-details div.content-wrapper .body .section.high .icon.detail-priority {
+#app-sidebar div.content-wrapper .body .section.high .icon.detail-priority {
   background-position: -180px -80px;
 }
-#task-details div.content-wrapper .body .section.high .section-title {
+#app-sidebar div.content-wrapper .body .section.high .section-title {
   color: #B3312D;
 }
-#task-details div.content-wrapper .body .section.medium .icon.detail-priority {
+#app-sidebar div.content-wrapper .body .section.medium .icon.detail-priority {
   background-position: -160px -100px;
 }
-#task-details div.content-wrapper .body .section.medium .section-title {
+#app-sidebar div.content-wrapper .body .section.medium .section-title {
   color: #FFDD00;
 }
-#task-details div.content-wrapper .body .section.low .icon.detail-priority {
+#app-sidebar div.content-wrapper .body .section.low .icon.detail-priority {
   background-position: -180px -100px;
 }
-#task-details div.content-wrapper .body .section.low .section-title {
+#app-sidebar div.content-wrapper .body .section.low .section-title {
   color: #4271A6;
 }
-#task-details div.content-wrapper .body .section.active .detail-categories {
+#app-sidebar div.content-wrapper .body .section.active .detail-categories {
   background-position: -200px -80px;
 }
-#task-details div.content-wrapper .body .section.active .select2-search-field input {
+#app-sidebar div.content-wrapper .body .section.active .select2-search-field input {
   color: #4271a6;
 }
-#task-details div.content-wrapper .body .section.editing .icon.detail-remindertype {
+#app-sidebar div.content-wrapper .body .section.editing .icon.detail-remindertype {
   display: block;
 }
-#task-details div.content-wrapper .body .section .icon.detail-remindertype {
+#app-sidebar div.content-wrapper .body .section .icon.detail-remindertype {
   background-position: -260px -40px;
 }
-#task-details div.content-wrapper .body .section.detail-reminder .section-description {
+#app-sidebar div.content-wrapper .body .section.detail-reminder .section-description {
   display: none;
   font-size: 11px;
   margin-top: -6px;
 }
-#task-details div.content-wrapper .body .section.detail-reminder .section-description.repeat {
+#app-sidebar div.content-wrapper .body .section.detail-reminder .section-description.repeat {
   display: block;
 }
-#task-details div.content-wrapper .body .section.detail-reminder.date .section-description {
+#app-sidebar div.content-wrapper .body .section.detail-reminder.date .section-description {
   display: block;
 }
-#task-details div.content-wrapper .body .section.detail-categories {
+#app-sidebar div.content-wrapper .body .section.detail-categories {
   height: auto;
   padding-left: 50px;
 }
-#task-details div.content-wrapper .body .section.detail-note {
+#app-sidebar div.content-wrapper .body .section.detail-note {
   padding: 20px 0;
   height: auto;
 }
-#task-details div.content-wrapper .body .section.detail-comments {
+#app-sidebar div.content-wrapper .body .section.detail-comments {
   background: none;
   padding: 10px 0;
   height: auto;
 }
-#task-details div.content-wrapper .body .section.detail-comments .comment-item {
+#app-sidebar div.content-wrapper .body .section.detail-comments .comment-item {
   padding: 5px 55px 0;
   position: relative;
 }
-#task-details div.content-wrapper .body .section.detail-comments .comment-item .icon.detail-delete {
+#app-sidebar div.content-wrapper .body .section.detail-comments .comment-item .icon.detail-delete {
   top: 5px;
 }
-#task-details div.content-wrapper .body .section.detail-comments .comment-item:hover .icon.detail-delete {
+#app-sidebar div.content-wrapper .body .section.detail-comments .comment-item:hover .icon.detail-delete {
   display: block;
 }
-#task-details div.content-wrapper .body .section.detail-comments .comment-item .avatar {
+#app-sidebar div.content-wrapper .body .section.detail-comments .comment-item .avatar {
   width: 32px;
   height: 32px;
   position: absolute;
@@ -1065,19 +1058,19 @@
   border-radius: 2px;
   overflow: hidden;
 }
-#task-details div.content-wrapper .body .section.detail-comments .comment-item .avatar img {
+#app-sidebar div.content-wrapper .body .section.detail-comments .comment-item .avatar img {
   height: 100%;
   width: 100%;
 }
-#task-details div.content-wrapper .body .section.detail-comments .comment-item .username {
+#app-sidebar div.content-wrapper .body .section.detail-comments .comment-item .username {
   display: inline-block;
   font-weight: bold;
 }
-#task-details div.content-wrapper .body .section.detail-comments .comment-item .time {
+#app-sidebar div.content-wrapper .body .section.detail-comments .comment-item .time {
   color: #9fa2a6;
   font-size: 11px;
 }
-#task-details div.content-wrapper .body .section.detail-addcomment {
+#app-sidebar div.content-wrapper .body .section.detail-addcomment {
   background: url("../img/divider.svg") repeat-x scroll center top transparent;
   bottom: 0;
   left: 0;
