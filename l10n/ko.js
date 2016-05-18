@@ -78,6 +78,7 @@ OC.L10N.register(
     "at the end" : "끝날 때",
     "at the beginning" : "시작할 때",
     "Set start date" : "시작 날짜 지점",
+    "{calendar} shared by {owner}" : "{owner} 님이 공유한 달력",
     "Important" : "중요",
     "Week" : "주",
     "All" : "모두",

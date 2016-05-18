@@ -79,6 +79,7 @@ OC.L10N.register(
     "at the beginning" : "në fillim",
     "Set start date" : "Caktoni datë fillimi",
     "{calendar} shared by {owner}" : "{calendar} ndarë nga {owner}",
+    "Unnamed" : "E paemër",
     "Important" : "E rëndësishme",
     "Week" : "Javë",
     "All" : "Krejt",

@@ -77,6 +77,8 @@ OC.L10N.register(
     "at the end" : "lopussa",
     "at the beginning" : "alussa",
     "Set start date" : "Aseta aloituspäivä",
+    "{calendar} shared by {owner}" : "{calendar} jakanut {owner}",
+    "Unnamed" : "Nimetön",
     "Important" : "Tärkeä",
     "Week" : "Viikko",
     "All" : "Kaikki",

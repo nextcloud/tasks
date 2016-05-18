@@ -76,6 +76,7 @@ $TRANSLATIONS = array(
 "at the end" => "lõpus",
 "at the beginning" => "alguses",
 "Set start date" => "Määra alguse kuupäev",
+"{calendar} shared by {owner}" => "{calendar} jagas {owner}",
 "Important" => "Tähtis",
 "Week" => "Nädal",
 "All" => "Kõik",

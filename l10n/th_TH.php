@@ -77,6 +77,7 @@ $TRANSLATIONS = array(
 "at the end" => "ที่จุดสิ้นสุด",
 "at the beginning" => "ที่จุดเริ่มต้น",
 "Set start date" => "วันที่เริ่มต้นการตั้งค่า",
+"{calendar} shared by {owner}" => "{calendar} ถูกแชร์โดย {owner}",
 "Important" => "สำคัญ",
 "Week" => "สัปดาห์",
 "All" => "ทั้งหมด",
