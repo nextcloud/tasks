@@ -19,6 +19,19 @@
   transition: max-height 300ms ease 0s;
   max-height: 100px;
 }
+#app-navigation li > a {
+  opacity: 1 !important;
+}
+#app-navigation li > a span.title,
+#app-navigation li > a span.icon {
+  opacity: 0.57;
+}
+#app-navigation li.active > a span.title,
+#app-navigation li:hover > a span.title,
+#app-navigation li.active > a span.icon,
+#app-navigation li:hover > a span.icon{
+  opacity: 1;
+}
 #app-navigation li.edit > a,
 #app-navigation li.edit .app-navigation-entry-utils,
 #app-navigation li.edit .app-navigation-entry-menu {
@@ -242,6 +255,27 @@
 }
 #content .icon.toggle-completed-tasks:hover {
   opacity: 1;
+}
+#content .calendar-indicator {
+  min-width: 12px;
+  min-height: 12px;
+  background-color: #F00;
+  display: inline-block;
+  height: 12px;
+  width: 12px;
+  margin-top: 0px;
+  border-radius: 50%;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 20px;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+#content .active .calendar-indicator {
+  height: 16px;
+  width: 16px;
+  margin-left: 2px;
+  margin-right: 2px;
 }
 #content tr:last-child .task-item {
   height: 39px;

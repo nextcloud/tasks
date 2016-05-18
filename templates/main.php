@@ -45,8 +45,8 @@
                 dnd-list="draggedTasks"
                 dnd-drop="dropList(event, index, item)"
                 dnd-dragover="dragoverList(event, index)">
-                <a href="#/calendars/{{ calendar.uri }}" style="border-right: 4px solid {{ calendar.color }};" ng-dblclick="startRename(calendar)">
-                    <span class="icon list-list"></span>
+                <a href="#/calendars/{{ calendar.uri }}" ng-dblclick="startRename(calendar)">
+                    <span class="calendar-indicator" style="background-color: {{ calendar.color }};"></span>
                     <span class="title">{{ calendar.displayname }}</span>
                 </a>
                 <div class="app-navigation-entry-utils">
