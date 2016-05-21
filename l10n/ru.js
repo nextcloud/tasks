@@ -79,6 +79,7 @@ OC.L10N.register(
     "at the beginning" : "в начале",
     "Set start date" : "Установить начальную дату",
     "{calendar} shared by {owner}" : "{calendar} опубликован пользователем {owner}",
+    "Unnamed" : "Не названный",
     "Important" : "Важный",
     "Week" : "Неделя",
     "All" : "Все",
