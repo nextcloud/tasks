@@ -78,6 +78,8 @@ OC.L10N.register(
     "at the end" : "la sfârșitul",
     "at the beginning" : "la începutul",
     "Set start date" : "Setează data de început",
+    "{calendar} shared by {owner}" : "{calendar} partajat de {owner}",
+    "Unnamed" : "Fără nume",
     "Important" : "Important",
     "Week" : "Săptămâna",
     "All" : "Toate ",
