@@ -79,6 +79,7 @@ OC.L10N.register(
     "at the beginning" : "al principio",
     "Set start date" : "Establecer fecha de inicio",
     "{calendar} shared by {owner}" : "{calendar} compartido por {owner}",
+    "Unnamed" : "Sin nombre",
     "Important" : "Importante",
     "Week" : "Semana",
     "All" : "Todos",

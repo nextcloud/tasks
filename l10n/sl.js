@@ -79,6 +79,7 @@ OC.L10N.register(
     "at the beginning" : "na začetku",
     "Set start date" : "Nastavi datum začetka",
     "{calendar} shared by {owner}" : "{calendar} je objavila oseba {owner}",
+    "Unnamed" : "Neimenovano",
     "Important" : "Pomembno",
     "Week" : "Teden",
     "All" : "Vsi",

@@ -79,6 +79,7 @@ OC.L10N.register(
     "at the beginning" : "başında",
     "Set start date" : "Başlangıç tarihini ayarla",
     "{calendar} shared by {owner}" : "{owner} tarafından paylaşılmış {calendar}",
+    "Unnamed" : "isimsiz",
     "Important" : "Önemli",
     "Week" : "Hafta",
     "All" : "Tümü",
