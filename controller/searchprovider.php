@@ -46,6 +46,7 @@ class SearchProvider extends \OCP\Search\Provider {
 	 * @return array
 	 */
 	public function search($query) {
+		return array();
 		// return $this->tasksService->search($query);
 	}
 }
