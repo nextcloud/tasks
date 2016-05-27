@@ -1950,72 +1950,52 @@
 		<clipPath id="SVGID_284_">
 			<use xlink:href="#SVGID_283_"  overflow="visible"/>
 		</clipPath>
+		<polygon clip-path="url(#SVGID_284_)" fill="none" stroke="#999999" stroke-width="1.25" stroke-miterlimit="10" points="
+			15.175,144.439 4.825,144.439 4.825,131.562 10.475,131.562 15.175,136.562 		"/>
+		<polyline clip-path="url(#SVGID_284_)" fill="none" stroke="#999999" stroke-width="1.25" stroke-miterlimit="10" points="
+			15.175,136.561 10.471,136.561 10.475,131.561 		"/>
 		
-			<rect x="3.96" y="137.905" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -95.3401 47.9571)" clip-path="url(#SVGID_284_)" fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-miterlimit="10" width="12.519" height="2.319"/>
-		<g clip-path="url(#SVGID_284_)">
-			<defs>
-				<rect id="SVGID_285_" y="120" width="20" height="40"/>
-			</defs>
-			<clipPath id="SVGID_286_">
-				<use xlink:href="#SVGID_285_"  overflow="visible"/>
-			</clipPath>
-			<path clip-path="url(#SVGID_286_)" fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-miterlimit="10" d="M6.939,143.983
-				l-0.479,0.479c0,0-2.071,0.933-2.321,0.683c-0.276-0.274,0.682-2.321,0.682-2.321l0.479-0.48"/>
-			
-				<line clip-path="url(#SVGID_286_)" fill="none" stroke="#FFFFFF" stroke-width="0.25" stroke-miterlimit="10" x1="5.88" y1="142.738" x2="13.893" y2="134.725"/>
-			
-				<line clip-path="url(#SVGID_286_)" fill="none" stroke="#FFFFFF" stroke-width="0.25" stroke-miterlimit="10" x1="6.545" y1="143.404" x2="14.559" y2="135.391"/>
-			
-				<rect x="14.553" y="133.256" transform="matrix(0.7063 -0.7079 0.7079 0.7063 -90.7836 49.9982)" clip-path="url(#SVGID_286_)" fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-miterlimit="10" width="0.631" height="2.319"/>
-			
-				<rect x="3.96" y="137.675" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -95.1798 47.8925)" clip-path="url(#SVGID_286_)" fill="none" stroke="#737272" stroke-width="0.5" stroke-miterlimit="10" width="12.519" height="2.318"/>
-			<path clip-path="url(#SVGID_286_)" fill="none" stroke="#737272" stroke-width="0.5" stroke-miterlimit="10" d="M6.939,143.753
-				l-0.479,0.479c0,0-2.071,0.933-2.321,0.683c-0.276-0.274,0.682-2.322,0.682-2.322l0.479-0.479"/>
-			
-				<line clip-path="url(#SVGID_286_)" fill="none" stroke="#737272" stroke-width="0.25" stroke-miterlimit="10" x1="5.88" y1="142.507" x2="13.893" y2="134.495"/>
-			
-				<line clip-path="url(#SVGID_286_)" fill="none" stroke="#737272" stroke-width="0.25" stroke-miterlimit="10" x1="6.545" y1="143.173" x2="14.559" y2="135.16"/>
-			
-				<rect x="14.552" y="133.025" transform="matrix(0.7059 -0.7083 0.7083 0.7059 -90.6665 49.9882)" clip-path="url(#SVGID_286_)" fill="none" stroke="#737272" stroke-width="0.5" stroke-miterlimit="10" width="0.631" height="2.319"/>
-		</g>
+			<line clip-path="url(#SVGID_284_)" fill="none" stroke="#999999" stroke-width="1.25" stroke-miterlimit="10" x1="9.071" y1="135.458" x2="6.225" y2="135.458"/>
+		
+			<line clip-path="url(#SVGID_284_)" fill="none" stroke="#999999" stroke-width="1.25" stroke-miterlimit="10" x1="13.775" y1="138.938" x2="6.226" y2="138.938"/>
 	</g>
 </g>
 <g>
 	<g>
 		<defs>
-			<rect id="SVGID_287_" x="220" y="100" width="20" height="40"/>
+			<rect id="SVGID_285_" x="220" y="100" width="20" height="40"/>
+		</defs>
+		<clipPath id="SVGID_286_">
+			<use xlink:href="#SVGID_285_"  overflow="visible"/>
+		</clipPath>
+		<rect x="223.641" y="114.146" clip-path="url(#SVGID_286_)" fill="#8F8F8F" width="12.7" height="1.625"/>
+		
+			<rect x="223.641" y="114.146" clip-path="url(#SVGID_286_)" fill="none" stroke="#8F8F8F" stroke-miterlimit="10" width="12.7" height="1.625"/>
+		<rect x="227.841" y="118.188" clip-path="url(#SVGID_286_)" fill="#8F8F8F" width="8.5" height="1.624"/>
+		
+			<rect x="227.841" y="118.188" clip-path="url(#SVGID_286_)" fill="none" stroke="#8F8F8F" stroke-miterlimit="10" width="8.5" height="1.624"/>
+		<rect x="232.143" y="122.229" clip-path="url(#SVGID_286_)" fill="#8F8F8F" width="4.198" height="1.625"/>
+		
+			<rect x="232.143" y="122.229" clip-path="url(#SVGID_286_)" fill="none" stroke="#8F8F8F" stroke-miterlimit="10" width="4.198" height="1.625"/>
+	</g>
+</g>
+<g>
+	<g>
+		<defs>
+			<rect id="SVGID_287_" x="260" y="100" width="20" height="40"/>
 		</defs>
 		<clipPath id="SVGID_288_">
 			<use xlink:href="#SVGID_287_"  overflow="visible"/>
 		</clipPath>
-		<rect x="223.641" y="114.146" clip-path="url(#SVGID_288_)" fill="#8F8F8F" width="12.7" height="1.625"/>
+		<rect x="263.641" y="114.146" clip-path="url(#SVGID_288_)" fill="#8F8F8F" width="12.7" height="1.625"/>
 		
-			<rect x="223.641" y="114.146" clip-path="url(#SVGID_288_)" fill="none" stroke="#8F8F8F" stroke-miterlimit="10" width="12.7" height="1.625"/>
-		<rect x="227.841" y="118.188" clip-path="url(#SVGID_288_)" fill="#8F8F8F" width="8.5" height="1.624"/>
+			<rect x="263.641" y="114.146" clip-path="url(#SVGID_288_)" fill="none" stroke="#8F8F8F" stroke-miterlimit="10" width="12.7" height="1.625"/>
+		<rect x="267.841" y="118.188" clip-path="url(#SVGID_288_)" fill="#D7D7D7" width="8.5" height="1.624"/>
 		
-			<rect x="227.841" y="118.188" clip-path="url(#SVGID_288_)" fill="none" stroke="#8F8F8F" stroke-miterlimit="10" width="8.5" height="1.624"/>
-		<rect x="232.143" y="122.229" clip-path="url(#SVGID_288_)" fill="#8F8F8F" width="4.198" height="1.625"/>
+			<rect x="267.841" y="118.188" clip-path="url(#SVGID_288_)" fill="none" stroke="#D7D7D7" stroke-miterlimit="10" width="8.5" height="1.624"/>
+		<rect x="272.143" y="122.229" clip-path="url(#SVGID_288_)" fill="#D7D7D7" width="4.198" height="1.625"/>
 		
-			<rect x="232.143" y="122.229" clip-path="url(#SVGID_288_)" fill="none" stroke="#8F8F8F" stroke-miterlimit="10" width="4.198" height="1.625"/>
-	</g>
-</g>
-<g>
-	<g>
-		<defs>
-			<rect id="SVGID_289_" x="260" y="100" width="20" height="40"/>
-		</defs>
-		<clipPath id="SVGID_290_">
-			<use xlink:href="#SVGID_289_"  overflow="visible"/>
-		</clipPath>
-		<rect x="263.641" y="114.146" clip-path="url(#SVGID_290_)" fill="#8F8F8F" width="12.7" height="1.625"/>
-		
-			<rect x="263.641" y="114.146" clip-path="url(#SVGID_290_)" fill="none" stroke="#8F8F8F" stroke-miterlimit="10" width="12.7" height="1.625"/>
-		<rect x="267.841" y="118.188" clip-path="url(#SVGID_290_)" fill="#D7D7D7" width="8.5" height="1.624"/>
-		
-			<rect x="267.841" y="118.188" clip-path="url(#SVGID_290_)" fill="none" stroke="#D7D7D7" stroke-miterlimit="10" width="8.5" height="1.624"/>
-		<rect x="272.143" y="122.229" clip-path="url(#SVGID_290_)" fill="#D7D7D7" width="4.198" height="1.625"/>
-		
-			<rect x="272.143" y="122.229" clip-path="url(#SVGID_290_)" fill="none" stroke="#D7D7D7" stroke-miterlimit="10" width="4.198" height="1.625"/>
+			<rect x="272.143" y="122.229" clip-path="url(#SVGID_288_)" fill="none" stroke="#D7D7D7" stroke-miterlimit="10" width="4.198" height="1.625"/>
 	</g>
 </g>
 </svg>
