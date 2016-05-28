@@ -79,6 +79,7 @@ OC.L10N.register(
     "at the beginning" : "vid början",
     "Set start date" : "Sätt startdatum",
     "{calendar} shared by {owner}" : "{calendar} delad utav {owner}",
+    "Unnamed" : "Namnlös",
     "Important" : "Viktigt",
     "Week" : "Vecka",
     "All" : "Alla",
