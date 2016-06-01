@@ -78,6 +78,7 @@ $TRANSLATIONS = array(
 "at the beginning" => "בהתחלה",
 "Set start date" => "קביעת תאריך התחלה",
 "{calendar} shared by {owner}" => "{calendar} משותף על ידי {owner}",
+"Unnamed" => "ללא שם",
 "Important" => "חשוב",
 "Week" => "שבוע",
 "All" => "הכל",
