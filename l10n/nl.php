@@ -78,6 +78,7 @@ $TRANSLATIONS = array(
 "at the beginning" => "aan het begin",
 "Set start date" => "Instellen begindatum",
 "{calendar} shared by {owner}" => "{calendar} gedeeld door {owner}",
+"Unnamed" => "Onbenoemd",
 "Important" => "Belangrijk",
 "Week" => "Week",
 "All" => "Alle",
