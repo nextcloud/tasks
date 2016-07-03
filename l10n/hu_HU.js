@@ -79,6 +79,7 @@ OC.L10N.register(
     "at the beginning" : "az elején",
     "Set start date" : "Kezdő dátum beállítása",
     "{calendar} shared by {owner}" : "{calendar} megosztója: {owner}",
+    "Unnamed" : "Névtelen",
     "Important" : "Fontos",
     "Week" : "Hét",
     "All" : "Mind",

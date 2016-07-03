@@ -79,6 +79,7 @@ OC.L10N.register(
     "at the beginning" : "ที่จุดเริ่มต้น",
     "Set start date" : "วันที่เริ่มต้นการตั้งค่า",
     "{calendar} shared by {owner}" : "{calendar} ถูกแชร์โดย {owner}",
+    "Unnamed" : "ไม่มีชื่อ",
     "Important" : "สำคัญ",
     "Week" : "สัปดาห์",
     "All" : "ทั้งหมด",
