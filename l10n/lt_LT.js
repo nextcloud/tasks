@@ -78,6 +78,8 @@ OC.L10N.register(
     "at the end" : "pabaigoje",
     "at the beginning" : "Iš pradžių",
     "Set start date" : "Nurodykite pradžios datą",
+    "{calendar} shared by {owner}" : "{calendar} pasidalino {owner}",
+    "Unnamed" : "Be pavadinimo",
     "Important" : "Svarbūs",
     "Week" : "Savaitė",
     "All" : "Viskas",

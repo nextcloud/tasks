@@ -71,6 +71,7 @@ $TRANSLATIONS = array(
 "Important" => "Importante",
 "Week" => "Semana",
 "All" => "Todos",
+"Current" => "Actual",
 "Completed" => "Completado",
 "rename" => "renombrar",
 "delete" => "eliminar",
