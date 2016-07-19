@@ -68,6 +68,7 @@ $TRANSLATIONS = array(
 "at the end" => "al final",
 "at the beginning" => "al inicio",
 "Set start date" => "Establecer fecha de inicio",
+"{calendar} shared by {owner}" => "{calendar} compartido por {owner}",
 "Important" => "Importante",
 "Week" => "Semana",
 "All" => "Todos",
