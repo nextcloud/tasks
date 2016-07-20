@@ -78,6 +78,7 @@ $TRANSLATIONS = array(
 "at the beginning" => "við upphaf",
 "Set start date" => "Setja upphafsdag",
 "{calendar} shared by {owner}" => "{calendar} deilt af {owner}",
+"Unnamed" => "Nafnlaust",
 "Important" => "Mikilvægt",
 "Week" => "Vika",
 "All" => "Allt",
