@@ -2840,6 +2840,15 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 	function Calendar(url, props, uri) {
 		var _this = this;
 
+		props.color = props['{http://apple.com/ns/ical/}calendar-color'];
+		if (typeof props.color !== 'undefined') {
+			if (props.color.length === 9) {
+				props.color = props.color.substr(0,7);
+			}
+		} else {
+			props.color = '#1d2d44';
+		}
+
 		angular.extend(this, {
 			_propertiesBackup: {},
 			_properties: {
@@ -2847,7 +2856,7 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 				uri: uri,
 				enabled: props['{http://owncloud.org/ns}calendar-enabled'] === '1',
 				displayname: props['{DAV:}displayname'] || t('tasks','Unnamed'),
-				color: props['{http://apple.com/ns/ical/}calendar-color'] || '#1d2d44',
+				color: props.color,
 				order: parseInt(props['{http://apple.com/ns/ical/}calendar-order']) || 0,
 				components: {
 					vevent: false,
