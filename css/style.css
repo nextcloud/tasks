@@ -532,6 +532,7 @@
   padding: 0 60px 0 32px;
   margin: 0;
   cursor: text;
+  outline: none;
 }
 #app-content div.task-list .loadmore {
   font-size: 11px;
@@ -879,7 +880,7 @@
   height: 17px;
 }
 #app-sidebar div.content-wrapper .body .section input[type="text"] {
-  float: left;  
+  float: left;
 }
 #app-sidebar div.content-wrapper .body .section .select2-search-field input {
   border: 0 none;
