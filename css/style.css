@@ -552,9 +552,6 @@
 #app-content div.task-list .completed-hidden ol.completed-tasks {
   display: none;
 }
-#app-content div.task-list .completed-hidden div.loadmore {
-  display: none;
-}
 #app-content div.task-list .grouped-tasks {
   position: relative;
 }
