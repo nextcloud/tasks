@@ -21,6 +21,7 @@
 }
 #app-navigation li > a {
   opacity: 1 !important;
+  padding-right: 20px;
 }
 #app-navigation li > a span.title,
 #app-navigation li > a span.icon {
@@ -36,6 +37,12 @@
 #app-navigation li.edit .app-navigation-entry-utils,
 #app-navigation li.edit .app-navigation-entry-menu {
   display: none;
+}
+#app-navigation li.active.with-menu > a {
+  padding-right: 70px;
+}
+#app-navigation .app-navigation-entry-utils li {
+  font-size: 100%;
 }
 #app-navigation .app-navigation-entry-menu li {
   float: inherit;
