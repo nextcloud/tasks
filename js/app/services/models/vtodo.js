@@ -46,9 +46,6 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 	}
 
 	VTodo.prototype = {
-		get calendaruri() {
-			return this.calendar.uri;
-		},
 		get summary() {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
 			return vtodos[0].getFirstPropertyValue('summary');

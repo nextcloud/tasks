@@ -422,7 +422,7 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 					newTask.calendar = newCalendar;
 					if (!TasksModel.hasNoParent(newTask)) {
 						var parent = TasksModel.getByUid(newTask.related);
-						if (parent.calendaruri !== newTask.calendaruri) {
+						if (parent.calendar.uri !== newTask.calendar.uri) {
 							newTask.related = null;
 							TasksBusinessLayer.prototype.setPercentComplete(newTask, 0);
 						}
@@ -437,7 +437,7 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 							var _i, _len, child;
 							for (_i = 0, _len = children.length; _i < _len; _i++) {
 								child = children[_i];
-								if (child.calendaruri !== newTask.calendaruri) {
+								if (child.calendar.uri !== newTask.calendar.uri) {
 									queries.push(TasksBusinessLayer.prototype.changeCalendar(child, newTask.calendar));
 								}
 							}
@@ -484,7 +484,7 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 					} else {
 						this.doUpdate(parent);
 					}
-					if (parent.calendaruri !== task.calendaruri) {
+					if (parent.calendar.uri !== task.calendar.uri) {
 						this.changeCalendar(task, parent.calendar);
 					} else {
 						this.doUpdate(task);

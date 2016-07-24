@@ -127,7 +127,7 @@
 		  tasks = this._$tasksmodel.filteredTasks(filter);
 		  for (_i = 0, _len = tasks.length; _i < _len; _i++) {
 			task = tasks[_i];
-			count += this._$tasksmodel.filterTasks(task, collectionID) && task.calendaruri === calendarID && !task.related;
+			count += this._$tasksmodel.filterTasks(task, collectionID) && task.calendar.uri === calendarID && !task.related;
 		  }
 		 //  if (collectionID === 'completed' && filter === '') {
 			// count += this.notLoaded(calendarID);

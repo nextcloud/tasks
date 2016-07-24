@@ -2080,7 +2080,7 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 					newTask.calendar = newCalendar;
 					if (!TasksModel.hasNoParent(newTask)) {
 						var parent = TasksModel.getByUid(newTask.related);
-						if (parent.calendaruri !== newTask.calendaruri) {
+						if (parent.calendar.uri !== newTask.calendar.uri) {
 							newTask.related = null;
 							TasksBusinessLayer.prototype.setPercentComplete(newTask, 0);
 						}
@@ -2095,7 +2095,7 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 							var _i, _len, child;
 							for (_i = 0, _len = children.length; _i < _len; _i++) {
 								child = children[_i];
-								if (child.calendaruri !== newTask.calendaruri) {
+								if (child.calendar.uri !== newTask.calendar.uri) {
 									queries.push(TasksBusinessLayer.prototype.changeCalendar(child, newTask.calendar));
 								}
 							}
@@ -2142,7 +2142,7 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 					} else {
 						this.doUpdate(parent);
 					}
-					if (parent.calendaruri !== task.calendaruri) {
+					if (parent.calendar.uri !== task.calendar.uri) {
 						this.changeCalendar(task, parent.calendar);
 					} else {
 						this.doUpdate(task);
@@ -3244,7 +3244,7 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 		  tasks = this._$tasksmodel.filteredTasks(filter);
 		  for (_i = 0, _len = tasks.length; _i < _len; _i++) {
 			task = tasks[_i];
-			count += this._$tasksmodel.filterTasks(task, collectionID) && task.calendaruri === calendarID && !task.related;
+			count += this._$tasksmodel.filterTasks(task, collectionID) && task.calendar.uri === calendarID && !task.related;
 		  }
 		 //  if (collectionID === 'completed' && filter === '') {
 			// count += this.notLoaded(calendarID);
@@ -3373,17 +3373,18 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 			};
 
 		TasksModel.prototype.update = function(task, clearCache) {
-		  var tmptask;
-		  if (clearCache === null) {
-			clearCache = true;
-		  }
-		  tmptask = this._tmpIdCache[task.tmpID];
-		  if (angular.isDefined(task.id) && angular.isDefined(tmptask)) {
-			tmptask.id = task.id;
-			this._dataMap[task.id] = tmptask;
-		  }
-		  task["void"] = false;
-		  return TasksModel.__super__.update.call(this, task, clearCache);
+
+			var entry, key, value, _results;
+			if (clearCache === null) {
+				clearCache = true;
+			}
+			if (clearCache) {
+				this._invalidateCache();
+			}
+			entry = this.getByUri(task.uri);
+			entry.components = task.components;
+			entry.components.toString();
+			return entry;
 		};
 
 		TasksModel.prototype.removeById = function(taskID) {
@@ -3562,7 +3563,7 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 					case 'week':
 						return task.completed === false && (this.week(task.start) || this.week(task.due));
 					default:
-						return '' + task.calendaruri === '' + filter;
+						return '' + task.calendar.uri === '' + filter;
 				}
 			};
 
@@ -3738,9 +3739,6 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 	}
 
 	VTodo.prototype = {
-		get calendaruri() {
-			return this.calendar.uri;
-		},
 		get summary() {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
 			return vtodos[0].getFirstPropertyValue('summary');

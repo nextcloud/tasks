@@ -60,17 +60,18 @@
 			};
 
 		TasksModel.prototype.update = function(task, clearCache) {
-		  var tmptask;
-		  if (clearCache === null) {
-			clearCache = true;
-		  }
-		  tmptask = this._tmpIdCache[task.tmpID];
-		  if (angular.isDefined(task.id) && angular.isDefined(tmptask)) {
-			tmptask.id = task.id;
-			this._dataMap[task.id] = tmptask;
-		  }
-		  task["void"] = false;
-		  return TasksModel.__super__.update.call(this, task, clearCache);
+
+			var entry, key, value, _results;
+			if (clearCache === null) {
+				clearCache = true;
+			}
+			if (clearCache) {
+				this._invalidateCache();
+			}
+			entry = this.getByUri(task.uri);
+			entry.components = task.components;
+			entry.components.toString();
+			return entry;
 		};
 
 		TasksModel.prototype.removeById = function(taskID) {
@@ -249,7 +250,7 @@
 					case 'week':
 						return task.completed === false && (this.week(task.start) || this.week(task.due));
 					default:
-						return '' + task.calendaruri === '' + filter;
+						return '' + task.calendar.uri === '' + filter;
 				}
 			};
 
