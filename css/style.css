@@ -730,11 +730,6 @@
   top: 55px;
 }
 #app-sidebar div.content-wrapper .body .note {
-  background: -webkit-linear-gradient(bottom, #dee2d0 1px, transparent 1px) repeat scroll 0 0 / 100% 26px #f5f5f5;
-  background: -moz-linear-gradient(center bottom, #dee2d0 1px, transparent 1px) repeat scroll 0 0 / 100% 26px #f5f5f5;
-  background: -ms-linear-gradient(center bottom, #dee2d0 1px, transparent 1px) repeat scroll 0 0 / 100% 26px #f5f5f5;
-  background: -o-linear-gradient(center bottom, #dee2d0 1px, transparent 1px) repeat scroll 0 0 / 100% 26px #f5f5f5;
-  background: linear-gradient(bottom, #dee2d0 1px, transparent 1px) repeat scroll 0 0 / 100% 26px #f5f5f5;
   background-color: #f5f5f5;
   border-width: 1px 1px 1px 1px;
   border-style: solid;
