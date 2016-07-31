@@ -62,6 +62,7 @@ $TRANSLATIONS = array(
 "Add an item due today in \"%s\"..." => "Pridať položku do dnes do \"%s\"...",
 "Add an item in \"%s\"..." => "Pridať položku do \"%s\"...",
 "Add a current item in \"%s\"..." => "Pridať túto položku do \"%s\"...",
+"Add a subtask to \"%s\"..." => "Pridať podúlohu do „%s“...",
 "_%n Completed Task_::_%n Completed Tasks_" => array("%n dokončená úloha","%n dokončené úlohy","%n dokončených úloh"),
 "Hours" => "Hodín",
 "Minutes" => "Minút",
@@ -76,6 +77,8 @@ $TRANSLATIONS = array(
 "at the end" => "na konci",
 "at the beginning" => "na začiatku",
 "Set start date" => "Nastaviť dátum začatia",
+"{calendar} shared by {owner}" => "{calendar} zdieľa {owner}",
+"Unnamed" => "nepomenovaný",
 "Important" => "Dôležité",
 "Week" => "Týždeň",
 "All" => "Všetky",
@@ -92,6 +95,7 @@ $TRANSLATIONS = array(
 "(New category)" => "(Nová kategória)",
 "Select categories..." => "Vybrať kategórie...",
 "Loading the task..." => "Nahrávam úlohu...",
-"Task not found!" => "Úloha nebola nájdená!"
+"Task not found!" => "Úloha nebola nájdená!",
+"add a subtask to" => "pridať podúlohu do"
 );
 $PLURAL_FORMS = "nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;";
