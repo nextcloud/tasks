@@ -10,7 +10,7 @@
     script('tasks', 'vendor/jquery-timepicker/jquery.ui.timepicker');
     script('tasks', 'vendor/davclient.js/lib/client');
     script('tasks', 'vendor/ical.js/build/ical');
-    style('tasks', 'style'); 
+    style('tasks', 'style');
     style('tasks', 'vendor/angularui/ui-select/select2');
 ?>
 
@@ -57,13 +57,13 @@
                 </div>
                 <div class="app-navigation-entry-menu" ng-show="calendar.writable">
                     <ul>
-                        <li title="<?php p($l->t('rename')); ?>" ng-click="startRename(calendar)" >
+                        <li title="<?php p($l->t('Rename')); ?>" ng-click="startRename(calendar)" >
                             <img class="icon-rename svg" src="<?php p(image_path('core', 'actions/rename.svg'))?>"/>
-                            <span><?php p($l->t('rename')); ?></span>
+                            <span><?php p($l->t('Rename')); ?></span>
                         </li>
-                        <li title="<?php p($l->t('delete')); ?>" ng-click="delete(calendar)">
+                        <li title="<?php p($l->t('Delete')); ?>" ng-click="delete(calendar)">
                             <img class="icon-delete svg" src="<?php p(image_path('core', 'actions/delete.svg'))?>"/>
-                            <span><?php p($l->t('delete')); ?></span>
+                            <span><?php p($l->t('Delete')); ?></span>
                         </li>
                     </ul>
                 </div>
