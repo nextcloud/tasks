@@ -83,8 +83,6 @@ OC.L10N.register(
     "All" : "Kõik",
     "Current" : "Praegune",
     "Completed" : "Lõpetatud",
-    "rename" : "nimeta ümber",
-    "delete" : "kustuta",
     "Add List..." : "Lisa nimekirja...",
     "New List" : "Uus nimekiri",
     "Settings" : "Seaded",

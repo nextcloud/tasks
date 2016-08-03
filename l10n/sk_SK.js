@@ -85,8 +85,6 @@ OC.L10N.register(
     "All" : "Všetky",
     "Current" : "Aktuálne",
     "Completed" : "Dokončené",
-    "rename" : "premenovať",
-    "delete" : "vymazať",
     "Add List..." : "Pridať zoznam",
     "New List" : "Nový zoznam",
     "Settings" : "Nastavenia",

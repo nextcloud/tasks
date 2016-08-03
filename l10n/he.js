@@ -85,8 +85,6 @@ OC.L10N.register(
     "All" : "הכל",
     "Current" : "נוכחי",
     "Completed" : "הושלם",
-    "rename" : "שינוי שם",
-    "delete" : "מחיקה",
     "Add List..." : "הוספת רשימה...",
     "New List" : "רשימה חדשה",
     "Settings" : "הגדרות",

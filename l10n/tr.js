@@ -85,8 +85,6 @@ OC.L10N.register(
     "All" : "Tümü",
     "Current" : "Geçerli",
     "Completed" : "Tamamlanmış",
-    "rename" : "adlandır",
-    "delete" : "sil",
     "Add List..." : "Listeye Ekle...",
     "New List" : "Yeni Liste",
     "Settings" : "Ayarlar",

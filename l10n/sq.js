@@ -85,8 +85,6 @@ OC.L10N.register(
     "All" : "Krejt",
     "Current" : "E tanishmja",
     "Completed" : "Të plotësuara",
-    "rename" : "riemërtoje",
-    "delete" : "fshije",
     "Add List..." : "Shtoni Listë…",
     "New List" : "Listë e Re",
     "Settings" : "Rregullime",

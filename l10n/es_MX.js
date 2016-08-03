@@ -75,8 +75,6 @@ OC.L10N.register(
     "All" : "Todos",
     "Current" : "Actual",
     "Completed" : "Completado",
-    "rename" : "renombrar",
-    "delete" : "eliminar",
     "Add List..." : "Agregar Lista...",
     "New List" : "Nueva Lista",
     "Settings" : "Ajustes",

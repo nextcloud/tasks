@@ -85,8 +85,6 @@ OC.L10N.register(
     "All" : "Viskas",
     "Current" : "Dabartinis",
     "Completed" : "Atliktas",
-    "rename" : "pervadinti",
-    "delete" : "ištrinti",
     "Add List..." : "Pridėti sąrašą...",
     "New List" : "Naujas sąrašas",
     "Settings" : "Parinktys",

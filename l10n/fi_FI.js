@@ -84,8 +84,6 @@ OC.L10N.register(
     "All" : "Kaikki",
     "Current" : "Nykyinen",
     "Completed" : "Valmiina",
-    "rename" : "nimeä uudelleen",
-    "delete" : "poista",
     "Add List..." : "Lisää luettelo...",
     "New List" : "Uusi luettelo",
     "Settings" : "Asetukset",

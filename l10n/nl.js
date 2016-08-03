@@ -85,8 +85,6 @@ OC.L10N.register(
     "All" : "Alle",
     "Current" : "Huidige",
     "Completed" : "Afgerond",
-    "rename" : "hernoemen",
-    "delete" : "verwijderen",
     "Add List..." : "Toevoegen lijst...",
     "New List" : "Nieuwe lijst",
     "Settings" : "Instellingen",

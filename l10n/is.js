@@ -85,8 +85,6 @@ OC.L10N.register(
     "All" : "Allt",
     "Current" : "Núverandi",
     "Completed" : "Lokið",
-    "rename" : "endurnefna",
-    "delete" : "eyða",
     "Add List..." : "Bæta við lista...",
     "New List" : "Nýr listi",
     "Settings" : "Stillingar",

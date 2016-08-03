@@ -85,8 +85,6 @@ OC.L10N.register(
     "All" : "Wszystkie",
     "Current" : "Obecny",
     "Completed" : "Ukończono",
-    "rename" : "zmiana nazwy",
-    "delete" : "skasuj",
     "Add List..." : "Dodaj listę...",
     "New List" : "Nowa lista",
     "Settings" : "Ustawienia",

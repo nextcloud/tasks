@@ -83,8 +83,6 @@ OC.L10N.register(
     "All" : "Све",
     "Current" : "Текуће",
     "Completed" : "Завршено",
-    "rename" : "преименуј",
-    "delete" : "обриши",
     "Add List..." : "Додај листу...",
     "New List" : "Нова листа",
     "Settings" : "Поставке",

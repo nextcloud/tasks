@@ -85,8 +85,6 @@ OC.L10N.register(
     "All" : "Alla",
     "Current" : "Nuvarande",
     "Completed" : "Slutförande",
-    "rename" : "byt namn",
-    "delete" : "radera",
     "Add List..." : "Lägg till lista ...",
     "New List" : "Ny lista",
     "Settings" : "Inställningar",

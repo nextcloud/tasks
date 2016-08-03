@@ -85,8 +85,6 @@ OC.L10N.register(
     "All" : "Toate ",
     "Current" : "Curent",
     "Completed" : "Terminat",
-    "rename" : "redenumește",
-    "delete" : "șterge",
     "Add List..." : "Adaugă o listă...",
     "New List" : "Listă nouă",
     "Settings" : "Setări",
