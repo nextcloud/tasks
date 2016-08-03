@@ -1442,6 +1442,21 @@ div.percentdone {
 }
 #app-settings-content li {
   line-height: 3em;
+  position: relative;
+  height: 40px;
+}
+#app-settings-content li .label-container {
+  white-space: nowrap;
+  padding-right: 115px;
+  display: inline-block;
+  text-overflow: ellipsis;
+  width: 100%;
+  overflow: hidden;
+  height: 100%;
+}
+#app-settings-content li select {
+  position: absolute;
+  right: 0px;
 }
 #app-settings-content li.headline {
   font-weight: bold;

@@ -104,8 +104,10 @@
                         <?php p($l->t('Visibility of Smart Collections')); ?>
                     </li>
                     <li ng-repeat="collection in collections">
-                        <span class="icon collection-{{ collection.id }}"><text ng-show="collection.id=='today'"><?php p($_['DOM']); ?></text></span>
-                        <label for="visibilityCollection-{{collection.id}}" class="title">{{ collection.displayname }}</label>
+                        <div class="label-container">
+                            <span class="icon collection-{{ collection.id }}"><text ng-show="collection.id=='today'"><?php p($_['DOM']); ?></text></span>
+                            <label for="visibilityCollection-{{collection.id}}" class="title">{{ collection.displayname }}</label>
+                        </div>
                         <select id="visibilityCollection-{{collection.id}}" ng-change="setVisibility(collection.id)" ng-model="collection.show" ng-options="collectionOption.id as collectionOption.name for collectionOption in collectionOptions"></select>
                     </li>
                 </ul>
