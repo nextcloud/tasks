@@ -77,6 +77,8 @@ OC.L10N.register(
     "All" : "সবাই",
     "Current" : "বর্তমান",
     "Completed" : "সুসম্পন্ন",
+    "Rename" : "পূনঃনামকরণ",
+    "Delete" : "মুছে",
     "Add List..." : "তালিকা সংযুক্ত করুন....",
     "New List" : "নতুন তালিকা",
     "Start of week" : "সপ্তাহ আরম্ভ",

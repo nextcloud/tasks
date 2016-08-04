@@ -84,6 +84,8 @@ OC.L10N.register(
     "All" : "全部",
     "Current" : "当前",
     "Completed" : "完成",
+    "Rename" : "重命名",
+    "Delete" : "删除",
     "Add List..." : "添加列表",
     "New List" : "新列表",
     "Settings" : "设置",

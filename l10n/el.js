@@ -83,6 +83,8 @@ OC.L10N.register(
     "All" : "Όλες",
     "Current" : "Τρέχουσα",
     "Completed" : "Ολοκληρωμένες",
+    "Rename" : "Μετονομασία",
+    "Delete" : "Διαγραφή",
     "Add List..." : "Προσθήκη Λίστας...",
     "New List" : "Νέα Λίστα",
     "Settings" : "Ρυθμίσεις",

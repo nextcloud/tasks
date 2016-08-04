@@ -85,6 +85,8 @@ OC.L10N.register(
     "All" : "Alle",
     "Current" : "Nåværende",
     "Completed" : "Ferdig",
+    "Rename" : "Gi nytt navn",
+    "Delete" : "Slett",
     "Add List..." : "Legg til liste...",
     "New List" : "Ny liste",
     "Settings" : "Innstillinger",

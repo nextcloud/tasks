@@ -85,6 +85,8 @@ OC.L10N.register(
     "All" : "ทั้งหมด",
     "Current" : "ปัจจุบัน",
     "Completed" : "เสร็จสมบูรณ์",
+    "Rename" : "เปลี่ยนชื่อ",
+    "Delete" : "ลบ",
     "Add List..." : "เพิ่มรายชื่อ ...",
     "New List" : "รายชื่อใหม่",
     "Settings" : "ตั้งค่า",
