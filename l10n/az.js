@@ -77,6 +77,8 @@ OC.L10N.register(
     "All" : "Hamısı",
     "Current" : "Mövcud",
     "Completed" : "Bitmişdir",
+    "Rename" : "Adı dəyiş",
+    "Delete" : "Sil",
     "Add List..." : "Siyahını əlavə et...",
     "New List" : "Yeni Siyahı",
     "Start of week" : "Həftə başlanğıcı",

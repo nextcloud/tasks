@@ -77,6 +77,8 @@ OC.L10N.register(
     "All" : "Denak",
     "Current" : "Unekoa",
     "Completed" : "Betea",
+    "Rename" : "Berrizendatu",
+    "Delete" : "Ezabatu",
     "Add List..." : "Gehitu zerrenda...",
     "New List" : "Zerrenda berria",
     "Settings" : "Ezarpenak",
