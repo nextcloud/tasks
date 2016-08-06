@@ -20,10 +20,10 @@
  */
 
 angular.module('Tasks').controller('AppController', [
-	'$scope', 'ListsBusinessLayer', '$route', 'Status', '$timeout', '$location', '$routeParams', 'Loading', 'SettingsModel', 'Persistence', function($scope, ListsBusinessLayer, $route, status, $timeout, $location, $routeParams, Loading, SettingsModel, Persistence) {
+	'$scope', '$rootScope', 'ListsBusinessLayer', '$route', 'Status', '$timeout', '$location', '$routeParams', 'Loading', 'SettingsModel', 'Persistence', function($scope, $rootScope, ListsBusinessLayer, $route, status, $timeout, $location, $routeParams, Loading, SettingsModel, Persistence) {
 		'use strict';
 		var AppController = (function() {
-			function AppController(_$scope, _$listsbusinesslayer, _$route, _$status, _$timeout, _$location, _$routeparams, _Loading, _$settingsmodel, _persistence) {
+			function AppController(_$scope, $rootScope, _$listsbusinesslayer, _$route, _$status, _$timeout, _$location, _$routeparams, _Loading, _$settingsmodel, _persistence) {
 				this._$scope = _$scope;
 				this._$listsbusinesslayer = _$listsbusinesslayer;
 				this._$route = _$route;
@@ -50,6 +50,9 @@ angular.module('Tasks').controller('AppController', [
 				this._$scope.closeAll = function($event) {
 					if ($($event.target).closest('.close-all').length || $($event.currentTarget).is($($event.target).closest('.handler'))) {
 						if (!angular.isUndefined(_$scope.route.calendarID)) {
+							if (_$scope.route.listparameter == 'name') {
+								$rootScope.$broadcast('cancelEditCalendar', _$scope.route.calendarID);
+							}
 							_$location.path('/calendars/' + _$scope.route.calendarID);
 						} else if (!angular.isUndefined(_$scope.route.collectionID)) {
 							_$location.path('/collections/' + _$scope.route.collectionID);
@@ -75,6 +78,6 @@ angular.module('Tasks').controller('AppController', [
 			}
 			return AppController;
 		})();
-		return new AppController($scope, ListsBusinessLayer, $route, status, $timeout, $location, $routeParams, Loading, SettingsModel, Persistence);
+		return new AppController($scope, $rootScope, ListsBusinessLayer, $route, status, $timeout, $location, $routeParams, Loading, SettingsModel, Persistence);
 	}
 ]);

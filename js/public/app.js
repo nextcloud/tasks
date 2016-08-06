@@ -145,10 +145,10 @@ angular.module('Tasks').run([
 ]);
 
 angular.module('Tasks').controller('AppController', [
-	'$scope', 'ListsBusinessLayer', '$route', 'Status', '$timeout', '$location', '$routeParams', 'Loading', 'SettingsModel', 'Persistence', function($scope, ListsBusinessLayer, $route, status, $timeout, $location, $routeParams, Loading, SettingsModel, Persistence) {
+	'$scope', '$rootScope', 'ListsBusinessLayer', '$route', 'Status', '$timeout', '$location', '$routeParams', 'Loading', 'SettingsModel', 'Persistence', function($scope, $rootScope, ListsBusinessLayer, $route, status, $timeout, $location, $routeParams, Loading, SettingsModel, Persistence) {
 		'use strict';
 		var AppController = (function() {
-			function AppController(_$scope, _$listsbusinesslayer, _$route, _$status, _$timeout, _$location, _$routeparams, _Loading, _$settingsmodel, _persistence) {
+			function AppController(_$scope, $rootScope, _$listsbusinesslayer, _$route, _$status, _$timeout, _$location, _$routeparams, _Loading, _$settingsmodel, _persistence) {
 				this._$scope = _$scope;
 				this._$listsbusinesslayer = _$listsbusinesslayer;
 				this._$route = _$route;
@@ -175,6 +175,9 @@ angular.module('Tasks').controller('AppController', [
 				this._$scope.closeAll = function($event) {
 					if ($($event.target).closest('.close-all').length || $($event.currentTarget).is($($event.target).closest('.handler'))) {
 						if (!angular.isUndefined(_$scope.route.calendarID)) {
+							if (_$scope.route.listparameter == 'name') {
+								$rootScope.$broadcast('cancelEditCalendar', _$scope.route.calendarID);
+							}
 							_$location.path('/calendars/' + _$scope.route.calendarID);
 						} else if (!angular.isUndefined(_$scope.route.collectionID)) {
 							_$location.path('/collections/' + _$scope.route.collectionID);
@@ -200,7 +203,7 @@ angular.module('Tasks').controller('AppController', [
 			}
 			return AppController;
 		})();
-		return new AppController($scope, ListsBusinessLayer, $route, status, $timeout, $location, $routeParams, Loading, SettingsModel, Persistence);
+		return new AppController($scope, $rootScope, ListsBusinessLayer, $route, status, $timeout, $location, $routeParams, Loading, SettingsModel, Persistence);
 	}
 ]);
 
@@ -575,16 +578,16 @@ angular.module('Tasks').controller('DetailsController', [
 ]);
 
 angular.module('Tasks').controller('ListController', [
-	'$scope', '$window', '$routeParams', 'ListsModel', 'TasksBusinessLayer', 'CollectionsModel', 'ListsBusinessLayer', '$location',
+	'$scope', '$rootScope', '$window', '$routeParams', 'ListsModel', 'TasksBusinessLayer', 'CollectionsModel', 'ListsBusinessLayer', '$location',
 	'SearchBusinessLayer', 'CalendarService', 'TasksModel',
-	function($scope, $window, $routeParams, ListsModel, TasksBusinessLayer, CollectionsModel, ListsBusinessLayer, $location,
+	function($scope, $rootScope, $window, $routeParams, ListsModel, TasksBusinessLayer, CollectionsModel, ListsBusinessLayer, $location,
 		SearchBusinessLayer, CalendarService, TasksModel) {
 		'use strict';
 	  var ListController;
 	  ListController = (function() {
-		function ListController(_$scope, _$window, _$routeParams, _$listsmodel, _$tasksbusinesslayer, _$collectionsmodel, _$listsbusinesslayer, $location,
+		function ListController(_$scope, $rootScope, _$window, _$routeParams, _$listsmodel, _$tasksbusinesslayer, _$collectionsmodel, _$listsbusinesslayer, $location,
 		_$searchbusinesslayer, _$calendarservice, _$tasksmodel) {
-		
+
 			this._$scope = _$scope;
 			this._$window = _$window;
 			this._$routeParams = _$routeParams;
@@ -641,21 +644,30 @@ angular.module('Tasks').controller('ListController', [
 				}
 			};
 
-			this._$scope.startRename = function(calendar) {
+			this._$scope.startEdit = function(calendar) {
 				_$scope.status.addingList = false;
 				calendar.prepareUpdate();
 				return $location.path('/calendars/' + _$scope.route.calendarID + '/edit/name');
 			};
 
-			this._$scope.cancelRename = function(event,calendar) {
+			this._$scope.checkKey = function(event,calendar) {
 				if (event.keyCode === 27) {
 					event.preventDefault();
-					calendar.resetToPreviousState();
-					$location.path('/calendars/' + _$scope.route.calendarID);
+					_$scope.cancelEdit(calendar);
 				}
 			};
 
-			this._$scope.rename = function(calendar) {
+			$rootScope.$on('cancelEditCalendar', function(s, calendarUri) {
+				var calendar = _$listsmodel.getByUri(calendarUri);
+				_$scope.cancelEdit(calendar);
+			});
+
+			this._$scope.cancelEdit = function(calendar) {
+				calendar.resetToPreviousState();
+				$location.path('/calendars/' + _$scope.route.calendarID);
+			};
+
+			this._$scope.saveEdit = function(calendar) {
 				var name = calendar.displayname;
 				if (name) {
 					if (!_$listsmodel.isNameAlreadyTaken(calendar.displayname, calendar.uri)) {
@@ -744,7 +756,7 @@ angular.module('Tasks').controller('ListController', [
 		return ListController;
 
 	  })();
-	  return new ListController($scope, $window, $routeParams, ListsModel, TasksBusinessLayer, CollectionsModel, ListsBusinessLayer, $location,
+	  return new ListController($scope, $rootScope, $window, $routeParams, ListsModel, TasksBusinessLayer, CollectionsModel, ListsBusinessLayer, $location,
 	  	SearchBusinessLayer, CalendarService, TasksModel);
 	}
 ]);
@@ -1231,6 +1243,150 @@ angular.module('Tasks').directive('avatar', function() {
 			});
 		}
 	};
+});
+
+/* https://github.com/kayellpeee/hsl_rgb_converter
+ * expected hue range: [0, 360)
+ * expected saturation range: [0, 1]
+ * expected lightness range: [0, 1]
+ */
+var hslToRgb = function(hue, saturation, lightness) {
+	'use strict';
+	// based on algorithm from http://en.wikipedia.org/wiki/HSL_and_HSV#Converting_to_RGB
+	if(Array.isArray(hue)) {
+		saturation = hue[1];
+		lightness = hue[2];
+		hue = hue[0];
+	}
+	if (hue === undefined) {
+		return [0, 0, 0];
+	}
+	saturation /= 100;
+	lightness /= 100;
+
+	var chroma = (1 - Math.abs((2 * lightness) - 1)) * saturation;
+	var huePrime = hue / 60;
+	var secondComponent = chroma * (1 - Math.abs((huePrime % 2) - 1));
+
+	huePrime = Math.floor(huePrime);
+	var red;
+	var green;
+	var blue;
+
+	if (huePrime === 0) {
+		red = chroma;
+		green = secondComponent;
+		blue = 0;
+	} else if (huePrime === 1) {
+		red = secondComponent;
+		green = chroma;
+		blue = 0;
+	} else if (huePrime === 2) {
+		red = 0;
+		green = chroma;
+		blue = secondComponent;
+	} else if (huePrime === 3) {
+		red = 0;
+		green = secondComponent;
+		blue = chroma;
+	} else if (huePrime === 4) {
+		red = secondComponent;
+		green = 0;
+		blue = chroma;
+	} else if (huePrime === 5) {
+		red = chroma;
+		green = 0;
+		blue = secondComponent;
+	}
+
+	var lightnessAdjustment = lightness - (chroma / 2);
+	red += lightnessAdjustment;
+	green += lightnessAdjustment;
+	blue += lightnessAdjustment;
+
+	return [Math.round(red * 255), Math.round(green * 255), Math.round(blue * 255)];
+
+};
+
+/*
+ * Convert rgb array to hex string
+ */
+var rgbToHex = function(r, g, b) {
+	'use strict';
+	if(Array.isArray(r)) {
+		g = r[1];
+		b = r[2];
+		r = r[0];
+	}
+	return '#' + parseInt(r, 10).toString(16) + parseInt(g, 10).toString(16) + parseInt(b, 10).toString(16);
+};
+
+var listofcolours = [
+	'#31CC7C',
+	'#317CCC',
+	'#FF7A66',
+	'#F1DB50',
+	'#7C31CC',
+	'#CC317C',
+	'#3A3B3D',
+	'#CACBCD'
+];
+
+/*
+ * Generate a random colour with the core generator
+ */
+var randColour = function() {
+	'use strict';
+	if (typeof String.prototype.toHsl === 'function') {
+		return rgbToHex(hslToRgb(Math.random().toString().toHsl()));
+	} else {
+		return listofcolours[Math.floor(Math.random() * listofcolours.length)];
+	}
+};
+
+/**
+ * Directive: Colorpicker
+ * Description: Colorpicker for the Tasks app.
+ */
+
+
+angular.module('Tasks').directive('colorpicker', function() {
+	'use strict';
+	if (typeof String.prototype.toHsl === 'function') {
+		var hsl = "";
+		var hslcolour = "";
+		//		  0    40   80   120  160  200   240  280  320
+		listofcolours = ["15", "9", "4", "b", "6", "11", "74", "f", "57"];
+		listofcolours.forEach(function(hash, index) {
+			hsl = hash.toHsl();
+			hslcolour = hslToRgb(hsl);
+			listofcolours[index] = rgbToHex(hslcolour);
+		});
+	}
+	return {
+		scope: {
+			selected: '=',
+			customizedColors: '=colors'
+		},
+		restrict: 'AE',
+		templateUrl: OC.filePath('tasks', 'templates', 'colorpicker.html'),
+		link: function(scope, element, attr) {
+			scope.colors = scope.customizedColors || listofcolours;
+			scope.selected = scope.selected || scope.colors[0];
+			scope.random = "#000000";
+
+			scope.randomizeColour = function() {
+				scope.random = randColour();
+				scope.pick(scope.random);
+			};
+
+			scope.pick = function(color) {
+				scope.selected = color;
+			};
+
+		}
+	};
+
 });
 
 angular.module('Tasks').directive('datepicker', function() {

@@ -67,6 +67,7 @@
 }
 #app-navigation li.edit .app-navigation-entry-edit {
   display: inline-block;
+  height: auto;
 }
 #app-navigation li .app-navigation-entry-edit {
   display: none;
@@ -1487,4 +1488,58 @@ ol[dnd-list] .dndPlaceholder {
 }
 .dropzone-visible > ol[dnd-list] {
   min-height: 50px;
+}
+
+/* ColorPicker overrides. */
+#app-navigation > ul ul.colorpicker-list {
+  display: inline-flex;
+}
+
+.colorpicker {
+  display: block;
+  height: 30px;
+  height: auto;
+  padding-bottom: 3px;
+  padding-top: 3px;
+}
+
+.colorpicker .colorpicker-list {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.colorpicker .colorpicker-list li {
+  height: 24px;
+  width: 24px !important;
+}
+
+.colorpicker .colorpicker-list li.selected {
+  border: 1px solid #333;
+}
+
+.colorpicker .colorpicker-list li.randomcolour {
+  background-image: url('../../img/random.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+#app-navigation .app-navigation-entry-edit input.icon-close {
+  width: 36px;
+  height: 38px;
+  float: left;
+  margin: 3px 0px;
+  border-left: 0px none;
+  background-color: rgba(240, 240, 240, 0.9);
+}
+#app-navigation .app-navigation-entry-edit input.icon-close:hover {
+  background-color: white;
+}
+
+#app-navigation .app-navigation-entry-edit input[type="text"] {
+  width: calc(100% - 72px);
 }

@@ -20,16 +20,16 @@
  */
 
 angular.module('Tasks').controller('ListController', [
-	'$scope', '$window', '$routeParams', 'ListsModel', 'TasksBusinessLayer', 'CollectionsModel', 'ListsBusinessLayer', '$location',
+	'$scope', '$rootScope', '$window', '$routeParams', 'ListsModel', 'TasksBusinessLayer', 'CollectionsModel', 'ListsBusinessLayer', '$location',
 	'SearchBusinessLayer', 'CalendarService', 'TasksModel',
-	function($scope, $window, $routeParams, ListsModel, TasksBusinessLayer, CollectionsModel, ListsBusinessLayer, $location,
+	function($scope, $rootScope, $window, $routeParams, ListsModel, TasksBusinessLayer, CollectionsModel, ListsBusinessLayer, $location,
 		SearchBusinessLayer, CalendarService, TasksModel) {
 		'use strict';
 	  var ListController;
 	  ListController = (function() {
-		function ListController(_$scope, _$window, _$routeParams, _$listsmodel, _$tasksbusinesslayer, _$collectionsmodel, _$listsbusinesslayer, $location,
+		function ListController(_$scope, $rootScope, _$window, _$routeParams, _$listsmodel, _$tasksbusinesslayer, _$collectionsmodel, _$listsbusinesslayer, $location,
 		_$searchbusinesslayer, _$calendarservice, _$tasksmodel) {
-		
+
 			this._$scope = _$scope;
 			this._$window = _$window;
 			this._$routeParams = _$routeParams;
@@ -86,21 +86,30 @@ angular.module('Tasks').controller('ListController', [
 				}
 			};
 
-			this._$scope.startRename = function(calendar) {
+			this._$scope.startEdit = function(calendar) {
 				_$scope.status.addingList = false;
 				calendar.prepareUpdate();
 				return $location.path('/calendars/' + _$scope.route.calendarID + '/edit/name');
 			};
 
-			this._$scope.cancelRename = function(event,calendar) {
+			this._$scope.checkKey = function(event,calendar) {
 				if (event.keyCode === 27) {
 					event.preventDefault();
-					calendar.resetToPreviousState();
-					$location.path('/calendars/' + _$scope.route.calendarID);
+					_$scope.cancelEdit(calendar);
 				}
 			};
 
-			this._$scope.rename = function(calendar) {
+			$rootScope.$on('cancelEditCalendar', function(s, calendarUri) {
+				var calendar = _$listsmodel.getByUri(calendarUri);
+				_$scope.cancelEdit(calendar);
+			});
+
+			this._$scope.cancelEdit = function(calendar) {
+				calendar.resetToPreviousState();
+				$location.path('/calendars/' + _$scope.route.calendarID);
+			};
+
+			this._$scope.saveEdit = function(calendar) {
 				var name = calendar.displayname;
 				if (name) {
 					if (!_$listsmodel.isNameAlreadyTaken(calendar.displayname, calendar.uri)) {
@@ -189,7 +198,7 @@ angular.module('Tasks').controller('ListController', [
 		return ListController;
 
 	  })();
-	  return new ListController($scope, $window, $routeParams, ListsModel, TasksBusinessLayer, CollectionsModel, ListsBusinessLayer, $location,
+	  return new ListController($scope, $rootScope, $window, $routeParams, ListsModel, TasksBusinessLayer, CollectionsModel, ListsBusinessLayer, $location,
 	  	SearchBusinessLayer, CalendarService, TasksModel);
 	}
 ]);
