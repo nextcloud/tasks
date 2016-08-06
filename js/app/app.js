@@ -63,7 +63,6 @@ angular.module('Tasks').run([
 			return timeOutUpdate();
 		}).call();
 		OCA.Search.tasks = SearchBusinessLayer;
-		$('link[rel="shortcut icon"]').attr('href', OC.filePath('tasks', 'img', 'favicon.png'));
 		$document.click(function(event) {
 			$rootScope.$broadcast('documentClicked', event);
 		});
