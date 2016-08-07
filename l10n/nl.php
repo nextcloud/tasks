@@ -84,7 +84,6 @@ $TRANSLATIONS = array(
 "All" => "Alle",
 "Current" => "Huidige",
 "Completed" => "Afgerond",
-"Rename" => "Naam wijzigen",
 "Delete" => "Verwijderen",
 "Add List..." => "Toevoegen lijst...",
 "New List" => "Nieuwe lijst",

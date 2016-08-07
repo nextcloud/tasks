@@ -84,7 +84,6 @@ $TRANSLATIONS = array(
 "All" => "Alla",
 "Current" => "Nuvarande",
 "Completed" => "Slutförande",
-"Rename" => "Byt namn",
 "Delete" => "Ta bort",
 "Add List..." => "Lägg till lista ...",
 "New List" => "Ny lista",

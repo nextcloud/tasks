@@ -76,7 +76,6 @@ $TRANSLATIONS = array(
 "All" => "Visi",
 "Current" => "Pašreizējais",
 "Completed" => "Pabeigts",
-"Rename" => "Pārsaukt",
 "Delete" => "Dzēst",
 "Add List..." => "Pievienot sarakstu",
 "New List" => "Jauns saraksts",

@@ -85,7 +85,6 @@ OC.L10N.register(
     "All" : "Vsi",
     "Current" : "Trenutno",
     "Completed" : "Končano",
-    "Rename" : "Preimenuj",
     "Delete" : "Izbriši",
     "Add List..." : "Dodaj seznam ...",
     "New List" : "Nov seznam",

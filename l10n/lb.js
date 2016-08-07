@@ -80,7 +80,6 @@ OC.L10N.register(
     "All" : "All",
     "Current" : "Aktuell",
     "Completed" : "Erfëllt",
-    "Rename" : "Ëmbenennen",
     "Delete" : "Läschen",
     "Add List..." : "Lëscht bäifügen",
     "New List" : "Nei Lëscht",

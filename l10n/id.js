@@ -83,7 +83,6 @@ OC.L10N.register(
     "All" : "Semua",
     "Current" : "Saat ini",
     "Completed" : "Selesai",
-    "Rename" : "Ubah nama",
     "Delete" : "Hapus",
     "Add List..." : "Tambah Daftar...",
     "New List" : "Daftar Baru",

@@ -84,7 +84,6 @@ $TRANSLATIONS = array(
 "All" => "Krejt",
 "Current" => "E tanishmja",
 "Completed" => "Të plotësuara",
-"Rename" => "Riemërtoje",
 "Delete" => "Fshije",
 "Add List..." => "Shtoni Listë…",
 "New List" => "Listë e Re",

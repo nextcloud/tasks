@@ -76,7 +76,6 @@ $TRANSLATIONS = array(
 "All" => "Denak",
 "Current" => "Unekoa",
 "Completed" => "Betea",
-"Rename" => "Berrizendatu",
 "Delete" => "Ezabatu",
 "Add List..." => "Gehitu zerrenda...",
 "New List" => "Zerrenda berria",

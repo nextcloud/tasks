@@ -82,7 +82,6 @@ $TRANSLATIONS = array(
 "All" => "Све",
 "Current" => "Текуће",
 "Completed" => "Завршено",
-"Rename" => "Преименуј",
 "Delete" => "Обриши",
 "Add List..." => "Додај листу...",
 "New List" => "Нова листа",
