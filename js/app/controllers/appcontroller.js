@@ -50,7 +50,7 @@ angular.module('Tasks').controller('AppController', [
 				this._$scope.closeAll = function($event) {
 					if ($($event.target).closest('.close-all').length || $($event.currentTarget).is($($event.target).closest('.handler'))) {
 						if (!angular.isUndefined(_$scope.route.calendarID)) {
-							if (_$scope.route.listparameter == 'name') {
+							if (_$scope.route.listparameter === 'name') {
 								$rootScope.$broadcast('cancelEditCalendar', _$scope.route.calendarID);
 							}
 							_$location.path('/calendars/' + _$scope.route.calendarID);
