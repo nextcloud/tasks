@@ -57,9 +57,9 @@
                 </div>
                 <div class="app-navigation-entry-menu" ng-show="calendar.writable">
                     <ul>
-                        <li title="<?php p($l->t('Rename')); ?>" ng-click="startRename(calendar)" >
+                        <li title="<?php p($l->t('Edit')); ?>" ng-click="startEdit(calendar)" >
                             <img class="icon-rename svg" src="<?php p(image_path('core', 'actions/rename.svg'))?>"/>
-                            <span><?php p($l->t('Rename')); ?></span>
+                            <span><?php p($l->t('Edit')); ?></span>
                         </li>
                         <li title="<?php p($l->t('Delete')); ?>" ng-click="delete(calendar)">
                             <img class="icon-delete svg" src="<?php p(image_path('core', 'actions/delete.svg'))?>"/>
@@ -69,9 +69,13 @@
                 </div>
                 <div class="app-navigation-entry-edit">
                     <form>
-                        <input ng-model="calendar.displayname" class="edit" type="text" ng-keydown="cancelRename($event,calendar)" autofocus-on-insert>
-                        <input type="submit" value="" class="action icon-checkmark svg" ng-click="rename(calendar)">
+                        <input ng-model="calendar.displayname" class="edit" type="text" ng-keydown="checkKey($event,calendar)" autofocus-on-insert>
+                        <input type="cancel" value="" class="action icon-close svg" ng-click="cancelEdit(calendar)" title="<?php p($l->t('Cancel')); ?>">
+                        <input type="submit" value="" class="action icon-checkmark svg" ng-click="saveEdit(calendar)" title="<?php p($l->t('Save')); ?>">
                     </form>
+                    <colorpicker class="colorpicker"
+                                 selected="calendar.color">
+                    </colorpicker>
                 </div>
             </li>
             <li class="newList handler" ng-class="{edit: status.addingList}">
