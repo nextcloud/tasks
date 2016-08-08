@@ -82,7 +82,6 @@ $TRANSLATIONS = array(
 "All" => "Kõik",
 "Current" => "Praegune",
 "Completed" => "Lõpetatud",
-"Rename" => "Nimeta ümber",
 "Delete" => "Kustuta",
 "Add List..." => "Lisa nimekirja...",
 "New List" => "Uus nimekiri",

@@ -84,7 +84,6 @@ $TRANSLATIONS = array(
 "All" => "Allt",
 "Current" => "Núverandi",
 "Completed" => "Lokið",
-"Rename" => "Endurnefna",
 "Delete" => "Eyða",
 "Add List..." => "Bæta við lista...",
 "New List" => "Nýr listi",

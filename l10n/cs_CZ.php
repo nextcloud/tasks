@@ -84,7 +84,6 @@ $TRANSLATIONS = array(
 "All" => "Vše",
 "Current" => "Aktuální",
 "Completed" => "Dokončeno",
-"Rename" => "Přejmenovat",
 "Delete" => "Smazat",
 "Add List..." => "Přidat seznam...",
 "New List" => "Nový seznam",

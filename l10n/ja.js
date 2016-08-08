@@ -85,7 +85,6 @@ OC.L10N.register(
     "All" : "すべて",
     "Current" : "現在",
     "Completed" : "完了",
-    "Rename" : "名前の変更",
     "Delete" : "削除",
     "Add List..." : "リスト追加...",
     "New List" : "新規リスト",

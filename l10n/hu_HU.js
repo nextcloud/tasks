@@ -85,7 +85,6 @@ OC.L10N.register(
     "All" : "Mind",
     "Current" : "Jelenlegi",
     "Completed" : "Befejezve",
-    "Rename" : "Átnevezés",
     "Delete" : "Törlés",
     "Add List..." : "Lista hozzáadása",
     "New List" : "Új lista",

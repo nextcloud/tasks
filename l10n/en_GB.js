@@ -85,7 +85,6 @@ OC.L10N.register(
     "All" : "All",
     "Current" : "Current",
     "Completed" : "Completed",
-    "Rename" : "Rename",
     "Delete" : "Delete",
     "Add List..." : "Add List...",
     "New List" : "New List",

@@ -76,7 +76,6 @@ $TRANSLATIONS = array(
 "All" => "Всички",
 "Current" => "Текущ",
 "Completed" => "Завършено",
-"Rename" => "Преименуване",
 "Delete" => "Изтриване",
 "Add List..." => "Добави Списък...",
 "New List" => "Нов Списък",
