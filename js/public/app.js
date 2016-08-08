@@ -3902,6 +3902,7 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		set summary(summary) {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
 			vtodos[0].updatePropertyWithValue('summary', summary);
+			this.updateLastModified();
 			this.data = this.components.toString();
 		},
 		get priority() {
@@ -3912,6 +3913,7 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		set priority(priority) {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
 			vtodos[0].updatePropertyWithValue('priority', (10 - priority) % 10);
+			this.updateLastModified();
 			this.data = this.components.toString();
 		},
 		get complete() {
@@ -3921,6 +3923,7 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		set complete(complete) {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
 			vtodos[0].updatePropertyWithValue('percent-complete', complete);
+			this.updateLastModified();
 			this.data = this.components.toString();
 			if (complete < 100) {
 				this.completed = null;
@@ -3950,6 +3953,7 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 			} else {
 				vtodos[0].removeProperty('completed');
 			}
+			this.updateLastModified();
 			this.data = this.components.toString();
 		},
 		get completed_date() {
@@ -3968,6 +3972,7 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		set status(status) {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
 			vtodos[0].updatePropertyWithValue('status', status);
+			this.updateLastModified();
 			this.data = this.components.toString();
 		},
 		get note() {
@@ -3977,6 +3982,7 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		set note(note) {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
 			vtodos[0].updatePropertyWithValue('description', note);
+			this.updateLastModified();
 			this.data = this.components.toString();
 		},
 		get uid() {
@@ -3994,6 +4000,7 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 			} else {
 				vtodos[0].removeProperty('related-to');
 			}
+			this.updateLastModified();
 			this.data = this.components.toString();
 		},
 		get hideSubtasks() {
@@ -4003,6 +4010,7 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		set hideSubtasks(hide) {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
 			vtodos[0].updatePropertyWithValue('x-oc-hidesubtasks', +hide);
+			this.updateLastModified();
 			this.data = this.components.toString();
 		},
 		get reminder() {
@@ -4031,6 +4039,7 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 			} else {
 				vtodos[0].removeProperty('categories');
 			}
+			this.updateLastModified();
 			this.data = this.components.toString();
 		},
 		get start() {
@@ -4044,6 +4053,7 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 			} else {
 				vtodos[0].removeProperty('dtstart');
 			}
+			this.updateLastModified();
 			this.data = this.components.toString();
 		},
 		get due() {
@@ -4057,6 +4067,7 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 			} else {
 				vtodos[0].removeProperty('due');
 			}
+			this.updateLastModified();
 			this.data = this.components.toString();
 		},
 		get comments() {
@@ -4067,6 +4078,10 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		},
 		set loadedCompleted (loadedCompleted) {
 			this.loaded = loadedCompleted;
+		},
+		updateLastModified () {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			vtodos[0].updatePropertyWithValue('last-modified', ICAL.Time.now());
 		}
 	};
 
