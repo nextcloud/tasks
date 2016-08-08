@@ -63,6 +63,7 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 			},
 			_updatedProperties: []
 		});
+		this._propertiesBackup = angular.copy(this._properties);
 
 		// angular.extend(this, {
 		// 	tmpId: null,
