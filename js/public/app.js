@@ -4082,6 +4082,7 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		updateLastModified () {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
 			vtodos[0].updatePropertyWithValue('last-modified', ICAL.Time.now());
+			vtodos[0].updatePropertyWithValue('dtstamp', ICAL.Time.now());
 		}
 	};
 
