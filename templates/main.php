@@ -87,7 +87,8 @@
                     <form ng-disabled="isAddingList">
                         <input id="newList" ng-model="status.newListName" class="edit hasTooltip" type="text" autofocus-on-insert
                         placeholder="<?php p($l->t('New List')); ?>" ng-keyup="checkNew($event,status.newListName)">
-                        <input type="submit" value="" class="action icon-checkmark svg" ng-click="create($event)">
+                        <input type="cancel" value="" class="action icon-close svg" ng-click="cancelCreate()" title="<?php p($l->t('Cancel')); ?>">
+                        <input type="submit" value="" class="action icon-checkmark svg" ng-click="create($event)" title="<?php p($l->t('Save')); ?>">
                     </form>
                 </div>
             </li>

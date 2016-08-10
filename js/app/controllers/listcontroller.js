@@ -77,6 +77,13 @@ angular.module('Tasks').controller('ListController', [
 				}
 			};
 
+			this._$scope.cancelCreate = function() {
+					$('.hasTooltip').tooltip('hide');
+					_$scope.nameError = false;
+					_$scope.status.addingList = false;
+					_$scope.status.newListName = "";
+			};
+
 			this._$scope.startEdit = function(calendar) {
 				_$scope.status.addingList = false;
 				_$scope.nameError = false;
