@@ -153,7 +153,7 @@
   opacity: 1;
 }
 #content .icon.detail-delete {
-  background-position: 0 -40px;
+  background-position: -260px 0;
   height: 20px;
   opacity: 0.4;
   width: 20px;
