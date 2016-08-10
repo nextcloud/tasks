@@ -1544,3 +1544,8 @@ ol[dnd-list] .dndPlaceholder {
 #app-navigation .app-navigation-entry-edit input[type="text"] {
   width: calc(100% - 72px);
 }
+.error input.edit {
+  color: #e9322d;
+  border-color: #e9322d !important;
+  box-shadow: 0 0 6px #f8b9b7;
+}
