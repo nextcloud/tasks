@@ -67,9 +67,9 @@
                         </li>
                     </ul>
                 </div>
-                <div class="app-navigation-entry-edit">
+                <div class="app-navigation-entry-edit" ng-class="{error: nameError}">
                     <form>
-                        <input ng-model="calendar.displayname" class="edit" type="text" ng-keydown="checkKey($event,calendar)" autofocus-on-insert>
+                        <input ng-model="calendar.displayname" class="edit hasTooltip" type="text" ng-keyup="checkEdit($event,calendar)" autofocus-on-insert>
                         <input type="cancel" value="" class="action icon-close svg" ng-click="cancelEdit(calendar)" title="<?php p($l->t('Cancel')); ?>">
                         <input type="submit" value="" class="action icon-checkmark svg" ng-click="saveEdit(calendar)" title="<?php p($l->t('Save')); ?>">
                     </form>
@@ -83,10 +83,10 @@
                     <span class="icon detail-add"></span>
                     <span class="title"><?php p($l->t('Add List...')); ?></span>
                 </a>
-                <div class="app-navigation-entry-edit">
+                <div class="app-navigation-entry-edit" ng-class="{error: nameError}">
                     <form ng-disabled="isAddingList">
-                        <input id="newList" ng-model="status.newListName" class="edit" type="text" autofocus-on-insert
-                        placeholder="<?php p($l->t('New List')); ?>" ng-keydown="cancelCreate($event)" >
+                        <input id="newList" ng-model="status.newListName" class="edit hasTooltip" type="text" autofocus-on-insert
+                        placeholder="<?php p($l->t('New List')); ?>" ng-keyup="checkNew($event,status.newListName)">
                         <input type="submit" value="" class="action icon-checkmark svg" ng-click="create($event)">
                     </form>
                 </div>

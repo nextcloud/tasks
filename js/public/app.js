@@ -603,6 +603,7 @@ angular.module('Tasks').controller('ListController', [
 			this._$scope.calendars = this._$listsmodel.getAll();
 			this._$scope.draggedTasks = [];
 			this._$scope.TasksBusinessLayer = this._$tasksbusinesslayer;
+			this._$scope.nameError = false;
 
 			this._$scope["delete"] = function(calendar) {
 				var really;
@@ -617,43 +618,60 @@ angular.module('Tasks').controller('ListController', [
 
 			this._$scope.startCreate = function() {
 				_$scope.status.addingList = true;
-			};
-
-			this._$scope.cancelCreate = function(event) {
-				if (event.keyCode === 27) {
-					_$scope.status.addingList = false;
-					_$scope.status.newListName = "";
-				}
+				_$scope.nameError = false;
+				$('.hasTooltip').tooltip('hide');
 			};
 
 			this._$scope.create = function() {
-				if (_$scope.status.newListName) {
-					if (!_$listsmodel.isNameAlreadyTaken(_$scope.status.newListName)) {
-						_$scope.status.addingList = false;
-						_$scope.isAddingList = true;
-						_$listsbusinesslayer.add(_$scope.status.newListName).then(function(calendar) {
-							$location.path('/calendars/' + calendar.uri);
-							return $scope.$apply();
-						});
-						_$scope.status.newListName = '';
-					} else {
-						alert(t('tasks', 'The name "%s" is already used.').replace('%s', _$scope.status.newListName));
-				 	}
-				} else {
-					alert(t('tasks', 'An empty name is not allowed.'));
+				var check = _$scope.isNameAllowed(_$scope.status.newListName);
+				if (check.allowed) {
+					_$scope.status.addingList = false;
+					_$scope.isAddingList = true;
+					_$listsbusinesslayer.add(_$scope.status.newListName).then(function(calendar) {
+						$location.path('/calendars/' + calendar.uri);
+						return $scope.$apply();
+					});
+					_$scope.status.newListName = '';
 				}
 			};
 
 			this._$scope.startEdit = function(calendar) {
 				_$scope.status.addingList = false;
+				_$scope.nameError = false;
+				$('.hasTooltip').tooltip('hide');
 				calendar.prepareUpdate();
 				return $location.path('/calendars/' + _$scope.route.calendarID + '/edit/name');
 			};
 
-			this._$scope.checkKey = function(event,calendar) {
+			this._$scope.checkNew = function(event,name) {
+				_$scope.checkName(event,name);
+			};
+
+			this._$scope.checkEdit = function(event,calendar) {
+				_$scope.checkName(event,calendar.displayname,calendar.uri);
+				if (event.keyCode === 27) {
+					_$scope.cancelEdit(calendar);
+				}
+			};
+
+			this._$scope.checkName = function(event,name,uri) {
+				var check = _$scope.isNameAllowed(name,uri);
+				var $input = $(event.currentTarget);
+				if (!check.allowed) {
+					$input.attr('title', check.msg)
+						.tooltip({placement: 'bottom', trigger: 'manual'})
+						.tooltip('fixTitle').tooltip('show');
+					_$scope.nameError = true;
+				} else {
+					$input.tooltip('hide');
+					_$scope.nameError = false;
+				}
 				if (event.keyCode === 27) {
 					event.preventDefault();
-					_$scope.cancelEdit(calendar);
+					$input.tooltip('hide');
+					_$scope.status.addingList = false;
+					_$scope.status.newListName = "";
+					_$scope.nameError = false;
 				}
 			};
 
@@ -664,21 +682,32 @@ angular.module('Tasks').controller('ListController', [
 
 			this._$scope.cancelEdit = function(calendar) {
 				calendar.resetToPreviousState();
+				$('.hasTooltip').tooltip('hide');
+				_$scope.nameError = false;
 				$location.path('/calendars/' + _$scope.route.calendarID);
 			};
 
 			this._$scope.saveEdit = function(calendar) {
-				var name = calendar.displayname;
-				if (name) {
-					if (!_$listsmodel.isNameAlreadyTaken(calendar.displayname, calendar.uri)) {
-						_$listsbusinesslayer.rename(calendar);
-						$location.path('/calendars/' + _$scope.route.calendarID);
-					} else {
-						return alert(t('tasks', 'The name "%s" is already used.').replace('%s', name));
-					}
-				} else {
-					return alert(t('tasks', 'An empty name is not allowed.'));
+				var check = _$scope.isNameAllowed(calendar.displayname, calendar.uri);
+				if (check.allowed) {
+					_$listsbusinesslayer.rename(calendar);
+					$location.path('/calendars/' + _$scope.route.calendarID);
 				}
+			};
+
+			this._$scope.isNameAllowed = function(name, uri) {
+				var check = {
+					allowed:	false,
+					msg:		''
+				};
+				if (_$listsmodel.isNameAlreadyTaken(name, uri)) {
+					check.msg = t('tasks', 'The name "%s" is already used.').replace('%s', name);
+				} else if (!name) {
+					check.msg = t('tasks', 'An empty name is not allowed.');
+				} else {
+					check.allowed = true;
+				}
+				return check;
 			};
 
 			this._$scope.getCollectionCount = function(collectionID) {
