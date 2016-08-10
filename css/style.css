@@ -1515,7 +1515,7 @@ ol[dnd-list] .dndPlaceholder {
 
 .colorpicker .colorpicker-list li {
   height: 24px;
-  width: 24px !important;
+  width: calc(100%/10) !important;
 }
 
 .colorpicker .colorpicker-list li.selected {
