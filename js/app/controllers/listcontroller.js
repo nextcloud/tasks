@@ -21,14 +21,14 @@
 
 angular.module('Tasks').controller('ListController', [
 	'$scope', '$rootScope', '$window', '$routeParams', 'ListsModel', 'TasksBusinessLayer', 'CollectionsModel', 'ListsBusinessLayer', '$location',
-	'SearchBusinessLayer', 'CalendarService', 'TasksModel',
+	'SearchBusinessLayer', 'CalendarService', 'TasksModel', '$timeout',
 	function($scope, $rootScope, $window, $routeParams, ListsModel, TasksBusinessLayer, CollectionsModel, ListsBusinessLayer, $location,
-		SearchBusinessLayer, CalendarService, TasksModel) {
+		SearchBusinessLayer, CalendarService, TasksModel, $timeout) {
 		'use strict';
 	  var ListController;
 	  ListController = (function() {
 		function ListController(_$scope, $rootScope, _$window, _$routeParams, _$listsmodel, _$tasksbusinesslayer, _$collectionsmodel, _$listsbusinesslayer, $location,
-		_$searchbusinesslayer, _$calendarservice, _$tasksmodel) {
+		_$searchbusinesslayer, _$calendarservice, _$tasksmodel, _$timeout) {
 
 			this._$scope = _$scope;
 			this._$window = _$window;
@@ -39,6 +39,7 @@ angular.module('Tasks').controller('ListController', [
 			this._$collectionsmodel = _$collectionsmodel;
 			this._$listsbusinesslayer = _$listsbusinesslayer;
 			this.$location = $location;
+			this._$timeout = _$timeout;
 			this._$searchbusinesslayer = _$searchbusinesslayer;
 			this._$calendarservice = _$calendarservice;
 			this._$scope.collections = this._$collectionsmodel.getAll();
@@ -62,6 +63,9 @@ angular.module('Tasks').controller('ListController', [
 				_$scope.status.addingList = true;
 				_$scope.nameError = false;
 				$('.hasTooltip').tooltip('hide');
+				_$timeout(function() {
+					$('#newList').focus();
+				}, 50);
 			};
 
 			this._$scope.create = function() {
@@ -89,7 +93,10 @@ angular.module('Tasks').controller('ListController', [
 				_$scope.nameError = false;
 				$('.hasTooltip').tooltip('hide');
 				calendar.prepareUpdate();
-				return $location.path('/calendars/' + _$scope.route.calendarID + '/edit/name');
+				$location.path('/calendars/' + _$scope.route.calendarID + '/edit/name');
+				_$timeout(function() {
+					$('#list_' + calendar.uri + ' input.edit').focus();
+				}, 50);
 			};
 
 			this._$scope.checkNew = function(event,name) {
@@ -235,6 +242,6 @@ angular.module('Tasks').controller('ListController', [
 
 	  })();
 	  return new ListController($scope, $rootScope, $window, $routeParams, ListsModel, TasksBusinessLayer, CollectionsModel, ListsBusinessLayer, $location,
-	  	SearchBusinessLayer, CalendarService, TasksModel);
+	  	SearchBusinessLayer, CalendarService, TasksModel, $timeout);
 	}
 ]);
