@@ -90,6 +90,9 @@
                         <input type="cancel" value="" class="action icon-close svg" ng-click="cancelCreate()" title="<?php p($l->t('Cancel')); ?>">
                         <input type="submit" value="" class="action icon-checkmark svg" ng-click="create($event)" title="<?php p($l->t('Save')); ?>">
                     </form>
+                    <colorpicker class="colorpicker"
+                                 selected="color">
+                    </colorpicker>
                 </div>
             </li>
         </ul>

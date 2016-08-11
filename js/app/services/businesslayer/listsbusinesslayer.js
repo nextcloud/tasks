@@ -44,8 +44,8 @@ angular.module('Tasks').factory('ListsBusinessLayer', [
 				});
 			};
 
-			ListsBusinessLayer.prototype.add = function(calendar) {
-				return this._$calendarservice.create(calendar, '#FF7A66', ['vtodo']).then(function(calendar) {
+			ListsBusinessLayer.prototype.add = function(calendar, color) {
+				return this._$calendarservice.create(calendar, color, ['vtodo']).then(function(calendar) {
 					ListsModel.add(calendar);
 					return calendar;
 				});

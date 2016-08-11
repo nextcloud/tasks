@@ -605,6 +605,7 @@ angular.module('Tasks').controller('ListController', [
 			this._$scope.draggedTasks = [];
 			this._$scope.TasksBusinessLayer = this._$tasksbusinesslayer;
 			this._$scope.nameError = false;
+			this._$scope.color = '#31CC7C';
 
 			this._$scope["delete"] = function(calendar) {
 				var really;
@@ -631,7 +632,7 @@ angular.module('Tasks').controller('ListController', [
 				if (check.allowed) {
 					_$scope.status.addingList = false;
 					_$scope.isAddingList = true;
-					_$listsbusinesslayer.add(_$scope.status.newListName).then(function(calendar) {
+					_$listsbusinesslayer.add(_$scope.status.newListName, _$scope.color).then(function(calendar) {
 						$location.path('/calendars/' + calendar.uri);
 						return $scope.$apply();
 					});
@@ -1725,8 +1726,8 @@ angular.module('Tasks').factory('ListsBusinessLayer', [
 				});
 			};
 
-			ListsBusinessLayer.prototype.add = function(calendar) {
-				return this._$calendarservice.create(calendar, '#FF7A66', ['vtodo']).then(function(calendar) {
+			ListsBusinessLayer.prototype.add = function(calendar, color) {
+				return this._$calendarservice.create(calendar, color, ['vtodo']).then(function(calendar) {
 					ListsModel.add(calendar);
 					return calendar;
 				});
