@@ -1,7 +1,7 @@
 (function(angular, $, oc_requesttoken, undefined){
 
 /**
- * ownCloud Task App - v0.9.2
+ * ownCloud Task App - v0.9.3
  *
  * Copyright (c) 2016 - Raimund Schlüßler <raimund.schluessler@googlemail.com>
  *

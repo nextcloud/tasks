@@ -2,7 +2,7 @@
 <info>
 	<id>tasks</id>
 	<name>Tasks</name>
-	<version>0.9.2</version>
+	<version>0.9.3</version>
 	<namespace>Tasks</namespace>
 	<category>productivity</category>
 	<licence>AGPL</licence>
@@ -10,6 +10,6 @@
 	<description>Task App for Calender TODOs</description>
 	<ocsid>164356</ocsid>
     <dependencies>
-        <owncloud min-version="9.0" max-version="9.2"/>
+        <owncloud min-version="9.1" max-version="9.2"/>
     </dependencies>
 </info>
