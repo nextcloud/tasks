@@ -47,10 +47,21 @@
 #app-navigation .app-navigation-entry-menu li {
   float: inherit;
   width: auto !important;
-  padding: 10px;
   opacity: 0.5;
   cursor: pointer;
+  height: 38px;
 }
+#app-navigation .app-navigation-entry-menu li>a,
+#app-navigation .app-navigation-entry-menu li>span {
+  width: 100%;
+  padding: 10px;
+  display: inline-block;
+  line-height: normal;
+  height: auto;
+  min-height: auto;
+  box-sizing: border-box;
+}
+
 #app-navigation .app-navigation-entry-menu li img,
 #app-navigation .app-navigation-entry-menu li span{
   cursor: pointer;
@@ -65,11 +76,13 @@
 #app-navigation .app-navigation-entry-menu li button{
   float: inherit;
 }
-#app-navigation li.edit .app-navigation-entry-edit {
+#app-navigation li.edit .app-navigation-entry-edit.name,
+#app-navigation li.caldav .app-navigation-entry-edit.caldav {
   display: inline-block;
   height: auto;
 }
-#app-navigation li .app-navigation-entry-edit {
+#app-navigation li .app-navigation-entry-edit.name,
+#app-navigation li .app-navigation-entry-edit.caldav {
   display: none;
 }
 #app-navigation li a > span.icon {
@@ -1541,9 +1554,14 @@ ol[dnd-list] .dndPlaceholder {
   background-color: white;
 }
 
-#app-navigation .app-navigation-entry-edit input[type="text"] {
+#app-navigation .app-navigation-entry-edit.name input[type="text"] {
   width: calc(100% - 72px);
 }
+
+#app-navigation .app-navigation-entry-edit.caldav input[type="text"] {
+  width: calc(100% - 36px);
+}
+
 .error input.edit {
   color: #e9322d;
   border-color: #e9322d !important;

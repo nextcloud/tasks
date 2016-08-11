@@ -41,7 +41,8 @@
                 id="list_{{ calendar.uri }}"
                 calendarID="{{calendar.uri}}"
                 ng-repeat="calendar in calendars"
-                ng-class="{active: calendar.uri==route.calendarID, edit:route.listparameter == 'name' && route.calendarID == calendar.uri}"
+                ng-class="{ active: calendar.uri==route.calendarID, edit:route.listparameter == 'name' && route.calendarID == calendar.uri,
+                            caldav: route.listparameter == 'caldav' && route.calendarID == calendar.uri}"
                 dnd-list="draggedTasks"
                 dnd-drop="dropList(event, index, item)"
                 dnd-dragover="dragoverList(event, index)">
@@ -57,17 +58,33 @@
                 </div>
                 <div class="app-navigation-entry-menu" ng-show="calendar.writable">
                     <ul>
-                        <li title="<?php p($l->t('Edit')); ?>" ng-click="startEdit(calendar)" >
-                            <img class="icon-rename svg" src="<?php p(image_path('core', 'actions/rename.svg'))?>"/>
-                            <span><?php p($l->t('Edit')); ?></span>
+                        <li>
+                            <span title="<?php p($l->t('Edit')); ?>" ng-click="startEdit(calendar)">
+                                <img class="icon-rename svg" src="<?php p(image_path('core', 'actions/rename.svg'))?>"/>
+                                <span><?php p($l->t('Edit')); ?></span>
+                            </span>
                         </li>
-                        <li title="<?php p($l->t('Delete')); ?>" ng-click="delete(calendar)">
-                            <img class="icon-delete svg" src="<?php p(image_path('core', 'actions/delete.svg'))?>"/>
-                            <span><?php p($l->t('Delete')); ?></span>
+                        <li>
+                            <span title="<?php p($l->t('CalDAV-Link')); ?>" ng-click="showCalDAVUrl(calendar)">
+                                <img class="icon-public svg" src="<?php p(image_path('core', 'actions/public.svg'))?>"/>
+                                <span><?php p($l->t('CalDAV-Link')); ?></span>
+                            </span>
+                        </li>
+                        <li>
+                            <a href="{{calendar.exportUrl}}" download="{{calendar.uri}}.ics" title="<?php p($l->t('Export')); ?>">
+                                <img class="icon-download svg" src="<?php p(image_path('core', 'actions/download.svg'))?>"/>
+                                <span><?php p($l->t('Export')); ?></span>
+                            </a>
+                        </li>
+                        <li>
+                            <span title="<?php p($l->t('Delete')); ?>" ng-click="delete(calendar)">
+                                <img class="icon-delete svg" src="<?php p(image_path('core', 'actions/delete.svg'))?>"/>
+                                <span><?php p($l->t('Delete')); ?></span>
+                            </span>
                         </li>
                     </ul>
                 </div>
-                <div class="app-navigation-entry-edit" ng-class="{error: nameError}">
+                <div class="app-navigation-entry-edit name" ng-class="{error: nameError}">
                     <form>
                         <input ng-model="calendar.displayname" class="edit hasTooltip" type="text" ng-keyup="checkEdit($event,calendar)" autofocus-on-insert>
                         <input type="cancel" value="" class="action icon-close svg" ng-click="cancelEdit(calendar)" title="<?php p($l->t('Cancel')); ?>">
@@ -77,13 +94,19 @@
                                  selected="calendar.color">
                     </colorpicker>
                 </div>
+                <div class="app-navigation-entry-edit caldav">
+                    <form>
+                        <input class="caldav" ng-value="calendar.caldav" readonly type="text"/>
+                        <input type="cancel" value="" class="action icon-close svg" ng-click="hideCalDAVUrl()" title="<?php p($l->t('Cancel')); ?>">
+                    </form>
+                </div>
             </li>
             <li class="newList handler" ng-class="{edit: status.addingList}">
                 <a class="addlist" ng-click="startCreate()" oc-click-focus="{selector: '#newList', timeout: 0}">
                     <span class="icon detail-add"></span>
                     <span class="title"><?php p($l->t('Add List...')); ?></span>
                 </a>
-                <div class="app-navigation-entry-edit" ng-class="{error: nameError}">
+                <div class="app-navigation-entry-edit name" ng-class="{error: nameError}">
                     <form ng-disabled="isAddingList">
                         <input id="newList" ng-model="status.newListName" class="edit hasTooltip" type="text" autofocus-on-insert
                         placeholder="<?php p($l->t('New List')); ?>" ng-keyup="checkNew($event,status.newListName)">

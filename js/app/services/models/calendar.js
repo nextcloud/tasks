@@ -23,7 +23,7 @@
  *
  */
 
-angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($rootScope, $filter) {
+angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', '$window', function($rootScope, $filter, $window) {
 	'use strict';
 
 	function Calendar(url, props, uri) {
@@ -154,6 +154,18 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', function($
 	Calendar.prototype = {
 		get url() {
 			return this._properties.url;
+		},
+		get caldav() {
+			return $window.location.origin + this.url;
+		},
+		get exportUrl() {
+			var url = this.url;
+			// cut off last slash to have a fancy name for the ics
+			if (url.slice(url.length - 1) === '/') {
+				url = url.slice(0, url.length - 1);
+			}
+			url += '?export';
+			return url;
 		},
 		get enabled() {
 			return this._properties.enabled;
