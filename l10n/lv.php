@@ -77,6 +77,7 @@ $TRANSLATIONS = array(
 "Current" => "Pašreizējais",
 "Completed" => "Pabeigts",
 "Edit" => "Rediģēt",
+"Export" => "Eksportēt",
 "Delete" => "Dzēst",
 "Cancel" => "Atcelt",
 "Save" => "Saglabāt",

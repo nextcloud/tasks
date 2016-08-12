@@ -83,6 +83,7 @@ $TRANSLATIONS = array(
 "Current" => "Текуће",
 "Completed" => "Завршено",
 "Edit" => "Уреди",
+"Export" => "Извези",
 "Delete" => "Обриши",
 "Cancel" => "Откажи",
 "Save" => "Сачувај",

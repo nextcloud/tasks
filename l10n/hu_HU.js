@@ -86,6 +86,7 @@ OC.L10N.register(
     "Current" : "Jelenlegi",
     "Completed" : "Befejezve",
     "Edit" : "Szerkesztés",
+    "Export" : "Exportálás",
     "Delete" : "Törlés",
     "Cancel" : "Mégsem",
     "Save" : "Mentés",

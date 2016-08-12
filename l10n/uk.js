@@ -84,6 +84,7 @@ OC.L10N.register(
     "Current" : "Поточні",
     "Completed" : "Завершені",
     "Edit" : "Редагувати",
+    "Export" : "Експорт",
     "Delete" : "Видалити",
     "Cancel" : "Скасувати",
     "Save" : "Зберегти",

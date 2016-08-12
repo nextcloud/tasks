@@ -78,6 +78,7 @@ OC.L10N.register(
     "Current" : "Unekoa",
     "Completed" : "Betea",
     "Edit" : "Editatu",
+    "Export" : "Esportatu",
     "Delete" : "Ezabatu",
     "Cancel" : "Ezeztatu",
     "Save" : "Gorde",

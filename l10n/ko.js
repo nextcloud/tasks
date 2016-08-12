@@ -85,6 +85,7 @@ OC.L10N.register(
     "Current" : "현재",
     "Completed" : "완료됨",
     "Edit" : "편집",
+    "Export" : "내보내기",
     "Delete" : "삭제",
     "Cancel" : "취소",
     "Save" : "저장",

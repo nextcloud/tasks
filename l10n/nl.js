@@ -86,6 +86,8 @@ OC.L10N.register(
     "Current" : "Huidige",
     "Completed" : "Afgerond",
     "Edit" : "Bewerk",
+    "CalDAV-Link" : "CalDAV-Link",
+    "Export" : "Exporteer",
     "Delete" : "Verwijderen",
     "Cancel" : "Annuleren",
     "Save" : "Opslaan",

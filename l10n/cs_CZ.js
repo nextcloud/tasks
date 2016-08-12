@@ -86,6 +86,7 @@ OC.L10N.register(
     "Current" : "Aktuální",
     "Completed" : "Dokončeno",
     "Edit" : "Upravit",
+    "Export" : "Exportovat",
     "Delete" : "Smazat",
     "Cancel" : "Zrušit",
     "Save" : "Uložit",

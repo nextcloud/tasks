@@ -78,6 +78,7 @@ OC.L10N.register(
     "Current" : "বর্তমান",
     "Completed" : "সুসম্পন্ন",
     "Edit" : "সম্পাদনা",
+    "Export" : "রপ্তানি",
     "Delete" : "মুছে",
     "Cancel" : "বাতিল",
     "Save" : "সংরক্ষণ",

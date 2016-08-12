@@ -86,6 +86,7 @@ OC.L10N.register(
     "Current" : "Nuvarande",
     "Completed" : "Slutförande",
     "Edit" : "Ändra",
+    "Export" : "Exportera",
     "Delete" : "Ta bort",
     "Cancel" : "Avbryt",
     "Save" : "Spara",

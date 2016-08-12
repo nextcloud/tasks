@@ -83,6 +83,7 @@ $TRANSLATIONS = array(
 "Current" => "Praegune",
 "Completed" => "Lõpetatud",
 "Edit" => "Muuda",
+"Export" => "Ekspordi",
 "Delete" => "Kustuta",
 "Cancel" => "Loobu",
 "Save" => "Salvesta",

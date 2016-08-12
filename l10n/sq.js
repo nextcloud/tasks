@@ -86,6 +86,8 @@ OC.L10N.register(
     "Current" : "E tanishmja",
     "Completed" : "Të plotësuara",
     "Edit" : "Përpunoni",
+    "CalDAV-Link" : "Lidhje CalDAV",
+    "Export" : "Eksportoji",
     "Delete" : "Fshije",
     "Cancel" : "Anuloje",
     "Save" : "Ruaje",

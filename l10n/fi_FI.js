@@ -85,6 +85,8 @@ OC.L10N.register(
     "Current" : "Nykyinen",
     "Completed" : "Valmiina",
     "Edit" : "Muokkaa",
+    "CalDAV-Link" : "CalDAV-linkki",
+    "Export" : "Vie",
     "Delete" : "Poista",
     "Cancel" : "Peruuta",
     "Save" : "Tallenna",

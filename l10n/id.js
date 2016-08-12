@@ -84,6 +84,7 @@ OC.L10N.register(
     "Current" : "Saat ini",
     "Completed" : "Selesai",
     "Edit" : "Sunting",
+    "Export" : "Ekspor",
     "Delete" : "Hapus",
     "Cancel" : "Batal",
     "Save" : "Simpan",

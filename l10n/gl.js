@@ -83,6 +83,7 @@ OC.L10N.register(
     "Current" : "Actual",
     "Completed" : "Completado",
     "Edit" : "Editar",
+    "Export" : "Exportar",
     "Delete" : "Eliminar",
     "Cancel" : "Cancelar",
     "Save" : "Gardar",

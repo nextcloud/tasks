@@ -86,6 +86,8 @@ OC.L10N.register(
     "Current" : "ปัจจุบัน",
     "Completed" : "เสร็จสมบูรณ์",
     "Edit" : "แก้ไข",
+    "CalDAV-Link" : "ลิงค์ CalDAV",
+    "Export" : "ส่งออก",
     "Delete" : "ลบ",
     "Cancel" : "ยกเลิก",
     "Save" : "บันทึก",

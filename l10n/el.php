@@ -83,6 +83,7 @@ $TRANSLATIONS = array(
 "Current" => "Τρέχουσα",
 "Completed" => "Ολοκληρωμένες",
 "Edit" => "Επεξεργασία",
+"Export" => "Εξαγωγή",
 "Delete" => "Διαγραφή",
 "Cancel" => "Άκυρο",
 "Save" => "Αποθήκευση",

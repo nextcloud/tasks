@@ -86,6 +86,8 @@ OC.L10N.register(
     "Current" : "נוכחי",
     "Completed" : "הושלם",
     "Edit" : "עריכה",
+    "CalDAV-Link" : "קישור-CalDAV",
+    "Export" : "ייצוא",
     "Delete" : "מחיקה",
     "Cancel" : "ביטול",
     "Save" : "שמירה",

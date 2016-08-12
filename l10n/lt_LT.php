@@ -85,6 +85,7 @@ $TRANSLATIONS = array(
 "Current" => "Dabartinis",
 "Completed" => "Atliktas",
 "Edit" => "Redaguoti",
+"Export" => "Eksportuoti",
 "Delete" => "Ištrinti",
 "Cancel" => "Atšaukti",
 "Save" => "Išsaugoti",

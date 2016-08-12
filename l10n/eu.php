@@ -77,6 +77,7 @@ $TRANSLATIONS = array(
 "Current" => "Unekoa",
 "Completed" => "Betea",
 "Edit" => "Editatu",
+"Export" => "Esportatu",
 "Delete" => "Ezabatu",
 "Cancel" => "Ezeztatu",
 "Save" => "Gorde",

@@ -85,6 +85,7 @@ $TRANSLATIONS = array(
 "Current" => "Jelenlegi",
 "Completed" => "Befejezve",
 "Edit" => "Szerkesztés",
+"Export" => "Exportálás",
 "Delete" => "Törlés",
 "Cancel" => "Mégsem",
 "Save" => "Mentés",

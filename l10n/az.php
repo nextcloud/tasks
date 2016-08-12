@@ -77,6 +77,7 @@ $TRANSLATIONS = array(
 "Current" => "Mövcud",
 "Completed" => "Bitmişdir",
 "Edit" => "Dəyişiklik et",
+"Export" => "Çıxarış",
 "Delete" => "Sil",
 "Cancel" => "Dayandır",
 "Save" => "Saxla",

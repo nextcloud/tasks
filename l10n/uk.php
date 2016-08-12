@@ -83,6 +83,7 @@ $TRANSLATIONS = array(
 "Current" => "Поточні",
 "Completed" => "Завершені",
 "Edit" => "Редагувати",
+"Export" => "Експорт",
 "Delete" => "Видалити",
 "Cancel" => "Скасувати",
 "Save" => "Зберегти",

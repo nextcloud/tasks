@@ -85,6 +85,7 @@ OC.L10N.register(
     "Current" : "当前",
     "Completed" : "完成",
     "Edit" : "编辑",
+    "Export" : "导出",
     "Delete" : "删除",
     "Cancel" : "取消",
     "Save" : "保存",

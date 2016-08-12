@@ -86,6 +86,7 @@ OC.L10N.register(
     "Current" : "Curent",
     "Completed" : "Terminat",
     "Edit" : "Editează",
+    "Export" : "Exportă",
     "Delete" : "Șterge",
     "Cancel" : "Anulează",
     "Save" : "Salvează",

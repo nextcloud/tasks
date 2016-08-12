@@ -78,6 +78,7 @@ OC.L10N.register(
     "Current" : "Текущ",
     "Completed" : "Завършено",
     "Edit" : "Редакция",
+    "Export" : "Експорт",
     "Delete" : "Изтриване",
     "Cancel" : "Отказ",
     "Save" : "Запазване",

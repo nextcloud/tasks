@@ -86,6 +86,7 @@ OC.L10N.register(
     "Current" : "Núverandi",
     "Completed" : "Lokið",
     "Edit" : "Breyta",
+    "Export" : "Flytja út",
     "Delete" : "Eyða",
     "Cancel" : "Hætta við",
     "Save" : "Vista",

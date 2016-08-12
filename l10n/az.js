@@ -78,6 +78,7 @@ OC.L10N.register(
     "Current" : "Mövcud",
     "Completed" : "Bitmişdir",
     "Edit" : "Dəyişiklik et",
+    "Export" : "Çıxarış",
     "Delete" : "Sil",
     "Cancel" : "Dayandır",
     "Save" : "Saxla",

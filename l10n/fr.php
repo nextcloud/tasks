@@ -85,6 +85,7 @@ $TRANSLATIONS = array(
 "Current" => "En ce moment",
 "Completed" => "Terminé",
 "Edit" => "Éditer",
+"Export" => "Exporter",
 "Delete" => "Supprimer",
 "Cancel" => "Annuler",
 "Save" => "Enregistrer",

@@ -86,6 +86,7 @@ OC.L10N.register(
     "Current" : "Dabartinis",
     "Completed" : "Atliktas",
     "Edit" : "Redaguoti",
+    "Export" : "Eksportuoti",
     "Delete" : "Ištrinti",
     "Cancel" : "Atšaukti",
     "Save" : "Išsaugoti",

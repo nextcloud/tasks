@@ -86,6 +86,8 @@ OC.L10N.register(
     "Current" : "Attuale",
     "Completed" : "Completato",
     "Edit" : "Modifica",
+    "CalDAV-Link" : "Collegamento CalDAV",
+    "Export" : "Esporta",
     "Delete" : "Elimina",
     "Cancel" : "Annulla",
     "Save" : "Salva",

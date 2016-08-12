@@ -86,6 +86,8 @@ OC.L10N.register(
     "Current" : "Nuværende",
     "Completed" : "Fuldført",
     "Edit" : "Redigér",
+    "CalDAV-Link" : "KalDAV-link",
+    "Export" : "Eksportér",
     "Delete" : "Slet",
     "Cancel" : "Annullér",
     "Save" : "Gem",

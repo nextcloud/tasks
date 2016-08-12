@@ -86,6 +86,8 @@ OC.L10N.register(
     "Current" : "Текущие",
     "Completed" : "Завершённые",
     "Edit" : "Редактировать",
+    "CalDAV-Link" : "Ссылка CalDAV",
+    "Export" : "Экспорт",
     "Delete" : "Удалить",
     "Cancel" : "Отмена",
     "Save" : "Сохранить",
