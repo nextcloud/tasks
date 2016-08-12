@@ -1567,3 +1567,58 @@ ol[dnd-list] .dndPlaceholder {
   border-color: #e9322d !important;
   box-shadow: 0 0 6px #f8b9b7;
 }
+
+.confirmed {
+  opacity: 1 !important;
+}
+.confirmed img {
+  margin-left: auto;
+  margin-right: auto !important;
+  display: block;
+}
+
+.confirmation-default {
+  overflow: hidden;
+}
+
+.confirmed .confirmation-default {
+  display: none !important;
+}
+
+.confirmation-confirm, .confirmation-abort {
+  width: 50% !important;
+  display: none !important;
+  overflow: hidden;
+  float: right;
+  height: 100% !important;
+}
+
+.confirmation-confirm, .confirmation-confirm span {
+  background-color: red;
+  cursor: default !important;
+}
+
+.confirmed .confirmation-confirm, .confirmed .confirmation-abort {
+  display: inline-block !important;
+}
+
+.confirmed .confirmation-confirm img {
+  display: none;
+}
+
+.countdown {
+  color: white;
+  display: block;
+  text-align: center;
+}
+
+.confirmed.active .confirmation-confirm{
+  cursor: pointer !important;
+}
+.confirmed.active .confirmation-confirm span.countdown {
+  display: none;
+}
+
+.confirmed.active .confirmation-confirm img {
+  display: block;
+}

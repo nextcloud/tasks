@@ -76,11 +76,7 @@
                                 <span><?php p($l->t('Export')); ?></span>
                             </a>
                         </li>
-                        <li>
-                            <span title="<?php p($l->t('Delete')); ?>" ng-click="delete(calendar)">
-                                <img class="icon-delete svg" src="<?php p(image_path('core', 'actions/delete.svg'))?>"/>
-                                <span><?php p($l->t('Delete')); ?></span>
-                            </span>
+                        <li confirmation="delete(calendar)" confirmation-message="deleteMessage(calendar)">
                         </li>
                     </ul>
                 </div>

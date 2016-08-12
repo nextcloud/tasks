@@ -607,15 +607,15 @@ angular.module('Tasks').controller('ListController', [
 			this._$scope.nameError = false;
 			this._$scope.color = '#31CC7C';
 
+			this._$scope.deleteMessage = function (calendar) {
+				return t('tasks', 'This will delete the Calendar "%s" and all of its entries.').replace('%s', calendar.displayname);
+			};
+
 			this._$scope["delete"] = function(calendar) {
-				var really;
-				really = confirm(t('tasks', 'This will delete the Calendar "%s" and all of its entries.').replace('%s', calendar.displayname));
-				if (really) {
-					return _$listsbusinesslayer["delete"](calendar).then(function() {
-						$location.path('/calendars/' + _$listsmodel.getStandardList().uri);
-						return $scope.$apply();
-					});
-				}
+				return _$listsbusinesslayer["delete"](calendar).then(function() {
+					$location.path('/calendars/' + _$listsmodel.getStandardList().uri);
+					return $scope.$apply();
+				});
 			};
 
 			this._$scope.startCreate = function() {
@@ -1455,6 +1455,82 @@ angular.module('Tasks').directive('colorpicker', function() {
 	};
 
 });
+
+angular.module('Tasks').directive('confirmation', function() {
+	'use strict';
+	return {
+		priority: -1,
+		restrict: 'A',
+		templateUrl: OC.generateUrl('/apps/tasks/templates/confirmation', {}),
+		scope: {
+			confirmationFunction: "&confirmation",
+			confirmationMessage: "&confirmationMessage",
+
+		},
+		controller: 'ConfirmationController'
+	};
+});
+
+angular.module('Tasks').controller('ConfirmationController', [
+	'$scope', '$rootScope', '$element', '$attrs', '$compile', '$document', '$window', '$timeout', function($scope, $rootScope, $element, $attrs, $compile, $document, $window, $timeout) {
+		'use strict';
+		var ConfirmationController = (function() {
+			function ConfirmationController(_$scope, $rootScope, $element, $attrs, $compile, $document, $window, $timeout) {
+				this._$scope = _$scope;
+				this._$scope.countdown = 3;
+
+				$element.bind( 'click', function( e ){
+					_$scope.countdown = 3;
+					$element.removeClass('active');
+					var message = _$scope.confirmationMessage() ? _$scope.confirmationMessage() : "Are you sure?";
+					if ($element.hasClass('confirmed')) {
+						return;
+					}
+					e.stopPropagation();
+					_$scope.activate();
+					$element.children('.confirmation-confirm')
+					.tooltip({title: message, container: 'body', placement: 'right'});
+					$element.addClass("confirmed");
+				});
+
+				$element.children('.confirmation-confirm').bind( 'click', function (e) {
+					if ($element.hasClass('confirmed active')) {
+						_$scope.confirmationFunction();
+						return;
+					} else{
+						e.stopPropagation();
+					}
+				});
+
+				this._$scope.documentClick = function () {
+					$element.removeClass("confirmed");
+				};
+
+				this._$scope.activate = function () {
+					if (_$scope.countdown) {
+						$element.find('.countdown').html(_$scope.countdown+' s');
+						$timeout(function() {
+							_$scope.activate();
+							}, 1000);
+						_$scope.countdown--;
+					} else {
+						$element.addClass('active');
+					}
+				};
+
+				$document.bind('click', _$scope.documentClick);
+				$document.bind('touchend', _$scope.documentClick);
+
+				$scope.$on('$destroy', function() {
+					$document.unbind('click', _$scope.documentClick);
+					$document.unbind('touchend', _$scope.documentClick);
+				});
+			}
+			return ConfirmationController;
+		})();
+		return new ConfirmationController($scope, $rootScope, $element, $attrs, $compile, $document, $window, $timeout);
+	}
+]);
 
 angular.module('Tasks').directive('datepicker', function() {
 	'use strict';

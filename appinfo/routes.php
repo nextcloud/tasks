@@ -31,6 +31,9 @@ $application->registerRoutes($this, array('routes' => array(
 	// page
 	array('name' => 'page#index', 'url' => '/', 'verb' => 'GET'),
 
+	// templates
+	array('name' => 'page#templates', 'url' => '/templates/{template}', 'verb' => 'GET'),
+
 	// collections
 	array('name' => 'collections#getCollections',	'url' => '/collections',										'verb' => 'GET'),
 	array('name' => 'collections#setVisibility',	'url' => '/collection/{collectionID}/visibility/{visibility}',	'verb' => 'POST'),
