@@ -85,6 +85,7 @@ $TRANSLATIONS = array(
 "Current" => "Aktuální",
 "Completed" => "Dokončeno",
 "Edit" => "Upravit",
+"CalDAV-Link" => "CalDAV odkaz",
 "Export" => "Exportovat",
 "Delete" => "Smazat",
 "Cancel" => "Zrušit",

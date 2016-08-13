@@ -86,6 +86,7 @@ OC.L10N.register(
     "Current" : "Aktuální",
     "Completed" : "Dokončeno",
     "Edit" : "Upravit",
+    "CalDAV-Link" : "CalDAV odkaz",
     "Export" : "Exportovat",
     "Delete" : "Smazat",
     "Cancel" : "Zrušit",
