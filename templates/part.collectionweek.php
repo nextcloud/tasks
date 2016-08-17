@@ -13,7 +13,7 @@
             <li class="task-item ui-draggable handler"
                 taskID="{{task.uri}}"
                 ng-animate="'animate'"
-                ng-repeat="task in filtered = filteredTasks() | filter:taskAtDay(task,day) | filter:hasNoParent(task) | filter:{'completed':'false'} | orderBy:sortDue | orderBy:'priority':true"
+                ng-repeat="task in filtered = filteredTasks() | filter:taskAtDay(task,day) | filter:hasNoParent(task) | filter:{'completed':'false'} | orderBy:[sortDue,'-priority','-completed','start','summary']"
                 ng-click="openDetails(task.uri,$event)"
                 ng-class="{done: task.completed}"
                 dnd-draggable="task"
