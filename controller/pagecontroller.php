@@ -24,6 +24,7 @@ namespace OCA\Tasks\Controller;
 
 use \OCP\AppFramework\Controller;
 use \OCP\AppFramework\Http\TemplateResponse;
+use \OCP\AppFramework\Http\NotFoundResponse;
 use \OCP\IRequest;
 use \OCP\IConfig;
 
@@ -60,6 +61,21 @@ class PageController extends Controller {
 			'DOM' => $day
 		));
 
+		return $response;
+	}
+
+
+	/**
+	 * @NoAdminRequired
+	 * @NoCSRFRequired
+	 */
+	public function templates($template) {
+		$templates = array(	'confirmation');
+		if (in_array($template, $templates)) {
+			$response = new TemplateResponse('tasks', $template, [], 'blank');
+		} else {
+			$response = new NotFoundResponse();
+		}
 		return $response;
 	}
 }
