@@ -1042,18 +1042,18 @@ angular.module('Tasks').controller('SettingsController', [
 					return true;
 				}
 			};
-			
+
 		  this._$scope.focusTaskInput = function() {
 			_$scope.status.focusTaskInput = true;
 		  };
 		  this._$scope.focusSubtaskInput = function() {
 			_$scope.status.focusSubtaskInput = true;
 		  };
-		  
+
 			this._$scope.openDetails = function(id, $event) {
 				var calendarID = _$scope.route.calendarID;
 				var collectionID = _$scope.route.collectionID;
-				if ($event==null || $($event.currentTarget).is($($event.target).closest('.handler'))) {
+				if ($event === null || $($event.currentTarget).is($($event.target).closest('.handler'))) {
 					var parent = _$tasksmodel.getByUri(id);
 					if (!parent.loadedCompleted) {
 						_tasksbusinesslayer.getAll(parent.calendar, true, parent).then(function() {
@@ -1222,7 +1222,7 @@ angular.module('Tasks').controller('SettingsController', [
 					var calendarID = $($event.target).closest('ol[dnd-list]').attr('calendarID');
 					var newCalendar = _$listsmodel.getByUri(calendarID);
 					var queries = _tasksbusinesslayer.makeRootTask(task, newCalendar, collectionID);
-					Promise.all(queries).then(function() {	
+					Promise.all(queries).then(function() {
 						$scope.$apply();
 					});
 				}
@@ -1253,7 +1253,7 @@ angular.module('Tasks').controller('SettingsController', [
 			this._$scope.dragStart = function($event) {
 				if ($event.dataTransfer.effectAllowed === 'copy' || ($event.dataTransfer.effectAllowed === 'copyMove' && $event.ctrlKey)) {
 					$($event.target).addClass('copy');
-				}				
+				}
 			};
 
 			this._$scope.dragEnd = function($event) {
