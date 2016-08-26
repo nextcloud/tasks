@@ -972,6 +972,7 @@ angular.module('Tasks').controller('SettingsController', [
 				task = VTodo.create(task);
 				_tasksbusinesslayer.add(task).then(function(task) {
 					_$scope.isAddingTask = false;
+					_$scope.openDetails(task.uri, null);
 					return $scope.$apply();
 				});
 				if (parent) {
@@ -1052,7 +1053,7 @@ angular.module('Tasks').controller('SettingsController', [
 			this._$scope.openDetails = function(id, $event) {
 				var calendarID = _$scope.route.calendarID;
 				var collectionID = _$scope.route.collectionID;
-				if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+				if ($event==null || $($event.currentTarget).is($($event.target).closest('.handler'))) {
 					var parent = _$tasksmodel.getByUri(id);
 					if (!parent.loadedCompleted) {
 						_tasksbusinesslayer.getAll(parent.calendar, true, parent).then(function() {
