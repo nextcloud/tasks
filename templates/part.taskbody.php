@@ -49,7 +49,7 @@
         </li>
         <li taskID="{{ task.uri }}"
             class="task-item ui-draggable handler subtask"
-            ng-repeat="task in getSubTasks(filtered,task) | orderBy:[sortDue,'-priority','-completed','start','summary']"
+            ng-repeat="task in getSubTasks(filtered,task) | orderBy:getSortOrder():sortDirection"
             ng-click="openDetails(task.uri,$event)"
             ng-class="{done: task.completed}"
             ng-include="'part.taskbody'"

@@ -52,6 +52,8 @@
 			this._$scope.focusInputField = false;
 			this._$scope.TasksModel = this._$tasksmodel;
 			this._$scope.TasksBusinessLayer = this._tasksbusinesslayer;
+			this._$scope.sortOrder = 'default';
+			this._$scope.sortDirection = false;
 
 			this._$scope.addTask = function(taskName, related, calendar, parent) {
 				var _ref, _this = this;
@@ -316,13 +318,44 @@
 				return _$listsmodel.loadedCompleted(calendarID);
 			};
 
-		  this._$scope.sortDue = function(task) {
-			if (task.due === null) {
-			  return 'last';
-			} else {
-			  return task.due;
-			}
-		  };
+			this._$scope.sortDue = function(task) {
+				if (task.due === null) {
+					return 'last';
+				} else {
+					return task.due;
+				}
+			};
+
+			this._$scope.sortStart = function(task) {
+				if (task.start === null) {
+					return 'last';
+				} else {
+					return task.start;
+				}
+			};
+
+			this._$scope.getSortOrder = function() {
+				switch (_$scope.sortOrder) {
+					case 'due':
+						return _$scope.sortDue;
+					case 'start':
+						return _$scope.sortStart;
+					case 'priority':
+						return '-priority';
+					case 'alphabetically':
+						return 'summary';
+					case 'manual':
+						return 'manual';
+					default:
+						return ['completed', _$scope.sortDue, '-priority', _$scope.sortStart, 'summary'];
+				}
+			};
+
+			this._$scope.setSortOrder = function($event, order) {
+				$event.stopPropagation();
+				_$scope.sortDirection = (_$scope.sortOrder === order) ? !_$scope.sortDirection : false;
+				_$scope.sortOrder = order;
+			};
 
 		  	this._$scope.dropAsSubtask = function($event, item, index) {
 				if ($event.dataTransfer.dropEffect === 'move') {

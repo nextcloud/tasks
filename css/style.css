@@ -44,15 +44,20 @@
 #app-navigation .app-navigation-entry-utils li {
   font-size: 100%;
 }
-#app-navigation .app-navigation-entry-menu li {
+#app-navigation .app-navigation-entry-menu li,
+.sortorder-dropdown li {
   float: inherit;
   width: auto !important;
   opacity: 0.5;
   cursor: pointer;
   height: 38px;
 }
+.sortorder-dropdown li.active {
+  opacity: 1;
+}
 #app-navigation .app-navigation-entry-menu li>a,
-#app-navigation .app-navigation-entry-menu li>span {
+#app-navigation .app-navigation-entry-menu li>span,
+.sortorder-dropdown li>span {
   width: 100%;
   padding: 10px;
   display: inline-block;
@@ -63,13 +68,17 @@
 }
 
 #app-navigation .app-navigation-entry-menu li img,
-#app-navigation .app-navigation-entry-menu li span{
+#app-navigation .app-navigation-entry-menu li span,
+.sortorder-dropdown li img,
+.sortorder-dropdown li span {
   cursor: pointer;
 }
-#app-navigation .app-navigation-entry-menu li:hover {
+#app-navigation .app-navigation-entry-menu li:hover,
+.sortorder-dropdown li:hover {
   opacity: 1 !important;
 }
-#app-navigation .app-navigation-entry-menu li img{
+#app-navigation .app-navigation-entry-menu li img,
+.sortorder-dropdown li img {
   margin-right: 5px;
   vertical-align: text-bottom;
 }
@@ -503,6 +512,7 @@
 }
 #app-content div.content-wrapper .task-list {
   height: 100%;
+  width: 100%;
   overflow-y: auto;
 }
 #app-content.details-visible {
@@ -532,6 +542,9 @@
   position: relative;
   border: 1px solid #CCCCCC;
   background: none repeat scroll 0 0 #EEEEEE;
+  width: calc(100% - 46px);
+  float: left;
+  height: 34px;
 }
 #app-content #add-task.focus {
   background-color: #FFFFFF;
@@ -554,6 +567,43 @@
   margin: 0;
   cursor: text;
   outline: none;
+}
+#app-content .sortorder-dropdown-button {
+  background-color: rgba(240, 240, 240, .9);
+  border: 1px solid #CCCCCC;
+  width: 34px;
+  height: 34px;
+  margin: 12px 0px 12px 12px;
+  float: right;
+  cursor: pointer;
+}
+.sortorder-dropdown {
+  display: none;
+  top: 68px;
+  right: 3px;
+}
+.sortorder-dropdown.open {
+  display: block;
+}
+.sortorder-dropdown .icon {
+  margin-top: -2px;
+  margin-right: 3px;
+}
+.sort-indicator {
+  width: 10px;
+  height: 8px;
+  margin-left: 5px;
+  display: inline-block;
+  vertical-align: text-bottom;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+  opacity: 0.8;
+  float: right;
+  margin-top: 2px;
+  visibility: hidden;
+}
+.active .sort-indicator {
+  visibility: visible;
 }
 #app-content div.task-list .loadmore {
   font-size: 11px;
@@ -934,9 +984,15 @@
   left: auto;
   right: 40px;
 }
-#app-sidebar div.content-wrapper .body .section .icon.detail-date,
-#app-sidebar div.content-wrapper .body .section .icon.detail-start {
+.icon.detail-start,
+.icon.detail-date {
   background-position: -220px -80px;
+}
+.icon.sort-manual {
+  background-position: -20px -140px;
+}
+.icon.sort-alphabetically {
+  background-position: -20px -160px;
 }
 #app-sidebar div.content-wrapper .body .section .icon.detail-remindertype {
   display: none;

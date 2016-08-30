@@ -160,6 +160,57 @@
                         ng-keydown="checkTaskInput($event)"/>
                 </form>
             </div>
+            <div class="app-navigation-entry-utils">
+                <div class="app-navigation-entry-utils-menu-button">
+                    <button class="icon-settings sortorder-dropdown-button"></button>
+                </div>
+            </div>
+            <div class="app-navigation-entry-menu bubble sortorder-dropdown">
+                <ul>
+                    <li ng-click="setSortOrder($event, 'default')" ng-class="{active: sortOrder == 'default'}" class="handler">
+                        <span>
+                            <span class="icon list-list"></span>
+                            <span><?php p($l->t('Default')); ?></span>
+                            <span class="sort-indicator" ng-class="{'icon-triangle-n': sortDirection, 'icon-triangle-s': !sortDirection}"></span>
+                        </span>
+                    </li>
+                    <li ng-click="setSortOrder($event, 'due')" ng-class="{active: sortOrder == 'due'}">
+                        <span>
+                            <span class="icon detail-date"></span>
+                            <span><?php p($l->t('Due date')); ?></span>
+                            <span class="sort-indicator" ng-class="{'icon-triangle-n': sortDirection, 'icon-triangle-s': !sortDirection}"></span>
+                        </span>
+                    </li>
+                    <li ng-click="setSortOrder($event, 'start')" ng-class="{active: sortOrder == 'start'}">
+                        <span>
+                            <span class="icon detail-start"></span>
+                            <span><?php p($l->t('Start date')); ?></span>
+                            <span class="sort-indicator" ng-class="{'icon-triangle-n': sortDirection, 'icon-triangle-s': !sortDirection}"></span>
+                        </span>
+                    </li>
+                    <li ng-click="setSortOrder($event, 'priority')" ng-class="{active: sortOrder == 'priority'}">
+                        <span>
+                            <span class="icon detail-priority"></span>
+                            <span><?php p($l->t('Priority')); ?></span>
+                            <span class="sort-indicator" ng-class="{'icon-triangle-n': sortDirection, 'icon-triangle-s': !sortDirection}"></span>
+                        </span>
+                    </li>
+                    <li ng-click="setSortOrder($event, 'alphabetically')" ng-class="{active: sortOrder == 'alphabetically'}">
+                        <span>
+                            <span class="icon sort-alphabetically"></span>
+                            <span><?php p($l->t('Alphabetically')); ?></span>
+                            <span class="sort-indicator" ng-class="{'icon-triangle-n': sortDirection, 'icon-triangle-s': !sortDirection}"></span>
+                        </span>
+                    </li>
+                    <li ng-click="setSortOrder($event, 'manual')" ng-class="{active: sortOrder == 'manual'}">
+                        <span>
+                            <span class="icon sort-manual"></span>
+                            <span><?php p($l->t('Manually')); ?></span>
+                            <span class="sort-indicator" ng-class="{'icon-triangle-n': sortDirection, 'icon-triangle-s': !sortDirection}"></span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
             <div class="task-list">
                 <?php print_unescaped($this->inc('part.tasklist')); ?>
                 <?php print_unescaped($this->inc('part.collectionall')); ?>
