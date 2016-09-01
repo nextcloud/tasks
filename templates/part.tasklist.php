@@ -11,7 +11,7 @@
             dnd-dragover="dragover(event, index)">
             <li class="task-item ui-draggable handler"
                 taskID="{{ task.uri }}"
-                ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,route.calendarID) | filter:{'completed':'false'} | orderBy:getSortOrder():sortDirection"
+                ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,route.calendarID) | filter:{'completed':'false'} | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"
                 ng-click="openDetails(task.uri,$event)"
                 ng-class="{done: task.completed}"
                 dnd-draggable="task"

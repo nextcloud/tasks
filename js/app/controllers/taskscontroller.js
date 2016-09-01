@@ -25,13 +25,13 @@
 
   angular.module('Tasks').controller('TasksController', [
 	'$scope', '$window', '$routeParams', 'TasksModel', 'ListsModel', 'CollectionsModel', 'TasksBusinessLayer', '$location',
-	'SettingsBusinessLayer', 'SearchBusinessLayer', 'VTodo',
+	'SettingsBusinessLayer', 'SearchBusinessLayer', 'VTodo', 'SettingsModel',
 	function($scope, $window, $routeParams, TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location,
-		SettingsBusinessLayer, SearchBusinessLayer, VTodo) {
+		SettingsBusinessLayer, SearchBusinessLayer, VTodo, SettingsModel) {
 	  var TasksController;
 	  TasksController = (function() {
 		function TasksController(_$scope, _$window, _$routeParams, _$tasksmodel, _$listsmodel, _$collectionsmodel, _tasksbusinesslayer, $location,
-			_settingsbusinesslayer, _searchbusinesslayer, vtodo) {
+			_settingsbusinesslayer, _searchbusinesslayer, vtodo, _$settingsmodel) {
 			var _this = this;
 			this._$scope = _$scope;
 			this._$window = _$window;
@@ -52,8 +52,7 @@
 			this._$scope.focusInputField = false;
 			this._$scope.TasksModel = this._$tasksmodel;
 			this._$scope.TasksBusinessLayer = this._tasksbusinesslayer;
-			this._$scope.sortOrder = 'default';
-			this._$scope.sortDirection = false;
+			this._$settingsmodel = _$settingsmodel;
 
 			this._$scope.addTask = function(taskName, related, calendar, parent) {
 				var _ref, _this = this;
@@ -335,7 +334,7 @@
 			};
 
 			this._$scope.getSortOrder = function() {
-				switch (_$scope.sortOrder) {
+				switch (_$scope.settingsmodel.getById('various').sortOrder) {
 					case 'due':
 						return _$scope.sortDue;
 					case 'start':
@@ -353,8 +352,10 @@
 
 			this._$scope.setSortOrder = function($event, order) {
 				$event.stopPropagation();
-				_$scope.sortDirection = (_$scope.sortOrder === order) ? !_$scope.sortDirection : false;
-				_$scope.sortOrder = order;
+				_$scope.settingsmodel.getById('various').sortDirection = (_$scope.settingsmodel.getById('various').sortOrder === order) ? +!_$scope.settingsmodel.getById('various').sortDirection : 0;
+				_$scope.settingsmodel.getById('various').sortOrder = order;
+				_settingsbusinesslayer.set('various', 'sortOrder', order);
+				_settingsbusinesslayer.set('various', 'sortDirection', _$scope.settingsmodel.getById('various').sortDirection);
 			};
 
 		  	this._$scope.dropAsSubtask = function($event, item, index) {
@@ -419,7 +420,7 @@
 
 	  })();
 	  return new TasksController($scope, $window, $routeParams, TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location, SettingsBusinessLayer,
-	  	SearchBusinessLayer, VTodo);
+	  	SearchBusinessLayer, VTodo, SettingsModel);
 	}
   ]);
 

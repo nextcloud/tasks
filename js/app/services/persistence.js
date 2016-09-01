@@ -119,7 +119,7 @@ angular.module('Tasks').factory('Persistence', [
 					routeParams: {
 						type: type,
 						setting: setting,
-						value: +value
+						value: value
 					}
 				};
 				return this._request.post('/apps/tasks/settings/{type}/{setting}/{value}', params);
