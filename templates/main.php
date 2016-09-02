@@ -161,8 +161,11 @@
                 </form>
             </div>
             <div class="app-navigation-entry-utils">
-                <div class="app-navigation-entry-utils-menu-button">
-                    <button class="icon-settings sortorder-dropdown-button"></button>
+                <div class="app-navigation-entry-utils-menu-button" title="<?php p($l->t('Change sort order')); ?>">
+                    <button class="sortorder-dropdown-button">
+                        <span class="icon sort-{{ settingsmodel.getById('various').sortOrder }}"></span>
+                        <span class="sort-indicator" ng-class="{'icon-triangle-n': settingsmodel.getById('various').sortDirection, 'icon-triangle-s': !settingsmodel.getById('various').sortDirection}"></span>
+                    </button>
                 </div>
             </div>
             <div class="app-navigation-entry-menu bubble sortorder-dropdown">

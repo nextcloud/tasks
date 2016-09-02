@@ -120,7 +120,8 @@
 #content .icon.none {
   background-position: 0px -20px;
 }
-#content .icon.list-list {
+#content .icon.list-list,
+#content .icon.sort-default {
   background-position: -40px 0px;
 }
 #content .icon.collection-starred {
@@ -231,7 +232,8 @@
 #content .icon.detail-percent {
   background-position: -260px -60px;
 }
-#content .icon.detail-priority {
+#content .icon.detail-priority,
+#content .icon.sort-priority {
   background-position: -160px -80px;
 }
 #content .icon.detail-categories {
@@ -542,7 +544,7 @@
   position: relative;
   border: 1px solid #CCCCCC;
   background: none repeat scroll 0 0 #EEEEEE;
-  width: calc(100% - 46px);
+  width: calc(100% - 54px);
   float: left;
   height: 34px;
 }
@@ -571,11 +573,16 @@
 #app-content .sortorder-dropdown-button {
   background-color: rgba(240, 240, 240, .9);
   border: 1px solid #CCCCCC;
-  width: 34px;
+  width: 42px;
   height: 34px;
   margin: 12px 0px 12px 12px;
+  padding: 0px;
   float: right;
   cursor: pointer;
+}
+#app-content .sortorder-dropdown-button .sort-indicator {
+  margin-left: 0px;
+  visibility: visible;
 }
 .sortorder-dropdown {
   display: none;
@@ -985,7 +992,9 @@
   right: 40px;
 }
 .icon.detail-start,
-.icon.detail-date {
+.icon.detail-date,
+.icon.sort-due,
+.icon.sort-start {
   background-position: -220px -80px;
 }
 .icon.sort-manual {
