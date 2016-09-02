@@ -25,13 +25,13 @@
 
   angular.module('Tasks').controller('TasksController', [
 	'$scope', '$window', '$routeParams', 'TasksModel', 'ListsModel', 'CollectionsModel', 'TasksBusinessLayer', '$location',
-	'SettingsBusinessLayer', 'SearchBusinessLayer', 'VTodo',
+	'SettingsBusinessLayer', 'SearchBusinessLayer', 'VTodo', 'SettingsModel',
 	function($scope, $window, $routeParams, TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location,
-		SettingsBusinessLayer, SearchBusinessLayer, VTodo) {
+		SettingsBusinessLayer, SearchBusinessLayer, VTodo, SettingsModel) {
 	  var TasksController;
 	  TasksController = (function() {
 		function TasksController(_$scope, _$window, _$routeParams, _$tasksmodel, _$listsmodel, _$collectionsmodel, _tasksbusinesslayer, $location,
-			_settingsbusinesslayer, _searchbusinesslayer, vtodo) {
+			_settingsbusinesslayer, _searchbusinesslayer, vtodo, _$settingsmodel) {
 			var _this = this;
 			this._$scope = _$scope;
 			this._$window = _$window;
@@ -52,6 +52,7 @@
 			this._$scope.focusInputField = false;
 			this._$scope.TasksModel = this._$tasksmodel;
 			this._$scope.TasksBusinessLayer = this._tasksbusinesslayer;
+			this._$settingsmodel = _$settingsmodel;
 
 			this._$scope.addTask = function(taskName, related, calendar, parent) {
 				var _ref, _this = this;
@@ -316,13 +317,45 @@
 				return _$listsmodel.loadedCompleted(calendarID);
 			};
 
-		  this._$scope.sortDue = function(task) {
-			if (task.due === null) {
-			  return 'last';
-			} else {
-			  return task.due;
-			}
-		  };
+			this._$scope.sortDue = function(task) {
+				if (task.due === null) {
+					return 'last';
+				} else {
+					return task.due;
+				}
+			};
+
+			this._$scope.sortStart = function(task) {
+				if (task.start === null) {
+					return 'last';
+				} else {
+					return task.start;
+				}
+			};
+
+			this._$scope.getSortOrder = function() {
+				switch (_$scope.settingsmodel.getById('various').sortOrder) {
+					case 'due':
+						return _$scope.sortDue;
+					case 'start':
+						return _$scope.sortStart;
+					case 'priority':
+						return '-priority';
+					case 'alphabetically':
+						return 'summary';
+					case 'manual':
+						return 'manual';
+					default:
+						return ['completed', _$scope.sortDue, '-priority', _$scope.sortStart, 'summary'];
+				}
+			};
+
+			this._$scope.setSortOrder = function($event, order) {
+				_$scope.settingsmodel.getById('various').sortDirection = (_$scope.settingsmodel.getById('various').sortOrder === order) ? +!_$scope.settingsmodel.getById('various').sortDirection : 0;
+				_$scope.settingsmodel.getById('various').sortOrder = order;
+				_settingsbusinesslayer.set('various', 'sortOrder', order);
+				_settingsbusinesslayer.set('various', 'sortDirection', _$scope.settingsmodel.getById('various').sortDirection);
+			};
 
 		  	this._$scope.dropAsSubtask = function($event, item, index) {
 				if ($event.dataTransfer.dropEffect === 'move') {
@@ -386,7 +419,7 @@
 
 	  })();
 	  return new TasksController($scope, $window, $routeParams, TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location, SettingsBusinessLayer,
-	  	SearchBusinessLayer, VTodo);
+	  	SearchBusinessLayer, VTodo, SettingsModel);
 	}
   ]);
 

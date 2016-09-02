@@ -47,6 +47,8 @@ class SettingsService {
 				'id' => 'various',
 				'showHidden' => (int)$this->settings->getUserValue($this->userId, $this->appName,'various_showHidden'),
 				'startOfWeek' => (int)$this->settings->getUserValue($this->userId, $this->appName,'various_startOfWeek'),
+				'sortOrder' => (string)$this->settings->getUserValue($this->userId, $this->appName,'various_sortOrder'),
+				'sortDirection' => (bool)$this->settings->getUserValue($this->userId, $this->appName,'various_sortDirection'),
 				'userID' => $this->userId
 			)
 		);
