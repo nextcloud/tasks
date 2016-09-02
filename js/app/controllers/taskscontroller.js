@@ -351,7 +351,6 @@
 			};
 
 			this._$scope.setSortOrder = function($event, order) {
-				$event.stopPropagation();
 				_$scope.settingsmodel.getById('various').sortDirection = (_$scope.settingsmodel.getById('various').sortOrder === order) ? +!_$scope.settingsmodel.getById('various').sortDirection : 0;
 				_$scope.settingsmodel.getById('various').sortOrder = order;
 				_settingsbusinesslayer.set('various', 'sortOrder', order);
