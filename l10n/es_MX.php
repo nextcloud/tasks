@@ -77,7 +77,6 @@ $TRANSLATIONS = array(
 "Delete" => "Eliminar",
 "Cancel" => "Cancelar",
 "Edit" => "Editar",
-"Export" => "Exportar",
 "Save" => "Guardar",
 "Add List..." => "Agregar Lista...",
 "New List" => "Nueva Lista",

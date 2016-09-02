@@ -85,7 +85,6 @@ $TRANSLATIONS = array(
 "Delete" => "Обриши",
 "Cancel" => "Откажи",
 "Edit" => "Уреди",
-"Export" => "Извези",
 "Save" => "Сачувај",
 "Add List..." => "Додај листу...",
 "New List" => "Нова листа",

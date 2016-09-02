@@ -85,7 +85,6 @@ OC.L10N.register(
     "Delete" : "Eliminar",
     "Cancel" : "Cancelar",
     "Edit" : "Editar",
-    "Export" : "Exportar",
     "Save" : "Gardar",
     "Add List..." : "Engadir unha lista...",
     "New List" : "Lista nova",

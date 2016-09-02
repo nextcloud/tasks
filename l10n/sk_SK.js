@@ -88,8 +88,6 @@ OC.L10N.register(
     "Delete" : "Zmazať",
     "Cancel" : "Zrušiť",
     "Edit" : "Upraviť",
-    "CalDAV-Link" : "CalDAV odkaz",
-    "Export" : "Export",
     "Save" : "Uložiť",
     "Add List..." : "Pridať zoznam",
     "New List" : "Nový zoznam",

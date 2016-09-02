@@ -82,7 +82,6 @@ $TRANSLATIONS = array(
 "Delete" => "Läschen",
 "Cancel" => "Ofbriechen",
 "Edit" => "Änneren",
-"Export" => "Exportéieren",
 "Save" => "Späicheren",
 "Add List..." => "Lëscht bäifügen",
 "New List" => "Nei Lëscht",

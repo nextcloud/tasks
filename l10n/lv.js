@@ -81,7 +81,6 @@ OC.L10N.register(
     "Delete" : "Dzēst",
     "Cancel" : "Atcelt",
     "Edit" : "Rediģēt",
-    "Export" : "Eksportēt",
     "Save" : "Saglabāt",
     "Add List..." : "Pievienot sarakstu",
     "New List" : "Jauns saraksts",

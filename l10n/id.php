@@ -85,7 +85,6 @@ $TRANSLATIONS = array(
 "Delete" => "Hapus",
 "Cancel" => "Batal",
 "Edit" => "Sunting",
-"Export" => "Ekspor",
 "Save" => "Simpan",
 "Add List..." => "Tambah Daftar...",
 "New List" => "Daftar Baru",

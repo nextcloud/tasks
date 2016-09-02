@@ -88,7 +88,6 @@ OC.L10N.register(
     "Delete" : "Törlés",
     "Cancel" : "Mégsem",
     "Edit" : "Szerkesztés",
-    "Export" : "Exportálás",
     "Save" : "Mentés",
     "Add List..." : "Lista hozzáadása",
     "New List" : "Új lista",

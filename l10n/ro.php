@@ -87,7 +87,6 @@ $TRANSLATIONS = array(
 "Delete" => "Șterge",
 "Cancel" => "Anulează",
 "Edit" => "Editează",
-"Export" => "Exportă",
 "Save" => "Salvează",
 "Add List..." => "Adaugă o listă...",
 "New List" => "Listă nouă",

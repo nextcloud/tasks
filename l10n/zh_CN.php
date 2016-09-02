@@ -86,7 +86,6 @@ $TRANSLATIONS = array(
 "Delete" => "删除",
 "Cancel" => "取消",
 "Edit" => "编辑",
-"Export" => "导出",
 "Save" => "保存",
 "Add List..." => "添加列表",
 "New List" => "新列表",

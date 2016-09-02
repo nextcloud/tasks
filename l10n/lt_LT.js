@@ -88,7 +88,6 @@ OC.L10N.register(
     "Delete" : "Ištrinti",
     "Cancel" : "Atšaukti",
     "Edit" : "Redaguoti",
-    "Export" : "Eksportuoti",
     "Save" : "Išsaugoti",
     "Add List..." : "Pridėti sąrašą...",
     "New List" : "Naujas sąrašas",

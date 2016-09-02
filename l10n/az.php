@@ -79,7 +79,6 @@ $TRANSLATIONS = array(
 "Delete" => "Sil",
 "Cancel" => "Dayandır",
 "Edit" => "Dəyişiklik et",
-"Export" => "Çıxarış",
 "Save" => "Saxla",
 "Add List..." => "Siyahını əlavə et...",
 "New List" => "Yeni Siyahı",
