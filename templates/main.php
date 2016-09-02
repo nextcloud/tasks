@@ -201,13 +201,13 @@
                             <span class="sort-indicator" ng-class="{'icon-triangle-n': settingsmodel.getById('various').sortDirection, 'icon-triangle-s': !settingsmodel.getById('various').sortDirection}"></span>
                         </span>
                     </li>
-<!--                     <li ng-click="setSortOrder($event, 'manual')" ng-class="{active: settingsmodel.getById('various').sortOrder == 'manual'}">
+                    <li ng-click="setSortOrder($event, 'manual')" ng-class="{active: settingsmodel.getById('various').sortOrder == 'manual'}">
                         <span>
                             <span class="icon sort-manual"></span>
                             <span><?php p($l->t('Manually')); ?></span>
                             <span class="sort-indicator" ng-class="{'icon-triangle-n': settingsmodel.getById('various').sortDirection, 'icon-triangle-s': !settingsmodel.getById('various').sortDirection}"></span>
                         </span>
-                    </li> -->
+                    </li>
                 </ul>
             </div>
             <div class="task-list">
