@@ -783,13 +783,13 @@ angular.module('Tasks').controller('ListController', [
 				return _$listsmodel.getCount(listID, type, filter);
 			};
 
-			this._$scope.dragoverList = function($event, item, index) {
+			this._$scope.dragoverList = function($event, index) {
 				var calendarID = $($event.target).closest('li.list').attr('calendarID');
 				var calendar = _$listsmodel.getByUri(calendarID);
 				return calendar.writable;
 			};
 
-			this._$scope.dropList = function($event, item, index) {
+			this._$scope.dropList = function($event, index, item) {
 				if ($event.dataTransfer.dropEffect === 'move') {
 					// we can't simply use item as task, since the directive seems to not copy all properties --> task.calendar.uri == undefined
 					var task = _$tasksmodel.getByUri(item.uri);
@@ -802,7 +802,7 @@ angular.module('Tasks').controller('ListController', [
 				return true;
 			};
 
-			this._$scope.dragoverCollection = function($event, item, index) {
+			this._$scope.dragoverCollection = function($event, index) {
 				if ($event.dataTransfer.effectAllowed === 'copy' || ($event.dataTransfer.effectAllowed === 'copyMove' && $event.ctrlKey)) {
 					return false;
 				}
@@ -811,7 +811,7 @@ angular.module('Tasks').controller('ListController', [
 				return collectionID === 'starred' || collectionID === 'completed' || collectionID === 'today';
 			};
 
-			this._$scope.dropCollection = function($event, item, index) {
+			this._$scope.dropCollection = function($event, index, item) {
 				if ($event.dataTransfer.dropEffect === 'move') {
 					var collectionID = $($event.target).closest('li.collection').attr('collectionID');
 					_$tasksbusinesslayer.changeCollection(item.uri, collectionID);
