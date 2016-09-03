@@ -78,11 +78,13 @@
     "Delete" : "Sil",
     "Cancel" : "Dayandır",
     "Edit" : "Dəyişiklik et",
+    "Download" : "Yüklə",
     "Save" : "Saxla",
     "Add List..." : "Siyahını əlavə et...",
     "New List" : "Yeni Siyahı",
     "Start of week" : "Həftə başlanğıcı",
     "Visibility of Smart Collections" : "Ağıllı yiğımların görünməsi",
+    "Default" : "Susmaya görə",
     "Load remaining completed tasks." : "Gözləmədə olan bitmiş taöşırıqları yüklə.",
     "Loading the task..." : "Tapşırıq yüklkənir...",
     "Task not found!" : "Tapşırıq tapılmadı!"

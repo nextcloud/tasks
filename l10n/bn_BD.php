@@ -79,10 +79,12 @@ $TRANSLATIONS = array(
 "Delete" => "মুছে",
 "Cancel" => "বাতিল",
 "Edit" => "সম্পাদনা",
+"Download" => "ডাউনলোড",
 "Save" => "সংরক্ষণ",
 "Add List..." => "তালিকা সংযুক্ত করুন....",
 "New List" => "নতুন তালিকা",
 "Start of week" => "সপ্তাহ আরম্ভ",
-"Visibility of Smart Collections" => "চটপট সংগ্রহের দর্শনযোগ্যতা"
+"Visibility of Smart Collections" => "চটপট সংগ্রহের দর্শনযোগ্যতা",
+"Default" => "পূর্বনির্ধারিত"
 );
 $PLURAL_FORMS = "nplurals=2; plural=(n != 1);";
