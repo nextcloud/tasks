@@ -88,8 +88,6 @@ OC.L10N.register(
     "Delete" : "מחיקה",
     "Cancel" : "ביטול",
     "Edit" : "עריכה",
-    "CalDAV-Link" : "קישור-CalDAV",
-    "Export" : "ייצוא",
     "Save" : "שמירה",
     "Add List..." : "הוספת רשימה...",
     "New List" : "רשימה חדשה",

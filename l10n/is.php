@@ -87,7 +87,6 @@ $TRANSLATIONS = array(
 "Delete" => "Eyða",
 "Cancel" => "Hætta við",
 "Edit" => "Breyta",
-"Export" => "Flytja út",
 "Save" => "Vista",
 "Add List..." => "Bæta við lista...",
 "New List" => "Nýr listi",

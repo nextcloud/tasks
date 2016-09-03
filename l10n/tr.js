@@ -88,8 +88,6 @@ OC.L10N.register(
     "Delete" : "Sil",
     "Cancel" : "İptal",
     "Edit" : "Düzenle",
-    "CalDAV-Link" : "CalDAV-Link",
-    "Export" : "Dışa aktar",
     "Save" : "Kaydet",
     "Add List..." : "Listeye Ekle...",
     "New List" : "Yeni Liste",

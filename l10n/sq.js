@@ -88,8 +88,6 @@ OC.L10N.register(
     "Delete" : "Fshije",
     "Cancel" : "Anuloje",
     "Edit" : "Përpunoni",
-    "CalDAV-Link" : "Lidhje CalDAV",
-    "Export" : "Eksportoji",
     "Save" : "Ruaje",
     "Add List..." : "Shtoni Listë…",
     "New List" : "Listë e Re",

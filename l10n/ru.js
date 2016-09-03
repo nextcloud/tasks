@@ -88,8 +88,6 @@ OC.L10N.register(
     "Delete" : "Удалить",
     "Cancel" : "Отмена",
     "Edit" : "Редактировать",
-    "CalDAV-Link" : "Ссылка CalDAV",
-    "Export" : "Экспорт",
     "Save" : "Сохранить",
     "Add List..." : "Добавить Список...",
     "New List" : "Новый список",

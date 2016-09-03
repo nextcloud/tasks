@@ -87,8 +87,6 @@ OC.L10N.register(
     "Delete" : "Poista",
     "Cancel" : "Peruuta",
     "Edit" : "Muokkaa",
-    "CalDAV-Link" : "CalDAV-linkki",
-    "Export" : "Vie",
     "Save" : "Tallenna",
     "Add List..." : "Lisää luettelo...",
     "New List" : "Uusi luettelo",

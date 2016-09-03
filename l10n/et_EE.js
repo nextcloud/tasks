@@ -86,7 +86,6 @@ OC.L10N.register(
     "Delete" : "Kustuta",
     "Cancel" : "Loobu",
     "Edit" : "Muuda",
-    "Export" : "Ekspordi",
     "Save" : "Salvesta",
     "Add List..." : "Lisa nimekirja...",
     "New List" : "Uus nimekiri",
