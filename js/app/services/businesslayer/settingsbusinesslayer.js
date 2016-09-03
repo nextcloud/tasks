@@ -39,10 +39,9 @@ angular.module('Tasks').factory('SettingsBusinessLayer', [
 			};
 
 			SettingsBusinessLayer.prototype.toggle = function(type, setting) {
-				var value;
 				this._$settingsmodel.toggle(type, setting);
-				value = this._$settingsmodel.getById(type)[setting];
-				return this._persistence.setting(type, setting, value);
+				var value = this._$settingsmodel.getById(type)[setting];
+				return this._persistence.setting(type, setting, +value);
 			};
 
 			SettingsBusinessLayer.prototype.set = function(type, setting, value) {
