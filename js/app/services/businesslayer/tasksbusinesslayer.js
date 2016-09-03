@@ -66,6 +66,13 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				}
 			};
 
+			TasksBusinessLayer.prototype.incrementOrder = function(task) {
+				if (task.calendar.writable) {
+					task.manualSort++;
+					this.doUpdate(task);
+				}
+			};
+
 			TasksBusinessLayer.prototype.setPercentComplete = function(task, percentComplete) {
 				if (task.calendar.writable) {
 					if (percentComplete < 100) {

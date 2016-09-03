@@ -224,6 +224,34 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		get comments() {
 			return null;
 		},
+		get manualSort() {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			var order = vtodos[0].getFirstPropertyValue('x-apple-sort-order');
+			if (order === null) {
+				var order = this.created.subtractDate(
+					new ICAL.Time({
+						year: 2001,
+						month: 1,
+						day: 1,
+						hour: 0,
+						minute: 0,
+						second: 0,
+						isDate: false
+					})
+				).toSeconds();
+			}
+			return +order;
+		},
+		set manualSort(order) {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			vtodos[0].updatePropertyWithValue('x-apple-sort-order', order);
+			this.updateLastModified();
+			this.data = this.components.toString();
+		},
+		get created() {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			return vtodos[0].getFirstPropertyValue('created');
+		},
 		get loadedCompleted () {
 			return this.loaded;
 		},

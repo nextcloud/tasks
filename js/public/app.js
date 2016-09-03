@@ -1223,7 +1223,7 @@ angular.module('Tasks').controller('SettingsController', [
 					case 'alphabetically':
 						return 'summary';
 					case 'manual':
-						return 'manual';
+						return 'manualSort';
 					default:
 						return ['completed', _$scope.sortDue, '-priority', _$scope.sortStart, 'summary'];
 				}
@@ -1236,10 +1236,10 @@ angular.module('Tasks').controller('SettingsController', [
 				_settingsbusinesslayer.set('various', 'sortDirection', _$scope.settingsmodel.getById('various').sortDirection);
 			};
 
-		  	this._$scope.dropAsSubtask = function($event, item, index) {
+		  	this._$scope.dropAsSubtask = function($event, task, index, tasks) {
 				if ($event.dataTransfer.dropEffect === 'move') {
 					var parentID = $($event.target).closest('.task-item').attr('taskID');
-					var task = _$tasksmodel.getByUri(item.uri);
+					var task = _$tasksmodel.getByUri(task.uri);
 					var parent = _$tasksmodel.getByUri(parentID);
 					_tasksbusinesslayer.changeParent(task, parent);
 				}
@@ -1248,9 +1248,10 @@ angular.module('Tasks').controller('SettingsController', [
 
 		  	};
 
-			this._$scope.dropAsRootTask = function($event, item, index) {
+			this._$scope.dropAsRootTask = function($event, task, index, tasks) {
 				if ($event.dataTransfer.dropEffect === 'move') {
-					var task = _$tasksmodel.getByUri(item.uri);
+					var task = _$tasksmodel.getByUri(task.uri);
+					_$scope.reorderTasks(tasks, task, index);
 					var collectionID = $($event.target).closest('ol[dnd-list]').attr('collectionID');
 					var calendarID = $($event.target).closest('ol[dnd-list]').attr('calendarID');
 					var newCalendar = _$listsmodel.getByUri(calendarID);
@@ -1261,6 +1262,27 @@ angular.module('Tasks').controller('SettingsController', [
 				}
 				$('.subtasks-container').removeClass('dropzone-visible');
 				return true;
+			};
+
+			this._$scope.reorderTasks = function(tasks, task, index) {
+				if (index > 0) {
+					task.manualSort = tasks[index-1].manualSort+1;
+				} else {
+					task.manualSort = tasks[index].manualSort;
+				}
+				if (task.manualSort >= tasks[index].manualSort) {
+					for (var jj = index; jj<tasks.length; jj++) {
+						if (tasks[jj] === task) {
+							break;
+						}
+						_tasksbusinesslayer.incrementOrder(tasks[jj]);
+						if (jj<tasks.length-1) {
+							if (tasks[jj].manualSort < tasks[jj+1].manualSort) {
+								break;
+							}
+						}
+					}
+				}
 			};
 
 			this._$scope.dragover = function($event, item, index) {
@@ -2052,6 +2074,13 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 			TasksBusinessLayer.prototype.setPriority = function(task, priority) {
 				if (task.calendar.writable) {
 					task.priority = priority;
+					this.doUpdate(task);
+				}
+			};
+
+			TasksBusinessLayer.prototype.incrementOrder = function(task) {
+				if (task.calendar.writable) {
+					task.manualSort++;
 					this.doUpdate(task);
 				}
 			};
@@ -4261,6 +4290,34 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		},
 		get comments() {
 			return null;
+		},
+		get manualSort() {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			var order = vtodos[0].getFirstPropertyValue('x-apple-sort-order');
+			if (order === null) {
+				var order = this.created.subtractDate(
+					new ICAL.Time({
+						year: 2001,
+						month: 1,
+						day: 1,
+						hour: 0,
+						minute: 0,
+						second: 0,
+						isDate: false
+					})
+				).toSeconds();
+			}
+			return +order;
+		},
+		set manualSort(order) {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			vtodos[0].updatePropertyWithValue('x-apple-sort-order', order);
+			this.updateLastModified();
+			this.data = this.components.toString();
+		},
+		get created() {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			return vtodos[0].getFirstPropertyValue('created');
 		},
 		get loadedCompleted () {
 			return this.loaded;

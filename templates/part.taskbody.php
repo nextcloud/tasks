@@ -23,6 +23,7 @@
     <a ng-show="route.collectionID=='week'" class="listname" >{{ task.calendar.displayname }}</a>
     <div class="title-wrapper">
         <span class="title" ng-bind-html="task.summary | linky:'_blank':{rel: 'nofollow'}"></span>
+        <span class="title">{{task.manualSort}}</span>
         <span class="categories-list">
             <ul>
                 <li ng-repeat="category in task.categories"><span>{{ category }}</span></li>
@@ -34,7 +35,7 @@
      ng-class="{subtaskshidden: hideSubtasks(task)}">
     <ol dnd-list="draggedTasks"
         calendarID="{{task.calendar.uri}}"
-        dnd-drop="dropAsSubtask(event, item, index)"
+        dnd-drop="dropAsSubtask(event, item, index, getSubTasks(filtered,task))"
         dnd-dragover="dragover(event, index)">
         <li class="task-item ui-draggable handler add-subtask"
             ng-show="status.addSubtaskTo == task.uid">

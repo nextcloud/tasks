@@ -1562,7 +1562,8 @@ ol[dnd-list] .copy.dndDraggingSource {
 ol[dnd-list] .dndPlaceholder {
   display: block;
   background-color: #ddd;
-  min-height: 37px;
+  min-height: 36px;
+  height: 36px;
 }
 .dropzone-visible > ol[dnd-list] {
   min-height: 50px;
