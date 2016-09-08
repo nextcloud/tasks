@@ -256,6 +256,12 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		if (task.note) {
 			vtodo.updatePropertyWithValue('description', task.note);
 		}
+		if (task.due) {
+			vtodo.updatePropertyWithValue('due', task.due);
+		}
+		if (task.start) {
+			vtodo.updatePropertyWithValue('dtstart', task.start);
+		}
 
 		return new VTodo(task.calendar, {
 			'{urn:ietf:params:xml:ns:caldav}calendar-data': comp.toString(),
