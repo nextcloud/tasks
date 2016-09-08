@@ -228,7 +228,7 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 			var vtodos = this.components.getAllSubcomponents('vtodo');
 			var order = vtodos[0].getFirstPropertyValue('x-apple-sort-order');
 			if (order === null) {
-				var order = this.created.subtractDate(
+				order = this.created.subtractDate(
 					new ICAL.Time({
 						year: 2001,
 						month: 1,

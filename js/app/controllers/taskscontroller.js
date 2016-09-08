@@ -360,7 +360,7 @@
 		  	this._$scope.dropAsSubtask = function($event, task, index, tasks) {
 				if ($event.dataTransfer.dropEffect === 'move') {
 					var parentID = $($event.target).closest('.task-item').attr('taskID');
-					var task = _$tasksmodel.getByUri(task.uri);
+					task = _$tasksmodel.getByUri(task.uri);
 					var parent = _$tasksmodel.getByUri(parentID);
 					_tasksbusinesslayer.changeParent(task, parent);
 				}
@@ -371,7 +371,7 @@
 
 			this._$scope.dropAsRootTask = function($event, task, index, tasks) {
 				if ($event.dataTransfer.dropEffect === 'move') {
-					var task = _$tasksmodel.getByUri(task.uri);
+					task = _$tasksmodel.getByUri(task.uri);
 					_$scope.reorderTasks(tasks, task, index);
 					var collectionID = $($event.target).closest('ol[dnd-list]').attr('collectionID');
 					var calendarID = $($event.target).closest('ol[dnd-list]').attr('calendarID');
