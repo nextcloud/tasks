@@ -943,7 +943,6 @@ angular.module('Tasks').controller('SettingsController', [
 					calendar: null,
 					related: related,
 					summary: taskName,
-					starred: false,
 					priority: '0',
 					due: false,
 					start: false,
@@ -958,14 +957,14 @@ angular.module('Tasks').controller('SettingsController', [
 					} else {
 						task.calendar = _$listsmodel.getStandardList();
 					}
-					if (_$scope.route.listID === 'starred') {
-						task.starred = true;
+					if (_$scope.route.collectionID === 'starred') {
+						task.priority = '1';
 					}
-					if (_$scope.route.listID === 'today') {
-						task.due = moment().startOf('day').format("YYYYMMDDTHHmmss");
+					if (_$scope.route.collectionID === 'today') {
+						task.due = moment().startOf('day').format("YYYY-MM-DDTHH:mm:ss");
 					}
-					if (_$scope.route.listID === 'current') {
-						task.start = moment().format("YYYYMMDDTHHmmss");
+					if (_$scope.route.collectionID === 'current') {
+						task.start = moment().format("YYYY-MM-DDTHH:mm:ss");
 					}
 				} else {
 					task.calendar = _$listsmodel.getByUri(_$scope.route.calendarID);
@@ -4292,6 +4291,12 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		}
 		if (task.note) {
 			vtodo.updatePropertyWithValue('description', task.note);
+		}
+		if (task.due) {
+			vtodo.updatePropertyWithValue('due', task.due);
+		}
+		if (task.start) {
+			vtodo.updatePropertyWithValue('dtstart', task.start);
 		}
 
 		return new VTodo(task.calendar, {
