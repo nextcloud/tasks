@@ -1100,7 +1100,7 @@ angular.module('Tasks').controller('SettingsController', [
 				ret = [];
 				for (_i = 0, _len = tasks.length; _i < _len; _i++) {
 					task = tasks[_i];
-					if (task.related === parent.uid && task !== parent) {
+					if (task.related === parent.uid && task !== parent && !(parent.hideCompletedSubtasks && task.completed)) {
 						ret.push(task);
 					}
 				}
@@ -1117,8 +1117,16 @@ angular.module('Tasks').controller('SettingsController', [
 				return _$tasksmodel.hasSubtasks(task.uid);
 			};
 
+			this._$scope.hasCompletedSubtasks = function(task) {
+				return _$tasksmodel.hasCompletedSubtasks(task.uid);
+			};
+
 			this._$scope.toggleSubtasks = function(task) {
 				_tasksbusinesslayer.setHideSubtasks(task, !task.hideSubtasks);
+			};
+
+			this._$scope.toggleCompletedSubtasks = function(task) {
+				_tasksbusinesslayer.setHideCompletedSubtasks(task, !task.hideCompletedSubtasks);
 			};
 
 			this._$scope.filterTasksByString = function(task) {
@@ -2104,6 +2112,13 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 
 			TasksBusinessLayer.prototype.setHideSubtasks = function(task, hide) {
 				task.hideSubtasks = hide;
+				if (task.calendar.writable) {
+					this.doUpdate(task);
+				}
+			};
+
+			TasksBusinessLayer.prototype.setHideCompletedSubtasks = function(task, hide) {
+				task.hideCompletedSubtasks = hide;
 				if (task.calendar.writable) {
 					this.doUpdate(task);
 				}
@@ -3826,6 +3841,18 @@ angular.module('Tasks').factory('Calendar', ['$rootScope', '$filter', '$window',
 		  return false;
 		};
 
+		TasksModel.prototype.hasCompletedSubtasks = function(uid) {
+		  var task, tasks, _i, _len;
+		  tasks = this.getAll();
+		  for (_i = 0, _len = tasks.length; _i < _len; _i++) {
+			task = tasks[_i];
+			if (task.related === uid && task.completed) {
+			  return true;
+			}
+		  }
+		  return false;
+		};
+
 		TasksModel.prototype.hasNoParent = function(task) {
 		  var t, tasks, _i, _len;
 		  if (!task.related) {
@@ -4197,6 +4224,16 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 		set hideSubtasks(hide) {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
 			vtodos[0].updatePropertyWithValue('x-oc-hidesubtasks', +hide);
+			this.updateLastModified();
+			this.data = this.components.toString();
+		},
+		get hideCompletedSubtasks() {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			return +vtodos[0].getFirstPropertyValue('x-oc-hidecompletedsubtasks') || 0;
+		},
+		set hideCompletedSubtasks(hide) {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			vtodos[0].updatePropertyWithValue('x-oc-hidecompletedsubtasks', +hide);
 			this.updateLastModified();
 			this.data = this.components.toString();
 		},

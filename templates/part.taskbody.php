@@ -1,7 +1,7 @@
 <div class="task-body"
     type="task"
     taskID="{{ task.uri }}"
-    ng-class="{active: route.taskID==task.uri, subtasks: hasSubtasks(task), subtaskshidden: task.hideSubtasks, attachment: task.note!=''}">
+    ng-class="{active: route.taskID==task.uri, subtasks: hasSubtasks(task), completedsubtasks: hasCompletedSubtasks(task), subtaskshidden: task.hideSubtasks, attachment: task.note!=''}">
     <div class="percentdone" style="width:{{ task.complete }}%; background-color:{{ task.calendar.color }};"></div>
     <a class="task-checkbox handler" name="toggleCompleted" ng-click="toggleCompleted(task)">
         <span class="icon task-checkbox" ng-class="{'task-checked': task.completed}"></span>
@@ -15,6 +15,9 @@
     </a>
     <a class="handler"  ng-click="toggleSubtasks(task)">
         <span class="icon large subtasks"></span>
+    </a>
+    <a class="handler"  ng-click="toggleCompletedSubtasks(task)">
+        <span class="icon large toggle-completed-subtasks" ng-class="{'hidden': task.hideCompletedSubtasks}"></span>
     </a>
     <a>
         <span class="icon large task-attachment"></span>

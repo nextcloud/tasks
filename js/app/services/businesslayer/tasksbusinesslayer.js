@@ -121,6 +121,13 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				}
 			};
 
+			TasksBusinessLayer.prototype.setHideCompletedSubtasks = function(task, hide) {
+				task.hideCompletedSubtasks = hide;
+				if (task.calendar.writable) {
+					this.doUpdate(task);
+				}
+			};
+
 			TasksBusinessLayer.prototype.deleteTask = function(task) {
 				var child, children, _i, _len;
 				children = this._$tasksmodel.getChildren(task);

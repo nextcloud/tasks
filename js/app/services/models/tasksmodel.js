@@ -170,6 +170,18 @@
 		  return false;
 		};
 
+		TasksModel.prototype.hasCompletedSubtasks = function(uid) {
+		  var task, tasks, _i, _len;
+		  tasks = this.getAll();
+		  for (_i = 0, _len = tasks.length; _i < _len; _i++) {
+			task = tasks[_i];
+			if (task.related === uid && task.completed) {
+			  return true;
+			}
+		  }
+		  return false;
+		};
+
 		TasksModel.prototype.hasNoParent = function(task) {
 		  var t, tasks, _i, _len;
 		  if (!task.related) {

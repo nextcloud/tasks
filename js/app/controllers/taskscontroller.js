@@ -221,7 +221,7 @@
 				ret = [];
 				for (_i = 0, _len = tasks.length; _i < _len; _i++) {
 					task = tasks[_i];
-					if (task.related === parent.uid && task !== parent) {
+					if (task.related === parent.uid && task !== parent && !(parent.hideCompletedSubtasks && task.completed)) {
 						ret.push(task);
 					}
 				}
@@ -238,8 +238,16 @@
 				return _$tasksmodel.hasSubtasks(task.uid);
 			};
 
+			this._$scope.hasCompletedSubtasks = function(task) {
+				return _$tasksmodel.hasCompletedSubtasks(task.uid);
+			};
+
 			this._$scope.toggleSubtasks = function(task) {
 				_tasksbusinesslayer.setHideSubtasks(task, !task.hideSubtasks);
+			};
+
+			this._$scope.toggleCompletedSubtasks = function(task) {
+				_tasksbusinesslayer.setHideCompletedSubtasks(task, !task.hideCompletedSubtasks);
 			};
 
 			this._$scope.filterTasksByString = function(task) {
