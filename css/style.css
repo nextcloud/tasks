@@ -279,13 +279,16 @@
 #content .icon.note-fullscreen:hover {
   opacity: 1;
 }
-#content .icon.toggle-completed-tasks {
-  background-position: -120px 0;
-  height: 20px;
+#content .icon.toggle-completed-subtasks {
+  background-position: -140px -100px;
+  float: right;
   opacity: 0.8;
   width: 20px;
 }
-#content .icon.toggle-completed-tasks:hover {
+#content .icon.toggle-completed-subtasks.hidden {
+  background-position: -120px -100px;
+}
+#content .icon.toggle-completed-subtasks:hover {
   opacity: 1;
 }
 #content .calendar-indicator {
@@ -472,6 +475,14 @@
 }
 #content li.task-item .task-body.subtasks .icon.subtasks,
 #content div.task-item .task-body.subtasks .icon.subtasks {
+  display: inline-block;
+}
+#content li.task-item .task-body .icon.toggle-completed-subtasks,
+#content div.task-item .task-body .icon.toggle-completed-subtasks {
+  display: none;
+}
+#content li.task-item .task-body.completedsubtasks .icon.toggle-completed-subtasks,
+#content div.task-item .task-body.completedsubtasks .icon.toggle-completed-subtasks {
   display: inline-block;
 }
 #content li.task-item .task-body.subtasks.subtaskshidden .icon.subtasks,
