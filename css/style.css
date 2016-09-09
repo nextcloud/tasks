@@ -659,7 +659,6 @@
   height: 100%;
 }
 #app-sidebar div.content-wrapper > div {
-  background: url("../img/bgTaskDetail.png") repeat scroll 0 0 #ffffff;
   border: 1px solid #CCCCCC;
   height: 100%;
   position: relative;
@@ -673,7 +672,6 @@
   width: 100%;
 }
 #app-sidebar div.content-wrapper div.footer {
-  background: url("../img/bgTask.png") repeat scroll 0 0 #ffffff;
   border-top: 1px solid #D3D3D3;
   bottom: 0;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
