@@ -78,6 +78,7 @@ OC.L10N.register(
     "at the beginning" : "alguses",
     "Set start date" : "Määra alguse kuupäev",
     "{calendar} shared by {owner}" : "{calendar} jagas {owner}",
+    "Unnamed" : "Nimeta",
     "Important" : "Tähtis",
     "Week" : "Nädal",
     "All" : "Kõik",
