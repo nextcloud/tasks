@@ -76,6 +76,16 @@ angular.module('Tasks').run([
 				sameElse: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY, HH:mm'
 			}
 		});
+ 		moment.locale('details_allday', {
+ 			calendar: {
+ 				lastDay: '[' + t('tasks', 'Due yesterday') + ']',
+ 				sameDay: '[' + t('tasks', 'Due today') + ']',
+ 				nextDay: '[' + t('tasks', 'Due tomorrow') + ']',
+ 				lastWeek: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY',
+ 				nextWeek: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY',
+ 				sameElse: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY'
+ 			}
+ 		});
 		moment.locale('start', {
 			calendar: {
 				lastDay: '[' + t('tasks', 'Started yesterday') + '], HH:mm',
@@ -92,6 +102,22 @@ angular.module('Tasks').run([
 				}
 			}
 		});
+ 		moment.locale('start_allday', {
+ 			calendar: {
+ 				lastDay: '[' + t('tasks', 'Started yesterday') + ']',
+ 				sameDay: '[' + t('tasks', 'Starts today') + ']',
+ 				nextDay: '[' + t('tasks', 'Starts tomorrow') + ']',
+ 				lastWeek: '[' + t('tasks', 'Started on') + '] MMM DD, YYYY',
+ 				nextWeek: '[' + t('tasks', 'Starts on') + '] MMM DD, YYYY',
+ 				sameElse: function() {
+ 					if (this.diff(moment()) > 0) {
+ 						return '[' + t('tasks', 'Starts on') + '] MMM DD, YYYY';
+ 					} else {
+ 						return '[' + t('tasks', 'Started on') + '] MMM DD, YYYY';
+ 					}
+ 				}
+ 			}
+ 		});
 	  moment.locale('reminder', {
 		calendar: {
 		  lastDay: t('tasks', '[Remind me yesterday at ]HH:mm'),

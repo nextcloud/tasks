@@ -23,7 +23,7 @@ angular.module('Tasks').filter('startDetails', function() {
 	'use strict';
 	return function(due) {
 		if (moment(due, "YYYYMMDDTHHmmss").isValid()) {
-			return moment(due, "YYYYMMDDTHHmmss").locale('start').calendar();
+			return moment(due, "YYYYMMDDTHHmmss").locale(due.isDate ? 'start_allday' : 'start').calendar();
 		} else {
 			return t('tasks', 'Set start date');
 		}

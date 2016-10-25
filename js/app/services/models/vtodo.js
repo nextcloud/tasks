@@ -231,6 +231,28 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 			this.updateLastModified();
 			this.data = this.components.toString();
 		},
+ 		get allDay() {
+ 			var vtodos = this.components.getAllSubcomponents('vtodo');
+ 			var start = vtodos[0].getFirstPropertyValue('dtstart');
+ 			var due = vtodos[0].getFirstPropertyValue('due');
+ 			var d = due ? due : start;
+ 			return d!=null && d.isDate;
+ 		},
+ 		set allDay(allDay) {
+ 			var vtodos = this.components.getAllSubcomponents('vtodo');
+ 			var start = vtodos[0].getFirstPropertyValue('dtstart');
+ 			if(start) {
+ 				start.isDate = allDay;
+ 				vtodos[0].updatePropertyWithValue('dtstart', start);
+ 			}
+ 			var due = vtodos[0].getFirstPropertyValue('due');
+ 			if(due) {
+ 				due.isDate = allDay;
+ 				vtodos[0].updatePropertyWithValue('due', due);
+ 			}
+ 			this.updateLastModified();
+ 			this.data = this.components.toString();
+ 		},
 		get comments() {
 			return null;
 		},

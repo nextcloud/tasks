@@ -68,6 +68,16 @@ angular.module('Tasks').run([
 				sameElse: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY, HH:mm'
 			}
 		});
+ 		moment.locale('details_allday', {
+ 			calendar: {
+ 				lastDay: '[' + t('tasks', 'Due yesterday') + ']',
+ 				sameDay: '[' + t('tasks', 'Due today') + ']',
+ 				nextDay: '[' + t('tasks', 'Due tomorrow') + ']',
+ 				lastWeek: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY',
+ 				nextWeek: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY',
+ 				sameElse: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY'
+ 			}
+ 		});
 		moment.locale('start', {
 			calendar: {
 				lastDay: '[' + t('tasks', 'Started yesterday') + '], HH:mm',
@@ -84,6 +94,22 @@ angular.module('Tasks').run([
 				}
 			}
 		});
+ 		moment.locale('start_allday', {
+ 			calendar: {
+ 				lastDay: '[' + t('tasks', 'Started yesterday') + ']',
+ 				sameDay: '[' + t('tasks', 'Starts today') + ']',
+ 				nextDay: '[' + t('tasks', 'Starts tomorrow') + ']',
+ 				lastWeek: '[' + t('tasks', 'Started on') + '] MMM DD, YYYY',
+ 				nextWeek: '[' + t('tasks', 'Starts on') + '] MMM DD, YYYY',
+ 				sameElse: function() {
+ 					if (this.diff(moment()) > 0) {
+ 						return '[' + t('tasks', 'Starts on') + '] MMM DD, YYYY';
+ 					} else {
+ 						return '[' + t('tasks', 'Started on') + '] MMM DD, YYYY';
+ 					}
+ 				}
+ 			}
+ 		});
 	  moment.locale('reminder', {
 		calendar: {
 		  lastDay: t('tasks', '[Remind me yesterday at ]HH:mm'),
@@ -477,6 +503,13 @@ angular.module('Tasks').controller('DetailsController', [
 				this._$scope.deleteDueDate = function(task) {
 					_tasksbusinesslayer.deleteDueDate(task);
 				};
+
+ 				this._$scope.isAllDayPossible = function(task) {
+ 					return !angular.isUndefined(task) && task.calendar.writable && (task.due || task.start);
+ 				};
+ 				this._$scope.toggleAllDay = function(task) {
+ 					_tasksbusinesslayer.setAllDay(task, !task.allDay);
+ 				};
 
 				  this._$scope.setreminderday = function(date) {
 					return _tasksbusinesslayer.setReminderDate(_$scope.route.taskID, moment(date, 'MM/DD/YYYY'), 'day');
@@ -1684,7 +1717,7 @@ angular.module('Tasks').filter('dateDetails', function() {
 	'use strict';
 	return function(due) {
 		if (moment(due, "YYYYMMDDTHHmmss").isValid()) {
-			return moment(due, "YYYYMMDDTHHmmss").locale('details').calendar();
+			return moment(due, "YYYYMMDDTHHmmss").locale(due.isDate ? 'details_allday' : 'details').calendar();
 		} else {
 			return t('tasks', 'Set due date');
 		}
@@ -1823,7 +1856,7 @@ angular.module('Tasks').filter('startDetails', function() {
 	'use strict';
 	return function(due) {
 		if (moment(due, "YYYYMMDDTHHmmss").isValid()) {
-			return moment(due, "YYYYMMDDTHHmmss").locale('start').calendar();
+			return moment(due, "YYYYMMDDTHHmmss").locale(due.isDate ? 'start_allday' : 'start').calendar();
 		} else {
 			return t('tasks', 'Set start date');
 		}
@@ -2147,6 +2180,7 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				if (type === null) {
 					type = 'day';
 				}
+				var allDay = task.allDay;
 				var due = moment(task.due, "YYYY-MM-DDTHH:mm:ss");
 				if (type === 'day') {
 					if (moment(due).isValid()) {
@@ -2166,6 +2200,7 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 					return;
 				}
 				task.due = due.format('YYYY-MM-DDTHH:mm:ss');
+				task.due.isDate = allDay;
 				// this.checkReminderDate(task);
 				this.doUpdate(task);
 			};
@@ -2190,6 +2225,7 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				if (type === null) {
 					type = 'day';
 				}
+				var allDay = task.allDay;
 				var start = moment(task.start, "YYYY-MM-DDTHH:mm:ss");
 				if (type === 'day') {
 					if (moment(start).isValid()) {
@@ -2207,6 +2243,7 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 					return;
 				}
 				task.start = start.format('YYYY-MM-DDTHH:mm:ss');
+				task.start.isDate = allDay;
 				// this.checkReminderDate(taskID);
 				this.doUpdate(task);
 			};
@@ -2220,6 +2257,11 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				this.doUpdate(task);
 			};
 
+ 			TasksBusinessLayer.prototype.setAllDay = function(task, allDay) {
+ 				task.allDay = allDay;
+ 				this.doUpdate(task);
+ 			};
+ 
 			TasksBusinessLayer.prototype.initReminder = function(taskID) {
 				var p, task;
 				if (!this.checkReminderDate(taskID)) {
@@ -4294,6 +4336,28 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 			this.updateLastModified();
 			this.data = this.components.toString();
 		},
+ 		get allDay() {
+ 			var vtodos = this.components.getAllSubcomponents('vtodo');
+ 			var start = vtodos[0].getFirstPropertyValue('dtstart');
+ 			var due = vtodos[0].getFirstPropertyValue('due');
+ 			var d = due ? due : start;
+ 			return d!=null && d.isDate;
+ 		},
+ 		set allDay(allDay) {
+ 			var vtodos = this.components.getAllSubcomponents('vtodo');
+ 			var start = vtodos[0].getFirstPropertyValue('dtstart');
+ 			if(start) {
+ 				start.isDate = allDay;
+ 				vtodos[0].updatePropertyWithValue('dtstart', start);
+ 			}
+ 			var due = vtodos[0].getFirstPropertyValue('due');
+ 			if(due) {
+ 				due.isDate = allDay;
+ 				vtodos[0].updatePropertyWithValue('due', due);
+ 			}
+ 			this.updateLastModified();
+ 			this.data = this.components.toString();
+ 		},
 		get comments() {
 			return null;
 		},
