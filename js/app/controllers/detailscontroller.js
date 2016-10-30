@@ -290,6 +290,13 @@ angular.module('Tasks').controller('DetailsController', [
 					_tasksbusinesslayer.deleteDueDate(task);
 				};
 
+ 				this._$scope.isAllDayPossible = function(task) {
+ 					return !angular.isUndefined(task) && task.calendar.writable && (task.due || task.start);
+ 				};
+ 				this._$scope.toggleAllDay = function(task) {
+ 					_tasksbusinesslayer.setAllDay(task, !task.allDay);
+ 				};
+
 				  this._$scope.setreminderday = function(date) {
 					return _tasksbusinesslayer.setReminderDate(_$scope.route.taskID, moment(date, 'MM/DD/YYYY'), 'day');
 				  };

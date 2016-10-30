@@ -23,7 +23,7 @@ angular.module('Tasks').filter('dateDetails', function() {
 	'use strict';
 	return function(due) {
 		if (moment(due, "YYYYMMDDTHHmmss").isValid()) {
-			return moment(due, "YYYYMMDDTHHmmss").locale('details').calendar();
+			return moment(due, "YYYYMMDDTHHmmss").locale(due.isDate ? 'details_allday' : 'details').calendar();
 		} else {
 			return t('tasks', 'Set due date');
 		}
