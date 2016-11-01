@@ -104,6 +104,7 @@ OC.L10N.register(
     "Alphabetically" : "Ordine alfabetico",
     "Manually" : "Manuale",
     "Load remaining completed tasks." : "Carica le attività completate rimanenti.",
+    "All day" : "Tutto il giorno",
     "(New category)" : "(Nuova categoria)",
     "Select categories..." : "Seleziona le categorie...",
     "Loading the task..." : "Caricamento attività in corso...",
