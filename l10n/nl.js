@@ -104,6 +104,7 @@ OC.L10N.register(
     "Alphabetically" : "Alfabetisch",
     "Manually" : "Handmatig",
     "Load remaining completed tasks." : "Laad overige afgeronde taken",
+    "All day" : "Hele dag",
     "(New category)" : "(Nieuwe categorie)",
     "Select categories..." : "Kies categorieën...",
     "Loading the task..." : "Laden van de taak...",
