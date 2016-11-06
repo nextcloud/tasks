@@ -104,6 +104,7 @@ OC.L10N.register(
     "Alphabetically" : "Abecedně",
     "Manually" : "Manuálně",
     "Load remaining completed tasks." : "Načíst zbývající dokončené úkoly.",
+    "All day" : "Celý den",
     "(New category)" : "(Nová kategorie)",
     "Select categories..." : "Vybrat kategorie...",
     "Loading the task..." : "Nahrávám úkol...",
