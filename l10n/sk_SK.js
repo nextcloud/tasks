@@ -78,7 +78,7 @@ OC.L10N.register(
     "at the end" : "na konci",
     "at the beginning" : "na začiatku",
     "Set start date" : "Nastaviť dátum začatia",
-    "{calendar} shared by {owner}" : "{calendar} zdieľa {owner}",
+    "{calendar} shared by {owner}" : "{calendar} sprístupňuje {owner}",
     "Unnamed" : "nepomenovaný",
     "Important" : "Dôležité",
     "Week" : "Týždeň",
