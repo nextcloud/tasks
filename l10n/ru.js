@@ -104,6 +104,7 @@ OC.L10N.register(
     "Alphabetically" : "По алфавиту",
     "Manually" : "Вручную",
     "Load remaining completed tasks." : "Загрузить оставшиеся завершённые задачи.",
+    "All day" : "Весь день",
     "(New category)" : "(Новая категория)",
     "Select categories..." : "Выбрать категории...",
     "Loading the task..." : "Загрузка задачи...",
