@@ -140,6 +140,14 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				});
 			};
 
+			TasksBusinessLayer.prototype.momentToICALTime = function(moment, asDate) {
+				if(asDate) {
+					return ICAL.Time.fromDateString(moment.format('YYYY-MM-DD'));
+				} else {
+					return ICAL.Time.fromDateTimeString(moment.format('YYYY-MM-DDTHH:mm:ss'));
+				}
+			};
+
 			TasksBusinessLayer.prototype.initDueDate = function(task) {
 				var due = moment(task.due, "YYYY-MM-DDTHH:mm:ss");
 				if (!due.isValid()) {
@@ -170,8 +178,7 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				} else {
 					return;
 				}
-				task.due = due.format('YYYY-MM-DDTHH:mm:ss');
-				task.due.isDate = allDay;
+				task.due = this.momentToICALTime(due, allDay);
 				// this.checkReminderDate(task);
 				this.doUpdate(task);
 			};
@@ -213,8 +220,7 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				} else {
 					return;
 				}
-				task.start = start.format('YYYY-MM-DDTHH:mm:ss');
-				task.start.isDate = allDay;
+				task.start = this.momentToICALTime(start, allDay);
 				// this.checkReminderDate(taskID);
 				this.doUpdate(task);
 			};
