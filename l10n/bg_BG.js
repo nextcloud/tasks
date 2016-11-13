@@ -52,7 +52,7 @@ OC.L10N.register(
     "Hidden" : "Скрито",
     "Visible" : "Видимо",
     "Automatic" : "Автоматично",
-    "Sunday" : "Неделя",
+    "Sunday" : "неделя",
     "Monday" : "понеделник",
     "Tuesday" : "вторник",
     "Wednesday" : "сряда",
