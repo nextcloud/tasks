@@ -11,5 +11,6 @@
 	<ocsid>164356</ocsid>
     <dependencies>
         <owncloud min-version="9.1" max-version="9.2"/>
+        <nextcloud min-version="10" max-version="11"/>
     </dependencies>
 </info>
