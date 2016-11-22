@@ -2178,9 +2178,16 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 			};
 
 			TasksBusinessLayer.prototype.initDueDate = function(task) {
+				var start = moment(task.start, "YYYY-MM-DDTHH:mm:ss");
 				var due = moment(task.due, "YYYY-MM-DDTHH:mm:ss");
 				if (!due.isValid()) {
-					return this.setDue(task, moment().startOf('hour').add(1, 'h'), 'time');
+					var reference = start.isAfter() ? start : moment();
+					if(task.allDay) {
+						reference.startOf('day').add(1, 'd');
+					} else {
+						reference.startOf('hour').add(1, 'h');
+					}
+					return this.setDue(task, reference, 'all');
 				}
 			};
 
@@ -2189,7 +2196,9 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 					type = 'day';
 				}
 				var allDay = task.allDay;
-				var due = moment(task.due, "YYYY-MM-DDTHH:mm:ss");
+				var start = moment(task.start, "YYYY-MM-DDTHH:mm:ss");
+				var olddue = moment(task.due, "YYYY-MM-DDTHH:mm:ss");
+				var due = olddue.clone();
 				if (type === 'day') {
 					if (moment(due).isValid()) {
 						due.year(date.year()).month(date.month()).date(date.date());
@@ -2207,6 +2216,10 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				} else {
 					return;
 				}
+				if(due.isBefore(start) || due.isSame(start)) {
+					start.subtract(olddue.diff(due), 'ms');
+					task.start = this.momentToICALTime(start, allDay);
+				}
 				task.due = this.momentToICALTime(due, allDay);
 				// this.checkReminderDate(task);
 				this.doUpdate(task);
@@ -2223,8 +2236,12 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 
 			TasksBusinessLayer.prototype.initStartDate = function(task) {
 				var start = moment(task.start, "YYYY-MM-DDTHH:mm:ss");
+				var due = moment(task.due, "YYYY-MM-DDTHH:mm:ss");
 				if (!start.isValid()) {
-					return this.setStart(task, moment().startOf('hour').add(1, 'h'), 'time');
+					var reference = due.isBefore() ? due : moment();
+					reference.subtract(1, 'm');
+					reference.startOf(task.allDay ? 'day' : 'hour');
+					return this.setStart(task, reference, 'all');
 				}
 			};
 
@@ -2233,7 +2250,9 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 					type = 'day';
 				}
 				var allDay = task.allDay;
-				var start = moment(task.start, "YYYY-MM-DDTHH:mm:ss");
+				var due = moment(task.due, "YYYY-MM-DDTHH:mm:ss");
+				var oldstart = moment(task.start, "YYYY-MM-DDTHH:mm:ss");
+				var start = oldstart.clone();
 				if (type === 'day') {
 					if (moment(start).isValid()) {
 						start.year(date.year()).month(date.month()).date(date.date());
@@ -2246,8 +2265,14 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 					} else {
 						start = date;
 					}
+				} else if (type === 'all') {
+					start = date;
 				} else {
 					return;
+				}
+				if(start.isAfter(due) || start.isSame(due)) {
+					due.add(start.diff(oldstart), 'ms');
+					task.due = this.momentToICALTime(due, allDay);
 				}
 				task.start = this.momentToICALTime(start, allDay);
 				// this.checkReminderDate(taskID);
@@ -2265,6 +2290,14 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 
  			TasksBusinessLayer.prototype.setAllDay = function(task, allDay) {
  				task.allDay = allDay;
+				if(allDay) {
+					var due = moment(task.due, "YYYY-MM-DDTHH:mm:ss");
+					var start = moment(task.start, "YYYY-MM-DDTHH:mm:ss");
+					if(start.isAfter(due) || start.isSame(due)) {
+						start = moment(due).subtract(1, 'day');
+						task.start = this.momentToICALTime(start, allDay);
+					}
+				}
  				this.doUpdate(task);
  			};
  
