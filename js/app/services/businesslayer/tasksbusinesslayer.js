@@ -209,8 +209,10 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				var start = moment(task.start, "YYYY-MM-DDTHH:mm:ss");
 				var due = moment(task.due, "YYYY-MM-DDTHH:mm:ss");
 				if (!start.isValid()) {
-					var reference = due.isBefore() ? due : moment();
-					reference.subtract(1, 'm');
+					var reference = moment().add(1, 'h');
+					if (due.isBefore(reference)) {
+						reference = due.subtract(1, 'm');
+					}
 					reference.startOf(task.allDay ? 'day' : 'hour');
 					return this.setStart(task, reference, 'all');
 				}
@@ -271,7 +273,7 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				}
  				this.doUpdate(task);
  			};
- 
+
 			TasksBusinessLayer.prototype.initReminder = function(taskID) {
 				var p, task;
 				if (!this.checkReminderDate(taskID)) {
