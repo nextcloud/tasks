@@ -83,9 +83,9 @@ sign:
 	chown -R www-data $(signed_dir)
 	sudo -u www-data php ../../occ integrity:sign-app --privateKey=$(build_dir)/app-signing/tasks.key --certificate=$(build_dir)/app-signing/tasks.crt --path=$(signed_dir)/$(app_name)
 	cd $(signed_dir); \
-	zip -r $(signed_dir)/$(app_name).zip ./$(app_name)
+	zip -r $(signed_dir)/$(app_name).zip $(app_name)
 	cd $(signed_dir); \
-	tar cvzf $(signed_dir)/$(app_name).tar.gz ./$(app_name)
+	tar cvzf $(signed_dir)/$(app_name).tar.gz $(app_name)
 	rm -rf $(signed_dir)/$(app_name)
 	openssl dgst -sha512 -sign $(build_dir)/app-signing/tasks.key $(signed_dir)/$(app_name).tar.gz | openssl base64 -out $(signed_dir)/$(app_name).sha512
 
