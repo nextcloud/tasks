@@ -87,6 +87,7 @@ sign:
 	cd $(signed_dir); \
 	tar cvzf $(signed_dir)/$(app_name).tar.gz ./$(app_name)
 	rm -rf $(signed_dir)/$(app_name)
+	openssl dgst -sha512 -sign $(build_dir)/app-signing/tasks.key $(signed_dir)/$(app_name).tar.gz | openssl base64 -out $(signed_dir)/$(app_name).sha512
 
 
 appstore: clean
