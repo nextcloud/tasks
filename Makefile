@@ -83,6 +83,8 @@ sign:
 	sudo -u www-data php ../../occ integrity:sign-app --privateKey=$(build_dir)/app-signing/tasks.key --certificate=$(build_dir)/app-signing/tasks.crt --path=$(signed_dir)/$(app_name)
 	cd $(signed_dir); \
 	zip -r $(signed_dir)/$(app_name).zip ./$(app_name)
+	cd $(signed_dir); \
+	tar cvzf $(signed_dir)/$(app_name).tar.gz ./$(app_name)
 	rm -rf $(signed_dir)/$(app_name)
 
 
