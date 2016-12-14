@@ -1,7 +1,7 @@
 {
   "name": "task",
   "description": "ownCloud Task App",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "author": {
     "name": "Raimund Schlüßler",
     "email": "raimund.schluessler@googlemail.com"
