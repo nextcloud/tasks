@@ -9,6 +9,7 @@
     <author mail="raimund.schluessler@googlemail.com">Raimund Schlüßler</author>
     <version>0.9.4</version>
     <ocsid>164356</ocsid>
+    <screenshot>https://raw.githubusercontent.com/nextcloud/tasks/master/screenshots/tasks-1.png</screenshot>
     <namespace>Tasks</namespace>
 	<category>organization</category>
     <dependencies>

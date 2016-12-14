@@ -78,6 +78,7 @@ sign:
 	--exclude=$(app_name)/js/vendor/jquery-timepicker/legacy_1.2.6 \
 	--exclude=$(app_name)/js/vendor/jquery-timepicker/tests \
 	--exclude=$(app_name)/js/vendor/jquery-timepicker/index.html \
+	--exclude=$(app_name)/screenshots \
 	--exclude=$(app_name)/timezones/INFO.md
 	chown -R www-data $(signed_dir)
 	sudo -u www-data php ../../occ integrity:sign-app --privateKey=$(build_dir)/app-signing/tasks.key --certificate=$(build_dir)/app-signing/tasks.crt --path=$(signed_dir)/$(app_name)
