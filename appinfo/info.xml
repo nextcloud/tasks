@@ -8,6 +8,7 @@
     <licence>agpl</licence>
     <author mail="raimund.schluessler@googlemail.com">Raimund Schlüßler</author>
     <version>0.9.4</version>
+    <ocsid>164356</ocsid>
     <namespace>Tasks</namespace>
 	<category>organization</category>
     <dependencies>
