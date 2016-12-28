@@ -104,6 +104,7 @@ OC.L10N.register(
     "Alphabetically" : "Alfabetikisht",
     "Manually" : "Dorazi",
     "Load remaining completed tasks." : "Ngarko punët e plotësuara të mbetura.",
+    "All day" : "Gjithë ditën",
     "(New category)" : "(Kategori e re)",
     "Select categories..." : "Përzgjidhni kategori…",
     "Loading the task..." : "Po ngarkohet puna…",
