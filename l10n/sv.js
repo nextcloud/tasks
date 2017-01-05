@@ -85,7 +85,7 @@ OC.L10N.register(
     "All" : "Alla",
     "Current" : "Nuvarande",
     "Completed" : "Slutförande",
-    "Delete" : "Ta bort",
+    "Delete" : "Radera",
     "Cancel" : "Avbryt",
     "Edit" : "Ändra",
     "Link" : "Länk",
