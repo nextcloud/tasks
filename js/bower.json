@@ -1,5 +1,5 @@
 {
-  "name": "ownCloud Task App",
+  "name": "Nextcloud - Tasks",
   "version": "0.9.4",
   "dependencies": {
     "angular": "",
@@ -14,7 +14,7 @@
     "davclient.js": "https://github.com/evert/davclient.js.git"
   },
   "devDependencies": {},
-  "homepage": "https://github.com/owncloud/tasks",
+  "homepage": "https://github.com/nextcloud/tasks",
   "authors": [
     "Raimund Schlüßler <raimund.schluessler@googlemail.com>"
   ],

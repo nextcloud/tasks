@@ -1,6 +1,6 @@
 {
-  "name": "task",
-  "description": "ownCloud Task App",
+  "name": "tasks",
+  "description": "Nextcloud - Tasks",
   "version": "0.9.4",
   "author": {
     "name": "Raimund Schlüßler",
@@ -10,9 +10,9 @@
   "homepage": "",
   "repository": {
     "type": "git",
-    "url": "git@github.com:owncloud/tasks.git"
+    "url": "git@github.com:nextcloud/tasks.git"
   },
-  "bugs": "https://github.com/owncloud/tasks/issues",
+  "bugs": "https://github.com/nextcloud/tasks/issues",
   "contributors": [],
   "dependencies": {},
   "devDependencies": {

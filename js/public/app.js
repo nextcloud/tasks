@@ -1,9 +1,9 @@
 (function(angular, $, oc_requesttoken, undefined){
 
 /**
- * ownCloud Task App - v0.9.4
+ * Nextcloud - Tasks - v0.9.4
  *
- * Copyright (c) 2016 - Raimund Schlüßler <raimund.schluessler@googlemail.com>
+ * Copyright (c) 2017 - Raimund Schlüßler <raimund.schluessler@googlemail.com>
  *
  * This file is licensed under the Affero			 General Public License version 3 or later.
  * See the COPYING file
