@@ -197,7 +197,7 @@ angular.module('Tasks').service('VTodoService', ['DavClient', 'RandomStringServi
 	};
 
 	this._generateRandomUri = function() {
-		var uri = 'ownCloud-';
+		var uri = 'Nextcloud-';
 		uri += RandomStringService.generate();
 		uri += RandomStringService.generate();
 		uri += '.ics';

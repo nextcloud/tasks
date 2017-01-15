@@ -34,6 +34,7 @@ angular.module('Tasks').service('DavClient', [
 				'urn:ietf:params:xml:ns:caldav': 'c',
 				'http://apple.com/ns/ical/': 'aapl',
 				'http://owncloud.org/ns': 'oc',
+				'http://nextcloud.com/ns': 'nc',
 				'http://calendarserver.org/ns/': 'cs'
 			}
 		});
@@ -42,6 +43,7 @@ angular.module('Tasks').service('DavClient', [
 			NS_IETF: 'urn:ietf:params:xml:ns:caldav',
 			NS_APPLE: 'http://apple.com/ns/ical/',
 			NS_OWNCLOUD: 'http://owncloud.org/ns',
+			NS_NEXTCLOUD: 'http://nextcloud.com/ns',
 			NS_CALENDARSERVER: 'http://calendarserver.org/ns/',
 			buildUrl: function(path) {
 				return window.location.protocol + '//' + window.location.host + path;

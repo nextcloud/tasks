@@ -33,7 +33,7 @@ angular.module('Tasks').service('ICalFactory', [
 				var root = new ICAL.Component(['vcalendar', [], []]);
 
 				var version = angular.element('#app').attr('data-appVersion');
-				root.updatePropertyWithValue('prodid', '-//ownCloud tasks v' + version);
+				root.updatePropertyWithValue('prodid', '-//Nextcloud Tasks v' + version);
 
 				return root;
 			}
