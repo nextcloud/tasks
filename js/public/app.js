@@ -1,4 +1,3 @@
-(function(angular, $, oc_requesttoken, undefined){
 
 /**
  * Nextcloud - Tasks - v0.9.4
@@ -4947,4 +4946,3 @@ angular.module('Tasks').service('VTodoService', ['DavClient', 'RandomStringServi
 
 }]);
 
-})(window.angular, window.jQuery, oc_requesttoken);
