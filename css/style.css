@@ -1508,6 +1508,7 @@ div.percentdone {
   background-image: url("../img/sprites.svg");
   background-position: -4px -44px;
   opacity: 0.4;
+  display: initial;
 }
 .detail-categories .select2-container-multi .select2-choices .select2-search-choice a.select2-search-choice-close:hover {
   background-position: -4px -44px;
