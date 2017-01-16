@@ -98,7 +98,7 @@ OC.L10N.register(
     "Visibility of Smart Collections" : "Synlighet av smarta samlingar",
     "Change sort order" : "Ändra sorteringsordning",
     "Default" : "Förvald",
-    "Due date" : "Utgångsdatum",
+    "Due date" : "Slutdatum",
     "Start date" : "Startdatum",
     "Priority" : "Prioritet",
     "Alphabetically" : "Alfabetisk",
