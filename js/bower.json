@@ -6,7 +6,7 @@
     "angular-route": "1.5.5",
     "angular-animate": "1.5.5",
     "angular-sanitize": "1.5.5",
-    "angular-ui-select": "https://github.com/angular-ui/ui-select.git#v0.17.0",
+    "angular-ui-select": "https://github.com/angular-ui/ui-select.git#v0.19.6",
     "angular-draganddrop": "https://github.com/marceljuenemann/angular-drag-and-drop-lists.git#v1.4.0",
     "jquery-timepicker": "",
     "ical.js": "~1.2.2",

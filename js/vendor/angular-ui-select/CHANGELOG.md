@@ -1,6 +1,114 @@
-<a name="0.16.1"></a>
-## [0.16.1](https://github.com/angular-ui/ui-select/compare/v0.16.1...v0.16.1) (2016-05-11)
+<a name="0.19.5"></a>
+## [0.19.5](https://github.com/angular-ui/ui-select/compare/v0.19.5...v0.19.5) (2016-10-24)
 
+## Reverted
+
+* **Bug fix:** Search input isn't blocked ([0d81493](https://github.com/angular-ui/ui-select/commit/0d81493))
+
+<a name="0.19.4"></a>
+## [0.19.4](https://github.com/angular-ui/ui-select/compare/v0.19.4...v0.19.4) (2016-10-19)
+
+### Bug Fixes
+
+* **bootstrap:** add aria-expanded to the multiple select ([6766754](https://github.com/angular-ui/ui-select/commit/6766754)), closes [#1775](https://github.com/angular-ui/ui-select/issues/1775)
+* ensure aria-activedescendant is correct ([e3be4d1](https://github.com/angular-ui/ui-select/commit/e3be4d1))
+* only apply listbox role when open ([e902ffc](https://github.com/angular-ui/ui-select/commit/e902ffc))
+* **bootstrap:** add search role ([f3194bf](https://github.com/angular-ui/ui-select/commit/f3194bf))
+
+### Features
+
+* **selectize:** add support for multiple selection  ([ff8071d](https://github.com/angular-ui/ui-select/commit/ff8071d)), closes [#295](https://github.com/angular-ui/ui-select/issues/295) [#1787](https://github.com/angular-ui/ui-select/issues/1787)
+
+<a name="0.19.3"></a>
+## [0.19.3](https://github.com/angular-ui/ui-select/compare/v0.19.3...v0.19.3) (2016-08-17)
+
+
+<a name="0.19.2"></a>
+## [0.19.2](https://github.com/angular-ui/ui-select/compare/v0.19.0...v0.19.2) (2016-08-16)
+
+
+### Bug Fixes
+
+* **bootstrap layout:** Restrict selected length to ui-select-container (#1680) ([01055c5](https://github.com/angular-ui/ui-select/commit/01055c5)), closes [#1576](https://github.com/angular-ui/ui-select/issues/1576)
+* **release:** bump version with built files ([76cf9c3](https://github.com/angular-ui/ui-select/commit/76cf9c3))
+
+<a name="0.19.1"></a>
+## [0.19.1](https://github.com/angular-ui/ui-select/compare/v0.19.0...v0.19.1) (2016-08-09)
+
+### Bug Fixes
+
+* **bootstrap layout:** Restrict selected length to ui-select-container (#1680) ([01055c5](https://github.com/angular-ui/ui-select/commit/01055c5)), closes [#1576](https://github.com/angular-ui/ui-select/issues/1576)
+
+<a name="0.19.0"></a>
+# [0.19.0](https://github.com/angular-ui/ui-select/compare/v0.19.0...v0.19.0) (2016-08-07)
+
+### Bug Fixes
+
+* **bootstrap layout:** Restrict selected length to ui-select-container (#1680) ([01055c5](https://github.com/angular-ui/ui-select/commit/01055c5)), closes [#1576](https://github.com/angular-ui/ui-select/issues/1576)
+
+<a name="0.18.1"></a>
+## [0.18.1](https://github.com/angular-ui/ui-select/compare/v0.18.1...v0.18.1) (2016-08-07)
+
+### Bug Fixes
+
+* **bootstrap:** remove anchor tag in choices ([b15189d](https://github.com/angular-ui/ui-select/commit/b15189d))
+* **uiSelect:** remove flicker on search change ([81c33d0](https://github.com/angular-ui/ui-select/commit/81c33d0)), closes [#1298](https://github.com/angular-ui/ui-select/issues/1298) [#1594](https://github.com/angular-ui/ui-select/issues/1594) [#1557](https://github.com/angular-ui/ui-select/issues/1557)
+* **uiSelectController:** Select by click on non-multiple tagging (bis) (#1727) ([3dfde71](https://github.com/angular-ui/ui-select/commit/3dfde71))
+
+### Features
+
+* **events:** add open-close callback  ([21bcd5e](https://github.com/angular-ui/ui-select/commit/21bcd5e)), closes [#432](https://github.com/angular-ui/ui-select/issues/432) [#1153](https://github.com/angular-ui/ui-select/issues/1153)
+
+### Performance Improvements
+
+* **repeatParserService:** track groups by name  ([1770038](https://github.com/angular-ui/ui-select/commit/1770038)), closes [#1721](https://github.com/angular-ui/ui-select/issues/1721) [#1722](https://github.com/angular-ui/ui-select/issues/1722)
+
+<a name="0.18.1"></a>
+## [0.18.1](https://github.com/angular-ui/ui-select/compare/v0.18.0...v0.18.1) (2016-07-10)
+
+### Bug Fixes
+
+* **isDisabled:** do not modify item ([b95bf9f](https://github.com/angular-ui/ui-select/commit/b95bf9f)), closes [#1200](https://github.com/angular-ui/ui-select/issues/1200) [#1661](https://github.com/angular-ui/ui-select/issues/1661)
+* **isLocked:** do not modify item ([c01d363](https://github.com/angular-ui/ui-select/commit/c01d363)), closes [#1269](https://github.com/angular-ui/ui-select/issues/1269) [#514](https://github.com/angular-ui/ui-select/issues/514)
+* **removeSelected:** fix incorrect removal of preselected item  ([32b7924](https://github.com/angular-ui/ui-select/commit/32b7924)), closes [#1672](https://github.com/angular-ui/ui-select/issues/1672)
+* **searchEnabled:** watch evaluated attribute value  ([4503295](https://github.com/angular-ui/ui-select/commit/4503295)), closes [#505](https://github.com/angular-ui/ui-select/issues/505)
+* **select2:** Up-direction when using global theme  ([5336dc5](https://github.com/angular-ui/ui-select/commit/5336dc5)), closes [#1674](https://github.com/angular-ui/ui-select/issues/1674)
+* **Selectize:** hide input box when selected data is 0 ([e179dc6](https://github.com/angular-ui/ui-select/commit/e179dc6)), closes [#1304](https://github.com/angular-ui/ui-select/issues/1304)
+* **tagging:** infite digest loops when name is similar ([fcd9bc5](https://github.com/angular-ui/ui-select/commit/fcd9bc5)), closes [#1693](https://github.com/angular-ui/ui-select/issues/1693)
+* **tagging:** Support paste with tagging enabled and tagging-label="false" ([668a0f3](https://github.com/angular-ui/ui-select/commit/668a0f3)), closes [#1668](https://github.com/angular-ui/ui-select/issues/1668)
+* **uiSelectMultiple:** $select.refreshItems is not a function  ([a41a7fc](https://github.com/angular-ui/ui-select/commit/a41a7fc))
+* **uiSelectMultiple:** Allow duplicates in $select.selected ([9f5d6ec](https://github.com/angular-ui/ui-select/commit/9f5d6ec)), closes [#1688](https://github.com/angular-ui/ui-select/issues/1688)
+* **uiSelectMultiple:** tolerate null/undefined view value ([0c29b64](https://github.com/angular-ui/ui-select/commit/0c29b64))
+* **uiSelectNoChoice:** support Select2 theme  ([e59e008](https://github.com/angular-ui/ui-select/commit/e59e008)), closes [#1608](https://github.com/angular-ui/ui-select/issues/1608)
+* **uiSelectNoChoice:** support Selectize theme  ([a7210c4](https://github.com/angular-ui/ui-select/commit/a7210c4)), closes [#1692](https://github.com/angular-ui/ui-select/issues/1692)
+
+<a name="0.18.0"></a>
+## [0.18.0](https://github.com/angular-ui/ui-select/compare/v0.17.1...v0.18.0) (2016-06-09)
+
+### Bug Fixes
+
+* **positioning:** stop flicker when closed ([ca4d09e](https://github.com/angular-ui/ui-select/commit/ca4d09e))
+* **positioning:** wait for animation to complete ([aa90dd8](https://github.com/angular-ui/ui-select/commit/aa90dd8)), closes [#1593](https://github.com/angular-ui/ui-select/issues/1593)
+* search input width resizing ([5c8cf86](https://github.com/angular-ui/ui-select/commit/5c8cf86)), closes [#1575](https://github.com/angular-ui/ui-select/issues/1575)
+* **uiSelectCtrl:** Prevent error when using ngAnimate < v1.4 ([8becac3](https://github.com/angular-ui/ui-select/commit/8becac3)), closes [#1626](https://github.com/angular-ui/ui-select/issues/1626)
+* **uiSelectNoChoice:** make compatible with Angular 1.5 ([c944307](https://github.com/angular-ui/ui-select/commit/c944307)), closes [#1609](https://github.com/angular-ui/ui-select/issues/1609)
+* **uiSelectNoChoice:** support bootstrap-multiple ([9d29307](https://github.com/angular-ui/ui-select/commit/9d29307)), closes [#1614](https://github.com/angular-ui/ui-select/issues/1614) [#1615](https://github.com/angular-ui/ui-select/issues/1615)
+
+### Features
+
+* **limit:** Change multi-select limit attr (#1632) ([f5888fb](https://github.com/angular-ui/ui-select/commit/f5888fb))
+* **removeSelected:** Implement removeSelected property for multiple selects ([3ad084f](https://github.com/angular-ui/ui-select/commit/3ad084f))
+
+<a name="0.17.1"></a>
+## [0.17.1](https://github.com/angular-ui/ui-select/compare/v0.17.0...v0.17.1) (2016-05-16)
+
+### Bug Fixes
+
+* **parserResult:** Ignore undefined parserResult when using custom tpl ([cee24e5](https://github.com/angular-ui/ui-select/commit/cee24e5)), closes [#1597](https://github.com/angular-ui/ui-select/issues/1597)
+* **select2:** hide dropdown if there are no items to show (same as #1588 for bootstrap) ([4c561ac](https://github.com/angular-ui/ui-select/commit/4c561ac))
+
+<a name="0.17.0"></a>
+## [0.17.0](https://github.com/angular-ui/ui-select/compare/v0.16.1...v0.17.0) (2016-05-11)
 
 ### Bug Fixes
 
@@ -32,8 +140,6 @@
 * **tagging multiple:** transform tagging item only once when filtering ([2b4a9ea](https://github.com/angular-ui/ui-select/commit/2b4a9ea))
 * **uiSelectCtrl:** moving activate events out of $timeout ([926f462](https://github.com/angular-ui/ui-select/commit/926f462))
 * change test in ctrl.isActive ([d6c14d4](https://github.com/angular-ui/ui-select/commit/d6c14d4))
-
-
 
 <a name="0.16.1"></a>
 # [0.16.1](https://github.com/angular-ui/ui-select/compare/v0.16.0...v0.16.1) (2016-03-23)
