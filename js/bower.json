@@ -1,20 +1,20 @@
 {
-  "name": "ownCloud Task App",
+  "name": "Nextcloud - Tasks",
   "version": "0.9.4",
   "dependencies": {
-    "angular": "",
-    "angular-route": "",
-    "angular-animate": "",
-    "angular-sanitize": "",
-    "angular-ui-select": "https://github.com/angular-ui/ui-select.git",
-    "angular-draganddrop": "https://github.com/marceljuenemann/angular-drag-and-drop-lists.git",
+    "angular": "1.5.5",
+    "angular-route": "1.5.5",
+    "angular-animate": "1.5.5",
+    "angular-sanitize": "1.5.5",
+    "angular-ui-select": "https://github.com/angular-ui/ui-select.git#v0.17.0",
+    "angular-draganddrop": "https://github.com/marceljuenemann/angular-drag-and-drop-lists.git#v1.4.0",
     "jquery-timepicker": "",
     "ical.js": "~1.1.2",
     "jstzdetect": "",
     "davclient.js": "https://github.com/evert/davclient.js.git"
   },
   "devDependencies": {},
-  "homepage": "https://github.com/owncloud/tasks",
+  "homepage": "https://github.com/nextcloud/tasks",
   "authors": [
     "Raimund Schlüßler <raimund.schluessler@googlemail.com>"
   ],

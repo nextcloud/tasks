@@ -1,11 +1,11 @@
 /**
- * ownCloud - Tasks App
+ * Nextcloud - Tasks App
  *
  * @author Raghu Nayyar
  * @author Georg Ehrke
- * @copyright 2016 Raghu Nayyar <beingminimal@gmail.com>
- * @copyright 2016 Georg Ehrke <oc.list@georgehrke.com>
- * @copyright 2016 John Molakvoæ <fremulon@protonmail.com>
+ * @copyright 2017 Raghu Nayyar <beingminimal@gmail.com>
+ * @copyright 2017 Georg Ehrke <oc.list@georgehrke.com>
+ * @copyright 2017 John Molakvoæ <fremulon@protonmail.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE

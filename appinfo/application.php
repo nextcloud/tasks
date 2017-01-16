@@ -1,9 +1,9 @@
 <?php
 /**
-* ownCloud - Tasks
+* Nextcloud - Tasks
 *
 * @author Raimund Schlüßler
-* @copyright 2015 Raimund Schlüßler raimund.schluessler@googlemail.com
+* @copyright 2017 Raimund Schlüßler raimund.schluessler@googlemail.com
 *
 * This library is free software; you can redistribute it and/or
 * modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -94,7 +94,7 @@ class Application extends App {
 			$user = $c->query('ServerContainer')->getUserSession()->getUser();
 
 			return ($user) ? $user->getUID() : '';
-		});	
+		});
 
 		$container->registerService('L10N', function(IAppContainer $c) {
 			return $c->query('ServerContainer')->getL10N($c->query('AppName'));

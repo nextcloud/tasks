@@ -1,9 +1,8 @@
-(function(angular, $, oc_requesttoken, undefined){
 
 /**
- * ownCloud Task App - v0.9.4
+ * Nextcloud - Tasks - v0.9.4
  *
- * Copyright (c) 2016 - Raimund Schlüßler <raimund.schluessler@googlemail.com>
+ * Copyright (c) 2017 - Raimund Schlüßler <raimund.schluessler@googlemail.com>
  *
  * This file is licensed under the Affero			 General Public License version 3 or later.
  * See the COPYING file
@@ -3075,6 +3074,7 @@ angular.module('Tasks').service('DavClient', [
 				'urn:ietf:params:xml:ns:caldav': 'c',
 				'http://apple.com/ns/ical/': 'aapl',
 				'http://owncloud.org/ns': 'oc',
+				'http://nextcloud.com/ns': 'nc',
 				'http://calendarserver.org/ns/': 'cs'
 			}
 		});
@@ -3083,6 +3083,7 @@ angular.module('Tasks').service('DavClient', [
 			NS_IETF: 'urn:ietf:params:xml:ns:caldav',
 			NS_APPLE: 'http://apple.com/ns/ical/',
 			NS_OWNCLOUD: 'http://owncloud.org/ns',
+			NS_NEXTCLOUD: 'http://nextcloud.com/ns',
 			NS_CALENDARSERVER: 'http://calendarserver.org/ns/',
 			buildUrl: function(path) {
 				return window.location.protocol + '//' + window.location.host + path;
@@ -3105,7 +3106,7 @@ angular.module('Tasks').service('ICalFactory', [
 				var root = new ICAL.Component(['vcalendar', [], []]);
 
 				var version = angular.element('#app').attr('data-appVersion');
-				root.updatePropertyWithValue('prodid', '-//ownCloud tasks v' + version);
+				root.updatePropertyWithValue('prodid', '-//Nextcloud Tasks v' + version);
 
 				return root;
 			}
@@ -4931,7 +4932,7 @@ angular.module('Tasks').service('VTodoService', ['DavClient', 'RandomStringServi
 	};
 
 	this._generateRandomUri = function() {
-		var uri = 'ownCloud-';
+		var uri = 'Nextcloud-';
 		uri += RandomStringService.generate();
 		uri += RandomStringService.generate();
 		uri += '.ics';
@@ -4945,4 +4946,3 @@ angular.module('Tasks').service('VTodoService', ['DavClient', 'RandomStringServi
 
 }]);
 
-})(window.angular, window.jQuery, oc_requesttoken);

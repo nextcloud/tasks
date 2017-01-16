@@ -1,8 +1,8 @@
 /**
- * ownCloud - Tasks
+ * Nextcloud - Tasks
  *
  * @author Raimund Schlüßler
- * @copyright 2016 Raimund Schlüßler <raimund.schluessler@googlemail.com>
+ * @copyright 2017 Raimund Schlüßler <raimund.schluessler@googlemail.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -19,7 +19,6 @@
  *
  */
 
-
 module.exports = function(grunt) {
 	'use strict';
 
@@ -27,10 +26,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-wrap');
-	grunt.loadNpmTasks('grunt-phpunit');
 	grunt.loadNpmTasks('grunt-karma');
-	// grunt.loadNpmTasks('grunt-newer');
-	grunt.loadNpmTasks('grunt-phpdocumentor');
 
 	grunt.initConfig({
 		meta: {
@@ -90,30 +86,9 @@ module.exports = function(grunt) {
 			continuous: {
 				configFile: 'config/karma.js',
 				singleRun: true,
-				browsers: ['PhantomJS'],
 				reporters: ['progress', 'junit'],
 				junitReporter: {
 					outputFile: 'test-results.xml'
-				}
-			},
-			unit_phantom: {
-				configFile: 'config/karma.js',
-				browsers: ['PhantomJS']
-			}
-		},
-		phpunit: {
-			classes: {
-				dir: '../tests'
-			},
-			options: {
-				colors: true
-			}
-		},
-		phpdocumentor: {
-			"default": {
-				options: {
-					directory: '../appinfo,../db,../controllers,../service',
-					target: '../docs'
 				}
 			}
 		}
@@ -121,4 +96,5 @@ module.exports = function(grunt) {
 	grunt.registerTask('ci', ['karma:continuous']);
 	grunt.registerTask('js', ['concat', 'wrap']);
 	grunt.registerTask('default', 'js');
+	grunt.registerTask('build', ['concat', 'wrap']);
 };

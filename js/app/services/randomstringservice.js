@@ -1,10 +1,10 @@
 /**
- * ownCloud - Calendar App
+ * Nextcloud - Tasks
  *
  * @author Raghu Nayyar
  * @author Georg Ehrke
- * @copyright 2016 Raghu Nayyar <beingminimal@gmail.com>
- * @copyright 2016 Georg Ehrke <oc.list@georgehrke.com>
+ * @copyright 2017 Raghu Nayyar <beingminimal@gmail.com>
+ * @copyright 2017 Georg Ehrke <oc.list@georgehrke.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -20,6 +20,7 @@
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+
 angular.module('Tasks').factory('RandomStringService', function () {
 	'use strict';
 

@@ -34,6 +34,6 @@
     "commit": "141e13919b30578ed53d079bdd269fb99b20f78f"
   },
   "_source": "https://github.com/marceljuenemann/angular-drag-and-drop-lists.git",
-  "_target": "*",
+  "_target": "v1.4.0",
   "_originalSource": "https://github.com/marceljuenemann/angular-drag-and-drop-lists.git"
 }

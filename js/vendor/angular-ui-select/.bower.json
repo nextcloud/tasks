@@ -36,6 +36,6 @@
     "commit": "c41b8928a846288583cd977b48a499d35a53ac45"
   },
   "_source": "https://github.com/angular-ui/ui-select.git",
-  "_target": "*",
+  "_target": "v0.17.0",
   "_originalSource": "https://github.com/angular-ui/ui-select.git"
 }

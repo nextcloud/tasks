@@ -1,12 +1,12 @@
 /**
- * ownCloud - Tasks
+ * Nextcloud - Tasks
  *
  * @author Raghu Nayyar
  * @author Georg Ehrke
  * @author Raimund Schlüßler
- * @copyright 2016 Raghu Nayyar <beingminimal@gmail.com>
- * @copyright 2016 Georg Ehrke <oc.list@georgehrke.com>
- * @copyright 2016 Raimund Schlüßler <raimund.schluessler@googlemail.com>
+ * @copyright 2017 Raghu Nayyar <beingminimal@gmail.com>
+ * @copyright 2017 Georg Ehrke <oc.list@georgehrke.com>
+ * @copyright 2017 Raimund Schlüßler <raimund.schluessler@googlemail.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -33,7 +33,7 @@ angular.module('Tasks').service('ICalFactory', [
 				var root = new ICAL.Component(['vcalendar', [], []]);
 
 				var version = angular.element('#app').attr('data-appVersion');
-				root.updatePropertyWithValue('prodid', '-//ownCloud tasks v' + version);
+				root.updatePropertyWithValue('prodid', '-//Nextcloud Tasks v' + version);
 
 				return root;
 			}

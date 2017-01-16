@@ -1,4 +1,4 @@
-<project name="owncloud-tasks" basedir="." default="test">
+<project name="nextcloud-tasks" basedir="." default="test">
 
 	<property file="build.properties"/>
 
