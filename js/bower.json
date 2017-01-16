@@ -9,7 +9,7 @@
     "angular-ui-select": "https://github.com/angular-ui/ui-select.git#v0.17.0",
     "angular-draganddrop": "https://github.com/marceljuenemann/angular-drag-and-drop-lists.git#v1.4.0",
     "jquery-timepicker": "",
-    "ical.js": "~1.1.2",
+    "ical.js": "~1.2.2",
     "jstzdetect": "",
     "davclient.js": "https://github.com/evert/davclient.js.git"
   },

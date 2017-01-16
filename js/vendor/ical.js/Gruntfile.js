@@ -3,6 +3,14 @@
 var path = require('path');
 
 module.exports = function(grunt) {
+  function loadOptionalTask(name) {
+    var root = path.resolve('node_modules');
+    var tasksdir = path.join(root, name, 'tasks');
+    if (grunt.file.exists(tasksdir)) {
+      grunt.loadNpmTasks(name);
+    }
+  }
+
   var pkg = grunt.file.readJSON('package.json');
   grunt.initConfig({
     pkg: pkg,
@@ -21,20 +29,37 @@ module.exports = function(grunt) {
         unit: ['test/*_test.js'],
         acceptance: ['test/acceptance/*_test.js'],
         performance: ['test/performance/*_test.js']
+      },
+      validator: {
+        dev: 'https://rawgit.com/mozilla-comm/ical.js/master/build/ical.js',
+        prod: 'https://cdn.rawgit.com/mozilla-comm/ical.js/<%= travis.commit %>/build/ical.js',
+        dest: 'validator.html'
       }
     },
 
     concat: {
       options: {
-        separator: '',
-        process: function(src, filepath) {
-          return src.replace('"use strict";', '');
-        }
+        separator: ''
       },
 
       dist: {
+        options: {
+          process: function(src, filepath) {
+            return src.replace('"use strict";', '');
+          }
+        },
         src: ['<%= libinfo.absfiles %>'],
         dest: 'build/ical.js'
+      },
+
+      validator: {
+        options: {
+          process: function(src, filepath) {
+            return src.replace(grunt.config('libinfo.validator.dev'), grunt.config('libinfo.validator.prod'));
+          }
+        },
+        src: ['sandbox/validator.html'],
+        dest: '<%= libinfo.validator.dest %>'
       }
     },
 
@@ -70,6 +95,10 @@ module.exports = function(grunt) {
       unit: ['mochacli:unit', 'node-inspector'],
       acceptance: ['mochacli:acceptance', 'node-inspector'],
       single: ['mochacli:single', 'node-inspector'],
+    },
+
+    eslint: {
+      src: ['<%= libinfo.absfiles %>']
     },
 
     mochacli: {
@@ -154,39 +183,6 @@ module.exports = function(grunt) {
       },
     },
 
-    jshint: {
-      options: {
-        "globalstrict": true,
-        "eqeqeq": false,
-        "-W041": false,
-        "strict": false,
-        "proto": true,
-        "shadow": true
-      },
-      lib: {
-        options: {
-          predef: ['ICAL']
-        },
-        src: ['<%= libinfo.absfiles %>']
-      },
-      ICALTester: {
-        src: ['tools/ICALTester/**/*.js']
-      }
-    },
-    gjslint: {
-      options: {
-        flags: ['--flagfile .gjslintrc'],
-        reporter: {
-          name: 'console'
-        }
-      },
-      lib: {
-        src: ['<%= libinfo.absfiles %>']
-      },
-      ICALTester: {
-        src: ['tools/ICALTester/**/*.js']
-      }
-    },
     uglify: {
       options: {
         sourceMap: true,
@@ -227,16 +223,16 @@ module.exports = function(grunt) {
 
     'gh-pages': {
       options: {
-        clone: 'jsdoc-stage',
+        clone: 'ghpages-stage',
         only: '<%= libinfo.doc %>',
         user: {
           name: 'Travis CI',
           email: 'builds@travis-ci.org',
         },
         repo: 'git@github.com:mozilla-comm/ical.js.git',
-        message: 'Update API Documentation for <%= travis.commit %>'
+        message: 'Update API documentation and validator for <%= travis.commit %>'
       },
-      src: '<%= libinfo.doc %>/**'
+      src: ['<%= libinfo.doc %>/**', '<%= libinfo.validator.dest %>']
     }
   });
 
@@ -249,31 +245,31 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-concurrent');
   grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-coveralls');
-  grunt.loadNpmTasks('grunt-gjslint');
   grunt.loadNpmTasks('grunt-gh-pages');
   grunt.loadNpmTasks('grunt-jsdoc');
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-mocha-cli');
   grunt.loadNpmTasks('grunt-mocha-istanbul');
-  grunt.loadNpmTasks('grunt-node-inspector');
   grunt.loadNpmTasks('grunt-release');
+  grunt.loadNpmTasks('gruntify-eslint');
+
+  loadOptionalTask('grunt-node-inspector');
 
   grunt.loadTasks('tasks');
 
   grunt.registerTask('default', ['package']);
-  grunt.registerTask('package', ['concat', 'uglify']);
+  grunt.registerTask('package', ['concat:dist', 'uglify']);
   grunt.registerTask('coverage', 'mocha_istanbul');
-  grunt.registerTask('linters', ['jshint', 'gjslint', 'check-browser-build']);
+  grunt.registerTask('linters', ['eslint', 'check-browser-build']);
   grunt.registerTask('test-server', ['test-agent-config', 'run-test-server']);
   grunt.registerTask('test', ['test-browser', 'test-node']);
 
-  grunt.registerTask('doc-ci', ['jsdoc', 'run-on-master-leader:run-with-env:GITHUB_SSH_KEY:gh-pages']);
+  grunt.registerTask('ghpages-ci', ['jsdoc', 'concat:validator', 'run-on-master-leader:run-with-env:GITHUB_SSH_KEY:gh-pages']);
   grunt.registerTask('unit-ci', ['test-node:unit', 'test-node:acceptance', 'run-on-master-leader:karma:ci']);
   grunt.registerTask('coverage-ci', ['coverage', 'coveralls']);
-  grunt.registerTask('test-ci', ['check-browser-build', 'linters', 'unit-ci', 'coverage-ci', 'doc-ci']);
+  grunt.registerTask('test-ci', ['check-browser-build', 'linters', 'unit-ci', 'coverage-ci', 'ghpages-ci']);
 
   // Additional tasks:
   //   - tests.js: performance-update, test-node, test-browser,
