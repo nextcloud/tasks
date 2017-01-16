@@ -20,9 +20,9 @@ Then open the Tasks app from the app menu.
 
 ## Maintainers
 
-[Raimund Schlüßler](https://github.com/raimund-schluessler) [and many more](https://github.com/nextcloud/calendar/graphs/contributors)
+[Raimund Schlüßler](https://github.com/raimund-schluessler) [and many more](https://github.com/nextcloud/tasks/graphs/contributors)
 
-If you’d like to join, just go through the [issue list](https://github.com/nextcloud/calendar/issues?q=is%3Aopen+is%3Aissue+label%3A%22starter+issue%22) and fix some. :)
+If you’d like to join, just go through the [issue list](https://github.com/nextcloud/tasks/issues?q=is%3Aopen+is%3Aissue+label%3A%22starter+issue%22) and fix some. :)
 
 ## Developer setup info
 
