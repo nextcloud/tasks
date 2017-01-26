@@ -64,7 +64,7 @@ OC.L10N.register(
     "Add an item in \"%s\"..." : "Ajouter un élément dans \"%s\"...",
     "Add a current item in \"%s\"..." : "Ajouter un élément courant dans \"%s\"...",
     "Add a subtask to \"%s\"..." : "Ajouter une sous-tâche à \"%s\"...",
-    "_%n Completed Task_::_%n Completed Tasks_" : ["%n tâche terminée","%n tâches terminées"],
+    "_%n Completed Task_::_%n Completed Tasks_" : ["%n Tâche Terminée","%n Tâches Terminées"],
     "Hours" : "Heures",
     "Minutes" : "Minutes",
     "Set due date" : "Spécifier la date d'échéance",
