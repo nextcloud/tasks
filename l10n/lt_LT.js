@@ -86,7 +86,7 @@ OC.L10N.register(
     "Current" : "Dabartinis",
     "Completed" : "Atliktas",
     "Delete" : "Ištrinti",
-    "Cancel" : "Atšaukti",
+    "Cancel" : "Atsisakyti",
     "Edit" : "Redaguoti",
     "Link" : "Nuoroda",
     "Download" : "Atsisiųsti",
