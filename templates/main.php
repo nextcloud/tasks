@@ -59,20 +59,20 @@
                 <div class="app-navigation-entry-menu" ng-show="calendar.writable">
                     <ul>
                         <li>
-                            <span ng-click="startEdit(calendar)">
-                                <img class="icon-rename svg" src="<?php p(image_path('core', 'actions/rename.svg'))?>"/>
+                            <a href="#" ng-click="startEdit(calendar)">
+                                <span class="icon-rename svg"></span>
                                 <span><?php p($l->t('Edit')); ?></span>
-                            </span>
+                            </a>
                         </li>
                         <li>
-                            <span ng-click="showCalDAVUrl(calendar)">
-                                <img class="icon-public svg" src="<?php p(image_path('core', 'actions/public.svg'))?>"/>
+                            <a href="#" ng-click="showCalDAVUrl(calendar)">
+                                <span class="icon-public svg"></span>
                                 <span><?php p($l->t('Link')); ?></span>
-                            </span>
+                            </a>
                         </li>
                         <li>
                             <a href="{{calendar.exportUrl}}" download="{{calendar.uri}}.ics">
-                                <img class="icon-download svg" src="<?php p(image_path('core', 'actions/download.svg'))?>"/>
+                                <span class="icon-download svg"></span>
                                 <span><?php p($l->t('Download')); ?></span>
                             </a>
                         </li>

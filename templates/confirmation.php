@@ -1,11 +1,10 @@
-<span class="confirmation-default">
-	<img class="icon-delete svg" src="<?php p(image_path('core', 'actions/delete.svg'))?>"/>
+<a href="#" class="confirmation-default">
+	<span class="icon-delete svg"></span>
 	<span><?php p($l->t('Delete')); ?></span>
-</span>
-<span class="confirmation-confirm">
+</a>
+<a class="confirmation-abort icon-close svg" title="<?php p($l->t('Cancel')); ?>">
+    <span></span>
+</a>
+<a class="confirmation-confirm icon-delete-white no-permission svg">
     <span class="countdown">33 &nbsp;</span>
-    <img class="icon-delete svg" src="<?php p(image_path('core', 'actions/delete-white.svg'))?>"/>
-</span>
-<span class="confirmation-abort" title="<?php p($l->t('Cancel')); ?>">
-    <img class="icon-close svg" src="<?php p(image_path('core', 'actions/close.svg'))?>"/>
-</span>
+</a>
