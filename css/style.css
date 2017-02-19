@@ -44,26 +44,23 @@
 #app-navigation .app-navigation-entry-utils li {
   font-size: 100%;
 }
-#app-navigation .app-navigation-entry-menu li,
-.sortorder-dropdown li {
+#app-navigation .app-navigation-entry-menu li {
   float: inherit;
   width: auto !important;
   opacity: 0.5;
   cursor: pointer;
 }
-.sortorder-dropdown li.active {
-  opacity: 1;
+.sortorder-dropdown li {
+  float: inherit;
+  width: auto !important;
+  cursor: pointer;
 }
-#app-navigation .app-navigation-entry-menu li>a,
-#app-navigation .app-navigation-entry-menu li>span,
-.sortorder-dropdown li>span {
-/*  width: 100%;
-  padding: 10px;
-  display: inline-block;
-  line-height: normal;
-  height: auto;
-  min-height: auto;
-  box-sizing: border-box;*/
+.sortorder-dropdown li.active a {
+  opacity: 1 !important;
+}
+
+.app-navigation-entry-menu.sortorder-dropdown li > a span {
+  opacity: 1 !important;
 }
 
 #app-navigation .app-navigation-entry-menu li img,
@@ -602,16 +599,14 @@
 .sortorder-dropdown.open {
   display: block;
 }
+.sortorder-dropdown a {
+  width: 100% !important;
+}
 .sortorder-dropdown .icon {
-  margin-top: -2px;
-  margin-right: 3px;
+  margin: 12px 8px;
 }
 .sort-indicator {
-  width: 10px;
-  height: 8px;
-  margin-left: 5px;
-  display: inline-block;
-  vertical-align: text-bottom;
+  margin-left: auto;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
   filter: alpha(opacity=80);
   opacity: 0.8;
