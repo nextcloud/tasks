@@ -62,6 +62,9 @@
   opacity: 0.5;
   cursor: pointer;
 }
+#app-navigation .app-navigation-entry-menu li a {
+  width: 100%;
+}
 .sortorder-dropdown li {
   float: inherit;
   width: auto !important;
