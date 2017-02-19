@@ -1631,6 +1631,8 @@ ol[dnd-list] .dndPlaceholder {
   margin: 3px 0px;
   border-left: 0px none;
   background-color: rgba(240, 240, 240, 0.9);
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
 }
 #app-navigation .app-navigation-entry-edit input.icon-close:hover {
   background-color: white;
