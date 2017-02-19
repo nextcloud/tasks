@@ -1,4 +1,4 @@
-<a href="#" class="confirmation-default">
+<a class="confirmation-default">
 	<span class="icon-delete svg"></span>
 	<span><?php p($l->t('Delete')); ?></span>
 </a>
