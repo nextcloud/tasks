@@ -1349,7 +1349,7 @@ angular.module('Tasks').directive('appNavigationEntryUtils', function() {
 		restrict: 'C',
 		link: function(scope, elm) {
 			var button, menu;
-			menu = elm.siblings('.app-navigation-entry-menu');
+			menu = elm.children('.app-navigation-entry-menu');
 			button = $(elm).find('.app-navigation-entry-utils-menu-button button');
 			button.click(function() {
 				menu.toggleClass('open');
