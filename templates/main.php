@@ -31,8 +31,10 @@
                     </span>
                     <span class="title">{{ collection.displayname }}</span>
                 </a>
-                <div class="app-navigation-entry-utils-counter">
-                    <span>{{ getCollectionString(collection.id) | counterFormatter }}</span>
+                <div class="app-navigation-entry-utils">
+                    <ul>
+                        <li class="app-navigation-entry-utils-counter">{{ getCollectionString(collection.id) | counterFormatter }}</li>
+                    </ul>
                 </div>
             </li>
             <li class="list handler"
@@ -49,36 +51,34 @@
                     <span class="title">{{ calendar.displayname }}</span>
                 </a>
                 <div class="app-navigation-entry-utils">
-                    <span class="app-navigation-entry-utils-menu-button svg" ng-show="calendar.writable">
-                        <button></button>
-                    </span>
-                    <div class="app-navigation-entry-menu" ng-show="calendar.writable">
-                        <ul>
-                            <li>
-                                <a ng-click="startEdit(calendar)">
-                                    <span class="icon-rename svg"></span>
-                                    <span><?php p($l->t('Edit')); ?></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a ng-click="showCalDAVUrl(calendar)">
-                                    <span class="icon-public svg"></span>
-                                    <span><?php p($l->t('Link')); ?></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{calendar.exportUrl}}" download="{{calendar.uri}}.ics">
-                                    <span class="icon-download svg"></span>
-                                    <span><?php p($l->t('Download')); ?></span>
-                                </a>
-                            </li>
-                            <li confirmation="delete(calendar)" confirmation-message="deleteMessage(calendar)">
-                            </li>
-                        </ul>
-                    </div>
+                    <ul>
+                        <li class="app-navigation-entry-utils-menu-button svg" ng-show="calendar.writable"><button></button></li>
+                        <li class="app-navigation-entry-utils-counter">{{ getListCount(calendar.uri,'all') | counterFormatter }}</li>
+                    </ul>
                 </div>
-                <div class="app-navigation-entry-utils-counter">
-                    <span>{{ getListCount(calendar.uri,'all') | counterFormatter }}</span>
+                <div class="app-navigation-entry-menu" ng-show="calendar.writable">
+                    <ul>
+                        <li>
+                            <a ng-click="startEdit(calendar)">
+                                <span class="icon-rename svg"></span>
+                                <span><?php p($l->t('Edit')); ?></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a ng-click="showCalDAVUrl(calendar)">
+                                <span class="icon-public svg"></span>
+                                <span><?php p($l->t('Link')); ?></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{calendar.exportUrl}}" download="{{calendar.uri}}.ics">
+                                <span class="icon-download svg"></span>
+                                <span><?php p($l->t('Download')); ?></span>
+                            </a>
+                        </li>
+                        <li confirmation="delete(calendar)" confirmation-message="deleteMessage(calendar)">
+                        </li>
+                    </ul>
                 </div>
 
                 <div class="app-navigation-entry-edit name" ng-class="{error: nameError}">

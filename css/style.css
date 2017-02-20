@@ -15,7 +15,7 @@
 /*
   app navigation
 */
-#app-navigation li {
+#app-navigation > ul > li {
   transition: max-height 300ms ease 0s;
   max-height: 100px;
   display: flex !important;
@@ -46,16 +46,14 @@
 #app-navigation li.edit .app-navigation-entry-utils-counter  {
   display: none;
 }
-#app-navigation .app-navigation-entry-utils {
-  position: relative;
-  z-index: auto;
+#app-navigation li.list:not(.active) .app-navigation-entry-utils {
   display: none;
-}
-#app-navigation .active .app-navigation-entry-utils {
-  display: initial;
 }
 #app-navigation .app-navigation-entry-utils li {
   font-size: 100%;
+}
+#app-navigation li.app-navigation-entry-utils-counter:empty {
+  display: none !important;
 }
 #app-navigation .app-navigation-entry-menu li {
   width: 100% !important;
