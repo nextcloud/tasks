@@ -167,46 +167,46 @@
             <div class="app-navigation-entry-menu bubble sortorder-dropdown">
                 <ul>
                     <li ng-click="setSortOrder($event, 'default')" ng-class="{active: settingsmodel.getById('various').sortOrder == 'default'}" class="handler">
-                        <span>
+                        <a>
                             <span class="icon list-list"></span>
                             <span><?php p($l->t('Default')); ?></span>
                             <span class="sort-indicator" ng-class="{'icon-triangle-n': settingsmodel.getById('various').sortDirection, 'icon-triangle-s': !settingsmodel.getById('various').sortDirection}"></span>
-                        </span>
+                        </a>
                     </li>
                     <li ng-click="setSortOrder($event, 'due')" ng-class="{active: settingsmodel.getById('various').sortOrder == 'due'}">
-                        <span>
+                        <a>
                             <span class="icon detail-date"></span>
                             <span><?php p($l->t('Due date')); ?></span>
                             <span class="sort-indicator" ng-class="{'icon-triangle-n': settingsmodel.getById('various').sortDirection, 'icon-triangle-s': !settingsmodel.getById('various').sortDirection}"></span>
-                        </span>
+                        </a>
                     </li>
                     <li ng-click="setSortOrder($event, 'start')" ng-class="{active: settingsmodel.getById('various').sortOrder == 'start'}">
-                        <span>
+                        <a>
                             <span class="icon detail-start"></span>
                             <span><?php p($l->t('Start date')); ?></span>
                             <span class="sort-indicator" ng-class="{'icon-triangle-n': settingsmodel.getById('various').sortDirection, 'icon-triangle-s': !settingsmodel.getById('various').sortDirection}"></span>
-                        </span>
+                        </a>
                     </li>
                     <li ng-click="setSortOrder($event, 'priority')" ng-class="{active: settingsmodel.getById('various').sortOrder == 'priority'}">
-                        <span>
+                        <a>
                             <span class="icon detail-priority"></span>
                             <span><?php p($l->t('Priority')); ?></span>
                             <span class="sort-indicator" ng-class="{'icon-triangle-n': settingsmodel.getById('various').sortDirection, 'icon-triangle-s': !settingsmodel.getById('various').sortDirection}"></span>
-                        </span>
+                        </a>
                     </li>
                     <li ng-click="setSortOrder($event, 'alphabetically')" ng-class="{active: settingsmodel.getById('various').sortOrder == 'alphabetically'}">
-                        <span>
+                        <a>
                             <span class="icon sort-alphabetically"></span>
                             <span><?php p($l->t('Alphabetically')); ?></span>
                             <span class="sort-indicator" ng-class="{'icon-triangle-n': settingsmodel.getById('various').sortDirection, 'icon-triangle-s': !settingsmodel.getById('various').sortDirection}"></span>
-                        </span>
+                        </a>
                     </li>
 <!--                     <li ng-click="setSortOrder($event, 'manual')" ng-class="{active: settingsmodel.getById('various').sortOrder == 'manual'}">
-                        <span>
+                        <a>
                             <span class="icon sort-manual"></span>
                             <span><?php p($l->t('Manually')); ?></span>
                             <span class="sort-indicator" ng-class="{'icon-triangle-n': settingsmodel.getById('various').sortDirection, 'icon-triangle-s': !settingsmodel.getById('various').sortDirection}"></span>
-                        </span>
+                        </a>
                     </li> -->
                 </ul>
             </div>
