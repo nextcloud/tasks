@@ -344,7 +344,6 @@
 #content div.task-item.add-subtask {
   background: #ffffff;
   border: 1px solid #cccccc;
-  padding: 6px 12px;
 }
 #content li.task-item.add-subtask input,
 #content div.task-item.add-subtask input {
@@ -551,7 +550,6 @@
 }
 #app-content #add-task {
   margin: 12px 0;
-  padding: 6px 12px;
   position: relative;
   border: 1px solid #CCCCCC;
   background: none repeat scroll 0 0 #EEEEEE;
@@ -569,7 +567,6 @@
 #app-content #add-task input {
   -moz-box-sizing: border-box;
   font-size: 13px;
-  padding-right: 60px;
   width: 100%;
   color: #505050;
   background: none repeat scroll 0 0 transparent !important;
