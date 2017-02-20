@@ -44,6 +44,9 @@
 #app-navigation .app-navigation-entry-utils li {
   font-size: 100%;
 }
+#app-navigation li.list:not(.active) .app-navigation-entry-utils-menu-button {
+   display: none;
+ }
 #app-navigation .app-navigation-entry-menu li,
 .sortorder-dropdown li {
   float: inherit;
