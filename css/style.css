@@ -44,29 +44,29 @@
 #app-navigation .app-navigation-entry-utils li {
   font-size: 100%;
 }
-#app-navigation .app-navigation-entry-menu li,
-.sortorder-dropdown li {
+#app-navigation li.list:not(.active) .app-navigation-entry-utils-menu-button {
+   display: none;
+ }
+#app-navigation .app-navigation-entry-menu li {
   float: inherit;
   width: auto !important;
   opacity: 0.5;
   cursor: pointer;
-  height: 38px;
 }
-.sortorder-dropdown li.active {
-  opacity: 1;
+.sortorder-dropdown li {
+  float: inherit;
+  width: auto !important;
+  cursor: pointer;
+ }
+.sortorder-dropdown li.active a {
+  opacity: 1 !important;
 }
-#app-navigation .app-navigation-entry-menu li>a,
-#app-navigation .app-navigation-entry-menu li>span,
-.sortorder-dropdown li>span {
-  width: 100%;
-  padding: 10px;
-  display: inline-block;
-  line-height: normal;
-  height: auto;
-  min-height: auto;
-  box-sizing: border-box;
+.sortorder-dropdown a {
+  width: 100% !important;
 }
-
+.app-navigation-entry-menu.sortorder-dropdown li > a span {
+  opacity: 1 !important;
+}
 #app-navigation .app-navigation-entry-menu li img,
 #app-navigation .app-navigation-entry-menu li span,
 .sortorder-dropdown li img,
@@ -601,15 +601,10 @@
   display: block;
 }
 .sortorder-dropdown .icon {
-  margin-top: -2px;
-  margin-right: 3px;
+  margin: 12px 8px;
 }
 .sort-indicator {
-  width: 10px;
-  height: 8px;
-  margin-left: 5px;
-  display: inline-block;
-  vertical-align: text-bottom;
+  margin-left: auto;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
   filter: alpha(opacity=80);
   opacity: 0.8;
@@ -1642,15 +1637,6 @@ ol[dnd-list] .dndPlaceholder {
   box-shadow: 0 0 6px #f8b9b7;
 }
 
-.confirmed {
-  opacity: 1 !important;
-}
-.confirmed img {
-  margin-left: auto;
-  margin-right: auto !important;
-  display: block;
-}
-
 .confirmation-default {
   overflow: hidden;
 }
@@ -1662,13 +1648,12 @@ ol[dnd-list] .dndPlaceholder {
 .confirmation-confirm, .confirmation-abort {
   width: 50% !important;
   display: none !important;
-  overflow: hidden;
-  float: right;
-  height: 100% !important;
+  padding-right: 0px !important;
+  background-position: center !important;
 }
 
-.confirmation-confirm, .confirmation-confirm span {
-  background-color: red;
+.confirmation-confirm {
+  background-color: red !important;
   cursor: default !important;
 }
 
@@ -1676,23 +1661,23 @@ ol[dnd-list] .dndPlaceholder {
   display: inline-block !important;
 }
 
-.confirmed .confirmation-confirm img {
-  display: none;
-}
+.app-navigation-entry-menu li > a:not(:empty).confirmation-confirm {
+  padding-right: 0 !important;
+ }
 
-.countdown {
+.app-navigation-entry-menu li > a span.countdown {
+  background-color: inherit;
   color: white;
   display: block;
   text-align: center;
+  -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=100)' !important;
+  filter: alpha(opacity=100) !important;
+  opacity: 1 !important;
 }
 
 .confirmed.active .confirmation-confirm{
   cursor: pointer !important;
 }
-.confirmed.active .confirmation-confirm span.countdown {
+.confirmed.active .countdown {
   display: none;
-}
-
-.confirmed.active .confirmation-confirm img {
-  display: block;
 }
