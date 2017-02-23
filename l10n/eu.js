@@ -20,7 +20,7 @@ OC.L10N.register(
     "Tomorrow" : "Bihar",
     "in %s" : "%s-an",
     "%s ago" : "duela %s",
-    "seconds" : "segundo",
+    "seconds" : "duela segundu batzuk",
     "a minute" : "minutu bat",
     "%d minutes" : "%d minutu",
     "an hour" : "ordu bat",
