@@ -104,6 +104,7 @@ OC.L10N.register(
     "Alphabetically" : "Alfabetisk",
     "Manually" : "Manuelt",
     "Load remaining completed tasks." : "Indlæs resten af de fuldførte opgaver.",
+    "All day" : "Hele dagen",
     "(New category)" : "(Ny kategori)",
     "Select categories..." : "Vælg kategorier...",
     "Loading the task..." : "Indlæser opgaven ...",
