@@ -142,7 +142,7 @@
         </div>
     </div>
 
-    <div id="app-content" ng-controller="TasksController" ng-class="{'details-visible':route.taskID}">
+    <div id="app-content" ng-controller="TasksController" ng-class="{'with-app-sidebar':route.taskID}">
         <div class="content-wrapper">
             <div id="add-task" class="add-task handler" ng-show="showInput()" ng-class="{'focus':status.focusTaskInput}">
                 <a class="input-star">
@@ -234,7 +234,7 @@
                 </div>
             </div>
         </div>
-        <div id="app-sidebar" ng-class="{'details-visible':route.taskID}">
+        <div id="app-sidebar" ng-class="{'disappear':!route.taskID}">
             <div class="content-wrapper">
                 <?php print_unescaped($this->inc('part.details')); ?>
             </div>

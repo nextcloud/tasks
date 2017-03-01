@@ -514,8 +514,8 @@
   line-height: 14px;
   margin: 11px 3px 0 7px;
 }
-#app-content {
-  overflow-x: hidden;
+.app-tasks #app-content {
+    overflow-x: hidden;
 }
 #app-content div.content-wrapper {
   padding: 6px 17px 75px;
@@ -527,9 +527,6 @@
   height: 100%;
   width: 100%;
   overflow-y: auto;
-}
-#app-content.details-visible {
-  padding-right: 370px;
 }
 #app-content h2 {
   font-weight: bold;
@@ -638,22 +635,11 @@
 #app-content div.task-list .grouped-tasks {
   position: relative;
 }
-#app-sidebar {
-  transition: all 0.2s ease-in-out;
-  right: -400px;
-  width: 370px;
-  max-width: 100%;
-  border-left: none;
-}
-#app-sidebar.details-visible {
-  right: 0;
-}
 #app-sidebar div.content-wrapper {
   padding: 0;
   height: 100%;
 }
 #app-sidebar div.content-wrapper > div {
-  border: 1px solid #CCCCCC;
   height: 100%;
   position: relative;
 }
