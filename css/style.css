@@ -358,6 +358,7 @@
   margin: 0;
   padding: 0 60px 0 32px;
   width: 100%;
+  min-height: 36px;
 }
 #content li.task-item.done .task-body,
 #content div.task-item.done .task-body {
@@ -577,6 +578,7 @@
   margin: 0;
   cursor: text;
   outline: none;
+  min-height: 32px;
 }
 #app-content .sortorder-dropdown-button {
   background-color: rgba(240, 240, 240, .9);
