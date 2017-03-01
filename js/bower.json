@@ -1,6 +1,6 @@
 {
   "name": "Nextcloud - Tasks",
-  "version": "0.9.4",
+  "version": "0.9.5",
   "dependencies": {
     "angular": "1.5.5",
     "angular-route": "1.5.5",
