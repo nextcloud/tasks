@@ -1,6 +1,6 @@
 
 /**
- * Nextcloud - Tasks - v0.9.4
+ * Nextcloud - Tasks - v0.9.5
  *
  * Copyright (c) 2017 - Raimund Schlüßler <raimund.schluessler@googlemail.com>
  *
