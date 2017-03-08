@@ -104,6 +104,7 @@ OC.L10N.register(
     "Alphabetically" : "Abecedno",
     "Manually" : "Ročno",
     "Load remaining completed tasks." : "Naloži preostale končane naloge.",
+    "All day" : "Cel dan",
     "(New category)" : "(nova kategorija)",
     "Select categories..." : "Izbor kategorije ...",
     "Loading the task..." : "Poteka nalaganje naloge ...",
