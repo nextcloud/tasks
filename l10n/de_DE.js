@@ -98,7 +98,7 @@ OC.L10N.register(
     "Visibility of Smart Collections" : "Sichtbarkeit der intelligenten Sammlungen",
     "Change sort order" : "Sortierreihenfolge ändern",
     "Default" : "Standard",
-    "Due date" : "Ablaufdatum",
+    "Due date" : "Fälligkeitsdatum",
     "Start date" : "Startdatum",
     "Priority" : "Priorität",
     "Alphabetically" : "Alphabetisch",
