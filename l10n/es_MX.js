@@ -95,6 +95,7 @@ OC.L10N.register(
     "New List" : "Nueva Lista",
     "Settings" : "Ajustes",
     "Start of week" : "Inicio de semana",
+    "Visibility of Smart Collections" : "Visibilidad de Colecciones Inteligentes",
     "Change sort order" : "Cambiar el criterio para ordenar",
     "Default" : "Predeterminado",
     "Due date" : "Fecha de vencimiento",
