@@ -109,6 +109,6 @@ OC.L10N.register(
     "Select categories..." : "Selecione categorias...",
     "Loading the task..." : "Carregando a tarefa...",
     "Task not found!" : "Tarefa não encontrada!",
-    "add a subtask to" : "adicionar uma sub-terefa para"
+    "add a subtask to" : "adicionar uma sub-tarefa para"
 },
 "nplurals=2; plural=(n > 1);");
