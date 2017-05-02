@@ -567,7 +567,6 @@
   font-size: 13px;
   width: 100%;
   color: #505050;
-  background: none repeat scroll 0 0 transparent !important;
   border: medium none !important;
   border-radius: 0 0 0 0 !important;
   box-shadow: none !important;
@@ -790,7 +789,6 @@
   top: 55px;
 }
 #app-sidebar div.content-wrapper .body .note {
-  background-color: #f5f5f5;
   border-width: 1px 1px 1px 1px;
   border-style: solid;
   border-color: #CFCFCF;
