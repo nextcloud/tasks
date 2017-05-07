@@ -934,12 +934,13 @@
 #app-sidebar div.content-wrapper .body .section input[type="range"] {
   border: medium none;
   box-shadow: none;
-  width: 190px;
-  margin: 5px 36px 0 0;
+  width: calc(100% - 90px);
+  margin: 5px 36px 0 5px;
   height: 17px;
 }
 #app-sidebar div.content-wrapper .body .section input[type="text"] {
   float: left;
+  min-height: 0;
 }
 #app-sidebar div.content-wrapper .body .section .select2-search-field input {
   border: 0 none;
