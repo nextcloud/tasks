@@ -87,7 +87,7 @@ OC.L10N.register(
     "Completed" : "Ferdig",
     "Delete" : "Slett",
     "Cancel" : "Avbryt",
-    "Edit" : "Endre",
+    "Edit" : "Rediger",
     "Link" : "Lenke",
     "Download" : "Last ned",
     "Save" : "Lagre",
