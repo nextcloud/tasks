@@ -63,7 +63,7 @@ OC.L10N.register(
     "Add an item due today in \"%s\"..." : "Einen heute fälligen Eintrag in „%s“ hinzufügen…",
     "Add an item in \"%s\"..." : "Einen Eintrag in „%s“ hinzufügen…",
     "Add a current item in \"%s\"..." : "Einen aktuellen Eintrag in „%s“ hinzufügen…",
-    "Add a subtask to \"%s\"..." : "Füge eine Unteraufgabe zu \"%s\" hinzu...",
+    "Add a subtask to \"%s\"..." : "Füge eine Unteraufgabe zu \"%s\" hinzu…",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n erledigte Aufgabe","%n erledigte Aufgaben"],
     "Hours" : "Stunden",
     "Minutes" : "Minuten",
@@ -106,7 +106,7 @@ OC.L10N.register(
     "Load remaining completed tasks." : "Die restlichen abgeschlossenen Aufgaben laden.",
     "All day" : "Ganztägig",
     "(New category)" : "(Neue Kategorie)",
-    "Select categories..." : "Kategorien auswählen...",
+    "Select categories..." : "Kategorien auswählen…",
     "Loading the task..." : "Laden der Aufgabe…",
     "Task not found!" : "Aufgabe nicht gefunden!",
     "add a subtask to" : "Erstelle eine Unteraufgabe für"
