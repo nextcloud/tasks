@@ -93,7 +93,7 @@ OC.L10N.register(
     "Save" : "Guardar",
     "Add List..." : "Agregar Lista...",
     "New List" : "Nueva Lista",
-    "Settings" : "Ajustes",
+    "Settings" : "Configuraciones ",
     "Start of week" : "Inicio de semana",
     "Visibility of Smart Collections" : "Visibilidad de Colecciones Inteligentes",
     "Change sort order" : "Cambiar el criterio para ordenar",
