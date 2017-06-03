@@ -18,8 +18,8 @@ OC.L10N.register(
     "Yesterday" : "Gestern",
     "Today" : "Heute",
     "Tomorrow" : "Morgen",
-    "in %s" : "unter %s",
-    "%s ago" : "%s her",
+    "in %s" : "in %s",
+    "%s ago" : "vor %s",
     "seconds" : "Sekunden",
     "a minute" : "Eine Minute",
     "%d minutes" : "%d Minuten",
@@ -34,7 +34,7 @@ OC.L10N.register(
     "week" : "Woche",
     "weeks" : "Wochen",
     "day" : "Tag",
-    "days" : "Tagen",
+    "days" : "Tage",
     "hour" : "Stunde",
     "hours" : "Stunden",
     "minute" : "Minute",
@@ -98,7 +98,7 @@ OC.L10N.register(
     "Visibility of Smart Collections" : "Sichtbarkeit der intelligenten Sammlungen",
     "Change sort order" : "Sortierreihenfolge ändern",
     "Default" : "Standard",
-    "Due date" : "Ablaufdatum",
+    "Due date" : "Fälligkeitsdatum",
     "Start date" : "Startdatum",
     "Priority" : "Priorität",
     "Alphabetically" : "Alphabetisch",
@@ -109,6 +109,6 @@ OC.L10N.register(
     "Select categories..." : "Kategorien auswählen…",
     "Loading the task..." : "Laden der Aufgabe…",
     "Task not found!" : "Aufgabe nicht gefunden!",
-    "add a subtask to" : "Erstelle eine Unteraufgabe für"
+    "add a subtask to" : "Füge eine Teilaufgabe hinzu"
 },
 "nplurals=2; plural=(n != 1);");
