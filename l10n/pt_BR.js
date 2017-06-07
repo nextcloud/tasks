@@ -34,7 +34,7 @@ OC.L10N.register(
     "week" : "semana",
     "weeks" : "semanas",
     "day" : "dia",
-    "days" : "dias",
+    "days" : "Dias",
     "hour" : "hora",
     "hours" : "horas",
     "minute" : "minuto",
