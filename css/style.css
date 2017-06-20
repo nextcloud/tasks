@@ -1428,6 +1428,8 @@ li.ui-draggable-dragging .duedate {
 }
 div.percentdone {
   height: 3px;
+  top: 33px;
+  position: relative;
   margin-bottom: -3px;
   background-color: #CCC;
   border-radius: 2px 2px 2px 2px;
