@@ -1432,7 +1432,6 @@ div.percentdone {
   position: relative;
   margin-bottom: -3px;
   background-color: #CCC;
-  border-radius: 2px 2px 2px 2px;
 }
 #searchresults {
   padding-top: 0px !important;
