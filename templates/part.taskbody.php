@@ -2,16 +2,22 @@
     type="task"
     taskID="{{ task.uri }}"
     ng-class="{active: route.taskID==task.uri, subtasks: hasSubtasks(task), completedsubtasks: hasCompletedSubtasks(task), subtaskshidden: task.hideSubtasks, attachment: task.note!=''}">
-    <div class="percentdone" style="width:{{ task.complete }}%; background-color:{{ task.calendar.color }};"></div>
+    
+    <div class="percentbar" ng-if="task.complete > 0 ">
+        <div class="percentdone" style="width:{{ task.complete }}%; background-color:{{ task.calendar.color }};"></div>
+    </div>
+
     <a class="task-checkbox handler" name="toggleCompleted" ng-click="toggleCompleted(task)">
         <span class="icon task-checkbox" ng-class="{'task-checked': task.completed}"></span>
     </a>
     <a class="icon task-separator"></a>
     <a class="task-star handler" ng-click="toggleStarred(task)">
-        <span class="icon large task-star faded" ng-class="{'high':task.priority>5,'medium':task.priority==5,'low':task.priority > 0 && task.priority < 5}"></span>
+        <span class="icon large task-star faded" ng-class="{'icon_margin':task.complete > 0,
+        'high':task.priority > 5, 'medium':task.priority == 5, 'low':task.priority > 0 && task.priority < 5}">
+        </span>
     </a>
     <a class="task-addsubtask handler add-subtask" ng-show="task.calendar.writable" ng-click="showSubtaskInput(task.uid)" oc-click-focus="{selector: '.add-subtask input', timeout: 0}">
-        <span class="icon large addsubtask" title="<?php p($l->t('add a subtask to')); ?> {{ task.summary }}"></span>
+        <span ng-class="{'icon_margin' : task.complete > 0}" class="icon large addsubtask" title="<?php p($l->t('add a subtask to')); ?> {{ task.summary }}"></span>
     </a>
     <a class="handler"  ng-click="toggleSubtasks(task)">
         <span class="icon large subtasks"></span>
