@@ -73,7 +73,7 @@ OC.L10N.register(
     "high" : "alto",
     "medium" : "medio",
     "low" : "bajo",
-    "no priority assigned" : "no hay una prioridad asignada",
+    "no priority assigned" : "no hay alguna prioridad asignada",
     "Remind me" : "Recordarme",
     "at the end" : "al final",
     "at the beginning" : "al inicio",
