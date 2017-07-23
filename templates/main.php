@@ -8,7 +8,6 @@
     script('tasks', 'vendor/jstzdetect/jstz.min');
     script('tasks', 'public/app');
     script('tasks', 'vendor/jquery-timepicker/jquery.ui.timepicker');
-    script('tasks', 'vendor/davclient.js/lib/client');
     script('tasks', 'vendor/ical.js/build/ical');
     style('tasks', 'style');
     style('tasks', 'vendor/angularui/ui-select/select2');

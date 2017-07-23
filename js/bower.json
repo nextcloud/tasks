@@ -10,8 +10,7 @@
     "angular-draganddrop": "https://github.com/marceljuenemann/angular-drag-and-drop-lists.git#v2.1.0",
     "jquery-timepicker": "",
     "ical.js": "~1.2.2",
-    "jstzdetect": "",
-    "davclient.js": "https://github.com/evert/davclient.js.git#v0.1.1"
+    "jstzdetect": ""
   },
   "devDependencies": {},
   "homepage": "https://github.com/nextcloud/tasks",
