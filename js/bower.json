@@ -11,7 +11,7 @@
     "jquery-timepicker": "",
     "ical.js": "~1.2.2",
     "jstzdetect": "",
-    "davclient.js": "https://github.com/evert/davclient.js.git"
+    "davclient.js": "https://github.com/evert/davclient.js.git#v0.0.1"
   },
   "devDependencies": {},
   "homepage": "https://github.com/nextcloud/tasks",

@@ -1,4 +1,3 @@
-
 /**
  * Nextcloud - Tasks - v0.9.5
  *
@@ -4945,4 +4944,3 @@ angular.module('Tasks').service('VTodoService', ['DavClient', 'RandomStringServi
 	// };
 
 }]);
-
