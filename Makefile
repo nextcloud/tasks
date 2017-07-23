@@ -185,7 +185,6 @@ appstore:
 	--exclude=/js/vendor/angular-ui-select/composer.json \
 	--exclude=/js/vendor/angular-ui-select/deploy-docs.sh \
 	--exclude=/js/vendor/jstzdetect/jstz.js \
-	--exclude=/js/vendor/davclient.js/index.html \
 	--exclude=/js/vendor/ical.js/build/benchmark \
 	--exclude=/js/vendor/ical.js/lib \
 	--exclude=/js/vendor/ical.js/samples \

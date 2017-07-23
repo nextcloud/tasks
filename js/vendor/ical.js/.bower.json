@@ -1,6 +1,6 @@
 {
   "name": "ical.js",
-  "version": "1.1.2",
+  "version": "1.2.2",
   "homepage": "https://github.com/mozilla-comm/ical.js",
   "authors": [
     "Philipp Kewisch <mozilla@kewis.ch>",
@@ -31,13 +31,13 @@
     "coverage",
     "junk"
   ],
-  "_release": "1.1.2",
+  "_release": "1.2.2",
   "_resolution": {
     "type": "version",
-    "tag": "v1.1.2",
-    "commit": "40298c09541ecb32c92077e2d1ca22d297eac28e"
+    "tag": "v1.2.2",
+    "commit": "a4e882f941ddca2e81373d93c53256017ce04011"
   },
-  "_source": "git://github.com/mozilla-comm/ical.js.git",
-  "_target": "~1.1.2",
+  "_source": "https://github.com/mozilla-comm/ical.js.git",
+  "_target": "~1.2.2",
   "_originalSource": "ical.js"
 }

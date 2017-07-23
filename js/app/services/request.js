@@ -63,18 +63,18 @@ angular.module('Tasks').factory('Request', [
 				if (defaultConfig.method === 'GET') {
 					defaultConfig.params = defaultConfig.data;
 				}
-				return this.$http(defaultConfig).success((function(_this) {
-					return function(data, status, headers, config) {
+				return this.$http(defaultConfig).then((function(_this) {
+					return function(response) {
 						var name, ref, value;
-						ref = data.data;
+						ref = response.data.data;
 						for (name in ref) {
 							value = ref[name];
 							_this.publisher.publishDataTo(value, name);
 						}
-						return defaultData.onSuccess(data, status, headers, config);
+						return defaultData.onSuccess(response.data, response.status, response.headers, response.config);
 					};
-				})(this)).error(function(data, status, headers, config) {
-					return defaultData.onFailure(data, status, headers, config);
+				})(this)).catch(function(response) {
+					return defaultData.onFailure(response.data, response.status, response.headers, response.config);
 				});
 			};
 

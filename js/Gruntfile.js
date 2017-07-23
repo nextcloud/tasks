@@ -26,7 +26,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-wrap');
-	grunt.loadNpmTasks('grunt-karma');
+	// grunt.loadNpmTasks('grunt-karma');
 
 	grunt.initConfig({
 		meta: {
@@ -93,8 +93,8 @@ module.exports = function(grunt) {
 			}
 		}
 	});
-	grunt.registerTask('ci', ['karma:continuous']);
-	grunt.registerTask('js', ['concat', 'wrap']);
+	// grunt.registerTask('ci', ['karma:continuous']);
+	grunt.registerTask('js', ['concat']);
 	grunt.registerTask('default', 'js');
-	grunt.registerTask('build', ['concat', 'wrap']);
+	grunt.registerTask('build', ['concat']);
 };
