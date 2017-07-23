@@ -63,7 +63,7 @@ OC.L10N.register(
     "Add an item due today in \"%s\"..." : "Einen heute fälligen Eintrag in „%s“ hinzufügen…",
     "Add an item in \"%s\"..." : "Einen Eintrag in „%s“ hinzufügen…",
     "Add a current item in \"%s\"..." : "Einen aktuellen Eintrag in „%s“ hinzufügen…",
-    "Add a subtask to \"%s\"..." : "Fügt eine Teileaufgabe zu \"%s\"...",
+    "Add a subtask to \"%s\"..." : "Fügt eine Teileaufgabe zu \"%s\"…",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n erledigte Aufgabe","%n erledigte Aufgaben"],
     "Hours" : "Stunden",
     "Minutes" : "Minuten",
@@ -98,7 +98,7 @@ OC.L10N.register(
     "Visibility of Smart Collections" : "Sichtbarkeit der intelligenten Sammlungen",
     "Change sort order" : "Sortierreihenfolge ändern",
     "Default" : "Standard",
-    "Due date" : "Ablaufdatum",
+    "Due date" : "Fälligkeitsdatum",
     "Start date" : "Startdatum",
     "Priority" : "Priorität",
     "Alphabetically" : "Alphabetisch",
@@ -106,9 +106,9 @@ OC.L10N.register(
     "Load remaining completed tasks." : "Die restlichen abgeschlossenen Aufgaben laden.",
     "All day" : "Ganztägig",
     "(New category)" : "(Neue Kategorie)",
-    "Select categories..." : "Kategorien auswählen...",
+    "Select categories..." : "Kategorien auswählen …",
     "Loading the task..." : "Laden der Aufgabe…",
     "Task not found!" : "Aufgabe nicht gefunden!",
-    "add a subtask to" : "fügen Sie eine Teilaufgabe hinzu"
+    "add a subtask to" : "Fügen Sie eine Teilaufgabe hinzu"
 },
 "nplurals=2; plural=(n != 1);");

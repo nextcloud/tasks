@@ -112,7 +112,7 @@
 #content .icon {
   background-image: url("../img/sprites.svg");
   height: 20px;
-  width: 20px;
+  width: 18px;
   display: inline-block;
   cursor: pointer;
   vertical-align: middle;
@@ -375,7 +375,7 @@
 }
 #content li.task-item .task-body .icon.large,
 #content div.task-item .task-body .icon.large{
-  height: 34px;
+  height: 24px;
 }
 #content li.task-item .task-body,
 #content div.task-item .task-body {
@@ -567,7 +567,6 @@
   font-size: 13px;
   width: 100%;
   color: #505050;
-  background: none repeat scroll 0 0 transparent !important;
   border: medium none !important;
   border-radius: 0 0 0 0 !important;
   box-shadow: none !important;
@@ -790,7 +789,6 @@
   top: 55px;
 }
 #app-sidebar div.content-wrapper .body .note {
-  background-color: #f5f5f5;
   border-width: 1px 1px 1px 1px;
   border-style: solid;
   border-color: #CFCFCF;
@@ -934,12 +932,13 @@
 #app-sidebar div.content-wrapper .body .section input[type="range"] {
   border: medium none;
   box-shadow: none;
-  width: 190px;
-  margin: 5px 36px 0 0;
+  width: calc(100% - 90px);
+  margin: 5px 36px 0 5px;
   height: 17px;
 }
 #app-sidebar div.content-wrapper .body .section input[type="text"] {
   float: left;
+  min-height: 0;
 }
 #app-sidebar div.content-wrapper .body .section .select2-search-field input {
   border: 0 none;
@@ -1429,9 +1428,22 @@ li.ui-draggable-dragging .duedate {
 }
 div.percentdone {
   height: 3px;
-  margin-bottom: -3px;
+  border-radius: 2px 0px 0px 2px;
+  opacity: 0.75;
+}
+div.percentbar {
+  height: 3px;
+  position: relative;
+  top: 26px;
+  left: 42px;
+  margin-right: 103px;
+  margin-bottom: -5px;
   background-color: #CCC;
   border-radius: 2px 2px 2px 2px;
+}
+.icon_margin {
+  top: 2px;
+  position: relative;
 }
 #searchresults {
   padding-top: 0px !important;

@@ -1,4 +1,6 @@
-{ "translations": {
+OC.L10N.register(
+    "tasks",
+    {
     "Tasks" : "Tareas",
     "Due yesterday" : "Venció ayer",
     "Due today" : "Vence hoy",
@@ -9,10 +11,10 @@
     "Starts tomorrow" : "Inicia mañana",
     "Started on" : "Iniciado el",
     "Starts on" : "Inicia el",
-    "[Remind me yesterday at ]HH:mm" : "[Recuérdame ayer a las ]HH:mm",
-    "[Remind me today at ]HH:mm" : "[Recuérdame hoy a las ]HH:mm",
-    "[Remind me tomorrow at ]HH:mm" : "[Recuérdame mañana a las ]HH:mm",
-    "[Remind me on ]MMM DD, YYYY,[ at ]HH:mm" : "[Recuérdame el ]DD [de ]MMM [de ] YYYY,[ a las ]HH:mm",
+    "[Remind me yesterday at ]HH:mm" : "[Recordarme ayer a las ]HH:mm",
+    "[Remind me today at ]HH:mm" : "[Recordarme hoy a las ]HH:mm",
+    "[Remind me tomorrow at ]HH:mm" : "[Recordarme mañana a las ]HH:mm",
+    "[Remind me on ]MMM DD, YYYY,[ at ]HH:mm" : "[Recordarme el ]DD [de ]MMM [de ] YYYY,[ a las ]HH:mm",
     "Yesterday" : "Ayer",
     "Today" : "Hoy",
     "Tomorrow" : "Mañana",
@@ -71,8 +73,8 @@
     "high" : "alto",
     "medium" : "medio",
     "low" : "bajo",
-    "no priority assigned" : "no hay alguna prioridad asignada",
-    "Remind me" : "Recuérdame",
+    "no priority assigned" : "no hay una prioridad asignada",
+    "Remind me" : "Recordarme",
     "at the end" : "al final",
     "at the beginning" : "al inicio",
     "Set start date" : "Establecer fecha de inicio",
@@ -86,7 +88,7 @@
     "Delete" : "Borrar",
     "Cancel" : "Cancelar",
     "Edit" : "Editar",
-    "Link" : "Liga",
+    "Link" : "Link",
     "Download" : "Descargar",
     "Save" : "Guardar",
     "Add List..." : "Agregar Lista...",
@@ -108,5 +110,5 @@
     "Loading the task..." : "Cargando la tarea...",
     "Task not found!" : "¡Tarea no encontrada!",
     "add a subtask to" : "agregar una subtarea a"
-},"pluralForm" :"nplurals=2; plural=(n != 1);"
-}
+},
+"nplurals=2; plural=(n != 1);");
