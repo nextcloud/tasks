@@ -1,6 +1,6 @@
 <div ng-controller="DetailsController" ng-click="endEdit($event)" class="handler">
     <div ng-show="TaskState()=='found'" ng-class="{'disabled': !task.calendar.writable}">
-        <a class="detail-checkbox" ng-click="toggleCompleted(task)">
+        <a class="detail-checkbox" ng-click="toggleCompleted(task)" role="checkbox" aria-checked="{{task.completed}}" aria-label="<?php p($l->t('Task is completed')); ?>">
         	<span class="icon detail-checkbox" ng-class="{'detail-checked':task.completed, 'disabled': !task.calendar.writable}"></span>
         </a>
         <a class="detail-star" ng-click="toggleStarred(task)">
@@ -47,7 +47,7 @@
                     <input class="timepicker-input medium focus" ng-hide="task.allDay" type="text" key-value="" placeholder="hh:mm" value="{{ task.due | timeTaskList }}" timepicker="due">
                 </div>
             </div>
-            <div class="section detail-all-day handler" ng-click="toggleAllDay(task)" ng-if="isAllDayPossible(task)">
+            <div class="section detail-all-day handler" ng-click="toggleAllDay(task)" ng-if="isAllDayPossible(task)" role="checkbox" aria-checked="{{task.allDay}}">
                     <span class="icon detail-checkbox disabled" ng-class="{'detail-checked': task.allDay, 'disabled': !task.calendar.writable}"></span>
                     <div class="section-title">
                         <text><?php p($l->t('All day')); ?></text>
