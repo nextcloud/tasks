@@ -102,11 +102,14 @@
     "Alphabetically" : "Alfabetik",
     "Manually" : "El ile",
     "Load remaining completed tasks." : "Geri kalan tamamlanmış görevleri yükle.",
+    "Task is completed" : "Görev tamamlandı",
     "All day" : "Tüm gün",
     "(New category)" : "(Yeni kategori)",
     "Select categories..." : "Kategorileri seçin...",
     "Loading the task..." : "Görev yükleniyor...",
     "Task not found!" : "Görev bulunamadı!",
-    "add a subtask to" : "şuraya bir alt görev ekle"
+    "add a subtask to" : "şuraya bir alt görev ekle",
+    "Toggle subtasks" : "Alt görevleri değiştir",
+    "Toggle completed subtasks" : "Tamamlanmış alt görevleri değiştir"
 },"pluralForm" :"nplurals=2; plural=(n > 1);"
 }

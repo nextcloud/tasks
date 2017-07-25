@@ -102,11 +102,14 @@
     "Alphabetically" : "Par ordre alphabétique",
     "Manually" : "Manuellement",
     "Load remaining completed tasks." : "Charger le reste des tâches terminées.",
+    "Task is completed" : "La tâche est terminée",
     "All day" : "Tous les jours",
     "(New category)" : "(Nouvelle catégorie)",
     "Select categories..." : "Sélectionner des catégories…",
     "Loading the task..." : "Chargement de la tâche…",
     "Task not found!" : "Tâche non trouvée !",
-    "add a subtask to" : "ajouter une sous-tâche à"
+    "add a subtask to" : "ajouter une sous-tâche à",
+    "Toggle subtasks" : "Activer / Désactiver les sous-tâches",
+    "Toggle completed subtasks" : "Activer / Désactiver les sous-tâches terminées"
 },"pluralForm" :"nplurals=2; plural=(n > 1);"
 }

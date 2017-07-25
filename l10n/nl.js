@@ -104,11 +104,14 @@ OC.L10N.register(
     "Alphabetically" : "Alfabetisch",
     "Manually" : "Handmatig",
     "Load remaining completed tasks." : "Overgebleven afgeronde taken laden.",
+    "Task is completed" : "Taak is gereed",
     "All day" : "Hele dag",
     "(New category)" : "(Nieuwe categorie)",
     "Select categories..." : "Kies categorieën...",
     "Loading the task..." : "Laden van de taak...",
     "Task not found!" : "Taak niet gevonden!",
-    "add a subtask to" : "voeg een subtaak toe aan"
+    "add a subtask to" : "voeg een subtaak toe aan",
+    "Toggle subtasks" : "Wissel subtaken",
+    "Toggle completed subtasks" : "Wissel afgeronde subtaken"
 },
 "nplurals=2; plural=(n != 1);");

@@ -104,11 +104,14 @@ OC.L10N.register(
     "Alphabetically" : "Alphabetically",
     "Manually" : "Manually",
     "Load remaining completed tasks." : "Load remaining completed tasks.",
+    "Task is completed" : "Task is completed",
     "All day" : "All day",
     "(New category)" : "(New category)",
     "Select categories..." : "Select categories...",
     "Loading the task..." : "Loading the task...",
     "Task not found!" : "Task not found!",
-    "add a subtask to" : "add a subtask to"
+    "add a subtask to" : "add a subtask to",
+    "Toggle subtasks" : "Toggle subtasks",
+    "Toggle completed subtasks" : "Toggle completed subtasks"
 },
 "nplurals=2; plural=(n != 1);");
