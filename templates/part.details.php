@@ -156,10 +156,10 @@
                 <input type="button" ng-click="addComment()" name="addComment" value="{{ commentStrings().button }}" ng-class="{'active':CommentContent}">
             </div> -->
         	<a class="detail-trash handler close-all" ng-click="deleteTask(task)" ng-show="task.calendar.writable">
-            	<span class="icon detail-trash"></span>
+            	<span class="icon detail-trash svg-trash"></span>
             </a>
             <a class="detail-close handler close-all">
-            	<span class="icon detail-close"></span>
+            	<span class="icon detail-close svg-hide"></span>
             </a>
         </div>
     </div>

@@ -45,7 +45,6 @@
 #app-navigation .app-navigation-entry-menu li {
   float: inherit;
   width: auto !important;
-  opacity: 0.5;
   cursor: pointer;
 }
 .sortorder-dropdown li {
@@ -91,12 +90,13 @@
 }
 #app-navigation li a > span.icon {
   margin-top: -3px;
+  margin-left: 2px;
 }
 #app-navigation li a > span.title {
-  margin-left: 9px;
+  margin-left: 11px;
 }
 #app-navigation li.animate-up {
-  max-height: 0px;
+  max-height: 0;
   border-bottom: 0;
   overflow: hidden;
 }
@@ -113,8 +113,19 @@
   vertical-align: middle;
   opacity: .5;
 }
+.svg-star {
+  opacity: 0.3;
+}
+.svg-star:hover {
+  opacity: 0.5;
+}
+.svg-star-low,
+.svg-star-medium,
+.svg-star-high {
+  opacity: 1 !important;
+}
 .icon.none {
-  background-position: 0px -20px;
+  background-position: 0 -20px;
 }
 .icon.collection-starred {
   background-position: 40% 80%;
@@ -165,7 +176,7 @@
   border-radius: 3px;
   border: 1px solid #b0b0b0;
   float: left;
-  margin: 8px;
+  margin: 9px;
 }
 #app-sidebar .icon.detail-checkbox {
   left: 16px !important;
@@ -196,20 +207,10 @@
 .icon.subtasks:hover {
     background-position: 100% 20%;
 }
-.icon.detail-trash {
-  background-position: -260px 0px;
-  transition: opacity 100ms ease 0s;
-  opacity: 0.6;
-}
 .icon.detail-settings {
   background-position: -200px -40px;
   transition: opacity 100ms ease 0s;
   opacity: 0.6;
-}
-.icon.detail-close {
-  background-position: -260px -20px;
-  opacity: 0.6;
-  transition: opacity 100ms ease 0s;
 }
 .icon.detail-reminder {
   background-position: -40px -40px;
@@ -219,6 +220,7 @@
 .icon.detail-priority,
 .icon.sort-priority {
   background-position: 40% 80%;
+  /*opacity: 1;*/
 }
 .icon.svg-checkmark,
 .icon.svg-checkmark {
@@ -234,22 +236,22 @@ a.detail-star .icon {
   width: 24px;
   background-size: 144px 144px;
   background-position: 40% 80%;
-  opacity: 0.2;
+  opacity: 0.3;
 }
 a.detail-star .icon.low {
   background-position: 80% 80%;
-  opacity: 0.8;
+  opacity: 1 !important;
 }
 a.detail-star .icon.medium {
   background-position: 100% 0;
-  opacity: 0.8;
+  opacity: 1 !important;
 }
 a.detail-star .icon.high {
   background-position: 60% 80%;
-  opacity: 0.8;
+  opacity: 1 !important;
 }
 a.detail-star .icon:hover {
-  opacity: 0.8;
+  opacity: 0.5;
 }
 .disabled .icon.detail-star:hover {
   background-position: -60px -40px;
@@ -279,13 +281,13 @@ a.detail-star .icon:hover {
   display: inline-block;
   height: 12px;
   width: 12px;
-  margin-top: 0px;
+  margin-top: 0;
   border-radius: 50%;
   text-align: center;
   vertical-align: middle;
   line-height: 20px;
   margin-left: 4px;
-  margin-right: 4px;
+  margin-right: 2px;
 }
 .active .calendar-indicator {
   height: 16px;
@@ -428,7 +430,7 @@ tr:last-child .task-item div.task-body {
   float: right;
   font-size: 11px;
   line-height: 14px;
-  margin: 8px;
+  margin: 10px;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 .task-body .duedate.overdue {
@@ -439,7 +441,7 @@ tr:last-child .task-item div.task-body {
   float: right;
   font-size: 11px;
   line-height: 14px;
-  margin: 11px 3px 0 7px;
+  margin: 10px;
 }
 .app-tasks #app-content {
     overflow-x: hidden;
@@ -508,13 +510,13 @@ tr:last-child .task-item div.task-body {
   border: 1px solid #CCCCCC;
   width: 42px;
   height: 34px;
-  margin: 12px 0px 12px 12px;
-  padding: 0px;
+  margin: 12px 0 12px 12px;
+  padding: 0;
   float: right;
   cursor: pointer;
 }
 #app-content .sortorder-dropdown-button .sort-indicator {
-  margin-left: 0px;
+  margin-left: 0;
   visibility: visible;
 }
 .sortorder-dropdown {
@@ -835,7 +837,7 @@ tr:last-child .task-item div.task-body {
   position: relative;
   text-shadow: 0 1px 0 white;
   border-top: none;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 #app-sidebar div.content-wrapper .body .section input {
   -moz-box-sizing: border-box;
@@ -871,7 +873,7 @@ tr:last-child .task-item div.task-body {
   border: 0 none;
   box-shadow: none;
   font-weight: bold;
-  margin-top: 0px;
+  margin-top: 0;
   font-family: inherit;
 }
 #app-sidebar div.content-wrapper .disabled .body .section .select2-search-field input {
@@ -880,7 +882,7 @@ tr:last-child .task-item div.task-body {
 }
 #app-sidebar div.content-wrapper .body .section select {
   background-color: rgba(0, 0, 0, 0);
-  border-radius: 0px;
+  border-radius: 0;
   border: 1px solid #CCC;
   padding: 0;
   width: 98px;
@@ -972,31 +974,34 @@ tr:last-child .task-item div.task-body {
   display: none;
 }
 .date .section-title {
-  color: #4271A6;
+  color: #4271A6 !important;
 }
 #app-sidebar div.content-wrapper .body .section.date .section-title.overdue {
-  color: #B3312D;
+  color: #B3312D !important;
 }
 #app-sidebar div.content-wrapper .body .section.date .section-title.repeat {
   margin-top: -2px;
 }
 .high .icon.detail-priority {
   background-position: 60% 80%;
+  opacity: 1;
 }
 .high .section-title {
-  color: #B3312D;
+  color: #B3312D !important;
 }
 .medium .icon.detail-priority {
   background-position: 100% 0;
+  opacity: 1;
 }
 .medium .section-title {
-  color: #FFDD00;
+  color: #FFDD00 !important;
 }
 .low .icon.detail-priority {
   background-position: 80% 80%;
+  opacity: 1;
 }
 .low .section-title {
-  color: #4271A6;
+  color: #4271A6 !important;
 }
 .active .detail-categories {
   opacity: 1;
@@ -1155,7 +1160,7 @@ input.duration-input {
 input.percent-input,
 input.priority-input {
   width: 35px;
-  margin-top: 0px;
+  margin-top: 0;
 }
 .ui-widget-content {
   background: none repeat scroll 0 0 #F9F9F9;
@@ -1373,13 +1378,13 @@ div.percentbar {
   position: relative;
 }
 #searchresults {
-  padding-top: 0px !important;
+  padding-top: 0 !important;
   margin-top: 20px !important;
   background-color: transparent !important;
   min-height: 150px;
 }
 #searchresults #status {
-  padding: 10px 0px 18px !important;
+  padding: 10px 0 18px !important;
   height: 22px !important;
   background-color: transparent !important;
   font-weight: bold;
@@ -1443,7 +1448,7 @@ div.percentbar {
   color: #9fa2a6;
   float: left;
   font-weight: bold;
-  margin: -5px 4px 0;
+  margin: -2px 4px 0;
   padding: 2px 5px;
   min-height: 22px;
 }
@@ -1463,7 +1468,7 @@ div.percentbar {
 }
 #app-settings-content li select {
   position: absolute;
-  right: 0px;
+  right: 0;
 }
 #app-settings-content li.headline {
   font-weight: bold;
@@ -1539,11 +1544,11 @@ ol[dnd-list] .dndPlaceholder {
   width: 36px;
   height: 38px;
   float: left;
-  margin: 3px 0px;
-  border-left: 0px none;
+  margin: 3px 0;
+  border-left: 0 none;
   background-color: rgba(240, 240, 240, 0.9);
-  border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 #app-navigation .app-navigation-entry-edit input.icon-close:hover {
   background-color: white;
@@ -1574,7 +1579,7 @@ ol[dnd-list] .dndPlaceholder {
 .confirmation-confirm, .confirmation-abort {
   width: 50% !important;
   display: none !important;
-  padding-right: 0px !important;
+  padding-right: 0 !important;
   background-position: center !important;
 }
 

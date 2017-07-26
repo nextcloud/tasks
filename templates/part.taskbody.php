@@ -13,7 +13,7 @@
     <a class="icon task-separator"></a>
     <a class="task-star handler" ng-click="toggleStarred(task)">
         <span class="icon svg-star large faded" ng-class="{'icon_margin':task.complete > 0,
-        'svg-star-high':task.priority > 5, 'svg-star-medium':task.priority == 5, 'svg-star-low':task.priority > 0 && task.priority < 5, 'svg-star':task.priority == 0}">
+        'svg-star-high':task.priority > 5, 'svg-star-medium':task.priority == 5, 'svg-star-low':task.priority > 0 && task.priority < 5}">
         </span>
     </a>
     <a class="task-addsubtask handler add-subtask" ng-show="task.calendar.writable" ng-click="showSubtaskInput(task.uid)" oc-click-focus="{selector: '.add-subtask input', timeout: 0}">
