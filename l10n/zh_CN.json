@@ -102,11 +102,14 @@
     "Alphabetically" : "字母序",
     "Manually" : "手动",
     "Load remaining completed tasks." : "载入剩余的已完成任务。",
+    "Task is completed" : "任务完成",
     "All day" : "所有天",
     "(New category)" : "（新分类）",
     "Select categories..." : "选择分类",
     "Loading the task..." : "读取任务中...",
     "Task not found!" : "没有任务！",
-    "add a subtask to" : "添加子任务到"
+    "add a subtask to" : "添加子任务到",
+    "Toggle subtasks" : "切换子任务",
+    "Toggle completed subtasks" : "切换已完成的子任务"
 },"pluralForm" :"nplurals=1; plural=0;"
 }
