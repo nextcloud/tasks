@@ -98,7 +98,7 @@ module.exports = function(grunt) {
 
 				// Target basics
 				expand: true,
-				cwd			: '../img/source',
+				cwd			: '../img/src',
 				src			: ['**/*.svg'],
 				dest: '..',
 
@@ -110,7 +110,7 @@ module.exports = function(grunt) {
 					mode: {
 						css: {		// Activate the «css» mode
 							bust: false,
-							common: 'icon_svg',
+							common: 'icon',
 							// dimensions: '',
 							render: {
 								css: true	// Activate CSS output (with default options)

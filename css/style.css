@@ -20,12 +20,7 @@
   max-height: 100px;
 }
 #app-navigation li > a {
-  opacity: 1 !important;
   padding-right: 20px;
-}
-#app-navigation li > a span.title,
-#app-navigation li > a span.icon {
-  opacity: 0.57;
 }
 #app-navigation li.active > a span.title,
 #app-navigation li:hover > a span.title,
@@ -109,61 +104,45 @@
   overflow: hidden;
   color: #423E3E;
 }
-#content .icon {
-  background-image: url("../img/sprites.svg");
-  height: 20px;
-  width: 20px;
+.icon {
+  /*background-size: 108px 108px;*/
+  height: 16px;
+  width: 16px;
   display: inline-block;
   cursor: pointer;
   vertical-align: middle;
+  opacity: .5;
 }
-#content .icon_svg {
-  height: 20px;
-  width: 20px;
-  display: inline-block;
-  cursor: pointer;
-  vertical-align: middle;
-}
-#content .icon.none {
+.icon.none {
   background-position: 0px -20px;
 }
-#content .icon.list-list {
-  background-position: -40px 0px;
+.icon.collection-starred {
+  background-position: 40% 80%;
 }
-#content .icon.collection-starred {
-  background-position: -20px 0px;
-}
-#content .icon.collection-today {
+.icon.collection-today {
   -moz-box-sizing: border-box;
-  background-position: -240px 0px;
-  color: #909090;
+  background-position: 20% 20%;
   font-size: 7px;
   font-weight: bold;
-  line-height: 9px;
-  padding-top: 7px;
+  line-height: 21px;
   text-align: center;
-  text-shadow: 0 1px 0 white;
 }
-#content .icon.collection-week {
-  background-position: -220px 0px;
+.icon.collection-week {
+  background-position: 20% 20%;
 }
-#content .icon.collection-completed {
-  background-position: -100px 0px;
+.icon.collection-completed {
+  background-position: 0 40%;
 }
-#content .icon.collection-all {
-  background-position: -200px 0px;
+.icon.collection-all {
+  background-position: 80% 0;
 }
-#content .icon.collection-current {
-  background-position: -240px -80px;
+.icon.collection-current {
+  background-position: 0 60%;
 }
-#content .icon.detail-add {
-  background-position: -80px 0px;
-  cursor: default;
-  height: 20px;
-  width: 20px;
-  opacity: 0.5;
+.icon.detail-add {
+  background-position: 20% 0;
 }
-#content .icon.input-date {
+.icon.input-date {
   display: none;
   background-position: -160px -100px;
   opacity: 0.4;
@@ -171,133 +150,129 @@
   right: 35px;
   top: 7px;
 }
-#content .icon.input-star {
+.icon.input-star {
   display: none;
   background-position: -100px -180px;
   opacity: 0.5;
   right: 9px;
 }
-#content .icon.input-star.starred {
+.icon.input-star.starred {
   background-position: -120px -180px;
   opacity: 1;
 }
-#content .icon.detail-delete {
-  background-position: -260px 0;
-  height: 20px;
-  opacity: 0.4;
-  width: 20px;
+.icon.task-checkbox,
+.icon.detail-checkbox {
+  border-radius: 3px;
+  border: 1px solid #b0b0b0;
+  float: left;
+  margin: 8px;
 }
-#content .icon.task-checkbox {
-  background-position: -60px 0px;
-  height: 20px;
-  width: 20px;
-  left: 8px;
+#app-sidebar .icon.detail-checkbox {
+  left: 16px !important;
   position: absolute;
-  top: 7px;
+  top: 19px;
+  margin: 0;
 }
-#content .icon.task-checkbox.disabled {
+.icon.task-checkbox:not(.disabled):hover,
+.icon.detail-checkbox:not(.disabled):hover {
+    border-color: #000;
+}
+.icon.task-checkbox:not(.svg-checkmark),
+.icon.detail-checkbox:not(.svg-checkmark) {
+    background: unset;
+}
+.icon.task-checkbox.disabled,
+.icon.detail-checkbox.disabled {
   cursor: not-allowed;
 }
-#content .icon.task-attachment {
-  background-position: 0 -120px;
+.icon.task-attachment {
+  background-position: 0 0;
   display: none;
 }
-#content .icon.subtasks {
+.icon.subtasks {
   float:right;
-  background-position: -220px -100px;
+  background-position: 100% 40%;
 }
-#content .icon.detail-trash {
+.icon.subtasks:hover {
+    background-position: 100% 20%;
+}
+.icon.detail-trash {
   background-position: -260px 0px;
   transition: opacity 100ms ease 0s;
   opacity: 0.6;
 }
-#content .icon.detail-settings {
+.icon.detail-settings {
   background-position: -200px -40px;
   transition: opacity 100ms ease 0s;
   opacity: 0.6;
 }
-#content .icon.detail-close {
+.icon.detail-close {
   background-position: -260px -20px;
   opacity: 0.6;
   transition: opacity 100ms ease 0s;
 }
-#content .icon.detail-checkbox {
-  left: 18px;
-  position: absolute;
-  top: 17px;
-  background-position: -60px 0px;
-}
-#content .disabled .icon.detail-checkbox {
-  cursor: not-allowed;
-}
-#content .icon.detail-reminder {
+.icon.detail-reminder {
   background-position: -40px -40px;
   height: 20px;
   width: 20px;
 }
-#content .icon.detail-percent {
-  background-position: -260px -60px;
+.icon.detail-priority,
+.icon.sort-priority {
+  background-position: 40% 80%;
 }
-#content .icon.detail-priority,
-#content .icon.sort-priority {
-  background-position: -160px -80px;
+.icon.svg-checkmark,
+.icon.svg-checkmark {
+  opacity: 1;
 }
-#content .icon.detail-categories {
-  background-position: -200px -60px;
+a.detail-star {
+    padding: 15px;
+    margin-left: auto;
+    float: right;
 }
-#content .icon.task-checked,
-#content .icon.detail-checked {
-  background-position: -60px -20px;
-  height: 20px;
-  width: 20px;
+a.detail-star .icon {
+  height: 24px;
+  width: 24px;
+  background-size: 144px 144px;
+  background-position: 40% 80%;
+  opacity: 0.2;
 }
-#content .icon.detail-star {
-  position: absolute;
-  right: 15px;
-  top: -2px;
-  background-position: -60px -40px;
-  height: 60px;
-  width: 30px;
+a.detail-star .icon.low {
+  background-position: 80% 80%;
+  opacity: 0.8;
 }
-#content .icon.detail-star.low {
-  background-position: -90px -100px !important;
+a.detail-star .icon.medium {
+  background-position: 100% 0;
+  opacity: 0.8;
 }
-#content .icon.detail-star.medium {
-  background-position: -60px -100px !important;
+a.detail-star .icon.high {
+  background-position: 60% 80%;
+  opacity: 0.8;
 }
-#content .icon.detail-star.high {
-  background-position: -120px -40px !important;
+a.detail-star .icon:hover {
+  opacity: 0.8;
 }
-#content .icon.detail-star:hover {
-  background-position: -90px -40px;
-}
-#content .disabled .icon.detail-star:hover {
+.disabled .icon.detail-star:hover {
   background-position: -60px -40px;
   cursor: not-allowed;
 }
-#content .icon.detail-save {
-  background-position: -20px -40px;
-}
-#content .icon.note-fullscreen {
+.icon.note-fullscreen {
   background-position: -140px -60px;
   opacity: 0.6;
 }
-#content .icon.note-fullscreen:hover {
+.icon.note-fullscreen:hover {
   opacity: 1;
 }
-#content .icon.toggle-completed-subtasks {
-  background-position: -140px -100px;
+.icon.toggle-completed-subtasks {
   float: right;
-  opacity: 0.8;
-  width: 20px;
-}
-#content .icon.toggle-completed-subtasks.hidden {
-  background-position: -120px -100px;
-}
-#content .icon.toggle-completed-subtasks:hover {
   opacity: 1;
 }
-#content .calendar-indicator {
+.icon.toggle-completed-subtasks.hidden {
+  opacity: 0.5;
+}
+.icon.toggle-completed-subtasks:hover {
+  opacity: 1;
+}
+.calendar-indicator {
   min-width: 12px;
   min-height: 12px;
   background-color: #F00;
@@ -312,47 +287,42 @@
   margin-left: 4px;
   margin-right: 4px;
 }
-#content .active .calendar-indicator {
+.active .calendar-indicator {
   height: 16px;
   width: 16px;
   margin-left: 2px;
   margin-right: 2px;
 }
-#content tr:last-child .task-item {
+tr:last-child .task-item {
   height: 39px;
 }
-#content tr:last-child .task-item div.task-body {
+tr:last-child .task-item div.task-body {
   border-width: 1px;
 }
-#content li.task-item:first-child {
+.task-item:first-child {
   margin-top: 0;
 }
-#content li.task-item:first-child .task-body {
+.task-item:first-child .task-body {
   border-width: 1px;
 }
-#content li.task-item,
-#content div.task-item {
+.task-item {
   cursor: default;
   min-height: 37px;
   list-style: none outside none;
   overflow: hidden;
   margin-top: -1px;
 }
-#content li.task-item .subtasks-container,
-#content div.task-item .subtasks-container {
+.task-item .subtasks-container {
   margin-left: 35px;
 }
-#content li.task-item .subtasks-container.subtaskshidden li.subtask,
-#content div.task-item .subtasks-container.subtaskshidden li.subtask {
+.task-item .subtasks-container.subtaskshidden li.subtask {
   display: none;
 }
-#content li.task-item.add-subtask,
-#content div.task-item.add-subtask {
+.task-item.add-subtask {
   background: #ffffff;
   border: 1px solid #cccccc;
 }
-#content li.task-item.add-subtask input,
-#content div.task-item.add-subtask input {
+.task-item.add-subtask input {
   background: transparent none repeat scroll 0 0 !important;
   border: medium none !important;
   border-radius: 0 !important;
@@ -366,25 +336,20 @@
   width: 100%;
   min-height: 36px;
 }
-#content li.task-item.done .task-body,
-#content div.task-item.done .task-body {
+.task-item.done .task-body {
   opacity: 0.6;
 }
-#content li.task-item.done .task-body .title,
-#content div.task-item.done .task-body .title {
+.task-item.done .task-body .title {
   text-decoration: line-through;
   text-shadow: none;
 }
-#content li.task-item .subtasks-container .task-item,
-#content div.task-item .subtasks-container .task-item {
+.task-item .subtasks-container .task-item {
   margin-top: -1px;
 }
-#content li.task-item .task-body .icon.large,
-#content div.task-item .task-body .icon.large{
-  height: 24px;
+.task-body .icon.large {
+  margin: 8px;
 }
-#content li.task-item .task-body,
-#content div.task-item .task-body {
+.task-body {
   -moz-box-sizing: border-box;
   background-color: #ffffff;
   height: 37px;
@@ -396,43 +361,31 @@
   border-color: #CCCCCC;
   overflow: hidden;
 }
-#content li.task-item .task-body:hover,
-#content li.task-item .task-body.active,
-#content div.task-item .task-body:hover,
-#content div.task-item .task-body.active {
+.task-body:hover,
+.task-body.active {
     background-color: #f8f8f8;
 }
-#content li.task-item .task-body .icon.task-separator,
-#content div.task-item .task-body .icon.task-separator {
+.task-body .icon.task-separator {
   cursor: default;
   height: 100%;
   left: 34px;
   position: absolute;
   top: 1px;
-  background-position: 0 -20px;
+  background: unset;
   width: 2px;
+  border-left: 1px dotted #b0b0b0;
 }
-#content li.task-item .task-body .icon_svg.svg-star-large,
-#content div.task-item .task-body .icon_svg.svg-star-large {
+.task-body .icon.svg-star {
   float: right;
-  margin: 0 8px 0 5px;
-  height: 40px;
-  width: 20px;
 }
-#content li.task-item .task-body .icon.addsubtask,
-#content div.task-item .task-body .icon.addsubtask {
-  background-position: 0 -80px;
+.task-body .icon.addsubtask {
+  background-position: 20% 0;
   float: right;
-  margin: 0 2px 0 5px;
-  height: 34px;
-  width: 20px;
 }
-#content li.task-item .task-body .icon.addsubtask:hover,
-#content div.task-item .task-body .icon.addsubtask:hover {
-  background-position: -20px -80px;
+.task-body .icon.addsubtask:hover {
+  opacity: 1;
 }
-#content li.task-item .task-body .title-wrapper,
-#content div.task-item .task-body .title-wrapper {
+.task-body .title-wrapper {
   cursor: pointer;
   color: #423E3E;
   display: block;
@@ -445,54 +398,43 @@
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
   white-space: nowrap;
 }
-#content li.task-item .task-body .title-wrapper .title,
-#content div.task-item .task-body .title-wrapper .title {
+.task-body .title-wrapper .title {
   cursor: text;
 }
-#content li.task-item .task-body.attachment .icon.task-attachment,
-#content div.task-item .task-body.attachment .icon.task-attachment {
+.task-body.attachment .icon.task-attachment {
   display: inline-block;
   float: right;
 }
-#content li.task-item .task-body .icon.subtasks,
-#content div.task-item .task-body .icon.subtasks {
+.task-body .icon.subtasks {
   display: none;
 }
-#content li.task-item .task-body.subtasks .icon.subtasks,
-#content div.task-item .task-body.subtasks .icon.subtasks {
+.task-body.subtasks .icon.subtasks {
   display: inline-block;
 }
-#content li.task-item .task-body .icon.toggle-completed-subtasks,
-#content div.task-item .task-body .icon.toggle-completed-subtasks {
+.task-body .icon.toggle-completed-subtasks {
   display: none;
 }
-#content li.task-item .task-body.completedsubtasks .icon.toggle-completed-subtasks,
-#content div.task-item .task-body.completedsubtasks .icon.toggle-completed-subtasks {
+.task-body.completedsubtasks .icon.toggle-completed-subtasks {
   display: inline-block;
 }
-#content li.task-item .task-body.subtasks.subtaskshidden .icon.subtasks,
-#content div.task-item .task-body.subtasks.subtaskshidden .icon.subtasks {
-  background-position: -260px -100px;
+.task-body.subtasks.subtaskshidden .icon.subtasks {
+  background-position: 100% 20%;
 }
-#content li.task-item .task-body.subtasks.subtaskshidden .icon.subtasks:hover,
-#content div.task-item .task-body.subtasks.subtaskshidden .icon.subtasks:hover {
-  background-position: -220px -100px;
+.task-body.subtasks.subtaskshidden .icon.subtasks:hover {
+  background-position: 100% 40%;
 }
-#content li.task-item .task-body .duedate,
-#content div.task-item .task-body .duedate {
+.task-body .duedate {
   color: #3B6594;
   float: right;
   font-size: 11px;
   line-height: 14px;
-  margin: 11px 3px 0 7px;
+  margin: 8px;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
 }
-#content li.task-item .task-body .duedate.overdue,
-#content div.task-item .task-body .duedate.overdue {
+.task-body .duedate.overdue {
   color: #B3312D;
 }
-#content li.task-item .task-body .listname,
-#content div.task-item .task-body .listname {
+.task-body .listname {
   color: #888;
   float: right;
   font-size: 11px;
@@ -887,7 +829,7 @@
   padding-bottom: 32px;
 }
 #app-sidebar div.content-wrapper .body .section {
-  background: url("../img/divider.svg") repeat-x scroll center bottom transparent;
+  border-bottom: 1px dotted #b0b0b0;
   height: 46px;
   padding: 9px 20px 9px 55px;
   position: relative;
@@ -951,30 +893,29 @@
   position: absolute;
   top: 13px;
 }
-#app-sidebar div.content-wrapper .body .section .icon.detail-delete {
+.icon.detail-delete {
   display: none;
-  left: auto;
+  margin-left: auto;
   right: 22px;
 }
-#app-sidebar div.content-wrapper .body .section .icon.detail-delete:hover {
+.icon.detail-save:hover,
+.icon.detail-delete:hover {
   opacity: 0.8;
 }
-#app-sidebar div.content-wrapper .body .section .icon.detail-save {
+.icon.detail-save {
   display: none;
-  left: auto;
-  right: 40px;
+  margin-left: auto;
+  right: 44px;
 }
+.icon.svg-calendar,
 .icon.detail-start,
 .icon.detail-date,
 .icon.sort-due,
 .icon.sort-start {
-  background-position: -220px -80px;
+  background-position: 20% 20%;
 }
 .icon.sort-manual {
   background-position: -20px -140px;
-}
-.icon.sort-alphabetically {
-  background-position: -20px -160px;
 }
 #app-sidebar div.content-wrapper .body .section .icon.detail-remindertype {
   display: none;
@@ -1005,16 +946,18 @@
 #app-sidebar div.content-wrapper .body .section.editing .section-edit {
   display: block;
 }
-#app-sidebar div.content-wrapper .body .section.date .icon.detail-date,
-#app-sidebar div.content-wrapper .body .section.date .icon.detail-start {
-  background-position: -220px -40px;
+.date .icon.detail-date,
+.date .icon.detail-start {
+  background-position: 40% 0;
+  opacity: 1;
 }
-#app-sidebar div.content-wrapper .body .section.date .icon.detail-date.overdue,
-#app-sidebar div.content-wrapper .body .section.date .icon.detail-start.overdue {
-  background-position: -220px -60px;
+.date .icon.detail-date.overdue,
+.date .icon.detail-start.overdue {
+  background-position: 40% 20%;
+  opacity: 1;
 }
-#app-sidebar div.content-wrapper .body .section.date .icon.detail-percent {
-  background-position: -260px -80px;
+#app-sidebar div.content-wrapper .body .section.date .icon.svg-percent {
+  opacity: 1;
 }
 #app-sidebar div.content-wrapper .body .section.date .icon.detail-reminder {
   background-position: -40px -60px;
@@ -1028,7 +971,7 @@
 #app-sidebar div.content-wrapper .disabled .body .section.date:hover .icon.detail-delete {
   display: none;
 }
-#app-sidebar div.content-wrapper .body .section.date .section-title {
+.date .section-title {
   color: #4271A6;
 }
 #app-sidebar div.content-wrapper .body .section.date .section-title.overdue {
@@ -1037,26 +980,26 @@
 #app-sidebar div.content-wrapper .body .section.date .section-title.repeat {
   margin-top: -2px;
 }
-#app-sidebar div.content-wrapper .body .section.high .icon.detail-priority {
-  background-position: -180px -80px;
+.high .icon.detail-priority {
+  background-position: 60% 80%;
 }
-#app-sidebar div.content-wrapper .body .section.high .section-title {
+.high .section-title {
   color: #B3312D;
 }
-#app-sidebar div.content-wrapper .body .section.medium .icon.detail-priority {
-  background-position: -160px -100px;
+.medium .icon.detail-priority {
+  background-position: 100% 0;
 }
-#app-sidebar div.content-wrapper .body .section.medium .section-title {
+.medium .section-title {
   color: #FFDD00;
 }
-#app-sidebar div.content-wrapper .body .section.low .icon.detail-priority {
-  background-position: -180px -100px;
+.low .icon.detail-priority {
+  background-position: 80% 80%;
 }
-#app-sidebar div.content-wrapper .body .section.low .section-title {
+.low .section-title {
   color: #4271A6;
 }
-#app-sidebar div.content-wrapper .body .section.active .detail-categories {
-  background-position: -200px -80px;
+.active .detail-categories {
+  opacity: 1;
 }
 #app-sidebar div.content-wrapper .body .section.active .select2-search-field input {
   color: #4271a6;
@@ -1123,7 +1066,7 @@
   font-size: 11px;
 }
 #app-sidebar div.content-wrapper .body .section.detail-addcomment {
-  background: url("../img/divider.svg") repeat-x scroll center top transparent;
+  border-top: 1px dotted #b0b0b0;
   bottom: 0;
   left: 0;
   position: absolute;
@@ -1181,22 +1124,22 @@ input,
 textarea {
   -moz-user-select: text;
 }
-#content a:hover .icon.detail-trash {
+a:hover .icon.detail-trash {
   opacity: 1;
 }
-#content a:hover .icon.detail-settings {
+a:hover .icon.detail-settings {
   opacity: 1;
 }
-#content a:hover .icon.detail-delete {
+a:hover .icon.detail-delete {
   opacity: 0.8;
 }
-#content a:hover .icon.detail-close {
+a:hover .icon.detail-close {
   opacity: 1;
 }
-#content a:hover .icon.input-date {
+a:hover .icon.input-date {
   opacity: 0.8;
 }
-#content a:hover .icon.input-star {
+a:hover .icon.input-star {
   opacity: 1;
 }
 input.datepicker-input {
@@ -1413,21 +1356,20 @@ li.ui-draggable-dragging .duedate {
 }
 div.percentdone {
   height: 3px;
-  border-radius: 2px 0px 0px 2px;
+  border-radius: 2px 0 0 2px;
   opacity: 0.75;
 }
 div.percentbar {
   height: 3px;
   position: relative;
-  top: 26px;
-  left: 42px;
-  margin-right: 103px;
-  margin-bottom: -5px;
+  top: calc(100% - 3px);
   background-color: #CCC;
-  border-radius: 2px 2px 2px 2px;
+  border-radius: 2px 0 0 2px;
 }
-.icon_margin {
-  top: 2px;
+.percentbar ~ div,
+.percentbar ~ a,
+.percentbar ~ a .icon {
+  bottom: 3px;
   position: relative;
 }
 #searchresults {
@@ -1452,7 +1394,7 @@ div.percentbar {
   background-position: -260px -20px;
   opacity: 0.6;
 }
-#searchresults span.icon.task-checkbox.task-checked {
+#searchresults span.icon.task-checkbox.svg-checkmark {
   background-position: -260px -20px;
 }
 #searchresults span.icon.task-star:hover {
@@ -1482,14 +1424,13 @@ div.percentbar {
   min-height: 22px;
 }
 .detail-categories .select2-container-multi .select2-choices .select2-search-choice a.select2-search-choice-close {
-  background-image: url("../img/sprites.svg");
-  background-position: -4px -44px;
+  background: url("svg/sprite.css.svg") no-repeat;
+  background-position: 60% 40%;
   opacity: 0.4;
   display: initial;
 }
 .detail-categories .select2-container-multi .select2-choices .select2-search-choice a.select2-search-choice-close:hover {
-  background-position: -4px -44px;
-  opacity: 0.8;
+  opacity: 1;
 }
 .categories-list {
   display: inline-block;

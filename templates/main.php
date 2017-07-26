@@ -159,7 +159,7 @@
             <div class="app-navigation-entry-utils">
                 <div class="app-navigation-entry-utils-menu-button" title="<?php p($l->t('Change sort order')); ?>">
                     <button class="sortorder-dropdown-button">
-                        <span class="icon_svg svg-sort-{{ settingsmodel.getById('various').sortOrder }}"></span>
+                        <span class="icon svg-{{ settingsmodel.getById('various').sortOrder }}"></span>
                         <span class="sort-indicator" ng-class="{'icon-triangle-n': settingsmodel.getById('various').sortDirection, 'icon-triangle-s': !settingsmodel.getById('various').sortDirection}"></span>
                     </button>
                 </div>
@@ -168,7 +168,7 @@
                 <ul>
                     <li ng-click="setSortOrder($event, 'default')" ng-class="{active: settingsmodel.getById('various').sortOrder == 'default'}" class="handler">
                         <a>
-                            <span class="icon list-list"></span>
+                            <span class="icon svg-menu"></span>
                             <span><?php p($l->t('Default')); ?></span>
                             <span class="sort-indicator" ng-class="{'icon-triangle-n': settingsmodel.getById('various').sortDirection, 'icon-triangle-s': !settingsmodel.getById('various').sortDirection}"></span>
                         </a>
@@ -196,7 +196,7 @@
                     </li>
                     <li ng-click="setSortOrder($event, 'alphabetically')" ng-class="{active: settingsmodel.getById('various').sortOrder == 'alphabetically'}">
                         <a>
-                            <span class="icon sort-alphabetically"></span>
+                            <span class="icon svg-alphabetically"></span>
                             <span><?php p($l->t('Alphabetically')); ?></span>
                             <span class="sort-indicator" ng-class="{'icon-triangle-n': settingsmodel.getById('various').sortDirection, 'icon-triangle-s': !settingsmodel.getById('various').sortDirection}"></span>
                         </a>

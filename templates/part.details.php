@@ -1,7 +1,7 @@
 <div ng-controller="DetailsController" ng-click="endEdit($event)" class="handler">
     <div ng-show="TaskState()=='found'" ng-class="{'disabled': !task.calendar.writable}">
         <a class="detail-checkbox" ng-click="toggleCompleted(task)" role="checkbox" aria-checked="{{task.completed}}" aria-label="<?php p($l->t('Task is completed')); ?>">
-        	<span class="icon detail-checkbox" ng-class="{'detail-checked':task.completed, 'disabled': !task.calendar.writable}"></span>
+        	<span class="icon detail-checkbox" ng-class="{'svg-checkmark':task.completed, 'disabled': !task.calendar.writable}"></span>
         </a>
         <a class="detail-star" ng-click="toggleStarred(task)">
         	<span class="icon detail-star" ng-class="{'high':task.priority>5,'medium':task.priority==5,'low':task.priority > 0 && task.priority < 5, 'disabled': !task.calendar.writable}"></span>
@@ -24,9 +24,9 @@
                     <text>{{ task.start | startDetails }}</text>
                 </div>
                 <a class="detail-delete handler end-edit" ng-click="deleteStartDate(task)">
-                    <span class="icon detail-delete"></span>
+                    <span class="icon detail-delete svg-trash"></span>
                 </a>
-                <span class="icon detail-save handler end-edit"></span>
+                <span class="icon detail-save svg-checkmark-color handler end-edit"></span>
                 <div class="section-edit">
                     <input class="datepicker-input medium focus" type="text" key-value="" placeholder="dd.mm.yyyy" value="{{ task.start | dateTaskList }}" datepicker="start">
                     <input class="timepicker-input medium focus handler" ng-hide="task.allDay" type="text" key-value="" placeholder="hh:mm" value="{{ task.start | timeTaskList }}" timepicker="start">
@@ -39,16 +39,16 @@
                     <text>{{ task.due | dateDetails }}</text>
                 </div>
                 <a class="detail-delete handler end-edit" ng-click="deleteDueDate(task)">
-                	<span class="icon detail-delete"></span>
+                	<span class="icon detail-delete svg-trash"></span>
                 </a>
-                <span class="icon detail-save handler end-edit"></span>
+                <span class="icon detail-save svg-checkmark-color handler end-edit"></span>
                 <div class="section-edit">
     				<input class="datepicker-input medium focus" type="text" key-value="" placeholder="dd.mm.yyyy" value="{{ task.due | dateTaskList }}" datepicker="due">
                     <input class="timepicker-input medium focus" ng-hide="task.allDay" type="text" key-value="" placeholder="hh:mm" value="{{ task.due | timeTaskList }}" timepicker="due">
                 </div>
             </div>
             <div class="section detail-all-day handler" ng-click="toggleAllDay(task)" ng-if="isAllDayPossible(task)" role="checkbox" aria-checked="{{task.allDay}}">
-                    <span class="icon detail-checkbox disabled" ng-class="{'detail-checked': task.allDay, 'disabled': !task.calendar.writable}"></span>
+                    <span class="icon detail-checkbox disabled" ng-class="{'svg-checkmark': task.allDay, 'disabled': !task.calendar.writable}"></span>
                     <div class="section-title">
                         <text><?php p($l->t('All day')); ?></text>
                     </div>
@@ -61,9 +61,9 @@
     				<text rel="">{{ task.reminder | reminderDetails:this }}</text>
     			</div>
                 <a class="detail-delete handler end-edit" ng-click="deleteReminder()">
-    				<span class="icon detail-delete"></span>
+    				<span class="icon detail-delete svg-trash"></span>
     			</a>
-                <span class="icon detail-save handler end-edit"></span>
+                <span class="icon detail-save svg-checkmark-color handler end-edit"></span>
                 <div class="section-edit" ng-switch='reminderType(task)'>
                     <div ng-switch-when="DATE-TIME">
                         <input class="datepicker-input medium focus" type="text" key-value="" placeholder="dd.mm.yyyy" value="{{ task.reminder.date | dateTaskList }}" datepicker="reminder">
@@ -82,23 +82,23 @@
                     <text>{{ task.priority | priorityDetails}}</text>
                 </div>
                 <a class="detail-delete handler end-edit" ng-click="deletePriority(task)">
-                    <span class="icon detail-delete"></span>
+                    <span class="icon detail-delete svg-trash"></span>
                 </a>
-                <span class="icon detail-save handler end-edit"></span>
+                <span class="icon detail-save svg-checkmark-color handler end-edit"></span>
                 <div class="section-edit">
                     <input class="priority-input" type="text" ng-model="task.priority" ng-change="triggerUpdate(task)">
                     <input type="range" ng-model="task.priority" min="0" max="9" step ="1" ng-change="triggerUpdate(task)">
                 </div>
             </div>
             <div class="section detail-complete handler" ng-class="{'editing':route.parameter=='percent', 'date':task.complete>0}"  ng-click="editPercent($event, task)">
-                <span class="icon detail-percent"></span>
+                <span class="icon svg-percent"></span>
                 <div class="section-title">
                     <text>{{ task.complete | percentDetails}}</text>
                 </div>
                 <a class="detail-delete handler end-edit" ng-click="deletePercent(task)">
-                    <span class="icon detail-delete"></span>
+                    <span class="icon detail-delete svg-trash"></span>
                 </a>
-                <span class="icon detail-save handler end-edit"></span>
+                <span class="icon detail-save svg-checkmark-color handler end-edit"></span>
                 <div class="section-edit">
                     <input class="percent-input" type="text" ng-model="task.complete" ng-change="setPercentComplete(task, task.complete)">
                     <input type="range" ng-model="task.complete" min="0" max="100" step ="1" ng-change="setPercentComplete(task, task.complete)">
@@ -106,7 +106,7 @@
             </div>
             <!-- <ul class="subtasks buffer"></ul> -->
             <div class="section detail-categories" ng-class="{'active':task.cats.length>0}">
-                <span class="icon detail-categories"></span>
+                <span class="icon svg-tag detail-categories"></span>
             <!-- Edit line 1080 to show placeholder -->
                 <ui-select multiple tagging tagging-label="<?php p($l->t('(New category)')); ?> " ng-model="task.cats" theme="select2" ng-disabled="!task.calendar.writable" style="width: 100%;"
                  on-remove="removeCategory($item, $model)" on-select="addCategory($item, $model)">
@@ -141,7 +141,7 @@
                     <li ng-repeat="comment in task.comments" class="comment-item" rel=" {{ comment.id }} ">
                         <div class="avatar" avatar userID="{{ comment.userID }}" size="32"></div>
                         <a class="detail-delete end-edit" ng-click="deleteComment(comment.id)" ng-show="settingsmodel.getById('various').userID == comment.userID">
-                            <span class="icon detail-delete"></span>
+                            <span class="icon detail-delete svg-trash"></span>
                         </a>
                         <span class="username">{{ comment.name }}</span>
                         <div class="comment" ng-bind-html="comment.comment | linky:'_blank':{rel: 'nofollow'}"></div>

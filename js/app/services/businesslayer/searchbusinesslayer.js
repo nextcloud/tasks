@@ -78,7 +78,7 @@
 			  }
 			  if (result.completed) {
 				$row.find('div.task-item').addClass('done');
-				$row.find('span.task-checkbox').addClass('task-checked');
+				$row.find('span.task-checkbox').addClass('svg-checkmark');
 			  }
 			  if (result.complete) {
 				$row.find('div.percentdone').css({
