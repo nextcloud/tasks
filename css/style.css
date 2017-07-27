@@ -1534,10 +1534,11 @@ ol[dnd-list] .dndPlaceholder {
 }
 
 .colorpicker .colorpicker-list li.randomcolour {
-  background-image: url('../img/random.svg');
-  background-repeat: no-repeat;
-  background-position: center center;
   cursor: pointer;
+}
+.colorpicker .colorpicker-list li.randomcolour .svg-random {
+  filter: invert(1);
+  opacity: 1;
 }
 
 #app-navigation .app-navigation-entry-edit input.icon-close {
