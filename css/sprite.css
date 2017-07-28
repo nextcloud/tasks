@@ -1,5 +1,5 @@
 .icon {
-	background: url("svg/sprite.css.svg") no-repeat;
+	background: url("../img/sprites.svg") no-repeat;
 }
 
 .svg-add {
@@ -12,7 +12,7 @@
 }
 
 .svg-all {
-	background-position: 80% 0;
+	background-position: 60% 60%;
 }
 
 .svg-all-dims {
@@ -138,7 +138,7 @@
 }
 
 .svg-menu {
-	background-position: 60% 60%;
+	background-position: 0 0;
 }
 
 .svg-menu-dims {
@@ -147,7 +147,7 @@
 }
 
 .svg-note {
-	background-position: 0 0;
+	background-position: 80% 0;
 }
 
 .svg-note-dims {
@@ -164,11 +164,11 @@
 	height: 16px;
 }
 
-.svg-percent1 {
+.svg-random {
 	background-position: 80% 40%;
 }
 
-.svg-percent1-dims {
+.svg-random-dims {
 	width: 16px;
 	height: 16px;
 }
@@ -277,24 +277,6 @@
 }
 
 .svg-trash-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-update {
-	background-position: 20% 100%;
-}
-
-.svg-update-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-update1 {
-	background-position: 40% 100%;
-}
-
-.svg-update1-dims {
 	width: 16px;
 	height: 16px;
 }

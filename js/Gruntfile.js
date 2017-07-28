@@ -98,8 +98,8 @@ module.exports = function(grunt) {
 
 				// Target basics
 				expand: true,
-				cwd			: '../img/src',
-				src			: ['**/*.svg'],
+				cwd: '../img/src',
+				src: ['**/*.svg'],
 				dest: '..',
 
 				// Target options
@@ -112,6 +112,7 @@ module.exports = function(grunt) {
 							bust: false,
 							common: 'icon',
 							// dimensions: '',
+							sprite: "../img/sprites.svg",
 							render: {
 								css: true	// Activate CSS output (with default options)
 							}

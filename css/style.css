@@ -1429,7 +1429,7 @@ div.percentbar {
   min-height: 22px;
 }
 .detail-categories .select2-container-multi .select2-choices .select2-search-choice a.select2-search-choice-close {
-  background: url("svg/sprite.css.svg") no-repeat;
+  background: url("../img/sprites.svg") no-repeat;
   background-position: 60% 40%;
   opacity: 0.4;
   display: initial;
