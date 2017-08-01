@@ -1,7 +1,7 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Punë",
+    "Tasks" : "Detyra",
     "Due yesterday" : "Mbaron dje",
     "Due today" : "Mbaron sot",
     "Due tomorrow" : "Mbaron nesër",
@@ -61,7 +61,7 @@ OC.L10N.register(
     "Saturday" : "E shtunë",
     "Add an important item in \"%s\"..." : "Shtoni një zë të rëndësishëm te \"%s\"...",
     "Add an item due today in \"%s\"..." : "Shtoni një zë që mbaron sot te \"%s\"...",
-    "Add an item in \"%s\"..." : "Shtoni një zë te \"%s\"...",
+    "Add an item in \"%s\"..." : "Shto një artikull tek \"%s\"...",
     "Add a current item in \"%s\"..." : "Shtoni një zë të tanishëm te \"%s\"...",
     "Add a subtask to \"%s\"..." : "Shtoni një nënpunë te \"%s\"…",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n Punë e Plotësuar","%n Punë të Plotësuara"],

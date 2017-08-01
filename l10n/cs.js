@@ -104,11 +104,14 @@ OC.L10N.register(
     "Alphabetically" : "Abecedně",
     "Manually" : "Manuálně",
     "Load remaining completed tasks." : "Načíst zbývající dokončené úkoly.",
+    "Task is completed" : "Úkol je dokončen",
     "All day" : "Celý den",
     "(New category)" : "(Nová kategorie)",
     "Select categories..." : "Vybrat kategorie...",
     "Loading the task..." : "Nahrávám úkol...",
     "Task not found!" : "Úkol nenalezen!",
-    "add a subtask to" : "přidat podúkol k"
+    "add a subtask to" : "přidat podúkol k",
+    "Toggle subtasks" : "Přepnout podúkoly",
+    "Toggle completed subtasks" : "Přepnout dokončené podúkoly"
 },
 "nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;");
