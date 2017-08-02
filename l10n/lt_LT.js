@@ -104,6 +104,7 @@ OC.L10N.register(
     "Alphabetically" : "Pagal abėcėlę",
     "Manually" : "Rankiniu būdu",
     "Load remaining completed tasks." : "Įkelti likusias atliktas užduotis.",
+    "Task is completed" : "Įvykdyta",
     "All day" : "Visą dieną",
     "(New category)" : "(Nauja kategorija)",
     "Select categories..." : "Pasirinkite kategorijas...",

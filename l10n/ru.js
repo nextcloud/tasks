@@ -104,11 +104,14 @@ OC.L10N.register(
     "Alphabetically" : "По алфавиту",
     "Manually" : "Вручную",
     "Load remaining completed tasks." : "Загрузить оставшиеся завершённые задачи.",
+    "Task is completed" : "Задача завершена",
     "All day" : "Весь день",
     "(New category)" : "(Новая категория)",
     "Select categories..." : "Выбрать категории...",
     "Loading the task..." : "Загрузка задачи...",
     "Task not found!" : "Задача не найдена!",
-    "add a subtask to" : "добавить подзадачу в"
+    "add a subtask to" : "добавить подзадачу в",
+    "Toggle subtasks" : "Поменять субзадачи",
+    "Toggle completed subtasks" : "Поменять завершённые субзадачи"
 },
 "nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);");

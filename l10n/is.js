@@ -104,11 +104,14 @@ OC.L10N.register(
     "Alphabetically" : "Í stafrófsröð",
     "Manually" : "Handvirkt",
     "Load remaining completed tasks." : "Hlaða inn afgangnum af loknum verkum.",
+    "Task is completed" : "Verki er lokið",
     "All day" : "Heilsdagsviðburður",
     "(New category)" : "(nýr flokkur)",
     "Select categories..." : "Veldu flokka...",
     "Loading the task..." : "Hleð inn verkinu...",
     "Task not found!" : "Verk fannst ekki!",
-    "add a subtask to" : "bæta undirverkefni við"
+    "add a subtask to" : "bæta undirverkefni við",
+    "Toggle subtasks" : "Víxla undirverkum af/á",
+    "Toggle completed subtasks" : "Víxla sýnileika kláraðra undirverka"
 },
 "nplurals=2; plural=(n % 10 != 1 || n % 100 == 11);");

@@ -104,11 +104,14 @@ OC.L10N.register(
     "Alphabetically" : "Alfabētiskā secībā",
     "Manually" : "Manuāli",
     "Load remaining completed tasks." : "Ielādēt pārējos pabeigtos uzdevumus.",
+    "Task is completed" : "Uzdevums pabeigts",
     "All day" : "Visas dienas",
     "(New category)" : "(Jauna kategorija)",
     "Select categories..." : "Atlasiet kategoriju...",
     "Loading the task..." : "Ielādē uzdevumu...",
     "Task not found!" : "Uzdevums nav atrasts!",
-    "add a subtask to" : "pievienot apakšuzdevumu"
+    "add a subtask to" : "pievienot apakšuzdevumu",
+    "Toggle subtasks" : "Pārslēgt apakšuzdevumus",
+    "Toggle completed subtasks" : "Pārslēgt pabeigtos apakšuzdevumus"
 },
 "nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);");

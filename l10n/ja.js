@@ -104,11 +104,14 @@ OC.L10N.register(
     "Alphabetically" : "アルファベット順",
     "Manually" : "手動",
     "Load remaining completed tasks." : "残りの完了済みタスクをロード",
+    "Task is completed" : "タスク完了",
     "All day" : "終日",
     "(New category)" : "(新しいカテゴリ)",
     "Select categories..." : "カテゴリーの選択...",
     "Loading the task..." : "タスクの読み込み中...",
     "Task not found!" : "タスクがありません！",
-    "add a subtask to" : "サブタスクを次に追加"
+    "add a subtask to" : "サブタスクを次に追加",
+    "Toggle subtasks" : "サブタスクをオン・オフ",
+    "Toggle completed subtasks" : "完了のサブタスクをオン・オフ"
 },
 "nplurals=1; plural=0;");
