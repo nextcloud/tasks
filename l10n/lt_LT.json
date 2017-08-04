@@ -9,10 +9,10 @@
     "Starts tomorrow" : "Prasidės rytoj",
     "Started on" : "Prasidėjo nuo",
     "Starts on" : "Prasideda nuo",
-    "[Remind me yesterday at ]HH:mm" : "[Priminti man vakar, laiku ]HH:mm",
-    "[Remind me today at ]HH:mm" : "[Priminti man šiandien, laiku ]HH:mm",
-    "[Remind me tomorrow at ]HH:mm" : "[Priminti man rytoj, laiku ]HH:mm",
-    "[Remind me on ]MMM DD, YYYY,[ at ]HH:mm" : "[Priminti man ] YYYY-MMM-DD [ laiku ] HH:mm",
+    "[Remind me yesterday at ]HH:mm" : "[Priminti man vakar, ties ]HH:mm",
+    "[Remind me today at ]HH:mm" : "[Priminti man šiandien, ties ]HH:mm",
+    "[Remind me tomorrow at ]HH:mm" : "[Priminti man rytoj, ties ]HH:mm",
+    "[Remind me on ]MMM DD, YYYY,[ at ]HH:mm" : "[Priminti man ] YYYY-MMM-DD [ ties ] HH:mm",
     "Yesterday" : "Vakar",
     "Today" : "Šiandien",
     "Tomorrow" : "Rytoj",
@@ -108,6 +108,8 @@
     "Select categories..." : "Pasirinkite kategorijas...",
     "Loading the task..." : "Įkeliama užduotis...",
     "Task not found!" : "Užduotis nerasta!",
-    "add a subtask to" : "pridėti konkretesnę užduotį į"
+    "add a subtask to" : "pridėti konkretesnę užduotį į",
+    "Toggle subtasks" : "Perjungti dalines užduotis",
+    "Toggle completed subtasks" : "Perjungti užbaigtas dalines užduotis"
 },"pluralForm" :"nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);"
 }
