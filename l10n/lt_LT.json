@@ -61,7 +61,7 @@
     "Add an item due today in \"%s\"..." : "Pridėti elementą atliktiną iki šiandien į „%s“...",
     "Add an item in \"%s\"..." : "Pridėti elementą į „%s“...",
     "Add a current item in \"%s\"..." : "Pridėti dabartinį elementą į „%s“...",
-    "Add a subtask to \"%s\"..." : "Pridėti konkretesnę užduotį į \"%s\"...",
+    "Add a subtask to \"%s\"..." : "Pridėti konkretesnę užduotį į „%s“...",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n atlikta užduotis","%n atliktos užduotys","%n atliktų užduočių"],
     "Hours" : "Valandos",
     "Minutes" : "Minutės",
