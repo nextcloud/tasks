@@ -104,11 +104,14 @@ OC.L10N.register(
     "Alphabetically" : "Abecedno",
     "Manually" : "Ročno",
     "Load remaining completed tasks." : "Naloži preostale končane naloge.",
+    "Task is completed" : "Naloga je zaključena",
     "All day" : "Cel dan",
     "(New category)" : "(nova kategorija)",
     "Select categories..." : "Izbor kategorije ...",
     "Loading the task..." : "Poteka nalaganje naloge ...",
     "Task not found!" : "Naloge ni mogoče najti!",
-    "add a subtask to" : "dodaj podrejeno nalogo"
+    "add a subtask to" : "dodaj podrejeno nalogo",
+    "Toggle subtasks" : "Preklopi podnaloge",
+    "Toggle completed subtasks" : "Preklopi zaključene podnaloge"
 },
 "nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);");
