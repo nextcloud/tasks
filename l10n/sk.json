@@ -102,11 +102,14 @@
     "Alphabetically" : "Abecedne",
     "Manually" : "Manuálne",
     "Load remaining completed tasks." : "Načítať zostávajúce dokončené úlohy.",
+    "Task is completed" : "Úloha je dokončená",
     "All day" : "Celý deň",
     "(New category)" : "(Nová kategória)",
     "Select categories..." : "Vybrať kategórie...",
     "Loading the task..." : "Nahrávam úlohu...",
     "Task not found!" : "Úloha nebola nájdená!",
-    "add a subtask to" : "pridať podúlohu do"
+    "add a subtask to" : "pridať podúlohu do",
+    "Toggle subtasks" : "Prepínanie podúloh",
+    "Toggle completed subtasks" : "Prepnúť dokončené podúlohy"
 },"pluralForm" :"nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;"
 }
