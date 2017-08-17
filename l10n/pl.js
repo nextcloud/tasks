@@ -104,11 +104,14 @@ OC.L10N.register(
     "Alphabetically" : "Alfabetycznie",
     "Manually" : "Ręcznie",
     "Load remaining completed tasks." : "Załaduj pozostałe ukończone zadania.",
+    "Task is completed" : "Zadanie jest zakończone",
     "All day" : "Cały dzień",
     "(New category)" : "(Nowa kategoria)",
     "Select categories..." : "Wybierz kategorie...",
     "Loading the task..." : "Ładowanie zadania...",
     "Task not found!" : "Nie znaleziono zadania!",
-    "add a subtask to" : "dodaj podzadanie do"
+    "add a subtask to" : "dodaj podzadanie do",
+    "Toggle subtasks" : "Przełącz podzadania",
+    "Toggle completed subtasks" : "Przełącz zakończone podzadania"
 },
 "nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);");
