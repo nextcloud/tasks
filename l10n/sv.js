@@ -104,11 +104,14 @@ OC.L10N.register(
     "Alphabetically" : "Alfabetisk",
     "Manually" : "Manuellt",
     "Load remaining completed tasks." : "Ladda återstående slutförda uppgifter.",
+    "Task is completed" : "Uppgift genomförd",
     "All day" : "Hela dagen",
     "(New category)" : "(Ny kategori)",
     "Select categories..." : "Välj kategorier...",
     "Loading the task..." : "Laddar uppgiften",
     "Task not found!" : "Uppgift ej hittad!",
-    "add a subtask to" : "Lägg till en under-anteckning till"
+    "add a subtask to" : "Lägg till en under-anteckning till",
+    "Toggle subtasks" : "Växla underuppgifter",
+    "Toggle completed subtasks" : "Växla färdiga underuppgifter"
 },
 "nplurals=2; plural=(n != 1);");
