@@ -12,7 +12,7 @@ OC.L10N.register(
     "Started on" : "Entamó en",
     "Starts on" : "Entama en",
     "[Remind me yesterday at ]HH:mm" : "[Recuérdame ayeri a les ]HH:mm",
-    "[Remind me today at ]HH:mm" : "[Recuérdame güei a les ]HH:mm",
+    "[Remind me today at ]HH:mm" : "[Recuérdamelo güei a les ]HH:mm",
     "[Remind me tomorrow at ]HH:mm" : "[Recuérdame mañana a les ]HH:mm",
     "[Remind me on ]MMM DD, YYYY,[ at ]HH:mm" : "[Recuerdame'l ]MMM DD, YYYY,[ a les]HH:mm",
     "Yesterday" : "Ayeri",
