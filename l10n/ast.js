@@ -96,16 +96,20 @@ OC.L10N.register(
     "Settings" : "Axustes",
     "Start of week" : "Entamu de selmana",
     "Visibility of Smart Collections" : "Visibilidá de Coleiciones Intelixentes",
+    "Change sort order" : "Camudar orde d'ordenación",
     "Default" : "Predetermináu",
     "Priority" : "Prioridá",
     "Alphabetically" : "Alfabéticamente",
     "Manually" : "A mano",
     "Load remaining completed tasks." : "Cargar el restante de xeres completaes.",
+    "Task is completed" : "La xera ta completada",
     "All day" : "Tol día",
     "(New category)" : "(Nueva estaya)",
     "Select categories..." : "Seleicionar estayes...",
     "Loading the task..." : "Cargando la xera...",
     "Task not found!" : "¡Xera non atopada!",
-    "add a subtask to" : "amestar una subxera a"
+    "add a subtask to" : "amestar una subxera a",
+    "Toggle subtasks" : "Alternar soxeres",
+    "Toggle completed subtasks" : "Alternar soxeres completaes"
 },
 "nplurals=2; plural=(n != 1);");
