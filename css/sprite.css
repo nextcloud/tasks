@@ -2,282 +2,141 @@
 	background: url("../img/sprites.svg") no-repeat;
 }
 
-.svg-add {
+.icon-add {
 	background-position: 20% 0;
 }
 
-.svg-add-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-all {
-	background-position: 60% 60%;
-}
-
-.svg-all-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-alphabetically {
-	background-position: 0 20%;
-}
-
-.svg-alphabetically-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-calendar {
-	background-position: 20% 20%;
-}
-
-.svg-calendar-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-calendar-due {
-	background-position: 40% 0;
-}
-
-.svg-calendar-due-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-calendar-overdue {
-	background-position: 40% 20%;
-}
-
-.svg-calendar-overdue-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-checkmark {
-	background-position: 0 40%;
-}
-
-.svg-checkmark-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-checkmark-color {
-	background-position: 20% 40%;
-}
-
-.svg-checkmark-color-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-clock {
-	background-position: 40% 40%;
-}
-
-.svg-clock-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-clock-due {
-	background-position: 60% 0;
-}
-
-.svg-clock-due-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-clock-overdue {
-	background-position: 60% 20%;
-}
-
-.svg-clock-overdue-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-close {
-	background-position: 60% 40%;
-}
-
-.svg-close-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-current {
-	background-position: 0 60%;
-}
-
-.svg-current-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-hide {
-	background-position: 20% 60%;
-}
-
-.svg-hide-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-manual {
-	background-position: 40% 60%;
-}
-
-.svg-manual-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-menu {
-	background-position: 0 0;
-}
-
-.svg-menu-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-note {
-	background-position: 80% 0;
-}
-
-.svg-note-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-percent {
+.icon-all {
 	background-position: 80% 20%;
 }
 
-.svg-percent-dims {
-	width: 16px;
-	height: 16px;
+.icon-alphabetically {
+	background-position: 0 20%;
 }
 
-.svg-random {
+.icon-calendar {
+	background-position: 20% 20%;
+}
+
+.icon-calendar-due {
+	background-position: 40% 0;
+}
+
+.icon-calendar-overdue {
+	background-position: 40% 20%;
+}
+
+.icon-checkmark {
+	background-position: 0 40%;
+}
+
+.icon-checkmark-color {
+	background-position: 20% 40%;
+}
+
+.icon-clock {
+	background-position: 40% 40%;
+}
+
+.icon-clock-due {
+	background-position: 60% 0;
+}
+
+.icon-clock-overdue {
+	background-position: 60% 20%;
+}
+
+.icon-close {
+	background-position: 60% 40%;
+}
+
+.icon-current {
+	background-position: 0 60%;
+}
+
+.icon-hide {
+	background-position: 20% 60%;
+}
+
+.icon-manual {
+	background-position: 40% 60%;
+}
+
+.icon-menu {
+	background-position: 60% 60%;
+}
+
+.icon-note {
+	background-position: 80% 0;
+}
+
+.icon-percent {
+	background-position: 0 0;
+}
+
+.icon-percent-active {
 	background-position: 80% 40%;
 }
 
-.svg-random-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-settings {
+.icon-random {
 	background-position: 80% 60%;
 }
 
-.svg-settings-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-sort-down {
+.icon-settings {
 	background-position: 0 80%;
 }
 
-.svg-sort-down-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-sort-up {
+.icon-sort-down {
 	background-position: 20% 80%;
 }
 
-.svg-sort-up-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-star {
+.icon-sort-up {
 	background-position: 40% 80%;
 }
 
-.svg-star-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-star-high {
+.icon-subtasks-hidden,
+.icon-subtasks-hidden\:regular {
 	background-position: 60% 80%;
 }
 
-.svg-star-high-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-star-low {
+.icon-subtasks-hidden:hover,
+.icon-subtasks-hidden\:hover {
 	background-position: 80% 80%;
 }
 
-.svg-star-low-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-star-medium {
+.icon-subtasks-visible {
 	background-position: 100% 0;
 }
 
-.svg-star-medium-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-subtasks-hidden {
+.icon-tag {
 	background-position: 100% 20%;
 }
 
-.svg-subtasks-hidden-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-subtasks-visible {
+.icon-tag-active {
 	background-position: 100% 40%;
 }
 
-.svg-subtasks-visible-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-tag {
+.icon-task-star {
 	background-position: 100% 60%;
 }
 
-.svg-tag-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-toggle {
+.icon-task-star-high {
 	background-position: 100% 80%;
 }
 
-.svg-toggle-dims {
-	width: 16px;
-	height: 16px;
-}
-
-.svg-trash {
+.icon-task-star-low {
 	background-position: 0 100%;
 }
 
-.svg-trash-dims {
-	width: 16px;
-	height: 16px;
+.icon-task-star-medium {
+	background-position: 20% 100%;
+}
+
+.icon-toggle {
+	background-position: 40% 100%;
+}
+
+.icon-trash {
+	background-position: 60% 100%;
 }
 

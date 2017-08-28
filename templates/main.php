@@ -26,8 +26,8 @@
                 dnd-drop="dropCollection(event, index, item)"
                 dnd-dragover="dragoverCollection(event, index)">
                 <a href="#/collections/{{ collection.id }}">
-                    <span class="icon collection-{{ collection.id }}">
-                        <text ng-show="collection.id=='today'"><?php p($_['DOM']); ?></text>
+                    <span class="icon {{ collection.icon }}">
+                        <text ng-if="collection.id=='today'"><?php p($_['DOM']); ?></text>
                     </span>
                     <span class="title">{{ collection.displayname }}</span>
                 </a>
@@ -99,7 +99,7 @@
             </li>
             <li class="newList handler" ng-class="{edit: status.addingList}">
                 <a class="addlist" ng-click="startCreate()" oc-click-focus="{selector: '#newList', timeout: 0}">
-                    <span class="icon detail-add"></span>
+                    <span class="icon icon-add"></span>
                     <span class="title"><?php p($l->t('Add List...')); ?></span>
                 </a>
                 <div class="app-navigation-entry-edit name" ng-class="{error: nameError}">

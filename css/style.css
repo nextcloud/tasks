@@ -67,7 +67,7 @@
 .sortorder-dropdown li span {
   cursor: pointer;
 }
-#app-navigation .app-navigation-entry-menu li:hover,
+#app-navigation .app-navigation-entry-menu li:hover a,
 .sortorder-dropdown li:hover {
   opacity: 1 !important;
 }
@@ -109,53 +109,35 @@
   height: 16px;
   width: 16px;
   display: inline-block;
-  cursor: pointer;
+  /*cursor: pointer;*/
   vertical-align: middle;
   opacity: .5;
 }
-.svg-star {
+.icon-task-star {
   opacity: 0.3;
 }
-.svg-star:hover {
+.task-item .icon-task-star:hover {
   opacity: 0.5;
 }
-.svg-star-low,
-.svg-star-medium,
-.svg-star-high {
+.icon-task-star-low,
+.icon-task-star-medium,
+.icon-task-star-high {
   opacity: 1 !important;
 }
 .icon.none {
-  background-position: 0 -20px;
+  /*background-position: 0 -20px;*/
 }
-.icon.collection-starred {
-  background-position: 40% 80%;
-}
-.icon.collection-today {
+.icon.icon-calendar {
   -moz-box-sizing: border-box;
-  background-position: 20% 20%;
+  /*background-position: 20% 20%;*/
   font-size: 7px;
   font-weight: bold;
   line-height: 21px;
   text-align: center;
 }
-.icon.collection-week {
-  background-position: 20% 20%;
-}
-.icon.collection-completed {
-  background-position: 0 40%;
-}
-.icon.collection-all {
-  background-position: 80% 0;
-}
-.icon.collection-current {
-  background-position: 0 60%;
-}
-.icon.detail-add {
-  background-position: 20% 0;
-}
 .icon.input-date {
   display: none;
-  background-position: -160px -100px;
+  /*background-position: -160px -100px;*/
   opacity: 0.4;
   transition: opacity 100ms ease 0s;
   right: 35px;
@@ -163,12 +145,12 @@
 }
 .icon.input-star {
   display: none;
-  background-position: -100px -180px;
+  /*background-position: -100px -180px;*/
   opacity: 0.5;
   right: 9px;
 }
 .icon.input-star.starred {
-  background-position: -120px -180px;
+  /*background-position: -120px -180px;*/
   opacity: 1;
 }
 .icon.task-checkbox,
@@ -180,6 +162,7 @@
 }
 #app-sidebar .icon.detail-checkbox {
   left: 16px !important;
+  cursor: pointer;
   position: absolute;
   top: 19px;
   margin: 0;
@@ -188,42 +171,36 @@
 .icon.detail-checkbox:not(.disabled):hover {
     border-color: #000;
 }
-.icon.task-checkbox:not(.svg-checkmark),
-.icon.detail-checkbox:not(.svg-checkmark) {
+.icon.task-checkbox:not(.icon-checkmark),
+.icon.detail-checkbox:not(.icon-checkmark) {
     background: unset;
 }
 .icon.task-checkbox.disabled,
 .icon.detail-checkbox.disabled {
   cursor: not-allowed;
 }
-.icon.task-attachment {
-  background-position: 0 0;
+.icon.icon-note {
   display: none;
 }
 .icon.subtasks {
   float:right;
-  background-position: 100% 40%;
+  /*background-position: 100% 40%;*/
 }
 .icon.subtasks:hover {
-    background-position: 100% 20%;
+  /*background-position: 100% 20%;*/
 }
 .icon.detail-settings {
-  background-position: -200px -40px;
+  /*background-position: -200px -40px;*/
   transition: opacity 100ms ease 0s;
   opacity: 0.6;
 }
 .icon.detail-reminder {
-  background-position: -40px -40px;
+  /*background-position: -40px -40px;*/
   height: 20px;
   width: 20px;
 }
-.icon.detail-priority,
-.icon.sort-priority {
-  background-position: 40% 80%;
-  /*opacity: 1;*/
-}
-.icon.svg-checkmark,
-.icon.svg-checkmark {
+.icon.icon-checkmark,
+.icon.icon-checkmark {
   opacity: 1;
 }
 a.detail-star {
@@ -235,30 +212,18 @@ a.detail-star .icon {
   height: 24px;
   width: 24px;
   background-size: 144px 144px;
-  background-position: 40% 80%;
+  /*background-position: 40% 80%;*/
   opacity: 0.3;
-}
-a.detail-star .icon.low {
-  background-position: 80% 80%;
-  opacity: 1 !important;
-}
-a.detail-star .icon.medium {
-  background-position: 100% 0;
-  opacity: 1 !important;
-}
-a.detail-star .icon.high {
-  background-position: 60% 80%;
-  opacity: 1 !important;
 }
 a.detail-star .icon:hover {
   opacity: 0.5;
 }
 .disabled .icon.detail-star:hover {
-  background-position: -60px -40px;
+  /*background-position: -60px -40px;*/
   cursor: not-allowed;
 }
 .icon.note-fullscreen {
-  background-position: -140px -60px;
+  /*background-position: -140px -60px;*/
   opacity: 0.6;
 }
 .icon.note-fullscreen:hover {
@@ -377,14 +342,14 @@ tr:last-child .task-item div.task-body {
   width: 2px;
   border-left: 1px dotted #b0b0b0;
 }
-.task-body .icon.svg-star {
+.task-body .icon.icon-task-star {
   float: right;
 }
-.task-body .icon.addsubtask {
-  background-position: 20% 0;
+.task-body .icon.icon-add {
+  /*background-position: 20% 0;*/
   float: right;
 }
-.task-body .icon.addsubtask:hover {
+.task-body .icon.icon-add:hover {
   opacity: 1;
 }
 .task-body .title-wrapper {
@@ -403,7 +368,7 @@ tr:last-child .task-item div.task-body {
 .task-body .title-wrapper .title {
   cursor: text;
 }
-.task-body.attachment .icon.task-attachment {
+.task-body.attachment .icon.icon-note {
   display: inline-block;
   float: right;
 }
@@ -420,10 +385,10 @@ tr:last-child .task-item div.task-body {
   display: inline-block;
 }
 .task-body.subtasks.subtaskshidden .icon.subtasks {
-  background-position: 100% 20%;
+  /*background-position: 100% 20%;*/
 }
 .task-body.subtasks.subtaskshidden .icon.subtasks:hover {
-  background-position: 100% 40%;
+  /*background-position: 100% 40%;*/
 }
 .task-body .duedate {
   color: #3B6594;
@@ -638,10 +603,10 @@ tr:last-child .task-item div.task-body {
   color: #9FA2A6 !important;
 }
 #app-sidebar div.content-wrapper.completed .body .section .icon.detail-date {
-  background-position: -100px -40px !important;
+  /*background-position: -100px -40px !important;*/
 }
 #app-sidebar div.content-wrapper.completed .body .section .icon.detail-reminder {
-  background-position: -40px -40px !important;
+  /*background-position: -40px -40px !important;*/
 }
 #app-sidebar div.content-wrapper .title {
   background-color: #f5f5f5;
@@ -909,15 +874,15 @@ tr:last-child .task-item div.task-body {
   margin-left: auto;
   right: 44px;
 }
-.icon.svg-calendar,
+.icon.icon-calendar,
 .icon.detail-start,
 .icon.detail-date,
 .icon.sort-due,
 .icon.sort-start {
-  background-position: 20% 20%;
+  /*background-position: 20% 20%;*/
 }
 .icon.sort-manual {
-  background-position: -20px -140px;
+  /*background-position: -20px -140px;*/
 }
 #app-sidebar div.content-wrapper .body .section .icon.detail-remindertype {
   display: none;
@@ -948,24 +913,18 @@ tr:last-child .task-item div.task-body {
 #app-sidebar div.content-wrapper .body .section.editing .section-edit {
   display: block;
 }
-.date .icon.detail-date,
-.date .icon.detail-start {
-  background-position: 40% 0;
+.date .icon.icon-calendar-due,
+.date .icon.icon-calendar-overdue {
   opacity: 1;
 }
-.date .icon.detail-date.overdue,
-.date .icon.detail-start.overdue {
-  background-position: 40% 20%;
-  opacity: 1;
-}
-#app-sidebar div.content-wrapper .body .section.date .icon.svg-percent {
+#app-sidebar div.content-wrapper .body .section.date .icon.icon-percent {
   opacity: 1;
 }
 #app-sidebar div.content-wrapper .body .section.date .icon.detail-reminder {
-  background-position: -40px -60px;
+  /*background-position: -40px -60px;*/
 }
 #app-sidebar div.content-wrapper .body .section.date .icon.detail-reminder.overdue {
-  background-position: -40px -80px;
+  /*background-position: -40px -80px;*/
 }
 #app-sidebar div.content-wrapper .body .section.date:hover .icon.detail-delete {
   display: block;
@@ -983,27 +942,27 @@ tr:last-child .task-item div.task-body {
   margin-top: -2px;
 }
 .high .icon.detail-priority {
-  background-position: 60% 80%;
+  /*background-position: 60% 80%;*/
   opacity: 1;
 }
 .high .section-title {
   color: #B3312D !important;
 }
 .medium .icon.detail-priority {
-  background-position: 100% 0;
+  /*background-position: 100% 0;*/
   opacity: 1;
 }
 .medium .section-title {
   color: #FFDD00 !important;
 }
 .low .icon.detail-priority {
-  background-position: 80% 80%;
+  /*background-position: 80% 80%;*/
   opacity: 1;
 }
 .low .section-title {
   color: #4271A6 !important;
 }
-.active .detail-categories {
+.icon.icon-tag-active {
   opacity: 1;
 }
 #app-sidebar div.content-wrapper .body .section.active .select2-search-field input {
@@ -1013,7 +972,7 @@ tr:last-child .task-item div.task-body {
   display: block;
 }
 #app-sidebar div.content-wrapper .body .section .icon.detail-remindertype {
-  background-position: -260px -40px;
+  /*background-position: -260px -40px;*/
 }
 #app-sidebar div.content-wrapper .body .section.detail-reminder .section-description {
   display: none;
@@ -1224,26 +1183,23 @@ td.ui-timepicker-hours table {
   background: none;
   border: none;
 }
-.ui-datepicker .ui-datepicker-prev span,
-.ui-timepicker .ui-datepicker-prev span,
-.ui-datepicker .ui-datepicker-next span,
-.ui-timepicker .ui-datepicker-next span {
-  margin-left: -4px;
-  margin-top: -4px;
-}
 .ui-datepicker .ui-icon-circle-triangle-w,
 .ui-timepicker .ui-icon-circle-triangle-w {
+  /*this will break when sprites.svg is recompiled
+    might be fixable with scss and @extend*/
   background-image: url("../img/sprites.svg");
-  background-position: -20px -60px;
-  height: 10px;
-  width: 10px;
+  background-position: -32px -64px;
+  height: 16px;
+  width: 16px;
 }
 .ui-datepicker .ui-icon-circle-triangle-e,
 .ui-timepicker .ui-icon-circle-triangle-e {
+  /*this will break when sprites.svg is recompiled
+    might be fixable with scss and @extend*/
   background-image: url("../img/sprites.svg");
-  background-position: -30px -60px;
-  height: 10px;
-  width: 10px;
+  background-position: -16px -64px;
+  height: 16px;
+  width: 16px;
 }
 .ui-datepicker table,
 .ui-timepicker table {
@@ -1362,20 +1318,17 @@ li.ui-draggable-dragging .duedate {
 div.percentdone {
   height: 3px;
   border-radius: 2px 0 0 2px;
-  opacity: 0.75;
+  opacity: .75;
 }
 div.percentbar {
   height: 3px;
   position: relative;
-  top: calc(100% - 3px);
+  top: 28px;
+  left: 42px;
+  margin-right: 103px;
+  margin-bottom: -5px;
   background-color: #CCC;
-  border-radius: 2px 0 0 2px;
-}
-.percentbar ~ div,
-.percentbar ~ a,
-.percentbar ~ a .icon {
-  bottom: 3px;
-  position: relative;
+  border-radius: 2px 2px 2px 2px;
 }
 #searchresults {
   padding-top: 0 !important;
@@ -1396,14 +1349,14 @@ div.percentbar {
   position: relative;
 }
 #searchresults span.icon.task-checkbox {
-  background-position: -260px -20px;
+  /*background-position: -260px -20px;*/
   opacity: 0.6;
 }
-#searchresults span.icon.task-checkbox.svg-checkmark {
-  background-position: -260px -20px;
+#searchresults span.icon.task-checkbox.icon-checkmark {
+  /*background-position: -260px -20px;*/
 }
 #searchresults span.icon.task-star:hover {
-  background-position: -140px 0 !important;
+  /*background-position: -140px 0 !important;*/
 }
 .template {
   display: none;
@@ -1429,10 +1382,11 @@ div.percentbar {
   min-height: 22px;
 }
 .detail-categories .select2-container-multi .select2-choices .select2-search-choice a.select2-search-choice-close {
-  background: url("../img/sprites.svg") no-repeat;
-  background-position: 60% 40%;
   opacity: 0.4;
   display: initial;
+  /*this will break when sprites.svg is recompiled
+    might be fixable with scss and @extend*/
+  background: url("../img/sprites.svg") no-repeat 60% 40%;
 }
 .detail-categories .select2-container-multi .select2-choices .select2-search-choice a.select2-search-choice-close:hover {
   opacity: 1;
@@ -1536,7 +1490,7 @@ ol[dnd-list] .dndPlaceholder {
 .colorpicker .colorpicker-list li.randomcolour {
   cursor: pointer;
 }
-.colorpicker .colorpicker-list li.randomcolour .svg-random {
+.colorpicker .colorpicker-list li.randomcolour .icon-random {
   filter: invert(1);
   opacity: 1;
 }
@@ -1576,12 +1530,16 @@ ol[dnd-list] .dndPlaceholder {
 .confirmed .confirmation-default {
   display: none !important;
 }
-
-.confirmation-confirm, .confirmation-abort {
+.confirmation-confirm,
+.confirmation-abort {
   width: 50% !important;
   display: none !important;
   padding-right: 0 !important;
   background-position: center !important;
+}
+
+#app-navigation .app-navigation-entry-menu li a.confirmation-confirm{
+  /*opacity: 1;*/
 }
 
 .confirmation-confirm {
@@ -1589,8 +1547,10 @@ ol[dnd-list] .dndPlaceholder {
   cursor: default !important;
 }
 
-.confirmed .confirmation-confirm, .confirmed .confirmation-abort {
+#app-navigation .app-navigation-entry-menu li.confirmed a.confirmation-confirm,
+#app-navigation .app-navigation-entry-menu li.confirmed a.confirmation-abort {
   display: inline-block !important;
+  opacity: 1;
 }
 
 .app-navigation-entry-menu li > a:not(:empty).confirmation-confirm {

@@ -1,14 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 15.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1"
-	 id="svg3212" sodipodi:docname="tasks.svg" inkscape:version="0.48.3.1 r9886" inkscape:export-ydpi="90" inkscape:export-xdpi="90" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" inkscape:export-filename="tasks.png"
-	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="32px" height="32px"
-	 viewBox="0 0 32 32" enable-background="new 0 0 32 32" xml:space="preserve">
-<sodipodi:namedview  id="namedview11" inkscape:pageopacity="0" inkscape:window-height="773" inkscape:window-width="1280" inkscape:pageshadow="2" fit-margin-bottom="0" fit-margin-right="0" inkscape:current-layer="svg3212" inkscape:window-y="-1" inkscape:window-x="0" inkscape:zoom="9.4816592" fit-margin-left="0" bordercolor="#666666" inkscape:cx="17.0879" guidetolerance="10" showgrid="false" objecttolerance="10" fit-margin-top="0" pagecolor="#ffffff" inkscape:cy="5.6383467" borderopacity="1" gridtolerance="10" inkscape:window-maximized="1">
-	</sodipodi:namedview>
-<path fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.75" stroke-miterlimit="10" d="M14.383,26.764c0,0,0.259-0.716,0.563-1.367
-	C19.854,14.827,26.158,7.867,28.954,4.707c2.264-2.559,1.378-2.156,0.375-1.503c-4.09,2.659-11.742,11.206-14.668,14.169
-	c-0.542,0.545-1.769,1.833-2.045,1.833c-0.313,0-1.358-0.481-1.955-0.833c-2.282-1.338-4.464-2.643-5.834-3.136
-	c-2.917-1.049-2.092-0.052-1.926,0.281c0.521,1.042,7.566,6.689,9.899,9.356C13.522,25.698,14.383,26.764,14.383,26.764z"/>
+<!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'>
+<svg width="32px" height="32px" enable-background="new 0 0 32 32" version="1.1" viewBox="0 0 32 32" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+<path d="m14.383 26.764s0.259-0.716 0.563-1.367c4.908-10.57 11.212-17.53 14.008-20.69 2.264-2.559 1.378-2.156 0.375-1.503-4.09 2.659-11.742 11.206-14.668 14.169-0.542 0.545-1.769 1.833-2.045 1.833-0.313 0-1.358-0.481-1.955-0.833-2.282-1.338-4.464-2.643-5.834-3.136-2.917-1.049-2.092-0.052-1.926 0.281 0.521 1.042 7.566 6.689 9.899 9.356 0.722 0.824 1.583 1.89 1.583 1.89z" fill="#fff" stroke="#fff" stroke-miterlimit="10" stroke-width=".75"/>
 </svg>
