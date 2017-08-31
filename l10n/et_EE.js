@@ -109,6 +109,9 @@ OC.L10N.register(
     "(New category)" : "(Uus kategooria)",
     "Select categories..." : "Vali kategooriad...",
     "Loading the task..." : "Ülesande laadimine...",
-    "Task not found!" : "Ülesannet ei leitud!"
+    "Task not found!" : "Ülesannet ei leitud!",
+    "add a subtask to" : "lisa alamülesanne",
+    "Toggle subtasks" : "Näita alamülesandeid",
+    "Toggle completed subtasks" : "Näita lõpetatud alamülesandeid"
 },
 "nplurals=2; plural=(n != 1);");
