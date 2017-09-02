@@ -109,11 +109,9 @@
   color: #423E3E;
 }
 .icon {
-  /*background-size: 108px 108px;*/
   height: 16px;
   width: 16px;
   display: inline-block;
-  /*cursor: pointer;*/
   vertical-align: middle;
   opacity: .5;
 }
@@ -125,12 +123,8 @@
 .ico-star-high {
   opacity: 1 !important;
 }
-.icon.none {
-  /*background-position: 0 -20px;*/
-}
 .icon.ico-calendar {
   -moz-box-sizing: border-box;
-  /*background-position: 20% 20%;*/
   font-size: 7px;
   font-weight: bold;
   line-height: 21px;
@@ -138,7 +132,6 @@
 }
 .icon.input-date {
   display: none;
-  /*background-position: -160px -100px;*/
   opacity: 0.4;
   transition: opacity 100ms ease 0s;
   right: 35px;
@@ -146,12 +139,10 @@
 }
 .icon.input-star {
   display: none;
-  /*background-position: -100px -180px;*/
   opacity: 0.5;
   right: 9px;
 }
 .icon.input-star.starred {
-  /*background-position: -120px -180px;*/
   opacity: 1;
 }
 .icon.task-checkbox,
@@ -185,18 +176,12 @@
 }
 .icon.subtasks {
   float:right;
-  /*background-position: 100% 40%;*/
-}
-.icon.subtasks:hover {
-  /*background-position: 100% 20%;*/
 }
 .icon.detail-settings {
-  /*background-position: -200px -40px;*/
   transition: opacity 100ms ease 0s;
   opacity: 0.6;
 }
 .icon.detail-reminder {
-  /*background-position: -40px -40px;*/
   height: 20px;
   width: 20px;
 }
@@ -213,18 +198,15 @@ a.detail-star .icon {
   height: 24px;
   width: 24px;
   background-size: 144px 144px;
-  /*background-position: 40% 80%;*/
   opacity: 0.3;
 }
 a.detail-star .icon:hover {
   opacity: 0.5;
 }
 .disabled .icon.detail-star:hover {
-  /*background-position: -60px -40px;*/
   cursor: not-allowed;
 }
 .icon.note-fullscreen {
-  /*background-position: -140px -60px;*/
   opacity: 0.6;
 }
 .icon.note-fullscreen:hover {
@@ -347,7 +329,6 @@ tr:last-child .task-item div.task-body {
   float: right;
 }
 .task-body .icon.ico-add {
-  /*background-position: 20% 0;*/
   float: right;
 }
 .task-body .icon.ico-add:hover {
@@ -384,12 +365,6 @@ tr:last-child .task-item div.task-body {
 }
 .task-body.completedsubtasks .icon.toggle-completed-subtasks {
   display: inline-block;
-}
-.task-body.subtasks.subtaskshidden .icon.subtasks {
-  /*background-position: 100% 20%;*/
-}
-.task-body.subtasks.subtaskshidden .icon.subtasks:hover {
-  /*background-position: 100% 40%;*/
 }
 .task-body .duedate {
   color: #3B6594;
@@ -605,12 +580,6 @@ tr:last-child .task-item div.task-body {
 }
 #app-sidebar div.content-wrapper.completed .body .section .section-title {
   color: #9FA2A6 !important;
-}
-#app-sidebar div.content-wrapper.completed .body .section .icon.detail-date {
-  /*background-position: -100px -40px !important;*/
-}
-#app-sidebar div.content-wrapper.completed .body .section .icon.detail-reminder {
-  /*background-position: -40px -40px !important;*/
 }
 #app-sidebar div.content-wrapper .title {
   background-color: #f5f5f5;
@@ -878,16 +847,6 @@ tr:last-child .task-item div.task-body {
   margin-left: auto;
   right: 44px;
 }
-.icon.ico-calendar,
-.icon.detail-start,
-.icon.detail-date,
-.icon.sort-due,
-.icon.sort-start {
-  /*background-position: 20% 20%;*/
-}
-.icon.sort-manual {
-  /*background-position: -20px -140px;*/
-}
 #app-sidebar div.content-wrapper .body .section .icon.detail-remindertype {
   display: none;
   left: 38px;
@@ -924,12 +883,6 @@ tr:last-child .task-item div.task-body {
 #app-sidebar div.content-wrapper .body .section.date .icon.ico-percent {
   opacity: 1;
 }
-#app-sidebar div.content-wrapper .body .section.date .icon.detail-reminder {
-  /*background-position: -40px -60px;*/
-}
-#app-sidebar div.content-wrapper .body .section.date .icon.detail-reminder.overdue {
-  /*background-position: -40px -80px;*/
-}
 #app-sidebar div.content-wrapper .body .section.date:hover .icon.detail-delete {
   display: block;
 }
@@ -946,21 +899,18 @@ tr:last-child .task-item div.task-body {
   margin-top: -2px;
 }
 .high .icon.detail-priority {
-  /*background-position: 60% 80%;*/
   opacity: 1;
 }
 .high .section-title {
   color: #B3312D !important;
 }
 .medium .icon.detail-priority {
-  /*background-position: 100% 0;*/
   opacity: 1;
 }
 .medium .section-title {
   color: #FFDD00 !important;
 }
 .low .icon.detail-priority {
-  /*background-position: 80% 80%;*/
   opacity: 1;
 }
 .low .section-title {
@@ -974,9 +924,6 @@ tr:last-child .task-item div.task-body {
 }
 #app-sidebar div.content-wrapper .body .section.editing .icon.detail-remindertype {
   display: block;
-}
-#app-sidebar div.content-wrapper .body .section .icon.detail-remindertype {
-  /*background-position: -260px -40px;*/
 }
 #app-sidebar div.content-wrapper .body .section.detail-reminder .section-description {
   display: none;
@@ -1353,14 +1300,7 @@ div.percentbar {
   position: relative;
 }
 #searchresults span.icon.task-checkbox {
-  /*background-position: -260px -20px;*/
   opacity: 0.6;
-}
-#searchresults span.icon.task-checkbox.ico-checkmark {
-  /*background-position: -260px -20px;*/
-}
-#searchresults span.icon.task-star:hover {
-  /*background-position: -140px 0 !important;*/
 }
 .template {
   display: none;
@@ -1540,10 +1480,6 @@ ol[dnd-list] .dndPlaceholder {
   display: none !important;
   padding-right: 0 !important;
   background-position: center !important;
-}
-
-#app-navigation .app-navigation-entry-menu li a.confirmation-confirm{
-  /*opacity: 1;*/
 }
 
 .confirmation-confirm {
