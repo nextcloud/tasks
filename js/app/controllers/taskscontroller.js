@@ -357,6 +357,22 @@
 				}
 			};
 
+			this._$scope.getSortOrderIcon = function() {
+				switch (_$scope.settingsmodel.getById('various').sortOrder) {
+					case 'due':
+					case 'start':
+						return 'calendar';
+					case 'priority':
+						return 'star';
+					case 'alphabetically':
+						return 'alphabetically';
+					case 'manual':
+						return 'manual';
+					default:
+						return 'menu';
+				}
+			}
+
 			this._$scope.setSortOrder = function($event, order) {
 				_$scope.settingsmodel.getById('various').sortDirection = (_$scope.settingsmodel.getById('various').sortOrder === order) ? +!_$scope.settingsmodel.getById('various').sortDirection : 0;
 				_$scope.settingsmodel.getById('various').sortOrder = order;
