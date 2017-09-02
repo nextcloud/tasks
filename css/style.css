@@ -47,12 +47,16 @@
   width: auto !important;
   cursor: pointer;
 }
+.collection .icon {
+  opacity: 1;
+}
 .sortorder-dropdown li {
   float: inherit;
   width: auto !important;
   cursor: pointer;
+  opacity: .57;
  }
-.sortorder-dropdown li.active a {
+.sortorder-dropdown li.active {
   opacity: 1 !important;
 }
 .sortorder-dropdown a {
@@ -113,21 +117,18 @@
   vertical-align: middle;
   opacity: .5;
 }
-.icon-task-star {
-  opacity: 0.3;
+.task-item .ico-star:hover {
+  opacity: 0.7;
 }
-.task-item .icon-task-star:hover {
-  opacity: 0.5;
-}
-.icon-task-star-low,
-.icon-task-star-medium,
-.icon-task-star-high {
+.ico-star-low,
+.ico-star-medium,
+.ico-star-high {
   opacity: 1 !important;
 }
 .icon.none {
   /*background-position: 0 -20px;*/
 }
-.icon.icon-calendar {
+.icon.ico-calendar {
   -moz-box-sizing: border-box;
   /*background-position: 20% 20%;*/
   font-size: 7px;
@@ -171,15 +172,15 @@
 .icon.detail-checkbox:not(.disabled):hover {
     border-color: #000;
 }
-.icon.task-checkbox:not(.icon-checkmark),
-.icon.detail-checkbox:not(.icon-checkmark) {
+.icon.task-checkbox:not(.ico-checkmark),
+.icon.detail-checkbox:not(.ico-checkmark) {
     background: unset;
 }
 .icon.task-checkbox.disabled,
 .icon.detail-checkbox.disabled {
   cursor: not-allowed;
 }
-.icon.icon-note {
+.icon.ico-note {
   display: none;
 }
 .icon.subtasks {
@@ -199,8 +200,8 @@
   height: 20px;
   width: 20px;
 }
-.icon.icon-checkmark,
-.icon.icon-checkmark {
+.icon.ico-checkmark,
+.icon.ico-checkmark {
   opacity: 1;
 }
 a.detail-star {
@@ -342,14 +343,14 @@ tr:last-child .task-item div.task-body {
   width: 2px;
   border-left: 1px dotted #b0b0b0;
 }
-.task-body .icon.icon-task-star {
+.task-body .icon.ico-star {
   float: right;
 }
-.task-body .icon.icon-add {
+.task-body .icon.ico-add {
   /*background-position: 20% 0;*/
   float: right;
 }
-.task-body .icon.icon-add:hover {
+.task-body .icon.ico-add:hover {
   opacity: 1;
 }
 .task-body .title-wrapper {
@@ -368,7 +369,7 @@ tr:last-child .task-item div.task-body {
 .task-body .title-wrapper .title {
   cursor: text;
 }
-.task-body.attachment .icon.icon-note {
+.task-body.attachment .icon.ico-note {
   display: inline-block;
   float: right;
 }
@@ -495,16 +496,19 @@ tr:last-child .task-item div.task-body {
 .sortorder-dropdown .icon {
   margin: 12px 8px;
 }
-.sort-indicator {
+.sortorder-dropdown .icon.sort-indicator {
   margin-left: auto;
+  margin-right: 0;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
   filter: alpha(opacity=80);
   opacity: 0.8;
   float: right;
-  margin-top: 2px;
   visibility: hidden;
 }
-.active .sort-indicator {
+.sortorder-dropdown .label {
+  margin-right: 10px;
+}
+.sortorder-dropdown .active .icon.sort-indicator {
   visibility: visible;
 }
 #app-content div.task-list .loadmore {
@@ -874,7 +878,7 @@ tr:last-child .task-item div.task-body {
   margin-left: auto;
   right: 44px;
 }
-.icon.icon-calendar,
+.icon.ico-calendar,
 .icon.detail-start,
 .icon.detail-date,
 .icon.sort-due,
@@ -913,11 +917,11 @@ tr:last-child .task-item div.task-body {
 #app-sidebar div.content-wrapper .body .section.editing .section-edit {
   display: block;
 }
-.date .icon.icon-calendar-due,
-.date .icon.icon-calendar-overdue {
+.date .icon.ico-calendar-due,
+.date .icon.ico-calendar-overdue {
   opacity: 1;
 }
-#app-sidebar div.content-wrapper .body .section.date .icon.icon-percent {
+#app-sidebar div.content-wrapper .body .section.date .icon.ico-percent {
   opacity: 1;
 }
 #app-sidebar div.content-wrapper .body .section.date .icon.detail-reminder {
@@ -962,7 +966,7 @@ tr:last-child .task-item div.task-body {
 .low .section-title {
   color: #4271A6 !important;
 }
-.icon.icon-tag-active {
+.icon.ico-tag-active {
   opacity: 1;
 }
 #app-sidebar div.content-wrapper .body .section.active .select2-search-field input {
@@ -1352,7 +1356,7 @@ div.percentbar {
   /*background-position: -260px -20px;*/
   opacity: 0.6;
 }
-#searchresults span.icon.task-checkbox.icon-checkmark {
+#searchresults span.icon.task-checkbox.ico-checkmark {
   /*background-position: -260px -20px;*/
 }
 #searchresults span.icon.task-star:hover {
@@ -1490,12 +1494,12 @@ ol[dnd-list] .dndPlaceholder {
 .colorpicker .colorpicker-list li.randomcolour {
   cursor: pointer;
 }
-.colorpicker .colorpicker-list li.randomcolour .icon-random {
+.colorpicker .colorpicker-list li.randomcolour .ico-random {
   filter: invert(1);
   opacity: 1;
 }
 
-#app-navigation .app-navigation-entry-edit input.icon-close {
+#app-navigation .app-navigation-entry-edit input.ico-close {
   width: 36px;
   height: 38px;
   float: left;
@@ -1505,7 +1509,7 @@ ol[dnd-list] .dndPlaceholder {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
-#app-navigation .app-navigation-entry-edit input.icon-close:hover {
+#app-navigation .app-navigation-entry-edit input.ico-close:hover {
   background-color: white;
 }
 

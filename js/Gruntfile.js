@@ -112,7 +112,7 @@ module.exports = function(grunt) {
 							bust: false,
 							common: 'icon',
 							dimensions: '',
-							prefix: '.icon-%s',
+							prefix: '.ico-%s',
 							sprite: "../img/sprites.svg",
 							render: {
 								css: true	// Activate CSS output (with default options)

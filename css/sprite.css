@@ -2,141 +2,141 @@
 	background: url("../img/sprites.svg") no-repeat;
 }
 
-.icon-add {
+.ico-add {
 	background-position: 20% 0;
 }
 
-.icon-all {
+.ico-all {
 	background-position: 80% 20%;
 }
 
-.icon-alphabetically {
+.ico-alphabetically {
 	background-position: 0 20%;
 }
 
-.icon-calendar {
+.ico-calendar {
 	background-position: 20% 20%;
 }
 
-.icon-calendar-due {
+.ico-calendar-due {
 	background-position: 40% 0;
 }
 
-.icon-calendar-overdue {
+.ico-calendar-overdue {
 	background-position: 40% 20%;
 }
 
-.icon-checkmark {
+.ico-checkmark {
 	background-position: 0 40%;
 }
 
-.icon-checkmark-color {
+.ico-checkmark-color {
 	background-position: 20% 40%;
 }
 
-.icon-clock {
+.ico-clock {
 	background-position: 40% 40%;
 }
 
-.icon-clock-due {
+.ico-clock-due {
 	background-position: 60% 0;
 }
 
-.icon-clock-overdue {
+.ico-clock-overdue {
 	background-position: 60% 20%;
 }
 
-.icon-close {
+.ico-close {
 	background-position: 60% 40%;
 }
 
-.icon-current {
+.ico-current {
 	background-position: 0 60%;
 }
 
-.icon-hide {
+.ico-hide {
 	background-position: 20% 60%;
 }
 
-.icon-manual {
+.ico-manual {
 	background-position: 40% 60%;
 }
 
-.icon-menu {
+.ico-menu {
 	background-position: 60% 60%;
 }
 
-.icon-note {
+.ico-note {
 	background-position: 80% 0;
 }
 
-.icon-percent {
+.ico-percent {
 	background-position: 0 0;
 }
 
-.icon-percent-active {
+.ico-percent-active {
 	background-position: 80% 40%;
 }
 
-.icon-random {
+.ico-random {
 	background-position: 80% 60%;
 }
 
-.icon-settings {
+.ico-settings {
 	background-position: 0 80%;
 }
 
-.icon-sort-down {
+.ico-sort-down {
 	background-position: 20% 80%;
 }
 
-.icon-sort-up {
+.ico-sort-up {
 	background-position: 40% 80%;
 }
 
-.icon-subtasks-hidden,
-.icon-subtasks-hidden\:regular {
+.ico-star {
 	background-position: 60% 80%;
 }
 
-.icon-subtasks-hidden:hover,
-.icon-subtasks-hidden\:hover {
+.ico-star-high {
 	background-position: 80% 80%;
 }
 
-.icon-subtasks-visible {
+.ico-star-low {
 	background-position: 100% 0;
 }
 
-.icon-tag {
+.ico-star-medium {
 	background-position: 100% 20%;
 }
 
-.icon-tag-active {
+.ico-subtasks-hidden,
+.ico-subtasks-hidden\:regular {
 	background-position: 100% 40%;
 }
 
-.icon-task-star {
+.ico-subtasks-hidden:hover,
+.ico-subtasks-hidden\:hover {
 	background-position: 100% 60%;
 }
 
-.icon-task-star-high {
+.ico-subtasks-visible {
 	background-position: 100% 80%;
 }
 
-.icon-task-star-low {
+.ico-tag {
 	background-position: 0 100%;
 }
 
-.icon-task-star-medium {
+.ico-tag-active {
 	background-position: 20% 100%;
 }
 
-.icon-toggle {
+.ico-toggle {
 	background-position: 40% 100%;
 }
 
-.icon-trash {
+.ico-trash {
 	background-position: 60% 100%;
 }
 
