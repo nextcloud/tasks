@@ -6,7 +6,7 @@
     script('tasks', 'vendor/angular-draganddrop/angular-drag-and-drop-lists.min');
     script('tasks', 'vendor/angular-ui-select/dist/select.min');
     script('tasks', 'vendor/jstzdetect/jstz.min');
-    script('tasks', 'public/app');
+    script('tasks', 'public/app.min');
     script('tasks', 'vendor/jquery-timepicker/jquery.ui.timepicker');
     script('tasks', 'vendor/ical.js/build/ical');
     style('tasks', 'style');
