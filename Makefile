@@ -33,13 +33,13 @@
 # build tools and additional package managers should be installed locally in
 # your project, since this won't pollute people's global namespace.
 #
-# The following yarn scripts in your package.json install and update the bower
-# and yarn dependencies and use gulp as build system (notice how everything is
+# The following yarn scripts in your package.json install and update the
+# yarn dependencies and use gulp as build system (notice how everything is
 # run from the node_modules folder):
 #
 #    "scripts": {
 #        "test": "node node_modules/gulp-cli/bin/gulp.js karma",
-#        "prebuild": "yarn install && node_modules/bower/bin/bower install && node_modules/bower/bin/bower update",
+#        "prebuild": "yarn install && yarn upgrade",
 #        "build": "node node_modules/gulp-cli/bin/gulp.js"
 #    },
 
@@ -98,8 +98,7 @@ yarn:
 clean:
 	rm -rf ./build
 
-# Same as clean but also removes dependencies installed by composer, bower and
-# yarn
+# Same as clean but also removes dependencies installed by yarn
 .PHONY: distclean
 distclean: clean
 	rm -rf vendor

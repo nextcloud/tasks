@@ -75,6 +75,30 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
+angular-animate@1.5.5:
+  version "1.5.5"
+  resolved "https://registry.yarnpkg.com/angular-animate/-/angular-animate-1.5.5.tgz#6641ba517d37b8158578d99178e1e9a6bed19b75"
+
+"angular-draganddrop@https://github.com/marceljuenemann/angular-drag-and-drop-lists.git#v2.1.0":
+  version "2.1.0"
+  resolved "https://github.com/marceljuenemann/angular-drag-and-drop-lists.git#7e98e194a8d66fa735bf6dc7c3e39886287b914e"
+
+angular-route@1.5.5:
+  version "1.5.5"
+  resolved "https://registry.yarnpkg.com/angular-route/-/angular-route-1.5.5.tgz#69349369209b1f34724a58145dc7ec6a4987a1e7"
+
+angular-sanitize@1.5.5:
+  version "1.5.5"
+  resolved "https://registry.yarnpkg.com/angular-sanitize/-/angular-sanitize-1.5.5.tgz#44a492348adf8cb5541725e75cb50685c664b1a6"
+
+"angular-ui-select@https://github.com/angular-ui/ui-select.git#v0.19.8":
+  version "0.19.8"
+  resolved "https://github.com/angular-ui/ui-select.git#32829a39e8efe7f94de049c6b529c23fedfc6686"
+
+angular@1.5.5:
+  version "1.5.5"
+  resolved "https://registry.yarnpkg.com/angular/-/angular-1.5.5.tgz#678fdfd1c9c47368dd202c7fc8bb3bd4dba17c18"
+
 ansi-regex@^2.0.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-2.1.1.tgz#c3b33ab5ee360d86e0e628f0468ae7ef27d654df"
@@ -698,10 +722,6 @@ boom@2.x.x:
   resolved "https://registry.yarnpkg.com/boom/-/boom-2.10.1.tgz#39c8918ceff5799f83f9492a848f625add0c766f"
   dependencies:
     hoek "2.x.x"
-
-bower@*:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/bower/-/bower-1.8.0.tgz#55dbebef0ad9155382d9e9d3e497c1372345b44a"
 
 brace-expansion@^1.0.0, brace-expansion@^1.1.7:
   version "1.1.8"
@@ -2189,6 +2209,10 @@ http-signature@~1.1.0:
     jsprim "^1.2.2"
     sshpk "^1.7.0"
 
+ical.js@~1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/ical.js/-/ical.js-1.2.2.tgz#59b517362a8f61dce0342fe67deb7c20dd119f6e"
+
 iconv-lite@0.4.15:
   version "0.4.15"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.15.tgz#fe265a218ac6a57cfe854927e9d04c19825eddeb"
@@ -2439,6 +2463,16 @@ isstream@0.1.x, isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
 
+jquery-timepicker@:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/jquery-timepicker/-/jquery-timepicker-1.3.3.tgz#034160c90a52619df68963eda7625d1fca89cb7a"
+  dependencies:
+    jquery ">= 1.4.3"
+
+"jquery@>= 1.4.3":
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.2.1.tgz#5c4d9de652af6cd0a770154a631bba12b015c787"
+
 js-base64@^2.1.9:
   version "2.1.9"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.1.9.tgz#f0e80ae039a4bd654b5f281fc93f04a914a7fcce"
@@ -2526,6 +2560,10 @@ jsprim@^1.2.2:
     extsprintf "1.3.0"
     json-schema "0.2.3"
     verror "1.10.0"
+
+jstimezonedetect@:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/jstimezonedetect/-/jstimezonedetect-1.0.6.tgz#60d31fbacdbf57af71b064887ee040f1595adb52"
 
 karma@^1.3.0:
   version "1.7.1"

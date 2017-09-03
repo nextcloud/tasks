@@ -1,30 +1,14 @@
-jQuery UI Timepicker by François Gélinas
-========================================
+# jQuery Timepicker [![Build Status](http://img.shields.io/travis/wvega/timepicker.svg)](https://travis-ci.org/wvega/timepicker) [![Gitter chat](https://badges.gitter.im/wvega/timepicker.png)](https://gitter.im/wvega/timepicker)
 
-What
-----
-This is a jQuery UI time picker plugin build to match with other official jQuery UI widgets.
-Based on the existing date picker, it will blend nicely with your form and use your selected jQuery UI theme.
-The plugin is very easy to integrate in your form for you time (hours / minutes) inputs.
+A jQuery plugin to enhance standard form input fields helping users to select
+(or type) times.
 
-Why
----
-I built this plugin because I could not find a plugin that did what I needed.
+Please visit http://timepicker.co for Documentation, Examples and Getting Started information.
 
-Doc
----
-Examples are available on the main page at [http://fgelinas.com/code/timepicker](http://fgelinas.com/code/timepicker)
-Most option parameters are documented at [http://fgelinas.com/code/timepicker/#usage](http://fgelinas.com/code/timepicker/#usage)
+## Release History
 
-Requirements
-------------
-Work with jQuery 1.5.1 and more, also require jQuery UI core.
-There is a legacy version of the plugin made to work with older jQuery 1.2.6 and UI 1.6 at [http://fgelinas.com/code/timepicker/#get_timepicker](http://fgelinas.com/code/timepicker/#get_timepicker)
+See [CHANGELOG](https://github.com/wvega/timepicker/blob/master/CHANGELOG).
 
-Licenses
---------
-The plugin is licensed under the [MIT](https://github.com/fgelinas/timepicker/blob/master/MIT-LICENSE.txt) and [GPL](https://github.com/fgelinas/timepicker/blob/master/GPL-LICENSE.txt) licenses.
-
-Other Stuff
------------
-There is a jsFiddle page [here](http://jsfiddle.net/fgelinas/R6jLt/) with basic implementation for testing.
+## License
+Copyright (c) 2016 Willington Vega
+Licensed under the MIT, GPL licenses.

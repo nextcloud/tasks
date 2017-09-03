@@ -1,0 +1,70 @@
+* Fri May 20 2016 - Version 1.3.3
+- Prevent dropdown from closing in IE when user clicks scrollbar (#56).
+- Prevent long-click from closing the timepicker (#50).
+
+* Sat Sep 13 2014 - Version 1.3.2
+- Add defaultTime option (#41).
+- Fix position bug (#43).
+
+* Sat Nov 09 2013 - Version 1.3.1
+- Fix minor errors in jQuery Package Manifest.
+
+* Sat Nov 09 2013 - Version 1.3.0
+- Drop support for jQuery 1.4.2 or below. Plugin requires jQuery 1.6.0 or newer.
+- Fix: Avoid showing dupliate time entries (#21)
+- Fix: next, previous, open and close methods are now chainable (#23)
+- Fix: getTime now takes into account values set using $.fn.val (#24)
+- Fix: Parse values like 12:77 into a valid datetime entry (#27).
+- Fix: Parse values like 6666 into a valid datetime entry (#33).
+- Fix: Use default cursor in time selector dropdown (#34).
+- Fix: Remove ReferenceError: event is not defined (#39).
+- Added lowercase am/pm format.
+- time-change event and change callbacks are triggered even if the new
+  time is null.
+- Minor CSS fixes.
+
+* Sun Feb 26 2012 - Version 1.2.2
+- Fix too much recursion error in parseTime function (#20).
+- Verifies argument passed to parseTime is string.
+- Add support for jQuery 1.6 prop function.
+
+* Mon Nov 14 2011 - Version 1.2.1
+- Fix strings support for startTime, minTime and maxTime options.
+
+* Sun Nov 13 2011 - Version 1.2.0
+- Add support for calling API methods using the plugin function,
+  passing the method's name as first argument and options as
+  subsequent arguments.
+- Add an option() method to allow changing options values after
+  initialization.
+- Add dropdown option to control whether the dropdown is displayed or not.
+- Add scrollbar option to control whether the scrollbars are displayed or not.
+- Aceept strings as values for the minTime, maxTime and startTime options.
+
+* Tue Jul 26 2011 - Version 1.1.2
+- Released under MIT and GPL Version 2 licenses.
+- Add zindex option to override input field's z-index (thanks to Ian Enders).
+
+* Tue Nov 23 2010 - Version 1.1.1
+- Fix Issue #11 (https://github.com/wvega/timepicker/issues/11)
+
+* Mon Nov 08 2010 - Version 1.1.0
+- Use input field's z-index.
+- Do not use rounded corners by default.
+- Use a single UL element for all timepicker in the same page.
+- Interval greather than 60 minutes are now supported.
+- Add time-change custom event.
+
+* Fri Oct 29 2010 - Version 1.0.3
+- Add dynamic option
+
+* Fri Oct 08 2010 - Version 1.0.2
+- Add support for jQuery 1.3 and superior (thanks to Brian Link)
+- Fix bug with jQuery 1.4.3
+
+* Thu Oct 07 2010 - Version 1.0.1
+- Fix selection issue in some versions of IE.
+  http://github.com/wvega/timepicker/issues/closed/#issue/3
+
+* Wed Jul 17 2010 - Version 1.0.0
+- jQuery Timepicker official release
