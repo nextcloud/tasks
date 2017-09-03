@@ -28,7 +28,6 @@
     "angular-sanitize": "1.5.5",
     "angular-ui-select": "https://github.com/angular-ui/ui-select.git#v0.19.8",
     "ical.js": "~1.2.2",
-    "jquery-timepicker": "",
     "jstimezonedetect": ""
   },
   "devDependencies": {
