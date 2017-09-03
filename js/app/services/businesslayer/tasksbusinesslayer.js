@@ -187,7 +187,7 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				} else {
 					return;
 				}
-				if(due.isBefore(start) || due.isSame(start)) {
+				if (due.isBefore(start) || due.isSame(start)) {
 					start.subtract(olddue.diff(due), 'ms');
 					task.start = this.momentToICALTime(start, allDay);
 				}
@@ -263,7 +263,7 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 
  			TasksBusinessLayer.prototype.setAllDay = function(task, allDay) {
  				task.allDay = allDay;
-				if(allDay) {
+				if (allDay) {
 					var due = moment(task.due, "YYYY-MM-DDTHH:mm:ss");
 					var start = moment(task.start, "YYYY-MM-DDTHH:mm:ss");
 					if(start.isAfter(due) || start.isSame(due)) {

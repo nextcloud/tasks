@@ -21,43 +21,61 @@
 
 (function() {
 	'use strict';
-  var __hasProp = {}.hasOwnProperty,
-	__extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-
-  angular.module('Tasks').factory('SettingsModel', [
-	'_Model', function(_Model) {
-	  var SettingsModel;
-	  SettingsModel = (function(_super) {
-		__extends(SettingsModel, _super);
-
-		function SettingsModel() {
-		  this._nameCache = {};
-		  SettingsModel.__super__.constructor.call(this);
+	var __hasProp = {}.hasOwnProperty,
+	__extends = function(child, parent) {
+		for (var key in parent) {
+			if (__hasProp.call(parent, key)) {
+				child[key] = parent[key];
+			}
 		}
+		function Ctor() {
+			this.constructor = child;
+		}
+		Ctor.prototype = parent.prototype;
+		child.prototype = new Ctor();
+		child.__super__ = parent.prototype;
+		return child;
+	},
+	__indexOf = [].indexOf || function(item) {
+		for (var i = 0, l = this.length; i < l; i++) {
+			if (i in this && this[i] === item) {
+				return i;
+			}
+		}
+		return -1;
+	};
 
-		SettingsModel.prototype.add = function(data, clearCache) {
-		  if (clearCache === null) {
-			clearCache = true;
-		  }
-		  this._nameCache[data.displayname] = data;
-		  if (angular.isDefined(data.id)) {
-			return SettingsModel.__super__.add.call(this, data, clearCache);
-		  } else {
-			return this._data.push(data);
-		  }
-		};
+	angular.module('Tasks').factory('SettingsModel', [
+		'_Model', function(_Model) {
+			var SettingsModel = (function(_super) {
 
-		SettingsModel.prototype.toggle = function(type, setting) {
-		  var set;
-		  set = this.getById(type);
-		  this.getById(type)[setting] = !set[setting];
-		};
+				function SettingsModel() {
+					this._nameCache = {};
+					SettingsModel.__super__.constructor.call(this);
+				}
 
-		return SettingsModel;
+				__extends(SettingsModel, _super);
 
-	  })(_Model);
-	  return new SettingsModel();
-	}
-  ]);
+				SettingsModel.prototype.add = function(data, clearCache) {
+					if (clearCache === null) {
+						clearCache = true;
+					}
+					this._nameCache[data.displayname] = data;
+					if (angular.isDefined(data.id)) {
+						return SettingsModel.__super__.add.call(this, data, clearCache);
+					} else {
+						return this._data.push(data);
+					}
+				};
 
+				SettingsModel.prototype.toggle = function(type, setting) {
+					var set;
+					set = this.getById(type);
+					this.getById(type)[setting] = !set[setting];
+				};
+				return SettingsModel;
+			})(_Model);
+			return new SettingsModel();
+		}
+	]);
 }).call(this);

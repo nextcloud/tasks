@@ -27,15 +27,15 @@ angular.module('Tasks').factory('Status', [
 			function Status() {
 				this._$status = {
 					addingList: false,
-				focusTaskInput: false
+					focusTaskInput: false
 				};
 			}
 
-		Status.prototype.getStatus = function() {
-			return this._$status;
-		};
+			Status.prototype.getStatus = function() {
+				return this._$status;
+			};
 
-		return Status;
+			return Status;
 
 		})();
 		return new Status();

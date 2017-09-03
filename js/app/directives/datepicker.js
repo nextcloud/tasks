@@ -22,35 +22,35 @@
 angular.module('Tasks').directive('datepicker', function() {
 	'use strict';
 	return {
-	  restrict: 'A',
-	  scope: false,
-	  link: function(scope, elm, attr) {
-		return elm.datepicker({
-		  onSelect: function(date, inst) {
-			scope['set' + attr.datepicker + 'day'](date);
-			return scope.$apply();
-		  },
-		  beforeShow: function(input, inst) {
-			var dp, marginLeft;
-			dp = $(inst).datepicker('widget');
-			marginLeft = -Math.abs($(input).outerWidth() - dp.outerWidth()) / 2 + 'px';
-			dp.css({
-			  'margin-left': marginLeft
+		restrict: 'A',
+		scope: false,
+		link: function(scope, elm, attr) {
+			return elm.datepicker({
+				onSelect: function(date, inst) {
+					scope['set' + attr.datepicker + 'day'](date);
+					return scope.$apply();
+				},
+				beforeShow: function(input, inst) {
+					var dp, marginLeft;
+					dp = $(inst).datepicker('widget');
+					marginLeft = -Math.abs($(input).outerWidth() - dp.outerWidth()) / 2 + 'px';
+					dp.css({
+						'margin-left': marginLeft
+					});
+					$("div.ui-datepicker:before").css({
+						'left': 100 + 'px'
+					});
+					return $('.hasDatepicker').datepicker("option", "firstDay", scope.settingsmodel.getById('various').startOfWeek);
+				},
+				beforeShowDay: function(date) {
+					if (moment(date).startOf('day').diff(moment(scope.task[attr.datepicker], "YYYYMMDDTHHmmss").startOf('day'), 'days') === 0) {
+						return [1, "selected"];
+					} else {
+						return [1, ""];
+					}
+				},
+				minDate: null
 			});
-			$("div.ui-datepicker:before").css({
-			  'left': 100 + 'px'
-			});
-			return $('.hasDatepicker').datepicker("option", "firstDay", scope.settingsmodel.getById('various').startOfWeek);
-		  },
-		  beforeShowDay: function(date) {
-			if (moment(date).startOf('day').diff(moment(scope.task[attr.datepicker], "YYYYMMDDTHHmmss").startOf('day'), 'days') === 0) {
-			  return [1, "selected"];
-			} else {
-			  return [1, ""];
-			}
-		  },
-		  minDate: null
-		});
-	  }
+		}
 	};
 });

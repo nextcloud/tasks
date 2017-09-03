@@ -21,15 +21,22 @@
 
 (function() {
 	'use strict';
-  var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+	var __indexOf = [].indexOf || function(item) {
+		for (var i = 0, l = this.length; i < l; i++) {
+			if (i in this && this[i] === item) {
+				return i;
+			}
+		}
+		return -1;
+	};
 
-  angular.module('Tasks').controller('TasksController', [
+	angular.module('Tasks').controller('TasksController', [
 	'$scope', '$window', '$routeParams', 'TasksModel', 'ListsModel', 'CollectionsModel', 'TasksBusinessLayer', '$location',
 	'SettingsBusinessLayer', 'SearchBusinessLayer', 'VTodo', 'SettingsModel',
 	function($scope, $window, $routeParams, TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location,
 		SettingsBusinessLayer, SearchBusinessLayer, VTodo, SettingsModel) {
-	  var TasksController;
-	  TasksController = (function() {
+		var TasksController;
+		TasksController = (function() {
 		function TasksController(_$scope, _$window, _$routeParams, _$tasksmodel, _$listsmodel, _$collectionsmodel, _tasksbusinesslayer, $location,
 			_settingsbusinesslayer, _searchbusinesslayer, vtodo, _$settingsmodel) {
 			var _this = this;
@@ -57,7 +64,7 @@
 			this._$scope.addTask = function(taskName, related, calendar, parent) {
 				var _ref, _this = this;
 				if (calendar === null) {
-				  calendar = '';
+					calendar = '';
 				}
 				_$scope.isAddingTask = true;
 				var task = {
@@ -164,12 +171,12 @@
 				}
 			};
 
-		  this._$scope.focusTaskInput = function() {
+			this._$scope.focusTaskInput = function() {
 			_$scope.status.focusTaskInput = true;
-		  };
-		  this._$scope.focusSubtaskInput = function() {
+			};
+			this._$scope.focusSubtaskInput = function() {
 			_$scope.status.focusSubtaskInput = true;
-		  };
+			};
 
 			this._$scope.openDetails = function(id, $event) {
 				var calendarID = _$scope.route.calendarID;
@@ -263,33 +270,33 @@
 				return _$tasksmodel.filteredTasks(filter);
 			};
 
-		  this._$scope.dayHasEntry = function() {
+			this._$scope.dayHasEntry = function() {
 			return function(date) {
-			  var filter, task, tasks, _i, _len;
-			  filter = _searchbusinesslayer.getFilter();
-			  tasks = _$tasksmodel.filteredTasks(filter);
-			  for (_i = 0, _len = tasks.length; _i < _len; _i++) {
+				var filter, task, tasks, _i, _len;
+				filter = _searchbusinesslayer.getFilter();
+				tasks = _$tasksmodel.filteredTasks(filter);
+				for (_i = 0, _len = tasks.length; _i < _len; _i++) {
 				task = tasks[_i];
 				if (task.completed || !_$tasksmodel.hasNoParent(task)) {
-				  continue;
+					continue;
 				}
 				if (_$tasksmodel.taskAtDay(task, date)) {
-				  return true;
+					return true;
 				}
-			  }
-			  return false;
+				}
+				return false;
 			};
-		  };
-		  this._$scope.taskAtDay = function(task, day) {
+			};
+			this._$scope.taskAtDay = function(task, day) {
 			return function(task) {
-			  return _$tasksmodel.taskAtDay(task, day);
+				return _$tasksmodel.taskAtDay(task, day);
 			};
-		  };
-		  this._$scope.filterLists = function() {
+			};
+			this._$scope.filterLists = function() {
 			return function(calendar) {
-			  return _$scope.getCount(calendar.uri, _$scope.route.collectionID);
+				return _$scope.getCount(calendar.uri, _$scope.route.collectionID);
 			};
-		  };
+			};
 
 			this._$scope.getCount = function(calendarID, type) {
 				var filter = _searchbusinesslayer.getFilter();
@@ -380,7 +387,7 @@
 				_settingsbusinesslayer.set('various', 'sortDirection', _$scope.settingsmodel.getById('various').sortDirection);
 			};
 
-		  	this._$scope.dropAsSubtask = function($event, item, index) {
+			this._$scope.dropAsSubtask = function($event, item, index) {
 				if ($event.dataTransfer.dropEffect === 'move') {
 					var parentID = $($event.target).closest('.task-item').attr('taskID');
 					var task = _$tasksmodel.getByUri(item.uri);
@@ -390,7 +397,7 @@
 				$('.subtasks-container').removeClass('dropzone-visible');
 				return true;
 
-		  	};
+			};
 
 			this._$scope.dropAsRootTask = function($event, item, index) {
 				if ($event.dataTransfer.dropEffect === 'move') {
@@ -440,10 +447,10 @@
 
 		return TasksController;
 
-	  })();
-	  return new TasksController($scope, $window, $routeParams, TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location, SettingsBusinessLayer,
-	  	SearchBusinessLayer, VTodo, SettingsModel);
+		})();
+		return new TasksController($scope, $window, $routeParams, TasksModel, ListsModel, CollectionsModel, TasksBusinessLayer, $location, SettingsBusinessLayer,
+		SearchBusinessLayer, VTodo, SettingsModel);
 	}
-  ]);
+	]);
 
 }).call(this);

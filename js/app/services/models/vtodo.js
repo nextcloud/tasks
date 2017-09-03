@@ -238,7 +238,7 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
  			var start = vtodos[0].getFirstPropertyValue('dtstart');
  			var due = vtodos[0].getFirstPropertyValue('due');
  			var d = due ? due : start;
- 			return d!=null && d.isDate;
+ 			return d!==null && d.isDate;
  		},
  		set allDay(allDay) {
  			var vtodos = this.components.getAllSubcomponents('vtodo');

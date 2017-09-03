@@ -76,16 +76,16 @@ angular.module('Tasks').run([
 				sameElse: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY, HH:mm'
 			}
 		});
- 		moment.locale('details_allday', {
- 			calendar: {
- 				lastDay: '[' + t('tasks', 'Due yesterday') + ']',
- 				sameDay: '[' + t('tasks', 'Due today') + ']',
- 				nextDay: '[' + t('tasks', 'Due tomorrow') + ']',
- 				lastWeek: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY',
- 				nextWeek: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY',
- 				sameElse: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY'
- 			}
- 		});
+		moment.locale('details_allday', {
+			calendar: {
+				lastDay: '[' + t('tasks', 'Due yesterday') + ']',
+				sameDay: '[' + t('tasks', 'Due today') + ']',
+				nextDay: '[' + t('tasks', 'Due tomorrow') + ']',
+				lastWeek: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY',
+				nextWeek: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY',
+				sameElse: '[' + t('tasks', 'Due on') + '] MMM DD, YYYY'
+			}
+		});
 		moment.locale('start', {
 			calendar: {
 				lastDay: '[' + t('tasks', 'Started yesterday') + '], HH:mm',
@@ -102,78 +102,78 @@ angular.module('Tasks').run([
 				}
 			}
 		});
- 		moment.locale('start_allday', {
- 			calendar: {
- 				lastDay: '[' + t('tasks', 'Started yesterday') + ']',
- 				sameDay: '[' + t('tasks', 'Starts today') + ']',
- 				nextDay: '[' + t('tasks', 'Starts tomorrow') + ']',
- 				lastWeek: '[' + t('tasks', 'Started on') + '] MMM DD, YYYY',
- 				nextWeek: '[' + t('tasks', 'Starts on') + '] MMM DD, YYYY',
- 				sameElse: function() {
- 					if (this.diff(moment()) > 0) {
- 						return '[' + t('tasks', 'Starts on') + '] MMM DD, YYYY';
- 					} else {
- 						return '[' + t('tasks', 'Started on') + '] MMM DD, YYYY';
- 					}
- 				}
- 			}
- 		});
-	  moment.locale('reminder', {
-		calendar: {
-		  lastDay: t('tasks', '[Remind me yesterday at ]HH:mm'),
-		  sameDay: t('tasks', '[Remind me today at ]HH:mm'),
-		  nextDay: t('tasks', '[Remind me tomorrow at ]HH:mm'),
-		  lastWeek: t('tasks', '[Remind me on ]MMM DD, YYYY,[ at ]HH:mm'),
-		  nextWeek: t('tasks', '[Remind me on ]MMM DD, YYYY,[ at ]HH:mm'),
-		  sameElse: t('tasks', '[Remind me on ]MMM DD, YYYY,[ at ]HH:mm')
-		}
-	  });
-	  moment.locale('tasks', {
-		calendar: {
-		  lastDay: '[' + t('tasks', 'Yesterday') + ']',
-		  sameDay: '[' + t('tasks', 'Today') + ']',
-		  nextDay: '[' + t('tasks', 'Tomorrow') + ']',
-		  lastWeek: 'DD.MM.YYYY',
-		  nextWeek: 'DD.MM.YYYY',
-		  sameElse: 'DD.MM.YYYY'
-		}
-	  });
-	  moment.locale('details_short', {
-		calendar: {
-		  lastDay: '[' + t('tasks', 'Yesterday') + ']',
-		  sameDay: '[' + t('tasks', 'Today') + ']',
-		  nextDay: '[' + t('tasks', 'Tomorrow') + ']',
-		  lastWeek: 'MMM DD, YYYY',
-		  nextWeek: 'MMM DD, YYYY',
-		  sameElse: 'MMM DD, YYYY'
-		}
-	  });
-	  moment.locale('list_week', {
-		calendar: {
-		  lastDay: '[' + t('tasks', 'Yesterday') + ']',
-		  sameDay: '[' + t('tasks', 'Today') + '], MMM. DD',
-		  nextDay: '[' + t('tasks', 'Tomorrow') + '], MMM. DD',
-		  lastWeek: 'ddd, MMM. DD',
-		  nextWeek: 'ddd, MMM. DD',
-		  sameElse: 'ddd, MMM. DD'
-		}
-	  });
-	  return moment.locale('en', {
-		relativeTime: {
-		  future: t('tasks', "in %s"),
-		  past: t('tasks', "%s ago"),
-		  s: t('tasks', "seconds"),
-		  m: t('tasks', "a minute"),
-		  mm: t('tasks', "%d minutes"),
-		  h: t('tasks', "an hour"),
-		  hh: t('tasks', "%d hours"),
-		  d: t('tasks', "a day"),
-		  dd: t('tasks', "%d days"),
-		  M: t('tasks', "a month"),
-		  MM: t('tasks', "%d months"),
-		  y: t('tasks', "a year"),
-		  yy: t('tasks', "%d years")
-		}
-	  });
+		moment.locale('start_allday', {
+			calendar: {
+				lastDay: '[' + t('tasks', 'Started yesterday') + ']',
+				sameDay: '[' + t('tasks', 'Starts today') + ']',
+				nextDay: '[' + t('tasks', 'Starts tomorrow') + ']',
+				lastWeek: '[' + t('tasks', 'Started on') + '] MMM DD, YYYY',
+				nextWeek: '[' + t('tasks', 'Starts on') + '] MMM DD, YYYY',
+				sameElse: function() {
+					if (this.diff(moment()) > 0) {
+						return '[' + t('tasks', 'Starts on') + '] MMM DD, YYYY';
+					} else {
+						return '[' + t('tasks', 'Started on') + '] MMM DD, YYYY';
+					}
+				}
+			}
+		});
+		moment.locale('reminder', {
+			calendar: {
+				lastDay: t('tasks', '[Remind me yesterday at ]HH:mm'),
+				sameDay: t('tasks', '[Remind me today at ]HH:mm'),
+				nextDay: t('tasks', '[Remind me tomorrow at ]HH:mm'),
+				lastWeek: t('tasks', '[Remind me on ]MMM DD, YYYY,[ at ]HH:mm'),
+				nextWeek: t('tasks', '[Remind me on ]MMM DD, YYYY,[ at ]HH:mm'),
+				sameElse: t('tasks', '[Remind me on ]MMM DD, YYYY,[ at ]HH:mm')
+			}
+		});
+		moment.locale('tasks', {
+			calendar: {
+				lastDay: '[' + t('tasks', 'Yesterday') + ']',
+				sameDay: '[' + t('tasks', 'Today') + ']',
+				nextDay: '[' + t('tasks', 'Tomorrow') + ']',
+				lastWeek: 'DD.MM.YYYY',
+				nextWeek: 'DD.MM.YYYY',
+				sameElse: 'DD.MM.YYYY'
+			}
+		});
+		moment.locale('details_short', {
+			calendar: {
+				lastDay: '[' + t('tasks', 'Yesterday') + ']',
+				sameDay: '[' + t('tasks', 'Today') + ']',
+				nextDay: '[' + t('tasks', 'Tomorrow') + ']',
+				lastWeek: 'MMM DD, YYYY',
+				nextWeek: 'MMM DD, YYYY',
+				sameElse: 'MMM DD, YYYY'
+			}
+		});
+		moment.locale('list_week', {
+			calendar: {
+				lastDay: '[' + t('tasks', 'Yesterday') + ']',
+				sameDay: '[' + t('tasks', 'Today') + '], MMM. DD',
+				nextDay: '[' + t('tasks', 'Tomorrow') + '], MMM. DD',
+				lastWeek: 'ddd, MMM. DD',
+				nextWeek: 'ddd, MMM. DD',
+				sameElse: 'ddd, MMM. DD'
+			}
+		});
+		return moment.locale('en', {
+			relativeTime: {
+				future: t('tasks', "in %s"),
+				past: t('tasks', "%s ago"),
+				s: t('tasks', "seconds"),
+				m: t('tasks', "a minute"),
+				mm: t('tasks', "%d minutes"),
+				h: t('tasks', "an hour"),
+				hh: t('tasks', "%d hours"),
+				d: t('tasks', "a day"),
+				dd: t('tasks', "%d days"),
+				M: t('tasks', "a month"),
+				MM: t('tasks', "%d months"),
+				y: t('tasks', "a year"),
+				yy: t('tasks', "%d years")
+			}
+		});
 	}
 ]);
