@@ -361,17 +361,17 @@
 				switch (_$scope.settingsmodel.getById('various').sortOrder) {
 					case 'due':
 					case 'start':
-						return 'calendar';
+						return 'ico-calendar';
 					case 'priority':
-						return 'star';
+						return 'ico-star';
 					case 'alphabetically':
-						return 'alphabetically';
+						return 'ico-alphabetically';
 					case 'manual':
-						return 'manual';
+						return 'ico-manual';
 					default:
-						return 'menu';
+						return 'ico-menu';
 				}
-			}
+			};
 
 			this._$scope.setSortOrder = function($event, order) {
 				_$scope.settingsmodel.getById('various').sortDirection = (_$scope.settingsmodel.getById('various').sortOrder === order) ? +!_$scope.settingsmodel.getById('various').sortDirection : 0;

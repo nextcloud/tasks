@@ -159,7 +159,7 @@
             <div class="app-navigation-entry-utils">
                 <div class="app-navigation-entry-utils-menu-button" title="<?php p($l->t('Change sort order')); ?>">
                     <button class="sortorder-dropdown-button">
-                        <span class="icon ico-{{ getSortOrderIcon() }}"></span>
+                        <span class="icon" ng-class="getSortOrderIcon()"></span>
                         <span class="icon sort-indicator" ng-class="{'ico-sort-up': settingsmodel.getById('various').sortDirection, 'ico-sort-down': !settingsmodel.getById('various').sortDirection}"></span>
                     </button>
                 </div>
