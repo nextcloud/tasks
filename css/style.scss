@@ -198,9 +198,6 @@ $font_1: Helvetica;
 $font_2: Arial;
 $font_3: Sans-Serif;
 
-//urls
-$url_0: url(../img/sprites.svg);
-
 //@extend-elements
 //original selectors
 //.icon.task-checkbox, .icon.detail-checkbox
@@ -281,9 +278,8 @@ $url_0: url(../img/sprites.svg);
 //.ui-datepicker .ui-icon-circle-triangle-w, .ui-timepicker .ui-icon-circle-triangle-w
 %extend_8 {
 	@extend .icon;
-	@extend .ico-sort-down;
-	// background-image: $url_0;
-	// background-position: -32px -64px;
+	@extend .ico-sort-up;
+
 	height: 16px;
 	width: 16px;
 }
@@ -292,9 +288,8 @@ $url_0: url(../img/sprites.svg);
 //.ui-datepicker .ui-icon-circle-triangle-e, .ui-timepicker .ui-icon-circle-triangle-e
 %extend_9 {
 	@extend .icon;
-	@extend .ico-sort-up;
-	// background-image: $url_0;
-	// background-position: -16px -64px;
+	@extend .ico-sort-down;
+
 	height: 16px;
 	width: 16px;
 }
@@ -2345,7 +2340,9 @@ li.ui-draggable-dragging {
 			a.select2-search-choice-close {
 				opacity: .4;
 				display: initial;
-				background: $url_0 no-repeat 60% 40%;
+
+				@extend .icon;
+				@extend .ico-close;
 
 				&:hover {
 					opacity: 1;
