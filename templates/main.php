@@ -98,7 +98,7 @@
             </li>
             <li class="newList handler" ng-class="{edit: status.addingList}">
                 <a class="addlist" ng-click="startCreate()" oc-click-focus="{selector: '#newList', timeout: 0}">
-                    <span class="icon ico-add"></span>
+                    <span class="icon icon-add"></span>
                     <span class="title"><?php p($l->t('Add List...')); ?></span>
                 </a>
                 <div class="app-navigation-entry-edit name" ng-class="{error: nameError}">
@@ -131,7 +131,7 @@
                     </li>
                     <li ng-repeat="collection in collections">
                         <div class="label-container">
-                            <span class="icon collection-{{ collection.id }}"><text ng-show="collection.id=='today'"><?php p($_['DOM']); ?></text></span>
+                            <span class="icon {{ collection.icon }}"><text ng-show="collection.id=='today'"><?php p($_['DOM']); ?></text></span>
                             <label for="visibilityCollection-{{collection.id}}" class="title">{{ collection.displayname }}</label>
                         </div>
                         <select id="visibilityCollection-{{collection.id}}" ng-change="setVisibility(collection.id)" ng-model="collection.show" ng-options="collectionOption.id as collectionOption.name for collectionOption in collectionOptions"></select>
@@ -159,7 +159,7 @@
                 <div class="app-navigation-entry-utils-menu-button" title="<?php p($l->t('Change sort order')); ?>">
                     <button class="sortorder-dropdown-button">
                         <span class="icon" ng-class="getSortOrderIcon()"></span>
-                        <span class="icon sort-indicator" ng-class="{'ico-sort-up': settingsmodel.getById('various').sortDirection, 'ico-sort-down': !settingsmodel.getById('various').sortDirection}"></span>
+                        <span class="icon sort-indicator" ng-class="{'icon-sort-up': settingsmodel.getById('various').sortDirection, 'icon-sort-down': !settingsmodel.getById('various').sortDirection}"></span>
                     </button>
                 </div>
             </div>
@@ -167,44 +167,44 @@
                 <ul>
                     <li ng-click="setSortOrder($event, 'default')" ng-class="{active: settingsmodel.getById('various').sortOrder == 'default'}" class="handler">
                         <a>
-                            <span class="icon ico-menu"></span>
+                            <span class="icon icon-menu"></span>
                             <span class="label"><?php p($l->t('Default')); ?></span>
-                            <span class="icon sort-indicator" ng-class="{'ico-sort-up': settingsmodel.getById('various').sortDirection, 'ico-sort-down': !settingsmodel.getById('various').sortDirection}"></span>
+                            <span class="icon sort-indicator" ng-class="{'icon-sort-up': settingsmodel.getById('various').sortDirection, 'icon-sort-down': !settingsmodel.getById('various').sortDirection}"></span>
                         </a>
                     </li>
                     <li ng-click="setSortOrder($event, 'due')" ng-class="{active: settingsmodel.getById('various').sortOrder == 'due'}">
                         <a>
-                            <span class="icon ico-calendar"></span>
+                            <span class="icon icon-calendar"></span>
                             <span class="label"><?php p($l->t('Due date')); ?></span>
-                            <span class="icon sort-indicator" ng-class="{'ico-sort-up': settingsmodel.getById('various').sortDirection, 'ico-sort-down': !settingsmodel.getById('various').sortDirection}"></span>
+                            <span class="icon sort-indicator" ng-class="{'icon-sort-up': settingsmodel.getById('various').sortDirection, 'icon-sort-down': !settingsmodel.getById('various').sortDirection}"></span>
                         </a>
                     </li>
                     <li ng-click="setSortOrder($event, 'start')" ng-class="{active: settingsmodel.getById('various').sortOrder == 'start'}">
                         <a>
-                            <span class="icon ico-calendar"></span>
+                            <span class="icon icon-calendar"></span>
                             <span class="label"><?php p($l->t('Start date')); ?></span>
-                            <span class="icon sort-indicator" ng-class="{'ico-sort-up': settingsmodel.getById('various').sortDirection, 'ico-sort-down': !settingsmodel.getById('various').sortDirection}"></span>
+                            <span class="icon sort-indicator" ng-class="{'icon-sort-up': settingsmodel.getById('various').sortDirection, 'icon-sort-down': !settingsmodel.getById('various').sortDirection}"></span>
                         </a>
                     </li>
                     <li ng-click="setSortOrder($event, 'priority')" ng-class="{active: settingsmodel.getById('various').sortOrder == 'priority'}">
                         <a>
-                            <span class="icon ico-star"></span>
+                            <span class="icon icon-task-star"></span>
                             <span class="label"><?php p($l->t('Priority')); ?></span>
-                            <span class="icon sort-indicator" ng-class="{'ico-sort-up': settingsmodel.getById('various').sortDirection, 'ico-sort-down': !settingsmodel.getById('various').sortDirection}"></span>
+                            <span class="icon sort-indicator" ng-class="{'icon-sort-up': settingsmodel.getById('various').sortDirection, 'icon-sort-down': !settingsmodel.getById('various').sortDirection}"></span>
                         </a>
                     </li>
                     <li ng-click="setSortOrder($event, 'alphabetically')" ng-class="{active: settingsmodel.getById('various').sortOrder == 'alphabetically'}">
                         <a>
-                            <span class="icon ico-alphabetically"></span>
+                            <span class="icon icon-alphabetically"></span>
                             <span class="label"><?php p($l->t('Alphabetically')); ?></span>
-                            <span class="icon sort-indicator" ng-class="{'ico-sort-up': settingsmodel.getById('various').sortDirection, 'ico-sort-down': !settingsmodel.getById('various').sortDirection}"></span>
+                            <span class="icon sort-indicator" ng-class="{'icon-sort-up': settingsmodel.getById('various').sortDirection, 'icon-sort-down': !settingsmodel.getById('various').sortDirection}"></span>
                         </a>
                     </li>
 <!--                     <li ng-click="setSortOrder($event, 'manual')" ng-class="{active: settingsmodel.getById('various').sortOrder == 'manual'}">
                         <a>
-                            <span class="icon ico-manual"></span>
+                            <span class="icon icon-manual"></span>
                             <span class="label"><?php p($l->t('Manually')); ?></span>
-                            <span class="icon sort-indicator" ng-class="{'ico-sort-up': settingsmodel.getById('various').sortDirection, 'ico-sort-down': !settingsmodel.getById('various').sortDirection}"></span>
+                            <span class="icon sort-indicator" ng-class="{'icon-sort-up': settingsmodel.getById('various').sortDirection, 'icon-sort-down': !settingsmodel.getById('various').sortDirection}"></span>
                         </a>
                     </li> -->
                 </ul>

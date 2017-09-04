@@ -135,7 +135,7 @@ $font_3: Sans-Serif;
 //.ui-datepicker .ui-icon-circle-triangle-w, .ui-timepicker .ui-icon-circle-triangle-w
 %extend_8 {
 	@extend .icon;
-	@extend .ico-sort-up;
+	@extend .icon-sort-up;
 
 	height: 16px;
 	width: 16px;
@@ -145,7 +145,7 @@ $font_3: Sans-Serif;
 //.ui-datepicker .ui-icon-circle-triangle-e, .ui-timepicker .ui-icon-circle-triangle-e
 %extend_9 {
 	@extend .icon;
-	@extend .ico-sort-down;
+	@extend .icon-sort-down;
 
 	height: 16px;
 	width: 16px;
@@ -301,13 +301,7 @@ $font_3: Sans-Serif;
 			border-left: 1px dotted $color_silver_chalice_approx;
 		}
 
-		&.ico-star {
-			float: right;
-		}
-
-		&.ico-add {
-			float: right;
-
+		&.icon-add {
 			&:hover {
 				opacity: 1;
 			}
@@ -371,7 +365,7 @@ $font_3: Sans-Serif;
 		margin: 10px;
 	}
 
-	&.attachment .icon.ico-note {
+	&.attachment .icon.icon-note {
 		display: inline-block;
 		float: right;
 	}
@@ -478,7 +472,7 @@ $font_3: Sans-Serif;
 	}
 
 	.app-navigation-entry-edit {
-		input.ico-close {
+		input.icon-close {
 			width: 36px;
 			height: 38px;
 			float: left;
@@ -612,6 +606,38 @@ $font_3: Sans-Serif;
 .app-navigation-entry-menu {
 	&.sortorder-dropdown li > a span {
 		opacity: 1 !important;
+
+		&[class*=" icon-"] {
+			padding: 0;
+
+			&.icon-menu {
+				@extend .icon-menu;
+			}
+
+			&.icon-calendar {
+				@extend .icon-calendar;
+			}
+
+			&.icon-task-star {
+				@extend .icon-task-star;
+			}
+
+			&.icon-alphabetically {
+				@extend .icon-alphabetically;
+			}
+
+			&.icon-manual {
+				@extend .icon-manual;
+			}
+
+			&.icon-sort-up {
+				@extend .icon-sort-up;
+			}
+
+			&.icon-sort-down {
+				@extend .icon-sort-down;
+			}
+		}
 	}
 
 	li > a {
@@ -635,19 +661,20 @@ $font_3: Sans-Serif;
 	color: $color_masala_approx;
 }
 
+#collection_today > a > span.icon,
+#app-settings .label-container span.icon {
+	font-size: 7px;
+	font-weight: bold;
+	line-height: 21px;
+	text-align: center;
+}
+
 .icon {
 	height: 16px;
 	width: 16px;
 	display: inline-block;
 	vertical-align: middle;
 	opacity: .5;
-
-	&.ico-calendar {
-		font-size: 7px;
-		font-weight: bold;
-		line-height: 21px;
-		text-align: center;
-	}
 
 	&.input-date {
 		display: none;
@@ -671,7 +698,7 @@ $font_3: Sans-Serif;
 	&.task-checkbox {
 		@extend %extend_1;
 
-		&:not(.ico-checkmark) {
+		&:not(.icon-checkmark) {
 			background: unset;
 		}
 
@@ -687,7 +714,7 @@ $font_3: Sans-Serif;
 	&.detail-checkbox {
 		@extend %extend_1;
 
-		&:not(.ico-checkmark) {
+		&:not(.icon-checkmark) {
 			background: unset;
 		}
 
@@ -700,11 +727,11 @@ $font_3: Sans-Serif;
 		}
 	}
 
-	&.ico-note {
+	&.icon-note {
 		display: none;
 	}
 
-	&.subtasks {
+	&.right {
 		float: right;
 	}
 
@@ -719,7 +746,7 @@ $font_3: Sans-Serif;
 		width: 20px;
 	}
 
-	&.ico-checkmark {
+	&.icon-checkmark {
 		opacity: 1;
 	}
 
@@ -764,7 +791,7 @@ $font_3: Sans-Serif;
 		}
 	}
 
-	&.ico-tag-active {
+	&.icon-tag-active {
 		opacity: 1;
 	}
 }
@@ -819,7 +846,7 @@ $font_3: Sans-Serif;
 		}
 	}
 
-	.ico-star:hover {
+	.task-star .icon:hover {
 		opacity: .7;
 	}
 
@@ -834,15 +861,15 @@ $font_3: Sans-Serif;
 	}
 }
 
-.ico-star-low {
+.icon-task-star-low {
 	opacity: 1 !important;
 }
 
-.ico-star-medium {
+.icon-task-star-medium {
 	opacity: 1 !important;
 }
 
-.ico-star-high {
+.icon-task-star-high {
 	opacity: 1 !important;
 }
 
@@ -1488,7 +1515,7 @@ a {
 						}
 					}
 
-					.icon.ico-percent {
+					.icon.icon-percent {
 						opacity: 1;
 					}
 
@@ -1620,11 +1647,11 @@ a {
 
 .date {
 	.icon {
-		&.ico-calendar-due {
+		&.icon-calendar-due {
 			opacity: 1;
 		}
 
-		&.ico-calendar-overdue {
+		&.icon-calendar-overdue {
 			opacity: 1;
 		}
 	}
@@ -2098,7 +2125,7 @@ ol[dnd-list] {
 			&.randomcolour {
 				cursor: pointer;
 
-				.ico-random {
+				.icon-random {
 					filter: invert(1);
 					opacity: 1;
 				}
@@ -2199,7 +2226,7 @@ li.ui-draggable-dragging {
 				display: initial;
 
 				@extend .icon;
-				@extend .ico-close;
+				@extend .icon-close;
 
 				&:hover {
 					opacity: 1;

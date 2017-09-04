@@ -368,15 +368,15 @@
 				switch (_$scope.settingsmodel.getById('various').sortOrder) {
 					case 'due':
 					case 'start':
-						return 'ico-calendar';
+						return 'icon-calendar';
 					case 'priority':
-						return 'ico-star';
+						return 'icon-star';
 					case 'alphabetically':
-						return 'ico-alphabetically';
+						return 'icon-alphabetically';
 					case 'manual':
-						return 'ico-manual';
+						return 'icon-manual';
 					default:
-						return 'ico-menu';
+						return 'icon-menu';
 				}
 			};
 
