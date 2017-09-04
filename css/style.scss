@@ -280,8 +280,10 @@ $url_0: url(../img/sprites.svg);
 //original selectors
 //.ui-datepicker .ui-icon-circle-triangle-w, .ui-timepicker .ui-icon-circle-triangle-w
 %extend_8 {
-	background-image: $url_0;
-	background-position: -32px -64px;
+	@extend .icon;
+	@extend .ico-sort-down;
+	// background-image: $url_0;
+	// background-position: -32px -64px;
 	height: 16px;
 	width: 16px;
 }
@@ -289,8 +291,10 @@ $url_0: url(../img/sprites.svg);
 //original selectors
 //.ui-datepicker .ui-icon-circle-triangle-e, .ui-timepicker .ui-icon-circle-triangle-e
 %extend_9 {
-	background-image: $url_0;
-	background-position: -16px -64px;
+	@extend .icon;
+	@extend .ico-sort-up;
+	// background-image: $url_0;
+	// background-position: -16px -64px;
 	height: 16px;
 	width: 16px;
 }
@@ -815,11 +819,11 @@ $url_0: url(../img/sprites.svg);
 	&.task-checkbox {
 		@extend %extend_1;
 
-		&:not(&.ico-checkmark) {
+		&:not(.ico-checkmark) {
 			background: unset;
 		}
 
-		&:not(&.disabled):hover {
+		&:not(.disabled):hover {
 			border-color: $black;
 		}
 
@@ -831,11 +835,11 @@ $url_0: url(../img/sprites.svg);
 	&.detail-checkbox {
 		@extend %extend_1;
 
-		&:not(&.ico-checkmark) {
+		&:not(.ico-checkmark) {
 			background: unset;
 		}
 
-		&:not(&.disabled):hover {
+		&:not(.disabled):hover {
 			border-color: $black;
 		}
 
@@ -988,6 +992,193 @@ $url_0: url(../img/sprites.svg);
 
 .ico-star-high {
 	opacity: 1 !important;
+}
+
+a {
+	&.detail-star {
+		padding: 15px;
+		margin-left: auto;
+		float: right;
+
+		.icon {
+			height: 24px;
+			width: 24px;
+			background-size: 144px 144px;
+			opacity: .3;
+
+			&:hover {
+				opacity: .5;
+			}
+		}
+	}
+
+	&:hover .icon {
+		&.detail-trash {
+			opacity: 1;
+		}
+
+		&.detail-settings {
+			opacity: 1;
+		}
+
+		&.detail-delete {
+			opacity: .8;
+		}
+
+		&.detail-close {
+			opacity: 1;
+		}
+
+		&.input-date {
+			opacity: .8;
+		}
+
+		&.input-star {
+			opacity: 1;
+		}
+	}
+}
+
+.calendar-indicator {
+	min-width: 12px;
+	min-height: 12px;
+	background-color: $red;
+	display: inline-block;
+	height: 12px;
+	width: 12px;
+	margin-top: 0;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 50%;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 20px;
+	margin-left: 4px;
+	margin-right: 2px;
+}
+
+#app-content {
+	div {
+		&.content-wrapper {
+			padding: 6px 17px 75px;
+			//Instead of the line below you could use @include box-sizing($bs)
+			box-sizing: border-box;
+			height: 100%;
+			overflow: hidden;
+
+			.task-list {
+				height: 100%;
+				width: 100%;
+				overflow-y: auto;
+			}
+
+			.task-body .title-wrapper span.title a {
+				cursor: pointer;
+				text-decoration: underline;
+			}
+		}
+
+		&.task-list {
+			.loadmore {
+				font-size: 11px;
+				margin-top: 10px;
+				text-align: center;
+
+				span {
+					color: $color_star_dust_approx;
+					background-color: $color_gray_nurse_approx;
+					//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+					border-radius: 10px;
+					padding: 3px 6px;
+
+					&:hover {
+						cursor: pointer;
+						color: $color_fuscous_gray_approx;
+					}
+				}
+			}
+
+			.grouped-tasks {
+				position: relative;
+			}
+
+			.completed-hidden ol.completed-tasks {
+				display: none;
+			}
+		}
+	}
+
+	h2 {
+		font-weight: bold;
+		font-size: 13px;
+		margin-bottom: 10px;
+		margin-top: 20px !important;
+		//Instead of the line below you could use @include text-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+		text-shadow: 0 1px 0 $white;
+		word-wrap: break-word;
+		opacity: .5;
+
+		&:hover {
+			opacity: .7;
+		}
+
+		&.heading-hiddentasks {
+			display: inline-block;
+			padding-right: 16px;
+			background-position: right center;
+			cursor: pointer;
+		}
+	}
+
+	#add-task {
+		margin: 12px 0;
+		position: relative;
+		border: 1px solid $color_celeste_approx;
+		background: none repeat scroll 0 0 $color_gallery_approx;
+		width: calc(100% - 54px);
+		float: left;
+		height: 34px;
+
+		&.focus {
+			background-color: $white;
+		}
+
+		.icon {
+			position: absolute;
+			top: 6px;
+		}
+
+		input {
+			font-size: 13px;
+			width: 100%;
+			color: $color_fuscous_gray_approx;
+			border: medium none !important;
+			//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+			border-radius: 0 !important;
+			//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+			box-shadow: none !important;
+			padding: 0 60px 0 32px;
+			margin: 0;
+			cursor: text;
+			outline: none;
+			min-height: 32px;
+		}
+	}
+
+	.sortorder-dropdown-button {
+		background-color: $color_gallery_90_approx;
+		border: 1px solid $color_celeste_approx;
+		width: 42px;
+		height: 34px;
+		margin: 12px 0 12px 12px;
+		padding: 0;
+		float: right;
+		cursor: pointer;
+
+		.sort-indicator {
+			margin-left: 0;
+			visibility: visible;
+		}
+	}
 }
 
 #app-sidebar {
@@ -1571,193 +1762,6 @@ $url_0: url(../img/sprites.svg);
 			&.date:hover .icon.detail-delete {
 				display: none;
 			}
-		}
-	}
-}
-
-a {
-	&.detail-star {
-		padding: 15px;
-		margin-left: auto;
-		float: right;
-
-		.icon {
-			height: 24px;
-			width: 24px;
-			background-size: 144px 144px;
-			opacity: .3;
-
-			&:hover {
-				opacity: .5;
-			}
-		}
-	}
-
-	&:hover .icon {
-		&.detail-trash {
-			opacity: 1;
-		}
-
-		&.detail-settings {
-			opacity: 1;
-		}
-
-		&.detail-delete {
-			opacity: .8;
-		}
-
-		&.detail-close {
-			opacity: 1;
-		}
-
-		&.input-date {
-			opacity: .8;
-		}
-
-		&.input-star {
-			opacity: 1;
-		}
-	}
-}
-
-.calendar-indicator {
-	min-width: 12px;
-	min-height: 12px;
-	background-color: $red;
-	display: inline-block;
-	height: 12px;
-	width: 12px;
-	margin-top: 0;
-	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
-	border-radius: 50%;
-	text-align: center;
-	vertical-align: middle;
-	line-height: 20px;
-	margin-left: 4px;
-	margin-right: 2px;
-}
-
-#app-content {
-	div {
-		&.content-wrapper {
-			padding: 6px 17px 75px;
-			//Instead of the line below you could use @include box-sizing($bs)
-			box-sizing: border-box;
-			height: 100%;
-			overflow: hidden;
-
-			.task-list {
-				height: 100%;
-				width: 100%;
-				overflow-y: auto;
-			}
-
-			.task-body .title-wrapper span.title a {
-				cursor: pointer;
-				text-decoration: underline;
-			}
-		}
-
-		&.task-list {
-			.loadmore {
-				font-size: 11px;
-				margin-top: 10px;
-				text-align: center;
-
-				span {
-					color: $color_star_dust_approx;
-					background-color: $color_gray_nurse_approx;
-					//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
-					border-radius: 10px;
-					padding: 3px 6px;
-
-					&:hover {
-						cursor: pointer;
-						color: $color_fuscous_gray_approx;
-					}
-				}
-			}
-
-			.grouped-tasks {
-				position: relative;
-			}
-
-			.completed-hidden ol.completed-tasks {
-				display: none;
-			}
-		}
-	}
-
-	h2 {
-		font-weight: bold;
-		font-size: 13px;
-		margin-bottom: 10px;
-		margin-top: 20px !important;
-		//Instead of the line below you could use @include text-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-		text-shadow: 0 1px 0 $white;
-		word-wrap: break-word;
-		opacity: .5;
-
-		&:hover {
-			opacity: .7;
-		}
-
-		&.heading-hiddentasks {
-			display: inline-block;
-			padding-right: 16px;
-			background-position: right center;
-			cursor: pointer;
-		}
-	}
-
-	#add-task {
-		margin: 12px 0;
-		position: relative;
-		border: 1px solid $color_celeste_approx;
-		background: none repeat scroll 0 0 $color_gallery_approx;
-		width: calc(100% - 54px);
-		float: left;
-		height: 34px;
-
-		&.focus {
-			background-color: $white;
-		}
-
-		.icon {
-			position: absolute;
-			top: 6px;
-		}
-
-		input {
-			font-size: 13px;
-			width: 100%;
-			color: $color_fuscous_gray_approx;
-			border: medium none !important;
-			//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
-			border-radius: 0 !important;
-			//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-			box-shadow: none !important;
-			padding: 0 60px 0 32px;
-			margin: 0;
-			cursor: text;
-			outline: none;
-			min-height: 32px;
-		}
-	}
-
-	.sortorder-dropdown-button {
-		background-color: $color_gallery_90_approx;
-		border: 1px solid $color_celeste_approx;
-		width: 42px;
-		height: 34px;
-		margin: 12px 0 12px 12px;
-		padding: 0;
-		float: right;
-		cursor: pointer;
-
-		.sort-indicator {
-			margin-left: 0;
-			visibility: visible;
 		}
 	}
 }
