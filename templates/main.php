@@ -10,7 +10,6 @@
     script('tasks', 'vendor_legacy/jquery-timepicker/jquery.ui.timepicker');
     script('tasks', 'vendor/ical.js/build/ical');
     style('tasks', 'style');
-    style('tasks', 'sprite');
     style('tasks', 'vendor/angularui/ui-select/select2');
 ?>
 

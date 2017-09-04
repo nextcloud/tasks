@@ -61,8 +61,8 @@ const svgConfig = {
 			prefix: '.ico-%s',
 			sprite: "../img/sprites.svg",
 			render: {
-				css: {
-					dest: "../css/sprite.css"
+				scss: {
+					dest: "../css/src/sprite.scss"
 				}
 			}
 		}
@@ -92,8 +92,7 @@ gulp.task('build', ['lint'], () => {
 		.pipe(gulp.dest(destinationFolder));
 });
 
-// gulp.task('default', ['build', 'vendor', 'scsslint', 'scssConcat']);
-gulp.task('default', ['build', 'vendor', 'svg_sprite']);
+gulp.task('default', ['build', 'vendor', 'scsslint', 'scssConcat']);
 
 gulp.task('lint', () => {
 	return gulp.src(lintSources)
@@ -118,7 +117,7 @@ gulp.task('scssConcat', ['svg_sprite'], () => {
 		.pipe(gulp.dest(scssDestinationFolder));
 });
 
-gulp.task('scssConcatWatch', () => {
+gulp.task('scssConcatWatch', ['scsslint'], () => {
 	return gulp.src(scssSources)
 		.pipe(concat(scssBuildTarget))
 		.pipe(gulp.dest(scssDestinationFolder));
