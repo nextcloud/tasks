@@ -52,26 +52,26 @@
                 <div class="app-navigation-entry-utils">
                     <ul>
                         <li class="app-navigation-entry-utils-counter">{{ getListCount(calendar.uri,'all') | counterFormatter }}</li>
-                        <li class="app-navigation-entry-utils-menu-button svg" ng-show="calendar.writable"><button></button></li>
+                        <li class="app-navigation-entry-utils-menu-button" ng-show="calendar.writable"><button></button></li>
                     </ul>
                 </div>
                 <div class="app-navigation-entry-menu" ng-show="calendar.writable">
                     <ul>
                         <li>
                             <a ng-click="startEdit(calendar)">
-                                <span class="icon-rename svg"></span>
+                                <span class="icon-rename"></span>
                                 <span><?php p($l->t('Edit')); ?></span>
                             </a>
                         </li>
                         <li>
                             <a ng-click="showCalDAVUrl(calendar)">
-                                <span class="icon-public svg"></span>
+                                <span class="icon-public"></span>
                                 <span><?php p($l->t('Link')); ?></span>
                             </a>
                         </li>
                         <li>
                             <a href="{{calendar.exportUrl}}" download="{{calendar.uri}}.ics">
-                                <span class="icon-download svg"></span>
+                                <span class="icon-download"></span>
                                 <span><?php p($l->t('Download')); ?></span>
                             </a>
                         </li>
@@ -82,8 +82,8 @@
                 <div class="app-navigation-entry-edit name" ng-class="{error: nameError}">
                     <form>
                         <input ng-model="calendar.displayname" class="edit hasTooltip" type="text" ng-keyup="checkEdit($event,calendar)" autofocus-on-insert>
-                        <input type="cancel" value="" class="action icon-close svg" ng-click="cancelEdit(calendar)" title="<?php p($l->t('Cancel')); ?>">
-                        <input type="submit" value="" class="action icon-checkmark svg" ng-click="saveEdit(calendar)" title="<?php p($l->t('Save')); ?>">
+                        <input type="cancel" value="" class="action icon-close" ng-click="cancelEdit(calendar)" title="<?php p($l->t('Cancel')); ?>">
+                        <input type="submit" value="" class="action icon-checkmark" ng-click="saveEdit(calendar)" title="<?php p($l->t('Save')); ?>">
                     </form>
                     <colorpicker class="colorpicker"
                                  selected="calendar.color">
@@ -92,7 +92,7 @@
                 <div class="app-navigation-entry-edit caldav">
                     <form>
                         <input class="caldav" ng-value="calendar.caldav" readonly type="text"/>
-                        <input type="cancel" value="" class="action icon-close svg" ng-click="hideCalDAVUrl()" title="<?php p($l->t('Cancel')); ?>">
+                        <input type="cancel" value="" class="action icon-close" ng-click="hideCalDAVUrl()" title="<?php p($l->t('Cancel')); ?>">
                     </form>
                 </div>
             </li>
@@ -105,8 +105,8 @@
                     <form ng-disabled="isAddingList">
                         <input id="newList" ng-model="status.newListName" class="edit hasTooltip" type="text" autofocus-on-insert
                         placeholder="<?php p($l->t('New List')); ?>" ng-keyup="checkNew($event,status.newListName)">
-                        <input type="cancel" value="" class="action icon-close svg" ng-click="cancelCreate()" title="<?php p($l->t('Cancel')); ?>">
-                        <input type="submit" value="" class="action icon-checkmark svg" ng-click="create($event)" title="<?php p($l->t('Save')); ?>">
+                        <input type="cancel" value="" class="action icon-close" ng-click="cancelCreate()" title="<?php p($l->t('Cancel')); ?>">
+                        <input type="submit" value="" class="action icon-checkmark" ng-click="create($event)" title="<?php p($l->t('Save')); ?>">
                     </form>
                     <colorpicker class="colorpicker"
                                  selected="color">

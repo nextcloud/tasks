@@ -142,69 +142,24 @@
 
 
 //colors
-$blue: #00f;
-$color_masala_approx: #423e3e;
-$color_silver_chalice_approx: #b0b0b0;
+$red: #f00;								// warnings and errors
+$red_overdue: #b3312d;		// overdue dates and high importance
+$yellow: #fd0;						// medium importance
+$blue_due: #4271a6;				// due dates and low importance
+$blue_background: #168ad4;// highlighting date/timepicker dates
+$gray_dark: #404040;			// text
+$gray: #a0a0a0;						// inactive text, checkbox-borders and separators
+$gray_light: #ccc;
+$gray_easy: #f7f7f7;
 $black: #000;
-$red: #f00;
 $white: #fff;
-$color_celeste_approx: #ccc;
-$color_fuscous_gray_approx: #505050;
-$color_desert_storm_approx: #f8f8f8;
-$white_80: rgba(255, 255, 255, .8);
-$color_calypso_approx: #3b6594;
-$color_well_read_approx: #b3312d;
-$color_suva_gray_approx: #888;
-$color_gallery_approx: #eee;
-$color_gallery_90_approx: rgba(240, 240, 240, .9);
-$color_star_dust_approx: #a0a0a0;
-$color_gray_nurse_approx: #e9e9e9;
-$color_quill_gray_approx: #d3d3d3;
-$white_50: rgba(255, 255, 255, .5);
-$color_silver_approx: #bdbcbb;
-$black_10: rgba(0, 0, 0, .1);
-$color_pink_swan_approx: #bbb;
-$color_picton_blue_approx: #5cb6e7;
-$color_mariner_approx: #317cd7;
-$color_wild_sand_approx: #f5f5f5;
-$black_24: rgba(0, 0, 0, .24);
-$color_kangaroo_approx: #c9c8bd;
-$color_curious_blue_65_approx: rgba(43, 136, 217, .65);
-$color_curious_blue_32_approx: rgba(43, 136, 217, .32);
-$white_43: rgba(255, 255, 255, .43);
-$color_curious_blue_12_approx: rgba(43, 136, 217, .12);
-$color_curious_blue_20_approx: rgba(43, 136, 217, .2);
-$color_san_marino_approx: #4271a6;
-$color_school_bus_yellow_approx: #fd0;
-$black_25: rgba(0, 0, 0, .25);
-$color_matisse_approx: #0c67a5;
-$white_30: rgba(255, 255, 255, .3);
-$black_50: rgba(0, 0, 0, .5);
-$color_alabaster_approx: #f9f9f9;
-$color_curious_blue_approx: #168ad4;
-$black_40: rgba(0, 0, 0, .4);
-$color_delta_approx: #a3a3a3;
-$color_tapa_approx: #737272;
-$black_20: rgba(0, 0, 0, .2);
-$color_mountain_mist_approx: #909090;
-$color_alto_approx: #ddd;
-$color_mine_shaft_approx: #333;
-$color_alizarin_crimson_approx: #e9322d;
-$color_sundown_approx: #f8b9b7;
-
-//fonts
-$font_0: Helvetica Neue;
-$font_1: Helvetica;
-$font_2: Arial;
-$font_3: Sans-Serif;
 
 //@extend-elements
 //original selectors
 //.icon.task-checkbox, .icon.detail-checkbox
 %extend_1 {
-	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
 	border-radius: 3px;
-	border: 1px solid $color_silver_chalice_approx;
+	border: 1px solid $gray;
 	float: left;
 	margin: 9px;
 }
@@ -212,7 +167,6 @@ $font_3: Sans-Serif;
 //original selectors
 //#app-sidebar div.content-wrapper .title textarea, #app-sidebar div.content-wrapper .title pre
 %extend_2 {
-	//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
 	box-shadow: none;
 	font-size: 16px;
 	font-weight: bold;
@@ -227,7 +181,6 @@ $font_3: Sans-Serif;
 //original selectors
 //#app-sidebar div.content-wrapper .body .note .expandingArea textarea, #app-sidebar div.content-wrapper .body .note .expandingArea pre
 %extend_3 {
-	//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
 	box-shadow: none;
 	background: none repeat scroll 0 0 transparent;
 	border: medium none;
@@ -239,167 +192,13 @@ $font_3: Sans-Serif;
 }
 
 //original selectors
-//#app-sidebar div.content-wrapper .body .note .note-body, #app-sidebar div.content-wrapper .body .note .note-edit
-%extend_4 {
-	cursor: text;
-	min-height: 140px;
-	word-wrap: break-word;
-}
-
-//original selectors
-//.ui-datepicker .ui-widget-header, .ui-timepicker .ui-widget-header
-%extend_5 {
-	background: none repeat scroll 0 0 transparent;
-	border: none;
-	color: $color_masala_approx;
-	font-weight: 600;
-	font-size: 12px;
-}
-
-//original selectors
-//.ui-datepicker .ui-datepicker-next, .ui-timepicker .ui-datepicker-next, .ui-datepicker .ui-datepicker-next-hover, .ui-timepicker .ui-datepicker-next-hover
-%extend_6 {
-	right: 2px;
-	top: 2px;
-	background: none;
-	border: none;
-}
-
-//original selectors
-//.ui-datepicker .ui-datepicker-prev, .ui-timepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-prev-hover, .ui-timepicker .ui-datepicker-prev-hover
-%extend_7 {
-	left: 2px;
-	top: 2px;
-	background: none;
-	border: none;
-}
-
-//original selectors
-//.ui-datepicker .ui-icon-circle-triangle-w, .ui-timepicker .ui-icon-circle-triangle-w
-%extend_8 {
-	@extend .icon;
-	@extend .icon-sort-up;
-
-	height: 16px;
-	width: 16px;
-}
-
-//original selectors
-//.ui-datepicker .ui-icon-circle-triangle-e, .ui-timepicker .ui-icon-circle-triangle-e
-%extend_9 {
-	@extend .icon;
-	@extend .icon-sort-down;
-
-	height: 16px;
-	width: 16px;
-}
-
-//original selectors
-//.ui-datepicker table thead th, .ui-timepicker table thead th
-%extend_10 {
-	color: $color_delta_approx;
-	font-size: 9px;
-	height: auto;
-	padding: 4px 0;
-	text-align: center;
-	text-transform: uppercase;
-}
-
-//original selectors
 //.ui-datepicker table td.selected a, .ui-timepicker table td.selected a
 %extend_11 {
-	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	background: linear-gradient(to top, rgba($blue_background, .8), rgba($blue_background, .6)) repeat scroll 0 0 transparent !important;
 	border-radius: 3px;
-	color: $white;
+	color: $white !important;
 	opacity: 1;
 	position: relative;
-	//Instead of the line below you could use @include text-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-	text-shadow: 0 1px 1px $black_40;
-}
-
-//original selectors
-//.ui-datepicker table a.ui-state-default, .ui-timepicker table a.ui-state-default
-%extend_12 {
-	border: none;
-	background: none repeat scroll 0 0 transparent;
-	color: $color_tapa_approx;
-	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
-	border-radius: 3px;
-	cursor: pointer;
-	display: block;
-	font-size: 12px;
-	font-weight: 500;
-	padding: 2px 0;
-	margin: 1px;
-	text-align: center;
-}
-
-//original selectors
-//div.ui-datepicker, div.ui-timepicker
-%extend_13 {
-	background: none repeat scroll 0 0 $color_alabaster_approx;
-	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
-	border-radius: 4px;
-	//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-	box-shadow: 0 1px 6px $black_50;
-	color: $color_masala_approx;
-	max-width: 304px;
-	min-height: 15px;
-	min-width: 150px;
-	position: absolute;
-	z-index: 1000;
-	margin-top: 9px;
-	padding: 8px;
-}
-
-//original selectors
-//div.ui-datepicker .arrow, div.ui-timepicker .arrow
-%extend_14 {
-	border-color: transparent transparent $color_alabaster_approx;
-	left: 50%;
-	margin-left: -12px;
-	top: -24px;
-	border-style: solid;
-	border-width: 12px;
-	height: 0;
-	position: absolute;
-	width: 0;
-	z-index: 100;
-}
-
-//original selectors
-//div.ui-datepicker:after, div.ui-timepicker:after
-%extend_15 {
-	border-bottom: 9px solid $color_alabaster_approx;
-	border-left: 9px solid rgba(0, 0, 0, 0);
-	border-right: 9px solid rgba(0, 0, 0, 0);
-	content: "";
-	display: inline-block;
-	left: 46%;
-	position: absolute;
-	top: -9px;
-}
-
-//original selectors
-//div.ui-datepicker:before, div.ui-timepicker:before
-%extend_16 {
-	border-bottom: 9px solid $black_20;
-	border-left: 9px solid rgba(0, 0, 0, 0);
-	border-right: 9px solid rgba(0, 0, 0, 0);
-	content: "";
-	display: inline-block;
-	left: 46%;
-	position: absolute;
-	top: -9px;
-}
-
-//original selectors
-//.confirmation-confirm, .confirmation-abort
-%extend_17 {
-	width: 50% !important;
-	display: none !important;
-	padding-right: 0 !important;
-	background-position: center !important;
 }
 
 * {
@@ -420,13 +219,8 @@ $font_3: Sans-Serif;
 	position: relative;
 	border-style: solid;
 	border-width: 1px;
-	border-color: $color_celeste_approx;
+	border-color: $gray_light;
 	overflow: hidden;
-
-	&.changeParent {
-		border-color: $blue !important;
-		z-index: 100 !important;
-	}
 
 	.icon {
 		&.large {
@@ -441,7 +235,7 @@ $font_3: Sans-Serif;
 			top: 1px;
 			background: unset;
 			width: 2px;
-			border-left: 1px dotted $color_silver_chalice_approx;
+			border-left: 1px dotted $gray;
 		}
 
 		&.icon-add {
@@ -460,16 +254,16 @@ $font_3: Sans-Serif;
 	}
 
 	&:hover {
-		background-color: $color_desert_storm_approx;
+		background-color: $gray_easy;
 	}
 
 	&.active {
-		background-color: $color_desert_storm_approx;
+		background-color: $gray_easy;
 	}
 
 	.title-wrapper {
 		cursor: pointer;
-		color: $color_masala_approx;
+		color: $gray_dark;
 		display: block;
 		line-height: 16px;
 		margin: 0 0 0 44px;
@@ -477,8 +271,6 @@ $font_3: Sans-Serif;
 		padding: 9px 0;
 		position: relative;
 		text-overflow: ellipsis;
-		//Instead of the line below you could use @include text-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-		text-shadow: 0 1px 0 $white_80;
 		white-space: nowrap;
 
 		.title {
@@ -487,21 +279,19 @@ $font_3: Sans-Serif;
 	}
 
 	.duedate {
-		color: $color_calypso_approx;
+		color: $blue_due;
 		float: right;
 		font-size: 11px;
 		line-height: 14px;
 		margin: 10px;
-		//Instead of the line below you could use @include text-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-		text-shadow: 0 1px 0 $white_80;
 
 		&.overdue {
-			color: $color_well_read_approx;
+			color: $red_overdue;
 		}
 	}
 
 	.listname {
-		color: $color_suva_gray_approx;
+		color: $gray;
 		float: right;
 		font-size: 11px;
 		line-height: 14px;
@@ -524,7 +314,6 @@ $font_3: Sans-Serif;
 
 #app-navigation {
 	li {
-		//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
 		transition: max-height 300ms ease 0s;
 		max-height: 100px;
 
@@ -615,20 +404,18 @@ $font_3: Sans-Serif;
 	}
 
 	.app-navigation-entry-edit {
-		input.icon-close {
+		input.action {
+			background-color: $gray_easy;
 			width: 36px;
-			height: 38px;
-			float: left;
-			margin: 3px 0;
 			border-left: 0 none;
-			background-color: $color_gallery_90_approx;
-			//Instead of the line below you could use @include border-top-left-radius($radius)
 			border-top-left-radius: 0;
-			//Instead of the line below you could use @include border-bottom-left-radius($radius)
 			border-bottom-left-radius: 0;
+			background-position: center;
 
 			&:hover {
-				background-color: $white;
+				border-left: 1px solid;
+				margin-left: -1px;
+				width: 37px;
 			}
 		}
 
@@ -801,7 +588,7 @@ $font_3: Sans-Serif;
 
 #content {
 	overflow: hidden;
-	color: $color_masala_approx;
+	color: $gray_dark;
 }
 
 #collection_today > a > span.icon,
@@ -822,7 +609,6 @@ $font_3: Sans-Serif;
 	&.input-date {
 		display: none;
 		opacity: .4;
-		//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
 		transition: opacity 100ms ease 0s;
 		right: 35px;
 		top: 7px;
@@ -838,22 +624,7 @@ $font_3: Sans-Serif;
 		}
 	}
 
-	&.task-checkbox {
-		@extend %extend_1;
-
-		&:not(.icon-checkmark) {
-			background: unset;
-		}
-
-		&:not(.disabled):hover {
-			border-color: $black;
-		}
-
-		&.disabled {
-			cursor: not-allowed;
-		}
-	}
-
+	&.task-checkbox,
 	&.detail-checkbox {
 		@extend %extend_1;
 
@@ -879,7 +650,6 @@ $font_3: Sans-Serif;
 	}
 
 	&.detail-settings {
-		//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
 		transition: opacity 100ms ease 0s;
 		opacity: .6;
 	}
@@ -968,18 +738,15 @@ $font_3: Sans-Serif;
 
 	&.add-subtask {
 		background: $white;
-		border: 1px solid $color_celeste_approx;
+		border: 1px solid $gray_light;
 
 		input {
 			background: transparent none repeat scroll 0 0 !important;
 			border: medium none !important;
-			//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
 			border-radius: 0 !important;
-			//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
 			box-shadow: none !important;
-			//Instead of the line below you could use @include box-sizing($bs)
 			box-sizing: border-box;
-			color: $color_fuscous_gray_approx;
+			color: $gray_dark;
 			cursor: text;
 			font-size: 100%;
 			margin: 0;
@@ -998,20 +765,12 @@ $font_3: Sans-Serif;
 
 		.title {
 			text-decoration: line-through;
-			//Instead of the line below you could use @include text-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-			text-shadow: none;
 		}
 	}
 }
 
-.icon-task-star-low {
-	opacity: 1 !important;
-}
-
-.icon-task-star-medium {
-	opacity: 1 !important;
-}
-
+.icon-task-star-low,
+.icon-task-star-medium,
 .icon-task-star-high {
 	opacity: 1 !important;
 }
@@ -1035,28 +794,16 @@ a {
 	}
 
 	&:hover .icon {
-		&.detail-trash {
-			opacity: 1;
-		}
-
-		&.detail-settings {
-			opacity: 1;
-		}
-
-		&.detail-delete {
-			opacity: .8;
-		}
-
-		&.detail-close {
-			opacity: 1;
-		}
-
-		&.input-date {
-			opacity: .8;
-		}
-
+		&.detail-trash,
+		&.detail-settings,
+		&.detail-close,
 		&.input-star {
 			opacity: 1;
+		}
+
+		&.detail-delete,
+		&.input-date {
+			opacity: .8;
 		}
 	}
 }
@@ -1069,7 +816,6 @@ a {
 	height: 12px;
 	width: 12px;
 	margin-top: 0;
-	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
 	border-radius: 50%;
 	text-align: center;
 	vertical-align: middle;
@@ -1082,7 +828,6 @@ a {
 	div {
 		&.content-wrapper {
 			padding: 6px 17px 75px;
-			//Instead of the line below you could use @include box-sizing($bs)
 			box-sizing: border-box;
 			height: 100%;
 			overflow: hidden;
@@ -1106,15 +851,14 @@ a {
 				text-align: center;
 
 				span {
-					color: $color_star_dust_approx;
-					background-color: $color_gray_nurse_approx;
-					//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+					color: $gray;
+					background-color: $gray_easy;
 					border-radius: 10px;
 					padding: 3px 6px;
 
 					&:hover {
 						cursor: pointer;
-						color: $color_fuscous_gray_approx;
+						color: $gray_dark;
 					}
 				}
 			}
@@ -1134,8 +878,6 @@ a {
 		font-size: 13px;
 		margin-bottom: 10px;
 		margin-top: 20px !important;
-		//Instead of the line below you could use @include text-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-		text-shadow: 0 1px 0 $white;
 		word-wrap: break-word;
 		opacity: .5;
 
@@ -1154,8 +896,8 @@ a {
 	#add-task {
 		margin: 12px 0;
 		position: relative;
-		border: 1px solid $color_celeste_approx;
-		background: none repeat scroll 0 0 $color_gallery_approx;
+		border: 1px solid $gray_light;
+		background: none repeat scroll 0 0 $gray_light;
 		width: calc(100% - 54px);
 		float: left;
 		height: 34px;
@@ -1172,11 +914,9 @@ a {
 		input {
 			font-size: 13px;
 			width: 100%;
-			color: $color_fuscous_gray_approx;
+			color: $gray_dark;
 			border: medium none !important;
-			//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
 			border-radius: 0 !important;
-			//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
 			box-shadow: none !important;
 			padding: 0 60px 0 32px;
 			margin: 0;
@@ -1187,8 +927,8 @@ a {
 	}
 
 	.sortorder-dropdown-button {
-		background-color: $color_gallery_90_approx;
-		border: 1px solid $color_celeste_approx;
+		background-color: $gray_easy;
+		border: 1px solid $gray_light;
 		width: 42px;
 		height: 34px;
 		margin: 12px 0 12px 12px;
@@ -1223,7 +963,7 @@ a {
 
 		div {
 			&.notice {
-				color: $color_suva_gray_approx;
+				color: $gray;
 				font-size: 16px;
 				position: absolute;
 				text-align: center;
@@ -1232,10 +972,8 @@ a {
 			}
 
 			&.footer {
-				border-top: 1px solid $color_quill_gray_approx;
+				border-top: 1px solid $gray_light;
 				bottom: 0;
-				//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-				box-shadow: 0 1px 0 $white_50 inset;
 				height: 65px;
 				left: 0;
 				position: absolute;
@@ -1247,49 +985,6 @@ a {
 					left: 8px;
 				}
 
-				.detail-addcomment {
-					padding: 4px 10px 0;
-
-					input {
-						background: none repeat scroll 0 0 $white;
-						border: 1px solid $color_silver_approx;
-						//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
-						border-radius: 0;
-						//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-						box-shadow: 0 1px 2px $black_10 inset;
-						//Instead of the line below you could use @include box-sizing($bs)
-						box-sizing: border-box;
-						color: $color_masala_approx;
-						font-family: $font_0, $font_1, $font_2, $font_3;
-						font-size: 13px;
-						font-weight: 500;
-						margin-top: 2px;
-						outline: medium none;
-						padding: 4px;
-						//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
-						transition: all .2s ease-in-out 0s;
-					}
-
-					input[type="text"] {
-						width: 230px;
-					}
-
-					input[type="button"] {
-						float: right;
-						margin-right: 0;
-						color: $color_pink_swan_approx;
-						cursor: default;
-
-						&.active {
-							color: $white;
-							background: linear-gradient(to top, $color_picton_blue_approx 0, $color_mariner_approx 100%) repeat scroll 0 0 transparent;
-							//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
-							transition: none;
-							cursor: pointer;
-						}
-					}
-				}
-
 				.detail-close .icon {
 					left: auto;
 					right: 8px;
@@ -1298,15 +993,13 @@ a {
 		}
 
 		.title {
-			background-color: $color_wild_sand_approx;
-			border-bottom: 1px solid $black_24;
+			background-color: $gray_easy;
+			border-bottom: 1px solid $gray_light;
 			font-size: 16px;
 			font-weight: bold;
 			line-height: 24px;
 			min-height: 24px;
 			padding: 16px 55px 13px;
-			//Instead of the line below you could use @include text-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-			text-shadow: 0 1px 0 $white;
 			word-wrap: break-word;
 
 			.title-text {
@@ -1315,8 +1008,6 @@ a {
 
 				&.strike-through {
 					text-decoration: line-through;
-					//Instead of the line below you could use @include text-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-					text-shadow: none;
 				}
 
 				a {
@@ -1329,7 +1020,6 @@ a {
 				@extend %extend_2;
 
 				margin: 0;
-				//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
 				border-radius: 0;
 				height: 100%;
 				left: 0;
@@ -1353,7 +1043,7 @@ a {
 
 			.expandable-container {
 				background: none repeat scroll 0 0 $white;
-				border: 1px solid $color_silver_chalice_approx;
+				border: 1px solid $gray;
 				margin: -1px -4px -1px -6px;
 				padding: 0 5px;
 				display: none !important;
@@ -1385,7 +1075,7 @@ a {
 			.note {
 				border-width: 1px;
 				border-style: solid;
-				border-color: $color_celeste_approx;
+				border-color: $gray_light;
 				font-size: 13px;
 				line-height: 26px;
 				margin: 0 20px;
@@ -1400,7 +1090,6 @@ a {
 						@extend %extend_3;
 
 						margin: 0 0 0 1px;
-						//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
 						border-radius: 0;
 						height: 100%;
 						left: 0;
@@ -1409,7 +1098,7 @@ a {
 						resize: none;
 						top: 0;
 						width: 100%;
-						color: $color_masala_approx;
+						color: $gray_dark;
 						font-weight: 500;
 						outline: medium none;
 					}
@@ -1426,52 +1115,11 @@ a {
 					}
 				}
 
-				.note-body {
-					@extend %extend_4;
-
-					a {
-						cursor: text;
-					}
-
-					.content-fakeable {
-						cursor: text !important;
-
-						.display-view {
-							display: block;
-						}
-
-						.edit-view {
-							display: none !important;
-						}
-
-						&.editing {
-							.display-view {
-								display: none !important;
-							}
-
-							.edit-view {
-								display: block !important;
-							}
-						}
-					}
-
-					.edit-view {
-						cursor: text !important;
-					}
-
-					.display-view {
-						cursor: text !important;
-						white-space: pre-wrap;
-
-						a {
-							cursor: pointer;
-							text-decoration: underline;
-						}
-					}
-				}
-
+				.note-body,
 				.note-edit {
-					@extend %extend_4;
+					cursor: text;
+					min-height: 140px;
+					word-wrap: break-word;
 
 					a {
 						cursor: text;
@@ -1512,83 +1160,48 @@ a {
 							text-decoration: underline;
 						}
 					}
-				}
-
-				.open-fullscreen-note {
-					margin-top: -2px;
-					padding-bottom: 10px;
-					padding-left: 10px;
-					position: absolute;
-					right: 23px;
-					z-index: 9999;
-				}
-			}
-
-			.subtasks {
-				background: none repeat scroll 0 0 $white;
-				border: 1px solid $color_kangaroo_approx;
-				//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-				box-shadow: 0 2px 3px $black_10;
-				margin: 20px;
-				position: relative;
-
-				&.buffer {
-					padding-bottom: 32px;
 				}
 			}
 
 			.section {
-				border-bottom: 1px dotted $color_silver_chalice_approx;
+				border-bottom: 1px dotted $gray;
 				height: 46px;
 				padding: 9px 20px 9px 55px;
 				position: relative;
-				//Instead of the line below you could use @include text-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-				text-shadow: 0 1px 0 $white;
 				border-top: none;
 				margin-bottom: 0;
 
 				input {
-					background: none repeat scroll 0 0 $white;
-					border: 1px solid $color_silver_approx;
-					//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+					background-color: $white;
+					border: 1px solid $blue_background;
 					border-radius: 0;
-					margin-top: 2px;
-					//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-					box-shadow: 0 1px 2px $black_10 inset;
-					color: $color_masala_approx;
-					font-family: $font_0, $font_1, $font_2, $font_3;
-					font-size: 13px;
+					margin-top: 0;
+					color: $gray_dark;
 					font-weight: 500;
 					outline: medium none;
 					padding: 4px;
-
-					&.focus {
-						background-color: $color_desert_storm_approx;
-						border: 1px solid $color_curious_blue_65_approx;
-						//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-						box-shadow: 0 0 4px $color_curious_blue_32_approx, 0 1px 1px $white_43, 0 2px 4px $color_curious_blue_12_approx inset, 0 0 4px $color_curious_blue_20_approx inset;
-					}
 				}
 
 				input[type="range"] {
 					border: medium none;
-					//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
 					box-shadow: none;
 					width: calc(100% - 90px);
-					margin: 5px 36px 0 5px;
-					height: 17px;
+					margin: 0 36px 0 5px;
+					height: 28px;
+					min-height: 20px;
 				}
 
 				input[type="text"] {
+					box-shadow: 0 0 4px rgba($blue_background, .3), 0 1px 1px rgba($white, .4), 0 2px 4px rgba($blue_background, .1) inset, 0 0 4px rgba($blue_background, .2) inset;
+					background: none repeat scroll 0 0 $gray_easy;
 					float: left;
 					min-height: 0;
 				}
 
 				select {
 					background-color: rgba(0, 0, 0, 0);
-					//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
 					border-radius: 0;
-					border: 1px solid $color_celeste_approx;
+					border: 1px solid $gray_light;
 					padding: 0;
 					width: 98px;
 					margin: 0;
@@ -1613,7 +1226,7 @@ a {
 				}
 
 				.section-title {
-					color: $color_star_dust_approx;
+					color: $gray;
 					font-weight: bold;
 					margin-top: 3px;
 					display: block;
@@ -1629,10 +1242,7 @@ a {
 							display: inline-block;
 						}
 
-						&.detail-delete {
-							display: block;
-						}
-
+						&.detail-delete,
 						&.detail-remindertype {
 							display: block;
 						}
@@ -1650,7 +1260,7 @@ a {
 				&.date {
 					.section-title {
 						&.overdue {
-							color: $color_well_read_approx !important;
+							color: $red_overdue !important;
 						}
 
 						&.repeat {
@@ -1693,62 +1303,8 @@ a {
 					height: auto;
 				}
 
-				&.detail-comments {
-					background: none;
-					padding: 10px 0;
-					height: auto;
-
-					.comment-item {
-						padding: 5px 55px 0;
-						position: relative;
-
-						.avatar {
-							width: 32px;
-							height: 32px;
-							position: absolute;
-							left: 10px;
-							top: 10px;
-							//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
-							border-radius: 2px;
-							overflow: hidden;
-
-							img {
-								height: 100%;
-								width: 100%;
-							}
-						}
-
-						.username {
-							display: inline-block;
-							font-weight: bold;
-						}
-
-						.time {
-							color: $color_star_dust_approx;
-							font-size: 11px;
-						}
-
-						.icon.detail-delete {
-							top: 5px;
-						}
-
-						&:hover .icon.detail-delete {
-							display: block;
-						}
-					}
-				}
-
-				&.detail-addcomment {
-					border-top: 1px dotted $color_silver_chalice_approx;
-					bottom: 0;
-					left: 0;
-					position: absolute;
-					right: 0;
-				}
-
 				.select2-search-field input {
 					border: 0 none;
-					//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
 					box-shadow: none;
 					font-weight: bold;
 					margin-top: 0;
@@ -1756,18 +1312,13 @@ a {
 				}
 
 				&.active .select2-search-field input {
-					color: $color_san_marino_approx;
+					color: $blue_due;
 				}
-			}
-
-			.detail-comments .comment a {
-				cursor: pointer;
-				text-decoration: underline;
 			}
 		}
 
 		&.completed .body .section .section-title {
-			color: $color_star_dust_approx !important;
+			color: $gray !important;
 		}
 
 		.task-list .task-body .title-wrapper .title a {
@@ -1790,104 +1341,34 @@ a {
 
 .date {
 	.icon {
-		&.icon-calendar-due {
-			opacity: 1;
-		}
-
+		&.icon-calendar-due,
 		&.icon-calendar-overdue {
 			opacity: 1;
 		}
 	}
 
 	.section-title {
-		color: $color_san_marino_approx !important;
+		color: $blue_due !important;
 	}
 }
 
-.high {
-	.section-title {
-		color: $color_well_read_approx !important;
-	}
-
-	.icon.detail-priority {
-		opacity: 1;
-	}
+.high .section-title {
+	color: $red_overdue !important;
 }
 
-.medium {
-	.section-title {
-		color: $color_school_bus_yellow_approx !important;
-	}
-
-	.icon.detail-priority {
-		opacity: 1;
-	}
+.medium .section-title {
+	color: $yellow !important;
 }
 
+.low .section-title {
+	color: $blue_due !important;
+}
+
+.high,
+.medium,
 .low {
-	.section-title {
-		color: $color_san_marino_approx !important;
-	}
-
 	.icon.detail-priority {
 		opacity: 1;
-	}
-}
-
-#modal-wrapper {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	background: none repeat scroll 0 0 $black_25;
-}
-
-#settings_modal {
-	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
-	border-radius: 6px;
-
-	.header {
-		h2 {
-			font-size: 17px;
-			padding: 10px;
-			text-align: center;
-		}
-
-		.button {
-			position: absolute;
-			top: 3px;
-			right: 5px;
-		}
-	}
-
-	.navbar {
-		border-color: $color_celeste_approx;
-		border-style: solid;
-		border-width: 1px 0;
-		height: 50px;
-	}
-
-	.content {
-		min-height: 100px;
-	}
-}
-
-.button {
-	background: linear-gradient(to top, $color_picton_blue_approx 0, $color_mariner_approx 100%) repeat scroll 0 0 transparent;
-	border-color: $color_matisse_approx;
-	//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-	box-shadow: 0 1px 0 $white_30 inset;
-	color: $white;
-	font-weight: bold;
-	//Instead of the line below you could use @include text-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-	text-shadow: 0 -1px 0 $black_50;
-	line-height: 14px;
-	margin-right: 8px;
-	padding: 6px 10px 5px;
-	position: relative;
-	float: right;
-
-	&:hover {
-		color: $color_celeste_approx;
 	}
 }
 
@@ -1905,11 +1386,7 @@ input {
 		width: 35px;
 	}
 
-	&.percent-input {
-		width: 35px;
-		margin-top: 0;
-	}
-
+	&.percent-input,
 	&.priority-input {
 		width: 35px;
 		margin-top: 0;
@@ -1917,10 +1394,9 @@ input {
 }
 
 .ui-widget-content {
-	background: none repeat scroll 0 0 $color_alabaster_approx;
-	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	background: none repeat scroll 0 0 $gray_easy;
 	border-radius: 4px;
-	color: $color_masala_approx;
+	color: $gray_dark;
 	max-width: 304px;
 	min-height: 15px;
 	min-width: 150px;
@@ -1928,35 +1404,12 @@ input {
 	border: none;
 }
 
-.ui-timepicker {
+.ui-timepicker,
+.ui-datepicker {
 	width: 185px;
 
 	table {
 		width: 100%;
-
-		td {
-			width: 14%;
-			padding: 0;
-
-			a.ui-state-active {
-				background: linear-gradient(to top, $color_picton_blue_approx 0, $color_curious_blue_approx 100%) repeat scroll 0 0 transparent;
-				//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
-				border-radius: 3px;
-				color: $white;
-				opacity: 1;
-				position: relative;
-				//Instead of the line below you could use @include text-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-				text-shadow: 0 1px 1px $black_40;
-			}
-
-			&.ui-datepicker-today a {
-				color: $color_curious_blue_approx;
-			}
-
-			&.selected a {
-				@extend %extend_11;
-			}
-		}
 
 		tr {
 			line-height: 15px;
@@ -1966,177 +1419,174 @@ input {
 			}
 		}
 
+		td {
+			width: 14%;
+			padding: 0;
+		}
+
 		thead th {
-			@extend %extend_10;
+			color: $gray;
+			font-size: 9px;
+			height: auto;
+			padding: 4px 0;
+			text-align: center;
+			text-transform: uppercase;
 		}
 
 		a.ui-state-default {
-			@extend %extend_12;
+			border: none;
+			background: none repeat scroll 0 0 transparent;
+			color: $gray_dark;
+			border-radius: 3px;
+			cursor: pointer;
+			display: block;
+			font-size: 12px;
+			font-weight: 500;
+			padding: 2px 0;
+			margin: 1px;
+			text-align: center;
 
 			&:hover {
 				border: none;
-				background: none repeat scroll 0 0 $color_gray_nurse_approx;
+				background: none repeat scroll 0 0 $gray_light;
 			}
 		}
 	}
 
 	.ui-widget-header {
-		@extend %extend_5;
+		background: none repeat scroll 0 0 transparent;
+		border: none;
+		color: $gray_dark;
+		font-weight: 600;
+		font-size: 12px;
+	}
+}
+
+.ui-timepicker {
+	table {
+		td {
+			a.ui-state-active {
+				@extend %extend_11;
+			}
+		}
 	}
 
 	.ui-timepicker-title {
 		text-align: center;
-	}
-
-	.ui-datepicker-next {
-		@extend %extend_6;
-	}
-
-	.ui-datepicker-next-hover {
-		@extend %extend_6;
-	}
-
-	.ui-datepicker-prev {
-		@extend %extend_7;
-	}
-
-	.ui-datepicker-prev-hover {
-		@extend %extend_7;
-	}
-
-	.ui-icon-circle-triangle-w {
-		@extend %extend_8;
-	}
-
-	.ui-icon-circle-triangle-e {
-		@extend %extend_9;
 	}
 }
 
 .ui-datepicker {
-	width: 185px;
-
-	.ui-widget-header {
-		@extend %extend_5;
-	}
-
-	.ui-timepicker-title {
-		text-align: center;
-	}
-
-	.ui-datepicker-next {
-		@extend %extend_6;
-	}
-
-	.ui-datepicker-next-hover {
-		@extend %extend_6;
-	}
-
-	.ui-datepicker-prev {
-		@extend %extend_7;
-	}
-
-	.ui-datepicker-prev-hover {
-		@extend %extend_7;
-	}
-
-	.ui-icon-circle-triangle-w {
-		@extend %extend_8;
-	}
-
-	.ui-icon-circle-triangle-e {
-		@extend %extend_9;
-	}
-
 	table {
-		width: 100%;
-
-		tr {
-			line-height: 15px;
-
-			&:hover {
-				background: none repeat scroll 0 0 transparent;
-			}
-		}
-
 		td {
-			width: 14%;
-			padding: 0;
-
-			&.ui-datepicker-today a {
-				color: $color_curious_blue_approx;
-			}
-
 			&.selected a {
 				@extend %extend_11;
 			}
-		}
 
-		thead th {
-			@extend %extend_10;
-		}
-
-		a.ui-state-default {
-			@extend %extend_12;
-
-			&:hover {
-				border: none;
-				background: none repeat scroll 0 0 $color_gray_nurse_approx;
+			&.ui-datepicker-today a {
+				color: $blue_background;
 			}
 		}
+	}
+
+	.ui-datepicker-next,
+	.ui-datepicker-next-hover {
+		right: 2px;
+		top: 2px;
+		background: none;
+		border: none;
+	}
+
+	.ui-datepicker-prev,
+	.ui-datepicker-prev-hover {
+		left: 2px;
+		top: 2px;
+		background: none;
+		border: none;
+	}
+
+	.ui-icon {
+		@extend .icon;
+
+		height: 16px;
+		width: 16px;
+	}
+
+	.ui-icon-circle-triangle-w {
+		@extend .icon-sort-up;
+	}
+
+	.ui-icon-circle-triangle-e {
+		@extend .icon-sort-down;
 	}
 }
 
 div {
-	&.ui-datepicker {
-		@extend %extend_13;
-
-		.arrow {
-			@extend %extend_14;
-		}
-
-		&::after {
-			@extend %extend_15;
-		}
-
-		&::before {
-			@extend %extend_16;
-		}
-	}
-
+	&.ui-datepicker,
 	&.ui-timepicker {
-		@extend %extend_13;
+		background: none repeat scroll 0 0 $gray_easy;
+		border-radius: 4px;
+		box-shadow: 0 1px 6px $gray_dark;
+		color: $gray_dark;
+		max-width: 304px;
+		min-height: 15px;
+		min-width: 150px;
+		position: absolute;
+		z-index: 1000;
+		margin-top: 9px;
+		padding: 8px;
 
 		.arrow {
-			@extend %extend_14;
+			border-color: transparent transparent $gray_easy;
+			left: 50%;
+			margin-left: -12px;
+			top: -24px;
+			border-style: solid;
+			border-width: 12px;
+			height: 0;
+			position: absolute;
+			width: 0;
+			z-index: 100;
 		}
 
 		&::after {
-			@extend %extend_15;
+			border-bottom: 9px solid $gray_easy;
+			border-left: 9px solid rgba(0, 0, 0, 0);
+			border-right: 9px solid rgba(0, 0, 0, 0);
+			content: "";
+			display: inline-block;
+			left: 46%;
+			position: absolute;
+			top: -9px;
 		}
 
 		&::before {
-			@extend %extend_16;
+			border-bottom: 9px solid $gray_light;
+			border-left: 9px solid rgba(0, 0, 0, 0);
+			border-right: 9px solid rgba(0, 0, 0, 0);
+			content: "";
+			display: inline-block;
+			left: 46%;
+			position: absolute;
+			top: -9px;
 		}
 	}
+}
 
-	&.percentdone {
+.percentbar {
+	height: 3px;
+	position: relative;
+	top: 28px;
+	left: 42px;
+	margin-right: 103px;
+	margin-bottom: -5px;
+	background-color: $gray_light;
+	border-radius: 2px;
+
+	.percentdone {
 		height: 3px;
-		//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
 		border-radius: 2px 0 0 2px;
 		opacity: .75;
-	}
-
-	&.percentbar {
-		height: 3px;
-		position: relative;
-		top: 28px;
-		left: 42px;
-		margin-right: 103px;
-		margin-bottom: -5px;
-		background-color: $color_celeste_approx;
-		//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
-		border-radius: 2px;
 	}
 }
 
@@ -2151,10 +1601,8 @@ div {
 		height: 22px !important;
 		background-color: transparent !important;
 		font-weight: bold;
-		color: $color_mountain_mist_approx;
+		color: $gray;
 		font-size: 13px !important;
-		//Instead of the line below you could use @include text-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-		text-shadow: 0 1px 0 $white;
 
 		&.emptycontent {
 			position: relative;
@@ -2175,11 +1623,10 @@ div {
 	vertical-align: middle;
 
 	li {
-		background-color: $color_wild_sand_approx;
-		border: 1px solid $color_celeste_approx;
-		//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+		background-color: $gray_easy;
+		border: 1px solid $gray_light;
 		border-radius: 2px;
-		color: $color_star_dust_approx;
+		color: $gray;
 		float: left;
 		font-weight: bold;
 		margin: -2px 4px 0;
@@ -2232,7 +1679,7 @@ ol[dnd-list] {
 
 	.dndPlaceholder {
 		display: block;
-		background-color: $color_alto_approx;
+		background-color: $gray_light;
 		min-height: 37px;
 	}
 
@@ -2262,7 +1709,7 @@ ol[dnd-list] {
 			width: calc(100% / 10) !important;
 
 			&.selected {
-				border: 1px solid $color_mine_shaft_approx;
+				border: 1px solid $gray_dark;
 			}
 
 			&.randomcolour {
@@ -2297,15 +1744,18 @@ ol[dnd-list] {
 	}
 }
 
+.confirmation-abort {
+	width: 50% !important;
+	display: none !important;
+	padding-right: 0 !important;
+	background-position: center !important;
+}
+
 .confirmation-confirm {
-	@extend %extend_17;
+	@extend .confirmation-abort;
 
 	background-color: $red !important;
 	cursor: default !important;
-}
-
-.confirmation-abort {
-	@extend %extend_17;
 }
 
 .collection .icon {
@@ -2336,7 +1786,7 @@ tr:last-child .task-item {
 }
 
 td.ui-timepicker-hours table {
-	border-right: 1px solid $color_celeste_approx;
+	border-right: 1px solid $gray_light;
 }
 
 li.ui-draggable-dragging {
@@ -2353,15 +1803,14 @@ li.ui-draggable-dragging {
 		border: 1px solid transparent;
 
 		.select2-search-choice {
-			color: $color_san_marino_approx;
+			color: $blue_due;
 			font-weight: bold;
 			line-height: 14px;
 			margin: 2px 0 3px 5px;
 			background-image: none;
-			background-color: $color_wild_sand_approx;
-			//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+			background-color: $gray_easy;
 			box-shadow: none;
-			border-color: $color_celeste_approx;
+			border-color: $gray_light;
 			min-height: 22px;
 
 			a.select2-search-choice-close {
@@ -2391,8 +1840,7 @@ li.ui-draggable-dragging {
 }
 
 .error input.edit {
-	color: $color_alizarin_crimson_approx;
-	border-color: $color_alizarin_crimson_approx !important;
-	//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-	box-shadow: 0 0 6px $color_sundown_approx;
+	color: $red;
+	border-color: $red !important;
+	box-shadow: 0 0 6px rgba($red, .3);
 }

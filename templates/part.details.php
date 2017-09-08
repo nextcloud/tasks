@@ -28,8 +28,8 @@
                 </a>
                 <span class="icon detail-save icon-checkmark-color handler end-edit"></span>
                 <div class="section-edit">
-                    <input class="datepicker-input medium focus" type="text" key-value="" placeholder="dd.mm.yyyy" value="{{ task.start | dateTaskList }}" datepicker="start">
-                    <input class="timepicker-input medium focus handler" ng-hide="task.allDay" type="text" key-value="" placeholder="hh:mm" value="{{ task.start | timeTaskList }}" timepicker="start">
+                    <input class="datepicker-input medium" type="text" key-value="" placeholder="dd.mm.yyyy" value="{{ task.start | dateTaskList }}" datepicker="start">
+                    <input class="timepicker-input medium handler" ng-hide="task.allDay" type="text" key-value="" placeholder="hh:mm" value="{{ task.start | timeTaskList }}" timepicker="start">
                 </div>
             </div>
             <div class="section detail-date handler" ng-class="{'date':isDue(task.due), 'editing':route.parameter=='duedate'}" ng-click="editDueDate($event, task)">
@@ -43,8 +43,8 @@
                 </a>
                 <span class="icon detail-save icon-checkmark-color handler end-edit"></span>
                 <div class="section-edit">
-    				<input class="datepicker-input medium focus" type="text" key-value="" placeholder="dd.mm.yyyy" value="{{ task.due | dateTaskList }}" datepicker="due">
-                    <input class="timepicker-input medium focus" ng-hide="task.allDay" type="text" key-value="" placeholder="hh:mm" value="{{ task.due | timeTaskList }}" timepicker="due">
+    				<input class="datepicker-input medium" type="text" key-value="" placeholder="dd.mm.yyyy" value="{{ task.due | dateTaskList }}" datepicker="due">
+                    <input class="timepicker-input medium" ng-hide="task.allDay" type="text" key-value="" placeholder="hh:mm" value="{{ task.due | timeTaskList }}" timepicker="due">
                 </div>
             </div>
             <div class="section detail-all-day handler" ng-click="toggleAllDay(task)" ng-if="isAllDayPossible(task)" role="checkbox" aria-checked="{{task.allDay}}">
@@ -66,11 +66,11 @@
                 <span class="icon detail-save icon-checkmark-color handler end-edit"></span>
                 <div class="section-edit" ng-switch='reminderType(task)'>
                     <div ng-switch-when="DATE-TIME">
-                        <input class="datepicker-input medium focus" type="text" key-value="" placeholder="dd.mm.yyyy" value="{{ task.reminder.date | dateTaskList }}" datepicker="reminder">
-                        <input class="timepicker-input medium focus" type="text" key-value="" placeholder="hh:mm" value="{{ task.reminder.date | timeTaskList }}" timepicker="reminder">
+                        <input class="datepicker-input medium" type="text" key-value="" placeholder="dd.mm.yyyy" value="{{ task.reminder.date | dateTaskList }}" datepicker="reminder">
+                        <input class="timepicker-input medium" type="text" key-value="" placeholder="hh:mm" value="{{ task.reminder.date | timeTaskList }}" timepicker="reminder">
                     </div>
                     <div ng-switch-when="DURATION">
-                        <input ng-change="setReminderDuration(task)" class="duration-input medium focus" type="number" key-value="" placeholder="" ng-model="task.reminder.duration[task.reminder.duration.token]">
+                        <input ng-change="setReminderDuration(task)" class="duration-input medium" type="number" key-value="" placeholder="" ng-model="task.reminder.duration[task.reminder.duration.token]">
                         <select ng-model="task.reminder.duration.token" ng-options="duration.id as duration.names for duration in durations"></select>
                         <select ng-change="setReminderDuration(task)" ng-model="task.reminder.duration.params" ng-options="param as param.name for param in filterParams(params) track by param.id"></select>
                     </div>
