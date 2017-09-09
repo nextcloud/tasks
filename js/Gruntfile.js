@@ -27,6 +27,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-wrap');
 	// grunt.loadNpmTasks('grunt-karma');
+	grunt.loadNpmTasks('grunt-svg-sprite');
 
 	grunt.initConfig({
 		meta: {
@@ -91,10 +92,37 @@ module.exports = function(grunt) {
 					outputFile: 'test-results.xml'
 				}
 			}
+		},
+		svg_sprite: {
+			basic: {
+
+				// Target basics
+				expand: true,
+				cwd			: '../img/source',
+				src			: ['**/*.svg'],
+				dest: '..',
+
+				// Target options
+				options: {
+					shape: {
+						transform: []
+					},
+					mode: {
+						css: {		// Activate the «css» mode
+							bust: false,
+							common: 'icon_svg',
+							// dimensions: '',
+							render: {
+								css: true	// Activate CSS output (with default options)
+							}
+						}
+					}
+				}
+			}
 		}
 	});
 	// grunt.registerTask('ci', ['karma:continuous']);
 	grunt.registerTask('js', ['concat']);
 	grunt.registerTask('default', 'js');
-	grunt.registerTask('build', ['concat']);
+	grunt.registerTask('build', ['concat', 'svg_sprite']);
 };

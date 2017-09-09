@@ -112,7 +112,14 @@
 #content .icon {
   background-image: url("../img/sprites.svg");
   height: 20px;
-  width: 18px;
+  width: 20px;
+  display: inline-block;
+  cursor: pointer;
+  vertical-align: middle;
+}
+#content .icon_svg {
+  height: 20px;
+  width: 20px;
   display: inline-block;
   cursor: pointer;
   vertical-align: middle;
@@ -120,8 +127,7 @@
 #content .icon.none {
   background-position: 0px -20px;
 }
-#content .icon.list-list,
-#content .icon.sort-default {
+#content .icon.list-list {
   background-position: -40px 0px;
 }
 #content .icon.collection-starred {
@@ -388,6 +394,7 @@
   border-style: solid;
   border-width: 1px;
   border-color: #CCCCCC;
+  overflow: hidden;
 }
 #content li.task-item .task-body:hover,
 #content li.task-item .task-body.active,
@@ -405,34 +412,12 @@
   background-position: 0 -20px;
   width: 2px;
 }
-#content li.task-item .task-body .icon.task-star,
-#content div.task-item .task-body .icon.task-star {
+#content li.task-item .task-body .icon_svg.svg-star-large,
+#content div.task-item .task-body .icon_svg.svg-star-large {
   float: right;
   margin: 0 8px 0 5px;
-  background-position: -140px 0px;
-  height: 34px;
+  height: 40px;
   width: 20px;
-}
-#content li.task-item .task-body .icon.task-star:hover,
-#content div.task-item .task-body .icon.task-star:hover {
-  background-position: -160px 0;
-}
-#content li.task-item .task-body .icon.task-star.disabled:hover,
-#content div.task-item .task-body .icon.task-star.disabled:hover {
-  background-position: -140px 0;
-  cursor: not-allowed;
-}
-#content li.task-item .task-body .icon.task-star.high,
-#content div.task-item .task-body .icon.task-star.high {
-  background-position: -180px 0 !important;
-}
-#content li.task-item .task-body .icon.task-star.medium,
-#content div.task-item .task-body .icon.task-star.medium {
-  background-position: -160px -40px !important;
-}
-#content li.task-item .task-body .icon.task-star.low,
-#content div.task-item .task-body .icon.task-star.low {
-  background-position: -180px -40px !important;
 }
 #content li.task-item .task-body .icon.addsubtask,
 #content div.task-item .task-body .icon.addsubtask {

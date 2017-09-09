@@ -10,6 +10,7 @@
     script('tasks', 'vendor/jquery-timepicker/jquery.ui.timepicker');
     script('tasks', 'vendor/ical.js/build/ical');
     style('tasks', 'style');
+    style('tasks', 'sprite');
     style('tasks', 'vendor/angularui/ui-select/select2');
 ?>
 
@@ -158,7 +159,7 @@
             <div class="app-navigation-entry-utils">
                 <div class="app-navigation-entry-utils-menu-button" title="<?php p($l->t('Change sort order')); ?>">
                     <button class="sortorder-dropdown-button">
-                        <span class="icon sort-{{ settingsmodel.getById('various').sortOrder }}"></span>
+                        <span class="icon_svg svg-sort-{{ settingsmodel.getById('various').sortOrder }}"></span>
                         <span class="sort-indicator" ng-class="{'icon-triangle-n': settingsmodel.getById('various').sortDirection, 'icon-triangle-s': !settingsmodel.getById('various').sortDirection}"></span>
                     </button>
                 </div>

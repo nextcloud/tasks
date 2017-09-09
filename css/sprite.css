@@ -1,0 +1,541 @@
+.icon_svg {
+	background: url("svg/sprite.css.svg") no-repeat;
+}
+
+.svg-all {
+	background-position: 66.66666666666667% 75%;
+}
+
+.svg-all-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-all-active {
+	background-position: 0 87.5%;
+}
+
+.svg-all-active-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-alphabetically {
+	background-position: 88.88888888888889% 12.5%;
+}
+
+.svg-alphabetically-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-calendar {
+	background-position: 88.88888888888889% 25%;
+}
+
+.svg-calendar-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-calendar-active {
+	background-position: 88.88888888888889% 37.5%;
+}
+
+.svg-calendar-active-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-categories {
+	background-position: 88.88888888888889% 50%;
+}
+
+.svg-categories-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-categories-active {
+	background-position: 88.88888888888889% 62.5%;
+}
+
+.svg-categories-active-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-checkbox {
+	background-position: 88.88888888888889% 75%;
+}
+
+.svg-checkbox-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-checkbox-checked {
+	background-position: 88.88888888888889% 87.5%;
+}
+
+.svg-checkbox-checked-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-checkmark {
+	background-position: 0 100%;
+}
+
+.svg-checkmark-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-checkmark-green {
+	background-position: 11.11111111111111% 100%;
+}
+
+.svg-checkmark-green-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-checkmark-white {
+	background-position: 22.22222222222222% 100%;
+}
+
+.svg-checkmark-white-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-clock {
+	background-position: 77.77777777777777% 100%;
+}
+
+.svg-clock-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-clock-due {
+	background-position: 88.88888888888889% 100%;
+}
+
+.svg-clock-due-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-clock-overdue {
+	background-position: 77.77777777777777% 37.5%;
+}
+
+.svg-clock-overdue-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-cross {
+	background-position: 77.77777777777777% 50%;
+}
+
+.svg-cross-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-current {
+	background-position: 77.77777777777777% 62.5%;
+}
+
+.svg-current-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-current-active {
+	background-position: 16.666666666666668% 62.5%;
+}
+
+.svg-current-active-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-date-detail-active {
+	background-position: 27.77777777777778% 62.5%;
+}
+
+.svg-date-detail-active-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-date-detail-none {
+	background-position: 38.888888888888886% 62.5%;
+}
+
+.svg-date-detail-none-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-detail-date {
+	background-position: 50% 62.5%;
+}
+
+.svg-detail-date-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-detail-date-overdue {
+	background-position: 0 75%;
+}
+
+.svg-detail-date-overdue-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-divider {
+	background-position: 91.37055837563452% 28%;
+}
+
+.svg-divider-dims {
+	width: 3px;
+	height: 2px;
+}
+
+.svg-eye-hidden {
+	background-position: 22.22222222222222% 75%;
+}
+
+.svg-eye-hidden-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-eye-visible {
+	background-position: 33.333333333333336% 75%;
+}
+
+.svg-eye-visible-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-hide {
+	background-position: 44.44444444444444% 75%;
+}
+
+.svg-hide-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-manual {
+	background-position: 55.55555555555556% 75%;
+}
+
+.svg-manual-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-note {
+	background-position: 38.888888888888886% 42.857142857142854%;
+}
+
+.svg-note-dims {
+	width: 20px;
+	height: 40px;
+}
+
+.svg-percent {
+	background-position: 77.77777777777777% 75%;
+}
+
+.svg-percent-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-percent-set {
+	background-position: 77.77777777777777% 25%;
+}
+
+.svg-percent-set-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-plus {
+	background-position: 11.11111111111111% 87.5%;
+}
+
+.svg-plus-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-plus-none {
+	background-position: 22.22222222222222% 87.5%;
+}
+
+.svg-plus-none-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-settings {
+	background-position: 33.333333333333336% 87.5%;
+}
+
+.svg-settings-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-sort-default {
+	background-position: 44.44444444444444% 87.5%;
+}
+
+.svg-sort-default-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-sort-down {
+	background-position: 100% 23.43529411764706%;
+}
+
+.svg-sort-down-dims {
+	width: 10px;
+	height: 10px;
+}
+
+.svg-sort-up {
+	background-position: 94.73684210526316% 23.43529411764706%;
+}
+
+.svg-sort-up-dims {
+	width: 10px;
+	height: 10px;
+}
+
+.svg-star {
+	background-position: 77.77777777777777% 87.5%;
+}
+
+.svg-star-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-star-active {
+	background-position: 99.91119005328596% 12.487512487512488%;
+}
+
+.svg-star-active-dims {
+	width: 19.84px;
+	height: 19.84px;
+}
+
+.svg-star-huge-high {
+	background-position: 0 0;
+}
+
+.svg-star-huge-high-dims {
+	width: 30px;
+	height: 60px;
+}
+
+.svg-star-huge-low {
+	background-position: 17.647058823529413% 0;
+}
+
+.svg-star-huge-low-dims {
+	width: 30px;
+	height: 60px;
+}
+
+.svg-star-huge-medium {
+	background-position: 35.294117647058826% 0;
+}
+
+.svg-star-huge-medium-dims {
+	width: 30px;
+	height: 60px;
+}
+
+.svg-star-huge-none,
+.svg-star-huge-none\:regular {
+	background-position: 52.94117647058823% 0;
+}
+
+.svg-star-huge-none-dims {
+	width: 30px;
+	height: 60px;
+}
+
+.svg-star-huge-none:hover,
+.svg-star-huge-none\:hover {
+	background-position: 0 50%;
+}
+
+.svg-star-huge-none-dims:hover,
+.svg-star-huge-none\:hover-dims {
+	width: 30px;
+	height: 60px;
+}
+
+.svg-star-large-high {
+	background-position: 16.666666666666668% 42.857142857142854%;
+}
+
+.svg-star-large-high-dims {
+	width: 20px;
+	height: 40px;
+}
+
+.svg-star-large-low {
+	background-position: 50% 42.857142857142854%;
+}
+
+.svg-star-large-low-dims {
+	width: 20px;
+	height: 40px;
+}
+
+.svg-star-large-medium {
+	background-position: 66.66666666666667% 0;
+}
+
+.svg-star-large-medium-dims {
+	width: 20px;
+	height: 40px;
+}
+
+.svg-star-large-none,
+.svg-star-large-none\:regular {
+	background-position: 66.66666666666667% 28.571428571428573%;
+}
+
+.svg-star-large-none-dims {
+	width: 20px;
+	height: 40px;
+}
+
+.svg-star-large-none:hover,
+.svg-star-large-none\:hover {
+	background-position: 66.66666666666667% 57.142857142857146%;
+}
+
+.svg-star-large-none-dims:hover,
+.svg-star-large-none\:hover-dims {
+	width: 20px;
+	height: 40px;
+}
+
+.svg-star-small-high {
+	background-position: 33.333333333333336% 100%;
+}
+
+.svg-star-small-high-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-star-small-low {
+	background-position: 44.44444444444444% 100%;
+}
+
+.svg-star-small-low-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-star-small-medium {
+	background-position: 55.55555555555556% 100%;
+}
+
+.svg-star-small-medium-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-star-small-none {
+	background-position: 66.66666666666667% 100%;
+}
+
+.svg-star-small-none-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-subtasks-hidden {
+	background-position: 77.77777777777777% 0;
+}
+
+.svg-subtasks-hidden-dims {
+	width: 20px;
+	height: 40px;
+}
+
+.svg-subtasks-visible {
+	background-position: 27.77777777777778% 42.857142857142854%;
+}
+
+.svg-subtasks-visible-dims {
+	width: 20px;
+	height: 40px;
+}
+
+.svg-task {
+	background-position: 88.88888888888889% 0;
+}
+
+.svg-task-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-task-active {
+	background-position: 66.66666666666667% 87.5%;
+}
+
+.svg-task-active-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-toggle {
+	background-position: 55.55555555555556% 87.5%;
+}
+
+.svg-toggle-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-trash {
+	background-position: 11.11111111111111% 75%;
+}
+
+.svg-trash-dims {
+	width: 20px;
+	height: 20px;
+}
+
+.svg-update {
+	background-position: 100% 0;
+}
+
+.svg-update-dims {
+	width: 20px;
+	height: 20px;
+}
+

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="20px" height="20px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve">
+<g>
+	<defs>
+		<rect id="SVGID_1_" x="2.667" y="2.667" width="14.667" height="14.667"/>
+	</defs>
+	<clipPath id="SVGID_2_">
+		<use xlink:href="#SVGID_1_"  overflow="visible"/>
+	</clipPath>
+	<polygon clip-path="url(#SVGID_2_)" fill="#34679B" points="10,3.266 5.63,16.734 17.078,8.412 2.922,8.412 14.375,16.729 	"/>
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_3_" x="1.333" y="1.333" width="17.333" height="17.333"/>
+	</defs>
+	<clipPath id="SVGID_4_">
+		<use xlink:href="#SVGID_3_"  overflow="visible"/>
+	</clipPath>
+	<polygon clip-path="url(#SVGID_4_)" fill="none" stroke="#34679B" stroke-width="0.75" stroke-miterlimit="10" points="10,3.266 
+		5.63,16.734 17.078,8.412 2.922,8.412 14.375,16.729 	"/>
+</g>
+</svg>
