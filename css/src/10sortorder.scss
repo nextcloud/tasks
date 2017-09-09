@@ -1,0 +1,63 @@
+/**
+	* rules for sortorder-dropdown
+	*/
+
+.sortorder-dropdown {
+	display: none;
+	top: 68px;
+	right: 3px;
+
+	li {
+		float: inherit;
+		width: auto !important;
+		cursor: pointer;
+		opacity: .57;
+
+		&.active {
+			opacity: 1 !important;
+		}
+
+		img {
+			cursor: pointer;
+			margin-right: 5px;
+			vertical-align: text-bottom;
+		}
+
+		span {
+			cursor: pointer;
+		}
+
+		&:hover {
+			opacity: 1 !important;
+		}
+	}
+
+	a {
+		width: 100% !important;
+	}
+
+	&.open {
+		display: block;
+	}
+
+	.icon {
+		margin: 12px 8px;
+
+		&.sort-indicator {
+			margin-left: auto;
+			margin-right: 0;
+			filter: alpha(opacity=80);
+			opacity: .8;
+			float: right;
+			visibility: hidden;
+		}
+	}
+
+	.label {
+		margin-right: 10px;
+	}
+
+	.active .icon.sort-indicator {
+		visibility: visible;
+	}
+}

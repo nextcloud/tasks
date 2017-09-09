@@ -1,0 +1,27 @@
+/**
+	* rules for searchresults
+	*/
+
+#searchresults {
+	padding-top: 0 !important;
+	margin-top: 20px !important;
+	background-color: transparent !important;
+	min-height: 150px;
+
+	#status {
+		padding: 10px 0 18px !important;
+		height: 22px !important;
+		background-color: transparent !important;
+		font-weight: bold;
+		color: $gray;
+		font-size: 13px !important;
+
+		&.emptycontent {
+			position: relative;
+		}
+	}
+
+	span.icon.task-checkbox {
+		opacity: .6;
+	}
+}

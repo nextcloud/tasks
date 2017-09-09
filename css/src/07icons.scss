@@ -1,0 +1,167 @@
+/**
+	* rules for icons
+	*/
+.collection .icon {
+	opacity: 1;
+}
+
+.disabled .icon.detail-star:hover {
+	cursor: not-allowed;
+}
+
+.icon {
+	height: 16px;
+	width: 16px;
+	display: inline-block;
+	vertical-align: middle;
+	opacity: .5;
+
+	&.input-date {
+		display: none;
+		opacity: .4;
+		transition: opacity 100ms ease 0s;
+		right: 35px;
+		top: 7px;
+	}
+
+	&.input-star {
+		display: none;
+		opacity: .5;
+		right: 9px;
+
+		&.starred {
+			opacity: 1;
+		}
+	}
+
+	&.task-checkbox,
+	&.detail-checkbox {
+		@extend %extend_1;
+
+		&:not(.icon-checkmark) {
+			background: unset;
+		}
+
+		&:not(.disabled):hover {
+			border-color: $black;
+		}
+
+		&.disabled {
+			cursor: not-allowed;
+		}
+	}
+
+	&.icon-note {
+		display: none;
+	}
+
+	&.right {
+		float: right;
+	}
+
+	&.detail-settings {
+		transition: opacity 100ms ease 0s;
+		opacity: .6;
+	}
+
+	&.detail-reminder {
+		height: 20px;
+		width: 20px;
+	}
+
+	&.icon-checkmark {
+		opacity: 1;
+	}
+
+	&.note-fullscreen {
+		opacity: .6;
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+
+	&.toggle-completed-subtasks {
+		float: right;
+		opacity: 1;
+
+		&.hidden {
+			opacity: .5;
+		}
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+
+	&.detail-delete {
+		display: none;
+		margin-left: auto;
+		right: 22px;
+
+		&:hover {
+			opacity: .8;
+		}
+	}
+
+	&.detail-save {
+		display: none;
+		margin-left: auto;
+		right: 44px;
+
+		&:hover {
+			opacity: .8;
+		}
+	}
+
+	&.icon-tag-active {
+		opacity: 1;
+	}
+}
+
+.icon-task-star-low,
+.icon-task-star-medium,
+.icon-task-star-high {
+	opacity: 1 !important;
+}
+
+a {
+	&.detail-star {
+		padding: 15px;
+		margin-left: auto;
+		float: right;
+
+		.icon {
+			height: 24px;
+			width: 24px;
+			background-size: 144px 144px;
+			opacity: .3;
+
+			&:hover {
+				opacity: .5;
+			}
+		}
+	}
+
+	&:hover .icon {
+		&.detail-trash,
+		&.detail-settings,
+		&.detail-close,
+		&.input-star {
+			opacity: 1;
+		}
+
+		&.detail-delete,
+		&.input-date {
+			opacity: .8;
+		}
+	}
+}
+
+.high,
+.medium,
+.low {
+	.icon.detail-priority {
+		opacity: 1;
+	}
+}

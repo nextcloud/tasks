@@ -1,0 +1,219 @@
+/**
+	* rules for task-body
+	*/
+
+.task-body {
+	background-color: $white;
+	height: 37px;
+	list-style: none outside none;
+	margin: 0;
+	position: relative;
+	border-style: solid;
+	border-width: 1px;
+	border-color: $gray_light;
+	overflow: hidden;
+
+	.icon {
+		&.large {
+			margin: 8px;
+		}
+
+		&.task-separator {
+			cursor: default;
+			height: 100%;
+			left: 34px;
+			position: absolute;
+			top: 1px;
+			background: unset;
+			width: 2px;
+			border-left: 1px dotted $gray;
+		}
+
+		&.icon-add {
+			&:hover {
+				opacity: 1;
+			}
+		}
+
+		&.subtasks {
+			display: none;
+		}
+
+		&.toggle-completed-subtasks {
+			display: none;
+		}
+	}
+
+	&:hover {
+		background-color: $gray_easy;
+	}
+
+	&.active {
+		background-color: $gray_easy;
+	}
+
+	.title-wrapper {
+		cursor: pointer;
+		color: $gray_dark;
+		display: block;
+		line-height: 16px;
+		margin: 0 0 0 44px;
+		overflow: hidden;
+		padding: 9px 0;
+		position: relative;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+
+		.title {
+			cursor: text;
+		}
+	}
+
+	.duedate {
+		color: $blue_due;
+		float: right;
+		font-size: 11px;
+		line-height: 14px;
+		margin: 10px;
+
+		&.overdue {
+			color: $red_overdue;
+		}
+	}
+
+	.listname {
+		color: $gray;
+		float: right;
+		font-size: 11px;
+		line-height: 14px;
+		margin: 10px;
+	}
+
+	&.attachment .icon.icon-note {
+		display: inline-block;
+		float: right;
+	}
+
+	&.subtasks .icon.subtasks {
+		display: inline-block;
+	}
+
+	&.completedsubtasks .icon.toggle-completed-subtasks {
+		display: inline-block;
+	}
+}
+
+.percentbar {
+	height: 3px;
+	position: relative;
+	top: 28px;
+	left: 42px;
+	margin-right: 103px;
+	margin-bottom: -5px;
+	background-color: $gray_light;
+	border-radius: 2px;
+
+	.percentdone {
+		height: 3px;
+		border-radius: 2px 0 0 2px;
+		opacity: .75;
+	}
+}
+
+.task-item {
+	cursor: default;
+	min-height: 37px;
+	list-style: none outside none;
+	overflow: hidden;
+	margin-top: -1px;
+
+	&:first-child {
+		margin-top: 0;
+
+		.task-body {
+			border-width: 1px;
+		}
+	}
+
+	.subtasks-container {
+		margin-left: 35px;
+
+		.task-item {
+			margin-top: -1px;
+		}
+
+		&.subtaskshidden li.subtask {
+			display: none;
+		}
+	}
+
+	&.add-subtask {
+		background: $white;
+		border: 1px solid $gray_light;
+
+		input {
+			background: transparent none repeat scroll 0 0 !important;
+			border: medium none !important;
+			border-radius: 0 !important;
+			box-shadow: none !important;
+			box-sizing: border-box;
+			color: $gray_dark;
+			cursor: text;
+			font-size: 100%;
+			margin: 0;
+			padding: 0 60px 0 32px;
+			width: 100%;
+			min-height: 36px;
+		}
+	}
+
+	.task-star .icon:hover {
+		opacity: .7;
+	}
+
+	&.done .task-body {
+		opacity: .6;
+
+		.title {
+			text-decoration: line-through;
+		}
+	}
+}
+
+.categories-list {
+	display: inline-block;
+	vertical-align: middle;
+
+	li {
+		background-color: $gray_easy;
+		border: 1px solid $gray_light;
+		border-radius: 2px;
+		color: $gray;
+		float: left;
+		font-weight: bold;
+		margin: -2px 4px 0;
+		padding: 2px 5px;
+		min-height: 22px;
+	}
+}
+
+li.ui-draggable-dragging {
+	width: 300px;
+	z-index: 101 !important;
+
+	.duedate {
+		display: none;
+	}
+}
+
+tr:last-child .task-item {
+	height: 39px;
+
+	div.task-body {
+		border-width: 1px;
+	}
+}
+
+.template {
+	display: none;
+}

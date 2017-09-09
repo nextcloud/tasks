@@ -1,148 +1,9 @@
-.icon {
-	background: url("../img/sprites.svg") no-repeat;
-}
-
-.icon-add {
-	background-position: 20% 0;
-}
-
-.icon-all {
-	background-position: 80% 20%;
-}
-
-.icon-alphabetically {
-	background-position: 0 20%;
-}
-
-.icon-calendar {
-	background-position: 20% 20%;
-}
-
-.icon-calendar-due {
-	background-position: 40% 0;
-}
-
-.icon-calendar-overdue {
-	background-position: 40% 20%;
-}
-
-.icon-checkmark {
-	background-position: 0 40%;
-}
-
-.icon-checkmark-color {
-	background-position: 20% 40%;
-}
-
-.icon-clock {
-	background-position: 40% 40%;
-}
-
-.icon-clock-due {
-	background-position: 60% 0;
-}
-
-.icon-clock-overdue {
-	background-position: 60% 20%;
-}
-
-.icon-close {
-	background-position: 60% 40%;
-}
-
-.icon-current {
-	background-position: 0 60%;
-}
-
-.icon-hide {
-	background-position: 20% 60%;
-}
-
-.icon-manual {
-	background-position: 40% 60%;
-}
-
-.icon-menu {
-	background-position: 60% 60%;
-}
-
-.icon-note {
-	background-position: 80% 0;
-}
-
-.icon-percent {
-	background-position: 0 0;
-}
-
-.icon-percent-active {
-	background-position: 80% 40%;
-}
-
-.icon-random {
-	background-position: 80% 60%;
-}
-
-.icon-settings {
-	background-position: 0 80%;
-}
-
-.icon-sort-down {
-	background-position: 20% 80%;
-}
-
-.icon-sort-up {
-	background-position: 40% 80%;
-}
-
-.icon-subtasks-hidden,
-.icon-subtasks-hidden\:regular {
-	background-position: 60% 80%;
-}
-
-.icon-subtasks-hidden:hover,
-.icon-subtasks-hidden\:hover {
-	background-position: 80% 80%;
-}
-
-.icon-subtasks-visible {
-	background-position: 100% 0;
-}
-
-.icon-tag {
-	background-position: 100% 20%;
-}
-
-.icon-tag-active {
-	background-position: 100% 40%;
-}
-
-.icon-task-star {
-	background-position: 100% 60%;
-}
-
-.icon-task-star-high {
-	background-position: 100% 80%;
-}
-
-.icon-task-star-low {
-	background-position: 0 100%;
-}
-
-.icon-task-star-medium {
-	background-position: 20% 100%;
-}
-
-.icon-toggle {
-	background-position: 40% 100%;
-}
-
-.icon-trash {
-	background-position: 60% 100%;
-}
-
+/**
+	* SCSS variables and extends
+	*/
 
 //colors
-$red: #f00;								// warnings and errors
+$red: $color-error;				// warnings and errors
 $red_overdue: #b3312d;		// overdue dates and high importance
 $yellow: #fd0;						// medium importance
 $blue_due: #4271a6;				// due dates and low importance
@@ -201,116 +62,9 @@ $white: #fff;
 	position: relative;
 }
 
-* {
-	margin: 0;
-	padding: 0;
-	text-decoration: none;
-}
-
-.visibility-hidden {
-	visibility: hidden;
-}
-
-.task-body {
-	background-color: $white;
-	height: 37px;
-	list-style: none outside none;
-	margin: 0;
-	position: relative;
-	border-style: solid;
-	border-width: 1px;
-	border-color: $gray_light;
-	overflow: hidden;
-
-	.icon {
-		&.large {
-			margin: 8px;
-		}
-
-		&.task-separator {
-			cursor: default;
-			height: 100%;
-			left: 34px;
-			position: absolute;
-			top: 1px;
-			background: unset;
-			width: 2px;
-			border-left: 1px dotted $gray;
-		}
-
-		&.icon-add {
-			&:hover {
-				opacity: 1;
-			}
-		}
-
-		&.subtasks {
-			display: none;
-		}
-
-		&.toggle-completed-subtasks {
-			display: none;
-		}
-	}
-
-	&:hover {
-		background-color: $gray_easy;
-	}
-
-	&.active {
-		background-color: $gray_easy;
-	}
-
-	.title-wrapper {
-		cursor: pointer;
-		color: $gray_dark;
-		display: block;
-		line-height: 16px;
-		margin: 0 0 0 44px;
-		overflow: hidden;
-		padding: 9px 0;
-		position: relative;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-
-		.title {
-			cursor: text;
-		}
-	}
-
-	.duedate {
-		color: $blue_due;
-		float: right;
-		font-size: 11px;
-		line-height: 14px;
-		margin: 10px;
-
-		&.overdue {
-			color: $red_overdue;
-		}
-	}
-
-	.listname {
-		color: $gray;
-		float: right;
-		font-size: 11px;
-		line-height: 14px;
-		margin: 10px;
-	}
-
-	&.attachment .icon.icon-note {
-		display: inline-block;
-		float: right;
-	}
-
-	&.subtasks .icon.subtasks {
-		display: inline-block;
-	}
-
-	&.completedsubtasks .icon.toggle-completed-subtasks {
-		display: inline-block;
-	}
-}
+/**
+	* rules for app-navigation
+	*/
 
 #app-navigation {
 	li {
@@ -322,30 +76,14 @@ $white: #fff;
 		}
 
 		&.active {
-			> a span {
-				&.title {
-					opacity: 1;
-				}
-
-				&.icon {
-					opacity: 1;
-				}
-			}
-
 			&.with-menu > a {
 				padding-right: 70px;
 			}
 		}
 
 		&.edit {
-			> a {
-				display: none;
-			}
-
-			.app-navigation-entry-utils {
-				display: none;
-			}
-
+			> a,
+			.app-navigation-entry-utils,
 			.app-navigation-entry-menu {
 				display: none;
 			}
@@ -357,10 +95,7 @@ $white: #fff;
 		}
 
 		.app-navigation-entry-edit {
-			&.name {
-				display: none;
-			}
-
+			&.name,
 			&.caldav {
 				display: none;
 			}
@@ -473,65 +208,38 @@ $white: #fff;
 	}
 }
 
-.sortorder-dropdown {
-	display: none;
-	top: 68px;
-	right: 3px;
-
-	li {
-		float: inherit;
-		width: auto !important;
-		cursor: pointer;
-		opacity: .57;
-
-		&.active {
-			opacity: 1 !important;
-		}
-
-		img {
-			cursor: pointer;
-			margin-right: 5px;
-			vertical-align: text-bottom;
-		}
-
-		span {
-			cursor: pointer;
-		}
-
-		&:hover {
-			opacity: 1 !important;
-		}
-	}
-
-	a {
-		width: 100% !important;
-	}
-
-	&.open {
-		display: block;
-	}
-
-	.icon {
-		margin: 12px 8px;
-
-		&.sort-indicator {
-			margin-left: auto;
-			margin-right: 0;
-			filter: alpha(opacity=80);
-			opacity: .8;
-			float: right;
-			visibility: hidden;
-		}
-	}
-
-	.label {
-		margin-right: 10px;
-	}
-
-	.active .icon.sort-indicator {
-		visibility: visible;
-	}
+.calendar-indicator {
+	min-width: 12px;
+	min-height: 12px;
+	background-color: $red;
+	display: inline-block;
+	height: 12px;
+	width: 12px;
+	margin-top: 0;
+	border-radius: 50%;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 20px;
+	margin-left: 4px;
+	margin-right: 2px;
 }
+
+.active .calendar-indicator {
+	height: 16px;
+	width: 16px;
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+.error input.edit {
+	color: $red;
+	border-color: $red !important;
+	box-shadow: 0 0 6px rgba($red, .3);
+}
+
+/**
+	* rules for app-navigation-entry-menu
+	*/
 
 .app-navigation-entry-menu {
 	&.sortorder-dropdown li > a span {
@@ -586,9 +294,115 @@ $white: #fff;
 	}
 }
 
-#content {
+.colorpicker {
+	display: block;
+	height: 30px;
+	height: auto;
+	padding-bottom: 3px;
+	padding-top: 3px;
+
+	.colorpicker-list {
+		display: flex;
+		flex-wrap: wrap;
+		width: 100%;
+		height: 100%;
+		text-align: center;
+		justify-content: center;
+		align-items: center;
+
+		li {
+			height: 24px;
+			width: calc(100% / 10) !important;
+
+			&.selected {
+				border: 1px solid $gray_dark;
+			}
+
+			&.randomcolour {
+				cursor: pointer;
+
+				.icon-random {
+					filter: invert(1);
+					opacity: 1;
+				}
+			}
+		}
+	}
+}
+
+.confirmation-default {
 	overflow: hidden;
-	color: $gray_dark;
+}
+
+.confirmed {
+	.confirmation-default {
+		display: none !important;
+	}
+
+	&.active {
+		.confirmation-confirm {
+			cursor: pointer !important;
+		}
+
+		.countdown {
+			display: none;
+		}
+	}
+}
+
+.confirmation-abort {
+	width: 50% !important;
+	display: none !important;
+	padding-right: 0 !important;
+	background-position: center !important;
+}
+
+.confirmation-confirm {
+	@extend .confirmation-abort;
+
+	background-color: $red !important;
+	cursor: default !important;
+}
+
+/**
+	* rules for settings area
+	*/
+
+#app-settings-content {
+	li {
+		line-height: 3em;
+		position: relative;
+		height: 40px;
+
+		.label-container {
+			white-space: nowrap;
+			padding-right: 115px;
+			display: inline-block;
+			text-overflow: ellipsis;
+			width: 100%;
+			overflow: hidden;
+			height: 100%;
+		}
+
+		select {
+			position: absolute;
+			right: 0;
+		}
+
+		&.headline {
+			font-weight: bold;
+			line-height: 1.5em;
+		}
+	}
+
+	.icon {
+		margin-top: -3px;
+	}
+
+	select {
+		float: right;
+		min-width: 105px;
+	}
 }
 
 #collection_today > a > span.icon,
@@ -599,229 +413,14 @@ $white: #fff;
 	text-align: center;
 }
 
-.icon {
-	height: 16px;
-	width: 16px;
-	display: inline-block;
-	vertical-align: middle;
-	opacity: .5;
+/**
+	* rules for app-content
+	*/
 
-	&.input-date {
-		display: none;
-		opacity: .4;
-		transition: opacity 100ms ease 0s;
-		right: 35px;
-		top: 7px;
-	}
-
-	&.input-star {
-		display: none;
-		opacity: .5;
-		right: 9px;
-
-		&.starred {
-			opacity: 1;
-		}
-	}
-
-	&.task-checkbox,
-	&.detail-checkbox {
-		@extend %extend_1;
-
-		&:not(.icon-checkmark) {
-			background: unset;
-		}
-
-		&:not(.disabled):hover {
-			border-color: $black;
-		}
-
-		&.disabled {
-			cursor: not-allowed;
-		}
-	}
-
-	&.icon-note {
-		display: none;
-	}
-
-	&.right {
-		float: right;
-	}
-
-	&.detail-settings {
-		transition: opacity 100ms ease 0s;
-		opacity: .6;
-	}
-
-	&.detail-reminder {
-		height: 20px;
-		width: 20px;
-	}
-
-	&.icon-checkmark {
-		opacity: 1;
-	}
-
-	&.note-fullscreen {
-		opacity: .6;
-
-		&:hover {
-			opacity: 1;
-		}
-	}
-
-	&.toggle-completed-subtasks {
-		float: right;
-		opacity: 1;
-
-		&.hidden {
-			opacity: .5;
-		}
-
-		&:hover {
-			opacity: 1;
-		}
-	}
-
-	&.detail-delete {
-		display: none;
-		margin-left: auto;
-		right: 22px;
-
-		&:hover {
-			opacity: .8;
-		}
-	}
-
-	&.detail-save {
-		display: none;
-		margin-left: auto;
-		right: 44px;
-
-		&:hover {
-			opacity: .8;
-		}
-	}
-
-	&.icon-tag-active {
-		opacity: 1;
-	}
-}
-
-.task-item {
-	cursor: default;
-	min-height: 37px;
-	list-style: none outside none;
-	overflow: hidden;
-	margin-top: -1px;
-
-	&:first-child {
-		margin-top: 0;
-
-		.task-body {
-			border-width: 1px;
-		}
-	}
-
-	.subtasks-container {
-		margin-left: 35px;
-
-		.task-item {
-			margin-top: -1px;
-		}
-
-		&.subtaskshidden li.subtask {
-			display: none;
-		}
-	}
-
-	&.add-subtask {
-		background: $white;
-		border: 1px solid $gray_light;
-
-		input {
-			background: transparent none repeat scroll 0 0 !important;
-			border: medium none !important;
-			border-radius: 0 !important;
-			box-shadow: none !important;
-			box-sizing: border-box;
-			color: $gray_dark;
-			cursor: text;
-			font-size: 100%;
-			margin: 0;
-			padding: 0 60px 0 32px;
-			width: 100%;
-			min-height: 36px;
-		}
-	}
-
-	.task-star .icon:hover {
-		opacity: .7;
-	}
-
-	&.done .task-body {
-		opacity: .6;
-
-		.title {
-			text-decoration: line-through;
-		}
-	}
-}
-
-.icon-task-star-low,
-.icon-task-star-medium,
-.icon-task-star-high {
-	opacity: 1 !important;
-}
-
-a {
-	&.detail-star {
-		padding: 15px;
-		margin-left: auto;
-		float: right;
-
-		.icon {
-			height: 24px;
-			width: 24px;
-			background-size: 144px 144px;
-			opacity: .3;
-
-			&:hover {
-				opacity: .5;
-			}
-		}
-	}
-
-	&:hover .icon {
-		&.detail-trash,
-		&.detail-settings,
-		&.detail-close,
-		&.input-star {
-			opacity: 1;
-		}
-
-		&.detail-delete,
-		&.input-date {
-			opacity: .8;
-		}
-	}
-}
-
-.calendar-indicator {
-	min-width: 12px;
-	min-height: 12px;
-	background-color: $red;
-	display: inline-block;
-	height: 12px;
-	width: 12px;
-	margin-top: 0;
-	border-radius: 50%;
-	text-align: center;
-	vertical-align: middle;
-	line-height: 20px;
-	margin-left: 4px;
-	margin-right: 2px;
+* {
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
 }
 
 #app-content {
@@ -942,6 +541,259 @@ a {
 		}
 	}
 }
+
+ol[dnd-list] {
+	.dndDraggingSource {
+		display: none;
+	}
+
+	.dndPlaceholder {
+		display: block;
+		background-color: $gray_light;
+		min-height: 37px;
+	}
+
+	.copy.dndDraggingSource {
+		display: block;
+	}
+}
+
+.dropzone-visible > ol[dnd-list] {
+	min-height: 50px;
+}
+
+#content {
+	overflow: hidden;
+	color: $gray_dark;
+}
+
+.app-tasks #app-content {
+	overflow-x: hidden;
+}
+
+/**
+	* rules for task-body
+	*/
+
+.task-body {
+	background-color: $white;
+	height: 37px;
+	list-style: none outside none;
+	margin: 0;
+	position: relative;
+	border-style: solid;
+	border-width: 1px;
+	border-color: $gray_light;
+	overflow: hidden;
+
+	.icon {
+		&.large {
+			margin: 8px;
+		}
+
+		&.task-separator {
+			cursor: default;
+			height: 100%;
+			left: 34px;
+			position: absolute;
+			top: 1px;
+			background: unset;
+			width: 2px;
+			border-left: 1px dotted $gray;
+		}
+
+		&.icon-add {
+			&:hover {
+				opacity: 1;
+			}
+		}
+
+		&.subtasks {
+			display: none;
+		}
+
+		&.toggle-completed-subtasks {
+			display: none;
+		}
+	}
+
+	&:hover {
+		background-color: $gray_easy;
+	}
+
+	&.active {
+		background-color: $gray_easy;
+	}
+
+	.title-wrapper {
+		cursor: pointer;
+		color: $gray_dark;
+		display: block;
+		line-height: 16px;
+		margin: 0 0 0 44px;
+		overflow: hidden;
+		padding: 9px 0;
+		position: relative;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+
+		.title {
+			cursor: text;
+		}
+	}
+
+	.duedate {
+		color: $blue_due;
+		float: right;
+		font-size: 11px;
+		line-height: 14px;
+		margin: 10px;
+
+		&.overdue {
+			color: $red_overdue;
+		}
+	}
+
+	.listname {
+		color: $gray;
+		float: right;
+		font-size: 11px;
+		line-height: 14px;
+		margin: 10px;
+	}
+
+	&.attachment .icon.icon-note {
+		display: inline-block;
+		float: right;
+	}
+
+	&.subtasks .icon.subtasks {
+		display: inline-block;
+	}
+
+	&.completedsubtasks .icon.toggle-completed-subtasks {
+		display: inline-block;
+	}
+}
+
+.percentbar {
+	height: 3px;
+	position: relative;
+	top: 28px;
+	left: 42px;
+	margin-right: 103px;
+	margin-bottom: -5px;
+	background-color: $gray_light;
+	border-radius: 2px;
+
+	.percentdone {
+		height: 3px;
+		border-radius: 2px 0 0 2px;
+		opacity: .75;
+	}
+}
+
+.task-item {
+	cursor: default;
+	min-height: 37px;
+	list-style: none outside none;
+	overflow: hidden;
+	margin-top: -1px;
+
+	&:first-child {
+		margin-top: 0;
+
+		.task-body {
+			border-width: 1px;
+		}
+	}
+
+	.subtasks-container {
+		margin-left: 35px;
+
+		.task-item {
+			margin-top: -1px;
+		}
+
+		&.subtaskshidden li.subtask {
+			display: none;
+		}
+	}
+
+	&.add-subtask {
+		background: $white;
+		border: 1px solid $gray_light;
+
+		input {
+			background: transparent none repeat scroll 0 0 !important;
+			border: medium none !important;
+			border-radius: 0 !important;
+			box-shadow: none !important;
+			box-sizing: border-box;
+			color: $gray_dark;
+			cursor: text;
+			font-size: 100%;
+			margin: 0;
+			padding: 0 60px 0 32px;
+			width: 100%;
+			min-height: 36px;
+		}
+	}
+
+	.task-star .icon:hover {
+		opacity: .7;
+	}
+
+	&.done .task-body {
+		opacity: .6;
+
+		.title {
+			text-decoration: line-through;
+		}
+	}
+}
+
+.categories-list {
+	display: inline-block;
+	vertical-align: middle;
+
+	li {
+		background-color: $gray_easy;
+		border: 1px solid $gray_light;
+		border-radius: 2px;
+		color: $gray;
+		float: left;
+		font-weight: bold;
+		margin: -2px 4px 0;
+		padding: 2px 5px;
+		min-height: 22px;
+	}
+}
+
+li.ui-draggable-dragging {
+	width: 300px;
+	z-index: 101 !important;
+
+	.duedate {
+		display: none;
+	}
+}
+
+tr:last-child .task-item {
+	height: 39px;
+
+	div.task-body {
+		border-width: 1px;
+	}
+}
+
+.template {
+	display: none;
+}
+
+/**
+	* rules for app-sidebar
+	*/
 
 #app-sidebar {
 	.icon.detail-checkbox {
@@ -1339,6 +1191,27 @@ a {
 	}
 }
 
+input {
+	&.datepicker-input {
+		width: 120px;
+	}
+
+	&.timepicker-input {
+		width: 80px;
+	}
+
+	&.duration-input {
+		margin: 2px 0 0 .3em;
+		width: 35px;
+	}
+
+	&.percent-input,
+	&.priority-input {
+		width: 35px;
+		margin-top: 0;
+	}
+}
+
 .date {
 	.icon {
 		&.icon-calendar-due,
@@ -1364,6 +1237,203 @@ a {
 	color: $blue_due !important;
 }
 
+.detail-categories .select2-container-multi {
+	.select2-choices {
+		border: 1px solid transparent;
+
+		.select2-search-choice {
+			color: $blue_due;
+			font-weight: bold;
+			line-height: 14px;
+			margin: 2px 0 3px 5px;
+			background-image: none;
+			background-color: $gray_easy;
+			box-shadow: none;
+			border-color: $gray_light;
+			min-height: 22px;
+
+			a.select2-search-choice-close {
+				opacity: .4;
+				display: initial;
+
+				@extend .icon;
+				@extend .icon-close;
+
+				&:hover {
+					opacity: 1;
+				}
+			}
+		}
+	}
+
+	&.select2-container-disabled .select2-choices {
+		background-color: $white;
+		background-image: none;
+		border: none;
+		cursor: default;
+	}
+}
+
+/**
+	* rules for icons
+	*/
+.collection .icon {
+	opacity: 1;
+}
+
+.disabled .icon.detail-star:hover {
+	cursor: not-allowed;
+}
+
+.icon {
+	height: 16px;
+	width: 16px;
+	display: inline-block;
+	vertical-align: middle;
+	opacity: .5;
+
+	&.input-date {
+		display: none;
+		opacity: .4;
+		transition: opacity 100ms ease 0s;
+		right: 35px;
+		top: 7px;
+	}
+
+	&.input-star {
+		display: none;
+		opacity: .5;
+		right: 9px;
+
+		&.starred {
+			opacity: 1;
+		}
+	}
+
+	&.task-checkbox,
+	&.detail-checkbox {
+		@extend %extend_1;
+
+		&:not(.icon-checkmark) {
+			background: unset;
+		}
+
+		&:not(.disabled):hover {
+			border-color: $black;
+		}
+
+		&.disabled {
+			cursor: not-allowed;
+		}
+	}
+
+	&.icon-note {
+		display: none;
+	}
+
+	&.right {
+		float: right;
+	}
+
+	&.detail-settings {
+		transition: opacity 100ms ease 0s;
+		opacity: .6;
+	}
+
+	&.detail-reminder {
+		height: 20px;
+		width: 20px;
+	}
+
+	&.icon-checkmark {
+		opacity: 1;
+	}
+
+	&.note-fullscreen {
+		opacity: .6;
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+
+	&.toggle-completed-subtasks {
+		float: right;
+		opacity: 1;
+
+		&.hidden {
+			opacity: .5;
+		}
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+
+	&.detail-delete {
+		display: none;
+		margin-left: auto;
+		right: 22px;
+
+		&:hover {
+			opacity: .8;
+		}
+	}
+
+	&.detail-save {
+		display: none;
+		margin-left: auto;
+		right: 44px;
+
+		&:hover {
+			opacity: .8;
+		}
+	}
+
+	&.icon-tag-active {
+		opacity: 1;
+	}
+}
+
+.icon-task-star-low,
+.icon-task-star-medium,
+.icon-task-star-high {
+	opacity: 1 !important;
+}
+
+a {
+	&.detail-star {
+		padding: 15px;
+		margin-left: auto;
+		float: right;
+
+		.icon {
+			height: 24px;
+			width: 24px;
+			background-size: 144px 144px;
+			opacity: .3;
+
+			&:hover {
+				opacity: .5;
+			}
+		}
+	}
+
+	&:hover .icon {
+		&.detail-trash,
+		&.detail-settings,
+		&.detail-close,
+		&.input-star {
+			opacity: 1;
+		}
+
+		&.detail-delete,
+		&.input-date {
+			opacity: .8;
+		}
+	}
+}
+
 .high,
 .medium,
 .low {
@@ -1372,26 +1442,37 @@ a {
 	}
 }
 
-input {
-	&.datepicker-input {
-		width: 120px;
+/**
+	* rules for searchresults
+	*/
+
+#searchresults {
+	padding-top: 0 !important;
+	margin-top: 20px !important;
+	background-color: transparent !important;
+	min-height: 150px;
+
+	#status {
+		padding: 10px 0 18px !important;
+		height: 22px !important;
+		background-color: transparent !important;
+		font-weight: bold;
+		color: $gray;
+		font-size: 13px !important;
+
+		&.emptycontent {
+			position: relative;
+		}
 	}
 
-	&.timepicker-input {
-		width: 80px;
-	}
-
-	&.duration-input {
-		margin: 2px 0 0 .3em;
-		width: 35px;
-	}
-
-	&.percent-input,
-	&.priority-input {
-		width: 35px;
-		margin-top: 0;
+	span.icon.task-checkbox {
+		opacity: .6;
 	}
 }
+
+/**
+	* rules for datetimepicker
+	*/
 
 .ui-widget-content {
 	background: none repeat scroll 0 0 $gray_easy;
@@ -1573,274 +1654,213 @@ div {
 	}
 }
 
-.percentbar {
-	height: 3px;
-	position: relative;
-	top: 28px;
-	left: 42px;
-	margin-right: 103px;
-	margin-bottom: -5px;
-	background-color: $gray_light;
-	border-radius: 2px;
-
-	.percentdone {
-		height: 3px;
-		border-radius: 2px 0 0 2px;
-		opacity: .75;
-	}
-}
-
-#searchresults {
-	padding-top: 0 !important;
-	margin-top: 20px !important;
-	background-color: transparent !important;
-	min-height: 150px;
-
-	#status {
-		padding: 10px 0 18px !important;
-		height: 22px !important;
-		background-color: transparent !important;
-		font-weight: bold;
-		color: $gray;
-		font-size: 13px !important;
-
-		&.emptycontent {
-			position: relative;
-		}
-	}
-
-	span.icon.task-checkbox {
-		opacity: .6;
-	}
-}
-
-.template {
-	display: none;
-}
-
-.categories-list {
-	display: inline-block;
-	vertical-align: middle;
-
-	li {
-		background-color: $gray_easy;
-		border: 1px solid $gray_light;
-		border-radius: 2px;
-		color: $gray;
-		float: left;
-		font-weight: bold;
-		margin: -2px 4px 0;
-		padding: 2px 5px;
-		min-height: 22px;
-	}
-}
-
-#app-settings-content {
-	li {
-		line-height: 3em;
-		position: relative;
-		height: 40px;
-
-		.label-container {
-			white-space: nowrap;
-			padding-right: 115px;
-			display: inline-block;
-			text-overflow: ellipsis;
-			width: 100%;
-			overflow: hidden;
-			height: 100%;
-		}
-
-		select {
-			position: absolute;
-			right: 0;
-		}
-
-		&.headline {
-			font-weight: bold;
-			line-height: 1.5em;
-		}
-	}
-
-	.icon {
-		margin-top: -3px;
-	}
-
-	select {
-		float: right;
-		min-width: 105px;
-	}
-}
-
-ol[dnd-list] {
-	.dndDraggingSource {
-		display: none;
-	}
-
-	.dndPlaceholder {
-		display: block;
-		background-color: $gray_light;
-		min-height: 37px;
-	}
-
-	.copy.dndDraggingSource {
-		display: block;
-	}
-}
-
-.colorpicker {
-	display: block;
-	height: 30px;
-	height: auto;
-	padding-bottom: 3px;
-	padding-top: 3px;
-
-	.colorpicker-list {
-		display: flex;
-		flex-wrap: wrap;
-		width: 100%;
-		height: 100%;
-		text-align: center;
-		justify-content: center;
-		align-items: center;
-
-		li {
-			height: 24px;
-			width: calc(100% / 10) !important;
-
-			&.selected {
-				border: 1px solid $gray_dark;
-			}
-
-			&.randomcolour {
-				cursor: pointer;
-
-				.icon-random {
-					filter: invert(1);
-					opacity: 1;
-				}
-			}
-		}
-	}
-}
-
-.confirmation-default {
-	overflow: hidden;
-}
-
-.confirmed {
-	.confirmation-default {
-		display: none !important;
-	}
-
-	&.active {
-		.confirmation-confirm {
-			cursor: pointer !important;
-		}
-
-		.countdown {
-			display: none;
-		}
-	}
-}
-
-.confirmation-abort {
-	width: 50% !important;
-	display: none !important;
-	padding-right: 0 !important;
-	background-position: center !important;
-}
-
-.confirmation-confirm {
-	@extend .confirmation-abort;
-
-	background-color: $red !important;
-	cursor: default !important;
-}
-
-.collection .icon {
-	opacity: 1;
-}
-
-.disabled .icon.detail-star:hover {
-	cursor: not-allowed;
-}
-
-.active .calendar-indicator {
-	height: 16px;
-	width: 16px;
-	margin-left: 2px;
-	margin-right: 2px;
-}
-
-tr:last-child .task-item {
-	height: 39px;
-
-	div.task-body {
-		border-width: 1px;
-	}
-}
-
-.app-tasks #app-content {
-	overflow-x: hidden;
-}
-
 td.ui-timepicker-hours table {
 	border-right: 1px solid $gray_light;
 }
 
-li.ui-draggable-dragging {
-	width: 300px;
-	z-index: 101 !important;
+/**
+	* rules for sortorder-dropdown
+	*/
 
-	.duedate {
-		display: none;
-	}
-}
+.sortorder-dropdown {
+	display: none;
+	top: 68px;
+	right: 3px;
 
-.detail-categories .select2-container-multi {
-	.select2-choices {
-		border: 1px solid transparent;
+	li {
+		float: inherit;
+		width: auto !important;
+		cursor: pointer;
+		opacity: .57;
 
-		.select2-search-choice {
-			color: $blue_due;
-			font-weight: bold;
-			line-height: 14px;
-			margin: 2px 0 3px 5px;
-			background-image: none;
-			background-color: $gray_easy;
-			box-shadow: none;
-			border-color: $gray_light;
-			min-height: 22px;
+		&.active {
+			opacity: 1 !important;
+		}
 
-			a.select2-search-choice-close {
-				opacity: .4;
-				display: initial;
+		img {
+			cursor: pointer;
+			margin-right: 5px;
+			vertical-align: text-bottom;
+		}
 
-				@extend .icon;
-				@extend .icon-close;
+		span {
+			cursor: pointer;
+		}
 
-				&:hover {
-					opacity: 1;
-				}
-			}
+		&:hover {
+			opacity: 1 !important;
 		}
 	}
 
-	&.select2-container-disabled .select2-choices {
-		background-color: $white;
-		background-image: none;
-		border: none;
-		cursor: default;
+	a {
+		width: 100% !important;
+	}
+
+	&.open {
+		display: block;
+	}
+
+	.icon {
+		margin: 12px 8px;
+
+		&.sort-indicator {
+			margin-left: auto;
+			margin-right: 0;
+			filter: alpha(opacity=80);
+			opacity: .8;
+			float: right;
+			visibility: hidden;
+		}
+	}
+
+	.label {
+		margin-right: 10px;
+	}
+
+	.active .icon.sort-indicator {
+		visibility: visible;
 	}
 }
 
-.dropzone-visible > ol[dnd-list] {
-	min-height: 50px;
+.icon {
+	background: url("../img/sprites.svg") no-repeat;
 }
 
-.error input.edit {
-	color: $red;
-	border-color: $red !important;
-	box-shadow: 0 0 6px rgba($red, .3);
+.icon-add {
+	background-position: 20% 0;
 }
+
+.icon-all {
+	background-position: 80% 20%;
+}
+
+.icon-alphabetically {
+	background-position: 0 20%;
+}
+
+.icon-calendar {
+	background-position: 20% 20%;
+}
+
+.icon-calendar-due {
+	background-position: 40% 0;
+}
+
+.icon-calendar-overdue {
+	background-position: 40% 20%;
+}
+
+.icon-checkmark {
+	background-position: 0 40%;
+}
+
+.icon-checkmark-color {
+	background-position: 20% 40%;
+}
+
+.icon-clock {
+	background-position: 40% 40%;
+}
+
+.icon-clock-due {
+	background-position: 60% 0;
+}
+
+.icon-clock-overdue {
+	background-position: 60% 20%;
+}
+
+.icon-close {
+	background-position: 60% 40%;
+}
+
+.icon-current {
+	background-position: 0 60%;
+}
+
+.icon-hide {
+	background-position: 20% 60%;
+}
+
+.icon-manual {
+	background-position: 40% 60%;
+}
+
+.icon-menu {
+	background-position: 60% 60%;
+}
+
+.icon-note {
+	background-position: 80% 0;
+}
+
+.icon-percent {
+	background-position: 0 0;
+}
+
+.icon-percent-active {
+	background-position: 80% 40%;
+}
+
+.icon-random {
+	background-position: 80% 60%;
+}
+
+.icon-settings {
+	background-position: 0 80%;
+}
+
+.icon-sort-down {
+	background-position: 20% 80%;
+}
+
+.icon-sort-up {
+	background-position: 40% 80%;
+}
+
+.icon-subtasks-hidden,
+.icon-subtasks-hidden\:regular {
+	background-position: 60% 80%;
+}
+
+.icon-subtasks-hidden:hover,
+.icon-subtasks-hidden\:hover {
+	background-position: 80% 80%;
+}
+
+.icon-subtasks-visible {
+	background-position: 100% 0;
+}
+
+.icon-tag {
+	background-position: 100% 20%;
+}
+
+.icon-tag-active {
+	background-position: 100% 40%;
+}
+
+.icon-task-star {
+	background-position: 100% 60%;
+}
+
+.icon-task-star-high {
+	background-position: 100% 80%;
+}
+
+.icon-task-star-low {
+	background-position: 0 100%;
+}
+
+.icon-task-star-medium {
+	background-position: 20% 100%;
+}
+
+.icon-toggle {
+	background-position: 40% 100%;
+}
+
+.icon-trash {
+	background-position: 60% 100%;
+}
+

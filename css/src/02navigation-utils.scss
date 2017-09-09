@@ -1,0 +1,126 @@
+/**
+	* rules for app-navigation-entry-menu
+	*/
+
+.app-navigation-entry-menu {
+	&.sortorder-dropdown li > a span {
+		opacity: 1 !important;
+
+		&[class*=" icon-"] {
+			padding: 0;
+
+			&.icon-menu {
+				@extend .icon-menu;
+			}
+
+			&.icon-calendar {
+				@extend .icon-calendar;
+			}
+
+			&.icon-task-star {
+				@extend .icon-task-star;
+			}
+
+			&.icon-alphabetically {
+				@extend .icon-alphabetically;
+			}
+
+			&.icon-manual {
+				@extend .icon-manual;
+			}
+
+			&.icon-sort-up {
+				@extend .icon-sort-up;
+			}
+
+			&.icon-sort-down {
+				@extend .icon-sort-down;
+			}
+		}
+	}
+
+	li > a {
+		&:not(:empty).confirmation-confirm {
+			padding-right: 0 !important;
+		}
+
+		span.countdown {
+			background-color: inherit;
+			color: $white;
+			display: block;
+			text-align: center;
+			filter: alpha(opacity=100) !important;
+			opacity: 1 !important;
+		}
+	}
+}
+
+.colorpicker {
+	display: block;
+	height: 30px;
+	height: auto;
+	padding-bottom: 3px;
+	padding-top: 3px;
+
+	.colorpicker-list {
+		display: flex;
+		flex-wrap: wrap;
+		width: 100%;
+		height: 100%;
+		text-align: center;
+		justify-content: center;
+		align-items: center;
+
+		li {
+			height: 24px;
+			width: calc(100% / 10) !important;
+
+			&.selected {
+				border: 1px solid $gray_dark;
+			}
+
+			&.randomcolour {
+				cursor: pointer;
+
+				.icon-random {
+					filter: invert(1);
+					opacity: 1;
+				}
+			}
+		}
+	}
+}
+
+.confirmation-default {
+	overflow: hidden;
+}
+
+.confirmed {
+	.confirmation-default {
+		display: none !important;
+	}
+
+	&.active {
+		.confirmation-confirm {
+			cursor: pointer !important;
+		}
+
+		.countdown {
+			display: none;
+		}
+	}
+}
+
+.confirmation-abort {
+	width: 50% !important;
+	display: none !important;
+	padding-right: 0 !important;
+	background-position: center !important;
+}
+
+.confirmation-confirm {
+	@extend .confirmation-abort;
+
+	background-color: $red !important;
+	cursor: default !important;
+}

@@ -1,0 +1,63 @@
+/**
+	* SCSS variables and extends
+	*/
+
+//colors
+$red: $color-error;				// warnings and errors
+$red_overdue: #b3312d;		// overdue dates and high importance
+$yellow: #fd0;						// medium importance
+$blue_due: #4271a6;				// due dates and low importance
+$blue_background: #168ad4;// highlighting date/timepicker dates
+$gray_dark: #404040;			// text
+$gray: #a0a0a0;						// inactive text, checkbox-borders and separators
+$gray_light: #ccc;
+$gray_easy: #f7f7f7;
+$black: #000;
+$white: #fff;
+
+//@extend-elements
+//original selectors
+//.icon.task-checkbox, .icon.detail-checkbox
+%extend_1 {
+	border-radius: 3px;
+	border: 1px solid $gray;
+	float: left;
+	margin: 9px;
+}
+
+//original selectors
+//#app-sidebar div.content-wrapper .title textarea, #app-sidebar div.content-wrapper .title pre
+%extend_2 {
+	box-shadow: none;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 24px;
+	background: none repeat scroll 0 0 transparent;
+	border: medium none;
+	padding: 0;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
+//original selectors
+//#app-sidebar div.content-wrapper .body .note .expandingArea textarea, #app-sidebar div.content-wrapper .body .note .expandingArea pre
+%extend_3 {
+	box-shadow: none;
+	background: none repeat scroll 0 0 transparent;
+	border: medium none;
+	font-size: 13px;
+	line-height: 26px;
+	padding: 0;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
+//original selectors
+//.ui-datepicker table td.selected a, .ui-timepicker table td.selected a
+%extend_11 {
+	background: linear-gradient(to top, rgba($blue_background, .8), rgba($blue_background, .6)) repeat scroll 0 0 transparent !important;
+	border-radius: 3px;
+	color: $white !important;
+	opacity: 1;
+	position: relative;
+}
