@@ -5,9 +5,9 @@
     script('tasks', 'vendor/angular-sanitize/angular-sanitize.min');
     script('tasks', 'vendor/angular-draganddrop/angular-drag-and-drop-lists.min');
     script('tasks', 'vendor/angular-ui-select/dist/select.min');
-    script('tasks', 'vendor/jstzdetect/jstz.min');
-    script('tasks', 'public/app');
-    script('tasks', 'vendor/jquery-timepicker/jquery.ui.timepicker');
+    script('tasks', 'vendor/jstimezonedetect/dist/jstz.min');
+    script('tasks', 'public/app.min');
+    script('tasks', 'vendor_legacy/jquery-timepicker/jquery.ui.timepicker');
     script('tasks', 'vendor/ical.js/build/ical');
     style('tasks', 'style');
     style('tasks', 'sprite');
