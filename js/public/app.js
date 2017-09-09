@@ -1267,6 +1267,22 @@ angular.module('Tasks').controller('SettingsController', [
 				}
 			};
 
+			this._$scope.getSortOrderIcon = function() {
+				switch (_$scope.settingsmodel.getById('various').sortOrder) {
+					case 'due':
+					case 'start':
+						return 'ico-calendar';
+					case 'priority':
+						return 'ico-star';
+					case 'alphabetically':
+						return 'ico-alphabetically';
+					case 'manual':
+						return 'ico-manual';
+					default:
+						return 'ico-menu';
+				}
+			};
+
 			this._$scope.setSortOrder = function($event, order) {
 				_$scope.settingsmodel.getById('various').sortDirection = (_$scope.settingsmodel.getById('various').sortOrder === order) ? +!_$scope.settingsmodel.getById('various').sortDirection : 0;
 				_$scope.settingsmodel.getById('various').sortOrder = order;
@@ -1982,7 +1998,7 @@ angular.module('Tasks').factory('ListsBusinessLayer', [
 			  }
 			  if (result.completed) {
 				$row.find('div.task-item').addClass('done');
-				$row.find('span.task-checkbox').addClass('task-checked');
+				$row.find('span.task-checkbox').addClass('svg-checkmark');
 			  }
 			  if (result.complete) {
 				$row.find('div.percentdone').css({

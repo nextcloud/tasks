@@ -49,27 +49,33 @@ class CollectionsService {
 			array(
 				'id' => "starred",
 				'displayname' => (string)$this->l10n->t('Important'),
-				'show' => 2),
+				'show' => 2,
+				'icon' => 'ico-star'),
 			array(
 				'id' => "today",
 				'displayname' => (string)$this->l10n->t('Today'),
-				'show' => 2),
+				'show' => 2,
+				'icon' => 'ico-calendar'),
 			array(
 				'id' => "week",
 				'displayname' => (string)$this->l10n->t('Week'),
-				'show' => 2),
+				'show' => 2,
+				'icon' => 'ico-calendar'),
 			array(
 				'id' => "all",
 				'displayname' => (string)$this->l10n->t('All'),
-				'show' => 2),
+				'show' => 2,
+				'icon' => 'ico-all'),
 			array(
 				'id' => "current",
 				'displayname' => (string)$this->l10n->t('Current'),
-				'show' => 2),
+				'show' => 2,
+				'icon' => 'ico-current'),
 			array(
 				'id' => "completed",
 				'displayname' => (string)$this->l10n->t('Completed'),
-				'show' => 2)
+				'show' => 2,
+				'icon' => 'ico-checkmark')
 		);
 		foreach ($collections as $key => $collection){
 			$tmp = $this->settings->getUserValue($this->userId, $this->appName,'show_'.$collection['id']);

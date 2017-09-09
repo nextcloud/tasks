@@ -1,14 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1"
-	 id="Ebene_1" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"
-	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="128px" height="128px"
-	 viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
-<path fill="#0082C9" d="M-28-48h88c11.047,0,20,8.957,20,20v88c0,11.047-8.953,20-20,20h-88c-11.045,0-20-8.953-20-20v-88
-	C-48-39.043-39.045-48-28-48z"/>
-<path fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.75" stroke-miterlimit="10" d="M7.832,61.988c0,0,0.992-2.738,2.152-5.23
-	C28.75,16.34,52.859-10.28,63.555-22.364c8.656-9.789,5.271-8.248,1.433-5.752c-15.64,10.172-44.91,42.86-56.095,54.186
-	c-2.072,2.086-6.764,7.016-7.824,7.016c-1.197,0-5.191-1.844-7.477-3.188c-8.729-5.117-17.077-10.105-22.313-11.994
-	c-11.156-4.012-8-0.201-7.363,1.076c1.992,3.984,28.932,25.582,37.856,35.777C4.535,57.914,7.832,61.988,7.832,61.988z"/>
+<!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'>
+<svg width="128px" height="128px" enable-background="new 0 0 128 128" version="1.1" viewBox="0 0 128 128" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+<path d="m-28-48h88c11.047 0 20 8.957 20 20v88c0 11.047-8.953 20-20 20h-88c-11.045 0-20-8.953-20-20v-88c0-11.043 8.955-20 20-20z" fill="#0082C9"/>
+<path d="m7.832 61.988s0.992-2.738 2.152-5.23c18.766-40.418 42.875-67.038 53.571-79.122 8.656-9.789 5.271-8.248 1.433-5.752-15.64 10.172-44.91 42.86-56.095 54.186-2.072 2.086-6.764 7.016-7.824 7.016-1.197 0-5.191-1.844-7.477-3.188-8.729-5.117-17.077-10.105-22.313-11.994-11.156-4.012-8-0.201-7.363 1.076 1.992 3.984 28.932 25.582 37.856 35.777 2.763 3.157 6.06 7.231 6.06 7.231z" fill="#fff" stroke="#fff" stroke-miterlimit="10" stroke-width=".75"/>
 </svg>

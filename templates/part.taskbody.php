@@ -2,31 +2,30 @@
     type="task"
     taskID="{{ task.uri }}"
     ng-class="{active: route.taskID==task.uri, subtasks: hasSubtasks(task), completedsubtasks: hasCompletedSubtasks(task), subtaskshidden: task.hideSubtasks, attachment: task.note!=''}">
-    
+
     <div class="percentbar" ng-if="task.complete > 0 ">
         <div class="percentdone" style="width:{{ task.complete }}%; background-color:{{ task.calendar.color }};" aria-label="{{ task.complete | percentDetails}}"></div>
     </div>
 
     <a class="task-checkbox handler" name="toggleCompleted" ng-click="toggleCompleted(task)" role="checkbox" aria-checked="{{task.completed}}" aria-label="<?php p($l->t('Task is completed')); ?>">
-        <span class="icon task-checkbox" ng-class="{'task-checked': task.completed}"></span>
+        <span class="icon task-checkbox" ng-class="{'ico-checkmark': task.completed}"></span>
     </a>
     <a class="icon task-separator"></a>
     <a class="task-star handler" ng-click="toggleStarred(task)">
-        <span class="icon large task-star faded" ng-class="{'icon_margin':task.complete > 0,
-        'high':task.priority > 5, 'medium':task.priority == 5, 'low':task.priority > 0 && task.priority < 5}">
+        <span class="icon ico-star large faded" ng-class="{'ico-star-high':task.priority > 5, 'ico-star-medium':task.priority == 5, 'ico-star-low':task.priority > 0 && task.priority < 5}">
         </span>
     </a>
     <a class="task-addsubtask handler add-subtask" ng-show="task.calendar.writable" ng-click="showSubtaskInput(task.uid)" oc-click-focus="{selector: '.add-subtask input', timeout: 0}">
-        <span ng-class="{'icon_margin' : task.complete > 0}" class="icon large addsubtask" title="<?php p($l->t('add a subtask to')); ?> {{ task.summary }}"></span>
+        <span class="icon large ico-add" title="<?php p($l->t('add a subtask to')); ?> {{ task.summary }}"></span>
     </a>
     <a class="handler"  ng-click="toggleSubtasks(task)">
-        <span class="icon large subtasks" title="<?php p($l->t('Toggle subtasks')); ?>"></span>
+        <span class="icon large subtasks" ng-class="task.hideSubtasks ? 'ico-subtasks-hidden' : 'ico-subtasks-visible'" title="<?php p($l->t('Toggle subtasks')); ?>"></span>
     </a>
     <a class="handler"  ng-click="toggleCompletedSubtasks(task)">
-        <span class="icon large toggle-completed-subtasks" ng-class="{'hidden': task.hideCompletedSubtasks}" title="<?php p($l->t('Toggle completed subtasks')); ?>"></span>
+        <span class="icon large ico-toggle toggle-completed-subtasks" ng-class="{'hidden': task.hideCompletedSubtasks}" title="<?php p($l->t('Toggle completed subtasks')); ?>"></span>
     </a>
     <a>
-        <span class="icon large task-attachment"></span>
+        <span class="icon large ico-note"></span>
     </a>
     <a class="duedate" ng-class="{overdue: TasksModel.overdue(task.due)}">{{ task.due | dateTaskList }}</a>
     <a ng-show="route.collectionID=='week'" class="listname" >{{ task.calendar.displayname }}</a>

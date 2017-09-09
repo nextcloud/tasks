@@ -1,0 +1,142 @@
+.icon {
+	background: url("../img/sprites.svg") no-repeat;
+}
+
+.ico-add {
+	background-position: 20% 0;
+}
+
+.ico-all {
+	background-position: 80% 20%;
+}
+
+.ico-alphabetically {
+	background-position: 0 20%;
+}
+
+.ico-calendar {
+	background-position: 20% 20%;
+}
+
+.ico-calendar-due {
+	background-position: 40% 0;
+}
+
+.ico-calendar-overdue {
+	background-position: 40% 20%;
+}
+
+.ico-checkmark {
+	background-position: 0 40%;
+}
+
+.ico-checkmark-color {
+	background-position: 20% 40%;
+}
+
+.ico-clock {
+	background-position: 40% 40%;
+}
+
+.ico-clock-due {
+	background-position: 60% 0;
+}
+
+.ico-clock-overdue {
+	background-position: 60% 20%;
+}
+
+.ico-close {
+	background-position: 60% 40%;
+}
+
+.ico-current {
+	background-position: 0 60%;
+}
+
+.ico-hide {
+	background-position: 20% 60%;
+}
+
+.ico-manual {
+	background-position: 40% 60%;
+}
+
+.ico-menu {
+	background-position: 60% 60%;
+}
+
+.ico-note {
+	background-position: 80% 0;
+}
+
+.ico-percent {
+	background-position: 0 0;
+}
+
+.ico-percent-active {
+	background-position: 80% 40%;
+}
+
+.ico-random {
+	background-position: 80% 60%;
+}
+
+.ico-settings {
+	background-position: 0 80%;
+}
+
+.ico-sort-down {
+	background-position: 20% 80%;
+}
+
+.ico-sort-up {
+	background-position: 40% 80%;
+}
+
+.ico-star {
+	background-position: 60% 80%;
+}
+
+.ico-star-high {
+	background-position: 80% 80%;
+}
+
+.ico-star-low {
+	background-position: 100% 0;
+}
+
+.ico-star-medium {
+	background-position: 100% 20%;
+}
+
+.ico-subtasks-hidden,
+.ico-subtasks-hidden\:regular {
+	background-position: 100% 40%;
+}
+
+.ico-subtasks-hidden:hover,
+.ico-subtasks-hidden\:hover {
+	background-position: 100% 60%;
+}
+
+.ico-subtasks-visible {
+	background-position: 100% 80%;
+}
+
+.ico-tag {
+	background-position: 0 100%;
+}
+
+.ico-tag-active {
+	background-position: 20% 100%;
+}
+
+.ico-toggle {
+	background-position: 40% 100%;
+}
+
+.ico-trash {
+	background-position: 60% 100%;
+}
+

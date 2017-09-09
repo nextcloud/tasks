@@ -20,12 +20,7 @@
   max-height: 100px;
 }
 #app-navigation li > a {
-  opacity: 1 !important;
   padding-right: 20px;
-}
-#app-navigation li > a span.title,
-#app-navigation li > a span.icon {
-  opacity: 0.57;
 }
 #app-navigation li.active > a span.title,
 #app-navigation li:hover > a span.title,
@@ -50,15 +45,18 @@
 #app-navigation .app-navigation-entry-menu li {
   float: inherit;
   width: auto !important;
-  opacity: 0.5;
   cursor: pointer;
+}
+.collection .icon {
+  opacity: 1;
 }
 .sortorder-dropdown li {
   float: inherit;
   width: auto !important;
   cursor: pointer;
+  opacity: .57;
  }
-.sortorder-dropdown li.active a {
+.sortorder-dropdown li.active {
   opacity: 1 !important;
 }
 .sortorder-dropdown a {
@@ -73,7 +71,7 @@
 .sortorder-dropdown li span {
   cursor: pointer;
 }
-#app-navigation .app-navigation-entry-menu li:hover,
+#app-navigation .app-navigation-entry-menu li:hover a,
 .sortorder-dropdown li:hover {
   opacity: 1 !important;
 }
@@ -96,12 +94,13 @@
 }
 #app-navigation li a > span.icon {
   margin-top: -3px;
+  margin-left: 2px;
 }
 #app-navigation li a > span.title {
-  margin-left: 9px;
+  margin-left: 11px;
 }
 #app-navigation li.animate-up {
-  max-height: 0px;
+  max-height: 0;
   border-bottom: 0;
   overflow: hidden;
 }
@@ -109,244 +108,171 @@
   overflow: hidden;
   color: #423E3E;
 }
-#content .icon {
-  background-image: url("../img/sprites.svg");
-  height: 20px;
-  width: 18px;
+.icon {
+  height: 16px;
+  width: 16px;
   display: inline-block;
-  cursor: pointer;
   vertical-align: middle;
+  opacity: .5;
 }
-#content .icon.none {
-  background-position: 0px -20px;
+.task-item .ico-star:hover {
+  opacity: 0.7;
 }
-#content .icon.list-list,
-#content .icon.sort-default {
-  background-position: -40px 0px;
+.ico-star-low,
+.ico-star-medium,
+.ico-star-high {
+  opacity: 1 !important;
 }
-#content .icon.collection-starred {
-  background-position: -20px 0px;
-}
-#content .icon.collection-today {
+.icon.ico-calendar {
   -moz-box-sizing: border-box;
-  background-position: -240px 0px;
-  color: #909090;
   font-size: 7px;
   font-weight: bold;
-  line-height: 9px;
-  padding-top: 7px;
+  line-height: 21px;
   text-align: center;
-  text-shadow: 0 1px 0 white;
 }
-#content .icon.collection-week {
-  background-position: -220px 0px;
-}
-#content .icon.collection-completed {
-  background-position: -100px 0px;
-}
-#content .icon.collection-all {
-  background-position: -200px 0px;
-}
-#content .icon.collection-current {
-  background-position: -240px -80px;
-}
-#content .icon.detail-add {
-  background-position: -80px 0px;
-  cursor: default;
-  height: 20px;
-  width: 20px;
-  opacity: 0.5;
-}
-#content .icon.input-date {
+.icon.input-date {
   display: none;
-  background-position: -160px -100px;
   opacity: 0.4;
   transition: opacity 100ms ease 0s;
   right: 35px;
   top: 7px;
 }
-#content .icon.input-star {
+.icon.input-star {
   display: none;
-  background-position: -100px -180px;
   opacity: 0.5;
   right: 9px;
 }
-#content .icon.input-star.starred {
-  background-position: -120px -180px;
+.icon.input-star.starred {
   opacity: 1;
 }
-#content .icon.detail-delete {
-  background-position: -260px 0;
-  height: 20px;
-  opacity: 0.4;
-  width: 20px;
+.icon.task-checkbox,
+.icon.detail-checkbox {
+  border-radius: 3px;
+  border: 1px solid #b0b0b0;
+  float: left;
+  margin: 9px;
 }
-#content .icon.task-checkbox {
-  background-position: -60px 0px;
-  height: 20px;
-  width: 20px;
-  left: 8px;
+#app-sidebar .icon.detail-checkbox {
+  left: 16px !important;
+  cursor: pointer;
   position: absolute;
-  top: 7px;
+  top: 19px;
+  margin: 0;
 }
-#content .icon.task-checkbox.disabled {
+.icon.task-checkbox:not(.disabled):hover,
+.icon.detail-checkbox:not(.disabled):hover {
+    border-color: #000;
+}
+.icon.task-checkbox:not(.ico-checkmark),
+.icon.detail-checkbox:not(.ico-checkmark) {
+    background: unset;
+}
+.icon.task-checkbox.disabled,
+.icon.detail-checkbox.disabled {
   cursor: not-allowed;
 }
-#content .icon.task-attachment {
-  background-position: 0 -120px;
+.icon.ico-note {
   display: none;
 }
-#content .icon.subtasks {
+.icon.subtasks {
   float:right;
-  background-position: -220px -100px;
 }
-#content .icon.detail-trash {
-  background-position: -260px 0px;
+.icon.detail-settings {
   transition: opacity 100ms ease 0s;
   opacity: 0.6;
 }
-#content .icon.detail-settings {
-  background-position: -200px -40px;
-  transition: opacity 100ms ease 0s;
-  opacity: 0.6;
-}
-#content .icon.detail-close {
-  background-position: -260px -20px;
-  opacity: 0.6;
-  transition: opacity 100ms ease 0s;
-}
-#content .icon.detail-checkbox {
-  left: 18px;
-  position: absolute;
-  top: 17px;
-  background-position: -60px 0px;
-}
-#content .disabled .icon.detail-checkbox {
-  cursor: not-allowed;
-}
-#content .icon.detail-reminder {
-  background-position: -40px -40px;
+.icon.detail-reminder {
   height: 20px;
   width: 20px;
 }
-#content .icon.detail-percent {
-  background-position: -260px -60px;
-}
-#content .icon.detail-priority,
-#content .icon.sort-priority {
-  background-position: -160px -80px;
-}
-#content .icon.detail-categories {
-  background-position: -200px -60px;
-}
-#content .icon.task-checked,
-#content .icon.detail-checked {
-  background-position: -60px -20px;
-  height: 20px;
-  width: 20px;
-}
-#content .icon.detail-star {
-  position: absolute;
-  right: 15px;
-  top: -2px;
-  background-position: -60px -40px;
-  height: 60px;
-  width: 30px;
-}
-#content .icon.detail-star.low {
-  background-position: -90px -100px !important;
-}
-#content .icon.detail-star.medium {
-  background-position: -60px -100px !important;
-}
-#content .icon.detail-star.high {
-  background-position: -120px -40px !important;
-}
-#content .icon.detail-star:hover {
-  background-position: -90px -40px;
-}
-#content .disabled .icon.detail-star:hover {
-  background-position: -60px -40px;
-  cursor: not-allowed;
-}
-#content .icon.detail-save {
-  background-position: -20px -40px;
-}
-#content .icon.note-fullscreen {
-  background-position: -140px -60px;
-  opacity: 0.6;
-}
-#content .icon.note-fullscreen:hover {
+.icon.ico-checkmark,
+.icon.ico-checkmark {
   opacity: 1;
 }
-#content .icon.toggle-completed-subtasks {
-  background-position: -140px -100px;
+a.detail-star {
+    padding: 15px;
+    margin-left: auto;
+    float: right;
+}
+a.detail-star .icon {
+  height: 24px;
+  width: 24px;
+  background-size: 144px 144px;
+  opacity: 0.3;
+}
+a.detail-star .icon:hover {
+  opacity: 0.5;
+}
+.disabled .icon.detail-star:hover {
+  cursor: not-allowed;
+}
+.icon.note-fullscreen {
+  opacity: 0.6;
+}
+.icon.note-fullscreen:hover {
+  opacity: 1;
+}
+.icon.toggle-completed-subtasks {
   float: right;
-  opacity: 0.8;
-  width: 20px;
-}
-#content .icon.toggle-completed-subtasks.hidden {
-  background-position: -120px -100px;
-}
-#content .icon.toggle-completed-subtasks:hover {
   opacity: 1;
 }
-#content .calendar-indicator {
+.icon.toggle-completed-subtasks.hidden {
+  opacity: 0.5;
+}
+.icon.toggle-completed-subtasks:hover {
+  opacity: 1;
+}
+.calendar-indicator {
   min-width: 12px;
   min-height: 12px;
   background-color: #F00;
   display: inline-block;
   height: 12px;
   width: 12px;
-  margin-top: 0px;
+  margin-top: 0;
   border-radius: 50%;
   text-align: center;
   vertical-align: middle;
   line-height: 20px;
   margin-left: 4px;
-  margin-right: 4px;
+  margin-right: 2px;
 }
-#content .active .calendar-indicator {
+.active .calendar-indicator {
   height: 16px;
   width: 16px;
   margin-left: 2px;
   margin-right: 2px;
 }
-#content tr:last-child .task-item {
+tr:last-child .task-item {
   height: 39px;
 }
-#content tr:last-child .task-item div.task-body {
+tr:last-child .task-item div.task-body {
   border-width: 1px;
 }
-#content li.task-item:first-child {
+.task-item:first-child {
   margin-top: 0;
 }
-#content li.task-item:first-child .task-body {
+.task-item:first-child .task-body {
   border-width: 1px;
 }
-#content li.task-item,
-#content div.task-item {
+.task-item {
   cursor: default;
   min-height: 37px;
   list-style: none outside none;
   overflow: hidden;
   margin-top: -1px;
 }
-#content li.task-item .subtasks-container,
-#content div.task-item .subtasks-container {
+.task-item .subtasks-container {
   margin-left: 35px;
 }
-#content li.task-item .subtasks-container.subtaskshidden li.subtask,
-#content div.task-item .subtasks-container.subtaskshidden li.subtask {
+.task-item .subtasks-container.subtaskshidden li.subtask {
   display: none;
 }
-#content li.task-item.add-subtask,
-#content div.task-item.add-subtask {
+.task-item.add-subtask {
   background: #ffffff;
   border: 1px solid #cccccc;
 }
-#content li.task-item.add-subtask input,
-#content div.task-item.add-subtask input {
+.task-item.add-subtask input {
   background: transparent none repeat scroll 0 0 !important;
   border: medium none !important;
   border-radius: 0 !important;
@@ -360,25 +286,20 @@
   width: 100%;
   min-height: 36px;
 }
-#content li.task-item.done .task-body,
-#content div.task-item.done .task-body {
+.task-item.done .task-body {
   opacity: 0.6;
 }
-#content li.task-item.done .task-body .title,
-#content div.task-item.done .task-body .title {
+.task-item.done .task-body .title {
   text-decoration: line-through;
   text-shadow: none;
 }
-#content li.task-item .subtasks-container .task-item,
-#content div.task-item .subtasks-container .task-item {
+.task-item .subtasks-container .task-item {
   margin-top: -1px;
 }
-#content li.task-item .task-body .icon.large,
-#content div.task-item .task-body .icon.large{
-  height: 24px;
+.task-body .icon.large {
+  margin: 8px;
 }
-#content li.task-item .task-body,
-#content div.task-item .task-body {
+.task-body {
   -moz-box-sizing: border-box;
   background-color: #ffffff;
   height: 37px;
@@ -388,66 +309,32 @@
   border-style: solid;
   border-width: 1px;
   border-color: #CCCCCC;
+  overflow: hidden;
 }
-#content li.task-item .task-body:hover,
-#content li.task-item .task-body.active,
-#content div.task-item .task-body:hover,
-#content div.task-item .task-body.active {
+.task-body:hover,
+.task-body.active {
     background-color: #f8f8f8;
 }
-#content li.task-item .task-body .icon.task-separator,
-#content div.task-item .task-body .icon.task-separator {
+.task-body .icon.task-separator {
   cursor: default;
   height: 100%;
   left: 34px;
   position: absolute;
   top: 1px;
-  background-position: 0 -20px;
+  background: unset;
   width: 2px;
+  border-left: 1px dotted #b0b0b0;
 }
-#content li.task-item .task-body .icon.task-star,
-#content div.task-item .task-body .icon.task-star {
+.task-body .icon.ico-star {
   float: right;
-  margin: 0 8px 0 5px;
-  background-position: -140px 0px;
-  height: 34px;
-  width: 20px;
 }
-#content li.task-item .task-body .icon.task-star:hover,
-#content div.task-item .task-body .icon.task-star:hover {
-  background-position: -160px 0;
-}
-#content li.task-item .task-body .icon.task-star.disabled:hover,
-#content div.task-item .task-body .icon.task-star.disabled:hover {
-  background-position: -140px 0;
-  cursor: not-allowed;
-}
-#content li.task-item .task-body .icon.task-star.high,
-#content div.task-item .task-body .icon.task-star.high {
-  background-position: -180px 0 !important;
-}
-#content li.task-item .task-body .icon.task-star.medium,
-#content div.task-item .task-body .icon.task-star.medium {
-  background-position: -160px -40px !important;
-}
-#content li.task-item .task-body .icon.task-star.low,
-#content div.task-item .task-body .icon.task-star.low {
-  background-position: -180px -40px !important;
-}
-#content li.task-item .task-body .icon.addsubtask,
-#content div.task-item .task-body .icon.addsubtask {
-  background-position: 0 -80px;
+.task-body .icon.ico-add {
   float: right;
-  margin: 0 2px 0 5px;
-  height: 34px;
-  width: 20px;
 }
-#content li.task-item .task-body .icon.addsubtask:hover,
-#content div.task-item .task-body .icon.addsubtask:hover {
-  background-position: -20px -80px;
+.task-body .icon.ico-add:hover {
+  opacity: 1;
 }
-#content li.task-item .task-body .title-wrapper,
-#content div.task-item .task-body .title-wrapper {
+.task-body .title-wrapper {
   cursor: pointer;
   color: #423E3E;
   display: block;
@@ -460,59 +347,42 @@
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
   white-space: nowrap;
 }
-#content li.task-item .task-body .title-wrapper .title,
-#content div.task-item .task-body .title-wrapper .title {
+.task-body .title-wrapper .title {
   cursor: text;
 }
-#content li.task-item .task-body.attachment .icon.task-attachment,
-#content div.task-item .task-body.attachment .icon.task-attachment {
+.task-body.attachment .icon.ico-note {
   display: inline-block;
   float: right;
 }
-#content li.task-item .task-body .icon.subtasks,
-#content div.task-item .task-body .icon.subtasks {
+.task-body .icon.subtasks {
   display: none;
 }
-#content li.task-item .task-body.subtasks .icon.subtasks,
-#content div.task-item .task-body.subtasks .icon.subtasks {
+.task-body.subtasks .icon.subtasks {
   display: inline-block;
 }
-#content li.task-item .task-body .icon.toggle-completed-subtasks,
-#content div.task-item .task-body .icon.toggle-completed-subtasks {
+.task-body .icon.toggle-completed-subtasks {
   display: none;
 }
-#content li.task-item .task-body.completedsubtasks .icon.toggle-completed-subtasks,
-#content div.task-item .task-body.completedsubtasks .icon.toggle-completed-subtasks {
+.task-body.completedsubtasks .icon.toggle-completed-subtasks {
   display: inline-block;
 }
-#content li.task-item .task-body.subtasks.subtaskshidden .icon.subtasks,
-#content div.task-item .task-body.subtasks.subtaskshidden .icon.subtasks {
-  background-position: -260px -100px;
-}
-#content li.task-item .task-body.subtasks.subtaskshidden .icon.subtasks:hover,
-#content div.task-item .task-body.subtasks.subtaskshidden .icon.subtasks:hover {
-  background-position: -220px -100px;
-}
-#content li.task-item .task-body .duedate,
-#content div.task-item .task-body .duedate {
+.task-body .duedate {
   color: #3B6594;
   float: right;
   font-size: 11px;
   line-height: 14px;
-  margin: 11px 3px 0 7px;
+  margin: 10px;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
 }
-#content li.task-item .task-body .duedate.overdue,
-#content div.task-item .task-body .duedate.overdue {
+.task-body .duedate.overdue {
   color: #B3312D;
 }
-#content li.task-item .task-body .listname,
-#content div.task-item .task-body .listname {
+.task-body .listname {
   color: #888;
   float: right;
   font-size: 11px;
   line-height: 14px;
-  margin: 11px 3px 0 7px;
+  margin: 10px;
 }
 .app-tasks #app-content {
     overflow-x: hidden;
@@ -581,13 +451,13 @@
   border: 1px solid #CCCCCC;
   width: 42px;
   height: 34px;
-  margin: 12px 0px 12px 12px;
-  padding: 0px;
+  margin: 12px 0 12px 12px;
+  padding: 0;
   float: right;
   cursor: pointer;
 }
 #app-content .sortorder-dropdown-button .sort-indicator {
-  margin-left: 0px;
+  margin-left: 0;
   visibility: visible;
 }
 .sortorder-dropdown {
@@ -601,16 +471,19 @@
 .sortorder-dropdown .icon {
   margin: 12px 8px;
 }
-.sort-indicator {
+.sortorder-dropdown .icon.sort-indicator {
   margin-left: auto;
+  margin-right: 0;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
   filter: alpha(opacity=80);
   opacity: 0.8;
   float: right;
-  margin-top: 2px;
   visibility: hidden;
 }
-.active .sort-indicator {
+.sortorder-dropdown .label {
+  margin-right: 10px;
+}
+.sortorder-dropdown .active .icon.sort-indicator {
   visibility: visible;
 }
 #app-content div.task-list .loadmore {
@@ -707,12 +580,6 @@
 }
 #app-sidebar div.content-wrapper.completed .body .section .section-title {
   color: #9FA2A6 !important;
-}
-#app-sidebar div.content-wrapper.completed .body .section .icon.detail-date {
-  background-position: -100px -40px !important;
-}
-#app-sidebar div.content-wrapper.completed .body .section .icon.detail-reminder {
-  background-position: -40px -40px !important;
 }
 #app-sidebar div.content-wrapper .title {
   background-color: #f5f5f5;
@@ -902,13 +769,13 @@
   padding-bottom: 32px;
 }
 #app-sidebar div.content-wrapper .body .section {
-  background: url("../img/divider.svg") repeat-x scroll center bottom transparent;
+  border-bottom: 1px dotted #b0b0b0;
   height: 46px;
   padding: 9px 20px 9px 55px;
   position: relative;
   text-shadow: 0 1px 0 white;
   border-top: none;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 #app-sidebar div.content-wrapper .body .section input {
   -moz-box-sizing: border-box;
@@ -944,7 +811,7 @@
   border: 0 none;
   box-shadow: none;
   font-weight: bold;
-  margin-top: 0px;
+  margin-top: 0;
   font-family: inherit;
 }
 #app-sidebar div.content-wrapper .disabled .body .section .select2-search-field input {
@@ -953,7 +820,7 @@
 }
 #app-sidebar div.content-wrapper .body .section select {
   background-color: rgba(0, 0, 0, 0);
-  border-radius: 0px;
+  border-radius: 0;
   border: 1px solid #CCC;
   padding: 0;
   width: 98px;
@@ -966,30 +833,19 @@
   position: absolute;
   top: 13px;
 }
-#app-sidebar div.content-wrapper .body .section .icon.detail-delete {
+.icon.detail-delete {
   display: none;
-  left: auto;
+  margin-left: auto;
   right: 22px;
 }
-#app-sidebar div.content-wrapper .body .section .icon.detail-delete:hover {
+.icon.detail-save:hover,
+.icon.detail-delete:hover {
   opacity: 0.8;
 }
-#app-sidebar div.content-wrapper .body .section .icon.detail-save {
+.icon.detail-save {
   display: none;
-  left: auto;
-  right: 40px;
-}
-.icon.detail-start,
-.icon.detail-date,
-.icon.sort-due,
-.icon.sort-start {
-  background-position: -220px -80px;
-}
-.icon.sort-manual {
-  background-position: -20px -140px;
-}
-.icon.sort-alphabetically {
-  background-position: -20px -160px;
+  margin-left: auto;
+  right: 44px;
 }
 #app-sidebar div.content-wrapper .body .section .icon.detail-remindertype {
   display: none;
@@ -1020,22 +876,12 @@
 #app-sidebar div.content-wrapper .body .section.editing .section-edit {
   display: block;
 }
-#app-sidebar div.content-wrapper .body .section.date .icon.detail-date,
-#app-sidebar div.content-wrapper .body .section.date .icon.detail-start {
-  background-position: -220px -40px;
+.date .icon.ico-calendar-due,
+.date .icon.ico-calendar-overdue {
+  opacity: 1;
 }
-#app-sidebar div.content-wrapper .body .section.date .icon.detail-date.overdue,
-#app-sidebar div.content-wrapper .body .section.date .icon.detail-start.overdue {
-  background-position: -220px -60px;
-}
-#app-sidebar div.content-wrapper .body .section.date .icon.detail-percent {
-  background-position: -260px -80px;
-}
-#app-sidebar div.content-wrapper .body .section.date .icon.detail-reminder {
-  background-position: -40px -60px;
-}
-#app-sidebar div.content-wrapper .body .section.date .icon.detail-reminder.overdue {
-  background-position: -40px -80px;
+#app-sidebar div.content-wrapper .body .section.date .icon.ico-percent {
+  opacity: 1;
 }
 #app-sidebar div.content-wrapper .body .section.date:hover .icon.detail-delete {
   display: block;
@@ -1043,44 +889,41 @@
 #app-sidebar div.content-wrapper .disabled .body .section.date:hover .icon.detail-delete {
   display: none;
 }
-#app-sidebar div.content-wrapper .body .section.date .section-title {
-  color: #4271A6;
+.date .section-title {
+  color: #4271A6 !important;
 }
 #app-sidebar div.content-wrapper .body .section.date .section-title.overdue {
-  color: #B3312D;
+  color: #B3312D !important;
 }
 #app-sidebar div.content-wrapper .body .section.date .section-title.repeat {
   margin-top: -2px;
 }
-#app-sidebar div.content-wrapper .body .section.high .icon.detail-priority {
-  background-position: -180px -80px;
+.high .icon.detail-priority {
+  opacity: 1;
 }
-#app-sidebar div.content-wrapper .body .section.high .section-title {
-  color: #B3312D;
+.high .section-title {
+  color: #B3312D !important;
 }
-#app-sidebar div.content-wrapper .body .section.medium .icon.detail-priority {
-  background-position: -160px -100px;
+.medium .icon.detail-priority {
+  opacity: 1;
 }
-#app-sidebar div.content-wrapper .body .section.medium .section-title {
-  color: #FFDD00;
+.medium .section-title {
+  color: #FFDD00 !important;
 }
-#app-sidebar div.content-wrapper .body .section.low .icon.detail-priority {
-  background-position: -180px -100px;
+.low .icon.detail-priority {
+  opacity: 1;
 }
-#app-sidebar div.content-wrapper .body .section.low .section-title {
-  color: #4271A6;
+.low .section-title {
+  color: #4271A6 !important;
 }
-#app-sidebar div.content-wrapper .body .section.active .detail-categories {
-  background-position: -200px -80px;
+.icon.ico-tag-active {
+  opacity: 1;
 }
 #app-sidebar div.content-wrapper .body .section.active .select2-search-field input {
   color: #4271a6;
 }
 #app-sidebar div.content-wrapper .body .section.editing .icon.detail-remindertype {
   display: block;
-}
-#app-sidebar div.content-wrapper .body .section .icon.detail-remindertype {
-  background-position: -260px -40px;
 }
 #app-sidebar div.content-wrapper .body .section.detail-reminder .section-description {
   display: none;
@@ -1138,7 +981,7 @@
   font-size: 11px;
 }
 #app-sidebar div.content-wrapper .body .section.detail-addcomment {
-  background: url("../img/divider.svg") repeat-x scroll center top transparent;
+  border-top: 1px dotted #b0b0b0;
   bottom: 0;
   left: 0;
   position: absolute;
@@ -1196,22 +1039,22 @@ input,
 textarea {
   -moz-user-select: text;
 }
-#content a:hover .icon.detail-trash {
+a:hover .icon.detail-trash {
   opacity: 1;
 }
-#content a:hover .icon.detail-settings {
+a:hover .icon.detail-settings {
   opacity: 1;
 }
-#content a:hover .icon.detail-delete {
+a:hover .icon.detail-delete {
   opacity: 0.8;
 }
-#content a:hover .icon.detail-close {
+a:hover .icon.detail-close {
   opacity: 1;
 }
-#content a:hover .icon.input-date {
+a:hover .icon.input-date {
   opacity: 0.8;
 }
-#content a:hover .icon.input-star {
+a:hover .icon.input-star {
   opacity: 1;
 }
 input.datepicker-input {
@@ -1227,7 +1070,7 @@ input.duration-input {
 input.percent-input,
 input.priority-input {
   width: 35px;
-  margin-top: 0px;
+  margin-top: 0;
 }
 .ui-widget-content {
   background: none repeat scroll 0 0 #F9F9F9;
@@ -1291,26 +1134,23 @@ td.ui-timepicker-hours table {
   background: none;
   border: none;
 }
-.ui-datepicker .ui-datepicker-prev span,
-.ui-timepicker .ui-datepicker-prev span,
-.ui-datepicker .ui-datepicker-next span,
-.ui-timepicker .ui-datepicker-next span {
-  margin-left: -4px;
-  margin-top: -4px;
-}
 .ui-datepicker .ui-icon-circle-triangle-w,
 .ui-timepicker .ui-icon-circle-triangle-w {
+  /*this will break when sprites.svg is recompiled
+    might be fixable with scss and @extend*/
   background-image: url("../img/sprites.svg");
-  background-position: -20px -60px;
-  height: 10px;
-  width: 10px;
+  background-position: -32px -64px;
+  height: 16px;
+  width: 16px;
 }
 .ui-datepicker .ui-icon-circle-triangle-e,
 .ui-timepicker .ui-icon-circle-triangle-e {
+  /*this will break when sprites.svg is recompiled
+    might be fixable with scss and @extend*/
   background-image: url("../img/sprites.svg");
-  background-position: -30px -60px;
-  height: 10px;
-  width: 10px;
+  background-position: -16px -64px;
+  height: 16px;
+  width: 16px;
 }
 .ui-datepicker table,
 .ui-timepicker table {
@@ -1428,31 +1268,27 @@ li.ui-draggable-dragging .duedate {
 }
 div.percentdone {
   height: 3px;
-  border-radius: 2px 0px 0px 2px;
-  opacity: 0.75;
+  border-radius: 2px 0 0 2px;
+  opacity: .75;
 }
 div.percentbar {
   height: 3px;
   position: relative;
-  top: 26px;
+  top: 28px;
   left: 42px;
   margin-right: 103px;
   margin-bottom: -5px;
   background-color: #CCC;
   border-radius: 2px 2px 2px 2px;
 }
-.icon_margin {
-  top: 2px;
-  position: relative;
-}
 #searchresults {
-  padding-top: 0px !important;
+  padding-top: 0 !important;
   margin-top: 20px !important;
   background-color: transparent !important;
   min-height: 150px;
 }
 #searchresults #status {
-  padding: 10px 0px 18px !important;
+  padding: 10px 0 18px !important;
   height: 22px !important;
   background-color: transparent !important;
   font-weight: bold;
@@ -1464,14 +1300,7 @@ div.percentbar {
   position: relative;
 }
 #searchresults span.icon.task-checkbox {
-  background-position: -260px -20px;
   opacity: 0.6;
-}
-#searchresults span.icon.task-checkbox.task-checked {
-  background-position: -260px -20px;
-}
-#searchresults span.icon.task-star:hover {
-  background-position: -140px 0 !important;
 }
 .template {
   display: none;
@@ -1497,14 +1326,14 @@ div.percentbar {
   min-height: 22px;
 }
 .detail-categories .select2-container-multi .select2-choices .select2-search-choice a.select2-search-choice-close {
-  background-image: url("../img/sprites.svg");
-  background-position: -4px -44px;
   opacity: 0.4;
   display: initial;
+  /*this will break when sprites.svg is recompiled
+    might be fixable with scss and @extend*/
+  background: url("../img/sprites.svg") no-repeat 60% 40%;
 }
 .detail-categories .select2-container-multi .select2-choices .select2-search-choice a.select2-search-choice-close:hover {
-  background-position: -4px -44px;
-  opacity: 0.8;
+  opacity: 1;
 }
 .categories-list {
   display: inline-block;
@@ -1517,7 +1346,7 @@ div.percentbar {
   color: #9fa2a6;
   float: left;
   font-weight: bold;
-  margin: -5px 4px 0;
+  margin: -2px 4px 0;
   padding: 2px 5px;
   min-height: 22px;
 }
@@ -1537,7 +1366,7 @@ div.percentbar {
 }
 #app-settings-content li select {
   position: absolute;
-  right: 0px;
+  right: 0;
 }
 #app-settings-content li.headline {
   font-weight: bold;
@@ -1603,23 +1432,24 @@ ol[dnd-list] .dndPlaceholder {
 }
 
 .colorpicker .colorpicker-list li.randomcolour {
-  background-image: url('../img/random.svg');
-  background-repeat: no-repeat;
-  background-position: center center;
   cursor: pointer;
 }
+.colorpicker .colorpicker-list li.randomcolour .ico-random {
+  filter: invert(1);
+  opacity: 1;
+}
 
-#app-navigation .app-navigation-entry-edit input.icon-close {
+#app-navigation .app-navigation-entry-edit input.ico-close {
   width: 36px;
   height: 38px;
   float: left;
-  margin: 3px 0px;
-  border-left: 0px none;
+  margin: 3px 0;
+  border-left: 0 none;
   background-color: rgba(240, 240, 240, 0.9);
-  border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
-#app-navigation .app-navigation-entry-edit input.icon-close:hover {
+#app-navigation .app-navigation-entry-edit input.ico-close:hover {
   background-color: white;
 }
 
@@ -1644,11 +1474,11 @@ ol[dnd-list] .dndPlaceholder {
 .confirmed .confirmation-default {
   display: none !important;
 }
-
-.confirmation-confirm, .confirmation-abort {
+.confirmation-confirm,
+.confirmation-abort {
   width: 50% !important;
   display: none !important;
-  padding-right: 0px !important;
+  padding-right: 0 !important;
   background-position: center !important;
 }
 
@@ -1657,8 +1487,10 @@ ol[dnd-list] .dndPlaceholder {
   cursor: default !important;
 }
 
-.confirmed .confirmation-confirm, .confirmed .confirmation-abort {
+#app-navigation .app-navigation-entry-menu li.confirmed a.confirmation-confirm,
+#app-navigation .app-navigation-entry-menu li.confirmed a.confirmation-abort {
   display: inline-block !important;
+  opacity: 1;
 }
 
 .app-navigation-entry-menu li > a:not(:empty).confirmation-confirm {
