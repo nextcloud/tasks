@@ -124,8 +124,8 @@ angular.module('Tasks').factory('Persistence', [
 				};
 				return this._request.post('/apps/tasks/settings/{type}/{setting}/{value}', params);
 			};
-		return Persistence;
-	  })();
-	  return new Persistence(Request, Loading, $rootScope, CalendarService);
+			return Persistence;
+		})();
+		return new Persistence(Request, Loading, $rootScope, CalendarService);
 	}
 ]);

@@ -126,13 +126,13 @@ angular.module('Tasks').controller('DetailsController', [
 					var task;
 					task = _$tasksmodel.getById(_$scope.route.taskID);
 					if (!(angular.isUndefined(task) || task === null)) {
-					  if (task.due && task.start) {
-						return params;
-					  } else if (task.start) {
-						return params.slice(0, 2);
-					  } else {
-						return params.slice(2);
-					  }
+						if (task.due && task.start) {
+							return params;
+						} else if (task.start) {
+							return params.slice(0, 2);
+						} else {
+							return params.slice(2);
+						}
 					}
 				};
 				this._$scope.deleteTask = function(task) {
@@ -214,7 +214,7 @@ angular.module('Tasks').controller('DetailsController', [
 					}
 				};
 
-			  	this._$scope.setEditRoute = function(type) {
+				this._$scope.setEditRoute = function(type) {
 					var calendarID = _$scope.route.calendarID;
 					var collectionID = _$scope.route.collectionID;
 					if (calendarID) {
@@ -222,7 +222,7 @@ angular.module('Tasks').controller('DetailsController', [
 					} else if (collectionID) {
 						$location.path('/collections/' + collectionID + '/tasks/' + _$scope.route.taskID + '/edit/' + type);
 					}
-			  	};
+				};
 
 				this._$scope.resetRoute = function() {
 					var calendarID = _$scope.route.calendarID;
@@ -290,91 +290,91 @@ angular.module('Tasks').controller('DetailsController', [
 					_tasksbusinesslayer.deleteDueDate(task);
 				};
 
- 				this._$scope.isAllDayPossible = function(task) {
- 					return !angular.isUndefined(task) && task.calendar.writable && (task.due || task.start);
- 				};
- 				this._$scope.toggleAllDay = function(task) {
- 					_tasksbusinesslayer.setAllDay(task, !task.allDay);
- 				};
+				this._$scope.isAllDayPossible = function(task) {
+					return !angular.isUndefined(task) && task.calendar.writable && (task.due || task.start);
+				};
+				this._$scope.toggleAllDay = function(task) {
+					_tasksbusinesslayer.setAllDay(task, !task.allDay);
+				};
 
-				  this._$scope.setreminderday = function(date) {
+					this._$scope.setreminderday = function(date) {
 					return _tasksbusinesslayer.setReminderDate(_$scope.route.taskID, moment(date, 'MM/DD/YYYY'), 'day');
-				  };
-				  this._$scope.setremindertime = function(date) {
-					return _tasksbusinesslayer.setReminderDate(_$scope.route.taskID, moment(date, 'HH:mm'), 'time');
-				  };
-				  this._$scope.reminderType = function(task) {
-					if (!angular.isUndefined(task)) {
-					  if (task.reminder === null) {
-						if (moment(task.start, "YYYYMMDDTHHmmss").isValid() || moment(task.due, "YYYYMMDDTHHmmss").isValid()) {
-						  return 'DURATION';
-						} else {
-						  return 'DATE-TIME';
-						}
-					  } else {
-						return task.reminder.type;
-					  }
-					}
-				  };
-				  this._$scope.changeReminderType = function(task) {
-					_tasksbusinesslayer.checkReminderDate(task.id);
-					if (this.reminderType(task) === 'DURATION') {
-					  if (task.reminder) {
-						task.reminder.type = 'DATE-TIME';
-					  } else {
-						task.reminder = {
-						  type: 'DATE-TIME'
-						};
-					  }
-					} else {
-					  if (task.reminder) {
-						task.reminder.type = 'DURATION';
-					  } else {
-						task.reminder = {
-						  type: 'DURATION'
-						};
-					  }
-					}
-					return _tasksbusinesslayer.setReminder(task.id);
-				  };
-				  this._$scope.setReminderDuration = function(taskID) {
-					return _tasksbusinesslayer.setReminder(_$scope.route.taskID);
-				  };
-				  this._$scope.addComment = function() {
-					var comment,
-					  _this = this;
-					if (_$scope.CommentContent) {
-					  _$scope.isAddingComment = true;
-					  comment = {
-						tmpID: 'newComment' + Date.now(),
-						comment: _$scope.CommentContent,
-						taskID: _$scope.route.taskID,
-						time: moment().format('YYYYMMDDTHHmmss'),
-						name: $('#expandDisplayName').text()
-					  };
-					  _tasksbusinesslayer.addComment(comment, function(data) {
-						_$tasksmodel.updateComment(data);
-						_$scope.isAddingComment = false;
-					  }, function() {
-						_$scope.isAddingComment = false;
-					  });
-					  _$scope.CommentContent = '';
-					}
-				  };
-				  this._$scope.sendComment = function(event) {
-					if (event.keyCode === 13) {
-					  return _$scope.addComment();
-					}
-				  };
-				  this._$scope.deleteComment = function(commentID) {
-					return _tasksbusinesslayer.deleteComment(_$scope.route.taskID, commentID);
-				  };
-				  this._$scope.commentStrings = function() {
-					return {
-					  button: t('tasks', 'Comment'),
-					  input: t('tasks', 'Add a comment')
 					};
-				  };
+					this._$scope.setremindertime = function(date) {
+					return _tasksbusinesslayer.setReminderDate(_$scope.route.taskID, moment(date, 'HH:mm'), 'time');
+					};
+					this._$scope.reminderType = function(task) {
+					if (!angular.isUndefined(task)) {
+						if (task.reminder === null) {
+							if (moment(task.start, "YYYYMMDDTHHmmss").isValid() || moment(task.due, "YYYYMMDDTHHmmss").isValid()) {
+								return 'DURATION';
+							} else {
+								return 'DATE-TIME';
+							}
+						} else {
+							return task.reminder.type;
+						}
+					}
+					};
+					this._$scope.changeReminderType = function(task) {
+						_tasksbusinesslayer.checkReminderDate(task.id);
+						if (this.reminderType(task) === 'DURATION') {
+							if (task.reminder) {
+								task.reminder.type = 'DATE-TIME';
+							} else {
+								task.reminder = {
+									type: 'DATE-TIME'
+								};
+							}
+						} else {
+							if (task.reminder) {
+								task.reminder.type = 'DURATION';
+							} else {
+								task.reminder = {
+									type: 'DURATION'
+								};
+							}
+						}
+						return _tasksbusinesslayer.setReminder(task.id);
+					};
+					this._$scope.setReminderDuration = function(taskID) {
+						return _tasksbusinesslayer.setReminder(_$scope.route.taskID);
+					};
+					this._$scope.addComment = function() {
+						var comment,
+							_this = this;
+						if (_$scope.CommentContent) {
+							_$scope.isAddingComment = true;
+							comment = {
+								tmpID: 'newComment' + Date.now(),
+								comment: _$scope.CommentContent,
+								taskID: _$scope.route.taskID,
+								time: moment().format('YYYYMMDDTHHmmss'),
+								name: $('#expandDisplayName').text()
+							};
+							_tasksbusinesslayer.addComment(comment, function(data) {
+								_$tasksmodel.updateComment(data);
+								_$scope.isAddingComment = false;
+							}, function() {
+								_$scope.isAddingComment = false;
+							});
+							_$scope.CommentContent = '';
+						}
+					};
+					this._$scope.sendComment = function(event) {
+						if (event.keyCode === 13) {
+							return _$scope.addComment();
+						}
+					};
+					this._$scope.deleteComment = function(commentID) {
+						return _tasksbusinesslayer.deleteComment(_$scope.route.taskID, commentID);
+					};
+					this._$scope.commentStrings = function() {
+						return {
+							button: t('tasks', 'Comment'),
+							input: t('tasks', 'Add a comment')
+						};
+					};
 				this._$scope.addCategory = function(category, model) {
 					_$scope.task.categories = _$scope.task.cats;
 					var default_categories = _$scope.settingsmodel.getById('various').categories;
@@ -391,7 +391,7 @@ angular.module('Tasks').controller('DetailsController', [
 
 		return DetailsController;
 
-	  })();
-	  return new DetailsController($scope, $window, TasksModel, TasksBusinessLayer, $route, $location, $timeout, $routeParams, SettingsModel, Loading, ListsModel);
+		})();
+		return new DetailsController($scope, $window, TasksModel, TasksBusinessLayer, $route, $location, $timeout, $routeParams, SettingsModel, Loading, ListsModel);
 	}
 ]);

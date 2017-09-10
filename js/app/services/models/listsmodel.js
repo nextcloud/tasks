@@ -21,153 +21,174 @@
 
 (function() {
 	'use strict';
-  var __hasProp = {}.hasOwnProperty,
-	__extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-
-  angular.module('Tasks').factory('ListsModel', [
-	'TasksModel', '_Model', function(TasksModel, _Model) {
-	  var ListsModel;
-	  ListsModel = (function(_super) {
-		__extends(ListsModel, _super);
-
-		function ListsModel(_$tasksmodel) {
-		  this._$tasksmodel = _$tasksmodel;
-		  this._tmpUriCache = {};
-		  this._data = [];
-		  this._dataMap = {};
-		  this._filterCache = {};
+	var __hasProp = {}.hasOwnProperty,
+	__extends = function(child, parent) {
+		for (var key in parent) {
+			if (__hasProp.call(parent, key)) {
+				child[key] = parent[key];
+			}
 		}
-
-		ListsModel.prototype.add = function(calendar, clearCache) {
-		  var updateByUri;
-		  if (clearCache === null) {
-			clearCache = true;
-		  }
-		  updateByUri = angular.isDefined(calendar.uri) && angular.isDefined(this.getByUri(calendar.uri));
-		  if (updateByUri) {
-			return this.update(calendar, clearCache);
-		  } else {
-			if (angular.isDefined(calendar.uri)) {
-			  if (clearCache) {
-				this._invalidateCache();
-			  }
-			  if (!angular.isDefined(this._dataMap[calendar.uri])) {
-				this._data.push(calendar);
-				this._dataMap[calendar.uri] = calendar;
-			  }
+		function Ctor() {
+			this.constructor = child;
+		}
+		Ctor.prototype = parent.prototype;
+		child.prototype = new Ctor();
+		child.__super__ = parent.prototype;
+		return child;
+	},
+	__indexOf = [].indexOf || function(item) {
+		for (var i = 0, l = this.length; i < l; i++) {
+			if (i in this && this[i] === item) {
+				return i;
 			}
-		  }
-		};
+		}
+		return -1;
+	};
 
-		ListsModel.prototype.getByUri = function(uri) {
-		  return this._dataMap[uri];
-		};
+	angular.module('Tasks').factory('ListsModel', [
+		'TasksModel', '_Model', function(TasksModel, _Model) {
+			var ListsModel = (function(_super) {
 
-		ListsModel.prototype.update = function(list, clearCache) {
-		  var tmplist;
-		  if (clearCache === null) {
-			clearCache = true;
-		  }
-		  tmplist = this._tmpIdCache[list.tmpID];
-		  if (angular.isDefined(list.id) && angular.isDefined(tmplist) && angular.isUndefined(tmplist.id)) {
-			tmplist.id = list.id;
-			this._dataMap[list.id] = tmplist;
-		  }
-		  list["void"] = false;
-		  return ListsModel.__super__.update.call(this, list, clearCache);
-		};
-
-		ListsModel.prototype["delete"] = function(calendar, clearCache) {
-		  var counter, data, entry, _i, _len, _ref;
-		  if (clearCache === null) {
-			clearCache = true;
-		  }
-		  _ref = this._data;
-		  for (counter = _i = 0, _len = _ref.length; _i < _len; counter = ++_i) {
-			entry = _ref[counter];
-			if (entry === calendar) {
-			  this._data.splice(counter, 1);
-			  data = this._dataMap[calendar.uri];
-			  delete this._dataMap[calendar.uri];
-			  if (clearCache) {
-				this._invalidateCache();
-			  }
-			  return data;
-			}
-		  }
-		};
-
-		ListsModel.prototype.getStandardList = function() {
-		  var calendars;
-		  if (this.size()) {
-			calendars = this.getAll();
-			return calendars[0];
-		  }
-		};
-
-		ListsModel.prototype.isNameAlreadyTaken = function(displayname, uri) {
-			var calendar, calendars, ret, _i, _len;
-			calendars = this.getAll();
-			ret = false;
-			for (_i = 0, _len = calendars.length; _i < _len; _i++) {
-				calendar = calendars[_i];
-				if (calendar.displayname === displayname && calendar.uri !== uri) {
-					ret = true;
+				function ListsModel(_$tasksmodel) {
+					this._$tasksmodel = _$tasksmodel;
+					this._tmpUriCache = {};
+					this._data = [];
+					this._dataMap = {};
+					this._filterCache = {};
 				}
-			}
-			return ret;
-		};
 
-		ListsModel.prototype.getCount = function(calendarID, collectionID, filter) {
-		  var count, task, tasks, _i, _len;
-		  if (filter === null) {
-			filter = '';
-		  }
-		  count = 0;
-		  tasks = this._$tasksmodel.filteredTasks(filter);
-		  for (_i = 0, _len = tasks.length; _i < _len; _i++) {
-			task = tasks[_i];
-			count += this._$tasksmodel.filterTasks(task, collectionID) && task.calendar.uri === calendarID && !task.related;
-		  }
-		 //  if (collectionID === 'completed' && filter === '') {
-			// count += this.notLoaded(calendarID);
-		 //  }
-		  return count;
-		};
+				__extends(ListsModel, _super);
 
-		ListsModel.prototype.loadedCompleted = function(calendarID) {
-			if (angular.isUndefined(this.getById(calendarID))) {
-				return false;
-			} else {
-				return this.getById(calendarID).loadedCompleted;
-			}
-		};
+				ListsModel.prototype.add = function(calendar, clearCache) {
+					var updateByUri;
+					if (clearCache === null) {
+						clearCache = true;
+					}
+					updateByUri = angular.isDefined(calendar.uri) && angular.isDefined(this.getByUri(calendar.uri));
+					if (updateByUri) {
+						return this.update(calendar, clearCache);
+					} else {
+						if (angular.isDefined(calendar.uri)) {
+							if (clearCache) {
+								this._invalidateCache();
+							}
+							if (!angular.isDefined(this._dataMap[calendar.uri])) {
+								this._data.push(calendar);
+								this._dataMap[calendar.uri] = calendar;
+							}
+						}
+					}
+				};
 
-		ListsModel.prototype.setLoadedCompleted = function(calendarID) {
-			this.getById(calendarID).loadedCompleted = true;
-		};
+				ListsModel.prototype.getByUri = function(uri) {
+					return this._dataMap[uri];
+				};
 
-		ListsModel.prototype.getColor = function(calendarID) {
-		  if (angular.isUndefined(this.getById(calendarID))) {
-			return '#CCCCCC';
-		  } else {
-			return this.getById(calendarID).calendarcolor;
-		  }
-		};
+				ListsModel.prototype.update = function(list, clearCache) {
+					var tmplist;
+					if (clearCache === null) {
+						clearCache = true;
+					}
+					tmplist = this._tmpIdCache[list.tmpID];
+					if (angular.isDefined(list.id) && angular.isDefined(tmplist) && angular.isUndefined(tmplist.id)) {
+						tmplist.id = list.id;
+						this._dataMap[list.id] = tmplist;
+					}
+					list["void"] = false;
+					return ListsModel.__super__.update.call(this, list, clearCache);
+				};
 
-		ListsModel.prototype.getName = function(calendarID) {
-		  if (angular.isUndefined(this.getById(calendarID))) {
-			return '';
-		  } else {
-			return this.getById(calendarID).displayname;
-		  }
-		};
+				ListsModel.prototype["delete"] = function(calendar, clearCache) {
+					var counter, data, entry, _i, _len, _ref;
+					if (clearCache === null) {
+						clearCache = true;
+					}
+					_ref = this._data;
+					for (counter = _i = 0, _len = _ref.length; _i < _len; counter = ++_i) {
+						entry = _ref[counter];
+						if (entry === calendar) {
+							this._data.splice(counter, 1);
+							data = this._dataMap[calendar.uri];
+							delete this._dataMap[calendar.uri];
+							if (clearCache) {
+								this._invalidateCache();
+							}
+							return data;
+						}
+					}
+				};
 
-		return ListsModel;
+				ListsModel.prototype.getStandardList = function() {
+					var calendars;
+					if (this.size()) {
+						calendars = this.getAll();
+						return calendars[0];
+					}
+				};
 
-	  })(_Model);
-	  return new ListsModel(TasksModel);
-	}
-  ]);
+				ListsModel.prototype.isNameAlreadyTaken = function(displayname, uri) {
+					var calendar, calendars, ret, _i, _len;
+					calendars = this.getAll();
+					ret = false;
+					for (_i = 0, _len = calendars.length; _i < _len; _i++) {
+						calendar = calendars[_i];
+						if (calendar.displayname === displayname && calendar.uri !== uri) {
+							ret = true;
+						}
+					}
+					return ret;
+				};
+
+				ListsModel.prototype.getCount = function(calendarID, collectionID, filter) {
+					var count, task, tasks, _i, _len;
+					if (filter === null) {
+						filter = '';
+					}
+					count = 0;
+					tasks = this._$tasksmodel.filteredTasks(filter);
+					for (_i = 0, _len = tasks.length; _i < _len; _i++) {
+						task = tasks[_i];
+						count += this._$tasksmodel.filterTasks(task, collectionID) && task.calendar.uri === calendarID && !task.related;
+					}
+				 //  if (collectionID === 'completed' && filter === '') {
+					// count += this.notLoaded(calendarID);
+				 //  }
+					return count;
+				};
+
+				ListsModel.prototype.loadedCompleted = function(calendarID) {
+					if (angular.isUndefined(this.getById(calendarID))) {
+						return false;
+					} else {
+						return this.getById(calendarID).loadedCompleted;
+					}
+				};
+
+				ListsModel.prototype.setLoadedCompleted = function(calendarID) {
+					this.getById(calendarID).loadedCompleted = true;
+				};
+
+				ListsModel.prototype.getColor = function(calendarID) {
+					if (angular.isUndefined(this.getById(calendarID))) {
+						return '#CCCCCC';
+					} else {
+						return this.getById(calendarID).calendarcolor;
+					}
+				};
+
+				ListsModel.prototype.getName = function(calendarID) {
+					if (angular.isUndefined(this.getById(calendarID))) {
+						return '';
+					} else {
+						return this.getById(calendarID).displayname;
+					}
+				};
+
+				return ListsModel;
+
+			})(_Model);
+			return new ListsModel(TasksModel);
+		}
+	]);
 
 }).call(this);

@@ -98,8 +98,8 @@ gulp.task('default', ['build', 'vendor', 'svg_sprite']);
 gulp.task('lint', () => {
 	return gulp.src(lintSources)
 		.pipe(jshint('.jshintrc'))
-		.pipe(jshint.reporter('default'));
-		// .pipe(jshint.reporter('fail'));
+		.pipe(jshint.reporter('default'))
+		.pipe(jshint.reporter('fail'));
 });
 
 gulp.task('scsslint', () => {

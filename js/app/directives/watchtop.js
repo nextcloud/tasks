@@ -24,11 +24,6 @@ angular.module('Tasks').directive('watchTop', function() {
 	return {
 		restrict: 'A',
 		link: function(scope, element, attr) {
-			({
-				scope: {
-					"divTop": "="
-				}
-			});
 			return scope.$watch(function() {
 				scope.divTop = element.prev().outerHeight(true);
 			});

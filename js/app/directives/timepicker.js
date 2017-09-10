@@ -22,18 +22,18 @@
 angular.module('Tasks').directive('timepicker', function() {
 	'use strict';
 	return {
-	  restrict: 'A',
-	  link: function(scope, elm, attr) {
-		return elm.timepicker({
-		  onSelect: function(date, inst) {
-			scope['set' + attr.timepicker + 'time'](date);
-			return scope.$apply();
-		  },
-		  myPosition: 'center top',
-		  atPosition: 'center bottom',
-		  hourText: t('tasks', 'Hours'),
-		  minuteText: t('tasks', 'Minutes')
-		});
-	  }
+		restrict: 'A',
+		link: function(scope, elm, attr) {
+			return elm.timepicker({
+				onSelect: function(date, inst) {
+				scope['set' + attr.timepicker + 'time'](date);
+				return scope.$apply();
+				},
+				myPosition: 'center top',
+				atPosition: 'center bottom',
+				hourText: t('tasks', 'Hours'),
+				minuteText: t('tasks', 'Minutes')
+			});
+		}
 	};
 });

@@ -34,6 +34,7 @@
           "inject": true,
           "module": true,
           "t": true,
+          "n": true,
           "it": true,
           "exports": true,
           "escapeHTML": true,

@@ -22,20 +22,20 @@
 angular.module('Tasks').directive('ocClickFocus', [
 	'$timeout', function($timeout) {
 		'use strict';
-	  return function(scope, elm, attr) {
-		var options;
-		options = scope.$eval(attr.ocClickFocus);
-		if (angular.isDefined(options) && angular.isDefined(options.selector)) {
-		  return elm.click(function() {
-			if (angular.isDefined(options.timeout)) {
-			  return $timeout(function() {
-				return $(options.selector).focus();
-			  }, options.timeout);
-			} else {
-			  return $(options.selector).focus();
+		return function(scope, elm, attr) {
+			var options;
+			options = scope.$eval(attr.ocClickFocus);
+			if (angular.isDefined(options) && angular.isDefined(options.selector)) {
+				return elm.click(function() {
+					if (angular.isDefined(options.timeout)) {
+						return $timeout(function() {
+							return $(options.selector).focus();
+						}, options.timeout);
+					} else {
+						return $(options.selector).focus();
+					}
+				});
 			}
-		  });
-		}
-	  };
+		};
 	}
 ]);
