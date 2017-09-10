@@ -36,7 +36,10 @@
 
 	&.task-checkbox,
 	&.detail-checkbox {
-		@extend %extend_1;
+		border-radius: 3px;
+		border: 1px solid $gray;
+		float: left;
+		margin: 9px;
 
 		&:not(.icon-checkmark) {
 			background: unset;

@@ -71,15 +71,16 @@
 	}
 }
 
-.ui-timepicker {
-	table {
-		td {
-			a.ui-state-active {
-				@extend %extend_11;
-			}
-		}
-	}
+.ui-datepicker table td.selected a,
+.ui-timepicker table td a.ui-state-active {
+	background: linear-gradient(to top, rgba($blue_background, .8), rgba($blue_background, .6)) repeat scroll 0 0 transparent !important;
+	border-radius: 3px;
+	color: $white !important;
+	opacity: 1;
+	position: relative;
+}
 
+.ui-timepicker {
 	.ui-timepicker-title {
 		text-align: center;
 	}
@@ -88,10 +89,6 @@
 .ui-datepicker {
 	table {
 		td {
-			&.selected a {
-				@extend %extend_11;
-			}
-
 			&.ui-datepicker-today a {
 				color: $blue_background;
 			}

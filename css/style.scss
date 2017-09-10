@@ -1,5 +1,5 @@
 /**
-	* SCSS variables and extends
+	* SCSS variables
 	*/
 
 //colors
@@ -14,53 +14,6 @@ $gray_light: #ccc;
 $gray_easy: #f7f7f7;
 $black: #000;
 $white: #fff;
-
-//@extend-elements
-//original selectors
-//.icon.task-checkbox, .icon.detail-checkbox
-%extend_1 {
-	border-radius: 3px;
-	border: 1px solid $gray;
-	float: left;
-	margin: 9px;
-}
-
-//original selectors
-//#app-sidebar div.content-wrapper .title textarea, #app-sidebar div.content-wrapper .title pre
-%extend_2 {
-	box-shadow: none;
-	font-size: 16px;
-	font-weight: bold;
-	line-height: 24px;
-	background: none repeat scroll 0 0 transparent;
-	border: medium none;
-	padding: 0;
-	white-space: pre-wrap;
-	word-wrap: break-word;
-}
-
-//original selectors
-//#app-sidebar div.content-wrapper .body .note .expandingArea textarea, #app-sidebar div.content-wrapper .body .note .expandingArea pre
-%extend_3 {
-	box-shadow: none;
-	background: none repeat scroll 0 0 transparent;
-	border: medium none;
-	font-size: 13px;
-	line-height: 26px;
-	padding: 0;
-	white-space: pre-wrap;
-	word-wrap: break-word;
-}
-
-//original selectors
-//.ui-datepicker table td.selected a, .ui-timepicker table td.selected a
-%extend_11 {
-	background: linear-gradient(to top, rgba($blue_background, .8), rgba($blue_background, .6)) repeat scroll 0 0 transparent !important;
-	border-radius: 3px;
-	color: $white !important;
-	opacity: 1;
-	position: relative;
-}
 
 /**
 	* rules for app-navigation
@@ -868,9 +821,20 @@ tr:last-child .task-item {
 				}
 			}
 
-			textarea {
-				@extend %extend_2;
+			textarea,
+			pre {
+				box-shadow: none;
+				font-size: 16px;
+				font-weight: bold;
+				line-height: 24px;
+				background: none repeat scroll 0 0 transparent;
+				border: medium none;
+				padding: 0;
+				white-space: pre-wrap;
+				word-wrap: break-word;
+			}
 
+			textarea {
 				margin: 0;
 				border-radius: 0;
 				height: 100%;
@@ -883,8 +847,6 @@ tr:last-child .task-item {
 			}
 
 			pre {
-				@extend %extend_2;
-
 				border: 0 none !important;
 				display: block;
 				margin: 0;
@@ -938,9 +900,19 @@ tr:last-child .task-item {
 					position: relative;
 					margin-left: -1px;
 
-					textarea {
-						@extend %extend_3;
+					textarea,
+					pre {
+						box-shadow: none;
+						background: none repeat scroll 0 0 transparent;
+						border: medium none;
+						font-size: 13px;
+						line-height: 26px;
+						padding: 0;
+						white-space: pre-wrap;
+						word-wrap: break-word;
+					}
 
+					textarea {
 						margin: 0 0 0 1px;
 						border-radius: 0;
 						height: 100%;
@@ -956,8 +928,6 @@ tr:last-child .task-item {
 					}
 
 					pre {
-						@extend %extend_3;
-
 						border: 0 none !important;
 						display: block;
 						margin: 0;
@@ -1312,7 +1282,10 @@ input {
 
 	&.task-checkbox,
 	&.detail-checkbox {
-		@extend %extend_1;
+		border-radius: 3px;
+		border: 1px solid $gray;
+		float: left;
+		margin: 9px;
 
 		&:not(.icon-checkmark) {
 			background: unset;
@@ -1543,15 +1516,16 @@ a {
 	}
 }
 
-.ui-timepicker {
-	table {
-		td {
-			a.ui-state-active {
-				@extend %extend_11;
-			}
-		}
-	}
+.ui-datepicker table td.selected a,
+.ui-timepicker table td a.ui-state-active {
+	background: linear-gradient(to top, rgba($blue_background, .8), rgba($blue_background, .6)) repeat scroll 0 0 transparent !important;
+	border-radius: 3px;
+	color: $white !important;
+	opacity: 1;
+	position: relative;
+}
 
+.ui-timepicker {
 	.ui-timepicker-title {
 		text-align: center;
 	}
@@ -1560,10 +1534,6 @@ a {
 .ui-datepicker {
 	table {
 		td {
-			&.selected a {
-				@extend %extend_11;
-			}
-
 			&.ui-datepicker-today a {
 				color: $blue_background;
 			}
