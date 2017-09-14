@@ -3,8 +3,8 @@
     script('tasks', 'vendor/angular-route/angular-route.min');
     script('tasks', 'vendor/angular-animate/angular-animate.min');
     script('tasks', 'vendor/angular-sanitize/angular-sanitize.min');
-    script('tasks', 'vendor/angular-draganddrop/angular-drag-and-drop-lists.min');
-    script('tasks', 'vendor/angular-ui-select/dist/select.min');
+    script('tasks', 'vendor/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min');
+    script('tasks', 'vendor/ui-select/dist/select.min');
     script('tasks', 'vendor/jstimezonedetect/dist/jstz.min');
     script('tasks', 'public/app.min');
     script('tasks', 'vendor_legacy/jquery-timepicker/jquery.ui.timepicker');

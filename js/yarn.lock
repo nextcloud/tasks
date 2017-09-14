@@ -79,7 +79,7 @@ angular-animate@1.5.5:
   version "1.5.5"
   resolved "https://registry.yarnpkg.com/angular-animate/-/angular-animate-1.5.5.tgz#6641ba517d37b8158578d99178e1e9a6bed19b75"
 
-"angular-draganddrop@https://github.com/marceljuenemann/angular-drag-and-drop-lists.git#v2.1.0":
+"angular-drag-and-drop-lists@https://github.com/marceljuenemann/angular-drag-and-drop-lists.git#v2.1.0":
   version "2.1.0"
   resolved "https://github.com/marceljuenemann/angular-drag-and-drop-lists.git#7e98e194a8d66fa735bf6dc7c3e39886287b914e"
 
@@ -90,10 +90,6 @@ angular-route@1.5.5:
 angular-sanitize@1.5.5:
   version "1.5.5"
   resolved "https://registry.yarnpkg.com/angular-sanitize/-/angular-sanitize-1.5.5.tgz#44a492348adf8cb5541725e75cb50685c664b1a6"
-
-"angular-ui-select@https://github.com/angular-ui/ui-select.git#v0.19.8":
-  version "0.19.8"
-  resolved "https://github.com/angular-ui/ui-select.git#32829a39e8efe7f94de049c6b529c23fedfc6686"
 
 angular@1.5.5:
   version "1.5.5"
@@ -1171,6 +1167,12 @@ debug@2.6.7:
 debug@2.6.8, debug@^2.2.0, debug@^2.6.8:
   version "2.6.8"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.8.tgz#e731531ca2ede27d188222427da17821d68ff4fc"
+  dependencies:
+    ms "2.0.0"
+
+debug@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-3.0.1.tgz#0564c612b521dc92d9f2988f0549e34f9c98db64"
   dependencies:
     ms "2.0.0"
 
@@ -2609,9 +2611,9 @@ klaw@^1.0.0:
   optionalDependencies:
     graceful-fs "^4.1.9"
 
-known-css-properties@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/known-css-properties/-/known-css-properties-0.2.0.tgz#899c94be368e55b42d7db8d5be7d73a4a4a41454"
+known-css-properties@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/known-css-properties/-/known-css-properties-0.3.0.tgz#a3d135bbfc60ee8c6eacf2f7e7e6f2d4755e49a4"
 
 lazy-cache@^1.0.3:
   version "1.0.4"
@@ -2860,7 +2862,7 @@ lodash@^3.8.0:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
-lodash@^4.0.0, lodash@^4.1.0, lodash@^4.11.1, lodash@^4.12.0, lodash@^4.13.1, lodash@^4.14.0, lodash@^4.17.4, lodash@^4.5.0:
+lodash@^4.0.0, lodash@^4.11.1, lodash@^4.12.0, lodash@^4.13.1, lodash@^4.14.0, lodash@^4.17.4, lodash@^4.5.0:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -2868,11 +2870,11 @@ lodash@~1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-1.0.2.tgz#8f57560c83b59fc270bd3d561b690043430e2551"
 
-log-symbols@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/log-symbols/-/log-symbols-1.0.2.tgz#376ff7b58ea3086a0f09facc74617eca501e1a18"
+log-symbols@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/log-symbols/-/log-symbols-2.0.0.tgz#595e63be4d5c8cbf294a9e09e0d5629f5913fc0c"
   dependencies:
-    chalk "^1.0.0"
+    chalk "^2.0.1"
 
 log4js@^0.6.31:
   version "0.6.38"
@@ -3488,13 +3490,14 @@ postcss-media-query-parser@^0.2.3:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/postcss-media-query-parser/-/postcss-media-query-parser-0.2.3.tgz#27b39c6f4d94f81b1a73b8f76351c609e5cef244"
 
-postcss-reporter@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/postcss-reporter/-/postcss-reporter-4.0.0.tgz#13356c365c36783adde88e28e09dbba6ec6c6501"
+postcss-reporter@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/postcss-reporter/-/postcss-reporter-5.0.0.tgz#a14177fd1342829d291653f2786efd67110332c3"
   dependencies:
-    chalk "^1.0.0"
-    lodash "^4.1.0"
-    log-symbols "^1.0.2"
+    chalk "^2.0.1"
+    lodash "^4.17.4"
+    log-symbols "^2.0.0"
+    postcss "^6.0.8"
 
 postcss-resolve-nested-selector@^0.1.1:
   version "0.1.1"
@@ -3534,6 +3537,14 @@ postcss@^6.0.0, postcss@^6.0.10, postcss@^6.0.3, postcss@^6.0.6:
     chalk "^2.1.0"
     source-map "^0.5.7"
     supports-color "^4.2.1"
+
+postcss@^6.0.8:
+  version "6.0.11"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-6.0.11.tgz#f48db210b1d37a7f7ab6499b7a54982997ab6f72"
+  dependencies:
+    chalk "^2.1.0"
+    source-map "^0.5.7"
+    supports-color "^4.4.0"
 
 preserve@^0.2.0:
   version "0.2.0"
@@ -4207,14 +4218,14 @@ stylelint-scss@^2.1.0:
     postcss-value-parser "^3.3.0"
 
 stylelint@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/stylelint/-/stylelint-8.0.0.tgz#87611211776cb315c93fcf6c58bc261d3c92612e"
+  version "8.1.1"
+  resolved "https://registry.yarnpkg.com/stylelint/-/stylelint-8.1.1.tgz#9feeed699598b27427715551ed7786db341c19ad"
   dependencies:
     autoprefixer "^7.1.2"
     balanced-match "^1.0.0"
     chalk "^2.0.1"
     cosmiconfig "^2.1.3"
-    debug "^2.6.8"
+    debug "^3.0.0"
     execall "^1.0.0"
     file-entry-cache "^2.0.0"
     get-stdin "^5.0.1"
@@ -4223,9 +4234,9 @@ stylelint@^8.0.0:
     html-tags "^2.0.0"
     ignore "^3.3.3"
     imurmurhash "^0.1.4"
-    known-css-properties "^0.2.0"
+    known-css-properties "^0.3.0"
     lodash "^4.17.4"
-    log-symbols "^1.0.2"
+    log-symbols "^2.0.0"
     mathml-tag-names "^2.0.1"
     meow "^3.7.0"
     micromatch "^2.3.11"
@@ -4234,7 +4245,7 @@ stylelint@^8.0.0:
     postcss "^6.0.6"
     postcss-less "^1.1.0"
     postcss-media-query-parser "^0.2.3"
-    postcss-reporter "^4.0.0"
+    postcss-reporter "^5.0.0"
     postcss-resolve-nested-selector "^0.1.1"
     postcss-scss "^1.0.2"
     postcss-selector-parser "^2.2.3"
@@ -4263,7 +4274,7 @@ supports-color@^3.2.3:
   dependencies:
     has-flag "^1.0.0"
 
-supports-color@^4.0.0, supports-color@^4.2.1:
+supports-color@^4.0.0, supports-color@^4.2.1, supports-color@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-4.4.0.tgz#883f7ddabc165142b2a61427f3352ded195d1a3e"
   dependencies:
@@ -4462,6 +4473,10 @@ uglify-save-license@^0.4.1:
 uglify-to-browserify@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/uglify-to-browserify/-/uglify-to-browserify-1.0.2.tgz#6e0924d6bda6b5afe349e39a6d632850a0f882b7"
+
+"ui-select@https://github.com/angular-ui/ui-select.git#v0.19.8":
+  version "0.19.8"
+  resolved "https://github.com/angular-ui/ui-select.git#32829a39e8efe7f94de049c6b529c23fedfc6686"
 
 uid-number@^0.0.6:
   version "0.0.6"
