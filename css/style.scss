@@ -1425,26 +1425,26 @@ a {
 	background-color: transparent !important;
 	min-height: 150px;
 
-	#status {
-		padding: 10px 0 18px !important;
-		height: 22px !important;
-		background-color: transparent !important;
-		font-weight: bold;
-		color: $gray;
-		font-size: 13px !important;
-
-		&.emptycontent {
-			position: relative;
-		}
-	}
-
 	span.icon.task-checkbox {
 		opacity: .6;
 	}
 }
 
+#status {
+	padding: 10px 0 18px !important;
+	height: 22px !important;
+	background-color: transparent !important;
+	font-weight: bold;
+	color: $gray;
+	font-size: 13px !important;
+
+	&.emptycontent {
+		position: relative;
+	}
+}
+
 /**
-	* rules for datetimepicker
+	* rules for date- and timepicker
 	*/
 
 .ui-widget-content {
@@ -1457,6 +1457,10 @@ a {
 	z-index: 1000;
 	border: none;
 }
+
+/**
+	* rules for both date- and timepicker
+	*/
 
 .ui-timepicker,
 .ui-datepicker {
@@ -1476,6 +1480,15 @@ a {
 		td {
 			width: 14%;
 			padding: 0;
+
+			&.selected a,
+			a.ui-state-active {
+				background: linear-gradient(to top, rgba($blue_background, .8), rgba($blue_background, .6)) repeat scroll 0 0 transparent !important;
+				border-radius: 3px;
+				color: $white !important;
+				opacity: 1;
+				position: relative;
+			}
 		}
 
 		thead th {
@@ -1513,62 +1526,6 @@ a {
 		color: $gray_dark;
 		font-weight: 600;
 		font-size: 12px;
-	}
-}
-
-.ui-datepicker table td.selected a,
-.ui-timepicker table td a.ui-state-active {
-	background: linear-gradient(to top, rgba($blue_background, .8), rgba($blue_background, .6)) repeat scroll 0 0 transparent !important;
-	border-radius: 3px;
-	color: $white !important;
-	opacity: 1;
-	position: relative;
-}
-
-.ui-timepicker {
-	.ui-timepicker-title {
-		text-align: center;
-	}
-}
-
-.ui-datepicker {
-	table {
-		td {
-			&.ui-datepicker-today a {
-				color: $blue_background;
-			}
-		}
-	}
-
-	.ui-datepicker-next,
-	.ui-datepicker-next-hover {
-		right: 2px;
-		top: 2px;
-		background: none;
-		border: none;
-	}
-
-	.ui-datepicker-prev,
-	.ui-datepicker-prev-hover {
-		left: 2px;
-		top: 2px;
-		background: none;
-		border: none;
-	}
-
-	.ui-icon {
-		@extend .icon;
-
-		height: 16px;
-		width: 16px;
-	}
-
-	.ui-icon-circle-triangle-w {
-		@extend .icon-sort-up;
-	}
-
-	.ui-icon-circle-triangle-e {
-		@extend .icon-sort-down;
 	}
 }
 
@@ -1624,8 +1581,63 @@ div {
 	}
 }
 
+/**
+	* rules for timepicker
+	*/
+
+.ui-timepicker {
+	.ui-timepicker-title {
+		text-align: center;
+	}
+}
+
 td.ui-timepicker-hours table {
 	border-right: 1px solid $gray_light;
+}
+
+/**
+	* rules for datepicker
+	*/
+
+.ui-datepicker {
+	table {
+		td {
+			&.ui-datepicker-today a {
+				color: $blue_background;
+			}
+		}
+	}
+
+	.ui-datepicker-next,
+	.ui-datepicker-next-hover {
+		right: 2px;
+		top: 2px;
+		background: none;
+		border: none;
+	}
+
+	.ui-datepicker-prev,
+	.ui-datepicker-prev-hover {
+		left: 2px;
+		top: 2px;
+		background: none;
+		border: none;
+	}
+
+	.ui-icon {
+		@extend .icon;
+
+		height: 16px;
+		width: 16px;
+	}
+
+	.ui-icon-circle-triangle-w {
+		@extend .icon-sort-up;
+	}
+
+	.ui-icon-circle-triangle-e {
+		@extend .icon-sort-down;
+	}
 }
 
 /**
