@@ -23,8 +23,8 @@
                 <div class="section-title" ng-class="{'overdue':isOverDue(task.start)}">
                     <text>{{ task.start | startDetails }}</text>
                 </div>
-                <a class="detail-delete handler end-edit" ng-click="deleteStartDate(task)">
-                    <span class="icon detail-delete icon-trash"></span>
+                <a class="handler end-edit" ng-click="deleteStartDate(task)">
+                    <span class="icon icon-trash"></span>
                 </a>
                 <span class="icon detail-save icon-checkmark-color handler end-edit"></span>
                 <div class="section-edit">
@@ -38,8 +38,8 @@
                 <div class="section-title" ng-class="{'overdue':isOverDue(task.due)}">
                     <text>{{ task.due | dateDetails }}</text>
                 </div>
-                <a class="detail-delete handler end-edit" ng-click="deleteDueDate(task)">
-                	<span class="icon detail-delete icon-trash"></span>
+                <a class="handler end-edit" ng-click="deleteDueDate(task)">
+                	<span class="icon icon-trash"></span>
                 </a>
                 <span class="icon detail-save icon-checkmark-color handler end-edit"></span>
                 <div class="section-edit">
@@ -60,8 +60,8 @@
                 <div class="section-title" ng-class="{'overdue':isOverDue(task.reminder.date)}">
     				<text rel="">{{ task.reminder | reminderDetails:this }}</text>
     			</div>
-                <a class="detail-delete handler end-edit" ng-click="deleteReminder()">
-    				<span class="icon detail-delete icon-trash"></span>
+                <a class="handler end-edit" ng-click="deleteReminder()">
+    				<span class="icon icon-trash"></span>
     			</a>
                 <span class="icon detail-save icon-checkmark-color handler end-edit"></span>
                 <div class="section-edit" ng-switch='reminderType(task)'>
@@ -81,8 +81,8 @@
                 <div class="section-title">
                     <text>{{ task.priority | priorityDetails}}</text>
                 </div>
-                <a class="detail-delete handler end-edit" ng-click="deletePriority(task)">
-                    <span class="icon detail-delete icon-trash"></span>
+                <a class="handler end-edit" ng-click="deletePriority(task)">
+                    <span class="icon icon-trash"></span>
                 </a>
                 <span class="icon detail-save icon-checkmark-color handler end-edit"></span>
                 <div class="section-edit">
@@ -95,8 +95,8 @@
                 <div class="section-title">
                     <text>{{ task.complete | percentDetails}}</text>
                 </div>
-                <a class="detail-delete handler end-edit" ng-click="deletePercent(task)">
-                    <span class="icon detail-delete icon-trash"></span>
+                <a class="handler end-edit" ng-click="deletePercent(task)">
+                    <span class="icon icon-trash"></span>
                 </a>
                 <span class="icon detail-save icon-checkmark-color handler end-edit"></span>
                 <div class="section-edit">
@@ -140,8 +140,8 @@
                 <ul>
                     <li ng-repeat="comment in task.comments" class="comment-item" rel=" {{ comment.id }} ">
                         <div class="avatar" avatar userID="{{ comment.userID }}" size="32"></div>
-                        <a class="detail-delete end-edit" ng-click="deleteComment(comment.id)" ng-show="settingsmodel.getById('various').userID == comment.userID">
-                            <span class="icon detail-delete icon-trash"></span>
+                        <a class="end-edit" ng-click="deleteComment(comment.id)" ng-show="settingsmodel.getById('various').userID == comment.userID">
+                            <span class="icon icon-trash"></span>
                         </a>
                         <span class="username">{{ comment.name }}</span>
                         <div class="comment" ng-bind-html="comment.comment | linky:'_blank':{rel: 'nofollow'}"></div>
@@ -155,11 +155,11 @@
                 <input type="text" placeholder="{{ commentStrings().input }}" ng-model="CommentContent" ng-keydown="sendComment($event)">
                 <input type="button" ng-click="addComment()" name="addComment" value="{{ commentStrings().button }}" ng-class="{'active':CommentContent}">
             </div> -->
-        	<a class="detail-trash handler close-all" ng-click="deleteTask(task)" ng-show="task.calendar.writable">
-            	<span class="icon detail-trash icon-trash"></span>
+        	<a class="handler close-all" ng-click="deleteTask(task)" ng-show="task.calendar.writable">
+            	<span class="icon icon-trash"></span>
             </a>
             <a class="detail-close handler close-all">
-            	<span class="icon detail-close icon-hide"></span>
+            	<span class="icon icon-hide"></span>
             </a>
         </div>
     </div>

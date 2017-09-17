@@ -144,12 +144,6 @@
     <div id="app-content" ng-controller="TasksController" ng-class="{'with-app-sidebar':route.taskID}">
         <div class="content-wrapper">
             <div id="add-task" class="add-task handler" ng-show="showInput()" ng-class="{'focus':status.focusTaskInput}">
-                <a class="input-star">
-                    <span class="icon input-star"></span>
-                </a>
-                <a class="input-date">
-                    <span class="icon input-date"></span>
-                </a>
                 <form ng-submit="addTask(status.taskName)" name="addTaskForm">
                     <input id="target" ng-disabled="isAddingTask" ng-click="focusTaskInput()" class="transparent" placeholder="{{ getAddString() }}" ng-model="status.taskName"
                         ng-keydown="checkTaskInput($event)"/>

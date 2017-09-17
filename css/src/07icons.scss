@@ -15,23 +15,12 @@
 	display: inline-block;
 	vertical-align: middle;
 	opacity: .5;
+	transition: opacity 100ms ease 0s;
 
-	&.input-date {
-		display: none;
-		opacity: .4;
-		transition: opacity 100ms ease 0s;
-		right: 35px;
-		top: 7px;
-	}
-
-	&.input-star {
-		display: none;
-		opacity: .5;
-		right: 9px;
-
-		&.starred {
-			opacity: 1;
-		}
+	&.icon-checkmark,
+	&.icon-tag-active,
+	&[class*=" icon-task-star-"] {
+		opacity: 1 !important;
 	}
 
 	&.task-checkbox,
@@ -62,70 +51,30 @@
 		float: right;
 	}
 
-	&.detail-settings {
-		transition: opacity 100ms ease 0s;
-		opacity: .6;
-	}
-
-	&.detail-reminder {
-		height: 20px;
-		width: 20px;
-	}
-
-	&.icon-checkmark {
-		opacity: 1;
-	}
-
-	&.note-fullscreen {
-		opacity: .6;
-
-		&:hover {
-			opacity: 1;
-		}
-	}
-
 	&.toggle-completed-subtasks {
 		float: right;
 		opacity: 1;
 
-		&.hidden {
-			opacity: .5;
-		}
-
 		&:hover {
 			opacity: 1;
 		}
 	}
-
-	&.detail-delete {
-		display: none;
-		margin-left: auto;
-		right: 22px;
-
-		&:hover {
-			opacity: .8;
-		}
-	}
-
-	&.detail-save {
-		display: none;
-		margin-left: auto;
-		right: 44px;
-
-		&:hover {
-			opacity: .8;
-		}
-	}
-
-	&.icon-tag-active {
-		opacity: 1;
-	}
 }
 
-.icon-task-star-low,
-.icon-task-star-medium,
-.icon-task-star-high {
-	opacity: 1 !important;
+.section {
+	.icon {
+		&.icon-trash {
+			display: none;
+			margin-left: auto;
+			right: 22px;
+		}
+
+		&.detail-save {
+			display: none;
+			margin-left: auto;
+			right: 44px;
+		}
+	}
 }
 
 a {
@@ -138,33 +87,17 @@ a {
 			height: 24px;
 			width: 24px;
 			background-size: 144px 144px;
-			opacity: .3;
 
 			&:hover {
-				opacity: .5;
+				opacity: 1;
 			}
 		}
 	}
 
 	&:hover .icon {
-		&.detail-trash,
-		&.detail-settings,
-		&.detail-close,
-		&.input-star {
+		&.icon-trash,
+		&.icon-hide {
 			opacity: 1;
 		}
-
-		&.detail-delete,
-		&.input-date {
-			opacity: .8;
-		}
-	}
-}
-
-.high,
-.medium,
-.low {
-	.icon.detail-priority {
-		opacity: 1;
 	}
 }

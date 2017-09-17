@@ -318,7 +318,7 @@
 							display: inline-block;
 						}
 
-						&.detail-delete,
+						&.icon-trash,
 						&.detail-remindertype {
 							display: block;
 						}
@@ -348,7 +348,7 @@
 						opacity: 1;
 					}
 
-					&:hover .icon.detail-delete {
+					&:hover .icon.icon-trash {
 						display: block;
 					}
 				}
@@ -408,7 +408,7 @@
 				display: block !important;
 			}
 
-			&.date:hover .icon.detail-delete {
+			&.date:hover .icon.icon-trash {
 				display: none;
 			}
 		}
