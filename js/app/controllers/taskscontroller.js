@@ -370,7 +370,7 @@
 					case 'start':
 						return 'icon-calendar';
 					case 'priority':
-						return 'icon-star';
+						return 'icon-task-star';
 					case 'alphabetically':
 						return 'icon-alphabetically';
 					case 'manual':
