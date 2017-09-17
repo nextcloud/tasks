@@ -13,27 +13,17 @@
 		cursor: pointer;
 		opacity: .57;
 
+		a {
+			width: 100% !important;
+		}
+
 		&.active {
 			opacity: 1 !important;
-		}
-
-		img {
-			cursor: pointer;
-			margin-right: 5px;
-			vertical-align: text-bottom;
-		}
-
-		span {
-			cursor: pointer;
 		}
 
 		&:hover {
 			opacity: 1 !important;
 		}
-	}
-
-	a {
-		width: 100% !important;
 	}
 
 	&.open {
@@ -46,8 +36,6 @@
 		&.sort-indicator {
 			margin-left: auto;
 			margin-right: 0;
-			filter: alpha(opacity=80);
-			opacity: .8;
 			float: right;
 			visibility: hidden;
 		}
