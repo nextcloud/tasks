@@ -11,9 +11,14 @@
 		margin: 0;
 	}
 
+	.flex-container {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+	}
+
 	div.content-wrapper {
 		padding: 0;
-		height: 100%;
 
 		> div {
 			height: 100%;
@@ -32,11 +37,8 @@
 
 			&.footer {
 				border-top: 1px solid $gray_light;
-				bottom: 0;
-				height: 65px;
-				left: 0;
-				position: absolute;
-				right: 0;
+				flex: 0 0 auto;
+				height: 30px;
 
 				.icon {
 					position: absolute;
@@ -52,12 +54,11 @@
 		}
 
 		.title {
+			flex: 0 0 auto;
 			background-color: $gray_easy;
 			border-bottom: 1px solid $gray_light;
 			font-size: 16px;
 			font-weight: bold;
-			line-height: 24px;
-			min-height: 24px;
 			padding: 16px 55px 13px;
 			word-wrap: break-word;
 
@@ -133,12 +134,9 @@
 		}
 
 		.body {
-			bottom: 65px;
-			left: 0;
+			flex: 1 1 auto;
 			overflow: auto;
-			position: absolute;
-			right: 0;
-			top: 55px;
+			position: relative;
 
 			.note {
 				border-width: 1px;
