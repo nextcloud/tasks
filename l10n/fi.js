@@ -104,6 +104,7 @@ OC.L10N.register(
     "Alphabetically" : "Aakkosjärjestys",
     "Manually" : "Käsin",
     "Load remaining completed tasks." : "Lataa loput valmistuneet tehtävät.",
+    "Task is completed" : "Tehtävä on valmis",
     "All day" : "Koko päivä",
     "(New category)" : "(Uusi luokka)",
     "Select categories..." : "Valitse luokat...",
