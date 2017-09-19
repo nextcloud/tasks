@@ -1,14 +1,15 @@
-<div ng-controller="DetailsController" ng-click="endEdit($event)" class="handler">
+<div ng-controller="DetailsController" ng-click="endEdit($event)" class="content-wrapper handler">
     <div class="flex-container" ng-show="TaskState()=='found'" ng-class="{'disabled': !task.calendar.writable}">
     	<div class="title" ng-class="{'editing':route.parameter=='name'}">
-            <a class="detail-checkbox" ng-click="toggleCompleted(task)" role="checkbox" aria-checked="{{task.completed}}" aria-label="<?php p($l->t('Task is completed')); ?>">
+            <a class="checkbox" ng-click="toggleCompleted(task)" role="checkbox" aria-checked="{{task.completed}}" aria-label="<?php p($l->t('Task is completed')); ?>">
             	<span class="icon detail-checkbox" ng-class="{'icon-checkmark':task.completed, 'disabled': !task.calendar.writable}"></span>
             </a>
-            <a class="detail-star" ng-click="toggleStarred(task)">
+            <a class="star" ng-click="toggleStarred(task)">
             	<span class="icon icon-task-star" ng-class="{'icon-task-star-high':task.priority>5,'icon-task-star-medium':task.priority==5,'icon-task-star-low':task.priority > 0 && task.priority < 5, 'disabled': !task.calendar.writable}"></span>
             </a>
-        	<span class="title-text handler" ng-class="{'strike-through':task.completed}" ng-click="editName($event, task)"
-            oc-click-focus="{selector: '#editName', timeout: 0}" ng-bind-html="task.summary | linky:'_blank':{rel: 'nofollow'}"></span>
+        	<div class="title-text handler" ng-class="{'strike-through':task.completed}" ng-click="editName($event, task)"
+            oc-click-focus="{selector: '#editName', timeout: 0}" ng-bind-html="task.summary | linky:'_blank':{rel: 'nofollow'}">
+            </div>
             <div class="expandable-container handler">
             	<div class="expandingArea active">
                     <pre><span>{{ task.summary }}</span><br /></pre>
@@ -151,14 +152,10 @@
             </div> -->
         </div>
         <div class="footer">
-<!--             <div class="detail-addcomment">
-                <input type="text" placeholder="{{ commentStrings().input }}" ng-model="CommentContent" ng-keydown="sendComment($event)">
-                <input type="button" ng-click="addComment()" name="addComment" value="{{ commentStrings().button }}" ng-class="{'active':CommentContent}">
-            </div> -->
-        	<a class="handler close-all" ng-click="deleteTask(task)" ng-show="task.calendar.writable">
+        	<a class="handler left close-all" ng-click="deleteTask(task)" ng-show="task.calendar.writable">
             	<span class="icon icon-trash"></span>
             </a>
-            <a class="detail-close handler close-all">
+            <a class="handler right close-all">
             	<span class="icon icon-hide"></span>
             </a>
         </div>

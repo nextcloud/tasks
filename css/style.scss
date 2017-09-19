@@ -749,13 +749,18 @@ tr:last-child .task-item {
 	*/
 
 #app-sidebar {
-	.icon.detail-checkbox {
-		left: 16px !important;
-		cursor: pointer;
-		position: absolute;
-		top: 19px;
-		margin: 0;
-	}
+	// .detail-checkbox {
+	// 	float: left;
+	// 	padding: 17px;
+	//
+	// 	.icon {
+	// 		left: 16px !important;
+	// 		cursor: pointer;
+	// 		position: absolute;
+	// 		top: 19px;
+	// 		margin: 0;
+	// 	}
+	// }
 
 	.flex-container {
 		display: flex;
@@ -766,35 +771,33 @@ tr:last-child .task-item {
 	div.content-wrapper {
 		padding: 0;
 
-		> div {
-			height: 100%;
-			position: relative;
+		.notice {
+			color: $gray;
+			font-size: 16px;
+			position: absolute;
+			text-align: center;
+			top: 50%;
+			width: 100%;
 		}
 
-		div {
-			&.notice {
-				color: $gray;
-				font-size: 16px;
-				position: absolute;
-				text-align: center;
-				top: 50%;
-				width: 100%;
-			}
+		.footer {
+			border-top: 1px solid $gray_light;
+			flex: 0 0 auto;
+			height: 30px;
 
-			&.footer {
-				border-top: 1px solid $gray_light;
-				flex: 0 0 auto;
-				height: 30px;
+			a {
+				padding: 7px;
 
-				.icon {
-					position: absolute;
-					bottom: 7px;
-					left: 8px;
+				&.left {
+					float: left;
 				}
 
-				.detail-close .icon {
-					left: auto;
-					right: 8px;
+				&.right {
+					float: right;
+				}
+
+				.icon {
+					display: block;
 				}
 			}
 		}
@@ -805,12 +808,42 @@ tr:last-child .task-item {
 			border-bottom: 1px solid $gray_light;
 			font-size: 16px;
 			font-weight: bold;
-			padding: 16px 55px 13px;
+			// line-height: 24px;
+			min-height: 50px;
+			// padding: 16px 55px 13px;
 			word-wrap: break-word;
+
+			.checkbox {
+				float: left;
+				padding: 16px 17px 18px;
+
+				.icon {
+					cursor: pointer;
+					margin: 0;
+				}
+			}
+
+			.star {
+				padding: 13px;
+				float: right;
+
+				.icon {
+					height: 24px;
+					width: 24px;
+					background-size: 144px 144px;
+
+					&:hover {
+						opacity: 1;
+					}
+				}
+			}
 
 			.title-text {
 				cursor: text;
-				display: block;
+				display: inline-block;
+				min-height: 24px;
+				margin: 13px 0;
+				width: calc(100% - 100px);
 
 				&.strike-through {
 					text-decoration: line-through;
@@ -828,6 +861,7 @@ tr:last-child .task-item {
 				font-size: 16px;
 				font-weight: bold;
 				line-height: 24px;
+				min-height: 24px;
 				background: none repeat scroll 0 0 transparent;
 				border: medium none;
 				padding: 0;
@@ -858,10 +892,14 @@ tr:last-child .task-item {
 
 			.expandable-container {
 				background: none repeat scroll 0 0 $white;
+				box-sizing: border-box;
 				border: 1px solid $gray;
-				margin: -1px -4px -1px -6px;
 				padding: 0 5px;
 				display: none !important;
+				margin: 13px 0;
+				width: calc(100% - 100px);
+				line-height: 24px;
+				min-height: 24px;
 
 				.expandingArea {
 					position: relative;
@@ -874,14 +912,14 @@ tr:last-child .task-item {
 				}
 
 				.expandable-container {
-					display: block !important;
+					display: inline-block !important;
 				}
 			}
 		}
 
 		.body {
 			flex: 1 1 auto;
-			overflow: auto;
+			overflow-y: auto;
 			position: relative;
 
 			.note {
@@ -991,6 +1029,28 @@ tr:last-child .task-item {
 				border-top: none;
 				margin-bottom: 0;
 
+				.section-title {
+					color: $gray;
+					font-weight: bold;
+					margin-top: 3px;
+					display: block;
+				}
+
+				&.low,
+				&.date {
+					.section-title {
+						color: $blue_due;
+					}
+				}
+
+				&.high .section-title {
+					color: $red_overdue;
+				}
+
+				&.medium .section-title {
+					color: $yellow;
+				}
+
 				input {
 					background-color: $white;
 					border: 1px solid $blue_background;
@@ -1033,23 +1093,6 @@ tr:last-child .task-item {
 					left: 16px;
 					position: absolute;
 					top: 13px;
-
-					&.detail-remindertype {
-						display: none;
-						left: 38px;
-						opacity: .4;
-
-						&:hover {
-							opacity: .8;
-						}
-					}
-				}
-
-				.section-title {
-					color: $gray;
-					font-weight: bold;
-					margin-top: 3px;
-					display: block;
 				}
 
 				.section-edit {
@@ -1058,12 +1101,8 @@ tr:last-child .task-item {
 
 				&.editing {
 					.icon {
-						&.detail-save {
-							display: inline-block;
-						}
-
-						&.icon-trash,
-						&.detail-remindertype {
+						&.detail-save,
+						&.icon-trash {
 							display: block;
 						}
 					}
@@ -1078,37 +1117,11 @@ tr:last-child .task-item {
 				}
 
 				&.date {
-					.section-title {
-						&.overdue {
-							color: $red_overdue !important;
-						}
-
-						&.repeat {
-							margin-top: -2px;
-						}
-					}
-
 					.icon.icon-percent {
 						opacity: 1;
 					}
 
 					&:hover .icon.icon-trash {
-						display: block;
-					}
-				}
-
-				&.detail-reminder {
-					.section-description {
-						display: none;
-						font-size: 11px;
-						margin-top: -6px;
-
-						&.repeat {
-							display: block;
-						}
-					}
-
-					&.date .section-description {
 						display: block;
 					}
 				}
@@ -1180,29 +1193,11 @@ input {
 	}
 }
 
-.date {
-	.icon {
-		&.icon-calendar-due,
-		&.icon-calendar-overdue {
-			opacity: 1;
-		}
+.date .icon {
+	&.icon-calendar-due,
+	&.icon-calendar-overdue {
+		opacity: 1;
 	}
-
-	.section-title {
-		color: $blue_due !important;
-	}
-}
-
-.high .section-title {
-	color: $red_overdue !important;
-}
-
-.medium .section-title {
-	color: $yellow !important;
-}
-
-.low .section-title {
-	color: $blue_due !important;
 }
 
 .detail-categories .select2-container-multi {
@@ -1322,22 +1317,6 @@ input {
 }
 
 a {
-	&.detail-star {
-		padding: 15px;
-		margin-left: auto;
-		float: right;
-
-		.icon {
-			height: 24px;
-			width: 24px;
-			background-size: 144px 144px;
-
-			&:hover {
-				opacity: 1;
-			}
-		}
-	}
-
 	&:hover .icon {
 		&.icon-trash,
 		&.icon-hide {

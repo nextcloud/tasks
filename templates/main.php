@@ -228,9 +228,7 @@
             </div>
         </div>
         <div id="app-sidebar" ng-class="{'disappear':!route.taskID}">
-            <div class="content-wrapper">
-                <?php print_unescaped($this->inc('part.details')); ?>
-            </div>
+            <?php print_unescaped($this->inc('part.details')); ?>
         </div>
     </div>
     <script type="text/ng-template" id="part.taskbody">

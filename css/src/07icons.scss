@@ -78,22 +78,6 @@
 }
 
 a {
-	&.detail-star {
-		padding: 15px;
-		margin-left: auto;
-		float: right;
-
-		.icon {
-			height: 24px;
-			width: 24px;
-			background-size: 144px 144px;
-
-			&:hover {
-				opacity: 1;
-			}
-		}
-	}
-
 	&:hover .icon {
 		&.icon-trash,
 		&.icon-hide {
