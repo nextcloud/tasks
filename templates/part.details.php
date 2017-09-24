@@ -19,7 +19,6 @@
         </div>
         <div class="body">
             <div class="section detail-start handler" ng-class="{'date':isDue(task.start), 'editing':route.parameter=='startdate'}" ng-click="editStart($event, task)">
-            <!-- oc-click-focus="{selector: 'div.detail-start input.datepicker-input', timeout: 0}" -->
                 <span class="icon icon-calendar" ng-class="{'icon-calendar-due':isDue(task.start), 'icon-calendar-overdue':isOverDue(task.start)}"></span>
                 <div class="section-title" ng-class="{'overdue':isOverDue(task.start)}">
                     <text>{{ task.start | startDetails }}</text>
@@ -34,7 +33,6 @@
                 </div>
             </div>
             <div class="section detail-date handler" ng-class="{'date':isDue(task.due), 'editing':route.parameter=='duedate'}" ng-click="editDueDate($event, task)">
-            <!-- oc-click-focus="{selector: 'div.detail-date input.datepicker-input', timeout: 0}" -->
             	<span class="icon icon-calendar" ng-class="{'icon-calendar-due':isDue(task.due), 'icon-calendar-overdue':isOverDue(task.due)}"></span>
                 <div class="section-title" ng-class="{'overdue':isOverDue(task.due)}">
                     <text>{{ task.due | dateDetails }}</text>
@@ -54,29 +52,6 @@
                         <text><?php p($l->t('All day')); ?></text>
                     </div>
             </div>
-
-<!--             <div class="section detail-reminder handler" ng-class="{'date':isDue(task.reminder.date), 'editing':route.parameter=='reminder'}" ng-click="editReminder($event, task)">
-            	<span class="icon detail-reminder" ng-class="{'overdue':isOverDue(task.reminder.date)}"></span>
-                <span class="icon detail-remindertype" ng-click="changeReminderType(task)" ng-show="task.due || task.start"></span>
-                <div class="section-title" ng-class="{'overdue':isOverDue(task.reminder.date)}">
-    				<text rel="">{{ task.reminder | reminderDetails:this }}</text>
-    			</div>
-                <a class="handler end-edit" ng-click="deleteReminder()">
-    				<span class="icon icon-trash"></span>
-    			</a>
-                <span class="icon detail-save icon-checkmark-color handler end-edit"></span>
-                <div class="section-edit" ng-switch='reminderType(task)'>
-                    <div ng-switch-when="DATE-TIME">
-                        <input class="datepicker-input medium" type="text" key-value="" placeholder="dd.mm.yyyy" value="{{ task.reminder.date | dateTaskList }}" datepicker="reminder">
-                        <input class="timepicker-input medium" type="text" key-value="" placeholder="hh:mm" value="{{ task.reminder.date | timeTaskList }}" timepicker="reminder">
-                    </div>
-                    <div ng-switch-when="DURATION">
-                        <input ng-change="setReminderDuration(task)" class="duration-input medium" type="number" key-value="" placeholder="" ng-model="task.reminder.duration[task.reminder.duration.token]">
-                        <select ng-model="task.reminder.duration.token" ng-options="duration.id as duration.names for duration in durations"></select>
-                        <select ng-change="setReminderDuration(task)" ng-model="task.reminder.duration.params" ng-options="param as param.name for param in filterParams(params) track by param.id"></select>
-                    </div>
-                </div>
-            </div> -->
             <div class="section detail-priority handler" ng-class="{'editing':route.parameter=='priority','high':task.priority>5,'medium':task.priority==5,'low':task.priority > 0 && task.priority < 5, 'date':task.priority>0}"  ng-click="editPriority($event, task)">
                 <span class="icon icon-task-star" ng-class="{'icon-task-star-high':task.priority>5,'icon-task-star-medium':task.priority==5,'icon-task-star-low':task.priority > 0 && task.priority < 5}"></span>
                 <div class="section-title">
@@ -105,7 +80,6 @@
                     <input type="range" ng-model="task.complete" min="0" max="100" step ="1" ng-change="setPercentComplete(task, task.complete)">
                 </div>
             </div>
-            <!-- <ul class="subtasks buffer"></ul> -->
             <div class="section detail-categories" ng-class="{'active':task.cats.length>0}">
                 <span class="icon icon-tag detail-categories" ng-class="{'icon-tag-active':task.cats.length>0}"></span>
             <!-- Edit line 1080 to show placeholder -->
@@ -120,11 +94,6 @@
             <div class="section detail-note">
                 <div class="note">
                 	<div class="note-body selectable handler" ng-click="editNote($event, task)" oc-click-focus="{selector: '.expandingArea textarea', timeout: 0}">
-                        <!--
-                        <a class="open-fullscreen-note">
-                        	<span class="icon note-fullscreen"></span>
-                        </a>
-                        -->
                         <div class="content-fakeable" ng-class="{'editing':route.parameter=='note'}">
                         	<div class="display-view" ng-bind-html="task.note | linky:'_blank':{rel: 'nofollow'}"></div>
                             <div class="edit-view">
@@ -137,19 +106,6 @@
                     </div>
                 </div>
             </div>
-<!--             <div class="section detail-comments">
-                <ul>
-                    <li ng-repeat="comment in task.comments" class="comment-item" rel=" {{ comment.id }} ">
-                        <div class="avatar" avatar userID="{{ comment.userID }}" size="32"></div>
-                        <a class="end-edit" ng-click="deleteComment(comment.id)" ng-show="settingsmodel.getById('various').userID == comment.userID">
-                            <span class="icon icon-trash"></span>
-                        </a>
-                        <span class="username">{{ comment.name }}</span>
-                        <div class="comment" ng-bind-html="comment.comment | linky:'_blank':{rel: 'nofollow'}"></div>
-                        <span class="time"> {{ comment.time | dateFromNow }} </span>
-                    </li>
-                </ul>
-            </div> -->
         </div>
         <div class="footer">
         	<a class="handler left close-all" ng-click="deleteTask(task)" ng-show="task.calendar.writable">
