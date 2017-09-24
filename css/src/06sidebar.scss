@@ -167,6 +167,191 @@
 			overflow-y: auto;
 			position: relative;
 
+			.section {
+				border-bottom: 1px dotted $gray;
+				padding: 0;
+				position: relative;
+				margin-bottom: 0;
+				width: 100%;
+
+				> div {
+					padding-left: 12px;
+					line-height: 44px;
+
+					&.utils {
+						position: absolute;
+						right: 0;
+						top: 0;
+						padding-right: 15px;
+
+						a {
+							vertical-align: middle;
+							display: inline-block;
+						}
+					}
+
+					.section-title {
+						color: $gray;
+						font-weight: bold;
+						margin-left: 12px;
+						line-height: 22px;
+						width: calc(100% - 100px);
+						display: inline-block;
+						vertical-align: middle;
+					}
+
+					.icon {
+						margin: 0;
+						float: unset;
+					}
+				}
+
+				&.low,
+				&.date {
+					.section-title {
+						color: $blue_due;
+					}
+				}
+
+				&.high .section-title {
+					color: $red_overdue;
+				}
+
+				&.medium .section-title {
+					color: $yellow;
+				}
+
+				input {
+					background-color: $white;
+					border: 1px solid $blue_background;
+					border-radius: 0;
+					margin-top: 0;
+					color: $gray_dark;
+					font-weight: 500;
+					outline: medium none;
+					padding: 4px;
+				}
+
+				input[type="range"] {
+					border: medium none;
+					box-shadow: none;
+					width: calc(100% - 50px);
+					vertical-align: middle;
+				}
+
+				input[type="text"] {
+					box-shadow: 0 0 4px rgba($blue_background, .3), 0 1px 1px rgba($white, .4), 0 2px 4px rgba($blue_background, .1) inset, 0 0 4px rgba($blue_background, .2) inset;
+					background: none repeat scroll 0 0 $gray_easy;
+					margin: 0;
+					min-height: 0;
+				}
+
+				select {
+					background-color: rgba(0, 0, 0, 0);
+					border-radius: 0;
+					border: 1px solid $gray_light;
+					padding: 0;
+					width: 98px;
+					margin: 0;
+					font-weight: normal;
+					height: 19px;
+				}
+
+				.section-edit {
+					display: none;
+					margin-left: 12px;
+					vertical-align: middle;
+					width: calc(100% - 80px);
+				}
+
+				&.editing {
+					.icon {
+						&.detail-save,
+						&.icon-trash {
+							display: block;
+						}
+					}
+
+					.section-title {
+						display: none;
+					}
+
+					.section-edit {
+						display: inline-block;
+					}
+				}
+
+				&.date {
+					.icon.icon-percent {
+						opacity: 1;
+					}
+
+					&:hover .icon.icon-trash {
+						display: block;
+					}
+				}
+
+				&.detail-note {
+					padding: 20px 0;
+					height: auto;
+				}
+
+				.detail-categories-container {
+					width: calc(100% - 40px);
+					display: inline-block;
+					margin-left: 12px;
+				}
+
+				&.detail-categories .select2-container-multi {
+					.select2-choices {
+						border: 1px solid transparent;
+
+						.select2-search-choice {
+							color: $blue_due;
+							font-weight: bold;
+							line-height: 14px;
+							margin: 2px 0 3px 5px;
+							background-image: none;
+							background-color: $gray_easy;
+							box-shadow: none;
+							border-color: $gray_light;
+							min-height: 22px;
+
+							a.select2-search-choice-close {
+								opacity: .4;
+								display: initial;
+
+								@extend .icon;
+								@extend .icon-close;
+
+								&:hover {
+									opacity: 1;
+								}
+							}
+						}
+					}
+
+					&.select2-container-disabled .select2-choices {
+						background-color: $white;
+						background-image: none;
+						border: none;
+						cursor: default;
+					}
+				}
+
+				.select2-search-field input {
+					border: 0 none;
+					box-shadow: none;
+					font-weight: bold;
+					margin-top: 0;
+					font-family: inherit;
+				}
+
+				&.active .select2-search-field input {
+					color: $blue_due;
+				}
+			}
+
 			.note {
 				border-width: 1px;
 				border-style: solid;
@@ -265,134 +450,6 @@
 					}
 				}
 			}
-
-			.section {
-				border-bottom: 1px dotted $gray;
-				height: 46px;
-				padding: 9px 20px 9px 55px;
-				position: relative;
-				border-top: none;
-				margin-bottom: 0;
-
-				.section-title {
-					color: $gray;
-					font-weight: bold;
-					margin-top: 3px;
-					display: block;
-				}
-
-				&.low,
-				&.date {
-					.section-title {
-						color: $blue_due;
-					}
-				}
-
-				&.high .section-title {
-					color: $red_overdue;
-				}
-
-				&.medium .section-title {
-					color: $yellow;
-				}
-
-				input {
-					background-color: $white;
-					border: 1px solid $blue_background;
-					border-radius: 0;
-					margin-top: 0;
-					color: $gray_dark;
-					font-weight: 500;
-					outline: medium none;
-					padding: 4px;
-				}
-
-				input[type="range"] {
-					border: medium none;
-					box-shadow: none;
-					width: calc(100% - 90px);
-					margin: 0 36px 0 5px;
-					height: 28px;
-					min-height: 20px;
-				}
-
-				input[type="text"] {
-					box-shadow: 0 0 4px rgba($blue_background, .3), 0 1px 1px rgba($white, .4), 0 2px 4px rgba($blue_background, .1) inset, 0 0 4px rgba($blue_background, .2) inset;
-					background: none repeat scroll 0 0 $gray_easy;
-					float: left;
-					min-height: 0;
-				}
-
-				select {
-					background-color: rgba(0, 0, 0, 0);
-					border-radius: 0;
-					border: 1px solid $gray_light;
-					padding: 0;
-					width: 98px;
-					margin: 0;
-					font-weight: normal;
-					height: 19px;
-				}
-
-				.icon {
-					left: 16px;
-					position: absolute;
-					top: 13px;
-				}
-
-				.section-edit {
-					display: none;
-				}
-
-				&.editing {
-					.icon {
-						&.detail-save,
-						&.icon-trash {
-							display: block;
-						}
-					}
-
-					.section-title {
-						display: none;
-					}
-
-					.section-edit {
-						display: block;
-					}
-				}
-
-				&.date {
-					.icon.icon-percent {
-						opacity: 1;
-					}
-
-					&:hover .icon.icon-trash {
-						display: block;
-					}
-				}
-
-				&.detail-categories {
-					height: auto;
-					padding-left: 50px;
-				}
-
-				&.detail-note {
-					padding: 20px 0;
-					height: auto;
-				}
-
-				.select2-search-field input {
-					border: 0 none;
-					box-shadow: none;
-					font-weight: bold;
-					margin-top: 0;
-					font-family: inherit;
-				}
-
-				&.active .select2-search-field input {
-					color: $blue_due;
-				}
-			}
 		}
 
 		&.completed .body .section .section-title {
@@ -442,42 +499,5 @@ input {
 	&.icon-calendar-due,
 	&.icon-calendar-overdue {
 		opacity: 1;
-	}
-}
-
-.detail-categories .select2-container-multi {
-	.select2-choices {
-		border: 1px solid transparent;
-
-		.select2-search-choice {
-			color: $blue_due;
-			font-weight: bold;
-			line-height: 14px;
-			margin: 2px 0 3px 5px;
-			background-image: none;
-			background-color: $gray_easy;
-			box-shadow: none;
-			border-color: $gray_light;
-			min-height: 22px;
-
-			a.select2-search-choice-close {
-				opacity: .4;
-				display: initial;
-
-				@extend .icon;
-				@extend .icon-close;
-
-				&:hover {
-					opacity: 1;
-				}
-			}
-		}
-	}
-
-	&.select2-container-disabled .select2-choices {
-		background-color: $white;
-		background-image: none;
-		border: none;
-		cursor: default;
 	}
 }
