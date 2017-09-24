@@ -1008,6 +1008,7 @@ tr:last-child .task-item {
 					margin-left: 12px;
 					vertical-align: middle;
 					width: calc(100% - 80px);
+					line-height: 0;
 				}
 
 				&.editing {
@@ -1222,11 +1223,11 @@ tr:last-child .task-item {
 
 input {
 	&.datepicker-input {
-		width: 120px;
+		width: 60%;
 	}
 
 	&.timepicker-input {
-		width: 80px;
+		width: calc(40% - 10px);
 	}
 
 	&.duration-input {
