@@ -3,19 +3,6 @@
 	*/
 
 #app-sidebar {
-	// .detail-checkbox {
-	// 	float: left;
-	// 	padding: 17px;
-	//
-	// 	.icon {
-	// 		left: 16px !important;
-	// 		cursor: pointer;
-	// 		position: absolute;
-	// 		top: 19px;
-	// 		margin: 0;
-	// 	}
-	// }
-
 	.flex-container {
 		display: flex;
 		flex-direction: column;
@@ -62,9 +49,7 @@
 			border-bottom: 1px solid $gray_light;
 			font-size: 16px;
 			font-weight: bold;
-			// line-height: 24px;
 			min-height: 50px;
-			// padding: 16px 55px 13px;
 			word-wrap: break-word;
 
 			.checkbox {
@@ -98,6 +83,12 @@
 				min-height: 24px;
 				margin: 13px 0;
 				width: calc(100% - 100px);
+				padding: 0 6px;
+				line-height: 22px;
+				// this border is to adjust the size of the div to the size
+				// of the input field for editing the title
+				// (setting a padding always let to a small flickering)
+				border: 1px solid transparent;
 
 				&.strike-through {
 					text-decoration: line-through;
@@ -114,8 +105,8 @@
 				box-shadow: none;
 				font-size: 16px;
 				font-weight: bold;
-				line-height: 24px;
-				min-height: 24px;
+				line-height: 22px;
+				min-height: 22px;
 				background: none repeat scroll 0 0 transparent;
 				border: medium none;
 				padding: 0;
@@ -148,7 +139,7 @@
 				background: none repeat scroll 0 0 $white;
 				box-sizing: border-box;
 				border: 1px solid $gray;
-				padding: 0 5px;
+				padding: 0 6px;
 				display: none !important;
 				margin: 13px 0;
 				width: calc(100% - 100px);
