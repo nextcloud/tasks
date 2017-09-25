@@ -80,14 +80,14 @@
 	#add-task {
 		margin: 12px 0;
 		position: relative;
-		border: 1px solid $gray_light;
-		background: none repeat scroll 0 0 $gray_light;
+		border: 1px solid nc-darken($color-main-background, 8%);
+		background: none repeat scroll 0 0 nc-darken($color-main-background, 8%);
 		width: calc(100% - 54px);
 		float: left;
 		height: 34px;
 
 		&.focus {
-			background-color: $white;
+			background-color: $color-main-background;
 		}
 
 		.icon {
@@ -98,7 +98,7 @@
 		input {
 			font-size: 13px;
 			width: 100%;
-			color: $gray_dark;
+			color: nc-darken($color-main-background, 8%);
 			border: medium none !important;
 			border-radius: 0 !important;
 			box-shadow: none !important;
@@ -111,8 +111,8 @@
 	}
 
 	.sortorder-dropdown-button {
-		background-color: $gray_easy;
-		border: 1px solid $gray_light;
+		background-color: nc-darken($color-main-background, 3%);
+		border: 1px solid nc-darken($color-main-background, 8%);
 		width: 42px;
 		height: 34px;
 		margin: 12px 0 12px 12px;
@@ -134,7 +134,7 @@ ol[dnd-list] {
 
 	.dndPlaceholder {
 		display: block;
-		background-color: $gray_light;
+		background-color: nc-darken($color-main-background, 8%);
 		min-height: 37px;
 	}
 
@@ -149,7 +149,7 @@ ol[dnd-list] {
 
 #content {
 	overflow: hidden;
-	color: $gray_dark;
+	color: nc-darken($color-main-background, 8%);
 }
 
 .app-tasks #app-content {

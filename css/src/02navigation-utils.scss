@@ -76,7 +76,7 @@
 			width: calc(100% / 10) !important;
 
 			&.selected {
-				border: 1px solid $gray_dark;
+				border: 1px solid nc-darken($color-main-background, 8%);
 			}
 
 			&.randomcolour {

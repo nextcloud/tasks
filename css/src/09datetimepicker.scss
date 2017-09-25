@@ -3,9 +3,9 @@
 	*/
 
 .ui-widget-content {
-	background: none repeat scroll 0 0 $gray_easy;
+	background: none repeat scroll 0 0 nc-darken($color-main-background, 3%);
 	border-radius: 4px;
-	color: $gray_dark;
+	color: nc-darken($color-main-background, 8%);
 	max-width: 304px;
 	min-height: 15px;
 	min-width: 150px;
@@ -38,7 +38,7 @@
 
 			&.selected a,
 			a.ui-state-active {
-				background: linear-gradient(to top, rgba($blue_background, .8), rgba($blue_background, .6)) repeat scroll 0 0 transparent !important;
+				background: linear-gradient(to top, rgba($color-primary, .8), rgba($color-primary, .6)) repeat scroll 0 0 transparent !important;
 				border-radius: 3px;
 				color: $white !important;
 				opacity: 1;
@@ -58,7 +58,7 @@
 		a.ui-state-default {
 			border: none;
 			background: none repeat scroll 0 0 transparent;
-			color: $gray_dark;
+			color: nc-darken($color-main-background, 8%);
 			border-radius: 3px;
 			cursor: pointer;
 			display: block;
@@ -70,7 +70,7 @@
 
 			&:hover {
 				border: none;
-				background: none repeat scroll 0 0 $gray_light;
+				background: none repeat scroll 0 0 nc-darken($color-main-background, 8%);
 			}
 		}
 	}
@@ -78,7 +78,7 @@
 	.ui-widget-header {
 		background: none repeat scroll 0 0 transparent;
 		border: none;
-		color: $gray_dark;
+		color: nc-darken($color-main-background, 8%);
 		font-weight: 600;
 		font-size: 12px;
 	}
@@ -87,10 +87,10 @@
 div {
 	&.ui-datepicker,
 	&.ui-timepicker {
-		background: none repeat scroll 0 0 $gray_easy;
+		background: none repeat scroll 0 0 nc-darken($color-main-background, 3%);
 		border-radius: 4px;
-		box-shadow: 0 1px 6px $gray_dark;
-		color: $gray_dark;
+		box-shadow: 0 1px 6px $color-box-shadow;
+		color: nc-darken($color-main-background, 8%);
 		max-width: 304px;
 		min-height: 15px;
 		min-width: 150px;
@@ -100,7 +100,7 @@ div {
 		padding: 8px;
 
 		.arrow {
-			border-color: transparent transparent $gray_easy;
+			border-color: transparent transparent nc-darken($color-main-background, 3%);
 			left: 50%;
 			margin-left: -12px;
 			top: -24px;
@@ -113,7 +113,7 @@ div {
 		}
 
 		&::after {
-			border-bottom: 9px solid $gray_easy;
+			border-bottom: 9px solid nc-darken($color-main-background, 3%);
 			border-left: 9px solid rgba(0, 0, 0, 0);
 			border-right: 9px solid rgba(0, 0, 0, 0);
 			content: "";
@@ -124,7 +124,7 @@ div {
 		}
 
 		&::before {
-			border-bottom: 9px solid $gray_light;
+			border-bottom: 9px solid nc-darken($color-main-background, 8%);
 			border-left: 9px solid rgba(0, 0, 0, 0);
 			border-right: 9px solid rgba(0, 0, 0, 0);
 			content: "";
@@ -147,7 +147,7 @@ div {
 }
 
 td.ui-timepicker-hours table {
-	border-right: 1px solid $gray_light;
+	border-right: 1px solid nc-darken($color-main-background, 8%);
 }
 
 /**
@@ -158,7 +158,7 @@ td.ui-timepicker-hours table {
 	table {
 		td {
 			&.ui-datepicker-today a {
-				color: $blue_background;
+				color: $color-primary;
 			}
 		}
 	}

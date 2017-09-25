@@ -18,7 +18,7 @@
 	height: 22px !important;
 	background-color: transparent !important;
 	font-weight: bold;
-	color: $gray;
+	color: nc-lighten($color-main-text, 63%);
 	font-size: 13px !important;
 
 	&.emptycontent {

@@ -147,7 +147,7 @@
 .calendar-indicator {
 	min-width: 12px;
 	min-height: 12px;
-	background-color: $red;
+	background-color: $color-primary;
 	display: inline-block;
 	height: 12px;
 	width: 12px;
@@ -168,7 +168,7 @@
 }
 
 .error input.edit {
-	color: $red;
-	border-color: $red !important;
-	box-shadow: 0 0 6px rgba($red, .3);
+	color: $color-error;
+	border-color: $color-error !important;
+	box-shadow: 0 0 6px rgba($color-error, .3);
 }

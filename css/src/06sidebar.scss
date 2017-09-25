@@ -22,7 +22,7 @@
 		}
 
 		.footer {
-			border-top: 1px solid $gray_light;
+			border-top: 1px solid nc-darken($color-main-background, 8%);
 			flex: 0 0 auto;
 			height: 30px;
 
@@ -45,8 +45,8 @@
 
 		.title {
 			flex: 0 0 auto;
-			background-color: $gray_easy;
-			border-bottom: 1px solid $gray_light;
+			background-color: nc-darken($color-main-background, 3%);
+			border-bottom: 1px solid nc-darken($color-main-background, 8%);
 			font-size: 16px;
 			font-weight: bold;
 			min-height: 50px;
@@ -214,7 +214,7 @@
 				}
 
 				&.high .section-title {
-					color: $red_overdue;
+					color: $color-error;
 				}
 
 				&.medium .section-title {
@@ -223,10 +223,10 @@
 
 				input {
 					background-color: $white;
-					border: 1px solid $blue_background;
+					border: 1px solid $color-primary;
 					border-radius: 0;
 					margin-top: 0;
-					color: $gray_dark;
+					color: nc-darken($color-main-background, 8%);
 					font-weight: 500;
 					outline: medium none;
 					padding: 4px;
@@ -240,8 +240,8 @@
 				}
 
 				input[type="text"] {
-					box-shadow: 0 0 4px rgba($blue_background, .3), 0 1px 1px rgba($white, .4), 0 2px 4px rgba($blue_background, .1) inset, 0 0 4px rgba($blue_background, .2) inset;
-					background: none repeat scroll 0 0 $gray_easy;
+					box-shadow: 0 0 4px rgba($color-primary, .3), 0 1px 1px rgba($white, .4), 0 2px 4px rgba($color-primary, .1) inset, 0 0 4px rgba($color-primary, .2) inset;
+					background: none repeat scroll 0 0 nc-darken($color-main-background, 3%);
 					margin: 0;
 					min-height: 0;
 				}
@@ -249,7 +249,7 @@
 				select {
 					background-color: rgba(0, 0, 0, 0);
 					border-radius: 0;
-					border: 1px solid $gray_light;
+					border: 1px solid nc-darken($color-main-background, 8%);
 					padding: 0;
 					width: 98px;
 					margin: 0;
@@ -313,9 +313,9 @@
 							line-height: 14px;
 							margin: 2px 0 3px 5px;
 							background-image: none;
-							background-color: $gray_easy;
+							background-color: nc-darken($color-main-background, 3%);
 							box-shadow: none;
-							border-color: $gray_light;
+							border-color: nc-darken($color-main-background, 8%);
 							min-height: 22px;
 
 							a.select2-search-choice-close {
@@ -356,7 +356,7 @@
 			.note {
 				border-width: 1px;
 				border-style: solid;
-				border-color: $gray_light;
+				border-color: nc-darken($color-main-background, 8%);
 				font-size: 13px;
 				line-height: 26px;
 				margin: 0 20px;
@@ -389,7 +389,7 @@
 						resize: none;
 						top: 0;
 						width: 100%;
-						color: $gray_dark;
+						color: nc-darken($color-main-background, 8%);
 						font-weight: 500;
 						outline: medium none;
 					}

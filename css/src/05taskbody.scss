@@ -10,7 +10,7 @@
 	position: relative;
 	border-style: solid;
 	border-width: 1px;
-	border-color: $gray_light;
+	border-color: nc-darken($color-main-background, 8%);
 	overflow: hidden;
 
 	.icon {
@@ -45,16 +45,16 @@
 	}
 
 	&:hover {
-		background-color: $gray_easy;
+		background-color: nc-darken($color-main-background, 3%);
 	}
 
 	&.active {
-		background-color: $gray_easy;
+		background-color: nc-darken($color-main-background, 3%);
 	}
 
 	.title-wrapper {
 		cursor: pointer;
-		color: $gray_dark;
+		color: nc-darken($color-main-background, 8%);
 		display: block;
 		line-height: 16px;
 		margin: 0 0 0 44px;
@@ -110,7 +110,7 @@
 	left: 42px;
 	margin-right: 103px;
 	margin-bottom: -5px;
-	background-color: $gray_light;
+	background-color: nc-darken($color-main-background, 8%);
 	border-radius: 2px;
 
 	.percentdone {
@@ -149,7 +149,7 @@
 
 	&.add-subtask {
 		background: $white;
-		border: 1px solid $gray_light;
+		border: 1px solid nc-darken($color-main-background, 8%);
 
 		input {
 			background: transparent none repeat scroll 0 0 !important;
@@ -157,7 +157,7 @@
 			border-radius: 0 !important;
 			box-shadow: none !important;
 			box-sizing: border-box;
-			color: $gray_dark;
+			color: nc-darken($color-main-background, 8%);
 			cursor: text;
 			font-size: 100%;
 			margin: 0;
@@ -185,8 +185,8 @@
 	vertical-align: middle;
 
 	li {
-		background-color: $gray_easy;
-		border: 1px solid $gray_light;
+		background-color: nc-darken($color-main-background, 3%);
+		border: 1px solid nc-darken($color-main-background, 8%);
 		border-radius: 2px;
 		color: $gray;
 		float: left;
