@@ -82,7 +82,7 @@
 	}
 
 	.listname {
-		color: nc-lighten($color-main-text, 37%);;
+		color: nc-lighten($color-main-text, 37%);
 		float: right;
 		font-size: 11px;
 		line-height: 14px;
@@ -188,7 +188,7 @@
 		background-color: nc-darken($color-main-background, 3%);
 		border: 1px solid nc-darken($color-main-background, 8%);
 		border-radius: 2px;
-		color: nc-lighten($color-main-text, 37%);;
+		color: nc-lighten($color-main-text, 37%);
 		float: left;
 		font-weight: bold;
 		margin: -2px 4px 0;
