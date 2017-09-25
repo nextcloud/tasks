@@ -17,10 +17,7 @@
 			width: 100% !important;
 		}
 
-		&.active {
-			opacity: 1 !important;
-		}
-
+		&.active,
 		&:hover {
 			opacity: 1 !important;
 		}

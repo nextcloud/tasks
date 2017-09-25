@@ -35,14 +35,14 @@
 				text-align: center;
 
 				span {
-					color: $gray;
-					background-color: $gray_easy;
+					color: nc-lighten($color-main-text, 60%);
+					background-color: nc-darken($color-main-background, 3%);
 					border-radius: 10px;
 					padding: 3px 6px;
 
 					&:hover {
 						cursor: pointer;
-						color: $gray_dark;
+						color: nc-lighten($color-main-text, 25%);
 					}
 				}
 			}
