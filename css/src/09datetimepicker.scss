@@ -40,14 +40,14 @@
 			a.ui-state-active {
 				background: linear-gradient(to top, rgba($color-primary, .8), rgba($color-primary, .6)) repeat scroll 0 0 transparent !important;
 				border-radius: 3px;
-				color: $white !important;
+				color: $color-primary-text !important;
 				opacity: 1;
 				position: relative;
 			}
 		}
 
 		thead th {
-			color: $gray;
+			color: nc-lighten($color-main-text, 63%);;
 			font-size: 9px;
 			height: auto;
 			padding: 4px 0;

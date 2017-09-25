@@ -3,7 +3,7 @@
 	*/
 
 .task-body {
-	background-color: $white;
+	background-color: $color-main-background;
 	height: 37px;
 	list-style: none outside none;
 	margin: 0;
@@ -26,7 +26,7 @@
 			top: 1px;
 			background: unset;
 			width: 2px;
-			border-left: 1px dotted $gray;
+			border-left: 1px dotted nc-darken($color-main-background, 8%);
 		}
 
 		&.icon-add {
@@ -70,19 +70,19 @@
 	}
 
 	.duedate {
-		color: $blue_due;
+		color: $color-primary;
 		float: right;
 		font-size: 11px;
 		line-height: 14px;
 		margin: 10px;
 
 		&.overdue {
-			color: $red_overdue;
+			color: $color-error;
 		}
 	}
 
 	.listname {
-		color: $gray;
+		color: nc-lighten($color-main-text, 37%);;
 		float: right;
 		font-size: 11px;
 		line-height: 14px;
@@ -148,7 +148,7 @@
 	}
 
 	&.add-subtask {
-		background: $white;
+		background: $color-main-background;
 		border: 1px solid nc-darken($color-main-background, 8%);
 
 		input {
@@ -188,7 +188,7 @@
 		background-color: nc-darken($color-main-background, 3%);
 		border: 1px solid nc-darken($color-main-background, 8%);
 		border-radius: 2px;
-		color: $gray;
+		color: nc-lighten($color-main-text, 37%);;
 		float: left;
 		font-weight: bold;
 		margin: -2px 4px 0;

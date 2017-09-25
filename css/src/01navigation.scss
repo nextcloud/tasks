@@ -76,7 +76,7 @@
 
 	.app-navigation-entry-edit {
 		input.action {
-			background-color: $gray_easy;
+			background-color: nc-darken($color-main-background, 3%);
 			width: 36px;
 			border-left: 0 none;
 			border-top-left-radius: 0;
