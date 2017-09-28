@@ -12,7 +12,7 @@
     "[Remind me yesterday at ]HH:mm" : "[Lembre-me ontem às ]HH:mm",
     "[Remind me today at ]HH:mm" : "[Lembre-me hoje às ] HH: mm",
     "[Remind me tomorrow at ]HH:mm" : "[Lembre-me amanhã às ] HH: mm",
-    "[Remind me on ]MMM DD, YYYY,[ at ]HH:mm" : "[Lembre-me em] MMM DD, AAAA, [ às ] HH: mm",
+    "[Remind me on ]MMM DD, YYYY,[ at ]HH:mm" : "[Lembre-me em] MMM DD, YYYY, [ às ] HH: mm",
     "Yesterday" : "Ontem",
     "Today" : "Hoje",
     "Tomorrow" : "Amanhã",
