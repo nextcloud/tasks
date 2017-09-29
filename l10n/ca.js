@@ -47,6 +47,7 @@ OC.L10N.register(
     "Comment" : "Comentari",
     "Add a comment" : "Afegeix un comentari",
     "This will delete the Calendar \"%s\" and all of its entries." : "Eliminarà el calendari \"%s\" i totes les seves entrades.",
+    "The name \"%s\" is already used." : "El nom \"%s\" ja està usat",
     "An empty name is not allowed." : "No es permet compartir de nou",
     "Hidden" : "Ocult",
     "Visible" : "Visible",
