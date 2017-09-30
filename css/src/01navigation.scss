@@ -76,7 +76,7 @@
 
 	.app-navigation-entry-edit {
 		input.action {
-			background-color: nc-darken($color-main-background, 3%);
+			background-color: $gray_easy;
 			width: 36px;
 			border-left: 0 none;
 			border-top-left-radius: 0;
@@ -147,7 +147,7 @@
 .calendar-indicator {
 	min-width: 12px;
 	min-height: 12px;
-	background-color: $color-primary;
+	background-color: $red;
 	display: inline-block;
 	height: 12px;
 	width: 12px;
@@ -168,7 +168,7 @@
 }
 
 .error input.edit {
-	color: $color-error;
-	border-color: $color-error !important;
-	box-shadow: 0 0 6px rgba($color-error, .3);
+	color: $red;
+	border-color: $red !important;
+	box-shadow: 0 0 6px rgba($red, .3);
 }

@@ -35,14 +35,14 @@
 				text-align: center;
 
 				span {
-					color: nc-lighten($color-main-text, 60%);
-					background-color: nc-darken($color-main-background, 3%);
+					color: $gray;
+					background-color: $gray_easy;
 					border-radius: 10px;
 					padding: 3px 6px;
 
 					&:hover {
 						cursor: pointer;
-						color: nc-lighten($color-main-text, 25%);
+						color: $gray_dark;
 					}
 				}
 			}
@@ -80,14 +80,14 @@
 	#add-task {
 		margin: 12px 0;
 		position: relative;
-		border: 1px solid nc-darken($color-main-background, 8%);
-		background: none repeat scroll 0 0 nc-darken($color-main-background, 8%);
+		border: 1px solid $gray_light;
+		background: none repeat scroll 0 0 $gray_light;
 		width: calc(100% - 54px);
 		float: left;
 		height: 34px;
 
 		&.focus {
-			background-color: $color-main-background;
+			background-color: $white;
 		}
 
 		.icon {
@@ -98,7 +98,7 @@
 		input {
 			font-size: 13px;
 			width: 100%;
-			color: nc-darken($color-main-background, 8%);
+			color: $gray_dark;
 			border: medium none !important;
 			border-radius: 0 !important;
 			box-shadow: none !important;
@@ -111,8 +111,8 @@
 	}
 
 	.sortorder-dropdown-button {
-		background-color: nc-darken($color-main-background, 3%);
-		border: 1px solid nc-darken($color-main-background, 8%);
+		background-color: $gray_easy;
+		border: 1px solid $gray_light;
 		width: 42px;
 		height: 34px;
 		margin: 12px 0 12px 12px;
@@ -134,7 +134,7 @@ ol[dnd-list] {
 
 	.dndPlaceholder {
 		display: block;
-		background-color: nc-darken($color-main-background, 8%);
+		background-color: $gray_light;
 		min-height: 37px;
 	}
 
@@ -149,7 +149,7 @@ ol[dnd-list] {
 
 #content {
 	overflow: hidden;
-	color: nc-darken($color-main-background, 8%);
+	color: $gray_dark;
 }
 
 .app-tasks #app-content {

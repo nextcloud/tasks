@@ -46,7 +46,7 @@
 
 		span.countdown {
 			background-color: inherit;
-			color: $color-main-text;
+			color: $white;
 			display: block;
 			text-align: center;
 			filter: alpha(opacity=100) !important;
@@ -76,7 +76,7 @@
 			width: calc(100% / 10) !important;
 
 			&.selected {
-				border: 1px solid nc-darken($color-main-background, 8%);
+				border: 1px solid $gray_dark;
 			}
 
 			&.randomcolour {
@@ -121,6 +121,6 @@
 .confirmation-confirm {
 	@extend .confirmation-abort;
 
-	background-color: $color-error !important;
+	background-color: $red !important;
 	cursor: default !important;
 }
