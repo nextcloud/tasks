@@ -1,6 +1,66 @@
 /**
-	* rules for task-body
+	* rules for task-items
 	*/
+
+.task-item {
+	cursor: default;
+	min-height: 37px;
+	list-style: none outside none;
+	overflow: hidden;
+	margin-top: -1px;
+
+	&:first-child {
+		margin-top: 0;
+
+		.task-body {
+			border-width: 1px;
+		}
+	}
+
+	&.done .task-body {
+		opacity: .6;
+
+		.title {
+			text-decoration: line-through;
+		}
+	}
+
+	&.add-subtask {
+		background: $white;
+		border: 1px solid $gray_light;
+
+		input {
+			background: transparent none repeat scroll 0 0 !important;
+			border: medium none !important;
+			border-radius: 0 !important;
+			box-shadow: none !important;
+			box-sizing: border-box;
+			color: $gray_dark;
+			cursor: text;
+			font-size: 100%;
+			margin: 0;
+			padding: 0 60px 0 32px;
+			width: 100%;
+			min-height: 36px;
+		}
+	}
+
+	.task-star .icon:hover {
+		opacity: .7;
+	}
+
+	.subtasks-container {
+		margin-left: 35px;
+
+		&.subtaskshidden li.subtask {
+			display: none;
+		}
+
+		.task-item {
+			margin-top: -1px;
+		}
+	}
+}
 
 .task-body {
 	background-color: $white;
@@ -12,6 +72,41 @@
 	border-width: 1px;
 	border-color: $gray_light;
 	overflow: hidden;
+
+	&:hover,
+	&.active {
+		background-color: $gray_easy;
+	}
+
+	&.attachment .icon.icon-note {
+		display: inline-block;
+		float: right;
+	}
+
+	&.subtasks .icon.subtasks {
+		display: inline-block;
+	}
+
+	&.completedsubtasks .icon.toggle-completed-subtasks {
+		display: inline-block;
+	}
+
+	.categories-list {
+		display: inline-block;
+		vertical-align: middle;
+
+		li {
+			background-color: $gray_easy;
+			border: 1px solid $gray_light;
+			border-radius: 2px;
+			color: $gray;
+			float: left;
+			font-weight: bold;
+			margin: -2px 4px 0;
+			padding: 2px 5px;
+			min-height: 22px;
+		}
+	}
 
 	.icon {
 		&.large {
@@ -42,14 +137,6 @@
 		&.toggle-completed-subtasks {
 			display: none;
 		}
-	}
-
-	&:hover {
-		background-color: $gray_easy;
-	}
-
-	&.active {
-		background-color: $gray_easy;
 	}
 
 	.title-wrapper {
@@ -89,128 +176,21 @@
 		margin: 10px;
 	}
 
-	&.attachment .icon.icon-note {
-		display: inline-block;
-		float: right;
-	}
-
-	&.subtasks .icon.subtasks {
-		display: inline-block;
-	}
-
-	&.completedsubtasks .icon.toggle-completed-subtasks {
-		display: inline-block;
-	}
-}
-
-.percentbar {
-	height: 3px;
-	position: relative;
-	top: 28px;
-	left: 42px;
-	margin-right: 103px;
-	margin-bottom: -5px;
-	background-color: $gray_light;
-	border-radius: 2px;
-
-	.percentdone {
+	.percentbar {
 		height: 3px;
-		border-radius: 2px 0 0 2px;
-		opacity: .75;
-	}
-}
-
-.task-item {
-	cursor: default;
-	min-height: 37px;
-	list-style: none outside none;
-	overflow: hidden;
-	margin-top: -1px;
-
-	&:first-child {
-		margin-top: 0;
-
-		.task-body {
-			border-width: 1px;
-		}
-	}
-
-	.subtasks-container {
-		margin-left: 35px;
-
-		.task-item {
-			margin-top: -1px;
-		}
-
-		&.subtaskshidden li.subtask {
-			display: none;
-		}
-	}
-
-	&.add-subtask {
-		background: $white;
-		border: 1px solid $gray_light;
-
-		input {
-			background: transparent none repeat scroll 0 0 !important;
-			border: medium none !important;
-			border-radius: 0 !important;
-			box-shadow: none !important;
-			box-sizing: border-box;
-			color: $gray_dark;
-			cursor: text;
-			font-size: 100%;
-			margin: 0;
-			padding: 0 60px 0 32px;
-			width: 100%;
-			min-height: 36px;
-		}
-	}
-
-	.task-star .icon:hover {
-		opacity: .7;
-	}
-
-	&.done .task-body {
-		opacity: .6;
-
-		.title {
-			text-decoration: line-through;
-		}
-	}
-}
-
-.categories-list {
-	display: inline-block;
-	vertical-align: middle;
-
-	li {
-		background-color: $gray_easy;
-		border: 1px solid $gray_light;
+		position: relative;
+		top: 28px;
+		left: 42px;
+		margin-right: 103px;
+		margin-bottom: -5px;
+		background-color: $gray_light;
 		border-radius: 2px;
-		color: $gray;
-		float: left;
-		font-weight: bold;
-		margin: -2px 4px 0;
-		padding: 2px 5px;
-		min-height: 22px;
-	}
-}
 
-li.ui-draggable-dragging {
-	width: 300px;
-	z-index: 101 !important;
-
-	.duedate {
-		display: none;
-	}
-}
-
-tr:last-child .task-item {
-	height: 39px;
-
-	div.task-body {
-		border-width: 1px;
+		.percentdone {
+			height: 3px;
+			border-radius: 2px 0 0 2px;
+			opacity: .75;
+		}
 	}
 }
 
