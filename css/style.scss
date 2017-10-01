@@ -798,28 +798,13 @@ tr:last-child .task-item {
 			min-height: 50px;
 			word-wrap: break-word;
 
-			.checkbox {
-				float: left;
-				padding: 16px 17px 18px;
-
-				.icon {
-					cursor: pointer;
-					margin: 0;
+			&.editing {
+				.title-text {
+					display: none !important;
 				}
-			}
 
-			.star {
-				padding: 13px;
-				float: right;
-
-				.icon {
-					height: 24px;
-					width: 24px;
-					background-size: 144px 144px;
-
-					&:hover {
-						opacity: 1;
-					}
+				.expandable-container {
+					display: inline-block !important;
 				}
 			}
 
@@ -843,6 +828,47 @@ tr:last-child .task-item {
 				a {
 					cursor: pointer;
 					text-decoration: underline;
+				}
+			}
+
+			.expandable-container {
+				background: none repeat scroll 0 0 $white;
+				box-sizing: border-box;
+				border: 1px solid $gray;
+				padding: 0 6px;
+				display: none !important;
+				margin: 13px 0;
+				width: calc(100% - 100px);
+				line-height: 24px;
+				min-height: 24px;
+
+				.expandingArea {
+					position: relative;
+				}
+			}
+
+			.checkbox {
+				float: left;
+				padding: 16px 17px 18px;
+
+				.icon {
+					cursor: pointer;
+					margin: 0;
+				}
+			}
+
+			.star {
+				padding: 13px;
+				float: right;
+
+				.icon {
+					height: 24px;
+					width: 24px;
+					background-size: 144px 144px;
+
+					&:hover {
+						opacity: 1;
+					}
 				}
 			}
 
@@ -880,32 +906,6 @@ tr:last-child .task-item {
 				padding: 0 !important;
 				visibility: hidden;
 			}
-
-			.expandable-container {
-				background: none repeat scroll 0 0 $white;
-				box-sizing: border-box;
-				border: 1px solid $gray;
-				padding: 0 6px;
-				display: none !important;
-				margin: 13px 0;
-				width: calc(100% - 100px);
-				line-height: 24px;
-				min-height: 24px;
-
-				.expandingArea {
-					position: relative;
-				}
-			}
-
-			&.editing {
-				.title-text {
-					display: none !important;
-				}
-
-				.expandable-container {
-					display: inline-block !important;
-				}
-			}
 		}
 
 		.body {
@@ -919,6 +919,72 @@ tr:last-child .task-item {
 				position: relative;
 				margin-bottom: 0;
 				width: 100%;
+				color: $gray;
+
+				&:last-of-type {
+					border-bottom: unset;
+				}
+
+				&.low,
+				&.date {
+					color: $blue_due;
+				}
+
+				&.high {
+					color: $red_overdue;
+				}
+
+				&.medium {
+					color: $yellow;
+				}
+
+				&.date:hover .icon.icon-trash {
+					display: block;
+				}
+
+				&.date .icon {
+					&.icon-calendar-due,
+					&.icon-calendar-overdue,
+					&.icon-percent {
+						opacity: 1;
+					}
+				}
+
+				&.detail-note {
+					padding: 20px 0;
+					height: auto;
+				}
+
+				&.editing {
+					.icon {
+						&.detail-save,
+						&.icon-trash {
+							display: block;
+						}
+					}
+
+					.section-title {
+						display: none;
+					}
+
+					.section-edit {
+						display: inline-block;
+					}
+				}
+
+				.icon {
+					&.icon-trash {
+						display: none;
+						margin-left: auto;
+						right: 22px;
+					}
+
+					&.detail-save {
+						display: none;
+						margin-left: auto;
+						right: 44px;
+					}
+				}
 
 				> div {
 					padding-left: 12px;
@@ -937,7 +1003,6 @@ tr:last-child .task-item {
 					}
 
 					.section-title {
-						color: $gray;
 						font-weight: bold;
 						margin-left: 12px;
 						line-height: 22px;
@@ -950,21 +1015,6 @@ tr:last-child .task-item {
 						margin: 0;
 						float: unset;
 					}
-				}
-
-				&.low,
-				&.date {
-					.section-title {
-						color: $blue_due;
-					}
-				}
-
-				&.high .section-title {
-					color: $red_overdue;
-				}
-
-				&.medium .section-title {
-					color: $yellow;
 				}
 
 				input {
@@ -992,6 +1042,27 @@ tr:last-child .task-item {
 					min-height: 0;
 				}
 
+				input {
+					&.datepicker-input {
+						width: 60%;
+					}
+
+					&.timepicker-input {
+						width: calc(40% - 10px);
+					}
+
+					&.duration-input {
+						margin: 2px 0 0 .3em;
+						width: 35px;
+					}
+
+					&.percent-input,
+					&.priority-input {
+						width: 35px;
+						margin-top: 0;
+					}
+				}
+
 				select {
 					background-color: rgba(0, 0, 0, 0);
 					border-radius: 0;
@@ -1009,38 +1080,6 @@ tr:last-child .task-item {
 					vertical-align: middle;
 					width: calc(100% - 80px);
 					line-height: 0;
-				}
-
-				&.editing {
-					.icon {
-						&.detail-save,
-						&.icon-trash {
-							display: block;
-						}
-					}
-
-					.section-title {
-						display: none;
-					}
-
-					.section-edit {
-						display: inline-block;
-					}
-				}
-
-				&.date {
-					.icon.icon-percent {
-						opacity: 1;
-					}
-
-					&:hover .icon.icon-trash {
-						display: block;
-					}
-				}
-
-				&.detail-note {
-					padding: 20px 0;
-					height: auto;
 				}
 
 				.detail-categories-container {
@@ -1097,115 +1136,87 @@ tr:last-child .task-item {
 				&.active .select2-search-field input {
 					color: $blue_due;
 				}
-			}
 
-			.note {
-				border-width: 1px;
-				border-style: solid;
-				border-color: $gray_light;
-				font-size: 13px;
-				line-height: 26px;
-				margin: 0 20px;
-				padding: 5px 15px;
-				cursor: text;
-
-				.expandingArea {
-					position: relative;
-					margin-left: -1px;
-
-					textarea,
-					pre {
-						box-shadow: none;
-						background: none repeat scroll 0 0 transparent;
-						border: medium none;
-						font-size: 13px;
-						line-height: 26px;
-						padding: 0;
-						white-space: pre-wrap;
-						word-wrap: break-word;
-					}
-
-					textarea {
-						margin: 0 0 0 1px;
-						border-radius: 0;
-						height: 100%;
-						left: 0;
-						overflow: hidden;
-						position: absolute;
-						resize: none;
-						top: 0;
-						width: 100%;
-						color: $gray_dark;
-						font-weight: 500;
-						outline: medium none;
-					}
-
-					pre {
-						border: 0 none !important;
-						display: block;
-						margin: 0;
-						outline: 0 none;
-						padding: 0 !important;
-						visibility: hidden;
-					}
-				}
-
-				.note-body,
-				.note-edit {
+				.note {
+					border-width: 1px;
+					border-style: solid;
+					border-color: $gray_light;
+					font-size: 13px;
+					line-height: 26px;
+					margin: 0 20px;
+					padding: 5px 15px;
 					cursor: text;
-					min-height: 140px;
-					word-wrap: break-word;
 
-					a {
-						cursor: text;
+					.expandingArea {
+						position: relative;
+						margin-left: -1px;
+
+						textarea,
+						pre {
+							box-shadow: none;
+							background: none repeat scroll 0 0 transparent;
+							border: medium none;
+							line-height: 26px;
+							padding: 0;
+							white-space: pre-wrap;
+							word-wrap: break-word;
+						}
+
+						textarea {
+							margin: 0 0 0 1px;
+							border-radius: 0;
+							height: 100%;
+							left: 0;
+							overflow: hidden;
+							position: absolute;
+							resize: none;
+							top: 0;
+							width: 100%;
+							color: $gray_dark;
+							font-weight: 500;
+							outline: medium none;
+						}
+
+						pre {
+							border: 0 none !important;
+							display: block;
+							margin: 0;
+							outline: 0 none;
+							padding: 0 !important;
+							visibility: hidden;
+						}
 					}
 
-					.content-fakeable {
-						cursor: text !important;
+					.note-body,
+					.note-edit {
+						min-height: 140px;
+						word-wrap: break-word;
+						cursor: text;
 
-						.display-view {
-							display: block;
-						}
+						.content-fakeable {
+							&.editing {
+								.display-view {
+									display: none !important;
+								}
 
-						.edit-view {
-							display: none !important;
-						}
+								.edit-view {
+									display: block !important;
+								}
+							}
 
-						&.editing {
 							.display-view {
-								display: none !important;
+								cursor: text;
+								display: block;
+								white-space: pre-wrap;
 							}
 
 							.edit-view {
-								display: block !important;
+								display: none !important;
 							}
-						}
-					}
-
-					.edit-view {
-						cursor: text !important;
-					}
-
-					.display-view {
-						cursor: text !important;
-						white-space: pre-wrap;
-
-						a {
-							cursor: pointer;
-							text-decoration: underline;
 						}
 					}
 				}
 			}
-		}
-
-		&.completed .body .section .section-title {
-			color: $gray !important;
-		}
-
-		.task-list .task-body .title-wrapper .title a {
-			cursor: pointer;
-			text-decoration: underline;
 		}
 
 		.disabled .body .section {
@@ -1218,34 +1229,6 @@ tr:last-child .task-item {
 				display: none;
 			}
 		}
-	}
-}
-
-input {
-	&.datepicker-input {
-		width: 60%;
-	}
-
-	&.timepicker-input {
-		width: calc(40% - 10px);
-	}
-
-	&.duration-input {
-		margin: 2px 0 0 .3em;
-		width: 35px;
-	}
-
-	&.percent-input,
-	&.priority-input {
-		width: 35px;
-		margin-top: 0;
-	}
-}
-
-.date .icon {
-	&.icon-calendar-due,
-	&.icon-calendar-overdue {
-		opacity: 1;
 	}
 }
 
