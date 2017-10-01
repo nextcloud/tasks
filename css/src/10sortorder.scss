@@ -7,25 +7,6 @@
 	top: 68px;
 	right: 3px;
 
-	li {
-		float: inherit;
-		width: auto !important;
-		cursor: pointer;
-		opacity: .57;
-
-		a {
-			width: 100% !important;
-		}
-
-		&.active {
-			opacity: 1 !important;
-		}
-
-		&:hover {
-			opacity: 1 !important;
-		}
-	}
-
 	&.open {
 		display: block;
 	}
@@ -47,5 +28,24 @@
 
 	.active .icon.sort-indicator {
 		visibility: visible;
+	}
+
+	li {
+		float: inherit;
+		width: auto !important;
+		cursor: pointer;
+		opacity: .57;
+
+		a {
+			width: 100% !important;
+		}
+
+		&.active {
+			opacity: 1 !important;
+		}
+
+		&:hover {
+			opacity: 1 !important;
+		}
 	}
 }
