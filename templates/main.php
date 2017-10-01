@@ -13,7 +13,13 @@
     style('tasks', 'vendor/angularui/ui-select/select2');
 ?>
 
-<div ng-app="Tasks" ng-cloak ng-controller="AppController" ng-click="closeAll($event)" id="app" class="handler" data-appVersion="<?php p($_['appVersion']); ?>">
+<div id="app"
+    ng-app="Tasks"
+    ng-cloak
+    ng-controller="AppController"
+    ng-click="closeAll($event)"
+    class="handler"
+    data-appVersion="<?php p($_['appVersion']); ?>">
     <div id="app-navigation" ng-controller="ListController">
         <ul id="collections">
             <li id="collection_{{ collection.id }}"
@@ -36,8 +42,8 @@
                     </ul>
                 </div>
             </li>
-            <li class="list with-menu handler"
-                id="list_{{ calendar.uri }}"
+            <li id="list_{{ calendar.uri }}"
+                class="list with-menu handler"
                 calendarID="{{calendar.uri}}"
                 ng-repeat="calendar in calendars"
                 ng-class="{ active: calendar.uri==route.calendarID, edit:route.listparameter == 'name' && route.calendarID == calendar.uri,
@@ -81,9 +87,21 @@
                 </div>
                 <div class="app-navigation-entry-edit name" ng-class="{error: nameError}">
                     <form>
-                        <input ng-model="calendar.displayname" class="edit hasTooltip" type="text" ng-keyup="checkEdit($event,calendar)" autofocus-on-insert>
-                        <input type="cancel" value="" class="action icon-close" ng-click="cancelEdit(calendar)" title="<?php p($l->t('Cancel')); ?>">
-                        <input type="submit" value="" class="action icon-checkmark" ng-click="saveEdit(calendar)" title="<?php p($l->t('Save')); ?>">
+                        <input ng-model="calendar.displayname"
+                            class="edit hasTooltip"
+                            type="text"
+                            ng-keyup="checkEdit($event,calendar)"
+                            autofocus-on-insert>
+                        <input type="cancel"
+                            value=""
+                            class="action icon-close"
+                            ng-click="cancelEdit(calendar)"
+                            title="<?php p($l->t('Cancel')); ?>">
+                        <input type="submit"
+                            value=""
+                            class="action icon-checkmark"
+                            ng-click="saveEdit(calendar)"
+                            title="<?php p($l->t('Save')); ?>">
                     </form>
                     <colorpicker class="colorpicker"
                                  selected="calendar.color">
@@ -91,26 +109,46 @@
                 </div>
                 <div class="app-navigation-entry-edit caldav">
                     <form>
-                        <input class="caldav" ng-value="calendar.caldav" readonly type="text"/>
-                        <input type="cancel" value="" class="action icon-close" ng-click="hideCalDAVUrl()" title="<?php p($l->t('Cancel')); ?>">
+                        <input class="caldav"
+                            ng-value="calendar.caldav"
+                            readonly
+                            type="text"/>
+                        <input type="cancel"
+                            value=""
+                            class="action icon-close"
+                            ng-click="hideCalDAVUrl()"
+                            title="<?php p($l->t('Cancel')); ?>">
                     </form>
                 </div>
             </li>
             <li class="newList handler" ng-class="{edit: status.addingList}">
-                <a class="addlist" ng-click="startCreate()" oc-click-focus="{selector: '#newList', timeout: 0}">
+                <a class="addlist"
+                    ng-click="startCreate()"
+                    oc-click-focus="{selector: '#newList', timeout: 0}">
                     <span class="icon icon-add"></span>
                     <span class="title"><?php p($l->t('Add List...')); ?></span>
                 </a>
                 <div class="app-navigation-entry-edit name" ng-class="{error: nameError}">
                     <form ng-disabled="isAddingList">
-                        <input id="newList" ng-model="status.newListName" class="edit hasTooltip" type="text" autofocus-on-insert
-                        placeholder="<?php p($l->t('New List')); ?>" ng-keyup="checkNew($event,status.newListName)">
-                        <input type="cancel" value="" class="action icon-close" ng-click="cancelCreate()" title="<?php p($l->t('Cancel')); ?>">
-                        <input type="submit" value="" class="action icon-checkmark" ng-click="create($event)" title="<?php p($l->t('Save')); ?>">
+                        <input id="newList"
+                            ng-model="status.newListName"
+                            class="edit hasTooltip"
+                            type="text"
+                            autofocus-on-insert
+                            placeholder="<?php p($l->t('New List')); ?>"
+                            ng-keyup="checkNew($event,status.newListName)">
+                        <input type="cancel"
+                            value=""
+                            class="action icon-close"
+                            ng-click="cancelCreate()"
+                            title="<?php p($l->t('Cancel')); ?>">
+                        <input type="submit"
+                            value=""
+                            class="action icon-checkmark"
+                            ng-click="create($event)"
+                            title="<?php p($l->t('Save')); ?>">
                     </form>
-                    <colorpicker class="colorpicker"
-                                 selected="color">
-                    </colorpicker>
+                    <colorpicker class="colorpicker" selected="color"></colorpicker>
                 </div>
             </li>
         </ul>
@@ -124,28 +162,48 @@
                 <ul>
                     <li>
                         <label for="startOfWeek"><?php p($l->t('Start of week')); ?></label>
-                        <select id="startOfWeek" ng-change="setStartOfWeek()" ng-model="settingsmodel.getById('various').startOfWeek" ng-options="startOfWeekOption.id as startOfWeekOption.name for startOfWeekOption in startOfWeekOptions"></select>
+                        <select id="startOfWeek"
+                            ng-change="setStartOfWeek()"
+                            ng-model="settingsmodel.getById('various').startOfWeek"
+                            ng-options="startOfWeekOption.id as startOfWeekOption.name for startOfWeekOption in startOfWeekOptions">
+                        </select>
                     </li>
                     <li class="headline">
                         <?php p($l->t('Visibility of Smart Collections')); ?>
                     </li>
                     <li ng-repeat="collection in collections">
                         <div class="label-container">
-                            <span class="icon {{ collection.icon }}"><text ng-show="collection.id=='today'"><?php p($_['DOM']); ?></text></span>
+                            <span class="icon {{ collection.icon }}">
+                                <text ng-show="collection.id=='today'"><?php p($_['DOM']); ?></text>
+                            </span>
                             <label for="visibilityCollection-{{collection.id}}" class="title">{{ collection.displayname }}</label>
                         </div>
-                        <select id="visibilityCollection-{{collection.id}}" ng-change="setVisibility(collection.id)" ng-model="collection.show" ng-options="collectionOption.id as collectionOption.name for collectionOption in collectionOptions"></select>
+                        <select id="visibilityCollection-{{collection.id}}"
+                            ng-change="setVisibility(collection.id)"
+                            ng-model="collection.show"
+                            ng-options="collectionOption.id as collectionOption.name for collectionOption in collectionOptions">
+                        </select>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
 
-    <div id="app-content" ng-controller="TasksController" ng-class="{'with-app-sidebar':route.taskID}">
+    <div id="app-content"
+        ng-controller="TasksController"
+        ng-class="{'with-app-sidebar':route.taskID}">
         <div class="content-wrapper">
-            <div id="add-task" class="add-task handler" ng-show="showInput()" ng-class="{'focus':status.focusTaskInput}">
+            <div id="add-task"
+                class="add-task handler"
+                ng-show="showInput()"
+                ng-class="{'focus':status.focusTaskInput}">
                 <form ng-submit="addTask(status.taskName)" name="addTaskForm">
-                    <input id="target" ng-disabled="isAddingTask" ng-click="focusTaskInput()" class="transparent" placeholder="{{ getAddString() }}" ng-model="status.taskName"
+                    <input id="target"
+                        ng-disabled="isAddingTask"
+                        ng-click="focusTaskInput()"
+                        class="transparent"
+                        placeholder="{{ getAddString() }}"
+                        ng-model="status.taskName"
                         ng-keydown="checkTaskInput($event)"/>
                 </form>
             </div>

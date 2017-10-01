@@ -2,6 +2,22 @@
 	* rules for sortorder-dropdown
 	*/
 
+.sortorder-dropdown-button {
+	background-color: $gray_easy;
+	border: 1px solid $gray_light;
+	width: 42px;
+	height: 34px;
+	margin: 12px 0 12px 12px;
+	padding: 0;
+	float: right;
+	cursor: pointer;
+
+	.sort-indicator {
+		margin-left: 0;
+		visibility: visible;
+	}
+}
+
 .sortorder-dropdown {
 	display: none;
 	top: 68px;

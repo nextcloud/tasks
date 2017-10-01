@@ -8,74 +8,13 @@
 	text-decoration: none;
 }
 
+#content {
+	overflow: hidden;
+	color: $gray_dark;
+}
+
 #app-content {
-	div {
-		&.content-wrapper {
-			padding: 6px 17px 75px;
-			box-sizing: border-box;
-			height: 100%;
-			overflow: hidden;
-
-			.task-list {
-				height: 100%;
-				width: 100%;
-				overflow-y: auto;
-			}
-
-			.task-body .title-wrapper span.title a {
-				cursor: pointer;
-				text-decoration: underline;
-			}
-		}
-
-		&.task-list {
-			.loadmore {
-				font-size: 11px;
-				margin-top: 10px;
-				text-align: center;
-
-				span {
-					color: $gray;
-					background-color: $gray_easy;
-					border-radius: 10px;
-					padding: 3px 6px;
-
-					&:hover {
-						cursor: pointer;
-						color: $gray_dark;
-					}
-				}
-			}
-
-			.grouped-tasks {
-				position: relative;
-			}
-
-			.completed-hidden ol.completed-tasks {
-				display: none;
-			}
-		}
-	}
-
-	h2 {
-		font-weight: bold;
-		font-size: 13px;
-		margin-bottom: 10px;
-		margin-top: 20px !important;
-		word-wrap: break-word;
-		opacity: .5;
-
-		&:hover {
-			opacity: .7;
-		}
-
-		&.heading-hiddentasks {
-			display: inline-block;
-			padding-right: 16px;
-			background-position: right center;
-			cursor: pointer;
-		}
-	}
+	overflow-x: hidden;
 
 	#add-task {
 		margin: 12px 0;
@@ -110,19 +49,69 @@
 		}
 	}
 
-	.sortorder-dropdown-button {
-		background-color: $gray_easy;
-		border: 1px solid $gray_light;
-		width: 42px;
-		height: 34px;
-		margin: 12px 0 12px 12px;
-		padding: 0;
-		float: right;
-		cursor: pointer;
+	.content-wrapper {
+		padding: 6px 17px 75px;
+		box-sizing: border-box;
+		height: 100%;
+		overflow: hidden;
 
-		.sort-indicator {
-			margin-left: 0;
-			visibility: visible;
+		.task-list {
+			height: 100%;
+			width: 100%;
+			overflow-y: auto;
+		}
+
+		.task-body .title-wrapper span.title a {
+			cursor: pointer;
+			text-decoration: underline;
+		}
+	}
+
+	.task-list {
+		.loadmore {
+			font-size: 11px;
+			margin-top: 10px;
+			text-align: center;
+
+			span {
+				color: $gray;
+				background-color: $gray_easy;
+				border-radius: 10px;
+				padding: 3px 6px;
+
+				&:hover {
+					cursor: pointer;
+					color: $gray_dark;
+				}
+			}
+		}
+
+		.grouped-tasks {
+			position: relative;
+		}
+
+		.completed-hidden ol.completed-tasks {
+			display: none;
+		}
+	}
+
+	h2 {
+		font-weight: bold;
+		font-size: 13px;
+		margin-bottom: 10px;
+		margin-top: 20px !important;
+		word-wrap: break-word;
+		opacity: .5;
+
+		&:hover {
+			opacity: .7;
+		}
+
+		&.heading-hiddentasks {
+			display: inline-block;
+			padding-right: 16px;
+			background-position: right center;
+			cursor: pointer;
 		}
 	}
 }
@@ -145,13 +134,4 @@ ol[dnd-list] {
 
 .dropzone-visible > ol[dnd-list] {
 	min-height: 50px;
-}
-
-#content {
-	overflow: hidden;
-	color: $gray_dark;
-}
-
-.app-tasks #app-content {
-	overflow-x: hidden;
 }
