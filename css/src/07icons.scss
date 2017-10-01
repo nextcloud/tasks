@@ -60,28 +60,3 @@
 		}
 	}
 }
-
-.section {
-	.icon {
-		&.icon-trash {
-			display: none;
-			margin-left: auto;
-			right: 22px;
-		}
-
-		&.detail-save {
-			display: none;
-			margin-left: auto;
-			right: 44px;
-		}
-	}
-}
-
-a {
-	&:hover .icon {
-		&.icon-trash,
-		&.icon-hide {
-			opacity: 1;
-		}
-	}
-}

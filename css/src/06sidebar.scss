@@ -29,6 +29,10 @@
 			a {
 				padding: 7px;
 
+				&:hover .icon {
+					opacity: 1;
+				}
+
 				&.left {
 					float: left;
 				}
