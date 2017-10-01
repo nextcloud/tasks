@@ -32,6 +32,13 @@ $white: #fff;
 			&.with-menu > a {
 				padding-right: 70px;
 			}
+
+			.calendar-indicator {
+				height: 16px;
+				width: 16px;
+				margin-left: 2px;
+				margin-right: 2px;
+			}
 		}
 
 		&.edit {
@@ -44,13 +51,6 @@ $white: #fff;
 			.app-navigation-entry-edit.name {
 				display: inline-block;
 				height: auto;
-			}
-		}
-
-		.app-navigation-entry-edit {
-			&.name,
-			&.caldav {
-				display: none;
 			}
 		}
 
@@ -79,19 +79,54 @@ $white: #fff;
 			height: auto;
 		}
 
-		a > span {
-			&.icon {
-				margin-top: -3px;
-				margin-left: 2px;
+		.app-navigation-entry-edit {
+			&.name,
+			&.caldav {
+				display: none;
 			}
+		}
 
-			&.title {
-				margin-left: 11px;
-			}
+		.error input.edit {
+			color: $red;
+			border-color: $red !important;
+			box-shadow: 0 0 6px rgba($red, .3);
+		}
+
+		.icon {
+			margin-top: -3px;
+			margin-left: 2px;
+		}
+
+		.calendar-indicator {
+			min-width: 12px;
+			min-height: 12px;
+			background-color: $red;
+			display: inline-block;
+			height: 12px;
+			width: 12px;
+			margin-top: 0;
+			border-radius: 50%;
+			text-align: center;
+			vertical-align: middle;
+			line-height: 20px;
+			margin-left: 4px;
+			margin-right: 2px;
+		}
+
+		.title {
+			margin-left: 11px;
 		}
 	}
 
 	.app-navigation-entry-edit {
+		&.name input[type="text"] {
+			width: calc(100% - 72px);
+		}
+
+		&.caldav input[type="text"] {
+			width: calc(100% - 36px);
+		}
+
 		input.action {
 			background-color: $gray_easy;
 			width: 36px;
@@ -106,14 +141,6 @@ $white: #fff;
 				width: 37px;
 			}
 		}
-
-		&.name input[type="text"] {
-			width: calc(100% - 72px);
-		}
-
-		&.caldav input[type="text"] {
-			width: calc(100% - 36px);
-		}
 	}
 
 	.app-navigation-entry-utils li {
@@ -124,20 +151,6 @@ $white: #fff;
 		float: inherit;
 		width: auto !important;
 		cursor: pointer;
-
-		img {
-			cursor: pointer;
-			margin-right: 5px;
-			vertical-align: text-bottom;
-		}
-
-		span {
-			cursor: pointer;
-		}
-
-		button {
-			float: inherit;
-		}
 
 		&:hover a {
 			opacity: 1 !important;
@@ -154,40 +167,25 @@ $white: #fff;
 				opacity: 1;
 			}
 		}
+
+		img {
+			cursor: pointer;
+			margin-right: 5px;
+			vertical-align: text-bottom;
+		}
+
+		span {
+			cursor: pointer;
+		}
+
+		button {
+			float: inherit;
+		}
 	}
 
 	> ul ul.colorpicker-list {
 		display: inline-flex;
 	}
-}
-
-.calendar-indicator {
-	min-width: 12px;
-	min-height: 12px;
-	background-color: $red;
-	display: inline-block;
-	height: 12px;
-	width: 12px;
-	margin-top: 0;
-	border-radius: 50%;
-	text-align: center;
-	vertical-align: middle;
-	line-height: 20px;
-	margin-left: 4px;
-	margin-right: 2px;
-}
-
-.active .calendar-indicator {
-	height: 16px;
-	width: 16px;
-	margin-left: 2px;
-	margin-right: 2px;
-}
-
-.error input.edit {
-	color: $red;
-	border-color: $red !important;
-	box-shadow: 0 0 6px rgba($red, .3);
 }
 
 /**
