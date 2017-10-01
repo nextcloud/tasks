@@ -3,10 +3,19 @@
 	*/
 
 #app-settings-content {
+	.icon {
+		margin-top: -3px;
+	}
+
 	li {
 		line-height: 3em;
 		position: relative;
 		height: 40px;
+
+		&.headline {
+			font-weight: bold;
+			line-height: 1.5em;
+		}
 
 		.label-container {
 			white-space: nowrap;
@@ -21,21 +30,9 @@
 		select {
 			position: absolute;
 			right: 0;
+			float: right;
+			min-width: 105px;
 		}
-
-		&.headline {
-			font-weight: bold;
-			line-height: 1.5em;
-		}
-	}
-
-	.icon {
-		margin-top: -3px;
-	}
-
-	select {
-		float: right;
-		min-width: 105px;
 	}
 }
 
