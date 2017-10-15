@@ -8,7 +8,7 @@
     script('tasks', 'vendor/jstimezonedetect/dist/jstz.min');
     script('tasks', 'public/app.min');
     script('tasks', 'vendor_legacy/jquery-timepicker/jquery.ui.timepicker');
-    script('tasks', 'vendor/ical.js/build/ical');
+    script('tasks', 'vendor/ical.js/build/ical.min');
     style('tasks', 'style');
     style('tasks', 'vendor/angularui/ui-select/select2');
 ?>
