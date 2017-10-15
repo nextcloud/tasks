@@ -1,3 +1,12 @@
+######################
+## Files build by make
+######################
+/css/src/sprite.scss
+/css/style.scss
+/img/sprites.svg
+/js/public/
+/js/vendor/
+
 #################
 ## PhpStorm
 #################
