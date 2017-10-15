@@ -745,7 +745,7 @@ ol[dnd-list] {
 				line-height: 22px;
 				// this border is to adjust the size of the div to the size
 				// of the input field for editing the title
-				// (setting a padding always let to a small flickering)
+				// (setting a padding always led to a small flickering)
 				border: 1px solid transparent;
 
 				&.strike-through {
