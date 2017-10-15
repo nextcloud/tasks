@@ -21,7 +21,7 @@
     <bugs>https://github.com/nextcloud/tasks/issues</bugs>
     <repository type="git">https://github.com/nextcloud/tasks.git</repository>
     <dependencies>
-        <owncloud min-version="9.1" max-version="9.2"/>
-        <nextcloud min-version="10" max-version="12"/>
+        <owncloud min-version="0" max-version="0"/>
+        <nextcloud min-version="12" max-version="13"/>
     </dependencies>
 </info>

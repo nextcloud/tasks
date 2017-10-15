@@ -1,0 +1,1552 @@
+/**
+	* SCSS variables
+	*/
+
+//colors
+$red: $color-error;				// warnings and errors
+$red_overdue: #b3312d;		// overdue dates and high importance
+$yellow: #fd0;						// medium importance
+$blue_due: #4271a6;				// due dates and low importance
+$blue_background: #168ad4;// highlighting date/timepicker dates
+$gray_dark: #404040;			// text
+$gray: #a0a0a0;						// inactive text, checkbox-borders and separators
+$gray_light: #ccc;
+$gray_easy: #f7f7f7;
+$black: #000;
+$white: #fff;
+
+/**
+	* rules for app-navigation
+	*/
+
+#app-navigation {
+	li {
+		transition: max-height 300ms ease 0s;
+		max-height: 100px;
+
+		> a {
+			padding-right: 20px;
+		}
+
+		&.active {
+			&.with-menu > a {
+				padding-right: 70px;
+			}
+
+			.calendar-indicator {
+				height: 16px;
+				width: 16px;
+				margin-left: 2px;
+				margin-right: 2px;
+			}
+		}
+
+		&.edit {
+			> a,
+			.app-navigation-entry-utils,
+			.app-navigation-entry-menu {
+				display: none;
+			}
+
+			.app-navigation-entry-edit.name {
+				display: inline-block;
+				height: auto;
+			}
+		}
+
+		&.animate-up {
+			max-height: 0;
+			border-bottom: 0;
+			overflow: hidden;
+		}
+
+		&:hover > a span {
+			&.title {
+				opacity: 1;
+			}
+
+			&.icon {
+				opacity: 1;
+			}
+		}
+
+		&.list:not(.active) .app-navigation-entry-utils-menu-button {
+			display: none;
+		}
+
+		&.caldav .app-navigation-entry-edit.caldav {
+			display: inline-block;
+			height: auto;
+		}
+
+		.app-navigation-entry-edit {
+			&.name,
+			&.caldav {
+				display: none;
+			}
+		}
+
+		.error input.edit {
+			color: $red;
+			border-color: $red !important;
+			box-shadow: 0 0 6px rgba($red, .3);
+		}
+
+		.icon {
+			margin-top: -3px;
+			margin-left: 2px;
+		}
+
+		.calendar-indicator {
+			min-width: 12px;
+			min-height: 12px;
+			background-color: $red;
+			display: inline-block;
+			height: 12px;
+			width: 12px;
+			margin-top: 0;
+			border-radius: 50%;
+			text-align: center;
+			vertical-align: middle;
+			line-height: 20px;
+			margin-left: 4px;
+			margin-right: 2px;
+		}
+
+		.title {
+			margin-left: 11px;
+		}
+	}
+
+	.app-navigation-entry-edit {
+		&.name input[type="text"] {
+			width: calc(100% - 72px);
+		}
+
+		&.caldav input[type="text"] {
+			width: calc(100% - 36px);
+		}
+
+		input.action {
+			background-color: $gray_easy;
+			width: 36px;
+			border-left: 0 none;
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
+			background-position: center;
+
+			&:hover {
+				border-left: 1px solid;
+				margin-left: -1px;
+				width: 37px;
+			}
+		}
+	}
+
+	.app-navigation-entry-utils li {
+		font-size: 100%;
+	}
+
+	.app-navigation-entry-menu li {
+		float: inherit;
+		width: auto !important;
+		cursor: pointer;
+
+		&:hover a {
+			opacity: 1 !important;
+		}
+
+		&.confirmed a {
+			&.confirmation-confirm {
+				display: inline-block !important;
+				opacity: 1;
+			}
+
+			&.confirmation-abort {
+				display: inline-block !important;
+				opacity: 1;
+			}
+		}
+
+		img {
+			cursor: pointer;
+			margin-right: 5px;
+			vertical-align: text-bottom;
+		}
+
+		span {
+			cursor: pointer;
+		}
+
+		button {
+			float: inherit;
+		}
+	}
+
+	> ul ul.colorpicker-list {
+		display: inline-flex;
+	}
+}
+
+/**
+	* rules for colorpicker
+	*/
+
+.colorpicker {
+	display: block;
+	height: 30px;
+	height: auto;
+	padding-bottom: 3px;
+	padding-top: 3px;
+
+	.colorpicker-list {
+		display: flex;
+		flex-wrap: wrap;
+		width: 100%;
+		height: 100%;
+		text-align: center;
+		justify-content: center;
+		align-items: center;
+
+		li {
+			height: 24px;
+			width: calc(100% / 10) !important;
+
+			&.selected {
+				border: 1px solid $gray_dark;
+			}
+
+			&.randomcolour {
+				cursor: pointer;
+
+				.icon-random {
+					filter: invert(1);
+					opacity: 1;
+				}
+			}
+		}
+	}
+}
+
+/**
+	* rules for confirmation directive
+	*/
+
+.app-navigation-entry-menu {
+	li > a {
+		&:not(:empty).confirmation-confirm {
+			padding-right: 0 !important;
+		}
+
+		span.countdown {
+			background-color: inherit;
+			color: $white;
+			display: block;
+			text-align: center;
+			filter: alpha(opacity=100) !important;
+			opacity: 1 !important;
+		}
+	}
+}
+
+.confirmation-default {
+	overflow: hidden;
+}
+
+.confirmed {
+	.confirmation-default {
+		display: none !important;
+	}
+
+	&.active {
+		.confirmation-confirm {
+			cursor: pointer !important;
+		}
+
+		.countdown {
+			display: none;
+		}
+	}
+}
+
+.confirmation-abort {
+	width: 50% !important;
+	display: none !important;
+	padding-right: 0 !important;
+	background-position: center !important;
+}
+
+.confirmation-confirm {
+	@extend .confirmation-abort;
+
+	background-color: $red !important;
+	cursor: default !important;
+}
+
+/**
+	* rules for settings area
+	*/
+
+#app-settings-content {
+	.icon {
+		margin-top: -3px;
+	}
+
+	li {
+		line-height: 3em;
+		position: relative;
+		height: 40px;
+
+		&.headline {
+			font-weight: bold;
+			line-height: 1.5em;
+		}
+
+		.label-container {
+			white-space: nowrap;
+			padding-right: 115px;
+			display: inline-block;
+			text-overflow: ellipsis;
+			width: 100%;
+			overflow: hidden;
+			height: 100%;
+		}
+
+		select {
+			position: absolute;
+			right: 0;
+			float: right;
+			min-width: 105px;
+		}
+	}
+}
+
+#collection_today > a > span.icon,
+#app-settings .label-container span.icon {
+	font-size: 7px;
+	font-weight: bold;
+	line-height: 21px;
+	text-align: center;
+}
+
+/**
+	* rules for app-content
+	*/
+
+* {
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+}
+
+#content {
+	overflow: hidden;
+	color: $gray_dark;
+}
+
+#app-content {
+	overflow-x: hidden;
+
+	#add-task {
+		margin: 12px 0;
+		position: relative;
+		border: 1px solid $gray_light;
+		background: none repeat scroll 0 0 $gray_light;
+		width: calc(100% - 54px);
+		float: left;
+		height: 34px;
+
+		&.focus {
+			background-color: $white;
+		}
+
+		.icon {
+			position: absolute;
+			top: 6px;
+		}
+
+		input {
+			font-size: 13px;
+			width: 100%;
+			color: $gray_dark;
+			border: medium none !important;
+			border-radius: 0 !important;
+			box-shadow: none !important;
+			padding: 0 60px 0 32px;
+			margin: 0;
+			cursor: text;
+			outline: none;
+			min-height: 32px;
+		}
+	}
+
+	.content-wrapper {
+		padding: 6px 17px 75px;
+		box-sizing: border-box;
+		height: 100%;
+		overflow: hidden;
+
+		.task-list {
+			height: 100%;
+			width: 100%;
+			overflow-y: auto;
+		}
+
+		.task-body .title-wrapper span.title a {
+			cursor: pointer;
+			text-decoration: underline;
+		}
+	}
+
+	.task-list {
+		.loadmore {
+			font-size: 11px;
+			margin-top: 10px;
+			text-align: center;
+
+			span {
+				color: $gray;
+				background-color: $gray_easy;
+				border-radius: 10px;
+				padding: 3px 6px;
+
+				&:hover {
+					cursor: pointer;
+					color: $gray_dark;
+				}
+			}
+		}
+
+		.grouped-tasks {
+			position: relative;
+		}
+
+		.completed-hidden ol.completed-tasks {
+			display: none;
+		}
+	}
+
+	h2 {
+		font-weight: bold;
+		font-size: 13px;
+		margin-bottom: 10px;
+		margin-top: 20px !important;
+		word-wrap: break-word;
+		opacity: .5;
+
+		&:hover {
+			opacity: .7;
+		}
+
+		&.heading-hiddentasks {
+			display: inline-block;
+			padding-right: 16px;
+			background-position: right center;
+			cursor: pointer;
+		}
+	}
+}
+
+ol[dnd-list] {
+	.dndDraggingSource {
+		display: none;
+	}
+
+	.dndPlaceholder {
+		display: block;
+		background-color: $gray_light;
+		min-height: 37px;
+	}
+
+	.copy.dndDraggingSource {
+		display: block;
+	}
+}
+
+.dropzone-visible > ol[dnd-list] {
+	min-height: 50px;
+}
+
+/**
+	* rules for task-items
+	*/
+
+.task-item {
+	cursor: default;
+	min-height: 37px;
+	list-style: none outside none;
+	overflow: hidden;
+	margin-top: -1px;
+
+	&:first-child {
+		margin-top: 0;
+
+		.task-body {
+			border-width: 1px;
+		}
+	}
+
+	&.done .task-body {
+		opacity: .6;
+
+		.title {
+			text-decoration: line-through;
+		}
+	}
+
+	&.add-subtask {
+		background: $white;
+		border: 1px solid $gray_light;
+
+		input {
+			background: transparent none repeat scroll 0 0 !important;
+			border: medium none !important;
+			border-radius: 0 !important;
+			box-shadow: none !important;
+			box-sizing: border-box;
+			color: $gray_dark;
+			cursor: text;
+			font-size: 100%;
+			margin: 0;
+			padding: 0 60px 0 32px;
+			width: 100%;
+			min-height: 36px;
+		}
+	}
+
+	.task-star .icon:hover {
+		opacity: .7;
+	}
+
+	.subtasks-container {
+		margin-left: 35px;
+
+		&.subtaskshidden li.subtask {
+			display: none;
+		}
+
+		.task-item {
+			margin-top: -1px;
+		}
+	}
+}
+
+.task-body {
+	background-color: $white;
+	height: 37px;
+	list-style: none outside none;
+	margin: 0;
+	position: relative;
+	border-style: solid;
+	border-width: 1px;
+	border-color: $gray_light;
+	overflow: hidden;
+
+	&:hover,
+	&.active {
+		background-color: $gray_easy;
+	}
+
+	&.attachment .icon.icon-note {
+		display: inline-block;
+		float: right;
+	}
+
+	&.subtasks .icon.subtasks {
+		display: inline-block;
+	}
+
+	&.completedsubtasks .icon.toggle-completed-subtasks {
+		display: inline-block;
+	}
+
+	.categories-list {
+		display: inline-block;
+		vertical-align: middle;
+
+		li {
+			background-color: $gray_easy;
+			border: 1px solid $gray_light;
+			border-radius: 2px;
+			color: $gray;
+			float: left;
+			font-weight: bold;
+			margin: -2px 4px 0;
+			padding: 2px 5px;
+			min-height: 22px;
+		}
+	}
+
+	.icon {
+		&.large {
+			margin: 8px;
+		}
+
+		&.task-separator {
+			cursor: default;
+			height: 100%;
+			left: 34px;
+			position: absolute;
+			top: 1px;
+			background: unset;
+			width: 2px;
+			border-left: 1px dotted $gray;
+		}
+
+		&.icon-add {
+			&:hover {
+				opacity: 1;
+			}
+		}
+
+		&.subtasks {
+			display: none;
+		}
+
+		&.toggle-completed-subtasks {
+			display: none;
+		}
+	}
+
+	.title-wrapper {
+		cursor: pointer;
+		color: $gray_dark;
+		display: block;
+		line-height: 16px;
+		margin: 0 0 0 44px;
+		overflow: hidden;
+		padding: 9px 0;
+		position: relative;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+
+		.title {
+			cursor: text;
+		}
+	}
+
+	.duedate {
+		color: $blue_due;
+		float: right;
+		font-size: 11px;
+		line-height: 14px;
+		margin: 10px;
+
+		&.overdue {
+			color: $red_overdue;
+		}
+	}
+
+	.listname {
+		color: $gray;
+		float: right;
+		font-size: 11px;
+		line-height: 14px;
+		margin: 10px;
+	}
+
+	.percentbar {
+		height: 3px;
+		position: relative;
+		top: 28px;
+		left: 42px;
+		margin-right: 103px;
+		margin-bottom: -5px;
+		background-color: $gray_light;
+		border-radius: 2px;
+
+		.percentdone {
+			height: 3px;
+			border-radius: 2px 0 0 2px;
+			opacity: .75;
+		}
+	}
+}
+
+.template {
+	display: none;
+}
+
+/**
+	* rules for app-sidebar
+	*/
+
+#app-sidebar {
+	.flex-container {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+	}
+
+	.content-wrapper {
+		padding: 0;
+
+		.notice {
+			color: $gray;
+			font-size: 16px;
+			position: absolute;
+			text-align: center;
+			top: 50%;
+			width: 100%;
+		}
+
+		.footer {
+			border-top: 1px solid $gray_light;
+			flex: 0 0 auto;
+			height: 30px;
+
+			a {
+				padding: 7px;
+
+				&:hover .icon {
+					opacity: 1;
+				}
+
+				&.left {
+					float: left;
+				}
+
+				&.right {
+					float: right;
+				}
+
+				.icon {
+					display: block;
+				}
+			}
+		}
+
+		.title {
+			flex: 0 0 auto;
+			background-color: $gray_easy;
+			border-bottom: 1px solid $gray_light;
+			font-size: 16px;
+			font-weight: bold;
+			min-height: 50px;
+			word-wrap: break-word;
+
+			&.editing {
+				.title-text {
+					display: none !important;
+				}
+
+				.expandable-container {
+					display: inline-block !important;
+				}
+			}
+
+			.title-text {
+				cursor: text;
+				display: inline-block;
+				min-height: 24px;
+				margin: 13px 0;
+				width: calc(100% - 100px);
+				padding: 0 6px;
+				line-height: 22px;
+				// this border is to adjust the size of the div to the size
+				// of the input field for editing the title
+				// (setting a padding always led to a small flickering)
+				border: 1px solid transparent;
+
+				&.strike-through {
+					text-decoration: line-through;
+				}
+
+				a {
+					cursor: pointer;
+					text-decoration: underline;
+				}
+			}
+
+			.expandable-container {
+				background: none repeat scroll 0 0 $white;
+				box-sizing: border-box;
+				border: 1px solid $gray;
+				padding: 0 6px;
+				display: none !important;
+				margin: 13px 0;
+				width: calc(100% - 100px);
+				line-height: 24px;
+				min-height: 24px;
+
+				.expandingArea {
+					position: relative;
+				}
+			}
+
+			.checkbox {
+				float: left;
+				padding: 16px 17px 18px;
+
+				.icon {
+					cursor: pointer;
+					margin: 0;
+				}
+			}
+
+			.star {
+				padding: 13px;
+				float: right;
+
+				.icon {
+					height: 24px;
+					width: 24px;
+					background-size: 144px 144px;
+
+					&:hover {
+						opacity: 1;
+					}
+				}
+			}
+
+			textarea,
+			pre {
+				box-shadow: none;
+				font-size: 16px;
+				font-weight: bold;
+				line-height: 22px;
+				min-height: 22px;
+				background: none repeat scroll 0 0 transparent;
+				border: medium none;
+				padding: 0;
+				white-space: pre-wrap;
+				word-wrap: break-word;
+			}
+
+			textarea {
+				margin: 0;
+				border-radius: 0;
+				height: 100%;
+				left: 0;
+				overflow: hidden;
+				position: absolute;
+				resize: none;
+				top: 0;
+				width: 100%;
+			}
+
+			pre {
+				border: 0 none !important;
+				display: block;
+				margin: 0;
+				outline: 0 none;
+				padding: 0 !important;
+				visibility: hidden;
+			}
+		}
+
+		.body {
+			flex: 1 1 auto;
+			overflow-y: auto;
+			position: relative;
+
+			.section {
+				border-bottom: 1px dotted $gray;
+				padding: 0;
+				position: relative;
+				margin-bottom: 0;
+				width: 100%;
+				color: $gray;
+
+				&:last-of-type {
+					border-bottom: unset;
+				}
+
+				&.low,
+				&.date {
+					color: $blue_due;
+				}
+
+				&.high {
+					color: $red_overdue;
+				}
+
+				&.medium {
+					color: $yellow;
+				}
+
+				&.date:hover .icon.icon-trash {
+					display: block;
+				}
+
+				&.date .icon {
+					&.icon-calendar-due,
+					&.icon-calendar-overdue,
+					&.icon-percent {
+						opacity: 1;
+					}
+				}
+
+				&.detail-note {
+					padding: 20px 0;
+					height: auto;
+				}
+
+				&.editing {
+					.icon {
+						&.detail-save,
+						&.icon-trash {
+							display: block;
+						}
+					}
+
+					.section-title {
+						display: none;
+					}
+
+					.section-edit {
+						display: inline-block;
+					}
+				}
+
+				.icon {
+					&.icon-trash {
+						display: none;
+						margin-left: auto;
+						right: 22px;
+					}
+
+					&.detail-save {
+						display: none;
+						margin-left: auto;
+						right: 44px;
+					}
+				}
+
+				> div {
+					padding-left: 12px;
+					line-height: 44px;
+
+					&.utils {
+						position: absolute;
+						right: 0;
+						top: 0;
+						padding-right: 15px;
+
+						a {
+							vertical-align: middle;
+							display: inline-block;
+						}
+					}
+
+					.section-title {
+						font-weight: bold;
+						margin-left: 12px;
+						line-height: 22px;
+						width: calc(100% - 100px);
+						display: inline-block;
+						vertical-align: middle;
+					}
+
+					.icon {
+						margin: 0;
+						float: unset;
+					}
+				}
+
+				input {
+					background-color: $white;
+					border: 1px solid $blue_background;
+					border-radius: 0;
+					margin-top: 0;
+					color: $gray_dark;
+					font-weight: 500;
+					outline: medium none;
+					padding: 4px;
+				}
+
+				input[type="range"] {
+					border: medium none;
+					box-shadow: none;
+					width: calc(100% - 50px);
+					vertical-align: middle;
+				}
+
+				input[type="text"] {
+					box-shadow: 0 0 4px rgba($blue_background, .3), 0 1px 1px rgba($white, .4), 0 2px 4px rgba($blue_background, .1) inset, 0 0 4px rgba($blue_background, .2) inset;
+					background: none repeat scroll 0 0 $gray_easy;
+					margin: 0;
+					min-height: 0;
+				}
+
+				input {
+					&.datepicker-input {
+						width: 60%;
+					}
+
+					&.timepicker-input {
+						width: calc(40% - 10px);
+					}
+
+					&.duration-input {
+						margin: 2px 0 0 .3em;
+						width: 35px;
+					}
+
+					&.percent-input,
+					&.priority-input {
+						width: 35px;
+						margin-top: 0;
+					}
+				}
+
+				select {
+					background-color: rgba(0, 0, 0, 0);
+					border-radius: 0;
+					border: 1px solid $gray_light;
+					padding: 0;
+					width: 98px;
+					margin: 0;
+					font-weight: normal;
+					height: 19px;
+				}
+
+				.section-edit {
+					display: none;
+					margin-left: 12px;
+					vertical-align: middle;
+					width: calc(100% - 80px);
+					line-height: 0;
+				}
+
+				.detail-categories-container {
+					width: calc(100% - 40px);
+					display: inline-block;
+					margin-left: 12px;
+				}
+
+				&.detail-categories .select2-container-multi {
+					.select2-choices {
+						border: 1px solid transparent;
+
+						.select2-search-choice {
+							color: $blue_due;
+							font-weight: bold;
+							line-height: 14px;
+							margin: 2px 0 3px 5px;
+							background-image: none;
+							background-color: $gray_easy;
+							box-shadow: none;
+							border-color: $gray_light;
+							min-height: 22px;
+
+							a.select2-search-choice-close {
+								opacity: .4;
+								display: initial;
+
+								@extend .icon;
+								@extend .icon-close;
+
+								&:hover {
+									opacity: 1;
+								}
+							}
+						}
+					}
+
+					&.select2-container-disabled .select2-choices {
+						background-color: $white;
+						background-image: none;
+						border: none;
+						cursor: default;
+					}
+				}
+
+				.select2-search-field input {
+					border: 0 none;
+					box-shadow: none;
+					font-weight: bold;
+					margin-top: 0;
+					font-family: inherit;
+				}
+
+				&.active .select2-search-field input {
+					color: $blue_due;
+				}
+
+				.note {
+					border-width: 1px;
+					border-style: solid;
+					border-color: $gray_light;
+					font-size: 13px;
+					line-height: 26px;
+					margin: 0 20px;
+					padding: 5px 15px;
+					cursor: text;
+
+					.expandingArea {
+						position: relative;
+						margin-left: -1px;
+
+						textarea,
+						pre {
+							box-shadow: none;
+							background: none repeat scroll 0 0 transparent;
+							border: medium none;
+							line-height: 26px;
+							padding: 0;
+							white-space: pre-wrap;
+							word-wrap: break-word;
+						}
+
+						textarea {
+							margin: 0 0 0 1px;
+							border-radius: 0;
+							height: 100%;
+							left: 0;
+							overflow: hidden;
+							position: absolute;
+							resize: none;
+							top: 0;
+							width: 100%;
+							color: $gray_dark;
+							font-weight: 500;
+							outline: medium none;
+						}
+
+						pre {
+							border: 0 none !important;
+							display: block;
+							margin: 0;
+							outline: 0 none;
+							padding: 0 !important;
+							visibility: hidden;
+						}
+					}
+
+					.note-body,
+					.note-edit {
+						min-height: 140px;
+						word-wrap: break-word;
+						cursor: text;
+
+						.content-fakeable {
+							&.editing {
+								.display-view {
+									display: none !important;
+								}
+
+								.edit-view {
+									display: block !important;
+								}
+							}
+
+							.display-view {
+								cursor: text;
+								display: block;
+								white-space: pre-wrap;
+							}
+
+							.edit-view {
+								display: none !important;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		.disabled .body .section {
+			.select2-search-field input {
+				width: auto;
+				display: block !important;
+			}
+
+			&.date:hover .icon.icon-trash {
+				display: none;
+			}
+		}
+	}
+}
+
+/**
+	* rules for icons
+	*/
+.collection .icon {
+	opacity: 1;
+}
+
+.disabled .icon.detail-star:hover {
+	cursor: not-allowed;
+}
+
+.icon {
+	height: 16px;
+	width: 16px;
+	display: inline-block;
+	vertical-align: middle;
+	opacity: .5;
+	transition: opacity 100ms ease 0s;
+
+	&.icon-checkmark,
+	&.icon-tag-active,
+	&[class*=" icon-task-star-"] {
+		opacity: 1 !important;
+	}
+
+	&.task-checkbox,
+	&.detail-checkbox {
+		border-radius: 3px;
+		border: 1px solid $gray;
+		float: left;
+		margin: 9px;
+
+		&:not(.icon-checkmark) {
+			background: unset;
+		}
+
+		&:not(.disabled):hover {
+			border-color: $black;
+		}
+
+		&.disabled {
+			cursor: not-allowed;
+		}
+	}
+
+	&.icon-note {
+		display: none;
+	}
+
+	&.right {
+		float: right;
+	}
+
+	&.toggle-completed-subtasks {
+		float: right;
+		opacity: 1;
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+}
+
+/**
+	* rules for searchresults
+	*/
+
+#searchresults {
+	padding-top: 0 !important;
+	margin-top: 20px !important;
+	background-color: transparent !important;
+	min-height: 150px;
+
+	span.icon.task-checkbox {
+		opacity: .6;
+	}
+}
+
+#status {
+	padding: 10px 0 18px !important;
+	height: 22px !important;
+	background-color: transparent !important;
+	font-weight: bold;
+	color: $gray;
+	font-size: 13px !important;
+
+	&.emptycontent {
+		position: relative;
+	}
+}
+
+/**
+	* rules for date- and timepicker
+	*/
+
+.ui-widget-content {
+	background: none repeat scroll 0 0 $gray_easy;
+	border-radius: 4px;
+	color: $gray_dark;
+	max-width: 304px;
+	min-height: 15px;
+	min-width: 150px;
+	z-index: 1000;
+	border: none;
+}
+
+/**
+	* rules for both date- and timepicker
+	*/
+
+.ui-timepicker,
+.ui-datepicker {
+	width: 185px;
+
+	table {
+		width: 100%;
+
+		tr {
+			line-height: 15px;
+
+			&:hover {
+				background: none repeat scroll 0 0 transparent;
+			}
+		}
+
+		td {
+			width: 14%;
+			padding: 0;
+
+			&.selected a,
+			a.ui-state-active {
+				background: linear-gradient(to top, rgba($blue_background, .8), rgba($blue_background, .6)) repeat scroll 0 0 transparent !important;
+				border-radius: 3px;
+				color: $white !important;
+				opacity: 1;
+				position: relative;
+			}
+		}
+
+		thead th {
+			color: $gray;
+			font-size: 9px;
+			height: auto;
+			padding: 4px 0;
+			text-align: center;
+			text-transform: uppercase;
+		}
+
+		a.ui-state-default {
+			border: none;
+			background: none repeat scroll 0 0 transparent;
+			color: $gray_dark;
+			border-radius: 3px;
+			cursor: pointer;
+			display: block;
+			font-size: 12px;
+			font-weight: 500;
+			padding: 2px 0;
+			margin: 1px;
+			text-align: center;
+
+			&:hover {
+				border: none;
+				background: none repeat scroll 0 0 $gray_light;
+			}
+		}
+	}
+
+	.ui-widget-header {
+		background: none repeat scroll 0 0 transparent;
+		border: none;
+		color: $gray_dark;
+		font-weight: 600;
+		font-size: 12px;
+	}
+}
+
+div {
+	&.ui-datepicker,
+	&.ui-timepicker {
+		background: none repeat scroll 0 0 $gray_easy;
+		border-radius: 4px;
+		box-shadow: 0 1px 6px $gray_dark;
+		color: $gray_dark;
+		max-width: 304px;
+		min-height: 15px;
+		min-width: 150px;
+		position: absolute;
+		z-index: 1000;
+		margin-top: 9px;
+		padding: 8px;
+
+		.arrow {
+			border-color: transparent transparent $gray_easy;
+			left: 50%;
+			margin-left: -12px;
+			top: -24px;
+			border-style: solid;
+			border-width: 12px;
+			height: 0;
+			position: absolute;
+			width: 0;
+			z-index: 100;
+		}
+
+		&::after {
+			border-bottom: 9px solid $gray_easy;
+			border-left: 9px solid rgba(0, 0, 0, 0);
+			border-right: 9px solid rgba(0, 0, 0, 0);
+			content: "";
+			display: inline-block;
+			left: 46%;
+			position: absolute;
+			top: -9px;
+		}
+
+		&::before {
+			border-bottom: 9px solid $gray_light;
+			border-left: 9px solid rgba(0, 0, 0, 0);
+			border-right: 9px solid rgba(0, 0, 0, 0);
+			content: "";
+			display: inline-block;
+			left: 46%;
+			position: absolute;
+			top: -9px;
+		}
+	}
+}
+
+/**
+	* rules for timepicker
+	*/
+
+.ui-timepicker {
+	.ui-timepicker-title {
+		text-align: center;
+	}
+}
+
+td.ui-timepicker-hours table {
+	border-right: 1px solid $gray_light;
+}
+
+/**
+	* rules for datepicker
+	*/
+
+.ui-datepicker {
+	table {
+		td {
+			&.ui-datepicker-today a {
+				color: $blue_background;
+			}
+		}
+	}
+
+	.ui-datepicker-next,
+	.ui-datepicker-next-hover {
+		right: 2px;
+		top: 2px;
+		background: none;
+		border: none;
+	}
+
+	.ui-datepicker-prev,
+	.ui-datepicker-prev-hover {
+		left: 2px;
+		top: 2px;
+		background: none;
+		border: none;
+	}
+
+	.ui-icon {
+		@extend .icon;
+
+		height: 16px;
+		width: 16px;
+	}
+
+	.ui-icon-circle-triangle-w {
+		@extend .icon-sort-up;
+	}
+
+	.ui-icon-circle-triangle-e {
+		@extend .icon-sort-down;
+	}
+}
+
+/**
+	* rules for sortorder-dropdown
+	*/
+
+.sortorder-dropdown-button {
+	background-color: $gray_easy;
+	border: 1px solid $gray_light;
+	width: 42px;
+	height: 34px;
+	margin: 12px 0 12px 12px;
+	padding: 0;
+	float: right;
+	cursor: pointer;
+
+	.sort-indicator {
+		margin-left: 0;
+		visibility: visible;
+	}
+}
+
+.sortorder-dropdown {
+	display: none;
+	top: 68px;
+	right: 3px;
+
+	&.open {
+		display: block;
+	}
+
+	.icon {
+		margin: 12px 8px;
+
+		&.sort-indicator {
+			margin-left: auto;
+			margin-right: 0;
+			float: right;
+			visibility: hidden;
+		}
+	}
+
+	.label {
+		margin-right: 10px;
+	}
+
+	.active .icon.sort-indicator {
+		visibility: visible;
+	}
+
+	li {
+		float: inherit;
+		width: auto !important;
+		cursor: pointer;
+		opacity: .57;
+
+		& > a span {
+			opacity: 1 !important;
+
+			&[class*=" icon-"] {
+				padding: 0;
+
+				&.icon-menu {
+					@extend .icon-menu;
+				}
+
+				&.icon-calendar {
+					@extend .icon-calendar;
+				}
+
+				&.icon-task-star {
+					@extend .icon-task-star;
+				}
+
+				&.icon-alphabetically {
+					@extend .icon-alphabetically;
+				}
+
+				&.icon-manual {
+					@extend .icon-manual;
+				}
+
+				&.icon-sort-up {
+					@extend .icon-sort-up;
+				}
+
+				&.icon-sort-down {
+					@extend .icon-sort-down;
+				}
+			}
+		}
+
+		a {
+			width: 100% !important;
+		}
+
+		&.active {
+			opacity: 1 !important;
+		}
+
+		&:hover {
+			opacity: 1 !important;
+		}
+	}
+}
