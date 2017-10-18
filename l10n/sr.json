@@ -76,6 +76,8 @@
     "at the end" : "на крају",
     "at the beginning" : "на почетку",
     "Set start date" : "Постави датум почетка",
+    "{calendar} shared by {owner}" : "{calendar} је поделио {owner}",
+    "Unnamed" : "Неименовано",
     "Important" : "Важно",
     "Week" : "Недеља",
     "All" : "Све",
@@ -92,12 +94,22 @@
     "Settings" : "Поставке",
     "Start of week" : "Почетак недеље",
     "Visibility of Smart Collections" : "Видљивост паметних збирки",
+    "Change sort order" : "Промени сортирање",
     "Default" : "Подразумевано",
+    "Due date" : "Рок",
+    "Start date" : "Датум почетка",
+    "Priority" : "Приоритет",
+    "Alphabetically" : "Азбучно",
+    "Manually" : "Ручно",
     "Load remaining completed tasks." : "Учитај преостале довршене задатке.",
+    "Task is completed" : "Задатак завршен",
+    "All day" : "Цео дан",
     "(New category)" : "(Нова категорија)",
     "Select categories..." : "Изаберите категорије...",
     "Loading the task..." : "Учитавам задатке...",
     "Task not found!" : "Задатак није пронађен!",
-    "add a subtask to" : "додај подзадатак"
+    "add a subtask to" : "додај подзадатак",
+    "Toggle subtasks" : "Укључи/искључи подзадатке",
+    "Toggle completed subtasks" : "Укључи/искључи завршене подзадатке"
 },"pluralForm" :"nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);"
 }
