@@ -104,11 +104,14 @@ OC.L10N.register(
     "Alphabetically" : "Betűrendben",
     "Manually" : "Manuálisan",
     "Load remaining completed tasks." : "Hátralévő befejezett feladatok betöltése.",
+    "Task is completed" : "Feladat elvégezve",
     "All day" : "Egész napos",
     "(New category)" : "(Új kategória)",
     "Select categories..." : "Kategória kiválasztása...",
     "Loading the task..." : "Feladat betöltése...",
     "Task not found!" : "Feladat nem található!",
-    "add a subtask to" : "részfeladat hozzáadás ehhez"
+    "add a subtask to" : "részfeladat hozzáadás ehhez",
+    "Toggle subtasks" : "Alfeladat ki/be kapcsolása",
+    "Toggle completed subtasks" : "Teljesített feladatok megjelenítése/elrejtése"
 },
 "nplurals=2; plural=(n != 1);");
