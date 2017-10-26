@@ -23,7 +23,7 @@
     <div id="app-navigation" ng-controller="ListController">
         <ul id="collections">
             <li id="collection_{{ collection.id }}"
-                class="collection"
+                class="collection reactive"
                 collectionID="{{collection.id}}"
                 ng-repeat="collection in collections"
                 ng-class="{'animate-up': hideCollection(collection.id), active: collection.id==route.collectionID}"
@@ -121,7 +121,7 @@
                     </form>
                 </div>
             </li>
-            <li class="newList handler" ng-class="{edit: status.addingList}">
+            <li class="newList handler reactive" ng-class="{edit: status.addingList}">
                 <a class="addlist"
                     ng-click="startCreate()"
                     oc-click-focus="{selector: '#newList', timeout: 0}">

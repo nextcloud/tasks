@@ -513,10 +513,6 @@ ol[dnd-list] {
 		}
 	}
 
-	.task-star .icon:hover {
-		opacity: .7;
-	}
-
 	.subtasks-container {
 		margin-left: 35px;
 
@@ -697,10 +693,6 @@ ol[dnd-list] {
 			a {
 				padding: 7px;
 
-				&:hover .icon {
-					opacity: 1;
-				}
-
 				&.left {
 					float: left;
 				}
@@ -791,10 +783,6 @@ ol[dnd-list] {
 					height: 24px;
 					width: 24px;
 					background-size: 144px 144px;
-
-					&:hover {
-						opacity: 1;
-					}
 				}
 			}
 
@@ -879,6 +867,13 @@ ol[dnd-list] {
 				&.detail-note {
 					padding: 20px 0;
 					height: auto;
+				}
+
+				&.detail-all-day {
+					div,
+					span {
+						cursor: pointer;
+					}
 				}
 
 				&.editing {
@@ -1169,6 +1164,22 @@ ol[dnd-list] {
 	cursor: not-allowed;
 }
 
+.reactive {
+	&:hover {
+		.icon {
+			opacity: .7;
+		}
+
+		.detail-checkbox:not(.disabled) {
+			border-color: $black;
+		}
+	}
+
+	.icon {
+		cursor: pointer;
+	}
+}
+
 .icon {
 	height: 16px;
 	width: 16px;
@@ -1176,6 +1187,19 @@ ol[dnd-list] {
 	vertical-align: middle;
 	opacity: .5;
 	transition: opacity 100ms ease 0s;
+	cursor: default;
+
+	&.reactive {
+		cursor: pointer;
+
+		&:hover {
+			opacity: .7;
+		}
+	}
+
+	&.active {
+		opacity: .7;
+	}
 
 	&.icon-checkmark,
 	&.icon-tag-active,
@@ -1209,15 +1233,6 @@ ol[dnd-list] {
 
 	&.right {
 		float: right;
-	}
-
-	&.toggle-completed-subtasks {
-		float: right;
-		opacity: 1;
-
-		&:hover {
-			opacity: 1;
-		}
 	}
 }
 
