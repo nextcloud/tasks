@@ -16,28 +16,28 @@
         role="checkbox"
         aria-checked="{{task.completed}}"
         aria-label="<?php p($l->t('Task is completed')); ?>">
-        <span class="icon task-checkbox" ng-class="{'icon-checkmark': task.completed}"></span>
+        <span class="icon task-checkbox reactive" ng-class="{'icon-checkmark': task.completed}"></span>
     </a>
     <a class="icon task-separator"></a>
     <a class="task-star handler" ng-click="toggleStarred(task)">
-        <span class="icon icon-task-star right large"ng-class="{'icon-task-star-high':task.priority > 5, 'icon-task-star-medium':task.priority == 5, 'icon-task-star-low':task.priority > 0 && task.priority < 5}">
+        <span class="icon icon-task-star right large reactive"ng-class="{'icon-task-star-high':task.priority > 5, 'icon-task-star-medium':task.priority == 5, 'icon-task-star-low':task.priority > 0 && task.priority < 5}">
         </span>
     </a>
     <a class="task-addsubtask handler add-subtask"
         ng-show="task.calendar.writable"
         ng-click="showSubtaskInput(task.uid)"
         oc-click-focus="{selector: '.add-subtask input', timeout: 0}">
-        <span class="icon icon-add right large" title="<?php p($l->t('add a subtask to')); ?> {{ task.summary }}"></span>
+        <span class="icon icon-add right large reactive" title="<?php p($l->t('add a subtask to')); ?> {{ task.summary }}"></span>
     </a>
-    <a class="handler"  ng-click="toggleSubtasks(task)">
-        <span class="icon right large subtasks"
+    <a class="handler" ng-click="toggleSubtasks(task)">
+        <span class="icon right large subtasks reactive"
             ng-class="task.hideSubtasks ? 'icon-subtasks-hidden' : 'icon-subtasks-visible'"
             title="<?php p($l->t('Toggle subtasks')); ?>">
         </span>
     </a>
-    <a class="handler"  ng-click="toggleCompletedSubtasks(task)">
-        <span class="icon icon-toggle right large toggle-completed-subtasks"
-            ng-class="{'hidden': task.hideCompletedSubtasks}"
+    <a class="handler" ng-click="toggleCompletedSubtasks(task)">
+        <span class="icon icon-toggle right large toggle-completed-subtasks reactive"
+            ng-class="{'active': !task.hideCompletedSubtasks}"
             title="<?php p($l->t('Toggle completed subtasks')); ?>">
         </span>
     </a>

@@ -5,14 +5,14 @@
         ng-show="TaskState()=='found'"
         ng-class="{'disabled': !task.calendar.writable}">
     	<div class="title" ng-class="{'editing':route.parameter=='name'}">
-            <a class="checkbox"
+            <a class="checkbox reactive"
                 ng-click="toggleCompleted(task)"
                 role="checkbox"
                 aria-checked="{{task.completed}}"
                 aria-label="<?php p($l->t('Task is completed')); ?>">
             	<span class="icon detail-checkbox" ng-class="{'icon-checkmark':task.completed, 'disabled': !task.calendar.writable}"></span>
             </a>
-            <a class="star" ng-click="toggleStarred(task)">
+            <a class="star reactive" ng-click="toggleStarred(task)">
             	<span class="icon icon-task-star"
                     ng-class="{'icon-task-star-high':task.priority>5,'icon-task-star-medium':task.priority==5,'icon-task-star-low':task.priority > 0 && task.priority < 5, 'disabled': !task.calendar.writable}"></span>
             </a>
@@ -63,10 +63,10 @@
                    </div>
                    <div class="utils">
                         <a>
-                            <span class="icon detail-save icon-checkmark-color handler end-edit"></span>
+                            <span class="icon detail-save icon-checkmark-color handler end-edit reactive"></span>
                         </a>
                         <a class="handler end-edit" ng-click="deleteStartDate(task)">
-                            <span class="icon icon-trash"></span>
+                            <span class="icon icon-trash reactive"></span>
                         </a>
                     </div>
                 </li>
@@ -96,14 +96,14 @@
                     </div>
                     <div class="utils">
                         <a>
-                            <span class="icon detail-save icon-checkmark-color handler end-edit"></span>
+                            <span class="icon detail-save icon-checkmark-color handler end-edit reactive"></span>
                         </a>
                         <a class="handler end-edit" ng-click="deleteDueDate(task)">
-                            <span class="icon icon-trash"></span>
+                            <span class="icon icon-trash reactive"></span>
                         </a>
                     </div>
                 </li>
-                <li class="section detail-all-day handler"
+                <li class="section detail-all-day handler reactive"
                     ng-click="toggleAllDay(task)"
                     ng-if="isAllDayPossible(task)"
                     role="checkbox"
@@ -139,10 +139,10 @@
                     </div>
                     <div class="utils">
                         <a>
-                            <span class="icon detail-save icon-checkmark-color handler end-edit"></span>
+                            <span class="icon detail-save icon-checkmark-color handler end-edit reactive"></span>
                         </a>
                         <a class="handler end-edit" ng-click="deletePriority(task)">
-                            <span class="icon icon-trash"></span>
+                            <span class="icon icon-trash reactive"></span>
                         </a>
                 </li>
                 <li class="section detail-complete handler"
@@ -168,10 +168,10 @@
                     </div>
                     <div class="utils">
                         <a>
-                            <span class="icon detail-save icon-checkmark-color handler end-edit"></span>
+                            <span class="icon detail-save icon-checkmark-color handler end-edit reactive"></span>
                         </a>
                         <a class="handler end-edit" ng-click="deletePercent(task)">
-                            <span class="icon icon-trash"></span>
+                            <span class="icon icon-trash reactive"></span>
                         </a>
                     </div>
                 </li>
@@ -218,12 +218,12 @@
             </ul>
         </div>
         <div class="footer">
-        	<a class="handler left close-all"
+        	<a class="handler left close-all reactive"
                 ng-click="deleteTask(task)"
                 ng-show="task.calendar.writable">
             	<span class="icon icon-trash"></span>
             </a>
-            <a class="handler right close-all">
+            <a class="handler right close-all reactive">
             	<span class="icon icon-hide"></span>
             </a>
         </div>
