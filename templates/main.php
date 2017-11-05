@@ -1,14 +1,5 @@
 <?php
-    script('tasks', 'vendor/angular/angular.min');
-    script('tasks', 'vendor/angular-route/angular-route.min');
-    script('tasks', 'vendor/angular-animate/angular-animate.min');
-    script('tasks', 'vendor/angular-sanitize/angular-sanitize.min');
-    script('tasks', 'vendor/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min');
-    script('tasks', 'vendor/ui-select/dist/select.min');
-    script('tasks', 'vendor/jstimezonedetect/dist/jstz.min');
-    script('tasks', 'public/app.min');
-    script('tasks', 'vendor_legacy/jquery-timepicker/jquery.ui.timepicker');
-    script('tasks', 'vendor/ical.js/build/ical.min');
+    script('tasks', 'merged');
     style('tasks', 'style');
     style('tasks', 'vendor/angularui/ui-select/select2');
 ?>
