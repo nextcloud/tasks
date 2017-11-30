@@ -59,7 +59,7 @@ OC.L10N.register(
     "Thursday" : "Torsdag",
     "Friday" : "Fredag",
     "Saturday" : "Lørdag",
-    "Add an important item in \"%s\"..." : "Legg til en viktig oppgave i \"%s\"...",
+    "Add an important item in \"%s\"..." : "Legg til en viktig oppgave i \"%s\"…",
     "Add an item due today in \"%s\"..." : "Legg til en oppgave med forfall i dag i \"%s\"…",
     "Add an item in \"%s\"..." : "Legg til en oppgave i \"%s\"…",
     "Add a current item in \"%s\"..." : "Legg til en nåværende oppgave i \"%s\"…",
