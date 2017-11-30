@@ -21,10 +21,8 @@
                 dnd-list="draggedTasks"
                 dnd-drop="dropCollection(event, index, item)"
                 dnd-dragover="dragoverCollection(event, index)">
-                <a href="#/collections/{{ collection.id }}">
-                    <span class="icon {{ collection.icon }}">
+                <a href="#/collections/{{ collection.id }}" class="icon {{ collection.icon }}">
                         <text ng-if="collection.id=='today'"><?php p($_['DOM']); ?></text>
-                    </span>
                     <span class="title">{{ collection.displayname }}</span>
                 </a>
                 <div class="app-navigation-entry-utils">
@@ -42,8 +40,8 @@
                 dnd-list="draggedTasks"
                 dnd-drop="dropList(event, index, item)"
                 dnd-dragover="dragoverList(event, index)">
+                <div class="app-navigation-entry-bullet" style="background-color: {{ calendar.color }};"></div>
                 <a href="#/calendars/{{ calendar.uri }}" ng-dblclick="startRename(calendar)">
-                    <span class="calendar-indicator" style="background-color: {{ calendar.color }};"></span>
                     <span class="title">{{ calendar.displayname }}</span>
                 </a>
                 <div class="app-navigation-entry-utils">
@@ -113,10 +111,9 @@
                 </div>
             </li>
             <li class="newList handler reactive" ng-class="{edit: status.addingList}">
-                <a class="addlist"
+                <a class="addlist icon icon-add"
                     ng-click="startCreate()"
                     oc-click-focus="{selector: '#newList', timeout: 0}">
-                    <span class="icon icon-add"></span>
                     <span class="title"><?php p($l->t('Add List...')); ?></span>
                 </a>
                 <div class="app-navigation-entry-edit name" ng-class="{error: nameError}">
