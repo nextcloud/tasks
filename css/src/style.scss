@@ -1132,6 +1132,16 @@ ol[dnd-list] {
 }
 
 /**
+	* timepicker fixes
+	*/
+
+.ui-timepicker-table td a {
+	cursor: pointer;
+	display: block;
+	width: 1.2em;
+}
+
+/**
 	* rules for icons
 	*/
 .collection .icon {
