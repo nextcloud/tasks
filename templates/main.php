@@ -32,7 +32,7 @@
                 </div>
             </li>
             <li id="list_{{ calendar.uri }}"
-                class="list with-menu handler"
+                class="list with-menu handler editing"
                 calendarID="{{calendar.uri}}"
                 ng-repeat="calendar in calendars"
                 ng-class="{ active: calendar.uri==route.calendarID, edit:route.listparameter == 'name' && route.calendarID == calendar.uri,
@@ -110,7 +110,7 @@
                     </form>
                 </div>
             </li>
-            <li class="newList handler icon-add reactive" ng-class="{edit: status.addingList}">
+            <li class="newList handler icon-add reactive editing" ng-class="{edit: status.addingList}">
                 <a class="addlist icon sprite"
                     ng-click="startCreate()"
                     oc-click-focus="{selector: '#newList', timeout: 0}">

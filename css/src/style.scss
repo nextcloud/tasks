@@ -76,6 +76,8 @@ $white: #fff;
 			}
 
 			.app-navigation-entry-edit {
+				padding-left: 5px !important;
+
 				&.name,
 				&.caldav {
 					display: none;
