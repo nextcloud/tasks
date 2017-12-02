@@ -22,7 +22,7 @@
                 dnd-drop="dropCollection(event, index, item)"
                 dnd-dragover="dragoverCollection(event, index)">
                 <a href="#/collections/{{ collection.id }}" class="sprite">
-                    <text ng-if="collection.id=='today'"><?php p($_['DOM']); ?></text>
+                    <span class="date" ng-if="collection.id=='today'"><?php p($_['DOM']); ?></span>
                     <span class="title">{{ collection.displayname }}</span>
                 </a>
                 <div class="app-navigation-entry-utils">

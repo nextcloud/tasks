@@ -293,7 +293,13 @@ $white: #fff;
 	}
 }
 
-#collection_today > a > span.icon,
+#collection_today > a > span.date {
+	position: absolute;
+	font-size: 7px;
+	left: 18px;
+	top: 1.5px;
+}
+
 #app-settings .label-container span.icon {
 	font-size: 7px;
 	font-weight: bold;
