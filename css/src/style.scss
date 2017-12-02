@@ -207,7 +207,7 @@ $white: #fff;
 .app-navigation-entry-menu {
 	li > a {
 		&:not(:empty).confirmation-confirm {
-			padding-right: 0 !important;
+			padding: 0 !important;
 		}
 
 		span.countdown {
@@ -236,7 +236,7 @@ $white: #fff;
 		}
 
 		.countdown {
-			display: none;
+			visibility: hidden;
 		}
 	}
 }
@@ -244,7 +244,7 @@ $white: #fff;
 .confirmation-abort {
 	width: 50% !important;
 	display: none !important;
-	padding-right: 0 !important;
+	padding: 0 !important;
 	background-position: center !important;
 }
 
