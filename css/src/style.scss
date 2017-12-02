@@ -22,12 +22,9 @@ $white: #fff;
 #app-navigation {
 	> ul {
 		> li {
-			transition: max-height 300ms ease 0s;
-			max-height: 100px;
 			background-image: unset;
 
 			> a {
-				padding-right: 20px;
 				background-image: unset;
 				background-position: inherit;
 			}
@@ -44,16 +41,10 @@ $white: #fff;
 				background-position: inherit;
 			}
 
-			&.active {
-				&.with-menu > a {
-					padding-right: 70px;
-				}
-
-				.app-navigation-entry-bullet {
-					height: 16px;
-					width: 16px;
-					margin: 14px;
-				}
+			&.active .app-navigation-entry-bullet {
+				height: 16px;
+				width: 16px;
+				margin: 14px;
 			}
 
 			&.edit {
@@ -73,16 +64,6 @@ $white: #fff;
 				max-height: 0;
 				border-bottom: 0;
 				overflow: hidden;
-			}
-
-			&:hover > a span {
-				&.title {
-					opacity: 1;
-				}
-
-				&.icon {
-					opacity: 1;
-				}
 			}
 
 			&.list:not(.active) .app-navigation-entry-utils-menu-button {
