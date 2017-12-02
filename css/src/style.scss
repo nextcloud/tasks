@@ -20,80 +20,92 @@ $white: #fff;
 	*/
 
 #app-navigation {
-	li {
-		transition: max-height 300ms ease 0s;
-		max-height: 100px;
+	> ul {
+		> li {
+			transition: max-height 300ms ease 0s;
+			max-height: 100px;
+			background-image: unset;
 
-		> a {
-			padding-right: 20px;
-		}
-
-		&.active {
-			&.with-menu > a {
-				padding-right: 70px;
+			> a {
+				padding-right: 20px;
+				background-image: unset;
+				background-position: inherit;
 			}
 
-			.calendar-indicator {
-				height: 16px;
+			.sprite::before {
+				content: '';
+				position: absolute;
+				z-index: -1;
 				width: 16px;
-				margin-left: 2px;
-				margin-right: 2px;
+				height: 16px;
+				background: url('../../../apps/tasks/css/../img/sprites.svg') no-repeat;
+				margin: 14px;
+				margin-left: -30px;
+				background-position: inherit;
 			}
-		}
 
-		&.edit {
-			> a,
-			.app-navigation-entry-utils,
-			.app-navigation-entry-menu {
+			&.active {
+				&.with-menu > a {
+					padding-right: 70px;
+				}
+
+				.app-navigation-entry-bullet {
+					height: 16px;
+					width: 16px;
+					margin: 14px;
+				}
+			}
+
+			&.edit {
+				> a,
+				.app-navigation-entry-utils,
+				.app-navigation-entry-menu {
+					display: none;
+				}
+
+				.app-navigation-entry-edit.name {
+					display: inline-block;
+					height: auto;
+				}
+			}
+
+			&.animate-up {
+				max-height: 0;
+				border-bottom: 0;
+				overflow: hidden;
+			}
+
+			&:hover > a span {
+				&.title {
+					opacity: 1;
+				}
+
+				&.icon {
+					opacity: 1;
+				}
+			}
+
+			&.list:not(.active) .app-navigation-entry-utils-menu-button {
 				display: none;
 			}
 
-			.app-navigation-entry-edit.name {
+			&.caldav .app-navigation-entry-edit.caldav {
 				display: inline-block;
 				height: auto;
 			}
-		}
 
-		&.animate-up {
-			max-height: 0;
-			border-bottom: 0;
-			overflow: hidden;
-		}
-
-		&:hover > a span {
-			&.title {
-				opacity: 1;
+			.app-navigation-entry-edit {
+				&.name,
+				&.caldav {
+					display: none;
+				}
 			}
 
-			&.icon {
-				opacity: 1;
+			.error input.edit {
+				color: $red;
+				border-color: $red !important;
+				box-shadow: 0 0 6px rgba($red, .3);
 			}
-		}
-
-		&.list:not(.active) .app-navigation-entry-utils-menu-button {
-			display: none;
-		}
-
-		&.caldav .app-navigation-entry-edit.caldav {
-			display: inline-block;
-			height: auto;
-		}
-
-		.app-navigation-entry-edit {
-			&.name,
-			&.caldav {
-				display: none;
-			}
-		}
-
-		.error input.edit {
-			color: $red;
-			border-color: $red !important;
-			box-shadow: 0 0 6px rgba($red, .3);
-		}
-
-		.title {
-			margin-left: 11px;
 		}
 	}
 

@@ -14,15 +14,15 @@
     <div id="app-navigation" ng-controller="ListController">
         <ul id="collections">
             <li id="collection_{{ collection.id }}"
-                class="collection reactive"
+                class="collection {{ collection.icon }} reactive"
                 collectionID="{{collection.id}}"
                 ng-repeat="collection in collections"
                 ng-class="{'animate-up': hideCollection(collection.id), active: collection.id==route.collectionID}"
                 dnd-list="draggedTasks"
                 dnd-drop="dropCollection(event, index, item)"
                 dnd-dragover="dragoverCollection(event, index)">
-                <a href="#/collections/{{ collection.id }}" class="icon {{ collection.icon }}">
-                        <text ng-if="collection.id=='today'"><?php p($_['DOM']); ?></text>
+                <a href="#/collections/{{ collection.id }}" class="sprite">
+                    <text ng-if="collection.id=='today'"><?php p($_['DOM']); ?></text>
                     <span class="title">{{ collection.displayname }}</span>
                 </a>
                 <div class="app-navigation-entry-utils">
@@ -110,8 +110,8 @@
                     </form>
                 </div>
             </li>
-            <li class="newList handler reactive" ng-class="{edit: status.addingList}">
-                <a class="addlist icon icon-add"
+            <li class="newList handler icon-add reactive" ng-class="{edit: status.addingList}">
+                <a class="addlist icon sprite"
                     ng-click="startCreate()"
                     oc-click-focus="{selector: '#newList', timeout: 0}">
                     <span class="title"><?php p($l->t('Add List...')); ?></span>
