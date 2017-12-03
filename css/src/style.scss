@@ -105,9 +105,8 @@ $white: #fff;
 			background-color: $gray_easy;
 			width: 36px;
 			border-left: 0 none;
-			border-top-left-radius: 0;
-			border-bottom-left-radius: 0;
 			background-position: center;
+			cursor: pointer;
 
 			&:hover {
 				border-left: 1px solid;
