@@ -1133,10 +1133,17 @@ ol[dnd-list] {
 /**
 	* timepicker fixes
 	*/
-
 .ui-timepicker-table td a {
 	display: block;
 	width: 14px;
+}
+
+/**
+	* datepicker fixes
+	*/
+.ui-widget.ui-datepicker .ui-datepicker-calendar td > a {
+	width: 14px;
+	line-height: 14px;
 }
 
 /**
