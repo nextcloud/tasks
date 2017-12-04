@@ -7,7 +7,6 @@ $red: $color-error;				// warnings and errors
 $red_overdue: #b3312d;		// overdue dates and high importance
 $yellow: #fd0;						// medium importance
 $blue_due: #4271a6;				// due dates and low importance
-$blue_background: #168ad4;// highlighting date/timepicker dates
 $gray_dark: #404040;			// text
 $gray: #a0a0a0;						// inactive text, checkbox-borders and separators
 $gray_light: #ccc;
@@ -917,7 +916,6 @@ ol[dnd-list] {
 
 				input {
 					background-color: $white;
-					border: 1px solid $blue_background;
 					border-radius: 0;
 					margin-top: 0;
 					color: $gray_dark;
@@ -934,7 +932,6 @@ ol[dnd-list] {
 				}
 
 				input[type="text"] {
-					box-shadow: 0 0 4px rgba($blue_background, .3), 0 1px 1px rgba($white, .4), 0 2px 4px rgba($blue_background, .1) inset, 0 0 4px rgba($blue_background, .2) inset;
 					background: none repeat scroll 0 0 $gray_easy;
 					margin: 0;
 					min-height: 0;
