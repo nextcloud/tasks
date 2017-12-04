@@ -61,9 +61,7 @@ $white: #fff;
 			}
 
 			&.animate-up {
-				max-height: 0;
-				border-bottom: 0;
-				overflow: hidden;
+				display: none;
 			}
 
 			&.list:not(.active) .app-navigation-entry-utils-menu-button {
