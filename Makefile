@@ -7,7 +7,7 @@
 # @author Raimund Schlüßler
 # @copyright 2017 Raimund Schlüßler <raimund.schluessler@googlemail.com>
 
-# Generic Makefile for building and packaging a Nextcloud app which uses yarn and
+# Generic Makefile for building and packaging a Nextcloud app which uses npm and
 # Composer.
 #
 # Dependencies:
@@ -15,31 +15,31 @@
 # * which
 # * curl: used if phpunit and composer are not installed to fetch them from the web
 # * tar: for building the archive
-# * yarn: for building and testing everything JS
+# * npm: for building and testing everything JS
 #
 # If no composer.json is in the app root directory, the Composer step
 # will be skipped. The same goes for the package.json which can be located in
 # the app root or the js/ directory.
 #
-# The yarn command by launches the yarn build script:
+# The npm command by launches the npm build script:
 #
-#    yarn run build
+#    npm run build
 #
-# The yarn test command launches the yarn test script:
+# The npm test command launches the npm test script:
 #
-#    yarn run test
+#    npm run test
 #
 # The idea behind this is to be completely testing and build tool agnostic. All
 # build tools and additional package managers should be installed locally in
 # your project, since this won't pollute people's global namespace.
 #
-# The following yarn scripts in your package.json install and update the
-# yarn dependencies and use gulp as build system (notice how everything is
+# The following npm scripts in your package.json install and update the
+# npm dependencies and use gulp as build system (notice how everything is
 # run from the node_modules folder):
 #
 #    "scripts": {
 #        "test": "node node_modules/gulp-cli/bin/gulp.js karma",
-#        "prebuild": "yarn install && yarn upgrade",
+#        "prebuild": "npm install && npm upgrade",
 #        "build": "node node_modules/gulp-cli/bin/gulp.js"
 #    },
 
@@ -51,7 +51,7 @@ source_package_name=$(source_artifact_directory)/$(app_name)
 appstore_build_directory=$(CURDIR)/build/appstore/tasks
 appstore_artifact_directory=$(CURDIR)/build/artifacts/appstore
 appstore_package_name=$(appstore_artifact_directory)/$(app_name)
-yarn=$(shell which yarn 2> /dev/null)
+npm=$(shell which npm 2> /dev/null)
 gcp=$(shell which gcp 2> /dev/null)
 
 ifeq (, $(gcp))
@@ -83,22 +83,22 @@ all: build
 
 # Fetches the PHP and JS dependencies and compiles the JS. If no composer.json
 # is present, the composer step is skipped, if no package.json or js/package.json
-# is present, the yarn step is skipped
+# is present, the npm step is skipped
 .PHONY: build
 build:
-	make yarn
+	make npm
 
-# Installs yarn dependencies
-.PHONY: yarn
-yarn:
-	cd js && $(yarn) run build
+# Installs npm dependencies
+.PHONY: npm
+npm:
+	cd js && $(npm) run build
 
 # Removes the appstore build
 .PHONY: clean
 clean:
 	rm -rf ./build
 
-# Same as clean but also removes dependencies installed by yarn
+# Same as clean but also removes dependencies installed by npm
 .PHONY: distclean
 distclean: clean
 	rm -rf vendor
@@ -246,7 +246,7 @@ endif
 # from the internet
 .PHONY: test
 test:
-	cd js && $(yarn) run test
+	cd js && $(npm) run test
 ifeq (, $(shell which phpunit 2> /dev/null))
 	@echo "No phpunit command available, downloading a copy from the web"
 	mkdir -p $(build_tools_directory)
