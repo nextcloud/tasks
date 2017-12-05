@@ -7,7 +7,6 @@ $red: $color-error;				// warnings and errors
 $red_overdue: #b3312d;		// overdue dates and high importance
 $yellow: #fd0;						// medium importance
 $blue_due: #4271a6;				// due dates and low importance
-$blue_background: #168ad4;// highlighting date/timepicker dates
 $gray_dark: #404040;			// text
 $gray: #a0a0a0;						// inactive text, checkbox-borders and separators
 $gray_light: #ccc;
@@ -20,101 +19,73 @@ $white: #fff;
 	*/
 
 #app-navigation {
-	li {
-		transition: max-height 300ms ease 0s;
-		max-height: 100px;
+	> ul {
+		> li {
+			background-image: unset;
 
-		> a {
-			padding-right: 20px;
-		}
-
-		&.active {
-			&.with-menu > a {
-				padding-right: 70px;
+			> a {
+				background-image: unset;
+				background-position: inherit;
 			}
 
-			.calendar-indicator {
+			.sprite::before {
+				content: '';
+				position: absolute;
+				z-index: -1;
+				width: 16px;
+				height: 16px;
+				background: url('../../../apps/tasks/css/../img/sprites.svg') no-repeat;
+				margin: 14px;
+				margin-left: -30px;
+				background-position: inherit;
+			}
+
+			&.active .app-navigation-entry-bullet {
 				height: 16px;
 				width: 16px;
-				margin-left: 2px;
-				margin-right: 2px;
+				margin: 14px;
 			}
-		}
 
-		&.edit {
-			> a,
-			.app-navigation-entry-utils,
-			.app-navigation-entry-menu {
+			&.edit {
+				> a,
+				.app-navigation-entry-utils,
+				.app-navigation-entry-menu {
+					display: none;
+				}
+
+				.app-navigation-entry-edit.name {
+					display: inline-block;
+					position: relative;
+				}
+			}
+
+			&.animate-up {
 				display: none;
 			}
 
-			.app-navigation-entry-edit.name {
+			&.list:not(.active) .app-navigation-entry-utils-menu-button {
+				display: none;
+			}
+
+			&.caldav .app-navigation-entry-edit.caldav {
 				display: inline-block;
 				height: auto;
 			}
-		}
 
-		&.animate-up {
-			max-height: 0;
-			border-bottom: 0;
-			overflow: hidden;
-		}
+			.app-navigation-entry-edit {
+				padding-left: 5px !important;
 
-		&:hover > a span {
-			&.title {
-				opacity: 1;
+				&.name,
+				&.caldav {
+					display: none;
+				}
 			}
 
-			&.icon {
-				opacity: 1;
+			.error input.edit {
+				color: $red;
+				border-color: $red !important;
+				box-shadow: 0 0 6px rgba($red, .3);
 			}
-		}
-
-		&.list:not(.active) .app-navigation-entry-utils-menu-button {
-			display: none;
-		}
-
-		&.caldav .app-navigation-entry-edit.caldav {
-			display: inline-block;
-			height: auto;
-		}
-
-		.app-navigation-entry-edit {
-			&.name,
-			&.caldav {
-				display: none;
-			}
-		}
-
-		.error input.edit {
-			color: $red;
-			border-color: $red !important;
-			box-shadow: 0 0 6px rgba($red, .3);
-		}
-
-		.icon {
-			margin-top: -3px;
-			margin-left: 2px;
-		}
-
-		.calendar-indicator {
-			min-width: 12px;
-			min-height: 12px;
-			background-color: $red;
-			display: inline-block;
-			height: 12px;
-			width: 12px;
-			margin-top: 0;
-			border-radius: 50%;
-			text-align: center;
-			vertical-align: middle;
-			line-height: 20px;
-			margin-left: 4px;
-			margin-right: 2px;
-		}
-
-		.title {
-			margin-left: 11px;
 		}
 	}
 
@@ -131,9 +102,8 @@ $white: #fff;
 			background-color: $gray_easy;
 			width: 36px;
 			border-left: 0 none;
-			border-top-left-radius: 0;
-			border-bottom-left-radius: 0;
 			background-position: center;
+			cursor: pointer;
 
 			&:hover {
 				border-left: 1px solid;
@@ -235,7 +205,7 @@ $white: #fff;
 .app-navigation-entry-menu {
 	li > a {
 		&:not(:empty).confirmation-confirm {
-			padding-right: 0 !important;
+			padding: 0 !important;
 		}
 
 		span.countdown {
@@ -264,7 +234,7 @@ $white: #fff;
 		}
 
 		.countdown {
-			display: none;
+			visibility: hidden;
 		}
 	}
 }
@@ -272,7 +242,7 @@ $white: #fff;
 .confirmation-abort {
 	width: 50% !important;
 	display: none !important;
-	padding-right: 0 !important;
+	padding: 0 !important;
 	background-position: center !important;
 }
 
@@ -321,7 +291,13 @@ $white: #fff;
 	}
 }
 
-#collection_today > a > span.icon,
+#collection_today > a > span.date {
+	position: absolute;
+	font-size: 7px;
+	left: 18px;
+	top: 1.5px;
+}
+
 #app-settings .label-container span.icon {
 	font-size: 7px;
 	font-weight: bold;
@@ -940,7 +916,6 @@ ol[dnd-list] {
 
 				input {
 					background-color: $white;
-					border: 1px solid $blue_background;
 					border-radius: 0;
 					margin-top: 0;
 					color: $gray_dark;
@@ -957,7 +932,6 @@ ol[dnd-list] {
 				}
 
 				input[type="text"] {
-					box-shadow: 0 0 4px rgba($blue_background, .3), 0 1px 1px rgba($white, .4), 0 2px 4px rgba($blue_background, .1) inset, 0 0 4px rgba($blue_background, .2) inset;
 					background: none repeat scroll 0 0 $gray_easy;
 					margin: 0;
 					min-height: 0;
@@ -1154,6 +1128,22 @@ ol[dnd-list] {
 }
 
 /**
+	* timepicker fixes
+	*/
+.ui-timepicker-table td a {
+	display: block;
+	width: 14px;
+}
+
+/**
+	* datepicker fixes
+	*/
+.ui-widget.ui-datepicker .ui-datepicker-calendar td > a {
+	width: 14px;
+	line-height: 14px;
+}
+
+/**
 	* rules for icons
 	*/
 .collection .icon {
@@ -1265,203 +1255,6 @@ ol[dnd-list] {
 }
 
 /**
-	* rules for date- and timepicker
-	*/
-
-.ui-widget-content {
-	background: none repeat scroll 0 0 $gray_easy;
-	border-radius: 4px;
-	color: $gray_dark;
-	max-width: 304px;
-	min-height: 15px;
-	min-width: 150px;
-	z-index: 1000;
-	border: none;
-}
-
-/**
-	* rules for both date- and timepicker
-	*/
-
-.ui-timepicker,
-.ui-datepicker {
-	width: 185px;
-
-	table {
-		width: 100%;
-
-		tr {
-			line-height: 15px;
-
-			&:hover {
-				background: none repeat scroll 0 0 transparent;
-			}
-		}
-
-		td {
-			width: 14%;
-			padding: 0;
-
-			&.selected a,
-			a.ui-state-active {
-				background: linear-gradient(to top, rgba($blue_background, .8), rgba($blue_background, .6)) repeat scroll 0 0 transparent !important;
-				border-radius: 3px;
-				color: $white !important;
-				opacity: 1;
-				position: relative;
-			}
-		}
-
-		thead th {
-			color: $gray;
-			font-size: 9px;
-			height: auto;
-			padding: 4px 0;
-			text-align: center;
-			text-transform: uppercase;
-		}
-
-		a.ui-state-default {
-			border: none;
-			background: none repeat scroll 0 0 transparent;
-			color: $gray_dark;
-			border-radius: 3px;
-			cursor: pointer;
-			display: block;
-			font-size: 12px;
-			font-weight: 500;
-			padding: 2px 0;
-			margin: 1px;
-			text-align: center;
-
-			&:hover {
-				border: none;
-				background: none repeat scroll 0 0 $gray_light;
-			}
-		}
-	}
-
-	.ui-widget-header {
-		background: none repeat scroll 0 0 transparent;
-		border: none;
-		color: $gray_dark;
-		font-weight: 600;
-		font-size: 12px;
-	}
-}
-
-div {
-	&.ui-datepicker,
-	&.ui-timepicker {
-		background: none repeat scroll 0 0 $gray_easy;
-		border-radius: 4px;
-		box-shadow: 0 1px 6px $gray_dark;
-		color: $gray_dark;
-		max-width: 304px;
-		min-height: 15px;
-		min-width: 150px;
-		position: absolute;
-		z-index: 1000;
-		margin-top: 9px;
-		padding: 8px;
-
-		.arrow {
-			border-color: transparent transparent $gray_easy;
-			left: 50%;
-			margin-left: -12px;
-			top: -24px;
-			border-style: solid;
-			border-width: 12px;
-			height: 0;
-			position: absolute;
-			width: 0;
-			z-index: 100;
-		}
-
-		&::after {
-			border-bottom: 9px solid $gray_easy;
-			border-left: 9px solid rgba(0, 0, 0, 0);
-			border-right: 9px solid rgba(0, 0, 0, 0);
-			content: "";
-			display: inline-block;
-			left: 46%;
-			position: absolute;
-			top: -9px;
-		}
-
-		&::before {
-			border-bottom: 9px solid $gray_light;
-			border-left: 9px solid rgba(0, 0, 0, 0);
-			border-right: 9px solid rgba(0, 0, 0, 0);
-			content: "";
-			display: inline-block;
-			left: 46%;
-			position: absolute;
-			top: -9px;
-		}
-	}
-}
-
-/**
-	* rules for timepicker
-	*/
-
-.ui-timepicker {
-	.ui-timepicker-title {
-		text-align: center;
-	}
-}
-
-td.ui-timepicker-hours table {
-	border-right: 1px solid $gray_light;
-}
-
-/**
-	* rules for datepicker
-	*/
-
-.ui-datepicker {
-	table {
-		td {
-			&.ui-datepicker-today a {
-				color: $blue_background;
-			}
-		}
-	}
-
-	.ui-datepicker-next,
-	.ui-datepicker-next-hover {
-		right: 2px;
-		top: 2px;
-		background: none;
-		border: none;
-	}
-
-	.ui-datepicker-prev,
-	.ui-datepicker-prev-hover {
-		left: 2px;
-		top: 2px;
-		background: none;
-		border: none;
-	}
-
-	.ui-icon {
-		@extend .icon;
-
-		height: 16px;
-		width: 16px;
-	}
-
-	.ui-icon-circle-triangle-w {
-		@extend .icon-sort-up;
-	}
-
-	.ui-icon-circle-triangle-e {
-		@extend .icon-sort-down;
-	}
-}
-
-/**
 	* rules for sortorder-dropdown
 	*/
 
@@ -1520,6 +1313,7 @@ td.ui-timepicker-hours table {
 
 			&[class*=" icon-"] {
 				padding: 0;
+				background-size: auto;
 
 				&.icon-menu {
 					@extend .icon-menu;

@@ -14,17 +14,15 @@
     <div id="app-navigation" ng-controller="ListController">
         <ul id="collections">
             <li id="collection_{{ collection.id }}"
-                class="collection reactive"
+                class="collection {{ collection.icon }} reactive"
                 collectionID="{{collection.id}}"
                 ng-repeat="collection in collections"
                 ng-class="{'animate-up': hideCollection(collection.id), active: collection.id==route.collectionID}"
                 dnd-list="draggedTasks"
                 dnd-drop="dropCollection(event, index, item)"
                 dnd-dragover="dragoverCollection(event, index)">
-                <a href="#/collections/{{ collection.id }}">
-                    <span class="icon {{ collection.icon }}">
-                        <text ng-if="collection.id=='today'"><?php p($_['DOM']); ?></text>
-                    </span>
+                <a href="#/collections/{{ collection.id }}" class="sprite">
+                    <span class="date" ng-if="collection.id=='today'"><?php p($_['DOM']); ?></span>
                     <span class="title">{{ collection.displayname }}</span>
                 </a>
                 <div class="app-navigation-entry-utils">
@@ -34,7 +32,7 @@
                 </div>
             </li>
             <li id="list_{{ calendar.uri }}"
-                class="list with-menu handler"
+                class="list with-menu handler editing"
                 calendarID="{{calendar.uri}}"
                 ng-repeat="calendar in calendars"
                 ng-class="{ active: calendar.uri==route.calendarID, edit:route.listparameter == 'name' && route.calendarID == calendar.uri,
@@ -42,8 +40,8 @@
                 dnd-list="draggedTasks"
                 dnd-drop="dropList(event, index, item)"
                 dnd-dragover="dragoverList(event, index)">
+                <div class="app-navigation-entry-bullet" style="background-color: {{ calendar.color }};"></div>
                 <a href="#/calendars/{{ calendar.uri }}" ng-dblclick="startRename(calendar)">
-                    <span class="calendar-indicator" style="background-color: {{ calendar.color }};"></span>
                     <span class="title">{{ calendar.displayname }}</span>
                 </a>
                 <div class="app-navigation-entry-utils">
@@ -112,11 +110,10 @@
                     </form>
                 </div>
             </li>
-            <li class="newList handler reactive" ng-class="{edit: status.addingList}">
-                <a class="addlist"
+            <li class="newList handler icon-add reactive editing" ng-class="{edit: status.addingList}">
+                <a class="addlist icon sprite"
                     ng-click="startCreate()"
                     oc-click-focus="{selector: '#newList', timeout: 0}">
-                    <span class="icon icon-add"></span>
                     <span class="title"><?php p($l->t('Add List...')); ?></span>
                 </a>
                 <div class="app-navigation-entry-edit name" ng-class="{error: nameError}">
