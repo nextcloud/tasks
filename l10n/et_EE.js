@@ -91,7 +91,7 @@ OC.L10N.register(
     "Link" : "Link",
     "Download" : "Lae alla",
     "Save" : "Salvesta",
-    "Add List..." : "Lisa nimekirja...",
+    "Add List..." : "Lisa nimekiri...",
     "New List" : "Uus nimekiri",
     "Settings" : "Seaded",
     "Start of week" : "Nädala algus",
