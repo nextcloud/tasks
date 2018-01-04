@@ -104,11 +104,14 @@ OC.L10N.register(
     "Alphabetically" : "가나다순",
     "Manually" : "수동으로",
     "Load remaining completed tasks." : "남아 있는 완료된 작업을 불러옵니다.",
+    "Task is completed" : "작업이 완료됨",
     "All day" : "하루 종일",
     "(New category)" : "(새 분류)",
     "Select categories..." : "분류 선택...",
     "Loading the task..." : "작업 불러오는 중...",
     "Task not found!" : "작업을 찾을 수 없습니다!",
-    "add a subtask to" : "다음에 하위 작업 추가"
+    "add a subtask to" : "다음에 하위 작업 추가",
+    "Toggle subtasks" : "하위 작업 전환",
+    "Toggle completed subtasks" : "완료된 하위 작업 전환"
 },
 "nplurals=1; plural=0;");
