@@ -112,6 +112,18 @@ dist:
 	make source
 	make appstore
 
+# Run make and make dist in a Docker container
+.PHONY: docker-dist
+docker-dist:
+	docker run --rm -it -v $(CURDIR):/tasks -w /tasks node make docker-target
+
+# Command used inside Docker container; do not invoke directly
+.PHONY: docker-target
+docker-target:
+	which rsync zip openssl || (apt-get update && apt-get install -y rsync zip openssl)
+	make
+	make dist
+
 # Builds the source package
 .PHONY: source
 source:
