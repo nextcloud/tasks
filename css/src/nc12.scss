@@ -1,0 +1,74 @@
+#app-navigation {
+	& > ul {
+		display: flex;
+		flex-direction: column;
+
+		& > li {
+			display: inline-flex;
+			flex-wrap: wrap;
+			order: 1;
+			flex-shrink: 0;
+
+			& > a,
+			& > ul > li > a {
+				flex: 1 1 0;
+				z-index: 100;
+			}
+
+			& .app-navigation-entry-bullet,
+			& > ul > li > .app-navigation-entry-bullet {
+				position: absolute;
+				display: block;
+				margin: 16px;
+				width: 12px;
+				height: 12px;
+				border: none;
+				border-radius: 50%;
+				cursor: pointer;
+			}
+
+			& .app-navigation-entry-menu,
+			& > ul > li > .app-navigation-entry-menu {
+				top: 44px;
+			}
+
+			& > a,
+			& > .app-navigation-entry-deleted {
+				padding-left: 44px !important;
+			}
+		}
+	}
+
+	& .app-navigation-entry-utils {
+		flex: 0 1 auto;
+		position: unset;
+	}
+
+	& .active.with-menu > a,
+	& .with-counter > a {
+		padding-right: 12px;
+	}
+
+	li .app-navigation-entry-menu > ul > li > a {
+		line-height: 36px;
+		height: 36px;
+		min-height: 36px;
+		display: flex;
+	}
+
+	.app-navigation-entry-edit {
+		height: auto;
+
+		form {
+			display: inline-flex;
+			width: 100%;
+		}
+	}
+}
+
+.bubble,
+.app-navigation-entry-menu,
+.popovermenu {
+	box-shadow: unset;
+	filter: drop-shadow(0 1px 3px rgba(179, 179, 179, .75));
+}
