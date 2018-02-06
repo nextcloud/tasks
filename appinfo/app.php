@@ -36,4 +36,3 @@ namespace OCA\Tasks\AppInfo;
 		'name' => \OC::$server->getL10N('tasks')->t('Tasks'),
 	];
 });
-\OC::$server->getSearch()->registerProvider('OCA\Tasks\Controller\SearchProvider', array('apps' => array('tasks')));
