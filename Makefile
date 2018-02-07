@@ -163,6 +163,7 @@ appstore:
 	--exclude=/js/bower.json \
 	--exclude=/js/gulpfile.js \
 	--exclude=/js/package.json \
+	--exclude=/js/package-lock.json \
 	--exclude=/js/README.mkdir \
 	--exclude=/js/yarn.lock \
 	--exclude=/js/app \
