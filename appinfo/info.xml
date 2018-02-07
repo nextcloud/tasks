@@ -12,7 +12,7 @@
     <screenshot>https://raw.githubusercontent.com/nextcloud/tasks/master/screenshots/tasks-1.png</screenshot>
     <namespace>Tasks</namespace>
     <category>office</category>
-    <category>productivity</category>
+    <category>organization</category>
     <documentation>
       <admin>https://github.com/nextcloud/tasks#installation</admin>
       <developer>https://github.com/nextcloud/tasks#developer-setup-info</developer>
