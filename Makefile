@@ -144,6 +144,7 @@ appstore:
 	--exclude=/.gitignore \
 	--exclude=/.scrutinizer.yml \
 	--exclude=/.travis.yml \
+	--exclude=/.tx \
 	--exclude=/build.xml \
 	--exclude=/CONTRIBUTING.md \
 	--exclude=/tasks.sublime-project \
