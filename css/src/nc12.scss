@@ -1,3 +1,5 @@
+$color-border: nc-darken($color-main-background, 8%);
+
 #app-navigation {
 	& > ul {
 		display: flex;
