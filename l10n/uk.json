@@ -76,6 +76,8 @@
     "at the end" : "в кінці",
     "at the beginning" : "на початку",
     "Set start date" : "Встановити дату початку",
+    "{calendar} shared by {owner}" : "{calendar} надається {owner}",
+    "Unnamed" : "Без назви",
     "Important" : "Важливий",
     "Week" : "Тиждень",
     "All" : "Всі",
@@ -92,12 +94,22 @@
     "Settings" : "Налаштування",
     "Start of week" : "Початок тижня",
     "Visibility of Smart Collections" : "Видимість Smart-колекції",
+    "Change sort order" : "Зміна порядку сортування",
     "Default" : "За замовчуванням",
+    "Due date" : "Термін виконання",
+    "Start date" : "Дата початку",
+    "Priority" : "Перевага",
+    "Alphabetically" : "За алфавітом",
+    "Manually" : "Вручну",
     "Load remaining completed tasks." : "Завантажити решту виконаних завдань.",
+    "Task is completed" : "Завдання виконано",
+    "All day" : "Всі дні",
     "(New category)" : "(Нова категория)",
     "Select categories..." : "Обрати категорії...",
     "Loading the task..." : "Завантаження завдання ...",
     "Task not found!" : "Завдання не знайдене!",
-    "add a subtask to" : "додати підзавдання до"
+    "add a subtask to" : "додати підзавдання до",
+    "Toggle subtasks" : "Перемкнути підзавдання",
+    "Toggle completed subtasks" : "Перемкнути завершені підзавдання"
 },"pluralForm" :"nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);"
 }
