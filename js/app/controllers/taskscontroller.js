@@ -229,21 +229,29 @@
                 ret = [];
 
                 var description = parent.note;
-                if(description){
+                if(description && description.startsWith("<tag>") && description.endsWith("</tag>")){
                     ret.push("_____________________");
-                    ret.push(description);
-				}
 
-                if(description.startsWith('<tags>') && description.startsWith('</tags>') ){
-                    description=description.split("[");
+                    description=description.substring(5, description.length);
+                    description=description.substring(0, description.length-6);
 
-                    for (_i = 0, _len = description.length; _i < _len; _i++) {
-                        task = description[_i];
-                        ret.push(task);
+                    var n = description.split("\n");
+                    for(var x in n){
+                    	var currentElement=n[x];
+                    	if(currentElement){
+                    		if(currentElement.startsWith("[x]")){
+                                ret.push("alive: "+currentElement.substring(3,currentElement.length));
+							}
+                            if(currentElement.startsWith("[ ]")){
+                                ret.push("dead: "+currentElement.substring(3,currentElement.length));
+                            }
+                            if(currentElement.startsWith("[]")){
+                                ret.push("dead: "+currentElement.substring(2,currentElement.length));
+                            }
 
+						}
                     }
 				}
-
 
 
                 return ret;
