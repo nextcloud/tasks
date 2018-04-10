@@ -223,7 +223,14 @@
 				};
 			};
 
+			this._$scope.checkListTaskClicked = function(task) {
 
+                window.alert("Checklistelem: "+task[0]+"\nactive: " +task[1]+"\npuid: " +task[2]);
+
+			};
+            this._$scope.changeValueInURI = function(name,state,uri) {
+                window.alert("Checklistelem: "+name+"\nactive: " +state+"\npuid: " +uri);
+			};
             this._$scope.getCheckListTasks = function(tasks, parent) {
                 var ret, task, _i, _len;
                 ret = [];
@@ -238,17 +245,22 @@
                     var n = description.split("\n");
                     for(var x in n){
                     	var currentElement=n[x];
+                        var elem = [];
                     	if(currentElement){
                     		if(currentElement.startsWith("[x]")){
-                                ret.push("alive: "+currentElement.substring(3,currentElement.length));
+                                currentElement=currentElement.substring(3,currentElement.length);
+                                elem[0]=currentElement;
+                                elem[1]=true;
+                                elem[2]=parent.uid;
+                                ret.push(elem);
 							}
-                            if(currentElement.startsWith("[ ]")){
-                                ret.push("dead: "+currentElement.substring(3,currentElement.length));
+                            if(currentElement.startsWith("[ ]") || currentElement.startsWith("[]")){
+                                currentElement=currentElement.substring(3,currentElement.length);
+                                elem[0]=currentElement;
+                                elem[1]=false;
+                                elem[2]=parent.uid;
+                                ret.push(elem);
                             }
-                            if(currentElement.startsWith("[]")){
-                                ret.push("dead: "+currentElement.substring(2,currentElement.length));
-                            }
-
 						}
                     }
 				}

@@ -91,12 +91,11 @@
 <div class="checklist-container"
      ng-class="{subtaskshidden: hideSubtasks(task)}">
     <ol dnd-list="draggedTasks"
-        calendarID="{{123456}}"
         dnd-drop="dropAsSubtask(event, item, index)"
         dnd-dragover="dragover(event, index)">
         <li class="task-item ui-draggable handler add-subtask"
             ng-show="status.addSubtaskTo == task.uid">
-            <form ng-submit="addTask(status.subtaskName,task.uid,task.calendar,task)" name="addTaskForm">
+        <form ng-submit="addTask(status.subtaskName,task.uid,task.calendar,task)" name="addTaskForm">
                 <input class="transparent"
                        placeholder="{{ task }}"
                        ng-disabled="isAddingTask"
@@ -106,17 +105,16 @@
             </form>
         </li>
 
-        <li taskID="{{ task }}"
+        <li taskID="{{ task[0] }}"
             class="task-item ui-draggable handler subtask"
-
             ng-repeat="task in getCheckListTasks(filtered,task) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"
-            ng-click=""
+            ng-click="checkListTaskClicked( task );"
             ng-class="{done: false}"
             dnd-draggable="task"
             dnd-dragstart="dragStart(event)"
             dnd-dragend="dragEnd(event)"
             dnd-effect-allowed="{{ allow(task) }}">
-            <label for="enableOpenTaskParsing">{{ task }}</label>
+            <label for="enableOpenTaskParsing">{{ task[0] }}</label>
         </li>
     </ol>
 </div>
