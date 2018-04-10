@@ -227,9 +227,9 @@
             this._$scope.getCheckListTasks = function(tasks, parent) {
                 var ret= [];
 
-                var test = parent.summary.toString()
+                var test = parent.summary.toString();
                 ret.push(test);
-                ret.push("abc2");
+                //ret.push("abc2");
 
 
                 return ret;

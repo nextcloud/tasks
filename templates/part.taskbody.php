@@ -55,6 +55,8 @@
         </span>
     </div>
 </div>
+
+
 <div class="subtasks-container"
     ng-class="{subtaskshidden: hideSubtasks(task)}">
     <ol dnd-list="draggedTasks"
@@ -103,6 +105,7 @@
                        ng-keydown="checkTaskInput($event)"/>
             </form>
         </li>
+
         <li taskID="{{ task }}"
             class="task-item ui-draggable handler subtask"
 
@@ -113,6 +116,7 @@
             dnd-dragstart="dragStart(event)"
             dnd-dragend="dragEnd(event)"
             dnd-effect-allowed="{{ allow(task) }}">
+            <label for="enableOpenTaskParsing">{{ task }}</label>
         </li>
     </ol>
 </div>
