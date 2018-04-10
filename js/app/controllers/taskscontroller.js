@@ -225,11 +225,25 @@
 
 
             this._$scope.getCheckListTasks = function(tasks, parent) {
-                var ret= [];
+                var ret, task, _i, _len;
+                ret = [];
 
-                var test = parent.summary.toString();
-                ret.push(test);
-                //ret.push("abc2");
+                var description = parent.note;
+                if(description){
+                    ret.push("_____________________");
+                    ret.push(description);
+				}
+
+                if(description.startsWith('<tags>') && description.startsWith('</tags>') ){
+                    description=description.split("[");
+
+                    for (_i = 0, _len = description.length; _i < _len; _i++) {
+                        task = description[_i];
+                        ret.push(task);
+
+                    }
+				}
+
 
 
                 return ret;
