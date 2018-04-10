@@ -500,6 +500,18 @@ ol[dnd-list] {
 			margin-top: -1px;
 		}
 	}
+
+	.checklist-container {
+		margin-left: 35px;
+
+		&.subtaskshidden li.subtask {
+			display: none;
+		}
+
+		.task-item {
+			margin-top: -1px;
+		}
+	}
 }
 
 .task-body {

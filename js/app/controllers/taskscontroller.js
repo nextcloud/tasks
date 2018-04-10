@@ -223,15 +223,30 @@
 				};
 			};
 
+
+            this._$scope.getCheckListTasks = function(tasks, parent) {
+                var ret= [];
+
+                var test = parent.summary.toString()
+                ret.push(test);
+                ret.push("abc2");
+
+
+                return ret;
+            };
+
+
 			this._$scope.getSubTasks = function(tasks, parent) {
 				var ret, task, _i, _len;
 				ret = [];
+
 				for (_i = 0, _len = tasks.length; _i < _len; _i++) {
 					task = tasks[_i];
 					if (task.related === parent.uid && task !== parent && !(parent.hideCompletedSubtasks && task.completed)) {
 						ret.push(task);
 					}
 				}
+
 				return ret;
 			};
 

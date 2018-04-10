@@ -74,10 +74,41 @@
         </li>
         <li taskID="{{ task.uri }}"
             class="task-item ui-draggable handler subtask"
+
             ng-repeat="task in getSubTasks(filtered,task) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"
             ng-click="openDetails(task.uri,$event)"
             ng-class="{done: task.completed}"
             ng-include="'part.taskbody'"
+            dnd-draggable="task"
+            dnd-dragstart="dragStart(event)"
+            dnd-dragend="dragEnd(event)"
+            dnd-effect-allowed="{{ allow(task) }}">
+        </li>
+    </ol>
+</div>
+<div class="checklist-container"
+     ng-class="{subtaskshidden: hideSubtasks(task)}">
+    <ol dnd-list="draggedTasks"
+        calendarID="{{123456}}"
+        dnd-drop="dropAsSubtask(event, item, index)"
+        dnd-dragover="dragover(event, index)">
+        <li class="task-item ui-draggable handler add-subtask"
+            ng-show="status.addSubtaskTo == task.uid">
+            <form ng-submit="addTask(status.subtaskName,task.uid,task.calendar,task)" name="addTaskForm">
+                <input class="transparent"
+                       placeholder="{{ task }}"
+                       ng-disabled="isAddingTask"
+                       ng-click="focusInput()"
+                       ng-model="status.subtaskName"
+                       ng-keydown="checkTaskInput($event)"/>
+            </form>
+        </li>
+        <li taskID="{{ task }}"
+            class="task-item ui-draggable handler subtask"
+
+            ng-repeat="task in getCheckListTasks(filtered,task) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"
+            ng-click=""
+            ng-class="{done: false}"
             dnd-draggable="task"
             dnd-dragstart="dragStart(event)"
             dnd-dragend="dragEnd(event)"
