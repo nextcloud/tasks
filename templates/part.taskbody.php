@@ -88,6 +88,8 @@
         </li>
     </ol>
 </div>
+
+
 <div class="checklist-container"
      ng-class="{subtaskshidden: hideSubtasks(task)}">
     <ol dnd-list="draggedTasks"
@@ -108,13 +110,40 @@
         <li taskID="{{ task[0] }}"
             class="task-item ui-draggable handler subtask"
             ng-repeat="task in getCheckListTasks(filtered,task) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"
-            ng-click="checkListTaskClicked( task );"
+            ng-click=""
             ng-class="{done: false}"
             dnd-draggable="task"
             dnd-dragstart="dragStart(event)"
             dnd-dragend="dragEnd(event)"
             dnd-effect-allowed="{{ allow(task) }}">
-            <label for="enableOpenTaskParsing">{{ task[0] }}</label>
+
+            <div class="task-body"
+                 taskID="{{ task[0] }}"
+
+                <label for="task-body"><?php p($l->t('Checklisttask')); ?>: {{ task[0] }} </label>
+                <a class="task-checkbox handler"
+                    name="toggleCompleted"
+                    ng-click="checkListTaskClicked( task )"
+                    role="checkbox"
+                    aria-checked="{{task[1]}}"
+                    aria-label="<?php p($l->t('Task is completed')); ?>">
+                    <span class="icon task-checkbox reactive" ng-class="{'icon-checkmark': task[1]}"></span>
+                </a>
+                <a class="icon task-separator"></a>
+                <a>
+                    <span class="icon icon-note right large"></span>
+                </a>
+                <a class="duedate" ng-class="{overdue: TasksModel.overdue(task.due)}">{{ task.due | dateTaskList }}</a>
+                <a ng-show="route.collectionID=='week'" class="listname" >{{ task.calendar.displayname }}</a>
+                <div class="title-wrapper">
+                    <span class="title" ng-bind-html="task.summary | linky:'_blank':{rel: 'nofollow'}"></span>
+                    <span class="categories-list">
+                        <ul>
+                            <li ng-repeat="category in task.categories"><span>{{ category }}</span></li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         </li>
     </ol>
 </div>

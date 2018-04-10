@@ -230,6 +230,20 @@
 			};
             this._$scope.changeValueInURI = function(name,state,uri) {
                 window.alert("Checklistelem: "+name+"\nactive: " +state+"\npuid: " +uri);
+
+
+
+                var task = _$tasksmodel.getById(uri);
+                if (task.calendar.writable) {
+                    if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
+                        if (!$($event.target).is('a')) {
+                            _$scope.setEditRoute('note');
+                        }
+                    }
+                }
+
+
+
 			};
             this._$scope.getCheckListTasks = function(tasks, parent) {
                 var ret, task, _i, _len;
@@ -237,7 +251,6 @@
 
                 var description = parent.note;
                 if(description && description.startsWith("<tag>") && description.endsWith("</tag>")){
-                    ret.push("_____________________");
 
                     description=description.substring(5, description.length);
                     description=description.substring(0, description.length-6);

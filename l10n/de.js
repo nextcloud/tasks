@@ -115,6 +115,7 @@ OC.L10N.register(
     "add a subtask to" : "Füge eine Teilaufgabe hinzu",
     "Toggle subtasks" : "Unteraufgaben umschalten",
     "Toggle completed subtasks" : "Fertige Unteraufgaben umschalten",
-        "OpenTaskParsing":"OpenTask Parsing"
+        "OpenTaskParsing":"OpenTask Parsing",
+        "Checklisttask":"Aufgabe"
 },
 "nplurals=2; plural=(n != 1);");
