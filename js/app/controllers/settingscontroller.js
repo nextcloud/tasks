@@ -90,6 +90,10 @@ angular.module('Tasks').controller('SettingsController', [
 				this._$scope.setStartOfWeek = function() {
 					return _$settingsbusinesslayer.set('various', 'startOfWeek', _$settingsmodel.getById('various').startOfWeek);
 				};
+
+                this._$scope.setOpenTaskParsing = function() {
+                    return _$settingsbusinesslayer.set('various', 'openTaskParsing', _$settingsmodel.getById('various').parsingOptions);
+                };
 			}
 
 			return SettingsController;

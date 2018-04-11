@@ -226,15 +226,28 @@
 
 			this._$scope.checkListTaskClicked = function(task) {
 
-                window.alert("Checklistelem: "+task[0]+"\nactive: " +task[1]+"\npuid: " +task[2]);
+                window.alert("Checklistelem: "+task);
 
 			};
-            this._$scope.changeValueInURI = function(name,state,uri) {
-                window.alert("Checklistelem: "+name+"\nactive: " +state+"\npuid: " +uri);
+            this._$scope.changeValueInURI = function(name,state,uri, calendar, parenttask,ev) {
+                //window.alert("Checklistelem: "+name+"\nactive: " +state+"\npuid: " +uri+"\ncaluri: " +calendar.uri);
+                var oldDescription = parenttask.note;
+                var newDescription = "";
 
 
+                if(!state){
+                    newDescription = oldDescription.replace("[ ]"+name, "[x]"+name);
+                }else{
+                    newDescription = oldDescription.replace("[x]"+name, "[ ]"+name);
+                }
 
+                //window.alert("old notes: "+oldDescription);
+                //window.alert("new notes: "+newDescription);
+
+                parenttask.note=newDescription;
+                this._tasksbusinesslayer.editNote(ev, parenttask);
 			};
+
             this._$scope.getCheckListTasks = function(tasks, parent) {
                 var ret;
                 ret = [];
@@ -255,6 +268,8 @@
                                 elem[0]=currentElement;
                                 elem[1]=true;
                                 elem[2]=parent.uid;
+                                elem[3]=parent.calendar;
+                                elem[4]=parent;
                                 ret.push(elem);
 							}
                             if(currentElement.startsWith("[ ]") || currentElement.startsWith("[]")){
@@ -262,6 +277,8 @@
                                 elem[0]=currentElement;
                                 elem[1]=false;
                                 elem[2]=parent.uid;
+                                elem[3]=parent.calendar;
+                                elem[4]=parent;
                                 ret.push(elem);
                             }
 						}
@@ -294,6 +311,10 @@
                     return false;
 				}
             };
+
+            this._$scope.addCheckListTask = function(parentuid) {
+                window.alert("addCheckListTask: "+parentuid);
+			};
 
 
 			this._$scope.getSubTasks = function(tasks, parent) {

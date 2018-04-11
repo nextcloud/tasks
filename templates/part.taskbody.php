@@ -35,6 +35,12 @@
             title="<?php p($l->t('Toggle subtasks')); ?>">
         </span>
     </a>
+    <a class="handler" ng-click="toggleChecklist(task)">
+        <span class="icon right large subtasks reactive"
+              ng-class="task.hideSubtasks ? 'icon-subtasks-hidden' : 'icon-subtasks-visible'"
+              title="<?php p($l->t('Toggle subtasks')); ?>">
+        </span>
+    </a>
     <a class="handler" ng-click="toggleCompletedSubtasks(task)">
         <span class="icon icon-toggle right large toggle-completed-subtasks reactive"
             ng-class="{'active': !task.hideCompletedSubtasks}"
@@ -97,7 +103,14 @@
          ng-show="getCheckListTaskCount(task)">
 
     <div class="task-body-checklist">
-        <label class="task-body-checklist.title-wrapper">Checklistelements:</label>
+        <label class="title" sytle=" pointer-events: none;" >Checklistelements:</label>
+        <a class="task-addsubtask handler add-subtask"
+           ng-show="task.calendar.writable"
+           ng-click="addCheckListTask(task.uid)"
+           oc-click-focus="{selector: '.add-subtask input', timeout: 0}">
+            <span class="icon icon-add right large reactive" title="<?php p($l->t('add a subtask to')); ?> {{ task.summary }}"></span>
+        </a>
+
     </div>
 
     <ol dnd-list="draggedTasks">
@@ -106,11 +119,11 @@
 
         </li>
 
-        <li taskID="{{ task[0] }}"
+        <li taskID="{{ task[2] }}"
             class="task-item subtask"
             ng-repeat="task in getCheckListTasks(filtered,task) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"
             ng-class="{done: task[1]}"
-            ng-click="checkListTaskClicked( task )"
+            ng-click="changeValueInURI( task[0],task[1],task[2],task[3], task[4], $event )"
             dnd-draggable=false
             dnd-effect-allowed=false>
 
@@ -118,10 +131,9 @@
                  taskID="{{ task[0] }}"
                 >
 
-
                 <a class="task-checkbox handler"
                     name="toggleCompleted"
-                    ng-click="checkListTaskClicked( task )"
+                    ng-click="changeValueInURI( task[0],task[1],task[2],task[3], task[4],$event)"
                     role="checkbox"
                     aria-checked="{{task[1]}}"
                     aria-label="<?php p($l->t('Task is completed')); ?>">

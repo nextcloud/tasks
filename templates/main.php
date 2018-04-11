@@ -159,7 +159,7 @@
                     <li>
                         <label for="enableOpenTaskParsing"><?php p($l->t('OpenTaskParsing')); ?></label>
                         <select id="enableOpenTaskParsing"
-                                ng-change="openTaskParsing()"
+                                ng-change="setOpenTaskParsing()"
                                 ng-model="settingsmodel.getById('various').parsingOptions"
                                 ng-options="parsingOption.id as parsingOption.name for parsingOption in parsingOptions">
                         </select>

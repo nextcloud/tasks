@@ -659,11 +659,6 @@ ol[dnd-list] {
 	border-color: $gray_light;
 	overflow: hidden;
 
-	&:hover,
-	&.active {
-		background-color: $gray_easy;
-	}
-
 	&.attachment .icon.icon-note {
 		display: inline-block;
 		float: right;
