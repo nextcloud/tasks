@@ -224,13 +224,9 @@
 				};
 			};
 
-			this._$scope.checkListTaskClicked = function(task) {
 
-                window.alert("Checklistelem: "+task);
+            this._$scope.changeValueInURI = function(name,state,uri, calendar, parenttask) {
 
-			};
-            this._$scope.changeValueInURI = function(name,state,uri, calendar, parenttask,ev) {
-                //window.alert("Checklistelem: "+name+"\nactive: " +state+"\npuid: " +uri+"\ncaluri: " +calendar.uri);
                 var oldDescription = parenttask.note;
                 var newDescription = "";
 
@@ -241,11 +237,8 @@
                     newDescription = oldDescription.replace("[x]"+name, "[ ]"+name);
                 }
 
-                //window.alert("old notes: "+oldDescription);
-                //window.alert("new notes: "+newDescription);
-
                 parenttask.note=newDescription;
-                this._tasksbusinesslayer.editNote(ev, parenttask);
+                _tasksbusinesslayer.doUpdate(parenttask);
 			};
 
             this._$scope.getCheckListTasks = function(tasks, parent) {

@@ -123,7 +123,7 @@
             class="task-item subtask"
             ng-repeat="task in getCheckListTasks(filtered,task) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"
             ng-class="{done: task[1]}"
-            ng-click="changeValueInURI( task[0],task[1],task[2],task[3], task[4], $event )"
+            ng-click="changeValueInURI( task[0],task[1],task[2],task[3], task[4])"
             dnd-draggable=false
             dnd-effect-allowed=false>
 
@@ -133,7 +133,7 @@
 
                 <a class="task-checkbox handler"
                     name="toggleCompleted"
-                    ng-click="changeValueInURI( task[0],task[1],task[2],task[3], task[4],$event)"
+                    ng-click="changeValueInURI( task[0],task[1],task[2],task[3], task[4])"
                     role="checkbox"
                     aria-checked="{{task[1]}}"
                     aria-label="<?php p($l->t('Task is completed')); ?>">
