@@ -112,6 +112,9 @@
     "Task not found!" : "Task not found!",
     "add a subtask to" : "add a subtask to",
     "Toggle subtasks" : "Toggle subtasks",
-    "Toggle completed subtasks" : "Toggle completed subtasks"
+    "Toggle completed subtasks" : "Toggle completed subtasks",
+  "OpenTaskParsing":"OpenTask Parsing",
+  "Checklisttask":"Checklist",
+  "checklisttitle":"Checklist"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

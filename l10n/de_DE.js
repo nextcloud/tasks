@@ -113,6 +113,9 @@ OC.L10N.register(
     "Task not found!" : "Aufgabe nicht gefunden!",
     "add a subtask to" : "Fügen Sie eine Teilaufgabe hinzu",
     "Toggle subtasks" : "Unteraufgaben umschalten",
-    "Toggle completed subtasks" : "Fertige Unteraufgaben umschalten"
+    "Toggle completed subtasks" : "Fertige Unteraufgaben umschalten",
+        "OpenTaskParsing":"OpenTask Parsing",
+        "Checklisttask":"Checklist",
+        "checklisttitle":"Checklist"
 },
 "nplurals=2; plural=(n != 1);");

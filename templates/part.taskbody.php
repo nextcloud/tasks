@@ -100,10 +100,18 @@
      style="
      border-bottom-style:solid;
 	 border-width: 1px;"
-         ng-show="getCheckListTaskCount(task)">
+         ng-show="getCheckListTaskCount(checklisttasks)">
 
     <div class="task-body-checklist">
-        <label class="title" sytle=" pointer-events: none;" >Checklistelements:</label>
+
+
+        <div class="title-wrapper">
+            <span class="title"><?php p($l->t('checklisttitle')); ?></span>
+        </div>
+
+
+
+
         <a class="task-addsubtask handler add-subtask"
            ng-show="task.calendar.writable"
            ng-click="addCheckListTask(task.uid)"
@@ -114,16 +122,16 @@
     </div>
 
     <ol dnd-list="draggedTasks">
-        <li class="task-item ui-draggable handler add-subtask"
+        <li class="task-item handler add-subtask"
             ng-show="status.addSubtaskTo == task.uid">
 
         </li>
 
-        <li taskID="{{ task[2] }}"
+        <li taskID="{{ checklisttasks[2] }}"
             class="task-item subtask"
-            ng-repeat="task in getCheckListTasks(filtered,task) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"
-            ng-class="{done: task[1]}"
-            ng-click="changeValueInURI( task[0],task[1],task[2],task[3], task[4])"
+            ng-repeat="checklisttasks in getCheckListTasks(filtered,task) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"
+            ng-class="{done: checklisttasks[1]}"
+            ng-click="changeValueInURI( checklisttasks[0],checklisttasks[1],checklisttasks[2],checklisttasks[3], checklisttasks[4])"
             dnd-draggable=false
             dnd-effect-allowed=false>
 
@@ -133,18 +141,18 @@
 
                 <a class="task-checkbox handler"
                     name="toggleCompleted"
-                    ng-click="changeValueInURI( task[0],task[1],task[2],task[3], task[4])"
+                    ng-click="changeValueInURI( checklisttasks[0],checklisttasks[1],checklisttasks[2],checklisttasks[3], checklisttasks[4])"
                     role="checkbox"
-                    aria-checked="{{task[1]}}"
+                    aria-checked="{{checklisttasks[1]}}"
                     aria-label="<?php p($l->t('Task is completed')); ?>">
-                    <span class="icon task-checkbox reactive" ng-class="{'icon-checkmark': task[1]}"></span>
+                    <span class="icon task-checkbox reactive" ng-class="{'icon-checkmark': checklisttasks[1]}"></span>
                 </a>
                 <a class="icon task-separator"></a>
                 <a>
                     <span class="icon icon-note right large"></span>
                 </a>
                 <div class="title-wrapper">
-                    <span class="title" ng-bind-html=" task[0] | linky:'_blank':{rel: 'nofollow'}"></span>
+                    <span class="title" ng-bind-html=" checklisttasks[0] | linky:'_blank':{rel: 'nofollow'}"></span>
                 </div>
             </div>
         </li>

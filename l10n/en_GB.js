@@ -115,6 +115,8 @@ OC.L10N.register(
     "add a subtask to" : "add a subtask to",
     "Toggle subtasks" : "Toggle subtasks",
     "Toggle completed subtasks" : "Toggle completed subtasks",
-        "OpenTaskParsing":"OpenTask Parsing"
+        "OpenTaskParsing":"OpenTask Parsing",
+        "Checklisttask":"Checklist",
+        "checklisttitle":"Checklist"
 },
 "nplurals=2; plural=(n != 1);");
