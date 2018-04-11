@@ -179,6 +179,7 @@
 			};
 
 			this._$scope.openDetails = function(id, $event) {
+
 				var calendarID = _$scope.route.calendarID;
 				var collectionID = _$scope.route.collectionID;
 				if ($event === null || $($event.currentTarget).is($($event.target).closest('.handler'))) {
@@ -233,20 +234,9 @@
 
 
 
-                var task = _$tasksmodel.getById(uri);
-                if (task.calendar.writable) {
-                    if ($($event.currentTarget).is($($event.target).closest('.handler'))) {
-                        if (!$($event.target).is('a')) {
-                            _$scope.setEditRoute('note');
-                        }
-                    }
-                }
-
-
-
 			};
             this._$scope.getCheckListTasks = function(tasks, parent) {
-                var ret, task, _i, _len;
+                var ret;
                 ret = [];
 
                 var description = parent.note;
@@ -280,6 +270,29 @@
 
 
                 return ret;
+            };
+
+            this._$scope.getCheckListTaskCount = function(parent) {
+                var ret = 0;
+                var description = parent.note;
+                if(description && description.startsWith("<tag>") && description.endsWith("</tag>")){
+                    description=description.substring(5, description.length);
+                    description=description.substring(0, description.length-6);
+
+                    var n = description.split("\n");
+                    for(var x in n){
+                        if(n[x]){
+                            ret++;
+                        }
+                    }
+                }
+
+
+                if(ret>0){
+                    return true;
+				}else{
+                    return false;
+				}
             };
 
 

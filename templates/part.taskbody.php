@@ -91,36 +91,34 @@
 
 
 <div class="checklist-container"
-     ng-class="{subtaskshidden: hideSubtasks(task)}">
-    <ol dnd-list="draggedTasks"
-        dnd-drop="dropAsSubtask(event, item, index)"
-        dnd-dragover="dragover(event, index)">
+     style="
+     border-bottom-style:solid;
+	 border-width: 1px;"
+         ng-show="getCheckListTaskCount(task)">
+
+    <div class="task-body-checklist">
+        <label class="task-body-checklist.title-wrapper">Checklistelements:</label>
+    </div>
+
+    <ol dnd-list="draggedTasks">
         <li class="task-item ui-draggable handler add-subtask"
             ng-show="status.addSubtaskTo == task.uid">
-        <form ng-submit="addTask(status.subtaskName,task.uid,task.calendar,task)" name="addTaskForm">
-                <input class="transparent"
-                       placeholder="{{ task }}"
-                       ng-disabled="isAddingTask"
-                       ng-click="focusInput()"
-                       ng-model="status.subtaskName"
-                       ng-keydown="checkTaskInput($event)"/>
-            </form>
+
         </li>
 
         <li taskID="{{ task[0] }}"
-            class="task-item ui-draggable handler subtask"
+            class="task-item subtask"
             ng-repeat="task in getCheckListTasks(filtered,task) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"
-            ng-click=""
-            ng-class="{done: false}"
-            dnd-draggable="task"
-            dnd-dragstart="dragStart(event)"
-            dnd-dragend="dragEnd(event)"
-            dnd-effect-allowed="{{ allow(task) }}">
+            ng-class="{done: task[1]}"
+            ng-click="checkListTaskClicked( task )"
+            dnd-draggable=false
+            dnd-effect-allowed=false>
 
-            <div class="task-body"
+            <div class="task-body-checklist"
                  taskID="{{ task[0] }}"
+                >
 
-                <label for="task-body"><?php p($l->t('Checklisttask')); ?>: {{ task[0] }} </label>
+
                 <a class="task-checkbox handler"
                     name="toggleCompleted"
                     ng-click="checkListTaskClicked( task )"
@@ -133,15 +131,8 @@
                 <a>
                     <span class="icon icon-note right large"></span>
                 </a>
-                <a class="duedate" ng-class="{overdue: TasksModel.overdue(task.due)}">{{ task.due | dateTaskList }}</a>
-                <a ng-show="route.collectionID=='week'" class="listname" >{{ task.calendar.displayname }}</a>
                 <div class="title-wrapper">
-                    <span class="title" ng-bind-html="task.summary | linky:'_blank':{rel: 'nofollow'}"></span>
-                    <span class="categories-list">
-                        <ul>
-                            <li ng-repeat="category in task.categories"><span>{{ category }}</span></li>
-                        </ul>
-                    </span>
+                    <span class="title" ng-bind-html=" task[0] | linky:'_blank':{rel: 'nofollow'}"></span>
                 </div>
             </div>
         </li>
