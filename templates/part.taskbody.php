@@ -96,11 +96,12 @@
 </div>
 
 
+
 <div class="checklist-container"
      style="
      border-bottom-style:solid;
 	 border-width: 1px;"
-         ng-show="getCheckListTaskCount(checklisttasks)">
+     ng-show="getCheckListTaskCount(task)">
 
     <div class="task-body-checklist">
 
@@ -129,30 +130,30 @@
 
         <li taskID="{{ checklisttasks[2] }}"
             class="task-item subtask"
-            ng-repeat="checklisttasks in getCheckListTasks(filtered,task) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"
-            ng-class="{done: checklisttasks[1]}"
-            ng-click="changeValueInURI( checklisttasks[0],checklisttasks[1],checklisttasks[2],checklisttasks[3], checklisttasks[4])"
+            ng-repeat="task in getCheckListTasks(filtered,task) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"
+            ng-class="{done: task[1]}"
+            ng-click="changeValueInURI( task[0],task[1],task[2],task[3], task[4])"
             dnd-draggable=false
             dnd-effect-allowed=false>
 
             <div class="task-body-checklist"
                  taskID="{{ task[0] }}"
-                >
+            >
 
                 <a class="task-checkbox handler"
-                    name="toggleCompleted"
-                    ng-click="changeValueInURI( checklisttasks[0],checklisttasks[1],checklisttasks[2],checklisttasks[3], checklisttasks[4])"
-                    role="checkbox"
-                    aria-checked="{{checklisttasks[1]}}"
-                    aria-label="<?php p($l->t('Task is completed')); ?>">
-                    <span class="icon task-checkbox reactive" ng-class="{'icon-checkmark': checklisttasks[1]}"></span>
+                   name="toggleCompleted"
+                   ng-click="changeValueInURI( task[0],task[1],task[2],task[3], task[4])"
+                   role="checkbox"
+                   aria-checked="{{task[1]}}"
+                   aria-label="<?php p($l->t('Task is completed')); ?>">
+                    <span class="icon task-checkbox reactive" ng-class="{'icon-checkmark': task[1]}"></span>
                 </a>
                 <a class="icon task-separator"></a>
                 <a>
                     <span class="icon icon-note right large"></span>
                 </a>
                 <div class="title-wrapper">
-                    <span class="title" ng-bind-html=" checklisttasks[0] | linky:'_blank':{rel: 'nofollow'}"></span>
+                    <span class="title" ng-bind-html=" task[0] | linky:'_blank':{rel: 'nofollow'}"></span>
                 </div>
             </div>
         </li>
