@@ -156,14 +156,6 @@
                             ng-options="startOfWeekOption.id as startOfWeekOption.name for startOfWeekOption in startOfWeekOptions">
                         </select>
                     </li>
-                    <li>
-                        <label for="enableOpenTaskParsing"><?php p($l->t('OpenTaskParsing')); ?></label>
-                        <select id="enableOpenTaskParsing"
-                                ng-change="setOpenTaskParsing()"
-                                ng-model="settingsmodel.getById('various').parsingOptions"
-                                ng-options="parsingOption.id as parsingOption.name for parsingOption in parsingOptions">
-                        </select>
-                    </li>
                     <li class="headline">
                         <?php p($l->t('Visibility of Smart Collections')); ?>
                     </li>

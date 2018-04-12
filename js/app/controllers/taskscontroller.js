@@ -59,6 +59,7 @@
 			this._$scope.focusInputField = false;
 			this._$scope.TasksModel = this._$tasksmodel;
 			this._$scope.TasksBusinessLayer = this._tasksbusinesslayer;
+			this._$scope.taskelements = [1,2,3];
 			this._$settingsmodel = _$settingsmodel;
 
 			this._$scope.addTask = function(taskName, related, calendar, parent) {
@@ -241,7 +242,7 @@
                 _tasksbusinesslayer.doUpdate(parenttask);
 			};
 
-            this._$scope.getCheckListTasks = function(tasks, parent) {
+            this._$scope.getCheckListTasks = function(parent) {
                 var ret;
                 ret = [];
 
@@ -278,11 +279,12 @@
                     }
 				}
 
-
+				//window.alert("retsize: "+ret.lenght+"\nscopesize: "+_$scope.taskelements.length);
                 return ret;
             };
 
             this._$scope.getCheckListTaskCount = function(parent) {
+                //this.getCheckListTasks(parent);
                 var ret = 0;
                 var description = parent.note;
                 if(description && description.startsWith("<tag>") && description.endsWith("</tag>")){
