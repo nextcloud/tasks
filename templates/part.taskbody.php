@@ -106,17 +106,36 @@
 
     {{taskelements1=[];taskelements1= getCheckListTasks(task);""}}
 
-    <div>
+    <div class="task-body-checklist">
         <div class="title-wrapper">
             <span class="title"><?php p($l->t('checklisttitle')); ?></span>
         </div>
     </div>
 
     <ol>
-        <li
+        <li class="task-item subtask"
                 ng-repeat="t in taskelements1"
                 ng-click="changeValueInURI( t[0],t[1],t[2],t[3], t[4])">
-            {{task.uri+"||"+t[0]}}
+
+            <div class="task-body-checklist">
+
+                <a class="task-checkbox handler"
+                   name="toggleCompleted"
+                   ng-click="changeValueInURI( t[0],t1],t[2],t[3], t[4])"
+                   role="checkbox"
+                   aria-checked="{{t[1]}}"
+                   aria-label="<?php p($l->t('Task is completed')); ?>">
+                    <span class="icon task-checkbox reactive" ng-class="{'icon-checkmark': t[1]}"></span>
+                </a>
+                <a class="icon task-separator"></a>
+                <a>
+                    <span class="icon icon-note right large"></span>
+                </a>
+                <div class="title-wrapper">
+                    <span class="title" ng-bind-html=" t[0] | linky:'_blank':{rel: 'nofollow'}"></span>
+                </div>
+            </div>
+
         </li>
     </ol>
 </div>

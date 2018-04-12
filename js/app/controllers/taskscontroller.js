@@ -181,6 +181,9 @@
 
 			this._$scope.openDetails = function(id, $event) {
 
+
+
+
 				var calendarID = _$scope.route.calendarID;
 				var collectionID = _$scope.route.collectionID;
 				if ($event === null || $($event.currentTarget).is($($event.target).closest('.handler'))) {
@@ -195,7 +198,7 @@
 						$location.path('/calendars/' + calendarID + '/tasks/' + id);
 					} else if (collectionID) {
 						$location.path('/collections/' + collectionID + '/tasks/' + id);
-					}
+					}else{ window.alert("open: "+id);}
 				}
 			};
 
@@ -243,10 +246,13 @@
 			};
 
             this._$scope.getCheckListTasks = function(parent) {
+              
                 var ret;
                 ret = [];
 
                 var description = parent.note;
+
+                //var description = "<tag>[ ] abc</tag>>";
                 if(description && description.startsWith("<tag>") && description.endsWith("</tag>")){
 
                     description=description.substring(5, description.length);
@@ -265,8 +271,7 @@
                                 elem[3]=parent.calendar;
                                 elem[4]=parent;
                                 ret.push(elem);
-							}
-                            if(currentElement.startsWith("[ ]") || currentElement.startsWith("[]")){
+							}else if (currentElement.startsWith("[ ]") || currentElement.startsWith("[]")){
                                 currentElement=currentElement.substring(3,currentElement.length);
                                 elem[0]=currentElement;
                                 elem[1]=false;
@@ -279,8 +284,11 @@
                     }
 				}
 
+
+
 				//window.alert("retsize: "+ret.lenght+"\nscopesize: "+_$scope.taskelements.length);
                 return ret;
+
             };
 
             this._$scope.getCheckListTaskCount = function(parent) {
