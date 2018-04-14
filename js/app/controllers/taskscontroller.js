@@ -245,14 +245,14 @@
                 _tasksbusinesslayer.doUpdate(parenttask);
 			};
 
-            this._$scope.getCheckListTasks = function(parent) {
-              
+			this._$scope.getCheckListTasks = function(parent) {
                 var ret;
                 ret = [];
-
+				
                 var description = parent.note;
 
-                //var description = "<tag>[ ] abc</tag>>";
+                //description = "<tag>[ ] abc</tag>";
+				
                 if(description && description.startsWith("<tag>") && description.endsWith("</tag>")){
 
                     description=description.substring(5, description.length);
@@ -261,30 +261,28 @@
                     var n = description.split("\n");
                     for(var x in n){
                     	var currentElement=n[x];
-                        var elem = [];
+                        var elem = {};
                     	if(currentElement){
                     		if(currentElement.startsWith("[x]")){
                                 currentElement=currentElement.substring(3,currentElement.length);
-                                elem[0]=currentElement;
-                                elem[1]=true;
-                                elem[2]=parent.uid;
-                                elem[3]=parent.calendar;
-                                elem[4]=parent;
+								elem.name = currentElement;
+								elem.state = true;
+								elem.uri = parent.uid;
+								elem.calendar = parent.calendar;
+								elem.parenttask = parent;
                                 ret.push(elem);
 							}else if (currentElement.startsWith("[ ]") || currentElement.startsWith("[]")){
                                 currentElement=currentElement.substring(3,currentElement.length);
-                                elem[0]=currentElement;
-                                elem[1]=false;
-                                elem[2]=parent.uid;
-                                elem[3]=parent.calendar;
-                                elem[4]=parent;
+                                elem.name = currentElement;
+								elem.state = false;
+								elem.uri = parent.uid;
+								elem.calendar = parent.calendar;
+								elem.parenttask = parent;
                                 ret.push(elem);
                             }
 						}
                     }
 				}
-
-
 
 				//window.alert("retsize: "+ret.lenght+"\nscopesize: "+_$scope.taskelements.length);
                 return ret;
@@ -302,17 +300,12 @@
                     var n = description.split("\n");
                     for(var x in n){
                         if(n[x]){
-                            ret++;
+                            return true;
                         }
                     }
                 }
 
-
-                if(ret>0){
-                    return true;
-				}else{
-                    return false;
-				}
+				return false;
             };
 
             this._$scope.addCheckListTask = function(parentuid) {

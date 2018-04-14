@@ -83,7 +83,7 @@
         <li taskID="{{ task.uri }}"
             class="task-item ui-draggable handler subtask"
 
-            ng-repeat="task in getSubTasks(filtered,task) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"
+            ng-repeat="subtask in getSubTasks(filtered,task) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"
             ng-click="openDetails(task.uri,$event)"
             ng-class="{done: task.completed}"
             ng-include="'part.taskbody'"
@@ -102,37 +102,31 @@
      border-bottom-style:solid;
 	 border-width: 1px;"
      ng-show="getCheckListTaskCount(task);"
+	 ng-init="checklist = getCheckListTasks(task)"
     >
-
-    {{taskelements1=[];taskelements1= getCheckListTasks(task);""}}
-
     <div class="task-body-checklist">
         <div class="title-wrapper">
             <span class="title"><?php p($l->t('checklisttitle')); ?></span>
         </div>
     </div>
-
-    <ol>
+    <ol>	
         <li class="task-item subtask"
-                ng-repeat="t in taskelements1"
-                ng-click="changeValueInURI( t[0],t[1],t[2],t[3], t[4])">
+                ng-repeat='t in checklist'>
 
             <div class="task-body-checklist">
-
                 <a class="task-checkbox handler"
                    name="toggleCompleted"
-                   ng-click="changeValueInURI( t[0],t1],t[2],t[3], t[4])"
                    role="checkbox"
-                   aria-checked="{{t[1]}}"
+                   aria-checked="{{t.state}}"
                    aria-label="<?php p($l->t('Task is completed')); ?>">
-                    <span class="icon task-checkbox reactive" ng-class="{'icon-checkmark': t[1]}"></span>
+                    <span class="icon task-checkbox reactive" ng-class="{'icon-checkmark': t.state}"></span>
                 </a>
                 <a class="icon task-separator"></a>
                 <a>
                     <span class="icon icon-note right large"></span>
                 </a>
                 <div class="title-wrapper">
-                    <span class="title" ng-bind-html=" t[0] | linky:'_blank':{rel: 'nofollow'}"></span>
+                    <span class="title" ng-bind-html=" t.name | linky:'_blank':{rel: 'nofollow'}"></span>
                 </div>
             </div>
 
