@@ -98,17 +98,28 @@
 
 
 <div class="checklist-container"
+     ng-class="{subtaskshidden: hideChecklists(task)}"
      style="
      border-bottom-style:solid;
 	 border-width: 1px;"
      ng-show="getCheckListTaskCount(task);"
 	 ng-init="checklist = getCheckListTasks(task)"
     >
+
     <div class="task-body-checklist">
+        <a class="task-addsubtask handler add-subtask"
+           ng-show="task.calendar.writable"
+           ng-click="addCheckListTask(task)"
+           oc-click-focus="{selector: '.add-subtask input', timeout: 0}">
+            <span class="icon icon-add right large reactive" title="<?php p($l->t('checklist')); ?> {{ task.summary }}"></span>
+        </a>
         <div class="title-wrapper">
-            <span class="title"><?php p($l->t('checklisttitle')); ?></span>
+            <span class="title">test</span>
         </div>
     </div>
+
+
+
     <ol>	
         <li class="task-item subtask"
                 ng-repeat='t in checklist'>

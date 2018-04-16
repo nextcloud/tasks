@@ -159,6 +159,18 @@
 				}
 			};
 
+            this._$scope.hideChecklists = function(task) {
+                var taskID = _$scope.route.taskID;
+                var descendantIDs = _$tasksmodel.getDescendantIDs(task);
+                if (task.uri === taskID) {
+                    return false;
+                } else if (__indexOf.call(descendantIDs, taskID) >= 0) {
+                    return false;
+                } else {
+                    return task.hideChecklists;
+                }
+            };
+
 			this._$scope.showInput = function() {
 				var collectionID = _$scope.route.collectionID;
 				var calendar = _$listsmodel.getByUri(_$scope.route.calendarID);
@@ -308,9 +320,24 @@
 				return false;
             };
 
-            this._$scope.addCheckListTask = function(parentuid) {
-                window.alert("addCheckListTask: "+parentuid);
-			};
+            this._$scope.addCheckListTask = function(parent) {
+                var newTask = prompt("Please enter a Taskname", "New Task");
+                if (newTask !== null) {
+
+                    var oldDescription = parent.note;
+
+                    var tag="<tag>";
+                    var tagend="</tag>";
+
+
+                    var pretags=oldDescription.substring(0, oldDescription.indexOf(tag));
+                    var midtags=oldDescription.substring(oldDescription.indexOf(tag)+tag.length, oldDescription.indexOf(tagend))+"[ ] "+newTask+"\\n";
+                    var posttags=oldDescription.substring(oldDescription.indexOf(tagend)+tagend.length, oldDescription.length);
+
+                    parent.note=pretags+tag+midtags+tagend+posttags;
+                    _tasksbusinesslayer.doUpdate(parent);
+                }
+            };
 
 
 			this._$scope.getSubTasks = function(tasks, parent) {
@@ -344,6 +371,9 @@
 			this._$scope.toggleSubtasks = function(task) {
 				_tasksbusinesslayer.setHideSubtasks(task, !task.hideSubtasks);
 			};
+            this._$scope.toggleChecklists = function(task) {
+                _tasksbusinesslayer.setHideSubtasks(task, !task.hideChecklists);
+            };
 
 			this._$scope.toggleCompletedSubtasks = function(task) {
 				_tasksbusinesslayer.setHideCompletedSubtasks(task, !task.hideCompletedSubtasks);
