@@ -111,10 +111,10 @@
            ng-show="task.calendar.writable"
            ng-click="addCheckListTask(task)"
            oc-click-focus="{selector: '.add-subtask input', timeout: 0}">
-            <span class="icon icon-add right large reactive" title="<?php p($l->t('checklist')); ?> {{ task.summary }}"></span>
+            <span class="icon icon-add right large reactive" title="<?php p($l->t('Add new todo')); ?>"></span>
         </a>
         <div class="title-wrapper">
-            <span class="title">test</span>
+            <span class="title"><?php p($l->t('checklisttitle')); ?>:</span>
         </div>
     </div>
 
@@ -143,7 +143,7 @@
                 <a class="handler" ng-click="toggleChecklist(task)">
                     <span class="icon right large subtasks reactive"
                         ng-class="task.hideSubtasks ? 'icon-subtasks-hidden' : 'icon-subtasks-visible'"
-                        title="<?php p($l->t('Toggle subtasks')); ?>">
+                        title="<?php p($l->t('Toggle checklisttask')); ?>">
                     </span>
                 </a>
 
