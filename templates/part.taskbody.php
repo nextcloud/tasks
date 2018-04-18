@@ -96,7 +96,7 @@
      style="
      border-bottom-style:solid;
 	 border-width: 1px;"
-     ng-show="getCheckListTaskCount(task)&&hideChecklists(task)"
+     ng-show="getCheckListTaskCount(task)"
      ng-init="checklist = getCheckListTasks(task)"
 >
 
