@@ -94,7 +94,9 @@
 <div class="checklist-container"
      ng-class="{subtaskshidden: hideChecklists(task)}"
      style="
+     margin-top:-1px;
      border-bottom-style:solid;
+     border-top-style:solid;
 	 border-width: 1px;"
      ng-show="getCheckListTaskCount(task)"
      ng-init="checklist = getCheckListTasks(task)"
@@ -108,7 +110,7 @@
             <span class="icon icon-add right large reactive" title="<?php p($l->t('Add new todo')); ?>"></span>
         </a>
         <div class="title-wrapper">
-            <span class="title"><?php p($l->t('checklisttitle')); ?>:</span>
+            <span class="title"><?php p($l->t('Todo')); ?>:</span>
         </div>
     </div>
 
