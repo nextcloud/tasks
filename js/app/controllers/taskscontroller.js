@@ -59,7 +59,6 @@
 			this._$scope.focusInputField = false;
 			this._$scope.TasksModel = this._$tasksmodel;
 			this._$scope.TasksBusinessLayer = this._tasksbusinesslayer;
-			this._$scope.taskelements = [1,2,3];
 			this._$settingsmodel = _$settingsmodel;
 
 			this._$scope.addTask = function(taskName, related, calendar, parent) {
@@ -243,26 +242,77 @@
 
             this._$scope.changeValueInURI = function(name,state,uri, calendar, parenttask) {
 
+
                 var oldDescription = parenttask.note;
                 var newDescription = "";
 
 
                 if(!state){
                     newDescription = oldDescription.replace("[ ]"+name, "[x]"+name);
+
                 }else{
                     newDescription = oldDescription.replace("[x]"+name, "[ ]"+name);
+
                 }
 
                 parenttask.note=newDescription;
+
                 _tasksbusinesslayer.doUpdate(parenttask);
+                this._$scope.apply();
+                _$scope.apply();
 			};
 
-			this._$scope.getCheckListTasks = function(parent) {
+            this._$scope.deleteChecklistTask = function(name, parenttask) {
+
+                var oldDescription = parenttask.note;
+                var newDescription;
+
+                newDescription = oldDescription.replace("[ ]"+name+"\n", "");
+                newDescription = newDescription.replace("[x]"+name+"\n", "");
+
+
+
+                parenttask.note=newDescription;
+
+                _tasksbusinesslayer.doUpdate(parenttask);
+                this._$scope.apply();
+                _$scope.apply();
+            };
+
+
+            this._$scope.addCheckListTask = function(parent) {
+                var newTask = prompt("Please enter a Taskname", "New Task");
+                if (newTask !== null) {
+
+                    var oldDescription = parent.note;
+
+                    var tag="<tag>";
+                    var tagend="</tag>";
+
+
+                    var pretags=oldDescription.substring(0, oldDescription.indexOf(tag));
+                    var midtags=oldDescription.substring(oldDescription.indexOf(tag)+tag.length, oldDescription.indexOf(tagend))+"[ ] "+newTask+"\n";
+                    var posttags=oldDescription.substring(oldDescription.indexOf(tagend)+tagend.length, oldDescription.length);
+
+                    parent.note=pretags+tag+midtags+tagend+posttags;
+                    _tasksbusinesslayer.doUpdate(parent);
+                    this.taskelements= this._$scope.getCheckListTasklist();
+                    this._$scope.apply();
+                    _$scope.apply();
+                }
+            };
+
+            this._$scope.getCheckListTasklist = function() {
+            	window.alert(this.taskelements.length);
+            	return this.taskelements;
+			};
+
+
+            this._$scope.getCheckListTasks = function(parent) {
                 var ret;
                 ret = [];
-				
-                var description = parent.note;
 
+                var description = parent.note;
                 //description = "<tag>[ ] abc</tag>";
 				
                 if(description && description.startsWith("<tag>") && description.endsWith("</tag>")){
@@ -319,26 +369,6 @@
 
 				return false;
             };
-
-            this._$scope.addCheckListTask = function(parent) {
-                var newTask = prompt("Please enter a Taskname", "New Task");
-                if (newTask !== null) {
-
-                    var oldDescription = parent.note;
-
-                    var tag="<tag>";
-                    var tagend="</tag>";
-
-
-                    var pretags=oldDescription.substring(0, oldDescription.indexOf(tag));
-                    var midtags=oldDescription.substring(oldDescription.indexOf(tag)+tag.length, oldDescription.indexOf(tagend))+"[ ] "+newTask+"\\n";
-                    var posttags=oldDescription.substring(oldDescription.indexOf(tagend)+tagend.length, oldDescription.length);
-
-                    parent.note=pretags+tag+midtags+tagend+posttags;
-                    _tasksbusinesslayer.doUpdate(parent);
-                }
-            };
-
 
 			this._$scope.getSubTasks = function(tasks, parent) {
 				var ret, task, _i, _len;
