@@ -121,6 +121,13 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				}
 			};
 
+            TasksBusinessLayer.prototype.setHideCheckLists = function(task, hide) {
+                task.hideCheckLists = hide;
+                if (task.calendar.writable) {
+                    this.doUpdate(task);
+                }
+            };
+
 			TasksBusinessLayer.prototype.setHideCompletedSubtasks = function(task, hide) {
 				task.hideCompletedSubtasks = hide;
 				if (task.calendar.writable) {
@@ -536,6 +543,7 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				if (parent.calendar.writable) {
 					task.related = parent.uid;
 					parent.hideSubtasks = 0;
+					parent.hideCheckLists = 0;
 					if (parent.completed && !task.completed) {
 						this.setPercentComplete(parent, 0);
 					} else {

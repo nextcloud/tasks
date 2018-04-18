@@ -399,10 +399,12 @@
 			};
 
 			this._$scope.toggleSubtasks = function(task) {
+                window.alert("state: "+task.hideCheckLists);
 				_tasksbusinesslayer.setHideSubtasks(task, !task.hideSubtasks);
 			};
-            this._$scope.toggleChecklists = function(task) {
-                _tasksbusinesslayer.setHideSubtasks(task, !task.hideChecklists);
+            this._$scope.toggleChecklist = function(task) {
+            	window.alert("state: "+task.hideCheckLists);
+                _tasksbusinesslayer.setHideCheckLists(task, !task.hideCheckLists);
             };
 
 			this._$scope.toggleCompletedSubtasks = function(task) {
