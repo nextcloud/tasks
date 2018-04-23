@@ -505,7 +505,7 @@ ol[dnd-list] {
 		margin-left: 35px;
 		border-color: $gray_light;
 
-		&.subtaskshidden li.subtask {
+		&.checklisttaskhidden li.checklisttask {
 			display: none;
 		}
 
@@ -664,11 +664,11 @@ ol[dnd-list] {
 		float: right;
 	}
 
-	&.subtasks .icon.subtasks {
+	&.checklist .icon.checklist {
 		display: inline-block;
 	}
 
-	&.completedsubtasks .icon.toggle-completed-subtasks {
+	&.completedsubtasks .icon.toggle-completed-checklist {
 		display: inline-block;
 	}
 
@@ -710,7 +710,7 @@ ol[dnd-list] {
 			}
 		}
 
-		&.subtasks {
+		&.checklisttask {
 			display: none;
 		}
 

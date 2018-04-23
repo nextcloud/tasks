@@ -97,7 +97,7 @@
 
 
 <div class="checklist-container"
-     ng-class="{subtaskshidden: hideChecklists(task)}"
+     ng-class="{checklisttaskhidden: hideChecklists(task)}"
      style="
      margin-top:-1px;
      border-bottom-style:solid;
@@ -118,7 +118,7 @@
         </div>
     </div>
     <ol>
-        <li class="task-item subtask"
+        <li class="task-item checklisttask"
             ng-repeat='t in checklist'>
             <div class="task-body-checklist">
                 <a class="task-checkbox handler"
