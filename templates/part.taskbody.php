@@ -96,7 +96,6 @@
 </div>
 
 
-
 <div class="checklist-container"
      ng-class="{subtaskshidden: hideChecklists(task)}"
      style="
