@@ -99,7 +99,6 @@
 
 <div class="checklist-container"
      ng-class="{subtaskshidden: hideChecklists(task)}"
-     ng-hide="hideChecklists(task)"
      style="
      margin-top:-1px;
      border-bottom-style:solid;
@@ -108,7 +107,6 @@
      ng-show="getCheckListTaskCount(task)"
      ng-init="checklist = getCheckListTasks(task)"
 >
-
     <div class="task-body-checklist">
         <a class="task-addsubtask handler add-subtask"
            ng-show="task.calendar.writable"
@@ -120,13 +118,9 @@
             <span class="title"><?php p($l->t('Todo')); ?>:</span>
         </div>
     </div>
-
-
-
     <ol>
         <li class="task-item subtask"
             ng-repeat='t in checklist'>
-
             <div class="task-body-checklist">
                 <a class="task-checkbox handler"
                    name="toggleCompleted"
@@ -137,8 +131,6 @@
                     <span class="icon task-checkbox reactive" ng-class="{'icon-checkmark': t.state}"></span>
                 </a>
                 <a class="icon task-separator"></a>
-
-
                 <a class="task-star handler" ng-click="deleteChecklistTask(t.name,t.parenttask)">
                     <span class="icon icon-trash right large reactive" >
                     </span>
@@ -149,16 +141,10 @@
                         title="<?php p($l->t('Toggle checklisttask')); ?>">
                     </span>
                 </a>
-
-
                 <div class="title-wrapper">
                     <span class="title" ng-bind-html=" t.name | linky:'_blank':{rel: 'nofollow'}"></span>
                 </div>
-
-
-
             </div>
-
         </li>
     </ol>
 </div>
