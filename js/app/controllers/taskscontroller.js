@@ -191,10 +191,6 @@
 			};
 
 			this._$scope.openDetails = function(id, $event) {
-
-
-
-
 				var calendarID = _$scope.route.calendarID;
 				var collectionID = _$scope.route.collectionID;
 				if ($event === null || $($event.currentTarget).is($($event.target).closest('.handler'))) {
@@ -209,7 +205,7 @@
 						$location.path('/calendars/' + calendarID + '/tasks/' + id);
 					} else if (collectionID) {
 						$location.path('/collections/' + collectionID + '/tasks/' + id);
-					}else{ window.alert("open: "+id);}
+					}
 				}
 			};
 
@@ -303,7 +299,6 @@
             };
 
             this._$scope.getCheckListTasklist = function() {
-            	window.alert(this.taskelements.length);
             	return this.taskelements;
 			};
 
@@ -399,11 +394,9 @@
 			};
 
 			this._$scope.toggleSubtasks = function(task) {
-                window.alert("state: "+task.hideCheckLists);
 				_tasksbusinesslayer.setHideSubtasks(task, !task.hideSubtasks);
 			};
             this._$scope.toggleChecklist = function(task) {
-            	window.alert("state: "+task.hideCheckLists);
                 _tasksbusinesslayer.setHideCheckLists(task, !task.hideCheckLists);
             };
 

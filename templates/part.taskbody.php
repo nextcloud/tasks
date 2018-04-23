@@ -35,6 +35,12 @@
               title="<?php p($l->t('Toggle subtasks')); ?>">
         </span>
     </a>
+    <a class="handler" ng-click="toggleChecklist(task)">
+        <span class="icon right large subtasks reactive"
+              ng-class="task.hideSubtasks ? 'icon-subtasks-hidden' : 'icon-subtasks-visible'"
+              title="<?php p($l->t('Toggle subtasks')); ?>">
+        </span>
+    </a>
     <a class="handler" ng-click="toggleCompletedSubtasks(task)">
         <span class="icon icon-toggle right large toggle-completed-subtasks reactive"
               ng-class="{'active': !task.hideCompletedSubtasks}"
@@ -93,6 +99,7 @@
 
 <div class="checklist-container"
      ng-class="{subtaskshidden: hideChecklists(task)}"
+     ng-hide="hideChecklists(task)"
      style="
      margin-top:-1px;
      border-bottom-style:solid;

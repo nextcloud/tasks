@@ -115,8 +115,5 @@ OC.L10N.register(
     "add a subtask to" : "add a subtask to",
     "Toggle subtasks" : "Toggle subtasks",
     "Toggle completed subtasks" : "Toggle completed subtasks",
-    "checklisttitle":"Tasklist",
-    "Add new todo":"New Todo",
-    "Toggle checklisttask":"Delete Todo"
 },
 "nplurals=2; plural=(n != 1);");
