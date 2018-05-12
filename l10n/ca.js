@@ -2,7 +2,7 @@ OC.L10N.register(
     "tasks",
     {
     "Tasks" : "Tasques",
-    "Due yesterday" : "Per ahir",
+    "Due yesterday" : "Des d'ahir",
     "Due today" : "Per avui",
     "Due tomorrow" : "Per demà",
     "Due on" : "Per a",
