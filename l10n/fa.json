@@ -43,7 +43,7 @@
     "Thursday" : "پنجشنبه",
     "Friday" : "جمعه",
     "Saturday" : "شنبه",
-    "_%n Completed Task_::_%n Completed Tasks_" : ["%n کار تکمیل شده"],
+    "_%n Completed Task_::_%n Completed Tasks_" : ["%n کار تکمیل شده","%n کار تکمیل شده"],
     "Hours" : "ساعت ها",
     "Minutes" : "دقایق",
     "Set due date" : "تعریف سر رسید",
@@ -70,5 +70,5 @@
     "Select categories..." : "انتخاب مجموعه...",
     "Loading the task..." : "بارگزاری کار...",
     "Task not found!" : "کار یافت نشد!"
-},"pluralForm" :"nplurals=1; plural=0;"
+},"pluralForm" :"nplurals=2; plural=((n<=1 && n>= 0) ? 1);"
 }

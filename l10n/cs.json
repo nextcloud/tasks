@@ -62,7 +62,7 @@
     "Add an item in \"%s\"..." : "Přidat položku do \"%s\"...",
     "Add a current item in \"%s\"..." : "Přidat současnou položku do \"%s\"...",
     "Add a subtask to \"%s\"..." : "Přidat podúkol k \"%s\"...",
-    "_%n Completed Task_::_%n Completed Tasks_" : ["%n dokončený úkol","%n dokončené úkoly","%n dokončených úkolů"],
+    "_%n Completed Task_::_%n Completed Tasks_" : ["%n dokončený úkol","%n dokončené úkoly","%n dokončených úkolů","%n dokončených úkolů"],
     "Hours" : "Hodiny",
     "Minutes" : "Minuty",
     "Set due date" : "Nastavit datum vypršení",
@@ -111,5 +111,5 @@
     "add a subtask to" : "přidat podúkol k",
     "Toggle subtasks" : "Přepnout podúkoly",
     "Toggle completed subtasks" : "Přepnout dokončené podúkoly"
-},"pluralForm" :"nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;"
+},"pluralForm" :"nplurals=4; plural=(n < 10 && n % 1 == 0) ? 1 : (n < 9999 && n >= 10 && n % 1 == 0) ? 3 : (n % 1 != 0) : 4;"
 }

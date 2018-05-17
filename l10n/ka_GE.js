@@ -64,7 +64,7 @@ OC.L10N.register(
     "Add an item in \"%s\"..." : "ელემენტის დამატება \"%s\"-ში…",
     "Add a current item in \"%s\"..." : "ამჟამინდელი ელემენტის დამატება \"%s\"-ში…",
     "Add a subtask to \"%s\"..." : "ქვე-დავალების დამატება \"%s\"-ში…",
-    "_%n Completed Task_::_%n Completed Tasks_" : ["%n დასრულებული დავალება"],
+    "_%n Completed Task_::_%n Completed Tasks_" : ["%n დასრულებული დავალება","%n დასრულებული დავალება"],
     "Hours" : "საათი",
     "Minutes" : "წუთი",
     "Set due date" : "განპირობებულია თარიღისთვის",
@@ -114,4 +114,4 @@ OC.L10N.register(
     "Toggle subtasks" : "ქვე-დავალებების გადართვა",
     "Toggle completed subtasks" : "დასრულებული ქვე-დავალებების გადართვა"
 },
-"nplurals=1; plural=0;");
+"nplurals=2; plural=(n==1);");

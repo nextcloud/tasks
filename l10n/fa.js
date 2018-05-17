@@ -45,7 +45,7 @@ OC.L10N.register(
     "Thursday" : "پنجشنبه",
     "Friday" : "جمعه",
     "Saturday" : "شنبه",
-    "_%n Completed Task_::_%n Completed Tasks_" : ["%n کار تکمیل شده"],
+    "_%n Completed Task_::_%n Completed Tasks_" : ["%n کار تکمیل شده","%n کار تکمیل شده"],
     "Hours" : "ساعت ها",
     "Minutes" : "دقایق",
     "Set due date" : "تعریف سر رسید",
@@ -73,4 +73,4 @@ OC.L10N.register(
     "Loading the task..." : "بارگزاری کار...",
     "Task not found!" : "کار یافت نشد!"
 },
-"nplurals=1; plural=0;");
+"nplurals=2; plural=((n<=1 && n>= 0) ? 1);");
