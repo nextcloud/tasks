@@ -114,4 +114,4 @@ OC.L10N.register(
     "Toggle subtasks" : "ქვე-დავალებების გადართვა",
     "Toggle completed subtasks" : "დასრულებული ქვე-დავალებების გადართვა"
 },
-"nplurals=2; plural=(n==1);");
+"nplurals=2; plural=(n!=1);");

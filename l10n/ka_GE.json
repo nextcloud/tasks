@@ -111,5 +111,5 @@
     "add a subtask to" : "დაუმატეთ ქვედავალება",
     "Toggle subtasks" : "ქვე-დავალებების გადართვა",
     "Toggle completed subtasks" : "დასრულებული ქვე-დავალებების გადართვა"
-},"pluralForm" :"nplurals=2; plural=(n==1);"
+},"pluralForm" :"nplurals=2; plural=(n!=1);"
 }

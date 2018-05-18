@@ -73,4 +73,4 @@ OC.L10N.register(
     "Loading the task..." : "بارگزاری کار...",
     "Task not found!" : "کار یافت نشد!"
 },
-"nplurals=2; plural=((n<=1 && n>= 0) ? 1);");
+"nplurals=2; plural=(n > 1);");

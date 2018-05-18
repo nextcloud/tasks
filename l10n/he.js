@@ -114,4 +114,4 @@ OC.L10N.register(
     "Toggle subtasks" : "הפעלה/כיבוי של תת־משימות",
     "Toggle completed subtasks" : "הפעלה/כיבוי של תת־משימות שהושלמו"
 },
-"nplurals=4; plural=(n==1 ? 1: n == 2 ? 2 : (n % 10 == 0 and n > 10) ? 4);");
+"nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;");
