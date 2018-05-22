@@ -64,7 +64,7 @@ OC.L10N.register(
     "Add an item in \"%s\"..." : "הוספת פריט ב־\"%s\"...",
     "Add a current item in \"%s\"..." : "הוספת פריט נוכחי ב־\"%s\"...",
     "Add a subtask to \"%s\"..." : "הוספת תת־פעילות ל־\"%s\"...",
-    "_%n Completed Task_::_%n Completed Tasks_" : ["%n פעילות מושלמת","%n פעילויות הושלמו","%n פעילויות הושלמו"],
+    "_%n Completed Task_::_%n Completed Tasks_" : ["%n פעילות מושלמת","%n פעילויות הושלמו","%n פעילויות הושלמו","%n פעילויות הושלמו"],
     "Hours" : "שעות",
     "Minutes" : "דקות",
     "Set due date" : "הגדרת תאריך יעד",
