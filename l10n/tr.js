@@ -85,6 +85,7 @@ OC.L10N.register(
     "All" : "Tümü",
     "Current" : "Güncel",
     "Completed" : "Tamamlanmış",
+    "The Tasks app for Nextcloud" : "Nextcloud Görevler uygulaması.",
     "Delete" : "Sil",
     "Cancel" : "İptal",
     "Edit" : "Düzenle",
