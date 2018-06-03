@@ -85,6 +85,7 @@ OC.L10N.register(
     "All" : "Все",
     "Current" : "Текущие",
     "Completed" : "Завершённые",
+    "The Tasks app for Nextcloud" : "Задачи для Nextcloud",
     "Delete" : "Удалить",
     "Cancel" : "Отмена",
     "Edit" : "Редактировать",

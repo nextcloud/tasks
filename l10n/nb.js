@@ -107,7 +107,7 @@ OC.L10N.register(
     "Task is completed" : "Oppgaven er fullført",
     "All day" : "Hele dagen",
     "(New category)" : "(Ny kategori)",
-    "Select categories..." : "Velg kategorier…",
+    "Select categories..." : "Velg kategorier …",
     "Loading the task..." : "Laster oppgave…",
     "Task not found!" : "Oppgaven ble ikke funnet!",
     "add a subtask to" : "legg en underoppgave til",
