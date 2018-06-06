@@ -85,6 +85,7 @@ OC.L10N.register(
     "All" : "Kaikki",
     "Current" : "Nykyinen",
     "Completed" : "Valmiina",
+    "The Tasks app for Nextcloud" : "Tehtäväsovellus Nextcloudille",
     "Delete" : "Poista",
     "Cancel" : "Peruuta",
     "Edit" : "Muokkaa",

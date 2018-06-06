@@ -86,6 +86,7 @@ OC.L10N.register(
     "Current" : "Текущие",
     "Completed" : "Завершённые",
     "The Tasks app for Nextcloud" : "Задачи для Nextcloud",
+    "Once enabled, a new Tasks menu will appear in your Nextcloud apps menu. From there you can add and delete tasks, edit their title, description, start and due dates, reminder times, mark them as important, and add comments on them. Tasks can be shared between users. Tasks can be synchronized using CalDav (each task list is linked to an Nextcloud calendar, to sync it to your local client - Thunderbird, Evolution, KDE Kontact, iCal... - just add the calendar as a remote calendar in you client). You can download your tasks as ICS files using the download button for each calendar." : "После включения, в меню приложений Nextcloud появится новое меню Задачи. Оттуда вы можете добавлять и удалять задания, редактировать их название, описание, дату начала и сроки, время напоминания, отмечать их как важные и добавлять комментарии к ним. Пользователи могут делиться задачами между собой. Задачи могут быть синхронизированы с помощью CalDav (каждый список задач связан с календарем Nextcloud, чтобы синхронизировать его с вашим локальным клиентом - Thunderbird, Evolution, KDE Kontact, iCal ... - просто добавьте календарь в качестве удаленного календаря в вашем клиенте). Вы можете загружать свои задачи в виде файлов ICS с помощью кнопки загрузки для каждого календаря.",
     "Delete" : "Удалить",
     "Cancel" : "Отмена",
     "Edit" : "Редактировать",
