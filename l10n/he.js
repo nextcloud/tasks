@@ -85,6 +85,7 @@ OC.L10N.register(
     "All" : "הכול",
     "Current" : "נוכחי",
     "Completed" : "הושלם",
+    "The Tasks app for Nextcloud" : "יישומון המשימות ל־Nextcloud",
     "Delete" : "מחיקה",
     "Cancel" : "ביטול",
     "Edit" : "עריכה",
