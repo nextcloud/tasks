@@ -85,6 +85,7 @@ OC.L10N.register(
     "All" : "Alle",
     "Current" : "Aktuell",
     "Completed" : "Fertiggestellt",
+    "The Tasks app for Nextcloud" : "Die Aufgabenverwaltungs-App für Nextcloud",
     "Delete" : "Löschen",
     "Cancel" : "Abbrechen",
     "Edit" : "Bearbeiten",
