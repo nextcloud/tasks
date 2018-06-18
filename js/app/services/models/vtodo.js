@@ -166,16 +166,16 @@ angular.module('Tasks').factory('VTodo', ['$filter', 'ICalFactory', 'RandomStrin
 			this.updateLastModified();
 			this.data = this.components.toString();
 		},
-        get hideChecklists() {
-            var vtodos = this.components.getAllSubcomponents('vtodo');
-            return +vtodos[0].getFirstPropertyValue('x-oc-hidechecklists') || 0;
-        },
-        set hideChecklists(hide) {
-            var vtodos = this.components.getAllSubcomponents('vtodo');
-            vtodos[0].updatePropertyWithValue('x-oc-hidechecklists', +hide);
-            this.updateLastModified();
-            this.data = this.components.toString();
-        },
+		get hideChecklists() {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			return +vtodos[0].getFirstPropertyValue('x-oc-hidechecklists') || 0;
+		},
+		set hideChecklists(hide) {
+			var vtodos = this.components.getAllSubcomponents('vtodo');
+			vtodos[0].updatePropertyWithValue('x-oc-hidechecklists', +hide);
+			this.updateLastModified();
+			this.data = this.components.toString();
+		},
 		get hideCompletedSubtasks() {
 			var vtodos = this.components.getAllSubcomponents('vtodo');
 			return +vtodos[0].getFirstPropertyValue('x-oc-hidecompletedsubtasks') || 0;

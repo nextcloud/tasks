@@ -48,25 +48,25 @@ angular.module('Tasks').controller('SettingsController', [
 						name: t('tasks', 'Automatic')
 					}
 				];
-                this._$scope.parsingOptions = [
-                    {
-                        id: 0,
-                        name: 'yes'
-                    }, {
-                        id: 1,
-                        name: 'no'
-                    }
-                ];
+				this._$scope.parsingOptions = [
+					{
+						id: 0,
+						name: 'yes'
+					}, {
+						id: 1,
+						name: 'no'
+					}
+				];
 				this._$scope.startOfWeekOptions = [
 					{
 						id: 0,
-                        name: t('tasks', 'Sunday')
+						name: t('tasks', 'Sunday')
 					}, {
 						id: 1,
-                        name: t('tasks', 'Monday')
+						name: t('tasks', 'Monday')
 					}, {
 						id: 2,
-                        name: t('tasks', 'Tuesday')
+						name: t('tasks', 'Tuesday')
 					}, {
 						id: 3,
 						name: t('tasks', 'Wednesday')
@@ -86,14 +86,13 @@ angular.module('Tasks').controller('SettingsController', [
 					collection = _$collectionsmodel.getById(collectionID);
 					return _$settingsbusinesslayer.setVisibility(collectionID, collection.show);
 				};
-
 				this._$scope.setStartOfWeek = function() {
 					return _$settingsbusinesslayer.set('various', 'startOfWeek', _$settingsmodel.getById('various').startOfWeek);
 				};
-
-                this._$scope.setOpenTaskParsing = function() {
-                    return _$settingsbusinesslayer.set('various', 'openTaskParsing', _$settingsmodel.getById('various').parsingOptions);
-                };
+				
+				this._$scope.setOpenTaskParsing = function() {
+					return _$settingsbusinesslayer.set('various', 'openTaskParsing', _$settingsmodel.getById('various').parsingOptions);
+				};
 			}
 
 			return SettingsController;

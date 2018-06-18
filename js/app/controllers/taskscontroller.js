@@ -158,17 +158,17 @@
 				}
 			};
 
-            this._$scope.hideChecklists = function(task) {
-                var taskID = _$scope.route.taskID;
-                var descendantIDs = _$tasksmodel.getDescendantIDs(task);
-                if (task.uri === taskID) {
-                    return false;
-                } else if (__indexOf.call(descendantIDs, taskID) >= 0) {
-                    return false;
-                } else {
-                    return task.hideChecklists;
-                }
-            };
+			this._$scope.hideChecklists = function(task) {
+				var taskID = _$scope.route.taskID;
+				var descendantIDs = _$tasksmodel.getDescendantIDs(task);
+				if (task.uri === taskID) {
+					return false;
+				} else if (__indexOf.call(descendantIDs, taskID) >= 0) {
+					return false;
+				} else {
+					return task.hideChecklists;
+				}
+			};
 
 			this._$scope.showInput = function() {
 				var collectionID = _$scope.route.collectionID;
@@ -235,147 +235,133 @@
 				};
 			};
 
+			this._$scope.changeValueInURI = function(name,state,uri, calendar, parenttask) {
+				var oldDescription = parenttask.note;
+				var newDescription = "";
 
-            this._$scope.changeValueInURI = function(name,state,uri, calendar, parenttask) {
+				if (!state) {
+					newDescription = oldDescription.replace("[ ]"+name, "[x]"+name);
 
+				} else {
+					newDescription = oldDescription.replace("[x]"+name, "[ ]"+name);
 
-                var oldDescription = parenttask.note;
-                var newDescription = "";
+				}
+				parenttask.note=newDescription;
 
-
-                if(!state){
-                    newDescription = oldDescription.replace("[ ]"+name, "[x]"+name);
-
-                }else{
-                    newDescription = oldDescription.replace("[x]"+name, "[ ]"+name);
-
-                }
-
-                parenttask.note=newDescription;
-
-                _tasksbusinesslayer.doUpdate(parenttask);
-                this._$scope.apply();
-                _$scope.apply();
+				_tasksbusinesslayer.doUpdate(parenttask);
+				this._$scope.apply();
+				_$scope.apply();
 			};
 
-            this._$scope.deleteChecklistTask = function(name, parenttask) {
+			this._$scope.deleteChecklistTask = function(name, parenttask) {
+				var oldDescription = parenttask.note;
+				var newDescription;
 
-                var oldDescription = parenttask.note;
-                var newDescription;
+				newDescription = oldDescription.replace("[ ]"+name+"\n", "");
+				newDescription = newDescription.replace("[x]"+name+"\n", "");
 
-                newDescription = oldDescription.replace("[ ]"+name+"\n", "");
-                newDescription = newDescription.replace("[x]"+name+"\n", "");
+				parenttask.note=newDescription;
 
-
-
-                parenttask.note=newDescription;
-
-                _tasksbusinesslayer.doUpdate(parenttask);
-                this._$scope.apply();
-                _$scope.apply();
-            };
-
-
-            this._$scope.addCheckListTask = function(parent) {
-                var newTask = prompt("Please enter a Taskname", "New Task");
-                if (newTask !== null) {
-
-                    var oldDescription = parent.note;
-
-                    var tag="<tag>";
-                    var tagend="</tag>";
-
-
-                    var pretags=oldDescription.substring(0, oldDescription.indexOf(tag));
-                    var midtags=oldDescription.substring(oldDescription.indexOf(tag)+tag.length, oldDescription.indexOf(tagend))+"[ ] "+newTask+"\n";
-                    var posttags=oldDescription.substring(oldDescription.indexOf(tagend)+tagend.length, oldDescription.length);
-
-                    parent.note=pretags+tag+midtags+tagend+posttags;
-                    _tasksbusinesslayer.doUpdate(parent);
-                    this.taskelements= this._$scope.getCheckListTasklist();
-                    this._$scope.apply();
-                    _$scope.apply();
-                }
-            };
-
-            this._$scope.getCheckListTasklist = function() {
-            	return this.taskelements;
+				_tasksbusinesslayer.doUpdate(parenttask);
+				this._$scope.apply();
+				_$scope.apply();
 			};
 
 
-            this._$scope.getCheckListTasks = function(parent) {
-                var ret;
-                ret = [];
+			this._$scope.addCheckListTask = function(parent) {
+				var newTask = prompt("Please enter a Taskname", "New Task");
+				if (newTask !== null) {
 
-                var description = parent.note;
-                //description = "<tag>[ ] abc</tag>";
+					var oldDescription = parent.note;
+
+					var tag="<tag>";
+					var tagend="</tag>";
+
+
+					var pretags = oldDescription.substring(0, oldDescription.indexOf(tag));
+					var midtags = oldDescription.substring(oldDescription.indexOf(tag)+tag.length, oldDescription.indexOf(tagend))+"[ ] "+newTask+"\n";
+					var posttags = oldDescription.substring(oldDescription.indexOf(tagend)+tagend.length, oldDescription.length);
+
+					parent.note = pretags+tag+midtags+tagend+posttags;
+					_tasksbusinesslayer.doUpdate(parent);
+					this.taskelements = this._$scope.getCheckListTasklist();
+					this._$scope.apply();
+					_$scope.apply();
+				}
+			};
+
+			this._$scope.getCheckListTasklist = function() {
+				return this.taskelements;
+			};
+
+
+			this._$scope.getCheckListTasks = function(parent) {
+				var ret;
+				ret = [];
+
+				var description = parent.note;
+				//description = "<tag>[ ] abc</tag>";
 				
-                if(description && description.startsWith("<tag>") && description.endsWith("</tag>")){
+				if (description && description.startsWith("<tag>") && description.endsWith("</tag>")) {
 
-                    description=description.substring(5, description.length);
-                    description=description.substring(0, description.length-6);
+					description=description.substring(5, description.length);
+					description=description.substring(0, description.length-6);
 
-                    var n = description.split("\n");
-                    for(var x in n){
-                    	var currentElement=n[x];
-                        var elem = {};
-                    	if(currentElement){
-                    		if(currentElement.startsWith("[x]")){
-                                currentElement=currentElement.substring(3,currentElement.length);
+					var n = description.split("\n");
+					for (var x in n) {
+						var currentElement = n[x];
+						var elem = {};
+						if (currentElement){
+							if (currentElement.startsWith("[x]")) {
+								currentElement=currentElement.substring(3,currentElement.length);
 								elem.name = currentElement;
 								elem.state = true;
 								elem.uri = parent.uid;
 								elem.calendar = parent.calendar;
 								elem.parenttask = parent;
-                                ret.push(elem);
-							}else if (currentElement.startsWith("[ ]") || currentElement.startsWith("[]")){
-                                currentElement=currentElement.substring(3,currentElement.length);
-                                elem.name = currentElement;
+								ret.push(elem);
+							} else if (currentElement.startsWith("[ ]") || currentElement.startsWith("[]")) {
+								currentElement=currentElement.substring(3,currentElement.length);
+								elem.name = currentElement;
 								elem.state = false;
 								elem.uri = parent.uid;
 								elem.calendar = parent.calendar;
 								elem.parenttask = parent;
-                                ret.push(elem);
-                            }
+								ret.push(elem);
+							}
 						}
-                    }
+					}
 				}
+				return ret;
+			};
 
-				//window.alert("retsize: "+ret.lenght+"\nscopesize: "+_$scope.taskelements.length);
-                return ret;
+			this._$scope.getCheckListTaskCount = function(parent) {
+				//this.getCheckListTasks(parent);
+				var ret = 0;
+				var description = parent.note;
+				if (description && description.startsWith("<tag>") && description.endsWith("</tag>")) {
+					description=description.substring(5, description.length);
+					description=description.substring(0, description.length-6);
 
-            };
-
-            this._$scope.getCheckListTaskCount = function(parent) {
-                //this.getCheckListTasks(parent);
-                var ret = 0;
-                var description = parent.note;
-                if(description && description.startsWith("<tag>") && description.endsWith("</tag>")){
-                    description=description.substring(5, description.length);
-                    description=description.substring(0, description.length-6);
-
-                    var n = description.split("\n");
-                    for(var x in n){
-                        if(n[x]){
-                            return true;
-                        }
-                    }
-                }
-
+					var n = description.split("\n");
+					for (var x in n) {
+						if (n[x]) {
+							return true;
+						}
+					}
+				}
 				return false;
-            };
+			};
 
 			this._$scope.getSubTasks = function(tasks, parent) {
 				var ret, task, _i, _len;
 				ret = [];
-
 				for (_i = 0, _len = tasks.length; _i < _len; _i++) {
 					task = tasks[_i];
 					if (task.related === parent.uid && task !== parent && !(parent.hideCompletedSubtasks && task.completed)) {
 						ret.push(task);
 					}
 				}
-
 				return ret;
 			};
 
@@ -396,9 +382,9 @@
 			this._$scope.toggleSubtasks = function(task) {
 				_tasksbusinesslayer.setHideSubtasks(task, !task.hideSubtasks);
 			};
-            this._$scope.toggleChecklist = function(task) {
-                _tasksbusinesslayer.setHideCheckLists(task, !task.hideCheckLists);
-            };
+			this._$scope.toggleChecklist = function(task) {
+				_tasksbusinesslayer.setHideCheckLists(task, !task.hideCheckLists);
+			};
 
 			this._$scope.toggleCompletedSubtasks = function(task) {
 				_tasksbusinesslayer.setHideCompletedSubtasks(task, !task.hideCompletedSubtasks);

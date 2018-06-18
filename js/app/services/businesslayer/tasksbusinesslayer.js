@@ -121,12 +121,12 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				}
 			};
 
-            TasksBusinessLayer.prototype.setHideCheckLists = function(task, hide) {
-                task.hideCheckLists = hide;
-                if (task.calendar.writable) {
-                    this.doUpdate(task);
-                }
-            };
+			TasksBusinessLayer.prototype.setHideCheckLists = function(task, hide) {
+				task.hideCheckLists = hide;
+				if (task.calendar.writable) {
+					this.doUpdate(task);
+				}
+			};
 
 			TasksBusinessLayer.prototype.setHideCompletedSubtasks = function(task, hide) {
 				task.hideCompletedSubtasks = hide;
@@ -519,7 +519,7 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				switch (collectionID) {
 					case 'starred':
 						task.priority = 9;
-			  			return this.doUpdate(task);
+						return this.doUpdate(task);
 					case 'completed':
 						return this.setPercentComplete(task, 100);
 					case 'uncompleted':
@@ -536,7 +536,7 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 						return false;
 					default:
 						return false;
-			  }
+				}
 			};
 
 			TasksBusinessLayer.prototype.changeParent = function(task, parent) {
