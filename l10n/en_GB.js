@@ -114,6 +114,6 @@ OC.L10N.register(
     "Task not found!" : "Task not found!",
     "add a subtask to" : "add a subtask to",
     "Toggle subtasks" : "Toggle subtasks",
-    "Toggle completed subtasks" : "Toggle completed subtasks",
+    "Toggle completed subtasks" : "Toggle completed subtasks"
 },
 "nplurals=2; plural=(n != 1);");
