@@ -914,16 +914,6 @@ ol[dnd-list] {
 					}
 				}
 
-				input {
-					background-color: $white;
-					border-radius: 0;
-					margin-top: 0;
-					color: $gray_dark;
-					font-weight: 500;
-					outline: medium none;
-					padding: 4px;
-				}
-
 				input[type="range"] {
 					border: medium none;
 					box-shadow: none;
@@ -938,6 +928,14 @@ ol[dnd-list] {
 				}
 
 				input {
+					background-color: $white;
+					border-radius: 0;
+					margin-top: 0;
+					color: $gray_dark;
+					font-weight: 500;
+					outline: medium none;
+					padding: 4px;
+
 					&.datepicker-input {
 						width: 60%;
 					}
