@@ -112,6 +112,18 @@ dist:
 	make source
 	make appstore
 
+# Run make and make dist in a Docker container
+.PHONY: docker-dist
+docker-dist:
+	docker run --rm -it -v $(CURDIR):/tasks -w /tasks node make docker-target
+
+# Command used inside Docker container; do not invoke directly
+.PHONY: docker-target
+docker-target:
+	which rsync zip openssl || (apt-get update && apt-get install -y rsync zip openssl)
+	make
+	make dist
+
 # Builds the source package
 .PHONY: source
 source:
@@ -240,7 +252,9 @@ endif
 	cd $(appstore_build_directory)/../; \
 	zip -r $(appstore_package_name).zip $(app_name)
 	tar -czf $(appstore_package_name).tar.gz -C $(appstore_build_directory)/../ $(app_name)
+ifdef CAN_SIGN
 	openssl dgst -sha512 -sign $(private_key) $(appstore_package_name).tar.gz | openssl base64 -out $(appstore_artifact_directory)/$(app_name).sha512
+endif
 
 
 # Command for running JS and PHP tests. Works for package.json files in the js/
