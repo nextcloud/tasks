@@ -85,6 +85,7 @@ OC.L10N.register(
     "All" : "Allt",
     "Current" : "Núverandi",
     "Completed" : "Lokið",
+    "The Tasks app for Nextcloud" : "Verkefnaforrit fyrir Nextcloud",
     "Delete" : "Eyða",
     "Cancel" : "Hætta við",
     "Edit" : "Breyta",
