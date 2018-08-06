@@ -316,7 +316,6 @@ $white: #fff;
 }
 
 #content {
-	overflow: hidden;
 	color: $gray_dark;
 }
 
@@ -327,7 +326,7 @@ $white: #fff;
 		margin: 12px 0;
 		position: relative;
 		border: 1px solid $gray_light;
-		width: calc(100% - 54px);
+		width: calc(100% - 56px);
 		float: left;
 		height: 34px;
 
@@ -544,7 +543,6 @@ ol[dnd-list] {
 			font-weight: bold;
 			margin: -2px 4px 0;
 			padding: 2px 5px;
-			min-height: 22px;
 		}
 	}
 
@@ -651,6 +649,9 @@ ol[dnd-list] {
 
 	.content-wrapper {
 		padding: 0;
+		box-sizing: border-box;
+		height: 100%;
+		overflow: hidden;
 
 		.notice {
 			color: $gray;
@@ -707,7 +708,7 @@ ol[dnd-list] {
 				display: inline-block;
 				min-height: 24px;
 				margin: 13px 0;
-				width: calc(100% - 100px);
+				width: calc(100% - 115px);
 				padding: 0 6px;
 				line-height: 22px;
 				// this border is to adjust the size of the div to the size
@@ -727,12 +728,11 @@ ol[dnd-list] {
 
 			.expandable-container {
 				background: none repeat scroll 0 0 $white;
-				box-sizing: border-box;
 				border: 1px solid $gray;
 				padding: 0 6px;
 				display: none !important;
 				margin: 13px 0;
-				width: calc(100% - 100px);
+				width: calc(100% - 115px);
 				line-height: 24px;
 				min-height: 24px;
 
@@ -994,7 +994,7 @@ ol[dnd-list] {
 							background-color: $gray_easy;
 							box-shadow: none;
 							border-color: $gray_light;
-							min-height: 22px;
+							padding: 3px 5px 3px 18px;
 
 							a.select2-search-choice-close {
 								opacity: .4;
