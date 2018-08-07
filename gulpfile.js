@@ -34,18 +34,18 @@ const gulp = require('gulp'),
 // configure
 const buildTarget = 'app.min.js';
 const scssBuildTarget = 'style.scss';
-const karmaConfig = __dirname + '/../tests/js/config/karma.js';
-const destinationFolder = __dirname + '/public/';
-const scssDestinationFolder = '../css/';
+const karmaConfig = __dirname + '/tests/js/config/karma.js';
+const destinationFolder = __dirname + '/js/public/';
+const scssDestinationFolder = __dirname + '/css/';
 
 const jsSources = [
-	'app/**/*.js'
+	'./js/app/**/*.js'
 ];
 const scssSources = [
-	'../css/src/*.scss'
+	'./css/src/*.scss'
 ];
 
-const testSources = ['../tests/js/unit/**/*.js'];
+const testSources = ['./tests/js/unit/**/*.js'];
 const lintSources = jsSources.concat(testSources).concat(['*.js']);
 const watchSources = lintSources;
 
@@ -59,10 +59,10 @@ const svgConfig = {
 			common: 'icon',
 			dimensions: '',
 			prefix: '.icon-%s',
-			sprite: "../img/sprites.svg",
+			sprite: "./img/sprites.svg",
 			render: {
 				scss: {
-					dest: "../css/src/sprite.scss"
+					dest: "./css/src/sprite.scss"
 				}
 			}
 		}
@@ -147,12 +147,12 @@ gulp.task('watch-karma', (done) => {
 });
 
 gulp.task('svg_sprite', () => {
-	return gulp.src('**/*.svg', {cwd: '../img/src'})
+	return gulp.src('**/*.svg', {cwd: '/img/src'})
 		.pipe(svgSprite(svgConfig))
 		.pipe(gulp.dest('..'));
 });
 
 gulp.task("vendor", () => {
 	return gulp.src(npmFiles(), { base: "./node_modules" })
-		.pipe(gulp.dest('vendor'));
+		.pipe(gulp.dest('./js/vendor'));
 });
