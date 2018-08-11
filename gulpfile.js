@@ -59,10 +59,10 @@ const svgConfig = {
 			common: 'icon',
 			dimensions: '',
 			prefix: '.icon-%s',
-			sprite: "./img/sprites.svg",
+			sprite: "../img/sprites.svg",
 			render: {
 				scss: {
-					dest: "./css/src/sprite.scss"
+					dest: "src/sprite.scss"
 				}
 			}
 		}
@@ -147,9 +147,9 @@ gulp.task('watch-karma', (done) => {
 });
 
 gulp.task('svg_sprite', () => {
-	return gulp.src('**/*.svg', {cwd: '/img/src'})
+	return gulp.src('**/*.svg', {cwd: 'img/src'})
 		.pipe(svgSprite(svgConfig))
-		.pipe(gulp.dest('..'));
+		.pipe(gulp.dest('.'));
 });
 
 gulp.task("vendor", () => {
