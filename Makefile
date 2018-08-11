@@ -91,7 +91,7 @@ build:
 # Installs npm dependencies
 .PHONY: npm
 npm:
-	cd js && $(npm) run build
+	$(npm) run build
 
 # Removes the appstore build
 .PHONY: clean
@@ -134,6 +134,7 @@ source:
 	--exclude=/.idea/ \
 	--exclude=/build/ \
 	--exclude=/js/node_modules/ \
+	--exclude=/node_modules/ \
 	--exclude=*.log
 ifdef CAN_SIGN
 	$(sign) --path "$(source_build_directory)"
@@ -169,19 +170,16 @@ appstore:
 	--exclude=/build \
 	--exclude=/css/src \
 	--exclude=/img/src \
-	--exclude=/js/.bowerrc \
+	--exclude=/.jshintrc \
+	--exclude=/.stylelintrc \
+	--exclude=/gulpfile.js \
+	--exclude=/node_modules \
+	--exclude=/package.json \
+	--exclude=/package-lock.json \
 	--exclude=/js/README.md \
-	--exclude=/js/.jshintrc \
-	--exclude=/js/.stylelintrc \
-	--exclude=/js/bower.json \
-	--exclude=/js/gulpfile.js \
-	--exclude=/js/package.json \
-	--exclude=/js/package-lock.json \
 	--exclude=/js/README.mkdir \
-	--exclude=/js/yarn.lock \
 	--exclude=/js/app \
 	--exclude=/js/config \
-	--exclude=/js/node_modules \
 	--exclude=/js/vendor/**/.bower.json \
 	--exclude=/js/vendor/**/.npmignore \
 	--exclude=/js/vendor/**/bower.json \
