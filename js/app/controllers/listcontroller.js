@@ -60,13 +60,14 @@ angular.module('Tasks').controller('ListController', [
 					});
 				};
 
-				this._$scope.startCreate = function() {
+				this._$scope.startCreate = function(e) {
 					_$scope.status.addingList = true;
 					_$scope.nameError = false;
 					$('.hasTooltip').tooltip('hide');
 					_$timeout(function() {
 						$('#newList').focus();
 					}, 50);
+					e.stopPropagation();
 				};
 
 				this._$scope.create = function() {

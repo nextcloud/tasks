@@ -104,7 +104,7 @@
         </li>
         <li class="newList handler icon-add reactive editing" ng-class="{edit: status.addingList}">
             <a class="addlist icon sprite"
-                ng-click="startCreate()"
+                ng-click="startCreate($event)"
                 oc-click-focus="{selector: '#newList', timeout: 0}">
                 <span class="title"><?php p($l->t('Add List...')); ?></span>
             </a>
