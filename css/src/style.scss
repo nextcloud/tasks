@@ -1314,8 +1314,8 @@ ol[dnd-list] {
 				padding: 0;
 				background-size: auto;
 
-				&.icon-menu {
-					@extend .icon-menu;
+				&.icon-list {
+					@extend .icon-list;
 				}
 
 				&.icon-calendar {

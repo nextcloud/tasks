@@ -376,7 +376,7 @@
 					case 'manual':
 						return 'icon-manual';
 					default:
-						return 'icon-menu';
+						return 'icon-list';
 				}
 			};
 

@@ -199,7 +199,7 @@
             <ul>
                 <li ng-click="setSortOrder($event, 'default')" ng-class="{active: settingsmodel.getById('various').sortOrder == 'default'}" class="handler">
                     <a>
-                        <span class="icon icon-menu"></span>
+                        <span class="icon icon-list"></span>
                         <span class="label"><?php p($l->t('Default')); ?></span>
                         <span class="icon sort-indicator" ng-class="{'icon-sort-up': settingsmodel.getById('various').sortDirection, 'icon-sort-down': !settingsmodel.getById('various').sortDirection}"></span>
                     </a>
