@@ -22,6 +22,6 @@
     <repository type="git">https://github.com/nextcloud/tasks.git</repository>
     <dependencies>
         <owncloud min-version="0" max-version="0"/>
-        <nextcloud min-version="14" max-version="14"/>
+        <nextcloud min-version="13" max-version="14"/>
     </dependencies>
 </info>
