@@ -5,7 +5,7 @@
 # @author Georg Ehrke <oc.list@georgehrke.com>
 # @copyright Georg Ehrke 2017
 # @author Raimund Schlüßler
-# @copyright 2017 Raimund Schlüßler <raimund.schluessler@googlemail.com>
+# @copyright 2018 Raimund Schlüßler <raimund.schluessler@mailbox.org>
 
 # Generic Makefile for building and packaging a Nextcloud app which uses npm and
 # Composer.

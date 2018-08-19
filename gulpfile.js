@@ -11,7 +11,7 @@
  * @copyright 2017 Georg Ehrke <oc.list@georgehrke.com>
  *
  * @author Raimund Schlüßler
- * @copyright 2017 Raimund Schlüßler <raimund.schluessler@googlemail.com>
+ * @copyright 2018 Raimund Schlüßler <raimund.schluessler@mailbox.org>
  */
 
 /*jslint node: true */
