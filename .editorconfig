@@ -7,7 +7,7 @@ end_of_line = lf
 insert_final_newline = true
 
 # Set default charset and indentation
-[*.{php,js}]
+[*.{php,js,scss,vue}]
 charset = utf-8
 indent_style = tab
 tab_width = 4

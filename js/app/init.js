@@ -18,14 +18,36 @@
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+'use strict';
 
-angular.module('Tasks').filter('dateTaskList', function() {
-	'use strict';
-	return function(due) {
-		if (moment(due, "YYYYMMDDTHHmmss").isValid()) {
-			return moment(due, "YYYYMMDDTHHmmss").locale('tasks').calendar();
-		} else {
-			return '';
-		}
-	};
+import {App} from "./app";
+
+if (!OCA.Tasks) {
+	/**
+	 * @namespace OCA.Tasks
+	 */
+	OCA.Tasks = {};
+}
+
+/**
+* @namespace
+*/
+
+$(document).ready(function () {
+	OCA.Tasks.App = new App();
+	OCA.Tasks.App.start();
+
+	var version = OC.config.version.split('.');
+
+	if (version[0] >= 14) {
+		OC.Search = new OCA.Search(OCA.Tasks.App.Vue.filter, OCA.Tasks.App.Vue.cleanSearch);
+	} else {
+		OCA.Tasks.App.Search = {
+			attach: function (search) {
+				search.setFilter('tasks', OCA.Tasks.App.Vue.filter);
+			}
+		};
+
+		OC.Plugins.register('OCA.Search', OCA.Tasks.App.Search);
+	}
 });

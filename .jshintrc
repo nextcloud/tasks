@@ -40,6 +40,8 @@
           "escapeHTML": true,
           "possible": true,
           "dav": true,
-          "OCA": true
+          "OCA": true,
+          "Vue": true,
+          "VueRouter": true
     }
 }

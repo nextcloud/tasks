@@ -1,0 +1,14 @@
+{
+  "env": {
+    "development": {
+      "presets": [
+        ["env", { "modules": false }]
+      ]
+    },
+    "test": {
+      "presets": [
+        ["env", { "targets": { "node": "current" }}]
+      ]
+    }
+  }
+}

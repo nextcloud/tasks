@@ -18,10 +18,20 @@
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+'use strict';
 
-angular.module('Tasks').filter('percentDetails', function() {
-	'use strict';
-	return function(percent) {
-		return t('tasks', '%s %% completed').replace('%s', percent).replace('%%', '%');
-	};
+import Vue from 'vue';
+import Vuex from 'vuex';
+import Axios from 'axios';
+Axios.defaults.headers.common.requesttoken = OC.requestToken;
+
+Vue.use(Vuex);
+
+export default new Vuex.Store({
+	state: {
+	},
+	mutations: {
+	},
+	actions: {
+	}
 });

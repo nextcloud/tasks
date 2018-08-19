@@ -1,5 +1,5 @@
 /**
- * Nextcloud - Inventory
+ * Nextcloud - Tasks
  *
  * This file is licensed under the Affero General Public License version 3 or
  * later. See the COPYING file.
@@ -19,35 +19,31 @@
 
 // get plugins
 const gulp = require('gulp'),
-	uglify = require('gulp-uglify'),
 	jshint = require('gulp-jshint'),
-	KarmaServer = require('karma').Server,
 	concat = require('gulp-concat'),
-	wrap = require('gulp-wrap'),
-	strip = require('gulp-strip-banner'),
-	babel = require('gulp-babel'),
 	stylelint = require('gulp-stylelint'),
-	sourcemaps = require('gulp-sourcemaps'),
 	svgSprite = require('gulp-svg-sprite'),
-	npmFiles = require('gulp-npm-files');
+	webpackStream = require('webpack-stream'),
+	webpackDevelopmentConfig = require('./webpack.common.js'),
+	webpackProductionConfig = require('./webpack.prod.js');
 
 // configure
-const buildTarget = 'app.min.js';
-const scssBuildTarget = 'style.scss';
-const karmaConfig = __dirname + '/tests/js/config/karma.js';
 const destinationFolder = __dirname + '/js/public/';
+const scssBuildTarget = 'style.scss';
 const scssDestinationFolder = __dirname + '/css/';
 
 const jsSources = [
-	'./js/app/**/*.js'
+	'js/app/**/*.js'
 ];
 const scssSources = [
-	'./css/src/*.scss'
+	'css/src/*.scss'
+];
+const testSources = [
+	'test/**/*.js'
 ];
 
-const testSources = ['./tests/js/unit/**/*.js'];
 const lintSources = jsSources.concat(testSources).concat(['*.js']);
-const watchSources = lintSources;
+const watchSources = jsSources.concat(['js/app/**/*.vue']);
 
 const svgConfig = {
 	shape: {
@@ -62,7 +58,7 @@ const svgConfig = {
 			sprite: "../img/sprites.svg",
 			render: {
 				scss: {
-					dest: "src/sprite.scss"
+					dest: "src/sprites.scss"
 				}
 			}
 		}
@@ -70,31 +66,27 @@ const svgConfig = {
 };
 
 // tasks
-gulp.task('build', ['lint'], () => {
 
-	return gulp.src(jsSources)
-		.pipe(babel({
-			presets: ['es2015'],
-			compact: false,
-			babelrc: false,
-			ast: false
-		}))
-		.pipe(strip())
-		.pipe(sourcemaps.init({identityMap: true}))
-		.pipe(concat(buildTarget))
-		.pipe(wrap(`(function($, oc_requesttoken, undefined){
-	'use strict';
+gulp.task('default', ['build']);
 
-	<%= contents %>
-})(jQuery, oc_requesttoken);`))
-		.pipe(uglify())
-		.pipe(sourcemaps.write('./'))
-		.pipe(gulp.dest(destinationFolder));
+gulp.task('build', ['lint', 'scssConcat'], function(callback) {
+	return webpackStream(webpackProductionConfig, require('webpack'))
+	.pipe(gulp.dest(destinationFolder));
 });
 
-gulp.task('default', ['build', 'vendor', 'scsslint', 'scssConcat']);
+gulp.task('development', ['lint', 'scssConcat'], function(callback) {
+	return webpackStream(webpackDevelopmentConfig, require('webpack'))
+	.pipe(gulp.dest(destinationFolder));
+});
 
-gulp.task('lint', () => {
+gulp.task('jsWatch', ['jslint'], function(callback) {
+	return webpackStream(webpackDevelopmentConfig, require('webpack'))
+	.pipe(gulp.dest(destinationFolder));
+});
+
+gulp.task('lint', ['jslint', 'scsslint']);
+
+gulp.task('jslint', () => {
 	return gulp.src(lintSources)
 		.pipe(jshint('.jshintrc'))
 		.pipe(jshint.reporter('default'))
@@ -124,35 +116,12 @@ gulp.task('scssConcatWatch', ['scsslint'], () => {
 });
 
 gulp.task('watch', () => {
-	gulp.watch(watchSources, ['build']);
+	gulp.watch(watchSources, ['jsWatch']);
 	gulp.watch(scssSources, ['scssConcatWatch']);
-});
-
-gulp.task('karma', (done) => {
-	new KarmaServer({
-		configFile: karmaConfig,
-		singleRun: true,
-		browsers: ['Firefox'],
-		reporters: ['progress', 'coverage']
-	}, done).start();
-});
-
-gulp.task('watch-karma', (done) => {
-	new KarmaServer({
-		configFile: karmaConfig,
-		autoWatch: true,
-		browsers: ['Firefox'],
-		reporters: ['progress', 'coverage']
-	}, done).start();
 });
 
 gulp.task('svg_sprite', () => {
 	return gulp.src('**/*.svg', {cwd: 'img/src'})
 		.pipe(svgSprite(svgConfig))
 		.pipe(gulp.dest('.'));
-});
-
-gulp.task("vendor", () => {
-	return gulp.src(npmFiles(), { base: "./node_modules" })
-		.pipe(gulp.dest('./js/vendor'));
 });
