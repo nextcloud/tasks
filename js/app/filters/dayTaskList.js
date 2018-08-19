@@ -2,7 +2,7 @@
  * Nextcloud - Tasks
  *
  * @author Raimund Schlüßler
- * @copyright 2017 Raimund Schlüßler <raimund.schluessler@googlemail.com>
+ * @copyright 2018 Raimund Schlüßler <raimund.schluessler@mailbox.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
