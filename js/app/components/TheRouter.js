@@ -19,13 +19,26 @@
  *
  */
 
-angular.module('Tasks').filter('timeTaskList', function() {
-	'use strict';
-	return function(due) {
-		if (moment(due, "YYYYMMDDTHHmmss").isValid()) {
-			return moment(due, "YYYYMMDDTHHmmss").format('HH:mm');
-		} else {
-			return '';
-		}
-	};
+import Vue from "vue";
+import VueRouter from "vue-router";
+
+import Collections from "./TheCollections.vue";
+import ItemsNew from "./TheItemsCreator.vue";
+
+const routes = [
+	// using
+	// { path: '/collections', component: Collections, alias: '/' },
+	// instead of
+	{ path: '/', redirect: '/collections' },
+	{ path: '/collections', component: Collections},
+	// would also be an option, but it currently does not work
+	// reliably with router-link due to
+	// https://github.com/vuejs/vue-router/issues/419
+	{ path: '/calendars/:id', component: Calendars, props: true},
+];
+
+Vue.use(VueRouter);
+
+export default new VueRouter({
+	routes, // short for `routes: routes`
 });
