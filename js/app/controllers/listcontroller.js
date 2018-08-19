@@ -90,7 +90,7 @@ angular.module('Tasks').controller('ListController', [
 					_$scope.status.newListName = "";
 				};
 
-				this._$scope.startEdit = function(calendar) {
+				this._$scope.startEdit = function(e, calendar) {
 					_$scope.status.addingList = false;
 					_$scope.nameError = false;
 					$('.hasTooltip').tooltip('hide');
@@ -99,15 +99,17 @@ angular.module('Tasks').controller('ListController', [
 					_$timeout(function() {
 						$('#list_' + calendar.uri + ' input.edit').focus();
 					}, 50);
+					e.stopPropagation();
 				};
 
-				this._$scope.showCalDAVUrl = function(calendar) {
+				this._$scope.showCalDAVUrl = function(e, calendar) {
 					_$scope.status.addingList = false;
 					_$scope.nameError = false;
 					$location.path('/calendars/' + _$scope.route.calendarID + '/edit/caldav');
 					_$timeout(function() {
 						$('#list_' + calendar.uri + ' input.caldav').focus();
 					}, 50);
+					e.stopPropagation();
 				};
 
 				this._$scope.hideCalDAVUrl = function() {
