@@ -45,13 +45,13 @@
             <div class="app-navigation-entry-menu" ng-show="calendar.writable">
                 <ul>
                     <li>
-                        <a ng-click="startEdit(calendar)">
+                        <a ng-click="startEdit($event, calendar)">
                             <span class="icon-rename"></span>
                             <span><?php p($l->t('Edit')); ?></span>
                         </a>
                     </li>
                     <li>
-                        <a ng-click="showCalDAVUrl(calendar)">
+                        <a ng-click="showCalDAVUrl($event, calendar)">
                             <span class="icon-public"></span>
                             <span><?php p($l->t('Link')); ?></span>
                         </a>
@@ -104,7 +104,7 @@
         </li>
         <li class="newList handler icon-add reactive editing" ng-class="{edit: status.addingList}">
             <a class="addlist icon sprite"
-                ng-click="startCreate()"
+                ng-click="startCreate($event)"
                 oc-click-focus="{selector: '#newList', timeout: 0}">
                 <span class="title"><?php p($l->t('Add List...')); ?></span>
             </a>
