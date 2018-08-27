@@ -9,10 +9,14 @@
   "license": "AGPLv3",
   "private": true,
   "homepage": "https://github.com/nextcloud/tasks",
+  "watch": {
+    "build": "node node_modules/gulp-cli/bin/gulp.js"
+  },
   "scripts": {
     "test": "node node_modules/gulp-cli/bin/gulp.js karma",
     "prebuild": "npm install && npm upgrade",
-    "build": "node node_modules/gulp-cli/bin/gulp.js"
+    "build": "node node_modules/gulp-cli/bin/gulp.js",
+    "watch": "npm-watch"
   },
   "repository": {
     "type": "git",

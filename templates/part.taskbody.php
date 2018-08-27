@@ -1,7 +1,7 @@
 <div class="task-body"
     type="task"
     taskID="{{ task.uri }}"
-    ng-class="{active: route.taskID==task.uri, subtasks: hasSubtasks(task), completedsubtasks: hasCompletedSubtasks(task), subtaskshidden: task.hideSubtasks, attachment: task.note!=''}">
+    ng-class="{active: route.taskID==task.uri, subtasks: hasSubtasks(task), completedsubtasks: hasCompletedSubtasks(task), subtaskshidden: task.hideSubtasks, checklistshidden: task.hideChecklists, attachment: task.note!=''}">
 
     <div class="percentbar" ng-if="task.complete > 0 ">
         <div class="percentdone"
@@ -35,12 +35,25 @@
             title="<?php p($l->t('Toggle subtasks')); ?>">
         </span>
     </a>
-    <a class="handler" ng-click="toggleChecklist(task)">
-        <span class="icon right large subtasks reactive"
-            ng-class="task.hideSubtasks ? 'icon-subtasks-hidden' : 'icon-subtasks-visible'"
-            title="<?php p($l->t('Toggle subtasks')); ?>">
+
+  <!--  <a class="task-checkbox handler"
+       name="toggleChecklist"
+       ng-click="toggleChecklist(task)"
+       role="checkbox"
+    >
+        <span class="icon task-checkbox reactive"
+              ng-class="task.hideChecklists ? 'icon-category-organization' : 'icon-subtasks-visible'"
+              title="<?php /*p($l->t('ThideChecklistst')); */?>"
+        ></span>
+    </a>-->
+
+
+   <!-- <a class="handler" ng-click="toggleChecklist(task)">
+        <span class="icon right large reactive"
+            ng-class="task.hideChecklists ? 'icon-category-organization' : 'icon-subtasks-visible'"
+            title="<?php /*p($l->t('Toggle Checklist')); */?>">
         </span>
-    </a>
+    </a>-->
     <a class="handler" ng-click="toggleCompletedSubtasks(task)">
         <span class="icon icon-toggle right large toggle-completed-subtasks reactive"
             ng-class="{'active': !task.hideCompletedSubtasks}"
@@ -94,7 +107,7 @@
 </div>
 
 <div class="checklist-container"
-    ng-class="{checklisttaskhidden: hideChecklists(task)}"
+    ng-class="{checklistshidden: hideChecklists(task)}"
     style="
     margin-top:-1px;
     border-bottom-style:solid;
@@ -121,6 +134,7 @@
                     name="toggleCompleted"
                     role="checkbox"
                     ng-click="changeValueInURI(t.name,t.state,t.uri, t.calendar, t.parenttask)"
+                    ng-checked="{{t.state}}"
                     aria-checked="{{t.state}}"
                     aria-label="<?php p($l->t('Task is completed')); ?>">
                     <span class="icon task-checkbox reactive" ng-class="{'icon-checkmark': t.state}"></span>
@@ -130,14 +144,15 @@
                     <span class="icon icon-trash right large reactive" >
                     </span>
                 </a>
-                <a class="handler" ng-click="toggleChecklist(task)">
+                <!--<a class="handler" ng-click="toggleChecklist(task)">
                     <span class="icon right large subtasks reactive"
                         ng-class="task.hideSubtasks ? 'icon-subtasks-hidden' : 'icon-subtasks-visible'"
-                        title="<?php p($l->t('Toggle checklisttask')); ?>">
+                        title="<?php /*p($l->t('Toggle checklisttask')); */?>">
                     </span>
-                </a>
+                </a>-->
+
                 <div class="title-wrapper">
-                    <span class="title" ng-bind-html=" t.name | linky:'_blank':{rel: 'nofollow'}"></span>
+                   <span class="title" ng-bind-html=" t.name | linky:'_blank':{rel: 'nofollow'}"></span>
                 </div>
             </div>
         </li>

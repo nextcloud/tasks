@@ -599,6 +599,14 @@ angular.module('Tasks').factory('TasksBusinessLayer', [
 				return this._persistence.deleteComment(taskID, commentID);
 			};
 
+            TasksBusinessLayer.prototype.updateOnChecklistTaskTrigger = function(task) {
+            	console.log("update");
+                if (task.calendar.writable) {
+                    this.doUpdate(task);
+                }
+            };
+
+
 		return TasksBusinessLayer;
 
 	  })();

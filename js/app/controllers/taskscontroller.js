@@ -105,7 +105,9 @@
 				});
 				if (parent) {
 					_tasksbusinesslayer.setHideSubtasks(parent, 0);
+                    _tasksbusinesslayer.setHideCheckLists(parent, 0);
 				}
+
 				_$scope.status.focusTaskInput = false;
 				_$scope.status.focusSubtaskInput = false;
 				_$scope.status.addSubtaskTo = null;
@@ -160,6 +162,7 @@
 
 			this._$scope.hideChecklists = function(task) {
 				var taskID = _$scope.route.taskID;
+                console.log("hide checklist tcontroller");
 				var descendantIDs = _$tasksmodel.getDescendantIDs(task);
 				if (task.uri === taskID) {
 					return false;
@@ -235,22 +238,29 @@
 				};
 			};
 
+
+            this._$scope.toggleCompletedSubtasks = function(task) {
+
+            };
+
 			this._$scope.changeValueInURI = function(name,state,uri, calendar, parenttask) {
 				var oldDescription = parenttask.note;
 				var newDescription = "";
 
-				if (!state) {
-					newDescription = oldDescription.replace("[ ]"+name, "[x]"+name);
+                var containsX=oldDescription.includes("[x]"+name);
+				if(containsX){state=true;}
 
+                //console.log("state: "+state+" containsx "+containsX);
+                if (!state) {
+					newDescription = oldDescription.replace("[ ]"+name, "[x]"+name);
 				} else {
 					newDescription = oldDescription.replace("[x]"+name, "[ ]"+name);
-
 				}
 				parenttask.note=newDescription;
 
-				_tasksbusinesslayer.doUpdate(parenttask);
-				this._$scope.apply();
-				_$scope.apply();
+                _tasksbusinesslayer.updateOnChecklistTaskTrigger(parenttask);
+
+
 			};
 
 			this._$scope.deleteChecklistTask = function(name, parenttask) {
@@ -263,8 +273,6 @@
 				parenttask.note=newDescription;
 
 				_tasksbusinesslayer.doUpdate(parenttask);
-				this._$scope.apply();
-				_$scope.apply();
 			};
 
 
@@ -284,9 +292,11 @@
 
 					parent.note = pretags+tag+midtags+tagend+posttags;
 					_tasksbusinesslayer.doUpdate(parent);
+					/*
 					this.taskelements = this._$scope.getCheckListTasklist();
 					this._$scope.apply();
 					_$scope.apply();
+					*/
 				}
 			};
 
@@ -302,7 +312,7 @@
 				var description = parent.note;
 				//description = "<tag>[ ] abc</tag>";
 				
-				if (description && description.startsWith("<tag>") && description.endsWith("</tag>")) {
+				if (description && description.includes("<tag>") && description.endsWith("</tag>")) {
 
 					description=description.substring(5, description.length);
 					description=description.substring(0, description.length-6);
