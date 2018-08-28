@@ -20,52 +20,61 @@
  */
 'use strict';
 
+if (!OCA.Tasks) {
+	/**
+	 * @namespace OCA.Tasks
+	 */
+	OCA.Tasks = {};
+}
+
+import App from './app.vue';
+
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { mapState } from 'vuex';
 import VueRouter from 'vue-router';
 
 import router from './components/TheRouter.js';
 import store from './store';
 
-Vue.prototype.OC = OC;
 Vue.prototype.t = t;
 Vue.prototype.n = n;
+Vue.prototype.OC = OC;
+Vue.prototype.OCA = OCA;
 
-export class App {
-	start() {
-		OCA.Tasks.App.Vue = new Vue({
-			el: '.app-tasks',
-			router: router,
-			store: store,
-			data: {
-				active: 'items',
-				searchString: '',
-				snap: false,
-				views: [
-					{
-						name: t('tasks', 'Collections'),
-						id: "collections"
-					},
-					{
-						name: t('tasks', 'Calendars'),
-						id: "calendars"
-					}
-				]
-			},
-			methods: {
-				filter(query) {
-					this.searchString = query;
-				},
-				cleanSearch() {
-					this.searchString = '';
+OCA.Tasks.App = new Vue({
+	el: '.app-tasks',
+	router,
+	store,
+	data: function () {
+		return {
+			searchString: ''
+		};
+	},
+	mounted: function() {
+		var version = OC.config.version.split('.');
+
+		if (version[0] >= 14) {
+			OC.Search = new OCA.Search(this.filter, this.cleanSearch);
+		} else {
+			OCA.Tasks.Search = {
+				attach: function (search) {
+					search.setFilter('tasks', this.filter);
 				}
-			},
-			computed: mapState({
-				showModal: state => state.showModal
-			})
-		});
+			};
 
-		store.dispatch('loadItems');
-	}
-}
+			OC.Plugins.register('OCA.Search', OCA.Tasks.Search);
+		}
+	},
+	beforeMount() {
+		this.$store.dispatch('loadTasks');
+	},
+	methods: {
+		filter(query) {
+			this.searchString = query;
+		},
+		cleanSearch() {
+			this.searchString = '';
+		}
+	},
+	render: h => h(App)
+});

@@ -90,6 +90,10 @@
       "!**/node_modules/**",
       "!**/vendor/**"
     ],
-    "coverageReporters": ["json", "text", "html"]
+    "coverageReporters": [
+      "json",
+      "text",
+      "html"
+    ]
   }
 }
