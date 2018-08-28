@@ -29,9 +29,27 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
 	state: {
+		tasks: []
 	},
 	mutations: {
+		setTasks(state, payload) {
+			state.tasks = payload.tasks;
+		}
 	},
 	actions: {
+		loadTasks({commit}) {
+			return new Promise(function(resolve) {
+				// Axios.get(OC.generateUrl('apps/tasks/tasks'))
+				// .then(function (response) {
+				// 	commit('setTasks' , {
+				// 		tasks: response.data.data.tasks
+				// 	});
+				// 	resolve();
+				// })
+				// .catch(function (error) {
+				// 	console.log(error);
+				// });
+			});
+		}
 	}
 });
