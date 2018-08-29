@@ -22,33 +22,55 @@
 
 import Vue from 'vue';
 import Vuex from 'vuex';
-import Axios from 'axios';
-Axios.defaults.headers.common.requesttoken = OC.requestToken;
+import Requests from './services/requests';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
 	state: {
-		tasks: []
+		tasks: [],
+		collections: [
+		],
+		calendars: [
+			{
+				uri: "test-1",
+				displayname: "Test 1",
+				color: "#eef",
+				writable: true
+			},
+			{
+				uri: "test-2",
+				displayname: "Test 2",
+				color: "#eef",
+				writable: false
+			},
+			{
+				uri: "test-3",
+				displayname: "Test 3",
+				color: "#112233",
+				writable: true
+			}
+		],
+		dayOfMonth: 23
 	},
 	mutations: {
-		setTasks(state, payload) {
-			state.tasks = payload.tasks;
+		setCollections(state, payload) {
+			state.collections = payload.collections;
 		}
 	},
 	actions: {
-		loadTasks({commit}) {
+		loadCollections({commit}) {
 			return new Promise(function(resolve) {
-				// Axios.get(OC.generateUrl('apps/tasks/tasks'))
-				// .then(function (response) {
-				// 	commit('setTasks' , {
-				// 		tasks: response.data.data.tasks
-				// 	});
-				// 	resolve();
-				// })
-				// .catch(function (error) {
-				// 	console.log(error);
-				// });
+				Requests.get(OC.generateUrl('apps/tasks/collections'))
+				.then(response => {
+					commit('setCollections' , {
+						collections: response.data.data.collections
+					});
+					resolve();
+				})
+				.catch(error => {
+					console.log(error);
+				});
 			});
 		}
 	}

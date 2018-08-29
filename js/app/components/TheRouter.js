@@ -22,21 +22,21 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import TheGeneralCollections from "./TheGeneralCollections.vue";
-import TheWeekCollection from "./TheWeekCollection.vue";
-import TheCalendarCollections from "./TheCalendarCollections.vue";
+import CollectionGeneral from "./TheCollections/General.vue";
+import CollectionWeek from "./TheCollections/Week.vue";
+import CollectionCalendar from "./TheCollections/Calendar.vue";
 
 const routes = [
 	// using
-	// { path: '/collections', component: Collections, alias: '/' },
+	// { path: '/collections/all', component: CollectionGeneral, alias: '/' },
 	// instead of
 	{ path: '/', redirect: '/collections/all' },
-	{ path: '/collections/:collectionId', component: TheGeneralCollections},
 	// would also be an option, but it currently does not work
 	// reliably with router-link due to
 	// https://github.com/vuejs/vue-router/issues/419
-	{ path: '/collections/week', component: TheWeekCollection},
-	{ path: '/calendars/:id', component: TheCalendarCollections, props: true},
+	{ path: '/collections/week', component: CollectionWeek},
+	{ path: '/collections/:collectionId', component: CollectionGeneral},
+	{ path: '/calendars/:id', component: CollectionCalendar, props: true},
 ];
 
 Vue.use(VueRouter);
