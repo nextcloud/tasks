@@ -20,8 +20,41 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<div>
-		Settings
+	<div id="app-settings" ng-controller="SettingsController">
+		<div id="app-settings-header">
+			<button class="settings-button" data-apps-slide-toggle="#app-settings-content">
+				<span>{{ t('tasks', 'Settings') }}</span>
+			</button>
+		</div>
+		<div id="app-settings-content">
+			<ul>
+				<li>
+					<label for="startOfWeek">{{ t('tasks', 'Start of week') }}</label>
+					<select id="startOfWeek"
+						ng-change="setStartOfWeek()"
+						ng-model="settingsmodel.getById('various').startOfWeek"
+						ng-options="startOfWeekOption.id as startOfWeekOption.name for startOfWeekOption in startOfWeekOptions">
+					</select>
+				</li>
+				<li class="headline">
+					{{ t('tasks', 'Visibility of Smart Collections') }}
+				</li>
+				<li v-for="collection in collections"
+					:key="collection.id">
+					<div class="label-container">
+						<span class="icon" :class="collection.icon">
+							<text ng-show="collection.id=='today'">{{ dayOfMonth }}</text>
+						</span>
+						<label :for="'visibilityCollection-' + collection.id" class="title">{{ collection.displayname }}</label>
+					</div>
+					<select :id="'visibilityCollection-' + collection.id"
+						ng-change="setVisibility(collection.id)"
+						ng-model="collection.show"
+						ng-options="collectionOption.id as collectionOption.name for collectionOption in collectionOptions">
+					</select>
+				</li>
+			</ul>
+		</div>
 	</div>
 </template>
 
@@ -29,8 +62,13 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 	import { mapState } from 'vuex';
 
 	export default {
-		computed: mapState({
-		}),
+		computed: Object.assign({},
+			mapState({
+				collections: state => state.collections,
+				calendars: state => state.calendars,
+				dayOfMonth: state => state.dayOfMonth
+			})
+		),
 		components: {
 		}
 	}

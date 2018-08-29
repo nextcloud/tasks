@@ -20,18 +20,23 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<div>
-		TheCalendarCollections
-	</div>
+	<ul class="colorpicker-list">
+		<li ng-repeat="color in colors"
+			ng-class="{ selected: (color===selected) }"
+			ng-click="pick(color)"
+			ng-style="{ 'background-color':color}; "></li>
+		<li class="randomcolour"
+			ng-click="randomizeColour()"
+			ng-style="{ 'background-color':random}; ">
+			<span class="icon icon-random"></span>
+		</li>
+	</ul>
 </template>
 
 <script>
 	import { mapState } from 'vuex';
 
 	export default {
-		computed: mapState({
-		}),
-		components: {
-		}
+		name: 'colorpicker'
 	}
 </script>
