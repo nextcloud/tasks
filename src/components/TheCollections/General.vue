@@ -24,28 +24,28 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 	<div>
 		<div v-for="calendar in calendars"
 			:key="calendar.id"
-			class="grouped-tasks ui-droppable"
-			:rel="calendar.uri">
+			:rel="calendar.uri"
+			class="grouped-tasks ui-droppable">
 			<h2 class="heading">
 				<text>{{ calendar.displayname }}</text>
 			</h2>
-			<ol class="tasks"
-				:calendarID="calendar.uri"
+			<ol :calendarID="calendar.uri"
 				:collectionID="$route.params.collectionId"
+				class="tasks"
 				type="list"
 				dnd-list="draggedTasks"
 				dnd-drop="dropAsRootTask(event, item, index)"
 				dnd-dragover="dragover(event, index)">
-				<li class="task-item ui-draggable handler"
+				<li v-for="task in tasks"
 					:taskID="task.uri"
+					:key="task.id"
+					class="task-item ui-draggable handler"
 					ng-animate="'animate'"
 					ng-click="openDetails(task.uri,$event)"
 					ng-class="{done: task.completed}"
 					dnd-draggable="task"
 					dnd-dragstart="dragStart(event)"
-					dnd-dragend="dragEnd(event)"
-					v-for="task in tasks"
-					:key="task.id">
+					dnd-dragend="dragEnd(event)">
 					<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,calendar.uri) | filter:filterTasks(task,route.collectionID) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
 					<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
 					<task-body />
@@ -59,18 +59,18 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-	import { mapState } from 'vuex';
-	import TaskBody from '../Task.vue';
+import { mapState } from 'vuex'
+import TaskBody from '../Task'
 
-	export default {
-		computed: Object.assign({},
-			mapState({
-				calendars: state => state.calendars,
-				tasks: state => state.tasks
-			})
-		),
-		components: {
-			'task-body': TaskBody
-		}
-	}
+export default {
+	components: {
+		'task-body': TaskBody
+	},
+	computed: Object.assign({},
+		mapState({
+			calendars: state => state.calendars,
+			tasks: state => state.tasks
+		})
+	)
+}
 </script>

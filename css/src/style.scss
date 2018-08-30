@@ -90,11 +90,11 @@ $white: #fff;
 	}
 
 	.app-navigation-entry-edit {
-		&.name input[type="text"] {
+		&.name input[type='text'] {
 			width: calc(100% - 72px);
 		}
 
-		&.caldav input[type="text"] {
+		&.caldav input[type='text'] {
 			width: calc(100% - 36px);
 		}
 
@@ -248,7 +248,6 @@ $white: #fff;
 
 .confirmation-confirm {
 	@extend .confirmation-abort;
-
 	background-color: $red !important;
 	cursor: default !important;
 }
@@ -914,14 +913,14 @@ ol[dnd-list] {
 					}
 				}
 
-				input[type="range"] {
+				input[type='range'] {
 					border: medium none;
 					box-shadow: none;
 					width: calc(100% - 50px);
 					vertical-align: middle;
 				}
 
-				input[type="text"] {
+				input[type='text'] {
 					background: none repeat scroll 0 0 $gray_easy;
 					margin: 0;
 					min-height: 0;
@@ -1192,7 +1191,7 @@ ol[dnd-list] {
 
 	&.icon-checkmark,
 	&.icon-tag-active,
-	&[class*=" icon-task-star-"] {
+	&[class*=' icon-task-star-'] {
 		opacity: 1 !important;
 	}
 
@@ -1310,7 +1309,7 @@ ol[dnd-list] {
 		& > a span {
 			opacity: 1 !important;
 
-			&[class*=" icon-"] {
+			&[class*=' icon-'] {
 				padding: 0;
 				background-size: auto;
 

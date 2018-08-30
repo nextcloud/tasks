@@ -1,4 +1,4 @@
 <?php
-    script('tasks', 'merged');
-    style('tasks', 'style');
+    script('tasks', 'tasks');
+    style('tasks', 'tasks');
 ?>
