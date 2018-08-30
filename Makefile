@@ -73,16 +73,15 @@ build:
 development:
 	$(npm) install
 	$(npm) update
-	$(npm) run development
+	$(npm) run dev
 
 # Removes the build directory and the compiled files
 .PHONY: clean
 clean:
-	rm -f ./css/style.scss
 	rm -f ./css/src/sprites.scss
 	rm -f ./img/sprites.svg
-	rm -f ./js/public/build.js
-	rm -f ./js/public/build.js.map
+	rm -f ./js/tasks.js
+	rm -f ./js/tasks.js.map
 	rm -rf $(build_directory)
 
 # Same as clean but also removes dependencies installed by npm
@@ -103,11 +102,17 @@ appstore: clean build
 	--exclude=/.git \
 	--exclude=/.babelrc \
 	--exclude=/.editorconfig \
+	--exclude=/.eslintrc.js \
+	--exclude=/.gitattributes \
 	--exclude=/.gitignore \
 	--exclude=/.gitlab-ci.yml \
-	--exclude=/.jshintrc \
+	--exclude=/.prettierrc.js \
+	--exclude=/.scrutinizer.yml \
 	--exclude=/.stylelintrc \
+	--exclude=/.travis.yml \
+	--exclude=/.tx \
 	--exclude=/.v8flags*.json \
+	--exclude=/build.xml \
 	--exclude=/CONTRIBUTING.md \
 	--exclude=/issue_template.md \
 	--exclude=/gulpfile.js \
@@ -117,13 +122,11 @@ appstore: clean build
 	--exclude=/README.md \
 	--exclude=/webpack.common.js \
 	--exclude=/webpack.prod.js \
-	--exclude=/webpack.test.js \
-	--exclude=/.nyc_output/ \
+	--exclude=/webpack.dev.js \
 	--exclude=/build \
 	--exclude=/coverage \
-	--exclude=/css/src \
 	--exclude=/img/src \
-	--exclude=/js/app \
+	--exclude=/src \
 	--exclude=/node_modules \
 	--exclude=/screenshots/ \
 	--exclude=/test
