@@ -26,32 +26,30 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			ng-show="TaskState()=='found'"
 			ng-class="{'disabled': !task.calendar.writable}">
 			<div class="title" ng-class="{'editing':route.parameter=='name'}">
-				<a class="checkbox reactive"
+				<a :aria-checked="task.completed"
+					:aria-label="t('tasks', 'Task is completed')"
+					class="checkbox reactive"
 					ng-click="toggleCompleted(task)"
-					role="checkbox"
-					:aria-checked="task.completed"
-					:aria-label="t('tasks', 'Task is completed')">
-					<span class="icon detail-checkbox" ng-class="{'icon-checkmark':task.completed, 'disabled': !task.calendar.writable}"></span>
+					role="checkbox">
+					<span class="icon detail-checkbox" ng-class="{'icon-checkmark':task.completed, 'disabled': !task.calendar.writable}" />
 				</a>
 				<a class="star reactive" ng-click="toggleStarred(task)">
-					<span class="icon icon-task-star"
-						:class="{'icon-task-star-high': task.priority>5, 'icon-task-star-medium':task.priority==5, 'icon-task-star-low':task.priority > 0 && task.priority < 5, 'disabled': !task.calendar.writable}"></span>
+					<span :class="{'icon-task-star-high': task.priority>5, 'icon-task-star-medium':task.priority==5, 'icon-task-star-low':task.priority > 0 && task.priority < 5, 'disabled': !task.calendar.writable}"
+						class="icon icon-task-star" />
 				</a>
-				<div class="title-text handler"
-					:class="{'strike-through':task.completed}"
+				<div :class="{'strike-through':task.completed}"
+					class="title-text handler"
 					ng-click="editName($event, task)"
 					oc-click-focus="{selector: '#editName', timeout: 0}"
-					ng-bind-html="task.summary | linky:'_blank':{rel: 'nofollow'}">
-				</div>
+					ng-bind-html="task.summary | linky:'_blank':{rel: 'nofollow'}" />
 				<div class="expandable-container handler">
 					<div class="expandingArea active">
-						<pre><span>{{ task.summary }}</span><br /></pre>
+						<pre><span>{{ task.summary }}</span><br></pre>
 						<textarea id="editName"
 							maxlength="200"
 							ng-model="task.summary"
 							ng-keydown="endName($event)"
-							ng-change="triggerUpdate(task)">
-						</textarea>
+							ng-change="triggerUpdate(task)" />
 					</div>
 				</div>
 			</div>
@@ -62,7 +60,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						ng-click="editStart($event, task)">
 						<div>
 							<span class="icon icon-calendar" ng-class="{'icon-calendar-due':isDue(task.start),
-							'icon-calendar-overdue':isOverDue(task.start)}"></span>
+							'icon-calendar-overdue':isOverDue(task.start)}" />
 							<span class="section-title">
 								<!-- <text>{{ task.start | startDetails }}</text> -->
 							</span>
@@ -84,10 +82,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						</div>
 						<div class="utils">
 							<a>
-								<span class="icon detail-save icon-checkmark-color handler end-edit reactive"></span>
+								<span class="icon detail-save icon-checkmark-color handler end-edit reactive" />
 							</a>
 							<a class="handler end-edit" ng-click="deleteStartDate(task)">
-								<span class="icon icon-trash reactive"></span>
+								<span class="icon icon-trash reactive" />
 							</a>
 						</div>
 					</li>
@@ -95,7 +93,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						ng-class="{'date':isDue(task.due), 'editing':route.parameter=='duedate', 'high':isOverDue(task.due)}"
 						ng-click="editDueDate($event, task)">
 						<div>
-							<span class="icon icon-calendar" ng-class="{'icon-calendar-due':isDue(task.due), 'icon-calendar-overdue':isOverDue(task.due)}"></span>
+							<span class="icon icon-calendar" ng-class="{'icon-calendar-due':isDue(task.due), 'icon-calendar-overdue':isOverDue(task.due)}" />
 							<span class="section-title">
 								<!-- <text>{{ task.due | dateDetails }}</text> -->
 							</span>
@@ -117,20 +115,20 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						</div>
 						<div class="utils">
 							<a>
-								<span class="icon detail-save icon-checkmark-color handler end-edit reactive"></span>
+								<span class="icon detail-save icon-checkmark-color handler end-edit reactive" />
 							</a>
 							<a class="handler end-edit" ng-click="deleteDueDate(task)">
-								<span class="icon icon-trash reactive"></span>
+								<span class="icon icon-trash reactive" />
 							</a>
 						</div>
 					</li>
-					<li class="section detail-all-day handler reactive"
+					<li :aria-checked="task.allDay"
+						class="section detail-all-day handler reactive"
 						ng-click="toggleAllDay(task)"
 						ng-if="isAllDayPossible(task)"
-						role="checkbox"
-						:aria-checked="task.allDay">
+						role="checkbox">
 						<div>
-							<span class="icon detail-checkbox" ng-class="{'icon-checkmark': task.allDay, 'disabled': !task.calendar.writable}"></span>
+							<span class="icon detail-checkbox" ng-class="{'icon-checkmark': task.allDay, 'disabled': !task.calendar.writable}" />
 							<span class="section-title">
 								<text>{{ t('tasks', 'All day') }}</text>
 							</span>
@@ -140,8 +138,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						ng-class="{'editing':route.parameter=='priority','high':task.priority>5,'medium':task.priority==5,'low':task.priority > 0 && task.priority < 5, 'date':task.priority>0}"
 						ng-click="editPriority($event, task)">
 						<div>
-							<span class="icon icon-task-star"
-								:class="{'icon-task-star-high':task.priority>5,'icon-task-star-medium':task.priority==5,'icon-task-star-low':task.priority > 0 && task.priority < 5}"></span>
+							<span :class="{'icon-task-star-high':task.priority>5,'icon-task-star-medium':task.priority==5,'icon-task-star-low':task.priority > 0 && task.priority < 5}"
+								class="icon icon-task-star" />
 							<span class="section-title">
 								<!-- <text>{{ task.priority | priorityDetails}}</text> -->
 							</span>
@@ -160,10 +158,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						</div>
 						<div class="utils">
 							<a>
-								<span class="icon detail-save icon-checkmark-color handler end-edit reactive"></span>
+								<span class="icon detail-save icon-checkmark-color handler end-edit reactive" />
 							</a>
 							<a class="handler end-edit" ng-click="deletePriority(task)">
-								<span class="icon icon-trash reactive"></span>
+								<span class="icon icon-trash reactive" />
 							</a>
 						</div>
 					</li>
@@ -171,7 +169,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						ng-class="{'editing':route.parameter=='percent', 'date':task.complete>0}"
 						ng-click="editPercent($event, task)">
 						<div>
-							<span class="icon icon-percent" ng-class="{'icon-percent-active':task.complete>0}"></span>
+							<span class="icon icon-percent" ng-class="{'icon-percent-active':task.complete>0}" />
 							<span class="section-title">
 								<!-- <text>{{ task.complete | percentDetails}}</text> -->
 							</span>
@@ -190,17 +188,17 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						</div>
 						<div class="utils">
 							<a>
-								<span class="icon detail-save icon-checkmark-color handler end-edit reactive"></span>
+								<span class="icon detail-save icon-checkmark-color handler end-edit reactive" />
 							</a>
 							<a class="handler end-edit" ng-click="deletePercent(task)">
-								<span class="icon icon-trash reactive"></span>
+								<span class="icon icon-trash reactive" />
 							</a>
 						</div>
 					</li>
 					<li class="section detail-categories" ng-class="{'active':task.cats.length>0}">
 						<div>
-							<span class="icon icon-tag detail-categories" ng-class="{'icon-tag-active':task.cats.length>0}"></span>
-						<!-- Edit line 1080 to show placeholder -->
+							<span class="icon icon-tag detail-categories" ng-class="{'icon-tag-active':task.cats.length>0}" />
+							<!-- Edit line 1080 to show placeholder -->
 							<div class="detail-categories-container">
 								<!-- <ui-select
 									multiple
@@ -226,11 +224,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 								ng-click="editNote($event, task)"
 								oc-click-focus="{selector: '.expandingArea textarea', timeout: 0}">
 								<div class="content-fakeable" ng-class="{'editing':route.parameter=='note'}">
-									<div class="display-view" ng-bind-html="task.note | linky:'_blank':{rel: 'nofollow'}"></div>
+									<div class="display-view" ng-bind-html="task.note | linky:'_blank':{rel: 'nofollow'}" />
 									<div class="edit-view">
 										<div class="expandingArea active">
-											<pre><span>{{ task.note }}</span><br /><br /></pre>
-											<textarea ng-model="task.note" ng-change="triggerUpdate(task)"></textarea>
+											<pre><span>{{ task.note }}</span><br><br></pre>
+											<textarea ng-model="task.note" ng-change="triggerUpdate(task)" />
 										</div>
 									</div>
 								</div>
@@ -243,10 +241,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<a class="handler left close-all reactive"
 					ng-click="deleteTask(task)"
 					ng-show="task.calendar.writable">
-					<span class="icon icon-trash"></span>
+					<span class="icon icon-trash" />
 				</a>
 				<a class="handler right close-all reactive">
-					<span class="icon icon-hide"></span>
+					<span class="icon icon-hide" />
 				</a>
 			</div>
 		</div>
@@ -261,26 +259,26 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-	import { mapState } from 'vuex';
+import { mapState } from 'vuex'
 
-	export default {
-		computed: mapState({
-		}),
-		components: {
-		},
-		data: function () {
-			return {
-				task: {
-					calendar: {
-						writable: true
-					},
-					complete: 4,
-					completed: false,
-					priority: 5,
-					cats: [],
-					note: "Migrate this app to vue."
-				}
-			};
+export default {
+	components: {
+	},
+	data: function() {
+		return {
+			task: {
+				calendar: {
+					writable: true
+				},
+				complete: 4,
+				completed: false,
+				priority: 5,
+				cats: [],
+				note: 'Migrate this app to vue.'
+			}
 		}
-	}
+	},
+	computed: mapState({
+	})
+}
 </script>

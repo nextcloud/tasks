@@ -24,19 +24,17 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		<li ng-repeat="color in colors"
 			ng-class="{ selected: (color===selected) }"
 			ng-click="pick(color)"
-			ng-style="{ 'background-color':color}; "></li>
+			ng-style="{ 'background-color':color}; " />
 		<li class="randomcolour"
 			ng-click="randomizeColour()"
 			ng-style="{ 'background-color':random}; ">
-			<span class="icon icon-random"></span>
+			<span class="icon icon-random" />
 		</li>
 	</ul>
 </template>
 
 <script>
-	import { mapState } from 'vuex';
-
-	export default {
-		name: 'colorpicker'
-	}
+export default {
+	name: 'Colorpicker'
+}
 </script>

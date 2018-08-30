@@ -19,31 +19,13 @@
 
 // get plugins
 const gulp = require('gulp'),
-	jshint = require('gulp-jshint'),
-	concat = require('gulp-concat'),
-	stylelint = require('gulp-stylelint'),
 	svgSprite = require('gulp-svg-sprite'),
 	webpackStream = require('webpack-stream'),
-	webpackDevelopmentConfig = require('./webpack.common.js'),
+	webpackDevelopmentConfig = require('./webpack.dev.js'),
 	webpackProductionConfig = require('./webpack.prod.js');
 
 // configure
-const destinationFolder = __dirname + '/js/public/';
-const scssBuildTarget = 'style.scss';
-const scssDestinationFolder = __dirname + '/css/';
-
-const jsSources = [
-	'js/app/**/*.js'
-];
-const scssSources = [
-	'css/src/*.scss'
-];
-const testSources = [
-	'test/**/*.js'
-];
-
-const lintSources = jsSources.concat(testSources).concat(['*.js']);
-const watchSources = jsSources.concat(['js/app/**/*.vue']);
+const destinationFolder = __dirname + '/js/';
 
 const svgConfig = {
 	shape: {
@@ -55,10 +37,10 @@ const svgConfig = {
 			common: 'icon',
 			dimensions: '',
 			prefix: '.icon-%s',
-			sprite: "../img/sprites.svg",
+			sprite: '../img/sprites.svg',
 			render: {
 				scss: {
-					dest: "src/sprites.scss"
+					dest: 'src/sprites.scss'
 				}
 			}
 		}
@@ -69,55 +51,14 @@ const svgConfig = {
 
 gulp.task('default', ['build']);
 
-gulp.task('build', ['lint', 'scssConcat'], function(callback) {
+gulp.task('build', ['svg_sprite'], function(callback) {
 	return webpackStream(webpackProductionConfig, require('webpack'))
 	.pipe(gulp.dest(destinationFolder));
 });
 
-gulp.task('development', ['lint', 'scssConcat'], function(callback) {
+gulp.task('development', ['svg_sprite'], function(callback) {
 	return webpackStream(webpackDevelopmentConfig, require('webpack'))
 	.pipe(gulp.dest(destinationFolder));
-});
-
-gulp.task('jsWatch', ['jslint'], function(callback) {
-	return webpackStream(webpackDevelopmentConfig, require('webpack'))
-	.pipe(gulp.dest(destinationFolder));
-});
-
-gulp.task('lint', ['jslint', 'scsslint']);
-
-gulp.task('jslint', () => {
-	return gulp.src(lintSources)
-		.pipe(jshint('.jshintrc'))
-		.pipe(jshint.reporter('default'))
-		.pipe(jshint.reporter('fail'));
-});
-
-gulp.task('scsslint', () => {
-	return gulp.src(scssSources)
-		.pipe(stylelint ({
-			reporters: [{
-				formatter: 'string',
-				console: true
-			}]
-		}));
-});
-
-gulp.task('scssConcat', ['svg_sprite'], () => {
-	return gulp.src(scssSources)
-		.pipe(concat(scssBuildTarget))
-		.pipe(gulp.dest(scssDestinationFolder));
-});
-
-gulp.task('scssConcatWatch', ['scsslint'], () => {
-	return gulp.src(scssSources)
-		.pipe(concat(scssBuildTarget))
-		.pipe(gulp.dest(scssDestinationFolder));
-});
-
-gulp.task('watch', () => {
-	gulp.watch(watchSources, ['jsWatch']);
-	gulp.watch(scssSources, ['scssConcatWatch']);
 });
 
 gulp.task('svg_sprite', () => {

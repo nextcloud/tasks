@@ -18,15 +18,15 @@
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-'use strict';
+'use strict'
 
-import Axios from 'axios';
-Axios.defaults.headers.common.requesttoken = OC.requestToken;
+import Axios from 'axios'
+Axios.defaults.headers.common.requesttoken = OC.requestToken
 
 export default {
 	get(url) {
 		return Axios.get(url)
 			.then((response) => Promise.resolve(response))
-			.catch((error) => Promise.reject(error));
+			.catch((error) => Promise.reject(error))
 	}
-};
+}

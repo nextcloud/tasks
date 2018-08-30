@@ -24,23 +24,23 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		<h2 class="heading">
 			<!-- <text>{{ day | day  }}</text> -->
 		</h2>
-		<ol class="tasks"
+		<ol :collectionID="$route.params.collectionId"
+			class="tasks"
 			listID=""
-			:collectionID="$route.params.collectionId"
 			type="list"
 			dnd-list="draggedTasks"
 			dnd-drop="dropAsRootTask(event, item, index)"
 			dnd-dragover="dragover(event, index)">
-			<li class="task-item ui-draggable handler"
+			<li v-for="task in tasks"
 				:taskID="task.uri"
+				:key="task.id"
+				class="task-item ui-draggable handler"
 				ng-animate="'animate'"
 				ng-click="openDetails(task.uri,$event)"
 				ng-class="{done: task.completed}"
 				dnd-draggable="task"
 				dnd-dragstart="dragStart(event)"
-				dnd-dragend="dragEnd(event)"
-				v-for="task in tasks"
-				:key="task.id">
+				dnd-dragend="dragEnd(event)">
 				<!-- ng-repeat="task in filtered = filteredTasks() | filter:taskAtDay(task,day) | filter:hasNoParent(task) | filter:{'completed':'false'} | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
 				<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
 				<task />
@@ -50,17 +50,17 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-	import { mapState } from 'vuex';
-	import Task from '../Task.vue';
+import { mapState } from 'vuex'
+import Task from '../Task'
 
-	export default {
-		computed: Object.assign({},
-			mapState({
-				tasks: state => state.tasks
-			})
-		),
-		components: {
-			'task': Task
-		}
-	}
+export default {
+	components: {
+		'task': Task
+	},
+	computed: Object.assign({},
+		mapState({
+			tasks: state => state.tasks
+		})
+	)
+}
 </script>

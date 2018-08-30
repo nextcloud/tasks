@@ -19,12 +19,12 @@
  *
  */
 
-import Vue from "vue";
-import VueRouter from "vue-router";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 
-import CollectionGeneral from "./TheCollections/General.vue";
-import CollectionWeek from "./TheCollections/Week.vue";
-import CollectionCalendar from "./TheCollections/Calendar.vue";
+import CollectionGeneral from './TheCollections/General'
+import CollectionWeek from './TheCollections/Week'
+import CollectionCalendar from './TheCollections/Calendar'
 
 const routes = [
 	// using
@@ -34,13 +34,13 @@ const routes = [
 	// would also be an option, but it currently does not work
 	// reliably with router-link due to
 	// https://github.com/vuejs/vue-router/issues/419
-	{ path: '/collections/week', component: CollectionWeek},
-	{ path: '/collections/:collectionId', component: CollectionGeneral},
-	{ path: '/calendars/:id', component: CollectionCalendar, props: true},
-];
+	{ path: '/collections/week', component: CollectionWeek },
+	{ path: '/collections/:collectionId', component: CollectionGeneral },
+	{ path: '/calendars/:id', component: CollectionCalendar, props: true }
+]
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 export default new VueRouter({
-	routes, // short for `routes: routes`
-});
+	routes // short for `routes: routes`
+})

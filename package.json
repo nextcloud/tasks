@@ -1,99 +1,108 @@
 {
-  "name": "tasks",
-  "description": "Nextcloud - Tasks",
-  "version": "0.9.8",
-  "author": {
-    "name": "Raimund Schlüßler",
-    "email": "raimund.schluessler@mailbox.org"
-  },
-  "license": "AGPLv3",
-  "private": true,
-  "homepage": "https://github.com/nextcloud/tasks",
-  "scripts": {
-    "test": "jest --verbose",
-    "prebuild": "npm install && npm upgrade",
-    "build": "node node_modules/gulp-cli/bin/gulp.js build",
-    "development": "node node_modules/gulp-cli/bin/gulp.js development",
-    "watch": "node node_modules/gulp-cli/bin/gulp.js watch"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:nextcloud/tasks.git"
-  },
-  "bugs": "https://github.com/nextcloud/tasks/issues",
-  "contributors": [],
-  "dependencies": {
-    "axios": "^0.18.0",
-    "vue": "^2.5.17",
-    "vue-router": "3.0.1",
-    "vuex": "^3.0.1",
-    "ical.js": "~1.2.2",
-    "jstimezonedetect": "",
-    "ui-select": "git+https://github.com/angular-ui/ui-select.git#v0.19.8"
-  },
-  "devDependencies": {
-    "@vue/test-utils": "^1.0.0-beta.24",
-    "babel-core": "^6.26.3",
-    "babel-jest": "^23.4.2",
-    "babel-loader": "^7.1.5",
-    "babel-preset-env": "^1.7.0",
-    "cross-env": "^5.2.0",
-    "css-loader": "^1.0.0",
-    "expect": "^23.5.0",
-    "file-loader": "^1.1.11",
-    "gulp": "^3.9.1",
-    "gulp-cli": "^2.0.1",
-    "gulp-concat": "^2.6.1",
-    "gulp-jshint": "^2.1.0",
-    "gulp-stylelint": "^7.0.0",
-    "gulp-svg-sprite": "1.4.0",
-    "jest": "^23.5.0",
-    "jest-serializer-vue": "^2.0.2",
-    "jsdom": "^11.12.0",
-    "jsdom-global": "^3.0.2",
-    "jshint": "^2.9.6",
-    "stylelint": "^9.4.0",
-    "stylelint-config-standard": "^18.2.0",
-    "stylelint-scss": "^3.2.0",
-    "uglifyjs-webpack-plugin": "^1.2.7",
-    "vue-jest": "^2.6.0",
-    "vue-loader": "^15.3.0",
-    "vue-template-compiler": "^2.5.17",
-    "webpack": "^4.16.5",
-    "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.5",
-    "webpack-merge": "^4.1.4",
-    "webpack-node-externals": "^1.6.0",
-    "webpack-stream": "^5.1.1"
-  },
-  "engines": {
-    "node": ">=6"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "vue"
-    ],
-    "moduleNameMapper": {
-      "^@/(.*)$": "<rootDir>/js/app/$1"
-    },
-    "transform": {
-      "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
-      ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
-    },
-    "snapshotSerializers": [
-      "<rootDir>/node_modules/jest-serializer-vue"
-    ],
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "<rootDir>/js/app/**/*.{js,vue}",
-      "!**/node_modules/**",
-      "!**/vendor/**"
-    ],
-    "coverageReporters": [
-      "json",
-      "text",
-      "html"
-    ]
-  }
+	"name": "tasks",
+	"description": "Nextcloud - Tasks",
+	"version": "0.9.7",
+	"author": {
+		"name": "Raimund Schlüßler",
+		"email": "raimund.schluessler@mailbox.org"
+	},
+	"license": "AGPLv3",
+	"private": true,
+	"homepage": "https://github.com/nextcloud/tasks",
+	"scripts": {
+		"test": "jest --verbose",
+		"prebuild": "npm install && npm upgrade",
+		"build": "node node_modules/gulp-cli/bin/gulp.js build",
+		"lint": "eslint --ext .js,.vue src tests",
+		"lint:fix": "eslint --ext .js,.vue src tests --fix",
+		"dev": "node node_modules/gulp-cli/bin/gulp.js development",
+		"watch": "webpack --progress --watch --config webpack.dev.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:nextcloud/tasks.git"
+	},
+	"bugs": "https://github.com/nextcloud/tasks/issues",
+	"contributors": [],
+	"dependencies": {
+		"axios": "^0.18.0",
+		"babel-polyfill": "^6.26.0",
+		"ical.js": "~1.2.2",
+		"jstimezonedetect": "",
+		"ui-select": "git+https://github.com/angular-ui/ui-select.git#v0.19.8",
+		"vue": "^2.5.17",
+		"vue-router": "3.0.1",
+		"vuex": "^3.0.1"
+	},
+	"devDependencies": {
+		"@vue/test-utils": "^1.0.0-beta.24",
+		"babel-core": "^6.26.3",
+		"babel-eslint": "^8.2.5",
+		"babel-jest": "^23.4.2",
+		"babel-loader": "^7.1.4",
+		"babel-preset-env": "^1.7.0",
+		"css-loader": "^1.0.0",
+		"eslint": "^4.19.1",
+		"eslint-config-standard": "^11.0.0",
+		"eslint-friendly-formatter": "^4.0.1",
+		"eslint-loader": "^2.0.0",
+		"eslint-plugin-import": "^2.13.0",
+		"eslint-plugin-node": "^6.0.1",
+		"eslint-plugin-promise": "^3.8.0",
+		"eslint-plugin-standard": "^3.1.0",
+		"eslint-plugin-vue": "^4.5.0",
+		"expect": "^23.5.0",
+		"file-loader": "^1.1.11",
+		"gulp": "^3.9.1",
+		"gulp-cli": "^2.0.1",
+		"gulp-svg-sprite": "1.4.0",
+		"jest": "^23.5.0",
+		"jest-serializer-vue": "^2.0.2",
+		"prettier-eslint": "^8.8.2",
+		"raw-loader": "^0.5.1",
+		"sass-loader": "^7.0.3",
+		"stylelint": "^8.4.0",
+		"stylelint-config-recommended-scss": "^3.2.0",
+		"stylelint-scss": "^3.1.3",
+		"stylelint-webpack-plugin": "^0.10.5",
+		"vue-jest": "^2.6.0",
+		"vue-loader": "^15.4.1",
+		"vue-template-compiler": "^2.5.17",
+		"webpack": "^4.17.1",
+		"webpack-cli": "^3.1.0",
+		"webpack-dev-server": "^3.1.7",
+		"webpack-merge": "^4.1.4",
+		"webpack-node-externals": "^1.6.0",
+		"webpack-stream": "^5.1.1"
+	},
+	"engines": {
+		"node": ">=6"
+	},
+	"jest": {
+		"moduleFileExtensions": [
+			"js",
+			"vue"
+		],
+		"moduleNameMapper": {
+			"^@/(.*)$": "<rootDir>/src/$1"
+		},
+		"transform": {
+			"^.+\\.js$": "<rootDir>/node_modules/babel-jest",
+			".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
+		},
+		"snapshotSerializers": [
+			"<rootDir>/node_modules/jest-serializer-vue"
+		],
+		"collectCoverage": true,
+		"collectCoverageFrom": [
+			"<rootDir>/src/**/*.{js,vue}",
+			"!**/node_modules/**",
+			"!**/vendor/**"
+		],
+		"coverageReporters": [
+			"json",
+			"text",
+			"html"
+		]
+	}
 }

@@ -18,13 +18,13 @@
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-'use strict';
+'use strict'
 
-import Vue from 'vue';
-import Vuex from 'vuex';
-import Requests from './services/requests';
+import Vue from 'vue'
+import Vuex from 'vuex'
+import Requests from './services/requests'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 export default new Vuex.Store({
 	state: {
@@ -33,21 +33,21 @@ export default new Vuex.Store({
 		],
 		calendars: [
 			{
-				uri: "test-1",
-				displayname: "Test 1",
-				color: "#eef",
+				uri: 'test-1',
+				displayname: 'Test 1',
+				color: '#eef',
 				writable: true
 			},
 			{
-				uri: "test-2",
-				displayname: "Test 2",
-				color: "#eef",
+				uri: 'test-2',
+				displayname: 'Test 2',
+				color: '#eef',
 				writable: false
 			},
 			{
-				uri: "test-3",
-				displayname: "Test 3",
-				color: "#112233",
+				uri: 'test-3',
+				displayname: 'Test 3',
+				color: '#112233',
 				writable: true
 			}
 		],
@@ -55,23 +55,20 @@ export default new Vuex.Store({
 	},
 	mutations: {
 		setCollections(state, payload) {
-			state.collections = payload.collections;
+			state.collections = payload.collections
 		}
 	},
 	actions: {
-		loadCollections({commit}) {
+		loadCollections({ commit }) {
 			return new Promise(function(resolve) {
 				Requests.get(OC.generateUrl('apps/tasks/collections'))
-				.then(response => {
-					commit('setCollections' , {
-						collections: response.data.data.collections
-					});
-					resolve();
-				})
-				.catch(error => {
-					console.log(error);
-				});
-			});
+					.then(response => {
+						commit('setCollections', {
+							collections: response.data.data.collections
+						})
+						resolve()
+					})
+			})
 		}
 	}
-});
+})

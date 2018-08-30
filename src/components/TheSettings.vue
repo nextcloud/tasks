@@ -33,8 +33,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<select id="startOfWeek"
 						ng-change="setStartOfWeek()"
 						ng-model="settingsmodel.getById('various').startOfWeek"
-						ng-options="startOfWeekOption.id as startOfWeekOption.name for startOfWeekOption in startOfWeekOptions">
-					</select>
+						ng-options="startOfWeekOption.id as startOfWeekOption.name for startOfWeekOption in startOfWeekOptions" />
 				</li>
 				<li class="headline">
 					{{ t('tasks', 'Visibility of Smart Collections') }}
@@ -42,7 +41,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<li v-for="collection in collections"
 					:key="collection.id">
 					<div class="label-container">
-						<span class="icon" :class="collection.icon">
+						<span :class="collection.icon" class="icon">
 							<text ng-show="collection.id=='today'">{{ dayOfMonth }}</text>
 						</span>
 						<label :for="'visibilityCollection-' + collection.id" class="title">{{ collection.displayname }}</label>
@@ -50,8 +49,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<select :id="'visibilityCollection-' + collection.id"
 						ng-change="setVisibility(collection.id)"
 						ng-model="collection.show"
-						ng-options="collectionOption.id as collectionOption.name for collectionOption in collectionOptions">
-					</select>
+						ng-options="collectionOption.id as collectionOption.name for collectionOption in collectionOptions" />
 				</li>
 			</ul>
 		</div>
@@ -59,17 +57,17 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-	import { mapState } from 'vuex';
+import { mapState } from 'vuex'
 
-	export default {
-		computed: Object.assign({},
-			mapState({
-				collections: state => state.collections,
-				calendars: state => state.calendars,
-				dayOfMonth: state => state.dayOfMonth
-			})
-		),
-		components: {
-		}
-	}
+export default {
+	components: {
+	},
+	computed: Object.assign({},
+		mapState({
+			collections: state => state.collections,
+			calendars: state => state.calendars,
+			dayOfMonth: state => state.dayOfMonth
+		})
+	)
+}
 </script>

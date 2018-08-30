@@ -1,22 +1,32 @@
-var path = require('path');
-var VueLoaderPlugin = require('vue-loader/lib/plugin');
+const path = require('path');
+const { VueLoaderPlugin } = require('vue-loader');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 module.exports = {
-	mode: 'development',
-	entry: './js/app/main.js',
+	entry: ['babel-polyfill', path.join(__dirname, 'src', 'main.js')],
 	output: {
-		path: path.resolve(__dirname, './js/public'),
-		publicPath: '/public/',
-		filename: 'build.js'
+		path: path.resolve(__dirname, './js'),
+		publicPath: '/js/',
+		filename: 'tasks.js'
 	},
-	plugins: [
-		new VueLoaderPlugin()
-	],
 	module: {
 		rules: [
 			{
+				test: /\.css$/,
+				use: ['vue-style-loader', 'css-loader']
+			},
+			{
+				test: /\.scss$/,
+				use: ['vue-style-loader', 'css-loader', 'sass-loader']
+			},
+			{
+				test: /\.(js|vue)$/,
+				use: 'eslint-loader',
+				enforce: 'pre'
+			},
+			{
 				test: /\.vue$/,
-				loader: 'vue-loader',
+				loader: 'vue-loader'
 			},
 			{
 				test: /\.js$/,
@@ -29,29 +39,14 @@ module.exports = {
 				options: {
 					name: '[name].[ext]?[hash]'
 				}
-			},
-			{
-			  test: /\.css$/,
-			  use: [
-				'vue-style-loader',
-				'css-loader'
-			  ]
 			}
 		]
 	},
+	plugins: [new VueLoaderPlugin(), new StyleLintPlugin()],
 	resolve: {
 		alias: {
-			'vue$': 'vue/dist/vue.esm.js',
-			'@': path.resolve(__dirname, 'js/app')
-		}
-	},
-	devServer: {
-		historyApiFallback: true,
-		noInfo: true,
-		overlay: true
-	},
-	performance: {
-		hints: false
-	},
-	devtool: '#eval-source-map'
+			vue$: 'vue/dist/vue.esm.js'
+		},
+		extensions: ['*', '.js', '.vue', '.json']
+	}
 };
