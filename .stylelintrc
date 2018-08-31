@@ -14,7 +14,7 @@
 		"selector-type-case": null,
 		"selector-list-comma-newline-after": null,
 		"no-descending-specificity": null,
-		"string-quotes": null
+		"string-quotes": "single"
 	},
 	"plugins": [
 		"stylelint-scss"
