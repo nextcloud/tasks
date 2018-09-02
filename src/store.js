@@ -36,23 +36,168 @@ export default new Vuex.Store({
 				uri: 'test-1',
 				displayname: 'Test 1',
 				color: '#eef',
-				writable: true
+				writable: true,
+				tasks: [
+					{
+						calendar: {
+							writable: true
+						},
+						summary: 'Test 1 - Task 1',
+						complete: 1,
+						completed: true,
+						priority: 1,
+						cats: [],
+						note: 'Migrate this app to vue.'
+					},
+					{
+						calendar: {
+							writable: true
+						},
+						summary: 'Test 1 - Task 2',
+						complete: 3,
+						completed: false,
+						priority: 5,
+						cats: [],
+						note: 'Migrate this app to vue.'
+					},
+					{
+						calendar: {
+							writable: true
+						},
+						summary: 'Test 1 - Task 3',
+						complete: 6,
+						completed: false,
+						priority: 7,
+						cats: [],
+						note: 'Migrate this app to vue.'
+					}
+				]
 			},
 			{
 				uri: 'test-2',
 				displayname: 'Test 2',
 				color: '#eef',
-				writable: false
+				writable: false,
+				tasks: [
+					{
+						calendar: {
+							writable: true
+						},
+						summary: 'Test 2 - Task 1',
+						complete: 1,
+						completed: true,
+						priority: 1,
+						cats: [],
+						note: 'Migrate this app to vue.'
+					},
+					{
+						calendar: {
+							writable: true
+						},
+						summary: 'Test 2 - Task 2',
+						complete: 3,
+						completed: false,
+						priority: 5,
+						cats: [],
+						note: 'Migrate this app to vue.'
+					},
+					{
+						calendar: {
+							writable: true
+						},
+						summary: 'Test 2 - Task 3',
+						complete: 6,
+						completed: true,
+						priority: 7,
+						cats: [],
+						note: 'Migrate this app to vue.'
+					},
+					{
+						calendar: {
+							writable: true
+						},
+						summary: 'Test 2 - Task 4',
+						complete: 6,
+						completed: false,
+						priority: 7,
+						cats: [],
+						note: 'Migrate this app to vue.'
+					},
+					{
+						calendar: {
+							writable: true
+						},
+						summary: 'Test 2 - Task 5',
+						complete: 6,
+						completed: false,
+						priority: 7,
+						cats: [],
+						note: 'Migrate this app to vue.'
+					}
+				]
 			},
 			{
 				uri: 'test-3',
 				displayname: 'Test 3',
 				color: '#112233',
-				writable: true
+				writable: true,
+				tasks: [
+
+					{
+						calendar: {
+							writable: true
+						},
+						summary: 'Test 3 - Task 1',
+						complete: 1,
+						completed: false,
+						priority: 1,
+						cats: [],
+						note: 'Migrate this app to vue.'
+					},
+					{
+						calendar: {
+							writable: true
+						},
+						summary: 'Test 3 - Task 2',
+						complete: 3,
+						completed: true,
+						priority: 5,
+						cats: [],
+						note: 'Migrate this app to vue.'
+					},
+					{
+						calendar: {
+							writable: true
+						},
+						summary: 'Test 3 - Task 3',
+						complete: 6,
+						completed: false,
+						priority: 7,
+						cats: [],
+						note: 'Migrate this app to vue.'
+					},
+					{
+						calendar: {
+							writable: true
+						},
+						summary: 'Test 3 - Task 4',
+						complete: 6,
+						completed: false,
+						priority: 7,
+						cats: [],
+						note: 'Migrate this app to vue.'
+					}
+				]
 			}
 		],
 		settings: {},
 		dayOfMonth: 23
+	},
+	getters: {
+		getCollectionCount: state => (collectionID) => {
+			// todo
+			return 12
+		}
 	},
 	mutations: {
 		setCollections(state, payload) {
@@ -69,7 +214,7 @@ export default new Vuex.Store({
 		 * Sets the visibility of a collection
 		 *
 		 * @param {Object} state
-		 * @param {Collection} collection the collection to update
+		 * @param {Collection} newCollection the collection to update
 		 */
 		setVisibility(state, newCollection) {
 			let collection = state.collections.find(search => search.id === newCollection.id)
