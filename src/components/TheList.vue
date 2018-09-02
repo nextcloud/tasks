@@ -37,9 +37,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<span v-if="collection.id=='today'" class="date">{{ dayOfMonth }}</span>
 				<span class="title">{{ collection.displayname }}</span>
 			</a>
-			<div class="app-navigation-entry-utils">
+			<div class="app-navigation-entry-utils" v-if="collection.id!='completed'">
 				<ul>
-					<!-- <li class="app-navigation-entry-utils-counter">{{ getCollectionString(collection.id) | counterFormatter }}</li> -->
+					<li class="app-navigation-entry-utils-counter">{{ getCollectionCount(collection.id) | counterFormatter }}</li>
 				</ul>
 			</div>
 		</router-link>
@@ -157,19 +157,34 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import Colorpicker from './Colorpicker'
 
 export default {
 	components: {
 		'colorpicker': Colorpicker
 	},
+	filters: {
+		counterFormatter: function(count) {
+			switch (false) {
+			case count !== 0:
+				return ''
+			case count < 999:
+				return '999+'
+			default:
+				return count
+			}
+		}
+	},
 	computed: Object.assign({},
 		mapState({
 			collections: state => state.collections,
 			calendars: state => state.calendars,
 			dayOfMonth: state => state.dayOfMonth
-		})
+		}),
+		mapGetters([
+			'getCollectionCount'
+		])
 	),
 	methods: {
 		hideCollection: function(collection) {
@@ -179,8 +194,7 @@ export default {
 			case 1:
 				return false
 			case 2:
-				// return this.getCollectionCount(collectionID) < 1
-				return false
+				return this.getCollectionCount(collection.id) < 1
 			}
 		}
 	}
