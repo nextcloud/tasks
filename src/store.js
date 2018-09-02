@@ -80,7 +80,7 @@ export default new Vuex.Store({
 		setSetting(context, payload) {
 			context.commit('setSetting', payload)
 			return new Promise(function() {
-				Requests.post(OC.generateUrl('apps/tasks/settings/' + payload.type + '/' + payload.value), {})
+				Requests.post(OC.generateUrl('apps/tasks/settings/{type}/{value}', payload), {})
 			})
 		},
 		loadSettings({ commit }) {
