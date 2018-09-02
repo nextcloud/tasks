@@ -27,10 +27,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			:collection-id="collection.id"
 			:to="'/collections/' + collection.id"
 			:key="collection.id"
-			:class="collection.icon"
+			:class="[collection.icon, {'animate-up': hideCollection(collection) }]"
 			tag="li" class="collection reactive"
 			active-class="active"
-			ng-class="{'animate-up': hideCollection(collection.id)}"
 			dnd-list="draggedTasks"
 			dnd-drop="dropCollection(event, index, item)"
 			dnd-dragover="dragoverCollection(event, index)">
@@ -171,6 +170,19 @@ export default {
 			calendars: state => state.calendars,
 			dayOfMonth: state => state.dayOfMonth
 		})
-	)
+	),
+	methods: {
+		hideCollection: function(collection) {
+			switch (collection.show) {
+			case 0:
+				return true
+			case 1:
+				return false
+			case 2:
+				// return this.getCollectionCount(collectionID) < 1
+				return false
+			}
+		}
+	}
 }
 </script>
