@@ -63,6 +63,17 @@ export default new Vuex.Store({
 		},
 		setSetting(state, payload) {
 			state.settings[payload.type] = payload.value
+		},
+
+		/**
+		 * Sets the visibility of a collection
+		 *
+		 * @param {Object} state
+		 * @param {Collection} collection the collection to update
+		 */
+		setVisibility(state, newCollection) {
+			let collection = state.collections.find(search => search.id === newCollection.id)
+			Vue.set(collection, 'show', newCollection.show)
 		}
 	},
 	actions: {
@@ -81,6 +92,12 @@ export default new Vuex.Store({
 			context.commit('setSetting', payload)
 			return new Promise(function() {
 				Requests.post(OC.generateUrl('apps/tasks/settings/{type}/{value}', payload), {})
+			})
+		},
+		setVisibility(context, collection) {
+			context.commit('setVisibility', collection)
+			return new Promise(function() {
+				Requests.post(OC.generateUrl('apps/tasks/collection/{id}/visibility/{show}', collection), {})
 			})
 		},
 		loadSettings({ commit }) {

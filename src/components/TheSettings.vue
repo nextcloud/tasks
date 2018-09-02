@@ -50,8 +50,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						<label :for="'visibilityCollection-' + collection.id" class="title">{{ collection.displayname }}</label>
 					</div>
 					<select :id="'visibilityCollection-' + collection.id"
-						v-model="collection.show"
-						@change="setVisibility(collection)">
+						:value="collection.show"
+						@change="setVisibility($event, collection.id)">
 						<option v-for="collectionOption in collectionOptions"
 							:value="collectionOption.id"
 							:key="collectionOption.id">
@@ -135,7 +135,8 @@ export default {
 	})
 	),
 	methods: {
-		setVisibility: function(collection) {
+		setVisibility: function(e, collectionID) {
+			this.$store.dispatch('setVisibility', { id: collectionID, show: +e.target.value })
 		}
 	}
 }
