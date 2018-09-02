@@ -28,5 +28,10 @@ export default {
 		return Axios.get(url)
 			.then((response) => Promise.resolve(response))
 			.catch((error) => Promise.reject(error))
+	},
+	post(url, data) {
+		return Axios.post(url, data)
+			.then((response) => Promise.resolve(response))
+			.catch((error) => Promise.reject(error))
 	}
 }

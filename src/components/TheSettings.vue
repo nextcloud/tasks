@@ -30,10 +30,13 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			<ul>
 				<li>
 					<label for="startOfWeek">{{ t('tasks', 'Start of week') }}</label>
-					<select id="startOfWeek"
-						ng-change="setStartOfWeek()"
-						ng-model="settingsmodel.getById('various').startOfWeek"
-						ng-options="startOfWeekOption.id as startOfWeekOption.name for startOfWeekOption in startOfWeekOptions" />
+					<select id="startOfWeek" v-model="startOfWeek">
+						<option v-for="startOfWeekOption in startOfWeekOptions"
+							:value="startOfWeekOption.id"
+							:key="startOfWeekOption.id">
+							{{ startOfWeekOption.name }}
+						</option>
+					</select>
 				</li>
 				<li class="headline">
 					{{ t('tasks', 'Visibility of Smart Collections') }}
@@ -42,14 +45,19 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					:key="collection.id">
 					<div class="label-container">
 						<span :class="collection.icon" class="icon">
-							<text ng-show="collection.id=='today'">{{ dayOfMonth }}</text>
+							<text v-if="collection.id=='today'">{{ dayOfMonth }}</text>
 						</span>
 						<label :for="'visibilityCollection-' + collection.id" class="title">{{ collection.displayname }}</label>
 					</div>
 					<select :id="'visibilityCollection-' + collection.id"
-						ng-change="setVisibility(collection.id)"
-						ng-model="collection.show"
-						ng-options="collectionOption.id as collectionOption.name for collectionOption in collectionOptions" />
+						v-model="collection.show"
+						@change="setVisibility(collection)">
+						<option v-for="collectionOption in collectionOptions"
+							:value="collectionOption.id"
+							:key="collectionOption.id">
+							{{ collectionOption.name }}
+						</option>
+					</select>
 				</li>
 			</ul>
 		</div>
@@ -62,12 +70,73 @@ import { mapState } from 'vuex'
 export default {
 	components: {
 	},
-	computed: Object.assign({},
-		mapState({
-			collections: state => state.collections,
-			calendars: state => state.calendars,
-			dayOfMonth: state => state.dayOfMonth
-		})
-	)
+	data: function() {
+		return {
+			collectionOptions: [
+				{
+					id: 0,
+					name: t('tasks', 'Hidden')
+				},
+				{
+					id: 1,
+					name: t('tasks', 'Visible')
+				},
+				{
+					id: 2,
+					name: t('tasks', 'Automatic')
+				}
+			],
+			startOfWeekOptions: [
+				{
+					id: 0,
+					name: t('tasks', 'Sunday')
+				},
+				{
+					id: 1,
+					name: t('tasks', 'Monday')
+				},
+				{
+					id: 2,
+					name: t('tasks', 'Tuesday')
+				},
+				{
+					id: 3,
+					name: t('tasks', 'Wednesday')
+				},
+				{
+					id: 4,
+					name: t('tasks', 'Thursday')
+				},
+				{
+					id: 5,
+					name: t('tasks', 'Friday')
+				},
+				{
+					id: 6,
+					name: t('tasks', 'Saturday')
+				}
+			]
+		}
+	},
+	computed: Object.assign({
+		startOfWeek: {
+			get() {
+				return this.$store.state.settings.startOfWeek
+			},
+			set(value) {
+				this.$store.dispatch('setSetting', { type: 'startOfWeek', value: value })
+			}
+		}
+	},
+	mapState({
+		collections: state => state.collections,
+		calendars: state => state.calendars,
+		dayOfMonth: state => state.dayOfMonth
+	})
+	),
+	methods: {
+		setVisibility: function(collection) {
+		}
+	}
 }
 </script>
