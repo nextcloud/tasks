@@ -49,9 +49,9 @@ class SettingsController extends Controller {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function set($setting, $type, $value){
-		return $this->generateResponse(function () use ($setting, $type, $value) {
-			return $this->settingsService->set($setting, $type, $value);
+	public function set($setting, $value){
+		return $this->generateResponse(function () use ($setting, $value) {
+			return $this->settingsService->set($setting, $value);
 		});
 	}
 }

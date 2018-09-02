@@ -51,11 +51,18 @@ export default new Vuex.Store({
 				writable: true
 			}
 		],
+		settings: {},
 		dayOfMonth: 23
 	},
 	mutations: {
 		setCollections(state, payload) {
 			state.collections = payload.collections
+		},
+		setSettings(state, payload) {
+			state.settings = payload.settings
+		},
+		setSetting(state, payload) {
+			state.settings[payload.type] = payload.value
 		}
 	},
 	actions: {
@@ -65,6 +72,23 @@ export default new Vuex.Store({
 					.then(response => {
 						commit('setCollections', {
 							collections: response.data.data.collections
+						})
+						resolve()
+					})
+			})
+		},
+		setSetting(context, payload) {
+			context.commit('setSetting', payload)
+			return new Promise(function() {
+				Requests.post(OC.generateUrl('apps/tasks/settings/' + payload.type + '/' + payload.value), {})
+			})
+		},
+		loadSettings({ commit }) {
+			return new Promise(function(resolve) {
+				Requests.get(OC.generateUrl('apps/tasks/settings'))
+					.then(response => {
+						commit('setSettings', {
+							settings: response.data.data.settings
 						})
 						resolve()
 					})

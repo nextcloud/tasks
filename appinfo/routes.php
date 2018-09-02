@@ -40,5 +40,5 @@ $application->registerRoutes($this, array('routes' => array(
 
 	// settings
 	array('name' => 'settings#get',	'url' => '/settings', 'verb' => 'GET'),
-	array('name' => 'settings#set', 'url' => '/settings/{type}/{setting}/{value}', 'verb' => 'POST'),
+	array('name' => 'settings#set', 'url' => '/settings/{setting}/{value}', 'verb' => 'POST'),
 )));

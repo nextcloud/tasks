@@ -43,14 +43,11 @@ class SettingsService {
 	 */
 	public function get() {
 		$settings = array(
-			array(
-				'id' => 'various',
-				'showHidden' => (int)$this->settings->getUserValue($this->userId, $this->appName,'various_showHidden'),
-				'startOfWeek' => (int)$this->settings->getUserValue($this->userId, $this->appName,'various_startOfWeek'),
-				'sortOrder' => (string)$this->settings->getUserValue($this->userId, $this->appName,'various_sortOrder'),
-				'sortDirection' => (bool)$this->settings->getUserValue($this->userId, $this->appName,'various_sortDirection'),
-				'userID' => $this->userId
-			)
+			'showHidden' => (int)$this->settings->getUserValue($this->userId, $this->appName,'various_showHidden'),
+			'startOfWeek' => (int)$this->settings->getUserValue($this->userId, $this->appName,'various_startOfWeek'),
+			'sortOrder' => (string)$this->settings->getUserValue($this->userId, $this->appName,'various_sortOrder'),
+			'sortDirection' => (bool)$this->settings->getUserValue($this->userId, $this->appName,'various_sortDirection'),
+			'userID' => $this->userId
 		);
 		return $settings;
 	}
@@ -63,8 +60,8 @@ class SettingsService {
 	 * @param $value
 	 * @return bool
 	 */
-	public function set($setting, $type, $value) {
-		$this->settings->setUserValue($this->userId, $this->appName, $type.'_'.$setting, $value);
+	public function set($setting, $value) {
+		$this->settings->setUserValue($this->userId, $this->appName, 'various_'.$setting, $value);
 		return true;
 	}
 }

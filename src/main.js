@@ -65,6 +65,7 @@ OCA.Tasks.App = new Vue({
 	},
 	beforeMount() {
 		this.$store.dispatch('loadCollections')
+		this.$store.dispatch('loadSettings')
 	},
 	methods: {
 		filter(query) {
