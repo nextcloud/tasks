@@ -85,6 +85,7 @@ OC.L10N.register(
     "All" : "Wszystkie",
     "Current" : "Obecny",
     "Completed" : "Ukończono",
+    "The Tasks app for Nextcloud" : "Aplikacja Zadania dla Nextcloud",
     "Delete" : "Usuń",
     "Cancel" : "Anuluj",
     "Edit" : "Edytuj",
