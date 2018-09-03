@@ -23,6 +23,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Requests from './services/requests'
+import DummyCalendars from './dummyCalendars'
+
+import { isTaskInList } from './storeHelper'
 
 Vue.use(Vuex)
 
@@ -31,172 +34,46 @@ export default new Vuex.Store({
 		tasks: [],
 		collections: [
 		],
-		calendars: [
-			{
-				uri: 'test-1',
-				displayname: 'Test 1',
-				color: '#eef',
-				writable: true,
-				tasks: [
-					{
-						calendar: {
-							writable: true
-						},
-						summary: 'Test 1 - Task 1',
-						complete: 1,
-						completed: true,
-						priority: 1,
-						cats: [],
-						note: 'Migrate this app to vue.'
-					},
-					{
-						calendar: {
-							writable: true
-						},
-						summary: 'Test 1 - Task 2',
-						complete: 3,
-						completed: false,
-						priority: 5,
-						cats: [],
-						note: 'Migrate this app to vue.'
-					},
-					{
-						calendar: {
-							writable: true
-						},
-						summary: 'Test 1 - Task 3',
-						complete: 6,
-						completed: false,
-						priority: 7,
-						cats: [],
-						note: 'Migrate this app to vue.'
-					}
-				]
-			},
-			{
-				uri: 'test-2',
-				displayname: 'Test 2',
-				color: '#eef',
-				writable: false,
-				tasks: [
-					{
-						calendar: {
-							writable: true
-						},
-						summary: 'Test 2 - Task 1',
-						complete: 1,
-						completed: true,
-						priority: 1,
-						cats: [],
-						note: 'Migrate this app to vue.'
-					},
-					{
-						calendar: {
-							writable: true
-						},
-						summary: 'Test 2 - Task 2',
-						complete: 3,
-						completed: false,
-						priority: 5,
-						cats: [],
-						note: 'Migrate this app to vue.'
-					},
-					{
-						calendar: {
-							writable: true
-						},
-						summary: 'Test 2 - Task 3',
-						complete: 6,
-						completed: true,
-						priority: 7,
-						cats: [],
-						note: 'Migrate this app to vue.'
-					},
-					{
-						calendar: {
-							writable: true
-						},
-						summary: 'Test 2 - Task 4',
-						complete: 6,
-						completed: false,
-						priority: 7,
-						cats: [],
-						note: 'Migrate this app to vue.'
-					},
-					{
-						calendar: {
-							writable: true
-						},
-						summary: 'Test 2 - Task 5',
-						complete: 6,
-						completed: false,
-						priority: 7,
-						cats: [],
-						note: 'Migrate this app to vue.'
-					}
-				]
-			},
-			{
-				uri: 'test-3',
-				displayname: 'Test 3',
-				color: '#112233',
-				writable: true,
-				tasks: [
-
-					{
-						calendar: {
-							writable: true
-						},
-						summary: 'Test 3 - Task 1',
-						complete: 1,
-						completed: false,
-						priority: 1,
-						cats: [],
-						note: 'Migrate this app to vue.'
-					},
-					{
-						calendar: {
-							writable: true
-						},
-						summary: 'Test 3 - Task 2',
-						complete: 3,
-						completed: true,
-						priority: 5,
-						cats: [],
-						note: 'Migrate this app to vue.'
-					},
-					{
-						calendar: {
-							writable: true
-						},
-						summary: 'Test 3 - Task 3',
-						complete: 6,
-						completed: false,
-						priority: 7,
-						cats: [],
-						note: 'Migrate this app to vue.'
-					},
-					{
-						calendar: {
-							writable: true
-						},
-						summary: 'Test 3 - Task 4',
-						complete: 6,
-						completed: false,
-						priority: 7,
-						cats: [],
-						note: 'Migrate this app to vue.'
-					}
-				]
-			}
-		],
+		calendars: DummyCalendars.calendars,
 		settings: {},
 		dayOfMonth: 23
 	},
 	getters: {
+
+		/**
+		 * Returns the count of tasks in a colllection
+		 *
+		 * Tasks have to
+		 *	- belong to a collection
+		 *	- be a root task
+		 *	- be uncompleted
+		 *
+		 * @param {String} collectionID the id of the collection in question
+		 */
 		getCollectionCount: state => (collectionID) => {
-			// todo
-			return 12
+			var count = 0
+			Object.values(state.calendars).forEach(calendar => {
+				count += calendar.tasks.filter(task => {
+					return isTaskInList(task, collectionID) && !task.related
+				}).length
+			})
+			return count
+		},
+
+		/**
+		 * Returns the count of tasks in a calendar
+		 *
+		 * Tasks have to be
+		 *	- a root task
+		 *	- uncompleted
+		 *
+		 * @param {String} calendarID the id of the calendar in question
+		 */
+		getCalendarCount: state => (calendarID) => {
+			return Object.values(state.calendars[calendarID].tasks)
+				.filter(task => {
+					return task.completed === false && !task.related
+				}).length
 		}
 	},
 	mutations: {

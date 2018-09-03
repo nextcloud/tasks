@@ -10,7 +10,8 @@ module.exports = {
 		t: false,
 		n: false,
 		OC: false,
-		OCA: false
+		OCA: false,
+		moment: true
 	},
 	parserOptions: {
 		parser: 'babel-eslint'

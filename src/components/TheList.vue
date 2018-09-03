@@ -37,7 +37,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<span v-if="collection.id=='today'" class="date">{{ dayOfMonth }}</span>
 				<span class="title">{{ collection.displayname }}</span>
 			</a>
-			<div class="app-navigation-entry-utils" v-if="collection.id!='completed'">
+			<div v-if="collection.id!='completed'" class="app-navigation-entry-utils">
 				<ul>
 					<li class="app-navigation-entry-utils-counter">{{ getCollectionCount(collection.id) | counterFormatter }}</li>
 				</ul>
@@ -63,7 +63,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			</a>
 			<div class="app-navigation-entry-utils">
 				<ul>
-					<!-- <li class="app-navigation-entry-utils-counter">{{ getListCount(calendar.uri,'all') | counterFormatter }}</li> -->
+					<li class="app-navigation-entry-utils-counter">{{ getCalendarCount(calendar.uri) | counterFormatter }}</li>
 					<li v-show="calendar.writable" class="app-navigation-entry-utils-menu-button"><button /></li>
 				</ul>
 			</div>
@@ -183,7 +183,8 @@ export default {
 			dayOfMonth: state => state.dayOfMonth
 		}),
 		mapGetters([
-			'getCollectionCount'
+			'getCollectionCount',
+			'getCalendarCount'
 		])
 	),
 	methods: {
