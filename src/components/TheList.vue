@@ -57,7 +57,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			dnd-list="draggedTasks"
 			dnd-drop="dropList(event, index, item)"
 			dnd-dragover="dragoverList(event, index)">
-			<div :style="'background-color: ' + calendar.color + ';'" class="app-navigation-entry-bullet" />
+			<div :style="{'background-color': calendar.color}" class="app-navigation-entry-bullet" />
 			<a ng-dblclick="startRename(calendar)">
 				<span class="title">{{ calendar.displayname }}</span>
 			</a>
