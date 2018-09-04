@@ -44,6 +44,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			</div>
 		</router-link>
 		<router-link
+			v-click-outside="() => resetView(calendar)"
 			v-for="calendar in calendars"
 			:id="'list_' + calendar.uri"
 			:calendar-id="calendar.uri"
@@ -99,7 +100,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						type="cancel"
 						value=""
 						class="action icon-close"
-						@click="endEdit()">
+						@click="resetView(calendar)">
 					<input :title="t('tasks', 'Save')"
 						type="submit"
 						value=""
@@ -118,7 +119,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						type="cancel"
 						value=""
 						class="action icon-close"
-						@click="hideCalDAVUrl()">
+						@click="resetView(calendar)">
 				</form>
 			</div>
 		</router-link>
@@ -159,10 +160,16 @@ import { mapState, mapGetters } from 'vuex'
 import Colorpicker from './Colorpicker'
 import PopoverMenu from './PopoverMenu'
 
+import clickOutside from 'vue-click-outside'
+
 export default {
 	components: {
 		'colorpicker': Colorpicker,
-		'popover': PopoverMenu
+		'popover': PopoverMenu,
+		clickOutside
+	},
+	directives: {
+		clickOutside
 	},
 	filters: {
 		counterFormatter: function(count) {
@@ -207,14 +214,16 @@ export default {
 		edit: function(calendar) {
 			this.editing = calendar.uri
 		},
-		endEdit: function() {
-			this.editing = ''
+		resetView: function(calendar) {
+			if (this.editing === calendar.uri) {
+				this.editing = ''
+			}
+			if (this.caldav === calendar.uri) {
+				this.caldav = ''
+			}
 		},
 		showCalDAVUrl: function(calendar) {
 			this.caldav = calendar.uri
-		},
-		hideCalDAVUrl: function() {
-			this.caldav = ''
 		},
 		exportUrl(calendar) {
 			var url = calendar.url
