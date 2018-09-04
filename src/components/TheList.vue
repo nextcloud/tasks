@@ -49,16 +49,15 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			:calendar-id="calendar.uri"
 			:to="'/calendars/' + calendar.uri"
 			:key="calendar.uri"
+			:class="{edit: editing == calendar.uri, caldav: caldav == calendar.uri}"
 			tag="li"
 			class="list with-menu handler editing"
 			active-class="active"
-			ng-class="edit:route.listparameter == 'name' && route.calendarID == calendar.uri,
-						caldav: route.listparameter == 'caldav' && route.calendarID == calendar.uri}"
 			dnd-list="draggedTasks"
 			dnd-drop="dropList(event, index, item)"
 			dnd-dragover="dragoverList(event, index)">
 			<div :style="{'background-color': calendar.color}" class="app-navigation-entry-bullet" />
-			<a ng-dblclick="startRename(calendar)">
+			<a>
 				<span class="title">{{ calendar.displayname }}</span>
 			</a>
 			<div class="app-navigation-entry-utils">
@@ -67,13 +66,13 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<popover v-show="calendar.writable" tag="li" class="app-navigation-entry-utils-menu-button">
 						<ul>
 							<li>
-								<a ng-click="startEdit(calendar)">
+								<a @click="edit(calendar)">
 									<span class="icon-rename" />
 									<span>{{ t('tasks', 'Edit') }}</span>
 								</a>
 							</li>
 							<li>
-								<a ng-click="showCalDAVUrl(calendar)">
+								<a @click="showCalDAVUrl(calendar)">
 									<span class="icon-public" />
 									<span>{{ t('tasks', 'Link') }}</span>
 								</a>
@@ -91,7 +90,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			</div>
 			<div class="app-navigation-entry-edit name" ng-class="{error: nameError}">
 				<form>
-					<input ng-model="calendar.displayname"
+					<input :value="calendar.displayname"
 						class="edit hasTooltip"
 						type="text"
 						ng-keyup="checkEdit($event,calendar)"
@@ -100,7 +99,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						type="cancel"
 						value=""
 						class="action icon-close"
-						ng-click="cancelEdit(calendar)">
+						@click="endEdit()">
 					<input :title="t('tasks', 'Save')"
 						type="submit"
 						value=""
@@ -111,15 +110,15 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			</div>
 			<div class="app-navigation-entry-edit caldav">
 				<form>
-					<input class="caldav"
-						ng-value="calendar.caldav"
+					<input :value="calendar.caldav"
+						class="caldav"
 						readonly
 						type="text">
 					<input :title="t('tasks', 'Cancel')"
 						type="cancel"
 						value=""
 						class="action icon-close"
-						ng-click="hideCalDAVUrl()">
+						@click="hideCalDAVUrl()">
 				</form>
 			</div>
 		</router-link>
@@ -177,6 +176,12 @@ export default {
 			}
 		}
 	},
+	data() {
+		return {
+			editing: '',
+			caldav: ''
+		}
+	},
 	computed: Object.assign({},
 		mapState({
 			collections: state => state.collections,
@@ -198,6 +203,18 @@ export default {
 			case 2:
 				return this.getCollectionCount(collection.id) < 1
 			}
+		},
+		edit: function(calendar) {
+			this.editing = calendar.uri
+		},
+		endEdit: function() {
+			this.editing = ''
+		},
+		showCalDAVUrl: function(calendar) {
+			this.caldav = calendar.uri
+		},
+		hideCalDAVUrl: function() {
+			this.caldav = ''
 		},
 		exportUrl(calendar) {
 			var url = calendar.url

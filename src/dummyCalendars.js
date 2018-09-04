@@ -28,6 +28,7 @@ export default ({
 			color: '#eef',
 			writable: true,
 			url: '/nextcloud/remote.php/dav/calendars/raimund.schluessler/test-1',
+			caldav: 'caldav-url',
 			tasks: [
 				{
 					calendar: {
