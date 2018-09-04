@@ -27,6 +27,7 @@ export default ({
 			displayname: 'Test 1',
 			color: '#eef',
 			writable: true,
+			url: '/nextcloud/remote.php/dav/calendars/raimund.schluessler/test-1',
 			tasks: [
 				{
 					calendar: {
@@ -75,6 +76,7 @@ export default ({
 			displayname: 'Test 2',
 			color: '#eef',
 			writable: false,
+			url: '/nextcloud/remote.php/dav/calendars/raimund.schluessler/test-2',
 			tasks: [
 				{
 					calendar: {
@@ -150,6 +152,7 @@ export default ({
 			displayname: 'Test 3',
 			color: '#112233',
 			writable: true,
+			url: '/nextcloud/remote.php/dav/calendars/raimund.schluessler/test-3',
 			tasks: [
 
 				{

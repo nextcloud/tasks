@@ -64,30 +64,29 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			<div class="app-navigation-entry-utils">
 				<ul>
 					<li class="app-navigation-entry-utils-counter">{{ getCalendarCount(calendar.uri) | counterFormatter }}</li>
-					<li v-show="calendar.writable" class="app-navigation-entry-utils-menu-button"><button /></li>
-				</ul>
-			</div>
-			<div v-show="calendar.writable" class="app-navigation-entry-menu">
-				<ul>
-					<li>
-						<a ng-click="startEdit(calendar)">
-							<span class="icon-rename" />
-							<span>{{ t('tasks', 'Edit') }}</span>
-						</a>
-					</li>
-					<li>
-						<a ng-click="showCalDAVUrl(calendar)">
-							<span class="icon-public" />
-							<span>{{ t('tasks', 'Link') }}</span>
-						</a>
-					</li>
-					<li>
-						<a :href="calendar.exportUrl" :download="calendar.uri + '.ics'">
-							<span class="icon-download" />
-							<span>{{ t('tasks', 'Download') }}</span>
-						</a>
-					</li>
-					<li confirmation="delete(calendar)" confirmation-message="deleteMessage(calendar)" />
+					<popover v-show="calendar.writable" tag="li" class="app-navigation-entry-utils-menu-button">
+						<ul>
+							<li>
+								<a ng-click="startEdit(calendar)">
+									<span class="icon-rename" />
+									<span>{{ t('tasks', 'Edit') }}</span>
+								</a>
+							</li>
+							<li>
+								<a ng-click="showCalDAVUrl(calendar)">
+									<span class="icon-public" />
+									<span>{{ t('tasks', 'Link') }}</span>
+								</a>
+							</li>
+							<li>
+								<a :href="exportUrl(calendar)" :download="calendar.uri + '.ics'">
+									<span class="icon-download" />
+									<span>{{ t('tasks', 'Download') }}</span>
+								</a>
+							</li>
+							<li confirmation="delete(calendar)" confirmation-message="deleteMessage(calendar)" />
+						</ul>
+					</popover>
 				</ul>
 			</div>
 			<div class="app-navigation-entry-edit name" ng-class="{error: nameError}">
@@ -159,10 +158,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <script>
 import { mapState, mapGetters } from 'vuex'
 import Colorpicker from './Colorpicker'
+import PopoverMenu from './PopoverMenu'
 
 export default {
 	components: {
-		'colorpicker': Colorpicker
+		'colorpicker': Colorpicker,
+		'popover': PopoverMenu
 	},
 	filters: {
 		counterFormatter: function(count) {
@@ -197,6 +198,15 @@ export default {
 			case 2:
 				return this.getCollectionCount(collection.id) < 1
 			}
+		},
+		exportUrl(calendar) {
+			var url = calendar.url
+			// cut off last slash to have a fancy name for the ics
+			if (url.slice(url.length - 1) === '/') {
+				url = url.slice(0, url.length - 1)
+			}
+			url += '?export'
+			return url
 		}
 	}
 }
