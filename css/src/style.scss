@@ -187,9 +187,22 @@
 		justify-content: center;
 		align-items: center;
 
+		.color-selector-label {
+			display: block;
+			height: 24px;
+			width: calc(100% / 9) !important;
+			background-image: url('../img/color_picker.svg');
+			background-repeat: no-repeat;
+			background-position: center center;
+
+			.color-selector {
+				visibility: hidden;
+			}
+		}
+
 		li {
 			height: 24px;
-			width: calc(100% / 10) !important;
+			width: calc(100% / 9) !important;
 
 			&.selected {
 				border: 1px solid $gray_dark;
