@@ -107,7 +107,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						class="action icon-checkmark"
 						ng-click="saveEdit(calendar)">
 				</form>
-				<colorpicker class="colorpicker" selected="calendar.color" />
+				<colorpicker :initial-color="calendar.color" @color-selected="setColor(calendar, ...arguments)" />
 			</div>
 			<div class="app-navigation-entry-edit caldav">
 				<form>
@@ -149,7 +149,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						class="action icon-checkmark"
 						ng-click="create($event)">
 				</form>
-				<colorpicker class="colorpicker" selected="color" />
+				<colorpicker @color-selected="setColor('new', ...arguments)" />
 			</div>
 		</li>
 	</ul>
@@ -233,6 +233,9 @@ export default {
 			}
 			url += '?export'
 			return url
+		},
+		setColor: function(calendar, color) {
+			console.log('Set color of ' + calendar.uri + ' to ' + color)
 		}
 	}
 }
