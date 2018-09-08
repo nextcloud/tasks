@@ -275,11 +275,11 @@ $white: #fff;
 		.label-container {
 			white-space: nowrap;
 			padding-right: 115px;
-			display: inline-block;
 			text-overflow: ellipsis;
 			width: 100%;
 			overflow: hidden;
 			height: 100%;
+			float: left;
 		}
 
 		select {
