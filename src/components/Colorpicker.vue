@@ -42,8 +42,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			<label v-if="supportsColorPicker"
 				:style="{'background-color': selectedColor}"
 				class="color-selector-label">
-				<input v-model="selectedColor"
-					@change="pick(selectedColor)"
+				<input :value="selectedColor"
+					@change="pick($event.target.value)"
 					type="color"
 					class="color-selector">
 			</label>
@@ -55,7 +55,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 export default {
 	name: 'Colorpicker',
 	props: {
-		initialColor: {
+		selectedColor: {
 			type: String,
 			default: '#31CC7C'
 		}
@@ -73,7 +73,6 @@ export default {
 				'#3A3B3D',
 				'#CACBCD'
 			],
-			selectedColor: this.initialColor
 		}
 	},
 	methods: {
