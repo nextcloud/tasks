@@ -30,6 +30,7 @@
 		"ical.js": "~1.2.2",
 		"jstimezonedetect": "",
 		"ui-select": "git+https://github.com/angular-ui/ui-select.git#v0.19.8",
+		"v-tooltip": "2.0.0-rc.33",
 		"vue": "^2.5.17",
 		"vue-router": "3.0.1",
 		"vuex": "^3.0.1"

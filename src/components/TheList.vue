@@ -91,8 +91,13 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			</div>
 			<div :class="{error: nameError}" class="app-navigation-entry-edit name">
 				<form>
-					<input v-model="newCalendarName"
-						class="edit hasTooltip"
+					<input v-tooltip="{
+							content: tooltipMessage,
+							show: showTooltip(calendar.uri),
+							trigger: 'manual'
+						}"
+						v-model="newCalendarName"
+						class="edit"
 						type="text"
 						autofocus-on-insert
 						@keyup="checkName($event, calendar.uri)">
@@ -131,13 +136,18 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			</a>
 			<div :class="{error: nameError}" class="app-navigation-entry-edit name">
 				<form>
-					<input id="newList"
+					<input v-tooltip="{
+							content: tooltipMessage,
+							show: showTooltip('new'),
+							trigger: 'manual'
+						}"
+						id="newList"
 						:placeholder="t('tasks', 'New List')"
 						v-model="newCalendarName"
-						class="edit hasTooltip"
+						class="edit"
 						type="text"
 						autofocus-on-insert
-						@keyup="checkName($event, '')">
+						@keyup="checkName($event, 'new')">
 					<input :title="t('tasks', 'Cancel')"
 						type="cancel"
 						value=""
@@ -156,12 +166,16 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
+import Vue from 'vue'
 import { mapState, mapGetters } from 'vuex'
 import Colorpicker from './Colorpicker'
 import PopoverMenu from './PopoverMenu'
 import Confirmation from './Confirmation'
+import VTooltip from 'v-tooltip'
 
 import clickOutside from 'vue-click-outside'
+
+Vue.use(VTooltip)
 
 export default {
 	components: {
@@ -192,7 +206,9 @@ export default {
 			creating: false,
 			nameError: false,
 			newCalendarName: '',
-			selectedColor: ''
+			selectedColor: '',
+			tooltipMessage: '',
+			tooltipTarget: ''
 		}
 	},
 	computed: Object.assign({},
@@ -218,12 +234,15 @@ export default {
 				return this.getCollectionCount(collection.id) < 1
 			}
 		},
+		showTooltip: function(target) {
+			return this.tooltipTarget === target
+		},
 		edit: function(calendar) {
 			this.editing = calendar.uri
 			this.newCalendarName = calendar.displayname
 			this.selectedColor = calendar.color
 			this.nameError = false
-			$('.hasTooltip').tooltip('hide')
+			this.tooltipTarget = ''
 		},
 		resetView: function(calendar) {
 			if (this.editing === calendar.uri) {
@@ -232,6 +251,7 @@ export default {
 			if (this.caldav === calendar.uri) {
 				this.caldav = ''
 			}
+			this.tooltipTarget = ''
 		},
 		showCalDAVUrl: function(calendar) {
 			this.caldav = calendar.uri
@@ -273,19 +293,17 @@ export default {
 		},
 		checkName: function(event, uri) {
 			var check = this.isNameAllowed(this.newCalendarName, uri)
-			var input = $(event.currentTarget)
+			this.tooltipMessage = check.msg
 			if (!check.allowed) {
-				input.attr('title', check.msg)
-					.tooltip({ placement: 'bottom', trigger: 'manual' })
-					.tooltip('fixTitle').tooltip('show')
+				this.tooltipTarget = uri
 				this.nameError = true
 			} else {
-				input.tooltip('hide')
+				this.tooltipTarget = ''
 				this.nameError = false
 			}
 			if (event.keyCode === 27) {
 				event.preventDefault()
-				input.tooltip('hide')
+				this.tooltipTarget = ''
 				this.creating = false
 				this.editing = false
 				this.nameError = false
