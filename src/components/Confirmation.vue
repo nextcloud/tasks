@@ -28,14 +28,23 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		<a :title="t('tasks', 'Cancel')" class="confirmation-abort icon-close" @click="reset">
 			<span />
 		</a>
-		<a class="confirmation-confirm icon-delete-white no-permission" @click="deleteCalendar($event)">
+		<a v-tooltip="{
+				placement: 'left',
+				boundariesElement: 'body',
+				content: message
+			}"
+			class="confirmation-confirm icon-delete-white no-permission" @click="deleteCalendar($event)">
 			<span class="countdown">{{ remaining }}</span>
 		</a>
 	</li>
 </template>
 
 <script>
+import Vue from 'vue'
+import VTooltip from 'v-tooltip'
 import clickOutside from 'vue-click-outside'
+
+Vue.use(VTooltip)
 
 export default {
 	name: 'PopoverMenu',
@@ -65,7 +74,6 @@ export default {
 			this.remaining = 3
 		},
 		activate: function(e) {
-			$('.confirmation-confirm').tooltip({ title: this.message, container: 'body', placement: 'right' })
 			this.activated = true
 			this.countdown()
 			e.stopPropagation()
