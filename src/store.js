@@ -74,6 +74,19 @@ export default new Vuex.Store({
 				.filter(task => {
 					return task.completed === false && !task.related
 				}).length
+		},
+
+		/**
+		 * Returns if a calendar name is already used by an other calendar
+		 *
+		 * @param {String} name the name to check
+		 * @param {String} uri the uri of the calendar to exclude
+		 */
+		isCalendarNameUsed: state => (name, uri) => {
+			var calendars = Object.values(state.calendars)
+			return calendars.some(calendar => {
+				return (calendar.displayname === name && calendar.uri !== uri)
+			})
 		}
 	},
 	mutations: {

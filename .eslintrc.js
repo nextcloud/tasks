@@ -11,7 +11,8 @@ module.exports = {
 		n: false,
 		OC: false,
 		OCA: false,
-		moment: true
+		moment: true,
+		$: false
 	},
 	parserOptions: {
 		parser: 'babel-eslint'
