@@ -84,7 +84,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									<span>{{ t('tasks', 'Download') }}</span>
 								</a>
 							</li>
-							<li confirmation="delete(calendar)" confirmation-message="deleteMessage(calendar)" />
+							<confirmation :message="deleteMessage(calendar.displayname)" @delete-calendar="deleteCalendar(calendar, ...arguments)" />
 						</ul>
 					</popover>
 				</ul>
@@ -159,6 +159,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 import { mapState, mapGetters } from 'vuex'
 import Colorpicker from './Colorpicker'
 import PopoverMenu from './PopoverMenu'
+import Confirmation from './Confirmation'
 
 import clickOutside from 'vue-click-outside'
 
@@ -166,6 +167,7 @@ export default {
 	components: {
 		'colorpicker': Colorpicker,
 		'popover': PopoverMenu,
+		'confirmation': Confirmation,
 		clickOutside
 	},
 	directives: {
@@ -302,6 +304,12 @@ export default {
 				check.allowed = true
 			}
 			return check
+		},
+		deleteMessage: function(name) {
+			return t('tasks', 'This will delete the Calendar "%s" and all of its entries.').replace('%s', name)
+		},
+		deleteCalendar: function(calendar) {
+			console.log('Delete calendar ' + calendar.uri)
 		}
 	}
 }
