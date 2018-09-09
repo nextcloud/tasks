@@ -43,9 +43,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				:style="{'background-color': selectedColor}"
 				class="color-selector-label">
 				<input :value="selectedColor"
-					@change="pick($event.target.value)"
 					type="color"
-					class="color-selector">
+					class="color-selector"
+					@change="pick($event.target.value)">
 			</label>
 		</ul>
 	</div>
@@ -72,7 +72,7 @@ export default {
 				'#CC317C',
 				'#3A3B3D',
 				'#CACBCD'
-			],
+			]
 		}
 	},
 	methods: {
