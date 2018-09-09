@@ -89,13 +89,13 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					</popover>
 				</ul>
 			</div>
-			<div class="app-navigation-entry-edit name" ng-class="{error: nameError}">
+			<div :class="{error: nameError}" class="app-navigation-entry-edit name">
 				<form>
-					<input :value="calendar.displayname"
+					<input v-model="newCalendarName"
 						class="edit hasTooltip"
 						type="text"
-						ng-keyup="checkEdit($event,calendar)"
-						autofocus-on-insert>
+						autofocus-on-insert
+						@keyup="checkName($event, calendar.uri)">
 					<input :title="t('tasks', 'Cancel')"
 						type="cancel"
 						value=""
@@ -105,9 +105,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						type="submit"
 						value=""
 						class="action icon-checkmark"
-						ng-click="saveEdit(calendar)">
+						@click="save(calendar)">
 				</form>
-				<colorpicker :initial-color="calendar.color" @color-selected="setColor(calendar, ...arguments)" />
+				<colorpicker :selected-color="selectedColor" @color-selected="setColor(...arguments)" />
 			</div>
 			<div class="app-navigation-entry-edit caldav">
 				<form>
@@ -123,33 +123,33 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</form>
 			</div>
 		</router-link>
-		<li class="newList handler icon-add reactive editing" ng-class="{edit: status.addingList}">
+		<li v-click-outside="cancelCreate" :class="{edit: creating}" class="newList handler icon-add reactive editing">
 			<a class="addlist icon sprite"
-				ng-click="startCreate()"
-				oc-click-focus="{selector: '#newList', timeout: 0}">
+				oc-click-focus="{selector: '#newList', timeout: 0}"
+				@click="startCreate($event)">
 				<span class="title">{{ t('tasks', 'Add List...') }}</span>
 			</a>
-			<div class="app-navigation-entry-edit name" ng-class="{error: nameError}">
-				<form ng-disabled="isAddingList">
+			<div :class="{error: nameError}" class="app-navigation-entry-edit name">
+				<form>
 					<input id="newList"
 						:placeholder="t('tasks', 'New List')"
-						ng-model="status.newListName"
+						v-model="newCalendarName"
 						class="edit hasTooltip"
 						type="text"
 						autofocus-on-insert
-						ng-keyup="checkNew($event,status.newListName)">
+						@keyup="checkName($event, '')">
 					<input :title="t('tasks', 'Cancel')"
 						type="cancel"
 						value=""
 						class="action icon-close"
-						ng-click="cancelCreate()">
+						@click="cancelCreate">
 					<input :title="t('tasks', 'Save')"
 						type="submit"
 						value=""
 						class="action icon-checkmark"
-						ng-click="create($event)">
+						@click="create($event)">
 				</form>
-				<colorpicker @color-selected="setColor('new', ...arguments)" />
+				<colorpicker :selected-color="selectedColor" @color-selected="setColor(...arguments)" />
 			</div>
 		</li>
 	</ul>
@@ -186,7 +186,11 @@ export default {
 	data() {
 		return {
 			editing: '',
-			caldav: ''
+			caldav: '',
+			creating: false,
+			nameError: false,
+			newCalendarName: '',
+			selectedColor: ''
 		}
 	},
 	computed: Object.assign({},
@@ -197,7 +201,8 @@ export default {
 		}),
 		mapGetters([
 			'getCollectionCount',
-			'getCalendarCount'
+			'getCalendarCount',
+			'isCalendarNameUsed'
 		])
 	),
 	methods: {
@@ -213,6 +218,10 @@ export default {
 		},
 		edit: function(calendar) {
 			this.editing = calendar.uri
+			this.newCalendarName = calendar.displayname
+			this.selectedColor = calendar.color
+			this.nameError = false
+			$('.hasTooltip').tooltip('hide')
 		},
 		resetView: function(calendar) {
 			if (this.editing === calendar.uri) {
@@ -234,8 +243,65 @@ export default {
 			url += '?export'
 			return url
 		},
-		setColor: function(calendar, color) {
-			console.log('Set color of ' + calendar.uri + ' to ' + color)
+		setColor: function(color) {
+			this.selectedColor = color
+		},
+		startCreate: function(e) {
+			if (OCA.Theming) {
+				this.selectedColor = OCA.Theming.color
+			} else {
+				this.selectedColor = '#0082C9'
+			}
+			this.newCalendarName = ''
+			this.creating = true
+			e.stopPropagation()
+		},
+		cancelCreate: function() {
+			this.creating = false
+		},
+		create: function() {
+			// TODO: Call correct methods of store
+			console.log('Create new calendar with name ' + this.newCalendarName + ' and color ' + this.selectedColor)
+			this.creating = false
+		},
+		save: function(calendar) {
+			// TODO: Call correct methods of store
+			console.log('Change name and color of calendar ' + calendar.uri + ' to ' + this.newCalendarName + ' and ' + this.selectedColor)
+			this.editing = false
+		},
+		checkName: function(event, uri) {
+			var check = this.isNameAllowed(this.newCalendarName, uri)
+			var input = $(event.currentTarget)
+			if (!check.allowed) {
+				input.attr('title', check.msg)
+					.tooltip({ placement: 'bottom', trigger: 'manual' })
+					.tooltip('fixTitle').tooltip('show')
+				this.nameError = true
+			} else {
+				input.tooltip('hide')
+				this.nameError = false
+			}
+			if (event.keyCode === 27) {
+				event.preventDefault()
+				input.tooltip('hide')
+				this.creating = false
+				this.editing = false
+				this.nameError = false
+			}
+		},
+		isNameAllowed: function(name, uri) {
+			var check = {
+				allowed:	false,
+				msg:	''
+			}
+			if (this.isCalendarNameUsed(name, uri)) {
+				check.msg = t('tasks', 'The name "%s" is already used.').replace('%s', name)
+			} else if (!name) {
+				check.msg = t('tasks', 'An empty name is not allowed.')
+			} else {
+				check.allowed = true
+			}
+			return check
 		}
 	}
 }
