@@ -324,7 +324,7 @@ export default {
 			return check
 		},
 		deleteMessage: function(name) {
-			return t('tasks', 'This will delete the Calendar "%s" and all of its entries.').replace('%s', name)
+			return t('tasks', 'This will delete the calendar "%s" and all corresponding events and tasks.').replace('%s', name)
 		},
 		deleteCalendar: function(calendar) {
 			console.log('Delete calendar ' + calendar.uri)

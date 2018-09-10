@@ -30,6 +30,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		</a>
 		<a v-tooltip="{
 				placement: 'left',
+				show: activated,
+				trigger: 'manual',
 				boundariesElement: 'body',
 				content: message
 			}"
