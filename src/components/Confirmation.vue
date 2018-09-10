@@ -42,11 +42,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import Vue from 'vue'
-import VTooltip from 'v-tooltip'
 import clickOutside from 'vue-click-outside'
-
-Vue.use(VTooltip)
 
 export default {
 	name: 'PopoverMenu',

@@ -166,16 +166,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import Vue from 'vue'
 import { mapState, mapGetters } from 'vuex'
 import Colorpicker from './Colorpicker'
 import PopoverMenu from './PopoverMenu'
 import Confirmation from './Confirmation'
-import VTooltip from 'v-tooltip'
 
 import clickOutside from 'vue-click-outside'
-
-Vue.use(VTooltip)
 
 export default {
 	components: {

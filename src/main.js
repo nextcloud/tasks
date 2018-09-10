@@ -26,6 +26,9 @@ import Vue from 'vue'
 
 import router from './components/TheRouter'
 import store from './store'
+import VTooltip from 'v-tooltip'
+
+Vue.use(VTooltip)
 
 if (!OCA.Tasks) {
 	/**
