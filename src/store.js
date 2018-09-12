@@ -31,7 +31,6 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
 	state: {
-		tasks: [],
 		collections: [
 		],
 		calendars: DummyCalendars.calendars,
@@ -87,6 +86,13 @@ export default new Vuex.Store({
 			return calendars.some(calendar => {
 				return (calendar.displayname === name && calendar.uri !== uri)
 			})
+		},
+
+		/**
+		 * Returns all tasks corresponding to current route value
+		 */
+		getTasks: state => {
+			return Object.values(state.calendars[state.route.params.calendarId].tasks)
 		}
 	},
 	mutations: {

@@ -21,8 +21,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div>
-		<div class="grouped-tasks"
-			ng-class="{'completed-hidden':!settingsmodel.getById('various').showHidden}">
+		<div :class="{'completed-hidden': showHidden}"
+			class="grouped-tasks">
 			<ol :calendarID="$route.params.calendarId"
 				class="tasks"
 				collectionID="uncompleted"
@@ -30,9 +30,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				dnd-list="draggedTasks"
 				dnd-drop="dropAsRootTask(event, item, index)"
 				dnd-dragover="dragover(event, index)">
-				<li v-for="task in tasks"
-					:taskID="task.uri"
+				<router-link v-for="task in tasks"
+					:task-id="task.uri"
 					:key="task.id"
+					:to="'/calendars/' + $route.params.calendarId + '/tasks/' + task.uri"
+					tag="li"
 					class="task-item ui-draggable handler"
 					ng-click="openDetails(task.uri,$event)"
 					ng-class="{done: task.completed}"
@@ -41,10 +43,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					dnd-dragend="dragEnd(event)">
 					<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,route.calendarID) | filter:{'completed':'false'} | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
 					<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
-					<task />
-				</li>
+					<!-- <task /> -->
+				</router-link>
 			</ol>
-			<h2 class="heading-hiddentasks icon-triangle-s handler" ng-show="getCount(route.calendarID,'completed')" ng-click="toggleHidden()">
+			<h2 class="heading-hiddentasks icon-triangle-s handler" ng-show="getCount(route.calendarID,'completed')" @click="toggleHidden">
 				<!-- {{ getCountString(route.calendarID,'completed') }} -->
 			</h2>
 			<ol :calendarID="$route.params.calendarId"
@@ -54,9 +56,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				dnd-list="draggedTasks"
 				dnd-drop="dropAsRootTask(event, item, index)"
 				dnd-dragover="dragover(event, index)">
-				<li v-for="task in tasks"
-					:taskID="task.uri"
+				<router-link v-for="task in tasks"
+					:task-id="task.uri"
 					:key="task.id"
+					:to="'/calendars/' + $route.params.calendarId + '/tasks/' + task.uri"
+					tag="li"
 					class="task-item handler"
 					ng-click="openDetails(task.uri,$event)"
 					ng-class="{done: task.completed}"
@@ -65,8 +69,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					dnd-dragend="dragEnd(event)">
 					<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,route.calendarID) | filter:{'completed':true} | orderBy:'completed_date':true"> -->
 					<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
-					<task />
-				</li>
+					<!-- <task /> -->
+				</router-link>
 			</ol>
 			<div class="loadmore handler" ng-hide="loadedCompleted(route.calendarID)">
 				<span ng-click="getCompletedTasks(route.calendarID)">{{ t('tasks', 'Load remaining completed tasks.') }}</span>
@@ -76,17 +80,36 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 import Task from '../Task'
 
 export default {
 	components: {
 		'task': Task
 	},
-	computed: Object.assign({},
-		mapState({
-			tasks: state => state.tasks
-		})
-	)
+	props: {
+		calendarId: {
+			type: String,
+			default: ''
+		}
+	},
+	computed: Object.assign({
+		showHidden: {
+			get() {
+				return this.$store.state.settings.showHidden
+			},
+			set(value) {
+				this.$store.dispatch('setSetting', { type: 'showHidden', value: value })
+			}
+		} },
+	mapGetters({
+		tasks: 'getTasks'
+	})
+	),
+	methods: {
+		toggleHidden: function() {
+			this.showHidden = +!this.showHidden
+		}
+	}
 }
 </script>

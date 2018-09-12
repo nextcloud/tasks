@@ -66,6 +66,12 @@ export default {
 	components: {
 		'task-body': TaskBody
 	},
+	props: {
+		collectionId: {
+			type: String,
+			default: ''
+		}
+	},
 	computed: Object.assign({},
 		mapState({
 			calendars: state => state.calendars,
