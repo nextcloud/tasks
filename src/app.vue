@@ -121,7 +121,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			</div>
 		</div>
 
-		<div id="app-sidebar">
+		<div id="app-sidebar" :class="{disappear: $route.params.taskId === undefined}">
 			<theDetails />
 		</div>
 	</div>

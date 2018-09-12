@@ -243,7 +243,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					ng-show="task.calendar.writable">
 					<span class="icon icon-trash" />
 				</a>
-				<a class="handler right close-all reactive">
+				<a class="handler right close-all reactive" @click="closeDetails">
 					<span class="icon icon-hide" />
 				</a>
 			</div>
@@ -279,6 +279,15 @@ export default {
 		}
 	},
 	computed: mapState({
-	})
+	}),
+	methods: {
+		closeDetails: function() {
+			if (this.$route.params.calendarId) {
+				this.$router.push({ path: `/calendars/${this.$route.params.calendarId}` })
+			} else {
+				this.$router.push({ path: `/collections/${this.$route.params.collectionId}` })
+			}
+		}
+	}
 }
 </script>

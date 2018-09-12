@@ -20,7 +20,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<div id="app-settings" ng-controller="SettingsController">
+	<div id="app-settings">
 		<div id="app-settings-header">
 			<button class="settings-button" data-apps-slide-toggle="#app-settings-content">
 				<span>{{ t('tasks', 'Settings') }}</span>

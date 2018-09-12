@@ -35,6 +35,7 @@ export default ({
 						writable: true
 					},
 					uid: 'ydf95848mn',
+					uri: 'ydf95848mn.ics',
 					due: '20180902T200933',
 					summary: 'Test 1 - Task 1',
 					complete: 1,
@@ -48,6 +49,7 @@ export default ({
 						writable: true
 					},
 					uid: 'ydf95748mn',
+					uri: 'ydf95748mn.ics',
 					due: '20180901T200926',
 					summary: 'Test 1 - Task 2',
 					complete: 3,
@@ -61,6 +63,7 @@ export default ({
 						writable: true
 					},
 					uid: 'ydf95849mn',
+					uri: 'ydf95849mn.ics',
 					due: '20170903T200916',
 					summary: 'Test 1 - Task 3',
 					complete: 6,
@@ -84,6 +87,7 @@ export default ({
 						writable: true
 					},
 					uid: 'ydf91848mn',
+					uri: 'ydf91848mn.ics',
 					due: '20180929T200912',
 					start: '20171003T100912',
 					summary: 'Test 2 - Task 1',
@@ -98,6 +102,7 @@ export default ({
 						writable: true
 					},
 					uid: 'yef91848mn',
+					uri: 'yef91848mn.ics',
 					due: '20181003T200912',
 					start: '20171003T200912',
 					summary: 'Test 2 - Task 2',
@@ -112,6 +117,7 @@ export default ({
 						writable: true
 					},
 					uid: 'yff91848mn',
+					uri: 'yff91848mn.ics',
 					due: '',
 					start: '',
 					summary: 'Test 2 - Task 3',
@@ -126,6 +132,7 @@ export default ({
 						writable: true
 					},
 					uid: 'ydg91848mn',
+					uri: 'ydg91848mn.ics',
 					due: '20180907T200912',
 					summary: 'Test 2 - Task 4',
 					complete: 6,
@@ -139,6 +146,7 @@ export default ({
 						writable: true
 					},
 					uid: 'ydh91848mn',
+					uri: 'ydh91848mn.ics',
 					summary: 'Test 2 - Task 5',
 					complete: 6,
 					completed: false,
@@ -161,6 +169,7 @@ export default ({
 						writable: true
 					},
 					uid: 'ydi92848mn',
+					uri: 'ydi92848mn.ics',
 					summary: 'Test 3 - Task 1',
 					complete: 1,
 					completed: false,
@@ -173,6 +182,7 @@ export default ({
 						writable: true
 					},
 					uid: 'ydj91848mn',
+					uri: 'ydj91848mn.ics',
 					summary: 'Test 3 - Task 2',
 					complete: 3,
 					completed: true,
@@ -185,6 +195,7 @@ export default ({
 						writable: true
 					},
 					uid: 'ydk91848mn',
+					uri: 'ydk91848mn.ics',
 					summary: 'Test 3 - Task 3',
 					complete: 6,
 					completed: false,
@@ -197,6 +208,7 @@ export default ({
 						writable: true
 					},
 					uid: 'ydl91848mn',
+					uri: 'ydl91848mn.ics',
 					summary: 'Test 3 - Task 4',
 					complete: 6,
 					completed: false,
