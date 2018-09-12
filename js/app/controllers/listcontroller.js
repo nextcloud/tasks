@@ -50,7 +50,7 @@ angular.module('Tasks').controller('ListController', [
 				this._$scope.color = '#31CC7C';
 
 				this._$scope.deleteMessage = function (calendar) {
-					return t('tasks', 'This will delete the Calendar "%s" and all of its entries.').replace('%s', calendar.displayname);
+					return t('tasks', 'This will delete the calendar "%s" and all corresponding events and tasks.').replace('%s', calendar.displayname);
 				};
 
 				this._$scope["delete"] = function(calendar) {

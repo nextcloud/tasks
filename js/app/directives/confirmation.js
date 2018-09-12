@@ -51,8 +51,7 @@ angular.module('Tasks').controller('ConfirmationController', [
 					}
 					e.stopPropagation();
 					_$scope.activate();
-					$element.children('.confirmation-confirm')
-					.tooltip({title: message, container: 'body', placement: 'right'});
+					$element.tooltip({title: message, container: 'body', placement: 'right', trigger: 'manual'}).tooltip('show');
 					$element.addClass("confirmed");
 				});
 
@@ -67,6 +66,7 @@ angular.module('Tasks').controller('ConfirmationController', [
 
 				this._$scope.documentClick = function () {
 					$element.removeClass("confirmed");
+					$element.tooltip('hide');
 				};
 
 				this._$scope.activate = function () {
