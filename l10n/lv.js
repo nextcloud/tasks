@@ -46,7 +46,6 @@ OC.L10N.register(
     "after end" : "pēc beigām",
     "Comment" : "Komentārs",
     "Add a comment" : "Pievienot komentāru",
-    "This will delete the Calendar \"%s\" and all of its entries." : "Šis dzēsīs Kalendāru \"%s\" un visus tā ierakstus.",
     "The name \"%s\" is already used." : "Nosaukums \"%s\" jau tiek lietots.",
     "An empty name is not allowed." : "Nosaukums ir obligāts.",
     "Hidden" : "Paslēpts",

@@ -42,7 +42,6 @@ OC.L10N.register(
     "after end" : "na einde",
     "Comment" : "Kommentaar",
     "Add a comment" : "Voeg kommentaar toe",
-    "This will delete the Calendar \"%s\" and all of its entries." : "Dit sal die Kalender “%s” en alle verbonde inskrywings skrap.",
     "The name \"%s\" is already used." : "Die naam “%s” bestaan reeds.",
     "An empty name is not allowed." : "’n Leë naam word nie toegestaan nie.",
     "Hidden" : "Versteek",

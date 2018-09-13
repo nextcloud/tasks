@@ -46,7 +46,6 @@ OC.L10N.register(
     "after end" : "শেষের পর",
     "Comment" : "মন্তব্য",
     "Add a comment" : "মন্তব্য দিন",
-    "This will delete the Calendar \"%s\" and all of its entries." : "\"%s\" নামের পঞ্জিকা ও তার ভেতরের সব তথ্য মুছে যাবে",
     "The name \"%s\" is already used." : "\"%s\" নামটি ইতোমধ্যে ব্যবহৃত হচ্ছে।",
     "An empty name is not allowed." : "একটি শুন্য নাম গ্রহণযোগ্য নয়।",
     "Hidden" : "লুকনো",

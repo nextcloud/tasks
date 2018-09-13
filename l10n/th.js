@@ -46,7 +46,6 @@ OC.L10N.register(
     "after end" : "หลังจากจบ",
     "Comment" : "แสดงความคิดเห็น",
     "Add a comment" : "เพิ่มความคิดเห็น",
-    "This will delete the Calendar \"%s\" and all of its entries." : "นี้จะลบปฏิทิน \"%s\" และรายการทั้งหมด",
     "The name \"%s\" is already used." : "ชื่อ \"%s\" ถูกใช้ไปแล้ว",
     "An empty name is not allowed." : "ชื่อห้ามปล่อยว่าง",
     "Hidden" : "ซ่อน",

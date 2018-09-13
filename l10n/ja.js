@@ -46,7 +46,6 @@ OC.L10N.register(
     "after end" : "終了後",
     "Comment" : "コメント",
     "Add a comment" : "コメントを追加",
-    "This will delete the Calendar \"%s\" and all of its entries." : "カレンダー \"%s\"とすべてのエントリが削除されます",
     "The name \"%s\" is already used." : "名前 \"%s\" はすでに使われています。",
     "An empty name is not allowed." : "件名を入力してください。",
     "Hidden" : "隠す",

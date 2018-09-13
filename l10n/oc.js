@@ -46,7 +46,6 @@ OC.L10N.register(
     "after end" : "aprèp la fin",
     "Comment" : "Comentar",
     "Add a comment" : "Apondre un comentari",
-    "This will delete the Calendar \"%s\" and all of its entries." : "Aquò va suprimir lo Calendièr \"%s\" e tot son contengut.",
     "The name \"%s\" is already used." : "Lo nom \"%s\" es ja utilizat.",
     "An empty name is not allowed." : "Un nom void es pas autorizat.",
     "Hidden" : "Amagat",

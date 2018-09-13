@@ -46,7 +46,6 @@ OC.L10N.register(
     "after end" : "след края",
     "Comment" : "Коментар",
     "Add a comment" : "Добави коментар",
-    "This will delete the Calendar \"%s\" and all of its entries." : "Календарът \"%s\" и всички събития в него ще бъдат изтрити.",
     "The name \"%s\" is already used." : "Името \"%s\" е вече използвано.",
     "An empty name is not allowed." : "Празно име не е разрешено.",
     "Hidden" : "Скрито",

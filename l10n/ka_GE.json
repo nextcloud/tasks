@@ -44,7 +44,6 @@
     "after end" : "დასრულების შემდეგ",
     "Comment" : "კომენტარი",
     "Add a comment" : "კომენტარის დამატება",
-    "This will delete the Calendar \"%s\" and all of its entries." : "ეს გააუქმებს კალენდარს \"%s\" და მის ჩანაწერებს.",
     "The name \"%s\" is already used." : "სახელი \"%s\" უკვე დაკავებულია",
     "An empty name is not allowed." : "ცარიელი სახელი არაა ნებადართული",
     "Hidden" : "უჩინარი",

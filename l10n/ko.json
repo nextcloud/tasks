@@ -44,7 +44,6 @@
     "after end" : "종료 이후",
     "Comment" : "설명",
     "Add a comment" : "설명 추가",
-    "This will delete the Calendar \"%s\" and all of its entries." : "달력 \"%s\" 및 포함된 모든 항목을 삭제합니다.",
     "The name \"%s\" is already used." : "이름 \"%s\"이(가) 이미 사용 중입니다.",
     "An empty name is not allowed." : "이름을 비워둘 수 없습니다.",
     "Hidden" : "숨김",

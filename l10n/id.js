@@ -46,7 +46,6 @@ OC.L10N.register(
     "after end" : "setelah diakhir",
     "Comment" : "Komentar",
     "Add a comment" : "Tambah komentar",
-    "This will delete the Calendar \"%s\" and all of its entries." : "Hal ini akan menghapus Kalender \"%s\" dan semua isinya",
     "The name \"%s\" is already used." : "Nama \"%s\" sudah digunakan.",
     "An empty name is not allowed." : "Nama kosong tidak diperbolehkan.",
     "Hidden" : "Sembunyi",

@@ -46,7 +46,6 @@ OC.L10N.register(
     "after end" : "pasibaigus",
     "Comment" : "Komentaras",
     "Add a comment" : "Pridėti komentarą",
-    "This will delete the Calendar \"%s\" and all of its entries." : "Tai ištrins kalendorių „%s“ ir visus jo įrašus.",
     "The name \"%s\" is already used." : "Pavadinimas „%s“ jau naudojamas.",
     "An empty name is not allowed." : "Pavadinimas yra būtinas",
     "Hidden" : "Paslėpta",

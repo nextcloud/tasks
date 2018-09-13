@@ -46,7 +46,6 @@ OC.L10N.register(
     "after end" : "pas fundit",
     "Comment" : "Koment",
     "Add a comment" : "Shtoni një koment",
-    "This will delete the Calendar \"%s\" and all of its entries." : "Kjo do të fshijë Kalendarin \"%s\" dhe krejt zërat e tij.",
     "The name \"%s\" is already used." : "Emri \"%s\" është tashmë në përdorim.",
     "An empty name is not allowed." : "Nuk lejohet emër i zbrazët.",
     "Hidden" : "I padukshëm",

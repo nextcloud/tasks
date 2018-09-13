@@ -46,7 +46,6 @@ OC.L10N.register(
     "after end" : "pärast lõppu",
     "Comment" : "Kommentaar",
     "Add a comment" : "Lisa kommentaar",
-    "This will delete the Calendar \"%s\" and all of its entries." : "See kustutab kalendri \"%s\" ja kõik selle sissekanded.",
     "The name \"%s\" is already used." : "Nimi \"%s\" on juba kasutuses.",
     "An empty name is not allowed." : "Nime lahter ei tohi olla tühi.",
     "Hidden" : "Peidetud",

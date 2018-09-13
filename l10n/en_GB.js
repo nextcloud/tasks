@@ -46,7 +46,6 @@ OC.L10N.register(
     "after end" : "after end",
     "Comment" : "Comment",
     "Add a comment" : "Add a comment",
-    "This will delete the Calendar \"%s\" and all of its entries." : "This will delete the Calendar \"%s\" and all of its entries.",
     "The name \"%s\" is already used." : "The name \"%s\" is already used.",
     "An empty name is not allowed." : "An empty name is not allowed.",
     "Hidden" : "Hidden",

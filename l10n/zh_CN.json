@@ -44,7 +44,6 @@
     "after end" : "结束后",
     "Comment" : "评论",
     "Add a comment" : "添加评论",
-    "This will delete the Calendar \"%s\" and all of its entries." : "这会删除日历 \"%s\" 和其中的所有内容。",
     "The name \"%s\" is already used." : "名称 \"%s\" 已被使用。",
     "An empty name is not allowed." : "不允许使用空名称。",
     "Hidden" : "隐藏",

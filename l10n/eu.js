@@ -46,7 +46,6 @@ OC.L10N.register(
     "after end" : "bukatu ondoren",
     "Comment" : "Iruzkina",
     "Add a comment" : "Gehitu iruzkina",
-    "This will delete the Calendar \"%s\" and all of its entries." : "Honek \"%s\" egutegia eta bere sarrera guztiak ezabatuko ditu.",
     "The name \"%s\" is already used." : "\"%s\" izena dagoeneko erabilita dago.",
     "An empty name is not allowed." : "Hutsa ez da izentzat onartzen.",
     "Hidden" : "Ezkutua",

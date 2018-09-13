@@ -46,7 +46,6 @@ OC.L10N.register(
     "after end" : "אחרי סיום",
     "Comment" : "תגובה",
     "Add a comment" : "הוספת תגובה",
-    "This will delete the Calendar \"%s\" and all of its entries." : "פעולה זו תמחק את היומן \"%s\" ואת כל הרשומות בו.",
     "The name \"%s\" is already used." : "השם \"%s\" כבר קיים.",
     "An empty name is not allowed." : "שדה שם ריק אינו מותר.",
     "Hidden" : "מוסתר",

@@ -46,7 +46,6 @@ OC.L10N.register(
     "after end" : "No Enn",
     "Comment" : "Kommentar",
     "Add a comment" : "Setz e Kommentar derbäi",
-    "This will delete the Calendar \"%s\" and all of its entries." : "Dëst läscht de Kalenner \"%s\" an all seng Donnéeën.",
     "The name \"%s\" is already used." : "Den Numm \"%s\" gëtt scho gebraucht.",
     "An empty name is not allowed." : "En eidelen Numm ass net erlaabt.",
     "Hidden" : "Verstoppt",

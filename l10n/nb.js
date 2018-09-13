@@ -46,7 +46,6 @@ OC.L10N.register(
     "after end" : "etter slutt",
     "Comment" : "Kommentar",
     "Add a comment" : "Legg til en kommentar",
-    "This will delete the Calendar \"%s\" and all of its entries." : "Dette vil slette kalenderen \"%s\" og alt den inneholder.",
     "The name \"%s\" is already used." : "Navnet \"%s\" er i bruk allerede.",
     "An empty name is not allowed." : "Et tomt navn er ikke tillatt.",
     "Hidden" : "Skjult",

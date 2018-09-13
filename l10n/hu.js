@@ -46,7 +46,6 @@ OC.L10N.register(
     "after end" : "Befejezés után",
     "Comment" : "Komment",
     "Add a comment" : "Komment hozzáadása",
-    "This will delete the Calendar \"%s\" and all of its entries." : "Ez törölni fogja a Naptárat \"%s\" és az összes bejegyzést.",
     "The name \"%s\" is already used." : "Ez a név \"%s\" már foglalt.",
     "An empty name is not allowed." : "Az üres név nem engedélyezett.",
     "Hidden" : "Rejtett",

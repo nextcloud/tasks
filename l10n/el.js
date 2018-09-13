@@ -46,7 +46,6 @@ OC.L10N.register(
     "after end" : "μετά τη λήξη",
     "Comment" : "Σχόλιο",
     "Add a comment" : "Προσθήκη σχολίου",
-    "This will delete the Calendar \"%s\" and all of its entries." : "Αυτό θα διαγράψει το Ημερολόγιο \"%s\" και όλες τις εγγραφές του.",
     "The name \"%s\" is already used." : "Το όνομα \"%s\" χρησιμοποιείται ήδη.",
     "An empty name is not allowed." : "Δεν επιτρέπεται κενό όνομα.",
     "Hidden" : "Κρυφό",

@@ -46,7 +46,6 @@ OC.L10N.register(
     "after end" : "po ukončení",
     "Comment" : "Komentár",
     "Add a comment" : "Pridať komentár",
-    "This will delete the Calendar \"%s\" and all of its entries." : "Táto operácia odstráni kalendár \"%s\" a všetky jeho položky.",
     "The name \"%s\" is already used." : "Názov \"%s\" je už použitý.",
     "An empty name is not allowed." : "Prázdny názov nie je povolený",
     "Hidden" : "Skryté",
