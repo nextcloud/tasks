@@ -46,6 +46,7 @@ OC.L10N.register(
     "after end" : "bittikten sonra",
     "Comment" : "Yorum",
     "Add a comment" : "Yorum ekle",
+    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Bu işlem \"%s\" takvimi ile ilgili tüm etkinlik ve görevleri silecek.",
     "The name \"%s\" is already used." : "\"%s\" adı zaten var.",
     "An empty name is not allowed." : "Ad boş bırakılamaz.",
     "Hidden" : "Gizli",

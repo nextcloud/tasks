@@ -46,6 +46,7 @@ OC.L10N.register(
     "after end" : "dopo la fine",
     "Comment" : "Commento",
     "Add a comment" : "Aggiungi un commento",
+    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Ciò eliminerà il calendario \"%s\" e tutti gli eventi e le attività corrispondenti.",
     "The name \"%s\" is already used." : "Il nome \"%s\" è già utilizzato.",
     "An empty name is not allowed." : "Un nome vuoto non è consentito.",
     "Hidden" : "Nascosto",
