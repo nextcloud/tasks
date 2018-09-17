@@ -26,7 +26,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			type="task"
 			ng-class="{active: route.taskID==task.uri, subtasks: hasSubtasks(task), completedsubtasks: hasCompletedSubtasks(task), subtaskshidden: task.hideSubtasks, attachment: task.note!=''}">
 
-			<div class="percentbar" ng-if="task.complete > 0 ">
+			<div v-if="task.complete > 0" class="percentbar">
 				<div :style="{ width: task.complete, 'background-color': task.calendar.color }"
 					class="percentdone">
 					<!-- aria-label="{{ task.complete | percentDetails}}"> -->
@@ -70,7 +70,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<span class="title" ng-bind-html="task.summary | linky:'_blank':{rel: 'nofollow'}" />
 				<span class="categories-list">
 					<ul>
-						<li ng-repeat="category in task.categories"><span>{{ category }}</span></li>
+						<li v-for="category in task.categories" :key="category">
+							<span>{{ category }}</span>
+						</li>
 					</ul>
 				</span>
 			</div>
@@ -92,16 +94,19 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							<!-- placeholder="{{ getSubAddString(task.summary) }}"/> -->
 					</form>
 				</li>
-				<li :taskID="task.uri"
+				<li v-for="subtask in tasks(task.uid)"
+					:key="subtask.uid"
+					:taskID="task.uri"
 					:class="{done: task.completed}"
 					class="task-item ui-draggable handler subtask"
+
 					ng-repeat="task in getSubTasks(filtered,task) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"
 					ng-click="openDetails(task.uri,$event)"
 					dnd-draggable="task"
 					dnd-dragstart="dragStart(event)"
 					dnd-dragend="dragEnd(event)">
 					<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
-					<task-body-component />
+					<task-body-component :task="subtask" />
 				</li>
 			</ol>
 		</div>
@@ -109,13 +114,36 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
 	name: 'TaskBodyComponent',
 	components: {
 	},
-	computed: mapState({
-	})
+	props: {
+		task: {
+			type: Object,
+			default: () => {
+				return {
+					calendar: {
+						writable: true
+					},
+					uid: 'ydk91848mn',
+					uri: 'ydk91848mn.ics',
+					summary: 'Test 3 - Task 3',
+					complete: 6,
+					completed: false,
+					priority: 7,
+					categories: [],
+					note: 'Migrate this app to vue.'
+				}
+			}
+		}
+	},
+	computed: Object.assign({},
+		mapGetters({
+			tasks: 'getTasksByParentId'
+		})
+	)
 }
 </script>
