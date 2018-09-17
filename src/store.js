@@ -93,6 +93,14 @@ export default new Vuex.Store({
 		 */
 		getTasks: state => {
 			return Object.values(state.calendars[state.route.params.calendarId].tasks)
+		},
+
+		/**
+		 * Returns all tasks corresponding to current route value
+		 */
+		getTasksByParentId: state => (parentId) => {
+			return []
+			// return Object.values(state.calendars[state.route.params.calendarId].tasks)
 		}
 	},
 	mutations: {

@@ -41,7 +41,7 @@ export default ({
 					complete: 1,
 					completed: true,
 					priority: 1,
-					cats: [],
+					categories: ['Test 1 Category 1', 'Test 1 Category 2'],
 					note: 'Migrate this app to vue.'
 				},
 				{
@@ -55,7 +55,7 @@ export default ({
 					complete: 3,
 					completed: false,
 					priority: 5,
-					cats: [],
+					categories: [],
 					note: 'Migrate this app to vue.'
 				},
 				{
@@ -69,7 +69,7 @@ export default ({
 					complete: 6,
 					completed: false,
 					priority: 7,
-					cats: [],
+					categories: [],
 					note: 'Migrate this app to vue.',
 					related: 'ydf95748mn'
 				}
@@ -94,7 +94,7 @@ export default ({
 					complete: 1,
 					completed: true,
 					priority: 1,
-					cats: [],
+					categories: [],
 					note: 'Migrate this app to vue.'
 				},
 				{
@@ -109,7 +109,7 @@ export default ({
 					complete: 3,
 					completed: false,
 					priority: 5,
-					cats: [],
+					categories: [],
 					note: 'Migrate this app to vue.'
 				},
 				{
@@ -124,7 +124,7 @@ export default ({
 					complete: 6,
 					completed: true,
 					priority: 7,
-					cats: [],
+					categories: [],
 					note: 'Migrate this app to vue.'
 				},
 				{
@@ -138,7 +138,7 @@ export default ({
 					complete: 6,
 					completed: false,
 					priority: 7,
-					cats: [],
+					categories: [],
 					note: 'Migrate this app to vue.'
 				},
 				{
@@ -151,7 +151,7 @@ export default ({
 					complete: 6,
 					completed: false,
 					priority: 7,
-					cats: [],
+					categories: [],
 					note: 'Migrate this app to vue.'
 				}
 			]
@@ -174,7 +174,7 @@ export default ({
 					complete: 1,
 					completed: false,
 					priority: 1,
-					cats: [],
+					categories: [],
 					note: 'Migrate this app to vue.'
 				},
 				{
@@ -187,7 +187,7 @@ export default ({
 					complete: 3,
 					completed: true,
 					priority: 5,
-					cats: [],
+					categories: [],
 					note: 'Migrate this app to vue.'
 				},
 				{
@@ -200,7 +200,7 @@ export default ({
 					complete: 6,
 					completed: false,
 					priority: 7,
-					cats: [],
+					categories: [],
 					note: 'Migrate this app to vue.'
 				},
 				{
@@ -213,7 +213,7 @@ export default ({
 					complete: 6,
 					completed: false,
 					priority: 7,
-					cats: [],
+					categories: [],
 					note: 'Migrate this app to vue.'
 				}
 			]
