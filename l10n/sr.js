@@ -46,6 +46,7 @@ OC.L10N.register(
     "after end" : "након завршетка",
     "Comment" : "Коментар",
     "Add a comment" : "Додајте коментар",
+    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Ово ће обрисати календар „%s“ и све догађаје и задатке из њега.",
     "The name \"%s\" is already used." : "Назив „%s“ се већ користи.",
     "An empty name is not allowed." : "Празан назив није дозвољен.",
     "Hidden" : "Сакривен",
