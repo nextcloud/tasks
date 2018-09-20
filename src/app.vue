@@ -99,24 +99,6 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</div>
 				<div class="task-list">
 					<router-view />
-					<div id="searchresults" />
-					<div class="task-item template">
-						<div class="task-body">
-							<div class="percentdone" />
-							<a class="task-checkbox" name="toggleCompleted" ng-click="toggleCompleted()">
-								<span class="icon task-checkbox" />
-							</a>
-							<a class="icon task-separator" />
-							<a class="task-star" ng-click="toggleStarred(task.id)">
-								<span class="icon task-star faded" />
-							</a>
-							<!-- <a class="duedate" ng-class="{overdue: TasksModel.overdue(task.due)}">{{ task.due | dateTaskList }}</a> -->
-							<div class="title-wrapper">
-								<span class="title" />
-								<span class="icon task-attachment" />
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
