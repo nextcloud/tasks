@@ -72,6 +72,36 @@ export default ({
 					categories: [],
 					note: 'Migrate this app to vue.',
 					related: 'ydf95748mn'
+				},
+				{
+					calendar: {
+						writable: true
+					},
+					uid: 'rtf95849mn',
+					uri: 'rtf95849mn.ics',
+					due: '20170903T200916',
+					summary: 'Test 1 - Task 4',
+					complete: 6,
+					completed: false,
+					priority: 7,
+					categories: [],
+					note: 'Migrate this app to vue.',
+					related: 'ydf95748mn'
+				},
+				{
+					calendar: {
+						writable: true
+					},
+					uid: 'yaf92889mn',
+					uri: 'yaf92889mn.ics',
+					due: '20170903T200916',
+					summary: 'Test 1 - Task 5',
+					complete: 6,
+					completed: false,
+					priority: 7,
+					categories: [],
+					note: 'Migrate this app to vue.',
+					related: 'ydf95849mn'
 				}
 			]
 		},
@@ -217,6 +247,14 @@ export default ({
 					note: 'Migrate this app to vue.'
 				}
 			]
+		},
+		'test-4': {
+			uri: 'test-4',
+			displayname: 'Test 4',
+			color: '#112245',
+			writable: true,
+			url: '/nextcloud/remote.php/dav/calendars/raimund.schluessler/test-4',
+			tasks: []
 		}
 	}
 })
