@@ -71,6 +71,8 @@ OCA.Tasks.App = new Vue({
 		}
 	},
 	beforeMount() {
+		// Configure the locale of moment.js
+		moment.locale(OC.getLocale().replace('_', '-').toLowerCase())
 		this.$store.dispatch('loadCollections')
 		this.$store.dispatch('loadSettings')
 	},
