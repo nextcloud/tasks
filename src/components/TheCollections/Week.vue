@@ -61,9 +61,9 @@ export default {
 		formatDay: function(day) {
 			var date = moment().add(day, 'day')
 			var dayString
-			if (day == 0) {
+			if (day === 0) {
 				dayString = t('tasks', 'Today')
-			} else if (day == 1) {
+			} else if (day === 1) {
 				dayString = t('tasks', 'Tomorrow')
 			} else {
 				dayString = date.format('dddd')
