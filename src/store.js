@@ -47,13 +47,13 @@ export default new Vuex.Store({
 		 *	- be a root task
 		 *	- be uncompleted
 		 *
-		 * @param {String} collectionID the id of the collection in question
+		 * @param {String} collectionId the Id of the collection in question
 		 */
-		getCollectionCount: state => (collectionID) => {
+		getCollectionCount: state => (collectionId) => {
 			var count = 0
 			Object.values(state.calendars).forEach(calendar => {
 				count += calendar.tasks.filter(task => {
-					return isTaskInList(task, collectionID) && !task.related
+					return isTaskInList(task, collectionId) && !task.related
 				}).length
 			})
 			return count
@@ -66,13 +66,32 @@ export default new Vuex.Store({
 		 *	- a root task
 		 *	- uncompleted
 		 *
-		 * @param {String} calendarID the id of the calendar in question
+		 * @param {String} calendarId the Id of the calendar in question
 		 */
-		getCalendarCount: state => (calendarID) => {
-			return Object.values(state.calendars[calendarID].tasks)
+		getCalendarCount: state => (calendarId) => {
+			return Object.values(state.calendars[calendarId].tasks)
 				.filter(task => {
 					return task.completed === false && !task.related
 				}).length
+		},
+
+		/**
+		 * Returns the count of tasks in a calendar belonging to a collection
+		 *
+		 * Tasks have to be
+		 *	- belong to the collection with collectionId
+		 *	- a root task
+		 *	- uncompleted
+		 *
+		 * @param {String} calendarId the Id of the calendar in question
+		 * @param {String} collectionId the Id of the collection in question
+		 */
+		getCalendarCountByCollectionId: state => (calendarId, collectionId) => {
+			var calendar = state.calendars[calendarId]
+			var count = calendar.tasks.filter(task => {
+				return isTaskInList(task, collectionId) && !task.related
+			}).length
+			return count
 		},
 
 		/**
@@ -89,18 +108,30 @@ export default new Vuex.Store({
 		},
 
 		/**
-		 * Returns all tasks corresponding to current route value
+		 * Returns all tasks corresponding to the calendar
+		 *
+		 * @param {String} calendarId the Id of the calendar in question
 		 */
-		getTasks: state => {
-			return Object.values(state.calendars[state.route.params.calendarId].tasks)
+		getTasksByCalendarId: state => (calendarId) => {
+			return Object.values(state.calendars[calendarId].tasks)
 		},
 
 		/**
 		 * Returns all tasks corresponding to current route value
 		 */
-		getTasksByParentId: state => (parentId) => {
-			return []
-			// return Object.values(state.calendars[state.route.params.calendarId].tasks)
+		getTasksByRoute: (state, getters) => {
+			return getters.getTasksByCalendarId(state.route.params.calendarId)
+		},
+
+		/**
+		 * Returns all tasks of all calendars
+		 */
+		getAllTasks: (state) => {
+			var tasks = []
+			Object.values(state.calendars).forEach(calendar => {
+				tasks.concat(calendar.tasks)
+			})
+			return tasks
 		}
 	},
 	mutations: {

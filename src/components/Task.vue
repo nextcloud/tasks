@@ -24,7 +24,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		<div :taskID="task.uri"
 			class="task-body"
 			type="task"
-			ng-class="{active: route.taskID==task.uri, subtasks: hasSubtasks(task), completedsubtasks: hasCompletedSubtasks(task), subtaskshidden: task.hideSubtasks, attachment: task.note!=''}">
+			ng-class="{active: route.taskID==task.uri, subtasks: hasSubtasks(task), completedsubtasks: hasCompletedSubtasks(task),
+			subtaskshidden: task.hideSubtasks, attachment: task.note!=''}">
 
 			<div v-if="task.complete > 0" class="percentbar">
 				<div :style="{ width: task.complete, 'background-color': task.calendar.color }"
@@ -43,7 +44,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			</a>
 			<a class="icon task-separator" />
 			<a class="task-star handler" ng-click="toggleStarred(task)">
-				<span :class="{'icon-task-star-high':task.priority > 5, 'icon-task-star-medium':task.priority == 5, 'icon-task-star-low':task.priority > 0 && task.priority < 5}" class="icon icon-task-star right large reactive" />
+				<span :class="{'icon-task-star-high':task.priority > 5, 'icon-task-star-medium':task.priority == 5,
+					'icon-task-star-low':task.priority > 0 && task.priority < 5}" class="icon icon-task-star right large reactive" />
 			</a>
 			<a class="task-addsubtask handler add-subtask"
 				ng-show="task.calendar.writable"
@@ -67,7 +69,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			<!-- <a class="duedate" ng-class="{overdue: TasksModel.overdue(task.due)}">{{ task.due | dateTaskList }}</a> -->
 			<a ng-show="route.collectionID=='week'" class="listname">{{ task.calendar.displayname }}</a>
 			<div class="title-wrapper">
-				<span class="title" ng-bind-html="task.summary | linky:'_blank':{rel: 'nofollow'}" />
+				<span class="title">{{ task.summary }}</span>
 				<span class="categories-list">
 					<ul>
 						<li v-for="category in task.categories" :key="category">
@@ -94,7 +96,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							<!-- placeholder="{{ getSubAddString(task.summary) }}"/> -->
 					</form>
 				</li>
-				<li v-for="subtask in tasks(task.uid)"
+				<li v-for="subtask in getTasksByParentId(task.uid)"
 					:key="subtask.uid"
 					:taskID="task.uri"
 					:class="{done: task.completed}"
@@ -106,7 +108,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					dnd-dragstart="dragStart(event)"
 					dnd-dragend="dragEnd(event)">
 					<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
-					<task-body-component :task="subtask" />
+					<task-body-component :task="subtask" :tasks="tasks" />
 				</li>
 			</ol>
 		</div>
@@ -114,36 +116,31 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 
 export default {
 	name: 'TaskBodyComponent',
-	components: {
-	},
 	props: {
 		task: {
 			type: Object,
-			default: () => {
-				return {
-					calendar: {
-						writable: true
-					},
-					uid: 'ydk91848mn',
-					uri: 'ydk91848mn.ics',
-					summary: 'Test 3 - Task 3',
-					complete: 6,
-					completed: false,
-					priority: 7,
-					categories: [],
-					note: 'Migrate this app to vue.'
-				}
-			}
+			required: true
+		},
+		tasks: {
+			type: Array,
+			required: true
 		}
 	},
-	computed: Object.assign({},
-		mapGetters({
-			tasks: 'getTasksByParentId'
-		})
-	)
+	methods: {
+		/**
+		 * Returns all tasks which are direct children of the task with ID parentId
+		 *
+		 * @param {String} parentId the Id of the parent task
+		 */
+		getTasksByParentId: function(parentId) {
+			return Object.values(this.tasks)
+				.filter(task => {
+					return task.related === parentId
+				})
+		}
+	}
 }
 </script>

@@ -20,15 +20,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<!-- <div ng-repeat="calendar in calendars | filter:filterLists()" class="grouped-tasks ui-droppable" :rel="calendar.uri"> -->
 	<div>
-		<div v-for="calendar in calendars"
+		<div v-for="calendar in filteredCalendars"
 			:key="calendar.id"
 			:rel="calendar.uri"
 			class="grouped-tasks ui-droppable">
-			<h2 class="heading">
-				<text>{{ calendar.displayname }}</text>
-			</h2>
+			<h2 class="heading">{{ calendar.displayname }}</h2>
 			<ol :calendarID="calendar.uri"
 				:collectionID="$route.params.collectionId"
 				class="tasks"
@@ -36,7 +33,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				dnd-list="draggedTasks"
 				dnd-drop="dropAsRootTask(event, item, index)"
 				dnd-dragover="dragover(event, index)">
-				<li v-for="task in tasks"
+				<li v-for="task in filteredTasks = tasks(calendar.uri)"
 					:taskID="task.uri"
 					:key="task.id"
 					class="task-item ui-draggable handler"
@@ -48,7 +45,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					dnd-dragend="dragEnd(event)">
 					<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,calendar.uri) | filter:filterTasks(task,route.collectionID) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
 					<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
-					<task-body />
+					<task-body :task="task" :tasks="filteredTasks" />
 				</li>
 			</ol>
 			<div class="loadmore handler" ng-hide="loadedCompleted(calendar.uri) || route.collectionID != 'completed'">
@@ -59,7 +56,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 import TaskBody from '../Task'
 
 export default {
@@ -72,11 +69,28 @@ export default {
 			default: ''
 		}
 	},
-	computed: Object.assign({},
-		mapState({
-			calendars: state => state.calendars,
-			tasks: state => state.tasks
-		})
+	computed: Object.assign({
+
+		/**
+		 * Returns the calendars which are to be shown for the current collection
+		 *
+		 * Calendars have to contain at least one task which
+		 *	- belongs to the collection
+		 *	- is a root task
+		 *	- is uncompleted
+		 *
+		 * @param {String} collectionId the Id of the collection in question
+		 */
+		filteredCalendars: function() {
+			return Object.values(this.$store.state.calendars)
+				.filter(calendar => {
+					return this.$store.getters.getCalendarCountByCollectionId(calendar.uri, this.$route.params.collectionId)
+				})
+		}
+	},
+	mapGetters({
+		tasks: 'getTasksByCalendarId'
+	})
 	)
 }
 </script>
