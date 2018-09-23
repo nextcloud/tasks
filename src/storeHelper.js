@@ -21,17 +21,14 @@
 'use strict'
 
 /**
- * Returns the count of tasks in a calendar
+ * Returns if a task belongs to a list
  *
- * Tasks have to be
- *	- a root task
- *	- uncompleted
- *
- * @param {Task} task the task to check
- * @param {String} task the id of the list in question
+ * @param {Object} task the task to check
+ * @param {String} listId the id of the list in question
+ * @returns {Boolean}
  */
-function isTaskInList(task, listID) {
-	switch (listID) {
+function isTaskInList(task, listId) {
+	switch (listId) {
 	case 'completed':
 		return task.completed === true
 	case 'all':
@@ -45,28 +42,59 @@ function isTaskInList(task, listID) {
 	case 'week':
 		return task.completed === false && (week(task.start) || week(task.due))
 	default:
-		return '' + task.calendar.uri === '' + listID
+		return '' + task.calendar.uri === '' + listId
 	}
 }
 
+/**
+ * Checks if the start or due date have already passed
+ *
+ * @param {String} start The start date
+ * @param {String} due The due date
+ * @returns {Boolean}
+ */
 function current(start, due) {
-	return !moment(start, 'YYYYMMDDTHHmmss').isValid() || moment(start, 'YYYYMMDDTHHmmss').diff(moment(), 'days', true) < 0 || moment(due, 'YYYYMMDDTHHmmss').diff(moment(), 'days', true) < 0
+	return !valid(start) || moment(start, 'YYYYMMDDTHHmmss').diff(moment(), 'days', true) < 0 || moment(due, 'YYYYMMDDTHHmmss').diff(moment(), 'days', true) < 0
 }
 
+/**
+ * Checks if a date is today
+ *
+ * @param {String} date The date
+ * @returns {Boolean}
+ */
 function today(date) {
-	return moment(date, 'YYYYMMDDTHHmmss').isValid() && moment(date, 'YYYYMMDDTHHmmss').diff(moment().startOf('day'), 'days', true) < 1
+	return valid(date) && moment(date, 'YYYYMMDDTHHmmss').diff(moment().startOf('day'), 'days', true) < 1
 }
 
+/**
+ * Checks if a date lies within the next week
+ *
+ * @param {String} date The date
+ * @returns {Boolean}
+ */
 function week(date) {
-	return moment(date, 'YYYYMMDDTHHmmss').isValid() && moment(date, 'YYYYMMDDTHHmmss').diff(moment().startOf('day'), 'days', true) < 7
+	return valid(date) && moment(date, 'YYYYMMDDTHHmmss').diff(moment().startOf('day'), 'days', true) < 7
 }
 
-function due(due) {
-	return moment(due, 'YYYYMMDDTHHmmss').isValid()
+/**
+ * Checks if a date is valid
+ *
+ * @param {String} date The date
+ * @returns {Boolean}
+ */
+function valid(date) {
+	return moment(date, 'YYYYMMDDTHHmmss').isValid()
 }
 
+/**
+ * Checks if a date is overdue
+ *
+ * @param {String} due The due date
+ * @returns {Boolean}
+ */
 function overdue(due) {
-	return moment(due, 'YYYYMMDDTHHmmss').isValid() && moment(due, 'YYYYMMDDTHHmmss').diff(moment()) < 0
+	return valid(date) && moment(due, 'YYYYMMDDTHHmmss').diff(moment()) < 0
 }
 
 export {
