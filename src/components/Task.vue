@@ -115,14 +115,14 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { overdue } from '../storeHelper'
+import { overdue, valid } from '../storeHelper'
 
 export default {
 	name: 'TaskBodyComponent',
 	filters: {
 		formatDate: function(due) {
 			var d = moment(due)
-			return d.isValid() ? d.format('L') : ''
+			return valid(d) ? d.format('L') : ''
 		}
 	},
 	props: {
