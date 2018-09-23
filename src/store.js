@@ -34,8 +34,7 @@ export default new Vuex.Store({
 		collections: [
 		],
 		calendars: DummyCalendars.calendars,
-		settings: {},
-		dayOfMonth: 23
+		settings: {}
 	},
 	getters: {
 

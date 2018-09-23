@@ -204,14 +204,14 @@ export default {
 			newCalendarName: '',
 			selectedColor: '',
 			tooltipMessage: '',
-			tooltipTarget: ''
+			tooltipTarget: '',
+			dayOfMonth: moment().date()
 		}
 	},
 	computed: Object.assign({},
 		mapState({
 			collections: state => state.collections,
-			calendars: state => state.calendars,
-			dayOfMonth: state => state.dayOfMonth
+			calendars: state => state.calendars
 		}),
 		mapGetters([
 			'getCollectionCount',
