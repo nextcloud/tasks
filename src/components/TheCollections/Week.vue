@@ -30,20 +30,20 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				dnd-list="draggedTasks"
 				dnd-drop="dropAsRootTask(event, item, index)"
 				dnd-dragover="dragover(event, index)">
-				<li v-for="task in tasks"
-					:taskID="task.uri"
-					:key="task.id"
+				<router-link v-for="task in tasks"
+					:task-id="task.uri"
+					:key="task.uid"
+					:to="'/collections/week/tasks/' + task.uri"
+					:class="{done: task.completed}"
+					tag="li"
 					class="task-item ui-draggable handler"
-					ng-animate="'animate'"
-					ng-click="openDetails(task.uri,$event)"
-					ng-class="{done: task.completed}"
 					dnd-draggable="task"
 					dnd-dragstart="dragStart(event)"
 					dnd-dragend="dragEnd(event)">
 					<!-- ng-repeat="task in filtered = filteredTasks() | filter:taskAtDay(task,day) | filter:hasNoParent(task) | filter:{'completed':'false'} | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
 					<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
 					<task :task="task" :tasks="tasks" />
-				</li>
+				</router-link>
 			</ol>
 		</div>
 	</div>

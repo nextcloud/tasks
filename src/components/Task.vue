@@ -22,10 +22,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <template>
 	<div class="task-body-component">
 		<div :taskID="task.uri"
+			:class="{active: $route.params.taskId==task.uri, subtasks: hasSubtasks(task), completedsubtasks: hasCompletedSubtasks(task),
+				subtaskshidden: task.hideSubtasks, attachment: task.note!=''}"
 			class="task-body"
-			type="task"
-			ng-class="{active: route.taskID==task.uri, subtasks: hasSubtasks(task), completedsubtasks: hasCompletedSubtasks(task),
-			subtaskshidden: task.hideSubtasks, attachment: task.note!=''}">
+			type="task">
 
 			<div v-if="task.complete > 0" class="percentbar">
 				<div :style="{ width: task.complete, 'background-color': task.calendar.color }"
@@ -38,36 +38,36 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				:aria-label="t('tasks', 'Task is completed')"
 				class="task-checkbox handler"
 				name="toggleCompleted"
-				ng-click="toggleCompleted(task)"
-				role="checkbox">
+				role="checkbox"
+				@click="toggleCompleted(task)">
 				<span :class="{'icon-checkmark': task.completed}" class="icon task-checkbox reactive" />
 			</a>
 			<a class="icon task-separator" />
-			<a class="task-star handler" ng-click="toggleStarred(task)">
+			<a class="task-star handler" @click="toggleStarred(task)">
 				<span :class="{'icon-task-star-high':task.priority > 5, 'icon-task-star-medium':task.priority == 5,
 					'icon-task-star-low':task.priority > 0 && task.priority < 5}" class="icon icon-task-star right large reactive" />
 			</a>
-			<a class="task-addsubtask handler add-subtask"
-				ng-show="task.calendar.writable"
-				ng-click="showSubtaskInput(task.uid)"
-				oc-click-focus="{selector: '.add-subtask input', timeout: 0}">
+			<a v-show="task.calendar.writable"
+				class="task-addsubtask handler add-subtask"
+				oc-click-focus="{selector: '.add-subtask input', timeout: 0}"
+				@click="showSubtaskInput(task.uid)">
 				<span :title="t('tasks', 'Add a subtask to subtasks') + ' ' + task.summary" class="icon icon-add right large reactive" />
 			</a>
-			<a class="handler" ng-click="toggleSubtasks(task)">
+			<a class="handler" @click="toggleSubtasks(task)">
 				<span :title="t('tasks', 'Toggle subtasks')"
-					class="icon right large subtasks reactive"
-					ng-class="task.hideSubtasks ? 'icon-subtasks-hidden' : 'icon-subtasks-visible'" />
+					:class="task.hideSubtasks ? 'icon-subtasks-hidden' : 'icon-subtasks-visible'"
+					class="icon right large subtasks reactive" />
 			</a>
-			<a class="handler" ng-click="toggleCompletedSubtasks(task)">
+			<a class="handler" @click="toggleCompletedSubtasks(task)">
 				<span :title="t('tasks', 'Toggle completed subtasks')"
-					class="icon icon-toggle right large toggle-completed-subtasks reactive"
-					ng-class="{'active': !task.hideCompletedSubtasks}" />
+					:class="{'active': !task.hideCompletedSubtasks}"
+					class="icon icon-toggle right large toggle-completed-subtasks reactive" />
 			</a>
 			<a>
 				<span class="icon icon-note right large" />
 			</a>
-			<!-- <a class="duedate" ng-class="{overdue: TasksModel.overdue(task.due)}">{{ task.due | dateTaskList }}</a> -->
-			<a ng-show="route.collectionID=='week'" class="listname">{{ task.calendar.displayname }}</a>
+			<a :class="{overdue: overdue(task.due)}" class="duedate">{{ task.due | formatDate }}</a>
+			<a v-show="$route.params.collectionId=='week'" class="listname">{{ task.calendar.displayname }}</a>
 			<div class="title-wrapper">
 				<span class="title">{{ task.summary }}</span>
 				<span class="categories-list">
@@ -79,8 +79,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</span>
 			</div>
 		</div>
-		<div class="subtasks-container"
-			ng-class="{subtaskshidden: hideSubtasks(task)}">
+		<div :class="{subtaskshidden: hideSubtasks(task)}"
+			class="subtasks-container">
 			<ol :calendarID="task.calendar.uri"
 				dnd-list="draggedTasks"
 				dnd-drop="dropAsSubtask(event, item, index)"
@@ -88,37 +88,43 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<li class="task-item ui-draggable handler add-subtask"
 					ng-show="status.addSubtaskTo == task.uid">
 					<form ng-submit="addTask(status.subtaskName,task.uid,task.calendar,task)" name="addTaskForm">
-						<input class="transparent"
+						<input :placeholder="subtasksCreationPlaceholder(task.summary)"
+							class="transparent"
 							ng-disabled="isAddingTask"
-							ng-click="focusInput()"
 							ng-model="status.subtaskName"
-							ng-keydown="checkTaskInput($event)">
-							<!-- placeholder="{{ getSubAddString(task.summary) }}"/> -->
+							@keyup.27="cancelCreation()">
 					</form>
 				</li>
-				<li v-for="subtask in getTasksByParentId(task.uid)"
+				<router-link v-for="subtask in getTasksByParentId(task.uid)"
 					:key="subtask.uid"
-					:taskID="task.uri"
-					:class="{done: task.completed}"
+					:to="getTaskRoute(subtask.uri)"
+					:task-id="subtask.uri"
+					:class="{done: subtask.completed}"
+					tag="li"
 					class="task-item ui-draggable handler subtask"
-
 					ng-repeat="task in getSubTasks(filtered,task) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"
-					ng-click="openDetails(task.uri,$event)"
 					dnd-draggable="task"
 					dnd-dragstart="dragStart(event)"
 					dnd-dragend="dragEnd(event)">
 					<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
 					<task-body-component :task="subtask" :tasks="tasks" />
-				</li>
+				</router-link>
 			</ol>
 		</div>
 	</div>
 </template>
 
 <script>
+import { overdue } from '../storeHelper'
 
 export default {
 	name: 'TaskBodyComponent',
+	filters: {
+		formatDate: function(due) {
+			var d = moment(due)
+			return d.isValid() ? d.format('L') : ''
+		}
+	},
 	props: {
 		task: {
 			type: Object,
@@ -131,7 +137,27 @@ export default {
 	},
 	methods: {
 		/**
-		 * Returns all tasks which are direct children of the task with ID parentId
+		 * Checks if a date is overdue
+		 */
+		overdue: overdue,
+
+		/**
+		 * Returns the path of the task
+		 *
+		 * @param {String} taskId the Id of the task
+		 */
+		getTaskRoute: function(taskId) {
+			var calendarId = this.$route.params.calendarId
+			var collectionId = this.$route.params.collectionId
+			if (calendarId) {
+				return '/calendars/' + calendarId + '/tasks/' + taskId
+			} else if (collectionId) {
+				return '/collections/' + collectionId + '/tasks/' + taskId
+			}
+		},
+
+		/**
+		 * Returns all tasks which are direct children of the task with Id parentId
 		 *
 		 * @param {String} parentId the Id of the parent task
 		 */
@@ -140,7 +166,46 @@ export default {
 				.filter(task => {
 					return task.related === parentId
 				})
+		},
+
+		/**
+		 * Returns the placeholder string shown in the subtasks input field
+		 *
+		 * @param {String} task the name of the parent task
+		 */
+		subtasksCreationPlaceholder: function(task) {
+			return t('tasks', 'Add a subtask to "{task}"...', {	task: task })
+		},
+
+		cancelCreation: function() {
+		},
+
+		hasSubtasks: function(task) {
+			return false
+		},
+
+		hasCompletedSubtasks: function(task) {
+			return false
+		},
+
+		toggleCompleted: function(task) {
+		},
+
+		toggleStarred: function(task) {
+		},
+
+		showSubtaskInput: function(taskUid) {
+		},
+
+		toggleSubtasks: function(task) {
+		},
+
+		toggleCompletedSubtasks: function(task) {
+		},
+
+		hideSubtasks: function(task) {
 		}
+
 	}
 }
 </script>

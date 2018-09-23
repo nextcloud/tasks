@@ -23,21 +23,20 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 	<div>
 		<div :class="{'completed-hidden': showHidden}"
 			class="grouped-tasks">
-			<ol :calendarID="$route.params.calendarId"
+			<ol :calendarId="calendarId"
 				class="tasks"
-				collectionID="uncompleted"
+				collectionId="uncompleted"
 				type="list"
 				dnd-list="draggedTasks"
 				dnd-drop="dropAsRootTask(event, item, index)"
 				dnd-dragover="dragover(event, index)">
 				<router-link v-for="task in tasks"
+					:class="{done: task.completed}"
 					:task-id="task.uri"
 					:key="task.id"
-					:to="'/calendars/' + $route.params.calendarId + '/tasks/' + task.uri"
+					:to="'/calendars/' + calendarId + '/tasks/' + task.uri"
 					tag="li"
 					class="task-item ui-draggable handler"
-					ng-click="openDetails(task.uri,$event)"
-					ng-class="{done: task.completed}"
 					dnd-draggable="task"
 					dnd-dragstart="dragStart(event)"
 					dnd-dragend="dragEnd(event)">
@@ -46,10 +45,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<task :task="task" :tasks="tasks" />
 				</router-link>
 			</ol>
-			<h2 class="heading-hiddentasks icon-triangle-s handler" ng-show="getCount(route.calendarID,'completed')" @click="toggleHidden">
-				<!-- {{ getCountString(route.calendarID,'completed') }} -->
+			<h2 v-show="completedCount(calendarId)" class="heading-hiddentasks icon-triangle-s handler" @click="toggleHidden">
+				{{ completedCountString(calendarId) }}
 			</h2>
-			<ol :calendarID="$route.params.calendarId"
+			<ol :calendarID="calendarId"
 				class="completed-tasks"
 				collectionID="completed"
 				type="list"
@@ -57,13 +56,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				dnd-drop="dropAsRootTask(event, item, index)"
 				dnd-dragover="dragover(event, index)">
 				<router-link v-for="task in tasks"
+					:class="{done: task.completed}"
 					:task-id="task.uri"
 					:key="task.id"
-					:to="'/calendars/' + $route.params.calendarId + '/tasks/' + task.uri"
+					:to="'/calendars/' + calendarId + '/tasks/' + task.uri"
 					tag="li"
 					class="task-item handler"
-					ng-click="openDetails(task.uri,$event)"
-					ng-class="{done: task.completed}"
 					dnd-draggable="task"
 					dnd-dragstart="dragStart(event)"
 					dnd-dragend="dragEnd(event)">
@@ -103,12 +101,20 @@ export default {
 			}
 		} },
 	mapGetters({
-		tasks: 'getTasksByRoute'
+		tasks: 'getTasksByRoute',
+		completedCount: 'getCalendarCountCompleted'
 	})
 	),
 	methods: {
 		toggleHidden: function() {
 			this.showHidden = +!this.showHidden
+		},
+
+		/**
+		 * Returns the string for completed tasks
+		 */
+		completedCountString: function() {
+			return n('tasks', '%n Completed Task', '%n Completed Tasks', this.completedCount(this.calendarId))
 		}
 	}
 }
