@@ -27,26 +27,26 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			class="grouped-tasks ui-droppable">
 			<h2 class="heading">{{ calendar.displayname }}</h2>
 			<ol :calendarID="calendar.uri"
-				:collectionID="$route.params.collectionId"
+				:collectionID="collectionId"
 				class="tasks"
 				type="list"
 				dnd-list="draggedTasks"
 				dnd-drop="dropAsRootTask(event, item, index)"
 				dnd-dragover="dragover(event, index)">
-				<li v-for="task in filteredTasks = tasks(calendar.uri)"
-					:taskID="task.uri"
-					:key="task.id"
+				<router-link v-for="task in filteredTasks = tasks(calendar.uri)"
+					:task-id="task.uri"
+					:key="task.uid"
+					:to="'/collections/' + collectionId + '/tasks/' + task.uri"
+					:class="{done: task.completed}"
+					tag="li"
 					class="task-item ui-draggable handler"
-					ng-animate="'animate'"
-					ng-click="openDetails(task.uri,$event)"
-					ng-class="{done: task.completed}"
 					dnd-draggable="task"
 					dnd-dragstart="dragStart(event)"
 					dnd-dragend="dragEnd(event)">
 					<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,calendar.uri) | filter:filterTasks(task,route.collectionID) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
 					<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
 					<task-body :task="task" :tasks="filteredTasks" />
-				</li>
+				</router-link>
 			</ol>
 			<div class="loadmore handler" ng-hide="loadedCompleted(calendar.uri) || route.collectionID != 'completed'">
 				<span ng-click="getCompletedTasks(calendar.uri)">{{ t('tasks', 'Load remaining completed tasks.') }}</span>
