@@ -95,6 +95,22 @@ export default new Vuex.Store({
 		},
 
 		/**
+		 * Returns the count of tasks in a calendar
+		 *
+		 * Tasks have to be
+		 *	- a root task
+		 *	- completed
+		 *
+		 * @param {String} calendarId the Id of the calendar in question
+		 */
+		getCalendarCountCompleted: state => (calendarId) => {
+			return Object.values(state.calendars[calendarId].tasks)
+				.filter(task => {
+					return task.completed === true && !task.related
+				}).length
+		},
+
+		/**
 		 * Returns if a calendar name is already used by an other calendar
 		 *
 		 * @param {String} name the name to check
