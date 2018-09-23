@@ -94,11 +94,11 @@ function valid(date) {
  * @returns {Boolean}
  */
 function overdue(due) {
-	return valid(date) && moment(due, 'YYYYMMDDTHHmmss').diff(moment()) < 0
+	return valid(due) && moment(due, 'YYYYMMDDTHHmmss').diff(moment()) < 0
 }
 
 export {
 	isTaskInList,
-	due,
+	valid,
 	overdue
 }
