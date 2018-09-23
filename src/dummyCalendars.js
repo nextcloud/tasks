@@ -42,7 +42,8 @@ export default ({
 					completed: true,
 					priority: 1,
 					categories: ['Test 1 Category 1', 'Test 1 Category 2'],
-					note: 'Migrate this app to vue.'
+					note: 'Migrate this app to vue.',
+					hideSubtasks: false
 				},
 				{
 					calendar: {
@@ -56,7 +57,8 @@ export default ({
 					completed: false,
 					priority: 5,
 					categories: [],
-					note: 'Migrate this app to vue.'
+					note: 'Migrate this app to vue.',
+					hideSubtasks: false
 				},
 				{
 					calendar: {
@@ -71,7 +73,8 @@ export default ({
 					priority: 7,
 					categories: [],
 					note: 'Migrate this app to vue.',
-					related: 'ydf95748mn'
+					related: 'ydf95748mn',
+					hideSubtasks: false
 				},
 				{
 					calendar: {
@@ -86,7 +89,8 @@ export default ({
 					priority: 7,
 					categories: [],
 					note: 'Migrate this app to vue.',
-					related: 'ydf95748mn'
+					related: 'ydf95748mn',
+					hideSubtasks: false
 				},
 				{
 					calendar: {
@@ -101,7 +105,8 @@ export default ({
 					priority: 7,
 					categories: [],
 					note: 'Migrate this app to vue.',
-					related: 'ydf95849mn'
+					related: 'ydf95849mn',
+					hideSubtasks: false
 				}
 			]
 		},
@@ -125,7 +130,8 @@ export default ({
 					completed: true,
 					priority: 1,
 					categories: [],
-					note: 'Migrate this app to vue.'
+					note: 'Migrate this app to vue.',
+					hideSubtasks: false
 				},
 				{
 					calendar: {
@@ -140,7 +146,8 @@ export default ({
 					completed: false,
 					priority: 5,
 					categories: [],
-					note: 'Migrate this app to vue.'
+					note: 'Migrate this app to vue.',
+					hideSubtasks: false
 				},
 				{
 					calendar: {
@@ -155,7 +162,8 @@ export default ({
 					completed: true,
 					priority: 7,
 					categories: [],
-					note: 'Migrate this app to vue.'
+					note: 'Migrate this app to vue.',
+					hideSubtasks: false
 				},
 				{
 					calendar: {
@@ -169,7 +177,8 @@ export default ({
 					completed: false,
 					priority: 7,
 					categories: [],
-					note: 'Migrate this app to vue.'
+					note: 'Migrate this app to vue.',
+					hideSubtasks: false
 				},
 				{
 					calendar: {
@@ -182,7 +191,8 @@ export default ({
 					completed: false,
 					priority: 7,
 					categories: [],
-					note: 'Migrate this app to vue.'
+					note: 'Migrate this app to vue.',
+					hideSubtasks: false
 				}
 			]
 		},
@@ -205,7 +215,8 @@ export default ({
 					completed: false,
 					priority: 1,
 					categories: [],
-					note: 'Migrate this app to vue.'
+					note: 'Migrate this app to vue.',
+					hideSubtasks: false
 				},
 				{
 					calendar: {
@@ -218,7 +229,8 @@ export default ({
 					completed: true,
 					priority: 5,
 					categories: [],
-					note: 'Migrate this app to vue.'
+					note: 'Migrate this app to vue.',
+					hideSubtasks: false
 				},
 				{
 					calendar: {
@@ -231,7 +243,8 @@ export default ({
 					completed: false,
 					priority: 7,
 					categories: [],
-					note: 'Migrate this app to vue.'
+					note: 'Migrate this app to vue.',
+					hideSubtasks: false
 				},
 				{
 					calendar: {
@@ -244,7 +257,8 @@ export default ({
 					completed: false,
 					priority: 7,
 					categories: [],
-					note: 'Migrate this app to vue.'
+					note: 'Migrate this app to vue.',
+					hideSubtasks: false
 				}
 			]
 		},
