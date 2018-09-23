@@ -28,16 +28,6 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		</div>
 		<div id="app-settings-content">
 			<ul>
-				<li>
-					<label for="startOfWeek">{{ t('tasks', 'Start of week') }}</label>
-					<select id="startOfWeek" v-model="startOfWeek">
-						<option v-for="startOfWeekOption in startOfWeekOptions"
-							:value="startOfWeekOption.id"
-							:key="startOfWeekOption.id">
-							{{ startOfWeekOption.name }}
-						</option>
-					</select>
-				</li>
 				<li class="headline">
 					{{ t('tasks', 'Visibility of Smart Collections') }}
 				</li>
@@ -85,54 +75,15 @@ export default {
 					id: 2,
 					name: t('tasks', 'Automatic')
 				}
-			],
-			startOfWeekOptions: [
-				{
-					id: 0,
-					name: t('tasks', 'Sunday')
-				},
-				{
-					id: 1,
-					name: t('tasks', 'Monday')
-				},
-				{
-					id: 2,
-					name: t('tasks', 'Tuesday')
-				},
-				{
-					id: 3,
-					name: t('tasks', 'Wednesday')
-				},
-				{
-					id: 4,
-					name: t('tasks', 'Thursday')
-				},
-				{
-					id: 5,
-					name: t('tasks', 'Friday')
-				},
-				{
-					id: 6,
-					name: t('tasks', 'Saturday')
-				}
 			]
 		}
 	},
-	computed: Object.assign({
-		startOfWeek: {
-			get() {
-				return this.$store.state.settings.startOfWeek
-			},
-			set(value) {
-				this.$store.dispatch('setSetting', { type: 'startOfWeek', value: value })
-			}
-		}
-	},
-	mapState({
-		collections: state => state.collections,
-		calendars: state => state.calendars,
-		dayOfMonth: state => state.dayOfMonth
-	})
+	computed: Object.assign({},
+		mapState({
+			collections: state => state.collections,
+			calendars: state => state.calendars,
+			dayOfMonth: state => state.dayOfMonth
+		})
 	),
 	methods: {
 		setVisibility: function(e, collectionID) {
