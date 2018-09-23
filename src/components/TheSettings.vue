@@ -35,7 +35,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					:key="collection.id">
 					<div class="label-container">
 						<span :class="collection.icon" class="icon">
-							<text v-if="collection.id=='today'">{{ dayOfMonth }}</text>
+							<span v-if="collection.id=='today'">{{ dayOfMonth }}</span>
 						</span>
 						<label :for="'visibilityCollection-' + collection.id" class="title">{{ collection.displayname }}</label>
 					</div>
@@ -75,14 +75,14 @@ export default {
 					id: 2,
 					name: t('tasks', 'Automatic')
 				}
-			]
+			],
+			dayOfMonth: moment().date()
 		}
 	},
 	computed: Object.assign({},
 		mapState({
 			collections: state => state.collections,
-			calendars: state => state.calendars,
-			dayOfMonth: state => state.dayOfMonth
+			calendars: state => state.calendars
 		})
 	),
 	methods: {
