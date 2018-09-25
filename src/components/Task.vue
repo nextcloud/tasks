@@ -21,7 +21,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div class="task-body-component">
-		<div :taskID="task.uri"
+		<div :taskId="task.uri"
 			:class="{active: $route.params.taskId==task.uri, subtasks: hasSubtasks(task), completedsubtasks: hasCompletedSubtasks(task),
 				subtaskshidden: task.hideSubtasks, attachment: task.note!=''}"
 			class="task-body"
@@ -36,29 +36,30 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 			<a :aria-checked="task.completed"
 				:aria-label="t('tasks', 'Task is completed')"
-				class="task-checkbox handler"
+				class="task-checkbox"
 				name="toggleCompleted"
 				role="checkbox"
 				@click="toggleCompleted(task)">
 				<span :class="{'icon-checkmark': task.completed}" class="icon task-checkbox reactive" />
 			</a>
 			<a class="icon task-separator" />
-			<a class="task-star handler" @click="toggleStarred(task)">
+			<a class="task-star" @click="toggleStarred(task)">
 				<span :class="{'icon-task-star-high':task.priority > 5, 'icon-task-star-medium':task.priority == 5,
 					'icon-task-star-low':task.priority > 0 && task.priority < 5}" class="icon icon-task-star right large reactive" />
 			</a>
 			<a v-show="task.calendar.writable"
-				class="task-addsubtask handler add-subtask"
-				oc-click-focus="{selector: '.add-subtask input', timeout: 0}"
-				@click="showSubtaskInput(task.uid)">
-				<span :title="t('tasks', 'Add a subtask to subtasks') + ' ' + task.summary" class="icon icon-add right large reactive" />
+				class="task-addsubtask add-subtask">
+				<span :taskId="task.uri"
+					:title="subtasksCreationPlaceholder(task.summary)" class="icon icon-add right large reactive"
+					oc-click-focus="{selector: '.add-subtask input', timeout: 0}"
+					@click="showSubtaskInput = true" />
 			</a>
-			<a class="handler" @click="toggleSubtasks(task)">
+			<a @click="toggleSubtasks(task)">
 				<span :title="t('tasks', 'Toggle subtasks')"
 					:class="task.hideSubtasks ? 'icon-subtasks-hidden' : 'icon-subtasks-visible'"
 					class="icon right large subtasks reactive" />
 			</a>
-			<a class="handler" @click="toggleCompletedSubtasks(task)">
+			<a @click="toggleCompletedSubtasks(task)">
 				<span :title="t('tasks', 'Toggle completed subtasks')"
 					:class="{'active': !task.hideCompletedSubtasks}"
 					class="icon icon-toggle right large toggle-completed-subtasks reactive" />
@@ -85,14 +86,15 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				dnd-list="draggedTasks"
 				dnd-drop="dropAsSubtask(event, item, index)"
 				dnd-dragover="dragover(event, index)">
-				<li class="task-item ui-draggable handler add-subtask"
-					ng-show="status.addSubtaskTo == task.uid">
+				<li v-click-outside="($event) => cancelCreation($event)"
+					v-show="showSubtaskInput"
+					class="task-item ui-draggable add-subtask">
 					<form ng-submit="addTask(status.subtaskName,task.uid,task.calendar,task)" name="addTaskForm">
 						<input :placeholder="subtasksCreationPlaceholder(task.summary)"
 							class="transparent"
 							ng-disabled="isAddingTask"
 							ng-model="status.subtaskName"
-							@keyup.27="cancelCreation()">
+							@keyup.27="showSubtaskInput = false">
 					</form>
 				</li>
 				<router-link v-for="subtask in getTasksByParentId(task.uid)"
@@ -101,12 +103,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					:task-id="subtask.uri"
 					:class="{done: subtask.completed}"
 					tag="li"
-					class="task-item ui-draggable handler subtask"
-					ng-repeat="task in getSubTasks(filtered,task) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"
+					class="task-item ui-draggable subtask"
 					dnd-draggable="task"
 					dnd-dragstart="dragStart(event)"
 					dnd-dragend="dragEnd(event)">
 					<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
+					<!-- "orderBy:getSortOrder():settingsmodel.getById('various').sortDirection" -->
 					<task-body-component :task="subtask" :tasks="tasks" />
 				</router-link>
 			</ol>
@@ -116,9 +118,16 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import { overdue, valid } from '../storeHelper'
+import clickOutside from 'vue-click-outside'
 
 export default {
 	name: 'TaskBodyComponent',
+	components: {
+		clickOutside
+	},
+	directives: {
+		clickOutside
+	},
 	filters: {
 		formatDate: function(due) {
 			var d = moment(due)
@@ -133,6 +142,11 @@ export default {
 		tasks: {
 			type: Array,
 			required: true
+		}
+	},
+	data() {
+		return {
+			showSubtaskInput: false
 		}
 	},
 	methods: {
@@ -177,7 +191,11 @@ export default {
 			return t('tasks', 'Add a subtask to "{task}"...', {	task: task })
 		},
 
-		cancelCreation: function() {
+		cancelCreation: function(e) {
+			// don't cancel the task creation if the own add-subtask button is clicked
+			if (e.target.getAttribute('taskId') !== this.task.uri) {
+				this.showSubtaskInput = false
+			}
 		},
 
 		hasSubtasks: function(task) {
@@ -192,9 +210,6 @@ export default {
 		},
 
 		toggleStarred: function(task) {
-		},
-
-		showSubtaskInput: function(taskUid) {
 		},
 
 		toggleSubtasks: function(task) {
