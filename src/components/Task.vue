@@ -89,11 +89,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<li v-click-outside="($event) => cancelCreation($event)"
 					v-show="showSubtaskInput"
 					class="task-item ui-draggable add-subtask">
-					<form ng-submit="addTask(status.subtaskName,task.uid,task.calendar,task)" name="addTaskForm">
-						<input :placeholder="subtasksCreationPlaceholder(task.summary)"
+					<form name="addTaskForm" @submit="addTask">
+						<input id="target"
+							v-model="newTaskName"
+							:placeholder="subtasksCreationPlaceholder(task.summary)"
+							:disabled="isAddingTask"
 							class="transparent"
-							ng-disabled="isAddingTask"
-							ng-model="status.subtaskName"
 							@keyup.27="showSubtaskInput = false">
 					</form>
 				</li>
@@ -146,7 +147,9 @@ export default {
 	},
 	data() {
 		return {
-			showSubtaskInput: false
+			showSubtaskInput: false,
+			newTaskName: '',
+			isAddingTask: false
 		}
 	},
 	methods: {
@@ -219,8 +222,11 @@ export default {
 		},
 
 		hideSubtasks: function(task) {
-		}
+		},
 
+		addTask: function() {
+			this.newTaskName = ''
+		}
 	}
 }
 </script>
