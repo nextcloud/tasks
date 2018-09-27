@@ -21,41 +21,46 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div>
-		<div v-for="day in dayHasEntry(days)" :key="day" class="grouped-tasks ui-droppable">
-			<h2 class="heading">{{ day | formatDay }}</h2>
-			<ol collectionID="week"
-				class="tasks"
-				listID=""
-				type="list"
-				dnd-list="draggedTasks"
-				dnd-drop="dropAsRootTask(event, item, index)"
-				dnd-dragover="dragover(event, index)">
-				<router-link v-for="task in tasks"
-					:task-id="task.uri"
-					:key="task.uid"
-					:to="'/collections/week/tasks/' + task.uri"
-					:class="{done: task.completed}"
-					tag="li"
-					class="task-item ui-draggable handler"
-					dnd-draggable="task"
-					dnd-dragstart="dragStart(event)"
-					dnd-dragend="dragEnd(event)">
-					<!-- ng-repeat="task in filtered = filteredTasks() | filter:taskAtDay(task,day) | filter:hasNoParent(task) | filter:{'completed':'false'} | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
-					<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
-					<task :task="task" :tasks="tasks" />
-				</router-link>
-			</ol>
+		<sortorderDropdown />
+		<div class="task-list">
+			<div v-for="day in dayHasEntry(days)" :key="day" class="grouped-tasks ui-droppable">
+				<h2 class="heading">{{ day | formatDay }}</h2>
+				<ol collectionID="week"
+					class="tasks"
+					listID=""
+					type="list"
+					dnd-list="draggedTasks"
+					dnd-drop="dropAsRootTask(event, item, index)"
+					dnd-dragover="dragover(event, index)">
+					<router-link v-for="task in tasks"
+						:task-id="task.uri"
+						:key="task.uid"
+						:to="'/collections/week/tasks/' + task.uri"
+						:class="{done: task.completed}"
+						tag="li"
+						class="task-item ui-draggable handler"
+						dnd-draggable="task"
+						dnd-dragstart="dragStart(event)"
+						dnd-dragend="dragEnd(event)">
+						<!-- ng-repeat="task in filtered = filteredTasks() | filter:taskAtDay(task,day) | filter:hasNoParent(task) | filter:{'completed':'false'} | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
+						<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
+						<task :task="task" :tasks="tasks" />
+					</router-link>
+				</ol>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import SortorderDropdown from '../SortorderDropdown'
 import TaskBody from '../Task'
 
 export default {
 	components: {
-		'task-body': TaskBody
+		'task-body': TaskBody,
+		'sortorderDropdown': SortorderDropdown
 	},
 	filters: {
 		formatDay: function(day) {

@@ -21,57 +21,72 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div>
-		<div :class="{'completed-hidden': showHidden}"
-			class="grouped-tasks">
-			<ol :calendarId="calendarId"
-				class="tasks"
-				collectionId="uncompleted"
-				type="list"
-				dnd-list="draggedTasks"
-				dnd-drop="dropAsRootTask(event, item, index)"
-				dnd-dragover="dragover(event, index)">
-				<router-link v-for="task in tasks"
-					:class="{done: task.completed}"
-					:task-id="task.uri"
-					:key="task.id"
-					:to="'/calendars/' + calendarId + '/tasks/' + task.uri"
-					tag="li"
-					class="task-item ui-draggable handler"
-					dnd-draggable="task"
-					dnd-dragstart="dragStart(event)"
-					dnd-dragend="dragEnd(event)">
-					<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,route.calendarID) | filter:{'completed':'false'} | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
-					<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
-					<task :task="task" :tasks="tasks" />
-				</router-link>
-			</ol>
-			<h2 v-show="completedCount(calendarId)" class="heading-hiddentasks icon-triangle-s handler" @click="toggleHidden">
-				{{ completedCountString(calendarId) }}
-			</h2>
-			<ol :calendarID="calendarId"
-				class="completed-tasks"
-				collectionID="completed"
-				type="list"
-				dnd-list="draggedTasks"
-				dnd-drop="dropAsRootTask(event, item, index)"
-				dnd-dragover="dragover(event, index)">
-				<router-link v-for="task in tasks"
-					:class="{done: task.completed}"
-					:task-id="task.uri"
-					:key="task.id"
-					:to="'/calendars/' + calendarId + '/tasks/' + task.uri"
-					tag="li"
-					class="task-item handler"
-					dnd-draggable="task"
-					dnd-dragstart="dragStart(event)"
-					dnd-dragend="dragEnd(event)">
-					<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,route.calendarID) | filter:{'completed':true} | orderBy:'completed_date':true"> -->
-					<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
-					<task :task="task" :tasks="tasks" />
-				</router-link>
-			</ol>
-			<div class="loadmore handler" ng-hide="loadedCompleted(route.calendarID)">
-				<span ng-click="getCompletedTasks(route.calendarID)">{{ t('tasks', 'Load remaining completed tasks.') }}</span>
+		<div v-show="calendar.writable"
+			id="add-task"
+			class="add-task handler">
+			<form name="addTaskForm" @submit="addTask">
+				<input id="target"
+					v-model="newTaskName"
+					:placeholder="inputString"
+					:disabled="isAddingTask"
+					class="transparent"
+					@keyup.27="clearNewTask($event)">
+			</form>
+		</div>
+		<sortorderDropdown />
+		<div class="task-list">
+			<div :class="{'completed-hidden': showHidden}"
+				class="grouped-tasks">
+				<ol :calendarId="calendarId"
+					class="tasks"
+					collectionId="uncompleted"
+					type="list"
+					dnd-list="draggedTasks"
+					dnd-drop="dropAsRootTask(event, item, index)"
+					dnd-dragover="dragover(event, index)">
+					<router-link v-for="task in tasks"
+						:class="{done: task.completed}"
+						:task-id="task.uri"
+						:key="task.id"
+						:to="'/calendars/' + calendarId + '/tasks/' + task.uri"
+						tag="li"
+						class="task-item ui-draggable handler"
+						dnd-draggable="task"
+						dnd-dragstart="dragStart(event)"
+						dnd-dragend="dragEnd(event)">
+						<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,route.calendarID) | filter:{'completed':'false'} | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
+						<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
+						<task :task="task" :tasks="tasks" />
+					</router-link>
+				</ol>
+				<h2 v-show="completedCount(calendarId)" class="heading-hiddentasks icon-triangle-s handler" @click="toggleHidden">
+					{{ completedCountString }}
+				</h2>
+				<ol :calendarId="calendarId"
+					class="completed-tasks"
+					collectionId="completed"
+					type="list"
+					dnd-list="draggedTasks"
+					dnd-drop="dropAsRootTask(event, item, index)"
+					dnd-dragover="dragover(event, index)">
+					<router-link v-for="task in tasks"
+						:class="{done: task.completed}"
+						:task-id="task.uri"
+						:key="task.id"
+						:to="'/calendars/' + calendarId + '/tasks/' + task.uri"
+						tag="li"
+						class="task-item handler"
+						dnd-draggable="task"
+						dnd-dragstart="dragStart(event)"
+						dnd-dragend="dragEnd(event)">
+						<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,route.calendarID) | filter:{'completed':true} | orderBy:'completed_date':true"> -->
+						<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
+						<task :task="task" :tasks="tasks" />
+					</router-link>
+				</ol>
+				<div class="loadmore handler" ng-hide="loadedCompleted(route.calendarID)">
+					<span ng-click="getCompletedTasks(route.calendarID)">{{ t('tasks', 'Load remaining completed tasks.') }}</span>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -79,16 +94,24 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import { mapGetters } from 'vuex'
+import SortorderDropdown from '../SortorderDropdown'
 import Task from '../Task'
 
 export default {
 	components: {
-		'task': Task
+		'task': Task,
+		'sortorderDropdown': SortorderDropdown
 	},
 	props: {
 		calendarId: {
 			type: String,
 			default: ''
+		}
+	},
+	data() {
+		return {
+			newTaskName: '',
+			isAddingTask: false
 		}
 	},
 	computed: Object.assign({
@@ -99,15 +122,10 @@ export default {
 			set(value) {
 				this.$store.dispatch('setSetting', { type: 'showHidden', value: value })
 			}
-		} },
-	mapGetters({
-		tasks: 'getTasksByRoute',
-		completedCount: 'getCalendarCountCompleted'
-	})
-	),
-	methods: {
-		toggleHidden: function() {
-			this.showHidden = +!this.showHidden
+		},
+
+		inputString: function() {
+			return t('tasks', 'Add a task to "{calendar}"...', { calendar: this.calendar.displayname })
 		},
 
 		/**
@@ -115,6 +133,26 @@ export default {
 		 */
 		completedCountString: function() {
 			return n('tasks', '%n Completed Task', '%n Completed Tasks', this.completedCount(this.calendarId))
+		} },
+	mapGetters({
+		tasks: 'getTasksByRoute',
+		completedCount: 'getCalendarCountCompleted',
+		calendar: 'getCalendarByRoute'
+	})
+	),
+	methods: {
+		toggleHidden: function() {
+			this.showHidden = +!this.showHidden
+		},
+
+		clearNewTask: function(event) {
+			event.target.blur()
+			this.newTaskName = ''
+		},
+
+		addTask: function() {
+			console.log('Add task with name ' + this.newTaskName + ' to calendar ' + this.calendar.displayname)
+			this.newTaskName = ''
 		}
 	}
 }

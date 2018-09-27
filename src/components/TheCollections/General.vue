@@ -21,35 +21,49 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div>
-		<div v-for="calendar in filteredCalendars"
-			:key="calendar.id"
-			:rel="calendar.uri"
-			class="grouped-tasks ui-droppable">
-			<h2 class="heading">{{ calendar.displayname }}</h2>
-			<ol :calendarID="calendar.uri"
-				:collectionID="collectionId"
-				class="tasks"
-				type="list"
-				dnd-list="draggedTasks"
-				dnd-drop="dropAsRootTask(event, item, index)"
-				dnd-dragover="dragover(event, index)">
-				<router-link v-for="task in filteredTasks = tasks(calendar.uri)"
-					:task-id="task.uri"
-					:key="task.uid"
-					:to="'/collections/' + collectionId + '/tasks/' + task.uri"
-					:class="{done: task.completed}"
-					tag="li"
-					class="task-item ui-draggable handler"
-					dnd-draggable="task"
-					dnd-dragstart="dragStart(event)"
-					dnd-dragend="dragEnd(event)">
-					<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,calendar.uri) | filter:filterTasks(task,route.collectionID) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
-					<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
-					<task-body :task="task" :tasks="filteredTasks" />
-				</router-link>
-			</ol>
-			<div class="loadmore handler" ng-hide="loadedCompleted(calendar.uri) || route.collectionID != 'completed'">
-				<span ng-click="getCompletedTasks(calendar.uri)">{{ t('tasks', 'Load remaining completed tasks.') }}</span>
+		<div v-show="collectionId !== 'completed'"
+			id="add-task"
+			class="add-task handler">
+			<form name="addTaskForm" @submit="addTask">
+				<input v-model="newTaskName"
+					:placeholder="inputString"
+					:disabled="isAddingTask"
+					class="transparent"
+					@keyup.27="clearNewTask($event)">
+			</form>
+		</div>
+		<sortorderDropdown />
+		<div class="task-list">
+			<div v-for="calendar in filteredCalendars"
+				:key="calendar.id"
+				:rel="calendar.uri"
+				class="grouped-tasks ui-droppable">
+				<h2 class="heading">{{ calendar.displayname }}</h2>
+				<ol :calendarID="calendar.uri"
+					:collectionID="collectionId"
+					class="tasks"
+					type="list"
+					dnd-list="draggedTasks"
+					dnd-drop="dropAsRootTask(event, item, index)"
+					dnd-dragover="dragover(event, index)">
+					<router-link v-for="task in filteredTasks = tasks(calendar.uri)"
+						:task-id="task.uri"
+						:key="task.uid"
+						:to="'/collections/' + collectionId + '/tasks/' + task.uri"
+						:class="{done: task.completed}"
+						tag="li"
+						class="task-item ui-draggable handler"
+						dnd-draggable="task"
+						dnd-dragstart="dragStart(event)"
+						dnd-dragend="dragEnd(event)">
+						<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,calendar.uri) | filter:filterTasks(task,route.collectionID) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
+						<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
+						<task-body :task="task" :tasks="filteredTasks" />
+					</router-link>
+				</ol>
+				<div class="loadmore handler" ng-hide="loadedCompleted(calendar.uri) || route.collectionID != 'completed'">
+					<span ng-click="getCompletedTasks(calendar.uri)">{{ t('tasks', 'Load remaining completed tasks.') }}</span>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -57,16 +71,24 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import { mapGetters } from 'vuex'
+import SortorderDropdown from '../SortorderDropdown'
 import TaskBody from '../Task'
 
 export default {
 	components: {
-		'task-body': TaskBody
+		'task-body': TaskBody,
+		'sortorderDropdown': SortorderDropdown
 	},
 	props: {
 		collectionId: {
 			type: String,
 			default: ''
+		}
+	},
+	data() {
+		return {
+			newTaskName: '',
+			isAddingTask: false
 		}
 	},
 	computed: Object.assign({
@@ -86,11 +108,35 @@ export default {
 				.filter(calendar => {
 					return this.$store.getters.getCalendarCountByCollectionId(calendar.uri, this.$route.params.collectionId)
 				})
+		},
+
+		inputString: function() {
+			switch (this.collectionId) {
+			case 'starred':
+				return t('tasks', 'Add an important task to "{calendar}"...', { calendar: this.calendar.displayname })
+			case 'today':
+				return t('tasks', 'Add a task due today to "{calendar}"...', { calendar: this.calendar.displayname })
+			case 'all':
+				return t('tasks', 'Add a task to "{calendar}"...', { calendar: this.calendar.displayname })
+			case 'current':
+				return t('tasks', 'Add a current task to "{calendar}"...', { calendar: this.calendar.displayname })
+			}
 		}
 	},
 	mapGetters({
-		tasks: 'getTasksByCalendarId'
+		tasks: 'getTasksByCalendarId',
+		calendar: 'getDefaultCalendar'
 	})
-	)
+	),
+	methods: {
+		clearNewTask: function(event) {
+			event.target.blur()
+			this.newTaskName = ''
+		},
+
+		addTask: function() {
+			this.newTaskName = ''
+		}
+	}
 }
 </script>

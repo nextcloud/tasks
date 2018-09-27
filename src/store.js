@@ -147,6 +147,23 @@ export default new Vuex.Store({
 				tasks.concat(calendar.tasks)
 			})
 			return tasks
+		},
+
+		/**
+		 * Returns the current calendar
+		 */
+		getCalendarByRoute: (state) => {
+			return state.calendars[state.route.params.calendarId]
+		},
+
+		/**
+		 * Returns the default calendar
+		 *
+		 * For now, this is the first calendar in the list.
+		 * Calendar order might change randomly.
+		 */
+		getDefaultCalendar: (state) => {
+			return Object.values(state.calendars)[0]
 		}
 	},
 	mutations: {
