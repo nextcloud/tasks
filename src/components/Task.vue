@@ -28,10 +28,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			type="task">
 
 			<div v-if="task.complete > 0" class="percentbar">
-				<div :style="{ width: task.complete, 'background-color': task.calendar.color }"
-					class="percentdone">
-					<!-- aria-label="{{ task.complete | percentDetails}}"> -->
-				</div>
+				<div :style="{ width: task.complete + '%', 'background-color': task.calendar.color }"
+					:aria-label="t('tasks', '{complete} % completed', {complete: task.complete})"
+					class="percentdone" />
 			</div>
 
 			<a :aria-checked="task.completed"
