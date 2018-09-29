@@ -25,20 +25,21 @@ export default ({
 		'test-1': {
 			uri: 'test-1',
 			displayname: 'Test 1',
-			color: '#eef',
+			color: '#ff0000',
 			writable: true,
 			url: '/nextcloud/remote.php/dav/calendars/raimund.schluessler/test-1',
 			caldav: 'caldav-url',
 			tasks: [
 				{
 					calendar: {
-						writable: true
+						writable: true,
+						color: '#ff0000',
 					},
 					uid: 'ydf95848mn',
 					uri: 'ydf95848mn.ics',
 					due: '20180902T200933',
 					summary: 'Test 1 - Task 1',
-					complete: 1,
+					complete: 0,
 					completed: true,
 					priority: 1,
 					categories: ['Test 1 Category 1', 'Test 1 Category 2'],
@@ -47,13 +48,14 @@ export default ({
 				},
 				{
 					calendar: {
-						writable: true
+						writable: true,
+						color: '#ff0000',
 					},
 					uid: 'ydf95748mn',
 					uri: 'ydf95748mn.ics',
 					due: '20180901T200926',
 					summary: 'Test 1 - Task 2',
-					complete: 3,
+					complete: 20,
 					completed: false,
 					priority: 5,
 					categories: [],
@@ -62,13 +64,14 @@ export default ({
 				},
 				{
 					calendar: {
-						writable: true
+						writable: true,
+						color: '#ff0000',
 					},
 					uid: 'ydf95849mn',
 					uri: 'ydf95849mn.ics',
 					due: '20170903T200916',
 					summary: 'Test 1 - Task 3',
-					complete: 6,
+					complete: 60,
 					completed: false,
 					priority: 7,
 					categories: [],
@@ -78,13 +81,14 @@ export default ({
 				},
 				{
 					calendar: {
-						writable: true
+						writable: true,
+						color: '#ff0000',
 					},
 					uid: 'rtf95849mn',
 					uri: 'rtf95849mn.ics',
 					due: '20170903T200916',
 					summary: 'Test 1 - Task 4',
-					complete: 6,
+					complete: 0,
 					completed: false,
 					priority: 7,
 					categories: [],
@@ -94,13 +98,14 @@ export default ({
 				},
 				{
 					calendar: {
-						writable: true
+						writable: true,
+						color: '#ff0000',
 					},
 					uid: 'yaf92889mn',
 					uri: 'yaf92889mn.ics',
 					due: '20170903T200916',
 					summary: 'Test 1 - Task 5',
-					complete: 6,
+					complete: 80,
 					completed: false,
 					priority: 7,
 					categories: [],
@@ -119,14 +124,15 @@ export default ({
 			tasks: [
 				{
 					calendar: {
-						writable: true
+						writable: true,
+						color: '#eef',
 					},
 					uid: 'ydf91848mn',
 					uri: 'ydf91848mn.ics',
 					due: '20180929T200912',
 					start: '20171003T100912',
 					summary: 'Test 2 - Task 1',
-					complete: 1,
+					complete: 90,
 					completed: true,
 					priority: 1,
 					categories: [],
@@ -135,14 +141,15 @@ export default ({
 				},
 				{
 					calendar: {
-						writable: true
+						writable: true,
+						color: '#eef',
 					},
 					uid: 'yef91848mn',
 					uri: 'yef91848mn.ics',
 					due: '20181003T200912',
 					start: '20171003T200912',
 					summary: 'Test 2 - Task 2',
-					complete: 3,
+					complete: 0,
 					completed: false,
 					priority: 5,
 					categories: [],
@@ -151,7 +158,8 @@ export default ({
 				},
 				{
 					calendar: {
-						writable: true
+						writable: true,
+						color: '#eef',
 					},
 					uid: 'yff91848mn',
 					uri: 'yff91848mn.ics',
@@ -167,7 +175,8 @@ export default ({
 				},
 				{
 					calendar: {
-						writable: true
+						writable: true,
+						color: '#eef',
 					},
 					uid: 'ydg91848mn',
 					uri: 'ydg91848mn.ics',
@@ -182,7 +191,8 @@ export default ({
 				},
 				{
 					calendar: {
-						writable: true
+						writable: true,
+						color: '#eef',
 					},
 					uid: 'ydh91848mn',
 					uri: 'ydh91848mn.ics',
@@ -206,7 +216,8 @@ export default ({
 
 				{
 					calendar: {
-						writable: true
+						writable: true,
+						color: '#112233',
 					},
 					uid: 'ydi92848mn',
 					uri: 'ydi92848mn.ics',
@@ -220,7 +231,8 @@ export default ({
 				},
 				{
 					calendar: {
-						writable: true
+						writable: true,
+						color: '#112233',
 					},
 					uid: 'ydj91848mn',
 					uri: 'ydj91848mn.ics',
@@ -234,7 +246,8 @@ export default ({
 				},
 				{
 					calendar: {
-						writable: true
+						writable: true,
+						color: '#112233',
 					},
 					uid: 'ydk91848mn',
 					uri: 'ydk91848mn.ics',
@@ -248,7 +261,8 @@ export default ({
 				},
 				{
 					calendar: {
-						writable: true
+						writable: true,
+						color: '#112233',
 					},
 					uid: 'ydl91848mn',
 					uri: 'ydl91848mn.ics',
