@@ -23,7 +23,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 	<div>
 		<div v-show="calendar.writable"
 			id="add-task"
-			class="add-task handler">
+			class="add-task">
 			<form name="addTaskForm" @submit="addTask">
 				<input id="target"
 					v-model="newTaskName"
@@ -50,7 +50,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						:key="task.id"
 						:to="'/calendars/' + calendarId + '/tasks/' + task.uri"
 						tag="li"
-						class="task-item ui-draggable handler"
+						class="task-item ui-draggable"
 						dnd-draggable="task"
 						dnd-dragstart="dragStart(event)"
 						dnd-dragend="dragEnd(event)">
@@ -59,7 +59,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						<task :task="task" :tasks="tasks" />
 					</router-link>
 				</ol>
-				<h2 v-show="completedCount(calendarId)" class="heading-hiddentasks icon-triangle-s handler" @click="toggleHidden">
+				<h2 v-show="completedCount(calendarId)" class="heading-hiddentasks icon-triangle-s" @click="toggleHidden">
 					{{ completedCountString }}
 				</h2>
 				<ol :calendarId="calendarId"
@@ -75,7 +75,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						:key="task.id"
 						:to="'/calendars/' + calendarId + '/tasks/' + task.uri"
 						tag="li"
-						class="task-item handler"
+						class="task-item"
 						dnd-draggable="task"
 						dnd-dragstart="dragStart(event)"
 						dnd-dragend="dragEnd(event)">
@@ -84,9 +84,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						<task :task="task" :tasks="tasks" />
 					</router-link>
 				</ol>
-				<div class="loadmore handler" ng-hide="loadedCompleted(route.calendarID)">
-					<span ng-click="getCompletedTasks(route.calendarID)">{{ t('tasks', 'Load remaining completed tasks.') }}</span>
-				</div>
+				<loadCompletedButton :calendar="calendar" />
 			</div>
 		</div>
 	</div>
@@ -95,12 +93,14 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <script>
 import { mapGetters } from 'vuex'
 import SortorderDropdown from '../SortorderDropdown'
+import LoadCompletedButton from '../LoadCompletedButton'
 import Task from '../Task'
 
 export default {
 	components: {
 		'task': Task,
-		'sortorderDropdown': SortorderDropdown
+		'sortorderDropdown': SortorderDropdown,
+		'loadCompletedButton': LoadCompletedButton
 	},
 	props: {
 		calendarId: {
