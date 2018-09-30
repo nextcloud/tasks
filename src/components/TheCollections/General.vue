@@ -23,7 +23,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 	<div>
 		<div v-show="collectionId !== 'completed'"
 			id="add-task"
-			class="add-task handler">
+			class="add-task">
 			<form name="addTaskForm" @submit="addTask">
 				<input v-model="newTaskName"
 					:placeholder="inputString"
@@ -52,7 +52,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						:to="'/collections/' + collectionId + '/tasks/' + task.uri"
 						:class="{done: task.completed}"
 						tag="li"
-						class="task-item ui-draggable handler"
+						class="task-item ui-draggable"
 						dnd-draggable="task"
 						dnd-dragstart="dragStart(event)"
 						dnd-dragend="dragEnd(event)">
