@@ -21,58 +21,26 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div>
-		<div class="app-navigation-entry-utils">
-			<div class="app-navigation-entry-utils-menu-button" title="<?php p($l->t('Change sort order')); ?>">
+		<div v-click-outside="closeMenu" class="app-navigation-entry-utils" @click="toggleMenu">
+			<div :title="t('tasks', 'Change sort order')" class="app-navigation-entry-utils-menu-button">
 				<button class="sortorder-dropdown-button">
-					<span class="icon" ng-class="getSortOrderIcon()" />
-					<span class="icon sort-indicator" ng-class="{'icon-sort-up': settingsmodel.getById('various').sortDirection, 'icon-sort-down': !settingsmodel.getById('various').sortDirection}" />
+					<span :class="sortOrderIcon" class="icon" />
+					<span :class="sortDirection ? 'icon-sort-up' : 'icon-sort-down'" class="icon sort-indicator" />
 				</button>
 			</div>
 		</div>
-		<div class="app-navigation-entry-menu bubble sortorder-dropdown">
+		<div :class="{'open': menuOpen}" class="app-navigation-entry-menu bubble sortorder-dropdown">
 			<ul>
-				<li ng-click="setSortOrder($event, 'default')" ng-class="{active: settingsmodel.getById('various').sortOrder == 'default'}" class="handler">
+				<li v-for="order in orders"
+					:key="order.id"
+					:class="{active: sortOrder == order.id}"
+					@click="setSortOrder(order.id)">
 					<a>
-						<span class="icon icon-list" />
-						<span class="label">{{ t('tasks', 'Default') }}</span>
-						<span class="icon sort-indicator" ng-class="{'icon-sort-up': settingsmodel.getById('various').sortDirection, 'icon-sort-down': !settingsmodel.getById('various').sortDirection}" />
+						<span :class="order.icon" class="icon" />
+						<span class="label">{{ order.text }}</span>
+						<span :class="sortDirection ? 'icon-sort-up' : 'icon-sort-down'" class="icon sort-indicator" />
 					</a>
 				</li>
-				<li ng-click="setSortOrder($event, 'due')" ng-class="{active: settingsmodel.getById('various').sortOrder == 'due'}">
-					<a>
-						<span class="icon icon-calendar" />
-						<span class="label">{{ t('tasks', 'Due date') }}</span>
-						<span class="icon sort-indicator" ng-class="{'icon-sort-up': settingsmodel.getById('various').sortDirection, 'icon-sort-down': !settingsmodel.getById('various').sortDirection}" />
-					</a>
-				</li>
-				<li ng-click="setSortOrder($event, 'start')" ng-class="{active: settingsmodel.getById('various').sortOrder == 'start'}">
-					<a>
-						<span class="icon icon-calendar" />
-						<span class="label">{{ t('tasks', 'Start date') }}</span>
-						<span class="icon sort-indicator" ng-class="{'icon-sort-up': settingsmodel.getById('various').sortDirection, 'icon-sort-down': !settingsmodel.getById('various').sortDirection}" />
-					</a>
-				</li>
-				<li ng-click="setSortOrder($event, 'priority')" ng-class="{active: settingsmodel.getById('various').sortOrder == 'priority'}">
-					<a>
-						<span class="icon icon-task-star" />
-						<span class="label">{{ t('tasks', 'Priority') }}</span>
-						<span class="icon sort-indicator" ng-class="{'icon-sort-up': settingsmodel.getById('various').sortDirection, 'icon-sort-down': !settingsmodel.getById('various').sortDirection}" />
-					</a>
-				</li>
-				<li ng-click="setSortOrder($event, 'alphabetically')" ng-class="{active: settingsmodel.getById('various').sortOrder == 'alphabetically'}">
-					<a>
-						<span class="icon icon-alphabetically" />
-						<span class="label">{{ t('tasks', 'Alphabetically') }}</span>
-						<span class="icon sort-indicator" ng-class="{'icon-sort-up': settingsmodel.getById('various').sortDirection, 'icon-sort-down': !settingsmodel.getById('various').sortDirection}" />
-					</a>
-				</li>
-				<!-- <li ng-click="setSortOrder($event, 'manual')" ng-class="{active: settingsmodel.getById('various').sortOrder == 'manual'}">
-					<a>
-						<span class="icon icon-manual" />
-						<span class="label">{{ t('tasks', 'Manually') }</span>
-						<span class="icon sort-indicator" ng-class="{'icon-sort-up': settingsmodel.getById('various').sortDirection, 'icon-sort-down': !settingsmodel.getById('various').sortDirection}" />
-					</a>
-				</li> -->
 			</ul>
 		</div>
 	</div>
@@ -91,15 +59,92 @@ export default {
 	},
 	data() {
 		return {
-			menuOpen: false
+			menuOpen: false,
+			orders: [
+				{
+					id: 'default',
+					icon: 'icon-list',
+					text: t('tasks', 'Default')
+				},
+				{
+					id: 'due',
+					icon: 'icon-calendar',
+					text: t('tasks', 'Due date')
+				},
+				{
+					id: 'start',
+					icon: 'icon-calendar',
+					text: t('tasks', 'Start date')
+				},
+				{
+					id: 'priority',
+					icon: 'icon-task-star',
+					text: t('tasks', 'Priority')
+				},
+				// Manual sorting is not yet implemented
+				// {
+				// 	id: 'manual',
+				// 	icon: 'icon-manual',
+				// 	text: t('tasks', 'Manually')
+				// },
+				{
+					id: 'alphabetically',
+					icon: 'icon-alphabetically',
+					text: t('tasks', 'Alphabetically')
+				}
+			]
 		}
 	},
+	computed: Object.assign({
+		sortOrder: {
+			get() {
+				return this.$store.state.settings.sortOrder
+			},
+			set(order) {
+				this.$store.dispatch('setSetting', { type: 'sortOrder', value: order })
+			}
+		},
+		sortDirection: {
+			get() {
+				return this.$store.state.settings.sortDirection
+			},
+			set(direction) {
+				this.$store.dispatch('setSetting', { type: 'sortDirection', value: +direction })
+			}
+		},
+		sortOrderIcon: function() {
+			var icon
+			switch (this.sortOrder) {
+			case 'due':
+			case 'start':
+				icon = 'calendar'
+				break
+			case 'priority':
+				icon = 'task-star'
+				break
+			case 'alphabetically':
+				icon = 'alphabetically'
+				break
+			case 'manual':
+				icon = 'manual'
+				break
+			default:
+				icon = 'list'
+			}
+			return 'icon-' + icon
+		}
+	}),
 	methods: {
 		closeMenu() {
 			this.menuOpen = false
 		},
 		toggleMenu() {
 			this.menuOpen = !this.menuOpen
+		},
+		setSortOrder(order) {
+			// If the sort order was already set, toggle the sort direction, otherwise reset it.
+			this.sortDirection = (this.sortOrder === order) ? !this.sortDirection : false
+			this.sortOrder = order
 		}
 	}
 }
