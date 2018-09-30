@@ -21,7 +21,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div ng-click="endEdit($event)"
-		class="content-wrapper handler">
+		class="content-wrapper">
 		<div class="flex-container"
 			ng-show="TaskState()=='found'"
 			ng-class="{'disabled': !task.calendar.writable}">
@@ -38,11 +38,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						class="icon icon-task-star" />
 				</a>
 				<div :class="{'strike-through':task.completed}"
-					class="title-text handler"
+					class="title-text"
 					ng-click="editName($event, task)"
 					oc-click-focus="{selector: '#editName', timeout: 0}"
 					ng-bind-html="task.summary | linky:'_blank':{rel: 'nofollow'}" />
-				<div class="expandable-container handler">
+				<div class="expandable-container">
 					<div class="expandingArea active">
 						<pre><span>{{ task.summary }}</span><br></pre>
 						<textarea id="editName"
@@ -55,7 +55,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			</div>
 			<div class="body">
 				<ul class="sections">
-					<li class="section detail-start handler"
+					<li class="section detail-start"
 						ng-class="{'date':isDue(task.start), 'editing':route.parameter=='startdate', 'high':isOverDue(task.start)}"
 						ng-click="editStart($event, task)">
 						<div>
@@ -71,7 +71,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									placeholder="dd.mm.yyyy"
 									value="{{ task.start | dateTaskList }}"
 									datepicker="start">
-								<input class="timepicker-input medium handler"
+								<input class="timepicker-input medium"
 									ng-hide="task.allDay"
 									type="text"
 									key-value=""
@@ -82,14 +82,14 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						</div>
 						<div class="utils">
 							<a>
-								<span class="icon detail-save icon-checkmark-color handler end-edit reactive" />
+								<span class="icon detail-save icon-checkmark-color end-edit reactive" />
 							</a>
-							<a class="handler end-edit" ng-click="deleteStartDate(task)">
+							<a class="end-edit" ng-click="deleteStartDate(task)">
 								<span class="icon icon-trash reactive" />
 							</a>
 						</div>
 					</li>
-					<li class="section detail-date handler"
+					<li class="section detail-date"
 						ng-class="{'date':isDue(task.due), 'editing':route.parameter=='duedate', 'high':isOverDue(task.due)}"
 						ng-click="editDueDate($event, task)">
 						<div>
@@ -115,15 +115,15 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						</div>
 						<div class="utils">
 							<a>
-								<span class="icon detail-save icon-checkmark-color handler end-edit reactive" />
+								<span class="icon detail-save icon-checkmark-color end-edit reactive" />
 							</a>
-							<a class="handler end-edit" ng-click="deleteDueDate(task)">
+							<a class="end-edit" ng-click="deleteDueDate(task)">
 								<span class="icon icon-trash reactive" />
 							</a>
 						</div>
 					</li>
 					<li :aria-checked="task.allDay"
-						class="section detail-all-day handler reactive"
+						class="section detail-all-day reactive"
 						ng-click="toggleAllDay(task)"
 						ng-if="isAllDayPossible(task)"
 						role="checkbox">
@@ -134,7 +134,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</span>
 						</div>
 					</li>
-					<li class="section detail-priority handler"
+					<li class="section detail-priority"
 						ng-class="{'editing':route.parameter=='priority','high':task.priority>5,'medium':task.priority==5,'low':task.priority > 0 && task.priority < 5, 'date':task.priority>0}"
 						ng-click="editPriority($event, task)">
 						<div>
@@ -158,14 +158,14 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						</div>
 						<div class="utils">
 							<a>
-								<span class="icon detail-save icon-checkmark-color handler end-edit reactive" />
+								<span class="icon detail-save icon-checkmark-color end-edit reactive" />
 							</a>
-							<a class="handler end-edit" ng-click="deletePriority(task)">
+							<a class="end-edit" ng-click="deletePriority(task)">
 								<span class="icon icon-trash reactive" />
 							</a>
 						</div>
 					</li>
-					<li class="section detail-complete handler"
+					<li class="section detail-complete"
 						ng-class="{'editing':route.parameter=='percent', 'date':task.complete>0}"
 						ng-click="editPercent($event, task)">
 						<div>
@@ -188,9 +188,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						</div>
 						<div class="utils">
 							<a>
-								<span class="icon detail-save icon-checkmark-color handler end-edit reactive" />
+								<span class="icon detail-save icon-checkmark-color end-edit reactive" />
 							</a>
-							<a class="handler end-edit" ng-click="deletePercent(task)">
+							<a class="end-edit" ng-click="deletePercent(task)">
 								<span class="icon icon-trash reactive" />
 							</a>
 						</div>
@@ -220,7 +220,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					</li>
 					<li class="section detail-note">
 						<div class="note">
-							<div class="note-body selectable handler"
+							<div class="note-body selectable"
 								ng-click="editNote($event, task)"
 								oc-click-focus="{selector: '.expandingArea textarea', timeout: 0}">
 								<div class="content-fakeable" ng-class="{'editing':route.parameter=='note'}">
@@ -238,12 +238,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</ul>
 			</div>
 			<div class="footer">
-				<a class="handler left close-all reactive"
+				<a class="left close-all reactive"
 					ng-click="deleteTask(task)"
 					ng-show="task.calendar.writable">
 					<span class="icon icon-trash" />
 				</a>
-				<a class="handler right close-all reactive" @click="closeDetails">
+				<a class="right close-all reactive" @click="closeDetails">
 					<span class="icon icon-hide" />
 				</a>
 			</div>

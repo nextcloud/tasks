@@ -52,7 +52,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			:key="calendar.uri"
 			:class="{edit: editing == calendar.uri, caldav: caldav == calendar.uri}"
 			tag="li"
-			class="list with-menu handler editing"
+			class="list with-menu editing"
 			active-class="active"
 			dnd-list="draggedTasks"
 			dnd-drop="dropList(event, index, item)"
@@ -128,7 +128,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</form>
 			</div>
 		</router-link>
-		<li v-click-outside="cancelCreate" :class="{edit: creating}" class="newList handler icon-add reactive editing">
+		<li v-click-outside="cancelCreate" :class="{edit: creating}" class="newList icon-add reactive editing">
 			<a class="addlist icon sprite"
 				oc-click-focus="{selector: '#newList', timeout: 0}"
 				@click="startCreate($event)">

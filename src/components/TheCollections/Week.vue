@@ -38,7 +38,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						:to="'/collections/week/tasks/' + task.uri"
 						:class="{done: task.completed}"
 						tag="li"
-						class="task-item ui-draggable handler"
+						class="task-item ui-draggable"
 						dnd-draggable="task"
 						dnd-dragstart="dragStart(event)"
 						dnd-dragend="dragEnd(event)">
