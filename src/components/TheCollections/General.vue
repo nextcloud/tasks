@@ -61,9 +61,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						<task-body :task="task" :tasks="filteredTasks" />
 					</router-link>
 				</ol>
-				<div class="loadmore handler" ng-hide="loadedCompleted(calendar.uri) || route.collectionID != 'completed'">
-					<span ng-click="getCompletedTasks(calendar.uri)">{{ t('tasks', 'Load remaining completed tasks.') }}</span>
-				</div>
+				<loadCompletedButton v-if="collectionId == 'completed'" :calendar="calendar" />
 			</div>
 		</div>
 	</div>
@@ -72,12 +70,14 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <script>
 import { mapGetters } from 'vuex'
 import SortorderDropdown from '../SortorderDropdown'
+import LoadCompletedButton from '../LoadCompletedButton'
 import TaskBody from '../Task'
 
 export default {
 	components: {
 		'task-body': TaskBody,
-		'sortorderDropdown': SortorderDropdown
+		'sortorderDropdown': SortorderDropdown,
+		'loadCompletedButton': LoadCompletedButton
 	},
 	props: {
 		collectionId: {
