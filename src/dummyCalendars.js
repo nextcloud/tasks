@@ -33,7 +33,7 @@ export default ({
 				{
 					calendar: {
 						writable: true,
-						color: '#ff0000',
+						color: '#ff0000'
 					},
 					uid: 'ydf95848mn',
 					uri: 'ydf95848mn.ics',
@@ -49,7 +49,7 @@ export default ({
 				{
 					calendar: {
 						writable: true,
-						color: '#ff0000',
+						color: '#ff0000'
 					},
 					uid: 'ydf95748mn',
 					uri: 'ydf95748mn.ics',
@@ -65,7 +65,7 @@ export default ({
 				{
 					calendar: {
 						writable: true,
-						color: '#ff0000',
+						color: '#ff0000'
 					},
 					uid: 'ydf95849mn',
 					uri: 'ydf95849mn.ics',
@@ -82,7 +82,7 @@ export default ({
 				{
 					calendar: {
 						writable: true,
-						color: '#ff0000',
+						color: '#ff0000'
 					},
 					uid: 'rtf95849mn',
 					uri: 'rtf95849mn.ics',
@@ -99,7 +99,7 @@ export default ({
 				{
 					calendar: {
 						writable: true,
-						color: '#ff0000',
+						color: '#ff0000'
 					},
 					uid: 'yaf92889mn',
 					uri: 'yaf92889mn.ics',
@@ -125,7 +125,7 @@ export default ({
 				{
 					calendar: {
 						writable: true,
-						color: '#eef',
+						color: '#eef'
 					},
 					uid: 'ydf91848mn',
 					uri: 'ydf91848mn.ics',
@@ -142,7 +142,7 @@ export default ({
 				{
 					calendar: {
 						writable: true,
-						color: '#eef',
+						color: '#eef'
 					},
 					uid: 'yef91848mn',
 					uri: 'yef91848mn.ics',
@@ -159,7 +159,7 @@ export default ({
 				{
 					calendar: {
 						writable: true,
-						color: '#eef',
+						color: '#eef'
 					},
 					uid: 'yff91848mn',
 					uri: 'yff91848mn.ics',
@@ -176,7 +176,7 @@ export default ({
 				{
 					calendar: {
 						writable: true,
-						color: '#eef',
+						color: '#eef'
 					},
 					uid: 'ydg91848mn',
 					uri: 'ydg91848mn.ics',
@@ -192,7 +192,7 @@ export default ({
 				{
 					calendar: {
 						writable: true,
-						color: '#eef',
+						color: '#eef'
 					},
 					uid: 'ydh91848mn',
 					uri: 'ydh91848mn.ics',
@@ -217,7 +217,7 @@ export default ({
 				{
 					calendar: {
 						writable: true,
-						color: '#112233',
+						color: '#112233'
 					},
 					uid: 'ydi92848mn',
 					uri: 'ydi92848mn.ics',
@@ -232,7 +232,7 @@ export default ({
 				{
 					calendar: {
 						writable: true,
-						color: '#112233',
+						color: '#112233'
 					},
 					uid: 'ydj91848mn',
 					uri: 'ydj91848mn.ics',
@@ -247,7 +247,7 @@ export default ({
 				{
 					calendar: {
 						writable: true,
-						color: '#112233',
+						color: '#112233'
 					},
 					uid: 'ydk91848mn',
 					uri: 'ydk91848mn.ics',
@@ -262,7 +262,7 @@ export default ({
 				{
 					calendar: {
 						writable: true,
-						color: '#112233',
+						color: '#112233'
 					},
 					uid: 'ydl91848mn',
 					uri: 'ydl91848mn.ics',
