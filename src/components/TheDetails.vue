@@ -22,8 +22,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <template>
 	<div ng-click="endEdit($event)"
 		class="content-wrapper">
-		<div class="flex-container"
-			ng-show="TaskState()=='found'"
+		<div v-if="task!=undefined"
+			class="flex-container"
 			ng-class="{'disabled': !task.calendar.writable}">
 			<div class="title" ng-class="{'editing':route.parameter=='name'}">
 				<a :aria-checked="task.completed"
@@ -40,8 +40,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<div :class="{'strike-through':task.completed}"
 					class="title-text"
 					ng-click="editName($event, task)"
-					oc-click-focus="{selector: '#editName', timeout: 0}"
-					ng-bind-html="task.summary | linky:'_blank':{rel: 'nofollow'}" />
+					oc-click-focus="{selector: '#editName', timeout: 0}">
+					{{ task.summary }}
+				</div>
 				<div class="expandable-container">
 					<div class="expandingArea active">
 						<pre><span>{{ task.summary }}</span><br></pre>
@@ -251,35 +252,29 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		<!-- <div ng-show="TaskState()=='loading'" class="notice">
 			<span>{{ t('tasks', 'Loading the task...') }}</span>
 			<div class="loading" style="height: 50px;"></div>
-		</div>
-		<div ng-show="TaskState()==null" class="notice">
-			<span>{{ t('tasks', 'Task not found!') }}</span>
 		</div> -->
+		<div v-else class="notice">
+			<span>{{ t('tasks', 'Task not found!') }}</span>
+		</div>
 	</div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
 	components: {
 	},
 	data: function() {
-		return {
-			task: {
-				calendar: {
-					writable: true
-				},
-				complete: 4,
-				completed: false,
-				priority: 5,
-				cats: [],
-				note: 'Migrate this app to vue.'
-			}
-		}
+		return {}
 	},
-	computed: mapState({
-	}),
+	computed: Object.assign(
+		mapState({
+		}),
+		mapGetters({
+			task: 'getTaskByRoute'
+		})
+	),
 	methods: {
 		closeDetails: function() {
 			if (this.$route.params.calendarId) {
