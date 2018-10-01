@@ -50,7 +50,7 @@ OC.L10N.register(
     "An empty name is not allowed." : "Az üres név nem engedélyezett.",
     "Hidden" : "Rejtett",
     "Visible" : "Látható",
-    "Automatic" : "Autómatikus",
+    "Automatic" : "Automatikus",
     "Sunday" : "vasárnap",
     "Monday" : "hétfő",
     "Tuesday" : "kedd",
