@@ -25,6 +25,7 @@ import VueRouter from 'vue-router'
 import CollectionGeneral from './TheCollections/General'
 import CollectionWeek from './TheCollections/Week'
 import CollectionCalendar from './TheCollections/Calendar'
+import TheDetails from './TheDetails'
 
 const routes = [
 	// using
@@ -35,11 +36,11 @@ const routes = [
 	// reliably with router-link due to
 	// https://github.com/vuejs/vue-router/issues/419
 	{ path: '/collections/week', component: CollectionWeek },
-	{ path: '/collections/week/tasks/:taskId', component: CollectionWeek },
+	{ path: '/collections/week/tasks/:taskId', components: { default: CollectionWeek, details: TheDetails } },
 	{ path: '/collections/:collectionId', component: CollectionGeneral, props: true },
-	{ path: '/collections/:collectionId/tasks/:taskId', component: CollectionGeneral, props: true },
+	{ path: '/collections/:collectionId/tasks/:taskId', components: { default: CollectionGeneral, details: TheDetails }, props: { default: true } },
 	{ path: '/calendars/:calendarId', component: CollectionCalendar, props: true },
-	{ path: '/calendars/:calendarId/tasks/:taskId', component: CollectionCalendar, props: true }
+	{ path: '/calendars/:calendarId/tasks/:taskId', components: { default: CollectionCalendar, details: TheDetails }, props: { default: true } }
 ]
 
 Vue.use(VueRouter)

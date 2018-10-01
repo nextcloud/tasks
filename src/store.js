@@ -150,6 +150,26 @@ export default new Vuex.Store({
 		},
 
 		/**
+		 * Returns the task currently opened by route
+		 */
+		getTaskByRoute: (state) => {
+			// If a calendar is given, only search in that calendar.
+			if (state.route.params.calendarId) {
+				return state.calendars[state.route.params.calendarId].tasks.find(task => {
+					return task.uri === state.route.params.taskId
+				})
+			}
+			// Else, we have to search all calendars
+			var task
+			for (let calendar of Object.values(state.calendars)) {
+				task = calendar.tasks.find(task => {
+					return task.uri === state.route.params.taskId
+				})
+				if (task) return task
+			}
+		},
+
+		/**
 		 * Returns the current calendar
 		 */
 		getCalendarByRoute: (state) => {

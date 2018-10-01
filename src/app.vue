@@ -33,7 +33,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		</div>
 
 		<div id="app-sidebar" :class="{disappear: $route.params.taskId === undefined}">
-			<theDetails />
+			<router-view name="details" />
 		</div>
 	</div>
 </template>
@@ -41,14 +41,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <script>
 import TheList from './components/TheList'
 import TheSettings from './components/TheSettings'
-import TheDetails from './components/TheDetails'
 
 export default {
 	name: 'App',
 	components: {
 		'theSettings': TheSettings,
-		'theList': TheList,
-		'theDetails': TheDetails
+		'theList': TheList
 	}
 }
 </script>
