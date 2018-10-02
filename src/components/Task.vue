@@ -38,11 +38,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				class="task-checkbox"
 				name="toggleCompleted"
 				role="checkbox"
-				@click="toggleCompleted(task)">
+				@click="toggleCompleted">
 				<span :class="{'icon-checkmark': task.completed}" class="icon task-checkbox reactive" />
 			</a>
 			<a class="icon task-separator" />
-			<a class="task-star" @click="toggleStarred(task)">
+			<a class="task-star" @click="toggleStarred">
 				<span :class="{'icon-task-star-high':task.priority > 5, 'icon-task-star-medium':task.priority == 5,
 					'icon-task-star-low':task.priority > 0 && task.priority < 5}" class="icon icon-task-star right large reactive" />
 			</a>
@@ -208,10 +208,12 @@ export default {
 			return false
 		},
 
-		toggleCompleted: function(task) {
+		toggleCompleted: function() {
+			this.$store.dispatch('toggleCompleted', this.task.uri)
 		},
 
-		toggleStarred: function(task) {
+		toggleStarred: function() {
+			this.$store.dispatch('toggleStarred', this.task.uri)
 		},
 
 		toggleSubtasks: function(task) {
