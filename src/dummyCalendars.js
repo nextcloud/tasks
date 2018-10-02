@@ -124,7 +124,7 @@ export default ({
 			tasks: [
 				{
 					calendar: {
-						writable: true,
+						writable: false,
 						color: '#eef'
 					},
 					uid: 'ydf91848mn',
@@ -141,7 +141,7 @@ export default ({
 				},
 				{
 					calendar: {
-						writable: true,
+						writable: false,
 						color: '#eef'
 					},
 					uid: 'yef91848mn',
@@ -158,7 +158,7 @@ export default ({
 				},
 				{
 					calendar: {
-						writable: true,
+						writable: false,
 						color: '#eef'
 					},
 					uid: 'yff91848mn',
@@ -175,7 +175,7 @@ export default ({
 				},
 				{
 					calendar: {
-						writable: true,
+						writable: false,
 						color: '#eef'
 					},
 					uid: 'ydg91848mn',
@@ -191,7 +191,7 @@ export default ({
 				},
 				{
 					calendar: {
-						writable: true,
+						writable: false,
 						color: '#eef'
 					},
 					uid: 'ydh91848mn',
