@@ -106,6 +106,10 @@ export default {
 		calendarId: {
 			type: String,
 			default: ''
+		},
+		taskId: {
+			type: String,
+			default: ''
 		}
 	},
 	data() {
