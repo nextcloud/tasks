@@ -23,21 +23,21 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 	<div ng-click="endEdit($event)"
 		class="content-wrapper">
 		<div v-if="task!=undefined"
-			class="flex-container"
-			ng-class="{'disabled': !task.calendar.writable}">
-			<div class="title" ng-class="{'editing':route.parameter=='name'}">
+			:class="{'disabled': !task.calendar.writable}"
+			class="flex-container">
+			<div class="title" ng-class="{'editing': route.parameter=='name'}">
 				<a :aria-checked="task.completed"
 					:aria-label="t('tasks', 'Task is completed')"
 					class="checkbox reactive"
-					ng-click="toggleCompleted(task)"
-					role="checkbox">
-					<span class="icon detail-checkbox" ng-class="{'icon-checkmark':task.completed, 'disabled': !task.calendar.writable}" />
+					role="checkbox"
+					@click="toggleCompleted">
+					<span :class="{'icon-checkmark': task.completed, 'disabled': !task.calendar.writable}" class="icon detail-checkbox" />
 				</a>
-				<a class="star reactive" ng-click="toggleStarred(task)">
+				<a class="star reactive" @click="toggleStarred">
 					<span :class="{'icon-task-star-high': task.priority>5, 'icon-task-star-medium':task.priority==5, 'icon-task-star-low':task.priority > 0 && task.priority < 5, 'disabled': !task.calendar.writable}"
 						class="icon icon-task-star" />
 				</a>
-				<div :class="{'strike-through':task.completed}"
+				<div :class="{'strike-through': task.completed}"
 					class="title-text"
 					ng-click="editName($event, task)"
 					oc-click-focus="{selector: '#editName', timeout: 0}">
@@ -85,7 +85,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							<a>
 								<span class="icon detail-save icon-checkmark-color end-edit reactive" />
 							</a>
-							<a class="end-edit" ng-click="deleteStartDate(task)">
+							<a class="end-edit" @click="deleteStartDate">
 								<span class="icon icon-trash reactive" />
 							</a>
 						</div>
@@ -118,16 +118,16 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							<a>
 								<span class="icon detail-save icon-checkmark-color end-edit reactive" />
 							</a>
-							<a class="end-edit" ng-click="deleteDueDate(task)">
+							<a class="end-edit" @click="deleteDueDate">
 								<span class="icon icon-trash reactive" />
 							</a>
 						</div>
 					</li>
 					<li :aria-checked="task.allDay"
 						class="section detail-all-day reactive"
-						ng-click="toggleAllDay(task)"
 						ng-if="isAllDayPossible(task)"
-						role="checkbox">
+						role="checkbox"
+						@click="toggleAllDay">
 						<div>
 							<span class="icon detail-checkbox" ng-class="{'icon-checkmark': task.allDay, 'disabled': !task.calendar.writable}" />
 							<span class="section-title">
@@ -239,9 +239,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</ul>
 			</div>
 			<div class="footer">
-				<a class="left close-all reactive"
-					ng-click="deleteTask(task)"
-					ng-show="task.calendar.writable">
+				<a v-show="task.calendar.writable"
+					class="left close-all reactive"
+					@click="deleteTask">
 					<span class="icon icon-trash" />
 				</a>
 				<a class="right close-all reactive" @click="closeDetails">
@@ -278,6 +278,30 @@ export default {
 			} else {
 				this.$router.push({ path: `/collections/${this.$route.params.collectionId}` })
 			}
+		},
+
+		deleteTask: function() {
+			this.$store.dispatch('deleteTask', this.task.uri)
+		},
+
+		toggleCompleted: function() {
+			this.$store.dispatch('toggleCompleted', this.task.uri)
+		},
+
+		toggleStarred: function() {
+			this.$store.dispatch('toggleStarred', this.task.uri)
+		},
+
+		deleteDueDate: function() {
+			this.$store.dispatch('deleteDueDate', this.task.uri)
+		},
+
+		deleteStartDate: function() {
+			this.$store.dispatch('deleteStartDate', this.task.uri)
+		},
+
+		toggleAllDay: function() {
+			this.$store.dispatch('toggleAllDay', this.task.uri)
 		}
 	}
 }

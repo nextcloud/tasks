@@ -206,6 +206,66 @@ export default new Vuex.Store({
 		setVisibility(state, newCollection) {
 			let collection = state.collections.find(search => search.id === newCollection.id)
 			Vue.set(collection, 'show', newCollection.show)
+		},
+
+		/**
+		 * Deletes a task
+		 *
+		 * @param {Object} state
+		 * @param {string} taskId The task id
+		 */
+		deleteTask(state, taskId) {
+			console.log('Delete task with uri ' + taskId)
+		},
+
+		/**
+		 * Toggles the completed state of a task
+		 *
+		 * @param {Object} state
+		 * @param {string} taskId The task id
+		 */
+		toggleCompleted(state, taskId) {
+			console.log('Toggle completed state of task with uri ' + taskId)
+		},
+
+		/**
+		 * Toggles the starred state of a task
+		 *
+		 * @param {Object} state
+		 * @param {string} taskId The task id
+		 */
+		toggleStarred(state, taskId) {
+			console.log('Toggle starred state of task with uri ' + taskId)
+		},
+
+		/**
+		 * Deletes the due date of a task
+		 *
+		 * @param {Object} state
+		 * @param {string} taskId The task id
+		 */
+		deleteDueDate(state, taskId) {
+			console.log('Deletes the due date of task with uri ' + taskId)
+		},
+
+		/**
+		 * Deletes the start date of a task
+		 *
+		 * @param {Object} state
+		 * @param {string} taskId The task id
+		 */
+		deleteStartDate(state, taskId) {
+			console.log('Deletes the start date of task with uri ' + taskId)
+		},
+
+		/**
+		 * Toggles if the start and due dates of a task are all day
+		 *
+		 * @param {Object} state
+		 * @param {string} taskId The task id
+		 */
+		toggleAllDay(state, taskId) {
+			console.log('Toggles the allday state of task with uri ' + taskId)
 		}
 	},
 	actions: {
@@ -231,6 +291,24 @@ export default new Vuex.Store({
 			return new Promise(function() {
 				Requests.post(OC.generateUrl('apps/tasks/collection/{id}/visibility/{show}', collection), {})
 			})
+		},
+		deleteTask(context, taskId) {
+			context.commit('deleteTask', taskId)
+		},
+		toggleCompleted(context, taskId) {
+			context.commit('toggleCompleted', taskId)
+		},
+		toggleStarred(context, taskId) {
+			context.commit('toggleStarred', taskId)
+		},
+		deleteDueDate(context, taskId) {
+			context.commit('deleteDueDate', taskId)
+		},
+		deleteStartDate(context, taskId) {
+			context.commit('deleteStartDate', taskId)
+		},
+		toggleAllDay(context, taskId) {
+			context.commit('toggleAllDay', taskId)
 		},
 		loadSettings({ commit }) {
 			return new Promise(function(resolve) {
