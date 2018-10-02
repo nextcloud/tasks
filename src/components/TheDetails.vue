@@ -249,10 +249,6 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</a>
 			</div>
 		</div>
-		<!-- <div ng-show="TaskState()=='loading'" class="notice">
-			<span>{{ t('tasks', 'Loading the task...') }}</span>
-			<div class="loading" style="height: 50px;"></div>
-		</div> -->
 		<div v-else class="notice">
 			<span>{{ t('tasks', 'Task not found!') }}</span>
 		</div>
