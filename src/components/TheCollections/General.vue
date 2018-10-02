@@ -83,6 +83,10 @@ export default {
 		collectionId: {
 			type: String,
 			default: ''
+		},
+		taskId: {
+			type: String,
+			default: ''
 		}
 	},
 	data() {
