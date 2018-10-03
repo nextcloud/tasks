@@ -41,7 +41,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					</div>
 					<select :id="'visibilityCollection-' + collection.id"
 						:value="collection.show"
-						@change="setVisibility($event, collection.id)">
+						@change="setVisibility({ id: collection.id, show: +$event.target.value })">
 						<option v-for="collectionOption in collectionOptions"
 							:value="collectionOption.id"
 							:key="collectionOption.id">
@@ -55,7 +55,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
 	components: {
@@ -85,10 +85,9 @@ export default {
 			calendars: state => state.calendars
 		})
 	),
-	methods: {
-		setVisibility: function(e, collectionID) {
-			this.$store.dispatch('setVisibility', { id: collectionID, show: +e.target.value })
-		}
-	}
+	methods:
+		mapActions([
+			'setVisibility'
+		])
 }
 </script>

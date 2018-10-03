@@ -30,10 +30,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					:aria-label="t('tasks', 'Task is completed')"
 					class="checkbox reactive"
 					role="checkbox"
-					@click="toggleCompleted">
+					@click="toggleCompleted(task.uri)">
 					<span :class="{'icon-checkmark': task.completed, 'disabled': !task.calendar.writable}" class="icon detail-checkbox" />
 				</a>
-				<a class="star reactive" @click="toggleStarred">
+				<a class="star reactive" @click="toggleStarred(task.uri)">
 					<span :class="{'icon-task-star-high': task.priority>5, 'icon-task-star-medium':task.priority==5, 'icon-task-star-low':task.priority > 0 && task.priority < 5, 'disabled': !task.calendar.writable}"
 						class="icon icon-task-star" />
 				</a>
@@ -85,7 +85,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							<a>
 								<span class="icon detail-save icon-checkmark-color end-edit reactive" />
 							</a>
-							<a class="end-edit" @click="deleteStartDate">
+							<a class="end-edit" @click="deleteStartDate(task.uri)">
 								<span class="icon icon-trash reactive" />
 							</a>
 						</div>
@@ -118,7 +118,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							<a>
 								<span class="icon detail-save icon-checkmark-color end-edit reactive" />
 							</a>
-							<a class="end-edit" @click="deleteDueDate">
+							<a class="end-edit" @click="deleteDueDate(task.uri)">
 								<span class="icon icon-trash reactive" />
 							</a>
 						</div>
@@ -127,7 +127,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						class="section detail-all-day reactive"
 						ng-if="isAllDayPossible(task)"
 						role="checkbox"
-						@click="toggleAllDay">
+						@click="toggleAllDay(task.uri)">
 						<div>
 							<span class="icon detail-checkbox" ng-class="{'icon-checkmark': task.allDay, 'disabled': !task.calendar.writable}" />
 							<span class="section-title">
@@ -241,7 +241,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			<div class="footer">
 				<a v-show="task.calendar.writable"
 					class="left close-all reactive"
-					@click="deleteTask">
+					@click="deleteTask(task.uri)">
 					<span class="icon icon-trash" />
 				</a>
 				<a class="right close-all reactive" @click="closeDetails">
@@ -256,7 +256,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
 	components: {
@@ -271,38 +271,24 @@ export default {
 			task: 'getTaskByRoute'
 		})
 	),
-	methods: {
-		closeDetails: function() {
-			if (this.$route.params.calendarId) {
-				this.$router.push({ path: `/calendars/${this.$route.params.calendarId}` })
-			} else {
-				this.$router.push({ path: `/collections/${this.$route.params.collectionId}` })
+	methods: Object.assign(
+		mapActions([
+			'deleteTask',
+			'toggleCompleted',
+			'toggleStarred',
+			'deleteDueDate',
+			'deleteStartDate',
+			'toggleAllDay'
+		]),
+		{
+			closeDetails: function() {
+				if (this.$route.params.calendarId) {
+					this.$router.push({ path: `/calendars/${this.$route.params.calendarId}` })
+				} else {
+					this.$router.push({ path: `/collections/${this.$route.params.collectionId}` })
+				}
 			}
-		},
-
-		deleteTask: function() {
-			this.$store.dispatch('deleteTask', this.task.uri)
-		},
-
-		toggleCompleted: function() {
-			this.$store.dispatch('toggleCompleted', this.task.uri)
-		},
-
-		toggleStarred: function() {
-			this.$store.dispatch('toggleStarred', this.task.uri)
-		},
-
-		deleteDueDate: function() {
-			this.$store.dispatch('deleteDueDate', this.task.uri)
-		},
-
-		deleteStartDate: function() {
-			this.$store.dispatch('deleteStartDate', this.task.uri)
-		},
-
-		toggleAllDay: function() {
-			this.$store.dispatch('toggleAllDay', this.task.uri)
 		}
-	}
+	)
 }
 </script>
