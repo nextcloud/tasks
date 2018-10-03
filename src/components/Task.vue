@@ -38,11 +38,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				class="task-checkbox"
 				name="toggleCompleted"
 				role="checkbox"
-				@click="toggleCompleted">
+				@click="toggleCompleted(task.uri)">
 				<span :class="{'icon-checkmark': task.completed}" class="icon task-checkbox reactive" />
 			</a>
 			<a class="icon task-separator" />
-			<a class="task-star" @click="toggleStarred">
+			<a class="task-star" @click="toggleStarred(task.uri)">
 				<span :class="{'icon-task-star-high':task.priority > 5, 'icon-task-star-medium':task.priority == 5,
 					'icon-task-star-low':task.priority > 0 && task.priority < 5}" class="icon icon-task-star right large reactive" />
 			</a>
@@ -119,6 +119,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <script>
 import { overdue, valid } from '../storeHelper'
 import clickOutside from 'vue-click-outside'
+import { mapActions } from 'vuex'
 
 export default {
 	name: 'TaskBodyComponent',
@@ -151,83 +152,81 @@ export default {
 			isAddingTask: false
 		}
 	},
-	methods: {
-		/**
-		 * Checks if a date is overdue
-		 */
-		overdue: overdue,
+	methods: Object.assign(
+		mapActions([
+			'toggleCompleted',
+			'toggleStarred'
+		]),
+		{
+			/**
+			 * Checks if a date is overdue
+			 */
+			overdue: overdue,
 
-		/**
-		 * Returns the path of the task
-		 *
-		 * @param {String} taskId the Id of the task
-		 */
-		getTaskRoute: function(taskId) {
-			var calendarId = this.$route.params.calendarId
-			var collectionId = this.$route.params.collectionId
-			if (calendarId) {
-				return '/calendars/' + calendarId + '/tasks/' + taskId
-			} else if (collectionId) {
-				return '/collections/' + collectionId + '/tasks/' + taskId
+			/**
+			 * Returns the path of the task
+			 *
+			 * @param {String} taskId the Id of the task
+			 */
+			getTaskRoute: function(taskId) {
+				var calendarId = this.$route.params.calendarId
+				var collectionId = this.$route.params.collectionId
+				if (calendarId) {
+					return '/calendars/' + calendarId + '/tasks/' + taskId
+				} else if (collectionId) {
+					return '/collections/' + collectionId + '/tasks/' + taskId
+				}
+			},
+
+			/**
+			 * Returns all tasks which are direct children of the task with Id parentId
+			 *
+			 * @param {String} parentId the Id of the parent task
+			 */
+			getTasksByParentId: function(parentId) {
+				return Object.values(this.tasks)
+					.filter(task => {
+						return task.related === parentId
+					})
+			},
+
+			/**
+			 * Returns the placeholder string shown in the subtasks input field
+			 *
+			 * @param {String} task the name of the parent task
+			 */
+			subtasksCreationPlaceholder: function(task) {
+				return t('tasks', 'Add a subtask to "{task}"...', {	task: task })
+			},
+
+			cancelCreation: function(e) {
+				// don't cancel the task creation if the own add-subtask button is clicked
+				if (e.target.getAttribute('taskId') !== this.task.uri) {
+					this.showSubtaskInput = false
+				}
+			},
+
+			hasSubtasks: function(task) {
+				return false
+			},
+
+			hasCompletedSubtasks: function(task) {
+				return false
+			},
+
+			toggleSubtasks: function(task) {
+			},
+
+			toggleCompletedSubtasks: function(task) {
+			},
+
+			hideSubtasks: function(task) {
+			},
+
+			addTask: function() {
+				this.newTaskName = ''
 			}
-		},
-
-		/**
-		 * Returns all tasks which are direct children of the task with Id parentId
-		 *
-		 * @param {String} parentId the Id of the parent task
-		 */
-		getTasksByParentId: function(parentId) {
-			return Object.values(this.tasks)
-				.filter(task => {
-					return task.related === parentId
-				})
-		},
-
-		/**
-		 * Returns the placeholder string shown in the subtasks input field
-		 *
-		 * @param {String} task the name of the parent task
-		 */
-		subtasksCreationPlaceholder: function(task) {
-			return t('tasks', 'Add a subtask to "{task}"...', {	task: task })
-		},
-
-		cancelCreation: function(e) {
-			// don't cancel the task creation if the own add-subtask button is clicked
-			if (e.target.getAttribute('taskId') !== this.task.uri) {
-				this.showSubtaskInput = false
-			}
-		},
-
-		hasSubtasks: function(task) {
-			return false
-		},
-
-		hasCompletedSubtasks: function(task) {
-			return false
-		},
-
-		toggleCompleted: function() {
-			this.$store.dispatch('toggleCompleted', this.task.uri)
-		},
-
-		toggleStarred: function() {
-			this.$store.dispatch('toggleStarred', this.task.uri)
-		},
-
-		toggleSubtasks: function(task) {
-		},
-
-		toggleCompletedSubtasks: function(task) {
-		},
-
-		hideSubtasks: function(task) {
-		},
-
-		addTask: function() {
-			this.newTaskName = ''
 		}
-	}
+	)
 }
 </script>
