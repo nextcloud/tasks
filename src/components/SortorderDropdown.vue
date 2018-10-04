@@ -98,7 +98,7 @@ export default {
 	computed: Object.assign({
 		sortOrder: {
 			get() {
-				return this.$store.state.settings.sortOrder
+				return this.$store.state.settings.settings.sortOrder
 			},
 			set(order) {
 				this.$store.dispatch('setSetting', { type: 'sortOrder', value: order })
@@ -106,7 +106,7 @@ export default {
 		},
 		sortDirection: {
 			get() {
-				return this.$store.state.settings.sortDirection
+				return this.$store.state.settings.settings.sortDirection
 			},
 			set(direction) {
 				this.$store.dispatch('setSetting', { type: 'sortDirection', value: +direction })

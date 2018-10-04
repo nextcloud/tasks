@@ -117,7 +117,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { overdue, valid } from '../storeHelper'
+import { overdue, valid } from '../store/storeHelper'
 import clickOutside from 'vue-click-outside'
 import { mapActions } from 'vuex'
 
