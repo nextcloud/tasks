@@ -210,8 +210,8 @@ export default {
 	},
 	computed: Object.assign({},
 		mapState({
-			collections: state => state.collections,
-			calendars: state => state.calendars
+			collections: state => state.collections.collections,
+			calendars: state => state.calendars.calendars
 		}),
 		mapGetters([
 			'getCollectionCount',

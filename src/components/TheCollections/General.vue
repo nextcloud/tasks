@@ -108,7 +108,7 @@ export default {
 		 * @param {String} collectionId the Id of the collection in question
 		 */
 		filteredCalendars: function() {
-			return Object.values(this.$store.state.calendars)
+			return Object.values(this.$store.state.calendars.calendars)
 				.filter(calendar => {
 					return this.$store.getters.getCalendarCountByCollectionId(calendar.uri, this.$route.params.collectionId)
 				})
