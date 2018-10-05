@@ -46,6 +46,7 @@ OC.L10N.register(
     "after end" : "eftir endi",
     "Comment" : "Athugasemd",
     "Add a comment" : "Bæta við athugasemd",
+    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Þetta mun eyða dagatalinu \"%s\" og öllum færslum þess.",
     "The name \"%s\" is already used." : "Nafnið \"%s\" er þegar í notkun.",
     "An empty name is not allowed." : "Autt heiti er ekki leyft.",
     "Hidden" : "Falið",
