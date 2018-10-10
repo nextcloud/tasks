@@ -131,8 +131,7 @@ export default {
 	},
 	filters: {
 		formatDate: function(due) {
-			var d = moment(due)
-			return valid(d) ? d.format('L') : ''
+			return valid(due) ? moment(due).format('L') : ''
 		}
 	},
 	props: {
