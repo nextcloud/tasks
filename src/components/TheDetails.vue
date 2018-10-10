@@ -56,12 +56,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			</div>
 			<div class="body">
 				<ul class="sections">
-					<li class="section detail-start"
-						ng-class="{'date':isDue(task.start), 'editing':route.parameter=='startdate', 'high':isOverDue(task.start)}"
+					<li :class="{'date': valid(task.start), 'editing': edit=='startdate', 'high': overdue(task.start)}"
+						class="section detail-start"
 						ng-click="editStart($event, task)">
 						<div>
-							<span class="icon icon-calendar" ng-class="{'icon-calendar-due':isDue(task.start),
-							'icon-calendar-overdue':isOverDue(task.start)}" />
+							<span :class="{'icon-calendar-due': valid(task.start), 'icon-calendar-overdue': overdue(task.start)}"
+								class="icon icon-calendar" />
 							<span class="section-title">
 								<!-- <text>{{ task.start | startDetails }}</text> -->
 							</span>
@@ -90,11 +90,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</a>
 						</div>
 					</li>
-					<li class="section detail-date"
-						ng-class="{'date':isDue(task.due), 'editing':route.parameter=='duedate', 'high':isOverDue(task.due)}"
+					<li :class="{'date': valid(task.due), 'editing': edit=='duedate', 'high': overdue(task.due)}"
+						class="section detail-date"
 						ng-click="editDueDate($event, task)">
 						<div>
-							<span class="icon icon-calendar" ng-class="{'icon-calendar-due':isDue(task.due), 'icon-calendar-overdue':isOverDue(task.due)}" />
+							<span :class="{'icon-calendar-due': valid(task.due), 'icon-calendar-overdue': overdue(task.due)}"
+								class="icon icon-calendar" />
 							<span class="section-title">
 								<!-- <text>{{ task.due | dateDetails }}</text> -->
 							</span>
@@ -123,16 +124,14 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</a>
 						</div>
 					</li>
-					<li :aria-checked="task.allDay"
+					<li v-show="isAllDayPossible"
+						:aria-checked="task.allDay"
 						class="section detail-all-day reactive"
-						ng-if="isAllDayPossible(task)"
 						role="checkbox"
 						@click="toggleAllDay(task.uri)">
 						<div>
-							<span class="icon detail-checkbox" ng-class="{'icon-checkmark': task.allDay, 'disabled': !task.calendar.writable}" />
-							<span class="section-title">
-								<text>{{ t('tasks', 'All day') }}</text>
-							</span>
+							<span :class="{'icon-checkmark': task.allDay, 'disabled': !task.calendar.writable}" class="icon detail-checkbox" />
+							<span class="section-title">{{ t('tasks', 'All day') }}</span>
 						</div>
 					</li>
 					<li class="section detail-priority"
@@ -257,19 +256,26 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
+import { valid, overdue } from '../store/storeHelper'
 
 export default {
 	components: {
 	},
 	data: function() {
-		return {}
+		return {
+			edit: ''
+		}
 	},
-	computed: Object.assign(
-		mapState({
-		}),
-		mapGetters({
-			task: 'getTaskByRoute'
-		})
+	computed: Object.assign({
+		isAllDayPossible: function() {
+			return this.task.calendar.writable && (this.task.due || this.task.start)
+		}
+	},
+	mapState({
+	}),
+	mapGetters({
+		task: 'getTaskByRoute'
+	})
 	),
 	methods: Object.assign(
 		mapActions([
@@ -287,7 +293,17 @@ export default {
 				} else {
 					this.$router.push({ path: `/collections/${this.$route.params.collectionId}` })
 				}
-			}
+			},
+
+			/**
+			 * Checks if a date is overdue
+			 */
+			overdue: overdue,
+
+			/**
+			 * Checks if a date is valid
+			 */
+			valid: valid
 		}
 	)
 }
