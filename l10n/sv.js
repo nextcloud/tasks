@@ -46,6 +46,7 @@ OC.L10N.register(
     "after end" : "efter utgång",
     "Comment" : "Kommentar",
     "Add a comment" : "Lägg till en kommentar",
+    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Detta kommer att radera kalendern \"%s\" och alla dess händelser och uppgifter.",
     "The name \"%s\" is already used." : "Namnet \"%s\" används redan.",
     "An empty name is not allowed." : "Ett tomt namn är inte tillåtet.",
     "Hidden" : "Gömd",
