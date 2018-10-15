@@ -62,9 +62,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						<div>
 							<span :class="{'icon-calendar-due': valid(task.start), 'icon-calendar-overdue': overdue(task.start)}"
 								class="icon icon-calendar" />
-							<span class="section-title">
-								<!-- <text>{{ task.start | startDetails }}</text> -->
-							</span>
+							<span class="section-title">{{ task.start | startDate }}</span>
 							<div class="section-edit">
 								<!-- <input class="datepicker-input medium"
 									type="text"
@@ -96,9 +94,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						<div>
 							<span :class="{'icon-calendar-due': valid(task.due), 'icon-calendar-overdue': overdue(task.due)}"
 								class="icon icon-calendar" />
-							<span class="section-title">
-								<!-- <text>{{ task.due | dateDetails }}</text> -->
-							</span>
+							<span class="section-title">{{ task.due | dueDate }}</span>
 							<div class="section-edit">
 								<!-- <input class="datepicker-input medium"
 									type="text"
@@ -260,6 +256,94 @@ import { valid, overdue } from '../store/storeHelper'
 
 export default {
 	components: {
+	},
+	filters: {
+		startDate: function(date) {
+			if (valid(date)) {
+				if (date.isDate) {
+					return moment(date, 'YYYYMMDDTHHmmss').calendar(null, {
+						sameDay: t('tasks', '[Starts today]'),
+						nextDay: t('tasks', '[Starts tomorrow]'),
+						nextWeek: t('tasks', '[Starts on] LL'),
+						lastDay: t('tasks', '[Started yesterday]'),
+						lastWeek: t('tasks', '[Started on] LL'),
+						sameElse: function(now) {
+							if (this.isBefore(now)) {
+								return t('tasks', '[Started on] LL')
+							} else {
+								return t('tasks', '[Starts on] LL')
+							}
+						}
+					})
+				} else {
+					return moment(date, 'YYYYMMDDTHHmmss').calendar(null, {
+						sameDay: function(now) {
+							if (this.isBefore(now)) {
+								return t('tasks', '[Started today at] LT')
+							} else {
+								return t('tasks', '[Starts today at] LT')
+							}
+						},
+						nextDay: t('tasks', '[Starts tomorrow at] LT'),
+						nextWeek: t('tasks', '[Starts on] LL [at] LT'),
+						lastDay: t('tasks', '[Started yesterday at] LT'),
+						lastWeek: t('tasks', '[Started on] LL [at] LT'),
+						sameElse: function(now) {
+							if (this.isBefore(now)) {
+								return t('tasks', '[Started on] LL [at] LT')
+							} else {
+								return t('tasks', '[Starts on] LL [at] LT')
+							}
+						}
+					})
+				}
+			} else {
+				return t('tasks', 'Set start date')
+			}
+		},
+		dueDate: function(date) {
+			if (valid(date)) {
+				if (date.isDate) {
+					return moment(date, 'YYYYMMDDTHHmmss').calendar(null, {
+						sameDay: t('tasks', '[Due today]'),
+						nextDay: t('tasks', '[Due tomorrow]'),
+						nextWeek: t('tasks', '[Due on] LL'),
+						lastDay: t('tasks', '[Was due yesterday]'),
+						lastWeek: t('tasks', '[Was due on] LL'),
+						sameElse: function(now) {
+							if (this.isBefore(now)) {
+								return t('tasks', '[Was due on] LL')
+							} else {
+								return t('tasks', '[Due on] LL')
+							}
+						}
+					})
+				} else {
+					return moment(date, 'YYYYMMDDTHHmmss').calendar(null, {
+						sameDay: function(now) {
+							if (this.isBefore(now)) {
+								return t('tasks', '[Was due today at] LT')
+							} else {
+								return t('tasks', '[Due today at] LT')
+							}
+						},
+						nextDay: t('tasks', '[Due tomorrow at] LT'),
+						nextWeek: t('tasks', '[Due on] LL [at] LT'),
+						lastDay: t('tasks', '[Was due yesterday at] LT'),
+						lastWeek: t('tasks', '[Was due on] LL [at] LT'),
+						sameElse: function(now) {
+							if (this.isBefore(now)) {
+								return t('tasks', '[Was due on] LL [at] LT')
+							} else {
+								return t('tasks', '[Due on] LL [at] LT')
+							}
+						}
+					})
+				}
+			} else {
+				return t('tasks', 'Set due date')
+			}
+		}
 	},
 	data: function() {
 		return {
