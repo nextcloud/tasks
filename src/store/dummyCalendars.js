@@ -37,7 +37,9 @@ export default ({
 					},
 					uid: 'ydf95848mn',
 					uri: 'ydf95848mn.ics',
-					due: '20180902T200933',
+					// construct dates for tomorrow
+					due: moment().add(1, 'days').format('YYYYMMDDTHHmmss'),
+					start: moment().add(1, 'days').format('YYYYMMDDTHHmmss'),
 					summary: 'Test 1 - Task 1',
 					complete: 0,
 					completed: true,
@@ -53,7 +55,9 @@ export default ({
 					},
 					uid: 'ydf95748mn',
 					uri: 'ydf95748mn.ics',
-					due: '20180901T200926',
+					// construct dates for yesterday
+					due: moment().subtract(1, 'days').format('YYYYMMDDTHHmmss'),
+					start: moment().subtract(1, 'days').format('YYYYMMDDTHHmmss'),
 					summary: 'Test 1 - Task 2',
 					complete: 20,
 					completed: false,
@@ -69,7 +73,9 @@ export default ({
 					},
 					uid: 'ydf95849mn',
 					uri: 'ydf95849mn.ics',
-					due: '20170903T200916',
+					// construct dates for last week
+					due: moment().subtract(5, 'days').format('YYYYMMDDTHHmmss'),
+					start: moment().subtract(5, 'days').format('YYYYMMDDTHHmmss'),
 					summary: 'Test 1 - Task 3',
 					complete: 60,
 					completed: false,
@@ -86,7 +92,9 @@ export default ({
 					},
 					uid: 'rtf95849mn',
 					uri: 'rtf95849mn.ics',
-					due: '20170903T200916',
+					// construct dates for next week
+					due: moment().add(5, 'days').format('YYYYMMDDTHHmmss'),
+					start: moment().add(5, 'days').format('YYYYMMDDTHHmmss'),
 					summary: 'Test 1 - Task 4',
 					complete: 0,
 					completed: false,
@@ -103,7 +111,9 @@ export default ({
 					},
 					uid: 'yaf92889mn',
 					uri: 'yaf92889mn.ics',
-					due: '20170903T200916',
+					// construct dates for today future
+					due: moment().add(1, 'hours').format('YYYYMMDDTHHmmss'),
+					start: moment().add(1, 'hours').format('YYYYMMDDTHHmmss'),
 					summary: 'Test 1 - Task 5',
 					complete: 80,
 					completed: false,
@@ -129,8 +139,9 @@ export default ({
 					},
 					uid: 'ydf91848mn',
 					uri: 'ydf91848mn.ics',
-					due: '20180929T200912',
-					start: '20171003T100912',
+					// construct dates for today past
+					due: moment().subtract(1, 'hours').format('YYYYMMDDTHHmmss'),
+					start: moment().subtract(1, 'hours').format('YYYYMMDDTHHmmss'),
 					summary: 'Test 2 - Task 1',
 					complete: 90,
 					completed: true,
@@ -146,8 +157,9 @@ export default ({
 					},
 					uid: 'yef91848mn',
 					uri: 'yef91848mn.ics',
-					due: '20181003T200912',
-					start: '20171003T200912',
+					// construct dates for far future
+					due: moment().add(5, 'years').format('YYYYMMDDTHHmmss'),
+					start: moment().add(5, 'years').format('YYYYMMDDTHHmmss'),
 					summary: 'Test 2 - Task 2',
 					complete: 0,
 					completed: false,
@@ -163,8 +175,9 @@ export default ({
 					},
 					uid: 'yff91848mn',
 					uri: 'yff91848mn.ics',
-					due: '',
-					start: '',
+					// construct dates for far past
+					due: moment().subtract(5, 'years').format('YYYYMMDDTHHmmss'),
+					start: moment().subtract(5, 'years').format('YYYYMMDDTHHmmss'),
 					summary: 'Test 2 - Task 3',
 					complete: 6,
 					completed: true,
@@ -180,7 +193,9 @@ export default ({
 					},
 					uid: 'ydg91848mn',
 					uri: 'ydg91848mn.ics',
-					due: '20180907T200912',
+					// construct dates for tomorrow, date only
+					due: moment().add(1, 'days').format('YYYYMMDD'),
+					start: moment().add(1, 'days').format('YYYYMMDD'),
 					summary: 'Test 2 - Task 4',
 					complete: 6,
 					completed: false,
@@ -196,6 +211,9 @@ export default ({
 					},
 					uid: 'ydh91848mn',
 					uri: 'ydh91848mn.ics',
+					// construct dates for yesterday, date only
+					due: moment().subtract(1, 'days').format('YYYYMMDD'),
+					start: moment().subtract(1, 'days').format('YYYYMMDD'),
 					summary: 'Test 2 - Task 5',
 					complete: 6,
 					completed: false,
@@ -221,6 +239,9 @@ export default ({
 					},
 					uid: 'ydi92848mn',
 					uri: 'ydi92848mn.ics',
+					// construct dates for last week, date only
+					due: moment().subtract(5, 'days').format('YYYYMMDD'),
+					start: moment().subtract(5, 'days').format('YYYYMMDD'),
 					summary: 'Test 3 - Task 1',
 					complete: 1,
 					completed: false,
@@ -236,6 +257,9 @@ export default ({
 					},
 					uid: 'ydj91848mn',
 					uri: 'ydj91848mn.ics',
+					// construct dates for next week, date only
+					due: moment().add(5, 'days').format('YYYYMMDD'),
+					start: moment().add(5, 'days').format('YYYYMMDD'),
 					summary: 'Test 3 - Task 2',
 					complete: 3,
 					completed: true,
@@ -251,6 +275,9 @@ export default ({
 					},
 					uid: 'ydk91848mn',
 					uri: 'ydk91848mn.ics',
+					// construct dates for today future, date only
+					due: moment().add(1, 'hours').format('YYYYMMDD'),
+					start: moment().add(1, 'hours').format('YYYYMMDD'),
 					summary: 'Test 3 - Task 3',
 					complete: 6,
 					completed: false,
@@ -266,7 +293,43 @@ export default ({
 					},
 					uid: 'ydl91848mn',
 					uri: 'ydl91848mn.ics',
+					// construct dates for today past, date only
+					due: moment().subtract(1, 'hours').format('YYYYMMDD'),
+					start: moment().subtract(1, 'hours').format('YYYYMMDD'),
 					summary: 'Test 3 - Task 4',
+					complete: 6,
+					completed: false,
+					priority: 7,
+					categories: [],
+					note: 'Migrate this app to vue.',
+					hideSubtasks: false
+				},
+				{
+					calendar: {
+						writable: true,
+						color: '#112233'
+					},
+					uid: 'ydl913r8mn',
+					uri: 'ydl913r8mn.ics',
+					// construct dates for today past, date only
+					due: '',
+					start: '',
+					summary: 'Test 3 - Task 5',
+					complete: 6,
+					completed: false,
+					priority: 7,
+					categories: [],
+					note: 'Migrate this app to vue.',
+					hideSubtasks: false
+				},
+				{
+					calendar: {
+						writable: true,
+						color: '#112233'
+					},
+					uid: 'y2w913r8mn',
+					uri: 'y2w913r8mn.ics',
+					summary: 'Test 3 - Task 6',
 					complete: 6,
 					completed: false,
 					priority: 7,
