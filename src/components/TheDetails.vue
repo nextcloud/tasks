@@ -25,7 +25,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		<div v-if="task!=undefined"
 			:class="{'disabled': !task.calendar.writable}"
 			class="flex-container">
-			<div class="title" ng-class="{'editing': route.parameter=='name'}">
+			<div :class="{'editing': edit=='name'}" class="title">
 				<a :aria-checked="task.completed"
 					:aria-label="t('tasks', 'Task is completed')"
 					class="checkbox reactive"
@@ -130,8 +130,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							<span class="section-title">{{ t('tasks', 'All day') }}</span>
 						</div>
 					</li>
-					<li class="section detail-priority"
-						ng-class="{'editing':route.parameter=='priority','high':task.priority>5,'medium':task.priority==5,'low':task.priority > 0 && task.priority < 5, 'date':task.priority>0}"
+					<li :class="{'editing': edit=='priority',
+						'high': task.priority>5, 'medium':task.priority==5, 'low':task.priority > 0 && task.priority < 5,
+						'date':task.priority>0}"
+						class="section detail-priority"
 						ng-click="editPriority($event, task)">
 						<div>
 							<span :class="{'icon-task-star-high':task.priority>5,'icon-task-star-medium':task.priority==5,'icon-task-star-low':task.priority > 0 && task.priority < 5}"
@@ -161,11 +163,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</a>
 						</div>
 					</li>
-					<li class="section detail-complete"
-						ng-class="{'editing':route.parameter=='percent', 'date':task.complete>0}"
+					<li :class="{'editing': edit=='percent', 'date': task.complete>0}"
+						class="section detail-complete"
 						ng-click="editPercent($event, task)">
 						<div>
-							<span class="icon icon-percent" ng-class="{'icon-percent-active':task.complete>0}" />
+							<span :class="{'icon-percent-active': task.complete>0}" class="icon icon-percent" />
 							<span class="section-title">
 								<!-- <text>{{ task.complete | percentDetails}}</text> -->
 							</span>
@@ -191,16 +193,16 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</a>
 						</div>
 					</li>
-					<li class="section detail-categories" ng-class="{'active':task.cats.length>0}">
+					<li :class="{'active': task.categories.length>0}" class="section detail-categories">
 						<div>
-							<span class="icon icon-tag detail-categories" ng-class="{'icon-tag-active':task.cats.length>0}" />
+							<span :class="{'icon-tag-active': task.categories.length>0}" class="icon icon-tag detail-categories" />
 							<!-- Edit line 1080 to show placeholder -->
 							<div class="detail-categories-container">
 								<!-- <ui-select
 									multiple
 									tagging
 									tagging-label="<?php p($l->t('(New category)')); ?>"
-									ng-model="task.cats"
+									ng-model="task.categories"
 									theme="select2"
 									ng-disabled="!task.calendar.writable"
 									style="width: 100%;"
@@ -219,7 +221,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							<div class="note-body selectable"
 								ng-click="editNote($event, task)"
 								oc-click-focus="{selector: '.expandingArea textarea', timeout: 0}">
-								<div class="content-fakeable" ng-class="{'editing':route.parameter=='note'}">
+								<div :class="{'editing': edit=='note'}" class="content-fakeable">
 									<div class="display-view" ng-bind-html="task.note | linky:'_blank':{rel: 'nofollow'}" />
 									<div class="edit-view">
 										<div class="expandingArea active">
