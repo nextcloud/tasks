@@ -23,7 +23,7 @@ $('#content.app-tasks').attr('ng-app', 'Tasks');
 $('#content.app-tasks').attr('ng-cloak');
 $('#content.app-tasks').attr('ng-controller', 'AppController');
 $('#content.app-tasks').attr('ng-click', 'closeAll($event)');
-$('#content.app-tasks').attr('class', 'handler');
+$('#content.app-tasks').addClass('handler');
 
 angular.module('Tasks', ['ngRoute', 'ngAnimate', 'ui.select', 'ngSanitize', 'dndLists']).config([
 	'$provide', '$routeProvider', '$interpolateProvider', '$httpProvider',
