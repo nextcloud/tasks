@@ -19,7 +19,7 @@ OC.L10N.register(
     "seconds" : "sekondes",
     "a minute" : "’n minuut",
     "%d minutes" : "%d minute",
-    "an hour" : "’n uur",
+    "an hour" : "’n uur",
     "%d hours" : "%d uur",
     "a day" : "’n dag",
     "%d days" : "%d dae",
