@@ -43,8 +43,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			</a>
 			<a class="icon task-separator" />
 			<a class="task-star" @click="toggleStarred(task.uri)">
-				<span :class="{'icon-task-star-high':task.priority > 5, 'icon-task-star-medium':task.priority == 5,
-					'icon-task-star-low':task.priority > 0 && task.priority < 5}" class="icon icon-task-star right large reactive" />
+				<span :class="{'icon-task-star-low': task.priority > 5, 'icon-task-star-medium': task.priority == 5,
+					'icon-task-star-high': task.priority > 0 && task.priority < 5}" class="icon icon-task-star right large reactive" />
 			</a>
 			<a v-show="task.calendar.writable"
 				class="task-addsubtask add-subtask">

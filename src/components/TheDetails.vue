@@ -20,8 +20,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<div ng-click="endEdit($event)"
-		class="content-wrapper">
+	<div class="content-wrapper">
 		<div v-if="task!=undefined"
 			:class="{'disabled': !task.calendar.writable}"
 			class="flex-container">
@@ -34,31 +33,35 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<span :class="{'icon-checkmark': task.completed, 'disabled': !task.calendar.writable}" class="icon detail-checkbox" />
 				</a>
 				<a class="star reactive" @click="toggleStarred(task.uri)">
-					<span :class="{'icon-task-star-high': task.priority>5, 'icon-task-star-medium':task.priority==5, 'icon-task-star-low':task.priority > 0 && task.priority < 5, 'disabled': !task.calendar.writable}"
+					<span :class="{'icon-task-star-low': task.priority>5, 'icon-task-star-medium': task.priority==5,
+						'icon-task-star-high': task.priority > 0 && task.priority < 5, 'disabled': !task.calendar.writable}"
 						class="icon icon-task-star" />
 				</a>
-				<div :class="{'strike-through': task.completed}"
-					class="title-text"
-					ng-click="editName($event, task)"
-					oc-click-focus="{selector: '#editName', timeout: 0}">
-					{{ task.summary }}
-				</div>
-				<div class="expandable-container">
-					<div class="expandingArea active">
-						<pre><span>{{ task.summary }}</span><br></pre>
-						<textarea id="editName"
-							maxlength="200"
-							ng-model="task.summary"
-							ng-keydown="endName($event)"
-							ng-change="triggerUpdate(task)" />
+				<div v-click-outside="() => endEditing('name')">
+					<div :class="{'strike-through': task.completed}"
+						class="title-text"
+						oc-click-focus="{selector: '#editName', timeout: 0}"
+						@click="editProperty('name')">
+						{{ task.summary }}
+					</div>
+					<div class="expandable-container">
+						<div class="expandingArea active">
+							<pre><span>{{ task.summary }}</span><br></pre>
+							<textarea id="editName"
+								maxlength="200"
+								ng-model="task.summary"
+								ng-keydown="endName($event)"
+								ng-change="triggerUpdate(task)" />
+						</div>
 					</div>
 				</div>
 			</div>
 			<div class="body">
 				<ul class="sections">
-					<li :class="{'date': valid(task.start), 'editing': edit=='startdate', 'high': overdue(task.start)}"
+					<li v-click-outside="() => endEditing('start')"
+						:class="{'date': valid(task.start), 'editing': edit=='start', 'high': overdue(task.start)}"
 						class="section detail-start"
-						ng-click="editStart($event, task)">
+						@click="editProperty('start')">
 						<div>
 							<span :class="{'icon-calendar-due': valid(task.start), 'icon-calendar-overdue': overdue(task.start)}"
 								class="icon icon-calendar" />
@@ -88,9 +91,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</a>
 						</div>
 					</li>
-					<li :class="{'date': valid(task.due), 'editing': edit=='duedate', 'high': overdue(task.due)}"
+					<li v-click-outside="() => endEditing('due')"
+						:class="{'date': valid(task.due), 'editing': edit=='due', 'high': overdue(task.due)}"
 						class="section detail-date"
-						ng-click="editDueDate($event, task)">
+						@click="editProperty('due')">
 						<div>
 							<span :class="{'icon-calendar-due': valid(task.due), 'icon-calendar-overdue': overdue(task.due)}"
 								class="icon icon-calendar" />
@@ -130,17 +134,17 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							<span class="section-title">{{ t('tasks', 'All day') }}</span>
 						</div>
 					</li>
-					<li :class="{'editing': edit=='priority',
-						'high': task.priority>5, 'medium':task.priority==5, 'low':task.priority > 0 && task.priority < 5,
-						'date':task.priority>0}"
+					<li v-click-outside="() => endEditing('priority')"
+						:class="{'editing': edit=='priority',
+						'low': task.priority>5, 'medium': task.priority==5, 'high': task.priority > 0 && task.priority < 5,
+						'date': task.priority>0}"
 						class="section detail-priority"
-						ng-click="editPriority($event, task)">
+						@click="editProperty('priority')">
 						<div>
-							<span :class="{'icon-task-star-high':task.priority>5,'icon-task-star-medium':task.priority==5,'icon-task-star-low':task.priority > 0 && task.priority < 5}"
+							<span :class="{'icon-task-star-low': task.priority>5, 'icon-task-star-medium': task.priority==5,
+								'icon-task-star-high': task.priority > 0 && task.priority < 5}"
 								class="icon icon-task-star" />
-							<span class="section-title">
-								<!-- <text>{{ task.priority | priorityDetails}}</text> -->
-							</span>
+							<span class="section-title">{{ task.priority | priority}}</span>
 							<div class="section-edit">
 								<input class="priority-input"
 									type="text"
@@ -158,19 +162,18 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							<a>
 								<span class="icon detail-save icon-checkmark-color end-edit reactive" />
 							</a>
-							<a class="end-edit" ng-click="deletePriority(task)">
+							<a class="end-edit" @click="deletePriority()">
 								<span class="icon icon-trash reactive" />
 							</a>
 						</div>
 					</li>
-					<li :class="{'editing': edit=='percent', 'date': task.complete>0}"
+					<li v-click-outside="() => endEditing('percent')"
+						:class="{'editing': edit=='percent', 'date': task.complete>0}"
 						class="section detail-complete"
-						ng-click="editPercent($event, task)">
+						@click="editProperty('percent')">
 						<div>
 							<span :class="{'icon-percent-active': task.complete>0}" class="icon icon-percent" />
-							<span class="section-title">
-								<!-- <text>{{ task.complete | percentDetails}}</text> -->
-							</span>
+							<span class="section-title">{{ task.complete | percent}}</span>
 							<div class="section-edit">
 								<input class="percent-input"
 									type="text"
@@ -188,7 +191,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							<a>
 								<span class="icon detail-save icon-checkmark-color end-edit reactive" />
 							</a>
-							<a class="end-edit" ng-click="deletePercent(task)">
+							<a class="end-edit" @click="deletePercent()">
 								<span class="icon icon-trash reactive" />
 							</a>
 						</div>
@@ -218,9 +221,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					</li>
 					<li class="section detail-note">
 						<div class="note">
-							<div class="note-body selectable"
-								ng-click="editNote($event, task)"
-								oc-click-focus="{selector: '.expandingArea textarea', timeout: 0}">
+							<div v-click-outside="() => endEditing('note')"
+								class="note-body selectable"
+								oc-click-focus="{selector: '.expandingArea textarea', timeout: 0}"
+								@click="editProperty('note')">
 								<div :class="{'editing': edit=='note'}" class="content-fakeable">
 									<div class="display-view" ng-bind-html="task.note | linky:'_blank':{rel: 'nofollow'}" />
 									<div class="edit-view">
@@ -256,8 +260,14 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { valid, overdue } from '../store/storeHelper'
 
+import clickOutside from 'vue-click-outside'
+
 export default {
 	components: {
+		clickOutside
+	},
+	directives: {
+		clickOutside
 	},
 	filters: {
 		startDate: function(date) {
@@ -345,6 +355,20 @@ export default {
 			} else {
 				return t('tasks', 'Set due date')
 			}
+		},
+		priority: function(priority) {
+			if (+priority === 0) {
+				return t('tasks', 'No priority assigned')
+			} else if (+priority > 0 && +priority < 5) {
+				return t('tasks', 'Priority %s: high').replace('%s', priority)
+			} else if (+priority === 5) {
+				return t('tasks', 'Priority %s: medium').replace('%s', priority)
+			} else if (+priority > 5 && +priority < 10) {
+				return t('tasks', 'Priority %s: low').replace('%s', priority)
+			}
+		},
+		percent: function(percent) {
+			return t('tasks', '%s %% completed').replace('%s', percent).replace('%%', '%')
 		}
 	},
 	data: function() {
@@ -389,7 +413,25 @@ export default {
 			/**
 			 * Checks if a date is valid
 			 */
-			valid: valid
+			valid: valid,
+
+			editProperty: function(type) {
+				if (this.task.calendar.writable) {
+					this.edit = type
+				}
+			},
+
+			endEditing: function(type) {
+				if (this.edit == type) {
+					this.edit = ''
+				}
+			},
+
+			deletePriority: function() {
+			},
+
+			deletePercent: function() {
+			}
 		}
 	)
 }
