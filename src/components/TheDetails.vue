@@ -147,14 +147,16 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							<span class="section-title">{{ task.priority | priority}}</span>
 							<div class="section-edit">
 								<input class="priority-input"
-									type="text"
+									type="number"
+									min="0"
+									max="9"
 									ng-model="task.priority"
 									ng-change="triggerUpdate(task)">
 								<input type="range"
-									ng-model="task.priority"
 									min="0"
 									max="9"
 									step="1"
+									ng-model="task.priority"
 									ng-change="triggerUpdate(task)">
 							</div>
 						</div>
@@ -176,14 +178,16 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							<span class="section-title">{{ task.complete | percent}}</span>
 							<div class="section-edit">
 								<input class="percent-input"
-									type="text"
+									type="number"
+									min="0"
+									max="100"
 									ng-model="task.complete"
 									ng-change="setPercentComplete(task, task.complete)">
 								<input type="range"
-									ng-model="task.complete"
 									min="0"
 									max="100"
 									step="1"
+									ng-model="task.complete"
 									ng-change="setPercentComplete(task, task.complete)">
 							</div>
 						</div>
