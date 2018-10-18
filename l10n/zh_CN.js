@@ -84,6 +84,7 @@ OC.L10N.register(
     "All" : "全部",
     "Current" : "当前",
     "Completed" : "完成",
+    "The Tasks app for Nextcloud" : "Nextcloud 任务应用",
     "Delete" : "删除",
     "Cancel" : "取消",
     "Edit" : "编辑",
