@@ -24,7 +24,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		<div v-if="task!=undefined"
 			:class="{'disabled': !task.calendar.writable}"
 			class="flex-container">
-			<div :class="{'editing': edit=='name'}" class="title">
+			<div :class="{'editing': edit=='summary'}" class="title">
 				<a :aria-checked="task.completed"
 					:aria-label="t('tasks', 'Task is completed')"
 					class="checkbox reactive"
@@ -37,32 +37,31 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						'icon-task-star-high': task.priority > 0 && task.priority < 5, 'disabled': !task.calendar.writable}"
 						class="icon icon-task-star" />
 				</a>
-				<div v-click-outside="() => endEditing('name')">
+				<div v-click-outside="() => finishEditing('summary')">
 					<div :class="{'strike-through': task.completed}"
 						class="title-text"
-						oc-click-focus="{selector: '#editName', timeout: 0}"
-						@click="editProperty('name')">
+						oc-click-focus="{selector: '#editSummary', timeout: 0}"
+						@click="editProperty('summary')">
 						{{ task.summary }}
 					</div>
 					<div class="expandable-container">
 						<div class="expandingArea active">
-							<pre><span>{{ task.summary }}</span><br></pre>
-							<textarea id="editName"
+							<pre><span>{{ tmpTask.summary }}</span><br></pre>
+							<textarea id="editSummary"
+								v-model="tmpTask.summary"
 								maxlength="200"
-								ng-model="task.summary"
-								ng-keydown="endName($event)"
-								ng-change="triggerUpdate(task)" />
+								@keyup.27="cancelEditing('summary')"
+								@keydown.enter.prevent="finishEditing('summary')" />
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="body">
 				<ul class="sections">
-					<li v-click-outside="() => endEditing('start')"
-						:class="{'date': valid(task.start), 'editing': edit=='start', 'high': overdue(task.start)}"
-						class="section detail-start"
-						@click="editProperty('start')">
-						<div>
+					<li :class="{'date': valid(task.start), 'editing': edit=='start', 'high': overdue(task.start)}"
+						class="section detail-start">
+						<div v-click-outside="() => finishEditing('start')"
+							@click="editProperty('start')">
 							<span :class="{'icon-calendar-due': valid(task.start), 'icon-calendar-overdue': overdue(task.start)}"
 								class="icon icon-calendar" />
 							<span class="section-title">{{ task.start | startDate }}</span>
@@ -86,16 +85,15 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							<a>
 								<span class="icon detail-save icon-checkmark-color end-edit reactive" />
 							</a>
-							<a class="end-edit" @click="deleteStartDate(task.uri)">
+							<a class="end-edit" @click="setProperty('start', '')">
 								<span class="icon icon-trash reactive" />
 							</a>
 						</div>
 					</li>
-					<li v-click-outside="() => endEditing('due')"
-						:class="{'date': valid(task.due), 'editing': edit=='due', 'high': overdue(task.due)}"
-						class="section detail-date"
-						@click="editProperty('due')">
-						<div>
+					<li :class="{'date': valid(task.due), 'editing': edit=='due', 'high': overdue(task.due)}"
+						class="section detail-date">
+						<div v-click-outside="() => finishEditing('due')"
+							@click="editProperty('due')">
 							<span :class="{'icon-calendar-due': valid(task.due), 'icon-calendar-overdue': overdue(task.due)}"
 								class="icon icon-calendar" />
 							<span class="section-title">{{ task.due | dueDate }}</span>
@@ -119,7 +117,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							<a>
 								<span class="icon detail-save icon-checkmark-color end-edit reactive" />
 							</a>
-							<a class="end-edit" @click="deleteDueDate(task.uri)">
+							<a class="end-edit" @click="setProperty('due', '')">
 								<span class="icon icon-trash reactive" />
 							</a>
 						</div>
@@ -134,68 +132,69 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							<span class="section-title">{{ t('tasks', 'All day') }}</span>
 						</div>
 					</li>
-					<li v-click-outside="() => endEditing('priority')"
-						:class="{'editing': edit=='priority',
-						'low': task.priority>5, 'medium': task.priority==5, 'high': task.priority > 0 && task.priority < 5,
-						'date': task.priority>0}"
-						class="section detail-priority"
-						@click="editProperty('priority')">
-						<div>
+					<li :class="{'editing': edit=='priority',
+							'low': task.priority>5, 'medium': task.priority==5, 'high': task.priority > 0 && task.priority < 5,
+							'date': task.priority>0}"
+						class="section detail-priority">
+						<div v-click-outside="() => finishEditing('priority')"
+							@click="editProperty('priority')">
 							<span :class="{'icon-task-star-low': task.priority>5, 'icon-task-star-medium': task.priority==5,
 								'icon-task-star-high': task.priority > 0 && task.priority < 5}"
 								class="icon icon-task-star" />
-							<span class="section-title">{{ task.priority | priority}}</span>
+							<span class="section-title">{{ task.priority | priority }}</span>
 							<div class="section-edit">
-								<input class="priority-input"
+								<input v-model="tmpTask.priority"
+									class="priority-input"
 									type="number"
 									min="0"
 									max="9"
-									ng-model="task.priority"
-									ng-change="triggerUpdate(task)">
-								<input type="range"
+									@keyup.27="cancelEditing('priority')"
+									@keydown.enter.prevent="finishEditing('priority')">
+								<input v-model="tmpTask.priority"
+									type="range"
 									min="0"
 									max="9"
 									step="1"
-									ng-model="task.priority"
-									ng-change="triggerUpdate(task)">
+									@change="finishEditing('priority')">
 							</div>
 						</div>
 						<div class="utils">
 							<a>
 								<span class="icon detail-save icon-checkmark-color end-edit reactive" />
 							</a>
-							<a class="end-edit" @click="deletePriority()">
+							<a class="end-edit" @click="setProperty('priority', 0)">
 								<span class="icon icon-trash reactive" />
 							</a>
 						</div>
 					</li>
-					<li v-click-outside="() => endEditing('percent')"
-						:class="{'editing': edit=='percent', 'date': task.complete>0}"
-						class="section detail-complete"
-						@click="editProperty('percent')">
-						<div>
+					<li :class="{'editing': edit=='complete', 'date': task.complete>0}"
+						class="section detail-complete">
+						<div v-click-outside="() => finishEditing('complete')"
+							@click="editProperty('complete')">
 							<span :class="{'icon-percent-active': task.complete>0}" class="icon icon-percent" />
-							<span class="section-title">{{ task.complete | percent}}</span>
+							<span class="section-title">{{ task.complete | complete }}</span>
 							<div class="section-edit">
-								<input class="percent-input"
+								<input v-model="tmpTask.complete"
+									class="percent-input"
 									type="number"
 									min="0"
 									max="100"
-									ng-model="task.complete"
-									ng-change="setPercentComplete(task, task.complete)">
-								<input type="range"
+									@keyup.27="cancelEditing('complete')"
+									@keydown.enter.prevent="finishEditing('complete')"
+									@keyup="setPropertyTemporarily('complete', tmpTask.complete)">
+								<input v-model="tmpTask.complete"
+									type="range"
 									min="0"
 									max="100"
 									step="1"
-									ng-model="task.complete"
-									ng-change="setPercentComplete(task, task.complete)">
+									@change="setPropertyTemporarily('complete', tmpTask.complete)">
 							</div>
 						</div>
 						<div class="utils">
 							<a>
 								<span class="icon detail-save icon-checkmark-color end-edit reactive" />
 							</a>
-							<a class="end-edit" @click="deletePercent()">
+							<a class="end-edit" @click="setProperty('complete', 0)">
 								<span class="icon icon-trash reactive" />
 							</a>
 						</div>
@@ -225,7 +224,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					</li>
 					<li class="section detail-note">
 						<div class="note">
-							<div v-click-outside="() => endEditing('note')"
+							<div v-click-outside="() => finishEditing('note')"
 								class="note-body selectable"
 								oc-click-focus="{selector: '.expandingArea textarea', timeout: 0}"
 								@click="editProperty('note')">
@@ -371,13 +370,20 @@ export default {
 				return t('tasks', 'Priority %s: low').replace('%s', priority)
 			}
 		},
-		percent: function(percent) {
-			return t('tasks', '%s %% completed').replace('%s', percent).replace('%%', '%')
+		complete: function(complete) {
+			return t('tasks', '%s %% completed').replace('%s', complete).replace('%%', '%')
 		}
 	},
 	data: function() {
 		return {
-			edit: ''
+			edit: '',
+			tmpTask: {
+				summary: '',
+				start: '',
+				due: '',
+				priority: '',
+				complete: ''
+			}
 		}
 	},
 	computed: Object.assign({
@@ -420,21 +426,31 @@ export default {
 			valid: valid,
 
 			editProperty: function(type) {
-				if (this.task.calendar.writable) {
+				if (this.task.calendar.writable && this.edit !== type) {
 					this.edit = type
+					this.tmpTask[type] = this.task[type]
 				}
 			},
 
-			endEditing: function(type) {
-				if (this.edit == type) {
+			finishEditing: function(type) {
+				if (this.edit === type) {
+					this.setProperty(type, this.tmpTask[type])
 					this.edit = ''
 				}
 			},
 
-			deletePriority: function() {
+			cancelEditing: function(type) {
+				this.edit = ''
+				this.tmpTask[type] = this.task[type]
 			},
 
-			deletePercent: function() {
+			setProperty: function(type, value) {
+				console.log('Set property "' + type + '" to "' + value)
+				this.edit = ''
+			},
+
+			setPropertyTemporarily: function(type, value) {
+				console.log('Set property "' + type + '" temporarily to "' + value)
 			}
 		}
 	)
