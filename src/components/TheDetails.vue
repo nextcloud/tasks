@@ -229,11 +229,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 								oc-click-focus="{selector: '.expandingArea textarea', timeout: 0}"
 								@click="editProperty('note')">
 								<div :class="{'editing': edit=='note'}" class="content-fakeable">
-									<div class="display-view" ng-bind-html="task.note | linky:'_blank':{rel: 'nofollow'}" />
+									<div class="display-view">{{ task.note }}</div>
 									<div class="edit-view">
 										<div class="expandingArea active">
-											<pre><span>{{ task.note }}</span><br><br></pre>
-											<textarea ng-model="task.note" ng-change="triggerUpdate(task)" />
+											<pre><span>{{ tmpTask.note }}</span><br><br></pre>
+											<textarea v-model="tmpTask.note" @change="setPropertyTemporarily('note', tmpTask.note)" />
 										</div>
 									</div>
 								</div>
@@ -382,7 +382,8 @@ export default {
 				start: '',
 				due: '',
 				priority: '',
-				complete: ''
+				complete: '',
+				note: ''
 			}
 		}
 	},
