@@ -44,9 +44,6 @@ module.exports = {
 	},
 	plugins: [new VueLoaderPlugin(), new StyleLintPlugin()],
 	resolve: {
-		alias: {
-			vue$: 'vue/dist/vue.esm.js'
-		},
 		extensions: ['*', '.js', '.vue', '.json']
 	}
 };
