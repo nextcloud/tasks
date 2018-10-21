@@ -511,6 +511,7 @@ ol[dnd-list] {
 	&:hover,
 	&.active {
 		background-color: $gray_easy;
+		box-shadow: inset 4px 0 var(--color-primary);
 	}
 
 	&.attachment .icon.icon-note {
