@@ -43,8 +43,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			</a>
 			<a class="icon task-separator" />
 			<a class="task-star" @click="toggleStarred(task.uri)">
-				<span :class="{'icon-task-star-low': task.priority > 5, 'icon-task-star-medium': task.priority == 5,
-					'icon-task-star-high': task.priority > 0 && task.priority < 5}" class="icon icon-task-star right large reactive" />
+				<span :class="[iconStar]" class="icon icon-task-star right large reactive" />
 			</a>
 			<a v-show="task.calendar.writable"
 				class="task-addsubtask add-subtask">
@@ -156,6 +155,17 @@ export default {
 			showSubtaskInput: false,
 			newTaskName: '',
 			isAddingTask: false
+		}
+	},
+	computed: {
+		iconStar: function() {
+			if (this.task.priority > 5) {
+				return 'icon-task-star-low'
+			} else if (this.task.priority === 5) {
+				return 'icon-task-star-medium'
+			} else if (this.task.priority > 0 && this.task.priority < 5) {
+				return 'icon-task-star-high'
+			}
 		}
 	},
 	methods: Object.assign(

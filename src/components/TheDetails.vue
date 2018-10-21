@@ -33,8 +33,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<span :class="{'icon-checkmark': task.completed, 'disabled': !task.calendar.writable}" class="icon detail-checkbox" />
 				</a>
 				<a class="star reactive" @click="toggleStarred(task.uri)">
-					<span :class="{'icon-task-star-low': task.priority>5, 'icon-task-star-medium': task.priority==5,
-						'icon-task-star-high': task.priority > 0 && task.priority < 5, 'disabled': !task.calendar.writable}"
+					<span :class="[{'disabled': !task.calendar.writable}, iconStar]"
 						class="icon icon-task-star" />
 				</a>
 				<div v-click-outside="() => finishEditing('summary')">
@@ -132,14 +131,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							<span class="section-title">{{ t('tasks', 'All day') }}</span>
 						</div>
 					</li>
-					<li :class="{'editing': edit=='priority',
-							'low': task.priority>5, 'medium': task.priority==5, 'high': task.priority > 0 && task.priority < 5,
-							'date': task.priority>0}"
+					<li :class="[{'editing': edit=='priority', 'date': task.priority>0}, priorityString]"
 						class="section detail-priority">
 						<div v-click-outside="() => finishEditing('priority')"
 							@click="editProperty('priority')">
-							<span :class="{'icon-task-star-low': task.priority>5, 'icon-task-star-medium': task.priority==5,
-								'icon-task-star-high': task.priority > 0 && task.priority < 5}"
+							<span :class="[iconStar]"
 								class="icon icon-task-star" />
 							<span class="section-title">{{ task.priority | priority }}</span>
 							<div class="section-edit">
@@ -390,6 +386,20 @@ export default {
 	computed: Object.assign({
 		isAllDayPossible: function() {
 			return this.task.calendar.writable && (this.task.due || this.task.start)
+		},
+		priorityString: function() {
+			if (this.task.priority > 5) {
+				return 'low'
+			} else if (this.task.priority === 5) {
+				return 'medium'
+			} else if (this.task.priority > 0 && this.task.priority < 5) {
+				return 'high'
+			}
+		},
+		iconStar: function() {
+			if (this.task.priority) {
+				return 'icon-task-star-' + this.priorityString
+			}
 		}
 	},
 	mapState({
