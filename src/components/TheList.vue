@@ -39,7 +39,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			</a>
 			<div v-if="collection.id!='completed'" class="app-navigation-entry-utils">
 				<ul>
-					<li class="app-navigation-entry-utils-counter">{{ getCollectionCount(collection.id) | counterFormatter }}</li>
+					<li class="app-navigation-entry-utils-counter">{{ collectionCount(collection.id) | counterFormatter }}</li>
 				</ul>
 			</div>
 		</router-link>
@@ -63,7 +63,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			</a>
 			<div class="app-navigation-entry-utils">
 				<ul>
-					<li class="app-navigation-entry-utils-counter">{{ getCalendarCount(calendar.uri) | counterFormatter }}</li>
+					<li class="app-navigation-entry-utils-counter">{{ calendarCount(calendar.uri) | counterFormatter }}</li>
 					<popover v-show="calendar.writable" tag="li" class="app-navigation-entry-utils-menu-button">
 						<ul>
 							<li>
@@ -210,14 +210,14 @@ export default {
 	},
 	computed: Object.assign({},
 		mapState({
-			collections: state => state.collections.collections,
-			calendars: state => state.calendars.calendars
+			collections: state => state.collections.collections
 		}),
-		mapGetters([
-			'getCollectionCount',
-			'getCalendarCount',
-			'isCalendarNameUsed'
-		])
+		mapGetters({
+			calendars: 'getSortedCalendars',
+			collectionCount: 'getCollectionCount',
+			calendarCount: 'getCalendarCount',
+			isCalendarNameUsed: 'isCalendarNameUsed'
+		})
 	),
 	methods: {
 		hideCollection: function(collection) {
@@ -227,7 +227,7 @@ export default {
 			case 1:
 				return false
 			case 2:
-				return this.getCollectionCount(collection.id) < 1
+				return this.collectionCount(collection.id) < 1
 			}
 		},
 		showTooltip: function(target) {

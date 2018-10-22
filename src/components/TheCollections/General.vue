@@ -108,9 +108,8 @@ export default {
 		 * @param {String} collectionId the Id of the collection in question
 		 */
 		filteredCalendars: function() {
-			return Object.values(this.$store.state.calendars.calendars)
-				.filter(calendar => {
-					return this.$store.getters.getCalendarCountByCollectionId(calendar.uri, this.$route.params.collectionId)
+			return this.calendars.filter(calendar => {
+					return this.calendarCount(calendar.uri, this.$route.params.collectionId)
 				})
 		},
 
@@ -129,7 +128,9 @@ export default {
 	},
 	mapGetters({
 		tasks: 'getTasksByCalendarId',
-		calendar: 'getDefaultCalendar'
+		calendar: 'getDefaultCalendar',
+		calendars: 'getSortedCalendars',
+		calendarCount: 'getCalendarCountByCollectionId'
 	})
 	),
 	methods: {
