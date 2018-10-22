@@ -346,6 +346,33 @@ export default ({
 			writable: true,
 			url: '/nextcloud/remote.php/dav/calendars/raimund.schluessler/test-4',
 			tasks: []
+		},
+		'a-list': {
+			uri: 'a-list',
+			displayname: 'A list',
+			color: '#dd2245',
+			writable: true,
+			url: '/nextcloud/remote.php/dav/calendars/raimund.schluessler/a-list',
+			tasks: [
+				{
+					calendar: {
+						writable: true,
+						color: '#dd2245'
+					},
+					uid: 'ydl92pr8mn',
+					uri: 'ydl92pr8mn.ics',
+					// construct dates for today past, date only
+					due: '',
+					start: '',
+					summary: 'A list - Task 1',
+					complete: 0,
+					completed: false,
+					priority: 0,
+					categories: [],
+					note: 'Migrate this app to vue.',
+					hideSubtasks: false
+				}
+			]
 		}
 	}
 })
