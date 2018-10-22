@@ -35,6 +35,17 @@ const state = {
 const getters = {
 
 	/**
+	 * Returns the calendars sorted alphabetically
+	 */
+	getSortedCalendars: state => {
+		return Object.values(state.calendars).sort(function(cal1, cal2) {
+			var n1 = cal1.displayname.toUpperCase()
+			var n2 = cal2.displayname.toUpperCase()
+			return (n1 < n2) ? -1 : (n1 > n2) ? 1 : 0
+		})
+	},
+
+	/**
 	 * Returns the count of tasks in a calendar
 	 *
 	 * Tasks have to be
