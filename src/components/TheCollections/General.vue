@@ -21,7 +21,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div>
-		<div v-show="collectionId !== 'completed'"
+		<div v-show="collectionId !== 'completed' && calendar.writable"
 			id="add-task"
 			class="add-task">
 			<form name="addTaskForm" @submit="addTask">
