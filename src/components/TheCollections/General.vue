@@ -109,8 +109,8 @@ export default {
 		 */
 		filteredCalendars: function() {
 			return this.calendars.filter(calendar => {
-					return this.calendarCount(calendar.uri, this.$route.params.collectionId)
-				})
+				return this.calendarCount(calendar.uri, this.$route.params.collectionId)
+			})
 		},
 
 		inputString: function() {
