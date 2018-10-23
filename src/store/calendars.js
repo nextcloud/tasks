@@ -122,8 +122,9 @@ const getters = {
 	 * For now, this is the first calendar in the list.
 	 * Calendar order might change randomly.
 	 */
-	getDefaultCalendar: (state) => {
-		return Object.values(state.calendars)[0]
+	getDefaultCalendar: (state, getters, rootState) => {
+		var calendar = state.calendars[rootState.settings.settings.defaultCalendarUri]
+		return calendar ? calendar : getters.getSortedCalendars[0]
 	}
 }
 

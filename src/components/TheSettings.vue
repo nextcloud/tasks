@@ -28,6 +28,16 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		</div>
 		<div id="app-settings-content">
 			<ul>
+				<li>
+					<label for="defaultCalendar">{{ t('tasks', 'Default list') }}</label>
+					<select id="defaultCalendar" v-model="defaultCalendarUri">
+						<option v-for="calendar in calendars"
+							:value="calendar.uri"
+							:key="calendar.uri">
+							{{ calendar.displayname }}
+						</option>
+					</select>
+				</li>
 				<li class="headline">
 					{{ t('tasks', 'Visibility of Smart Collections') }}
 				</li>
@@ -55,7 +65,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
 	components: {
@@ -79,11 +89,22 @@ export default {
 			dayOfMonth: moment().date()
 		}
 	},
-	computed: Object.assign({},
-		mapState({
-			collections: state => state.collections.collections,
-			calendars: state => state.calendars.calendars
-		})
+	computed: Object.assign({
+		defaultCalendarUri: {
+			get() {
+				return this.$store.getters.getDefaultCalendar.uri
+			},
+			set(value) {
+				this.$store.dispatch('setSetting', { type: 'defaultCalendarUri', value: value })
+			}
+		}
+	},
+	mapState({
+		collections: state => state.collections.collections
+	}),
+	mapGetters({
+		calendars: 'getSortedCalendars'
+	})
 	),
 	methods:
 		mapActions([
