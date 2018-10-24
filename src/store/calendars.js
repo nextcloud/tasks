@@ -123,8 +123,7 @@ const getters = {
 	 * Calendar order might change randomly.
 	 */
 	getDefaultCalendar: (state, getters, rootState) => {
-		var calendar = state.calendars[rootState.settings.settings.defaultCalendarUri]
-		return calendar ? calendar : getters.getSortedCalendars[0]
+		return state.calendars[rootState.settings.settings.defaultCalendarUri] || getters.getSortedCalendars[0]
 	}
 }
 
