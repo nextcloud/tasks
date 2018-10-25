@@ -60,24 +60,19 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<li :class="{'date': valid(task.start), 'editing': edit=='start', 'high': overdue(task.start)}"
 						class="section detail-start">
 						<div v-click-outside="() => finishEditing('start')"
-							@click="editProperty('start')">
+							@click="editProperty('start', $event)">
 							<span :class="{'icon-calendar-due': valid(task.start), 'icon-calendar-overdue': overdue(task.start)}"
 								class="icon icon-calendar" />
 							<span class="section-title">{{ task.start | startDate }}</span>
 							<div class="section-edit">
-								<!-- <input class="datepicker-input medium"
-									type="text"
-									key-value=""
-									placeholder="dd.mm.yyyy"
-									value="{{ task.start | dateTaskList }}"
-									datepicker="start">
-								<input class="timepicker-input medium"
-									ng-hide="task.allDay"
-									type="text"
-									key-value=""
-									placeholder="hh:mm"
-									value="{{ task.start | timeTaskList }}"
-									timepicker="start"> -->
+								<datetime-picker :value="startDate" :lang="lang"
+									:format="dateFormat" :clearable="false" :first-day-of-week="firstDay"
+									:type="'date'" :placeholder="t('tasks', 'Set start date')"
+									class="date" @change="setStartDate" />
+								<datetime-picker :value="startDate" :lang="lang"
+									:format="timeFormat" :clearable="false" :time-picker-options="timePickerOptions"
+									:type="'time'" :placeholder="t('tasks', 'Set start time')"
+									class="time" @change="setStartTime" />
 							</div>
 						</div>
 						<div class="utils">
@@ -92,24 +87,19 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<li :class="{'date': valid(task.due), 'editing': edit=='due', 'high': overdue(task.due)}"
 						class="section detail-date">
 						<div v-click-outside="() => finishEditing('due')"
-							@click="editProperty('due')">
+							@click="editProperty('due', $event)">
 							<span :class="{'icon-calendar-due': valid(task.due), 'icon-calendar-overdue': overdue(task.due)}"
 								class="icon icon-calendar" />
 							<span class="section-title">{{ task.due | dueDate }}</span>
 							<div class="section-edit">
-								<!-- <input class="datepicker-input medium"
-									type="text"
-									key-value=""
-									placeholder="dd.mm.yyyy"
-									value="{{ task.due | dateTaskList }}"
-									datepicker="due">
-								<input class="timepicker-input medium"
-									ng-hide="task.allDay"
-									type="text"
-									key-value=""
-									placeholder="hh:mm"
-									value="{{ task.due | timeTaskList }}"
-									timepicker="due"> -->
+								<datetime-picker :value="dueDate" :lang="lang"
+									:format="dateFormat" :clearable="false" :first-day-of-week="firstDay"
+									:type="'date'" :placeholder="t('tasks', 'Set due date')"
+									class="date" @change="setDueDate" />
+								<datetime-picker :value="dueDate" :lang="lang"
+									:format="timeFormat" :clearable="false" :time-picker-options="timePickerOptions"
+									:type="'time'" :placeholder="t('tasks', 'Set due time')"
+									class="time" @change="setDueTime" />
 							</div>
 						</div>
 						<div class="utils">
@@ -258,12 +248,14 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { valid, overdue } from '../store/storeHelper'
+import { DatetimePicker } from 'nextcloud-vue'
 
 import clickOutside from 'vue-click-outside'
 
 export default {
 	components: {
-		clickOutside
+		clickOutside,
+		DatetimePicker
 	},
 	directives: {
 		clickOutside
@@ -380,6 +372,18 @@ export default {
 				priority: '',
 				complete: '',
 				note: ''
+			},
+			firstDay: window.firstDay,		// provided by nextcloud
+			lang: {
+				days: window.dayNamesShort,		// provided by nextcloud
+				months: window.monthNamesShort	// provided by nextcloud
+			},
+			dateFormat: moment.localeData().longDateFormat('L'),
+			timeFormat: moment.localeData().longDateFormat('LT'),
+			timePickerOptions: {
+				start: '00:00',
+				step: '00:30',
+				end: '23:30'
 			}
 		}
 	},
@@ -400,6 +404,12 @@ export default {
 			if (this.task.priority) {
 				return 'icon-task-star-' + this.priorityString
 			}
+		},
+		startDate: function() {
+			return moment(this.task.start).toDate()
+		},
+		dueDate: function() {
+			return moment(this.task.due).toDate()
 		}
 	},
 	mapState({
@@ -436,7 +446,12 @@ export default {
 			 */
 			valid: valid,
 
-			editProperty: function(type) {
+			editProperty: function(type, event) {
+				// don't start to edit the property again
+				// if the confirm button of the datepicker was clicked
+				if (event && event.target.classList.contains('mx-datepicker-btn-confirm')) {
+					return
+				}
 				if (this.task.calendar.writable && this.edit !== type) {
 					this.edit = type
 					this.tmpTask[type] = this.task[type]
@@ -462,6 +477,22 @@ export default {
 
 			setPropertyTemporarily: function(type, value) {
 				console.log('Set property "' + type + '" temporarily to "' + value)
+			},
+
+			setStartDate: function(date) {
+				console.log('Set start date to ' + date)
+			},
+
+			setStartTime: function(time) {
+				console.log('Set start time to ' + time)
+			},
+
+			setDueDate: function(date) {
+				console.log('Set due date to ' + date)
+			},
+
+			setDueTime: function(time) {
+				console.log('Set due time to ' + time)
 			}
 		}
 	)

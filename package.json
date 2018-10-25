@@ -29,6 +29,7 @@
 		"babel-polyfill": "^6.26.0",
 		"ical.js": "~1.2.2",
 		"jstimezonedetect": "",
+		"nextcloud-vue": "^0.2.0",
 		"ui-select": "git+https://github.com/angular-ui/ui-select.git#v0.19.8",
 		"v-tooltip": "2.0.0-rc.33",
 		"vue": "^2.5.17",
