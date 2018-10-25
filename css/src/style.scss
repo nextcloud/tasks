@@ -966,10 +966,19 @@ ol[dnd-list] {
 
 				.section-edit {
 					display: none;
-					margin-left: 12px;
+					padding-left: 12px;
 					vertical-align: middle;
 					width: calc(100% - 80px);
 					line-height: 0;
+
+					.mx-datepicker {
+						&.date {
+							width: 59%;
+						}
+						&.time {
+							width: 40%
+						}
+					}
 				}
 
 				.detail-categories-container {
