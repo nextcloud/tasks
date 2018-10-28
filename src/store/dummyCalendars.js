@@ -44,7 +44,32 @@ export default ({
 					complete: 0,
 					completed: true,
 					priority: 1,
-					categories: ['Test 1 Category 1', 'Test 1 Category 2'],
+					categories: [
+						{
+							id: 1,
+							name: 'Test 1 Category 1'
+						},
+						{
+							id: 2,
+							name: 'Test 1 Category 2'
+						},
+						{
+							id: 3,
+							name: 'Test 1 Category 3'
+						},
+						{
+							id: 4,
+							name: 'Test 1 Category 4'
+						},
+						{
+							id: 5,
+							name: 'Test 1 Category 5'
+						},
+						{
+							id: 6,
+							name: 'Test 1 Category 6'
+						}
+					],
 					note: 'Migrate this app to vue.',
 					hideSubtasks: false,
 					allDay: false

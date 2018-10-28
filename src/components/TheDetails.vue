@@ -188,23 +188,21 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<li :class="{'active': task.categories.length>0}" class="section detail-categories">
 						<div>
 							<span :class="{'icon-tag-active': task.categories.length>0}" class="icon icon-tag detail-categories" />
-							<!-- Edit line 1080 to show placeholder -->
 							<div class="detail-categories-container">
-								<!-- <ui-select
-									multiple
-									tagging
-									tagging-label="<?php p($l->t('(New category)')); ?>"
-									ng-model="task.categories"
-									theme="select2"
-									ng-disabled="!task.calendar.writable"
-									style="width: 100%;"
-									on-remove="removeCategory($item, $model)"
-									on-select="addCategory($item, $model)">
-									<ui-select-match placeholder="<?php p($l->t('Select categories...')); ?>">{{$item}}</ui-select-match>
-									<ui-select-choices repeat="category in settingsmodel.getById('various').categories | filter:$select.search">
-									{{category}}
-									</ui-select-choices>
-								</ui-select> -->
+								<multiselect v-if="task.categories"
+									v-model="task.categories"
+									:multiple="true"
+									:searchable="true"
+									:options="task.categories"
+									:placeholder="t('tasks', 'Select categories')"
+									:taggable="true"
+									:tag-placeholder="t('tasks', 'Add this as a new category')"
+									:close-on-select="false"
+									class="multiselect-vue"
+									track-by="id"
+									label="name"
+									@input="updateCategories"
+									@tag="addCategory" />
 							</div>
 						</div>
 					</li>
@@ -248,14 +246,15 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { valid, overdue } from '../store/storeHelper'
-import { DatetimePicker } from 'nextcloud-vue'
+import { DatetimePicker, Multiselect } from 'nextcloud-vue'
 
 import clickOutside from 'vue-click-outside'
 
 export default {
 	components: {
 		clickOutside,
-		DatetimePicker
+		DatetimePicker,
+		Multiselect
 	},
 	directives: {
 		clickOutside
@@ -384,7 +383,8 @@ export default {
 				start: '00:00',
 				step: '00:30',
 				end: '23:30'
-			}
+			},
+			categories: []
 		}
 	},
 	computed: Object.assign({
@@ -493,6 +493,14 @@ export default {
 
 			setDueTime: function(time) {
 				console.log('Set due time to ' + time)
+			},
+
+			updateCategories: function(category) {
+				console.log(category)
+			},
+
+			addCategory: function(category) {
+				console.log(category)
 			}
 		}
 	)
