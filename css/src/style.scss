@@ -974,9 +974,38 @@ ol[dnd-list] {
 				}
 
 				.detail-categories-container {
-					width: calc(100% - 40px);
+					width: calc(100% - 52px);
 					display: inline-block;
 					margin-left: 12px;
+
+					.multiselect.multiselect-vue {
+						width: 100%;
+						margin: 1px -1px;
+						vertical-align: middle;
+
+						&.multiselect--active .multiselect__tags {
+							border: 1px solid var(--color-border-dark);
+						}
+
+						.multiselect__tags {
+							border: 1px solid transparent;
+
+							.multiselect__tags-wrap {
+								padding-left: 0px;
+							}
+
+							.multiselect__input {
+								padding: 0px !important;
+								font-weight: bold;
+							}
+						}
+
+						.multiselect__tag {
+							color: $blue_due;
+							background: $gray_easy;
+							font-weight: bold;
+						}
+					}
 				}
 
 				.note {
