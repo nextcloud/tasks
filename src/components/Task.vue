@@ -73,7 +73,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</div>
 				<div class="categories-list">
 					<span v-for="category in task.categories" :key="category.id" class="category">
-						<span class="category-label" :title="category.name" >{{ category.name }}</span>
+						<span :title="category.name" class="category-label">{{ category.name }}</span>
 					</span>
 				</div>
 			</div>
