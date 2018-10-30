@@ -67,15 +67,15 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			</a>
 			<a :class="{overdue: overdue(task.due)}" class="duedate">{{ task.due | formatDate }}</a>
 			<a v-show="$route.params.collectionId=='week'" class="listname">{{ task.calendar.displayname }}</a>
-			<div class="title-wrapper">
-				<span class="title">{{ task.summary }}</span>
-				<span class="categories-list">
-					<ul>
-						<li v-for="category in task.categories" :key="category.id">
-							<span>{{ category.name }}</span>
-						</li>
-					</ul>
-				</span>
+			<div class="task-info-wrapper">
+				<div class="title">
+					<span>{{ task.summary }}</span>
+				</div>
+				<div class="categories-list">
+					<span v-for="category in task.categories" :key="category.id" class="category">
+						<span class="category-label" :title="category.name" >{{ category.name }}</span>
+					</span>
+				</div>
 			</div>
 		</div>
 		<div :class="{subtaskshidden: hideSubtasks(task)}"
