@@ -516,7 +516,6 @@ ol[dnd-list] {
 
 	&.attachment .icon.icon-note {
 		display: inline-block;
-		float: right;
 	}
 
 	&.subtasks .icon.subtasks {
@@ -525,22 +524,6 @@ ol[dnd-list] {
 
 	&.completedsubtasks .icon.toggle-completed-subtasks {
 		display: inline-block;
-	}
-
-	.categories-list {
-		display: inline-block;
-		vertical-align: middle;
-
-		li {
-			background-color: $gray_easy;
-			border: 1px solid $gray_light;
-			border-radius: 2px;
-			color: $gray;
-			float: left;
-			font-weight: bold;
-			margin: -2px 4px 0;
-			padding: 2px 5px;
-		}
 	}
 
 	.icon {
@@ -574,20 +557,49 @@ ol[dnd-list] {
 		}
 	}
 
-	.title-wrapper {
+	.task-info-wrapper {
 		cursor: pointer;
 		color: $gray_dark;
-		display: block;
+		display: flex;
 		line-height: 16px;
-		margin: 0 0 0 44px;
+		margin: 0;
 		overflow: hidden;
-		padding: 9px 0;
 		position: relative;
 		text-overflow: ellipsis;
 		white-space: nowrap;
 
 		.title {
 			cursor: text;
+			display: inline-flex;
+			padding: 10px;
+		}
+
+		.categories-list {
+			padding: 8px;
+			vertical-align: middle;
+			display: inline-flex;
+			text-overflow: ellipsis;
+			flex-wrap: nowrap;
+			overflow: hidden;
+	
+			.category {
+				overflow: hidden;
+				display: inline-flex;
+				min-width: 45px;
+				background-color: $gray_easy;
+				border: 1px solid $gray_light;
+				border-radius: 2px;
+				margin: 0 4px;
+
+				.category-label {
+					color: $gray;
+					font-weight: bold;
+					padding: 2px 4px;
+					text-overflow: ellipsis;
+					overflow: hidden;
+					white-space: nowrap;
+				}
+			}
 		}
 	}
 
