@@ -264,29 +264,30 @@
 
 	li {
 		line-height: 3em;
-		position: relative;
+		display: flex;
 		height: 40px;
+
+		label {
+			white-space: nowrap;
+			padding-right: 10px;
+		}
 
 		&.headline {
 			font-weight: bold;
-			line-height: 1.5em;
+			line-height: 50px;
 		}
 
 		.label-container {
 			white-space: nowrap;
-			padding-right: 115px;
 			text-overflow: ellipsis;
-			width: 100%;
 			overflow: hidden;
-			height: 100%;
 			float: left;
 		}
 
 		select {
-			position: absolute;
-			right: 0;
-			float: right;
 			min-width: 105px;
+			text-overflow: ellipsis;
+			margin-left: auto;
 		}
 	}
 }
