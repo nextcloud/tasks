@@ -212,15 +212,17 @@ const mutations = {
 	},
 
 	/**
-	 * Rename a calendar
+	 * Change name and color of calendar
 	 * @param {Object} context the store mutations
 	 * @param {Object} data destructuring object
-	 * @param {Object} data.calendar the calendar to rename
+	 * @param {Object} data.calendar the calendar to change
 	 * @param {String} data.newName the new name of the calendar
+	 * @param {String} data.newColor the new color of the calendar
 	 */
-	renameCalendar(context, { calendar, newName }) {
+	renameCalendar(context, { calendar, newName, newColor }) {
 		calendar = state.calendars.find(search => search.id === calendar.id)
 		calendar.displayName = newName
+		calendar.color = newColor
 	},
 
 	/**
@@ -338,10 +340,10 @@ const actions = {
 					return mapDavCollectionToCalendar(calendar)
 				})
 			})
-		
+
 		// remove calendars which don't support tasks
 		calendars = calendars.filter(calendar => calendar.supportsTasks)
-		
+
 		calendars.forEach(calendar => {
 			context.commit('addCalendar', calendar)
 		})
@@ -397,16 +399,18 @@ const actions = {
 	},
 
 	/**
-	 * Rename a calendar
+	 * Change name and color of calendar
 	 * @param {Object} context the store mutations Current context
-	 * @param {Object} data.calendar the calendar to rename
+	 * @param {Object} data.calendar the calendar to change
 	 * @param {String} data.newName the new name of the calendar
+	 * @param {String} data.newColor the new color of the calendar
 	 * @returns {Promise}
 	 */
-	async renameCalendar(context, { calendar, newName }) {
+	async changeCalendar(context, { calendar, newName, newColor }) {
 		calendar.dav.displayname = newName
+		calendar.dav.color = newColor
 		return calendar.dav.update()
-			.then((response) => context.commit('renameCalendar', { calendar, newName }))
+			.then((response) => context.commit('renameCalendar', { calendar, newName, newColor }))
 			.catch((error) => { throw error })
 	},
 
