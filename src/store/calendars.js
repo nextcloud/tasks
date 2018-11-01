@@ -47,7 +47,8 @@ const calendarModel = {
 	tasks: [],
 	url: '',
 	readOnly: false,
-	dav: false
+	dav: false,
+	supportsTasks: true
 }
 
 const state = {
@@ -71,7 +72,8 @@ export function mapDavCollectionToCalendar(calendar) {
 		readOnly: false, // this currently does not work correctly. Need to get the state from the actual calendar!
 		tasks: [],
 		url: calendar.url,
-		dav: calendar
+		dav: calendar,
+		supportsTasks: calendar.components.includes('VTODO')
 	}
 }
 
@@ -336,7 +338,10 @@ const actions = {
 					return mapDavCollectionToCalendar(calendar)
 				})
 			})
-
+		
+		// remove calendars which don't support tasks
+		calendars = calendars.filter(calendar => calendar.supportsTasks)
+		
 		calendars.forEach(calendar => {
 			context.commit('addCalendar', calendar)
 		})
