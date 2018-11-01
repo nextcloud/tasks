@@ -33,7 +33,7 @@ import Vue from 'vue'
 import ICAL from 'ical.js'
 import parseIcs from '../services/parseIcs'
 import client from '../services/cdav'
-import Event from '../models/todo'
+import Task from '../models/task'
 import pLimit from 'p-limit'
 import { isTaskInList } from './storeHelper'
 
@@ -222,47 +222,47 @@ const mutations = {
 	},
 
 	/**
-	 * Append a list of events to an calendar
+	 * Append a list of tasks to a calendar
 	 * and remove duplicates
 	 *
 	 * @param {Object} state the store data
 	 * @param {Object} data destructuring object
-	 * @param {Object} data.calendar the calendar to add the event to
-	 * @param {Event[]} data.events array of events to append
+	 * @param {Object} data.calendar the calendar to add the task to
+	 * @param {Task[]} data.tasks array of tasks to append
 	 */
-	appendEventsToCalendar(state, { calendar, events }) {
+	appendTasksToCalendar(state, { calendar, tasks }) {
 		calendar = state.calendars.find(search => search === calendar)
 
 		// convert list into an array and remove duplicate
-		calendar.events = events.reduce((list, event) => {
-			if (list[event.uid]) {
-				console.debug('Duplicate event overrided', list[event.uid], event)
+		calendar.tasks = tasks.reduce((list, task) => {
+			if (list[task.uid]) {
+				console.debug('Duplicate task overridden', list[task.uid], task)
 			}
-			Vue.set(list, event.uid, event)
+			Vue.set(list, task.uid, task)
 			return list
-		}, calendar.events)
+		}, calendar.tasks)
 	},
 
 	/**
-	 * Add an event to an calendar and overwrite if duplicate uid
+	 * Add an task to an calendar and overwrite if duplicate uid
 	 *
 	 * @param {Object} state the store data
-	 * @param {Event} event the event to add
+	 * @param {Task} task the task to add
 	 */
-	addEventToCalendar(state, event) {
-		let calendar = state.calendars.find(search => search.id === event.calendar.id)
-		Vue.set(calendar.events, event.uid, event)
+	addTaskToCalendar(state, task) {
+		let calendar = state.calendars.find(search => search.id === task.calendar.id)
+		Vue.set(calendar.tasks, task.uid, task)
 	},
 
 	/**
-	 * Delete an event in a specified calendar
+	 * Delete an task in a specified calendar
 	 *
 	 * @param {Object} state the store data
-	 * @param {Event} event the event to delete
+	 * @param {Task} task the task to delete
 	 */
-	deleteEventFromCalendar(state, event) {
-		let calendar = state.calendars.find(search => search.id === event.calendar.id)
-		Vue.delete(calendar, event.uid)
+	deleteTaskFromCalendar(state, task) {
+		let calendar = state.calendars.find(search => search.id === task.calendar.id)
+		Vue.delete(calendar, task.uid)
 	},
 
 	/**
@@ -369,9 +369,9 @@ const actions = {
 	async deleteCalendar(context, calendar) {
 		return calendar.dav.delete()
 			.then((response) => {
-				// delete all the events from the store that belong to this calendar
-				Object.values(calendar.events)
-					.forEach(event => context.commit('deleteEvent', event))
+				// delete all the tasks from the store that belong to this calendar
+				Object.values(calendar.tasks)
+					.forEach(task => context.commit('deleteTask', task))
 				// then delete the calendar
 				context.commit('deleteCalendar', calendar)
 			})
@@ -406,29 +406,29 @@ const actions = {
 	},
 
 	/**
-	 * Retrieve the events of the specified calendar
+	 * Retrieve the tasks of the specified calendar
 	 * and commit the results
 	 *
 	 * @param {Object} context the store mutations
 	 * @param {Object} importDetails = { ics, calendar }
 	 * @returns {Promise}
 	 */
-	async getTodosFromCalendar(context, { calendar }) {
+	async getTasksFromCalendar(context, { calendar }) {
 		return calendar.dav.findByType('VTODO')
 			.then((response) => {
 				// We don't want to lose the url information
 				// so we need to parse one by one
-				const events = response.map(item => {
-					let event = new Event(item.data, calendar)
-					Vue.set(event, 'dav', item)
-					return event
+				const tasks = response.map(item => {
+					let task = new Task(item.data, calendar)
+					Vue.set(task, 'dav', item)
+					return task
 				})
-				context.commit('appendTodosToCalendar', { calendar, events })
-				context.commit('appendTodos', events)
-				return events
+				context.commit('appendTasksToCalendar', { calendar, tasks })
+				context.commit('appendTasks', tasks)
+				return tasks
 			})
 			.catch((error) => {
-				// unrecoverable error, if no events were loaded,
+				// unrecoverable error, if no tasks were loaded,
 				// remove the calendar
 				// TODO: create a failed calendar state and show that there was an issue?
 				context.commit('deleteCalendar', calendar)
@@ -441,8 +441,8 @@ const actions = {
 	 * @param {Object} context the store mutations
 	 * @param {Object} importDetails = { ics, calendar }
 	 */
-	async importEventsIntoCalendar(context, { ics, calendar }) {
-		const events = parseIcs(ics, calendar)
+	async importTasksIntoCalendar(context, { ics, calendar }) {
+		const tasks = parseIcs(ics, calendar)
 		context.commit('changeStage', 'importing')
 
 		// max simultaneous requests
@@ -450,19 +450,19 @@ const actions = {
 		const requests = []
 
 		// create the array of requests to send
-		events.map(async event => {
+		tasks.map(async task => {
 			// Get vcard string
 			try {
-				let vData = ICAL.stringify(event.vCard.jCal)
-				// push event to server and use limit
-				requests.push(limit(() => event.calendar.dav.createVCard(vData)
+				let vData = ICAL.stringify(task.vCard.jCal)
+				// push task to server and use limit
+				requests.push(limit(() => task.calendar.dav.createVCard(vData)
 					.then((response) => {
-						// setting the event dav property
-						Vue.set(event, 'dav', response)
+						// setting the task dav property
+						Vue.set(task, 'dav', response)
 
 						// success, update store
-						context.commit('addEvent', event)
-						context.commit('addEventToCalendar', event)
+						context.commit('addTask', task)
+						context.commit('addTaskToCalendar', task)
 						context.commit('incrementAccepted')
 					})
 					.catch((error) => {
@@ -513,37 +513,37 @@ const actions = {
 	},
 
 	/**
-	 * Move an event to the provided calendar
+	 * Move an task to the provided calendar
 	 *
 	 * @param {Object} context the store mutations
 	 * @param {Object} data destructuring object
-	 * @param {Event} data.event the event to move
-	 * @param {Object} data.calendar the calendar to move the event to
+	 * @param {Task} data.task the task to move
+	 * @param {Object} data.calendar the calendar to move the task to
 	 */
-	async moveEventToCalendar(context, { event, calendar }) {
-		// only local move if the event doesn't exists on the server
-		if (event.dav) {
+	async moveTaskToCalendar(context, { task, calendar }) {
+		// only local move if the task doesn't exist on the server
+		if (task.dav) {
 			// TODO: implement proper move
-			// await events.dav.move(calendar.dav)
+			// await tasks.dav.move(calendar.dav)
 			// 	.catch((error) => {
 			// 		console.error(error)
 			// 		OC.Notification.showTemporary(t('calendars', 'An error occurred'))
 			// 	})
-			let vData = ICAL.stringify(event.vCard.jCal)
+			let vData = ICAL.stringify(task.vCard.jCal)
 			let newDav
 			await calendar.dav.createVCard(vData)
 				.then((response) => { newDav = response })
 				.catch((error) => { throw error })
-			await event.dav.delete()
+			await task.dav.delete()
 				.catch((error) => {
 					console.error(error)
 					OC.Notification.showTemporary(t('calendars', 'An error occurred'))
 				})
-			await Vue.set(event, 'dav', newDav)
+			await Vue.set(task, 'dav', newDav)
 		}
-		await context.commit('deleteEventFromCalendar', event)
-		await context.commit('updateEventCalendar', { event, calendar })
-		await context.commit('addEventToCalendar', event)
+		await context.commit('deleteTaskFromCalendar', task)
+		await context.commit('updateTaskCalendar', { task, calendar })
+		await context.commit('addTaskToCalendar', task)
 	}
 }
 
