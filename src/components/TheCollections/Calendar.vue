@@ -20,8 +20,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<div>
-		<div v-show="calendar.writable"
+	<div v-if="calendar">
+		<div v-show="!calendar.readOnly"
 			id="add-task"
 			class="add-task">
 			<form name="addTaskForm" @submit="addTask">
@@ -129,7 +129,7 @@ export default {
 		},
 
 		inputString: function() {
-			return t('tasks', 'Add a task to "{calendar}"...', { calendar: this.calendar.displayname })
+			return t('tasks', 'Add a task to "{calendar}"...', { calendar: this.calendar.displayName })
 		},
 
 		/**
@@ -155,7 +155,7 @@ export default {
 		},
 
 		addTask: function() {
-			console.log('Add task with name ' + this.newTaskName + ' to calendar ' + this.calendar.displayname)
+			console.log('Add task with name ' + this.newTaskName + ' to calendar ' + this.calendar.displayName)
 			this.newTaskName = ''
 		}
 	}

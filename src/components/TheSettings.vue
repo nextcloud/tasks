@@ -30,11 +30,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			<ul>
 				<li>
 					<label for="defaultCalendar">{{ t('tasks', 'Default list') }}</label>
-					<select id="defaultCalendar" v-model="defaultCalendarUri">
+					<select id="defaultCalendar" v-model="defaultCalendarId">
 						<option v-for="calendar in calendars"
-							:value="calendar.uri"
-							:key="calendar.uri">
-							{{ calendar.displayname }}
+							:value="calendar.id"
+							:key="calendar.id">
+							{{ calendar.displayName }}
 						</option>
 					</select>
 				</li>
@@ -47,7 +47,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						<span :class="collection.icon" class="icon">
 							<span v-if="collection.id=='today'">{{ dayOfMonth }}</span>
 						</span>
-						<label :for="'visibilityCollection-' + collection.id" class="title">{{ collection.displayname }}</label>
+						<label :for="'visibilityCollection-' + collection.id" class="title">{{ collection.displayName }}</label>
 					</div>
 					<select :id="'visibilityCollection-' + collection.id"
 						:value="collection.show"
@@ -90,12 +90,13 @@ export default {
 		}
 	},
 	computed: Object.assign({
-		defaultCalendarUri: {
+		defaultCalendarId: {
 			get() {
-				return this.$store.getters.getDefaultCalendar.uri
+				var cal = this.$store.getters.getDefaultCalendar
+				return cal ? cal.id : ''
 			},
 			set(value) {
-				this.$store.dispatch('setSetting', { type: 'defaultCalendarUri', value: value })
+				this.$store.dispatch('setSetting', { type: 'defaultCalendarId', value: value })
 			}
 		}
 	},

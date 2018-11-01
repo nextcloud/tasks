@@ -35,7 +35,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			dnd-dragover="dragoverCollection(event, index)">
 			<a class="sprite">
 				<span v-if="collection.id=='today'" class="date">{{ dayOfMonth }}</span>
-				<span class="title">{{ collection.displayname }}</span>
+				<span class="title">{{ collection.displayName }}</span>
 			</a>
 			<div v-if="collection.id!='completed'" class="app-navigation-entry-utils">
 				<ul>
@@ -46,11 +46,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		<router-link
 			v-click-outside="() => resetView(calendar)"
 			v-for="calendar in calendars"
-			:id="'list_' + calendar.uri"
-			:calendar-id="calendar.uri"
-			:to="'/calendars/' + calendar.uri"
-			:key="calendar.uri"
-			:class="{edit: editing == calendar.uri, caldav: caldav == calendar.uri}"
+			:id="'list_' + calendar.id"
+			:calendar-id="calendar.id"
+			:to="'/calendars/' + calendar.id"
+			:key="calendar.id"
+			:class="{edit: editing == calendar.id, caldav: caldav == calendar.id}"
 			tag="li"
 			class="list with-menu editing"
 			active-class="active"
@@ -59,12 +59,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			dnd-dragover="dragoverList(event, index)">
 			<div :style="{'background-color': calendar.color}" class="app-navigation-entry-bullet" />
 			<a>
-				<span class="title">{{ calendar.displayname }}</span>
+				<span class="title">{{ calendar.displayName }}</span>
 			</a>
 			<div class="app-navigation-entry-utils">
 				<ul>
-					<li class="app-navigation-entry-utils-counter">{{ calendarCount(calendar.uri) | counterFormatter }}</li>
-					<popover v-show="calendar.writable" tag="li" class="app-navigation-entry-utils-menu-button">
+					<li class="app-navigation-entry-utils-counter">{{ calendarCount(calendar.id) | counterFormatter }}</li>
+					<popover v-show="!calendar.readOnly" tag="li" class="app-navigation-entry-utils-menu-button">
 						<ul>
 							<li>
 								<a @click="edit(calendar)">
@@ -79,12 +79,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 								</a>
 							</li>
 							<li>
-								<a :href="exportUrl(calendar)" :download="calendar.uri + '.ics'">
+								<a :href="exportUrl(calendar)" :download="calendar.id + '.ics'">
 									<span class="icon-download" />
 									<span>{{ t('tasks', 'Download') }}</span>
 								</a>
 							</li>
-							<confirmation :message="deleteMessage(calendar.displayname)" @delete-calendar="deleteCalendar(calendar, ...arguments)" />
+							<confirmation :message="deleteMessage(calendar.displayName)" @delete-calendar="deleteCalendar(calendar, ...arguments)" />
 						</ul>
 					</popover>
 				</ul>
@@ -93,14 +93,14 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<form>
 					<input v-tooltip="{
 							content: tooltipMessage,
-							show: showTooltip(calendar.uri),
+							show: showTooltip(calendar.id),
 							trigger: 'manual'
 						}"
 						v-model="newCalendarName"
 						class="edit"
 						type="text"
 						autofocus-on-insert
-						@keyup="checkName($event, calendar.uri)">
+						@keyup="checkName($event, calendar.id)">
 					<input :title="t('tasks', 'Cancel')"
 						type="cancel"
 						value=""
@@ -234,23 +234,23 @@ export default {
 			return this.tooltipTarget === target
 		},
 		edit: function(calendar) {
-			this.editing = calendar.uri
-			this.newCalendarName = calendar.displayname
+			this.editing = calendar.id
+			this.newCalendarName = calendar.displayName
 			this.selectedColor = calendar.color
 			this.nameError = false
 			this.tooltipTarget = ''
 		},
 		resetView: function(calendar) {
-			if (this.editing === calendar.uri) {
+			if (this.editing === calendar.id) {
 				this.editing = ''
 			}
-			if (this.caldav === calendar.uri) {
+			if (this.caldav === calendar.id) {
 				this.caldav = ''
 			}
 			this.tooltipTarget = ''
 		},
 		showCalDAVUrl: function(calendar) {
-			this.caldav = calendar.uri
+			this.caldav = calendar.id
 		},
 		exportUrl(calendar) {
 			var url = calendar.url
@@ -284,14 +284,14 @@ export default {
 		},
 		save: function(calendar) {
 			// TODO: Call correct methods of store
-			console.log('Change name and color of calendar ' + calendar.uri + ' to ' + this.newCalendarName + ' and ' + this.selectedColor)
+			console.log('Change name and color of calendar ' + calendar.id + ' to ' + this.newCalendarName + ' and ' + this.selectedColor)
 			this.editing = false
 		},
-		checkName: function(event, uri) {
-			var check = this.isNameAllowed(this.newCalendarName, uri)
+		checkName: function(event, id) {
+			var check = this.isNameAllowed(this.newCalendarName, id)
 			this.tooltipMessage = check.msg
 			if (!check.allowed) {
-				this.tooltipTarget = uri
+				this.tooltipTarget = id
 				this.nameError = true
 			} else {
 				this.tooltipTarget = ''
@@ -305,12 +305,12 @@ export default {
 				this.nameError = false
 			}
 		},
-		isNameAllowed: function(name, uri) {
+		isNameAllowed: function(name, id) {
 			var check = {
 				allowed:	false,
 				msg:	''
 			}
-			if (this.isCalendarNameUsed(name, uri)) {
+			if (this.isCalendarNameUsed(name, id)) {
 				check.msg = t('tasks', 'The name "%s" is already used.').replace('%s', name)
 			} else if (!name) {
 				check.msg = t('tasks', 'An empty name is not allowed.')
@@ -323,7 +323,7 @@ export default {
 			return t('tasks', 'This will delete the calendar "%s" and all corresponding events and tasks.').replace('%s', name)
 		},
 		deleteCalendar: function(calendar) {
-			console.log('Delete calendar ' + calendar.uri)
+			console.log('Delete calendar ' + calendar.id)
 		}
 	}
 }

@@ -20,8 +20,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<div>
-		<div v-show="collectionId !== 'completed' && calendar.writable"
+	<div v-if="calendar">
+		<div v-show="collectionId !== 'completed' && !calendar.readOnly"
 			id="add-task"
 			class="add-task">
 			<form name="addTaskForm" @submit="addTask">
@@ -36,17 +36,17 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		<div class="task-list">
 			<div v-for="calendar in filteredCalendars"
 				:key="calendar.id"
-				:rel="calendar.uri"
+				:rel="calendar.id"
 				class="grouped-tasks ui-droppable">
-				<h2 class="heading">{{ calendar.displayname }}</h2>
-				<ol :calendarID="calendar.uri"
+				<h2 class="heading">{{ calendar.displayName }}</h2>
+				<ol :calendarID="calendar.id"
 					:collectionID="collectionId"
 					class="tasks"
 					type="list"
 					dnd-list="draggedTasks"
 					dnd-drop="dropAsRootTask(event, item, index)"
 					dnd-dragover="dragover(event, index)">
-					<router-link v-for="task in filteredTasks = tasks(calendar.uri)"
+					<router-link v-for="task in filteredTasks = tasks(calendar.id)"
 						:task-id="task.uri"
 						:key="task.uid"
 						:to="'/collections/' + collectionId + '/tasks/' + task.uri"
@@ -109,20 +109,20 @@ export default {
 		 */
 		filteredCalendars: function() {
 			return this.calendars.filter(calendar => {
-				return this.calendarCount(calendar.uri, this.$route.params.collectionId)
+				return this.calendarCount(calendar.id, this.$route.params.collectionId)
 			})
 		},
 
 		inputString: function() {
 			switch (this.collectionId) {
 			case 'starred':
-				return t('tasks', 'Add an important task to "{calendar}"...', { calendar: this.calendar.displayname })
+				return t('tasks', 'Add an important task to "{calendar}"...', { calendar: this.calendar.displayName })
 			case 'today':
-				return t('tasks', 'Add a task due today to "{calendar}"...', { calendar: this.calendar.displayname })
+				return t('tasks', 'Add a task due today to "{calendar}"...', { calendar: this.calendar.displayName })
 			case 'all':
-				return t('tasks', 'Add a task to "{calendar}"...', { calendar: this.calendar.displayname })
+				return t('tasks', 'Add a task to "{calendar}"...', { calendar: this.calendar.displayName })
 			case 'current':
-				return t('tasks', 'Add a current task to "{calendar}"...', { calendar: this.calendar.displayname })
+				return t('tasks', 'Add a current task to "{calendar}"...', { calendar: this.calendar.displayName })
 			}
 		}
 	},

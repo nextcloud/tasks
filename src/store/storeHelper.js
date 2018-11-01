@@ -42,7 +42,7 @@ function isTaskInList(task, listId) {
 	case 'week':
 		return task.completed === false && (week(task.start) || week(task.due))
 	default:
-		return '' + task.calendar.uri === '' + listId
+		return '' + task.calendar.id === '' + listId
 	}
 }
 
