@@ -166,7 +166,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 import Colorpicker from './Colorpicker'
 import PopoverMenu from './PopoverMenu'
 import Confirmation from './Confirmation'
@@ -219,112 +219,116 @@ export default {
 			isCalendarNameUsed: 'isCalendarNameUsed'
 		})
 	),
-	methods: {
-		hideCollection: function(collection) {
-			switch (collection.show) {
-			case 0:
-				return true
-			case 1:
-				return false
-			case 2:
-				return this.collectionCount(collection.id) < 1
-			}
-		},
-		showTooltip: function(target) {
-			return this.tooltipTarget === target
-		},
-		edit: function(calendar) {
-			this.editing = calendar.id
-			this.newCalendarName = calendar.displayName
-			this.selectedColor = calendar.color
-			this.nameError = false
-			this.tooltipTarget = ''
-		},
-		resetView: function(calendar) {
-			if (this.editing === calendar.id) {
-				this.editing = ''
-			}
-			if (this.caldav === calendar.id) {
-				this.caldav = ''
-			}
-			this.tooltipTarget = ''
-		},
-		showCalDAVUrl: function(calendar) {
-			this.caldav = calendar.id
-		},
-		exportUrl(calendar) {
-			var url = calendar.url
-			// cut off last slash to have a fancy name for the ics
-			if (url.slice(url.length - 1) === '/') {
-				url = url.slice(0, url.length - 1)
-			}
-			url += '?export'
-			return url
-		},
-		setColor: function(color) {
-			this.selectedColor = color
-		},
-		startCreate: function(e) {
-			if (OCA.Theming) {
-				this.selectedColor = OCA.Theming.color
-			} else {
-				this.selectedColor = '#0082C9'
-			}
-			this.newCalendarName = ''
-			this.creating = true
-			e.stopPropagation()
-		},
-		cancelCreate: function() {
-			this.creating = false
-		},
-		create: function() {
-			// TODO: Call correct methods of store
-			console.log('Create new calendar with name ' + this.newCalendarName + ' and color ' + this.selectedColor)
-			this.creating = false
-		},
-		save: function(calendar) {
-			// TODO: Call correct methods of store
-			console.log('Change name and color of calendar ' + calendar.id + ' to ' + this.newCalendarName + ' and ' + this.selectedColor)
-			this.editing = false
-		},
-		checkName: function(event, id) {
-			var check = this.isNameAllowed(this.newCalendarName, id)
-			this.tooltipMessage = check.msg
-			if (!check.allowed) {
-				this.tooltipTarget = id
-				this.nameError = true
-			} else {
-				this.tooltipTarget = ''
+	methods: Object.assign(
+		mapActions([
+			'changeCalendar'
+		]),
+		{
+			hideCollection: function(collection) {
+				switch (collection.show) {
+				case 0:
+					return true
+				case 1:
+					return false
+				case 2:
+					return this.collectionCount(collection.id) < 1
+				}
+			},
+			showTooltip: function(target) {
+				return this.tooltipTarget === target
+			},
+			edit: function(calendar) {
+				this.editing = calendar.id
+				this.newCalendarName = calendar.displayName
+				this.selectedColor = calendar.color
 				this.nameError = false
-			}
-			if (event.keyCode === 27) {
-				event.preventDefault()
 				this.tooltipTarget = ''
+			},
+			resetView: function(calendar) {
+				if (this.editing === calendar.id) {
+					this.editing = ''
+				}
+				if (this.caldav === calendar.id) {
+					this.caldav = ''
+				}
+				this.tooltipTarget = ''
+			},
+			showCalDAVUrl: function(calendar) {
+				this.caldav = calendar.id
+			},
+			exportUrl(calendar) {
+				var url = calendar.url
+				// cut off last slash to have a fancy name for the ics
+				if (url.slice(url.length - 1) === '/') {
+					url = url.slice(0, url.length - 1)
+				}
+				url += '?export'
+				return url
+			},
+			setColor: function(color) {
+				this.selectedColor = color
+			},
+			startCreate: function(e) {
+				if (OCA.Theming) {
+					this.selectedColor = OCA.Theming.color
+				} else {
+					this.selectedColor = '#0082C9'
+				}
+				this.newCalendarName = ''
+				this.creating = true
+				e.stopPropagation()
+			},
+			cancelCreate: function() {
 				this.creating = false
+			},
+			create: function() {
+				// TODO: Call correct methods of store
+				console.log('Create new calendar with name ' + this.newCalendarName + ' and color ' + this.selectedColor)
+				this.creating = false
+			},
+			save: function(calendar) {
+				this.changeCalendar({ calendar: calendar, newName: this.newCalendarName, newColor: this.selectedColor })
 				this.editing = false
-				this.nameError = false
+			},
+			checkName: function(event, id) {
+				var check = this.isNameAllowed(this.newCalendarName, id)
+				this.tooltipMessage = check.msg
+				if (!check.allowed) {
+					this.tooltipTarget = id
+					this.nameError = true
+				} else {
+					this.tooltipTarget = ''
+					this.nameError = false
+				}
+				if (event.keyCode === 27) {
+					event.preventDefault()
+					this.tooltipTarget = ''
+					this.creating = false
+					this.editing = false
+					this.nameError = false
+				}
+			},
+			isNameAllowed: function(name, id) {
+				var check = {
+					allowed:	false,
+					msg:	''
+				}
+				if (this.isCalendarNameUsed(name, id)) {
+					check.msg = t('tasks', 'The name "%s" is already used.').replace('%s', name)
+				} else if (!name) {
+					check.msg = t('tasks', 'An empty name is not allowed.')
+				} else {
+					check.allowed = true
+				}
+				return check
+			},
+			deleteMessage: function(name) {
+				return t('tasks', 'This will delete the calendar "%s" and all corresponding events and tasks.').replace('%s', name)
+			},
+			deleteCalendar: function(calendar) {
+				console.log('Delete calendar ' + calendar.id)
 			}
-		},
-		isNameAllowed: function(name, id) {
-			var check = {
-				allowed:	false,
-				msg:	''
-			}
-			if (this.isCalendarNameUsed(name, id)) {
-				check.msg = t('tasks', 'The name "%s" is already used.').replace('%s', name)
-			} else if (!name) {
-				check.msg = t('tasks', 'An empty name is not allowed.')
-			} else {
-				check.allowed = true
-			}
-			return check
-		},
-		deleteMessage: function(name) {
-			return t('tasks', 'This will delete the calendar "%s" and all corresponding events and tasks.').replace('%s', name)
-		},
-		deleteCalendar: function(calendar) {
-			console.log('Delete calendar ' + calendar.id)
 		}
-	}
+	)
 }
 </script>
