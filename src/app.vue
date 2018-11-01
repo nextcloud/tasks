@@ -39,6 +39,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import TheList from './components/TheList'
 import TheSettings from './components/TheSettings'
 import client from './services/cdav.js'
@@ -49,8 +50,13 @@ export default {
 		'theSettings': TheSettings,
 		'theList': TheList
 	},
+	computed: Object.assign({},
+		mapState({
+			calendars: state => state.calendars.calendars
+		})
+	),
 	beforeMount() {
-		// get calendars then get todos
+		// get calendars then get tasks
 		client.connect({ enableCalDAV: true }).then(() => {
 			this.$store.dispatch('getCalendars')
 				.then((calendars) => {
@@ -58,22 +64,22 @@ export default {
 					if (calendars.length === 0) {
 						this.$store.dispatch('appendCalendar', { displayName: t('tasks', 'Tasks') })
 							.then(() => {
-								this.fetchTodos()
+								this.fetchTasks()
 							})
-					// else, let's get those todos!
+					// else, let's get those tasks!
 					} else {
-						this.fetchTodos()
+						this.fetchTasks()
 					}
 				})
 		})
 	},
 	methods: {
 		/**
-		 * Fetch the todos of each calendar
+		 * Fetch the tasks of each calendar
 		 */
-		fetchTodos() {
-			// wait for all calendars to have fetch their todos
-			// Promise.all(this.calendars.map(calendar => this.$store.dispatch('getTodosFromCalendar', { calendar })))
+		fetchTasks() {
+			// wait for all calendars to have fetch their tasks
+			// Promise.all(this.calendars.map(calendar => this.$store.dispatch('getTasksFromCalendar', { calendar })))
 			// 	.then(results => {
 			// 		this.loading = false
 			// 		console.log(results)
