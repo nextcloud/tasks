@@ -45,7 +45,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			<a class="task-star" @click="toggleStarred(task.uri)">
 				<span :class="[iconStar]" class="icon icon-task-star right large reactive" />
 			</a>
-			<a v-show="task.calendar.writable"
+			<a v-show="!task.calendar.readOnly"
 				class="task-addsubtask add-subtask">
 				<span :taskId="task.uri"
 					:title="subtasksCreationPlaceholder(task.summary)" class="icon icon-add right large reactive"

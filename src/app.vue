@@ -41,12 +41,44 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <script>
 import TheList from './components/TheList'
 import TheSettings from './components/TheSettings'
+import client from './services/cdav.js'
 
 export default {
 	name: 'App',
 	components: {
 		'theSettings': TheSettings,
 		'theList': TheList
+	},
+	beforeMount() {
+		// get calendars then get todos
+		client.connect({ enableCalDAV: true }).then(() => {
+			this.$store.dispatch('getCalendars')
+				.then((calendars) => {
+					// No calendars? Create a new one!
+					if (calendars.length === 0) {
+						this.$store.dispatch('appendCalendar', { displayName: t('tasks', 'Tasks') })
+							.then(() => {
+								this.fetchTodos()
+							})
+					// else, let's get those todos!
+					} else {
+						this.fetchTodos()
+					}
+				})
+		})
+	},
+	methods: {
+		/**
+		 * Fetch the todos of each calendar
+		 */
+		fetchTodos() {
+			// wait for all calendars to have fetch their todos
+			// Promise.all(this.calendars.map(calendar => this.$store.dispatch('getTodosFromCalendar', { calendar })))
+			// 	.then(results => {
+			// 		this.loading = false
+			// 		console.log(results)
+			// 	})
+		}
 	}
 }
 </script>

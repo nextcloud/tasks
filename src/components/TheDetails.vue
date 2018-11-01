@@ -22,7 +22,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <template>
 	<div class="content-wrapper">
 		<div v-if="task!=undefined"
-			:class="{'disabled': !task.calendar.writable}"
+			:class="{'disabled': task.calendar.readOnly}"
 			class="flex-container">
 			<div :class="{'editing': edit=='summary'}" class="title">
 				<a :aria-checked="task.completed"
@@ -30,10 +30,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					class="checkbox reactive"
 					role="checkbox"
 					@click="toggleCompleted(task.uri)">
-					<span :class="{'icon-checkmark': task.completed, 'disabled': !task.calendar.writable}" class="icon detail-checkbox" />
+					<span :class="{'icon-checkmark': task.completed, 'disabled': task.calendar.readOnly}" class="icon detail-checkbox" />
 				</a>
 				<a class="star reactive" @click="toggleStarred(task.uri)">
-					<span :class="[{'disabled': !task.calendar.writable}, iconStar]"
+					<span :class="[{'disabled': task.calendar.readOnly}, iconStar]"
 						class="icon icon-task-star" />
 				</a>
 				<div v-click-outside="() => finishEditing('summary')">
@@ -117,7 +117,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						role="checkbox"
 						@click="toggleAllDay(task.uri)">
 						<div>
-							<span :class="{'icon-checkmark': task.allDay, 'disabled': !task.calendar.writable}" class="icon detail-checkbox" />
+							<span :class="{'icon-checkmark': task.allDay, 'disabled': task.calendar.readOnly}" class="icon detail-checkbox" />
 							<span class="section-title">{{ t('tasks', 'All day') }}</span>
 						</div>
 					</li>
@@ -227,7 +227,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</ul>
 			</div>
 			<div class="footer">
-				<a v-show="task.calendar.writable"
+				<a v-show="!task.calendar.readOnly"
 					class="left close-all reactive"
 					@click="deleteTask(task.uri)">
 					<span class="icon icon-trash" />
@@ -389,7 +389,7 @@ export default {
 	},
 	computed: Object.assign({
 		isAllDayPossible: function() {
-			return this.task.calendar.writable && (this.task.due || this.task.start)
+			return !this.task.calendar.readOnly && (this.task.due || this.task.start)
 		},
 		priorityString: function() {
 			if (this.task.priority > 5) {
@@ -452,7 +452,7 @@ export default {
 				if (event && event.target.classList.contains('mx-datepicker-btn-confirm')) {
 					return
 				}
-				if (this.task.calendar.writable && this.edit !== type) {
+				if (!this.task.calendar.readOnly && this.edit !== type) {
 					this.edit = type
 					this.tmpTask[type] = this.task[type]
 				}

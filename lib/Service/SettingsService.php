@@ -43,7 +43,7 @@ class SettingsService {
 	 */
 	public function get() {
 		$settings = array(
-			'defaultCalendarUri' => (string)$this->settings->getUserValue($this->userId, $this->appName,'various_defaultCalendarUri'),
+			'defaultCalendarId' => (string)$this->settings->getUserValue($this->userId, $this->appName,'various_defaultCalendarId'),
 			'showHidden' => (int)$this->settings->getUserValue($this->userId, $this->appName,'various_showHidden'),
 			'sortOrder' => (string)$this->settings->getUserValue($this->userId, $this->appName,'various_sortOrder'),
 			'sortDirection' => (bool)$this->settings->getUserValue($this->userId, $this->appName,'various_sortDirection'),

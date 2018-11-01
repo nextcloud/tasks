@@ -27,9 +27,11 @@
 	"dependencies": {
 		"axios": "^0.18.0",
 		"babel-polyfill": "^6.26.0",
+		"cdav-library": "github:nextcloud/cdav-library",
 		"ical.js": "~1.2.2",
 		"jstimezonedetect": "",
 		"nextcloud-vue": "^0.2.0",
+		"p-limit": "^2.0.0",
 		"ui-select": "git+https://github.com/angular-ui/ui-select.git#v0.19.8",
 		"v-tooltip": "2.0.0-rc.33",
 		"vue": "^2.5.17",

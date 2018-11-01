@@ -32,7 +32,8 @@ const getters = {
 	 * @param {String} calendarId the Id of the calendar in question
 	 */
 	getTasksByCalendarId: (state, getters, rootState) => (calendarId) => {
-		return Object.values(rootState.calendars.calendars[calendarId].tasks)
+		var calendar = getters.getCalendarById(calendarId)
+		return Object.values(calendar.tasks)
 	},
 
 	/**
@@ -47,7 +48,7 @@ const getters = {
 	 */
 	getAllTasks: (state, getters, rootState) => {
 		var tasks = []
-		Object.values(rootState.calendars.calendars).forEach(calendar => {
+		rootState.calendars.calendars.forEach(calendar => {
 			tasks.concat(calendar.tasks)
 		})
 		return tasks
@@ -59,13 +60,14 @@ const getters = {
 	getTaskByRoute: (state, getters, rootState) => {
 		// If a calendar is given, only search in that calendar.
 		if (rootState.route.params.calendarId) {
-			return rootState.calendars.calendars[rootState.route.params.calendarId].tasks.find(task => {
+			var calendar = getters.getCalendarById(rootState.route.params.calendarId)
+			return calendar.tasks.find(task => {
 				return task.uri === rootState.route.params.taskId
 			})
 		}
 		// Else, we have to search all calendars
 		var task
-		for (let calendar of Object.values(rootState.calendars.calendars)) {
+		for (let calendar of rootState.calendars.calendars) {
 			task = calendar.tasks.find(task => {
 				return task.uri === rootState.route.params.taskId
 			})
