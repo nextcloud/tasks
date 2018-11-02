@@ -222,7 +222,8 @@ export default {
 	methods: Object.assign(
 		mapActions([
 			'changeCalendar',
-			'deleteCalendar'
+			'deleteCalendar',
+			'appendCalendar'
 		]),
 		{
 			hideCollection: function(collection) {
@@ -283,8 +284,7 @@ export default {
 				this.creating = false
 			},
 			create: function() {
-				// TODO: Call correct methods of store
-				console.log('Create new calendar with name ' + this.newCalendarName + ' and color ' + this.selectedColor)
+				this.appendCalendar({displayName: this.newCalendarName, color: this.selectedColor})
 				this.creating = false
 			},
 			save: function(calendar) {
