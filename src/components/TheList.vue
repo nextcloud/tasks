@@ -287,7 +287,7 @@ export default {
 				if (!this.isNameAllowed(this.newCalendarName, 'new').allowed) {
 					return
 				}
-				this.appendCalendar({displayName: this.newCalendarName, color: this.selectedColor})
+				this.appendCalendar({ displayName: this.newCalendarName, color: this.selectedColor })
 				this.creating = false
 			},
 			save: function(calendar) {
