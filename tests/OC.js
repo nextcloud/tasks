@@ -1,9 +1,11 @@
 export class OC {
+
 	generateUrl(url) {
-		return '';
+		return ''
 	}
 
 	imagePath(app, img) {
-		return '';
+		return ''
 	}
+
 }
