@@ -84,7 +84,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									<span>{{ t('tasks', 'Download') }}</span>
 								</a>
 							</li>
-							<confirmation :message="deleteMessage(calendar.displayName)" @delete-calendar="deleteCalendar({calendar: calendar})" />
+							<confirmation :message="deleteMessage(calendar.displayName)" @delete-calendar="deleteCalendar(calendar)" />
 						</ul>
 					</popover>
 				</ul>
