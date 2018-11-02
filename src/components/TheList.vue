@@ -93,14 +93,14 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<form>
 					<input v-tooltip="{
 							content: tooltipMessage,
-							show: showTooltip(calendar.id),
+							show: showTooltip('list_' + calendar.id),
 							trigger: 'manual'
 						}"
 						v-model="newCalendarName"
 						class="edit"
 						type="text"
 						autofocus-on-insert
-						@keyup="checkName($event, calendar.id)">
+						@keyup="checkName($event, 'list_' + calendar.id)">
 					<input :title="t('tasks', 'Cancel')"
 						type="cancel"
 						value=""
