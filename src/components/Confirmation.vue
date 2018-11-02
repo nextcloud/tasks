@@ -87,6 +87,7 @@ export default {
 		deleteCalendar: function(e) {
 			if (this.armed) {
 				this.$emit('delete-calendar')
+				this.activated = false
 			} else {
 				e.stopPropagation()
 			}
