@@ -84,7 +84,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									<span>{{ t('tasks', 'Download') }}</span>
 								</a>
 							</li>
-							<confirmation :message="deleteMessage(calendar.displayName)" @delete-calendar="deleteCalendar(calendar, ...arguments)" />
+							<confirmation :message="deleteMessage(calendar.displayName)" @delete-calendar="deleteCalendar({calendar: calendar})" />
 						</ul>
 					</popover>
 				</ul>
@@ -221,7 +221,8 @@ export default {
 	),
 	methods: Object.assign(
 		mapActions([
-			'changeCalendar'
+			'changeCalendar',
+			'deleteCalendar'
 		]),
 		{
 			hideCollection: function(collection) {
@@ -324,9 +325,6 @@ export default {
 			},
 			deleteMessage: function(name) {
 				return t('tasks', 'This will delete the calendar "%s" and all corresponding events and tasks.').replace('%s', name)
-			},
-			deleteCalendar: function(calendar) {
-				console.log('Delete calendar ' + calendar.id)
 			}
 		}
 	)
