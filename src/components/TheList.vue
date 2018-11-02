@@ -284,10 +284,16 @@ export default {
 				this.creating = false
 			},
 			create: function() {
+				if (!this.isNameAllowed(this.newCalendarName, 'new').allowed) {
+					return
+				}
 				this.appendCalendar({displayName: this.newCalendarName, color: this.selectedColor})
 				this.creating = false
 			},
 			save: function(calendar) {
+				if (!this.isNameAllowed(this.newCalendarName, calendar.id).allowed) {
+					return
+				}
 				this.changeCalendar({ calendar: calendar, newName: this.newCalendarName, newColor: this.selectedColor })
 				this.editing = false
 			},
