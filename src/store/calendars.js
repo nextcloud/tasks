@@ -156,7 +156,7 @@ const getters = {
 	 */
 	isCalendarNameUsed: state => (name, id) => {
 		return state.calendars.some(calendar => {
-			return (calendar.displayname === name && calendar.id !== id)
+			return (calendar.displayName === name && calendar.id !== id)
 		})
 	},
 
