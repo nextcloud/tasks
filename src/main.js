@@ -55,7 +55,6 @@ Vue.prototype.t = t
 Vue.prototype.n = n
 Vue.prototype.OC = OC
 Vue.prototype.OCA = OCA
-Vue.prototype.$ = $
 
 OCA.Tasks.App = new Vue({
 	el: '.app-tasks',
