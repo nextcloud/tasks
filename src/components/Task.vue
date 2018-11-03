@@ -185,6 +185,7 @@ export default {
 			 * Returns the path of the task
 			 *
 			 * @param {String} taskId the Id of the task
+			 * @returns {String} the route to the task
 			 */
 			getTaskRoute: function(taskId) {
 				var calendarId = this.$route.params.calendarId
@@ -200,6 +201,7 @@ export default {
 			 * Returns all tasks which are direct children of the task with Id parentId
 			 *
 			 * @param {String} parentId the Id of the parent task
+			 * @returns {Array} the sub-tasks of the task with parentId
 			 */
 			getTasksByParentId: function(parentId) {
 				return Object.values(this.tasks)
@@ -212,6 +214,7 @@ export default {
 			 * Returns the placeholder string shown in the subtasks input field
 			 *
 			 * @param {String} task the name of the parent task
+			 * @returns {String} the placeholder string to show
 			 */
 			subtasksCreationPlaceholder: function(task) {
 				return t('tasks', 'Add a subtask to "{task}"...', {	task: task })

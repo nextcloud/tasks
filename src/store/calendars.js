@@ -81,6 +81,9 @@ const getters = {
 
 	/**
 	 * Returns the calendars sorted alphabetically
+	 *
+	 * @param {Object} state the store data
+	 * @returns {Array} the calendars sorted alphabetically
 	 */
 	getSortedCalendars: state => {
 		return state.calendars.sort(function(cal1, cal2) {
@@ -100,10 +103,13 @@ const getters = {
 	 *
 	 * Tasks have to be
 	 *	- a root task
-		*	- uncompleted
-		*
-		* @param {String} calendarId the Id of the calendar in question
-		*/
+	 *	- uncompleted
+	 *
+	 * @param {Object} state the store data
+	 * @param {Object} getters the store getters
+	 * @param {String} calendarId the Id of the calendar in question
+	 * @returns {Number} the count of tasks
+	 */
 	getCalendarCount: (state, getters) => (calendarId) => {
 		var calendar = getters.getCalendarById(calendarId)
 		return Object.values(calendar.tasks)
@@ -117,12 +123,15 @@ const getters = {
 	 *
 	 * Tasks have to be
 	 *	- belong to the collection with collectionId
-		*	- a root task
-		*	- uncompleted
-		*
-		* @param {String} calendarId the Id of the calendar in question
-		* @param {String} collectionId the Id of the collection in question
-		*/
+	 *	- a root task
+	 *	- uncompleted
+	 *
+	 * @param {Object} state the store data
+	 * @param {Object} getters the store getters
+	 * @param {String} calendarId the Id of the calendar in question
+	 * @param {String} collectionId the Id of the collection in question
+	 * @returns {Number} the count of tasks in a calendar
+	 */
 	getCalendarCountByCollectionId: (state, getters) => (calendarId, collectionId) => {
 		var calendar = getters.getCalendarById(calendarId)
 		var count = calendar.tasks.filter(task => {
@@ -132,14 +141,17 @@ const getters = {
 	},
 
 	/**
-	 * Returns the count of tasks in a calendar
+	 * Returns the count of completed tasks in a calendar
 	 *
 	 * Tasks have to be
 	 *	- a root task
-		*	- completed
-		*
-		* @param {String} calendarId the Id of the calendar in question
-		*/
+	 *	- completed
+	 *
+	 * @param {Object} state the store data
+	 * @param {Object} getters the store getters
+	 * @param {String} calendarId the Id of the calendar in question
+	 * @returns {Number} the count of completed tasks in a calendar
+	 */
 	getCalendarCountCompleted: (state, getters) => (calendarId) => {
 		var calendar = getters.getCalendarById(calendarId)
 		return Object.values(calendar.tasks)
@@ -151,8 +163,10 @@ const getters = {
 	/**
 	 * Returns if a calendar name is already used by an other calendar
 	 *
+	 * @param {Object} state the store data
 	 * @param {String} name the name to check
 	 * @param {String} id the Id of the calendar to exclude
+	 * @returns {Bool} is a calendar name is used
 	 */
 	isCalendarNameUsed: state => (name, id) => {
 		return state.calendars.some(calendar => {
@@ -162,6 +176,11 @@ const getters = {
 
 	/**
 	 * Returns the current calendar
+	 *
+	 * @param {Object} state the store data
+	 * @param {Object} getters the store getters
+	 * @param {Object} rootState the store root state
+	 * @returns {Object} the calendar by route
 	 */
 	getCalendarByRoute: (state, getters, rootState) => {
 		return getters.getCalendarById(rootState.route.params.calendarId)
@@ -170,8 +189,10 @@ const getters = {
 	/**
 	 * Returns the default calendar
 	 *
-	 * For now, this is the first calendar in the list.
-	 * Calendar order might change randomly.
+	 * @param {Object} state the store data
+	 * @param {Object} getters the store getters
+	 * @param {Object} rootState the store root state
+	 * @returns {Object} the default calendar
 	 */
 	getDefaultCalendar: (state, getters, rootState) => {
 		return getters.getCalendarById(rootState.settings.settings.defaultCalendarId) || getters.getSortedCalendars[0]
