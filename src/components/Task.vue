@@ -130,14 +130,16 @@ export default {
 	},
 	filters: {
 		formatDate: function(due) {
-			return valid(due) ? moment(due).calendar(null, {
-				lastDay: t('tasks', '[Yesterday]'),
-				sameDay: t('tasks', '[Today]'),
-				nextDay: t('tasks', '[Tomorrow]'),
-				lastWeek: 'L',
-				nextWeek: 'L',
-				sameElse: 'L'
-			}) : ''
+			return valid(due)
+				? moment(due).calendar(null, {
+					lastDay: t('tasks', '[Yesterday]'),
+					sameDay: t('tasks', '[Today]'),
+					nextDay: t('tasks', '[Tomorrow]'),
+					lastWeek: 'L',
+					nextWeek: 'L',
+					sameElse: 'L'
+				})
+				: ''
 		}
 	},
 	props: {
