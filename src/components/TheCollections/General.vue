@@ -105,7 +105,7 @@ export default {
 		 *	- is a root task
 		 *	- is uncompleted
 		 *
-		 * @param {String} collectionId the Id of the collection in question
+		 * @returns {Array} the calendars which should be shown in the collection
 		 */
 		filteredCalendars: function() {
 			return this.calendars.filter(calendar => {

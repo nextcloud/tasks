@@ -39,11 +39,15 @@ const getters = {
 	 *
 	 * Tasks have to
 	 *	- belong to a collection
-		*	- be a root task
-		*	- be uncompleted
-		*
-		* @param {String} collectionId the Id of the collection in question
-		*/
+	 *	- be a root task
+	 *	- be uncompleted
+	 *
+	 * @param {Object} state the store data
+	 * @param {Object} getters the store getters
+	 * @param {Object} rootState the store root state
+	 * @param {String} collectionId the Id of the collection in question
+	 * @returns {Number} count of tasks in the collection
+	 */
 	getCollectionCount: (state, getters, rootState) => (collectionId) => {
 		var count = 0
 		rootState.calendars.calendars.forEach(calendar => {
@@ -63,7 +67,7 @@ const mutations = {
 	/**
 	 * Sets the visibility of a collection
 	 *
-	 * @param {Object} state
+	 * @param {Object} state the store data
 	 * @param {Collection} newCollection the collection to update
 	 */
 	setVisibility(state, newCollection) {

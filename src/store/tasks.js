@@ -29,7 +29,11 @@ const getters = {
 	/**
 	 * Returns all tasks corresponding to the calendar
 	 *
+	 * @param {Object} state the store data
+	 * @param {Object} getters the store getters
+	 * @param {Object} rootState the store root state
 	 * @param {String} calendarId the Id of the calendar in question
+	 * @returns {Array} the tasks
 	 */
 	getTasksByCalendarId: (state, getters, rootState) => (calendarId) => {
 		var calendar = getters.getCalendarById(calendarId)
@@ -38,6 +42,11 @@ const getters = {
 
 	/**
 	 * Returns all tasks corresponding to current route value
+	 *
+	 * @param {Object} state the store data
+	 * @param {Object} getters the store getters
+	 * @param {Object} rootState the store root state
+	 * @returns {Array} the tasks
 	 */
 	getTasksByRoute: (state, getters, rootState) => {
 		return getters.getTasksByCalendarId(rootState.route.params.calendarId)
@@ -45,6 +54,11 @@ const getters = {
 
 	/**
 	 * Returns all tasks of all calendars
+	 *
+	 * @param {Object} state the store data
+	 * @param {Object} getters the store getters
+	 * @param {Object} rootState the store root state
+	 * @returns {Array} all tasks in store
 	 */
 	getAllTasks: (state, getters, rootState) => {
 		var tasks = []
@@ -56,6 +70,11 @@ const getters = {
 
 	/**
 	 * Returns the task currently opened by route
+	 *
+	 * @param {Object} state the store data
+	 * @param {Object} getters the store getters
+	 * @param {Object} rootState the store root state
+	 * @returns {Object} the task
 	 */
 	getTaskByRoute: (state, getters, rootState) => {
 		// If a calendar is given, only search in that calendar.
@@ -80,7 +99,7 @@ const mutations = {
 	/**
 	 * Deletes a task
 	 *
-	 * @param {Object} state
+	 * @param {Object} state the store data
 	 * @param {string} taskId The task id
 	 */
 	deleteTask(state, taskId) {
@@ -90,7 +109,7 @@ const mutations = {
 	/**
 	 * Toggles the completed state of a task
 	 *
-	 * @param {Object} state
+	 * @param {Object} state the store data
 	 * @param {string} taskId The task id
 	 */
 	toggleCompleted(state, taskId) {
@@ -100,7 +119,7 @@ const mutations = {
 	/**
 	 * Toggles the starred state of a task
 	 *
-	 * @param {Object} state
+	 * @param {Object} state the store data
 	 * @param {string} taskId The task id
 	 */
 	toggleStarred(state, taskId) {
@@ -110,7 +129,7 @@ const mutations = {
 	/**
 	 * Deletes the due date of a task
 	 *
-	 * @param {Object} state
+	 * @param {Object} state the store data
 	 * @param {string} taskId The task id
 	 */
 	deleteDueDate(state, taskId) {
@@ -120,7 +139,7 @@ const mutations = {
 	/**
 	 * Deletes the start date of a task
 	 *
-	 * @param {Object} state
+	 * @param {Object} state the store data
 	 * @param {string} taskId The task id
 	 */
 	deleteStartDate(state, taskId) {
@@ -130,7 +149,7 @@ const mutations = {
 	/**
 	 * Toggles if the start and due dates of a task are all day
 	 *
-	 * @param {Object} state
+	 * @param {Object} state the store data
 	 * @param {string} taskId The task id
 	 */
 	toggleAllDay(state, taskId) {

@@ -134,6 +134,8 @@ export default {
 
 		/**
 		 * Returns the string for completed tasks
+		 *
+	 	 * @returns {String} The string to show for the completed tasks count
 		 */
 		completedCountString: function() {
 			return n('tasks', '%n Completed Task', '%n Completed Tasks', this.completedCount(this.calendarId))
