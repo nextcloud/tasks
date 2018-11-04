@@ -380,7 +380,7 @@ const actions = {
 	 * @returns {Promise}
 	 */
 	async appendCalendar(context, calendar) {
-		return client.calendarHomes[0].createCalendarCollection(calendar.displayName, calendar.color)
+		return client.calendarHomes[0].createCalendarCollection(calendar.displayName, calendar.color, ['VTODO'])
 			.then((response) => {
 				calendar = mapDavCollectionToCalendar(response)
 				context.commit('addCalendar', calendar)
