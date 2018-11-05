@@ -31,7 +31,6 @@
 
 import Vue from 'vue'
 import ICAL from 'ical.js'
-import parseIcs from '../services/parseIcs'
 import client from '../services/cdav'
 import Task from '../models/task'
 import pLimit from 'p-limit'
@@ -258,14 +257,7 @@ const mutations = {
 	appendTasksToCalendar(state, { calendar, tasks }) {
 		calendar = state.calendars.find(search => search === calendar)
 
-		// convert list into an array and remove duplicate
-		calendar.tasks = tasks.reduce((list, task) => {
-			if (list[task.uid]) {
-				console.debug('Duplicate task overridden', list[task.uid], task)
-			}
-			Vue.set(list, task.uid, task)
-			return list
-		}, calendar.tasks)
+		Vue.set(calendar, 'tasks', tasks)
 	},
 
 	/**
@@ -449,12 +441,12 @@ const actions = {
 				// We don't want to lose the url information
 				// so we need to parse one by one
 				const tasks = response.map(item => {
-					let task = new Task(item.data, calendar)
+					let task = new Task(item.data, calendar, item)
 					Vue.set(task, 'dav', item)
 					return task
 				})
 				context.commit('appendTasksToCalendar', { calendar, tasks })
-				context.commit('appendTasks', tasks)
+				// context.commit('appendTasks', tasks)
 				return tasks
 			})
 			.catch((error) => {

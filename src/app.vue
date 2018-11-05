@@ -82,7 +82,7 @@ export default {
 			Promise.all(this.calendars.map(calendar => this.$store.dispatch('getTasksFromCalendar', { calendar })))
 				.then(results => {
 					this.loading = false
-					console.log(results)
+					// console.log(results)
 				})
 		}
 	}
