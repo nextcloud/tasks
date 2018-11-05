@@ -80,6 +80,9 @@ const getters = {
 		// If a calendar is given, only search in that calendar.
 		if (rootState.route.params.calendarId) {
 			var calendar = getters.getCalendarById(rootState.route.params.calendarId)
+			if (!calendar) {
+				return null
+			}
 			return calendar.tasks.find(task => {
 				return task.uri === rootState.route.params.taskId
 			})

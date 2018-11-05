@@ -199,8 +199,6 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									:tag-placeholder="t('tasks', 'Add this as a new category')"
 									:close-on-select="false"
 									class="multiselect-vue"
-									track-by="id"
-									label="name"
 									@input="updateCategories"
 									@tag="addCategory" />
 							</div>
