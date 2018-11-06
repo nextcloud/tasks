@@ -3,6 +3,9 @@
   "plugins": [
     "stylelint-scss"
   ],
+  "ignoreFiles": [
+      "./css/src/sprite.scss"
+  ],
   "rules": {
     "indentation": "tab",
     "number-leading-zero": "never",
