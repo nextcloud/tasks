@@ -27,7 +27,7 @@
 	"dependencies": {
 		"@babel/polyfill": "^7.0.0",
 		"axios": "^0.18.0",
-		"cdav-library": "github:nextcloud/cdav-library#bugfix/noid/fix_addressbook_calendar_queries",
+		"cdav-library": "github:nextcloud/cdav-library",
 		"ical.js": "~1.2.2",
 		"jstimezonedetect": "",
 		"nextcloud-vue": "^0.3.1",
