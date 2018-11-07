@@ -469,36 +469,36 @@ export default {
 			},
 
 			setProperty: function(type, value) {
-				console.log('Set property "' + type + '" to "' + value)
+				console.debug('Set property "' + type + '" to "' + value)
 				this.edit = ''
 			},
 
 			setPropertyTemporarily: function(type, value) {
-				console.log('Set property "' + type + '" temporarily to "' + value)
+				console.debug('Set property "' + type + '" temporarily to "' + value)
 			},
 
 			setStartDate: function(date) {
-				console.log('Set start date to ' + date)
+				console.debug('Set start date to ' + date)
 			},
 
 			setStartTime: function(time) {
-				console.log('Set start time to ' + time)
+				console.debug('Set start time to ' + time)
 			},
 
 			setDueDate: function(date) {
-				console.log('Set due date to ' + date)
+				console.debug('Set due date to ' + date)
 			},
 
 			setDueTime: function(time) {
-				console.log('Set due time to ' + time)
+				console.debug('Set due time to ' + time)
 			},
 
 			updateCategories: function(category) {
-				console.log(category)
+				console.debug(category)
 			},
 
 			addCategory: function(category) {
-				console.log(category)
+				console.debug(category)
 			}
 		}
 	)

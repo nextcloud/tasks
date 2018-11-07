@@ -157,7 +157,7 @@ export default {
 		},
 
 		addTask: function() {
-			console.log('Add task with name ' + this.newTaskName + ' to calendar ' + this.calendar.displayName)
+			console.debug('Add task with name ' + this.newTaskName + ' to calendar ' + this.calendar.displayName)
 			this.newTaskName = ''
 		}
 	}
