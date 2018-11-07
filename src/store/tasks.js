@@ -106,7 +106,7 @@ const mutations = {
 	 * @param {string} taskId The task id
 	 */
 	deleteTask(state, taskId) {
-		console.log('Delete task with uri ' + taskId)
+		console.debug('Delete task with uri ' + taskId)
 	},
 
 	/**
@@ -116,7 +116,7 @@ const mutations = {
 	 * @param {string} taskId The task id
 	 */
 	toggleCompleted(state, taskId) {
-		console.log('Toggle completed state of task with uri ' + taskId)
+		console.debug('Toggle completed state of task with uri ' + taskId)
 	},
 
 	/**
@@ -126,7 +126,7 @@ const mutations = {
 	 * @param {string} taskId The task id
 	 */
 	toggleStarred(state, taskId) {
-		console.log('Toggle starred state of task with uri ' + taskId)
+		console.debug('Toggle starred state of task with uri ' + taskId)
 	},
 
 	/**
@@ -136,7 +136,7 @@ const mutations = {
 	 * @param {string} taskId The task id
 	 */
 	deleteDueDate(state, taskId) {
-		console.log('Deletes the due date of task with uri ' + taskId)
+		console.debug('Deletes the due date of task with uri ' + taskId)
 	},
 
 	/**
@@ -146,7 +146,7 @@ const mutations = {
 	 * @param {string} taskId The task id
 	 */
 	deleteStartDate(state, taskId) {
-		console.log('Deletes the start date of task with uri ' + taskId)
+		console.debug('Deletes the start date of task with uri ' + taskId)
 	},
 
 	/**
@@ -156,7 +156,7 @@ const mutations = {
 	 * @param {string} taskId The task id
 	 */
 	toggleAllDay(state, taskId) {
-		console.log('Toggles the allday state of task with uri ' + taskId)
+		console.debug('Toggles the allday state of task with uri ' + taskId)
 	}
 }
 
