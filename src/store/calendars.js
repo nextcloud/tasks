@@ -31,6 +31,7 @@
 
 import Vue from 'vue'
 import ICAL from 'ical.js'
+import parseIcs from '../services/parseIcs'
 import client from '../services/cdav'
 import Task from '../models/task'
 import pLimit from 'p-limit'

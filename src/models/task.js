@@ -32,6 +32,7 @@ export default class Task {
 	 *
 	 * @param {string} vcalendar the vcalendar data as string with proper new lines
 	 * @param {object} calendar the calendar which the task belongs to
+	 * @param {object} raw the raw vcalendar data
 	 * @memberof Task
 	 */
 	constructor(vcalendar, calendar, raw) {
@@ -141,7 +142,7 @@ export default class Task {
 	 */
 	get summary() {
 		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
-		return vtodo.getFirstPropertyValue('summary');
+		return vtodo.getFirstPropertyValue('summary')
 	}
 
 	/**
@@ -176,18 +177,18 @@ export default class Task {
 	/**
 	 * Set the categories
 	 *
-	 * @param {string} categories the categories
+	 * @param {string} newCategories the categories
 	 * @memberof Task
 	 */
-	set categories(cats) {
+	set categories(newCategories) {
 		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
 		var categories = vtodo.getFirstProperty('categories')
-		if (cats.length > 0) {
+		if (newCategories.length > 0) {
 			if (categories) {
-				categories.setValues(cats)
+				categories.setValues(newCategories)
 			} else {
 				var prop = new ICAL.Property('categories')
-				prop.setValues(cats)
+				prop.setValues(newCategories)
 				categories = vtodo.addProperty(prop)
 			}
 		} else {
@@ -197,7 +198,7 @@ export default class Task {
 		this.vcalendar = this.vCalendar.toString()
 	}
 
-	updateLastModified () {
+	updateLastModified() {
 		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
 		vtodo.updatePropertyWithValue('last-modified', ICAL.Time.now())
 		vtodo.updatePropertyWithValue('dtstamp', ICAL.Time.now())
