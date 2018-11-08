@@ -158,6 +158,209 @@ export default class Task {
 		this.vcalendar = this.vCalendar.toString()
 	}
 
+	get priority() {
+		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
+		return vtodo.getFirstPropertyValue('priority')
+	}
+
+	set priority(priority) {
+		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
+		// TODO: check that priority is >= 0 and <10
+		vtodo.updatePropertyWithValue('priority', priority)
+		this.updateLastModified()
+		this.data = this.components.toString()
+	}
+
+	get complete() {
+		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
+		return vtodo.getFirstPropertyValue('percent-complete') || 0
+	}
+
+	set complete(complete) {
+		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
+		vtodo.updatePropertyWithValue('percent-complete', complete)
+		this.updateLastModified()
+		this.data = this.components.toString()
+		if (complete < 100) {
+			this.completed = null
+			if (complete === 0) {
+				this.status = 'NEEDS-ACTION'
+			} else {
+				this.status = 'IN-PROCESS'
+			}
+		} else {
+			this.completed = ICAL.Time.now()
+			this.status = 'COMPLETED'
+		}
+	}
+
+	get completed() {
+		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
+		var comp = vtodo.getFirstPropertyValue('completed')
+		if (comp) {
+			return true
+		} else {
+			return false
+		}
+	}
+
+	set completed(completed) {
+		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
+		if (completed) {
+			vtodo.updatePropertyWithValue('completed', completed)
+		} else {
+			vtodo.removeProperty('completed')
+		}
+		this.updateLastModified()
+		this.data = this.components.toString()
+	}
+
+	get completedDate() {
+		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
+		var comp = vtodo.getFirstPropertyValue('completed')
+		if (comp) {
+			return comp.toJSDate()
+		} else {
+			return null
+		}
+	}
+
+	get status() {
+		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
+		return vtodo.getFirstPropertyValue('status')
+	}
+
+	set status(status) {
+		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
+		vtodo.updatePropertyWithValue('status', status)
+		this.updateLastModified()
+		this.data = this.components.toString()
+	}
+
+	get note() {
+		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
+		return vtodo.getFirstPropertyValue('description') || ''
+	}
+
+	set note(note) {
+		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
+		vtodo.updatePropertyWithValue('description', note)
+		this.updateLastModified()
+		this.data = this.components.toString()
+	}
+
+	get related() {
+		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
+		return vtodo.getFirstPropertyValue('related-to') || null
+	}
+
+	set related(related) {
+		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
+		if (related) {
+			vtodo.updatePropertyWithValue('related-to', related)
+		} else {
+			vtodo.removeProperty('related-to')
+		}
+		this.updateLastModified()
+		this.data = this.components.toString()
+	}
+
+	get hideSubtasks() {
+		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
+		return +vtodo.getFirstPropertyValue('x-oc-hidesubtasks') || 0
+	}
+
+	set hideSubtasks(hide) {
+		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
+		vtodo.updatePropertyWithValue('x-oc-hidesubtasks', +hide)
+		this.updateLastModified()
+		this.data = this.components.toString()
+	}
+
+	get hideCompletedSubtasks() {
+		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
+		return +vtodo.getFirstPropertyValue('x-oc-hidecompletedsubtasks') || 0
+	}
+
+	set hideCompletedSubtasks(hide) {
+		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
+		vtodo.updatePropertyWithValue('x-oc-hidecompletedsubtasks', +hide)
+		this.updateLastModified()
+		this.data = this.components.toString()
+	}
+
+	get start() {
+		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
+		return vtodo.getFirstPropertyValue('dtstart')
+	}
+
+	set start(start) {
+		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
+		if (start) {
+			vtodo.updatePropertyWithValue('dtstart', start)
+		} else {
+			vtodo.removeProperty('dtstart')
+		}
+		this.updateLastModified()
+		this.data = this.components.toString()
+	}
+
+	get due() {
+		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
+		return vtodo.getFirstPropertyValue('due')
+	}
+
+	set due(due) {
+		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
+		if (due) {
+			vtodo.updatePropertyWithValue('due', due)
+		} else {
+			vtodo.removeProperty('due')
+		}
+		this.updateLastModified()
+		this.data = this.components.toString()
+	}
+
+	get allDay() {
+		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
+		var start = vtodo.getFirstPropertyValue('dtstart')
+		var due = vtodo.getFirstPropertyValue('due')
+		var d = due || start
+		return d !== null && d.isDate
+	}
+
+	set allDay(allDay) {
+		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
+		var start = vtodo.getFirstPropertyValue('dtstart')
+		if (start) {
+			start.isDate = allDay
+			vtodo.updatePropertyWithValue('dtstart', start)
+		}
+		var due = vtodo.getFirstPropertyValue('due')
+		if (due) {
+			due.isDate = allDay
+			vtodo.updatePropertyWithValue('due', due)
+		}
+		this.updateLastModified()
+		this.data = this.components.toString()
+	}
+
+	get comments() {
+		return null
+	}
+
+	get loadedCompleted() {
+		return this.loaded
+	}
+
+	set loadedCompleted(loadedCompleted) {
+		this.loaded = loadedCompleted
+	}
+
+	get reminder() {
+		return null
+	}
+
 	/**
 	 * Return the categories
 	 *
