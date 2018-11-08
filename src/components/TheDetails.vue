@@ -404,10 +404,10 @@ export default {
 			}
 		},
 		startDate: function() {
-			return moment(this.task.start).toDate()
+			return moment(this.task.start, 'YYYYMMDDTHHmmss').toDate()
 		},
 		dueDate: function() {
-			return moment(this.task.due).toDate()
+			return moment(this.task.due, 'YYYYMMDDTHHmmss').toDate()
 		}
 	},
 	mapState({
