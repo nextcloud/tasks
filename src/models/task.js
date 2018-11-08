@@ -168,7 +168,7 @@ export default class Task {
 		// TODO: check that priority is >= 0 and <10
 		vtodo.updatePropertyWithValue('priority', priority)
 		this.updateLastModified()
-		this.data = this.components.toString()
+		this.vcalendar = this.vCalendar.toString()
 	}
 
 	get complete() {
@@ -180,7 +180,7 @@ export default class Task {
 		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
 		vtodo.updatePropertyWithValue('percent-complete', complete)
 		this.updateLastModified()
-		this.data = this.components.toString()
+		this.vcalendar = this.vCalendar.toString()
 		if (complete < 100) {
 			this.completed = null
 			if (complete === 0) {
@@ -212,7 +212,7 @@ export default class Task {
 			vtodo.removeProperty('completed')
 		}
 		this.updateLastModified()
-		this.data = this.components.toString()
+		this.vcalendar = this.vCalendar.toString()
 	}
 
 	get completedDate() {
@@ -234,7 +234,7 @@ export default class Task {
 		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
 		vtodo.updatePropertyWithValue('status', status)
 		this.updateLastModified()
-		this.data = this.components.toString()
+		this.vcalendar = this.vCalendar.toString()
 	}
 
 	get note() {
@@ -246,7 +246,7 @@ export default class Task {
 		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
 		vtodo.updatePropertyWithValue('description', note)
 		this.updateLastModified()
-		this.data = this.components.toString()
+		this.vcalendar = this.vCalendar.toString()
 	}
 
 	get related() {
@@ -262,7 +262,7 @@ export default class Task {
 			vtodo.removeProperty('related-to')
 		}
 		this.updateLastModified()
-		this.data = this.components.toString()
+		this.vcalendar = this.vCalendar.toString()
 	}
 
 	get hideSubtasks() {
@@ -274,7 +274,7 @@ export default class Task {
 		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
 		vtodo.updatePropertyWithValue('x-oc-hidesubtasks', +hide)
 		this.updateLastModified()
-		this.data = this.components.toString()
+		this.vcalendar = this.vCalendar.toString()
 	}
 
 	get hideCompletedSubtasks() {
@@ -286,7 +286,7 @@ export default class Task {
 		var vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
 		vtodo.updatePropertyWithValue('x-oc-hidecompletedsubtasks', +hide)
 		this.updateLastModified()
-		this.data = this.components.toString()
+		this.vcalendar = this.vCalendar.toString()
 	}
 
 	get start() {
@@ -302,7 +302,7 @@ export default class Task {
 			vtodo.removeProperty('dtstart')
 		}
 		this.updateLastModified()
-		this.data = this.components.toString()
+		this.vcalendar = this.vCalendar.toString()
 	}
 
 	get due() {
@@ -318,7 +318,7 @@ export default class Task {
 			vtodo.removeProperty('due')
 		}
 		this.updateLastModified()
-		this.data = this.components.toString()
+		this.vcalendar = this.vCalendar.toString()
 	}
 
 	get allDay() {
@@ -342,7 +342,7 @@ export default class Task {
 			vtodo.updatePropertyWithValue('due', due)
 		}
 		this.updateLastModified()
-		this.data = this.components.toString()
+		this.vcalendar = this.vCalendar.toString()
 	}
 
 	get comments() {
