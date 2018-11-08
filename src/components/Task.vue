@@ -129,9 +129,9 @@ export default {
 		clickOutside
 	},
 	filters: {
-		formatDate: function(due) {
-			return valid(due)
-				? moment(due).calendar(null, {
+		formatDate: function(date) {
+			return valid(date)
+				? moment(date, 'YYYYMMDDTHHmmss').calendar(null, {
 					lastDay: t('tasks', '[Yesterday]'),
 					sameDay: t('tasks', '[Today]'),
 					nextDay: t('tasks', '[Tomorrow]'),
