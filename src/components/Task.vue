@@ -38,7 +38,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				class="task-checkbox"
 				name="toggleCompleted"
 				role="checkbox"
-				@click="toggleCompleted(task.uri)">
+				@click="toggleCompleted(task)">
 				<span :class="{'icon-checkmark': task.completed}" class="icon task-checkbox reactive" />
 			</a>
 			<a class="icon task-separator" />

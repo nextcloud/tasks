@@ -113,10 +113,15 @@ const mutations = {
 	 * Toggles the completed state of a task
 	 *
 	 * @param {Object} state the store data
-	 * @param {string} taskId The task id
+	 * @param {string} task The task
 	 */
-	toggleCompleted(state, taskId) {
-		console.debug('Toggle completed state of task with uri ' + taskId)
+	toggleCompleted(state, task) {
+		if (task.completed) {
+			task.complete = 0
+		} else {
+			task.complete = 100
+		}
+		// TODO: set completed state of parent and child tasks
 	},
 
 	/**
