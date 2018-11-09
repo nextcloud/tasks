@@ -64,7 +64,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							<span :class="{'icon-calendar-due': valid(task.start), 'icon-calendar-overdue': overdue(task.start)}"
 								class="icon icon-calendar" />
 							<span class="section-title">{{ task.start | startDate }}</span>
-							<div class="section-edit">
+							<div v-if="edit=='start'" class="section-edit">
 								<datetime-picker :value="startDate" :lang="lang"
 									:format="dateFormat" :clearable="false" :first-day-of-week="firstDay"
 									:type="'date'" :placeholder="t('tasks', 'Set start date')"
@@ -91,7 +91,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							<span :class="{'icon-calendar-due': valid(task.due), 'icon-calendar-overdue': overdue(task.due)}"
 								class="icon icon-calendar" />
 							<span class="section-title">{{ task.due | dueDate }}</span>
-							<div class="section-edit">
+							<div v-if="edit=='due'" class="section-edit">
 								<datetime-picker :value="dueDate" :lang="lang"
 									:format="dateFormat" :clearable="false" :first-day-of-week="firstDay"
 									:type="'date'" :placeholder="t('tasks', 'Set due date')"
