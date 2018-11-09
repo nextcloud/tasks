@@ -20,14 +20,18 @@
  */
 'use strict'
 
-import App from './app'
-
 import Vue from 'vue'
+
+import App from './app'
 
 import router from './components/TheRouter'
 import store from './store/store'
 import { sync } from 'vuex-router-sync'
 import VTooltip from 'v-tooltip'
+
+// Disable on production
+Vue.config.devtools = true
+Vue.config.performance = true
 
 // CSP config for webpack dynamic chunk loading
 // eslint-disable-next-line
