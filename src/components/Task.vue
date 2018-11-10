@@ -88,8 +88,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					v-show="showSubtaskInput"
 					class="task-item ui-draggable add-subtask">
 					<form name="addTaskForm" @submit="addTask">
-						<input id="target"
-							v-model="newTaskName"
+						<input v-model="newTaskName"
 							:placeholder="subtasksCreationPlaceholder(task.summary)"
 							:disabled="isAddingTask"
 							class="transparent"
