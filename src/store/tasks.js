@@ -22,8 +22,13 @@
 
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Task from '../models/task'
 
 Vue.use(Vuex)
+
+const state = {
+	tasks: {}
+}
 
 const getters = {
 	/**
@@ -83,14 +88,14 @@ const getters = {
 			if (!calendar) {
 				return null
 			}
-			return calendar.tasks.find(task => {
+			return Object.values(calendar.tasks).find(task => {
 				return task.uri === rootState.route.params.taskId
 			})
 		}
 		// Else, we have to search all calendars
 		var task
 		for (let calendar of rootState.calendars.calendars) {
-			task = calendar.tasks.find(task => {
+			task = Object.values(calendar.tasks).find(task => {
 				return task.uri === rootState.route.params.taskId
 			})
 			if (task) return task
@@ -99,6 +104,24 @@ const getters = {
 }
 
 const mutations = {
+
+	/**
+	 * Store tasks into state
+	 *
+	 * @param {Object} state Default state
+	 * @param {Array<Task>} tasks Tasks
+	 */
+	appendTasks(state, tasks = []) {
+		state.tasks = tasks.reduce(function(list, task) {
+			if (task instanceof Task) {
+				Vue.set(list, task.key, task)
+			} else {
+				console.error('Wrong task object', task)
+			}
+			return list
+		}, state.tasks)
+	},
+
 	/**
 	 * Deletes a task
 	 *
@@ -186,4 +209,4 @@ const actions = {
 	}
 }
 
-export default { getters, mutations, actions }
+export default { state, getters, mutations, actions }

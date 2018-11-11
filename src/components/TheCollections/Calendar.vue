@@ -128,6 +128,10 @@ export default {
 			}
 		},
 
+		tasks: function() {
+			return Object.values(this.calendar.tasks)
+		},
+
 		inputString: function() {
 			return t('tasks', 'Add a task to "{calendar}"...', { calendar: this.calendar.displayName })
 		},
@@ -141,7 +145,6 @@ export default {
 			return n('tasks', '%n Completed Task', '%n Completed Tasks', this.completedCount(this.calendarId))
 		} },
 	mapGetters({
-		tasks: 'getTasksByRoute',
 		completedCount: 'getCalendarCountCompleted',
 		calendar: 'getCalendarByRoute'
 	})

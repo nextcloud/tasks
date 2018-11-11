@@ -99,6 +99,16 @@ export default class Task {
 	}
 
 	/**
+	 * Return the key
+	 *
+	 * @readonly
+	 * @memberof Task
+	 */
+	get key() {
+		return this.uid + '~' + this.calendar.id
+	}
+
+	/**
 	 * Return the url
 	 *
 	 * @readonly

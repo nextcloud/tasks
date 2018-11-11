@@ -51,7 +51,7 @@ const getters = {
 	getCollectionCount: (state, getters, rootState) => (collectionId) => {
 		var count = 0
 		rootState.calendars.calendars.forEach(calendar => {
-			count += calendar.tasks.filter(task => {
+			count += Object.values(calendar.tasks).filter(task => {
 				return isTaskInList(task, collectionId) && !task.related
 			}).length
 		})
