@@ -134,7 +134,7 @@ const getters = {
 	 */
 	getCalendarCountByCollectionId: (state, getters) => (calendarId, collectionId) => {
 		var calendar = getters.getCalendarById(calendarId)
-		var count = calendar.tasks.filter(task => {
+		var count = Object.values(calendar.tasks).filter(task => {
 			return isTaskInList(task, collectionId) && !task.related
 		}).length
 		return count
@@ -258,7 +258,15 @@ const mutations = {
 	appendTasksToCalendar(state, { calendar, tasks }) {
 		calendar = state.calendars.find(search => search === calendar)
 
-		Vue.set(calendar, 'tasks', tasks)
+		// convert list into an array and remove duplicate
+		calendar.tasks = tasks.reduce((list, task) => {
+			if (list[task.uid]) {
+				console.debug('Duplicate task overridden', list[task.uid], task)
+			}
+			Vue.set(list, task.uid, task)
+			return list
+		}, calendar.tasks)
+
 	},
 
 	/**
@@ -447,7 +455,7 @@ const actions = {
 					return task
 				})
 				context.commit('appendTasksToCalendar', { calendar, tasks })
-				// context.commit('appendTasks', tasks)
+				context.commit('appendTasks', tasks)
 				return tasks
 			})
 			.catch((error) => {
