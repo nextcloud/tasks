@@ -105,7 +105,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							@keyup.27="showSubtaskInput = false">
 					</form>
 				</li>
-				<task-body-component v-for="subtask in getTasksByParentId(task.uid)"
+				<task-body-component v-for="subtask in subTasks"
 					:key="subtask.uid"
 					:task="subtask" :tasks="tasks" :base-url="baseUrl"
 					class="subtask" />
@@ -173,6 +173,18 @@ export default {
 			} else if (this.task.priority > 0 && this.task.priority < 5) {
 				return 'icon-task-star-high'
 			}
+		},
+
+		/**
+		 * Returns all tasks which are direct children of the current task
+		 *
+		 * @returns {Array} the sub-tasks of the current task
+		 */
+		subTasks: function() {
+			return Object.values(this.tasks)
+				.filter(task => {
+					return task.related === this.task.uid
+				})
 		}
 	},
 	methods: Object.assign(
@@ -196,19 +208,6 @@ export default {
 				if (!$event.target.classList.contains('no-nav')) {
 					this.$router.push(route)
 				}
-			},
-
-			/**
-			 * Returns all tasks which are direct children of the task with Id parentId
-			 *
-			 * @param {String} parentId the Id of the parent task
-			 * @returns {Array} the sub-tasks of the task with parentId
-			 */
-			getTasksByParentId: function(parentId) {
-				return Object.values(this.tasks)
-					.filter(task => {
-						return task.related === parentId
-					})
 			},
 
 			/**
