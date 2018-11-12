@@ -454,6 +454,17 @@ const actions = {
 					Vue.set(task, 'dav', item)
 					return task
 				})
+
+				// Initialize subtasks so we don't have to search for them on every change.
+				// We do have to manually adjust this list when a task is added, deleted or moved.
+				tasks.forEach(
+					parent => {
+						parent.subTasks = tasks.filter(task => {
+							return task.related === parent.uid
+						})
+					}
+				)
+
 				context.commit('appendTasksToCalendar', { calendar, tasks })
 				context.commit('appendTasks', tasks)
 				return tasks
