@@ -26,17 +26,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		dnd-draggable="task"
 		dnd-dragstart="dragStart(event)"
 		dnd-dragend="dragEnd(event)">
-		<router-link :to="baseUrl + '/tasks/' + task.uri"
-			:task-id="task.uri"
-			:class="{subtasks: hasSubtasks(task), completedsubtasks: hasCompletedSubtasks(task),
+		<div :task-id="task.uri"
+			:class="{active: $route.params.taskId==task.uri, subtasks: hasSubtasks(task), completedsubtasks: hasCompletedSubtasks(task),
 				subtaskshidden: task.hideSubtasks, attachment: task.note!=''}"
-			tag="div"
-			event=""
-			active-class="active"
 			class="task-body"
 			type="task"
-			@click.native="navigate($event, baseUrl + '/tasks/' + task.uri)">
-
+			@click="navigate($event, baseUrl + '/tasks/' + task.uri)">
 			<div v-if="task.complete > 0" class="percentbar">
 				<div :style="{ width: task.complete + '%', 'background-color': task.calendar.color }"
 					:aria-label="t('tasks', '{complete} % completed', {complete: task.complete})"
@@ -87,7 +82,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					</span>
 				</div>
 			</div>
-		</router-link>
+		</div>
 		<div :class="{subtaskshidden: hideSubtasks(task)}"
 			class="subtasks-container">
 			<ol :calendarID="task.calendar.uri"
