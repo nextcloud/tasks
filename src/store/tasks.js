@@ -58,6 +58,22 @@ const getters = {
 	},
 
 	/**
+	 * Returns all tasks which are direct children of the current task
+	 *
+	 * @param {Object} state the store data
+	 * @param {Object} getters the store getters
+	 * @param {Object} rootState the store root state
+	 * @param {Object} parent the parent task
+	 * @returns {Array} the sub-tasks of the current task
+	 */
+	getTasksByParent: (state, getters, rootState) => (parent) => {
+		return getters.getTasksByCalendarId(parent.calendar.id)
+			.filter(task => {
+				return task.related === parent.uid
+			})
+	},
+
+	/**
 	 * Returns all tasks of all calendars
 	 *
 	 * @param {Object} state the store data

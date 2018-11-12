@@ -46,7 +46,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					dnd-dragover="dragover(event, index)">
 					<task v-for="task in tasks"
 						:key="task.id"
-						:task="task" :tasks="tasks" :base-url="'/calendars/' + calendarId" />
+						:task="task" :base-url="'/calendars/' + calendarId" />
 						<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,route.calendarID) | filter:{'completed':'false'} | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
 						<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
 				</ol>
@@ -62,7 +62,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					dnd-dragover="dragover(event, index)">
 					<task v-for="task in tasks"
 						:key="task.id"
-						:task="task" :tasks="tasks" :base-url="'/calendars/' + calendarId" />
+						:task="task" :base-url="'/calendars/' + calendarId" />
 						<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,route.calendarID) | filter:{'completed':true} | orderBy:'completed_date':true"> -->
 						<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
 				</ol>

@@ -105,9 +105,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							@keyup.27="showSubtaskInput = false">
 					</form>
 				</li>
-				<task-body-component v-for="subtask in subTasks"
+				<task-body-component v-for="subtask in subTasks(task)"
 					:key="subtask.uid"
-					:task="subtask" :tasks="tasks" :base-url="baseUrl"
+					:task="subtask" :base-url="baseUrl"
 					class="subtask" />
 					<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
 					<!-- "orderBy:getSortOrder():settingsmodel.getById('various').sortDirection" -->
@@ -119,7 +119,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <script>
 import { overdue, valid } from '../store/storeHelper'
 import clickOutside from 'vue-click-outside'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
 	name: 'TaskBodyComponent',
@@ -148,10 +148,6 @@ export default {
 			type: Object,
 			required: true
 		},
-		tasks: {
-			type: Array,
-			required: true
-		},
 		baseUrl: {
 			type: String,
 			required: true
@@ -164,7 +160,7 @@ export default {
 			isAddingTask: false
 		}
 	},
-	computed: {
+	computed: Object.assign({
 		iconStar: function() {
 			if (this.task.priority > 5) {
 				return 'icon-task-star-low'
@@ -173,20 +169,11 @@ export default {
 			} else if (this.task.priority > 0 && this.task.priority < 5) {
 				return 'icon-task-star-high'
 			}
-		},
-
-		/**
-		 * Returns all tasks which are direct children of the current task
-		 *
-		 * @returns {Array} the sub-tasks of the current task
-		 */
-		subTasks: function() {
-			return Object.values(this.tasks)
-				.filter(task => {
-					return task.related === this.task.uid
-				})
-		}
-	},
+		} },
+	mapGetters({
+		subTasks: 'getTasksByParent'
+	})
+	),
 	methods: Object.assign(
 		mapActions([
 			'toggleCompleted',
