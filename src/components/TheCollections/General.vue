@@ -48,7 +48,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					dnd-dragover="dragover(event, index)">
 					<task-body v-for="task in filteredTasks = tasks(calendar.id)"
 						:key="task.id"
-						:task="task" :tasks="filteredTasks" :base-url="'/collections/' + collectionId" />
+						:task="task" :base-url="'/collections/' + collectionId" />
 						<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,calendar.uri) | filter:filterTasks(task,route.collectionID) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
 						<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
 				</ol>
