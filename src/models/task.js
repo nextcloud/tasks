@@ -50,6 +50,8 @@ export default class Task {
 		this.calendar = calendar
 		this.vCalendar = new ICAL.Component(this.jCal)
 
+		this.subTasks = {}
+
 		// used to state a task is not up to date with
 		// the server and cannot be pushed (etag)
 		this.conflict = false

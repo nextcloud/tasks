@@ -105,7 +105,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							@keyup.27="showSubtaskInput = false">
 					</form>
 				</li>
-				<task-body-component v-for="subtask in subTasks(task)"
+				<task-body-component v-for="subtask in task.subTasks"
 					:key="subtask.uid"
 					:task="subtask" :base-url="baseUrl"
 					class="subtask" />
@@ -119,7 +119,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <script>
 import { overdue, valid } from '../store/storeHelper'
 import clickOutside from 'vue-click-outside'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
 	name: 'TaskBodyComponent',
@@ -160,7 +160,7 @@ export default {
 			isAddingTask: false
 		}
 	},
-	computed: Object.assign({
+	computed: {
 		iconStar: function() {
 			if (this.task.priority > 5) {
 				return 'icon-task-star-low'
@@ -169,11 +169,8 @@ export default {
 			} else if (this.task.priority > 0 && this.task.priority < 5) {
 				return 'icon-task-star-high'
 			}
-		} },
-	mapGetters({
-		subTasks: 'getTasksByParent'
-	})
-	),
+		}
+	},
 	methods: Object.assign(
 		mapActions([
 			'toggleCompleted',
