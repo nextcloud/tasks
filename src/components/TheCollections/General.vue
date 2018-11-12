@@ -46,20 +46,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					dnd-list="draggedTasks"
 					dnd-drop="dropAsRootTask(event, item, index)"
 					dnd-dragover="dragover(event, index)">
-					<router-link v-for="task in filteredTasks = tasks(calendar.id)"
-						:task-id="task.uri"
-						:key="task.uid"
-						:to="'/collections/' + collectionId + '/tasks/' + task.uri"
-						:class="{done: task.completed}"
-						tag="li"
-						class="task-item ui-draggable"
-						dnd-draggable="task"
-						dnd-dragstart="dragStart(event)"
-						dnd-dragend="dragEnd(event)">
+					<task-body v-for="task in filteredTasks = tasks(calendar.id)"
+						:key="task.id"
+						:task="task" :tasks="filteredTasks" :base-url="'/collections/' + collectionId" />
 						<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,calendar.uri) | filter:filterTasks(task,route.collectionID) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
 						<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
-						<task-body :task="task" :tasks="filteredTasks" />
-					</router-link>
 				</ol>
 				<loadCompletedButton v-if="collectionId == 'completed'" :calendar="calendar" />
 			</div>

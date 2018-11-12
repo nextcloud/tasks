@@ -44,20 +44,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					dnd-list="draggedTasks"
 					dnd-drop="dropAsRootTask(event, item, index)"
 					dnd-dragover="dragover(event, index)">
-					<router-link v-for="task in tasks"
-						:class="{done: task.completed}"
-						:task-id="task.uri"
+					<task v-for="task in tasks"
 						:key="task.id"
-						:to="'/calendars/' + calendarId + '/tasks/' + task.uri"
-						tag="li"
-						class="task-item ui-draggable"
-						dnd-draggable="task"
-						dnd-dragstart="dragStart(event)"
-						dnd-dragend="dragEnd(event)">
+						:task="task" :tasks="tasks" :base-url="'/calendars/' + calendarId" />
 						<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,route.calendarID) | filter:{'completed':'false'} | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
 						<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
-						<task :task="task" :tasks="tasks" />
-					</router-link>
 				</ol>
 				<h2 v-show="completedCount(calendarId)" class="heading-hiddentasks icon-triangle-s" @click="toggleHidden">
 					{{ completedCountString }}
@@ -69,20 +60,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					dnd-list="draggedTasks"
 					dnd-drop="dropAsRootTask(event, item, index)"
 					dnd-dragover="dragover(event, index)">
-					<router-link v-for="task in tasks"
-						:class="{done: task.completed}"
-						:task-id="task.uri"
+					<task v-for="task in tasks"
 						:key="task.id"
-						:to="'/calendars/' + calendarId + '/tasks/' + task.uri"
-						tag="li"
-						class="task-item"
-						dnd-draggable="task"
-						dnd-dragstart="dragStart(event)"
-						dnd-dragend="dragEnd(event)">
+						:task="task" :tasks="tasks" :base-url="'/calendars/' + calendarId" />
 						<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,route.calendarID) | filter:{'completed':true} | orderBy:'completed_date':true"> -->
 						<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
-						<task :task="task" :tasks="tasks" />
-					</router-link>
 				</ol>
 				<loadCompletedButton :calendar="calendar" />
 			</div>

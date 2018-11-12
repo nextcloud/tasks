@@ -20,10 +20,18 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<div class="task-body-component">
-		<div :taskId="task.uri"
-			:class="{active: $route.params.taskId==task.uri, subtasks: hasSubtasks(task), completedsubtasks: hasCompletedSubtasks(task),
+	<li :task-id="task.uri"
+		:class="{done: task.completed}"
+		class="task-item ui-draggable"
+		dnd-draggable="task"
+		dnd-dragstart="dragStart(event)"
+		dnd-dragend="dragEnd(event)">
+		<router-link :to="baseUrl + '/tasks/' + task.uri"
+			:task-id="task.uri"
+			:class="{subtasks: hasSubtasks(task), completedsubtasks: hasCompletedSubtasks(task),
 				subtaskshidden: task.hideSubtasks, attachment: task.note!=''}"
+			tag="div"
+			active-class="active"
 			class="task-body"
 			type="task">
 
@@ -33,40 +41,40 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					class="percentdone" />
 			</div>
 
-			<a :aria-checked="task.completed"
+			<span :aria-checked="task.completed"
 				:aria-label="t('tasks', 'Task is completed')"
 				class="task-checkbox"
 				name="toggleCompleted"
 				role="checkbox"
 				@click="toggleCompleted(task)">
 				<span :class="{'icon-checkmark': task.completed}" class="icon task-checkbox reactive" />
-			</a>
-			<a class="icon task-separator" />
-			<a class="task-star" @click="toggleStarred(task.uri)">
+			</span>
+			<span class="icon task-separator" />
+			<span class="task-star" @click="toggleStarred(task.uri)">
 				<span :class="[iconStar]" class="icon icon-task-star right large reactive" />
-			</a>
-			<a v-show="!task.calendar.readOnly"
+			</span>
+			<span v-show="!task.calendar.readOnly"
 				class="task-addsubtask add-subtask">
 				<span :taskId="task.uri"
 					:title="subtasksCreationPlaceholder(task.summary)" class="icon icon-add right large reactive"
 					oc-click-focus="{selector: '.add-subtask input', timeout: 0}"
 					@click="showSubtaskInput = true" />
-			</a>
-			<a @click="toggleSubtasks(task)">
+			</span>
+			<span @click="toggleSubtasks(task)">
 				<span :title="t('tasks', 'Toggle subtasks')"
 					:class="task.hideSubtasks ? 'icon-subtasks-hidden' : 'icon-subtasks-visible'"
 					class="icon right large subtasks reactive" />
-			</a>
-			<a @click="toggleCompletedSubtasks(task)">
+			</span>
+			<span @click="toggleCompletedSubtasks(task)">
 				<span :title="t('tasks', 'Toggle completed subtasks')"
 					:class="{'active': !task.hideCompletedSubtasks}"
 					class="icon icon-toggle right large toggle-completed-subtasks reactive" />
-			</a>
-			<a>
+			</span>
+			<span>
 				<span class="icon icon-note right large" />
-			</a>
-			<a :class="{overdue: overdue(task.due)}" class="duedate">{{ task.due | formatDate }}</a>
-			<a v-show="$route.params.collectionId=='week'" class="listname">{{ task.calendar.displayname }}</a>
+			</span>
+			<span :class="{overdue: overdue(task.due)}" class="duedate">{{ task.due | formatDate }}</span>
+			<span v-show="$route.params.collectionId=='week'" class="listname">{{ task.calendar.displayname }}</span>
 			<div class="task-info-wrapper">
 				<div class="title">
 					<span>{{ task.summary }}</span>
@@ -77,7 +85,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					</span>
 				</div>
 			</div>
-		</div>
+		</router-link>
 		<div :class="{subtaskshidden: hideSubtasks(task)}"
 			class="subtasks-container">
 			<ol :calendarID="task.calendar.uri"
@@ -95,23 +103,15 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							@keyup.27="showSubtaskInput = false">
 					</form>
 				</li>
-				<router-link v-for="subtask in getTasksByParentId(task.uid)"
+				<task-body-component v-for="subtask in getTasksByParentId(task.uid)"
 					:key="subtask.uid"
-					:to="getTaskRoute(subtask.uri)"
-					:task-id="subtask.uri"
-					:class="{done: subtask.completed}"
-					tag="li"
-					class="task-item ui-draggable subtask"
-					dnd-draggable="task"
-					dnd-dragstart="dragStart(event)"
-					dnd-dragend="dragEnd(event)">
+					:task="subtask" :tasks="tasks" :base-url="baseUrl"
+					class="subtask" />
 					<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
 					<!-- "orderBy:getSortOrder():settingsmodel.getById('various').sortDirection" -->
-					<task-body-component :task="subtask" :tasks="tasks" />
-				</router-link>
 			</ol>
 		</div>
-	</div>
+	</li>
 </template>
 
 <script>
@@ -149,6 +149,10 @@ export default {
 		tasks: {
 			type: Array,
 			required: true
+		},
+		baseUrl: {
+			type: String,
+			required: true
 		}
 	},
 	data() {
@@ -179,22 +183,6 @@ export default {
 			 * Checks if a date is overdue
 			 */
 			overdue: overdue,
-
-			/**
-			 * Returns the path of the task
-			 *
-			 * @param {String} taskId the Id of the task
-			 * @returns {String} the route to the task
-			 */
-			getTaskRoute: function(taskId) {
-				var calendarId = this.$route.params.calendarId
-				var collectionId = this.$route.params.collectionId
-				if (calendarId) {
-					return '/calendars/' + calendarId + '/tasks/' + taskId
-				} else if (collectionId) {
-					return '/collections/' + collectionId + '/tasks/' + taskId
-				}
-			},
 
 			/**
 			 * Returns all tasks which are direct children of the task with Id parentId
