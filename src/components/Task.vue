@@ -31,9 +31,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			:class="{subtasks: hasSubtasks(task), completedsubtasks: hasCompletedSubtasks(task),
 				subtaskshidden: task.hideSubtasks, attachment: task.note!=''}"
 			tag="div"
+			event=""
 			active-class="active"
 			class="task-body"
-			type="task">
+			type="task"
+			@click.native="navigate($event, baseUrl + '/tasks/' + task.uri)">
 
 			<div v-if="task.complete > 0" class="percentbar">
 				<div :style="{ width: task.complete + '%', 'background-color': task.calendar.color }"
@@ -47,28 +49,28 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				name="toggleCompleted"
 				role="checkbox"
 				@click="toggleCompleted(task)">
-				<span :class="{'icon-checkmark': task.completed}" class="icon task-checkbox reactive" />
+				<span :class="{'icon-checkmark': task.completed}" class="icon task-checkbox reactive no-nav" />
 			</span>
 			<span class="icon task-separator" />
 			<span class="task-star" @click="toggleStarred(task.uri)">
-				<span :class="[iconStar]" class="icon icon-task-star right large reactive" />
+				<span :class="[iconStar]" class="icon icon-task-star right large reactive no-nav" />
 			</span>
 			<span v-show="!task.calendar.readOnly"
 				class="task-addsubtask add-subtask">
 				<span :taskId="task.uri"
-					:title="subtasksCreationPlaceholder(task.summary)" class="icon icon-add right large reactive"
+					:title="subtasksCreationPlaceholder(task.summary)" class="icon icon-add right large reactive no-nav"
 					oc-click-focus="{selector: '.add-subtask input', timeout: 0}"
 					@click="showSubtaskInput = true" />
 			</span>
 			<span @click="toggleSubtasks(task)">
 				<span :title="t('tasks', 'Toggle subtasks')"
 					:class="task.hideSubtasks ? 'icon-subtasks-hidden' : 'icon-subtasks-visible'"
-					class="icon right large subtasks reactive" />
+					class="icon right large subtasks reactive no-nav" />
 			</span>
 			<span @click="toggleCompletedSubtasks(task)">
 				<span :title="t('tasks', 'Toggle completed subtasks')"
 					:class="{'active': !task.hideCompletedSubtasks}"
-					class="icon icon-toggle right large toggle-completed-subtasks reactive" />
+					class="icon icon-toggle right large toggle-completed-subtasks reactive no-nav" />
 			</span>
 			<span>
 				<span class="icon icon-note right large" />
@@ -183,6 +185,18 @@ export default {
 			 * Checks if a date is overdue
 			 */
 			overdue: overdue,
+
+			/**
+			 * Navigates to a different route, but checks if navigation is desired
+			 *
+			 * @param {Object} $event the event that triggered navigation
+			 * @param {String} route the route to navigate to
+			 */
+			navigate: function($event, route) {
+				if (!$event.target.classList.contains('no-nav')) {
+					this.$router.push(route)
+				}
+			},
 
 			/**
 			 * Returns all tasks which are direct children of the task with Id parentId
