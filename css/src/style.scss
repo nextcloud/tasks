@@ -514,18 +514,6 @@ ol[dnd-list] {
 		box-shadow: inset 4px 0 var(--color-primary);
 	}
 
-	&.attachment .icon.icon-note {
-		display: inline-block;
-	}
-
-	&.subtasks .icon.subtasks {
-		display: inline-block;
-	}
-
-	&.completedsubtasks .icon.toggle-completed-subtasks {
-		display: inline-block;
-	}
-
 	.icon {
 		&.large {
 			margin: 8px;
@@ -546,14 +534,6 @@ ol[dnd-list] {
 			&:hover {
 				opacity: 1;
 			}
-		}
-
-		&.subtasks {
-			display: none;
-		}
-
-		&.toggle-completed-subtasks {
-			display: none;
 		}
 	}
 
