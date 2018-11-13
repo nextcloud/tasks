@@ -22,13 +22,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <template>
 	<li :task-id="task.uri"
 		:class="{done: task.completed}"
-		class="task-item ui-draggable"
-		dnd-draggable="task"
-		dnd-dragstart="dragStart(event)"
-		dnd-dragend="dragEnd(event)">
+		class="task-item">
 		<div :task-id="task.uri"
-			:class="{active: $route.params.taskId==task.uri, subtasks: task.subTasks.length, completedsubtasks: hasCompletedSubtasks,
-				subtaskshidden: task.hideSubtasks, attachment: task.note!=''}"
+			:class="{active: $route.params.taskId==task.uri}"
 			class="task-body"
 			type="task"
 			@click="navigate($event, baseUrl + '/tasks/' + task.uri)">
@@ -57,17 +53,17 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					oc-click-focus="{selector: '.add-subtask input', timeout: 0}"
 					@click="showSubtaskInput = true" />
 			</span>
-			<span @click="toggleSubtasks(task)">
+			<span v-if="task.subTasks.length" @click="toggleSubtasks(task)">
 				<span :title="t('tasks', 'Toggle subtasks')"
 					:class="task.hideSubtasks ? 'icon-subtasks-hidden' : 'icon-subtasks-visible'"
 					class="icon right large subtasks reactive no-nav" />
 			</span>
-			<span @click="toggleCompletedSubtasks(task)">
+			<span v-if="hasCompletedSubtasks" @click="toggleCompletedSubtasks(task)">
 				<span :title="t('tasks', 'Toggle completed subtasks')"
 					:class="{'active': !task.hideCompletedSubtasks}"
 					class="icon icon-toggle right large toggle-completed-subtasks reactive no-nav" />
 			</span>
-			<span>
+			<span v-if="task.note!=''">
 				<span class="icon icon-note right large" />
 			</span>
 			<span :class="{overdue: overdue(task.due)}" class="duedate">{{ task.due | formatDate }}</span>
@@ -86,7 +82,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		<div class="subtasks-container">
 			<div v-click-outside="($event) => cancelCreation($event)"
 				v-if="showSubtaskInput"
-				class="task-item ui-draggable add-subtask">
+				class="task-item add-subtask">
 				<form name="addTaskForm" @submit="addTask">
 					<input v-model="newTaskName"
 						:placeholder="subtasksCreationPlaceholder"
@@ -95,10 +91,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						@keyup.27="showSubtaskInput = false">
 				</form>
 			</div>
-			<ol v-if="!task.hideSubtasks" :calendarID="task.calendar.uri"
-				dnd-list="draggedTasks"
-				dnd-drop="dropAsSubtask(event, item, index)"
-				dnd-dragover="dragover(event, index)">
+			<ol v-if="!task.hideSubtasks" :calendarID="task.calendar.uri">
 				<task-body-component v-for="subtask in task.subTasks"
 					:key="subtask.uid"
 					:task="subtask" :base-url="baseUrl"
