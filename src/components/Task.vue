@@ -27,7 +27,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		dnd-dragstart="dragStart(event)"
 		dnd-dragend="dragEnd(event)">
 		<div :task-id="task.uri"
-			:class="{active: $route.params.taskId==task.uri, subtasks: hasSubtasks(task), completedsubtasks: hasCompletedSubtasks(task),
+			:class="{active: $route.params.taskId==task.uri, subtasks: task.subTasks.length, completedsubtasks: hasCompletedSubtasks,
 				subtaskshidden: task.hideSubtasks, attachment: task.note!=''}"
 			class="task-body"
 			type="task"
@@ -53,7 +53,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			<span v-if="!task.calendar.readOnly"
 				class="task-addsubtask add-subtask">
 				<span :taskId="task.uri"
-					:title="subtasksCreationPlaceholder(task.summary)" class="icon icon-add right large reactive no-nav"
+					:title="subtasksCreationPlaceholder" class="icon icon-add right large reactive no-nav"
 					oc-click-focus="{selector: '.add-subtask input', timeout: 0}"
 					@click="showSubtaskInput = true" />
 			</span>
@@ -83,23 +83,22 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</div>
 			</div>
 		</div>
-		<div :class="{subtaskshidden: hideSubtasks(task)}"
-			class="subtasks-container">
-			<ol :calendarID="task.calendar.uri"
+		<div class="subtasks-container">
+			<div v-click-outside="($event) => cancelCreation($event)"
+				v-if="showSubtaskInput"
+				class="task-item ui-draggable add-subtask">
+				<form name="addTaskForm" @submit="addTask">
+					<input v-model="newTaskName"
+						:placeholder="subtasksCreationPlaceholder"
+						:disabled="isAddingTask"
+						class="transparent"
+						@keyup.27="showSubtaskInput = false">
+				</form>
+			</div>
+			<ol v-if="!task.hideSubtasks" :calendarID="task.calendar.uri"
 				dnd-list="draggedTasks"
 				dnd-drop="dropAsSubtask(event, item, index)"
 				dnd-dragover="dragover(event, index)">
-				<li v-click-outside="($event) => cancelCreation($event)"
-					v-if="showSubtaskInput"
-					class="task-item ui-draggable add-subtask">
-					<form name="addTaskForm" @submit="addTask">
-						<input v-model="newTaskName"
-							:placeholder="subtasksCreationPlaceholder(task.summary)"
-							:disabled="isAddingTask"
-							class="transparent"
-							@keyup.27="showSubtaskInput = false">
-					</form>
-				</li>
 				<task-body-component v-for="subtask in task.subTasks"
 					:key="subtask.uid"
 					:task="subtask" :base-url="baseUrl"
@@ -164,6 +163,22 @@ export default {
 			} else if (this.task.priority > 0 && this.task.priority < 5) {
 				return 'icon-task-star-high'
 			}
+		},
+
+		hasCompletedSubtasks: function() {
+			return this.task.subTasks.some(subTask => {
+				return subTask.completed
+			})
+		},
+
+		/**
+		 * Returns the placeholder string shown in the subtasks input field
+		 *
+		 * @param {String} task the name of the parent task
+		 * @returns {String} the placeholder string to show
+		 */
+		subtasksCreationPlaceholder: function() {
+			return t('tasks', 'Add a subtask to "{task}"...', {	task: this.task.summary })
 		}
 	},
 	methods: Object.assign(
@@ -189,16 +204,6 @@ export default {
 				}
 			},
 
-			/**
-			 * Returns the placeholder string shown in the subtasks input field
-			 *
-			 * @param {String} task the name of the parent task
-			 * @returns {String} the placeholder string to show
-			 */
-			subtasksCreationPlaceholder: function(task) {
-				return t('tasks', 'Add a subtask to "{task}"...', {	task: task })
-			},
-
 			cancelCreation: function(e) {
 				// don't cancel the task creation if the own add-subtask button is clicked
 				if (e.target.getAttribute('taskId') !== this.task.uri) {
@@ -206,21 +211,10 @@ export default {
 				}
 			},
 
-			hasSubtasks: function(task) {
-				return false
-			},
-
-			hasCompletedSubtasks: function(task) {
-				return false
-			},
-
 			toggleSubtasks: function(task) {
 			},
 
 			toggleCompletedSubtasks: function(task) {
-			},
-
-			hideSubtasks: function(task) {
 			},
 
 			addTask: function() {
