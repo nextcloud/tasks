@@ -50,7 +50,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			<span class="task-star" @click="toggleStarred(task.uri)">
 				<span :class="[iconStar]" class="icon icon-task-star right large reactive no-nav" />
 			</span>
-			<span v-show="!task.calendar.readOnly"
+			<span v-if="!task.calendar.readOnly"
 				class="task-addsubtask add-subtask">
 				<span :taskId="task.uri"
 					:title="subtasksCreationPlaceholder(task.summary)" class="icon icon-add right large reactive no-nav"
@@ -71,7 +71,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<span class="icon icon-note right large" />
 			</span>
 			<span :class="{overdue: overdue(task.due)}" class="duedate">{{ task.due | formatDate }}</span>
-			<span v-show="$route.params.collectionId=='week'" class="listname">{{ task.calendar.displayname }}</span>
+			<span v-if="$route.params.collectionId=='week'" class="listname">{{ task.calendar.displayname }}</span>
 			<div class="task-info-wrapper">
 				<div class="title">
 					<span>{{ task.summary }}</span>
@@ -90,7 +90,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				dnd-drop="dropAsSubtask(event, item, index)"
 				dnd-dragover="dragover(event, index)">
 				<li v-click-outside="($event) => cancelCreation($event)"
-					v-show="showSubtaskInput"
+					v-if="showSubtaskInput"
 					class="task-item ui-draggable add-subtask">
 					<form name="addTaskForm" @submit="addTask">
 						<input v-model="newTaskName"
