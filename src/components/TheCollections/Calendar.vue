@@ -21,7 +21,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div v-if="calendar">
-		<div v-show="!calendar.readOnly"
+		<div v-if="!calendar.readOnly"
 			id="add-task"
 			class="add-task">
 			<form name="addTaskForm" @submit="addTask">
