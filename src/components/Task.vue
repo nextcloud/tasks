@@ -84,10 +84,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				v-if="showSubtaskInput"
 				class="task-item add-subtask">
 				<form name="addTaskForm" @submit="addTask">
-					<input v-model="newTaskName"
+					<input v-focus
+						v-model="newTaskName"
 						:placeholder="subtasksCreationPlaceholder"
 						:disabled="isAddingTask"
-						class="transparent"
 						@keyup.27="showSubtaskInput = false">
 				</form>
 			</div>
@@ -107,6 +107,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 import { overdue, valid } from '../store/storeHelper'
 import clickOutside from 'vue-click-outside'
 import { mapActions } from 'vuex'
+import focus from '../directives/focus'
 
 export default {
 	name: 'TaskBodyComponent',
@@ -114,7 +115,8 @@ export default {
 		clickOutside
 	},
 	directives: {
-		clickOutside
+		clickOutside,
+		focus
 	},
 	filters: {
 		formatDate: function(date) {
