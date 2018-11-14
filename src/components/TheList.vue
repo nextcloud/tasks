@@ -29,10 +29,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			:key="collection.id"
 			:class="[collection.icon, {'animate-up': hideCollection(collection) }]"
 			tag="li" class="collection reactive"
-			active-class="active"
-			dnd-list="draggedTasks"
-			dnd-drop="dropCollection(event, index, item)"
-			dnd-dragover="dragoverCollection(event, index)">
+			active-class="active">
 			<a class="sprite">
 				<span v-if="collection.id=='today'" class="date">{{ dayOfMonth }}</span>
 				<span class="title">{{ collection.displayName }}</span>
@@ -53,10 +50,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			:class="{edit: editing == calendar.id, caldav: caldav == calendar.id}"
 			tag="li"
 			class="list with-menu editing"
-			active-class="active"
-			dnd-list="draggedTasks"
-			dnd-drop="dropList(event, index, item)"
-			dnd-dragover="dragoverList(event, index)">
+			active-class="active">
 			<div :style="{'background-color': calendar.color}" class="app-navigation-entry-bullet" />
 			<a>
 				<span class="title">{{ calendar.displayName }}</span>
@@ -99,7 +93,6 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						v-model="newCalendarName"
 						class="edit"
 						type="text"
-						autofocus-on-insert
 						@keyup="checkName($event, 'list_' + calendar.id)">
 					<input :title="t('tasks', 'Cancel')"
 						type="cancel"
@@ -130,7 +123,6 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		</router-link>
 		<li v-click-outside="cancelCreate" :class="{edit: creating}" class="newList icon-add reactive editing">
 			<a class="addlist icon sprite"
-				oc-click-focus="{selector: '#newList', timeout: 0}"
 				@click="startCreate($event)">
 				<span class="title">{{ t('tasks', 'Add List...') }}</span>
 			</a>
@@ -141,12 +133,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							show: showTooltip('new'),
 							trigger: 'manual'
 						}"
-						id="newList"
+						id="newListInput"
 						:placeholder="t('tasks', 'New List')"
 						v-model="newCalendarName"
 						class="edit"
 						type="text"
-						autofocus-on-insert
 						@keyup="checkName($event, 'new')">
 					<input :title="t('tasks', 'Cancel')"
 						type="cancel"
@@ -245,6 +236,9 @@ export default {
 				this.selectedColor = calendar.color
 				this.nameError = false
 				this.tooltipTarget = ''
+				this.$nextTick(
+					() => document.querySelector('#list_' + calendar.id + ' input.edit').focus()
+				)
 			},
 			resetView: function(calendar) {
 				if (this.editing === calendar.id) {
@@ -278,6 +272,9 @@ export default {
 				}
 				this.newCalendarName = ''
 				this.creating = true
+				this.$nextTick(
+					() => document.getElementById('newListInput').focus()
+				)
 				e.stopPropagation()
 			},
 			cancelCreate: function() {
