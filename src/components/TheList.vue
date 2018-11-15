@@ -93,7 +93,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						v-model="newCalendarName"
 						class="edit"
 						type="text"
-						@keyup="checkName($event, 'list_' + calendar.id)">
+						@keyup="checkName($event, calendar.id)">
 					<input :title="t('tasks', 'Cancel')"
 						type="cancel"
 						value=""
@@ -130,7 +130,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<form>
 					<input v-tooltip="{
 							content: tooltipMessage,
-							show: showTooltip('new'),
+							show: showTooltip('list_'),
 							trigger: 'manual'
 						}"
 						id="newListInput"
@@ -138,7 +138,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						v-model="newCalendarName"
 						class="edit"
 						type="text"
-						@keyup="checkName($event, 'new')">
+						@keyup="checkName($event, '')">
 					<input :title="t('tasks', 'Cancel')"
 						type="cancel"
 						value=""
@@ -298,7 +298,7 @@ export default {
 				var check = this.isNameAllowed(this.newCalendarName, id)
 				this.tooltipMessage = check.msg
 				if (!check.allowed) {
-					this.tooltipTarget = id
+					this.tooltipTarget = 'list_' + id
 					this.nameError = true
 				} else {
 					this.tooltipTarget = ''
