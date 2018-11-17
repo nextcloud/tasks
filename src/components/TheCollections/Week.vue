@@ -28,15 +28,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<ol collectionID="week"
 					class="tasks"
 					listID=""
-					type="list"
-					dnd-list="draggedTasks"
-					dnd-drop="dropAsRootTask(event, item, index)"
-					dnd-dragover="dragover(event, index)">
+					type="list">
 					<task-body v-for="task in tasks"
 						:key="task.id"
 						:task="task" :base-url="'/collections/week'" />
 						<!-- ng-repeat="task in filtered = filteredTasks() | filter:taskAtDay(task,day) | filter:hasNoParent(task) | filter:{'completed':'false'} | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
-						<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
 				</ol>
 			</div>
 		</div>

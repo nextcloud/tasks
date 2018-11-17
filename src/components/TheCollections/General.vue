@@ -42,15 +42,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<ol :calendarID="calendar.id"
 					:collectionID="collectionId"
 					class="tasks"
-					type="list"
-					dnd-list="draggedTasks"
-					dnd-drop="dropAsRootTask(event, item, index)"
-					dnd-dragover="dragover(event, index)">
+					type="list">
 					<task-body v-for="task in filteredTasks = tasks(calendar.id)"
 						:key="task.id"
 						:task="task" :base-url="'/collections/' + collectionId" />
 						<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,calendar.uri) | filter:filterTasks(task,route.collectionID) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
-						<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
 				</ol>
 				<loadCompletedButton v-if="collectionId == 'completed'" :calendar="calendar" />
 			</div>

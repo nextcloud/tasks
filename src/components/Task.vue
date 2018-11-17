@@ -96,7 +96,6 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					:key="subtask.uid"
 					:task="subtask" :base-url="baseUrl"
 					class="subtask" />
-					<!-- dnd-effect-allowed="{{ allow(task) }}"> -->
 					<!-- "orderBy:getSortOrder():settingsmodel.getById('various').sortDirection" -->
 			</ol>
 		</div>
