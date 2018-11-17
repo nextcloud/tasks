@@ -36,7 +36,7 @@ function isTaskInList(task, listId) {
 	case 'current':
 		return task.completed === false && current(task.start, task.due)
 	case 'starred':
-		return task.completed === false && task.priority > 5
+		return task.completed === false && (task.priority > 0 && task.priority < 5)
 	case 'today':
 		return task.completed === false && (today(task.start) || today(task.due))
 	case 'week':
