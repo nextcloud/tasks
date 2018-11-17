@@ -43,7 +43,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					:collectionID="collectionId"
 					class="tasks"
 					type="list">
-					<task-body v-for="task in filteredTasks = tasks(calendar.id)"
+					<task-body v-for="task in rootTasks(calendar.tasks)"
 						:key="task.id"
 						:task="task" :base-url="'/collections/' + collectionId" />
 						<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,calendar.uri) | filter:filterTasks(task,route.collectionID) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
@@ -114,7 +114,7 @@ export default {
 		}
 	},
 	mapGetters({
-		tasks: 'getTasksByCalendarId',
+		rootTasks: 'findRootTasks',
 		calendar: 'getDefaultCalendar',
 		calendars: 'getSortedCalendars',
 		calendarCount: 'getCalendarCountByCollectionId'

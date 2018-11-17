@@ -97,8 +97,22 @@ function overdue(due) {
 	return valid(due) && moment(due, 'YYYYMMDDTHHmmss').diff(moment()) < 0
 }
 
+/**
+ * Checks if for a given task the parent is found in the given Object
+ *
+ * @param {Object} task The task
+ * @param {Object} tasks The tasks to search in
+ * @returns {Boolean}
+ */
+function isParentInList(task, tasks) {
+	return Object.values(tasks).some(t => {
+		return t.uid === task.uid
+	})
+}
+
 export {
 	isTaskInList,
 	valid,
-	overdue
+	overdue,
+	isParentInList
 }
