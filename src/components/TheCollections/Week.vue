@@ -29,7 +29,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					class="tasks"
 					listID=""
 					type="list">
-					<task-body v-for="task in tasks"
+					<task-body v-for="task in rootTasks(tasks)"
 						:key="task.id"
 						:task="task" :base-url="'/collections/week'" />
 						<!-- ng-repeat="task in filtered = filteredTasks() | filter:taskAtDay(task,day) | filter:hasNoParent(task) | filter:{'completed':'false'} | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
@@ -70,7 +70,8 @@ export default {
 	},
 	computed: Object.assign({},
 		mapGetters({
-			tasks: 'getAllTasks'
+			tasks: 'getAllTasks',
+			rootTasks: 'findRootTasks'
 		})
 	),
 	methods: {

@@ -23,6 +23,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Task from '../models/task'
+import { isParentInList } from './storeHelper'
 
 Vue.use(Vuex)
 
@@ -116,6 +117,23 @@ const getters = {
 			})
 			if (task) return task
 		}
+	},
+
+	/**
+	 * Returns the root tasks from a given object
+	 *
+	 * @param {Object} tasks the tasks to search in
+	 * @returns {Array}
+	 */
+	findRootTasks: () => (tasks) => {
+		return Object.values(tasks).filter(task => {
+			/**
+			 * Check if the task has the related field set.
+			 * If it has, then check if the parent task is available
+			 * (otherwise it might happen, that this task is not shown at all)
+			 */
+			return !task.related || !isParentInList(task, tasks)
+		})
 	}
 }
 
