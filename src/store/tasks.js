@@ -85,7 +85,7 @@ const getters = {
 	getAllTasks: (state, getters, rootState) => {
 		var tasks = []
 		rootState.calendars.calendars.forEach(calendar => {
-			tasks.concat(calendar.tasks)
+			tasks = tasks.concat(Object.values(calendar.tasks))
 		})
 		return tasks
 	},
