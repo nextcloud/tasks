@@ -35,8 +35,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		</div>
 		<sortorderDropdown />
 		<div class="task-list">
-			<div :class="{'completed-hidden': showHidden}"
-				class="grouped-tasks">
+			<div class="grouped-tasks">
 				<ol :calendarId="calendarId"
 					class="tasks"
 					collectionId="uncompleted"
@@ -49,7 +48,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<h2 v-show="completedCount(calendarId)" class="heading-hiddentasks icon-triangle-s" @click="toggleHidden">
 					{{ completedCountString }}
 				</h2>
-				<ol :calendarId="calendarId"
+				<ol v-if="showHidden"
+					:calendarId="calendarId"
 					class="completed-tasks"
 					collectionId="completed"
 					type="list">
