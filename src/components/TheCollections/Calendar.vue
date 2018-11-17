@@ -95,7 +95,7 @@ export default {
 	computed: Object.assign({
 		showHidden: {
 			get() {
-				return this.$store.state.settings.showHidden
+				return this.$store.state.settings.settings.showHidden
 			},
 			set(value) {
 				this.$store.dispatch('setSetting', { type: 'showHidden', value: value })
