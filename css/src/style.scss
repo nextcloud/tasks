@@ -421,26 +421,6 @@
 	}
 }
 
-ol[dnd-list] {
-	.dndDraggingSource {
-		display: none;
-	}
-
-	.dndPlaceholder {
-		display: block;
-		background-color: $gray_light;
-		min-height: 37px;
-	}
-
-	.copy.dndDraggingSource {
-		display: block;
-	}
-}
-
-.dropzone-visible > ol[dnd-list] {
-	min-height: 50px;
-}
-
 /**
 	* rules for task-items
 	*/
