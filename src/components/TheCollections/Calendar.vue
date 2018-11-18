@@ -42,7 +42,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					type="list">
 					<task v-for="task in rootTasks(calendar.tasks)"
 						:key="task.id"
-						:task="task" :base-url="'/calendars/' + calendarId" />
+						:task="task" />
 						<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,route.calendarID) | filter:{'completed':'false'} | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
 				</ol>
 				<h2 v-show="completedCount(calendarId)" class="heading-hiddentasks icon-triangle-s" @click="toggleHidden">
@@ -55,7 +55,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					type="list">
 					<task v-for="task in rootTasks(calendar.tasks)"
 						:key="task.id"
-						:task="task" :base-url="'/calendars/' + calendarId" />
+						:task="task" />
 						<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,route.calendarID) | filter:{'completed':true} | orderBy:'completed_date':true"> -->
 				</ol>
 				<loadCompletedButton :calendar="calendar" />
