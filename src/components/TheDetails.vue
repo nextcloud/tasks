@@ -39,14 +39,13 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<div v-click-outside="() => finishEditing('summary')">
 					<div :class="{'strike-through': task.completed}"
 						class="title-text"
-						oc-click-focus="{selector: '#editSummary', timeout: 0}"
 						@click="editProperty('summary')">
 						{{ task.summary }}
 					</div>
 					<div class="expandable-container">
 						<div class="expandingArea active">
 							<pre><span>{{ tmpTask.summary }}</span><br></pre>
-							<textarea id="editSummary"
+							<textarea id="summaryInput"
 								v-model="tmpTask.summary"
 								maxlength="200"
 								@keyup.27="cancelEditing('summary')"
@@ -208,14 +207,13 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						<div class="note">
 							<div v-click-outside="() => finishEditing('note')"
 								class="note-body selectable"
-								oc-click-focus="{selector: '.expandingArea textarea', timeout: 0}"
 								@click="editProperty('note')">
 								<div :class="{'editing': edit=='note'}" class="content-fakeable">
 									<div class="display-view">{{ task.note }}</div>
 									<div class="edit-view">
 										<div class="expandingArea active">
 											<pre><span>{{ tmpTask.note }}</span><br><br></pre>
-											<textarea v-model="tmpTask.note" @change="setPropertyTemporarily('note', tmpTask.note)" />
+											<textarea id="noteInput" v-model="tmpTask.note" @change="setPropertyTemporarily('note', tmpTask.note)" />
 										</div>
 									</div>
 								</div>
@@ -453,6 +451,11 @@ export default {
 				if (!this.task.calendar.readOnly && this.edit !== type) {
 					this.edit = type
 					this.tmpTask[type] = this.task[type]
+				}
+				if (type === 'summary' || type === 'note') {
+					this.$nextTick(
+						() => document.getElementById(type + 'Input').focus()
+					)
 				}
 			},
 
