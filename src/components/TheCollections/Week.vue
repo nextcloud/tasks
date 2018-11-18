@@ -31,7 +31,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					type="list">
 					<task-body v-for="task in rootTasks(tasks)"
 						:key="task.id"
-						:task="task" :base-url="'/collections/week'" />
+						:task="task" />
 						<!-- ng-repeat="task in filtered = filteredTasks() | filter:taskAtDay(task,day) | filter:hasNoParent(task) | filter:{'completed':'false'} | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
 				</ol>
 			</div>

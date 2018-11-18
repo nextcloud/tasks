@@ -45,7 +45,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					type="list">
 					<task-body v-for="task in rootTasks(calendar.tasks)"
 						:key="task.id"
-						:task="task" :base-url="'/collections/' + collectionId" />
+						:task="task" />
 						<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,calendar.uri) | filter:filterTasks(task,route.collectionID) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
 				</ol>
 				<loadCompletedButton v-if="collectionId == 'completed'" :calendar="calendar" />

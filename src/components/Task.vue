@@ -27,7 +27,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			:class="{active: $route.params.taskId==task.uri}"
 			class="task-body"
 			type="task"
-			@click="navigate($event, baseUrl + '/tasks/' + task.uri)">
+			@click="navigate($event)">
 			<div v-if="task.complete > 0" class="percentbar">
 				<div :style="{ width: task.complete + '%', 'background-color': task.calendar.color }"
 					:aria-label="t('tasks', '{complete} % completed', {complete: task.complete})"
@@ -94,7 +94,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			<ol v-if="!task.hideSubtasks" :calendarID="task.calendar.uri">
 				<task-body-component v-for="subtask in task.subTasks"
 					:key="subtask.uid"
-					:task="subtask" :base-url="baseUrl"
+					:task="subtask"
 					class="subtask" />
 					<!-- "orderBy:getSortOrder():settingsmodel.getById('various').sortDirection" -->
 			</ol>
@@ -135,10 +135,6 @@ export default {
 		task: {
 			type: Object,
 			required: true
-		},
-		baseUrl: {
-			type: String,
-			required: true
 		}
 	},
 	data() {
@@ -149,6 +145,21 @@ export default {
 		}
 	},
 	computed: {
+		/**
+		 * Returns the path of the task
+		 *
+		 * @returns {String} the route to the task
+		 */
+		taskRoute: function() {
+			var calendarId = this.$route.params.calendarId
+			var collectionId = this.$route.params.collectionId
+			if (calendarId) {
+				return '/calendars/' + calendarId + '/tasks/' + this.task.uri
+			} else if (collectionId) {
+				return '/collections/' + collectionId + '/tasks/' + this.task.uri
+			}
+		},
+
 		iconStar: function() {
 			if (this.task.priority > 5) {
 				return 'icon-task-star-low'
@@ -192,9 +203,9 @@ export default {
 			 * @param {Object} $event the event that triggered navigation
 			 * @param {String} route the route to navigate to
 			 */
-			navigate: function($event, route) {
+			navigate: function($event) {
 				if (!$event.target.classList.contains('no-nav')) {
-					this.$router.push(route)
+					this.$router.push(this.taskRoute)
 				}
 			},
 
