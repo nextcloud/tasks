@@ -48,7 +48,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						:task="task" />
 						<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,calendar.uri) | filter:filterTasks(task,route.collectionID) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
 				</ol>
-				<loadCompletedButton v-if="collectionId == 'completed'" :calendar="calendar" />
+				<loadCompletedButton v-if="collectionId === 'completed'" :calendar="calendar" />
 			</div>
 		</div>
 	</div>
@@ -65,16 +65,6 @@ export default {
 		'task-body': TaskBody,
 		'sortorderDropdown': SortorderDropdown,
 		'loadCompletedButton': LoadCompletedButton
-	},
-	props: {
-		collectionId: {
-			type: String,
-			default: ''
-		},
-		taskId: {
-			type: String,
-			default: ''
-		}
 	},
 	data() {
 		return {
@@ -96,8 +86,12 @@ export default {
 		 */
 		filteredCalendars: function() {
 			return this.calendars.filter(calendar => {
-				return this.calendarCount(calendar.id, this.$route.params.collectionId)
+				return this.calendarCount(calendar.id, this.collectionId)
 			})
+		},
+
+		collectionId: function() {
+			return this.$route.params.collectionId
 		},
 
 		inputString: function() {
