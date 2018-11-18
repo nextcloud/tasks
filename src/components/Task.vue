@@ -50,7 +50,6 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				class="task-addsubtask add-subtask">
 				<span :taskId="task.uri"
 					:title="subtasksCreationPlaceholder" class="icon icon-add right large reactive no-nav"
-					oc-click-focus="{selector: '.add-subtask input', timeout: 0}"
 					@click="showSubtaskInput = true" />
 			</span>
 			<span v-if="task.subTasks.length" @click="toggleSubtasks(task)">
