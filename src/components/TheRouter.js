@@ -22,9 +22,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import CollectionGeneral from './TheCollections/General'
-import CollectionWeek from './TheCollections/Week'
-import CollectionCalendar from './TheCollections/Calendar'
+import Collections from './TheCollections/Collections'
+import Calendar from './TheCollections/Calendar'
 import TheDetails from './TheDetails'
 
 const routes = [
@@ -35,12 +34,10 @@ const routes = [
 	// would also be an option, but it currently does not work
 	// reliably with router-link due to
 	// https://github.com/vuejs/vue-router/issues/419
-	{ path: '/collections/week', component: CollectionWeek },
-	{ path: '/collections/week/tasks/:taskId', components: { default: CollectionWeek, details: TheDetails } },
-	{ path: '/collections/:collectionId', component: CollectionGeneral, props: true },
-	{ path: '/collections/:collectionId/tasks/:taskId', components: { default: CollectionGeneral, details: TheDetails }, props: { default: true } },
-	{ path: '/calendars/:calendarId', component: CollectionCalendar, props: true },
-	{ path: '/calendars/:calendarId/tasks/:taskId', components: { default: CollectionCalendar, details: TheDetails }, props: { default: true } }
+	{ path: '/collections/:collectionId', component: Collections, props: true },
+	{ path: '/collections/:collectionId/tasks/:taskId', components: { default: Collections, details: TheDetails }, props: { default: true } },
+	{ path: '/calendars/:calendarId', component: Calendar, props: true },
+	{ path: '/calendars/:calendarId/tasks/:taskId', components: { default: Calendar, details: TheDetails }, props: { default: true } }
 ]
 
 Vue.use(VueRouter)
