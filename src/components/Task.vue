@@ -67,7 +67,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<span class="icon icon-note right large" />
 			</span>
 			<span :class="{overdue: overdue(task.due)}" class="duedate">{{ task.due | formatDate }}</span>
-			<span v-if="$route.params.collectionId=='week'" class="listname">{{ task.calendar.displayname }}</span>
+			<span v-if="$route.params.collectionId=='week'" class="listname">{{ task.calendar.displayName }}</span>
 			<div class="task-info-wrapper">
 				<div class="title">
 					<span>{{ task.summary }}</span>
