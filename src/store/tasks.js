@@ -134,6 +134,40 @@ const getters = {
 			 */
 			return !task.related || !isParentInList(task, tasks)
 		})
+	},
+
+	/**
+	 * Returns the completed root tasks from a given object
+	 *
+	 * @param {Object} tasks the tasks to search in
+	 * @returns {Array}
+	 */
+	findCompletedRootTasks: () => (tasks) => {
+		return Object.values(tasks).filter(task => {
+			/**
+			 * Check if the task has the related field set.
+			 * If it has, then check if the parent task is available
+			 * (otherwise it might happen, that this task is not shown at all)
+			 */
+			return (!task.related || !isParentInList(task, tasks)) && task.completed
+		})
+	},
+
+	/**
+	 * Returns the not completed root tasks from a given object
+	 *
+	 * @param {Object} tasks the tasks to search in
+	 * @returns {Array}
+	 */
+	findUncompletedRootTasks: () => (tasks) => {
+		return Object.values(tasks).filter(task => {
+			/**
+			 * Check if the task has the related field set.
+			 * If it has, then check if the parent task is available
+			 * (otherwise it might happen, that this task is not shown at all)
+			 */
+			return (!task.related || !isParentInList(task, tasks)) && !task.completed
+		})
 	}
 }
 

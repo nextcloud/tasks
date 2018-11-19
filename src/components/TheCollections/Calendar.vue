@@ -40,7 +40,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					class="tasks"
 					collectionId="uncompleted"
 					type="list">
-					<task v-for="task in rootTasks(calendar.tasks)"
+					<task v-for="task in uncompletedRootTasks(calendar.tasks)"
 						:key="task.id"
 						:task="task" />
 						<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,route.calendarID) | filter:{'completed':'false'} | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
@@ -53,7 +53,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					class="completed-tasks"
 					collectionId="completed"
 					type="list">
-					<task v-for="task in rootTasks(calendar.tasks)"
+					<task v-for="task in completedRootTasks(calendar.tasks)"
 						:key="task.id"
 						:task="task" />
 						<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,route.calendarID) | filter:{'completed':true} | orderBy:'completed_date':true"> -->
@@ -117,7 +117,8 @@ export default {
 	mapGetters({
 		completedCount: 'getCalendarCountCompleted',
 		calendar: 'getCalendarByRoute',
-		rootTasks: 'findRootTasks'
+		uncompletedRootTasks: 'findUncompletedRootTasks',
+		completedRootTasks: 'findCompletedRootTasks'
 	})
 	),
 	methods: {
