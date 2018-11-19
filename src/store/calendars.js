@@ -69,7 +69,7 @@ export function mapDavCollectionToCalendar(calendar) {
 		color: calendar.color,
 		enabled: calendar.enabled !== false,
 		owner: calendar.owner,
-		readOnly: false, // this currently does not work correctly. Need to get the state from the actual calendar!
+		readOnly: !calendar.isWriteable(),
 		tasks: [],
 		url: calendar.url,
 		dav: calendar,
