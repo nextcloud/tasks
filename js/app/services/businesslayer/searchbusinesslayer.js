@@ -40,6 +40,7 @@
 					this._$location = _$location;
 					this.getFilter = __bind(this.getFilter, this);
 					this.setFilter = __bind(this.setFilter, this);
+					this.cleanSearch = __bind(this.cleanSearch, this);
 					this.attach = __bind(this.attach, this);
 					this.initialize();
 					this._$searchString = '';
@@ -48,14 +49,22 @@
 				SearchBusinessLayer.prototype.attach = function(search) {
 					var _this = this;
 					search.setFilter('tasks', function(query) {
-						return _this._$rootScope.$apply(function() {
-							return _this.setFilter(query);
-						});
+						return _this.setFilter(query);
 					});
 				};
 
 				SearchBusinessLayer.prototype.setFilter = function(query) {
-					this._$searchString = query;
+					var _this = this;
+					return _this._$rootScope.$apply(function() {
+						_this._$searchString = query;	
+					});
+				};
+
+				SearchBusinessLayer.prototype.cleanSearch = function() {
+					var _this = this;
+					return _this._$rootScope.$apply(function() {
+						_this._$searchString = '';
+					});
 				};
 
 				SearchBusinessLayer.prototype.getFilter = function() {
@@ -63,7 +72,14 @@
 				};
 
 				SearchBusinessLayer.prototype.initialize = function() {
-					return OC.Plugins.register('OCA.Search', this);
+
+					var version = OC.config.version.split('.');
+
+					if (version[0] >= 14) {
+						OC.Search = new OCA.Search(this.setFilter, this.cleanSearch);
+					} else {
+						OC.Plugins.register('OCA.Search', this);
+					}
 				};
 
 				return SearchBusinessLayer;

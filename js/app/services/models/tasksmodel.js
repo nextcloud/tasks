@@ -126,7 +126,7 @@
 					for (var _i = 0, _len = tasks.length; _i < _len; _i++) {
 						task = tasks[_i];
 						if (task.calendarid === listID) {
-							taskIDs.push(task.id);
+							taskIDs.push(task.uid);
 						}
 					}
 					_results = [];
@@ -172,7 +172,7 @@
 				};
 
 				TasksModel.prototype.isLoaded = function(task) {
-					if (this.getById(task.id)) {
+					if (this.getByUid(task.uid)) {
 						return true;
 					} else {
 						return false;
@@ -216,12 +216,12 @@
 					}
 				};
 
-				TasksModel.prototype.getIdByUid = function(uid) {
+				TasksModel.prototype.getUriByUid = function(uid) {
 					var tasks = this.getAll();
 					for (var _i = 0, _len = tasks.length; _i < _len; _i++) {
 						var task = tasks[_i];
 						if (task.uid === uid) {
-							return task.id;
+							return task.uri;
 						}
 					}
 					return false;
@@ -296,7 +296,7 @@
 									continue;
 								}
 								ret.push(task);
-								parentID = this.getIdByUid(task.related);
+								parentID = this.getUriByUid(task.related);
 								ancestors = this.getAncestor(parentID, ret);
 								if (ancestors) {
 									ret = ret.concat(ancestors);
@@ -310,7 +310,7 @@
 				TasksModel.prototype.objectExists = function(task, ret) {
 					for (var _i = 0, _len = ret.length; _i < _len; _i++) {
 						var re = ret[_i];
-						if (re.id === task.id) {
+						if (re.uid === task.uid) {
 							return true;
 						}
 					}
@@ -319,16 +319,12 @@
 
 				TasksModel.prototype.filterTasksByString = function(task, filter) {
 					var key, keys, value;
-					keys = ['name', 'note', 'location', 'categories', 'comments'];
+					keys = ['summary', 'note', 'location', 'categories'];
 					filter = filter.toLowerCase();
 					for (key in task) {
 						value = task[key];
 						if (__indexOf.call(keys, key) >= 0) {
-							if (key === 'comments') {
-								if (this.searchComments(task.comments, filter)) {
-									return true;
-								}
-							} else if (key === 'categories') {
+							if (key === 'categories') {
 								if (this.searchCategories(task.categories, filter)) {
 									return true;
 								}
@@ -340,14 +336,25 @@
 					return false;
 				};
 
-				TasksModel.prototype.searchComments = function(comments, filter) {
-					for (var _i = 0, _len = comments.length; _i < _len; _i++) {
-						var comment = comments[_i];
-						if (comment.comment.toLowerCase().indexOf(filter) !== -1) {
-							return true;
+				TasksModel.prototype.getAncestor = function(taskUri, ret) {
+					var ancestors, parentUri, task, tasks;
+					tasks = [];
+					task = this.getByUri(taskUri);
+					if (task) {
+						if (this.objectExists(task, ret)) {
+							return tasks;
+						}
+						tasks.push(task);
+						if (this.hasNoParent(task)) {
+							return tasks;
+						}
+						parentUri = this.getUriByUid(task.related);
+						ancestors = this.getAncestor(parentUri, ret);
+						if (ancestors) {
+							tasks = tasks.concat(ancestors);
 						}
 					}
-					return false;
+					return tasks;
 				};
 
 				TasksModel.prototype.searchCategories = function(categories, filter) {
@@ -385,50 +392,6 @@
 
 				TasksModel.prototype.current = function(start, due) {
 					return !moment(start, "YYYYMMDDTHHmmss").isValid() || moment(start, "YYYYMMDDTHHmmss").diff(moment(), 'days', true) < 0 || moment(due, "YYYYMMDDTHHmmss").diff(moment(), 'days', true) < 0;
-				};
-
-				TasksModel.prototype.addComment = function(comment) {
-					var task;
-					task = this.getById(comment.taskID);
-					if (task.comments) {
-						task.comments.push(comment);
-					} else {
-						task.comments = [comment];
-					}
-				};
-
-				TasksModel.prototype.updateComment = function(comment) {
-					var com, i, task, _i, _len, _ref, _results;
-					task = this.getById(comment.taskID);
-					i = 0;
-					_ref = task.comments;
-					_results = [];
-					for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-						com = _ref[_i];
-						if (com.tmpID === comment.tmpID) {
-							task.comments[i] = comment;
-							break;
-						}
-						_results.push(i++);
-					}
-					return _results;
-				};
-
-				TasksModel.prototype.deleteComment = function(taskID, commentID) {
-					var comment, i, task, _i, _len, _ref, _results;
-					task = this.getById(taskID);
-					i = 0;
-					_ref = task.comments;
-					_results = [];
-					for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-						comment = _ref[_i];
-						if (comment.id === commentID) {
-							task.comments.splice(i, 1);
-							break;
-						}
-						_results.push(i++);
-					}
-					return _results;
 				};
 
 				return TasksModel;
