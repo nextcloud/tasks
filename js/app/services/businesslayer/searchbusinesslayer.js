@@ -40,6 +40,7 @@
 					this._$location = _$location;
 					this.getFilter = __bind(this.getFilter, this);
 					this.setFilter = __bind(this.setFilter, this);
+					this.cleanSearch = __bind(this.cleanSearch, this);
 					this.attach = __bind(this.attach, this);
 					this.initialize();
 					this._$searchString = '';
@@ -48,16 +49,22 @@
 				SearchBusinessLayer.prototype.attach = function(search) {
 					var _this = this;
 					search.setFilter('tasks', function(query) {
-						return _this._$rootScope.$apply(function() {
-							return _this.setFilter(query);
-						});
+						return _this.setFilter(query);
 					});
-					search.setRenderer('task', this.renderTaskResult.bind(this));
-					return search.setHandler('task', this.handleTaskClick.bind(this));
 				};
 
 				SearchBusinessLayer.prototype.setFilter = function(query) {
-					this._$searchString = query;
+					var _this = this;
+					return _this._$rootScope.$apply(function() {
+						_this._$searchString = query;	
+					});
+				};
+
+				SearchBusinessLayer.prototype.cleanSearch = function() {
+					var _this = this;
+					return _this._$rootScope.$apply(function() {
+						_this._$searchString = '';
+					});
 				};
 
 				SearchBusinessLayer.prototype.getFilter = function() {
@@ -65,40 +72,14 @@
 				};
 
 				SearchBusinessLayer.prototype.initialize = function() {
-					var _this = this;
-					this.handleTaskClick = function($row, result, event) {
-						return _this._$location.path('/lists/' + result.calendarid + '/tasks/' + result.id);
-					};
-					this.renderTaskResult = function($row, result) {
-						var $template;
-						if (!_this._$tasksmodel.filterTasks(result, _this._$routeparams.listID) || !_this._$tasksmodel.isLoaded(result)) {
-							$template = $('div.task-item.template');
-							$template = $template.clone();
-							$row = $('<tr class="result"></tr>').append($template.removeClass('template'));
-							$row.data('result', result);
-							$row.find('span.title').text(result.name);
-							if (result.starred) {
-								$row.find('span.task-star').addClass('task-starred');
-							}
-							if (result.completed) {
-								$row.find('div.task-item').addClass('done');
-								$row.find('span.task-checkbox').addClass('svg-checkmark');
-							}
-							if (result.complete) {
-								$row.find('div.percentdone').css({
-									'width': result.complete + '%',
-									'background-color': '' + _this._$listsmodel.getColor(result.calendarid)
-								});
-							}
-							if (result.note) {
-								$row.find('div.title-wrapper').addClass('attachment');
-							}
-							return $row;
-						} else {
-							return null;
-						}
-					};
-					return OC.Plugins.register('OCA.Search', this);
+
+					var version = OC.config.version.split('.');
+
+					if (version[0] >= 14) {
+						OC.Search = new OCA.Search(this.setFilter, this.cleanSearch);
+					} else {
+						OC.Plugins.register('OCA.Search', this);
+					}
 				};
 
 				return SearchBusinessLayer;
