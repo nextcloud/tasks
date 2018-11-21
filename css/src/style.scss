@@ -1152,22 +1152,9 @@
 	}
 }
 
-#status {
-	padding: 10px 0 18px !important;
-	height: 22px !important;
-	background-color: transparent !important;
-	font-weight: bold;
-	color: $gray;
-	font-size: 13px !important;
-
-	&.emptycontent {
-		position: relative;
-	}
-}
-
 /**
-	* rules for sortorder-dropdown
-	*/
+ * rules for sortorder-dropdown
+ */
 
 .sortorder-dropdown-button {
 	background-color: $gray_easy;
