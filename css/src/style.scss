@@ -445,11 +445,9 @@
 	}
 
 	&.add-subtask {
-		background: $white;
 		border: 1px solid $gray_light;
 
 		input {
-			background: transparent none repeat scroll 0 0 !important;
 			border: medium none !important;
 			border-radius: 0 !important;
 			box-shadow: none !important;
@@ -474,7 +472,6 @@
 }
 
 .task-body {
-	background-color: $white;
 	height: 37px;
 	list-style: none outside none;
 	margin: 0;
@@ -694,7 +691,6 @@
 			}
 
 			.expandable-container {
-				background: none repeat scroll 0 0 $white;
 				border: 1px solid $gray;
 				padding: 0 6px;
 				display: none !important;
@@ -895,7 +891,6 @@
 				}
 
 				input {
-					background-color: $white;
 					border-radius: 0;
 					margin-top: 0;
 					color: $gray_dark;
@@ -1085,10 +1080,6 @@
 		.icon {
 			opacity: .7;
 		}
-
-		.detail-checkbox:not(.disabled) {
-			border-color: $black;
-		}
 	}
 
 	.icon {
@@ -1126,16 +1117,17 @@
 	&.task-checkbox,
 	&.detail-checkbox {
 		border-radius: 3px;
-		border: 1px solid $gray;
+		border: 1px solid var(--color-main-text);
 		float: left;
 		margin: 9px;
+		opacity: 0.5;
 
 		&:not(.icon-checkmark) {
 			background: unset;
 		}
 
 		&:not(.disabled):hover {
-			border-color: $black;
+			opacity: 0.7;
 		}
 
 		&.disabled {
