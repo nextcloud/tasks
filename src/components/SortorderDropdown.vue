@@ -24,8 +24,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		<div v-click-outside="closeMenu" class="app-navigation-entry-utils" @click="toggleMenu">
 			<div :title="t('tasks', 'Change sort order')" class="app-navigation-entry-utils-menu-button">
 				<button class="sortorder-dropdown-button">
-					<span :class="sortOrderIcon" class="icon" />
-					<span :class="sortDirection ? 'icon-sort-up' : 'icon-sort-down'" class="icon sort-indicator" />
+					<span :class="sortOrderIcon" class="icon icon-bw" />
+					<span :class="sortDirection ? 'icon-sort-up' : 'icon-sort-down'" class="icon icon-bw sort-indicator" />
 				</button>
 			</div>
 		</div>
@@ -36,9 +36,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					:class="{active: sortOrder == order.id}"
 					@click="setSortOrder(order.id)">
 					<a>
-						<span :class="order.icon" class="icon" />
+						<span :class="order.icon" class="icon icon-bw" />
 						<span class="label">{{ order.text }}</span>
-						<span :class="sortDirection ? 'icon-sort-up' : 'icon-sort-down'" class="icon sort-indicator" />
+						<span :class="sortDirection ? 'icon-sort-up' : 'icon-sort-down'" class="icon icon-bw sort-indicator" />
 					</a>
 				</li>
 			</ul>

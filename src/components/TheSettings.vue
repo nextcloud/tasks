@@ -44,7 +44,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<li v-for="collection in collections"
 					:key="collection.id">
 					<div class="label-container">
-						<span :class="collection.icon" class="icon">
+						<span :class="collection.icon" class="icon icon-bw">
 							<span v-if="collection.id=='today'">{{ dayOfMonth }}</span>
 						</span>
 						<label :for="'visibilityCollection-' + collection.id" class="title">{{ collection.displayName }}</label>
