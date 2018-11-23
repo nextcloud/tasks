@@ -8,13 +8,13 @@
 	"mode": {
 		"css": {
 			"bust": false,
-			"common": "icon",
+			"common": "icon-color",
 			"prefix": ".icon-%s",
-			"sprite": "../img/sprites.svg",
+			"sprite": "../img/color.svg",
 			"render": {
 				"scss": {
-					"template": "svg-sprite.tmpl",
-					"dest": "src/sprites.scss"
+					"template": "svg-sprite-color.tmpl",
+					"dest": "src/sprites-color.scss"
 				}
 			}
 		}

@@ -18,7 +18,7 @@
 				z-index: -1;
 				width: 16px;
 				height: 16px;
-				background: url('../../../apps/tasks/css/../img/sprites.svg') no-repeat;
+				background: var(--icon-tasks-bw-000) no-repeat;
 				margin: 14px;
 				margin-left: -30px;
 				background-position: inherit;
@@ -721,7 +721,13 @@
 				.icon {
 					height: 24px;
 					width: 24px;
-					background-size: 144px 144px;
+					&.icon-color {
+						background-size: 96px 72px;
+					}
+
+					&.icon-bw {
+						background-size: 120px 120px;
+					}
 				}
 			}
 
@@ -798,7 +804,8 @@
 				&.date .icon {
 					&.icon-calendar-due,
 					&.icon-calendar-overdue,
-					&.icon-percent {
+					&.icon-percent,
+					&.icon-percent-active {
 						opacity: 1;
 					}
 				}

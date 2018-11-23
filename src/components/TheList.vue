@@ -122,7 +122,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			</div>
 		</router-link>
 		<li v-click-outside="cancelCreate" :class="{edit: creating}" class="newList icon-add reactive editing">
-			<a class="addlist icon sprite"
+			<a class="icon icon-bw addlist sprite"
 				@click="startCreate($event)">
 				<span class="title">{{ t('tasks', 'Add List...') }}</span>
 			</a>

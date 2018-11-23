@@ -16,7 +16,7 @@
 		"lint": "eslint --ext .js,.vue src tests",
 		"lint:fix": "eslint --ext .js,.vue src tests --fix",
 		"test": "jest --verbose",
-		"svg_sprite": "svg-sprite --config svg-sprite.json img/src/**/*.svg"
+		"svg_sprite": "svg-sprite --config svg-sprite-color.json img/src/color/*.svg && svg-sprite --config svg-sprite-bw.json img/src/bw/*.svg"
 	},
 	"repository": {
 		"type": "git",
