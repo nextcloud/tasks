@@ -30,11 +30,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					class="checkbox reactive"
 					role="checkbox"
 					@click="toggleCompleted(task.uri)">
-					<span :class="{'icon-checkmark': task.completed, 'disabled': task.calendar.readOnly}" class="icon detail-checkbox" />
+					<span :class="{'icon-checkmark': task.completed, 'disabled': task.calendar.readOnly}" class="icon icon-bw detail-checkbox" />
 				</a>
 				<a class="star reactive" @click="toggleStarred(task.uri)">
 					<span :class="[{'disabled': task.calendar.readOnly}, iconStar]"
-						class="icon icon-task-star" />
+						class="icon" />
 				</a>
 				<div v-click-outside="() => finishEditing('summary')">
 					<div :class="{'strike-through': task.completed}"
@@ -60,8 +60,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						class="section detail-start">
 						<div v-click-outside="() => finishEditing('start')"
 							@click="editProperty('start', $event)">
-							<span :class="{'icon-calendar-due': valid(task.start), 'icon-calendar-overdue': overdue(task.start)}"
-								class="icon icon-calendar" />
+							<span :class="[dateIcon(task.start)]"
+								class="icon" />
 							<span class="section-title">{{ task.start | startDate }}</span>
 							<div v-if="edit=='start'" class="section-edit">
 								<datetime-picker :value="startDate" :lang="lang"
@@ -76,10 +76,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						</div>
 						<div class="utils">
 							<a>
-								<span class="icon detail-save icon-checkmark-color end-edit reactive" />
+								<span class="icon icon-color detail-save icon-checkmark-color end-edit reactive" />
 							</a>
 							<a class="end-edit" @click="setProperty('start', '')">
-								<span class="icon icon-trash reactive" />
+								<span class="icon icon-bw icon-trash reactive" />
 							</a>
 						</div>
 					</li>
@@ -87,8 +87,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						class="section detail-date">
 						<div v-click-outside="() => finishEditing('due')"
 							@click="editProperty('due', $event)">
-							<span :class="{'icon-calendar-due': valid(task.due), 'icon-calendar-overdue': overdue(task.due)}"
-								class="icon icon-calendar" />
+							<span :class="[dateIcon(task.due)]"
+								class="icon" />
 							<span class="section-title">{{ task.due | dueDate }}</span>
 							<div v-if="edit=='due'" class="section-edit">
 								<datetime-picker :value="dueDate" :lang="lang"
@@ -103,10 +103,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						</div>
 						<div class="utils">
 							<a>
-								<span class="icon detail-save icon-checkmark-color end-edit reactive" />
+								<span class="icon icon-color detail-save icon-checkmark-color end-edit reactive" />
 							</a>
 							<a class="end-edit" @click="setProperty('due', '')">
-								<span class="icon icon-trash reactive" />
+								<span class="icon icon-bw icon-trash reactive" />
 							</a>
 						</div>
 					</li>
@@ -116,7 +116,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						role="checkbox"
 						@click="toggleAllDay(task.uri)">
 						<div>
-							<span :class="{'icon-checkmark': task.allDay, 'disabled': task.calendar.readOnly}" class="icon detail-checkbox" />
+							<span :class="{'icon-checkmark': task.allDay, 'disabled': task.calendar.readOnly}" class="icon icon-color detail-checkbox" />
 							<span class="section-title">{{ t('tasks', 'All day') }}</span>
 						</div>
 					</li>
@@ -125,7 +125,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						<div v-click-outside="() => finishEditing('priority')"
 							@click="editProperty('priority')">
 							<span :class="[iconStar]"
-								class="icon icon-task-star" />
+								class="icon" />
 							<span class="section-title">{{ task.priority | priority }}</span>
 							<div class="section-edit">
 								<input v-model="tmpTask.priority"
@@ -145,10 +145,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						</div>
 						<div class="utils">
 							<a>
-								<span class="icon detail-save icon-checkmark-color end-edit reactive" />
+								<span class="icon icon-color detail-save icon-checkmark-color end-edit reactive" />
 							</a>
 							<a class="end-edit" @click="setProperty('priority', 0)">
-								<span class="icon icon-trash reactive" />
+								<span class="icon icon-bw icon-trash reactive" />
 							</a>
 						</div>
 					</li>
@@ -156,7 +156,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						class="section detail-complete">
 						<div v-click-outside="() => finishEditing('complete')"
 							@click="editProperty('complete')">
-							<span :class="{'icon-percent-active': task.complete>0}" class="icon icon-percent" />
+							<span :class="[iconPercent]" class="icon" />
 							<span class="section-title">{{ task.complete | complete }}</span>
 							<div class="section-edit">
 								<input v-model="tmpTask.complete"
@@ -177,16 +177,16 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						</div>
 						<div class="utils">
 							<a>
-								<span class="icon detail-save icon-checkmark-color end-edit reactive" />
+								<span class="icon icon-color detail-save icon-checkmark-color end-edit reactive" />
 							</a>
 							<a class="end-edit" @click="setProperty('complete', 0)">
-								<span class="icon icon-trash reactive" />
+								<span class="icon icon-bw icon-trash reactive" />
 							</a>
 						</div>
 					</li>
 					<li :class="{'active': task.categories.length>0}" class="section detail-categories">
 						<div>
-							<span :class="{'icon-tag-active': task.categories.length>0}" class="icon icon-tag detail-categories" />
+							<span :class="[iconCategories]" class="icon detail-categories" />
 							<div class="detail-categories-container">
 								<multiselect v-if="task.categories"
 									v-model="task.categories"
@@ -226,10 +226,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<a v-show="!task.calendar.readOnly"
 					class="left close-all reactive"
 					@click="deleteTask(task.uri)">
-					<span class="icon icon-trash" />
+					<span class="icon icon-bw icon-trash" />
 				</a>
 				<a class="right close-all reactive" @click="closeDetails">
-					<span class="icon icon-hide" />
+					<span class="icon icon-bw icon-hide" />
 				</a>
 			</div>
 		</div>
@@ -398,7 +398,23 @@ export default {
 		},
 		iconStar: function() {
 			if (this.task.priority) {
-				return 'icon-task-star-' + this.priorityString
+				return 'icon-color icon-task-star-' + this.priorityString
+			} else {
+				return 'icon-bw icon-task-star'
+			}
+		},
+		iconPercent: function() {
+			if (this.task.complete > 0) {
+				return 'icon-color icon-percent-active'
+			} else {
+				return 'icon-bw icon-percent'
+			}
+		},
+		iconCategories: function() {
+			if (this.task.categories.length > 0) {
+				return 'icon-color icon-tag-active'
+			} else {
+				return 'icon-bw icon-tag'
 			}
 		},
 		startDate: function() {
@@ -429,6 +445,18 @@ export default {
 					this.$router.push({ path: `/calendars/${this.$route.params.calendarId}` })
 				} else {
 					this.$router.push({ path: `/collections/${this.$route.params.collectionId}` })
+				}
+			},
+
+			dateIcon: function(date) {
+				if (valid(date)) {
+					var c = 'icon-color icon-calendar-due'
+					if (overdue(date)) {
+						c += ' icon-calendar-overdue'
+					}
+					return c
+				} else {
+					return 'icon-bw icon-calendar'
 				}
 			},
 

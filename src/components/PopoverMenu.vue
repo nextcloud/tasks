@@ -21,7 +21,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<component :is="tag">
-		<button v-click-outside="closeMenu" @click="toggleMenu" />
+		<button v-click-outside="closeMenu" class="icon-more" @click="toggleMenu" />
 		<div :class="{'open': menuOpen}" class="app-navigation-entry-menu">
 			<slot />
 		</div>

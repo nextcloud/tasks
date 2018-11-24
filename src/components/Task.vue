@@ -40,30 +40,30 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				name="toggleCompleted"
 				role="checkbox"
 				@click="toggleCompleted(task)">
-				<span :class="{'icon-checkmark': task.completed}" class="icon task-checkbox reactive no-nav" />
+				<span :class="{'icon-checkmark': task.completed}" class="icon icon-bw task-checkbox reactive no-nav" />
 			</span>
 			<span class="icon task-separator" />
 			<span class="task-star" @click="toggleStarred(task.uri)">
-				<span :class="[iconStar]" class="icon icon-task-star right large reactive no-nav" />
+				<span :class="[iconStar]" class="icon right large reactive no-nav" />
 			</span>
 			<span v-if="!task.calendar.readOnly"
 				class="task-addsubtask add-subtask">
 				<span :taskId="task.uri"
-					:title="subtasksCreationPlaceholder" class="icon icon-add right large reactive no-nav"
+					:title="subtasksCreationPlaceholder" class="icon icon-bw icon-add right large reactive no-nav"
 					@click="showSubtaskInput = true" />
 			</span>
 			<span v-if="task.subTasks.length" @click="toggleSubtasks(task)">
 				<span :title="t('tasks', 'Toggle subtasks')"
 					:class="task.hideSubtasks ? 'icon-subtasks-hidden' : 'icon-subtasks-visible'"
-					class="icon right large subtasks reactive no-nav" />
+					class="icon icon-bw right large subtasks reactive no-nav" />
 			</span>
 			<span v-if="hasCompletedSubtasks" @click="toggleCompletedSubtasks(task)">
 				<span :title="t('tasks', 'Toggle completed subtasks')"
 					:class="{'active': !task.hideCompletedSubtasks}"
-					class="icon icon-toggle right large toggle-completed-subtasks reactive no-nav" />
+					class="icon icon-bw icon-toggle right large toggle-completed-subtasks reactive no-nav" />
 			</span>
 			<span v-if="task.note!=''">
-				<span class="icon icon-note right large" />
+				<span class="icon icon-bw icon-note right large" />
 			</span>
 			<span :class="{overdue: overdue(task.due)}" class="duedate">{{ task.due | formatDate }}</span>
 			<span v-if="$route.params.collectionId=='week'" class="listname">{{ task.calendar.displayName }}</span>
@@ -161,11 +161,13 @@ export default {
 
 		iconStar: function() {
 			if (this.task.priority > 5) {
-				return 'icon-task-star-low'
+				return 'icon-color icon-task-star-low'
 			} else if (this.task.priority === 5) {
-				return 'icon-task-star-medium'
+				return 'icon-color icon-task-star-medium'
 			} else if (this.task.priority > 0 && this.task.priority < 5) {
-				return 'icon-task-star-high'
+				return 'icon-color icon-task-star-high'
+			} else {
+				return 'icon-bw icon-task-star'
 			}
 		},
 
