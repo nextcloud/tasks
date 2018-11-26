@@ -109,7 +109,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			</div>
 			<div class="app-navigation-entry-edit caldav">
 				<form>
-					<input :value="calendar.caldav"
+					<input :value="url(calendar)"
 						class="caldav"
 						readonly
 						type="text">
@@ -260,6 +260,10 @@ export default {
 				}
 				url += '?export'
 				return url
+			},
+			url(calendar) {
+				const rootURL = OC.linkToRemote('dav')
+				return new URL(calendar.url, rootURL)
 			},
 			setColor: function(color) {
 				this.selectedColor = color
