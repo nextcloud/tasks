@@ -1,7 +1,7 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Verk",
+    "Tasks" : "Verkefni",
     "Due yesterday" : "Átti að ljúka í gær",
     "Due today" : "Á að ljúka í dag",
     "Due tomorrow" : "Á að ljúka á morgun",
@@ -64,7 +64,7 @@ OC.L10N.register(
     "Add an item in \"%s\"..." : "Bæta atriði við \"%s\"...",
     "Add a current item in \"%s\"..." : "Bæta þessu atriði við \"%s\"...",
     "Add a subtask to \"%s\"..." : "Bæta undirverkefni við \"%s\"...",
-    "_%n Completed Task_::_%n Completed Tasks_" : ["%n lokið verk","%n lokin verk"],
+    "_%n Completed Task_::_%n Completed Tasks_" : ["%n lokið verkefni","%n lokin verkefni"],
     "Hours" : "klukkustundir",
     "Minutes" : "mínútur",
     "Set due date" : "Setja skiladag",
@@ -86,6 +86,7 @@ OC.L10N.register(
     "Current" : "Núverandi",
     "Completed" : "Lokið",
     "The Tasks app for Nextcloud" : "Verkefnaforrit fyrir Nextcloud",
+    "Once enabled, a new Tasks menu will appear in your Nextcloud apps menu. From there you can add and delete tasks, edit their title, description, start and due dates, reminder times, mark them as important, and add comments on them. Tasks can be shared between users. Tasks can be synchronized using CalDav (each task list is linked to an Nextcloud calendar, to sync it to your local client - Thunderbird, Evolution, KDE Kontact, iCal... - just add the calendar as a remote calendar in you client). You can download your tasks as ICS files using the download button for each calendar." : "Þegar þetta hefur verið virkjað birtist ný Verkefni-valmynd í Nextcloud-forritavalmyndinni. Þaðan er hægt að bæta við og eyða verkefnum, breyta fyrirsögn þeirra, lýsingu, upphafs- og lokadagsetningum, tímasetningum áminninga, merkja sem mikilvæg og bæta athugasemdum við verk. Hægt er að seila verkefnum á milli notenda. Verkefni er hægt að samstilla með CalDav (hver verkefnalisti er tendur við Nextcloud-dagatal, til að samstilla það við dagatalatengd forrit - Thunderbird, Evolution, KDE Kontact, iCal... - þarf einfaldlega að bæta dagatalinu við sem fjartengdu dagatali í forritinu). Þú getur sótt verkefnin þín sem ICS-skrár með því að ýta á niðurhalshnappinn við hvert dagatal.",
     "Delete" : "Eyða",
     "Cancel" : "Hætta við",
     "Edit" : "Breyta",
@@ -104,15 +105,15 @@ OC.L10N.register(
     "Priority" : "Forgangur",
     "Alphabetically" : "Í stafrófsröð",
     "Manually" : "Handvirkt",
-    "Load remaining completed tasks." : "Hlaða inn afgangnum af loknum verkum.",
-    "Task is completed" : "Verki er lokið",
+    "Load remaining completed tasks." : "Hlaða inn afgangnum af loknum verkefnum.",
+    "Task is completed" : "Verkefni er lokið",
     "All day" : "Heilsdagsviðburður",
     "(New category)" : "(nýr flokkur)",
     "Select categories..." : "Veldu flokka...",
-    "Loading the task..." : "Hleð inn verkinu...",
-    "Task not found!" : "Verk fannst ekki!",
+    "Loading the task..." : "Hleð inn verkefninu...",
+    "Task not found!" : "Verkefn fannst ekki!",
     "add a subtask to" : "bæta undirverkefni við",
-    "Toggle subtasks" : "Víxla undirverkum af/á",
-    "Toggle completed subtasks" : "Víxla sýnileika kláraðra undirverka"
+    "Toggle subtasks" : "Víxla undirverkefnum af/á",
+    "Toggle completed subtasks" : "Víxla sýnileika kláraðra undirverkefna"
 },
 "nplurals=2; plural=(n % 10 != 1 || n % 100 == 11);");
