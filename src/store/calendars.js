@@ -35,7 +35,7 @@ import parseIcs from '../services/parseIcs'
 import client from '../services/cdav'
 import Task from '../models/task'
 import pLimit from 'p-limit'
-import { isTaskInList } from './storeHelper'
+import { isTaskInList, isParentInList } from './storeHelper'
 import { findVTODObyState } from './cdav-requests'
 
 const calendarModel = {
@@ -115,7 +115,7 @@ const getters = {
 		var calendar = getters.getCalendarById(calendarId)
 		return Object.values(calendar.tasks)
 			.filter(task => {
-				return task.completed === false && !task.related
+				return task.completed === false && (!task.related || !isParentInList(task, calendar.tasks))
 			}).length
 	},
 
@@ -136,7 +136,7 @@ const getters = {
 	getCalendarCountByCollectionId: (state, getters) => (calendarId, collectionId) => {
 		var calendar = getters.getCalendarById(calendarId)
 		var count = Object.values(calendar.tasks).filter(task => {
-			return isTaskInList(task, collectionId) && !task.related
+			return isTaskInList(task, collectionId) && (!task.related || !isParentInList(task, calendar.tasks))
 		}).length
 		return count
 	},
@@ -157,7 +157,7 @@ const getters = {
 		var calendar = getters.getCalendarById(calendarId)
 		return Object.values(calendar.tasks)
 			.filter(task => {
-				return task.completed === true && !task.related
+				return task.completed === true && (!task.related || !isParentInList(task, calendar.tasks))
 			}).length
 	},
 
