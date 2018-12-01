@@ -40,19 +40,21 @@ function findVTODObyState(calendar, completed, related) {
 			name: [NS.IETF_CALDAV, 'comp-filter'],
 			attributes: [
 				['name', 'VTODO']
-			],
-			children: [{
-				name: [NS.IETF_CALDAV, 'prop-filter'],
-				attributes: [
-					['name', 'completed']
-				]
-			}]
+			]
 		}]
 	}
-	if (!completed) {
-		query.children[0].children[0].children = [{
-			name: [NS.IETF_CALDAV, 'is-not-defined']
+	if (completed !== null) {
+		query.children[0].children = [{
+			name: [NS.IETF_CALDAV, 'prop-filter'],
+			attributes: [
+				['name', 'completed']
+			]
 		}]
+		if (!completed) {
+			query.children[0].children[0].children = [{
+				name: [NS.IETF_CALDAV, 'is-not-defined']
+			}]
+		}
 	}
 	if (related) {
 		query.children[0].children.push({
