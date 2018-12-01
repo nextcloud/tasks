@@ -36,6 +36,7 @@ import client from '../services/cdav'
 import Task from '../models/task'
 import pLimit from 'p-limit'
 import { isTaskInList } from './storeHelper'
+import { findVTODObyState } from './cdav-requests'
 
 const calendarModel = {
 	id: '',
@@ -445,7 +446,7 @@ const actions = {
 	 * @returns {Promise}
 	 */
 	async getTasksFromCalendar(context, { calendar }) {
-		return calendar.dav.findByType('VTODO')
+		return findVTODObyState(calendar, false, null)
 			.then((response) => {
 				// We don't want to lose the url information
 				// so we need to parse one by one
