@@ -106,7 +106,7 @@ function overdue(due) {
  */
 function isParentInList(task, tasks) {
 	return Object.values(tasks).some(t => {
-		return t.uid === task.uid
+		return t.uid === task.related
 	})
 }
 
