@@ -20,7 +20,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<component :is="collectionType" />
+	<Component :is="collectionType" />
 </template>
 
 <script>
@@ -29,15 +29,15 @@ import Week from './Week'
 
 export default {
 	components: {
-		'collection-general': General,
-		'collection-week': Week
+		'CollectionGeneral': General,
+		'CollectionWeek': Week
 	},
 	computed: {
 		collectionType: function() {
 			if (this.$route.params.collectionId === 'week') {
-				return 'collection-week'
+				return 'CollectionWeek'
 			} else {
-				return 'collection-general'
+				return 'CollectionGeneral'
 			}
 		}
 	}

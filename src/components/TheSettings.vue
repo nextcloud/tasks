@@ -29,11 +29,14 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		<div id="app-settings-content">
 			<ul>
 				<li>
-					<label for="defaultCalendar">{{ t('tasks', 'Default list') }}</label>
+					<label for="defaultCalendar">
+						{{ t('tasks', 'Default list') }}
+					</label>
 					<select id="defaultCalendar" v-model="defaultCalendarId">
 						<option v-for="calendar in calendars"
+							:key="calendar.id"
 							:value="calendar.id"
-							:key="calendar.id">
+						>
 							{{ calendar.displayName }}
 						</option>
 					</select>
@@ -42,19 +45,26 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					{{ t('tasks', 'Visibility of Smart Collections') }}
 				</li>
 				<li v-for="collection in collections"
-					:key="collection.id">
+					:key="collection.id"
+				>
 					<div class="label-container">
 						<span :class="collection.icon" class="icon icon-bw">
-							<span v-if="collection.id=='today'">{{ dayOfMonth }}</span>
+							<span v-if="collection.id=='today'">
+								{{ dayOfMonth }}
+							</span>
 						</span>
-						<label :for="'visibilityCollection-' + collection.id" class="title">{{ collection.displayName }}</label>
+						<label :for="'visibilityCollection-' + collection.id" class="title">
+							{{ collection.displayName }}
+						</label>
 					</div>
 					<select :id="'visibilityCollection-' + collection.id"
 						:value="collection.show"
-						@change="setVisibility({ id: collection.id, show: +$event.target.value })">
+						@change="setVisibility({ id: collection.id, show: +$event.target.value })"
+					>
 						<option v-for="collectionOption in collectionOptions"
+							:key="collectionOption.id"
 							:value="collectionOption.id"
-							:key="collectionOption.id">
+						>
 							{{ collectionOption.name }}
 						</option>
 					</select>
@@ -68,8 +78,6 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
-	components: {
-	},
 	data: function() {
 		return {
 			collectionOptions: [

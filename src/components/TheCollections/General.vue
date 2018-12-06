@@ -23,32 +23,39 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 	<div v-if="calendar">
 		<div v-if="collectionId !== 'completed' && !calendar.readOnly"
 			id="add-task"
-			class="add-task">
+			class="add-task"
+		>
 			<form name="addTaskForm" @submit="addTask">
 				<input v-model="newTaskName"
 					:placeholder="inputString"
 					:disabled="isAddingTask"
 					class="transparent"
-					@keyup.27="clearNewTask($event)">
+					@keyup.27="clearNewTask($event)"
+				>
 			</form>
 		</div>
-		<sortorderDropdown />
+		<SortorderDropdown />
 		<div class="task-list">
 			<div v-for="calendar in filteredCalendars"
 				:key="calendar.id"
 				:rel="calendar.id"
-				class="grouped-tasks ui-droppable">
-				<h2 class="heading">{{ calendar.displayName }}</h2>
+				class="grouped-tasks ui-droppable"
+			>
+				<h2 class="heading">
+					{{ calendar.displayName }}
+				</h2>
 				<ol :calendarID="calendar.id"
 					:collectionID="collectionId"
 					class="tasks"
-					type="list">
-					<task-body v-for="task in uncompletedRootTasks(calendar.tasks)"
+					type="list"
+				>
+					<TaskBody v-for="task in uncompletedRootTasks(calendar.tasks)"
 						:key="task.id"
-						:task="task" />
-						<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,calendar.uri) | filter:filterTasks(task,route.collectionID) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
+						:task="task"
+					/>
+					<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,calendar.uri) | filter:filterTasks(task,route.collectionID) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
 				</ol>
-				<loadCompletedButton v-if="collectionId === 'completed'" :calendar="calendar" />
+				<LoadCompletedButton v-if="collectionId === 'completed'" :calendar="calendar" />
 			</div>
 		</div>
 	</div>
@@ -62,9 +69,9 @@ import TaskBody from '../Task'
 
 export default {
 	components: {
-		'task-body': TaskBody,
-		'sortorderDropdown': SortorderDropdown,
-		'loadCompletedButton': LoadCompletedButton
+		'TaskBody': TaskBody,
+		'SortorderDropdown': SortorderDropdown,
+		'LoadCompletedButton': LoadCompletedButton
 	},
 	data() {
 		return {

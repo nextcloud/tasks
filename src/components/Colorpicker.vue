@@ -32,20 +32,24 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				:key="color"
 				:class="{ selected: (color===selectedColor) }"
 				:style="{'background-color': color}"
-				@click="pick(color)" />
+				@click="pick(color)"
+			/>
 			<li v-if="!supportsColorPicker"
 				:style="{'background-color': random}"
 				class="randomcolour"
-				@click="randomizeColour">
+				@click="randomizeColour"
+			>
 				<span class="icon icon-random" />
 			</li>
 			<label v-if="supportsColorPicker"
 				:style="{'background-color': selectedColor}"
-				class="color-selector-label">
+				class="color-selector-label"
+			>
 				<input :value="selectedColor"
 					type="color"
 					class="color-selector"
-					@change="pick($event.target.value)">
+					@change="pick($event.target.value)"
+				>
 			</label>
 		</ul>
 	</div>

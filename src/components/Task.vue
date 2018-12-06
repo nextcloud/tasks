@@ -22,16 +22,19 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <template>
 	<li :task-id="task.uri"
 		:class="{done: task.completed}"
-		class="task-item">
+		class="task-item"
+	>
 		<div :task-id="task.uri"
 			:class="{active: $route.params.taskId==task.uri}"
 			class="task-body"
 			type="task"
-			@click="navigate($event)">
+			@click="navigate($event)"
+		>
 			<div v-if="task.complete > 0" class="percentbar">
 				<div :style="{ width: task.complete + '%', 'background-color': task.calendar.color }"
 					:aria-label="t('tasks', '{complete} % completed', {complete: task.complete})"
-					class="percentdone" />
+					class="percentdone"
+				/>
 			</div>
 
 			<span :aria-checked="task.completed"
@@ -39,7 +42,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				class="task-checkbox"
 				name="toggleCompleted"
 				role="checkbox"
-				@click="toggleCompleted(task)">
+				@click="toggleCompleted(task)"
+			>
 				<span :class="{'icon-checkmark': task.completed}" class="icon icon-bw task-checkbox reactive no-nav" />
 			</span>
 			<span class="icon task-separator" />
@@ -47,55 +51,68 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<span :class="[iconStar]" class="icon right large reactive no-nav" />
 			</span>
 			<span v-if="!task.calendar.readOnly"
-				class="task-addsubtask add-subtask">
+				class="task-addsubtask add-subtask"
+			>
 				<span :taskId="task.uri"
 					:title="subtasksCreationPlaceholder" class="icon icon-bw icon-add right large reactive no-nav"
-					@click="showSubtaskInput = true" />
+					@click="showSubtaskInput = true"
+				/>
 			</span>
 			<span v-if="task.subTasks.length" @click="toggleSubtasks(task)">
 				<span :title="t('tasks', 'Toggle subtasks')"
 					:class="task.hideSubtasks ? 'icon-subtasks-hidden' : 'icon-subtasks-visible'"
-					class="icon icon-bw right large subtasks reactive no-nav" />
+					class="icon icon-bw right large subtasks reactive no-nav"
+				/>
 			</span>
 			<span v-if="hasCompletedSubtasks" @click="toggleCompletedSubtasks(task)">
 				<span :title="t('tasks', 'Toggle completed subtasks')"
 					:class="{'active': !task.hideCompletedSubtasks}"
-					class="icon icon-bw icon-toggle right large toggle-completed-subtasks reactive no-nav" />
+					class="icon icon-bw icon-toggle right large toggle-completed-subtasks reactive no-nav"
+				/>
 			</span>
 			<span v-if="task.note!=''">
 				<span class="icon icon-bw icon-note right large" />
 			</span>
-			<span :class="{overdue: overdue(task.due)}" class="duedate">{{ task.due | formatDate }}</span>
-			<span v-if="$route.params.collectionId=='week'" class="listname">{{ task.calendar.displayName }}</span>
+			<span :class="{overdue: overdue(task.due)}" class="duedate">
+				{{ task.due | formatDate }}
+			</span>
+			<span v-if="$route.params.collectionId=='week'" class="listname">
+				{{ task.calendar.displayName }}
+			</span>
 			<div class="task-info-wrapper">
 				<div class="title">
 					<span>{{ task.summary }}</span>
 				</div>
 				<div class="categories-list">
 					<span v-for="category in task.categories" :key="category" class="category">
-						<span :title="category" class="category-label">{{ category }}</span>
+						<span :title="category" class="category-label">
+							{{ category }}
+						</span>
 					</span>
 				</div>
 			</div>
 		</div>
 		<div class="subtasks-container">
-			<div v-click-outside="($event) => cancelCreation($event)"
-				v-if="showSubtaskInput"
-				class="task-item add-subtask">
+			<div v-if="showSubtaskInput"
+				v-click-outside="($event) => cancelCreation($event)"
+				class="task-item add-subtask"
+			>
 				<form name="addTaskForm" @submit="addTask">
-					<input v-focus
-						v-model="newTaskName"
+					<input v-model="newTaskName"
+						v-focus
 						:placeholder="subtasksCreationPlaceholder"
 						:disabled="isAddingTask"
-						@keyup.27="showSubtaskInput = false">
+						@keyup.27="showSubtaskInput = false"
+					>
 				</form>
 			</div>
 			<ol v-if="!task.hideSubtasks" :calendarID="task.calendar.uri">
-				<task-body-component v-for="subtask in task.subTasks"
+				<TaskBodyComponent v-for="subtask in task.subTasks"
 					:key="subtask.uid"
 					:task="subtask"
-					class="subtask" />
-					<!-- "orderBy:getSortOrder():settingsmodel.getById('various').sortDirection" -->
+					class="subtask"
+				/>
+				<!-- "orderBy:getSortOrder():settingsmodel.getById('various').sortDirection" -->
 			</ol>
 		</div>
 	</li>
@@ -103,17 +120,14 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import { overdue, valid } from '../store/storeHelper'
-import clickOutside from 'vue-click-outside'
+import ClickOutside from 'vue-click-outside'
 import { mapActions } from 'vuex'
 import focus from '../directives/focus'
 
 export default {
 	name: 'TaskBodyComponent',
-	components: {
-		clickOutside
-	},
 	directives: {
-		clickOutside,
+		ClickOutside,
 		focus
 	},
 	filters: {
@@ -157,6 +171,7 @@ export default {
 			} else if (collectionId) {
 				return '/collections/' + collectionId + '/tasks/' + this.task.uri
 			}
+			return ''
 		},
 
 		iconStar: function() {

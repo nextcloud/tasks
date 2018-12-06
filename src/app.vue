@@ -22,18 +22,18 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <template>
 	<div id="content" class="app-tasks">
 		<div id="app-navigation">
-			<theList />
-			<theSettings />
+			<TheList />
+			<TheSettings />
 		</div>
 
 		<div id="app-content">
 			<div class="content-wrapper">
-				<router-view />
+				<RouterView />
 			</div>
 		</div>
 
 		<div id="app-sidebar" :class="{disappear: $route.params.taskId === undefined}">
-			<router-view name="details" />
+			<RouterView name="details" />
 		</div>
 	</div>
 </template>
@@ -47,8 +47,8 @@ import client from './services/cdav.js'
 export default {
 	name: 'App',
 	components: {
-		'theSettings': TheSettings,
-		'theList': TheList
+		'TheSettings': TheSettings,
+		'TheList': TheList
 	},
 	computed: Object.assign({},
 		mapState({
