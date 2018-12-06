@@ -21,18 +21,22 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div>
-		<sortorderDropdown />
+		<SortorderDropdown />
 		<div class="task-list">
 			<div v-for="day in dayHasEntry(days)" :key="day" class="grouped-tasks ui-droppable">
-				<h2 class="heading">{{ day | formatDay }}</h2>
+				<h2 class="heading">
+					{{ day | formatDay }}
+				</h2>
 				<ol collectionID="week"
 					class="tasks"
 					listID=""
-					type="list">
-					<task-body v-for="task in uncompletedRootTasks(tasks)"
+					type="list"
+				>
+					<TaskBody v-for="task in uncompletedRootTasks(tasks)"
 						:key="task.id"
-						:task="task" />
-						<!-- ng-repeat="task in filtered = filteredTasks() | filter:taskAtDay(task,day) | filter:hasNoParent(task) | filter:{'completed':'false'} | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
+						:task="task"
+					/>
+					<!-- ng-repeat="task in filtered = filteredTasks() | filter:taskAtDay(task,day) | filter:hasNoParent(task) | filter:{'completed':'false'} | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
 				</ol>
 			</div>
 		</div>
@@ -46,8 +50,8 @@ import TaskBody from '../Task'
 
 export default {
 	components: {
-		'task-body': TaskBody,
-		'sortorderDropdown': SortorderDropdown
+		'TaskBody': TaskBody,
+		'SortorderDropdown': SortorderDropdown
 	},
 	filters: {
 		formatDay: function(day) {

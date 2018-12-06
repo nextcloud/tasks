@@ -23,23 +23,27 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 	<div class="content-wrapper">
 		<div v-if="task!=undefined"
 			:class="{'disabled': task.calendar.readOnly}"
-			class="flex-container">
+			class="flex-container"
+		>
 			<div :class="{'editing': edit=='summary'}" class="title">
 				<a :aria-checked="task.completed"
 					:aria-label="t('tasks', 'Task is completed')"
 					class="checkbox reactive"
 					role="checkbox"
-					@click="toggleCompleted(task.uri)">
+					@click="toggleCompleted(task.uri)"
+				>
 					<span :class="{'icon-checkmark': task.completed, 'disabled': task.calendar.readOnly}" class="icon icon-bw detail-checkbox" />
 				</a>
 				<a class="star reactive" @click="toggleStarred(task.uri)">
 					<span :class="[{'disabled': task.calendar.readOnly}, iconStar]"
-						class="icon" />
+						class="icon"
+					/>
 				</a>
 				<div v-click-outside="() => finishEditing('summary')">
 					<div :class="{'strike-through': task.completed}"
 						class="title-text"
-						@click="editProperty('summary')">
+						@click="editProperty('summary')"
+					>
 						{{ task.summary }}
 					</div>
 					<div class="expandable-container">
@@ -49,7 +53,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 								v-model="tmpTask.summary"
 								maxlength="200"
 								@keyup.27="cancelEditing('summary')"
-								@keydown.enter.prevent="finishEditing('summary')" />
+								@keydown.enter.prevent="finishEditing('summary')"
+							/>
 						</div>
 					</div>
 				</div>
@@ -57,21 +62,28 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			<div class="body">
 				<ul class="sections">
 					<li :class="{'date': valid(task.start), 'editing': edit=='start', 'high': overdue(task.start)}"
-						class="section detail-start">
+						class="section detail-start"
+					>
 						<div v-click-outside="() => finishEditing('start')"
-							@click="editProperty('start', $event)">
+							@click="editProperty('start', $event)"
+						>
 							<span :class="[dateIcon(task.start)]"
-								class="icon" />
-							<span class="section-title">{{ task.start | startDate }}</span>
+								class="icon"
+							/>
+							<span class="section-title">
+								{{ task.start | startDate }}
+							</span>
 							<div v-if="edit=='start'" class="section-edit">
-								<datetime-picker :value="startDate" :lang="lang"
+								<DatetimePicker :value="startDate" :lang="lang"
 									:format="dateFormat" :clearable="false" :first-day-of-week="firstDay"
 									:type="'date'" :placeholder="t('tasks', 'Set start date')"
-									class="date" @change="setStartDate" />
-								<datetime-picker :value="startDate" :lang="lang"
+									class="date" @change="setStartDate"
+								/>
+								<DatetimePicker :value="startDate" :lang="lang"
 									:format="timeFormat" :clearable="false" :time-picker-options="timePickerOptions"
 									:type="'time'" :placeholder="t('tasks', 'Set start time')"
-									class="time" @change="setStartTime" />
+									class="time" @change="setStartTime"
+								/>
 							</div>
 						</div>
 						<div class="utils">
@@ -84,21 +96,28 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						</div>
 					</li>
 					<li :class="{'date': valid(task.due), 'editing': edit=='due', 'high': overdue(task.due)}"
-						class="section detail-date">
+						class="section detail-date"
+					>
 						<div v-click-outside="() => finishEditing('due')"
-							@click="editProperty('due', $event)">
+							@click="editProperty('due', $event)"
+						>
 							<span :class="[dateIcon(task.due)]"
-								class="icon" />
-							<span class="section-title">{{ task.due | dueDate }}</span>
+								class="icon"
+							/>
+							<span class="section-title">
+								{{ task.due | dueDate }}
+							</span>
 							<div v-if="edit=='due'" class="section-edit">
-								<datetime-picker :value="dueDate" :lang="lang"
+								<DatetimePicker :value="dueDate" :lang="lang"
 									:format="dateFormat" :clearable="false" :first-day-of-week="firstDay"
 									:type="'date'" :placeholder="t('tasks', 'Set due date')"
-									class="date" @change="setDueDate" />
-								<datetime-picker :value="dueDate" :lang="lang"
+									class="date" @change="setDueDate"
+								/>
+								<DatetimePicker :value="dueDate" :lang="lang"
 									:format="timeFormat" :clearable="false" :time-picker-options="timePickerOptions"
 									:type="'time'" :placeholder="t('tasks', 'Set due time')"
-									class="time" @change="setDueTime" />
+									class="time" @change="setDueTime"
+								/>
 							</div>
 						</div>
 						<div class="utils">
@@ -114,19 +133,27 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						:aria-checked="task.allDay"
 						class="section detail-all-day reactive"
 						role="checkbox"
-						@click="toggleAllDay(task.uri)">
+						@click="toggleAllDay(task.uri)"
+					>
 						<div>
 							<span :class="{'icon-checkmark': task.allDay, 'disabled': task.calendar.readOnly}" class="icon icon-color detail-checkbox" />
-							<span class="section-title">{{ t('tasks', 'All day') }}</span>
+							<span class="section-title">
+								{{ t('tasks', 'All day') }}
+							</span>
 						</div>
 					</li>
 					<li :class="[{'editing': edit=='priority', 'date': task.priority>0}, priorityString]"
-						class="section detail-priority">
+						class="section detail-priority"
+					>
 						<div v-click-outside="() => finishEditing('priority')"
-							@click="editProperty('priority')">
+							@click="editProperty('priority')"
+						>
 							<span :class="[iconStar]"
-								class="icon" />
-							<span class="section-title">{{ task.priority | priority }}</span>
+								class="icon"
+							/>
+							<span class="section-title">
+								{{ task.priority | priority }}
+							</span>
 							<div class="section-edit">
 								<input v-model="tmpTask.priority"
 									class="priority-input"
@@ -134,13 +161,15 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									min="0"
 									max="9"
 									@keyup.27="cancelEditing('priority')"
-									@keydown.enter.prevent="finishEditing('priority')">
+									@keydown.enter.prevent="finishEditing('priority')"
+								>
 								<input v-model="tmpTask.priority"
 									type="range"
 									min="0"
 									max="9"
 									step="1"
-									@change="finishEditing('priority')">
+									@change="finishEditing('priority')"
+								>
 							</div>
 						</div>
 						<div class="utils">
@@ -153,11 +182,15 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						</div>
 					</li>
 					<li :class="{'editing': edit=='complete', 'date': task.complete>0}"
-						class="section detail-complete">
+						class="section detail-complete"
+					>
 						<div v-click-outside="() => finishEditing('complete')"
-							@click="editProperty('complete')">
+							@click="editProperty('complete')"
+						>
 							<span :class="[iconPercent]" class="icon" />
-							<span class="section-title">{{ task.complete | complete }}</span>
+							<span class="section-title">
+								{{ task.complete | complete }}
+							</span>
 							<div class="section-edit">
 								<input v-model="tmpTask.complete"
 									class="percent-input"
@@ -166,13 +199,15 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									max="100"
 									@keyup.27="cancelEditing('complete')"
 									@keydown.enter.prevent="finishEditing('complete')"
-									@keyup="setPropertyTemporarily('complete', tmpTask.complete)">
+									@keyup.exact="setPropertyTemporarily('complete', tmpTask.complete)"
+								>
 								<input v-model="tmpTask.complete"
 									type="range"
 									min="0"
 									max="100"
 									step="1"
-									@change="setPropertyTemporarily('complete', tmpTask.complete)">
+									@change="setPropertyTemporarily('complete', tmpTask.complete)"
+								>
 							</div>
 						</div>
 						<div class="utils">
@@ -188,7 +223,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						<div>
 							<span :class="[iconCategories]" class="icon detail-categories" />
 							<div class="detail-categories-container">
-								<multiselect v-if="task.categories"
+								<Multiselect v-if="task.categories"
 									v-model="task.categories"
 									:multiple="true"
 									:searchable="true"
@@ -199,7 +234,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									:close-on-select="false"
 									class="multiselect-vue"
 									@input="updateCategories"
-									@tag="addCategory" />
+									@tag="addCategory"
+								/>
 							</div>
 						</div>
 					</li>
@@ -207,9 +243,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						<div class="note">
 							<div v-click-outside="() => finishEditing('note')"
 								class="note-body selectable"
-								@click="editProperty('note')">
+								@click="editProperty('note')"
+							>
 								<div :class="{'editing': edit=='note'}" class="content-fakeable">
-									<div class="display-view">{{ task.note }}</div>
+									<div class="display-view">
+										{{ task.note }}
+									</div>
 									<div class="edit-view">
 										<div class="expandingArea active">
 											<pre><span>{{ tmpTask.note }}</span><br><br></pre>
@@ -225,7 +264,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			<div class="footer">
 				<a v-show="!task.calendar.readOnly"
 					class="left close-all reactive"
-					@click="deleteTask(task.uri)">
+					@click="deleteTask(task.uri)"
+				>
 					<span class="icon icon-bw icon-trash" />
 				</a>
 				<a class="right close-all reactive" @click="closeDetails">
@@ -244,16 +284,15 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 import { valid, overdue } from '../store/storeHelper'
 import { DatetimePicker, Multiselect } from 'nextcloud-vue'
 
-import clickOutside from 'vue-click-outside'
+import ClickOutside from 'vue-click-outside'
 
 export default {
 	components: {
-		clickOutside,
 		DatetimePicker,
 		Multiselect
 	},
 	directives: {
-		clickOutside
+		ClickOutside
 	},
 	filters: {
 		startDate: function(date) {

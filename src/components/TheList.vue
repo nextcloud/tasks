@@ -21,44 +21,56 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<ul id="collections">
-		<router-link
+		<RouterLink
 			v-for="collection in collections"
 			:id="'collection_' + collection.id"
+			:key="collection.id"
 			:collection-id="collection.id"
 			:to="'/collections/' + collection.id"
-			:key="collection.id"
 			:class="[collection.icon, {'animate-up': hideCollection(collection) }]"
 			tag="li" class="collection reactive"
-			active-class="active">
+			active-class="active"
+		>
 			<a class="sprite">
-				<span v-if="collection.id=='today'" class="date">{{ dayOfMonth }}</span>
-				<span class="title">{{ collection.displayName }}</span>
+				<span v-if="collection.id=='today'" class="date">
+					{{ dayOfMonth }}
+				</span>
+				<span class="title">
+					{{ collection.displayName }}
+				</span>
 			</a>
 			<div v-if="collection.id!='completed'" class="app-navigation-entry-utils">
 				<ul>
-					<li class="app-navigation-entry-utils-counter">{{ collectionCount(collection.id) | counterFormatter }}</li>
+					<li class="app-navigation-entry-utils-counter">
+						{{ collectionCount(collection.id) | counterFormatter }}
+					</li>
 				</ul>
 			</div>
-		</router-link>
-		<router-link
-			v-click-outside="() => resetView(calendar)"
+		</RouterLink>
+		<RouterLink
 			v-for="calendar in calendars"
 			:id="'list_' + calendar.id"
+			:key="calendar.id"
+			v-click-outside="() => resetView(calendar)"
 			:calendar-id="calendar.id"
 			:to="'/calendars/' + calendar.id"
-			:key="calendar.id"
 			:class="{edit: editing == calendar.id, caldav: caldav == calendar.id}"
 			tag="li"
 			class="list with-menu editing"
-			active-class="active">
+			active-class="active"
+		>
 			<div :style="{'background-color': calendar.color}" class="app-navigation-entry-bullet" />
 			<a>
-				<span class="title">{{ calendar.displayName }}</span>
+				<span class="title">
+					{{ calendar.displayName }}
+				</span>
 			</a>
 			<div class="app-navigation-entry-utils">
 				<ul>
-					<li class="app-navigation-entry-utils-counter">{{ calendarCount(calendar.id) | counterFormatter }}</li>
-					<popover v-show="!calendar.readOnly" tag="li" class="app-navigation-entry-utils-menu-button">
+					<li class="app-navigation-entry-utils-counter">
+						{{ calendarCount(calendar.id) | counterFormatter }}
+					</li>
+					<Popover v-show="!calendar.readOnly" tag="li" class="app-navigation-entry-utils-menu-button">
 						<ul>
 							<li>
 								<a @click="edit(calendar)">
@@ -78,79 +90,90 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									<span>{{ t('tasks', 'Download') }}</span>
 								</a>
 							</li>
-							<confirmation :message="deleteMessage(calendar.displayName)" @delete-calendar="deleteCalendar(calendar)" />
+							<Confirmation :message="deleteMessage(calendar.displayName)" @delete-calendar="deleteCalendar(calendar)" />
 						</ul>
-					</popover>
+					</Popover>
 				</ul>
 			</div>
 			<div :class="{error: nameError}" class="app-navigation-entry-edit name">
 				<form>
-					<input v-tooltip="{
+					<input v-model="newCalendarName"
+						v-tooltip="{
 							content: tooltipMessage,
 							show: showTooltip('list_' + calendar.id),
 							trigger: 'manual'
 						}"
-						v-model="newCalendarName"
 						class="edit"
 						type="text"
-						@keyup="checkName($event, calendar.id)">
+						@keyup="checkName($event, calendar.id)"
+					>
 					<input :title="t('tasks', 'Cancel')"
 						type="cancel"
 						value=""
 						class="action icon-close"
-						@click="resetView(calendar)">
+						@click="resetView(calendar)"
+					>
 					<input :title="t('tasks', 'Save')"
 						type="submit"
 						value=""
 						class="action icon-checkmark"
-						@click="save(calendar)">
+						@click="save(calendar)"
+					>
 				</form>
-				<colorpicker :selected-color="selectedColor" @color-selected="setColor(...arguments)" />
+				<Colorpicker :selected-color="selectedColor" @color-selected="setColor(...arguments)" />
 			</div>
 			<div class="app-navigation-entry-edit caldav">
 				<form>
 					<input :value="url(calendar)"
 						class="caldav"
 						readonly
-						type="text">
+						type="text"
+					>
 					<input :title="t('tasks', 'Cancel')"
 						type="cancel"
 						value=""
 						class="action icon-close"
-						@click="resetView(calendar)">
+						@click="resetView(calendar)"
+					>
 				</form>
 			</div>
-		</router-link>
+		</RouterLink>
 		<li v-click-outside="cancelCreate" :class="{edit: creating}" class="newList icon-add reactive editing">
 			<a class="icon icon-bw addlist sprite"
-				@click="startCreate($event)">
-				<span class="title">{{ t('tasks', 'Add List...') }}</span>
+				@click="startCreate($event)"
+			>
+				<span class="title">
+					{{ t('tasks', 'Add List...') }}
+				</span>
 			</a>
 			<div :class="{error: nameError}" class="app-navigation-entry-edit name">
 				<form>
-					<input v-tooltip="{
+					<input id="newListInput"
+						v-model="newCalendarName"
+						v-tooltip="{
 							content: tooltipMessage,
 							show: showTooltip('list_'),
 							trigger: 'manual'
 						}"
-						id="newListInput"
 						:placeholder="t('tasks', 'New List')"
-						v-model="newCalendarName"
 						class="edit"
 						type="text"
-						@keyup="checkName($event, '')">
+						@keyup="checkName($event, '')"
+					>
 					<input :title="t('tasks', 'Cancel')"
 						type="cancel"
 						value=""
 						class="action icon-close"
-						@click="cancelCreate">
+						@click="cancelCreate"
+					>
 					<input :title="t('tasks', 'Save')"
 						type="submit"
 						value=""
 						class="action icon-checkmark"
-						@click="create($event)">
+						@click="create($event)"
+					>
 				</form>
-				<colorpicker :selected-color="selectedColor" @color-selected="setColor(...arguments)" />
+				<Colorpicker :selected-color="selectedColor" @color-selected="setColor(...arguments)" />
 			</div>
 		</li>
 	</ul>
@@ -162,17 +185,16 @@ import Colorpicker from './Colorpicker'
 import PopoverMenu from './PopoverMenu'
 import Confirmation from './Confirmation'
 
-import clickOutside from 'vue-click-outside'
+import ClickOutside from 'vue-click-outside'
 
 export default {
 	components: {
-		'colorpicker': Colorpicker,
-		'popover': PopoverMenu,
-		'confirmation': Confirmation,
-		clickOutside
+		'Colorpicker': Colorpicker,
+		'Popover': PopoverMenu,
+		'Confirmation': Confirmation
 	},
 	directives: {
-		clickOutside
+		ClickOutside
 	},
 	filters: {
 		counterFormatter: function(count) {

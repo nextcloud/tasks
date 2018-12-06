@@ -34,10 +34,13 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<li v-for="order in orders"
 					:key="order.id"
 					:class="{active: sortOrder == order.id}"
-					@click="setSortOrder(order.id)">
+					@click="setSortOrder(order.id)"
+				>
 					<a>
 						<span :class="order.icon" class="icon icon-bw" />
-						<span class="label">{{ order.text }}</span>
+						<span class="label">
+							{{ order.text }}
+						</span>
 						<span :class="sortDirection ? 'icon-sort-up' : 'icon-sort-down'" class="icon icon-bw sort-indicator" />
 					</a>
 				</li>
@@ -47,15 +50,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import clickOutside from 'vue-click-outside'
+import ClickOutside from 'vue-click-outside'
 
 export default {
 	name: 'SortorderDropdown',
-	components: {
-		clickOutside
-	},
 	directives: {
-		clickOutside
+		ClickOutside
 	},
 	data() {
 		return {

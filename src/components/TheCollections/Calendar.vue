@@ -23,27 +23,31 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 	<div v-if="calendar">
 		<div v-if="!calendar.readOnly"
 			id="add-task"
-			class="add-task">
+			class="add-task"
+		>
 			<form name="addTaskForm" @submit="addTask">
 				<input id="target"
 					v-model="newTaskName"
 					:placeholder="inputString"
 					:disabled="isAddingTask"
 					class="transparent"
-					@keyup.27="clearNewTask($event)">
+					@keyup.27="clearNewTask($event)"
+				>
 			</form>
 		</div>
-		<sortorderDropdown />
+		<SortorderDropdown />
 		<div class="task-list">
 			<div class="grouped-tasks">
 				<ol :calendarId="calendarId"
 					class="tasks"
 					collectionId="uncompleted"
-					type="list">
-					<task v-for="task in uncompletedRootTasks(calendar.tasks)"
+					type="list"
+				>
+					<Task v-for="task in uncompletedRootTasks(calendar.tasks)"
 						:key="task.id"
-						:task="task" />
-						<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,route.calendarID) | filter:{'completed':'false'} | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
+						:task="task"
+					/>
+					<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,route.calendarID) | filter:{'completed':'false'} | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
 				</ol>
 				<h2 v-show="completedCount(calendarId)" class="heading-hiddentasks icon-triangle-s" @click="toggleHidden">
 					{{ completedCountString }}
@@ -52,13 +56,15 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					:calendarId="calendarId"
 					class="completed-tasks"
 					collectionId="completed"
-					type="list">
-					<task v-for="task in completedRootTasks(calendar.tasks)"
+					type="list"
+				>
+					<Task v-for="task in completedRootTasks(calendar.tasks)"
 						:key="task.id"
-						:task="task" />
-						<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,route.calendarID) | filter:{'completed':true} | orderBy:'completed_date':true"> -->
+						:task="task"
+					/>
+					<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,route.calendarID) | filter:{'completed':true} | orderBy:'completed_date':true"> -->
 				</ol>
-				<loadCompletedButton :calendar="calendar" />
+				<LoadCompletedButton :calendar="calendar" />
 			</div>
 		</div>
 	</div>
@@ -72,9 +78,9 @@ import Task from '../Task'
 
 export default {
 	components: {
-		'task': Task,
-		'sortorderDropdown': SortorderDropdown,
-		'loadCompletedButton': LoadCompletedButton
+		'Task': Task,
+		'SortorderDropdown': SortorderDropdown,
+		'LoadCompletedButton': LoadCompletedButton
 	},
 	props: {
 		calendarId: {
