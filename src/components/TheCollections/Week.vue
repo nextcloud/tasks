@@ -3,6 +3,7 @@ Nextcloud - Tasks
 
 @author Raimund Schlüßler
 @copyright 2018 Raimund Schlüßler <raimund.schluessler@mailbox.org>
+@copyright 2018 Vadim Nicolai <contact@vadimnicolai.com>
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -32,7 +33,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					listID=""
 					type="list"
 				>
-					<TaskBody v-for="task in uncompletedRootTasks(tasks)"
+					<TaskBody v-for="task in sort(uncompletedRootTasks(tasks), sortOrder, sortDirection)"
 						:key="task.id"
 						:task="task"
 					/>
@@ -45,6 +46,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import { mapGetters } from 'vuex'
+import { sort } from '../../store/storeHelper'
 import SortorderDropdown from '../SortorderDropdown'
 import TaskBody from '../Task'
 
@@ -75,10 +77,13 @@ export default {
 	computed: {
 		...mapGetters({
 			tasks: 'getAllTasks',
-			uncompletedRootTasks: 'findUncompletedRootTasks'
-		})
+			uncompletedRootTasks: 'findUncompletedRootTasks',
+			sortOrder: 'sortOrder',
+			sortDirection: 'sortDirection'
+		}),
 	},
 	methods: {
+		sort,
 		dayHasEntry: function(days) {
 			return days
 		}
