@@ -70,9 +70,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<li class="app-navigation-entry-utils-counter">
 						{{ calendarCount(calendar.id) | counterFormatter }}
 					</li>
-					<Popover v-show="!calendar.readOnly" tag="li" class="app-navigation-entry-utils-menu-button">
+					<Popover tag="li" class="app-navigation-entry-utils-menu-button">
 						<ul>
-							<li>
+							<li v-if="!calendar.readOnly">
 								<a @click="edit(calendar)">
 									<span class="icon-rename" />
 									<span>{{ t('tasks', 'Edit') }}</span>
@@ -96,7 +96,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									<span>{{ t('tasks', 'Download') }}</span>
 								</a>
 							</li>
-							<Confirmation :message="deleteMessage(calendar.displayName)" @delete-calendar="deleteCalendar(calendar)" />
+							<Confirmation v-if="!calendar.readOnly" :message="deleteMessage(calendar.displayName)" @delete-calendar="deleteCalendar(calendar)" />
 						</ul>
 					</Popover>
 				</ul>
