@@ -3,6 +3,7 @@ Nextcloud - Tasks
 
 @author Raimund Schlüßler
 @copyright 2018 Raimund Schlüßler <raimund.schluessler@mailbox.org>
+@copyright 2018 Vadim Nicolai <contact@vadimnicolai.com>
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -43,7 +44,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					collectionId="uncompleted"
 					type="list"
 				>
-					<Task v-for="task in uncompletedRootTasks(calendar.tasks)"
+					<Task v-for="task in sort(uncompletedRootTasks(calendar.tasks), sortOrder, sortDirection)"
 						:key="task.id"
 						:task="task"
 					/>
@@ -58,7 +59,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					collectionId="completed"
 					type="list"
 				>
-					<Task v-for="task in completedRootTasks(calendar.tasks)"
+					<Task v-for="task in sort(completedRootTasks(calendar.tasks), sortOrder, sortDirection)"
 						:key="task.id"
 						:task="task"
 					/>
@@ -72,6 +73,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import { mapGetters } from 'vuex'
+import { sort } from '../../store/storeHelper'
 import SortorderDropdown from '../SortorderDropdown'
 import LoadCompletedButton from '../LoadCompletedButton'
 import Task from '../Task'
@@ -124,10 +126,13 @@ export default {
 			completedCount: 'getCalendarCountCompleted',
 			calendar: 'getCalendarByRoute',
 			uncompletedRootTasks: 'findUncompletedRootTasks',
-			completedRootTasks: 'findCompletedRootTasks'
+			completedRootTasks: 'findCompletedRootTasks',
+			sortOrder: 'sortOrder',
+			sortDirection: 'sortDirection'
 		})
 	},
 	methods: {
+		sort,
 		toggleHidden: function() {
 			this.showHidden = +!this.showHidden
 		},
