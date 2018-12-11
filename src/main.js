@@ -28,6 +28,7 @@ import router from './components/TheRouter'
 import store from './store/store'
 import { sync } from 'vuex-router-sync'
 import VTooltip from 'v-tooltip'
+import VueClipboard from 'vue-clipboard2'
 
 // Disable on production
 Vue.config.devtools = true
@@ -47,6 +48,7 @@ __webpack_public_path__ = OC.linkTo('tasks', 'js/')
 sync(store, router)
 
 Vue.use(VTooltip)
+Vue.use(VueClipboard)
 
 if (!OCA.Tasks) {
 	/**
