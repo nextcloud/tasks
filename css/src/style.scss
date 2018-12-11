@@ -51,16 +51,10 @@
 				display: none;
 			}
 
-			&.caldav .app-navigation-entry-edit.caldav {
-				display: inline-block;
-				height: auto;
-			}
-
 			.app-navigation-entry-edit {
 				padding-left: 5px !important;
 
-				&.name,
-				&.caldav {
+				&.name {
 					display: none;
 				}
 			}
@@ -76,10 +70,6 @@
 	.app-navigation-entry-edit {
 		&.name input[type='text'] {
 			width: calc(100% - 72px);
-		}
-
-		&.caldav input[type='text'] {
-			width: calc(100% - 36px);
 		}
 
 		input.action {

@@ -54,7 +54,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			v-click-outside="() => resetView(calendar)"
 			:calendar-id="calendar.id"
 			:to="'/calendars/' + calendar.id"
-			:class="{edit: editing == calendar.id, caldav: caldav == calendar.id}"
+			:class="{edit: editing == calendar.id}"
 			tag="li"
 			class="list with-menu editing"
 			active-class="active"
@@ -79,9 +79,15 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 								</a>
 							</li>
 							<li>
-								<a @click="showCalDAVUrl(calendar)">
+								<a @click="copyCalDAVUrl($event, calendar)">
 									<span class="icon-public" />
-									<span>{{ t('tasks', 'Link') }}</span>
+									<span>
+										{{ !copied
+											? t('tasks', 'Copy private link')
+											: copySuccess
+												? t('tasks', 'Copied')
+												: t('tasks', 'Can not copy') }}
+									</span>
 								</a>
 							</li>
 							<li>
@@ -121,21 +127,6 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					>
 				</form>
 				<Colorpicker :selected-color="selectedColor" @color-selected="setColor(...arguments)" />
-			</div>
-			<div class="app-navigation-entry-edit caldav">
-				<form>
-					<input :value="url(calendar)"
-						class="caldav"
-						readonly
-						type="text"
-					>
-					<input :title="t('tasks', 'Cancel')"
-						type="cancel"
-						value=""
-						class="action icon-close"
-						@click="resetView(calendar)"
-					>
-				</form>
 			</div>
 		</RouterLink>
 		<li v-click-outside="cancelCreate" :class="{edit: creating}" class="newList icon-add reactive editing">
@@ -211,7 +202,8 @@ export default {
 	data() {
 		return {
 			editing: '',
-			caldav: '',
+			copySuccess: false,
+			copied: false,
 			creating: false,
 			nameError: false,
 			newCalendarName: '',
@@ -266,13 +258,32 @@ export default {
 				if (this.editing === calendar.id) {
 					this.editing = ''
 				}
-				if (this.caldav === calendar.id) {
-					this.caldav = ''
-				}
 				this.tooltipTarget = ''
 			},
-			showCalDAVUrl: function(calendar) {
-				this.caldav = calendar.id
+			copyCalDAVUrl(event, calendar) {
+				// change to loading status
+				event.stopPropagation()
+
+				const url = this.url(calendar)
+
+				// copy link for calendar to clipboard
+				this.$copyText(url)
+					.then(e => {
+						event.preventDefault()
+						this.copySuccess = true
+						this.copied = true
+						// Notify calendar url was copied
+						OC.Notification.showTemporary(t('tasks', 'Calendar link copied to clipboard.'))
+					}, e => {
+						this.copySuccess = false
+						this.copied = true
+						OC.Notification.showTemporary(t('tasks', 'Calendar link could not be copied to clipboard.'))
+					}).then(() => {
+						setTimeout(() => {
+							// stop loading status regardless of outcome
+							this.copied = false
+						}, 2000)
+					})
 			},
 			exportUrl(calendar) {
 				var url = calendar.url
