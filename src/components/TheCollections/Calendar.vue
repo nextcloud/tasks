@@ -98,7 +98,7 @@ export default {
 			isAddingTask: false
 		}
 	},
-	computed: Object.assign({
+	computed: {
 		showHidden: {
 			get() {
 				return this.$store.state.settings.settings.showHidden
@@ -119,14 +119,14 @@ export default {
 		 */
 		completedCountString: function() {
 			return n('tasks', '%n Completed Task', '%n Completed Tasks', this.completedCount(this.calendarId))
-		} },
-	mapGetters({
-		completedCount: 'getCalendarCountCompleted',
-		calendar: 'getCalendarByRoute',
-		uncompletedRootTasks: 'findUncompletedRootTasks',
-		completedRootTasks: 'findCompletedRootTasks'
-	})
-	),
+		},
+		...mapGetters({
+			completedCount: 'getCalendarCountCompleted',
+			calendar: 'getCalendarByRoute',
+			uncompletedRootTasks: 'findUncompletedRootTasks',
+			completedRootTasks: 'findCompletedRootTasks'
+		})
+	},
 	methods: {
 		toggleHidden: function() {
 			this.showHidden = +!this.showHidden

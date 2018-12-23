@@ -202,46 +202,44 @@ export default {
 			return t('tasks', 'Add a subtask to "{task}"...', {	task: this.task.summary })
 		}
 	},
-	methods: Object.assign(
-		mapActions([
+	methods: {
+		...mapActions([
 			'toggleCompleted',
 			'toggleStarred'
 		]),
-		{
-			/**
-			 * Checks if a date is overdue
-			 */
-			overdue: overdue,
+		/**
+		 * Checks if a date is overdue
+		 */
+		overdue: overdue,
 
-			/**
-			 * Navigates to a different route, but checks if navigation is desired
-			 *
-			 * @param {Object} $event the event that triggered navigation
-			 * @param {String} route the route to navigate to
-			 */
-			navigate: function($event) {
-				if (!$event.target.classList.contains('no-nav')) {
-					this.$router.push(this.taskRoute)
-				}
-			},
-
-			cancelCreation: function(e) {
-				// don't cancel the task creation if the own add-subtask button is clicked
-				if (e.target.getAttribute('taskId') !== this.task.uri) {
-					this.showSubtaskInput = false
-				}
-			},
-
-			toggleSubtasks: function(task) {
-			},
-
-			toggleCompletedSubtasks: function(task) {
-			},
-
-			addTask: function() {
-				this.newTaskName = ''
+		/**
+		 * Navigates to a different route, but checks if navigation is desired
+		 *
+		 * @param {Object} $event the event that triggered navigation
+		 * @param {String} route the route to navigate to
+		 */
+		navigate: function($event) {
+			if (!$event.target.classList.contains('no-nav')) {
+				this.$router.push(this.taskRoute)
 			}
+		},
+
+		cancelCreation: function(e) {
+			// don't cancel the task creation if the own add-subtask button is clicked
+			if (e.target.getAttribute('taskId') !== this.task.uri) {
+				this.showSubtaskInput = false
+			}
+		},
+
+		toggleSubtasks: function(task) {
+		},
+
+		toggleCompletedSubtasks: function(task) {
+		},
+
+		addTask: function() {
+			this.newTaskName = ''
 		}
-	)
+	}
 }
 </script>

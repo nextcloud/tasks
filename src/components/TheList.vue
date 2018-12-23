@@ -213,160 +213,158 @@ export default {
 			dayOfMonth: moment().date()
 		}
 	},
-	computed: Object.assign({},
-		mapState({
+	computed: {
+		...mapState({
 			collections: state => state.collections.collections
 		}),
-		mapGetters({
+		...mapGetters({
 			calendars: 'getSortedCalendars',
 			collectionCount: 'getCollectionCount',
 			calendarCount: 'getCalendarCount',
 			isCalendarNameUsed: 'isCalendarNameUsed'
 		})
-	),
-	methods: Object.assign(
-		mapActions([
+	},
+	methods: {
+		...mapActions([
 			'changeCalendar',
 			'deleteCalendar',
 			'appendCalendar'
 		]),
-		{
-			hideCollection: function(collection) {
-				switch (collection.show) {
-				case 0:
-					return true
-				case 1:
-					return false
-				case 2:
-					return this.collectionCount(collection.id) < 1
-				}
-			},
-			showTooltip: function(target) {
-				return this.tooltipTarget === target
-			},
-			edit: function(calendar) {
-				this.editing = calendar.id
-				this.newCalendarName = calendar.displayName
-				this.selectedColor = calendar.color
-				this.nameError = false
-				this.tooltipTarget = ''
-				this.$nextTick(
-					() => document.querySelector('#list_' + calendar.id + ' input.edit').focus()
-				)
-			},
-			resetView: function(calendar) {
-				if (this.editing === calendar.id) {
-					this.editing = ''
-				}
-				this.tooltipTarget = ''
-			},
-			copyCalDAVUrl(event, calendar) {
-				// change to loading status
-				event.stopPropagation()
-
-				const url = this.url(calendar)
-
-				// copy link for calendar to clipboard
-				this.$copyText(url)
-					.then(e => {
-						event.preventDefault()
-						this.copySuccess = true
-						this.copied = true
-						// Notify calendar url was copied
-						OC.Notification.showTemporary(t('tasks', 'Calendar link copied to clipboard.'))
-					}, e => {
-						this.copySuccess = false
-						this.copied = true
-						OC.Notification.showTemporary(t('tasks', 'Calendar link could not be copied to clipboard.'))
-					}).then(() => {
-						setTimeout(() => {
-							// stop loading status regardless of outcome
-							this.copied = false
-						}, 2000)
-					})
-			},
-			exportUrl(calendar) {
-				var url = calendar.url
-				// cut off last slash to have a fancy name for the ics
-				if (url.slice(url.length - 1) === '/') {
-					url = url.slice(0, url.length - 1)
-				}
-				url += '?export'
-				return url
-			},
-			url(calendar) {
-				const rootURL = OC.linkToRemote('dav')
-				return new URL(calendar.url, rootURL)
-			},
-			setColor: function(color) {
-				this.selectedColor = color
-			},
-			startCreate: function(e) {
-				if (OCA.Theming) {
-					this.selectedColor = OCA.Theming.color
-				} else {
-					this.selectedColor = '#0082C9'
-				}
-				this.newCalendarName = ''
-				this.creating = true
-				this.$nextTick(
-					() => document.getElementById('newListInput').focus()
-				)
-				e.stopPropagation()
-			},
-			cancelCreate: function() {
-				this.creating = false
-			},
-			create: function() {
-				if (!this.isNameAllowed(this.newCalendarName, 'new').allowed) {
-					return
-				}
-				this.appendCalendar({ displayName: this.newCalendarName, color: this.selectedColor })
-				this.creating = false
-			},
-			save: function(calendar) {
-				if (!this.isNameAllowed(this.newCalendarName, calendar.id).allowed) {
-					return
-				}
-				this.changeCalendar({ calendar: calendar, newName: this.newCalendarName, newColor: this.selectedColor })
-				this.editing = false
-			},
-			checkName: function(event, id) {
-				var check = this.isNameAllowed(this.newCalendarName, id)
-				this.tooltipMessage = check.msg
-				if (!check.allowed) {
-					this.tooltipTarget = 'list_' + id
-					this.nameError = true
-				} else {
-					this.tooltipTarget = ''
-					this.nameError = false
-				}
-				if (event.keyCode === 27) {
-					event.preventDefault()
-					this.tooltipTarget = ''
-					this.creating = false
-					this.editing = false
-					this.nameError = false
-				}
-			},
-			isNameAllowed: function(name, id) {
-				var check = {
-					allowed:	false,
-					msg:	''
-				}
-				if (this.isCalendarNameUsed(name, id)) {
-					check.msg = t('tasks', 'The name "%s" is already used.').replace('%s', name)
-				} else if (!name) {
-					check.msg = t('tasks', 'An empty name is not allowed.')
-				} else {
-					check.allowed = true
-				}
-				return check
-			},
-			deleteMessage: function(name) {
-				return t('tasks', 'This will delete the calendar "%s" and all corresponding events and tasks.').replace('%s', name)
+		hideCollection: function(collection) {
+			switch (collection.show) {
+			case 0:
+				return true
+			case 1:
+				return false
+			case 2:
+				return this.collectionCount(collection.id) < 1
 			}
+		},
+		showTooltip: function(target) {
+			return this.tooltipTarget === target
+		},
+		edit: function(calendar) {
+			this.editing = calendar.id
+			this.newCalendarName = calendar.displayName
+			this.selectedColor = calendar.color
+			this.nameError = false
+			this.tooltipTarget = ''
+			this.$nextTick(
+				() => document.querySelector('#list_' + calendar.id + ' input.edit').focus()
+			)
+		},
+		resetView: function(calendar) {
+			if (this.editing === calendar.id) {
+				this.editing = ''
+			}
+			this.tooltipTarget = ''
+		},
+		copyCalDAVUrl(event, calendar) {
+			// change to loading status
+			event.stopPropagation()
+
+			const url = this.url(calendar)
+
+			// copy link for calendar to clipboard
+			this.$copyText(url)
+				.then(e => {
+					event.preventDefault()
+					this.copySuccess = true
+					this.copied = true
+					// Notify calendar url was copied
+					OC.Notification.showTemporary(t('tasks', 'Calendar link copied to clipboard.'))
+				}, e => {
+					this.copySuccess = false
+					this.copied = true
+					OC.Notification.showTemporary(t('tasks', 'Calendar link could not be copied to clipboard.'))
+				}).then(() => {
+					setTimeout(() => {
+						// stop loading status regardless of outcome
+						this.copied = false
+					}, 2000)
+				})
+		},
+		exportUrl(calendar) {
+			var url = calendar.url
+			// cut off last slash to have a fancy name for the ics
+			if (url.slice(url.length - 1) === '/') {
+				url = url.slice(0, url.length - 1)
+			}
+			url += '?export'
+			return url
+		},
+		url(calendar) {
+			const rootURL = OC.linkToRemote('dav')
+			return new URL(calendar.url, rootURL)
+		},
+		setColor: function(color) {
+			this.selectedColor = color
+		},
+		startCreate: function(e) {
+			if (OCA.Theming) {
+				this.selectedColor = OCA.Theming.color
+			} else {
+				this.selectedColor = '#0082C9'
+			}
+			this.newCalendarName = ''
+			this.creating = true
+			this.$nextTick(
+				() => document.getElementById('newListInput').focus()
+			)
+			e.stopPropagation()
+		},
+		cancelCreate: function() {
+			this.creating = false
+		},
+		create: function() {
+			if (!this.isNameAllowed(this.newCalendarName, 'new').allowed) {
+				return
+			}
+			this.appendCalendar({ displayName: this.newCalendarName, color: this.selectedColor })
+			this.creating = false
+		},
+		save: function(calendar) {
+			if (!this.isNameAllowed(this.newCalendarName, calendar.id).allowed) {
+				return
+			}
+			this.changeCalendar({ calendar: calendar, newName: this.newCalendarName, newColor: this.selectedColor })
+			this.editing = false
+		},
+		checkName: function(event, id) {
+			var check = this.isNameAllowed(this.newCalendarName, id)
+			this.tooltipMessage = check.msg
+			if (!check.allowed) {
+				this.tooltipTarget = 'list_' + id
+				this.nameError = true
+			} else {
+				this.tooltipTarget = ''
+				this.nameError = false
+			}
+			if (event.keyCode === 27) {
+				event.preventDefault()
+				this.tooltipTarget = ''
+				this.creating = false
+				this.editing = false
+				this.nameError = false
+			}
+		},
+		isNameAllowed: function(name, id) {
+			var check = {
+				allowed:	false,
+				msg:	''
+			}
+			if (this.isCalendarNameUsed(name, id)) {
+				check.msg = t('tasks', 'The name "%s" is already used.').replace('%s', name)
+			} else if (!name) {
+				check.msg = t('tasks', 'An empty name is not allowed.')
+			} else {
+				check.allowed = true
+			}
+			return check
+		},
+		deleteMessage: function(name) {
+			return t('tasks', 'This will delete the calendar "%s" and all corresponding events and tasks.').replace('%s', name)
 		}
-	)
+	}
 }
 </script>
