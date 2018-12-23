@@ -95,7 +95,7 @@ export default {
 			]
 		}
 	},
-	computed: Object.assign({
+	computed: {
 		sortOrder: {
 			get() {
 				return this.$store.state.settings.settings.sortOrder
@@ -133,7 +133,7 @@ export default {
 			}
 			return 'icon-' + icon
 		}
-	}),
+	},
 	methods: {
 		closeMenu() {
 			this.menuOpen = false

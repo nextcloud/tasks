@@ -72,12 +72,12 @@ export default {
 			days: [0, 1, 2, 3, 4, 5, 6]
 		}
 	},
-	computed: Object.assign({},
-		mapGetters({
+	computed: {
+		...mapGetters({
 			tasks: 'getAllTasks',
 			uncompletedRootTasks: 'findUncompletedRootTasks'
 		})
-	),
+	},
 	methods: {
 		dayHasEntry: function(days) {
 			return days

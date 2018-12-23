@@ -422,7 +422,7 @@ export default {
 			categories: []
 		}
 	},
-	computed: Object.assign({
+	computed: {
 		isAllDayPossible: function() {
 			return !this.task.calendar.readOnly && (this.task.due || this.task.start)
 		},
@@ -433,6 +433,8 @@ export default {
 				return 'medium'
 			} else if (this.task.priority > 0 && this.task.priority < 5) {
 				return 'high'
+			} else {
+				return ''
 			}
 		},
 		iconStar: function() {
@@ -461,16 +463,15 @@ export default {
 		},
 		dueDate: function() {
 			return moment(this.task.due, 'YYYYMMDDTHHmmss').toDate()
-		}
+		},
+		...mapState({
+		}),
+		...mapGetters({
+			task: 'getTaskByRoute'
+		})
 	},
-	mapState({
-	}),
-	mapGetters({
-		task: 'getTaskByRoute'
-	})
-	),
-	methods: Object.assign(
-		mapActions([
+	methods: {
+		...mapActions([
 			'deleteTask',
 			'toggleCompleted',
 			'toggleStarred',
@@ -478,99 +479,97 @@ export default {
 			'deleteStartDate',
 			'toggleAllDay'
 		]),
-		{
-			closeDetails: function() {
-				if (this.$route.params.calendarId) {
-					this.$router.push({ path: `/calendars/${this.$route.params.calendarId}` })
-				} else {
-					this.$router.push({ path: `/collections/${this.$route.params.collectionId}` })
-				}
-			},
-
-			dateIcon: function(date) {
-				if (valid(date)) {
-					var c = 'icon-color icon-calendar-due'
-					if (overdue(date)) {
-						c += ' icon-calendar-overdue'
-					}
-					return c
-				} else {
-					return 'icon-bw icon-calendar'
-				}
-			},
-
-			/**
-			 * Checks if a date is overdue
-			 */
-			overdue: overdue,
-
-			/**
-			 * Checks if a date is valid
-			 */
-			valid: valid,
-
-			editProperty: function(type, event) {
-				// don't start to edit the property again
-				// if the confirm button of the datepicker was clicked
-				if (event && event.target.classList.contains('mx-datepicker-btn-confirm')) {
-					return
-				}
-				if (!this.task.calendar.readOnly && this.edit !== type) {
-					this.edit = type
-					this.tmpTask[type] = this.task[type]
-				}
-				if (type === 'summary' || type === 'note') {
-					this.$nextTick(
-						() => document.getElementById(type + 'Input').focus()
-					)
-				}
-			},
-
-			finishEditing: function(type) {
-				if (this.edit === type) {
-					this.setProperty(type, this.tmpTask[type])
-					this.edit = ''
-				}
-			},
-
-			cancelEditing: function(type) {
-				this.edit = ''
-				this.tmpTask[type] = this.task[type]
-			},
-
-			setProperty: function(type, value) {
-				console.debug('Set property "' + type + '" to "' + value)
-				this.edit = ''
-			},
-
-			setPropertyTemporarily: function(type, value) {
-				console.debug('Set property "' + type + '" temporarily to "' + value)
-			},
-
-			setStartDate: function(date) {
-				console.debug('Set start date to ' + date)
-			},
-
-			setStartTime: function(time) {
-				console.debug('Set start time to ' + time)
-			},
-
-			setDueDate: function(date) {
-				console.debug('Set due date to ' + date)
-			},
-
-			setDueTime: function(time) {
-				console.debug('Set due time to ' + time)
-			},
-
-			updateCategories: function(category) {
-				console.debug(category)
-			},
-
-			addCategory: function(category) {
-				console.debug(category)
+		closeDetails: function() {
+			if (this.$route.params.calendarId) {
+				this.$router.push({ path: `/calendars/${this.$route.params.calendarId}` })
+			} else {
+				this.$router.push({ path: `/collections/${this.$route.params.collectionId}` })
 			}
+		},
+
+		dateIcon: function(date) {
+			if (valid(date)) {
+				var c = 'icon-color icon-calendar-due'
+				if (overdue(date)) {
+					c += ' icon-calendar-overdue'
+				}
+				return c
+			} else {
+				return 'icon-bw icon-calendar'
+			}
+		},
+
+		/**
+		 * Checks if a date is overdue
+		 */
+		overdue: overdue,
+
+		/**
+		 * Checks if a date is valid
+		 */
+		valid: valid,
+
+		editProperty: function(type, event) {
+			// don't start to edit the property again
+			// if the confirm button of the datepicker was clicked
+			if (event && event.target.classList.contains('mx-datepicker-btn-confirm')) {
+				return
+			}
+			if (!this.task.calendar.readOnly && this.edit !== type) {
+				this.edit = type
+				this.tmpTask[type] = this.task[type]
+			}
+			if (type === 'summary' || type === 'note') {
+				this.$nextTick(
+					() => document.getElementById(type + 'Input').focus()
+				)
+			}
+		},
+
+		finishEditing: function(type) {
+			if (this.edit === type) {
+				this.setProperty(type, this.tmpTask[type])
+				this.edit = ''
+			}
+		},
+
+		cancelEditing: function(type) {
+			this.edit = ''
+			this.tmpTask[type] = this.task[type]
+		},
+
+		setProperty: function(type, value) {
+			console.debug('Set property "' + type + '" to "' + value)
+			this.edit = ''
+		},
+
+		setPropertyTemporarily: function(type, value) {
+			console.debug('Set property "' + type + '" temporarily to "' + value)
+		},
+
+		setStartDate: function(date) {
+			console.debug('Set start date to ' + date)
+		},
+
+		setStartTime: function(time) {
+			console.debug('Set start time to ' + time)
+		},
+
+		setDueDate: function(date) {
+			console.debug('Set due date to ' + date)
+		},
+
+		setDueTime: function(time) {
+			console.debug('Set due time to ' + time)
+		},
+
+		updateCategories: function(category) {
+			console.debug(category)
+		},
+
+		addCategory: function(category) {
+			console.debug(category)
 		}
-	)
+	}
 }
 </script>

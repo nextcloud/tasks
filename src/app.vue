@@ -50,11 +50,11 @@ export default {
 		'TheSettings': TheSettings,
 		'TheList': TheList
 	},
-	computed: Object.assign({},
-		mapState({
+	computed: {
+		...mapState({
 			calendars: state => state.calendars.calendars
 		})
-	),
+	},
 	beforeMount() {
 		// get calendars then get tasks
 		client.connect({ enableCalDAV: true }).then(() => {

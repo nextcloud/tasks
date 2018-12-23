@@ -79,7 +79,7 @@ export default {
 			isAddingTask: false
 		}
 	},
-	computed: Object.assign({
+	computed: {
 
 		/**
 		 * Returns the calendars which are to be shown for the current collection
@@ -107,20 +107,19 @@ export default {
 				return t('tasks', 'Add an important task to "{calendar}"...', { calendar: this.calendar.displayName })
 			case 'today':
 				return t('tasks', 'Add a task due today to "{calendar}"...', { calendar: this.calendar.displayName })
-			case 'all':
-				return t('tasks', 'Add a task to "{calendar}"...', { calendar: this.calendar.displayName })
 			case 'current':
 				return t('tasks', 'Add a current task to "{calendar}"...', { calendar: this.calendar.displayName })
+			default:
+				return t('tasks', 'Add a task to "{calendar}"...', { calendar: this.calendar.displayName })
 			}
-		}
+		},
+		...mapGetters({
+			uncompletedRootTasks: 'findUncompletedRootTasks',
+			calendar: 'getDefaultCalendar',
+			calendars: 'getSortedCalendars',
+			calendarCount: 'getCalendarCountByCollectionId'
+		})
 	},
-	mapGetters({
-		uncompletedRootTasks: 'findUncompletedRootTasks',
-		calendar: 'getDefaultCalendar',
-		calendars: 'getSortedCalendars',
-		calendarCount: 'getCalendarCountByCollectionId'
-	})
-	),
 	methods: {
 		clearNewTask: function(event) {
 			event.target.blur()

@@ -97,7 +97,7 @@ export default {
 			dayOfMonth: moment().date()
 		}
 	},
-	computed: Object.assign({
+	computed: {
 		defaultCalendarId: {
 			get() {
 				var cal = this.$store.getters.getDefaultCalendar
@@ -106,15 +106,14 @@ export default {
 			set(value) {
 				this.$store.dispatch('setSetting', { type: 'defaultCalendarId', value: value })
 			}
-		}
+		},
+		...mapState({
+			collections: state => state.collections.collections
+		}),
+		...mapGetters({
+			calendars: 'getSortedCalendars'
+		})
 	},
-	mapState({
-		collections: state => state.collections.collections
-	}),
-	mapGetters({
-		calendars: 'getSortedCalendars'
-	})
-	),
 	methods:
 		mapActions([
 			'setVisibility'
