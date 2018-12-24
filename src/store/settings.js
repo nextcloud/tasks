@@ -3,6 +3,7 @@
  *
  * @author Raimund Schlüßler
  * @copyright 2018 Raimund Schlüßler <raimund.schluessler@mailbox.org>
+ * @copyright 2018 Vadim Nicolai <contact@vadimnicolai.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -30,7 +31,10 @@ const state = {
 	settings: {}
 }
 
-const getters = {}
+const getters = {
+	sortOrder: (state) => state.settings.sortOrder,
+	sortDirection: (state) => state.settings.sortDirection,
+}
 
 const mutations = {
 	setSettings(state, payload) {

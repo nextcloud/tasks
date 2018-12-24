@@ -3,6 +3,7 @@ Nextcloud - Tasks
 
 @author Raimund Schlüßler
 @copyright 2018 Raimund Schlüßler <raimund.schluessler@mailbox.org>
+@copyright 2018 Vadim Nicolai <contact@vadimnicolai.com>
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -107,7 +108,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</form>
 			</div>
 			<ol v-if="!task.hideSubtasks" :calendarID="task.calendar.uri">
-				<TaskBodyComponent v-for="subtask in task.subTasks"
+				<TaskBodyComponent v-for="subtask in sort([...task.subTasks], sortOrder, sortDirection)"
 					:key="subtask.uid"
 					:task="subtask"
 					class="subtask"
@@ -119,9 +120,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { overdue, valid } from '../store/storeHelper'
+import { overdue, valid, sort } from '../store/storeHelper'
 import ClickOutside from 'vue-click-outside'
-import { mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import focus from '../directives/focus'
 
 export default {
@@ -158,6 +159,10 @@ export default {
 		}
 	},
 	computed: {
+		...mapGetters({
+			sortOrder: 'sortOrder',
+			sortDirection: 'sortDirection'
+		}),
 		/**
 		 * Returns the path of the task
 		 *
@@ -207,6 +212,7 @@ export default {
 			'toggleCompleted',
 			'toggleStarred'
 		]),
+		sort,
 		/**
 		 * Checks if a date is overdue
 		 */

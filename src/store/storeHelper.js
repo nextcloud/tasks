@@ -3,6 +3,7 @@
  *
  * @author Raimund Schlüßler
  * @copyright 2017 Raimund Schlüßler <raimund.schluessler@mailbox.org>
+ * @copyright 2018 Vadim Nicolai <contact@vadimnicolai.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -110,9 +111,82 @@ function isParentInList(task, tasks) {
 	})
 }
 
+/**
+ * Sorts tasks in specified order type
+ *
+ * @param {Array} tasks The tasks to search in
+ * @param {String} sortOrder The sorting order type
+ * @param {Boolean} sortDirection The sorting direction
+ * @returns {Array}
+ */
+function sort(tasks, sortOrder, sortDirection) {
+	switch (sortOrder) {
+	case 'alphabetically': {
+		const sortedTasks = sortAlphabetically(tasks)
+		if (sortDirection) return sortedTasks
+		return sortedTasks.reverse()
+	}
+	case 'priority': {
+		const sortedTasks = tasks.sort((taskA, taskB) => taskA.priority - taskB.priority)
+		if (sortDirection) return sortedTasks
+		return sortedTasks.reverse()
+	}
+	case 'due': {
+		const sortedTasks = sortByDate(tasks, 'due')
+		if (sortDirection) return sortedTasks
+		return sortedTasks.reverse()
+	}
+	case 'start': {
+		const sortedTasks = sortByDate(tasks, 'start')
+		if (sortDirection) return sortedTasks
+		return sortedTasks.reverse()
+	}
+	default:
+		return tasks
+	}
+}
+
+/**
+ * Sorts tasks alphabetically in ascending order
+ *
+ * @param {Array} tasks The tasks to be sorted
+ * @returns {Array}
+ */
+function sortAlphabetically(tasks) {
+	return tasks.sort((taskA, taskB) =>
+		taskA.summary.toLowerCase().localeCompare(taskB.summary.toLowerCase())
+	)
+}
+
+/**
+ * Sorts tasks by date in ascending order
+ *
+ * @param {Array} tasks The tasks to be sorted
+ * @param {String} date The date sort type
+ * @returns {Array}
+ */
+function sortByDate(tasks, date) {
+	return tasks.sort((taskA, taskB) => {
+		if (taskA[date] === null && taskB[date] !== null) {
+			return -1
+		}
+
+		if (taskA[date] !== null && taskB[date] === null) {
+			return 1
+		}
+
+		if (taskA[date] === null && taskB[date] === null) {
+			return 0
+		}
+
+		return moment(taskA[date]).format('YYYYMMDDHHmm') - moment(taskB[date]).format('YYYYMMDDHHmm')
+	})
+}
+
 export {
 	isTaskInList,
 	valid,
 	overdue,
-	isParentInList
+	isParentInList,
+	sort,
 }
