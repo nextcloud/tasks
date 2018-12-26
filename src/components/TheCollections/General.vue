@@ -50,11 +50,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					class="tasks"
 					type="list"
 				>
-					<TaskBody v-for="task in sort(uncompletedRootTasks(calendar.tasks), sortOrder, sortDirection)"
+					<TaskBody v-for="task in sort(calendar.filteredTasks, sortOrder, sortDirection)"
 						:key="task.id"
 						:task="task"
 					/>
-					<!-- ng-repeat="task in filtered = filteredTasks() | filter:hasNoParent(task) | filter:filterTasks(task,calendar.uri) | filter:filterTasks(task,route.collectionID) | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
 				</ol>
 				<LoadCompletedButton v-if="collectionId === 'completed'" :calendar="calendar" />
 			</div>
@@ -64,7 +63,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import { mapGetters } from 'vuex'
-import { sort } from '../../store/storeHelper'
+import { sort, isTaskInList, isParentInList } from '../../store/storeHelper'
 import SortorderDropdown from '../SortorderDropdown'
 import LoadCompletedButton from '../LoadCompletedButton'
 import TaskBody from '../Task'
@@ -84,7 +83,8 @@ export default {
 	computed: {
 
 		/**
-		 * Returns the calendars which are to be shown for the current collection
+		 * Returns the calendars which are to be shown for the current collection and
+		 * adds a filteredTasks property to each calendar containing the tasks belonging to the collection.
 		 *
 		 * Calendars have to contain at least one task which
 		 *	- belongs to the collection
@@ -94,9 +94,17 @@ export default {
 		 * @returns {Array} the calendars which should be shown in the collection
 		 */
 		filteredCalendars: function() {
-			return this.calendars.filter(calendar => {
-				return this.calendarCount(calendar.id, this.collectionId)
+			var filteredCalendars = []
+			this.calendars.forEach(calendar => {
+				calendar.filteredTasks = Object.values(calendar.tasks).filter(task => {
+					return isTaskInList(task, this.collectionId) && (!task.related || !isParentInList(task, calendar.tasks))
+				})
+				if (calendar.filteredTasks.length) {
+					filteredCalendars.push(calendar)
+				}
 			})
+			console.debug('called')
+			return filteredCalendars
 		},
 
 		collectionId: function() {
@@ -116,10 +124,8 @@ export default {
 			}
 		},
 		...mapGetters({
-			uncompletedRootTasks: 'findUncompletedRootTasks',
 			calendar: 'getDefaultCalendar',
 			calendars: 'getSortedCalendars',
-			calendarCount: 'getCalendarCountByCollectionId',
 			sortOrder: 'sortOrder',
 			sortDirection: 'sortDirection'
 		})
