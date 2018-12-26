@@ -35,7 +35,7 @@ import parseIcs from '../services/parseIcs'
 import client from '../services/cdav'
 import Task from '../models/task'
 import pLimit from 'p-limit'
-import { isTaskInList, isParentInList } from './storeHelper'
+import { isParentInList } from './storeHelper'
 import { findVTODObyState } from './cdav-requests'
 
 const calendarModel = {
@@ -117,28 +117,6 @@ const getters = {
 			.filter(task => {
 				return task.completed === false && (!task.related || !isParentInList(task, calendar.tasks))
 			}).length
-	},
-
-	/**
-	 * Returns the count of tasks in a calendar belonging to a collection
-	 *
-	 * Tasks have to be
-	 *	- belong to the collection with collectionId
-	 *	- a root task
-	 *	- uncompleted
-	 *
-	 * @param {Object} state the store data
-	 * @param {Object} getters the store getters
-	 * @param {String} calendarId the Id of the calendar in question
-	 * @param {String} collectionId the Id of the collection in question
-	 * @returns {Number} the count of tasks in a calendar
-	 */
-	getCalendarCountByCollectionId: (state, getters) => (calendarId, collectionId) => {
-		var calendar = getters.getCalendarById(calendarId)
-		var count = Object.values(calendar.tasks).filter(task => {
-			return isTaskInList(task, collectionId) && (!task.related || !isParentInList(task, calendar.tasks))
-		}).length
-		return count
 	},
 
 	/**
