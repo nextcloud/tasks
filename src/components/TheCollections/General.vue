@@ -103,7 +103,6 @@ export default {
 					filteredCalendars.push(calendar)
 				}
 			})
-			console.debug('called')
 			return filteredCalendars
 		},
 
