@@ -24,20 +24,19 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 	<div>
 		<SortorderDropdown />
 		<div class="task-list">
-			<div v-for="day in dayHasEntry(days)" :key="day" class="grouped-tasks ui-droppable">
+			<div v-for="day in days" :key="day.diff" class="grouped-tasks ui-droppable">
 				<h2 class="heading">
-					{{ day | formatDay }}
+					{{ day.diff | formatDay }}
 				</h2>
 				<ol collectionID="week"
 					class="tasks"
 					listID=""
 					type="list"
 				>
-					<TaskBody v-for="task in sort(uncompletedRootTasks(tasks), sortOrder, sortDirection)"
+					<TaskBody v-for="task in sort(day.tasks, sortOrder, sortDirection)"
 						:key="task.id"
 						:task="task"
 					/>
-					<!-- ng-repeat="task in filtered = filteredTasks() | filter:taskAtDay(task,day) | filter:hasNoParent(task) | filter:{'completed':'false'} | orderBy:getSortOrder():settingsmodel.getById('various').sortDirection"> -->
 				</ol>
 			</div>
 		</div>
@@ -69,11 +68,6 @@ export default {
 			return dayString + ', ' + date.format('LL')
 		}
 	},
-	data() {
-		return {
-			days: [0, 1, 2, 3, 4, 5, 6]
-		}
-	},
 	computed: {
 		...mapGetters({
 			tasks: 'getAllTasks',
@@ -81,12 +75,63 @@ export default {
 			sortOrder: 'sortOrder',
 			sortDirection: 'sortDirection'
 		}),
+
+		/**
+		 * Returns an array with an entry for every day which has tasks for this day.
+		 *
+		 * @returns {Array} the array with the days
+		 */
+		days: function() {
+			// Construct array with days for the current week.
+			var days = []
+			for (var day = 0; day < 7; day++) {
+				days.push({ diff: day, tasks: [] })
+			}
+
+			// Add every task due at a certain day to that day.
+			var tasks = this.uncompletedRootTasks(this.tasks)
+			var start, due
+			tasks.forEach(task => {
+				var diff, startdiff, duediff
+				start = moment(task.start, 'YYYYMMDDTHHmmss').startOf('day')
+				due = moment(task.due, 'YYYYMMDDTHHmmss').startOf('day')
+
+				// Add all tasks whose start date will be reached at that day.
+				if (start.isValid() && !due.isValid()) {
+					diff = start.diff(moment().startOf('day'), 'days')
+				}
+
+				// Add all tasks whose due date will be reached at that day.
+				if (due.isValid() && !start.isValid()) {
+					diff = due.diff(moment().startOf('day'), 'days')
+				}
+
+				// Add all tasks whose due or start date will be reached at that day.
+				// Add the task to the day at which either due or start date are reached first.
+				if (start.isValid() && due.isValid()) {
+					startdiff = start.diff(moment().startOf('day'), 'days')
+					duediff = due.diff(moment().startOf('day'), 'days')
+					// chose the date that is reached first
+					diff = (startdiff < duediff) ? startdiff : duediff
+				}
+
+				// If the date was reached before today, map it to today.
+				if (diff < 0) {
+					diff = 0
+				}
+				// Add the task to the respective day if it is within the next week.
+				if (diff < 7) {
+					days[diff].tasks.push(task)
+				}
+
+			})
+
+			// Remove all days without tasks.
+			return days.filter(day => day.tasks.length)
+		}
 	},
 	methods: {
-		sort,
-		dayHasEntry: function(days) {
-			return days
-		}
+		sort
 	}
 }
 </script>
