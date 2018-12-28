@@ -127,7 +127,7 @@ function sort(tasks, sortOrder, sortDirection) {
 		break
 	}
 	case 'priority': {
-		sortedTasks = tasks.sort((taskA, taskB) => taskA.priority - taskB.priority)
+		sortedTasks = sortByPriority(tasks)
 		break
 	}
 	case 'due': {
@@ -142,6 +142,25 @@ function sort(tasks, sortOrder, sortDirection) {
 		sortedTasks = tasks
 	}
 	return sortDirection ? sortedTasks.reverse() : sortedTasks
+}
+
+/**
+ * Sorts tasks by priority in ascending order
+ *
+ * Sorting by priority is a bit tricky, because
+ * 0 means no priority, but 1 is highest priority and 9 is lowest priority.
+ * Hence, sort order must be 1, 2, ..., 9, 0
+ *
+ * @param {Array} tasks The tasks to be sorted
+ * @returns {Array}
+ */
+function sortByPriority(tasks) {
+	return tasks.sort((taskA, taskB) => {
+		if (-taskA.priority === -taskB.priority) return 0
+		if (-taskA.priority === 0) return 1
+		if (-taskB.priority === 0) return -1
+		return taskA.priority - taskB.priority
+	})
 }
 
 /**
