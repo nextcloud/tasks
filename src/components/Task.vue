@@ -78,7 +78,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				{{ task.due | formatDate }}
 			</span>
 			<span v-if="$route.params.collectionId=='week'" class="listname">
-				{{ task.calendar.displayName }}
+				<span :style="{'background-color': task.calendar.color}" class="calendar-indicator" />
+				<span>{{ task.calendar.displayName }}</span>
 			</span>
 			<div class="task-info-wrapper">
 				<div class="title">

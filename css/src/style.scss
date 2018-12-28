@@ -566,6 +566,16 @@
 		font-size: 11px;
 		line-height: 14px;
 		margin: 10px;
+
+		.calendar-indicator {
+			position: relative;
+			display: inline-block;
+			width: 8px;
+			height: 8px;
+			border: none;
+			border-radius: 50%;
+cursor: pointer
+		}
 	}
 
 	.percentbar {
