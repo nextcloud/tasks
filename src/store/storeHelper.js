@@ -179,7 +179,7 @@ function sortByDate(tasks, date) {
 			return 0
 		}
 
-		return moment(taskA[date], 'YYYYMMDDTHHmmss').format('YYYYMMDDHHmm') - moment(taskB[date], 'YYYYMMDDTHHmmss').format('YYYYMMDDHHmm')
+		return moment(taskA[date], 'YYYYMMDDTHHmmss').diff(moment(taskB[date], 'YYYYMMDDTHHmmss'))
 	})
 }
 
