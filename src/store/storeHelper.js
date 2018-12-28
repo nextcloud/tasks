@@ -120,30 +120,28 @@ function isParentInList(task, tasks) {
  * @returns {Array}
  */
 function sort(tasks, sortOrder, sortDirection) {
+	var sortedTasks
 	switch (sortOrder) {
 	case 'alphabetically': {
-		const sortedTasks = sortAlphabetically(tasks)
-		if (sortDirection) return sortedTasks
-		return sortedTasks.reverse()
+		sortedTasks = sortAlphabetically(tasks)
+		break
 	}
 	case 'priority': {
-		const sortedTasks = tasks.sort((taskA, taskB) => taskA.priority - taskB.priority)
-		if (sortDirection) return sortedTasks
-		return sortedTasks.reverse()
+		sortedTasks = tasks.sort((taskA, taskB) => taskA.priority - taskB.priority)
+		break
 	}
 	case 'due': {
-		const sortedTasks = sortByDate(tasks, 'due')
-		if (sortDirection) return sortedTasks
-		return sortedTasks.reverse()
+		sortedTasks = sortByDate(tasks, 'due')
+		break
 	}
 	case 'start': {
-		const sortedTasks = sortByDate(tasks, 'start')
-		if (sortDirection) return sortedTasks
-		return sortedTasks.reverse()
+		sortedTasks = sortByDate(tasks, 'start')
+		break
 	}
 	default:
-		return tasks
+		sortedTasks = tasks
 	}
+	return sortDirection ? sortedTasks.reverse() : sortedTasks
 }
 
 /**
