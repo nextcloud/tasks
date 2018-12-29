@@ -32,10 +32,9 @@ export default class Task {
 	 *
 	 * @param {string} vcalendar the vcalendar data as string with proper new lines
 	 * @param {object} calendar the calendar which the task belongs to
-	 * @param {object} raw the raw vcalendar data
 	 * @memberof Task
 	 */
-	constructor(vcalendar, calendar, raw) {
+	constructor(vcalendar, calendar) {
 		if (typeof vcalendar !== 'string' || vcalendar.length === 0) {
 			throw new Error('Invalid vCalendar')
 		}
@@ -62,8 +61,6 @@ export default class Task {
 			console.debug('This task did not have a proper uid. Setting a new one for ', this)
 			this.vtodo.addPropertyWithValue('uid', uuid())
 		}
-
-		this.uri = raw.url.substr(raw.url.lastIndexOf('/') + 1)
 	}
 
 	/**
@@ -119,6 +116,19 @@ export default class Task {
 	get url() {
 		if (this.dav) {
 			return this.dav.url
+		}
+		return ''
+	}
+
+	/**
+	 * Return the uri
+	 *
+	 * @readonly
+	 * @memberof Task
+	 */
+	get uri() {
+		if (this.dav) {
+			return this.dav.url.substr(this.dav.url.lastIndexOf('/') + 1)
 		}
 		return ''
 	}
