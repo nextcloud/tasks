@@ -429,7 +429,7 @@ const actions = {
 				// We don't want to lose the url information
 				// so we need to parse one by one
 				const tasks = response.map(item => {
-					let task = new Task(item.data, calendar, item)
+					let task = new Task(item.data, calendar)
 					Vue.set(task, 'dav', item)
 					return task
 				})
