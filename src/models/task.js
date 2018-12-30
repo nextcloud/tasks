@@ -162,7 +162,7 @@ export default class Task {
 	 * @memberof Task
 	 */
 	get summary() {
-		return this.vtodo.getFirstPropertyValue('summary')
+		return this.vtodo.getFirstPropertyValue('summary') || ''
 	}
 
 	/**
