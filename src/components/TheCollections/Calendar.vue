@@ -70,7 +70,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import { sort } from '../../store/storeHelper'
 import SortorderDropdown from '../SortorderDropdown'
 import LoadCompletedButton from '../LoadCompletedButton'
@@ -130,6 +130,9 @@ export default {
 		})
 	},
 	methods: {
+		...mapActions([
+			'createTask'
+		]),
 		sort,
 		toggleHidden: function() {
 			this.showHidden = +!this.showHidden
@@ -141,7 +144,7 @@ export default {
 		},
 
 		addTask: function() {
-			console.debug('Add task with name ' + this.newTaskName + ' to calendar ' + this.calendar.displayName)
+			this.createTask({ summary: this.newTaskName, calendar: this.calendar })
 			this.newTaskName = ''
 		}
 	}

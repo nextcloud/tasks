@@ -62,7 +62,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import { sort, isTaskInList, isParentInList } from '../../store/storeHelper'
 import SortorderDropdown from '../SortorderDropdown'
 import LoadCompletedButton from '../LoadCompletedButton'
@@ -130,6 +130,9 @@ export default {
 		})
 	},
 	methods: {
+		...mapActions([
+			'createTask'
+		]),
 		sort,
 		clearNewTask: function(event) {
 			event.target.blur()
@@ -137,6 +140,21 @@ export default {
 		},
 
 		addTask: function() {
+			var task = { summary: this.newTaskName }
+
+			// If the task is created in a collection view,
+			// set the appropriate properties.
+			if (this.$route.params.collectionId === 'starred') {
+				task.priority = '1'
+			}
+			if (this.$route.params.collectionId === 'today') {
+				task.due = moment().startOf('day').format('YYYY-MM-DDTHH:mm:ss')
+			}
+			if (this.$route.params.collectionId === 'current') {
+				task.start = moment().format('YYYY-MM-DDTHH:mm:ss')
+			}
+
+			this.createTask(task)
 			this.newTaskName = ''
 		}
 	}
