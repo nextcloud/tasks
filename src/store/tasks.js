@@ -192,13 +192,26 @@ const mutations = {
 	},
 
 	/**
-	 * Deletes a task
+	 * Delete a task from the store
 	 *
 	 * @param {Object} state the store data
-	 * @param {string} taskId The task id
+	 * @param {string} task The task to delete
 	 */
-	deleteTask(state, taskId) {
-		console.debug('Delete task with uri ' + taskId)
+	deleteTask(state, task) {
+		if (state.tasks[task.key] && task instanceof Task) {
+			// Remove task from parents subTask list if necessary
+			if (task.related) {
+				let tasks = task.calendar.tasks
+				let parent = Object.values(tasks).find(search => search.uid === task.related)
+				if (parent) {
+					let index = parent.subTasks.findIndex(search => search.key === task.key)
+					parent.subTasks.splice(index, 1)
+				}
+			}
+
+			// Remove the task from the calendar
+			Vue.delete(task.calendar.tasks, task.uid)
+		}
 	},
 
 	/**
@@ -326,9 +339,30 @@ const actions = {
 		}
 	},
 
-	deleteTask(context, taskId) {
-		context.commit('deleteTask', taskId)
+	/**
+	 * Delete a task
+	 *
+	 * @param {Object} context the store mutations
+	 * @param {Object} data destructuring object
+	 * @param {Task} data.task the task to delete
+	 * @param {boolean} [data.dav = true] trigger a dav deletion
+	 */
+	async deleteTask(context, { task, dav = true }) {
+		// delete all subtasks first
+		await Promise.all(task.subTasks.map(async(subTask) => {
+			await context.dispatch('deleteTask', { task: subTask, dav: true })
+		}))
+		// only local delete if the task doesn't exists on the server
+		if (task.dav && dav) {
+			await task.dav.delete()
+				.catch((error) => {
+					console.debug(error)
+					OC.Notification.showTemporary(t('tasks', 'Could not delete the task.'))
+				})
+		}
+		context.commit('deleteTask', task)
 	},
+
 	toggleCompleted(context, taskId) {
 		context.commit('toggleCompleted', taskId)
 	},

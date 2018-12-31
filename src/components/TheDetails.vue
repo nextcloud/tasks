@@ -264,7 +264,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			<div class="footer">
 				<a v-show="!task.calendar.readOnly"
 					class="left close-all reactive"
-					@click="deleteTask(task.uri)"
+					@click="removeTask"
 				>
 					<span class="icon icon-bw icon-trash" />
 				</a>
@@ -479,6 +479,12 @@ export default {
 			'deleteStartDate',
 			'toggleAllDay'
 		]),
+
+		removeTask: function() {
+			this.deleteTask({ task: this.task, dav: true })
+			this.closeDetails()
+		},
+
 		closeDetails: function() {
 			if (this.$route.params.calendarId) {
 				this.$router.push({ path: `/calendars/${this.$route.params.calendarId}` })
