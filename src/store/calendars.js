@@ -267,7 +267,7 @@ const mutations = {
 	 */
 	deleteTaskFromCalendar(state, task) {
 		let calendar = state.calendars.find(search => search.id === task.calendar.id)
-		Vue.delete(calendar, task.uid)
+		Vue.delete(calendar.tasks, task.uid)
 	},
 
 	/**
