@@ -71,6 +71,7 @@ OC.L10N.register(
     "at the end" : "bukaeran",
     "at the beginning" : "hasieran",
     "Set start date" : "Ezarri hasteko eguna",
+    "Unnamed" : "Izen gabekoa",
     "Important" : "Garrantzitsua",
     "Week" : "Astea",
     "All" : "Denak",
@@ -88,6 +89,12 @@ OC.L10N.register(
     "Start of week" : "Astearen hasiera",
     "Visibility of Smart Collections" : "Bilduma argien ikusgarritasuna",
     "Default" : "Lehenetsia",
-    "Load remaining completed tasks." : "Kargatu betetako  beste zereginak"
+    "Due date" : "Epemuga",
+    "Start date" : "Hasiera data",
+    "Priority" : "Lehentasuna",
+    "Alphabetically" : "Alfabetikoki",
+    "Manually" : "Eskuz",
+    "Load remaining completed tasks." : "Kargatu betetako  beste zereginak",
+    "All day" : "Egun osoa"
 },
 "nplurals=2; plural=(n != 1);");
