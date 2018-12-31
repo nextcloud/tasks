@@ -24,6 +24,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Task from '../models/task'
 import { isParentInList } from './storeHelper'
+import ICAL from 'ical.js'
 
 Vue.use(Vuex)
 
@@ -201,6 +202,22 @@ const mutations = {
 	},
 
 	/**
+	 * Add a task to parent task as subtask
+	 *
+	 * @param {Object} state the store data
+	 * @param {Task} task the task to add
+	 */
+	addTaskToParent(state, task) {
+		if (task.related) {
+			let tasks = task.calendar.tasks
+			let parent = Object.values(tasks).find(search => search.uid === task.related)
+			if (parent) {
+				parent.subTasks.push(task)
+			}
+		}
+	},
+
+	/**
 	 * Toggles the completed state of a task
 	 *
 	 * @param {Object} state the store data
@@ -257,6 +274,58 @@ const mutations = {
 }
 
 const actions = {
+
+	/**
+	 * Create a new task
+	 *
+	 * @param {Object} context the store mutations
+	 * @param {Object} taskData the data of the new task
+	 * @returns {Promise}
+	 */
+	async createTask(context, taskData) {
+		if (!taskData.calendar) {
+			taskData.calendar = context.getters.getDefaultCalendar
+		}
+
+		let task = new Task('BEGIN:VCALENDAR\nVERSION:2.0\nEND:VCALENDAR', taskData.calendar)
+
+		task.vtodo.updatePropertyWithValue('created', ICAL.Time.now())
+		task.vtodo.updatePropertyWithValue('dtstamp', ICAL.Time.now())
+		task.vtodo.updatePropertyWithValue('last-modified', ICAL.Time.now())
+		task.vtodo.updatePropertyWithValue('summary', taskData.summary)
+		task.vtodo.updatePropertyWithValue('x-oc-hidesubtasks', 0)
+		if (taskData.priority) {
+			task.vtodo.updatePropertyWithValue('priority', taskData.priority)
+		}
+		if (taskData.complete) {
+			task.vtodo.updatePropertyWithValue('percent-complete', taskData.complete)
+		}
+		if (taskData.related) {
+			task.vtodo.updatePropertyWithValue('related-to', taskData.related)
+		}
+		if (taskData.note) {
+			task.vtodo.updatePropertyWithValue('description', taskData.note)
+		}
+		if (taskData.due) {
+			task.vtodo.updatePropertyWithValue('due', taskData.due)
+		}
+		if (taskData.start) {
+			task.vtodo.updatePropertyWithValue('dtstart', taskData.start)
+		}
+
+		let vData = ICAL.stringify(task.jCal)
+
+		if (!task.dav) {
+			await task.calendar.dav.createVObject(vData)
+				.then((response) => {
+					Vue.set(task, 'dav', response)
+					context.commit('addTaskToCalendar', task)
+					context.commit('addTaskToParent', task)
+				})
+				.catch((error) => { throw error })
+		}
+	},
+
 	deleteTask(context, taskId) {
 		context.commit('deleteTask', taskId)
 	},

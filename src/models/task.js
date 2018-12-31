@@ -49,7 +49,7 @@ export default class Task {
 		this.calendar = calendar
 		this.vCalendar = new ICAL.Component(this.jCal)
 
-		this.subTasks = {}
+		this.subTasks = []
 
 		// used to state a task is not up to date with
 		// the server and cannot be pushed (etag)
@@ -57,6 +57,12 @@ export default class Task {
 
 		// if no uid set, create one
 		this.vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
+
+		if (!this.vtodo) {
+			this.vtodo = new ICAL.Component('vtodo')
+			this.vCalendar.addSubcomponent(this.vtodo)
+		}
+
 		if (!this.vtodo.hasProperty('uid')) {
 			console.debug('This task did not have a proper uid. Setting a new one for ', this)
 			this.vtodo.addPropertyWithValue('uid', uuid())

@@ -211,7 +211,8 @@ export default {
 	methods: {
 		...mapActions([
 			'toggleCompleted',
-			'toggleStarred'
+			'toggleStarred',
+			'createTask'
 		]),
 		sort,
 		/**
@@ -245,6 +246,21 @@ export default {
 		},
 
 		addTask: function() {
+			var task = { summary: this.newTaskName, calendar: this.task.calendar, related: this.task.uid }
+
+			// If the task is created in a collection view,
+			// set the appropriate properties.
+			if (this.$route.params.collectionId === 'starred') {
+				task.priority = '1'
+			}
+			if (this.$route.params.collectionId === 'today') {
+				task.due = moment().startOf('day').format('YYYY-MM-DDTHH:mm:ss')
+			}
+			if (this.$route.params.collectionId === 'current') {
+				task.start = moment().format('YYYY-MM-DDTHH:mm:ss')
+			}
+
+			this.createTask(task)
 			this.newTaskName = ''
 		}
 	}
