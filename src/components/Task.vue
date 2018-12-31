@@ -114,7 +114,6 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					:task="subtask"
 					class="subtask"
 				/>
-				<!-- "orderBy:getSortOrder():settingsmodel.getById('various').sortDirection" -->
 			</ol>
 		</div>
 	</li>
