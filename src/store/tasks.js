@@ -192,13 +192,35 @@ const mutations = {
 	},
 
 	/**
+	 * Store task into state
+	 *
+	 * @param {Object} state Default state
+	 * @param {Task} task The task to append
+	 */
+	appendTask(state, task) {
+		Vue.set(state.tasks, task.key, task)
+	},
+
+	/**
+	 * Store task into state
+	 *
+	 * @param {Object} state Default state
+	 * @param {Task} task The task to append
+	 */
+	deleteTask(state, task) {
+		if (state.tasks[task.key] && task instanceof Task) {
+			Vue.delete(state.tasks, task.key)
+		}
+	},
+
+	/**
 	 * Delete a task from the store
 	 *
 	 * @param {Object} state the store data
 	 * @param {string} task The task to delete
 	 */
-	deleteTask(state, task) {
-		if (state.tasks[task.key] && task instanceof Task) {
+	deleteTaskFromParent(state, task) {
+		if (task instanceof Task) {
 			// Remove task from parents subTask list if necessary
 			if (task.related) {
 				let tasks = task.calendar.tasks
@@ -208,9 +230,6 @@ const mutations = {
 					parent.subTasks.splice(index, 1)
 				}
 			}
-
-			// Remove the task from the calendar
-			Vue.delete(task.calendar.tasks, task.uid)
 		}
 	},
 
@@ -332,6 +351,7 @@ const actions = {
 			await task.calendar.dav.createVObject(vData)
 				.then((response) => {
 					Vue.set(task, 'dav', response)
+					context.commit('appendTask', task)
 					context.commit('addTaskToCalendar', task)
 					context.commit('addTaskToParent', task)
 				})
@@ -361,6 +381,8 @@ const actions = {
 				})
 		}
 		context.commit('deleteTask', task)
+		context.commit('deleteTaskFromParent', task)
+		context.commit('deleteTaskFromCalendar', task)
 	},
 
 	toggleCompleted(context, taskId) {
