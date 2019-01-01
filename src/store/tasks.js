@@ -420,6 +420,7 @@ const actions = {
 				})
 		} else {
 			console.error('This task is outdated, refusing to push', task)
+			OC.Notification.showTemporary(t('tasks', 'This task is outdated, refusing to push.'))
 		}
 	},
 
