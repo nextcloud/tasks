@@ -169,6 +169,17 @@ const getters = {
 			 */
 			return (!task.related || !isParentInList(task, tasks)) && !task.completed
 		})
+	},
+
+	/**
+	 * Returns the parent task of a given task
+	 *
+	 * @param {string} task The task of which to find the parent
+	 * @returns {Task} the parent task
+	 */
+	getParentTask: () => (task) => {
+		let tasks = task.calendar.tasks
+		return Object.values(tasks).find(search => search.uid === task.related) || null
 	}
 }
 
@@ -385,20 +396,70 @@ const actions = {
 		context.commit('deleteTaskFromCalendar', task)
 	},
 
-	toggleCompleted(context, taskId) {
-		context.commit('toggleCompleted', taskId)
+	/**
+	 * Update a task
+	 *
+	 * @param {Object} context the store context
+	 * @param {Task} task the task to update
+	 * @returns {Promise}
+	 */
+	async updateTask(context, task) {
+		let vCalendar = ICAL.stringify(task.jCal)
+
+		if (!task.conflict) {
+			task.dav.data = vCalendar
+			return task.dav.update()
+				.catch((error) => {
+					OC.Notification.showTemporary(t('tasks', 'Could not update the task.'))
+					// wrong etag, we most likely have a conflict
+					if (error && error.status === 412) {
+						// saving the new etag so that the user can manually
+						// trigger a fetchCompleteData without any further errors
+						task.conflict = error.xhr.getResponseHeader('etag')
+					}
+				})
+		} else {
+			console.error('This task is outdated, refusing to push', task)
+		}
 	},
-	toggleStarred(context, taskId) {
-		context.commit('toggleStarred', taskId)
+
+	async toggleCompleted(context, task) {
+		if (task.completed) {
+			await context.dispatch('setPercentComplete', { task: task, complete: 0 })
+		} else {
+			await context.dispatch('setPercentComplete', { task: task, complete: 100 })
+		}
 	},
-	deleteDueDate(context, taskId) {
-		context.commit('deleteDueDate', taskId)
+
+	async setPercentComplete(context, { task, complete }) {
+		if (complete < 100) {
+			// uncomplete the parent task
+			let parent = context.getters.getParentTask(task)
+			if (parent.completed) {
+				await context.dispatch('setPercentComplete', { task: parent, complete: 0 })
+			}
+		} else {
+			// complete all sub tasks
+			await Promise.all(task.subTasks.map(async(subTask) => {
+				if (!subTask.completed) {
+					await context.dispatch('setPercentComplete', { task: subTask, complete: 100 })
+				}
+			}))
+		}
+		task.complete = complete
+		context.dispatch('updateTask', task)
 	},
-	deleteStartDate(context, taskId) {
-		context.commit('deleteStartDate', taskId)
+	toggleStarred(context, task) {
+		context.commit('toggleStarred', task)
 	},
-	toggleAllDay(context, taskId) {
-		context.commit('toggleAllDay', taskId)
+	deleteDueDate(context, task) {
+		context.commit('deleteDueDate', task)
+	},
+	deleteStartDate(context, task) {
+		context.commit('deleteStartDate', task)
+	},
+	toggleAllDay(context, task) {
+		context.commit('toggleAllDay', task)
 	}
 }
 
