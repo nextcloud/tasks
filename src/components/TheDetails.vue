@@ -30,7 +30,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					:aria-label="t('tasks', 'Task is completed')"
 					class="checkbox reactive"
 					role="checkbox"
-					@click="toggleCompleted(task.uri)"
+					@click="toggleCompleted(task)"
 				>
 					<span :class="{'icon-checkmark': task.completed, 'disabled': task.calendar.readOnly}" class="icon icon-bw detail-checkbox" />
 				</a>
