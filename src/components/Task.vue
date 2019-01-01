@@ -211,7 +211,8 @@ export default {
 		...mapActions([
 			'toggleCompleted',
 			'toggleStarred',
-			'createTask'
+			'createTask',
+			'getTasksFromCalendar'
 		]),
 		sort,
 		/**
@@ -227,6 +228,9 @@ export default {
 		 */
 		navigate: function($event) {
 			if (!$event.target.classList.contains('no-nav')) {
+				if (!this.task.loadedCompleted) {
+					this.getTasksFromCalendar({ calendar: this.task.calendar, completed: true, related: this.task.uid })
+				}
 				this.$router.push(this.taskRoute)
 			}
 		},

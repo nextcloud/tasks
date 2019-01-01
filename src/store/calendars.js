@@ -423,8 +423,8 @@ const actions = {
 	 * @param {Object} importDetails = { ics, calendar }
 	 * @returns {Promise}
 	 */
-	async getTasksFromCalendar(context, { calendar }) {
-		return findVTODObyState(calendar, false, null)
+	async getTasksFromCalendar(context, { calendar, completed = false, related = null }) {
+		return findVTODObyState(calendar, completed, related)
 			.then((response) => {
 				// We don't want to lose the url information
 				// so we need to parse one by one
@@ -443,6 +443,16 @@ const actions = {
 						})
 					}
 				)
+
+				// If the requested tasks are related to a task, add the tasks as subtasks
+				if (related) {
+					let parent = Object.values(calendar.tasks).find(search => search.uid === related)
+					if (parent) {
+						parent.loadedCompleted = true
+						// todo: check that we don't add tasks twice to sub tasks array
+						tasks.map(task => parent.subTasks.push(task))
+					}
+				}
 
 				context.commit('appendTasksToCalendar', { calendar, tasks })
 				context.commit('appendTasks', tasks)
