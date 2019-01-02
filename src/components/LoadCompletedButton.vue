@@ -48,9 +48,9 @@ export default {
 		]),
 		loadCompletedTasks() {
 			this.getTasksFromCalendar({ calendar: this.calendar, completed: true, related: null })
-			.then((response) => {
-				this.calendar.loadedCompleted = true
-			})
+				.then((response) => {
+					this.calendar.loadedCompleted = true
+				})
 		}
 	}
 }
