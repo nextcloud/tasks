@@ -452,6 +452,11 @@ const actions = {
 							Vue.set(list, task.uid, task)
 							return list
 						}, parent.subTasks)
+
+						// If necessary, add the tasks as subtasks to parent tasks already present in the store.
+						if (!related) {
+							context.commit('addTaskToParent', parent)
+						}
 					}
 				)
 
@@ -463,8 +468,6 @@ const actions = {
 						tasks.map(task => Vue.set(parent.subTasks, task.uid, task))
 					}
 				}
-
-				// Todo: If necessary, add the tasks as subtasks to parent tasks already present in the store.
 
 				context.commit('appendTasksToCalendar', { calendar, tasks })
 				context.commit('appendTasks', tasks)
