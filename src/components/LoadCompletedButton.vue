@@ -20,7 +20,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<div v-show="loadedCompleted" class="loadmore">
+	<div v-show="!loadedCompleted" class="loadmore">
 		<span @click="loadCompletedTasks">
 			{{ t('tasks', 'Load remaining completed tasks.') }}
 		</span>
@@ -28,6 +28,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 
 export default {
 	props: {
@@ -38,13 +39,18 @@ export default {
 	},
 	computed: {
 		loadedCompleted() {
-			// TODO: Query the store if the completed tasks where already loaded for calendar "this.calendar"
-			return false
+			return this.calendar.loadedCompleted
 		}
 	},
 	methods: {
+		...mapActions([
+			'getTasksFromCalendar',
+		]),
 		loadCompletedTasks() {
-			// TODO: Load completed tasks for calendar "this.calendar"
+			this.getTasksFromCalendar({ calendar: this.calendar, completed: true, related: null })
+			.then((response) => {
+				this.calendar.loadedCompleted = true
+			})
 		}
 	}
 }
