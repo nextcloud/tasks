@@ -237,8 +237,7 @@ const mutations = {
 				let tasks = task.calendar.tasks
 				let parent = Object.values(tasks).find(search => search.uid === task.related)
 				if (parent) {
-					let index = parent.subTasks.findIndex(search => search.key === task.key)
-					parent.subTasks.splice(index, 1)
+					Vue.delete(parent.subTasks, task.uid)
 				}
 			}
 		}
@@ -255,7 +254,7 @@ const mutations = {
 			let tasks = task.calendar.tasks
 			let parent = Object.values(tasks).find(search => search.uid === task.related)
 			if (parent) {
-				parent.subTasks.push(task)
+				Vue.set(parent.subTasks, task.uid, task)
 			}
 		}
 	},
@@ -380,7 +379,7 @@ const actions = {
 	 */
 	async deleteTask(context, { task, dav = true }) {
 		// delete all subtasks first
-		await Promise.all(task.subTasks.map(async(subTask) => {
+		await Promise.all(Object.values(task.subTasks).map(async(subTask) => {
 			await context.dispatch('deleteTask', { task: subTask, dav: true })
 		}))
 		// only local delete if the task doesn't exists on the server
@@ -441,7 +440,7 @@ const actions = {
 			}
 		} else {
 			// complete all sub tasks
-			await Promise.all(task.subTasks.map(async(subTask) => {
+			await Promise.all(Object.values(task.subTasks).map(async(subTask) => {
 				if (!subTask.completed) {
 					await context.dispatch('setPercentComplete', { task: subTask, complete: 100 })
 				}

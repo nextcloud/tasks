@@ -438,9 +438,18 @@ const actions = {
 				// We do have to manually adjust this list when a task is added, deleted or moved.
 				tasks.forEach(
 					parent => {
-						parent.subTasks = tasks.filter(task => {
+						var subTasks = tasks.filter(task => {
 							return task.related === parent.uid
 						})
+
+						// convert list into an array and remove duplicate
+						parent.subTasks = subTasks.reduce((list, task) => {
+							if (list[task.uid]) {
+								console.debug('Duplicate task overridden', list[task.uid], task)
+							}
+							Vue.set(list, task.uid, task)
+							return list
+						}, parent.subTasks)
 					}
 				)
 
@@ -449,8 +458,7 @@ const actions = {
 					let parent = Object.values(calendar.tasks).find(search => search.uid === related)
 					if (parent) {
 						parent.loadedCompleted = true
-						// todo: check that we don't add tasks twice to sub tasks array
-						tasks.map(task => parent.subTasks.push(task))
+						tasks.map(task => Vue.set(parent.subTasks, task.uid, task))
 					}
 				}
 

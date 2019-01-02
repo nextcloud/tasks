@@ -109,7 +109,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</form>
 			</div>
 			<ol v-if="!task.hideSubtasks" :calendarID="task.calendar.uri">
-				<TaskBodyComponent v-for="subtask in sort([...task.subTasks], sortOrder, sortDirection)"
+				<TaskBodyComponent v-for="subtask in sort([...Object.values(task.subTasks)], sortOrder, sortDirection)"
 					:key="subtask.uid"
 					:task="subtask"
 					class="subtask"
@@ -192,7 +192,7 @@ export default {
 		},
 
 		hasCompletedSubtasks: function() {
-			return this.task.subTasks.some(subTask => {
+			return Object.values(this.task.subTasks).some(subTask => {
 				return subTask.completed
 			})
 		},
