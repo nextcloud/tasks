@@ -435,7 +435,7 @@ const actions = {
 		if (complete < 100) {
 			// uncomplete the parent task
 			let parent = context.getters.getParentTask(task)
-			if (parent.completed) {
+			if (parent && parent.completed) {
 				await context.dispatch('setPercentComplete', { task: parent, complete: 0 })
 			}
 		} else {
