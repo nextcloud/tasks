@@ -344,6 +344,13 @@ const actions = {
 		}
 		if (taskData.related) {
 			task.vtodo.updatePropertyWithValue('related-to', taskData.related)
+			// Check that parent task is not completed, uncomplete if necessary.
+			if (taskData.complete !== 100) {
+				let parent = context.getters.getParentTask(task)
+				if (parent && parent.completed) {
+					await context.dispatch('setPercentComplete', { task: parent, complete: 0 })
+				}
+			}
 		}
 		if (taskData.note) {
 			task.vtodo.updatePropertyWithValue('description', taskData.note)
