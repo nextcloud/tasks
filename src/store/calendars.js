@@ -49,7 +49,8 @@ const calendarModel = {
 	url: '',
 	readOnly: false,
 	dav: false,
-	supportsTasks: true
+	supportsTasks: true,
+	loadedCompleted: false,
 }
 
 const state = {
@@ -74,7 +75,8 @@ export function mapDavCollectionToCalendar(calendar) {
 		tasks: [],
 		url: calendar.url,
 		dav: calendar,
-		supportsTasks: calendar.components.includes('VTODO')
+		supportsTasks: calendar.components.includes('VTODO'),
+		loadedCompleted: false,
 	}
 }
 
@@ -461,6 +463,8 @@ const actions = {
 						tasks.map(task => Vue.set(parent.subTasks, task.uid, task))
 					}
 				}
+
+				// Todo: If necessary, add the tasks as subtasks to parent tasks already present in the store.
 
 				context.commit('appendTasksToCalendar', { calendar, tasks })
 				context.commit('appendTasks', tasks)
