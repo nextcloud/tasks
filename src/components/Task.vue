@@ -48,7 +48,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<span :class="{'icon-checkmark': task.completed}" class="icon icon-bw task-checkbox reactive no-nav" />
 			</span>
 			<span class="icon task-separator" />
-			<span class="task-star" @click="toggleStarred(task.uri)">
+			<span class="task-star" @click="toggleStarred(task)">
 				<span :class="[iconStar]" class="icon right large reactive no-nav" />
 			</span>
 			<span v-if="!task.calendar.readOnly"
@@ -59,13 +59,13 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					@click="showSubtaskInput = true"
 				/>
 			</span>
-			<span v-if="task.subTasks.length" @click="toggleSubtasks(task)">
+			<span v-if="Object.values(task.subTasks).length" @click="toggleSubtasksVisibility(task)">
 				<span :title="t('tasks', 'Toggle subtasks')"
 					:class="task.hideSubtasks ? 'icon-subtasks-hidden' : 'icon-subtasks-visible'"
 					class="icon icon-bw right large subtasks reactive no-nav"
 				/>
 			</span>
-			<span v-if="hasCompletedSubtasks" @click="toggleCompletedSubtasks(task)">
+			<span v-if="hasCompletedSubtasks" @click="toggleCompletedSubtasksVisibility(task)">
 				<span :title="t('tasks', 'Toggle completed subtasks')"
 					:class="{'active': !task.hideCompletedSubtasks}"
 					class="icon icon-bw icon-toggle right large toggle-completed-subtasks reactive no-nav"
@@ -212,7 +212,9 @@ export default {
 			'toggleCompleted',
 			'toggleStarred',
 			'createTask',
-			'getTasksFromCalendar'
+			'getTasksFromCalendar',
+			'toggleSubtasksVisibility',
+			'toggleCompletedSubtasksVisibility',
 		]),
 		sort,
 		/**
@@ -240,12 +242,6 @@ export default {
 			if (e.target.getAttribute('taskId') !== this.task.uri) {
 				this.showSubtaskInput = false
 			}
-		},
-
-		toggleSubtasks: function(task) {
-		},
-
-		toggleCompletedSubtasks: function(task) {
 		},
 
 		addTask: function() {
