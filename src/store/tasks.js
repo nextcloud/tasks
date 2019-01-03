@@ -45,7 +45,7 @@ const getters = {
 	getTasksByCalendarId: (state, getters, rootState) => (calendarId) => {
 		var calendar = getters.getCalendarById(calendarId)
 		if (calendar) {
-		return Object.values(calendar.tasks)
+			return Object.values(calendar.tasks)
 		}
 	},
 
@@ -267,53 +267,72 @@ const mutations = {
 	 * @param {Object} state the store data
 	 * @param {string} task The task
 	 */
-	toggleCompleted(state, task) {
-		if (task.completed) {
-			task.complete = 0
-		} else {
-			task.complete = 100
-		}
-		// TODO: set completed state of parent and child tasks
+	setComplete(state, { task, complete }) {
+		Vue.set(task, 'complete', complete)
 	},
 
 	/**
 	 * Toggles the starred state of a task
 	 *
 	 * @param {Object} state the store data
-	 * @param {string} taskId The task id
+	 * @param {string} task The task
 	 */
-	toggleStarred(state, taskId) {
-		console.debug('Toggle starred state of task with uri ' + taskId)
+	toggleStarred(state, task) {
+		if (task.priority === 0) {
+			Vue.set(task, 'priority', 1)
+		} else {
+			Vue.set(task, 'priority', 0)
+		}
+	},
+
+	/**
+	 * Toggles the visibility of the subtasks
+	 *
+	 * @param {Object} state the store data
+	 * @param {string} task The task
+	 */
+	toggleSubtasksVisibility(state, task) {
+		Vue.set(task, 'hideSubtasks', !task.hideSubtasks)
+	},
+
+	/**
+	 * Toggles the visibility of the completed subtasks
+	 *
+	 * @param {Object} state the store data
+	 * @param {string} task The task
+	 */
+	toggleCompletedSubtasksVisibility(state, task) {
+		Vue.set(task, 'hideCompletedSubtasks', !task.hideCompletedSubtasks)
 	},
 
 	/**
 	 * Deletes the due date of a task
 	 *
 	 * @param {Object} state the store data
-	 * @param {string} taskId The task id
+	 * @param {string} task The task
 	 */
-	deleteDueDate(state, taskId) {
-		console.debug('Deletes the due date of task with uri ' + taskId)
+	deleteDueDate(state, task) {
+		console.debug('Deletes the due date of task ' + task)
 	},
 
 	/**
 	 * Deletes the start date of a task
 	 *
 	 * @param {Object} state the store data
-	 * @param {string} taskId The task id
+	 * @param {string} task The task
 	 */
-	deleteStartDate(state, taskId) {
-		console.debug('Deletes the start date of task with uri ' + taskId)
+	deleteStartDate(state, task) {
+		console.debug('Deletes the start date of task ' + task)
 	},
 
 	/**
 	 * Toggles if the start and due dates of a task are all day
 	 *
 	 * @param {Object} state the store data
-	 * @param {string} taskId The task id
+	 * @param {string} task The task
 	 */
-	toggleAllDay(state, taskId) {
-		console.debug('Toggles the allday state of task with uri ' + taskId)
+	toggleAllDay(state, task) {
+		console.debug('Toggles the allday state of task ' + task)
 	}
 }
 
@@ -455,20 +474,38 @@ const actions = {
 				}
 			}))
 		}
-		task.complete = complete
+		context.commit('setComplete', { task: task, complete: complete })
 		context.dispatch('updateTask', task)
 	},
+
+	async toggleSubtasksVisibility(context, task) {
+		context.commit('toggleSubtasksVisibility', task)
+		context.dispatch('updateTask', task)
+	},
+
+	async toggleCompletedSubtasksVisibility(context, task) {
+		context.commit('toggleCompletedSubtasksVisibility', task)
+		context.dispatch('updateTask', task)
+	},
+
 	toggleStarred(context, task) {
 		context.commit('toggleStarred', task)
+		context.dispatch('updateTask', task)
 	},
+
 	deleteDueDate(context, task) {
 		context.commit('deleteDueDate', task)
+		context.dispatch('updateTask', task)
 	},
+
 	deleteStartDate(context, task) {
 		context.commit('deleteStartDate', task)
+		context.dispatch('updateTask', task)
 	},
+
 	toggleAllDay(context, task) {
 		context.commit('toggleAllDay', task)
+		context.dispatch('updateTask', task)
 	}
 }
 
