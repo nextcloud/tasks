@@ -66,6 +66,27 @@ export default class Task {
 			console.debug('This task did not have a proper uid. Setting a new one for ', this)
 			this.vtodo.addPropertyWithValue('uid', uuid())
 		}
+
+		// Define properties, so Vue reacts to changes of them
+		this._uid = this.vtodo.getFirstPropertyValue('uid') || ''
+		this._summary = this.vtodo.getFirstPropertyValue('summary') || ''
+		this._priority = this.vtodo.getFirstPropertyValue('priority')
+		this._complete = this.vtodo.getFirstPropertyValue('percent-complete') || 0
+		this._completed = !!this.vtodo.getFirstPropertyValue('completed')
+		this._status = this.vtodo.getFirstPropertyValue('status')
+		this._note = this.vtodo.getFirstPropertyValue('description') || ''
+		this._related = this.vtodo.getFirstPropertyValue('related-to') || null
+		this._hideSubtaks = +this.vtodo.getFirstPropertyValue('x-oc-hidesubtasks') || 0
+		this._hideCompletedSubtaks = +this.vtodo.getFirstPropertyValue('x-oc-hidecompletedsubtasks') || 0
+		this._start = this.vtodo.getFirstPropertyValue('dtstart')
+		this._due = this.vtodo.getFirstPropertyValue('due')
+		var start = this.vtodo.getFirstPropertyValue('dtstart')
+		var due = this.vtodo.getFirstPropertyValue('due')
+		var d = due || start
+		this._allDay = d !== null && d.isDate
+		this._loaded = false
+		var categories = this.vtodo.getFirstProperty('categories')
+		this._categories = categories ? categories.getValues() : []
 	}
 
 	/**
@@ -145,7 +166,7 @@ export default class Task {
 	 * @memberof Task
 	 */
 	get uid() {
-		return this.vtodo.getFirstPropertyValue('uid') || ''
+		return this._uid
 	}
 
 	/**
@@ -156,6 +177,7 @@ export default class Task {
 	 */
 	set uid(uid) {
 		this.vCalendar.updatePropertyWithValue('uid', uid)
+		this._uid = this.vtodo.getFirstPropertyValue('uid') || ''
 		return true
 	}
 
@@ -166,7 +188,7 @@ export default class Task {
 	 * @memberof Task
 	 */
 	get summary() {
-		return this.vtodo.getFirstPropertyValue('summary') || ''
+		return this._summary
 	}
 
 	/**
@@ -178,20 +200,22 @@ export default class Task {
 	set summary(summary) {
 		this.vtodo.updatePropertyWithValue('summary', summary)
 		this.updateLastModified()
+		this._summary = this.vtodo.getFirstPropertyValue('summary') || ''
 	}
 
 	get priority() {
-		return this.vtodo.getFirstPropertyValue('priority')
+		return this._priority
 	}
 
 	set priority(priority) {
 		// TODO: check that priority is >= 0 and <10
 		this.vtodo.updatePropertyWithValue('priority', priority)
 		this.updateLastModified()
+		this._priority = this.vtodo.getFirstPropertyValue('priority')
 	}
 
 	get complete() {
-		return this.vtodo.getFirstPropertyValue('percent-complete') || 0
+		return this._complete
 	}
 
 	set complete(complete) {
@@ -208,15 +232,11 @@ export default class Task {
 			this.completed = ICAL.Time.now()
 			this.status = 'COMPLETED'
 		}
+		this._complete = this.vtodo.getFirstPropertyValue('percent-complete') || 0
 	}
 
 	get completed() {
-		var comp = this.vtodo.getFirstPropertyValue('completed')
-		if (comp) {
-			return true
-		} else {
-			return false
-		}
+		return this._completed
 	}
 
 	set completed(completed) {
@@ -226,6 +246,7 @@ export default class Task {
 			this.vtodo.removeProperty('completed')
 		}
 		this.updateLastModified()
+		this._completed = !!this.vtodo.getFirstPropertyValue('completed')
 	}
 
 	get completedDate() {
@@ -238,25 +259,27 @@ export default class Task {
 	}
 
 	get status() {
-		return this.vtodo.getFirstPropertyValue('status')
+		return this._status
 	}
 
 	set status(status) {
 		this.vtodo.updatePropertyWithValue('status', status)
 		this.updateLastModified()
+		this._status = this.vtodo.getFirstPropertyValue('status')
 	}
 
 	get note() {
-		return this.vtodo.getFirstPropertyValue('description') || ''
+		return this._note
 	}
 
 	set note(note) {
 		this.vtodo.updatePropertyWithValue('description', note)
 		this.updateLastModified()
+		this._note = this.vtodo.getFirstPropertyValue('description') || ''
 	}
 
 	get related() {
-		return this.vtodo.getFirstPropertyValue('related-to') || null
+		return this._related
 	}
 
 	set related(related) {
@@ -266,28 +289,31 @@ export default class Task {
 			this.vtodo.removeProperty('related-to')
 		}
 		this.updateLastModified()
+		this._related = this.vtodo.getFirstPropertyValue('related-to') || null
 	}
 
 	get hideSubtasks() {
-		return +this.vtodo.getFirstPropertyValue('x-oc-hidesubtasks') || 0
+		return this._hideSubtaks
 	}
 
 	set hideSubtasks(hide) {
 		this.vtodo.updatePropertyWithValue('x-oc-hidesubtasks', +hide)
 		this.updateLastModified()
+		this._hideSubtaks = +this.vtodo.getFirstPropertyValue('x-oc-hidesubtasks') || 0
 	}
 
 	get hideCompletedSubtasks() {
-		return +this.vtodo.getFirstPropertyValue('x-oc-hidecompletedsubtasks') || 0
+		return this._hideCompletedSubtaks
 	}
 
 	set hideCompletedSubtasks(hide) {
 		this.vtodo.updatePropertyWithValue('x-oc-hidecompletedsubtasks', +hide)
 		this.updateLastModified()
+		this._hideCompletedSubtaks = +this.vtodo.getFirstPropertyValue('x-oc-hidecompletedsubtasks') || 0
 	}
 
 	get start() {
-		return this.vtodo.getFirstPropertyValue('dtstart')
+		return this._start
 	}
 
 	set start(start) {
@@ -297,10 +323,11 @@ export default class Task {
 			this.vtodo.removeProperty('dtstart')
 		}
 		this.updateLastModified()
+		this._start = this.vtodo.getFirstPropertyValue('dtstart')
 	}
 
 	get due() {
-		return this.vtodo.getFirstPropertyValue('due')
+		return this._due
 	}
 
 	set due(due) {
@@ -310,13 +337,11 @@ export default class Task {
 			this.vtodo.removeProperty('due')
 		}
 		this.updateLastModified()
+		this._due = this.vtodo.getFirstPropertyValue('due')
 	}
 
 	get allDay() {
-		var start = this.vtodo.getFirstPropertyValue('dtstart')
-		var due = this.vtodo.getFirstPropertyValue('due')
-		var d = due || start
-		return d !== null && d.isDate
+		return this._allDay
 	}
 
 	set allDay(allDay) {
@@ -331,6 +356,10 @@ export default class Task {
 			this.vtodo.updatePropertyWithValue('due', due)
 		}
 		this.updateLastModified()
+		start = this.vtodo.getFirstPropertyValue('dtstart')
+		due = this.vtodo.getFirstPropertyValue('due')
+		var d = due || start
+		this._allDay = d !== null && d.isDate
 	}
 
 	get comments() {
@@ -338,11 +367,11 @@ export default class Task {
 	}
 
 	get loadedCompleted() {
-		return this.loaded
+		return this._loaded
 	}
 
 	set loadedCompleted(loadedCompleted) {
-		this.loaded = loadedCompleted
+		this._loaded = loadedCompleted
 	}
 
 	get reminder() {
@@ -356,12 +385,7 @@ export default class Task {
 	 * @memberof Task
 	 */
 	get categories() {
-		var categories = this.vtodo.getFirstProperty('categories')
-		if (categories) {
-			return categories.getValues()
-		} else {
-			return []
-		}
+		return this._categories
 	}
 
 	/**
@@ -384,6 +408,9 @@ export default class Task {
 			this.vtodo.removeProperty('categories')
 		}
 		this.updateLastModified()
+		categories = this.vtodo.getFirstProperty('categories')
+		this._categories = categories ? categories.getValues() : []
+
 	}
 
 	updateLastModified() {
