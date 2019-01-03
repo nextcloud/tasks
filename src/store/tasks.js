@@ -44,7 +44,9 @@ const getters = {
 	 */
 	getTasksByCalendarId: (state, getters, rootState) => (calendarId) => {
 		var calendar = getters.getCalendarById(calendarId)
+		if (calendar) {
 		return Object.values(calendar.tasks)
+		}
 	},
 
 	/**
