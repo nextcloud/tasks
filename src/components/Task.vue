@@ -109,7 +109,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</form>
 			</div>
 			<ol v-if="!task.hideSubtasks" :calendarID="task.calendar.uri">
-				<TaskBodyComponent v-for="subtask in sort([...Object.values(task.subTasks)], sortOrder, sortDirection)"
+				<TaskBodyComponent v-for="subtask in filteredSubtasks"
 					:key="subtask.uid"
 					:task="subtask"
 					class="subtask"
@@ -205,7 +205,22 @@ export default {
 		 */
 		subtasksCreationPlaceholder: function() {
 			return t('tasks', 'Add a subtask to "{task}"...', {	task: this.task.summary })
-		}
+		},
+
+		/**
+		 * Returns the subtasks filtered by completed state if necessary
+		 *
+		 * @returns {Array} the array with the subtasks to show
+		 */
+		filteredSubtasks: function() {
+			var subTasks = Object.values(this.task.subTasks)
+			if (this.task.hideCompletedSubtasks) {
+				subTasks = subTasks.filter(task => {
+					return !task.completed
+				})
+			}
+			return sort([...subTasks], this.sortOrder, this.sortDirection)
+		},
 	},
 	methods: {
 		...mapActions([
