@@ -352,21 +352,19 @@ const actions = {
 
 		let task = new Task('BEGIN:VCALENDAR\nVERSION:2.0\nEND:VCALENDAR', taskData.calendar)
 
-		task.vtodo.updatePropertyWithValue('created', ICAL.Time.now())
-		task.vtodo.updatePropertyWithValue('dtstamp', ICAL.Time.now())
-		task.vtodo.updatePropertyWithValue('last-modified', ICAL.Time.now())
-		task.vtodo.updatePropertyWithValue('summary', taskData.summary)
-		task.vtodo.updatePropertyWithValue('x-oc-hidesubtasks', 0)
+		task.created = ICAL.Time.now()
+		task.summary = taskData.summary
+		task.hidesubtasks = 0
 		if (taskData.priority) {
-			task.vtodo.updatePropertyWithValue('priority', taskData.priority)
+			task.priority = taskData.priority
 		}
 		if (taskData.complete) {
-			task.vtodo.updatePropertyWithValue('percent-complete', taskData.complete)
+			task.complete = taskData.complete
 		}
 		if (taskData.related) {
-			task.vtodo.updatePropertyWithValue('related-to', taskData.related)
+			task.related = taskData.related
 			// Check that parent task is not completed, uncomplete if necessary.
-			if (taskData.complete !== 100) {
+			if (task.complete !== 100) {
 				let parent = context.getters.getParentTask(task)
 				if (parent && parent.completed) {
 					await context.dispatch('setPercentComplete', { task: parent, complete: 0 })
@@ -374,13 +372,13 @@ const actions = {
 			}
 		}
 		if (taskData.note) {
-			task.vtodo.updatePropertyWithValue('description', taskData.note)
+			task.note = taskData.note
 		}
 		if (taskData.due) {
-			task.vtodo.updatePropertyWithValue('due', taskData.due)
+			task.due = taskData.due
 		}
 		if (taskData.start) {
-			task.vtodo.updatePropertyWithValue('dtstart', taskData.start)
+			task.start = taskData.start
 		}
 
 		let vData = ICAL.stringify(task.jCal)

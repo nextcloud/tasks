@@ -87,6 +87,7 @@ export default class Task {
 		this._loaded = false
 		var categories = this.vtodo.getFirstProperty('categories')
 		this._categories = categories ? categories.getValues() : []
+		this._created = this.vtodo.getFirstPropertyValue('created')
 	}
 
 	/**
@@ -416,6 +417,16 @@ export default class Task {
 	updateLastModified() {
 		this.vtodo.updatePropertyWithValue('last-modified', ICAL.Time.now())
 		this.vtodo.updatePropertyWithValue('dtstamp', ICAL.Time.now())
+	}
+
+	get created() {
+		return this._created
+	}
+
+	set created(createdDate) {
+		this.vtodo.updatePropertyWithValue('created', createdDate)
+		this.updateLastModified()
+		this._created = this.vtodo.getFirstPropertyValue('created')
 	}
 
 }
