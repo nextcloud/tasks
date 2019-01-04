@@ -120,104 +120,153 @@ function isParentInList(task, tasks) {
  * @returns {Array}
  */
 function sort(tasks, sortOrder, sortDirection) {
-	var sortedTasks
+	var comparators
 	switch (sortOrder) {
 	case 'alphabetically': {
-		sortedTasks = sortAlphabetically(tasks)
+		comparators = [sortAlphabetically, sortByPriority]
 		break
 	}
 	case 'priority': {
-		sortedTasks = sortByPriority(tasks)
+		comparators = [sortByPriority, sortAlphabetically]
 		break
 	}
 	case 'due': {
-		sortedTasks = sortByDate(tasks, 'due')
+		comparators = [sortByDue, sortAlphabetically]
 		break
 	}
 	case 'start': {
-		sortedTasks = sortByDate(tasks, 'start')
+		comparators = [sortByStart, sortAlphabetically]
 		break
 	}
 	case 'created': {
-		sortedTasks = sortByDate(tasks, 'created')
+		comparators = [sortByCreated, sortAlphabetically]
 		break
 	}
 	case 'modified': {
-		sortedTasks = sortByDate(tasks, 'modified')
+		comparators = [sortByModified, sortAlphabetically]
 		break
 	}
 	default:
-		sortedTasks = sortByCompleted(tasks)
+		comparators = [sortByCompleted, sortByPriority, sortByStart, sortAlphabetically]
 	}
+	var sortedTasks = tasks.sort((taskA, taskB) => {
+		var compIndex = 0
+		var result = comparators[compIndex](taskA, taskB)
+		while (result === 0 && compIndex < comparators.length) {
+			result = comparators[compIndex](taskA, taskB)
+			compIndex++
+		}
+		return result
+	})
 	return sortDirection ? sortedTasks.reverse() : sortedTasks
 }
 
 /**
- * Sorts tasks by completed state in ascending order
+ * Comparator two compare two tasks by completed state in ascending order
  *
- * @param {Array} tasks The tasks to be sorted
- * @returns {Array}
+ * @param {Task} taskA The first task
+ * @param {Task} taskB The second task
+ * @returns {Integer}
  */
-function sortByCompleted(tasks) {
-	return tasks.sort((taskA, taskB) =>
-		taskA.completed - taskB.completed
-	)
+function sortByCompleted(taskA, taskB) {
+	return taskA.completed - taskB.completed
 }
 
 /**
- * Sorts tasks by priority in ascending order
+ * Comparator to compare two tasks by priority in ascending order
  *
  * Sorting by priority is a bit tricky, because
  * 0 means no priority, but 1 is highest priority and 9 is lowest priority.
  * Hence, sort order must be 1, 2, ..., 9, 0
  *
- * @param {Array} tasks The tasks to be sorted
- * @returns {Array}
+ * @param {Task} taskA The first task
+ * @param {Task} taskB The second task
+ * @returns {Integer}
  */
-function sortByPriority(tasks) {
-	return tasks.sort((taskA, taskB) => {
-		if (-taskA.priority === -taskB.priority) return 0
-		if (-taskA.priority === 0) return 1
-		if (-taskB.priority === 0) return -1
-		return taskA.priority - taskB.priority
-	})
+function sortByPriority(taskA, taskB) {
+	if (-taskA.priority === -taskB.priority) return 0
+	if (-taskA.priority === 0) return 1
+	if (-taskB.priority === 0) return -1
+	return taskA.priority - taskB.priority
 }
 
 /**
- * Sorts tasks alphabetically in ascending order
+ * Comparator to compare two tasks alphabetically in ascending order
  *
- * @param {Array} tasks The tasks to be sorted
- * @returns {Array}
+ * @param {Task} taskA The first task
+ * @param {Task} taskB The second task
+ * @returns {Integer}
  */
-function sortAlphabetically(tasks) {
-	return tasks.sort((taskA, taskB) =>
-		taskA.summary.toLowerCase().localeCompare(taskB.summary.toLowerCase())
-	)
+function sortAlphabetically(taskA, taskB) {
+	return taskA.summary.toLowerCase().localeCompare(taskB.summary.toLowerCase())
 }
 
 /**
- * Sorts tasks by date in ascending order
+ * Comparator proxy to compare two tasks by due date in ascending order
  *
- * @param {Array} tasks The tasks to be sorted
+ * @param {Task} taskA The first task
+ * @param {Task} taskB The second task
+ * @returns {Integer}
+ */
+function sortByDue(taskA, taskB) {
+	return sortByDate(taskA, taskB, 'due')
+}
+
+/**
+ * Comparator proxy to compare two tasks by start date in ascending order
+ *
+ * @param {Task} taskA The first task
+ * @param {Task} taskB The second task
+ * @returns {Integer}
+ */
+function sortByStart(taskA, taskB) {
+	return sortByDate(taskA, taskB, 'start')
+}
+
+/**
+ * Comparator proxy to compare two tasks by last-modified date in ascending order
+ *
+ * @param {Task} taskA The first task
+ * @param {Task} taskB The second task
+ * @returns {Integer}
+ */
+function sortByModified(taskA, taskB) {
+	return sortByDate(taskA, taskB, 'modified')
+}
+
+/**
+ * Comparator proxy to compare two tasks by created date in ascending order
+ *
+ * @param {Task} taskA The first task
+ * @param {Task} taskB The second task
+ * @returns {Integer}
+ */
+function sortByCreated(taskA, taskB) {
+	return sortByDate(taskA, taskB, 'created')
+}
+
+/**
+ * Comparator to compare two tasks by date in ascending order
+ *
+ * @param {Task} taskA The first task
+ * @param {Task} taskB The second task
  * @param {String} date The date sort type
- * @returns {Array}
+ * @returns {Integer}
  */
-function sortByDate(tasks, date) {
-	return tasks.sort((taskA, taskB) => {
-		if (taskA[date] === null && taskB[date] !== null) {
-			return -1
-		}
+function sortByDate(taskA, taskB, date) {
+	if (taskA[date] === null && taskB[date] !== null) {
+		return -1
+	}
 
-		if (taskA[date] !== null && taskB[date] === null) {
-			return 1
-		}
+	if (taskA[date] !== null && taskB[date] === null) {
+		return 1
+	}
 
-		if (taskA[date] === null && taskB[date] === null) {
-			return 0
-		}
+	if (taskA[date] === null && taskB[date] === null) {
+		return 0
+	}
 
-		return moment(taskA[date], 'YYYYMMDDTHHmmss').diff(moment(taskB[date], 'YYYYMMDDTHHmmss'))
-	})
+	return moment(taskA[date], 'YYYYMMDDTHHmmss').diff(moment(taskB[date], 'YYYYMMDDTHHmmss'))
 }
 
 export {
