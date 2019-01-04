@@ -147,9 +147,21 @@ function sort(tasks, sortOrder, sortDirection) {
 		break
 	}
 	default:
-		sortedTasks = tasks
+		sortedTasks = sortByCompleted(tasks)
 	}
 	return sortDirection ? sortedTasks.reverse() : sortedTasks
+}
+
+/**
+ * Sorts tasks by completed state in ascending order
+ *
+ * @param {Array} tasks The tasks to be sorted
+ * @returns {Array}
+ */
+function sortByCompleted(tasks) {
+	return tasks.sort((taskA, taskB) =>
+		taskA.completed - taskB.completed
+	)
 }
 
 /**
