@@ -77,6 +77,16 @@ export default {
 					text: t('tasks', 'Start date')
 				},
 				{
+					id: 'created',
+					icon: 'icon-calendar',
+					text: t('tasks', 'Created date')
+				},
+				{
+					id: 'modified',
+					icon: 'icon-calendar',
+					text: t('tasks', 'Last modified')
+				},
+				{
 					id: 'priority',
 					icon: 'icon-task-star',
 					text: t('tasks', 'Priority')
@@ -117,6 +127,8 @@ export default {
 			switch (this.sortOrder) {
 			case 'due':
 			case 'start':
+			case 'created':
+			case 'modified':
 				icon = 'calendar'
 				break
 			case 'priority':
