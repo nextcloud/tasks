@@ -87,6 +87,7 @@ export default class Task {
 		this._loaded = false
 		var categories = this.vtodo.getFirstProperty('categories')
 		this._categories = categories ? categories.getValues() : []
+		this._modified = this.vtodo.getFirstPropertyValue('last-modified')
 		this._created = this.vtodo.getFirstPropertyValue('created')
 	}
 
@@ -411,12 +412,17 @@ export default class Task {
 		this.updateLastModified()
 		categories = this.vtodo.getFirstProperty('categories')
 		this._categories = categories ? categories.getValues() : []
-
 	}
 
 	updateLastModified() {
-		this.vtodo.updatePropertyWithValue('last-modified', ICAL.Time.now())
-		this.vtodo.updatePropertyWithValue('dtstamp', ICAL.Time.now())
+		var now = ICAL.Time.now()
+		this.vtodo.updatePropertyWithValue('last-modified', now)
+		this.vtodo.updatePropertyWithValue('dtstamp', now)
+		this._modified = now
+	}
+
+	get modified() {
+		return this._modified
 	}
 
 	get created() {

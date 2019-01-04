@@ -138,6 +138,14 @@ function sort(tasks, sortOrder, sortDirection) {
 		sortedTasks = sortByDate(tasks, 'start')
 		break
 	}
+	case 'created': {
+		sortedTasks = sortByDate(tasks, 'created')
+		break
+	}
+	case 'modified': {
+		sortedTasks = sortByDate(tasks, 'modified')
+		break
+	}
 	default:
 		sortedTasks = tasks
 	}
