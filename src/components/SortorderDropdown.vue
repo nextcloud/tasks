@@ -33,6 +33,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			<ul>
 				<li v-for="order in orders"
 					:key="order.id"
+					v-tooltip="{
+						placement: 'left',
+						content: order.hint,
+						delay: { show: 500, hide: 0 }
+					}"
 					:class="{active: sortOrder == order.id}"
 					@click="setSortOrder(order.id)"
 				>
@@ -64,43 +69,51 @@ export default {
 				{
 					id: 'default',
 					icon: 'icon-list',
-					text: t('tasks', 'Default')
+					text: t('tasks', 'Default'),
+					hint: t('tasks', 'Sort by completed state, priority, start date and summary.')
 				},
 				{
 					id: 'due',
 					icon: 'icon-calendar',
-					text: t('tasks', 'Due date')
+					text: t('tasks', 'Due date'),
+					hint: t('tasks', 'Sort by due date and summary.')
 				},
 				{
 					id: 'start',
 					icon: 'icon-calendar',
-					text: t('tasks', 'Start date')
+					text: t('tasks', 'Start date'),
+					hint: t('tasks', 'Sort by start date and summary.')
 				},
 				{
 					id: 'created',
 					icon: 'icon-calendar',
-					text: t('tasks', 'Created date')
+					text: t('tasks', 'Created date'),
+					hint: t('tasks', 'Sort by created date and summary.')
 				},
 				{
 					id: 'modified',
 					icon: 'icon-calendar',
-					text: t('tasks', 'Last modified')
+					text: t('tasks', 'Last modified'),
+					hint: t('tasks', 'Sort by last-modified date and summary.')
 				},
 				{
 					id: 'priority',
 					icon: 'icon-task-star',
-					text: t('tasks', 'Priority')
+					text: t('tasks', 'Priority'),
+					hint: t('tasks', 'Sort by priority and summary.')
 				},
 				// Manual sorting is not yet implemented
 				// {
 				// 	id: 'manual',
 				// 	icon: 'icon-manual',
-				// 	text: t('tasks', 'Manually')
+				// 	text: t('tasks', 'Manually'),
+				// 	hint: t('tasks', 'Sort by manual order.')
 				// },
 				{
 					id: 'alphabetically',
 					icon: 'icon-alphabetically',
-					text: t('tasks', 'Alphabetically')
+					text: t('tasks', 'Alphabetically'),
+					hint: t('tasks', 'Sort by summary and priority.')
 				}
 			]
 		}
