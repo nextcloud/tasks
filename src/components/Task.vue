@@ -60,13 +60,13 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				/>
 			</span>
 			<span v-if="Object.values(task.subTasks).length" @click="toggleSubtasksVisibility(task)">
-				<span :title="t('tasks', 'Toggle subtasks')"
+				<span :title="t('tasks', 'Toggle visibility of all subtasks.')"
 					:class="task.hideSubtasks ? 'icon-subtasks-hidden' : 'icon-subtasks-visible'"
 					class="icon icon-bw right large subtasks reactive no-nav"
 				/>
 			</span>
 			<span v-if="hasCompletedSubtasks" @click="toggleCompletedSubtasksVisibility(task)">
-				<span :title="t('tasks', 'Toggle completed subtasks')"
+				<span :title="t('tasks', 'Toggle visibility of completed subtasks.')"
 					:class="{'active': !task.hideCompletedSubtasks}"
 					class="icon icon-bw icon-toggle right large toggle-completed-subtasks reactive no-nav"
 				/>
