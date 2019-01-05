@@ -486,7 +486,7 @@ const actions = {
 		context.dispatch('updateTask', task)
 	},
 
-	toggleStarred(context, task) {
+	async toggleStarred(context, task) {
 		context.commit('toggleStarred', task)
 		context.dispatch('updateTask', task)
 	},
