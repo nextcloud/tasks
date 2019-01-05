@@ -24,8 +24,8 @@
 /**
  * Returns if a task belongs to a list
  *
- * @param {Object} task the task to check
- * @param {String} listId the id of the list in question
+ * @param {Object} task The task to check
+ * @param {String} listId The id of the list in question
  * @returns {Boolean}
  */
 function isTaskInList(task, listId) {
@@ -101,7 +101,7 @@ function overdue(due) {
 /**
  * Checks if for a given task the parent is found in the given Object
  *
- * @param {Object} task The task
+ * @param {Task} task The task
  * @param {Object} tasks The tasks to search in
  * @returns {Boolean}
  */
@@ -114,7 +114,7 @@ function isParentInList(task, tasks) {
 /**
  * Sorts tasks in specified order type
  *
- * @param {Array} tasks The tasks to search in
+ * @param {Array<Task>} tasks The tasks to sort
  * @param {String} sortOrder The sorting order type
  * @param {Boolean} sortDirection The sorting direction
  * @returns {Array}

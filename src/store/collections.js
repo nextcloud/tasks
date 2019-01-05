@@ -42,11 +42,11 @@ const getters = {
 	 *	- be a root task
 	 *	- be uncompleted
 	 *
-	 * @param {Object} state the store data
-	 * @param {Object} getters the store getters
-	 * @param {Object} rootState the store root state
-	 * @param {String} collectionId the Id of the collection in question
-	 * @returns {Number} count of tasks in the collection
+	 * @param {Object} state The store data
+	 * @param {Object} getters The store getters
+	 * @param {Object} rootState The store root state
+	 * @param {String} collectionId The id of the collection in question
+	 * @returns {Integer} Count of tasks in the collection
 	 */
 	getCollectionCount: (state, getters, rootState) => (collectionId) => {
 		var count = 0
@@ -60,6 +60,12 @@ const getters = {
 }
 
 const mutations = {
+	/**
+	 * Stores all available collections in the state
+	 *
+	 * @param {Object} state The store data
+	 * @param {Object} payload The collections payload
+	 */
 	setCollections(state, payload) {
 		state.collections = payload.collections
 	},
@@ -67,8 +73,8 @@ const mutations = {
 	/**
 	 * Sets the visibility of a collection
 	 *
-	 * @param {Object} state the store data
-	 * @param {Collection} newCollection the collection to update
+	 * @param {Object} state The store data
+	 * @param {Collection} newCollection The collection to update
 	 */
 	setVisibility(state, newCollection) {
 		let collection = state.collections.find(search => search.id === newCollection.id)
@@ -77,6 +83,12 @@ const mutations = {
 }
 
 const actions = {
+	/**
+	 * Requests all collections from the server
+	 *
+	 * @param {Object} commit The store mutations
+	 * @returns {Promise}
+	 */
 	loadCollections({ commit }) {
 		return new Promise(function(resolve) {
 			Requests.get(OC.generateUrl('apps/tasks/collections'))
@@ -88,6 +100,14 @@ const actions = {
 				})
 		})
 	},
+
+	/**
+	 * Writes the visibility of a collection to the server
+	 *
+	 * @param {Object} context The store mutations
+	 * @param {Collection} collection The collection to change
+	 * @returns {Promise}
+	 */
 	setVisibility(context, collection) {
 		context.commit('setVisibility', collection)
 		return new Promise(function() {
