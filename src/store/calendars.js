@@ -217,7 +217,6 @@ const mutations = {
 	 * @param {Calendar} calendar The calendar to toggle
 	 */
 	toggleCalendarEnabled(context, calendar) {
-		calendar = state.calendars.find(search => search.id === calendar.id)
 		calendar.enabled = !calendar.enabled
 	},
 
@@ -231,7 +230,6 @@ const mutations = {
 	 * @param {String} data.newColor The new color of the calendar
 	 */
 	renameCalendar(context, { calendar, newName, newColor }) {
-		calendar = state.calendars.find(search => search.id === calendar.id)
 		calendar.displayName = newName
 		calendar.color = newColor
 	},
@@ -246,8 +244,6 @@ const mutations = {
 	 * @param {Task[]} data.tasks Array of tasks to append
 	 */
 	appendTasksToCalendar(state, { calendar, tasks }) {
-		calendar = state.calendars.find(search => search === calendar)
-
 		// Convert list into an array and remove duplicate
 		calendar.tasks = tasks.reduce((list, task) => {
 			if (list[task.uid]) {
@@ -266,8 +262,7 @@ const mutations = {
 	 * @param {Task} task The task to add
 	 */
 	addTaskToCalendar(state, task) {
-		let calendar = state.calendars.find(search => search.id === task.calendar.id)
-		Vue.set(calendar.tasks, task.uid, task)
+		Vue.set(task.calendar.tasks, task.uid, task)
 	},
 
 	/**
@@ -277,8 +272,7 @@ const mutations = {
 	 * @param {Task} task The task to delete
 	 */
 	deleteTaskFromCalendar(state, task) {
-		let calendar = state.calendars.find(search => search.id === task.calendar.id)
-		Vue.delete(calendar.tasks, task.uid)
+		Vue.delete(task.calendar.tasks, task.uid)
 	},
 
 	/**
@@ -292,7 +286,6 @@ const mutations = {
 	 * @param {Boolean} data.group The group
 	 */
 	shareCalendar(state, { calendar, sharee, id, group }) {
-		calendar = state.calendars.find(search => search.id === calendar.id)
 		let newSharee = {
 			displayname: sharee,
 			id,
