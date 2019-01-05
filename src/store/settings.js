@@ -32,26 +32,66 @@ const state = {
 }
 
 const getters = {
+	/**
+	 * Returns the sort order how to sort tasks
+	 *
+	 * @param {Object} state The store data
+	 * @returns {String} The sort order
+	 */
 	sortOrder: (state) => state.settings.sortOrder,
+
+	/**
+	 * Returns the sort direction how to sort tasks
+	 *
+	 * @param {Object} state The store data
+	 * @returns {String} The sort direction
+	 */
 	sortDirection: (state) => state.settings.sortDirection,
 }
 
 const mutations = {
+	/**
+	 * Sets all settings
+	 *
+	 * @param {Object} state Default state
+	 * @param {Object} payload The settings object
+	 */
 	setSettings(state, payload) {
 		state.settings = payload.settings
 	},
+
+	/**
+	 * Sets a setting value
+	 *
+	 * @param {Object} state Default state
+	 * @param {Object} payload The setting object
+	 */
 	setSetting(state, payload) {
 		state.settings[payload.type] = payload.value
 	}
 }
 
 const actions = {
+	/**
+	 * Writes a setting to the server
+	 *
+	 * @param {Object} context The store context
+	 * @param {Object} payload The setting to save
+	 * @returns {Promise}
+	 */
 	setSetting(context, payload) {
 		context.commit('setSetting', payload)
 		return new Promise(function() {
 			Requests.post(OC.generateUrl('apps/tasks/settings/{type}/{value}', payload), {})
 		})
 	},
+
+	/**
+	 * Requests all app settings from the server
+	 *
+	 * @param {Object} commit The store mutations
+	 * @returns {Promise}
+	 */
 	loadSettings({ commit }) {
 		return new Promise(function(resolve) {
 			Requests.get(OC.generateUrl('apps/tasks/settings'))

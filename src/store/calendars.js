@@ -58,9 +58,9 @@ const state = {
 }
 
 /**
- * map a dav collection to our calendar object model
+ * Maps a dav collection to our calendar object model
  *
- * @param {Object} calendar the calendar object from the cdav library
+ * @param {Object} calendar The calendar object from the cdav library
  * @returns {Object}
  */
 export function mapDavCollectionToCalendar(calendar) {
@@ -85,8 +85,8 @@ const getters = {
 	/**
 	 * Returns the calendars sorted alphabetically
 	 *
-	 * @param {Object} state the store data
-	 * @returns {Array} the calendars sorted alphabetically
+	 * @param {Object} state The store data
+	 * @returns {Array<Calendar>} Array of the calendars sorted alphabetically
 	 */
 	getSortedCalendars: state => {
 		return state.calendars.sort(function(cal1, cal2) {
@@ -96,22 +96,29 @@ const getters = {
 		})
 	},
 
+	/**
+	 * Returns the calendar with the given calendarId
+	 *
+	 * @param {Object} state The store data
+	 * @param {String} calendarId The id of the requested calendar
+	 * @returns {Calendar} The requested calendar
+	 */
 	getCalendarById: state => (calendarId) => {
 		var calendar = state.calendars.find(search => search.id === calendarId)
 		return calendar
 	},
 
 	/**
-	 * Returns the count of tasks in a calendar
+	 * Returns the number of tasks in a calendar
 	 *
 	 * Tasks have to be
 	 *	- a root task
 	 *	- uncompleted
 	 *
-	 * @param {Object} state the store data
-	 * @param {Object} getters the store getters
-	 * @param {String} calendarId the Id of the calendar in question
-	 * @returns {Number} the count of tasks
+	 * @param {Object} state The store data
+	 * @param {Object} getters The store getters
+	 * @param {String} calendarId The id of the requested calendar
+	 * @returns {Integer} The number of tasks
 	 */
 	getCalendarCount: (state, getters) => (calendarId) => {
 		var calendar = getters.getCalendarById(calendarId)
@@ -128,10 +135,10 @@ const getters = {
 	 *	- a root task
 	 *	- completed
 	 *
-	 * @param {Object} state the store data
-	 * @param {Object} getters the store getters
-	 * @param {String} calendarId the Id of the calendar in question
-	 * @returns {Number} the count of completed tasks in a calendar
+	 * @param {Object} state The store data
+	 * @param {Object} getters The store getters
+	 * @param {String} calendarId The id of the calendar in question
+	 * @returns {Integer} The count of completed tasks in a calendar
 	 */
 	getCalendarCountCompleted: (state, getters) => (calendarId) => {
 		var calendar = getters.getCalendarById(calendarId)
@@ -144,10 +151,10 @@ const getters = {
 	/**
 	 * Returns if a calendar name is already used by an other calendar
 	 *
-	 * @param {Object} state the store data
-	 * @param {String} name the name to check
-	 * @param {String} id the Id of the calendar to exclude
-	 * @returns {Bool} is a calendar name is used
+	 * @param {Object} state The store data
+	 * @param {String} name The name to check
+	 * @param {String} id The id of the calendar to exclude
+	 * @returns {Boolean} If a calendar name is already used
 	 */
 	isCalendarNameUsed: state => (name, id) => {
 		return state.calendars.some(calendar => {
@@ -158,10 +165,10 @@ const getters = {
 	/**
 	 * Returns the current calendar
 	 *
-	 * @param {Object} state the store data
-	 * @param {Object} getters the store getters
-	 * @param {Object} rootState the store root state
-	 * @returns {Object} the calendar by route
+	 * @param {Object} state The store data
+	 * @param {Object} getters The store getters
+	 * @param {Object} rootState The store root state
+	 * @returns {Calendar} The calendar by route
 	 */
 	getCalendarByRoute: (state, getters, rootState) => {
 		return getters.getCalendarById(rootState.route.params.calendarId)
@@ -170,10 +177,10 @@ const getters = {
 	/**
 	 * Returns the default calendar
 	 *
-	 * @param {Object} state the store data
-	 * @param {Object} getters the store getters
-	 * @param {Object} rootState the store root state
-	 * @returns {Object} the default calendar
+	 * @param {Object} state The store data
+	 * @param {Object} getters The store getters
+	 * @param {Object} rootState The store root state
+	 * @returns {Calendar} The default calendar
 	 */
 	getDefaultCalendar: (state, getters, rootState) => {
 		return getters.getCalendarById(rootState.settings.settings.defaultCalendarId) || getters.getSortedCalendars[0]
@@ -183,10 +190,10 @@ const getters = {
 const mutations = {
 
 	/**
-	 * Add calendar into state
+	 * Adds a calendar to the state
 	 *
-	 * @param {Object} state the store data
-	 * @param {Object} calendar the calendar to add
+	 * @param {Object} state The store data
+	 * @param {Calendar} calendar The calendar to add
 	 */
 	addCalendar(state, calendar) {
 		// extend the calendar to the default model
@@ -196,17 +203,18 @@ const mutations = {
 	/**
 	 * Delete calendar
 	 *
-	 * @param {Object} state the store data
-	 * @param {Object} calendar the calendar to delete
+	 * @param {Object} state The store data
+	 * @param {Calendar} calendar The calendar to delete
 	 */
 	deleteCalendar(state, calendar) {
 		state.calendars.splice(state.calendars.indexOf(calendar), 1)
 	},
 
 	/**
-	 * Toggle whether a calendar is Enabled
-	 * @param {Object} context the store mutations
-	 * @param {Object} calendar the calendar to toggle
+	 * Toggles whether a calendar is enabled
+	 *
+	 * @param {Object} context The store mutations
+	 * @param {Calendar} calendar The calendar to toggle
 	 */
 	toggleCalendarEnabled(context, calendar) {
 		calendar = state.calendars.find(search => search.id === calendar.id)
@@ -214,12 +222,13 @@ const mutations = {
 	},
 
 	/**
-	 * Change name and color of calendar
-	 * @param {Object} context the store mutations
-	 * @param {Object} data destructuring object
-	 * @param {Object} data.calendar the calendar to change
-	 * @param {String} data.newName the new name of the calendar
-	 * @param {String} data.newColor the new color of the calendar
+	 * Changes the name and the color of a calendar
+	 *
+	 * @param {Object} context The store mutations
+	 * @param {Object} data Destructuring object
+	 * @param {Calendar} data.calendar The calendar to change
+	 * @param {String} data.newName The new name of the calendar
+	 * @param {String} data.newColor The new color of the calendar
 	 */
 	renameCalendar(context, { calendar, newName, newColor }) {
 		calendar = state.calendars.find(search => search.id === calendar.id)
@@ -228,18 +237,18 @@ const mutations = {
 	},
 
 	/**
-	 * Append a list of tasks to a calendar
-	 * and remove duplicates
+	 * Appends a list of tasks to a calendar
+	 * and removes duplicates
 	 *
-	 * @param {Object} state the store data
-	 * @param {Object} data destructuring object
-	 * @param {Object} data.calendar the calendar to add the task to
-	 * @param {Task[]} data.tasks array of tasks to append
+	 * @param {Object} state The store data
+	 * @param {Object} data Destructuring object
+	 * @param {Calendar} data.calendar The calendar to add the tasks to
+	 * @param {Task[]} data.tasks Array of tasks to append
 	 */
 	appendTasksToCalendar(state, { calendar, tasks }) {
 		calendar = state.calendars.find(search => search === calendar)
 
-		// convert list into an array and remove duplicate
+		// Convert list into an array and remove duplicate
 		calendar.tasks = tasks.reduce((list, task) => {
 			if (list[task.uid]) {
 				console.debug('Duplicate task overridden', list[task.uid], task)
@@ -251,10 +260,10 @@ const mutations = {
 	},
 
 	/**
-	 * Add an task to an calendar and overwrite if duplicate uid
+	 * Adds a task to a calendar and overwrites if duplicate uid
 	 *
-	 * @param {Object} state the store data
-	 * @param {Task} task the task to add
+	 * @param {Object} state The store data
+	 * @param {Task} task The task to add
 	 */
 	addTaskToCalendar(state, task) {
 		let calendar = state.calendars.find(search => search.id === task.calendar.id)
@@ -262,10 +271,10 @@ const mutations = {
 	},
 
 	/**
-	 * Delete an task in a specified calendar
+	 * Deletes a task from its calendar
 	 *
-	 * @param {Object} state the store data
-	 * @param {Task} task the task to delete
+	 * @param {Object} state The store data
+	 * @param {Task} task The task to delete
 	 */
 	deleteTaskFromCalendar(state, task) {
 		let calendar = state.calendars.find(search => search.id === task.calendar.id)
@@ -273,14 +282,14 @@ const mutations = {
 	},
 
 	/**
-	 * Share calendar with a user or group
+	 * Shares a calendar with a user or group
 	 *
-	 * @param {Object} state the store data
-	 * @param {Object} data destructuring object
-	 * @param {Object} data.calendar the calendar
-	 * @param {string} data.sharee the sharee
-	 * @param {string} data.id id
-	 * @param {Boolean} data.group group
+	 * @param {Object} state The store data
+	 * @param {Object} data Destructuring object
+	 * @param {Calendar} data.calendar The calendar
+	 * @param {String} data.sharee The sharee
+	 * @param {String} data.id The id
+	 * @param {Boolean} data.group The group
 	 */
 	shareCalendar(state, { calendar, sharee, id, group }) {
 		calendar = state.calendars.find(search => search.id === calendar.id)
@@ -294,10 +303,10 @@ const mutations = {
 	},
 
 	/**
-	 * Remove Sharee from calendar shares list
+	 * Removes a sharee from calendar shares list
 	 *
-	 * @param {Object} state the store data
-	 * @param {Object} sharee the sharee
+	 * @param {Object} state The store data
+	 * @param {Object} sharee The sharee
 	 */
 	removeSharee(state, sharee) {
 		let calendar = state.calendars.find(search => {
@@ -311,10 +320,10 @@ const mutations = {
 	},
 
 	/**
-	 * Toggle sharee's writable permission
+	 * Toggles sharee's writable permission
 	 *
-	 * @param {Object} state the store data
-	 * @param {Object} sharee the sharee
+	 * @param {Object} state The store data
+	 * @param {Object} sharee The sharee
 	 */
 	updateShareeWritable(state, sharee) {
 		let calendar = state.calendars.find(search => {
@@ -331,10 +340,10 @@ const mutations = {
 
 const actions = {
 	/**
-	 * Retrieve and commit calendars
+	 * Retrieves and commits calendars
 	 *
-	 * @param {Object} context the store mutations
-	 * @returns {Promise<Array>} the calendars
+	 * @param {Object} context The store mutations
+	 * @returns {Promise<Array>} The calendars
 	 */
 	async getCalendars(context) {
 		let calendars = await client.calendarHomes[0].findAllCalendars()
@@ -344,7 +353,7 @@ const actions = {
 				})
 			})
 
-		// remove calendars which don't support tasks
+		// Remove calendars which don't support tasks
 		calendars = calendars.filter(calendar => calendar.supportsTasks)
 
 		calendars.forEach(calendar => {
@@ -355,10 +364,10 @@ const actions = {
 	},
 
 	/**
-	 * Append a new calendar to array of existing calendars
+	 * Appends a new calendar to array of existing calendars
 	 *
-	 * @param {Object} context the store mutations
-	 * @param {Object} calendar The calendar to append
+	 * @param {Object} context The store mutations
+	 * @param {Calendar} calendar The calendar to append
 	 * @returns {Promise}
 	 */
 	async appendCalendar(context, calendar) {
@@ -372,26 +381,26 @@ const actions = {
 
 	/**
 	 * Delete calendar
-	 * @param {Object} context the store mutations Current context
-	 * @param {Object} calendar the calendar to delete
+	 * @param {Object} context The store mutations Current context
+	 * @param {Calendar} calendar The calendar to delete
 	 * @returns {Promise}
 	 */
 	async deleteCalendar(context, calendar) {
 		return calendar.dav.delete()
 			.then((response) => {
-				// delete all the tasks from the store that belong to this calendar
+				// Delete all the tasks from the store that belong to this calendar
 				Object.values(calendar.tasks)
 					.forEach(task => context.commit('deleteTask', task))
-				// then delete the calendar
+				// Then delete the calendar
 				context.commit('deleteCalendar', calendar)
 			})
 			.catch((error) => { throw error })
 	},
 
 	/**
-	 * Toggle whether a calendar is Enabled
-	 * @param {Object} context the store mutations Current context
-	 * @param {Object} calendar the calendar to toggle
+	 * Toggles whether a calendar is enabled
+	 * @param {Object} context The store mutations current context
+	 * @param {Calendar} calendar The calendar to toggle
 	 * @returns {Promise}
 	 */
 	async toggleCalendarEnabled(context, calendar) {
@@ -402,11 +411,12 @@ const actions = {
 	},
 
 	/**
-	 * Change name and color of calendar
-	 * @param {Object} context the store mutations Current context
-	 * @param {Object} data.calendar the calendar to change
-	 * @param {String} data.newName the new name of the calendar
-	 * @param {String} data.newColor the new color of the calendar
+	 * Changes the name and the color of a calendar
+	 *
+	 * @param {Object} context The store mutations Current context
+	 * @param {Calendar} data.calendar The calendar to change
+	 * @param {String} data.newName The new name of the calendar
+	 * @param {String} data.newColor The new color of the calendar
 	 * @returns {Promise}
 	 */
 	async changeCalendar(context, { calendar, newName, newColor }) {
@@ -418,11 +428,14 @@ const actions = {
 	},
 
 	/**
-	 * Retrieve the tasks of the specified calendar
-	 * and commit the results
+	 * Retrieves the tasks of the specified calendar
+	 * and commits the results
 	 *
-	 * @param {Object} context the store mutations
-	 * @param {Object} importDetails = { ics, calendar }
+	 * @param {Object} context The store mutations
+	 * @param {Object} data Destructuring object
+	 * @param {Calendar} data.calendar The calendar
+	 * @param {String} data.completed Are the requested tasks completed
+	 * @param {String} data.related The uid of the parent task
 	 * @returns {Promise}
 	 */
 	async getTasksFromCalendar(context, { calendar, completed = false, related = null }) {
@@ -444,7 +457,7 @@ const actions = {
 							return task.related === parent.uid
 						})
 
-						// convert list into an array and remove duplicate
+						// Convert list into an array and remove duplicate
 						parent.subTasks = subTasks.reduce((list, task) => {
 							if (list[task.uid]) {
 								console.debug('Duplicate task overridden', list[task.uid], task)
@@ -483,8 +496,9 @@ const actions = {
 	},
 
 	/**
+	 * Imports tasks into a calendar from an ics file
 	 *
-	 * @param {Object} context the store mutations
+	 * @param {Object} context The store mutations
 	 * @param {Object} importDetails = { ics, calendar }
 	 */
 	async importTasksIntoCalendar(context, { ics, calendar }) {
@@ -528,46 +542,49 @@ const actions = {
 	},
 
 	/**
-	 * Remove sharee from calendar
-	 * @param {Object} context the store mutations Current context
-	 * @param {Object} sharee calendar sharee object
+	 * Removes a sharee from a calendar
+	 *
+	 * @param {Object} context The store mutations Current context
+	 * @param {Object} sharee Calendar sharee object
 	 */
 	removeSharee(context, sharee) {
 		context.commit('removeSharee', sharee)
 	},
 
 	/**
-	 * Toggle permissions of calendar Sharees writeable rights
-	 * @param {Object} context the store mutations Current context
-	 * @param {Object} sharee calendar sharee object
+	 * Toggles permissions of calendar sharees writeable rights
+	 *
+	 * @param {Object} context The store mutations Current context
+	 * @param {Object} sharee Calendar sharee object
 	 */
 	toggleShareeWritable(context, sharee) {
 		context.commit('updateShareeWritable', sharee)
 	},
 
 	/**
-	 * Share calendar with User or Group
-	 * @param {Object} context the store mutations Current context
-	 * @param {Object} data.calendar the calendar
-	 * @param {String} data.sharee the sharee
-	 * @param {Boolean} data.id id
-	 * @param {Boolean} data.group group
+	 * Shares a calendar with a user or a group
+	 *
+	 * @param {Object} context The store mutations Current context
+	 * @param {Calendar} data.calendar The calendar
+	 * @param {String} data.sharee The sharee
+	 * @param {Boolean} data.id The id
+	 * @param {Boolean} data.group The group
 	 */
 	shareCalendar(context, { calendar, sharee, id, group }) {
-		// Share calendar with entered group or user
+		// Share a calendar with the entered group or user
 		context.commit('shareCalendar', { calendar, sharee, id, group })
 	},
 
 	/**
-	 * Move an task to the provided calendar
+	 * Moves a task to the provided calendar
 	 *
-	 * @param {Object} context the store mutations
-	 * @param {Object} data destructuring object
-	 * @param {Task} data.task the task to move
-	 * @param {Object} data.calendar the calendar to move the task to
+	 * @param {Object} context The store mutations
+	 * @param {Object} data Destructuring object
+	 * @param {Task} data.task The task to move
+	 * @param {Calendar} data.calendar The calendar to move the task to
 	 */
 	async moveTaskToCalendar(context, { task, calendar }) {
-		// only local move if the task doesn't exist on the server
+		// Only local move if the task doesn't exist on the server
 		if (task.dav) {
 			// TODO: implement proper move
 			// await tasks.dav.move(calendar.dav)

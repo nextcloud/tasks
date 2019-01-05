@@ -23,10 +23,10 @@
 import { namespaces as NS } from 'cdav-library'
 
 /**
- * Find all VTODOs in a calendar with requested state and relation
+ * Finds all VTODOs in a calendar with requested state and relation
  *
- * @param {Object} calendar the calendar
- * @param {Bool} completed completed state of the VTODOs
+ * @param {Object} calendar The calendar
+ * @param {Bool} completed Completed state of the VTODOs
  * @param {String} related uid of the parent VTODO
  * @returns {Promise<VTODO[]>}
  */
