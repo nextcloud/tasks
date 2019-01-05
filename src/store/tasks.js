@@ -306,6 +306,17 @@ const mutations = {
 	},
 
 	/**
+	 * Sets the summary of a task
+	 *
+	 * @param {Object} state The store data
+	 * @param {Task} task The task
+	 * @param {String} summary The summary
+	 */
+	setSummary(state, { task, summary }) {
+		Vue.set(task, 'summary', summary)
+	},
+
+	/**
 	 * Deletes the due date of a task
 	 *
 	 * @param {Object} state the store data
@@ -488,6 +499,11 @@ const actions = {
 
 	async toggleStarred(context, task) {
 		context.commit('toggleStarred', task)
+		context.dispatch('updateTask', task)
+	},
+
+	async setSummary(context, { task, summary }) {
+		context.commit('setSummary', { task: task, summary: summary })
 		context.dispatch('updateTask', task)
 	},
 

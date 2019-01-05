@@ -475,6 +475,7 @@ export default {
 			'deleteTask',
 			'toggleCompleted',
 			'toggleStarred',
+			'setSummary',
 			'deleteDueDate',
 			'deleteStartDate',
 			'toggleAllDay'
@@ -546,6 +547,11 @@ export default {
 
 		setProperty: function(type, value) {
 			console.debug('Set property "' + type + '" to "' + value)
+			switch (type) {
+			case 'summary':
+				this.setSummary({ task: this.task, summary: value })
+				break
+			}
 			this.edit = ''
 		},
 
