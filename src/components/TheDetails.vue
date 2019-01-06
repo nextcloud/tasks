@@ -40,12 +40,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					/>
 				</a>
 				<div v-click-outside="() => finishEditing('summary')">
-					<div :class="{'strike-through': task.completed}"
+					<div v-linkify="task.summary"
+						:class="{'strike-through': task.completed}"
 						class="title-text"
 						@click="editProperty('summary')"
-					>
-						{{ task.summary }}
-					</div>
+					/>
 					<div class="expandable-container">
 						<div class="expandingArea active">
 							<pre><span>{{ tmpTask.summary }}</span><br></pre>
@@ -285,6 +284,7 @@ import { valid, overdue } from '../store/storeHelper'
 import { DatetimePicker, Multiselect } from 'nextcloud-vue'
 
 import ClickOutside from 'vue-click-outside'
+import { linkify } from '../directives/linkify.js'
 
 export default {
 	components: {
@@ -292,7 +292,8 @@ export default {
 		Multiselect
 	},
 	directives: {
-		ClickOutside
+		ClickOutside,
+		linkify
 	},
 	filters: {
 		startDate: function(date) {
@@ -468,7 +469,7 @@ export default {
 		}),
 		...mapGetters({
 			task: 'getTaskByRoute'
-		})
+		}),
 	},
 	methods: {
 		...mapActions([
