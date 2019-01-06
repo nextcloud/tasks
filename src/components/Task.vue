@@ -83,7 +83,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			</span>
 			<div class="task-info-wrapper">
 				<div class="title">
-					<span>{{ task.summary }}</span>
+					<span v-linkify="task.summary" />
 				</div>
 				<div class="categories-list">
 					<span v-for="category in task.categories" :key="category" class="category">
@@ -124,12 +124,14 @@ import { overdue, valid, sort } from '../store/storeHelper'
 import ClickOutside from 'vue-click-outside'
 import { mapGetters, mapActions } from 'vuex'
 import focus from '../directives/focus'
+import { linkify } from '../directives/linkify.js'
 
 export default {
 	name: 'TaskBodyComponent',
 	directives: {
 		ClickOutside,
-		focus
+		focus,
+		linkify
 	},
 	filters: {
 		formatDate: function(date) {
