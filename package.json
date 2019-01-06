@@ -30,6 +30,7 @@
 		"cdav-library": "github:nextcloud/cdav-library#0d5be948bbe5682ac350f8534c4459885e5eb25d",
 		"ical.js": "~1.3.0",
 		"jstimezonedetect": "",
+		"linkifyjs": "~2.1.7",
 		"nextcloud-vue": "^0.4.6",
 		"p-limit": "^2.1.0",
 		"uuid": "^3.3.2",
