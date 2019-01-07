@@ -1,8 +1,8 @@
 /**
- * Nextcloud - Inventory
+ * Nextcloud - Tasks
  *
  * @author Raimund Schlüßler
- * @copyright 2017 Raimund Schlüßler <raimund.schluessler@mailbox.org>
+ * @copyright 2019 Raimund Schlüßler <raimund.schluessler@mailbox.org>
  * @copyright 2018 Vadim Nicolai <contact@vadimnicolai.com>
  *
  * This library is free software; you can redistribute it and/or
