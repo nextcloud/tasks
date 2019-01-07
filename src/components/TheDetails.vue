@@ -43,7 +43,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<div v-linkify="task.summary"
 						:class="{'strike-through': task.completed}"
 						class="title-text"
-						@click="editProperty('summary')"
+						@click="editProperty('summary', $event)"
 					/>
 					<div class="expandable-container">
 						<div class="expandingArea active">
@@ -520,7 +520,8 @@ export default {
 		editProperty: function(type, event) {
 			// don't start to edit the property again
 			// if the confirm button of the datepicker was clicked
-			if (event && event.target.classList.contains('mx-datepicker-btn-confirm')) {
+			// don't start to edit if a linkified link was clicked
+			if (event && (event.target.classList.contains('mx-datepicker-btn-confirm') || event.target.tagName === 'A')) {
 				return
 			}
 			if (!this.task.calendar.readOnly && this.edit !== type) {
