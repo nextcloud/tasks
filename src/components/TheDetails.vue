@@ -246,11 +246,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 								@click="editProperty('note')"
 							>
 								<div :class="{'editing': edit=='note'}" class="content-fakeable">
-									<vue-markdown id="markdown"
-										:source="task.note"
-										:anchor-attributes="{ target: '_blank', rel: 'nofollow'}"
-										class="display-view"
-									/>
+									<div class="display-view">
+										{{ task.note }}
+									</div>
 									<div class="edit-view">
 										<div class="expandingArea active">
 											<pre><span>{{ tmpTask.note }}</span><br><br></pre>
@@ -285,15 +283,13 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { valid, overdue } from '../store/storeHelper'
 import { DatetimePicker, Multiselect } from 'nextcloud-vue'
-import VueMarkdown from 'vue-markdown'
 
 import ClickOutside from 'vue-click-outside'
 
 export default {
 	components: {
 		DatetimePicker,
-		Multiselect,
-		VueMarkdown,
+		Multiselect
 	},
 	directives: {
 		ClickOutside
