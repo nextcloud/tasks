@@ -245,7 +245,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 								@click="editProperty('note', $event)"
 							>
 								<div :class="{'editing': edit=='note'}" class="content-fakeable">
-									<div v-linkify="task.note" class="display-view" />
+									<markdown id="markdown"
+										:source="task.note"
+										class="display-view"
+									/>
 									<div class="edit-view">
 										<div class="expandingArea active">
 											<pre><span>{{ tmpTask.note }}</span><br><br></pre>
@@ -280,6 +283,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { valid, overdue } from '../store/storeHelper'
 import { DatetimePicker, Multiselect } from 'nextcloud-vue'
+import Markdown from './Markdown'
 
 import ClickOutside from 'vue-click-outside'
 import { linkify } from '../directives/linkify.js'
@@ -287,7 +291,8 @@ import { linkify } from '../directives/linkify.js'
 export default {
 	components: {
 		DatetimePicker,
-		Multiselect
+		Multiselect,
+		Markdown,
 	},
 	directives: {
 		ClickOutside,
