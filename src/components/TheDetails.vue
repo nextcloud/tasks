@@ -242,12 +242,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						<div class="note">
 							<div v-click-outside="() => finishEditing('note')"
 								class="note-body selectable"
-								@click="editProperty('note')"
+								@click="editProperty('note', $event)"
 							>
 								<div :class="{'editing': edit=='note'}" class="content-fakeable">
-									<div class="display-view">
-										{{ task.note }}
-									</div>
+									<div v-linkify="task.note" class="display-view" />
 									<div class="edit-view">
 										<div class="expandingArea active">
 											<pre><span>{{ tmpTask.note }}</span><br><br></pre>
