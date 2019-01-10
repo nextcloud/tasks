@@ -317,6 +317,17 @@ const mutations = {
 	},
 
 	/**
+	 * Sets the summary of a task
+	 *
+	 * @param {Object} state The store data
+	 * @param {Task} task The task
+	 * @param {String} note The note
+	 */
+	setNote(state, { task, note }) {
+		Vue.set(task, 'note', note)
+	},
+
+	/**
 	 * Deletes the due date of a task
 	 *
 	 * @param {Object} state The store data
@@ -540,6 +551,17 @@ const actions = {
 	 */
 	async setSummary(context, { task, summary }) {
 		context.commit('setSummary', { task: task, summary: summary })
+		context.dispatch('updateTask', task)
+	},
+
+	/**
+	 * Sets the note of a task
+	 *
+	 * @param {Object} context The store context
+	 * @param {Task} task The task to update
+	 */
+	async setNote(context, { task, note }) {
+		context.commit('setNote', { task: task, note: note })
 		context.dispatch('updateTask', task)
 	},
 

@@ -252,7 +252,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									<div class="edit-view">
 										<div class="expandingArea active">
 											<pre><span>{{ tmpTask.note }}</span><br><br></pre>
-											<textarea id="noteInput" v-model="tmpTask.note" @change="setPropertyTemporarily('note', tmpTask.note)" />
+											<textarea id="noteInput" v-model="tmpTask.note" @change="setProperty('note', tmpTask.note)" />
 										</div>
 									</div>
 								</div>
@@ -480,6 +480,7 @@ export default {
 			'toggleCompleted',
 			'toggleStarred',
 			'setSummary',
+			'setNote',
 			'deleteDueDate',
 			'deleteStartDate',
 			'toggleAllDay'
@@ -555,6 +556,9 @@ export default {
 			switch (type) {
 			case 'summary':
 				this.setSummary({ task: this.task, summary: value })
+				break
+			case 'note':
+				this.setNote({ task: this.task, note: value })
 				break
 			}
 			this.edit = ''
