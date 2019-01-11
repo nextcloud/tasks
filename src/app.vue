@@ -20,7 +20,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<div id="content" class="app-tasks">
+	<div id="content" class="app-tasks" @click="closeDetails($event)">
 		<div id="app-navigation">
 			<TheList />
 			<TheSettings />
@@ -85,6 +85,21 @@ export default {
 				this.loading = false
 				// console.log(results)
 			})
+		},
+
+		/**
+		 * Close the details view
+		 *
+		 * @param {Object} $event the event
+		 */
+		closeDetails($event) {
+			if (!($event.target.closest('.reactive') || $event.target.classList.contains('reactive')) && !$event.target.closest('#app-sidebar')) {
+				if (this.$route.params.calendarId) {
+					this.$router.push({ path: `/calendars/${this.$route.params.calendarId}` })
+				} else {
+					this.$router.push({ path: `/collections/${this.$route.params.collectionId}` })
+				}
+			}
 		}
 	}
 }

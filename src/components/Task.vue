@@ -27,7 +27,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 	>
 		<div :task-id="task.uri"
 			:class="{active: $route.params.taskId==task.uri}"
-			class="task-body"
+			class="task-body reactive"
 			type="task"
 			@click="navigate($event)"
 		>

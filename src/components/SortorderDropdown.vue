@@ -21,7 +21,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div>
-		<div v-click-outside="closeMenu" class="app-navigation-entry-utils" @click="toggleMenu">
+		<div v-click-outside="closeMenu" class="app-navigation-entry-utils reactive" @click="toggleMenu">
 			<div :title="t('tasks', 'Change sort order')" class="app-navigation-entry-utils-menu-button">
 				<button class="sortorder-dropdown-button">
 					<span :class="sortOrderIcon" class="icon icon-bw" />
@@ -29,7 +29,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</button>
 			</div>
 		</div>
-		<div :class="{'open': menuOpen}" class="app-navigation-entry-menu bubble sortorder-dropdown">
+		<div :class="{'open': menuOpen}" class="app-navigation-entry-menu bubble sortorder-dropdown reactive">
 			<ul>
 				<li v-for="order in orders"
 					:key="order.id"

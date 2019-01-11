@@ -30,7 +30,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<input v-model="newTaskName"
 					:placeholder="inputString"
 					:disabled="isAddingTask"
-					class="transparent"
+					class="transparent reactive"
 					@keyup.27="clearNewTask($event)"
 				>
 			</form>

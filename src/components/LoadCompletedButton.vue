@@ -20,7 +20,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<div v-show="!loadedCompleted" class="loadmore">
+	<div v-show="!loadedCompleted" class="loadmore reactive">
 		<span @click="loadCompletedTasks">
 			{{ t('tasks', 'Load all completed tasks.') }}
 		</span>
