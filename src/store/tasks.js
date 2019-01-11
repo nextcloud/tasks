@@ -583,6 +583,8 @@ const actions = {
 	 * @param {Task} task The task to update
 	 */
 	async setPriority(context, { task, priority }) {
+		// check priority to comply with RFC5545 (to be between 0 and 9)
+		priority = (+priority < 0) ? 0 : (+priority > 9) ? 9 : Math.round(+priority)
 		context.commit('setPriority', { task: task, priority: priority })
 		context.dispatch('updateTask', task)
 	},
