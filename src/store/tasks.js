@@ -278,7 +278,7 @@ const mutations = {
 	 * @param {Task} task The task
 	 */
 	toggleStarred(state, task) {
-		if (task.priority === 0) {
+		if (+task.priority < 1 || +task.priority > 4) {
 			Vue.set(task, 'priority', 1)
 		} else {
 			Vue.set(task, 'priority', 0)
@@ -317,7 +317,7 @@ const mutations = {
 	},
 
 	/**
-	 * Sets the summary of a task
+	 * Sets the note of a task
 	 *
 	 * @param {Object} state The store data
 	 * @param {Task} task The task
@@ -325,6 +325,17 @@ const mutations = {
 	 */
 	setNote(state, { task, note }) {
 		Vue.set(task, 'note', note)
+	},
+
+	/**
+	 * Sets the priority of a task
+	 *
+	 * @param {Object} state The store data
+	 * @param {Task} task The task
+	 * @param {String} priority The priority
+	 */
+	setPriority(state, { task, priority }) {
+		Vue.set(task, 'priority', priority)
 	},
 
 	/**
@@ -562,6 +573,17 @@ const actions = {
 	 */
 	async setNote(context, { task, note }) {
 		context.commit('setNote', { task: task, note: note })
+		context.dispatch('updateTask', task)
+	},
+
+	/**
+	 * Sets the priority of a task
+	 *
+	 * @param {Object} context The store context
+	 * @param {Task} task The task to update
+	 */
+	async setPriority(context, { task, priority }) {
+		context.commit('setPriority', { task: task, priority: priority })
 		context.dispatch('updateTask', task)
 	},
 

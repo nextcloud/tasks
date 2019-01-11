@@ -182,11 +182,11 @@ export default {
 		},
 
 		iconStar: function() {
-			if (this.task.priority > 5) {
+			if (+this.task.priority > 5) {
 				return 'icon-color icon-task-star-low'
-			} else if (this.task.priority === 5) {
+			} else if (+this.task.priority === 5) {
 				return 'icon-color icon-task-star-medium'
-			} else if (this.task.priority > 0 && this.task.priority < 5) {
+			} else if (+this.task.priority > 0 && +this.task.priority < 5) {
 				return 'icon-color icon-task-star-high'
 			} else {
 				return 'icon-bw icon-task-star'
