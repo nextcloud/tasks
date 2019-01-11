@@ -479,6 +479,7 @@ export default {
 			'setSummary',
 			'setNote',
 			'setPriority',
+			'setPercentComplete',
 			'deleteDueDate',
 			'deleteStartDate',
 			'toggleAllDay'
@@ -560,6 +561,9 @@ export default {
 				break
 			case 'priority':
 				this.setPriority({ task: this.task, priority: value })
+				break
+			case 'complete':
+				this.setPercentComplete({ task: this.task, complete: value })
 				break
 			}
 			this.edit = ''
