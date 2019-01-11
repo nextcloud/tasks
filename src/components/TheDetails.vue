@@ -167,7 +167,6 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									min="0"
 									max="9"
 									step="1"
-									@change="finishEditing('priority')"
 								>
 							</div>
 						</div>
@@ -198,14 +197,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									max="100"
 									@keyup.27="cancelEditing('complete')"
 									@keydown.enter.prevent="finishEditing('complete')"
-									@keyup.exact="setPropertyTemporarily('complete', tmpTask.complete)"
 								>
 								<input v-model="tmpTask.complete"
 									type="range"
 									min="0"
 									max="100"
 									step="1"
-									@change="setPropertyTemporarily('complete', tmpTask.complete)"
 								>
 							</div>
 						</div>
@@ -431,18 +428,18 @@ export default {
 			return !this.task.calendar.readOnly && (this.task.due || this.task.start)
 		},
 		priorityString: function() {
-			if (this.task.priority > 5) {
+			if (+this.task.priority > 5) {
 				return 'low'
-			} else if (this.task.priority === 5) {
+			} else if (+this.task.priority === 5) {
 				return 'medium'
-			} else if (this.task.priority > 0 && this.task.priority < 5) {
+			} else if (+this.task.priority > 0 && +this.task.priority < 5) {
 				return 'high'
 			} else {
 				return ''
 			}
 		},
 		iconStar: function() {
-			if (this.task.priority) {
+			if (+this.task.priority) {
 				return 'icon-color icon-task-star-' + this.priorityString
 			} else {
 				return 'icon-bw icon-task-star'
@@ -481,6 +478,7 @@ export default {
 			'toggleStarred',
 			'setSummary',
 			'setNote',
+			'setPriority',
 			'deleteDueDate',
 			'deleteStartDate',
 			'toggleAllDay'
@@ -560,12 +558,11 @@ export default {
 			case 'note':
 				this.setNote({ task: this.task, note: value })
 				break
+			case 'priority':
+				this.setPriority({ task: this.task, priority: value })
+				break
 			}
 			this.edit = ''
-		},
-
-		setPropertyTemporarily: function(type, value) {
-			console.debug('Set property "' + type + '" temporarily to "' + value)
 		},
 
 		setStartDate: function(date) {
