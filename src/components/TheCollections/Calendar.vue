@@ -31,7 +31,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					v-model="newTaskName"
 					:placeholder="inputString"
 					:disabled="isAddingTask"
-					class="transparent"
+					class="transparent reactive"
 					@keyup.27="clearNewTask($event)"
 				>
 			</form>
@@ -49,7 +49,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						:task="task"
 					/>
 				</ol>
-				<h2 v-show="completedCount(calendarId)" class="heading-hiddentasks icon-triangle-s" @click="toggleHidden">
+				<h2 v-show="completedCount(calendarId)" class="heading-hiddentasks icon-triangle-s reactive" @click="toggleHidden">
 					{{ completedCountString }}
 				</h2>
 				<ol v-if="showHidden"
