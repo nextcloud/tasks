@@ -328,6 +328,30 @@ const mutations = {
 	},
 
 	/**
+	 * Sets the categories of a task
+	 *
+	 * @param {Object} state The store data
+	 * @param {Task} task The task
+	 * @param {Array} categories The array of categories
+	 */
+	setCategories(state, { task, categories }) {
+		Vue.set(task, 'categories', categories)
+	},
+
+	/**
+	 * Adds a category to a task
+	 *
+	 * @param {Object} state The store data
+	 * @param {Task} task The task
+	 * @param {String} category The category to add
+	 */
+	addCategory(state, { task, category }) {
+		var categories = task.categories
+		categories.push(category)
+		Vue.set(task, 'categories', categories)
+	},
+
+	/**
 	 * Sets the priority of a task
 	 *
 	 * @param {Object} state The store data
@@ -573,6 +597,28 @@ const actions = {
 	 */
 	async setNote(context, { task, note }) {
 		context.commit('setNote', { task: task, note: note })
+		context.dispatch('updateTask', task)
+	},
+
+	/**
+	 * Sets the categories of a task
+	 *
+	 * @param {Object} context The store context
+	 * @param {Task} task The task to update
+	 */
+	async setCategories(context, { task, categories }) {
+		context.commit('setCategories', { task: task, categories: categories })
+		context.dispatch('updateTask', task)
+	},
+
+	/**
+	 * Adds a category to a task
+	 *
+	 * @param {Object} context The store context
+	 * @param {Task} task The task to update
+	 */
+	async addCategory(context, { task, category }) {
+		context.commit('addCategory', { task: task, category: category })
 		context.dispatch('updateTask', task)
 	},
 

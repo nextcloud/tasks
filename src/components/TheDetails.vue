@@ -230,7 +230,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									:close-on-select="false"
 									class="multiselect-vue"
 									@input="updateCategories"
-									@tag="addCategory"
+									@tag="updateCategory"
 								/>
 							</div>
 						</div>
@@ -480,6 +480,8 @@ export default {
 			'setNote',
 			'setPriority',
 			'setPercentComplete',
+			'setCategories',
+			'addCategory',
 			'deleteDueDate',
 			'deleteStartDate',
 			'toggleAllDay'
@@ -585,12 +587,22 @@ export default {
 			console.debug('Set due time to ' + time)
 		},
 
-		updateCategories: function(category) {
-			console.debug(category)
+		/**
+		 * Sets the categories of a task
+		 *
+		 * @param {Array} categories The new categories
+		 */
+		updateCategories: function(categories) {
+			this.setCategories({ task: this.task, categories: categories })
 		},
 
-		addCategory: function(category) {
-			console.debug(category)
+		/**
+		 * Adds a category to the list of categories
+		 *
+		 * @param {String} category The name of the category to add
+		 */
+		updateCategory: function(category) {
+			this.addCategory({ task: this.task, category: category })
 		}
 	}
 }
