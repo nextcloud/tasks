@@ -363,23 +363,23 @@ const mutations = {
 	},
 
 	/**
-	 * Deletes the due date of a task
+	 * Sets the due date of a task
 	 *
 	 * @param {Object} state The store data
 	 * @param {Task} task The task
 	 */
-	deleteDueDate(state, task) {
-		console.debug('Deletes the due date of task ' + task)
+	setDue(state, { task, due }) {
+		Vue.set(task, 'due', due)
 	},
 
 	/**
-	 * Deletes the start date of a task
+	 * Sets the start date of a task
 	 *
 	 * @param {Object} state The store data
 	 * @param {Task} task The task
 	 */
-	deleteStartDate(state, task) {
-		console.debug('Deletes the start date of task ' + task)
+	setStart(state, { task, start }) {
+		Vue.set(task, 'start', start)
 	},
 
 	/**
@@ -636,24 +636,24 @@ const actions = {
 	},
 
 	/**
-	 * Deletes the due date of a task
+	 * Sets the due date of a task
 	 *
 	 * @param {Object} context The store context
 	 * @param {Task} task The task to update
 	 */
-	async deleteDueDate(context, task) {
-		context.commit('deleteDueDate', task)
+	async setDue(context, { task, due }) {
+		context.commit('setDue', { task: task, due: due })
 		context.dispatch('updateTask', task)
 	},
 
 	/**
-	 * Deletes the start date of a task
+	 * Sets the start date of a task
 	 *
 	 * @param {Object} context The store context
 	 * @param {Task} task The task to update
 	 */
-	async deleteStartDate(context, task) {
-		context.commit('deleteStartDate', task)
+	async setStart(context, { task, start }) {
+		context.commit('setStart', { task: task, start: start })
 		context.dispatch('updateTask', task)
 	},
 
