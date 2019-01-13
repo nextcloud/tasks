@@ -89,7 +89,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							<a>
 								<span class="icon icon-color detail-save icon-checkmark-color end-edit reactive" />
 							</a>
-							<a class="end-edit" @click="setProperty('start', '')">
+							<a class="end-edit" @click="setStart({ task: task, start: null })">
 								<span class="icon icon-bw icon-trash reactive" />
 							</a>
 						</div>
@@ -123,7 +123,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							<a>
 								<span class="icon icon-color detail-save icon-checkmark-color end-edit reactive" />
 							</a>
-							<a class="end-edit" @click="setProperty('due', '')">
+							<a class="end-edit" @click="setDue({ task: task, due: null })">
 								<span class="icon icon-bw icon-trash reactive" />
 							</a>
 						</div>
@@ -482,8 +482,8 @@ export default {
 			'setPercentComplete',
 			'setCategories',
 			'addCategory',
-			'deleteDueDate',
-			'deleteStartDate',
+			'setDue',
+			'setStart',
 			'toggleAllDay'
 		]),
 
