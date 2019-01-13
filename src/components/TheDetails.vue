@@ -132,10 +132,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						:aria-checked="task.allDay"
 						class="section detail-all-day reactive"
 						role="checkbox"
-						@click="toggleAllDay(task.uri)"
+						@click="toggleAllDay(task)"
 					>
 						<div>
-							<span :class="{'icon-checkmark': task.allDay, 'disabled': task.calendar.readOnly}" class="icon icon-color detail-checkbox" />
+							<span :class="{'icon-checkmark': task.allDay, 'disabled': task.calendar.readOnly}" class="icon icon-bw detail-checkbox" />
 							<span class="section-title">
 								{{ t('tasks', 'All day') }}
 							</span>

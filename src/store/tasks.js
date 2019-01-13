@@ -389,7 +389,7 @@ const mutations = {
 	 * @param {Task} task The task
 	 */
 	toggleAllDay(state, task) {
-		console.debug('Toggles the allday state of task ' + task)
+		Vue.set(task, 'allDay', !task.allDay)
 	}
 }
 
