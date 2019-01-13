@@ -78,7 +78,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									:type="'date'" :placeholder="t('tasks', 'Set start date')"
 									class="date" @change="setStartDate"
 								/>
-								<DatetimePicker :value="startDate" :lang="lang"
+								<DatetimePicker v-if="!task.allDay" :value="startDate" :lang="lang"
 									:format="timeFormat" :clearable="false" :time-picker-options="timePickerOptions"
 									:type="'time'" :placeholder="t('tasks', 'Set start time')"
 									class="time" @change="setStartTime"
@@ -112,7 +112,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									:type="'date'" :placeholder="t('tasks', 'Set due date')"
 									class="date" @change="setDueDate"
 								/>
-								<DatetimePicker :value="dueDate" :lang="lang"
+								<DatetimePicker v-if="!task.allDay" :value="dueDate" :lang="lang"
 									:format="timeFormat" :clearable="false" :time-picker-options="timePickerOptions"
 									:type="'time'" :placeholder="t('tasks', 'Set due time')"
 									class="time" @change="setDueTime"
