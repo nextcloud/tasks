@@ -377,7 +377,7 @@ const mutations = {
 			// Check, that the due date is after the start date.
 			// If it is not, shift the start date to keep the difference between start and due equal.
 			var start = moment(task.start, 'YYYY-MM-DDTHH:mm:ss')
-			if (!due.isAfter(start)) {
+			if (start.isValid() && !due.isAfter(start)) {
 				start.subtract(moment(task.due, 'YYYY-MM-DDTHH:mm:ss').diff(due), 'ms')
 				Vue.set(task, 'start', momentToICALTime(start, task.allDay))
 			}
@@ -401,7 +401,7 @@ const mutations = {
 			// Check, that the start date is before the due date.
 			// If it is not, shift the due date to keep the difference between start and due equal.
 			var due = moment(task.due, 'YYYY-MM-DDTHH:mm:ss')
-			if (!start.isBefore(due)) {
+			if (due.isValid() && !start.isBefore(due)) {
 				due.add(start.diff(moment(task.start, 'YYYY-MM-DDTHH:mm:ss')), 'ms')
 				Vue.set(task, 'due', momentToICALTime(due, task.allDay))
 			}
