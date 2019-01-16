@@ -23,7 +23,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Task from '../models/task'
-import { isParentInList } from './storeHelper'
+import { isParentInList, momentToICALTime } from './storeHelper'
 import ICAL from 'ical.js'
 
 Vue.use(Vuex)
@@ -367,9 +367,23 @@ const mutations = {
 	 *
 	 * @param {Object} state The store data
 	 * @param {Task} task The task
+	 * @param {Moment} due The due date moment
 	 */
 	setDue(state, { task, due }) {
-		Vue.set(task, 'due', due)
+		if (due === null) {
+			// If the date is null, just set (remove) it.
+			Vue.set(task, 'due', due)
+		} else {
+			// Check, that the due date is after the start date.
+			// If it is not, shift the start date to keep the difference between start and due equal.
+			var start = moment(task.start, 'YYYY-MM-DDTHH:mm:ss')
+			if (!due.isAfter(start)) {
+				start.subtract(moment(task.due, 'YYYY-MM-DDTHH:mm:ss').diff(due), 'ms')
+				Vue.set(task, 'start', momentToICALTime(start, task.allDay))
+			}
+			// Set the due date, convert it to ICALTime first.
+			Vue.set(task, 'due', momentToICALTime(due, task.allDay))
+		}
 	},
 
 	/**
@@ -377,9 +391,23 @@ const mutations = {
 	 *
 	 * @param {Object} state The store data
 	 * @param {Task} task The task
+	 * @param {Moment} start The start date moment
 	 */
 	setStart(state, { task, start }) {
-		Vue.set(task, 'start', start)
+		if (start === null) {
+			// If the date is null, just set (remove) it.
+			Vue.set(task, 'start', start)
+		} else {
+			// Check, that the start date is before the due date.
+			// If it is not, shift the due date to keep the difference between start and due equal.
+			var due = moment(task.due, 'YYYY-MM-DDTHH:mm:ss')
+			if (!start.isBefore(due)) {
+				due.add(start.diff(moment(task.start, 'YYYY-MM-DDTHH:mm:ss')), 'ms')
+				Vue.set(task, 'due', momentToICALTime(due, task.allDay))
+			}
+			// Set the due date, convert it to ICALTime first.
+			Vue.set(task, 'start', momentToICALTime(start, task.allDay))
+		}
 	},
 
 	/**
