@@ -70,15 +70,15 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 								class="icon"
 							/>
 							<span class="section-title">
-								{{ task.start | startDate }}
+								{{ task.start | formatStartDate }}
 							</span>
 							<div v-if="edit=='start'" class="section-edit">
-								<DatetimePicker :value="startDate" :lang="lang"
+								<DatetimePicker :value="tmpTask.start" :lang="lang"
 									:format="dateFormat" :clearable="false" :first-day-of-week="firstDay"
 									:type="'date'" :placeholder="t('tasks', 'Set start date')"
 									class="date" @change="setStartDate"
 								/>
-								<DatetimePicker v-if="!task.allDay" :value="startDate" :lang="lang"
+								<DatetimePicker v-if="!task.allDay" :value="tmpTask.start" :lang="lang"
 									:format="timeFormat" :clearable="false" :time-picker-options="timePickerOptions"
 									:type="'time'" :placeholder="t('tasks', 'Set start time')"
 									class="time" @change="setStartTime"
@@ -104,15 +104,15 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 								class="icon"
 							/>
 							<span class="section-title">
-								{{ task.due | dueDate }}
+								{{ task.due | formatDueDate }}
 							</span>
 							<div v-if="edit=='due'" class="section-edit">
-								<DatetimePicker :value="dueDate" :lang="lang"
+								<DatetimePicker :value="tmpTask.due" :lang="lang"
 									:format="dateFormat" :clearable="false" :first-day-of-week="firstDay"
 									:type="'date'" :placeholder="t('tasks', 'Set due date')"
 									class="date" @change="setDueDate"
 								/>
-								<DatetimePicker v-if="!task.allDay" :value="dueDate" :lang="lang"
+								<DatetimePicker v-if="!task.allDay" :value="tmpTask.due" :lang="lang"
 									:format="timeFormat" :clearable="false" :time-picker-options="timePickerOptions"
 									:type="'time'" :placeholder="t('tasks', 'Set due time')"
 									class="time" @change="setDueTime"
@@ -277,7 +277,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import { valid, overdue } from '../store/storeHelper'
 import { DatetimePicker, Multiselect } from 'nextcloud-vue'
 import Markdown from './Markdown'
@@ -296,7 +296,7 @@ export default {
 		linkify
 	},
 	filters: {
-		startDate: function(date) {
+		formatStartDate: function(date) {
 			if (valid(date)) {
 				if (date.isDate) {
 					return moment(date, 'YYYYMMDDTHHmmss').calendar(null, {
@@ -339,7 +339,7 @@ export default {
 				return t('tasks', 'Set start date')
 			}
 		},
-		dueDate: function(date) {
+		formatDueDate: function(date) {
 			if (valid(date)) {
 				if (date.isDate) {
 					return moment(date, 'YYYYMMDDTHHmmss').calendar(null, {
@@ -459,14 +459,6 @@ export default {
 				return 'icon-bw icon-tag'
 			}
 		},
-		startDate: function() {
-			return moment(this.task.start, 'YYYYMMDDTHHmmss').toDate()
-		},
-		dueDate: function() {
-			return moment(this.task.due, 'YYYYMMDDTHHmmss').toDate()
-		},
-		...mapState({
-		}),
 		...mapGetters({
 			task: 'getTaskByRoute'
 		}),
@@ -532,6 +524,15 @@ export default {
 			if (!this.task.calendar.readOnly && this.edit !== type) {
 				this.edit = type
 				this.tmpTask[type] = this.task[type]
+				// If we edit the due or the start date, inintialize it.
+				if (type === 'due') {
+					this.tmpTask.due = this.initDueDate()
+					this.tmpTask.start = moment(this.task.start, 'YYYY-MM-DDTHH:mm:ss')
+				}
+				if (type === 'start') {
+					this.tmpTask.start = this.initStartDate()
+					this.tmpTask.due = moment(this.task.due, 'YYYY-MM-DDTHH:mm:ss')
+				}
 			}
 			if (type === 'summary' || type === 'note') {
 				this.$nextTick(
@@ -553,7 +554,6 @@ export default {
 		},
 
 		setProperty: function(type, value) {
-			console.debug('Set property "' + type + '" to "' + value)
 			switch (type) {
 			case 'summary':
 				this.setSummary({ task: this.task, summary: value })
@@ -567,24 +567,106 @@ export default {
 			case 'complete':
 				this.setPercentComplete({ task: this.task, complete: value })
 				break
+			case 'start':
+				this.setStart({ task: this.task, start: value })
+				break
+			case 'due':
+				this.setDue({ task: this.task, due: value })
+				break
 			}
 			this.edit = ''
 		},
 
+		/**
+		 * Initializes the start date of a task
+		 *
+		 * @returns {Moment} The start date moment
+		 */
+		initStartDate: function() {
+			var start = moment(this.task.start, 'YYYY-MM-DDTHH:mm:ss')
+			if (!start.isValid()) {
+				var due = moment(this.task.due, 'YYYY-MM-DDTHH:mm:ss')
+				var reference = moment().add(1, 'h')
+				if (due.isBefore(reference)) {
+					reference = due.subtract(1, 'm')
+				}
+				reference.startOf(this.task.allDay ? 'day' : 'hour')
+				return reference
+			}
+			return start
+		},
+
+		/**
+		 * Initializes the due date of a task
+		 *
+		 * @returns {Moment} The due date moment
+		 */
+		initDueDate: function() {
+			var due = moment(this.task.due, 'YYYY-MM-DDTHH:mm:ss')
+			if (!due.isValid()) {
+				var start = moment(this.task.start, 'YYYY-MM-DDTHH:mm:ss')
+				var reference = start.isAfter() ? start : moment()
+				if (this.task.allDay) {
+					reference.startOf('day').add(1, 'd')
+				} else {
+					reference.startOf('hour').add(1, 'h')
+				}
+				return reference
+			}
+			return due
+		},
+
 		setStartDate: function(date) {
-			console.debug('Set start date to ' + date)
+			this.setStartDateTime(date, 'day')
 		},
 
 		setStartTime: function(time) {
-			console.debug('Set start time to ' + time)
+			this.setStartDateTime(time, 'time')
+		},
+
+		setStartDateTime: function(datetime, type = null) {
+			this.tmpTask.start = this.setDatePartial(this.tmpTask.start.clone(), moment(datetime), type)
 		},
 
 		setDueDate: function(date) {
-			console.debug('Set due date to ' + date)
+			this.setDueDateTime(date, 'day')
 		},
 
 		setDueTime: function(time) {
-			console.debug('Set due time to ' + time)
+			this.setDueDateTime(time, 'time')
+		},
+
+		setDueDateTime: function(datetime, type = 'day') {
+			this.tmpTask.due = this.setDatePartial(this.tmpTask.due.clone(), moment(datetime), type)
+		},
+
+		/**
+		 * Sets partial values of a moment to the values of an other moment.
+		 *
+		 * @param {Moment} date The moment to alter
+		 * @param {Moment} part The moment to take the new values from
+		 * @param {String} type Value indicating what values to set
+		 * @returns {Moment} The altered moment
+		 */
+		setDatePartial: function(date, part, type = null) {
+			// Set only year, month and day
+			if (type === 'day') {
+				if (date.isValid()) {
+					return date.year(part.year()).month(part.month()).date(part.date())
+				} else {
+					return part.add(12, 'h')
+				}
+			// Set only hour and minute
+			} else if (type === 'time') {
+				if (date.isValid()) {
+					return date.hour(part.hour()).minute(part.minute())
+				} else {
+					return part
+				}
+			// Set all values
+			} else {
+				return part
+			}
 		},
 
 		/**

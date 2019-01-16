@@ -21,6 +21,8 @@
  */
 'use strict'
 
+import ICAL from 'ical.js'
+
 /**
  * Returns if a task belongs to a list
  *
@@ -269,10 +271,26 @@ function sortByDate(taskA, taskB, date) {
 	return moment(taskA[date], 'YYYYMMDDTHHmmss').diff(moment(taskB[date], 'YYYYMMDDTHHmmss'))
 }
 
+/**
+ * Function to convert a moment to a ICAL Time
+ *
+ * @param {Moment} moment The moment to convert
+ * @param {Bool} asDate Is the moment all day
+ * @returns {ICAL.Time}
+ */
+function momentToICALTime(moment, asDate) {
+	if (asDate) {
+		return ICAL.Time.fromDateString(moment.format('YYYY-MM-DD'))
+	} else {
+		return ICAL.Time.fromDateTimeString(moment.format('YYYY-MM-DDTHH:mm:ss'))
+	}
+}
+
 export {
 	isTaskInList,
 	valid,
 	overdue,
 	isParentInList,
 	sort,
+	momentToICALTime,
 }
