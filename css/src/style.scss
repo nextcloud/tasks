@@ -630,16 +630,14 @@
 			border-top: 1px solid $gray_light;
 			flex: 0 0 auto;
 			height: 30px;
+			display: flex;
+			justify-content: space-between;
 
 			a {
 				padding: 7px;
 
-				&.left {
-					float: left;
-				}
-
-				&.right {
-					float: right;
+				&.info {
+					cursor: default;
 				}
 
 				.icon {

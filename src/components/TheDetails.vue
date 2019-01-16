@@ -260,12 +260,20 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			</div>
 			<div class="footer">
 				<a v-show="!task.calendar.readOnly"
-					class="left close-all reactive"
+					class="close-all reactive"
 					@click="removeTask"
 				>
 					<span class="icon icon-bw icon-trash" />
 				</a>
-				<a class="right close-all reactive" @click="closeDetails">
+				<a v-tooltip="{
+						content: taskInfo,
+						html: true,
+					}"
+					class="info"
+				>
+					<span class="icon icon-info" />
+				</a>
+				<a class="close-all reactive" @click="closeDetails">
 					<span class="icon icon-bw icon-hide" />
 				</a>
 			</div>
@@ -424,6 +432,10 @@ export default {
 		}
 	},
 	computed: {
+		taskInfo: function() {
+			return t('tasks', 'Last modified %s').replace('%s', moment(this.task.modified, 'YYYY-MM-DDTHH:mm:ss').calendar())
+				+ '<br />' + t('tasks', 'Created %s').replace('%s', moment(this.task.created, 'YYYY-MM-DDTHH:mm:ss').calendar())
+		},
 		isAllDayPossible: function() {
 			return !this.task.calendar.readOnly && (this.task.due || this.task.start)
 		},
