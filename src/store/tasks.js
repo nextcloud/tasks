@@ -377,8 +377,13 @@ const mutations = {
 			// Check, that the due date is after the start date.
 			// If it is not, shift the start date to keep the difference between start and due equal.
 			var start = moment(task.start, 'YYYY-MM-DDTHH:mm:ss')
-			if (start.isValid() && !due.isAfter(start)) {
-				start.subtract(moment(task.due, 'YYYY-MM-DDTHH:mm:ss').diff(due), 'ms')
+			if (start.isValid() && due.isBefore(start)) {
+				var currentdue = moment(task.due, 'YYYY-MM-DDTHH:mm:ss')
+				if (currentdue.isValid()) {
+					start.subtract(currentdue.diff(due), 'ms')
+				} else {
+					start = due.clone()
+				}
 				Vue.set(task, 'start', momentToICALTime(start, task.allDay))
 			}
 			// Set the due date, convert it to ICALTime first.
@@ -401,8 +406,13 @@ const mutations = {
 			// Check, that the start date is before the due date.
 			// If it is not, shift the due date to keep the difference between start and due equal.
 			var due = moment(task.due, 'YYYY-MM-DDTHH:mm:ss')
-			if (due.isValid() && !start.isBefore(due)) {
-				due.add(start.diff(moment(task.start, 'YYYY-MM-DDTHH:mm:ss')), 'ms')
+			if (due.isValid() && start.isAfter(due)) {
+				var currentstart = moment(task.start, 'YYYY-MM-DDTHH:mm:ss')
+				if (currentstart.isValid()) {
+					due.add(start.diff(currentstart), 'ms')
+				} else {
+					due = start.clone()
+				}
 				Vue.set(task, 'due', momentToICALTime(due, task.allDay))
 			}
 			// Set the due date, convert it to ICALTime first.
