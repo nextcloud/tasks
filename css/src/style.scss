@@ -771,12 +771,12 @@
 			position: relative;
 
 			.section {
-				border-bottom: 1px dotted $gray;
+				border-bottom: 1px dotted var(--color-text-lighter);
 				padding: 0;
 				position: relative;
 				margin-bottom: 0;
 				width: 100%;
-				color: $gray;
+				color: var(--color-text-lighter);
 
 				&:last-of-type {
 					border-bottom: unset;
@@ -880,6 +880,17 @@
 						margin: 0;
 						float: unset;
 					}
+
+					.calendar-indicator {
+						position: relative;
+						display: inline-block;
+						width: 16px;
+						height: 16px;
+						border: none;
+						border-radius: 50%;
+						cursor: pointer;
+						vertical-align: middle;
+					}
 				}
 
 				input[type='range'] {
@@ -943,7 +954,12 @@
 					}
 				}
 
-				.detail-categories-container {
+				.detail-calendar-container .multiselect__single {
+					color: $blue_due;
+				}
+
+				.detail-categories-container,
+				.detail-calendar-container {
 					width: calc(100% - 52px);
 					display: inline-block;
 					margin-left: 12px;
@@ -968,12 +984,21 @@
 								padding: 0px !important;
 								font-weight: bold;
 							}
+
+							.multiselect__single {
+								padding-left: 0px !important;
+								font-weight: bold;
+							}
 						}
 
 						.multiselect__tag {
 							color: $blue_due;
 							background: $gray_easy;
 							font-weight: bold;
+						}
+
+						.multiselect__element {
+							line-height: 1.1em;
 						}
 					}
 				}
@@ -1254,8 +1279,4 @@
 
 .icon span{
 	font-family: var(--font-face);
-}
-
-.multiselect__element {
-	line-height: 1.6em;
 }

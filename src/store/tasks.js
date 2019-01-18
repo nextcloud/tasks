@@ -428,7 +428,29 @@ const mutations = {
 	 */
 	toggleAllDay(state, task) {
 		Vue.set(task, 'allDay', !task.allDay)
-	}
+	},
+
+	/**
+	 * Move task to a different calendar
+	 *
+	 * @param {Object} state The store data
+	 * @param {Task} task The task
+	 * @param {Calendar} calendar The calendar to move the task to
+	 */
+	setTaskCalendar(state, { task, calendar }) {
+		Vue.set(task, 'calendar', calendar)
+	},
+
+	/**
+	 * Move task to a different calendar
+	 *
+	 * @param {Object} state The store data
+	 * @param {Task} task The task
+	 * @param {String} related The uid of the related task
+	 */
+	setTaskParent(state, { task, related }) {
+		Vue.set(task, 'related', related)
+	},
 }
 
 const actions = {

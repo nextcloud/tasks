@@ -141,6 +141,28 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</span>
 						</div>
 					</li>
+					<li class="section detail-calendar reactive">
+						<div v-click-outside="() => finishEditing('calendar')"
+							@click="editProperty('calendar')"
+						>
+							<span :style="{'background-color': task.calendar.color}" class="calendar-indicator" />
+							<div class="detail-calendar-container">
+								<Multiselect
+									:value="task.calendar"
+									:multiple="false"
+									:allow-empty="false"
+									track-by="id"
+									:placeholder="t('tasks', 'Select a calendar')"
+									label="displayName"
+									:options="writableCalendars"
+									:close-on-select="true"
+									class="multiselect-vue"
+									@input="changeCalendar"
+									@tag="changeCalendar"
+								/>
+							</div>
+						</div>
+					</li>
 					<li :class="[{'editing': edit=='priority', 'date': task.priority>0}, priorityString]"
 						class="section detail-priority"
 					>
@@ -472,6 +494,7 @@ export default {
 			}
 		},
 		...mapGetters({
+			writableCalendars: 'getSortedWritableCalendars',
 			task: 'getTaskByRoute'
 		}),
 	},
@@ -488,7 +511,8 @@ export default {
 			'addCategory',
 			'setDue',
 			'setStart',
-			'toggleAllDay'
+			'toggleAllDay',
+			'moveTaskToCalendar',
 		]),
 
 		removeTask: function() {
@@ -697,7 +721,15 @@ export default {
 		 */
 		updateCategory: function(category) {
 			this.addCategory({ task: this.task, category: category })
-		}
+		},
+
+		async changeCalendar(calendar) {
+			const task = await this.moveTaskToCalendar({ task: this.task, calendar: calendar })
+			// If we are in a calendar view, we have to navigate to the new calendar.
+			if (this.$route.params.calendarId) {
+				this.$router.push('/calendars/' + task.calendar.id + '/tasks/' + task.uri)
+			}
+		},
 	}
 }
 </script>
