@@ -97,6 +97,23 @@ const getters = {
 	},
 
 	/**
+	 * Returns the calendars sorted alphabetically
+	 *
+	 * @param {Object} state The store data
+	 * @returns {Array<Calendar>} Array of the calendars sorted alphabetically
+	 */
+	getSortedWritableCalendars: state => {
+		return state.calendars.filter(calendar => {
+			return !calendar.readOnly
+		})
+			.sort(function(cal1, cal2) {
+				var n1 = cal1.displayName.toUpperCase()
+				var n2 = cal2.displayName.toUpperCase()
+				return (n1 < n2) ? -1 : (n1 > n2) ? 1 : 0
+			})
+	},
+
+	/**
 	 * Returns the calendar with the given calendarId
 	 *
 	 * @param {Object} state The store data
@@ -575,31 +592,42 @@ const actions = {
 	 * @param {Object} data Destructuring object
 	 * @param {Task} data.task The task to move
 	 * @param {Calendar} data.calendar The calendar to move the task to
+	 * @param {Boolean} data.removeParent If the task has a parent, remove the link to the parent
+	 * @returns {Task} The moved task
 	 */
-	async moveTaskToCalendar(context, { task, calendar }) {
-		// Only local move if the task doesn't exist on the server
-		if (task.dav) {
-			// TODO: implement proper move
-			// await tasks.dav.move(calendar.dav)
-			// 	.catch((error) => {
-			// 		console.error(error)
-			// 		OC.Notification.showTemporary(t('calendars', 'An error occurred'))
-			// 	})
-			let vData = ICAL.stringify(task.vCard.jCal)
-			let newDav
-			await calendar.dav.createVCard(vData)
-				.then((response) => { newDav = response })
-				.catch((error) => { throw error })
-			await task.dav.delete()
+	async moveTaskToCalendar(context, { task, calendar, removeParent = true }) {
+		// Only local move if the task doesn't exist on the server.
+		// Don't move if source and target calendar are the same.
+		if (task.dav && task.calendar !== calendar) {
+			// Move all subtasks first
+			await Promise.all(Object.values(task.subTasks).map(async(subTask) => {
+				await context.dispatch('moveTaskToCalendar', { task: subTask, calendar: calendar, removeParent: false })
+			}))
+
+			// If a task has a parent task which is not moved, remove the reference to it.
+			if (removeParent && task.related !== null) {
+				// Remove the task from the parents subtask list
+				context.commit('deleteTaskFromParent', task)
+				// Unlink the related parent task
+				context.commit('setTaskParent', { task: task, related: null })
+				// We have to send an update.
+				await context.dispatch('updateTask', task)
+			}
+
+			await task.dav.move(calendar.dav)
+				.then((response) => {
+					context.commit('deleteTaskFromCalendar', task)
+					// Update the calendar of the task
+					context.commit('setTaskCalendar', { task: task, calendar: calendar })
+					// Remove the task from the calendar, add it to the new one
+					context.commit('addTaskToCalendar', task)
+				})
 				.catch((error) => {
 					console.error(error)
 					OC.Notification.showTemporary(t('calendars', 'An error occurred'))
 				})
-			await Vue.set(task, 'dav', newDav)
 		}
-		await context.commit('deleteTaskFromCalendar', task)
-		await context.commit('updateTaskCalendar', { task, calendar })
-		await context.commit('addTaskToCalendar', task)
+		return task
 	}
 }
 
