@@ -39,6 +39,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						class="icon"
 					/>
 				</a>
+				<TaskStatusDisplay :task="task" />
 				<div v-click-outside="() => finishEditing('summary')">
 					<div v-linkify="task.summary"
 						:class="{'strike-through': task.completed}"
@@ -311,6 +312,7 @@ import { mapGetters, mapActions } from 'vuex'
 import { valid, overdue } from '../store/storeHelper'
 import { DatetimePicker, Multiselect } from 'nextcloud-vue'
 import Markdown from './Markdown'
+import TaskStatusDisplay from './TaskStatusDisplay'
 
 import ClickOutside from 'vue-click-outside'
 import { linkify } from '../directives/linkify.js'
@@ -320,6 +322,7 @@ export default {
 		DatetimePicker,
 		Multiselect,
 		Markdown,
+		TaskStatusDisplay,
 	},
 	directives: {
 		ClickOutside,

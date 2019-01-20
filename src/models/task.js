@@ -54,6 +54,12 @@ export default class Task {
 		// the server and cannot be pushed (etag)
 		this.conflict = false
 
+		this.initTodo()
+
+		this.syncstatus = null
+	}
+
+	initTodo() {
 		// if no uid set, create one
 		this.vtodo = this.vCalendar.getFirstSubcomponent('vtodo')
 
@@ -100,6 +106,7 @@ export default class Task {
 	updateTask(jCal) {
 		this.jCal = jCal
 		this.vCalendar = new ICAL.Component(this.jCal)
+		this.initTodo()
 	}
 
 	/**
