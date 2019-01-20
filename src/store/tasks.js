@@ -25,6 +25,7 @@ import Vuex from 'vuex'
 import Task from '../models/task'
 import { isParentInList, momentToICALTime } from './storeHelper'
 import ICAL from 'ical.js'
+import TaskStatus from '../models/taskStatus'
 
 Vue.use(Vuex)
 
@@ -451,6 +452,39 @@ const mutations = {
 	setTaskParent(state, { task, related }) {
 		Vue.set(task, 'related', related)
 	},
+
+	/**
+	 * Update a task etag
+	 *
+	 * @param {Object} state The store data
+	 * @param {Object} data Destructuring object
+	 * @param {Task} task The task to update
+	 * @param {string} etag The task etag
+	 */
+	updateTaskEtag(state, { task, etag }) {
+		if (state.tasks[task.key] && task instanceof Task) {
+			// replace task object data
+			state.tasks[task.key].dav.etag = etag
+		} else {
+			console.error('Error while replacing the etag of following task ', task)
+		}
+	},
+
+	/**
+	 * Update a task
+	 *
+	 * @param {Object} state The store data
+	 * @param {Task} task The task to update
+	 */
+	updateTask(state, task) {
+		if (state.tasks[task.key] && task instanceof Task) {
+			// replace task object data
+			state.tasks[task.key].updateTask(task.jCal)
+
+		} else {
+			console.error('Error while replacing the following task ', task)
+		}
+	},
 }
 
 const actions = {
@@ -504,6 +538,7 @@ const actions = {
 			await task.calendar.dav.createVObject(vData)
 				.then((response) => {
 					Vue.set(task, 'dav', response)
+					task.syncstatus = new TaskStatus('success', 'Successfully created the task.')
 					context.commit('appendTask', task)
 					context.commit('addTaskToCalendar', task)
 					context.commit('addTaskToParent', task)
@@ -530,7 +565,7 @@ const actions = {
 			await task.dav.delete()
 				.catch((error) => {
 					console.debug(error)
-					OC.Notification.showTemporary(t('tasks', 'Could not delete the task.'))
+					task.syncstatus = new TaskStatus('error', t('tasks', 'Could not delete the task.'))
 				})
 		}
 		context.commit('deleteTask', task)
@@ -550,19 +585,24 @@ const actions = {
 
 		if (!task.conflict) {
 			task.dav.data = vCalendar
+			task.syncstatus = new TaskStatus('sync', t('tasks', 'Synchronizing to the server.'))
 			return task.dav.update()
+				.then((response) => {
+					task.syncstatus = new TaskStatus('success', t('tasks', 'Task successfully saved to server.'))
+				})
 				.catch((error) => {
-					OC.Notification.showTemporary(t('tasks', 'Could not update the task.'))
 					// Wrong etag, we most likely have a conflict
 					if (error && error.status === 412) {
 						// Saving the new etag so that the user can manually
 						// trigger a fetchCompleteData without any further errors
 						task.conflict = error.xhr.getResponseHeader('etag')
+						task.syncstatus = new TaskStatus('refresh', t('tasks', 'Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared.'), 'fetchFullTask')
+					} else {
+						task.syncstatus = new TaskStatus('error', t('tasks', 'Could not update the task.'))
 					}
 				})
 		} else {
-			console.error('This task is outdated, refusing to push', task)
-			OC.Notification.showTemporary(t('tasks', 'This task is outdated, refusing to push.'))
+			task.syncstatus = new TaskStatus('refresh', t('tasks', 'Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared.'), 'fetchFullTask')
 		}
 	},
 
@@ -726,6 +766,28 @@ const actions = {
 	async toggleAllDay(context, task) {
 		context.commit('toggleAllDay', task)
 		context.dispatch('updateTask', task)
+	},
+
+	/**
+	 * Fetch the full vObject from the dav server
+	 *
+	 * @param {Object} context The store mutations
+	 * @param {Object} data Destructuring object
+	 * @param {Task} data.task The task to fetch
+	 * @param {string} data.etag The task etag to override in case of conflict
+	 * @returns {Promise}
+	 */
+	async fetchFullTask(context, { task, etag = '' }) {
+		if (etag !== '') {
+			await context.commit('updateTaskEtag', { task, etag })
+		}
+		return task.dav.fetchCompleteData()
+			.then((response) => {
+				let newTask = new Task(task.dav.data, task.calendar)
+				task.syncstatus = new TaskStatus('success', 'Successfully updated the task.')
+				context.commit('updateTask', newTask)
+			})
+			.catch((error) => { throw error })
 	}
 }
 
