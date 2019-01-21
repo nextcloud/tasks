@@ -37,6 +37,7 @@ import Task from '../models/task'
 import pLimit from 'p-limit'
 import { isParentInList } from './storeHelper'
 import { findVTODObyState } from './cdav-requests'
+import TaskStatus from '../models/taskStatus'
 
 const calendarModel = {
 	id: '',
@@ -621,6 +622,7 @@ const actions = {
 					context.commit('setTaskCalendar', { task: task, calendar: calendar })
 					// Remove the task from the calendar, add it to the new one
 					context.commit('addTaskToCalendar', task)
+					task.syncstatus = new TaskStatus('success', 'Task successfully moved to new calendar.')
 				})
 				.catch((error) => {
 					console.error(error)

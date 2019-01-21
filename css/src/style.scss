@@ -665,12 +665,17 @@
 				}
 			}
 
+			.status-display {
+				float: right;
+				margin: 17px 0;
+			}
+
 			.title-text {
 				cursor: text;
 				display: inline-block;
 				min-height: 24px;
 				margin: 13px 0;
-				width: calc(100% - 115px);
+				width: calc(100% - 116px);
 				padding: 0 6px;
 				line-height: 22px;
 				// this border is to adjust the size of the div to the size
@@ -693,7 +698,7 @@
 				padding: 0 6px;
 				display: none !important;
 				margin: 13px 0;
-				width: calc(100% - 115px);
+				width: calc(100% - 116px);
 				line-height: 24px;
 				min-height: 24px;
 
@@ -713,7 +718,7 @@
 			}
 
 			.star {
-				padding: 13px;
+				padding: 13px 13px 13px 8px;
 				float: right;
 
 				.icon {
@@ -1279,4 +1284,44 @@
 
 .icon span{
 	font-family: var(--font-face);
+}
+
+.task-status-container {
+	float:right;
+	margin: 8px;
+}
+
+.status-display {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+
+	&.success {
+		@extend .icon-color;
+		@extend .icon-checkmark-color;
+	}
+
+	&.refresh {
+		background-image: var(--icon-history-000);
+		animation: pulse 2s infinite;
+		border-radius: 50%;
+		opacity: .5;
+		cursor: pointer;
+
+		&:hover{
+			opacity: .7;
+		}
+	}
+}
+
+@keyframes pulse {
+	0% {
+		box-shadow: 0 0 0 0 rgba(50, 50, 50, .4);
+	}
+	70% {
+		box-shadow: 0 0 0 10px rgba(50, 50, 50, 0);
+	}
+	100% {
+		box-shadow: 0 0 0 0 rgba(50, 50, 50, 0);
+	}
 }

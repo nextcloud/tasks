@@ -74,6 +74,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			<span v-if="task.note!=''">
 				<span class="icon icon-bw icon-note right large" />
 			</span>
+			<span class="task-status-container">
+				<TaskStatusDisplay :task="task" />
+			</span>
 			<span :class="{overdue: overdue(task.due)}" class="duedate">
 				{{ task.due | formatDate }}
 			</span>
@@ -125,13 +128,17 @@ import ClickOutside from 'vue-click-outside'
 import { mapGetters, mapActions } from 'vuex'
 import focus from '../directives/focus'
 import { linkify } from '../directives/linkify.js'
+import TaskStatusDisplay from './TaskStatusDisplay'
 
 export default {
 	name: 'TaskBodyComponent',
 	directives: {
 		ClickOutside,
 		focus,
-		linkify
+		linkify,
+	},
+	components: {
+		TaskStatusDisplay,
 	},
 	filters: {
 		formatDate: function(date) {
