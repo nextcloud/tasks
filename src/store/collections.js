@@ -24,7 +24,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Requests from '../services/requests'
 
-import { isTaskInList } from './storeHelper'
+import { isTaskInList, searchSubTasks } from './storeHelper'
 
 Vue.use(Vuex)
 
@@ -49,11 +49,21 @@ const getters = {
 	 * @returns {Integer} Count of tasks in the collection
 	 */
 	getCollectionCount: (state, getters, rootState) => (collectionId) => {
-		var count = 0
+		let count = 0
 		rootState.calendars.calendars.forEach(calendar => {
-			count += Object.values(calendar.tasks).filter(task => {
+			let tasks = Object.values(calendar.tasks).filter(task => {
 				return isTaskInList(task, collectionId) && !task.related
-			}).length
+			})
+			if (rootState.tasks.searchQuery) {
+				tasks = tasks.filter(task => {
+					if (task.matches(rootState.tasks.searchQuery)) {
+						return true
+					}
+					// We also have to show tasks for which one sub(sub...)task matches.
+					return searchSubTasks(task, rootState.tasks.searchQuery)
+				})
+			}
+			count += tasks.length
 		})
 		return count
 	}
