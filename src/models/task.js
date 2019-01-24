@@ -95,6 +95,9 @@ export default class Task {
 		this._categories = categories ? categories.getValues() : []
 		this._modified = this.vtodo.getFirstPropertyValue('last-modified')
 		this._created = this.vtodo.getFirstPropertyValue('created')
+
+		this._searchQuery = ''
+		this._matchesSearchQuery = true
 	}
 
 	/**
@@ -442,4 +445,45 @@ export default class Task {
 		this._created = this.vtodo.getFirstPropertyValue('created')
 	}
 
+	/**
+	 * Checks if the task matches the search query
+	 *
+	 * @param {String} searchQuery The search string
+	 * @returns {Boolean} If the task matches
+	 */
+	matches(searchQuery) {
+		// If the search query maches the previous search, we don't have to search again.
+		if (this._searchQuery === searchQuery) {
+			return this._matchesSearchQuery
+		}
+		// We cache the current search query for faster future comparison.
+		this._searchQuery = searchQuery
+		// If the search query is empty, the task matches by default.
+		if (!searchQuery) {
+			this._matchesSearchQuery = true
+			return this._matchesSearchQuery
+		}
+		// We search in these task properties
+		var keys = ['summary', 'note', 'categories']
+		// Make search case-insensitive.
+		searchQuery = searchQuery.toLowerCase()
+		for (const key of keys) {
+			// For the categories search the array
+			if (key === 'categories') {
+				for (const category of this[key]) {
+					if (category.toLowerCase().indexOf(searchQuery) > -1) {
+						this._matchesSearchQuery = true
+						return this._matchesSearchQuery
+					}
+				}
+			} else {
+				if (this[key].toLowerCase().indexOf(searchQuery) > -1) {
+					this._matchesSearchQuery = true
+					return this._matchesSearchQuery
+				}
+			}
+		}
+		this._matchesSearchQuery = false
+		return this._matchesSearchQuery
+	}
 }

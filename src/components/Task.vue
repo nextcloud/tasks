@@ -21,7 +21,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<li :task-id="task.uri"
+	<li	v-show="showTask"
+		:task-id="task.uri"
 		:class="{done: task.completed}"
 		class="task-item"
 	>
@@ -170,7 +171,8 @@ export default {
 	computed: {
 		...mapGetters({
 			sortOrder: 'sortOrder',
-			sortDirection: 'sortDirection'
+			sortDirection: 'sortDirection',
+			searchQuery: 'searchQuery',
 		}),
 		/**
 		 * Returns the path of the task
@@ -230,6 +232,20 @@ export default {
 			}
 			return sort([...subTasks], this.sortOrder, this.sortDirection)
 		},
+
+		/**
+		 * Indicates whether we show the task because it matches the search.
+		 *
+		 * @returns {Boolean} If the task matches
+		 */
+		showTask: function() {
+			// If the task directly matches the search, we show it.
+			if (this.task.matches(this.searchQuery)) {
+				return true
+			}
+			// We also have to show tasks for which one sub(sub...)task matches.
+			return this.searchSubTasks(this.task)
+		},
 	},
 	methods: {
 		...mapActions([
@@ -245,6 +261,21 @@ export default {
 		 * Checks if a date is overdue
 		 */
 		overdue: overdue,
+
+		/**
+		 * Checks if one of the tasks sub(sub-...)tasks matches the search query
+		 *
+		 * @param {Task} task The task to search in
+		 * @returns {Boolean} If the task matches
+		 */
+		searchSubTasks(task) {
+			return Object.values(task.subTasks).some((subTask) => {
+				if (subTask.matches(this.searchQuery)) {
+					return true
+				}
+				return this.searchSubTasks(subTask)
+			})
+		},
 
 		/**
 		 * Navigates to a different route, but checks if navigation is desired

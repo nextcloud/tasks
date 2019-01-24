@@ -30,7 +30,8 @@ import TaskStatus from '../models/taskStatus'
 Vue.use(Vuex)
 
 const state = {
-	tasks: {}
+	tasks: {},
+	searchQuery: '',
 }
 
 const getters = {
@@ -183,7 +184,19 @@ const getters = {
 	getParentTask: () => (task) => {
 		let tasks = task.calendar.tasks
 		return Object.values(tasks).find(search => search.uid === task.related) || null
-	}
+	},
+
+	/**
+	 * Returns the current search query
+	 *
+	 * @param {Object} state The store data
+	 * @param {Object} getters The store getters
+	 * @param {Object} rootState The store root state
+	 * @returns {String} The current search query
+	 */
+	searchQuery: (state, getters, rootState) => {
+		return state.searchQuery
+	},
 }
 
 const mutations = {
@@ -484,6 +497,16 @@ const mutations = {
 		} else {
 			console.error('Error while replacing the following task ', task)
 		}
+	},
+
+	/**
+	 * Sets the search query
+	 *
+	 * @param {Object} state The store data
+	 * @param {String} searchQuery The search query
+	 */
+	setSearchQuery(state, searchQuery) {
+		state.searchQuery = searchQuery
 	},
 }
 
