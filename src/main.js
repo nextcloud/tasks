@@ -94,10 +94,10 @@ OCA.Tasks.App = new Vue({
 	},
 	methods: {
 		filter(query) {
-			this.searchString = query
+			this.$store.commit('setSearchQuery', query)
 		},
 		cleanSearch() {
-			this.searchString = ''
+			this.$store.commit('setSearchQuery', '')
 		}
 	},
 	render: h => h(App)
