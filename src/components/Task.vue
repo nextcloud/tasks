@@ -112,7 +112,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					>
 				</form>
 			</div>
-			<ol v-if="!task.hideSubtasks" :calendarID="task.calendar.uri">
+			<ol v-if="!task.hideSubtasks || searchQuery" :calendarID="task.calendar.uri">
 				<TaskBodyComponent v-for="subtask in filteredSubtasks"
 					:key="subtask.uid"
 					:task="subtask"
