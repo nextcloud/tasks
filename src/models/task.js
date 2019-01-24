@@ -486,4 +486,5 @@ export default class Task {
 		this._matchesSearchQuery = false
 		return this._matchesSearchQuery
 	}
+
 }

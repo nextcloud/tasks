@@ -124,7 +124,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { overdue, valid, sort } from '../store/storeHelper'
+import { overdue, valid, sort, searchSubTasks } from '../store/storeHelper'
 import ClickOutside from 'vue-click-outside'
 import { mapGetters, mapActions } from 'vuex'
 import focus from '../directives/focus'
@@ -244,7 +244,7 @@ export default {
 				return true
 			}
 			// We also have to show tasks for which one sub(sub...)task matches.
-			return this.searchSubTasks(this.task)
+			return this.searchSubTasks(this.task, this.searchQuery)
 		},
 	},
 	methods: {
@@ -266,16 +266,10 @@ export default {
 		 * Checks if one of the tasks sub(sub-...)tasks matches the search query
 		 *
 		 * @param {Task} task The task to search in
+		 * @param {String} searchQuery The string to find
 		 * @returns {Boolean} If the task matches
 		 */
-		searchSubTasks(task) {
-			return Object.values(task.subTasks).some((subTask) => {
-				if (subTask.matches(this.searchQuery)) {
-					return true
-				}
-				return this.searchSubTasks(subTask)
-			})
-		},
+		searchSubTasks: searchSubTasks,
 
 		/**
 		 * Navigates to a different route, but checks if navigation is desired

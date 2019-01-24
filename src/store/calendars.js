@@ -35,7 +35,7 @@ import parseIcs from '../services/parseIcs'
 import client from '../services/cdav'
 import Task from '../models/task'
 import pLimit from 'p-limit'
-import { isParentInList } from './storeHelper'
+import { isParentInList, searchSubTasks } from './storeHelper'
 import { findVTODObyState } from './cdav-requests'
 import TaskStatus from '../models/taskStatus'
 
@@ -135,15 +135,26 @@ const getters = {
 	 *
 	 * @param {Object} state The store data
 	 * @param {Object} getters The store getters
+	 * @param {Object} rootState The store root state
 	 * @param {String} calendarId The id of the requested calendar
 	 * @returns {Integer} The number of tasks
 	 */
-	getCalendarCount: (state, getters) => (calendarId) => {
-		var calendar = getters.getCalendarById(calendarId)
-		return Object.values(calendar.tasks)
+	getCalendarCount: (state, getters, rootState) => (calendarId) => {
+		let calendar = getters.getCalendarById(calendarId)
+		let tasks = Object.values(calendar.tasks)
 			.filter(task => {
 				return task.completed === false && (!task.related || !isParentInList(task, calendar.tasks))
-			}).length
+			})
+		if (rootState.tasks.searchQuery) {
+			tasks = tasks.filter(task => {
+				if (task.matches(rootState.tasks.searchQuery)) {
+					return true
+				}
+				// We also have to show tasks for which one sub(sub...)task matches.
+				return searchSubTasks(task, rootState.tasks.searchQuery)
+			})
+		}
+		return tasks.length
 	},
 
 	/**

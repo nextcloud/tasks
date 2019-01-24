@@ -286,6 +286,22 @@ function momentToICALTime(moment, asDate) {
 	}
 }
 
+/**
+ * Checks if one of the tasks sub(sub-...)tasks matches the search query
+ *
+ * @param {Task} task The task to search in
+ * @param {String} searchQuery The string to find
+ * @returns {Boolean} If the task matches
+ */
+function searchSubTasks(task, searchQuery) {
+	return Object.values(task.subTasks).some((subTask) => {
+		if (subTask.matches(searchQuery)) {
+			return true
+		}
+		return searchSubTasks(subTask, searchQuery)
+	})
+}
+
 export {
 	isTaskInList,
 	valid,
@@ -293,4 +309,5 @@ export {
 	isParentInList,
 	sort,
 	momentToICALTime,
+	searchSubTasks,
 }
