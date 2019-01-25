@@ -1,0 +1,15 @@
+/**
+	* SCSS variables
+	*/
+
+//colors
+$red: #e9322d;				// warnings and errors
+$red_overdue: #b3312d;		// overdue dates and high importance
+$yellow: #fd0;				// medium importance
+$blue_due: #4271a6;			// due dates and low importance
+$gray_dark: var(--color-main-text);		// text
+$gray: #a0a0a0;				// inactive text, checkbox-borders and separators
+$gray_light: var(--color-border-dark);
+$gray_easy: var(--color-background-dark);
+$black: #000;
+$white: #fff;

@@ -1,0 +1,22 @@
+{
+	"shape": {
+		"dimension": {
+			"attributes": false
+		},
+		"transform": []
+	},
+	"mode": {
+		"css": {
+			"bust": false,
+			"common": "icon-color",
+			"prefix": ".icon-%s",
+			"sprite": "../img/color.svg",
+			"render": {
+				"scss": {
+					"template": "svg-sprite-color.tmpl",
+					"dest": "src/sprites-color.scss"
+				}
+			}
+		}
+	}
+}

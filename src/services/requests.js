@@ -1,4 +1,3 @@
-<?php
 /**
  * Nextcloud - Tasks
  *
@@ -19,39 +18,20 @@
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+'use strict'
 
-namespace OCA\Tasks\Controller;
+import Axios from 'axios'
+Axios.defaults.headers.common.requesttoken = OC.requestToken
 
-use \OCA\Tasks\Service\SettingsService;
-use \OCP\AppFramework\Controller;
-use \OCP\IRequest;
-
-class SettingsController extends Controller {
-
-	private $settingsService;
-
-	use Response;
-
-	public function __construct($appName, IRequest $request, SettingsService $settingsService){
-		parent::__construct($appName, $request);
-		$this->settingsService = $settingsService;
-	}
-
-	/**
-	 * @NoAdminRequired
-	 */
-	public function get(){
-		return $this->generateResponse(function () {
-			return ['settings' => $this->settingsService->get()];
-		});
-	}
-
-	/**
-	 * @NoAdminRequired
-	 */
-	public function set($setting, $value){
-		return $this->generateResponse(function () use ($setting, $value) {
-			return $this->settingsService->set($setting, $value);
-		});
+export default {
+	get(url) {
+		return Axios.get(url)
+			.then((response) => Promise.resolve(response))
+			.catch((error) => Promise.reject(error))
+	},
+	post(url, data) {
+		return Axios.post(url, data)
+			.then((response) => Promise.resolve(response))
+			.catch((error) => Promise.reject(error))
 	}
 }

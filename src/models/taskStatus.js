@@ -1,6 +1,8 @@
-<?php
 /**
  * Nextcloud - Tasks
+ *
+ * @author John Molakvoæ
+ * @copyright 2018 John Molakvoæ <skjnldsv@protonmail.com>
  *
  * @author Raimund Schlüßler
  * @copyright 2018 Raimund Schlüßler <raimund.schluessler@mailbox.org>
@@ -20,38 +22,36 @@
  *
  */
 
-namespace OCA\Tasks\Controller;
-
-use \OCA\Tasks\Service\SettingsService;
-use \OCP\AppFramework\Controller;
-use \OCP\IRequest;
-
-class SettingsController extends Controller {
-
-	private $settingsService;
-
-	use Response;
-
-	public function __construct($appName, IRequest $request, SettingsService $settingsService){
-		parent::__construct($appName, $request);
-		$this->settingsService = $settingsService;
-	}
+export default class TaskStatus {
 
 	/**
-	 * @NoAdminRequired
+	 * Creates an instance of a status
+	 *
+	 * @param {String} type The type of the status
+	 * @param {String} message The type of the status
+	 * @param {String} action The type of the status
+	 * @memberof Status
 	 */
-	public function get(){
-		return $this->generateResponse(function () {
-			return ['settings' => $this->settingsService->get()];
-		});
+	constructor(type, message, action = null) {
+
+		this.duration = -1
+		this.type = type
+
+		switch (type) {
+		case 'refresh':
+			this.cssClass = 'refresh'
+			break
+		case 'sync':
+			this.cssClass = 'icon-loading-small-dark'
+			break
+		case 'success':
+			this.cssClass = 'success'
+			this.duration = 5000		// timeout in ms
+			break
+		}
+
+		this.action = action
+		this.message = message
 	}
 
-	/**
-	 * @NoAdminRequired
-	 */
-	public function set($setting, $value){
-		return $this->generateResponse(function () use ($setting, $value) {
-			return $this->settingsService->set($setting, $value);
-		});
-	}
 }

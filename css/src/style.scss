@@ -1,20 +1,4 @@
 /**
-	* SCSS variables
-	*/
-
-//colors
-$red: $color-error;				// warnings and errors
-$red_overdue: #b3312d;		// overdue dates and high importance
-$yellow: #fd0;						// medium importance
-$blue_due: #4271a6;				// due dates and low importance
-$gray_dark: #404040;			// text
-$gray: #a0a0a0;						// inactive text, checkbox-borders and separators
-$gray_light: #ccc;
-$gray_easy: #f7f7f7;
-$black: #000;
-$white: #fff;
-
-/**
 	* rules for app-navigation
 	*/
 
@@ -34,7 +18,7 @@ $white: #fff;
 				z-index: -1;
 				width: 16px;
 				height: 16px;
-				background: url('../../../apps/tasks/css/../img/sprites.svg') no-repeat;
+				background: var(--icon-tasks-bw-000) no-repeat;
 				margin: 14px;
 				margin-left: -30px;
 				background-position: inherit;
@@ -67,16 +51,10 @@ $white: #fff;
 				display: none;
 			}
 
-			&.caldav .app-navigation-entry-edit.caldav {
-				display: inline-block;
-				height: auto;
-			}
-
 			.app-navigation-entry-edit {
 				padding-left: 5px !important;
 
-				&.name,
-				&.caldav {
+				&.name {
 					display: none;
 				}
 			}
@@ -90,12 +68,8 @@ $white: #fff;
 	}
 
 	.app-navigation-entry-edit {
-		&.name input[type="text"] {
+		&.name input[type='text'] {
 			width: calc(100% - 72px);
-		}
-
-		&.caldav input[type="text"] {
-			width: calc(100% - 36px);
 		}
 
 		input.action {
@@ -117,39 +91,64 @@ $white: #fff;
 		font-size: 100%;
 	}
 
-	.app-navigation-entry-menu li {
-		float: inherit;
-		width: auto !important;
-		cursor: pointer;
-
-		&:hover a {
-			opacity: 1 !important;
+	.app-navigation-entry-menu {
+		ul {
+			align-items: unset;
 		}
 
-		&.confirmed a {
-			&.confirmation-confirm {
-				display: inline-block !important;
-				opacity: 1;
-			}
-
-			&.confirmation-abort {
-				display: inline-block !important;
-				opacity: 1;
-			}
-		}
-
-		img {
-			cursor: pointer;
-			margin-right: 5px;
-			vertical-align: text-bottom;
-		}
-
-		span {
-			cursor: pointer;
-		}
-
-		button {
+		li {
 			float: inherit;
+			width: auto !important;
+			cursor: pointer;
+			height: 36px;
+
+			/*
+			 * rules for confirmation directive
+			 */
+			> a {
+				&:not(:empty).confirmation-confirm {
+					padding: 0 !important;
+				}
+		
+				span.countdown {
+					background-color: inherit;
+					color: $white;
+					display: block;
+					text-align: center;
+					filter: alpha(opacity=100) !important;
+					opacity: 1 !important;
+				}
+			}
+
+			&:hover a {
+				opacity: 1 !important;
+			}
+
+			&.confirmed a {
+				&.confirmation-confirm {
+					display: inline-block !important;
+					opacity: 1;
+				}
+
+				&.confirmation-abort {
+					display: inline-block !important;
+					opacity: 1;
+				}
+			}
+
+			img {
+				cursor: pointer;
+				margin-right: 5px;
+				vertical-align: text-bottom;
+			}
+
+			span {
+				cursor: pointer;
+			}
+
+			button {
+				float: inherit;
+			}
 		}
 	}
 
@@ -178,9 +177,22 @@ $white: #fff;
 		justify-content: center;
 		align-items: center;
 
+		.color-selector-label {
+			display: block;
+			height: 24px;
+			width: calc(100% / 9) !important;
+			background-image: url('../img/color_picker.svg');
+			background-repeat: no-repeat;
+			background-position: center center;
+
+			.color-selector {
+				visibility: hidden;
+			}
+		}
+
 		li {
 			height: 24px;
-			width: calc(100% / 10) !important;
+			width: calc(100% / 9) !important;
 
 			&.selected {
 				border: 1px solid $gray_dark;
@@ -194,27 +206,6 @@ $white: #fff;
 					opacity: 1;
 				}
 			}
-		}
-	}
-}
-
-/**
-	* rules for confirmation directive
-	*/
-
-.app-navigation-entry-menu {
-	li > a {
-		&:not(:empty).confirmation-confirm {
-			padding: 0 !important;
-		}
-
-		span.countdown {
-			background-color: inherit;
-			color: $white;
-			display: block;
-			text-align: center;
-			filter: alpha(opacity=100) !important;
-			opacity: 1 !important;
 		}
 	}
 }
@@ -248,7 +239,6 @@ $white: #fff;
 
 .confirmation-confirm {
 	@extend .confirmation-abort;
-
 	background-color: $red !important;
 	cursor: default !important;
 }
@@ -264,38 +254,42 @@ $white: #fff;
 
 	li {
 		line-height: 3em;
-		position: relative;
+		display: flex;
 		height: 40px;
+
+		label {
+			white-space: nowrap;
+			padding-right: 10px;
+		}
 
 		&.headline {
 			font-weight: bold;
-			line-height: 1.5em;
+			line-height: 50px;
 		}
 
 		.label-container {
 			white-space: nowrap;
-			padding-right: 115px;
 			text-overflow: ellipsis;
-			width: 100%;
 			overflow: hidden;
-			height: 100%;
 			float: left;
 		}
 
 		select {
-			position: absolute;
-			right: 0;
-			float: right;
 			min-width: 105px;
+			text-overflow: ellipsis;
+			margin-left: auto;
 		}
 	}
 }
 
 #collection_today > a > span.date {
 	position: absolute;
-	font-size: 7px;
-	left: 18px;
-	top: 1.5px;
+	font-size: 6px;
+	left: 17px;
+	top: 2px;
+	width: 10px;
+	text-align: center;
+	font-weight: bold;
 }
 
 #app-settings .label-container span.icon {
@@ -330,10 +324,6 @@ $white: #fff;
 		float: left;
 		height: 34px;
 
-		&.focus {
-			background-color: $white;
-		}
-
 		.icon {
 			position: absolute;
 			top: 6px;
@@ -366,7 +356,7 @@ $white: #fff;
 			overflow-y: auto;
 		}
 
-		.task-body .title-wrapper span.title a {
+		.task-body .task-info-wrapper .title span a {
 			cursor: pointer;
 			text-decoration: underline;
 		}
@@ -394,10 +384,6 @@ $white: #fff;
 		.grouped-tasks {
 			position: relative;
 		}
-
-		.completed-hidden ol.completed-tasks {
-			display: none;
-		}
 	}
 
 	h2 {
@@ -419,26 +405,6 @@ $white: #fff;
 			cursor: pointer;
 		}
 	}
-}
-
-ol[dnd-list] {
-	.dndDraggingSource {
-		display: none;
-	}
-
-	.dndPlaceholder {
-		display: block;
-		background-color: $gray_light;
-		min-height: 37px;
-	}
-
-	.copy.dndDraggingSource {
-		display: block;
-	}
-}
-
-.dropzone-visible > ol[dnd-list] {
-	min-height: 50px;
 }
 
 /**
@@ -469,11 +435,9 @@ ol[dnd-list] {
 	}
 
 	&.add-subtask {
-		background: $white;
 		border: 1px solid $gray_light;
 
 		input {
-			background: transparent none repeat scroll 0 0 !important;
 			border: medium none !important;
 			border-radius: 0 !important;
 			box-shadow: none !important;
@@ -491,10 +455,6 @@ ol[dnd-list] {
 	.subtasks-container {
 		margin-left: 35px;
 
-		&.subtaskshidden li.subtask {
-			display: none;
-		}
-
 		.task-item {
 			margin-top: -1px;
 		}
@@ -502,7 +462,6 @@ ol[dnd-list] {
 }
 
 .task-body {
-	background-color: $white;
 	height: 37px;
 	list-style: none outside none;
 	margin: 0;
@@ -516,35 +475,6 @@ ol[dnd-list] {
 	&.active {
 		background-color: $gray_easy;
 		box-shadow: inset 4px 0 var(--color-primary);
-	}
-
-	&.attachment .icon.icon-note {
-		display: inline-block;
-		float: right;
-	}
-
-	&.subtasks .icon.subtasks {
-		display: inline-block;
-	}
-
-	&.completedsubtasks .icon.toggle-completed-subtasks {
-		display: inline-block;
-	}
-
-	.categories-list {
-		display: inline-block;
-		vertical-align: middle;
-
-		li {
-			background-color: $gray_easy;
-			border: 1px solid $gray_light;
-			border-radius: 2px;
-			color: $gray;
-			float: left;
-			font-weight: bold;
-			margin: -2px 4px 0;
-			padding: 2px 5px;
-		}
 	}
 
 	.icon {
@@ -568,30 +498,53 @@ ol[dnd-list] {
 				opacity: 1;
 			}
 		}
-
-		&.subtasks {
-			display: none;
-		}
-
-		&.toggle-completed-subtasks {
-			display: none;
-		}
 	}
 
-	.title-wrapper {
+	.task-info-wrapper {
 		cursor: pointer;
 		color: $gray_dark;
-		display: block;
+		display: flex;
 		line-height: 16px;
-		margin: 0 0 0 44px;
+		margin: 0;
 		overflow: hidden;
-		padding: 9px 0;
 		position: relative;
 		text-overflow: ellipsis;
 		white-space: nowrap;
 
 		.title {
 			cursor: text;
+			display: inline-flex;
+			padding: 10px;
+		}
+
+		.categories-list {
+			padding: 8px;
+			vertical-align: middle;
+			display: inline-flex;
+			text-overflow: ellipsis;
+			flex-wrap: nowrap;
+			overflow: hidden;
+	
+			.category {
+				overflow: hidden;
+				display: inline-flex;
+				min-width: 45px;
+				background-color: $gray_easy;
+				border: 1px solid $gray_light;
+				border-radius: 2px;
+				margin: 0 4px;
+
+				.category-label {
+					color: $gray;
+					font-weight: bold;
+					padding: 2px 4px;
+					text-overflow: ellipsis;
+					overflow: hidden;
+					white-space: nowrap;
+					width: 100%;
+					text-align: center;
+				}
+			}
 		}
 	}
 
@@ -613,6 +566,16 @@ ol[dnd-list] {
 		font-size: 11px;
 		line-height: 14px;
 		margin: 10px;
+
+		.calendar-indicator {
+			position: relative;
+			display: inline-block;
+			width: 8px;
+			height: 8px;
+			border: none;
+			border-radius: 50%;
+			cursor: pointer
+		}
 	}
 
 	.percentbar {
@@ -667,16 +630,14 @@ ol[dnd-list] {
 			border-top: 1px solid $gray_light;
 			flex: 0 0 auto;
 			height: 30px;
+			display: flex;
+			justify-content: space-between;
 
 			a {
 				padding: 7px;
 
-				&.left {
-					float: left;
-				}
-
-				&.right {
-					float: right;
+				&.info {
+					cursor: default;
 				}
 
 				.icon {
@@ -704,12 +665,17 @@ ol[dnd-list] {
 				}
 			}
 
+			.status-display {
+				float: right;
+				margin: 17px 0;
+			}
+
 			.title-text {
 				cursor: text;
 				display: inline-block;
 				min-height: 24px;
 				margin: 13px 0;
-				width: calc(100% - 115px);
+				width: calc(100% - 116px);
 				padding: 0 6px;
 				line-height: 22px;
 				// this border is to adjust the size of the div to the size
@@ -728,12 +694,11 @@ ol[dnd-list] {
 			}
 
 			.expandable-container {
-				background: none repeat scroll 0 0 $white;
 				border: 1px solid $gray;
 				padding: 0 6px;
 				display: none !important;
 				margin: 13px 0;
-				width: calc(100% - 115px);
+				width: calc(100% - 116px);
 				line-height: 24px;
 				min-height: 24px;
 
@@ -753,13 +718,19 @@ ol[dnd-list] {
 			}
 
 			.star {
-				padding: 13px;
+				padding: 13px 13px 13px 8px;
 				float: right;
 
 				.icon {
 					height: 24px;
 					width: 24px;
-					background-size: 144px 144px;
+					&.icon-color {
+						background-size: 96px 72px;
+					}
+
+					&.icon-bw {
+						background-size: 120px 120px;
+					}
 				}
 			}
 
@@ -805,12 +776,12 @@ ol[dnd-list] {
 			position: relative;
 
 			.section {
-				border-bottom: 1px dotted $gray;
+				border-bottom: 1px dotted var(--color-text-lighter);
 				padding: 0;
 				position: relative;
 				margin-bottom: 0;
 				width: 100%;
-				color: $gray;
+				color: var(--color-text-lighter);
 
 				&:last-of-type {
 					border-bottom: unset;
@@ -836,7 +807,8 @@ ol[dnd-list] {
 				&.date .icon {
 					&.icon-calendar-due,
 					&.icon-calendar-overdue,
-					&.icon-percent {
+					&.icon-percent,
+					&.icon-percent-active {
 						opacity: 1;
 					}
 				}
@@ -913,37 +885,39 @@ ol[dnd-list] {
 						margin: 0;
 						float: unset;
 					}
+
+					.calendar-indicator {
+						position: relative;
+						display: inline-block;
+						width: 16px;
+						height: 16px;
+						border: none;
+						border-radius: 50%;
+						cursor: pointer;
+						vertical-align: middle;
+					}
 				}
 
-				input[type="range"] {
+				input[type='range'] {
 					border: medium none;
 					box-shadow: none;
 					width: calc(100% - 50px);
 					vertical-align: middle;
 				}
 
-				input[type="text"] {
+				input[type='number'] {
 					background: none repeat scroll 0 0 $gray_easy;
 					margin: 0;
 					min-height: 0;
 				}
 
 				input {
-					background-color: $white;
 					border-radius: 0;
 					margin-top: 0;
 					color: $gray_dark;
 					font-weight: 500;
 					outline: medium none;
 					padding: 4px;
-
-					&.datepicker-input {
-						width: 60%;
-					}
-
-					&.timepicker-input {
-						width: calc(40% - 10px);
-					}
 
 					&.duration-input {
 						margin: 2px 0 0 .3em;
@@ -970,65 +944,68 @@ ol[dnd-list] {
 
 				.section-edit {
 					display: none;
-					margin-left: 12px;
+					padding-left: 12px;
 					vertical-align: middle;
 					width: calc(100% - 80px);
 					line-height: 0;
-				}
 
-				.detail-categories-container {
-					width: calc(100% - 40px);
-					display: inline-block;
-					margin-left: 12px;
-				}
-
-				&.detail-categories .select2-container-multi {
-					.select2-choices {
-						border: 1px solid transparent;
-
-						.select2-search-choice {
-							color: $blue_due;
-							font-weight: bold;
-							line-height: 14px;
-							margin: 2px 0 3px 5px;
-							background-image: none;
-							background-color: $gray_easy;
-							box-shadow: none;
-							border-color: $gray_light;
-							padding: 3px 5px 3px 18px;
-
-							a.select2-search-choice-close {
-								opacity: .4;
-								display: initial;
-
-								@extend .icon;
-								@extend .icon-close;
-
-								&:hover {
-									opacity: 1;
-								}
-							}
+					.mx-datepicker {
+						&.date {
+							width: 59%;
+						}
+						&.time {
+							width: 40%
 						}
 					}
-
-					&.select2-container-disabled .select2-choices {
-						background-color: $white;
-						background-image: none;
-						border: none;
-						cursor: default;
-					}
 				}
 
-				.select2-search-field input {
-					border: 0 none;
-					box-shadow: none;
-					font-weight: bold;
-					margin-top: 0;
-					font-family: inherit;
-				}
-
-				&.active .select2-search-field input {
+				.detail-calendar-container .multiselect__single {
 					color: $blue_due;
+				}
+
+				.detail-categories-container,
+				.detail-calendar-container {
+					width: calc(100% - 52px);
+					display: inline-block;
+					margin-left: 12px;
+
+					.multiselect.multiselect-vue {
+						width: 100%;
+						margin: 1px -1px;
+						vertical-align: middle;
+
+						&.multiselect--active .multiselect__tags {
+							border: 1px solid var(--color-border-dark);
+						}
+
+						.multiselect__tags {
+							border: 1px solid transparent;
+
+							.multiselect__tags-wrap {
+								padding-left: 0px;
+							}
+
+							.multiselect__input {
+								padding: 0px !important;
+								font-weight: bold;
+							}
+
+							.multiselect__single {
+								padding-left: 0px !important;
+								font-weight: bold;
+							}
+						}
+
+						.multiselect__tag {
+							color: $blue_due;
+							background: $gray_easy;
+							font-weight: bold;
+						}
+
+						.multiselect__element {
+							line-height: 1.1em;
+						}
+					}
 				}
 
 				.note {
@@ -1100,8 +1077,6 @@ ol[dnd-list] {
 
 							.display-view {
 								cursor: text;
-								display: block;
-								white-space: pre-wrap;
 							}
 
 							.edit-view {
@@ -1114,33 +1089,12 @@ ol[dnd-list] {
 		}
 
 		.disabled .body .section {
-			.select2-search-field input {
-				width: auto;
-				display: block !important;
-			}
 
 			&.date:hover .icon.icon-trash {
 				display: none;
 			}
 		}
 	}
-}
-
-/**
-	* timepicker fixes
-	*/
-.ui-timepicker-table td a {
-	display: block;
-	width: 14px;
-}
-
-/**
-	* datepicker fixes
-	*/
-.ui-widget.ui-datepicker .ui-datepicker-calendar td > a {
-	width: 18px;
-	line-height: 18px;
-	height: 18px;
 }
 
 /**
@@ -1158,10 +1112,6 @@ ol[dnd-list] {
 	&:hover {
 		.icon {
 			opacity: .7;
-		}
-
-		.detail-checkbox:not(.disabled) {
-			border-color: $black;
 		}
 	}
 
@@ -1193,23 +1143,24 @@ ol[dnd-list] {
 
 	&.icon-checkmark,
 	&.icon-tag-active,
-	&[class*=" icon-task-star-"] {
+	&[class*=' icon-task-star-'] {
 		opacity: 1 !important;
 	}
 
 	&.task-checkbox,
 	&.detail-checkbox {
 		border-radius: 3px;
-		border: 1px solid $gray;
+		border: 1px solid var(--color-main-text);
 		float: left;
 		margin: 9px;
+		opacity: 0.5;
 
 		&:not(.icon-checkmark) {
 			background: unset;
 		}
 
 		&:not(.disabled):hover {
-			border-color: $black;
+			opacity: 0.7;
 		}
 
 		&.disabled {
@@ -1217,31 +1168,14 @@ ol[dnd-list] {
 		}
 	}
 
-	&.icon-note {
-		display: none;
-	}
-
 	&.right {
 		float: right;
 	}
 }
 
-#status {
-	padding: 10px 0 18px !important;
-	height: 22px !important;
-	background-color: transparent !important;
-	font-weight: bold;
-	color: $gray;
-	font-size: 13px !important;
-
-	&.emptycontent {
-		position: relative;
-	}
-}
-
 /**
-	* rules for sortorder-dropdown
-	*/
+ * rules for sortorder-dropdown
+ */
 
 .sortorder-dropdown-button {
 	background-color: $gray_easy;
@@ -1269,7 +1203,7 @@ ol[dnd-list] {
 	}
 
 	.icon {
-		margin: 12px 8px;
+		margin: 11px 8px;
 
 		&.sort-indicator {
 			margin-left: auto;
@@ -1296,7 +1230,7 @@ ol[dnd-list] {
 		& > a span {
 			opacity: 1 !important;
 
-			&[class*=" icon-"] {
+			&[class*=' icon-'] {
 				padding: 0;
 				background-size: auto;
 
@@ -1341,5 +1275,53 @@ ol[dnd-list] {
 		&:hover {
 			opacity: 1 !important;
 		}
+	}
+}
+
+.tooltip-arrow {
+	width: unset !important;
+}
+
+.icon span{
+	font-family: var(--font-face);
+}
+
+.task-status-container {
+	float:right;
+	margin: 8px;
+}
+
+.status-display {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+
+	&.success {
+		@extend .icon-color;
+		@extend .icon-checkmark-color;
+	}
+
+	&.refresh {
+		background-image: var(--icon-history-000);
+		animation: pulse 2s infinite;
+		border-radius: 50%;
+		opacity: .5;
+		cursor: pointer;
+
+		&:hover{
+			opacity: .7;
+		}
+	}
+}
+
+@keyframes pulse {
+	0% {
+		box-shadow: 0 0 0 0 rgba(50, 50, 50, .4);
+	}
+	70% {
+		box-shadow: 0 0 0 10px rgba(50, 50, 50, 0);
+	}
+	100% {
+		box-shadow: 0 0 0 0 rgba(50, 50, 50, 0);
 	}
 }

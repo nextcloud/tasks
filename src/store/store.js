@@ -1,4 +1,3 @@
-<?php
 /**
  * Nextcloud - Tasks
  *
@@ -19,39 +18,22 @@
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+'use strict'
 
-namespace OCA\Tasks\Controller;
+import Vue from 'vue'
+import Vuex from 'vuex'
+import calendars from './calendars'
+import collections from './collections'
+import tasks from './tasks'
+import settings from './settings'
 
-use \OCA\Tasks\Service\SettingsService;
-use \OCP\AppFramework\Controller;
-use \OCP\IRequest;
+Vue.use(Vuex)
 
-class SettingsController extends Controller {
-
-	private $settingsService;
-
-	use Response;
-
-	public function __construct($appName, IRequest $request, SettingsService $settingsService){
-		parent::__construct($appName, $request);
-		$this->settingsService = $settingsService;
+export default new Vuex.Store({
+	modules: {
+		calendars,
+		collections,
+		tasks,
+		settings
 	}
-
-	/**
-	 * @NoAdminRequired
-	 */
-	public function get(){
-		return $this->generateResponse(function () {
-			return ['settings' => $this->settingsService->get()];
-		});
-	}
-
-	/**
-	 * @NoAdminRequired
-	 */
-	public function set($setting, $value){
-		return $this->generateResponse(function () use ($setting, $value) {
-			return $this->settingsService->set($setting, $value);
-		});
-	}
-}
+})

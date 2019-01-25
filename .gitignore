@@ -1,11 +1,11 @@
 ######################
 ## Files build by make
 ######################
-/css/src/sprite.scss
-/css/style.scss
-/img/sprites.svg
-/js/public/
-/js/vendor/
+/css/src/sprites-bw.scss
+/css/src/sprites-color.scss
+/img/bw.svg
+/img/color.svg
+/js/
 
 #################
 ## PhpStorm
@@ -247,3 +247,4 @@ Various
 *.rej
 
 build/
+coverage 
