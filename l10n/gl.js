@@ -49,7 +49,7 @@ OC.L10N.register(
     "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Isto eliminará o calendario «%s» e todos os seus eventos e tarefas correspodentes.",
     "The name \"%s\" is already used." : "O nome «%s» xa esta a ser usado.",
     "An empty name is not allowed." : "Non está permitido deixar baleiro o campo nome",
-    "Hidden" : "Agochado",
+    "Hidden" : "Agachado",
     "Visible" : "Visíbel",
     "Automatic" : "Automatico",
     "Sunday" : "domingo",
