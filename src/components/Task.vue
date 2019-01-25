@@ -103,7 +103,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				v-click-outside="($event) => cancelCreation($event)"
 				class="task-item add-subtask"
 			>
-				<form name="addTaskForm" @submit="addTask">
+				<form name="addTaskForm" @submit.prevent="addTask">
 					<input v-model="newTaskName"
 						v-focus
 						:placeholder="subtasksCreationPlaceholder"
