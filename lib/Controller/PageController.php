@@ -26,6 +26,7 @@ use \OCP\AppFramework\Controller;
 use \OCP\AppFramework\Http\TemplateResponse;
 use \OCP\AppFramework\Http\NotFoundResponse;
 use \OCP\IRequest;
+use \OCP\IUserSession;
 use \OCP\IConfig;
 
 /**
@@ -35,12 +36,14 @@ class PageController extends Controller {
 
 	/**
 	 * @param string $appName
+	 * @param IUserSession $userSession
 	 * @param IConfig $config
 	 */
-	public function __construct($appName, IRequest $request,
+	public function __construct($appName, IRequest $request, IUserSession $userSession,
 								$userId, IConfig $config) {
 		parent::__construct($appName, $request);
 		$this->config = $config;
+		$this->userSession = $userSession;
 		$this->userId = $userId;
 	}
 
@@ -50,18 +53,8 @@ class PageController extends Controller {
 	 * @NoCSRFRequired
 	 */
 	public function index() {
-
-		$day = new \DateTime('today');
-		$day = $day->format('d');
-
-		$appVersion = $this->config->getAppValue($this->appName, 'installed_version');
-		$response = new TemplateResponse('tasks', 'main');
-		$response->setParams(array(
-			'appVersion' => $appVersion,
-			'DOM' => $day
-		));
-
-		return $response;
+		\OCP\Util::connectHook('\OCP\Config', 'js', $this, 'addJavaScriptVariablesForIndex');
+		return new TemplateResponse('tasks', 'main');
 	}
 
 
@@ -77,5 +70,21 @@ class PageController extends Controller {
 			$response = new NotFoundResponse();
 		}
 		return $response;
+	}
+
+	/**
+	 * Add parameters to javascript for user sites
+	 *
+	 * @param array $array
+	 */
+	public function addJavaScriptVariablesForIndex(array $array) {
+		$user = $this->userSession->getUser();
+		if ($user === null) {
+			return;
+		}
+		$appversion = $this->config->getAppValue($this->appName, 'installed_version');
+		$array['array']['oca_tasks'] = \json_encode([
+			'versionstring' => $appversion,
+		]);
 	}
 }
