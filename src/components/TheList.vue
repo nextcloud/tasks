@@ -120,7 +120,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						@click="resetView(calendar)"
 					>
 					<input :title="t('tasks', 'Save')"
-						type="submit"
+						type="button"
 						value=""
 						class="action icon-checkmark"
 						@click="save(calendar)"
@@ -158,7 +158,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						@click="cancelCreate"
 					>
 					<input :title="t('tasks', 'Save')"
-						type="submit"
+						type="button"
 						value=""
 						class="action icon-checkmark"
 						@click="create($event)"
