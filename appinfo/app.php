@@ -20,19 +20,5 @@
 *
 */
 
-namespace OCA\Tasks\AppInfo;
-
-\OC::$server->getNavigationManager()->add(function () {
-	$urlGenerator = \OC::$server->getURLGenerator();
-    return [
-		'id' => 'tasks',
-
-		'order' => 100,
-
-		'href' => $urlGenerator->linkToRoute('tasks.page.index'),
-
-		'icon' => $urlGenerator->imagePath('tasks', 'tasks.svg'),
-
-		'name' => \OC::$server->getL10N('tasks')->t('Tasks'),
-	];
-});
+$app = new \OCA\Tasks\AppInfo\Application();
+$app->registerNavigation();

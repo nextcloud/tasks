@@ -3,7 +3,7 @@
  * Nextcloud - Tasks
  *
  * @author Raimund Schlüßler
- * @copyright 2018 Raimund Schlüßler <raimund.schluessler@mailbox.org>
+ * @copyright 2019 Raimund Schlüßler <raimund.schluessler@mailbox.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -24,7 +24,6 @@ namespace OCA\Tasks\Controller;
 
 use \OCP\AppFramework\Controller;
 use \OCP\AppFramework\Http\TemplateResponse;
-use \OCP\AppFramework\Http\NotFoundResponse;
 use \OCP\IRequest;
 use \OCP\IUserSession;
 use \OCP\IConfig;
@@ -35,41 +34,37 @@ use \OCP\IConfig;
 class PageController extends Controller {
 
 	/**
+	 * @var IUserSession
+	 */
+	private $userSession;
+
+	/**
+	 * @var IConfig
+	 */
+	private $config;
+
+	/**
 	 * @param string $appName
+	 * @param IRequest $request an instance of the request
 	 * @param IUserSession $userSession
 	 * @param IConfig $config
 	 */
-	public function __construct($appName, IRequest $request, IUserSession $userSession,
-								$userId, IConfig $config) {
+	public function __construct(string $appName, IRequest $request, IUserSession $userSession, IConfig $config) {
 		parent::__construct($appName, $request);
-		$this->config = $config;
 		$this->userSession = $userSession;
-		$this->userId = $userId;
+		$this->config = $config;
 	}
 
 
 	/**
 	 * @NoAdminRequired
 	 * @NoCSRFRequired
+	 *
+	 * @return TemplateResponse
 	 */
-	public function index() {
+	public function index():TemplateResponse {
 		\OCP\Util::connectHook('\OCP\Config', 'js', $this, 'addJavaScriptVariablesForIndex');
 		return new TemplateResponse('tasks', 'main');
-	}
-
-
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
-	public function templates($template) {
-		$templates = array(	'confirmation');
-		if (in_array($template, $templates)) {
-			$response = new TemplateResponse('tasks', $template, [], 'blank');
-		} else {
-			$response = new NotFoundResponse();
-		}
-		return $response;
 	}
 
 	/**

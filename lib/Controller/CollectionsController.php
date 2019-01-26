@@ -28,11 +28,19 @@ use \OCP\AppFramework\Controller;
 
 class CollectionsController extends Controller {
 
+	/**
+	 * @var CollectionsService
+	 */
 	private $collectionsService;
 
 	use Response;
 
-	public function __construct($appName, IRequest $request, CollectionsService $collectionsService){
+	/**
+	 * @param string $appName
+	 * @param IRequest $request an instance of the request
+	 * @param CollectionsService $collectionsService
+	 */
+	public function __construct(string $appName, IRequest $request, CollectionsService $collectionsService){
 		parent::__construct($appName, $request);
 		$this->collectionsService = $collectionsService;
 	}
