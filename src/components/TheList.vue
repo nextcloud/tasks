@@ -111,7 +111,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						}"
 						class="edit"
 						type="text"
-						@keyup="checkName($event, calendar.id)"
+						@keyup="checkName($event, calendar, save)"
 					>
 					<input :title="t('tasks', 'Cancel')"
 						type="cancel"
@@ -149,7 +149,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						:placeholder="t('tasks', 'New List')"
 						class="edit"
 						type="text"
-						@keyup="checkName($event, '')"
+						@keyup="checkName($event, null, create)"
 					>
 					<input :title="t('tasks', 'Cancel')"
 						type="cancel"
@@ -330,15 +330,19 @@ export default {
 			this.changeCalendar({ calendar: calendar, newName: this.newCalendarName, newColor: this.selectedColor })
 			this.editing = false
 		},
-		checkName: function(event, id) {
-			var check = this.isNameAllowed(this.newCalendarName, id)
+		checkName: function(event, calendar, callback) {
+			const calendarId = calendar ? calendar.id : ''
+			const check = this.isNameAllowed(this.newCalendarName, calendarId)
 			this.tooltipMessage = check.msg
 			if (!check.allowed) {
-				this.tooltipTarget = 'list_' + id
+				this.tooltipTarget = 'list_' + calendarId
 				this.nameError = true
 			} else {
 				this.tooltipTarget = ''
 				this.nameError = false
+			}
+			if (event.keyCode === 13) {
+				callback(calendar)
 			}
 			if (event.keyCode === 27) {
 				event.preventDefault()
