@@ -59,7 +59,7 @@ ifneq ("$(wildcard $(private_key))","") #(,$(wildcard $(private_key)))
 	endif
 endif
 
-all: build
+all: install build
 
 # Fetches the PHP and JS dependencies and compiles the JS. If no composer.json
 # is present, the composer step is skipped, if no package.json or js/package.json
@@ -69,6 +69,12 @@ build:
 	$(npm) run build
 
 # Sets up the development environment
+.PHONY: install
+install:
+	$(npm) install
+	$(npm) update
+
+# Runs the development build
 .PHONY: development
 development:
 	$(npm) install

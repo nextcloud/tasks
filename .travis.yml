@@ -1,9 +1,9 @@
+dist: trusty
 language: php
 php:
-  - 5.4
-  - 5.5
-  - 5.6
-  - hhvm
+  - 7.0
+  - 7.1
+  - 7.2
 
 branches:
   only:
@@ -11,11 +11,8 @@ branches:
     - /^stable\d+(\.\d+)?$/
 
 script:
-  # Test lint
-  - sh -c "ant test"
-
+  - make
+  - make test
 
 matrix:
-  allow_failures:
-    - php: hhvm
   fast_finish: true

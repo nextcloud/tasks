@@ -27,12 +27,33 @@ use OCP\IL10N;
 
 class CollectionsService {
 
+	/**
+	 * @var string
+	 */
 	private $userId;
+
+	/**
+	 * @var IL10N
+	 */
 	private $l10n;
+
+	/**
+	 * @var IConfig
+	 */
 	private $settings;
+
+	/**
+	 * @var string
+	 */
 	private $appName;
 
-	public function __construct($userId, IL10N $l10n, IConfig $settings, $appName) {
+	/**
+	 * @param string $userId
+	 * @param IL10N $l10n
+	 * @param IConfig $settings
+	 * @param string $appName
+	 */
+	public function __construct(string $userId, IL10N $l10n, IConfig $settings, string $appName) {
 		$this->userId = $userId;
 		$this->l10n = $l10n;
 		$this->settings = $settings;
@@ -40,11 +61,11 @@ class CollectionsService {
 	}
 
 	/**
-	 * get all collections
+	 * Get all collections
 	 *
 	 * @return array
 	 */
-	public function getAll() {
+	public function getAll():array {
 		$collections = array(
 			array(
 				'id' => "starred",
@@ -89,13 +110,13 @@ class CollectionsService {
 	}
 
 	/**
-	 * set the visibility of a collection by collectionID
+	 * Set the visibility of a collection by collectionID
 	 *
-	 * @param int $collectionID
+	 * @param string $collectionID
 	 * @param int $visibility
 	 * @return bool
 	 */
-	public function setVisibility($collectionID, $visibility){
+	public function setVisibility(string $collectionID, int $visibility):bool {
 		if (in_array($visibility, array(0,1,2))){
 			$this->settings->setUserValue($this->userId, $this->appName,'show_'.$collectionID,$visibility);
 		}

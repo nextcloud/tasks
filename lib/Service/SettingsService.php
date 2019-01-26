@@ -26,22 +26,38 @@ use OCP\IConfig;
 
 class SettingsService {
 
+	/**
+	 * @var string
+	 */
 	private $userId;
+
+	/**
+	 * @var IConfig
+	 */
 	private $settings;
+
+	/**
+	 * @var string
+	 */
 	private $appName;
 
-	public function __construct($userId, IConfig $settings, $appName) {
+	/**
+	 * @param string $userId
+	 * @param IConfig $settings
+	 * @param string $appName
+	 */
+	public function __construct(string $userId, IConfig $settings, string $appName) {
 		$this->userId = $userId;
 		$this->settings = $settings;
 		$this->appName = $appName;
 	}
 
 	/**
-	 * get the current settings
+	 * Get the current settings
 	 *
 	 * @return array
 	 */
-	public function get() {
+	public function get():array {
 		$settings = array(
 			'defaultCalendarId' => (string)$this->settings->getUserValue($this->userId, $this->appName,'various_defaultCalendarId'),
 			'showHidden' => (int)$this->settings->getUserValue($this->userId, $this->appName,'various_showHidden'),
@@ -53,14 +69,13 @@ class SettingsService {
 	}
 
 	/**
-	 * set setting of type to new value
+	 * Set setting of type to new value
 	 *
 	 * @param $setting
-	 * @param $type
 	 * @param $value
 	 * @return bool
 	 */
-	public function set($setting, $value) {
+	public function set($setting, $value):bool {
 		$this->settings->setUserValue($this->userId, $this->appName, 'various_'.$setting, $value);
 		return true;
 	}

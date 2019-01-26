@@ -27,12 +27,20 @@ use \OCP\AppFramework\Controller;
 use \OCP\IRequest;
 
 class SettingsController extends Controller {
-
+	
+	/**
+	 * @var SettingsService
+	 */
 	private $settingsService;
 
 	use Response;
 
-	public function __construct($appName, IRequest $request, SettingsService $settingsService){
+	/**
+	 * @param string $appName
+	 * @param IRequest $request an instance of the request
+	 * @param SettingsService $settingsService
+	 */
+	public function __construct(string $appName, IRequest $request, SettingsService $settingsService){
 		parent::__construct($appName, $request);
 		$this->settingsService = $settingsService;
 	}
@@ -49,7 +57,7 @@ class SettingsController extends Controller {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function set($setting, $value){
+	public function set($setting, $value) {
 		return $this->generateResponse(function () use ($setting, $value) {
 			return $this->settingsService->set($setting, $value);
 		});
