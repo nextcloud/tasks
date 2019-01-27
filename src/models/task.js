@@ -112,6 +112,12 @@ export default class Task {
 		this._class = this.vtodo.getFirstPropertyValue('class') || 'PUBLIC'
 		this._pinned = this.vtodo.getFirstPropertyValue('x-pinned') === 'true'
 
+		let sortOrder = this.vtodo.getFirstPropertyValue('x-apple-sort-order')
+		if (sortOrder === null) {
+			sortOrder = this.getSortOrder()
+		}
+		this._sortOrder = +sortOrder
+
 		this._searchQuery = ''
 		this._matchesSearchQuery = true
 	}
@@ -555,6 +561,10 @@ export default class Task {
 		this.updateLastModified()
 		this._created = this.vtodo.getFirstPropertyValue('created')
 		this._createdMoment = moment(this._created, 'YYYYMMDDTHHmmss')
+		// Update the sortorder if necessary
+		if (this.vtodo.getFirstPropertyValue('x-apple-sort-order') === null) {
+			this._sortOrder = this.getSortOrder()
+		}
 	}
 
 	get class() {
@@ -569,6 +579,48 @@ export default class Task {
 		}
 		this.updateLastModified()
 		this._class = this.vtodo.getFirstPropertyValue('class') || 'PUBLIC'
+	}
+
+	get sortOrder() {
+		return this._sortOrder
+	}
+
+	set sortOrder(sortOrder) {
+		// We expect an integer for the sort order.
+		sortOrder = parseInt(sortOrder)
+		if (isNaN(sortOrder)) {
+			this.vtodo.removeProperty('x-apple-sort-order')
+			// Get the default sort order.
+			sortOrder = this.getSortOrder()
+		} else {
+			this.vtodo.updatePropertyWithValue('x-apple-sort-order', sortOrder)
+		}
+		this.updateLastModified()
+		this._sortOrder = sortOrder
+	}
+
+	/**
+	 * Construct the default value for the sort order
+	 * from the created date.
+	 *
+	 * @returns {Integer} The sort order
+	 */
+	getSortOrder() {
+		// If there is no created date we return 0.
+		if (this._created === null) {
+			return 0
+		}
+		return this._created.subtractDate(
+			new ICAL.Time({
+				year: 2001,
+				month: 1,
+				day: 1,
+				hour: 0,
+				minute: 0,
+				second: 0,
+				isDate: false,
+			})
+		).toSeconds()
 	}
 
 	/**

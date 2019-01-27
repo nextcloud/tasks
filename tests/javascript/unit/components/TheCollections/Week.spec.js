@@ -10,6 +10,15 @@ localVue.use(VTooltip)
 describe('Week.vue', () => {
 	'use strict'
 
+	/**
+	 * We asynchronously import the "TaskBody" component inside "TaskDragContainer",
+	 * so the first test always fails, since "TaskBody" is not loaded yet.
+	 * I didn't find a proper solution yet, but mounting once before the actual tests
+	 * mitigates the error.
+	 * Proper solutions welcome, though.
+	 */
+	mount(Week, { localVue, store, router })
+
 	it('Checks that the correct tasks are shown for day 0 (today)', () => {
 		const wrapper = mount(Week, { localVue, store, router })
 		expect(wrapper.find('div[day="0"] li[task-id="pwen4kz18g.ics"]').exists()).toBe(true) // Was due today --> shown

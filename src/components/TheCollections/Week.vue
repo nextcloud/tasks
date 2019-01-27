@@ -45,14 +45,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<span class="heading__title">{{ dayString(day.diff) }}</span>
 				</h2>
 				<TaskDragContainer
-					:collection-id="'week-' + day.diff"
-					class="tasks"
-					type="list">
-					<TaskBody v-for="task in sort(day.tasks, sortOrder, sortDirection)"
-						:key="task.key"
-						:task="task"
-						:collection-string="'week-' + day.diff" />
-				</TaskDragContainer>
+					:tasks="day.tasks"
+					:collection-string="`week-${day.diff}`"
+					:collection-id="`week-${day.diff}`" />
 			</div>
 		</div>
 	</div>
@@ -61,14 +56,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <script>
 import moment from '@nextcloud/moment'
 import { mapGetters, mapActions } from 'vuex'
-import { sort, isTaskInList } from '../../store/storeHelper'
+import { isTaskInList } from '../../store/storeHelper'
 import SortorderDropdown from '../SortorderDropdown'
-import TaskBody from '../TaskBody'
 import TaskDragContainer from '../TaskDragContainer'
 
 export default {
 	components: {
-		TaskBody,
 		SortorderDropdown,
 		TaskDragContainer,
 	},
@@ -83,8 +76,6 @@ export default {
 			calendar: 'getDefaultCalendar',
 			tasks: 'getAllTasks',
 			uncompletedRootTasks: 'findUncompletedRootTasks',
-			sortOrder: 'sortOrder',
-			sortDirection: 'sortDirection',
 		}),
 
 		/**
@@ -121,8 +112,6 @@ export default {
 		...mapActions([
 			'createTask',
 		]),
-
-		sort,
 
 		dayString(day) {
 			const date = moment().add(day, 'day')

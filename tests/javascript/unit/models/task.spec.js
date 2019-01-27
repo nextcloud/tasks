@@ -1,4 +1,5 @@
 import Task from 'Models/task'
+import ICAL from 'ical.js'
 
 import { loadICS } from '../../../assets/loadAsset'
 
@@ -131,5 +132,33 @@ describe('task', () => {
 		expect(task.related).toEqual(null)
 		task.related = 'newparent123'
 		expect(task.related).toEqual('newparent123')
+	})
+
+	it('Should not change the sort order, when the created date is changed and x-apple-sort-order is set.', () => {
+		const task = new Task(loadICS('vcalendars/vcalendar-sortOrder1'), {})
+		expect(task.sortOrder).toEqual(1)
+		task.created = ICAL.Time.fromDateTimeString('2018-11-19T18:39:11')
+		expect(task.sortOrder).toEqual(1)
+	})
+
+	it('Should update the sort order, when the created date is changed and x-apple-sort-order is not set.', () => {
+		const task = new Task(loadICS('vcalendars/vcalendar-sortOrderByCreated1'), {})
+		expect(task.sortOrder).toEqual(564345550)
+		task.created = ICAL.Time.fromDateTimeString('2018-11-19T18:39:11')
+		expect(task.sortOrder).toEqual(564345551)
+	})
+
+	it('Should update the sort order, when x-apple-sort-order is deleted.', () => {
+		const task = new Task(loadICS('vcalendars/vcalendar-sortOrder1'), {})
+		expect(task.sortOrder).toEqual(1)
+		task.sortOrder = null
+		expect(task.sortOrder).toEqual(564345559)
+	})
+
+	it('Should update the sort order, when a new sort order is set.', () => {
+		const task = new Task(loadICS('vcalendars/vcalendar-sortOrder1'), {})
+		expect(task.sortOrder).toEqual(1)
+		task.sortOrder = 2
+		expect(task.sortOrder).toEqual(2)
 	})
 })

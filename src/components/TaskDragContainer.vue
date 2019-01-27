@@ -25,30 +25,61 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		:set-data="setDragData"
 		v-bind="{group: 'tasks', swapThreshold: 0.30, delay: 500, delayOnTouchOnly: true, touchStartThreshold: 3, disabled: disabled, filter: '.readOnly'}"
 		:move="onMove"
-		@add="onAdd">
-		<slot />
+		@add="onAdd"
+		@end="onEnd">
+		<TaskBody v-for="task in sortedTasks"
+			:key="task.key"
+			:task="task"
+			:collection-string="collectionString" />
 	</draggable>
 </template>
 
 <script>
+import { sort } from '../store/storeHelper'
+
 import draggable from 'vuedraggable'
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 export default {
+	name: 'TaskDragContainer',
 	components: {
+		/**
+		 * We asynchronously import here, because we have a circular dependency
+		 * between TaskDragContainer and TaskBody which otherwise cannot be resolved.
+		 * See https://vuejs.org/v2/guide/components-edge-cases.html#Circular-References-Between-Components
+		 *
+		 * We load it "eager", because the TaskBody will always be required.
+		 *
+		 * @returns {Object} The TaskBody component
+		 */
+		TaskBody: () => import(/* webpackMode: "eager" */ './TaskBody'),
 		draggable,
 	},
 	props: {
+		tasks: {
+			type: Array,
+			default: () => [],
+		},
 		disabled: {
 			type: Boolean,
 			default: false,
+		},
+		collectionString: {
+			type: String,
+			default: null,
 		},
 	},
 	computed: {
 		...mapGetters({
 			getCalendar: 'getCalendarById',
 			getTask: 'getTaskByUri',
+			sortOrder: 'sortOrder',
+			sortDirection: 'sortDirection',
 		}),
+
+		sortedTasks() {
+			return sort([...this.tasks], this.sortOrder, this.sortDirection)
+		},
 	},
 	methods: {
 		...mapActions([
@@ -56,7 +87,12 @@ export default {
 			'setPriority',
 			'setPercentComplete',
 			'setDate',
+			'setSortOrder',
 		]),
+
+		...mapMutations({
+			commitSortOrder: 'setSortOrder',
+		}),
 
 		setDragData: (dataTransfer) => {
 			// We do nothing here, this just prevents
@@ -64,8 +100,91 @@ export default {
 			// dataTransfer object.
 		},
 
+		adjustSortOrder(task, newIndex, oldIndex = -1) {
+			// Only change the sort order if we sort manually
+			if (this.sortOrder !== 'manual') {
+				return
+			}
+			// If the tasks array has no entry, we don't need to sort.
+			if (this.sortedTasks.length === 0) {
+				return
+			}
+			// If the task is inserted at its current position, don't sort.
+			if (newIndex === oldIndex) {
+				return
+			}
+
+			// Get a copy of the sorted tasks array
+			const sortedTasks = [...this.sortedTasks]
+
+			// In case the task to move is already in the array, move it to the new position
+			if (oldIndex > -1) {
+				sortedTasks.splice(newIndex, 0, sortedTasks.splice(oldIndex, 1)[0])
+			// Otherwise insert it
+			} else {
+				sortedTasks.splice(newIndex, 0, task)
+			}
+			// Get the new sort order for the moved task and apply it.
+			// We just do that to minimize the number of other tasks to be changed.
+			let newSortOrder
+			if (newIndex + 1 < sortedTasks.length) {
+				newSortOrder = sortedTasks[newIndex + 1].sortOrder - Math.pow(-1, +this.sortDirection)
+			} else {
+				newSortOrder = sortedTasks[newIndex - 1].sortOrder + Math.pow(-1, +this.sortDirection)
+			}
+			if (newSortOrder < 0) {
+				newSortOrder = 0
+			}
+			// If we moved the task from a different list, don't schedule a request to the server,
+			// this will be done afterwards.
+			const newOrder = { task: sortedTasks[newIndex], order: newSortOrder }
+			if (oldIndex > -1) {
+				this.setSortOrder(newOrder)
+			} else {
+				this.commitSortOrder(newOrder)
+			}
+
+			// Check the sort orders to be strictly monotonous
+			if (this.sortDirection) {
+				sortedTasks.reverse()
+			}
+			let currentIndex = 1
+			while (currentIndex < sortedTasks.length) {
+				if (sortedTasks[currentIndex].sortOrder <= sortedTasks[currentIndex - 1].sortOrder) {
+					const order = { task: sortedTasks[currentIndex], order: sortedTasks[currentIndex - 1].sortOrder + 1 }
+					if (sortedTasks[currentIndex] === task) {
+						this.commitSortOrder(order)
+					} else {
+						this.setSortOrder(order)
+					}
+				}
+				currentIndex++
+			}
+		},
+
 		/**
 		 * Called when a task is dropped.
+		 * We only handle sorting tasks here.
+		 *
+		 * @param {Object} $event The event which caused the drop
+		 */
+		onEnd($event) {
+			// Don't do anything if the tasks are not sorted but moved.
+			if ($event.to !== $event.from) {
+				return
+			}
+			/**
+			 * We have to adjust the sortOrder property of the tasks
+			 * to achieve the desired sort order.
+			 */
+			this.adjustSortOrder(null, $event.newIndex, $event.oldIndex)
+		},
+
+		/**
+		 * Called when a task is dropped.
+		 * We handle changing the parent task, calendar or collection here
+		 * and also have to sort a task to the correct position
+		 * in case of manual sort order.
 		 *
 		 * @param {Object} $event The event which caused the drop
 		 */
@@ -76,6 +195,11 @@ export default {
 			if (taskAttribute) {
 				task = this.getTask(taskAttribute.value)
 			}
+			/**
+			 * We have to adjust the sortOrder property of the tasks
+			 * to achieve the desired sort order.
+			 */
+			this.adjustSortOrder(task, $event.newIndex, -1)
 			// Move the task to a new calendar or parent.
 			this.prepareMoving(task, $event)
 			this.prepareCollecting(task, $event)

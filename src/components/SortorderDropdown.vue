@@ -43,6 +43,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <script>
 import Actions from '@nextcloud/vue/dist/Components/Actions'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
+import { mapGetters } from 'vuex'
 
 export default {
 	name: 'SortorderDropdown',
@@ -96,26 +97,30 @@ export default {
 					text: this.$t('tasks', 'Priority'),
 					hint: this.$t('tasks', 'Sort by priority and summary.'),
 				},
-				// Manual sorting is not yet implemented
-				// {
-				//  id: 'manual',
-				//  icon: 'icon-manual',
-				//  text: this.$t('tasks', 'Manually'),
-				//  hint: this.$t('tasks', 'Sort by manual order.')
-				// },
 				{
 					id: 'alphabetically',
 					icon: 'icon-alphabetically',
 					text: this.$t('tasks', 'Alphabetically'),
 					hint: this.$t('tasks', 'Sort by summary and priority.'),
 				},
+				{
+					id: 'manual',
+					icon: 'icon-manual',
+					text: this.$t('tasks', 'Manually'),
+					hint: this.$t('tasks', 'Sort by manual order.'),
+				},
 			],
 		}
 	},
 	computed: {
+		...mapGetters({
+			sortOrderGetter: 'sortOrder',
+			sortDirectionGetter: 'sortDirection',
+		}),
+
 		sortOrder: {
 			get() {
-				return this.$store.state.settings.settings.sortOrder
+				return this.sortOrderGetter
 			},
 			set(order) {
 				this.$store.dispatch('setSetting', { type: 'sortOrder', value: order })
@@ -123,7 +128,7 @@ export default {
 		},
 		sortDirection: {
 			get() {
-				return this.$store.state.settings.settings.sortDirection
+				return this.sortDirectionGetter
 			},
 			set(direction) {
 				this.$store.dispatch('setSetting', { type: 'sortDirection', value: +direction })

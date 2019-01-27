@@ -46,16 +46,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<span class="heading__title">{{ calendar.displayName }}</span>
 				</h2>
 				<TaskDragContainer
-					:calendar-id="calendar.id"
-					:collection-id="collectionId"
+					:tasks="calendar.filteredTasks"
 					:disabled="calendar.readOnly"
-					class="tasks"
-					type="list">
-					<TaskBody v-for="task in sort(calendar.filteredTasks, sortOrder, sortDirection)"
-						:key="task.key"
-						:task="task"
-						:collection-string="collectionId" />
-				</TaskDragContainer>
+					:collection-string="collectionId"
+					:calendar-id="calendar.id"
+					:collection-id="collectionId" />
 				<LoadCompletedButton v-if="collectionId === 'completed'" :calendar="calendar" />
 			</div>
 		</div>
@@ -65,15 +60,13 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <script>
 import moment from '@nextcloud/moment'
 import { mapGetters, mapActions } from 'vuex'
-import { sort, isTaskInList, isParentInList } from '../../store/storeHelper'
+import { isTaskInList, isParentInList } from '../../store/storeHelper'
 import SortorderDropdown from '../SortorderDropdown'
 import LoadCompletedButton from '../LoadCompletedButton'
-import TaskBody from '../TaskBody'
 import TaskDragContainer from '../TaskDragContainer'
 
 export default {
 	components: {
-		TaskBody,
 		SortorderDropdown,
 		LoadCompletedButton,
 		TaskDragContainer,
@@ -129,15 +122,12 @@ export default {
 		...mapGetters({
 			calendar: 'getDefaultCalendar',
 			calendars: 'getSortedCalendars',
-			sortOrder: 'sortOrder',
-			sortDirection: 'sortDirection',
 		}),
 	},
 	methods: {
 		...mapActions([
 			'createTask',
 		]),
-		sort,
 		clearNewTask(event) {
 			event.target.blur()
 			this.newTaskName = ''
