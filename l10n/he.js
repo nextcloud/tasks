@@ -1,9 +1,9 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "משימות",
     "The name \"%s\" is already used." : "השם \"%s\" כבר קיים.",
     "An empty name is not allowed." : "שדה שם ריק אינו מותר.",
+    "Tasks" : "משימות",
     "Important" : "חשוב",
     "Today" : "היום",
     "Week" : "שבוע",

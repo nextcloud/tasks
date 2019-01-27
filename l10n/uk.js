@@ -1,9 +1,9 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Завдання",
     "The name \"%s\" is already used." : "Назва \"%s\" вже використовується.",
     "An empty name is not allowed." : "Порожнє поле не допускається.",
+    "Tasks" : "Завдання",
     "Important" : "Важливий",
     "Today" : "Сьогодні",
     "Week" : "Тиждень",

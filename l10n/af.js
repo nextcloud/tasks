@@ -1,9 +1,9 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Take",
     "The name \"%s\" is already used." : "Die naam “%s” bestaan reeds.",
     "An empty name is not allowed." : "’n Leë naam word nie toegestaan nie.",
+    "Tasks" : "Take",
     "Important" : "Belangrik",
     "Today" : "Vandag",
     "Week" : "Week",

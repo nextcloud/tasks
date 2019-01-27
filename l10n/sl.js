@@ -1,9 +1,9 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Naloge",
     "The name \"%s\" is already used." : "Ime \"%s\" je že v uporabi.",
     "An empty name is not allowed." : "Prazno polje imena ni dovoljeno.",
+    "Tasks" : "Naloge",
     "Important" : "Pomembno",
     "Today" : "Danes",
     "Week" : "Teden",

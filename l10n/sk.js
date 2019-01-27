@@ -1,10 +1,10 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Úlohy",
     "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Táto operácia odstráni kalendár \"%s\" a všetky jeho udalosti a úlohy.",
     "The name \"%s\" is already used." : "Názov \"%s\" je už použitý.",
     "An empty name is not allowed." : "Prázdny názov nie je povolený",
+    "Tasks" : "Úlohy",
     "Important" : "Dôležité",
     "Today" : "Dnes",
     "Week" : "Týždeň",

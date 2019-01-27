@@ -1,9 +1,9 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "งาน",
     "The name \"%s\" is already used." : "ชื่อ \"%s\" ถูกใช้ไปแล้ว",
     "An empty name is not allowed." : "ชื่อห้ามปล่อยว่าง",
+    "Tasks" : "งาน",
     "Important" : "สำคัญ",
     "Today" : "วันนี้",
     "Week" : "สัปดาห์",

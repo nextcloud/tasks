@@ -1,10 +1,10 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Tasques",
     "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Això suprimirà el calendari \"%s\" i tots els esdeveniments corresponents i tasques.",
     "The name \"%s\" is already used." : "El nom \"%s\" ja està usat.",
     "An empty name is not allowed." : "No es permet un nom buit.",
+    "Tasks" : "Tasques",
     "Important" : "Important",
     "Today" : "Avui",
     "Week" : "Setmana",

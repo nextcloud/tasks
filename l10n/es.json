@@ -1,8 +1,8 @@
 { "translations": {
-    "Tasks" : "Tareas",
     "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Esto eliminará el calendario \"%s\" y todos sus correspondientes eventos y tareas.",
     "The name \"%s\" is already used." : "El nombre \"%s\" ya está en uso.",
     "An empty name is not allowed." : "No se puede dejar el nombre en blanco.",
+    "Tasks" : "Tareas",
     "Important" : "Importante",
     "Today" : "Hoy",
     "Week" : "Semana",

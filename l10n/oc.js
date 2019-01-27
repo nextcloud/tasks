@@ -1,9 +1,9 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Prètzfaches",
     "The name \"%s\" is already used." : "Lo nom \"%s\" es ja utilizat.",
     "An empty name is not allowed." : "Un nom void es pas autorizat.",
+    "Tasks" : "Prètzfaches",
     "Important" : "Important",
     "Today" : "Uèi",
     "Week" : "Aquesta setmana",

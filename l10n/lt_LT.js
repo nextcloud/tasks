@@ -1,10 +1,10 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Užduotys",
     "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Tai ištrins kalendorių \"%s\" ir visus atitinkamus įvykius ir užduotis.",
     "The name \"%s\" is already used." : "Pavadinimas „%s“ jau naudojamas.",
     "An empty name is not allowed." : "Pavadinimas yra būtinas",
+    "Tasks" : "Užduotys",
     "Important" : "Svarbus",
     "Today" : "Šiandien",
     "Week" : "Savaitė",

@@ -1,9 +1,9 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Ülesanded",
     "The name \"%s\" is already used." : "Nimi \"%s\" on juba kasutuses.",
     "An empty name is not allowed." : "Nime lahter ei tohi olla tühi.",
+    "Tasks" : "Ülesanded",
     "Important" : "Tähtis",
     "Today" : "Täna",
     "Week" : "Nädal",

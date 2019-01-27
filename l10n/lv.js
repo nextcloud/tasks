@@ -1,9 +1,9 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Uzdevumi",
     "The name \"%s\" is already used." : "Nosaukums \"%s\" jau tiek lietots.",
     "An empty name is not allowed." : "Nosaukums ir obligāts.",
+    "Tasks" : "Uzdevumi",
     "Important" : "Svarīgi",
     "Today" : "Šodien",
     "Week" : "Nedēļa",

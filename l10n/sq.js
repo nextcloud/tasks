@@ -1,9 +1,9 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Detyra",
     "The name \"%s\" is already used." : "Emri \"%s\" është tashmë në përdorim.",
     "An empty name is not allowed." : "Nuk lejohet emër i zbrazët.",
+    "Tasks" : "Detyra",
     "Important" : "E rëndësishme",
     "Today" : "Sot",
     "Week" : "Javë",

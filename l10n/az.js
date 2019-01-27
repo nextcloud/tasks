@@ -1,9 +1,9 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Tapşırıqlar",
     "The name \"%s\" is already used." : "Ad \"%s\" artıq istifadə edilir.",
     "An empty name is not allowed." : "Boş ada izin verilmir.",
+    "Tasks" : "Tapşırıqlar",
     "Important" : "Vacib",
     "Today" : "Bu gün",
     "Week" : "Həftə",

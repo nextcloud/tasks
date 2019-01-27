@@ -1,9 +1,9 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Xeres",
     "The name \"%s\" is already used." : "El nome \"%s\" yá ta usándose.",
     "An empty name is not allowed." : "Nun s'almite un nome baleru",
+    "Tasks" : "Xeres",
     "Important" : "Importante",
     "Today" : "Güei",
     "Week" : "Selmana",

@@ -1,8 +1,8 @@
 { "translations": {
-    "Tasks" : "Feladatok",
     "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Ez törölni fogja a Naptár \"%s\" és a hozzá kapcsolódó eseményeket és feladatokat.",
     "The name \"%s\" is already used." : "Ez a név \"%s\" már foglalt.",
     "An empty name is not allowed." : "Az üres név nem engedélyezett.",
+    "Tasks" : "Feladatok",
     "Important" : "Fontos",
     "Today" : "Ma",
     "Week" : "Hét",

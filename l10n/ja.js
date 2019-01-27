@@ -1,9 +1,9 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "タスク",
     "The name \"%s\" is already used." : "名前 \"%s\" はすでに使われています。",
     "An empty name is not allowed." : "件名を入力してください。",
+    "Tasks" : "タスク",
     "Important" : "重要",
     "Today" : "今日",
     "Week" : "週",

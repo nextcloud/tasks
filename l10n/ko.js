@@ -1,9 +1,9 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "작업",
     "The name \"%s\" is already used." : "이름 \"%s\"이(가) 이미 사용 중입니다.",
     "An empty name is not allowed." : "이름을 비워둘 수 없습니다.",
+    "Tasks" : "작업",
     "Important" : "중요",
     "Today" : "오늘",
     "Week" : "주",

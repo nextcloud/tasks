@@ -1,9 +1,9 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "დავალებები",
     "The name \"%s\" is already used." : "სახელი \"%s\" უკვე დაკავებულია",
     "An empty name is not allowed." : "ცარიელი სახელი არაა ნებადართული",
+    "Tasks" : "დავალებები",
     "Important" : "აუცილებელი",
     "Today" : "დღეს",
     "Week" : "კვირა",

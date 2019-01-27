@@ -1,9 +1,9 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Εργασίες",
     "The name \"%s\" is already used." : "Το όνομα \"%s\" χρησιμοποιείται ήδη.",
     "An empty name is not allowed." : "Δεν επιτρέπεται κενό όνομα.",
+    "Tasks" : "Εργασίες",
     "Important" : "Σημαντικό ",
     "Today" : "Σήμερα",
     "Week" : "Εβδομάδα",
