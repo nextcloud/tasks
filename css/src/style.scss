@@ -451,6 +451,14 @@
 		}
 	}
 
+	&.sortable-ghost .task-body {
+		background-color: rgba( $color-primary, .3 );
+	}
+
+	&.dragover > div.subtasks-container > ol {
+		min-height: 37px;
+	}
+
 	.subtasks-container {
 		margin-left: 35px;
 

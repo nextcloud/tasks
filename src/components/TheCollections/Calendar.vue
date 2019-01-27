@@ -39,30 +39,31 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		<SortorderDropdown />
 		<div class="task-list">
 			<div class="grouped-tasks">
-				<ol :calendarId="calendarId"
+				<task-drag-container
+					:calendar-id="calendarId"
 					class="tasks"
-					collectionId="uncompleted"
+					collection-id="uncompleted"
 					type="list"
 				>
 					<Task v-for="task in sort(uncompletedRootTasks(calendar.tasks), sortOrder, sortDirection)"
 						:key="task.id"
 						:task="task"
 					/>
-				</ol>
+				</task-drag-container>
 				<h2 v-show="completedCount(calendarId)" class="heading-hiddentasks icon-triangle-s reactive" @click="toggleHidden">
 					{{ completedCountString }}
 				</h2>
-				<ol v-if="showHidden"
-					:calendarId="calendarId"
+				<task-drag-container v-if="showHidden"
+					:calendar-id="calendarId"
 					class="completed-tasks"
-					collectionId="completed"
+					collection-id="completed"
 					type="list"
 				>
 					<Task v-for="task in sort(completedRootTasks(calendar.tasks), sortOrder, sortDirection)"
 						:key="task.id"
 						:task="task"
 					/>
-				</ol>
+				</task-drag-container>
 				<LoadCompletedButton :calendar="calendar" />
 			</div>
 		</div>
@@ -75,12 +76,14 @@ import { sort } from '../../store/storeHelper'
 import SortorderDropdown from '../SortorderDropdown'
 import LoadCompletedButton from '../LoadCompletedButton'
 import Task from '../Task'
+import TaskDragContainer from '../TaskDragContainer'
 
 export default {
 	components: {
 		'Task': Task,
 		'SortorderDropdown': SortorderDropdown,
-		'LoadCompletedButton': LoadCompletedButton
+		'LoadCompletedButton': LoadCompletedButton,
+		TaskDragContainer,
 	},
 	props: {
 		calendarId: {
@@ -146,7 +149,15 @@ export default {
 		addTask: function() {
 			this.createTask({ summary: this.newTaskName, calendar: this.calendar })
 			this.newTaskName = ''
-		}
+		},
+
+		onMove: function($event, $originalEvent) {
+			console.debug($event)
+			console.debug($event.target)
+			console.debug($event.to)
+			// console.debug('target: ' + $event.target.attributes['task-id'].value)
+			// console.debug('to: ' + $event.to.attributes['task-id'].value)
+		},
 	}
 }
 </script>

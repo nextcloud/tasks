@@ -45,8 +45,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<h2 class="heading">
 					{{ calendar.displayName }}
 				</h2>
-				<ol :calendarID="calendar.id"
-					:collectionID="collectionId"
+				<task-drag-container
+					:calendar-id="calendar.id"
+					:collection-id="collectionId"
 					class="tasks"
 					type="list"
 				>
@@ -54,7 +55,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						:key="task.id"
 						:task="task"
 					/>
-				</ol>
+				</task-drag-container>
 				<LoadCompletedButton v-if="collectionId === 'completed'" :calendar="calendar" />
 			</div>
 		</div>
@@ -67,12 +68,14 @@ import { sort, isTaskInList, isParentInList } from '../../store/storeHelper'
 import SortorderDropdown from '../SortorderDropdown'
 import LoadCompletedButton from '../LoadCompletedButton'
 import TaskBody from '../Task'
+import TaskDragContainer from '../TaskDragContainer'
 
 export default {
 	components: {
 		'TaskBody': TaskBody,
 		'SortorderDropdown': SortorderDropdown,
-		'LoadCompletedButton': LoadCompletedButton
+		'LoadCompletedButton': LoadCompletedButton,
+		TaskDragContainer,
 	},
 	data() {
 		return {

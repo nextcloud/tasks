@@ -28,16 +28,16 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<h2 class="heading">
 					{{ day.diff | formatDay }}
 				</h2>
-				<ol collectionID="week"
+				<task-drag-container
+					collection-id="week"
 					class="tasks"
-					listID=""
 					type="list"
 				>
 					<TaskBody v-for="task in sort(day.tasks, sortOrder, sortDirection)"
 						:key="task.id"
 						:task="task"
 					/>
-				</ol>
+				</task-drag-container>
 			</div>
 		</div>
 	</div>
@@ -48,11 +48,13 @@ import { mapGetters } from 'vuex'
 import { sort } from '../../store/storeHelper'
 import SortorderDropdown from '../SortorderDropdown'
 import TaskBody from '../Task'
+import TaskDragContainer from '../TaskDragContainer'
 
 export default {
 	components: {
 		'TaskBody': TaskBody,
-		'SortorderDropdown': SortorderDropdown
+		'SortorderDropdown': SortorderDropdown,
+		TaskDragContainer,
 	},
 	filters: {
 		formatDay: function(day) {
