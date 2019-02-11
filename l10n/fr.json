@@ -49,6 +49,8 @@
     "[Starts tomorrow]" : "[Débute demain]",
     "[Starts tomorrow at] LT" : "[Débute demain à] LT",
     "[Started yesterday at] LT" : "[Débuté hier à] LT",
+    "[Due today]" : "[Pour aujourd'hui]",
+    "[Due tomorrow]" : "[Pour demain]",
     "No priority assigned" : "Aucune priorité définie",
     "Priority %s: high" : "Priorité %s : haute",
     "Priority %s: medium" : "Priorité %s : moyenne",
