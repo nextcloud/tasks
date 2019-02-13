@@ -1,9 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Bu işlem \"%s\" takvimi ile ilgili tüm etkinlik ve görevleri silecek.",
-    "The name \"%s\" is already used." : "\"%s\" adı zaten var.",
-    "An empty name is not allowed." : "Ad boş bırakılamaz.",
     "Tasks" : "Görevler",
     "Important" : "Önemli",
     "Today" : "Bugün",
@@ -95,6 +92,9 @@ OC.L10N.register(
     "New List" : "Yeni Liste",
     "Calendar link copied to clipboard." : "Takvim bağlantısı panoya kopyalandı.",
     "Calendar link could not be copied to clipboard." : "Takvim bağlantısı panoya kopyalanamadı.",
+    "The name \"%s\" is already used." : "\"%s\" adı zaten var.",
+    "An empty name is not allowed." : "Ad boş bırakılamaz.",
+    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Bu işlem \"%s\" takvimi ile ilgili tüm etkinlik ve görevleri silecek.",
     "Settings" : "Ayarlar",
     "Default list" : "Varsayılan liste",
     "Visibility of Smart Collections" : "Akıllı Derleme Görünürlüğü",

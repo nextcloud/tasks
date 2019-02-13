@@ -1,9 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Tämä poistaa kalenterin \"%s\" ja kaikki sitä vastaavat tapahtumat sekä tehtävät.",
-    "The name \"%s\" is already used." : "Nimi \"%s\" on jo käytössä.",
-    "An empty name is not allowed." : "Nimi ei voi olla tyhjä.",
     "Tasks" : "Tehtävät",
     "Important" : "Tärkeä",
     "Today" : "Tänään",
@@ -53,6 +50,9 @@ OC.L10N.register(
     "New List" : "Uusi luettelo",
     "Calendar link copied to clipboard." : "Kalenterilinkki kopioitu leikepöydälle.",
     "Calendar link could not be copied to clipboard." : "Kalenterilinkkiä ei voitu kopioida leikepöydälle.",
+    "The name \"%s\" is already used." : "Nimi \"%s\" on jo käytössä.",
+    "An empty name is not allowed." : "Nimi ei voi olla tyhjä.",
+    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Tämä poistaa kalenterin \"%s\" ja kaikki sitä vastaavat tapahtumat sekä tehtävät.",
     "Settings" : "Asetukset",
     "Default list" : "Oletusluettelo",
     "Visibility of Smart Collections" : "Älykkäiden kokoelmien näkyvyys",

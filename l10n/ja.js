@@ -1,8 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "The name \"%s\" is already used." : "名前 \"%s\" はすでに使われています。",
-    "An empty name is not allowed." : "件名を入力してください。",
     "Tasks" : "タスク",
     "Important" : "重要",
     "Today" : "今日",
@@ -32,6 +30,8 @@ OC.L10N.register(
     "Save" : "保存",
     "Add List..." : "リストを追加...",
     "New List" : "新規リスト",
+    "The name \"%s\" is already used." : "名前 \"%s\" はすでに使われています。",
+    "An empty name is not allowed." : "件名を入力してください。",
     "Settings" : "設定",
     "Visibility of Smart Collections" : "スマートコレクションの表示",
     "Hidden" : "隠す",

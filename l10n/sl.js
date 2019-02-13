@@ -1,8 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "The name \"%s\" is already used." : "Ime \"%s\" je že v uporabi.",
-    "An empty name is not allowed." : "Prazno polje imena ni dovoljeno.",
     "Tasks" : "Naloge",
     "Important" : "Pomembno",
     "Today" : "Danes",
@@ -33,6 +31,8 @@ OC.L10N.register(
     "Save" : "Shrani",
     "Add List..." : "Dodaj seznam ...",
     "New List" : "Nov seznam",
+    "The name \"%s\" is already used." : "Ime \"%s\" je že v uporabi.",
+    "An empty name is not allowed." : "Prazno polje imena ni dovoljeno.",
     "Settings" : "Nastavitve",
     "Visibility of Smart Collections" : "Vidnost pametnih zbirk",
     "Hidden" : "Skrito",

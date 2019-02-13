@@ -1,9 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "This will delete the calendar \"%s\" and all corresponding events and tasks.",
-    "The name \"%s\" is already used." : "The name \"%s\" is already used.",
-    "An empty name is not allowed." : "An empty name is not allowed.",
     "Tasks" : "Tasks",
     "Important" : "Important",
     "Today" : "Today",
@@ -35,6 +32,9 @@ OC.L10N.register(
     "Save" : "Save",
     "Add List..." : "Add List...",
     "New List" : "New List",
+    "The name \"%s\" is already used." : "The name \"%s\" is already used.",
+    "An empty name is not allowed." : "An empty name is not allowed.",
+    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "This will delete the calendar \"%s\" and all corresponding events and tasks.",
     "Settings" : "Settings",
     "Visibility of Smart Collections" : "Visibility of Smart Collections",
     "Hidden" : "Hidden",

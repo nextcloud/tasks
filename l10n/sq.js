@@ -1,8 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "The name \"%s\" is already used." : "Emri \"%s\" është tashmë në përdorim.",
-    "An empty name is not allowed." : "Nuk lejohet emër i zbrazët.",
     "Tasks" : "Detyra",
     "Important" : "E rëndësishme",
     "Today" : "Sot",
@@ -32,6 +30,8 @@ OC.L10N.register(
     "Save" : "Ruaje",
     "Add List..." : "Shtoni Listë…",
     "New List" : "Listë e Re",
+    "The name \"%s\" is already used." : "Emri \"%s\" është tashmë në përdorim.",
+    "An empty name is not allowed." : "Nuk lejohet emër i zbrazët.",
     "Settings" : "Rregullime",
     "Visibility of Smart Collections" : "Dukshmëri Koleksionesh të Mençura",
     "Hidden" : "I padukshëm",

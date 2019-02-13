@@ -1,8 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "The name \"%s\" is already used." : "Nosaukums \"%s\" jau tiek lietots.",
-    "An empty name is not allowed." : "Nosaukums ir obligāts.",
     "Tasks" : "Uzdevumi",
     "Important" : "Svarīgi",
     "Today" : "Šodien",
@@ -32,6 +30,8 @@ OC.L10N.register(
     "Save" : "Saglabāt",
     "Add List..." : "Pievienot sarakstu",
     "New List" : "Jauns saraksts",
+    "The name \"%s\" is already used." : "Nosaukums \"%s\" jau tiek lietots.",
+    "An empty name is not allowed." : "Nosaukums ir obligāts.",
     "Settings" : "Iestatījumi",
     "Visibility of Smart Collections" : "Viedo kolekciju redzamība",
     "Hidden" : "Paslēpts",

@@ -1,8 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "The name \"%s\" is already used." : "\"%s\" izena dagoeneko erabilita dago.",
-    "An empty name is not allowed." : "Hutsa ez da izentzat onartzen.",
     "Tasks" : "Zereginak",
     "Important" : "Garrantzitsua",
     "Today" : "Gaur",
@@ -29,6 +27,8 @@ OC.L10N.register(
     "Save" : "Gorde",
     "Add List..." : "Gehitu zerrenda...",
     "New List" : "Zerrenda berria",
+    "The name \"%s\" is already used." : "\"%s\" izena dagoeneko erabilita dago.",
+    "An empty name is not allowed." : "Hutsa ez da izentzat onartzen.",
     "Settings" : "Ezarpenak",
     "Visibility of Smart Collections" : "Bilduma argien ikusgarritasuna",
     "Hidden" : "Ezkutua",

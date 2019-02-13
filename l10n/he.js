@@ -1,8 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "The name \"%s\" is already used." : "השם \"%s\" כבר קיים.",
-    "An empty name is not allowed." : "שדה שם ריק אינו מותר.",
     "Tasks" : "משימות",
     "Important" : "חשוב",
     "Today" : "היום",
@@ -33,6 +31,8 @@ OC.L10N.register(
     "Save" : "שמירה",
     "Add List..." : "הוספת רשימה...",
     "New List" : "רשימה חדשה",
+    "The name \"%s\" is already used." : "השם \"%s\" כבר קיים.",
+    "An empty name is not allowed." : "שדה שם ריק אינו מותר.",
     "Settings" : "הגדרות",
     "Visibility of Smart Collections" : "הצגה של אוספים חכמים",
     "Hidden" : "מוסתר",

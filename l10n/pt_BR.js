@@ -1,9 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Isso irá excluir o calendário \"%s\" e todas as tarefas e eventos dele.",
-    "The name \"%s\" is already used." : "O nome \"%s\" já está em uso.",
-    "An empty name is not allowed." : "Não é permitido nome em branco",
     "Tasks" : "Tarefas",
     "Important" : "Importante",
     "Today" : "Hoje",
@@ -95,6 +92,9 @@ OC.L10N.register(
     "New List" : "Nova Lista",
     "Calendar link copied to clipboard." : "Link do calendário copiado para a área de transferência.",
     "Calendar link could not be copied to clipboard." : "O link do calendário não pôde ser copiado para a área de transferência.",
+    "The name \"%s\" is already used." : "O nome \"%s\" já está em uso.",
+    "An empty name is not allowed." : "Não é permitido nome em branco",
+    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Isso irá excluir o calendário \"%s\" e todas as tarefas e eventos dele.",
     "Settings" : "Configurações",
     "Default list" : "Lista padrão",
     "Visibility of Smart Collections" : "Visibilidade das Coleções Inteligentes",

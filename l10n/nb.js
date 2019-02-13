@@ -1,9 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Dette sletter kalender \"%s\" og alle hendelser og oppgaver i denne.",
-    "The name \"%s\" is already used." : "Navnet \"%s\" er i bruk allerede.",
-    "An empty name is not allowed." : "Et tomt navn er ikke tillatt.",
     "Tasks" : "Oppgaver",
     "Important" : "Viktig",
     "Today" : "I dag",
@@ -35,6 +32,9 @@ OC.L10N.register(
     "Save" : "Lagre",
     "Add List..." : "Legg til liste…",
     "New List" : "Ny liste",
+    "The name \"%s\" is already used." : "Navnet \"%s\" er i bruk allerede.",
+    "An empty name is not allowed." : "Et tomt navn er ikke tillatt.",
+    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Dette sletter kalender \"%s\" og alle hendelser og oppgaver i denne.",
     "Settings" : "Innstillinger",
     "Visibility of Smart Collections" : "Synlighet for smarte samlinger",
     "Hidden" : "Skjult",

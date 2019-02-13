@@ -1,8 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "The name \"%s\" is already used." : "Lo nom \"%s\" es ja utilizat.",
-    "An empty name is not allowed." : "Un nom void es pas autorizat.",
     "Tasks" : "Prètzfaches",
     "Important" : "Important",
     "Today" : "Uèi",
@@ -24,6 +22,8 @@ OC.L10N.register(
     "Save" : "Enregistrar",
     "Add List..." : "Apondre una lista...",
     "New List" : "Novèla lista",
+    "The name \"%s\" is already used." : "Lo nom \"%s\" es ja utilizat.",
+    "An empty name is not allowed." : "Un nom void es pas autorizat.",
     "Settings" : "Paramètres",
     "Visibility of Smart Collections" : "Visibilitat de las colleccions Smart",
     "Hidden" : "Amagat",

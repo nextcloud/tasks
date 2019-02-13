@@ -1,8 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "The name \"%s\" is already used." : "Назва \"%s\" вже використовується.",
-    "An empty name is not allowed." : "Порожнє поле не допускається.",
     "Tasks" : "Завдання",
     "Important" : "Важливий",
     "Today" : "Сьогодні",
@@ -32,6 +30,8 @@ OC.L10N.register(
     "Save" : "Зберегти",
     "Add List..." : "Додати список...",
     "New List" : "Новий список",
+    "The name \"%s\" is already used." : "Назва \"%s\" вже використовується.",
+    "An empty name is not allowed." : "Порожнє поле не допускається.",
     "Settings" : "Налаштування",
     "Visibility of Smart Collections" : "Видимість Smart-колекції",
     "Hidden" : "Прихований",

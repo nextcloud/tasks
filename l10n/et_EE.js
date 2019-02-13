@@ -1,8 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "The name \"%s\" is already used." : "Nimi \"%s\" on juba kasutuses.",
-    "An empty name is not allowed." : "Nime lahter ei tohi olla tühi.",
     "Tasks" : "Ülesanded",
     "Important" : "Tähtis",
     "Today" : "Täna",
@@ -32,6 +30,8 @@ OC.L10N.register(
     "Save" : "Salvesta",
     "Add List..." : "Lisa nimekiri...",
     "New List" : "Uus nimekiri",
+    "The name \"%s\" is already used." : "Nimi \"%s\" on juba kasutuses.",
+    "An empty name is not allowed." : "Nime lahter ei tohi olla tühi.",
     "Settings" : "Seaded",
     "Visibility of Smart Collections" : "Nutikate kollektsioonide nähtavus",
     "Hidden" : "Peidetud",

@@ -1,9 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Dit verwijdert agenda \"%s\" en alle bijbehorende afspraken en taken.",
-    "The name \"%s\" is already used." : "De naam \"%s\" is al in gebruik.",
-    "An empty name is not allowed." : "Een lege naam is niet toegestaan.",
     "Tasks" : "Taken",
     "Important" : "Belangrijk",
     "Today" : "Vandaag",
@@ -95,6 +92,9 @@ OC.L10N.register(
     "New List" : "Nieuwe lijst",
     "Calendar link copied to clipboard." : "Kalenderlink gekopieerd naar klembord.",
     "Calendar link could not be copied to clipboard." : "Kalenderlink kon niet worden gekopieerd naar klembord.",
+    "The name \"%s\" is already used." : "De naam \"%s\" is al in gebruik.",
+    "An empty name is not allowed." : "Een lege naam is niet toegestaan.",
+    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Dit verwijdert agenda \"%s\" en alle bijbehorende afspraken en taken.",
     "Settings" : "Instellingen",
     "Default list" : "Standaardlijst",
     "Visibility of Smart Collections" : "Zichtbaarheid van Slimme Verzamelingen",

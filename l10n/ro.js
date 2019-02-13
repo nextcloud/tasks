@@ -1,8 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "The name \"%s\" is already used." : "Numele \"%s\" este deja folosit.",
-    "An empty name is not allowed." : "Un nume vid nu este permis.",
     "Tasks" : "Sarcini",
     "Important" : "Important",
     "Today" : "Astăzi",
@@ -24,6 +22,8 @@ OC.L10N.register(
     "Save" : "Salvează",
     "Add List..." : "Adaugă o listă...",
     "New List" : "Listă nouă",
+    "The name \"%s\" is already used." : "Numele \"%s\" este deja folosit.",
+    "An empty name is not allowed." : "Un nume vid nu este permis.",
     "Settings" : "Setări",
     "Visibility of Smart Collections" : "Vizibilitatea colecțiilor inteligente",
     "Hidden" : "Ascuns",

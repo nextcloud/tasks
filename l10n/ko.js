@@ -1,8 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "The name \"%s\" is already used." : "이름 \"%s\"이(가) 이미 사용 중입니다.",
-    "An empty name is not allowed." : "이름을 비워둘 수 없습니다.",
     "Tasks" : "작업",
     "Important" : "중요",
     "Today" : "오늘",
@@ -32,6 +30,8 @@ OC.L10N.register(
     "Save" : "저장",
     "Add List..." : "목록 추가...",
     "New List" : "새 목록",
+    "The name \"%s\" is already used." : "이름 \"%s\"이(가) 이미 사용 중입니다.",
+    "An empty name is not allowed." : "이름을 비워둘 수 없습니다.",
     "Settings" : "설정",
     "Visibility of Smart Collections" : "똑똑한 모음집 표시 여부",
     "Hidden" : "숨김",

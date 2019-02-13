@@ -1,9 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Это действие удалит календарь «%s» и все его события и задачи.",
-    "The name \"%s\" is already used." : "Имя \"%s\" уже используется.",
-    "An empty name is not allowed." : "Пустые имена не допускаются.",
     "Tasks" : "Задачи",
     "Important" : "Важный",
     "Today" : "Сегодня",
@@ -36,6 +33,9 @@ OC.L10N.register(
     "Save" : "Сохранить",
     "Add List..." : "Добавить Список…",
     "New List" : "Новый список",
+    "The name \"%s\" is already used." : "Имя \"%s\" уже используется.",
+    "An empty name is not allowed." : "Пустые имена не допускаются.",
+    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Это действие удалит календарь «%s» и все его события и задачи.",
     "Settings" : "Настройки",
     "Visibility of Smart Collections" : "Доступность Умных Коллекций",
     "Hidden" : "Скрывать",

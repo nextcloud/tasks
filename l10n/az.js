@@ -1,8 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "The name \"%s\" is already used." : "Ad \"%s\" artıq istifadə edilir.",
-    "An empty name is not allowed." : "Boş ada izin verilmir.",
     "Tasks" : "Tapşırıqlar",
     "Important" : "Vacib",
     "Today" : "Bu gün",
@@ -24,6 +22,8 @@ OC.L10N.register(
     "Save" : "Saxla",
     "Add List..." : "Siyahını əlavə et...",
     "New List" : "Yeni Siyahı",
+    "The name \"%s\" is already used." : "Ad \"%s\" artıq istifadə edilir.",
+    "An empty name is not allowed." : "Boş ada izin verilmir.",
     "Visibility of Smart Collections" : "Ağıllı yiğımların görünməsi",
     "Hidden" : "Gizli",
     "Visible" : "Görünən",

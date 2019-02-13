@@ -1,7 +1,4 @@
 { "translations": {
-    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Detta kommer att radera kalendern \"%s\" och alla dess händelser och uppgifter.",
-    "The name \"%s\" is already used." : "Namnet \"%s\" används redan.",
-    "An empty name is not allowed." : "Ett tomt namn är inte tillåtet.",
     "Tasks" : "Uppgifter",
     "Important" : "Viktigt",
     "Today" : "Idag",
@@ -31,6 +28,9 @@
     "Save" : "Spara",
     "Add List..." : "Lägg till lista ...",
     "New List" : "Ny lista",
+    "The name \"%s\" is already used." : "Namnet \"%s\" används redan.",
+    "An empty name is not allowed." : "Ett tomt namn är inte tillåtet.",
+    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Detta kommer att radera kalendern \"%s\" och alla dess händelser och uppgifter.",
     "Settings" : "Inställningar",
     "Visibility of Smart Collections" : "Synlighet av smarta samlingar",
     "Hidden" : "Gömd",

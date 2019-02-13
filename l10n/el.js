@@ -1,8 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "The name \"%s\" is already used." : "Το όνομα \"%s\" χρησιμοποιείται ήδη.",
-    "An empty name is not allowed." : "Δεν επιτρέπεται κενό όνομα.",
     "Tasks" : "Εργασίες",
     "Important" : "Σημαντικό ",
     "Today" : "Σήμερα",
@@ -32,6 +30,8 @@ OC.L10N.register(
     "Save" : "Αποθήκευση",
     "Add List..." : "Προσθήκη Λίστας...",
     "New List" : "Νέα Λίστα",
+    "The name \"%s\" is already used." : "Το όνομα \"%s\" χρησιμοποιείται ήδη.",
+    "An empty name is not allowed." : "Δεν επιτρέπεται κενό όνομα.",
     "Settings" : "Ρυθμίσεις",
     "Visibility of Smart Collections" : "Ορατότητα Έξυπνων Συλλογών",
     "Hidden" : "Κρυφό",

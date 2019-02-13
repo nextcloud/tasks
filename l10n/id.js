@@ -1,8 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "The name \"%s\" is already used." : "Nama \"%s\" sudah digunakan.",
-    "An empty name is not allowed." : "Nama kosong tidak diperbolehkan.",
     "Tasks" : "Tugas",
     "Important" : "Penting",
     "Today" : "Hari Ini",
@@ -24,6 +22,8 @@ OC.L10N.register(
     "Save" : "Simpan",
     "Add List..." : "Tambah Daftar...",
     "New List" : "Daftar Baru",
+    "The name \"%s\" is already used." : "Nama \"%s\" sudah digunakan.",
+    "An empty name is not allowed." : "Nama kosong tidak diperbolehkan.",
     "Settings" : "Pengaturan",
     "Visibility of Smart Collections" : "Visibilitas Koleksi Cerdas",
     "Hidden" : "Sembunyi",

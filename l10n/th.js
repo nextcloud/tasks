@@ -1,8 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "The name \"%s\" is already used." : "ชื่อ \"%s\" ถูกใช้ไปแล้ว",
-    "An empty name is not allowed." : "ชื่อห้ามปล่อยว่าง",
     "Tasks" : "งาน",
     "Important" : "สำคัญ",
     "Today" : "วันนี้",
@@ -30,6 +28,8 @@ OC.L10N.register(
     "Save" : "บันทึก",
     "Add List..." : "เพิ่มรายชื่อ ...",
     "New List" : "รายชื่อใหม่",
+    "The name \"%s\" is already used." : "ชื่อ \"%s\" ถูกใช้ไปแล้ว",
+    "An empty name is not allowed." : "ชื่อห้ามปล่อยว่าง",
     "Settings" : "ตั้งค่า",
     "Visibility of Smart Collections" : "การแสดงผลของสมาร์ทคอลเลกชัน",
     "Hidden" : "ซ่อน",

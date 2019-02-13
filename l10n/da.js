@@ -1,8 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "The name \"%s\" is already used." : "Navnet \"%s\" er allerede i brug.",
-    "An empty name is not allowed." : "Et tomt navn er ikke tilladt.",
     "Tasks" : "Opgaver",
     "Important" : "Vigtigt",
     "Today" : "I dag",
@@ -35,6 +33,8 @@ OC.L10N.register(
     "Save" : "Gem",
     "Add List..." : "Tilføj liste...",
     "New List" : "Ny liste",
+    "The name \"%s\" is already used." : "Navnet \"%s\" er allerede i brug.",
+    "An empty name is not allowed." : "Et tomt navn er ikke tilladt.",
     "Settings" : "Indstillinger",
     "Visibility of Smart Collections" : "Synlighed for smarte samlinger",
     "Hidden" : "Skjult",

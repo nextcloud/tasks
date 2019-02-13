@@ -1,9 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Ez törölni fogja a Naptár \"%s\" és a hozzá kapcsolódó eseményeket és feladatokat.",
-    "The name \"%s\" is already used." : "Ez a név \"%s\" már foglalt.",
-    "An empty name is not allowed." : "Az üres név nem engedélyezett.",
     "Tasks" : "Feladatok",
     "Important" : "Fontos",
     "Today" : "Ma",
@@ -35,6 +32,9 @@ OC.L10N.register(
     "Save" : "Mentés",
     "Add List..." : "Lista hozzáadása",
     "New List" : "Új lista",
+    "The name \"%s\" is already used." : "Ez a név \"%s\" már foglalt.",
+    "An empty name is not allowed." : "Az üres név nem engedélyezett.",
+    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Ez törölni fogja a Naptár \"%s\" és a hozzá kapcsolódó eseményeket és feladatokat.",
     "Settings" : "Beállítások",
     "Visibility of Smart Collections" : "Okos gyűjtemény láthatósága",
     "Hidden" : "Rejtett",

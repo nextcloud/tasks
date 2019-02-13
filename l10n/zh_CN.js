@@ -1,9 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "这将删除日历“%s”以及所有相应的事件和任务。",
-    "The name \"%s\" is already used." : "名称 \"%s\" 已被使用。",
-    "An empty name is not allowed." : "不允许使用空名称。",
     "Tasks" : "任务",
     "Important" : "重要",
     "Today" : "今天",
@@ -35,6 +32,9 @@ OC.L10N.register(
     "Save" : "保存",
     "Add List..." : "添加列表...",
     "New List" : "新列表",
+    "The name \"%s\" is already used." : "名称 \"%s\" 已被使用。",
+    "An empty name is not allowed." : "不允许使用空名称。",
+    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "这将删除日历“%s”以及所有相应的事件和任务。",
     "Settings" : "设置",
     "Visibility of Smart Collections" : "智能集合的可见性",
     "Hidden" : "隐藏",

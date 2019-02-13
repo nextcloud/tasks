@@ -1,8 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "The name \"%s\" is already used." : "Le nomine \"%s\" ja es usate.",
-    "An empty name is not allowed." : "Un nomine vacue non es permittite.",
     "Important" : "Importante",
     "Today" : "Hodie",
     "Week" : "Septimana",
@@ -24,6 +22,8 @@ OC.L10N.register(
     "Save" : "Salveguardar",
     "Add List..." : "Adder Lista...",
     "New List" : "Nove Lista",
+    "The name \"%s\" is already used." : "Le nomine \"%s\" ja es usate.",
+    "An empty name is not allowed." : "Un nomine vacue non es permittite.",
     "Settings" : "Configurationes",
     "Visibility of Smart Collections" : "Visibilitate de Collectiones Intelligente",
     "Hidden" : "Occultate",

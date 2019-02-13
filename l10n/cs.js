@@ -1,9 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Toto smaže kalendář „%s“ a všechny události a úkoly v něm.",
-    "The name \"%s\" is already used." : "Název „%s“ je už používán.",
-    "An empty name is not allowed." : "Prázdný název není povolen.",
     "Tasks" : "Úkoly",
     "Important" : "Důležité",
     "Today" : "Dnes",
@@ -95,6 +92,9 @@ OC.L10N.register(
     "New List" : "Nový seznam",
     "Calendar link copied to clipboard." : "Odkaz do kalendáře zkopírován do schránky.",
     "Calendar link could not be copied to clipboard." : "Odkaz do kalendáře se nepodařilo zkopírovat do schránky.",
+    "The name \"%s\" is already used." : "Název „%s“ je už používán.",
+    "An empty name is not allowed." : "Prázdný název není povolen.",
+    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Toto smaže kalendář „%s“ a všechny události a úkoly v něm.",
     "Settings" : "Nastavení",
     "Default list" : "Výchozí seznam",
     "Visibility of Smart Collections" : "Viditelnost Chytrých kolekcí",

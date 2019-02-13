@@ -1,8 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "The name \"%s\" is already used." : "Den Numm \"%s\" gëtt scho gebraucht.",
-    "An empty name is not allowed." : "En eidelen Numm ass net erlaabt.",
     "Tasks" : "Tâchen",
     "Important" : "Wichteg",
     "Today" : "Haut",
@@ -24,6 +22,8 @@ OC.L10N.register(
     "Save" : "Späicheren",
     "Add List..." : "Lëscht bäifügen",
     "New List" : "Nei Lëscht",
+    "The name \"%s\" is already used." : "Den Numm \"%s\" gëtt scho gebraucht.",
+    "An empty name is not allowed." : "En eidelen Numm ass net erlaabt.",
     "Settings" : "Astellungen",
     "Hidden" : "Verstoppt",
     "Visible" : "Visibel",

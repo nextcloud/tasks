@@ -1,9 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Þetta mun eyða dagatalinu \"%s\" og öllum færslum þess.",
-    "The name \"%s\" is already used." : "Nafnið \"%s\" er þegar í notkun.",
-    "An empty name is not allowed." : "Autt heiti er ekki leyft.",
     "Tasks" : "Verkefni",
     "Important" : "Mikilvægt",
     "Today" : "Í dag",
@@ -95,6 +92,9 @@ OC.L10N.register(
     "New List" : "Nýr listi",
     "Calendar link copied to clipboard." : "Dagatalstengill afritaður á klippispjald.",
     "Calendar link could not be copied to clipboard." : "Ekki var hægt að afrita dagatalstengil á klippispjald.",
+    "The name \"%s\" is already used." : "Nafnið \"%s\" er þegar í notkun.",
+    "An empty name is not allowed." : "Autt heiti er ekki leyft.",
+    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Þetta mun eyða dagatalinu \"%s\" og öllum færslum þess.",
     "Settings" : "Stillingar",
     "Default list" : "Sjálfgefinn listi",
     "Visibility of Smart Collections" : "Sýnileiki snjallsafna (Smart Collections)",

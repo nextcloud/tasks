@@ -1,8 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "The name \"%s\" is already used." : "El nome \"%s\" yá ta usándose.",
-    "An empty name is not allowed." : "Nun s'almite un nome baleru",
     "Tasks" : "Xeres",
     "Important" : "Importante",
     "Today" : "Güei",
@@ -30,6 +28,8 @@ OC.L10N.register(
     "Save" : "Guardar",
     "Add List..." : "Amestar Llista...",
     "New List" : "Nueva Llista",
+    "The name \"%s\" is already used." : "El nome \"%s\" yá ta usándose.",
+    "An empty name is not allowed." : "Nun s'almite un nome baleru",
     "Settings" : "Axustes",
     "Visibility of Smart Collections" : "Visibilidá de Coleiciones Intelixentes",
     "Hidden" : "Anubríu",

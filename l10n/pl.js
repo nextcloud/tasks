@@ -1,8 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "The name \"%s\" is already used." : "Nazwa \"%s\" jest już używana.",
-    "An empty name is not allowed." : "Pusta nazwa nie jest dozwolona.",
     "Tasks" : "Zadania",
     "Important" : "Ważne",
     "Today" : "Dziś",
@@ -34,6 +32,8 @@ OC.L10N.register(
     "Save" : "Zapisz",
     "Add List..." : "Dodaj listę…",
     "New List" : "Nowa lista",
+    "The name \"%s\" is already used." : "Nazwa \"%s\" jest już używana.",
+    "An empty name is not allowed." : "Pusta nazwa nie jest dozwolona.",
     "Settings" : "Ustawienia",
     "Visibility of Smart Collections" : "Widoczność Smart Collections",
     "Hidden" : "Ukryty",

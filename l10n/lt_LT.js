@@ -1,9 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Tai ištrins kalendorių \"%s\" ir visus atitinkamus įvykius ir užduotis.",
-    "The name \"%s\" is already used." : "Pavadinimas „%s“ jau naudojamas.",
-    "An empty name is not allowed." : "Pavadinimas yra būtinas",
     "Tasks" : "Užduotys",
     "Important" : "Svarbus",
     "Today" : "Šiandien",
@@ -35,6 +32,9 @@ OC.L10N.register(
     "Save" : "Įrašyti",
     "Add List..." : "Pridėti sąrašą...",
     "New List" : "Naujas sąrašas",
+    "The name \"%s\" is already used." : "Pavadinimas „%s“ jau naudojamas.",
+    "An empty name is not allowed." : "Pavadinimas yra būtinas",
+    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Tai ištrins kalendorių \"%s\" ir visus atitinkamus įvykius ir užduotis.",
     "Settings" : "Nustatymai",
     "Visibility of Smart Collections" : "Išmanių rinkinių matomumas",
     "Hidden" : "Paslėpta",

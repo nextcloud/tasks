@@ -1,8 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "The name \"%s\" is already used." : "名稱 \"%s\" 已被使用.",
-    "An empty name is not allowed." : "不允許空白的名稱.",
     "Tasks" : "工作項目",
     "Important" : "重要",
     "Today" : "今天",
@@ -31,6 +29,8 @@ OC.L10N.register(
     "Save" : "儲存",
     "Add List..." : "新增列表...",
     "New List" : "新列表",
+    "The name \"%s\" is already used." : "名稱 \"%s\" 已被使用.",
+    "An empty name is not allowed." : "不允許空白的名稱.",
     "Settings" : "設定",
     "Hidden" : "隱藏",
     "Visible" : "顯示",

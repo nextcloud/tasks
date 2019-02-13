@@ -1,9 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Ово ће обрисати календар „%s“ и све догађаје и задатке из њега.",
-    "The name \"%s\" is already used." : "Назив „%s“ се већ користи.",
-    "An empty name is not allowed." : "Празан назив није дозвољен.",
     "Tasks" : "Задаци",
     "Important" : "Важно",
     "Today" : "Данас",
@@ -79,6 +76,9 @@ OC.L10N.register(
     "New List" : "Нова листа",
     "Calendar link copied to clipboard." : "Веза календара копирана у оставу.",
     "Calendar link could not be copied to clipboard." : "Веза календара није могла да се копира у оставу.",
+    "The name \"%s\" is already used." : "Назив „%s“ се већ користи.",
+    "An empty name is not allowed." : "Празан назив није дозвољен.",
+    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Ово ће обрисати календар „%s“ и све догађаје и задатке из њега.",
     "Settings" : "Поставке",
     "Default list" : "Подразумевани списак",
     "Visibility of Smart Collections" : "Видљивост паметних збирки",

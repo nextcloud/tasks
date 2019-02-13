@@ -1,9 +1,6 @@
 OC.L10N.register(
     "tasks",
     {
-    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Dadurch werden der Kalender „%s“ und alle zugehörigen Ereignisse und Aufgaben gelöscht.",
-    "The name \"%s\" is already used." : "Der Name „%s“ wird bereits verwendet.",
-    "An empty name is not allowed." : "Ein leerer Name ist nicht erlaubt.",
     "Tasks" : "Aufgaben",
     "Important" : "Wichtig",
     "Today" : "Heute",
@@ -95,6 +92,9 @@ OC.L10N.register(
     "New List" : "Neue Liste",
     "Calendar link copied to clipboard." : "Kalender-Link in die Zwischenablage kopiert.",
     "Calendar link could not be copied to clipboard." : "Kalender-Link konnte nicht in die Zwischenablage kopiert werden.",
+    "The name \"%s\" is already used." : "Der Name „%s“ wird bereits verwendet.",
+    "An empty name is not allowed." : "Ein leerer Name ist nicht erlaubt.",
+    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "Dadurch werden der Kalender „%s“ und alle zugehörigen Ereignisse und Aufgaben gelöscht.",
     "Settings" : "Einstellungen",
     "Default list" : "Standardliste",
     "Visibility of Smart Collections" : "Sichtbarkeit der intelligenten Sammlungen",
