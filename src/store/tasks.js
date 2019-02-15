@@ -598,6 +598,21 @@ const actions = {
 	},
 
 	/**
+	 * Schedules an update request for a given task
+	 *
+	 * @param {Object} context The store context
+	 * @param {Task} task The task to update
+	 * @returns {Promise}
+	 */
+	async scheduleTaskUpdate(context, task) {
+		// If there already is an update request scheduled that has not started yet,
+		// we don't have to schedule another one.
+		if (!task.updateQueue.size) {
+			task.updateQueue.add(() => context.dispatch('updateTask', task))
+		}
+	},
+
+	/**
 	 * Updates a task
 	 *
 	 * @param {Object} context The store context
@@ -666,7 +681,7 @@ const actions = {
 			}))
 		}
 		context.commit('setComplete', { task: task, complete: complete })
-		context.dispatch('updateTask', task)
+		context.dispatch('scheduleTaskUpdate', task)
 	},
 
 	/**
@@ -677,7 +692,7 @@ const actions = {
 	 */
 	async toggleSubtasksVisibility(context, task) {
 		context.commit('toggleSubtasksVisibility', task)
-		context.dispatch('updateTask', task)
+		context.dispatch('scheduleTaskUpdate', task)
 	},
 
 	/**
@@ -688,7 +703,7 @@ const actions = {
 	 */
 	async toggleCompletedSubtasksVisibility(context, task) {
 		context.commit('toggleCompletedSubtasksVisibility', task)
-		context.dispatch('updateTask', task)
+		context.dispatch('scheduleTaskUpdate', task)
 	},
 
 	/**
@@ -699,7 +714,7 @@ const actions = {
 	 */
 	async toggleStarred(context, task) {
 		context.commit('toggleStarred', task)
-		context.dispatch('updateTask', task)
+		context.dispatch('scheduleTaskUpdate', task)
 	},
 
 	/**
@@ -710,7 +725,7 @@ const actions = {
 	 */
 	async setSummary(context, { task, summary }) {
 		context.commit('setSummary', { task: task, summary: summary })
-		context.dispatch('updateTask', task)
+		context.dispatch('scheduleTaskUpdate', task)
 	},
 
 	/**
@@ -721,7 +736,7 @@ const actions = {
 	 */
 	async setNote(context, { task, note }) {
 		context.commit('setNote', { task: task, note: note })
-		context.dispatch('updateTask', task)
+		context.dispatch('scheduleTaskUpdate', task)
 	},
 
 	/**
@@ -732,7 +747,7 @@ const actions = {
 	 */
 	async setCategories(context, { task, categories }) {
 		context.commit('setCategories', { task: task, categories: categories })
-		context.dispatch('updateTask', task)
+		context.dispatch('scheduleTaskUpdate', task)
 	},
 
 	/**
@@ -743,7 +758,7 @@ const actions = {
 	 */
 	async addCategory(context, { task, category }) {
 		context.commit('addCategory', { task: task, category: category })
-		context.dispatch('updateTask', task)
+		context.dispatch('scheduleTaskUpdate', task)
 	},
 
 	/**
@@ -756,7 +771,7 @@ const actions = {
 		// check priority to comply with RFC5545 (to be between 0 and 9)
 		priority = (+priority < 0) ? 0 : (+priority > 9) ? 9 : Math.round(+priority)
 		context.commit('setPriority', { task: task, priority: priority })
-		context.dispatch('updateTask', task)
+		context.dispatch('scheduleTaskUpdate', task)
 	},
 
 	/**
@@ -767,7 +782,7 @@ const actions = {
 	 */
 	async setDue(context, { task, due }) {
 		context.commit('setDue', { task: task, due: due })
-		context.dispatch('updateTask', task)
+		context.dispatch('scheduleTaskUpdate', task)
 	},
 
 	/**
@@ -778,7 +793,7 @@ const actions = {
 	 */
 	async setStart(context, { task, start }) {
 		context.commit('setStart', { task: task, start: start })
-		context.dispatch('updateTask', task)
+		context.dispatch('scheduleTaskUpdate', task)
 	},
 
 	/**
@@ -789,7 +804,7 @@ const actions = {
 	 */
 	async toggleAllDay(context, task) {
 		context.commit('toggleAllDay', task)
-		context.dispatch('updateTask', task)
+		context.dispatch('scheduleTaskUpdate', task)
 	},
 
 	/**

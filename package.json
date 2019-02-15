@@ -38,6 +38,7 @@
 		"linkify-it": "~2.1.0",
 		"nextcloud-vue": "^0.6.3",
 		"p-limit": "^2.1.0",
+		"p-queue": "^3.0.0",
 		"uuid": "^3.3.2",
 		"v-tooltip": "2.0.0-rc.33",
 		"vue": "^2.6.6",

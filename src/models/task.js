@@ -24,6 +24,7 @@
 
 import uuid from 'uuid'
 import ICAL from 'ical.js'
+import PQueue from 'p-queue'
 
 export default class Task {
 
@@ -57,6 +58,11 @@ export default class Task {
 		this.initTodo()
 
 		this.syncstatus = null
+
+		// Queue for update requests with concurrency 1,
+		// because we only want to allow one request at a time
+		// (otherwise we will run into problems with changed ETags).
+		this.updateQueue = new PQueue({ concurrency: 1 })
 	}
 
 	initTodo() {
