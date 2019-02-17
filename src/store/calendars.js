@@ -489,7 +489,8 @@ const actions = {
 
 						// If necessary, add the tasks as subtasks to parent tasks already present in the store.
 						if (!related) {
-							context.commit('addTaskToParent', parent)
+							let parentParent = context.getters.getTaskByUid(parent.related)
+							context.commit('addTaskToParent', { task: parent, parent: parentParent })
 						}
 					}
 				)
