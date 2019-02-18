@@ -43,7 +43,8 @@ export default {
 	},
 	data() {
 		let md = new MarkdownIt({
-			linkify: this.linkify
+			linkify: this.linkify,
+			breaks: true,
 		})
 			.use(MarkdownItEmoji)
 			.use(Mila, {
