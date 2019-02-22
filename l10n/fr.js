@@ -46,6 +46,8 @@ OC.L10N.register(
     "Task not found!" : "Tâche non trouvée !",
     "[Starts today]" : "[Débute aujourd'hui]",
     "[Starts tomorrow]" : "[Débute demain]",
+    "[Started on] LL" : "[Démarré le] LL",
+    "[Started today at] LT" : "[Démarré aujourd'hui à] LT",
     "[Starts tomorrow at] LT" : "[Débute demain à] LT",
     "[Started yesterday at] LT" : "[Débuté hier à] LT",
     "[Due today]" : "[Pour aujourd'hui]",
