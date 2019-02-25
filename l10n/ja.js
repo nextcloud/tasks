@@ -14,6 +14,7 @@ OC.L10N.register(
     "Default" : "デフォルト",
     "Due date" : "期限",
     "Start date" : "開始日",
+    "Created date" : "データーを作成",
     "Priority" : "優先度",
     "Manually" : "手動",
     "Alphabetically" : "アルファベット順",
