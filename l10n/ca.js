@@ -27,8 +27,8 @@ OC.L10N.register(
     "All day" : "Tot el dia",
     "Task not found!" : "La tasca no s'ha trobat!",
     "%s %% completed" : "%s %% completat",
-    "Edit" : "Editar",
-    "Download" : "Descàrrega",
+    "Edit" : "Edita",
+    "Download" : "Descarrega",
     "Save" : "Desa",
     "Add List..." : "Afegeix Llista...",
     "New List" : "Nova llista",
@@ -39,6 +39,7 @@ OC.L10N.register(
     "Visibility of Smart Collections" : "Visibilitat de les col·leccions intel·ligents",
     "Hidden" : "Ocult",
     "Visible" : "Visible",
-    "Automatic" : "Automàtic"
+    "Automatic" : "Automàtic",
+    "An error occurred" : "S'ha produït un error"
 },
 "nplurals=2; plural=(n != 1);");
