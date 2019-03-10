@@ -26,6 +26,7 @@ OC.L10N.register(
     "Task not found!" : "Uppgift ej hittad!",
     "%s %% completed" : "%s %% slutfört",
     "Edit" : "Ändra",
+    "Copied" : "Kopierad",
     "Download" : "Ladda ned",
     "Save" : "Spara",
     "Add List..." : "Lägg till lista ...",
