@@ -148,6 +148,10 @@ function sort(tasks, sortOrder, sortDirection) {
 		comparators = [sortByModified, sortAlphabetically]
 		break
 	}
+	case 'completedDate': {
+		comparators = [sortByCompletedDate, sortAlphabetically]
+		break
+	}
 	default:
 		comparators = [sortByCompleted, sortByPriority, sortByStart, sortAlphabetically]
 	}
@@ -234,6 +238,17 @@ function sortByStart(taskA, taskB) {
  */
 function sortByModified(taskA, taskB) {
 	return sortByDate(taskA, taskB, 'modified')
+}
+
+/**
+ * Comparator proxy to compare two tasks by completed date in ascending order
+ *
+ * @param {Task} taskA The first task
+ * @param {Task} taskB The second task
+ * @returns {Integer}
+ */
+function sortByCompletedDate(taskA, taskB) {
+	return sortByDate(taskA, taskB, 'completedDate')
 }
 
 /**
