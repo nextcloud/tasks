@@ -97,6 +97,12 @@ export default {
 					hint: t('tasks', 'Sort by last-modified date and summary.')
 				},
 				{
+					id: 'completedDate',
+					icon: 'icon-calendar',
+					text: t('tasks', 'Completed date'),
+					hint: t('tasks', 'Sort by completed date.')
+				},
+				{
 					id: 'priority',
 					icon: 'icon-task-star',
 					text: t('tasks', 'Priority'),
@@ -141,6 +147,7 @@ export default {
 			case 'due':
 			case 'start':
 			case 'created':
+			case 'completedDate':
 			case 'modified':
 				icon = 'calendar'
 				break

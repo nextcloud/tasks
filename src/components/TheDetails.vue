@@ -460,6 +460,7 @@ export default {
 		taskInfo: function() {
 			return t('tasks', 'Last modified %s').replace('%s', moment(this.task.modified, 'YYYY-MM-DDTHH:mm:ss').calendar())
 				+ '<br />' + t('tasks', 'Created %s').replace('%s', moment(this.task.created, 'YYYY-MM-DDTHH:mm:ss').calendar())
+				+ (this.task.completed ? ('<br />' + t('tasks', 'Completed %s').replace('%s', moment(this.task.completedDate, 'YYYY-MM-DDTHH:mm:ss').calendar())) : '')
 		},
 		isAllDayPossible: function() {
 			return !this.task.calendar.readOnly && (this.task.due || this.task.start)

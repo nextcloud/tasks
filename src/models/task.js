@@ -84,7 +84,9 @@ export default class Task {
 		this._summary = this.vtodo.getFirstPropertyValue('summary') || ''
 		this._priority = this.vtodo.getFirstPropertyValue('priority')
 		this._complete = this.vtodo.getFirstPropertyValue('percent-complete') || 0
-		this._completed = !!this.vtodo.getFirstPropertyValue('completed')
+		var comp = this.vtodo.getFirstPropertyValue('completed')
+		this._completed = !!comp
+		this._completedDate = comp ? comp.toJSDate() : null
 		this._status = this.vtodo.getFirstPropertyValue('status')
 		this._note = this.vtodo.getFirstPropertyValue('description') || ''
 		this._related = this.vtodo.getFirstPropertyValue('related-to') || null
@@ -264,16 +266,13 @@ export default class Task {
 			this.vtodo.removeProperty('completed')
 		}
 		this.updateLastModified()
-		this._completed = !!this.vtodo.getFirstPropertyValue('completed')
+		var comp = this.vtodo.getFirstPropertyValue('completed')
+		this._completed = !!comp
+		this._completedDate = comp ? comp.toJSDate() : null
 	}
 
 	get completedDate() {
-		var comp = this.vtodo.getFirstPropertyValue('completed')
-		if (comp) {
-			return comp.toJSDate()
-		} else {
-			return null
-		}
+		return this._completedDate
 	}
 
 	get status() {
