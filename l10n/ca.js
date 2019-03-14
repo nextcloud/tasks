@@ -12,7 +12,7 @@ OC.L10N.register(
     "Once enabled, a new Tasks menu will appear in your Nextcloud apps menu. From there you can add and delete tasks, edit their title, description, start and due dates, reminder times, mark them as important, and add comments on them. Tasks can be shared between users. Tasks can be synchronized using CalDav (each task list is linked to an Nextcloud calendar, to sync it to your local client - Thunderbird, Evolution, KDE Kontact, iCal... - just add the calendar as a remote calendar in you client). You can download your tasks as ICS files using the download button for each calendar." : "Una vegada permès, apareixerà un nou menú de Tasques al seu menú d'aplicacions Nextcloud. Des d'allà pot afegir i suprimir les tasques, editar seu títol, descripció, dates d’inici i venciments, hores de recordatoris, marcar-les com importants i afegir comentaris sobre elles. Les tasques es poden compartir entre usuaris. Les tasques es poden sincronitzar mitjançant CalDav (cada llista de tasques està vinculada a un calendari de Nextcloud, per sincronitzar amb el seu client local - Thunderbird, Evolution, KDE Kontact, iCal... - només afegeixi el calendari com a calendari remot en el teu client). Pots descarregar les teves tasques com a fitxers ICS utilitzant el botó de descàrrega per a cada calendari.",
     "Delete" : "Esborra",
     "Cancel" : "Cancel·la",
-    "Load all completed tasks." : "Carrega totes les tasques completades",
+    "Load all completed tasks." : "Carrega totes les tasques completades.",
     "Change sort order" : "Canvia l'ordre",
     "Default" : "Per defecte",
     "Sort by completed state, priority, start date and summary." : "Ordena per estat, prioritat, data d'inici i resum.",
