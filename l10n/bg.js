@@ -42,6 +42,7 @@ OC.L10N.register(
     "Add this as a new category" : "Добави като нова категория",
     "Task not found!" : "Задачата не е намерена!",
     "%s %% completed" : "%s %% завършени",
+    "Last modified %s" : "Последна промяна: %s",
     "Edit" : "Редакция",
     "Download" : "Изтегляне",
     "Save" : "Запазване",
