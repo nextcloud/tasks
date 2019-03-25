@@ -34,6 +34,7 @@ OC.L10N.register(
     "The name \"%s\" is already used." : "名前 \"%s\" はすでに使われています。",
     "An empty name is not allowed." : "件名を入力してください。",
     "Settings" : "設定",
+    "Default list" : "デフォルトリスト",
     "Visibility of Smart Collections" : "スマートコレクションの表示",
     "Hidden" : "隠す",
     "Visible" : "表示する",
