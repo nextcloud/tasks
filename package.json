@@ -27,7 +27,7 @@
 	"dependencies": {
 		"@babel/polyfill": "^7.4.0",
 		"axios": "^0.18.0",
-		"cdav-library": "github:nextcloud/cdav-library#c27587a4fdb318d10ef329548d146755964e6672",
+		"cdav-library": "github:nextcloud/cdav-library#3ec4dae028f086fed3e1baa49ec6f6dd04c95043",
 		"ical.js": "~1.3.0",
 		"jstimezonedetect": "",
 		"linkifyjs": "~2.1.8",
@@ -36,7 +36,7 @@
 		"markdown-it-link-attributes": "~2.1.0",
 		"markdown-it-task-lists": "~2.1.1",
 		"linkify-it": "~2.1.0",
-		"nextcloud-vue": "^0.9.3",
+		"nextcloud-vue": "^0.9.4",
 		"p-limit": "^2.2.0",
 		"p-queue": "^4.0.0",
 		"uuid": "^3.3.2",
