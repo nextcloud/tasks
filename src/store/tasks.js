@@ -26,7 +26,6 @@ import Task from '../models/task'
 import { isParentInList, momentToICALTime } from './storeHelper'
 import ICAL from 'ical.js'
 import TaskStatus from '../models/taskStatus'
-import { getAppVersion } from '../services/productInformationProvider'
 
 Vue.use(Vuex)
 
@@ -525,7 +524,7 @@ const actions = {
 			taskData.calendar = context.getters.getDefaultCalendar
 		}
 
-		let task = new Task('BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Nextcloud Tasks v' + getAppVersion() + '\nEND:VCALENDAR', taskData.calendar)
+		let task = new Task('BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Nextcloud Tasks v' + appVersion + '\nEND:VCALENDAR', taskData.calendar)
 
 		task.created = ICAL.Time.now()
 		task.summary = taskData.summary

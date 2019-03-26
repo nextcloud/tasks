@@ -43,7 +43,13 @@ module.exports = {
 			}
 		]
 	},
-	plugins: [new VueLoaderPlugin(), new StyleLintPlugin()],
+	plugins: [
+		new VueLoaderPlugin(),
+		new StyleLintPlugin(),
+		new webpack.DefinePlugin({
+			appVersion: JSON.stringify(require('./package.json').version)
+		})
+	],
 	resolve: {
 		extensions: ['*', '.js', '.vue', '.json']
 	}
