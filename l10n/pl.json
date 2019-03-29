@@ -41,7 +41,7 @@
     "Add a task to \"{calendar}\"..." : "Dodaj zadanie do \"{kalendarz}\"...",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n zakończone zadanie","%n zakończonych zadań","%n zakończonych zadań","%n zakończonych zadań"],
     "Add an important task to \"{calendar}\"..." : "Dodaj ważne zadanie do \"{kalendarz}\"...",
-    "Add a task due today to \"{calendar}\"..." : "Dodaj zadanie na dzisiaj do \"{kalendarz}\"...",
+    "Add a task due today to \"{calendar}\"..." : "Dodaj zadanie na dzisiaj do \"{calendar}\"...",
     "Add a current task to \"{calendar}\"..." : "Dodaj aktualne zadanie do \"{kalendarz}\"...",
     "Tomorrow" : "Jutro",
     "Set start date" : "Ustaw datę rozpoczęcia",

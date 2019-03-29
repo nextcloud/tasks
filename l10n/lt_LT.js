@@ -67,6 +67,7 @@ OC.L10N.register(
     "Created %s" : "Sukurta %s",
     "Completed %s" : "Atlikta %s",
     "Edit" : "Taisyti",
+    "Copy private link" : "Kopijuoti privačią nuorodą",
     "Download" : "Atsisiųsti",
     "Save" : "Įrašyti",
     "Add List..." : "Pridėti sąrašą...",
