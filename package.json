@@ -40,7 +40,7 @@
 		"p-limit": "^2.2.0",
 		"p-queue": "^5.0.0",
 		"uuid": "^3.3.2",
-		"v-tooltip": "2.0.0-rc.33",
+		"v-tooltip": "2.0.0",
 		"vue": "^2.6.10",
 		"vue-clipboard2": "^0.3.0",
 		"vue-router": "3.0.3",
