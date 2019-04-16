@@ -36,7 +36,7 @@
 		"markdown-it-link-attributes": "~2.1.0",
 		"markdown-it-task-lists": "~2.1.1",
 		"linkify-it": "~2.1.0",
-		"nextcloud-vue": "^0.9.7",
+		"nextcloud-vue": "^0.10.0",
 		"p-limit": "^2.2.0",
 		"p-queue": "^5.0.0",
 		"uuid": "^3.3.2",
