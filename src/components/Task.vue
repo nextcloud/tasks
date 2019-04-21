@@ -24,6 +24,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 	<li	v-show="showTask"
 		:task-id="task.uri"
 		:class="{done: task.completed}"
+		:data-priority="[task.priority]"
 		class="task-item"
 	>
 		<div :task-id="task.uri"
