@@ -153,7 +153,7 @@ function sort(tasks, sortOrder, sortDirection) {
 		break
 	}
 	default:
-		comparators = [sortByCompleted, sortByPriority, sortByStart, sortAlphabetically]
+		comparators = [sortByCompleted, sortByDue, sortByPriority, sortByStart, sortAlphabetically]
 	}
 	var sortedTasks = tasks.sort((taskA, taskB) => {
 		var compIndex = 0
