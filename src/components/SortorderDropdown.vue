@@ -70,7 +70,7 @@ export default {
 					id: 'default',
 					icon: 'icon-list',
 					text: t('tasks', 'Default'),
-					hint: t('tasks', 'Sort by completed state, priority, start date and summary.')
+					hint: t('tasks', 'Sort by completed state, due date, priority, start date and summary.')
 				},
 				{
 					id: 'due',
