@@ -73,6 +73,7 @@
 		"jsdom": "^15.0.0",
 		"jsdom-global": "^3.0.2",
 		"node-sass": "^4.11.0",
+		"moment": "^2.24.0",
 		"prettier-eslint": "^8.8.2",
 		"raw-loader": "^2.0.0",
 		"sass-loader": "^7.1.0",
