@@ -272,11 +272,11 @@ function sortByCreated(taskA, taskB) {
  */
 function sortByDate(taskA, taskB, date) {
 	if (taskA[date] === null && taskB[date] !== null) {
-		return -1
+		return 1
 	}
 
 	if (taskA[date] !== null && taskB[date] === null) {
-		return 1
+		return -1
 	}
 
 	if (taskA[date] === null && taskB[date] === null) {
