@@ -634,7 +634,7 @@ const actions = {
 						// Saving the new etag so that the user can manually
 						// trigger a fetchCompleteData without any further errors
 						task.conflict = error.xhr.getResponseHeader('etag')
-						task.syncstatus = new TaskStatus('refresh', t('tasks', 'Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared.'), 'fetchFullTask')
+						task.syncstatus = new TaskStatus('refresh', t('tasks', 'Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded.'), 'fetchFullTask')
 					} else {
 						task.syncstatus = new TaskStatus('error', t('tasks', 'Could not update the task.'))
 					}
