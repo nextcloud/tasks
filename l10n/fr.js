@@ -15,7 +15,6 @@ OC.L10N.register(
     "Load all completed tasks." : "Charger toutes les tâches terminées.",
     "Change sort order" : "Modifier l'ordre de tri",
     "Default" : "Défaut",
-    "Sort by completed state, priority, start date and summary." : "Trier par état terminé, priorité, date de début et résumé.",
     "Due date" : "Date d'échéance",
     "Sort by due date and summary." : "Trier par échéance et résumé.",
     "Start date" : "Date de début",

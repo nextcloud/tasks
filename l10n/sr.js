@@ -15,7 +15,6 @@ OC.L10N.register(
     "Load all completed tasks." : "Учитај све завршене задатке.",
     "Change sort order" : "Промени сортирање",
     "Default" : "Подразумевано",
-    "Sort by completed state, priority, start date and summary." : "Сортирај по датуму завршетка, приоритету, датуму почетка и опису.",
     "Due date" : "Рок",
     "Sort by due date and summary." : "Сортирај по року и опису",
     "Start date" : "Датум почетка",

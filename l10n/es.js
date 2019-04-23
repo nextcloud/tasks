@@ -15,7 +15,6 @@ OC.L10N.register(
     "Load all completed tasks." : "Cargar todas las tareas completadas.",
     "Change sort order" : "Cambiar el orden",
     "Default" : "Predeterminado",
-    "Sort by completed state, priority, start date and summary." : "Ordenar por estado de completado, prioridad, fecha de inicio y resumen.",
     "Due date" : "Fecha límite",
     "Sort by due date and summary." : "Ordenar por fecha tope y resumen.",
     "Start date" : "Fecha inicial",

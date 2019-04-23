@@ -15,7 +15,6 @@ OC.L10N.register(
     "Load all completed tasks." : "Laad alle voltooide taken.",
     "Change sort order" : "Volgorde wijzigen",
     "Default" : "Standaard",
-    "Sort by completed state, priority, start date and summary." : "Sorteer op voltooide status, prioriteit, startdatum en samenvatting.",
     "Due date" : "Vervaldatum",
     "Sort by due date and summary." : "Sorteer op vervaldatum en samenvatting.",
     "Start date" : "Startdatum",

@@ -15,7 +15,6 @@ OC.L10N.register(
     "Load all completed tasks." : "Tüm tamamlanmış görevleri yükler.",
     "Change sort order" : "Sıralamayı değiştir",
     "Default" : "Varsayılan",
-    "Sort by completed state, priority, start date and summary." : "Tamamlanma durumu, öncelik, başlangıç tarihi ve özete göre sıralar.",
     "Due date" : "Bitiş tarihi",
     "Sort by due date and summary." : "Bitiş tarihi ve özete göre sıralar.",
     "Start date" : "Başlangıç ​​tarihi",

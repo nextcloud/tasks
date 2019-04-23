@@ -15,7 +15,6 @@ OC.L10N.register(
     "Load all completed tasks." : "Załaduj wszystkie ukończone zadania.",
     "Change sort order" : "Zmień kierunek sortowania",
     "Default" : "Domyślny",
-    "Sort by completed state, priority, start date and summary." : "Sortuj według ukończonego stanu, priorytetu, daty rozpoczęcia i podsumowania.",
     "Due date" : "Data do",
     "Sort by due date and summary." : "Sortuj według daty zakończenia i podsumowania.",
     "Start date" : "Data od",

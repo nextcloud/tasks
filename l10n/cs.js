@@ -15,7 +15,6 @@ OC.L10N.register(
     "Load all completed tasks." : "Načíst všechny dokončené úlohy.",
     "Change sort order" : "Změnit řazení",
     "Default" : "Výchozí",
-    "Sort by completed state, priority, start date and summary." : "Seřadit podle stavu dokončení, priority, data zahájení a shrnutí.",
     "Due date" : "Datum ukončení",
     "Sort by due date and summary." : "Seřadit podle termínu a shrnutí.",
     "Start date" : "Datum počátku",

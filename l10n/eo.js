@@ -15,7 +15,6 @@ OC.L10N.register(
     "Load all completed tasks." : "Ŝargi ĉiujn plenumitajn taskojn.",
     "Change sort order" : "Ŝanĝi ordigon",
     "Default" : "Defaŭlta",
-    "Sort by completed state, priority, start date and summary." : "Ordigi laŭ plenumstato, prioritato, komencdato kaj resumo.",
     "Due date" : "Limdato",
     "Sort by due date and summary." : "Ordigi laŭ limdato kaj resumo.",
     "Start date" : "Komencdato",

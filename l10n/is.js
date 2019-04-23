@@ -15,7 +15,6 @@ OC.L10N.register(
     "Load all completed tasks." : "Hlaða inn öllum loknum verkum.",
     "Change sort order" : "Breyta röðun",
     "Default" : "Sjálfgefið",
-    "Sort by completed state, priority, start date and summary." : "Raða eftir framvindustöðu, forgangi, upphafsdagsetningu og yfirliti.",
     "Due date" : "Skiladagur",
     "Sort by due date and summary." : "Raða eftir skiladagsetningu og yfirliti.",
     "Start date" : "Upphafsdagur",
