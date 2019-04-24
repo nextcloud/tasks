@@ -15,6 +15,7 @@ OC.L10N.register(
     "Load all completed tasks." : "Carregar todas as tarefas finalizadas.",
     "Change sort order" : "Alterar a ordem de classificação",
     "Default" : "Padrão",
+    "Sort by completed state, due date, priority, start date and summary." : "Classificar por status, data devida, prioridade, data de início e resumo.",
     "Due date" : "Data programada",
     "Sort by due date and summary." : "Ordenar por data prevista e resumo.",
     "Start date" : "Data de início",
@@ -107,7 +108,7 @@ OC.L10N.register(
     "Could not delete the task." : "Não foi possível excluir a tarefa.",
     "Synchronizing to the server." : "Sincronizando com o servidor.",
     "Task successfully saved to server." : "Tarefa salva no servidor.",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Não foi possível atualizar a tarefa porque ela foi alterada no servidor. Por favor, clique para atualizá-la. As alterações locais serão descartadas.",
-    "Could not update the task." : "Não foi possível atualizar a tarefa."
+    "Could not update the task." : "Não foi possível atualizar a tarefa.",
+    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Não foi possível atualizar a tarefa porque ela foi alterada no servidor. Por favor, clique para atualizá-la. As alterações locais serão descartadas."
 },
 "nplurals=2; plural=(n > 1);");

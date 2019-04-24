@@ -107,7 +107,7 @@ OC.L10N.register(
     "Could not delete the task." : "Non foi posíbel eliminar a tarefa",
     "Synchronizing to the server." : "Sincronizando co servidor.",
     "Task successfully saved to server." : "A tarefa foi gardada satisfactoriamente no servidor.",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Non foi posíbel actualizar a tarefa porque foi modificada no servidor. Prema para actualizala, os cambios locais serán desbotados.",
-    "Could not update the task." : "Non foi posíbel actualizar a tarefa"
+    "Could not update the task." : "Non foi posíbel actualizar a tarefa",
+    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Non foi posíbel actualizar a tarefa porque foi modificada no servidor. Prema para actualizala, os cambios locais serán desbotados."
 },
 "nplurals=2; plural=(n != 1);");

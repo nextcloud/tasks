@@ -107,7 +107,7 @@ OC.L10N.register(
     "Could not delete the task." : "No se ha podido eliminar la tarea.",
     "Synchronizing to the server." : "Sincronizando con el servidor.",
     "Task successfully saved to server." : "Tarea guardada correctamente en el servidor.",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "No se ha podido actualizar la tarea porque ha cambiado en el servidor. Por favor, pulsa para recargarla, los cambios locales serán descargados.",
-    "Could not update the task." : "No se ha podido actualizar la tarea."
+    "Could not update the task." : "No se ha podido actualizar la tarea.",
+    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "No se ha podido actualizar la tarea porque ha cambiado en el servidor. Por favor, pulsa para recargarla, los cambios locales serán descargados."
 },
 "nplurals=2; plural=(n != 1);");

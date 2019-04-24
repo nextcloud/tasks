@@ -13,6 +13,7 @@
     "Load all completed tasks." : "Charger toutes les tâches terminées.",
     "Change sort order" : "Modifier l'ordre de tri",
     "Default" : "Défaut",
+    "Sort by completed state, due date, priority, start date and summary." : "Trier par état d'avancement, date d'échéance, priorité, date de début et résumé.",
     "Due date" : "Date d'échéance",
     "Sort by due date and summary." : "Trier par échéance et résumé.",
     "Start date" : "Date de début",
@@ -105,7 +106,7 @@
     "Could not delete the task." : "Impossible de supprimer la tâche.",
     "Synchronizing to the server." : "Synchronisation en cours avec le serveur.",
     "Task successfully saved to server." : "Tâche enregistrée sur le serveur.",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "La tâche n'a pas pu être mise à jour car elle a été changé sur le serveur. Merci de cliquer pour la recharger, les changements locaux seront supprimés. ",
-    "Could not update the task." : "Impossible de mettre à jour la tâche."
+    "Could not update the task." : "Impossible de mettre à jour la tâche.",
+    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "La tâche n'a pas pu être mise à jour car elle a été changé sur le serveur. Merci de cliquer pour la recharger, les changements locaux seront supprimés. "
 },"pluralForm" :"nplurals=2; plural=(n > 1);"
 }

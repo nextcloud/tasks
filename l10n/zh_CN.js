@@ -15,6 +15,7 @@ OC.L10N.register(
     "Load all completed tasks." : "载入所有已完成任务。",
     "Change sort order" : "更改排序",
     "Default" : "默认",
+    "Sort by completed state, due date, priority, start date and summary." : "按已完成状态，截止日期，优先级，开始日期及概况排序",
     "Due date" : "截止日期",
     "Sort by due date and summary." : "按到期日及概况排序",
     "Start date" : "开始日期",
@@ -107,7 +108,7 @@ OC.L10N.register(
     "Could not delete the task." : "无法删除任务。",
     "Synchronizing to the server." : "正在同步到服务器。",
     "Task successfully saved to server." : "任务已成功保存到服务器。",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "无法更新任务，因为它已在服务器上被修改。请点击以刷新它，本地变更将被丢弃。",
-    "Could not update the task." : "无法更新任务。"
+    "Could not update the task." : "无法更新任务。",
+    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "无法更新任务，因为它已在服务器上被修改。请点击以刷新它，本地变更将被丢弃。"
 },
 "nplurals=1; plural=0;");

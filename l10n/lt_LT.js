@@ -85,6 +85,7 @@ OC.L10N.register(
     "Automatic" : "Automatiškai",
     "An error occurred" : "Įvyko klaida",
     "Could not delete the task." : "Nepavyko ištrinti užduoties.",
+    "Synchronizing to the server." : "Sinchronizuojama į serverį.",
     "Task successfully saved to server." : "Užduotis sėkmingai įrašyta į serverį.",
     "Could not update the task." : "Nepavyko atnaujinti užduoties."
 },

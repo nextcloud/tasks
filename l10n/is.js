@@ -107,7 +107,7 @@ OC.L10N.register(
     "Could not delete the task." : "Gat ekki eytt verkefninu.",
     "Synchronizing to the server." : "Samstilli við netþjóninn.",
     "Task successfully saved to server." : "Tókst að vista verkefnið á þjóninn.",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Gat ekki uppfært verkefnið vegna þess að því var breytt á þjóninum. Smelltu til að endurlesa það, breytingum hjá þér verður hent.",
-    "Could not update the task." : "Gat ekki uppfært verkefnið."
+    "Could not update the task." : "Gat ekki uppfært verkefnið.",
+    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Gat ekki uppfært verkefnið vegna þess að því var breytt á þjóninum. Smelltu til að endurlesa það, breytingum hjá þér verður hent."
 },
 "nplurals=2; plural=(n % 10 != 1 || n % 100 == 11);");

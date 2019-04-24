@@ -15,6 +15,7 @@ OC.L10N.register(
     "Load all completed tasks." : "Ŝargi ĉiujn plenumitajn taskojn.",
     "Change sort order" : "Ŝanĝi ordigon",
     "Default" : "Defaŭlta",
+    "Sort by completed state, due date, priority, start date and summary." : "Ordigi laŭ plenumstato, limdato, prioritato, komencdato kaj resumo.",
     "Due date" : "Limdato",
     "Sort by due date and summary." : "Ordigi laŭ limdato kaj resumo.",
     "Start date" : "Komencdato",
@@ -107,7 +108,7 @@ OC.L10N.register(
     "Could not delete the task." : "Ne eblis forigi la taskon.",
     "Synchronizing to the server." : "Sinkronigo al servilo.",
     "Task successfully saved to server." : "Tasko sukcese konservita en la servilo.",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Ne eblis ĝisdatigi la taskon, ĉar ĝi ŝanĝiĝis en la servilo. Bv. alklaki por aktualigi ĝin; lokaj ŝanĝoj perdiĝos.",
-    "Could not update the task." : "Ne eblis ĝisdatigi la taskon."
+    "Could not update the task." : "Ne eblis ĝisdatigi la taskon.",
+    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Ne eblis ĝisdatigi la taskon, ĉar ĝi ŝanĝiĝis en la servilo. Bv. alklaki por aktualigi ĝin; lokaj ŝanĝoj perdiĝos."
 },
 "nplurals=2; plural=(n != 1);");

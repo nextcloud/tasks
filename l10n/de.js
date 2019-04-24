@@ -15,6 +15,7 @@ OC.L10N.register(
     "Load all completed tasks." : "Alle abgeschlossenen Aufgaben laden.",
     "Change sort order" : "Sortierreihenfolge ändern",
     "Default" : "Standard",
+    "Sort by completed state, due date, priority, start date and summary." : "Sortieren nach Abgeschlossen-Status, Fälligskeitsdatum, Priorität, Startdatum und Zusammenfassung.",
     "Due date" : "Fälligkeitsdatum",
     "Sort by due date and summary." : "Sortiere nach Fälligkeitsdatum und Zusammenfassung.",
     "Start date" : "Startdatum",
@@ -107,7 +108,7 @@ OC.L10N.register(
     "Could not delete the task." : "Aufgabe konnte nicht gelöscht werden.",
     "Synchronizing to the server." : "Synchronisiere mit dem Server.",
     "Task successfully saved to server." : "Aufgabe erfolgreich auf dem Server gespeichert.",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Die Aufgabe konnte nicht aktualisiert werden, da sie auf dem Server geändert wurde. Bitte Aktualisieren drücken, damit die lokalen Änderungen verworfen werden.",
-    "Could not update the task." : "Aufgabe konnte nicht aktualisiert werden."
+    "Could not update the task." : "Aufgabe konnte nicht aktualisiert werden.",
+    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Die Aufgabe konnte nicht aktualisiert werden, da sie auf dem Server geändert wurde. Bitte Aktualisieren drücken, damit die lokalen Änderungen verworfen werden."
 },
 "nplurals=2; plural=(n != 1);");
