@@ -108,6 +108,7 @@ OC.L10N.register(
     "Could not delete the task." : "impossibile eliminare l'attività.",
     "Synchronizing to the server." : "Sincronizzazione con il server.",
     "Task successfully saved to server." : "Attività salvato correttamente sul server.",
+    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Impossibile aggiornare l'attività poiché è stata modificata sul server. Fai clic per aggiornarla, le modifiche locali saranno scartate.",
     "Could not update the task." : "impossibile aggiornare l'attività.",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Impossibile aggiornare l'attività poiché è stata modificata sul server. Fai clic per aggiornarla, le modifiche locali saranno scartate."
 },

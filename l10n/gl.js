@@ -15,6 +15,7 @@ OC.L10N.register(
     "Load all completed tasks." : "Cargar todas as tarefas completadas.",
     "Change sort order" : "Cambiar a ordenación",
     "Default" : "Predeterminado",
+    "Sort by completed state, due date, priority, start date and summary." : "Ordenar polo estado de completado, data de caducidade, prioridade, data de inicio e resumo.",
     "Due date" : "Data de caducidade",
     "Sort by due date and summary." : "Ordear por data de caducidade e resumo.",
     "Start date" : "Data de comezo",
@@ -107,6 +108,7 @@ OC.L10N.register(
     "Could not delete the task." : "Non foi posíbel eliminar a tarefa",
     "Synchronizing to the server." : "Sincronizando co servidor.",
     "Task successfully saved to server." : "A tarefa foi gardada satisfactoriamente no servidor.",
+    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Non foi posíbel actualizar a tarefa porque foi modificada no servidor. Prema para actualizala, os cambios locais serán desbotados.",
     "Could not update the task." : "Non foi posíbel actualizar a tarefa",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Non foi posíbel actualizar a tarefa porque foi modificada no servidor. Prema para actualizala, os cambios locais serán desbotados."
 },

@@ -15,6 +15,7 @@ OC.L10N.register(
     "Load all completed tasks." : "Tüm tamamlanmış görevleri yükler.",
     "Change sort order" : "Sıralamayı değiştir",
     "Default" : "Varsayılan",
+    "Sort by completed state, due date, priority, start date and summary." : "Tamamlanma durumu, bitiş tarihi, öncelik, başlangıç tarihi ve özete göre sıralar.",
     "Due date" : "Bitiş tarihi",
     "Sort by due date and summary." : "Bitiş tarihi ve özete göre sıralar.",
     "Start date" : "Başlangıç ​​tarihi",
@@ -107,6 +108,7 @@ OC.L10N.register(
     "Could not delete the task." : "Görev silinemedi.",
     "Synchronizing to the server." : "Sunucu ile eşitleniyor.",
     "Task successfully saved to server." : "Görev sunucu üzerine kaydedildi.",
+    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Görev sunucu üzerinde değiştirilmiş olduğundan güncellenemedi. Lütfen yenilemek için tıklayın. Yaptığınız yerel değişiklikler yok sayılacak.",
     "Could not update the task." : "Görev güncellenemedi.",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Görev sunucu üzerinde değiştirilmiş olduğundan güncellenemedi. Lütfen yenilemek için tıklayın. Yaptığınız yerel değişiklikler yok sayılacak."
 },

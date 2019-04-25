@@ -108,7 +108,8 @@ OC.L10N.register(
     "Could not delete the task." : "Impossible de supprimer la tâche.",
     "Synchronizing to the server." : "Synchronisation en cours avec le serveur.",
     "Task successfully saved to server." : "Tâche enregistrée sur le serveur.",
+    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "La tâche ne peut pas être mise à jour car elle a été modifiée sur le serveur. Merci de cliquer pour la recharger, les modifications locales seront perdues.",
     "Could not update the task." : "Impossible de mettre à jour la tâche.",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "La tâche n'a pas pu être mise à jour car elle a été changé sur le serveur. Merci de cliquer pour la recharger, les changements locaux seront supprimés. "
+    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "La tâche ne peut pas être mise à jour car elle a été modifiée sur le serveur. Merci de cliquer pour la recharger, les modifications locales seront perdues."
 },
 "nplurals=2; plural=(n > 1);");
