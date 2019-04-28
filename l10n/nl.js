@@ -15,6 +15,7 @@ OC.L10N.register(
     "Load all completed tasks." : "Laad alle voltooide taken.",
     "Change sort order" : "Volgorde wijzigen",
     "Default" : "Standaard",
+    "Sort by completed state, due date, priority, start date and summary." : "Sorteren op status, vervaldatum, prioriteit, startdatum en samenvatting.",
     "Due date" : "Vervaldatum",
     "Sort by due date and summary." : "Sorteer op vervaldatum en samenvatting.",
     "Start date" : "Startdatum",
@@ -107,6 +108,7 @@ OC.L10N.register(
     "Could not delete the task." : "Kon de taak niet verwijderen.",
     "Synchronizing to the server." : "Synchroniseren met de server.",
     "Task successfully saved to server." : "Taak succesvol opgeslagen naar de server.",
+    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Kon de taak niet bijwerken omdat die was gewijzigd op de server. Klik om te verversen, lokale wijzigingen worden genegeerd.",
     "Could not update the task." : "Kon de taak niet bewerken.",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Kon de taak niet bijwerken, omdat deze is bewerkt op de server. Probeer te klikken om te vernieuwen, lokale wijzigingen worden verwijderd."
 },
