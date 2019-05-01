@@ -45,8 +45,8 @@ OC.L10N.register(
     "Hidden" : "Ocult",
     "Visible" : "Visible",
     "Automatic" : "Automàtic",
-    "An error occurred" : "S'ha produït un error",
     "Could not delete the task." : "No s'ha pogut eliminar la tasca.",
-    "Could not update the task." : "No s'ha pogut actualitzar la tasca."
+    "Could not update the task." : "No s'ha pogut actualitzar la tasca.",
+    "An error occurred" : "S'ha produït un error"
 },
 "nplurals=2; plural=(n != 1);");

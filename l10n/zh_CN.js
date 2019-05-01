@@ -104,12 +104,12 @@ OC.L10N.register(
     "Hidden" : "隐藏",
     "Visible" : "可见",
     "Automatic" : "自动",
-    "An error occurred" : "发生了一个错误",
     "Could not delete the task." : "无法删除任务。",
     "Synchronizing to the server." : "正在同步到服务器。",
     "Task successfully saved to server." : "任务已成功保存到服务器。",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "无法更新任务，因为它已在服务器上被更改。请点击以刷新此任务，本地变更将被丢弃。",
     "Could not update the task." : "无法更新任务。",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "无法更新任务，因为它已在服务器上被修改。请点击以刷新它，本地变更将被丢弃。"
+    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "无法更新任务，因为它已在服务器上被修改。请点击以刷新它，本地变更将被丢弃。",
+    "An error occurred" : "发生了一个错误"
 },
 "nplurals=1; plural=0;");

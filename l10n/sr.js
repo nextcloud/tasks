@@ -103,11 +103,11 @@ OC.L10N.register(
     "Hidden" : "Сакривен",
     "Visible" : "Видљив",
     "Automatic" : "Аутоматски",
-    "An error occurred" : "Догодила се грешка",
     "Could not delete the task." : "Не могу да обришем задатак.",
     "Synchronizing to the server." : "Синхронизујем са сервером.",
     "Task successfully saved to server." : "Задатак успешно сачуван на серверу.",
     "Could not update the task." : "Не могу да ажурирам задатак.",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Не могу да ажурирам задатак пошто је промењен на серверу. Кликните да га освежите, а локалне измене ће бити одбачене."
+    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Не могу да ажурирам задатак пошто је промењен на серверу. Кликните да га освежите, а локалне измене ће бити одбачене.",
+    "An error occurred" : "Догодила се грешка"
 },
 "nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);");

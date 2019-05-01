@@ -59,10 +59,10 @@ OC.L10N.register(
     "Hidden" : "Piilotettu",
     "Visible" : "Näkyvissä",
     "Automatic" : "Automaattinen",
-    "An error occurred" : "Tapahtui virhe",
     "Could not delete the task." : "Tehtävää ei voitu poistaa.",
     "Synchronizing to the server." : "Synkronoidaan palvleimelle.",
     "Task successfully saved to server." : "Tehtävä tallennettu onnistuneesti palvelimelle.",
-    "Could not update the task." : "Tehtävää ei voitu päivittää."
+    "Could not update the task." : "Tehtävää ei voitu päivittää.",
+    "An error occurred" : "Tapahtui virhe"
 },
 "nplurals=2; plural=(n != 1);");

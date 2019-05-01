@@ -102,11 +102,11 @@ OC.L10N.register(
     "Hidden" : "מוסתר",
     "Visible" : "גלוי",
     "Automatic" : "אוטומטי",
-    "An error occurred" : "אירעה שגיאה",
     "Could not delete the task." : "לא ניתן למחוק את המשימה.",
     "Synchronizing to the server." : "מתבצע סנכרון מול השרת.",
     "Task successfully saved to server." : "המשימה נשמרה לשרת בהצלחה.",
     "Could not update the task." : "לא ניתן לעדכן את המשימה.",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "לא ניתן לעדכן את המשימה כיוון שהיא נערכה בשרת. נא ללחוץ כדי לרענן אותה, השינויים המקומיים לא יישמרו."
+    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "לא ניתן לעדכן את המשימה כיוון שהיא נערכה בשרת. נא ללחוץ כדי לרענן אותה, השינויים המקומיים לא יישמרו.",
+    "An error occurred" : "אירעה שגיאה"
 },
 "nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;");

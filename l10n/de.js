@@ -104,12 +104,12 @@ OC.L10N.register(
     "Hidden" : "Verborgen",
     "Visible" : "Sichtbar",
     "Automatic" : "Automatisch",
-    "An error occurred" : "Es ist ein Fehler aufgetreten",
     "Could not delete the task." : "Aufgabe konnte nicht gelöscht werden.",
     "Synchronizing to the server." : "Synchronisiere mit dem Server.",
     "Task successfully saved to server." : "Aufgabe erfolgreich auf dem Server gespeichert.",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Die Aufgabe konnte nicht aktualisiert werden, da sie auf dem Server geändert wurde. Bitte Aktualisieren drücken, damit die lokalen Änderungen verworfen werden.",
     "Could not update the task." : "Aufgabe konnte nicht aktualisiert werden.",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Die Aufgabe konnte nicht aktualisiert werden, da sie auf dem Server geändert wurde. Bitte Aktualisieren drücken, damit die lokalen Änderungen verworfen werden."
+    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Die Aufgabe konnte nicht aktualisiert werden, da sie auf dem Server geändert wurde. Bitte Aktualisieren drücken, damit die lokalen Änderungen verworfen werden.",
+    "An error occurred" : "Es ist ein Fehler aufgetreten"
 },
 "nplurals=2; plural=(n != 1);");

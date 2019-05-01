@@ -104,12 +104,12 @@ OC.L10N.register(
     "Hidden" : "Masqué",
     "Visible" : "Visible",
     "Automatic" : "Automatique",
-    "An error occurred" : "Une erreur est survenue",
     "Could not delete the task." : "Impossible de supprimer la tâche.",
     "Synchronizing to the server." : "Synchronisation en cours avec le serveur.",
     "Task successfully saved to server." : "Tâche enregistrée sur le serveur.",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "La tâche ne peut pas être mise à jour car elle a été modifiée sur le serveur. Merci de cliquer pour la recharger, les modifications locales seront perdues.",
     "Could not update the task." : "Impossible de mettre à jour la tâche.",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "La tâche ne peut pas être mise à jour car elle a été modifiée sur le serveur. Merci de cliquer pour la recharger, les modifications locales seront perdues."
+    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "La tâche ne peut pas être mise à jour car elle a été modifiée sur le serveur. Merci de cliquer pour la recharger, les modifications locales seront perdues.",
+    "An error occurred" : "Une erreur est survenue"
 },
 "nplurals=2; plural=(n > 1);");

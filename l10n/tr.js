@@ -104,12 +104,12 @@ OC.L10N.register(
     "Hidden" : "Gizli",
     "Visible" : "Görünür",
     "Automatic" : "Otomatik",
-    "An error occurred" : "Bir sorun çıktı",
     "Could not delete the task." : "Görev silinemedi.",
     "Synchronizing to the server." : "Sunucu ile eşitleniyor.",
     "Task successfully saved to server." : "Görev sunucu üzerine kaydedildi.",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Görev sunucu üzerinde değiştirilmiş olduğundan güncellenemedi. Lütfen yenilemek için tıklayın. Yaptığınız yerel değişiklikler yok sayılacak.",
     "Could not update the task." : "Görev güncellenemedi.",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Görev sunucu üzerinde değiştirilmiş olduğundan güncellenemedi. Lütfen yenilemek için tıklayın. Yaptığınız yerel değişiklikler yok sayılacak."
+    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Görev sunucu üzerinde değiştirilmiş olduğundan güncellenemedi. Lütfen yenilemek için tıklayın. Yaptığınız yerel değişiklikler yok sayılacak.",
+    "An error occurred" : "Bir sorun çıktı"
 },
 "nplurals=2; plural=(n > 1);");

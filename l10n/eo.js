@@ -104,11 +104,12 @@ OC.L10N.register(
     "Hidden" : "Nevidebla",
     "Visible" : "Videbla",
     "Automatic" : "Aŭtomata",
-    "An error occurred" : "Eraro okazis",
     "Could not delete the task." : "Ne eblis forigi la taskon.",
     "Synchronizing to the server." : "Sinkronigo al servilo.",
     "Task successfully saved to server." : "Tasko sukcese konservita en la servilo.",
+    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Ne eblis ĝisdatigi la taskon, ĉar ĝi ŝanĝiĝis en la servilo. Bv. alklaki por aktualigi ĝin; lokaj ŝanĝoj perdiĝos.",
     "Could not update the task." : "Ne eblis ĝisdatigi la taskon.",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Ne eblis ĝisdatigi la taskon, ĉar ĝi ŝanĝiĝis en la servilo. Bv. alklaki por aktualigi ĝin; lokaj ŝanĝoj perdiĝos."
+    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Ne eblis ĝisdatigi la taskon, ĉar ĝi ŝanĝiĝis en la servilo. Bv. alklaki por aktualigi ĝin; lokaj ŝanĝoj perdiĝos.",
+    "An error occurred" : "Eraro okazis"
 },
 "nplurals=2; plural=(n != 1);");
