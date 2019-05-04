@@ -134,7 +134,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				@click="startCreate($event)"
 			>
 				<span class="title">
-					{{ t('tasks', 'Add List...') }}
+					{{ t('tasks', 'Add List…') }}
 				</span>
 			</a>
 			<div :class="{error: nameError}" class="app-navigation-entry-edit name">
