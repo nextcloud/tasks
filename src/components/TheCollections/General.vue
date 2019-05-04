@@ -113,13 +113,13 @@ export default {
 		inputString: function() {
 			switch (this.collectionId) {
 			case 'starred':
-				return t('tasks', 'Add an important task to "{calendar}"...', { calendar: this.calendar.displayName })
+				return t('tasks', 'Add an important task to "{calendar}"…', { calendar: this.calendar.displayName })
 			case 'today':
-				return t('tasks', 'Add a task due today to "{calendar}"...', { calendar: this.calendar.displayName })
+				return t('tasks', 'Add a task due today to "{calendar}"…', { calendar: this.calendar.displayName })
 			case 'current':
-				return t('tasks', 'Add a current task to "{calendar}"...', { calendar: this.calendar.displayName })
+				return t('tasks', 'Add a current task to "{calendar}"…', { calendar: this.calendar.displayName })
 			default:
-				return t('tasks', 'Add a task to "{calendar}"...', { calendar: this.calendar.displayName })
+				return t('tasks', 'Add a task to "{calendar}"…', { calendar: this.calendar.displayName })
 			}
 		},
 		...mapGetters({
