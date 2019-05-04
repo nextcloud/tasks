@@ -87,6 +87,7 @@ export default {
 				{
 					id: 'created',
 					icon: 'icon-calendar',
+					// TRANSLATORS The date at which a task was created.
 					text: t('tasks', 'Created date'),
 					hint: t('tasks', 'Sort by created date and summary.')
 				},
