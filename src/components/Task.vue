@@ -216,7 +216,7 @@ export default {
 		 * @returns {String} the placeholder string to show
 		 */
 		subtasksCreationPlaceholder: function() {
-			return t('tasks', 'Add a subtask to "{task}"...', {	task: this.task.summary })
+			return t('tasks', 'Add a subtask to "{task}"…', {	task: this.task.summary })
 		},
 
 		/**
