@@ -30,7 +30,6 @@ OC.L10N.register(
     "Edit" : "Upraviť",
     "Download" : "Sťahovanie",
     "Save" : "Uložiť",
-    "Add List..." : "Pridať zoznam",
     "New List" : "Nový zoznam",
     "The name \"%s\" is already used." : "Názov \"%s\" je už použitý.",
     "An empty name is not allowed." : "Prázdny názov nie je povolený",

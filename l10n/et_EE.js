@@ -28,7 +28,6 @@ OC.L10N.register(
     "Edit" : "Muuda",
     "Download" : "Lae alla",
     "Save" : "Salvesta",
-    "Add List..." : "Lisa nimekiri...",
     "New List" : "Uus nimekiri",
     "The name \"%s\" is already used." : "Nimi \"%s\" on juba kasutuses.",
     "An empty name is not allowed." : "Nime lahter ei tohi olla tühi.",

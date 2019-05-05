@@ -28,7 +28,6 @@ OC.L10N.register(
     "Edit" : "Редагувати",
     "Download" : "Завантажити",
     "Save" : "Зберегти",
-    "Add List..." : "Додати список...",
     "New List" : "Новий список",
     "The name \"%s\" is already used." : "Назва \"%s\" вже використовується.",
     "An empty name is not allowed." : "Порожнє поле не допускається.",

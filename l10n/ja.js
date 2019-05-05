@@ -29,7 +29,6 @@ OC.L10N.register(
     "Edit" : "編集",
     "Download" : "ダウンロード",
     "Save" : "保存",
-    "Add List..." : "リストを追加...",
     "New List" : "新規リスト",
     "The name \"%s\" is already used." : "名前 \"%s\" はすでに使われています。",
     "An empty name is not allowed." : "件名を入力してください。",

@@ -28,7 +28,6 @@ OC.L10N.register(
     "Edit" : "Përpunoni",
     "Download" : "Shkarkoje",
     "Save" : "Ruaje",
-    "Add List..." : "Shtoni Listë…",
     "New List" : "Listë e Re",
     "The name \"%s\" is already used." : "Emri \"%s\" është tashmë në përdorim.",
     "An empty name is not allowed." : "Nuk lejohet emër i zbrazët.",

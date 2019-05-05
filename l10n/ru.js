@@ -31,7 +31,6 @@ OC.L10N.register(
     "Edit" : "Редактировать",
     "Download" : "Скачать",
     "Save" : "Сохранить",
-    "Add List..." : "Добавить Список…",
     "New List" : "Новый список",
     "The name \"%s\" is already used." : "Имя \"%s\" уже используется.",
     "An empty name is not allowed." : "Пустые имена не допускаются.",

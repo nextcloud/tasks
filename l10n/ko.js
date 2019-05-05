@@ -28,7 +28,6 @@ OC.L10N.register(
     "Edit" : "편집",
     "Download" : "다운로드",
     "Save" : "저장",
-    "Add List..." : "목록 추가...",
     "New List" : "새 목록",
     "The name \"%s\" is already used." : "이름 \"%s\"이(가) 이미 사용 중입니다.",
     "An empty name is not allowed." : "이름을 비워둘 수 없습니다.",

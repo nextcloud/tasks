@@ -25,7 +25,6 @@ OC.L10N.register(
     "Edit" : "Editatu",
     "Download" : "Deskargatu",
     "Save" : "Gorde",
-    "Add List..." : "Gehitu zerrenda...",
     "New List" : "Zerrenda berria",
     "The name \"%s\" is already used." : "\"%s\" izena dagoeneko erabilita dago.",
     "An empty name is not allowed." : "Hutsa ez da izentzat onartzen.",

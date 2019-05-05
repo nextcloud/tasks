@@ -30,7 +30,6 @@ OC.L10N.register(
     "Edit" : "Edit",
     "Download" : "Download",
     "Save" : "Save",
-    "Add List..." : "Add List...",
     "New List" : "New List",
     "The name \"%s\" is already used." : "The name \"%s\" is already used.",
     "An empty name is not allowed." : "An empty name is not allowed.",

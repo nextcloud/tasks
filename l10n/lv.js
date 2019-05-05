@@ -28,7 +28,6 @@ OC.L10N.register(
     "Edit" : "Rediģēt",
     "Download" : "Lejupielādēt",
     "Save" : "Saglabāt",
-    "Add List..." : "Pievienot sarakstu",
     "New List" : "Jauns saraksts",
     "The name \"%s\" is already used." : "Nosaukums \"%s\" jau tiek lietots.",
     "An empty name is not allowed." : "Nosaukums ir obligāts.",

@@ -27,7 +27,6 @@ OC.L10N.register(
     "Edit" : "編輯",
     "Download" : "下載",
     "Save" : "儲存",
-    "Add List..." : "新增列表...",
     "New List" : "新列表",
     "The name \"%s\" is already used." : "名稱 \"%s\" 已被使用.",
     "An empty name is not allowed." : "不允許空白的名稱.",

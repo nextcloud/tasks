@@ -35,7 +35,6 @@ OC.L10N.register(
     "Edit" : "Edita",
     "Download" : "Baixa",
     "Save" : "Desa",
-    "Add List..." : "Afegeix una llista...",
     "New List" : "Crea una llista",
     "The name \"%s\" is already used." : "El nom \"%s\" ja està usat.",
     "An empty name is not allowed." : "No es permet un nom buit.",

@@ -32,7 +32,6 @@ OC.L10N.register(
     "Edit" : "Szerkesztés",
     "Download" : "Letöltés",
     "Save" : "Mentés",
-    "Add List..." : "Lista hozzáadása",
     "New List" : "Új lista",
     "The name \"%s\" is already used." : "Ez a név \"%s\" már foglalt.",
     "An empty name is not allowed." : "Az üres név nem engedélyezett.",

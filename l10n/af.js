@@ -28,7 +28,6 @@ OC.L10N.register(
     "Edit" : "Wysig",
     "Download" : "Laai Af",
     "Save" : "Stoor",
-    "Add List..." : "Voeg lys by...",
     "New List" : "Nuwe lys",
     "The name \"%s\" is already used." : "Die naam “%s” bestaan reeds.",
     "An empty name is not allowed." : "’n Leë naam word nie toegestaan nie.",

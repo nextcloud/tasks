@@ -26,7 +26,6 @@ OC.L10N.register(
     "Edit" : "Editar",
     "Download" : "Baxar",
     "Save" : "Guardar",
-    "Add List..." : "Amestar Llista...",
     "New List" : "Nueva Llista",
     "The name \"%s\" is already used." : "El nome \"%s\" yá ta usándose.",
     "An empty name is not allowed." : "Nun s'almite un nome baleru",

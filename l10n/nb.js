@@ -30,7 +30,6 @@ OC.L10N.register(
     "Edit" : "Rediger",
     "Download" : "Last ned",
     "Save" : "Lagre",
-    "Add List..." : "Legg til liste…",
     "New List" : "Ny liste",
     "The name \"%s\" is already used." : "Navnet \"%s\" er i bruk allerede.",
     "An empty name is not allowed." : "Et tomt navn er ikke tillatt.",

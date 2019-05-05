@@ -31,7 +31,6 @@ OC.L10N.register(
     "Edit" : "Redigér",
     "Download" : "Hent",
     "Save" : "Gem",
-    "Add List..." : "Tilføj liste...",
     "New List" : "Ny liste",
     "The name \"%s\" is already used." : "Navnet \"%s\" er allerede i brug.",
     "An empty name is not allowed." : "Et tomt navn er ikke tilladt.",

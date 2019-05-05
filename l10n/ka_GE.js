@@ -28,7 +28,6 @@ OC.L10N.register(
     "Edit" : "რედაქტირება",
     "Download" : "ჩამოტვირთვა",
     "Save" : "შენახვა",
-    "Add List..." : "სიის დამატება…",
     "New List" : "ახალი სია",
     "The name \"%s\" is already used." : "სახელი \"%s\" უკვე დაკავებულია",
     "An empty name is not allowed." : "ცარიელი სახელი არაა ნებადართული",
