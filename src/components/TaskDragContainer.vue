@@ -47,6 +47,10 @@ export default {
 	methods: {
 		...mapActions([
 			'moveTask',
+			'setPriority',
+			'setPercentComplete',
+			'setDue',
+			'setStart',
 		]),
 
 		/**
@@ -65,9 +69,15 @@ export default {
 		 * @param {Object} $event The event which caused the drop
 		 */
 		onEnd: function($event) {
+			var task
+			// The task to move
+			var taskAttribute = $event.item.attributes['task-id']
+			if (taskAttribute) {
+				task = this.getTask(taskAttribute.value)
+			}
 			// Move the task to a new calendar or parent.
-			this.prepareMoving($event)
-			this.prepareCollecting($event)
+			this.prepareMoving(task, $event)
+			this.prepareCollecting(task, $event)
 			this.cleanUpDragging()
 			$event.stopPropagation()
 		},
@@ -85,15 +95,11 @@ export default {
 		/**
 		 * Function to move a task to a new calendar or parent
 		 *
+		 * @param {Task} task The task to change
 		 * @param {Object} $event The event which caused the move
 		 */
-		prepareMoving: function($event) {
-			var task, parent, calendar
-			// The task to move
-			var taskAttribute = $event.item.attributes['task-id']
-			if (taskAttribute) {
-				task = this.getTask(taskAttribute.value)
-			}
+		prepareMoving: function(task, $event) {
+			var parent, calendar
 			// The new calendar --> make the moved task a root task
 			var calendarAttribute = $event.to.attributes['calendar-id']
 			if (calendarAttribute) {
@@ -117,15 +123,70 @@ export default {
 		/**
 		 * Function to add a task to a collection.
 		 *
+		 * @param {Task} task The task to change
 		 * @param {Object} $event The event which caused the change
 		 */
-		prepareCollecting: function($event) {
+		prepareCollecting: function(task, $event) {
 			// The new collection --> make the moved task a member of this collection
 			// This is necessary for the collections {starred, today, completed, uncompleted and week}
 			var collectionAttribute = $event.to.attributes['collection-id']
 			if (collectionAttribute) {
 				var collectionId = collectionAttribute.value
-				console.debug('New collection id: ' + collectionId)
+				// Split the collectionId in case we deal with 'week-x'
+				collectionId = collectionId.split('-')
+				switch (collectionId[0]) {
+				case 'starred':
+					this.setPriority({ task: task, priority: 1 })
+					break
+				case 'completed':
+					this.setPercentComplete({ task: task, complete: 100 })
+					break
+				case 'uncompleted':
+					if (task.completed) {
+						this.setPercentComplete({ task: task, complete: 0 })
+					}
+					break
+				case 'today':
+					this.setDate(task, 0)
+					break
+				case 'week':
+					this.setDate(task, collectionId[1])
+					break
+				}
+			}
+		},
+
+		/**
+		 * Sets the start or due date to the given day
+		 *
+		 * @param {Task} task The task to change
+		 * @param {Integer} day The day to set
+		 */
+		setDate: function(task, day) {
+			var start = moment(task.start, 'YYYYMMDDTHHmmss').startOf('day')
+			var due = moment(task.due, 'YYYYMMDDTHHmmss').startOf('day')
+			day = moment().startOf('day').add(day, 'days')
+
+			var diff
+			// Adjust start date
+			if (start.isValid()) {
+				diff = start.diff(moment().startOf('day'), 'days')
+				diff = diff < 0 ? 0 : diff
+				if (diff !== day) {
+					var newStart = moment(task.start, 'YYYYMMDDTHHmmss').year(day.year()).month(day.month()).date(day.date())
+					this.setStart({ task: task, start: newStart })
+				}
+			// Adjust due date
+			} else if (due.isValid()) {
+				diff = due.diff(moment().startOf('day'), 'days')
+				diff = diff < 0 ? 0 : diff
+				if (diff !== day) {
+					var newDue = moment(task.due, 'YYYYMMDDTHHmmss').year(day.year()).month(day.month()).date(day.date())
+					this.setDue({ task: task, due: newDue })
+				}
+			// Set the due date to appropriate value
+			} else {
+				this.setDue({ task: task, due: day })
 			}
 		},
 	},
