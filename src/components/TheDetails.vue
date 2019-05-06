@@ -546,7 +546,7 @@ export default {
 			'setDue',
 			'setStart',
 			'toggleAllDay',
-			'moveTaskToCalendar',
+			'moveTask',
 		]),
 
 		removeTask: function() {
@@ -758,7 +758,7 @@ export default {
 		},
 
 		async changeCalendar(calendar) {
-			const task = await this.moveTaskToCalendar({ task: this.task, calendar: calendar })
+			const task = await this.moveTask({ task: this.task, calendar: calendar })
 			// If we are in a calendar view, we have to navigate to the new calendar.
 			if (this.$route.params.calendarId) {
 				this.$router.push('/calendars/' + task.calendar.id + '/tasks/' + task.uri)

@@ -115,13 +115,49 @@ const getters = {
 			})
 		}
 		// Else, we have to search all calendars
+		return getters.getTaskByUri(rootState.route.params.taskId)
+	},
+
+	/**
+	 * Returns the task by Uri
+	 *
+	 * @param {Object} state The store data
+	 * @param {Object} getters The store getters
+	 * @param {Object} rootState The store root state
+	 * @param {String} taskUri The Uri of the task in question
+	 * @returns {Task} The task
+	 */
+	getTaskByUri: (state, getters, rootState) => (taskUri) => {
+		// We have to search in all calendars
 		var task
 		for (let calendar of rootState.calendars.calendars) {
 			task = Object.values(calendar.tasks).find(task => {
-				return task.uri === rootState.route.params.taskId
+				return task.uri === taskUri
 			})
 			if (task) return task
 		}
+		return null
+	},
+
+	/**
+	 * Returns the task by Uri
+	 *
+	 * @param {Object} state The store data
+	 * @param {Object} getters The store getters
+	 * @param {Object} rootState The store root state
+	 * @param {String} taskUid The Uid of the task in question
+	 * @returns {Task} The task
+	 */
+	getTaskByUid: (state, getters, rootState) => (taskUid) => {
+		// We have to search in all calendars
+		var task
+		for (let calendar of rootState.calendars.calendars) {
+			task = Object.values(calendar.tasks).find(task => {
+				return task.uid === taskUid
+			})
+			if (task) return task
+		}
+		return null
 	},
 
 	/**
@@ -244,17 +280,14 @@ const mutations = {
 	 * Deletes a task from the parent
 	 *
 	 * @param {Object} state The store data
-	 * @param {Task} task The task to delete
+	 * @param {Task} task The task to delete from the parents subtask list
+	 * @param {Task} parent The paren task
 	 */
-	deleteTaskFromParent(state, task) {
+	deleteTaskFromParent(state, { task, parent }) {
 		if (task instanceof Task) {
 			// Remove task from parents subTask list if necessary
-			if (task.related) {
-				let tasks = task.calendar.tasks
-				let parent = Object.values(tasks).find(search => search.uid === task.related)
-				if (parent) {
-					Vue.delete(parent.subTasks, task.uid)
-				}
+			if (task.related && parent) {
+				Vue.delete(parent.subTasks, task.uid)
 			}
 		}
 	},
@@ -263,15 +296,12 @@ const mutations = {
 	 * Adds a task to parent task as subtask
 	 *
 	 * @param {Object} state The store data
-	 * @param {Task} task The task to add
+	 * @param {Task} task The task to add to the parents subtask list
+	 * @param {Task} parent The paren task
 	 */
-	addTaskToParent(state, task) {
-		if (task.related) {
-			let tasks = task.calendar.tasks
-			let parent = Object.values(tasks).find(search => search.uid === task.related)
-			if (parent) {
-				Vue.set(parent.subTasks, task.uid, task)
-			}
+	addTaskToParent(state, { task, parent }) {
+		if (task.related && parent) {
+			Vue.set(parent.subTasks, task.uid, task)
 		}
 	},
 
@@ -564,7 +594,8 @@ const actions = {
 					task.syncstatus = new TaskStatus('success', 'Successfully created the task.')
 					context.commit('appendTask', task)
 					context.commit('addTaskToCalendar', task)
-					context.commit('addTaskToParent', task)
+					let parent = context.getters.getTaskByUid(task.related)
+					context.commit('addTaskToParent', { task: task, parent: parent })
 				})
 				.catch((error) => { throw error })
 		}
@@ -592,7 +623,8 @@ const actions = {
 				})
 		}
 		context.commit('deleteTask', task)
-		context.commit('deleteTaskFromParent', task)
+		let parent = context.getters.getTaskByUid(task.related)
+		context.commit('deleteTaskFromParent', { task: task, parent: parent })
 		context.commit('deleteTaskFromCalendar', task)
 	},
 
@@ -829,33 +861,53 @@ const actions = {
 	},
 
 	/**
-	 * Moves a task to the provided calendar
+	 * Moves a task to a new parent task
+	 *
+	 * @param {Object} context The store mutations
+	 * @param {Object} data Destructuring object
+	 * @param {Task} data.task The task to move
+	 * @param {Task} data.parent The new parent task
+	 */
+	async setTaskParent(context, { task, parent }) {
+		var parentId = parent ? parent.uid : null
+		// Only update the parent in case it differs from the current one.
+		if (task.related !== parentId) {
+			// Remove the task from the old parents subtask list
+			let oldParent = context.getters.getTaskByUid(task.related)
+			context.commit('deleteTaskFromParent', { task: task, parent: oldParent })
+			// Link to new parent
+			Vue.set(task, 'related', parentId)
+			// Add task to new parents subtask list
+			if (parent) {
+				Vue.set(parent.subTasks, task.uid, task)
+				// If the parent is completed, we complete the task
+				if (parent.completed) {
+					await context.dispatch('setPercentComplete', { task: task, complete: 100 })
+				}
+			}
+			// We have to send an update.
+			await context.dispatch('scheduleTaskUpdate', task)
+		}
+	},
+
+	/**
+	 * Moves a task to a new calendar or parent task
 	 *
 	 * @param {Object} context The store mutations
 	 * @param {Object} data Destructuring object
 	 * @param {Task} data.task The task to move
 	 * @param {Calendar} data.calendar The calendar to move the task to
-	 * @param {Boolean} data.removeParent If the task has a parent, remove the link to the parent
+	 * @param {Task} data.parent The new parent task
 	 * @returns {Task} The moved task
 	 */
-	async moveTaskToCalendar(context, { task, calendar, removeParent = true }) {
-		// Only local move if the task doesn't exist on the server.
+	async moveTask(context, { task, calendar, parent = null }) {
+
 		// Don't move if source and target calendar are the same.
 		if (task.dav && task.calendar !== calendar) {
 			// Move all subtasks first
 			await Promise.all(Object.values(task.subTasks).map(async(subTask) => {
-				await context.dispatch('moveTaskToCalendar', { task: subTask, calendar: calendar, removeParent: false })
+				await context.dispatch('moveTask', { task: subTask, calendar: calendar, parent: task })
 			}))
-
-			// If a task has a parent task which is not moved, remove the reference to it.
-			if (removeParent && task.related !== null) {
-				// Remove the task from the parents subtask list
-				context.commit('deleteTaskFromParent', task)
-				// Unlink the related parent task
-				context.commit('setTaskParent', { task: task, related: null })
-				// We have to send an update.
-				await context.dispatch('updateTask', task)
-			}
 
 			await task.dav.move(calendar.dav)
 				.then((response) => {
@@ -871,6 +923,10 @@ const actions = {
 					OC.Notification.showTemporary(t('calendars', 'An error occurred'))
 				})
 		}
+
+		// Set the new parent
+		await context.dispatch('setTaskParent', { task: task, parent: parent })
+
 		return task
 	},
 }

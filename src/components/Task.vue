@@ -113,13 +113,16 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					>
 				</form>
 			</div>
-			<ol v-if="!task.hideSubtasks || searchQuery" :calendarID="task.calendar.uri">
+			<task-drag-container v-if="!task.hideSubtasks || searchQuery"
+				:task-id="task.uri"
+				:calendar-id="task.calendar.uri"
+			>
 				<TaskBodyComponent v-for="subtask in filteredSubtasks"
 					:key="subtask.uid"
 					:task="subtask"
 					class="subtask"
 				/>
-			</ol>
+			</task-drag-container>
 		</div>
 	</li>
 </template>
@@ -131,6 +134,7 @@ import { mapGetters, mapActions } from 'vuex'
 import focus from '../directives/focus'
 import { linkify } from '../directives/linkify.js'
 import TaskStatusDisplay from './TaskStatusDisplay'
+import TaskDragContainer from './TaskDragContainer'
 
 export default {
 	name: 'TaskBodyComponent',
@@ -141,6 +145,7 @@ export default {
 	},
 	components: {
 		TaskStatusDisplay,
+		TaskDragContainer,
 	},
 	filters: {
 		formatDate: function(date) {
@@ -311,7 +316,7 @@ export default {
 
 			this.createTask(task)
 			this.newTaskName = ''
-		}
+		},
 	}
 }
 </script>
