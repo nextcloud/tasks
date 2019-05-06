@@ -67,6 +67,7 @@ OC.L10N.register(
     "Copy private link" : "Kopijuoti privačią nuorodą",
     "Download" : "Atsisiųsti",
     "Save" : "Įrašyti",
+    "Add List…" : "Pridėti sąrašą…",
     "New List" : "Naujas sąrašas",
     "Calendar link copied to clipboard." : "Kalendoriaus nuoroda nukopijuota į iškarpinę.",
     "Calendar link could not be copied to clipboard." : "Kalendoriaus nuorodos nepavyko nukopijuoti į iškarpinę.",
