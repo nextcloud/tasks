@@ -26,6 +26,7 @@ import Task from '../models/task'
 import { isParentInList, momentToICALTime } from './storeHelper'
 import ICAL from 'ical.js'
 import TaskStatus from '../models/taskStatus'
+import router from '../components/TheRouter'
 
 Vue.use(Vuex)
 
@@ -596,6 +597,18 @@ const actions = {
 					context.commit('addTaskToCalendar', task)
 					let parent = context.getters.getTaskByUid(task.related)
 					context.commit('addTaskToParent', { task: task, parent: parent })
+
+					// Open the details view for the new task
+					var calendarId = context.rootState.route.params.calendarId
+					var collectionId = context.rootState.route.params.collectionId
+					var taskRoute = ''
+					if (calendarId) {
+						taskRoute = '/calendars/' + calendarId + '/tasks/' + task.uri
+					} else if (collectionId) {
+						taskRoute = '/collections/' + collectionId + '/tasks/' + task.uri
+					}
+					router.push(taskRoute)
+
 				})
 				.catch((error) => { throw error })
 		}
