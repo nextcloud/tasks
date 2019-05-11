@@ -31,8 +31,17 @@ module.exports = {
 			},
 			{
 				test: /\.js$/,
-				loader: 'babel-loader',
-				exclude: /node_modules/
+				use: {
+					loader: 'babel-loader',
+					options: {
+						plugins: [
+							'@babel/plugin-syntax-dynamic-import',
+							'@babel/plugin-proposal-object-rest-spread'
+						],
+						presets: ['@babel/preset-env']
+					}
+				},
+				exclude: /node_modules\/(?!(p-limit|p-defer|p-queue|p-try|cdav-library))/
 			},
 			{
 				test: /\.(png|jpg|gif|svg)$/,
