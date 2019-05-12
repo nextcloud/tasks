@@ -532,6 +532,25 @@ export default {
 			task: 'getTaskByRoute'
 		}),
 	},
+
+	/**
+	 * Before we close the details view, we save possible edits.
+	 */
+	beforeDestroy: function() {
+		this.finishEditing(this.edit)
+	},
+
+	/**
+	 * Before we navigate to a new task, we save possible edits.
+	 *
+	 * @param {Route} to The target Route Object being navigated to.
+	 * @param {Route} from The current route being navigated away from.
+	 * @param {Function} next This function must be called to resolve the hook.
+	 */
+	beforeRouteUpdate: function(to, from, next) {
+		this.finishEditing(this.edit)
+		next()
+	},
 	methods: {
 		...mapActions([
 			'deleteTask',
@@ -591,6 +610,10 @@ export default {
 			if (event && (event.target.classList.contains('mx-datepicker-btn-confirm') || event.target.tagName === 'A')) {
 				return
 			}
+			// Save possible edits before starting to edit another property.
+			if (this.edit !== type) {
+				this.finishEditing(this.edit)
+			}
 			if (!this.task.calendar.readOnly && this.edit !== type) {
 				this.edit = type
 				this.tmpTask[type] = this.task[type]
@@ -614,7 +637,6 @@ export default {
 		finishEditing: function(type) {
 			if (this.edit === type) {
 				this.setProperty(type, this.tmpTask[type])
-				this.edit = ''
 			}
 		},
 
