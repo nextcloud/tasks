@@ -38,7 +38,7 @@ OC.L10N.register(
     "[Yesterday]" : "[Wczoraj]",
     "[Today]" : "[Dzisiaj]",
     "[Tomorrow]" : "[Jutro]",
-    "Add a task to \"{calendar}\"..." : "Dodaj zadanie do \"{kalendarz}\"...",
+    "Add a task to \"{calendar}\"..." : "Dodaj zadanie do \"{calendar}\"...",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n zakończone zadanie","%n zakończonych zadań","%n zakończonych zadań","%n zakończonych zadań"],
     "Tomorrow" : "Jutro",
     "Set start date" : "Ustaw datę rozpoczęcia",
