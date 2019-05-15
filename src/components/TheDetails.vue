@@ -535,9 +535,14 @@ export default {
 
 	/**
 	 * Before we close the details view, we save possible edits.
+	 *
+	 * @param {Route} to The target Route Object being navigated to.
+	 * @param {Route} from The current route being navigated away from.
+	 * @param {Function} next This function must be called to resolve the hook.
 	 */
-	beforeDestroy: function() {
+	beforeRouteLeave: function(to, from, next) {
 		this.finishEditing(this.edit)
+		next()
 	},
 
 	/**
