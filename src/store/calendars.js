@@ -75,8 +75,29 @@ export function mapDavCollectionToCalendar(calendar) {
 		tasks: {},
 		url: calendar.url,
 		dav: calendar,
+		shares: calendar.shares.map(sharee => Object.assign({}, mapDavShareeToSharee(sharee))),
 		supportsTasks: calendar.components.includes('VTODO'),
 		loadedCompleted: false,
+	}
+}
+
+/**
+ * Maps a dav collection to the sharee array
+ *
+ * @param {Object} sharee The sharee object from the cdav library shares
+ * @returns {Object}
+ */
+export function mapDavShareeToSharee(sharee) {
+	const id = sharee.href.split('/').slice(-1)[0]
+	const name = sharee['common-name']
+		? sharee['common-name']
+		: id
+	return {
+		displayName: name,
+		id: id,
+		writeable: sharee.access[0].endsWith('read-write'),
+		isGroup: sharee.href.startsWith('principal:principals/groups/'),
+		uri: sharee.href
 	}
 }
 
@@ -309,16 +330,19 @@ const mutations = {
 	 * @param {Object} state The store data
 	 * @param {Object} data Destructuring object
 	 * @param {Calendar} data.calendar The calendar
-	 * @param {String} data.sharee The sharee
-	 * @param {String} data.id The id
-	 * @param {Boolean} data.group The group
+	 * @param {String} data.user The userId
+	 * @param {String} data.displayName The displayName
+	 * @param {String} data.uri The sharing principalScheme uri
+	 * @param {Boolean} data.isGroup Is this a group ?
 	 */
-	shareCalendar(state, { calendar, sharee, id, group }) {
-		let newSharee = {
-			displayname: sharee,
-			id,
+	shareCalendar(state, { calendar, user, displayName, uri, isGroup }) {
+		calendar = state.calendars.find(search => search.id === calendar.id)
+		const newSharee = {
+			displayName,
+			id: user,
 			writeable: false,
-			group
+			isGroup,
+			uri
 		}
 		calendar.shares.push(newSharee)
 	},
@@ -327,34 +351,27 @@ const mutations = {
 	 * Removes a sharee from calendar shares list
 	 *
 	 * @param {Object} state The store data
-	 * @param {Object} sharee The sharee
+	 * @param {Object} data Destructuring object
+	 * @param {Calendar} data.calendar The calendar
+	 * @param {String} data.uri The sharee uri
 	 */
-	removeSharee(state, sharee) {
-		let calendar = state.calendars.find(search => {
-			for (let i in search.shares) {
-				if (search.shares[i] === sharee) {
-					return true
-				}
-			}
-		})
-		calendar.shares.splice(calendar.shares.indexOf(sharee), 1)
+	removeSharee(state, { calendar, uri }) {
+		calendar = state.calendars.find(search => search.id === calendar.id)
+		let shareIndex = calendar.shares.findIndex(sharee => sharee.uri === uri)
+		calendar.shares.splice(shareIndex, 1)
 	},
 
 	/**
 	 * Toggles sharee's writable permission
 	 *
 	 * @param {Object} state The store data
-	 * @param {Object} sharee The sharee
+	 * @param {Object} data Destructuring object
+	 * @param {Object} data.calendar The calendar
+	 * @param {String} data.uri The sharee uri
 	 */
-	updateShareeWritable(state, sharee) {
-		let calendar = state.calendars.find(search => {
-			for (let i in search.shares) {
-				if (search.shares[i] === sharee) {
-					return true
-				}
-			}
-		})
-		sharee = calendar.shares.find(search => search === sharee)
+	updateShareeWritable(state, { calendar, uri }) {
+		calendar = state.calendars.find(search => search.id === calendar.id)
+		let sharee = calendar.shares.find(sharee => sharee.uri === uri)
 		sharee.writeable = !sharee.writeable
 	}
 }
@@ -567,20 +584,36 @@ const actions = {
 	 * Removes a sharee from a calendar
 	 *
 	 * @param {Object} context The store mutations Current context
-	 * @param {Object} sharee Calendar sharee object
+	 * @param {Object} data Destructuring object
+	 * @param {Object} data.calendar The calendar
+	 * @param {String} data.uri The sharee uri
 	 */
-	removeSharee(context, sharee) {
-		context.commit('removeSharee', sharee)
+	async removeSharee(context, { calendar, uri }) {
+		try {
+			await calendar.dav.unshare(uri)
+			context.commit('removeSharee', { calendar, uri })
+		} catch (error) {
+			throw error
+		}
 	},
 
 	/**
 	 * Toggles permissions of calendar sharees writeable rights
 	 *
 	 * @param {Object} context The store mutations Current context
-	 * @param {Object} sharee Calendar sharee object
+	 * @param {Object} data Destructuring object
+	 * @param {Object} data.calendar The calendar
+	 * @param {String} data.uri The sharee uri
+	 * @param {Boolean} data.writeable The sharee permission
 	 */
-	toggleShareeWritable(context, sharee) {
-		context.commit('updateShareeWritable', sharee)
+	async toggleShareeWritable(context, { calendar, uri, writeable }) {
+		try {
+			await calendar.dav.share(uri, writeable)
+			context.commit('updateShareeWritable', { calendar, uri, writeable })
+		} catch (error) {
+			throw error
+		}
+
 	},
 
 	/**
@@ -588,13 +621,19 @@ const actions = {
 	 *
 	 * @param {Object} context The store mutations Current context
 	 * @param {Calendar} data.calendar The calendar
-	 * @param {String} data.sharee The sharee
-	 * @param {Boolean} data.id The id
-	 * @param {Boolean} data.group The group
+	 * @param {String} data.user The userId
+	 * @param {String} data.displayName The displayName
+	 * @param {String} data.uri The sharing principalScheme uri
+	 * @param {Boolean} data.isGroup Is this a group ?
 	 */
-	shareCalendar(context, { calendar, sharee, id, group }) {
-		// Share a calendar with the entered group or user
-		context.commit('shareCalendar', { calendar, sharee, id, group })
+	async shareCalendar(context, { calendar, user, displayName, uri, isGroup }) {
+		// Share calendar with entered group or user
+		try {
+			await calendar.dav.share(uri)
+			context.commit('shareCalendar', { calendar, user, displayName, uri, isGroup })
+		} catch (error) {
+			throw error
+		}
 	},
 }
 

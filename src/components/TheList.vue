@@ -65,11 +65,19 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					{{ calendar.displayName }}
 				</span>
 			</a>
+
 			<div class="app-navigation-entry-utils">
 				<ul>
 					<li class="app-navigation-entry-utils-counter">
 						{{ calendarCount(calendar.id) | counterFormatter }}
 					</li>
+
+					<!-- sharing button -->
+					<li v-if="!calendar.readOnly" v-tooltip.top="sharedWithTooltip(calendar)"
+						:class="{'calendar__share--shared': hasShares(calendar)}"
+						:title="sharedWithTooltip(calendar)" href="#"
+						class="calendar__share icon-shared reactive" @click="toggleShare(calendar)"
+					/>
 					<Popover tag="li" class="app-navigation-entry-utils-menu-button reactive">
 						<ul>
 							<li v-if="!calendar.readOnly">
@@ -101,6 +109,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					</Popover>
 				</ul>
 			</div>
+
+			<!-- sharing input -->
+			<ShareCalendar v-if="shareOpen == calendar.id && !calendar.readOnly" :calendar="calendar" />
+
 			<div :class="{error: nameError}" class="app-navigation-entry-edit name">
 				<form>
 					<input v-model="newCalendarName"
@@ -175,6 +187,7 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 import Colorpicker from './Colorpicker'
 import PopoverMenu from './PopoverMenu'
 import Confirmation from './Confirmation'
+import ShareCalendar from './CalendarShare'
 
 import ClickOutside from 'vue-click-outside'
 
@@ -182,7 +195,8 @@ export default {
 	components: {
 		'Colorpicker': Colorpicker,
 		'Popover': PopoverMenu,
-		'Confirmation': Confirmation
+		'Confirmation': Confirmation,
+		ShareCalendar
 	},
 	directives: {
 		ClickOutside
@@ -202,6 +216,7 @@ export default {
 	data() {
 		return {
 			editing: '',
+			shareOpen: '',
 			copySuccess: false,
 			copied: false,
 			creating: false,
@@ -253,9 +268,33 @@ export default {
 				() => document.querySelector('#list_' + calendar.id + ' input.edit').focus()
 			)
 		},
+		toggleShare: function(calendar) {
+			if (this.shareOpen === calendar.id) {
+				this.shareOpen = ''
+			} else {
+				this.shareOpen = calendar.id
+			}
+		},
+		hasShares: function(calendar) {
+			return calendar.shares.length > 0
+		},
+		// info tooltip about number of shares
+		sharedWithTooltip: function(calendar) {
+			return this.hasShares(calendar)
+				? n('tasks',
+					'Shared with {num} entity',
+					'Shared with {num} entities',
+					calendar.shares.length, {
+						num: calendar.shares.length
+					})
+				: '' // disable the tooltip
+		},
 		resetView: function(calendar) {
 			if (this.editing === calendar.id) {
 				this.editing = ''
+			}
+			if (this.shareOpen === calendar.id) {
+				this.shareOpen = ''
 			}
 			this.tooltipTarget = ''
 		},
