@@ -1,0 +1,64 @@
+/**
+ * @copyright Copyright (c) 2019 John Molakvoæ <skjnldsv@protonmail.com>
+ *
+ * @author John Molakvoæ <skjnldsv@protonmail.com>
+ * @author Team Popcorn <teampopcornberlin@gmail.com>
+ * @author Raimund Schlüßler <raimund.schluessler@mailbox.org>
+ *
+ * @license GNU AGPL version 3 or any later version
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+
+.calendar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+
+	> a:first-of-type {
+		// put actions at the end
+		margin-left: auto;
+	}
+
+	&__name {
+		display: block;
+		flex: 0 1 auto;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	&__share,
+	&__menu .icon-more {
+		width: 44px;
+		height: 44px;
+		opacity: .5;
+		cursor: pointer;
+		&:hover,
+		&:focus,
+		&:active {
+			opacity: .7;
+		}
+	}
+	&__share {
+		&--shared {
+			opacity: .7;
+		}
+	}
+	&--disabled &__name {
+		opacity: .5;
+	}
+}

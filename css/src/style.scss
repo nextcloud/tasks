@@ -47,8 +47,11 @@
 				display: none;
 			}
 
-			&.list:not(.active) .app-navigation-entry-utils-menu-button {
-				display: none;
+			&.list:not(.active) {
+				.app-navigation-entry-utils-menu-button,
+				.calendar__share {
+					display: none;
+				}
 			}
 
 			.app-navigation-entry-edit {
