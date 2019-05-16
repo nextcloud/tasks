@@ -931,14 +931,19 @@
 
 					&.duration-input {
 						margin: 2px 0 0 .3em;
-						width: 35px;
+						width: 44px;
 					}
 
 					&.percent-input,
 					&.priority-input {
-						width: 35px;
+						width: 44px;
 						margin-top: 0;
 					}
+				}
+
+				input::-webkit-outer-spin-button,
+				input::-webkit-inner-spin-button {
+					-webkit-appearance: none;
 				}
 
 				select {
