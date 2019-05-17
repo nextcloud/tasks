@@ -164,6 +164,28 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</div>
 						</div>
 					</li>
+					<li class="section detail-class reactive">
+						<div v-click-outside="() => finishEditing('class')"
+							@click="editProperty('class')"
+						>
+							<span class="icon icon-color icon-privacy" />
+							<div class="detail-calendar-container">
+								<Multiselect
+									:value="classSelect.find( _ => _.type === task.class )"
+									:multiple="false"
+									:allow-empty="false"
+									track-by="type"
+									:placeholder="t('tasks', 'Select a classification')"
+									label="displayName"
+									:options="classSelect"
+									:close-on-select="true"
+									class="multiselect-vue"
+									@input="changeClass"
+									@tag="changeClass"
+								/>
+							</div>
+						</div>
+					</li>
 					<li :class="[{'editing': edit=='priority', 'date': task.priority>0}, priorityString]"
 						class="section detail-priority"
 					>
@@ -483,7 +505,12 @@ export default {
 				step: '00:30',
 				end: '23:30'
 			},
-			categories: []
+			categories: [],
+			classSelect: [
+				{ displayName: t('tasks', 'When shared show full event'), type: 'PUBLIC' },
+				{ displayName: t('tasks', 'When shared show only busy'), type: 'CONFIDENTIAL' },
+				{ displayName: t('tasks', 'When shared hide this event'), type: 'PRIVATE' },
+			],
 		}
 	},
 	computed: {
@@ -547,6 +574,7 @@ export default {
 			'setStart',
 			'toggleAllDay',
 			'moveTask',
+			'setClassification',
 		]),
 
 		removeTask: function() {
@@ -708,6 +736,10 @@ export default {
 
 		setDueDateTime: function(datetime, type = 'day') {
 			this.tmpTask.due = this.setDatePartial(this.tmpTask.due.clone(), moment(datetime), type)
+		},
+
+		changeClass: function(classification) {
+			this.setClassification({ task: this.task, classification: classification.type })
 		},
 
 		/**
