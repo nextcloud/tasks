@@ -408,6 +408,17 @@ const mutations = {
 	},
 
 	/**
+	 * Sets the classification of a task
+	 *
+	 * @param {Object} state The store data
+	 * @param {Task} task The task
+	 * @param {String} classification The classification
+	 */
+	setClassification(state, { task, classification }) {
+		Vue.set(task, 'class', classification)
+	},
+
+	/**
 	 * Sets the due date of a task
 	 *
 	 * @param {Object} state The store data
@@ -815,6 +826,19 @@ const actions = {
 		// check priority to comply with RFC5545 (to be between 0 and 9)
 		priority = (+priority < 0) ? 0 : (+priority > 9) ? 9 : Math.round(+priority)
 		context.commit('setPriority', { task: task, priority: priority })
+		context.dispatch('scheduleTaskUpdate', task)
+	},
+
+	/**
+	 * Sets the classification of a task
+	 *
+	 * @param {Object} context The store context
+	 * @param {Task} task The task to update
+	 */
+	async setClassification(context, { task, classification }) {
+		// check classification to comply with RFC5545 values
+		classification = (['PUBLIC', 'PRIVATE', 'CONFIDENTIAL'].indexOf(classification) > -1) ? classification : null
+		context.commit('setClassification', { task: task, classification: classification })
 		context.dispatch('scheduleTaskUpdate', task)
 	},
 

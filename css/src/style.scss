@@ -858,6 +858,11 @@
 						margin-left: auto;
 						right: 22px;
 					}
+				
+					&.icon-privacy {
+						opacity: 1;
+						cursor: unset;
+					}
 
 					&.detail-save {
 						display: none;

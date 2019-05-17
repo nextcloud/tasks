@@ -103,6 +103,7 @@ export default class Task {
 		this._categories = categories ? categories.getValues() : []
 		this._modified = this.vtodo.getFirstPropertyValue('last-modified')
 		this._created = this.vtodo.getFirstPropertyValue('created')
+		this._class = this.vtodo.getFirstPropertyValue('class') || 'PUBLIC'
 
 		this._searchQuery = ''
 		this._matchesSearchQuery = true
@@ -448,6 +449,20 @@ export default class Task {
 		this.vtodo.updatePropertyWithValue('created', createdDate)
 		this.updateLastModified()
 		this._created = this.vtodo.getFirstPropertyValue('created')
+	}
+
+	get class() {
+		return this._class
+	}
+
+	set class(classification) {
+		if (classification) {
+			this.vtodo.updatePropertyWithValue('class', classification)
+		} else {
+			this.vtodo.removeProperty('class')
+		}
+		this.updateLastModified()
+		this._class = this.vtodo.getFirstPropertyValue('class') || 'PUBLIC'
 	}
 
 	/**
