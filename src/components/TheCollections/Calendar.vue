@@ -65,6 +65,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					/>
 				</task-drag-container>
 				<LoadCompletedButton :calendar="calendar" />
+				<DeleteCompletedModal v-if="calendar.loadedCompleted" :calendar="calendar" />
 			</div>
 		</div>
 	</div>
@@ -75,6 +76,7 @@ import { mapGetters, mapActions } from 'vuex'
 import { sort } from '../../store/storeHelper'
 import SortorderDropdown from '../SortorderDropdown'
 import LoadCompletedButton from '../LoadCompletedButton'
+import DeleteCompletedModal from '../DeleteCompletedModal'
 import Task from '../Task'
 import TaskDragContainer from '../TaskDragContainer'
 
@@ -84,6 +86,7 @@ export default {
 		'SortorderDropdown': SortorderDropdown,
 		'LoadCompletedButton': LoadCompletedButton,
 		TaskDragContainer,
+		DeleteCompletedModal,
 	},
 	props: {
 		calendarId: {

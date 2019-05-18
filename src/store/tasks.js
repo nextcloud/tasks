@@ -634,6 +634,12 @@ const actions = {
 	 * @param {Boolean} [data.dav = true] Trigger a dav deletion
 	 */
 	async deleteTask(context, { task, dav = true }) {
+		function deleteTaskFromStore() {
+			context.commit('deleteTask', task)
+			let parent = context.getters.getTaskByUid(task.related)
+			context.commit('deleteTaskFromParent', { task: task, parent: parent })
+			context.commit('deleteTaskFromCalendar', task)
+		}
 		// delete all subtasks first
 		await Promise.all(Object.values(task.subTasks).map(async(subTask) => {
 			await context.dispatch('deleteTask', { task: subTask, dav: true })
@@ -641,15 +647,16 @@ const actions = {
 		// only local delete if the task doesn't exists on the server
 		if (task.dav && dav) {
 			await task.dav.delete()
+				.then(() => {
+					deleteTaskFromStore()
+				})
 				.catch((error) => {
 					console.debug(error)
 					task.syncstatus = new TaskStatus('error', t('tasks', 'Could not delete the task.'))
 				})
+		} else {
+			deleteTaskFromStore()
 		}
-		context.commit('deleteTask', task)
-		let parent = context.getters.getTaskByUid(task.related)
-		context.commit('deleteTaskFromParent', { task: task, parent: parent })
-		context.commit('deleteTaskFromCalendar', task)
 	},
 
 	/**
