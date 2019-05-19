@@ -58,6 +58,7 @@ OC.L10N.register(
     "Set due time" : "Définir une date d'échéance",
     "All day" : "Tous les jours",
     "Select a calendar" : "Sélectionnez un calendrier",
+    "Select a classification" : "Sélectionner une catégorie",
     "Select categories" : "Sélectionner des catégories",
     "Add this as a new category" : "Ajouter comme nouvelle catégorie",
     "Task not found!" : "Tâche non trouvée !",
