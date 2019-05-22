@@ -113,7 +113,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					>
 				</form>
 			</div>
-			<task-drag-container v-if="!task.hideSubtasks || searchQuery"
+			<task-drag-container v-if="showSubtasks"
 				:task-id="task.uri"
 				:calendar-id="task.calendar.uri"
 			>
@@ -251,6 +251,50 @@ export default {
 			}
 			// We also have to show tasks for which one sub(sub...)task matches.
 			return this.searchSubTasks(this.task, this.searchQuery)
+		},
+
+		/**
+		 * Checks whether we show the subtasks
+		 *
+		 * @returns {Boolean} If we show the subtasks
+		 */
+		showSubtasks: function() {
+			if (!this.task.hideSubtasks || this.searchQuery || this.isTaskOpen || this.isDescendantOpen) {
+				return true
+			} else {
+				return false
+			}
+		},
+
+		/**
+		 * Checks whether the task is currently open in the details view
+		 *
+		 * @returns {Boolean} If it is open
+		 */
+		isTaskOpen: function() {
+			return this.task.uri === this.$route.params.taskId
+		},
+
+		/**
+		 * Checks whether one of the tasks descendants is currently open in the details view
+		 *
+		 * @returns {Boolean} If a descendeant is open
+		 */
+		isDescendantOpen: function() {
+			var taskId = this.$route.params.taskId
+			var checkSubtasksOpen = function subtasksOpen(tasks) {
+				for (var key in tasks) {
+					var task = tasks[key]
+					if (task.uri === taskId) {
+						return true
+					}
+					if (subtasksOpen(task.subTasks)) {
+						return true
+					}
+				}
+				return false
+			}
+			return checkSubtasksOpen(this.task.subTasks)
 		},
 	},
 	methods: {
