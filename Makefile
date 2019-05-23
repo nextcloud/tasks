@@ -59,27 +59,33 @@ ifneq ("$(wildcard $(private_key))","") #(,$(wildcard $(private_key)))
 	endif
 endif
 
-all: install build
+.PHONY: all
+all: dev-setup build-svg-sprite build-js-production
 
-# Fetches the PHP and JS dependencies and compiles the JS. If no composer.json
-# is present, the composer step is skipped, if no package.json or js/package.json
-# is present, the npm step is skipped
-.PHONY: build
-build:
-	$(npm) run build
+# cleanup and generate a clean developement setup
+dev-setup: clean clean-dev npm-init
 
-# Sets up the development environment
-.PHONY: install
-install:
-	$(npm) install
-	$(npm) update
+npm-init:
+	npm install
+
+npm-update:
+	npm update
 
 # Runs the development build
-.PHONY: development
-development:
-	$(npm) install
-	$(npm) update
-	$(npm) run dev
+build-js:
+	npm run dev
+
+# Runs the production build
+build-js-production:
+	npm run build
+
+# Runs the development build and keep watching
+watch-js:
+	npm run watch
+
+# Build the svg sprite
+build-svg-sprite:
+	npm run svg_sprite
 
 # Removes the build directory and the compiled files
 .PHONY: clean
@@ -95,18 +101,13 @@ clean:
 	rm -rf $(build_directory)
 
 # Same as clean but also removes dependencies installed by npm
-.PHONY: distclean
-distclean: clean
+.PHONY: clean-dev
+clean-dev:
 	rm -rf node_modules
-
-# Watches the js and scss files
-.PHONY: watch
-watch:
-	$(npm) run watch
 
 # Builds the source package for the app store
 .PHONY: appstore
-appstore: clean build
+appstore: clean build-svg-sprite build-js-production
 	mkdir -p $(appstore_build_directory) $(appstore_artifact_directory)
 	rsync -av .	$(appstore_build_directory) \
 	--exclude=/.git \
