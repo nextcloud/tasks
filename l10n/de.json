@@ -88,7 +88,7 @@
     "Priority %s: low" : "Priorität %s: niedrig",
     "%s %% completed" : "%s %% fertiggestellt",
     "When shared show full event" : "Wenn geteilt, zeige das vollständige Ereignis an",
-    "When shared show only busy" : "Wenn geteilt, zeige das Ereignis nicht an",
+    "When shared show only busy" : "Wenn geteilt, zeige nur den Status 'beschäftigt' an",
     "When shared hide this event" : "Wenn geteilt, zeige das Ereignis nicht an",
     "Last modified %s" : "Zuletzt geändert %s",
     "Created %s" : "%s erstellt",
