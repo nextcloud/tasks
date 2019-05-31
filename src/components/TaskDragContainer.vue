@@ -26,7 +26,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		:move="onMove"
 		@end="onEnd"
 	>
-		<slot :move="onMove" />
+		<slot />
 	</draggable>
 </template>
 
@@ -54,16 +54,6 @@ export default {
 		]),
 
 		/**
-		 * Called when a task is dragged.
-		 *
-		 * @param {Object} $event The event which caused the move
-		 */
-		onMove: function($event) {
-			this.cleanUpDragging()
-			$event.related.classList.add('dragover')
-		},
-
-		/**
 		 * Called when a task is dropped.
 		 *
 		 * @param {Object} $event The event which caused the drop
@@ -78,18 +68,7 @@ export default {
 			// Move the task to a new calendar or parent.
 			this.prepareMoving(task, $event)
 			this.prepareCollecting(task, $event)
-			this.cleanUpDragging()
 			$event.stopPropagation()
-		},
-
-		/**
-		 * Called when we stopped dragging. Cleans up temporarily added classes.
-		 */
-		cleanUpDragging: function() {
-			var items = document.getElementsByClassName('task-item')
-			for (let i = 0; i < items.length; i++) {
-				items[i].classList.remove('dragover')
-			}
 		},
 
 		/**
