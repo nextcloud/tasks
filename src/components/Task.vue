@@ -137,7 +137,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { overdue, valid, sort, searchSubTasks } from '../store/storeHelper'
+import { overdue, valid, sort, searchSubTasks, isTaskInList } from '../store/storeHelper'
 import ClickOutside from 'vue-click-outside'
 import { mapGetters, mapActions } from 'vuex'
 import focus from '../directives/focus'
@@ -219,7 +219,9 @@ export default {
 		},
 
 		/**
-		 * Returns the subtasks filtered by completed state if necessary
+		 * Returns the subtasks filtered by completed state if necessary and
+		 * filtered by collections (for week, today, important and current) when
+		 * the task is not opened in details view.
 		 *
 		 * @returns {Array} the array with the subtasks to show
 		 */
@@ -228,6 +230,12 @@ export default {
 			if (this.task.hideCompletedSubtasks) {
 				subTasks = subTasks.filter(task => {
 					return !task.completed
+				})
+			}
+			if (['today', 'week', 'starred', 'current'].indexOf(this.$route.params.collectionId) > -1
+				&& this.$route.params.taskId !== this.task.uri) {
+				subTasks = subTasks.filter(task => {
+					return isTaskInList(task, this.$route.params.collectionId)
 				})
 			}
 			return sort([...subTasks], this.sortOrder, this.sortDirection)
