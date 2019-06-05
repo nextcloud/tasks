@@ -39,7 +39,6 @@ const getters = {
 	 *
 	 * Tasks have to
 	 *	- belong to a collection
-	 *	- be a root task
 	 *	- be uncompleted
 	 *
 	 * @param {Object} state The store data
@@ -52,7 +51,7 @@ const getters = {
 		let count = 0
 		rootState.calendars.calendars.forEach(calendar => {
 			let tasks = Object.values(calendar.tasks).filter(task => {
-				return isTaskInList(task, collectionId) && !task.related
+				return isTaskInList(task, collectionId, false)
 			})
 			if (rootState.tasks.searchQuery) {
 				tasks = tasks.filter(task => {
