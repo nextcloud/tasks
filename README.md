@@ -1,6 +1,5 @@
 # Tasks
-
-[![Build Status](https://scrutinizer-ci.com/g/nextcloud/tasks/badges/build.png?b=master)](https://scrutinizer-ci.com/g/nextcloud/tasks/build-status/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nextcloud/tasks/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nextcloud/tasks/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/nextcloud/tasks/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/nextcloud/tasks/?branch=master)
+![Downloads](https://img.shields.io/github/downloads/nextcloud/tasks/total.svg) [![Build Status](https://scrutinizer-ci.com/g/nextcloud/tasks/badges/build.png?b=master)](https://scrutinizer-ci.com/g/nextcloud/tasks/build-status/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nextcloud/tasks/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nextcloud/tasks/?branch=master) [![Code coverage](https://img.shields.io/codecov/c/github/nextcloud/tasks.svg)](https://codecov.io/gh/nextcloud/tasks/) [![Dependabot status](https://img.shields.io/badge/Dependabot-enabled-brightgreen.svg?longCache=true&logo=dependabot)](https://dependabot.com)
 
 **A tasks app for [Nextcloud](http://nextcloud.com). Easily sync tasks from various devices with your Nextcloud and edit them online.**
 

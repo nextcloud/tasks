@@ -109,6 +109,7 @@
 		"snapshotSerializers": [
 			"<rootDir>/node_modules/jest-serializer-vue"
 		],
+		"coverageDirectory": "./coverage/",
 		"collectCoverage": true,
 		"collectCoverageFrom": [
 			"<rootDir>/src/**/*.{js,vue}",
@@ -117,7 +118,9 @@
 		"coverageReporters": [
 			"json",
 			"text",
-			"html"
+			"html",
+			"lcov",
+			"clover"
 		]
 	}
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<phpunit bootstrap="tests/bootstrap.php"
+		 verbose="true"
+         colors="true"
+		 timeoutForSmallTests="900"
+		 timeoutForMediumTests="900"
+		 timeoutForLargeTests="900">
+	<testsuite name='Contacts app tests'>
+        <directory>./tests/unit</directory>
+	</testsuite>
+	<!-- filters for code coverage -->
+	<filter>
+		<whitelist>
+			<directory suffix=".php">./</directory>
+			<exclude>
+				<directory suffix=".php">./l10n</directory>
+				<directory suffix=".php">./templates</directory>
+				<directory suffix=".php">./tests</directory>
+			</exclude>
+		</whitelist>
+	</filter>
+</phpunit>
