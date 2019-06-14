@@ -23,7 +23,6 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 	<draggable tag="ol"
 		:list="['']"
 		v-bind="{group: 'tasks', swapThreshold: 0.30, delay: 500, delayOnTouchOnly: true, touchStartThreshold: 3}"
-		:move="onMove"
 		@end="onEnd"
 	>
 		<slot />
