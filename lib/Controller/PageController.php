@@ -25,7 +25,6 @@ namespace OCA\Tasks\Controller;
 use \OCP\AppFramework\Controller;
 use \OCP\AppFramework\Http\TemplateResponse;
 use \OCP\IRequest;
-use \OCP\IUserSession;
 
 /**
  * Controller class for main page.
@@ -33,18 +32,11 @@ use \OCP\IUserSession;
 class PageController extends Controller {
 
 	/**
-	 * @var IUserSession
-	 */
-	private $userSession;
-
-	/**
 	 * @param string $appName
 	 * @param IRequest $request an instance of the request
-	 * @param IUserSession $userSession
 	 */
-	public function __construct(string $appName, IRequest $request, IUserSession $userSession) {
+	public function __construct(string $appName, IRequest $request) {
 		parent::__construct($appName, $request);
-		$this->userSession = $userSession;
 	}
 
 
