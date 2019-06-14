@@ -168,3 +168,11 @@ endif
 .PHONY: test
 test:
 	$(npm) run test
+
+test-php:
+	phpunit -c phpunit.xml
+	phpunit -c phpunit.integration.xml
+
+test-php-coverage:
+	phpunit -c phpunit.xml --coverage-clover=coverage-unit.xml
+	phpunit -c phpunit.integration.xml --coverage-clover=coverage-integration.xml
