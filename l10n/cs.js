@@ -16,6 +16,7 @@ OC.L10N.register(
     "Unable to delete the share." : "Sdílení se nedaří smazat.",
     "Delete" : "Smazat",
     "Cancel" : "Storno",
+    "Delete completed tasks." : "Smazat dokončené úkoly.",
     "No errors" : "Bez chyb",
     "Load all completed tasks." : "Načíst všechny dokončené úlohy.",
     "Change sort order" : "Změnit řazení",
