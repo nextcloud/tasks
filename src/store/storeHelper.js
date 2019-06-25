@@ -136,6 +136,33 @@ function week(date) {
 	return valid(date) && moment(date, 'YYYYMMDDTHHmmss').diff(moment().startOf('day'), 'days', true) < 7
 }
 
+function dayOfTask(task) {
+	var diff, startdiff, duediff
+	var start = moment(task.start, 'YYYYMMDDTHHmmss').startOf('day')
+	var due = moment(task.due, 'YYYYMMDDTHHmmss').startOf('day')
+
+	// Add all tasks whose start date will be reached at that day.
+	if (start.isValid() && !due.isValid()) {
+		diff = start.diff(moment().startOf('day'), 'days')
+	}
+
+	// Add all tasks whose due date will be reached at that day.
+	if (due.isValid() && !start.isValid()) {
+		diff = due.diff(moment().startOf('day'), 'days')
+	}
+
+	// Add all tasks whose due or start date will be reached at that day.
+	// Add the task to the day at which either due or start date are reached first.
+	if (start.isValid() && due.isValid()) {
+		startdiff = start.diff(moment().startOf('day'), 'days')
+		duediff = due.diff(moment().startOf('day'), 'days')
+		// chose the date that is reached first
+		diff = (startdiff < duediff) ? startdiff : duediff
+	}
+
+	return diff
+}
+
 /**
  * Checks if a date is valid
  *
@@ -381,4 +408,5 @@ export {
 	sort,
 	momentToICALTime,
 	searchSubTasks,
+	dayOfTask,
 }

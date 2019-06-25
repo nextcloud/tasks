@@ -45,7 +45,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import { mapGetters } from 'vuex'
-import { sort } from '../../store/storeHelper'
+import { sort, dayOfTask } from '../../store/storeHelper'
 import SortorderDropdown from '../SortorderDropdown'
 import Task from '../Task'
 import TaskDragContainer from '../TaskDragContainer'
@@ -92,30 +92,8 @@ export default {
 
 			// Add every task due at a certain day to that day.
 			var tasks = this.uncompletedRootTasks(this.tasks)
-			var start, due
 			tasks.forEach(task => {
-				var diff, startdiff, duediff
-				start = moment(task.start, 'YYYYMMDDTHHmmss').startOf('day')
-				due = moment(task.due, 'YYYYMMDDTHHmmss').startOf('day')
-
-				// Add all tasks whose start date will be reached at that day.
-				if (start.isValid() && !due.isValid()) {
-					diff = start.diff(moment().startOf('day'), 'days')
-				}
-
-				// Add all tasks whose due date will be reached at that day.
-				if (due.isValid() && !start.isValid()) {
-					diff = due.diff(moment().startOf('day'), 'days')
-				}
-
-				// Add all tasks whose due or start date will be reached at that day.
-				// Add the task to the day at which either due or start date are reached first.
-				if (start.isValid() && due.isValid()) {
-					startdiff = start.diff(moment().startOf('day'), 'days')
-					duediff = due.diff(moment().startOf('day'), 'days')
-					// chose the date that is reached first
-					diff = (startdiff < duediff) ? startdiff : duediff
-				}
+				var diff = dayOfTask(task)
 
 				// If the date was reached before today, map it to today.
 				if (diff < 0) {
