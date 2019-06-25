@@ -72,7 +72,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<div class="task-status-container">
 					<TaskStatusDisplay :task="task" />
 				</div>
-				<div v-if="$route.params.collectionId=='week'" class="calendar">
+				<div v-if="collectionId=='week'" class="calendar">
 					<span :style="{'background-color': task.calendar.color}" class="calendar-indicator" />
 					<span class="calendar-name">{{ task.calendar.displayName }}</span>
 				</div>
@@ -129,6 +129,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<TaskBodyComponent v-for="subtask in filteredSubtasks"
 					:key="subtask.uid"
 					:task="subtask"
+					:collection-string="collectionString"
 					class="subtask"
 				/>
 			</task-drag-container>
@@ -174,13 +175,18 @@ export default {
 		task: {
 			type: Object,
 			required: true
-		}
+		},
+		collectionString: {
+			type: String,
+			default: null,
+			required: false
+		},
 	},
 	data() {
 		return {
 			showSubtaskInput: false,
 			newTaskName: '',
-			isAddingTask: false
+			isAddingTask: false,
 		}
 	},
 	computed: {
@@ -189,6 +195,14 @@ export default {
 			sortDirection: 'sortDirection',
 			searchQuery: 'searchQuery',
 		}),
+
+		collectionId: function() {
+			if (this.collectionString) {
+				return this.collectionString.split('-')[0]
+			} else {
+				return null
+			}
+		},
 
 		iconStar: function() {
 			if (+this.task.priority > 5) {
@@ -232,10 +246,10 @@ export default {
 					return !task.completed
 				})
 			}
-			if (['today', 'week', 'starred', 'current'].indexOf(this.$route.params.collectionId) > -1
+			if (['today', 'week', 'starred', 'current'].indexOf(this.collectionId) > -1
 				&& this.$route.params.taskId !== this.task.uri) {
 				subTasks = subTasks.filter(task => {
-					return isTaskInList(task, this.$route.params.collectionId)
+					return isTaskInList(task, this.collectionId)
 				})
 			}
 			return sort([...subTasks], this.sortOrder, this.sortDirection)
@@ -343,8 +357,8 @@ export default {
 				}
 				if (this.$route.params.calendarId) {
 					this.$router.push({ name: 'calendarsTask', params: { calendarId: this.$route.params.calendarId, taskId: this.task.uri } })
-				} else if (this.$route.params.collectionId) {
-					this.$router.push({ name: 'collectionsTask', params: { collectionId: this.$route.params.collectionId, taskId: this.task.uri } })
+				} else if (this.collectionId) {
+					this.$router.push({ name: 'collectionsTask', params: { collectionId: this.collectionId, taskId: this.task.uri } })
 				}
 			}
 		},
@@ -361,13 +375,13 @@ export default {
 
 			// If the task is created in a collection view,
 			// set the appropriate properties.
-			if (this.$route.params.collectionId === 'starred') {
+			if (this.collectionId === 'starred') {
 				task.priority = '1'
 			}
-			if (this.$route.params.collectionId === 'today') {
+			if (this.collectionId === 'today') {
 				task.due = moment().startOf('day').format('YYYY-MM-DDTHH:mm:ss')
 			}
-			if (this.$route.params.collectionId === 'current') {
+			if (this.collectionId === 'current') {
 				task.start = moment().format('YYYY-MM-DDTHH:mm:ss')
 			}
 
