@@ -180,21 +180,6 @@ export default {
 			sortDirection: 'sortDirection',
 			searchQuery: 'searchQuery',
 		}),
-		/**
-		 * Returns the path of the task
-		 *
-		 * @returns {String} the route to the task
-		 */
-		taskRoute: function() {
-			var calendarId = this.$route.params.calendarId
-			var collectionId = this.$route.params.collectionId
-			if (calendarId) {
-				return '/calendars/' + calendarId + '/tasks/' + this.task.uri
-			} else if (collectionId) {
-				return '/collections/' + collectionId + '/tasks/' + this.task.uri
-			}
-			return ''
-		},
 
 		iconStar: function() {
 			if (+this.task.priority > 5) {
@@ -332,7 +317,11 @@ export default {
 				if (!this.task.loadedCompleted) {
 					this.getTasksFromCalendar({ calendar: this.task.calendar, completed: true, related: this.task.uid })
 				}
-				this.$router.push(this.taskRoute)
+				if (this.$route.params.calendarId) {
+					this.$router.push({ name: 'calendarsTask', params: { calendarId: this.$route.params.calendarId, taskId: this.task.uri } })
+				} else if (this.$route.params.collectionId) {
+					this.$router.push({ name: 'collectionsTask', params: { collectionId: this.$route.params.collectionId, taskId: this.task.uri } })
+				}
 			}
 		},
 

@@ -612,13 +612,11 @@ const actions = {
 					// Open the details view for the new task
 					var calendarId = context.rootState.route.params.calendarId
 					var collectionId = context.rootState.route.params.collectionId
-					var taskRoute = ''
 					if (calendarId) {
-						taskRoute = '/calendars/' + calendarId + '/tasks/' + task.uri
+						router.push({ name: 'calendarsTask', params: { calendarId: calendarId, taskId: task.uri } })
 					} else if (collectionId) {
-						taskRoute = '/collections/' + collectionId + '/tasks/' + task.uri
+						router.push({ name: 'collectionsTask', params: { collectionId: collectionId, taskId: task.uri } })
 					}
-					router.push(taskRoute)
 
 				})
 				.catch((error) => { throw error })

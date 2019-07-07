@@ -34,10 +34,10 @@ const routes = [
 	// would also be an option, but it currently does not work
 	// reliably with router-link due to
 	// https://github.com/vuejs/vue-router/issues/419
-	{ path: '/collections/:collectionId', component: Collections, props: true },
-	{ path: '/collections/:collectionId/tasks/:taskId', components: { default: Collections, details: TheDetails }, props: { default: true } },
-	{ path: '/calendars/:calendarId', component: Calendar, props: true },
-	{ path: '/calendars/:calendarId/tasks/:taskId', components: { default: Calendar, details: TheDetails }, props: { default: true } }
+	{ name: 'collections', path: '/collections/:collectionId', component: Collections, props: true },
+	{ name: 'collectionsTask', path: '/collections/:collectionId/tasks/:taskId', components: { default: Collections, details: TheDetails }, props: { default: true } },
+	{ name: 'calendars', path: '/calendars/:calendarId', component: Calendar, props: true },
+	{ name: 'calendarsTask', path: '/calendars/:calendarId/tasks/:taskId', components: { default: Calendar, details: TheDetails }, props: { default: true } }
 ]
 
 Vue.use(VueRouter)
