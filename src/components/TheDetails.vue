@@ -608,9 +608,9 @@ export default {
 
 		closeDetails: function() {
 			if (this.$route.params.calendarId) {
-				this.$router.push({ path: `/calendars/${this.$route.params.calendarId}` })
+				this.$router.push({ name: 'calendars', params: { calendarId: this.$route.params.calendarId } })
 			} else {
-				this.$router.push({ path: `/collections/${this.$route.params.collectionId}` })
+				this.$router.push({ name: 'collections', params: { collectionId: this.$route.params.collectionId } })
 			}
 		},
 
@@ -820,7 +820,7 @@ export default {
 			const task = await this.moveTask({ task: this.task, calendar: calendar })
 			// If we are in a calendar view, we have to navigate to the new calendar.
 			if (this.$route.params.calendarId) {
-				this.$router.push('/calendars/' + task.calendar.id + '/tasks/' + task.uri)
+				this.$router.push({ name: 'calendarsTask', params: { calendarId: task.calendar.id, taskId: task.uri } })
 			}
 		},
 	}
