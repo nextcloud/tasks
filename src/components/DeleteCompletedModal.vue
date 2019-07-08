@@ -33,14 +33,13 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<div v-if="completedTasksCount">
 					<h3 class="delete-completed__header">
 						{{ n('tasks',
-							'This will delete {taskCount} completed task and its subtasks from calendar "{calendarName}".',
-							'This will delete {taskCount} completed tasks and their subtasks from calendar "{calendarName}".',
+							'This will delete {taskCount} completed task and its subtasks from calendar "%s".',
+							'This will delete {taskCount} completed tasks and their subtasks from calendar "%s".',
 							initialCompletedRootTasksCount,
 							{
-								taskCount: initialCompletedRootTasksCount,
-								calendarName: calendar.displayName
+								taskCount: initialCompletedRootTasksCount
 							}
-						) }}
+						).replace('%s', calendar.displayName) }}
 					</h3>
 					<button class="delete-completed__button icon-delete" type="button"
 						@click="deleteCompletedTasks"
@@ -50,7 +49,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</div>
 				<div v-else>
 					<h3 class="delete-completed__header">
-						{{ t('tasks', 'Deleted all completed tasks from calendar "{calendarName}".', {calendarName: calendar.displayName}) }}
+						{{ t('tasks', 'Deleted all completed tasks from calendar "%s".').replace('%s', calendar.displayName) }}
 					</h3>
 				</div>
 				<div>
