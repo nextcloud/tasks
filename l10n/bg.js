@@ -28,7 +28,6 @@ OC.L10N.register(
     "[Yesterday]" : "[вчера]",
     "[Today]" : "[днес]",
     "[Tomorrow]" : "[утре]",
-    "Add a task to \"{calendar}\"..." : "Добави задача към \"{calendar}\"...",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n Завършена задача","%n Завършени задачи"],
     "Tomorrow" : "Утре",
     "Set start date" : "Начална дата",

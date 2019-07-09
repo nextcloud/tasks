@@ -37,7 +37,6 @@ OC.L10N.register(
     "[Yesterday]" : "[אתמול]",
     "[Today]" : "[היום]",
     "[Tomorrow]" : "[מחר]",
-    "Add a task to \"{calendar}\"..." : "הוספת משימה אל „{calendar}”…",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n פעילות מושלמת","%n פעילויות הושלמו","%n פעילויות הושלמו","%n פעילויות הושלמו"],
     "Tomorrow" : "מחר",
     "Set start date" : "קביעת תאריך התחלה",

@@ -18,7 +18,6 @@ OC.L10N.register(
     "Cancel" : "Mégsem",
     "Delete all completed tasks." : "Összes befejezett feladat törlése.",
     "Delete completed tasks." : "Befejezett feladatok törlése.",
-    "Deleted all completed tasks from calendar \"{calendarName}\"." : "Összes befejezett feladat törölve \"{calendarName}\" naptárból.",
     "No errors" : "Nincsenek hibák",
     "Load all completed tasks." : "Összes befejezett feladat betöltése.",
     "Change sort order" : "Rendezési sorrend váltás",

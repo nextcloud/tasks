@@ -25,7 +25,6 @@ OC.L10N.register(
     "[Yesterday]" : "[Eilen]",
     "[Today]" : "[Tänään]",
     "[Tomorrow]" : "[Huomenna]",
-    "Add a task to \"{calendar}\"..." : "Lisää tehtävä kalenteriin \"{calendar}\"...",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n valmistunut tehtävä","%n valmistunutta tehtävää"],
     "Tomorrow" : "Huomenna",
     "Set start date" : "Aseta aloituspäivä",

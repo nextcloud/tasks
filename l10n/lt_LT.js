@@ -30,7 +30,6 @@ OC.L10N.register(
     "[Yesterday]" : "[Vakar]",
     "[Today]" : "[Šiandien]",
     "[Tomorrow]" : "[Rytoj]",
-    "Add a task to \"{calendar}\"..." : "Pridėti užduotį į \"{calendar}\"...",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n atlikta užduotis","%n atliktos užduotys","%n atliktų užduočių","%n atlikta užduotis"],
     "Tomorrow" : "Rytoj",
     "Set start date" : "Nustatyti pradžios datą",
