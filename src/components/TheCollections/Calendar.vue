@@ -115,7 +115,7 @@ export default {
 		},
 
 		inputString: function() {
-			return t('tasks', 'Add a task to "%s"...').replace('%s', this.calendar.displayName)
+			return t('tasks', 'Add a task to "%s"…').replace('%s', this.calendar.displayName)
 		},
 
 		/**
