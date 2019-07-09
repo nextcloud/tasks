@@ -153,14 +153,6 @@ export default {
 			this.createTask({ summary: this.newTaskName, calendar: this.calendar })
 			this.newTaskName = ''
 		},
-
-		onMove: function($event, $originalEvent) {
-			console.debug($event)
-			console.debug($event.target)
-			console.debug($event.to)
-			// console.debug('target: ' + $event.target.attributes['task-id'].value)
-			// console.debug('to: ' + $event.to.attributes['task-id'].value)
-		},
 	}
 }
 </script>
