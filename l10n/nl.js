@@ -21,6 +21,7 @@ OC.L10N.register(
     "Delete completed tasks." : "Verwijder voltooide taken.",
     "No errors" : "Geen foutmeldingen.",
     "Open your browser console for more details" : "Open je browserconsole voor meer details.",
+    "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["Kon {failedCount} taak niet verwijderen.","Kon {failedCount} taken niet verwijderen."],
     "Load all completed tasks." : "Laad alle voltooide taken.",
     "Change sort order" : "Volgorde wijzigen",
     "Default" : "Standaard",

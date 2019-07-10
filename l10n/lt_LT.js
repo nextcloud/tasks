@@ -16,6 +16,8 @@ OC.L10N.register(
     "Unable to change permissions." : "Nepavyko pakeisti leidimų.",
     "Delete" : "Ištrinti",
     "Cancel" : "Atsisakyti",
+    "Delete all completed tasks." : "Ištrinti visas atliktas užduotis.",
+    "Delete completed tasks." : "Ištrinti atliktas užduotis.",
     "No errors" : "Klaidų nėra",
     "Load all completed tasks." : "Įkelti visas atliktas užduotis.",
     "Change sort order" : "Keisti rikiavimo tvarką",
