@@ -56,6 +56,7 @@ OC.L10N.register(
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n tâche terminée","%n tâches terminées"],
     "Add an important task to \"%s\"…" : "Ajouter une tâche importante à \"%s\"…",
     "Add a task due today to \"%s\"…" : "Ajouter une tâche échéant aujourd'hui à \"%s\"…",
+    "Add a current task to \"%s\"…" : "Ajouter une tâche en cours à \"%s\"…",
     "Tomorrow" : "Demain",
     "Set start date" : "Indiquer la date de début",
     "Set start time" : "Définir une date de début",
