@@ -1,0 +1,25 @@
+OC.L10N.register(
+    "tasks",
+    {
+    "Tasks" : "وظایف",
+    "Important" : "مهم",
+    "Today" : "امروز",
+    "Week" : "هفته",
+    "All" : "همه",
+    "Current" : "کنونی",
+    "Completed" : "نکمیل شده",
+    "Delete" : "حذف",
+    "Cancel" : "لغو",
+    "Default" : "پیش فرض",
+    "_%n Completed Task_::_%n Completed Tasks_" : ["%n کار تکمیل شده","%n کار تکمیل شده"],
+    "Tomorrow" : "فردا",
+    "Set due date" : "تعریف سر رسید",
+    "Task not found!" : "کار یافت نشد!",
+    "Edit" : "ویرایش",
+    "Download" : "دانلود",
+    "Save" : "ذخیره",
+    "New List" : "لیست جدید",
+    "Settings" : "تنظیمات",
+    "Hidden" : "مخفی"
+},
+"nplurals=2; plural=(n > 1);");

@@ -1,0 +1,25 @@
+OC.L10N.register(
+    "tasks",
+    {
+    "Tasks" : "Задачи",
+    "Important" : "Важно",
+    "Today" : "Денеска",
+    "Week" : "Седмица",
+    "All" : "Сите",
+    "Completed" : "Завршено",
+    "Delete" : "Избриши",
+    "Cancel" : "Откажи",
+    "Default" : "Предефиниран",
+    "Tomorrow" : "Утре",
+    "Set start date" : "Постави почетен датум",
+    "Set due date" : "Постави краен рок",
+    "Edit" : "Уреди",
+    "Download" : "Преземи",
+    "Save" : "Сними",
+    "New List" : "Нова листа",
+    "Settings" : "Подесувања",
+    "Hidden" : "Сокриен",
+    "Visible" : "Видлив",
+    "Automatic" : "Автоматски"
+},
+"nplurals=2; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : 1;");

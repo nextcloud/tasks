@@ -1,0 +1,10 @@
+{ "translations": {
+    "Today" : "Hari ini",
+    "Week" : "Minggu",
+    "Delete" : "Padam",
+    "Cancel" : "Batal",
+    "Edit" : "Sunting",
+    "Download" : "Muat turun",
+    "Save" : "Simpan"
+},"pluralForm" :"nplurals=1; plural=0;"
+}

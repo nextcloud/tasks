@@ -1,0 +1,14 @@
+{ "translations": {
+    "Tasks" : "ភារកិច្ច",
+    "Important" : "សំខាន់",
+    "Today" : "ថ្ងៃ​នេះ",
+    "Week" : "សប្ដាហ៍",
+    "All" : "ទាំងអស់",
+    "Delete" : "លុប",
+    "Cancel" : "បោះបង់",
+    "Default" : "លំនាំ​ដើម",
+    "Edit" : "កែប្រែ",
+    "Download" : "ទាញយក",
+    "Save" : "រក្សាទុក"
+},"pluralForm" :"nplurals=1; plural=0;"
+}
