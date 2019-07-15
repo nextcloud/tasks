@@ -34,7 +34,7 @@
 		"markdown-it-emoji": "~1.4.0",
 		"markdown-it-link-attributes": "~2.1.0",
 		"markdown-it-task-lists": "~2.1.1",
-		"linkify-it": "~2.1.0",
+		"linkify-it": "~2.2.0",
 		"nextcloud-vue": "^0.11.5",
 		"p-limit": "^2.2.0",
 		"p-queue": "^6.1.0",
