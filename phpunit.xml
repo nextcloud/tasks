@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <phpunit bootstrap="tests/bootstrap.php"
 		 verbose="true"
-         colors="true"
+		 colors="true"
 		 timeoutForSmallTests="900"
 		 timeoutForMediumTests="900"
 		 timeoutForLargeTests="900">
-	<testsuite name='Contacts app tests'>
-        <directory>./tests/unit</directory>
+	<testsuite name='Tasks app tests'>
+		<directory>./tests/unit</directory>
 	</testsuite>
 	<!-- filters for code coverage -->
 	<filter>
