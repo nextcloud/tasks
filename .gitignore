@@ -248,3 +248,4 @@ Various
 
 build/
 coverage 
+.phpunit.result.cache
