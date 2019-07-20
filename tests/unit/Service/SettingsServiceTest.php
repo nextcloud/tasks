@@ -54,47 +54,48 @@ class SettingsServiceTest extends TestCase {
 	public function testGet() {
 		$return = [
 			'defaultCalendarId' => 'personal',
-			'showHidden' => 0,
+			'showHidden' => 1,
 			'sortOrder' => 'default',
 			'sortDirection' => false,
 			'userID' => $this->userId
 		];
-		
-		$this->settings->expects($this->at(0))
-			->method('getUserValue')
-			->with(
-				$this->equalTo($this->userId),
-				$this->equalTo($this->appName),
-				'various_defaultCalendarId'
-			)
-			->will($this->returnValue('personal'));
 
-		$this->settings->expects($this->at(1))
-			->method('getUserValue')
-			->with(
-				$this->equalTo($this->userId),
-				$this->equalTo($this->appName),
-				'various_showHidden'
-			)
-			->will($this->returnValue(0));
+		$map = [
+			[
+				$this->userId,
+				$this->appName,
+				'various_defaultCalendarId',
+				'',
+				'personal'
+			],
+			[
+				$this->userId,
+				$this->appName,
+				'various_showHidden',
+				'',
+				1
+			],
+			[
+				$this->userId,
+				$this->appName,
+				'various_sortOrder',
+				'',
+				'default'
+			],
+			[
+				$this->userId,
+				$this->appName,
+				'various_sortDirection',
+				'',
+				false
+			]
+		];
 
-		$this->settings->expects($this->at(2))
+		$this->settings->expects($this->any())
 			->method('getUserValue')
-			->with(
-				$this->equalTo($this->userId),
-				$this->equalTo($this->appName),
-				'various_sortOrder'
-			)
-			->will($this->returnValue('default'));
-
-		$this->settings->expects($this->at(3))
-			->method('getUserValue')
-			->with(
-				$this->equalTo($this->userId),
-				$this->equalTo($this->appName),
-				'various_sortDirection'
-			)
-			->will($this->returnValue(false));
+			->will(
+				$this->returnValueMap($map)
+			);
 
 		$result = $this->settingsService->get();
 
