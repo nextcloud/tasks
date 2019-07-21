@@ -22,6 +22,8 @@ OC.L10N.register(
     "Set due date" : "Ezarri epemuga",
     "All day" : "Egun osoa",
     "%s %% completed" : "%% %s  betea",
+    "When shared show full event" : "Partekatzean erakutsi gertaera osoa",
+    "When shared hide this event" : "Partekatzean ezkutatu gertaera hau",
     "Edit" : "Editatu",
     "Download" : "Deskargatu",
     "Save" : "Gorde",
