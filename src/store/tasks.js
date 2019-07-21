@@ -727,6 +727,10 @@ const actions = {
 	 * @param {Task} task The task to update
 	 */
 	async toggleCompleted(context, task) {
+		// Don't try to edit tasks in read-only calendars
+		if (task.calendar.readOnly) {
+			return
+		}
 		if (task.completed) {
 			await context.dispatch('setPercentComplete', { task: task, complete: 0 })
 		} else {
@@ -788,6 +792,10 @@ const actions = {
 	 * @param {Task} task The task to update
 	 */
 	async toggleStarred(context, task) {
+		// Don't try to edit tasks in read-only calendars
+		if (task.calendar.readOnly) {
+			return
+		}
 		context.commit('toggleStarred', task)
 		context.dispatch('scheduleTaskUpdate', task)
 	},

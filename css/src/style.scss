@@ -1153,6 +1153,10 @@
 		}
 	}
 
+	&.disabled {
+		cursor: not-allowed;
+	}
+
 	&.active {
 		opacity: .7;
 	}
