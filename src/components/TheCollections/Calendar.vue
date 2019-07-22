@@ -65,7 +65,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					/>
 				</task-drag-container>
 				<LoadCompletedButton :calendar="calendar" />
-				<DeleteCompletedModal v-if="calendar.loadedCompleted" :calendar="calendar" />
+				<DeleteCompletedModal v-if="calendar.loadedCompleted && !calendar.readOnly" :calendar="calendar" />
 			</div>
 		</div>
 	</div>
