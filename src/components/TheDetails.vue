@@ -304,7 +304,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</ul>
 			</div>
 			<div class="footer">
-				<a v-show="!task.calendar.readOnly"
+				<a :style="{visibility: task.calendar.readOnly ? 'hidden' : 'visible'}"
 					class="close-all reactive"
 					@click="removeTask"
 				>
