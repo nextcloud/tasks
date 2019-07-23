@@ -990,6 +990,15 @@
 						margin: 1px -1px;
 						vertical-align: middle;
 
+						&.multiselect--disabled {
+							background-color: var(--color-main-background) !important;
+							cursor: default;
+							.multiselect__single, input:not([type='range']):disabled {
+								background-color: var(--color-main-background) !important;
+								cursor: default;
+							}
+						}
+
 						&.multiselect--active .multiselect__tags {
 							border: 1px solid var(--color-border-dark);
 						}
