@@ -61,7 +61,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			</div>
 			<div class="body">
 				<ul class="sections">
-					<li :class="{'date': valid(task.start), 'editing': edit=='start', 'high': overdue(task.start)}"
+					<li v-show="!task.calendar.readOnly || task.start" :class="{'date': valid(task.start), 'editing': edit=='start', 'high': overdue(task.start)}"
 						class="section detail-start"
 					>
 						<div v-click-outside="() => finishEditing('start')"
@@ -95,7 +95,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</a>
 						</div>
 					</li>
-					<li :class="{'date': valid(task.due), 'editing': edit=='due', 'high': overdue(task.due)}"
+					<li v-show="!task.calendar.readOnly || task.due" :class="{'date': valid(task.due), 'editing': edit=='due', 'high': overdue(task.due)}"
 						class="section detail-date"
 					>
 						<div v-click-outside="() => finishEditing('due')"
@@ -188,7 +188,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</div>
 						</div>
 					</li>
-					<li :class="[{'editing': edit=='priority', 'date': task.priority>0}, priorityString]"
+					<li v-show="!task.calendar.readOnly || task.priority" :class="[{'editing': edit=='priority', 'date': task.priority>0}, priorityString]"
 						class="section detail-priority"
 					>
 						<div v-click-outside="() => finishEditing('priority')"
@@ -226,7 +226,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</a>
 						</div>
 					</li>
-					<li :class="{'editing': edit=='complete', 'date': task.complete>0}"
+					<li v-show="!task.calendar.readOnly || task.complete" :class="{'editing': edit=='complete', 'date': task.complete>0}"
 						class="section detail-complete"
 					>
 						<div v-click-outside="() => finishEditing('complete')"
@@ -262,7 +262,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</a>
 						</div>
 					</li>
-					<li :class="{'active': task.categories.length>0}" class="section detail-categories">
+					<li v-show="!task.calendar.readOnly || task.categories.length>0" :class="{'active': task.categories.length>0}" class="section detail-categories">
 						<div>
 							<span :class="[iconCategories]" class="icon detail-categories" />
 							<div class="detail-categories-container">
@@ -283,7 +283,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</div>
 						</div>
 					</li>
-					<li class="section detail-note">
+					<li v-show="!task.calendar.readOnly || task.note" class="section detail-note">
 						<div class="note">
 							<div v-click-outside="() => finishEditing('note')"
 								class="note-body selectable"
@@ -523,7 +523,7 @@ export default {
 				+ (this.task.completed ? ('<br />' + t('tasks', 'Completed %s').replace('%s', moment(this.task.completedDate, 'YYYY-MM-DDTHH:mm:ss').calendar())) : '')
 		},
 		isAllDayPossible: function() {
-			return !this.task.calendar.readOnly && (this.task.due || this.task.start)
+			return !this.task.calendar.readOnly || (this.task.due || this.task.start)
 		},
 		priorityString: function() {
 			if (+this.task.priority > 5) {

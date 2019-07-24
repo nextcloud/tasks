@@ -899,6 +899,10 @@ const actions = {
 	 * @param {Task} task The task to update
 	 */
 	async toggleAllDay(context, task) {
+		// Don't try to toggle tasks from read-only calendars
+		if (task.calendar.readOnly) {
+			return task
+		}
 		context.commit('toggleAllDay', task)
 		context.dispatch('scheduleTaskUpdate', task)
 	},
