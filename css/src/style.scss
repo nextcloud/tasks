@@ -990,6 +990,15 @@
 						margin: 1px -1px;
 						vertical-align: middle;
 
+						&.multiselect--disabled {
+							background-color: var(--color-main-background) !important;
+							cursor: default;
+							.multiselect__single, input:not([type='range']):disabled {
+								background-color: var(--color-main-background) !important;
+								cursor: default;
+							}
+						}
+
 						&.multiselect--active .multiselect__tags {
 							border: 1px solid var(--color-border-dark);
 						}
@@ -1105,6 +1114,18 @@
 		}
 
 		.disabled .body .section {
+			> div {
+				.calendar-indicator {
+					cursor: default;
+				}
+			}
+			
+			&.detail-all-day {
+				div,
+				span {
+					cursor: default;
+				}
+			}
 
 			&.date:hover .icon.icon-trash {
 				display: none;
@@ -1151,6 +1172,10 @@
 		&:hover {
 			opacity: .7;
 		}
+	}
+
+	&.disabled {
+		cursor: not-allowed;
 	}
 
 	&.active {

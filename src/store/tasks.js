@@ -566,6 +566,11 @@ const actions = {
 			taskData.calendar = context.getters.getDefaultCalendar
 		}
 
+		// Don't try to create tasks in read-only calendars
+		if (taskData.calendar.readOnly) {
+			return
+		}
+
 		let task = new Task('BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Nextcloud Tasks v' + appVersion + '\nEND:VCALENDAR', taskData.calendar)
 
 		task.created = ICAL.Time.now()
@@ -632,6 +637,11 @@ const actions = {
 	 * @param {Boolean} [data.dav = true] Trigger a dav deletion
 	 */
 	async deleteTask(context, { task, dav = true }) {
+		// Don't try to delete tasks in read-only calendars
+		if (task.calendar.readOnly) {
+			return
+		}
+
 		function deleteTaskFromStore() {
 			context.commit('deleteTask', task)
 			let parent = context.getters.getTaskByUid(task.related)
@@ -680,6 +690,11 @@ const actions = {
 	 * @returns {Promise}
 	 */
 	async updateTask(context, task) {
+		// Don't try to update tasks in read-only calendars
+		if (task.calendar.readOnly) {
+			return
+		}
+
 		let vCalendar = ICAL.stringify(task.jCal)
 
 		if (!task.conflict) {
@@ -712,6 +727,10 @@ const actions = {
 	 * @param {Task} task The task to update
 	 */
 	async toggleCompleted(context, task) {
+		// Don't try to edit tasks in read-only calendars
+		if (task.calendar.readOnly) {
+			return
+		}
 		if (task.completed) {
 			await context.dispatch('setPercentComplete', { task: task, complete: 0 })
 		} else {
@@ -773,6 +792,10 @@ const actions = {
 	 * @param {Task} task The task to update
 	 */
 	async toggleStarred(context, task) {
+		// Don't try to edit tasks in read-only calendars
+		if (task.calendar.readOnly) {
+			return
+		}
 		context.commit('toggleStarred', task)
 		context.dispatch('scheduleTaskUpdate', task)
 	},
@@ -876,6 +899,10 @@ const actions = {
 	 * @param {Task} task The task to update
 	 */
 	async toggleAllDay(context, task) {
+		// Don't try to toggle tasks from read-only calendars
+		if (task.calendar.readOnly) {
+			return task
+		}
 		context.commit('toggleAllDay', task)
 		context.dispatch('scheduleTaskUpdate', task)
 	},
@@ -943,6 +970,10 @@ const actions = {
 	 * @returns {Task} The moved task
 	 */
 	async moveTask(context, { task, calendar, parent = null }) {
+		// Don't try to move tasks from read-only calendars
+		if (task.calendar.readOnly) {
+			return task
+		}
 
 		// Don't move if source and target calendar are the same.
 		if (task.dav && task.calendar !== calendar) {

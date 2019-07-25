@@ -47,11 +47,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				role="checkbox"
 				@click="toggleCompleted(task)"
 			>
-				<span :class="{'icon-checkmark': task.completed}" class="icon icon-bw task-checkbox reactive no-nav" />
+				<span :class="{'icon-checkmark': task.completed, 'disabled': task.calendar.readOnly}" class="icon icon-bw task-checkbox reactive no-nav" />
 			</span>
 			<span class="icon task-separator" />
 			<span class="task-star" @click="toggleStarred(task)">
-				<span :class="[iconStar]" class="icon right large reactive no-nav" />
+				<span :class="[iconStar, {'disabled': task.calendar.readOnly}]" class="icon right large reactive no-nav" />
 			</span>
 			<span v-if="!task.calendar.readOnly"
 				class="task-addsubtask add-subtask"
