@@ -1114,6 +1114,18 @@
 		}
 
 		.disabled .body .section {
+			> div {
+				.calendar-indicator {
+					cursor: default;
+				}
+			}
+			
+			&.detail-all-day {
+				div,
+				span {
+					cursor: default;
+				}
+			}
 
 			&.date:hover .icon.icon-trash {
 				display: none;
