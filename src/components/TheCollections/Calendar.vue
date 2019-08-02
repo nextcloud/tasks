@@ -41,6 +41,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			<div class="grouped-tasks">
 				<task-drag-container
 					:calendar-id="calendarId"
+					:disabled="calendar.readOnly"
 					class="tasks"
 					collection-id="uncompleted"
 					type="list"
@@ -55,6 +56,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</h2>
 				<task-drag-container v-if="showHidden"
 					:calendar-id="calendarId"
+					:disabled="calendar.readOnly"
 					class="completed-tasks"
 					collection-id="completed"
 					type="list"
