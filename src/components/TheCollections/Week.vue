@@ -30,6 +30,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</h2>
 				<task-drag-container
 					:collection-id="'week-' + day.diff"
+					:disabled="calendar.readOnly"
 					class="tasks"
 					type="list"
 				>

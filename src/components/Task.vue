@@ -116,6 +116,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			<task-drag-container v-if="showSubtasks"
 				:task-id="task.uri"
 				:calendar-id="task.calendar.uri"
+				:disabled="task.calendar.readOnly"
 			>
 				<TaskBodyComponent v-for="subtask in filteredSubtasks"
 					:key="subtask.uid"
