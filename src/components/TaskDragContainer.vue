@@ -54,8 +54,7 @@ export default {
 			'moveTask',
 			'setPriority',
 			'setPercentComplete',
-			'setDue',
-			'setStart',
+			'setDate',
 		]),
 
 		/**
@@ -131,46 +130,12 @@ export default {
 					}
 					break
 				case 'today':
-					this.setDate(task, 0)
+					this.setDate({ task: task, day: 0 })
 					break
 				case 'week':
-					this.setDate(task, collectionId[1])
+					this.setDate({ task: task, day: collectionId[1] })
 					break
 				}
-			}
-		},
-
-		/**
-		 * Sets the start or due date to the given day
-		 *
-		 * @param {Task} task The task to change
-		 * @param {Integer} day The day to set
-		 */
-		setDate: function(task, day) {
-			var start = moment(task.start, 'YYYYMMDDTHHmmss').startOf('day')
-			var due = moment(task.due, 'YYYYMMDDTHHmmss').startOf('day')
-			day = moment().startOf('day').add(day, 'days')
-
-			var diff
-			// Adjust start date
-			if (start.isValid()) {
-				diff = start.diff(moment().startOf('day'), 'days')
-				diff = diff < 0 ? 0 : diff
-				if (diff !== day) {
-					var newStart = moment(task.start, 'YYYYMMDDTHHmmss').year(day.year()).month(day.month()).date(day.date())
-					this.setStart({ task: task, start: newStart })
-				}
-			// Adjust due date
-			} else if (due.isValid()) {
-				diff = due.diff(moment().startOf('day'), 'days')
-				diff = diff < 0 ? 0 : diff
-				if (diff !== day) {
-					var newDue = moment(task.due, 'YYYYMMDDTHHmmss').year(day.year()).month(day.month()).date(day.date())
-					this.setDue({ task: task, due: newDue })
-				}
-			// Set the due date to appropriate value
-			} else {
-				this.setDue({ task: task, due: day })
 			}
 		},
 	},

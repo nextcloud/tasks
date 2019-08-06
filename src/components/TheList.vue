@@ -21,15 +21,15 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<ul id="collections">
-		<RouterLink
+		<draggable
 			v-for="collection in collections"
 			:id="'collection_' + collection.id"
 			:key="collection.id"
 			:collection-id="collection.id"
-			:to="{ name: 'collections', params: {collectionId: collection.id } }"
+			:component-data="{props: {tag: 'li', to: { name: 'collections', params: { collectionId: collection.id } }, 'active-class': 'active'}}"
 			:class="[collection.icon, {'animate-up': hideCollection(collection) }]"
-			tag="li" class="collection reactive"
-			active-class="active"
+			tag="RouterLink" class="collection reactive"
+			v-bind="{group: 'tasks', filter: '*'}" @add="dropTaskOnCollection(...arguments, collection)"
 		>
 			<a class="sprite">
 				<span v-if="collection.id=='today'" class="date">
@@ -46,7 +46,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					</li>
 				</ul>
 			</div>
-		</RouterLink>
+		</draggable>
 		<draggable
 			v-for="calendar in calendars"
 			:id="'list_' + calendar.id"
@@ -248,6 +248,9 @@ export default {
 			'deleteCalendar',
 			'appendCalendar',
 			'moveTask',
+			'setPriority',
+			'setPercentComplete',
+			'setDate',
 		]),
 		dropTaskOnCalendar: function($event, calendar) {
 			var task
@@ -256,6 +259,27 @@ export default {
 				task = this.getTask(taskAttribute.value)
 				if (calendar !== task.calendar) {
 					this.moveTask({ task: task, calendar: calendar, parent: undefined })
+				}
+			}
+		},
+		dropTaskOnCollection: function($event, collection) {
+			var task
+			var taskAttribute = $event.item.attributes['task-id']
+			if (taskAttribute) {
+				task = this.getTask(taskAttribute.value)
+				switch (collection.id) {
+				case 'starred':
+					this.setPriority({ task: task, priority: 1 })
+					break
+				case 'completed':
+					this.setPercentComplete({ task: task, complete: 100 })
+					break
+				case 'today':
+					this.setDate({ task: task, day: 0 })
+					break
+				case 'week':
+					this.setDate({ task: task, day: 6 })
+					break
 				}
 			}
 		},
