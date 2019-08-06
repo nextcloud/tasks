@@ -254,7 +254,9 @@ export default {
 			var taskAttribute = $event.item.attributes['task-id']
 			if (taskAttribute) {
 				task = this.getTask(taskAttribute.value)
-				this.moveTask({ task: task, calendar: calendar, parent: undefined })
+				if (calendar !== task.calendar) {
+					this.moveTask({ task: task, calendar: calendar, parent: undefined })
+				}
 			}
 		},
 		hideCollection: function(collection) {

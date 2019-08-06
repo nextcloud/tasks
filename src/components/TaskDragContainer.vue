@@ -23,7 +23,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 	<draggable tag="ol"
 		:list="['']"
 		v-bind="{group: 'tasks', swapThreshold: 0.30, delay: 500, delayOnTouchOnly: true, touchStartThreshold: 3, disabled: disabled}"
-		@end="onEnd"
+		@add="onAdd"
 	>
 		<slot />
 	</draggable>
@@ -63,7 +63,7 @@ export default {
 		 *
 		 * @param {Object} $event The event which caused the drop
 		 */
-		onEnd: function($event) {
+		onAdd: function($event) {
 			var task
 			// The task to move
 			var taskAttribute = $event.item.attributes['task-id']
