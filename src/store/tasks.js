@@ -893,6 +893,44 @@ const actions = {
 	},
 
 	/**
+	 * Sets the start or due date to the given day
+	 *
+	 * @param {Object} context The store context
+	 * @param {Task} task The task to update
+	 * @param {Integer} day The day to set
+	 */
+	async setDate(context, { task, day }) {
+		var start = moment(task.start, 'YYYYMMDDTHHmmss').startOf('day')
+		var due = moment(task.due, 'YYYYMMDDTHHmmss').startOf('day')
+		day = moment().startOf('day').add(day, 'days')
+
+		var diff
+		// Adjust start date
+		if (start.isValid()) {
+			diff = start.diff(moment().startOf('day'), 'days')
+			diff = diff < 0 ? 0 : diff
+			if (diff !== day) {
+				var newStart = moment(task.start, 'YYYYMMDDTHHmmss').year(day.year()).month(day.month()).date(day.date())
+				context.commit('setStart', { task: task, start: newStart })
+				context.dispatch('scheduleTaskUpdate', task)
+			}
+		// Adjust due date
+		} else if (due.isValid()) {
+			diff = due.diff(moment().startOf('day'), 'days')
+			diff = diff < 0 ? 0 : diff
+			if (diff !== day) {
+				var newDue = moment(task.due, 'YYYYMMDDTHHmmss').year(day.year()).month(day.month()).date(day.date())
+				context.commit('setDue', { task: task, due: newDue })
+				context.dispatch('scheduleTaskUpdate', task)
+			}
+		// Set the due date to appropriate value
+		} else {
+			context.commit('setDue', { task: task, due: day })
+			context.dispatch('scheduleTaskUpdate', task)
+		}
+	},
+
+	/**
 	 * Toggles if due and start date of a task are all-day
 	 *
 	 * @param {Object} context The store context

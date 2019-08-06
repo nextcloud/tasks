@@ -54,6 +54,12 @@
 				}
 			}
 
+			&.list, &.collection {
+				.task-item {
+					display: none;
+				}
+			}
+
 			.app-navigation-entry-edit {
 				padding-left: 5px !important;
 
