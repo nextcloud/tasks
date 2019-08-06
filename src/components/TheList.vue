@@ -47,17 +47,17 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</ul>
 			</div>
 		</RouterLink>
-		<RouterLink
+		<draggable
 			v-for="calendar in calendars"
 			:id="'list_' + calendar.id"
 			:key="calendar.id"
 			v-click-outside="() => resetView(calendar)"
 			:calendar-id="calendar.id"
-			:to="{ name: 'calendars', params: { calendarId: calendar.id } }"
+			:component-data="{props: {tag: 'li', to: { name: 'calendars', params: { calendarId: calendar.id } }, 'active-class': 'active'}}"
 			:class="{edit: editing == calendar.id}"
-			tag="li"
+			tag="RouterLink"
 			class="list with-menu editing"
-			active-class="active"
+			v-bind="{group: 'tasks', filter: '*', disabled: calendar.readOnly}" @add="dropTaskOnCalendar(...arguments, calendar)"
 		>
 			<div :style="{'background-color': calendar.color}" class="app-navigation-entry-bullet" />
 			<a>
@@ -140,7 +140,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</form>
 				<Colorpicker :selected-color="selectedColor" @color-selected="setColor(...arguments)" />
 			</div>
-		</RouterLink>
+		</draggable>
 		<li v-click-outside="cancelCreate" :class="{edit: creating}" class="newList icon-add reactive editing">
 			<a class="icon icon-bw addlist sprite"
 				@click="startCreate($event)"
@@ -190,13 +190,15 @@ import Confirmation from './Confirmation'
 import ShareCalendar from './CalendarShare'
 
 import ClickOutside from 'vue-click-outside'
+import draggable from 'vuedraggable'
 
 export default {
 	components: {
 		'Colorpicker': Colorpicker,
 		'Popover': PopoverMenu,
 		'Confirmation': Confirmation,
-		ShareCalendar
+		ShareCalendar,
+		draggable,
 	},
 	directives: {
 		ClickOutside
@@ -236,15 +238,25 @@ export default {
 			calendars: 'getSortedCalendars',
 			collectionCount: 'getCollectionCount',
 			calendarCount: 'getCalendarCount',
-			isCalendarNameUsed: 'isCalendarNameUsed'
+			isCalendarNameUsed: 'isCalendarNameUsed',
+			getTask: 'getTaskByUri',
 		})
 	},
 	methods: {
 		...mapActions([
 			'changeCalendar',
 			'deleteCalendar',
-			'appendCalendar'
+			'appendCalendar',
+			'moveTask',
 		]),
+		dropTaskOnCalendar: function($event, calendar) {
+			var task
+			var taskAttribute = $event.item.attributes['task-id']
+			if (taskAttribute) {
+				task = this.getTask(taskAttribute.value)
+				this.moveTask({ task: task, calendar: calendar, parent: undefined })
+			}
+		},
 		hideCollection: function(collection) {
 			switch (collection.show) {
 			case 0:
