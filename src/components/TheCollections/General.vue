@@ -52,7 +52,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					class="tasks"
 					type="list"
 				>
-					<TaskBody v-for="task in sort(calendar.filteredTasks, sortOrder, sortDirection)"
+					<Task v-for="task in sort(calendar.filteredTasks, sortOrder, sortDirection)"
 						:key="task.id"
 						:task="task"
 					/>
@@ -68,14 +68,14 @@ import { mapGetters, mapActions } from 'vuex'
 import { sort, isTaskInList, isParentInList } from '../../store/storeHelper'
 import SortorderDropdown from '../SortorderDropdown'
 import LoadCompletedButton from '../LoadCompletedButton'
-import TaskBody from '../Task'
+import Task from '../Task'
 import TaskDragContainer from '../TaskDragContainer'
 
 export default {
 	components: {
-		'TaskBody': TaskBody,
-		'SortorderDropdown': SortorderDropdown,
-		'LoadCompletedButton': LoadCompletedButton,
+		Task,
+		SortorderDropdown,
+		LoadCompletedButton,
 		TaskDragContainer,
 	},
 	data() {

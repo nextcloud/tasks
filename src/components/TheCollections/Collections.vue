@@ -29,15 +29,15 @@ import Week from './Week'
 
 export default {
 	components: {
-		'CollectionGeneral': General,
-		'CollectionWeek': Week
+		General,
+		Week,
 	},
 	computed: {
 		collectionType: function() {
 			if (this.$route.params.collectionId === 'week') {
-				return 'CollectionWeek'
+				return 'Week'
 			} else {
-				return 'CollectionGeneral'
+				return 'General'
 			}
 		}
 	}

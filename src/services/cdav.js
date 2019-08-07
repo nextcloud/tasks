@@ -25,7 +25,7 @@ import DavClient from 'cdav-library'
 function xhrProvider() {
 	var headers = {
 		'X-Requested-With': 'XMLHttpRequest',
-		'requesttoken': OC.requestToken
+		requesttoken: OC.requestToken
 	}
 	var xhr = new XMLHttpRequest()
 	var oldOpen = xhr.open
@@ -33,7 +33,7 @@ function xhrProvider() {
 	// override open() method to add headers
 	xhr.open = function() {
 		var result = oldOpen.apply(this, arguments)
-		for (let name in headers) {
+		for (const name in headers) {
 			xhr.setRequestHeader(name, headers[name])
 		}
 		return result

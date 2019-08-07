@@ -42,7 +42,7 @@ export default {
 		}
 	},
 	data() {
-		let md = new MarkdownIt({
+		const md = new MarkdownIt({
 			linkify: this.linkify,
 			breaks: true,
 		})

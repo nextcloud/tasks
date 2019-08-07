@@ -78,7 +78,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						:title="sharedWithTooltip(calendar)" href="#"
 						class="calendar__share icon-shared reactive" @click="toggleShare(calendar)"
 					/>
-					<Popover tag="li" class="app-navigation-entry-utils-menu-button reactive">
+					<PopoverMenu tag="li" class="app-navigation-entry-utils-menu-button reactive">
 						<ul>
 							<li v-if="!calendar.readOnly">
 								<a @click="edit(calendar)">
@@ -106,7 +106,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</li>
 							<Confirmation v-if="!calendar.readOnly" :message="deleteMessage(calendar.displayName)" @delete-calendar="deleteCalendar(calendar)" />
 						</ul>
-					</Popover>
+					</PopoverMenu>
 				</ul>
 			</div>
 
@@ -194,14 +194,14 @@ import draggable from 'vuedraggable'
 
 export default {
 	components: {
-		'Colorpicker': Colorpicker,
-		'Popover': PopoverMenu,
-		'Confirmation': Confirmation,
+		Colorpicker,
+		PopoverMenu,
+		Confirmation,
 		ShareCalendar,
 		draggable,
 	},
 	directives: {
-		ClickOutside
+		ClickOutside,
 	},
 	filters: {
 		counterFormatter: function(count) {

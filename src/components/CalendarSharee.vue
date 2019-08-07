@@ -55,10 +55,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-
 export default {
 	name: 'ShareSharee',
-
 	props: {
 		calendar: {
 			type: Object,
@@ -69,13 +67,11 @@ export default {
 			required: true
 		}
 	},
-
 	data() {
 		return {
 			loading: false
 		}
 	},
-
 	computed: {
 		writeable() {
 			return this.sharee.writeable
@@ -85,13 +81,11 @@ export default {
 			return this.sharee.id + this.calendar.id + Math.floor(Math.random() * 1000)
 		}
 	},
-
 	methods: {
 		async deleteSharee() {
 			if (this.loading) {
 				return false
 			}
-
 			this.loading = true
 			try {
 				await this.$store.dispatch('removeSharee', {
@@ -109,7 +103,6 @@ export default {
 			if (this.loading) {
 				return false
 			}
-
 			this.loading = true
 			try {
 				await this.$store.dispatch('toggleShareeWritable', {

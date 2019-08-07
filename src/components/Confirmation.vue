@@ -50,7 +50,7 @@ import ClickOutside from 'vue-click-outside'
 export default {
 	name: 'PopoverMenu',
 	directives: {
-		ClickOutside
+		ClickOutside,
 	},
 	props: {
 		message: {

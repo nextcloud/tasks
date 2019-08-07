@@ -84,9 +84,9 @@ import TaskDragContainer from '../TaskDragContainer'
 
 export default {
 	components: {
-		'Task': Task,
-		'SortorderDropdown': SortorderDropdown,
-		'LoadCompletedButton': LoadCompletedButton,
+		Task,
+		SortorderDropdown,
+		LoadCompletedButton,
 		TaskDragContainer,
 		DeleteCompletedModal,
 	},

@@ -59,7 +59,7 @@ export default {
 	name: 'ShareCalendar',
 	components: {
 		calendarSharee,
-		Multiselect
+		Multiselect,
 	},
 	props: {
 		calendar: {
@@ -99,7 +99,7 @@ export default {
 		 * @param {boolean} data.isGroup is this a group ?
 		 */
 		shareCalendar({ user, displayName, uri, isGroup }) {
-			let calendar = this.calendar
+			const calendar = this.calendar
 			uri = decodeURI(uri)
 			user = decodeURI(user)
 			this.$store.dispatch('shareCalendar', { calendar, user, displayName, uri, isGroup })

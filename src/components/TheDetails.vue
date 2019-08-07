@@ -351,7 +351,7 @@ export default {
 	},
 	directives: {
 		ClickOutside,
-		linkify
+		linkify,
 	},
 	filters: {
 		formatStartDate: function(date) {
