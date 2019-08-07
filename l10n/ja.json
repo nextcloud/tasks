@@ -95,7 +95,7 @@
     "Calendar link could not be copied to clipboard." : "カレンダーリンクをクリップボードにコピーできませんでした。",
     "The name \"%s\" is already used." : "名前 \"%s\" はすでに使われています。",
     "An empty name is not allowed." : "件名を入力してください。",
-    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "これにより、カレンダー「%s」とそれに対応するすべての予定と作業が削除されます。",
+    "This will delete the calendar \"%s\" and all corresponding events and tasks." : "カレンダー\"%s\"とカレンダーに対応するすべての予定と作業が削除されます。",
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["{num}個のエンティティと共有"],
     "Settings" : "設定",
     "Default list" : "デフォルトリスト",
