@@ -314,7 +314,7 @@ export default {
 		 * @param {String} route the route to navigate to
 		 */
 		navigate: function($event) {
-			if (!$event.target.classList.contains('no-nav')) {
+			if (!$event.target.classList.contains('no-nav') && this.$route.params.taskId !== this.task.uri) {
 				if (!this.task.loadedCompleted) {
 					this.getTasksFromCalendar({ calendar: this.task.calendar, completed: true, related: this.task.uid })
 				}
