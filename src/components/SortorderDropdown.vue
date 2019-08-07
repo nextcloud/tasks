@@ -60,7 +60,7 @@ import ClickOutside from 'vue-click-outside'
 export default {
 	name: 'SortorderDropdown',
 	directives: {
-		ClickOutside
+		ClickOutside,
 	},
 	data() {
 		return {

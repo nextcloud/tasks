@@ -40,7 +40,7 @@ export default class Task {
 			throw new Error('Invalid vCalendar')
 		}
 
-		let jCal = ICAL.parse(vcalendar)
+		const jCal = ICAL.parse(vcalendar)
 		if (jCal[0] !== 'vcalendar') {
 			throw new Error('Only one task is allowed in the vCalendar data')
 		}

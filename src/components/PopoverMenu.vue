@@ -34,10 +34,10 @@ import clickOutside from 'vue-click-outside'
 export default {
 	name: 'PopoverMenu',
 	components: {
-		clickOutside
+		clickOutside,
 	},
 	directives: {
-		clickOutside
+		clickOutside,
 	},
 	props: {
 		tag: {

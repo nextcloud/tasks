@@ -160,7 +160,7 @@ const getters = {
 	 * @returns {Integer} The number of tasks
 	 */
 	getCalendarCount: (state, getters, rootState) => (calendarId) => {
-		let calendar = getters.getCalendarById(calendarId)
+		const calendar = getters.getCalendarById(calendarId)
 		let tasks = Object.values(calendar.tasks)
 			.filter(task => {
 				return task.completed === false && (!task.related || !isParentInList(task, calendar.tasks))
@@ -357,7 +357,7 @@ const mutations = {
 	 */
 	removeSharee(state, { calendar, uri }) {
 		calendar = state.calendars.find(search => search.id === calendar.id)
-		let shareIndex = calendar.shares.findIndex(sharee => sharee.uri === uri)
+		const shareIndex = calendar.shares.findIndex(sharee => sharee.uri === uri)
 		calendar.shares.splice(shareIndex, 1)
 	},
 
@@ -371,7 +371,7 @@ const mutations = {
 	 */
 	updateShareeWritable(state, { calendar, uri }) {
 		calendar = state.calendars.find(search => search.id === calendar.id)
-		let sharee = calendar.shares.find(sharee => sharee.uri === uri)
+		const sharee = calendar.shares.find(sharee => sharee.uri === uri)
 		sharee.writeable = !sharee.writeable
 	}
 }
@@ -482,7 +482,7 @@ const actions = {
 				// We don't want to lose the url information
 				// so we need to parse one by one
 				const tasks = response.map(item => {
-					let task = new Task(item.data, calendar)
+					const task = new Task(item.data, calendar)
 					Vue.set(task, 'dav', item)
 					return task
 				})
@@ -506,7 +506,7 @@ const actions = {
 
 						// If necessary, add the tasks as subtasks to parent tasks already present in the store.
 						if (!related) {
-							let parentParent = context.getters.getTaskByUid(parent.related)
+							const parentParent = context.getters.getTaskByUid(parent.related)
 							context.commit('addTaskToParent', { task: parent, parent: parentParent })
 						}
 					}
@@ -514,7 +514,7 @@ const actions = {
 
 				// If the requested tasks are related to a task, add the tasks as subtasks
 				if (related) {
-					let parent = Object.values(calendar.tasks).find(search => search.uid === related)
+					const parent = Object.values(calendar.tasks).find(search => search.uid === related)
 					if (parent) {
 						parent.loadedCompleted = true
 						tasks.map(task => Vue.set(parent.subTasks, task.uid, task))
@@ -552,7 +552,7 @@ const actions = {
 		tasks.map(async task => {
 			// Get vcard string
 			try {
-				let vData = ICAL.stringify(task.vCard.jCal)
+				const vData = ICAL.stringify(task.vCard.jCal)
 				// push task to server and use limit
 				requests.push(limit(() => task.calendar.dav.createVCard(vData)
 					.then((response) => {
@@ -589,12 +589,8 @@ const actions = {
 	 * @param {String} data.uri The sharee uri
 	 */
 	async removeSharee(context, { calendar, uri }) {
-		try {
-			await calendar.dav.unshare(uri)
-			context.commit('removeSharee', { calendar, uri })
-		} catch (error) {
-			throw error
-		}
+		await calendar.dav.unshare(uri)
+		context.commit('removeSharee', { calendar, uri })
 	},
 
 	/**
@@ -607,13 +603,8 @@ const actions = {
 	 * @param {Boolean} data.writeable The sharee permission
 	 */
 	async toggleShareeWritable(context, { calendar, uri, writeable }) {
-		try {
-			await calendar.dav.share(uri, writeable)
-			context.commit('updateShareeWritable', { calendar, uri, writeable })
-		} catch (error) {
-			throw error
-		}
-
+		await calendar.dav.share(uri, writeable)
+		context.commit('updateShareeWritable', { calendar, uri, writeable })
 	},
 
 	/**
@@ -628,12 +619,8 @@ const actions = {
 	 */
 	async shareCalendar(context, { calendar, user, displayName, uri, isGroup }) {
 		// Share calendar with entered group or user
-		try {
-			await calendar.dav.share(uri)
-			context.commit('shareCalendar', { calendar, user, displayName, uri, isGroup })
-		} catch (error) {
-			throw error
-		}
+		await calendar.dav.share(uri)
+		context.commit('shareCalendar', { calendar, user, displayName, uri, isGroup })
 	},
 }
 

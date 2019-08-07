@@ -131,7 +131,7 @@ const getters = {
 	getTaskByUri: (state, getters, rootState) => (taskUri) => {
 		// We have to search in all calendars
 		var task
-		for (let calendar of rootState.calendars.calendars) {
+		for (const calendar of rootState.calendars.calendars) {
 			task = Object.values(calendar.tasks).find(task => {
 				return task.uri === taskUri
 			})
@@ -152,7 +152,7 @@ const getters = {
 	getTaskByUid: (state, getters, rootState) => (taskUid) => {
 		// We have to search in all calendars
 		var task
-		for (let calendar of rootState.calendars.calendars) {
+		for (const calendar of rootState.calendars.calendars) {
 			task = Object.values(calendar.tasks).find(task => {
 				return task.uid === taskUid
 			})
@@ -219,7 +219,7 @@ const getters = {
 	 * @returns {Task} The parent task
 	 */
 	getParentTask: () => (task) => {
-		let tasks = task.calendar.tasks
+		const tasks = task.calendar.tasks
 		return Object.values(tasks).find(search => search.uid === task.related) || null
 	},
 
@@ -571,7 +571,7 @@ const actions = {
 			return
 		}
 
-		let task = new Task('BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Nextcloud Tasks v' + appVersion + '\nEND:VCALENDAR', taskData.calendar)
+		const task = new Task('BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Nextcloud Tasks v' + appVersion + '\nEND:VCALENDAR', taskData.calendar)
 
 		task.created = ICAL.Time.now()
 		task.summary = taskData.summary
@@ -582,16 +582,6 @@ const actions = {
 		if (taskData.complete) {
 			task.complete = taskData.complete
 		}
-		if (taskData.related) {
-			task.related = taskData.related
-			// Check that parent task is not completed, uncomplete if necessary.
-			if (task.complete !== 100) {
-				let parent = context.getters.getParentTask(task)
-				if (parent && parent.completed) {
-					await context.dispatch('setPercentComplete', { task: parent, complete: 0 })
-				}
-			}
-		}
 		if (taskData.note) {
 			task.note = taskData.note
 		}
@@ -601,8 +591,18 @@ const actions = {
 		if (taskData.start) {
 			task.start = taskData.start
 		}
+		if (taskData.related) {
+			task.related = taskData.related
+			// Check that parent task is not completed, uncomplete if necessary.
+			if (task.complete !== 100) {
+				const parent = context.getters.getParentTask(task)
+				if (parent && parent.completed) {
+					await context.dispatch('setPercentComplete', { task: parent, complete: 0 })
+				}
+			}
+		}
 
-		let vData = ICAL.stringify(task.jCal)
+		const vData = ICAL.stringify(task.jCal)
 
 		if (!task.dav) {
 			await task.calendar.dav.createVObject(vData)
@@ -611,7 +611,7 @@ const actions = {
 					task.syncstatus = new TaskStatus('success', 'Successfully created the task.')
 					context.commit('appendTask', task)
 					context.commit('addTaskToCalendar', task)
-					let parent = context.getters.getTaskByUid(task.related)
+					const parent = context.getters.getTaskByUid(task.related)
 					context.commit('addTaskToParent', { task: task, parent: parent })
 
 					// Open the details view for the new task
@@ -644,7 +644,7 @@ const actions = {
 
 		function deleteTaskFromStore() {
 			context.commit('deleteTask', task)
-			let parent = context.getters.getTaskByUid(task.related)
+			const parent = context.getters.getTaskByUid(task.related)
 			context.commit('deleteTaskFromParent', { task: task, parent: parent })
 			context.commit('deleteTaskFromCalendar', task)
 		}
@@ -695,7 +695,7 @@ const actions = {
 			return
 		}
 
-		let vCalendar = ICAL.stringify(task.jCal)
+		const vCalendar = ICAL.stringify(task.jCal)
 
 		if (!task.conflict) {
 			task.dav.data = vCalendar
@@ -747,7 +747,7 @@ const actions = {
 	async setPercentComplete(context, { task, complete }) {
 		if (complete < 100) {
 			// uncomplete the parent task
-			let parent = context.getters.getParentTask(task)
+			const parent = context.getters.getParentTask(task)
 			if (parent && parent.completed) {
 				await context.dispatch('setPercentComplete', { task: parent, complete: 0 })
 			}
@@ -960,7 +960,7 @@ const actions = {
 		}
 		return task.dav.fetchCompleteData()
 			.then((response) => {
-				let newTask = new Task(task.dav.data, task.calendar)
+				const newTask = new Task(task.dav.data, task.calendar)
 				task.syncstatus = new TaskStatus('success', 'Successfully updated the task.')
 				context.commit('updateTask', newTask)
 			})
@@ -980,7 +980,7 @@ const actions = {
 		// Only update the parent in case it differs from the current one.
 		if (task.related !== parentId) {
 			// Remove the task from the old parents subtask list
-			let oldParent = context.getters.getTaskByUid(task.related)
+			const oldParent = context.getters.getTaskByUid(task.related)
 			context.commit('deleteTaskFromParent', { task: task, parent: oldParent })
 			// Link to new parent
 			Vue.set(task, 'related', parentId)

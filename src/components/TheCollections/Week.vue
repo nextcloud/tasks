@@ -33,7 +33,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					class="tasks"
 					type="list"
 				>
-					<TaskBody v-for="task in sort(day.tasks, sortOrder, sortDirection)"
+					<Task v-for="task in sort(day.tasks, sortOrder, sortDirection)"
 						:key="task.id"
 						:task="task"
 					/>
@@ -47,13 +47,13 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 import { mapGetters } from 'vuex'
 import { sort } from '../../store/storeHelper'
 import SortorderDropdown from '../SortorderDropdown'
-import TaskBody from '../Task'
+import Task from '../Task'
 import TaskDragContainer from '../TaskDragContainer'
 
 export default {
 	components: {
-		'TaskBody': TaskBody,
-		'SortorderDropdown': SortorderDropdown,
+		Task,
+		SortorderDropdown,
 		TaskDragContainer,
 	},
 	filters: {

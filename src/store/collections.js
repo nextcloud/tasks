@@ -87,7 +87,7 @@ const mutations = {
 	 * @param {Collection} newCollection The collection to update
 	 */
 	setVisibility(state, newCollection) {
-		let collection = state.collections.find(search => search.id === newCollection.id)
+		const collection = state.collections.find(search => search.id === newCollection.id)
 		Vue.set(collection, 'show', newCollection.show)
 	}
 }

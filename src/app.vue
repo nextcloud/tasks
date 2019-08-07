@@ -47,8 +47,8 @@ import client from './services/cdav.js'
 export default {
 	name: 'App',
 	components: {
-		'TheSettings': TheSettings,
-		'TheList': TheList
+		TheSettings,
+		TheList,
 	},
 	computed: {
 		...mapState({
