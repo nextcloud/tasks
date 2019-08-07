@@ -23,7 +23,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <template>
 	<li	v-show="showTask"
 		:task-id="task.uri"
-		:class="{done: task.completed}"
+		:class="{done: task.completed, readOnly: task.calendar.readOnly}"
 		:data-priority="[task.priority]"
 		class="task-item"
 	>
