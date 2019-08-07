@@ -93,7 +93,8 @@ export default {
 		 * @param {Object} $event the event
 		 */
 		closeDetails($event) {
-			if (!($event.target.closest('.reactive') || $event.target.classList.contains('reactive')) && !$event.target.closest('#app-sidebar')) {
+			if (!($event.target.closest('.reactive') || $event.target.classList.contains('reactive'))
+			&& !$event.target.closest('#app-sidebar') && this.$route.params.taskId) {
 				if (this.$route.params.calendarId) {
 					this.$router.push({ name: 'calendars', params: { calendarId: this.$route.params.calendarId } })
 				} else {
