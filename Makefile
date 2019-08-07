@@ -113,10 +113,12 @@ appstore: clean build-svg-sprite build-js-production
 	--exclude=/.git \
 	--exclude=/.babelrc \
 	--exclude=/.babelrc.js \
+	--exclude=/.codecov.yml \
 	--exclude=/.editorconfig \
 	--exclude=/.eslintrc.js \
 	--exclude=/.gitattributes \
 	--exclude=/.gitignore \
+	--exclude=/.phpunit.result.cache \
 	--exclude=/.gitlab-ci.yml \
 	--exclude=/.prettierrc.js \
 	--exclude=/.scrutinizer.yml \
@@ -131,6 +133,8 @@ appstore: clean build-svg-sprite build-js-production
 	--exclude=/Makefile \
 	--exclude=/package-lock.json \
 	--exclude=/package.json \
+	--exclude=/phpunit.xml \
+	--exclude=/phpunit.integration.xml \
 	--exclude=/README.md \
 	--exclude=/svg-sprite-bw.json \
 	--exclude=/svg-sprite-bw.tmpl \
