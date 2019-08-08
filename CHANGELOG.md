@@ -1,3 +1,15 @@
+## 0.11.1 - 2019-08-08
+### Added
+- Add possibility to drop tasks on calendars and collections in left sidebar #399
+- Updated translations
+- Updated dependencies
+- Added unit- and integration tests for PHP code #511
+
+### Fixed
+- Enable showing calendars with percent-encoded characters in their URI #480
+- Fix double-encoded calendar names and task name placeholders #486
+- Correctly handle tasks in read-only calendars #523, #529
+
 ## 0.11.0 - 2019-06-25
 ### Added
 - Implement sharing task lists with other users #410
