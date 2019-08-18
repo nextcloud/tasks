@@ -17,7 +17,7 @@ OC.L10N.register(
     "Download" : "Преземи",
     "Save" : "Сними",
     "New List" : "Нова листа",
-    "Settings" : "Подесувања",
+    "Settings" : "Параметри",
     "Hidden" : "Сокриен",
     "Visible" : "Видлив",
     "Automatic" : "Автоматски"
