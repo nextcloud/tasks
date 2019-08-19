@@ -36,7 +36,7 @@
 		"markdown-it-link-attributes": "~2.1.0",
 		"markdown-it-task-lists": "~2.1.1",
 		"nextcloud-vue": "^0.12.1",
-		"p-limit": "^2.2.0",
+		"p-limit": "^2.2.1",
 		"p-queue": "^6.1.1",
 		"uuid": "^3.3.2",
 		"v-tooltip": "2.0.2",
