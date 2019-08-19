@@ -78,6 +78,7 @@ OC.L10N.register(
     "Synchronizing to the server." : "Συγχρονισμός με τον διακομιστή.",
     "Task successfully saved to server." : "Η εργασία αποθηκεύτηκε επιτυχώς στον διακομιστή.",
     "Could not update the task." : "Αδυναμία ενημέρωσης της εργασίας.",
+    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Δεν ήταν δυνατή η ενημέρωση της εργασίας επειδή άλλαξε στον διακομιστή. Κάντε κλικ για να την ανανεώσετε, οι τοπικές αλλαγές θα διαγραφούν.",
     "An error occurred" : "Παρουσιάστηκε σφάλμα"
 },
 "nplurals=2; plural=(n != 1);");

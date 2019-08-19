@@ -88,7 +88,7 @@ OC.L10N.register(
     "Edit" : "編集",
     "Copy private link" : "プライベートリンクをコピー",
     "Copied" : "コピーしました",
-    "Can not copy" : "コピーに失敗しました",
+    "Can not copy" : "コピーできません",
     "Download" : "ダウンロード",
     "Save" : "保存",
     "Add List…" : "リストを追加…",
