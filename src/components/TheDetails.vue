@@ -523,7 +523,7 @@ export default {
 				+ (this.task.completed ? ('<br />' + t('tasks', 'Completed %s').replace('%s', moment(this.task.completedDate, 'YYYY-MM-DDTHH:mm:ss').calendar())) : '')
 		},
 		isAllDayPossible: function() {
-			return !this.task.calendar.readOnly || (this.task.due || this.task.start)
+			return !this.task.calendar.readOnly && (this.task.due || this.task.start)
 		},
 		priorityString: function() {
 			if (+this.task.priority > 5) {
