@@ -47,7 +47,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					type="list"
 				>
 					<Task v-for="task in sort(uncompletedRootTasks(calendar.tasks), sortOrder, sortDirection)"
-						:key="task.id"
+						:key="task.key"
 						:task="task"
 					/>
 				</task-drag-container>
@@ -62,7 +62,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					type="list"
 				>
 					<Task v-for="task in sort(completedRootTasks(calendar.tasks), sortOrder, sortDirection)"
-						:key="task.id"
+						:key="task.key"
 						:task="task"
 					/>
 				</task-drag-container>

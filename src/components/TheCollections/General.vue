@@ -53,7 +53,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					type="list"
 				>
 					<Task v-for="task in sort(calendar.filteredTasks, sortOrder, sortDirection)"
-						:key="task.id"
+						:key="task.key"
 						:task="task"
 					/>
 				</task-drag-container>
