@@ -26,14 +26,24 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			class="flex-container"
 		>
 			<div :class="{'editing': edit=='summary'}" class="title">
-				<a :aria-checked="task.completed"
+				<!-- <a :aria-checked="task.completed"
 					:aria-label="t('tasks', 'Task is completed')"
 					class="checkbox reactive"
 					role="checkbox"
 					@click="toggleCompleted(task)"
 				>
 					<span :class="{'icon-checkmark': task.completed, 'disabled': task.calendar.readOnly}" class="icon icon-bw detail-checkbox" />
-				</a>
+				</a> -->
+
+				<input id="toggleCompleted"
+					type="checkbox"
+					class="checkbox task-checkbox"
+					name="toggleCompleted"
+					:checked="task.completed"
+					@click="toggleCompleted(task)"
+				>
+				<label for="toggleCompleted" />
+
 				<a class="star reactive" @click="toggleStarred(task)">
 					<span :class="[{'disabled': task.calendar.readOnly}, iconStar]"
 						class="icon"
