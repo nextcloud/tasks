@@ -3,6 +3,9 @@
 	*/
 
 #app-navigation {
+	&:not(.vue) > ul > li > a {
+		background-position: inherit;
+	}
 	> ul {
 		> li {
 			background-image: unset;
