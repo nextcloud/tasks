@@ -26,22 +26,15 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			class="flex-container"
 		>
 			<div :class="{'editing': edit=='summary'}" class="title">
-				<!-- <a :aria-checked="task.completed"
-					:aria-label="t('tasks', 'Task is completed')"
-					class="checkbox reactive"
-					role="checkbox"
-					@click="toggleCompleted(task)"
-				>
-					<span :class="{'icon-checkmark': task.completed, 'disabled': task.calendar.readOnly}" class="icon icon-bw detail-checkbox" />
-				</a> -->
-
-				<input id="toggleCompleted"
+				
+				<input :id="'toggleCompleted_' + task.uid"
 					type="checkbox"
 					class="checkbox task-checkbox"
 					name="toggleCompleted"
+					:class="{'disabled': task.calendar.readOnly}"
 					:checked="task.completed"
-					@click="toggleCompleted(task)"
-				>
+					:aria-label="t('tasks', 'Task is completed')"
+					@click="toggleCompleted(task)">
 				<label for="toggleCompleted" />
 
 				<a class="star reactive" @click="toggleStarred(task)">
@@ -139,18 +132,17 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</a>
 						</div>
 					</li>
-					<li v-show="isAllDayPossible"
-						:aria-checked="task.allDay"
-						class="section detail-all-day reactive"
-						role="checkbox"
+					
+					<li>
+						<input v-if="isAllDayPossible" 
+						type="checkbox"
+						class="checkbox section detail-all-day reactive"
+						name="isAllDayPossible"
+						:class="{'disabled': task.calendar.readOnly}"
+						:checked="task.allDay"
 						@click="toggleAllDay(task)"
-					>
-						<div>
-							<span :class="{'icon-checkmark': task.allDay, 'disabled': task.calendar.readOnly}" class="icon icon-bw detail-checkbox" />
-							<span class="section-title">
-								{{ t('tasks', 'All day') }}
-							</span>
-						</div>
+						>
+						<label for="isAllDayPossible">{{ t('tasks', 'All day') }}</label>
 					</li>
 					<li class="section detail-calendar reactive">
 						<div v-click-outside="() => finishEditing('calendar')"

@@ -1217,9 +1217,13 @@
 		border-radius: 3px;
 		border: 1px solid var(--color-main-text);
 		float: left;
-		margin: 9px;
+		margin: 7px 7px;
+		padding: 9px;
 		opacity: 0.5;
 
+		&.icon-checkmark {
+			margin-top: 10px;
+		}
 		&:not(.icon-checkmark) {
 			background: unset;
 		}
