@@ -853,6 +853,15 @@
 					span {
 						cursor: pointer;
 					}
+					input[type='checkbox'].checkbox + label {
+						&::before {
+							margin-left: 0;
+						}
+						>span {
+							font-weight: bold;
+							margin-left: 10px;
+						}
+					}
 				}
 
 				&.editing {
@@ -1187,16 +1196,20 @@
 	margin: 7px;
 	margin-right: 3px;
 	opacity: 0.5;
+}
 
-	input[type='checkbox'].checkbox {
-		&:checked + label::before {
-			background-image: var(--icon-checkmark-000);
-			background-color: unset;
-			border-color: unset;
-		}
-		&:disabled + label::before {
-			background-color: var(--color-background-darker) !important;
-		}
+.detail-checkbox {
+	padding: 8px;
+}
+
+input[type='checkbox'].checkbox {
+	&:checked + label::before {
+		background-image: var(--icon-checkmark-000);
+		background-color: unset;
+		border-color: unset;
+	}
+	&:disabled + label::before {
+		background-color: var(--color-background-darker) !important;
 	}
 }
 

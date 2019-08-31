@@ -26,16 +26,20 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			class="flex-container"
 		>
 			<div :class="{'editing': edit=='summary'}" class="title">
-				<input :id="'toggleCompleted_' + task.uid"
-					type="checkbox"
-					class="checkbox task-checkbox"
-					name="toggleCompleted"
-					:class="{'disabled': task.calendar.readOnly}"
-					:checked="task.completed"
-					:aria-label="t('tasks', 'Task is completed')"
-					@click="toggleCompleted(task)"
-				>
-				<label for="toggleCompleted" />
+				<span class="detail-checkbox">
+					<input :id="'detailsToggleCompleted_' + task.uid"
+						type="checkbox"
+						class="checkbox"
+						name="detailsToggleCompleted"
+						:class="{'disabled': task.calendar.readOnly}"
+						:checked="task.completed"
+						:aria-checked="task.completed"
+						:disabled="task.calendar.readOnly"
+						:aria-label="t('tasks', 'Task is completed')"
+						@click="toggleCompleted(task)"
+					>
+					<label :for="'detailsToggleCompleted_' + task.uid" />
+				</span>
 
 				<a class="star reactive" @click="toggleStarred(task)">
 					<span :class="[{'disabled': task.calendar.readOnly}, iconStar]"
@@ -133,16 +137,24 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						</div>
 					</li>
 
-					<li>
-						<input v-if="isAllDayPossible"
-							type="checkbox"
-							class="checkbox section detail-all-day reactive"
-							name="isAllDayPossible"
-							:class="{'disabled': task.calendar.readOnly}"
-							:checked="task.allDay"
-							@click="toggleAllDay(task)"
-						>
-						<label for="isAllDayPossible">{{ t('tasks', 'All day') }}</label>
+					<li v-if="isAllDayPossible"
+						class="section detail-all-day reactive"
+					>
+						<div>
+							<input id="isAllDayPossible"
+								type="checkbox"
+								class="checkbox"
+								name="isAllDayPossible"
+								:class="{'disabled': task.calendar.readOnly}"
+								:aria-checked="task.allDay"
+								:checked="task.allDay"
+								:disabled="task.calendar.readOnly"
+								@click="toggleAllDay(task)"
+							>
+							<label for="isAllDayPossible">
+								<span>{{ t('tasks', 'All day') }}</span>
+							</label>
+						</div>
 					</li>
 					<li class="section detail-calendar reactive">
 						<div v-click-outside="() => finishEditing('calendar')"
