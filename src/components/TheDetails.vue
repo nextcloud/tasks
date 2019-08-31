@@ -26,7 +26,6 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			class="flex-container"
 		>
 			<div :class="{'editing': edit=='summary'}" class="title">
-				
 				<input :id="'toggleCompleted_' + task.uid"
 					type="checkbox"
 					class="checkbox task-checkbox"
@@ -34,7 +33,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					:class="{'disabled': task.calendar.readOnly}"
 					:checked="task.completed"
 					:aria-label="t('tasks', 'Task is completed')"
-					@click="toggleCompleted(task)">
+					@click="toggleCompleted(task)"
+				>
 				<label for="toggleCompleted" />
 
 				<a class="star reactive" @click="toggleStarred(task)">
@@ -132,15 +132,15 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</a>
 						</div>
 					</li>
-					
+
 					<li>
-						<input v-if="isAllDayPossible" 
-						type="checkbox"
-						class="checkbox section detail-all-day reactive"
-						name="isAllDayPossible"
-						:class="{'disabled': task.calendar.readOnly}"
-						:checked="task.allDay"
-						@click="toggleAllDay(task)"
+						<input v-if="isAllDayPossible"
+							type="checkbox"
+							class="checkbox section detail-all-day reactive"
+							name="isAllDayPossible"
+							:class="{'disabled': task.calendar.readOnly}"
+							:checked="task.allDay"
+							@click="toggleAllDay(task)"
 						>
 						<label for="isAllDayPossible">{{ t('tasks', 'All day') }}</label>
 					</li>
