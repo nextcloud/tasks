@@ -1181,6 +1181,20 @@
 	}
 }
 
+.task-checkbox,
+.detail-checkbox {
+	float: left;
+	margin: 7px;
+	margin-right: 3px;
+	opacity: 0.5;
+
+	input[type='checkbox'].checkbox:checked + label::before {
+		background-image: var(--icon-checkmark-000);
+		background-color: unset;
+		border-color: unset;
+	}
+}
+
 .icon {
 	height: 16px;
 	width: 16px;
