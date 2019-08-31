@@ -3,8 +3,18 @@
 	*/
 
 #app-navigation {
-	&:not(.vue) > ul > li > a {
-		background-position: inherit;
+	&:not(.vue) {
+		> ul > li > a {
+			background-position: inherit;
+		}
+		.app-navigation-entry-menu {
+			ul {
+				align-items: unset;
+				li {
+					width: auto !important;
+				}
+			}
+		}
 	}
 	> ul {
 		> li {
