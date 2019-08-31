@@ -40,15 +40,6 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				/>
 			</div>
 
-			<!-- <span :aria-checked="task.completed"
-				:aria-label="t('tasks', 'Task is completed')"
-				class="task-checkbox"
-				name="toggleCompleted"
-				role="checkbox"
-				@click="toggleCompleted(task)"
-			>
-				<span :class="{'icon-checkmark': task.completed, 'disabled': task.calendar.readOnly}" class="icon icon-bw task-checkbox reactive no-nav" />
-			</span> -->
 			<span class="task-checkbox">
 				<input :id="'toggleCompleted_' + task.uid"
 					type="checkbox"
@@ -63,7 +54,6 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				>
 				<label class="reactive no-nav" :for="'toggleCompleted_' + task.uid" />
 			</span>
-
 			<span class="icon task-separator" />
 			<span class="task-star" @click="toggleStarred(task)">
 				<span :class="[iconStar, {'disabled': task.calendar.readOnly}]" class="icon right large reactive no-nav" />

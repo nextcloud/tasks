@@ -136,8 +136,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</a>
 						</div>
 					</li>
-
-					<li v-if="isAllDayPossible"
+					<li v-show="isAllDayPossible"
 						class="section detail-all-day reactive"
 					>
 						<div>

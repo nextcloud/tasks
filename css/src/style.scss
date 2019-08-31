@@ -1244,31 +1244,6 @@ input[type='checkbox'].checkbox {
 		opacity: 1 !important;
 	}
 
-	&.task-checkbox,
-	&.detail-checkbox {
-		border-radius: 3px;
-		border: 1px solid var(--color-main-text);
-		float: left;
-		margin: 7px 7px;
-		padding: 9px;
-		opacity: 0.5;
-
-		&.icon-checkmark {
-			margin-top: 10px;
-		}
-		&:not(.icon-checkmark) {
-			background: unset;
-		}
-
-		&:not(.disabled):hover {
-			opacity: 0.7;
-		}
-
-		&.disabled {
-			cursor: not-allowed;
-		}
-	}
-
 	&.right {
 		float: right;
 	}
