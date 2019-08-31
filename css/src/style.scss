@@ -4,8 +4,13 @@
 
 #app-navigation {
 	&:not(.vue) {
-		> ul > li > a {
-			background-position: inherit;
+		> ul > li {
+			> a {
+				background-position: inherit;
+			}
+			> .app-navigation-entry-edit {
+				padding-left: 5px !important;
+			}
 		}
 		.app-navigation-entry-menu {
 			ul {
