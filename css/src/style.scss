@@ -1188,10 +1188,15 @@
 	margin-right: 3px;
 	opacity: 0.5;
 
-	input[type='checkbox'].checkbox:checked + label::before {
-		background-image: var(--icon-checkmark-000);
-		background-color: unset;
-		border-color: unset;
+	input[type='checkbox'].checkbox {
+		&:checked + label::before {
+			background-image: var(--icon-checkmark-000);
+			background-color: unset;
+			border-color: unset;
+		}
+		&:disabled + label::before {
+			background-color: var(--color-background-darker) !important;
+		}
 	}
 }
 
