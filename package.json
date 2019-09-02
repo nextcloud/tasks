@@ -57,6 +57,7 @@
 		"babel-eslint": "^10.0.3",
 		"babel-jest": "^24.9.0",
 		"babel-loader": "^8.0.6",
+		"browserslist-config-nextcloud": "0.0.1",
 		"css-loader": "^3.2.0",
 		"eslint": "^6.3.0",
 		"eslint-config-standard": "^14.1.0",
@@ -72,8 +73,8 @@
 		"jest-serializer-vue": "^2.0.2",
 		"jsdom": "^15.1.1",
 		"jsdom-global": "^3.0.2",
-		"node-sass": "^4.12.0",
 		"moment": "^2.24.0",
+		"node-sass": "^4.12.0",
 		"prettier-eslint": "^9.0.0",
 		"raw-loader": "^3.1.0",
 		"sass-loader": "^8.0.0",
@@ -122,5 +123,8 @@
 			"lcov",
 			"clover"
 		]
-	}
+	},
+	"browserslist": [
+		"extends browserslist-config-nextcloud"
+	]
 }
