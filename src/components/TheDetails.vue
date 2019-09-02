@@ -26,14 +26,21 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			class="flex-container"
 		>
 			<div :class="{'editing': edit=='summary'}" class="title">
-				<a :aria-checked="task.completed"
-					:aria-label="t('tasks', 'Task is completed')"
-					class="checkbox reactive"
-					role="checkbox"
-					@click="toggleCompleted(task)"
-				>
-					<span :class="{'icon-checkmark': task.completed, 'disabled': task.calendar.readOnly}" class="icon icon-bw detail-checkbox" />
-				</a>
+				<span class="detail-checkbox">
+					<input :id="'detailsToggleCompleted_' + task.uid"
+						type="checkbox"
+						class="checkbox"
+						name="detailsToggleCompleted"
+						:class="{'disabled': task.calendar.readOnly}"
+						:checked="task.completed"
+						:aria-checked="task.completed"
+						:disabled="task.calendar.readOnly"
+						:aria-label="t('tasks', 'Task is completed')"
+						@click="toggleCompleted(task)"
+					>
+					<label :for="'detailsToggleCompleted_' + task.uid" />
+				</span>
+
 				<a class="star reactive" @click="toggleStarred(task)">
 					<span :class="[{'disabled': task.calendar.readOnly}, iconStar]"
 						class="icon"
@@ -130,16 +137,22 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						</div>
 					</li>
 					<li v-show="isAllDayPossible"
-						:aria-checked="task.allDay"
 						class="section detail-all-day reactive"
-						role="checkbox"
-						@click="toggleAllDay(task)"
 					>
 						<div>
-							<span :class="{'icon-checkmark': task.allDay, 'disabled': task.calendar.readOnly}" class="icon icon-bw detail-checkbox" />
-							<span class="section-title">
-								{{ t('tasks', 'All day') }}
-							</span>
+							<input id="isAllDayPossible"
+								type="checkbox"
+								class="checkbox"
+								name="isAllDayPossible"
+								:class="{'disabled': task.calendar.readOnly}"
+								:aria-checked="task.allDay"
+								:checked="task.allDay"
+								:disabled="task.calendar.readOnly"
+								@click="toggleAllDay(task)"
+							>
+							<label for="isAllDayPossible">
+								<span>{{ t('tasks', 'All day') }}</span>
+							</label>
 						</div>
 					</li>
 					<li class="section detail-calendar reactive">
