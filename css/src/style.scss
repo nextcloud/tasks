@@ -1211,6 +1211,10 @@ input[type='checkbox'].checkbox {
 	&:disabled + label::before {
 		background-color: var(--color-background-darker) !important;
 	}
+	+ label::before {
+		height: 14px;
+		width: 14px;
+	}
 }
 
 .icon {
