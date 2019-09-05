@@ -33,14 +33,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			type="task"
 			@click="navigate($event)"
 		>
-			<div v-if="task.complete > 0" class="percentbar">
-				<div :style="{ width: task.complete + '%', 'background-color': task.calendar.color }"
-					:aria-label="$t('tasks', '{complete} % completed', {complete: task.complete})"
-					class="percentdone"
-				/>
-			</div>
-
-			<span class="task-checkbox">
+			<!-- Checkbox with divider -->
+			<div class="task-checkbox">
 				<input :id="'toggleCompleted_' + task.uid"
 					type="checkbox"
 					class="checkbox"
@@ -53,45 +47,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					@click="toggleCompleted(task)"
 				>
 				<label class="reactive no-nav" :for="'toggleCompleted_' + task.uid" />
-			</span>
-			<span class="icon task-separator" />
-			<span class="task-star" @click="toggleStarred(task)">
-				<span :class="[iconStar, {'disabled': task.calendar.readOnly}]" class="icon right large reactive no-nav" />
-			</span>
-			<span v-if="!task.calendar.readOnly"
-				class="task-addsubtask add-subtask"
-			>
-				<span :taskId="task.uri"
-					:title="subtasksCreationPlaceholder" class="icon icon-bw icon-add right large reactive no-nav"
-					@click="showSubtaskInput = true"
-				/>
-			</span>
-			<span v-if="Object.values(task.subTasks).length" @click="toggleSubtasksVisibility(task)">
-				<span :title="$t('tasks', 'Toggle visibility of all subtasks.')"
-					:class="task.hideSubtasks ? 'icon-subtasks-hidden' : 'icon-subtasks-visible'"
-					class="icon icon-bw right large subtasks reactive no-nav"
-				/>
-			</span>
-			<span v-if="hasCompletedSubtasks" @click="toggleCompletedSubtasksVisibility(task)">
-				<span :title="$t('tasks', 'Toggle visibility of completed subtasks.')"
-					:class="{'active': !task.hideCompletedSubtasks}"
-					class="icon icon-bw icon-toggle right large toggle-completed-subtasks reactive no-nav"
-				/>
-			</span>
-			<span v-if="task.note!=''">
-				<span class="icon icon-bw icon-note right large" />
-			</span>
-			<span class="task-status-container">
-				<TaskStatusDisplay :task="task" />
-			</span>
-			<span :class="{overdue: overdue(task.due)}" class="duedate">
-				{{ task.due | formatDate }}
-			</span>
-			<span v-if="$route.params.collectionId=='week'" class="listname">
-				<span :style="{'background-color': task.calendar.color}" class="calendar-indicator" />
-				<span>{{ task.calendar.displayName }}</span>
-			</span>
-			<div class="task-info-wrapper">
+			</div>
+			<!-- Info: title, progress & categories -->
+			<div class="task-info">
 				<div class="title">
 					<span v-linkify="task.summary" />
 				</div>
@@ -101,6 +59,51 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							{{ category }}
 						</span>
 					</span>
+				</div>
+				<div v-if="task.complete > 0" class="percentbar">
+					<div :style="{ width: task.complete + '%', 'background-color': task.calendar.color }"
+						:aria-label="$t('tasks', '{complete} % completed', {complete: task.complete})"
+						class="percentdone"
+					/>
+				</div>
+			</div>
+			<!-- Icons: sync-status, calendarname, date, note, subtask-show-completed, subtask-visibility, add-subtask, starred -->
+			<div class="task-body-icons">
+				<div class="task-status-container">
+					<TaskStatusDisplay :task="task" />
+				</div>
+				<div v-if="$route.params.collectionId=='week'" class="calendar">
+					<span :style="{'background-color': task.calendar.color}" class="calendar-indicator" />
+					<span class="calendar-name">{{ task.calendar.displayName }}</span>
+				</div>
+				<div v-if="task.due" :class="{overdue: overdue(task.due)}" class="duedate">
+					{{ task.due | formatDate }}
+				</div>
+				<div v-if="task.note!=''">
+					<span class="icon icon-bw icon-note" />
+				</div>
+				<div v-if="hasCompletedSubtasks" @click="toggleCompletedSubtasksVisibility(task)">
+					<span :title="$t('tasks', 'Toggle visibility of completed subtasks.')"
+						:class="{'active': !task.hideCompletedSubtasks}"
+						class="icon icon-bw icon-toggle toggle-completed-subtasks reactive no-nav"
+					/>
+				</div>
+				<div v-if="Object.values(task.subTasks).length" @click="toggleSubtasksVisibility(task)">
+					<span :title="$t('tasks', 'Toggle visibility of all subtasks.')"
+						:class="task.hideSubtasks ? 'icon-subtasks-hidden' : 'icon-subtasks-visible'"
+						class="icon icon-bw subtasks reactive no-nav"
+					/>
+				</div>
+				<div v-if="!task.calendar.readOnly"
+					class="task-addsubtask add-subtask"
+				>
+					<span :taskId="task.uri"
+						:title="subtasksCreationPlaceholder" class="icon icon-bw icon-add reactive no-nav"
+						@click="showSubtaskInput = true"
+					/>
+				</div>
+				<div class="task-star" @click="toggleStarred(task)">
+					<span :class="[iconStar, {'disabled': task.calendar.readOnly}]" class="icon reactive no-nav" />
 				</div>
 			</div>
 		</div>

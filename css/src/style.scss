@@ -136,7 +136,7 @@
 				&:not(:empty).confirmation-confirm {
 					padding: 0 !important;
 				}
-		
+
 				span.countdown {
 					background-color: inherit;
 					color: $white;
@@ -377,38 +377,227 @@
 		overflow: hidden;
 
 		.task-list {
-			height: 100%;
 			width: 100%;
 			overflow-y: auto;
-		}
 
-		.task-body .task-info-wrapper .title span a {
-			cursor: pointer;
-			text-decoration: underline;
-		}
-	}
+			.loadmore {
+				font-size: 11px;
+				margin-top: 10px;
+				text-align: center;
+				height: 21px;
 
-	.task-list {
-		.loadmore {
-			font-size: 11px;
-			margin-top: 10px;
-			text-align: center;
+				span {
+					color: $gray;
+					background-color: $gray_easy;
+					border-radius: 10px;
+					padding: 3px 6px;
 
-			span {
-				color: $gray;
-				background-color: $gray_easy;
-				border-radius: 10px;
-				padding: 3px 6px;
-
-				&:hover {
-					cursor: pointer;
-					color: $gray_dark;
+					&:hover {
+						cursor: pointer;
+						color: $gray_dark;
+					}
 				}
 			}
-		}
 
-		.grouped-tasks {
-			position: relative;
+			.grouped-tasks {
+				position: relative;
+				padding-top: 2px;
+
+				.task-item {
+					cursor: default;
+					list-style: none outside none;
+					margin-top: -1px;
+
+					&.done .task-body {
+						opacity: .6;
+
+						.title {
+							text-decoration: line-through;
+						}
+					}
+
+					&.add-subtask {
+						border: 1px solid $gray_light;
+
+						input {
+							border: medium none !important;
+							border-radius: 0 !important;
+							box-shadow: none !important;
+							box-sizing: border-box;
+							color: $gray_dark;
+							cursor: text;
+							font-size: 100%;
+							margin: 0;
+							padding: 0 60px 0 32px;
+							width: 100%;
+							min-height: 36px;
+						}
+					}
+
+					&.sortable-ghost .task-body {
+						background-color: rgba( $color-primary, .3 );
+					}
+
+					.subtasks-container {
+						margin-left: 35px;
+					}
+
+					.task-body {
+						display: flex;
+						flex-direction: row;
+						flex-wrap: nowrap;
+						align-items: center;
+						height: 37px;
+						position: relative;
+						border: 1px solid $gray_light;
+						overflow: hidden;
+
+						&:hover,
+						&.active {
+							background-color: $gray_easy;
+							box-shadow: inset 4px 0 var(--color-primary);
+						}
+
+						.task-checkbox {
+							padding: 7px;
+							padding-right: 3px;
+							border-right: 1px dotted $gray;
+							opacity: 0.5;
+						}
+
+						.task-info {
+							display: flex;
+							flex: 1 1 auto;
+							cursor: pointer;
+							color: $gray_dark;
+							line-height: 16px;
+							margin: 0;
+							overflow: hidden;
+							position: relative;
+							text-overflow: ellipsis;
+							white-space: nowrap;
+
+							.title {
+								cursor: text;
+								display: inline-flex;
+								padding: 10px;
+								overflow: hidden;
+
+								span {
+									overflow: hidden;
+									text-overflow: ellipsis;
+
+									a {
+										cursor: pointer;
+										text-decoration: underline;
+									}
+								}
+							}
+
+							.categories-list {
+								padding: 8px;
+								overflow: hidden;
+
+								.category {
+									overflow: hidden;
+									display: inline-flex;
+									min-width: 45px;
+									background-color: $gray_easy;
+									border: 1px solid $gray_light;
+									border-radius: 2px;
+									margin: 0 4px;
+
+									.category-label {
+										color: $gray;
+										font-weight: bold;
+										padding: 2px 4px;
+										text-overflow: ellipsis;
+										overflow: hidden;
+										white-space: nowrap;
+										width: 100%;
+										text-align: center;
+									}
+								}
+							}
+
+							.percentbar {
+								height: 3px;
+								position: absolute;
+								bottom: 3px;
+								left: 10px;
+								right: 10px;
+								background-color: $gray_light;
+								border-radius: 2px;
+
+								.percentdone {
+									height: 3px;
+									border-radius: 2px 0 0 2px;
+									opacity: .75;
+								}
+							}
+						}
+
+						.task-body-icons {
+							display: flex;
+							max-width: 50%;
+							justify-content: flex-end;
+							overflow: hidden;
+
+							&>div {
+								height: 37px;
+								padding: 10px;
+								display: flex;
+								flex-direction: row;
+								align-items: center;
+								flex-wrap: nowrap;
+							}
+
+							.icon {
+								vertical-align: unset;
+
+								&.icon-add {
+									&:hover {
+										opacity: 1;
+									}
+								}
+							}
+
+							.duedate {
+								color: $blue_due;
+								font-size: 11px;
+								line-height: 14px;
+
+								&.overdue {
+									color: $red_overdue;
+								}
+							}
+
+							.calendar {
+								color: $gray;
+								font-size: 11px;
+								line-height: 14px;
+								white-space: nowrap;
+
+								.calendar-indicator {
+									position: relative;
+									display: inline-block;
+									margin-right: 3px;
+									width: 8px;
+									height: 8px;
+									border: none;
+									border-radius: 50%;
+									cursor: pointer
+								}
+								.calendar-name {
+									max-width: 200px;
+									overflow: hidden;
+									text-overflow: ellipsis;
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -431,203 +620,6 @@
 			cursor: pointer;
 		}
 	}
-}
-
-/**
-	* rules for task-items
-	*/
-
-.task-item {
-	cursor: default;
-	min-height: 37px;
-	list-style: none outside none;
-	overflow: hidden;
-	margin-top: -1px;
-
-	&:first-child {
-		margin-top: 0;
-
-		.task-body {
-			border-width: 1px;
-		}
-	}
-
-	&.done .task-body {
-		opacity: .6;
-
-		.title {
-			text-decoration: line-through;
-		}
-	}
-
-	&.add-subtask {
-		border: 1px solid $gray_light;
-
-		input {
-			border: medium none !important;
-			border-radius: 0 !important;
-			box-shadow: none !important;
-			box-sizing: border-box;
-			color: $gray_dark;
-			cursor: text;
-			font-size: 100%;
-			margin: 0;
-			padding: 0 60px 0 32px;
-			width: 100%;
-			min-height: 36px;
-		}
-	}
-
-	&.sortable-ghost .task-body {
-		background-color: rgba( $color-primary, .3 );
-	}
-
-	.subtasks-container {
-		margin-left: 35px;
-
-		.task-item {
-			margin-top: -1px;
-		}
-	}
-}
-
-.task-body {
-	height: 37px;
-	list-style: none outside none;
-	margin: 0;
-	position: relative;
-	border-style: solid;
-	border-width: 1px;
-	border-color: $gray_light;
-	overflow: hidden;
-
-	&:hover,
-	&.active {
-		background-color: $gray_easy;
-		box-shadow: inset 4px 0 var(--color-primary);
-	}
-
-	.icon {
-		&.large {
-			margin: 8px;
-		}
-
-		&.task-separator {
-			cursor: default;
-			height: 100%;
-			left: 34px;
-			position: absolute;
-			top: 1px;
-			background: unset;
-			width: 2px;
-			border-left: 1px dotted $gray;
-		}
-
-		&.icon-add {
-			&:hover {
-				opacity: 1;
-			}
-		}
-	}
-
-	.task-info-wrapper {
-		cursor: pointer;
-		color: $gray_dark;
-		display: flex;
-		line-height: 16px;
-		margin: 0;
-		overflow: hidden;
-		position: relative;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-
-		.title {
-			cursor: text;
-			display: inline-flex;
-			padding: 10px;
-		}
-
-		.categories-list {
-			padding: 8px;
-			vertical-align: middle;
-			display: inline-flex;
-			text-overflow: ellipsis;
-			flex-wrap: nowrap;
-			overflow: hidden;
-	
-			.category {
-				overflow: hidden;
-				display: inline-flex;
-				min-width: 45px;
-				background-color: $gray_easy;
-				border: 1px solid $gray_light;
-				border-radius: 2px;
-				margin: 0 4px;
-
-				.category-label {
-					color: $gray;
-					font-weight: bold;
-					padding: 2px 4px;
-					text-overflow: ellipsis;
-					overflow: hidden;
-					white-space: nowrap;
-					width: 100%;
-					text-align: center;
-				}
-			}
-		}
-	}
-
-	.duedate {
-		color: $blue_due;
-		float: right;
-		font-size: 11px;
-		line-height: 14px;
-		margin: 10px;
-
-		&.overdue {
-			color: $red_overdue;
-		}
-	}
-
-	.listname {
-		color: $gray;
-		float: right;
-		font-size: 11px;
-		line-height: 14px;
-		margin: 10px;
-
-		.calendar-indicator {
-			position: relative;
-			display: inline-block;
-			width: 8px;
-			height: 8px;
-			border: none;
-			border-radius: 50%;
-			cursor: pointer
-		}
-	}
-
-	.percentbar {
-		height: 3px;
-		position: relative;
-		top: 28px;
-		left: 42px;
-		margin-right: 103px;
-		margin-bottom: -5px;
-		background-color: $gray_light;
-		border-radius: 2px;
-
-		.percentdone {
-			height: 3px;
-			border-radius: 2px 0 0 2px;
-			opacity: .75;
-		}
-	}
-}
-
-.template {
-	display: none;
 }
 
 /**
@@ -887,7 +879,7 @@
 						margin-left: auto;
 						right: 22px;
 					}
-				
+
 					&.icon-privacy {
 						opacity: 1;
 						cursor: unset;
@@ -1152,7 +1144,7 @@
 					cursor: default;
 				}
 			}
-			
+
 			&.detail-all-day {
 				div,
 				span {
@@ -1190,16 +1182,12 @@
 	}
 }
 
-.task-checkbox,
 .detail-checkbox {
 	float: left;
+	padding: 8px;
 	margin: 7px;
 	margin-right: 3px;
 	opacity: 0.5;
-}
-
-.detail-checkbox {
-	padding: 8px;
 }
 
 input[type='checkbox'].checkbox {
@@ -1364,11 +1352,6 @@ input[type='checkbox'].checkbox {
 
 .icon span{
 	font-family: var(--font-face);
-}
-
-.task-status-container {
-	float:right;
-	margin: 8px;
 }
 
 .status-display {
