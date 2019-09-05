@@ -23,9 +23,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 	<li v-click-outside="reset" :class="{confirmed: activated, active: armed}">
 		<a class="confirmation-default" @click="activate($event)">
 			<span class="icon-delete" />
-			<span>{{ t('tasks', 'Delete') }}</span>
+			<span>{{ $t('tasks', 'Delete') }}</span>
 		</a>
-		<a :title="t('tasks', 'Cancel')" class="confirmation-abort icon-close" @click="reset">
+		<a :title="$t('tasks', 'Cancel')" class="confirmation-abort icon-close" @click="reset">
 			<span />
 		</a>
 		<a v-tooltip="{

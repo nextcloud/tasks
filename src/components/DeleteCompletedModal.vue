@@ -22,7 +22,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <template>
 	<div class="loadmore reactive">
 		<span v-show="completedTasksCount" @click="openModal">
-			{{ t('tasks', 'Delete all completed tasks.') }}
+			{{ $t('tasks', 'Delete all completed tasks.') }}
 		</span>
 		<Modal v-if="modalOpen"
 			:out-transition="true"
@@ -32,7 +32,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<p class="icon-delete" />
 				<div v-if="completedTasksCount">
 					<h3 class="delete-completed__header">
-						{{ n('tasks',
+						{{ $n('tasks',
 							'This will delete {taskCount} completed task and its subtasks from calendar "%s".',
 							'This will delete {taskCount} completed tasks and their subtasks from calendar "%s".',
 							initialCompletedRootTasksCount,
@@ -44,12 +44,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<button class="delete-completed__button icon-delete" type="button"
 						@click="deleteCompletedTasks"
 					>
-						{{ t('tasks', 'Delete completed tasks.') }}
+						{{ $t('tasks', 'Delete completed tasks.') }}
 					</button>
 				</div>
 				<div v-else>
 					<h3 class="delete-completed__header">
-						{{ t('tasks', 'Deleted all completed tasks from calendar "%s".').replace('%s', calendar.displayName) }}
+						{{ $t('tasks', 'Deleted all completed tasks from calendar "%s".').replace('%s', calendar.displayName) }}
 					</h3>
 				</div>
 				<div>
@@ -57,10 +57,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<p class="delete-completed__tracker">
 						<span>{{ percentage }} %</span>
 						<span v-if="failed === 0">
-							{{ t('tasks', 'No errors') }}
+							{{ $t('tasks', 'No errors') }}
 						</span>
-						<span v-else v-tooltip.auto="t('tasks', 'Open your browser console for more details')">
-							{{ n('tasks',
+						<span v-else v-tooltip.auto="$t('tasks', 'Open your browser console for more details')">
+							{{ $n('tasks',
 								'Could not delete {failedCount} task.',
 								'Could not delete {failedCount} tasks.',
 								failed,

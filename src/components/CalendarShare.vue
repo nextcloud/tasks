@@ -78,10 +78,10 @@ export default {
 	},
 	computed: {
 		placeholder() {
-			return t('tasks', 'Share with users or groups')
+			return this.$t('tasks', 'Share with users or groups')
 		},
 		noResult() {
-			return t('tasks', 'No users or groups')
+			return this.$t('tasks', 'No users or groups')
 		}
 	},
 	mounted() {

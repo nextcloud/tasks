@@ -23,14 +23,14 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 	<div id="app-settings" class="reactive">
 		<div id="app-settings-header">
 			<button class="settings-button" data-apps-slide-toggle="#app-settings-content">
-				<span>{{ t('tasks', 'Settings') }}</span>
+				<span>{{ $t('tasks', 'Settings') }}</span>
 			</button>
 		</div>
 		<div id="app-settings-content">
 			<ul>
 				<li>
 					<label for="defaultCalendar">
-						{{ t('tasks', 'Default list') }}
+						{{ $t('tasks', 'Default list') }}
 					</label>
 					<select id="defaultCalendar" v-model="defaultCalendarId">
 						<option v-for="calendar in calendars"
@@ -42,7 +42,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					</select>
 				</li>
 				<li class="headline">
-					{{ t('tasks', 'Visibility of Smart Collections') }}
+					{{ $t('tasks', 'Visibility of Smart Collections') }}
 				</li>
 				<li v-for="collection in collections"
 					:key="collection.id"
@@ -83,15 +83,15 @@ export default {
 			collectionOptions: [
 				{
 					id: 0,
-					name: t('tasks', 'Hidden')
+					name: this.$t('tasks', 'Hidden')
 				},
 				{
 					id: 1,
-					name: t('tasks', 'Visible')
+					name: this.$t('tasks', 'Visible')
 				},
 				{
 					id: 2,
-					name: t('tasks', 'Automatic')
+					name: this.$t('tasks', 'Automatic')
 				}
 			],
 			dayOfMonth: moment().date()

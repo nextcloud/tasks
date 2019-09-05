@@ -83,7 +83,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							<li v-if="!calendar.readOnly">
 								<a @click="edit(calendar)">
 									<span class="icon-rename" />
-									<span>{{ t('tasks', 'Edit') }}</span>
+									<span>{{ $t('tasks', 'Edit') }}</span>
 								</a>
 							</li>
 							<li>
@@ -91,17 +91,17 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									<span class="icon-public" />
 									<span>
 										{{ !copied
-											? t('tasks', 'Copy private link')
+											? $t('tasks', 'Copy private link')
 											: copySuccess
-												? t('tasks', 'Copied')
-												: t('tasks', 'Can not copy') }}
+												? $t('tasks', 'Copied')
+												: $t('tasks', 'Can not copy') }}
 									</span>
 								</a>
 							</li>
 							<li>
 								<a :href="exportUrl(calendar)" :download="calendar.id + '.ics'">
 									<span class="icon-download" />
-									<span>{{ t('tasks', 'Download') }}</span>
+									<span>{{ $t('tasks', 'Download') }}</span>
 								</a>
 							</li>
 							<Confirmation v-if="!calendar.readOnly" :message="deleteMessage(calendar.displayName)" @delete-calendar="deleteCalendar(calendar)" />
@@ -125,13 +125,13 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						type="text"
 						@keyup="checkName($event, calendar, save)"
 					>
-					<input :title="t('tasks', 'Cancel')"
+					<input :title="$t('tasks', 'Cancel')"
 						type="cancel"
 						value=""
 						class="action icon-close"
 						@click="resetView(calendar)"
 					>
-					<input :title="t('tasks', 'Save')"
+					<input :title="$t('tasks', 'Save')"
 						type="button"
 						value=""
 						class="action icon-checkmark"
@@ -146,7 +146,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				@click="startCreate($event)"
 			>
 				<span class="title">
-					{{ t('tasks', 'Add List…') }}
+					{{ $t('tasks', 'Add List…') }}
 				</span>
 			</a>
 			<div :class="{error: nameError}" class="app-navigation-entry-edit name">
@@ -158,18 +158,18 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							show: showTooltip('list_'),
 							trigger: 'manual'
 						}"
-						:placeholder="t('tasks', 'New List')"
+						:placeholder="$t('tasks', 'New List')"
 						class="edit"
 						type="text"
 						@keyup="checkName($event, null, create)"
 					>
-					<input :title="t('tasks', 'Cancel')"
+					<input :title="$t('tasks', 'Cancel')"
 						type="cancel"
 						value=""
 						class="action icon-close"
 						@click="cancelCreate"
 					>
-					<input :title="t('tasks', 'Save')"
+					<input :title="$t('tasks', 'Save')"
 						type="button"
 						value=""
 						class="action icon-checkmark"
@@ -319,7 +319,7 @@ export default {
 		// info tooltip about number of shares
 		sharedWithTooltip: function(calendar) {
 			return this.hasShares(calendar)
-				? n('tasks',
+				? this.$n('tasks',
 					'Shared with {num} entity',
 					'Shared with {num} entities',
 					calendar.shares.length, {
@@ -349,11 +349,11 @@ export default {
 					this.copySuccess = true
 					this.copied = true
 					// Notify calendar url was copied
-					OC.Notification.showTemporary(t('tasks', 'Calendar link copied to clipboard.'))
+					this.$OC.Notification.showTemporary(this.$t('tasks', 'Calendar link copied to clipboard.'))
 				}, e => {
 					this.copySuccess = false
 					this.copied = true
-					OC.Notification.showTemporary(t('tasks', 'Calendar link could not be copied to clipboard.'))
+					this.$OC.Notification.showTemporary(this.$t('tasks', 'Calendar link could not be copied to clipboard.'))
 				}).then(() => {
 					setTimeout(() => {
 						// stop loading status regardless of outcome
@@ -371,15 +371,15 @@ export default {
 			return url
 		},
 		url(calendar) {
-			const rootURL = OC.linkToRemote('dav')
+			const rootURL = this.$OC.linkToRemote('dav')
 			return new URL(calendar.url, rootURL)
 		},
 		setColor: function(color) {
 			this.selectedColor = color
 		},
 		startCreate: function(e) {
-			if (OCA.Theming) {
-				this.selectedColor = OCA.Theming.color
+			if (this.$OCA.Theming) {
+				this.selectedColor = this.$OCA.Theming.color
 			} else {
 				this.selectedColor = '#0082C9'
 			}
@@ -435,16 +435,16 @@ export default {
 				msg:	''
 			}
 			if (this.isCalendarNameUsed(name, id)) {
-				check.msg = t('tasks', 'The name "%s" is already used.').replace('%s', name)
+				check.msg = this.$t('tasks', 'The name "%s" is already used.').replace('%s', name)
 			} else if (!name) {
-				check.msg = t('tasks', 'An empty name is not allowed.')
+				check.msg = this.$t('tasks', 'An empty name is not allowed.')
 			} else {
 				check.allowed = true
 			}
 			return check
 		},
 		deleteMessage: function(name) {
-			return t('tasks', 'This will delete the calendar "%s" and all corresponding events and tasks.').replace('%s', name)
+			return this.$t('tasks', 'This will delete the calendar "%s" and all corresponding events and tasks.').replace('%s', name)
 		}
 	}
 }

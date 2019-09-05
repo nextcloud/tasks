@@ -35,7 +35,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						:checked="task.completed"
 						:aria-checked="task.completed"
 						:disabled="task.calendar.readOnly"
-						:aria-label="t('tasks', 'Task is completed')"
+						:aria-label="$t('tasks', 'Task is completed')"
 						@click="toggleCompleted(task)"
 					>
 					<label :for="'detailsToggleCompleted_' + task.uid" />
@@ -83,12 +83,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							<div v-if="edit=='start'" class="section-edit">
 								<DatetimePicker :value="tmpTask.start" :lang="lang"
 									:format="dateFormat" :clearable="false" :first-day-of-week="firstDay"
-									:type="'date'" :placeholder="t('tasks', 'Set start date')"
+									:type="'date'" :placeholder="$t('tasks', 'Set start date')"
 									class="date" @change="setStartDate"
 								/>
 								<DatetimePicker v-if="!task.allDay" :value="tmpTask.start" :lang="lang"
 									:format="timeFormat" :clearable="false" :time-picker-options="timePickerOptions"
-									:type="'time'" :placeholder="t('tasks', 'Set start time')"
+									:type="'time'" :placeholder="$t('tasks', 'Set start time')"
 									class="time" @change="setStartTime"
 								/>
 							</div>
@@ -117,12 +117,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							<div v-if="edit=='due'" class="section-edit">
 								<DatetimePicker :value="tmpTask.due" :lang="lang"
 									:format="dateFormat" :clearable="false" :first-day-of-week="firstDay"
-									:type="'date'" :placeholder="t('tasks', 'Set due date')"
+									:type="'date'" :placeholder="$t('tasks', 'Set due date')"
 									class="date" @change="setDueDate"
 								/>
 								<DatetimePicker v-if="!task.allDay" :value="tmpTask.due" :lang="lang"
 									:format="timeFormat" :clearable="false" :time-picker-options="timePickerOptions"
-									:type="'time'" :placeholder="t('tasks', 'Set due time')"
+									:type="'time'" :placeholder="$t('tasks', 'Set due time')"
 									class="time" @change="setDueTime"
 								/>
 							</div>
@@ -151,7 +151,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 								@click="toggleAllDay(task)"
 							>
 							<label for="isAllDayPossible">
-								<span>{{ t('tasks', 'All day') }}</span>
+								<span>{{ $t('tasks', 'All day') }}</span>
 							</label>
 						</div>
 					</li>
@@ -167,7 +167,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									:allow-empty="false"
 									:disabled="task.calendar.readOnly"
 									track-by="id"
-									:placeholder="t('tasks', 'Select a calendar')"
+									:placeholder="$t('tasks', 'Select a calendar')"
 									label="displayName"
 									:options="writableCalendars"
 									:close-on-select="true"
@@ -190,7 +190,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									:allow-empty="false"
 									:disabled="task.calendar.readOnly"
 									track-by="type"
-									:placeholder="t('tasks', 'Select a classification')"
+									:placeholder="$t('tasks', 'Select a classification')"
 									label="displayName"
 									:options="classSelect"
 									:close-on-select="true"
@@ -285,9 +285,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									:searchable="true"
 									:disabled="task.calendar.readOnly"
 									:options="task.categories"
-									:placeholder="t('tasks', 'Select categories')"
+									:placeholder="$t('tasks', 'Select categories')"
 									:taggable="true"
-									:tag-placeholder="t('tasks', 'Add this as a new category')"
+									:tag-placeholder="$t('tasks', 'Add this as a new category')"
 									:close-on-select="false"
 									class="multiselect-vue"
 									@input="updateCategories"
@@ -340,7 +340,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			</div>
 		</div>
 		<div v-else class="notice">
-			<span>{{ t('tasks', 'Task not found!') }}</span>
+			<span>{{ $t('tasks', 'Task not found!') }}</span>
 		</div>
 	</div>
 </template>
@@ -523,17 +523,17 @@ export default {
 			},
 			categories: [],
 			classSelect: [
-				{ displayName: t('tasks', 'When shared show full event'), type: 'PUBLIC' },
-				{ displayName: t('tasks', 'When shared show only busy'), type: 'CONFIDENTIAL' },
-				{ displayName: t('tasks', 'When shared hide this event'), type: 'PRIVATE' },
+				{ displayName: this.$t('tasks', 'When shared show full event'), type: 'PUBLIC' },
+				{ displayName: this.$t('tasks', 'When shared show only busy'), type: 'CONFIDENTIAL' },
+				{ displayName: this.$t('tasks', 'When shared hide this event'), type: 'PRIVATE' },
 			],
 		}
 	},
 	computed: {
 		taskInfo: function() {
-			return t('tasks', 'Last modified %s').replace('%s', moment(this.task.modified, 'YYYY-MM-DDTHH:mm:ss').calendar())
-				+ '<br />' + t('tasks', 'Created %s').replace('%s', moment(this.task.created, 'YYYY-MM-DDTHH:mm:ss').calendar())
-				+ (this.task.completed ? ('<br />' + t('tasks', 'Completed %s').replace('%s', moment(this.task.completedDate, 'YYYY-MM-DDTHH:mm:ss').calendar())) : '')
+			return this.$t('tasks', 'Last modified %s').replace('%s', moment(this.task.modified, 'YYYY-MM-DDTHH:mm:ss').calendar())
+				+ '<br />' + this.$t('tasks', 'Created %s').replace('%s', moment(this.task.created, 'YYYY-MM-DDTHH:mm:ss').calendar())
+				+ (this.task.completed ? ('<br />' + this.$t('tasks', 'Completed %s').replace('%s', moment(this.task.completedDate, 'YYYY-MM-DDTHH:mm:ss').calendar())) : '')
 		},
 		isAllDayPossible: function() {
 			return !this.task.calendar.readOnly && (this.task.due || this.task.start)

@@ -117,13 +117,13 @@ export default {
 		inputString: function() {
 			switch (this.collectionId) {
 			case 'starred':
-				return t('tasks', 'Add an important task to "%s"…').replace('%s', this.calendar.displayName)
+				return this.$t('tasks', 'Add an important task to "%s"…').replace('%s', this.calendar.displayName)
 			case 'today':
-				return t('tasks', 'Add a task due today to "%s"…').replace('%s', this.calendar.displayName)
+				return this.$t('tasks', 'Add a task due today to "%s"…').replace('%s', this.calendar.displayName)
 			case 'current':
-				return t('tasks', 'Add a current task to "%s"…').replace('%s', this.calendar.displayName)
+				return this.$t('tasks', 'Add a current task to "%s"…').replace('%s', this.calendar.displayName)
 			default:
-				return t('tasks', 'Add a task to "%s"…').replace('%s', this.calendar.displayName)
+				return this.$t('tasks', 'Add a task to "%s"…').replace('%s', this.calendar.displayName)
 			}
 		},
 		...mapGetters({

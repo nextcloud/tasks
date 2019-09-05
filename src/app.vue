@@ -62,7 +62,7 @@ export default {
 				.then((calendars) => {
 					// No calendars? Create a new one!
 					if (calendars.length === 0) {
-						this.$store.dispatch('appendCalendar', { displayName: t('tasks', 'Tasks') })
+						this.$store.dispatch('appendCalendar', { displayName: this.$t('tasks', 'Tasks') })
 							.then(() => {
 								this.fetchTasks()
 							})
