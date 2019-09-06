@@ -372,22 +372,22 @@ export default {
 				if (date.isDate) {
 					return moment(date, 'YYYYMMDDTHHmmss').calendar(null, {
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-						sameDay: t('tasks', '[Starts today]'),
+						sameDay: OCA.Tasks.$t('tasks', '[Starts today]'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-						nextDay: t('tasks', '[Starts tomorrow]'),
+						nextDay: OCA.Tasks.$t('tasks', '[Starts tomorrow]'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LL" will be replaced with a date, e.g. 'September 4 1986'. Please translate the string, and keep the brackets and the "LL".
-						nextWeek: t('tasks', '[Starts on] LL'),
+						nextWeek: OCA.Tasks.$t('tasks', '[Starts on] LL'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-						lastDay: t('tasks', '[Started yesterday]'),
+						lastDay: OCA.Tasks.$t('tasks', '[Started yesterday]'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LL" will be replaced with a date, e.g. 'September 4 1986'. Please translate the string, and keep the brackets and the "LL".
-						lastWeek: t('tasks', '[Started on] LL'),
+						lastWeek: OCA.Tasks.$t('tasks', '[Started on] LL'),
 						sameElse: function(now) {
 							if (this.isBefore(now)) {
 								// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LL" will be replaced with a date, e.g. 'September 4 1986'. Please translate the string, and keep the brackets and the "LL".
-								return t('tasks', '[Started on] LL')
+								return OCA.Tasks.$t('tasks', '[Started on] LL')
 							} else {
 								// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LL" will be replaced with a date, e.g. 'September 4 1986'. Please translate the string, and keep the brackets and the "LL".
-								return t('tasks', '[Starts on] LL')
+								return OCA.Tasks.$t('tasks', '[Starts on] LL')
 							}
 						}
 					})
@@ -396,33 +396,33 @@ export default {
 						sameDay: function(now) {
 							if (this.isBefore(now)) {
 								// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LT" will be replaced with a time, e.g. '08:30 PM'. Please translate the string and keep the brackets and the "LT".
-								return t('tasks', '[Started today at] LT')
+								return OCA.Tasks.$t('tasks', '[Started today at] LT')
 							} else {
 								// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LT" will be replaced with a time, e.g. '08:30 PM'. Please translate the string and keep the brackets and the "LT".
-								return t('tasks', '[Starts today at] LT')
+								return OCA.Tasks.$t('tasks', '[Starts today at] LT')
 							}
 						},
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LT" will be replaced with a time, e.g. '08:30 PM'. Please translate the string and keep the brackets and the "LT".
-						nextDay: t('tasks', '[Starts tomorrow at] LT'),
+						nextDay: OCA.Tasks.$t('tasks', '[Starts tomorrow at] LT'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LL" will be replaced with a date, e.g. 'September 4 1986' and "LT" will be replaced with a time, e.g. '08:30 PM'. Please translate the string and keep the brackets the "LL" and the "LT".
-						nextWeek: t('tasks', '[Starts on] LL [at] LT'),
+						nextWeek: OCA.Tasks.$t('tasks', '[Starts on] LL [at] LT'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LT" will be replaced with a time, e.g. '08:30 PM'. Please translate the string and keep the brackets and the "LT".
-						lastDay: t('tasks', '[Started yesterday at] LT'),
+						lastDay: OCA.Tasks.$t('tasks', '[Started yesterday at] LT'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LL" will be replaced with a date, e.g. 'September 4 1986' and "LT" will be replaced with a time, e.g. '08:30 PM'. Please translate the string and keep the brackets the "LL" and the "LT".
-						lastWeek: t('tasks', '[Started on] LL [at] LT'),
+						lastWeek: OCA.Tasks.$t('tasks', '[Started on] LL [at] LT'),
 						sameElse: function(now) {
 							if (this.isBefore(now)) {
 								// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LL" will be replaced with a date, e.g. 'September 4 1986' and "LT" will be replaced with a time, e.g. '08:30 PM'. Please translate the string and keep the brackets the "LL" and the "LT".
-								return t('tasks', '[Started on] LL [at] LT')
+								return OCA.Tasks.$t('tasks', '[Started on] LL [at] LT')
 							} else {
 								// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LL" will be replaced with a date, e.g. 'September 4 1986' and "LT" will be replaced with a time, e.g. '08:30 PM'. Please translate the string and keep the brackets the "LL" and the "LT".
-								return t('tasks', '[Starts on] LL [at] LT')
+								return OCA.Tasks.$t('tasks', '[Starts on] LL [at] LT')
 							}
 						}
 					})
 				}
 			} else {
-				return t('tasks', 'Set start date')
+				return OCA.Tasks.$t('tasks', 'Set start date')
 			}
 		},
 		formatDueDate: function(date) {
@@ -430,22 +430,22 @@ export default {
 				if (date.isDate) {
 					return moment(date, 'YYYYMMDDTHHmmss').calendar(null, {
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-						sameDay: t('tasks', '[Due today]'),
+						sameDay: OCA.Tasks.$t('tasks', '[Due today]'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-						nextDay: t('tasks', '[Due tomorrow]'),
+						nextDay: OCA.Tasks.$t('tasks', '[Due tomorrow]'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LL" will be replaced with a date, e.g. 'September 4 1986'. Please translate the string and keep the brackets and the "LL".
-						nextWeek: t('tasks', '[Due on] LL'),
+						nextWeek: OCA.Tasks.$t('tasks', '[Due on] LL'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string, but keep the brackets.
-						lastDay: t('tasks', '[Was due yesterday]'),
+						lastDay: OCA.Tasks.$t('tasks', '[Was due yesterday]'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LL" will be replaced with a date, e.g. 'September 4 1986'. Please translate the string, but keep the brackets and the "LL".
-						lastWeek: t('tasks', '[Was due on] LL'),
+						lastWeek: OCA.Tasks.$t('tasks', '[Was due on] LL'),
 						sameElse: function(now) {
 							if (this.isBefore(now)) {
 								// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string, but keep the brackets and the "LL".
-								return t('tasks', '[Was due on] LL')
+								return OCA.Tasks.$t('tasks', '[Was due on] LL')
 							} else {
 								// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string, but keep the brackets and the "LL".
-								return t('tasks', '[Due on] LL')
+								return OCA.Tasks.$t('tasks', '[Due on] LL')
 							}
 						}
 					})
@@ -454,48 +454,48 @@ export default {
 						sameDay: function(now) {
 							if (this.isBefore(now)) {
 								// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LT" will be replaced with a time, e.g. '08:30 PM'. Please translate the string and keep the brackets and the "LT".
-								return t('tasks', '[Was due today at] LT')
+								return OCA.Tasks.$t('tasks', '[Was due today at] LT')
 							} else {
 								// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LT" will be replaced with a time, e.g. '08:30 PM'. Please translate the string and keep the brackets and the "LT".
-								return t('tasks', '[Due today at] LT')
+								return OCA.Tasks.$t('tasks', '[Due today at] LT')
 							}
 						},
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LT" will be replaced with a time, e.g. '08:30 PM'. Please translate the string and keep the brackets and the "LT".
-						nextDay: t('tasks', '[Due tomorrow at] LT'),
+						nextDay: OCA.Tasks.$t('tasks', '[Due tomorrow at] LT'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LT" will be replaced with a time, e.g. '08:30 PM'. Please translate the string and keep the brackets and the "LT".
-						nextWeek: t('tasks', '[Due on] LL [at] LT'),
+						nextWeek: OCA.Tasks.$t('tasks', '[Due on] LL [at] LT'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LT" will be replaced with a time, e.g. '08:30 PM'. Please translate the string and keep the brackets and the "LT".
-						lastDay: t('tasks', '[Was due yesterday at] LT'),
+						lastDay: OCA.Tasks.$t('tasks', '[Was due yesterday at] LT'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LL" will be replaced with a date, e.g. 'September 4 1986' and "LT" will be replaced with a time, e.g. '08:30 PM'. Please translate the string and keep the brackets the "LL" and the "LT".
-						lastWeek: t('tasks', '[Was due on] LL [at] LT'),
+						lastWeek: OCA.Tasks.$t('tasks', '[Was due on] LL [at] LT'),
 						sameElse: function(now) {
 							if (this.isBefore(now)) {
 								// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LL" will be replaced with a date, e.g. 'September 4 1986' and "LT" will be replaced with a time, e.g. '08:30 PM'. Please translate the string and keep the brackets the "LL" and the "LT".
-								return t('tasks', '[Was due on] LL [at] LT')
+								return OCA.Tasks.$t('tasks', '[Was due on] LL [at] LT')
 							} else {
 								// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LL" will be replaced with a date, e.g. 'September 4 1986' and "LT" will be replaced with a time, e.g. '08:30 PM'. Please translate the string and keep the brackets the "LL" and the "LT".
-								return t('tasks', '[Due on] LL [at] LT')
+								return OCA.Tasks.$t('tasks', '[Due on] LL [at] LT')
 							}
 						}
 					})
 				}
 			} else {
-				return t('tasks', 'Set due date')
+				return OCA.Tasks.$t('tasks', 'Set due date')
 			}
 		},
 		priority: function(priority) {
 			if (+priority === 0) {
-				return t('tasks', 'No priority assigned')
+				return OCA.Tasks.$t('tasks', 'No priority assigned')
 			} else if (+priority > 0 && +priority < 5) {
-				return t('tasks', 'Priority {priority}: high', { priority: priority })
+				return OCA.Tasks.$t('tasks', 'Priority {priority}: high', { priority: priority })
 			} else if (+priority === 5) {
-				return t('tasks', 'Priority {priority}: medium', { priority: priority })
+				return OCA.Tasks.$t('tasks', 'Priority {priority}: medium', { priority: priority })
 			} else if (+priority > 5 && +priority < 10) {
-				return t('tasks', 'Priority {priority}: low', { priority: priority })
+				return OCA.Tasks.$t('tasks', 'Priority {priority}: low', { priority: priority })
 			}
 		},
 		complete: function(complete) {
-			return t('tasks', '{percent} % completed', { percent: complete })
+			return OCA.Tasks.$t('tasks', '{percent} % completed', { percent: complete })
 		}
 	},
 	data: function() {

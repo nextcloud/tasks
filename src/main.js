@@ -57,11 +57,18 @@ if (!OCA.Tasks) {
 	OCA.Tasks = {}
 }
 
-Vue.prototype.$t = t
-Vue.prototype.$n = n
+Vue.prototype.$t = function() {
+	return t.apply(null, arguments).toString()
+}
+Vue.prototype.$n = function() {
+	return n.apply(null, arguments).toString()
+}
 Vue.prototype.$OC = OC
 Vue.prototype.$OCA = OCA
 Vue.prototype.$appVersion = $appVersion
+
+OCA.Tasks.$t = Vue.prototype.$t
+OCA.Tasks.$n = Vue.prototype.$n
 
 OCA.Tasks.App = new Vue({
 	el: '.app-tasks',
