@@ -56,7 +56,7 @@ module.exports = {
 		new VueLoaderPlugin(),
 		new StyleLintPlugin(),
 		new webpack.DefinePlugin({
-			appVersion: JSON.stringify(require('./package.json').version)
+			$appVersion: JSON.stringify(require('./package.json').version)
 		})
 	],
 	resolve: {
