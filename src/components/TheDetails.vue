@@ -487,15 +487,15 @@ export default {
 			if (+priority === 0) {
 				return t('tasks', 'No priority assigned')
 			} else if (+priority > 0 && +priority < 5) {
-				return t('tasks', 'Priority %s: high').replace('%s', priority)
+				return t('tasks', 'Priority {priority}: high', { priority: priority })
 			} else if (+priority === 5) {
-				return t('tasks', 'Priority %s: medium').replace('%s', priority)
+				return t('tasks', 'Priority {priority}: medium', { priority: priority })
 			} else if (+priority > 5 && +priority < 10) {
-				return t('tasks', 'Priority %s: low').replace('%s', priority)
+				return t('tasks', 'Priority {priority}: low', { priority: priority })
 			}
 		},
 		complete: function(complete) {
-			return t('tasks', '%s %% completed').replace('%s', complete).replace('%%', '%')
+			return t('tasks', '{percent} % completed', { percent: complete })
 		}
 	},
 	data: function() {
@@ -531,9 +531,9 @@ export default {
 	},
 	computed: {
 		taskInfo: function() {
-			return this.$t('tasks', 'Last modified %s').replace('%s', moment(this.task.modified, 'YYYY-MM-DDTHH:mm:ss').calendar())
-				+ '<br />' + this.$t('tasks', 'Created %s').replace('%s', moment(this.task.created, 'YYYY-MM-DDTHH:mm:ss').calendar())
-				+ (this.task.completed ? ('<br />' + this.$t('tasks', 'Completed %s').replace('%s', moment(this.task.completedDate, 'YYYY-MM-DDTHH:mm:ss').calendar())) : '')
+			return this.$t('tasks', 'Last modified {date}', { date: moment(this.task.modified, 'YYYY-MM-DDTHH:mm:ss').calendar() })
+				+ '<br />' + this.$t('tasks', 'Created {date}', { date: moment(this.task.created, 'YYYY-MM-DDTHH:mm:ss').calendar() })
+				+ (this.task.completed ? ('<br />' + this.$t('tasks', 'Completed {date}', { date: moment(this.task.completedDate, 'YYYY-MM-DDTHH:mm:ss').calendar() })) : '')
 		},
 		isAllDayPossible: function() {
 			return !this.task.calendar.readOnly && (this.task.due || this.task.start)

@@ -117,7 +117,7 @@ export default {
 		},
 
 		inputString: function() {
-			return this.$t('tasks', 'Add a task to "%s"…').replace('%s', this.calendar.displayName)
+			return this.$t('tasks', 'Add a task to "{task}"…', { task: this.calendar.displayName })
 		},
 
 		/**
