@@ -435,7 +435,7 @@ export default {
 				msg:	''
 			}
 			if (this.isCalendarNameUsed(name, id)) {
-				check.msg = this.$t('tasks', 'The name "%s" is already used.').replace('%s', name)
+				check.msg = this.$t('tasks', 'The name "{calendar}" is already used.', { calendar: name })
 			} else if (!name) {
 				check.msg = this.$t('tasks', 'An empty name is not allowed.')
 			} else {
@@ -444,7 +444,7 @@ export default {
 			return check
 		},
 		deleteMessage: function(name) {
-			return this.$t('tasks', 'This will delete the calendar "%s" and all corresponding events and tasks.').replace('%s', name)
+			return this.$t('tasks', 'This will delete the calendar "{calendar}" and all corresponding events and tasks.', { calendar: name })
 		}
 	}
 }
