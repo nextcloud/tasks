@@ -55,6 +55,9 @@ module.exports = {
 			'requireReturn': false,
 			'requireReturnDescription': false
 		}],
+		"node/no-missing-import": ["error", {
+			"tryExtensions": [".js", ".json", ".node", ".vue"]
+		}],
 		// es6 import/export and require
 		'node/no-unpublished-require': ['off'],
 		'node/no-unsupported-features/es-syntax': ['off'],
