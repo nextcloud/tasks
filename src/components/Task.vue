@@ -35,7 +35,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		>
 			<div v-if="task.complete > 0" class="percentbar">
 				<div :style="{ width: task.complete + '%', 'background-color': task.calendar.color }"
-					:aria-label="t('tasks', '{complete} % completed', {complete: task.complete})"
+					:aria-label="$t('tasks', '{complete} % completed', {complete: task.complete})"
 					class="percentdone"
 				/>
 			</div>
@@ -49,7 +49,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					:checked="task.completed"
 					:aria-checked="task.completed"
 					:disabled="task.calendar.readOnly"
-					:aria-label="t('tasks', 'Task is completed')"
+					:aria-label="$t('tasks', 'Task is completed')"
 					@click="toggleCompleted(task)"
 				>
 				<label class="reactive no-nav" :for="'toggleCompleted_' + task.uid" />
@@ -67,13 +67,13 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				/>
 			</span>
 			<span v-if="Object.values(task.subTasks).length" @click="toggleSubtasksVisibility(task)">
-				<span :title="t('tasks', 'Toggle visibility of all subtasks.')"
+				<span :title="$t('tasks', 'Toggle visibility of all subtasks.')"
 					:class="task.hideSubtasks ? 'icon-subtasks-hidden' : 'icon-subtasks-visible'"
 					class="icon icon-bw right large subtasks reactive no-nav"
 				/>
 			</span>
 			<span v-if="hasCompletedSubtasks" @click="toggleCompletedSubtasksVisibility(task)">
-				<span :title="t('tasks', 'Toggle visibility of completed subtasks.')"
+				<span :title="$t('tasks', 'Toggle visibility of completed subtasks.')"
 					:class="{'active': !task.hideCompletedSubtasks}"
 					class="icon icon-bw icon-toggle right large toggle-completed-subtasks reactive no-nav"
 				/>
@@ -212,7 +212,7 @@ export default {
 		 * @returns {String} the placeholder string to show
 		 */
 		subtasksCreationPlaceholder: function() {
-			return t('tasks', 'Add a subtask to "%s"…').replace('%s', this.task.summary)
+			return this.$t('tasks', 'Add a subtask to "{task}"…', { task: this.task.summary })
 		},
 
 		/**

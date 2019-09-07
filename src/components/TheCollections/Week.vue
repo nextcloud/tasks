@@ -61,9 +61,9 @@ export default {
 			var date = moment().add(day, 'day')
 			var dayString
 			if (day === 0) {
-				dayString = t('tasks', 'Today')
+				dayString = this.$t('tasks', 'Today')
 			} else if (day === 1) {
-				dayString = t('tasks', 'Tomorrow')
+				dayString = this.$t('tasks', 'Tomorrow')
 			} else {
 				dayString = date.format('dddd')
 			}

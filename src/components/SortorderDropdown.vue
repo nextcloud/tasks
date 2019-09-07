@@ -22,7 +22,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <template>
 	<div>
 		<div v-click-outside="closeMenu" class="app-navigation-entry-utils reactive" @click="toggleMenu">
-			<div :title="t('tasks', 'Change sort order')" class="app-navigation-entry-utils-menu-button">
+			<div :title="$t('tasks', 'Change sort order')" class="app-navigation-entry-utils-menu-button">
 				<button class="sortorder-dropdown-button">
 					<span :class="sortOrderIcon" class="icon icon-bw" />
 					<span :class="sortDirection ? 'icon-sort-up' : 'icon-sort-down'" class="icon icon-bw sort-indicator" />
@@ -69,58 +69,58 @@ export default {
 				{
 					id: 'default',
 					icon: 'icon-list',
-					text: t('tasks', 'Default'),
-					hint: t('tasks', 'Sort by completed state, due date, priority, start date and summary.')
+					text: this.$t('tasks', 'Default'),
+					hint: this.$t('tasks', 'Sort by completed state, due date, priority, start date and summary.')
 				},
 				{
 					id: 'due',
 					icon: 'icon-calendar',
-					text: t('tasks', 'Due date'),
-					hint: t('tasks', 'Sort by due date and summary.')
+					text: this.$t('tasks', 'Due date'),
+					hint: this.$t('tasks', 'Sort by due date and summary.')
 				},
 				{
 					id: 'start',
 					icon: 'icon-calendar',
-					text: t('tasks', 'Start date'),
-					hint: t('tasks', 'Sort by start date and summary.')
+					text: this.$t('tasks', 'Start date'),
+					hint: this.$t('tasks', 'Sort by start date and summary.')
 				},
 				{
 					id: 'created',
 					icon: 'icon-calendar',
 					// TRANSLATORS The date at which a task was created.
-					text: t('tasks', 'Created date'),
-					hint: t('tasks', 'Sort by created date and summary.')
+					text: this.$t('tasks', 'Created date'),
+					hint: this.$t('tasks', 'Sort by created date and summary.')
 				},
 				{
 					id: 'modified',
 					icon: 'icon-calendar',
-					text: t('tasks', 'Last modified'),
-					hint: t('tasks', 'Sort by last-modified date and summary.')
+					text: this.$t('tasks', 'Last modified'),
+					hint: this.$t('tasks', 'Sort by last-modified date and summary.')
 				},
 				{
 					id: 'completedDate',
 					icon: 'icon-calendar',
-					text: t('tasks', 'Completed date'),
-					hint: t('tasks', 'Sort by completed date.')
+					text: this.$t('tasks', 'Completed date'),
+					hint: this.$t('tasks', 'Sort by completed date.')
 				},
 				{
 					id: 'priority',
 					icon: 'icon-task-star',
-					text: t('tasks', 'Priority'),
-					hint: t('tasks', 'Sort by priority and summary.')
+					text: this.$t('tasks', 'Priority'),
+					hint: this.$t('tasks', 'Sort by priority and summary.')
 				},
 				// Manual sorting is not yet implemented
 				// {
 				// 	id: 'manual',
 				// 	icon: 'icon-manual',
-				// 	text: t('tasks', 'Manually'),
-				// 	hint: t('tasks', 'Sort by manual order.')
+				// 	text: this.$t('tasks', 'Manually'),
+				// 	hint: this.$t('tasks', 'Sort by manual order.')
 				// },
 				{
 					id: 'alphabetically',
 					icon: 'icon-alphabetically',
-					text: t('tasks', 'Alphabetically'),
-					hint: t('tasks', 'Sort by summary and priority.')
+					text: this.$t('tasks', 'Alphabetically'),
+					hint: this.$t('tasks', 'Sort by summary and priority.')
 				}
 			]
 		}

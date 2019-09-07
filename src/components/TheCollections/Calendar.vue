@@ -117,7 +117,7 @@ export default {
 		},
 
 		inputString: function() {
-			return t('tasks', 'Add a task to "%s"…').replace('%s', this.calendar.displayName)
+			return this.$t('tasks', 'Add a task to "{task}"…', { task: this.calendar.displayName })
 		},
 
 		/**
@@ -126,7 +126,7 @@ export default {
 	 	 * @returns {String} The string to show for the completed tasks count
 		 */
 		completedCountString: function() {
-			return n('tasks', '%n Completed Task', '%n Completed Tasks', this.completedCount(this.calendarId))
+			return this.$n('tasks', '%n Completed Task', '%n Completed Tasks', this.completedCount(this.calendarId))
 		},
 		...mapGetters({
 			completedCount: 'getCalendarCountCompleted',

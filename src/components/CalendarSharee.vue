@@ -43,7 +43,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 				@change="editSharee"
 			>
 			<label :for="uid">
-				{{ t('tasks', 'can edit') }}
+				{{ $t('tasks', 'can edit') }}
 			</label>
 			<a :class="{'calendar-sharee__utils--disabled': loading}" href="#"
 				title="Delete"
@@ -94,7 +94,7 @@ export default {
 				})
 			} catch (error) {
 				console.error(error)
-				OC.Notification.showTemporary(t('tasks', 'Unable to delete the share.'))
+				this.$OC.Notification.showTemporary(this.$t('tasks', 'Unable to delete the share.'))
 			} finally {
 				this.loading = false
 			}
@@ -112,7 +112,7 @@ export default {
 				})
 			} catch (error) {
 				console.error(error)
-				OC.Notification.showTemporary(t('tasks', 'Unable to change permissions.'))
+				this.$OC.Notification.showTemporary(this.$t('tasks', 'Unable to change permissions.'))
 			} finally {
 				this.loading = false
 			}

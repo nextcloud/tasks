@@ -12,7 +12,7 @@ module.exports = {
 		OC: false,
 		OCA: false,
 		moment: true,
-		appVersion: true,
+		$appVersion: true,
 	},
 	parserOptions: {
 		parser: 'babel-eslint'

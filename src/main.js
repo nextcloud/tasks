@@ -57,11 +57,11 @@ if (!OCA.Tasks) {
 	OCA.Tasks = {}
 }
 
-Vue.prototype.t = t
-Vue.prototype.n = n
-Vue.prototype.OC = OC
-Vue.prototype.OCA = OCA
-Vue.prototype.appVersion = appVersion
+Vue.prototype.$t = t
+Vue.prototype.$n = n
+Vue.prototype.$OC = OC
+Vue.prototype.$OCA = OCA
+Vue.prototype.$appVersion = $appVersion
 
 OCA.Tasks.App = new Vue({
 	el: '.app-tasks',
@@ -73,23 +73,23 @@ OCA.Tasks.App = new Vue({
 		}
 	},
 	mounted: function() {
-		var version = OC.config.version.split('.')
+		var version = this.$OC.config.version.split('.')
 
 		if (version[0] >= 14) {
-			OC.Search = new OCA.Search(this.filter, this.cleanSearch)
+			this.$OC.Search = new OCA.Search(this.filter, this.cleanSearch)
 		} else {
-			OCA.Tasks.Search = {
+			this.$OCA.Tasks.Search = {
 				attach: function(search) {
 					search.setFilter('tasks', this.filter)
 				}
 			}
 
-			OC.Plugins.register('OCA.Search', OCA.Tasks.Search)
+			this.$OC.Plugins.register('OCA.Search', this.$OCA.Tasks.Search)
 		}
 	},
 	beforeMount() {
 		// Configure the locale of moment.js
-		moment.locale(OC.getLocale().replace('_', '-').toLowerCase())
+		moment.locale(this.$OC.getLocale().replace('_', '-').toLowerCase())
 		this.$store.dispatch('loadCollections')
 		this.$store.dispatch('loadSettings')
 	},
