@@ -1,5 +1,5 @@
 import moment from 'moment'
-import { sort } from '@/store/storeHelper'
+import { sort } from '../../src/store/storeHelper'
 
 global.moment = moment
 
