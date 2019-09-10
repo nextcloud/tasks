@@ -73,19 +73,7 @@ OCA.Tasks.App = new Vue({
 		}
 	},
 	mounted: function() {
-		var version = this.$OC.config.version.split('.')
-
-		if (version[0] >= 14) {
-			this.$OC.Search = new OCA.Search(this.filter, this.cleanSearch)
-		} else {
-			this.$OCA.Tasks.Search = {
-				attach: function(search) {
-					search.setFilter('tasks', this.filter)
-				}
-			}
-
-			this.$OC.Plugins.register('OCA.Search', this.$OCA.Tasks.Search)
-		}
+		this.$OC.Search = new OCA.Search(this.filter, this.cleanSearch)
 	},
 	beforeMount() {
 		// Configure the locale of moment.js
