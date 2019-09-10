@@ -157,9 +157,9 @@ export default {
 		formatDate: function(date) {
 			return valid(date)
 				? moment(date, 'YYYYMMDDTHHmmss').calendar(null, {
-					lastDay: t('tasks', '[Yesterday]'),
-					sameDay: t('tasks', '[Today]'),
-					nextDay: t('tasks', '[Tomorrow]'),
+					lastDay: OCA.Tasks.$t('tasks', '[Yesterday]'),
+					sameDay: OCA.Tasks.$t('tasks', '[Today]'),
+					nextDay: OCA.Tasks.$t('tasks', '[Tomorrow]'),
 					lastWeek: 'L',
 					nextWeek: 'L',
 					sameElse: 'L'

@@ -660,7 +660,7 @@ const actions = {
 				})
 				.catch((error) => {
 					console.debug(error)
-					task.syncstatus = new TaskStatus('error', t('tasks', 'Could not delete the task.'))
+					task.syncstatus = new TaskStatus('error', OCA.Tasks.$t('tasks', 'Could not delete the task.'))
 				})
 		} else {
 			deleteTaskFromStore()
@@ -699,10 +699,10 @@ const actions = {
 
 		if (!task.conflict) {
 			task.dav.data = vCalendar
-			task.syncstatus = new TaskStatus('sync', t('tasks', 'Synchronizing to the server.'))
+			task.syncstatus = new TaskStatus('sync', OCA.Tasks.$t('tasks', 'Synchronizing to the server.'))
 			return task.dav.update()
 				.then((response) => {
-					task.syncstatus = new TaskStatus('success', t('tasks', 'Task successfully saved to server.'))
+					task.syncstatus = new TaskStatus('success', OCA.Tasks.$t('tasks', 'Task successfully saved to server.'))
 				})
 				.catch((error) => {
 					// Wrong etag, we most likely have a conflict
@@ -710,13 +710,13 @@ const actions = {
 						// Saving the new etag so that the user can manually
 						// trigger a fetchCompleteData without any further errors
 						task.conflict = error.xhr.getResponseHeader('etag')
-						task.syncstatus = new TaskStatus('refresh', t('tasks', 'Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded.'), 'fetchFullTask')
+						task.syncstatus = new TaskStatus('refresh', OCA.Tasks.$t('tasks', 'Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded.'), 'fetchFullTask')
 					} else {
-						task.syncstatus = new TaskStatus('error', t('tasks', 'Could not update the task.'))
+						task.syncstatus = new TaskStatus('error', OCA.Tasks.$t('tasks', 'Could not update the task.'))
 					}
 				})
 		} else {
-			task.syncstatus = new TaskStatus('refresh', t('tasks', 'Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared.'), 'fetchFullTask')
+			task.syncstatus = new TaskStatus('refresh', OCA.Tasks.$t('tasks', 'Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared.'), 'fetchFullTask')
 		}
 	},
 
