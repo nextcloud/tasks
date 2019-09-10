@@ -1,3 +1,21 @@
+## 0.11.2 - 2019-09-10
+### Added
+- Support for Nextcloud 17 #579
+- Adjust checkbox design to match overall Nextcloud style #572
+- Rework task item layout #598
+- Updated translations
+- Updated dependencies
+
+### Fixed
+- Fix problems with Chrome 77 #593
+- Don't show raw JSON when adding categories #416
+- Only show toggle-all-day checkbox when a date is set #576
+- Fix the key in `v-for` for tasks #578
+- Slightly reduced the bundlesize #571
+- Properly scope instance properties #586
+- Use built-in replace functionality for translations #591
+- Remove legacy code #600
+
 ## 0.11.1 - 2019-08-08
 ### Added
 - Add possibility to drop tasks on calendars and collections in left sidebar #399
