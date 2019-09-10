@@ -99,7 +99,7 @@ OC.L10N.register(
     "When shared show full event" : "Wenn geteilt, zeige das vollständige Ereignis an",
     "When shared show only busy" : "Wenn geteilt, zeige nur den Status 'beschäftigt' an",
     "When shared hide this event" : "Wenn geteilt, zeige das Ereignis nicht an",
-    "Completed {date}" : "Erledigungsdatum {date}",
+    "Completed {date}" : "Erledigt am {date}",
     "Created {date}" : "Erstellt am {date}",
     "Last modified {date}" : "Zuletzt geändert am {date}",
     "Edit" : "Bearbeiten",
