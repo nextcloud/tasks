@@ -63,6 +63,8 @@ Vue.prototype.$t = function() {
 Vue.prototype.$n = function() {
 	return n.apply(null, arguments).toString()
 }
+Vue.prototype.t = Vue.prototype.$t
+Vue.prototype.n = Vue.prototype.$n
 Vue.prototype.$OC = OC
 Vue.prototype.$OCA = OCA
 Vue.prototype.$appVersion = $appVersion
