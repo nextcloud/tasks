@@ -439,7 +439,7 @@
 					}
 
 					.subtasks-container {
-						margin-left: 35px;
+						margin-left: 37px;
 					}
 
 					.task-body {
@@ -459,8 +459,9 @@
 						}
 
 						.task-checkbox {
-							padding: 7px;
-							padding-right: 3px;
+							padding: 8px;
+							height: 37px;
+							width: 37px;
 							border-right: 1px dotted $gray;
 							opacity: 0.5;
 						}
