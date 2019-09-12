@@ -19,6 +19,7 @@ OC.L10N.register(
     "Cancel" : "Cancelar",
     "Delete all completed tasks." : "Borrar todas las tareas completadas.",
     "Delete completed tasks." : "Borrar las tareas completadas.",
+    "Deleted all completed tasks from calendar \"{calendar}\"." : "Se han eliminado todas las tareas completadas del calendario \"{calendar}\".",
     "No errors" : "No hay errores",
     "Open your browser console for more details" : "Abre la consola del navegador para más detalles",
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["No se ha podido eliminar {failedCount} tarea.","No se han podido eliminar {failedCount} tareas."],

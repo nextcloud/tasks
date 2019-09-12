@@ -22,7 +22,7 @@ OC.L10N.register(
     "Deleted all completed tasks from calendar \"{calendar}\"." : "Alle abgeschlossenen Aufgaben aus dem Kalender \"{calendar}\" gelöscht.",
     "No errors" : "Keine Fehler",
     "Open your browser console for more details" : "Browser-Konsole für weitere Einzelheiten öffnen",
-    "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["Hiermit werden {taskCount} abgeschlossene Aufgabe und ihre Unteraufgaben aus dem Kalender \"{calendar}\" gelöscht.","Hiermit werden {taskCount} abgeschlossene Aufgaben und deren Unteraufgaben aus dem Kalender \"{calendar}\" gelöscht."],
+    "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["Hiermit wird {taskCount} abgeschlossene Aufgabe und ihre Unteraufgaben aus dem Kalender \"{calendar}\" gelöscht.","Hiermit werden {taskCount} abgeschlossene Aufgaben und deren Unteraufgaben aus dem Kalender \"{calendar}\" gelöscht."],
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["{failedCount} Aufgabe konnte nicht gelöscht werden.","{failedCount} Aufgaben konnten nicht gelöscht werden."],
     "Load all completed tasks." : "Alle abgeschlossenen Aufgaben laden.",
     "Change sort order" : "Sortierreihenfolge ändern",
