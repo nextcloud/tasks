@@ -27,6 +27,7 @@ import { isParentInList, momentToICALTime } from './storeHelper'
 import ICAL from 'ical.js'
 import TaskStatus from '../models/taskStatus'
 import router from '../components/TheRouter'
+import { findVTODObyUid } from './cdav-requests'
 
 Vue.use(Vuex)
 
@@ -717,6 +718,88 @@ const actions = {
 				})
 		} else {
 			task.syncstatus = new TaskStatus('refresh', OCA.Tasks.$t('tasks', 'Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared.'), 'fetchFullTask')
+		}
+	},
+
+	/**
+	 * Retrieves the task with the given uri from the given calendar
+	 * and commits the result
+	 *
+	 * @param {Object} context The store mutations
+	 * @param {Object} data Destructuring object
+	 * @param {Calendar} data.calendar The calendar
+	 * @param {String} data.taskUri The uri of the requested task
+	 * @returns {Task}
+	 */
+	async getTaskByUri(context, { calendar, taskUri }) {
+		const response = await calendar.dav.find(taskUri)
+		if (response) {
+			const task = new Task(response.data, calendar)
+			Vue.set(task, 'dav', response)
+			if (task.related) {
+				let parent = context.getters.getTaskByUid(task.related)
+				// If the parent is not found locally, we try to get it from the server.
+				if (!parent) {
+					parent = await context.dispatch('getTaskByUid', { calendar, taskUid: task.related })
+				}
+				context.commit('addTaskToParent', { task, parent })
+			}
+
+			// In case we already have subtasks of this task in the store, add them as well.
+			const subTasksInStore = context.getters.getTasksByParent(task)
+			subTasksInStore.forEach(
+				subTask => {
+					context.commit('addTaskToParent', { task: subTask, parent: task })
+				}
+			)
+
+			context.commit('appendTasksToCalendar', { calendar, tasks: [task] })
+			context.commit('appendTasks', [task])
+			return task
+		} else {
+			return null
+		}
+	},
+
+	/**
+	 * Retrieves the task with the given uid from the given calendar
+	 * and commits the result
+	 *
+	 * @param {Object} context The store mutations
+	 * @param {Object} data Destructuring object
+	 * @param {Calendar} data.calendar The calendar
+	 * @param {String} data.taskUid The uid of the requested task
+	 * @returns {Task}
+	 */
+	async getTaskByUid(context, { calendar, taskUid }) {
+		const response = await findVTODObyUid(calendar, taskUid)
+		// We expect to only get zero or one task when we query by UID.
+		if (response.length) {
+			const task = new Task(response[0].data, calendar)
+			Vue.set(task, 'dav', response[0])
+			if (task.related) {
+				let parent = context.getters.getTaskByUid(task.related)
+				// If the parent is not found locally, we try to get it from the server.
+				if (!parent) {
+					parent = await context.dispatch('getTaskByUid', { calendar, taskUid: task.related })
+				}
+				context.commit('addTaskToParent', { task, parent })
+			}
+
+			// In case we already have subtasks of this task in the store, add them as well.
+			const subTasksInStore = context.getters.getTasksByParent(task)
+			subTasksInStore.forEach(
+				subTask => {
+					context.commit('addTaskToParent', { task: subTask, parent: task })
+				}
+			)
+
+			context.commit('appendTasksToCalendar', { calendar, tasks: [task] })
+			context.commit('appendTasks', [task])
+			return task
+		} else {
+			console.debug('no task')
+			return null
 		}
 	},
 
