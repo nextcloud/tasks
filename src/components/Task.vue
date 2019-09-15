@@ -291,6 +291,13 @@ export default {
 			return checkSubtasksOpen(this.task.subTasks)
 		},
 	},
+
+	created() {
+		if (!this.task.loadedCompleted && this.$route.params.taskId === this.task.uri) {
+			this.getTasksFromCalendar({ calendar: this.task.calendar, completed: true, related: this.task.uid })
+		}
+	},
+
 	methods: {
 		...mapActions([
 			'toggleCompleted',
