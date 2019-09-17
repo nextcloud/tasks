@@ -1,3 +1,13 @@
+## 0.11.3 - 2019-09-17
+
+### Added
+- Updated translations
+- Updated dependencies
+
+### Fixed
+- Minor design fix for checkboxes on Nextcloud 16 #605
+- Fix scrolling on Android #613
+
 ## 0.11.2 - 2019-09-10
 ### Added
 - Support for Nextcloud 17 #579
