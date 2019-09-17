@@ -1074,6 +1074,9 @@ const actions = {
 			return task
 		}
 		context.commit('toggleAllDay', task)
+		if (+context.rootState.settings.settings.allDay !== +task.allDay) {
+			context.dispatch('setSetting', { type: 'allDay', value: +task.allDay })
+		}
 		context.dispatch('scheduleTaskUpdate', task)
 	},
 

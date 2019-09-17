@@ -47,6 +47,14 @@ const getters = {
 	 * @returns {String} The sort direction
 	 */
 	sortDirection: (state) => state.settings.sortDirection,
+
+	/**
+	 * Returns if all-day is default
+	 *
+	 * @param {Object} state The store data
+	 * @returns {String} Whether all-day is default
+	 */
+	allDay: (state) => state.settings.allDay,
 }
 
 const mutations = {
