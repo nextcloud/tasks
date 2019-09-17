@@ -557,7 +557,7 @@ export default {
 				+ (this.task.completed ? ('<br />' + this.$t('tasks', 'Completed {date}', { date: this.task.completedDateMoment.calendar() })) : '')
 		},
 		isAllDayPossible: function() {
-			return !this.task.calendar.readOnly && (this.task.due || this.task.start)
+			return !this.task.calendar.readOnly && (this.task.due || this.task.start || ['start', 'due'].includes(this.edit))
 		},
 		priorityClass: function() {
 			if (+this.task.priority > 5) {
