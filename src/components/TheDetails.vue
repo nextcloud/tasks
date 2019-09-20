@@ -21,7 +21,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div class="content-wrapper">
-		<div v-if="task!=undefined"
+		<div v-if="task"
 			:class="{'disabled': task.calendar.readOnly}"
 			class="flex-container"
 		>
@@ -340,7 +340,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			</div>
 		</div>
 		<div v-else class="notice">
-			<span>{{ $t('tasks', 'Task not found!') }}</span>
+			<span v-if="loading">{{ $t('tasks', 'Loading task from server.') }}</span>
+			<span v-else>{{ $t('tasks', 'Task not found!') }}</span>
 		</div>
 	</div>
 </template>
@@ -500,6 +501,7 @@ export default {
 	},
 	data: function() {
 		return {
+			loading: false,
 			edit: '',
 			tmpTask: {
 				summary: '',
@@ -572,8 +574,19 @@ export default {
 		},
 		...mapGetters({
 			writableCalendars: 'getSortedWritableCalendars',
-			task: 'getTaskByRoute'
+			task: 'getTaskByRoute',
+			calendar: 'getCalendarByRoute',
+			calendars: 'getSortedCalendars',
 		}),
+	},
+
+	watch: {
+		$route: 'loadTask',
+		calendars: 'loadTask',
+	},
+
+	created() {
+		this.loadTask()
 	},
 
 	/**
@@ -615,7 +628,27 @@ export default {
 			'toggleAllDay',
 			'moveTask',
 			'setClassification',
+			'getTaskByUri',
 		]),
+
+		async loadTask() {
+			if (this.task === undefined || this.task === null) {
+				const calendars = this.calendar ? [this.calendar] : this.calendars
+				for (const calendar of calendars) {
+					this.loading = true
+					try {
+						const task = await this.getTaskByUri({ calendar, taskUri: this.$route.params.taskId })
+						// If we found the task, we don't need to query the other calendars.
+						if (task) {
+							break
+						}
+					} catch {
+						console.debug('Task ' + this.$route.params.taskId + ' not found in calendar ' + calendar.displayName + '.')
+					}
+				}
+				this.loading = false
+			}
+		},
 
 		removeTask: function() {
 			this.deleteTask({ task: this.task, dav: true })

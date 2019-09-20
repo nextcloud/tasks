@@ -71,6 +71,33 @@ function findVTODObyState(calendar, completed, related) {
 	return calendar.dav.calendarQuery([query])
 }
 
+function findVTODObyUid(calendar, taskUid) {
+	const query = {
+		name: [NS.IETF_CALDAV, 'comp-filter'],
+		attributes: [
+			['name', 'VCALENDAR']
+		],
+		children: [{
+			name: [NS.IETF_CALDAV, 'comp-filter'],
+			attributes: [
+				['name', 'VTODO']
+			]
+		}]
+	}
+	query.children[0].children = [{
+		name: [NS.IETF_CALDAV, 'prop-filter'],
+		attributes: [
+			['name', 'uid']
+		],
+		children: [{
+			name: [NS.IETF_CALDAV, 'text-match'],
+			value: taskUid
+		}]
+	}]
+	return calendar.dav.calendarQuery([query])
+}
+
 export {
-	findVTODObyState
+	findVTODObyState,
+	findVTODObyUid
 }
