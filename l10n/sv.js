@@ -67,6 +67,7 @@ OC.L10N.register(
     "Select a classification" : "Välj en klassificering",
     "Select categories" : "Välj kategorier",
     "Add this as a new category" : "Lägg till som en ny kategori",
+    "Loading task from server." : "Laddar uppgiften från servern.",
     "Task not found!" : "Uppgift ej hittad!",
     "[Starts today]" : "[Startar idag]",
     "[Starts tomorrow]" : "[Startar imorgon]",

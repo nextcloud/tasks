@@ -68,6 +68,7 @@ OC.L10N.register(
     "Select a classification" : "Seleccione unha clasificación",
     "Select categories" : "Seleccionar categorías",
     "Add this as a new category" : "Engadir isto como unha nova categoría",
+    "Loading task from server." : "Cargando tarefas dende o servidor.",
     "Task not found!" : "Non se atopou a tarefa!",
     "[Starts today]" : "[Comeza hoxe]",
     "[Starts tomorrow]" : "[Comeza mañá]",
