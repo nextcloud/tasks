@@ -22,4 +22,13 @@
     <dependencies>
         <nextcloud min-version="15" max-version="18"/>
     </dependencies>
+    <navigations>
+        <navigation>
+            <id>tasks</id>
+            <name>Tasks</name>
+            <route>tasks.page.index</route>
+            <icon>tasks.svg</icon>
+            <order>100</order>
+        </navigation>
+    </navigations>
 </info>
