@@ -32,27 +32,4 @@ class Application extends App {
 	public function __construct(array $params=[]) {
 		parent::__construct('tasks', $params);
 	}
-
-	/**
-	 * Register navigation
-	 */
-	public function registerNavigation() {
-		$appName = $this->getContainer()->getAppName();
-		$server = $this->getContainer()->getServer();
-		$urlGenerator = $server->getURLGenerator();
-
-		$server->getNavigationManager()->add(function() use ($appName, $server, $urlGenerator) {
-			return [
-				'id' => $appName,
-
-				'order' => 100,
-
-				'href' => $urlGenerator->linkToRoute('tasks.page.index'),
-
-				'icon' => $urlGenerator->imagePath($appName, 'tasks.svg'),
-
-				'name' => $server->getL10N($appName)->t('Tasks'),
-			];
-		});
-	}
 }

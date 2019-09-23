@@ -45,10 +45,8 @@ class AppTest extends TestCase {
 	public function testNavigation() {
 		$navigationManager = \OC::$server->getNavigationManager();
 		$navigationManager->clear();
-		$countBefore = count($navigationManager->getAll());
-		require __DIR__ . '/../../../appinfo/app.php';
-		// Test whether the navigation entry got added
-		$this->assertCount($countBefore + 1, $navigationManager->getAll());
+		$enabled = array_key_exists('tasks', $navigationManager->getAll());
+		$this->assertTrue($enabled);
 	}
 
 }
