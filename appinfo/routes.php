@@ -19,26 +19,12 @@
 * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 *
 */
-
-namespace OCA\Tasks;
-
-// use \OCP\AppFramework\App;
-use \OCA\Tasks\AppInfo\Application;
-
-$application = new Application();
-
-$application->registerRoutes($this, array('routes' => array(
-	// page
-	array('name' => 'page#index', 'url' => '/', 'verb' => 'GET'),
-
-	// templates
-	array('name' => 'page#templates', 'url' => '/templates/{template}', 'verb' => 'GET'),
-
-	// collections
-	array('name' => 'collections#getCollections',	'url' => '/collections',										'verb' => 'GET'),
-	array('name' => 'collections#setVisibility',	'url' => '/collection/{collectionID}/visibility/{visibility}',	'verb' => 'POST'),
-
-	// settings
-	array('name' => 'settings#get',	'url' => '/settings', 'verb' => 'GET'),
-	array('name' => 'settings#set', 'url' => '/settings/{setting}/{value}', 'verb' => 'POST'),
-)));
+return [
+	'routes' => [
+		['name' => 'page#index',				'url' => '/',													'verb' => 'GET'],
+		['name' => 'collections#getCollections','url' => '/collections',										'verb' => 'GET'],
+		['name' => 'collections#setVisibility',	'url' => '/collection/{collectionID}/visibility/{visibility}',	'verb' => 'POST'],
+		['name' => 'settings#get',				'url' => '/settings',											'verb' => 'GET'],
+		['name' => 'settings#set',				'url' => '/settings/{setting}/{value}',							'verb' => 'POST'],
+	]
+];
