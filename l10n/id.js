@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Tugas",
     "Important" : "Penting",
     "Today" : "Hari Ini",
     "Week" : "Minggu",
     "All" : "Semua",
     "Current" : "Saat ini",
     "Completed" : "Selesai",
+    "Tasks" : "Tugas",
     "Delete" : "Hapus",
     "Cancel" : "Batal",
     "Default" : "Default",

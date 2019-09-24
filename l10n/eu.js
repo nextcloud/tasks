@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Zereginak",
     "Important" : "Garrantzitsua",
     "Today" : "Gaur",
     "Week" : "Astea",
     "All" : "Denak",
     "Current" : "Unekoa",
     "Completed" : "Betea",
+    "Tasks" : "Zereginak",
     "Delete" : "Ezabatu",
     "Cancel" : "Ezeztatu",
     "Default" : "Lehenetsia",

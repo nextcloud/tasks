@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "المهام",
     "Important" : "مهم",
     "Today" : "اليوم",
     "Week" : "أسبوع",
     "All" : "الكل",
     "Current" : "الحالي",
     "Completed" : "مكتمل",
+    "Tasks" : "المهام",
     "Delete" : "حذف ",
     "Cancel" : "إلغاء",
     "No errors" : "لا توجد أخطاء",

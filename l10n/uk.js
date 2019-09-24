@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Завдання",
     "Important" : "Важливий",
     "Today" : "Сьогодні",
     "Week" : "Тиждень",
     "All" : "Всі",
     "Current" : "Поточні",
     "Completed" : "Завершені",
+    "Tasks" : "Завдання",
     "Delete" : "Видалити",
     "Cancel" : "Скасувати",
     "Change sort order" : "Зміна порядку сортування",

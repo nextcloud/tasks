@@ -1,11 +1,11 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "ۋەزىپەلەر",
     "Important" : "مۇھىم",
     "Today" : "بۈگۈن",
     "Week" : "ھەپتە",
     "All" : "ھەممىسى",
+    "Tasks" : "ۋەزىپەلەر",
     "Delete" : "ئۆچۈر",
     "Cancel" : "ۋاز كەچ",
     "Default" : "كۆڭۈلدىكى",

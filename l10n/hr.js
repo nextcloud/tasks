@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Zadaci",
     "Important" : "Važno",
     "Today" : "Danas",
     "Week" : "Tjedan",
     "All" : "Sve",
     "Current" : "Trenutno",
     "Completed" : "Završeno",
+    "Tasks" : "Zadaci",
     "The Tasks app for Nextcloud" : "Aplikacija Zadaci za Nextcloud",
     "Once enabled, a new Tasks menu will appear in your Nextcloud apps menu. From there you can add and delete tasks, edit their title, description, start and due dates, reminder times, mark them as important, and add comments on them. Tasks can be shared between users. Tasks can be synchronized using CalDav (each task list is linked to an Nextcloud calendar, to sync it to your local client - Thunderbird, Evolution, KDE Kontact, iCal... - just add the calendar as a remote calendar in you client). You can download your tasks as ICS files using the download button for each calendar." : "Nakon što je omogućena, novi izbornik Zadaci pojavit će se u izborniku Nextcloudove aplikacije. Iz njega možete dodavati i brisati zadatke, uređivati njihov naslov, opis, datume početka i završetka, podsjetnike, označavati ih kao važne i dodavati komentare. Zadaci se mogu dijeliti između korisnika. Zadaci se mogu sinkronizirati s pomoću kalendara CalDav (svaki popis zadataka povezan je s Nextcloudovim kalendarom radi sinkronizacije s lokalnim klijentom – Thunderbird, Evolution, KDE Kontact, iCal... – jednostavno dodajte kalendar kao udaljeni kalendar u svojem klijentu). Svoje zadatke možete preuzeti u obliku ICS datoteka s pomoću gumba za preuzimanje u kalendaru.",
     "Share with users or groups" : "Dijelite s korisnicima ili grupama",

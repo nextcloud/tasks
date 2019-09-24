@@ -1,15 +1,15 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Tarefas",
     "Important" : "Importante",
     "Today" : "Hoxe",
     "Week" : "Semana",
     "All" : "Todo",
     "Current" : "Actual",
     "Completed" : "Completado",
-    "The Tasks app for Nextcloud" : "O aplicativo de Tarefas para o Nextcloud",
-    "Once enabled, a new Tasks menu will appear in your Nextcloud apps menu. From there you can add and delete tasks, edit their title, description, start and due dates, reminder times, mark them as important, and add comments on them. Tasks can be shared between users. Tasks can be synchronized using CalDav (each task list is linked to an Nextcloud calendar, to sync it to your local client - Thunderbird, Evolution, KDE Kontact, iCal... - just add the calendar as a remote calendar in you client). You can download your tasks as ICS files using the download button for each calendar." : "Unha vez activado, no menú de aplicativos do Nextcloud aparecerá unha nova opción «Tarefas». Dende aí pode engadir e eliminar tarefas; editar o seu título, descrición e datas de inicio e remate, horarios de recordatorio; marcalas como importantes; e engadirlles comentarios. As tarefas poden compartirse entre usuarios. As tarefas poden sincronizarse usando CalDAv (cada lista de tarefas está ligada cun calendario do Nextcloud para sincronizalo co seu cliente local [Thunderbird, Evolution, KDE Kontact, iCal...]. Só hai que engadir o calendario como un calendario remoto no seu cliente). Pode descargar as súas tarefas como ficheiros ICS usando o botón de descarga para cada calendario.",
+    "Tasks" : "Tarefas",
+    "The Tasks app for Nextcloud" : "A aplicación de Tarefas para o Nextcloud",
+    "Once enabled, a new Tasks menu will appear in your Nextcloud apps menu. From there you can add and delete tasks, edit their title, description, start and due dates, reminder times, mark them as important, and add comments on them. Tasks can be shared between users. Tasks can be synchronized using CalDav (each task list is linked to an Nextcloud calendar, to sync it to your local client - Thunderbird, Evolution, KDE Kontact, iCal... - just add the calendar as a remote calendar in you client). You can download your tasks as ICS files using the download button for each calendar." : "Unha vez activado, no menú de aplicacións do Nextcloud aparecerá unha nova opción «Tarefas». Dende aí pode engadir e eliminar tarefas; editar o seu título, descrición e datas de inicio e remate, horarios de recordatorio; marcalas como importantes; e engadirlles comentarios. As tarefas poden compartirse entre usuarios. As tarefas poden sincronizarse usando CalDAv (cada lista de tarefas está ligada cun calendario do Nextcloud para sincronizalo co seu cliente local [Thunderbird, Evolution, KDE Kontact, iCal...]. Só hai que engadir o calendario como un calendario remoto no seu cliente). Pode descargar as súas tarefas como ficheiros ICS usando o botón de descarga para cada calendario.",
     "Share with users or groups" : "Compartir con usuarios ou grupos",
     "No users or groups" : "Non hai usuarios nin grupos",
     "can edit" : "pode editar",

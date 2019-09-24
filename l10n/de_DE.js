@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Aufgaben",
     "Important" : "Wichtig",
     "Today" : "Heute",
     "Week" : "Woche",
     "All" : "Alle",
     "Current" : "Aktuell",
     "Completed" : "Fertiggestellt",
+    "Tasks" : "Aufgaben",
     "The Tasks app for Nextcloud" : "Die Aufgabenverwaltungs-App für Nextcloud",
     "Once enabled, a new Tasks menu will appear in your Nextcloud apps menu. From there you can add and delete tasks, edit their title, description, start and due dates, reminder times, mark them as important, and add comments on them. Tasks can be shared between users. Tasks can be synchronized using CalDav (each task list is linked to an Nextcloud calendar, to sync it to your local client - Thunderbird, Evolution, KDE Kontact, iCal... - just add the calendar as a remote calendar in you client). You can download your tasks as ICS files using the download button for each calendar." : "Sobald aktiviert, erscheint ein neues Aufgaben-Menü in Ihrem Nextcloud Apps-Menü. Von dort aus können Sie Aufgaben hinzufügen und löschen, sowie deren Titel, Beschreibung, Start- und Fälligkeitsdaten, Erinnerungszeiten bearbeiten und Kommentare hinzufügen. Aufgaben können zwischen den Benutzern geteilt werden. Aufgaben können auch mit CalDav synchronisiert werden (jede Aufgabenliste ist mit einem Nextcloud-Kalender verknüpft, um sie mit dem lokalen Client zu synchronisieren - Thunderbird, Evolution, KDE Kontact, iCal… Füge den Kalender einfach als externer Kalender in den Client ein). Die Aufgaben können als ICS-Dateien über den Download-Button für jeden Kalender herunterladen werden.",
     "Share with users or groups" : "Mit Benutzern oder Gruppen teilen",

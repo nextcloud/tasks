@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "დავალებები",
     "Important" : "აუცილებელი",
     "Today" : "დღეს",
     "Week" : "კვირა",
     "All" : "ყველა",
     "Current" : "ამჟამინდელი",
     "Completed" : "დასრულებული",
+    "Tasks" : "დავალებები",
     "Delete" : "წაშლა",
     "Cancel" : "უარყოფა",
     "Change sort order" : "განლაგების შეცვლა",

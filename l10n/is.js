@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Verkefni",
     "Important" : "Mikilvægt",
     "Today" : "Í dag",
     "Week" : "Vika",
     "All" : "Allt",
     "Current" : "Núverandi",
     "Completed" : "Lokið",
+    "Tasks" : "Verkefni",
     "The Tasks app for Nextcloud" : "Verkefnaforrit fyrir Nextcloud",
     "Once enabled, a new Tasks menu will appear in your Nextcloud apps menu. From there you can add and delete tasks, edit their title, description, start and due dates, reminder times, mark them as important, and add comments on them. Tasks can be shared between users. Tasks can be synchronized using CalDav (each task list is linked to an Nextcloud calendar, to sync it to your local client - Thunderbird, Evolution, KDE Kontact, iCal... - just add the calendar as a remote calendar in you client). You can download your tasks as ICS files using the download button for each calendar." : "Þegar þetta hefur verið virkjað birtist ný Verkefni-valmynd í Nextcloud-forritavalmyndinni. Þaðan er hægt að bæta við og eyða verkefnum, breyta fyrirsögn þeirra, lýsingu, upphafs- og lokadagsetningum, tímasetningum áminninga, merkja sem mikilvæg og bæta athugasemdum við verk. Hægt er að seila verkefnum á milli notenda. Verkefni er hægt að samstilla með CalDav (hver verkefnalisti er tendur við Nextcloud-dagatal, til að samstilla það við dagatalatengd forrit - Thunderbird, Evolution, KDE Kontact, iCal... - þarf einfaldlega að bæta dagatalinu við sem fjartengdu dagatali í forritinu). Þú getur sótt verkefnin þín sem ICS-skrár með því að ýta á niðurhalshnappinn við hvert dagatal.",
     "Share with users or groups" : "Deila með notendum eða hópum",

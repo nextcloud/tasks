@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Xeres",
     "Important" : "Importante",
     "Today" : "Güei",
     "Week" : "Selmana",
     "All" : "Toos",
     "Current" : "Actual",
     "Completed" : "Completáu",
+    "Tasks" : "Xeres",
     "Delete" : "Desaniciar",
     "Cancel" : "Encaboxar",
     "Change sort order" : "Camudar orde d'ordenación",

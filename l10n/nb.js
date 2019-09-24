@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Oppgaver",
     "Important" : "Viktig",
     "Today" : "I dag",
     "Week" : "Uke",
     "All" : "Alle",
     "Current" : "Nåværende",
     "Completed" : "Ferdig",
+    "Tasks" : "Oppgaver",
     "The Tasks app for Nextcloud" : "Oppgave-appen for Nextcloud",
     "Once enabled, a new Tasks menu will appear in your Nextcloud apps menu. From there you can add and delete tasks, edit their title, description, start and due dates, reminder times, mark them as important, and add comments on them. Tasks can be shared between users. Tasks can be synchronized using CalDav (each task list is linked to an Nextcloud calendar, to sync it to your local client - Thunderbird, Evolution, KDE Kontact, iCal... - just add the calendar as a remote calendar in you client). You can download your tasks as ICS files using the download button for each calendar." : "Når aktivert vil en ny Oppgave meny vises i Nextcloud app-meny. I denne kan du legge til og slette oppgaver, endre tittel beskrivelse, start og slutt dato, påminnelser, merke dem som viktige eller editere kommentarer på dem. Oppgaver kan deles med andre brukere og sykroniseres med CalDav (Thunderbird, Evolution, KDE Kontakter, ICal.... - legg til kalender om et abonnement i din klient). Du kan laste ned oppgaver som ICS filer ved å bruke knappen for nedlasting i hver kalender.",
     "Delete" : "Slett",

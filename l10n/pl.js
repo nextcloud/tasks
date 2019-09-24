@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Zadania",
     "Important" : "Ważne",
     "Today" : "Dzisiaj",
     "Week" : "Tydzień",
     "All" : "Wszystkie",
     "Current" : "Obecny",
     "Completed" : "Ukończono",
+    "Tasks" : "Zadania",
     "The Tasks app for Nextcloud" : "Aplikacja Tasks dla Nextcloud",
     "Once enabled, a new Tasks menu will appear in your Nextcloud apps menu. From there you can add and delete tasks, edit their title, description, start and due dates, reminder times, mark them as important, and add comments on them. Tasks can be shared between users. Tasks can be synchronized using CalDav (each task list is linked to an Nextcloud calendar, to sync it to your local client - Thunderbird, Evolution, KDE Kontact, iCal... - just add the calendar as a remote calendar in you client). You can download your tasks as ICS files using the download button for each calendar." : "Po włączeniu, nowe menu Zadania pojawi się w Twoim menu aplikacji Nextcloud. Stamtąd możesz dodać i usuwać zadania, edytować ich tytuł, opis, daty rozpoczęcia i ukończenia, czasy przypomnień, oznaczać je jako ważne i dodawać komentarze do nich. Zadania mogą być dzielone z innymi użytkownikami. Zadania mogą być synchronizowane z wykorzystaniem CalDav (każda lista zadań jest połączona z kalendarzem Nextcloud, aby zsynchronizować ją z lokalnym klientem - Thunderbird, Evolution, KDE Kontact, iCal... - po prostu dodaj kalendarz jako zdalny kalendarz w swoim kliencie). Możesz pobrać swoje zadania jako pliki ICS używając przycisku pobierania dla każdego kalendarza.",
     "Share with users or groups" : "Udostępnij użytkownikom lub grupom",
@@ -68,6 +68,7 @@ OC.L10N.register(
     "Select a classification" : "Wybierz klasyfikację",
     "Select categories" : "Wybierz kategorie",
     "Add this as a new category" : "Dodaj to jako nową kategorię",
+    "Loading task from server." : "Wczytywanie zadania z serwera.",
     "Task not found!" : "Nie znaleziono zadania!",
     "[Starts today]" : "[Rozpoczyna się dzisiaj]",
     "[Starts tomorrow]" : "[Rozpoczyna się jutro]",

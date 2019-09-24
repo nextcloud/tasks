@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "কর্ম",
     "Important" : "গুরুত্বপূর্ণ",
     "Today" : "আজ",
     "Week" : "সপ্তাহ",
     "All" : "সবাই",
     "Current" : "বর্তমান",
     "Completed" : "সুসম্পন্ন",
+    "Tasks" : "কর্ম",
     "Delete" : "মুছে",
     "Cancel" : "বাতিল",
     "Default" : "পূর্বনির্ধারিত",

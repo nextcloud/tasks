@@ -1,10 +1,10 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "کام",
     "Important" : "اہم",
     "Today" : "آج",
     "Week" : "ہفتہ",
+    "Tasks" : "کام",
     "Delete" : "حذف کریں",
     "Cancel" : "منسوخ کریں",
     "Edit" : "تدوین کریں",

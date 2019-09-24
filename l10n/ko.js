@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "작업",
     "Important" : "중요",
     "Today" : "오늘",
     "Week" : "주",
     "All" : "모두",
     "Current" : "현재",
     "Completed" : "완료됨",
+    "Tasks" : "작업",
     "Delete" : "삭제",
     "Cancel" : "취소",
     "Change sort order" : "정렬 순서 변경",

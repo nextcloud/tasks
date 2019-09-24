@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Prètzfaches",
     "Important" : "Important",
     "Today" : "Uèi",
     "Week" : "Aquesta setmana",
     "All" : "Tot",
     "Current" : "En aqueste moment",
     "Completed" : "Acabat",
+    "Tasks" : "Prètzfaches",
     "Delete" : "Suprimir",
     "Cancel" : "Anullar",
     "Default" : "Defaut",

@@ -1,9 +1,9 @@
 { "translations": {
-    "Tasks" : "Oppgåver",
     "Important" : "Viktig",
     "Today" : "I dag",
     "Week" : "Veke",
     "All" : "Alle",
+    "Tasks" : "Oppgåver",
     "Delete" : "Slett",
     "Cancel" : "Avbryt",
     "Default" : "Standard",

@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "งาน",
     "Important" : "สำคัญ",
     "Today" : "วันนี้",
     "Week" : "สัปดาห์",
     "All" : "ทั้งหมด",
     "Current" : "ปัจจุบัน",
     "Completed" : "เสร็จสมบูรณ์",
+    "Tasks" : "งาน",
     "Delete" : "ลบ",
     "Cancel" : "ยกเลิก",
     "Change sort order" : "เปลี่ยนการเรียงลำดับ",

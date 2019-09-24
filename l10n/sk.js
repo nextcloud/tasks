@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Úlohy",
     "Important" : "Dôležité",
     "Today" : "Dnes",
     "Week" : "Týždeň",
     "All" : "Všetky",
     "Current" : "Aktuálne",
     "Completed" : "Dokončené",
+    "Tasks" : "Úlohy",
     "The Tasks app for Nextcloud" : "Aplikácia úloh pre Nextcloud",
     "Share with users or groups" : "Sprístupniť používateľom alebo skupinám",
     "No users or groups" : "Žiadny používatelia alebo skupiny",

@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "وظایف",
     "Important" : "مهم",
     "Today" : "امروز",
     "Week" : "هفته",
     "All" : "همه",
     "Current" : "کنونی",
     "Completed" : "نکمیل شده",
+    "Tasks" : "وظایف",
     "Delete" : "حذف",
     "Cancel" : "لغو",
     "Default" : "پیش فرض",

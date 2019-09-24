@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Zadaci",
     "Important" : "Važno",
     "Today" : "Danas",
     "Week" : "Sedmica",
     "All" : "Svi",
     "Current" : "Trenutno",
     "Completed" : "Zavrženo",
+    "Tasks" : "Zadaci",
     "Delete" : "Obriši",
     "Cancel" : "Odustani",
     "Default" : "Zadano",

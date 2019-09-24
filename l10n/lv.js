@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Uzdevumi",
     "Important" : "Svarīgi",
     "Today" : "Šodien",
     "Week" : "Nedēļa",
     "All" : "Visi",
     "Current" : "Pašreizējais",
     "Completed" : "Pabeigts",
+    "Tasks" : "Uzdevumi",
     "Delete" : "Dzēst",
     "Cancel" : "Atcelt",
     "Change sort order" : "Mainīt kārtošanas secību",

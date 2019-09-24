@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Uppgifter",
     "Important" : "Viktigt",
     "Today" : "Idag",
     "Week" : "Vecka",
     "All" : "Alla",
     "Current" : "Nuvarande",
     "Completed" : "Slutförande",
+    "Tasks" : "Uppgifter",
     "The Tasks app for Nextcloud" : "En uppgift-app för Nextcloud",
     "Share with users or groups" : "Dela med användare eller grupper",
     "No users or groups" : "Inga användare eller grupper",

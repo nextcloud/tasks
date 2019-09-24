@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Naloge",
     "Important" : "Pomembno",
     "Today" : "Danes",
     "Week" : "Teden",
     "All" : "Vsi",
     "Current" : "Trenutno",
     "Completed" : "Končano",
+    "Tasks" : "Naloge",
     "The Tasks app for Nextcloud" : "Program Tasks za Nextcloud",
     "Delete" : "Izbriši",
     "Cancel" : "Prekliči",

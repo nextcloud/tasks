@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Tehtävät",
     "Important" : "Tärkeä",
     "Today" : "Tänään",
     "Week" : "Viikko",
     "All" : "Kaikki",
     "Current" : "Nykyinen",
     "Completed" : "Valmiina",
+    "Tasks" : "Tehtävät",
     "The Tasks app for Nextcloud" : "Tehtäväsovellus Nextcloudille",
     "Delete" : "Poista",
     "Cancel" : "Peruuta",

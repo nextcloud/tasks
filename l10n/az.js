@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Tapşırıqlar",
     "Important" : "Vacib",
     "Today" : "Bu gün",
     "Week" : "Həftə",
     "All" : "Hamısı",
     "Current" : "Mövcud",
     "Completed" : "Bitmişdir",
+    "Tasks" : "Tapşırıqlar",
     "Delete" : "Sil",
     "Cancel" : "Dayandır",
     "Default" : "Susmaya görə",

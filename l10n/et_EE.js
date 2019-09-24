@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Ülesanded",
     "Important" : "Tähtis",
     "Today" : "Täna",
     "Week" : "Nädal",
     "All" : "Kõik",
     "Current" : "Praegune",
     "Completed" : "Lõpetatud",
+    "Tasks" : "Ülesanded",
     "Delete" : "Kustuta",
     "Cancel" : "Loobu",
     "Change sort order" : "Muuda sorteerimisjärjekorda",

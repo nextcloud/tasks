@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "任务",
     "Important" : "重要",
     "Today" : "今天",
     "Week" : "星期",
     "All" : "全部",
     "Current" : "当前",
     "Completed" : "完成",
+    "Tasks" : "任务",
     "The Tasks app for Nextcloud" : "Nextcloud 任务应用",
     "Once enabled, a new Tasks menu will appear in your Nextcloud apps menu. From there you can add and delete tasks, edit their title, description, start and due dates, reminder times, mark them as important, and add comments on them. Tasks can be shared between users. Tasks can be synchronized using CalDav (each task list is linked to an Nextcloud calendar, to sync it to your local client - Thunderbird, Evolution, KDE Kontact, iCal... - just add the calendar as a remote calendar in you client). You can download your tasks as ICS files using the download button for each calendar." : "在启用后，Nextcloud 应用菜单中将显示一个新的“任务”菜单。从那里，您可以添加和删除任务，编辑其标题，描述，开始和截止日期，提醒时间，将其标记为重要，并添加注释。任务可以在用户之间共享。可以使用 CalDav 同步任务（每个任务列表链接到 Nextcloud 日历，将其同步到本地客户端 - Thunderbird，Evolution，KDE Kontact，iCal ... - 只需将日历添加为客户端中的远程日历）。您可以使用每个日历的下载按钮将任务下载为 ICS 文件。",
     "Share with users or groups" : "和用户或者群组共享",

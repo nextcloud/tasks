@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Detyra",
     "Important" : "E rëndësishme",
     "Today" : "Sot",
     "Week" : "Javë",
     "All" : "Krejt",
     "Current" : "E tanishmja",
     "Completed" : "Të plotësuara",
+    "Tasks" : "Detyra",
     "Delete" : "Fshije",
     "Cancel" : "Anuloje",
     "Change sort order" : "Ndryshoni rend renditjeje",

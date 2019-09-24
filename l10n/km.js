@@ -1,11 +1,11 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "ភារកិច្ច",
     "Important" : "សំខាន់",
     "Today" : "ថ្ងៃ​នេះ",
     "Week" : "សប្ដាហ៍",
     "All" : "ទាំងអស់",
+    "Tasks" : "ភារកិច្ច",
     "Delete" : "លុប",
     "Cancel" : "បោះបង់",
     "Default" : "លំនាំ​ដើម",

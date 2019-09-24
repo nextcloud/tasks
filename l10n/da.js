@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Opgaver",
     "Important" : "Vigtigt",
     "Today" : "I dag",
     "Week" : "Uge",
     "All" : "Alle",
     "Current" : "Nuværende",
     "Completed" : "Fuldført",
+    "Tasks" : "Opgaver",
     "Delete" : "Slet",
     "Cancel" : "Annullér",
     "Change sort order" : "Skift sorteringsrækkefølge",

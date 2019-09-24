@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "משימות",
     "Important" : "חשוב",
     "Today" : "היום",
     "Week" : "שבוע",
     "All" : "הכול",
     "Current" : "נוכחי",
     "Completed" : "הושלם",
+    "Tasks" : "משימות",
     "The Tasks app for Nextcloud" : "יישומון המשימות ל־Nextcloud",
     "Delete" : "מחיקה",
     "Cancel" : "ביטול",

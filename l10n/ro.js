@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Sarcini",
     "Important" : "Important",
     "Today" : "Astăzi",
     "Week" : "Săptămâna",
     "All" : "Toate ",
     "Current" : "Curent",
     "Completed" : "Terminat",
+    "Tasks" : "Sarcini",
     "Delete" : "Șterge",
     "Cancel" : "Anulează",
     "Default" : "Implicită",

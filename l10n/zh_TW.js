@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "工作項目",
     "Important" : "重要",
     "Today" : "今天",
     "Week" : "週",
     "All" : "所有",
     "Current" : "目前",
     "Completed" : "完成",
+    "Tasks" : "工作項目",
     "Delete" : "刪除",
     "Cancel" : "取消",
     "Change sort order" : "改變分類順序",

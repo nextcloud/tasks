@@ -1,13 +1,13 @@
 OC.L10N.register(
     "tasks",
     {
-    "Tasks" : "Εργασίες",
     "Important" : "Σημαντικό ",
     "Today" : "Σήμερα",
     "Week" : "Εβδομάδα",
     "All" : "Όλες",
     "Current" : "Τρέχουσα",
     "Completed" : "Ολοκληρωμένες",
+    "Tasks" : "Εργασίες",
     "The Tasks app for Nextcloud" : "Η εφαρμογή Εργασίες για το Nextcloud",
     "can edit" : "δυνατότητα επεξεργασίας",
     "Unable to delete the share." : "Αδυναμία διαγραφής κοινόχρηστου.",
