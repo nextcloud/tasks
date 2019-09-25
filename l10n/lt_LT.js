@@ -19,6 +19,7 @@ OC.L10N.register(
     "Delete all completed tasks." : "Ištrinti visas atliktas užduotis.",
     "Delete completed tasks." : "Ištrinti atliktas užduotis.",
     "No errors" : "Klaidų nėra",
+    "Open your browser console for more details" : "Išsamesnei informacijai, atverkite savo naršyklės pultą",
     "Load all completed tasks." : "Įkelti visas atliktas užduotis.",
     "Change sort order" : "Keisti rikiavimo tvarką",
     "Default" : "Numatytasis",
