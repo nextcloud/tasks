@@ -66,6 +66,7 @@
     "Select a classification" : "选择类别",
     "Select categories" : "选择分类",
     "Add this as a new category" : "添加此项作为新的分类",
+    "Loading task from server." : "从服务器加载任务。",
     "Task not found!" : "没有任务！",
     "[Starts today]" : "[今天开始]",
     "[Starts tomorrow]" : "[明天开始]",
