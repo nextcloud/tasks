@@ -84,7 +84,7 @@
 		"stylelint-scss": "^3.11.1",
 		"stylelint-webpack-plugin": "^0.10.5",
 		"svg-sprite": "^1.5.0",
-		"terser-webpack-plugin": "^2.1.0",
+		"terser-webpack-plugin": "^2.1.2",
 		"vue-jest": "^3.0.5",
 		"vue-loader": "^15.7.1",
 		"vue-template-compiler": "^2.6.10",
