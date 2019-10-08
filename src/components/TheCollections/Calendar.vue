@@ -152,7 +152,21 @@ export default {
 		},
 
 		addTask: function() {
-			this.createTask({ summary: this.newTaskName, calendar: this.calendar })
+			if (this.$store.state.settings.settings.defaultAllDay) {
+
+				this.createTask({
+					summary: this.newTaskName,
+					calendar: this.calendar,
+					allDay: true
+				})
+			} else {
+				this.createTask({
+					summary: this.newTaskName,
+					calendar: this.calendar
+				})
+
+			}
+
 			this.newTaskName = ''
 		},
 	}

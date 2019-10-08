@@ -592,6 +592,9 @@ const actions = {
 		if (taskData.start) {
 			task.start = taskData.start
 		}
+		if (taskData.allDay) {
+			task.allDay = taskData.allDay
+		}
 		if (taskData.related) {
 			task.related = taskData.related
 			// Check that parent task is not completed, uncomplete if necessary.
@@ -602,7 +605,6 @@ const actions = {
 				}
 			}
 		}
-
 		const vData = ICAL.stringify(task.jCal)
 
 		if (!task.dav) {
@@ -1026,6 +1028,7 @@ const actions = {
 		}
 		context.commit('toggleAllDay', task)
 		context.dispatch('scheduleTaskUpdate', task)
+		context.dispatch('setSetting', { type: 'defaultAllDay', value: task.allDay })
 	},
 
 	/**
