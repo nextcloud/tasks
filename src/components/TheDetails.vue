@@ -553,10 +553,10 @@ export default {
 				{ displayName: this.$t('tasks', 'When shared hide this event'), type: 'PRIVATE' },
 			],
 			statusSelect: [
-				{ displayName: this.$t('tasks', 'needs action'), type: 'NEEDS-ACTION' },
-				{ displayName: this.$t('tasks', 'completed'), type: 'COMPLETED' },
-				{ displayName: this.$t('tasks', 'in process'), type: 'IN-PROCESS' },
-				{ displayName: this.$t('tasks', 'canceled'), type: 'CANCELLED' },
+				{ displayName: this.$t('tasks', 'Needs action'), type: 'NEEDS-ACTION' },
+				{ displayName: this.$t('tasks', 'Completed'), type: 'COMPLETED' },
+				{ displayName: this.$t('tasks', 'In process'), type: 'IN-PROCESS' },
+				{ displayName: this.$t('tasks', 'Canceled'), type: 'CANCELLED' },
 			],
 		}
 	},
