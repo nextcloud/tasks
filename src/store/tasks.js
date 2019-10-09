@@ -420,6 +420,17 @@ const mutations = {
 	},
 
 	/**
+	 * Sets the status of a task
+	 *
+	 * @param {Object} state The store data
+	 * @param {Task} task The task
+	 * @param {String} status The status
+	 */
+	setStatus(state, { task, status }) {
+		Vue.set(task, 'status', status)
+	},
+
+	/**
 	 * Sets the due date of a task
 	 *
 	 * @param {Object} state The store data
@@ -950,6 +961,19 @@ const actions = {
 		// check classification to comply with RFC5545 values
 		classification = (['PUBLIC', 'PRIVATE', 'CONFIDENTIAL'].indexOf(classification) > -1) ? classification : null
 		context.commit('setClassification', { task: task, classification: classification })
+		context.dispatch('scheduleTaskUpdate', task)
+	},
+
+	/**
+	 * Sets the status of a task
+	 *
+	 * @param {Object} context The store context
+	 * @param {Task} task The task to update
+	 */
+	async setStatus(context, { task, status }) {
+		// check status to comply with RFC5545 values
+		status = (['NEEDS-ACTION', 'COMPLETED', 'IN-PROCESS', 'CANCELLED'].indexOf(status) > -1) ? status : null
+		context.commit('setStatus', { task: task, status: status })
 		context.dispatch('scheduleTaskUpdate', task)
 	},
 

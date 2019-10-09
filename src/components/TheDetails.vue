@@ -201,6 +201,29 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</div>
 						</div>
 					</li>
+					<li class="section detail-class reactive">
+						<div v-click-outside="() => finishEditing('status')"
+							@click="editProperty('status')"
+						>
+							<span :class="[iconStatus]" class="icon" />
+							<div class="detail-calendar-container">
+								<Multiselect
+									:value="statusSelect.find( _ => _.type === task.status )"
+									:multiple="false"
+									:allow-empty="false"
+									:disabled="task.calendar.readOnly"
+									track-by="type"
+									:placeholder="$t('tasks', 'Select a status')"
+									label="displayName"
+									:options="statusSelect"
+									:close-on-select="true"
+									class="multiselect-vue"
+									@input="changeStatus"
+									@tag="changeStatus"
+								/>
+							</div>
+						</div>
+					</li>
 					<li v-show="!task.calendar.readOnly || task.priority" :class="[{'editing': edit=='priority', 'date': task.priority>0}, priorityString]"
 						class="section detail-priority"
 					>
@@ -529,6 +552,12 @@ export default {
 				{ displayName: this.$t('tasks', 'When shared show only busy'), type: 'CONFIDENTIAL' },
 				{ displayName: this.$t('tasks', 'When shared hide this event'), type: 'PRIVATE' },
 			],
+			statusSelect: [
+				{ displayName: this.$t('tasks', 'Needs action'), type: 'NEEDS-ACTION' },
+				{ displayName: this.$t('tasks', 'Completed'), type: 'COMPLETED' },
+				{ displayName: this.$t('tasks', 'In process'), type: 'IN-PROCESS' },
+				{ displayName: this.$t('tasks', 'Canceled'), type: 'CANCELLED' },
+			],
 		}
 	},
 	computed: {
@@ -570,6 +599,13 @@ export default {
 				return 'icon-color icon-tag-active'
 			} else {
 				return 'icon-bw icon-tag'
+			}
+		},
+		iconStatus: function() {
+			if (this.task.status) {
+				return 'icon-color icon-status'
+			} else {
+				return 'icon-bw icon-current'
 			}
 		},
 		...mapGetters({
@@ -628,6 +664,7 @@ export default {
 			'toggleAllDay',
 			'moveTask',
 			'setClassification',
+			'setStatus',
 			'getTaskByUri',
 		]),
 
@@ -816,6 +853,10 @@ export default {
 
 		changeClass: function(classification) {
 			this.setClassification({ task: this.task, classification: classification.type })
+		},
+
+		changeStatus: function(status) {
+			this.setStatus({ task: this.task, status: status.type })
 		},
 
 		/**
