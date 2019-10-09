@@ -179,29 +179,6 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						</div>
 					</li>
 					<li class="section detail-class reactive">
-						<div v-click-outside="() => finishEditing('status')"
-							@click="editProperty('status')"
-						>
-							<span class="icon icon-color icon-privacy" />
-							<div class="detail-calendar-container">
-								<Multiselect
-									:value="statusSelect.find( _ => _.type === task.status )"
-									:multiple="false"
-									:allow-empty="false"
-									:disabled="task.calendar.readOnly"
-									track-by="type"
-									:placeholder="$t('tasks', 'Select a status')"
-									label="displayName"
-									:options="statusSelect"
-									:close-on-select="true"
-									class="multiselect-vue"
-									@input="changeStatus"
-									@tag="changeStatus"
-								/>
-							</div>
-						</div>
-					</li>
-					<li class="section detail-class reactive">
 						<div v-click-outside="() => finishEditing('class')"
 							@click="editProperty('class')"
 						>
@@ -220,6 +197,29 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									class="multiselect-vue"
 									@input="changeClass"
 									@tag="changeClass"
+								/>
+							</div>
+						</div>
+					</li>
+					<li class="section detail-class reactive">
+						<div v-click-outside="() => finishEditing('status')"
+							@click="editProperty('status')"
+						>
+							<span class="icon icon-color icon-current" />
+							<div class="detail-calendar-container">
+								<Multiselect
+									:value="statusSelect.find( _ => _.type === task.status )"
+									:multiple="false"
+									:allow-empty="false"
+									:disabled="task.calendar.readOnly"
+									track-by="type"
+									:placeholder="$t('tasks', 'Select a status')"
+									label="displayName"
+									:options="statusSelect"
+									:close-on-select="true"
+									class="multiselect-vue"
+									@input="changeStatus"
+									@tag="changeStatus"
 								/>
 							</div>
 						</div>
