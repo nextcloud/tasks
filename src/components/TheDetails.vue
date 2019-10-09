@@ -205,7 +205,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						<div v-click-outside="() => finishEditing('status')"
 							@click="editProperty('status')"
 						>
-							<span class="icon icon-color icon-current" />
+							<span :class="[iconStatus]" class="icon" />
 							<div class="detail-calendar-container">
 								<Multiselect
 									:value="statusSelect.find( _ => _.type === task.status )"
@@ -599,6 +599,13 @@ export default {
 				return 'icon-color icon-tag-active'
 			} else {
 				return 'icon-bw icon-tag'
+			}
+		},
+		iconStatus: function() {
+			if (this.task.status) {
+				return 'icon-color icon-status'
+			} else {
+				return 'icon-bw icon-current'
 			}
 		},
 		...mapGetters({
