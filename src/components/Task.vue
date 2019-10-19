@@ -37,7 +37,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			<div class="task-checkbox">
 				<input :id="'toggleCompleted_' + task.uid"
 					type="checkbox"
-					class="checkbox"
+					class="checkbox no-nav"
 					name="toggleCompleted"
 					:class="{'disabled': task.calendar.readOnly}"
 					:checked="task.completed"
