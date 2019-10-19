@@ -1194,7 +1194,7 @@
 
 input[type='checkbox'].checkbox {
 	&:checked + label::before {
-		background-image: var(--icon-checkmark-000);
+		background-image: var(--icon-checkmark-000) !important;
 		background-color: unset;
 		border-color: unset;
 	}
