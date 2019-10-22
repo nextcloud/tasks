@@ -243,7 +243,7 @@ export default class Task {
 		this.vtodo.updatePropertyWithValue('percent-complete', complete)
 		this.updateLastModified()
 		if (complete < 100) {
-			this.completed = null
+			this.completed = false
 			if (complete === 0) {
 				this.status = 'NEEDS-ACTION'
 			} else {
