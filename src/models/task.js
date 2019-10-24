@@ -250,7 +250,7 @@ export default class Task {
 				this.status = 'IN-PROCESS'
 			}
 		} else {
-			this.completed = ICAL.Time.now()
+			this.completed = true
 			this.status = 'COMPLETED'
 		}
 		this._complete = this.vtodo.getFirstPropertyValue('percent-complete') || 0
@@ -262,7 +262,7 @@ export default class Task {
 
 	set completed(completed) {
 		if (completed) {
-			this.vtodo.updatePropertyWithValue('completed', completed)
+			this.vtodo.updatePropertyWithValue('completed', ICAL.Time.now())
 		} else {
 			this.vtodo.removeProperty('completed')
 		}
