@@ -19,6 +19,8 @@
     "Delete completed tasks." : "Smazat dokončené úkoly.",
     "Deleted all completed tasks from calendar \"{calendar}\"." : "Smazány všechny dokončené úkoly z kalendáře „{calendar}“.",
     "No errors" : "Bez chyb",
+    "Open your browser console for more details" : "Další podrobnosti získáte otevřením konzole webového prohlížeče",
+    "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["Nedaří se smazat {failedCount} úkol.","Nedaří se smazat {failedCount} úkoly.","Nedaří se smazat {failedCount} úkolů.","Nedaří se smazat {failedCount} úkoly."],
     "Load all completed tasks." : "Načíst všechny dokončené úlohy.",
     "Change sort order" : "Změnit řazení",
     "Default" : "Výchozí",
