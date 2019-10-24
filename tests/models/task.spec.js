@@ -63,4 +63,11 @@ describe('task', () => {
 		expect(task.complete).toBeLessThan(100)
 		expect(task.completed).toEqual(false)
 	})
+
+	it('Should set and get the uid', () => {
+		const task = new Task(vCalendar, {})
+		expect(task.uid).toEqual('pwen4kz18g')
+		task.uid = 'pwen4kz19g'
+		expect(task.uid).toEqual('pwen4kz19g')
+	})
 })
