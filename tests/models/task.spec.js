@@ -70,4 +70,18 @@ describe('task', () => {
 		task.uid = 'pwen4kz19g'
 		expect(task.uid).toEqual('pwen4kz19g')
 	})
+
+	it('Should set and get the summary', () => {
+		const task = new Task(vCalendar, {})
+		expect(task.summary).toEqual('Test 1')
+		task.summary = 'Test 2'
+		expect(task.summary).toEqual('Test 2')
+	})
+
+	it('Should set and get the priority', () => {
+		const task = new Task(vCalendar, {})
+		expect(task.priority).toEqual(null)
+		task.priority = 1
+		expect(task.priority).toEqual(1)
+	})
 })
