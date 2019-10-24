@@ -21,30 +21,31 @@ describe('task', () => {
 		task.complete = 100
 		expect(task.status).toEqual('COMPLETED')
 		expect(task.completed).toEqual(true)
+		expect(task.completedDate).not.toEqual(null)
 	})
 
 	it('Should set status to "NEEDS-ACTION" when complete is 0.', () => {
 		const task = new Task(vCalendar, {})
 		task.complete = 0
 		expect(task.status).toEqual('NEEDS-ACTION')
-		expect(task.completedDate).toEqual(null)
 		expect(task.completed).toEqual(false)
+		expect(task.completedDate).toEqual(null)
 	})
 
 	it('Should set status to "IN-PROCESS" when complete is >0 and <100.', () => {
 		const task = new Task(vCalendar, {})
 		task.complete = 50
 		expect(task.status).toEqual('IN-PROCESS')
-		expect(task.completedDate).toEqual(null)
 		expect(task.completed).toEqual(false)
+		expect(task.completedDate).toEqual(null)
 	})
 
 	it('Should set complete to 100 when status is "COMPLETED".', () => {
 		const task = new Task(vCalendar, {})
 		task.status = 'COMPLETED'
 		expect(task.complete).toEqual(100)
-		expect(task.completedDate).not.toEqual(null)
 		expect(task.completed).toEqual(true)
+		expect(task.completedDate).not.toEqual(null)
 	})
 
 	it('Should set complete to 0 when status is "NEEDS-ACTION".', () => {
@@ -53,6 +54,7 @@ describe('task', () => {
 		task.status = 'NEEDS-ACTION'
 		expect(task.complete).toEqual(0)
 		expect(task.completed).toEqual(false)
+		expect(task.completedDate).toEqual(null)
 	})
 
 	it('Should set complete to >0 and <100 when status is "IN-PROCESS".', () => {
@@ -62,6 +64,25 @@ describe('task', () => {
 		expect(task.complete).toBeGreaterThan(0)
 		expect(task.complete).toBeLessThan(100)
 		expect(task.completed).toEqual(false)
+		expect(task.completedDate).toEqual(null)
+	})
+
+	it('Should set complete to <100 when setting completed to false.', () => {
+		const task = new Task(vCalendar, {})
+		task.complete = 100
+		task.completed = false
+		expect(task.status).toEqual('IN-PROCESS')
+		expect(task.complete).toBeLessThan(100)
+		expect(task.completedDate).toEqual(null)
+	})
+
+	it('Should set complete to 100 when setting completed to true.', () => {
+		const task = new Task(vCalendar, {})
+		task.complete = 0
+		task.completed = true
+		expect(task.status).toEqual('COMPLETED')
+		expect(task.complete).toEqual(100)
+		expect(task.completedDate).not.toEqual(null)
 	})
 
 	it('Should set and get the uid', () => {
