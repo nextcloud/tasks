@@ -197,7 +197,7 @@ export default class Task {
 	 * @memberof Task
 	 */
 	set uid(uid) {
-		this.vCalendar.updatePropertyWithValue('uid', uid)
+		this.vtodo.updatePropertyWithValue('uid', uid)
 		this._uid = this.vtodo.getFirstPropertyValue('uid') || ''
 		return true
 	}
@@ -240,19 +240,26 @@ export default class Task {
 	}
 
 	set complete(complete) {
-		this.vtodo.updatePropertyWithValue('percent-complete', complete)
-		this.updateLastModified()
+		// Make complete a number
+		complete = +complete
+		this.setComplete(complete)
 		if (complete < 100) {
-			this.completed = null
+			this.setCompleted(false)
+			console.debug(complete)
 			if (complete === 0) {
-				this.status = 'NEEDS-ACTION'
+				this.setStatus('NEEDS-ACTION')
 			} else {
-				this.status = 'IN-PROCESS'
+				this.setStatus('IN-PROCESS')
 			}
 		} else {
-			this.completed = ICAL.Time.now()
-			this.status = 'COMPLETED'
+			this.setCompleted(true)
+			this.setStatus('COMPLETED')
 		}
+	}
+
+	setComplete(complete) {
+		this.vtodo.updatePropertyWithValue('percent-complete', complete)
+		this.updateLastModified()
 		this._complete = this.vtodo.getFirstPropertyValue('percent-complete') || 0
 	}
 
@@ -261,8 +268,21 @@ export default class Task {
 	}
 
 	set completed(completed) {
+		this.setCompleted(completed)
 		if (completed) {
-			this.vtodo.updatePropertyWithValue('completed', completed)
+			this.setComplete(100)
+			this.setStatus('COMPLETED')
+		} else {
+			if (this.complete === 100) {
+				this.setComplete(99)
+				this.setStatus('IN-PROCESS')
+			}
+		}
+	}
+
+	setCompleted(completed) {
+		if (completed) {
+			this.vtodo.updatePropertyWithValue('completed', ICAL.Time.now())
 		} else {
 			this.vtodo.removeProperty('completed')
 		}
@@ -281,6 +301,24 @@ export default class Task {
 	}
 
 	set status(status) {
+		this.setStatus(status)
+		if (status === 'COMPLETED') {
+			this.setComplete(100)
+			this.setCompleted(true)
+		} else if (status === 'IN-PROCESS') {
+			this.setCompleted(false)
+			if (this.complete === 100) {
+				this.setComplete(99)
+			} else if (this.complete === 0) {
+				this.setComplete(1)
+			}
+		} else if (status === 'NEEDS-ACTION') {
+			this.setComplete(0)
+			this.setCompleted(false)
+		}
+	}
+
+	setStatus(status) {
 		this.vtodo.updatePropertyWithValue('status', status)
 		this.updateLastModified()
 		this._status = this.vtodo.getFirstPropertyValue('status')
