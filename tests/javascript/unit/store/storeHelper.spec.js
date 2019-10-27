@@ -1,6 +1,6 @@
 import moment from 'moment'
 import MockDate from 'mockdate'
-import { sort } from '../../src/store/storeHelper'
+import { sort } from '../../../../src/store/storeHelper'
 
 global.moment = moment
 
