@@ -245,7 +245,6 @@ export default class Task {
 		this.setComplete(complete)
 		if (complete < 100) {
 			this.setCompleted(false)
-			console.debug(complete)
 			if (complete === 0) {
 				this.setStatus('NEEDS-ACTION')
 			} else {
