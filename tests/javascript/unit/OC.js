@@ -8,4 +8,8 @@ export class OC {
 		return ''
 	}
 
+	linkToRemote(app) {
+		return ''
+	}
+
 }
