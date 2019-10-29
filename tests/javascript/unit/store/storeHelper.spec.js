@@ -1,8 +1,4 @@
-import moment from 'moment'
-import MockDate from 'mockdate'
 import { sort } from '../../../../src/store/storeHelper'
-
-global.moment = moment
 
 const tasks = [
 	{
@@ -41,9 +37,5 @@ describe('storeHelper', () => {
 	})
 
 	it("Tests if correct tasks are found for the 'current' collection.", () => {
-		// Set date to fixed value
-		MockDate.set(moment('20190101T123456', 'YYYYMMDDTHHmmss'))
-		
-		MockDate.reset()
 	})
 })
