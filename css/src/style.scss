@@ -698,7 +698,7 @@
 				display: inline-block;
 				min-height: 24px;
 				margin: 13px 0;
-				width: calc(100% - 116px);
+				width: calc(100% - (41px + 16px + 45px + 45px + 14px)); /* checkbox (41px), status display (16px),  star (45px), pin (45px), safety distance (14px) */
 				padding: 0 6px;
 				line-height: 22px;
 				// this border is to adjust the size of the div to the size
@@ -721,7 +721,7 @@
 				padding: 0 6px;
 				display: none !important;
 				margin: 13px 0;
-				width: calc(100% - 116px);
+				width: calc(100% - (41px + 16px + 45px + 45px + 14px)); /* checkbox (41px), status display (16px),  star (45px), pin (45px), safety distance (14px) */
 				line-height: 24px;
 				min-height: 24px;
 
@@ -748,11 +748,13 @@
 					height: 24px;
 					width: 24px;
 					&.icon-color {
-						background-size: 96px 72px;
+						/* 16px per icon, 4 rows, scale by factor 1.5, keep aspect ratio */
+						background-size: calc(1.5 * 4 * 16px) auto;
 					}
 
 					&.icon-bw {
-						background-size: 120px 120px;
+						/* 16px per icon, 6 rows, scale by factor 1.5, keep aspect ratio */
+						background-size: calc(1.5 * 6 * 16px) auto;
 					}
 				}
 			}

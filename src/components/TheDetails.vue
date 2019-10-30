@@ -40,7 +40,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					>
 					<label :for="'detailsToggleCompleted_' + task.uid" />
 				</span>
-
+				<a class="star reactive" @click="togglePinned(task)">
+					<span :class="[{'disabled': task.calendar.readOnly}, iconPinned]" class="icon" />
+				</a>
 				<a class="star reactive" @click="toggleStarred(task)">
 					<span :class="[{'disabled': task.calendar.readOnly}, iconStar]"
 						class="icon"
@@ -587,6 +589,13 @@ export default {
 				return 'icon-bw icon-task-star'
 			}
 		},
+		iconPinned: function() {
+			if (+this.task.pinned) {
+				return 'icon-bw icon-pinned-off'
+			} else {
+				return 'icon-bw icon-pinned'
+			}
+		},
 		iconPercent: function() {
 			if (this.task.complete > 0) {
 				return 'icon-color icon-percent-active'
@@ -666,6 +675,7 @@ export default {
 			'setClassification',
 			'setStatus',
 			'getTaskByUri',
+			'togglePinned',
 		]),
 
 		async loadTask() {
