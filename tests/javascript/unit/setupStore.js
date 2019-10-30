@@ -69,6 +69,46 @@ LAST-MODIFIED:20190918T095816\n
 UID:pwen4kz20g\n
 SUMMARY:Calendar 1 - Task 3\n
 END:VTODO\n
+END:VCALENDAR`,
+`
+BEGIN:VCALENDAR\n
+VERSION:2.0\n
+PRODID:-//Nextcloud Tasks 0.11.3\n
+BEGIN:VTODO\n
+CREATED:20181119T183919\n
+DTSTAMP:20190918T095816\n
+LAST-MODIFIED:20190918T095816\n
+RELATED-TO:pwen4kz20g\n
+UID:pwen4kz23g\n
+SUMMARY:Calendar 1 - Task 3 - Subtask 1\n
+END:VTODO\n
+END:VCALENDAR`,
+`
+BEGIN:VCALENDAR\n
+VERSION:2.0\n
+PRODID:-//Nextcloud Tasks 0.11.3\n
+BEGIN:VTODO\n
+CREATED:20181119T183919\n
+DTSTAMP:20190918T095816\n
+LAST-MODIFIED:20190918T095816\n
+RELATED-TO:pwen4kz20g\n
+UID:pwen4kz25g\n
+SUMMARY:Calendar 1 - Task 3 - Subtask 2\n
+END:VTODO\n
+END:VCALENDAR`,
+`
+BEGIN:VCALENDAR\n
+VERSION:2.0\n
+PRODID:-//Nextcloud Tasks 0.11.3\n
+BEGIN:VTODO\n
+CREATED:20181119T183919\n
+DTSTAMP:20190918T095816\n
+LAST-MODIFIED:20190918T095816\n
+RELATED-TO:pwen4kz23g\n
+UID:pwen4kz24g\n
+SUMMARY:Calendar 1 - Task 3 - Subtask 1 - Subsubtask 1\n
+PRIORITY:1\n
+END:VTODO\n
 END:VCALENDAR`
 		],
 	},
@@ -117,6 +157,24 @@ calendarsData.forEach(calendarData => {
 		localVue.set(task, 'dav', response)
 		return task
 	})
+	// Add subtasks correctly
+	tasks.forEach(
+		parent => {
+			var subTasks = tasks.filter(task => {
+				return task.related === parent.uid
+			})
+
+			// Convert list into an array and remove duplicate
+			parent.subTasks = subTasks.reduce((list, task) => {
+				if (list[task.uid]) {
+					console.debug('Duplicate task overridden', list[task.uid], task)
+				}
+				localVue.set(list, task.uid, task)
+				return list
+			}, parent.subTasks)
+		}
+	)
+
 	store.commit('addCalendar', calendar)
 	store.commit('appendTasksToCalendar', { calendar, tasks })
 })

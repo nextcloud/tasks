@@ -35,6 +35,18 @@ describe('General.vue', () => {
 		expect(wrapper.vm.filteredCalendars.length).toBe(1)
 	})
 
+	it('Checks that only important tasks show in the starred view', () => {
+		const wrapper = mount(General, { localVue, store, router })
+		if (wrapper.vm.$route.params.collectionId !== 'starred') {
+			router.push({ name: 'collections', params: { collectionId: 'starred' } })
+		}
+		expect(wrapper.find('li[task-id="pwen4kz18g.ics"]').exists()).toBe(true)	// Important task				--> shown
+		expect(wrapper.find('li[task-id="pwen4kz19g.ics"]').exists()).toBe(false)	// Not important task			--> hidden
+		expect(wrapper.find('li[task-id="pwen4kz20g.ics"]').exists()).toBe(true)	// Has an important subsubtask	--> shown
+		expect(wrapper.find('li[task-id="pwen4kz24g.ics"]').exists()).toBe(true)	// Important subsubtask 		--> shown
+		expect(wrapper.find('li[task-id="pwen4kz25g.ics"]').exists()).toBe(false)	// Has an important sibling, but no important child --> hidden
+	})
+
 	it('Checks that we get the correct number of calendars for the current view', () => {
 		const wrapper = mount(General, { localVue, store, router })
 		if (wrapper.vm.$route.params.collectionId !== 'current') {
