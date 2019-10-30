@@ -107,7 +107,12 @@ END:VCALENDAR`
 calendarsData.forEach(calendarData => {
 	const calendar = mapDavCollectionToCalendar(calendarData)
 	const tasks = calendarData.tasks.map(taskData => {
-		return new Task(taskData, calendar)
+		const task = new Task(taskData, calendar)
+		const response = {
+			url: `${calendar.id}/${task.uid}.ics`
+		}
+		localVue.set(task, 'dav', response)
+		return task
 	})
 	store.commit('addCalendar', calendar)
 	store.commit('appendTasksToCalendar', { calendar, tasks })
