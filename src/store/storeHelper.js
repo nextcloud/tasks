@@ -125,19 +125,19 @@ function sort(tasks, sortOrder, sortDirection) {
 	var comparators
 	switch (sortOrder) {
 	case 'alphabetically': {
-		comparators = [sortAlphabetically, sortByPriority]
+		comparators = [sortByPinned, sortAlphabetically, sortByPriority]
 		break
 	}
 	case 'priority': {
-		comparators = [sortByPriority, sortAlphabetically]
+		comparators = [sortByPinned, sortByPriority, sortAlphabetically]
 		break
 	}
 	case 'due': {
-		comparators = [sortByDue, sortAlphabetically]
+		comparators = [sortByPinned, sortByDue, sortAlphabetically]
 		break
 	}
 	case 'start': {
-		comparators = [sortByStart, sortAlphabetically]
+		comparators = [sortByPinned, sortByStart, sortAlphabetically]
 		break
 	}
 	case 'created': {
@@ -145,15 +145,15 @@ function sort(tasks, sortOrder, sortDirection) {
 		break
 	}
 	case 'modified': {
-		comparators = [sortByModified, sortAlphabetically]
+		comparators = [sortByPinned, sortByModified, sortAlphabetically]
 		break
 	}
 	case 'completedDate': {
-		comparators = [sortByCompletedDate, sortAlphabetically]
+		comparators = [sortByPinned, sortByCompletedDate, sortAlphabetically]
 		break
 	}
 	default:
-		comparators = [sortByCompleted, sortByDue, sortByPriority, sortByStart, sortAlphabetically]
+		comparators = [sortByPinned, sortByCompleted, sortByDue, sortByPriority, sortByStart, sortAlphabetically]
 	}
 	var sortedTasks = tasks.sort((taskA, taskB) => {
 		var compIndex = 0
@@ -168,7 +168,21 @@ function sort(tasks, sortOrder, sortDirection) {
 }
 
 /**
- * Comparator two compare two tasks by completed state in ascending order
+ * Comparator to compare two tasks by pinned state
+ *
+ * @param {Task} taskA The first task
+ * @param {Task} taskB The second task
+ * @returns {Integer}
+ */
+function sortByPinned(taskA, taskB) {
+	if (taskA.pinned && taskB.pinned) return 0
+	if (taskA.pinned) return -1
+	if (taskB.pinned) return 1
+	return 0
+}
+
+/**
+ * Comparator to compare two tasks by completed state in ascending order
  *
  * @param {Task} taskA The first task
  * @param {Task} taskB The second task
