@@ -141,7 +141,7 @@ function sort(tasks, sortOrder, sortDirection) {
 		break
 	}
 	case 'created': {
-		comparators = [sortByCreated, sortAlphabetically]
+		comparators = [sortByPinned, sortByCreated, sortAlphabetically]
 		break
 	}
 	case 'modified': {
