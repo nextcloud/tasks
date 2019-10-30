@@ -18,6 +18,15 @@ describe('General.vue', () => {
 		expect(wrapper.vm.calendars.length).toBe(2)
 	})
 
+	it('Checks that only uncompleted tasks show in the all view', () => {
+		const wrapper = mount(General, { localVue, store, router })
+		if (wrapper.vm.$route.params.collectionId !== 'all') {
+			router.push({ name: 'collections', params: { collectionId: 'all' } })
+		}
+		expect(wrapper.find('li[task-id="pwen4kz18g.ics"]').exists()).toBe(true)
+		expect(wrapper.find('li[task-id="pwen4kz19g.ics"]').exists()).toBe(false)
+	})
+
 	it('Checks that we get the correct number of calendars for the starred view', () => {
 		const wrapper = mount(General, { localVue, store, router })
 		if (wrapper.vm.$route.params.collectionId !== 'starred') {
@@ -47,6 +56,6 @@ describe('General.vue', () => {
 		if (wrapper.vm.$route.params.collectionId !== 'completed') {
 			router.push({ name: 'collections', params: { collectionId: 'completed' } })
 		}
-		expect(wrapper.vm.filteredCalendars.length).toBe(0)
+		expect(wrapper.vm.filteredCalendars.length).toBe(1)
 	})
 })
