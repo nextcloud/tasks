@@ -590,7 +590,7 @@ export default {
 			}
 		},
 		iconPinned: function() {
-			if (+this.task.pinned) {
+			if (this.task.pinned) {
 				return 'icon-bw icon-pinned-off'
 			} else {
 				return 'icon-bw icon-pinned'
