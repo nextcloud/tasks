@@ -60,6 +60,11 @@ export default {
 	},
 	methods: {
 		react: function() {
+			// Prevent event dispatching if action is null (e.g. successful store)
+			if (this.status.action === null) {
+				return
+			}
+
 			this.$store.dispatch(this.status.action, { task: this.task, etag: this.conflict })
 				.then(() => {
 					this.task.conflict = false
