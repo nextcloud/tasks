@@ -774,19 +774,14 @@
 				padding: 10px;
 				height: 44px;
 				width: 44px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
 
 				.icon {
-					height: 24px;
-					width: 24px;
-					&.icon-color {
-						/* 16px per icon, 4 rows, scale by factor 1.5, keep aspect ratio */
-						background-size: calc(1.5 * 4 * 16px) auto;
-					}
-
-					&.icon-bw {
-						/* 16px per icon, 6 rows, scale by factor 1.5, keep aspect ratio */
-						background-size: calc(1.5 * 6 * 16px) auto;
-					}
+					height: 16px;
+					width: 16px;
+					transform: scale(1.5);
 				}
 			}
 		}
