@@ -79,6 +79,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<div v-if="task.due" :class="{overdue: overdue(task.due)}" class="duedate">
 					{{ task.due | formatDate }}
 				</div>
+				<div v-if="task.pinned">
+					<span class="icon icon-bw icon-pinned" />
+				</div>
 				<div v-if="task.note!=''">
 					<span class="icon icon-bw icon-note" />
 				</div>

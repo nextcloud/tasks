@@ -104,6 +104,7 @@ export default class Task {
 		this._modified = this.vtodo.getFirstPropertyValue('last-modified')
 		this._created = this.vtodo.getFirstPropertyValue('created')
 		this._class = this.vtodo.getFirstPropertyValue('class') || 'PUBLIC'
+		this._pinned = this.vtodo.getFirstPropertyValue('x-pinned') === 'true'
 
 		this._searchQuery = ''
 		this._matchesSearchQuery = true
@@ -345,6 +346,20 @@ export default class Task {
 		}
 		this.updateLastModified()
 		this._related = this.vtodo.getFirstPropertyValue('related-to') || null
+	}
+
+	get pinned() {
+		return this._pinned
+	}
+
+	set pinned(pinned) {
+		if (pinned === true) {
+			this.vtodo.updatePropertyWithValue('x-pinned', 'true')
+		} else {
+			this.vtodo.removeProperty('x-pinned')
+		}
+		this.updateLastModified()
+		this._pinned = this.vtodo.getFirstPropertyValue('x-pinned') === 'true'
 	}
 
 	get hideSubtasks() {

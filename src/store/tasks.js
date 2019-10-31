@@ -332,6 +332,16 @@ const mutations = {
 	},
 
 	/**
+	 * Toggles the pinned state of a task
+	 *
+	 * @param {Object} state The store data
+	 * @param {Task} task The task
+	 */
+	togglePinned(state, task) {
+		Vue.set(task, 'pinned', !task.pinned)
+	},
+
+	/**
 	 * Toggles the visibility of the subtasks
 	 *
 	 * @param {Object} state The store data
@@ -891,6 +901,21 @@ const actions = {
 			return
 		}
 		context.commit('toggleStarred', task)
+		context.dispatch('scheduleTaskUpdate', task)
+	},
+
+	/**
+	 * Toggles the pinned state of a task
+	 *
+	 * @param {Object} context The store context
+	 * @param {Task} task The task to update
+	 */
+	async togglePinned(context, task) {
+		// Don't try to edit tasks in read-only calendars
+		if (task.calendar.readOnly) {
+			return
+		}
+		context.commit('togglePinned', task)
 		context.dispatch('scheduleTaskUpdate', task)
 	},
 
