@@ -671,6 +671,8 @@
 
 		.title {
 			flex: 0 0 auto;
+			display: flex;
+			align-items: center;
 			background-color: $gray_easy;
 			border-bottom: 1px solid $gray_light;
 			font-size: 16px;
@@ -688,61 +690,90 @@
 				}
 			}
 
-			.status-display {
-				float: right;
-				margin: 17px 0;
+			.detail-checkbox {
+				padding: 11px 10px;
+				opacity: 0.5;
 			}
 
-			.title-text {
-				cursor: text;
-				display: inline-block;
-				min-height: 24px;
-				margin: 13px 0;
-				width: calc(100% - (41px + 16px + 45px + 45px + 14px)); /* checkbox (41px), status display (16px),  star (45px), pin (45px), safety distance (14px) */
-				padding: 0 6px;
-				line-height: 22px;
-				// this border is to adjust the size of the div to the size
-				// of the input field for editing the title
-				// (setting a padding always led to a small flickering)
-				border: 1px solid transparent;
+			.title-wrapper {
+				flex-grow: 1;
 
-				&.strike-through {
-					text-decoration: line-through;
+				.title-text {
+					cursor: text;
+					display: inline-block;
+					width: 100%;
+					min-height: 24px;
+					margin: 13px 0;
+					padding: 0 6px;
+					line-height: 22px;
+					// this border is to adjust the size of the div to the size
+					// of the input field for editing the title
+					// (setting a padding always led to a small flickering)
+					border: 1px solid transparent;
+
+					&.strike-through {
+						text-decoration: line-through;
+					}
 				}
 
-				a {
-					cursor: pointer;
-					text-decoration: underline;
+				.expandable-container {
+					width: 100%;
+					border: 1px solid $gray;
+					padding: 0 6px;
+					display: none;
+					margin: 13px 0;
+					line-height: 24px;
+					min-height: 24px;
+
+					.expandingArea {
+						position: relative;
+					}
 				}
-			}
 
-			.expandable-container {
-				border: 1px solid $gray;
-				padding: 0 6px;
-				display: none !important;
-				margin: 13px 0;
-				width: calc(100% - (41px + 16px + 45px + 45px + 14px)); /* checkbox (41px), status display (16px),  star (45px), pin (45px), safety distance (14px) */
-				line-height: 24px;
-				min-height: 24px;
-
-				.expandingArea {
-					position: relative;
+				textarea,
+				pre {
+					box-shadow: none;
+					font-size: 16px;
+					font-weight: bold;
+					line-height: 22px;
+					min-height: 22px;
+					background: none repeat scroll 0 0 transparent;
+					border: medium none;
+					padding: 0;
+					white-space: pre-wrap;
+					word-wrap: break-word;
 				}
-			}
-
-			.checkbox {
-				float: left;
-				padding: 16px 17px 18px;
-
-				.icon {
-					cursor: pointer;
+	
+				textarea {
 					margin: 0;
+					border-radius: 0;
+					height: 100%;
+					left: 0;
+					overflow: hidden;
+					position: absolute;
+					resize: none;
+					top: 0;
+					width: 100%;
+				}
+	
+				pre {
+					border: 0 none !important;
+					display: block;
+					margin: 0;
+					outline: 0 none;
+					padding: 0 !important;
+					visibility: hidden;
 				}
 			}
 
-			.star {
-				padding: 13px 13px 13px 8px;
-				float: right;
+			.status-display {
+				margin: 17px 6px;
+			}
+
+			.action {
+				padding: 10px;
+				height: 44px;
+				width: 44px;
 
 				.icon {
 					height: 24px;
@@ -757,41 +788,6 @@
 						background-size: calc(1.5 * 6 * 16px) auto;
 					}
 				}
-			}
-
-			textarea,
-			pre {
-				box-shadow: none;
-				font-size: 16px;
-				font-weight: bold;
-				line-height: 22px;
-				min-height: 22px;
-				background: none repeat scroll 0 0 transparent;
-				border: medium none;
-				padding: 0;
-				white-space: pre-wrap;
-				word-wrap: break-word;
-			}
-
-			textarea {
-				margin: 0;
-				border-radius: 0;
-				height: 100%;
-				left: 0;
-				overflow: hidden;
-				position: absolute;
-				resize: none;
-				top: 0;
-				width: 100%;
-			}
-
-			pre {
-				border: 0 none !important;
-				display: block;
-				margin: 0;
-				outline: 0 none;
-				padding: 0 !important;
-				visibility: hidden;
 			}
 		}
 
@@ -1184,14 +1180,6 @@
 	.icon {
 		cursor: pointer;
 	}
-}
-
-.detail-checkbox {
-	float: left;
-	padding: 8px;
-	margin: 7px;
-	margin-right: 3px;
-	opacity: 0.5;
 }
 
 input[type='checkbox'].checkbox {
