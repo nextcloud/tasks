@@ -34,17 +34,17 @@ import ICAL from 'ical.js'
 function isTaskInList(task, listId, checkSubtasks = true) {
 	switch (listId) {
 	case 'completed':
-		return task.completed === true
+		return task.completed
 	case 'all':
-		return task.completed === false
+		return !task.completed
 	case 'current':
-		return task.completed === false && testTask(task, isTaskCurrent, checkSubtasks)
+		return !task.completed && testTask(task, isTaskCurrent, checkSubtasks)
 	case 'starred':
-		return task.completed === false && testTask(task, isTaskPriority, checkSubtasks)
+		return !task.completed && testTask(task, isTaskPriority, checkSubtasks)
 	case 'today':
-		return task.completed === false && testTask(task, isTaskToday, checkSubtasks)
+		return !task.completed && testTask(task, isTaskToday, checkSubtasks)
 	case 'week':
-		return task.completed === false && testTask(task, isTaskWeek, checkSubtasks)
+		return !task.completed && testTask(task, isTaskWeek, checkSubtasks)
 	default:
 		return '' + task.calendar.id === '' + listId
 	}
