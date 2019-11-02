@@ -51,6 +51,8 @@ describe('General.vue', () => {
 		expect(wrapper.find('li[task-id="pwen4kz20g.ics"]').exists()).toBe(true)	// Has an important subsubtask	--> shown
 		expect(wrapper.find('li[task-id="pwen4kz24g.ics"]').exists()).toBe(true)	// Important subsubtask 		--> shown
 		expect(wrapper.find('li[task-id="pwen4kz25g.ics"]').exists()).toBe(false)	// Has an important sibling, but no important child --> hidden
+		// Not important, has important subtask which is completed	--> hidden
+		expect(wrapper.find('li[task-id="pwen4kz30g.ics"]').exists()).toBe(false)
 	})
 
 	/*
@@ -74,6 +76,8 @@ describe('General.vue', () => {
 		expect(wrapper.find('li[task-id="pwen4kz20g.ics"]').exists()).toBe(true)	// Start date in the future, but current subsubtask	--> shown
 		expect(wrapper.find('li[task-id="pwen4kz24g.ics"]').exists()).toBe(true)	// Current subsubtask 			--> shown
 		expect(wrapper.find('li[task-id="pwen4kz25g.ics"]').exists()).toBe(false)	// Start date in the future and no current child	--> hidden
+		// Not current, has current subtask which is completed	--> hidden
+		expect(wrapper.find('li[task-id="pwen4kz30g.ics"]').exists()).toBe(false)
 	})
 
 	/*
