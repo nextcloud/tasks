@@ -59,15 +59,12 @@ function isTaskInList(task, listId, checkSubtasks = true) {
  * @returns {Boolean}
  */
 function testTask(task, testFunction, checkSubtasks = false) {
-	if (testFunction(task)) {
+	if (!task.completed && testFunction(task)) {
 		return true
 	}
 	if (checkSubtasks) {
 		for (var key in task.subTasks) {
 			var subTask = task.subTasks[key]
-			if (testFunction(subTask)) {
-				return true
-			}
 			if (testTask(subTask, testFunction, checkSubtasks)) {
 				return true
 			}
