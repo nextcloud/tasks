@@ -88,7 +88,15 @@ describe('General.vue', () => {
 		if (wrapper.vm.$route.params.collectionId !== 'today') {
 			router.push({ name: 'collections', params: { collectionId: 'today' } })
 		}
-		expect(wrapper.vm.filteredCalendars.length).toBe(0)
+		expect(wrapper.vm.filteredCalendars.length).toBe(1)
+	})
+
+	it('Checks that only today tasks show in the today view', () => {
+		const wrapper = mount(General, { localVue, store, router })
+		if (wrapper.vm.$route.params.collectionId !== 'today') {
+			router.push({ name: 'collections', params: { collectionId: 'today' } })
+		}
+		expect(wrapper.find('li[task-id="pwen4kz18g.ics"]').exists()).toBe(true)	// Already due			--> shown
 	})
 
 	/*

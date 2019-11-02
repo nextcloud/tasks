@@ -22,6 +22,11 @@ VueTestUtils.config.mocks.$n = function(app, singular, plural, count) {
 VueTestUtils.config.mocks.n = VueTestUtils.config.mocks.$n
 global.n = VueTestUtils.config.mocks.$n
 
+global.OCA = {}
+global.OCA.Tasks = {}
+global.OCA.Tasks.$t = VueTestUtils.config.mocks.$t
+global.OCA.Tasks.$n = VueTestUtils.config.mocks.$n
+
 afterAll(() => {
 	MockDate.reset()
 });
