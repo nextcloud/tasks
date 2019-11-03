@@ -27,7 +27,7 @@ describe('General.vue', () => {
 			router.push({ name: 'collections', params: { collectionId: 'all' } })
 		}
 		expect(wrapper.find('li[task-id="pwen4kz18g.ics"]').exists()).toBe(true)
-		expect(wrapper.find('li[task-id="pwen4kz19g.ics"]').exists()).toBe(false)
+		expect(wrapper.find('li[task-id="pwen4kz40g.ics"]').exists()).toBe(false)
 	})
 
 	/*
@@ -113,5 +113,14 @@ describe('General.vue', () => {
 			router.push({ name: 'collections', params: { collectionId: 'completed' } })
 		}
 		expect(wrapper.vm.filteredCalendars.length).toBe(1)
+	})
+
+	it('Checks that only completed tasks show in the completed view', () => {
+		const wrapper = mount(General, { localVue, store, router })
+		if (wrapper.vm.$route.params.collectionId !== 'completed') {
+			router.push({ name: 'collections', params: { collectionId: 'completed' } })
+		}
+		expect(wrapper.find('li[task-id="pwen4kz19g.ics"]').exists()).toBe(false)	// Not completed	-->	hidden
+		expect(wrapper.find('li[task-id="pwen4kz40g.ics"]').exists()).toBe(true)	// Completed		--> shown
 	})
 })
