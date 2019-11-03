@@ -96,7 +96,12 @@ describe('General.vue', () => {
 		if (wrapper.vm.$route.params.collectionId !== 'today') {
 			router.push({ name: 'collections', params: { collectionId: 'today' } })
 		}
-		expect(wrapper.find('li[task-id="pwen4kz18g.ics"]').exists()).toBe(true)	// Already due			--> shown
+		expect(wrapper.find('li[task-id="pwen4kz18g.ics"]').exists()).toBe(true)	// Already due					--> shown
+		expect(wrapper.find('li[task-id="pwen4kz19g.ics"]').exists()).toBe(false)	// Start date in the future		--> hidden
+		expect(wrapper.find('li[task-id="pwen4kz20g.ics"]').exists()).toBe(true)	// Start date in the future, but due subsubtask	--> shown
+		expect(wrapper.find('li[task-id="pwen4kz23g.ics"]').exists()).toBe(true)	// Due subtask					--> shown
+		// Not today, has today subtask which is completed	--> hidden
+		expect(wrapper.find('li[task-id="pwen4kz30g.ics"]').exists()).toBe(false)
 	})
 
 	/*
