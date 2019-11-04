@@ -102,7 +102,7 @@ OC.L10N.register(
     "When shared show only busy" : "Kiam kunhavigita, montri nur kiel okupita",
     "When shared hide this event" : "Kiam kunhavigita, kaŝi tiun okazaĵon",
     "Needs action" : "Bezono de ago",
-    "In process" : "Plenumante",
+    "In process" : "Plenumado",
     "Canceled" : "Nuligita",
     "Completed {date}" : "Plenumita {date}",
     "Created {date}" : "Kreita {date}",
