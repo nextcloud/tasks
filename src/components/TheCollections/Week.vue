@@ -24,7 +24,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 	<div>
 		<SortorderDropdown />
 		<div class="task-list">
-			<div v-for="day in days" :key="day.diff" class="grouped-tasks ui-droppable">
+			<div v-for="day in days" :key="day.diff" :day="day.diff"
+				class="grouped-tasks ui-droppable"
+			>
 				<h2 class="heading">
 					{{ day.diff | formatDay }}
 				</h2>
