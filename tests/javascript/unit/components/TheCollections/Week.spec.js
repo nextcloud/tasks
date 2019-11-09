@@ -16,6 +16,8 @@ describe('Week.vue', () => {
 		expect(wrapper.find('div[day="0"] li[task-id="pwen4kz20g.ics"]').exists()).toBe(true)	// Has a due subtask	--> shown
 		expect(wrapper.find('div[day="0"] li[task-id="pwen4kz23g.ics"]').exists()).toBe(true)	// Due subtask			--> shown
 		expect(wrapper.find('div[day="0"] li[task-id="pwen4kz25g.ics"]').exists()).toBe(false)	// Start date in future	--> hidden
+		expect(wrapper.find('div[day="0"] li[task-id="pwen8kz22g.ics"]').exists()).toBe(true)	// Was due today		--> shown
+		expect(wrapper.find('div[day="0"] li[task-id="pwen7kz22g.ics"]').exists()).toBe(false)	// Subtask due in 2 days--> hidden
 	})
 
 	it('Checks that the correct tasks are shown for day 1 (tomorrow)', () => {
@@ -26,6 +28,9 @@ describe('Week.vue', () => {
 	it('Checks that the correct tasks are shown for day 2 (day after tomorrow)', () => {
 		const wrapper = mount(Week, { localVue, store, router })
 		expect(wrapper.find('div[day="2"] li[task-id="pwen4kz21g.ics"]').exists()).toBe(true)	// Start the day after tomorrow	--> shown
+		expect(wrapper.find('div[day="2"] li[task-id="pwen8kz22g.ics"]').exists()).toBe(true)	// Was due today, but has subtask due in 2 days	--> shown
+		expect(wrapper.find('div[day="2"] li[task-id="pwen7kz22g.ics"]').exists()).toBe(true)	// Subtask due in 2 days--> shown
+		expect(wrapper.find('div[day="2"] li[task-id="pwen2kz37g.ics"]').exists()).toBe(false)	// Subtask due in a month --> hidden
 	})
 
 	it('Checks that the correct tasks are shown for day 6', () => {

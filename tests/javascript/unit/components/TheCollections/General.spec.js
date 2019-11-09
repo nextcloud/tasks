@@ -88,7 +88,7 @@ describe('General.vue', () => {
 		if (wrapper.vm.$route.params.collectionId !== 'today') {
 			router.push({ name: 'collections', params: { collectionId: 'today' } })
 		}
-		expect(wrapper.vm.filteredCalendars.length).toBe(1)
+		expect(wrapper.vm.filteredCalendars.length).toBe(2)
 	})
 
 	it('Checks that only today tasks show in the today view', () => {
