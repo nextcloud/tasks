@@ -37,4 +37,16 @@ describe('Week.vue', () => {
 		const wrapper = mount(Week, { localVue, store, router })
 		expect(wrapper.find('div[day="6"] li[task-id="pwen4kz22g.ics"]').exists()).toBe(true)	// Starts in 7 days		--> shown
 	})
+
+	it('Checks that only the clicked task is marked active', () => {
+		const wrapper = mount(Week, { localVue, store, router })
+		let taskAtDay0 = wrapper.find('div[day="0"] li[task-id="pwen8kz22g.ics"] > div')
+		let taskAtDay2 = wrapper.find('div[day="2"] li[task-id="pwen8kz22g.ics"] > div')
+
+		// Click on first task to open it
+		taskAtDay0.trigger('click')
+
+		expect(taskAtDay0.classes('active')).toBe(true)	// Should be shown active, since it was clicked
+		expect(taskAtDay2.classes('active')).toBe(false)	// Shouldn't be shown active, since it was not clicked
+	})
 })
