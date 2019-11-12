@@ -28,7 +28,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		class="task-item"
 	>
 		<div :task-id="task.uri"
-			:class="{active: $route.params.taskId==task.uri}"
+			:class="{active: isTaskOpen}"
 			class="task-body reactive"
 			type="task"
 			@click="navigate($event)"
@@ -204,6 +204,14 @@ export default {
 			}
 		},
 
+		collectionParam: function() {
+			try {
+				return this.collectionString.split('-')[1]
+			} catch {
+				return null
+			}
+		},
+
 		iconStar: function() {
 			if (+this.task.priority > 5) {
 				return 'icon-color icon-task-star-low'
@@ -288,7 +296,7 @@ export default {
 		 * @returns {Boolean} If it is open
 		 */
 		isTaskOpen: function() {
-			return this.task.uri === this.$route.params.taskId
+			return (this.task.uri === this.$route.params.taskId) && (this.collectionParam === this.$route.params.collectionParam)
 		},
 
 		/**
@@ -351,14 +359,22 @@ export default {
 		 * @param {String} route the route to navigate to
 		 */
 		navigate: function($event) {
-			if (!$event.target.classList.contains('no-nav') && this.$route.params.taskId !== this.task.uri) {
+			if (!$event.target.classList.contains('no-nav')
+				&& (this.$route.params.taskId !== this.task.uri || this.$route.params.collectionParam !== this.collectionParam)) {
 				if (!this.task.loadedCompleted) {
 					this.getTasksFromCalendar({ calendar: this.task.calendar, completed: true, related: this.task.uid })
 				}
 				if (this.$route.params.calendarId) {
 					this.$router.push({ name: 'calendarsTask', params: { calendarId: this.$route.params.calendarId, taskId: this.task.uri } })
 				} else if (this.collectionId) {
-					this.$router.push({ name: 'collectionsTask', params: { collectionId: this.collectionId, taskId: this.task.uri } })
+					if (this.collectionParam) {
+						this.$router.push({
+							name: 'collectionsParamTask',
+							params: { collectionId: this.collectionId, collectionParam: this.collectionParam, taskId: this.task.uri }
+						})
+					} else {
+						this.$router.push({ name: 'collectionsTask', params: { collectionId: this.collectionId, taskId: this.task.uri } })
+					}
 				}
 			}
 		},
