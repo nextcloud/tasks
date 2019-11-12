@@ -249,7 +249,7 @@ export default {
 			if (['today', 'week', 'starred', 'current'].indexOf(this.collectionId) > -1
 				&& this.$route.params.taskId !== this.task.uri) {
 				subTasks = subTasks.filter(task => {
-					return isTaskInList(task, this.collectionId)
+					return isTaskInList(task, this.collectionString)
 				})
 			}
 			return sort([...subTasks], this.sortOrder, this.sortDirection)

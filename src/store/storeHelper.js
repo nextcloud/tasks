@@ -32,6 +32,9 @@ import ICAL from 'ical.js'
  * @returns {Boolean}
  */
 function isTaskInList(task, listId, checkSubtasks = true) {
+	const parts = listId.split('-')
+	listId = parts[0]
+	const day = parts[1] ? parts[1] : null
 	switch (listId) {
 	case 'completed':
 		return task.completed
@@ -44,7 +47,11 @@ function isTaskInList(task, listId, checkSubtasks = true) {
 	case 'today':
 		return !task.completed && testTask(task, isTaskToday, checkSubtasks)
 	case 'week':
-		return !task.completed && testTask(task, isTaskWeek, checkSubtasks)
+		if (!day) {
+			return !task.completed && testTask(task, isTaskWeek, checkSubtasks)
+		} else {
+			return !task.completed && testTask(task, (task) => isTaskDay(task, parseInt(day)), checkSubtasks)
+		}
 	default:
 		return '' + task.calendar.id === '' + listId
 	}
@@ -131,6 +138,19 @@ function isTaskWeek(task) {
  */
 function week(date) {
 	return valid(date) && moment(date, 'YYYYMMDDTHHmmss').diff(moment().startOf('day'), 'days', true) < 7
+}
+
+/**
+ * Checks if the start or due date of a task are at a given day
+ *
+ * @param {Object} task The task to check
+ * @param {Integer} day The day
+ * @returns {Boolean}
+ */
+function isTaskDay(task, day) {
+	let diff = dayOfTask(task)
+	diff = (diff < 0) ? 0 : diff
+	return diff === day
 }
 
 function dayOfTask(task) {
@@ -405,5 +425,4 @@ export {
 	sort,
 	momentToICALTime,
 	searchSubTasks,
-	dayOfTask,
 }

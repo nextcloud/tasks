@@ -48,7 +48,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import { mapGetters } from 'vuex'
-import { sort, dayOfTask } from '../../store/storeHelper'
+import { sort, isTaskInList } from '../../store/storeHelper'
 import SortorderDropdown from '../SortorderDropdown'
 import Task from '../Task'
 import TaskDragContainer from '../TaskDragContainer'
@@ -87,27 +87,21 @@ export default {
 		 * @returns {Array} the array with the days
 		 */
 		days: function() {
+			// Get all uncompleted root tasks
+			var tasks = this.uncompletedRootTasks(this.tasks)
+
 			// Construct array with days for the current week.
 			var days = []
 			for (var day = 0; day < 7; day++) {
 				days.push({ diff: day, tasks: [] })
+
+				tasks.forEach(task => {
+					// Add the task to the respective day if it is within the next week.
+					if (isTaskInList(task, `week-${day}`)) {
+						days[day].tasks.push(task)
+					}
+				})
 			}
-
-			// Add every task due at a certain day to that day.
-			var tasks = this.uncompletedRootTasks(this.tasks)
-			tasks.forEach(task => {
-				var diff = dayOfTask(task)
-
-				// If the date was reached before today, map it to today.
-				if (diff < 0) {
-					diff = 0
-				}
-				// Add the task to the respective day if it is within the next week.
-				if (diff < 7) {
-					days[diff].tasks.push(task)
-				}
-
-			})
 
 			// Remove all days without tasks.
 			return days.filter(day => day.tasks.length)
