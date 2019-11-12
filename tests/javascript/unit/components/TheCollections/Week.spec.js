@@ -49,4 +49,26 @@ describe('Week.vue', () => {
 		expect(taskAtDay0.classes('active')).toBe(true)	// Should be shown active, since it was clicked
 		expect(taskAtDay2.classes('active')).toBe(false)	// Shouldn't be shown active, since it was not clicked
 	})
+
+	it('Checks that not matching subtasks are only shown for active tasks', () => {
+		const wrapper = mount(Week, { localVue, store, router })
+		let taskAtDay0 = wrapper.find('div[day="0"] li[task-id="pwen8kz22g.ics"] > div')
+
+		if (wrapper.vm.$route.params.taskId !== null) {
+			router.push({ name: 'collections', params: { collectionId: 'week' } })
+		}
+		expect(taskAtDay0.classes('active')).toBe(false)
+
+		expect(wrapper.find('div[day="0"] li[task-id="pwen7kz22g.ics"]').exists()).toBe(false)	// Not shown, since it doesn't match collection
+		expect(wrapper.find('div[day="0"] li[task-id="pwen2kz37g.ics"]').exists()).toBe(false)	// Not shown, since it doesn't match collection
+		expect(wrapper.find('div[day="2"] li[task-id="pwen7kz22g.ics"]').exists()).toBe(true)	// Shown, since it is due in 2 days
+
+		// Click on first task to open it
+		taskAtDay0.trigger('click')
+		expect(taskAtDay0.classes('active')).toBe(true)
+
+		expect(wrapper.find('div[day="0"] li[task-id="pwen7kz22g.ics"]').exists()).toBe(true)	// Shown now, because parent is active
+		expect(wrapper.find('div[day="0"] li[task-id="pwen2kz37g.ics"]').exists()).toBe(true)	// Shown now, because parent is active
+		expect(wrapper.find('div[day="2"] li[task-id="pwen2kz37g.ics"]').exists()).toBe(false)	// Not shown, since parent is not active
+	})
 })
