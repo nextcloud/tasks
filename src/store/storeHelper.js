@@ -97,7 +97,7 @@ function isTaskPriority(task) {
  * @returns {Boolean}
  */
 function isTaskCurrent(task) {
-	return !valid(task.start) || moment(task.start, 'YYYYMMDDTHHmmss').diff(moment(), 'days', true) < 0 || moment(task.due, 'YYYYMMDDTHHmmss').diff(moment(), 'days', true) < 0
+	return !task.startMoment.isValid() || task.startMoment.diff(moment(), 'days', true) < 0 || task.dueMoment.diff(moment(), 'days', true) < 0
 }
 
 /**
@@ -107,17 +107,17 @@ function isTaskCurrent(task) {
  * @returns {Boolean}
  */
 function isTaskToday(task) {
-	return (today(task.start) || today(task.due))
+	return (today(task.startMoment) || today(task.dueMoment))
 }
 
 /**
  * Checks if a date is today
  *
- * @param {String} date The date
+ * @param {Moment} date The date as moment
  * @returns {Boolean}
  */
 function today(date) {
-	return valid(date) && moment(date, 'YYYYMMDDTHHmmss').diff(moment().startOf('day'), 'days', true) < 1
+	return date.isValid() && date.diff(moment().startOf('day'), 'days', true) < 1
 }
 
 /**
@@ -127,17 +127,17 @@ function today(date) {
  * @returns {Boolean}
  */
 function isTaskWeek(task) {
-	return (week(task.start) || week(task.due))
+	return (week(task.startMoment) || week(task.dueMoment))
 }
 
 /**
  * Checks if a date lies within the next week
  *
- * @param {String} date The date
+ * @param {Moment} date The date as moment
  * @returns {Boolean}
  */
 function week(date) {
-	return valid(date) && moment(date, 'YYYYMMDDTHHmmss').diff(moment().startOf('day'), 'days', true) < 7
+	return date.isValid() && date.diff(moment().startOf('day'), 'days', true) < 7
 }
 
 /**
@@ -155,8 +155,8 @@ function isTaskDay(task, day) {
 
 function dayOfTask(task) {
 	var diff, startdiff, duediff
-	var start = moment(task.start, 'YYYYMMDDTHHmmss').startOf('day')
-	var due = moment(task.due, 'YYYYMMDDTHHmmss').startOf('day')
+	var start = task.startMoment.startOf('day')
+	var due = task.dueMoment.startOf('day')
 
 	// Add all tasks whose start date will be reached at that day.
 	if (start.isValid() && !due.isValid()) {
@@ -181,23 +181,13 @@ function dayOfTask(task) {
 }
 
 /**
- * Checks if a date is valid
- *
- * @param {String} date The date
- * @returns {Boolean}
- */
-function valid(date) {
-	return moment(date, 'YYYYMMDDTHHmmss').isValid()
-}
-
-/**
  * Checks if a date is overdue
  *
- * @param {String} due The due date
+ * @param {Moment} date The date
  * @returns {Boolean}
  */
-function overdue(due) {
-	return valid(due) && moment(due, 'YYYYMMDDTHHmmss').diff(moment()) < 0
+function overdue(date) {
+	return date.isValid() && date.diff(moment()) < 0
 }
 
 /**
@@ -396,8 +386,7 @@ function sortByDate(taskA, taskB, date) {
 	if (taskA[date] === null && taskB[date] === null) {
 		return 0
 	}
-
-	return moment(taskA[date], 'YYYYMMDDTHHmmss').diff(moment(taskB[date], 'YYYYMMDDTHHmmss'))
+	return taskA[date + 'Moment'].diff(taskB[date + 'Moment'])
 }
 
 /**
@@ -433,7 +422,6 @@ function searchSubTasks(task, searchQuery) {
 
 export {
 	isTaskInList,
-	valid,
 	overdue,
 	isParentInList,
 	sort,

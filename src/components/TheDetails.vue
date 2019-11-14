@@ -70,13 +70,13 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			</div>
 			<div class="body">
 				<ul class="sections">
-					<li v-show="!task.calendar.readOnly || task.start" :class="{'date': valid(task.start), 'editing': edit=='start', 'high': overdue(task.start)}"
+					<li v-show="!task.calendar.readOnly || task.start" :class="{'date': task.startMoment.isValid(), 'editing': edit=='start', 'high': overdue(task.startMoment)}"
 						class="section detail-start"
 					>
 						<div v-click-outside="() => finishEditing('start')"
 							@click="editProperty('start', $event)"
 						>
-							<span :class="[dateIcon(task.start)]"
+							<span :class="[dateIcon(task.startMoment)]"
 								class="icon"
 							/>
 							<span class="section-title">
@@ -104,13 +104,13 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</a>
 						</div>
 					</li>
-					<li v-show="!task.calendar.readOnly || task.due" :class="{'date': valid(task.due), 'editing': edit=='due', 'high': overdue(task.due)}"
+					<li v-show="!task.calendar.readOnly || task.due" :class="{'date': task.dueMoment.isValid(), 'editing': edit=='due', 'high': overdue(task.dueMoment)}"
 						class="section detail-date"
 					>
 						<div v-click-outside="() => finishEditing('due')"
 							@click="editProperty('due', $event)"
 						>
-							<span :class="[dateIcon(task.due)]"
+							<span :class="[dateIcon(task.dueMoment)]"
 								class="icon"
 							/>
 							<span class="section-title">
@@ -373,7 +373,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import { valid, overdue } from '../store/storeHelper'
+import { overdue } from '../store/storeHelper'
 import { DatetimePicker, Multiselect } from 'nextcloud-vue'
 import Markdown from './Markdown'
 import TaskStatusDisplay from './TaskStatusDisplay'
@@ -394,7 +394,7 @@ export default {
 	},
 	filters: {
 		formatStartDate: function(date) {
-			if (valid(date)) {
+			if (moment(date, 'YYYYMMDDTHHmmss').isValid()) {
 				if (date.isDate) {
 					return moment(date, 'YYYYMMDDTHHmmss').calendar(null, {
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
@@ -452,7 +452,7 @@ export default {
 			}
 		},
 		formatDueDate: function(date) {
-			if (valid(date)) {
+			if (moment(date, 'YYYYMMDDTHHmmss').isValid()) {
 				if (date.isDate) {
 					return moment(date, 'YYYYMMDDTHHmmss').calendar(null, {
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
@@ -564,9 +564,9 @@ export default {
 	},
 	computed: {
 		taskInfo: function() {
-			return this.$t('tasks', 'Last modified {date}', { date: moment(this.task.modified, 'YYYY-MM-DDTHH:mm:ss').calendar() })
-				+ '<br />' + this.$t('tasks', 'Created {date}', { date: moment(this.task.created, 'YYYY-MM-DDTHH:mm:ss').calendar() })
-				+ (this.task.completed ? ('<br />' + this.$t('tasks', 'Completed {date}', { date: moment(this.task.completedDate, 'YYYY-MM-DDTHH:mm:ss').calendar() })) : '')
+			return this.$t('tasks', 'Last modified {date}', { date: this.task.modifiedMoment.calendar() })
+				+ '<br />' + this.$t('tasks', 'Created {date}', { date: this.task.createdMoment.calendar() })
+				+ (this.task.completed ? ('<br />' + this.$t('tasks', 'Completed {date}', { date: this.task.completedDateMoment.calendar() })) : '')
 		},
 		isAllDayPossible: function() {
 			return !this.task.calendar.readOnly && (this.task.due || this.task.start)
@@ -711,7 +711,7 @@ export default {
 		},
 
 		dateIcon: function(date) {
-			if (valid(date)) {
+			if (date.isValid()) {
 				var c = 'icon-color icon-calendar-due'
 				if (overdue(date)) {
 					c += ' icon-calendar-overdue'
@@ -726,11 +726,6 @@ export default {
 		 * Checks if a date is overdue
 		 */
 		overdue: overdue,
-
-		/**
-		 * Checks if a date is valid
-		 */
-		valid: valid,
 
 		editProperty: function(type, event) {
 			// don't start to edit the property again
@@ -749,11 +744,11 @@ export default {
 				// If we edit the due or the start date, inintialize it.
 				if (type === 'due') {
 					this.tmpTask.due = this.initDueDate()
-					this.tmpTask.start = moment(this.task.start, 'YYYY-MM-DDTHH:mm:ss')
+					this.tmpTask.start = this.task.startMoment
 				}
 				if (type === 'start') {
 					this.tmpTask.start = this.initStartDate()
-					this.tmpTask.due = moment(this.task.due, 'YYYY-MM-DDTHH:mm:ss')
+					this.tmpTask.due = this.task.dueMoment
 				}
 			}
 			if (type === 'summary' || type === 'note') {
@@ -804,9 +799,9 @@ export default {
 		 * @returns {Moment} The start date moment
 		 */
 		initStartDate: function() {
-			var start = moment(this.task.start, 'YYYY-MM-DDTHH:mm:ss')
+			var start = this.task.startMoment
 			if (!start.isValid()) {
-				var due = moment(this.task.due, 'YYYY-MM-DDTHH:mm:ss')
+				var due = this.task.dueMoment
 				var reference = moment().add(1, 'h')
 				if (due.isBefore(reference)) {
 					reference = due.subtract(1, 'm')
@@ -823,9 +818,9 @@ export default {
 		 * @returns {Moment} The due date moment
 		 */
 		initDueDate: function() {
-			var due = moment(this.task.due, 'YYYY-MM-DDTHH:mm:ss')
+			var due = this.task.dueMoment
 			if (!due.isValid()) {
-				var start = moment(this.task.start, 'YYYY-MM-DDTHH:mm:ss')
+				var start = this.task.startMoment
 				var reference = start.isAfter() ? start : moment()
 				if (this.task.allDay) {
 					reference.startOf('day').add(1, 'd')
