@@ -29,6 +29,7 @@ const calendarsData = [
 		isWriteable: () => { return true },
 		shares: [],
 		components: ['VTODO'],
+		calendarQuery: () => { return null },
 		tasks: [`
 BEGIN:VCALENDAR\n
 VERSION:2.0\n
@@ -181,6 +182,7 @@ END:VCALENDAR`
 		isWriteable: () => { return true },
 		shares: [],
 		components: ['VTODO', 'VEVENT'],
+		calendarQuery: () => { return null },
 		tasks: [`
 BEGIN:VCALENDAR\n
 VERSION:2.0\n
