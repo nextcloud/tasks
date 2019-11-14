@@ -28,7 +28,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		class="task-item"
 	>
 		<div :task-id="task.uri"
-			:class="{active: $route.params.taskId==task.uri}"
+			:class="{active: isTaskOpen()}"
 			class="task-body reactive"
 			type="task"
 			@click="navigate($event)"
@@ -72,7 +72,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<div class="task-status-container">
 					<TaskStatusDisplay :task="task" />
 				</div>
-				<div v-if="$route.params.collectionId=='week'" class="calendar">
+				<div v-if="collectionId=='week'" class="calendar">
 					<span :style="{'background-color': task.calendar.color}" class="calendar-indicator" />
 					<span class="calendar-name">{{ task.calendar.displayName }}</span>
 				</div>
@@ -132,6 +132,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<TaskBodyComponent v-for="subtask in filteredSubtasks"
 					:key="subtask.uid"
 					:task="subtask"
+					:collection-string="collectionString"
 					class="subtask"
 				/>
 			</task-drag-container>
@@ -140,7 +141,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { overdue, valid, sort, searchSubTasks } from '../store/storeHelper'
+import { overdue, valid, sort, searchSubTasks, isTaskInList } from '../store/storeHelper'
 import ClickOutside from 'vue-click-outside'
 import { mapGetters, mapActions } from 'vuex'
 import focus from '../directives/focus'
@@ -177,13 +178,18 @@ export default {
 		task: {
 			type: Object,
 			required: true
-		}
+		},
+		collectionString: {
+			type: String,
+			default: null,
+			required: false
+		},
 	},
 	data() {
 		return {
 			showSubtaskInput: false,
 			newTaskName: '',
-			isAddingTask: false
+			isAddingTask: false,
 		}
 	},
 	computed: {
@@ -192,6 +198,22 @@ export default {
 			sortDirection: 'sortDirection',
 			searchQuery: 'searchQuery',
 		}),
+
+		collectionId: function() {
+			if (this.collectionString) {
+				return this.collectionString.split('-')[0]
+			} else {
+				return null
+			}
+		},
+
+		collectionParam: function() {
+			try {
+				return this.collectionString.split('-')[1]
+			} catch {
+				return null
+			}
+		},
 
 		iconStar: function() {
 			if (+this.task.priority > 5) {
@@ -222,7 +244,9 @@ export default {
 		},
 
 		/**
-		 * Returns the subtasks filtered by completed state if necessary
+		 * Returns the subtasks filtered by completed state if necessary and
+		 * filtered by collections (for week, today, important and current) when
+		 * the task is not opened in details view.
 		 *
 		 * @returns {Array} the array with the subtasks to show
 		 */
@@ -231,6 +255,12 @@ export default {
 			if (this.task.hideCompletedSubtasks) {
 				subTasks = subTasks.filter(task => {
 					return !task.completed
+				})
+			}
+			if (['today', 'week', 'starred', 'current'].indexOf(this.collectionId) > -1
+				&& !this.isTaskOpen()) {
+				subTasks = subTasks.filter(task => {
+					return isTaskInList(task, this.collectionString) || this.isTaskOpen(task) || this.isDescendantOpen(task)
 				})
 			}
 			return sort([...subTasks], this.sortOrder, this.sortDirection)
@@ -256,42 +286,11 @@ export default {
 		 * @returns {Boolean} If we show the subtasks
 		 */
 		showSubtasks: function() {
-			if (!this.task.hideSubtasks || this.searchQuery || this.isTaskOpen || this.isDescendantOpen) {
+			if (!this.task.hideSubtasks || this.searchQuery || this.isTaskOpen() || this.isDescendantOpen()) {
 				return true
 			} else {
 				return false
 			}
-		},
-
-		/**
-		 * Checks whether the task is currently open in the details view
-		 *
-		 * @returns {Boolean} If it is open
-		 */
-		isTaskOpen: function() {
-			return this.task.uri === this.$route.params.taskId
-		},
-
-		/**
-		 * Checks whether one of the tasks descendants is currently open in the details view
-		 *
-		 * @returns {Boolean} If a descendeant is open
-		 */
-		isDescendantOpen: function() {
-			var taskId = this.$route.params.taskId
-			var checkSubtasksOpen = function subtasksOpen(tasks) {
-				for (var key in tasks) {
-					var task = tasks[key]
-					if (task.uri === taskId) {
-						return true
-					}
-					if (subtasksOpen(task.subTasks)) {
-						return true
-					}
-				}
-				return false
-			}
-			return checkSubtasksOpen(this.task.subTasks)
 		},
 	},
 
@@ -326,20 +325,64 @@ export default {
 		searchSubTasks: searchSubTasks,
 
 		/**
+		 * Checks whether the task is currently open in the details view
+		 *
+		 * @param {Task} task The task to check
+		 * @returns {Boolean} If it is open
+		 */
+		isTaskOpen: function(task = this.task) {
+			return (task.uri === this.$route.params.taskId) && (this.collectionParam === this.$route.params.collectionParam)
+		},
+
+		/**
+		 * Checks whether one of the tasks descendants is currently open in the details view
+		 *
+		 * @param {Task} task The task to check
+		 * @returns {Boolean} If a descendeant is open
+		 */
+		isDescendantOpen: function(task = this.task) {
+			if (this.collectionParam !== this.$route.params.collectionParam) {
+				return false
+			}
+			var taskId = this.$route.params.taskId
+			var checkSubtasksOpen = function subtasksOpen(tasks) {
+				for (var key in tasks) {
+					var task = tasks[key]
+					if (task.uri === taskId) {
+						return true
+					}
+					if (subtasksOpen(task.subTasks)) {
+						return true
+					}
+				}
+				return false
+			}
+			return checkSubtasksOpen(task.subTasks)
+		},
+
+		/**
 		 * Navigates to a different route, but checks if navigation is desired
 		 *
 		 * @param {Object} $event the event that triggered navigation
 		 * @param {String} route the route to navigate to
 		 */
 		navigate: function($event) {
-			if (!$event.target.classList.contains('no-nav') && this.$route.params.taskId !== this.task.uri) {
+			if (!$event.target.classList.contains('no-nav')
+				&& (this.$route.params.taskId !== this.task.uri || this.$route.params.collectionParam !== this.collectionParam)) {
 				if (!this.task.loadedCompleted) {
 					this.getTasksFromCalendar({ calendar: this.task.calendar, completed: true, related: this.task.uid })
 				}
 				if (this.$route.params.calendarId) {
 					this.$router.push({ name: 'calendarsTask', params: { calendarId: this.$route.params.calendarId, taskId: this.task.uri } })
-				} else if (this.$route.params.collectionId) {
-					this.$router.push({ name: 'collectionsTask', params: { collectionId: this.$route.params.collectionId, taskId: this.task.uri } })
+				} else if (this.collectionId) {
+					if (this.collectionParam) {
+						this.$router.push({
+							name: 'collectionsParamTask',
+							params: { collectionId: this.collectionId, collectionParam: this.collectionParam, taskId: this.task.uri }
+						})
+					} else {
+						this.$router.push({ name: 'collectionsTask', params: { collectionId: this.collectionId, taskId: this.task.uri } })
+					}
 				}
 			}
 		},
@@ -356,13 +399,13 @@ export default {
 
 			// If the task is created in a collection view,
 			// set the appropriate properties.
-			if (this.$route.params.collectionId === 'starred') {
+			if (this.collectionId === 'starred') {
 				task.priority = '1'
 			}
-			if (this.$route.params.collectionId === 'today') {
+			if (this.collectionId === 'today') {
 				task.due = moment().startOf('day').format('YYYY-MM-DDTHH:mm:ss')
 			}
-			if (this.$route.params.collectionId === 'current') {
+			if (this.collectionId === 'current') {
 				task.start = moment().format('YYYY-MM-DDTHH:mm:ss')
 			}
 

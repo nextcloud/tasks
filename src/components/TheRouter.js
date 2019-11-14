@@ -35,7 +35,18 @@ const routes = [
 	// reliably with router-link due to
 	// https://github.com/vuejs/vue-router/issues/419
 	{ name: 'collections', path: '/collections/:collectionId', component: Collections, props: true },
-	{ name: 'collectionsTask', path: '/collections/:collectionId/tasks/:taskId', components: { default: Collections, details: TheDetails }, props: { default: true } },
+	{
+		name: 'collectionsTask',
+		path: '/collections/:collectionId/tasks/:taskId',
+		components: { default: Collections, details: TheDetails },
+		props: { default: true }
+	},
+	{
+		name: 'collectionsParamTask',
+		path: '/collections/:collectionId/:collectionParam/tasks/:taskId',
+		components: { default: Collections, details: TheDetails },
+		props: { default: true }
+	},
 	{ name: 'calendars', path: '/calendars/:calendarId', component: Calendar, props: true },
 	{ name: 'calendarsTask', path: '/calendars/:calendarId/tasks/:taskId', components: { default: Calendar, details: TheDetails }, props: { default: true } }
 ]

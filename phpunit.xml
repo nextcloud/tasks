@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<phpunit bootstrap="tests/bootstrap.php"
+<phpunit bootstrap="tests/php/bootstrap.php"
 		 verbose="true"
 		 colors="true"
 		 timeoutForSmallTests="900"
 		 timeoutForMediumTests="900"
 		 timeoutForLargeTests="900">
 	<testsuite name='Tasks app tests'>
-		<directory>./tests/unit</directory>
+		<directory>./tests/php/unit</directory>
 	</testsuite>
 	<!-- filters for code coverage -->
 	<filter>

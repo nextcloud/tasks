@@ -477,8 +477,9 @@ const actions = {
 	 * @returns {Promise}
 	 */
 	async getTasksFromCalendar(context, { calendar, completed = false, related = null }) {
-		return findVTODObyState(calendar, completed, related)
-			.then((response) => {
+		try {
+			const response = await findVTODObyState(calendar, completed, related)
+			if (response) {
 				// We don't want to lose the url information
 				// so we need to parse one by one
 				const tasks = response.map(item => {
@@ -532,14 +533,14 @@ const actions = {
 				context.commit('appendTasksToCalendar', { calendar, tasks })
 				context.commit('appendTasks', tasks)
 				return tasks
-			})
-			.catch((error) => {
-				// unrecoverable error, if no tasks were loaded,
-				// remove the calendar
-				// TODO: create a failed calendar state and show that there was an issue?
-				context.commit('deleteCalendar', calendar)
-				console.error(error)
-			})
+			}
+		} catch (error) {
+			// unrecoverable error, if no tasks were loaded,
+			// remove the calendar
+			// TODO: create a failed calendar state and show that there was an issue?
+			context.commit('deleteCalendar', calendar)
+			console.error(error)
+		}
 	},
 
 	/**

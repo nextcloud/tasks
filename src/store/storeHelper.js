@@ -28,36 +28,86 @@ import ICAL from 'ical.js'
  *
  * @param {Object} task The task to check
  * @param {String} listId The id of the list in question
+ * @param {Boolean} checkSubtasks Whether we also check if a descendant task matches
  * @returns {Boolean}
  */
-function isTaskInList(task, listId) {
+function isTaskInList(task, listId, checkSubtasks = true) {
+	const parts = listId.split('-')
+	listId = parts[0]
+	const day = parts[1] ? parts[1] : null
 	switch (listId) {
 	case 'completed':
-		return task.completed === true
+		return task.completed
 	case 'all':
-		return task.completed === false
+		return !task.completed
 	case 'current':
-		return task.completed === false && current(task.start, task.due)
+		return !task.completed && testTask(task, isTaskCurrent, checkSubtasks)
 	case 'starred':
-		return task.completed === false && (task.priority > 0 && task.priority < 5)
+		return !task.completed && testTask(task, isTaskPriority, checkSubtasks)
 	case 'today':
-		return task.completed === false && (today(task.start) || today(task.due))
+		return !task.completed && testTask(task, isTaskToday, checkSubtasks)
 	case 'week':
-		return task.completed === false && (week(task.start) || week(task.due))
+		if (!day) {
+			return !task.completed && testTask(task, isTaskWeek, checkSubtasks)
+		} else {
+			return !task.completed && testTask(task, (task) => isTaskDay(task, parseInt(day)), checkSubtasks)
+		}
 	default:
 		return '' + task.calendar.id === '' + listId
 	}
 }
 
 /**
- * Checks if the start or due date have already passed
+ * Checks for a task (and possibly its subtasks) if the given test function returns true
  *
- * @param {String} start The start date
- * @param {String} due The due date
+ * @param {Object} task The task to check
+ * @param {Function} testFunction The function to apply on the task
+ * @param {Boolean} checkSubtasks Whether to check subtasks
  * @returns {Boolean}
  */
-function current(start, due) {
-	return !valid(start) || moment(start, 'YYYYMMDDTHHmmss').diff(moment(), 'days', true) < 0 || moment(due, 'YYYYMMDDTHHmmss').diff(moment(), 'days', true) < 0
+function testTask(task, testFunction, checkSubtasks = false) {
+	if (!task.completed && testFunction(task)) {
+		return true
+	}
+	if (checkSubtasks) {
+		for (var key in task.subTasks) {
+			var subTask = task.subTasks[key]
+			if (testTask(subTask, testFunction, checkSubtasks)) {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+/**
+ * Checks if the task has a high priority
+ *
+ * @param {Object} task The task to check
+ * @returns {Boolean}
+ */
+function isTaskPriority(task) {
+	return (task.priority > 0 && task.priority < 5)
+}
+
+/**
+ * Checks if the start or due date have already passed
+ *
+ * @param {Object} task The task to check
+ * @returns {Boolean}
+ */
+function isTaskCurrent(task) {
+	return !valid(task.start) || moment(task.start, 'YYYYMMDDTHHmmss').diff(moment(), 'days', true) < 0 || moment(task.due, 'YYYYMMDDTHHmmss').diff(moment(), 'days', true) < 0
+}
+
+/**
+ * Checks if the start or due date of a task are today
+ *
+ * @param {Object} task The task to check
+ * @returns {Boolean}
+ */
+function isTaskToday(task) {
+	return (today(task.start) || today(task.due))
 }
 
 /**
@@ -71,6 +121,16 @@ function today(date) {
 }
 
 /**
+ * Checks if the start or due date of a task are this week
+ *
+ * @param {Object} task The task to check
+ * @returns {Boolean}
+ */
+function isTaskWeek(task) {
+	return (week(task.start) || week(task.due))
+}
+
+/**
  * Checks if a date lies within the next week
  *
  * @param {String} date The date
@@ -78,6 +138,46 @@ function today(date) {
  */
 function week(date) {
 	return valid(date) && moment(date, 'YYYYMMDDTHHmmss').diff(moment().startOf('day'), 'days', true) < 7
+}
+
+/**
+ * Checks if the start or due date of a task are at a given day
+ *
+ * @param {Object} task The task to check
+ * @param {Integer} day The day
+ * @returns {Boolean}
+ */
+function isTaskDay(task, day) {
+	let diff = dayOfTask(task)
+	diff = (diff < 0) ? 0 : diff
+	return diff === day
+}
+
+function dayOfTask(task) {
+	var diff, startdiff, duediff
+	var start = moment(task.start, 'YYYYMMDDTHHmmss').startOf('day')
+	var due = moment(task.due, 'YYYYMMDDTHHmmss').startOf('day')
+
+	// Add all tasks whose start date will be reached at that day.
+	if (start.isValid() && !due.isValid()) {
+		diff = start.diff(moment().startOf('day'), 'days')
+	}
+
+	// Add all tasks whose due date will be reached at that day.
+	if (due.isValid() && !start.isValid()) {
+		diff = due.diff(moment().startOf('day'), 'days')
+	}
+
+	// Add all tasks whose due or start date will be reached at that day.
+	// Add the task to the day at which either due or start date are reached first.
+	if (start.isValid() && due.isValid()) {
+		startdiff = start.diff(moment().startOf('day'), 'days')
+		duediff = due.diff(moment().startOf('day'), 'days')
+		// chose the date that is reached first
+		diff = (startdiff < duediff) ? startdiff : duediff
+	}
+
+	return diff
 }
 
 /**
