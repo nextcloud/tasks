@@ -32,6 +32,7 @@ OC.L10N.register(
     "[Due today]" : "[Poteče danes]",
     "[Was due today at] LT" : "[Je poteklo danes ob] LT",
     "[Due today at] LT" : "[Poteče danes ob] LT",
+    "Canceled" : "Preklicano",
     "Edit" : "Uredi",
     "Download" : "Prejmi",
     "Save" : "Shrani",
