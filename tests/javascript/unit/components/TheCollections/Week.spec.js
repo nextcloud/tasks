@@ -71,4 +71,42 @@ describe('Week.vue', () => {
 		expect(wrapper.find('div[day="0"] li[task-id="pwen2kz37g.ics"]').exists()).toBe(true)	// Shown now, because parent is active
 		expect(wrapper.find('div[day="2"] li[task-id="pwen2kz37g.ics"]').exists()).toBe(false)	// Not shown, since parent is not active
 	})
+
+	it('Checks that an active task and its ancestors are shown', () => {
+		const wrapper = mount(Week, { localVue, store, router })
+		let taskAtDay0 = wrapper.find('div[day="0"] li[task-id="pwen8kz22g.ics"] > div')
+
+		if (wrapper.vm.$route.params.taskId !== null) {
+			router.push({ name: 'collections', params: { collectionId: 'week' } })
+		}
+		expect(taskAtDay0.classes('active')).toBe(false)
+		
+		expect(wrapper.find('div[day="0"] li[task-id="pwen8kz22g.ics"]').exists()).toBe(true)	// Shown, since it is due today
+		expect(wrapper.find('div[day="0"] li[task-id="pwen2kz37g.ics"]').exists()).toBe(false)	// Not shown, since it is only due in a month
+		expect(wrapper.find('div[day="0"] li[task-id="pwen2kz38g.ics"]').exists()).toBe(false)	// Not shown, since it is not due at all
+
+		// Click on first task to open it
+		taskAtDay0.trigger('click')
+		expect(taskAtDay0.classes('active')).toBe(true)
+
+		expect(wrapper.find('div[day="0"] li[task-id="pwen2kz37g.ics"]').exists()).toBe(true)	// Shown now, since parent is active
+		expect(wrapper.find('div[day="0"] li[task-id="pwen7kz22g.ics"]').exists()).toBe(true)	// Shown now, since parent is active
+
+		let subtaskAtDay0 = wrapper.find('div[day="0"] li[task-id="pwen2kz37g.ics"] > div')
+		// Click on subtask to open it
+		subtaskAtDay0.trigger('click')
+		expect(subtaskAtDay0.classes('active')).toBe(true)
+
+		expect(wrapper.find('div[day="0"] li[task-id="pwen2kz38g.ics"]').exists()).toBe(true)	// Shown now, since parent is active
+		expect(wrapper.find('div[day="0"] li[task-id="pwen7kz22g.ics"]').exists()).toBe(false)	// Not shown, since only sibling is active
+
+		let subsubtaskAtDay0 = wrapper.find('div[day="0"] li[task-id="pwen2kz38g.ics"] > div')
+		// Click on subtask to open it
+		subsubtaskAtDay0.trigger('click')
+		expect(subsubtaskAtDay0.classes('active')).toBe(true)
+		
+		expect(wrapper.find('div[day="0"] li[task-id="pwen8kz22g.ics"]').exists()).toBe(true)	// Shown, since it is due today
+		expect(wrapper.find('div[day="0"] li[task-id="pwen2kz37g.ics"]').exists()).toBe(true)	// Shown, since child is active
+		expect(wrapper.find('div[day="0"] li[task-id="pwen2kz38g.ics"]').exists()).toBe(true)	// Shown, since it is active
+	})
 })
