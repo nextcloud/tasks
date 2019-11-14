@@ -1,23 +1,60 @@
 import { sort } from '../../../../src/store/storeHelper'
+import Task from '../../../../src/models/task'
 
-const tasks = [
-	{
-		id: 1,
-		due: '20191119T183901'
-	},
-	{
-		id: 2,
-		due: '20181119T183901'
-	},
-	{
-		id: 3,
-		due: null
-	},
-	{
-		id: 4,
-		due: '20151119T183901'
-	},
+const vCalendars = [`
+BEGIN:VCALENDAR\n
+VERSION:2.0\n
+PRODID:-//Nextcloud Tasks 0.11.3\n
+BEGIN:VTODO\n
+CREATED:20170101T180000\n
+DTSTAMP:20180101T180000\n
+LAST-MODIFIED:20180101T180000\n
+UID:task01\n
+SUMMARY:Test 1\n
+DUE:20191119T183901\n
+END:VTODO\n
+END:VCALENDAR`,
+`
+BEGIN:VCALENDAR\n
+VERSION:2.0\n
+PRODID:-//Nextcloud Tasks 0.11.3\n
+BEGIN:VTODO\n
+CREATED:20170101T180000\n
+DTSTAMP:20180101T180000\n
+LAST-MODIFIED:20180101T180000\n
+UID:task02\n
+SUMMARY:Test 1\n
+DUE:20181119T183901\n
+END:VTODO\n
+END:VCALENDAR`,
+`
+BEGIN:VCALENDAR\n
+VERSION:2.0\n
+PRODID:-//Nextcloud Tasks 0.11.3\n
+BEGIN:VTODO\n
+CREATED:20170101T180000\n
+DTSTAMP:20180101T180000\n
+LAST-MODIFIED:20180101T180000\n
+UID:task03\n
+SUMMARY:Test 1\n
+END:VTODO\n
+END:VCALENDAR`,
+`
+BEGIN:VCALENDAR\n
+VERSION:2.0\n
+PRODID:-//Nextcloud Tasks 0.11.3\n
+BEGIN:VTODO\n
+CREATED:20170101T180000\n
+DTSTAMP:20180101T180000\n
+LAST-MODIFIED:20180101T180000\n
+UID:task04\n
+SUMMARY:Test 1\n
+DUE:20151119T183901\n
+END:VTODO\n
+END:VCALENDAR`,
 ]
+
+const tasks = vCalendars.map((vCalendar) => {new Task(vCalendar) })
 
 describe('storeHelper', () => {
 	'use strict'
@@ -34,8 +71,5 @@ describe('storeHelper', () => {
 		const expectedTasks = [tasks[2], tasks[0], tasks[1], tasks[3]]
 		const receivedTasks = sort(clonedTasks, 'due', 1)
 		expect(receivedTasks).toEqual(expectedTasks)
-	})
-
-	it("Tests if correct tasks are found for the 'current' collection.", () => {
 	})
 })
