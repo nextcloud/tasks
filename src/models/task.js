@@ -87,13 +87,16 @@ export default class Task {
 		var comp = this.vtodo.getFirstPropertyValue('completed')
 		this._completed = !!comp
 		this._completedDate = comp ? comp.toJSDate() : null
+		this._completedDateMoment = moment(this._completedDate, 'YYYYMMDDTHHmmss')
 		this._status = this.vtodo.getFirstPropertyValue('status')
 		this._note = this.vtodo.getFirstPropertyValue('description') || ''
 		this._related = this.vtodo.getFirstPropertyValue('related-to') || null
 		this._hideSubtaks = +this.vtodo.getFirstPropertyValue('x-oc-hidesubtasks') || 0
 		this._hideCompletedSubtaks = +this.vtodo.getFirstPropertyValue('x-oc-hidecompletedsubtasks') || 0
 		this._start = this.vtodo.getFirstPropertyValue('dtstart')
+		this._startMoment = moment(this._start, 'YYYYMMDDTHHmmss')
 		this._due = this.vtodo.getFirstPropertyValue('due')
+		this._dueMoment = moment(this._due, 'YYYYMMDDTHHmmss')
 		var start = this.vtodo.getFirstPropertyValue('dtstart')
 		var due = this.vtodo.getFirstPropertyValue('due')
 		var d = due || start
@@ -102,7 +105,9 @@ export default class Task {
 		var categories = this.vtodo.getFirstProperty('categories')
 		this._categories = categories ? categories.getValues() : []
 		this._modified = this.vtodo.getFirstPropertyValue('last-modified')
+		this._modifiedMoment = moment(this._modified, 'YYYYMMDDTHHmmss')
 		this._created = this.vtodo.getFirstPropertyValue('created')
+		this._createdMoment = moment(this._created, 'YYYYMMDDTHHmmss')
 		this._class = this.vtodo.getFirstPropertyValue('class') || 'PUBLIC'
 		this._pinned = this.vtodo.getFirstPropertyValue('x-pinned') === 'true'
 
@@ -290,10 +295,15 @@ export default class Task {
 		var comp = this.vtodo.getFirstPropertyValue('completed')
 		this._completed = !!comp
 		this._completedDate = comp ? comp.toJSDate() : null
+		this._completedDateMoment = moment(this._completedDate, 'YYYYMMDDTHHmmss')
 	}
 
 	get completedDate() {
 		return this._completedDate
+	}
+
+	get completedDateMoment() {
+		return this._completedDateMoment.clone()
 	}
 
 	get status() {
@@ -394,6 +404,11 @@ export default class Task {
 		}
 		this.updateLastModified()
 		this._start = this.vtodo.getFirstPropertyValue('dtstart')
+		this._startMoment = moment(this._start, 'YYYYMMDDTHHmmss')
+	}
+
+	get startMoment() {
+		return this._startMoment.clone()
 	}
 
 	get due() {
@@ -408,6 +423,11 @@ export default class Task {
 		}
 		this.updateLastModified()
 		this._due = this.vtodo.getFirstPropertyValue('due')
+		this._dueMoment = moment(this._due, 'YYYYMMDDTHHmmss')
+	}
+
+	get dueMoment() {
+		return this._dueMoment.clone()
 	}
 
 	get allDay() {
@@ -487,20 +507,30 @@ export default class Task {
 		this.vtodo.updatePropertyWithValue('last-modified', now)
 		this.vtodo.updatePropertyWithValue('dtstamp', now)
 		this._modified = now
+		this._modifiedMoment = moment(this._modified, 'YYYYMMDDTHHmmss')
 	}
 
 	get modified() {
 		return this._modified
 	}
 
+	get modifiedMoment() {
+		return this._modifiedMoment.clone()
+	}
+
 	get created() {
 		return this._created
+	}
+
+	get createdMoment() {
+		return this._createdMoment.clone()
 	}
 
 	set created(createdDate) {
 		this.vtodo.updatePropertyWithValue('created', createdDate)
 		this.updateLastModified()
 		this._created = this.vtodo.getFirstPropertyValue('created')
+		this._createdMoment = moment(this._created, 'YYYYMMDDTHHmmss')
 	}
 
 	get class() {

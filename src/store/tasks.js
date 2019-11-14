@@ -454,9 +454,9 @@ const mutations = {
 		} else {
 			// Check, that the due date is after the start date.
 			// If it is not, shift the start date to keep the difference between start and due equal.
-			var start = moment(task.start, 'YYYY-MM-DDTHH:mm:ss')
+			var start = task.startMoment
 			if (start.isValid() && due.isBefore(start)) {
-				var currentdue = moment(task.due, 'YYYY-MM-DDTHH:mm:ss')
+				var currentdue = task.dueMoment
 				if (currentdue.isValid()) {
 					start.subtract(currentdue.diff(due), 'ms')
 				} else {
@@ -483,9 +483,9 @@ const mutations = {
 		} else {
 			// Check, that the start date is before the due date.
 			// If it is not, shift the due date to keep the difference between start and due equal.
-			var due = moment(task.due, 'YYYY-MM-DDTHH:mm:ss')
+			var due = task.dueMoment
 			if (due.isValid() && start.isAfter(due)) {
-				var currentstart = moment(task.start, 'YYYY-MM-DDTHH:mm:ss')
+				var currentstart = task.startMoment
 				if (currentstart.isValid()) {
 					due.add(start.diff(currentstart), 'ms')
 				} else {
@@ -1032,8 +1032,8 @@ const actions = {
 	 * @param {Integer} day The day to set
 	 */
 	async setDate(context, { task, day }) {
-		var start = moment(task.start, 'YYYYMMDDTHHmmss').startOf('day')
-		var due = moment(task.due, 'YYYYMMDDTHHmmss').startOf('day')
+		var start = task.startMoment.startOf('day')
+		var due = task.dueMoment.startOf('day')
 		day = moment().startOf('day').add(day, 'days')
 
 		var diff
@@ -1042,7 +1042,7 @@ const actions = {
 			diff = start.diff(moment().startOf('day'), 'days')
 			diff = diff < 0 ? 0 : diff
 			if (diff !== day) {
-				var newStart = moment(task.start, 'YYYYMMDDTHHmmss').year(day.year()).month(day.month()).date(day.date())
+				var newStart = task.startMoment.year(day.year()).month(day.month()).date(day.date())
 				context.commit('setStart', { task: task, start: newStart })
 				context.dispatch('scheduleTaskUpdate', task)
 			}
@@ -1051,7 +1051,7 @@ const actions = {
 			diff = due.diff(moment().startOf('day'), 'days')
 			diff = diff < 0 ? 0 : diff
 			if (diff !== day) {
-				var newDue = moment(task.due, 'YYYYMMDDTHHmmss').year(day.year()).month(day.month()).date(day.date())
+				var newDue = task.dueMoment.year(day.year()).month(day.month()).date(day.date())
 				context.commit('setDue', { task: task, due: newDue })
 				context.dispatch('scheduleTaskUpdate', task)
 			}

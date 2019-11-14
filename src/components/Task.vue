@@ -76,8 +76,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<span :style="{'background-color': task.calendar.color}" class="calendar-indicator" />
 					<span class="calendar-name">{{ task.calendar.displayName }}</span>
 				</div>
-				<div v-if="task.due" :class="{overdue: overdue(task.due)}" class="duedate">
-					{{ task.due | formatDate }}
+				<div v-if="task.due" :class="{overdue: overdue(task.dueMoment)}" class="duedate">
+					{{ task.dueMoment | formatDate }}
 				</div>
 				<div v-if="task.pinned">
 					<span class="icon icon-bw icon-pinned" />
@@ -141,7 +141,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { overdue, valid, sort, searchSubTasks, isTaskInList } from '../store/storeHelper'
+import { overdue, sort, searchSubTasks, isTaskInList } from '../store/storeHelper'
 import ClickOutside from 'vue-click-outside'
 import { mapGetters, mapActions } from 'vuex'
 import focus from '../directives/focus'
@@ -162,8 +162,8 @@ export default {
 	},
 	filters: {
 		formatDate: function(date) {
-			return valid(date)
-				? moment(date, 'YYYYMMDDTHHmmss').calendar(null, {
+			return date.isValid()
+				? date.calendar(null, {
 					lastDay: OCA.Tasks.$t('tasks', '[Yesterday]'),
 					sameDay: OCA.Tasks.$t('tasks', '[Today]'),
 					nextDay: OCA.Tasks.$t('tasks', '[Tomorrow]'),
