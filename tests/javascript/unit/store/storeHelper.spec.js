@@ -54,7 +54,7 @@ END:VTODO\n
 END:VCALENDAR`,
 ]
 
-const tasks = vCalendars.map((vCalendar) => {new Task(vCalendar) })
+const tasks = vCalendars.map((vCalendar) => { return new Task(vCalendar) })
 
 describe('storeHelper', () => {
 	'use strict'
