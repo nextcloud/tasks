@@ -28,7 +28,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		class="task-item"
 	>
 		<div :task-id="task.uri"
-			:class="{active: isTaskOpen}"
+			:class="{active: isTaskOpen()}"
 			class="task-body reactive"
 			type="task"
 			@click="navigate($event)"
@@ -255,9 +255,9 @@ export default {
 				})
 			}
 			if (['today', 'week', 'starred', 'current'].indexOf(this.collectionId) > -1
-				&& !this.isTaskOpen) {
+				&& !this.isTaskOpen()) {
 				subTasks = subTasks.filter(task => {
-					return isTaskInList(task, this.collectionString)
+					return isTaskInList(task, this.collectionString) || this.isTaskOpen(task) || this.isDescendantOpen(task)
 				})
 			}
 			return sort([...subTasks], this.sortOrder, this.sortDirection)
@@ -283,42 +283,11 @@ export default {
 		 * @returns {Boolean} If we show the subtasks
 		 */
 		showSubtasks: function() {
-			if (!this.task.hideSubtasks || this.searchQuery || this.isTaskOpen || this.isDescendantOpen) {
+			if (!this.task.hideSubtasks || this.searchQuery || this.isTaskOpen() || this.isDescendantOpen()) {
 				return true
 			} else {
 				return false
 			}
-		},
-
-		/**
-		 * Checks whether the task is currently open in the details view
-		 *
-		 * @returns {Boolean} If it is open
-		 */
-		isTaskOpen: function() {
-			return (this.task.uri === this.$route.params.taskId) && (this.collectionParam === this.$route.params.collectionParam)
-		},
-
-		/**
-		 * Checks whether one of the tasks descendants is currently open in the details view
-		 *
-		 * @returns {Boolean} If a descendeant is open
-		 */
-		isDescendantOpen: function() {
-			var taskId = this.$route.params.taskId
-			var checkSubtasksOpen = function subtasksOpen(tasks) {
-				for (var key in tasks) {
-					var task = tasks[key]
-					if (task.uri === taskId) {
-						return true
-					}
-					if (subtasksOpen(task.subTasks)) {
-						return true
-					}
-				}
-				return false
-			}
-			return checkSubtasksOpen(this.task.subTasks)
 		},
 	},
 
@@ -351,6 +320,42 @@ export default {
 		 * @returns {Boolean} If the task matches
 		 */
 		searchSubTasks: searchSubTasks,
+
+		/**
+		 * Checks whether the task is currently open in the details view
+		 *
+		 * @param {Task} task The task to check
+		 * @returns {Boolean} If it is open
+		 */
+		isTaskOpen: function(task = this.task) {
+			return (task.uri === this.$route.params.taskId) && (this.collectionParam === this.$route.params.collectionParam)
+		},
+
+		/**
+		 * Checks whether one of the tasks descendants is currently open in the details view
+		 *
+		 * @param {Task} task The task to check
+		 * @returns {Boolean} If a descendeant is open
+		 */
+		isDescendantOpen: function(task = this.task) {
+			if (this.collectionParam !== this.$route.params.collectionParam) {
+				return false
+			}
+			var taskId = this.$route.params.taskId
+			var checkSubtasksOpen = function subtasksOpen(tasks) {
+				for (var key in tasks) {
+					var task = tasks[key]
+					if (task.uri === taskId) {
+						return true
+					}
+					if (subtasksOpen(task.subTasks)) {
+						return true
+					}
+				}
+				return false
+			}
+			return checkSubtasksOpen(task.subTasks)
+		},
 
 		/**
 		 * Navigates to a different route, but checks if navigation is desired
