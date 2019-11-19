@@ -77,7 +77,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<span class="calendar-name">{{ task.calendar.displayName }}</span>
 				</div>
 				<div v-if="task.due" :class="{overdue: overdue(task.dueMoment)}" class="duedate">
-					{{ task.dueMoment | formatDate }}
+					{{ dueDateString }}
 				</div>
 				<div v-if="task.pinned">
 					<span class="icon icon-bw icon-pinned" />
@@ -160,20 +160,6 @@ export default {
 		TaskStatusDisplay,
 		TaskDragContainer,
 	},
-	filters: {
-		formatDate: function(date) {
-			return date.isValid()
-				? date.calendar(null, {
-					lastDay: OCA.Tasks.$t('tasks', '[Yesterday]'),
-					sameDay: OCA.Tasks.$t('tasks', '[Today]'),
-					nextDay: OCA.Tasks.$t('tasks', '[Tomorrow]'),
-					lastWeek: 'L',
-					nextWeek: 'L',
-					sameElse: 'L'
-				})
-				: ''
-		}
-	},
 	props: {
 		task: {
 			type: Object,
@@ -198,6 +184,19 @@ export default {
 			sortDirection: 'sortDirection',
 			searchQuery: 'searchQuery',
 		}),
+
+		dueDateString: function() {
+			return this.task.dueMoment.isValid()
+				? this.task.dueMoment.calendar(null, {
+					lastDay: this.$t('tasks', '[Yesterday]'),
+					sameDay: this.$t('tasks', '[Today]'),
+					nextDay: this.$t('tasks', '[Tomorrow]'),
+					lastWeek: 'L',
+					nextWeek: 'L',
+					sameElse: 'L'
+				})
+				: ''
+		},
 
 		collectionId: function() {
 			if (this.collectionString) {

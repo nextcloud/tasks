@@ -28,7 +28,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				class="grouped-tasks ui-droppable"
 			>
 				<h2 class="heading">
-					{{ day.diff | formatDay }}
+					{{ dayString(day.diff) }}
 				</h2>
 				<task-drag-container
 					:collection-id="'week-' + day.diff"
@@ -58,20 +58,6 @@ export default {
 		Task,
 		SortorderDropdown,
 		TaskDragContainer,
-	},
-	filters: {
-		formatDay: function(day) {
-			var date = moment().add(day, 'day')
-			var dayString
-			if (day === 0) {
-				dayString = OCA.Tasks.$t('tasks', 'Today')
-			} else if (day === 1) {
-				dayString = OCA.Tasks.$t('tasks', 'Tomorrow')
-			} else {
-				dayString = date.format('dddd')
-			}
-			return dayString + ', ' + date.format('LL')
-		}
 	},
 	computed: {
 		...mapGetters({
@@ -108,7 +94,20 @@ export default {
 		}
 	},
 	methods: {
-		sort
+		sort,
+
+		dayString: function(day) {
+			var date = moment().add(day, 'day')
+			var dayString
+			if (day === 0) {
+				dayString = this.$t('tasks', 'Today')
+			} else if (day === 1) {
+				dayString = this.$t('tasks', 'Tomorrow')
+			} else {
+				dayString = date.format('dddd')
+			}
+			return dayString + ', ' + date.format('LL')
+		},
 	}
 }
 </script>
