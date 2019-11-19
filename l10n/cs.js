@@ -22,6 +22,7 @@ OC.L10N.register(
     "Deleted all completed tasks from calendar \"{calendar}\"." : "Smazány všechny dokončené úkoly z kalendáře „{calendar}“.",
     "No errors" : "Bez chyb",
     "Open your browser console for more details" : "Další podrobnosti získáte otevřením konzole webového prohlížeče",
+    "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["Toto vymaže {taskCount} dokončený úkol a jeho dílčí úkoly z „{calendar}“.","Toto vymaže {taskCount} dokončené úkoly a jejich dílčí úkoly z „{calendar}“.","Toto vymaže {taskCount} dokončených úkolů a jejich dílčí úkoly z „{calendar}“.","Toto vymaže {taskCount} dokončené úkoly a jejich dílčí úkoly z „{calendar}“."],
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["Nedaří se smazat {failedCount} úkol.","Nedaří se smazat {failedCount} úkoly.","Nedaří se smazat {failedCount} úkolů.","Nedaří se smazat {failedCount} úkoly."],
     "Load all completed tasks." : "Načíst všechny dokončené úlohy.",
     "Change sort order" : "Změnit řazení",
