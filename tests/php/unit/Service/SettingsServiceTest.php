@@ -57,7 +57,8 @@ class SettingsServiceTest extends TestCase {
 			'showHidden' => 1,
 			'sortOrder' => 'default',
 			'sortDirection' => false,
-			'userID' => $this->userId
+			'userID' => $this->userId,
+			'allDay' => false
 		];
 
 		$map = [
@@ -86,6 +87,13 @@ class SettingsServiceTest extends TestCase {
 				$this->userId,
 				$this->appName,
 				'various_sortDirection',
+				'',
+				false
+			],
+			[
+				$this->userId,
+				$this->appName,
+				'various_allDay',
 				'',
 				false
 			]
