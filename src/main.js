@@ -24,7 +24,7 @@ import Vue from 'vue'
 
 import App from './app'
 
-import router from './components/TheRouter'
+import router from './router'
 import store from './store/store'
 import { sync } from 'vuex-router-sync'
 import VTooltip from 'v-tooltip'
