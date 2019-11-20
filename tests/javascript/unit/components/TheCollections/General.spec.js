@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import General from '../../../../../src/components/TheCollections/General'
-import router from '../../../../../src/components/TheRouter'
+import router from '../../../../../src/router'
 
 import { store, localVue } from '../../setupStore'
 

@@ -26,7 +26,7 @@ import Task from '../models/task'
 import { isParentInList, momentToICALTime } from './storeHelper'
 import ICAL from 'ical.js'
 import TaskStatus from '../models/taskStatus'
-import router from '../components/TheRouter'
+import router from '../router'
 import { findVTODObyUid } from './cdav-requests'
 
 Vue.use(Vuex)

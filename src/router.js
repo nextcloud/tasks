@@ -22,9 +22,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Collections from './TheCollections/Collections'
-import Calendar from './TheCollections/Calendar'
-import TheDetails from './TheDetails'
+import Collections from './components/TheCollections/Collections'
+import Calendar from './components/TheCollections/Calendar'
+import TheDetails from './components/TheDetails'
 
 const routes = [
 	// using
