@@ -88,7 +88,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									:type="'date'" :placeholder="$t('tasks', 'Set start date')"
 									class="date" @change="setStartDate"
 								/>
-								<DatetimePicker v-if="!task.allDay" :value="tmpTask.start" :lang="lang"
+								<DatetimePicker v-if="!allDay" :value="tmpTask.start" :lang="lang"
 									:format="timeFormat" :clearable="false" :time-picker-options="timePickerOptions"
 									:type="'time'" :placeholder="$t('tasks', 'Set start time')"
 									class="time" @change="setStartTime"
@@ -122,7 +122,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									:type="'date'" :placeholder="$t('tasks', 'Set due date')"
 									class="date" @change="setDueDate"
 								/>
-								<DatetimePicker v-if="!task.allDay" :value="tmpTask.due" :lang="lang"
+								<DatetimePicker v-if="!allDay" :value="tmpTask.due" :lang="lang"
 									:format="timeFormat" :clearable="false" :time-picker-options="timePickerOptions"
 									:type="'time'" :placeholder="$t('tasks', 'Set due time')"
 									class="time" @change="setDueTime"
@@ -147,8 +147,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 								class="checkbox"
 								name="isAllDayPossible"
 								:class="{'disabled': task.calendar.readOnly}"
-								:aria-checked="task.allDay"
-								:checked="task.allDay"
+								:aria-checked="allDay"
+								:checked="allDay"
 								:disabled="task.calendar.readOnly"
 								@click="toggleAllDay(task)"
 							>
@@ -433,10 +433,23 @@ export default {
 		}
 	},
 	computed: {
+		/**
+		 * Whether the dates of a task are all-day
+		 * When no dates are set, we consider the last used value.
+		 *
+		 * @returns {Boolean} Are the dates all-day
+		 */
+		allDay: function() {
+			if (this.task.startMoment.isValid() || this.task.dueMoment.isValid()) {
+				return this.task.allDay
+			} else {
+				return this.$store.state.settings.settings.allDay
+			}
+		},
 		startDateString: function() {
 			const $t = this.$t
 			if (this.task.startMoment.isValid()) {
-				if (this.task.allDay) {
+				if (this.allDay) {
 					return this.task.startMoment.calendar(null, {
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						sameDay: this.$t('tasks', '[Starts today]'),
@@ -495,7 +508,7 @@ export default {
 		dueDateString: function() {
 			const $t = this.$t
 			if (this.task.dueMoment.isValid()) {
-				if (this.task.allDay) {
+				if (this.allDay) {
 					return this.task.dueMoment.calendar(null, {
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						sameDay: this.$t('tasks', '[Due today]'),
@@ -787,10 +800,10 @@ export default {
 				this.setPercentComplete({ task: this.task, complete: value })
 				break
 			case 'start':
-				this.setStart({ task: this.task, start: value })
+				this.setStart({ task: this.task, start: value, allDay: this.allDay })
 				break
 			case 'due':
-				this.setDue({ task: this.task, due: value })
+				this.setDue({ task: this.task, due: value, allDay: this.allDay })
 				break
 			}
 			this.edit = ''
@@ -809,7 +822,7 @@ export default {
 				if (due.isBefore(reference)) {
 					reference = due.subtract(1, 'm')
 				}
-				reference.startOf(this.task.allDay ? 'day' : 'hour')
+				reference.startOf(this.allDay ? 'day' : 'hour')
 				return reference
 			}
 			return start
@@ -825,7 +838,7 @@ export default {
 			if (!due.isValid()) {
 				var start = this.task.startMoment
 				var reference = start.isAfter() ? start : moment()
-				if (this.task.allDay) {
+				if (this.allDay) {
 					reference.startOf('day').add(1, 'd')
 				} else {
 					reference.startOf('hour').add(1, 'h')

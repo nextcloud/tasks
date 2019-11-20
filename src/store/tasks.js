@@ -446,8 +446,9 @@ const mutations = {
 	 * @param {Object} state The store data
 	 * @param {Task} task The task
 	 * @param {Moment} due The due date moment
+	 * @param {Boolean} allDay Whether the date is all-day
 	 */
-	setDue(state, { task, due }) {
+	setDue(state, { task, due, allDay }) {
 		if (due === null) {
 			// If the date is null, just set (remove) it.
 			Vue.set(task, 'due', due)
@@ -462,10 +463,10 @@ const mutations = {
 				} else {
 					start = due.clone()
 				}
-				Vue.set(task, 'start', momentToICALTime(start, task.allDay))
+				Vue.set(task, 'start', momentToICALTime(start, allDay))
 			}
 			// Set the due date, convert it to ICALTime first.
-			Vue.set(task, 'due', momentToICALTime(due, task.allDay))
+			Vue.set(task, 'due', momentToICALTime(due, allDay))
 		}
 	},
 
@@ -475,8 +476,9 @@ const mutations = {
 	 * @param {Object} state The store data
 	 * @param {Task} task The task
 	 * @param {Moment} start The start date moment
+	 * @param {Boolean} allDay Whether the date is all-day
 	 */
-	setStart(state, { task, start }) {
+	setStart(state, { task, start, allDay }) {
 		if (start === null) {
 			// If the date is null, just set (remove) it.
 			Vue.set(task, 'start', start)
@@ -491,10 +493,10 @@ const mutations = {
 				} else {
 					due = start.clone()
 				}
-				Vue.set(task, 'due', momentToICALTime(due, task.allDay))
+				Vue.set(task, 'due', momentToICALTime(due, allDay))
 			}
 			// Set the due date, convert it to ICALTime first.
-			Vue.set(task, 'start', momentToICALTime(start, task.allDay))
+			Vue.set(task, 'start', momentToICALTime(start, allDay))
 		}
 	},
 
@@ -1008,8 +1010,8 @@ const actions = {
 	 * @param {Object} context The store context
 	 * @param {Task} task The task to update
 	 */
-	async setDue(context, { task, due }) {
-		context.commit('setDue', { task: task, due: due })
+	async setDue(context, { task, due, allDay }) {
+		context.commit('setDue', { task: task, due: due, allDay: allDay })
 		context.dispatch('scheduleTaskUpdate', task)
 	},
 
@@ -1019,8 +1021,8 @@ const actions = {
 	 * @param {Object} context The store context
 	 * @param {Task} task The task to update
 	 */
-	async setStart(context, { task, start }) {
-		context.commit('setStart', { task: task, start: start })
+	async setStart(context, { task, start, allDay }) {
+		context.commit('setStart', { task: task, start: start, allDay: allDay })
 		context.dispatch('scheduleTaskUpdate', task)
 	},
 

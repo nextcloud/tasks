@@ -405,6 +405,9 @@ export default class Task {
 		this.updateLastModified()
 		this._start = this.vtodo.getFirstPropertyValue('dtstart')
 		this._startMoment = moment(this._start, 'YYYYMMDDTHHmmss')
+		// Check all day setting
+		var d = this._due || this._start
+		this._allDay = d !== null && d.isDate
 	}
 
 	get startMoment() {
@@ -424,6 +427,9 @@ export default class Task {
 		this.updateLastModified()
 		this._due = this.vtodo.getFirstPropertyValue('due')
 		this._dueMoment = moment(this._due, 'YYYYMMDDTHHmmss')
+		// Check all day setting
+		var d = this._due || this._start
+		this._allDay = d !== null && d.isDate
 	}
 
 	get dueMoment() {
