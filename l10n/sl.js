@@ -24,15 +24,15 @@ OC.L10N.register(
     "Tomorrow" : "Jutri",
     "Set start date" : "Nastavi datum začetka",
     "Set due date" : "Nastavi datum preteka",
-    "All day" : "Cel dan",
+    "All day" : "Ves dan",
     "Task not found!" : "Naloge ni mogoče najti!",
+    "Canceled" : "Preklicano",
     "[Starts today]" : "[Začne se danes]",
     "[Started today at] LT" : "[Začne se danes ob] LT",
     "[Starts today at] LT" : "[Začne se danes ob] LT",
     "[Due today]" : "[Poteče danes]",
     "[Was due today at] LT" : "[Je poteklo danes ob] LT",
     "[Due today at] LT" : "[Poteče danes ob] LT",
-    "Canceled" : "Preklicano",
     "Edit" : "Uredi",
     "Download" : "Prejmi",
     "Save" : "Shrani",
@@ -42,6 +42,7 @@ OC.L10N.register(
     "Visibility of Smart Collections" : "Vidnost pametnih zbirk",
     "Hidden" : "Skrito",
     "Visible" : "Vidno",
-    "Automatic" : "Samodejno"
+    "Automatic" : "Samodejno",
+    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Naloge ni mogoče posodobiti, ker je bila spremenjena na strežniku. Nalogo je treba osvežiti, vse krajevne spremembe pa bodo izgubljene."
 },
 "nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);");

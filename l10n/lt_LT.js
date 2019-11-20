@@ -73,6 +73,7 @@ OC.L10N.register(
     "New List" : "Naujas sąrašas",
     "Calendar link copied to clipboard." : "Kalendoriaus nuoroda nukopijuota į iškarpinę.",
     "Calendar link could not be copied to clipboard." : "Kalendoriaus nuorodos nepavyko nukopijuoti į iškarpinę.",
+    "The name \"{calendar}\" is already used." : "Pavadinimas \"{calendar}\" jau yra naudojamas.",
     "An empty name is not allowed." : "Pavadinimas yra būtinas",
     "Settings" : "Nustatymai",
     "Default list" : "Numatytasis sąrašas",
