@@ -113,7 +113,7 @@ OC.L10N.register(
     "Can not copy" : "Nedaří se zkopírovat",
     "Download" : "Stáhnout",
     "Save" : "Uložit",
-    "Add List…" : "Přidat seznam...",
+    "Add List…" : "Přidat seznam…",
     "New List" : "Nový seznam",
     "Calendar link copied to clipboard." : "Odkaz do kalendáře zkopírován do schránky.",
     "Calendar link could not be copied to clipboard." : "Odkaz do kalendáře se nepodařilo zkopírovat do schránky.",
