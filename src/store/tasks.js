@@ -615,6 +615,9 @@ const actions = {
 		if (taskData.start) {
 			task.start = taskData.start
 		}
+		if (taskData.allDay) {
+			task.allDay = taskData.allDay
+		}
 		if (taskData.related) {
 			task.related = taskData.related
 			// Check that parent task is not completed, uncomplete if necessary.
