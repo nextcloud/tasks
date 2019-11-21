@@ -652,12 +652,12 @@
 		.footer {
 			border-top: 1px solid $gray_light;
 			flex: 0 0 auto;
-			height: 30px;
+			height: 44px;
 			display: flex;
 			justify-content: space-between;
 
-			a {
-				padding: 7px;
+			>span, button {
+				padding: 14px;
 
 				&.info {
 					cursor: default;
@@ -666,6 +666,16 @@
 				.icon {
 					display: block;
 				}
+			}
+
+			button {
+				box-sizing: border-box;
+				width: 44px;
+				height: 44px;
+				margin: 0;
+				cursor: pointer;
+				border: none;
+				background-color: transparent;
 			}
 		}
 

@@ -345,23 +345,23 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</ul>
 			</div>
 			<div class="footer">
-				<a :style="{visibility: task.calendar.readOnly ? 'hidden' : 'visible'}"
+				<button :style="{visibility: task.calendar.readOnly ? 'hidden' : 'visible'}"
 					class="close-all reactive"
 					@click="removeTask"
 				>
 					<span class="icon icon-bw icon-trash" />
-				</a>
-				<a v-tooltip="{
+				</button>
+				<span v-tooltip="{
 						content: taskInfo,
 						html: true,
 					}"
 					class="info"
 				>
 					<span class="icon icon-info" />
-				</a>
-				<a class="close-all reactive" @click="closeDetails">
+				</span>
+				<button class="close-all reactive" @click="closeDetails">
 					<span class="icon icon-bw icon-hide" />
-				</a>
+				</button>
 			</div>
 		</div>
 		<div v-else class="notice">
