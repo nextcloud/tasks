@@ -154,6 +154,7 @@ export default {
 			}
 			if (this.$route.params.collectionId === 'today') {
 				task.due = moment().startOf('day').format('YYYY-MM-DDTHH:mm:ss')
+				task.allDay = this.$store.state.settings.settings.allDay
 			}
 			if (this.$route.params.collectionId === 'current') {
 				task.start = moment().format('YYYY-MM-DDTHH:mm:ss')
