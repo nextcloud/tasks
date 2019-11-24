@@ -102,7 +102,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							<button>
 								<span class="icon icon-color icon-checkmark-color reactive" />
 							</button>
-							<button class="delete" @click="setStart({ task: task, start: null })">
+							<button class="delete" @click="setProperty('start', null)">
 								<span class="icon icon-bw icon-trash reactive" />
 							</button>
 						</div>
@@ -139,7 +139,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							<button>
 								<span class="icon icon-color icon-checkmark-color reactive" />
 							</button>
-							<button class="delete" @click="setDue({ task: task, due: null })">
+							<button class="delete" @click="setProperty('due', null)">
 								<span class="icon icon-bw icon-trash reactive" />
 							</button>
 						</div>
