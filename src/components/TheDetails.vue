@@ -99,11 +99,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</div>
 						</div>
 						<div class="section-utils">
-							<button>
-								<span class="icon icon-color icon-checkmark-color reactive" />
+							<button class="inline reactive">
+								<span class="icon icon-color icon-checkmark-color" />
 							</button>
-							<button class="delete" @click="setProperty('start', null)">
-								<span class="icon icon-bw icon-trash reactive" />
+							<button class="delete inline reactive" @click="setProperty('start', null)">
+								<span class="icon icon-bw icon-trash" />
 							</button>
 						</div>
 					</li>
@@ -136,11 +136,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</div>
 						</div>
 						<div class="section-utils">
-							<button>
-								<span class="icon icon-color icon-checkmark-color reactive" />
+							<button class="inline reactive">
+								<span class="icon icon-color icon-checkmark-color" />
 							</button>
-							<button class="delete" @click="setProperty('due', null)">
-								<span class="icon icon-bw icon-trash reactive" />
+							<button class="delete inline reactive" @click="setProperty('due', null)">
+								<span class="icon icon-bw icon-trash" />
 							</button>
 						</div>
 					</li>
@@ -272,11 +272,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</div>
 						</div>
 						<div class="section-utils">
-							<button>
-								<span class="icon icon-color icon-checkmark-color reactive" />
+							<button class="inline reactive">
+								<span class="icon icon-color icon-checkmark-color" />
 							</button>
-							<button class="delete" @click="setProperty('priority', 0)">
-								<span class="icon icon-bw icon-trash reactive" />
+							<button class="delete inline reactive" @click="setProperty('priority', 0)">
+								<span class="icon icon-bw icon-trash" />
 							</button>
 						</div>
 					</li>
@@ -311,11 +311,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</div>
 						</div>
 						<div class="section-utils">
-							<button>
-								<span class="icon icon-color icon-checkmark-color reactive" />
+							<button class="inline reactive">
+								<span class="icon icon-color icon-checkmark-color" />
 							</button>
-							<button class="delete" @click="setProperty('complete', 0)">
-								<span class="icon icon-bw icon-trash reactive" />
+							<button class="delete inline reactive" @click="setProperty('complete', 0)">
+								<span class="icon icon-bw icon-trash" />
 							</button>
 						</div>
 					</li>

@@ -85,29 +85,35 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<div v-if="task.note!=''">
 					<span class="icon icon-bw icon-note" />
 				</div>
-				<div v-if="hasCompletedSubtasks" @click="toggleCompletedSubtasksVisibility(task)">
-					<span :title="$t('tasks', 'Toggle visibility of completed subtasks.')"
-						:class="{'active': !task.hideCompletedSubtasks}"
-						class="icon icon-bw icon-toggle toggle-completed-subtasks reactive no-nav"
-					/>
-				</div>
-				<div v-if="Object.values(task.subTasks).length" @click="toggleSubtasksVisibility(task)">
-					<span :title="$t('tasks', 'Toggle visibility of all subtasks.')"
-						:class="task.hideSubtasks ? 'icon-subtasks-hidden' : 'icon-subtasks-visible'"
-						class="icon icon-bw subtasks reactive no-nav"
-					/>
-				</div>
-				<div v-if="!task.calendar.readOnly"
-					class="task-addsubtask add-subtask"
+				<button v-if="hasCompletedSubtasks"
+					class="inline reactive no-nav"
+					:title="$t('tasks', 'Toggle visibility of completed subtasks.')"
+					@click="toggleCompletedSubtasksVisibility(task)"
 				>
-					<span :taskId="task.uri"
-						:title="subtasksCreationPlaceholder" class="icon icon-bw icon-add reactive no-nav"
-						@click="showSubtaskInput = true"
+					<span :class="{'active': !task.hideCompletedSubtasks}"
+						class="icon icon-bw icon-toggle toggle-completed-subtasks"
 					/>
-				</div>
-				<div class="task-star" @click="toggleStarred(task)">
-					<span :class="[iconStar, {'disabled': task.calendar.readOnly}]" class="icon reactive no-nav" />
-				</div>
+				</button>
+				<button v-if="Object.values(task.subTasks).length"
+					class="inline reactive no-nav"
+					:title="$t('tasks', 'Toggle visibility of all subtasks.')"
+					@click="toggleSubtasksVisibility(task)"
+				>
+					<span :class="task.hideSubtasks ? 'icon-subtasks-hidden' : 'icon-subtasks-visible'"
+						class="icon icon-bw subtasks"
+					/>
+				</button>
+				<button v-if="!task.calendar.readOnly"
+					class="inline task-addsubtask add-subtask reactive no-nav"
+					:taskId="task.uri"
+					:title="subtasksCreationPlaceholder"
+					@click="showSubtaskInput = true"
+				>
+					<span class="icon icon-bw icon-add" :taskId="task.uri" />
+				</button>
+				<button class="inline task-star reactive no-nav" @click="toggleStarred(task)">
+					<span :class="[iconStar, {'disabled': task.calendar.readOnly}]" class="icon" />
+				</button>
 			</div>
 		</div>
 		<div class="subtasks-container">
@@ -366,7 +372,7 @@ export default {
 		 * @param {String} route the route to navigate to
 		 */
 		navigate: function($event) {
-			if (!$event.target.classList.contains('no-nav')
+			if (!$event.target.closest('.no-nav')
 				&& (this.$route.params.taskId !== this.task.uri || this.$route.params.collectionParam !== this.collectionParam)) {
 				if (!this.task.loadedCompleted) {
 					this.getTasksFromCalendar({ calendar: this.task.calendar, completed: true, related: this.task.uid })
