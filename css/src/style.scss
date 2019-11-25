@@ -652,12 +652,12 @@
 		.footer {
 			border-top: 1px solid $gray_light;
 			flex: 0 0 auto;
-			height: 30px;
+			height: 44px;
 			display: flex;
 			justify-content: space-between;
 
-			a {
-				padding: 7px;
+			>span, button {
+				padding: 14px;
 
 				&.info {
 					cursor: default;
@@ -666,6 +666,16 @@
 				.icon {
 					display: block;
 				}
+			}
+
+			button {
+				box-sizing: border-box;
+				width: 44px;
+				height: 44px;
+				margin: 0;
+				cursor: pointer;
+				border: none;
+				background-color: transparent;
 			}
 		}
 
@@ -798,6 +808,231 @@
 				margin-bottom: 0;
 				width: 100%;
 				color: var(--color-text-lighter);
+				display: flex;
+
+				> div {
+					display: flex;
+					line-height: 44px;
+
+					&.section-content {
+						flex-grow: 1;
+
+						&.note {
+							border-width: 1px;
+							border-style: solid;
+							border-color: $gray_light;
+							font-size: 13px;
+							line-height: 26px;
+							margin: 0 20px;
+							padding: 5px 15px;
+							cursor: text;
+		
+							.expandingArea {
+								position: relative;
+								margin-left: -1px;
+		
+								textarea,
+								pre {
+									box-shadow: none;
+									background: none repeat scroll 0 0 transparent;
+									border: medium none;
+									line-height: 26px;
+									padding: 0;
+									white-space: pre-wrap;
+									word-wrap: break-word;
+								}
+		
+								textarea {
+									margin: 0 0 0 1px;
+									border-radius: 0;
+									height: 100%;
+									left: 0;
+									overflow: hidden;
+									position: absolute;
+									resize: none;
+									top: 0;
+									width: 100%;
+									color: $gray_dark;
+									font-weight: 500;
+									outline: medium none;
+								}
+		
+								pre {
+									border: 0 none !important;
+									display: block;
+									margin: 0;
+									outline: 0 none;
+									padding: 0 !important;
+									visibility: hidden;
+								}
+							}
+		
+							.note-body,
+							.note-edit {
+								min-height: 140px;
+								word-wrap: break-word;
+								cursor: text;
+								width: 100%;
+		
+								.content-fakeable {
+									&.editing {
+										.display-view {
+											display: none !important;
+										}
+		
+										.edit-view {
+											display: block !important;
+										}
+									}
+		
+									.display-view {
+										cursor: text;
+									}
+		
+									.edit-view {
+										display: none !important;
+									}
+								}
+							}
+						}
+
+						.section-icon {
+							padding: 14px;
+							height: 44px;
+							width: 44px;
+
+							.icon {
+								display: block;
+							}
+
+							.calendar-indicator {
+								display: block;
+								width: 16px;
+								height: 16px;
+								border: none;
+								border-radius: 50%;
+							}
+						}
+
+						.section-title {
+							font-weight: bold;
+							display: inline-block;
+							width: calc(100% - 44px);
+							padding-right: 20px;
+							cursor: pointer;
+						}
+
+						.section-edit {
+							display: none;
+							flex-grow: 1;
+
+							.mx-datepicker {
+								&.date {
+									width: 59%;
+								}
+								&.time {
+									width: 39%
+								}
+							}
+						}
+
+						.detail-multiselect-container {
+							width: calc(100% - 44px);
+							display: flex;
+							align-items: center;
+							padding-right: 20px;
+
+							&.blue .multiselect__single {
+								color: $blue_due;
+							}
+
+							.multiselect.multiselect-vue {
+								width: 100%;
+								margin: 1px -1px;
+								vertical-align: middle;
+
+								&.multiselect--disabled {
+									background-color: var(--color-main-background) !important;
+									cursor: default;
+									.multiselect__single, input:not([type='range']):disabled {
+										background-color: var(--color-main-background) !important;
+										cursor: default;
+									}
+								}
+
+								&.multiselect--active .multiselect__tags {
+									border: 1px solid var(--color-border-dark);
+								}
+
+								.multiselect__tags {
+									border: 1px solid transparent;
+
+									.multiselect__tags-wrap {
+										padding-left: 0px;
+									}
+
+									.multiselect__input {
+										padding: 0px !important;
+										font-weight: bold;
+									}
+
+									.multiselect__single {
+										padding-left: 0px !important;
+										font-weight: bold;
+									}
+								}
+
+								.multiselect__tag {
+									color: $blue_due;
+									background: $gray_easy;
+									font-weight: bold;
+								}
+
+								.multiselect__element {
+									line-height: 1.3em;
+								}
+							}
+						}
+					}
+
+					&.section-utils button {
+						box-sizing: border-box;
+						width: 44px;
+						height: 44px;
+						margin: 0;
+						cursor: pointer;
+						border: none;
+						background-color: transparent;
+						display: none;
+						padding: 14px;
+
+						&:hover .icon {
+							opacity: 0.7;
+						}
+
+						span {
+							display: block;
+						}
+					}
+				}
+
+				&.date:hover button.delete {
+					display: block !important;
+				}
+
+				&.editing {
+					.section-utils button {
+						display: block !important;
+					}
+
+					.section-title {
+						display: none !important;
+					}
+
+					.section-edit {
+						display: inline-block !important;
+					}
+				}
 
 				&:last-of-type {
 					border-bottom: unset;
@@ -816,10 +1051,6 @@
 					color: $yellow;
 				}
 
-				&.date:hover .icon.icon-trash {
-					display: block;
-				}
-
 				&.date .icon {
 					&.icon-calendar-due,
 					&.icon-calendar-overdue,
@@ -835,10 +1066,16 @@
 				}
 
 				&.detail-all-day {
+					label {
+						padding-left: 14px;
+						width: 100%;
+					}
+
 					div,
 					span {
 						cursor: pointer;
 					}
+
 					input[type='checkbox'].checkbox + label {
 						&::before {
 							margin-left: 0;
@@ -850,82 +1087,11 @@
 					}
 				}
 
-				&.editing {
-					.icon {
-						&.detail-save,
-						&.icon-trash {
-							display: block;
-						}
-					}
-
-					.section-title {
-						display: none;
-					}
-
-					.section-edit {
-						display: inline-block;
-					}
-				}
-
 				.icon {
-					&.icon-trash {
-						display: none;
-						margin-left: auto;
-						right: 22px;
-					}
-
 					&.icon-privacy,
 					&.icon-status {
 						opacity: 1;
 						cursor: unset;
-					}
-
-					&.detail-save {
-						display: none;
-						margin-left: auto;
-						right: 44px;
-					}
-				}
-
-				> div {
-					padding-left: 12px;
-					line-height: 44px;
-
-					&.utils {
-						position: absolute;
-						right: 0;
-						top: 0;
-						padding-right: 15px;
-
-						a {
-							vertical-align: middle;
-							display: inline-block;
-						}
-					}
-
-					.section-title {
-						font-weight: bold;
-						margin-left: 12px;
-						line-height: 22px;
-						width: calc(100% - 100px);
-						display: inline-block;
-						vertical-align: middle;
-					}
-
-					.icon {
-						margin: 0;
-						float: unset;
-					}
-
-					.calendar-indicator {
-						position: relative;
-						display: inline-block;
-						width: 16px;
-						height: 16px;
-						border: none;
-						border-radius: 50%;
-						cursor: pointer;
-						vertical-align: middle;
 					}
 				}
 
@@ -976,159 +1142,6 @@
 					margin: 0;
 					font-weight: normal;
 					height: 19px;
-				}
-
-				.section-edit {
-					display: none;
-					padding-left: 12px;
-					vertical-align: middle;
-					width: calc(100% - 80px);
-					line-height: 0;
-
-					.mx-datepicker {
-						&.date {
-							width: 59%;
-						}
-						&.time {
-							width: 39%
-						}
-					}
-				}
-
-				.detail-calendar-container .multiselect__single {
-					color: $blue_due;
-				}
-
-				.detail-categories-container,
-				.detail-calendar-container {
-					width: calc(100% - 52px);
-					display: inline-block;
-					margin-left: 12px;
-
-					.multiselect.multiselect-vue {
-						width: 100%;
-						margin: 1px -1px;
-						vertical-align: middle;
-
-						&.multiselect--disabled {
-							background-color: var(--color-main-background) !important;
-							cursor: default;
-							.multiselect__single, input:not([type='range']):disabled {
-								background-color: var(--color-main-background) !important;
-								cursor: default;
-							}
-						}
-
-						&.multiselect--active .multiselect__tags {
-							border: 1px solid var(--color-border-dark);
-						}
-
-						.multiselect__tags {
-							border: 1px solid transparent;
-
-							.multiselect__tags-wrap {
-								padding-left: 0px;
-							}
-
-							.multiselect__input {
-								padding: 0px !important;
-								font-weight: bold;
-							}
-
-							.multiselect__single {
-								padding-left: 0px !important;
-								font-weight: bold;
-							}
-						}
-
-						.multiselect__tag {
-							color: $blue_due;
-							background: $gray_easy;
-							font-weight: bold;
-						}
-
-						.multiselect__element {
-							line-height: 1.3em;
-						}
-					}
-				}
-
-				.note {
-					border-width: 1px;
-					border-style: solid;
-					border-color: $gray_light;
-					font-size: 13px;
-					line-height: 26px;
-					margin: 0 20px;
-					padding: 5px 15px;
-					cursor: text;
-
-					.expandingArea {
-						position: relative;
-						margin-left: -1px;
-
-						textarea,
-						pre {
-							box-shadow: none;
-							background: none repeat scroll 0 0 transparent;
-							border: medium none;
-							line-height: 26px;
-							padding: 0;
-							white-space: pre-wrap;
-							word-wrap: break-word;
-						}
-
-						textarea {
-							margin: 0 0 0 1px;
-							border-radius: 0;
-							height: 100%;
-							left: 0;
-							overflow: hidden;
-							position: absolute;
-							resize: none;
-							top: 0;
-							width: 100%;
-							color: $gray_dark;
-							font-weight: 500;
-							outline: medium none;
-						}
-
-						pre {
-							border: 0 none !important;
-							display: block;
-							margin: 0;
-							outline: 0 none;
-							padding: 0 !important;
-							visibility: hidden;
-						}
-					}
-
-					.note-body,
-					.note-edit {
-						min-height: 140px;
-						word-wrap: break-word;
-						cursor: text;
-
-						.content-fakeable {
-							&.editing {
-								.display-view {
-									display: none !important;
-								}
-
-								.edit-view {
-									display: block !important;
-								}
-							}
-
-							.display-view {
-								cursor: text;
-							}
-
-							.edit-view {
-								display: none !important;
-							}
-						}
-					}
 				}
 			}
 		}

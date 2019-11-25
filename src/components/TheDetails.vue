@@ -74,11 +74,14 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						class="section detail-start"
 					>
 						<div v-click-outside="() => finishEditing('start')"
+							class="section-content"
 							@click="editProperty('start', $event)"
 						>
-							<span :class="[dateIcon(task.startMoment)]"
-								class="icon"
-							/>
+							<span class="section-icon">
+								<span :class="[dateIcon(task.startMoment)]"
+									class="icon"
+								/>
+							</span>
 							<span class="section-title">
 								{{ startDateString }}
 							</span>
@@ -95,24 +98,27 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 								/>
 							</div>
 						</div>
-						<div class="utils">
-							<a>
-								<span class="icon icon-color detail-save icon-checkmark-color end-edit reactive" />
-							</a>
-							<a class="end-edit" @click="setStart({ task: task, start: null })">
+						<div class="section-utils">
+							<button>
+								<span class="icon icon-color icon-checkmark-color reactive" />
+							</button>
+							<button class="delete" @click="setProperty('start', null)">
 								<span class="icon icon-bw icon-trash reactive" />
-							</a>
+							</button>
 						</div>
 					</li>
 					<li v-show="!task.calendar.readOnly || task.due" :class="{'date': task.dueMoment.isValid(), 'editing': edit=='due', 'high': overdue(task.dueMoment)}"
 						class="section detail-date"
 					>
 						<div v-click-outside="() => finishEditing('due')"
+							class="section-content"
 							@click="editProperty('due', $event)"
 						>
-							<span :class="[dateIcon(task.dueMoment)]"
-								class="icon"
-							/>
+							<span class="section-icon">
+								<span :class="[dateIcon(task.dueMoment)]"
+									class="icon"
+								/>
+							</span>
 							<span class="section-title">
 								{{ dueDateString }}
 							</span>
@@ -129,19 +135,19 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 								/>
 							</div>
 						</div>
-						<div class="utils">
-							<a>
-								<span class="icon icon-color detail-save icon-checkmark-color end-edit reactive" />
-							</a>
-							<a class="end-edit" @click="setDue({ task: task, due: null })">
+						<div class="section-utils">
+							<button>
+								<span class="icon icon-color icon-checkmark-color reactive" />
+							</button>
+							<button class="delete" @click="setProperty('due', null)">
 								<span class="icon icon-bw icon-trash reactive" />
-							</a>
+							</button>
 						</div>
 					</li>
 					<li v-show="isAllDayPossible"
 						class="section detail-all-day reactive"
 					>
-						<div>
+						<div class="section-content">
 							<input id="isAllDayPossible"
 								type="checkbox"
 								class="checkbox"
@@ -159,10 +165,13 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					</li>
 					<li class="section detail-calendar reactive">
 						<div v-click-outside="() => finishEditing('calendar')"
+							class="section-content"
 							@click="editProperty('calendar')"
 						>
-							<span :style="{'background-color': task.calendar.color}" class="calendar-indicator" />
-							<div class="detail-calendar-container">
+							<span class="section-icon">
+								<span :style="{'background-color': task.calendar.color}" class="calendar-indicator" />
+							</span>
+							<div class="detail-multiselect-container blue">
 								<Multiselect
 									:value="task.calendar"
 									:multiple="false"
@@ -182,10 +191,13 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					</li>
 					<li class="section detail-class reactive">
 						<div v-click-outside="() => finishEditing('class')"
+							class="section-content"
 							@click="editProperty('class')"
 						>
-							<span class="icon icon-color icon-privacy" />
-							<div class="detail-calendar-container">
+							<span class="section-icon">
+								<span class="icon icon-color icon-privacy" />
+							</span>
+							<div class="detail-multiselect-container blue">
 								<Multiselect
 									:value="classSelect.find( _ => _.type === task.class )"
 									:multiple="false"
@@ -205,10 +217,13 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					</li>
 					<li class="section detail-class reactive">
 						<div v-click-outside="() => finishEditing('status')"
+							class="section-content"
 							@click="editProperty('status')"
 						>
-							<span :class="[iconStatus]" class="icon" />
-							<div class="detail-calendar-container">
+							<span class="section-icon">
+								<span :class="[iconStatus]" class="icon" />
+							</span>
+							<div class="detail-multiselect-container blue">
 								<Multiselect
 									:value="statusSelect.find( _ => _.type === task.status )"
 									:multiple="false"
@@ -230,11 +245,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						class="section detail-priority"
 					>
 						<div v-click-outside="() => finishEditing('priority')"
+							class="section-content"
 							@click="editProperty('priority')"
 						>
-							<span :class="[iconStar]"
-								class="icon"
-							/>
+							<span class="section-icon">
+								<span :class="[iconStar]" class="icon" />
+							</span>
 							<span class="section-title">
 								{{ priorityString }}
 							</span>
@@ -255,22 +271,25 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 								>
 							</div>
 						</div>
-						<div class="utils">
-							<a>
-								<span class="icon icon-color detail-save icon-checkmark-color end-edit reactive" />
-							</a>
-							<a class="end-edit" @click="setProperty('priority', 0)">
+						<div class="section-utils">
+							<button>
+								<span class="icon icon-color icon-checkmark-color reactive" />
+							</button>
+							<button class="delete" @click="setProperty('priority', 0)">
 								<span class="icon icon-bw icon-trash reactive" />
-							</a>
+							</button>
 						</div>
 					</li>
 					<li v-show="!task.calendar.readOnly || task.complete" :class="{'editing': edit=='complete', 'date': task.complete>0}"
 						class="section detail-complete"
 					>
 						<div v-click-outside="() => finishEditing('complete')"
+							class="section-content"
 							@click="editProperty('complete')"
 						>
-							<span :class="[iconPercent]" class="icon" />
+							<span class="section-icon">
+								<span :class="[iconPercent]" class="icon" />
+							</span>
 							<span class="section-title">
 								{{ completeString }}
 							</span>
@@ -291,19 +310,21 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 								>
 							</div>
 						</div>
-						<div class="utils">
-							<a>
-								<span class="icon icon-color detail-save icon-checkmark-color end-edit reactive" />
-							</a>
-							<a class="end-edit" @click="setProperty('complete', 0)">
+						<div class="section-utils">
+							<button>
+								<span class="icon icon-color icon-checkmark-color reactive" />
+							</button>
+							<button class="delete" @click="setProperty('complete', 0)">
 								<span class="icon icon-bw icon-trash reactive" />
-							</a>
+							</button>
 						</div>
 					</li>
 					<li v-show="!task.calendar.readOnly || task.categories.length>0" :class="{'active': task.categories.length>0}" class="section detail-categories">
-						<div>
-							<span :class="[iconCategories]" class="icon detail-categories" />
-							<div class="detail-categories-container">
+						<div class="section-content">
+							<span class="section-icon">
+								<span :class="[iconCategories]" class="icon detail-categories" />
+							</span>
+							<div class="detail-multiselect-container">
 								<Multiselect v-if="task.categories"
 									v-model="task.categories"
 									:multiple="true"
@@ -322,7 +343,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						</div>
 					</li>
 					<li v-show="!task.calendar.readOnly || task.note" class="section detail-note">
-						<div class="note">
+						<div class="section-content note">
 							<div v-click-outside="() => finishEditing('note')"
 								class="note-body selectable"
 								@click="editProperty('note', $event)"
@@ -345,23 +366,23 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</ul>
 			</div>
 			<div class="footer">
-				<a :style="{visibility: task.calendar.readOnly ? 'hidden' : 'visible'}"
+				<button :style="{visibility: task.calendar.readOnly ? 'hidden' : 'visible'}"
 					class="close-all reactive"
 					@click="removeTask"
 				>
 					<span class="icon icon-bw icon-trash" />
-				</a>
-				<a v-tooltip="{
+				</button>
+				<span v-tooltip="{
 						content: taskInfo,
 						html: true,
 					}"
 					class="info"
 				>
 					<span class="icon icon-info" />
-				</a>
-				<a class="close-all reactive" @click="closeDetails">
+				</span>
+				<button class="close-all reactive" @click="closeDetails">
 					<span class="icon icon-bw icon-hide" />
-				</a>
+				</button>
 			</div>
 		</div>
 		<div v-else class="notice">
