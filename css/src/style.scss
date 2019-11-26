@@ -366,7 +366,7 @@
 			margin: 0;
 			cursor: text;
 			outline: none;
-			min-height: 32px;
+			min-height: 44px;
 		}
 	}
 
@@ -428,9 +428,9 @@
 							cursor: text;
 							font-size: 100%;
 							margin: 0;
-							padding: 0 60px 0 32px;
+							padding: 0 60px 0 44px;
 							width: 100%;
-							min-height: 36px;
+							min-height: 44px;
 						}
 					}
 
@@ -439,7 +439,7 @@
 					}
 
 					.subtasks-container {
-						margin-left: 37px;
+						margin-left: 44px;
 					}
 
 					.task-body {
@@ -447,7 +447,7 @@
 						flex-direction: row;
 						flex-wrap: nowrap;
 						align-items: center;
-						height: 37px;
+						height: 44px;
 						position: relative;
 						border: 1px solid $gray_light;
 						overflow: hidden;
@@ -459,9 +459,9 @@
 						}
 
 						.task-checkbox {
-							padding: 8px;
-							height: 37px;
-							width: 37px;
+							padding: 11px;
+							height: 44px;
+							width: 44px;
 							border-right: 1px dotted $gray;
 							opacity: 0.5;
 						}
@@ -481,7 +481,7 @@
 							.title {
 								cursor: text;
 								display: inline-flex;
-								padding: 10px;
+								padding: 14px;
 								overflow: hidden;
 
 								span {
@@ -496,7 +496,7 @@
 							}
 
 							.categories-list {
-								padding: 8px;
+								padding: 11px;
 								overflow: hidden;
 
 								.category {
@@ -545,8 +545,8 @@
 							overflow: hidden;
 
 							&>div {
-								height: 37px;
-								padding: 10px;
+								height: 44px;
+								padding: 14px;
 								display: flex;
 								flex-direction: row;
 								align-items: center;
@@ -996,23 +996,7 @@
 					}
 
 					&.section-utils button {
-						box-sizing: border-box;
-						width: 44px;
-						height: 44px;
-						margin: 0;
-						cursor: pointer;
-						border: none;
-						background-color: transparent;
 						display: none;
-						padding: 14px;
-
-						&:hover .icon {
-							opacity: 0.7;
-						}
-
-						span {
-							display: block;
-						}
 					}
 				}
 
@@ -1174,20 +1158,29 @@
 	opacity: 1;
 }
 
-.disabled .icon.detail-star:hover {
-	cursor: not-allowed;
-}
+button.inline {
+	box-sizing: border-box;
+	width: 44px;
+	height: 44px;
+	margin: 0;
+	cursor: pointer;
+	border: none;
+	padding: 14px;
+	background-color: transparent !important;
+	border-radius: 0;
 
-.reactive {
-	&:hover {
-		.icon {
-			opacity: .7;
-		}
+	&:hover .icon {
+		opacity: 0.7;
 	}
 
-	.icon {
+	span.icon {
+		display: block;
 		cursor: pointer;
 	}
+}
+
+.disabled .icon.detail-star:hover {
+	cursor: not-allowed;
 }
 
 input[type='checkbox'].checkbox {
