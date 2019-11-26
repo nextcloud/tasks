@@ -343,30 +343,134 @@
 #app-content {
 	overflow-x: hidden;
 
-	#add-task {
+	.header {
 		margin: 12px 0;
-		position: relative;
-		border: 1px solid $gray_light;
-		width: calc(100% - 56px);
-		float: left;
+		display: flex;
 
-		.icon {
-			position: absolute;
-			top: 6px;
+		#add-task {
+			position: relative;
+			border: 1px solid $gray_light;
+			width: calc(100% - 44px);
+
+			input {
+				font-size: 13px;
+				width: 100%;
+				color: $gray_dark;
+				border: medium none !important;
+				border-radius: 0 !important;
+				box-shadow: none !important;
+				padding: 0 60px 0 32px;
+				margin: 0;
+				cursor: text;
+				outline: none;
+				min-height: 44px;
+			}
 		}
 
-		input {
-			font-size: 13px;
-			width: 100%;
-			color: $gray_dark;
-			border: medium none !important;
-			border-radius: 0 !important;
-			box-shadow: none !important;
-			padding: 0 60px 0 32px;
-			margin: 0;
-			cursor: text;
-			outline: none;
-			min-height: 44px;
+		.sortorder {
+			margin-left: auto;
+
+			.icon-list {
+				@include icon-color('icon-list', 'tasks', $color-black, 3);
+
+				&__up {
+					@include icon-color('icon-list-up', 'tasks', $color-black, 3);
+				}
+				&__down {
+					@include icon-color('icon-list-down', 'tasks', $color-black, 3);
+				}
+			}
+			.icon-start {
+				@include icon-color('icon-start', 'tasks', $color-black, 3);
+
+				&__up {
+					@include icon-color('icon-start-up', 'tasks', $color-black, 3);
+				}
+				&__down {
+					@include icon-color('icon-start-down', 'tasks', $color-black, 3);
+				}
+			}
+			.icon-due {
+				@include icon-color('icon-due', 'tasks', $color-black, 3);
+
+				&__up {
+					@include icon-color('icon-due-up', 'tasks', $color-black, 3);
+				}
+				&__down {
+					@include icon-color('icon-due-down', 'tasks', $color-black, 3);
+				}
+			}
+			.icon-add {
+				@include icon-color('icon-add', 'tasks', $color-black, 3);
+
+				&__up {
+					@include icon-color('icon-add-up', 'tasks', $color-black, 3);
+				}
+				&__down {
+					@include icon-color('icon-add-down', 'tasks', $color-black, 3);
+				}
+			}
+			.icon-manual {
+				@include icon-color('icon-manual', 'tasks', $color-black, 3);
+
+				&__up {
+					@include icon-color('icon-manual-up', 'tasks', $color-black, 3);
+				}
+				&__down {
+					@include icon-color('icon-manual-down', 'tasks', $color-black, 3);
+				}
+			}
+			.icon-rename {
+				@include icon-color('icon-rename', 'tasks', $color-black, 3);
+
+				&__up {
+					@include icon-color('icon-rename-up', 'tasks', $color-black, 3);
+				}
+				&__down {
+					@include icon-color('icon-rename-down', 'tasks', $color-black, 3);
+				}
+			}
+			.icon-checkmark {
+				@include icon-color('icon-checkmark', 'tasks', $color-black, 3);
+
+				&__up {
+					@include icon-color('icon-checkmark-up', 'tasks', $color-black, 3);
+				}
+				&__down {
+					@include icon-color('icon-checkmark-down', 'tasks', $color-black, 3);
+				}
+			}
+			.icon-task-star {
+				@include icon-color('icon-task-star', 'tasks', $color-black, 3);
+
+				&__up {
+					@include icon-color('icon-task-star-up', 'tasks', $color-black, 3);
+				}
+				&__down {
+					@include icon-color('icon-task-star-down', 'tasks', $color-black, 3);
+				}
+			}
+			.icon-alphabetically {
+				@include icon-color('icon-alphabetically', 'tasks', $color-black, 3);
+				
+				&__up {
+					@include icon-color('icon-alphabetically-up', 'tasks', $color-black, 3);
+				}
+				&__down {
+					@include icon-color('icon-alphabetically-down', 'tasks', $color-black, 3);
+				}
+			}
+
+			li {
+				&.selected .action-button {
+					opacity: 1;
+				}
+
+				.action-button__icon {
+					background-size: unset;
+					background-position: center;
+				}
+			}
 		}
 	}
 
@@ -1217,111 +1321,6 @@ input[type='checkbox'].checkbox {
 
 	&.right {
 		float: right;
-	}
-}
-
-/**
- * rules for sortorder-dropdown
- */
-
-.sortorder-dropdown-button {
-	background-color: $gray_easy;
-	border: 1px solid $gray_light;
-	width: 42px;
-	height: 34px;
-	margin: 12px 0 12px 12px;
-	padding: 0;
-	float: right;
-	cursor: pointer;
-
-	.sort-indicator {
-		margin-left: 0;
-		visibility: visible;
-	}
-}
-
-.sortorder-dropdown {
-	display: none;
-	top: 68px;
-	right: 3px;
-
-	&.open {
-		display: block;
-	}
-
-	.icon {
-		margin: 14px 8px;
-
-		&.sort-indicator {
-			margin-left: auto;
-			margin-right: 0;
-			float: right;
-			visibility: hidden;
-		}
-	}
-
-	.label {
-		margin-right: 10px;
-	}
-
-	.active .icon.sort-indicator {
-		visibility: visible;
-	}
-
-	li {
-		float: inherit;
-		width: auto !important;
-		cursor: pointer;
-		opacity: .57;
-
-		& > a span {
-			opacity: 1 !important;
-
-			&[class*=' icon-'] {
-				padding: 0;
-				background-size: auto;
-
-				&.icon-list {
-					@extend .icon-list;
-				}
-
-				&.icon-calendar {
-					@extend .icon-calendar;
-				}
-
-				&.icon-task-star {
-					@extend .icon-task-star;
-				}
-
-				&.icon-alphabetically {
-					@extend .icon-alphabetically;
-				}
-
-				&.icon-manual {
-					@extend .icon-manual;
-				}
-
-				&.icon-sort-up {
-					@extend .icon-sort-up;
-				}
-
-				&.icon-sort-down {
-					@extend .icon-sort-down;
-				}
-			}
-		}
-
-		a {
-			width: 100% !important;
-		}
-
-		&.active {
-			opacity: 1 !important;
-		}
-
-		&:hover {
-			opacity: 1 !important;
-		}
 	}
 }
 
