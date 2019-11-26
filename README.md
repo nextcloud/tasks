@@ -17,6 +17,18 @@
 In your Nextcloud, simply navigate to »Apps«, choose the category »Organization«, find the Tasks app and enable it.
 Then open the Tasks app from the app menu.
 
+## Apps which sync with Nextcloud Tasks (using CalDAV)
+
+* Apple Reminders (iOS, MacOS)
+* [2Do](https://www.2doapp.com/) (Android, iOS, MacOS)
+* [Davx5](https://www.davx5.com/) (Android)
+* [OpenTasks](https://opentasks.app/) [(Android)](https://play.google.com/store/apps/details?id=org.dmfs.tasks)
+* [Outlook Caldav Synchronizer](https://caldavsynchronizer.org/)  (Windows)
+* [Tasks: Astrid Todo List Clone](https://tasks.org/)  [(Android)](https://play.google.com/store/apps/details?id=org.tasks&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1)
+* [Qownnotes](https://www.qownnotes.org/) (Read-only, Cross Platform Desktop App)
+* [Thunderbird Lightning Plugin](https://addons.thunderbird.net/en-US/thunderbird/addon/lightning/) (Cross Platform Desktop App)
+* [Vdirsyncer](https://vdirsyncer.pimutils.org/en/stable/) (Linux)
+
 ## Maintainers
 
 [Raimund Schlüßler](https://github.com/raimund-schluessler) [and many more](https://github.com/nextcloud/tasks/graphs/contributors)
