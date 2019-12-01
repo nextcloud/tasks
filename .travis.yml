@@ -117,9 +117,6 @@ matrix:
       after_success:
 
     - language: php
-      php: 7.1
-
-    - language: php
       php: 7.2
 
     - language: php
