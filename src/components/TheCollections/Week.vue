@@ -98,7 +98,7 @@ export default {
 
 			// Construct array with days for the current week.
 			var days = []
-			for (var day = 0; day < 7; day++) {
+			for (var day = 0; day < 8; day++) {
 				days.push({ diff: day, tasks: [] })
 
 				tasks.forEach(task => {
