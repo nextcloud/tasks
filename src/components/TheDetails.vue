@@ -216,7 +216,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						</div>
 					</li>
 					<li v-show="!task.calendar.readOnly || task.status"
-						class="section detail-class reactive">
+						class="section detail-class reactive"
+					>
 						<div v-click-outside="() => finishEditing('status')"
 							class="section-content"
 							@click="editProperty('status')"
