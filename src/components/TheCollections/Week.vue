@@ -22,6 +22,19 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div>
+		<div v-if="calendar && !calendar.readOnly"
+			id="add-task"
+			class="add-task"
+		>
+			<form name="addTaskForm" @submit.prevent="addTask">
+				<input v-model="newTaskName"
+					:placeholder="inputString"
+					:disabled="isAddingTask"
+					class="transparent reactive"
+					@keyup.27="clearNewTask($event)"
+				>
+			</form>
+		</div>
 		<SortorderDropdown />
 		<div class="task-list">
 			<div v-for="day in days" :key="day.diff" :day="day.diff"
@@ -47,7 +60,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import { sort, isTaskInList } from '../../store/storeHelper'
 import SortorderDropdown from '../SortorderDropdown'
 import Task from '../Task'
@@ -59,8 +72,15 @@ export default {
 		SortorderDropdown,
 		TaskDragContainer,
 	},
+	data() {
+		return {
+			newTaskName: '',
+			isAddingTask: false
+		}
+	},
 	computed: {
 		...mapGetters({
+			calendar: 'getDefaultCalendar',
 			tasks: 'getAllTasks',
 			uncompletedRootTasks: 'findUncompletedRootTasks',
 			sortOrder: 'sortOrder',
@@ -78,7 +98,7 @@ export default {
 
 			// Construct array with days for the current week.
 			var days = []
-			for (var day = 0; day < 7; day++) {
+			for (var day = 0; day < 8; day++) {
 				days.push({ diff: day, tasks: [] })
 
 				tasks.forEach(task => {
@@ -91,9 +111,17 @@ export default {
 
 			// Remove all days without tasks.
 			return days.filter(day => day.tasks.length)
-		}
+		},
+
+		inputString: function() {
+			return this.$t('tasks', 'Add a task due today to "{calendar}"…', { calendar: this.calendar.displayName })
+		},
 	},
 	methods: {
+		...mapActions([
+			'createTask'
+		]),
+
 		sort,
 
 		dayString: function(day) {
@@ -108,6 +136,21 @@ export default {
 			}
 			return dayString + ', ' + date.format('LL')
 		},
+
+		clearNewTask: function(event) {
+			event.target.blur()
+			this.newTaskName = ''
+		},
+
+		addTask: function() {
+			var task = { summary: this.newTaskName }
+
+			task.due = moment().startOf('day').format('YYYY-MM-DDTHH:mm:ss')
+			task.allDay = this.$store.state.settings.settings.allDay
+
+			this.createTask(task)
+			this.newTaskName = ''
+		}
 	}
 }
 </script>

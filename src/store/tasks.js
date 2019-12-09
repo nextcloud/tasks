@@ -647,7 +647,14 @@ const actions = {
 					if (calendarId) {
 						router.push({ name: 'calendarsTask', params: { calendarId: calendarId, taskId: task.uri } })
 					} else if (collectionId) {
-						router.push({ name: 'collectionsTask', params: { collectionId: collectionId, taskId: task.uri } })
+						if (collectionId === 'week') {
+							router.push({
+								name: 'collectionsParamTask',
+								params: { collectionId: collectionId, taskId: task.uri, collectionParam: '0' }
+							})
+						} else {
+							router.push({ name: 'collectionsTask', params: { collectionId: collectionId, taskId: task.uri } })
+						}
 					}
 
 				})
