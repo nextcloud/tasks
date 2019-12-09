@@ -656,7 +656,7 @@
 			display: flex;
 			justify-content: space-between;
 
-			>span, button {
+			>span {
 				padding: 14px;
 
 				&.info {
@@ -666,16 +666,6 @@
 				.icon {
 					display: block;
 				}
-			}
-
-			button {
-				box-sizing: border-box;
-				width: 44px;
-				height: 44px;
-				margin: 0;
-				cursor: pointer;
-				border: none;
-				background-color: transparent;
 			}
 		}
 
@@ -780,17 +770,13 @@
 				margin: 17px 6px;
 			}
 
-			.action {
+			button {
 				padding: 10px;
-				height: 44px;
-				width: 44px;
 				display: flex;
 				align-items: center;
 				justify-content: center;
 
 				.icon {
-					height: 16px;
-					width: 16px;
 					transform: scale(1.5);
 				}
 			}
