@@ -59,14 +59,14 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					</div>
 				</div>
 				<TaskStatusDisplay :task="task" />
-				<span class="action reactive" @click="togglePinned(task)">
+				<button class="reactive inline" @click="togglePinned(task)">
 					<span :class="[{'disabled': task.calendar.readOnly}, iconPinned]" class="icon" />
-				</span>
-				<span class="action reactive" @click="toggleStarred(task)">
+				</button>
+				<button class="reactive inline" @click="toggleStarred(task)">
 					<span :class="[{'disabled': task.calendar.readOnly}, iconStar]"
 						class="icon"
 					/>
-				</span>
+				</button>
 			</div>
 			<div class="body">
 				<ul class="sections">
@@ -369,7 +369,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			</div>
 			<div class="footer">
 				<button :style="{visibility: task.calendar.readOnly ? 'hidden' : 'visible'}"
-					class="close-all reactive"
+					class="close-all reactive inline"
 					@click="removeTask"
 				>
 					<span class="icon icon-bw icon-trash" />
@@ -382,7 +382,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				>
 					<span class="icon icon-info" />
 				</span>
-				<button class="close-all reactive" @click="closeDetails">
+				<button class="close-all reactive inline" @click="closeDetails">
 					<span class="icon icon-bw icon-hide" />
 				</button>
 			</div>
