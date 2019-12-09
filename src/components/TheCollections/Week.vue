@@ -114,7 +114,7 @@ export default {
 		},
 
 		inputString: function() {
-			return this.$t('tasks', 'Add a task due in one week to "{calendar}"…', { calendar: this.calendar.displayName })
+			return this.$t('tasks', 'Add a task due today to "{calendar}"…', { calendar: this.calendar.displayName })
 		},
 	},
 	methods: {
@@ -145,7 +145,7 @@ export default {
 		addTask: function() {
 			var task = { summary: this.newTaskName }
 
-			task.due = moment().add(7, 'days').startOf('day').format('YYYY-MM-DDTHH:mm:ss')
+			task.due = moment().startOf('day').format('YYYY-MM-DDTHH:mm:ss')
 			task.allDay = this.$store.state.settings.settings.allDay
 
 			this.createTask(task)
