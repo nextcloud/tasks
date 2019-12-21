@@ -750,7 +750,7 @@ const actions = {
 					}
 				})
 		} else {
-			task.syncstatus = new TaskStatus('refresh', OCA.Tasks.$t('tasks', 'Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared.'), 'fetchFullTask')
+			task.syncstatus = new TaskStatus('refresh', OCA.Tasks.$t('tasks', 'Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded.'), 'fetchFullTask')
 		}
 	},
 
