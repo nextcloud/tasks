@@ -8,6 +8,7 @@ OC.L10N.register(
     "Current" : "En aqueste moment",
     "Completed" : "Acabat",
     "Tasks" : "Prètzfaches",
+    "can edit" : "pòt modificar",
     "Delete" : "Suprimir",
     "Cancel" : "Anullar",
     "Default" : "Defaut",

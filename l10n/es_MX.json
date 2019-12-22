@@ -7,12 +7,15 @@
     "Completed" : "Completado",
     "Tasks" : "Tareas",
     "The Tasks app for Nextcloud" : "Una aplicación de Tareas para Nextcloud",
+    "Share with users or groups" : "Compartir con otros usuarios o grupos",
+    "can edit" : "puede editar",
     "Delete" : "Borrar",
     "Cancel" : "Cancelar",
     "Change sort order" : "Cambiar el criterio para ordenar",
     "Default" : "Predeterminado",
     "Due date" : "Fecha de vencimiento",
     "Start date" : "Fecha de inicio",
+    "Last modified" : "Última modificación",
     "Priority" : "Prioridad",
     "Manually" : "Manualmente",
     "Alphabetically" : "Alfabéticamente",
@@ -23,6 +26,9 @@
     "Set due date" : "Establecer fecha de vencimiento",
     "All day" : "Todo el día",
     "Task not found!" : "¡Tarea no encontrada!",
+    "When shared show full event" : "Al compartir, mostrar el evento completo",
+    "When shared show only busy" : "Al compartir, mostrar sólo como ocupado ",
+    "When shared hide this event" : "Al compartir, ocultar este evento ",
     "Edit" : "Editar",
     "Download" : "Descargar",
     "Save" : "Guardar",
@@ -32,6 +38,7 @@
     "Visibility of Smart Collections" : "Visibilidad de Colecciones Inteligentes",
     "Hidden" : "Oculto",
     "Visible" : "Visible",
-    "Automatic" : "Automático"
+    "Automatic" : "Automático",
+    "An error occurred" : "Ha ocurrido un error"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

@@ -7,8 +7,15 @@
     "Completed" : "הושלם",
     "Tasks" : "משימות",
     "The Tasks app for Nextcloud" : "יישומון המשימות ל־Nextcloud",
+    "Share with users or groups" : "שיתוף עם משתמשים או קבוצות",
+    "No users or groups" : "אין משתמשים או קבוצות",
+    "can edit" : "יש הרשאת עריכה",
+    "Unable to delete the share." : "לא ניתן למחוק את השיתוף.",
+    "Unable to change permissions." : "לא ניתן לשנות הרשאות.",
     "Delete" : "מחיקה",
     "Cancel" : "ביטול",
+    "No errors" : "אין שגיאות",
+    "Open your browser console for more details" : "נא לפתוח את המסוף של הדפדפן שלך לקבלת פרטים נוספים",
     "Load all completed tasks." : "טעינת כל המשימות שהושלמו.",
     "Change sort order" : "שינוי סדר מיון",
     "Default" : "בררת מחדל",
@@ -46,6 +53,9 @@
     "Select categories" : "בחירת קטגוריות",
     "Add this as a new category" : "הוספת הקטגוריה הזאת כחדשה",
     "Task not found!" : "לא אותרה משימה!",
+    "When shared show full event" : "כאשר משותף מציג אירוע מלא",
+    "When shared show only busy" : "כאשר משותף מציג עסוק בלבד",
+    "When shared hide this event" : "כאשר משותף מסתיר אירוע זה",
     "[Starts today]" : "[מתחילה היום]",
     "[Starts tomorrow]" : "[מתחילה מחר]",
     "[Starts on] LL" : "[מתחילה במועד] LL",
@@ -89,7 +99,6 @@
     "Synchronizing to the server." : "מתבצע סנכרון מול השרת.",
     "Task successfully saved to server." : "המשימה נשמרה לשרת בהצלחה.",
     "Could not update the task." : "לא ניתן לעדכן את המשימה.",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "לא ניתן לעדכן את המשימה כיוון שהיא נערכה בשרת. נא ללחוץ כדי לרענן אותה, השינויים המקומיים לא יישמרו.",
     "An error occurred" : "אירעה שגיאה"
 },"pluralForm" :"nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;"
 }

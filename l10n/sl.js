@@ -131,7 +131,6 @@ OC.L10N.register(
     "Task successfully saved to server." : "Naloga je uspešno shranjena na strežnik.",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Naloge ni mogoče posodobiti, ker je bila spremenjena na strežniku. Nalogo je treba osvežiti, vse krajevne spremembe pa bodo izgubljene.",
     "Could not update the task." : "Naloge ni mogoče posodobiti.",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Naloge ni mogoče posodobiti, ker je bila spremenjena na strežniku. Nalogo je treba osvežiti, vse krajevne spremembe pa bodo izgubljene.",
     "An error occurred" : "Prišlo je do napake."
 },
 "nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);");

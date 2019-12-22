@@ -5,6 +5,8 @@ OC.L10N.register(
     "Week" : "Շաբաթ",
     "Current" : "Ընթացիկ",
     "Completed" : "Ավարտվեց",
+    "Share with users or groups" : "Կիսվել օգտատերերի կամ խմբերի հետ",
+    "can edit" : "կարող է խմբագրել",
     "Delete" : "Ջնջել",
     "Cancel" : "Չեղարկել",
     "Default" : "Լռելյայն",

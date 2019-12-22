@@ -108,7 +108,6 @@ OC.L10N.register(
     "Task successfully saved to server." : "タスクはサーバーに正常に保存されました。",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "サーバー上でタスクが変更されたため、タスクを更新できませんでした。 クリックして更新してください。ローカルの変更は破棄されます。",
     "Could not update the task." : "タスクを更新できませんでした",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "サーバー上でタスクが変更されたため、タスクを更新できませんでした。 クリックして更新してください。ローカルの変更は破棄されました。",
     "An error occurred" : "エラーが発生しました"
 },
 "nplurals=1; plural=0;");

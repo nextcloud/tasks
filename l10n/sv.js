@@ -131,7 +131,6 @@ OC.L10N.register(
     "Task successfully saved to server." : "Uppgiften sparades till servern.",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Det gick inte att uppdatera uppgiften eftersom den ändrades på servern. Klicka för att uppdatera, lokala ändringar kommer att ignoreras.",
     "Could not update the task." : "Kunde inte uppdatera uppgiften.",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Det gick inte att uppdatera uppgiften eftersom den ändrades på servern. Klicka för att uppdatera, lokala ändringar kommer att ignoreras.",
     "An error occurred" : "Ett fel uppstod"
 },
 "nplurals=2; plural=(n != 1);");

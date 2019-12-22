@@ -48,7 +48,12 @@ OC.L10N.register(
     "[Yesterday]" : "[Í gær]",
     "[Today]" : "[Í dag]",
     "[Tomorrow]" : "[Á morgun]",
+    "Add a subtask to \"{task}\"…" : "Bæta undirverkefni við \"{task}\"...",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n lokið verkefni","%n lokin verkefni"],
+    "Add an important task to \"{calendar}\"…" : "Bæta mikilvægu verkefni við \"{calendar}\"...",
+    "Add a task due today to \"{calendar}\"…" : "Bæta verkefni sem á að klára í dag við \"{calendar}\"...",
+    "Add a current task to \"{calendar}\"…" : "Bæta fyrirliggjandi verkefni við \"{calendar}\"...",
+    "Add a task to \"{calendar}\"…" : "Bæta verkefni við \"{calendar}\"...",
     "Tomorrow" : "Á morgun",
     "Set start date" : "Setja upphafsdag",
     "Set start time" : "Setja upphafstíma",
@@ -109,7 +114,6 @@ OC.L10N.register(
     "Task successfully saved to server." : "Tókst að vista verkefnið á þjóninn.",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Gat ekki uppfært verkefnið vegna þess að því var breytt á þjóninum. Smelltu til að endurlesa það, breytingum hjá þér verður hent.",
     "Could not update the task." : "Gat ekki uppfært verkefnið.",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Gat ekki uppfært verkefnið vegna þess að því var breytt á þjóninum. Smelltu til að endurlesa það, breytingum hjá þér verður hent.",
     "An error occurred" : "Villa kom upp"
 },
 "nplurals=2; plural=(n % 10 != 1 || n % 100 == 11);");

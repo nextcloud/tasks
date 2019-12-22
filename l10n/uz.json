@@ -1,0 +1,10 @@
+{ "translations": {
+    "All" : "Hammasi",
+    "Tasks" : "Vazifalar",
+    "Delete" : "O'chir",
+    "Cancel" : "Bekor qilish",
+    "Download" : "Yuklab oling",
+    "Save" : "Saqlash",
+    "Settings" : "Sozlamalar"
+},"pluralForm" :"nplurals=1; plural=0;"
+}

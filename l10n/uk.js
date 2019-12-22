@@ -8,6 +8,8 @@ OC.L10N.register(
     "Current" : "Поточні",
     "Completed" : "Завершені",
     "Tasks" : "Завдання",
+    "Share with users or groups" : "Поділитися з користувачем або групою",
+    "can edit" : "може редагувати",
     "Delete" : "Видалити",
     "Cancel" : "Скасувати",
     "Change sort order" : "Зміна порядку сортування",
@@ -33,6 +35,7 @@ OC.L10N.register(
     "Visibility of Smart Collections" : "Видимість Smart-колекції",
     "Hidden" : "Прихований",
     "Visible" : "Видимий",
-    "Automatic" : "Автоматично"
+    "Automatic" : "Автоматично",
+    "An error occurred" : "Виникла помилка"
 },
 "nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);");

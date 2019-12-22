@@ -132,7 +132,6 @@ OC.L10N.register(
     "Task successfully saved to server." : "A tarefa foi gardada satisfactoriamente no servidor.",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Non foi posíbel actualizar a tarefa porque foi modificada no servidor. Prema para actualizala, os cambios locais serán desbotados.",
     "Could not update the task." : "Non foi posíbel actualizar a tarefa",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Non foi posíbel actualizar a tarefa porque foi modificada no servidor. Prema para actualizala, os cambios locais serán desbotados.",
     "An error occurred" : "Produciuse un erro"
 },
 "nplurals=2; plural=(n != 1);");

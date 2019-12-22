@@ -60,6 +60,9 @@ OC.L10N.register(
     "Select categories" : "Назначить категории",
     "Add this as a new category" : "Добавить как новую категорию",
     "Task not found!" : "Задача не найдена",
+    "When shared show full event" : "Показывать подробно при размещении в общем доступе",
+    "When shared show only busy" : "Показывать только занятость при размещении в общем доступе",
+    "When shared hide this event" : "Скрыть это событие при размещении в общем доступе",
     "[Starts today]" : "[Начало сегодня]",
     "[Starts tomorrow]" : "[Начало завтра]",
     "[Starts on] LL" : "[Начало] LL",
@@ -106,7 +109,6 @@ OC.L10N.register(
     "Task successfully saved to server." : "Задача сохранена на сервере.",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Не удалось обновить задачу, так как она была изменена на сервере. Нажмите для получения обновлённой задачи с сервера, внесённые изменения не будут сохранены.",
     "Could not update the task." : "Не удалось обновить задачу.",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Не удалось обновить задачу, так как она была изменена на сервере. Нажмите для получения обновлённой задачи с сервера, внесённые изменения не будут сохранены.",
     "An error occurred" : "Произошла ошибка"
 },
 "nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);");

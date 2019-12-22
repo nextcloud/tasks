@@ -132,7 +132,6 @@ OC.L10N.register(
     "Task successfully saved to server." : "Užduotis sėkmingai įrašyta į serverį.",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Nepavyko atnaujinti užduoties, nes ji buvo pakeista serveryje. Spustelėkite, kad įkeltumėte ją iš naujo, vietiniai pakeitimai bus atmesti.",
     "Could not update the task." : "Nepavyko atnaujinti užduoties.",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Nepavyko atnaujinti užduoties, nes ji buvo pakeista serveryje. Spustelėkite, kad įkeltumėte ją iš naujo, vietiniai pakeitimai bus atmesti.",
     "An error occurred" : "Įvyko klaida"
 },
 "nplurals=4; plural=(n % 10 == 1 && (n % 100 > 19 || n % 100 < 11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? 1 : n % 1 != 0 ? 2: 3);");

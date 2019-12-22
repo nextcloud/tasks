@@ -132,7 +132,6 @@ OC.L10N.register(
     "Task successfully saved to server." : "Úkol úspěšně uložen na server.",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Úkol se nepodařilo se zaktualizovat, protože byl mezitím změněn na serveru. Klikněte pro jeho opětovné načtení. Vámi provedené změny budou ztraceny.",
     "Could not update the task." : "Úkol se nedaří aktualizovat.",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Úkol se nepodařilo aktualizovat protože byl mezitím změněn na serveru. Klikněte pro jeho opětovné načtení, vámi provedené změny ovšem budou ztraceny.",
     "An error occurred" : "Došlo k chybě"
 },
 "nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;");

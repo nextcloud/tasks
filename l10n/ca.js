@@ -131,7 +131,6 @@ OC.L10N.register(
     "Task successfully saved to server." : "Tasca desada correctament al servidor.",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "No s'ha pogut actualitzar la tasca perquè aquesta ha canviat al servidor. Si us plau refresqueu la tasca, es perdran els canvis locals.",
     "Could not update the task." : "No s'ha pogut actualitzar la tasca.",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "No s'ha pogut actualitzar la tasca perquè aquesta ha canviat al servidor. Si us plau refresqueu la tasca, es perdran els canvis locals.",
     "An error occurred" : "S'ha produït un error"
 },
 "nplurals=2; plural=(n != 1);");

@@ -8,6 +8,8 @@ OC.L10N.register(
     "Current" : "کنونی",
     "Completed" : "نکمیل شده",
     "Tasks" : "وظایف",
+    "Share with users or groups" : "اشتراک گذاری با کاربران یا گروه ها ...",
+    "can edit" : "توانایی ویرایش",
     "Delete" : "حذف",
     "Cancel" : "لغو",
     "Default" : "پیش فرض",

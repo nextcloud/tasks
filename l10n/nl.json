@@ -129,7 +129,6 @@
     "Task successfully saved to server." : "Taak succesvol opgeslagen naar de server.",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Kon de taak niet bijwerken omdat die was gewijzigd op de server. Klik om te verversen, lokale wijzigingen worden genegeerd.",
     "Could not update the task." : "Kon de taak niet bewerken.",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Kon de taak niet bijwerken, omdat deze is bewerkt op de server. Probeer te klikken om te vernieuwen, lokale wijzigingen worden verwijderd.",
     "An error occurred" : "Er heeft een fout opgetreden"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

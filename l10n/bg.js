@@ -9,9 +9,11 @@ OC.L10N.register(
     "Completed" : "Завършено",
     "Tasks" : "Задачи",
     "The Tasks app for Nextcloud" : "Задачи за NextCloud",
+    "Share with users or groups" : "Сподели с потребители или групи",
     "can edit" : "може да редактира",
     "Delete" : "Изтриване",
     "Cancel" : "Отказ",
+    "No errors" : "Няма грешки",
     "Load all completed tasks." : "Зареди всички завършени задачи.",
     "Change sort order" : "Промени подредбата",
     "Default" : "Стандартно",
@@ -38,6 +40,9 @@ OC.L10N.register(
     "Select categories" : "Избор на категории",
     "Add this as a new category" : "Добави като нова категория",
     "Task not found!" : "Задачата не е намерена!",
+    "When shared show full event" : "При споделяне, показвай цялото събитие",
+    "When shared show only busy" : "При споделяне, показвай само статус \"зает\"",
+    "When shared hide this event" : "При споделяне, скривай това събитие",
     "Edit" : "Редакция",
     "Download" : "Изтегляне",
     "Save" : "Запазване",
@@ -47,6 +52,7 @@ OC.L10N.register(
     "Visibility of Smart Collections" : "Видимост на \"Smart\" колекции",
     "Hidden" : "Скрито",
     "Visible" : "Видимо",
-    "Automatic" : "Автоматично"
+    "Automatic" : "Автоматично",
+    "An error occurred" : "Възникна грешка"
 },
 "nplurals=2; plural=(n != 1);");

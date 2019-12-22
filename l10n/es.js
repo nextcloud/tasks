@@ -132,7 +132,6 @@ OC.L10N.register(
     "Task successfully saved to server." : "Tarea guardada correctamente en el servidor.",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "No se ha podido actualizar la tarea porque ha cambiado en el servidor. Por favor, pulsa para volver a cargarla. Se perderán los cambios locales.",
     "Could not update the task." : "No se ha podido actualizar la tarea.",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "No se ha podido actualizar la tarea porque ha cambiado en el servidor. Por favor, pulsa para recargarla, los cambios locales serán descargados.",
     "An error occurred" : "Ha ocurrido un error"
 },
 "nplurals=2; plural=(n != 1);");

@@ -11,6 +11,7 @@ OC.L10N.register(
     "Default" : "كۆڭۈلدىكى",
     "Edit" : "تەھرىر",
     "Download" : "چۈشۈر",
-    "Save" : "ساقلا"
+    "Save" : "ساقلا",
+    "Settings" : "تەڭشەكلەر"
 },
 "nplurals=1; plural=0;");

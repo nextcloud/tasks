@@ -8,11 +8,17 @@ OC.L10N.register(
     "Current" : "الحالي",
     "Completed" : "مكتمل",
     "Tasks" : "المهام",
+    "Share with users or groups" : "شارك مع مستخدمين او مجموعات",
+    "can edit" : "يمكن التعديل",
     "Delete" : "حذف ",
     "Cancel" : "إلغاء",
     "No errors" : "لا توجد أخطاء",
     "Default" : "افتراضي",
+    "Last modified" : "آخر تعديل",
     "Tomorrow" : "غدا",
+    "When shared show full event" : "عرض الحدث كاملاً عند مشاركته",
+    "When shared show only busy" : "عرض مشغول عند مشاركة الحدث",
+    "When shared hide this event" : "إخفاء الحدث عند مشاركته",
     "Edit" : "تعديل",
     "Download" : "تحميل",
     "Save" : "حفظ",
@@ -20,6 +26,7 @@ OC.L10N.register(
     "An empty name is not allowed." : "غير مسموح بإسم فارغ",
     "Settings" : "الإعدادات",
     "Hidden" : "مخفي",
-    "Automatic" : "تلقائي"
+    "Automatic" : "تلقائي",
+    "An error occurred" : "طرأ هناك خطأ"
 },
 "nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;");

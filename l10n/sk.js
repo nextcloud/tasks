@@ -131,7 +131,6 @@ OC.L10N.register(
     "Task successfully saved to server." : "Úloha úspešne uložená na server.",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Nepodarilo sa upraviť úlohu, pretože bola zmenená na serveri. Kliknite na obnovenie, lokálne vykonané zmeny budú zahodené.",
     "Could not update the task." : "Nepodarilo sa upraviť úlohu.",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discared." : "Nepodarilo sa upraviť úlohu, pretože bola zmenená na serveri. Kliknite na obnovenie, lokálne vykonané zmeny budú zahodené.",
     "An error occurred" : "Vyskytla sa chyba"
 },
 "nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);");
