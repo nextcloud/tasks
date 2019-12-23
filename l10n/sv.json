@@ -67,7 +67,7 @@
     "Select categories" : "Välj kategorier",
     "Add this as a new category" : "Lägg till som en ny kategori",
     "Loading task from server." : "Laddar uppgiften från servern.",
-    "Task not found!" : "Uppgift ej hittad!",
+    "Task not found!" : "Uppgift hittades inte!",
     "When shared show full event" : "Om delad, visa hela händelsen",
     "When shared show only busy" : "Om delad, visa endast upptagen",
     "When shared hide this event" : "Om delad, dölj denna händelse",
