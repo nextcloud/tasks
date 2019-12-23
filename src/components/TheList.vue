@@ -57,7 +57,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			:class="{edit: editing == calendar.id}"
 			tag="RouterLink"
 			class="list with-menu editing"
-			v-bind="{group: 'tasks', filter: '*', disabled: calendar.readOnly}" @add="dropTaskOnCalendar(...arguments, calendar)"
+			v-bind="{group: 'tasks', filter: '*', disabled: calendar.readOnly, preventOnFilter: false}" @add="dropTaskOnCalendar(...arguments, calendar)"
 		>
 			<div :style="{'background-color': calendar.color}" class="app-navigation-entry-bullet" />
 			<a>
