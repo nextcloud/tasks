@@ -22,6 +22,8 @@ OC.L10N.register(
     "Tomorrow" : "Утре",
     "Set start date" : "Постави почетен датум",
     "Set due date" : "Постави краен рок",
+    "All day" : "Сите денови",
+    "Add this as a new category" : "Додади како нова категорија",
     "Edit" : "Уреди",
     "Copy private link" : "Копирај приватен линк",
     "Copied" : "Копирано",
