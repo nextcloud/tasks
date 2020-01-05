@@ -38,7 +38,7 @@
 		"markdown-it-link-attributes": "~3.0.0",
 		"markdown-it-task-lists": "~2.1.1",
 		"moment": "^2.24.0",
-		"p-limit": "^2.2.1",
+		"p-limit": "^2.2.2",
 		"p-queue": "^6.2.1",
 		"uuid": "^3.3.3",
 		"v-tooltip": "2.0.2",
