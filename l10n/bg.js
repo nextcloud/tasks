@@ -44,6 +44,7 @@ OC.L10N.register(
     "When shared show only busy" : "При споделяне, показвай само статус \"зает\"",
     "When shared hide this event" : "При споделяне, скривай това събитие",
     "Edit" : "Редакция",
+    "Copy private link" : "Копирай скритата връзка",
     "Download" : "Изтегляне",
     "Save" : "Запазване",
     "New List" : "Нов списък",
