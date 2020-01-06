@@ -344,7 +344,9 @@ const mutations = {
 			isGroup,
 			uri
 		}
-		calendar.shares.push(newSharee)
+		if (!calendar.shares.some((share) => share.uri === uri)) {
+			calendar.shares.push(newSharee)
+		}
 	},
 
 	/**
