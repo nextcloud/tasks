@@ -15,6 +15,7 @@ OC.L10N.register(
     "Unable to change permissions." : "No se pueden cambiar los permisos.",
     "Delete" : "Borrar",
     "Cancel" : "Cancelar",
+    "No errors" : "Sin errores",
     "Open your browser console for more details" : "Abra la consola de su navegador para más detalles",
     "Change sort order" : "Cambiar el criterio para ordenar",
     "Default" : "Predeterminado",
