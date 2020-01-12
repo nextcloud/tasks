@@ -81,7 +81,7 @@
 		"node-sass": "^4.13.0",
 		"prettier-eslint": "^9.0.1",
 		"raw-loader": "^4.0.0",
-		"sass-loader": "^8.0.0",
+		"sass-loader": "^8.0.1",
 		"stylelint": "^12.0.1",
 		"stylelint-config-recommended-scss": "^4.1.0",
 		"stylelint-scss": "^3.13.0",
