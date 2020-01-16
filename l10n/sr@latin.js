@@ -2,10 +2,15 @@ OC.L10N.register(
     "tasks",
     {
     "Today" : "Today",
+    "Current" : "Tekuće",
+    "Completed" : "Završeno",
     "can edit" : "može da menja",
     "Delete" : "Delete",
     "Cancel" : "Cancel",
+    "Default" : "Podrazumevano",
+    "Due date" : "Rok",
     "Edit" : "Uredi",
+    "Download" : "Preuzmi",
     "Save" : "Save",
     "Settings" : "Postavke"
 },
