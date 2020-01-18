@@ -115,7 +115,7 @@ OC.L10N.register(
     "Save" : "Zapisz",
     "Add List…" : "Dodaj listę…",
     "New List" : "Nowa lista",
-    "Calendar link copied to clipboard." : "Link do kalendarza został skopiowany do schowka.",
+    "Calendar link copied to clipboard." : "Link do kalendarza skopiowany do schowka.",
     "Calendar link could not be copied to clipboard." : "Link do kalendarza nie mógł zostać skopiowany do schowka.",
     "The name \"{calendar}\" is already used." : "Nazwa \"{calendar}\" jest już używana.",
     "An empty name is not allowed." : "Pusta nazwa nie jest dozwolona.",
