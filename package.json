@@ -74,7 +74,7 @@
 		"jest": "^24.9.0",
 		"jest-environment-jsdom-fourteen": "^1.0.1",
 		"jest-serializer-vue": "^2.0.2",
-		"jsdom": "^15.2.1",
+		"jsdom": "^16.0.0",
 		"jsdom-global": "^3.0.2",
 		"mockdate": "2.0.5",
 		"moment": "^2.24.0",
