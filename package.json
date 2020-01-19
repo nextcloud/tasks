@@ -78,7 +78,7 @@
 		"jsdom-global": "^3.0.2",
 		"mockdate": "2.0.5",
 		"moment": "^2.24.0",
-		"node-sass": "^4.13.0",
+		"node-sass": "^4.13.1",
 		"prettier-eslint": "^9.0.1",
 		"raw-loader": "^4.0.0",
 		"sass-loader": "^8.0.1",
