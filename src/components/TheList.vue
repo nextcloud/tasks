@@ -21,99 +21,85 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<ul id="collections">
-		<draggable
+		<AppNavigationItem
 			v-for="collection in collections"
+			v-show="!hideCollection(collection)"
 			:id="'collection_' + collection.id"
 			:key="collection.id"
 			:collection-id="collection.id"
-			:component-data="{props: {tag: 'li', to: { name: 'collections', params: { collectionId: collection.id } }, 'active-class': 'active'}}"
-			:class="[collection.icon, {'animate-up': hideCollection(collection) }]"
-			tag="RouterLink"
+			:icon="collection.icon"
+			:to="{ name: 'collections', params: { collectionId: collection.id } }"
+			:title="collection.displayName"
 			class="collection reactive"
-			v-bind="{group: 'tasks', filter: '*'}"
 			@add="dropTaskOnCollection(...arguments, collection)">
-			<a class="sprite">
-				<span v-if="collection.id=='today'" class="date">
-					{{ dayOfMonth }}
-				</span>
-				<span class="title">
-					{{ collection.displayName }}
-				</span>
-			</a>
-			<div v-if="collection.id!='completed'" class="app-navigation-entry-utils">
-				<ul>
-					<li class="app-navigation-entry-utils-counter">
-						{{ collectionCount(collection.id) | counterFormatter }}
-					</li>
-				</ul>
-			</div>
-		</draggable>
-		<draggable
+			<AppNavigationCounter slot="counter">
+				{{ collectionCount(collection.id) | counterFormatter }}
+			</AppNavigationCounter>
+		</AppNavigationItem>
+		<AppNavigationItem
 			v-for="calendar in calendars"
 			:id="'list_' + calendar.id"
 			:key="calendar.id"
 			v-click-outside="() => resetView(calendar)"
 			:calendar-id="calendar.id"
-			:component-data="{props: {tag: 'li', to: { name: 'calendars', params: { calendarId: calendar.id } }, 'active-class': 'active'}}"
+			:to="{ name: 'calendars', params: { calendarId: calendar.id } }"
+			:title="calendar.displayName"
 			:class="{edit: editing == calendar.id}"
-			tag="RouterLink"
 			class="list with-menu editing"
-			v-bind="{group: 'tasks', filter: '*', disabled: calendar.readOnly, preventOnFilter: false}"
 			@add="dropTaskOnCalendar(...arguments, calendar)">
-			<div :style="{'background-color': calendar.color}" class="app-navigation-entry-bullet" />
-			<a>
-				<span class="title">
-					{{ calendar.displayName }}
-				</span>
-			</a>
+			<AppNavigationIconBullet slot="icon" :color="calendar.color" />
 
-			<div class="app-navigation-entry-utils">
-				<ul>
-					<li class="app-navigation-entry-utils-counter">
-						{{ calendarCount(calendar.id) | counterFormatter }}
-					</li>
+			<template slot="counter">
+				<AppNavigationCounter>
+					{{ calendarCount(calendar.id) | counterFormatter }}
+				</AppNavigationCounter>
+				<Actions v-if="!calendar.readOnly">
+					<ActionButton
+						:icon="sharingIconClass(calendar)"
+						@click="toggleShare(calendar)">
+						{{ sharedWithTooltip(calendar) }}
+					</ActionButton>
+				</Actions>
+				<Avatar v-if="calendar.isSharedWithMe && calendar.loadedOwnerPrincipal" :user="calendar.ownerUserId" :display-name="calendar.ownerDisplayname" />
+				<div v-if="calendar.isSharedWithMe && !calendar.loadedOwnerPrincipal" class="icon icon-loading" />
+			</template>
 
-					<!-- sharing button -->
-					<li v-if="!calendar.readOnly"
-						v-tooltip.top="sharedWithTooltip(calendar)"
-						:class="{'calendar__share--shared': hasShares(calendar)}"
-						:title="sharedWithTooltip(calendar)"
-						href="#"
-						class="calendar__share icon-shared reactive"
-						@click="toggleShare(calendar)" />
-					<PopoverMenu tag="li" class="app-navigation-entry-utils-menu-button reactive">
-						<ul>
-							<li v-if="!calendar.readOnly">
-								<a @click="edit(calendar)">
-									<span class="icon-rename" />
-									<span>{{ $t('tasks', 'Edit') }}</span>
-								</a>
-							</li>
-							<li>
-								<a @click="copyCalDAVUrl($event, calendar)">
-									<span class="icon-public" />
-									<span>
-										{{ !copied
-											? $t('tasks', 'Copy private link')
-											: copySuccess
-												? $t('tasks', 'Copied')
-												: $t('tasks', 'Can not copy') }}
-									</span>
-								</a>
-							</li>
-							<li>
-								<a :href="exportUrl(calendar)" :download="calendar.id + '.ics'">
-									<span class="icon-download" />
-									<span>{{ $t('tasks', 'Download') }}</span>
-								</a>
-							</li>
-							<Confirmation v-if="!calendar.readOnly" :message="deleteMessage(calendar.displayName)" @delete-calendar="deleteCalendar(calendar)" />
-						</ul>
-					</PopoverMenu>
-				</ul>
-			</div>
+			<template slot="actions">
+				<ActionButton
+					v-if="!calendar.readOnly"
+					icon="icon-rename"
+					@click="edit(calendar)">
+					{{ $t('tasks', 'Edit') }}
+				</ActionButton>
+				<ActionButton
+					icon="icon-public"
+					:close-after-click="true"
+					@click="copyCalDAVUrl($event, calendar)">
+					{{ !copied
+						? $t('tasks', 'Copy private link')
+						: copySuccess
+							? $t('tasks', 'Copied')
+							: $t('tasks', 'Can not copy') }}
+				</ActionButton>
+				<ActionLink
+					icon="icon-download"
+					:close-after-click="true"
+					:href="exportUrl(calendar)">
+					{{ $t('tasks', 'Download') }}
+				</ActionLink>
+				<ActionButton
+					v-if="!calendar.readOnly"
+					v-tooltip="{
+						placement: 'left',
+						boundariesElement: 'body',
+						content: deleteMessage(calendar)
+					}"
+					icon="icon-delete"
+					@click="deleteCalendar(calendar)">
+					{{ !calendar.isSharedWithMe ? $t('calendar', 'Delete') : $t('calendar', 'Unshare') }}
+				</ActionButton>
+			</template>
 
-			<!-- sharing input -->
 			<ShareCalendar v-if="shareOpen == calendar.id && !calendar.readOnly" :calendar="calendar" />
 
 			<div :class="{error: nameError}" class="app-navigation-entry-edit name">
@@ -140,8 +126,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</form>
 				<Colorpicker :selected-color="selectedColor" @color-selected="setColor(...arguments)" />
 			</div>
-		</draggable>
-		<li v-click-outside="cancelCreate" :class="{edit: creating}" class="newList icon-add reactive editing">
+		</AppNavigationItem>
+		<!-- <li v-click-outside="cancelCreate" :class="{edit: creating}" class="newList icon-add reactive editing">
 			<a class="icon icon-bw addlist sprite"
 				@click="startCreate($event)">
 				<span class="title">
@@ -174,27 +160,33 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</form>
 				<Colorpicker :selected-color="selectedColor" @color-selected="setColor(...arguments)" />
 			</div>
-		</li>
+		</li> -->
 	</ul>
 </template>
 
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 import Colorpicker from './Colorpicker'
-import PopoverMenu from './PopoverMenu'
-import Confirmation from './Confirmation'
 import ShareCalendar from './CalendarShare'
 
 import ClickOutside from 'vue-click-outside'
-import draggable from 'vuedraggable'
+import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
+import AppNavigationCounter from '@nextcloud/vue/dist/Components/AppNavigationCounter'
+import AppNavigationIconBullet from '@nextcloud/vue/dist/Components/AppNavigationIconBullet'
+import Actions from '@nextcloud/vue/dist/Components/Actions'
+import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
+import ActionLink from '@nextcloud/vue/dist/Components/ActionLink'
 
 export default {
 	components: {
 		Colorpicker,
-		PopoverMenu,
-		Confirmation,
 		ShareCalendar,
-		draggable,
+		AppNavigationItem,
+		AppNavigationCounter,
+		AppNavigationIconBullet,
+		Actions,
+		ActionButton,
+		ActionLink,
 	},
 	directives: {
 		ClickOutside,
@@ -439,8 +431,16 @@ export default {
 			}
 			return check
 		},
-		deleteMessage: function(name) {
-			return this.$t('tasks', 'This will delete the calendar "{calendar}" and all corresponding events and tasks.', { calendar: name })
+		deleteMessage: function(calendar) {
+			return !calendar.isSharedWithMe
+				? this.$t('tasks', 'This will delete the calendar "{calendar}" and all corresponding events and tasks.', { calendar: calendar.displayName })
+				: this.$t('tasks', 'This will unshare the calendar "{calendar}".', { calendar: calendar.displayName })
+		},
+		sharingIconClass(calendar) {
+			if (calendar.shares.length) {
+				return 'icon-shared'
+			}
+			return 'icon-share'
 		},
 	},
 }
