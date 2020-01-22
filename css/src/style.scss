@@ -5,13 +5,17 @@
 #app-navigation {
 	> ul {
 		> li {
-			&.collection .app-navigation-entry-icon::before {
-				content: '';
-				position: absolute;
-				width: 16px;
-				height: 16px;
-				background: var(--icon-tasks-bw-000) no-repeat;
-				background-position: inherit;
+			&.collection .app-navigation-entry-icon {
+				background-image: unset;
+
+				&::before {
+					content: '';
+					position: absolute;
+					width: 16px;
+					height: 16px;
+					background: var(--icon-tasks-bw-000) no-repeat;
+					background-position: inherit;
+				}
 			}
 
 			&.list {

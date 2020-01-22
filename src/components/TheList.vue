@@ -45,7 +45,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			:to="{ name: 'calendars', params: { calendarId: calendar.id } }"
 			:title="calendar.displayName"
 			:class="{edit: editing == calendar.id}"
-			class="list with-menu editing"
+			class="list reactive"
 			@add="dropTaskOnCalendar(...arguments, calendar)">
 			<AppNavigationIconBullet slot="icon" :color="calendar.color" />
 
@@ -127,14 +127,13 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<Colorpicker :selected-color="selectedColor" @color-selected="setColor(...arguments)" />
 			</div>
 		</AppNavigationItem>
-		<!-- <li v-click-outside="cancelCreate" :class="{edit: creating}" class="newList icon-add reactive editing">
-			<a class="icon icon-bw addlist sprite"
-				@click="startCreate($event)">
-				<span class="title">
-					{{ $t('tasks', 'Add List…') }}
-				</span>
-			</a>
-			<div :class="{error: nameError}" class="app-navigation-entry-edit name">
+		<AppNavigationItem v-click-outside="cancelCreate"
+			:title="$t('tasks', 'Add List…')"
+			icon="icon-add"
+			:class="{edit: creating}"
+			class="collection reactive"
+			@click="startCreate($event)">
+			<div :class="{error: nameError}" class="app-navigation-entry-edit">
 				<form>
 					<input id="newListInput"
 						v-model="newCalendarName"
@@ -160,7 +159,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</form>
 				<Colorpicker :selected-color="selectedColor" @color-selected="setColor(...arguments)" />
 			</div>
-		</li> -->
+		</AppNavigationItem>
 	</ul>
 </template>
 
