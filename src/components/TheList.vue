@@ -102,7 +102,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 			<ShareCalendar v-if="shareOpen == calendar.id && !calendar.readOnly" :calendar="calendar" />
 
-			<div :class="{error: nameError}" class="app-navigation-entry-edit name">
+			<div :class="{error: nameError}" class="app-navigation-entry-edit">
 				<form>
 					<input v-model="newCalendarName"
 						v-tooltip="{
