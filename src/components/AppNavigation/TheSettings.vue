@@ -38,17 +38,14 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				{{ $t('tasks', 'Visibility of Smart Collections') }}
 			</li>
 			<li v-for="collection in collections"
-				:key="collection.id">
-				<div class="label-container">
-					<span :class="collection.icon" class="icon icon-bw">
-						<span v-if="collection.id=='today'">
-							{{ dayOfMonth }}
-						</span>
-					</span>
+				:key="collection.id"
+				class="collection">
+				<div :class="collection.icon" class="icon" />
+				<span class="label-container">
 					<label :for="'visibilityCollection-' + collection.id" class="title">
 						{{ collection.displayName }}
 					</label>
-				</div>
+				</span>
 				<select :id="'visibilityCollection-' + collection.id"
 					:value="collection.show"
 					@change="setVisibility({ id: collection.id, show: +$event.target.value })">
