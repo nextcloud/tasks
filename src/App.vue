@@ -43,8 +43,8 @@ import { mapState } from 'vuex'
 import AppNavigation from '@nextcloud/vue/dist/Components/AppNavigation'
 import AppContent from '@nextcloud/vue/dist/Components/AppContent'
 import AppNavigationSettings from '@nextcloud/vue/dist/Components/AppNavigationSettings'
-import TheList from './components/TheList'
-import TheSettings from './components/TheSettings'
+import TheList from './components/AppNavigation/List'
+import TheSettings from './components/AppNavigation/TheSettings'
 import client from './services/cdav.js'
 
 export default {
