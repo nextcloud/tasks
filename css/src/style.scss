@@ -50,6 +50,16 @@
 				}
 			}
 
+			&.deleted {
+				.app-navigation-entry__title {
+					text-decoration: line-through;
+				}
+
+				.app-navigation-entry__icon-bullet {
+					opacity: 0.3;
+				}
+			}
+
 			button {
 				&.icon-share {
 					opacity: 0.3 !important;

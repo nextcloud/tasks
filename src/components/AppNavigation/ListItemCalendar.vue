@@ -26,12 +26,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		:calendar-id="calendar.id"
 		:to="{ name: 'calendars', params: { calendarId: calendar.id } }"
 		:title="calendar.displayName"
-		:class="{edit: editing}"
+		:class="{edit: editing, deleted: !!deleteTimeout}"
 		class="list reactive"
 		@add="dropTaskOnCalendar(...arguments, calendar)">
 		<AppNavigationIconBullet slot="icon" :color="calendar.color" />
 
-		<template slot="counter">
+		<template v-if="!deleteTimeout" slot="counter">
 			<AppNavigationCounter>
 				{{ calendarCount(calendar.id) | counterFormatter }}
 			</AppNavigationCounter>
@@ -46,7 +46,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			<div v-if="calendar.isSharedWithMe && !calendar.loadedOwnerPrincipal" class="icon icon-loading" />
 		</template>
 
-		<template slot="actions">
+		<template v-if="!deleteTimeout" slot="actions">
 			<ActionButton
 				v-if="!calendar.readOnly"
 				icon="icon-rename"
@@ -77,14 +77,22 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					content: deleteMessage
 				}"
 				icon="icon-delete"
-				@click="deleteCalendar">
-				{{ !calendar.isSharedWithMe ? $t('calendar', 'Delete') : $t('calendar', 'Unshare') }}
+				@click="scheduleDelete">
+				{{ !calendar.isSharedWithMe ? $t('tasks', 'Delete') : $t('tasks', 'Unshare') }}
 			</ActionButton>
 		</template>
 
-		<ShareCalendar v-if="shareOpen && !calendar.readOnly" :calendar="calendar" />
+		<template v-if="!!deleteTimeout" slot="actions">
+			<ActionButton
+				icon="icon-history"
+				@click.prevent.stop="cancelDelete">
+				{{ $n('tasks', 'Deleting the calendar in {countdown} second', 'Deleting the calendar in {countdown} seconds', countdown, { countdown }) }}
+			</ActionButton>
+		</template>
 
-		<div :class="{error: nameError}" class="app-navigation-entry-edit">
+		<ShareCalendar v-if="shareOpen && !calendar.readOnly && !deleteTimeout" :calendar="calendar" />
+
+		<div v-if="!deleteTimeout" :class="{error: nameError}" class="app-navigation-entry-edit">
 			<form>
 				<input v-model="newCalendarName"
 					v-tooltip="{
@@ -123,6 +131,8 @@ import AppNavigationIconBullet from '@nextcloud/vue/dist/Components/AppNavigatio
 import Actions from '@nextcloud/vue/dist/Components/Actions'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
 import ActionLink from '@nextcloud/vue/dist/Components/ActionLink'
+
+const CD_DURATION = 7
 
 export default {
 	components: {
@@ -167,6 +177,10 @@ export default {
 			selectedColor: '',
 			tooltipMessage: '',
 			tooltipTarget: '',
+			// Deleting
+			deleteInterval: null,
+			deleteTimeout: null,
+			countdown: CD_DURATION,
 		}
 	},
 	computed: {
@@ -326,6 +340,41 @@ export default {
 				check.allowed = true
 			}
 			return check
+		},
+
+		/**
+		 * Deletes or unshares the calendar
+		 */
+		scheduleDelete() {
+			this.deleteInterval = setInterval(() => {
+				this.countdown--
+				if (this.countdown < 0) {
+					this.countdown = 0
+				}
+			}, 1000)
+			this.deleteTimeout = setTimeout(async() => {
+				try {
+					await this.deleteCalendar(this.calendar)
+				} catch (error) {
+					this.$toast.error(this.$t('tasks', 'An error occurred, unable to delete the calendar.'))
+					console.error(error)
+				} finally {
+					clearInterval(this.deleteInterval)
+					this.deleteTimeout = null
+					this.deleteInterval = null
+					this.countdown = CD_DURATION
+				}
+			}, 1e3 * CD_DURATION)
+		},
+		/**
+		 * Cancels the deletion of a calendar
+		 */
+		cancelDelete() {
+			clearTimeout(this.deleteTimeout)
+			clearInterval(this.deleteInterval)
+			this.deleteTimeout = null
+			this.deleteInterval = null
+			this.countdown = CD_DURATION
 		},
 	},
 }
