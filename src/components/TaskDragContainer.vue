@@ -22,6 +22,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <template>
 	<draggable tag="ol"
 		:list="['']"
+		:set-data="setDragData"
 		v-bind="{group: 'tasks', swapThreshold: 0.30, delay: 500, delayOnTouchOnly: true, touchStartThreshold: 3, disabled: disabled, filter: '.readOnly'}"
 		@add="onAdd">
 		<slot />
@@ -55,6 +56,12 @@ export default {
 			'setPercentComplete',
 			'setDate',
 		]),
+
+		setDragData: (dataTransfer) => {
+			// We do nothing here, this just prevents
+			// vue.draggable from setting data on the
+			// dataTransfer object.
+		},
 
 		/**
 		 * Called when a task is dropped.

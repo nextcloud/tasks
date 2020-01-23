@@ -28,7 +28,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		:title="calendar.displayName"
 		:class="{edit: editing, deleted: !!deleteTimeout}"
 		class="list reactive"
-		@add="dropTaskOnCalendar(...arguments, calendar)">
+		draggable="false"
+		@dragstart.native="dragStart"
+		@drop.native="dropTask"
+		@dragover.native="dragOver"
+		@dragenter.native="dragEnter"
+		@dragleave.native="dragLeave">
 		<AppNavigationIconBullet slot="icon" :color="calendar.color" />
 
 		<template v-if="!deleteTimeout" slot="counter">
@@ -235,13 +240,83 @@ export default {
 			'deleteCalendar',
 			'moveTask',
 		]),
-		dropTaskOnCalendar: function($event, calendar) {
-			let task
-			const taskAttribute = $event.item.attributes['task-id']
-			if (taskAttribute) {
-				task = this.getTask(taskAttribute.value)
-				if (calendar !== task.calendar) {
-					this.moveTask({ task: task, calendar: calendar, parent: undefined })
+
+		/**
+		 * Handle the drag start
+		 *
+		 * @param {Object} e The event object
+		 * @returns {Boolean}
+		 */
+		dragStart(e) {
+			e.stopPropagation()
+			e.preventDefault()
+			return false
+		},
+		/**
+		 * Handle the drag over
+		 *
+		 * @param {Object} e The event object
+		 * @returns {Boolean}
+		 */
+		dragOver(e) {
+			if (e.preventDefault) {
+				e.preventDefault()
+			}
+			return false
+		},
+		/**
+		 * Set the appropriate class on hovering
+		 *
+		 * @param {Object} e The event object
+		 */
+		dragEnter(e) {
+			// Check if dropping here is allowed
+			if (this.calendar.readOnly) {
+				return
+			}
+			// Get the correct element, in case we hover a child.
+			if (e.target.closest) {
+				const target = e.target.closest('li.list')
+				if (target) {
+					const calendars = document.querySelectorAll('li.list')
+					calendars.forEach((f) => { f.classList.remove('dnd-hover') })
+					target.classList.add('dnd-hover')
+				}
+			}
+		},
+		/**
+		 * Remove the hovering class after leaving
+		 *
+		 * @param {Object} e The event object
+		 */
+		dragLeave(e) {
+			// Don't do anything if we leave towards a child element.
+			if (e.target.contains(e.relatedTarget)) {
+				return
+			}
+			// Get the correct element, in case we leave directly from a child.
+			if (e.target.closest) {
+				const target = e.target.closest('li.list')
+				if (!target || target.contains(e.relatedTarget)) {
+					return
+				}
+				target.classList.remove('dnd-hover')
+			}
+		},
+		/**
+		 * Drop a task on a calendar
+		 *
+		 * @param {Object} e The event object
+		 */
+		dropTask(e) {
+			// Remove all hover classes
+			const calendars = document.querySelectorAll('li.list')
+			calendars.forEach((f) => { f.classList.remove('dnd-hover') })
+			const taskUri = e.dataTransfer.getData('text/plain')
+			if (taskUri) {
+				const task = this.getTask(taskUri)
+				if (this.calendar !== task.calendar) {
+					this.moveTask({ task: task, calendar: this.calendar, parent: undefined })
 				}
 			}
 		},

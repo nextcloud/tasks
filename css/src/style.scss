@@ -60,6 +60,10 @@
 				}
 			}
 
+			&.dnd-hover {
+				background-color: rgba( $color-primary, .3 );
+			}
+
 			button {
 				&.icon-share {
 					opacity: 0.3 !important;

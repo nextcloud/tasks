@@ -31,7 +31,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			:to="{ name: 'collections', params: { collectionId: collection.id } }"
 			:title="collection.displayName"
 			class="collection reactive"
-			@add="dropTaskOnCollection(...arguments, collection)">
+			draggable="false"
+			@dragstart.native="dragStart"
+			@drop.native="dropTaskOnCollection(...arguments, collection)"
+			@dragover.native="dragOver"
+			@dragenter.native="dragEnter(...arguments, collection)"
+			@dragleave.native="dragLeave">
 			<AppNavigationCounter slot="counter">
 				{{ collectionCount(collection.id) | counterFormatter }}
 			</AppNavigationCounter>
@@ -140,11 +145,87 @@ export default {
 			'setPercentComplete',
 			'setDate',
 		]),
-		dropTaskOnCollection: function($event, collection) {
-			let task
-			const taskAttribute = $event.item.attributes['task-id']
-			if (taskAttribute) {
-				task = this.getTask(taskAttribute.value)
+
+		/**
+		 * Handle the drag start
+		 *
+		 * @param {Object} e The event object
+		 * @returns {Boolean}
+		 */
+		dragStart(e) {
+			e.stopPropagation()
+			e.preventDefault()
+			return false
+		},
+		/**
+		 * Handle the drag over
+		 *
+		 * @param {Object} e The event object
+		 * @returns {Boolean}
+		 */
+		dragOver(e) {
+			if (e.preventDefault) {
+				e.preventDefault()
+			}
+			return false
+		},
+		/**
+		 * Set the appropriate class on hovering
+		 *
+		 * @param {Object} e The event object
+		 * @param {Object} collection The collection on which the task was dropped
+		 */
+		dragEnter(e, collection) {
+			// Check if dropping here is allowed
+			if (!['starred', 'completed', 'today', 'week'].includes(collection.id)) {
+				return
+			}
+			// Get the correct element, in case we hover a child.
+			if (e.target.closest) {
+				const target = e.target.closest('li.collection')
+				if (target) {
+					const collections = document.querySelectorAll('li.collection')
+					collections.forEach((f) => { f.classList.remove('dnd-hover') })
+					target.classList.add('dnd-hover')
+				}
+			}
+		},
+		/**
+		 * Remove the hovering class after leaving
+		 *
+		 * @param {Object} e The event object
+		 */
+		dragLeave(e) {
+			// Don't do anything if we leave towards a child element.
+			if (e.target.contains(e.relatedTarget)) {
+				return
+			}
+			// Get the correct element, in case we leave directly from a child.
+			if (e.target.closest) {
+				const target = e.target.closest('li.collection')
+				if (!target || target.contains(e.relatedTarget)) {
+					return
+				}
+				target.classList.remove('dnd-hover')
+			}
+		},
+		/**
+		 * Drop a task on a collection
+		 *
+		 * @param {Object} e The event object
+		 * @param {Object} collection The collection
+		 */
+		dropTaskOnCollection(e, collection) {
+			// Remove all hover classes
+			const collections = document.querySelectorAll('li.collection')
+			collections.forEach((f) => { f.classList.remove('dnd-hover') })
+			// Check if dropping here is allowed
+			if (!['starred', 'completed', 'today', 'week'].includes(collection.id)) {
+				return
+			}
+			const taskUri = e.dataTransfer.getData('text/plain')
+			if (taskUri) {
+				const task = this.getTask(taskUri)
 				switch (collection.id) {
 				case 'starred':
 					this.setPriority({ task: task, priority: 1 })
