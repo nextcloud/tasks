@@ -37,6 +37,7 @@ import Task from '../models/task'
 import pLimit from 'p-limit'
 import { isParentInList, searchSubTasks } from './storeHelper'
 import { findVTODObyState } from './cdav-requests'
+import router from '../router'
 
 const calendarModel = {
 	id: '',
@@ -415,6 +416,8 @@ const actions = {
 			.then((response) => {
 				calendar = mapDavCollectionToCalendar(response)
 				context.commit('addCalendar', calendar)
+				// Open the calendar
+				router.push({ name: 'calendars', params: { calendarId: calendar.id } })
 			})
 			.catch((error) => { throw error })
 	},
