@@ -1,4 +1,4 @@
-import VueTestUtils from '@vue/test-utils'
+import { config } from '@vue/test-utils'
 import { OC } from './OC.js'
 import moment from 'moment'
 import MockDate from 'mockdate'
@@ -10,22 +10,22 @@ global.OC = new OC()
 global.moment = moment
 
 // Mock nextcloud translate functions
-VueTestUtils.config.mocks.$t = function(app, string) {
+config.mocks.$t = function(app, string) {
 	return string
 }
-VueTestUtils.config.mocks.t = VueTestUtils.config.mocks.$t
-global.t = VueTestUtils.config.mocks.$t
+config.mocks.t = config.mocks.$t
+global.t = config.mocks.$t
 
-VueTestUtils.config.mocks.$n = function(app, singular, plural, count) {
+config.mocks.$n = function(app, singular, plural, count) {
 	return singular
 }
-VueTestUtils.config.mocks.n = VueTestUtils.config.mocks.$n
-global.n = VueTestUtils.config.mocks.$n
+config.mocks.n = config.mocks.$n
+global.n = config.mocks.$n
 
 global.OCA = {}
 global.OCA.Tasks = {}
-global.OCA.Tasks.$t = VueTestUtils.config.mocks.$t
-global.OCA.Tasks.$n = VueTestUtils.config.mocks.$n
+global.OCA.Tasks.$t = config.mocks.$t
+global.OCA.Tasks.$n = config.mocks.$n
 
 afterAll(() => {
 	MockDate.reset()
