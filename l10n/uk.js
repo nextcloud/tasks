@@ -27,6 +27,7 @@ OC.L10N.register(
     "All day" : "Всі дні",
     "Task not found!" : "Завдання не знайдене!",
     "Edit" : "Редагувати",
+    "Copy private link" : "Копіювати приватне посилання",
     "Download" : "Завантажити",
     "Save" : "Зберегти",
     "New List" : "Новий список",
