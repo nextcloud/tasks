@@ -119,7 +119,7 @@ OC.L10N.register(
     "Calendar link could not be copied to clipboard." : "Link do kalendarza nie mógł zostać skopiowany do schowka.",
     "The name \"{calendar}\" is already used." : "Nazwa \"{calendar}\" jest już używana.",
     "An empty name is not allowed." : "Pusta nazwa nie jest dozwolona.",
-    "This will delete the calendar \"{calendar}\" and all corresponding events and tasks." : "Spowoduje to usunięcie kalendarza \"{calendar}\" oraz wszystkie odpowiadające wydarzenia i zadania.",
+    "This will delete the calendar \"{calendar}\" and all corresponding events and tasks." : "Spowoduje to usunięcie kalendarza \"{calendar}\" oraz wszystkich odpowiednich wydarzeń i zadań.",
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Współdzielone z {num} jednostką","Współdzielone z {num} jednostkami","Współdzielone z {num} jednostkami","Współdzielone z {num} jednostkami"],
     "Settings" : "Ustawienia",
     "Default list" : "Lista domyślna",
