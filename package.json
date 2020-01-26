@@ -41,7 +41,7 @@
 		"p-limit": "^2.2.2",
 		"p-queue": "^6.2.1",
 		"uuid": "^3.4.0",
-		"v-tooltip": "2.0.2",
+		"v-tooltip": "2.0.3",
 		"vue": "^2.6.11",
 		"vue-click-outside": "^1.0.7",
 		"vue-clipboard2": "^0.3.1",
