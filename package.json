@@ -25,7 +25,7 @@
 	"bugs": "https://github.com/nextcloud/tasks/issues",
 	"contributors": [],
 	"dependencies": {
-		"@nextcloud/vue": "1.2.5",
+		"@nextcloud/vue": "1.2.7",
 		"@vue/test-utils": "^1.0.0-beta.31",
 		"axios": "^0.19.1",
 		"cdav-library": "github:nextcloud/cdav-library",
