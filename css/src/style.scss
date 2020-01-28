@@ -468,14 +468,13 @@
 
 						.task-info {
 							display: flex;
-							flex: 1 1 auto;
+							flex-grow: 1;
 							cursor: pointer;
 							color: $gray_dark;
 							line-height: 16px;
 							margin: 0;
 							overflow: hidden;
 							position: relative;
-							text-overflow: ellipsis;
 							white-space: nowrap;
 
 							.title {
@@ -497,7 +496,7 @@
 
 							.categories-list {
 								padding: 11px;
-								overflow: hidden;
+								max-width: 50%;
 
 								.category {
 									overflow: hidden;
@@ -540,9 +539,7 @@
 
 						.task-body-icons {
 							display: flex;
-							max-width: 50%;
-							justify-content: flex-end;
-							overflow: hidden;
+							margin-left: auto;
 
 							&>div {
 								height: 44px;
