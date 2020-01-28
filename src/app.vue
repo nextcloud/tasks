@@ -62,7 +62,11 @@ export default {
 				.then((calendars) => {
 					// No calendars? Create a new one!
 					if (calendars.length === 0) {
-						this.$store.dispatch('appendCalendar', { displayName: this.$t('tasks', 'Tasks') })
+						let color = '#0082C9'
+						if (this.$OCA.Theming) {
+							color = this.$OCA.Theming.color
+						}
+						this.$store.dispatch('appendCalendar', { displayName: this.$t('tasks', 'Tasks'), color })
 							.then(() => {
 								this.fetchTasks()
 							})
