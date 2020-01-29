@@ -29,6 +29,7 @@ OC.L10N.register(
     "Calendar link copied to clipboard." : "پیوند تقویم در کلیپ بورد کپی شد.",
     "Calendar link could not be copied to clipboard." : "پیوند تقویم را نمی توان در کلیپ بورد کپی کرد.",
     "Settings" : "تنظیمات",
-    "Hidden" : "مخفی"
+    "Hidden" : "مخفی",
+    "Automatic" : "خودکار"
 },
 "nplurals=2; plural=(n > 1);");
