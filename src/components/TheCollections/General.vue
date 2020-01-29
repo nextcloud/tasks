@@ -22,20 +22,22 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div v-if="calendar">
-		<div v-if="collectionId !== 'completed' && !calendar.readOnly"
-			id="add-task"
-			class="add-task"
-		>
-			<form name="addTaskForm" @submit.prevent="addTask">
-				<input v-model="newTaskName"
-					:placeholder="inputString"
-					:disabled="isAddingTask"
-					class="transparent reactive"
-					@keyup.27="clearNewTask($event)"
-				>
-			</form>
+		<div class="header">
+			<div v-if="collectionId !== 'completed' && !calendar.readOnly"
+				id="add-task"
+				class="add-task"
+			>
+				<form name="addTaskForm" @submit.prevent="addTask">
+					<input v-model="newTaskName"
+						:placeholder="inputString"
+						:disabled="isAddingTask"
+						class="transparent reactive"
+						@keyup.27="clearNewTask($event)"
+					>
+				</form>
+			</div>
+			<SortorderDropdown />
 		</div>
-		<SortorderDropdown />
 		<div class="task-list">
 			<div v-for="calendar in filteredCalendars"
 				:key="calendar.id"
