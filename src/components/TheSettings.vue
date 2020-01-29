@@ -111,7 +111,7 @@ export default {
 			collections: state => state.collections.collections
 		}),
 		...mapGetters({
-			calendars: 'getSortedCalendars'
+			calendars: 'getSortedWritableCalendars'
 		})
 	},
 	methods:

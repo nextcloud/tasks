@@ -233,7 +233,12 @@ const getters = {
 	 * @returns {Calendar} The default calendar
 	 */
 	getDefaultCalendar: (state, getters, rootState) => {
-		return getters.getCalendarById(rootState.settings.settings.defaultCalendarId) || getters.getSortedCalendars[0]
+		const defaultCalendar = getters.getCalendarById(rootState.settings.settings.defaultCalendarId)
+		// If the default calendar is read only we return the first calendar that is writable
+		if (!defaultCalendar || defaultCalendar.readOnly) {
+			return getters.getSortedCalendars.find(calendar => !calendar.readOnly) || getters.getSortedCalendars[0]
+		}
+		return defaultCalendar
 	}
 }
 
