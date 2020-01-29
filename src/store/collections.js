@@ -29,7 +29,7 @@ import { isTaskInList, searchSubTasks } from './storeHelper'
 Vue.use(Vuex)
 
 const state = {
-	collections: []
+	collections: [],
 }
 
 const getters = {
@@ -38,8 +38,8 @@ const getters = {
 	 * Returns the count of tasks in a colllection
 	 *
 	 * Tasks have to
-	 *	- belong to a collection
-	 *	- be uncompleted
+	 * - belong to a collection
+	 * - be uncompleted
 	 *
 	 * @param {Object} state The store data
 	 * @param {Object} getters The store getters
@@ -65,7 +65,7 @@ const getters = {
 			count += tasks.length
 		})
 		return count
-	}
+	},
 }
 
 const mutations = {
@@ -88,7 +88,7 @@ const mutations = {
 	setVisibility(state, newCollection) {
 		const collection = state.collections.find(search => search.id === newCollection.id)
 		Vue.set(collection, 'show', newCollection.show)
-	}
+	},
 }
 
 const actions = {
@@ -103,7 +103,7 @@ const actions = {
 			Requests.get(OC.generateUrl('apps/tasks/collections'))
 				.then(response => {
 					commit('setCollections', {
-						collections: response.data.data.collections
+						collections: response.data.data.collections,
 					})
 					resolve()
 				})
@@ -122,7 +122,7 @@ const actions = {
 		return new Promise(function() {
 			Requests.post(OC.generateUrl('apps/tasks/collection/{id}/visibility/{show}', collection), {})
 		})
-	}
+	},
 }
 
 export default { state, getters, mutations, actions }

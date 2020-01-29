@@ -70,8 +70,8 @@ function testTask(task, testFunction, checkSubtasks = false) {
 		return true
 	}
 	if (checkSubtasks) {
-		for (var key in task.subTasks) {
-			var subTask = task.subTasks[key]
+		for (const key in task.subTasks) {
+			const subTask = task.subTasks[key]
 			if (testTask(subTask, testFunction, checkSubtasks)) {
 				return true
 			}
@@ -154,9 +154,9 @@ function isTaskDay(task, day) {
 }
 
 function dayOfTask(task) {
-	var diff, startdiff, duediff
-	var start = task.startMoment.startOf('day')
-	var due = task.dueMoment.startOf('day')
+	let diff, startdiff, duediff
+	const start = task.startMoment.startOf('day')
+	const due = task.dueMoment.startOf('day')
 
 	// Add all tasks whose start date will be reached at that day.
 	if (start.isValid() && !due.isValid()) {
@@ -212,7 +212,7 @@ function isParentInList(task, tasks) {
  * @returns {Array}
  */
 function sort(tasks, sortOrder, sortDirection) {
-	var comparators
+	let comparators
 	switch (sortOrder) {
 	case 'alphabetically': {
 		comparators = [sortByPinned, sortAlphabetically, sortByPriority]
@@ -245,9 +245,9 @@ function sort(tasks, sortOrder, sortDirection) {
 	default:
 		comparators = [sortByPinned, sortByCompleted, sortByDue, sortByPriority, sortByStart, sortAlphabetically]
 	}
-	var sortedTasks = tasks.sort((taskA, taskB) => {
-		var compIndex = 0
-		var result = comparators[compIndex](taskA, taskB)
+	const sortedTasks = tasks.sort((taskA, taskB) => {
+		let compIndex = 0
+		let result = comparators[compIndex](taskA, taskB)
 		while (result === 0 && compIndex < comparators.length) {
 			result = comparators[compIndex](taskA, taskB)
 			compIndex++

@@ -39,7 +39,7 @@ export default {
 			} else {
 				return 'General'
 			}
-		}
-	}
+		},
+	},
 }
 </script>

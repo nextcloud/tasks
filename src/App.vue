@@ -52,8 +52,8 @@ export default {
 	},
 	computed: {
 		...mapState({
-			calendars: state => state.calendars.calendars
-		})
+			calendars: state => state.calendars.calendars,
+		}),
 	},
 	beforeMount() {
 		// get calendars then get tasks
@@ -105,7 +105,7 @@ export default {
 					this.$router.push({ name: 'collections', params: { collectionId: this.$route.params.collectionId } })
 				}
 			}
-		}
-	}
+		},
+	},
 }
 </script>

@@ -20,14 +20,14 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<div v-if="status" v-tooltip="{
+	<div v-if="status"
+		v-tooltip="{
 			content: status.message,
 			html: true
 		}"
 		class="status-display"
 		:class="status.cssClass"
-		@click="react"
-	/>
+		@click="react" />
 </template>
 
 <script>
@@ -37,8 +37,8 @@ export default {
 	props: {
 		task: {
 			type: Object,
-			required: true
-		}
+			required: true,
+		},
 	},
 	data() {
 		return {
@@ -48,12 +48,12 @@ export default {
 	computed: {
 		status: function() {
 			return this.task.syncstatus
-		}
+		},
 	},
 	watch: {
 		status: function(newStatus) {
 			this.checkTimeout(newStatus)
-		}
+		},
 	},
 	mounted: function() {
 		this.checkTimeout(this.status)
@@ -80,6 +80,6 @@ export default {
 				}
 			}
 		},
-	}
+	},
 }
 </script>

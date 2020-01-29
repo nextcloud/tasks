@@ -23,8 +23,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 	<Actions class="sortorder reactive"
 		:title="$t('tasks', 'Change sort order')"
 		:default-icon="sortOrderIcon"
-		menu-align="right"
-	>
+		menu-align="right">
 		<ActionButton v-for="order in orders"
 			:key="order.id"
 			v-tooltip="{
@@ -35,8 +34,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			:class="{selected: sortOrder === order.id}"
 			:icon="getIcon(order)"
 			:close-after-click="true"
-			@click="setSortOrder(order.id)"
-		>
+			@click="setSortOrder(order.id)">
 			{{ order.text }}
 		</ActionButton>
 	</Actions>
@@ -59,59 +57,59 @@ export default {
 					id: 'default',
 					icon: 'icon-list',
 					text: this.$t('tasks', 'Relevance'),
-					hint: this.$t('tasks', 'Sort by completed state, due date, priority, start date and summary.')
+					hint: this.$t('tasks', 'Sort by completed state, due date, priority, start date and summary.'),
 				},
 				{
 					id: 'start',
 					icon: 'icon-start',
 					text: this.$t('tasks', 'Start date'),
-					hint: this.$t('tasks', 'Sort by start date and summary.')
+					hint: this.$t('tasks', 'Sort by start date and summary.'),
 				},
 				{
 					id: 'due',
 					icon: 'icon-due',
 					text: this.$t('tasks', 'Due date'),
-					hint: this.$t('tasks', 'Sort by due date and summary.')
+					hint: this.$t('tasks', 'Sort by due date and summary.'),
 				},
 				{
 					id: 'created',
 					icon: 'icon-add',
 					// TRANSLATORS The date at which a task was created.
 					text: this.$t('tasks', 'Created date'),
-					hint: this.$t('tasks', 'Sort by created date and summary.')
+					hint: this.$t('tasks', 'Sort by created date and summary.'),
 				},
 				{
 					id: 'modified',
 					icon: 'icon-rename',
 					text: this.$t('tasks', 'Last modified'),
-					hint: this.$t('tasks', 'Sort by last-modified date and summary.')
+					hint: this.$t('tasks', 'Sort by last-modified date and summary.'),
 				},
 				{
 					id: 'completedDate',
 					icon: 'icon-checkmark',
 					text: this.$t('tasks', 'Completed date'),
-					hint: this.$t('tasks', 'Sort by completed date.')
+					hint: this.$t('tasks', 'Sort by completed date.'),
 				},
 				{
 					id: 'priority',
 					icon: 'icon-task-star',
 					text: this.$t('tasks', 'Priority'),
-					hint: this.$t('tasks', 'Sort by priority and summary.')
+					hint: this.$t('tasks', 'Sort by priority and summary.'),
 				},
 				// Manual sorting is not yet implemented
 				// {
-				// 	id: 'manual',
-				// 	icon: 'icon-manual',
-				// 	text: this.$t('tasks', 'Manually'),
-				// 	hint: this.$t('tasks', 'Sort by manual order.')
+				//  id: 'manual',
+				//  icon: 'icon-manual',
+				//  text: this.$t('tasks', 'Manually'),
+				//  hint: this.$t('tasks', 'Sort by manual order.')
 				// },
 				{
 					id: 'alphabetically',
 					icon: 'icon-alphabetically',
 					text: this.$t('tasks', 'Alphabetically'),
-					hint: this.$t('tasks', 'Sort by summary and priority.')
-				}
-			]
+					hint: this.$t('tasks', 'Sort by summary and priority.'),
+				},
+			],
 		}
 	},
 	computed: {
@@ -121,7 +119,7 @@ export default {
 			},
 			set(order) {
 				this.$store.dispatch('setSetting', { type: 'sortOrder', value: order })
-			}
+			},
 		},
 		sortDirection: {
 			get() {
@@ -129,7 +127,7 @@ export default {
 			},
 			set(direction) {
 				this.$store.dispatch('setSetting', { type: 'sortDirection', value: +direction })
-			}
+			},
 		},
 		sortOrderIcon: function() {
 			for (const order of this.orders) {
@@ -138,7 +136,7 @@ export default {
 				}
 			}
 			return 'icon-list'
-		}
+		},
 	},
 	methods: {
 		getIcon(order) {
@@ -152,7 +150,7 @@ export default {
 			// If the sort order was already set, toggle the sort direction, otherwise reset it.
 			this.sortDirection = (this.sortOrder === order) ? !this.sortDirection : false
 			this.sortOrder = order
-		}
-	}
+		},
+	},
 }
 </script>

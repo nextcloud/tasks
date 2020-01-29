@@ -35,8 +35,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				boundariesElement: 'body',
 				content: message
 			}"
-			class="confirmation-confirm icon-delete-white no-permission" @click="deleteCalendar($event)"
-		>
+			class="confirmation-confirm icon-delete-white no-permission"
+			@click="deleteCalendar($event)">
 			<span class="countdown">
 				{{ remaining }}
 			</span>
@@ -48,21 +48,20 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 import ClickOutside from 'vue-click-outside'
 
 export default {
-	name: 'PopoverMenu',
 	directives: {
 		ClickOutside,
 	},
 	props: {
 		message: {
 			type: String,
-			default: ''
-		}
+			default: '',
+		},
 	},
 	data() {
 		return {
 			remaining: 3,
 			activated: false,
-			armed: false
+			armed: false,
 		}
 	},
 	methods: {
@@ -91,7 +90,7 @@ export default {
 			} else {
 				e.stopPropagation()
 			}
-		}
-	}
+		},
+	},
 }
 </script>

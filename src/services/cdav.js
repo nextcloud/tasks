@@ -23,16 +23,16 @@
 import DavClient from 'cdav-library'
 
 function xhrProvider() {
-	var headers = {
+	const headers = {
 		'X-Requested-With': 'XMLHttpRequest',
-		requesttoken: OC.requestToken
+		requesttoken: OC.requestToken,
 	}
-	var xhr = new XMLHttpRequest()
-	var oldOpen = xhr.open
+	const xhr = new XMLHttpRequest()
+	const oldOpen = xhr.open
 
 	// override open() method to add headers
 	xhr.open = function() {
-		var result = oldOpen.apply(this, arguments)
+		const result = oldOpen.apply(this, arguments)
 		for (const name in headers) {
 			xhr.setRequestHeader(name, headers[name])
 		}
@@ -43,5 +43,5 @@ function xhrProvider() {
 }
 
 export default new DavClient({
-	rootUrl: OC.linkToRemote('dav')
+	rootUrl: OC.linkToRemote('dav'),
 }, xhrProvider)

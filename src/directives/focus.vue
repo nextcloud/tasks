@@ -23,6 +23,6 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 export default {
 	inserted: function(el) {
 		el.focus()
-	}
+	},
 }
 </script>

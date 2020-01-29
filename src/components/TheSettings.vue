@@ -35,8 +35,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<select id="defaultCalendar" v-model="defaultCalendarId">
 						<option v-for="calendar in calendars"
 							:key="calendar.id"
-							:value="calendar.id"
-						>
+							:value="calendar.id">
 							{{ calendar.displayName }}
 						</option>
 					</select>
@@ -45,8 +44,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					{{ $t('tasks', 'Visibility of Smart Collections') }}
 				</li>
 				<li v-for="collection in collections"
-					:key="collection.id"
-				>
+					:key="collection.id">
 					<div class="label-container">
 						<span :class="collection.icon" class="icon icon-bw">
 							<span v-if="collection.id=='today'">
@@ -59,12 +57,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					</div>
 					<select :id="'visibilityCollection-' + collection.id"
 						:value="collection.show"
-						@change="setVisibility({ id: collection.id, show: +$event.target.value })"
-					>
+						@change="setVisibility({ id: collection.id, show: +$event.target.value })">
 						<option v-for="collectionOption in collectionOptions"
 							:key="collectionOption.id"
-							:value="collectionOption.id"
-						>
+							:value="collectionOption.id">
 							{{ collectionOption.name }}
 						</option>
 					</select>
@@ -83,40 +79,40 @@ export default {
 			collectionOptions: [
 				{
 					id: 0,
-					name: this.$t('tasks', 'Hidden')
+					name: this.$t('tasks', 'Hidden'),
 				},
 				{
 					id: 1,
-					name: this.$t('tasks', 'Visible')
+					name: this.$t('tasks', 'Visible'),
 				},
 				{
 					id: 2,
-					name: this.$t('tasks', 'Automatic')
-				}
+					name: this.$t('tasks', 'Automatic'),
+				},
 			],
-			dayOfMonth: moment().date()
+			dayOfMonth: moment().date(),
 		}
 	},
 	computed: {
 		defaultCalendarId: {
 			get() {
-				var cal = this.$store.getters.getDefaultCalendar
+				const cal = this.$store.getters.getDefaultCalendar
 				return cal ? cal.id : ''
 			},
 			set(value) {
 				this.$store.dispatch('setSetting', { type: 'defaultCalendarId', value: value })
-			}
+			},
 		},
 		...mapState({
-			collections: state => state.collections.collections
+			collections: state => state.collections.collections,
 		}),
 		...mapGetters({
-			calendars: 'getSortedWritableCalendars'
-		})
+			calendars: 'getSortedWritableCalendars',
+		}),
 	},
 	methods:
 		mapActions([
-			'setVisibility'
-		])
+			'setVisibility',
+		]),
 }
 </script>

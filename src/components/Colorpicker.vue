@@ -32,24 +32,20 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				:key="color"
 				:class="{ selected: (color===selectedColor) }"
 				:style="{'background-color': color}"
-				@click="pick(color)"
-			/>
+				@click="pick(color)" />
 			<li v-if="!supportsColorPicker"
 				:style="{'background-color': random}"
 				class="randomcolour"
-				@click="randomizeColour"
-			>
+				@click="randomizeColour">
 				<span class="icon icon-random" />
 			</li>
 			<label v-if="supportsColorPicker"
 				:style="{'background-color': selectedColor}"
-				class="color-selector-label"
-			>
+				class="color-selector-label">
 				<input :value="selectedColor"
 					type="color"
 					class="color-selector"
-					@change="pick($event.target.value)"
-				>
+					@change="pick($event.target.value)">
 			</label>
 		</ul>
 	</div>
@@ -61,8 +57,8 @@ export default {
 	props: {
 		selectedColor: {
 			type: String,
-			default: '#31CC7C'
-		}
+			default: '#31CC7C',
+		},
 	},
 	data() {
 		return {
@@ -75,8 +71,8 @@ export default {
 				'#7C31CC',
 				'#CC317C',
 				'#3A3B3D',
-				'#CACBCD'
-			]
+				'#CACBCD',
+			],
 		}
 	},
 	methods: {
@@ -132,14 +128,14 @@ export default {
 			saturation /= 100
 			lightness /= 100
 
-			var chroma = (1 - Math.abs((2 * lightness) - 1)) * saturation
-			var huePrime = hue / 60
-			var secondComponent = chroma * (1 - Math.abs((huePrime % 2) - 1))
+			const chroma = (1 - Math.abs((2 * lightness) - 1)) * saturation
+			let huePrime = hue / 60
+			const secondComponent = chroma * (1 - Math.abs((huePrime % 2) - 1))
 
 			huePrime = Math.floor(huePrime)
-			var red
-			var green
-			var blue
+			let red
+			let green
+			let blue
 
 			if (huePrime === 0) {
 				red = chroma
@@ -167,13 +163,13 @@ export default {
 				blue = secondComponent
 			}
 
-			var lightnessAdjustment = lightness - (chroma / 2)
+			const lightnessAdjustment = lightness - (chroma / 2)
 			red += lightnessAdjustment
 			green += lightnessAdjustment
 			blue += lightnessAdjustment
 
 			return [Math.round(red * 255), Math.round(green * 255), Math.round(blue * 255)]
-		}
-	}
+		},
+	},
 }
 </script>

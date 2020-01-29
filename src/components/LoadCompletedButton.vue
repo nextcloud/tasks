@@ -34,13 +34,13 @@ export default {
 	props: {
 		calendar: {
 			type: Object,
-			required: true
-		}
+			required: true,
+		},
 	},
 	computed: {
 		loadedCompleted() {
 			return this.calendar.loadedCompleted
-		}
+		},
 	},
 	methods: {
 		...mapActions([
@@ -51,7 +51,7 @@ export default {
 				.then((response) => {
 					this.calendar.loadedCompleted = true
 				})
-		}
-	}
+		},
+	},
 }
 </script>

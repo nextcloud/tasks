@@ -24,11 +24,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 <template>
 	<li class="calendar-sharee">
 		<span :class="{
-			'icon-loading-small': loading,
-			'icon-group': sharee.isGroup && !loading,
-			'icon-user': !sharee.isGroup && !loading
-		}" class="icon"
-		/>
+				'icon-loading-small': loading,
+				'icon-group': sharee.isGroup && !loading,
+				'icon-user': !sharee.isGroup && !loading
+			}"
+			class="icon" />
 		<span class="calendar-sharee__identifier">
 			{{ sharee.displayName }}
 		</span>
@@ -40,36 +40,35 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 				class="checkbox"
 				name="editable"
 				type="checkbox"
-				@change="editSharee"
-			>
+				@change="editSharee">
 			<label :for="uid">
 				{{ $t('tasks', 'can edit') }}
 			</label>
-			<a :class="{'calendar-sharee__utils--disabled': loading}" href="#"
+			<a :class="{'calendar-sharee__utils--disabled': loading}"
+				href="#"
 				title="Delete"
 				class="icon-delete"
-				@click="deleteSharee"
-			/>
+				@click="deleteSharee" />
 		</span>
 	</li>
 </template>
 
 <script>
 export default {
-	name: 'ShareSharee',
+	name: 'CalendarSharee',
 	props: {
 		calendar: {
 			type: Object,
-			required: true
+			required: true,
 		},
 		sharee: {
 			type: Object,
-			required: true
-		}
+			required: true,
+		},
 	},
 	data() {
 		return {
-			loading: false
+			loading: false,
 		}
 	},
 	computed: {
@@ -79,7 +78,7 @@ export default {
 		// generated id for this sharee
 		uid() {
 			return this.sharee.id + this.calendar.id + Math.floor(Math.random() * 1000)
-		}
+		},
 	},
 	methods: {
 		async deleteSharee() {
@@ -90,7 +89,7 @@ export default {
 			try {
 				await this.$store.dispatch('removeSharee', {
 					calendar: this.calendar,
-					uri: this.sharee.uri
+					uri: this.sharee.uri,
 				})
 			} catch (error) {
 				console.error(error)
@@ -108,7 +107,7 @@ export default {
 				await this.$store.dispatch('toggleShareeWritable', {
 					calendar: this.calendar,
 					uri: this.sharee.uri,
-					writeable: !this.sharee.writeable
+					writeable: !this.sharee.writeable,
 				})
 			} catch (error) {
 				console.error(error)
@@ -116,7 +115,7 @@ export default {
 			} finally {
 				this.loading = false
 			}
-		}
-	}
+		},
+	},
 }
 </script>

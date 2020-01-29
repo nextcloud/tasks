@@ -28,9 +28,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			:collection-id="collection.id"
 			:component-data="{props: {tag: 'li', to: { name: 'collections', params: { collectionId: collection.id } }, 'active-class': 'active'}}"
 			:class="[collection.icon, {'animate-up': hideCollection(collection) }]"
-			tag="RouterLink" class="collection reactive"
-			v-bind="{group: 'tasks', filter: '*'}" @add="dropTaskOnCollection(...arguments, collection)"
-		>
+			tag="RouterLink"
+			class="collection reactive"
+			v-bind="{group: 'tasks', filter: '*'}"
+			@add="dropTaskOnCollection(...arguments, collection)">
 			<a class="sprite">
 				<span v-if="collection.id=='today'" class="date">
 					{{ dayOfMonth }}
@@ -57,8 +58,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			:class="{edit: editing == calendar.id}"
 			tag="RouterLink"
 			class="list with-menu editing"
-			v-bind="{group: 'tasks', filter: '*', disabled: calendar.readOnly, preventOnFilter: false}" @add="dropTaskOnCalendar(...arguments, calendar)"
-		>
+			v-bind="{group: 'tasks', filter: '*', disabled: calendar.readOnly, preventOnFilter: false}"
+			@add="dropTaskOnCalendar(...arguments, calendar)">
 			<div :style="{'background-color': calendar.color}" class="app-navigation-entry-bullet" />
 			<a>
 				<span class="title">
@@ -73,11 +74,13 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					</li>
 
 					<!-- sharing button -->
-					<li v-if="!calendar.readOnly" v-tooltip.top="sharedWithTooltip(calendar)"
+					<li v-if="!calendar.readOnly"
+						v-tooltip.top="sharedWithTooltip(calendar)"
 						:class="{'calendar__share--shared': hasShares(calendar)}"
-						:title="sharedWithTooltip(calendar)" href="#"
-						class="calendar__share icon-shared reactive" @click="toggleShare(calendar)"
-					/>
+						:title="sharedWithTooltip(calendar)"
+						href="#"
+						class="calendar__share icon-shared reactive"
+						@click="toggleShare(calendar)" />
 					<PopoverMenu tag="li" class="app-navigation-entry-utils-menu-button reactive">
 						<ul>
 							<li v-if="!calendar.readOnly">
@@ -123,28 +126,24 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						}"
 						class="edit"
 						type="text"
-						@keyup="checkName($event, calendar, save)"
-					>
+						@keyup="checkName($event, calendar, save)">
 					<input :title="$t('tasks', 'Cancel')"
 						type="cancel"
 						value=""
 						class="action icon-close"
-						@click="resetView(calendar)"
-					>
+						@click="resetView(calendar)">
 					<input :title="$t('tasks', 'Save')"
 						type="button"
 						value=""
 						class="action icon-checkmark"
-						@click="save(calendar)"
-					>
+						@click="save(calendar)">
 				</form>
 				<Colorpicker :selected-color="selectedColor" @color-selected="setColor(...arguments)" />
 			</div>
 		</draggable>
 		<li v-click-outside="cancelCreate" :class="{edit: creating}" class="newList icon-add reactive editing">
 			<a class="icon icon-bw addlist sprite"
-				@click="startCreate($event)"
-			>
+				@click="startCreate($event)">
 				<span class="title">
 					{{ $t('tasks', 'Add List…') }}
 				</span>
@@ -161,20 +160,17 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						:placeholder="$t('tasks', 'New List')"
 						class="edit"
 						type="text"
-						@keyup="checkName($event, null, create)"
-					>
+						@keyup="checkName($event, null, create)">
 					<input :title="$t('tasks', 'Cancel')"
 						type="cancel"
 						value=""
 						class="action icon-close"
-						@click="cancelCreate"
-					>
+						@click="cancelCreate">
 					<input :title="$t('tasks', 'Save')"
 						type="button"
 						value=""
 						class="action icon-checkmark"
-						@click="create($event)"
-					>
+						@click="create($event)">
 				</form>
 				<Colorpicker :selected-color="selectedColor" @color-selected="setColor(...arguments)" />
 			</div>
@@ -213,7 +209,7 @@ export default {
 			default:
 				return count
 			}
-		}
+		},
 	},
 	data() {
 		return {
@@ -227,12 +223,12 @@ export default {
 			selectedColor: '',
 			tooltipMessage: '',
 			tooltipTarget: '',
-			dayOfMonth: moment().date()
+			dayOfMonth: moment().date(),
 		}
 	},
 	computed: {
 		...mapState({
-			collections: state => state.collections.collections
+			collections: state => state.collections.collections,
 		}),
 		...mapGetters({
 			calendars: 'getSortedCalendars',
@@ -240,7 +236,7 @@ export default {
 			calendarCount: 'getCalendarCount',
 			isCalendarNameUsed: 'isCalendarNameUsed',
 			getTask: 'getTaskByUri',
-		})
+		}),
 	},
 	methods: {
 		...mapActions([
@@ -253,8 +249,8 @@ export default {
 			'setDate',
 		]),
 		dropTaskOnCalendar: function($event, calendar) {
-			var task
-			var taskAttribute = $event.item.attributes['task-id']
+			let task
+			const taskAttribute = $event.item.attributes['task-id']
 			if (taskAttribute) {
 				task = this.getTask(taskAttribute.value)
 				if (calendar !== task.calendar) {
@@ -263,8 +259,8 @@ export default {
 			}
 		},
 		dropTaskOnCollection: function($event, collection) {
-			var task
-			var taskAttribute = $event.item.attributes['task-id']
+			let task
+			const taskAttribute = $event.item.attributes['task-id']
 			if (taskAttribute) {
 				task = this.getTask(taskAttribute.value)
 				switch (collection.id) {
@@ -323,7 +319,7 @@ export default {
 					'Shared with {num} entity',
 					'Shared with {num} entities',
 					calendar.shares.length, {
-						num: calendar.shares.length
+						num: calendar.shares.length,
 					})
 				: '' // disable the tooltip
 		},
@@ -362,7 +358,7 @@ export default {
 				})
 		},
 		exportUrl(calendar) {
-			var url = calendar.url
+			let url = calendar.url
 			// cut off last slash to have a fancy name for the ics
 			if (url.slice(url.length - 1) === '/') {
 				url = url.slice(0, url.length - 1)
@@ -430,9 +426,9 @@ export default {
 			}
 		},
 		isNameAllowed: function(name, id) {
-			var check = {
-				allowed:	false,
-				msg:	''
+			const check = {
+				allowed: false,
+				msg: '',
 			}
 			if (this.isCalendarNameUsed(name, id)) {
 				check.msg = this.$t('tasks', 'The name "{calendar}" is already used.', { calendar: name })
@@ -445,7 +441,7 @@ export default {
 		},
 		deleteMessage: function(name) {
 			return this.$t('tasks', 'This will delete the calendar "{calendar}" and all corresponding events and tasks.', { calendar: name })
-		}
-	}
+		},
+	},
 }
 </script>
