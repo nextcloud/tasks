@@ -23,8 +23,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 	<div class="content-wrapper">
 		<div v-if="task"
 			:class="{'disabled': task.calendar.readOnly}"
-			class="flex-container"
-		>
+			class="flex-container">
 			<div :class="{'editing': edit=='summary'}" class="title">
 				<span class="detail-checkbox">
 					<input :id="'detailsToggleCompleted_' + task.uid"
@@ -36,16 +35,14 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						:aria-checked="task.completed"
 						:disabled="task.calendar.readOnly"
 						:aria-label="$t('tasks', 'Task is completed')"
-						@click="toggleCompleted(task)"
-					>
+						@click="toggleCompleted(task)">
 					<label :for="'detailsToggleCompleted_' + task.uid" />
 				</span>
 				<div v-click-outside="() => finishEditing('summary')" class="title-wrapper">
 					<div v-linkify="task.summary"
 						:class="{'strike-through': task.completed}"
 						class="title-text"
-						@click="editProperty('summary', $event)"
-					/>
+						@click="editProperty('summary', $event)" />
 					<div class="expandable-container">
 						<div class="expandingArea active">
 							<pre><span>{{ tmpTask.summary }}</span><br></pre>
@@ -53,8 +50,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 								v-model="tmpTask.summary"
 								maxlength="200"
 								@keyup.27="cancelEditing('summary')"
-								@keydown.enter.prevent="finishEditing('summary')"
-							/>
+								@keydown.enter.prevent="finishEditing('summary')" />
 						</div>
 					</div>
 				</div>
@@ -64,38 +60,44 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</button>
 				<button class="reactive inline" @click="toggleStarred(task)">
 					<span :class="[{'disabled': task.calendar.readOnly}, iconStar]"
-						class="icon"
-					/>
+						class="icon" />
 				</button>
 			</div>
 			<div class="body">
 				<ul class="sections">
-					<li v-show="!task.calendar.readOnly || task.start" :class="{'date': task.startMoment.isValid(), 'editing': edit=='start', 'high': overdue(task.startMoment)}"
-						class="section detail-start"
-					>
+					<li v-show="!task.calendar.readOnly || task.start"
+						:class="{'date': task.startMoment.isValid(), 'editing': edit=='start', 'high': overdue(task.startMoment)}"
+						class="section detail-start">
 						<div v-click-outside="() => finishEditing('start')"
 							class="section-content"
-							@click="editProperty('start', $event)"
-						>
+							@click="editProperty('start', $event)">
 							<span class="section-icon">
 								<span :class="[dateIcon(task.startMoment)]"
-									class="icon"
-								/>
+									class="icon" />
 							</span>
 							<span class="section-title">
 								{{ startDateString }}
 							</span>
 							<div v-if="edit=='start'" class="section-edit">
-								<DatetimePicker :value="tmpTask.start" :lang="lang"
-									:format="dateFormat" :clearable="false" :first-day-of-week="firstDay"
-									:type="'date'" :placeholder="$t('tasks', 'Set start date')"
-									class="date" @change="setStartDate"
-								/>
-								<DatetimePicker v-if="!allDay" :value="tmpTask.start" :lang="lang"
-									:format="timeFormat" :clearable="false" :time-picker-options="timePickerOptions"
-									:type="'time'" :placeholder="$t('tasks', 'Set start time')"
-									class="time" @change="setStartTime"
-								/>
+								<DatetimePicker :value="tmpTask.start"
+									:lang="lang"
+									:format="dateFormat"
+									:clearable="false"
+									:first-day-of-week="firstDay"
+									:type="'date'"
+									:placeholder="$t('tasks', 'Set start date')"
+									class="date"
+									@change="setStartDate" />
+								<DatetimePicker v-if="!allDay"
+									:value="tmpTask.start"
+									:lang="lang"
+									:format="timeFormat"
+									:clearable="false"
+									:time-picker-options="timePickerOptions"
+									:type="'time'"
+									:placeholder="$t('tasks', 'Set start time')"
+									class="time"
+									@change="setStartTime" />
 							</div>
 						</div>
 						<div class="section-utils">
@@ -107,32 +109,39 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</button>
 						</div>
 					</li>
-					<li v-show="!task.calendar.readOnly || task.due" :class="{'date': task.dueMoment.isValid(), 'editing': edit=='due', 'high': overdue(task.dueMoment)}"
-						class="section detail-date"
-					>
+					<li v-show="!task.calendar.readOnly || task.due"
+						:class="{'date': task.dueMoment.isValid(), 'editing': edit=='due', 'high': overdue(task.dueMoment)}"
+						class="section detail-date">
 						<div v-click-outside="() => finishEditing('due')"
 							class="section-content"
-							@click="editProperty('due', $event)"
-						>
+							@click="editProperty('due', $event)">
 							<span class="section-icon">
 								<span :class="[dateIcon(task.dueMoment)]"
-									class="icon"
-								/>
+									class="icon" />
 							</span>
 							<span class="section-title">
 								{{ dueDateString }}
 							</span>
 							<div v-if="edit=='due'" class="section-edit">
-								<DatetimePicker :value="tmpTask.due" :lang="lang"
-									:format="dateFormat" :clearable="false" :first-day-of-week="firstDay"
-									:type="'date'" :placeholder="$t('tasks', 'Set due date')"
-									class="date" @change="setDueDate"
-								/>
-								<DatetimePicker v-if="!allDay" :value="tmpTask.due" :lang="lang"
-									:format="timeFormat" :clearable="false" :time-picker-options="timePickerOptions"
-									:type="'time'" :placeholder="$t('tasks', 'Set due time')"
-									class="time" @change="setDueTime"
-								/>
+								<DatetimePicker :value="tmpTask.due"
+									:lang="lang"
+									:format="dateFormat"
+									:clearable="false"
+									:first-day-of-week="firstDay"
+									:type="'date'"
+									:placeholder="$t('tasks', 'Set due date')"
+									class="date"
+									@change="setDueDate" />
+								<DatetimePicker v-if="!allDay"
+									:value="tmpTask.due"
+									:lang="lang"
+									:format="timeFormat"
+									:clearable="false"
+									:time-picker-options="timePickerOptions"
+									:type="'time'"
+									:placeholder="$t('tasks', 'Set due time')"
+									class="time"
+									@change="setDueTime" />
 							</div>
 						</div>
 						<div class="section-utils">
@@ -145,8 +154,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						</div>
 					</li>
 					<li v-show="isAllDayPossible"
-						class="section detail-all-day reactive"
-					>
+						class="section detail-all-day reactive">
 						<div class="section-content">
 							<input id="isAllDayPossible"
 								type="checkbox"
@@ -156,8 +164,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 								:aria-checked="allDay"
 								:checked="allDay"
 								:disabled="task.calendar.readOnly"
-								@click="toggleAllDay(task)"
-							>
+								@click="toggleAllDay(task)">
 							<label for="isAllDayPossible">
 								<span>{{ $t('tasks', 'All day') }}</span>
 							</label>
@@ -166,8 +173,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<li class="section detail-calendar reactive">
 						<div v-click-outside="() => finishEditing('calendar')"
 							class="section-content"
-							@click="editProperty('calendar')"
-						>
+							@click="editProperty('calendar')">
 							<span class="section-icon">
 								<span :style="{'background-color': task.calendar.color}" class="calendar-indicator" />
 							</span>
@@ -184,16 +190,14 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									:close-on-select="true"
 									class="multiselect-vue"
 									@input="changeCalendar"
-									@tag="changeCalendar"
-								/>
+									@tag="changeCalendar" />
 							</div>
 						</div>
 					</li>
 					<li class="section detail-class reactive">
 						<div v-click-outside="() => finishEditing('class')"
 							class="section-content"
-							@click="editProperty('class')"
-						>
+							@click="editProperty('class')">
 							<span class="section-icon">
 								<span class="icon icon-color icon-privacy" />
 							</span>
@@ -210,18 +214,15 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									:close-on-select="true"
 									class="multiselect-vue"
 									@input="changeClass"
-									@tag="changeClass"
-								/>
+									@tag="changeClass" />
 							</div>
 						</div>
 					</li>
 					<li v-show="!task.calendar.readOnly || task.status"
-						class="section detail-class reactive"
-					>
+						class="section detail-class reactive">
 						<div v-click-outside="() => finishEditing('status')"
 							class="section-content"
-							@click="editProperty('status')"
-						>
+							@click="editProperty('status')">
 							<span class="section-icon">
 								<span :class="[iconStatus]" class="icon" />
 							</span>
@@ -238,18 +239,16 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									:close-on-select="true"
 									class="multiselect-vue"
 									@input="changeStatus"
-									@tag="changeStatus"
-								/>
+									@tag="changeStatus" />
 							</div>
 						</div>
 					</li>
-					<li v-show="!task.calendar.readOnly || task.priority" :class="[{'editing': edit=='priority', 'date': task.priority>0}, priorityClass]"
-						class="section detail-priority"
-					>
+					<li v-show="!task.calendar.readOnly || task.priority"
+						:class="[{'editing': edit=='priority', 'date': task.priority>0}, priorityClass]"
+						class="section detail-priority">
 						<div v-click-outside="() => finishEditing('priority')"
 							class="section-content"
-							@click="editProperty('priority')"
-						>
+							@click="editProperty('priority')">
 							<span class="section-icon">
 								<span :class="[iconStar]" class="icon" />
 							</span>
@@ -263,14 +262,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									min="0"
 									max="9"
 									@keyup.27="cancelEditing('priority')"
-									@keydown.enter.prevent="finishEditing('priority')"
-								>
+									@keydown.enter.prevent="finishEditing('priority')">
 								<input v-model="tmpTask.priority"
 									type="range"
 									min="0"
 									max="9"
-									step="1"
-								>
+									step="1">
 							</div>
 						</div>
 						<div class="section-utils">
@@ -282,13 +279,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</button>
 						</div>
 					</li>
-					<li v-show="!task.calendar.readOnly || task.complete" :class="{'editing': edit=='complete', 'date': task.complete>0}"
-						class="section detail-complete"
-					>
+					<li v-show="!task.calendar.readOnly || task.complete"
+						:class="{'editing': edit=='complete', 'date': task.complete>0}"
+						class="section detail-complete">
 						<div v-click-outside="() => finishEditing('complete')"
 							class="section-content"
-							@click="editProperty('complete')"
-						>
+							@click="editProperty('complete')">
 							<span class="section-icon">
 								<span :class="[iconPercent]" class="icon" />
 							</span>
@@ -302,14 +298,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									min="0"
 									max="100"
 									@keyup.27="cancelEditing('complete')"
-									@keydown.enter.prevent="finishEditing('complete')"
-								>
+									@keydown.enter.prevent="finishEditing('complete')">
 								<input v-model="tmpTask.complete"
 									type="range"
 									min="0"
 									max="100"
-									step="1"
-								>
+									step="1">
 							</div>
 						</div>
 						<div class="section-utils">
@@ -339,8 +333,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									:close-on-select="false"
 									class="multiselect-vue"
 									@input="updateCategories"
-									@tag="updateCategory"
-								/>
+									@tag="updateCategory" />
 							</div>
 						</div>
 					</li>
@@ -348,13 +341,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						<div class="section-content note">
 							<div v-click-outside="() => finishEditing('note')"
 								class="note-body selectable"
-								@click="editProperty('note', $event)"
-							>
+								@click="editProperty('note', $event)">
 								<div :class="{'editing': edit=='note'}" class="content-fakeable">
-									<markdown id="markdown"
+									<Markdown id="markdown"
 										:source="task.note"
-										class="display-view"
-									/>
+										class="display-view" />
 									<div class="edit-view">
 										<div class="expandingArea active">
 											<pre><span>{{ tmpTask.note }}</span><br><br></pre>
@@ -370,16 +361,14 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			<div class="footer">
 				<button :style="{visibility: task.calendar.readOnly ? 'hidden' : 'visible'}"
 					class="close-all reactive inline"
-					@click="removeTask"
-				>
+					@click="removeTask">
 					<span class="icon icon-bw icon-trash" />
 				</button>
 				<span v-tooltip="{
 						content: taskInfo,
 						html: true,
 					}"
-					class="info"
-				>
+					class="info">
 					<span class="icon icon-info" />
 				</span>
 				<button class="close-all reactive inline" @click="closeDetails">
@@ -428,19 +417,19 @@ export default {
 				due: '',
 				priority: '',
 				complete: '',
-				note: ''
+				note: '',
 			},
-			firstDay: window.firstDay,		// provided by nextcloud
+			firstDay: window.firstDay, // provided by nextcloud
 			lang: {
-				days: window.dayNamesShort,		// provided by nextcloud
-				months: window.monthNamesShort	// provided by nextcloud
+				days: window.dayNamesShort, // provided by nextcloud
+				months: window.monthNamesShort, // provided by nextcloud
 			},
 			dateFormat: moment.localeData().longDateFormat('L'),
 			timeFormat: moment.localeData().longDateFormat('LT'),
 			timePickerOptions: {
 				start: '00:00',
 				step: '00:30',
-				end: '23:30'
+				end: '23:30',
 			},
 			categories: [],
 			classSelect: [
@@ -493,7 +482,7 @@ export default {
 								// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LL" will be replaced with a date, e.g. 'September 4 1986'. Please translate the string, and keep the brackets and the "LL".
 								return $t('tasks', '[Starts on] LL')
 							}
-						}
+						},
 					})
 				} else {
 					return this.task.startMoment.calendar(null, {
@@ -522,7 +511,7 @@ export default {
 								// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LL" will be replaced with a date, e.g. 'September 4 1986' and "LT" will be replaced with a time, e.g. '08:30 PM'. Please translate the string and keep the brackets the "LL" and the "LT".
 								return $t('tasks', '[Starts on] LL [at] LT')
 							}
-						}
+						},
 					})
 				}
 			} else {
@@ -552,7 +541,7 @@ export default {
 								// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string, but keep the brackets and the "LL".
 								return $t('tasks', '[Due on] LL')
 							}
-						}
+						},
 					})
 				} else {
 					return this.task.dueMoment.calendar(null, {
@@ -581,7 +570,7 @@ export default {
 								// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LL" will be replaced with a date, e.g. 'September 4 1986' and "LT" will be replaced with a time, e.g. '08:30 PM'. Please translate the string and keep the brackets the "LL" and the "LT".
 								return $t('tasks', '[Due on] LL [at] LT')
 							}
-						}
+						},
 					})
 				}
 			} else {
@@ -752,7 +741,7 @@ export default {
 
 		dateIcon: function(date) {
 			if (date.isValid()) {
-				var c = 'icon-color icon-calendar-due'
+				let c = 'icon-color icon-calendar-due'
 				if (overdue(date)) {
 					c += ' icon-calendar-overdue'
 				}
@@ -839,10 +828,10 @@ export default {
 		 * @returns {Moment} The start date moment
 		 */
 		initStartDate: function() {
-			var start = this.task.startMoment
+			const start = this.task.startMoment
 			if (!start.isValid()) {
-				var due = this.task.dueMoment
-				var reference = moment().add(1, 'h')
+				const due = this.task.dueMoment
+				let reference = moment().add(1, 'h')
 				if (due.isBefore(reference)) {
 					reference = due.subtract(1, 'm')
 				}
@@ -858,10 +847,10 @@ export default {
 		 * @returns {Moment} The due date moment
 		 */
 		initDueDate: function() {
-			var due = this.task.dueMoment
+			const due = this.task.dueMoment
 			if (!due.isValid()) {
-				var start = this.task.startMoment
-				var reference = start.isAfter() ? start : moment()
+				const start = this.task.startMoment
+				const reference = start.isAfter() ? start : moment()
 				if (this.allDay) {
 					reference.startOf('day').add(1, 'd')
 				} else {
@@ -958,6 +947,6 @@ export default {
 				this.$router.push({ name: 'calendarsTask', params: { calendarId: task.calendar.id, taskId: task.uri } })
 			}
 		},
-	}
+	},
 }
 </script>

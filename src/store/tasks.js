@@ -47,7 +47,7 @@ const getters = {
 	 * @returns {Array} The tasks
 	 */
 	getTasksByCalendarId: (state, getters, rootState) => (calendarId) => {
-		var calendar = getters.getCalendarById(calendarId)
+		const calendar = getters.getCalendarById(calendarId)
 		if (calendar) {
 			return Object.values(calendar.tasks)
 		}
@@ -90,7 +90,7 @@ const getters = {
 	 * @returns {Array} All tasks in store
 	 */
 	getAllTasks: (state, getters, rootState) => {
-		var tasks = []
+		let tasks = []
 		rootState.calendars.calendars.forEach(calendar => {
 			tasks = tasks.concat(Object.values(calendar.tasks))
 		})
@@ -108,7 +108,7 @@ const getters = {
 	getTaskByRoute: (state, getters, rootState) => {
 		// If a calendar is given, only search in that calendar.
 		if (rootState.route.params.calendarId) {
-			var calendar = getters.getCalendarById(rootState.route.params.calendarId)
+			const calendar = getters.getCalendarById(rootState.route.params.calendarId)
 			if (!calendar) {
 				return null
 			}
@@ -131,7 +131,7 @@ const getters = {
 	 */
 	getTaskByUri: (state, getters, rootState) => (taskUri) => {
 		// We have to search in all calendars
-		var task
+		let task
 		for (const calendar of rootState.calendars.calendars) {
 			task = Object.values(calendar.tasks).find(task => {
 				return task.uri === taskUri
@@ -152,7 +152,7 @@ const getters = {
 	 */
 	getTaskByUid: (state, getters, rootState) => (taskUid) => {
 		// We have to search in all calendars
-		var task
+		let task
 		for (const calendar of rootState.calendars.calendars) {
 			task = Object.values(calendar.tasks).find(task => {
 				return task.uid === taskUid
@@ -402,7 +402,7 @@ const mutations = {
 	 * @param {String} category The category to add
 	 */
 	addCategory(state, { task, category }) {
-		var categories = task.categories
+		const categories = task.categories
 		categories.push(category)
 		Vue.set(task, 'categories', categories)
 	},
@@ -455,9 +455,9 @@ const mutations = {
 		} else {
 			// Check, that the due date is after the start date.
 			// If it is not, shift the start date to keep the difference between start and due equal.
-			var start = task.startMoment
+			let start = task.startMoment
 			if (start.isValid() && due.isBefore(start)) {
-				var currentdue = task.dueMoment
+				const currentdue = task.dueMoment
 				if (currentdue.isValid()) {
 					start.subtract(currentdue.diff(due), 'ms')
 				} else {
@@ -485,9 +485,9 @@ const mutations = {
 		} else {
 			// Check, that the start date is before the due date.
 			// If it is not, shift the due date to keep the difference between start and due equal.
-			var due = task.dueMoment
+			let due = task.dueMoment
 			if (due.isValid() && start.isAfter(due)) {
-				var currentstart = task.startMoment
+				const currentstart = task.startMoment
 				if (currentstart.isValid()) {
 					due.add(start.diff(currentstart), 'ms')
 				} else {
@@ -642,15 +642,15 @@ const actions = {
 					context.commit('addTaskToParent', { task: task, parent: parent })
 
 					// Open the details view for the new task
-					var calendarId = context.rootState.route.params.calendarId
-					var collectionId = context.rootState.route.params.collectionId
+					const calendarId = context.rootState.route.params.calendarId
+					const collectionId = context.rootState.route.params.collectionId
 					if (calendarId) {
 						router.push({ name: 'calendarsTask', params: { calendarId: calendarId, taskId: task.uri } })
 					} else if (collectionId) {
 						if (collectionId === 'week') {
 							router.push({
 								name: 'collectionsParamTask',
-								params: { collectionId: collectionId, taskId: task.uri, collectionParam: '0' }
+								params: { collectionId: collectionId, taskId: task.uri, collectionParam: '0' },
 							})
 						} else {
 							router.push({ name: 'collectionsTask', params: { collectionId: collectionId, taskId: task.uri } })
@@ -1044,17 +1044,17 @@ const actions = {
 	 * @param {Integer} day The day to set
 	 */
 	async setDate(context, { task, day }) {
-		var start = task.startMoment.startOf('day')
-		var due = task.dueMoment.startOf('day')
+		const start = task.startMoment.startOf('day')
+		const due = task.dueMoment.startOf('day')
 		day = moment().startOf('day').add(day, 'days')
 
-		var diff
+		let diff
 		// Adjust start date
 		if (start.isValid()) {
 			diff = start.diff(moment().startOf('day'), 'days')
 			diff = diff < 0 ? 0 : diff
 			if (diff !== day) {
-				var newStart = task.startMoment.year(day.year()).month(day.month()).date(day.date())
+				const newStart = task.startMoment.year(day.year()).month(day.month()).date(day.date())
 				context.commit('setStart', { task: task, start: newStart })
 				context.dispatch('scheduleTaskUpdate', task)
 			}
@@ -1063,7 +1063,7 @@ const actions = {
 			diff = due.diff(moment().startOf('day'), 'days')
 			diff = diff < 0 ? 0 : diff
 			if (diff !== day) {
-				var newDue = task.dueMoment.year(day.year()).month(day.month()).date(day.date())
+				const newDue = task.dueMoment.year(day.year()).month(day.month()).date(day.date())
 				context.commit('setDue', { task: task, due: newDue })
 				context.dispatch('scheduleTaskUpdate', task)
 			}
@@ -1123,7 +1123,7 @@ const actions = {
 	 * @param {Task} data.parent The new parent task
 	 */
 	async setTaskParent(context, { task, parent }) {
-		var parentId = parent ? parent.uid : null
+		const parentId = parent ? parent.uid : null
 		// Only update the parent in case it differs from the current one.
 		if (task.related !== parentId) {
 			// Remove the task from the old parents subtask list

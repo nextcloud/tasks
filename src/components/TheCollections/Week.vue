@@ -25,37 +25,34 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		<div class="header">
 			<div v-if="calendar && !calendar.readOnly"
 				id="add-task"
-				class="add-task"
-			>
+				class="add-task">
 				<form name="addTaskForm" @submit.prevent="addTask">
 					<input v-model="newTaskName"
 						:placeholder="inputString"
 						:disabled="isAddingTask"
 						class="transparent reactive"
-						@keyup.27="clearNewTask($event)"
-					>
+						@keyup.27="clearNewTask($event)">
 				</form>
 			</div>
 			<SortorderDropdown />
 		</div>
 		<div class="task-list">
-			<div v-for="day in days" :key="day.diff" :day="day.diff"
-				class="grouped-tasks ui-droppable"
-			>
+			<div v-for="day in days"
+				:key="day.diff"
+				:day="day.diff"
+				class="grouped-tasks ui-droppable">
 				<h2 class="heading">
 					{{ dayString(day.diff) }}
 				</h2>
-				<task-drag-container
+				<TaskDragContainer
 					:collection-id="'week-' + day.diff"
 					class="tasks"
-					type="list"
-				>
-					<Task v-for="task in sort(day.tasks, sortOrder, sortDirection)"
+					type="list">
+					<TaskBody v-for="task in sort(day.tasks, sortOrder, sortDirection)"
 						:key="task.key"
 						:task="task"
-						:collection-string="'week-' + day.diff"
-					/>
-				</task-drag-container>
+						:collection-string="'week-' + day.diff" />
+				</TaskDragContainer>
 			</div>
 		</div>
 	</div>
@@ -65,19 +62,19 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 import { mapGetters, mapActions } from 'vuex'
 import { sort, isTaskInList } from '../../store/storeHelper'
 import SortorderDropdown from '../SortorderDropdown'
-import Task from '../Task'
+import TaskBody from '../TaskBody'
 import TaskDragContainer from '../TaskDragContainer'
 
 export default {
 	components: {
-		Task,
+		TaskBody,
 		SortorderDropdown,
 		TaskDragContainer,
 	},
 	data() {
 		return {
 			newTaskName: '',
-			isAddingTask: false
+			isAddingTask: false,
 		}
 	},
 	computed: {
@@ -86,7 +83,7 @@ export default {
 			tasks: 'getAllTasks',
 			uncompletedRootTasks: 'findUncompletedRootTasks',
 			sortOrder: 'sortOrder',
-			sortDirection: 'sortDirection'
+			sortDirection: 'sortDirection',
 		}),
 
 		/**
@@ -96,11 +93,11 @@ export default {
 		 */
 		days: function() {
 			// Get all uncompleted root tasks
-			var tasks = this.uncompletedRootTasks(this.tasks)
+			const tasks = this.uncompletedRootTasks(this.tasks)
 
 			// Construct array with days for the current week.
-			var days = []
-			for (var day = 0; day < 8; day++) {
+			const days = []
+			for (let day = 0; day < 8; day++) {
 				days.push({ diff: day, tasks: [] })
 
 				tasks.forEach(task => {
@@ -121,14 +118,14 @@ export default {
 	},
 	methods: {
 		...mapActions([
-			'createTask'
+			'createTask',
 		]),
 
 		sort,
 
 		dayString: function(day) {
-			var date = moment().add(day, 'day')
-			var dayString
+			const date = moment().add(day, 'day')
+			let dayString
 			if (day === 0) {
 				dayString = this.$t('tasks', 'Today')
 			} else if (day === 1) {
@@ -145,14 +142,14 @@ export default {
 		},
 
 		addTask: function() {
-			var task = { summary: this.newTaskName }
+			const task = { summary: this.newTaskName }
 
 			task.due = moment().startOf('day').format('YYYY-MM-DDTHH:mm:ss')
 			task.allDay = this.$store.state.settings.settings.allDay
 
 			this.createTask(task)
 			this.newTaskName = ''
-		}
-	}
+		},
+	},
 }
 </script>

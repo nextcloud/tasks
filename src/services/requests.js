@@ -33,5 +33,5 @@ export default {
 		return Axios.post(url, data)
 			.then((response) => Promise.resolve(response))
 			.catch((error) => Promise.reject(error))
-	}
+	},
 }

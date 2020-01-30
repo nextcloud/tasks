@@ -34,12 +34,12 @@ export default {
 	props: {
 		source: {
 			type: String,
-			default: ''
+			default: '',
 		},
 		linkify: {
 			type: Boolean,
-			default: true
-		}
+			default: true,
+		},
 	},
 	data() {
 		const md = new MarkdownIt({
@@ -50,12 +50,12 @@ export default {
 			.use(Mila, {
 				attrs: {
 					target: '_blank',
-					rel: 'nofollow'
-				}
+					rel: 'nofollow',
+				},
 			})
 			.use(Mitl)
 		return {
-			md: md
+			md: md,
 		}
 	},
 	watch: {
@@ -65,8 +65,8 @@ export default {
 				this.$nextTick(_ => {
 					this.$refs['markdown-container'].innerHTML = this.md.render(val)
 				})
-			}
-		}
+			},
+		},
 	},
 }
 </script>

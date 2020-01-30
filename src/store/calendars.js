@@ -55,7 +55,7 @@ const calendarModel = {
 }
 
 const state = {
-	calendars: []
+	calendars: [],
 }
 
 /**
@@ -98,7 +98,7 @@ export function mapDavShareeToSharee(sharee) {
 		id: id,
 		writeable: sharee.access[0].endsWith('read-write'),
 		isGroup: sharee.href.startsWith('principal:principals/groups/'),
-		uri: sharee.href
+		uri: sharee.href,
 	}
 }
 
@@ -112,8 +112,8 @@ const getters = {
 	 */
 	getSortedCalendars: state => {
 		return state.calendars.sort(function(cal1, cal2) {
-			var n1 = cal1.displayName.toUpperCase()
-			var n2 = cal2.displayName.toUpperCase()
+			const n1 = cal1.displayName.toUpperCase()
+			const n2 = cal2.displayName.toUpperCase()
 			return (n1 < n2) ? -1 : (n1 > n2) ? 1 : 0
 		})
 	},
@@ -129,8 +129,8 @@ const getters = {
 			return !calendar.readOnly
 		})
 			.sort(function(cal1, cal2) {
-				var n1 = cal1.displayName.toUpperCase()
-				var n2 = cal2.displayName.toUpperCase()
+				const n1 = cal1.displayName.toUpperCase()
+				const n2 = cal2.displayName.toUpperCase()
 				return (n1 < n2) ? -1 : (n1 > n2) ? 1 : 0
 			})
 	},
@@ -143,7 +143,7 @@ const getters = {
 	 * @returns {Calendar} The requested calendar
 	 */
 	getCalendarById: state => (calendarId) => {
-		var calendar = state.calendars.find(search => search.id === calendarId)
+		const calendar = state.calendars.find(search => search.id === calendarId)
 		return calendar
 	},
 
@@ -151,8 +151,8 @@ const getters = {
 	 * Returns the number of tasks in a calendar
 	 *
 	 * Tasks have to be
-	 *	- a root task
-	 *	- uncompleted
+	 * - a root task
+	 * - uncompleted
 	 *
 	 * @param {Object} state The store data
 	 * @param {Object} getters The store getters
@@ -182,8 +182,8 @@ const getters = {
 	 * Returns the count of completed tasks in a calendar
 	 *
 	 * Tasks have to be
-	 *	- a root task
-	 *	- completed
+	 * - a root task
+	 * - completed
 	 *
 	 * @param {Object} state The store data
 	 * @param {Object} getters The store getters
@@ -191,7 +191,7 @@ const getters = {
 	 * @returns {Integer} The count of completed tasks in a calendar
 	 */
 	getCalendarCountCompleted: (state, getters) => (calendarId) => {
-		var calendar = getters.getCalendarById(calendarId)
+		const calendar = getters.getCalendarById(calendarId)
 		return Object.values(calendar.tasks)
 			.filter(task => {
 				return task.completed === true && (!task.related || !isParentInList(task, calendar.tasks))
@@ -239,7 +239,7 @@ const getters = {
 			return getters.getSortedCalendars.find(calendar => !calendar.readOnly) || getters.getSortedCalendars[0]
 		}
 		return defaultCalendar
-	}
+	},
 }
 
 const mutations = {
@@ -348,7 +348,7 @@ const mutations = {
 			id: user,
 			writeable: false,
 			isGroup,
-			uri
+			uri,
 		}
 		if (!calendar.shares.some((share) => share.uri === uri)) {
 			calendar.shares.push(newSharee)
@@ -381,7 +381,7 @@ const mutations = {
 		calendar = state.calendars.find(search => search.id === calendar.id)
 		const sharee = calendar.shares.find(sharee => sharee.uri === uri)
 		sharee.writeable = !sharee.writeable
-	}
+	},
 }
 
 const actions = {
@@ -502,7 +502,7 @@ const actions = {
 				// We do have to manually adjust this list when a task is added, deleted or moved.
 				tasks.forEach(
 					parent => {
-						var subTasks = tasks.filter(task => {
+						const subTasks = tasks.filter(task => {
 							return task.related === parent.uid
 						})
 

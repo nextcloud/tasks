@@ -25,49 +25,43 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		<div class="header">
 			<div v-if="!calendar.readOnly"
 				id="add-task"
-				class="add-task"
-			>
+				class="add-task">
 				<form name="addTaskForm" @submit.prevent="addTask">
 					<input id="target"
 						v-model="newTaskName"
 						:placeholder="inputString"
 						:disabled="isAddingTask"
 						class="transparent reactive"
-						@keyup.27="clearNewTask($event)"
-					>
+						@keyup.27="clearNewTask($event)">
 				</form>
 			</div>
 			<SortorderDropdown />
 		</div>
 		<div class="task-list">
 			<div class="grouped-tasks">
-				<task-drag-container
+				<TaskDragContainer
 					:calendar-id="calendarId"
 					:disabled="calendar.readOnly"
 					class="tasks"
 					collection-id="uncompleted"
-					type="list"
-				>
-					<Task v-for="task in sort(uncompletedRootTasks(calendar.tasks), sortOrder, sortDirection)"
+					type="list">
+					<TaskBody v-for="task in sort(uncompletedRootTasks(calendar.tasks), sortOrder, sortDirection)"
 						:key="task.key"
-						:task="task"
-					/>
-				</task-drag-container>
+						:task="task" />
+				</TaskDragContainer>
 				<h2 v-show="completedCount(calendarId)" class="heading-hiddentasks icon-triangle-s reactive" @click="toggleHidden">
 					{{ completedCountString }}
 				</h2>
-				<task-drag-container v-if="showHidden"
+				<TaskDragContainer v-if="showHidden"
 					:calendar-id="calendarId"
 					:disabled="calendar.readOnly"
 					class="completed-tasks"
 					collection-id="completed"
-					type="list"
-				>
-					<Task v-for="task in sort(completedRootTasks(calendar.tasks), sortOrder, sortDirection)"
+					type="list">
+					<TaskBody v-for="task in sort(completedRootTasks(calendar.tasks), sortOrder, sortDirection)"
 						:key="task.key"
-						:task="task"
-					/>
-				</task-drag-container>
+						:task="task" />
+				</TaskDragContainer>
 				<LoadCompletedButton :calendar="calendar" />
 				<DeleteCompletedModal v-if="calendar.loadedCompleted && !calendar.readOnly" :calendar="calendar" />
 			</div>
@@ -81,12 +75,12 @@ import { sort } from '../../store/storeHelper'
 import SortorderDropdown from '../SortorderDropdown'
 import LoadCompletedButton from '../LoadCompletedButton'
 import DeleteCompletedModal from '../DeleteCompletedModal'
-import Task from '../Task'
+import TaskBody from '../TaskBody'
 import TaskDragContainer from '../TaskDragContainer'
 
 export default {
 	components: {
-		Task,
+		TaskBody,
 		SortorderDropdown,
 		LoadCompletedButton,
 		TaskDragContainer,
@@ -95,17 +89,17 @@ export default {
 	props: {
 		calendarId: {
 			type: String,
-			default: ''
+			default: '',
 		},
 		taskId: {
 			type: String,
-			default: ''
-		}
+			default: '',
+		},
 	},
 	data() {
 		return {
 			newTaskName: '',
-			isAddingTask: false
+			isAddingTask: false,
 		}
 	},
 	computed: {
@@ -115,7 +109,7 @@ export default {
 			},
 			set(value) {
 				this.$store.dispatch('setSetting', { type: 'showHidden', value: value })
-			}
+			},
 		},
 
 		inputString: function() {
@@ -136,12 +130,12 @@ export default {
 			uncompletedRootTasks: 'findUncompletedRootTasks',
 			completedRootTasks: 'findCompletedRootTasks',
 			sortOrder: 'sortOrder',
-			sortDirection: 'sortDirection'
-		})
+			sortDirection: 'sortDirection',
+		}),
 	},
 	methods: {
 		...mapActions([
-			'createTask'
+			'createTask',
 		]),
 		sort,
 		toggleHidden: function() {
@@ -157,6 +151,6 @@ export default {
 			this.createTask({ summary: this.newTaskName, calendar: this.calendar })
 			this.newTaskName = ''
 		},
-	}
+	},
 }
 </script>

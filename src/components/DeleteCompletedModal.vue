@@ -26,8 +26,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		</span>
 		<Modal v-if="modalOpen"
 			:out-transition="true"
-			@close="closeModal"
-		>
+			@close="closeModal">
 			<div class="emptycontent delete-completed">
 				<p class="icon-delete" />
 				<div v-if="completedTasksCount">
@@ -42,9 +41,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							}
 						) }}
 					</h3>
-					<button class="delete-completed__button icon-delete" type="button"
-						@click="deleteCompletedTasks"
-					>
+					<button class="delete-completed__button icon-delete"
+						type="button"
+						@click="deleteCompletedTasks">
 						{{ $t('tasks', 'Delete completed tasks.') }}
 					</button>
 				</div>
@@ -86,8 +85,8 @@ export default {
 	props: {
 		calendar: {
 			type: Object,
-			required: true
-		}
+			required: true,
+		},
 	},
 	data() {
 		return {
@@ -104,8 +103,8 @@ export default {
 			return this.completedRootTasks(this.calendar.tasks)
 		},
 		completedTasksCount() {
-			var completedCount = function counter(tasks) {
-				var i = tasks.length
+			const completedCount = function counter(tasks) {
+				let i = tasks.length
 				tasks.map((task) => {
 					i += counter(Object.values(task.subTasks))
 				})
@@ -146,7 +145,7 @@ export default {
 			this.tasks.map(
 				(task) => this.deleteTask({ task: task, dav: true })
 			)
-		}
+		},
 	},
 }
 </script>

@@ -21,18 +21,16 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<li	v-show="showTask"
+	<li v-show="showTask"
 		:task-id="task.uri"
 		:class="{done: task.completed, readOnly: task.calendar.readOnly}"
 		:data-priority="[task.priority]"
-		class="task-item"
-	>
+		class="task-item">
 		<div :task-id="task.uri"
 			:class="{active: isTaskOpen()}"
 			class="task-body reactive"
 			type="task"
-			@click="navigate($event)"
-		>
+			@click="navigate($event)">
 			<!-- Checkbox with divider -->
 			<div class="task-checkbox">
 				<input :id="'toggleCompleted_' + task.uid"
@@ -44,8 +42,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					:aria-checked="task.completed"
 					:disabled="task.calendar.readOnly"
 					:aria-label="$t('tasks', 'Task is completed')"
-					@click="toggleCompleted(task)"
-				>
+					@click="toggleCompleted(task)">
 				<label class="reactive no-nav" :for="'toggleCompleted_' + task.uid" />
 			</div>
 			<!-- Info: title, progress & categories -->
@@ -63,8 +60,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<div v-if="task.complete > 0" class="percentbar">
 					<div :style="{ width: task.complete + '%', 'background-color': task.calendar.color }"
 						:aria-label="$t('tasks', '{complete} % completed', {complete: task.complete})"
-						class="percentdone"
-					/>
+						class="percentdone" />
 				</div>
 			</div>
 			<!-- Icons: sync-status, calendarname, date, note, subtask-show-completed, subtask-visibility, add-subtask, starred -->
@@ -88,27 +84,22 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<button v-if="hasCompletedSubtasks"
 					class="inline reactive no-nav"
 					:title="$t('tasks', 'Toggle visibility of completed subtasks.')"
-					@click="toggleCompletedSubtasksVisibility(task)"
-				>
+					@click="toggleCompletedSubtasksVisibility(task)">
 					<span :class="{'active': !task.hideCompletedSubtasks}"
-						class="icon icon-bw icon-toggle toggle-completed-subtasks"
-					/>
+						class="icon icon-bw icon-toggle toggle-completed-subtasks" />
 				</button>
 				<button v-if="Object.values(task.subTasks).length"
 					class="inline reactive no-nav"
 					:title="$t('tasks', 'Toggle visibility of all subtasks.')"
-					@click="toggleSubtasksVisibility(task)"
-				>
+					@click="toggleSubtasksVisibility(task)">
 					<span :class="task.hideSubtasks ? 'icon-subtasks-hidden' : 'icon-subtasks-visible'"
-						class="icon icon-bw subtasks"
-					/>
+						class="icon icon-bw subtasks" />
 				</button>
 				<button v-if="!task.calendar.readOnly"
 					class="inline task-addsubtask add-subtask reactive no-nav"
 					:taskId="task.uri"
 					:title="subtasksCreationPlaceholder"
-					@click="showSubtaskInput = true"
-				>
+					@click="showSubtaskInput = true">
 					<span class="icon icon-bw icon-add" :taskId="task.uri" />
 				</button>
 				<button class="inline task-star reactive no-nav" @click="toggleStarred(task)">
@@ -119,29 +110,25 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		<div class="subtasks-container">
 			<div v-if="showSubtaskInput"
 				v-click-outside="($event) => cancelCreation($event)"
-				class="task-item add-subtask"
-			>
+				class="task-item add-subtask">
 				<form name="addTaskForm" @submit.prevent="addTask">
 					<input v-model="newTaskName"
 						v-focus
 						:placeholder="subtasksCreationPlaceholder"
 						:disabled="isAddingTask"
-						@keyup.27="showSubtaskInput = false"
-					>
+						@keyup.27="showSubtaskInput = false">
 				</form>
 			</div>
-			<task-drag-container v-if="showSubtasks"
+			<TaskDragContainer v-if="showSubtasks"
 				:task-id="task.uri"
 				:calendar-id="task.calendar.uri"
-				:disabled="task.calendar.readOnly"
-			>
-				<TaskBodyComponent v-for="subtask in filteredSubtasks"
+				:disabled="task.calendar.readOnly">
+				<TaskBody v-for="subtask in filteredSubtasks"
 					:key="subtask.uid"
 					:task="subtask"
 					:collection-string="collectionString"
-					class="subtask"
-				/>
-			</task-drag-container>
+					class="subtask" />
+			</TaskDragContainer>
 		</div>
 	</li>
 </template>
@@ -156,7 +143,7 @@ import TaskStatusDisplay from './TaskStatusDisplay'
 import TaskDragContainer from './TaskDragContainer'
 
 export default {
-	name: 'TaskBodyComponent',
+	name: 'TaskBody',
 	directives: {
 		ClickOutside,
 		focus,
@@ -169,12 +156,12 @@ export default {
 	props: {
 		task: {
 			type: Object,
-			required: true
+			required: true,
 		},
 		collectionString: {
 			type: String,
 			default: null,
-			required: false
+			required: false,
 		},
 	},
 	data() {
@@ -199,7 +186,7 @@ export default {
 					nextDay: this.$t('tasks', '[Tomorrow]'),
 					lastWeek: 'L',
 					nextWeek: 'L',
-					sameElse: 'L'
+					sameElse: 'L',
 				})
 				: ''
 		},
@@ -256,7 +243,7 @@ export default {
 		 * @returns {Array} the array with the subtasks to show
 		 */
 		filteredSubtasks: function() {
-			var subTasks = Object.values(this.task.subTasks)
+			let subTasks = Object.values(this.task.subTasks)
 			if (this.task.hideCompletedSubtasks) {
 				subTasks = subTasks.filter(task => {
 					return !task.completed
@@ -349,10 +336,10 @@ export default {
 			if (this.collectionParam !== this.$route.params.collectionParam) {
 				return false
 			}
-			var taskId = this.$route.params.taskId
-			var checkSubtasksOpen = function subtasksOpen(tasks) {
-				for (var key in tasks) {
-					var task = tasks[key]
+			const taskId = this.$route.params.taskId
+			const checkSubtasksOpen = function subtasksOpen(tasks) {
+				for (const key in tasks) {
+					const task = tasks[key]
 					if (task.uri === taskId) {
 						return true
 					}
@@ -383,7 +370,7 @@ export default {
 					if (this.collectionParam) {
 						this.$router.push({
 							name: 'collectionsParamTask',
-							params: { collectionId: this.collectionId, collectionParam: this.collectionParam, taskId: this.task.uri }
+							params: { collectionId: this.collectionId, collectionParam: this.collectionParam, taskId: this.task.uri },
 						})
 					} else {
 						this.$router.push({ name: 'collectionsTask', params: { collectionId: this.collectionId, taskId: this.task.uri } })
@@ -400,7 +387,7 @@ export default {
 		},
 
 		addTask: function() {
-			var task = { summary: this.newTaskName, calendar: this.task.calendar, related: this.task.uid }
+			const task = { summary: this.newTaskName, calendar: this.task.calendar, related: this.task.uid }
 
 			// If the task is created in a collection view,
 			// set the appropriate properties.
@@ -417,6 +404,6 @@ export default {
 			this.createTask(task)
 			this.newTaskName = ''
 		},
-	}
+	},
 }
 </script>

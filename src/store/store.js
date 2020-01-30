@@ -34,6 +34,6 @@ export default new Vuex.Store({
 		calendars,
 		collections,
 		tasks,
-		settings
-	}
+		settings,
+	},
 })

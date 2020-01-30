@@ -46,7 +46,7 @@ export default class TaskStatus {
 			break
 		case 'success':
 			this.cssClass = 'success'
-			this.duration = 5000		// timeout in ms
+			this.duration = 5000 // timeout in ms
 			break
 		}
 

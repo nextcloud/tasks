@@ -1,6 +1,7 @@
 import { config } from '@vue/test-utils'
 import { OC } from './OC.js'
 import moment from 'moment'
+// eslint-disable-next-line node/no-unpublished-import
 import MockDate from 'mockdate'
 
 // Set date to fixed value
@@ -29,4 +30,4 @@ global.OCA.Tasks.$n = config.mocks.$n
 
 afterAll(() => {
 	MockDate.reset()
-});
+})

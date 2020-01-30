@@ -28,7 +28,7 @@ import Requests from '../services/requests'
 Vue.use(Vuex)
 
 const state = {
-	settings: {}
+	settings: {},
 }
 
 const getters = {
@@ -76,7 +76,7 @@ const mutations = {
 	 */
 	setSetting(state, payload) {
 		state.settings[payload.type] = payload.value
-	}
+	},
 }
 
 const actions = {
@@ -105,12 +105,12 @@ const actions = {
 			Requests.get(OC.generateUrl('apps/tasks/settings'))
 				.then(response => {
 					commit('setSettings', {
-						settings: response.data.data.settings
+						settings: response.data.data.settings,
 					})
 					resolve()
 				})
 		})
-	}
+	},
 }
 
 export default { state, getters, mutations, actions }

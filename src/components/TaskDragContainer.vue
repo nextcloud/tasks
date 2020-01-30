@@ -23,8 +23,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 	<draggable tag="ol"
 		:list="['']"
 		v-bind="{group: 'tasks', swapThreshold: 0.30, delay: 500, delayOnTouchOnly: true, touchStartThreshold: 3, disabled: disabled, filter: '.readOnly'}"
-		@add="onAdd"
-	>
+		@add="onAdd">
 		<slot />
 	</draggable>
 </template>
@@ -41,7 +40,7 @@ export default {
 		disabled: {
 			type: Boolean,
 			default: false,
-		}
+		},
 	},
 	computed: {
 		...mapGetters({
@@ -63,9 +62,9 @@ export default {
 		 * @param {Object} $event The event which caused the drop
 		 */
 		onAdd: function($event) {
-			var task
+			let task
 			// The task to move
-			var taskAttribute = $event.item.attributes['task-id']
+			const taskAttribute = $event.item.attributes['task-id']
 			if (taskAttribute) {
 				task = this.getTask(taskAttribute.value)
 			}
@@ -82,14 +81,14 @@ export default {
 		 * @param {Object} $event The event which caused the move
 		 */
 		prepareMoving: function(task, $event) {
-			var parent, calendar
+			let parent, calendar
 			// The new calendar --> make the moved task a root task
-			var calendarAttribute = $event.to.attributes['calendar-id']
+			const calendarAttribute = $event.to.attributes['calendar-id']
 			if (calendarAttribute) {
 				calendar = this.getCalendar(calendarAttribute.value)
 			}
 			// The new parent task --> make the moved task a subtask
-			var parentAttribute = $event.to.attributes['task-id']
+			const parentAttribute = $event.to.attributes['task-id']
 			if (parentAttribute) {
 				parent = this.getTask(parentAttribute.value)
 				// If we move to a parent task, the calendar has to be the parents calendar.
@@ -112,9 +111,9 @@ export default {
 		prepareCollecting: function(task, $event) {
 			// The new collection --> make the moved task a member of this collection
 			// This is necessary for the collections {starred, today, completed, uncompleted and week}
-			var collectionAttribute = $event.to.attributes['collection-id']
+			const collectionAttribute = $event.to.attributes['collection-id']
 			if (collectionAttribute) {
-				var collectionId = collectionAttribute.value
+				let collectionId = collectionAttribute.value
 				// Split the collectionId in case we deal with 'week-x'
 				collectionId = collectionId.split('-')
 				switch (collectionId[0]) {

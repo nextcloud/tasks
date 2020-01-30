@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div class="calendar-shares">
-		<multiselect
+		<Multiselect
 			id="users-groups-search"
 			:options="usersOrGroups"
 			:searchable="true"
@@ -37,13 +37,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 			track-by="user"
 			label="user"
 			@search-change="findSharee"
-			@input="shareCalendar"
-		/>
+			@input="shareCalendar" />
 		<!-- list of user or groups calendar is shared with -->
 		<ul v-if="calendar.shares.length > 0" class="calendar-shares__list">
-			<calendar-sharee v-for="sharee in calendar.shares" :key="sharee.uri"
-				:sharee="sharee" :calendar="calendar"
-			/>
+			<CalendarSharee v-for="sharee in calendar.shares"
+				:key="sharee.uri"
+				:sharee="sharee"
+				:calendar="calendar" />
 		</ul>
 	</div>
 </template>
@@ -52,13 +52,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 import client from '../services/cdav'
 import { Multiselect } from '@nextcloud/vue/dist/Components/Multiselect'
 
-import calendarSharee from './CalendarSharee'
+import CalendarSharee from './CalendarSharee'
 // import debounce from 'debounce'
 
 export default {
-	name: 'ShareCalendar',
+	name: 'CalendarShare',
 	components: {
-		calendarSharee,
+		CalendarSharee,
 		Multiselect,
 	},
 	props: {
@@ -66,14 +66,14 @@ export default {
 			type: Object,
 			default() {
 				return {}
-			}
-		}
+			},
+		},
 	},
 	data() {
 		return {
 			isLoading: false,
 			inputGiven: false,
-			usersOrGroups: []
+			usersOrGroups: [],
 		}
 	},
 	computed: {
@@ -82,7 +82,7 @@ export default {
 		},
 		noResult() {
 			return this.$t('tasks', 'No users or groups')
-		}
+		},
 	},
 	mounted() {
 		// This ensures that the multiselect input is in focus as soon as the user clicks share
@@ -124,7 +124,7 @@ export default {
 							displayName: result.displayname,
 							icon: isGroup ? 'icon-group' : 'icon-user',
 							uri: result.principalScheme,
-							isGroup
+							isGroup,
 						})
 					}
 					return list
@@ -135,7 +135,7 @@ export default {
 				this.inputGiven = false
 				this.isLoading = false
 			}
-		}
-	}
+		},
+	},
 }
 </script>

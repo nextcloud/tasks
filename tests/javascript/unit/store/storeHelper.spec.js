@@ -51,8 +51,7 @@ UID:task04\n
 SUMMARY:Test 1\n
 DUE:20151119T183901\n
 END:VTODO\n
-END:VCALENDAR`,
-]
+END:VCALENDAR`]
 
 const tasks = vCalendars.map((vCalendar) => { return new Task(vCalendar) })
 

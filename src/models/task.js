@@ -84,7 +84,7 @@ export default class Task {
 		this._summary = this.vtodo.getFirstPropertyValue('summary') || ''
 		this._priority = this.vtodo.getFirstPropertyValue('priority')
 		this._complete = this.vtodo.getFirstPropertyValue('percent-complete') || 0
-		var comp = this.vtodo.getFirstPropertyValue('completed')
+		const comp = this.vtodo.getFirstPropertyValue('completed')
 		this._completed = !!comp
 		this._completedDate = comp ? comp.toJSDate() : null
 		this._completedDateMoment = moment(this._completedDate, 'YYYYMMDDTHHmmss')
@@ -97,12 +97,12 @@ export default class Task {
 		this._startMoment = moment(this._start, 'YYYYMMDDTHHmmss')
 		this._due = this.vtodo.getFirstPropertyValue('due')
 		this._dueMoment = moment(this._due, 'YYYYMMDDTHHmmss')
-		var start = this.vtodo.getFirstPropertyValue('dtstart')
-		var due = this.vtodo.getFirstPropertyValue('due')
-		var d = due || start
+		const start = this.vtodo.getFirstPropertyValue('dtstart')
+		const due = this.vtodo.getFirstPropertyValue('due')
+		const d = due || start
 		this._allDay = d !== null && d.isDate
 		this._loaded = false
-		var categories = this.vtodo.getFirstProperty('categories')
+		const categories = this.vtodo.getFirstProperty('categories')
 		this._categories = categories ? categories.getValues() : []
 		this._modified = this.vtodo.getFirstPropertyValue('last-modified')
 		this._modifiedMoment = moment(this._modified, 'YYYYMMDDTHHmmss')
@@ -292,7 +292,7 @@ export default class Task {
 			this.vtodo.removeProperty('completed')
 		}
 		this.updateLastModified()
-		var comp = this.vtodo.getFirstPropertyValue('completed')
+		const comp = this.vtodo.getFirstPropertyValue('completed')
 		this._completed = !!comp
 		this._completedDate = comp ? comp.toJSDate() : null
 		this._completedDateMoment = moment(this._completedDate, 'YYYYMMDDTHHmmss')
@@ -406,7 +406,7 @@ export default class Task {
 		this._start = this.vtodo.getFirstPropertyValue('dtstart')
 		this._startMoment = moment(this._start, 'YYYYMMDDTHHmmss')
 		// Check all day setting
-		var d = this._due || this._start
+		const d = this._due || this._start
 		this._allDay = d !== null && d.isDate
 	}
 
@@ -428,7 +428,7 @@ export default class Task {
 		this._due = this.vtodo.getFirstPropertyValue('due')
 		this._dueMoment = moment(this._due, 'YYYYMMDDTHHmmss')
 		// Check all day setting
-		var d = this._due || this._start
+		const d = this._due || this._start
 		this._allDay = d !== null && d.isDate
 	}
 
@@ -441,12 +441,12 @@ export default class Task {
 	}
 
 	set allDay(allDay) {
-		var start = this.vtodo.getFirstPropertyValue('dtstart')
+		let start = this.vtodo.getFirstPropertyValue('dtstart')
 		if (start) {
 			start.isDate = allDay
 			this.vtodo.updatePropertyWithValue('dtstart', start)
 		}
-		var due = this.vtodo.getFirstPropertyValue('due')
+		let due = this.vtodo.getFirstPropertyValue('due')
 		if (due) {
 			due.isDate = allDay
 			this.vtodo.updatePropertyWithValue('due', due)
@@ -454,7 +454,7 @@ export default class Task {
 		this.updateLastModified()
 		start = this.vtodo.getFirstPropertyValue('dtstart')
 		due = this.vtodo.getFirstPropertyValue('due')
-		var d = due || start
+		const d = due || start
 		this._allDay = d !== null && d.isDate
 	}
 
@@ -491,12 +491,12 @@ export default class Task {
 	 * @memberof Task
 	 */
 	set categories(newCategories) {
-		var categories = this.vtodo.getFirstProperty('categories')
+		let categories = this.vtodo.getFirstProperty('categories')
 		if (newCategories.length > 0) {
 			if (categories) {
 				categories.setValues(newCategories)
 			} else {
-				var prop = new ICAL.Property('categories')
+				const prop = new ICAL.Property('categories')
 				prop.setValues(newCategories)
 				categories = this.vtodo.addProperty(prop)
 			}
@@ -509,7 +509,7 @@ export default class Task {
 	}
 
 	updateLastModified() {
-		var now = ICAL.Time.now()
+		const now = ICAL.Time.now()
 		this.vtodo.updatePropertyWithValue('last-modified', now)
 		this.vtodo.updatePropertyWithValue('dtstamp', now)
 		this._modified = now
@@ -572,7 +572,7 @@ export default class Task {
 			return this._matchesSearchQuery
 		}
 		// We search in these task properties
-		var keys = ['summary', 'note', 'categories']
+		const keys = ['summary', 'note', 'categories']
 		// Make search case-insensitive.
 		searchQuery = searchQuery.toLowerCase()
 		for (const key of keys) {

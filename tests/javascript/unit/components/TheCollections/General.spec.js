@@ -46,12 +46,12 @@ describe('General.vue', () => {
 		if (wrapper.vm.$route.params.collectionId !== 'starred') {
 			router.push({ name: 'collections', params: { collectionId: 'starred' } })
 		}
-		expect(wrapper.find('li[task-id="pwen4kz18g.ics"]').exists()).toBe(true)	// Important task				--> shown
-		expect(wrapper.find('li[task-id="pwen4kz19g.ics"]').exists()).toBe(false)	// Not important task			--> hidden
-		expect(wrapper.find('li[task-id="pwen4kz20g.ics"]').exists()).toBe(true)	// Has an important subsubtask	--> shown
-		expect(wrapper.find('li[task-id="pwen4kz24g.ics"]').exists()).toBe(true)	// Important subsubtask 		--> shown
-		expect(wrapper.find('li[task-id="pwen4kz25g.ics"]').exists()).toBe(false)	// Has an important sibling, but no important child --> hidden
-		// Not important, has important subtask which is completed	--> hidden
+		expect(wrapper.find('li[task-id="pwen4kz18g.ics"]').exists()).toBe(true) // Important task --> shown
+		expect(wrapper.find('li[task-id="pwen4kz19g.ics"]').exists()).toBe(false) // Not important task --> hidden
+		expect(wrapper.find('li[task-id="pwen4kz20g.ics"]').exists()).toBe(true) // Has an important subsubtask --> shown
+		expect(wrapper.find('li[task-id="pwen4kz24g.ics"]').exists()).toBe(true) // Important subsubtask --> shown
+		expect(wrapper.find('li[task-id="pwen4kz25g.ics"]').exists()).toBe(false) // Has an important sibling, but no important child --> hidden
+		// Not important, has important subtask which is completed --> hidden
 		expect(wrapper.find('li[task-id="pwen4kz30g.ics"]').exists()).toBe(false)
 	})
 
@@ -71,12 +71,12 @@ describe('General.vue', () => {
 		if (wrapper.vm.$route.params.collectionId !== 'current') {
 			router.push({ name: 'collections', params: { collectionId: 'current' } })
 		}
-		expect(wrapper.find('li[task-id="pwen4kz18g.ics"]').exists()).toBe(true)	// No start or due date			--> shown
-		expect(wrapper.find('li[task-id="pwen4kz19g.ics"]').exists()).toBe(false)	// Start date in the future		--> hidden
-		expect(wrapper.find('li[task-id="pwen4kz20g.ics"]').exists()).toBe(true)	// Start date in the future, but current subsubtask	--> shown
-		expect(wrapper.find('li[task-id="pwen4kz24g.ics"]').exists()).toBe(true)	// Current subsubtask 			--> shown
-		expect(wrapper.find('li[task-id="pwen4kz25g.ics"]').exists()).toBe(false)	// Start date in the future and no current child	--> hidden
-		// Not current, has current subtask which is completed	--> hidden
+		expect(wrapper.find('li[task-id="pwen4kz18g.ics"]').exists()).toBe(true) // No start or due date --> shown
+		expect(wrapper.find('li[task-id="pwen4kz19g.ics"]').exists()).toBe(false) // Start date in the future --> hidden
+		expect(wrapper.find('li[task-id="pwen4kz20g.ics"]').exists()).toBe(true) // Start date in the future, but current subsubtask --> shown
+		expect(wrapper.find('li[task-id="pwen4kz24g.ics"]').exists()).toBe(true) // Current subsubtask --> shown
+		expect(wrapper.find('li[task-id="pwen4kz25g.ics"]').exists()).toBe(false) // Start date in the future and no current child --> hidden
+		// Not current, has current subtask which is completed --> hidden
 		expect(wrapper.find('li[task-id="pwen4kz30g.ics"]').exists()).toBe(false)
 	})
 
@@ -96,11 +96,11 @@ describe('General.vue', () => {
 		if (wrapper.vm.$route.params.collectionId !== 'today') {
 			router.push({ name: 'collections', params: { collectionId: 'today' } })
 		}
-		expect(wrapper.find('li[task-id="pwen4kz18g.ics"]').exists()).toBe(true)	// Already due					--> shown
-		expect(wrapper.find('li[task-id="pwen4kz19g.ics"]').exists()).toBe(false)	// Start date in the future		--> hidden
-		expect(wrapper.find('li[task-id="pwen4kz20g.ics"]').exists()).toBe(true)	// Start date in the future, but due subsubtask	--> shown
-		expect(wrapper.find('li[task-id="pwen4kz23g.ics"]').exists()).toBe(true)	// Due subtask					--> shown
-		// Not today, has today subtask which is completed	--> hidden
+		expect(wrapper.find('li[task-id="pwen4kz18g.ics"]').exists()).toBe(true) // Already due --> shown
+		expect(wrapper.find('li[task-id="pwen4kz19g.ics"]').exists()).toBe(false) // Start date in the future --> hidden
+		expect(wrapper.find('li[task-id="pwen4kz20g.ics"]').exists()).toBe(true) // Start date in the future, but due subsubtask --> shown
+		expect(wrapper.find('li[task-id="pwen4kz23g.ics"]').exists()).toBe(true) // Due subtask --> shown
+		// Not today, has today subtask which is completed --> hidden
 		expect(wrapper.find('li[task-id="pwen4kz30g.ics"]').exists()).toBe(false)
 	})
 
@@ -120,7 +120,7 @@ describe('General.vue', () => {
 		if (wrapper.vm.$route.params.collectionId !== 'completed') {
 			router.push({ name: 'collections', params: { collectionId: 'completed' } })
 		}
-		expect(wrapper.find('li[task-id="pwen4kz19g.ics"]').exists()).toBe(false)	// Not completed	-->	hidden
-		expect(wrapper.find('li[task-id="pwen4kz40g.ics"]').exists()).toBe(true)	// Completed		--> shown
+		expect(wrapper.find('li[task-id="pwen4kz19g.ics"]').exists()).toBe(false) // Not completed --> hidden
+		expect(wrapper.find('li[task-id="pwen4kz40g.ics"]').exists()).toBe(true) // Completed --> shown
 	})
 })

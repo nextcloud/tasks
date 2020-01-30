@@ -1,13 +1,11 @@
 import { createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 
-import calendars from '../../../src/store/calendars'
+import calendars, { mapDavCollectionToCalendar } from '../../../src/store/calendars'
 import collections from '../../../src/store/collections'
 import tasks from '../../../src/store/tasks'
 import settings from '../../../src/store/settings'
 import Task from '../../../src/models/task'
-
-import { mapDavCollectionToCalendar } from '../../../src/store/calendars'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
@@ -17,8 +15,8 @@ const store = new Vuex.Store({
 		calendars,
 		collections,
 		tasks,
-		settings
-	}
+		settings,
+	},
 })
 
 const calendarsData = [
@@ -44,7 +42,7 @@ PRIORITY:1\n
 DUE:20190101T123400\n
 END:VTODO\n
 END:VCALENDAR`,
-`
+		`
 BEGIN:VCALENDAR\n
 VERSION:2.0\n
 PRODID:-//Nextcloud Tasks 0.11.3\n
@@ -58,7 +56,7 @@ PRIORITY:9\n
 DTSTART:20190918T095816\n
 END:VTODO\n
 END:VCALENDAR`,
-`
+		`
 BEGIN:VCALENDAR\n
 VERSION:2.0\n
 PRODID:-//Nextcloud Tasks 0.11.3\n
@@ -70,7 +68,7 @@ UID:pwen4kz20g\n
 SUMMARY:Calendar 1 - Task 3\n
 END:VTODO\n
 END:VCALENDAR`,
-`
+		`
 BEGIN:VCALENDAR\n
 VERSION:2.0\n
 PRODID:-//Nextcloud Tasks 0.11.3\n
@@ -84,7 +82,7 @@ SUMMARY:Calendar 1 - Task 3 - Subtask 1\n
 DUE:20190101T123400\n
 END:VTODO\n
 END:VCALENDAR`,
-`
+		`
 BEGIN:VCALENDAR\n
 VERSION:2.0\n
 PRODID:-//Nextcloud Tasks 0.11.3\n
@@ -98,7 +96,7 @@ SUMMARY:Calendar 1 - Task 3 - Subtask 2\n
 DTSTART:20190918T095816\n
 END:VTODO\n
 END:VCALENDAR`,
-`
+		`
 BEGIN:VCALENDAR\n
 VERSION:2.0\n
 PRODID:-//Nextcloud Tasks 0.11.3\n
@@ -112,7 +110,7 @@ SUMMARY:Calendar 1 - Task 3 - Subtask 1 - Subsubtask 1\n
 PRIORITY:1\n
 END:VTODO\n
 END:VCALENDAR`,
-`
+		`
 BEGIN:VCALENDAR\n
 VERSION:2.0\n
 PRODID:-//Nextcloud Tasks 0.11.3\n
@@ -125,7 +123,7 @@ SUMMARY:Calendar 1 - Task 4\n
 DTSTART:20190918T095816\n
 END:VTODO\n
 END:VCALENDAR`,
-`
+		`
 BEGIN:VCALENDAR\n
 VERSION:2.0\n
 PRODID:-//Nextcloud Tasks 0.11.3\n
@@ -142,7 +140,7 @@ STATUS:COMPLETED\n
 COMPLETED:20190918T095816\n
 END:VTODO\n
 END:VCALENDAR`,
-`
+		`
 BEGIN:VCALENDAR\n
 VERSION:2.0\n
 PRODID:-//Nextcloud Tasks 0.11.3\n
@@ -159,7 +157,7 @@ COMPLETED:20190918T095816\n
 DTSTART:20190918T095816\n
 END:VTODO\n
 END:VCALENDAR`,
-`
+		`
 BEGIN:VCALENDAR\n
 VERSION:2.0\n
 PRODID:-//Nextcloud Tasks 0.11.3\n
@@ -172,8 +170,7 @@ SUMMARY:Calendar 1 - Task 6\n
 PRIORITY:9\n
 DTSTART:20190102T095816\n
 END:VTODO\n
-END:VCALENDAR`
-		],
+END:VCALENDAR`],
 	},
 	{
 		url: 'calendar-2/tmp',
@@ -196,7 +193,7 @@ SUMMARY:Calendar 2 - Task 1\n
 DUE:20190103T120000\n
 END:VTODO\n
 END:VCALENDAR`,
-`
+		`
 BEGIN:VCALENDAR\n
 VERSION:2.0\n
 PRODID:-//Nextcloud Tasks 0.11.3\n
@@ -209,7 +206,7 @@ SUMMARY:Calendar 2 - Task 2\n
 DUE:20190107T120000\n
 END:VTODO\n
 END:VCALENDAR`,
-`
+		`
 BEGIN:VCALENDAR\n
 VERSION:2.0\n
 PRODID:-//Nextcloud Tasks 0.11.3\n
@@ -222,7 +219,7 @@ SUMMARY:Calendar 2 - Task 3\n
 DUE:20180107T120000\n
 END:VTODO\n
 END:VCALENDAR`,
-`
+		`
 BEGIN:VCALENDAR\n
 VERSION:2.0\n
 PRODID:-//Nextcloud Tasks 0.11.3\n
@@ -235,7 +232,7 @@ SUMMARY:Calendar 2 - Task 4\n
 DUE:20190101T120000\n
 END:VTODO\n
 END:VCALENDAR`,
-`
+		`
 BEGIN:VCALENDAR\n
 VERSION:2.0\n
 PRODID:-//Nextcloud Tasks 0.11.3\n
@@ -249,7 +246,7 @@ SUMMARY:Calendar 2 - Task 4 - Subtask 1\n
 DUE:20190103T120000\n
 END:VTODO\n
 END:VCALENDAR`,
-`
+		`
 BEGIN:VCALENDAR\n
 VERSION:2.0\n
 PRODID:-//Nextcloud Tasks 0.11.3\n
@@ -263,7 +260,7 @@ SUMMARY:Calendar 2 - Task 4 - Subtask 2\n
 DUE:20190203T120000\n
 END:VTODO\n
 END:VCALENDAR`,
-`
+		`
 BEGIN:VCALENDAR\n
 VERSION:2.0\n
 PRODID:-//Nextcloud Tasks 0.11.3\n
@@ -275,8 +272,7 @@ RELATED-TO:pwen2kz37g\n
 UID:pwen2kz38g\n
 SUMMARY:Calendar 2 - Task 4 - Subtask 2 - Subsubtask 1\n
 END:VTODO\n
-END:VCALENDAR`
-		],
+END:VCALENDAR`],
 	},
 ]
 
@@ -285,7 +281,7 @@ calendarsData.forEach(calendarData => {
 	const tasks = calendarData.tasks.map(taskData => {
 		const task = new Task(taskData, calendar)
 		const response = {
-			url: `${calendar.id}/${task.uid}.ics`
+			url: `${calendar.id}/${task.uid}.ics`,
 		}
 		localVue.set(task, 'dav', response)
 		return task
@@ -293,7 +289,7 @@ calendarsData.forEach(calendarData => {
 	// Add subtasks correctly
 	tasks.forEach(
 		parent => {
-			var subTasks = tasks.filter(task => {
+			const subTasks = tasks.filter(task => {
 				return task.related === parent.uid
 			})
 

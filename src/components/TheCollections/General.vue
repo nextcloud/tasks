@@ -25,15 +25,13 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		<div class="header">
 			<div v-if="collectionId !== 'completed' && !calendar.readOnly"
 				id="add-task"
-				class="add-task"
-			>
+				class="add-task">
 				<form name="addTaskForm" @submit.prevent="addTask">
 					<input v-model="newTaskName"
 						:placeholder="inputString"
 						:disabled="isAddingTask"
 						class="transparent reactive"
-						@keyup.27="clearNewTask($event)"
-					>
+						@keyup.27="clearNewTask($event)">
 				</form>
 			</div>
 			<SortorderDropdown />
@@ -42,24 +40,21 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			<div v-for="calendar in filteredCalendars"
 				:key="calendar.id"
 				:rel="calendar.id"
-				class="grouped-tasks ui-droppable"
-			>
+				class="grouped-tasks ui-droppable">
 				<h2 class="heading">
 					{{ calendar.displayName }}
 				</h2>
-				<task-drag-container
+				<TaskDragContainer
 					:calendar-id="calendar.id"
 					:collection-id="collectionId"
 					:disabled="calendar.readOnly"
 					class="tasks"
-					type="list"
-				>
-					<Task v-for="task in sort(calendar.filteredTasks, sortOrder, sortDirection)"
+					type="list">
+					<TaskBody v-for="task in sort(calendar.filteredTasks, sortOrder, sortDirection)"
 						:key="task.key"
 						:task="task"
-						:collection-string="collectionId"
-					/>
-				</task-drag-container>
+						:collection-string="collectionId" />
+				</TaskDragContainer>
 				<LoadCompletedButton v-if="collectionId === 'completed'" :calendar="calendar" />
 			</div>
 		</div>
@@ -71,12 +66,12 @@ import { mapGetters, mapActions } from 'vuex'
 import { sort, isTaskInList, isParentInList } from '../../store/storeHelper'
 import SortorderDropdown from '../SortorderDropdown'
 import LoadCompletedButton from '../LoadCompletedButton'
-import Task from '../Task'
+import TaskBody from '../TaskBody'
 import TaskDragContainer from '../TaskDragContainer'
 
 export default {
 	components: {
-		Task,
+		TaskBody,
 		SortorderDropdown,
 		LoadCompletedButton,
 		TaskDragContainer,
@@ -84,7 +79,7 @@ export default {
 	data() {
 		return {
 			newTaskName: '',
-			isAddingTask: false
+			isAddingTask: false,
 		}
 	},
 	computed: {
@@ -94,14 +89,14 @@ export default {
 		 * adds a filteredTasks property to each calendar containing the tasks belonging to the collection.
 		 *
 		 * Calendars have to contain at least one task which
-		 *	- belongs to the collection
-		 *	- is a root task
-		 *	- is uncompleted
+		 * - belongs to the collection
+		 * - is a root task
+		 * - is uncompleted
 		 *
 		 * @returns {Array} the calendars which should be shown in the collection
 		 */
 		filteredCalendars: function() {
-			var filteredCalendars = []
+			const filteredCalendars = []
 			this.calendars.forEach(calendar => {
 				calendar.filteredTasks = Object.values(calendar.tasks).filter(task => {
 					return isTaskInList(task, this.collectionId) && (!task.related || !isParentInList(task, calendar.tasks))
@@ -133,12 +128,12 @@ export default {
 			calendar: 'getDefaultCalendar',
 			calendars: 'getSortedCalendars',
 			sortOrder: 'sortOrder',
-			sortDirection: 'sortDirection'
-		})
+			sortDirection: 'sortDirection',
+		}),
 	},
 	methods: {
 		...mapActions([
-			'createTask'
+			'createTask',
 		]),
 		sort,
 		clearNewTask: function(event) {
@@ -147,7 +142,7 @@ export default {
 		},
 
 		addTask: function() {
-			var task = { summary: this.newTaskName }
+			const task = { summary: this.newTaskName }
 
 			// If the task is created in a collection view,
 			// set the appropriate properties.
@@ -164,7 +159,7 @@ export default {
 
 			this.createTask(task)
 			this.newTaskName = ''
-		}
-	}
+		},
+	},
 }
 </script>

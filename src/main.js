@@ -22,7 +22,7 @@
 
 import Vue from 'vue'
 
-import App from './app'
+import App from './App'
 
 import router from './router'
 import store from './store/store'
@@ -78,7 +78,7 @@ OCA.Tasks.App = new Vue({
 	store,
 	data: function() {
 		return {
-			searchString: ''
+			searchString: '',
 		}
 	},
 	mounted: function() {
@@ -96,7 +96,7 @@ OCA.Tasks.App = new Vue({
 		},
 		cleanSearch() {
 			this.$store.commit('setSearchQuery', '')
-		}
+		},
 	},
-	render: h => h(App)
+	render: h => h(App),
 })

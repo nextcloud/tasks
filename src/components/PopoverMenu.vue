@@ -42,12 +42,12 @@ export default {
 	props: {
 		tag: {
 			type: String,
-			default: 'div'
-		}
+			default: 'div',
+		},
 	},
 	data() {
 		return {
-			menuOpen: false
+			menuOpen: false,
 		}
 	},
 	methods: {
@@ -56,7 +56,7 @@ export default {
 		},
 		toggleMenu() {
 			this.menuOpen = !this.menuOpen
-		}
-	}
+		},
+	},
 }
 </script>
