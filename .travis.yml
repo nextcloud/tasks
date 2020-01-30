@@ -63,9 +63,6 @@ script:
   - xmllint appinfo/info.xml --schema info.xsd --noout
   - rm info.xsd
 
-  # Check PHP syntax errors
-  - find . -name \*.php -not -path './vendor/*' -exec php -l "{}" \;
-
   # Run server's app code checker
   - php ../../occ app:check-code tasks
 
@@ -86,17 +83,6 @@ after_failure:
 
 matrix:
   include:
-    - stage: build
-      language: node_js
-      node_js:
-        - "10"
-      before_install:
-      before_script:
-      script:
-        - make
-      after_failure:
-      after_success:
-
     - stage: test
       language: node_js
       node_js:
