@@ -12,7 +12,6 @@ OC.L10N.register(
     "can edit" : "poate edita",
     "Delete" : "Șterge",
     "Cancel" : "Anulează",
-    "Default" : "Implicită",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n sarcină realizată","%n sarcini realizate","%n sarcini realizate"],
     "Tomorrow" : "Mâine",
     "Set start date" : "Setează data de început",

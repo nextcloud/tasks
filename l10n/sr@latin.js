@@ -7,7 +7,6 @@ OC.L10N.register(
     "can edit" : "može da menja",
     "Delete" : "Delete",
     "Cancel" : "Cancel",
-    "Default" : "Podrazumevano",
     "Due date" : "Rok",
     "Edit" : "Uredi",
     "Download" : "Preuzmi",

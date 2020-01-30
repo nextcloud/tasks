@@ -9,7 +9,6 @@ OC.L10N.register(
     "can edit" : "kan endra",
     "Delete" : "Slett",
     "Cancel" : "Avbryt",
-    "Default" : "Standard",
     "Last modified" : "Siste endra",
     "When shared show full event" : "Når delt, vis heile hendinga",
     "When shared show only busy" : "Når delt, vis berre oppteken",

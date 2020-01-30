@@ -13,7 +13,6 @@ OC.L10N.register(
     "Delete" : "حذف ",
     "Cancel" : "إلغاء",
     "No errors" : "لا توجد أخطاء",
-    "Default" : "افتراضي",
     "Last modified" : "آخر تعديل",
     "Tomorrow" : "غدا",
     "When shared show full event" : "عرض الحدث كاملاً عند مشاركته",

@@ -11,7 +11,6 @@ OC.L10N.register(
     "can edit" : "mogu mijenjati",
     "Delete" : "Obriši",
     "Cancel" : "Odustani",
-    "Default" : "Zadano",
     "Tomorrow" : "Sutra",
     "Edit" : "Izmjeni",
     "Download" : "Preuzmi",

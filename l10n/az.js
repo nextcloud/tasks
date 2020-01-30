@@ -11,7 +11,6 @@ OC.L10N.register(
     "can edit" : "dəyişmək olar",
     "Delete" : "Sil",
     "Cancel" : "Dayandır",
-    "Default" : "Susmaya görə",
     "_%n Completed Task_::_%n Completed Tasks_" : ["\"%s\" Bitmiş Tapşırıqlar","Completed Tasks"],
     "Tomorrow" : "Sabah",
     "Set start date" : "Başlanğıc tarixini işə sal",

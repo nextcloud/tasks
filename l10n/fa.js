@@ -13,7 +13,6 @@ OC.L10N.register(
     "can edit" : "توانایی ویرایش",
     "Delete" : "حذف",
     "Cancel" : "لغو",
-    "Default" : "پیش فرض",
     "Due date" : "موعد مقرر",
     "Last modified" : "آخرین اصلاح شده",
     "Alphabetically" : "الفبایی",

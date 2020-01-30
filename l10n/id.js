@@ -12,7 +12,6 @@ OC.L10N.register(
     "can edit" : "dapat menyunting",
     "Delete" : "Hapus",
     "Cancel" : "Batal",
-    "Default" : "Default",
     "Last modified" : "Terakhir diubah",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n Tugas Diselesaikan"],
     "Tomorrow" : "Besok",

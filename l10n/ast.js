@@ -13,7 +13,6 @@ OC.L10N.register(
     "Delete" : "Desaniciar",
     "Cancel" : "Encaboxar",
     "Change sort order" : "Camudar orde d'ordenación",
-    "Default" : "Predetermináu",
     "Priority" : "Prioridá",
     "Manually" : "A mano",
     "Alphabetically" : "Alfabéticamente",

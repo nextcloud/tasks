@@ -9,7 +9,6 @@ OC.L10N.register(
     "can edit" : "կարող է խմբագրել",
     "Delete" : "Ջնջել",
     "Cancel" : "Չեղարկել",
-    "Default" : "Լռելյայն",
     "Edit" : "Խմբագրել",
     "Download" : "Ներբեռնել",
     "Save" : "Պահել",

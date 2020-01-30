@@ -8,7 +8,6 @@ OC.L10N.register(
     "Tasks" : "ۋەزىپەلەر",
     "Delete" : "ئۆچۈر",
     "Cancel" : "ۋاز كەچ",
-    "Default" : "كۆڭۈلدىكى",
     "Edit" : "تەھرىر",
     "Download" : "چۈشۈر",
     "Save" : "ساقلا",

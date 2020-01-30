@@ -12,7 +12,6 @@ OC.L10N.register(
     "can edit" : "kann änneren",
     "Delete" : "Läschen",
     "Cancel" : "Ofbriechen",
-    "Default" : "Standard",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n erfëllt Aufgab","%n erfëllten Aufgaben"],
     "Tomorrow" : "Muer",
     "Set start date" : "Setz en Ufanks Datum fest",

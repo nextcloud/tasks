@@ -12,7 +12,6 @@ OC.L10N.register(
     "can edit" : "pode editar",
     "Delete" : "Eliminar ",
     "Cancel" : "Cancelar",
-    "Default" : "Padrão",
     "Due date" : "Data limite",
     "Last modified" : "Última modificação",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n Tarefa Concluída","%n Tarefas Concluídas"],

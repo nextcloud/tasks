@@ -9,7 +9,6 @@ OC.L10N.register(
     "can edit" : "អាច​កែប្រែ",
     "Delete" : "លុប",
     "Cancel" : "បោះបង់",
-    "Default" : "លំនាំ​ដើម",
     "Edit" : "កែប្រែ",
     "Download" : "ទាញយក",
     "Save" : "រក្សាទុក",

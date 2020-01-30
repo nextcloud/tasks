@@ -11,7 +11,6 @@ OC.L10N.register(
     "can edit" : "可編輯",
     "Delete" : "刪除",
     "Cancel" : "取消",
-    "Default" : "預設",
     "Tomorrow" : "明天",
     "Set start date" : "設定開始日期",
     "Set due date" : "設定到期日",

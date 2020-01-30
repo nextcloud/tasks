@@ -17,7 +17,6 @@ OC.L10N.register(
     "Cancel" : "Откажи",
     "No errors" : "Нема грешки",
     "Open your browser console for more details" : "Отворете ја конзолата на прелистувачот за повеќе детали",
-    "Default" : "Предефиниран",
     "Last modified" : "Скоро изменети",
     "Tomorrow" : "Утре",
     "Set start date" : "Постави почетен датум",

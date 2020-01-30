@@ -11,7 +11,6 @@ OC.L10N.register(
     "can edit" : "pòt modificar",
     "Delete" : "Suprimir",
     "Cancel" : "Anullar",
-    "Default" : "Defaut",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n prètzfach acabat","%n prètzfaches acabats"],
     "Tomorrow" : "Deman",
     "Set start date" : "Especificar la data de començament",
