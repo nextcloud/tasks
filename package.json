@@ -74,10 +74,8 @@
 		"eslint-plugin-vue": "^6.1.2",
 		"file-loader": "^5.0.2",
 		"jest": "^25.1.0",
-		"jest-environment-jsdom-fourteen": "^1.0.1",
+		"jest-environment-jsdom-sixteen": "^1.0.0",
 		"jest-serializer-vue": "^2.0.2",
-		"jsdom": "^16.0.1",
-		"jsdom-global": "^3.0.2",
 		"mockdate": "2.0.5",
 		"moment": "^2.24.0",
 		"node-sass": "^4.13.1",
@@ -108,7 +106,7 @@
 		"moduleNameMapper": {
 			"^@/(.*)$": "<rootDir>/src/$1"
 		},
-		"testEnvironment": "jest-environment-jsdom-fourteen",
+		"testEnvironment": "jest-environment-jsdom-sixteen",
 		"transform": {
 			"^.+\\.js$": "<rootDir>/node_modules/babel-jest",
 			".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
