@@ -24,6 +24,7 @@
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["Impossible de supprimer {failedCount} tâche.","Impossible de supprimer {failedCount} tâches."],
     "Load all completed tasks." : "Charger toutes les tâches terminées.",
     "Change sort order" : "Modifier l'ordre de tri",
+    "Relevance" : "Pertinence",
     "Sort by completed state, due date, priority, start date and summary." : "Trier par état d'avancement, date d'échéance, priorité, date de début et résumé.",
     "Start date" : "Date de début",
     "Sort by start date and summary." : "Trier par date de début et résumé.",

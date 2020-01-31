@@ -24,6 +24,7 @@
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["{failedCount} Aufgabe konnte nicht gelöscht werden.","{failedCount} Aufgaben konnten nicht gelöscht werden."],
     "Load all completed tasks." : "Alle abgeschlossenen Aufgaben laden.",
     "Change sort order" : "Sortierreihenfolge ändern",
+    "Relevance" : "Wichtigkeit",
     "Sort by completed state, due date, priority, start date and summary." : "Sortieren nach Abgeschlossen-Status, Fälligskeitsdatum, Priorität, Startdatum und Zusammenfassung.",
     "Start date" : "Startdatum",
     "Sort by start date and summary." : "Nach Startdatum und Zusammenfassung sortieren.",

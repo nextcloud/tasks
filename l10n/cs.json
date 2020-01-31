@@ -24,6 +24,7 @@
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["Nedaří se smazat {failedCount} úkol.","Nedaří se smazat {failedCount} úkoly.","Nedaří se smazat {failedCount} úkolů.","Nedaří se smazat {failedCount} úkoly."],
     "Load all completed tasks." : "Načíst všechny dokončené úkoly.",
     "Change sort order" : "Změnit řazení",
+    "Relevance" : "Relevantnost",
     "Sort by completed state, due date, priority, start date and summary." : "Seřadit podle stupně dokončenosti, termínu, priority, data zahájení a shrnutí.",
     "Start date" : "Datum počátku",
     "Sort by start date and summary." : "Seřadit podle data zahájení a shrnutí.",

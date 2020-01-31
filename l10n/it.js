@@ -26,6 +26,7 @@ OC.L10N.register(
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["Impossibile eliminare {failedCount} attività.","Iimpossibile eliminare {failedCount} attività."],
     "Load all completed tasks." : "Carica tutte le attività completate.",
     "Change sort order" : "Cambia l'ordinamento",
+    "Relevance" : "Importanza",
     "Sort by completed state, due date, priority, start date and summary." : "Ordina per stato di completamento, data di scadenza, priorità, data di inizio e riepilogo.",
     "Start date" : "Data iniziale",
     "Sort by start date and summary." : "Ordina per data di inizio e riepilogo.",

@@ -26,6 +26,7 @@ OC.L10N.register(
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["{failedCount} görev silinemedi.","{failedCount} görev silinemedi."],
     "Load all completed tasks." : "Tüm tamamlanmış görevleri yükler.",
     "Change sort order" : "Sıralamayı değiştir",
+    "Relevance" : "İlişki",
     "Sort by completed state, due date, priority, start date and summary." : "Tamamlanma durumu, bitiş tarihi, öncelik, başlangıç tarihi ve özete göre sıralar.",
     "Start date" : "Başlangıç ​​tarihi",
     "Sort by start date and summary." : "Başlangıç tarihi ve özete göre sıralar.",

@@ -24,6 +24,7 @@
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["Non foi posíbel eliminar {failedCount} tarefa.","Non foi posíbel eliminar {failedCount} tarefas."],
     "Load all completed tasks." : "Cargar todas as tarefas completadas.",
     "Change sort order" : "Cambiar a ordenación",
+    "Relevance" : "Relevancia",
     "Sort by completed state, due date, priority, start date and summary." : "Ordenar polo estado de completado, data de caducidade, prioridade, data de inicio e resumo.",
     "Start date" : "Data de comezo",
     "Sort by start date and summary." : "Ordenar por data de inicio e resumo.",

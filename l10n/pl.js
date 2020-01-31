@@ -26,6 +26,7 @@ OC.L10N.register(
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["Nie można usunąć {failedCount} zadania.","Nie można usunąć {failedCount} zadań.","Nie można usunąć {failedCount} zadań.","Nie można usunąć {failedCount} zadań."],
     "Load all completed tasks." : "Załaduj wszystkie ukończone zadania.",
     "Change sort order" : "Zmień kierunek sortowania",
+    "Relevance" : "Związek z tematem",
     "Sort by completed state, due date, priority, start date and summary." : "Sortuj według zakończonego stanu, terminu, priorytetu, daty rozpoczęcia i podsumowania.",
     "Start date" : "Data od",
     "Sort by start date and summary." : "Sortuj według daty rozpoczęcia i podsumowania.",
