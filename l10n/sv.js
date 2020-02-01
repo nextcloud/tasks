@@ -25,6 +25,7 @@ OC.L10N.register(
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["Kunde inte radera {failedCount} uppgift.","Kunde inte radera {failedCount} uppgifter."],
     "Load all completed tasks." : "Ladda alla slutförda uppgifter.",
     "Change sort order" : "Ändra sorteringsordning",
+    "Relevance" : "Relevans",
     "Sort by completed state, due date, priority, start date and summary." : "Sortera efter slutförd status, förfallodag, prioritet, startdatum och sammanfattning.",
     "Start date" : "Startdatum",
     "Sort by start date and summary." : "Sortera efter startdatum och sammanfattning.",
