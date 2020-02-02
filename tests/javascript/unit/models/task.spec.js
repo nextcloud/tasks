@@ -1,4 +1,4 @@
-import Task from '../../../../src/models/task'
+import Task from 'Models/task'
 
 describe('task', () => {
 	'use strict'

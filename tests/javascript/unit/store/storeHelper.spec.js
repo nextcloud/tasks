@@ -1,5 +1,5 @@
-import { sort } from '../../../../src/store/storeHelper'
-import Task from '../../../../src/models/task'
+import { sort } from 'Store/storeHelper'
+import Task from 'Models/task'
 
 const vCalendars = [`
 BEGIN:VCALENDAR\n
