@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
-import Week from '../../../../../src/components/TheCollections/Week'
-import router from '../../../../../src/router'
+import Week from 'Components/TheCollections/Week'
+import router from '@/router'
 
 import { store, localVue } from '../../setupStore'
 

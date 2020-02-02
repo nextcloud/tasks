@@ -104,7 +104,15 @@
 			"vue"
 		],
 		"moduleNameMapper": {
-			"^@/(.*)$": "<rootDir>/src/$1"
+			"^@/(.*)$": "<rootDir>/src/$1",
+			"^Assets/(.*)$": "<rootDir>/src/assets/$1",
+			"^Components/(.*)$": "<rootDir>/src/components/$1",
+			"^Directives/(.*)$": "<rootDir>/src/directives/$1",
+			"^Fonts/(.*)$": "<rootDir>/src/fonts/$1",
+			"^Mixins/(.*)$": "<rootDir>/src/mixins/$1",
+			"^Models/(.*)$": "<rootDir>/src/models/$1",
+			"^Store/(.*)$": "<rootDir>/src/store/$1",
+			"^Utils/(.*)$": "<rootDir>/src/utils/$1"
 		},
 		"testEnvironment": "jest-environment-jsdom-sixteen",
 		"transform": {
