@@ -34,6 +34,7 @@ OC.L10N.register(
     "Calendar link could not be copied to clipboard." : "پیوند تقویم را نمی توان در کلیپ بورد کپی کرد.",
     "Settings" : "تنظیمات",
     "Hidden" : "مخفی",
-    "Automatic" : "خودکار"
+    "Automatic" : "خودکار",
+    "An error occurred" : "خطایی روی داد"
 },
 "nplurals=2; plural=(n > 1);");
