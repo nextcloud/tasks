@@ -24,6 +24,7 @@
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["Ni mogoče izbrisati {failedCount} naloge.","Ni mogoče izbrisati {failedCount} nalog.","Ni mogoče izbrisati {failedCount} nalog.","Ni mogoče izbrisati {failedCount} nalog."],
     "Load all completed tasks." : "Naloži vse končane naloge.",
     "Change sort order" : "Spremeni vrstni red razvrščanja",
+    "Relevance" : "Pomembnost",
     "Sort by completed state, due date, priority, start date and summary." : "Razvrsti po stanju opravljenosti, po datumu konca, prednosti, začetku in povzetku.",
     "Start date" : "Datum začetka",
     "Sort by start date and summary." : "Razvrsti po datumu začetka, nato po povzetku.",
