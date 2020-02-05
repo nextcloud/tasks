@@ -38,6 +38,7 @@ OC.L10N.register(
     "Visibility of Smart Collections" : "Nutikate kollektsioonide nähtavus",
     "Hidden" : "Peidetud",
     "Visible" : "Nähtav",
-    "Automatic" : "Automaatne"
+    "Automatic" : "Automaatne",
+    "An error occurred" : "Tekkis tõrge"
 },
 "nplurals=2; plural=(n != 1);");

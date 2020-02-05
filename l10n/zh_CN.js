@@ -26,6 +26,7 @@ OC.L10N.register(
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["无法删除 {failedCount} 个任务。"],
     "Load all completed tasks." : "载入所有已完成任务。",
     "Change sort order" : "更改排序",
+    "Relevance" : "相关联",
     "Sort by completed state, due date, priority, start date and summary." : "按已完成状态，截止日期，优先级，开始日期及概况排序",
     "Start date" : "开始日期",
     "Sort by start date and summary." : "按开始日期及概况排序",
