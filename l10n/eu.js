@@ -9,7 +9,6 @@ OC.L10N.register(
     "Completed" : "Osatua",
     "Tasks" : "Atazak",
     "The Tasks app for Nextcloud" : "Nextcloudeko Atazak aplikazioa",
-    "Once enabled, a new Tasks menu will appear in your Nextcloud apps menu. From there you can add and delete tasks, edit their title, description, start and due dates and mark them as important. Tasks can be shared between users. Tasks can be synchronized using CalDav (each task list is linked to an Nextcloud calendar, to sync it to your local client - Thunderbird, Evolution, KDE Kontact, iCal... - just add the calendar as a remote calendar in your client). You can download your tasks as ICS files using the download button for each calendar." : "Gaitutakoan Atazak izeneko menu berria agertuko da Nexcloudeko aplikazioen menuan. Bertan atazak gehitu eta ezabatu ahal izango dituzu, baita izenburua, deskribapena, hasiera-data eta epemuga aldatu eta garrantzitsu bezala markatu ere. Atazak erabiltzaileen artean partekatu daitezke. Atazak CalDav erabiliz sinkronizatu daitezke (ataza zerrenda bakoitza Nextcloud egutegi bati lotua dago, zure bezero lokalarekin - Thunderbird, Evolution, KDE Kontact, iCal... - sinkronizatzeko nahikoa da bezeroan egutegia urruneko egutegi bezala gehitzea). Zure atazak ICS fitxategi bezala deskargatu ditzakezu, egutegi bakoitzaren deskargatu botoia erabiliz.",
     "Share with users or groups" : "Partekatu erabiltzaile edo taldeekin",
     "No users or groups" : "Ez dago erabiltzaile edo talderik",
     "can edit" : "edita daiteke",

@@ -9,7 +9,6 @@ OC.L10N.register(
     "Completed" : "Afgerond",
     "Tasks" : "Taken",
     "The Tasks app for Nextcloud" : "De Taken app voor Nextcloud",
-    "Once enabled, a new Tasks menu will appear in your Nextcloud apps menu. From there you can add and delete tasks, edit their title, description, start and due dates and mark them as important. Tasks can be shared between users. Tasks can be synchronized using CalDav (each task list is linked to an Nextcloud calendar, to sync it to your local client - Thunderbird, Evolution, KDE Kontact, iCal... - just add the calendar as a remote calendar in your client). You can download your tasks as ICS files using the download button for each calendar." : "Wanneer ingeschakeld, verschijnt een nieuw Taken-menu in je Nextcloud-apps-menu. Van daaruit kunt je taken toevoegen en verwijderen, de titel, beschrijving, begin- en vervaldatums en ze markeren als belangrijk. Taken kunnen door gebruikers worden gedeeld. Taken kunnen worden gesynchroniseerd met CalDav (elke takenlijst is gekoppeld aan een Nextcloud-agenda om deze te synchroniseren met de lokale client - Thunderbird, Evolution, KDE Kontact, iCal ... - voeg de agenda in je client gewoon toe als een externe agenda). Je kunt je taken voor elke kalender als ICS-bestanden downloaden met behulp van de downloadknop.",
     "Share with users or groups" : "Delen met gebruikers of groepen",
     "No users or groups" : "Geen gebruikers of groepen",
     "can edit" : "kan bewerken",

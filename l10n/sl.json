@@ -7,7 +7,6 @@
     "Completed" : "Končano",
     "Tasks" : "Naloge",
     "The Tasks app for Nextcloud" : "Program Tasks za Nextcloud",
-    "Once enabled, a new Tasks menu will appear in your Nextcloud apps menu. From there you can add and delete tasks, edit their title, description, start and due dates and mark them as important. Tasks can be shared between users. Tasks can be synchronized using CalDav (each task list is linked to an Nextcloud calendar, to sync it to your local client - Thunderbird, Evolution, KDE Kontact, iCal... - just add the calendar as a remote calendar in your client). You can download your tasks as ICS files using the download button for each calendar." : "Po namestitvi programa se v meniju Nextcloud pojavi nova ikona Naloge. V vmesniku je mogoče dodati, izbrisati, ponovno urejati in prestavljati naloge, mogoče je dodati začetki in končni čas, opomnik, oznako pomembnosti in opombe. Naloge je prav tako mogoče dodeliti v souporabo. Podprto je tudi usklajevanje s koledarjem (vsak seznam je povezan s koledarjem Nextcloud, prek tega pa ga je mogoče povezati z namiznim programom – Thunderbird, Evolution, KDE Kontact, iCal ... – z enostavnim dodajanjem povezave do oddaljenega koledarja) prek sistema CalDav. Naloge je mogoče prejeti tudi v zapisu ICS za vsak koledar.",
     "Share with users or groups" : "Souporaba z uporabniki in skupinami",
     "No users or groups" : "Ni uporabnikov oziroma skupin",
     "can edit" : "lahko ureja",
