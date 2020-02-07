@@ -7,6 +7,7 @@
     "Completed" : "Completado",
     "Tasks" : "Tarefas",
     "The Tasks app for Nextcloud" : "A aplicación de Tarefas para o Nextcloud",
+    "Once enabled, a new Tasks menu will appear in your Nextcloud apps menu. From there you can add and delete tasks, edit their title, description, start and due dates and mark them as important. Tasks can be shared between users. Tasks can be synchronized using CalDav (each task list is linked to an Nextcloud calendar, to sync it to your local client - Thunderbird, Evolution, KDE Kontact, iCal, … - just add the calendar as a remote calendar in your client). You can download your tasks as ICS files using the download button for each calendar." : "Unha vez activado, aparecerá un novo menú Tarefas no menú de aplicacións Nextcloud. A partir de aí pode engadir e eliminar tarefas, editar o seu título, descrición, datas de inicio e caducidade e marcalas como importantes. As tarefas pódense compartir entre os usuarios. As tarefas pódense sincronizar usando CalDav (cada lista de tarefas está ligada a un calendario Nextcloud, para sincronizalo co seu cliente local - Thunderbird, Evolution, KDE Kontact, iCal … - abonda engadir o calendario como un calendario remoto no seu cliente). Pode descargar as súas tarefas como ficheiros ICS usando o botón de descarga de cada calendario.",
     "Share with users or groups" : "Compartir con usuarios ou grupos",
     "No users or groups" : "Non hai usuarios nin grupos",
     "can edit" : "pode editar",
