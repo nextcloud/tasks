@@ -83,25 +83,6 @@ after_failure:
 
 matrix:
   include:
-    - stage: test
-      language: node_js
-      node_js:
-        - "10"
-
-      before_install:
-      before_script:
-
-      install:
-        - npm install -g codecov
-
-      script:
-        - make dev-setup
-        - make test
-        - bash <(curl -s https://codecov.io/bash) -cF javascript;
-
-      after_failure:
-      after_success:
-
     - language: php
       php: 7.2
 
