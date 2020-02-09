@@ -25,7 +25,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		:task-id="task.uri"
 		:class="{done: task.completed, readOnly: task.calendar.readOnly}"
 		:data-priority="[task.priority]"
-		class="task-item">
+		class="task-item"
+		@dragstart="dragStart($event)">
 		<div :task-id="task.uri"
 			:class="{active: isTaskOpen()}"
 			class="task-body reactive"
@@ -306,6 +307,17 @@ export default {
 		 * Checks if a date is overdue
 		 */
 		overdue: overdue,
+
+		/**
+		 * Set task uri in the data transfer object
+		 * so we can get it when dropped on an
+		 * app-navigation-item
+		 *
+		 * @param {Object} e The drag event
+		 */
+		dragStart(e) {
+			e.dataTransfer.setData('text/plain', this.task.uri)
+		},
 
 		/**
 		 * Checks if one of the tasks sub(sub-...)tasks matches the search query

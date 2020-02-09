@@ -68,6 +68,7 @@ Vue.prototype.n = Vue.prototype.$n
 Vue.prototype.$OC = OC
 Vue.prototype.$OCA = OCA
 Vue.prototype.$appVersion = $appVersion
+Vue.prototype.$toast = OCP.Toast // eslint-disable-line no-undef
 
 OCA.Tasks.$t = Vue.prototype.$t
 OCA.Tasks.$n = Vue.prototype.$n

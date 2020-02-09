@@ -3,72 +3,44 @@
 	*/
 
 #app-navigation {
-	&:not(.vue) {
-		> ul > li {
-			> a {
-				background-position: inherit;
-			}
-			> .app-navigation-entry-edit {
-				padding-left: 5px !important;
-			}
-		}
-		.app-navigation-entry-menu {
-			ul {
-				align-items: unset;
-				li {
-					width: auto !important;
-				}
-			}
-		}
-	}
 	> ul {
 		> li {
-			background-image: unset;
-
-			> a {
+			&.collection .app-navigation-entry-icon {
 				background-image: unset;
-				background-position: inherit;
+
+				&::before {
+					content: '';
+					position: absolute;
+					width: 16px;
+					height: 16px;
+					background: var(--icon-tasks-bw-000) no-repeat;
+					background-position: inherit;
+				}
 			}
 
-			.sprite::before {
-				content: '';
-				position: absolute;
-				z-index: -1;
-				width: 16px;
-				height: 16px;
-				background: var(--icon-tasks-bw-000) no-repeat;
-				margin: 14px;
-				margin-left: -30px;
-				background-position: inherit;
-			}
+			&.list {
+				&.active .app-navigation-entry__icon-bullet > div {
+					height: 16px;
+					width: 16px;
+					margin: -1px;
+				}
 
-			&.active .app-navigation-entry-bullet {
-				height: 16px;
-				width: 16px;
-				margin: 14px;
+				&:not(.active) {
+					.app-navigation-entry__utils .action-item,
+					.calendar__share {
+						display: none;
+					}
+				}
 			}
 
 			&.edit {
-				> a,
-				.app-navigation-entry-utils,
-				.app-navigation-entry-menu {
+				.app-navigation-entry__utils,
+				.app-navigation-entry-link {
 					display: none;
 				}
 
-				.app-navigation-entry-edit.name {
+				.app-navigation-entry-edit {
 					display: inline-block;
-					position: relative;
-				}
-			}
-
-			&.animate-up {
-				display: none;
-			}
-
-			&.list:not(.active) {
-				.app-navigation-entry-utils-menu-button,
-				.calendar__share {
-					display: none;
 				}
 			}
 
@@ -78,115 +50,87 @@
 				}
 			}
 
-			.app-navigation-entry-edit {
-				padding-left: 5px !important;
+			&.deleted {
+				.app-navigation-entry__title {
+					text-decoration: line-through;
+				}
 
-				&.name {
-					display: none;
+				.app-navigation-entry__icon-bullet {
+					opacity: 0.3;
 				}
 			}
 
-			.error input.edit {
-				color: $red;
-				border-color: $red !important;
-				box-shadow: 0 0 6px rgba($red, .3);
+			&.dnd-hover {
+				background-color: rgba( $color-primary, .3 );
 			}
-		}
-	}
 
-	.app-navigation-entry-edit {
-		&.name input[type='text'] {
-			width: calc(100% - 72px);
-		}
-
-		input.action {
-			background-color: $gray_easy;
-			width: 36px;
-			border-left: 0 none;
-			background-position: center;
-			cursor: pointer;
-
-			&:hover {
-				border-left: 1px solid;
-				margin-left: -1px;
-				width: 37px;
-			}
-		}
-	}
-
-	.app-navigation-entry-utils li {
-		font-size: 100%;
-	}
-
-	.app-navigation-entry-menu {
-		ul {
-			align-items: unset;
-		}
-
-		li {
-			float: inherit;
-			width: auto !important;
-			cursor: pointer;
-			height: 44px;
-
-			/*
-			 * rules for confirmation directive
-			 */
-			> a {
-				&:not(:empty).confirmation-confirm {
-					padding: 0 !important;
+			button {
+				&.icon-share {
+					opacity: 0.3 !important;
 				}
-
-				span.countdown {
-					background-color: inherit;
-					color: $white;
-					display: block;
-					text-align: center;
-					filter: alpha(opacity=100) !important;
+		
+				&.icon-shared,
+				&.icon-public {
+					opacity: 0.7 !important;
+				}
+		
+				&.icon-share:active,
+				&.icon-share:focus,
+				&.icon-share:hover,
+				&.icon-shared:active,
+				&.icon-shared:focus,
+				&.icon-shared:hover,
+				&.icon-public:active,
+				&.icon-public:focus,
+				&.icon-public:hover {
 					opacity: 1 !important;
 				}
 			}
 
-			&:hover a {
-				opacity: 1 !important;
-			}
+			.app-navigation-entry-edit {
+				padding-left: 5px !important;
+				display: none;
+				position: relative;
 
-			&.confirmed a {
-				&.confirmation-confirm {
-					display: inline-block !important;
-					opacity: 1;
+				&.error input.edit {
+					color: $red;
+					border-color: $red !important;
+					box-shadow: 0 0 6px rgba($red, .3);
 				}
 
-				&.confirmation-abort {
-					display: inline-block !important;
-					opacity: 1;
+				form {
+					display: flex;
+
+					input {
+						margin-right: 0;
+
+						&[type='text'] {
+							flex-grow: 1;
+						}
+
+						&.action {
+							background-color: $gray_easy;
+							width: 36px;
+							border-left: 0 none;
+							background-position: center;
+							cursor: pointer;
+				
+							&:hover {
+								border-left: 1px solid;
+								margin-left: -1px;
+								width: 37px;
+							}
+						}
+					}
 				}
-			}
-
-			img {
-				cursor: pointer;
-				margin-right: 5px;
-				vertical-align: text-bottom;
-			}
-
-			span {
-				cursor: pointer;
-			}
-
-			button {
-				float: inherit;
 			}
 		}
-	}
-
-	> ul ul.colorpicker-list {
-		display: inline-flex;
 	}
 }
 
 /**
-	* rules for colorpicker
-	*/
+ * rules for colorpicker
+ */
 
 .colorpicker {
 	display: block;
@@ -196,7 +140,7 @@
 	padding-top: 3px;
 
 	.colorpicker-list {
-		display: flex;
+		display: inline-flex;
 		flex-wrap: wrap;
 		width: 100%;
 		height: 100%;
@@ -237,68 +181,48 @@
 	}
 }
 
-.confirmation-default {
-	overflow: hidden;
-}
-
-.confirmed {
-	.confirmation-default {
-		display: none !important;
-	}
-
-	&.active {
-		.confirmation-confirm {
-			cursor: pointer !important;
-		}
-
-		.countdown {
-			visibility: hidden;
-		}
-	}
-}
-
-.confirmation-abort {
-	width: 50% !important;
-	display: none !important;
-	padding: 0 !important;
-	background-position: center !important;
-}
-
-.confirmation-confirm {
-	@extend .confirmation-abort;
-	background-color: $red !important;
-	cursor: default !important;
-}
-
 /**
 	* rules for settings area
 	*/
 
 #app-settings-content {
-	.icon {
-		margin-top: -3px;
-	}
-
 	li {
-		line-height: 3em;
 		display: flex;
-		height: 40px;
-
-		label {
-			white-space: nowrap;
-			padding-right: 10px;
-		}
+		align-items: center;
+		height: 44px;
 
 		&.headline {
 			font-weight: bold;
-			line-height: 50px;
 		}
 
-		.label-container {
-			white-space: nowrap;
-			text-overflow: ellipsis;
-			overflow: hidden;
-			float: left;
+		&.collection {
+			.icon {
+				display: flex;
+				align-items: center;
+				flex: 0 0 44px;
+				justify-content: center;
+				width: 44px;
+				height: 44px;
+				background-size: 16px 16px;
+				background-image: unset;
+				margin-left: -10px;
+
+				&::before {
+					content: '';
+					width: 16px;
+					height: 16px;
+					background: var(--icon-tasks-bw-000) no-repeat;
+					background-position: inherit;
+				}
+			}
+
+			.label-container {
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				display: flex;
+				align-items: center;
+			}
 		}
 
 		select {
@@ -306,24 +230,12 @@
 			text-overflow: ellipsis;
 			margin-left: auto;
 		}
+
+		label {
+			white-space: nowrap;
+			padding-right: 10px;
+		}
 	}
-}
-
-#collection_today > a > span.date {
-	position: absolute;
-	font-size: 6px;
-	left: 17px;
-	top: 2px;
-	width: 10px;
-	text-align: center;
-	font-weight: bold;
-}
-
-#app-settings .label-container span.icon {
-	font-size: 7px;
-	font-weight: bold;
-	line-height: 21px;
-	text-align: center;
 }
 
 /**
@@ -474,7 +386,7 @@
 		}
 	}
 
-	.content-wrapper {
+	> div {
 		padding: 6px 17px 75px;
 		box-sizing: border-box;
 		height: 100%;

@@ -21,16 +21,16 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div id="content" class="app-tasks" @click="closeDetails($event)">
-		<div id="app-navigation">
+		<AppNavigation>
 			<TheList />
-			<TheSettings />
-		</div>
+			<AppNavigationSettings>
+				<TheSettings />
+			</AppNavigationSettings>
+		</AppNavigation>
 
-		<div id="app-content">
-			<div class="content-wrapper">
-				<RouterView />
-			</div>
-		</div>
+		<AppContent>
+			<RouterView />
+		</AppContent>
 
 		<div id="app-sidebar" :class="{disappear: $route.params.taskId === undefined}">
 			<RouterView name="details" />
@@ -40,8 +40,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import { mapState } from 'vuex'
-import TheList from './components/TheList'
-import TheSettings from './components/TheSettings'
+import AppNavigation from '@nextcloud/vue/dist/Components/AppNavigation'
+import AppContent from '@nextcloud/vue/dist/Components/AppContent'
+import AppNavigationSettings from '@nextcloud/vue/dist/Components/AppNavigationSettings'
+import TheList from './components/AppNavigation/List'
+import TheSettings from './components/AppNavigation/TheSettings'
 import client from './services/cdav.js'
 
 export default {
@@ -49,6 +52,9 @@ export default {
 	components: {
 		TheSettings,
 		TheList,
+		AppNavigation,
+		AppContent,
+		AppNavigationSettings,
 	},
 	computed: {
 		...mapState({
