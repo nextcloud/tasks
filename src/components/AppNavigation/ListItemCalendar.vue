@@ -37,18 +37,18 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		<AppNavigationIconBullet slot="icon" :color="calendar.color" />
 
 		<template v-if="!deleteTimeout" slot="counter">
-			<AppNavigationCounter>
-				{{ calendarCount(calendar.id) | counterFormatter }}
-			</AppNavigationCounter>
-			<Actions v-if="!calendar.readOnly">
+			<Actions v-if="calendar.canBeShared">
 				<ActionButton
 					:icon="sharingIconClass"
 					@click="toggleShare">
 					{{ sharedWithTooltip }}
 				</ActionButton>
 			</Actions>
-			<Avatar v-if="calendar.isSharedWithMe && calendar.loadedOwnerPrincipal" :user="calendar.ownerUserId" :display-name="calendar.ownerDisplayname" />
-			<div v-if="calendar.isSharedWithMe && !calendar.loadedOwnerPrincipal" class="icon icon-loading" />
+			<Avatar v-if="calendar.isSharedWithMe && loadedOwnerPrincipal" :user="ownerUserId" :display-name="ownerDisplayname" />
+			<div v-if="calendar.isSharedWithMe && !loadedOwnerPrincipal" class="icon icon-loading" />
+			<AppNavigationCounter v-if="calendarCount">
+				{{ calendarCount | counterFormatter }}
+			</AppNavigationCounter>
 		</template>
 
 		<template v-if="!deleteTimeout" slot="actions">
@@ -75,13 +75,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				{{ $t('tasks', 'Download') }}
 			</ActionLink>
 			<ActionButton
-				v-if="!calendar.readOnly"
 				v-tooltip="{
 					placement: 'left',
 					boundariesElement: 'body',
 					content: deleteMessage
 				}"
-				icon="icon-delete"
+				:icon="calendar.isSharedWithMe ? 'icon-close' : 'icon-delete'"
 				@click="scheduleDelete">
 				{{ !calendar.isSharedWithMe ? $t('tasks', 'Delete') : $t('tasks', 'Unshare') }}
 			</ActionButton>
@@ -91,7 +90,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			<ActionButton
 				icon="icon-history"
 				@click.prevent.stop="cancelDelete">
-				{{ $n('tasks', 'Deleting the calendar in {countdown} second', 'Deleting the calendar in {countdown} seconds', countdown, { countdown }) }}
+				{{ undoDeleteMessage }}
 			</ActionButton>
 		</template>
 
@@ -130,6 +129,7 @@ import Colorpicker from './Colorpicker'
 import ShareCalendar from './CalendarShare'
 
 import ClickOutside from 'vue-click-outside'
+import Avatar from '@nextcloud/vue/dist/Components/Avatar'
 import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
 import AppNavigationCounter from '@nextcloud/vue/dist/Components/AppNavigationCounter'
 import AppNavigationIconBullet from '@nextcloud/vue/dist/Components/AppNavigationIconBullet'
@@ -143,6 +143,7 @@ export default {
 	components: {
 		Colorpicker,
 		ShareCalendar,
+		Avatar,
 		AppNavigationItem,
 		AppNavigationCounter,
 		AppNavigationIconBullet,
@@ -190,15 +191,25 @@ export default {
 	},
 	computed: {
 		...mapGetters({
-			calendarCount: 'getCalendarCount',
+			getCalendarCount: 'getCalendarCount',
 			isCalendarNameUsed: 'isCalendarNameUsed',
 			getTask: 'getTaskByUri',
+			getPrincipalByUrl: 'getPrincipalByUrl',
 		}),
+
+		calendarCount() {
+			return this.getCalendarCount(this.calendar.id)
+		},
 
 		deleteMessage() {
 			return !this.calendar.isSharedWithMe
 				? this.$t('tasks', 'This will delete the calendar "{calendar}" and all corresponding events and tasks.', { calendar: this.calendar.displayName })
 				: this.$t('tasks', 'This will unshare the calendar "{calendar}".', { calendar: this.calendar.displayName })
+		},
+		undoDeleteMessage() {
+			return !this.calendar.isSharedWithMe
+				? this.$n('tasks', 'Deleting the calendar in {countdown} second', 'Deleting the calendar in {countdown} seconds', this.countdown, { countdown: this.countdown })
+				: this.$n('tasks', 'Unsharing the calendar in {countdown} second', 'Unsharing the calendar in {countdown} seconds', this.countdown, { countdown: this.countdown })
 		},
 		sharingIconClass() {
 			if (this.calendar.shares.length) {
@@ -232,6 +243,28 @@ export default {
 						num: this.calendar.shares.length,
 					})
 				: '' // disable the tooltip
+		},
+		/**
+		 * Whether or not the information about the owner principal was loaded
+		 *
+		 * @returns {Boolean}
+		 */
+		loadedOwnerPrincipal() {
+			return this.getPrincipalByUrl(this.calendar.owner) !== undefined
+		},
+		ownerUserId() {
+			const principal = this.getPrincipalByUrl(this.calendar.owner)
+			if (principal) {
+				return principal.userId
+			}
+			return ''
+		},
+		ownerDisplayname() {
+			const principal = this.getPrincipalByUrl(this.calendar.owner)
+			if (principal) {
+				return principal.displayname
+			}
+			return ''
 		},
 	},
 	methods: {

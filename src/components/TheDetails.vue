@@ -22,7 +22,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <template>
 	<div class="content-wrapper">
 		<div v-if="task"
-			:class="{'disabled': task.calendar.readOnly}"
+			:class="{'disabled': readOnly}"
 			class="flex-container">
 			<div :class="{'editing': edit=='summary'}" class="title">
 				<span class="detail-checkbox">
@@ -30,10 +30,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						type="checkbox"
 						class="checkbox"
 						name="detailsToggleCompleted"
-						:class="{'disabled': task.calendar.readOnly}"
+						:class="{'disabled': readOnly}"
 						:checked="task.completed"
 						:aria-checked="task.completed"
-						:disabled="task.calendar.readOnly"
+						:disabled="readOnly"
 						:aria-label="$t('tasks', 'Task is completed')"
 						@click="toggleCompleted(task)">
 					<label :for="'detailsToggleCompleted_' + task.uid" />
@@ -56,16 +56,16 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</div>
 				<TaskStatusDisplay :task="task" />
 				<button class="reactive inline" @click="togglePinned(task)">
-					<span :class="[{'disabled': task.calendar.readOnly}, iconPinned]" class="icon" />
+					<span :class="[{'disabled': readOnly}, iconPinned]" class="icon" />
 				</button>
 				<button class="reactive inline" @click="toggleStarred(task)">
-					<span :class="[{'disabled': task.calendar.readOnly}, iconStar]"
+					<span :class="[{'disabled': readOnly}, iconStar]"
 						class="icon" />
 				</button>
 			</div>
 			<div class="body">
 				<ul class="sections">
-					<li v-show="!task.calendar.readOnly || task.start"
+					<li v-show="!readOnly || task.start"
 						:class="{'date': task.startMoment.isValid(), 'editing': edit=='start', 'high': overdue(task.startMoment)}"
 						class="section detail-start">
 						<div v-click-outside="() => finishEditing('start')"
@@ -109,7 +109,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</button>
 						</div>
 					</li>
-					<li v-show="!task.calendar.readOnly || task.due"
+					<li v-show="!readOnly || task.due"
 						:class="{'date': task.dueMoment.isValid(), 'editing': edit=='due', 'high': overdue(task.dueMoment)}"
 						class="section detail-date">
 						<div v-click-outside="() => finishEditing('due')"
@@ -160,10 +160,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 								type="checkbox"
 								class="checkbox"
 								name="isAllDayPossible"
-								:class="{'disabled': task.calendar.readOnly}"
+								:class="{'disabled': readOnly}"
 								:aria-checked="allDay"
 								:checked="allDay"
-								:disabled="task.calendar.readOnly"
+								:disabled="readOnly"
 								@click="toggleAllDay(task)">
 							<label for="isAllDayPossible">
 								<span>{{ $t('tasks', 'All day') }}</span>
@@ -182,7 +182,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									:value="task.calendar"
 									:multiple="false"
 									:allow-empty="false"
-									:disabled="task.calendar.readOnly"
+									:disabled="readOnly"
 									track-by="id"
 									:placeholder="$t('tasks', 'Select a calendar')"
 									label="displayName"
@@ -206,7 +206,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									:value="classSelect.find( _ => _.type === task.class )"
 									:multiple="false"
 									:allow-empty="false"
-									:disabled="task.calendar.readOnly"
+									:disabled="readOnly || task.calendar.isSharedWithMe"
 									track-by="type"
 									:placeholder="$t('tasks', 'Select a classification')"
 									label="displayName"
@@ -218,7 +218,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</div>
 						</div>
 					</li>
-					<li v-show="!task.calendar.readOnly || task.status"
+					<li v-show="!readOnly || task.status"
 						class="section detail-class reactive">
 						<div v-click-outside="() => finishEditing('status')"
 							class="section-content"
@@ -231,7 +231,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									:value="statusSelect.find( _ => _.type === task.status )"
 									:multiple="false"
 									:allow-empty="false"
-									:disabled="task.calendar.readOnly"
+									:disabled="readOnly"
 									track-by="type"
 									:placeholder="$t('tasks', 'Select a status')"
 									label="displayName"
@@ -243,7 +243,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</div>
 						</div>
 					</li>
-					<li v-show="!task.calendar.readOnly || task.priority"
+					<li v-show="!readOnly || task.priority"
 						:class="[{'editing': edit=='priority', 'date': task.priority>0}, priorityClass]"
 						class="section detail-priority">
 						<div v-click-outside="() => finishEditing('priority')"
@@ -279,7 +279,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</button>
 						</div>
 					</li>
-					<li v-show="!task.calendar.readOnly || task.complete"
+					<li v-show="!readOnly || task.complete"
 						:class="{'editing': edit=='complete', 'date': task.complete>0}"
 						class="section detail-complete">
 						<div v-click-outside="() => finishEditing('complete')"
@@ -315,7 +315,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</button>
 						</div>
 					</li>
-					<li v-show="!task.calendar.readOnly || task.categories.length>0" :class="{'active': task.categories.length>0}" class="section detail-categories">
+					<li v-show="!readOnly || task.categories.length>0" :class="{'active': task.categories.length>0}" class="section detail-categories">
 						<div class="section-content">
 							<span class="section-icon">
 								<span :class="[iconCategories]" class="icon detail-categories" />
@@ -325,7 +325,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									v-model="task.categories"
 									:multiple="true"
 									:searchable="true"
-									:disabled="task.calendar.readOnly"
+									:disabled="readOnly"
 									:options="task.categories"
 									:placeholder="$t('tasks', 'Select categories')"
 									:taggable="true"
@@ -337,7 +337,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</div>
 						</div>
 					</li>
-					<li v-show="!task.calendar.readOnly || task.note" class="section detail-note">
+					<li v-show="!readOnly || task.note" class="section detail-note">
 						<div class="section-content note">
 							<div v-click-outside="() => finishEditing('note')"
 								class="note-body selectable"
@@ -359,7 +359,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</ul>
 			</div>
 			<div class="footer">
-				<button :style="{visibility: task.calendar.readOnly ? 'hidden' : 'visible'}"
+				<button :style="{visibility: readOnly ? 'hidden' : 'visible'}"
 					class="close-all reactive inline"
 					@click="removeTask">
 					<span class="icon icon-bw icon-trash" />
@@ -446,6 +446,16 @@ export default {
 		}
 	},
 	computed: {
+		/**
+		 * Whether we treat the task as read-only.
+		 * We also treat tasks in shared calendars with an access class other than 'PUBLIC'
+		 * as read-only.
+		 *
+		 * @returns {Boolean} Is the task read-only
+		 */
+		readOnly() {
+			return this.task.calendar.readOnly || (this.task.calendar.isSharedWithMe && this.task.class !== 'PUBLIC')
+		},
 		/**
 		 * Whether the dates of a task are all-day
 		 * When no dates are set, we consider the last used value.
@@ -583,7 +593,7 @@ export default {
 				+ (this.task.completed ? ('<br />' + this.$t('tasks', 'Completed {date}', { date: this.task.completedDateMoment.calendar() })) : '')
 		},
 		isAllDayPossible: function() {
-			return !this.task.calendar.readOnly && (this.task.due || this.task.start || ['start', 'due'].includes(this.edit))
+			return !this.readOnly && (this.task.due || this.task.start || ['start', 'due'].includes(this.edit))
 		},
 		priorityClass: function() {
 			if (+this.task.priority > 5) {
@@ -763,11 +773,15 @@ export default {
 			if (event && (event.target.classList.contains('mx-datepicker-btn-confirm') || event.target.tagName === 'A')) {
 				return
 			}
+			// Don't allow to change the access class in calendars shared with me.
+			if (this.task.calendar.isSharedWithMe && type === 'class') {
+				return
+			}
 			// Save possible edits before starting to edit another property.
 			if (this.edit !== type) {
 				this.finishEditing(this.edit)
 			}
-			if (!this.task.calendar.readOnly && this.edit !== type) {
+			if (!this.readOnly && this.edit !== type) {
 				this.edit = type
 				this.tmpTask[type] = this.task[type]
 				// If we edit the due or the start date, inintialize it.

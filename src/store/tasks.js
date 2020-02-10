@@ -675,6 +675,10 @@ const actions = {
 		if (task.calendar.readOnly) {
 			return
 		}
+		// Don't delete tasks in shared calendars with access class not PUBLIC
+		if (task.calendar.isSharedWithMe && task.class !== 'PUBLIC') {
+			return
+		}
 
 		function deleteTaskFromStore() {
 			context.commit('deleteTask', task)
@@ -726,6 +730,10 @@ const actions = {
 	async updateTask(context, task) {
 		// Don't try to update tasks in read-only calendars
 		if (task.calendar.readOnly) {
+			return
+		}
+		// Don't edit tasks in shared calendars with access class not PUBLIC
+		if (task.calendar.isSharedWithMe && task.class !== 'PUBLIC') {
 			return
 		}
 
@@ -847,6 +855,10 @@ const actions = {
 		if (task.calendar.readOnly) {
 			return
 		}
+		// Don't edit tasks in shared calendars with access class not PUBLIC
+		if (task.calendar.isSharedWithMe && task.class !== 'PUBLIC') {
+			return
+		}
 		if (task.completed) {
 			await context.dispatch('setPercentComplete', { task: task, complete: 0 })
 		} else {
@@ -912,6 +924,10 @@ const actions = {
 		if (task.calendar.readOnly) {
 			return
 		}
+		// Don't edit tasks in shared calendars with access class not PUBLIC
+		if (task.calendar.isSharedWithMe && task.class !== 'PUBLIC') {
+			return
+		}
 		context.commit('toggleStarred', task)
 		context.dispatch('scheduleTaskUpdate', task)
 	},
@@ -925,6 +941,10 @@ const actions = {
 	async togglePinned(context, task) {
 		// Don't try to edit tasks in read-only calendars
 		if (task.calendar.readOnly) {
+			return
+		}
+		// Don't edit tasks in shared calendars with access class not PUBLIC
+		if (task.calendar.isSharedWithMe && task.class !== 'PUBLIC') {
 			return
 		}
 		context.commit('togglePinned', task)
@@ -1085,6 +1105,10 @@ const actions = {
 		if (task.calendar.readOnly) {
 			return task
 		}
+		// Don't edit tasks in shared calendars with access class not PUBLIC
+		if (task.calendar.isSharedWithMe && task.class !== 'PUBLIC') {
+			return
+		}
 		context.commit('toggleAllDay', task)
 		if (+context.rootState.settings.settings.allDay !== +task.allDay) {
 			context.dispatch('setSetting', { type: 'allDay', value: +task.allDay })
@@ -1159,7 +1183,10 @@ const actions = {
 		if (task.calendar.readOnly) {
 			return task
 		}
-
+		// Don't move tasks in shared calendars with access class not PUBLIC
+		if (task.calendar.isSharedWithMe && task.class !== 'PUBLIC') {
+			return
+		}
 		// Don't move if source and target calendar are the same.
 		if (task.dav && task.calendar !== calendar) {
 			// Move all subtasks first
