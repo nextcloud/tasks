@@ -7,11 +7,11 @@ OC.L10N.register(
     "Completed" : "Ավարտվեց",
     "Share with users or groups" : "Կիսվել օգտատերերի կամ խմբերի հետ",
     "can edit" : "կարող է խմբագրել",
-    "Delete" : "Ջնջել",
     "Cancel" : "Չեղարկել",
+    "Save" : "Պահել",
     "Edit" : "Խմբագրել",
     "Download" : "Ներբեռնել",
-    "Save" : "Պահել",
-    "Settings" : "Կարգավորումներ"
+    "Delete" : "Ջնջել",
+    "Unshare" : "Չկիսվել"
 },
 "nplurals=2; plural=(n != 1);");

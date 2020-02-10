@@ -4,11 +4,11 @@ OC.L10N.register(
     "Today" : "Today",
     "All" : "﻿ಎಲ್ಲಾ",
     "can edit" : "﻿ಸಂಪಾದಿಸಬಹುದು",
-    "Delete" : "﻿ಅಳಿಸಿ",
     "Cancel" : "﻿ರದ್ದು",
+    "Save" : "﻿ಉಳಿಸಿ",
     "Edit" : "ಸಂಪಾದಿಸು",
     "Download" : "ಪ್ರತಿಯನ್ನು ಸ್ಥಳೀಯವಾಗಿ ಉಳಿಸಿಕೊಳ್ಳಿ",
-    "Save" : "﻿ಉಳಿಸಿ",
-    "Settings" : "ಆಯ್ಕೆ"
+    "Delete" : "﻿ಅಳಿಸಿ",
+    "Unshare" : "ಹಂಚಿಕೆಯನ್ನು ಹಿಂತೆಗೆ"
 },
 "nplurals=2; plural=(n > 1);");

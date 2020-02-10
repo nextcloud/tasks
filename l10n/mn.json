@@ -6,18 +6,18 @@
     "Completed" : "Гүйцэтгэгдсэн",
     "Share with users or groups" : "Бусад хэрэглэгч, бүлэгт хуваалцах",
     "can edit" : "засаж чадна",
-    "Delete" : "устгах",
+    "New List" : "шинэ жагсаалт",
     "Cancel" : "цуцлах",
+    "Save" : "хадгалах",
+    "Edit" : "засварлах",
+    "Download" : "татаж авах",
+    "Delete" : "устгах",
+    "Unshare" : "Түгээлтийг зогсоох",
+    "Hidden" : "Далд",
     "Last modified" : "Сүүлд өөрчилсөн",
     "Tomorrow" : "маргааш",
     "When shared show full event" : "Түгээсэн тохиолдолд үйл явдлыг бүтнээр нь харуул",
     "When shared show only busy" : "Түгээсэн тохиолдолд зөвхөн завгүй гэж харуул",
-    "When shared hide this event" : "Түгээсэн тохиолдолд энэ үйл явдлыг нуу",
-    "Edit" : "засварлах",
-    "Download" : "татаж авах",
-    "Save" : "хадгалах",
-    "New List" : "шинэ жагсаалт",
-    "Settings" : "Тохиргоо",
-    "Hidden" : "Далд"
+    "When shared hide this event" : "Түгээсэн тохиолдолд энэ үйл явдлыг нуу"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

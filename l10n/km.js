@@ -7,11 +7,11 @@ OC.L10N.register(
     "All" : "ទាំងអស់",
     "Tasks" : "ភារកិច្ច",
     "can edit" : "អាច​កែប្រែ",
-    "Delete" : "លុប",
     "Cancel" : "បោះបង់",
+    "Save" : "រក្សាទុក",
     "Edit" : "កែប្រែ",
     "Download" : "ទាញយក",
-    "Save" : "រក្សាទុក",
-    "Settings" : "ការកំណត់"
+    "Delete" : "លុប",
+    "Unshare" : "លែង​ចែក​រំលែក"
 },
 "nplurals=1; plural=0;");

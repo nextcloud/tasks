@@ -4,11 +4,10 @@ OC.L10N.register(
     "Today" : "Hari ini",
     "Week" : "Minggu",
     "can edit" : "boleh mengubah",
-    "Delete" : "Padam",
     "Cancel" : "Batal",
+    "Save" : "Simpan",
     "Edit" : "Sunting",
     "Download" : "Muat turun",
-    "Save" : "Simpan",
-    "Settings" : "Tetapan"
+    "Delete" : "Padam"
 },
 "nplurals=1; plural=0;");

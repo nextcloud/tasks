@@ -6,11 +6,10 @@ OC.L10N.register(
     "Week" : "ہفتہ",
     "Tasks" : "کام",
     "can edit" : "تبدیل کر سکے ھیں",
-    "Delete" : "حذف کریں",
     "Cancel" : "منسوخ کریں",
+    "Save" : "حفظ",
     "Edit" : "تدوین کریں",
     "Download" : "ڈاؤن لوڈ",
-    "Save" : "حفظ",
-    "Settings" : "سیٹینگز"
+    "Delete" : "حذف کریں"
 },
 "nplurals=2; plural=(n != 1);");

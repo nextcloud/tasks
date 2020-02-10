@@ -7,11 +7,11 @@ OC.L10N.register(
     "All" : "සියල්ල",
     "Tasks" : "කාර්යය",
     "can edit" : "සංස්කරණය කළ හැක",
-    "Delete" : "මකා දමන්න",
     "Cancel" : "එපා",
+    "Save" : "සුරකින්න",
     "Edit" : "සකසන්න",
     "Download" : "බාන්න",
-    "Save" : "සුරකින්න",
-    "Settings" : "සැකසුම්"
+    "Delete" : "මකා දමන්න",
+    "Unshare" : "නොබෙදු"
 },
 "nplurals=2; plural=(n != 1);");

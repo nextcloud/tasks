@@ -7,15 +7,15 @@ OC.L10N.register(
     "All" : "Alle",
     "Tasks" : "Oppgåver",
     "can edit" : "kan endra",
-    "Delete" : "Slett",
     "Cancel" : "Avbryt",
+    "Save" : "Lagra",
+    "Edit" : "Endra",
+    "Download" : "Last ned",
+    "Delete" : "Slett",
+    "Unshare" : "Fjern deling",
     "Last modified" : "Siste endra",
     "When shared show full event" : "Når delt, vis heile hendinga",
     "When shared show only busy" : "Når delt, vis berre oppteken",
-    "When shared hide this event" : "Når delt, gøym denne hendinga",
-    "Edit" : "Endra",
-    "Download" : "Last ned",
-    "Save" : "Lagra",
-    "Settings" : "Innstillingar"
+    "When shared hide this event" : "Når delt, gøym denne hendinga"
 },
 "nplurals=2; plural=(n != 1);");

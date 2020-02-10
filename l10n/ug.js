@@ -6,11 +6,10 @@ OC.L10N.register(
     "Week" : "ھەپتە",
     "All" : "ھەممىسى",
     "Tasks" : "ۋەزىپەلەر",
-    "Delete" : "ئۆچۈر",
     "Cancel" : "ۋاز كەچ",
+    "Save" : "ساقلا",
     "Edit" : "تەھرىر",
     "Download" : "چۈشۈر",
-    "Save" : "ساقلا",
-    "Settings" : "تەڭشەكلەر"
+    "Delete" : "ئۆچۈر"
 },
 "nplurals=1; plural=0;");

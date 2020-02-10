@@ -7,17 +7,17 @@
     "Completed" : "已完成",
     "Share with users or groups" : "共享于用戶或組別",
     "can edit" : "可編輯",
-    "Delete" : "刪除",
     "Cancel" : "取消",
-    "Tomorrow" : "明天",
-    "Set start date" : "設定開始日期",
-    "Set due date" : "設定到期日",
+    "Save" : "儲存",
     "Edit" : "編輯",
     "Download" : "下載",
-    "Save" : "儲存",
-    "Settings" : "設定",
+    "Delete" : "刪除",
+    "Unshare" : "取消分享",
     "Hidden" : "隠藏",
     "Visible" : "可見",
-    "Automatic" : "自動"
+    "Automatic" : "自動",
+    "Tomorrow" : "明天",
+    "Set start date" : "設定開始日期",
+    "Set due date" : "設定到期日"
 },"pluralForm" :"nplurals=1; plural=0;"
 }
