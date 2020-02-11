@@ -23,23 +23,25 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div class="calendar-shares">
-		<Multiselect
-			id="users-groups-search"
-			:options="usersOrGroups"
-			:searchable="true"
-			:internal-search="false"
-			:max-height="600"
-			:show-no-results="true"
-			:placeholder="placeholder"
-			:class="{ 'showContent': inputGiven, 'icon-loading': isLoading }"
-			:user-select="true"
-			open-direction="bottom"
-			track-by="user"
-			label="user"
-			@search-change="findSharee"
-			@input="shareCalendar" />
-		<!-- list of user or groups calendar is shared with -->
-		<ul v-if="calendar.shares.length > 0" class="calendar-shares__list">
+		<ul>
+			<li class="app-navigation-entry__multiselect">
+				<Multiselect
+					id="users-groups-search"
+					:options="usersOrGroups"
+					:searchable="true"
+					:internal-search="false"
+					:max-height="600"
+					:show-no-results="true"
+					:placeholder="placeholder"
+					:class="{ 'showContent': inputGiven, 'icon-loading': isLoading }"
+					:user-select="true"
+					open-direction="bottom"
+					track-by="user"
+					label="user"
+					@search-change="findSharee"
+					@input="shareCalendar" />
+			</li>
+			<!-- list of user or groups calendar is shared with -->
 			<CalendarSharee v-for="sharee in calendar.shares"
 				:key="sharee.uri"
 				:sharee="sharee"

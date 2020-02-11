@@ -4,6 +4,9 @@
 @author Team Popcorn <teampopcornberlin@gmail.com>
 @author Raimund Schlüßler <raimund.schluessler@mailbox.org>
 
+@copyright Copyright (c) 2020 Georg Ehrke <oc.list@georgehrke.com>
+@author Georg Ehrke <oc.list@georgehrke.com>
+
 @license GNU AGPL version 3 or any later version
 
 This program is free software: you can redistribute it and/or modify
@@ -22,40 +25,51 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<li class="calendar-sharee">
-		<span :class="{
-				'icon-loading-small': loading,
-				'icon-group': sharee.isGroup && !loading,
-				'icon-user': !sharee.isGroup && !loading
-			}"
-			class="icon" />
-		<span class="calendar-sharee__identifier">
-			{{ sharee.displayName }}
-		</span>
-		<span class="calendar-sharee__utils">
-			<input
-				:id="uid"
-				:checked="writeable"
+	<AppNavigationItem
+		:title="sharee.displayName">
+		<template slot="icon">
+			<div v-if="sharee.isGroup" class="avatar icon-group" />
+			<div v-else-if="sharee.isCircle" class="avatar icon-circle" />
+			<Avatar v-else
+				:user="sharee.id"
+				:display-name="sharee.displayName"
+				:disable-menu="true" />
+		</template>
+
+		<template slot="counter">
+			<ActionCheckbox
 				:disabled="loading"
-				class="checkbox"
-				name="editable"
-				type="checkbox"
-				@change="editSharee">
-			<label :for="uid">
+				:checked="writeable"
+				@update:checked="editSharee">
 				{{ $t('tasks', 'can edit') }}
-			</label>
-			<a :class="{'calendar-sharee__utils--disabled': loading}"
-				href="#"
-				title="Delete"
-				class="icon-delete"
-				@click="deleteSharee" />
-		</span>
-	</li>
+			</ActionCheckbox>
+		</template>
+
+		<template slot="actions">
+			<ActionButton
+				icon="icon-delete"
+				:disabled="loading"
+				@click.prevent.stop="deleteSharee">
+				{{ $t('tasks', 'Unshare with {displayName}', { displayName: sharee.displayName }) }}
+			</ActionButton>
+		</template>
+	</AppNavigationItem>
 </template>
 
 <script>
+import { ActionButton } from '@nextcloud/vue/dist/Components/ActionButton'
+import { ActionCheckbox } from '@nextcloud/vue/dist/Components/ActionCheckbox'
+import { AppNavigationItem } from '@nextcloud/vue/dist/Components/AppNavigationItem'
+import { Avatar } from '@nextcloud/vue/dist/Components/Avatar'
+
 export default {
 	name: 'CalendarSharee',
+	components: {
+		ActionButton,
+		ActionCheckbox,
+		AppNavigationItem,
+		Avatar,
+	},
 	props: {
 		calendar: {
 			type: Object,
