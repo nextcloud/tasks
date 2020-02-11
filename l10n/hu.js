@@ -24,6 +24,7 @@ OC.L10N.register(
     "Can not copy" : "Nem lehet másolni",
     "Download" : "Letöltés",
     "Delete" : "Törlés",
+    "Unshare" : "Megosztás visszavonása",
     "Calendar link copied to clipboard." : "Naptár hivatkozás a vágólapra másolva.",
     "Calendar link could not be copied to clipboard." : "Naptári hivatkozást nem lehet vágólapra másolni.",
     "Default list" : "Alapértelmezett lista",

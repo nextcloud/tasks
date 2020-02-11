@@ -10,6 +10,7 @@ OC.L10N.register(
     "Save" : "حفظ",
     "Edit" : "تدوین کریں",
     "Download" : "ڈاؤن لوڈ",
-    "Delete" : "حذف کریں"
+    "Delete" : "حذف کریں",
+    "Unshare" : "شئیرنگ ختم کریں"
 },
 "nplurals=2; plural=(n != 1);");

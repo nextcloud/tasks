@@ -17,6 +17,7 @@ OC.L10N.register(
     "Edit" : "რედაქტირება",
     "Download" : "ჩამოტვირთვა",
     "Delete" : "წაშლა",
+    "Unshare" : "გაზიარების შეწყვეტა",
     "Visibility of Smart Collections" : "ჭკვიანი კოლექციების ხილვადობა",
     "Hidden" : "უჩინარი",
     "Visible" : "ჩანს",

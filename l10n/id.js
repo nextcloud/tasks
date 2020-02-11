@@ -17,6 +17,7 @@ OC.L10N.register(
     "Edit" : "Sunting",
     "Download" : "Unduh",
     "Delete" : "Hapus",
+    "Unshare" : "Batalkan berbagi",
     "Visibility of Smart Collections" : "Visibilitas Koleksi Cerdas",
     "Hidden" : "Sembunyi",
     "Visible" : "Tampak",

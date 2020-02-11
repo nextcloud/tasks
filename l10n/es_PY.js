@@ -17,6 +17,7 @@ OC.L10N.register(
     "Edit" : "Editar",
     "Download" : "Descargar",
     "Delete" : "Borrar",
+    "Unshare" : "Dejar de compartir",
     "Visibility of Smart Collections" : "Visibilidad de Colecciones Inteligentes",
     "Hidden" : "Oculto",
     "Visible" : "Visible",

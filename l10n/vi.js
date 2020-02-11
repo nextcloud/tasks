@@ -15,6 +15,7 @@ OC.L10N.register(
     "Edit" : "Sửa",
     "Download" : "Tải về",
     "Delete" : "Xóa",
+    "Unshare" : "Bỏ chia sẽ",
     "Hidden" : "Ẩn",
     "Due date" : "Thời hạn",
     "When shared show full event" : "Khi được chia sẻ thì thể hiện đầy đủ sự kiện",

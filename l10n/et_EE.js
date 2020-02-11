@@ -17,6 +17,7 @@ OC.L10N.register(
     "Edit" : "Muuda",
     "Download" : "Lae alla",
     "Delete" : "Kustuta",
+    "Unshare" : "Lõpeta jagamine",
     "Visibility of Smart Collections" : "Nutikate kollektsioonide nähtavus",
     "Hidden" : "Peidetud",
     "Visible" : "Nähtav",

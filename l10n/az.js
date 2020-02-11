@@ -16,6 +16,7 @@ OC.L10N.register(
     "Edit" : "Dəyişiklik et",
     "Download" : "Yüklə",
     "Delete" : "Sil",
+    "Unshare" : "Paylaşımı durdur",
     "Visibility of Smart Collections" : "Ağıllı yiğımların görünməsi",
     "Hidden" : "Gizli",
     "Visible" : "Görünən",

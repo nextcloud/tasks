@@ -10,6 +10,7 @@ OC.L10N.register(
     "Save" : "ساقلا",
     "Edit" : "تەھرىر",
     "Download" : "چۈشۈر",
-    "Delete" : "ئۆچۈر"
+    "Delete" : "ئۆچۈر",
+    "Unshare" : "ھەمبەھىرلىمە"
 },
 "nplurals=1; plural=0;");
