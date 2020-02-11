@@ -204,7 +204,7 @@ export default {
 			try {
 				return this.collectionString.split('-')[1]
 			} catch {
-				return null
+				return undefined
 			}
 		},
 
