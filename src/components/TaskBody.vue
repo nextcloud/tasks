@@ -73,36 +73,36 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<span :style="{'background-color': task.calendar.color}" class="calendar-indicator" />
 					<span class="calendar-name">{{ task.calendar.displayName }}</span>
 				</div>
-				<div v-if="task.due" :class="{overdue: overdue(task.dueMoment)}" class="duedate">
-					{{ dueDateString }}
-				</div>
 				<div v-if="task.pinned">
 					<span class="icon icon-sprt-bw sprt-pinned" />
 				</div>
 				<div v-if="task.note!=''">
 					<span class="icon icon-sprt-bw sprt-note" />
 				</div>
-				<button v-if="hasCompletedSubtasks"
-					class="inline reactive no-nav"
-					:title="$t('tasks', 'Toggle visibility of completed subtasks.')"
-					@click="toggleCompletedSubtasksVisibility(task)">
-					<span :class="{'active': !task.hideCompletedSubtasks}"
-						class="icon icon-sprt-bw sprt-toggle toggle-completed-subtasks" />
-				</button>
-				<button v-if="Object.values(task.subTasks).length"
-					class="inline reactive no-nav"
-					:title="$t('tasks', 'Toggle visibility of all subtasks.')"
-					@click="toggleSubtasksVisibility(task)">
-					<span :class="task.hideSubtasks ? 'sprt-subtasks-hidden' : 'sprt-subtasks-visible'"
-						class="icon icon-sprt-bw" />
-				</button>
-				<button v-if="!task.calendar.readOnly"
-					class="inline task-addsubtask add-subtask reactive no-nav"
-					:taskId="task.uri"
-					:title="subtasksCreationPlaceholder"
-					@click="showSubtaskInput = true">
-					<span class="icon icon-sprt-bw sprt-add" :taskId="task.uri" />
-				</button>
+				<div v-if="task.due" :class="{overdue: overdue(task.dueMoment)}" class="duedate">
+					{{ dueDateString }}
+				</div>
+				<Actions class="reactive no-nav">
+					<ActionButton v-if="!task.calendar.readOnly"
+						:close-after-click="true"
+						class="reactive no-nav"
+						icon="icon-add"
+						@click="openSubtaskInput">
+						{{ $t('tasks', 'Add subtask') }}
+					</ActionButton>
+					<ActionButton v-if="Object.values(task.subTasks).length"
+						class="reactive no-nav"
+						:icon="task.hideSubtasks ? 'icon-subtasks-hidden' : 'icon-subtasks-visible'"
+						@click="toggleSubtasksVisibility(task)">
+						{{ task.hideSubtasks ? $t('tasks', 'Show subtasks') : $t('tasks', 'Hide subtasks') }}
+					</ActionButton>
+					<ActionButton v-if="hasCompletedSubtasks"
+						class="reactive no-nav"
+						icon="icon-toggle"
+						@click="toggleCompletedSubtasksVisibility(task)">
+						{{ task.hideCompletedSubtasks ? $t('tasks', 'Show completed subtasks') : $t('tasks', 'Hide completed subtasks') }}
+					</ActionButton>
+				</Actions>
 				<button class="inline task-star reactive no-nav" @click="toggleStarred(task)">
 					<span :class="[iconStar, {'disabled': task.calendar.readOnly}]" class="icon" />
 				</button>
@@ -110,11 +110,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		</div>
 		<div class="subtasks-container">
 			<div v-if="showSubtaskInput"
-				v-click-outside="($event) => cancelCreation($event)"
+				v-click-outside="($event) => closeSubtaskInput($event)"
 				class="task-item add-subtask">
 				<form name="addTaskForm" @submit.prevent="addTask">
-					<input v-model="newTaskName"
-						v-focus
+					<input ref="input"
+						v-model="newTaskName"
 						:placeholder="subtasksCreationPlaceholder"
 						:disabled="isAddingTask"
 						@keyup.27="showSubtaskInput = false">
@@ -138,21 +138,24 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 import { overdue, sort, searchSubTasks, isTaskInList } from '../store/storeHelper'
 import ClickOutside from 'vue-click-outside'
 import { mapGetters, mapActions } from 'vuex'
-import focus from '../directives/focus'
 import { linkify } from '../directives/linkify.js'
 import TaskStatusDisplay from './TaskStatusDisplay'
 import TaskDragContainer from './TaskDragContainer'
+
+import Actions from '@nextcloud/vue/dist/Components/Actions'
+import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
 
 export default {
 	name: 'TaskBody',
 	directives: {
 		ClickOutside,
-		focus,
 		linkify,
 	},
 	components: {
 		TaskStatusDisplay,
 		TaskDragContainer,
+		Actions,
+		ActionButton,
 	},
 	props: {
 		task: {
@@ -168,6 +171,7 @@ export default {
 	data() {
 		return {
 			showSubtaskInput: false,
+			justOpened: false,
 			newTaskName: '',
 			isAddingTask: false,
 		}
@@ -391,11 +395,21 @@ export default {
 			}
 		},
 
-		cancelCreation: function(e) {
+		openSubtaskInput() {
+			this.showSubtaskInput = true
+			this.justOpened = true
+			this.$nextTick(
+				() => this.$refs.input.focus()
+			)
+		},
+
+		closeSubtaskInput: function(e) {
 			// don't cancel the task creation if the own add-subtask button is clicked
-			if (e.target.getAttribute('taskId') !== this.task.uri) {
-				this.showSubtaskInput = false
+			if (this.justOpened) {
+				this.justOpened = false
+				return
 			}
+			this.showSubtaskInput = false
 		},
 
 		addTask: function() {
