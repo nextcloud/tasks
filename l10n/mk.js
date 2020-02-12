@@ -37,6 +37,8 @@ OC.L10N.register(
     "Set due date" : "Постави краен рок",
     "All day" : "Сите денови",
     "Add this as a new category" : "Додади како нова категорија",
+    "When shared show full event" : "Кога е споделен, прикажи го целосно настанот",
+    "When shared show only busy" : "Кога е споделено покажи зафатен",
     "An error occurred" : "Настана грешка"
 },
 "nplurals=2; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : 1;");
