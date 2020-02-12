@@ -72,7 +72,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							class="section-content"
 							@click="editProperty('start', $event)">
 							<span class="section-icon">
-								<span :class="[dateIcon(task.startMoment)]"
+								<span :class="[startDateIcon(task.startMoment)]"
 									class="icon" />
 							</span>
 							<span class="section-title">
@@ -116,7 +116,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							class="section-content"
 							@click="editProperty('due', $event)">
 							<span class="section-icon">
-								<span :class="[dateIcon(task.dueMoment)]"
+								<span :class="[dueDateIcon(task.dueMoment)]"
 									class="icon" />
 							</span>
 							<span class="section-title">
@@ -739,15 +739,19 @@ export default {
 			}
 		},
 
-		dateIcon: function(date) {
+		startDateIcon: function(date) {
 			if (date.isValid()) {
-				let c = 'icon-color icon-calendar-due'
-				if (overdue(date)) {
-					c += ' icon-calendar-overdue'
-				}
-				return c
+				return `icon-color icon-startdate-${overdue(date) ? 'overdue' : 'due'}`
 			} else {
-				return 'icon-bw icon-calendar'
+				return 'icon-bw icon-startdate'
+			}
+		},
+
+		dueDateIcon: function(date) {
+			if (date.isValid()) {
+				return `icon-color icon-duedate-${overdue(date) ? 'overdue' : 'due'}`
+			} else {
+				return 'icon-bw icon-duedate'
 			}
 		},
 

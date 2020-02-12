@@ -903,6 +903,11 @@
 
 							.icon {
 								display: block;
+
+								&.icon-color {
+									opacity: 1;
+									cursor: unset;
+								}
 							}
 
 							.calendar-indicator {
@@ -1035,15 +1040,6 @@
 					color: $yellow;
 				}
 
-				&.date .icon {
-					&.icon-calendar-due,
-					&.icon-calendar-overdue,
-					&.icon-percent,
-					&.icon-percent-active {
-						opacity: 1;
-					}
-				}
-
 				&.detail-note {
 					padding: 20px 0;
 					height: auto;
@@ -1068,14 +1064,6 @@
 							font-weight: bold;
 							margin-left: 10px;
 						}
-					}
-				}
-
-				.icon {
-					&.icon-privacy,
-					&.icon-status {
-						opacity: 1;
-						cursor: unset;
 					}
 				}
 
