@@ -168,15 +168,6 @@
 			&.selected {
 				border: 1px solid $gray_dark;
 			}
-
-			&.randomcolour {
-				cursor: pointer;
-
-				.icon-random {
-					filter: invert(1);
-					opacity: 1;
-				}
-			}
 		}
 	}
 }
