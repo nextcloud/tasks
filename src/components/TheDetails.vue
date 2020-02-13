@@ -102,10 +102,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						</div>
 						<div class="section-utils">
 							<button class="inline reactive">
-								<span class="icon icon-color icon-checkmark-color" />
+								<span class="icon sprt-color sprt-checkmark-color" />
 							</button>
 							<button class="delete inline reactive" @click="setProperty('start', null)">
-								<span class="icon icon-bw icon-trash" />
+								<span class="icon icon-sprt-bw sprt-trash" />
 							</button>
 						</div>
 					</li>
@@ -146,10 +146,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						</div>
 						<div class="section-utils">
 							<button class="inline reactive">
-								<span class="icon icon-color icon-checkmark-color" />
+								<span class="icon sprt-color sprt-checkmark-color" />
 							</button>
 							<button class="delete inline reactive" @click="setProperty('due', null)">
-								<span class="icon icon-bw icon-trash" />
+								<span class="icon icon-sprt-bw sprt-trash" />
 							</button>
 						</div>
 					</li>
@@ -199,7 +199,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							class="section-content"
 							@click="editProperty('class')">
 							<span class="section-icon">
-								<span class="icon icon-color icon-privacy" />
+								<span class="icon sprt-color sprt-privacy" />
 							</span>
 							<div class="detail-multiselect-container blue">
 								<Multiselect
@@ -272,10 +272,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						</div>
 						<div class="section-utils">
 							<button class="inline reactive">
-								<span class="icon icon-color icon-checkmark-color" />
+								<span class="icon sprt-color sprt-checkmark-color" />
 							</button>
 							<button class="delete inline reactive" @click="setProperty('priority', 0)">
-								<span class="icon icon-bw icon-trash" />
+								<span class="icon icon-sprt-bw sprt-trash" />
 							</button>
 						</div>
 					</li>
@@ -308,10 +308,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						</div>
 						<div class="section-utils">
 							<button class="inline reactive">
-								<span class="icon icon-color icon-checkmark-color" />
+								<span class="icon sprt-color sprt-checkmark-color" />
 							</button>
 							<button class="delete inline reactive" @click="setProperty('complete', 0)">
-								<span class="icon icon-bw icon-trash" />
+								<span class="icon icon-sprt-bw sprt-trash" />
 							</button>
 						</div>
 					</li>
@@ -362,7 +362,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<button :style="{visibility: task.calendar.readOnly ? 'hidden' : 'visible'}"
 					class="close-all reactive inline"
 					@click="removeTask">
-					<span class="icon icon-bw icon-trash" />
+					<span class="icon icon-sprt-bw sprt-trash" />
 				</button>
 				<span v-tooltip="{
 						content: taskInfo,
@@ -372,7 +372,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<span class="icon icon-info" />
 				</span>
 				<button class="close-all reactive inline" @click="closeDetails">
-					<span class="icon icon-bw icon-hide" />
+					<span class="icon icon-sprt-bw sprt-hide" />
 				</button>
 			</div>
 		</div>
@@ -613,37 +613,37 @@ export default {
 		},
 		iconStar: function() {
 			if (+this.task.priority) {
-				return 'icon-color icon-task-star-' + this.priorityClass
+				return 'sprt-color sprt-task-star-' + this.priorityClass
 			} else {
-				return 'icon-bw icon-task-star'
+				return 'icon-sprt-bw sprt-task-star'
 			}
 		},
 		iconPinned: function() {
 			if (this.task.pinned) {
-				return 'icon-bw icon-pinned'
+				return 'icon-sprt-bw sprt-pinned'
 			} else {
-				return 'icon-bw icon-pinned-off'
+				return 'icon-sprt-bw sprt-pinned-off'
 			}
 		},
 		iconPercent: function() {
 			if (this.task.complete > 0) {
-				return 'icon-color icon-percent-active'
+				return 'sprt-color sprt-percent-active'
 			} else {
-				return 'icon-bw icon-percent'
+				return 'icon-sprt-bw sprt-percent'
 			}
 		},
 		iconCategories: function() {
 			if (this.task.categories.length > 0) {
-				return 'icon-color icon-tag-active'
+				return 'sprt-color sprt-tag-active'
 			} else {
-				return 'icon-bw icon-tag'
+				return 'icon-sprt-bw sprt-tag'
 			}
 		},
 		iconStatus: function() {
 			if (this.task.status) {
-				return 'icon-color icon-status'
+				return 'sprt-color sprt-status'
 			} else {
-				return 'icon-bw icon-current'
+				return 'icon-sprt-bw sprt-current'
 			}
 		},
 		...mapGetters({
@@ -741,17 +741,17 @@ export default {
 
 		startDateIcon: function(date) {
 			if (date.isValid()) {
-				return `icon-color icon-startdate-${overdue(date) ? 'overdue' : 'due'}`
+				return `sprt-color sprt-startdate-${overdue(date) ? 'overdue' : 'due'}`
 			} else {
-				return 'icon-bw icon-startdate'
+				return 'icon-sprt-bw sprt-startdate'
 			}
 		},
 
 		dueDateIcon: function(date) {
 			if (date.isValid()) {
-				return `icon-color icon-duedate-${overdue(date) ? 'overdue' : 'due'}`
+				return `sprt-color sprt-duedate-${overdue(date) ? 'overdue' : 'due'}`
 			} else {
-				return 'icon-bw icon-duedate'
+				return 'icon-sprt-bw sprt-duedate'
 			}
 		},
 
