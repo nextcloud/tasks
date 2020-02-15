@@ -5,17 +5,13 @@
 #app-navigation {
 	> ul {
 		> li {
-			&.collection .app-navigation-entry-icon {
-				background-image: unset;
-
-				&::before {
-					content: '';
-					position: absolute;
-					width: 16px;
-					height: 16px;
-					background: var(--icon-tasks-bw-000) no-repeat;
-					background-position: inherit;
-				}
+			&.collection .app-navigation-entry-icon::before {
+				content: '';
+				position: absolute;
+				width: 16px;
+				height: 16px;
+				background: var(--icon-tasks-sprt-bw-000) no-repeat;
+				background-position: inherit;
 			}
 
 			&.list {
@@ -168,15 +164,6 @@
 			&.selected {
 				border: 1px solid $gray_dark;
 			}
-
-			&.randomcolour {
-				cursor: pointer;
-
-				.icon-random {
-					filter: invert(1);
-					opacity: 1;
-				}
-			}
 		}
 	}
 }
@@ -211,7 +198,7 @@
 					content: '';
 					width: 16px;
 					height: 16px;
-					background: var(--icon-tasks-bw-000) no-repeat;
+					background: var(--icon-tasks-sprt-bw-000) no-repeat;
 					background-position: inherit;
 				}
 			}
@@ -568,7 +555,7 @@
 							.icon {
 								vertical-align: unset;
 
-								&.icon-add {
+								&.sprt-add {
 									&:hover {
 										opacity: 1;
 									}
@@ -904,7 +891,7 @@
 							.icon {
 								display: block;
 
-								&.icon-color {
+								&.sprt-color {
 									opacity: 1;
 									cursor: unset;
 								}
@@ -1132,7 +1119,7 @@
 				}
 			}
 
-			&.date:hover .icon.icon-trash {
+			&.date:hover .icon.sprt-trash {
 				display: none;
 			}
 		}
@@ -1211,9 +1198,9 @@ input[type='checkbox'].checkbox {
 		opacity: .7;
 	}
 
-	&.icon-checkmark,
-	&.icon-tag-active,
-	&[class*=' icon-task-star-'] {
+	&.sprt-checkmark,
+	&.sprt-tag-active,
+	&[class*=' sprt-task-star-'] {
 		opacity: 1 !important;
 	}
 
@@ -1236,8 +1223,8 @@ input[type='checkbox'].checkbox {
 	height: 16px;
 
 	&.success {
-		@extend .icon-color;
-		@extend .icon-checkmark-color;
+		@extend .sprt-color;
+		@extend .sprt-checkmark-color;
 	}
 
 	&.refresh {

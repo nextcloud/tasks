@@ -47,7 +47,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			:calendar="calendar" />
 		<AppNavigationItem v-click-outside="cancelCreate"
 			:title="$t('tasks', 'Add List…')"
-			icon="icon-add"
+			icon="sprt-add"
 			:class="{edit: creating}"
 			class="collection reactive"
 			@click="startCreate($event)">

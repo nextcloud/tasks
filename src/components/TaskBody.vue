@@ -77,31 +77,31 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					{{ dueDateString }}
 				</div>
 				<div v-if="task.pinned">
-					<span class="icon icon-bw icon-pinned" />
+					<span class="icon icon-sprt-bw sprt-pinned" />
 				</div>
 				<div v-if="task.note!=''">
-					<span class="icon icon-bw icon-note" />
+					<span class="icon icon-sprt-bw sprt-note" />
 				</div>
 				<button v-if="hasCompletedSubtasks"
 					class="inline reactive no-nav"
 					:title="$t('tasks', 'Toggle visibility of completed subtasks.')"
 					@click="toggleCompletedSubtasksVisibility(task)">
 					<span :class="{'active': !task.hideCompletedSubtasks}"
-						class="icon icon-bw icon-toggle toggle-completed-subtasks" />
+						class="icon icon-sprt-bw sprt-toggle toggle-completed-subtasks" />
 				</button>
 				<button v-if="Object.values(task.subTasks).length"
 					class="inline reactive no-nav"
 					:title="$t('tasks', 'Toggle visibility of all subtasks.')"
 					@click="toggleSubtasksVisibility(task)">
-					<span :class="task.hideSubtasks ? 'icon-subtasks-hidden' : 'icon-subtasks-visible'"
-						class="icon icon-bw subtasks" />
+					<span :class="task.hideSubtasks ? 'sprt-subtasks-hidden' : 'sprt-subtasks-visible'"
+						class="icon icon-sprt-bw" />
 				</button>
 				<button v-if="!task.calendar.readOnly"
 					class="inline task-addsubtask add-subtask reactive no-nav"
 					:taskId="task.uri"
 					:title="subtasksCreationPlaceholder"
 					@click="showSubtaskInput = true">
-					<span class="icon icon-bw icon-add" :taskId="task.uri" />
+					<span class="icon icon-sprt-bw sprt-add" :taskId="task.uri" />
 				</button>
 				<button class="inline task-star reactive no-nav" @click="toggleStarred(task)">
 					<span :class="[iconStar, {'disabled': task.calendar.readOnly}]" class="icon" />
@@ -210,13 +210,13 @@ export default {
 
 		iconStar: function() {
 			if (+this.task.priority > 5) {
-				return 'icon-color icon-task-star-low'
+				return 'sprt-color sprt-task-star-low'
 			} else if (+this.task.priority === 5) {
-				return 'icon-color icon-task-star-medium'
+				return 'sprt-color sprt-task-star-medium'
 			} else if (+this.task.priority > 0 && +this.task.priority < 5) {
-				return 'icon-color icon-task-star-high'
+				return 'sprt-color sprt-task-star-high'
 			} else {
-				return 'icon-bw icon-task-star'
+				return 'icon-sprt-bw sprt-task-star'
 			}
 		},
 

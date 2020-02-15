@@ -61,32 +61,32 @@ class CollectionsServiceTest extends TestCase {
 				'id' => "starred",
 				'displayName' => 'Important',
 				'show' => 2,
-				'icon' => 'icon-task-star'),
+				'icon' => 'sprt-task-star'),
 			array(
 				'id' => "today",
 				'displayName' => 'Today',
 				'show' => 2,
-				'icon' => 'icon-calendar'),
+				'icon' => 'sprt-calendar'),
 			array(
 				'id' => "week",
 				'displayName' => 'Week',
 				'show' => 2,
-				'icon' => 'icon-calendar'),
+				'icon' => 'sprt-calendar'),
 			array(
 				'id' => "all",
 				'displayName' => 'All',
 				'show' => 2,
-				'icon' => 'icon-all'),
+				'icon' => 'sprt-all'),
 			array(
 				'id' => "current",
 				'displayName' => 'Current',
 				'show' => 2,
-				'icon' => 'icon-current'),
+				'icon' => 'sprt-current'),
 			array(
 				'id' => "completed",
 				'displayName' => 'Completed',
 				'show' => 2,
-				'icon' => 'icon-checkmark')
+				'icon' => 'sprt-checkmark')
 		);
 		
 		$map = [

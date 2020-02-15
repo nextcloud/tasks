@@ -8,9 +8,9 @@
 	"mode": {
 		"css": {
 			"bust": false,
-			"common": "icon-color",
-			"prefix": ".icon-%s",
-			"sprite": "../img/color.svg",
+			"common": "sprt-color",
+			"prefix": ".sprt-%s",
+			"sprite": "../img/sprt-color.svg",
 			"render": {
 				"scss": {
 					"template": "svg-sprite-color.tmpl",
