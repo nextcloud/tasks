@@ -26,6 +26,7 @@ import calendars from './calendars'
 import collections from './collections'
 import tasks from './tasks'
 import settings from './settings'
+import principals from './principals'
 
 Vue.use(Vuex)
 
@@ -35,5 +36,6 @@ export default new Vuex.Store({
 		collections,
 		tasks,
 		settings,
+		principals,
 	},
 })

@@ -61,27 +61,34 @@ export default {
 			calendars: state => state.calendars.calendars,
 		}),
 	},
-	beforeMount() {
+	async beforeMount() {
 		// get calendars then get tasks
-		client.connect({ enableCalDAV: true }).then(() => {
-			this.$store.dispatch('getCalendars')
-				.then((calendars) => {
-					// No calendars? Create a new one!
-					if (calendars.length === 0) {
-						let color = '#0082C9'
-						if (this.$OCA.Theming) {
-							color = this.$OCA.Theming.color
-						}
-						this.$store.dispatch('appendCalendar', { displayName: this.$t('tasks', 'Tasks'), color })
-							.then(() => {
-								this.fetchTasks()
-							})
-					// else, let's get those tasks!
-					} else {
-						this.fetchTasks()
-					}
-				})
+		await client.connect({ enableCalDAV: true })
+		await this.$store.dispatch('fetchCurrentUserPrincipal')
+		const calendars = await this.$store.dispatch('getCalendars')
+		const owners = []
+		calendars.forEach((calendar) => {
+			if (owners.indexOf(calendar.owner) === -1) {
+				owners.push(calendar.owner)
+			}
 		})
+		owners.forEach((owner) => {
+			this.$store.dispatch('fetchPrincipalByUrl', {
+				url: owner,
+			})
+		})
+		// No calendars? Create a new one!
+		if (calendars.length === 0) {
+			let color = '#0082C9'
+			if (this.$OCA.Theming) {
+				color = this.$OCA.Theming.color
+			}
+			await this.$store.dispatch('appendCalendar', { displayName: this.$t('tasks', 'Tasks'), color })
+			this.fetchTasks()
+		// else, let's get those tasks!
+		} else {
+			this.fetchTasks()
+		}
 	},
 	methods: {
 		/**

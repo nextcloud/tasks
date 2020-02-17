@@ -23,40 +23,49 @@
  */
 
 .calendar-shares {
-	width: calc(100% - 6px);
-	margin: 6px;
-	&__list {
-		margin-top: 8px;
-		margin-bottom: 12px;
-		display: flex;
-		flex-direction: column;
-	}
-
 	&__shareematch--bold {
 		font-weight: bold;
 	}
+
+	.app-navigation-entry {
+		padding-left: 0 !important;
+
+		.avatar {
+			width: 32px;
+			height: 32px;
+			background-color: var(--color-border-dark);
+			background-size: 16px;
+		}
+
+		&__utils {
+			.action-checkbox__label {
+				padding-right: 0 !important;
+			}
 	
-	.icon-loading::after {
-		top: 70%;
-		left: 95%;
-		height: 14px;
-		width: 14px;
-	}
-
-	.multiselect {
-		width: inherit;
-		margin: 0;
-		.multiselect__tags:focus-within, 
-		.multiselect__tags:hover {
-			border-color: var(--color-primary-element);
+			.action-checkbox__label::before {
+				margin: 4px 4px 0 !important;
+			}
 		}
+		
+		&__multiselect {
+			padding-left: 6px !important;
 
-		&:not(.showContent) .multiselect__content-wrapper {
-			display: none;
-		}
+			.multiselect {
+				width: calc(100% - 14px);
+				margin: 0;
+				.multiselect__tags:focus-within, 
+				.multiselect__tags:hover {
+					border-color: var(--color-primary-element);
+				}
 
-		.multiselect__content-wrapper {
-			z-index: 101 !important;
+				&:not(.showContent) .multiselect__content-wrapper {
+					display: none;
+				}
+
+				.multiselect__content-wrapper {
+					z-index: 101 !important;
+				}
+			}
 		}
 	}
 }

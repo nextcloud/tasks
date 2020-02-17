@@ -52,6 +52,10 @@ const calendarModel = {
 	dav: false,
 	supportsTasks: true,
 	loadedCompleted: false,
+	// Whether or not the calendar is shared with me
+	isSharedWithMe: false,
+	// Whether or not the calendar can be shared by me
+	canBeShared: false,
 }
 
 const state = {
@@ -62,16 +66,26 @@ const state = {
  * Maps a dav collection to our calendar object model
  *
  * @param {Object} calendar The calendar object from the cdav library
+ * @param {Object} currentUserPrincipal The principal model of the current user principal
  * @returns {Object}
  */
-export function mapDavCollectionToCalendar(calendar) {
+export function mapDavCollectionToCalendar(calendar, currentUserPrincipal) {
+	const owner = calendar.owner
+	let isSharedWithMe = false
+	if (!currentUserPrincipal) {
+		// If the user is not authenticated, the calendar
+		// will always be marked as shared with them
+		isSharedWithMe = true
+	} else {
+		isSharedWithMe = (owner !== currentUserPrincipal.url)
+	}
 	return {
 		// get last part of url
 		id: calendar.url.split('/').slice(-2, -1)[0],
 		displayName: calendar.displayname,
 		color: calendar.color,
 		enabled: calendar.enabled !== false,
-		owner: calendar.owner,
+		owner,
 		readOnly: !calendar.isWriteable(),
 		tasks: {},
 		url: calendar.url,
@@ -79,6 +93,8 @@ export function mapDavCollectionToCalendar(calendar) {
 		shares: calendar.shares.map(sharee => Object.assign({}, mapDavShareeToSharee(sharee))),
 		supportsTasks: calendar.components.includes('VTODO'),
 		loadedCompleted: false,
+		isSharedWithMe,
+		canBeShared: calendar.isShareable(),
 	}
 }
 
@@ -395,7 +411,7 @@ const actions = {
 		let calendars = await client.calendarHomes[0].findAllCalendars()
 			.then(calendars => {
 				return calendars.map(calendar => {
-					return mapDavCollectionToCalendar(calendar)
+					return mapDavCollectionToCalendar(calendar, context.getters.getCurrentUserPrincipal)
 				})
 			})
 
@@ -419,7 +435,7 @@ const actions = {
 	async appendCalendar(context, calendar) {
 		return client.calendarHomes[0].createCalendarCollection(calendar.displayName, calendar.color, ['VTODO'])
 			.then((response) => {
-				calendar = mapDavCollectionToCalendar(response)
+				calendar = mapDavCollectionToCalendar(response, context.getters.getCurrentUserPrincipal)
 				context.commit('addCalendar', calendar)
 				// Open the calendar
 				router.push({ name: 'calendars', params: { calendarId: calendar.id } })
