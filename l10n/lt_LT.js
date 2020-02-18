@@ -13,6 +13,7 @@ OC.L10N.register(
     "Share with users or groups" : "Bendrinti su naudotojais ar grupėmis",
     "No users or groups" : "Nėra jokių naudotojų ar grupių",
     "can edit" : "gali redaguoti",
+    "Unshare with {displayName}" : "Nustoti bendrinti su {displayName}",
     "Unable to delete the share." : "Nepavyko ištrinti viešinio.",
     "Unable to change permissions." : "Nepavyko pakeisti leidimų.",
     "Add List…" : "Pridėti sąrašą…",

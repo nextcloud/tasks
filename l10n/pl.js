@@ -13,6 +13,7 @@ OC.L10N.register(
     "Share with users or groups" : "Udostępnij użytkownikom lub grupom",
     "No users or groups" : "Brak użytkowników lub grup",
     "can edit" : "może edytować",
+    "Unshare with {displayName}" : "Nie współdziel z {displayName}",
     "Unable to delete the share." : "Nie można usunąć współdzielenia.",
     "Unable to change permissions." : "Nie można zmienić uprawnień.",
     "Add List…" : "Dodaj listę…",

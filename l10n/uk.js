@@ -11,6 +11,7 @@ OC.L10N.register(
     "Share with users or groups" : "Поділитися з користувачем або групою",
     "No users or groups" : "Жодного користувача або групм",
     "can edit" : "може редагувати",
+    "Unshare with {displayName}" : "Припинити поширення з {displayName}",
     "New List" : "Новий список",
     "Cancel" : "Скасувати",
     "Save" : "Зберегти",

@@ -9,6 +9,7 @@
     "Share with users or groups" : "اشتراک گذاری با کاربران یا گروه ها ...",
     "No users or groups" : "هیچ کاربر یا گروهی وجود ندارد",
     "can edit" : "توانایی ویرایش",
+    "Unshare with {displayName}" : "عدم اشتراک گذاری با {displayName}",
     "New List" : "لیست جدید",
     "Cancel" : "لغو",
     "Save" : "ذخیره",

@@ -13,6 +13,7 @@ OC.L10N.register(
     "Share with users or groups" : "Partager avec des utilisateurs ou des groupes",
     "No users or groups" : "Aucun utilisateur ou groupe",
     "can edit" : "peut modifier",
+    "Unshare with {displayName}" : "Ne plus partager avec {displayName}",
     "Unable to delete the share." : "Impossible de supprimer le partage.",
     "Unable to change permissions." : "Impossible de modifier les autorisations.",
     "Add List…" : "Ajouter une liste...",

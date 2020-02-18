@@ -13,6 +13,7 @@ OC.L10N.register(
     "Share with users or groups" : "Kullanıcı ya da gruplarla paylaş",
     "No users or groups" : "Hiçbir kullanıcı ya da grupla",
     "can edit" : "düzenleyebilir",
+    "Unshare with {displayName}" : "{displayName} ile paylaşımı kaldır",
     "Unable to delete the share." : "Paylaşım silinemedi.",
     "Unable to change permissions." : "İzinler değiştirilemedi.",
     "Add List…" : "Liste Ekle …",

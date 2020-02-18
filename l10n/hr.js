@@ -12,6 +12,7 @@ OC.L10N.register(
     "Share with users or groups" : "Dijelite s korisnicima ili grupama",
     "No users or groups" : "Nema korisnika ili grupa",
     "can edit" : "uređivanje moguće",
+    "Unshare with {displayName}" : "Prekid dijeljenja s {displayName}",
     "Unable to delete the share." : "Nije moguće izbrisati dijeljenje.",
     "Unable to change permissions." : "Nije moguće promijeniti dopuštenja.",
     "Add List…" : "Dodaj popis…",

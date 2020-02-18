@@ -12,6 +12,7 @@ OC.L10N.register(
     "Share with users or groups" : "Partekatu erabiltzaile edo taldeekin",
     "No users or groups" : "Ez dago erabiltzaile edo talderik",
     "can edit" : "edita daiteke",
+    "Unshare with {displayName}" : "Utzi {displayName} erabiltzailearekin partekatzeari",
     "Unable to delete the share." : "Ezin da partekatzea ezabatu.",
     "Unable to change permissions." : "Ezin dira baimenak aldatu.",
     "Add List…" : "Gehitu zerrenda...",

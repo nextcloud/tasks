@@ -12,6 +12,7 @@ OC.L10N.register(
     "Share with users or groups" : "Sprístupniť používateľom alebo skupinám",
     "No users or groups" : "Žiadny používatelia alebo skupiny",
     "can edit" : "môže upravovať ",
+    "Unshare with {displayName}" : "Zrušiť zdieľanie s {displayName}",
     "Unable to delete the share." : "Nemožno zmazať zdieľanie.",
     "Unable to change permissions." : "Nepodarilo sa zmeniť oprávnenia.",
     "Add List…" : "Pridať zoznam",

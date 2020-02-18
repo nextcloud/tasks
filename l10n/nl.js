@@ -12,6 +12,7 @@ OC.L10N.register(
     "Share with users or groups" : "Delen met gebruikers of groepen",
     "No users or groups" : "Geen gebruikers of groepen",
     "can edit" : "kan bewerken",
+    "Unshare with {displayName}" : "Stop delen met {displayName}",
     "Unable to delete the share." : "Kan de share niet verwijderen.",
     "Unable to change permissions." : "Kan de permissies niet wijzigen.",
     "Add List…" : "Toevoegen lijst...",

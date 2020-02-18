@@ -12,6 +12,7 @@ OC.L10N.register(
     "Share with users or groups" : "Deila með notendum eða hópum",
     "No users or groups" : "Engir notendur eða hópar",
     "can edit" : "getur breytt",
+    "Unshare with {displayName}" : "Hætta deilingu með {displayName}",
     "Unable to delete the share." : "Get ekki eytt sameigninni.",
     "Unable to change permissions." : "Tekst ekki að breyta heimildum.",
     "Add List…" : "Bæta við lista...",
