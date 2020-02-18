@@ -635,7 +635,7 @@ const actions = {
 			await task.calendar.dav.createVObject(vData)
 				.then((response) => {
 					Vue.set(task, 'dav', response)
-					task.syncstatus = new TaskStatus('success', 'Successfully created the task.')
+					task.syncstatus = new TaskStatus('success', OCA.Tasks.$t('tasks', 'Successfully created the task.'))
 					context.commit('appendTask', task)
 					context.commit('addTaskToCalendar', task)
 					const parent = context.getters.getTaskByUid(task.related)
@@ -1132,7 +1132,7 @@ const actions = {
 		return task.dav.fetchCompleteData()
 			.then((response) => {
 				const newTask = new Task(task.dav.data, task.calendar)
-				task.syncstatus = new TaskStatus('success', 'Successfully updated the task.')
+				task.syncstatus = new TaskStatus('success', OCA.Tasks.$t('tasks', 'Successfully updated the task.'))
 				context.commit('updateTask', newTask)
 			})
 			.catch((error) => { throw error })
@@ -1201,11 +1201,11 @@ const actions = {
 					context.commit('setTaskCalendar', { task: task, calendar: calendar })
 					// Remove the task from the calendar, add it to the new one
 					context.commit('addTaskToCalendar', task)
-					task.syncstatus = new TaskStatus('success', 'Task successfully moved to new calendar.')
+					task.syncstatus = new TaskStatus('success', OCA.Tasks.$t('tasks', 'Task successfully moved to new calendar.'))
 				})
 				.catch((error) => {
 					console.error(error)
-					OC.Notification.showTemporary(t('calendars', 'An error occurred'))
+					OC.Notification.showTemporary(OCA.Tasks.$t('tasks', 'An error occurred'))
 				})
 		}
 
