@@ -35,6 +35,7 @@ OC.L10N.register(
     "Calendar link could not be copied to clipboard." : "Link do kalendarza nie mógł zostać skopiowany do schowka.",
     "An error occurred, unable to delete the calendar." : "Wystąpił błąd, nie można usunąć kalendarza.",
     "_Deleting the calendar in {countdown} second_::_Deleting the calendar in {countdown} seconds_" : ["Usunięcie kalendarza za {countdown} sekundę","Usunięcie kalendarza za {countdown} sekundy","Usunięcie kalendarza za {countdown} sekund","Usunięcie kalendarza za {countdown} sekund"],
+    "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Udostępnienie kalendarza za {countdown} sekundę","Udostępnienie kalendarza za {countdown} sekundy","Udostępnienie kalendarza za {countdown} sekund","Udostępnienie kalendarza za {countdown} sekund"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Współdzielone z {num} jednostką","Współdzielone z {num} jednostkami","Współdzielone z {num} jednostkami","Współdzielone z {num} jednostkami"],
     "Default list" : "Lista domyślna",
     "Visibility of Smart Collections" : "Widok kategorii",
@@ -133,7 +134,7 @@ OC.L10N.register(
     "{percent} % completed" : "Ukończono {percent}%",
     "Could not delete the task." : "Nie można usunąć zadania.",
     "Synchronizing to the server." : "Synchronizacja z serwerem.",
-    "Task successfully saved to server." : "Zadanie pomyślnie zapisane na serwer.",
+    "Task successfully saved to server." : "Zadanie pomyślnie zapisane na serwerze.",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Nie można zaktualizować zadania, ponieważ zostało zmienione na serwerze. Kliknij, aby odświeżyć. Lokalne zmiany zostaną odrzucone.",
     "Could not update the task." : "Nie można zaktualizować zadania.",
     "An error occurred" : "Wystąpił błąd"

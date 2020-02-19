@@ -35,6 +35,7 @@ OC.L10N.register(
     "Calendar link could not be copied to clipboard." : "Kalender-Link konnte nicht in die Zwischenablage kopiert werden.",
     "An error occurred, unable to delete the calendar." : "Es ist ein Fehler aufgetreten, der Kalender konnte nicht gelöscht werden.",
     "_Deleting the calendar in {countdown} second_::_Deleting the calendar in {countdown} seconds_" : ["Der Kalender wird in {countdown} Sekunde gelöscht","Der Kalender wird in {countdown} Sekunden gelöscht"],
+    "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Kalenderfreigabe wird in  {countdown} Sekunde beendet","Kalenderfreigabe wird in  {countdown} Sekunden beendet"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Für {num} Entitäten freigegeben","Für {num} Entitäten freigegeben"],
     "Default list" : "Standardliste",
     "Visibility of Smart Collections" : "Sichtbarkeit der intelligenten Sammlungen",

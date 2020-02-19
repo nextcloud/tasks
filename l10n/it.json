@@ -33,6 +33,7 @@
     "Calendar link could not be copied to clipboard." : "Il collegamento del calendario non può essere copiato negli appunti.",
     "An error occurred, unable to delete the calendar." : "Si è verificato un errore, impossibile eliminare il calendario.",
     "_Deleting the calendar in {countdown} second_::_Deleting the calendar in {countdown} seconds_" : ["Eliminazione del calendario in {countdown} secondo","Eliminazione del calendario in {countdown} secondi"],
+    "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Rimozione condivisione del calendario in {countdown} secondo","Rimozione condivisione del calendario in {countdown} secondi"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Condiviso con {num} entità","Condiviso con {num} entità"],
     "Default list" : "Elenco predefinito",
     "Visibility of Smart Collections" : "Visibilità delle collezioni veloci",

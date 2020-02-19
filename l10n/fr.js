@@ -35,6 +35,7 @@ OC.L10N.register(
     "Calendar link could not be copied to clipboard." : "Impossible de copier le lien de l'agenda dans le presse-papier.",
     "An error occurred, unable to delete the calendar." : "Une erreur est survenue, impossible de supprimer l'agenda.",
     "_Deleting the calendar in {countdown} second_::_Deleting the calendar in {countdown} seconds_" : ["Suppression de l'agenda dans {countdown} seconde","Suppression de l'agenda dans {countdown} secondes"],
+    "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Fin de partage de l'agenda dans {countdown} seconde.","Fin de partage de l'agenda dans {countdown} secondes."],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Partagé avec {num} entité","Partagé avec {num} entités"],
     "Default list" : "Liste par défaut",
     "Visibility of Smart Collections" : "Visibilité des collections Smart",
