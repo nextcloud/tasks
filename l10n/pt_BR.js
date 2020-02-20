@@ -132,11 +132,14 @@ OC.L10N.register(
     "Priority {priority}: medium" : "Prioridade {priority}: média",
     "Priority {priority}: low" : "Prioridade {priority}: baixa",
     "{percent} % completed" : "{percent} % finalizado",
+    "Successfully created the task." : "Tarefa criada com sucesso.",
     "Could not delete the task." : "Não foi possível excluir a tarefa.",
     "Synchronizing to the server." : "Sincronizando com o servidor.",
     "Task successfully saved to server." : "Tarefa salva no servidor.",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Não foi possível atualizar a tarefa porque ela foi alterada no servidor. Clique para atualizá-la. As alterações locais serão descartadas.",
     "Could not update the task." : "Não foi possível atualizar a tarefa.",
+    "Successfully updated the task." : "Tarefa atualizada com sucesso.",
+    "Task successfully moved to new calendar." : "Tarefa movida para o novo calendário.",
     "An error occurred" : "Ocorreu um erro"
 },
 "nplurals=2; plural=(n > 1);");

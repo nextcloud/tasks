@@ -130,11 +130,14 @@
     "Priority {priority}: medium" : "Priorytet {priority}: średni",
     "Priority {priority}: low" : "Priorytet {priority}: niski",
     "{percent} % completed" : "Ukończono {percent}%",
+    "Successfully created the task." : "Pomyślnie utworzono zadanie.",
     "Could not delete the task." : "Nie można usunąć zadania.",
     "Synchronizing to the server." : "Synchronizacja z serwerem.",
     "Task successfully saved to server." : "Zadanie pomyślnie zapisane na serwerze.",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Nie można zaktualizować zadania, ponieważ zostało zmienione na serwerze. Kliknij, aby odświeżyć. Lokalne zmiany zostaną odrzucone.",
     "Could not update the task." : "Nie można zaktualizować zadania.",
+    "Successfully updated the task." : "Pomyślnie zaktualizowano zadanie.",
+    "Task successfully moved to new calendar." : "Zadanie zostało pomyślnie przeniesione do nowego kalendarza.",
     "An error occurred" : "Wystąpił błąd"
 },"pluralForm" :"nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);"
 }

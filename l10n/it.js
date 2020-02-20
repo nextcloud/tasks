@@ -132,11 +132,14 @@ OC.L10N.register(
     "Priority {priority}: medium" : "Priorità {priority}: media",
     "Priority {priority}: low" : "Priorità {priority}: bassa",
     "{percent} % completed" : "{percent} % completato",
+    "Successfully created the task." : "Attività creata correttamente.",
     "Could not delete the task." : "impossibile eliminare l'attività.",
     "Synchronizing to the server." : "Sincronizzazione con il server.",
-    "Task successfully saved to server." : "Attività salvato correttamente sul server.",
+    "Task successfully saved to server." : "Attività salvata correttamente sul server.",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Impossibile aggiornare l'attività poiché è stata modificata sul server. Fai clic per aggiornarla, le modifiche locali saranno scartate.",
     "Could not update the task." : "impossibile aggiornare l'attività.",
+    "Successfully updated the task." : "Attività aggiornata correttamente.",
+    "Task successfully moved to new calendar." : "Attività spostata correttamente in nuovo calendario.",
     "An error occurred" : "Si è verificato un errore"
 },
 "nplurals=2; plural=(n != 1);");

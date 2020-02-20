@@ -34,6 +34,7 @@ OC.L10N.register(
     "Calendar link could not be copied to clipboard." : "Kalenderlänk kunde inte kopieras till urklipp.",
     "An error occurred, unable to delete the calendar." : "Ett fel inträffade, kunde inte radera kalendern.",
     "_Deleting the calendar in {countdown} second_::_Deleting the calendar in {countdown} seconds_" : ["Raderar kalendern om {countdown} sekund","Raderar kalendern om {countdown} sekunder"],
+    "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Slutar dela kalendern om {countdown} sekund","Slutar dela kalendern om {countdown} sekunder"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Delad med {num} enhet","Delad med {num} enheter"],
     "Default list" : "Standardlista",
     "Visibility of Smart Collections" : "Synlighet av smarta samlingar",
@@ -130,11 +131,14 @@ OC.L10N.register(
     "Priority {priority}: medium" : "Prioritet {priority}: medium",
     "Priority {priority}: low" : "Prioritet {priority}: låg",
     "{percent} % completed" : "{percent} % slutfört",
+    "Successfully created the task." : "Uppgiften skapad.",
     "Could not delete the task." : "Kunde inte radera uppgiften.",
     "Synchronizing to the server." : "Synkroniserar till servern.",
     "Task successfully saved to server." : "Uppgiften sparades till servern.",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Det gick inte att uppdatera uppgiften eftersom den ändrades på servern. Klicka för att uppdatera, lokala ändringar kommer att ignoreras.",
     "Could not update the task." : "Kunde inte uppdatera uppgiften.",
+    "Successfully updated the task." : "Uppgiften uppdaterad.",
+    "Task successfully moved to new calendar." : "Uppgiften flyttad till en ny kalender.",
     "An error occurred" : "Ett fel uppstod"
 },
 "nplurals=2; plural=(n != 1);");

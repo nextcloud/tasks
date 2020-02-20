@@ -130,11 +130,14 @@
     "Priority {priority}: medium" : "Prioridad {priority}: media",
     "Priority {priority}: low" : "Prioridad {priority}: baja",
     "{percent} % completed" : "{percent}% completado",
+    "Successfully created the task." : "Tarea creada con éxito.",
     "Could not delete the task." : "No se ha podido eliminar la tarea.",
     "Synchronizing to the server." : "Sincronizando con el servidor.",
     "Task successfully saved to server." : "Tarea guardada correctamente en el servidor.",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "No se ha podido actualizar la tarea porque ha cambiado en el servidor. Por favor, pulsa para volver a cargarla. Se perderán los cambios locales.",
     "Could not update the task." : "No se ha podido actualizar la tarea.",
+    "Successfully updated the task." : "Tarea actualizada con éxito.",
+    "Task successfully moved to new calendar." : "Tarea movida con éxito al nuevo calendario.",
     "An error occurred" : "Ha ocurrido un error"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

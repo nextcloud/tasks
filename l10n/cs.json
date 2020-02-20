@@ -130,11 +130,14 @@
     "Priority {priority}: medium" : "Priorita {priority}: střední",
     "Priority {priority}: low" : "Priorita {priority}: nízká",
     "{percent} % completed" : "{percent} % dokončeno",
+    "Successfully created the task." : "Úkol úspěšně vytvořen.",
     "Could not delete the task." : "Úkol se nedaří smazat.",
     "Synchronizing to the server." : "Synchronizuje se se serverem.",
     "Task successfully saved to server." : "Úkol úspěšně uložen na server.",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Úkol se nepodařilo se zaktualizovat, protože byl mezitím změněn na serveru. Klikněte pro jeho opětovné načtení. Vámi provedené změny budou ztraceny.",
     "Could not update the task." : "Úkol se nedaří aktualizovat.",
+    "Successfully updated the task." : "Úkol úspěšně aktualizován.",
+    "Task successfully moved to new calendar." : "Úkol úspěšně přesunut do nového kalendáře.",
     "An error occurred" : "Došlo k chybě"
 },"pluralForm" :"nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;"
 }
