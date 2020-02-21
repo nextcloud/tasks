@@ -33,6 +33,7 @@
     "Calendar link could not be copied to clipboard." : "日历链接无法复制到剪贴板。",
     "An error occurred, unable to delete the calendar." : "发生错误，无法删除日历。",
     "_Deleting the calendar in {countdown} second_::_Deleting the calendar in {countdown} seconds_" : ["在{countdown}秒内删除日历"],
+    "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["在 {countdown} 秒内取消共享日历"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["与 {num} 个实体共享"],
     "Default list" : "默认列表",
     "Visibility of Smart Collections" : "智能集合的可见性",
@@ -129,11 +130,14 @@
     "Priority {priority}: medium" : "优先级 {priority}：中",
     "Priority {priority}: low" : "优先级 {priority}：低",
     "{percent} % completed" : "{percent} % 已完成",
+    "Successfully created the task." : "成功创建任务。",
     "Could not delete the task." : "无法删除任务。",
     "Synchronizing to the server." : "正在同步到服务器。",
     "Task successfully saved to server." : "任务已成功保存到服务器。",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "无法更新任务，因为它已在服务器上被更改。请点击以刷新此任务，本地变更将被丢弃。",
     "Could not update the task." : "无法更新任务。",
+    "Successfully updated the task." : "成功更新任务。",
+    "Task successfully moved to new calendar." : "任务已成功移至新日历。",
     "An error occurred" : "发生了一个错误"
 },"pluralForm" :"nplurals=1; plural=0;"
 }
