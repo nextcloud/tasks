@@ -39,7 +39,7 @@
 		"markdown-it-task-lists": "~2.1.1",
 		"moment": "^2.24.0",
 		"p-limit": "^2.2.2",
-		"p-queue": "^6.2.1",
+		"p-queue": "^6.3.0",
 		"uuid": "^3.4.0",
 		"v-tooltip": "2.0.3",
 		"vue": "^2.6.11",
