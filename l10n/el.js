@@ -132,11 +132,14 @@ OC.L10N.register(
     "Priority {priority}: medium" : "Προτεραιότητα {priority}: μεσαία",
     "Priority {priority}: low" : "Προτεραιότητα {priority}: χαμηλή",
     "{percent} % completed" : "{complete} % ολοκληρωμένες",
+    "Successfully created the task." : "Επιτυχής δημιουργία εργασίας.",
     "Could not delete the task." : "Αδυναμία διαγραφής εργασίας.",
     "Synchronizing to the server." : "Συγχρονισμός με τον διακομιστή.",
     "Task successfully saved to server." : "Η εργασία αποθηκεύτηκε επιτυχώς στον διακομιστή.",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Δεν ήταν δυνατή η ενημέρωση της εργασίας επειδή άλλαξε στον διακομιστή. Κλικ για ανανέωση, οι τοπικές αλλαγές θα διαγραφούν.",
     "Could not update the task." : "Αδυναμία ενημέρωσης της εργασίας.",
+    "Successfully updated the task." : "Επιτυχής ενημέρωση εργασίας.",
+    "Task successfully moved to new calendar." : "Η Εργασία μεταφέρθηκε επιτυχώς στο νέο ημερολόγιο.",
     "An error occurred" : "Παρουσιάστηκε σφάλμα"
 },
 "nplurals=2; plural=(n != 1);");
