@@ -28,9 +28,12 @@
     "Delete" : "Удалить",
     "Unshare" : "Закрыть доступ",
     "This will delete the calendar \"{calendar}\" and all corresponding events and tasks." : "Это действие удалит календарь «{calendar}», в том числе все его события и задачи.",
+    "This will unshare the calendar \"{calendar}\"." : "Это действие приведёт к закрытию общего доступа к календарю «{calendar}».",
     "Calendar link copied to clipboard." : "Ссылка на календарь скопирована в буфер обмена.",
     "Calendar link could not be copied to clipboard." : "Не удалось скопировать ссылку на календарь в буфер обмена.",
     "An error occurred, unable to delete the calendar." : "Произошла ошибка, не удалось удалить календарь.",
+    "_Deleting the calendar in {countdown} second_::_Deleting the calendar in {countdown} seconds_" : ["Календарь будет удалён через {countdown} секунду","Календарь будет удалён через {countdown} секунд","Календарь будет удалён через {countdown} секунд","Календарь будет удалён через {countdown} секунды"],
+    "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Общий доступ к календарю будет закрыт через {countdown} секунду","Общий доступ к календарю будет закрыт через {countdown} секунды","Общий доступ к календарю будет закрыт через {countdown} секунд","Общий доступ к календарю будет закрыт через {countdown} секунды"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Совместный доступ с {num} получателем","Совместный доступ с {num} получателями","Совместный доступ с {num} получателями","Совместный доступ с {num} получателями"],
     "Default list" : "Список по умолчанию:",
     "Visibility of Smart Collections" : "Настройка показа наборов задач:",
@@ -127,11 +130,14 @@
     "Priority {priority}: medium" : "Приоритет {priority}: средний",
     "Priority {priority}: low" : "Приоритет {priority}: низкий",
     "{percent} % completed" : "Выполнение: {complete}%",
+    "Successfully created the task." : "Задача создана.",
     "Could not delete the task." : "Не удалось удалить задачу.",
     "Synchronizing to the server." : "Синхронизация с сервером…",
     "Task successfully saved to server." : "Задача сохранена на сервере.",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Не удалось обновить задачу, так как она была изменена на сервере. Нажмите для получения обновлённой задачи с сервера, внесённые изменения не будут сохранены.",
     "Could not update the task." : "Не удалось обновить задачу.",
+    "Successfully updated the task." : "Задача обновлена.",
+    "Task successfully moved to new calendar." : "Задача перемещена в новый календарь.",
     "An error occurred" : "Произошла ошибка"
 },"pluralForm" :"nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);"
 }
