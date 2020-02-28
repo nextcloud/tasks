@@ -11,6 +11,7 @@ OC.L10N.register(
     "Share with users or groups" : "與使用者或群組分享",
     "No users or groups" : "沒有使用者或群組",
     "can edit" : "允許編輯",
+    "Unable to delete the share." : "無法刪除共享.",
     "Add List…" : "增加清單...",
     "New List" : "新列表",
     "Cancel" : "取消",
