@@ -40,7 +40,7 @@
 		"moment": "^2.24.0",
 		"p-limit": "^2.2.2",
 		"p-queue": "^6.3.0",
-		"uuid": "^3.4.0",
+		"uuid": "^7.0.1",
 		"v-tooltip": "2.0.3",
 		"vue": "^2.6.11",
 		"vue-click-outside": "^1.0.7",
