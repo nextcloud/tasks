@@ -73,6 +73,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<span :style="{'background-color': task.calendar.color}" class="calendar-indicator" />
 					<span class="calendar-name">{{ task.calendar.displayName }}</span>
 				</div>
+				<div v-if="hasHiddenSubtasks">
+					<span class="icon icon-sprt-bw sprt-subtasks-hidden" />
+				</div>
 				<div v-if="task.pinned">
 					<span class="icon icon-sprt-bw sprt-pinned" />
 				</div>
@@ -228,6 +231,10 @@ export default {
 			return Object.values(this.task.subTasks).some(subTask => {
 				return subTask.completed
 			})
+		},
+
+		hasHiddenSubtasks() {
+			return (this.hasCompletedSubtasks && this.task.hideCompletedSubtasks) || (this.filteredSubtasks.length && this.task.hideSubtasks)
 		},
 
 		/**
