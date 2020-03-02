@@ -85,7 +85,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<div v-if="task.due" :class="{overdue: overdue(task.dueMoment)}" class="duedate">
 					{{ dueDateString }}
 				</div>
-				<Actions class="reactive no-nav">
+				<Actions class="reactive no-nav" menu-align="right">
 					<ActionButton v-if="!task.calendar.readOnly"
 						:close-after-click="true"
 						class="reactive no-nav"
