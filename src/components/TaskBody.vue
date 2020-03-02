@@ -105,6 +105,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						@click="toggleCompletedSubtasksVisibility(task)">
 						{{ task.hideCompletedSubtasks ? $t('tasks', 'Show completed subtasks') : $t('tasks', 'Hide completed subtasks') }}
 					</ActionButton>
+					<ActionButton v-if="!readOnly"
+						class="reactive no-nav"
+						icon="icon-delete"
+						@click="removeTask()">
+						{{ $t('tasks', 'Delete task') }}
+					</ActionButton>
 				</Actions>
 				<button class="inline task-star reactive no-nav" @click="toggleStarred(task)">
 					<span :class="[iconStar, {'disabled': task.calendar.readOnly}]" class="icon" />
@@ -296,6 +302,17 @@ export default {
 				return false
 			}
 		},
+
+		/**
+		 * Whether we treat the task as read-only.
+		 * We also treat tasks in shared calendars with an access class other than 'PUBLIC'
+		 * as read-only.
+		 *
+		 * @returns {Boolean} Is the task read-only
+		 */
+		readOnly() {
+			return this.task.calendar.readOnly || (this.task.calendar.isSharedWithMe && this.task.class !== 'PUBLIC')
+		},
 	},
 
 	created() {
@@ -312,6 +329,7 @@ export default {
 			'getTasksFromCalendar',
 			'toggleSubtasksVisibility',
 			'toggleCompletedSubtasksVisibility',
+			'deleteTask',
 		]),
 		sort,
 		/**
@@ -347,6 +365,21 @@ export default {
 		 */
 		isTaskOpen: function(task = this.task) {
 			return (task.uri === this.$route.params.taskId) && (this.collectionParam === this.$route.params.collectionParam)
+		},
+
+		/**
+		 * Deletes the task
+		 */
+		removeTask() {
+			// Close the details view if necessary
+			if (this.isTaskOpen() || this.isDescendantOpen()) {
+				if (this.$route.params.calendarId) {
+					this.$router.push({ name: 'calendars', params: { calendarId: this.$route.params.calendarId } })
+				} else {
+					this.$router.push({ name: 'collections', params: { collectionId: this.$route.params.collectionId } })
+				}
+			}
+			this.deleteTask({ task: this.task, dav: true })
 		},
 
 		/**
