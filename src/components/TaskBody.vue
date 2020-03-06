@@ -23,7 +23,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <template>
 	<li v-show="showTask"
 		:task-id="task.uri"
-		:class="{done: task.completed, readOnly: task.calendar.readOnly}"
+		:class="{done: task.completed, readOnly: task.calendar.readOnly, deleted: !!deleteTimeout}"
 		:data-priority="[task.priority]"
 		class="task-item"
 		@dragstart="dragStart($event)">
@@ -73,8 +73,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<span :style="{'background-color': task.calendar.color}" class="calendar-indicator" />
 					<span class="calendar-name">{{ task.calendar.displayName }}</span>
 				</div>
-				<div v-if="task.due" :class="{overdue: overdue(task.dueMoment)}" class="duedate">
-					{{ dueDateString }}
+				<div v-if="hasHiddenSubtasks">
+					<span class="icon icon-sprt-bw sprt-subtasks-hidden" />
 				</div>
 				<div v-if="task.pinned">
 					<span class="icon icon-sprt-bw sprt-pinned" />
@@ -82,27 +82,43 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<div v-if="task.note!=''">
 					<span class="icon icon-sprt-bw sprt-note" />
 				</div>
-				<button v-if="hasCompletedSubtasks"
-					class="inline reactive no-nav"
-					:title="$t('tasks', 'Toggle visibility of completed subtasks.')"
-					@click="toggleCompletedSubtasksVisibility(task)">
-					<span :class="{'active': !task.hideCompletedSubtasks}"
-						class="icon icon-sprt-bw sprt-toggle toggle-completed-subtasks" />
-				</button>
-				<button v-if="Object.values(task.subTasks).length"
-					class="inline reactive no-nav"
-					:title="$t('tasks', 'Toggle visibility of all subtasks.')"
-					@click="toggleSubtasksVisibility(task)">
-					<span :class="task.hideSubtasks ? 'sprt-subtasks-hidden' : 'sprt-subtasks-visible'"
-						class="icon icon-sprt-bw" />
-				</button>
-				<button v-if="!task.calendar.readOnly"
-					class="inline task-addsubtask add-subtask reactive no-nav"
-					:taskId="task.uri"
-					:title="subtasksCreationPlaceholder"
-					@click="showSubtaskInput = true">
-					<span class="icon icon-sprt-bw sprt-add" :taskId="task.uri" />
-				</button>
+				<div v-if="task.due" :class="{overdue: overdue(task.dueMoment)}" class="duedate">
+					<span>{{ dueDateString }}</span>
+				</div>
+				<Actions v-if="!deleteTimeout" class="reactive no-nav" menu-align="right">
+					<ActionButton v-if="!task.calendar.readOnly"
+						:close-after-click="true"
+						class="reactive no-nav"
+						icon="icon-add"
+						@click="openSubtaskInput">
+						{{ $t('tasks', 'Add subtask') }}
+					</ActionButton>
+					<ActionButton v-if="Object.values(task.subTasks).length"
+						class="reactive no-nav"
+						:icon="task.hideSubtasks ? 'icon-subtasks-hidden' : 'icon-subtasks-visible'"
+						@click="toggleSubtasksVisibility(task)">
+						{{ task.hideSubtasks ? $t('tasks', 'Show subtasks') : $t('tasks', 'Hide subtasks') }}
+					</ActionButton>
+					<ActionButton v-if="hasCompletedSubtasks"
+						class="reactive no-nav"
+						icon="icon-toggle"
+						@click="toggleCompletedSubtasksVisibility(task)">
+						{{ task.hideCompletedSubtasks ? $t('tasks', 'Show completed subtasks') : $t('tasks', 'Hide completed subtasks') }}
+					</ActionButton>
+					<ActionButton v-if="!readOnly"
+						class="reactive no-nav"
+						icon="icon-delete"
+						@click="scheduleDelete">
+						{{ $t('tasks', 'Delete task') }}
+					</ActionButton>
+				</Actions>
+				<Actions v-if="!!deleteTimeout">
+					<ActionButton
+						icon="icon-history"
+						@click.prevent.stop="cancelDelete">
+						{{ $n('tasks', 'Deleting the task in {countdown} second', 'Deleting the task in {countdown} seconds', countdown, { countdown: countdown }) }}
+					</ActionButton>
+				</Actions>
 				<button class="inline task-star reactive no-nav" @click="toggleStarred(task)">
 					<span :class="[iconStar, {'disabled': task.calendar.readOnly}]" class="icon" />
 				</button>
@@ -110,11 +126,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		</div>
 		<div class="subtasks-container">
 			<div v-if="showSubtaskInput"
-				v-click-outside="($event) => cancelCreation($event)"
+				v-click-outside="($event) => closeSubtaskInput($event)"
 				class="task-item add-subtask">
 				<form name="addTaskForm" @submit.prevent="addTask">
-					<input v-model="newTaskName"
-						v-focus
+					<input ref="input"
+						v-model="newTaskName"
 						:placeholder="subtasksCreationPlaceholder"
 						:disabled="isAddingTask"
 						@keyup.27="showSubtaskInput = false">
@@ -138,21 +154,26 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 import { overdue, sort, searchSubTasks, isTaskInList } from '../store/storeHelper'
 import ClickOutside from 'vue-click-outside'
 import { mapGetters, mapActions } from 'vuex'
-import focus from '../directives/focus'
 import { linkify } from '../directives/linkify.js'
 import TaskStatusDisplay from './TaskStatusDisplay'
 import TaskDragContainer from './TaskDragContainer'
+
+import Actions from '@nextcloud/vue/dist/Components/Actions'
+import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
+
+const CD_DURATION = 7
 
 export default {
 	name: 'TaskBody',
 	directives: {
 		ClickOutside,
-		focus,
 		linkify,
 	},
 	components: {
 		TaskStatusDisplay,
 		TaskDragContainer,
+		Actions,
+		ActionButton,
 	},
 	props: {
 		task: {
@@ -168,8 +189,13 @@ export default {
 	data() {
 		return {
 			showSubtaskInput: false,
+			justOpened: false,
 			newTaskName: '',
 			isAddingTask: false,
+			// Deleting
+			deleteInterval: null,
+			deleteTimeout: null,
+			countdown: CD_DURATION,
 		}
 	},
 	computed: {
@@ -224,6 +250,10 @@ export default {
 			return Object.values(this.task.subTasks).some(subTask => {
 				return subTask.completed
 			})
+		},
+
+		hasHiddenSubtasks() {
+			return (this.hasCompletedSubtasks && this.task.hideCompletedSubtasks) || (this.filteredSubtasks.length && this.task.hideSubtasks)
 		},
 
 		/**
@@ -285,6 +315,17 @@ export default {
 				return false
 			}
 		},
+
+		/**
+		 * Whether we treat the task as read-only.
+		 * We also treat tasks in shared calendars with an access class other than 'PUBLIC'
+		 * as read-only.
+		 *
+		 * @returns {Boolean} Is the task read-only
+		 */
+		readOnly() {
+			return this.task.calendar.readOnly || (this.task.calendar.isSharedWithMe && this.task.class !== 'PUBLIC')
+		},
 	},
 
 	created() {
@@ -301,6 +342,7 @@ export default {
 			'getTasksFromCalendar',
 			'toggleSubtasksVisibility',
 			'toggleCompletedSubtasksVisibility',
+			'deleteTask',
 		]),
 		sort,
 		/**
@@ -336,6 +378,50 @@ export default {
 		 */
 		isTaskOpen: function(task = this.task) {
 			return (task.uri === this.$route.params.taskId) && (this.collectionParam === this.$route.params.collectionParam)
+		},
+
+		/**
+		 * Deletes the task
+		 */
+		scheduleDelete() {
+			this.deleteInterval = setInterval(() => {
+				this.countdown--
+				if (this.countdown < 0) {
+					this.countdown = 0
+				}
+			}, 1000)
+			this.deleteTimeout = setTimeout(async() => {
+				try {
+					// Close the details view if necessary
+					if (this.isTaskOpen() || this.isDescendantOpen()) {
+						if (this.$route.params.calendarId) {
+							this.$router.push({ name: 'calendars', params: { calendarId: this.$route.params.calendarId } })
+						} else {
+							this.$router.push({ name: 'collections', params: { collectionId: this.$route.params.collectionId } })
+						}
+					}
+					await this.deleteTask({ task: this.task, dav: true })
+				} catch (error) {
+					this.$toast.error(this.$t('tasks', 'An error occurred, unable to delete the task.'))
+					console.error(error)
+				} finally {
+					clearInterval(this.deleteInterval)
+					this.deleteTimeout = null
+					this.deleteInterval = null
+					this.countdown = CD_DURATION
+				}
+			}, 1e3 * CD_DURATION)
+		},
+
+		/**
+		 * Cancels the deletion of the task
+		 */
+		cancelDelete() {
+			clearTimeout(this.deleteTimeout)
+			clearInterval(this.deleteInterval)
+			this.deleteTimeout = null
+			this.deleteInterval = null
+			this.countdown = CD_DURATION
 		},
 
 		/**
@@ -391,11 +477,21 @@ export default {
 			}
 		},
 
-		cancelCreation: function(e) {
+		openSubtaskInput() {
+			this.showSubtaskInput = true
+			this.justOpened = true
+			this.$nextTick(
+				() => this.$refs.input.focus()
+			)
+		},
+
+		closeSubtaskInput: function(e) {
 			// don't cancel the task creation if the own add-subtask button is clicked
-			if (e.target.getAttribute('taskId') !== this.task.uri) {
-				this.showSubtaskInput = false
+			if (this.justOpened) {
+				this.justOpened = false
+				return
 			}
+			this.showSubtaskInput = false
 		},
 
 		addTask: function() {

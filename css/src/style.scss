@@ -423,6 +423,10 @@
 						}
 					}
 
+					&.deleted .task-info {
+						opacity: .6;
+					}
+
 					&.add-subtask {
 						border: 1px solid $gray_light;
 
@@ -457,7 +461,6 @@
 						height: 44px;
 						position: relative;
 						border: 1px solid $gray_light;
-						overflow: hidden;
 
 						&:hover,
 						&.active {
@@ -548,13 +551,26 @@
 							display: flex;
 							margin-left: auto;
 
-							&>div {
+							&>div:not(.action-item) {
 								height: 44px;
-								padding: 14px;
+								padding: 14px 7px;
 								display: flex;
 								flex-direction: row;
 								align-items: center;
 								flex-wrap: nowrap;
+							}
+
+							
+							.icon-toggle {
+								@include icon-color('icon-toggle', 'tasks', $color-black, 3);
+							}
+
+							.icon-subtasks-hidden {
+								@include icon-color('icon-subtasks-hidden', 'tasks', $color-black, 3);
+							}
+
+							.icon-subtasks-visible {
+								@include icon-color('icon-subtasks-visible', 'tasks', $color-black, 3);
 							}
 
 							.icon {
@@ -574,6 +590,14 @@
 
 								&.overdue {
 									color: $red_overdue;
+								}
+
+								span {
+									overflow: hidden;
+									text-align: right;
+									text-overflow: ellipsis;
+									white-space: nowrap;
+									width: 60px;
 								}
 							}
 
