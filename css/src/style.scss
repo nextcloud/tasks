@@ -423,6 +423,10 @@
 						}
 					}
 
+					&.deleted .task-info {
+						opacity: .6;
+					}
+
 					&.add-subtask {
 						border: 1px solid $gray_light;
 

@@ -23,7 +23,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <template>
 	<li v-show="showTask"
 		:task-id="task.uri"
-		:class="{done: task.completed, readOnly: task.calendar.readOnly}"
+		:class="{done: task.completed, readOnly: task.calendar.readOnly, deleted: !!deleteTimeout}"
 		:data-priority="[task.priority]"
 		class="task-item"
 		@dragstart="dragStart($event)">
@@ -85,7 +85,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<div v-if="task.due" :class="{overdue: overdue(task.dueMoment)}" class="duedate">
 					<span>{{ dueDateString }}</span>
 				</div>
-				<Actions class="reactive no-nav" menu-align="right">
+				<Actions v-if="!deleteTimeout" class="reactive no-nav" menu-align="right">
 					<ActionButton v-if="!task.calendar.readOnly"
 						:close-after-click="true"
 						class="reactive no-nav"
@@ -108,8 +108,15 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<ActionButton v-if="!readOnly"
 						class="reactive no-nav"
 						icon="icon-delete"
-						@click="removeTask()">
+						@click="scheduleDelete">
 						{{ $t('tasks', 'Delete task') }}
+					</ActionButton>
+				</Actions>
+				<Actions v-if="!!deleteTimeout">
+					<ActionButton
+						icon="icon-history"
+						@click.prevent.stop="cancelDelete">
+						{{ $n('tasks', 'Deleting the task in {countdown} second', 'Deleting the task in {countdown} seconds', countdown, { countdown: countdown }) }}
 					</ActionButton>
 				</Actions>
 				<button class="inline task-star reactive no-nav" @click="toggleStarred(task)">
@@ -154,6 +161,8 @@ import TaskDragContainer from './TaskDragContainer'
 import Actions from '@nextcloud/vue/dist/Components/Actions'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
 
+const CD_DURATION = 7
+
 export default {
 	name: 'TaskBody',
 	directives: {
@@ -183,6 +192,10 @@ export default {
 			justOpened: false,
 			newTaskName: '',
 			isAddingTask: false,
+			// Deleting
+			deleteInterval: null,
+			deleteTimeout: null,
+			countdown: CD_DURATION,
 		}
 	},
 	computed: {
@@ -370,16 +383,45 @@ export default {
 		/**
 		 * Deletes the task
 		 */
-		removeTask() {
-			// Close the details view if necessary
-			if (this.isTaskOpen() || this.isDescendantOpen()) {
-				if (this.$route.params.calendarId) {
-					this.$router.push({ name: 'calendars', params: { calendarId: this.$route.params.calendarId } })
-				} else {
-					this.$router.push({ name: 'collections', params: { collectionId: this.$route.params.collectionId } })
+		scheduleDelete() {
+			this.deleteInterval = setInterval(() => {
+				this.countdown--
+				if (this.countdown < 0) {
+					this.countdown = 0
 				}
-			}
-			this.deleteTask({ task: this.task, dav: true })
+			}, 1000)
+			this.deleteTimeout = setTimeout(async() => {
+				try {
+					// Close the details view if necessary
+					if (this.isTaskOpen() || this.isDescendantOpen()) {
+						if (this.$route.params.calendarId) {
+							this.$router.push({ name: 'calendars', params: { calendarId: this.$route.params.calendarId } })
+						} else {
+							this.$router.push({ name: 'collections', params: { collectionId: this.$route.params.collectionId } })
+						}
+					}
+					await this.deleteTask({ task: this.task, dav: true })
+				} catch (error) {
+					this.$toast.error(this.$t('tasks', 'An error occurred, unable to delete the task.'))
+					console.error(error)
+				} finally {
+					clearInterval(this.deleteInterval)
+					this.deleteTimeout = null
+					this.deleteInterval = null
+					this.countdown = CD_DURATION
+				}
+			}, 1e3 * CD_DURATION)
+		},
+
+		/**
+		 * Cancels the deletion of the task
+		 */
+		cancelDelete() {
+			clearTimeout(this.deleteTimeout)
+			clearInterval(this.deleteInterval)
+			this.deleteTimeout = null
+			this.deleteInterval = null
+			this.countdown = CD_DURATION
 		},
 
 		/**
