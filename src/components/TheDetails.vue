@@ -68,7 +68,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<li v-show="!readOnly || task.start"
 						:class="{'date': task.startMoment.isValid(), 'editing': edit=='start', 'high': overdue(task.startMoment)}"
 						class="section detail-start">
-						<div v-click-outside="() => finishEditing('start')"
+						<div v-click-outside="($event) => finishEditing('start', $event)"
 							class="section-content"
 							@click="editProperty('start', $event)">
 							<span class="section-icon">
@@ -79,22 +79,21 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 								{{ startDateString }}
 							</span>
 							<div v-if="edit=='start'" class="section-edit">
-								<DatetimePicker :value="tmpTask.start"
+								<DatetimePicker :value="tmpTask.start.toDate()"
 									:lang="lang"
 									:format="dateFormat"
 									:clearable="false"
-									:first-day-of-week="firstDay"
-									:type="'date'"
+									type="date"
 									:placeholder="$t('tasks', 'Set start date')"
 									class="date"
 									@change="setStartDate" />
 								<DatetimePicker v-if="!allDay"
-									:value="tmpTask.start"
+									:value="tmpTask.start.toDate()"
 									:lang="lang"
 									:format="timeFormat"
 									:clearable="false"
 									:time-picker-options="timePickerOptions"
-									:type="'time'"
+									type="time"
 									:placeholder="$t('tasks', 'Set start time')"
 									class="time"
 									@change="setStartTime" />
@@ -112,7 +111,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<li v-show="!readOnly || task.due"
 						:class="{'date': task.dueMoment.isValid(), 'editing': edit=='due', 'high': overdue(task.dueMoment)}"
 						class="section detail-date">
-						<div v-click-outside="() => finishEditing('due')"
+						<div v-click-outside="($event) => finishEditing('due', $event)"
 							class="section-content"
 							@click="editProperty('due', $event)">
 							<span class="section-icon">
@@ -123,22 +122,21 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 								{{ dueDateString }}
 							</span>
 							<div v-if="edit=='due'" class="section-edit">
-								<DatetimePicker :value="tmpTask.due"
+								<DatetimePicker :value="tmpTask.due.toDate()"
 									:lang="lang"
 									:format="dateFormat"
 									:clearable="false"
-									:first-day-of-week="firstDay"
-									:type="'date'"
+									type="date"
 									:placeholder="$t('tasks', 'Set due date')"
 									class="date"
 									@change="setDueDate" />
 								<DatetimePicker v-if="!allDay"
-									:value="tmpTask.due"
+									:value="tmpTask.due.toDate()"
 									:lang="lang"
 									:format="timeFormat"
 									:clearable="false"
 									:time-picker-options="timePickerOptions"
-									:type="'time'"
+									type="time"
 									:placeholder="$t('tasks', 'Set due time')"
 									class="time"
 									@change="setDueTime" />
@@ -419,8 +417,10 @@ export default {
 				complete: '',
 				note: '',
 			},
-			firstDay: window.firstDay, // provided by nextcloud
 			lang: {
+				formatLocale: {
+					firstDayOfWeek: window.firstDay,
+				},
 				days: window.dayNamesShort, // provided by nextcloud
 				months: window.monthNamesShort, // provided by nextcloud
 			},
@@ -791,11 +791,11 @@ export default {
 				// If we edit the due or the start date, inintialize it.
 				if (type === 'due') {
 					this.tmpTask.due = this.initDueDate()
-					this.tmpTask.start = this.task.startMoment
+					this.tmpTask.start = this.task.startMoment.toDate()
 				}
 				if (type === 'start') {
 					this.tmpTask.start = this.initStartDate()
-					this.tmpTask.due = this.task.dueMoment
+					this.tmpTask.due = this.task.dueMoment.toDate()
 				}
 			}
 			if (type === 'summary' || type === 'note') {
@@ -805,7 +805,11 @@ export default {
 			}
 		},
 
-		finishEditing: function(type) {
+		finishEditing: function(type, $event) {
+			// For some reason the click-outside handlers fire for the datepicker month and year buttons!?
+			if ($event && $event.target.classList.contains('mx-btn')) {
+				return
+			}
 			if (this.edit === type) {
 				this.setProperty(type, this.tmpTask[type])
 			}
@@ -843,7 +847,7 @@ export default {
 		/**
 		 * Initializes the start date of a task
 		 *
-		 * @returns {Moment} The start date moment
+		 * @returns {Date} The start date moment
 		 */
 		initStartDate: function() {
 			const start = this.task.startMoment
@@ -862,7 +866,7 @@ export default {
 		/**
 		 * Initializes the due date of a task
 		 *
-		 * @returns {Moment} The due date moment
+		 * @returns {Date} The due date moment
 		 */
 		initDueDate: function() {
 			const due = this.task.dueMoment
@@ -880,11 +884,11 @@ export default {
 		},
 
 		setStartDate: function(date) {
-			this.setStartDateTime(date, 'day')
+			this.setStartDateTime(moment(date), 'day')
 		},
 
 		setStartTime: function(time) {
-			this.setStartDateTime(time, 'time')
+			this.setStartDateTime(moment(time), 'time')
 		},
 
 		setStartDateTime: function(datetime, type = null) {
@@ -892,11 +896,11 @@ export default {
 		},
 
 		setDueDate: function(date) {
-			this.setDueDateTime(date, 'day')
+			this.setDueDateTime(moment(date), 'day')
 		},
 
 		setDueTime: function(time) {
-			this.setDueDateTime(time, 'time')
+			this.setDueDateTime(moment(time), 'time')
 		},
 
 		setDueDateTime: function(datetime, type = 'day') {
