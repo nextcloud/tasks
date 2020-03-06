@@ -28,6 +28,7 @@ Then open the Tasks app from the app menu.
 * [Qownnotes](https://www.qownnotes.org/) (Read-only, Cross Platform Desktop App)
 * [Thunderbird Lightning Plugin](https://addons.thunderbird.net/en-US/thunderbird/addon/lightning/) (Cross Platform Desktop App)
 * [Vdirsyncer](https://vdirsyncer.pimutils.org/en/stable/) (Linux)
+* [BusyCal](https://www.busymac.com/busycal) (MacOS)
 
 ## Maintainers
 
