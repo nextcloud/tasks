@@ -587,6 +587,14 @@
 								&.overdue {
 									color: $red_overdue;
 								}
+
+								span {
+									overflow: hidden;
+									text-align: right;
+									text-overflow: ellipsis;
+									white-space: nowrap;
+									width: 60px;
+								}
 							}
 
 							.calendar {

@@ -83,7 +83,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<span class="icon icon-sprt-bw sprt-note" />
 				</div>
 				<div v-if="task.due" :class="{overdue: overdue(task.dueMoment)}" class="duedate">
-					{{ dueDateString }}
+					<span>{{ dueDateString }}</span>
 				</div>
 				<Actions class="reactive no-nav" menu-align="right">
 					<ActionButton v-if="!task.calendar.readOnly"
