@@ -12,4 +12,8 @@ export class OC {
 		return ''
 	}
 
+	getLanguage() {
+		return 'en-GB'
+	}
+
 }
