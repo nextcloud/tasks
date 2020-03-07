@@ -184,7 +184,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									track-by="id"
 									:placeholder="$t('tasks', 'Select a calendar')"
 									label="displayName"
-									:options="writableCalendars"
+									:options="targetCalendars"
 									:close-on-select="true"
 									class="multiselect-vue"
 									@input="changeCalendar"
@@ -655,6 +655,15 @@ export default {
 			} else {
 				return 'icon-sprt-bw sprt-current'
 			}
+		},
+		targetCalendars() {
+			let calendars = this.writableCalendars
+			// Tasks with an access class other than PUBLIC cannot be moved
+			// into calendars shared with me
+			if (this.task.class !== 'PUBLIC') {
+				calendars = calendars.filter(calendar => !calendar.isSharedWithMe)
+			}
+			return calendars
 		},
 		...mapGetters({
 			writableCalendars: 'getSortedWritableCalendars',
