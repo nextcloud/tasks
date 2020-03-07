@@ -20,8 +20,7 @@
  */
 'use strict'
 
-import Axios from 'axios'
-Axios.defaults.headers.common.requesttoken = OC.requestToken
+import Axios from '@nextcloud/axios'
 
 export default {
 	get(url) {

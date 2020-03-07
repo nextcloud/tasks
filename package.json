@@ -25,14 +25,14 @@
 	"bugs": "https://github.com/nextcloud/tasks/issues",
 	"contributors": [],
 	"dependencies": {
+		"@nextcloud/axios": "^1.3.1",
 		"@nextcloud/vue": "1.4.0",
 		"@vue/test-utils": "^1.0.0-beta.31",
-		"axios": "^0.19.2",
 		"cdav-library": "github:nextcloud/cdav-library",
 		"ical.js": "~1.3.0",
 		"jstimezonedetect": "",
 		"linkify-it": "~2.2.0",
-		"linkifyjs": "~2.1.8",
+		"linkifyjs": "~2.1.9",
 		"markdown-it": "~10.0.0",
 		"markdown-it-emoji": "~1.4.0",
 		"markdown-it-link-attributes": "~3.0.0",
@@ -40,7 +40,7 @@
 		"moment": "^2.24.0",
 		"p-limit": "^2.2.2",
 		"p-queue": "^6.3.0",
-		"uuid": "^7.0.1",
+		"uuid": "^7.0.2",
 		"v-tooltip": "2.0.3",
 		"vue": "^2.6.11",
 		"vue-click-outside": "^1.0.7",
@@ -51,23 +51,23 @@
 		"vuex-router-sync": "^5.0.0"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.8.6",
+		"@babel/core": "^7.8.7",
 		"@babel/plugin-proposal-object-rest-spread": "^7.8.3",
 		"@babel/plugin-syntax-dynamic-import": "^7.8.3",
-		"@babel/preset-env": "^7.8.6",
+		"@babel/preset-env": "^7.8.7",
+		"@nextcloud/browserslist-config": "^1.0.0",
+		"@nextcloud/eslint-config": "^1.1.0",
+		"@nextcloud/eslint-plugin": "^1.1.0",
 		"babel-core": "^7.0.0-bridge.0",
 		"babel-eslint": "^10.1.0",
 		"babel-jest": "^25.1.0",
 		"babel-loader": "^8.0.6",
-		"browserslist-config-nextcloud": "0.1.0",
 		"css-loader": "^3.4.2",
 		"eslint": "^6.8.0",
-		"eslint-config-nextcloud": "0.1.1",
 		"eslint-config-standard": "^14.1.0",
 		"eslint-friendly-formatter": "^4.0.1",
 		"eslint-loader": "^3.0.3",
 		"eslint-plugin-import": "^2.20.1",
-		"eslint-plugin-nextcloud": "^0.3.0",
 		"eslint-plugin-node": "^11.0.0",
 		"eslint-plugin-promise": "^4.2.1",
 		"eslint-plugin-standard": "^4.0.1",
@@ -91,7 +91,7 @@
 		"vue-jest": "^3.0.5",
 		"vue-loader": "^15.9.0",
 		"vue-template-compiler": "^2.6.11",
-		"webpack": "^4.41.6",
+		"webpack": "^4.42.0",
 		"webpack-cli": "^3.3.11",
 		"webpack-merge": "^4.2.2"
 	},
@@ -140,6 +140,6 @@
 		]
 	},
 	"browserslist": [
-		"extends browserslist-config-nextcloud"
+		"extends @nextcloud/browserslist-config"
 	]
 }
