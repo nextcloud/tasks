@@ -111,6 +111,7 @@ appstore: clean build-svg-sprite build-js-production
 	mkdir -p $(appstore_build_directory) $(appstore_artifact_directory)
 	rsync -av .	$(appstore_build_directory) \
 	--exclude=/.git \
+	--exclude=/.github \
 	--exclude=/.babelrc \
 	--exclude=/.babelrc.js \
 	--exclude=/.codecov.yml \
@@ -127,6 +128,7 @@ appstore: clean build-svg-sprite build-js-production
 	--exclude=/.tx \
 	--exclude=/.v8flags*.json \
 	--exclude=/build.xml \
+	--exclude=/composer.json \
 	--exclude=/CONTRIBUTING.md \
 	--exclude=/issue_template.md \
 	--exclude=/gulpfile.js \
