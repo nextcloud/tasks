@@ -23,7 +23,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <template>
 	<li v-show="showTask"
 		:task-id="task.uri"
-		:class="{done: task.completed, readOnly: task.calendar.readOnly, deleted: !!deleteTimeout}"
+		:class="{done: task.completed, readOnly: readOnly, deleted: !!deleteTimeout}"
 		:data-priority="[task.priority]"
 		class="task-item"
 		@dragstart="dragStart($event)">
@@ -38,10 +38,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					type="checkbox"
 					class="checkbox no-nav"
 					name="toggleCompleted"
-					:class="{'disabled': task.calendar.readOnly}"
+					:class="{'disabled': readOnly}"
 					:checked="task.completed"
 					:aria-checked="task.completed"
-					:disabled="task.calendar.readOnly"
+					:disabled="readOnly"
 					:aria-label="$t('tasks', 'Task is completed')"
 					@click="toggleCompleted(task)">
 				<label class="reactive no-nav" :for="'toggleCompleted_' + task.uid" />
@@ -120,7 +120,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					</ActionButton>
 				</Actions>
 				<button class="inline task-star reactive no-nav" @click="toggleStarred(task)">
-					<span :class="[iconStar, {'disabled': task.calendar.readOnly}]" class="icon" />
+					<span :class="[iconStar, {'disabled': readOnly}]" class="icon" />
 				</button>
 			</div>
 		</div>
