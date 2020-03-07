@@ -1313,3 +1313,9 @@ input[type='checkbox'].checkbox {
 		padding-top: 10px;
 	}
 }
+
+@media only screen and (max-width: $breakpoint-mobile) {
+	#app-content > div {
+		padding: 6px 0 75px;
+	}
+}
