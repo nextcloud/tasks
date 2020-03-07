@@ -54,8 +54,6 @@ OC.L10N.register(
     "Sort by summary and priority." : "מיון לפי תקציר ועדיפות.",
     "Task is completed" : "המשימה הושלמה",
     "{complete} % completed" : "{complete} % הושלמו",
-    "Toggle visibility of completed subtasks." : "החלפת מצב חשיפה של כל תת־המשימות שהושלמו.",
-    "Toggle visibility of all subtasks." : "החלפת מצב חשיפה של כל תת־המשימות.",
     "[Yesterday]" : "[אתמול]",
     "[Today]" : "[היום]",
     "[Tomorrow]" : "[מחר]",

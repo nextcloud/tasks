@@ -70,8 +70,6 @@ OC.L10N.register(
     "Sort by summary and priority." : "Sorteer op samenvatting en prioriteit.",
     "Task is completed" : "Taak is gereed",
     "{complete} % completed" : "{complete} % gereed",
-    "Toggle visibility of completed subtasks." : "Wissel zichtbaarheid van voltooide subtaken.",
-    "Toggle visibility of all subtasks." : "Wissel zichtbaarheid van alle subtaken.",
     "[Yesterday]" : "[Gisteren]",
     "[Today]" : "[Vandaag]",
     "[Tomorrow]" : "[Morgen]",

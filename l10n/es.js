@@ -71,8 +71,6 @@ OC.L10N.register(
     "Sort by summary and priority." : "Ordenar por resumen y prioridad.",
     "Task is completed" : "La tarea está completada",
     "{complete} % completed" : "{complete} % completado",
-    "Toggle visibility of completed subtasks." : "Alternar visibilidad de subtareas completadas.",
-    "Toggle visibility of all subtasks." : "Alternar visibilidad de todas las subtareas.",
     "[Yesterday]" : "[Ayer]",
     "[Today]" : "[Hoy]",
     "[Tomorrow]" : "[Mañana]",

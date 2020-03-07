@@ -62,8 +62,6 @@ OC.L10N.register(
     "Sort by summary and priority." : "Raða eftir yfirliti og forgangi.",
     "Task is completed" : "Verkefni er lokið",
     "{complete} % completed" : "{complete} % lokið",
-    "Toggle visibility of completed subtasks." : "Víxla sýnileika allra lokinna undirverkefna.",
-    "Toggle visibility of all subtasks." : "Víxla sýnileika allra undirverkefna.",
     "[Yesterday]" : "[Í gær]",
     "[Today]" : "[Í dag]",
     "[Tomorrow]" : "[Á morgun]",

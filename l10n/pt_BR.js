@@ -71,8 +71,6 @@ OC.L10N.register(
     "Sort by summary and priority." : "Ordenar por resumo e prioridade.",
     "Task is completed" : "Tarefa concluída",
     "{complete} % completed" : "{complete} % completo",
-    "Toggle visibility of completed subtasks." : "Alternar a visão das subtarefas finalizadas.",
-    "Toggle visibility of all subtasks." : "Alternar a visão das subtarefas.",
     "[Yesterday]" : "[Ontem]",
     "[Today]" : "[Hoje]",
     "[Tomorrow]" : "[Amanhã]",

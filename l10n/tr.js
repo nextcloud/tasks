@@ -71,8 +71,6 @@ OC.L10N.register(
     "Sort by summary and priority." : "Özellik ve önceliğe göre sıralar.",
     "Task is completed" : "Görev tamamlandı",
     "{complete} % completed" : "% {complete} tamamlandı",
-    "Toggle visibility of completed subtasks." : "Tamamlanmış alt görevlerin görünürlüğünü değiştirir.",
-    "Toggle visibility of all subtasks." : "Tüm alt görevlerin görünürlüğünü değiştirir.",
     "[Yesterday]" : "[Dün]",
     "[Today]" : "[Bugün]",
     "[Tomorrow]" : "[Yarın]",

@@ -70,8 +70,6 @@ OC.L10N.register(
     "Sort by summary and priority." : "Sortera efter sammanfattning och prioritering.",
     "Task is completed" : "Uppgift genomförd",
     "{complete} % completed" : "{complete} % slutfört",
-    "Toggle visibility of completed subtasks." : "Växla synlighet för slutförda uppgifter.",
-    "Toggle visibility of all subtasks." : "Växla synlighet för alla underuppgifter.",
     "[Yesterday]" : "[Igår]",
     "[Today]" : "[Idag]",
     "[Tomorrow]" : "[Imorgon]",

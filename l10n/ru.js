@@ -71,8 +71,6 @@ OC.L10N.register(
     "Sort by summary and priority." : "Сортировка по описанию и приоритету.",
     "Task is completed" : "Задача завершена",
     "{complete} % completed" : "Выполнено {complete}%",
-    "Toggle visibility of completed subtasks." : "Показать или скрыть выполненные вложенные задачи.",
-    "Toggle visibility of all subtasks." : "Показать или скрыть вложенные задачи.",
     "[Yesterday]" : "[Вчера]",
     "[Today]" : "[Сегодня]",
     "[Tomorrow]" : "[Завтра]",

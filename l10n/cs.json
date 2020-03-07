@@ -69,8 +69,6 @@
     "Sort by summary and priority." : "Seřadit podle shrnutí a priority.",
     "Task is completed" : "Úkol je dokončen",
     "{complete} % completed" : "{complete}% dokončeno",
-    "Toggle visibility of completed subtasks." : "Vyp/zap. viditelnost dokončených podúkolů.",
-    "Toggle visibility of all subtasks." : "Vyp/zap. viditelnost všech podúkolů",
     "[Yesterday]" : "[Včera]",
     "[Today]" : "[Dnes]",
     "[Tomorrow]" : "[Zítra]",

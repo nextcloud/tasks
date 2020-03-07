@@ -70,8 +70,6 @@ OC.L10N.register(
     "Sort by summary and priority." : "Rikiuoti pagal santrauką bei pirmenybę.",
     "Task is completed" : "Užduotis atlikta",
     "{complete} % completed" : "{complete}% atlikta",
-    "Toggle visibility of completed subtasks." : "Perjungti atliktų dalinių užduočių matomumą.",
-    "Toggle visibility of all subtasks." : "Perjungti visų dalinių užduočių matomumą.",
     "[Yesterday]" : "[Vakar]",
     "[Today]" : "[Šiandien]",
     "[Tomorrow]" : "[Rytoj]",

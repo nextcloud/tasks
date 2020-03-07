@@ -64,8 +64,6 @@ OC.L10N.register(
     "Sort by summary and priority." : "Ordigi laŭ resumo kaj prioritato.",
     "Task is completed" : "Tasko plenumita.",
     "{complete} % completed" : "{complete} % plenumita",
-    "Toggle visibility of completed subtasks." : "Baskuligi videblecon de plenumitaj subtaskoj.",
-    "Toggle visibility of all subtasks." : "Baskuligi videblecon de ĉiuj subtaskoj.",
     "[Yesterday]" : "[Hieraŭ]",
     "[Today]" : "[Hodiaŭ]",
     "[Tomorrow]" : "[Morgaŭ]",

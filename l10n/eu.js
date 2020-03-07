@@ -66,8 +66,6 @@ OC.L10N.register(
     "Sort by summary and priority." : "Ordenatu laburpena eta lehentasunaren arabera.",
     "Task is completed" : "Ataza osatuta",
     "{complete} % completed" : "% {complete} osatuta",
-    "Toggle visibility of completed subtasks." : "Txandakatu osatutako azpi-atazen ikusgaitasuna",
-    "Toggle visibility of all subtasks." : "Txandakatu azpi-ataza guztien ikusgaitasuna.",
     "[Yesterday]" : "[Atzo]",
     "[Today]" : "[Gaur]",
     "[Tomorrow]" : "[Bihar]",

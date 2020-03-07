@@ -71,8 +71,6 @@ OC.L10N.register(
     "Sort by summary and priority." : "Ταξινόμηση κατά σύνοψη και προτεραιότητα.",
     "Task is completed" : "Η εργασία ολοκληρώθηκε",
     "{complete} % completed" : "{complete} % ολοκληρωμένες",
-    "Toggle visibility of completed subtasks." : "Εναλλαγή εμφάνισης ολοκληρωμένων υποεργασιών.",
-    "Toggle visibility of all subtasks." : "Εναλλαγή εμφάνισης όλων των υποεργασιών.",
     "[Yesterday]" : "[Χθες]",
     "[Today]" : "[Σήμερα]",
     "[Tomorrow]" : "[Αύριο]",

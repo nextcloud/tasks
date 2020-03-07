@@ -71,8 +71,6 @@ OC.L10N.register(
     "Sort by summary and priority." : "Razvrstaj prema sažetku i prioritetu.",
     "Task is completed" : "Zadatak je završen",
     "{complete} % completed" : "Završeno {complete} %",
-    "Toggle visibility of completed subtasks." : "Uključi/isključi vidljivost svih završenih podzadataka.",
-    "Toggle visibility of all subtasks." : "Uključi/isključi vidljivost svih podzadataka.",
     "[Yesterday]" : "[Jučer]",
     "[Today]" : "[Danas]",
     "[Tomorrow]" : "[Sutra]",

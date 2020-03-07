@@ -71,8 +71,6 @@ OC.L10N.register(
     "Sort by summary and priority." : "按摘要和优先级排序。",
     "Task is completed" : "任务完成",
     "{complete} % completed" : "{complete} % 已完成",
-    "Toggle visibility of completed subtasks." : "切换已完成子任务的可见性。",
-    "Toggle visibility of all subtasks." : "切换所有子任务的可见性。",
     "[Yesterday]" : "[昨天]",
     "[Today]" : "[今天]",
     "[Tomorrow]" : "[明天]",

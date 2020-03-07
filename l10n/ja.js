@@ -64,8 +64,6 @@ OC.L10N.register(
     "Sort by summary and priority." : "要約と優先順位で並べ替えます。",
     "Task is completed" : "タスク完了",
     "{complete} % completed" : "{complete} %完了",
-    "Toggle visibility of completed subtasks." : "完了したサブタスクの表示/非表示を切り替えます。",
-    "Toggle visibility of all subtasks." : "すべてのサブタスクの表示/非表示を切り替えます。",
     "[Yesterday]" : "[昨日]",
     "[Today]" : "[今日]",
     "[Tomorrow]" : "[明日]",
