@@ -24,6 +24,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		:list="['']"
 		:set-data="setDragData"
 		v-bind="{group: 'tasks', swapThreshold: 0.30, delay: 500, delayOnTouchOnly: true, touchStartThreshold: 3, disabled: disabled, filter: '.readOnly'}"
+		:move="onMove"
 		@add="onAdd">
 		<slot />
 	</draggable>
@@ -79,6 +80,44 @@ export default {
 			this.prepareMoving(task, $event)
 			this.prepareCollecting(task, $event)
 			$event.stopPropagation()
+		},
+
+		/**
+		 * Called when a task is moved.
+		 * We check here if drop onto the target is allowed.
+		 *
+		 * Dropping tasks with class not PUBLIC onto calendars shared with me
+		 * is forbidden.
+		 *
+		 * @param {Object} $event The event which caused the move
+		 * @returns {Boolean} If the drop is allowed
+		 */
+		onMove($event) {
+			// The task to move
+			const taskAttribute = $event.dragged.attributes['task-id']
+			if (taskAttribute) {
+				const task = this.getTask(taskAttribute.value)
+				if (task.class === 'PUBLIC') {
+					return true
+				}
+				let calendar
+				const calendarAttribute = $event.to.attributes['calendar-id']
+				if (calendarAttribute) {
+					calendar = this.getCalendar(calendarAttribute.value)
+				}
+				if (!calendar) {
+					const parentAttribute = $event.to.attributes['task-id']
+					if (parentAttribute) {
+						const parent = this.getTask(parentAttribute.value)
+						// If we move to a parent task, the calendar has to be the parents calendar.
+						calendar = parent.calendar
+					}
+				}
+				if (calendar && calendar.isSharedWithMe) {
+					return false
+				}
+			}
+			return true
 		},
 
 		/**

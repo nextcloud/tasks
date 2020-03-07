@@ -62,7 +62,8 @@
 			}
 
 			&.dnd-hover {
-				background-color: rgba( $color-primary, .3 );
+				// background-color: rgba( $color-primary, .1 ); didn't work for some reason
+				background-color: transparentize( $color-primary, .9 );
 			}
 
 			button {
@@ -446,7 +447,8 @@
 					}
 
 					&.sortable-ghost .task-body {
-						background-color: rgba( $color-primary, .3 );
+						// background-color: rgba( $color-primary, .1 ); didn't work for some reason
+						background-color: transparentize( $color-primary, .9 );
 					}
 
 					.subtasks-container {

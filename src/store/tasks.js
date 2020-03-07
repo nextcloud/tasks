@@ -1183,8 +1183,8 @@ const actions = {
 		if (task.calendar.readOnly) {
 			return task
 		}
-		// Don't move tasks in shared calendars with access class not PUBLIC
-		if (task.calendar.isSharedWithMe && task.class !== 'PUBLIC') {
+		// Don't move tasks with access class not PUBLIC from or to calendars shared with me
+		if ((task.calendar.isSharedWithMe || calendar.isSharedWithMe) && task.class !== 'PUBLIC') {
 			return
 		}
 		// Don't move if source and target calendar are the same.

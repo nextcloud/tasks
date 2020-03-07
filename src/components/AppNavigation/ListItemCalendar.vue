@@ -307,6 +307,15 @@ export default {
 			if (this.calendar.readOnly) {
 				return
 			}
+			if (this.calendar.isSharedWithMe) {
+				const taskUri = e.dataTransfer.getData('text/plain')
+				if (taskUri) {
+					const task = this.getTask(taskUri)
+					if (task.class !== 'PUBLIC') {
+						return
+					}
+				}
+			}
 			// Get the correct element, in case we hover a child.
 			if (e.target.closest) {
 				const target = e.target.closest('li.list')
