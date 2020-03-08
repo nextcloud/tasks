@@ -1,3 +1,38 @@
+## 0.12.0 - 2020-03-08
+
+### Added
+- Properly show all tasks matching a collection (including subtasks) #83 #431
+- Implement pinning a task, works with [OpenTasks](https://github.com/dmfs/opentasks) #695
+- Allow to set task status #655
+- Save last value of all-day setting and apply to new dates #657
+- Load tasks from server if not found locally #608
+- Adjust sort-order dropdown style #736
+- Navigate to newly created calendar after creation #825
+- Allow strike-through and italic in notes field #682 #702
+- Use new icons for start and due date in details view #865
+- Show user avatars for shared lists and in share view #862
+- Move task body actions into dropdown #866
+- Move to Github actions #844
+- Move app-navigation to vue-components #818
+- Remove padding on content area for small screens #900
+- Updated translations
+- Updated dependencies
+- Code cleanup #632 #696 #698 #712 #713 #721 #722 #723 #843 #846 #853 #868
+
+### Fixed
+- Regression: Don't open detail view when toggling completed state #681
+- Prevent editing non-public tasks in lists shared with me #862
+- Prevent moving non-public tasks to lists shared with me #902
+- Increase size of clickable area to 44x44 px to follow Nextcloud standard #734 #735
+- Fix color of checked checkboxes in dark mode #679
+- Fix error when clicking successful sync status #699
+- Prevent adding a sharee twice #782
+- Set primary color on default calendar creation #839
+- Fix issues with very long task titles #840
+- Prevent read-only calendars as default calendar #841
+- Hide superfluous scrollbar in task list #842
+- Better handle calendars without assigned color #904
+
 ## 0.11.3 - 2019-09-17
 
 ### Added
