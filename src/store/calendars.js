@@ -88,6 +88,18 @@ export function mapDavCollectionToCalendar(calendar, currentUserPrincipal) {
 		// As fallback if we don't know what color that is supposed to be
 		color = uidToHexColor(displayName)
 	}
+
+	const shares = []
+	if (!!currentUserPrincipal && Array.isArray(calendar.shares)) {
+		for (const share of calendar.shares) {
+			if (share.href === currentUserPrincipal.principalScheme) {
+				continue
+			}
+
+			shares.push(mapDavShareeToSharee(share))
+		}
+	}
+
 	return {
 		// get last part of url
 		id: calendar.url.split('/').slice(-2, -1)[0],
@@ -99,7 +111,7 @@ export function mapDavCollectionToCalendar(calendar, currentUserPrincipal) {
 		tasks: {},
 		url: calendar.url,
 		dav: calendar,
-		shares: calendar.shares.map(sharee => Object.assign({}, mapDavShareeToSharee(sharee))),
+		shares,
 		supportsTasks: calendar.components.includes('VTODO'),
 		loadedCompleted: false,
 		isSharedWithMe,
