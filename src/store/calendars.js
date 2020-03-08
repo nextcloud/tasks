@@ -38,6 +38,7 @@ import pLimit from 'p-limit'
 import { isParentInList, searchSubTasks } from './storeHelper'
 import { findVTODObyState } from './cdav-requests'
 import router from '../router'
+import { detectColor, uidToHexColor } from '../utils/color.js'
 
 const calendarModel = {
 	id: '',
@@ -79,11 +80,19 @@ export function mapDavCollectionToCalendar(calendar, currentUserPrincipal) {
 	} else {
 		isSharedWithMe = (owner !== currentUserPrincipal.url)
 	}
+	const displayName = calendar.displayname || getCalendarUriFromUrl(calendar.url)
+	// calendar.color can be set to anything on the server,
+	// so make sure it's something that remotely looks like a color
+	let color = detectColor(calendar.color)
+	if (!color) {
+		// As fallback if we don't know what color that is supposed to be
+		color = uidToHexColor(displayName)
+	}
 	return {
 		// get last part of url
 		id: calendar.url.split('/').slice(-2, -1)[0],
-		displayName: calendar.displayname,
-		color: calendar.color,
+		displayName,
+		color,
 		enabled: calendar.enabled !== false,
 		owner,
 		readOnly: !calendar.isWriteable(),
@@ -116,6 +125,20 @@ export function mapDavShareeToSharee(sharee) {
 		isGroup: sharee.href.startsWith('principal:principals/groups/'),
 		uri: sharee.href,
 	}
+}
+
+/**
+ * Gets the calendar uri from the url
+ *
+ * @param {String} url The url to get calendar uri from
+ * @returns {string}
+ */
+function getCalendarUriFromUrl(url) {
+	if (url.endsWith('/')) {
+		url = url.substring(0, url.length - 1)
+	}
+
+	return url.substring(url.lastIndexOf('/') + 1)
 }
 
 const getters = {
