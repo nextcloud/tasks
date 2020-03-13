@@ -82,6 +82,7 @@ OC.L10N.register(
     "[Tomorrow]" : "[Morgen]",
     "Add a subtask to \"{task}\"…" : "Voeg een subtaak toe aan \"{task}\"…",
     "An error occurred, unable to delete the task." : "Er is een fout opgetreden, taak kan niet verwijderd worden.",
+    "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["De taak wordt verwijderd over {countdown} seconde","De taak wordt verwijderd over {countdown} seconden"],
     "Add a task to \"{task}\"…" : "Voeg een taak toe aan \"{task}\"…",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n afgeronde taak","%n afgeronde taken"],
     "Add an important task to \"{calendar}\"…" : "Voeg een belangrijke taak toe aan \"{calendar}\"…",
