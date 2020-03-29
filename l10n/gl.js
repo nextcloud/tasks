@@ -142,7 +142,7 @@ OC.L10N.register(
     "Could not delete the task." : "Non foi posíbel eliminar a tarefa",
     "Synchronizing to the server." : "Sincronizando co servidor.",
     "Task successfully saved to server." : "A tarefa foi gardada satisfactoriamente no servidor.",
-    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Non foi posíbel actualizar a tarefa porque foi modificada no servidor. Prema para actualizala, os cambios locais serán desbotados.",
+    "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Non foi posíbel actualizar a tarefa porque foi modificada no servidor. Prema para actualizala, os cambios locais serán descartados.",
     "Could not update the task." : "Non foi posíbel actualizar a tarefa",
     "Successfully updated the task." : "A tarefa foi actualizada satisfactoriamente.",
     "Task successfully moved to new calendar." : "A tarefa foi movida satisfactoriamente ao novo calendario.",
