@@ -1,0 +1,37 @@
+name: Jest
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+      - stable*
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-versions: [12.x]
+
+    name: test${{ matrix.node-versions }}
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Set up node ${{ matrix.node-versions }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-versions }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Set up Codecov
+        run: npm install -g codecov
+      - name: Test
+        run: npm run test
+        env:
+          CI: true
+      - name: Upload coverage
+        run: bash <(curl -s https://codecov.io/bash) -cF javascript -t ${{ secrets.CODECOV_TOKEN }};

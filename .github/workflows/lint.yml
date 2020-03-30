@@ -1,4 +1,5 @@
 name: Lint
+
 on:
   pull_request:
   push:
@@ -7,42 +8,52 @@ on:
       - stable*
 
 jobs:
-  php-linters:
+  php:
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
         php-versions: ['7.2', '7.3', '7.4']
-    name: php${{ matrix.php-versions }} lint
+  
+    name: php${{ matrix.php-versions }}
     steps:
-    - name: Checkout
-      uses: actions/checkout@master
-    - name: Set up php${{ matrix.php-versions }}
-      uses: shivammathur/setup-php@master
-      with:
-        php-version: ${{ matrix.php-versions }}
-        coverage: none
-    - name: Lint
-      run: composer run lint
-    - name: Download schema
-      run: wget https://apps.nextcloud.com/schema/apps/info.xsd
-    - name: Lint info.xml
-      uses: ChristophWurst/xmllint-action@v1
-      with:
-        xml-file: ./appinfo/info.xml
-        xml-schema-file: ./info.xsd
+      - uses: actions/checkout@v2
 
-  node-linters:
+      - name: Set up php ${{ matrix.php-versions }}
+        uses: shivammathur/setup-php@v1
+        with:
+          php-version: ${{ matrix.php-versions }}
+          coverage: none
+
+      - name: Lint
+        run: composer run lint
+
+      - name: Download schema
+        run: wget https://apps.nextcloud.com/schema/apps/info.xsd
+      - name: Lint info.xml
+        uses: ChristophWurst/xmllint-action@v1
+        with:
+          xml-file: ./appinfo/info.xml
+          xml-schema-file: ./info.xsd
+
+  node:
     runs-on: ubuntu-latest
-    name: ESLint
+
+    strategy:
+      matrix:
+        node-versions: [12.x]
+
+    name: node${{ matrix.node-versions }}
     steps:
-    - uses: actions/checkout@master
-    - name: Set up Node
-      uses: actions/setup-node@v1
-      with:
-        node-version: 12.x
-    - name: npm install
-      run: npm ci
-    - name: eslint
-      run: npm run lint
-    env:
-      CI: true
+      - uses: actions/checkout@v2
+
+      - name: Set up node ${{ matrix.node-versions }}
+        uses: actions/setup-node@v1
+        with:
+          node-versions: ${{ matrix.node-versions }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
