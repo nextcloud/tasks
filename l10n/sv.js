@@ -141,7 +141,7 @@ OC.L10N.register(
     "Successfully created the task." : "Uppgiften skapad.",
     "Could not delete the task." : "Kunde inte radera uppgiften.",
     "Synchronizing to the server." : "Synkroniserar till servern.",
-    "Task successfully saved to server." : "Uppgiften sparades till servern.",
+    "Task successfully saved to server." : "Uppgiften sparades i servern.",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Det gick inte att uppdatera uppgiften eftersom den ändrades på servern. Klicka för att uppdatera, lokala ändringar kommer att ignoreras.",
     "Could not update the task." : "Kunde inte uppdatera uppgiften.",
     "Successfully updated the task." : "Uppgiften uppdaterad.",
