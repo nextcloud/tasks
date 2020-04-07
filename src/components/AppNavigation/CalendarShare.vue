@@ -52,7 +52,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import client from '../../services/cdav'
-import { Multiselect } from '@nextcloud/vue/dist/Components/Multiselect'
+import Multiselect from '@nextcloud/vue/dist/Components/Multiselect'
 
 import CalendarSharee from './CalendarSharee'
 // import debounce from 'debounce'
