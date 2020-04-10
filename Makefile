@@ -87,6 +87,16 @@ watch-js:
 build-svg-sprite:
 	npm run svg_sprite
 
+composer.phar:
+	curl -sS https://getcomposer.org/installer | php
+
+install-composer-deps-dev: composer.phar
+	php composer.phar install -o
+
+update-composer: composer.phar
+	rm -f composer.lock
+	php composer.phar install --prefer-dist
+
 # Removes the build directory and the compiled files
 .PHONY: clean
 clean:
@@ -182,3 +192,6 @@ test-php:
 test-php-coverage:
 	phpunit -c phpunit.xml --coverage-clover=coverage-unit.xml
 	phpunit -c phpunit.integration.xml --coverage-clover=coverage-integration.xml
+
+lint-php:
+	php composer.phar run-script cs:check

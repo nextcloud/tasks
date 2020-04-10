@@ -1,3 +1,7 @@
+# Composer
+composer.phar
+/vendor/
+
 ######################
 ## Files build by make
 ######################
@@ -249,3 +253,5 @@ Various
 build/
 coverage 
 .phpunit.result.cache
+
+.php_cs.cache
