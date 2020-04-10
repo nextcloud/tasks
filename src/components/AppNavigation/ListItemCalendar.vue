@@ -136,6 +136,8 @@ import AppNavigationIconBullet from '@nextcloud/vue/dist/Components/AppNavigatio
 import Actions from '@nextcloud/vue/dist/Components/Actions'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
 import ActionLink from '@nextcloud/vue/dist/Components/ActionLink'
+import { generateRemoteUrl } from '@nextcloud/router'
+import { showSuccess, showError } from '@nextcloud/dialogs'
 
 const CD_DURATION = 7
 
@@ -227,7 +229,7 @@ export default {
 			return url
 		},
 		url() {
-			const rootURL = this.$OC.linkToRemote('dav')
+			const rootURL = generateRemoteUrl('dav')
 			return new URL(this.calendar.url, rootURL)
 		},
 		hasShares() {
@@ -400,11 +402,11 @@ export default {
 					this.copySuccess = true
 					this.copied = true
 					// Notify calendar url was copied
-					this.$OC.Notification.showTemporary(this.$t('tasks', 'Calendar link copied to clipboard.'))
+					showSuccess(this.$t('tasks', 'Calendar link copied to clipboard.'))
 				}, e => {
 					this.copySuccess = false
 					this.copied = true
-					this.$OC.Notification.showTemporary(this.$t('tasks', 'Calendar link could not be copied to clipboard.'))
+					showError(this.$t('tasks', 'Calendar link could not be copied to clipboard.'))
 				}).then(() => {
 					setTimeout(() => {
 						// stop loading status regardless of outcome
@@ -473,7 +475,7 @@ export default {
 				try {
 					await this.deleteCalendar(this.calendar)
 				} catch (error) {
-					this.$toast.error(this.$t('tasks', 'An error occurred, unable to delete the calendar.'))
+					showError(this.$t('tasks', 'An error occurred, unable to delete the calendar.'))
 					console.error(error)
 				} finally {
 					clearInterval(this.deleteInterval)

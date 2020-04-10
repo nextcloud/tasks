@@ -21,6 +21,7 @@
  */
 
 import DavClient from 'cdav-library'
+import { generateRemoteUrl } from '@nextcloud/router'
 
 function xhrProvider() {
 	const headers = {
@@ -43,5 +44,5 @@ function xhrProvider() {
 }
 
 export default new DavClient({
-	rootUrl: OC.linkToRemote('dav'),
+	rootUrl: generateRemoteUrl('dav'),
 }, xhrProvider)

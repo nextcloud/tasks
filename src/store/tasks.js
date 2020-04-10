@@ -28,6 +28,7 @@ import ICAL from 'ical.js'
 import TaskStatus from '../models/taskStatus'
 import router from '../router'
 import { findVTODObyUid } from './cdav-requests'
+import { showError } from '@nextcloud/dialogs'
 
 Vue.use(Vuex)
 
@@ -1205,7 +1206,7 @@ const actions = {
 				})
 				.catch((error) => {
 					console.error(error)
-					OC.Notification.showTemporary(OCA.Tasks.$t('tasks', 'An error occurred'))
+					showError(OCA.Tasks.$t('tasks', 'An error occurred'))
 				})
 		}
 

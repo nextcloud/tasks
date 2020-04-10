@@ -29,6 +29,7 @@ import store from './store/store'
 import { sync } from 'vuex-router-sync'
 import VTooltip from 'v-tooltip'
 import VueClipboard from 'vue-clipboard2'
+import { linkTo } from '@nextcloud/router'
 
 // Disable on production
 Vue.config.devtools = true
@@ -39,11 +40,11 @@ Vue.config.performance = true
 __webpack_nonce__ = btoa(OC.requestToken)
 
 // Correct the root of the app for chunk loading
-// OC.linkTo matches the apps folders
-// OC.generateUrl ensure the index.php (or not)
+// linkTo matches the apps folders
+// generateUrl ensure the index.php (or not)
 // We do not want the index.php since we're loading files
 // eslint-disable-next-line
-__webpack_public_path__ = OC.linkTo('tasks', 'js/')
+__webpack_public_path__ = linkTo('tasks', 'js/')
 
 sync(store, router)
 
@@ -68,7 +69,6 @@ Vue.prototype.n = Vue.prototype.$n
 Vue.prototype.$OC = OC
 Vue.prototype.$OCA = OCA
 Vue.prototype.$appVersion = $appVersion
-Vue.prototype.$toast = OCP.Toast // eslint-disable-line no-undef
 
 OCA.Tasks.$t = Vue.prototype.$t
 OCA.Tasks.$n = Vue.prototype.$n

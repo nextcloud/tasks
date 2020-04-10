@@ -160,6 +160,7 @@ import TaskDragContainer from './TaskDragContainer'
 
 import Actions from '@nextcloud/vue/dist/Components/Actions'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
+import { showError } from '@nextcloud/dialogs'
 
 const CD_DURATION = 7
 
@@ -402,7 +403,7 @@ export default {
 					}
 					await this.deleteTask({ task: this.task, dav: true })
 				} catch (error) {
-					this.$toast.error(this.$t('tasks', 'An error occurred, unable to delete the task.'))
+					showError(this.$t('tasks', 'An error occurred, unable to delete the task.'))
 					console.error(error)
 				} finally {
 					clearInterval(this.deleteInterval)
