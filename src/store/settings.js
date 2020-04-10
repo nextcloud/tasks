@@ -24,6 +24,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Requests from '../services/requests'
+import { generateUrl } from '@nextcloud/router'
 
 Vue.use(Vuex)
 
@@ -90,7 +91,7 @@ const actions = {
 	setSetting(context, payload) {
 		context.commit('setSetting', payload)
 		return new Promise(function() {
-			Requests.post(OC.generateUrl('apps/tasks/settings/{type}/{value}', payload), {})
+			Requests.post(generateUrl('apps/tasks/settings/{type}/{value}', payload), {})
 		})
 	},
 
@@ -102,7 +103,7 @@ const actions = {
 	 */
 	loadSettings({ commit }) {
 		return new Promise(function(resolve) {
-			Requests.get(OC.generateUrl('apps/tasks/settings'))
+			Requests.get(generateUrl('apps/tasks/settings'))
 				.then(response => {
 					commit('setSettings', {
 						settings: response.data.data.settings,

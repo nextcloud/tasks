@@ -61,6 +61,7 @@ import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
 import ActionCheckbox from '@nextcloud/vue/dist/Components/ActionCheckbox'
 import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
 import Avatar from '@nextcloud/vue/dist/Components/Avatar'
+import { showError } from '@nextcloud/dialogs'
 
 export default {
 	name: 'CalendarSharee',
@@ -107,7 +108,7 @@ export default {
 				})
 			} catch (error) {
 				console.error(error)
-				this.$OC.Notification.showTemporary(this.$t('tasks', 'Unable to delete the share.'))
+				showError(this.$t('tasks', 'Unable to delete the share.'))
 			} finally {
 				this.loading = false
 			}
@@ -125,7 +126,7 @@ export default {
 				})
 			} catch (error) {
 				console.error(error)
-				this.$OC.Notification.showTemporary(this.$t('tasks', 'Unable to change permissions.'))
+				showError(this.$t('tasks', 'Unable to change permissions.'))
 			} finally {
 				this.loading = false
 			}

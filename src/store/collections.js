@@ -22,6 +22,7 @@
 
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { generateUrl } from '@nextcloud/router'
 import Requests from '../services/requests'
 
 import { isTaskInList, searchSubTasks } from './storeHelper'
@@ -100,7 +101,7 @@ const actions = {
 	 */
 	loadCollections({ commit }) {
 		return new Promise(function(resolve) {
-			Requests.get(OC.generateUrl('apps/tasks/collections'))
+			Requests.get(generateUrl('apps/tasks/collections'))
 				.then(response => {
 					commit('setCollections', {
 						collections: response.data.data.collections,
@@ -120,7 +121,7 @@ const actions = {
 	setVisibility(context, collection) {
 		context.commit('setVisibility', collection)
 		return new Promise(function() {
-			Requests.post(OC.generateUrl('apps/tasks/collection/{id}/visibility/{show}', collection), {})
+			Requests.post(generateUrl('apps/tasks/collection/{id}/visibility/{show}', collection), {})
 		})
 	},
 }
