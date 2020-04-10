@@ -2,7 +2,7 @@ OC.L10N.register(
     "tasks",
     {
     "Important" : "Важно",
-    "Today" : "Денеска",
+    "Today" : "Денес",
     "Week" : "Седмица",
     "All" : "Сите",
     "Current" : "Моменталлни",
