@@ -58,14 +58,14 @@ class SettingsService {
 	 * @return array
 	 */
 	public function get():array {
-		$settings = array(
+		$settings = [
 			'defaultCalendarId' => (string)$this->settings->getUserValue($this->userId, $this->appName,'various_defaultCalendarId'),
 			'showHidden' => (int)$this->settings->getUserValue($this->userId, $this->appName,'various_showHidden'),
 			'sortOrder' => (string)$this->settings->getUserValue($this->userId, $this->appName,'various_sortOrder'),
 			'sortDirection' => (bool)$this->settings->getUserValue($this->userId, $this->appName,'various_sortDirection'),
 			'allDay' => (bool)$this->settings->getUserValue($this->userId, $this->appName,'various_allDay'),
 			'userID' => $this->userId
-		);
+		];
 		return $settings;
 	}
 

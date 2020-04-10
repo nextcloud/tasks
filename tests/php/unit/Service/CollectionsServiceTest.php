@@ -28,7 +28,6 @@ use OCP\IL10N;
 
 use PHPUnit\Framework\TestCase;
 
-
 class CollectionsServiceTest extends TestCase {
 
 	private $collectionsService;
@@ -56,38 +55,38 @@ class CollectionsServiceTest extends TestCase {
 	}
 
 	public function testGetAll() {
-		$return = array(
-			array(
+		$return = [
+			[
 				'id' => "starred",
 				'displayName' => 'Important',
 				'show' => 2,
-				'icon' => 'sprt-task-star'),
-			array(
+				'icon' => 'sprt-task-star'],
+			[
 				'id' => "today",
 				'displayName' => 'Today',
 				'show' => 2,
-				'icon' => 'sprt-calendar'),
-			array(
+				'icon' => 'sprt-calendar'],
+			[
 				'id' => "week",
 				'displayName' => 'Week',
 				'show' => 2,
-				'icon' => 'sprt-calendar'),
-			array(
+				'icon' => 'sprt-calendar'],
+			[
 				'id' => "all",
 				'displayName' => 'All',
 				'show' => 2,
-				'icon' => 'sprt-all'),
-			array(
+				'icon' => 'sprt-all'],
+			[
 				'id' => "current",
 				'displayName' => 'Current',
 				'show' => 2,
-				'icon' => 'sprt-current'),
-			array(
+				'icon' => 'sprt-current'],
+			[
 				'id' => "completed",
 				'displayName' => 'Completed',
 				'show' => 2,
-				'icon' => 'sprt-checkmark')
-		);
+				'icon' => 'sprt-checkmark']
+		];
 		
 		$map = [
 			['Important', [],'Important'],

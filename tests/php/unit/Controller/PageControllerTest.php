@@ -14,7 +14,6 @@ namespace OCA\Tasks\Controller;
 use OCP\AppFramework\Http\TemplateResponse;
 use PHPUnit\Framework\TestCase as Base;
 
-
 class PageControllerTest extends Base {
 
 	private $controller;

@@ -40,7 +40,7 @@ class SettingsController extends Controller {
 	 * @param IRequest $request an instance of the request
 	 * @param SettingsService $settingsService
 	 */
-	public function __construct(string $appName, IRequest $request, SettingsService $settingsService){
+	public function __construct(string $appName, IRequest $request, SettingsService $settingsService) {
 		parent::__construct($appName, $request);
 		$this->settingsService = $settingsService;
 	}
@@ -48,7 +48,7 @@ class SettingsController extends Controller {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function get(){
+	public function get() {
 		return $this->generateResponse(function () {
 			return ['settings' => $this->settingsService->get()];
 		});
