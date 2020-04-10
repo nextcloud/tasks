@@ -27,7 +27,7 @@ use \OCP\AppFramework\Http\JSONResponse;
 
 trait Response {
 
-	protected function generateResponse (Closure $callback) {
+	protected function generateResponse(Closure $callback) {
 		try {
 			$message = [
 				'status' => 'success',

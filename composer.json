@@ -1,23 +1,26 @@
 {
-  "name": "nextcloud/tasks",
-  "description": "Nextcloud Tasks",
-  "type": "project",
-  "license": "AGPL",
-  "authors": [
-      {
-          "name": "Bernhard Posselt",
-          "email": "dev@bernhard-posselt.com"
-      }
-  ],
-  "require": {},
-  "require-dev": {
-      "phpunit/phpunit": "^7.5"
-  },
-  "config": {
-      "optimize-autoloader": true,
-      "classmap-authoritative": true
-  },
-  "scripts": {
-      "lint": "find . -name \\*.php -not -path './vendor/*' -exec php -l \"{}\" \\;"
-  }
+    "name": "nextcloud/tasks",
+    "description": "Nextcloud Tasks",
+    "type": "project",
+    "license": "AGPL",
+    "authors": [
+        {
+            "name": "Bernhard Posselt",
+            "email": "dev@bernhard-posselt.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "nextcloud/coding-standard": "^0.2.0",
+        "phpunit/phpunit": "^7.5"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "classmap-authoritative": true
+    },
+    "scripts": {
+        "cs:check": "php-cs-fixer fix --dry-run --verbose",
+        "cs:fix": "php-cs-fixer fix",
+        "lint": "find . -name \\*.php -not -path './vendor/*' -exec php -l \"{}\" \\;"
+    }
 }

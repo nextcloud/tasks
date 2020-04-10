@@ -40,7 +40,7 @@ class CollectionsController extends Controller {
 	 * @param IRequest $request an instance of the request
 	 * @param CollectionsService $collectionsService
 	 */
-	public function __construct(string $appName, IRequest $request, CollectionsService $collectionsService){
+	public function __construct(string $appName, IRequest $request, CollectionsService $collectionsService) {
 		parent::__construct($appName, $request);
 		$this->collectionsService = $collectionsService;
 	}
@@ -48,7 +48,7 @@ class CollectionsController extends Controller {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function getCollections(){
+	public function getCollections() {
 		return $this->generateResponse(function () {
 			return ['collections' => $this->collectionsService->getAll()];
 		});
@@ -57,7 +57,7 @@ class CollectionsController extends Controller {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function setVisibility($collectionID, $visibility){
+	public function setVisibility($collectionID, $visibility) {
 		return $this->generateResponse(function () use ($collectionID, $visibility) {
 			return $this->collectionsService->setVisibility($collectionID, $visibility);
 		});

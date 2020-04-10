@@ -66,41 +66,41 @@ class CollectionsService {
 	 * @return array
 	 */
 	public function getAll():array {
-		$collections = array(
-			array(
+		$collections = [
+			[
 				'id' => "starred",
 				'displayName' => (string)$this->l10n->t('Important'),
 				'show' => 2,
-				'icon' => 'sprt-task-star'),
-			array(
+				'icon' => 'sprt-task-star'],
+			[
 				'id' => "today",
 				'displayName' => (string)$this->l10n->t('Today'),
 				'show' => 2,
-				'icon' => 'sprt-calendar'),
-			array(
+				'icon' => 'sprt-calendar'],
+			[
 				'id' => "week",
 				'displayName' => (string)$this->l10n->t('Week'),
 				'show' => 2,
-				'icon' => 'sprt-calendar'),
-			array(
+				'icon' => 'sprt-calendar'],
+			[
 				'id' => "all",
 				'displayName' => (string)$this->l10n->t('All'),
 				'show' => 2,
-				'icon' => 'sprt-all'),
-			array(
+				'icon' => 'sprt-all'],
+			[
 				'id' => "current",
 				'displayName' => (string)$this->l10n->t('Current'),
 				'show' => 2,
-				'icon' => 'sprt-current'),
-			array(
+				'icon' => 'sprt-current'],
+			[
 				'id' => "completed",
 				'displayName' => (string)$this->l10n->t('Completed'),
 				'show' => 2,
-				'icon' => 'sprt-checkmark')
-		);
+				'icon' => 'sprt-checkmark']
+		];
 		foreach ($collections as $key => $collection){
 			$tmp = $this->settings->getUserValue($this->userId, $this->appName,'show_'.$collection['id']);
-			if (!in_array($tmp, array('0','1','2'))) {
+			if (!in_array($tmp, ['0','1','2'])) {
 				$this->settings->setUserValue($this->userId, $this->appName,'show_'.$collection['id'],$collections[$key]['show']);
 			} else {
 				$collections[$key]['show'] = (int)$tmp;
@@ -117,7 +117,7 @@ class CollectionsService {
 	 * @return bool
 	 */
 	public function setVisibility(string $collectionID, int $visibility):bool {
-		if (in_array($visibility, array(0,1,2))){
+		if (in_array($visibility, [0,1,2])){
 			$this->settings->setUserValue($this->userId, $this->appName,'show_'.$collectionID,$visibility);
 		}
 		return true;

@@ -23,7 +23,6 @@
  *
  */
 
-use OCP\AppFramework\App;
 use PHPUnit\Framework\TestCase;
 
 class AppTest extends TestCase {
