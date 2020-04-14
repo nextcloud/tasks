@@ -7,17 +7,26 @@
     "Completed" : "Hoàn thành",
     "Tasks" : "Nhiệm vụ",
     "Share with users or groups" : "Chia sẽ với người dùng hoặc nhóm",
+    "No users or groups" : "Không có người dùng hay nhóm",
     "can edit" : "Có thể chỉnh sửa",
+    "Unable to delete the share." : "Không thể xóa chia sẻ.",
+    "Unable to change permissions." : "Không thể thay đổi quyền hạn.",
     "Cancel" : "Hủy",
     "Save" : "Lưu",
     "Edit" : "Sửa",
+    "Copied" : "Đã sao chép",
+    "Can not copy" : "Không thể sao chép",
     "Download" : "Tải về",
     "Delete" : "Xóa",
     "Unshare" : "Bỏ chia sẽ",
     "Hidden" : "Ẩn",
+    "No errors" : "Không có lỗi",
+    "Open your browser console for more details" : "Mở trong trình duyệt để biết thêm chi tiết",
     "Due date" : "Thời hạn",
+    "Last modified" : "Lần cuối chỉnh sửa",
     "When shared show full event" : "Khi được chia sẻ thì thể hiện đầy đủ sự kiện",
     "When shared show only busy" : "Khi được chia sẻ thì chỉ thể hiện đang bận",
-    "When shared hide this event" : "Khi được chia sẻ thì ẩn sự kiện này đi"
+    "When shared hide this event" : "Khi được chia sẻ thì ẩn sự kiện này đi",
+    "An error occurred" : "Có lỗi đã xảy ra"
 },"pluralForm" :"nplurals=1; plural=0;"
 }
