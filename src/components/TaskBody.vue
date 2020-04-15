@@ -158,6 +158,7 @@ import { linkify } from '../directives/linkify.js'
 import TaskStatusDisplay from './TaskStatusDisplay'
 import TaskDragContainer from './TaskDragContainer'
 
+import moment from '@nextcloud/moment'
 import Actions from '@nextcloud/vue/dist/Components/Actions'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
 import { showError } from '@nextcloud/dialogs'

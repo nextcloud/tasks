@@ -1,6 +1,6 @@
 import { config } from '@vue/test-utils'
 import { OC } from './OC.js'
-import moment from 'moment'
+import moment from '@nextcloud/moment'
 // eslint-disable-next-line node/no-unpublished-import
 import MockDate from 'mockdate'
 
@@ -8,7 +8,6 @@ import MockDate from 'mockdate'
 MockDate.set(moment('20190101T123456', 'YYYYMMDDTHHmmss'))
 
 global.OC = new OC()
-global.moment = moment
 
 // Mock nextcloud translate functions
 config.mocks.$t = function(app, string) {

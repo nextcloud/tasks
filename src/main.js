@@ -86,8 +86,6 @@ OCA.Tasks.App = new Vue({
 		this.$OC.Search = new OCA.Search(this.filter, this.cleanSearch)
 	},
 	beforeMount() {
-		// Configure the locale of moment.js
-		moment.locale(this.$OC.getLocale().replace('_', '-').toLowerCase())
 		this.$store.dispatch('loadCollections')
 		this.$store.dispatch('loadSettings')
 	},

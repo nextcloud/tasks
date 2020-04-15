@@ -61,6 +61,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
+import moment from '@nextcloud/moment'
 import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {

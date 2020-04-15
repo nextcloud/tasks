@@ -59,6 +59,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
+import moment from '@nextcloud/moment'
 import { mapGetters, mapActions } from 'vuex'
 import { sort, isTaskInList } from '../../store/storeHelper'
 import SortorderDropdown from '../SortorderDropdown'
