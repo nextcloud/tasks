@@ -29,6 +29,7 @@ import TaskStatus from '../models/taskStatus'
 import router from '../router'
 import { findVTODObyUid } from './cdav-requests'
 import { showError } from '@nextcloud/dialogs'
+import moment from '@nextcloud/moment'
 
 Vue.use(Vuex)
 

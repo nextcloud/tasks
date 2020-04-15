@@ -384,6 +384,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import { overdue } from '../store/storeHelper'
+import moment from '@nextcloud/moment'
 import DatetimePicker from '@nextcloud/vue/dist/Components/DatetimePicker'
 import Multiselect from '@nextcloud/vue/dist/Components/Multiselect'
 import Markdown from './Markdown'
