@@ -98,7 +98,7 @@ class CollectionsService {
 				'show' => 2,
 				'icon' => 'sprt-checkmark']
 		];
-		foreach ($collections as $key => $collection){
+		foreach ($collections as $key => $collection) {
 			$tmp = $this->settings->getUserValue($this->userId, $this->appName,'show_'.$collection['id']);
 			if (!in_array($tmp, ['0','1','2'])) {
 				$this->settings->setUserValue($this->userId, $this->appName,'show_'.$collection['id'],$collections[$key]['show']);
@@ -117,7 +117,7 @@ class CollectionsService {
 	 * @return bool
 	 */
 	public function setVisibility(string $collectionID, int $visibility):bool {
-		if (in_array($visibility, [0,1,2])){
+		if (in_array($visibility, [0,1,2])) {
 			$this->settings->setUserValue($this->userId, $this->appName,'show_'.$collectionID,$visibility);
 		}
 		return true;

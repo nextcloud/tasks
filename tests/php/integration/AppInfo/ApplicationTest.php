@@ -26,7 +26,6 @@
 use PHPUnit\Framework\TestCase;
 
 class AppTest extends TestCase {
-
 	private $container;
 	private $app;
 
@@ -47,5 +46,4 @@ class AppTest extends TestCase {
 		$enabled = array_key_exists('tasks', $navigationManager->getAll());
 		$this->assertTrue($enabled);
 	}
-
 }
