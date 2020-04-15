@@ -26,7 +26,6 @@ use \Closure;
 use \OCP\AppFramework\Http\JSONResponse;
 
 trait Response {
-
 	protected function generateResponse(Closure $callback) {
 		try {
 			$message = [
@@ -34,8 +33,7 @@ trait Response {
 				'data' => $callback(),
 				'message' => null
 			];
-
-		} catch(\Exception $e) {
+		} catch (\Exception $e) {
 			$message = [
 				'status' => 'error',
 				'data' => null,
@@ -44,5 +42,4 @@ trait Response {
 		}
 		return new JSONResponse($message);
 	}
-
 }

@@ -29,7 +29,6 @@ use OCP\IRequest;
 use PHPUnit\Framework\TestCase;
 
 class CollectionsControllerTest extends TestCase {
-
 	private $appName;
 	private $collectionsService;
 	private $request;

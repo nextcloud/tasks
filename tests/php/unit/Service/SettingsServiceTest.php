@@ -28,7 +28,6 @@ use OCP\IConfig;
 use PHPUnit\Framework\TestCase;
 
 class SettingsServiceTest extends TestCase {
-
 	private $settingsService;
 	private $settings;
 	private $userId;

@@ -29,7 +29,6 @@ use OCP\IRequest;
 use PHPUnit\Framework\TestCase;
 
 class SettingsControllerTest extends TestCase {
-
 	private $appName;
 	private $settingsService;
 	private $request;

@@ -29,7 +29,6 @@ use OCP\IL10N;
 use PHPUnit\Framework\TestCase;
 
 class CollectionsServiceTest extends TestCase {
-
 	private $collectionsService;
 	private $settings;
 	private $userId;
