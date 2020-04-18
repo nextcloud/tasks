@@ -2,7 +2,7 @@
 	* rules for app-navigation
 	*/
 
-#app-navigation {
+.app-navigation {
 	> ul {
 		> li {
 			&.collection .app-navigation-entry-icon::before {
@@ -241,15 +241,10 @@
 	text-decoration: none;
 }
 
-#content {
-	color: $gray_dark;
-}
-
-#app-content {
-	overflow-x: hidden;
-
+.app-content {
 	.header {
 		margin: 12px 0;
+		margin-left: 27px;
 		display: flex;
 
 		#add-task {
@@ -1318,7 +1313,13 @@ input[type='checkbox'].checkbox {
 }
 
 @media only screen and (max-width: $breakpoint-mobile) {
-	#app-content > div {
-		padding: 6px 0 75px;
+	.app-content {
+
+		& > div {
+			padding: 6px 0 75px;
+		}
+		.header {
+			margin-left: 44px;
+		}
 	}
 }
