@@ -47,7 +47,7 @@
 		"uuid": "^7.0.3",
 		"v-tooltip": "2.0.3",
 		"vue": "^2.6.11",
-		"vue-click-outside": "^1.0.7",
+		"vue-click-outside": "^1.1.0",
 		"vue-clipboard2": "^0.3.1",
 		"vue-router": "3.1.6",
 		"vuedraggable": "^2.23.2",
