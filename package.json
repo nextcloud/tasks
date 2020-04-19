@@ -84,7 +84,7 @@
 		"moment": "^2.24.0",
 		"node-sass": "^4.13.1",
 		"prettier-eslint": "^9.0.1",
-		"raw-loader": "^4.0.0",
+		"raw-loader": "^4.0.1",
 		"sass-loader": "^8.0.2",
 		"stylelint": "^13.3.2",
 		"stylelint-config-recommended-scss": "^4.2.0",
