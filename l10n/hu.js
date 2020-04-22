@@ -28,6 +28,7 @@ OC.L10N.register(
     "Unshare" : "Megosztás visszavonása",
     "Calendar link copied to clipboard." : "Naptár hivatkozás a vágólapra másolva.",
     "Calendar link could not be copied to clipboard." : "Naptári hivatkozást nem lehet vágólapra másolni.",
+    "An error occurred, unable to delete the calendar." : "Hiba lépett fel, a naptárat nem lehet törölni.",
     "Default list" : "Alapértelmezett lista",
     "Visibility of Smart Collections" : "Okos gyűjtemény láthatósága",
     "Hidden" : "Rejtett",
