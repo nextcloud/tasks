@@ -105,4 +105,125 @@ describe('task', () => {
 		task.priority = 1
 		expect(task.priority).toEqual(1)
 	})
+
+	const vCalendar2 = `
+	BEGIN:VCALENDAR\n
+	VERSION:2.0\n
+	PRODID:-//Nextcloud Tasks 0.11.3\n
+	BEGIN:VTODO\n
+	CREATED:20181119T183919\n
+	DTSTAMP:20190918T095816\n
+	LAST-MODIFIED:20190918T095816\n
+	UID:pwen4kz18g\n
+	SUMMARY:Test 1\n
+	RELATED-TO;RELTYPE=CHILD:255ce6ca-fbae-4263-89c5-5743f8456b22\n
+	END:VTODO\n
+	END:VCALENDAR`
+
+	it('Should not return "CHILD" relation.', () => {
+		const task = new Task(vCalendar2, {})
+		expect(task.related).toEqual(null)
+	})
+
+	const vCalendar3 = `
+	BEGIN:VCALENDAR\n
+	VERSION:2.0\n
+	PRODID:-//Nextcloud Tasks 0.11.3\n
+	BEGIN:VTODO\n
+	CREATED:20181119T183919\n
+	DTSTAMP:20190918T095816\n
+	LAST-MODIFIED:20190918T095816\n
+	UID:pwen4kz18g\n
+	SUMMARY:Test 1\n
+	RELATED-TO;RELTYPE=SIBLING:255ce6ca-fbae-4263-89c5-5743f8456b22\n
+	END:VTODO\n
+	END:VCALENDAR`
+
+	it('Should not return "SIBLING" relation.', () => {
+		const task = new Task(vCalendar3, {})
+		expect(task.related).toEqual(null)
+	})
+
+	const vCalendar4 = `
+	BEGIN:VCALENDAR\n
+	VERSION:2.0\n
+	PRODID:-//Nextcloud Tasks 0.11.3\n
+	BEGIN:VTODO\n
+	CREATED:20181119T183919\n
+	DTSTAMP:20190918T095816\n
+	LAST-MODIFIED:20190918T095816\n
+	UID:pwen4kz18g\n
+	SUMMARY:Test 1\n
+	RELATED-TO;RELTYPE=PARENT:255ce6ca-fbae-4263-89c5-5743f8456b22\n
+	END:VTODO\n
+	END:VCALENDAR`
+
+	it('Should return "PARENT" relation.', () => {
+		const task = new Task(vCalendar4, {})
+		expect(task.related).toEqual('255ce6ca-fbae-4263-89c5-5743f8456b22')
+	})
+
+	const vCalendar5 = `
+	BEGIN:VCALENDAR\n
+	VERSION:2.0\n
+	PRODID:-//Nextcloud Tasks 0.11.3\n
+	BEGIN:VTODO\n
+	CREATED:20181119T183919\n
+	DTSTAMP:20190918T095816\n
+	LAST-MODIFIED:20190918T095816\n
+	UID:pwen4kz18g\n
+	SUMMARY:Test 1\n
+	RELATED-TO:255ce6ca-fbae-4263-89c5-5743f8456b22\n
+	END:VTODO\n
+	END:VCALENDAR`
+
+	it('Should return relation if RELTYPE is not specified.', () => {
+		const task = new Task(vCalendar5, {})
+		expect(task.related).toEqual('255ce6ca-fbae-4263-89c5-5743f8456b22')
+	})
+
+	const vCalendar6 = `
+	BEGIN:VCALENDAR\n
+	VERSION:2.0\n
+	PRODID:-//Nextcloud Tasks 0.11.3\n
+	BEGIN:VTODO\n
+	CREATED:20181119T183919\n
+	DTSTAMP:20190918T095816\n
+	LAST-MODIFIED:20190918T095816\n
+	UID:pwen4kz18g\n
+	SUMMARY:Test 1\n
+	END:VTODO\n
+	END:VCALENDAR`
+
+	it('Should correctly set the parent.', () => {
+		const task = new Task(vCalendar6, {})
+		expect(task.related).toEqual(null)
+		task.related = 'newparent123'
+		expect(task.related).toEqual('newparent123')
+		task.related = 'newparent124'
+		expect(task.related).toEqual('newparent124')
+		task.related = null
+		expect(task.related).toEqual(null)
+	})
+
+	const vCalendar7 = `
+	BEGIN:VCALENDAR\n
+	VERSION:2.0\n
+	PRODID:-//Nextcloud Tasks 0.11.3\n
+	BEGIN:VTODO\n
+	CREATED:20181119T183919\n
+	DTSTAMP:20190918T095816\n
+	LAST-MODIFIED:20190918T095816\n
+	UID:pwen4kz18g\n
+	SUMMARY:Test 1\n
+	RELATED-TO;RELTYPE=CHILD:255ce6ca-fbae-4263-89c5-5743f8456b22\n
+	END:VTODO\n
+	END:VCALENDAR`
+
+	it('Should correctly set the parent if a "RELATED-TO;RELTYPE=CHILD" property already exists.', () => {
+		const task = new Task(vCalendar7, {})
+		expect(task.related).toEqual(null)
+		task.related = 'newparent123'
+		expect(task.related).toEqual('newparent123')
+	})
 })
