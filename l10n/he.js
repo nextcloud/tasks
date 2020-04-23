@@ -12,6 +12,7 @@ OC.L10N.register(
     "Share with users or groups" : "שיתוף עם משתמשים או קבוצות",
     "No users or groups" : "אין משתמשים או קבוצות",
     "can edit" : "יש הרשאת עריכה",
+    "Unshare with {displayName}" : "ביטול שיתוף עם {displayName}",
     "Unable to delete the share." : "לא ניתן למחוק את השיתוף.",
     "Unable to change permissions." : "לא ניתן לשנות הרשאות.",
     "New List" : "רשימה חדשה",
