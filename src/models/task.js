@@ -91,7 +91,7 @@ export default class Task {
 		this._completedDateMoment = moment(this._completedDate, 'YYYYMMDDTHHmmss')
 		this._status = this.vtodo.getFirstPropertyValue('status')
 		this._note = this.vtodo.getFirstPropertyValue('description') || ''
-		this._related = this.vtodo.getFirstPropertyValue('related-to') || null
+		this._related = this.getParent()?.getFirstValue() || null
 		this._hideSubtaks = +this.vtodo.getFirstPropertyValue('x-oc-hidesubtasks') || 0
 		this._hideCompletedSubtaks = +this.vtodo.getFirstPropertyValue('x-oc-hidecompletedsubtasks') || 0
 		this._start = this.vtodo.getFirstPropertyValue('dtstart')
@@ -350,13 +350,30 @@ export default class Task {
 	}
 
 	set related(related) {
-		if (related) {
-			this.vtodo.updatePropertyWithValue('related-to', related)
+		const parent = this.getParent()
+		// If a parent already exists, update or remove it
+		if (parent) {
+			if (related) {
+				parent.setValue(related)
+			} else {
+				this.vtodo.removeProperty(parent)
+			}
+		// Otherwise create a new property, so we don't overwrite RELTYPE=CHILD/SIBLING entries.
 		} else {
-			this.vtodo.removeProperty('related-to')
+			if (related) {
+				this.vtodo.addPropertyWithValue('related-to', related)
+			}
 		}
 		this.updateLastModified()
-		this._related = this.vtodo.getFirstPropertyValue('related-to') || null
+		this._related = this.getParent()?.getFirstValue() || null
+	}
+
+	getParent() {
+		const related = this.vtodo.getAllProperties('related-to')
+		// Return only the first parent for now
+		return related.find(related => {
+			return related.getFirstParameter('reltype') === 'PARENT' || related.getFirstParameter('reltype') === undefined
+		})
 	}
 
 	get pinned() {
