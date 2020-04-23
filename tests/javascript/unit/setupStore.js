@@ -6,6 +6,7 @@ import collections from 'Store/collections'
 import tasks from 'Store/tasks'
 import settings from 'Store/settings'
 import Task from 'Models/task'
+import { loadICS } from '../../assets/loadAsset'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
@@ -29,149 +30,18 @@ const calendarsData = [
 		shares: [],
 		components: ['VTODO'],
 		calendarQuery: () => { return null },
-		tasks: [`
-BEGIN:VCALENDAR\n
-VERSION:2.0\n
-PRODID:-//Nextcloud Tasks 0.11.3\n
-BEGIN:VTODO\n
-CREATED:20181119T183919\n
-DTSTAMP:20190918T095816\n
-LAST-MODIFIED:20190918T095816\n
-UID:pwen4kz18g\n
-SUMMARY:Calendar 1 - Task 1\n
-PRIORITY:1\n
-DUE:20190101T123400\n
-END:VTODO\n
-END:VCALENDAR`,
-		`
-BEGIN:VCALENDAR\n
-VERSION:2.0\n
-PRODID:-//Nextcloud Tasks 0.11.3\n
-BEGIN:VTODO\n
-CREATED:20181119T183919\n
-DTSTAMP:20190918T095816\n
-LAST-MODIFIED:20190918T095816\n
-UID:pwen4kz19g\n
-SUMMARY:Calendar 1 - Task 2\n
-PRIORITY:9\n
-DTSTART:20190918T095816\n
-END:VTODO\n
-END:VCALENDAR`,
-		`
-BEGIN:VCALENDAR\n
-VERSION:2.0\n
-PRODID:-//Nextcloud Tasks 0.11.3\n
-BEGIN:VTODO\n
-CREATED:20181119T183919\n
-DTSTAMP:20190918T095816\n
-LAST-MODIFIED:20190918T095816\n
-UID:pwen4kz20g\n
-SUMMARY:Calendar 1 - Task 3\n
-END:VTODO\n
-END:VCALENDAR`,
-		`
-BEGIN:VCALENDAR\n
-VERSION:2.0\n
-PRODID:-//Nextcloud Tasks 0.11.3\n
-BEGIN:VTODO\n
-CREATED:20181119T183919\n
-DTSTAMP:20190918T095816\n
-LAST-MODIFIED:20190918T095816\n
-RELATED-TO:pwen4kz20g\n
-UID:pwen4kz23g\n
-SUMMARY:Calendar 1 - Task 3 - Subtask 1\n
-DUE:20190101T123400\n
-END:VTODO\n
-END:VCALENDAR`,
-		`
-BEGIN:VCALENDAR\n
-VERSION:2.0\n
-PRODID:-//Nextcloud Tasks 0.11.3\n
-BEGIN:VTODO\n
-CREATED:20181119T183919\n
-DTSTAMP:20190918T095816\n
-LAST-MODIFIED:20190918T095816\n
-RELATED-TO:pwen4kz20g\n
-UID:pwen4kz25g\n
-SUMMARY:Calendar 1 - Task 3 - Subtask 2\n
-DTSTART:20190918T095816\n
-END:VTODO\n
-END:VCALENDAR`,
-		`
-BEGIN:VCALENDAR\n
-VERSION:2.0\n
-PRODID:-//Nextcloud Tasks 0.11.3\n
-BEGIN:VTODO\n
-CREATED:20181119T183919\n
-DTSTAMP:20190918T095816\n
-LAST-MODIFIED:20190918T095816\n
-RELATED-TO:pwen4kz23g\n
-UID:pwen4kz24g\n
-SUMMARY:Calendar 1 - Task 3 - Subtask 1 - Subsubtask 1\n
-PRIORITY:1\n
-END:VTODO\n
-END:VCALENDAR`,
-		`
-BEGIN:VCALENDAR\n
-VERSION:2.0\n
-PRODID:-//Nextcloud Tasks 0.11.3\n
-BEGIN:VTODO\n
-CREATED:20181119T183919\n
-DTSTAMP:20190918T095816\n
-LAST-MODIFIED:20190918T095816\n
-UID:pwen4kz30g\n
-SUMMARY:Calendar 1 - Task 4\n
-DTSTART:20190918T095816\n
-END:VTODO\n
-END:VCALENDAR`,
-		`
-BEGIN:VCALENDAR\n
-VERSION:2.0\n
-PRODID:-//Nextcloud Tasks 0.11.3\n
-BEGIN:VTODO\n
-CREATED:20181119T183919\n
-DTSTAMP:20190918T095816\n
-LAST-MODIFIED:20190918T095816\n
-RELATED-TO:pwen4kz30g\n
-UID:pwen4kz31g\n
-SUMMARY:Calendar 1 - Task 4 - Subtask 1\n
-PRIORITY:1\n
-PERCENT-COMPLETE:100\n
-STATUS:COMPLETED\n
-COMPLETED:20190918T095816\n
-END:VTODO\n
-END:VCALENDAR`,
-		`
-BEGIN:VCALENDAR\n
-VERSION:2.0\n
-PRODID:-//Nextcloud Tasks 0.11.3\n
-BEGIN:VTODO\n
-CREATED:20181119T183919\n
-DTSTAMP:20190918T095816\n
-LAST-MODIFIED:20190918T095816\n
-UID:pwen4kz40g\n
-SUMMARY:Calendar 1 - Task 5\n
-PRIORITY:9\n
-PERCENT-COMPLETE:100\n
-STATUS:COMPLETED\n
-COMPLETED:20190918T095816\n
-DTSTART:20190918T095816\n
-END:VTODO\n
-END:VCALENDAR`,
-		`
-BEGIN:VCALENDAR\n
-VERSION:2.0\n
-PRODID:-//Nextcloud Tasks 0.11.3\n
-BEGIN:VTODO\n
-CREATED:20181119T183919\n
-DTSTAMP:20190918T095816\n
-LAST-MODIFIED:20190918T095816\n
-UID:pwen4kz41g\n
-SUMMARY:Calendar 1 - Task 6\n
-PRIORITY:9\n
-DTSTART:20190102T095816\n
-END:VTODO\n
-END:VCALENDAR`],
+		tasks: [
+			'vcalendars/calendar1/vcalendar-vtodo1',
+			'vcalendars/calendar1/vcalendar-vtodo2',
+			'vcalendars/calendar1/vcalendar-vtodo3',
+			'vcalendars/calendar1/vcalendar-vtodo3_1',
+			'vcalendars/calendar1/vcalendar-vtodo3_1_1',
+			'vcalendars/calendar1/vcalendar-vtodo3_2',
+			'vcalendars/calendar1/vcalendar-vtodo4',
+			'vcalendars/calendar1/vcalendar-vtodo4_1',
+			'vcalendars/calendar1/vcalendar-vtodo5',
+			'vcalendars/calendar1/vcalendar-vtodo6',
+		].map(vcalendar => loadICS(vcalendar)),
 	},
 	{
 		url: 'calendar-2/tmp',
@@ -182,99 +52,15 @@ END:VCALENDAR`],
 		shares: [],
 		components: ['VTODO', 'VEVENT'],
 		calendarQuery: () => { return null },
-		tasks: [`
-BEGIN:VCALENDAR\n
-VERSION:2.0\n
-PRODID:-//Nextcloud Tasks 0.11.3\n
-BEGIN:VTODO\n
-CREATED:20181119T183919\n
-DTSTAMP:20190918T095816\n
-LAST-MODIFIED:20190918T095816\n
-UID:pwen4kz21g\n
-SUMMARY:Calendar 2 - Task 1\n
-DUE:20190103T120000\n
-END:VTODO\n
-END:VCALENDAR`,
-		`
-BEGIN:VCALENDAR\n
-VERSION:2.0\n
-PRODID:-//Nextcloud Tasks 0.11.3\n
-BEGIN:VTODO\n
-CREATED:20181119T183919\n
-DTSTAMP:20190918T095816\n
-LAST-MODIFIED:20190918T095816\n
-UID:pwen4kz22g\n
-SUMMARY:Calendar 2 - Task 2\n
-DUE:20190107T120000\n
-END:VTODO\n
-END:VCALENDAR`,
-		`
-BEGIN:VCALENDAR\n
-VERSION:2.0\n
-PRODID:-//Nextcloud Tasks 0.11.3\n
-BEGIN:VTODO\n
-CREATED:20171119T183919\n
-DTSTAMP:20180918T095816\n
-LAST-MODIFIED:20190918T095816\n
-UID:pwen9kz22g\n
-SUMMARY:Calendar 2 - Task 3\n
-DUE:20180107T120000\n
-END:VTODO\n
-END:VCALENDAR`,
-		`
-BEGIN:VCALENDAR\n
-VERSION:2.0\n
-PRODID:-//Nextcloud Tasks 0.11.3\n
-BEGIN:VTODO\n
-CREATED:20171119T183919\n
-DTSTAMP:20180918T095816\n
-LAST-MODIFIED:20190918T095816\n
-UID:pwen8kz22g\n
-SUMMARY:Calendar 2 - Task 4\n
-DUE:20190101T120000\n
-END:VTODO\n
-END:VCALENDAR`,
-		`
-BEGIN:VCALENDAR\n
-VERSION:2.0\n
-PRODID:-//Nextcloud Tasks 0.11.3\n
-BEGIN:VTODO\n
-CREATED:20171119T183919\n
-DTSTAMP:20180918T095816\n
-LAST-MODIFIED:20190918T095816\n
-RELATED-TO:pwen8kz22g\n
-UID:pwen7kz22g\n
-SUMMARY:Calendar 2 - Task 4 - Subtask 1\n
-DUE:20190103T120000\n
-END:VTODO\n
-END:VCALENDAR`,
-		`
-BEGIN:VCALENDAR\n
-VERSION:2.0\n
-PRODID:-//Nextcloud Tasks 0.11.3\n
-BEGIN:VTODO\n
-CREATED:20171119T183919\n
-DTSTAMP:20180918T095816\n
-LAST-MODIFIED:20190918T095816\n
-RELATED-TO:pwen8kz22g\n
-UID:pwen2kz37g\n
-SUMMARY:Calendar 2 - Task 4 - Subtask 2\n
-DUE:20190203T120000\n
-END:VTODO\n
-END:VCALENDAR`,
-		`
-BEGIN:VCALENDAR\n
-VERSION:2.0\n
-PRODID:-//Nextcloud Tasks 0.11.3\n
-BEGIN:VTODO\n
-CREATED:20171119T183919\n
-DTSTAMP:20180918T095816\n
-LAST-MODIFIED:20190918T095816\n
-RELATED-TO:pwen2kz37g\n
-UID:pwen2kz38g\n
-SUMMARY:Calendar 2 - Task 4 - Subtask 2 - Subsubtask 1\n
-END:VTODO\n
-END:VCALENDAR`],
+		tasks: [
+			'vcalendars/calendar2/vcalendar-vtodo1',
+			'vcalendars/calendar2/vcalendar-vtodo2',
+			'vcalendars/calendar2/vcalendar-vtodo3',
+			'vcalendars/calendar2/vcalendar-vtodo4',
+			'vcalendars/calendar2/vcalendar-vtodo4_1',
+			'vcalendars/calendar2/vcalendar-vtodo4_2',
+			'vcalendars/calendar2/vcalendar-vtodo4_2_1',
+		].map(vcalendar => loadICS(vcalendar)),
 	},
 ]
 
