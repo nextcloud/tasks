@@ -1,59 +1,16 @@
 import { sort } from 'Store/storeHelper'
 import Task from 'Models/task'
 
-const vCalendars = [`
-BEGIN:VCALENDAR\n
-VERSION:2.0\n
-PRODID:-//Nextcloud Tasks 0.11.3\n
-BEGIN:VTODO\n
-CREATED:20170101T180000\n
-DTSTAMP:20180101T180000\n
-LAST-MODIFIED:20180101T180000\n
-UID:task01\n
-SUMMARY:Test 1\n
-DUE:20191119T183901\n
-END:VTODO\n
-END:VCALENDAR`,
-`
-BEGIN:VCALENDAR\n
-VERSION:2.0\n
-PRODID:-//Nextcloud Tasks 0.11.3\n
-BEGIN:VTODO\n
-CREATED:20170101T180000\n
-DTSTAMP:20180101T180000\n
-LAST-MODIFIED:20180101T180000\n
-UID:task02\n
-SUMMARY:Test 1\n
-DUE:20181119T183901\n
-END:VTODO\n
-END:VCALENDAR`,
-`
-BEGIN:VCALENDAR\n
-VERSION:2.0\n
-PRODID:-//Nextcloud Tasks 0.11.3\n
-BEGIN:VTODO\n
-CREATED:20170101T180000\n
-DTSTAMP:20180101T180000\n
-LAST-MODIFIED:20180101T180000\n
-UID:task03\n
-SUMMARY:Test 1\n
-END:VTODO\n
-END:VCALENDAR`,
-`
-BEGIN:VCALENDAR\n
-VERSION:2.0\n
-PRODID:-//Nextcloud Tasks 0.11.3\n
-BEGIN:VTODO\n
-CREATED:20170101T180000\n
-DTSTAMP:20180101T180000\n
-LAST-MODIFIED:20180101T180000\n
-UID:task04\n
-SUMMARY:Test 1\n
-DUE:20151119T183901\n
-END:VTODO\n
-END:VCALENDAR`]
+import { loadICS } from '../../../assets/loadAsset'
 
-const tasks = vCalendars.map((vCalendar) => { return new Task(vCalendar) })
+const vCalendarNames = [
+	'vcalendars/vcalendar-due-2019',
+	'vcalendars/vcalendar-due-2018',
+	'vcalendars/vcalendar-due-undefined',
+	'vcalendars/vcalendar-due-2015',
+]
+
+const tasks = vCalendarNames.map((vCalendar) => { return new Task(loadICS(vCalendar)) })
 
 describe('storeHelper', () => {
 	'use strict'
