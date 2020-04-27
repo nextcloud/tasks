@@ -130,6 +130,8 @@ appstore: clean build-svg-sprite build-js-production
 	--exclude=/.gitattributes \
 	--exclude=/.gitignore \
 	--exclude=/.phpunit.result.cache \
+	--exclude=/.php_cs.cache \
+	--exclude=/.php_cs.dist \
 	--exclude=/.gitlab-ci.yml \
 	--exclude=/.prettierrc.js \
 	--exclude=/.scrutinizer.yml \
@@ -139,6 +141,8 @@ appstore: clean build-svg-sprite build-js-production
 	--exclude=/.v8flags*.json \
 	--exclude=/build.xml \
 	--exclude=/composer.json \
+	--exclude=/composer.lock \
+	--exclude=/composer.phar \
 	--exclude=/CONTRIBUTING.md \
 	--exclude=/issue_template.md \
 	--exclude=/gulpfile.js \
@@ -162,7 +166,8 @@ appstore: clean build-svg-sprite build-js-production
 	--exclude=/node_modules \
 	--exclude=/screenshots/ \
 	--exclude=/test \
-	--exclude=/tests
+	--exclude=/tests \
+	--exclude=/vendor
 ifdef CAN_SIGN
 	mv $(configdir)/config.php $(configdir)/config-2.php
 	$(sign) --path="$(appstore_build_directory)"
