@@ -1,3 +1,17 @@
+## 0.12.2 - 2020-04-27
+
+### Added
+- Updated translations
+- Updated dependencies
+- Update Github actions #939, #952, #958
+- Code cleanup #974
+
+### Fixed
+- Don't show subscriptions anymore #942
+- Fix interpreting RELTYPE=CHILD/SIBLING as parent relation #972
+- Don't cut off task title in task body #917
+- Don't use deprecated globals #953, #963
+
 ## 0.12.1 - 2020-03-08
 
 ### Fixed
