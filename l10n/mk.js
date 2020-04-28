@@ -32,6 +32,7 @@ OC.L10N.register(
     "No errors" : "Нема грешки",
     "Open your browser console for more details" : "Отворете ја конзолата на прелистувачот за повеќе детали",
     "Last modified" : "Скоро изменети",
+    "Priority" : "Приоритет",
     "Tomorrow" : "Утре",
     "Set start date" : "Постави почетен датум",
     "Set due date" : "Постави краен рок",

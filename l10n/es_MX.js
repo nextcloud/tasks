@@ -40,6 +40,7 @@ OC.L10N.register(
     "When shared show full event" : "Al compartir, mostrar el evento completo",
     "When shared show only busy" : "Al compartir, mostrar sólo como ocupado ",
     "When shared hide this event" : "Al compartir, ocultar este evento ",
+    "Canceled" : "Cancelada",
     "An error occurred" : "Ha ocurrido un error"
 },
 "nplurals=2; plural=(n != 1);");
