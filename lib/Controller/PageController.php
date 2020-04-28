@@ -22,8 +22,10 @@
 
 namespace OCA\Tasks\Controller;
 
+use \OCA\Tasks\Service\SettingsService;
 use \OCP\AppFramework\Controller;
 use \OCP\AppFramework\Http\TemplateResponse;
+use \OCP\IInitialStateService;
 use \OCP\IRequest;
 
 /**
@@ -32,11 +34,18 @@ use \OCP\IRequest;
 class PageController extends Controller {
 
 	/**
+	 * @var IInitialStateService
+	 */
+	private $initialStateService;
+
+	/**
 	 * @param string $appName
 	 * @param IRequest $request an instance of the request
 	 */
-	public function __construct(string $appName, IRequest $request) {
+	public function __construct(string $appName, IRequest $request, SettingsService $settingsService, IInitialStateService $initialStateService) {
 		parent::__construct($appName, $request);
+		$this->settingsService = $settingsService;
+		$this->initialStateService = $initialStateService;
 	}
 
 
@@ -47,6 +56,12 @@ class PageController extends Controller {
 	 * @return TemplateResponse
 	 */
 	public function index():TemplateResponse {
+		$settings = $this->settingsService->get();
+
+		foreach ($settings as $setting => $value) {
+			$this->initialStateService->provideInitialState($this->appName, $setting, $value);
+		}
+
 		return new TemplateResponse('tasks', 'main');
 	}
 }

@@ -21,10 +21,12 @@
  */
 'use strict'
 
+import Requests from '../services/requests'
+
+import { loadState } from '@nextcloud/initial-state'
+import { generateUrl } from '@nextcloud/router'
 import Vue from 'vue'
 import Vuex from 'vuex'
-import Requests from '../services/requests'
-import { generateUrl } from '@nextcloud/router'
 
 Vue.use(Vuex)
 
@@ -63,10 +65,10 @@ const mutations = {
 	 * Sets all settings
 	 *
 	 * @param {Object} state Default state
-	 * @param {Object} payload The settings object
+	 * @param {Object} settings The settings object
 	 */
-	setSettings(state, payload) {
-		state.settings = payload.settings
+	setSettings(state, settings) {
+		state.settings = settings
 	},
 
 	/**
@@ -99,17 +101,14 @@ const actions = {
 	 * Requests all app settings from the server
 	 *
 	 * @param {Object} commit The store mutations
-	 * @returns {Promise}
 	 */
 	loadSettings({ commit }) {
-		return new Promise(function(resolve) {
-			Requests.get(generateUrl('apps/tasks/settings'))
-				.then(response => {
-					commit('setSettings', {
-						settings: response.data.data.settings,
-					})
-					resolve()
-				})
+		commit('setSettings', {
+			defaultCalendarId: loadState('tasks', 'defaultCalendarId'),
+			showHidden: loadState('tasks', 'showHidden'),
+			sortOrder: loadState('tasks', 'sortOrder'),
+			sortDirection: loadState('tasks', 'sortDirection'),
+			allDay: loadState('tasks', 'allDay'),
 		})
 	},
 }

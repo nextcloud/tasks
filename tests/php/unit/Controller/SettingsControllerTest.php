@@ -54,19 +54,6 @@ class SettingsControllerTest extends TestCase {
 		);
 	}
 
-	public function testGet() {
-		$return = ['sortOrder' => 0];
-		$this->settingsService->expects($this->once())
-			->method('get')
-			->will($this->returnValue($return));
-
-		$expected = $this->generateResponse(function () use ($return) {
-			return ['settings' => $return];
-		});
-		$response = $this->controller->get();
-		$this->assertEquals($expected, $response);
-	}
-
 	public function testSet() {
 		$this->settingsService->expects($this->once())
 			->method('set')

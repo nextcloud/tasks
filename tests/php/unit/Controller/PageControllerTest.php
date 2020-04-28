@@ -11,6 +11,7 @@
 
 namespace OCA\Tasks\Controller;
 
+use OCA\Tasks\Service\SettingsService;
 use OCP\AppFramework\Http\TemplateResponse;
 use PHPUnit\Framework\TestCase as Base;
 
@@ -19,10 +20,16 @@ class PageControllerTest extends Base {
 
 	public function setUp(): void {
 		$request = $this->getMockBuilder('OCP\IRequest')->getMock();
+		$settingsService = $this->getMockBuilder(SettingsService::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$initialStateService = $this->getMockBuilder('OCP\IInitialStateService')->getMock();
 
 		$this->controller = new PageController(
 			'tasks',
-			$request
+			$request,
+			$settingsService,
+			$initialStateService
 		);
 	}
 

@@ -34,7 +34,7 @@ class SettingsService {
 	/**
 	 * @var IConfig
 	 */
-	private $settings;
+	private $config;
 
 	/**
 	 * @var string
@@ -46,9 +46,9 @@ class SettingsService {
 	 * @param IConfig $settings
 	 * @param string $appName
 	 */
-	public function __construct(string $userId, IConfig $settings, string $appName) {
+	public function __construct(string $userId, IConfig $config, string $appName) {
 		$this->userId = $userId;
-		$this->settings = $settings;
+		$this->config = $config;
 		$this->appName = $appName;
 	}
 
@@ -58,15 +58,19 @@ class SettingsService {
 	 * @return array
 	 */
 	public function get():array {
-		$settings = [
-			'defaultCalendarId' => (string)$this->settings->getUserValue($this->userId, $this->appName,'various_defaultCalendarId'),
-			'showHidden' => (int)$this->settings->getUserValue($this->userId, $this->appName,'various_showHidden'),
-			'sortOrder' => (string)$this->settings->getUserValue($this->userId, $this->appName,'various_sortOrder'),
-			'sortDirection' => (bool)$this->settings->getUserValue($this->userId, $this->appName,'various_sortDirection'),
-			'allDay' => (bool)$this->settings->getUserValue($this->userId, $this->appName,'various_allDay'),
-			'userID' => $this->userId
+		$defaultCalendarId = (string)$this->config->getUserValue($this->userId, $this->appName, 'various_defaultCalendarId');
+		$showHidden = (bool)$this->config->getUserValue($this->userId, $this->appName, 'various_showHidden', false);
+		$sortOrder = (string)$this->config->getUserValue($this->userId, $this->appName, 'various_sortOrder', 'default');
+		$sortDirection = (bool)$this->config->getUserValue($this->userId, $this->appName, 'various_sortDirection', false);
+		$allDay = (bool)$this->config->getUserValue($this->userId, $this->appName, 'various_allDay', false);
+
+		return [
+			'defaultCalendarId' => $defaultCalendarId,
+			'showHidden' => $showHidden,
+			'sortOrder' => $sortOrder,
+			'sortDirection' => $sortDirection,
+			'allDay' => $allDay
 		];
-		return $settings;
 	}
 
 	/**
@@ -77,7 +81,7 @@ class SettingsService {
 	 * @return bool
 	 */
 	public function set($setting, $value):bool {
-		$this->settings->setUserValue($this->userId, $this->appName, 'various_'.$setting, $value);
+		$this->config->setUserValue($this->userId, $this->appName, 'various_'.$setting, $value);
 		return true;
 	}
 }
