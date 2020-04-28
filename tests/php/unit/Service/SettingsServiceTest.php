@@ -52,10 +52,9 @@ class SettingsServiceTest extends TestCase {
 	public function testGet() {
 		$return = [
 			'defaultCalendarId' => 'personal',
-			'showHidden' => 1,
+			'showHidden' => false,
 			'sortOrder' => 'default',
 			'sortDirection' => false,
-			'userID' => $this->userId,
 			'allDay' => false
 		];
 
@@ -71,28 +70,28 @@ class SettingsServiceTest extends TestCase {
 				$this->userId,
 				$this->appName,
 				'various_showHidden',
-				'',
-				1
+				false,
+				false
 			],
 			[
 				$this->userId,
 				$this->appName,
 				'various_sortOrder',
-				'',
+				'default',
 				'default'
 			],
 			[
 				$this->userId,
 				$this->appName,
 				'various_sortDirection',
-				'',
+				false,
 				false
 			],
 			[
 				$this->userId,
 				$this->appName,
 				'various_allDay',
-				'',
+				false,
 				false
 			]
 		];

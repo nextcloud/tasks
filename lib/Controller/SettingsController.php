@@ -48,15 +48,6 @@ class SettingsController extends Controller {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function get() {
-		return $this->generateResponse(function () {
-			return ['settings' => $this->settingsService->get()];
-		});
-	}
-
-	/**
-	 * @NoAdminRequired
-	 */
 	public function set($setting, $value) {
 		return $this->generateResponse(function () use ($setting, $value) {
 			return $this->settingsService->set($setting, $value);
