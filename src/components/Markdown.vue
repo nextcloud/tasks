@@ -55,7 +55,7 @@ export default {
 			})
 			.use(Mitl)
 		return {
-			md: md,
+			md,
 		}
 	},
 	watch: {

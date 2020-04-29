@@ -69,7 +69,7 @@ export default {
 		 *
 		 * @param {Object} $event The event which caused the drop
 		 */
-		onAdd: function($event) {
+		onAdd($event) {
 			let task
 			// The task to move
 			const taskAttribute = $event.item.attributes['task-id']
@@ -126,7 +126,7 @@ export default {
 		 * @param {Task} task The task to change
 		 * @param {Object} $event The event which caused the move
 		 */
-		prepareMoving: function(task, $event) {
+		prepareMoving(task, $event) {
 			let parent, calendar
 			// The new calendar --> make the moved task a root task
 			const calendarAttribute = $event.to.attributes['calendar-id']
@@ -145,7 +145,7 @@ export default {
 				calendar = task.calendar
 			}
 			// Move the task to the appropriate calendar and parent.
-			this.moveTask({ task: task, calendar: calendar, parent: parent })
+			this.moveTask({ task, calendar, parent })
 		},
 
 		/**
@@ -154,7 +154,7 @@ export default {
 		 * @param {Task} task The task to change
 		 * @param {Object} $event The event which caused the change
 		 */
-		prepareCollecting: function(task, $event) {
+		prepareCollecting(task, $event) {
 			// The new collection --> make the moved task a member of this collection
 			// This is necessary for the collections {starred, today, completed, uncompleted and week}
 			const collectionAttribute = $event.to.attributes['collection-id']
@@ -164,21 +164,21 @@ export default {
 				collectionId = collectionId.split('-')
 				switch (collectionId[0]) {
 				case 'starred':
-					this.setPriority({ task: task, priority: 1 })
+					this.setPriority({ task, priority: 1 })
 					break
 				case 'completed':
-					this.setPercentComplete({ task: task, complete: 100 })
+					this.setPercentComplete({ task, complete: 100 })
 					break
 				case 'uncompleted':
 					if (task.completed) {
-						this.setPercentComplete({ task: task, complete: 0 })
+						this.setPercentComplete({ task, complete: 0 })
 					}
 					break
 				case 'today':
-					this.setDate({ task: task, day: 0 })
+					this.setDate({ task, day: 0 })
 					break
 				case 'week':
-					this.setDate({ task: task, day: collectionId[1] })
+					this.setDate({ task, day: collectionId[1] })
 					break
 				}
 			}

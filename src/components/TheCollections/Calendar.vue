@@ -108,11 +108,11 @@ export default {
 				return this.$store.state.settings.settings.showHidden
 			},
 			set(value) {
-				this.$store.dispatch('setSetting', { type: 'showHidden', value: value })
+				this.$store.dispatch('setSetting', { type: 'showHidden', value })
 			},
 		},
 
-		inputString: function() {
+		inputString() {
 			return this.$t('tasks', 'Add a task to "{task}"…', { task: this.calendar.displayName })
 		},
 
@@ -121,7 +121,7 @@ export default {
 		 *
 	 	 * @returns {String} The string to show for the completed tasks count
 		 */
-		completedCountString: function() {
+		completedCountString() {
 			return this.$n('tasks', '%n Completed Task', '%n Completed Tasks', this.completedCount(this.calendarId))
 		},
 		...mapGetters({
@@ -138,16 +138,16 @@ export default {
 			'createTask',
 		]),
 		sort,
-		toggleHidden: function() {
+		toggleHidden() {
 			this.showHidden = +!this.showHidden
 		},
 
-		clearNewTask: function(event) {
+		clearNewTask(event) {
 			event.target.blur()
 			this.newTaskName = ''
 		},
 
-		addTask: function() {
+		addTask() {
 			this.createTask({ summary: this.newTaskName, calendar: this.calendar })
 			this.newTaskName = ''
 		},

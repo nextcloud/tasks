@@ -406,7 +406,7 @@ export default {
 	},
 	filters: {
 	},
-	data: function() {
+	data() {
 		return {
 			loading: false,
 			edit: '',
@@ -463,14 +463,14 @@ export default {
 		 *
 		 * @returns {Boolean} Are the dates all-day
 		 */
-		allDay: function() {
+		allDay() {
 			if (this.task.startMoment.isValid() || this.task.dueMoment.isValid()) {
 				return this.task.allDay
 			} else {
 				return this.$store.state.settings.settings.allDay
 			}
 		},
-		startDateString: function() {
+		startDateString() {
 			const $t = this.$t
 			if (this.task.startMoment.isValid()) {
 				if (this.allDay) {
@@ -485,7 +485,7 @@ export default {
 						lastDay: this.$t('tasks', '[Started yesterday]'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LL" will be replaced with a date, e.g. 'September 4 1986'. Please translate the string, and keep the brackets and the "LL".
 						lastWeek: this.$t('tasks', '[Started on] LL'),
-						sameElse: function(now) {
+						sameElse(now) {
 							if (this.isBefore(now)) {
 								// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LL" will be replaced with a date, e.g. 'September 4 1986'. Please translate the string, and keep the brackets and the "LL".
 								return $t('tasks', '[Started on] LL')
@@ -497,7 +497,7 @@ export default {
 					})
 				} else {
 					return this.task.startMoment.calendar(null, {
-						sameDay: function(now) {
+						sameDay(now) {
 							if (this.isBefore(now)) {
 								// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LT" will be replaced with a time, e.g. '08:30 PM'. Please translate the string and keep the brackets and the "LT".
 								return $t('tasks', '[Started today at] LT')
@@ -514,7 +514,7 @@ export default {
 						lastDay: this.$t('tasks', '[Started yesterday at] LT'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LL" will be replaced with a date, e.g. 'September 4 1986' and "LT" will be replaced with a time, e.g. '08:30 PM'. Please translate the string and keep the brackets the "LL" and the "LT".
 						lastWeek: this.$t('tasks', '[Started on] LL [at] LT'),
-						sameElse: function(now) {
+						sameElse(now) {
 							if (this.isBefore(now)) {
 								// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LL" will be replaced with a date, e.g. 'September 4 1986' and "LT" will be replaced with a time, e.g. '08:30 PM'. Please translate the string and keep the brackets the "LL" and the "LT".
 								return $t('tasks', '[Started on] LL [at] LT')
@@ -529,7 +529,7 @@ export default {
 				return this.$t('tasks', 'Set start date')
 			}
 		},
-		dueDateString: function() {
+		dueDateString() {
 			const $t = this.$t
 			if (this.task.dueMoment.isValid()) {
 				if (this.allDay) {
@@ -544,7 +544,7 @@ export default {
 						lastDay: this.$t('tasks', '[Was due yesterday]'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LL" will be replaced with a date, e.g. 'September 4 1986'. Please translate the string, but keep the brackets and the "LL".
 						lastWeek: this.$t('tasks', '[Was due on] LL'),
-						sameElse: function(now) {
+						sameElse(now) {
 							if (this.isBefore(now)) {
 								// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string, but keep the brackets and the "LL".
 								return $t('tasks', '[Was due on] LL')
@@ -556,7 +556,7 @@ export default {
 					})
 				} else {
 					return this.task.dueMoment.calendar(null, {
-						sameDay: function(now) {
+						sameDay(now) {
 							if (this.isBefore(now)) {
 								// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LT" will be replaced with a time, e.g. '08:30 PM'. Please translate the string and keep the brackets and the "LT".
 								return $t('tasks', '[Was due today at] LT')
@@ -573,7 +573,7 @@ export default {
 						lastDay: this.$t('tasks', '[Was due yesterday at] LT'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LL" will be replaced with a date, e.g. 'September 4 1986' and "LT" will be replaced with a time, e.g. '08:30 PM'. Please translate the string and keep the brackets the "LL" and the "LT".
 						lastWeek: this.$t('tasks', '[Was due on] LL [at] LT'),
-						sameElse: function(now) {
+						sameElse(now) {
 							if (this.isBefore(now)) {
 								// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. "LL" will be replaced with a date, e.g. 'September 4 1986' and "LT" will be replaced with a time, e.g. '08:30 PM'. Please translate the string and keep the brackets the "LL" and the "LT".
 								return $t('tasks', '[Was due on] LL [at] LT')
@@ -588,15 +588,15 @@ export default {
 				return this.$t('tasks', 'Set due date')
 			}
 		},
-		taskInfo: function() {
+		taskInfo() {
 			return this.$t('tasks', 'Last modified {date}', { date: this.task.modifiedMoment.calendar() })
 				+ '<br />' + this.$t('tasks', 'Created {date}', { date: this.task.createdMoment.calendar() })
 				+ (this.task.completed ? ('<br />' + this.$t('tasks', 'Completed {date}', { date: this.task.completedDateMoment.calendar() })) : '')
 		},
-		isAllDayPossible: function() {
+		isAllDayPossible() {
 			return !this.readOnly && (this.task.due || this.task.start || ['start', 'due'].includes(this.edit))
 		},
-		priorityClass: function() {
+		priorityClass() {
 			if (+this.task.priority > 5) {
 				return 'low'
 			} else if (+this.task.priority === 5) {
@@ -607,7 +607,7 @@ export default {
 				return ''
 			}
 		},
-		priorityString: function() {
+		priorityString() {
 			if (+this.task.priority === 0) {
 				return this.$t('tasks', 'No priority assigned')
 			} else if (+this.task.priority > 0 && +this.task.priority < 5) {
@@ -619,38 +619,38 @@ export default {
 			}
 			return ''
 		},
-		completeString: function() {
+		completeString() {
 			return this.$t('tasks', '{percent} % completed', { percent: this.task.complete })
 		},
-		iconStar: function() {
+		iconStar() {
 			if (+this.task.priority) {
 				return 'sprt-color sprt-task-star-' + this.priorityClass
 			} else {
 				return 'icon-sprt-bw sprt-task-star'
 			}
 		},
-		iconPinned: function() {
+		iconPinned() {
 			if (this.task.pinned) {
 				return 'icon-sprt-bw sprt-pinned'
 			} else {
 				return 'icon-sprt-bw sprt-pinned-off'
 			}
 		},
-		iconPercent: function() {
+		iconPercent() {
 			if (this.task.complete > 0) {
 				return 'sprt-color sprt-percent-active'
 			} else {
 				return 'icon-sprt-bw sprt-percent'
 			}
 		},
-		iconCategories: function() {
+		iconCategories() {
 			if (this.task.categories.length > 0) {
 				return 'sprt-color sprt-tag-active'
 			} else {
 				return 'icon-sprt-bw sprt-tag'
 			}
 		},
-		iconStatus: function() {
+		iconStatus() {
 			if (this.task.status) {
 				return 'sprt-color sprt-status'
 			} else {
@@ -690,7 +690,7 @@ export default {
 	 * @param {Route} from The current route being navigated away from.
 	 * @param {Function} next This function must be called to resolve the hook.
 	 */
-	beforeRouteLeave: function(to, from, next) {
+	beforeRouteLeave(to, from, next) {
 		this.finishEditing(this.edit)
 		next()
 	},
@@ -702,7 +702,7 @@ export default {
 	 * @param {Route} from The current route being navigated away from.
 	 * @param {Function} next This function must be called to resolve the hook.
 	 */
-	beforeRouteUpdate: function(to, from, next) {
+	beforeRouteUpdate(to, from, next) {
 		this.finishEditing(this.edit)
 		next()
 	},
@@ -746,12 +746,12 @@ export default {
 			}
 		},
 
-		removeTask: function() {
+		removeTask() {
 			this.deleteTask({ task: this.task, dav: true })
 			this.closeDetails()
 		},
 
-		closeDetails: function() {
+		closeDetails() {
 			if (this.$route.params.calendarId) {
 				this.$router.push({ name: 'calendars', params: { calendarId: this.$route.params.calendarId } })
 			} else {
@@ -759,7 +759,7 @@ export default {
 			}
 		},
 
-		startDateIcon: function(date) {
+		startDateIcon(date) {
 			if (date.isValid()) {
 				return `sprt-color sprt-startdate-${overdue(date) ? 'overdue' : 'due'}`
 			} else {
@@ -767,7 +767,7 @@ export default {
 			}
 		},
 
-		dueDateIcon: function(date) {
+		dueDateIcon(date) {
 			if (date.isValid()) {
 				return `sprt-color sprt-duedate-${overdue(date) ? 'overdue' : 'due'}`
 			} else {
@@ -778,9 +778,9 @@ export default {
 		/**
 		 * Checks if a date is overdue
 		 */
-		overdue: overdue,
+		overdue,
 
-		editProperty: function(type, event) {
+		editProperty(type, event) {
 			// don't start to edit the property again
 			// if the confirm button of the datepicker was clicked
 			// don't start to edit if a linkified link was clicked
@@ -815,7 +815,7 @@ export default {
 			}
 		},
 
-		finishEditing: function(type, $event) {
+		finishEditing(type, $event) {
 			// For some reason the click-outside handlers fire for the datepicker month and year buttons!?
 			if ($event && $event.target.classList.contains('mx-btn')) {
 				return
@@ -825,12 +825,12 @@ export default {
 			}
 		},
 
-		cancelEditing: function(type) {
+		cancelEditing(type) {
 			this.edit = ''
 			this.tmpTask[type] = this.task[type]
 		},
 
-		setProperty: function(type, value) {
+		setProperty(type, value) {
 			switch (type) {
 			case 'summary':
 				this.setSummary({ task: this.task, summary: value })
@@ -859,7 +859,7 @@ export default {
 		 *
 		 * @returns {Date} The start date moment
 		 */
-		initStartDate: function() {
+		initStartDate() {
 			const start = this.task.startMoment
 			if (!start.isValid()) {
 				const due = this.task.dueMoment
@@ -878,7 +878,7 @@ export default {
 		 *
 		 * @returns {Date} The due date moment
 		 */
-		initDueDate: function() {
+		initDueDate() {
 			const due = this.task.dueMoment
 			if (!due.isValid()) {
 				const start = this.task.startMoment
@@ -893,35 +893,35 @@ export default {
 			return due
 		},
 
-		setStartDate: function(date) {
+		setStartDate(date) {
 			this.setStartDateTime(moment(date), 'day')
 		},
 
-		setStartTime: function(time) {
+		setStartTime(time) {
 			this.setStartDateTime(moment(time), 'time')
 		},
 
-		setStartDateTime: function(datetime, type = null) {
+		setStartDateTime(datetime, type = null) {
 			this.tmpTask.start = this.setDatePartial(this.tmpTask.start.clone(), moment(datetime), type)
 		},
 
-		setDueDate: function(date) {
+		setDueDate(date) {
 			this.setDueDateTime(moment(date), 'day')
 		},
 
-		setDueTime: function(time) {
+		setDueTime(time) {
 			this.setDueDateTime(moment(time), 'time')
 		},
 
-		setDueDateTime: function(datetime, type = 'day') {
+		setDueDateTime(datetime, type = 'day') {
 			this.tmpTask.due = this.setDatePartial(this.tmpTask.due.clone(), moment(datetime), type)
 		},
 
-		changeClass: function(classification) {
+		changeClass(classification) {
 			this.setClassification({ task: this.task, classification: classification.type })
 		},
 
-		changeStatus: function(status) {
+		changeStatus(status) {
 			this.setStatus({ task: this.task, status: status.type })
 		},
 
@@ -933,7 +933,7 @@ export default {
 		 * @param {String} type Value indicating what values to set
 		 * @returns {Moment} The altered moment
 		 */
-		setDatePartial: function(date, part, type = null) {
+		setDatePartial(date, part, type = null) {
 			// Set only year, month and day
 			if (type === 'day') {
 				if (date.isValid()) {
@@ -959,8 +959,8 @@ export default {
 		 *
 		 * @param {Array} categories The new categories
 		 */
-		updateCategories: function(categories) {
-			this.setCategories({ task: this.task, categories: categories })
+		updateCategories(categories) {
+			this.setCategories({ task: this.task, categories })
 		},
 
 		/**
@@ -968,12 +968,12 @@ export default {
 		 *
 		 * @param {String} category The name of the category to add
 		 */
-		updateCategory: function(category) {
-			this.addCategory({ task: this.task, category: category })
+		updateCategory(category) {
+			this.addCategory({ task: this.task, category })
 		},
 
 		async changeCalendar(calendar) {
-			const task = await this.moveTask({ task: this.task, calendar: calendar })
+			const task = await this.moveTask({ task: this.task, calendar })
 			// If we are in a calendar view, we have to navigate to the new calendar.
 			if (this.$route.params.calendarId) {
 				this.$router.push({ name: 'calendarsTask', params: { calendarId: task.calendar.id, taskId: task.uri } })

@@ -96,7 +96,7 @@ export default {
 		 *
 		 * @returns {Array} the calendars which should be shown in the collection
 		 */
-		filteredCalendars: function() {
+		filteredCalendars() {
 			const filteredCalendars = []
 			this.calendars.forEach(calendar => {
 				calendar.filteredTasks = Object.values(calendar.tasks).filter(task => {
@@ -109,11 +109,11 @@ export default {
 			return filteredCalendars
 		},
 
-		collectionId: function() {
+		collectionId() {
 			return this.$route.params.collectionId
 		},
 
-		inputString: function() {
+		inputString() {
 			switch (this.collectionId) {
 			case 'starred':
 				return this.$t('tasks', 'Add an important task to "{calendar}"…', { calendar: this.calendar.displayName })
@@ -137,12 +137,12 @@ export default {
 			'createTask',
 		]),
 		sort,
-		clearNewTask: function(event) {
+		clearNewTask(event) {
 			event.target.blur()
 			this.newTaskName = ''
 		},
 
-		addTask: function() {
+		addTask() {
 			const task = { summary: this.newTaskName }
 
 			// If the task is created in a collection view,

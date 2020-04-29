@@ -157,7 +157,7 @@ export default {
 		ClickOutside,
 	},
 	filters: {
-		counterFormatter: function(count) {
+		counterFormatter(count) {
 			switch (false) {
 			case count !== 0:
 				return ''
@@ -360,11 +360,11 @@ export default {
 			if (taskUri) {
 				const task = this.getTask(taskUri)
 				if (this.calendar !== task.calendar) {
-					this.moveTask({ task: task, calendar: this.calendar, parent: undefined })
+					this.moveTask({ task, calendar: this.calendar, parent: undefined })
 				}
 			}
 		},
-		showTooltip: function(target) {
+		showTooltip(target) {
 			return this.tooltipTarget === target
 		},
 		editCalendar() {
@@ -414,7 +414,7 @@ export default {
 					}, 2000)
 				})
 		},
-		setColor: function(color) {
+		setColor(color) {
 			this.selectedColor = color
 		},
 		save() {
@@ -424,7 +424,7 @@ export default {
 			this.changeCalendar({ calendar: this.calendar, newName: this.newCalendarName, newColor: this.selectedColor })
 			this.editing = false
 		},
-		checkName: function(event, calendar, callback) {
+		checkName(event, calendar, callback) {
 			const calendarId = calendar ? calendar.id : ''
 			const check = this.isNameAllowed(this.newCalendarName, calendarId)
 			this.tooltipMessage = check.msg
@@ -446,7 +446,7 @@ export default {
 				this.nameError = false
 			}
 		},
-		isNameAllowed: function(name, id) {
+		isNameAllowed(name, id) {
 			const check = {
 				allowed: false,
 				msg: '',

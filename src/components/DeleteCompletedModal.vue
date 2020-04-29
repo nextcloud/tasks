@@ -143,7 +143,7 @@ export default {
 		},
 		deleteCompletedTasks() {
 			this.tasks.map(
-				(task) => this.deleteTask({ task: task, dav: true })
+				(task) => this.deleteTask({ task, dav: true })
 			)
 		},
 	},

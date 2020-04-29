@@ -207,7 +207,7 @@ export default {
 			searchQuery: 'searchQuery',
 		}),
 
-		dueDateString: function() {
+		dueDateString() {
 			return this.task.dueMoment.isValid()
 				? this.task.dueMoment.calendar(null, {
 					lastDay: this.$t('tasks', '[Yesterday]'),
@@ -220,7 +220,7 @@ export default {
 				: ''
 		},
 
-		collectionId: function() {
+		collectionId() {
 			if (this.collectionString) {
 				return this.collectionString.split('-')[0]
 			} else {
@@ -228,7 +228,7 @@ export default {
 			}
 		},
 
-		collectionParam: function() {
+		collectionParam() {
 			try {
 				return this.collectionString.split('-')[1]
 			} catch {
@@ -236,7 +236,7 @@ export default {
 			}
 		},
 
-		iconStar: function() {
+		iconStar() {
 			if (+this.task.priority > 5) {
 				return 'sprt-color sprt-task-star-low'
 			} else if (+this.task.priority === 5) {
@@ -248,7 +248,7 @@ export default {
 			}
 		},
 
-		hasCompletedSubtasks: function() {
+		hasCompletedSubtasks() {
 			return Object.values(this.task.subTasks).some(subTask => {
 				return subTask.completed
 			})
@@ -264,7 +264,7 @@ export default {
 		 * @param {String} task the name of the parent task
 		 * @returns {String} the placeholder string to show
 		 */
-		subtasksCreationPlaceholder: function() {
+		subtasksCreationPlaceholder() {
 			return this.$t('tasks', 'Add a subtask to "{task}"…', { task: this.task.summary })
 		},
 
@@ -275,7 +275,7 @@ export default {
 		 *
 		 * @returns {Array} the array with the subtasks to show
 		 */
-		filteredSubtasks: function() {
+		filteredSubtasks() {
 			let subTasks = Object.values(this.task.subTasks)
 			if (this.task.hideCompletedSubtasks) {
 				subTasks = subTasks.filter(task => {
@@ -296,7 +296,7 @@ export default {
 		 *
 		 * @returns {Boolean} If the task matches
 		 */
-		showTask: function() {
+		showTask() {
 			// If the task directly matches the search, we show it.
 			if (this.task.matches(this.searchQuery)) {
 				return true
@@ -310,7 +310,7 @@ export default {
 		 *
 		 * @returns {Boolean} If we show the subtasks
 		 */
-		showSubtasks: function() {
+		showSubtasks() {
 			if (!this.task.hideSubtasks || this.searchQuery || this.isTaskOpen() || this.isDescendantOpen()) {
 				return true
 			} else {
@@ -350,7 +350,7 @@ export default {
 		/**
 		 * Checks if a date is overdue
 		 */
-		overdue: overdue,
+		overdue,
 
 		/**
 		 * Set task uri in the data transfer object
@@ -370,7 +370,7 @@ export default {
 		 * @param {String} searchQuery The string to find
 		 * @returns {Boolean} If the task matches
 		 */
-		searchSubTasks: searchSubTasks,
+		searchSubTasks,
 
 		/**
 		 * Checks whether the task is currently open in the details view
@@ -378,7 +378,7 @@ export default {
 		 * @param {Task} task The task to check
 		 * @returns {Boolean} If it is open
 		 */
-		isTaskOpen: function(task = this.task) {
+		isTaskOpen(task = this.task) {
 			return (task.uri === this.$route.params.taskId) && (this.collectionParam === this.$route.params.collectionParam)
 		},
 
@@ -432,7 +432,7 @@ export default {
 		 * @param {Task} task The task to check
 		 * @returns {Boolean} If a descendeant is open
 		 */
-		isDescendantOpen: function(task = this.task) {
+		isDescendantOpen(task = this.task) {
 			if (this.collectionParam !== this.$route.params.collectionParam) {
 				return false
 			}
@@ -458,7 +458,7 @@ export default {
 		 * @param {Object} $event the event that triggered navigation
 		 * @param {String} route the route to navigate to
 		 */
-		navigate: function($event) {
+		navigate($event) {
 			if (!$event.target.closest('.no-nav')
 				&& (this.$route.params.taskId !== this.task.uri || this.$route.params.collectionParam !== this.collectionParam)) {
 				if (!this.task.loadedCompleted) {
@@ -487,7 +487,7 @@ export default {
 			)
 		},
 
-		closeSubtaskInput: function(e) {
+		closeSubtaskInput(e) {
 			// don't cancel the task creation if the own add-subtask button is clicked
 			if (this.justOpened) {
 				this.justOpened = false
@@ -496,7 +496,7 @@ export default {
 			this.showSubtaskInput = false
 		},
 
-		addTask: function() {
+		addTask() {
 			const task = { summary: this.newTaskName, calendar: this.task.calendar, related: this.task.uid }
 
 			// If the task is created in a collection view,

@@ -46,20 +46,20 @@ export default {
 		}
 	},
 	computed: {
-		status: function() {
+		status() {
 			return this.task.syncstatus
 		},
 	},
 	watch: {
-		status: function(newStatus) {
+		status(newStatus) {
 			this.checkTimeout(newStatus)
 		},
 	},
-	mounted: function() {
+	mounted() {
 		this.checkTimeout(this.status)
 	},
 	methods: {
-		react: function() {
+		react() {
 			// Prevent event dispatching if action is null (e.g. successful store)
 			if (this.status.action === null) {
 				return
@@ -70,7 +70,7 @@ export default {
 					this.task.conflict = false
 				})
 		},
-		checkTimeout: function(newStatus) {
+		checkTimeout(newStatus) {
 			if (newStatus) {
 				if (this.resetStatusTimeout) {
 					clearTimeout(this.resetStatusTimeout)

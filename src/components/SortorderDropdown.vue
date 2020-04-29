@@ -129,7 +129,7 @@ export default {
 				this.$store.dispatch('setSetting', { type: 'sortDirection', value: +direction })
 			},
 		},
-		sortOrderIcon: function() {
+		sortOrderIcon() {
 			for (const order of this.orders) {
 				if (order.id === this.sortOrder) {
 					return `${order.icon}__${this.sortDirection ? 'down' : 'up'}`

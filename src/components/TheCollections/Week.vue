@@ -92,7 +92,7 @@ export default {
 		 *
 		 * @returns {Array} the array with the days
 		 */
-		days: function() {
+		days() {
 			// Get all uncompleted root tasks
 			const tasks = this.uncompletedRootTasks(this.tasks)
 
@@ -113,7 +113,7 @@ export default {
 			return days.filter(day => day.tasks.length)
 		},
 
-		inputString: function() {
+		inputString() {
 			return this.$t('tasks', 'Add a task due today to "{calendar}"…', { calendar: this.calendar.displayName })
 		},
 	},
@@ -124,7 +124,7 @@ export default {
 
 		sort,
 
-		dayString: function(day) {
+		dayString(day) {
 			const date = moment().add(day, 'day')
 			let dayString
 			if (day === 0) {
@@ -137,12 +137,12 @@ export default {
 			return dayString + ', ' + date.format('LL')
 		},
 
-		clearNewTask: function(event) {
+		clearNewTask(event) {
 			event.target.blur()
 			this.newTaskName = ''
 		},
 
-		addTask: function() {
+		addTask() {
 			const task = { summary: this.newTaskName }
 
 			task.due = moment().startOf('day').format('YYYY-MM-DDTHH:mm:ss')
