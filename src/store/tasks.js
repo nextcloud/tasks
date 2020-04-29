@@ -641,21 +641,21 @@ const actions = {
 					context.commit('appendTask', task)
 					context.commit('addTaskToCalendar', task)
 					const parent = context.getters.getTaskByUid(task.related)
-					context.commit('addTaskToParent', { task: task, parent: parent })
+					context.commit('addTaskToParent', { task, parent })
 
 					// Open the details view for the new task
 					const calendarId = context.rootState.route.params.calendarId
 					const collectionId = context.rootState.route.params.collectionId
 					if (calendarId) {
-						router.push({ name: 'calendarsTask', params: { calendarId: calendarId, taskId: task.uri } })
+						router.push({ name: 'calendarsTask', params: { calendarId, taskId: task.uri } })
 					} else if (collectionId) {
 						if (collectionId === 'week') {
 							router.push({
 								name: 'collectionsParamTask',
-								params: { collectionId: collectionId, taskId: task.uri, collectionParam: '0' },
+								params: { collectionId, taskId: task.uri, collectionParam: '0' },
 							})
 						} else {
-							router.push({ name: 'collectionsTask', params: { collectionId: collectionId, taskId: task.uri } })
+							router.push({ name: 'collectionsTask', params: { collectionId, taskId: task.uri } })
 						}
 					}
 
@@ -685,7 +685,7 @@ const actions = {
 		function deleteTaskFromStore() {
 			context.commit('deleteTask', task)
 			const parent = context.getters.getTaskByUid(task.related)
-			context.commit('deleteTaskFromParent', { task: task, parent: parent })
+			context.commit('deleteTaskFromParent', { task, parent })
 			context.commit('deleteTaskFromCalendar', task)
 		}
 		// delete all subtasks first
@@ -862,9 +862,9 @@ const actions = {
 			return
 		}
 		if (task.completed) {
-			await context.dispatch('setPercentComplete', { task: task, complete: 0 })
+			await context.dispatch('setPercentComplete', { task, complete: 0 })
 		} else {
-			await context.dispatch('setPercentComplete', { task: task, complete: 100 })
+			await context.dispatch('setPercentComplete', { task, complete: 100 })
 		}
 	},
 
@@ -889,7 +889,7 @@ const actions = {
 				}
 			}))
 		}
-		context.commit('setComplete', { task: task, complete: complete })
+		context.commit('setComplete', { task, complete })
 		context.dispatch('scheduleTaskUpdate', task)
 	},
 
@@ -960,7 +960,7 @@ const actions = {
 	 * @param {Task} task The task to update
 	 */
 	async setSummary(context, { task, summary }) {
-		context.commit('setSummary', { task: task, summary: summary })
+		context.commit('setSummary', { task, summary })
 		context.dispatch('scheduleTaskUpdate', task)
 	},
 
@@ -971,7 +971,7 @@ const actions = {
 	 * @param {Task} task The task to update
 	 */
 	async setNote(context, { task, note }) {
-		context.commit('setNote', { task: task, note: note })
+		context.commit('setNote', { task, note })
 		context.dispatch('scheduleTaskUpdate', task)
 	},
 
@@ -982,7 +982,7 @@ const actions = {
 	 * @param {Task} task The task to update
 	 */
 	async setCategories(context, { task, categories }) {
-		context.commit('setCategories', { task: task, categories: categories })
+		context.commit('setCategories', { task, categories })
 		context.dispatch('scheduleTaskUpdate', task)
 	},
 
@@ -993,7 +993,7 @@ const actions = {
 	 * @param {Task} task The task to update
 	 */
 	async addCategory(context, { task, category }) {
-		context.commit('addCategory', { task: task, category: category })
+		context.commit('addCategory', { task, category })
 		context.dispatch('scheduleTaskUpdate', task)
 	},
 
@@ -1006,7 +1006,7 @@ const actions = {
 	async setPriority(context, { task, priority }) {
 		// check priority to comply with RFC5545 (to be between 0 and 9)
 		priority = (+priority < 0) ? 0 : (+priority > 9) ? 9 : Math.round(+priority)
-		context.commit('setPriority', { task: task, priority: priority })
+		context.commit('setPriority', { task, priority })
 		context.dispatch('scheduleTaskUpdate', task)
 	},
 
@@ -1019,7 +1019,7 @@ const actions = {
 	async setClassification(context, { task, classification }) {
 		// check classification to comply with RFC5545 values
 		classification = (['PUBLIC', 'PRIVATE', 'CONFIDENTIAL'].indexOf(classification) > -1) ? classification : null
-		context.commit('setClassification', { task: task, classification: classification })
+		context.commit('setClassification', { task, classification })
 		context.dispatch('scheduleTaskUpdate', task)
 	},
 
@@ -1032,7 +1032,7 @@ const actions = {
 	async setStatus(context, { task, status }) {
 		// check status to comply with RFC5545 values
 		status = (['NEEDS-ACTION', 'COMPLETED', 'IN-PROCESS', 'CANCELLED'].indexOf(status) > -1) ? status : null
-		context.commit('setStatus', { task: task, status: status })
+		context.commit('setStatus', { task, status })
 		context.dispatch('scheduleTaskUpdate', task)
 	},
 
@@ -1043,7 +1043,7 @@ const actions = {
 	 * @param {Task} task The task to update
 	 */
 	async setDue(context, { task, due, allDay }) {
-		context.commit('setDue', { task: task, due: due, allDay: allDay })
+		context.commit('setDue', { task, due, allDay })
 		context.dispatch('scheduleTaskUpdate', task)
 	},
 
@@ -1054,7 +1054,7 @@ const actions = {
 	 * @param {Task} task The task to update
 	 */
 	async setStart(context, { task, start, allDay }) {
-		context.commit('setStart', { task: task, start: start, allDay: allDay })
+		context.commit('setStart', { task, start, allDay })
 		context.dispatch('scheduleTaskUpdate', task)
 	},
 
@@ -1077,7 +1077,7 @@ const actions = {
 			diff = diff < 0 ? 0 : diff
 			if (diff !== day) {
 				const newStart = task.startMoment.year(day.year()).month(day.month()).date(day.date())
-				context.commit('setStart', { task: task, start: newStart })
+				context.commit('setStart', { task, start: newStart })
 				context.dispatch('scheduleTaskUpdate', task)
 			}
 		// Adjust due date
@@ -1086,12 +1086,12 @@ const actions = {
 			diff = diff < 0 ? 0 : diff
 			if (diff !== day) {
 				const newDue = task.dueMoment.year(day.year()).month(day.month()).date(day.date())
-				context.commit('setDue', { task: task, due: newDue })
+				context.commit('setDue', { task, due: newDue })
 				context.dispatch('scheduleTaskUpdate', task)
 			}
 		// Set the due date to appropriate value
 		} else {
-			context.commit('setDue', { task: task, due: day })
+			context.commit('setDue', { task, due: day })
 			context.dispatch('scheduleTaskUpdate', task)
 		}
 	},
@@ -1154,7 +1154,7 @@ const actions = {
 		if (task.related !== parentId) {
 			// Remove the task from the old parents subtask list
 			const oldParent = context.getters.getTaskByUid(task.related)
-			context.commit('deleteTaskFromParent', { task: task, parent: oldParent })
+			context.commit('deleteTaskFromParent', { task, parent: oldParent })
 			// Link to new parent
 			Vue.set(task, 'related', parentId)
 			// Add task to new parents subtask list
@@ -1162,7 +1162,7 @@ const actions = {
 				Vue.set(parent.subTasks, task.uid, task)
 				// If the parent is completed, we complete the task
 				if (parent.completed) {
-					await context.dispatch('setPercentComplete', { task: task, complete: 100 })
+					await context.dispatch('setPercentComplete', { task, complete: 100 })
 				}
 			}
 			// We have to send an update.
@@ -1193,14 +1193,14 @@ const actions = {
 		if (task.dav && task.calendar !== calendar) {
 			// Move all subtasks first
 			await Promise.all(Object.values(task.subTasks).map(async(subTask) => {
-				await context.dispatch('moveTask', { task: subTask, calendar: calendar, parent: task })
+				await context.dispatch('moveTask', { task: subTask, calendar, parent: task })
 			}))
 
 			await task.dav.move(calendar.dav)
 				.then((response) => {
 					context.commit('deleteTaskFromCalendar', task)
 					// Update the calendar of the task
-					context.commit('setTaskCalendar', { task: task, calendar: calendar })
+					context.commit('setTaskCalendar', { task, calendar })
 					// Remove the task from the calendar, add it to the new one
 					context.commit('addTaskToCalendar', task)
 					task.syncstatus = new TaskStatus('success', OCA.Tasks.$t('tasks', 'Task successfully moved to new calendar.'))
@@ -1212,7 +1212,7 @@ const actions = {
 		}
 
 		// Set the new parent
-		await context.dispatch('setTaskParent', { task: task, parent: parent })
+		await context.dispatch('setTaskParent', { task, parent })
 
 		return task
 	},

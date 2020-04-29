@@ -77,12 +77,12 @@ OCA.Tasks.App = new Vue({
 	el: '.app-tasks',
 	router,
 	store,
-	data: function() {
+	data() {
 		return {
 			searchString: '',
 		}
 	},
-	mounted: function() {
+	mounted() {
 		this.$OC.Search = new OCA.Search(this.filter, this.cleanSearch)
 	},
 	beforeMount() {

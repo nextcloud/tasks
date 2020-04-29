@@ -65,7 +65,7 @@ import moment from '@nextcloud/moment'
 import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
-	data: function() {
+	data() {
 		return {
 			collectionOptions: [
 				{
@@ -91,7 +91,7 @@ export default {
 				return cal ? cal.id : ''
 			},
 			set(value) {
-				this.$store.dispatch('setSetting', { type: 'defaultCalendarId', value: value })
+				this.$store.dispatch('setSetting', { type: 'defaultCalendarId', value })
 			},
 		},
 		...mapState({

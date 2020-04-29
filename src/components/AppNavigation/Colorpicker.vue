@@ -76,22 +76,22 @@ export default {
 		}
 	},
 	methods: {
-		supportsColorPicker: function() {
+		supportsColorPicker() {
 			const inputElement = document.createElement('input')
 			inputElement.setAttribute('type', 'color')
 			return inputElement.type === 'color'
 		},
-		randomizeColour: function() {
+		randomizeColour() {
 			this.random = this.randColour()
 			this.pick(this.random)
 		},
-		pick: function(color) {
+		pick(color) {
 			this.$emit('color-selected', color)
 		},
 		/*
 		* Generate a random colour with the core generator
 		*/
-		randColour: function() {
+		randColour() {
 			if (typeof String.prototype.toHsl === 'function') {
 				return this.rgbToHex(this.hslToRgb(Math.random().toString().toHsl()))
 			} else {
@@ -101,7 +101,7 @@ export default {
 		/*
 		* Convert rgb array to hex string
 		*/
-		rgbToHex: function(r, g, b) {
+		rgbToHex(r, g, b) {
 			if (Array.isArray(r)) {
 				g = r[1]
 				b = r[2]
@@ -115,7 +115,7 @@ export default {
 		* expected saturation range: [0, 1]
 		* expected lightness range: [0, 1]
 		*/
-		hslToRgb: function(hue, saturation, lightness) {
+		hslToRgb(hue, saturation, lightness) {
 			// based on algorithm from http://en.wikipedia.org/wiki/HSL_and_HSV#Converting_to_RGB
 			if (Array.isArray(hue)) {
 				saturation = hue[1]

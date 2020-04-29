@@ -101,7 +101,7 @@ export default {
 		ClickOutside,
 	},
 	filters: {
-		counterFormatter: function(count) {
+		counterFormatter(count) {
 			switch (false) {
 			case count !== 0:
 				return ''
@@ -228,21 +228,21 @@ export default {
 				const task = this.getTask(taskUri)
 				switch (collection.id) {
 				case 'starred':
-					this.setPriority({ task: task, priority: 1 })
+					this.setPriority({ task, priority: 1 })
 					break
 				case 'completed':
-					this.setPercentComplete({ task: task, complete: 100 })
+					this.setPercentComplete({ task, complete: 100 })
 					break
 				case 'today':
-					this.setDate({ task: task, day: 0 })
+					this.setDate({ task, day: 0 })
 					break
 				case 'week':
-					this.setDate({ task: task, day: 6 })
+					this.setDate({ task, day: 6 })
 					break
 				}
 			}
 		},
-		hideCollection: function(collection) {
+		hideCollection(collection) {
 			switch (collection.show) {
 			case 0:
 				return true
@@ -252,10 +252,10 @@ export default {
 				return this.collectionCount(collection.id) < 1
 			}
 		},
-		showTooltip: function(target) {
+		showTooltip(target) {
 			return this.tooltipTarget === target
 		},
-		startCreate: function(e) {
+		startCreate(e) {
 			if (this.$OCA.Theming) {
 				this.selectedColor = this.$OCA.Theming.color
 			} else {
@@ -268,17 +268,17 @@ export default {
 			)
 			e.stopPropagation()
 		},
-		cancelCreate: function() {
+		cancelCreate() {
 			this.creating = false
 		},
-		create: function() {
+		create() {
 			if (!this.isNameAllowed(this.newCalendarName, 'new').allowed) {
 				return
 			}
 			this.appendCalendar({ displayName: this.newCalendarName, color: this.selectedColor })
 			this.creating = false
 		},
-		checkName: function(event, calendar, callback) {
+		checkName(event, calendar, callback) {
 			const calendarId = calendar ? calendar.id : ''
 			const check = this.isNameAllowed(this.newCalendarName, calendarId)
 			this.tooltipMessage = check.msg
@@ -300,7 +300,7 @@ export default {
 				this.nameError = false
 			}
 		},
-		isNameAllowed: function(name, id) {
+		isNameAllowed(name, id) {
 			const check = {
 				allowed: false,
 				msg: '',
@@ -314,7 +314,7 @@ export default {
 			}
 			return check
 		},
-		setColor: function(color) {
+		setColor(color) {
 			this.selectedColor = color
 		},
 	},

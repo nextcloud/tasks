@@ -112,7 +112,7 @@ export default {
 		 *
 		 * @param {string} query The query string
 		 */
-		findSharee: async function(query) {
+		async findSharee(query) {
 			this.isLoading = true
 			this.usersOrGroups = []
 			if (query.length > 0) {

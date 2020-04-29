@@ -132,7 +132,7 @@ export function mapDavShareeToSharee(sharee) {
 		: id
 	return {
 		displayName: name,
-		id: id,
+		id,
 		writeable: sharee.access[0].endsWith('read-write'),
 		isGroup: sharee.href.startsWith('principal:principals/groups/'),
 		uri: sharee.href,
@@ -570,7 +570,7 @@ const actions = {
 						const subTasksInStore = context.getters.getTasksByParent(parent)
 						subTasksInStore.forEach(
 							subTask => {
-								context.commit('addTaskToParent', { task: subTask, parent: parent })
+								context.commit('addTaskToParent', { task: subTask, parent })
 							}
 						)
 

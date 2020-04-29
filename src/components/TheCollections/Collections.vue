@@ -33,7 +33,7 @@ export default {
 		Week,
 	},
 	computed: {
-		collectionType: function() {
+		collectionType() {
 			if (this.$route.params.collectionId === 'week') {
 				return 'Week'
 			} else {
