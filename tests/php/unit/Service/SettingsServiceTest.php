@@ -55,7 +55,8 @@ class SettingsServiceTest extends TestCase {
 			'showHidden' => false,
 			'sortOrder' => 'default',
 			'sortDirection' => false,
-			'allDay' => false
+			'allDay' => false,
+			'initialRoute' => '/collections/all'
 		];
 
 		$map = [
@@ -93,6 +94,13 @@ class SettingsServiceTest extends TestCase {
 				'various_allDay',
 				false,
 				false
+			],
+			[
+				$this->userId,
+				$this->appName,
+				'various_initialRoute',
+				'/collections/all',
+				'/collections/all'
 			]
 		];
 

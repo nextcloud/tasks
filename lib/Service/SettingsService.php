@@ -63,13 +63,15 @@ class SettingsService {
 		$sortOrder = (string)$this->config->getUserValue($this->userId, $this->appName, 'various_sortOrder', 'default');
 		$sortDirection = (bool)$this->config->getUserValue($this->userId, $this->appName, 'various_sortDirection', false);
 		$allDay = (bool)$this->config->getUserValue($this->userId, $this->appName, 'various_allDay', false);
+		$initialRoute = (string)$this->config->getUserValue($this->userId, $this->appName, 'various_initialRoute', '/collections/all');
 
 		return [
 			'defaultCalendarId' => $defaultCalendarId,
 			'showHidden' => $showHidden,
 			'sortOrder' => $sortOrder,
 			'sortDirection' => $sortDirection,
-			'allDay' => $allDay
+			'allDay' => $allDay,
+			'initialRoute' => $initialRoute
 		];
 	}
 

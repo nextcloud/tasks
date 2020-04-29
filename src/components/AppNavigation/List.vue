@@ -36,7 +36,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			@drop.native="dropTaskOnCollection(...arguments, collection)"
 			@dragover.native="dragOver"
 			@dragenter.native="dragEnter(...arguments, collection)"
-			@dragleave.native="dragLeave">
+			@dragleave.native="dragLeave"
+			@click="setInitialRoute(`/collections/${collection.id}`)">
 			<AppNavigationCounter slot="counter">
 				{{ collectionCount(collection.id) | counterFormatter }}
 			</AppNavigationCounter>
@@ -44,7 +45,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		<ListItemCalendar
 			v-for="calendar in calendars"
 			:key="calendar.id"
-			:calendar="calendar" />
+			:calendar="calendar"
+			@click.native="setInitialRoute(`/calendars/${calendar.id}`)" />
 		<AppNavigationItem v-click-outside="cancelCreate"
 			:title="$t('tasks', 'Add List…')"
 			icon="sprt-add"
@@ -144,6 +146,7 @@ export default {
 			'setPriority',
 			'setPercentComplete',
 			'setDate',
+			'setSetting',
 		]),
 
 		/**
@@ -316,6 +319,14 @@ export default {
 		},
 		setColor(color) {
 			this.selectedColor = color
+		},
+		/**
+		 * Saves the current route as new initial route
+		 *
+		 * @param {String} route The new initial route
+		 */
+		setInitialRoute(route) {
+			this.setSetting({ type: 'initialRoute', value: route })
 		},
 	},
 }

@@ -25,6 +25,6 @@ return [
 		['name' => 'collections#getCollections','url' => '/collections',										'verb' => 'GET'],
 		['name' => 'collections#setVisibility',	'url' => '/collection/{collectionID}/visibility/{visibility}',	'verb' => 'POST'],
 		['name' => 'settings#get',				'url' => '/settings',											'verb' => 'GET'],
-		['name' => 'settings#set',				'url' => '/settings/{setting}/{value}',							'verb' => 'POST'],
+		['name' => 'settings#set',				'url' => '/settings/{setting}',									'verb' => 'POST'],
 	]
 ];
