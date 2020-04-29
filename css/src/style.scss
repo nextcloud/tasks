@@ -600,7 +600,29 @@
 									text-align: right;
 									text-overflow: ellipsis;
 									white-space: nowrap;
+								}
+
+								&__short {
 									width: 60px;
+								}
+
+								&__long {
+									width: 100px;
+									display: none;
+
+									&--date-only {
+										width: 60px;
+									}
+								}
+
+								@media only screen and (min-width: $breakpoint-mobile) {
+									&__long {
+										display: inline-block;
+									}
+
+									&__short {
+										display: none;
+									}
 								}
 							}
 
