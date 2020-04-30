@@ -324,7 +324,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									:multiple="true"
 									:searchable="true"
 									:disabled="readOnly"
-									:options="task.categories"
+									:options="categories"
 									:placeholder="$t('tasks', 'Select categories')"
 									:taggable="true"
 									:tag-placeholder="$t('tasks', 'Add this as a new category')"
@@ -432,7 +432,6 @@ export default {
 				step: '00:30',
 				end: '23:30',
 			},
-			categories: [],
 			classSelect: [
 				{ displayName: this.$t('tasks', 'When shared show full event'), type: 'PUBLIC' },
 				{ displayName: this.$t('tasks', 'When shared show only busy'), type: 'CONFIDENTIAL' },
@@ -671,6 +670,7 @@ export default {
 			task: 'getTaskByRoute',
 			calendar: 'getCalendarByRoute',
 			calendars: 'getSortedCalendars',
+			categories: 'categories',
 		}),
 	},
 
