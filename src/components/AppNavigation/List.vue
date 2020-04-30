@@ -138,6 +138,7 @@ export default {
 			calendarCount: 'getCalendarCount',
 			isCalendarNameUsed: 'isCalendarNameUsed',
 			getTask: 'getTaskByUri',
+			initialRoute: 'initialRoute',
 		}),
 	},
 	methods: {
@@ -326,6 +327,9 @@ export default {
 		 * @param {String} route The new initial route
 		 */
 		setInitialRoute(route) {
+			if (route === this.initialRoute) {
+				return
+			}
 			this.setSetting({ type: 'initialRoute', value: route })
 		},
 	},

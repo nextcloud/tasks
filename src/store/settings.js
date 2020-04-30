@@ -58,6 +58,14 @@ const getters = {
 	 * @returns {String} Whether all-day is default
 	 */
 	allDay: (state) => state.settings.allDay,
+
+	/**
+	 * Returns the initial route
+	 *
+	 * @param {Object} state The store data
+	 * @returns {String} Whether all-day is default
+	 */
+	initialRoute: (state) => state.settings.initialRoute,
 }
 
 const mutations = {
@@ -109,6 +117,7 @@ const actions = {
 			sortOrder: loadState('tasks', 'sortOrder'),
 			sortDirection: loadState('tasks', 'sortDirection'),
 			allDay: loadState('tasks', 'allDay'),
+			initialRoute: loadState('tasks', 'initialRoute'),
 		})
 	},
 }
