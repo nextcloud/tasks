@@ -83,7 +83,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<span class="icon icon-sprt-bw sprt-note" />
 				</div>
 				<div v-if="task.due" :class="{overdue: overdue(task.dueMoment)}" class="duedate">
-					<span>{{ dueDateString }}</span>
+					<span class="duedate__short">{{ dueDateShort }}</span>
+					<span class="duedate__long" :class="{ 'duedate__long--date-only': task.allDay }">{{ dueDateLong }}</span>
 				</div>
 				<Actions v-if="!deleteTimeout" class="reactive no-nav" menu-align="right">
 					<ActionButton v-if="!task.calendar.readOnly"
@@ -207,7 +208,7 @@ export default {
 			searchQuery: 'searchQuery',
 		}),
 
-		dueDateString() {
+		dueDateShort() {
 			return this.task.dueMoment.isValid()
 				? this.task.dueMoment.calendar(null, {
 					lastDay: this.$t('tasks', '[Yesterday]'),
@@ -216,6 +217,22 @@ export default {
 					lastWeek: 'L',
 					nextWeek: 'L',
 					sameElse: 'L',
+				})
+				: ''
+		},
+
+		dueDateLong() {
+			if (this.task.allDay) {
+				return this.dueDateShort
+			}
+			return this.task.dueMoment.isValid()
+				? this.task.dueMoment.calendar(null, {
+					lastDay: this.$t('tasks', '[Yesterday at] LT'),
+					sameDay: this.$t('tasks', '[Today at] LT'),
+					nextDay: this.$t('tasks', '[Tomorrow at] LT'),
+					lastWeek: this.$t('tasks', 'L [at] LT'),
+					nextWeek: this.$t('tasks', 'L [at] LT'),
+					sameElse: this.$t('tasks', 'L [at] LT'),
 				})
 				: ''
 		},
