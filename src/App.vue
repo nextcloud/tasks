@@ -20,7 +20,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<div id="content" class="app-tasks" @click="closeDetails($event)">
+	<Content app-name="tasks" @click="closeDetails($event)">
 		<AppNavigation>
 			<TheList />
 			<AppNavigationSettings>
@@ -32,16 +32,17 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			<RouterView />
 		</AppContent>
 
-		<div id="app-sidebar" :class="{disappear: $route.params.taskId === undefined}">
+		<div class="app-sidebar" :class="{disappear: $route.params.taskId === undefined}">
 			<RouterView name="details" />
 		</div>
-	</div>
+	</Content>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import AppNavigation from '@nextcloud/vue/dist/Components/AppNavigation'
 import AppContent from '@nextcloud/vue/dist/Components/AppContent'
+import Content from '@nextcloud/vue/dist/Components/Content'
 import AppNavigationSettings from '@nextcloud/vue/dist/Components/AppNavigationSettings'
 import TheList from './components/AppNavigation/List'
 import TheSettings from './components/AppNavigation/TheSettings'
@@ -55,6 +56,7 @@ export default {
 		AppNavigation,
 		AppContent,
 		AppNavigationSettings,
+		Content,
 	},
 	computed: {
 		...mapState({
