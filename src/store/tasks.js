@@ -237,6 +237,26 @@ const getters = {
 	searchQuery: (state, getters, rootState) => {
 		return state.searchQuery
 	},
+
+	/**
+	 * Returns all categories of all tasks
+	 *
+	 * @param {Object} state The store data
+	 * @param {Object} getters The store getters
+	 * @returns {Array} All categories
+	 */
+	categories: (state, getters) => {
+		const tasks = getters.getAllTasks
+		return tasks.reduce((categories, task) => {
+			// Add each category to the categories array if it's not present yet
+			task.categories.forEach((category) => {
+				if (!categories.includes(category)) {
+					categories.push(category)
+				}
+			})
+			return categories
+		}, [])
+	},
 }
 
 const mutations = {
