@@ -20,7 +20,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<Content app-name="tasks" @click="closeDetails($event)">
+	<Content app-name="tasks" @click.native="closeDetails($event)">
 		<AppNavigation>
 			<TheList />
 			<AppNavigationSettings>
