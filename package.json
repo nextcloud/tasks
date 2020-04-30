@@ -34,6 +34,7 @@
 		"@vue/test-utils": "^1.0.0-beta.33",
 		"cdav-library": "github:nextcloud/cdav-library",
 		"color-convert": "^2.0.1",
+		"debounce": "^1.2.0",
 		"ical.js": "~1.4.0",
 		"jstimezonedetect": "",
 		"linkify-it": "~2.2.0",

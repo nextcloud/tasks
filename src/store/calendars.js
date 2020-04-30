@@ -127,14 +127,20 @@ export function mapDavCollectionToCalendar(calendar, currentUserPrincipal) {
  */
 export function mapDavShareeToSharee(sharee) {
 	const id = sharee.href.split('/').slice(-1)[0]
-	const name = sharee['common-name']
+	let name = sharee['common-name']
 		? sharee['common-name']
-		: id
+		: sharee.href
+
+	if (sharee.href.startsWith('principal:principals/groups/') && name === sharee.href) {
+		name = sharee.href.substr(28)
+	}
+
 	return {
 		displayName: name,
 		id,
 		writeable: sharee.access[0].endsWith('read-write'),
 		isGroup: sharee.href.startsWith('principal:principals/groups/'),
+		isCircle: sharee.href.startsWith('principal:principals/circles/'),
 		uri: sharee.href,
 	}
 }
@@ -391,14 +397,16 @@ const mutations = {
 	 * @param {String} data.displayName The displayName
 	 * @param {String} data.uri The sharing principalScheme uri
 	 * @param {Boolean} data.isGroup Is this a group ?
+	 * @param {Boolean} data.isCircle Is this a circle?
 	 */
-	shareCalendar(state, { calendar, user, displayName, uri, isGroup }) {
+	shareCalendar(state, { calendar, user, displayName, uri, isGroup, isCircle }) {
 		calendar = state.calendars.find(search => search.id === calendar.id)
 		const newSharee = {
 			displayName,
 			id: user,
 			writeable: false,
 			isGroup,
+			isCircle,
 			uri,
 		}
 		if (!calendar.shares.some((share) => share.uri === uri)) {
@@ -686,11 +694,12 @@ const actions = {
 	 * @param {String} data.displayName The displayName
 	 * @param {String} data.uri The sharing principalScheme uri
 	 * @param {Boolean} data.isGroup Is this a group ?
+	 * @param {Boolean} data.isCircle Is this a circle?
 	 */
-	async shareCalendar(context, { calendar, user, displayName, uri, isGroup }) {
+	async shareCalendar(context, { calendar, user, displayName, uri, isGroup, isCircle }) {
 		// Share calendar with entered group or user
 		await calendar.dav.share(uri)
-		context.commit('shareCalendar', { calendar, user, displayName, uri, isGroup })
+		context.commit('shareCalendar', { calendar, user, displayName, uri, isGroup, isCircle })
 	},
 }
 
