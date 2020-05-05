@@ -72,6 +72,7 @@ OC.L10N.register(
     "When shared show full event" : "כאשר משותף מציג אירוע מלא",
     "When shared show only busy" : "כאשר משותף מציג עסוק בלבד",
     "When shared hide this event" : "כאשר משותף מסתיר אירוע זה",
+    "Canceled" : "מבוטלת",
     "[Starts today]" : "[מתחילה היום]",
     "[Starts tomorrow]" : "[מתחילה מחר]",
     "[Starts on] LL" : "[מתחילה במועד] LL",
