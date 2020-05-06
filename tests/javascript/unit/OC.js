@@ -16,4 +16,8 @@ export class OC {
 		return 'en-GB'
 	}
 
+	getLocale() {
+		return 'en_GB'
+	}
+
 }
