@@ -1,11 +1,10 @@
 import { config } from '@vue/test-utils'
 import { OC } from './OC.js'
-import moment from '@nextcloud/moment'
 // eslint-disable-next-line node/no-unpublished-import
 import MockDate from 'mockdate'
 
 // Set date to fixed value
-MockDate.set(moment('20190101T123456', 'YYYYMMDDTHHmmss'))
+MockDate.set(new Date('2019-01-01T12:34:56'))
 
 global.OC = new OC()
 
