@@ -69,6 +69,7 @@ OC.L10N.register(
     "When shared show full event" : "Megosztáskor mutassa a teljes eseményt.",
     "When shared show only busy" : "Megosztáskor csak a foglaltságot mutassa",
     "When shared hide this event" : "Megosztáskor rejtse el ezt az eseményt",
+    "Canceled" : "Megszakítva",
     "No priority assigned" : "Nincs prioritás beállítva",
     "Could not delete the task." : "Nem sikerült törölni a feladatot.",
     "Synchronizing to the server." : "Szinkronizálás a kiszolgálóval.",
