@@ -88,6 +88,7 @@ OC.L10N.register(
     "When shared show full event" : "共有時にすべてのイベントを表示",
     "When shared show only busy" : "共有時に実行中のみを表示",
     "When shared hide this event" : "共有時にこのイベントを隠す",
+    "Canceled" : "キャンセルされた",
     "[Starts today]" : "[今日開始]",
     "[Starts tomorrow]" : "[明日開始]",
     "[Started yesterday]" : "[昨日から]",
