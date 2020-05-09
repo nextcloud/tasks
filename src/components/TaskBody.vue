@@ -138,15 +138,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</form>
 			</div>
 			<TaskDragContainer v-if="showSubtasks"
+				:tasks="filteredSubtasks"
+				:disabled="task.calendar.readOnly"
+				:collection-string="collectionString"
 				:task-id="task.uri"
-				:calendar-id="task.calendar.uri"
-				:disabled="task.calendar.readOnly">
-				<TaskBody v-for="subtask in filteredSubtasks"
-					:key="subtask.uid"
-					:task="subtask"
-					:collection-string="collectionString"
-					class="subtask" />
-			</TaskDragContainer>
+				:calendar-id="task.calendar.uri" />
 		</div>
 	</li>
 </template>
@@ -186,7 +182,6 @@ export default {
 		collectionString: {
 			type: String,
 			default: null,
-			required: false,
 		},
 	},
 	data() {
@@ -203,8 +198,6 @@ export default {
 	},
 	computed: {
 		...mapGetters({
-			sortOrder: 'sortOrder',
-			sortDirection: 'sortDirection',
 			searchQuery: 'searchQuery',
 		}),
 
@@ -305,7 +298,7 @@ export default {
 					return isTaskInList(task, this.collectionString) || this.isTaskOpen(task) || this.isDescendantOpen(task)
 				})
 			}
-			return sort([...subTasks], this.sortOrder, this.sortDirection)
+			return subTasks
 		},
 
 		/**

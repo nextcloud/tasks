@@ -243,6 +243,10 @@ function sort(tasks, sortOrder, sortDirection) {
 		comparators = [sortByPinned, sortByCompletedDate, sortAlphabetically]
 		break
 	}
+	case 'manual': {
+		comparators = [sortBySortOrder]
+		break
+	}
 	default:
 		comparators = [sortByPinned, sortByCompleted, sortByDue, sortByPriority, sortByStart, sortAlphabetically]
 	}
@@ -388,6 +392,17 @@ function sortByDate(taskA, taskB, date) {
 		return 0
 	}
 	return taskA[date + 'Moment'].diff(taskB[date + 'Moment'])
+}
+
+/**
+ * Comparator to compare two tasks by sort order in ascending order
+ *
+ * @param {Task} taskA The first task
+ * @param {Task} taskB The second task
+ * @returns {Integer}
+ */
+function sortBySortOrder(taskA, taskB) {
+	return taskA.sortOrder - taskB.sortOrder
 }
 
 /**

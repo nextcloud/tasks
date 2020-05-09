@@ -463,6 +463,17 @@ const mutations = {
 	},
 
 	/**
+	 * Sets the sort order of a task
+	 *
+	 * @param {Object} state The store data
+	 * @param {Task} task The task
+	 * @param {Integer} order The sort order
+	 */
+	setSortOrder(state, { task, order }) {
+		Vue.set(task, 'sortOrder', order)
+	},
+
+	/**
 	 * Sets the due date of a task
 	 *
 	 * @param {Object} state The store data
@@ -1053,6 +1064,21 @@ const actions = {
 		// check status to comply with RFC5545 values
 		status = (['NEEDS-ACTION', 'COMPLETED', 'IN-PROCESS', 'CANCELLED'].indexOf(status) > -1) ? status : null
 		context.commit('setStatus', { task, status })
+		context.dispatch('scheduleTaskUpdate', task)
+	},
+
+	/**
+	 * Sets the sort order of a task
+	 *
+	 * @param {Object} context The store context
+	 * @param {Task} task The task to update
+	 * @param {Integer} order The sort order
+	 */
+	async setSortOrder(context, { task, order }) {
+		if (task.sortOrder === order) {
+			return
+		}
+		context.commit('setSortOrder', { task, order })
 		context.dispatch('scheduleTaskUpdate', task)
 	},
 

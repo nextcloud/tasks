@@ -40,28 +40,18 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		<div class="task-list">
 			<div class="grouped-tasks">
 				<TaskDragContainer
+					:tasks="uncompletedRootTasks(calendar.tasks)"
 					:calendar-id="calendarId"
 					:disabled="calendar.readOnly"
-					class="tasks"
-					collection-id="uncompleted"
-					type="list">
-					<TaskBody v-for="task in sort(uncompletedRootTasks(calendar.tasks), sortOrder, sortDirection)"
-						:key="task.key"
-						:task="task" />
-				</TaskDragContainer>
+					collection-id="uncompleted" />
 				<h2 v-show="completedCount(calendarId)" class="heading heading--hiddentasks reactive" @click="toggleHidden">
 					<span class="heading__title icon-triangle-s">{{ completedCountString }}</span>
 				</h2>
 				<TaskDragContainer v-if="showHidden"
+					:tasks="completedRootTasks(calendar.tasks)"
 					:calendar-id="calendarId"
 					:disabled="calendar.readOnly"
-					class="completed-tasks"
-					collection-id="completed"
-					type="list">
-					<TaskBody v-for="task in sort(completedRootTasks(calendar.tasks), sortOrder, sortDirection)"
-						:key="task.key"
-						:task="task" />
-				</TaskDragContainer>
+					collection-id="completed" />
 				<LoadCompletedButton :calendar="calendar" />
 				<DeleteCompletedModal v-if="calendar.loadedCompleted && !calendar.readOnly" :calendar="calendar" />
 			</div>
@@ -71,16 +61,13 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import { sort } from '../../store/storeHelper'
 import SortorderDropdown from '../SortorderDropdown'
 import LoadCompletedButton from '../LoadCompletedButton'
 import DeleteCompletedModal from '../DeleteCompletedModal'
-import TaskBody from '../TaskBody'
 import TaskDragContainer from '../TaskDragContainer'
 
 export default {
 	components: {
-		TaskBody,
 		SortorderDropdown,
 		LoadCompletedButton,
 		TaskDragContainer,
@@ -129,15 +116,12 @@ export default {
 			calendar: 'getCalendarByRoute',
 			uncompletedRootTasks: 'findUncompletedRootTasks',
 			completedRootTasks: 'findCompletedRootTasks',
-			sortOrder: 'sortOrder',
-			sortDirection: 'sortDirection',
 		}),
 	},
 	methods: {
 		...mapActions([
 			'createTask',
 		]),
-		sort,
 		toggleHidden() {
 			this.showHidden = +!this.showHidden
 		},
