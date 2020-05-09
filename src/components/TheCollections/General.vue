@@ -42,7 +42,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				:rel="calendar.id"
 				class="grouped-tasks ui-droppable">
 				<h2 class="heading">
-					{{ calendar.displayName }}
+					<span class="heading__icon-bullet" :style="{'background-color': calendar.color }" />
+					<span class="heading__title">{{ calendar.displayName }}</span>
 				</h2>
 				<TaskDragContainer
 					:calendar-id="calendar.id"

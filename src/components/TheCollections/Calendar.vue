@@ -49,8 +49,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						:key="task.key"
 						:task="task" />
 				</TaskDragContainer>
-				<h2 v-show="completedCount(calendarId)" class="heading-hiddentasks icon-triangle-s reactive" @click="toggleHidden">
-					{{ completedCountString }}
+				<h2 v-show="completedCount(calendarId)" class="heading heading--hiddentasks reactive" @click="toggleHidden">
+					<span class="heading__title icon-triangle-s">{{ completedCountString }}</span>
 				</h2>
 				<TaskDragContainer v-if="showHidden"
 					:calendar-id="calendarId"
