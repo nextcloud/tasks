@@ -46,7 +46,7 @@ describe('TaskDragContainer.vue', () => {
 				tasks,
 				settings,
 				principals,
-			}
+			},
 		})
 	})
 
