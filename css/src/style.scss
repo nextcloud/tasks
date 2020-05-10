@@ -461,10 +461,12 @@
 						position: relative;
 						border: 1px solid $gray_light;
 
-						&:hover,
+						&:hover {
+							background-color: var(--color-background-hover);
+						}
+
 						&.active {
-							background-color: $gray_easy;
-							box-shadow: inset 4px 0 var(--color-primary);
+							background-color: var(--color-primary-light) !important;
 						}
 
 						.task-checkbox {
