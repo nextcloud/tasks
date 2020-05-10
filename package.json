@@ -89,7 +89,7 @@
 		"sass-loader": "^8.0.2",
 		"stylelint": "^13.3.3",
 		"stylelint-config-recommended-scss": "^4.2.0",
-		"stylelint-scss": "^3.17.1",
+		"stylelint-scss": "^3.17.2",
 		"stylelint-webpack-plugin": "^2.0.0",
 		"svg-sprite": "^1.5.0",
 		"terser-webpack-plugin": "^3.0.0",
