@@ -249,8 +249,11 @@ $blue_due: #4271a6;			// due dates and low importance
 
 .app-content {
 	.header {
-		margin: 12px 0;
-		margin-left: 27px;
+		padding: 12px 12px 12px 44px;
+		position: sticky;
+		top: 50px;
+		background-color: var(--color-main-background-translucent);
+		z-index: 1000;
 		display: flex;
 
 		#add-task {
@@ -381,13 +384,16 @@ $blue_due: #4271a6;			// due dates and low importance
 	}
 
 	> div {
-		padding: 6px 17px 75px;
 		box-sizing: border-box;
-		height: 100%;
-		overflow: hidden;
+		padding-bottom: 75px;
 
 		.task-list {
 			width: 100%;
+			padding: 0 12px;
+
+			@media only screen and (max-width: $breakpoint-mobile) {
+				padding: 0;
+			}
 
 			.loadmore {
 				font-size: 11px;
@@ -1354,17 +1360,5 @@ input[type='checkbox'].checkbox {
 		width: 80%;
 		margin: auto;
 		padding-top: 10px;
-	}
-}
-
-@media only screen and (max-width: $breakpoint-mobile) {
-	.app-content {
-
-		& > div {
-			padding: 6px 0 75px;
-		}
-		.header {
-			margin-left: 44px;
-		}
 	}
 }
