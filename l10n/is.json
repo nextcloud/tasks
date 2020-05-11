@@ -83,6 +83,7 @@
     "When shared show full event" : "Þegar er deilt, birta allan atburð",
     "When shared show only busy" : "Þegar er deilt, birta eingöngu upptekið",
     "When shared hide this event" : "Þegar er deilt, fela þennan atburð",
+    "Canceled" : "Hætt við",
     "[Starts today]" : "[Byrjar í dag]",
     "[Starts tomorrow]" : "[Byrjar á morgun]",
     "[Starts on] LL" : "[Byrjar þann] LL",
