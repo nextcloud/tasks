@@ -1,3 +1,20 @@
+## 0.13.0 - 2020-05-11
+
+### Added
+- Implement manual sorting of tasks #237
+- Allow sharing with circles #995
+- Propose categories of all available tasks #998
+- Remember last view #989
+- Make task input field stick to the top #1027
+- Allow to close left sidebar on desktop #965
+- Show due time in task body on large screens #992
+- Show calendar color in front of calendar name in task list #1013
+- Adjust task-body hover and active background-color to new Nextcloud standard #1014
+- Use initial state api #987
+- Updated translations
+- Updated dependencies
+- Code cleanup #990 #1015
+
 ## 0.12.2 - 2020-04-27
 
 ### Added
