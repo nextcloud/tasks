@@ -268,11 +268,13 @@ $blue_due: #4271a6;			// due dates and low importance
 				border: medium none !important;
 				border-radius: 0 !important;
 				box-shadow: none !important;
-				padding: 0 60px 0 32px;
+				padding: 0 14px;
 				margin: 0;
 				cursor: text;
 				outline: none;
 				min-height: 44px;
+				text-overflow: ellipsis;
+				overflow: hidden;
 			}
 		}
 
