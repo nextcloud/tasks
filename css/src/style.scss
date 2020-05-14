@@ -489,7 +489,6 @@ $blue_due: #4271a6;			// due dates and low importance
 							padding: 11px;
 							height: 44px;
 							width: 44px;
-							border-right: 1px dotted var(--color-border-dark);
 							opacity: 0.5;
 						}
 
@@ -507,7 +506,7 @@ $blue_due: #4271a6;			// due dates and low importance
 							.title {
 								cursor: text;
 								display: inline-flex;
-								padding: 10px 14px;
+								padding: 10px 14px 10px 0;
 								overflow: hidden;
 
 								span {
