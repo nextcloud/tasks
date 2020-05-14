@@ -506,7 +506,7 @@ $blue_due: #4271a6;			// due dates and low importance
 							.title {
 								cursor: text;
 								display: inline-flex;
-								padding: 10px 14px 10px 0;
+								padding: 10px 10px 10px 0;
 								overflow: hidden;
 
 								span {
@@ -522,10 +522,12 @@ $blue_due: #4271a6;			// due dates and low importance
 							}
 
 							.categories-list {
-								padding: 11px;
+								display: flex;
+								align-items: center;
 								max-width: 50%;
 
 								.category {
+									height: 22px;
 									overflow: hidden;
 									display: inline-flex;
 									min-width: 45px;
@@ -597,6 +599,14 @@ $blue_due: #4271a6;			// due dates and low importance
 									&:hover {
 										opacity: 1;
 									}
+								}
+							}
+
+							&>div.task-status-container {
+								padding: 14px 0;
+
+								.status-display {
+									margin-left: 7px;
 								}
 							}
 
