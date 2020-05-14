@@ -696,6 +696,9 @@ $blue_due: #4271a6;			// due dates and low importance
 			font-size: 13px;
 			word-wrap: break-word;
 			opacity: .5;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
 
 		}
 
