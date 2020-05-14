@@ -256,6 +256,10 @@ $blue_due: #4271a6;			// due dates and low importance
 		z-index: 1000;
 		display: flex;
 
+		@media only screen and (max-width: $breakpoint-mobile) {
+			padding-right: 0;
+		}
+
 		#add-task {
 			position: relative;
 			border: 1px solid var(--color-border-dark);
