@@ -857,6 +857,7 @@ $blue_due: #4271a6;			// due dates and low importance
 
 			.status-display {
 				margin: 17px 6px;
+				min-width: 16px;
 			}
 
 			button {
@@ -891,6 +892,7 @@ $blue_due: #4271a6;			// due dates and low importance
 
 					&.section-content {
 						flex-grow: 1;
+						min-width: 0;
 
 						&.note {
 							border-width: 1px;
@@ -998,8 +1000,11 @@ $blue_due: #4271a6;			// due dates and low importance
 							font-weight: bold;
 							display: inline-block;
 							width: calc(100% - 44px);
-							padding-right: 20px;
+							padding-right: 14px;
 							cursor: pointer;
+							overflow: hidden;
+							text-overflow: ellipsis;
+							white-space: nowrap;
 						}
 
 						.section-edit {
@@ -1008,7 +1013,7 @@ $blue_due: #4271a6;			// due dates and low importance
 
 							.mx-datepicker {
 								&.date {
-									width: 59%;
+									width: 58%;
 								}
 								&.time {
 									width: 39%
@@ -1059,6 +1064,9 @@ $blue_due: #4271a6;			// due dates and low importance
 									.multiselect__single {
 										padding-left: 0px !important;
 										font-weight: bold;
+										white-space: nowrap;
+										text-overflow: ellipsis;
+										overflow: hidden;
 									}
 								}
 
