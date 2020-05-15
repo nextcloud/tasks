@@ -13,6 +13,7 @@ OC.L10N.register(
     "No users or groups" : "Жодного користувача або групм",
     "can edit" : "може редагувати",
     "Unshare with {displayName}" : "Припинити поширення з {displayName}",
+    "Unable to delete the share." : "Неможливо вилучити спільний елемент.",
     "Add List…" : "Додати список",
     "New List" : "Новий список",
     "Cancel" : "Скасувати",
