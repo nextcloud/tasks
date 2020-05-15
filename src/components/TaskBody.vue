@@ -128,7 +128,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		<div class="subtasks-container">
 			<div v-if="showSubtaskInput"
 				v-click-outside="($event) => closeSubtaskInput($event)"
-				class="task-item add-subtask">
+				class="task-item add-task">
 				<form name="addTaskForm" @submit.prevent="addTask">
 					<input ref="input"
 						v-model="newTaskName"

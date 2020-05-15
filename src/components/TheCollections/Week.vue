@@ -24,7 +24,6 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 	<div>
 		<div class="header">
 			<div v-if="calendar && !calendar.readOnly"
-				id="add-task"
 				class="add-task">
 				<form name="addTaskForm" @submit.prevent="addTask">
 					<input v-model="newTaskName"
