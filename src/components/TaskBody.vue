@@ -51,7 +51,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<div class="title">
 					<span v-linkify="task.summary" />
 				</div>
-				<div class="categories-list">
+				<div v-if="task.categories.length > 0" class="categories-list">
 					<span v-for="category in task.categories" :key="category" class="category">
 						<span :title="category" class="category-label">
 							{{ category }}

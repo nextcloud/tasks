@@ -249,12 +249,16 @@ $blue_due: #4271a6;			// due dates and low importance
 
 .app-content {
 	.header {
-		padding: 12px 12px 12px 44px;
+		padding: 12px 15px 12px 44px;
 		position: sticky;
 		top: 50px;
 		background-color: var(--color-main-background-translucent);
 		z-index: 1000;
 		display: flex;
+
+		@media only screen and (max-width: $breakpoint-mobile) {
+			padding-right: 0;
+		}
 
 		#add-task {
 			position: relative;
@@ -268,11 +272,13 @@ $blue_due: #4271a6;			// due dates and low importance
 				border: medium none !important;
 				border-radius: 0 !important;
 				box-shadow: none !important;
-				padding: 0 60px 0 32px;
+				padding: 0 14px;
 				margin: 0;
 				cursor: text;
 				outline: none;
 				min-height: 44px;
+				text-overflow: ellipsis;
+				overflow: hidden;
 			}
 		}
 
@@ -389,7 +395,7 @@ $blue_due: #4271a6;			// due dates and low importance
 
 		.task-list {
 			width: 100%;
-			padding: 0 12px;
+			padding: 0 15px;
 
 			@media only screen and (max-width: $breakpoint-mobile) {
 				padding: 0;
@@ -483,7 +489,6 @@ $blue_due: #4271a6;			// due dates and low importance
 							padding: 11px;
 							height: 44px;
 							width: 44px;
-							border-right: 1px dotted var(--color-border-dark);
 							opacity: 0.5;
 						}
 
@@ -501,7 +506,7 @@ $blue_due: #4271a6;			// due dates and low importance
 							.title {
 								cursor: text;
 								display: inline-flex;
-								padding: 10px 14px;
+								padding: 10px 10px 10px 0;
 								overflow: hidden;
 
 								span {
@@ -517,10 +522,12 @@ $blue_due: #4271a6;			// due dates and low importance
 							}
 
 							.categories-list {
-								padding: 11px;
+								display: flex;
+								align-items: center;
 								max-width: 50%;
 
 								.category {
+									height: 22px;
 									overflow: hidden;
 									display: inline-flex;
 									min-width: 45px;
@@ -595,6 +602,14 @@ $blue_due: #4271a6;			// due dates and low importance
 								}
 							}
 
+							&>div.task-status-container {
+								padding: 14px 0;
+
+								.status-display {
+									margin-left: 7px;
+								}
+							}
+
 							.duedate {
 								color: $blue_due;
 								font-size: 11px;
@@ -616,7 +631,7 @@ $blue_due: #4271a6;			// due dates and low importance
 								}
 
 								&__long {
-									width: 100px;
+									width: 105px;
 									display: none;
 
 									&--date-only {
@@ -670,6 +685,10 @@ $blue_due: #4271a6;			// due dates and low importance
 		margin-bottom: 10px;
 		margin-top: 20px !important;
 
+		@media only screen and (max-width: $breakpoint-mobile) {
+			padding-left: 15px;
+		}
+
 		&--hiddentasks {
 			.heading__title {
 				display: inline-block;
@@ -687,15 +706,19 @@ $blue_due: #4271a6;			// due dates and low importance
 			font-size: 13px;
 			word-wrap: break-word;
 			opacity: .5;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
 
 		}
 
 		&__icon-bullet {
 			width: 14px;
+			min-width: 14px;
 			height: 14px;
 			border: none;
 			border-radius: 50%;
-			margin-right: 5px;
+			margin-right: 8px;
 		}
 	}
 }
