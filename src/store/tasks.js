@@ -677,16 +677,19 @@ const actions = {
 					// Open the details view for the new task
 					const calendarId = context.rootState.route.params.calendarId
 					const collectionId = context.rootState.route.params.collectionId
-					if (calendarId) {
-						router.push({ name: 'calendarsTask', params: { calendarId, taskId: task.uri } })
-					} else if (collectionId) {
-						if (collectionId === 'week') {
-							router.push({
-								name: 'collectionsParamTask',
-								params: { collectionId, taskId: task.uri, collectionParam: '0' },
-							})
-						} else {
-							router.push({ name: 'collectionsTask', params: { collectionId, taskId: task.uri } })
+					// Only open the details view if there is enough space or if it is already open.
+					if (document.documentElement.clientWidth >= 768 || context.rootState.route.params.taskId !== undefined) {
+						if (calendarId) {
+							router.push({ name: 'calendarsTask', params: { calendarId, taskId: task.uri } })
+						} else if (collectionId) {
+							if (collectionId === 'week') {
+								router.push({
+									name: 'collectionsParamTask',
+									params: { collectionId, taskId: task.uri, collectionParam: '0' },
+								})
+							} else {
+								router.push({ name: 'collectionsTask', params: { collectionId, taskId: task.uri } })
+							}
 						}
 					}
 
