@@ -1,3 +1,14 @@
+## 0.13.1 - 2020-05-15
+
+### Added
+- Only open details view for new tasks if there is enough space #1037 #1039
+- Update screenshot #1041
+- Updated translations
+
+### Fixed
+- Various style fixes for Tasks on mobile #1036
+- Fix overflowing section in right sidebar #1040
+
 ## 0.13.0 - 2020-05-11
 
 ### Added
