@@ -260,26 +260,9 @@ $blue_due: #4271a6;			// due dates and low importance
 			padding-right: 0;
 		}
 
-		#add-task {
+		.add-task {
 			position: relative;
-			border: 1px solid var(--color-border-dark);
 			width: calc(100% - 44px);
-
-			input {
-				font-size: 13px;
-				width: 100%;
-				color: var(--color-main-text);
-				border: medium none !important;
-				border-radius: 0 !important;
-				box-shadow: none !important;
-				padding: 0 14px;
-				margin: 0;
-				cursor: text;
-				outline: none;
-				min-height: 44px;
-				text-overflow: ellipsis;
-				overflow: hidden;
-			}
 		}
 
 		.sortorder {
@@ -389,6 +372,28 @@ $blue_due: #4271a6;			// due dates and low importance
 		}
 	}
 
+	.add-task {
+		border: 1px solid var(--color-border-dark);
+
+		input {
+			border: medium none !important;
+			border-radius: 0 !important;
+			box-shadow: none !important;
+			box-sizing: border-box;
+			color: var(--color-main-text);
+			cursor: text;
+			font-size: 100%;
+			margin: 0;
+			padding: 0 14px;
+			width: 100%;
+			min-height: 44px;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			outline: none;
+		}
+	}
+
 	> div {
 		box-sizing: border-box;
 		padding-bottom: 75px;
@@ -439,24 +444,6 @@ $blue_due: #4271a6;			// due dates and low importance
 
 					&.deleted .task-info {
 						opacity: .6;
-					}
-
-					&.add-subtask {
-						border: 1px solid var(--color-border-dark);
-
-						input {
-							border: medium none !important;
-							border-radius: 0 !important;
-							box-shadow: none !important;
-							box-sizing: border-box;
-							color: var(--color-main-text);
-							cursor: text;
-							font-size: 100%;
-							margin: 0;
-							padding: 0 60px 0 44px;
-							width: 100%;
-							min-height: 44px;
-						}
 					}
 
 					&.sortable-ghost .task-body {
