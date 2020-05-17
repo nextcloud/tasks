@@ -14,6 +14,7 @@ OC.L10N.register(
     "can edit" : "може редагувати",
     "Unshare with {displayName}" : "Припинити поширення з {displayName}",
     "Unable to delete the share." : "Неможливо вилучити спільний елемент.",
+    "Unable to change permissions." : "Неможливо змінити права доступу.",
     "Add List…" : "Додати список",
     "New List" : "Новий список",
     "Cancel" : "Скасувати",
