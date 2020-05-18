@@ -36,6 +36,7 @@ OC.L10N.register(
     "Visible" : "Видимий",
     "Automatic" : "Автоматично",
     "No errors" : "Без помилок",
+    "Open your browser console for more details" : "Відкрийте консоль браузера для докладної інформації",
     "Change sort order" : "Зміна порядку сортування",
     "Relevance" : "Відповідність",
     "Start date" : "Дата початку",

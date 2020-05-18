@@ -27,7 +27,7 @@
     "Download" : "Herunterladen",
     "Delete" : "Löschen",
     "Unshare" : "Freigabe aufheben",
-    "This will delete the calendar \"{calendar}\" and all corresponding events and tasks." : "Hiermit wird der Kalender „{calendar}“ und alle zugehörigen Termine und Aufgaben gelöscht.",
+    "This will delete the calendar \"{calendar}\" and all corresponding events and tasks." : "Hierdurch wird der Kalender „{calendar}“ mit allen Terminen und Aufgaben gelöscht.",
     "This will unshare the calendar \"{calendar}\"." : "Die Freigabe des Kalenders \"{calendar}\" wird aufgehoben.",
     "Calendar link copied to clipboard." : "Kalender-Link in die Zwischenablage kopiert.",
     "Calendar link could not be copied to clipboard." : "Kalender-Link konnte nicht in die Zwischenablage kopiert werden.",
