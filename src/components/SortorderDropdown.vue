@@ -31,6 +31,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				content: order.hint,
 				delay: { show: 500, hide: 0 }
 			}"
+			class="reactive"
 			:class="{selected: sortOrder === order.id}"
 			:icon="getIcon(order)"
 			:close-after-click="true"
