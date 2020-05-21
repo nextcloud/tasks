@@ -25,7 +25,7 @@ OC.L10N.register(
     "Copied" : "Скопійовано",
     "Can not copy" : "Неможливо скопіювати",
     "Download" : "Завантажити",
-    "Delete" : "Видалити",
+    "Delete" : "Вилучити",
     "Unshare" : "Закрити доступ",
     "Calendar link copied to clipboard." : "Посилання на календар зкопійовано до буфера обміну",
     "Calendar link could not be copied to clipboard." : "Посилання на календар не може бути зкопійоване до буфера обміну",
