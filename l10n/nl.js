@@ -110,7 +110,7 @@ OC.L10N.register(
     "When shared show only busy" : "Wanneer gedeeld, toon enkel onbeschikbaarheid",
     "When shared hide this event" : "Wanneer gedeeld, verberg deze afspraak",
     "Needs action" : "Vereist actie",
-    "In process" : "I proces",
+    "In process" : "In behandeling",
     "Canceled" : "Geannuleerd",
     "[Starts today]" : "[Begint vandaag]",
     "[Starts tomorrow]" : "[Begint morgen]",
