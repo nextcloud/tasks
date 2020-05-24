@@ -37,7 +37,7 @@
 		"debounce": "^1.2.0",
 		"ical.js": "~1.4.0",
 		"jstimezonedetect": "",
-		"linkify-it": "~2.2.0",
+		"linkify-it": "~3.0.2",
 		"linkifyjs": "~2.1.9",
 		"markdown-it": "~11.0.0",
 		"markdown-it-emoji": "~1.4.0",
