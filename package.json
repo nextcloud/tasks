@@ -39,7 +39,7 @@
 		"jstimezonedetect": "",
 		"linkify-it": "~2.2.0",
 		"linkifyjs": "~2.1.9",
-		"markdown-it": "~10.0.0",
+		"markdown-it": "~11.0.0",
 		"markdown-it-emoji": "~1.4.0",
 		"markdown-it-link-attributes": "~3.0.0",
 		"markdown-it-task-lists": "~2.1.1",
