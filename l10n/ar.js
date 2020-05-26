@@ -21,6 +21,7 @@ OC.L10N.register(
     "Hidden" : "مخفي",
     "Automatic" : "تلقائي",
     "No errors" : "لا توجد أخطاء",
+    "Due date" : "تاريخ الانجاز",
     "Last modified" : "آخر تعديل",
     "Tomorrow" : "غدا",
     "When shared show full event" : "عرض الحدث كاملاً عند مشاركته",

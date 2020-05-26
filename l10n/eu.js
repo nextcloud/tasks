@@ -32,6 +32,7 @@ OC.L10N.register(
     "Calendar link copied to clipboard." : "Egutegiko esteka arbelera kopiatu da.",
     "Calendar link could not be copied to clipboard." : "Ezin izan da egutegiko esteka arbelera kopiatu.",
     "An error occurred, unable to delete the calendar." : "Errore bat gertatu da, ezin da egutegia ezabatu.",
+    "_Deleting the calendar in {countdown} second_::_Deleting the calendar in {countdown} seconds_" : ["Egutegia ezabatzen segundu {countdown}ean","Egutegia ezabatzen {countdown} segundutan"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Entitate {num}ekin partekatua","{num} entitaterekin partekatua"],
     "Default list" : "Zerrenda lehenetsia",
     "Visibility of Smart Collections" : "Bilduma adimendunen ikusgaitasuna",
