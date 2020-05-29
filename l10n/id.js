@@ -22,11 +22,13 @@ OC.L10N.register(
     "Hidden" : "Sembunyi",
     "Visible" : "Tampak",
     "Automatic" : "Otomatis",
+    "Due date" : "Tenggat",
     "Last modified" : "Terakhir diubah",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n Tugas Diselesaikan"],
     "Tomorrow" : "Besok",
     "Set start date" : "Atur tanggal mulai",
     "Set due date" : "Atur tanggal jatuh tempo",
-    "Task not found!" : "Tugas tidak ditemukan!"
+    "Task not found!" : "Tugas tidak ditemukan!",
+    "An error occurred" : "Terjadi kesalahan"
 },
 "nplurals=1; plural=0;");
