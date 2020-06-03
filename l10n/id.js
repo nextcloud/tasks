@@ -8,6 +8,7 @@ OC.L10N.register(
     "Current" : "Saat ini",
     "Completed" : "Selesai",
     "Tasks" : "Tugas",
+    "The Tasks app for Nextcloud" : "Aplikasi Tugas untuk Nextcloud",
     "Share with users or groups" : "Bagi dengan pengguna atau grup",
     "can edit" : "dapat menyunting",
     "New List" : "Daftar Baru",
