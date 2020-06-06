@@ -10,6 +10,7 @@
     "Share with users or groups" : "Jaa käyttäjien tai ryhmien kanssa",
     "No users or groups" : "Ei käyttäjiä tai ryhmiä",
     "can edit" : "voi muokata",
+    "Unshare with {displayName}" : "Poista jako kohteesta {displayName}",
     "Unable to delete the share." : "Jakoa ei voitu poistaa.",
     "Unable to change permissions." : "Käyttöoikeuksia ei voitu muuttaa.",
     "Add List…" : "Lisää lista…",
