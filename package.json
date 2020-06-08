@@ -29,7 +29,7 @@
 		"@nextcloud/dialogs": "^1.4.0",
 		"@nextcloud/initial-state": "1.1.2",
 		"@nextcloud/moment": "^1.1.1",
-		"@nextcloud/router": "^1.0.2",
+		"@nextcloud/router": "^1.1.0",
 		"@nextcloud/vue": "^2.0.0",
 		"@vue/test-utils": "^1.0.3",
 		"cdav-library": "github:nextcloud/cdav-library",
