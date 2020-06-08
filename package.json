@@ -87,7 +87,7 @@
 		"prettier-eslint": "^10.1.1",
 		"raw-loader": "^4.0.1",
 		"sass-loader": "^8.0.2",
-		"stylelint": "^13.5.0",
+		"stylelint": "^13.6.0",
 		"stylelint-config-recommended-scss": "^4.2.0",
 		"stylelint-scss": "^3.17.2",
 		"stylelint-webpack-plugin": "^2.0.0",
