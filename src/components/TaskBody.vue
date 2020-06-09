@@ -82,9 +82,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<div v-if="task.note!=''">
 					<span class="icon icon-sprt-bw sprt-note" />
 				</div>
-				<div v-if="task.due" :class="{overdue: overdue(task.dueMoment)}" class="duedate">
-					<span class="duedate__short">{{ dueDateShort }}</span>
-					<span class="duedate__long" :class="{ 'duedate__long--date-only': task.allDay }">{{ dueDateLong }}</span>
+				<div v-if="task.due || task.completed" :class="{overdue: overdue(task.dueMoment) && !task.completed}" class="date">
+					<span class="date__short" :class="{ 'date__short--completed': task.completed }">{{ dueDateShort }}</span>
+					<span class="date__long" :class="{ 'date__long--date-only': task.allDay && !task.completed, 'date__long--completed': task.completed }">{{ dueDateLong }}</span>
 				</div>
 				<Actions v-if="!deleteTimeout" class="reactive no-nav" menu-align="right">
 					<ActionButton v-if="!task.calendar.readOnly"
@@ -202,32 +202,58 @@ export default {
 		}),
 
 		dueDateShort() {
-			return this.task.dueMoment.isValid()
-				? this.task.dueMoment.calendar(null, {
-					lastDay: this.$t('tasks', '[Yesterday]'),
-					sameDay: this.$t('tasks', '[Today]'),
-					nextDay: this.$t('tasks', '[Tomorrow]'),
-					lastWeek: 'L',
-					nextWeek: 'L',
-					sameElse: 'L',
-				})
-				: ''
+			if (!this.task.completed) {
+				return this.task.dueMoment.isValid()
+					? this.task.dueMoment.calendar(null, {
+						lastDay: this.$t('tasks', '[Yesterday]'),
+						sameDay: this.$t('tasks', '[Today]'),
+						nextDay: this.$t('tasks', '[Tomorrow]'),
+						lastWeek: 'L',
+						nextWeek: 'L',
+						sameElse: 'L',
+					})
+					: ''
+			} else {
+				return this.task.completedDateMoment.isValid()
+					? this.task.completedDateMoment.calendar(null, {
+						lastDay: this.$t('tasks', '[Completed yesterday]'),
+						sameDay: this.$t('tasks', '[Completed today]'),
+						nextDay: this.$t('tasks', '[Completed tomorrow]'),
+						lastWeek: '[Completed] L',
+						nextWeek: '[Completed] L',
+						sameElse: '[Completed] L',
+					})
+					: ''
+			}
 		},
 
 		dueDateLong() {
 			if (this.task.allDay) {
 				return this.dueDateShort
 			}
-			return this.task.dueMoment.isValid()
-				? this.task.dueMoment.calendar(null, {
-					lastDay: this.$t('tasks', '[Yesterday at] LT'),
-					sameDay: this.$t('tasks', '[Today at] LT'),
-					nextDay: this.$t('tasks', '[Tomorrow at] LT'),
-					lastWeek: this.$t('tasks', 'L [at] LT'),
-					nextWeek: this.$t('tasks', 'L [at] LT'),
-					sameElse: this.$t('tasks', 'L [at] LT'),
-				})
-				: ''
+			if (!this.task.completed) {
+				return this.task.dueMoment.isValid()
+					? this.task.dueMoment.calendar(null, {
+						lastDay: this.$t('tasks', '[Yesterday at] LT'),
+						sameDay: this.$t('tasks', '[Today at] LT'),
+						nextDay: this.$t('tasks', '[Tomorrow at] LT'),
+						lastWeek: this.$t('tasks', 'L [at] LT'),
+						nextWeek: this.$t('tasks', 'L [at] LT'),
+						sameElse: this.$t('tasks', 'L [at] LT'),
+					})
+					: ''
+			} else {
+				return this.task.completedDateMoment.isValid()
+					? this.task.completedDateMoment.calendar(null, {
+						lastDay: this.$t('tasks', '[Completed yesterday at] LT'),
+						sameDay: this.$t('tasks', '[Completed today at] LT'),
+						nextDay: this.$t('tasks', '[Completed tomorrow at] LT'),
+						lastWeek: this.$t('tasks', '[Completed] L [at] LT'),
+						nextWeek: this.$t('tasks', '[Completed] L [at] LT'),
+						sameElse: this.$t('tasks', '[Completed] L [at] LT'),
+					})
+					: ''
+			}
 		},
 
 		collectionId() {
