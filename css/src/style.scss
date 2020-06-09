@@ -597,7 +597,7 @@ $blue_due: #4271a6;			// due dates and low importance
 								}
 							}
 
-							.duedate {
+							.date {
 								color: $blue_due;
 								font-size: 11px;
 								line-height: 14px;
@@ -615,6 +615,10 @@ $blue_due: #4271a6;			// due dates and low importance
 
 								&__short {
 									width: 60px;
+
+									&--completed {
+										width: 110px;
+									}
 								}
 
 								&__long {
@@ -623,6 +627,10 @@ $blue_due: #4271a6;			// due dates and low importance
 
 									&--date-only {
 										width: 60px;
+									}
+
+									&--completed {
+										width: 150px;
 									}
 								}
 
