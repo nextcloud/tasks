@@ -205,8 +205,11 @@ export default {
 			if (!this.task.completed) {
 				return this.task.dueMoment.isValid()
 					? this.task.dueMoment.calendar(null, {
+						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						lastDay: this.$t('tasks', '[Yesterday]'),
+						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						sameDay: this.$t('tasks', '[Today]'),
+						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						nextDay: this.$t('tasks', '[Tomorrow]'),
 						lastWeek: 'L',
 						nextWeek: 'L',
@@ -216,11 +219,17 @@ export default {
 			} else {
 				return this.task.completedDateMoment.isValid()
 					? this.task.completedDateMoment.calendar(null, {
+						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						lastDay: this.$t('tasks', '[Completed yesterday]'),
+						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						sameDay: this.$t('tasks', '[Completed today]'),
+						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						nextDay: this.$t('tasks', '[Completed tomorrow]'),
+						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						lastWeek: '[Completed] L',
+						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						nextWeek: '[Completed] L',
+						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						sameElse: '[Completed] L',
 					})
 					: ''
@@ -234,22 +243,34 @@ export default {
 			if (!this.task.completed) {
 				return this.task.dueMoment.isValid()
 					? this.task.dueMoment.calendar(null, {
+						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						lastDay: this.$t('tasks', '[Yesterday at] LT'),
+						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						sameDay: this.$t('tasks', '[Today at] LT'),
+						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						nextDay: this.$t('tasks', '[Tomorrow at] LT'),
+						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						lastWeek: this.$t('tasks', 'L [at] LT'),
+						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						nextWeek: this.$t('tasks', 'L [at] LT'),
+						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						sameElse: this.$t('tasks', 'L [at] LT'),
 					})
 					: ''
 			} else {
 				return this.task.completedDateMoment.isValid()
 					? this.task.completedDateMoment.calendar(null, {
+						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						lastDay: this.$t('tasks', '[Completed yesterday at] LT'),
+						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						sameDay: this.$t('tasks', '[Completed today at] LT'),
+						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						nextDay: this.$t('tasks', '[Completed tomorrow at] LT'),
+						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						lastWeek: this.$t('tasks', '[Completed] L [at] LT'),
+						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						nextWeek: this.$t('tasks', '[Completed] L [at] LT'),
+						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						sameElse: this.$t('tasks', '[Completed] L [at] LT'),
 					})
 					: ''
