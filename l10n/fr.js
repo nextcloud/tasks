@@ -90,6 +90,7 @@ OC.L10N.register(
     "[Completed yesterday at] LT" : "[Terminé hier à] LT",
     "[Completed today at] LT" : "[Terminé aujourd'hui à] LT",
     "[Completed tomorrow at] LT" : "[Terminé demain à] LT",
+    "[Completed] L [at] LT" : "[Terminé] L [à] LT",
     "Add a subtask to \"{task}\"…" : "Ajouter une sous-tâche dans \"{task}\"…",
     "An error occurred, unable to delete the task." : "Une erreur est survenue, impossible de supprimer la tâche.",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["Suppression de la tâche dans {countdown} seconde","Suppression de la tâche dans {countdown} secondes"],
