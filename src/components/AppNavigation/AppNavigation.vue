@@ -20,74 +20,84 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<ul id="collections">
-		<AppNavigationItem
-			v-for="collection in collections"
-			v-show="!hideCollection(collection)"
-			:id="'collection_' + collection.id"
-			:key="collection.id"
-			:collection-id="collection.id"
-			:icon="collection.icon"
-			:to="{ name: 'collections', params: { collectionId: collection.id } }"
-			:title="collection.displayName"
-			class="collection reactive"
-			draggable="false"
-			@dragstart.native="dragStart"
-			@drop.native="dropTaskOnCollection(...arguments, collection)"
-			@dragover.native="dragOver"
-			@dragenter.native="dragEnter(...arguments, collection)"
-			@dragleave.native="dragLeave"
-			@click="setInitialRoute(`/collections/${collection.id}`)">
-			<AppNavigationCounter slot="counter">
-				{{ collectionCount(collection.id) | counterFormatter }}
-			</AppNavigationCounter>
-		</AppNavigationItem>
-		<ListItemCalendar
-			v-for="calendar in calendars"
-			:key="calendar.id"
-			:calendar="calendar"
-			@click.native="setInitialRoute(`/calendars/${calendar.id}`)" />
-		<AppNavigationItem v-click-outside="cancelCreate"
-			:title="$t('tasks', 'Add List…')"
-			icon="sprt-add"
-			:class="{edit: creating}"
-			class="collection reactive"
-			@click="startCreate($event)">
-			<div :class="{error: nameError}" class="app-navigation-entry-edit">
-				<form>
-					<input id="newListInput"
-						v-model="newCalendarName"
-						v-tooltip="{
-							content: tooltipMessage,
-							show: showTooltip('list_'),
-							trigger: 'manual'
-						}"
-						:placeholder="$t('tasks', 'New List')"
-						class="edit"
-						type="text"
-						@keyup="checkName($event, null, create)">
-					<input :title="$t('tasks', 'Cancel')"
-						type="cancel"
-						value=""
-						class="action icon-close"
-						@click="cancelCreate">
-					<input :title="$t('tasks', 'Save')"
-						type="button"
-						value=""
-						class="action icon-checkmark"
-						@click="create($event)">
-				</form>
-				<Colorpicker :selected-color="selectedColor" @color-selected="setColor(...arguments)" />
-			</div>
-		</AppNavigationItem>
-	</ul>
+	<AppNavigation>
+		<template #list>
+			<AppNavigationItem
+				v-for="collection in collections"
+				v-show="!hideCollection(collection)"
+				:id="'collection_' + collection.id"
+				:key="collection.id"
+				:collection-id="collection.id"
+				:icon="collection.icon"
+				:to="{ name: 'collections', params: { collectionId: collection.id } }"
+				:title="collection.displayName"
+				class="collection reactive"
+				draggable="false"
+				@dragstart.native="dragStart"
+				@drop.native="dropTaskOnCollection(...arguments, collection)"
+				@dragover.native="dragOver"
+				@dragenter.native="dragEnter(...arguments, collection)"
+				@dragleave.native="dragLeave"
+				@click="setInitialRoute(`/collections/${collection.id}`)">
+				<AppNavigationCounter slot="counter">
+					{{ collectionCount(collection.id) | counterFormatter }}
+				</AppNavigationCounter>
+			</AppNavigationItem>
+			<ListItemCalendar
+				v-for="calendar in calendars"
+				:key="calendar.id"
+				:calendar="calendar"
+				@click.native="setInitialRoute(`/calendars/${calendar.id}`)" />
+			<AppNavigationItem v-click-outside="cancelCreate"
+				:title="$t('tasks', 'Add List…')"
+				icon="sprt-add"
+				:class="{edit: creating}"
+				class="collection reactive"
+				@click="startCreate($event)">
+				<div :class="{error: nameError}" class="app-navigation-entry-edit">
+					<form>
+						<input id="newListInput"
+							v-model="newCalendarName"
+							v-tooltip="{
+								content: tooltipMessage,
+								show: showTooltip('list_'),
+								trigger: 'manual'
+							}"
+							:placeholder="$t('tasks', 'New List')"
+							class="edit"
+							type="text"
+							@keyup="checkName($event, null, create)">
+						<input :title="$t('tasks', 'Cancel')"
+							type="cancel"
+							value=""
+							class="action icon-close"
+							@click="cancelCreate">
+						<input :title="$t('tasks', 'Save')"
+							type="button"
+							value=""
+							class="action icon-checkmark"
+							@click="create($event)">
+					</form>
+					<Colorpicker :selected-color="selectedColor" @color-selected="setColor(...arguments)" />
+				</div>
+			</AppNavigationItem>
+		</template>
+		<template #footer>
+			<AppNavigationSettings>
+				<TheSettings />
+			</AppNavigationSettings>
+		</template>
+	</AppNavigation>
 </template>
 
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 import ListItemCalendar from './ListItemCalendar'
 import Colorpicker from './Colorpicker'
+import TheSettings from './TheSettings'
 
+import AppNavigation from '@nextcloud/vue/dist/Components/AppNavigation'
+import AppNavigationSettings from '@nextcloud/vue/dist/Components/AppNavigationSettings'
 import ClickOutside from 'vue-click-outside'
 import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
 import AppNavigationCounter from '@nextcloud/vue/dist/Components/AppNavigationCounter'
@@ -96,8 +106,11 @@ export default {
 	components: {
 		ListItemCalendar,
 		Colorpicker,
+		TheSettings,
+		AppNavigation,
 		AppNavigationItem,
 		AppNavigationCounter,
+		AppNavigationSettings,
 	},
 	directives: {
 		ClickOutside,
