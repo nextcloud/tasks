@@ -21,12 +21,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<Content app-name="tasks" @click.native="closeDetails($event)">
-		<AppNavigation>
-			<TheList />
-			<AppNavigationSettings>
-				<TheSettings />
-			</AppNavigationSettings>
-		</AppNavigation>
+		<AppNavigation />
 
 		<AppContent>
 			<RouterView />
@@ -40,22 +35,16 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import { mapState } from 'vuex'
-import AppNavigation from '@nextcloud/vue/dist/Components/AppNavigation'
+import AppNavigation from './components/AppNavigation/AppNavigation'
 import AppContent from '@nextcloud/vue/dist/Components/AppContent'
 import Content from '@nextcloud/vue/dist/Components/Content'
-import AppNavigationSettings from '@nextcloud/vue/dist/Components/AppNavigationSettings'
-import TheList from './components/AppNavigation/List'
-import TheSettings from './components/AppNavigation/TheSettings'
 import client from './services/cdav.js'
 
 export default {
 	name: 'App',
 	components: {
-		TheSettings,
-		TheList,
 		AppNavigation,
 		AppContent,
-		AppNavigationSettings,
 		Content,
 	},
 	computed: {
