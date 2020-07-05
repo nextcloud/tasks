@@ -3,9 +3,9 @@ OC.L10N.register(
     {
     "Today" : "Hari ini",
     "Week" : "Minggu",
-    "can edit" : "boleh mengubah",
     "Cancel" : "Batal",
     "Save" : "Simpan",
+    "can edit" : "boleh mengubah",
     "Edit" : "Sunting",
     "Download" : "Muat turun",
     "Delete" : "Padam"
