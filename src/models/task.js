@@ -103,8 +103,7 @@ export default class Task {
 		const d = due || start
 		this._allDay = d !== null && d.isDate
 		this._loaded = false
-		const categories = this.vtodo.getFirstProperty('categories')
-		this._categories = categories ? categories.getValues() : []
+		this._categories = this.getCategories()
 		this._modified = this.vtodo.getFirstPropertyValue('last-modified')
 		this._modifiedMoment = moment(this._modified, 'YYYYMMDDTHHmmss')
 		this._created = this.vtodo.getFirstPropertyValue('created')
@@ -508,6 +507,16 @@ export default class Task {
 		return this._categories
 	}
 
+	getCategories() {
+		let categories = []
+		for (const cats of this.vtodo.getAllProperties('categories')) {
+			if (cats) {
+				categories = categories.concat(cats.getValues())
+			}
+		}
+		return categories
+	}
+
 	/**
 	 * Set the categories
 	 *
@@ -515,21 +524,38 @@ export default class Task {
 	 * @memberof Task
 	 */
 	set categories(newCategories) {
-		let categories = this.vtodo.getFirstProperty('categories')
 		if (newCategories.length > 0) {
-			if (categories) {
-				categories.setValues(newCategories)
-			} else {
+			let categories = this.vtodo.getAllProperties('categories')
+			// If there are no categories set yet, just set them
+			if (categories.length < 1) {
 				const prop = new ICAL.Property('categories')
 				prop.setValues(newCategories)
 				categories = this.vtodo.addProperty(prop)
+			// If there is only one categories property, overwrite it
+			} else if (categories.length < 2) {
+				categories[0].setValues(newCategories)
+			// If there are multiple categories properties, we have to iterate over all
+			// and remove unwanted categories and add new ones
+			} else {
+				const toRemove = this._categories.filter(c => !newCategories.includes(c))
+				const toAdd = newCategories.filter(c => !this._categories.includes(c))
+				// Remove all unwanted categories
+				for (const cats of categories) {
+					const c = cats.getValues().filter(c => !toRemove.includes(c))
+					if (c.length) {
+						cats.setValues(c)
+					} else {
+						this.vtodo.removeProperty(cats)
+					}
+				}
+				// Add new categories
+				categories[0].setValues(categories[0].getValues().concat(toAdd))
 			}
 		} else {
-			this.vtodo.removeProperty('categories')
+			this.vtodo.removeAllProperties('categories')
 		}
 		this.updateLastModified()
-		categories = this.vtodo.getFirstProperty('categories')
-		this._categories = categories ? categories.getValues() : []
+		this._categories = this.getCategories()
 	}
 
 	updateLastModified() {
