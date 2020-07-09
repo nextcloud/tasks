@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Today" : "Hiziv",
     "All" : "Pep tra",
+    "Completed" : "Achuet",
     "Cancel" : "Arrest",
     "Save" : "Entilañ",
     "Edit" : "Cheñch",
