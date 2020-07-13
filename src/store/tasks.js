@@ -424,9 +424,7 @@ const mutations = {
 	 * @param {String} category The category to add
 	 */
 	addCategory(state, { task, category }) {
-		const categories = task.categories
-		categories.push(category)
-		Vue.set(task, 'categories', categories)
+		Vue.set(task, 'categories', task.categories.concat([category]))
 	},
 
 	/**
