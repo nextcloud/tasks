@@ -1,3 +1,15 @@
+## 0.13.2 - 2020-07-13
+
+### Added
+- Show completed date in task body #1078
+- Updated translations
+- Updated dependencies
+
+### Fixed
+- Don't close task details when selecting sort order #1046
+- Properly handle multiple categories properties #1114
+- Add comments for translators fd01755acb939d1cf4f07c2291e353845172af6d
+
 ## 0.13.1 - 2020-05-15
 
 ### Added
