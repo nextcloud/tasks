@@ -104,7 +104,13 @@ export default {
 		},
 
 		inputString() {
-			return this.$t('tasks', 'Add a task due today to "{calendar}"…', { calendar: this.calendar.displayName })
+			return this.$t(
+				'tasks',
+				'Add a task due today to "{calendar}"…',
+				{ calendar: this.calendar.displayName },
+				undefined,
+				{ sanitize: false, escape: false }
+			)
 		},
 	},
 	methods: {

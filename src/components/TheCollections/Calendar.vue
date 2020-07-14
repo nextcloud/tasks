@@ -99,7 +99,13 @@ export default {
 		},
 
 		inputString() {
-			return this.$t('tasks', 'Add a task to "{task}"…', { task: this.calendar.displayName })
+			return this.$t(
+				'tasks',
+				'Add a task to "{task}"…',
+				{ task: this.calendar.displayName },
+				undefined,
+				{ sanitize: false, escape: false }
+			)
 		},
 
 		/**
