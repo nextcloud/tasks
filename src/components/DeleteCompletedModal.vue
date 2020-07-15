@@ -38,7 +38,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							{
 								taskCount: initialCompletedRootTasksCount,
 								calendar: calendar.displayName
-							}
+							},
+							{ sanitize: false, escape: false }
 						) }}
 					</h3>
 					<button class="delete-completed__button icon-delete"
@@ -49,7 +50,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</div>
 				<div v-else>
 					<h3 class="delete-completed__header">
-						{{ $t('tasks', 'Deleted all completed tasks from calendar "{calendar}".', { calendar: calendar.displayName }) }}
+						{{ $t('tasks',
+							'Deleted all completed tasks from calendar "{calendar}".',
+							{ calendar: calendar.displayName },
+							undefined,
+							{ sanitize: false, escape: false }
+						) }}
 					</h3>
 				</div>
 				<div>

@@ -322,7 +322,13 @@ export default {
 		 * @returns {String} the placeholder string to show
 		 */
 		subtasksCreationPlaceholder() {
-			return this.$t('tasks', 'Add a subtask to "{task}"…', { task: this.task.summary })
+			return this.$t(
+				'tasks',
+				'Add a subtask to "{task}"…',
+				{ task: this.task.summary },
+				undefined,
+				{ sanitize: false, escape: false }
+			)
 		},
 
 		/**
