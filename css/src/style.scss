@@ -437,18 +437,19 @@ $priority_colors: ($red_overdue, $red_overdue, $red_overdue, $red_overdue, $yell
 			*/
 			
 			@mixin remove-last-squared-corners($sublevels-left: 8) {
-				&:empty {
+				&::before,
+				&>ol:empty::before {
 					display: none !important;
 				}
 				@if $sublevels-left > 0 {
-					&>.task-item:last-child>.subtasks-container>ol {
+					&>ol>.task-item:last-child>.subtasks-container{
 						@include remove-last-squared-corners($sublevels-left - 1);
 					}
 				}
 			}
 			
-			.grouped-tasks>ol,
-			.sortable-ghost>.subtasks-container>ol {
+			.grouped-tasks,
+			.sortable-ghost>.subtasks-container {
 				@include remove-last-squared-corners;
 			}
 			
@@ -487,35 +488,30 @@ $priority_colors: ($red_overdue, $red_overdue, $red_overdue, $red_overdue, $yell
 						}
 					}
 					
-					.subtasks-container>ol,
-					.subtasks-container>.add-task {
-						&:not(:empty) {
-							margin-left: 44px;
-							
-							&>.task-item:first-child>.task-body{
-								border-top-left-radius: 0;
-							}						
-						}
-
-						&::before {
-							content: '';
-							display: block;
-							height: 1px;
-							border: 0 solid var(--color-main-background);
-							border-width: var(--border-radius) 0;
-							margin: calc(-1 * var(--border-radius)) 0;
-							background-color: var(--color-background-darker);
-							position: relative;
-							z-index: -1;
-						}
-					}
-					
-					.subtasks-container>.add-task {
-						border-top: 1px solid var(--color-background-darker);
-					}
-					
-					.subtasks-container>.add-task + ol {
+					&.subtasksHidden>.subtasks-container {
 						margin-left: 44px;
+					}
+					&:not(.subtasksHidden)>.subtasks-container{
+						&>ol:not(:empty),
+						&>.add-task + ol,
+						&>.add-task {
+							margin-left: 44px;
+						}
+					}
+					
+					&.subtasksHidden>.subtasks-container::before,
+					&.subtasksHidden>.subtasks-container>.add-task::after,
+					&:not(.subtasksHidden)>.subtasks-container>.add-task::before,
+					&>.subtasks-container>ol::before {
+						content: '';
+						display: block;
+						height: 1px;
+						border: 0 solid var(--color-main-background);
+						border-width: var(--border-radius) 0;
+						margin: calc(-1 * var(--border-radius)) 0;
+						background-color: var(--color-background-darker);
+						position: relative;
+						z-index: -1;
 					}
 					
 					// Apply colors to checkboxes for each non-zero priority level

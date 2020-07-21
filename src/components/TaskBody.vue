@@ -23,7 +23,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <template>
 	<li v-show="showTask"
 		:task-id="task.uri"
-		:class="{done: task.completed, readOnly: readOnly, deleted: !!deleteTimeout}"
+		:class="{done: task.completed, readOnly: readOnly, deleted: !!deleteTimeout, subtasksHidden: !showSubtasks}"
 		:data-priority="[task.priority]"
 		class="task-item"
 		@dragstart="dragStart($event)">
