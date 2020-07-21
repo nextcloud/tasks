@@ -467,6 +467,11 @@ $priority_colors: ($red_overdue, $red_overdue, $red_overdue, $red_overdue, $yell
 				
 				>ol {
 					filter: drop-shadow(1px 1px 1px var(--color-box-shadow));
+					z-index: 1;
+					
+					&:hover {
+						z-index: 10;
+					}
 				}
 				
 				.task-item {
