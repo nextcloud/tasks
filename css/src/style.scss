@@ -500,9 +500,11 @@ $priority_colors: ($red_overdue, $red_overdue, $red_overdue, $red_overdue, $yell
 						&::before {
 							content: '';
 							display: block;
-							padding: var(--border-radius);
+							height: 1px;
+							border: 0 solid var(--color-main-background);
+							border-width: var(--border-radius) 0;
 							margin: calc(-1 * var(--border-radius)) 0;
-							background: var(--color-main-background);
+							background-color: var(--color-background-darker);
 							position: relative;
 							z-index: -1;
 						}
@@ -532,7 +534,6 @@ $priority_colors: ($red_overdue, $red_overdue, $red_overdue, $red_overdue, $yell
 						position: relative;
 						background-color: var(--color-main-background);
 						border-radius: var(--border-radius);
-						box-shadow: inset 0 2px 0 -1px var(--color-background-darker);
 
 						&.active {
 							.task-info .title {
