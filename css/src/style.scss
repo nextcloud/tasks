@@ -437,6 +437,14 @@ $priority_colors: ($red_overdue, $red_overdue, $red_overdue, $red_overdue, $yell
 			*/
 			
 			@mixin remove-last-squared-corners($sublevels-left: 8) {
+				&>.add-task{
+					&::before{
+						display: block;
+					}
+					&::after{
+						display: none;
+					}
+				}
 				&::before,
 				&>ol:empty::before {
 					display: none !important;
@@ -496,6 +504,7 @@ $priority_colors: ($red_overdue, $red_overdue, $red_overdue, $red_overdue, $yell
 					}
 					
 					&.subtasksHidden>.subtasks-container::before,
+					&.subtasksHidden>.subtasks-container>.add-task::before,
 					&.subtasksHidden>.subtasks-container>.add-task::after,
 					&:not(.subtasksHidden)>.subtasks-container>.add-task::before,
 					&>.subtasks-container>ol::before {
@@ -508,6 +517,9 @@ $priority_colors: ($red_overdue, $red_overdue, $red_overdue, $red_overdue, $yell
 						background-color: var(--color-background-darker);
 						position: relative;
 						z-index: -1;
+					}
+					&.subtasksHidden>.subtasks-container>.add-task::before{
+						display: none;
 					}
 					
 					// Apply colors to checkboxes for each non-zero priority level
