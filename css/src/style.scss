@@ -5,6 +5,9 @@ $red_overdue: #b3312d;		// overdue dates and high importance
 $yellow: #fd0;				// medium importance
 $blue_due: #4271a6;			// due dates and low importance
 
+// Specify colors for each non-zero priority level
+$priority_colors: ($red_overdue, $red_overdue, $red_overdue, $red_overdue, $yellow, $blue_due, $blue_due, $blue_due, $blue_due);
+
 /**
  * rules for app-navigation
  */
@@ -248,11 +251,13 @@ $blue_due: #4271a6;			// due dates and low importance
 }
 
 .app-content {
+	background-color: var(--color-background-dark) !important;	
+	
 	.header {
 		padding: 12px 15px 12px 44px;
 		position: sticky;
 		top: 50px;
-		background-color: var(--color-main-background-translucent);
+		background-color: var(--color-background-dark);
 		z-index: 1000;
 		display: flex;
 
@@ -263,6 +268,10 @@ $blue_due: #4271a6;			// due dates and low importance
 		.add-task {
 			position: relative;
 			width: calc(100% - 44px);
+			
+			input{
+				box-shadow: 1px 1px 1px var(--color-box-shadow);
+			}
 		}
 
 		.sortorder {
@@ -372,26 +381,21 @@ $blue_due: #4271a6;			// due dates and low importance
 		}
 	}
 
-	.add-task {
-		border: 1px solid var(--color-border-dark);
-
-		input {
-			border: medium none !important;
-			border-radius: 0 !important;
-			box-shadow: none !important;
-			box-sizing: border-box;
-			color: var(--color-main-text);
-			cursor: text;
-			font-size: 100%;
-			margin: 0;
-			padding: 0 15px;
-			width: 100%;
-			min-height: 44px;
-			overflow: hidden;
-			white-space: nowrap;
-			text-overflow: ellipsis;
-			outline: none;
-		}
+	.add-task input {
+		border: medium none !important;
+		box-sizing: border-box;
+		color: var(--color-main-text);
+		cursor: text;
+		font-size: 100%;
+		margin: 0;
+		padding: 0 15px;
+		width: 100%;
+		min-height: 44px;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		outline: none;
+		border-radius: var(--border-radius);
 	}
 
 	> div {
@@ -414,8 +418,8 @@ $blue_due: #4271a6;			// due dates and low importance
 
 				span {
 					color: var(--color-text-lighter);
-					background-color: var(--color-background-dark);
-					border-radius: 10px;
+					background-color: var(--color-main-background);
+					border-radius: var(--border-radius-pill);
 					padding: 3px 6px;
 
 					&:hover {
@@ -425,17 +429,45 @@ $blue_due: #4271a6;			// due dates and low importance
 				}
 			}
 
+
+			/*
+			This mixin is a way to remove the squared corners from the last task of a tree.
+			CSS has no selector for this, this is done using a recursive mixin for up to 8 sublevels of tasks (arbitrary chosen).
+			After this point, the last task of the tree will have squared corners, but nothing will technically break.
+			*/
+			
+			@mixin remove-last-squared-corners($sublevels-left: 8) {
+				&:empty {
+					display: none !important;
+				}
+				@if $sublevels-left > 0 {
+					&>.task-item:last-child>.subtasks-container>ol {
+						@include remove-last-squared-corners($sublevels-left - 1);
+					}
+				}
+			}
+			
+			.grouped-tasks>ol,
+			.sortable-ghost>.subtasks-container>ol {
+				@include remove-last-squared-corners;
+			}
+			
 			.grouped-tasks {
 				position: relative;
 				padding-top: 2px;
-
+				
+				>ol {
+					filter: drop-shadow(1px 1px 1px var(--color-box-shadow));
+				}
+				
 				.task-item {
 					cursor: default;
 					list-style: none outside none;
-					margin-top: -1px;
 
 					&.done .task-body {
-						opacity: .6;
+						.task-info{
+							opacity: .6;
+						}
 
 						.title {
 							text-decoration: line-through;
@@ -446,13 +478,49 @@ $blue_due: #4271a6;			// due dates and low importance
 						opacity: .6;
 					}
 
-					&.sortable-ghost .task-body {
-						// background-color: rgba( $color-primary, .1 ); didn't work for some reason
-						background-color: transparentize( $color-primary, .9 );
-					}
+					&.sortable-ghost {						
+						filter: drop-shadow(0 0 3px var(--color-primary));
+						z-index: 5;
 
-					.subtasks-container {
+						.task-body {
+							border-radius: var(--border-radius) !important;
+						}
+					}
+					
+					.subtasks-container>ol,
+					.subtasks-container>.add-task {
+						&:not(:empty) {
+							margin-left: 44px;
+							
+							&>.task-item:first-child>.task-body{
+								border-top-left-radius: 0;
+							}						
+						}
+
+						&::before {
+							content: '';
+							display: block;
+							padding: var(--border-radius);
+							margin: calc(-1 * var(--border-radius)) 0;
+							background: var(--color-main-background);
+							position: relative;
+							z-index: -1;
+						}
+					}
+					
+					.subtasks-container>.add-task {
+						border-top: 1px solid var(--color-background-darker);
+					}
+					
+					.subtasks-container>.add-task + ol {
 						margin-left: 44px;
+					}
+					
+					// Apply colors to checkboxes for each non-zero priority level
+					@for $i from 1 through 9 {
+						&[data-priority="#{$i}"]>.task-body>.task-checkbox>input[type='checkbox'].checkbox + label::before {
+							border-color: nth($priority_colors, $i);
+						}
 					}
 
 					.task-body {
@@ -462,21 +530,26 @@ $blue_due: #4271a6;			// due dates and low importance
 						align-items: center;
 						height: 44px;
 						position: relative;
-						border: 1px solid var(--color-border-dark);
-
-						&:hover {
-							background-color: var(--color-background-hover);
-						}
+						background-color: var(--color-main-background);
+						border-radius: var(--border-radius);
+						box-shadow: inset 0 2px 0 -1px var(--color-background-darker);
 
 						&.active {
-							background-color: var(--color-primary-light) !important;
+							.task-info .title {
+								font-weight: bold;
+							}
 						}
 
 						.task-checkbox {
-							padding: 11px;
+							padding: 12px 10px;
 							height: 44px;
 							width: 44px;
-							opacity: .5;
+														
+							input[type='checkbox'].checkbox + label::before {
+								border-width: 2px;
+								border-radius: var(--border-radius);
+								border-color: $color-lightgrey;
+							}
 						}
 
 						.task-info {
