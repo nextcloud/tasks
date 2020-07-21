@@ -482,10 +482,6 @@ $priority_colors: ($red_overdue, $red_overdue, $red_overdue, $red_overdue, $yell
 					&.sortable-ghost {						
 						filter: drop-shadow(0 0 3px var(--color-primary));
 						z-index: 5;
-
-						.task-body {
-							border-radius: var(--border-radius) !important;
-						}
 					}
 					
 					&.subtasksHidden>.subtasks-container {
