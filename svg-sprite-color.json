@@ -14,7 +14,7 @@
 			"render": {
 				"scss": {
 					"template": "svg-sprite-color.tmpl",
-					"dest": "src/sprites-color.scss"
+					"dest": "sprites-color.scss"
 				}
 			}
 		}

@@ -15,6 +15,8 @@
 		"watch": "NODE_ENV=development webpack --progress --watch --config webpack.dev.js",
 		"lint": "eslint --ext .js,.vue src tests",
 		"lint:fix": "eslint --ext .js,.vue src tests --fix",
+		"stylelint": "stylelint 'css/src/**/*.scss'",
+		"stylelint:fix": "stylelint 'css/src/**/*.scss' --fix",
 		"test": "jest --verbose",
 		"svg_sprite": "svg-sprite --config svg-sprite-color.json img/src/color/*.svg && svg-sprite --config svg-sprite-bw.json img/src/bw/*.svg"
 	},

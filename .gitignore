@@ -5,8 +5,8 @@ composer.phar
 ######################
 ## Files build by make
 ######################
-/css/src/sprites-bw.scss
-/css/src/sprites-color.scss
+/css/sprites-bw.scss
+/css/sprites-color.scss
 /img/sprt-bw.svg
 /img/sprt-color.svg
 /js/

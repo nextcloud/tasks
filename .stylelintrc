@@ -1,9 +1,13 @@
 {
 	"extends": "stylelint-config-recommended-scss",
 	"rules": {
+		"no-eol-whitespace": true,
+		"length-zero-no-unit": true,
+		"block-opening-brace-space-before": "always",
+		"block-no-empty": true,
 		"indentation": "tab",
 		"selector-type-no-unknown": null,
-		"number-leading-zero": null,
+		"number-leading-zero": "never",
 		"rule-empty-line-before": ["always", {
 			"ignore": ["after-comment", "inside-block"]
 		}],
