@@ -14,7 +14,7 @@
 			"render": {
 				"scss": {
 					"template": "svg-sprite-bw.tmpl",
-					"dest": "src/sprites-bw.scss"
+					"dest": "sprites-bw.scss"
 				}
 			}
 		}

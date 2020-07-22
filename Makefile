@@ -100,9 +100,9 @@ update-composer: composer.phar
 # Removes the build directory and the compiled files
 .PHONY: clean
 clean:
-	rm -f ./css/src/sprites.scss
-	rm -f ./css/src/sprites-bw.scss
-	rm -f ./css/src/sprites-color.scss
+	rm -f ./css/sprites.scss
+	rm -f ./css/sprites-bw.scss
+	rm -f ./css/sprites-color.scss
 	rm -f ./img/sprites.svg
 	rm -f ./img/bw.svg
 	rm -f ./img/color.svg
