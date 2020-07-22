@@ -41,19 +41,19 @@
 			.action-checkbox__label {
 				padding-right: 0 !important;
 			}
-	
+
 			.action-checkbox__label::before {
 				margin: 4px 4px 0 !important;
 			}
 		}
-		
+
 		&__multiselect {
 			padding-left: 6px !important;
 
 			.multiselect {
 				width: calc(100% - 14px);
 				margin: 0;
-				.multiselect__tags:focus-within, 
+				.multiselect__tags:focus-within,
 				.multiselect__tags:hover {
 					border-color: var(--color-primary-element);
 				}
