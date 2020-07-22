@@ -27,7 +27,7 @@ use OCP\IConfig;
 class SettingsService {
 
 	/**
-	 * @var string
+	 * @var ?string
 	 */
 	private $userId;
 
@@ -46,7 +46,7 @@ class SettingsService {
 	 * @param IConfig $settings
 	 * @param string $appName
 	 */
-	public function __construct(string $userId, IConfig $config, string $appName) {
+	public function __construct(?string $userId, IConfig $config, string $appName) {
 		$this->userId = $userId;
 		$this->config = $config;
 		$this->appName = $appName;
