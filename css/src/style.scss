@@ -5,9 +5,6 @@ $red_overdue: #b3312d;		// overdue dates and high importance
 $yellow: #fd0;				// medium importance
 $blue_due: #4271a6;			// due dates and low importance
 
-// Specify colors for each non-zero priority level
-$priority_colors: ($red_overdue, $red_overdue, $red_overdue, $red_overdue, $yellow, $blue_due, $blue_due, $blue_due, $blue_due);
-
 /**
  * rules for app-navigation
  */
@@ -527,13 +524,6 @@ $priority_colors: ($red_overdue, $red_overdue, $red_overdue, $red_overdue, $yell
 						display: none;
 					}
 
-					// Apply colors to checkboxes for each non-zero priority level
-					@for $i from 1 through 9 {
-						&[data-priority="#{$i}"]>.task-body>.task-checkbox>input[type='checkbox'].checkbox + label::before {
-							border-color: nth($priority_colors, $i);
-						}
-					}
-
 					.task-body {
 						display: flex;
 						flex-direction: row;
@@ -555,10 +545,22 @@ $priority_colors: ($red_overdue, $red_overdue, $red_overdue, $red_overdue, $yell
 							height: 44px;
 							width: 44px;
 
-							input[type='checkbox'].checkbox + label::before {
-								border-width: 2px;
-								border-radius: var(--border-radius);
-								border-color: $color-lightgrey;
+							input[type='checkbox'].checkbox + label {
+								&::before {
+									border-width: 2px;
+									border-radius: var(--border-radius);
+								}
+
+								&.priority-high::before {
+									border-color: $red_overdue;
+								}
+								&.priority-medium::before {
+									border-color: $yellow;
+								}
+
+								&.priority-low::before {
+									border-color: $blue_due;
+								}
 							}
 						}
 
@@ -870,7 +872,24 @@ $priority_colors: ($red_overdue, $red_overdue, $red_overdue, $red_overdue, $yell
 
 			.detail-checkbox {
 				padding: 11px 10px;
-				opacity: .5;
+
+				input[type='checkbox'].checkbox + label {
+					&::before {
+						border-width: 2px;
+						border-radius: var(--border-radius);
+					}
+
+					&.priority-high::before {
+						border-color: $red_overdue;
+					}
+					&.priority-medium::before {
+						border-color: $yellow;
+					}
+
+					&.priority-low::before {
+						border-color: $blue_due;
+					}
+				}
 			}
 
 			.title-wrapper {
@@ -1223,6 +1242,11 @@ $priority_colors: ($red_overdue, $red_overdue, $red_overdue, $red_overdue, $yell
 					label {
 						padding-left: 14px;
 						width: 100%;
+
+						&::before {
+							border-width: 2px;
+							border-radius: var(--border-radius);
+						}
 					}
 
 					div,

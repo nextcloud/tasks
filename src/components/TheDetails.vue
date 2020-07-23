@@ -36,7 +36,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						:disabled="readOnly"
 						:aria-label="$t('tasks', 'Task is completed')"
 						@click="toggleCompleted(task)">
-					<label :for="'detailsToggleCompleted_' + task.uid" />
+					<label :class="[checkboxColor]" :for="'detailsToggleCompleted_' + task.uid" />
 				</span>
 				<div v-click-outside="() => finishEditing('summary')" class="title-wrapper">
 					<div v-linkify="task.summary"
@@ -617,6 +617,10 @@ export default {
 				return this.$t('tasks', 'Priority {priority}: low', { priority: this.task.priority })
 			}
 			return ''
+		},
+		checkboxColor() {
+			const priority = this.priorityClass
+			return priority ? `priority-${priority}` : ''
 		},
 		completeString() {
 			return this.$t('tasks', '{percent} % completed', { percent: this.task.complete })
