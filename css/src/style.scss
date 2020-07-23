@@ -251,8 +251,8 @@ $priority_colors: ($red_overdue, $red_overdue, $red_overdue, $red_overdue, $yell
 }
 
 .app-content {
-	background-color: var(--color-background-dark) !important;	
-	
+	background-color: var(--color-background-dark) !important;
+
 	.header {
 		padding: 12px 15px 12px 44px;
 		position: sticky;
@@ -268,8 +268,8 @@ $priority_colors: ($red_overdue, $red_overdue, $red_overdue, $red_overdue, $yell
 		.add-task {
 			position: relative;
 			width: calc(100% - 44px);
-			
-			input{
+
+			input {
 				box-shadow: 1px 1px 1px var(--color-box-shadow);
 			}
 		}
@@ -435,13 +435,13 @@ $priority_colors: ($red_overdue, $red_overdue, $red_overdue, $red_overdue, $yell
 			CSS has no selector for this, this is done using a recursive mixin for up to 8 sublevels of tasks (arbitrary chosen).
 			After this point, the last task of the tree will have squared corners, but nothing will technically break.
 			*/
-			
+
 			@mixin remove-last-squared-corners($sublevels-left: 8) {
-				&>.add-task{
-					&::before{
+				&>.add-task {
+					&::before {
 						display: block;
 					}
-					&::after{
+					&::after {
 						display: none;
 					}
 				}
@@ -450,36 +450,36 @@ $priority_colors: ($red_overdue, $red_overdue, $red_overdue, $red_overdue, $yell
 					display: none !important;
 				}
 				@if $sublevels-left > 0 {
-					&>ol>.task-item:last-child>.subtasks-container{
+					&>ol>.task-item:last-child>.subtasks-container {
 						@include remove-last-squared-corners($sublevels-left - 1);
 					}
 				}
 			}
-			
+
 			.grouped-tasks,
 			.sortable-ghost>.subtasks-container {
 				@include remove-last-squared-corners;
 			}
-			
+
 			.grouped-tasks {
 				position: relative;
 				padding-top: 2px;
-				
+
 				>ol {
 					filter: drop-shadow(1px 1px 1px var(--color-box-shadow));
 					z-index: 1;
-					
+
 					&:hover {
 						z-index: 10;
 					}
 				}
-				
+
 				.task-item {
 					cursor: default;
 					list-style: none outside none;
 
 					&.done .task-body {
-						.task-info{
+						.task-info {
 							opacity: .6;
 						}
 
@@ -492,22 +492,22 @@ $priority_colors: ($red_overdue, $red_overdue, $red_overdue, $red_overdue, $yell
 						opacity: .6;
 					}
 
-					&.sortable-ghost {						
+					&.sortable-ghost {
 						filter: drop-shadow(0 0 3px var(--color-primary));
 						z-index: 5;
 					}
-					
+
 					&.subtasksHidden>.subtasks-container {
 						margin-left: 44px;
 					}
-					&:not(.subtasksHidden)>.subtasks-container{
+					&:not(.subtasksHidden)>.subtasks-container {
 						&>ol:not(:empty),
 						&>.add-task + ol,
 						&>.add-task {
 							margin-left: 44px;
 						}
 					}
-					
+
 					&.subtasksHidden>.subtasks-container::before,
 					&.subtasksHidden>.subtasks-container>.add-task::before,
 					&.subtasksHidden>.subtasks-container>.add-task::after,
@@ -523,10 +523,10 @@ $priority_colors: ($red_overdue, $red_overdue, $red_overdue, $red_overdue, $yell
 						position: relative;
 						z-index: -1;
 					}
-					&.subtasksHidden>.subtasks-container>.add-task::before{
+					&.subtasksHidden>.subtasks-container>.add-task::before {
 						display: none;
 					}
-					
+
 					// Apply colors to checkboxes for each non-zero priority level
 					@for $i from 1 through 9 {
 						&[data-priority="#{$i}"]>.task-body>.task-checkbox>input[type='checkbox'].checkbox + label::before {
@@ -554,7 +554,7 @@ $priority_colors: ($red_overdue, $red_overdue, $red_overdue, $red_overdue, $yell
 							padding: 12px 10px;
 							height: 44px;
 							width: 44px;
-														
+
 							input[type='checkbox'].checkbox + label::before {
 								border-width: 2px;
 								border-radius: var(--border-radius);
