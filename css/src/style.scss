@@ -267,7 +267,7 @@ $blue_due: #4271a6;			// due dates and low importance
 			width: calc(100% - 44px);
 
 			input {
-				box-shadow: 1px 1px 1px var(--color-box-shadow);
+				box-shadow: 0 0 1px var(--color-box-shadow);
 			}
 		}
 
@@ -463,7 +463,7 @@ $blue_due: #4271a6;			// due dates and low importance
 				padding-top: 2px;
 
 				>ol {
-					filter: drop-shadow(1px 1px 1px var(--color-box-shadow));
+					filter: drop-shadow(0 0 1px var(--color-box-shadow));
 					z-index: 1;
 
 					&:hover {
