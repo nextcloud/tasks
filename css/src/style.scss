@@ -534,10 +534,12 @@ $blue_due: #4271a6;			// due dates and low importance
 						background-color: var(--color-main-background);
 						border-radius: var(--border-radius);
 
+						&:hover {
+							background-color: var(--color-background-hover);
+						}
+
 						&.active {
-							.task-info .title {
-								font-weight: bold;
-							}
+							background-color: var(--color-primary-light) !important;
 						}
 
 						.task-checkbox {
