@@ -426,48 +426,23 @@ $blue_due: #4271a6;			// due dates and low importance
 				}
 			}
 
-
-			/*
-			This mixin is a way to remove the squared corners from the last task of a tree.
-			CSS has no selector for this, this is done using a recursive mixin for up to 8 sublevels of tasks (arbitrary chosen).
-			After this point, the last task of the tree will have squared corners, but nothing will technically break.
-			*/
-
-			@mixin remove-last-squared-corners($sublevels-left: 8) {
-				&>.add-task {
-					&::before {
-						display: block;
-					}
-					&::after {
-						display: none;
-					}
-				}
-				&::before,
-				&>ol:empty::before {
-					display: none !important;
-				}
-				@if $sublevels-left > 0 {
-					&>ol>.task-item:last-child>.subtasks-container {
-						@include remove-last-squared-corners($sublevels-left - 1);
-					}
-				}
-			}
-
-			.grouped-tasks,
-			.sortable-ghost>.subtasks-container {
-				@include remove-last-squared-corners;
-			}
-
 			.grouped-tasks {
 				position: relative;
 				padding-top: 2px;
 
-				>ol {
+				> ol {
 					filter: drop-shadow(0 0 1px var(--color-box-shadow));
 					z-index: 1;
 
 					&:hover {
 						z-index: 10;
+					}
+
+					// Show round corners for first root task
+					> .task-item:first-child > .task-body {
+						border-top-left-radius: var(--border-radius);
+						border-top-right-radius: var(--border-radius);
+						border-top: none;
 					}
 				}
 
@@ -494,34 +469,48 @@ $blue_due: #4271a6;			// due dates and low importance
 						z-index: 5;
 					}
 
-					&.subtasksHidden>.subtasks-container {
-						margin-left: 44px;
-					}
-					&:not(.subtasksHidden)>.subtasks-container {
-						&>ol:not(:empty),
-						&>.add-task + ol,
-						&>.add-task {
-							margin-left: 44px;
+					&.add-task {
+						border-top:  1px solid var(--color-border);
+
+						input {
+							border-top-left-radius: 0;
+							border-top-right-radius: 0;
 						}
 					}
 
-					&.subtasksHidden>.subtasks-container::before,
-					&.subtasksHidden>.subtasks-container>.add-task::before,
-					&.subtasksHidden>.subtasks-container>.add-task::after,
-					&:not(.subtasksHidden)>.subtasks-container>.add-task::before,
-					&>.subtasks-container>ol::before {
-						content: '';
-						display: block;
-						height: 1px;
-						border: 0 solid var(--color-main-background);
-						border-width: var(--border-radius) 0;
-						margin: calc(-1 * var(--border-radius)) 0;
-						background-color: var(--color-background-darker);
-						position: relative;
-						z-index: -1;
+					// Show round corners if a task is the last in the (sub-)list
+					&:last-child .task-body {
+						border-bottom-left-radius: var(--border-radius);
+						border-bottom-right-radius: var(--border-radius);
 					}
-					&.subtasksHidden>.subtasks-container>.add-task::before {
-						display: none;
+
+					// Don't show round corners if any of the ancestors is not the last in the (sub-)list
+					&:not(:last-child) {
+						.add-task input {
+							border-bottom-left-radius: 0;
+							border-bottom-right-radius: 0;
+						}
+						.task-body {
+							border-bottom-left-radius: 0;
+							border-bottom-right-radius: 0;
+						}
+					}
+
+					// If the subtasks container is visible, show a round corner for the task itself and
+					// the next task in the list
+					&.container-visible {
+						& > .task-body {
+							border-bottom-left-radius: var(--border-radius);
+							border-bottom-right-radius: 0;
+						}
+
+						& + .task-item > .task-body {
+							border-top-left-radius: var(--border-radius);
+						}
+					}
+
+					.subtasks-container {
+						margin-left: 44px;
 					}
 
 					.task-body {
@@ -532,7 +521,7 @@ $blue_due: #4271a6;			// due dates and low importance
 						height: 44px;
 						position: relative;
 						background-color: var(--color-main-background);
-						border-radius: var(--border-radius);
+						border-top: 1px solid var(--color-border);
 
 						&:hover {
 							background-color: var(--color-background-hover);
