@@ -445,7 +445,7 @@ $blue_due: #4271a6;			// due dates and low importance
 							border-top-right-radius: var(--border-radius);
 							border-top: none;
 						}
-						
+
 						& > .task-body {
 							@media only screen and (max-width: $breakpoint-mobile) {
 								border-radius: 0 !important;
