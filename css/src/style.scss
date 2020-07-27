@@ -549,11 +549,17 @@ $blue_due: #4271a6;			// due dates and low importance
 								&::before {
 									border-width: 2px;
 									border-radius: var(--border-radius);
+									border-color: var(--color-border-dark);
+								}
+
+								&:hover {
+									border-color: var(--color-border-dark);
 								}
 
 								&.priority-high::before {
 									border-color: $red_overdue;
 								}
+
 								&.priority-medium::before {
 									border-color: $yellow;
 								}
@@ -877,11 +883,17 @@ $blue_due: #4271a6;			// due dates and low importance
 					&::before {
 						border-width: 2px;
 						border-radius: var(--border-radius);
+						border-color: var(--color-border-dark);
+					}
+
+					&:hover {
+						border-color: var(--color-border-dark);
 					}
 
 					&.priority-high::before {
 						border-color: $red_overdue;
 					}
+
 					&.priority-medium::before {
 						border-color: $yellow;
 					}
