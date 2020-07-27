@@ -486,6 +486,7 @@ $blue_due: #4271a6;			// due dates and low importance
 
 					// Don't show round corners if any of the ancestors is not the last in the (sub-)list
 					&:not(:last-child) {
+						&.add-task input,
 						.add-task input {
 							border-bottom-left-radius: 0;
 							border-bottom-right-radius: 0;
