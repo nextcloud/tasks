@@ -18,7 +18,13 @@
 		"selector-type-case": null,
 		"selector-list-comma-newline-after": null,
 		"no-descending-specificity": null,
-		"string-quotes": "single"
+		"string-quotes": "single",
+		"selector-combinator-space-before": "always",
+		"selector-combinator-space-after": "always",
+		"declaration-block-no-duplicate-properties": true,
+		"no-extra-semicolons": true,
+		"declaration-colon-space-after": "always",
+		"declaration-colon-space-before": "never"
 	},
 	"plugins": [
 		"stylelint-scss"
