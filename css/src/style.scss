@@ -142,7 +142,6 @@ $blue_due: #4271a6;			// due dates and low importance
 
 .colorpicker {
 	display: block;
-	height: 30px;
 	height: auto;
 	padding-bottom: 3px;
 	padding-top: 3px;
@@ -478,7 +477,7 @@ $blue_due: #4271a6;			// due dates and low importance
 					}
 
 					&.add-task {
-						border-top:  1px solid var(--color-border);
+						border-top: 1px solid var(--color-border);
 
 						input {
 							border-top-left-radius: 0;
@@ -648,7 +647,7 @@ $blue_due: #4271a6;			// due dates and low importance
 							display: flex;
 							margin-left: auto;
 
-							&>div:not(.action-item) {
+							& > div:not(.action-item) {
 								height: 44px;
 								padding: 14px 7px;
 								display: flex;
@@ -680,7 +679,7 @@ $blue_due: #4271a6;			// due dates and low importance
 								}
 							}
 
-							&>div.task-status-container {
+							& > div.task-status-container {
 								padding: 14px 0;
 
 								.status-display {
@@ -842,7 +841,7 @@ $blue_due: #4271a6;			// due dates and low importance
 			display: flex;
 			justify-content: space-between;
 
-			>span {
+			> span {
 				padding: 14px;
 
 				&.info {
@@ -1270,7 +1269,7 @@ $blue_due: #4271a6;			// due dates and low importance
 						&::before {
 							margin-left: 0;
 						}
-						>span {
+						> span {
 							font-weight: bold;
 							margin-left: 10px;
 						}
