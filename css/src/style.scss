@@ -248,11 +248,13 @@ $blue_due: #4271a6;			// due dates and low importance
 }
 
 .app-content {
+	background-color: var(--color-background-dark) !important;
+
 	.header {
 		padding: 12px 15px 12px 44px;
 		position: sticky;
 		top: 50px;
-		background-color: var(--color-main-background-translucent);
+		background-color: var(--color-background-dark);
 		z-index: 1000;
 		display: flex;
 
@@ -263,6 +265,10 @@ $blue_due: #4271a6;			// due dates and low importance
 		.add-task {
 			position: relative;
 			width: calc(100% - 44px);
+
+			input {
+				box-shadow: 0 0 1px var(--color-box-shadow);
+			}
 		}
 
 		.sortorder {
@@ -372,26 +378,21 @@ $blue_due: #4271a6;			// due dates and low importance
 		}
 	}
 
-	.add-task {
-		border: 1px solid var(--color-border-dark);
-
-		input {
-			border: medium none !important;
-			border-radius: 0 !important;
-			box-shadow: none !important;
-			box-sizing: border-box;
-			color: var(--color-main-text);
-			cursor: text;
-			font-size: 100%;
-			margin: 0;
-			padding: 0 15px;
-			width: 100%;
-			min-height: 44px;
-			overflow: hidden;
-			white-space: nowrap;
-			text-overflow: ellipsis;
-			outline: none;
-		}
+	.add-task input {
+		border: medium none !important;
+		box-sizing: border-box;
+		color: var(--color-main-text);
+		cursor: text;
+		font-size: 100%;
+		margin: 0;
+		padding: 0 15px;
+		width: 100%;
+		min-height: 44px;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		outline: none;
+		border-radius: var(--border-radius);
 	}
 
 	> div {
@@ -414,8 +415,8 @@ $blue_due: #4271a6;			// due dates and low importance
 
 				span {
 					color: var(--color-text-lighter);
-					background-color: var(--color-background-dark);
-					border-radius: 10px;
+					background-color: var(--color-main-background);
+					border-radius: var(--border-radius-pill);
 					padding: 3px 6px;
 
 					&:hover {
@@ -429,13 +430,38 @@ $blue_due: #4271a6;			// due dates and low importance
 				position: relative;
 				padding-top: 2px;
 
+				> ol {
+					filter: drop-shadow(0 0 1px var(--color-box-shadow));
+					z-index: 1;
+
+					&:hover {
+						z-index: 10;
+					}
+
+					// Show round corners for first root task
+					> .task-item {
+						&:first-child > .task-body {
+							border-top-left-radius: var(--border-radius);
+							border-top-right-radius: var(--border-radius);
+							border-top: none;
+						}
+
+						& > .task-body {
+							@media only screen and (max-width: $breakpoint-mobile) {
+								border-radius: 0 !important;
+							}
+						}
+					}
+				}
+
 				.task-item {
 					cursor: default;
 					list-style: none outside none;
-					margin-top: -1px;
 
 					&.done .task-body {
-						opacity: .6;
+						.task-info {
+							opacity: .6;
+						}
 
 						.title {
 							text-decoration: line-through;
@@ -446,9 +472,50 @@ $blue_due: #4271a6;			// due dates and low importance
 						opacity: .6;
 					}
 
-					&.sortable-ghost .task-body {
-						// background-color: rgba( $color-primary, .1 ); didn't work for some reason
-						background-color: transparentize( $color-primary, .9 );
+					&.sortable-ghost {
+						filter: drop-shadow(0 0 3px var(--color-primary));
+						z-index: 5;
+					}
+
+					&.add-task {
+						border-top:  1px solid var(--color-border);
+
+						input {
+							border-top-left-radius: 0;
+							border-top-right-radius: 0;
+						}
+					}
+
+					// Show round corners if a task is the last in the (sub-)list
+					&:last-child .task-body {
+						border-bottom-left-radius: var(--border-radius);
+						border-bottom-right-radius: var(--border-radius);
+					}
+
+					// Don't show round corners if any of the ancestors is not the last in the (sub-)list
+					&:not(:last-child) {
+						&.add-task input,
+						.add-task input {
+							border-bottom-left-radius: 0;
+							border-bottom-right-radius: 0;
+						}
+						.task-body {
+							border-bottom-left-radius: 0;
+							border-bottom-right-radius: 0;
+						}
+					}
+
+					// If the subtasks container is visible, show a round corner for the task itself and
+					// the next task in the list
+					&.container-visible {
+						& > .task-body {
+							border-bottom-left-radius: var(--border-radius);
+							border-bottom-right-radius: 0;
+						}
+
+						& + .task-item > .task-body {
+							border-top-left-radius: var(--border-radius);
+						}
 					}
 
 					.subtasks-container {
@@ -462,7 +529,8 @@ $blue_due: #4271a6;			// due dates and low importance
 						align-items: center;
 						height: 44px;
 						position: relative;
-						border: 1px solid var(--color-border-dark);
+						background-color: var(--color-main-background);
+						border-top: 1px solid var(--color-border);
 
 						&:hover {
 							background-color: var(--color-background-hover);
@@ -473,10 +541,33 @@ $blue_due: #4271a6;			// due dates and low importance
 						}
 
 						.task-checkbox {
-							padding: 11px;
+							padding: 11px 10px;
 							height: 44px;
 							width: 44px;
-							opacity: .5;
+
+							input[type='checkbox'].checkbox + label {
+								&::before {
+									border-width: 2px;
+									border-radius: var(--border-radius);
+									border-color: var(--color-border-dark);
+								}
+
+								&:hover {
+									border-color: var(--color-border-dark);
+								}
+
+								&.priority-high::before {
+									border-color: $red_overdue;
+								}
+
+								&.priority-medium::before {
+									border-color: $yellow;
+								}
+
+								&.priority-low::before {
+									border-color: $blue_due;
+								}
+							}
 						}
 
 						.task-info {
@@ -768,7 +859,7 @@ $blue_due: #4271a6;			// due dates and low importance
 			flex: 0 0 auto;
 			display: flex;
 			align-items: center;
-			background-color: var(--color-background-dark);
+			background-color: var(--color-background-hover);
 			border-bottom: 1px solid var(--color-border-dark);
 			font-size: 16px;
 			font-weight: bold;
@@ -787,7 +878,30 @@ $blue_due: #4271a6;			// due dates and low importance
 
 			.detail-checkbox {
 				padding: 11px 10px;
-				opacity: .5;
+
+				input[type='checkbox'].checkbox + label {
+					&::before {
+						border-width: 2px;
+						border-radius: var(--border-radius);
+						border-color: var(--color-border-dark);
+					}
+
+					&:hover {
+						border-color: var(--color-border-dark);
+					}
+
+					&.priority-high::before {
+						border-color: $red_overdue;
+					}
+
+					&.priority-medium::before {
+						border-color: $yellow;
+					}
+
+					&.priority-low::before {
+						border-color: $blue_due;
+					}
+				}
 			}
 
 			.title-wrapper {
@@ -1140,6 +1254,11 @@ $blue_due: #4271a6;			// due dates and low importance
 					label {
 						padding-left: 14px;
 						width: 100%;
+
+						&::before {
+							border-width: 2px;
+							border-radius: var(--border-radius);
+						}
 					}
 
 					div,

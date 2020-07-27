@@ -23,7 +23,13 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <template>
 	<li v-show="showTask"
 		:task-id="task.uri"
-		:class="{done: task.completed, readOnly: readOnly, deleted: !!deleteTimeout}"
+		:class="{
+			done: task.completed,
+			readOnly: readOnly,
+			deleted: !!deleteTimeout,
+			subtasksHidden: !showSubtasks,
+			'container-visible': ((showSubtasks && filteredSubtasks.length) || showSubtaskInput)
+		}"
 		:data-priority="[task.priority]"
 		class="task-item"
 		@dragstart="dragStart($event)">
@@ -44,7 +50,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					:disabled="readOnly"
 					:aria-label="$t('tasks', 'Task is completed')"
 					@click="toggleCompleted(task)">
-				<label class="reactive no-nav" :for="'toggleCompleted_' + task.uid" />
+				<label :class="[checkboxColor, 'reactive no-nav']" :for="'toggleCompleted_' + task.uid" />
 			</div>
 			<!-- Info: title, progress & categories -->
 			<div class="task-info">
@@ -293,16 +299,26 @@ export default {
 			}
 		},
 
-		iconStar() {
+		priorityClass() {
 			if (+this.task.priority > 5) {
-				return 'sprt-color sprt-task-star-low'
+				return 'low'
 			} else if (+this.task.priority === 5) {
-				return 'sprt-color sprt-task-star-medium'
+				return 'medium'
 			} else if (+this.task.priority > 0 && +this.task.priority < 5) {
-				return 'sprt-color sprt-task-star-high'
+				return 'high'
 			} else {
-				return 'icon-sprt-bw sprt-task-star'
+				return ''
 			}
+		},
+
+		checkboxColor() {
+			const priority = this.priorityClass
+			return priority ? `priority-${priority}` : ''
+		},
+
+		iconStar() {
+			const priority = this.priorityClass
+			return priority ? `sprt-color sprt-task-star-${priority}` : 'icon-sprt-bw sprt-task-star'
 		},
 
 		hasCompletedSubtasks() {

@@ -20,7 +20,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<draggable tag="ol"
+	<draggable v-if="sortedTasks.length"
+		tag="ol"
 		:list="['']"
 		:set-data="setDragData"
 		v-bind="{group: 'tasks', swapThreshold: 0.30, delay: 500, delayOnTouchOnly: true, touchStartThreshold: 3, disabled: disabled, filter: '.readOnly'}"
