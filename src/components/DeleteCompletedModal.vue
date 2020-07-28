@@ -31,16 +31,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<p class="icon-delete" />
 				<div v-if="completedTasksCount">
 					<h3 class="delete-completed__header">
-						{{ $n('tasks',
-							'This will delete {taskCount} completed task and its subtasks from calendar "{calendar}".',
-							'This will delete {taskCount} completed tasks and their subtasks from calendar "{calendar}".',
-							initialCompletedRootTasksCount,
-							{
-								taskCount: initialCompletedRootTasksCount,
-								calendar: calendar.displayName
-							},
-							{ sanitize: false, escape: false }
-						) }}
+						{{ $n('tasks', 'This will delete {taskCount} completed task and its subtasks from calendar "{calendar}".', 'This will delete {taskCount} completed tasks and their subtasks from calendar "{calendar}".', initialCompletedRootTasksCount, {taskCount: initialCompletedRootTasksCount, calendar: calendar.displayName}, { sanitize: false, escape: false }) }}
 					</h3>
 					<button class="delete-completed__button icon-delete"
 						type="button"
@@ -50,12 +41,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</div>
 				<div v-else>
 					<h3 class="delete-completed__header">
-						{{ $t('tasks',
-							'Deleted all completed tasks from calendar "{calendar}".',
-							{ calendar: calendar.displayName },
-							undefined,
-							{ sanitize: false, escape: false }
-						) }}
+						{{ $t('tasks', 'Deleted all completed tasks from calendar "{calendar}".', { calendar: calendar.displayName }, undefined, { sanitize: false, escape: false }) }}
 					</h3>
 				</div>
 				<div>
@@ -66,12 +52,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							{{ $t('tasks', 'No errors') }}
 						</span>
 						<span v-else v-tooltip.auto="$t('tasks', 'Open your browser console for more details')">
-							{{ $n('tasks',
-								'Could not delete {failedCount} task.',
-								'Could not delete {failedCount} tasks.',
-								failed,
-								{ failedCount: failed }
-							) }}
+							{{ $n('tasks', 'Could not delete {failedCount} task.', 'Could not delete {failedCount} tasks.', failed, { failedCount: failed }) }}
 						</span>
 					</p>
 				</div>

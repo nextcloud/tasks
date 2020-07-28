@@ -205,37 +205,13 @@ export default {
 
 		deleteMessage() {
 			return !this.calendar.isSharedWithMe
-				? this.$t(
-					'tasks',
-					'This will delete the calendar "{calendar}" and all corresponding events and tasks.',
-					{ calendar: this.calendar.displayName },
-					undefined,
-					{ sanitize: false, escape: false }
-				)
-				: this.$t(
-					'tasks',
-					'This will unshare the calendar "{calendar}".',
-					{ calendar: this.calendar.displayName },
-					undefined,
-					{ sanitize: false, escape: false }
-				)
+				? this.$t('tasks', 'This will delete the calendar "{calendar}" and all corresponding events and tasks.', { calendar: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
+				: this.$t('tasks', 'This will unshare the calendar "{calendar}".', { calendar: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
 		},
 		undoDeleteMessage() {
 			return !this.calendar.isSharedWithMe
-				? this.$n(
-					'tasks',
-					'Deleting the calendar in {countdown} second',
-					'Deleting the calendar in {countdown} seconds',
-					this.countdown,
-					{ countdown: this.countdown }
-				)
-				: this.$n(
-					'tasks',
-					'Unsharing the calendar in {countdown} second',
-					'Unsharing the calendar in {countdown} seconds',
-					this.countdown,
-					{ countdown: this.countdown }
-				)
+				? this.$n('tasks', 'Deleting the calendar in {countdown} second', 'Deleting the calendar in {countdown} seconds', this.countdown, { countdown: this.countdown })
+				: this.$n('tasks', 'Unsharing the calendar in {countdown} second', 'Unsharing the calendar in {countdown} seconds', this.countdown, { countdown: this.countdown })
 		},
 		sharingIconClass() {
 			if (this.calendar.shares.length) {
