@@ -323,13 +323,7 @@ export default {
 				msg: '',
 			}
 			if (this.isCalendarNameUsed(name, id)) {
-				check.msg = this.$t(
-					'tasks',
-					'The name "{calendar}" is already used.',
-					{ calendar: name },
-					undefined,
-					{ sanitize: false, escape: false }
-				)
+				check.msg = this.$t('tasks', 'The name "{calendar}" is already used.', { calendar: name }, undefined, { sanitize: false, escape: false })
 			} else if (!name) {
 				check.msg = this.$t('tasks', 'An empty name is not allowed.')
 			} else {

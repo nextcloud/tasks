@@ -109,37 +109,13 @@ export default {
 		inputString() {
 			switch (this.collectionId) {
 			case 'starred':
-				return this.$t(
-					'tasks',
-					'Add an important task to "{calendar}"…',
-					{ calendar: this.calendar.displayName },
-					undefined,
-					{ sanitize: false, escape: false }
-				)
+				return this.$t('tasks', 'Add an important task to "{calendar}"…', { calendar: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
 			case 'today':
-				return this.$t(
-					'tasks',
-					'Add a task due today to "{calendar}"…',
-					{ calendar: this.calendar.displayName },
-					undefined,
-					{ sanitize: false, escape: false }
-				)
+				return this.$t('tasks', 'Add a task due today to "{calendar}"…', { calendar: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
 			case 'current':
-				return this.$t(
-					'tasks',
-					'Add a current task to "{calendar}"…',
-					{ calendar: this.calendar.displayName },
-					undefined,
-					{ sanitize: false, escape: false }
-				)
+				return this.$t('tasks', 'Add a current task to "{calendar}"…', { calendar: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
 			default:
-				return this.$t(
-					'tasks',
-					'Add a task to "{calendar}"…',
-					{ calendar: this.calendar.displayName },
-					undefined,
-					{ sanitize: false, escape: false }
-				)
+				return this.$t('tasks', 'Add a task to "{calendar}"…', { calendar: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
 			}
 		},
 		...mapGetters({
