@@ -28,7 +28,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			readOnly: readOnly,
 			deleted: !!deleteTimeout,
 			subtasksHidden: !showSubtasks,
-			'container-visible': ((showSubtasks && filteredSubtasks.length) || showSubtaskInput)
+			'container-visible': (filteredSubtasksShown.length || showSubtaskInput),
+			'subtasks-visible': filteredSubtasksShown.length
 		}"
 		:data-priority="[task.priority]"
 		class="task-item"
@@ -143,8 +144,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						@keyup.27="showSubtaskInput = false">
 				</form>
 			</div>
-			<TaskDragContainer v-if="showSubtasks"
-				:tasks="filteredSubtasks"
+			<TaskDragContainer
+				:tasks="filteredSubtasksShown"
 				:disabled="task.calendar.readOnly"
 				:collection-string="collectionString"
 				:task-id="task.uri"
@@ -346,7 +347,7 @@ export default {
 		 * filtered by collections (for week, today, important and current) when
 		 * the task is not opened in details view.
 		 *
-		 * @returns {Array} the array with the subtasks to show
+		 * @returns {Array} the array with the filtered subtasks
 		 */
 		filteredSubtasks() {
 			let subTasks = Object.values(this.task.subTasks)
@@ -362,6 +363,18 @@ export default {
 				})
 			}
 			return subTasks
+		},
+
+		/**
+		 * Returns the filtered subtasks or an empty array if the subtasks should be hidden.
+		 *
+		 * @returns {Array} the array with the subtasks to show
+		 */
+		filteredSubtasksShown() {
+			 if (this.showSubtasks) {
+				return this.filteredSubtasks
+			 }
+			 return []
 		},
 
 		/**

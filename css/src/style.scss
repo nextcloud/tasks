@@ -480,8 +480,7 @@ $blue_due: #4271a6;			// due dates and low importance
 						border-top: 1px solid var(--color-border);
 
 						input {
-							border-top-left-radius: 0;
-							border-top-right-radius: 0;
+							border-radius: 0;
 						}
 					}
 
@@ -491,9 +490,13 @@ $blue_due: #4271a6;			// due dates and low importance
 						border-bottom-right-radius: var(--border-radius);
 					}
 
+					&:not(.subtasks-visible) .add-task input {
+						border-bottom-left-radius: var(--border-radius);
+						border-bottom-right-radius: var(--border-radius);
+					}
+
 					// Don't show round corners if any of the ancestors is not the last in the (sub-)list
 					&:not(:last-child) {
-						&.add-task input,
 						.add-task input {
 							border-bottom-left-radius: 0;
 							border-bottom-right-radius: 0;
