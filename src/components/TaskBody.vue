@@ -28,7 +28,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			readOnly: readOnly,
 			deleted: !!deleteTimeout,
 			subtasksHidden: !showSubtasks,
-			'container-visible': ((showSubtasks && filteredSubtasks.length) || showSubtaskInput)
+			'container-visible': (filteredSubtasksShown.length || showSubtaskInput),
+			'subtasks-visible': filteredSubtasksShown.length
 		}"
 		:data-priority="[task.priority]"
 		class="task-item"
