@@ -6,7 +6,7 @@ OC.L10N.register(
     "Current" : "A red",
     "Completed" : "Achuet",
     "Cancel" : "Arrest",
-    "Save" : "Entilañ",
+    "Save" : "Enrollañ",
     "can edit" : "posuple eo embann",
     "Edit" : "Cheñch",
     "Download" : "Pellgargañ",
