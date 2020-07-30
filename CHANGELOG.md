@@ -1,3 +1,18 @@
+## 0.13.3 - 2020-07-30
+
+### Added
+- Update the design of the task list #1136
+- Updated translations
+- Updated dependencies
+
+### Fixed
+- Fix double escaping of calendar names, needs NC 18.0.5 or 19.0.1 onwards #1123
+- Allow dragging to parent tasks which have their subtasks hidden #1150
+- Fix opacity of completed tasks dropdown menu #1136 #1145
+- Fix Internal Server Error when not logged in #1138
+- Fix unused import of css file #1125
+- Add SCSS stylelint, fix SCSS style issues #1139 #1144
+
 ## 0.13.2 - 2020-07-13
 
 ### Added
