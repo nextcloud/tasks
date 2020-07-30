@@ -32,6 +32,8 @@
     "Calendar link copied to clipboard." : "Odkaz do kalendáře zkopírován do schránky.",
     "Calendar link could not be copied to clipboard." : "Odkaz do kalendáře se nepodařilo zkopírovat do schránky.",
     "An error occurred, unable to delete the calendar." : "Došlo k chybě, kalendář se nepodařilo smazat.",
+    "_Deleting the calendar in {countdown} second_::_Deleting the calendar in {countdown} seconds_" : ["Kalendáře bude smazán za {countdown} sekundu","Kalendáře bude smazán za {countdown} sekundy","Kalendáře bude smazán za {countdown} sekund","Kalendáře bude smazán za {countdown} sekundy"],
+    "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Sdílení kalendáře bude zrušeno za {countdown} sekundu","Sdílení kalendáře bude zrušeno za {countdown} sekundy","Sdílení kalendáře bude zrušeno za {countdown} sekund","Sdílení kalendáře bude zrušeno za {countdown} sekundy"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Sdíleno s {num} entitou","Sdíleno s {num} entitami","Sdíleno s {num} entitami","Sdíleno s {num} entitami"],
     "Default list" : "Výchozí seznam",
     "Visibility of Smart Collections" : "Viditelnost Chytrých kolekcí",

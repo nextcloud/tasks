@@ -34,6 +34,8 @@ OC.L10N.register(
     "Calendar link copied to clipboard." : "Takvim bağlantısı panoya kopyalandı.",
     "Calendar link could not be copied to clipboard." : "Takvim bağlantısı panoya kopyalanamadı.",
     "An error occurred, unable to delete the calendar." : "Bir sorun çıktı. Takvim silinemedi.",
+    "_Deleting the calendar in {countdown} second_::_Deleting the calendar in {countdown} seconds_" : ["Takvim {countdown} saniye içinde silinecek","Takvim {countdown} saniye içinde silinecek"],
+    "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Takvim {countdown} saniye içinde paylaşımdan kaldırılacak","Takvim {countdown} saniye içinde paylaşımdan kaldırılacak"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["{num} varlık ile paylaşılmış","{num} varlık ile paylaşılmış"],
     "Default list" : "Varsayılan liste",
     "Visibility of Smart Collections" : "Akıllı Derleme Görünürlüğü",

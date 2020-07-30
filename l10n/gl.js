@@ -34,6 +34,8 @@ OC.L10N.register(
     "Calendar link copied to clipboard." : "A ligazón do calendario foi copiada no portapapeis.",
     "Calendar link could not be copied to clipboard." : "Non foi posíbel copiar a ligazón do calendario no portapapeis.",
     "An error occurred, unable to delete the calendar." : "Produciuse un erro, non é posíbel eliminar o calendario.",
+    "_Deleting the calendar in {countdown} second_::_Deleting the calendar in {countdown} seconds_" : ["Eliminar o calendario en {countdown} segundo","Eliminar o calendario en {countdown} segundos"],
+    "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Deixar de compartir o calendario en {countdown} segundo","Deixar de compartir o calendario en {countdown} segundos"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Compartido con {num} entidade","Compartido con {num} entidades"],
     "Default list" : "Lista predeterminada",
     "Visibility of Smart Collections" : "Visibilidade das coleccións intelixentes",

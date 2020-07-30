@@ -34,6 +34,8 @@ OC.L10N.register(
     "Calendar link copied to clipboard." : "Odkaz na kalendár skopírovaný do schránky.",
     "Calendar link could not be copied to clipboard." : "Odkaz na kalendár nebolo možné  skopírovať do schránky.",
     "An error occurred, unable to delete the calendar." : "Vyskytla sa chyba, nie je možné zmazať kalendár.",
+    "_Deleting the calendar in {countdown} second_::_Deleting the calendar in {countdown} seconds_" : ["Kalendár bude zmazaný za {countdown} sekundu","Kalendár bude zmazaný za {countdown} sekundy","Kalendár bude zmazaný za {countdown} sekundy","Kalendár bude zmazaný za {countdown} sekúnd"],
+    "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Zdieľanie kalendára bude zmazané za {countdown} sekundu","Zdieľanie kalendára bude zmazané za {countdown} sekundy","Zdieľanie kalendára bude zmazané za {countdown} sekundy","Zdieľanie kalendára bude zmazané za {countdown} sekúnd"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Zdieľané s {num} entitou","Zdieľané s {num} entitami","Zdieľané s {num} entitami","Zdieľané s {num} entitami"],
     "Default list" : "Predvolený zoznam",
     "Visibility of Smart Collections" : "Viditeľnosť inteligentných kolekcií",

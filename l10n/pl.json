@@ -32,6 +32,8 @@
     "Calendar link copied to clipboard." : "Link do kalendarza skopiowany do schowka.",
     "Calendar link could not be copied to clipboard." : "Link do kalendarza nie mógł zostać skopiowany do schowka.",
     "An error occurred, unable to delete the calendar." : "Wystąpił błąd, nie można usunąć kalendarza.",
+    "_Deleting the calendar in {countdown} second_::_Deleting the calendar in {countdown} seconds_" : ["Usunięcie kalendarza za {countdown} sekundę","Usunięcie kalendarza za {countdown} sekundy","Usunięcie kalendarza za {countdown} sekund","Usunięcie kalendarza za {countdown} sekund"],
+    "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Zatrzymanie udostępnienia kalendarza za {countdown} sekundę","Zatrzymanie udostępnienia kalendarza za {countdown} sekundy","Zatrzymanie udostępnienia kalendarza za {countdown} sekund","Zatrzymanie udostępnienia kalendarza za {countdown} sekund"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Współdzielone z {num} jednostką","Współdzielone z {num} jednostkami","Współdzielone z {num} jednostkami","Współdzielone z {num} jednostkami"],
     "Default list" : "Lista domyślna",
     "Visibility of Smart Collections" : "Widok kategorii",
