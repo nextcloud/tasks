@@ -880,6 +880,7 @@ $blue_due: #4271a6;			// due dates and low importance
 
 			.detail-checkbox {
 				padding: 11px 10px;
+				padding-right: 7px;
 
 				input[type='checkbox'].checkbox + label {
 					&::before {
@@ -1274,7 +1275,7 @@ $blue_due: #4271a6;			// due dates and low importance
 						}
 						> span {
 							font-weight: bold;
-							margin-left: 10px;
+							margin-left: 7px;
 						}
 					}
 				}
