@@ -226,9 +226,7 @@ export default {
 			while (currentIndex < calendars.length) {
 				if (calendars[currentIndex].order <= calendars[currentIndex - 1].order) {
 					const order = { calendar: calendars[currentIndex], order: calendars[currentIndex - 1].order + 1 }
-					if (currentIndex !== newIndex) {
-						this.setCalendarOrder(order)
-					}
+					this.setCalendarOrder(order)
 				}
 				currentIndex++
 			}
