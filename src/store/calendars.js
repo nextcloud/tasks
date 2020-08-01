@@ -57,6 +57,8 @@ const calendarModel = {
 	isSharedWithMe: false,
 	// Whether or not the calendar can be shared by me
 	canBeShared: false,
+	// The order of this calendar in the calendar-list
+	order: 0,
 }
 
 const state = {
@@ -100,11 +102,14 @@ export function mapDavCollectionToCalendar(calendar, currentUserPrincipal) {
 		}
 	}
 
+	const order = +calendar.order || 0
+
 	return {
 		// get last part of url
 		id: calendar.url.split('/').slice(-2, -1)[0],
 		displayName,
 		color,
+		order,
 		enabled: calendar.enabled !== false,
 		owner,
 		readOnly: !calendar.isWriteable(),
@@ -169,8 +174,8 @@ const getters = {
 	 */
 	getSortedCalendars: state => {
 		return state.calendars.sort(function(cal1, cal2) {
-			const n1 = cal1.displayName.toUpperCase()
-			const n2 = cal2.displayName.toUpperCase()
+			const n1 = cal1.order
+			const n2 = cal2.order
 			return (n1 < n2) ? -1 : (n1 > n2) ? 1 : 0
 		})
 	},
@@ -186,8 +191,8 @@ const getters = {
 			return !calendar.readOnly
 		})
 			.sort(function(cal1, cal2) {
-				const n1 = cal1.displayName.toUpperCase()
-				const n2 = cal2.displayName.toUpperCase()
+				const n1 = cal1.order
+				const n2 = cal2.order
 				return (n1 < n2) ? -1 : (n1 > n2) ? 1 : 0
 			})
 	},
@@ -440,6 +445,17 @@ const mutations = {
 		calendar = state.calendars.find(search => search.id === calendar.id)
 		const sharee = calendar.shares.find(sharee => sharee.uri === uri)
 		sharee.writeable = !sharee.writeable
+	},
+
+	/**
+	 * Sets the sort order of a calendar
+	 *
+	 * @param {Object} state The store data
+	 * @param {Calendar} calendar The calendar
+	 * @param {Integer} order The sort order
+	 */
+	setCalendarOrder(state, { calendar, order }) {
+		Vue.set(calendar, 'order', order)
 	},
 }
 
@@ -700,6 +716,23 @@ const actions = {
 		// Share calendar with entered group or user
 		await calendar.dav.share(uri)
 		context.commit('shareCalendar', { calendar, user, displayName, uri, isGroup, isCircle })
+	},
+
+	/**
+	 * Sets the sort order of a calendar
+	 *
+	 * @param {Object} context The store context
+	 * @param {Calendar} calendar The calendar to update
+	 * @param {Integer} order The sort order
+	 */
+	async setCalendarOrder(context, { calendar, order }) {
+		if (calendar.order === order) {
+			return
+		}
+
+		context.commit('setCalendarOrder', { calendar, order })
+		calendar.dav.order = order
+		await calendar.dav.update()
 	},
 }
 
