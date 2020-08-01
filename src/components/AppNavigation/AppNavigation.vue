@@ -43,11 +43,15 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					{{ collectionCount(collection.id) | counterFormatter }}
 				</AppNavigationCounter>
 			</AppNavigationItem>
-			<ListItemCalendar
-				v-for="calendar in calendars"
-				:key="calendar.id"
-				:calendar="calendar"
-				@click.native="setInitialRoute(`/calendars/${calendar.id}`)" />
+			<draggable
+				:set-data="setData"
+				@update="update">
+				<ListItemCalendar
+					v-for="calendar in calendars"
+					:key="calendar.id"
+					:calendar="calendar"
+					@click.native="setInitialRoute(`/calendars/${calendar.id}`)" />
+			</draggable>
 			<AppNavigationItem v-click-outside="cancelCreate"
 				:title="$t('tasks', 'Add List…')"
 				icon="sprt-add"
@@ -96,6 +100,7 @@ import ListItemCalendar from './ListItemCalendar'
 import Colorpicker from './Colorpicker'
 import TheSettings from './TheSettings'
 
+import draggable from 'vuedraggable'
 import AppNavigation from '@nextcloud/vue/dist/Components/AppNavigation'
 import AppNavigationSettings from '@nextcloud/vue/dist/Components/AppNavigationSettings'
 import ClickOutside from 'vue-click-outside'
@@ -111,6 +116,7 @@ export default {
 		AppNavigationItem,
 		AppNavigationCounter,
 		AppNavigationSettings,
+		draggable,
 	},
 	directives: {
 		ClickOutside,
@@ -161,7 +167,72 @@ export default {
 			'setPercentComplete',
 			'setDate',
 			'setSetting',
+			'setCalendarOrder',
 		]),
+
+		/**
+		 * Indicate that we drag a calendar item
+		 *
+		 * @param {Object} dataTransfer The dataTransfer object
+		 */
+		setData(dataTransfer) {
+			dataTransfer.setData('text/plain', 'calendar')
+		},
+
+		/**
+		 * Called when the calendar list order is changed.
+		 *
+		 * @param {Object} $event The event which caused the sorting
+		 */
+		update($event) {
+			const newIndex = $event.newIndex
+			const oldIndex = $event.oldIndex
+
+			// If the calendars array has no entry, we don't need to sort.
+			if (this.calendars.length === 0) {
+				return
+			}
+			// If the calendar is inserted at its current position, don't sort.
+			if (newIndex === oldIndex) {
+				return
+			}
+
+			// Get a copy of the sorted calendars array
+			const calendars = [...this.calendars]
+
+			// In case the task to move is already in the array, move it to the new position
+			if (oldIndex > -1) {
+				calendars.splice(newIndex, 0, calendars.splice(oldIndex, 1)[0])
+			} else {
+				return
+			}
+
+			// Get the new sort order for the moved calenars and apply it.
+			// We just do that to minimize the number of other calendars to be changed.
+			let newSortOrder
+			if (newIndex + 1 < calendars.length) {
+				newSortOrder = calendars[newIndex + 1].order - 1
+			} else {
+				newSortOrder = calendars[newIndex - 1].order + 1
+			}
+			if (newSortOrder < 0) {
+				newSortOrder = 0
+			}
+			// Apply the new sort order for the moved calendar
+			this.setCalendarOrder({ calendar: calendars[newIndex], order: newSortOrder })
+
+			// Check the sort orders to be strictly monotonous
+			let currentIndex = 1
+			while (currentIndex < calendars.length) {
+				if (calendars[currentIndex].order <= calendars[currentIndex - 1].order) {
+					const order = { calendar: calendars[currentIndex], order: calendars[currentIndex - 1].order + 1 }
+					if (currentIndex !== newIndex) {
+						this.setCalendarOrder(order)
+					}
+				}
+				currentIndex++
+			}
+		},
 
 		/**
 		 * Handle the drag start
@@ -195,6 +266,10 @@ export default {
 		dragEnter(e, collection) {
 			// Check if dropping here is allowed
 			if (!['starred', 'completed', 'today', 'week'].includes(collection.id)) {
+				return
+			}
+			// Dragging calendars has no effect
+			if (e.dataTransfer.getData('text/plain') === 'calendar') {
 				return
 			}
 			// Get the correct element, in case we hover a child.

@@ -28,8 +28,6 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		:title="calendar.displayName"
 		:class="{edit: editing, deleted: !!deleteTimeout}"
 		class="list reactive"
-		draggable="false"
-		@dragstart.native="dragStart"
 		@drop.native="dropTask"
 		@dragover.native="dragOver"
 		@dragenter.native="dragEnter"
@@ -275,18 +273,6 @@ export default {
 			'deleteCalendar',
 			'moveTask',
 		]),
-
-		/**
-		 * Handle the drag start
-		 *
-		 * @param {Object} e The event object
-		 * @returns {Boolean}
-		 */
-		dragStart(e) {
-			e.stopPropagation()
-			e.preventDefault()
-			return false
-		},
 		/**
 		 * Handle the drag over
 		 *
@@ -313,7 +299,7 @@ export default {
 				const taskUri = e.dataTransfer.getData('text/plain')
 				if (taskUri) {
 					const task = this.getTask(taskUri)
-					if (task.class !== 'PUBLIC') {
+					if (task?.class !== 'PUBLIC') {
 						return
 					}
 				}
@@ -359,7 +345,7 @@ export default {
 			const taskUri = e.dataTransfer.getData('text/plain')
 			if (taskUri) {
 				const task = this.getTask(taskUri)
-				if (this.calendar !== task.calendar) {
+				if (task && this.calendar !== task.calendar) {
 					this.moveTask({ task, calendar: this.calendar, parent: undefined })
 				}
 			}

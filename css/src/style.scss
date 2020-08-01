@@ -10,6 +10,9 @@ $blue_due: #4271a6;			// due dates and low importance
  */
 .app-navigation {
 	> ul {
+		display: block !important;
+
+		> div > li,
 		> li {
 			&.collection .app-navigation-entry-icon::before {
 				content: '';
@@ -67,9 +70,12 @@ $blue_due: #4271a6;			// due dates and low importance
 				}
 			}
 
-			&.dnd-hover {
+			&.dnd-hover,
+			&.sortable-ghost {
 				// background-color: rgba( $color-primary, .1 ); didn't work for some reason
 				background-color: transparentize( $color-primary, .9 );
+				box-shadow: 0 0 3px var(--color-primary);
+				z-index: 1000;
 			}
 
 			button {
