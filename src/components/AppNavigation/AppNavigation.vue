@@ -207,10 +207,11 @@ export default {
 				return
 			}
 
-			// Get the new sort order for the moved calenars and apply it.
+			// Get the new sort order for the moved calendar and apply it.
 			// We just do that to minimize the number of other calendars to be changed.
 			let newSortOrder
-			if (newIndex + 1 < calendars.length) {
+			if (newIndex + 1 < calendars.length
+				&& (newIndex < 1 || calendars[newIndex + 1].order - 1 > calendars[newIndex - 1].order)) {
 				newSortOrder = calendars[newIndex + 1].order - 1
 			} else {
 				newSortOrder = calendars[newIndex - 1].order + 1
