@@ -124,13 +124,19 @@ export default {
 			} else {
 				sortedTasks.splice(newIndex, 0, task)
 			}
+			// Make sure we sort in the correct direction
+			if (this.sortDirection) {
+				sortedTasks.reverse()
+				newIndex = sortedTasks.length - newIndex - 1
+			}
 			// Get the new sort order for the moved task and apply it.
 			// We just do that to minimize the number of other tasks to be changed.
 			let newSortOrder
-			if (newIndex + 1 < sortedTasks.length) {
-				newSortOrder = sortedTasks[newIndex + 1].sortOrder - Math.pow(-1, +this.sortDirection)
+			if (newIndex + 1 < sortedTasks.length
+				&& (newIndex < 1 || sortedTasks[newIndex + 1].sortOrder - 1 > sortedTasks[newIndex - 1].sortOrder)) {
+				newSortOrder = sortedTasks[newIndex + 1].sortOrder - 1
 			} else {
-				newSortOrder = sortedTasks[newIndex - 1].sortOrder + Math.pow(-1, +this.sortDirection)
+				newSortOrder = sortedTasks[newIndex - 1].sortOrder + 1
 			}
 			if (newSortOrder < 0) {
 				newSortOrder = 0
@@ -145,9 +151,6 @@ export default {
 			}
 
 			// Check the sort orders to be strictly monotonous
-			if (this.sortDirection) {
-				sortedTasks.reverse()
-			}
 			let currentIndex = 1
 			while (currentIndex < sortedTasks.length) {
 				if (sortedTasks[currentIndex].sortOrder <= sortedTasks[currentIndex - 1].sortOrder) {
