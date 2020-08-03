@@ -443,6 +443,10 @@ $blue_due: #4271a6;			// due dates and low importance
 						z-index: 10;
 					}
 
+					&.completed {
+						margin-top: 12px;
+					}
+
 					// Show round corners for first root task
 					> .task-item {
 						&:first-child > .task-body {
@@ -776,7 +780,6 @@ $blue_due: #4271a6;			// due dates and low importance
 	.heading {
 		display: flex;
 		align-items: center;
-		margin-bottom: 10px;
 		margin-top: 20px !important;
 
 		@media only screen and (max-width: $breakpoint-mobile) {
@@ -784,6 +787,8 @@ $blue_due: #4271a6;			// due dates and low importance
 		}
 
 		&--hiddentasks {
+			margin-bottom: 0;
+
 			.heading__title {
 				display: inline-block;
 				padding-right: 16px;
