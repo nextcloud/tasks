@@ -3,11 +3,13 @@ import collections from 'Store/collections.js'
 import tasks from 'Store/tasks.js'
 import settings from 'Store/settings.js'
 import Task from 'Models/task.js'
+import router from '@/router.js'
 
 import { loadICS } from '../../assets/loadAsset.js'
 
 import { createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
+import { sync } from 'vuex-router-sync'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
@@ -20,6 +22,10 @@ const store = new Vuex.Store({
 		settings,
 	},
 })
+
+// Sync router and store so that we can access
+// the router from within the store
+sync(store, router)
 
 const calendarsData = [
 	{
@@ -71,6 +77,7 @@ calendarsData.forEach(calendarData => {
 		const task = new Task(taskData, calendar)
 		const response = {
 			url: `${calendar.id}/${task.uid}.ics`,
+			update: () => { return Promise.resolve(response) },
 		}
 		localVue.set(task, 'dav', response)
 		return task

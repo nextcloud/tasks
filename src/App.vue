@@ -27,9 +27,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			<RouterView />
 		</AppContent>
 
-		<div id="app-sidebar" :class="{disappear: $route.params.taskId === undefined}">
-			<RouterView name="sidebar" />
-		</div>
+		<RouterView name="sidebar" />
 	</Content>
 </template>
 
@@ -106,7 +104,7 @@ export default {
 			if (!($event.target.closest('.reactive') || $event.target.classList.contains('reactive')
 			|| $event.target.classList.contains('mx-btn') // For some reason the click-outside handlers fire for the datepicker month and year buttons!?
 			)
-			&& !$event.target.closest('#app-sidebar') && this.$route.params.taskId) {
+			&& !$event.target.closest('.app-sidebar') && this.$route.params.taskId) {
 				if (this.$route.params.calendarId) {
 					this.$router.push({ name: 'calendars', params: { calendarId: this.$route.params.calendarId } })
 				} else {
