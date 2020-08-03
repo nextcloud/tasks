@@ -50,6 +50,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					:tasks="completedRootTasks(calendar.tasks)"
 					:calendar-id="calendarId"
 					:disabled="calendar.readOnly"
+					class="completed"
 					collection-id="completed" />
 				<LoadCompletedButton :calendar="calendar" />
 				<DeleteCompletedModal v-if="calendar.loadedCompleted && !calendar.readOnly" :calendar="calendar" />
