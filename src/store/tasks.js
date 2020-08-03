@@ -1021,6 +1021,9 @@ const actions = {
 	 * @param {Task} task The task to update
 	 */
 	async setNote(context, { task, note }) {
+		if (note === task.note) {
+			return
+		}
 		context.commit('setNote', { task, note })
 		context.dispatch('scheduleTaskUpdate', task)
 	},

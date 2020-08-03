@@ -27,6 +27,17 @@ import store from './store/store.js'
 import { subscribe, unsubscribe } from '@nextcloud/event-bus'
 import { linkTo } from '@nextcloud/router'
 
+import Eye from 'vue-material-design-icons/Eye.vue'
+import EyeOff from 'vue-material-design-icons/EyeOff.vue'
+import CalendarRemove from 'vue-material-design-icons/CalendarRemove.vue'
+import Cancel from 'vue-material-design-icons/Cancel.vue'
+import Check from 'vue-material-design-icons/Check.vue'
+import TrendingUp from 'vue-material-design-icons/TrendingUp.vue'
+import AlertBoxOutline from 'vue-material-design-icons/AlertBoxOutline.vue'
+import Pulse from 'vue-material-design-icons/Pulse.vue'
+import Tag from 'vue-material-design-icons/Tag.vue'
+import Delete from 'vue-material-design-icons/Delete.vue'
+
 import Vue from 'vue'
 import { sync } from 'vuex-router-sync'
 import VTooltip from 'v-tooltip'
@@ -51,6 +62,32 @@ sync(store, router)
 
 Vue.use(VTooltip)
 Vue.use(VueClipboard)
+
+/**
+ * We have to globally register these material design icons
+ * so we can use them dynamically via `<component :is="icon" />`
+ * in the MultiselectOption component.
+ */
+// eslint-disable-next-line vue/match-component-file-name
+Vue.component('IconEye', Eye)
+// eslint-disable-next-line vue/match-component-file-name
+Vue.component('IconEyeOff', EyeOff)
+// eslint-disable-next-line vue/match-component-file-name
+Vue.component('IconCalendarRemove', CalendarRemove)
+// eslint-disable-next-line vue/match-component-file-name
+Vue.component('IconCancel', Cancel)
+// eslint-disable-next-line vue/match-component-file-name
+Vue.component('IconCheck', Check)
+// eslint-disable-next-line vue/match-component-file-name
+Vue.component('IconTrendingUp', TrendingUp)
+// eslint-disable-next-line vue/match-component-file-name
+Vue.component('IconAlertBoxOutline', AlertBoxOutline)
+// eslint-disable-next-line vue/match-component-file-name
+Vue.component('IconPulse', Pulse)
+// eslint-disable-next-line vue/match-component-file-name
+Vue.component('IconTag', Tag)
+// eslint-disable-next-line vue/match-component-file-name
+Vue.component('IconDelete', Delete)
 
 if (!OCA.Tasks) {
 	/**
