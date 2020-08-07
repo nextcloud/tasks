@@ -34,6 +34,8 @@ OC.L10N.register(
     "Calendar link copied to clipboard." : "Веза календара копирана у оставу.",
     "Calendar link could not be copied to clipboard." : "Веза календара није могла да се копира у оставу.",
     "An error occurred, unable to delete the calendar." : "Догодила се грешка, не могу да обришем календар.",
+    "_Deleting the calendar in {countdown} second_::_Deleting the calendar in {countdown} seconds_" : ["Бришем календар за {countdown} секунду","Бришем календар за {countdown} секунде","Бришем календар за {countdown} секунди"],
+    "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Уклањам дељење календара за {countdown} секунду","Уклањам дељење календара за {countdown} секунде","Уклањам дељење календара за {countdown} секунди"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Дељено са {num} ентитетом","Дељено са {num} ентитета","Дељено са {num} ентитета"],
     "Default list" : "Подразумевани списак",
     "Visibility of Smart Collections" : "Видљивост паметних збирки",

@@ -27,6 +27,7 @@ OC.L10N.register(
     "Unshare" : "Opphev deling",
     "Calendar link copied to clipboard." : "Lenke til kalender kopiert til utklippstavle.",
     "Calendar link could not be copied to clipboard." : "Lenke til kalender kunne ikke bli kopiert til utklippstavle.",
+    "An error occurred, unable to delete the calendar." : "En feil oppstod, kan ikke slette kalenderen. ",
     "Visibility of Smart Collections" : "Synlighet for smarte samlinger",
     "Hidden" : "Skjult",
     "Visible" : "Synlig",
