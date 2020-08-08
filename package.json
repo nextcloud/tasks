@@ -45,7 +45,7 @@
 		"markdown-it-emoji": "~1.4.0",
 		"markdown-it-link-attributes": "~3.0.0",
 		"markdown-it-task-lists": "~2.1.1",
-		"md5": "^2.2.1",
+		"md5": "^2.3.0",
 		"p-limit": "^3.0.2",
 		"p-queue": "^6.6.0",
 		"uuid": "^8.3.0",
