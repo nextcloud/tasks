@@ -146,7 +146,7 @@ OC.L10N.register(
     "Priority {priority}: high" : "Приоритет {priority}: высокий",
     "Priority {priority}: medium" : "Приоритет {priority}: средний",
     "Priority {priority}: low" : "Приоритет {priority}: низкий",
-    "{percent} % completed" : "Выполнение: {complete}%",
+    "{percent} % completed" : "Выполнение: {percent}%",
     "Successfully created the task." : "Задача создана.",
     "Could not delete the task." : "Не удалось удалить задачу.",
     "Synchronizing to the server." : "Синхронизация с сервером…",
