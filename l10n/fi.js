@@ -31,6 +31,7 @@ OC.L10N.register(
     "Calendar link copied to clipboard." : "Kalenterilinkki kopioitu leikepöydälle.",
     "Calendar link could not be copied to clipboard." : "Kalenterilinkkiä ei voitu kopioida leikepöydälle.",
     "An error occurred, unable to delete the calendar." : "Tapahtui virhe, kalenteria ei voitu poistaa.",
+    "_Deleting the calendar in {countdown} second_::_Deleting the calendar in {countdown} seconds_" : ["Poistetaan kalenteri {countdown} sekunnissa","Poistetaan kalenteri {countdown} sekunnissa"],
     "Default list" : "Oletusluettelo",
     "Visibility of Smart Collections" : "Älykkäiden kokoelmien näkyvyys",
     "Hidden" : "Piilotettu",
