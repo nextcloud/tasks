@@ -32,6 +32,8 @@
     "Calendar link copied to clipboard." : "Ссылка на календарь скопирована в буфер обмена.",
     "Calendar link could not be copied to clipboard." : "Не удалось скопировать ссылку на календарь в буфер обмена.",
     "An error occurred, unable to delete the calendar." : "Произошла ошибка, не удалось удалить календарь.",
+    "_Deleting the calendar in {countdown} second_::_Deleting the calendar in {countdown} seconds_" : ["Календарь будет удалён через {countdown} секунды","Календари будут удалены через {countdown} секунды","Календари будут удалены через {countdown} секунды","Календарь будет удалён через {countdown} секунды"],
+    "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Общий доступ к календарю будет закрыт через {countdown} секунды","Общий доступ к календарям будет закрыт через {countdown} секунды","Общий доступ к календарям будет закрыт через {countdown} секунды","Общий доступ к календарю будет закрыт через {countdown} секунды"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Совместный доступ с {num} получателем","Совместный доступ с {num} получателями","Совместный доступ с {num} получателями","Совместный доступ с {num} получателями"],
     "Default list" : "Список по умолчанию:",
     "Visibility of Smart Collections" : "Настройка показа наборов задач:",
