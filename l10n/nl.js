@@ -34,6 +34,8 @@ OC.L10N.register(
     "Calendar link copied to clipboard." : "Kalenderlink gekopieerd naar klembord.",
     "Calendar link could not be copied to clipboard." : "Kalenderlink kon niet worden gekopieerd naar klembord.",
     "An error occurred, unable to delete the calendar." : "Er is een fout opgetreden waardoor de agenda niet kan worden verwijderd.",
+    "_Deleting the calendar in {countdown} second_::_Deleting the calendar in {countdown} seconds_" : ["De agenda verwijderen over {countdown} seconden","Deleting the calendar in {countdown} seconds"],
+    "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Het delen van de agenda ongedaan maken over {countdown} seconden","Unsharing the calendar in {countdown} seconds"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Gedeeld met {num} object","Gedeeld met {num} objecten"],
     "Default list" : "Standaardlijst",
     "Visibility of Smart Collections" : "Zichtbaarheid van Slimme Verzamelingen",
