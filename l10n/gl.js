@@ -50,7 +50,7 @@ OC.L10N.register(
     "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["Isto eliminará {taskCount} tarefa completada e as súas subtarefas do calendario «{calendar}».","Isto eliminará {taskCount} tarefas completadas e as súas subtarefas do calendario «{calendar}»."],
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["Non foi posíbel eliminar {failedCount} tarefa.","Non foi posíbel eliminar {failedCount} tarefas."],
     "Load all completed tasks." : "Cargar todas as tarefas completadas.",
-    "Change sort order" : "Cambiar a ordenación",
+    "Change sort order" : "Cambiar o criterio de ordenación",
     "Relevance" : "Relevancia",
     "Sort by completed state, due date, priority, start date and summary." : "Ordenar polo estado de completado, data de caducidade, prioridade, data de inicio e resumo.",
     "Start date" : "Data de comezo",
