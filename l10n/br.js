@@ -2,6 +2,7 @@ OC.L10N.register(
     "tasks",
     {
     "Today" : "Hiziv",
+    "Week" : "Sizun",
     "All" : "Pep tra",
     "Current" : "A red",
     "Completed" : "Achuet",

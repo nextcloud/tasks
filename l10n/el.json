@@ -32,6 +32,8 @@
     "Calendar link copied to clipboard." : "Ο σύνδεσμος του ημερολογίου αντιγράφηκε στο πρόχειρο.",
     "Calendar link could not be copied to clipboard." : "Αδυναμία αντιγραφής συνδέσμου ημερολογίου στο πρόχειρο.",
     "An error occurred, unable to delete the calendar." : "Παρουσιάστηκε σφάλμα, δεν δύναται να διαγραφεί το ημερολόγιο.",
+    "_Deleting the calendar in {countdown} second_::_Deleting the calendar in {countdown} seconds_" : ["Διαγραφή ημερολογίου σε {countdown} δεύτερα","Διαγραφή ημερολογίου σε {countdown} δεύτερα"],
+    "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Κατάργηση κοινής χρήσης ημερολογίου σε {countdown} δεύτερα","Κατάργηση κοινής χρήσης ημερολογίου σε {countdown} δεύτερα"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Κοινη χρήση με {num} οντότητα","Κοινη χρήση με {num} οντότητες"],
     "Default list" : "Προεπιλεγμένη λίστα",
     "Visibility of Smart Collections" : "Ορατότητα Έξυπνων Συλλογών",
