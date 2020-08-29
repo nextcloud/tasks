@@ -1,5 +1,54 @@
 @include icon-black-white('circle', 'tasks', 1);
 
+@include icon-black-white('list', 'tasks', 1);
+@include icon-black-white('list__up', 'tasks', 1);
+@include icon-black-white('list__down', 'tasks', 1);
+
+@include icon-black-white('start', 'tasks', 1);
+@include icon-black-white('start__up', 'tasks', 1);
+@include icon-black-white('start__down', 'tasks', 1);
+
+@include icon-black-white('due', 'tasks', 1);
+@include icon-black-white('due__up', 'tasks', 1);
+@include icon-black-white('due__down', 'tasks', 1);
+
+@include icon-black-white('add', 'tasks', 1);
+@include icon-black-white('add__up', 'tasks', 1);
+@include icon-black-white('add__down', 'tasks', 1);
+
+@include icon-black-white('manual', 'tasks', 1);
+@include icon-black-white('manual__up', 'tasks', 1);
+@include icon-black-white('manual__down', 'tasks', 1);
+
+@include icon-black-white('rename', 'tasks', 1);
+@include icon-black-white('rename__up', 'tasks', 1);
+@include icon-black-white('rename__down', 'tasks', 1);
+
+@include icon-black-white('checkmark', 'tasks', 1);
+@include icon-black-white('checkmark__up', 'tasks', 1);
+@include icon-black-white('checkmark__down', 'tasks', 1);
+
+@include icon-black-white('task-star', 'tasks', 1);
+@include icon-black-white('task-star__up', 'tasks', 1);
+@include icon-black-white('task-star__down', 'tasks', 1);
+
+@include icon-black-white('alphabetically', 'tasks', 1);
+@include icon-black-white('alphabetically__up', 'tasks', 1);
+@include icon-black-white('alphabetically__down', 'tasks', 1);
+
+.popover {
+	li {
+		&.selected .action-button {
+			opacity: 1;
+		}
+
+		.action-button__icon {
+			background-size: unset !important;
+			background-position: center !important;
+		}
+	}
+}
+
 //colors
 $red_overdue: #b3312d;		// overdue dates and high importance
 $yellow: #fd0;				// medium importance
@@ -278,108 +327,6 @@ $blue_due: #4271a6;			// due dates and low importance
 
 		.sortorder {
 			margin-left: auto;
-
-			.icon-list {
-				@include icon-color('icon-list', 'tasks', $color-black, 3);
-
-				&__up {
-					@include icon-color('icon-list-up', 'tasks', $color-black, 3);
-				}
-				&__down {
-					@include icon-color('icon-list-down', 'tasks', $color-black, 3);
-				}
-			}
-			.icon-start {
-				@include icon-color('icon-start', 'tasks', $color-black, 3);
-
-				&__up {
-					@include icon-color('icon-start-up', 'tasks', $color-black, 3);
-				}
-				&__down {
-					@include icon-color('icon-start-down', 'tasks', $color-black, 3);
-				}
-			}
-			.icon-due {
-				@include icon-color('icon-due', 'tasks', $color-black, 3);
-
-				&__up {
-					@include icon-color('icon-due-up', 'tasks', $color-black, 3);
-				}
-				&__down {
-					@include icon-color('icon-due-down', 'tasks', $color-black, 3);
-				}
-			}
-			.icon-add {
-				@include icon-color('icon-add', 'tasks', $color-black, 3);
-
-				&__up {
-					@include icon-color('icon-add-up', 'tasks', $color-black, 3);
-				}
-				&__down {
-					@include icon-color('icon-add-down', 'tasks', $color-black, 3);
-				}
-			}
-			.icon-manual {
-				@include icon-color('icon-manual', 'tasks', $color-black, 3);
-
-				&__up {
-					@include icon-color('icon-manual-up', 'tasks', $color-black, 3);
-				}
-				&__down {
-					@include icon-color('icon-manual-down', 'tasks', $color-black, 3);
-				}
-			}
-			.icon-rename {
-				@include icon-color('icon-rename', 'tasks', $color-black, 3);
-
-				&__up {
-					@include icon-color('icon-rename-up', 'tasks', $color-black, 3);
-				}
-				&__down {
-					@include icon-color('icon-rename-down', 'tasks', $color-black, 3);
-				}
-			}
-			.icon-checkmark {
-				@include icon-color('icon-checkmark', 'tasks', $color-black, 3);
-
-				&__up {
-					@include icon-color('icon-checkmark-up', 'tasks', $color-black, 3);
-				}
-				&__down {
-					@include icon-color('icon-checkmark-down', 'tasks', $color-black, 3);
-				}
-			}
-			.icon-task-star {
-				@include icon-color('icon-task-star', 'tasks', $color-black, 3);
-
-				&__up {
-					@include icon-color('icon-task-star-up', 'tasks', $color-black, 3);
-				}
-				&__down {
-					@include icon-color('icon-task-star-down', 'tasks', $color-black, 3);
-				}
-			}
-			.icon-alphabetically {
-				@include icon-color('icon-alphabetically', 'tasks', $color-black, 3);
-
-				&__up {
-					@include icon-color('icon-alphabetically-up', 'tasks', $color-black, 3);
-				}
-				&__down {
-					@include icon-color('icon-alphabetically-down', 'tasks', $color-black, 3);
-				}
-			}
-
-			li {
-				&.selected .action-button {
-					opacity: 1;
-				}
-
-				.action-button__icon {
-					background-size: unset;
-					background-position: center;
-				}
-			}
 		}
 	}
 
