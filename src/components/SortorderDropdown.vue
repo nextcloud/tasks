@@ -23,6 +23,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 	<Actions class="sortorder reactive"
 		:title="$t('tasks', 'Change sort order')"
 		:default-icon="sortOrderIcon"
+		container=".header"
 		menu-align="right">
 		<ActionButton v-for="order in orders"
 			:key="order.id"
