@@ -38,6 +38,7 @@ OC.L10N.register(
     "Task not found!" : "¡Tarea no encontrada!",
     "When shared show full event" : "Al compartir, mostrar el evento completo",
     "When shared show only busy" : "Al compartir, mostrar sólo como ocupado ",
-    "When shared hide this event" : "Al compartir, ocultar este evento "
+    "When shared hide this event" : "Al compartir, ocultar este evento ",
+    "An error occurred" : "Se presentó un error"
 },
 "nplurals=2; plural=(n != 1);");
