@@ -32,6 +32,8 @@
     "Calendar link copied to clipboard." : "Poveznica kalendara kopirana je u međuspremnik.",
     "Calendar link could not be copied to clipboard." : "Poveznica kalendara nije kopirana u međuspremnik.",
     "An error occurred, unable to delete the calendar." : "Došlo je do pogreške, nije moguće izbrisati kalendar.",
+    "_Deleting the calendar in {countdown} second_::_Deleting the calendar in {countdown} seconds_" : ["Brisanje kalendara za {countdown} sekundu","Brisanje kalendara za {countdown} sekundi","Brisanje kalendara za {countdown} sekundi"],
+    "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Prekid dijeljenja kalendara za {countdown} sekundu","Prekid dijeljenja kalendara za {countdown} sekundi","Prekid dijeljenja kalendara za {countdown} sekundi"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Dijeljeno s {num} entitetom","Dijeljeno s {num} entiteta","Dijeljeno s {num} entiteta"],
     "Default list" : "Zadani popis",
     "Visibility of Smart Collections" : "Vidljivost pametnih zbirki",
