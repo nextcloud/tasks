@@ -1,6 +1,11 @@
 /**
  * Markdown rendering
  */
+
+$color-lightgrey: #bbbbbb;
+$color-main-background: #ddd;
+$color-darkgrey:#666;
+
 #markdown {
 	width: 100% !important;
 	min-height: 40px;
