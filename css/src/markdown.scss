@@ -66,7 +66,7 @@
 	}
 
 	pre {
-		background-color: var(--color-background-dark, $color-lightgrey);
+		background-color: var(--color-background-dark);
 		padding: 3px;
 		overflow: auto;
 
@@ -101,7 +101,7 @@
 		margin-top: 0;
 	}
 	li input[type='checkbox'].checkbox:not(:checked) + label::before {
-		background-color: $color-main-background;
+		background-color: var(--color-main-background);
 	}
 
 	table {
@@ -109,10 +109,10 @@
 		border-collapse: collapse;
 
 		thead {
-			background-color: var(--color-background-dark, $color-lightgrey);
+			background-color: var(--color-background-dark);
 		}
 		td, th {
-			border: 1px solid var(--color-background-darker, $color-darkgrey);
+			border: 1px solid var(--color-background-darker);
 			padding: 3px;
 		}
 	}

@@ -127,8 +127,7 @@ $blue_due: #4271a6;			// due dates and low importance
 
 			&.dnd-hover,
 			&.sortable-ghost {
-				// background-color: rgba( $color-primary, .1 ); didn't work for some reason
-				background-color: transparentize( $color-primary, .9 );
+				background-color: var(--color-primary-light);
 				box-shadow: 0 0 3px var(--color-primary);
 				z-index: 1000;
 			}
@@ -604,7 +603,7 @@ $blue_due: #4271a6;			// due dates and low importance
 								.percentdone {
 									height: 3px;
 									border-radius: 2px 0 0 2px;
-									background-color: $color-primary;
+									background-color: var(--color-primary);
 								}
 							}
 						}
