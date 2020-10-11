@@ -1,3 +1,17 @@
+## 0.13.4 - 2020-10-11
+
+### Added
+- Allow to adjust the calendar order #15 #1155
+- Adjust app to unified search of Nextcloud 20 #1202 #1226
+- Updated translations
+- Updated dependencies
+
+### Fixed
+- Fix failing SCSS compilation #1251 #1262
+- Improve calculating new task sort order #1169
+- Better indicate dropping on empty completed list #1170
+- Fix actions menus #1225
+
 ## 0.13.3 - 2020-07-30
 
 ### Added
