@@ -30,7 +30,7 @@
 		"@nextcloud/axios": "^1.4.0",
 		"@nextcloud/dialogs": "^3.0.0",
 		"@nextcloud/event-bus": "^1.2.0",
-		"@nextcloud/initial-state": "1.1.2",
+		"@nextcloud/initial-state": "1.2.0",
 		"@nextcloud/moment": "^1.1.1",
 		"@nextcloud/router": "^1.2.0",
 		"@nextcloud/vue": "^2.6.8",
