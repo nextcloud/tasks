@@ -22,7 +22,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <template>
 	<AppNavigationItem
 		:id="'list_' + calendar.id"
-		v-click-outside="resetView"
+		v-click-outside="{ handler: resetView, middleware: clickOutsideMiddleware }"
 		:calendar-id="calendar.id"
 		:to="{ name: 'calendars', params: { calendarId: calendar.id } }"
 		:title="calendar.displayName"
@@ -53,6 +53,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			<ActionButton
 				v-if="!calendar.readOnly"
 				icon="icon-rename"
+				class="edit-calendar"
+				:close-after-click="true"
 				@click="editCalendar">
 				{{ $t('tasks', 'Edit') }}
 			</ActionButton>
@@ -126,7 +128,7 @@ import { mapGetters, mapActions } from 'vuex'
 import Colorpicker from './Colorpicker'
 import ShareCalendar from './CalendarShare'
 
-import ClickOutside from 'vue-click-outside'
+import ClickOutside from 'v-click-outside'
 import Avatar from '@nextcloud/vue/dist/Components/Avatar'
 import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
 import AppNavigationCounter from '@nextcloud/vue/dist/Components/AppNavigationCounter'
@@ -152,7 +154,7 @@ export default {
 		ActionLink,
 	},
 	directives: {
-		ClickOutside,
+		clickOutside: ClickOutside.directive,
 	},
 	filters: {
 		counterFormatter(count) {
@@ -370,10 +372,13 @@ export default {
 		toggleShare() {
 			this.shareOpen = !this.shareOpen
 		},
-		resetView($event) {
+		resetView() {
 			this.editing = false
 			this.shareOpen = false
 			this.tooltipTarget = ''
+		},
+		clickOutsideMiddleware(event) {
+			return !event.target.closest('.edit-calendar')
 		},
 		copyCalDAVUrl(event) {
 			// change to loading status

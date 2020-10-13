@@ -390,7 +390,7 @@ import Multiselect from '@nextcloud/vue/dist/Components/Multiselect'
 import Markdown from './Markdown'
 import TaskStatusDisplay from './TaskStatusDisplay'
 
-import ClickOutside from 'vue-click-outside'
+import ClickOutside from 'v-click-outside'
 import { linkify } from '../directives/linkify.js'
 
 export default {
@@ -401,7 +401,7 @@ export default {
 		TaskStatusDisplay,
 	},
 	directives: {
-		ClickOutside,
+		clickOutside: ClickOutside.directive,
 		linkify,
 	},
 	filters: {
