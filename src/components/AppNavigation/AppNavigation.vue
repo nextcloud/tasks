@@ -45,6 +45,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			</AppNavigationItem>
 			<draggable
 				:set-data="setData"
+				v-bind="{swapThreshold: 0.30, delay: 500, delayOnTouchOnly: true, touchStartThreshold: 3}"
 				@update="update">
 				<ListItemCalendar
 					v-for="calendar in calendars"
