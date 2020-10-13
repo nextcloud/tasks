@@ -36,6 +36,9 @@
 @include icon-black-white('alphabetically__up', 'tasks', 1);
 @include icon-black-white('alphabetically__down', 'tasks', 1);
 
+@include icon-black-white('subtasks-visible', 'tasks', 1);
+@include icon-black-white('subtasks-hidden', 'tasks', 1);
+
 // Hack for https://github.com/nextcloud/nextcloud-vue/issues/1384
 body {
 	min-height: 100%;
