@@ -96,7 +96,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<Actions v-if="!deleteTimeout" class="reactive no-nav" menu-align="right">
 					<ActionButton v-if="!task.calendar.readOnly"
 						:close-after-click="true"
-						class="reactive no-nav"
+						class="reactive no-nav open-input"
 						icon="icon-add"
 						@click="openSubtaskInput">
 						{{ $t('tasks', 'Add subtask') }}
@@ -134,7 +134,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		</div>
 		<div class="subtasks-container">
 			<div v-if="showSubtaskInput"
-				v-click-outside="($event) => closeSubtaskInput($event)"
+				v-click-outside="{ handler: closeSubtaskInput, middleware: clickOutsideMiddleware }"
 				class="task-item add-task">
 				<form name="addTaskForm" @submit.prevent="addTask">
 					<input ref="input"
@@ -156,7 +156,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import { overdue, sort, searchSubTasks, isTaskInList } from '../store/storeHelper'
-import ClickOutside from 'vue-click-outside'
+import ClickOutside from 'v-click-outside'
 import { mapGetters, mapActions } from 'vuex'
 import { linkify } from '../directives/linkify.js'
 import TaskStatusDisplay from './TaskStatusDisplay'
@@ -172,7 +172,7 @@ const CD_DURATION = 7
 export default {
 	name: 'TaskBody',
 	directives: {
-		ClickOutside,
+		clickOutside: ClickOutside.directive,
 		linkify,
 	},
 	components: {
@@ -194,7 +194,6 @@ export default {
 	data() {
 		return {
 			showSubtaskInput: false,
-			justOpened: false,
 			newTaskName: '',
 			isAddingTask: false,
 			// Deleting
@@ -567,19 +566,17 @@ export default {
 
 		openSubtaskInput() {
 			this.showSubtaskInput = true
-			this.justOpened = true
 			this.$nextTick(
 				() => this.$refs.input.focus()
 			)
 		},
 
-		closeSubtaskInput(e) {
-			// don't cancel the task creation if the own add-subtask button is clicked
-			if (this.justOpened) {
-				this.justOpened = false
-				return
-			}
+		closeSubtaskInput() {
 			this.showSubtaskInput = false
+		},
+
+		clickOutsideMiddleware(event) {
+			return !event.target.closest('.open-input')
 		},
 
 		addTask() {

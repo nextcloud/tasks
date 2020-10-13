@@ -103,7 +103,7 @@ import TheSettings from './TheSettings'
 import draggable from 'vuedraggable'
 import AppNavigation from '@nextcloud/vue/dist/Components/AppNavigation'
 import AppNavigationSettings from '@nextcloud/vue/dist/Components/AppNavigationSettings'
-import ClickOutside from 'vue-click-outside'
+import ClickOutside from 'v-click-outside'
 import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
 import AppNavigationCounter from '@nextcloud/vue/dist/Components/AppNavigationCounter'
 
@@ -119,7 +119,7 @@ export default {
 		draggable,
 	},
 	directives: {
-		ClickOutside,
+		clickOutside: ClickOutside.directive,
 	},
 	filters: {
 		counterFormatter(count) {
