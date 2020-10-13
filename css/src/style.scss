@@ -484,6 +484,10 @@ $blue_due: #4271a6;			// due dates and low importance
 
 					.subtasks-container {
 						margin-left: 44px;
+
+						@media only screen and (max-width: $breakpoint-mobile) {
+							margin-left: 14px;
+						}
 					}
 
 					.task-body {
