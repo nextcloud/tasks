@@ -75,6 +75,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				{{ $t('tasks', 'Download') }}
 			</ActionLink>
 			<ActionButton
+				v-if="!calendar.readOnly || calendar.isSharedWithMe"
 				v-tooltip="{
 					placement: 'left',
 					boundariesElement: 'body',
