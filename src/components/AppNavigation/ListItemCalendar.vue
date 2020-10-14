@@ -75,6 +75,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				{{ $t('tasks', 'Download') }}
 			</ActionLink>
 			<ActionButton
+				v-if="!calendar.readOnly || calendar.isSharedWithMe"
 				v-tooltip="{
 					placement: 'left',
 					boundariesElement: 'body',
@@ -204,14 +205,26 @@ export default {
 		},
 
 		deleteMessage() {
-			return !this.calendar.isSharedWithMe
-				? this.$t('tasks', 'This will delete the calendar "{calendar}" and all corresponding events and tasks.', { calendar: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
-				: this.$t('tasks', 'This will unshare the calendar "{calendar}".', { calendar: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
+			if (this.calendar.supportsEvents) {
+				return !this.calendar.isSharedWithMe
+					? this.$t('tasks', 'This will delete the calendar "{calendar}" and all corresponding events and tasks.', { calendar: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
+					: this.$t('tasks', 'This will unshare the calendar "{calendar}".', { calendar: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
+			} else {
+				return !this.calendar.isSharedWithMe
+					? this.$t('tasks', 'This will delete the list "{list}" and all corresponding tasks.', { list: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
+					: this.$t('tasks', 'This will unshare the list "{list}".', { list: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
+			}
 		},
 		undoDeleteMessage() {
-			return !this.calendar.isSharedWithMe
-				? this.$n('tasks', 'Deleting the calendar in {countdown} second', 'Deleting the calendar in {countdown} seconds', this.countdown, { countdown: this.countdown })
-				: this.$n('tasks', 'Unsharing the calendar in {countdown} second', 'Unsharing the calendar in {countdown} seconds', this.countdown, { countdown: this.countdown })
+			if (this.calendar.supportsEvents) {
+				return !this.calendar.isSharedWithMe
+					? this.$n('tasks', 'Deleting the calendar in {countdown} second', 'Deleting the calendar in {countdown} seconds', this.countdown, { countdown: this.countdown })
+					: this.$n('tasks', 'Unsharing the calendar in {countdown} second', 'Unsharing the calendar in {countdown} seconds', this.countdown, { countdown: this.countdown })
+			} else {
+				return !this.calendar.isSharedWithMe
+					? this.$n('tasks', 'Deleting the list in {countdown} second', 'Deleting the list in {countdown} seconds', this.countdown, { countdown: this.countdown })
+					: this.$n('tasks', 'Unsharing the list in {countdown} second', 'Unsharing the list in {countdown} seconds', this.countdown, { countdown: this.countdown })
+			}
 		},
 		sharingIconClass() {
 			if (this.calendar.shares.length) {
@@ -393,11 +406,18 @@ export default {
 					this.copySuccess = true
 					this.copied = true
 					// Notify calendar url was copied
-					showSuccess(this.$t('tasks', 'Calendar link copied to clipboard.'))
+					const msg = this.calendar.supportsEvents
+						? this.$t('tasks', 'Calendar link copied to clipboard.')
+						: this.$t('tasks', 'List link copied to clipboard.')
+					console.debug(msg)
+					showSuccess(msg)
 				}, e => {
 					this.copySuccess = false
 					this.copied = true
-					showError(this.$t('tasks', 'Calendar link could not be copied to clipboard.'))
+					const msg = this.calendar.supportsEvents
+						? this.$t('tasks', 'Calendar link could not be copied to clipboard.')
+						: this.$t('tasks', 'List link could not be copied to clipboard.')
+					showError(msg)
 				}).then(() => {
 					setTimeout(() => {
 						// stop loading status regardless of outcome
@@ -466,7 +486,10 @@ export default {
 				try {
 					await this.deleteCalendar(this.calendar)
 				} catch (error) {
-					showError(this.$t('tasks', 'An error occurred, unable to delete the calendar.'))
+					const msg = this.calendar.supportsEvents
+						? this.$t('tasks', 'An error occurred, unable to delete the calendar.')
+						: this.$t('tasks', 'An error occurred, unable to delete the list.')
+					showError(msg)
 					console.error(error)
 				} finally {
 					clearInterval(this.deleteInterval)
