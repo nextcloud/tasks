@@ -51,6 +51,7 @@ const calendarModel = {
 	url: '',
 	readOnly: false,
 	dav: false,
+	supportsEvents: true,
 	supportsTasks: true,
 	loadedCompleted: false,
 	// Whether or not the calendar is shared with me
@@ -117,6 +118,7 @@ export function mapDavCollectionToCalendar(calendar, currentUserPrincipal) {
 		url: calendar.url,
 		dav: calendar,
 		shares,
+		supportsEvents: calendar.components.includes('VEVENT'),
 		supportsTasks: calendar.components.includes('VTODO'),
 		loadedCompleted: false,
 		isSharedWithMe,
