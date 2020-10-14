@@ -139,7 +139,7 @@ export default {
 		sortOrderIcon() {
 			for (const order of this.orders) {
 				if (order.id === this.sortOrder) {
-					return `${order.icon}--${this.sortDirection ? 'down' : 'up'}`
+					return this.getIcon(order)
 				}
 			}
 			return 'icon-list'
@@ -147,11 +147,7 @@ export default {
 	},
 	methods: {
 		getIcon(order) {
-			if (order.id !== this.sortOrder) {
-				return order.icon
-			} else {
-				return `${order.icon}--${this.sortDirection ? 'down' : 'up'}`
-			}
+			return (order.id === this.sortOrder) ? `${order.icon}--${this.sortDirection ? 'down' : 'up'}` : order.icon
 		},
 		setSortOrder(order) {
 			// If the sort order was already set, toggle the sort direction, otherwise reset it.
