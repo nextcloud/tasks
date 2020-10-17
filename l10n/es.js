@@ -31,6 +31,7 @@ OC.L10N.register(
     "Unshare" : "No compartir",
     "This will delete the calendar \"{calendar}\" and all corresponding events and tasks." : "Esto eliminará el calendario \"{calendar}\" y todos los eventos y tareas correspondientes.",
     "This will unshare the calendar \"{calendar}\"." : "Esto dejará de compartir el calendario \"{calendar}\"",
+    "This will delete the list \"{list}\" and all corresponding tasks." : "Esto eliminará la lista \"{list}\" y todas sus correspondientes tareas.",
     "Calendar link copied to clipboard." : "Enlace de calendario copiado al portapapeles.",
     "Calendar link could not be copied to clipboard." : "No se ha podido copiar al portapapeles el enlace de calendario.",
     "An error occurred, unable to delete the calendar." : "Se ha producido un error, no se ha podido borrar el calendario.",

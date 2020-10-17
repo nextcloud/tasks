@@ -41,7 +41,7 @@
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Kalenderfreigabe wird in {countdown} Sekunde aufgehoben","Kalenderfreigabe wird in {countdown} Sekunden aufgehoben"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Lösche die Liste in {countdown} Sekunde","Lösche die Liste in {countdown} Sekunden"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Listenfreigabe wird in {countdown} Sekunde aufgehoben","Listenfreigabe wird in {countdown} Sekunden aufgehoben"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Für {num} Entitäten freigegeben","Für {num} Entität freigegeben"],
+    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Mit {num} Entität geteilt","Mit {num} Entitäten geteilt"],
     "Default list" : "Standardliste",
     "Visibility of Smart Collections" : "Sichtbarkeit der intelligenten Sammlungen",
     "Hidden" : "Verborgen",
