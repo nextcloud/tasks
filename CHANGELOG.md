@@ -1,3 +1,20 @@
+## 0.13.5 - 2020-10-20
+
+### Added
+- Reduce subtasks container padding on mobile #1250 #1280
+- Updated translations
+- Updated dependencies
+
+### Fixed
+- Fix opening calendar edit input #1276 #1283
+- Improve sorting calendars on mobile #1278 #1285
+- Improve calendar deletion wording #1279 #1290
+- Fix hide-subtasks popover icon #1282 #1284
+- Fix task sort-order icons on dark theme #1288 #1289 
+- Fix webpack5 build #1286
+- Remove unused component #1277 #1281
+- Fix stylelint #1304
+
 ## 0.13.4 - 2020-10-11
 
 ### Added
