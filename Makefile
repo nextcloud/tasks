@@ -135,6 +135,7 @@ appstore: clean build-svg-sprite build-js-production
 	--exclude=/.gitlab-ci.yml \
 	--exclude=/.prettierrc.js \
 	--exclude=/.scrutinizer.yml \
+	--exclude=/.stylelintignore \
 	--exclude=/.stylelintrc \
 	--exclude=/.travis.yml \
 	--exclude=/.tx \
