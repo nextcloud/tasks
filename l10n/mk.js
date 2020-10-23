@@ -31,6 +31,7 @@ OC.L10N.register(
     "Automatic" : "Автоматски",
     "No errors" : "Нема грешки",
     "Open your browser console for more details" : "Отворете ја конзолата на прелистувачот за повеќе детали",
+    "Due date" : "До датум",
     "Last modified" : "Скоро изменети",
     "Priority" : "Приоритет",
     "[Yesterday]" : "[Вчера]",
@@ -39,10 +40,12 @@ OC.L10N.register(
     "Tomorrow" : "Утре",
     "Set start date" : "Постави почетен датум",
     "Set due date" : "Постави краен рок",
-    "All day" : "Сите денови",
+    "All day" : "Цели денови",
     "Add this as a new category" : "Додади како нова категорија",
     "When shared show full event" : "Кога е споделен, прикажи го целосно настанот",
-    "When shared show only busy" : "Кога е споделено покажи зафатен",
+    "When shared show only busy" : "Кога е споделен, прикажи зафатено",
+    "When shared hide this event" : "Кога е споделен, сокриј го настанот",
+    "Canceled" : "Откажано",
     "An error occurred" : "Настана грешка"
 },
 "nplurals=2; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : 1;");
