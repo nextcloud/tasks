@@ -97,7 +97,7 @@
 		"svg-sprite": "^1.5.0",
 		"terser-webpack-plugin": "^4.2.3",
 		"vue-jest": "^3.0.7",
-		"vue-loader": "^15.9.3",
+		"vue-loader": "^15.9.4",
 		"vue-template-compiler": "^2.6.12",
 		"webpack": "^4.44.2",
 		"webpack-cli": "^4.1.0",
