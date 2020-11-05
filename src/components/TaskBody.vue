@@ -33,6 +33,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		}"
 		:data-priority="[task.priority]"
 		class="task-item"
+		ref="taskItem"
 		@dragstart="dragStart($event)">
 		<div :task-id="task.uri"
 			:class="{active: isTaskOpen()}"
@@ -445,6 +446,11 @@ export default {
 		 * @param {Object} e The drag event
 		 */
 		dragStart(e) {
+			// Only set the uri if it's the closest task to the drag event
+			// so we don't get the uri of the root task (the event bubbles up).
+			if (e.target.closest('.task-item') !== this.$refs.taskItem) {
+				return
+			}
 			e.dataTransfer.setData('text/plain', this.task.uri)
 		},
 
