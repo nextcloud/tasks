@@ -71,7 +71,7 @@
 		"babel-eslint": "^10.1.0",
 		"babel-jest": "^26.6.1",
 		"babel-loader": "^8.1.0",
-		"css-loader": "^5.0.0",
+		"css-loader": "^5.0.1",
 		"eslint": "^6.8.0",
 		"eslint-config-standard": "^14.1.1",
 		"eslint-friendly-formatter": "^4.0.1",
