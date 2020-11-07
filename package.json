@@ -86,7 +86,7 @@
 		"jest-environment-jsdom-sixteen": "^1.0.3",
 		"jest-serializer-vue": "^2.0.2",
 		"mockdate": "^3.0.2",
-		"node-sass": "^4.14.1",
+		"node-sass": "^5.0.0",
 		"prettier-eslint": "^11.0.0",
 		"raw-loader": "^4.0.2",
 		"sass-loader": "^10.0.4",
