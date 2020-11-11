@@ -22,6 +22,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<li v-show="showTask"
+		ref="taskItem"
 		:task-id="task.uri"
 		:class="{
 			done: task.completed,
@@ -33,7 +34,6 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		}"
 		:data-priority="[task.priority]"
 		class="task-item"
-		ref="taskItem"
 		@dragstart="dragStart($event)">
 		<div :task-id="task.uri"
 			:class="{active: isTaskOpen()}"
