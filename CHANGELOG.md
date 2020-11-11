@@ -1,3 +1,12 @@
+## 0.13.6 -2020-11-11
+
+### Added
+- Updated translations
+- Updated dependencies
+
+### Fixed
+- Only moved dragged task #1329 #1330
+
 ## 0.13.5 - 2020-10-20
 
 ### Added
