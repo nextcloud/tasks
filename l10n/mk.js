@@ -34,6 +34,7 @@ OC.L10N.register(
     "Due date" : "До датум",
     "Last modified" : "Скоро изменети",
     "Priority" : "Приоритет",
+    "Alphabetically" : "Азбучно",
     "[Yesterday]" : "[Вчера]",
     "[Today]" : "[Денес]",
     "[Tomorrow]" : "[Утре]",
