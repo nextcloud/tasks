@@ -41,7 +41,7 @@ OC.L10N.register(
     "An error occurred, unable to delete the list." : "Es ist ein Fehler aufgetreten, die Liste konnte nicht gelöscht werden.",
     "_Deleting the calendar in {countdown} second_::_Deleting the calendar in {countdown} seconds_" : ["Lösche den Kalender in {countdown} Sekunde","Lösche den Kalender in {countdown} Sekunden"],
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Kalenderfreigabe wird in {countdown} Sekunde aufgehoben","Kalenderfreigabe wird in {countdown} Sekunden aufgehoben"],
-    "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Lösche die Liste in {countdown} Sekunde","Die Liste wird in {countdown} Sekunden gelöscht"],
+    "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Die Liste wird in {countdown} Sekunde gelöscht","Die Liste wird in {countdown} Sekunden gelöscht"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Listenfreigabe wird in {countdown} Sekunde aufgehoben","Listenfreigabe wird in {countdown} Sekunden aufgehoben"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Mit {num} Entität geteilt","Mit {num} Entitäten geteilt"],
     "Default list" : "Standardliste",
