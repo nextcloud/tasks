@@ -33,7 +33,7 @@
 		"@nextcloud/initial-state": "1.2.0",
 		"@nextcloud/moment": "^1.1.1",
 		"@nextcloud/router": "^1.2.0",
-		"@nextcloud/vue": "^3.2.0",
+		"@nextcloud/vue": "^3.3.0",
 		"@vue/test-utils": "^1.1.1",
 		"cdav-library": "github:nextcloud/cdav-library",
 		"color-convert": "^2.0.1",
