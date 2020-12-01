@@ -29,6 +29,7 @@ Then open the Tasks app from the app menu.
 * [Thunderbird Lightning Plugin](https://addons.thunderbird.net/en-US/thunderbird/addon/lightning/) (Cross Platform Desktop App)
 * [Vdirsyncer](https://vdirsyncer.pimutils.org/en/stable/) (Linux)
 * [BusyCal](https://www.busymac.com/busycal) (MacOS)
+* [aCalendar+](https://acalendar.tapirapps.de/de/support/home) (via Davx5) [(Android)](https://play.google.com/store/apps/details?id=org.withouthat.acalendarplus)
 
 ## Maintainers
 
