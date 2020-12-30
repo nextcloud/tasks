@@ -29,11 +29,18 @@
     "Unshare" : "Delen stoppen",
     "This will delete the calendar \"{calendar}\" and all corresponding events and tasks." : "Dit verwijdert agenda \"{calendar}\" en alle bijbehorende afspraken en taken.",
     "This will unshare the calendar \"{calendar}\"." : "Dit zorg voor beëindigen van delen van agenda \"{calendar}\".",
+    "This will delete the list \"{list}\" and all corresponding tasks." : "Dit verwijdert lijst \"{list}\" en alle bijbehorende taken.",
+    "This will unshare the list \"{list}\"." : "Dit zorg voor beëindigen van delen van lijst \"{lijst}\".",
     "Calendar link copied to clipboard." : "Kalenderlink gekopieerd naar klembord.",
+    "List link copied to clipboard." : "Lijst-link gekopieerd naar klembord.",
     "Calendar link could not be copied to clipboard." : "Kalenderlink kon niet worden gekopieerd naar klembord.",
+    "List link could not be copied to clipboard." : "Lijst-link kon niet worden gekopieerd naar klembord.",
     "An error occurred, unable to delete the calendar." : "Er is een fout opgetreden waardoor de agenda niet kan worden verwijderd.",
-    "_Deleting the calendar in {countdown} second_::_Deleting the calendar in {countdown} seconds_" : ["De agenda verwijderen over {countdown} seconden","Deleting the calendar in {countdown} seconds"],
-    "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Het delen van de agenda ongedaan maken over {countdown} seconden","Unsharing the calendar in {countdown} seconds"],
+    "An error occurred, unable to delete the list." : "Er is een fout opgetreden, lijst kan niet verwijderd worden.",
+    "_Deleting the calendar in {countdown} second_::_Deleting the calendar in {countdown} seconds_" : ["Agenda wordt verwijderd over {countdown} seconde","Agenda wordt verwijderd over {countdown} seconden"],
+    "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Het delen van de agenda wordt over {countdown} seconde gestopt","Het delen van de agenda wordt over {countdown} seconden gestopt"],
+    "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["De lijst wordt verwijderd over {countdown} seconde","De lijst wordt verwijderd over {countdown} seconden"],
+    "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Het delen van de lijst wordt over {countdown} seconde gestopt","Het delen van de lijst wordt over {countdown} seconden gestopt"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Gedeeld met {num} object","Gedeeld met {num} objecten"],
     "Default list" : "Standaardlijst",
     "Visibility of Smart Collections" : "Zichtbaarheid van Slimme Verzamelingen",
@@ -112,7 +119,7 @@
     "Loading task from server." : "Taken van de server aan het laden.",
     "Task not found!" : "Taak niet gevonden!",
     "When shared show full event" : "Wanneer gedeeld, toon gehele afspraak",
-    "When shared show only busy" : "Wanneer gedeeld, toon enkel onbeschikbaarheid",
+    "When shared show only busy" : "Wanneer gedeeld, toon alleen onbeschikbaarheid",
     "When shared hide this event" : "Wanneer gedeeld, verberg deze afspraak",
     "Needs action" : "Vereist actie",
     "In process" : "In behandeling",
@@ -155,6 +162,6 @@
     "Could not update the task." : "Kon de taak niet bewerken.",
     "Successfully updated the task." : "Taak succesvol bijgewerkt.",
     "Task successfully moved to new calendar." : "Taak succesvol verplaatst naar de nieuwe agenda.",
-    "An error occurred" : "Er heeft een fout opgetreden"
+    "An error occurred" : "Er is een fout opgetreden"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
