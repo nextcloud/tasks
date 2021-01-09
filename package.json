@@ -27,7 +27,7 @@
 	"bugs": "https://github.com/nextcloud/tasks/issues",
 	"contributors": [],
 	"dependencies": {
-		"@nextcloud/axios": "^1.5.0",
+		"@nextcloud/axios": "^1.6.0",
 		"@nextcloud/dialogs": "^3.1.1",
 		"@nextcloud/event-bus": "^1.2.0",
 		"@nextcloud/initial-state": "1.2.0",
