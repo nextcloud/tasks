@@ -23,10 +23,13 @@ jobs:
         server-versions: ['stable20', 'stable21', 'master']
         include:
           - php-versions: '7.2'
+            databases: 'sqlite'
             server-versions: 'stable20'
           - php-versions: '8.0'
+            databases: 'sqlite'
             server-versions: 'stable21'
           - php-versions: '8.0'
+            databases: 'sqlite'
             server-versions: 'master'
   
     name: php${{ matrix.php-versions }}-${{ matrix.databases }}-${{ matrix.server-versions }}
@@ -124,7 +127,7 @@ jobs:
         with:
           php-version: ${{ matrix.php-versions }}
           tools: phpunit
-          extensions: mbstring, iconv, fileinfo, intl, mysql, pdo_mysql
+          extensions: mbstring, iconv, fileinfo, intl, mysql, pdo_mysql, gd, zip
           coverage: none
 
       - name: Set up PHPUnit
@@ -196,7 +199,7 @@ jobs:
         with:
           php-version: ${{ matrix.php-versions }}
           tools: phpunit
-          extensions: mbstring, iconv, fileinfo, intl, pgsql, pdo_pgsql
+          extensions: mbstring, iconv, fileinfo, intl, pgsql, pdo_pgsql, gd, zip
           coverage: none
 
       - name: Set up PHPUnit
