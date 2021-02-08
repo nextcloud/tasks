@@ -18,9 +18,16 @@ jobs:
       # do not stop on another job's failure
       fail-fast: false
       matrix:
-        php-versions: ['7.4']
+        php-versions: ['7.3', '7.4']
         databases: ['sqlite']
-        server-versions: ['master']
+        server-versions: ['stable20', 'stable21', 'master']
+        include:
+          - php-versions: '7.2'
+            nextcloud-versions: 'stable20'
+          - php-versions: '8.0'
+            nextcloud-versions: 'stable21'
+          - php-versions: '8.0'
+            nextcloud-versions: 'master'
   
     name: php${{ matrix.php-versions }}-${{ matrix.databases }}-${{ matrix.server-versions }}
 
@@ -48,7 +55,7 @@ jobs:
         with:
           php-version: ${{ matrix.php-versions }}
           tools: phpunit
-          extensions: mbstring, iconv, fileinfo, intl, sqlite, pdo_sqlite
+          extensions: mbstring, iconv, fileinfo, intl, sqlite, pdo_sqlite, gd, zip
           coverage: xdebug
 
       - name: Set up PHPUnit
