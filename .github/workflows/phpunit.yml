@@ -25,12 +25,13 @@ jobs:
           - php-versions: '7.2'
             databases: 'sqlite'
             server-versions: 'stable20'
-          - php-versions: '8.0'
-            databases: 'sqlite'
-            server-versions: 'stable21'
-          - php-versions: '8.0'
-            databases: 'sqlite'
-            server-versions: 'master'
+# PHP8 needs an updated composer lock-file
+#          - php-versions: '8.0'
+#            databases: 'sqlite'
+#            server-versions: 'stable21'
+#          - php-versions: '8.0'
+#            databases: 'sqlite'
+#            server-versions: 'master'
   
     name: php${{ matrix.php-versions }}-${{ matrix.databases }}-${{ matrix.server-versions }}
 
