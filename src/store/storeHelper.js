@@ -2,7 +2,7 @@
  * Nextcloud - Tasks
  *
  * @author Raimund Schlüßler
- * @copyright 2020 Jonas Thelemann <e-mail@jonas-thelemann.de>
+ * @copyright 2021 Jonas Thelemann <e-mail@jonas-thelemann.de>
  * @copyright 2019 Raimund Schlüßler <raimund.schluessler@mailbox.org>
  * @copyright 2018 Vadim Nicolai <contact@vadimnicolai.com>
  *
@@ -40,7 +40,7 @@ function isTaskInList(task, listId, checkSubtasks = true) {
 	const day = parts[1] ? parts[1] : null
 	switch (listId) {
 	case 'completed':
-		return task.completed
+		return !isTaskOpen(task)
 	case 'all':
 		return isTaskOpen(task)
 	case 'current':
