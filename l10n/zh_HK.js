@@ -57,7 +57,7 @@ OC.L10N.register(
     "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["這將會從日曆「{calendar}」刪除 {taskCount} 個已完成的工作項目與其子項目。"],
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["無法刪除 {failedCount} 個工作項目。"],
     "Load all completed tasks." : "載入所有已完成的工作項目。",
-    "Change sort order" : "改變分類順序",
+    "Change sort order" : "改變分類排序",
     "Relevance" : "關聯",
     "Sort by completed state, due date, priority, start date and summary." : "按完成狀態、結束日期、優先程度、開始日期與摘要排序。",
     "Start date" : "開始日期",
