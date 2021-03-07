@@ -110,7 +110,7 @@ OC.L10N.register(
     "Tomorrow" : "明天",
     "Set start date" : "設定開始日期",
     "Set start time" : "設定開始時間",
-    "Set due date" : "設定到期日期",
+    "Set due date" : "設定到期日",
     "Set due time" : "設定到期時間",
     "All day" : "整天",
     "Select a calendar" : "選擇日曆",
