@@ -112,7 +112,7 @@ OC.L10N.register(
     "Set start time" : "Définir une date de début",
     "Set due date" : "Indiquer la date d'échéance",
     "Set due time" : "Définir une date d'échéance",
-    "All day" : "Tous les jours",
+    "All day" : "Toute la journée",
     "Select a calendar" : "Sélectionnez un agenda",
     "Select a classification" : "Sélectionner une catégorie",
     "Select a status" : "Sélectionner un statut",

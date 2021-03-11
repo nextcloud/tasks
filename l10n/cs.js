@@ -32,7 +32,7 @@ OC.L10N.register(
     "This will delete the calendar \"{calendar}\" and all corresponding events and tasks." : "Toto smaže kalendář „{calendar}“ a všechny odpovídající události a úkoly.",
     "This will unshare the calendar \"{calendar}\"." : "Toto zruší sdílení kalendáře „{calendar}“.",
     "This will delete the list \"{list}\" and all corresponding tasks." : "Toto smaže seznam „{list}“ a všechny odpovídající úkoly.",
-    "This will unshare the list \"{list}\"." : "Toto zruší sdílení kalendáře „{list}“.",
+    "This will unshare the list \"{list}\"." : "Toto zruší sdílení seznamu „{list}“.",
     "Calendar link copied to clipboard." : "Odkaz do kalendáře zkopírován do schránky.",
     "List link copied to clipboard." : "Odkaz na seznam zkopírován do schránky.",
     "Calendar link could not be copied to clipboard." : "Odkaz do kalendáře se nepodařilo zkopírovat do schránky.",
