@@ -4,7 +4,7 @@ const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = merge(common, {
 	mode: 'production',
-	devtool: '#source-map',
+	devtool: 'source-map',
 	optimization: {
 		minimizer: [new TerserPlugin({
 			terserOptions: {
@@ -12,7 +12,6 @@ module.exports = merge(common, {
 					comments: false,
 				}
 			},
-			sourceMap: true,
 		})],
 	}
 });

@@ -567,6 +567,10 @@ const actions = {
 		try {
 			const response = await findVTODObyState(calendar, completed, related)
 			if (response) {
+				// If we loaded completed tasks, note that.
+				if (completed) {
+					calendar.loadedCompleted = true
+				}
 				// We don't want to lose the url information
 				// so we need to parse one by one
 				const tasks = response.map(item => {

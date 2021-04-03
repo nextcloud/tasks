@@ -571,12 +571,26 @@ const mutations = {
 	 * @param {Task} task The task to update
 	 * @param {string} etag The task etag
 	 */
-	updateTaskEtag(state, { task, etag }) {
+	updateTaskEtag(state, { task }) {
 		if (state.tasks[task.key] && task instanceof Task) {
 			// replace task object data
-			state.tasks[task.key].dav.etag = etag
+			state.tasks[task.key].dav.etag = task.conflict
 		} else {
 			console.error('Error while replacing the etag of following task ', task)
+		}
+	},
+
+	/**
+	 * Resets the sync status
+	 *
+	 * @param {Object} state The store data
+	 * @param {Object} data Destructuring object
+	 * @param {Task} task The task to update
+	 */
+	resetStatus(state, { task }) {
+		if (state.tasks[task.key] && task instanceof Task) {
+			// replace task object data
+			state.tasks[task.key].syncstatus = null
 		}
 	},
 
@@ -1174,14 +1188,15 @@ const actions = {
 	 * @param {string} data.etag The task etag to override in case of conflict
 	 * @returns {Promise}
 	 */
-	async fetchFullTask(context, { task, etag = '' }) {
-		if (etag !== '') {
-			await context.commit('updateTaskEtag', { task, etag })
+	async fetchFullTask(context, { task }) {
+		if (task.conflict !== '') {
+			await context.commit('updateTaskEtag', { task })
 		}
 		return task.dav.fetchCompleteData()
 			.then((response) => {
 				const newTask = new Task(task.dav.data, task.calendar)
 				task.syncstatus = new TaskStatus('success', OCA.Tasks.$t('tasks', 'Successfully updated the task.'))
+				task.conflict = false
 				context.commit('updateTask', newTask)
 			})
 			.catch((error) => { throw error })

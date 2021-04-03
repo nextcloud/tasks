@@ -92,7 +92,7 @@ export default {
 		completedTasksCount() {
 			const completedCount = function counter(tasks) {
 				let i = tasks.length
-				tasks.map((task) => {
+				tasks.forEach((task) => {
 					i += counter(Object.values(task.subTasks))
 				})
 				return i
