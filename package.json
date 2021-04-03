@@ -103,8 +103,10 @@
 		"webpack-cli": "^4.6.0",
 		"webpack-merge": "^5.7.3"
 	},
+	"type": "module",
+	"exports": "./js/tasks.js",
 	"engines": {
-		"node": ">=10.0.0"
+		"node": ">=12.0.0"
 	},
 	"jest": {
 		"moduleFileExtensions": [

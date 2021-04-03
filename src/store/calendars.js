@@ -27,7 +27,6 @@
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-'use strict'
 
 import parseIcs from '../services/parseIcs.js'
 import client from '../services/cdav.js'

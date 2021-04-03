@@ -18,7 +18,6 @@
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-'use strict'
 
 import Requests from '../services/requests.js'
 import { isTaskInList, searchSubTasks } from './storeHelper.js'

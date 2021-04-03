@@ -1,9 +1,11 @@
-const path = require('path')
-const webpack = require('webpack')
-const { VueLoaderPlugin } = require('vue-loader')
-const StyleLintPlugin = require('stylelint-webpack-plugin')
+import path from 'path'
+import webpack from 'webpack'
+import { VueLoaderPlugin } from 'vue-loader'
+import StyleLintPlugin from 'stylelint-webpack-plugin'
 
-module.exports = {
+const __dirname = path.dirname(new URL(import.meta.url).pathname)
+
+export default {
 	entry: path.join(__dirname, 'src', 'main.js'),
 	output: {
 		path: path.resolve(__dirname, './js'),
@@ -56,7 +58,7 @@ module.exports = {
 		new VueLoaderPlugin(),
 		new StyleLintPlugin(),
 		new webpack.DefinePlugin({
-			$appVersion: JSON.stringify(require('./package.json').version)
+			$appVersion: JSON.stringify(process.env.npm_package_version)
 		})
 	],
 	resolve: {
