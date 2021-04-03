@@ -65,10 +65,7 @@ export default {
 				return
 			}
 
-			this.$store.dispatch(this.status.action, { task: this.task, etag: this.conflict })
-				.then(() => {
-					this.task.conflict = false
-				})
+			this.$store.dispatch(this.status.action, { task: this.task })
 		},
 		checkTimeout(newStatus) {
 			if (newStatus) {
@@ -76,7 +73,12 @@ export default {
 					clearTimeout(this.resetStatusTimeout)
 				}
 				if (newStatus.duration > 0) {
-					this.resetStatusTimeout = setTimeout(() => { this.task.syncstatus = null }, this.status.duration)
+					this.resetStatusTimeout = setTimeout(
+						() => {
+							this.$store.commit('resetStatus', { task: this.task })
+							// this.task.syncstatus = null
+						}, this.status.duration
+					)
 				}
 			}
 		},

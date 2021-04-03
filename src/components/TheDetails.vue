@@ -406,6 +406,30 @@ export default {
 	},
 	filters: {
 	},
+
+	/**
+	 * Before we close the details view, we save possible edits.
+	 *
+	 * @param {Route} to The target Route Object being navigated to.
+	 * @param {Route} from The current route being navigated away from.
+	 * @param {Function} next This function must be called to resolve the hook.
+	 */
+	beforeRouteLeave(to, from, next) {
+		this.finishEditing(this.edit)
+		next()
+	},
+
+	/**
+	 * Before we navigate to a new task, we save possible edits.
+	 *
+	 * @param {Route} to The target Route Object being navigated to.
+	 * @param {Route} from The current route being navigated away from.
+	 * @param {Function} next This function must be called to resolve the hook.
+	 */
+	beforeRouteUpdate(to, from, next) {
+		this.finishEditing(this.edit)
+		next()
+	},
 	data() {
 		return {
 			loading: false,
@@ -685,30 +709,6 @@ export default {
 
 	created() {
 		this.loadTask()
-	},
-
-	/**
-	 * Before we close the details view, we save possible edits.
-	 *
-	 * @param {Route} to The target Route Object being navigated to.
-	 * @param {Route} from The current route being navigated away from.
-	 * @param {Function} next This function must be called to resolve the hook.
-	 */
-	beforeRouteLeave(to, from, next) {
-		this.finishEditing(this.edit)
-		next()
-	},
-
-	/**
-	 * Before we navigate to a new task, we save possible edits.
-	 *
-	 * @param {Route} to The target Route Object being navigated to.
-	 * @param {Route} from The current route being navigated away from.
-	 * @param {Function} next This function must be called to resolve the hook.
-	 */
-	beforeRouteUpdate(to, from, next) {
-		this.finishEditing(this.edit)
-		next()
 	},
 	methods: {
 		...mapActions([

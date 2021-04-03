@@ -211,7 +211,6 @@ export default class Task {
 	set uid(uid) {
 		this.vtodo.updatePropertyWithValue('uid', uid)
 		this._uid = this.vtodo.getFirstPropertyValue('uid') || ''
-		return true
 	}
 
 	/**
