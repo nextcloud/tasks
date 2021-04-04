@@ -157,16 +157,17 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import { overdue, sort, searchSubTasks, isTaskInList } from '../store/storeHelper'
-import ClickOutside from 'v-click-outside'
-import { mapGetters, mapActions } from 'vuex'
 import { linkify } from '../directives/linkify.js'
 import TaskStatusDisplay from './TaskStatusDisplay'
 import TaskDragContainer from './TaskDragContainer'
 
+import { showError } from '@nextcloud/dialogs'
 import moment from '@nextcloud/moment'
 import Actions from '@nextcloud/vue/dist/Components/Actions'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
-import { showError } from '@nextcloud/dialogs'
+
+import ClickOutside from 'v-click-outside'
+import { mapGetters, mapActions } from 'vuex'
 
 const CD_DURATION = 7
 

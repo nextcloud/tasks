@@ -20,18 +20,17 @@
  */
 'use strict'
 
-import Vue from 'vue'
-
 import App from './App'
-
 import router from './router'
 import store from './store/store'
+
+import { subscribe, unsubscribe } from '@nextcloud/event-bus'
+import { linkTo } from '@nextcloud/router'
+
+import Vue from 'vue'
 import { sync } from 'vuex-router-sync'
 import VTooltip from 'v-tooltip'
 import VueClipboard from 'vue-clipboard2'
-import { linkTo } from '@nextcloud/router'
-
-import { subscribe, unsubscribe } from '@nextcloud/event-bus'
 
 // Disable on production
 Vue.config.devtools = true

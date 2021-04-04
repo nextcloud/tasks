@@ -57,12 +57,14 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import moment from '@nextcloud/moment'
-import { mapGetters, mapActions } from 'vuex'
 import { isTaskInList, isParentInList } from '../../store/storeHelper'
-import SortorderDropdown from '../SortorderDropdown'
 import LoadCompletedButton from '../LoadCompletedButton'
+import SortorderDropdown from '../SortorderDropdown'
 import TaskDragContainer from '../TaskDragContainer'
+
+import moment from '@nextcloud/moment'
+
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
 	components: {

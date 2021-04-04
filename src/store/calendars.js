@@ -29,16 +29,17 @@
  */
 'use strict'
 
-import Vue from 'vue'
-import ICAL from 'ical.js'
 import parseIcs from '../services/parseIcs'
 import client from '../services/cdav'
 import Task from '../models/task'
-import pLimit from 'p-limit'
 import { isParentInList, searchSubTasks } from './storeHelper'
 import { findVTODObyState } from './cdav-requests'
 import router from '../router'
 import { detectColor, uidToHexColor } from '../utils/color.js'
+
+import ICAL from 'ical.js'
+import pLimit from 'p-limit'
+import Vue from 'vue'
 
 const calendarModel = {
 	id: '',

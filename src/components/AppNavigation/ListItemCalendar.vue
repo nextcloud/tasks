@@ -125,11 +125,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
 import Colorpicker from './Colorpicker'
 import ShareCalendar from './CalendarShare'
 
-import ClickOutside from 'v-click-outside'
+import { showSuccess, showError } from '@nextcloud/dialogs'
+import { generateRemoteUrl } from '@nextcloud/router'
 import Avatar from '@nextcloud/vue/dist/Components/Avatar'
 import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
 import AppNavigationCounter from '@nextcloud/vue/dist/Components/AppNavigationCounter'
@@ -137,8 +137,9 @@ import AppNavigationIconBullet from '@nextcloud/vue/dist/Components/AppNavigatio
 import Actions from '@nextcloud/vue/dist/Components/Actions'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
 import ActionLink from '@nextcloud/vue/dist/Components/ActionLink'
-import { generateRemoteUrl } from '@nextcloud/router'
-import { showSuccess, showError } from '@nextcloud/dialogs'
+
+import ClickOutside from 'v-click-outside'
+import { mapGetters, mapActions } from 'vuex'
 
 const CD_DURATION = 7
 

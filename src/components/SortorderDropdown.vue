@@ -45,6 +45,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 <script>
 import Actions from '@nextcloud/vue/dist/Components/Actions'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
+
 import { mapGetters } from 'vuex'
 
 export default {

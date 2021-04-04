@@ -20,12 +20,13 @@
  */
 'use strict'
 
+import Requests from '../services/requests'
+import { isTaskInList, searchSubTasks } from './storeHelper'
+
+import { generateUrl } from '@nextcloud/router'
+
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { generateUrl } from '@nextcloud/router'
-import Requests from '../services/requests'
-
-import { isTaskInList, searchSubTasks } from './storeHelper'
 
 Vue.use(Vuex)
 

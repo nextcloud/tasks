@@ -34,11 +34,13 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import AppNavigation from './components/AppNavigation/AppNavigation'
+import client from './services/cdav.js'
+
 import AppContent from '@nextcloud/vue/dist/Components/AppContent'
 import Content from '@nextcloud/vue/dist/Components/Content'
-import client from './services/cdav.js'
+
+import { mapState } from 'vuex'
 
 export default {
 	name: 'App',

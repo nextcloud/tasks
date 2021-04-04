@@ -382,16 +382,17 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
 import { overdue } from '../store/storeHelper'
+import Markdown from './Markdown'
+import TaskStatusDisplay from './TaskStatusDisplay'
+import { linkify } from '../directives/linkify.js'
+
 import moment from '@nextcloud/moment'
 import DatetimePicker from '@nextcloud/vue/dist/Components/DatetimePicker'
 import Multiselect from '@nextcloud/vue/dist/Components/Multiselect'
-import Markdown from './Markdown'
-import TaskStatusDisplay from './TaskStatusDisplay'
 
 import ClickOutside from 'v-click-outside'
-import { linkify } from '../directives/linkify.js'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
 	components: {
