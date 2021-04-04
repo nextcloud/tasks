@@ -57,11 +57,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
+import { showError } from '@nextcloud/dialogs'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
 import ActionCheckbox from '@nextcloud/vue/dist/Components/ActionCheckbox'
 import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
 import Avatar from '@nextcloud/vue/dist/Components/Avatar'
-import { showError } from '@nextcloud/dialogs'
 
 export default {
 	name: 'CalendarSharee',

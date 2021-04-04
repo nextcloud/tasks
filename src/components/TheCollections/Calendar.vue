@@ -62,11 +62,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
-import SortorderDropdown from '../SortorderDropdown'
-import LoadCompletedButton from '../LoadCompletedButton'
 import DeleteCompletedModal from '../DeleteCompletedModal'
+import LoadCompletedButton from '../LoadCompletedButton'
+import SortorderDropdown from '../SortorderDropdown'
 import TaskDragContainer from '../TaskDragContainer'
+
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
 	components: {

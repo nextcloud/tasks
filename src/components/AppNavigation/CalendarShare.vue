@@ -59,9 +59,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 import CalendarSharee from './CalendarSharee'
 import client from '../../services/cdav'
 
-import HttpClient from '@nextcloud/axios'
+import Axios from '@nextcloud/axios'
 import { generateOcsUrl } from '@nextcloud/router'
 import Multiselect from '@nextcloud/vue/dist/Components/Multiselect'
+
 import debounce from 'debounce'
 
 export default {
@@ -205,7 +206,7 @@ export default {
 		async findShareesFromCircles(query, hiddenPrincipals, hiddenUrls) {
 			let results
 			try {
-				results = await HttpClient.get(generateOcsUrl('apps/files_sharing/api/v1') + 'sharees', {
+				results = await Axios.get(generateOcsUrl('apps/files_sharing/api/v1') + 'sharees', {
 					params: {
 						format: 'json',
 						search: query,

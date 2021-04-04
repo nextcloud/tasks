@@ -22,6 +22,7 @@
 'use strict'
 
 import moment from '@nextcloud/moment'
+
 import ICAL from 'ical.js'
 
 /**

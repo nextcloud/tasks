@@ -23,9 +23,11 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
  */
-import Vue from 'vue'
+
 import client from '../services/cdav'
 import { getDefaultPrincipalObject, mapDavToPrincipal } from '../models/principal'
+
+import Vue from 'vue'
 
 const state = {
 	principals: [],

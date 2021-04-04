@@ -25,6 +25,7 @@ import Requests from '../services/requests'
 
 import { loadState } from '@nextcloud/initial-state'
 import { generateUrl } from '@nextcloud/router'
+
 import Vue from 'vue'
 import Vuex from 'vuex'
 

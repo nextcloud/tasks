@@ -20,13 +20,14 @@
  */
 'use strict'
 
-import Vue from 'vue'
-import Vuex from 'vuex'
 import calendars from './calendars'
 import collections from './collections'
 import tasks from './tasks'
 import settings from './settings'
 import principals from './principals'
+
+import Vue from 'vue'
+import Vuex from 'vuex'
 
 Vue.use(Vuex)
 

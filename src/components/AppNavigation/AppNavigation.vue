@@ -96,17 +96,18 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex'
 import ListItemCalendar from './ListItemCalendar'
 import Colorpicker from './Colorpicker'
 import TheSettings from './TheSettings'
 
-import draggable from 'vuedraggable'
 import AppNavigation from '@nextcloud/vue/dist/Components/AppNavigation'
-import AppNavigationSettings from '@nextcloud/vue/dist/Components/AppNavigationSettings'
-import ClickOutside from 'v-click-outside'
-import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
 import AppNavigationCounter from '@nextcloud/vue/dist/Components/AppNavigationCounter'
+import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
+import AppNavigationSettings from '@nextcloud/vue/dist/Components/AppNavigationSettings'
+
+import draggable from 'vuedraggable'
+import ClickOutside from 'v-click-outside'
+import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
 	components: {

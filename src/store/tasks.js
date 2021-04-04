@@ -20,16 +20,18 @@
  */
 'use strict'
 
-import Vue from 'vue'
-import Vuex from 'vuex'
 import Task from '../models/task'
 import { isParentInList, momentToICALTime } from './storeHelper'
-import ICAL from 'ical.js'
 import TaskStatus from '../models/taskStatus'
 import router from '../router'
 import { findVTODObyUid } from './cdav-requests'
+
 import { showError } from '@nextcloud/dialogs'
 import moment from '@nextcloud/moment'
+
+import ICAL from 'ical.js'
+import Vue from 'vue'
+import Vuex from 'vuex'
 
 Vue.use(Vuex)
 

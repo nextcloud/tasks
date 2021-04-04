@@ -62,8 +62,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
 import Modal from '@nextcloud/vue/dist/Components/Modal'
+
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
 	components: {
