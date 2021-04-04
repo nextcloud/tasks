@@ -31,14 +31,6 @@ build_directory=$(CURDIR)/build
 appstore_build_directory=$(CURDIR)/build/appstore/$(app_name)
 appstore_artifact_directory=$(CURDIR)/build/artifacts/appstore
 appstore_package_name=$(appstore_artifact_directory)/$(app_name)
-npm=$(shell which npm 2> /dev/null)
-gcp=$(shell which gcp 2> /dev/null)
-
-ifeq (, $(gcp))
-	copy_command=cp
-else
-	copy_command=gcp
-endif
 
 # code signing
 # assumes the following:
@@ -189,7 +181,7 @@ endif
 # Command for running VUE tests
 .PHONY: test
 test:
-	$(npm) run test
+	npm run test
 
 test-php:
 	phpunit -c phpunit.xml
