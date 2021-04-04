@@ -35,7 +35,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { sort } from '../store/storeHelper'
+import { sort } from '../store/storeHelper.js'
 
 import draggable from 'vuedraggable'
 import { mapGetters, mapActions, mapMutations } from 'vuex'

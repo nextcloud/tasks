@@ -125,8 +125,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import Colorpicker from './Colorpicker'
-import ShareCalendar from './CalendarShare'
+import Colorpicker from './Colorpicker.vue'
+import ShareCalendar from './CalendarShare.vue'
 
 import { showSuccess, showError } from '@nextcloud/dialogs'
 import { generateRemoteUrl } from '@nextcloud/router'

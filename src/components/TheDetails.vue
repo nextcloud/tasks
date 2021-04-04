@@ -382,9 +382,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { overdue } from '../store/storeHelper'
-import Markdown from './Markdown'
-import TaskStatusDisplay from './TaskStatusDisplay'
+import { overdue } from '../store/storeHelper.js'
+import Markdown from './Markdown.vue'
+import TaskStatusDisplay from './TaskStatusDisplay.vue'
 import { linkify } from '../directives/linkify.js'
 
 import moment from '@nextcloud/moment'

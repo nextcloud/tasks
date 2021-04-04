@@ -156,10 +156,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { overdue, sort, searchSubTasks, isTaskInList } from '../store/storeHelper'
+import { overdue, sort, searchSubTasks, isTaskInList } from '../store/storeHelper.js'
 import { linkify } from '../directives/linkify.js'
-import TaskStatusDisplay from './TaskStatusDisplay'
-import TaskDragContainer from './TaskDragContainer'
+import TaskStatusDisplay from './TaskStatusDisplay.vue'
+import TaskDragContainer from './TaskDragContainer.vue'
 
 import { showError } from '@nextcloud/dialogs'
 import moment from '@nextcloud/moment'

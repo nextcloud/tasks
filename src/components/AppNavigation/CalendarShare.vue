@@ -56,8 +56,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import CalendarSharee from './CalendarSharee'
-import client from '../../services/cdav'
+import CalendarSharee from './CalendarSharee.vue'
+import client from '../../services/cdav.js'
 
 import Axios from '@nextcloud/axios'
 import { generateOcsUrl } from '@nextcloud/router'

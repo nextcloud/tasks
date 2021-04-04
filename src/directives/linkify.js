@@ -20,7 +20,7 @@
  */
 'use strict'
 
-import linkifyStr from 'linkifyjs/string'
+import linkifyStr from 'linkifyjs/string.js'
 
 function linkify(el, binding) {
 	el.innerHTML = linkifyStr(binding.value, {

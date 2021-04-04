@@ -34,7 +34,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import AppNavigation from './components/AppNavigation/AppNavigation'
+import AppNavigation from './components/AppNavigation/AppNavigation.vue'
 import client from './services/cdav.js'
 
 import AppContent from '@nextcloud/vue/dist/Components/AppContent'
