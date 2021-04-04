@@ -20,11 +20,11 @@
  */
 'use strict'
 
-import Task from '../models/task'
-import { isParentInList, momentToICALTime } from './storeHelper'
-import TaskStatus from '../models/taskStatus'
-import router from '../router'
-import { findVTODObyUid } from './cdav-requests'
+import Task from '../models/task.js'
+import { isParentInList, momentToICALTime } from './storeHelper.js'
+import TaskStatus from '../models/taskStatus.js'
+import router from '../router.js'
+import { findVTODObyUid } from './cdav-requests.js'
 
 import { showError } from '@nextcloud/dialogs'
 import moment from '@nextcloud/moment'

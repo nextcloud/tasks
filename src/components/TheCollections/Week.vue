@@ -53,9 +53,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { isTaskInList } from '../../store/storeHelper'
-import SortorderDropdown from '../SortorderDropdown'
-import TaskDragContainer from '../TaskDragContainer'
+import { isTaskInList } from '../../store/storeHelper.js'
+import SortorderDropdown from '../SortorderDropdown.vue'
+import TaskDragContainer from '../TaskDragContainer.vue'
 
 import moment from '@nextcloud/moment'
 
