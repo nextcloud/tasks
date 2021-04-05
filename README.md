@@ -30,6 +30,7 @@ Then open the Tasks app from the app menu.
 * [Vdirsyncer](https://vdirsyncer.pimutils.org/en/stable/) (Linux)
 * [BusyCal](https://www.busymac.com/busycal) (MacOS)
 * [aCalendar+](https://acalendar.tapirapps.de/de/support/home) (via Davx5) [(Android)](https://play.google.com/store/apps/details?id=org.withouthat.acalendarplus)
+* [GNOME Todo](https://wiki.gnome.org/Apps/Todo) (Linux)
 
 ## Maintainers
 
