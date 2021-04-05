@@ -5,7 +5,7 @@ module.exports = {
 		OC: false,
 		OCA: false,
 		moment: true,
-		$appVersion: true,
+		appVersion: true,
 	},
 	extends: [
 		'@nextcloud',
