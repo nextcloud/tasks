@@ -69,7 +69,7 @@ Vue.prototype.t = Vue.prototype.$t
 Vue.prototype.n = Vue.prototype.$n
 Vue.prototype.$OC = OC
 Vue.prototype.$OCA = OCA
-Vue.prototype.$appVersion = $appVersion
+Vue.prototype.$appVersion = appVersion
 
 OCA.Tasks.$t = Vue.prototype.$t
 OCA.Tasks.$n = Vue.prototype.$n

@@ -1,4 +1,4 @@
 <?php
 
-	script('tasks', 'tasks');
+	script('tasks', 'tasks-main');
 	style('tasks', 'tasks');
