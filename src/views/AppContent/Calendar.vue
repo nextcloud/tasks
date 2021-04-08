@@ -62,10 +62,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import DeleteCompletedModal from '../DeleteCompletedModal.vue'
-import LoadCompletedButton from '../LoadCompletedButton.vue'
-import SortorderDropdown from '../SortorderDropdown.vue'
-import TaskDragContainer from '../TaskDragContainer.vue'
+import DeleteCompletedModal from '../../components/DeleteCompletedModal.vue'
+import LoadCompletedButton from '../../components/LoadCompletedButton.vue'
+import SortorderDropdown from '../../components/SortorderDropdown.vue'
+import TaskDragContainer from '../../components/TaskDragContainer.vue'
 
 import { mapGetters, mapActions } from 'vuex'
 

@@ -1,4 +1,4 @@
-import Week from 'Components/TheCollections/Week.vue'
+import Week from 'Views/AppContent/Week.vue'
 import router from '@/router.js'
 
 import { store, localVue } from '../../setupStore.js'

@@ -383,8 +383,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import { overdue } from '../store/storeHelper.js'
-import Markdown from './Markdown.vue'
-import TaskStatusDisplay from './TaskStatusDisplay.vue'
+import Markdown from '../components/Markdown.vue'
+import TaskStatusDisplay from '../components/TaskStatusDisplay.vue'
 import { linkify } from '../directives/linkify.js'
 
 import moment from '@nextcloud/moment'

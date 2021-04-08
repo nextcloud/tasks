@@ -126,7 +126,8 @@
 			"^Mixins/(.*)$": "<rootDir>/src/mixins/$1",
 			"^Models/(.*)$": "<rootDir>/src/models/$1",
 			"^Store/(.*)$": "<rootDir>/src/store/$1",
-			"^Utils/(.*)$": "<rootDir>/src/utils/$1"
+			"^Utils/(.*)$": "<rootDir>/src/utils/$1",
+			"^Views/(.*)$": "<rootDir>/src/views/$1"
 		},
 		"testEnvironment": "jest-environment-jsdom-sixteen",
 		"transform": {
