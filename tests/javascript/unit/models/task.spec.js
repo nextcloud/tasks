@@ -1,7 +1,8 @@
-import Task from 'Models/task'
-import ICAL from 'ical.js'
+import Task from 'Models/task.js'
 
-import { loadICS } from '../../../assets/loadAsset'
+import { loadICS } from '../../../assets/loadAsset.js'
+
+import ICAL from 'ical.js'
 
 describe('task', () => {
 	'use strict'

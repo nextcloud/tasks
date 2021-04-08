@@ -1,12 +1,13 @@
+import calendars, { mapDavCollectionToCalendar } from 'Store/calendars.js'
+import collections from 'Store/collections.js'
+import tasks from 'Store/tasks.js'
+import settings from 'Store/settings.js'
+import Task from 'Models/task.js'
+
+import { loadICS } from '../../assets/loadAsset.js'
+
 import { createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
-
-import calendars, { mapDavCollectionToCalendar } from 'Store/calendars'
-import collections from 'Store/collections'
-import tasks from 'Store/tasks'
-import settings from 'Store/settings'
-import Task from 'Models/task'
-import { loadICS } from '../../assets/loadAsset'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)

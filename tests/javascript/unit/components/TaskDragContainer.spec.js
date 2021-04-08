@@ -1,15 +1,15 @@
+import TaskDragContainer from 'Components/TaskDragContainer.vue'
+import Task from 'Models/task.js'
+import calendars from 'Store/calendars.js'
+import collections from 'Store/collections.js'
+import tasks from 'Store/tasks.js'
+import settings from 'Store/settings.js'
+import principals from 'Store/principals.js'
+import router from '@/router.js'
+
+import { loadICS } from '../../../assets/loadAsset.js'
+
 import { shallowMount, createLocalVue } from '@vue/test-utils'
-import TaskDragContainer from 'Components/TaskDragContainer'
-import Task from 'Models/task'
-import calendars from 'Store/calendars'
-import collections from 'Store/collections'
-import tasks from 'Store/tasks'
-import settings from 'Store/settings'
-import principals from 'Store/principals'
-import router from '@/router'
-
-import { loadICS } from '../../../assets/loadAsset'
-
 import Vuex from 'vuex'
 
 const localVue = createLocalVue()

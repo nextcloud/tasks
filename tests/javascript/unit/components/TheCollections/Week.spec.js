@@ -1,10 +1,11 @@
+import Week from 'Components/TheCollections/Week.vue'
+import router from '@/router.js'
+
+import { store, localVue } from '../../setupStore.js'
+
 import { mount } from '@vue/test-utils'
-import Week from 'Components/TheCollections/Week'
-import router from '@/router'
-
-import { store, localVue } from '../../setupStore'
-
 import VTooltip from 'v-tooltip'
+
 localVue.use(VTooltip)
 
 describe('Week.vue', () => {

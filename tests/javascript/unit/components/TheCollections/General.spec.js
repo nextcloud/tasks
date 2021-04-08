@@ -1,10 +1,11 @@
+import General from 'Components/TheCollections/General.vue'
+import router from '@/router.js'
+
+import { store, localVue } from '../../setupStore.js'
+
 import { mount } from '@vue/test-utils'
-import General from 'Components/TheCollections/General'
-import router from '@/router'
-
-import { store, localVue } from '../../setupStore'
-
 import VTooltip from 'v-tooltip'
+
 localVue.use(VTooltip)
 
 describe('General.vue', () => {

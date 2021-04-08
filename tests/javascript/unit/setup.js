@@ -1,5 +1,6 @@
-import { config } from '@vue/test-utils'
 import { OC } from './OC.js'
+
+import { config } from '@vue/test-utils'
 // eslint-disable-next-line node/no-unpublished-import
 import MockDate from 'mockdate'
 
