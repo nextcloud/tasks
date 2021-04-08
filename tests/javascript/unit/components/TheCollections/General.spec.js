@@ -1,4 +1,4 @@
-import General from 'Components/TheCollections/General.vue'
+import General from 'Views/AppContent/General.vue'
 import router from '@/router.js'
 
 import { store, localVue } from '../../setupStore.js'

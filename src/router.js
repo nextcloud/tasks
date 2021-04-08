@@ -20,9 +20,9 @@
  */
 
 import { getInitialRoute } from './utils/router.js'
-import Collections from './components/TheCollections/Collections.vue'
-import Calendar from './components/TheCollections/Calendar.vue'
-import TheDetails from './components/TheDetails.vue'
+import Collections from './views/AppContent/Collections.vue'
+import Calendar from './views/AppContent/Calendar.vue'
+import TheDetails from './views/TheDetails.vue'
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
