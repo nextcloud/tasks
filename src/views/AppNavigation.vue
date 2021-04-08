@@ -97,8 +97,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import ListItemCalendar from '../components/AppNavigation/ListItemCalendar.vue'
-import Colorpicker from '../components/AppNavigation//Colorpicker.vue'
-import TheSettings from '../components/AppNavigation//TheSettings.vue'
+import Colorpicker from '../components/AppNavigation/Colorpicker.vue'
+import TheSettings from '../components/AppNavigation/TheSettings.vue'
 
 import AppNavigation from '@nextcloud/vue/dist/Components/AppNavigation'
 import AppNavigationCounter from '@nextcloud/vue/dist/Components/AppNavigationCounter'
