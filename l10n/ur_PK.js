@@ -5,12 +5,12 @@ OC.L10N.register(
     "Today" : "آج",
     "Week" : "ہفتہ",
     "Tasks" : "کام",
-    "Cancel" : "منسوخ کریں",
-    "Save" : "حفظ",
     "can edit" : "تبدیل کر سکے ھیں",
     "Edit" : "تدوین کریں",
     "Download" : "ڈاؤن لوڈ",
     "Delete" : "حذف کریں",
-    "Unshare" : "شئیرنگ ختم کریں"
+    "Unshare" : "شئیرنگ ختم کریں",
+    "Cancel" : "منسوخ کریں",
+    "Save" : "حفظ"
 },
 "nplurals=2; plural=(n != 1);");

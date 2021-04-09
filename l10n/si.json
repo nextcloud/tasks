@@ -5,11 +5,11 @@
     "All" : "සියල්ල",
     "Completed" : "සම්පුර්ණයි",
     "Tasks" : "කාර්යයන්",
-    "Cancel" : "අවලංගු කරන්න",
-    "Save" : "සුරකින්න",
     "Edit" : "සංස්කරණය",
     "Copy private link" : "පුද්ගලික සබැඳිය පිටපත් කරන්න",
     "Download" : "බාගන්න",
+    "Cancel" : "අවලංගු කරන්න",
+    "Save" : "සුරකින්න",
     "Tomorrow" : "හෙට"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
