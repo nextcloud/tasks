@@ -66,7 +66,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					? $t('tasks', 'Copy private link')
 					: copySuccess
 						? $t('tasks', 'Copied')
-						: $t('tasks', 'Can not copy') }}
+						: $t('tasks', 'Cannot copy') }}
 			</ActionButton>
 			<ActionLink
 				icon="icon-download"
