@@ -19,7 +19,6 @@ OC.L10N.register(
     "Edit" : "Editar",
     "Copy private link" : "Copiar enlace privado",
     "Copied" : "Copiado",
-    "Can not copy" : "No se puede copiar",
     "Download" : "Descargar",
     "Delete" : "Eliminar",
     "Unshare" : "No compartir",

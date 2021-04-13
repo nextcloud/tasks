@@ -13,7 +13,6 @@ OC.L10N.register(
     "can edit" : "kan wysig",
     "Edit" : "Wysig",
     "Copied" : "Gekopieer",
-    "Can not copy" : "Kan nie kopieer nie",
     "Download" : "Laai Af",
     "Delete" : "Skrap",
     "Unshare" : "Ontdeel",

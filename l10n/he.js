@@ -18,7 +18,6 @@ OC.L10N.register(
     "Edit" : "עריכה",
     "Copy private link" : "העתקת קישור פרטי",
     "Copied" : "הועתק",
-    "Can not copy" : "לא ניתן להעתיק",
     "Download" : "הורדה",
     "Delete" : "מחיקה",
     "Unshare" : "ביטול שיתוף",

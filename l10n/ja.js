@@ -19,7 +19,6 @@ OC.L10N.register(
     "Edit" : "編集",
     "Copy private link" : "プライベートリンクをコピー",
     "Copied" : "コピーしました",
-    "Can not copy" : "コピーできません",
     "Download" : "ダウンロード",
     "Delete" : "削除",
     "Unshare" : "共有を解除",

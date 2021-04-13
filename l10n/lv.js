@@ -15,7 +15,6 @@ OC.L10N.register(
     "Unable to change permissions." : "Nevar mainīt atļaujas.",
     "Edit" : "Rediģēt",
     "Copied" : "Nokopēts",
-    "Can not copy" : "Nevar nokopēt",
     "Download" : "Lejupielādēt",
     "Delete" : "Dzēst",
     "Unshare" : "Pārtraukt dalīšanos",

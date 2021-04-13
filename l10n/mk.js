@@ -19,7 +19,6 @@ OC.L10N.register(
     "Edit" : "Уреди",
     "Copy private link" : "Копирај приватен линк",
     "Copied" : "Копирано",
-    "Can not copy" : "Неможе да се копира",
     "Download" : "Преземи",
     "Delete" : "Избриши",
     "Unshare" : "Отстрани споделување",

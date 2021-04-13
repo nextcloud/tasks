@@ -19,7 +19,6 @@ OC.L10N.register(
     "Edit" : "Taisyti",
     "Copy private link" : "Kopijuoti privačią nuorodą",
     "Copied" : "Nukopijuota",
-    "Can not copy" : "Negalima kopijuoti",
     "Download" : "Atsisiųsti",
     "Delete" : "Ištrinti",
     "Unshare" : "Nustoti bendrinti",

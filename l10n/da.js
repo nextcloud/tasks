@@ -16,7 +16,6 @@ OC.L10N.register(
     "Edit" : "Redigér",
     "Copy private link" : "Kopier privat link",
     "Copied" : "opieret",
-    "Can not copy" : "Kan ikke kopiere",
     "Download" : "Hent",
     "Delete" : "Slet",
     "Unshare" : "Fjern deling",

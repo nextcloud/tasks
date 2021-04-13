@@ -15,7 +15,6 @@ OC.L10N.register(
     "Unable to change permissions." : "Não é possível alterar as permissões.",
     "Edit" : "Editar",
     "Copied" : "Copiado",
-    "Can not copy" : "Não é possível copiar",
     "Download" : "Transferir",
     "Delete" : "Eliminar ",
     "Unshare" : "Cancelar partilha",

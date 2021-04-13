@@ -18,7 +18,6 @@ OC.L10N.register(
     "Edit" : "Breyta",
     "Copy private link" : "Afrita einkatengil",
     "Copied" : "Afritað",
-    "Can not copy" : "Gat ekki afritað",
     "Download" : "Sækja",
     "Delete" : "Eyða",
     "Unshare" : "Hætta deilingu",

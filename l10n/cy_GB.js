@@ -11,7 +11,6 @@ OC.L10N.register(
     "Unable to change permissions." : "Methu newid caniatâd.",
     "Edit" : "Golygu",
     "Copied" : "Copïwyd",
-    "Can not copy" : "Methu copïo",
     "Download" : "Llwytho i lawr",
     "Delete" : "Dileu",
     "Unshare" : "Dad-rannu",

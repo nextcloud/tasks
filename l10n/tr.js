@@ -19,7 +19,6 @@ OC.L10N.register(
     "Edit" : "Düzenle",
     "Copy private link" : "Özel bağlantıyı kopyala",
     "Copied" : "Kopyalandı",
-    "Can not copy" : "Kopyalanamadı",
     "Download" : "İndir",
     "Delete" : "Sil",
     "Unshare" : "Paylaşımı kaldır",

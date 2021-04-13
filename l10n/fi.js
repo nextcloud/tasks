@@ -18,7 +18,6 @@ OC.L10N.register(
     "Edit" : "Muokkaa",
     "Copy private link" : "Kopioi yksityinen linkki",
     "Copied" : "Kopioitu",
-    "Can not copy" : "Ei voida kopioida",
     "Download" : "Lataa",
     "Delete" : "Poista",
     "Unshare" : "Lopeta jakaminen",
