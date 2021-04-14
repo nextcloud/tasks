@@ -19,6 +19,7 @@ OC.L10N.register(
     "Edit" : "Edytuj",
     "Copy private link" : "Kopiuj link prywatny",
     "Copied" : "Skopiowano",
+    "Cannot copy" : "Nie można skopiować",
     "Download" : "Pobierz",
     "Delete" : "Usuń",
     "Unshare" : "Zatrzymaj udostępnianie",

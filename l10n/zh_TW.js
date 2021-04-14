@@ -19,6 +19,7 @@ OC.L10N.register(
     "Edit" : "編輯",
     "Copy private link" : "複製私人連結",
     "Copied" : "已複製",
+    "Cannot copy" : "無法複製",
     "Download" : "下載",
     "Delete" : "刪除",
     "Unshare" : "撤回分享",

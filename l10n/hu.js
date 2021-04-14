@@ -22,7 +22,7 @@ OC.L10N.register(
     "Download" : "Letöltés",
     "Delete" : "Törlés",
     "Unshare" : "Megosztás visszavonása",
-    "Cancel" : "Mégsem",
+    "Cancel" : "Mégse",
     "Save" : "Mentés",
     "This will delete the calendar \"{calendar}\" and all corresponding events and tasks." : "Ez törölni fogja a(z) \"{calendar}\" nevű Naptár és a hozzá kapcsolódó eseményeket és feladatokat.",
     "This will unshare the calendar \"{calendar}\"." : "Ez visszavonja a megosztást erről a naptárról \"[calendar]\".",
