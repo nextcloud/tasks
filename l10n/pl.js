@@ -73,7 +73,7 @@ OC.L10N.register(
     "Alphabetically" : "Alfabetycznie",
     "Sort by summary and priority." : "Sortuj według podsumowania i priorytetu.",
     "Manually" : "Ręcznie",
-    "Sort by manual order." : "Sortuj według ustawionej kolejności.",
+    "Sort by manual order." : "Sortuj według kolejności ustawionej.",
     "Task is completed" : "Zadanie jest zakończone",
     "{complete} % completed" : "Ukończono {complete}%",
     "Add subtask" : "Dodaj podzadanie",
