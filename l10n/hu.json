@@ -93,6 +93,7 @@
     "[Completed yesterday at] LT" : "[Tegnap befejezve] LT",
     "[Completed today at] LT" : "[ma elkészült ] LT",
     "[Completed tomorrow at] LT" : "[Holnap elkészül] LT",
+    "[Completed] L [at] LT" : "[Ellkészült ] L ekkor: LT",
     "Add a subtask to \"{task}\"…" : "Adjon hozzá egy részfeladatot a(z) „{task}” elemhez…",
     "An error occurred, unable to delete the task." : "Hiba történt, nem sikerült törölni a feladatot.",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["A feladat törlése {countdown} másodperc múlva","A feladat törlése {countdown} másodperc múlva"],
