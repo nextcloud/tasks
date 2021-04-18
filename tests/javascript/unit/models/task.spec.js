@@ -44,6 +44,9 @@ describe('task', () => {
 		task.complete = 100
 		task.status = 'NEEDS-ACTION'
 		expect(task.complete).toEqual(0)
+		// Check that property gets removed instead of being set to zero
+		const complete = task.vtodo.getFirstPropertyValue('percent-complete')
+		expect(complete).toEqual(null)
 		expect(task.completed).toEqual(false)
 		expect(task.completedDate).toEqual(null)
 	})
@@ -92,9 +95,14 @@ describe('task', () => {
 
 	it('Should set and get the priority', () => {
 		const task = new Task(loadICS('vcalendars/vcalendar-default'), {})
-		expect(task.priority).toEqual(null)
+		expect(task.priority).toEqual(0)
 		task.priority = 1
 		expect(task.priority).toEqual(1)
+		task.priority = 0
+		expect(task.priority).toEqual(0)
+		// Check that property gets removed instead of being set to zero
+		const priority = task.vtodo.getFirstPropertyValue('priority')
+		expect(priority).toEqual(null)
 	})
 
 	it('Should not return "CHILD" relation.', () => {

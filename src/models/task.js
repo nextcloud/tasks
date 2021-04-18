@@ -84,7 +84,7 @@ export default class Task {
 		// Define properties, so Vue reacts to changes of them
 		this._uid = this.vtodo.getFirstPropertyValue('uid') || ''
 		this._summary = this.vtodo.getFirstPropertyValue('summary') || ''
-		this._priority = this.vtodo.getFirstPropertyValue('priority')
+		this._priority = this.vtodo.getFirstPropertyValue('priority') || 0
 		this._complete = this.vtodo.getFirstPropertyValue('percent-complete') || 0
 		const comp = this.vtodo.getFirstPropertyValue('completed')
 		this._completed = !!comp
@@ -242,9 +242,13 @@ export default class Task {
 
 	set priority(priority) {
 		// TODO: check that priority is >= 0 and <10
-		this.vtodo.updatePropertyWithValue('priority', priority)
+		if (priority === null || priority === 0) {
+			this.vtodo.removeProperty('priority')
+		} else {
+			this.vtodo.updatePropertyWithValue('priority', priority)
+		}
 		this.updateLastModified()
-		this._priority = this.vtodo.getFirstPropertyValue('priority')
+		this._priority = this.vtodo.getFirstPropertyValue('priority') || 0
 	}
 
 	get complete() {
@@ -252,9 +256,9 @@ export default class Task {
 	}
 
 	set complete(complete) {
+		this.setComplete(complete)
 		// Make complete a number
 		complete = +complete
-		this.setComplete(complete)
 		if (complete < 100) {
 			this.setCompleted(false)
 			if (complete === 0) {
@@ -269,7 +273,11 @@ export default class Task {
 	}
 
 	setComplete(complete) {
-		this.vtodo.updatePropertyWithValue('percent-complete', complete)
+		if (complete === null || complete === 0) {
+			this.vtodo.removeProperty('percent-complete')
+		} else {
+			this.vtodo.updatePropertyWithValue('percent-complete', complete)
+		}
 		this.updateLastModified()
 		this._complete = this.vtodo.getFirstPropertyValue('percent-complete') || 0
 	}
