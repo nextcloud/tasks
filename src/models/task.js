@@ -336,14 +336,18 @@ export default class Task {
 			} else if (this.complete === 0) {
 				this.setComplete(1)
 			}
-		} else if (status === 'NEEDS-ACTION') {
+		} else if (status === 'NEEDS-ACTION' || status === null) {
 			this.setComplete(0)
 			this.setCompleted(false)
 		}
 	}
 
 	setStatus(status) {
-		this.vtodo.updatePropertyWithValue('status', status)
+		if (status === null) {
+			this.vtodo.removeProperty('status')
+		} else {
+			this.vtodo.updatePropertyWithValue('status', status)
+		}
 		this.updateLastModified()
 		this._status = this.vtodo.getFirstPropertyValue('status')
 	}

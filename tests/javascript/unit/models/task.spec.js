@@ -204,4 +204,12 @@ describe('task', () => {
 		task.categories = []
 		expect(task.categories.length).toEqual(0)
 	})
+
+	it('Should remove status property when set to null', () => {
+		const task = new Task(loadICS('vcalendars/vcalendar-default'), {})
+		task.status = null
+		// Check that status gets removed instead of being set to zero
+		const complete = task.vtodo.getFirstPropertyValue('status')
+		expect(complete).toEqual(null)
+	})
 })
