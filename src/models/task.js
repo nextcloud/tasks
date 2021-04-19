@@ -237,7 +237,7 @@ export default class Task {
 	}
 
 	get priority() {
-		return this._priority
+		return Number(this._priority)
 	}
 
 	set priority(priority) {
@@ -252,7 +252,7 @@ export default class Task {
 	}
 
 	get complete() {
-		return this._complete
+		return Number(this._complete)
 	}
 
 	set complete(complete) {
