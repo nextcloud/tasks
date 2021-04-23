@@ -149,6 +149,7 @@ appstore: clean build-svg-sprite build-js-production
 	--exclude=/svg-sprite-bw.tmpl \
 	--exclude=/svg-sprite-color.json \
 	--exclude=/svg-sprite-color.tmpl \
+	--exclude=/webpack.js \
 	--exclude=/webpack.common.js \
 	--exclude=/webpack.prod.js \
 	--exclude=/webpack.dev.js \
