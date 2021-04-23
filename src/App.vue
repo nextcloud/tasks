@@ -28,7 +28,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		</AppContent>
 
 		<div id="app-sidebar" :class="{disappear: $route.params.taskId === undefined}">
-			<RouterView name="details" />
+			<RouterView name="sidebar" />
 		</div>
 	</Content>
 </template>
