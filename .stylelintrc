@@ -19,6 +19,12 @@
 		"selector-list-comma-newline-after": null,
 		"no-descending-specificity": null,
 		"string-quotes": "single",
+		"selector-pseudo-element-no-unknown": [
+			true,
+			{
+				ignorePseudoElements: ['v-deep']
+			}
+		],
 		"selector-combinator-space-before": "always",
 		"selector-combinator-space-after": "always",
 		"declaration-block-no-duplicate-properties": true,
