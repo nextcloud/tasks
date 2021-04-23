@@ -20,9 +20,9 @@
  */
 
 import { getInitialRoute } from './utils/router.js'
-import Collections from './views/AppContent/Collections.vue'
+import AppSidebar from './views/AppSidebar.vue'
 import Calendar from './views/AppContent/Calendar.vue'
-import TheDetails from './views/TheDetails.vue'
+import Collections from './views/AppContent/Collections.vue'
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
@@ -39,17 +39,17 @@ const routes = [
 	{
 		name: 'collectionsTask',
 		path: '/collections/:collectionId/tasks/:taskId',
-		components: { default: Collections, details: TheDetails },
+		components: { default: Collections, sidebar: AppSidebar },
 		props: { default: true },
 	},
 	{
 		name: 'collectionsParamTask',
 		path: '/collections/:collectionId/:collectionParam/tasks/:taskId',
-		components: { default: Collections, details: TheDetails },
+		components: { default: Collections, sidebar: AppSidebar },
 		props: { default: true },
 	},
 	{ name: 'calendars', path: '/calendars/:calendarId', component: Calendar, props: true },
-	{ name: 'calendarsTask', path: '/calendars/:calendarId/tasks/:taskId', components: { default: Calendar, details: TheDetails }, props: { default: true } },
+	{ name: 'calendarsTask', path: '/calendars/:calendarId/tasks/:taskId', components: { default: Calendar, sidebar: AppSidebar }, props: { default: true } },
 ]
 
 Vue.use(VueRouter)
