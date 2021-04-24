@@ -22,6 +22,7 @@
 
 namespace OCA\Tasks\Service;
 
+use OCP\App\IAppManager;
 use OCP\IConfig;
 
 class SettingsService {
@@ -42,14 +43,20 @@ class SettingsService {
 	private $appName;
 
 	/**
+	 * @var IAppManager
+	 */
+	private $appManager;
+
+	/**
 	 * @param string $userId
 	 * @param IConfig $settings
 	 * @param string $appName
 	 */
-	public function __construct(?string $userId, IConfig $config, string $appName) {
+	public function __construct(?string $userId, IConfig $config, string $appName, IAppManager $appManager) {
 		$this->userId = $userId;
 		$this->config = $config;
 		$this->appName = $appName;
+		$this->appManager = $appManager;
 	}
 
 	/**
@@ -65,13 +72,22 @@ class SettingsService {
 		$allDay = (bool)$this->config->getUserValue($this->userId, $this->appName, 'various_allDay', false);
 		$initialRoute = (string)$this->config->getUserValue($this->userId, $this->appName, 'various_initialRoute', '/collections/all');
 
+		$calendarEnabled = $this->appManager->isEnabledForUser('calendar');
+		$defaultInitialView = $this->config->getAppValue('calendar', 'currentView', 'dayGridMonth');
+		$calendarView = $this->getView($this->config->getUserValue($this->userId, 'calendar', 'currentView', $defaultInitialView));
+		$defaultShowTasks = $this->config->getAppValue('calendar', 'showTasks', 'yes');
+		$showTasks = $this->config->getUserValue($this->userId, 'calendar', 'showTasks', $defaultShowTasks) === 'yes';
+
 		return [
 			'defaultCalendarId' => $defaultCalendarId,
 			'showHidden' => $showHidden,
 			'sortOrder' => $sortOrder,
 			'sortDirection' => $sortDirection,
 			'allDay' => $allDay,
-			'initialRoute' => $initialRoute
+			'initialRoute' => $initialRoute,
+			'calendarEnabled' => $calendarEnabled,
+			'showTasks' => $showTasks,
+			'calendarView' => $calendarView
 		];
 	}
 
@@ -85,5 +101,27 @@ class SettingsService {
 	public function set($setting, $value):bool {
 		$this->config->setUserValue($this->userId, $this->appName, 'various_'.$setting, $value);
 		return true;
+	}
+
+	/**
+	 * Makes sure we don't use the old views anymore
+	 *
+	 * @param string $view
+	 * @return string
+	 */
+	private function getView(string $view): string {
+		switch ($view) {
+			case 'agendaDay':
+				return 'timeGridDay';
+
+			case 'agendaWeek':
+				return 'timeGridWeek';
+
+			case 'month':
+				return 'dayGridMonth';
+
+			default:
+				return $view;
+		}
 	}
 }
