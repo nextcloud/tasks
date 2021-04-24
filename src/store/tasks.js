@@ -922,6 +922,9 @@ const actions = {
 	 * @param {Task} task The task to update
 	 */
 	async setPercentComplete(context, { task, complete }) {
+		if (complete === task.complete) {
+			return
+		}
 		if (complete < 100) {
 			// uncomplete the parent task
 			const parent = context.getters.getParentTask(task)
@@ -1051,6 +1054,9 @@ const actions = {
 	 * @param {Task} task The task to update
 	 */
 	async setPriority(context, { task, priority }) {
+		if (priority === task.priority) {
+			return
+		}
 		// check priority to comply with RFC5545 (to be between 0 and 9)
 		priority = (+priority < 0) ? 0 : (+priority > 9) ? 9 : Math.round(+priority)
 		context.commit('setPriority', { task, priority })
