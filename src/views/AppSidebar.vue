@@ -189,7 +189,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			:order="1">
 			<NotesItem :note="task.note" :read-only="readOnly" @setNote="(note) =>setNote({ task, note })" />
 		</AppSidebarTab>
-		<AppSidebarTab v-if="task"
+		<!-- <AppSidebarTab v-if="task"
 			id="app-sidebar-tab-reminder"
 			class="app-sidebar-tab"
 			icon="icon-reminder"
@@ -204,7 +204,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			:name="$t('tasks', 'Repeat')"
 			:order="3">
 			Repeat
-		</AppSidebarTab>
+		</AppSidebarTab> -->
 		<EmptyContent v-else
 			:icon="taskStatusIcon">
 			{{ taskStatusLabel }}
