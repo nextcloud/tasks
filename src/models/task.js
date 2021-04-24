@@ -104,7 +104,7 @@ export default class Task {
 		const d = due || start
 		this._allDay = d !== null && d.isDate
 		this._loaded = false
-		this._categories = this.getCategories()
+		this._tags = this.getTags()
 		this._modified = this.vtodo.getFirstPropertyValue('last-modified')
 		this._modifiedMoment = moment(this._modified, 'YYYYMMDDTHHmmss')
 		this._created = this.vtodo.getFirstPropertyValue('created')
@@ -510,64 +510,64 @@ export default class Task {
 	}
 
 	/**
-	 * Return the categories
+	 * Return the tags
 	 *
 	 * @readonly
 	 * @memberof Task
 	 */
-	get categories() {
-		return this._categories
+	get tags() {
+		return this._tags
 	}
 
-	getCategories() {
-		let categories = []
-		for (const cats of this.vtodo.getAllProperties('categories')) {
-			if (cats) {
-				categories = categories.concat(cats.getValues())
+	getTags() {
+		let tags = []
+		for (const t of this.vtodo.getAllProperties('categories')) {
+			if (t) {
+				tags = tags.concat(t.getValues())
 			}
 		}
-		return categories
+		return tags
 	}
 
 	/**
-	 * Set the categories
+	 * Set the tags
 	 *
-	 * @param {string} newCategories the categories
+	 * @param {string} newTags The tags
 	 * @memberof Task
 	 */
-	set categories(newCategories) {
-		if (newCategories.length > 0) {
-			let categories = this.vtodo.getAllProperties('categories')
-			// If there are no categories set yet, just set them
-			if (categories.length < 1) {
+	set tags(newTags) {
+		if (newTags.length > 0) {
+			let tags = this.vtodo.getAllProperties('categories')
+			// If there are no tags set yet, just set them
+			if (tags.length < 1) {
 				const prop = new ICAL.Property('categories')
-				prop.setValues(newCategories)
-				categories = this.vtodo.addProperty(prop)
-			// If there is only one categories property, overwrite it
-			} else if (categories.length < 2) {
-				categories[0].setValues(newCategories)
-			// If there are multiple categories properties, we have to iterate over all
-			// and remove unwanted categories and add new ones
+				prop.setValues(newTags)
+				tags = this.vtodo.addProperty(prop)
+			// If there is only one tags property, overwrite it
+			} else if (tags.length < 2) {
+				tags[0].setValues(newTags)
+			// If there are multiple tags properties, we have to iterate over all
+			// and remove unwanted tags and add new ones
 			} else {
-				const toRemove = this._categories.filter(c => !newCategories.includes(c))
-				const toAdd = newCategories.filter(c => !this._categories.includes(c))
-				// Remove all unwanted categories
-				for (const cats of categories) {
-					const c = cats.getValues().filter(c => !toRemove.includes(c))
-					if (c.length) {
-						cats.setValues(c)
+				const toRemove = this._tags.filter(c => !newTags.includes(c))
+				const toAdd = newTags.filter(c => !this._tags.includes(c))
+				// Remove all unwanted tags
+				for (const ts of tags) {
+					const t = ts.getValues().filter(c => !toRemove.includes(c))
+					if (t.length) {
+						ts.setValues(t)
 					} else {
-						this.vtodo.removeProperty(cats)
+						this.vtodo.removeProperty(ts)
 					}
 				}
-				// Add new categories
-				categories[0].setValues(categories[0].getValues().concat(toAdd))
+				// Add new tags
+				tags[0].setValues(tags[0].getValues().concat(toAdd))
 			}
 		} else {
 			this.vtodo.removeAllProperties('categories')
 		}
 		this.updateLastModified()
-		this._categories = this.getCategories()
+		this._tags = this.getTags()
 	}
 
 	updateLastModified() {
@@ -680,14 +680,14 @@ export default class Task {
 			return this._matchesSearchQuery
 		}
 		// We search in these task properties
-		const keys = ['summary', 'note', 'categories']
+		const keys = ['summary', 'note', 'tags']
 		// Make search case-insensitive.
 		searchQuery = searchQuery.toLowerCase()
 		for (const key of keys) {
-			// For the categories search the array
-			if (key === 'categories') {
-				for (const category of this[key]) {
-					if (category.toLowerCase().indexOf(searchQuery) > -1) {
+			// For the tags search the array
+			if (key === 'tags') {
+				for (const tag of this[key]) {
+					if (tag.toLowerCase().indexOf(searchQuery) > -1) {
 						this._matchesSearchQuery = true
 						return this._matchesSearchQuery
 					}

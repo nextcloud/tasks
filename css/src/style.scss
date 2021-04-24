@@ -570,12 +570,12 @@ $blue_due: #4271a6;			// due dates and low importance
 								}
 							}
 
-							.categories-list {
+							.tags-list {
 								display: flex;
 								align-items: center;
 								max-width: 50%;
 
-								.category {
+								.tag {
 									height: 22px;
 									overflow: hidden;
 									display: inline-flex;
@@ -585,7 +585,7 @@ $blue_due: #4271a6;			// due dates and low importance
 									border-radius: 2px;
 									margin: 0 4px;
 
-									.category-label {
+									.tag-label {
 										color: var(--color-text-lighter);
 										font-weight: bold;
 										padding: 2px 4px;

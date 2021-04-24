@@ -313,25 +313,25 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							</button>
 						</div>
 					</li>
-					<li v-show="!readOnly || task.categories.length>0" :class="{'active': task.categories.length>0}" class="section detail-categories">
+					<li v-show="!readOnly || task.tags.length>0" :class="{'active': task.tags.length>0}" class="section">
 						<div class="section-content">
 							<span class="section-icon">
-								<span :class="[iconCategories]" class="icon detail-categories" />
+								<span :class="[iconTags]" class="icon" />
 							</span>
 							<div class="detail-multiselect-container">
-								<Multiselect v-if="task.categories"
-									v-model="task.categories"
+								<Multiselect v-if="task.tags"
+									v-model="task.tags"
 									:multiple="true"
 									:searchable="true"
 									:disabled="readOnly"
-									:options="categories"
-									:placeholder="$t('tasks', 'Select categories')"
+									:options="tags"
+									:placeholder="$t('tasks', 'Select tags')"
 									:taggable="true"
-									:tag-placeholder="$t('tasks', 'Add this as a new category')"
+									:tag-placeholder="$t('tasks', 'Add this as a new tag')"
 									:close-on-select="false"
 									class="multiselect-vue"
-									@input="updateCategories"
-									@tag="updateCategory" />
+									@input="updateTags"
+									@tag="updateTag" />
 							</div>
 						</div>
 					</li>
@@ -671,8 +671,8 @@ export default {
 				return 'icon-sprt-bw sprt-percent'
 			}
 		},
-		iconCategories() {
-			if (this.task.categories.length > 0) {
+		iconTags() {
+			if (this.task.tags.length > 0) {
 				return 'sprt-color sprt-tag-active'
 			} else {
 				return 'icon-sprt-bw sprt-tag'
@@ -699,7 +699,7 @@ export default {
 			task: 'getTaskByRoute',
 			calendar: 'getCalendarByRoute',
 			calendars: 'getSortedCalendars',
-			categories: 'categories',
+			tags: 'tags',
 		}),
 	},
 
@@ -720,8 +720,8 @@ export default {
 			'setNote',
 			'setPriority',
 			'setPercentComplete',
-			'setCategories',
-			'addCategory',
+			'setTags',
+			'addTag',
 			'setDue',
 			'setStart',
 			'toggleAllDay',
@@ -960,21 +960,21 @@ export default {
 		},
 
 		/**
-		 * Sets the categories of a task
+		 * Sets the tags of a task
 		 *
-		 * @param {Array} categories The new categories
+		 * @param {Array} tags The new tags
 		 */
-		updateCategories(categories) {
-			this.setCategories({ task: this.task, categories })
+		updateTags(tags) {
+			this.setTags({ task: this.task, tags })
 		},
 
 		/**
-		 * Adds a category to the list of categories
+		 * Adds a tag to the list of tags
 		 *
-		 * @param {String} category The name of the category to add
+		 * @param {String} tag The name of the tag to add
 		 */
-		updateCategory(category) {
-			this.addCategory({ task: this.task, category })
+		updateTag(tag) {
+			this.addTag({ task: this.task, tag })
 		},
 
 		async changeCalendar(calendar) {

@@ -241,22 +241,22 @@ const getters = {
 	},
 
 	/**
-	 * Returns all categories of all tasks
+	 * Returns all tags of all tasks
 	 *
 	 * @param {Object} state The store data
 	 * @param {Object} getters The store getters
-	 * @returns {Array} All categories
+	 * @returns {Array} All tags
 	 */
-	categories: (state, getters) => {
+	tags: (state, getters) => {
 		const tasks = getters.getAllTasks
-		return tasks.reduce((categories, task) => {
-			// Add each category to the categories array if it's not present yet
-			task.categories.forEach((category) => {
-				if (!categories.includes(category)) {
-					categories.push(category)
+		return tasks.reduce((tags, task) => {
+			// Add each tag to the tags array if it's not present yet
+			task.tags.forEach((tag) => {
+				if (!tags.includes(tag)) {
+					tags.push(tag)
 				}
 			})
-			return categories
+			return tags
 		}, [])
 	},
 }
@@ -408,25 +408,25 @@ const mutations = {
 	},
 
 	/**
-	 * Sets the categories of a task
+	 * Sets the tags of a task
 	 *
 	 * @param {Object} state The store data
 	 * @param {Task} task The task
-	 * @param {Array} categories The array of categories
+	 * @param {Array} tags The array of tags
 	 */
-	setCategories(state, { task, categories }) {
-		Vue.set(task, 'categories', categories)
+	setTags(state, { task, tags }) {
+		Vue.set(task, 'tags', tags)
 	},
 
 	/**
-	 * Adds a category to a task
+	 * Adds a tag to a task
 	 *
 	 * @param {Object} state The store data
 	 * @param {Task} task The task
-	 * @param {String} category The category to add
+	 * @param {String} tag The tag to add
 	 */
-	addCategory(state, { task, category }) {
-		Vue.set(task, 'categories', task.categories.concat([category]))
+	addTag(state, { task, tag }) {
+		Vue.set(task, 'tags', task.tags.concat([tag]))
 	},
 
 	/**
@@ -1026,24 +1026,24 @@ const actions = {
 	},
 
 	/**
-	 * Sets the categories of a task
+	 * Sets the tags of a task
 	 *
 	 * @param {Object} context The store context
 	 * @param {Task} task The task to update
 	 */
-	async setCategories(context, { task, categories }) {
-		context.commit('setCategories', { task, categories })
+	async setTags(context, { task, tags }) {
+		context.commit('setTags', { task, tags })
 		context.dispatch('scheduleTaskUpdate', task)
 	},
 
 	/**
-	 * Adds a category to a task
+	 * Adds a tag to a task
 	 *
 	 * @param {Object} context The store context
 	 * @param {Task} task The task to update
 	 */
-	async addCategory(context, { task, category }) {
-		context.commit('addCategory', { task, category })
+	async addTag(context, { task, tag }) {
+		context.commit('addTag', { task, tag })
 		context.dispatch('scheduleTaskUpdate', task)
 	},
 
