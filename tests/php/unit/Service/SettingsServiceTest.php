@@ -23,6 +23,7 @@
 namespace OCA\Tasks\Tests\Unit\Service;
 
 use OCA\Tasks\Service\SettingsService;
+use OCP\App\IAppManager;
 use OCP\IConfig;
 
 use PHPUnit\Framework\TestCase;
@@ -32,6 +33,7 @@ class SettingsServiceTest extends TestCase {
 	private $settings;
 	private $userId;
 	private $appName;
+	private $appManager;
 
 	/**
 	 * Gets run before each test
@@ -39,13 +41,17 @@ class SettingsServiceTest extends TestCase {
 	protected function setUp(): void {
 		$this->appName = 'tasks';
 		$this->userId = 'admin';
-		$this->settings = $this->getMockBuilder(IConfig::class)
+		$this->config = $this->getMockBuilder(IConfig::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$this->appManager = $this->getMockBuilder(IAppManager::class)
 			->disableOriginalConstructor()
 			->getMock();
 		$this->settingsService = new SettingsService(
 			$this->userId,
-			$this->settings,
-			$this->appName
+			$this->config,
+			$this->appName,
+			$this->appManager
 		);
 	}
 
@@ -56,10 +62,13 @@ class SettingsServiceTest extends TestCase {
 			'sortOrder' => 'default',
 			'sortDirection' => false,
 			'allDay' => false,
-			'initialRoute' => '/collections/all'
+			'initialRoute' => '/collections/all',
+			'calendarEnabled' => true,
+			'showTasks' => true,
+			'calendarView' => 'dayGridMonth'
 		];
 
-		$map = [
+		$userValueMap = [
 			[
 				$this->userId,
 				$this->appName,
@@ -101,14 +110,53 @@ class SettingsServiceTest extends TestCase {
 				'various_initialRoute',
 				'/collections/all',
 				'/collections/all'
+			],
+			[
+				$this->userId,
+				'calendar',
+				'showTasks',
+				'yes',
+				'yes'
+			],
+			[
+				$this->userId,
+				'calendar',
+				'currentView',
+				'dayGridMonth',
+				'dayGridMonth'
 			]
 		];
 
-		$this->settings->expects($this->any())
+		$appValueMap = [
+			[
+				'calendar',
+				'currentView',
+				'dayGridMonth',
+				'dayGridMonth'
+			],
+			[
+				'calendar',
+				'showTasks',
+				'yes',
+				'yes'
+			]
+		];
+
+		$this->config->expects($this->any())
 			->method('getUserValue')
 			->will(
-				$this->returnValueMap($map)
+				$this->returnValueMap($userValueMap)
 			);
+
+		$this->config->expects($this->any())
+			->method('getAppValue')
+			->will(
+				$this->returnValueMap($appValueMap)
+			);
+
+		$this->appManager->expects($this->any())
+			->method('isEnabledForUser')
+			->willReturn(true);
 
 		$result = $this->settingsService->get();
 
@@ -119,7 +167,7 @@ class SettingsServiceTest extends TestCase {
 	public function testSet() {
 		$return = true;
 		
-		$this->settings->expects($this->once())
+		$this->config->expects($this->once())
 			->method('setUserValue')
 			->with(
 				$this->equalTo($this->userId),

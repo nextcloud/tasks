@@ -70,6 +70,22 @@ const getters = {
 	 * @returns {String} Whether all-day is default
 	 */
 	initialRoute: (state) => state.settings.initialRoute,
+
+	/**
+	 * Returns whether we can show tasks in the Calendar app
+	 *
+	 * @param {Object} state The store data
+	 * @returns {Boolean} Whether we can show tasks in Calendar app
+	 */
+	showTaskInCalendar: (state) => state.settings.calendarEnabled && state.settings.showTasks,
+
+	/**
+	 * Returns the current view of the Calendar app
+	 *
+	 * @param {Object} state The store data
+	 * @returns {String} The current view of the Calendar app
+	 */
+	calendarView: (state) => state.settings.calendarView,
 }
 
 const mutations = {
@@ -122,6 +138,9 @@ const actions = {
 			sortDirection: loadState('tasks', 'sortDirection'),
 			allDay: loadState('tasks', 'allDay'),
 			initialRoute: loadState('tasks', 'initialRoute'),
+			calendarEnabled: loadState('tasks', 'calendarEnabled'),
+			showTasks: loadState('tasks', 'showTasks'),
+			calendarView: loadState('tasks', 'calendarView'),
 		})
 	},
 }
