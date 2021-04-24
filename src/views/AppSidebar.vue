@@ -221,7 +221,6 @@ import SliderItem from '../components/AppSidebar/SliderItem.vue'
 import TagsItem from '../components/AppSidebar/TagsItem.vue'
 import NotesItem from '../components/AppSidebar/NotesItem.vue'
 // import TaskStatusDisplay from '../components/TaskStatusDisplay.vue'
-import { linkify } from '../directives/linkify.js'
 
 import moment from '@nextcloud/moment'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
@@ -242,7 +241,6 @@ import PinOff from 'vue-material-design-icons/PinOff.vue'
 import Star from 'vue-material-design-icons/Star.vue'
 import Percent from 'vue-material-design-icons/Percent.vue'
 
-import ClickOutside from 'v-click-outside'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -271,47 +269,12 @@ export default {
 		NotesItem,
 		// TaskStatusDisplay,
 	},
-	directives: {
-		clickOutside: ClickOutside.directive,
-		linkify,
-	},
-	filters: {
-	},
-
-	/**
-	 * Before we close the details view, we save possible edits.
-	 *
-	 * @param {Route} to The target Route Object being navigated to.
-	 * @param {Route} from The current route being navigated away from.
-	 * @param {Function} next This function must be called to resolve the hook.
-	 */
-	beforeRouteLeave(to, from, next) {
-		next()
-	},
-
-	/**
-	 * Before we navigate to a new task, we save possible edits.
-	 *
-	 * @param {Route} to The target Route Object being navigated to.
-	 * @param {Route} from The current route being navigated away from.
-	 * @param {Function} next This function must be called to resolve the hook.
-	 */
-	beforeRouteUpdate(to, from, next) {
-		next()
-	},
 	data() {
 		return {
 			editingTitle: false,
 			editingStart: false,
 			editingDue: false,
 			loading: false,
-			edit: '',
-			tmpTask: {
-				summary: '',
-				priority: '',
-				complete: '',
-				note: '',
-			},
 			classSelect: [
 				{
 					displayName: this.$t('tasks', 'When shared show full event'),
