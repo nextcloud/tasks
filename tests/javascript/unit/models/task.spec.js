@@ -171,38 +171,38 @@ describe('task', () => {
 		expect(task.sortOrder).toEqual(2)
 	})
 
-	it('Should show all categories from multiple properties.', () => {
+	it('Should show all tags from multiple properties.', () => {
 		const task = new Task(loadICS('vcalendars/vcalendar-categories-multiple'), {})
-		expect(task.categories.length).toEqual(3)
+		expect(task.tags.length).toEqual(3)
 	})
 
-	it('Should properly add and remove categories from multiple properties.', () => {
+	it('Should properly add and remove tags from multiple properties.', () => {
 		const task = new Task(loadICS('vcalendars/vcalendar-categories-multiple'), {})
-		expect(task.categories.length).toEqual(3)
-		expect(task.categories).toEqual(['cat1', 'cat2', 'cat3'])
-		task.categories = ['cat1', 'cat5']
-		expect(task.categories).toEqual(['cat1', 'cat5'])
-		task.categories = []
-		expect(task.categories.length).toEqual(0)
+		expect(task.tags.length).toEqual(3)
+		expect(task.tags).toEqual(['cat1', 'cat2', 'cat3'])
+		task.tags = ['cat1', 'cat5']
+		expect(task.tags).toEqual(['cat1', 'cat5'])
+		task.tags = []
+		expect(task.tags.length).toEqual(0)
 	})
 
-	it('Should properly add and remove categories from a single property.', () => {
+	it('Should properly add and remove tags from a single property.', () => {
 		const task = new Task(loadICS('vcalendars/vcalendar-categories-single'), {})
-		expect(task.categories.length).toEqual(2)
-		expect(task.categories).toEqual(['cat1', 'cat2'])
-		task.categories = ['cat1', 'cat3']
-		expect(task.categories).toEqual(['cat1', 'cat3'])
-		task.categories = []
-		expect(task.categories.length).toEqual(0)
+		expect(task.tags.length).toEqual(2)
+		expect(task.tags).toEqual(['cat1', 'cat2'])
+		task.tags = ['cat1', 'cat3']
+		expect(task.tags).toEqual(['cat1', 'cat3'])
+		task.tags = []
+		expect(task.tags.length).toEqual(0)
 	})
 
-	it('Should properly add and remove categories if none are set yet.', () => {
+	it('Should properly add and remove tags if none are set yet.', () => {
 		const task = new Task(loadICS('vcalendars/vcalendar-categories-none'), {})
-		expect(task.categories.length).toEqual(0)
-		task.categories = ['cat1', 'cat3']
-		expect(task.categories).toEqual(['cat1', 'cat3'])
-		task.categories = []
-		expect(task.categories.length).toEqual(0)
+		expect(task.tags.length).toEqual(0)
+		task.tags = ['cat1', 'cat3']
+		expect(task.tags).toEqual(['cat1', 'cat3'])
+		task.tags = []
+		expect(task.tags.length).toEqual(0)
 	})
 
 	it('Should remove status property when set to null', () => {

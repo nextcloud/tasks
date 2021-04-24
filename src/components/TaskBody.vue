@@ -54,15 +54,15 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					@click="toggleCompleted(task)">
 				<label :class="[checkboxColor, 'reactive no-nav']" :for="'toggleCompleted_' + task.uid" />
 			</div>
-			<!-- Info: title, progress & categories -->
+			<!-- Info: title, progress & tags -->
 			<div class="task-info">
 				<div class="title">
 					<span v-linkify="task.summary" />
 				</div>
-				<div v-if="task.categories.length > 0" class="categories-list">
-					<span v-for="category in task.categories" :key="category" class="category">
-						<span :title="category" class="category-label">
-							{{ category }}
+				<div v-if="task.tags.length > 0" class="tags-list">
+					<span v-for="(tag, index) in task.tags" :key="index" class="tag">
+						<span :title="tag" class="tag-label">
+							{{ tag }}
 						</span>
 					</span>
 				</div>
