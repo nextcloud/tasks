@@ -34,6 +34,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			:searchable="false"
 			:allow-empty="false"
 			:close-on-select="true"
+			open-direction="below"
 			track-by="type"
 			@input="change"
 			@tag="change">
