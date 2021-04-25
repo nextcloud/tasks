@@ -114,8 +114,6 @@ OC.L10N.register(
     "Select a calendar" : "הגדרת יומן",
     "Select a classification" : "בחירת סיווג",
     "Select a status" : "בחירת מצב",
-    "Select categories" : "בחירת קטגוריות",
-    "Add this as a new category" : "הוספת הקטגוריה הזאת כחדשה",
     "Loading task from server." : "נטענת משימה מהשרת.",
     "Task not found!" : "לא אותרה משימה!",
     "When shared show full event" : "כאשר משותף מציג אירוע מלא",

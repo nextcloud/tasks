@@ -115,8 +115,6 @@ OC.L10N.register(
     "Select a calendar" : "Επιλογή ημερολογίου",
     "Select a classification" : "Επιλέξτε μια ταξινόμηση",
     "Select a status" : "Επιλέξτε κατάσταση",
-    "Select categories" : "Επιλογή κατηγοριών",
-    "Add this as a new category" : "Προσθήκη ως νέα κατηγορία",
     "Loading task from server." : "Ανάγνωση εργασιών από διακομιστή.",
     "Task not found!" : "Δεν βρέθηκε εργασία!",
     "When shared show full event" : "Ειδοποίηση όταν κοινοποιείται",

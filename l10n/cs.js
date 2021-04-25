@@ -116,8 +116,6 @@ OC.L10N.register(
     "Select a calendar" : "Vybrat kalendář",
     "Select a classification" : "Vybrat klasifikaci",
     "Select a status" : "Vybrat stav",
-    "Select categories" : "Vybrat kategorie",
-    "Add this as a new category" : "Přidat toto jako novou kategorii",
     "Loading task from server." : "Načítání úkolů ze serveru.",
     "Task not found!" : "Úkol nenalezen!",
     "When shared show full event" : "Když sdíleno zobrazit úplnou událost",

@@ -82,8 +82,6 @@ OC.L10N.register(
     "Select a calendar" : "Elekti kalendaron",
     "Select a classification" : "Elektu klasifikon",
     "Select a status" : "Elekti staton",
-    "Select categories" : "Elekti kategoriojn",
-    "Add this as a new category" : "Aldoni tion kiel novan kategorion",
     "Loading task from server." : "Ricevo de la takso el la servilo.",
     "Task not found!" : "Tasko ne trovita!",
     "When shared show full event" : "Kiam kunhavigita, montri plenajn detalojn",

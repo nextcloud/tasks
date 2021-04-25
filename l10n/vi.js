@@ -38,7 +38,6 @@ OC.L10N.register(
     "Add List…" : "Thêm vào danh sách…",
     "New List" : "Danh sách mới",
     "All day" : "Cả ngày",
-    "Add this as a new category" : "Thêm mục này như là mục mới",
     "When shared show full event" : "Khi được chia sẻ thì thể hiện đầy đủ sự kiện",
     "When shared show only busy" : "Khi được chia sẻ thì chỉ thể hiện đang bận",
     "When shared hide this event" : "Khi được chia sẻ thì ẩn sự kiện này đi",

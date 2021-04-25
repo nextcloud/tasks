@@ -89,8 +89,6 @@
     "All day" : "終日",
     "Select a calendar" : "カレンダーを選択",
     "Select a classification" : "分類を選択",
-    "Select categories" : "カテゴリを選択",
-    "Add this as a new category" : "これを新しいカテゴリーとして追加",
     "Loading task from server." : "タスクをサーバーから読み込み中。",
     "Task not found!" : "タスクがありません！",
     "When shared show full event" : "共有時にすべてのイベントを表示",

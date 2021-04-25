@@ -113,8 +113,6 @@
     "Select a calendar" : "Sélectionnez un agenda",
     "Select a classification" : "Sélectionner une catégorie",
     "Select a status" : "Sélectionner un statut",
-    "Select categories" : "Sélectionner des catégories",
-    "Add this as a new category" : "Ajouter comme nouvelle catégorie",
     "Loading task from server." : "Chargement de la tâche depuis le serveur.",
     "Task not found!" : "Tâche non trouvée !",
     "When shared show full event" : "En cas de partage, afficher l’évènement complet",

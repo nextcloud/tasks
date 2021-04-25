@@ -115,8 +115,6 @@ OC.L10N.register(
     "Select a calendar" : "Odaberi kalendar",
     "Select a classification" : "Odaberi klasifikaciju",
     "Select a status" : "Odaberi status",
-    "Select categories" : "Odaberi kategorije",
-    "Add this as a new category" : "Dodaj kao novu kategoriju",
     "Loading task from server." : "Učitavanje zadatka s poslužitelja.",
     "Task not found!" : "Zadatak nije pronađen!",
     "When shared show full event" : "Kada se dijeli, prikaži cijeli događaj",

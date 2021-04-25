@@ -115,8 +115,6 @@ OC.L10N.register(
     "Select a calendar" : "Kalender wählen",
     "Select a classification" : "Klassifikation wählen",
     "Select a status" : "Status auswählen",
-    "Select categories" : "Kategorien wählen",
-    "Add this as a new category" : "Dies als neue Kategorie hinzufügen",
     "Loading task from server." : "Aufgabe wird vom Server geladen.",
     "Task not found!" : "Aufgabe nicht gefunden!",
     "When shared show full event" : "Wenn geteilt, zeige den vollständigen Termin an",

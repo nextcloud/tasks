@@ -116,8 +116,6 @@ OC.L10N.register(
     "Select a calendar" : "Naptár kiválasztása",
     "Select a classification" : "Besorolás kiválasztása",
     "Select a status" : "Válasszon egy állapotot",
-    "Select categories" : "Kategóriák kiválasztása",
-    "Add this as a new category" : "Hozzáadás új kategóriaként",
     "Loading task from server." : "Feladat betöltése a szerverről.",
     "Task not found!" : "Feladat nem található!",
     "When shared show full event" : "Megosztáskor mutassa a teljes eseményt",

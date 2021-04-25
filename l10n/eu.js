@@ -102,8 +102,6 @@ OC.L10N.register(
     "Select a calendar" : "Hautatu egutegi bat",
     "Select a classification" : "Hautatu sailkapen bat",
     "Select a status" : "Hautatu egoera bat",
-    "Select categories" : "Hautatu kategoriak",
-    "Add this as a new category" : "Gehitu hau kategoria berri bezala",
     "Loading task from server." : "Zeregina zerbitzaritik kargatzen.",
     "Task not found!" : "Ez da zeregina aurkitu!",
     "When shared show full event" : "Partekatzean erakutsi gertaera osoa",

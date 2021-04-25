@@ -116,8 +116,6 @@ OC.L10N.register(
     "Select a calendar" : "Izbor koledarja",
     "Select a classification" : "Izbor preikaza",
     "Select a status" : "Izbor stanja",
-    "Select categories" : "Izbor kategorije",
-    "Add this as a new category" : "Dodaj kot novo kategorijo",
     "Loading task from server." : "Poteka nalaganje nalog s strežnika.",
     "Task not found!" : "Naloge ni mogoče najti!",
     "When shared show full event" : "V souporabi pokaži poln dogodek",

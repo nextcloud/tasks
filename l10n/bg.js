@@ -115,8 +115,6 @@ OC.L10N.register(
     "Select a calendar" : "Избор на календар",
     "Select a classification" : "Избор на класификация",
     "Select a status" : "Избор на състояние",
-    "Select categories" : "Избор на категории",
-    "Add this as a new category" : "Добави като нова категория",
     "Loading task from server." : "Зарежда се задача от сървъра.",
     "Task not found!" : "Задачата не е намерена!",
     "When shared show full event" : "При споделяне, показвай цялото събитие",

@@ -33,7 +33,6 @@ OC.L10N.register(
     "New List" : "لیست جدید",
     "Set due date" : "تعریف سر رسید",
     "All day" : "تمام روز",
-    "Add this as a new category" : "این را به عنوان یک دسته جدید اضافه کنید",
     "Task not found!" : "کار یافت نشد!",
     "When shared show full event" : "هنگام اشتراک گذاری ، رویداد کامل را نشان می دهد",
     "When shared show only busy" : "وقتی نمایش اشتراکی فقط مشغول است",

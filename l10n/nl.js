@@ -115,8 +115,6 @@ OC.L10N.register(
     "Select a calendar" : "Selecteer een kalender",
     "Select a classification" : "Selecteer een classificatie",
     "Select a status" : "Selecteer een status",
-    "Select categories" : "Selecteer categorieën",
-    "Add this as a new category" : "Voeg dit toe als een nieuwe categorie",
     "Loading task from server." : "Taken van de server aan het laden.",
     "Task not found!" : "Taak niet gevonden!",
     "When shared show full event" : "Wanneer gedeeld, toon gehele afspraak",

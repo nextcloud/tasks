@@ -56,7 +56,6 @@ OC.L10N.register(
     "Set due time" : "Встановити час завершення",
     "All day" : "Всі дні",
     "Select a calendar" : "Вибрати календар",
-    "Add this as a new category" : "Додати це як нову категорію",
     "Task not found!" : "Завдання не знайдене!",
     "When shared show full event" : "При поширенні показувати подію повністю",
     "When shared show only busy" : "При поширенні показувати тільки зайнятий час",

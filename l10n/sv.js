@@ -95,8 +95,6 @@ OC.L10N.register(
     "Select a calendar" : "Välj en kalender",
     "Select a classification" : "Välj en klassificering",
     "Select a status" : "Välj en status",
-    "Select categories" : "Välj kategorier",
-    "Add this as a new category" : "Lägg till som en ny kategori",
     "Loading task from server." : "Läser in uppgiften från servern.",
     "Task not found!" : "Uppgift hittades inte!",
     "When shared show full event" : "Om delad, visa hela händelsen",

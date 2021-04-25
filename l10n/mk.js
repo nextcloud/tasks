@@ -115,8 +115,6 @@ OC.L10N.register(
     "Select a calendar" : "Избери календар",
     "Select a classification" : "Избери класификација",
     "Select a status" : "Избери статус",
-    "Select categories" : "Избери категории",
-    "Add this as a new category" : "Додади како нова категорија",
     "Loading task from server." : "Вчитување на задачите од серверот.",
     "Task not found!" : "Задачата не е пронајдена!",
     "When shared show full event" : "Кога е споделен, прикажи го целосно настанот",

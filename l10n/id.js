@@ -36,7 +36,6 @@ OC.L10N.register(
     "Set start date" : "Atur tanggal mulai",
     "Set due date" : "Atur tanggal jatuh tempo",
     "All day" : "Sepanjang hari",
-    "Add this as a new category" : "Tambah sebagai kategori baru",
     "Task not found!" : "Tugas tidak ditemukan!",
     "An error occurred" : "Terjadi kesalahan"
 },

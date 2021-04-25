@@ -115,8 +115,6 @@ OC.L10N.register(
     "Select a calendar" : "Vybrať kalendár",
     "Select a classification" : "Vybrať klasifikáciu",
     "Select a status" : "Vybrať status",
-    "Select categories" : "Vybrať kategórie",
-    "Add this as a new category" : "Pridať ako novú kategóriu",
     "Loading task from server." : "Nahrať úlohu zo servera.",
     "Task not found!" : "Úloha nebola nájdená!",
     "When shared show full event" : "Pri zdieľaní zobraziť udalosť úplne",

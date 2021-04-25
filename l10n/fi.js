@@ -73,8 +73,6 @@ OC.L10N.register(
     "All day" : "Koko päivä",
     "Select a calendar" : "Valitse kalenteri",
     "Select a status" : "Valitse tila",
-    "Select categories" : "Valitse luokat",
-    "Add this as a new category" : "Lisää tämä uutena luokkana",
     "Loading task from server." : "Ladataan tehtävää palvelimelta.",
     "Task not found!" : "Tehtävää ei löytynyt!",
     "When shared show full event" : "Jaettaessa näytä koko tapahtuma",
