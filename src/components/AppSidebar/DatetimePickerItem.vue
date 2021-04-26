@@ -42,6 +42,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:clearable="false"
 					:append-to-body="true"
 					type="date"
+					:positioned-parent="container"
 					:placeholder="$t('tasks', 'Set date')"
 					class="date"
 					@change="setDate" />
@@ -53,6 +54,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:append-to-body="true"
 					:time-picker-options="timePickerOptions"
 					type="time"
+					:positioned-parent="container"
 					:placeholder="$t('tasks', 'Set time')"
 					class="time" />
 			</div>
@@ -134,6 +136,9 @@ export default {
 		isOverdue() {
 			return overdue(this.date)
 		},
+		container() {
+			return document.getElementById('app-sidebar-vue')
+		},
 	},
 	methods: {
 		/**
@@ -157,7 +162,6 @@ $blue: #4271a6;
 .property__item {
 	border-bottom: 1px solid var(--color-border);
 	padding: 0;
-	position: relative;
 	margin-bottom: 0;
 	width: 100%;
 	color: var(--color-text-lighter);
@@ -207,6 +211,7 @@ $blue: #4271a6;
 
 					.mx-datepicker {
 						width: auto;
+						position: unset;
 						&.date {
 							min-width: 100px;
 							flex-shrink: 1;
