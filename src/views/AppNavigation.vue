@@ -39,7 +39,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				@dragenter.native="dragEnter(...arguments, collection)"
 				@dragleave.native="dragLeave"
 				@click="setInitialRoute(`/collections/${collection.id}`)">
-				<AppNavigationCounter slot="counter">
+				<AppNavigationCounter v-show="collectionCount(collection.id)" slot="counter">
 					{{ collectionCount(collection.id) | counterFormatter }}
 				</AppNavigationCounter>
 			</AppNavigationItem>
