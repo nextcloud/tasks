@@ -116,6 +116,8 @@ OC.L10N.register(
     "Select a calendar" : "Bir takvim seçin",
     "Select a classification" : "Bir sınıflandırma seçin",
     "Select a status" : "Bir durum seçin",
+    "Select tags" : "Etiketleri seçin",
+    "Add this as a new tag" : "Bunu yeni bir etiket olarak ekle",
     "Loading task from server." : "Görev sunucudan yükleniyor.",
     "Task not found!" : "Görev bulunamadı!",
     "When shared show full event" : "Paylaşılırken tüm işlemler görüntülensin",

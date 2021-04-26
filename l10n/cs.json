@@ -114,6 +114,8 @@
     "Select a calendar" : "Vybrat kalendář",
     "Select a classification" : "Vybrat klasifikaci",
     "Select a status" : "Vybrat stav",
+    "Select tags" : "Výběr štítků",
+    "Add this as a new tag" : "Přidat toto jako nový štítek",
     "Loading task from server." : "Načítání úkolů ze serveru.",
     "Task not found!" : "Úkol nenalezen!",
     "When shared show full event" : "Když sdíleno zobrazit úplnou událost",

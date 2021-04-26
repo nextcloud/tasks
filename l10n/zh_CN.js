@@ -116,6 +116,8 @@ OC.L10N.register(
     "Select a calendar" : "选择一个日历",
     "Select a classification" : "选择类别",
     "Select a status" : "选择一个状态",
+    "Select tags" : "选择标签",
+    "Add this as a new tag" : "将此添加为一个新标签",
     "Loading task from server." : "从服务器加载任务。",
     "Task not found!" : "没有任务！",
     "When shared show full event" : "共享时显示完整事件",

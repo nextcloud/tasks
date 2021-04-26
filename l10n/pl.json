@@ -114,6 +114,8 @@
     "Select a calendar" : "Wybierz kalendarz",
     "Select a classification" : "Wybierz klasyfikację",
     "Select a status" : "Wybierz status",
+    "Select tags" : "Wybierz etykiety",
+    "Add this as a new tag" : "Dodaj to jako nową etykietę",
     "Loading task from server." : "Wczytywanie zadania z serwera.",
     "Task not found!" : "Nie znaleziono zadania!",
     "When shared show full event" : "Po udostępnieniu pokaż pełne wydarzenie",
