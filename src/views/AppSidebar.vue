@@ -823,6 +823,10 @@ $blue: #4271a6;
 	margin: 0;
 }
 
+.app-sidebar::v-deep .app-sidebar-tabs {
+	min-height: 160px !important;
+}
+
 .app-sidebar__tab {
 	padding: 0;
 }
