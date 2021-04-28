@@ -116,6 +116,8 @@ OC.L10N.register(
     "Select a calendar" : "Selecionar um calendário",
     "Select a classification" : "Selecione uma classificação",
     "Select a status" : "Selecione um status",
+    "Select tags" : "Selecione as etiquetas",
+    "Add this as a new tag" : "Adicionar como uma nova etiqueta",
     "Loading task from server." : "Carregando tarefas do servidor.",
     "Task not found!" : "Tarefa não encontrada!",
     "When shared show full event" : "Quando compartilhado, mostrar o evento completo",
