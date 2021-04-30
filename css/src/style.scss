@@ -81,6 +81,19 @@ $blue_due: #4271a6;			// due dates and low importance
 				background-position: inherit;
 			}
 
+			// Overwrite padding until https://github.com/nextcloud/nextcloud-vue/pull/1897#issuecomment-830301938
+			// is confirmed
+			&.app-navigation-entry {
+				padding: 0;
+				padding-right: 4px;
+			}
+
+			.app-navigation-entry__counter-wrapper {
+				display: flex;
+				align-items: center;
+				flex: 0 1 auto;
+			}
+
 			&.list {
 				&.active .app-navigation-entry__icon-bullet > div {
 					height: 16px;
