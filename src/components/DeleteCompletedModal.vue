@@ -137,3 +137,38 @@ export default {
 	},
 }
 </script>
+
+<style lang="scss" scoped>
+.delete-completed {
+	margin: 50px;
+	width: auto;
+	min-width: 30vw;
+	&__button {
+		display: inline-block;
+		padding: 10px;
+		padding-left: 34px;
+		background-position: 10px center;
+		text-align: left;
+		margin: 0;
+		width: unset !important;
+		height: unset !important;
+		background-size: unset !important;
+	}
+	&__header {
+		padding-top: 20px;
+		max-width: 80%;
+		margin: 12px auto;
+	}
+	&__progress {
+		width: 80%;
+		margin: auto;
+	}
+	&__tracker {
+		display: flex;
+		justify-content: space-between;
+		width: 80%;
+		margin: auto;
+		padding-top: 10px;
+	}
+}
+</style>
