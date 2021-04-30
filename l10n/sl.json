@@ -114,6 +114,8 @@
     "Select a calendar" : "Izbor koledarja",
     "Select a classification" : "Izbor preikaza",
     "Select a status" : "Izbor stanja",
+    "Select tags" : "Izbor oznak",
+    "Add this as a new tag" : "Dodaj kot novo oznako",
     "Loading task from server." : "Poteka nalaganje nalog s strežnika.",
     "Task not found!" : "Naloge ni mogoče najti!",
     "When shared show full event" : "V souporabi pokaži poln dogodek",
