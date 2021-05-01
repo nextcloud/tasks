@@ -1,8 +1,5 @@
 @include icon-black-white('circle', 'tasks', 1);
 
-@include icon-black-white('subtasks-visible', 'tasks', 1);
-@include icon-black-white('subtasks-hidden', 'tasks', 1);
-
 // Hack for https://github.com/nextcloud/nextcloud-vue/issues/1384
 body {
 	min-height: 100%;
@@ -194,29 +191,26 @@ $blue_due: #4271a6;			// due dates and low importance
 
 			input {
 				box-shadow: 0 0 1px var(--color-box-shadow);
+				border: medium none !important;
+				box-sizing: border-box;
+				color: var(--color-main-text);
+				cursor: text;
+				font-size: 100%;
+				margin: 0;
+				padding: 0 15px;
+				width: 100%;
+				min-height: 44px;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				outline: none;
+				border-radius: var(--border-radius);
 			}
 		}
 
 		.sortorder {
 			margin-left: auto;
 		}
-	}
-
-	.add-task input {
-		border: medium none !important;
-		box-sizing: border-box;
-		color: var(--color-main-text);
-		cursor: text;
-		font-size: 100%;
-		margin: 0;
-		padding: 0 15px;
-		width: 100%;
-		min-height: 44px;
-		overflow: hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
-		outline: none;
-		border-radius: var(--border-radius);
 	}
 
 	> div {
@@ -264,336 +258,6 @@ $blue_due: #4271a6;			// due dates and low importance
 
 					&.completed {
 						margin-top: 12px;
-					}
-
-					// Show round corners for first root task
-					> .task-item {
-						&:first-child > .task-body {
-							border-top-left-radius: var(--border-radius);
-							border-top-right-radius: var(--border-radius);
-							border-top: none;
-						}
-
-						& > .task-body {
-							@media only screen and (max-width: $breakpoint-mobile) {
-								border-radius: 0 !important;
-							}
-						}
-					}
-				}
-
-				.task-item {
-					cursor: default;
-					list-style: none outside none;
-
-					&.done .task-body {
-						.task-info {
-							opacity: .6;
-						}
-
-						.title {
-							text-decoration: line-through;
-						}
-					}
-
-					&.deleted .task-info {
-						opacity: .6;
-					}
-
-					&.sortable-ghost {
-						filter: drop-shadow(0 0 3px var(--color-primary));
-						z-index: 5;
-					}
-
-					&.add-task {
-						border-top: 1px solid var(--color-border);
-
-						input {
-							border-radius: 0;
-						}
-					}
-
-					// Show round corners if a task is the last in the (sub-)list
-					&:last-child .task-body {
-						border-bottom-left-radius: var(--border-radius);
-						border-bottom-right-radius: var(--border-radius);
-					}
-
-					&:not(.subtasks-visible) .add-task input {
-						border-bottom-left-radius: var(--border-radius);
-						border-bottom-right-radius: var(--border-radius);
-					}
-
-					// Don't show round corners if any of the ancestors is not the last in the (sub-)list
-					&:not(:last-child) {
-						.add-task input {
-							border-bottom-left-radius: 0;
-							border-bottom-right-radius: 0;
-						}
-						.task-body {
-							border-bottom-left-radius: 0;
-							border-bottom-right-radius: 0;
-						}
-					}
-
-					// If the subtasks container is visible, show a round corner for the task itself and
-					// the next task in the list
-					&.container-visible {
-						& > .task-body {
-							border-bottom-left-radius: var(--border-radius);
-							border-bottom-right-radius: 0;
-						}
-
-						& + .task-item > .task-body {
-							border-top-left-radius: var(--border-radius);
-						}
-					}
-
-					.subtasks-container {
-						margin-left: 44px;
-
-						@media only screen and (max-width: $breakpoint-mobile) {
-							margin-left: 14px;
-						}
-					}
-
-					.task-body {
-						display: flex;
-						flex-direction: row;
-						flex-wrap: nowrap;
-						align-items: center;
-						height: 44px;
-						position: relative;
-						background-color: var(--color-main-background);
-						border-top: 1px solid var(--color-border);
-
-						&:hover {
-							background-color: var(--color-background-hover);
-						}
-
-						&.active {
-							background-color: var(--color-primary-light) !important;
-						}
-
-						.task-checkbox {
-							padding: 11px 10px;
-							height: 44px;
-							width: 44px;
-
-							input[type='checkbox'].checkbox + label {
-								&::before {
-									border-width: 2px;
-									border-radius: var(--border-radius);
-									border-color: var(--color-border-dark);
-								}
-
-								&:hover {
-									border-color: var(--color-border-dark);
-								}
-
-								&.priority-high::before {
-									border-color: $red_overdue;
-								}
-
-								&.priority-medium::before {
-									border-color: $yellow;
-								}
-
-								&.priority-low::before {
-									border-color: $blue_due;
-								}
-							}
-						}
-
-						.task-info {
-							display: flex;
-							flex-grow: 1;
-							cursor: pointer;
-							color: var(--color-main-text);
-							line-height: 16px;
-							margin: 0;
-							overflow: hidden;
-							position: relative;
-							white-space: nowrap;
-
-							.title {
-								cursor: text;
-								display: inline-flex;
-								padding: 10px 10px 10px 0;
-								overflow: hidden;
-
-								span {
-									line-height: 24px;
-									overflow: hidden;
-									text-overflow: ellipsis;
-
-									a {
-										cursor: pointer;
-										text-decoration: underline;
-									}
-								}
-							}
-
-							.tags-list {
-								display: flex;
-								align-items: center;
-								max-width: 50%;
-
-								.tag {
-									height: 22px;
-									overflow: hidden;
-									display: inline-flex;
-									min-width: 45px;
-									background-color: var(--color-background-dark);
-									border: 1px solid var(--color-border-dark);
-									border-radius: 2px;
-									margin: 0 4px;
-
-									.tag-label {
-										color: var(--color-text-lighter);
-										font-weight: bold;
-										padding: 2px 4px;
-										text-overflow: ellipsis;
-										overflow: hidden;
-										white-space: nowrap;
-										width: 100%;
-										text-align: center;
-									}
-								}
-							}
-
-							.percentbar {
-								height: 3px;
-								position: absolute;
-								bottom: 3px;
-								left: 10px;
-								right: 10px;
-								background-color: var(--color-background-darker);
-								border-radius: 2px;
-
-								.percentdone {
-									height: 3px;
-									border-radius: 2px 0 0 2px;
-									background-color: var(--color-primary);
-								}
-							}
-						}
-
-						.task-body-icons {
-							display: flex;
-							margin-left: auto;
-
-							& > div:not(.action-item) {
-								height: 44px;
-								padding: 14px 7px;
-								display: flex;
-								flex-direction: row;
-								align-items: center;
-								flex-wrap: nowrap;
-							}
-
-
-							.icon-toggle {
-								@include icon-color('icon-toggle', 'tasks', $color-black, 3);
-							}
-
-							.icon-subtasks-hidden {
-								@include icon-color('icon-subtasks-hidden', 'tasks', $color-black, 3);
-							}
-
-							.icon-subtasks-visible {
-								@include icon-color('icon-subtasks-visible', 'tasks', $color-black, 3);
-							}
-
-							.icon {
-								vertical-align: unset;
-
-								&.sprt-add {
-									&:hover {
-										opacity: 1;
-									}
-								}
-							}
-
-							& > div.task-status-container {
-								padding: 14px 0;
-
-								.status-display {
-									margin-left: 7px;
-								}
-							}
-
-							.date {
-								color: $blue_due;
-								font-size: 11px;
-								line-height: 14px;
-
-								&.overdue {
-									color: $red_overdue;
-								}
-
-								span {
-									overflow: hidden;
-									text-align: right;
-									text-overflow: ellipsis;
-									white-space: nowrap;
-								}
-
-								&__short {
-									width: 60px;
-
-									&--completed {
-										width: 110px;
-									}
-								}
-
-								&__long {
-									width: 105px;
-									display: none;
-
-									&--date-only {
-										width: 60px;
-									}
-
-									&--completed {
-										width: 150px;
-									}
-								}
-
-								@media only screen and (min-width: $breakpoint-mobile) {
-									&__long {
-										display: inline-block;
-									}
-
-									&__short {
-										display: none;
-									}
-								}
-							}
-
-							.calendar {
-								color: var(--color-text-lighter);
-								font-size: 11px;
-								line-height: 14px;
-								white-space: nowrap;
-
-								.calendar-indicator {
-									position: relative;
-									display: inline-block;
-									margin-right: 3px;
-									width: 8px;
-									height: 8px;
-									border: none;
-									border-radius: 50%;
-									cursor: pointer
-								}
-								.calendar-name {
-									max-width: 200px;
-									overflow: hidden;
-									text-overflow: ellipsis;
-								}
-							}
-						}
 					}
 				}
 			}
