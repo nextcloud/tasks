@@ -47,9 +47,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 		<template slot="actions">
 			<ActionButton
-				icon="icon-delete"
 				:disabled="loading"
 				@click.prevent.stop="deleteSharee">
+				<Delete slot="icon" :size="24" decorative />
 				{{ $t('tasks', 'Unshare with {displayName}', { displayName: sharee.displayName }) }}
 			</ActionButton>
 		</template>
@@ -63,6 +63,8 @@ import ActionCheckbox from '@nextcloud/vue/dist/Components/ActionCheckbox'
 import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
 import Avatar from '@nextcloud/vue/dist/Components/Avatar'
 
+import Delete from 'vue-material-design-icons/Delete.vue'
+
 export default {
 	name: 'CalendarSharee',
 	components: {
@@ -70,6 +72,7 @@ export default {
 		ActionCheckbox,
 		AppNavigationItem,
 		Avatar,
+		Delete,
 	},
 	props: {
 		calendar: {

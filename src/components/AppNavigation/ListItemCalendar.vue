@@ -26,7 +26,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		:calendar-id="calendar.id"
 		:to="{ name: 'calendars', params: { calendarId: calendar.id } }"
 		:title="calendar.displayName"
-		:class="{edit: editing, deleted: !!deleteTimeout}"
+		:class="{'list--edit': editing, 'list--deleted': !!deleteTimeout}"
 		class="list reactive"
 		@drop.native="dropTask"
 		@dragover.native="dragOver"
@@ -35,10 +35,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		<AppNavigationIconBullet slot="icon" :color="calendar.color" />
 
 		<template v-if="!deleteTimeout" slot="counter">
-			<Actions v-if="calendar.canBeShared">
+			<Actions v-if="calendar.canBeShared"
+				:class="{shared: hasShares}"
+				class="sharing">
 				<ActionButton
-					:icon="sharingIconClass"
 					@click="toggleShare">
+					<ShareVariant slot="icon" :size="24" decorative />
 					{{ sharedWithTooltip }}
 				</ActionButton>
 			</Actions>
@@ -56,12 +58,13 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				class="edit-calendar"
 				:close-after-click="true"
 				@click="editCalendar">
+				<Pencil slot="icon" :size="24" decorative />
 				{{ $t('tasks', 'Edit') }}
 			</ActionButton>
 			<ActionButton
-				icon="icon-public"
 				:close-after-click="true"
 				@click="copyCalDAVUrl($event, calendar)">
+				<LinkVariant slot="icon" :size="24" decorative />
 				{{ !copied
 					? $t('tasks', 'Copy private link')
 					: copySuccess
@@ -72,6 +75,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				icon="icon-download"
 				:close-after-click="true"
 				:href="exportUrl">
+				<Download slot="icon" :size="24" decorative />
 				{{ $t('tasks', 'Download') }}
 			</ActionLink>
 			<ActionButton
@@ -81,16 +85,25 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					boundariesElement: 'body',
 					content: deleteMessage
 				}"
-				:icon="calendar.isSharedWithMe ? 'icon-close' : 'icon-delete'"
 				@click="scheduleDelete">
+				<Delete
+					v-if="!calendar.isSharedWithMe"
+					slot="icon"
+					:size="24"
+					decorative />
+				<Close
+					v-else
+					slot="icon"
+					:size="24"
+					decorative />
 				{{ !calendar.isSharedWithMe ? $t('tasks', 'Delete') : $t('tasks', 'Unshare') }}
 			</ActionButton>
 		</template>
 
 		<template v-if="!!deleteTimeout" slot="actions">
 			<ActionButton
-				icon="icon-history"
 				@click.prevent.stop="cancelDelete">
+				<Undo slot="icon" :size="24" decorative />
 				{{ undoDeleteMessage }}
 			</ActionButton>
 		</template>
@@ -138,6 +151,14 @@ import Actions from '@nextcloud/vue/dist/Components/Actions'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
 import ActionLink from '@nextcloud/vue/dist/Components/ActionLink'
 
+import Download from 'vue-material-design-icons/Download.vue'
+import Delete from 'vue-material-design-icons/Delete.vue'
+import Close from 'vue-material-design-icons/Close.vue'
+import Pencil from 'vue-material-design-icons/Pencil.vue'
+import Undo from 'vue-material-design-icons/Undo.vue'
+import LinkVariant from 'vue-material-design-icons/LinkVariant.vue'
+import ShareVariant from 'vue-material-design-icons/ShareVariant.vue'
+
 import ClickOutside from 'v-click-outside'
 import { mapGetters, mapActions } from 'vuex'
 
@@ -154,6 +175,13 @@ export default {
 		Actions,
 		ActionButton,
 		ActionLink,
+		Undo,
+		Download,
+		Delete,
+		Close,
+		Pencil,
+		LinkVariant,
+		ShareVariant,
 	},
 	directives: {
 		clickOutside: ClickOutside.directive,
@@ -226,12 +254,6 @@ export default {
 					? this.$n('tasks', 'Deleting the list in {countdown} second', 'Deleting the list in {countdown} seconds', this.countdown, { countdown: this.countdown })
 					: this.$n('tasks', 'Unsharing the list in {countdown} second', 'Unsharing the list in {countdown} seconds', this.countdown, { countdown: this.countdown })
 			}
-		},
-		sharingIconClass() {
-			if (this.calendar.shares.length) {
-				return 'icon-shared'
-			}
-			return 'icon-share'
 		},
 		exportUrl() {
 			let url = this.calendar.url
@@ -513,3 +535,96 @@ export default {
 	},
 }
 </script>
+
+<style lang="scss" scoped>
+$color-error: #e9322d;
+
+.list::v-deep {
+	&.active .app-navigation-entry__icon-bullet > div {
+		height: 16px;
+		width: 16px;
+		margin: -1px;
+	}
+
+	&:not(.active) {
+		.app-navigation-entry__utils .action-item,
+		.calendar__share {
+			display: none;
+		}
+	}
+
+	&.list--edit {
+		.app-navigation-entry__utils,
+		.app-navigation-entry-link {
+			display: none;
+		}
+
+		.app-navigation-entry-edit {
+			display: inline-block;
+		}
+	}
+
+	&.list--deleted {
+		.app-navigation-entry__title {
+			text-decoration: line-through;
+		}
+
+		.app-navigation-entry__icon-bullet {
+			opacity: .3;
+		}
+	}
+
+	.app-navigation-entry__utils .icon-loading {
+		height: 32px;
+		width: 32px;
+	}
+
+	.app-navigation-entry__counter-wrapper {
+		display: flex;
+		align-items: center;
+		flex: 0 1 auto;
+
+		.action-item.sharing:not(.shared) {
+			opacity: .3;
+		}
+	}
+
+	.app-navigation-entry-edit {
+		padding-left: 5px !important;
+		display: none;
+		position: relative;
+
+		&.error input.edit {
+			color: var(--color-error);
+			border-color: var(--color-error) !important;
+			box-shadow: 0 0 6px transparentize( $color-error, .7 );
+		}
+
+		form {
+			display: flex;
+
+			input {
+				margin-right: 0;
+
+				&[type='text'] {
+					flex-grow: 1;
+				}
+
+				&.action {
+					background-color: var(--color-background-dark);
+					width: 36px;
+					border-left: 0 none;
+					background-position: center;
+					cursor: pointer;
+
+					&:hover {
+						border-left: 1px solid;
+						margin-left: -1px;
+						width: 37px;
+					}
+				}
+			}
+		}
+	}
+}
+</style>

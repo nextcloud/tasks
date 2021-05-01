@@ -56,7 +56,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			<AppNavigationItem v-click-outside="cancelCreate"
 				:title="$t('tasks', 'Add List…')"
 				icon="sprt-add"
-				:class="{edit: creating}"
+				:class="{'collection--edit': creating}"
 				class="collection reactive"
 				@click="startCreate($event)">
 				<div :class="{error: nameError}" class="app-navigation-entry-edit">
@@ -420,3 +420,57 @@ export default {
 	},
 }
 </script>
+
+<style lang="scss" scoped>
+$color-error: #e9322d;
+
+.collection::v-deep {
+	&.collection--edit {
+		.app-navigation-entry-link {
+			display: none;
+		}
+
+		.app-navigation-entry-edit {
+			display: inline-block;
+		}
+	}
+
+	.app-navigation-entry-edit {
+		padding-left: 5px !important;
+		display: none;
+		position: relative;
+
+		&.error input.edit {
+			color: var(--color-error);
+			border-color: var(--color-error) !important;
+			box-shadow: 0 0 6px transparentize( $color-error, .7 );
+		}
+
+		form {
+			display: flex;
+
+			input {
+				margin-right: 0;
+
+				&[type='text'] {
+					flex-grow: 1;
+				}
+
+				&.action {
+					background-color: var(--color-background-dark);
+					width: 36px;
+					border-left: 0 none;
+					background-position: center;
+					cursor: pointer;
+
+					&:hover {
+						border-left: 1px solid;
+						margin-left: -1px;
+						width: 37px;
+					}
+				}
+			}
+		}
+	}
+}
+</style>
