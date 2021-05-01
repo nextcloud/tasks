@@ -164,63 +164,6 @@ $blue_due: #4271a6;			// due dates and low importance
 }
 
 /**
-	* rules for settings area
-	*/
-
-#app-settings-content {
-	li {
-		display: flex;
-		align-items: center;
-		height: 44px;
-
-		&.headline {
-			font-weight: bold;
-		}
-
-		&.collection {
-			.icon {
-				display: flex;
-				align-items: center;
-				flex: 0 0 44px;
-				justify-content: center;
-				width: 44px;
-				height: 44px;
-				background-size: 16px 16px;
-				background-image: unset;
-				margin-left: -10px;
-
-				&::before {
-					content: '';
-					width: 16px;
-					height: 16px;
-					background: var(--icon-tasks-sprt-bw-000) no-repeat;
-					background-position: inherit;
-				}
-			}
-
-			.label-container {
-				white-space: nowrap;
-				text-overflow: ellipsis;
-				overflow: hidden;
-				display: flex;
-				align-items: center;
-			}
-		}
-
-		select {
-			min-width: 105px;
-			text-overflow: ellipsis;
-			margin-left: auto;
-		}
-
-		label {
-			white-space: nowrap;
-			padding-right: 10px;
-		}
-	}
-}
-
-/**
 	* rules for app-content
 	*/
 
