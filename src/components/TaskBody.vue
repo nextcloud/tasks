@@ -25,23 +25,21 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		ref="taskItem"
 		:task-id="task.uri"
 		:class="{
-			done: task.completed,
-			readOnly: readOnly,
-			deleted: !!deleteTimeout,
-			subtasksHidden: !showSubtasks,
-			'container-visible': (filteredSubtasksShown.length || showSubtaskInput),
-			'subtasks-visible': filteredSubtasksShown.length
+			'task-item--completed': task.completed,
+			'task-item--deleted': !!deleteTimeout,
+			'task-item--input-visible': (filteredSubtasksShown.length || showSubtaskInput),
+			'task-item--subtasks-visible': filteredSubtasksShown.length
 		}"
 		:data-priority="[task.priority]"
 		class="task-item"
 		@dragstart="dragStart($event)">
 		<div :task-id="task.uri"
-			:class="{active: isTaskOpen()}"
-			class="task-body reactive"
+			:class="{'task-item__body--active': isTaskOpen()}"
+			class="task-item__body reactive"
 			type="task"
 			@click="navigate($event)">
 			<!-- Checkbox with divider -->
-			<div class="task-checkbox">
+			<div class="task-body__checkbox">
 				<input :id="'toggleCompleted_' + task.uid"
 					type="checkbox"
 					class="checkbox no-nav"
@@ -52,10 +50,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					:disabled="readOnly"
 					:aria-label="$t('tasks', 'Task is completed')"
 					@click="toggleCompleted(task)">
-				<label :class="[checkboxColor, 'reactive no-nav']" :for="'toggleCompleted_' + task.uid" />
+				<label :class="[priorityClass, 'reactive no-nav']" :for="'toggleCompleted_' + task.uid" />
 			</div>
 			<!-- Info: title, progress & tags -->
-			<div class="task-info">
+			<div class="task-body__info">
 				<div class="title">
 					<span v-linkify="task.summary" />
 				</div>
@@ -68,29 +66,24 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</div>
 				<div v-if="task.complete > 0" class="percentbar">
 					<div :style="{ width: task.complete + '%', 'background-color': task.calendar.color }"
+						:class="{'completed': task.completed}"
 						:aria-label="$t('tasks', '{complete} % completed', {complete: task.complete})"
-						class="percentdone" />
+						class="percentbar__done" />
 				</div>
 			</div>
 			<!-- Icons: sync-status, calendarname, date, note, subtask-show-completed, subtask-visibility, add-subtask, starred -->
-			<div class="task-body-icons">
+			<div class="task-body__icons">
 				<div class="task-status-container">
 					<TaskStatusDisplay :task="task" />
 				</div>
 				<div v-if="collectionId=='week'" class="calendar">
-					<span :style="{'background-color': task.calendar.color}" class="calendar-indicator" />
-					<span class="calendar-name">{{ task.calendar.displayName }}</span>
+					<span :style="{'background-color': task.calendar.color}" class="calendar__indicator" />
+					<span class="calendar__name">{{ task.calendar.displayName }}</span>
 				</div>
-				<div v-if="hasHiddenSubtasks">
-					<span class="icon icon-sprt-bw sprt-subtasks-hidden" />
-				</div>
-				<div v-if="task.pinned">
-					<span class="icon icon-sprt-bw sprt-pinned" />
-				</div>
-				<div v-if="task.note!=''">
-					<span class="icon icon-sprt-bw sprt-note" />
-				</div>
-				<div v-if="task.due || task.completed" :class="{overdue: overdue(task.dueMoment) && !task.completed}" class="date">
+				<SortVariant v-if="hasHiddenSubtasks" :size="24" :title="$t('tasks', 'Task has hidden subtasks')" />
+				<Pin v-if="task.pinned" :size="24" :title="$t('tasks', 'Task is pinned')" />
+				<NoteText v-if="task.note!=''" :size="24" :title="$t('tasks', 'Task has a note')" />
+				<div v-if="task.due || task.completed" :class="{'date--overdue': overdue(task.dueMoment) && !task.completed}" class="date">
 					<span class="date__short" :class="{ 'date__short--completed': task.completed }">{{ dueDateShort }}</span>
 					<span class="date__long" :class="{ 'date__long--date-only': task.allDay && !task.completed, 'date__long--completed': task.completed }">{{ dueDateLong }}</span>
 				</div>
@@ -98,45 +91,51 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<ActionButton v-if="!task.calendar.readOnly"
 						:close-after-click="true"
 						class="reactive no-nav open-input"
-						icon="icon-add"
 						@click="openSubtaskInput">
+						<Plus slot="icon" :size="24" decorative />
 						{{ $t('tasks', 'Add subtask') }}
 					</ActionButton>
 					<ActionButton v-if="Object.values(task.subTasks).length"
 						class="reactive no-nav"
-						:icon="task.hideSubtasks ? 'icon-subtasks-hidden' : 'icon-subtasks-visible'"
 						@click="toggleSubtasksVisibility(task)">
+						<SortVariant slot="icon" :size="24" decorative />
 						{{ task.hideSubtasks ? $t('tasks', 'Show subtasks') : $t('tasks', 'Hide subtasks') }}
 					</ActionButton>
 					<ActionButton v-if="hasCompletedSubtasks"
 						class="reactive no-nav"
-						icon="icon-toggle"
 						@click="toggleCompletedSubtasksVisibility(task)">
+						<Eye slot="icon" :size="24" decorative />
 						{{ task.hideCompletedSubtasks ? $t('tasks', 'Show completed subtasks') : $t('tasks', 'Hide completed subtasks') }}
 					</ActionButton>
 					<ActionButton v-if="!readOnly"
 						class="reactive no-nav"
-						icon="icon-delete"
 						@click="scheduleDelete">
+						<Delete slot="icon" :size="24" decorative />
 						{{ $t('tasks', 'Delete task') }}
 					</ActionButton>
 				</Actions>
 				<Actions v-if="!!deleteTimeout">
 					<ActionButton
-						icon="icon-history"
+						class="reactive no-nav"
 						@click.prevent.stop="cancelDelete">
+						<Undo slot="icon" :size="24" decorative />
 						{{ $n('tasks', 'Deleting the task in {countdown} second', 'Deleting the task in {countdown} seconds', countdown, { countdown: countdown }) }}
 					</ActionButton>
 				</Actions>
-				<button class="inline task-star reactive no-nav" @click="toggleStarred(task)">
-					<span :class="[iconStar, {'disabled': readOnly}]" class="icon" />
-				</button>
+				<Actions :disabled="readOnly" :class="[{ priority: task.priority }, priorityClass]" class="reactive no-nav">
+					<ActionButton
+						:disabled="readOnly"
+						@click="toggleStarred(task)">
+						<Star slot="icon" :size="24" decorative />
+						{{ $t('tasks', 'Toggle starred') }}
+					</ActionButton>
+				</Actions>
 			</div>
 		</div>
-		<div class="subtasks-container">
+		<div class="task-item__subtasks">
 			<div v-if="showSubtaskInput"
 				v-click-outside="{ handler: closeSubtaskInput, middleware: clickOutsideMiddleware }"
-				class="task-item add-task">
+				class="task-item task-item--input">
 				<form name="addTaskForm" @submit.prevent="addTask">
 					<input ref="input"
 						v-model="newTaskName"
@@ -166,6 +165,15 @@ import moment from '@nextcloud/moment'
 import Actions from '@nextcloud/vue/dist/Components/Actions'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
 
+import Eye from 'vue-material-design-icons/Eye.vue'
+import Delete from 'vue-material-design-icons/Delete.vue'
+import Pin from 'vue-material-design-icons/Pin.vue'
+import Plus from 'vue-material-design-icons/Plus.vue'
+import NoteText from 'vue-material-design-icons/NoteText.vue'
+import SortVariant from 'vue-material-design-icons/SortVariant.vue'
+import Star from 'vue-material-design-icons/Star.vue'
+import Undo from 'vue-material-design-icons/Undo.vue'
+
 import ClickOutside from 'v-click-outside'
 import { mapGetters, mapActions } from 'vuex'
 
@@ -182,6 +190,14 @@ export default {
 		TaskDragContainer,
 		Actions,
 		ActionButton,
+		Delete,
+		Eye,
+		Pin,
+		Plus,
+		NoteText,
+		SortVariant,
+		Star,
+		Undo,
 	},
 	props: {
 		task: {
@@ -303,24 +319,15 @@ export default {
 
 		priorityClass() {
 			if (+this.task.priority > 5) {
-				return 'low'
-			} else if (+this.task.priority === 5) {
-				return 'medium'
-			} else if (+this.task.priority > 0 && +this.task.priority < 5) {
-				return 'high'
-			} else {
-				return ''
+				return 'priority--low'
 			}
-		},
-
-		checkboxColor() {
-			const priority = this.priorityClass
-			return priority ? `priority-${priority}` : ''
-		},
-
-		iconStar() {
-			const priority = this.priorityClass
-			return priority ? `sprt-color sprt-task-star-${priority}` : 'icon-sprt-bw sprt-task-star'
+			if (+this.task.priority === 5) {
+				return 'priority--medium'
+			}
+			if (+this.task.priority > 0) {
+				return 'priority--high'
+			}
+			return null
 		},
 
 		hasCompletedSubtasks() {
@@ -607,3 +614,357 @@ export default {
 	},
 }
 </script>
+
+<style lang="scss" scoped>
+$red_overdue: #b3312d; // overdue dates and high importance
+$yellow: #fd0; // medium importance
+$blue_due: #4271a6; // due dates and low importance
+
+// mobile breakpoint
+$breakpoint-mobile: 1024px;
+
+// Show round corners for first root task
+.grouped-tasks > ol > .task-item {
+	&:first-child > .task-item__body {
+		border-top-left-radius: var(--border-radius);
+		border-top-right-radius: var(--border-radius);
+		border-top: none;
+	}
+
+	& > .task-item__body {
+		@media only screen and (max-width: $breakpoint-mobile) {
+			border-radius: 0 !important;
+		}
+	}
+}
+
+.task-item {
+	cursor: default;
+	list-style: none outside none;
+
+	&--completed .task-item__body .task-body__info {
+		opacity: .6;
+		.title {
+			text-decoration: line-through;
+		}
+	}
+
+	&--deleted .task-body__info {
+		opacity: .6;
+	}
+
+	&.sortable-ghost {
+		filter: drop-shadow(0 0 3px var(--color-primary));
+		z-index: 5;
+	}
+
+	&--input {
+		border-top: 1px solid var(--color-border);
+
+		input {
+			border-radius: 0;
+			border: medium none !important;
+			box-sizing: border-box;
+			color: var(--color-main-text);
+			cursor: text;
+			font-size: 100%;
+			margin: 0;
+			padding: 0 15px;
+			width: 100%;
+			min-height: 44px;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			outline: none;
+		}
+	}
+
+	// Show round corners if a task is the last in the (sub-)list
+	&:last-child .task-item__body {
+		border-bottom-left-radius: var(--border-radius);
+		border-bottom-right-radius: var(--border-radius);
+	}
+
+	&:not(.task-item--subtasks-visible).task-item--input input {
+		border-bottom-left-radius: var(--border-radius);
+		border-bottom-right-radius: var(--border-radius);
+	}
+
+	// Don't show round corners if any of the ancestors is not the last in the (sub-)list
+	&:not(:last-child) {
+		.task-item--input input {
+			border-bottom-left-radius: 0;
+			border-bottom-right-radius: 0;
+		}
+		.task-item__body {
+			border-bottom-left-radius: 0;
+			border-bottom-right-radius: 0;
+		}
+	}
+
+	// If the subtasks container is visible, show a round corner for the task itself and
+	// the next task in the list
+	&.task-item--input-visible {
+		& > .task-item__body {
+			border-bottom-left-radius: var(--border-radius);
+			border-bottom-right-radius: 0;
+		}
+
+		& + .task-item > .task-item__body {
+			border-top-left-radius: var(--border-radius);
+		}
+	}
+
+	&__body {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		align-items: center;
+		height: 44px;
+		position: relative;
+		background-color: var(--color-main-background);
+		border-top: 1px solid var(--color-border);
+
+		&:hover {
+			background-color: var(--color-background-hover);
+		}
+
+		&--active {
+			background-color: var(--color-primary-light) !important;
+		}
+
+		.task-body {
+			&__checkbox {
+				padding: 11px 10px;
+				height: 44px;
+				width: 44px;
+
+				input[type='checkbox'].checkbox + label {
+					&::before {
+						border-width: 2px;
+						border-radius: var(--border-radius);
+						border-color: var(--color-border-dark);
+					}
+
+					&:hover {
+						border-color: var(--color-border-dark);
+					}
+
+					&.priority {
+						&--high::before {
+							border-color: $red_overdue;
+						}
+
+						&--medium::before {
+							border-color: $yellow;
+						}
+
+						&--low::before {
+							border-color: $blue_due;
+						}
+					}
+				}
+			}
+
+			&__info {
+				display: flex;
+				flex-grow: 1;
+				cursor: pointer;
+				color: var(--color-main-text);
+				line-height: 16px;
+				margin: 0;
+				overflow: hidden;
+				position: relative;
+				white-space: nowrap;
+
+				.title {
+					cursor: text;
+					display: inline-flex;
+					padding: 10px 10px 10px 0;
+					overflow: hidden;
+
+					span {
+						line-height: 24px;
+						overflow: hidden;
+						text-overflow: ellipsis;
+
+						// We need v-deep as it comes from a directive
+						&::v-deep a {
+							cursor: pointer;
+							text-decoration: underline;
+						}
+					}
+				}
+
+				.tags-list {
+					display: flex;
+					align-items: center;
+					max-width: 50%;
+
+					.tag {
+						height: 22px;
+						overflow: hidden;
+						display: inline-flex;
+						min-width: 45px;
+						background-color: var(--color-background-dark);
+						border: 1px solid var(--color-border-dark);
+						border-radius: 2px;
+						margin: 0 4px;
+
+						.tag-label {
+							color: var(--color-text-lighter);
+							font-weight: bold;
+							padding: 2px 4px;
+							text-overflow: ellipsis;
+							overflow: hidden;
+							white-space: nowrap;
+							width: 100%;
+							text-align: center;
+						}
+					}
+				}
+
+				.percentbar {
+					height: 3px;
+					position: absolute;
+					bottom: 3px;
+					left: 0;
+					right: 10px;
+					background-color: var(--color-background-darker);
+					border-radius: 2px;
+
+					&__done {
+						height: 3px;
+						border-radius: 2px 0 0 2px;
+						background-color: var(--color-primary);
+
+						&.completed {
+							border-radius: 2px;
+						}
+					}
+				}
+			}
+			&__icons {
+				display: flex;
+				margin-left: auto;
+
+				& > div:not(.action-item) {
+					height: 44px;
+					padding: 14px 7px;
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					flex-wrap: nowrap;
+				}
+
+				& > .material-design-icon {
+					opacity: .5;
+				}
+
+				& > div.task-status-container {
+					padding: 14px 0;
+
+					.status-display {
+						margin-left: 7px;
+					}
+				}
+
+				.action-item.priority {
+					opacity: 1;
+
+					&--high {
+						color: $red_overdue;
+					}
+
+					&--medium {
+						color: $yellow;
+					}
+
+					&--low {
+						color: $blue_due;
+					}
+				}
+
+				.date {
+					color: $blue_due;
+					font-size: 11px;
+					line-height: 14px;
+
+					&--overdue {
+						color: $red_overdue;
+					}
+
+					span {
+						overflow: hidden;
+						text-align: right;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+					}
+
+					&__short {
+						width: 60px;
+
+						&--completed {
+							width: 110px;
+						}
+					}
+
+					&__long {
+						width: 105px;
+						display: none;
+
+						&--date-only {
+							width: 60px;
+						}
+
+						&--completed {
+							width: 150px;
+						}
+					}
+
+					@media only screen and (min-width: $breakpoint-mobile) {
+						&__long {
+							display: inline-block;
+						}
+
+						&__short {
+							display: none;
+						}
+					}
+				}
+
+				.calendar {
+					color: var(--color-text-lighter);
+					font-size: 11px;
+					line-height: 14px;
+					white-space: nowrap;
+
+					&__indicator {
+						position: relative;
+						display: inline-block;
+						margin-right: 3px;
+						width: 8px;
+						height: 8px;
+						border: none;
+						border-radius: 50%;
+						cursor: pointer
+					}
+					&__name {
+						max-width: 200px;
+						overflow: hidden;
+						text-overflow: ellipsis;
+					}
+				}
+			}
+		}
+	}
+
+	&__subtasks {
+		margin-left: 44px;
+
+		@media only screen and (max-width: $breakpoint-mobile) {
+			margin-left: 14px;
+		}
+	}
+}
+</style>
