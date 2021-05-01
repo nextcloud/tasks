@@ -41,7 +41,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<li v-for="collection in collections"
 					:key="collection.id"
 					class="collection">
-					<div :class="collection.icon" class="icon" />
+					<component :is="collection.icon" :size="24" decorative />
 					<span class="label-container">
 						<label :for="'visibilityCollection-' + collection.id" class="title">
 							{{ collection.displayName }}
@@ -66,11 +66,24 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 import moment from '@nextcloud/moment'
 import AppNavigationSettings from '@nextcloud/vue/dist/Components/AppNavigationSettings'
 
+import Star from 'vue-material-design-icons/Star.vue'
+import CalendarToday from 'vue-material-design-icons/CalendarToday.vue'
+import CalendarWeek from 'vue-material-design-icons/CalendarWeek.vue'
+import CircleOutline from 'vue-material-design-icons/CircleOutline.vue'
+import Check from 'vue-material-design-icons/Check.vue'
+import TrendingUp from 'vue-material-design-icons/TrendingUp.vue'
+
 import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
 	components: {
 		AppNavigationSettings,
+		Star,
+		CalendarToday,
+		CalendarWeek,
+		CircleOutline,
+		Check,
+		TrendingUp,
 	},
 	data() {
 		return {
@@ -126,24 +139,8 @@ li {
 	}
 
 	&.collection {
-		.icon {
-			display: flex;
-			align-items: center;
-			flex: 0 0 44px;
-			justify-content: center;
-			width: 44px;
-			height: 44px;
-			background-size: 16px 16px;
-			background-image: unset;
-			margin-left: -10px;
-
-			&::before {
-				content: '';
-				width: 16px;
-				height: 16px;
-				background: var(--icon-tasks-sprt-bw-000) no-repeat;
-				background-position: inherit;
-			}
+		.material-design-icon {
+			margin-right: 10px;
 		}
 
 		.label-container {
