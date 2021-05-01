@@ -1,41 +1,5 @@
 @include icon-black-white('circle', 'tasks', 1);
 
-@include icon-black-white('list', 'tasks', 1);
-@include icon-black-white('list--up', 'tasks', 1);
-@include icon-black-white('list--down', 'tasks', 1);
-
-@include icon-black-white('start', 'tasks', 1);
-@include icon-black-white('start--up', 'tasks', 1);
-@include icon-black-white('start--down', 'tasks', 1);
-
-@include icon-black-white('due', 'tasks', 1);
-@include icon-black-white('due--up', 'tasks', 1);
-@include icon-black-white('due--down', 'tasks', 1);
-
-@include icon-black-white('add', 'tasks', 1);
-@include icon-black-white('add--up', 'tasks', 1);
-@include icon-black-white('add--down', 'tasks', 1);
-
-@include icon-black-white('manual', 'tasks', 1);
-@include icon-black-white('manual--up', 'tasks', 1);
-@include icon-black-white('manual--down', 'tasks', 1);
-
-@include icon-black-white('rename', 'tasks', 1);
-@include icon-black-white('rename--up', 'tasks', 1);
-@include icon-black-white('rename--down', 'tasks', 1);
-
-@include icon-black-white('checkmark', 'tasks', 1);
-@include icon-black-white('checkmark--up', 'tasks', 1);
-@include icon-black-white('checkmark--down', 'tasks', 1);
-
-@include icon-black-white('task-star', 'tasks', 1);
-@include icon-black-white('task-star--up', 'tasks', 1);
-@include icon-black-white('task-star--down', 'tasks', 1);
-
-@include icon-black-white('alphabetically', 'tasks', 1);
-@include icon-black-white('alphabetically--up', 'tasks', 1);
-@include icon-black-white('alphabetically--down', 'tasks', 1);
-
 @include icon-black-white('subtasks-visible', 'tasks', 1);
 @include icon-black-white('subtasks-hidden', 'tasks', 1);
 
@@ -43,19 +7,6 @@
 body {
 	min-height: 100%;
 	height: auto;
-}
-
-.popover {
-	li {
-		&.selected .action-button {
-			opacity: 1;
-		}
-
-		.action-button__icon {
-			background-size: unset !important;
-			background-position: center !important;
-		}
-	}
 }
 
 //colors
