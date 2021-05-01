@@ -2,7 +2,7 @@
 Nextcloud - Tasks
 
 @author Raimund Schlüßler
-@copyright 2018 Raimund Schlüßler <raimund.schluessler@mailbox.org>
+@copyright 2021 Raimund Schlüßler <raimund.schluessler@mailbox.org>
 @copyright 2018 Vadim Nicolai <contact@vadimnicolai.com>
 
 This library is free software; you can redistribute it and/or
@@ -21,20 +21,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<div v-if="calendar">
-		<div class="header">
-			<div v-if="collectionId !== 'completed' && !calendar.readOnly"
-				class="add-task">
-				<form name="addTaskForm" @submit.prevent="addTask">
-					<input v-model="newTaskName"
-						:placeholder="inputString"
-						:disabled="isAddingTask"
-						class="transparent reactive"
-						@keyup.27="clearNewTask($event)">
-				</form>
-			</div>
-			<SortorderDropdown />
-		</div>
+	<div>
+		<Header />
 		<div class="task-list">
 			<div v-for="calendar in filteredCalendars"
 				:key="calendar.id"
@@ -58,25 +46,17 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import { isTaskInList, isParentInList } from '../../store/storeHelper.js'
+import Header from './Header.vue'
 import LoadCompletedButton from '../../components/LoadCompletedButton.vue'
-import SortorderDropdown from '../../components/SortorderDropdown.vue'
 import TaskDragContainer from '../../components/TaskDragContainer.vue'
 
-import moment from '@nextcloud/moment'
-
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
 	components: {
-		SortorderDropdown,
+		Header,
 		LoadCompletedButton,
 		TaskDragContainer,
-	},
-	data() {
-		return {
-			newTaskName: '',
-			isAddingTask: false,
-		}
 	},
 	computed: {
 
@@ -107,52 +87,9 @@ export default {
 		collectionId() {
 			return this.$route.params.collectionId
 		},
-
-		inputString() {
-			switch (this.collectionId) {
-			case 'starred':
-				return this.$t('tasks', 'Add an important task to "{calendar}"…', { calendar: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
-			case 'today':
-				return this.$t('tasks', 'Add a task due today to "{calendar}"…', { calendar: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
-			case 'current':
-				return this.$t('tasks', 'Add a current task to "{calendar}"…', { calendar: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
-			default:
-				return this.$t('tasks', 'Add a task to "{calendar}"…', { calendar: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
-			}
-		},
 		...mapGetters({
-			calendar: 'getDefaultCalendar',
 			calendars: 'getSortedCalendars',
 		}),
-	},
-	methods: {
-		...mapActions([
-			'createTask',
-		]),
-		clearNewTask(event) {
-			event.target.blur()
-			this.newTaskName = ''
-		},
-
-		addTask() {
-			const task = { summary: this.newTaskName }
-
-			// If the task is created in a collection view,
-			// set the appropriate properties.
-			if (this.$route.params.collectionId === 'starred') {
-				task.priority = '1'
-			}
-			if (this.$route.params.collectionId === 'today') {
-				task.due = moment().startOf('day').format('YYYY-MM-DDTHH:mm:ss')
-				task.allDay = this.$store.state.settings.settings.allDay
-			}
-			if (this.$route.params.collectionId === 'current') {
-				task.start = moment().format('YYYY-MM-DDTHH:mm:ss')
-			}
-
-			this.createTask(task)
-			this.newTaskName = ''
-		},
 	},
 }
 </script>

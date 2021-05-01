@@ -173,46 +173,6 @@ $blue_due: #4271a6;			// due dates and low importance
 .app-content {
 	background-color: var(--color-background-dark) !important;
 
-	.header {
-		padding: 12px 15px 12px 44px;
-		position: sticky;
-		top: 50px;
-		background-color: var(--color-background-dark);
-		z-index: 1000;
-		display: flex;
-
-		@media only screen and (max-width: $breakpoint-mobile) {
-			padding-right: 0;
-		}
-
-		.add-task {
-			position: relative;
-			width: calc(100% - 44px);
-
-			input {
-				box-shadow: 0 0 1px var(--color-box-shadow);
-				border: medium none !important;
-				box-sizing: border-box;
-				color: var(--color-main-text);
-				cursor: text;
-				font-size: 100%;
-				margin: 0;
-				padding: 0 15px;
-				width: 100%;
-				min-height: 44px;
-				overflow: hidden;
-				white-space: nowrap;
-				text-overflow: ellipsis;
-				outline: none;
-				border-radius: var(--border-radius);
-			}
-		}
-
-		.sortorder {
-			margin-left: auto;
-		}
-	}
-
 	> div {
 		box-sizing: border-box;
 		padding-bottom: 75px;

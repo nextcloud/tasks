@@ -2,7 +2,7 @@
 Nextcloud - Tasks
 
 @author Raimund Schlüßler
-@copyright 2018 Raimund Schlüßler <raimund.schluessler@mailbox.org>
+@copyright 2021 Raimund Schlüßler <raimund.schluessler@mailbox.org>
 @copyright 2018 Vadim Nicolai <contact@vadimnicolai.com>
 @copyright 2021 cnmicha <cnmicha@bhb-networks.com>
 
@@ -23,21 +23,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div v-if="calendar">
-		<div class="header">
-			<div v-if="!calendar.readOnly"
-				class="add-task">
-				<form name="addTaskForm" @submit.prevent="addTask">
-					<input id="target"
-						v-model="newTaskName"
-						:placeholder="inputString"
-						:disabled="isAddingTask"
-						autocomplete="off"
-						class="transparent reactive"
-						@keyup.27="clearNewTask($event)">
-				</form>
-			</div>
-			<SortorderDropdown />
-		</div>
+		<Header />
 		<div class="task-list">
 			<div class="grouped-tasks">
 				<TaskDragContainer
@@ -62,16 +48,16 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
+import Header from './Header.vue'
 import DeleteCompletedModal from '../../components/DeleteCompletedModal.vue'
 import LoadCompletedButton from '../../components/LoadCompletedButton.vue'
-import SortorderDropdown from '../../components/SortorderDropdown.vue'
 import TaskDragContainer from '../../components/TaskDragContainer.vue'
 
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
 	components: {
-		SortorderDropdown,
+		Header,
 		LoadCompletedButton,
 		TaskDragContainer,
 		DeleteCompletedModal,
@@ -86,12 +72,6 @@ export default {
 			default: '',
 		},
 	},
-	data() {
-		return {
-			newTaskName: '',
-			isAddingTask: false,
-		}
-	},
 	computed: {
 		showHidden: {
 			get() {
@@ -101,11 +81,6 @@ export default {
 				this.$store.dispatch('setSetting', { type: 'showHidden', value })
 			},
 		},
-
-		inputString() {
-			return this.$t('tasks', 'Add a task to "{task}"…', { task: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
-		},
-
 		/**
 		 * Returns the string for completed tasks
 		 *
@@ -122,21 +97,8 @@ export default {
 		}),
 	},
 	methods: {
-		...mapActions([
-			'createTask',
-		]),
 		toggleHidden() {
 			this.showHidden = +!this.showHidden
-		},
-
-		clearNewTask(event) {
-			event.target.blur()
-			this.newTaskName = ''
-		},
-
-		addTask() {
-			this.createTask({ summary: this.newTaskName, calendar: this.calendar })
-			this.newTaskName = ''
 		},
 	},
 }

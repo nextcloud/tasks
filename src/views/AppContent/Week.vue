@@ -2,7 +2,7 @@
 Nextcloud - Tasks
 
 @author Raimund Schlüßler
-@copyright 2018 Raimund Schlüßler <raimund.schluessler@mailbox.org>
+@copyright 2021 Raimund Schlüßler <raimund.schluessler@mailbox.org>
 @copyright 2018 Vadim Nicolai <contact@vadimnicolai.com>
 
 This library is free software; you can redistribute it and/or
@@ -22,19 +22,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div>
-		<div class="header">
-			<div v-if="calendar && !calendar.readOnly"
-				class="add-task">
-				<form name="addTaskForm" @submit.prevent="addTask">
-					<input v-model="newTaskName"
-						:placeholder="inputString"
-						:disabled="isAddingTask"
-						class="transparent reactive"
-						@keyup.27="clearNewTask($event)">
-				</form>
-			</div>
-			<SortorderDropdown />
-		</div>
+		<Header />
 		<div class="task-list">
 			<div v-for="day in days"
 				:key="day.diff"
@@ -54,27 +42,20 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import { isTaskInList } from '../../store/storeHelper.js'
-import SortorderDropdown from '../../components/SortorderDropdown.vue'
+import Header from './Header.vue'
 import TaskDragContainer from '../../components/TaskDragContainer.vue'
 
 import moment from '@nextcloud/moment'
 
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
 	components: {
-		SortorderDropdown,
+		Header,
 		TaskDragContainer,
-	},
-	data() {
-		return {
-			newTaskName: '',
-			isAddingTask: false,
-		}
 	},
 	computed: {
 		...mapGetters({
-			calendar: 'getDefaultCalendar',
 			tasks: 'getAllTasks',
 			uncompletedRootTasks: 'findUncompletedRootTasks',
 		}),
@@ -104,16 +85,8 @@ export default {
 			// Remove all days without tasks.
 			return days.filter(day => day.tasks.length)
 		},
-
-		inputString() {
-			return this.$t('tasks', 'Add a task due today to "{calendar}"…', { calendar: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
-		},
 	},
 	methods: {
-		...mapActions([
-			'createTask',
-		]),
-
 		dayString(day) {
 			const date = moment().add(day, 'day')
 			let dayString
@@ -125,21 +98,6 @@ export default {
 				dayString = date.format('dddd')
 			}
 			return dayString + ', ' + date.format('LL')
-		},
-
-		clearNewTask(event) {
-			event.target.blur()
-			this.newTaskName = ''
-		},
-
-		addTask() {
-			const task = { summary: this.newTaskName }
-
-			task.due = moment().startOf('day').format('YYYY-MM-DDTHH:mm:ss')
-			task.allDay = this.$store.state.settings.settings.allDay
-
-			this.createTask(task)
-			this.newTaskName = ''
 		},
 	},
 }
