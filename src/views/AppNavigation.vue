@@ -88,9 +88,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			</AppNavigationItem>
 		</template>
 		<template #footer>
-			<AppNavigationSettings>
-				<TheSettings />
-			</AppNavigationSettings>
+			<TheSettings />
 		</template>
 	</AppNavigation>
 </template>
@@ -103,7 +101,6 @@ import TheSettings from '../components/AppNavigation/TheSettings.vue'
 import AppNavigation from '@nextcloud/vue/dist/Components/AppNavigation'
 import AppNavigationCounter from '@nextcloud/vue/dist/Components/AppNavigationCounter'
 import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
-import AppNavigationSettings from '@nextcloud/vue/dist/Components/AppNavigationSettings'
 
 import draggable from 'vuedraggable'
 import ClickOutside from 'v-click-outside'
@@ -113,11 +110,10 @@ export default {
 	components: {
 		ListItemCalendar,
 		Colorpicker,
-		TheSettings,
 		AppNavigation,
 		AppNavigationItem,
 		AppNavigationCounter,
-		AppNavigationSettings,
+		TheSettings,
 		draggable,
 	},
 	directives: {
