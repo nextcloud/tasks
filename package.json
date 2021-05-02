@@ -17,8 +17,7 @@
 		"lint:fix": "eslint --ext .js,.vue src tests --fix",
 		"stylelint": "stylelint 'css/src/**/*.scss'",
 		"stylelint:fix": "stylelint 'css/src/**/*.scss' --fix",
-		"test": "jest --verbose",
-		"svg_sprite": "svg-sprite --config svg-sprite-color.json img/src/color/*.svg && svg-sprite --config svg-sprite-bw.json img/src/bw/*.svg"
+		"test": "jest --verbose"
 	},
 	"repository": {
 		"type": "git",
@@ -100,7 +99,6 @@
 		"stylelint-config-recommended-scss": "^4.2.0",
 		"stylelint-scss": "^3.19.0",
 		"stylelint-webpack-plugin": "^2.1.1",
-		"svg-sprite": "^1.5.0",
 		"terser-webpack-plugin": "^5.1.1",
 		"url-loader": "^4.1.1",
 		"vue-jest": "^3.0.7",
