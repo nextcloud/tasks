@@ -215,7 +215,7 @@ li.action::v-deep {
 	}
 }
 // overlay the sort direction icon with the sort order icon
-.sort-direction {
+.material-design-icon.sort-direction {
 	position: absolute;
 	top: 0;
 	justify-content: right;
