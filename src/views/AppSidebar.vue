@@ -814,32 +814,44 @@ $blue: #4271a6;
 	width: 44px;
 	justify-content: center;
 
-	input[type='checkbox'].checkbox + label {
-		display: flex;
-		align-items: center;
-
-		&::before {
-			margin: 0;
-			border-width: 2px;
-			border-radius: var(--border-radius);
-			border-color: var(--color-border-dark);
+	input[type='checkbox'].checkbox {
+		&:checked + label::before {
+			background-image: var(--icon-checkmark-000) !important;
+			background-color: unset;
+			border-color: unset;
 		}
-
-		&:hover {
-			border-color: var(--color-border-dark);
+		&:disabled + label::before {
+			background-color: var(--color-background-darker) !important;
 		}
+		+ label {
+			display: flex;
+			align-items: center;
 
-		&.priority {
-			&--high::before {
-				border-color: $red;
+			&::before {
+				margin: 0;
+				border-width: 2px;
+				border-radius: var(--border-radius);
+				border-color: var(--color-border-dark);
+				height: 14px;
+				width: 14px;
 			}
 
-			&--medium::before {
-				border-color: $yellow;
+			&:hover {
+				border-color: var(--color-border-dark);
 			}
 
-			&--low::before {
-				border-color: $blue;
+			&.priority {
+				&--high::before {
+					border-color: $red;
+				}
+
+				&--medium::before {
+					border-color: $yellow;
+				}
+
+				&--low::before {
+					border-color: $blue;
+				}
 			}
 		}
 	}

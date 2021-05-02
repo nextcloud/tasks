@@ -48,6 +48,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</AppNavigationCounter>
 			</AppNavigationItem>
 			<draggable
+				class="draggable-container"
 				:set-data="setData"
 				v-bind="{swapThreshold: 0.30, delay: 500, delayOnTouchOnly: true, touchStartThreshold: 3}"
 				@update="update">
@@ -443,6 +444,11 @@ export default {
 
 <style lang="scss" scoped>
 $color-error: #e9322d;
+
+// ensure calendars are shown after collections
+.draggable-container {
+	order: 1;
+}
 
 .collection::v-deep {
 	&.collection--edit {

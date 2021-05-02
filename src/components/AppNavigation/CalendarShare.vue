@@ -249,3 +249,53 @@ export default {
 	},
 }
 </script>
+
+<style lang="scss" scoped>
+.calendar-shares {
+	&__shareematch--bold {
+		font-weight: bold;
+	}
+
+	.app-navigation-entry {
+		padding-left: 0 !important;
+
+		.avatar {
+			width: 32px;
+			height: 32px;
+			background-color: var(--color-border-dark);
+			background-size: 16px;
+		}
+
+		&__utils {
+			.action-checkbox__label {
+				padding-right: 0 !important;
+			}
+
+			.action-checkbox__label::before {
+				margin: 4px 4px 0 !important;
+			}
+		}
+
+		&__multiselect::v-deep {
+			padding-left: 6px !important;
+
+			.multiselect {
+				width: calc(100% - 14px);
+				margin: 0;
+				.multiselect__tags:focus-within,
+				.multiselect__tags:hover {
+					border-color: var(--color-primary-element);
+				}
+
+				&:not(.showContent) .multiselect__content-wrapper {
+					display: none;
+				}
+
+				.multiselect__content-wrapper {
+					z-index: 101 !important;
+				}
+			}
+		}
+	}
+}
+</style>

@@ -2,7 +2,7 @@
  * Nextcloud - Tasks
  *
  * @author Raimund Schlüßler
- * @copyright 2018 Raimund Schlüßler <raimund.schluessler@mailbox.org>
+ * @copyright 2021 Raimund Schlüßler <raimund.schluessler@mailbox.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -19,7 +19,112 @@
  *
  */
 
-@import './src/style';
+@include icon-black-white('circle', 'tasks', 1);
+@include icon-black-white('reminder', 'tasks', 1);
+@include icon-black-white('repeat', 'tasks', 1);
+@include icon-black-white('note', 'tasks', 1);
 
-@import './src/Calendars/Calendar.scss';
-@import './src/Calendars/CalendarShares.scss';
+// Hack for https://github.com/nextcloud/nextcloud-vue/issues/1384
+body {
+	min-height: 100%;
+	height: auto;
+}
+
+.app-navigation {
+	> ul > div > li,
+	> ul > li {
+		// Overwrite padding until https://github.com/nextcloud/nextcloud-vue/pull/1897#issuecomment-830301938
+		// is confirmed
+		&.app-navigation-entry {
+			padding: 0;
+			padding-right: 4px;
+		}
+
+		&.dnd-hover,
+		&.sortable-ghost {
+			background-color: var(--color-primary-light);
+			box-shadow: 0 0 3px var(--color-primary);
+			z-index: 1000;
+		}
+	}
+}
+
+.app-content {
+	background-color: var(--color-background-dark) !important;
+
+	> div {
+		box-sizing: border-box;
+		padding-bottom: 75px;
+
+		.task-list {
+			width: 100%;
+			padding: 0 15px;
+
+			@media only screen and (max-width: $breakpoint-mobile) {
+				padding: 0;
+			}
+
+			.grouped-tasks {
+				position: relative;
+				padding-top: 2px;
+
+				> ol {
+					filter: drop-shadow(0 0 1px var(--color-box-shadow));
+					z-index: 1;
+
+					&:hover {
+						z-index: 10;
+					}
+
+					&.completed {
+						margin-top: 12px;
+					}
+				}
+			}
+		}
+	}
+
+	.heading {
+		display: flex;
+		align-items: center;
+		margin-top: 20px !important;
+
+		@media only screen and (max-width: $breakpoint-mobile) {
+			padding-left: 15px;
+		}
+
+		&--hiddentasks {
+			margin-bottom: 0;
+
+			.heading__title {
+				display: inline-block;
+				padding-right: 16px;
+				background-position: right center;
+				cursor: pointer;
+				&:hover {
+					opacity: .7;
+				}
+			}
+		}
+
+		&__title {
+			font-weight: bold;
+			font-size: 13px;
+			word-wrap: break-word;
+			opacity: .5;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+
+		}
+
+		&__icon-bullet {
+			width: 14px;
+			min-width: 14px;
+			height: 14px;
+			border: none;
+			border-radius: 50%;
+			margin-right: 8px;
+		}
+	}
+}
