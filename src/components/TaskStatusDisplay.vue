@@ -2,7 +2,7 @@
 Nextcloud - Tasks
 
 @author Raimund Schlüßler
-@copyright 2018 Raimund Schlüßler <raimund.schluessler@mailbox.org>
+@copyright 2021 Raimund Schlüßler <raimund.schluessler@mailbox.org>
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -20,24 +20,42 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<div v-if="status"
-		v-tooltip="{
-			content: status.message,
-			html: true
-		}"
-		class="status-display"
-		:class="status.cssClass"
-		@click="react" />
+	<Actions v-if="status" :disabled="isDisabled">
+		<ActionButton :disabled="isDisabled" :class="[`status--${status.status}`]" @click="statusClicked">
+			<template slot="icon">
+				<AlertCircleOutline :size="24" class="status--error" />
+				<Check :size="24" class="status--success" />
+				<Loading :size="24" class="status--sync" />
+				<SyncAlert :size="24" class="status--conflict" />
+			</template>
+			{{ status.message }}
+		</ActionButton>
+	</Actions>
 </template>
 
 <script>
+import Actions from '@nextcloud/vue/dist/Components/Actions'
+import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
+
+import AlertCircleOutline from 'vue-material-design-icons/AlertCircleOutline.vue'
+import Check from 'vue-material-design-icons/Check.vue'
+import Loading from 'vue-material-design-icons/Loading.vue'
+import SyncAlert from 'vue-material-design-icons/SyncAlert.vue'
 
 export default {
 	name: 'TaskStatusDisplay',
+	components: {
+		Actions,
+		ActionButton,
+		AlertCircleOutline,
+		Check,
+		Loading,
+		SyncAlert,
+	},
 	props: {
-		task: {
+		status: {
 			type: Object,
-			required: true,
+			default: null,
 		},
 	},
 	data() {
@@ -46,8 +64,8 @@ export default {
 		}
 	},
 	computed: {
-		status() {
-			return this.task.syncstatus
+		isDisabled() {
+			return this.status.status !== 'conflict'
 		},
 	},
 	watch: {
@@ -59,25 +77,19 @@ export default {
 		this.checkTimeout(this.status)
 	},
 	methods: {
-		react() {
-			// Prevent event dispatching if action is null (e.g. successful store)
-			if (this.status.action === null) {
-				return
-			}
-
-			this.$store.dispatch(this.status.action, { task: this.task })
+		statusClicked() {
+			this.$emit('statusClicked')
 		},
 		checkTimeout(newStatus) {
 			if (newStatus) {
 				if (this.resetStatusTimeout) {
 					clearTimeout(this.resetStatusTimeout)
 				}
-				if (newStatus.duration > 0) {
+				if (newStatus.status === 'success') {
 					this.resetStatusTimeout = setTimeout(
 						() => {
-							this.$store.commit('resetStatus', { task: this.task })
-							// this.task.syncstatus = null
-						}, this.status.duration
+							this.$emit('resetStatus')
+						}, 5000
 					)
 				}
 			}
@@ -85,3 +97,71 @@ export default {
 	},
 }
 </script>
+
+<style lang="scss" scoped>
+.action-item {
+	&:disabled {
+		opacity: 1 !important;
+	}
+	.material-design-icon {
+		display: none;
+	}
+	&.status {
+		&--error {
+			color: var(--color-error);
+
+			.status--error {
+				display: flex;
+			}
+		}
+		&--success {
+			color: var(--color-success);
+
+			.status--success {
+				display: flex;
+			}
+		}
+		&--sync svg,
+		&--conflict svg {
+			animation-iteration-count: infinite;
+			animation-duration: 1s;
+		}
+		&--sync {
+			.status--sync {
+				display: flex;
+			}
+			svg {
+				animation-name: spin;
+			}
+		}
+		&--conflict {
+			.status--conflict {
+				display: flex;
+			}
+			svg {
+				animation-name: pulse;
+				border-radius: 50%;
+			}
+		}
+	}
+}
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+@keyframes pulse {
+	0% {
+		box-shadow: 0 0 0 0 rgba(50, 50, 50, .4);
+	}
+	70% {
+		box-shadow: 0 0 0 10px rgba(50, 50, 50, 0);
+	}
+	100% {
+		box-shadow: 0 0 0 0 rgba(50, 50, 50, 0);
+	}
+}
+</style>

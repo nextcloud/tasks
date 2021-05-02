@@ -2,7 +2,7 @@
 Nextcloud - Tasks
 
 @author Raimund Schlüßler
-@copyright 2018 Raimund Schlüßler <raimund.schluessler@mailbox.org>
+@copyright 2021 Raimund Schlüßler <raimund.schluessler@mailbox.org>
 @copyright 2018 Vadim Nicolai <contact@vadimnicolai.com>
 
 This library is free software; you can redistribute it and/or
@@ -73,9 +73,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			</div>
 			<!-- Icons: sync-status, calendarname, date, note, subtask-show-completed, subtask-visibility, add-subtask, starred -->
 			<div class="task-body__icons">
-				<div class="task-status-container">
-					<TaskStatusDisplay :task="task" />
-				</div>
+				<TaskStatusDisplay
+					:status="task.syncStatus"
+					class="reactive no-nav"
+					@statusClicked="updateTask"
+					@resetStatus="resetStatus({ task })" />
 				<div v-if="collectionId=='week'" class="calendar">
 					<span :style="{'background-color': task.calendar.color}" class="calendar__indicator" />
 					<span class="calendar__name">{{ task.calendar.displayName }}</span>
@@ -175,7 +177,7 @@ import Star from 'vue-material-design-icons/Star.vue'
 import Undo from 'vue-material-design-icons/Undo.vue'
 
 import ClickOutside from 'v-click-outside'
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 const CD_DURATION = 7
 
@@ -439,12 +441,20 @@ export default {
 			'toggleSubtasksVisibility',
 			'toggleCompletedSubtasksVisibility',
 			'deleteTask',
+			'fetchFullTask',
 		]),
+		...mapMutations(['resetStatus']),
 		sort,
 		/**
 		 * Checks if a date is overdue
 		 */
 		overdue,
+
+		updateTask() {
+			if (this.task.syncStatus?.status === 'conflict') {
+				this.fetchFullTask({ task: this.task })
+			}
+		},
 
 		/**
 		 * Set task uri in the data transfer object

@@ -22,7 +22,7 @@
 
 import Task from '../models/task.js'
 import { isParentInList, momentToICALTime } from './storeHelper.js'
-import TaskStatus from '../models/taskStatus.js'
+import SyncStatus from '../models/syncStatus.js'
 import router from '../router.js'
 import { findVTODObyUid } from './cdav-requests.js'
 
@@ -592,7 +592,7 @@ const mutations = {
 	resetStatus(state, { task }) {
 		if (state.tasks[task.key] && task instanceof Task) {
 			// replace task object data
-			state.tasks[task.key].syncstatus = null
+			state.tasks[task.key].syncStatus = null
 		}
 	},
 
@@ -681,7 +681,7 @@ const actions = {
 			await task.calendar.dav.createVObject(vData)
 				.then((response) => {
 					Vue.set(task, 'dav', response)
-					task.syncstatus = new TaskStatus('success', OCA.Tasks.$t('tasks', 'Successfully created the task.'))
+					task.syncStatus = new SyncStatus('success', OCA.Tasks.$t('tasks', 'Successfully created the task.'))
 					context.commit('appendTask', task)
 					context.commit('addTaskToCalendar', task)
 					const parent = context.getters.getTaskByUid(task.related)
@@ -747,7 +747,7 @@ const actions = {
 				})
 				.catch((error) => {
 					console.debug(error)
-					task.syncstatus = new TaskStatus('error', OCA.Tasks.$t('tasks', 'Could not delete the task.'))
+					task.syncStatus = new SyncStatus('error', OCA.Tasks.$t('tasks', 'Could not delete the task.'))
 				})
 		} else {
 			deleteTaskFromStore()
@@ -790,10 +790,10 @@ const actions = {
 
 		if (!task.conflict) {
 			task.dav.data = vCalendar
-			task.syncstatus = new TaskStatus('sync', OCA.Tasks.$t('tasks', 'Synchronizing to the server.'))
+			task.syncStatus = new SyncStatus('sync', OCA.Tasks.$t('tasks', 'Synchronizing to the server.'))
 			return task.dav.update()
 				.then((response) => {
-					task.syncstatus = new TaskStatus('success', OCA.Tasks.$t('tasks', 'Task successfully saved to server.'))
+					task.syncStatus = new SyncStatus('success', OCA.Tasks.$t('tasks', 'Task successfully saved to server.'))
 				})
 				.catch((error) => {
 					// Wrong etag, we most likely have a conflict
@@ -801,13 +801,13 @@ const actions = {
 						// Saving the new etag so that the user can manually
 						// trigger a fetchCompleteData without any further errors
 						task.conflict = error.xhr.getResponseHeader('etag')
-						task.syncstatus = new TaskStatus('refresh', OCA.Tasks.$t('tasks', 'Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded.'), 'fetchFullTask')
+						task.syncStatus = new SyncStatus('conflict', OCA.Tasks.$t('tasks', 'Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded.'))
 					} else {
-						task.syncstatus = new TaskStatus('error', OCA.Tasks.$t('tasks', 'Could not update the task.'))
+						task.syncStatus = new SyncStatus('error', OCA.Tasks.$t('tasks', 'Could not update the task.'))
 					}
 				})
 		} else {
-			task.syncstatus = new TaskStatus('refresh', OCA.Tasks.$t('tasks', 'Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded.'), 'fetchFullTask')
+			task.syncStatus = new SyncStatus('conflict', OCA.Tasks.$t('tasks', 'Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded.'))
 		}
 	},
 
@@ -1205,7 +1205,7 @@ const actions = {
 		return task.dav.fetchCompleteData()
 			.then((response) => {
 				const newTask = new Task(task.dav.data, task.calendar)
-				task.syncstatus = new TaskStatus('success', OCA.Tasks.$t('tasks', 'Successfully updated the task.'))
+				task.syncStatus = new SyncStatus('success', OCA.Tasks.$t('tasks', 'Successfully updated the task.'))
 				task.conflict = false
 				context.commit('updateTask', newTask)
 			})
@@ -1275,7 +1275,7 @@ const actions = {
 					context.commit('setTaskCalendar', { task, calendar })
 					// Remove the task from the calendar, add it to the new one
 					context.commit('addTaskToCalendar', task)
-					task.syncstatus = new TaskStatus('success', OCA.Tasks.$t('tasks', 'Task successfully moved to new calendar.'))
+					task.syncStatus = new SyncStatus('success', OCA.Tasks.$t('tasks', 'Task successfully moved to new calendar.'))
 				})
 				.catch((error) => {
 					console.error(error)
