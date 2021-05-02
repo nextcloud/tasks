@@ -41,8 +41,8 @@ $blue_due: #4271a6;			// due dates and low importance
 }
 
 /**
-	* rules for app-content
-	*/
+* rules for app-content
+*/
 
 * {
 	margin: 0;
@@ -152,10 +152,6 @@ $blue_due: #4271a6;			// due dates and low importance
 /**
 * rules for icons
 */
-.collection .icon {
-	opacity: 1;
-}
-
 button.inline {
 	box-sizing: border-box;
 	width: 44px;
@@ -177,10 +173,6 @@ button.inline {
 	}
 }
 
-.disabled .icon.detail-star:hover {
-	cursor: not-allowed;
-}
-
 input[type='checkbox'].checkbox {
 	&:checked + label::before {
 		background-image: var(--icon-checkmark-000) !important;
@@ -196,46 +188,6 @@ input[type='checkbox'].checkbox {
 	}
 }
 
-.icon {
-	height: 16px;
-	width: 16px;
-	display: inline-block;
-	vertical-align: middle;
-	opacity: .5;
-	transition: opacity 100ms ease 0s;
-	cursor: default;
-
-	&.reactive {
-		cursor: pointer;
-
-		&:hover {
-			opacity: .7;
-		}
-	}
-
-	&.disabled {
-		cursor: not-allowed;
-	}
-
-	&.active {
-		opacity: .7;
-	}
-
-	&.sprt-checkmark,
-	&.sprt-tag-active,
-	&[class*=' sprt-task-star-'] {
-		opacity: 1 !important;
-	}
-
-	&.right {
-		float: right;
-	}
-}
-
 .tooltip-arrow {
 	width: unset !important;
-}
-
-.icon span {
-	font-family: var(--font-face);
 }
