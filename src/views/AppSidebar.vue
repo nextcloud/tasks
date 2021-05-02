@@ -20,457 +20,422 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<div class="content-wrapper">
-		<div v-if="task"
-			:class="{'disabled': readOnly}"
-			class="flex-container">
-			<div :class="{'editing': edit=='summary'}" class="title">
-				<span class="detail-checkbox">
-					<input :id="'detailsToggleCompleted_' + task.uid"
-						type="checkbox"
-						class="checkbox"
-						name="detailsToggleCompleted"
-						:class="{'disabled': readOnly}"
-						:checked="task.completed"
-						:aria-checked="task.completed"
-						:disabled="readOnly"
-						:aria-label="$t('tasks', 'Task is completed')"
-						@click="toggleCompleted(task)">
-					<label :class="[checkboxColor]" :for="'detailsToggleCompleted_' + task.uid" />
-				</span>
-				<div v-click-outside="() => finishEditing('summary')" class="title-wrapper">
-					<div v-linkify="task.summary"
-						:class="{'strike-through': task.completed}"
-						class="title-text"
-						@click="editProperty('summary', $event)" />
-					<div class="expandable-container">
-						<div class="expandingArea active">
-							<pre><span>{{ tmpTask.summary }}</span><br></pre>
-							<textarea id="summaryInput"
-								v-model="tmpTask.summary"
-								maxlength="200"
-								@keyup.27="cancelEditing('summary')"
-								@keydown.enter.prevent="finishEditing('summary')" />
-						</div>
-					</div>
-				</div>
-				<TaskStatusDisplay :task="task" />
-				<button class="reactive inline" @click="togglePinned(task)">
-					<span :class="[{'disabled': readOnly}, iconPinned]" class="icon" />
-				</button>
-				<button class="reactive inline" @click="toggleStarred(task)">
-					<span :class="[{'disabled': readOnly}, iconStar]"
-						class="icon" />
-				</button>
+	<AppSidebar
+		:title="title"
+		:title-editable="editingTitle"
+		:linkify-title="true"
+		:subtitle="subtitle"
+		:empty="!task"
+		@start-editing="newTitle = task.summary"
+		@update:titleEditable="editTitle"
+		@update:title="updateTitle"
+		@submit-title="saveTitle"
+		@close="closeAppSidebar()">
+		<template v-if="task" #description>
+			<DatetimePickerItem
+				v-show="!readOnly || task.start"
+				:date="task.startMoment"
+				:value="newStartDate"
+				:all-day="allDay"
+				:property-string="startDateString"
+				:read-only="readOnly"
+				:task="task"
+				@editing="(editing) => editingStart = editing"
+				@setValue="setStartDate">
+				<CalendarStart slot="icon" :size="24" decorative />
+			</DatetimePickerItem>
+			<DatetimePickerItem
+				v-show="!readOnly || task.due"
+				:date="task.dueMoment"
+				:value="newDueDate"
+				:all-day="allDay"
+				:property-string="dueDateString"
+				:read-only="readOnly"
+				:task="task"
+				@editing="(editing) => editingDue = editing"
+				@setValue="setDueDate">
+				<CalendarEnd slot="icon" :size="24" decorative />
+			</DatetimePickerItem>
+			<CheckboxItem
+				v-show="showAllDayToggle"
+				id="allDayToggle"
+				:checked="allDay"
+				:read-only="readOnly"
+				:property-string="$t('tasks', 'All day')"
+				@setChecked="toggleAllDay(task)" />
+			<CalendarPickerItem
+				:disabled="readOnly"
+				:calendar="task.calendar"
+				:calendars="targetCalendars"
+				@changeCalendar="changeCalendar" />
+		</template>
+
+		<template #secondary-actions>
+			<ActionButton v-if="!readOnly"
+				@click="togglePinned(task)">
+				<PinOff v-if="task.pinned"
+					slot="icon"
+					:size="24"
+					decorative />
+				<Pin v-else
+					slot="icon"
+					:size="24"
+					decorative />
+				{{ task.pinned ? $t('tasks', 'Unpin') : $t('tasks', 'Pin') }}
+			</ActionButton>
+			<ActionLink v-if="showInCalendar"
+				:href="calendarLink"
+				:close-after-click="true"
+				target="_blank">
+				<Calendar slot="icon" :size="24" decorative />
+				{{ $t('tasks', 'Show in Calendar') }}
+			</ActionLink>
+			<ActionButton v-if="!readOnly"
+				:close-after-click="true"
+				@click="editTitle(true)">
+				<Pencil slot="icon" :size="24" decorative />
+				{{ $t('tasks', 'Edit title') }}
+			</ActionButton>
+			<ActionLink
+				:href="downloadURL"
+				:close-after-click="true">
+				<Download slot="icon" :size="24" decorative />
+				{{ $t('tasks', 'Download') }}
+			</ActionLink>
+			<ActionButton v-if="!readOnly"
+				@click="removeTask">
+				<Delete slot="icon" :size="24" decorative />
+				{{ $t('tasks', 'Delete') }}
+			</ActionButton>
+		</template>
+
+		<template #tertiary-actions>
+			<span class="app-sidebar-header__checkbox">
+				<input :id="'detailsToggleCompleted_' + task.uid"
+					type="checkbox"
+					class="checkbox"
+					:class="{'disabled': readOnly}"
+					:checked="task.completed"
+					:aria-checked="task.completed"
+					:disabled="readOnly"
+					:aria-label="$t('tasks', 'Task is completed')"
+					@click="toggleCompleted(task)">
+				<label :class="[priorityClass]" :for="'detailsToggleCompleted_' + task.uid" />
+			</span>
+		</template>
+
+		<AppSidebarTab v-if="task"
+			id="app-sidebar-tab-details"
+			class="app-sidebar-tab"
+			icon="icon-details"
+			:name="$t('tasks', 'Details')"
+			:order="0">
+			<div>
+				<MultiselectItem
+					v-show="!readOnly || task.class !== 'PUBLIC'"
+					:value="classSelect.find( _ => _.type === task.class )"
+					:options="classSelect"
+					:disabled="readOnly || task.calendar.isSharedWithMe"
+					:placeholder="$t('tasks', 'Select a classification')"
+					icon="IconEye"
+					@changeValue="changeClass" />
+				<MultiselectItem
+					v-show="!readOnly || task.status"
+					:value="statusOptions.find( _ => _.type === task.status )"
+					:options="statusOptions"
+					:disabled="readOnly"
+					:placeholder="$t('tasks', 'Select a status')"
+					icon="IconPulse"
+					@changeValue="changeStatus" />
+				<SliderItem
+					v-show="!readOnly || task.priority"
+					:value="task.priority"
+					:property-string="priorityString"
+					:read-only="readOnly"
+					:min-value="0"
+					:max-value="9"
+					:color="priorityColor"
+					:task="task"
+					@setValue="({task, value}) => setPriority({ task, priority: value })">
+					<Star slot="icon" :size="24" decorative />
+				</SliderItem>
+				<SliderItem
+					v-show="!readOnly || task.complete"
+					:value="task.complete"
+					:property-string="completeString"
+					:read-only="readOnly"
+					:min-value="0"
+					:max-value="100"
+					:color="task.complete > 0 ? '#4271a6' : null"
+					:task="task"
+					@setValue="({task, value}) => setPercentComplete({ task, complete: value })">
+					<Percent slot="icon" :size="24" decorative />
+				</SliderItem>
+				<TagsItem
+					v-show="!readOnly || task.tags.length > 0"
+					:options="tags"
+					:tags="task.tags"
+					:disabled="readOnly"
+					:placeholder="$t('tasks', 'Select tags')"
+					icon="IconTag"
+					@addTag="updateTag"
+					@setTags="updateTags" />
 			</div>
-			<div class="body">
-				<ul class="sections">
-					<li v-show="!readOnly || task.start"
-						:class="{'date': task.startMoment.isValid(), 'editing': edit=='start', 'high': overdue(task.startMoment)}"
-						class="section detail-start">
-						<div v-click-outside="($event) => finishEditing('start', $event)"
-							class="section-content"
-							@click="editProperty('start', $event)">
-							<span class="section-icon">
-								<span :class="[startDateIcon(task.startMoment)]"
-									class="icon" />
-							</span>
-							<span class="section-title">
-								{{ startDateString }}
-							</span>
-							<div v-if="edit=='start'" class="section-edit">
-								<DatetimePicker :value="tmpTask.start.toDate()"
-									:lang="lang"
-									:format="dateFormat"
-									:clearable="false"
-									type="date"
-									:placeholder="$t('tasks', 'Set start date')"
-									class="date"
-									@change="setStartDate" />
-								<DatetimePicker v-if="!allDay"
-									:value="tmpTask.start.toDate()"
-									:lang="lang"
-									:format="timeFormat"
-									:clearable="false"
-									:time-picker-options="timePickerOptions"
-									type="time"
-									:placeholder="$t('tasks', 'Set start time')"
-									class="time"
-									@change="setStartTime" />
-							</div>
-						</div>
-						<div class="section-utils">
-							<button class="inline reactive">
-								<span class="icon sprt-color sprt-checkmark-color" />
-							</button>
-							<button class="delete inline reactive" @click="setProperty('start', null)">
-								<span class="icon icon-sprt-bw sprt-trash" />
-							</button>
-						</div>
-					</li>
-					<li v-show="!readOnly || task.due"
-						:class="{'date': task.dueMoment.isValid(), 'editing': edit=='due', 'high': overdue(task.dueMoment)}"
-						class="section detail-date">
-						<div v-click-outside="($event) => finishEditing('due', $event)"
-							class="section-content"
-							@click="editProperty('due', $event)">
-							<span class="section-icon">
-								<span :class="[dueDateIcon(task.dueMoment)]"
-									class="icon" />
-							</span>
-							<span class="section-title">
-								{{ dueDateString }}
-							</span>
-							<div v-if="edit=='due'" class="section-edit">
-								<DatetimePicker :value="tmpTask.due.toDate()"
-									:lang="lang"
-									:format="dateFormat"
-									:clearable="false"
-									type="date"
-									:placeholder="$t('tasks', 'Set due date')"
-									class="date"
-									@change="setDueDate" />
-								<DatetimePicker v-if="!allDay"
-									:value="tmpTask.due.toDate()"
-									:lang="lang"
-									:format="timeFormat"
-									:clearable="false"
-									:time-picker-options="timePickerOptions"
-									type="time"
-									:placeholder="$t('tasks', 'Set due time')"
-									class="time"
-									@change="setDueTime" />
-							</div>
-						</div>
-						<div class="section-utils">
-							<button class="inline reactive">
-								<span class="icon sprt-color sprt-checkmark-color" />
-							</button>
-							<button class="delete inline reactive" @click="setProperty('due', null)">
-								<span class="icon icon-sprt-bw sprt-trash" />
-							</button>
-						</div>
-					</li>
-					<li v-show="isAllDayPossible"
-						class="section detail-all-day reactive">
-						<div class="section-content">
-							<input id="isAllDayPossible"
-								type="checkbox"
-								class="checkbox"
-								name="isAllDayPossible"
-								:class="{'disabled': readOnly}"
-								:aria-checked="allDay"
-								:checked="allDay"
-								:disabled="readOnly"
-								@click="toggleAllDay(task)">
-							<label for="isAllDayPossible">
-								<span>{{ $t('tasks', 'All day') }}</span>
-							</label>
-						</div>
-					</li>
-					<li class="section detail-calendar reactive">
-						<div v-click-outside="() => finishEditing('calendar')"
-							class="section-content"
-							@click="editProperty('calendar')">
-							<span class="section-icon">
-								<span :style="{'background-color': task.calendar.color}" class="calendar-indicator" />
-							</span>
-							<div class="detail-multiselect-container blue">
-								<Multiselect
-									:value="task.calendar"
-									:multiple="false"
-									:allow-empty="false"
-									:disabled="readOnly"
-									track-by="id"
-									:placeholder="$t('tasks', 'Select a calendar')"
-									label="displayName"
-									:options="targetCalendars"
-									:close-on-select="true"
-									class="multiselect-vue"
-									@input="changeCalendar"
-									@tag="changeCalendar" />
-							</div>
-						</div>
-					</li>
-					<li class="section detail-class reactive">
-						<div v-click-outside="() => finishEditing('class')"
-							class="section-content"
-							@click="editProperty('class')">
-							<span class="section-icon">
-								<span class="icon sprt-color sprt-privacy" />
-							</span>
-							<div class="detail-multiselect-container blue">
-								<Multiselect
-									:value="classSelect.find( _ => _.type === task.class )"
-									:multiple="false"
-									:allow-empty="false"
-									:disabled="readOnly || task.calendar.isSharedWithMe"
-									track-by="type"
-									:placeholder="$t('tasks', 'Select a classification')"
-									label="displayName"
-									:options="classSelect"
-									:close-on-select="true"
-									class="multiselect-vue"
-									@input="changeClass"
-									@tag="changeClass" />
-							</div>
-						</div>
-					</li>
-					<li v-show="!readOnly || task.status"
-						class="section detail-class reactive">
-						<div v-click-outside="() => finishEditing('status')"
-							class="section-content"
-							@click="editProperty('status')">
-							<span class="section-icon">
-								<span :class="[iconStatus]" class="icon" />
-							</span>
-							<div class="detail-multiselect-container blue">
-								<Multiselect
-									:value="statusSelect.find( _ => _.type === task.status )"
-									:multiple="false"
-									:allow-empty="false"
-									:disabled="readOnly"
-									track-by="type"
-									:placeholder="$t('tasks', 'Select a status')"
-									label="displayName"
-									:options="statusSelect"
-									:close-on-select="true"
-									class="multiselect-vue"
-									@input="changeStatus"
-									@tag="changeStatus" />
-							</div>
-						</div>
-					</li>
-					<li v-show="!readOnly || task.priority"
-						:class="[{'editing': edit=='priority', 'date': task.priority>0}, priorityClass]"
-						class="section detail-priority">
-						<div v-click-outside="() => finishEditing('priority')"
-							class="section-content"
-							@click="editProperty('priority')">
-							<span class="section-icon">
-								<span :class="[iconStar]" class="icon" />
-							</span>
-							<span class="section-title">
-								{{ priorityString }}
-							</span>
-							<div class="section-edit">
-								<input v-model="tmpTask.priority"
-									class="priority-input"
-									type="number"
-									min="0"
-									max="9"
-									@keyup.27="cancelEditing('priority')"
-									@keydown.enter.prevent="finishEditing('priority')">
-								<input v-model="tmpTask.priority"
-									type="range"
-									min="0"
-									max="9"
-									step="1">
-							</div>
-						</div>
-						<div class="section-utils">
-							<button class="inline reactive">
-								<span class="icon sprt-color sprt-checkmark-color" />
-							</button>
-							<button class="delete inline reactive" @click="setProperty('priority', 0)">
-								<span class="icon icon-sprt-bw sprt-trash" />
-							</button>
-						</div>
-					</li>
-					<li v-show="!readOnly || task.complete"
-						:class="{'editing': edit=='complete', 'date': task.complete>0}"
-						class="section detail-complete">
-						<div v-click-outside="() => finishEditing('complete')"
-							class="section-content"
-							@click="editProperty('complete')">
-							<span class="section-icon">
-								<span :class="[iconPercent]" class="icon" />
-							</span>
-							<span class="section-title">
-								{{ completeString }}
-							</span>
-							<div class="section-edit">
-								<input v-model="tmpTask.complete"
-									class="percent-input"
-									type="number"
-									min="0"
-									max="100"
-									@keyup.27="cancelEditing('complete')"
-									@keydown.enter.prevent="finishEditing('complete')">
-								<input v-model="tmpTask.complete"
-									type="range"
-									min="0"
-									max="100"
-									step="1">
-							</div>
-						</div>
-						<div class="section-utils">
-							<button class="inline reactive">
-								<span class="icon sprt-color sprt-checkmark-color" />
-							</button>
-							<button class="delete inline reactive" @click="setProperty('complete', 0)">
-								<span class="icon icon-sprt-bw sprt-trash" />
-							</button>
-						</div>
-					</li>
-					<li v-show="!readOnly || task.tags.length>0" :class="{'active': task.tags.length>0}" class="section">
-						<div class="section-content">
-							<span class="section-icon">
-								<span :class="[iconTags]" class="icon" />
-							</span>
-							<div class="detail-multiselect-container">
-								<Multiselect v-if="task.tags"
-									v-model="task.tags"
-									:multiple="true"
-									:searchable="true"
-									:disabled="readOnly"
-									:options="tags"
-									:placeholder="$t('tasks', 'Select tags')"
-									:taggable="true"
-									:tag-placeholder="$t('tasks', 'Add this as a new tag')"
-									:close-on-select="false"
-									class="multiselect-vue"
-									@input="updateTags"
-									@tag="updateTag" />
-							</div>
-						</div>
-					</li>
-					<li v-show="!readOnly || task.note" class="section detail-note">
-						<div class="section-content note">
-							<div v-click-outside="() => finishEditing('note')"
-								class="note-body selectable"
-								@click="editProperty('note', $event)">
-								<div :class="{'editing': edit=='note'}" class="content-fakeable">
-									<Markdown id="markdown"
-										:source="task.note"
-										class="display-view" />
-									<div class="edit-view">
-										<div class="expandingArea active">
-											<pre><span>{{ tmpTask.note }}</span><br><br></pre>
-											<textarea id="noteInput" v-model="tmpTask.note" @change="setProperty('note', tmpTask.note)" />
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</li>
-				</ul>
-			</div>
-			<div class="footer">
-				<button :style="{visibility: readOnly ? 'hidden' : 'visible'}"
-					class="close-all reactive inline"
-					@click="removeTask">
-					<span class="icon icon-sprt-bw sprt-trash" />
-				</button>
-				<span v-tooltip="{
-						content: taskInfo,
-						html: true,
-					}"
-					class="info">
-					<span class="icon icon-info" />
-				</span>
-				<button class="close-all reactive inline" @click="closeDetails">
-					<span class="icon icon-sprt-bw sprt-hide" />
-				</button>
-			</div>
-		</div>
-		<div v-else class="notice">
-			<span v-if="loading">{{ $t('tasks', 'Loading task from server.') }}</span>
-			<span v-else>{{ $t('tasks', 'Task not found!') }}</span>
-		</div>
-	</div>
+		</AppSidebarTab>
+		<EmptyContent v-else
+			:icon="taskStatusIcon">
+			{{ taskStatusLabel }}
+		</EmptyContent>
+		<AppSidebarTab v-if="task && (!readOnly || task.note)"
+			id="app-sidebar-tab-notes"
+			class="app-sidebar-tab"
+			icon="icon-note"
+			:name="$t('tasks', 'Notes')"
+			:order="1">
+			<NotesItem
+				v-show="!readOnly || task.note"
+				:value="task.note"
+				:read-only="readOnly"
+				:task="task"
+				@setValue="({task, value}) => setNote({ task, note: value })" />
+		</AppSidebarTab>
+		<!-- <AppSidebarTab v-if="task"
+			id="app-sidebar-tab-reminder"
+			class="app-sidebar-tab"
+			icon="icon-reminder"
+			:name="$t('tasks', 'Reminders')"
+			:order="2">
+			Reminders
+		</AppSidebarTab>
+		<AppSidebarTab v-if="task"
+			id="app-sidebar-tab-repeat"
+			class="app-sidebar-tab"
+			icon="icon-repeat"
+			:name="$t('tasks', 'Repeat')"
+			:order="3">
+			Repeat
+		</AppSidebarTab> -->
+	</AppSidebar>
 </template>
 
 <script>
-import { overdue } from '../store/storeHelper.js'
-import Markdown from '../components/Markdown.vue'
-import TaskStatusDisplay from '../components/TaskStatusDisplay.vue'
-import { linkify } from '../directives/linkify.js'
+import CheckboxItem from '../components/AppSidebar/CheckboxItem.vue'
+import DatetimePickerItem from '../components/AppSidebar/DatetimePickerItem.vue'
+import CalendarPickerItem from '../components/AppSidebar/CalendarPickerItem.vue'
+import MultiselectItem from '../components/AppSidebar/MultiselectItem.vue'
+import SliderItem from '../components/AppSidebar/SliderItem.vue'
+import TagsItem from '../components/AppSidebar/TagsItem.vue'
+import NotesItem from '../components/AppSidebar/NotesItem.vue'
+// import TaskStatusDisplay from '../components/TaskStatusDisplay.vue'
 
+import { subscribe, unsubscribe } from '@nextcloud/event-bus'
 import moment from '@nextcloud/moment'
-import DatetimePicker from '@nextcloud/vue/dist/Components/DatetimePicker'
-import Multiselect from '@nextcloud/vue/dist/Components/Multiselect'
+import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
+import ActionLink from '@nextcloud/vue/dist/Components/ActionLink'
+import EmptyContent from '@nextcloud/vue/dist/Components/EmptyContent'
+import AppSidebar from '@nextcloud/vue/dist/Components/AppSidebar'
+import AppSidebarTab from '@nextcloud/vue/dist/Components/AppSidebarTab'
+import { generateUrl } from '@nextcloud/router'
 
-import ClickOutside from 'v-click-outside'
+import Calendar from 'vue-material-design-icons/Calendar.vue'
+import CalendarStart from 'vue-material-design-icons/CalendarStart.vue'
+import CalendarEnd from 'vue-material-design-icons/CalendarEnd.vue'
+import Delete from 'vue-material-design-icons/Delete.vue'
+import Download from 'vue-material-design-icons/Download.vue'
+import Pencil from 'vue-material-design-icons/Pencil.vue'
+import Pin from 'vue-material-design-icons/Pin.vue'
+import PinOff from 'vue-material-design-icons/PinOff.vue'
+import Star from 'vue-material-design-icons/Star.vue'
+import Percent from 'vue-material-design-icons/Percent.vue'
+
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
 	components: {
-		DatetimePicker,
-		Multiselect,
-		Markdown,
-		TaskStatusDisplay,
-	},
-	directives: {
-		clickOutside: ClickOutside.directive,
-		linkify,
-	},
-	filters: {
-	},
-
-	/**
-	 * Before we close the details view, we save possible edits.
-	 *
-	 * @param {Route} to The target Route Object being navigated to.
-	 * @param {Route} from The current route being navigated away from.
-	 * @param {Function} next This function must be called to resolve the hook.
-	 */
-	beforeRouteLeave(to, from, next) {
-		this.finishEditing(this.edit)
-		next()
-	},
-
-	/**
-	 * Before we navigate to a new task, we save possible edits.
-	 *
-	 * @param {Route} to The target Route Object being navigated to.
-	 * @param {Route} from The current route being navigated away from.
-	 * @param {Function} next This function must be called to resolve the hook.
-	 */
-	beforeRouteUpdate(to, from, next) {
-		this.finishEditing(this.edit)
-		next()
+		AppSidebar,
+		AppSidebarTab,
+		ActionButton,
+		ActionLink,
+		CheckboxItem,
+		DatetimePickerItem,
+		Calendar,
+		CalendarStart,
+		CalendarEnd,
+		Delete,
+		Download,
+		Pencil,
+		Pin,
+		PinOff,
+		Star,
+		Percent,
+		EmptyContent,
+		MultiselectItem,
+		SliderItem,
+		TagsItem,
+		CalendarPickerItem,
+		NotesItem,
+		// TaskStatusDisplay,
 	},
 	data() {
 		return {
+			editingTitle: false,
+			editingStart: false,
+			editingDue: false,
 			loading: false,
-			edit: '',
-			tmpTask: {
-				summary: '',
-				start: '',
-				due: '',
-				priority: '',
-				complete: '',
-				note: '',
-			},
-			lang: {
-				formatLocale: {
-					firstDayOfWeek: window.firstDay,
-				},
-				days: window.dayNamesShort, // provided by nextcloud
-				months: window.monthNamesShort, // provided by nextcloud
-			},
-			dateFormat: moment.localeData().longDateFormat('L'),
-			timeFormat: moment.localeData().longDateFormat('LT'),
-			timePickerOptions: {
-				start: '00:00',
-				step: '00:30',
-				end: '23:30',
-			},
 			classSelect: [
-				{ displayName: this.$t('tasks', 'When shared show full event'), type: 'PUBLIC' },
-				{ displayName: this.$t('tasks', 'When shared show only busy'), type: 'CONFIDENTIAL' },
-				{ displayName: this.$t('tasks', 'When shared hide this event'), type: 'PRIVATE' },
+				{
+					displayName: this.$t('tasks', 'When shared show full event'),
+					type: 'PUBLIC',
+					icon: 'IconEye',
+				},
+				{
+					displayName: this.$t('tasks', 'When shared show only busy'),
+					type: 'CONFIDENTIAL',
+					icon: 'IconCalendarRemove',
+					optionClass: 'active',
+				},
+				{
+					displayName: this.$t('tasks', 'When shared hide this event'),
+					type: 'PRIVATE',
+					icon: 'IconEyeOff',
+					optionClass: 'active',
+				},
 			],
-			statusSelect: [
-				{ displayName: this.$t('tasks', 'Needs action'), type: 'NEEDS-ACTION' },
-				{ displayName: this.$t('tasks', 'Completed'), type: 'COMPLETED' },
-				{ displayName: this.$t('tasks', 'In process'), type: 'IN-PROCESS' },
-				{ displayName: this.$t('tasks', 'Canceled'), type: 'CANCELLED' },
-			],
+			newTitle: '',
 		}
 	},
 	computed: {
+		title() {
+			return this.task ? this.task.summary : ''
+		},
+		subtitle() {
+			if (!this.task) {
+				return ''
+			}
+			if (this.task?.completed && this.task.completedDateMoment.isValid()) {
+				return this.task.completedDateMoment.calendar(null, {
+					lastDay: this.$t('tasks', '[Completed yesterday at] LT'),
+					sameDay: this.$t('tasks', '[Completed today at] LT'),
+					nextDay: this.$t('tasks', '[Completed tomorrow at] LT'),
+					lastWeek: this.$t('tasks', '[Completed last] dddd [at] LT'),
+					nextWeek: this.$t('tasks', '[Completed] dddd [at] LT'),
+					sameElse: this.$t('tasks', '[Completed] L'),
+				})
+			}
+			if (this.task?.modifiedMoment.isValid()) {
+				return this.task.modifiedMoment.calendar(null, {
+					lastDay: this.$t('tasks', '[Last modified yesterday at] LT'),
+					sameDay: this.$t('tasks', '[Last modified today at] LT'),
+					nextDay: this.$t('tasks', '[Last modified tomorrow at] LT'),
+					lastWeek: this.$t('tasks', '[Last modified last] dddd [at] LT'),
+					nextWeek: this.$t('tasks', '[Last modified] dddd [at] LT'),
+					sameElse: this.$t('tasks', '[Last modified] L'),
+				})
+			}
+			if (this.task?.createdMoment.isValid()) {
+				return this.task.createdMoment.calendar(null, {
+					lastDay: this.$t('tasks', '[Created yesterday at] LT'),
+					sameDay: this.$t('tasks', '[Created today at] LT'),
+					nextDay: this.$t('tasks', '[Created tomorrow at] LT'),
+					lastWeek: this.$t('tasks', '[Created last] dddd [at] LT'),
+					nextWeek: this.$t('tasks', '[Created] dddd [at] LT'),
+					sameElse: this.$t('tasks', '[Created] L'),
+				})
+			}
+			return ''
+		},
+		statusOptions() {
+			const statusOptions = [
+				{
+					displayName: this.$t('tasks', 'Needs action'),
+					type: 'NEEDS-ACTION',
+					icon: 'IconAlertBoxOutline',
+					optionClass: 'active',
+				},
+				{
+					displayName: this.$t('tasks', 'Completed'),
+					type: 'COMPLETED',
+					icon: 'IconCheck',
+					optionClass: 'active',
+				},
+				{
+					displayName: this.$t('tasks', 'In process'),
+					type: 'IN-PROCESS',
+					icon: 'IconTrendingUp',
+					optionClass: 'active',
+				},
+				{
+					displayName: this.$t('tasks', 'Canceled'),
+					type: 'CANCELLED',
+					icon: 'IconCancel',
+					optionClass: 'active',
+				},
+			]
+			if (this.task.status) {
+				return statusOptions.concat([{
+					displayName: this.$t('tasks', 'Clear status'),
+					type: null,
+					icon: 'IconDelete',
+					optionClass: 'center',
+				}])
+			}
+			return statusOptions
+		},
+		/**
+		 * Returns the download url as a string or null if event is loading or does not exist on the server (yet)
+		 *
+		 * @returns {string|null}
+		 */
+		downloadURL() {
+			if (!this.task) {
+				return null
+			}
+			return this.task?.url + '?export'
+		},
+		/**
+		 * Initializes the start date of a task
+		 *
+		 * @returns {Date} The start date moment
+		 */
+		newStartDate() {
+			const start = this.task.startMoment
+			if (start.isValid()) {
+				return start.toDate()
+			}
+			const due = this.task.dueMoment
+			let reference = moment().add(1, 'h')
+			if (due.isBefore(reference)) {
+				reference = due.subtract(1, 'm')
+			}
+			reference.startOf(this.allDay ? 'day' : 'hour')
+			return reference.toDate()
+		},
+
+		/**
+		 * Initializes the due date of a task
+		 *
+		 * @returns {Date} The due date moment
+		 */
+		newDueDate() {
+			const due = this.task.dueMoment
+			if (due.isValid()) {
+				return due.toDate()
+			}
+			const start = this.task.startMoment
+			const reference = start.isAfter() ? start : moment()
+			if (this.allDay) {
+				reference.startOf('day').add(1, 'd')
+			} else {
+				reference.startOf('hour').add(1, 'h')
+			}
+			return reference.toDate()
+		},
+		taskStatusLabel() {
+			return this.loading ? this.$t('tasks', 'Loading task from server.') : this.$t('tasks', 'Task not found!')
+		},
+		taskStatusIcon() {
+			return this.loading ? 'icon-loading' : 'icon-search'
+		},
 		/**
 		 * Whether we treat the task as read-only.
 		 * We also treat tasks in shared calendars with an access class other than 'PUBLIC'
@@ -489,10 +454,17 @@ export default {
 		 */
 		allDay() {
 			if (this.task.startMoment.isValid() || this.task.dueMoment.isValid()) {
-				return this.task.allDay
+				return !!this.task.allDay
 			} else {
-				return this.$store.state.settings.settings.allDay
+				return !!this.$store.state.settings.settings.allDay
 			}
+		},
+		showInCalendar() {
+			// Only tasks with a due date show up in the calendar
+			return !!this.showTaskInCalendar && this.task.dueMoment.isValid()
+		},
+		calendarLink() {
+			return generateUrl(`apps/calendar/${this.calendarView}/${this.task.dueMoment.format('YYYY-MM-DD')}`)
 		},
 		startDateString() {
 			const $t = this.$t
@@ -612,78 +584,47 @@ export default {
 				return this.$t('tasks', 'Set due date')
 			}
 		},
-		taskInfo() {
-			return this.$t('tasks', 'Last modified {date}', { date: this.task.modifiedMoment.calendar() })
-				+ '<br />' + this.$t('tasks', 'Created {date}', { date: this.task.createdMoment.calendar() })
-				+ (this.task.completed ? ('<br />' + this.$t('tasks', 'Completed {date}', { date: this.task.completedDateMoment.calendar() })) : '')
+		showAllDayToggle() {
+			return !this.readOnly && (this.task.due || this.task.start || this.editingStart || this.editingDue)
 		},
-		isAllDayPossible() {
-			return !this.readOnly && (this.task.due || this.task.start || ['start', 'due'].includes(this.edit))
+		priorityColor() {
+			if (+this.task.priority > 5) {
+				return '#4271a6'
+			}
+			if (+this.task.priority === 5) {
+				return '#fd0'
+			}
+			if (+this.task.priority > 0) {
+				return '#b3312d'
+			}
+			return null
+		},
+		priorityString() {
+			if (+this.task.priority > 5) {
+				return this.$t('tasks', 'Priority {priority}: low', { priority: this.task.priority })
+			}
+			if (+this.task.priority === 5) {
+				return this.$t('tasks', 'Priority {priority}: medium', { priority: this.task.priority })
+			}
+			if (+this.task.priority > 0) {
+				return this.$t('tasks', 'Priority {priority}: high', { priority: this.task.priority })
+			}
+			return this.$t('tasks', 'No priority assigned')
 		},
 		priorityClass() {
 			if (+this.task.priority > 5) {
-				return 'low'
-			} else if (+this.task.priority === 5) {
-				return 'medium'
-			} else if (+this.task.priority > 0 && +this.task.priority < 5) {
-				return 'high'
-			} else {
-				return ''
+				return 'priority--low'
 			}
-		},
-		priorityString() {
-			if (+this.task.priority === 0) {
-				return this.$t('tasks', 'No priority assigned')
-			} else if (+this.task.priority > 0 && +this.task.priority < 5) {
-				return this.$t('tasks', 'Priority {priority}: high', { priority: this.task.priority })
-			} else if (+this.task.priority === 5) {
-				return this.$t('tasks', 'Priority {priority}: medium', { priority: this.task.priority })
-			} else if (+this.task.priority > 5 && +this.task.priority < 10) {
-				return this.$t('tasks', 'Priority {priority}: low', { priority: this.task.priority })
+			if (+this.task.priority === 5) {
+				return 'priority--medium'
 			}
-			return ''
-		},
-		checkboxColor() {
-			const priority = this.priorityClass
-			return priority ? `priority-${priority}` : ''
+			if (+this.task.priority > 0) {
+				return 'priority--high'
+			}
+			return null
 		},
 		completeString() {
 			return this.$t('tasks', '{percent} % completed', { percent: this.task.complete })
-		},
-		iconStar() {
-			if (+this.task.priority) {
-				return 'sprt-color sprt-task-star-' + this.priorityClass
-			} else {
-				return 'icon-sprt-bw sprt-task-star'
-			}
-		},
-		iconPinned() {
-			if (this.task.pinned) {
-				return 'icon-sprt-bw sprt-pinned'
-			} else {
-				return 'icon-sprt-bw sprt-pinned-off'
-			}
-		},
-		iconPercent() {
-			if (this.task.complete > 0) {
-				return 'sprt-color sprt-percent-active'
-			} else {
-				return 'icon-sprt-bw sprt-percent'
-			}
-		},
-		iconTags() {
-			if (this.task.tags.length > 0) {
-				return 'sprt-color sprt-tag-active'
-			} else {
-				return 'icon-sprt-bw sprt-tag'
-			}
-		},
-		iconStatus() {
-			if (this.task.status) {
-				return 'sprt-color sprt-status'
-			} else {
-				return 'icon-sprt-bw sprt-current'
-			}
 		},
 		targetCalendars() {
 			let calendars = this.writableCalendars
@@ -700,6 +641,8 @@ export default {
 			calendar: 'getCalendarByRoute',
 			calendars: 'getSortedCalendars',
 			tags: 'tags',
+			showTaskInCalendar: 'showTaskInCalendar',
+			calendarView: 'calendarView',
 		}),
 	},
 
@@ -707,7 +650,12 @@ export default {
 		$route: 'loadTask',
 		calendars: 'loadTask',
 	},
-
+	mounted() {
+		subscribe('tasks:close-appsidebar', this.closeAppSidebar)
+	},
+	beforeDestroy() {
+		unsubscribe('tasks:close-appsidebar', this.closeAppSidebar)
+	},
 	created() {
 		this.loadTask()
 	},
@@ -753,10 +701,10 @@ export default {
 
 		removeTask() {
 			this.deleteTask({ task: this.task, dav: true })
-			this.closeDetails()
+			this.closeAppSidebar()
 		},
 
-		closeDetails() {
+		closeAppSidebar() {
 			if (this.$route.params.calendarId) {
 				this.$router.push({ name: 'calendars', params: { calendarId: this.$route.params.calendarId } })
 			} else {
@@ -764,162 +712,58 @@ export default {
 			}
 		},
 
-		startDateIcon(date) {
-			if (date.isValid()) {
-				return `sprt-color sprt-startdate-${overdue(date) ? 'overdue' : 'due'}`
-			} else {
-				return 'icon-sprt-bw sprt-startdate'
+		editTitle(editing) {
+			if (this.readOnly) {
+				return
+			}
+			this.editingTitle = editing
+			if (this.editingTitle) {
+				this.newTitle = this.task.summary
 			}
 		},
 
-		dueDateIcon(date) {
-			if (date.isValid()) {
-				return `sprt-color sprt-duedate-${overdue(date) ? 'overdue' : 'due'}`
-			} else {
-				return 'icon-sprt-bw sprt-duedate'
+		updateTitle(title) {
+			this.newTitle = title
+		},
+
+		saveTitle() {
+			if (this.newTitle !== this.task.summary) {
+				this.setSummary({ task: this.task, summary: this.newTitle })
 			}
 		},
 
 		/**
-		 * Checks if a date is overdue
-		 */
-		overdue,
-
-		editProperty(type, event) {
-			// don't start to edit the property again
-			// if the confirm button of the datepicker was clicked
-			// don't start to edit if a linkified link was clicked
-			if (event && (event.target.classList.contains('mx-datepicker-btn-confirm') || event.target.tagName === 'A')) {
-				return
-			}
-			// Don't allow to change the access class in calendars shared with me.
-			if (this.task.calendar.isSharedWithMe && type === 'class') {
-				return
-			}
-			// Save possible edits before starting to edit another property.
-			if (this.edit !== type) {
-				this.finishEditing(this.edit)
-			}
-			if (!this.readOnly && this.edit !== type) {
-				this.edit = type
-				this.tmpTask[type] = this.task[type]
-				// If we edit the due or the start date, inintialize it.
-				if (type === 'due') {
-					this.tmpTask.due = this.initDueDate()
-					this.tmpTask.start = this.task.startMoment.toDate()
-				}
-				if (type === 'start') {
-					this.tmpTask.start = this.initStartDate()
-					this.tmpTask.due = this.task.dueMoment.toDate()
-				}
-			}
-			if (type === 'summary' || type === 'note') {
-				this.$nextTick(
-					() => document.getElementById(type + 'Input').focus()
-				)
-			}
-		},
-
-		finishEditing(type, $event) {
-			// For some reason the click-outside handlers fire for the datepicker month and year buttons!?
-			if ($event && $event.target.classList.contains('mx-btn')) {
-				return
-			}
-			if (this.edit === type) {
-				this.setProperty(type, this.tmpTask[type])
-			}
-		},
-
-		cancelEditing(type) {
-			this.edit = ''
-			this.tmpTask[type] = this.task[type]
-		},
-
-		setProperty(type, value) {
-			switch (type) {
-			case 'summary':
-				this.setSummary({ task: this.task, summary: value })
-				break
-			case 'note':
-				this.setNote({ task: this.task, note: value })
-				break
-			case 'priority':
-				this.setPriority({ task: this.task, priority: value })
-				break
-			case 'complete':
-				this.setPercentComplete({ task: this.task, complete: value })
-				break
-			case 'start':
-				this.setStart({ task: this.task, start: value, allDay: this.allDay })
-				break
-			case 'due':
-				this.setDue({ task: this.task, due: value, allDay: this.allDay })
-				break
-			}
-			this.edit = ''
-		},
-
-		/**
-		 * Initializes the start date of a task
+		 * Sets the start date to the given Date
+		 * or to null
 		 *
-		 * @returns {Date} The start date moment
+		 * @param {Task} task The task for which to set the date
+		 * @param {Date} date The new start date
 		 */
-		initStartDate() {
-			const start = this.task.startMoment
-			if (!start.isValid()) {
-				const due = this.task.dueMoment
-				let reference = moment().add(1, 'h')
-				if (due.isBefore(reference)) {
-					reference = due.subtract(1, 'm')
-				}
-				reference.startOf(this.allDay ? 'day' : 'hour')
-				return reference
+		setStartDate({ task, value: date }) {
+			if (date) {
+				date = moment(date)
 			}
-			return start
+			if (this.task.startMoment.isSame(date)) {
+				return
+			}
+			this.setStart({ task, start: date, allDay: this.allDay })
 		},
 
 		/**
-		 * Initializes the due date of a task
+		 * Sets the due date to the given Date
+		 * or to null
 		 *
-		 * @returns {Date} The due date moment
+		 * @param {Task} task The task for which to set the date
+		 * @param {Date} date The new due date
 		 */
-		initDueDate() {
-			const due = this.task.dueMoment
-			if (!due.isValid()) {
-				const start = this.task.startMoment
-				const reference = start.isAfter() ? start : moment()
-				if (this.allDay) {
-					reference.startOf('day').add(1, 'd')
-				} else {
-					reference.startOf('hour').add(1, 'h')
-				}
-				return reference
+		setDueDate({ task, value: date }) {
+			if (date) {
+				date = moment(date)
 			}
-			return due
-		},
-
-		setStartDate(date) {
-			this.setStartDateTime(moment(date), 'day')
-		},
-
-		setStartTime(time) {
-			this.setStartDateTime(moment(time), 'time')
-		},
-
-		setStartDateTime(datetime, type = null) {
-			this.tmpTask.start = this.setDatePartial(this.tmpTask.start.clone(), moment(datetime), type)
-		},
-
-		setDueDate(date) {
-			this.setDueDateTime(moment(date), 'day')
-		},
-
-		setDueTime(time) {
-			this.setDueDateTime(moment(time), 'time')
-		},
-
-		setDueDateTime(datetime, type = 'day') {
-			this.tmpTask.due = this.setDatePartial(this.tmpTask.due.clone(), moment(datetime), type)
+			if (this.task.dueMoment.isSame(date)) {
+				return
+			}
+			this.setDue({ task, due: date, allDay: this.allDay })
 		},
 
 		changeClass(classification) {
@@ -928,35 +772,6 @@ export default {
 
 		changeStatus(status) {
 			this.setStatus({ task: this.task, status: status.type })
-		},
-
-		/**
-		 * Sets partial values of a moment to the values of an other moment.
-		 *
-		 * @param {Moment} date The moment to alter
-		 * @param {Moment} part The moment to take the new values from
-		 * @param {String} type Value indicating what values to set
-		 * @returns {Moment} The altered moment
-		 */
-		setDatePartial(date, part, type = null) {
-			// Set only year, month and day
-			if (type === 'day') {
-				if (date.isValid()) {
-					return date.year(part.year()).month(part.month()).date(part.date())
-				} else {
-					return part.add(12, 'h')
-				}
-			// Set only hour and minute
-			} else if (type === 'time') {
-				if (date.isValid()) {
-					return date.hour(part.hour()).minute(part.minute())
-				} else {
-					return part
-				}
-			// Set all values
-			} else {
-				return part
-			}
 		},
 
 		/**
@@ -987,3 +802,61 @@ export default {
 	},
 }
 </script>
+
+<style lang="scss" scoped>
+$red: #b3312d;
+$yellow: #fd0;
+$blue: #4271a6;
+
+.app-sidebar-header__desc .app-sidebar-header__checkbox {
+	display: flex;
+	height: 44px;
+	width: 44px;
+	justify-content: center;
+
+	input[type='checkbox'].checkbox + label {
+		display: flex;
+		align-items: center;
+
+		&::before {
+			margin: 0;
+			border-width: 2px;
+			border-radius: var(--border-radius);
+			border-color: var(--color-border-dark);
+		}
+
+		&:hover {
+			border-color: var(--color-border-dark);
+		}
+
+		&.priority {
+			&--high::before {
+				border-color: $red;
+			}
+
+			&--medium::before {
+				border-color: $yellow;
+			}
+
+			&--low::before {
+				border-color: $blue;
+			}
+		}
+	}
+}
+
+.app-sidebar::v-deep .app-sidebar-header__description {
+	flex-wrap: wrap;
+	margin: 0;
+}
+
+.app-sidebar::v-deep .app-sidebar-tabs {
+	min-height: 160px !important;
+}
+
+.app-sidebar__tab {
+	padding: 0;
+	// This should go into @nextcloud/vue
+	height: 100%;
+}
+</style>

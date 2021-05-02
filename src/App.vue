@@ -20,16 +20,14 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<Content app-name="tasks" @click.native="closeDetails($event)">
-		<AppNavigation />
+	<Content app-name="tasks">
+		<AppNavigation @click.native="closeAppSidebar($event)" />
 
-		<AppContent>
+		<AppContent @click.native="closeAppSidebar($event)">
 			<RouterView />
 		</AppContent>
 
-		<div id="app-sidebar" :class="{disappear: $route.params.taskId === undefined}">
-			<RouterView name="sidebar" />
-		</div>
+		<RouterView name="sidebar" />
 	</Content>
 </template>
 
@@ -37,6 +35,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 import AppNavigation from './views/AppNavigation.vue'
 import client from './services/cdav.js'
 
+import { emit } from '@nextcloud/event-bus'
 import AppContent from '@nextcloud/vue/dist/Components/AppContent'
 import Content from '@nextcloud/vue/dist/Components/Content'
 
@@ -102,16 +101,9 @@ export default {
 		 *
 		 * @param {Object} $event the event
 		 */
-		closeDetails($event) {
-			if (!($event.target.closest('.reactive') || $event.target.classList.contains('reactive')
-			|| $event.target.classList.contains('mx-btn') // For some reason the click-outside handlers fire for the datepicker month and year buttons!?
-			)
-			&& !$event.target.closest('#app-sidebar') && this.$route.params.taskId) {
-				if (this.$route.params.calendarId) {
-					this.$router.push({ name: 'calendars', params: { calendarId: this.$route.params.calendarId } })
-				} else {
-					this.$router.push({ name: 'collections', params: { collectionId: this.$route.params.collectionId } })
-				}
+		closeAppSidebar($event) {
+			if (!($event.target.closest('.reactive') || $event.target.classList.contains('reactive')) && this.$route.params.taskId) {
+				emit('tasks:close-appsidebar')
 			}
 		},
 	},
