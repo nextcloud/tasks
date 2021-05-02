@@ -239,38 +239,3 @@ input[type='checkbox'].checkbox {
 .icon span {
 	font-family: var(--font-face);
 }
-
-.status-display {
-	display: inline-block;
-	width: 16px;
-	height: 16px;
-
-	&.success {
-		@extend .sprt-color;
-		@extend .sprt-checkmark-color;
-	}
-
-	&.refresh {
-		background-image: var(--icon-history-000);
-		animation: pulse 2s infinite;
-		border-radius: 50%;
-		opacity: .5;
-		cursor: pointer;
-
-		&:hover {
-			opacity: .7;
-		}
-	}
-}
-
-@keyframes pulse {
-	0% {
-		box-shadow: 0 0 0 0 rgba(50, 50, 50, .4);
-	}
-	70% {
-		box-shadow: 0 0 0 10px rgba(50, 50, 50, 0);
-	}
-	100% {
-		box-shadow: 0 0 0 0 rgba(50, 50, 50, 0);
-	}
-}

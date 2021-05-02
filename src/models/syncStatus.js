@@ -5,7 +5,7 @@
  * @copyright 2018 John Molakvoæ <skjnldsv@protonmail.com>
  *
  * @author Raimund Schlüßler
- * @copyright 2018 Raimund Schlüßler <raimund.schluessler@mailbox.org>
+ * @copyright 2021 Raimund Schlüßler <raimund.schluessler@mailbox.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -22,35 +22,17 @@
  *
  */
 
-export default class TaskStatus {
+export default class SyncStatus {
 
 	/**
-	 * Creates an instance of a status
+	 * Creates an instance of a SyncStatus
 	 *
-	 * @param {String} type The type of the status
-	 * @param {String} message The type of the status
-	 * @param {String} action The type of the status
-	 * @memberof Status
+	 * @param {String} status The type of the status
+	 * @param {String} message The message to show
+	 * @memberof SyncStatus
 	 */
-	constructor(type, message, action = null) {
-
-		this.duration = -1
-		this.type = type
-
-		switch (type) {
-		case 'refresh':
-			this.cssClass = 'refresh'
-			break
-		case 'sync':
-			this.cssClass = 'icon-loading-small-dark'
-			break
-		case 'success':
-			this.cssClass = 'success'
-			this.duration = 5000 // timeout in ms
-			break
-		}
-
-		this.action = action
+	constructor(status, message) {
+		this.status = status
 		this.message = message
 	}
 

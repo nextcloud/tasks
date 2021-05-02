@@ -5,7 +5,7 @@
  * @copyright 2018 John Molakvoæ <skjnldsv@protonmail.com>
  *
  * @author Raimund Schlüßler
- * @copyright 2018 Raimund Schlüßler <raimund.schluessler@mailbox.org>
+ * @copyright 2021 Raimund Schlüßler <raimund.schluessler@mailbox.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -59,7 +59,7 @@ export default class Task {
 
 		this.initTodo()
 
-		this.syncstatus = null
+		this.syncStatus = null
 
 		// Queue for update requests with concurrency 1,
 		// because we only want to allow one request at a time
