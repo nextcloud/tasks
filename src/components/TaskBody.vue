@@ -749,28 +749,40 @@ $breakpoint-mobile: 1024px;
 				height: 44px;
 				width: 44px;
 
-				input[type='checkbox'].checkbox + label {
-					&::before {
-						border-width: 2px;
-						border-radius: var(--border-radius);
-						border-color: var(--color-border-dark);
+				input[type='checkbox'].checkbox {
+					&:checked + label::before {
+						background-image: var(--icon-checkmark-000) !important;
+						background-color: unset;
+						border-color: unset;
 					}
-
-					&:hover {
-						border-color: var(--color-border-dark);
+					&:disabled + label::before {
+						background-color: var(--color-background-darker) !important;
 					}
-
-					&.priority {
-						&--high::before {
-							border-color: $red_overdue;
+					+ label {
+						&::before {
+							border-width: 2px;
+							border-radius: var(--border-radius);
+							border-color: var(--color-border-dark);
+							height: 14px;
+							width: 14px;
 						}
 
-						&--medium::before {
-							border-color: $yellow;
+						&:hover {
+							border-color: var(--color-border-dark);
 						}
 
-						&--low::before {
-							border-color: $blue_due;
+						&.priority {
+							&--high::before {
+								border-color: $red_overdue;
+							}
+
+							&--medium::before {
+								border-color: $yellow;
+							}
+
+							&--low::before {
+								border-color: $blue_due;
+							}
 						}
 					}
 				}

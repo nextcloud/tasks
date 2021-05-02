@@ -52,3 +52,24 @@ export default {
 	},
 }
 </script>
+
+<style lang="scss" scoped>
+.loadmore {
+	font-size: 11px;
+	margin-top: 10px;
+	text-align: center;
+	height: 21px;
+
+	span {
+		color: var(--color-text-lighter);
+		background-color: var(--color-main-background);
+		border-radius: var(--border-radius-pill);
+		padding: 3px 6px;
+
+		&:hover {
+			cursor: pointer;
+			color: var(--color-main-text);
+		}
+	}
+}
+</style>
