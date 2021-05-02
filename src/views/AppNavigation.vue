@@ -28,7 +28,6 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				:id="'collection_' + collection.id"
 				:key="collection.id"
 				:collection-id="collection.id"
-				:icon="collection.icon"
 				:to="{ name: 'collections', params: { collectionId: collection.id } }"
 				:title="collection.displayName"
 				class="collection reactive"
@@ -39,6 +38,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				@dragenter.native="dragEnter(...arguments, collection)"
 				@dragleave.native="dragLeave"
 				@click="setInitialRoute(`/collections/${collection.id}`)">
+				<component
+					:is="collection.icon"
+					slot="icon"
+					:size="24"
+					decorative />
 				<AppNavigationCounter v-show="collectionCount(collection.id)" slot="counter">
 					{{ collectionCount(collection.id) | counterFormatter }}
 				</AppNavigationCounter>
@@ -59,6 +63,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				:class="{'collection--edit': creating}"
 				class="collection reactive"
 				@click="startCreate($event)">
+				<Plus slot="icon" :size="24" decorative />
 				<div :class="{error: nameError}" class="app-navigation-entry-edit">
 					<form>
 						<input id="newListInput"
@@ -102,6 +107,14 @@ import AppNavigation from '@nextcloud/vue/dist/Components/AppNavigation'
 import AppNavigationCounter from '@nextcloud/vue/dist/Components/AppNavigationCounter'
 import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
 
+import Star from 'vue-material-design-icons/Star.vue'
+import CalendarToday from 'vue-material-design-icons/CalendarToday.vue'
+import CalendarWeek from 'vue-material-design-icons/CalendarWeek.vue'
+import CircleOutline from 'vue-material-design-icons/CircleOutline.vue'
+import Check from 'vue-material-design-icons/Check.vue'
+import TrendingUp from 'vue-material-design-icons/TrendingUp.vue'
+import Plus from 'vue-material-design-icons/Plus.vue'
+
 import draggable from 'vuedraggable'
 import ClickOutside from 'v-click-outside'
 import { mapState, mapGetters, mapActions } from 'vuex'
@@ -115,6 +128,13 @@ export default {
 		AppNavigationCounter,
 		AppNavigationSettings,
 		draggable,
+		Star,
+		CalendarToday,
+		CalendarWeek,
+		CircleOutline,
+		Check,
+		TrendingUp,
+		Plus,
 	},
 	directives: {
 		clickOutside: ClickOutside.directive,

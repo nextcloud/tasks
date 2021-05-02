@@ -71,32 +71,32 @@ class CollectionsService {
 				'id' => "starred",
 				'displayName' => (string)$this->l10n->t('Important'),
 				'show' => 2,
-				'icon' => 'sprt-task-star'],
+				'icon' => 'Star'],
 			[
 				'id' => "today",
 				'displayName' => (string)$this->l10n->t('Today'),
 				'show' => 2,
-				'icon' => 'sprt-calendar'],
+				'icon' => 'CalendarToday'],
 			[
 				'id' => "week",
 				'displayName' => (string)$this->l10n->t('Week'),
 				'show' => 2,
-				'icon' => 'sprt-calendar'],
+				'icon' => 'CalendarWeek'],
 			[
 				'id' => "all",
 				'displayName' => (string)$this->l10n->t('All'),
 				'show' => 2,
-				'icon' => 'sprt-all'],
+				'icon' => 'CircleOutline'],
 			[
 				'id' => "current",
 				'displayName' => (string)$this->l10n->t('Current'),
 				'show' => 2,
-				'icon' => 'sprt-current'],
+				'icon' => 'TrendingUp'],
 			[
 				'id' => "completed",
 				'displayName' => (string)$this->l10n->t('Completed'),
 				'show' => 2,
-				'icon' => 'sprt-checkmark']
+				'icon' => 'Check']
 		];
 		foreach ($collections as $key => $collection) {
 			$tmp = $this->settings->getUserValue($this->userId, $this->appName,'show_'.$collection['id']);
