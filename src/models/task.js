@@ -251,6 +251,10 @@ export default class Task {
 		this._priority = this.vtodo.getFirstPropertyValue('priority') || 0
 	}
 
+	get closed() {
+		return this._completed || this._status === 'CANCELLED'
+	}
+
 	get complete() {
 		return Number(this._complete)
 	}

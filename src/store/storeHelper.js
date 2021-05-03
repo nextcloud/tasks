@@ -40,34 +40,24 @@ function isTaskInList(task, listId, checkSubtasks = true) {
 	const day = parts[1] ? parts[1] : null
 	switch (listId) {
 	case 'completed':
-		return !isTaskOpen(task)
+		return task.closed
 	case 'all':
-		return isTaskOpen(task)
+		return !task.closed
 	case 'current':
-		return isTaskOpen(task) && testTask(task, isTaskCurrent, checkSubtasks)
+		return !task.closed && testTask(task, isTaskCurrent, checkSubtasks)
 	case 'starred':
-		return isTaskOpen(task) && testTask(task, isTaskPriority, checkSubtasks)
+		return !task.closed && testTask(task, isTaskPriority, checkSubtasks)
 	case 'today':
-		return isTaskOpen(task) && testTask(task, isTaskToday, checkSubtasks)
+		return !task.closed && testTask(task, isTaskToday, checkSubtasks)
 	case 'week':
 		if (!day) {
-			return isTaskOpen(task) && testTask(task, isTaskWeek, checkSubtasks)
+			return !task.closed && testTask(task, isTaskWeek, checkSubtasks)
 		} else {
-			return isTaskOpen(task) && testTask(task, (task) => isTaskDay(task, parseInt(day)), checkSubtasks)
+			return !task.closed && testTask(task, (task) => isTaskDay(task, parseInt(day)), checkSubtasks)
 		}
 	default:
 		return '' + task.calendar.id === '' + listId
 	}
-}
-
-/**
- * Returns if a task is uncanceled and uncompleted.
- *
- * @param {Object} task The task to check
- * @returns {Boolean}
- */
-function isTaskOpen(task) {
-	return !['CANCELLED', 'COMPLETED'].includes(task.status)
 }
 
 /**
@@ -79,7 +69,7 @@ function isTaskOpen(task) {
  * @returns {Boolean}
  */
 function testTask(task, testFunction, checkSubtasks = false) {
-	if (!task.completed && testFunction(task)) {
+	if (!task.closed && testFunction(task)) {
 		return true
 	}
 	if (checkSubtasks) {

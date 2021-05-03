@@ -88,17 +88,17 @@ export default {
 			return this.calendar.loadedCompleted
 		},
 		tasks() {
-			return this.completedRootTasks(this.calendar.tasks)
+			return this.closedRootTasks(this.calendar.tasks)
 		},
 		completedTasksCount() {
-			const completedCount = function counter(tasks) {
+			const closedCount = function counter(tasks) {
 				let i = tasks.length
 				tasks.forEach((task) => {
 					i += counter(Object.values(task.subTasks))
 				})
 				return i
 			}
-			return completedCount(this.tasks)
+			return closedCount(this.tasks)
 		},
 		failed() {
 			return 0
@@ -112,8 +112,8 @@ export default {
 				: Math.floor(this.progress / this.initialCompletedTasksCount * 100)
 		},
 		...mapGetters({
-			completedCount: 'getCalendarCountCompleted',
-			completedRootTasks: 'findCompletedRootTasks',
+			closedCount: 'getCalendarCountClosed',
+			closedRootTasks: 'findClosedRootTasks',
 		}),
 	},
 	methods: {

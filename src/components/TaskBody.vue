@@ -25,7 +25,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		ref="taskItem"
 		:task-id="task.uri"
 		:class="{
-			'task-item--completed': task.completed || task.status === 'CANCELLED',
+			'task-item--closed': task.closed,
 			'task-item--deleted': !!deleteTimeout,
 			'task-item--input-visible': (filteredSubtasksShown.length || showSubtaskInput),
 			'task-item--subtasks-visible': filteredSubtasksShown.length
@@ -109,7 +109,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						class="reactive no-nav"
 						@click="toggleCompletedSubtasksVisibility(task)">
 						<Eye slot="icon" :size="24" decorative />
-						{{ task.hideCompletedSubtasks ? $t('tasks', 'Show completed subtasks') : $t('tasks', 'Hide completed subtasks') }}
+						{{ task.hideCompletedSubtasks ? $t('tasks', 'Show closed subtasks') : $t('tasks', 'Hide closed subtasks') }}
 					</ActionButton>
 					<ActionButton v-if="!readOnly"
 						class="reactive no-nav"
@@ -338,7 +338,7 @@ export default {
 
 		hasCompletedSubtasks() {
 			return Object.values(this.task.subTasks).some(subTask => {
-				return subTask.completed
+				return subTask.closed
 			})
 		},
 
@@ -367,7 +367,7 @@ export default {
 			let subTasks = Object.values(this.task.subTasks)
 			if (this.task.hideCompletedSubtasks) {
 				subTasks = subTasks.filter(task => {
-					return !task.completed
+					return !task.closed
 				})
 			}
 			if (['today', 'week', 'starred', 'current'].indexOf(this.collectionId) > -1
@@ -656,7 +656,7 @@ $breakpoint-mobile: 1024px;
 	cursor: default;
 	list-style: none outside none;
 
-	&--completed .task-item__body .task-body__info {
+	&--closed .task-item__body .task-body__info {
 		opacity: .6;
 		.title {
 			text-decoration: line-through;
