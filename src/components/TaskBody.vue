@@ -25,7 +25,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		ref="taskItem"
 		:task-id="task.uri"
 		:class="{
-			'task-item--completed': task.completed,
+			'task-item--completed': task.completed || task.status === 'CANCELLED',
 			'task-item--deleted': !!deleteTimeout,
 			'task-item--input-visible': (filteredSubtasksShown.length || showSubtaskInput),
 			'task-item--subtasks-visible': filteredSubtasksShown.length
@@ -50,7 +50,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					:disabled="readOnly"
 					:aria-label="$t('tasks', 'Task is completed')"
 					@click="toggleCompleted(task)">
-				<label :class="[priorityClass, 'reactive no-nav']" :for="'toggleCompleted_' + task.uid" />
+				<label :class="[priorityClass, 'reactive no-nav']" :for="'toggleCompleted_' + task.uid">
+					<Cancel v-if="task.status === 'CANCELLED' && !task.completed" :size="24" decorative />
+				</label>
 			</div>
 			<!-- Info: title, progress & tags -->
 			<div class="task-body__info">
@@ -168,6 +170,7 @@ import Actions from '@nextcloud/vue/dist/Components/Actions'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
 
 import Eye from 'vue-material-design-icons/Eye.vue'
+import Cancel from 'vue-material-design-icons/Cancel.vue'
 import Delete from 'vue-material-design-icons/Delete.vue'
 import Pin from 'vue-material-design-icons/Pin.vue'
 import Plus from 'vue-material-design-icons/Plus.vue'
@@ -194,6 +197,7 @@ export default {
 		ActionButton,
 		Delete,
 		Eye,
+		Cancel,
 		Pin,
 		Plus,
 		TextBoxOutline,
@@ -745,9 +749,11 @@ $breakpoint-mobile: 1024px;
 
 		.task-body {
 			&__checkbox {
-				padding: 11px 10px;
+				display: flex;
 				height: 44px;
 				width: 44px;
+				justify-content: center;
+				flex-shrink: 0;
 
 				input[type='checkbox'].checkbox {
 					&:checked + label::before {
@@ -759,7 +765,18 @@ $breakpoint-mobile: 1024px;
 						background-color: var(--color-background-darker) !important;
 					}
 					+ label {
+						display: flex;
+						align-items: center;
+
+						.material-design-icon {
+							position: absolute;
+							height: 18px;
+							width: 18px;
+							opacity: .7;
+						}
+
 						&::before {
+							margin: 0;
 							border-width: 2px;
 							border-radius: var(--border-radius);
 							border-color: var(--color-border-dark);
