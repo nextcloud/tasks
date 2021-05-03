@@ -30,11 +30,11 @@ OC.L10N.register(
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n งานเสร็จสมบูรณ์"],
     "Tomorrow" : "วันพรุ่งนี้",
     "New List" : "รายชื่อใหม่",
-    "Set start date" : "วันที่เริ่มต้นการตั้งค่า",
-    "Set due date" : "ระบุวันครบกำหนด",
-    "Task not found!" : "ไม่พบงาน!",
     "When shared show full event" : "เมื่อแชร์จะแสดงกิจกรรมทั้งหมด",
     "When shared show only busy" : "เมื่อแชร์จะแสดงเฉพาะไม่ว่าง",
-    "When shared hide this event" : "เมื่อแชร์จะซ่อนกิจกรรมนี้"
+    "When shared hide this event" : "เมื่อแชร์จะซ่อนกิจกรรมนี้",
+    "Task not found!" : "ไม่พบงาน!",
+    "Set start date" : "วันที่เริ่มต้นการตั้งค่า",
+    "Set due date" : "ระบุวันครบกำหนด"
 },
 "nplurals=1; plural=0;");

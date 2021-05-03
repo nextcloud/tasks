@@ -31,12 +31,12 @@ OC.L10N.register(
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n کار تکمیل شده","%n کار تکمیل شده"],
     "Tomorrow" : "فردا",
     "New List" : "لیست جدید",
-    "Set due date" : "تعریف سر رسید",
     "All day" : "تمام روز",
-    "Task not found!" : "کار یافت نشد!",
     "When shared show full event" : "هنگام اشتراک گذاری ، رویداد کامل را نشان می دهد",
     "When shared show only busy" : "وقتی نمایش اشتراکی فقط مشغول است",
     "When shared hide this event" : "هنگام اشتراک گذاری این رویداد را پنهان کنید",
+    "Task not found!" : "کار یافت نشد!",
+    "Set due date" : "تعریف سر رسید",
     "An error occurred" : "خطایی روی داد"
 },
 "nplurals=2; plural=(n > 1);");

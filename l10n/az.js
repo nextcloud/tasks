@@ -23,8 +23,8 @@ OC.L10N.register(
     "_%n Completed Task_::_%n Completed Tasks_" : ["\"%s\" Bitmiş Tapşırıqlar","Completed Tasks"],
     "Tomorrow" : "Sabah",
     "New List" : "Yeni Siyahı",
+    "Task not found!" : "Tapşırıq tapılmadı!",
     "Set start date" : "Başlanğıc tarixini işə sal",
-    "Set due date" : "Vaxtı təyin et",
-    "Task not found!" : "Tapşırıq tapılmadı!"
+    "Set due date" : "Vaxtı təyin et"
 },
 "nplurals=2; plural=(n != 1);");

@@ -36,13 +36,13 @@
     "_%n Completed Task_::_%n Completed Tasks_" : ["neviena pabeigta uzdevuma","%n paeigts uzdevums","%n pabeigti uzvedumi"],
     "Tomorrow" : "Rīt",
     "New List" : "Jauns saraksts",
-    "Set start date" : "Uzstādīt sākuma datumu",
-    "Set due date" : "Uzstādīt izpildes termiņu",
     "All day" : "Visas dienas",
-    "Task not found!" : "Uzdevums nav atrasts!",
     "When shared show full event" : "Ja koplietots, tad rādīt pilnu notikumu",
     "When shared show only busy" : "Ja koplietots, tad rādīt tikai aizņemts",
     "When shared hide this event" : "Ja koplietots, tad paslēpt notikumu",
+    "Task not found!" : "Uzdevums nav atrasts!",
+    "Set start date" : "Uzstādīt sākuma datumu",
+    "Set due date" : "Uzstādīt izpildes termiņu",
     "An error occurred" : "Gadījās kļūda"
 },"pluralForm" :"nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);"
 }

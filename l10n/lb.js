@@ -23,11 +23,11 @@ OC.L10N.register(
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n erfëllt Aufgab","%n erfëllten Aufgaben"],
     "Tomorrow" : "Muer",
     "New List" : "Nei Lëscht",
-    "Set start date" : "Setz en Ufanks Datum fest",
-    "Set due date" : "Datum setzen bis wéini et fälleg ass",
-    "Task not found!" : "Tâche konnt net fonnt ginn!",
     "When shared show full event" : "Wann et gedeelt gouf, dann de ganzen Evenement uweisen",
     "When shared show only busy" : "Wann et gedeelt gouf, dann nëmmen als beschäftegt uweisen",
-    "When shared hide this event" : "Wann et gedeelt gouf, dann verstopp dëst Evenement"
+    "When shared hide this event" : "Wann et gedeelt gouf, dann verstopp dëst Evenement",
+    "Task not found!" : "Tâche konnt net fonnt ginn!",
+    "Set start date" : "Setz en Ufanks Datum fest",
+    "Set due date" : "Datum setzen bis wéini et fälleg ass"
 },
 "nplurals=2; plural=(n != 1);");

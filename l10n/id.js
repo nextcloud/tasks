@@ -33,10 +33,10 @@ OC.L10N.register(
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n Tugas Diselesaikan"],
     "Tomorrow" : "Besok",
     "New List" : "Daftar Baru",
-    "Set start date" : "Atur tanggal mulai",
-    "Set due date" : "Atur tanggal jatuh tempo",
     "All day" : "Sepanjang hari",
     "Task not found!" : "Tugas tidak ditemukan!",
+    "Set start date" : "Atur tanggal mulai",
+    "Set due date" : "Atur tanggal jatuh tempo",
     "An error occurred" : "Terjadi kesalahan"
 },
 "nplurals=1; plural=0;");

@@ -55,14 +55,14 @@
     "Tomorrow" : "내일",
     "Add List…" : "리스트 더하기...",
     "New List" : "새 목록",
-    "Set start date" : "시작 날짜 지점",
-    "Set due date" : "만료 기한 설정",
     "All day" : "하루 종일",
-    "Task not found!" : "작업을 찾을 수 없습니다!",
     "When shared show full event" : "전체 일정 공유",
     "When shared show only busy" : "바쁨/한가함만 공유",
     "When shared hide this event" : "일정 공유하지 않음",
     "Canceled" : "취소됨",
+    "Task not found!" : "작업을 찾을 수 없습니다!",
+    "Set start date" : "시작 날짜 지점",
+    "Set due date" : "만료 기한 설정",
     "An error occurred" : "오류가 발생함"
 },"pluralForm" :"nplurals=1; plural=0;"
 }

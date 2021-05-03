@@ -29,12 +29,12 @@ OC.L10N.register(
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n xera completada","%n xeres completaes"],
     "Tomorrow" : "Mañana",
     "New List" : "Nueva Llista",
-    "Set start date" : "Afitar la fecha d'entamu",
-    "Set due date" : "Afitar la data de caducidá",
     "All day" : "Tol día",
-    "Task not found!" : "¡Xera non atopada!",
     "When shared show full event" : "Amosar l'eventu completu al compartir",
     "When shared show only busy" : "Amosar namás ocupáu al compartir",
-    "When shared hide this event" : "Anubrir l'eventu al compartir"
+    "When shared hide this event" : "Anubrir l'eventu al compartir",
+    "Task not found!" : "¡Xera non atopada!",
+    "Set start date" : "Afitar la fecha d'entamu",
+    "Set due date" : "Afitar la data de caducidá"
 },
 "nplurals=2; plural=(n != 1);");

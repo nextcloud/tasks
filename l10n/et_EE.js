@@ -35,13 +35,13 @@ OC.L10N.register(
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n lõpetatud ülesanne","%n lõpetatud ülesannet"],
     "Tomorrow" : "Homme",
     "New List" : "Uus nimekiri",
-    "Set start date" : "Määra alguse kuupäev",
-    "Set due date" : "Määra tähtaeg",
     "All day" : "Kogu päev",
-    "Task not found!" : "Ülesannet ei leitud!",
     "When shared show full event" : "Kui on jagatud, siis näita kogu sündmust",
     "When shared show only busy" : "Kui on jagatud, siis näita ainult, kas on hõivatud",
     "When shared hide this event" : "Kui on jagatud, siis peida see sündmus",
+    "Task not found!" : "Ülesannet ei leitud!",
+    "Set start date" : "Määra alguse kuupäev",
+    "Set due date" : "Määra tähtaeg",
     "An error occurred" : "Tekkis tõrge"
 },
 "nplurals=2; plural=(n != 1);");

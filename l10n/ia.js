@@ -26,10 +26,10 @@ OC.L10N.register(
     "Manually" : "Manualmente",
     "Tomorrow" : "Deman",
     "New List" : "Nove Lista",
-    "Set start date" : "Assigna le data de initio",
-    "Set due date" : "Assignar data debite",
     "When shared show full event" : "Quando compartite, monstrar evento integremente",
     "When shared show only busy" : "Quando compartite, monstrar solo si illo es occupate",
-    "When shared hide this event" : "Quando compartite, celar iste evento"
+    "When shared hide this event" : "Quando compartite, celar iste evento",
+    "Set start date" : "Assigna le data de initio",
+    "Set due date" : "Assignar data debite"
 },
 "nplurals=2; plural=(n != 1);");

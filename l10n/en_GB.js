@@ -33,12 +33,12 @@ OC.L10N.register(
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n Completed Task","%n Completed Tasks"],
     "Tomorrow" : "Tomorrow",
     "New List" : "New List",
-    "Set start date" : "Set start date",
-    "Set due date" : "Set due date",
     "All day" : "All day",
-    "Task not found!" : "Task not found!",
     "When shared show full event" : "When shared show full event",
     "When shared show only busy" : "When shared show only busy",
-    "When shared hide this event" : "When shared hide this event"
+    "When shared hide this event" : "When shared hide this event",
+    "Task not found!" : "Task not found!",
+    "Set start date" : "Set start date",
+    "Set due date" : "Set due date"
 },
 "nplurals=2; plural=(n != 1);");
