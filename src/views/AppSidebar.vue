@@ -316,7 +316,7 @@ export default {
 				return this.task.completedDateMoment.calendar(null, {
 					lastDay: this.$t('tasks', '[Completed yesterday at] LT'),
 					sameDay: this.$t('tasks', '[Completed today at] LT'),
-					nextDay: this.$t('tasks', '[Completed tomorrow at] LT'),
+					nextDay: this.$t('tasks', '[Completed] L'),
 					lastWeek: this.$t('tasks', '[Completed last] dddd [at] LT'),
 					nextWeek: this.$t('tasks', '[Completed] dddd [at] LT'),
 					sameElse: this.$t('tasks', '[Completed] L'),
@@ -326,7 +326,7 @@ export default {
 				return this.task.modifiedMoment.calendar(null, {
 					lastDay: this.$t('tasks', '[Last modified yesterday at] LT'),
 					sameDay: this.$t('tasks', '[Last modified today at] LT'),
-					nextDay: this.$t('tasks', '[Last modified tomorrow at] LT'),
+					nextDay: this.$t('tasks', '[Last modified] L'),
 					lastWeek: this.$t('tasks', '[Last modified last] dddd [at] LT'),
 					nextWeek: this.$t('tasks', '[Last modified] dddd [at] LT'),
 					sameElse: this.$t('tasks', '[Last modified] L'),
@@ -336,7 +336,7 @@ export default {
 				return this.task.createdMoment.calendar(null, {
 					lastDay: this.$t('tasks', '[Created yesterday at] LT'),
 					sameDay: this.$t('tasks', '[Created today at] LT'),
-					nextDay: this.$t('tasks', '[Created tomorrow at] LT'),
+					nextDay: this.$t('tasks', '[Created] L'),
 					lastWeek: this.$t('tasks', '[Created last] dddd [at] LT'),
 					nextWeek: this.$t('tasks', '[Created] dddd [at] LT'),
 					sameElse: this.$t('tasks', '[Created] L'),
