@@ -41,7 +41,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 				:disabled="loading"
 				:checked="writeable"
 				@update:checked="editSharee">
-				{{ $t('tasks', 'can edit') }}
+				{{ $t('tasks', 'Can edit') }}
 			</ActionCheckbox>
 		</template>
 
