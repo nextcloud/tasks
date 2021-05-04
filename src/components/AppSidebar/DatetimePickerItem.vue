@@ -20,7 +20,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<div v-click-outside="() => setValue()"
+	<div v-click-outside="checkOutsideClick"
 		:class="{
 			'property__item--clearable': date.isValid() && !readOnly,
 			'property__item--valid': isValid,
@@ -137,6 +137,25 @@ export default {
 		},
 	},
 	methods: {
+		/**
+		 * Checks if the click originated from the datepicker
+		 * and sets the value if not.
+		 *
+		 * @param {Object} $event The click event
+		 */
+		checkOutsideClick($event) {
+			/**
+			 * If the click originates from the datepicker, we do nothing.
+			 * Can be removed once https://github.com/nextcloud/nextcloud-vue/pull/1881
+			 * is merged and the datepicker is not attached to body anymore.
+			 */
+			if ($event.target.closest('.mx-datepicker-main')
+				|| $event.target.closest('.mx-table')
+				|| $event.target.classList.contains('mx-btn')) {
+				return
+			}
+			this.setValue()
+		},
 		/**
 		 * When selecting a new date with the datepicker, the time is always set to 00:00.
 		 * So we have to get the time from the previous date object.
