@@ -67,7 +67,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<div v-if="task.complete > 0" class="percentbar">
 					<div :style="{ width: task.complete + '%', 'background-color': task.calendar.color }"
 						:class="{'completed': task.completed}"
-						:aria-label="$t('tasks', '{complete} % completed', {complete: task.complete})"
+						:aria-label="$t('tasks', '{complete}% completed', {complete: task.complete})"
 						class="percentbar__done" />
 				</div>
 			</div>
