@@ -624,7 +624,7 @@ export default {
 			return null
 		},
 		completeString() {
-			return this.$t('tasks', '{percent} % completed', { percent: this.task.complete })
+			return this.$t('tasks', '{percent}% completed', { percent: this.task.complete })
 		},
 		targetCalendars() {
 			let calendars = this.writableCalendars
