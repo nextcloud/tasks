@@ -17,7 +17,6 @@ OC.L10N.register(
     "Automatic" : "Автоматски",
     "Share with users or groups" : "Сподели со корисници или групи",
     "No users or groups" : "Нема корисници или групи",
-    "can edit" : "може да се измени",
     "Unshare with {displayName}" : "Не споделувај со {displayName}",
     "Unable to delete the share." : "Неможе да се избрише споделениот контакт",
     "Unable to change permissions." : "Неможе да се променат дозволите.",

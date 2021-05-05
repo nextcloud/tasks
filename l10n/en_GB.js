@@ -14,7 +14,6 @@ OC.L10N.register(
     "Visible" : "Visible",
     "Automatic" : "Automatic",
     "Share with users or groups" : "Share with users or groups",
-    "can edit" : "can edit",
     "Edit" : "Edit",
     "Download" : "Download",
     "Delete" : "Delete",

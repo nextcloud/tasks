@@ -17,7 +17,6 @@ OC.L10N.register(
     "Automatic" : "Автоматически",
     "Share with users or groups" : "Поделиться с пользователями или группами",
     "No users or groups" : "Пользователи или группы отсутствуют",
-    "can edit" : "Разрешить редактировать",
     "Unshare with {displayName}" : "Отменить общий доступ для {displayName}",
     "Unable to delete the share." : "Невозможно закрыть общий доступ.",
     "Unable to change permissions." : "Невозможно изменить права доступа.",

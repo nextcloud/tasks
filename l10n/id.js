@@ -15,7 +15,6 @@ OC.L10N.register(
     "Automatic" : "Otomatis",
     "Share with users or groups" : "Bagi dengan pengguna atau grup",
     "No users or groups" : "Tidak ada pengguna atau grup",
-    "can edit" : "dapat menyunting",
     "Unshare with {displayName}" : "Batal berbagi dengan {displayName}",
     "Edit" : "Sunting",
     "Copy private link" : "Salin tautan privat",

@@ -12,7 +12,6 @@ OC.L10N.register(
     "Hidden" : "Amagat",
     "Visible" : "Visible",
     "Automatic" : "Automatic",
-    "can edit" : "pòt modificar",
     "Edit" : "Modificar",
     "Download" : "Telecargar",
     "Delete" : "Suprimir",

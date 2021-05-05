@@ -12,7 +12,6 @@ OC.L10N.register(
     "Hidden" : "লুকনো",
     "Visible" : "দর্শনযোগ্য",
     "Automatic" : "স্বয়ংক্রিয়",
-    "can edit" : "সম্পাদনা করতে পারবেন",
     "Edit" : "সম্পাদনা",
     "Download" : "ডাউনলোড",
     "Delete" : "মুছে",

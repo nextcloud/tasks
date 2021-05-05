@@ -14,7 +14,6 @@ OC.L10N.register(
     "Automatic" : "Automātisks",
     "Share with users or groups" : "Koplietot ar lietotājiem vai grupām",
     "No users or groups" : "Nav lietotāji vai grupas",
-    "can edit" : "var rediģēt",
     "Unable to delete the share." : "Nevar izdzēst kopīgošanu.",
     "Unable to change permissions." : "Nevar mainīt atļaujas.",
     "Edit" : "Rediģēt",

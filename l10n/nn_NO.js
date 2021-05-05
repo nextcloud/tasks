@@ -6,7 +6,6 @@ OC.L10N.register(
     "Week" : "Veke",
     "All" : "Alle",
     "Tasks" : "Oppgåver",
-    "can edit" : "kan endra",
     "Edit" : "Endra",
     "Download" : "Last ned",
     "Delete" : "Slett",

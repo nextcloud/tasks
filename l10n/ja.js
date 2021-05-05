@@ -17,7 +17,6 @@ OC.L10N.register(
     "Automatic" : "自動",
     "Share with users or groups" : "ユーザーまたはグループと共有する",
     "No users or groups" : "ユーザーまたはグループはありません",
-    "can edit" : "編集を許可",
     "Unshare with {displayName}" : "{displayName}との共有を解除",
     "Unable to delete the share." : "共有を解除できません。",
     "Unable to change permissions." : "権限を変更できません。",

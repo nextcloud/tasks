@@ -14,7 +14,6 @@ OC.L10N.register(
     "Automatic" : "Automat",
     "Share with users or groups" : "Partajează cu utilizatori sau grupuri",
     "No users or groups" : "Nu sunt utilizatori sau grupuri",
-    "can edit" : "poate edita",
     "Edit" : "Editează",
     "Copy private link" : "Copiază link privat",
     "Download" : "Descarcă",

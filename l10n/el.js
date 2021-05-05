@@ -17,7 +17,6 @@ OC.L10N.register(
     "Automatic" : "Αυτόματο",
     "Share with users or groups" : "Κοινή χρήση με χρήστες ή ομάδες",
     "No users or groups" : "Δεν υπάρχουν χρήστες ή ομάδες",
-    "can edit" : "δυνατότητα επεξεργασίας",
     "Unshare with {displayName}" : "Κατάργηση κοινής χρήσης με {displayName}",
     "Unable to delete the share." : "Αδυναμία διαγραφής κοινόχρηστου.",
     "Unable to change permissions." : "Αδυναμία αλλαγής δικαιωμάτων.",

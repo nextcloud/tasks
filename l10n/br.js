@@ -8,7 +8,6 @@ OC.L10N.register(
     "Completed" : "Achuet",
     "Share with users or groups" : "Rannañ gant implijourienn pe strolladoù",
     "No users or groups" : "Implijourienn pe strodadoù ebet",
-    "can edit" : "posuple eo embann",
     "Unshare with {displayName}" : "Dirannañ gant {displayName}",
     "Edit" : "Cheñch",
     "Copy private link" : "Eilañ al liamm prevez",

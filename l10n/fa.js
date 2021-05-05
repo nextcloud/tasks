@@ -12,7 +12,6 @@ OC.L10N.register(
     "Automatic" : "خودکار",
     "Share with users or groups" : "اشتراک گذاری با کاربران یا گروه ها ...",
     "No users or groups" : "هیچ کاربر یا گروهی وجود ندارد",
-    "can edit" : "توانایی ویرایش",
     "Unshare with {displayName}" : "عدم اشتراک گذاری با {displayName}",
     "Edit" : "ویرایش",
     "Copy private link" : "پیوند خصوصی را کپی کنید",

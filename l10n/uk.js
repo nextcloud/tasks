@@ -16,7 +16,6 @@ OC.L10N.register(
     "Automatic" : "Автоматично",
     "Share with users or groups" : "Поділитися з користувачем або групою",
     "No users or groups" : "Жодного користувача або групм",
-    "can edit" : "може редагувати",
     "Unshare with {displayName}" : "Припинити поширення з {displayName}",
     "Unable to delete the share." : "Неможливо вилучити спільний елемент.",
     "Unable to change permissions." : "Неможливо змінити права доступу.",

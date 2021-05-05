@@ -11,7 +11,6 @@ OC.L10N.register(
     "Hidden" : "مخفي",
     "Automatic" : "تلقائي",
     "Share with users or groups" : "شارك مع مستخدمين او مجموعات",
-    "can edit" : "يمكن التعديل",
     "Edit" : "تعديل",
     "Download" : "تحميل",
     "Delete" : "حذف ",

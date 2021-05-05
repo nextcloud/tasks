@@ -13,7 +13,6 @@ OC.L10N.register(
     "Visible" : "มองเห็นได้",
     "Automatic" : "อัตโนมัติ",
     "Share with users or groups" : "แชร์กับผู้ใช้หรือกลุ่ม",
-    "can edit" : "สามารถแก้ไข",
     "Edit" : "แก้ไข",
     "Download" : "ดาวน์โหลด",
     "Delete" : "ลบ",

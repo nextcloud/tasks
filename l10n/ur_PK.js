@@ -5,7 +5,6 @@ OC.L10N.register(
     "Today" : "آج",
     "Week" : "ہفتہ",
     "Tasks" : "کام",
-    "can edit" : "تبدیل کر سکے ھیں",
     "Edit" : "تدوین کریں",
     "Download" : "ڈاؤن لوڈ",
     "Delete" : "حذف کریں",

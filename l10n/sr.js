@@ -17,7 +17,6 @@ OC.L10N.register(
     "Automatic" : "Аутоматски",
     "Share with users or groups" : "Дели са корисницима или групама",
     "No users or groups" : "Нема корисника или група",
-    "can edit" : "може да мења",
     "Unshare with {displayName}" : "Уклони дељење са {displayName}",
     "Unable to delete the share." : "Не могу да обришем дељење.",
     "Unable to change permissions." : "Не могу да променим привилегије.",

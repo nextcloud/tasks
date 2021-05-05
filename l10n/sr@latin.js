@@ -4,7 +4,6 @@ OC.L10N.register(
     "Today" : "Today",
     "Current" : "Tekuće",
     "Completed" : "Završeno",
-    "can edit" : "može da menja",
     "Edit" : "Uredi",
     "Download" : "Preuzmi",
     "Delete" : "Delete",

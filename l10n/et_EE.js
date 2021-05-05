@@ -14,7 +14,6 @@ OC.L10N.register(
     "Automatic" : "Automaatne",
     "Share with users or groups" : "Jaga kasutajate või gruppidega",
     "No users or groups" : "Ei ole kasutajaid või gruppe",
-    "can edit" : "saab redigeerida",
     "Unshare with {displayName}" : "Lõpeta jagamine kasutajaga: {displayName}",
     "Edit" : "Muuda",
     "Copy private link" : "Kopeeri privaatne link",

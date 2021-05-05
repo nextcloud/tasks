@@ -12,7 +12,6 @@ OC.L10N.register(
     "Hidden" : "Gizli",
     "Visible" : "Görünən",
     "Automatic" : "Avtomatik",
-    "can edit" : "dəyişmək olar",
     "Edit" : "Dəyişiklik et",
     "Download" : "Yüklə",
     "Delete" : "Sil",

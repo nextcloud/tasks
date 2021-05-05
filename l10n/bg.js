@@ -17,7 +17,6 @@ OC.L10N.register(
     "Automatic" : "Автоматично",
     "Share with users or groups" : "Сподели с потребители или групи",
     "No users or groups" : "Няма потребители или групи",
-    "can edit" : "може да редактира",
     "Unshare with {displayName}" : "Прекратява споделянето с {displayName}",
     "Unable to delete the share." : "Неуспешно изтриване на споделяне.",
     "Unable to change permissions." : "Неуспешна промяна на права.",

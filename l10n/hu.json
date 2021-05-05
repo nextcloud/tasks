@@ -15,7 +15,6 @@
     "Automatic" : "Automatikus",
     "Share with users or groups" : "Megosztás felhasználókkal vagy csoportokkal",
     "No users or groups" : "Nincsenek felhasználók vagy csoportok",
-    "can edit" : "módosíthat",
     "Unshare with {displayName}" : "Megosztás {displayName}-vel törölve",
     "Unable to delete the share." : "Nem lehet törölni a megosztást.",
     "Unable to change permissions." : "Nem lehet változtatni az engedélyeket.",

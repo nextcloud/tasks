@@ -14,7 +14,6 @@ OC.L10N.register(
     "Automatic" : "Outomaties",
     "Share with users or groups" : "Deel met gebruikers of groepe",
     "No users or groups" : "Geen gebruikers of groepe",
-    "can edit" : "kan wysig",
     "Edit" : "Wysig",
     "Copied" : "Gekopieer",
     "Download" : "Laai Af",

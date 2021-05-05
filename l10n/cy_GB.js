@@ -6,7 +6,6 @@ OC.L10N.register(
     "All" : "Popeth",
     "Share with users or groups" : "Rhannwch gyda defnyddwyr neu grwpiau",
     "No users or groups" : "Dim defnyddwyr na grwpiau",
-    "can edit" : "yn gallu golygu",
     "Unable to delete the share." : "Methu dileu'r gyfran.",
     "Unable to change permissions." : "Methu newid caniatâd.",
     "Edit" : "Golygu",

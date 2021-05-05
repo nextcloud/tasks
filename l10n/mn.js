@@ -8,7 +8,6 @@ OC.L10N.register(
     "Completed" : "Гүйцэтгэгдсэн",
     "Hidden" : "Далд",
     "Share with users or groups" : "Бусад хэрэглэгч, бүлэгт хуваалцах",
-    "can edit" : "засаж чадна",
     "Edit" : "засварлах",
     "Download" : "татаж авах",
     "Delete" : "устгах",

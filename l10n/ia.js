@@ -12,7 +12,6 @@ OC.L10N.register(
     "Visible" : "Visibile",
     "Automatic" : "Automatic",
     "Share with users or groups" : "Compartir con usatores o gruppos",
-    "can edit" : "pote modificar",
     "Edit" : "Modificar",
     "Download" : "Discargar",
     "Delete" : "Deler",

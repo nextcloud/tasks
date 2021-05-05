@@ -14,7 +14,6 @@ OC.L10N.register(
     "Automatic" : "Automatisk",
     "Share with users or groups" : "Del med brugere eller grupper",
     "No users or groups" : "Ingen brugere eller grupper",
-    "can edit" : "kan redigere",
     "Unable to delete the share." : "Kan ikke slette delingen.",
     "Unable to change permissions." : "Kan ikke ændre tilladelser.",
     "Edit" : "Redigér",

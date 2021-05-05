@@ -17,7 +17,6 @@ OC.L10N.register(
     "Automatic" : "Automatisch",
     "Share with users or groups" : "Mit Benutzern oder Gruppen teilen",
     "No users or groups" : "Keine Benutzer oder Gruppen",
-    "can edit" : "kann bearbeiten",
     "Unshare with {displayName}" : "Mit {displayName} nicht mehr teilen",
     "Unable to delete the share." : "Freigabe kann nicht gelöscht werden.",
     "Unable to change permissions." : "Berechtigungen können nicht geändert werden.",

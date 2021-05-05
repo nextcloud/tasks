@@ -13,7 +13,6 @@ OC.L10N.register(
     "Visible" : "I dukshëm",
     "Automatic" : "Automatike",
     "Share with users or groups" : "Nda me përdoruesit ose grupet",
-    "can edit" : "mund të modifikoni",
     "Edit" : "Përpunoni",
     "Download" : "Shkarkoje",
     "Delete" : "Fshije",

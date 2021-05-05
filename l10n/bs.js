@@ -8,7 +8,6 @@ OC.L10N.register(
     "Current" : "Trenutno",
     "Completed" : "Zavrženo",
     "Tasks" : "Zadaci",
-    "can edit" : "mogu mijenjati",
     "Edit" : "Izmjeni",
     "Download" : "Preuzmi",
     "Delete" : "Obriši",
