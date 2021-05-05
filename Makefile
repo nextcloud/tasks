@@ -88,8 +88,9 @@ update-composer: composer.phar
 # Removes the build directory and the compiled files
 .PHONY: clean
 clean:
-	rm -f ./js/tasks.js
-	rm -f ./js/tasks.js.map
+	rm -f ./js/tasks-main.js
+	rm -f ./js/tasks-main.js.map
+	rm -f ./js/tasks-main.js.LICENSE.txt
 	rm -rf $(build_directory)
 
 # Same as clean but also removes dependencies installed by npm
