@@ -17,6 +17,7 @@ OC.L10N.register(
     "Automatic" : "Automático",
     "Share with users or groups" : "Compartir con otros usuarios o grupos",
     "No users or groups" : "No hay usuarios ni grupos.",
+    "Can edit" : "Puede editar",
     "Unshare with {displayName}" : "Dejar de compartir con {displayName}",
     "Unable to delete the share." : "No se ha podido eliminar el elemento compartido.",
     "Unable to change permissions." : "No se han podido cambiar los permisos.",

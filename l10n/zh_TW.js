@@ -17,6 +17,7 @@ OC.L10N.register(
     "Automatic" : "自動",
     "Share with users or groups" : "與使用者或群組分享",
     "No users or groups" : "沒有使用者或群組",
+    "Can edit" : "可以編輯",
     "Unshare with {displayName}" : "取消與 {displayName} 的分享",
     "Unable to delete the share." : "無法刪除共享.",
     "Unable to change permissions." : "無法變更權限。",
