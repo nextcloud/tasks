@@ -33,13 +33,6 @@ body {
 .app-navigation {
 	> ul > div > li,
 	> ul > li {
-		// Overwrite padding until https://github.com/nextcloud/nextcloud-vue/pull/1897#issuecomment-830301938
-		// is confirmed
-		&.app-navigation-entry {
-			padding: 0;
-			padding-right: 4px;
-		}
-
 		&.dnd-hover,
 		&.sortable-ghost {
 			background-color: var(--color-primary-light);
