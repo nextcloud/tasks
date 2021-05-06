@@ -579,14 +579,8 @@ $color-error: #e9322d;
 		width: 32px;
 	}
 
-	.app-navigation-entry__counter-wrapper {
-		display: flex;
-		align-items: center;
-		flex: 0 1 auto;
-
-		.action-item.sharing:not(.shared) {
-			opacity: .3;
-		}
+	.app-navigation-entry__counter-wrapper .action-item.sharing:not(.shared) {
+		opacity: .3;
 	}
 
 	.app-navigation-entry-edit {
