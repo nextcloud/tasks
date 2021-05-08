@@ -88,7 +88,7 @@
 		"jest-environment-jsdom-sixteen": "^2.0.0",
 		"jest-serializer-vue": "^2.0.2",
 		"mockdate": "^3.0.5",
-		"node-polyfill-webpack-plugin": "^1.1.0",
+		"node-polyfill-webpack-plugin": "^1.1.1",
 		"node-sass": "^5.0.0",
 		"prettier-eslint": "^12.0.0",
 		"raw-loader": "^4.0.2",
