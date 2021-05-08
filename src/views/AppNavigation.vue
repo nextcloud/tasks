@@ -444,11 +444,6 @@ export default {
 <style lang="scss" scoped>
 $color-error: #e9322d;
 
-// ensure calendars are shown after collections
-.draggable-container {
-	order: 1;
-}
-
 .collection::v-deep {
 	&.collection--edit {
 		.app-navigation-entry-link {
