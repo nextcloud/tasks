@@ -81,24 +81,24 @@ export default {
 		/**
 		 * Gets the user-id of the calendar's owner
 		 *
-		 * @returns {null|String}
+		 * @returns {undefined|String}
 		 */
 		userId() {
 			if (this.principal) {
 				return this.principal.userId
 			}
-			return null
+			return undefined
 		},
 		/**
 		 * Gets the displayname of the calendar's owner
 		 *
-		 * @returns {null|String}
+		 * @returns {undefined|String}
 		 */
 		userDisplayName() {
 			if (this.principal) {
 				return this.principal.displayname
 			}
-			return null
+			return undefined
 		},
 	},
 }
