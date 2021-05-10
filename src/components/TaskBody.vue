@@ -84,7 +84,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</div>
 				<SortVariant v-if="hasHiddenSubtasks" :size="24" :title="$t('tasks', 'Task has hidden subtasks')" />
 				<Pin v-if="task.pinned" :size="24" :title="$t('tasks', 'Task is pinned')" />
-				<NoteText v-if="task.note!=''" :size="24" :title="$t('tasks', 'Task has a note')" />
+				<TextBoxOutline v-if="task.note!=''" :size="24" :title="$t('tasks', 'Task has a note')" />
 				<div v-if="task.due || task.completed" :class="{'date--overdue': overdue(task.dueMoment) && !task.completed}" class="date">
 					<span class="date__short" :class="{ 'date__short--completed': task.completed }">{{ dueDateShort }}</span>
 					<span class="date__long" :class="{ 'date__long--date-only': task.allDay && !task.completed, 'date__long--completed': task.completed }">{{ dueDateLong }}</span>
@@ -171,7 +171,7 @@ import Eye from 'vue-material-design-icons/Eye.vue'
 import Delete from 'vue-material-design-icons/Delete.vue'
 import Pin from 'vue-material-design-icons/Pin.vue'
 import Plus from 'vue-material-design-icons/Plus.vue'
-import NoteText from 'vue-material-design-icons/NoteText.vue'
+import TextBoxOutline from 'vue-material-design-icons/TextBoxOutline.vue'
 import SortVariant from 'vue-material-design-icons/SortVariant.vue'
 import Star from 'vue-material-design-icons/Star.vue'
 import Undo from 'vue-material-design-icons/Undo.vue'
@@ -196,7 +196,7 @@ export default {
 		Eye,
 		Pin,
 		Plus,
-		NoteText,
+		TextBoxOutline,
 		SortVariant,
 		Star,
 		Undo,

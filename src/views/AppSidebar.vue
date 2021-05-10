@@ -191,7 +191,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			class="app-sidebar-tab"
 			:name="$t('tasks', 'Notes')"
 			:order="1">
-			<NoteText slot="icon" :size="24" decorative />
+			<TextBoxOutline slot="icon" :size="24" decorative />
 			<NotesItem
 				v-show="!readOnly || task.note"
 				:value="task.note"
@@ -247,7 +247,7 @@ import Pin from 'vue-material-design-icons/Pin.vue'
 import PinOff from 'vue-material-design-icons/PinOff.vue'
 import Star from 'vue-material-design-icons/Star.vue'
 import Percent from 'vue-material-design-icons/Percent.vue'
-import NoteText from 'vue-material-design-icons/NoteText.vue'
+import TextBoxOutline from 'vue-material-design-icons/TextBoxOutline.vue'
 import InformationOutline from 'vue-material-design-icons/InformationOutline.vue'
 
 import { mapGetters, mapActions } from 'vuex'
@@ -270,7 +270,7 @@ export default {
 		PinOff,
 		Star,
 		Percent,
-		NoteText,
+		TextBoxOutline,
 		InformationOutline,
 		EmptyContent,
 		MultiselectItem,
