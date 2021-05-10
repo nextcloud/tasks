@@ -20,9 +20,6 @@
  */
 
 @include icon-black-white('circle', 'tasks', 1);
-@include icon-black-white('reminder', 'tasks', 1);
-@include icon-black-white('repeat', 'tasks', 1);
-@include icon-black-white('note', 'tasks', 1);
 
 // Hack for https://github.com/nextcloud/nextcloud-vue/issues/1384
 body {
