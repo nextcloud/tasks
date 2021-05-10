@@ -59,7 +59,7 @@ jobs:
 
     strategy:
       matrix:
-        node-versions: [12.x]
+        node-versions: [15, 16]
 
     name: node${{ matrix.node-versions }}
     steps:
@@ -81,7 +81,7 @@ jobs:
 
     strategy:
       matrix:
-        node-versions: [12.x]
+        node-versions: [15, 16]
 
     name: SCSS
     steps:
