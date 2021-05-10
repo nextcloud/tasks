@@ -1271,10 +1271,12 @@ const actions = {
 			await task.dav.move(calendar.dav)
 				.then((response) => {
 					context.commit('deleteTaskFromCalendar', task)
+					context.commit('deleteTask', task)
 					// Update the calendar of the task
 					context.commit('setTaskCalendar', { task, calendar })
 					// Remove the task from the calendar, add it to the new one
 					context.commit('addTaskToCalendar', task)
+					context.commit('appendTask', task)
 					task.syncStatus = new SyncStatus('success', OCA.Tasks.$t('tasks', 'Task successfully moved to new calendar.'))
 				})
 				.catch((error) => {
