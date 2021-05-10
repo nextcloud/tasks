@@ -127,9 +127,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		<AppSidebarTab v-if="task"
 			id="app-sidebar-tab-details"
 			class="app-sidebar-tab"
-			icon="icon-details"
 			:name="$t('tasks', 'Details')"
 			:order="0">
+			<InformationOutline slot="icon" :size="24" decorative />
 			<div>
 				<MultiselectItem
 					v-show="!readOnly || task.class !== 'PUBLIC'"
@@ -189,9 +189,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		<AppSidebarTab v-if="task && (!readOnly || task.note)"
 			id="app-sidebar-tab-notes"
 			class="app-sidebar-tab"
-			icon="icon-note"
 			:name="$t('tasks', 'Notes')"
 			:order="1">
+			<NoteText slot="icon" :size="24" decorative />
 			<NotesItem
 				v-show="!readOnly || task.note"
 				:value="task.note"
@@ -247,6 +247,8 @@ import Pin from 'vue-material-design-icons/Pin.vue'
 import PinOff from 'vue-material-design-icons/PinOff.vue'
 import Star from 'vue-material-design-icons/Star.vue'
 import Percent from 'vue-material-design-icons/Percent.vue'
+import NoteText from 'vue-material-design-icons/NoteText.vue'
+import InformationOutline from 'vue-material-design-icons/InformationOutline.vue'
 
 import { mapGetters, mapActions } from 'vuex'
 
@@ -268,6 +270,8 @@ export default {
 		PinOff,
 		Star,
 		Percent,
+		NoteText,
+		InformationOutline,
 		EmptyContent,
 		MultiselectItem,
 		SliderItem,
