@@ -27,15 +27,15 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		<div class="task-list">
 			<div class="grouped-tasks">
 				<TaskDragContainer
-					:tasks="uncompletedRootTasks(calendar.tasks)"
+					:tasks="openRootTasks(calendar.tasks)"
 					:calendar-id="calendarId"
 					:disabled="calendar.readOnly"
 					collection-id="uncompleted" />
-				<h2 v-show="completedCount(calendarId)" class="heading heading--hiddentasks reactive" @click="toggleHidden">
-					<span class="heading__title icon-triangle-s">{{ completedCountString }}</span>
+				<h2 v-show="closedCount(calendarId)" class="heading heading--hiddentasks reactive" @click="toggleHidden">
+					<span class="heading__title icon-triangle-s">{{ closedCountString }}</span>
 				</h2>
 				<TaskDragContainer v-if="showHidden"
-					:tasks="completedRootTasks(calendar.tasks)"
+					:tasks="closedRootTasks(calendar.tasks)"
 					:calendar-id="calendarId"
 					:disabled="calendar.readOnly"
 					class="completed"
@@ -82,18 +82,18 @@ export default {
 			},
 		},
 		/**
-		 * Returns the string for completed tasks
+		 * Returns the string for closed tasks
 		 *
 	 	 * @returns {String} The string to show for the completed tasks count
 		 */
-		completedCountString() {
-			return this.$n('tasks', '%n Completed Task', '%n Completed Tasks', this.completedCount(this.calendarId))
+		closedCountString() {
+			return this.$n('tasks', '%n Completed Task', '%n Completed Tasks', this.closedCount(this.calendarId))
 		},
 		...mapGetters({
-			completedCount: 'getCalendarCountCompleted',
+			closedCount: 'getCalendarCountClosed',
 			calendar: 'getCalendarByRoute',
-			uncompletedRootTasks: 'findUncompletedRootTasks',
-			completedRootTasks: 'findCompletedRootTasks',
+			openRootTasks: 'findOpenRootTasks',
+			closedRootTasks: 'findClosedRootTasks',
 		}),
 	},
 	methods: {

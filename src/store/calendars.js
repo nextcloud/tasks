@@ -229,7 +229,7 @@ const getters = {
 		const calendar = getters.getCalendarById(calendarId)
 		let tasks = Object.values(calendar.tasks)
 			.filter(task => {
-				return task.completed === false && (!task.related || !isParentInList(task, calendar.tasks))
+				return task.closed === false && (!task.related || !isParentInList(task, calendar.tasks))
 			})
 		if (rootState.tasks.searchQuery) {
 			tasks = tasks.filter(task => {
@@ -244,22 +244,22 @@ const getters = {
 	},
 
 	/**
-	 * Returns the count of completed tasks in a calendar
+	 * Returns the count of closed tasks in a calendar
 	 *
 	 * Tasks have to be
 	 * - a root task
-	 * - completed
+	 * - closed
 	 *
 	 * @param {Object} state The store data
 	 * @param {Object} getters The store getters
 	 * @param {String} calendarId The id of the calendar in question
-	 * @returns {Integer} The count of completed tasks in a calendar
+	 * @returns {Integer} The count of closed tasks in a calendar
 	 */
-	getCalendarCountCompleted: (state, getters) => (calendarId) => {
+	getCalendarCountClosed: (state, getters) => (calendarId) => {
 		const calendar = getters.getCalendarById(calendarId)
 		return Object.values(calendar.tasks)
 			.filter(task => {
-				return task.completed === true && (!task.related || !isParentInList(task, calendar.tasks))
+				return task.closed === true && (!task.related || !isParentInList(task, calendar.tasks))
 			}).length
 	},
 

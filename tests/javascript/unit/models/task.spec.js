@@ -212,4 +212,14 @@ describe('task', () => {
 		const complete = task.vtodo.getFirstPropertyValue('status')
 		expect(complete).toEqual(null)
 	})
+
+	it('Indicates cloesed when completed or cancelled', () => {
+		const task = new Task(loadICS('vcalendars/vcalendar-default'), {})
+		task.status = 'CANCELLED'
+		expect(task.closed).toEqual(true)
+		task.status = null
+		expect(task.closed).toEqual(false)
+		task.complete = 100
+		expect(task.closed).toEqual(true)
+	})
 })

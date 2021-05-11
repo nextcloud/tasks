@@ -2,6 +2,7 @@
  * Nextcloud - Tasks
  *
  * @author Raimund Schlüßler
+ * @copyright 2021 Jonas Thelemann <e-mail@jonas-thelemann.de>
  * @copyright 2019 Raimund Schlüßler <raimund.schluessler@mailbox.org>
  * @copyright 2018 Vadim Nicolai <contact@vadimnicolai.com>
  *
@@ -39,20 +40,20 @@ function isTaskInList(task, listId, checkSubtasks = true) {
 	const day = parts[1] ? parts[1] : null
 	switch (listId) {
 	case 'completed':
-		return task.completed
+		return task.closed
 	case 'all':
-		return !task.completed
+		return !task.closed
 	case 'current':
-		return !task.completed && testTask(task, isTaskCurrent, checkSubtasks)
+		return !task.closed && testTask(task, isTaskCurrent, checkSubtasks)
 	case 'starred':
-		return !task.completed && testTask(task, isTaskPriority, checkSubtasks)
+		return !task.closed && testTask(task, isTaskPriority, checkSubtasks)
 	case 'today':
-		return !task.completed && testTask(task, isTaskToday, checkSubtasks)
+		return !task.closed && testTask(task, isTaskToday, checkSubtasks)
 	case 'week':
 		if (!day) {
-			return !task.completed && testTask(task, isTaskWeek, checkSubtasks)
+			return !task.closed && testTask(task, isTaskWeek, checkSubtasks)
 		} else {
-			return !task.completed && testTask(task, (task) => isTaskDay(task, parseInt(day)), checkSubtasks)
+			return !task.closed && testTask(task, (task) => isTaskDay(task, parseInt(day)), checkSubtasks)
 		}
 	default:
 		return '' + task.calendar.id === '' + listId
@@ -68,7 +69,7 @@ function isTaskInList(task, listId, checkSubtasks = true) {
  * @returns {Boolean}
  */
 function testTask(task, testFunction, checkSubtasks = false) {
-	if (!task.completed && testFunction(task)) {
+	if (!task.closed && testFunction(task)) {
 		return true
 	}
 	if (checkSubtasks) {

@@ -57,7 +57,7 @@ export default {
 	computed: {
 		...mapGetters({
 			tasks: 'getAllTasks',
-			uncompletedRootTasks: 'findUncompletedRootTasks',
+			openRootTasks: 'findOpenRootTasks',
 		}),
 
 		/**
@@ -66,8 +66,8 @@ export default {
 		 * @returns {Array} the array with the days
 		 */
 		days() {
-			// Get all uncompleted root tasks
-			const tasks = this.uncompletedRootTasks(this.tasks)
+			// Get all open root tasks
+			const tasks = this.openRootTasks(this.tasks)
 
 			// Construct array with days for the current week.
 			const days = []

@@ -48,6 +48,7 @@ const calendarsData = [
 			'vcalendars/calendar1/vcalendar-vtodo4_1',
 			'vcalendars/calendar1/vcalendar-vtodo5',
 			'vcalendars/calendar1/vcalendar-vtodo6',
+			'vcalendars/calendar1/vcalendar-vtodo7',
 		].map(vcalendar => loadICS(vcalendar)),
 	},
 	{

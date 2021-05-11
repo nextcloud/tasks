@@ -184,36 +184,36 @@ const getters = {
 	},
 
 	/**
-	 * Returns the completed root tasks from a given object
+	 * Returns the closed root tasks from a given object
 	 *
 	 * @param {Object} tasks The tasks to search in
 	 * @returns {Array}
 	 */
-	findCompletedRootTasks: () => (tasks) => {
+	findClosedRootTasks: () => (tasks) => {
 		return Object.values(tasks).filter(task => {
 			/**
 			 * Check if the task has the related field set.
 			 * If it has, then check if the parent task is available
 			 * (otherwise it might happen, that this task is not shown at all)
 			 */
-			return (!task.related || !isParentInList(task, tasks)) && task.completed
+			return (!task.related || !isParentInList(task, tasks)) && task.closed
 		})
 	},
 
 	/**
-	 * Returns the not completed root tasks from a given object
+	 * Returns the not closed root tasks from a given object
 	 *
 	 * @param {Object} tasks The tasks to search in
 	 * @returns {Array}
 	 */
-	findUncompletedRootTasks: () => (tasks) => {
+	findOpenRootTasks: () => (tasks) => {
 		return Object.values(tasks).filter(task => {
 			/**
 			 * Check if the task has the related field set.
 			 * If it has, then check if the parent task is available
 			 * (otherwise it might happen, that this task is not shown at all)
 			 */
-			return (!task.related || !isParentInList(task, tasks)) && !task.completed
+			return (!task.related || !isParentInList(task, tasks)) && !task.closed
 		})
 	},
 
@@ -928,13 +928,13 @@ const actions = {
 		if (complete < 100) {
 			// uncomplete the parent task
 			const parent = context.getters.getParentTask(task)
-			if (parent && parent.completed) {
+			if (parent && parent.closed) {
 				await context.dispatch('setPercentComplete', { task: parent, complete: 0 })
 			}
 		} else {
 			// complete all sub tasks
 			await Promise.all(Object.values(task.subTasks).map(async(subTask) => {
-				if (!subTask.completed) {
+				if (!subTask.closed) {
 					await context.dispatch('setPercentComplete', { task: subTask, complete: 100 })
 				}
 			}))
@@ -1088,6 +1088,20 @@ const actions = {
 	async setStatus(context, { task, status }) {
 		// check status to comply with RFC5545 values
 		status = (['NEEDS-ACTION', 'COMPLETED', 'IN-PROCESS', 'CANCELLED'].indexOf(status) > -1) ? status : null
+		if (status !== 'CANCELLED' && !task.completed) {
+			// uncancel the parent task
+			const parent = context.getters.getParentTask(task)
+			if (parent && parent.closed) {
+				await context.dispatch('setStatus', { task: parent, status: 'IN-PROCESS' })
+			}
+		} else {
+			// set all open subtasks to cancelled
+			await Promise.all(Object.values(task.subTasks).map(async(subTask) => {
+				if (!subTask.closed) {
+					await context.dispatch('setStatus', { task: subTask, status: 'CANCELLED' })
+				}
+			}))
+		}
 		context.commit('setStatus', { task, status })
 		context.dispatch('scheduleTaskUpdate', task)
 	},

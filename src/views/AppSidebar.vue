@@ -120,7 +120,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					:disabled="readOnly"
 					:aria-label="$t('tasks', 'Task is completed')"
 					@click="toggleCompleted(task)">
-				<label :class="[priorityClass]" :for="'detailsToggleCompleted_' + task.uid" />
+				<label :class="[priorityClass]" :for="'detailsToggleCompleted_' + task.uid">
+					<Cancel v-if="task.status === 'CANCELLED' && !task.completed" :size="24" decorative />
+				</label>
 			</span>
 		</template>
 
@@ -240,6 +242,7 @@ import { generateUrl } from '@nextcloud/router'
 import Calendar from 'vue-material-design-icons/Calendar.vue'
 import CalendarStart from 'vue-material-design-icons/CalendarStart.vue'
 import CalendarEnd from 'vue-material-design-icons/CalendarEnd.vue'
+import Cancel from 'vue-material-design-icons/Cancel.vue'
 import Delete from 'vue-material-design-icons/Delete.vue'
 import Download from 'vue-material-design-icons/Download.vue'
 import Pencil from 'vue-material-design-icons/Pencil.vue'
@@ -263,6 +266,7 @@ export default {
 		Calendar,
 		CalendarStart,
 		CalendarEnd,
+		Cancel,
 		Delete,
 		Download,
 		Pencil,
@@ -817,6 +821,7 @@ $blue: #4271a6;
 	height: 44px;
 	width: 44px;
 	justify-content: center;
+	flex-shrink: 0;
 
 	input[type='checkbox'].checkbox {
 		&:checked + label::before {
@@ -830,6 +835,13 @@ $blue: #4271a6;
 		+ label {
 			display: flex;
 			align-items: center;
+
+			.material-design-icon {
+				position: absolute;
+				height: 18px;
+				width: 18px;
+				opacity: .7;
+			}
 
 			&::before {
 				margin: 0;
