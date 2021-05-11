@@ -22,13 +22,14 @@ describe('General.vue', () => {
 		expect(wrapper.vm.calendars.length).toBe(2)
 	})
 
-	it('Checks that only uncompleted tasks show in the all view', () => {
+	it('Checks that only uncompleted and not cancelled tasks show in the all view', () => {
 		const wrapper = mount(General, { localVue, store, router })
 		if (wrapper.vm.$route.params.collectionId !== 'all') {
 			router.push({ name: 'collections', params: { collectionId: 'all' } })
 		}
 		expect(wrapper.find('li[task-id="pwen4kz18g.ics"]').exists()).toBe(true)
 		expect(wrapper.find('li[task-id="pwen4kz40g.ics"]').exists()).toBe(false)
+		expect(wrapper.find('li[task-id="pwen9kz48g.ics"]').exists()).toBe(false)
 	})
 
 	/*
@@ -54,6 +55,7 @@ describe('General.vue', () => {
 		expect(wrapper.find('li[task-id="pwen4kz25g.ics"]').exists()).toBe(false) // Has an important sibling, but no important child --> hidden
 		// Not important, has important subtask which is completed --> hidden
 		expect(wrapper.find('li[task-id="pwen4kz30g.ics"]').exists()).toBe(false)
+		expect(wrapper.find('li[task-id="pwen9kz48g.ics"]').exists()).toBe(false) // Important but cancelled --> hidden
 	})
 
 	/*
@@ -116,12 +118,13 @@ describe('General.vue', () => {
 		expect(wrapper.vm.filteredCalendars.length).toBe(1)
 	})
 
-	it('Checks that only completed tasks show in the completed view', () => {
+	it('Checks that only completed or cancelled tasks show in the completed view', () => {
 		const wrapper = mount(General, { localVue, store, router })
 		if (wrapper.vm.$route.params.collectionId !== 'completed') {
 			router.push({ name: 'collections', params: { collectionId: 'completed' } })
 		}
 		expect(wrapper.find('li[task-id="pwen4kz19g.ics"]').exists()).toBe(false) // Not completed --> hidden
 		expect(wrapper.find('li[task-id="pwen4kz40g.ics"]').exists()).toBe(true) // Completed --> shown
+		expect(wrapper.find('li[task-id="pwen9kz48g.ics"]').exists()).toBe(true) // Cancelled --> shown
 	})
 })
