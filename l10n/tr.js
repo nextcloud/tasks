@@ -92,8 +92,6 @@ OC.L10N.register(
     "Add subtask" : "Alt görev ekle",
     "Show subtasks" : "Alt görevleri görüntüle",
     "Hide subtasks" : "Alt görevleri gizle",
-    "Show completed subtasks" : "Tamamlanmış alt görevleri görüntüle",
-    "Hide completed subtasks" : "Tamamlanmış alt görevleri gizle",
     "Delete task" : "Görevi sil",
     "Toggle starred" : "Yıldız koy/kaldır",
     "[Yesterday]" : "[Dün]",

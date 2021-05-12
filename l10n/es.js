@@ -92,8 +92,6 @@ OC.L10N.register(
     "Add subtask" : "Añadir subtarea",
     "Show subtasks" : "Ver subtareas",
     "Hide subtasks" : "Ocultar subtareas",
-    "Show completed subtasks" : "Ver las subtareas completadas",
-    "Hide completed subtasks" : "Ocultar las subtareas completadas",
     "Delete task" : "Eliminar tarea",
     "Toggle starred" : "Alternar favorito",
     "[Yesterday]" : "[Ayer]",

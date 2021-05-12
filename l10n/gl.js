@@ -79,8 +79,6 @@ OC.L10N.register(
     "Add subtask" : "Engadir unha subtarefa",
     "Show subtasks" : "Amosar as subtarefas",
     "Hide subtasks" : "Agochar as subtarefas",
-    "Show completed subtasks" : "Amosar as subtarefas completadas",
-    "Hide completed subtasks" : "Agochar as subtarefas completadas",
     "Delete task" : "Eliminar tarefa",
     "[Yesterday]" : "[Onte]",
     "[Today]" : "[Hoxe]",

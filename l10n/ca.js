@@ -76,8 +76,6 @@ OC.L10N.register(
     "Add subtask" : "Afegeix subtasca",
     "Show subtasks" : "Mostra subtasques",
     "Hide subtasks" : "Amaga subtasques",
-    "Show completed subtasks" : "Mostra les subtasques completades",
-    "Hide completed subtasks" : "Amaga les subtasques completades",
     "Delete task" : "Esborra la tasca",
     "[Yesterday]" : "[Ahir]",
     "[Today]" : "[Avui]",

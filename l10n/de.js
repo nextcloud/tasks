@@ -92,8 +92,6 @@ OC.L10N.register(
     "Add subtask" : "Teilaufgabe hinzufügen",
     "Show subtasks" : "Teilaufgabe anzeigen",
     "Hide subtasks" : "Teilaufgaben ausblenden",
-    "Show completed subtasks" : "Fertige Teilaufgaben anzeigen",
-    "Hide completed subtasks" : "Fertige Teilaufgaben ausblenden",
     "Delete task" : "Aufgabe löschen",
     "Toggle starred" : "Favorisiert umschalten",
     "[Yesterday]" : "[Gestern]",

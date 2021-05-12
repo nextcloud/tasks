@@ -77,8 +77,6 @@ OC.L10N.register(
     "Add subtask" : "הוספת תת־משימה",
     "Show subtasks" : "הצגת תת־משימות",
     "Hide subtasks" : "הסתרת תת־משימות",
-    "Show completed subtasks" : "הצגת תת־משימות שהושלמו",
-    "Hide completed subtasks" : "הסתרת תת־משימות שהושלמו",
     "Delete task" : "מחיקת משימה",
     "[Yesterday]" : "[אתמול]",
     "[Today]" : "[היום]",

@@ -69,8 +69,6 @@ OC.L10N.register(
     "Add subtask" : "Lägg till underuppgift",
     "Show subtasks" : "Visa underuppgifter",
     "Hide subtasks" : "Dölj underuppgifter",
-    "Show completed subtasks" : "Visa slutförda underuppgifter",
-    "Hide completed subtasks" : "Dölj slutförda underuppgifter",
     "Delete task" : "Ta bort uppgift",
     "[Yesterday]" : "[Igår]",
     "[Today]" : "[Idag]",

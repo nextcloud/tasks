@@ -92,8 +92,6 @@ OC.L10N.register(
     "Add subtask" : "新增子工作項目",
     "Show subtasks" : "顯示子工作項目",
     "Hide subtasks" : "隱藏子工作項目",
-    "Show completed subtasks" : "顯示已完成的子工作項目",
-    "Hide completed subtasks" : "隱藏已完成的子工作項目",
     "Delete task" : "刪除工作項目",
     "Toggle starred" : "加上／移除星號",
     "[Yesterday]" : "[昨天]",

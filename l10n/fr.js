@@ -78,8 +78,6 @@ OC.L10N.register(
     "Add subtask" : "Ajouter une sous-tâche",
     "Show subtasks" : "Afficher les sous-tâches",
     "Hide subtasks" : "Masquer les sous-tâches",
-    "Show completed subtasks" : "Afficher les sous-tâches terminées",
-    "Hide completed subtasks" : "Masquer les sous-tâches terminées",
     "Delete task" : "Supprimer la tâche",
     "[Yesterday]" : "[Hier]",
     "[Today]" : "[Aujourd'hui]",

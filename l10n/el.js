@@ -78,8 +78,6 @@ OC.L10N.register(
     "Add subtask" : "Προσθήκη υποεργασίας",
     "Show subtasks" : "Εμφάνιση υποεργασιών",
     "Hide subtasks" : "Απόκρυψη υποεργασιών",
-    "Show completed subtasks" : "Εμφάνιση ολοκληρωμένων υποεργασιών",
-    "Hide completed subtasks" : "Απόκρυψη ολοκληρωμένων υποεργασιών",
     "Delete task" : "Διαγραφή εργασίας",
     "[Yesterday]" : "[Χθες]",
     "[Today]" : "[Σήμερα]",

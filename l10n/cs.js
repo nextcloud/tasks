@@ -92,8 +92,6 @@ OC.L10N.register(
     "Add subtask" : "Přidat dílčí úkol",
     "Show subtasks" : "Zobrazit dílčí úkoly",
     "Hide subtasks" : "Skrýt dílčí úkoly",
-    "Show completed subtasks" : "Zobrazit dokončené dílčí úkoly",
-    "Hide completed subtasks" : "Skrýt dokončené dílčí úkoly",
     "Delete task" : "Smazat úkol",
     "Toggle starred" : "Přidat/odebrat označení hvězdičkou",
     "[Yesterday]" : "[Včera]",

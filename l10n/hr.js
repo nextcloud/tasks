@@ -78,8 +78,6 @@ OC.L10N.register(
     "Add subtask" : "Dodaj podzadatak",
     "Show subtasks" : "Prikaži podzadatke",
     "Hide subtasks" : "Sakrij podzadatke",
-    "Show completed subtasks" : "Prikaži završene podzadatke",
-    "Hide completed subtasks" : "Sakrij završene podzadatke",
     "Delete task" : "Izbriši zadatak",
     "[Yesterday]" : "[Jučer]",
     "[Today]" : "[Danas]",

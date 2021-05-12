@@ -79,8 +79,6 @@ OC.L10N.register(
     "Add subtask" : "Aggiungi sottoattività",
     "Show subtasks" : "Mostra sottoattività",
     "Hide subtasks" : "Nascondi sottoattività",
-    "Show completed subtasks" : "Mostra sottoattività completate",
-    "Hide completed subtasks" : "Nascondi sottoattività completate",
     "Delete task" : "Elimina attività",
     "[Yesterday]" : "[Ieri]",
     "[Today]" : "[Oggi]",

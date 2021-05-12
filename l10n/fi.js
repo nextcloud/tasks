@@ -52,8 +52,6 @@ OC.L10N.register(
     "Add subtask" : "Lisää alitehtävä",
     "Show subtasks" : "Näytä alitehtävät",
     "Hide subtasks" : "Piilota alitehtävät",
-    "Show completed subtasks" : "Näytä valmistuneet alitehtävät",
-    "Hide completed subtasks" : "Piilota valmistuneet alitehtävät",
     "Delete task" : "Poista tehtävä",
     "[Yesterday]" : "[Eilen]",
     "[Today]" : "[Tänään]",

@@ -85,8 +85,6 @@ OC.L10N.register(
     "Add subtask" : "Gehitu azpizeregina",
     "Show subtasks" : "Erakutsi azpizereginak",
     "Hide subtasks" : "Ezkutatu azpizereginak",
-    "Show completed subtasks" : "Erakutsi osatutako azpizereginak",
-    "Hide completed subtasks" : "Ezkutatu osatutako azpizereginak",
     "Delete task" : "Ezabatu zeregina",
     "[Yesterday]" : "[Atzo]",
     "[Today]" : "[Gaur]",

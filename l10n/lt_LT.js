@@ -74,8 +74,6 @@ OC.L10N.register(
     "Add subtask" : "Pridėti dalinę užduotį",
     "Show subtasks" : "Rodyti dalines užduotis",
     "Hide subtasks" : "Slėpti dalines užduotis",
-    "Show completed subtasks" : "Rodyti užbaigtas dalines užduotis",
-    "Hide completed subtasks" : "Slėpti užbaigtas dalines užduotis",
     "Delete task" : "Ištrinti užduotį",
     "[Yesterday]" : "[Vakar]",
     "[Today]" : "[Šiandien]",

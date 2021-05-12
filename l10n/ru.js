@@ -79,8 +79,6 @@ OC.L10N.register(
     "Add subtask" : "Добавить вложенную задачу",
     "Show subtasks" : "Показать вложенные задачи",
     "Hide subtasks" : "Скрыть вложенные задачи",
-    "Show completed subtasks" : "Показать завершённые вложенные задачи",
-    "Hide completed subtasks" : "Скрыть завершённые вложенные задачи",
     "Delete task" : "Удалить задачу",
     "[Yesterday]" : "[Вчера]",
     "[Today]" : "[Сегодня]",

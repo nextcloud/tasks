@@ -79,8 +79,6 @@ OC.L10N.register(
     "Add subtask" : "Részfeladat hozzáadása",
     "Show subtasks" : "Részfeladatok megjelenítése",
     "Hide subtasks" : "Részfeladatok elrejtése",
-    "Show completed subtasks" : "A befejezett részfeladatok megjelenítése",
-    "Hide completed subtasks" : "A befejezett részfeladatok elrejtése",
     "Delete task" : "Feladat törlése",
     "[Yesterday]" : "[Tegnap]",
     "[Today]" : "[Ma]",

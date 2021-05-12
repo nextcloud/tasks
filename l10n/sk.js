@@ -78,8 +78,6 @@ OC.L10N.register(
     "Add subtask" : "Pridať čiastkovú úlohu",
     "Show subtasks" : "Zobraziť čiastkové úlohy",
     "Hide subtasks" : "Skryť čiastkové úlohy",
-    "Show completed subtasks" : "Zobraziť dokončené čiastkové úlohy",
-    "Hide completed subtasks" : "Skryť dokončené čiastkové úlohy",
     "Delete task" : "Odstrániť úlohu",
     "[Yesterday]" : "[Včera]",
     "[Today]" : "[Dnes]",

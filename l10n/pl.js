@@ -92,8 +92,6 @@ OC.L10N.register(
     "Add subtask" : "Dodaj podzadanie",
     "Show subtasks" : "Pokaż podzadania",
     "Hide subtasks" : "Ukryj podzadania",
-    "Show completed subtasks" : "Pokaż zakończone podzadania",
-    "Hide completed subtasks" : "Ukryj zakończone podzadania",
     "Delete task" : "Usuń zadanie",
     "Toggle starred" : "Oznaczono gwiazdką",
     "[Yesterday]" : "[Wczoraj]",
