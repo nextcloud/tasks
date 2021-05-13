@@ -21,12 +21,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<Actions v-if="status" :disabled="isDisabled">
-		<ActionButton :disabled="isDisabled" :class="[`status--${status.status}`]" @click="statusClicked">
+		<ActionButton :key="status.status" :disabled="isDisabled" @click="statusClicked">
 			<template slot="icon">
-				<AlertCircleOutline :size="24" class="status--error" />
-				<Check :size="24" class="status--success" />
-				<Loading :size="24" class="status--sync" />
-				<SyncAlert :size="24" class="status--conflict" />
+				<AlertCircleOutline v-if="status.status==='error'" :size="24" class="status--error" />
+				<Check v-if="status.status==='success'" :size="24" class="status--success" />
+				<Loading v-if="status.status==='sync'" :size="24" class="status--sync" />
+				<SyncAlert v-if="status.status==='conflict'" :size="24" class="status--conflict" />
 			</template>
 			{{ status.message }}
 		</ActionButton>
@@ -103,41 +103,23 @@ export default {
 	&:disabled {
 		opacity: 1 !important;
 	}
-	.material-design-icon {
-		display: none;
-	}
-	&.status {
+	.status {
 		&--error {
 			color: var(--color-error);
-
-			.status--error {
-				display: flex;
-			}
 		}
 		&--success {
 			color: var(--color-success);
-
-			.status--success {
-				display: flex;
-			}
 		}
 		&--sync svg,
 		&--conflict svg {
 			animation-iteration-count: infinite;
 			animation-duration: 1s;
 		}
-		&--sync {
-			.status--sync {
-				display: flex;
-			}
-			svg {
-				animation-name: spin;
-			}
+		&--sync svg {
+			animation-name: spin;
 		}
 		&--conflict {
-			.status--conflict {
-				display: flex;
-			}
+			color: var(--color-warning);
 			svg {
 				animation-name: pulse;
 				border-radius: 50%;
