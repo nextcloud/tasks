@@ -90,6 +90,8 @@
     "Add subtask" : "添加子任务",
     "Show subtasks" : "显示子任务",
     "Hide subtasks" : "隐藏子任务",
+    "Show closed subtasks" : "显示关闭的子任务",
+    "Hide closed subtasks" : "隐藏关闭的子任务",
     "Delete task" : "删除任务",
     "Toggle starred" : "加星标/取消星标",
     "[Yesterday]" : "[昨天]",

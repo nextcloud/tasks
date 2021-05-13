@@ -92,6 +92,8 @@ OC.L10N.register(
     "Add subtask" : "Subtaak toevoegen",
     "Show subtasks" : "Subtaken weergeven",
     "Hide subtasks" : "Subtaken verbergen",
+    "Show closed subtasks" : "Toon afgesloten subtaken",
+    "Hide closed subtasks" : "Verberg afgesloten subtaken",
     "Delete task" : "Verwijder taak",
     "Toggle starred" : "Omschakelen gesterd",
     "[Yesterday]" : "[Gisteren]",
