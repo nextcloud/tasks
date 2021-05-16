@@ -92,6 +92,8 @@ OC.L10N.register(
     "Add subtask" : "Dodaj podrejeno nalogo",
     "Show subtasks" : "Pokaži podrejene naloge",
     "Hide subtasks" : "Skrij podrejene naloge",
+    "Show closed subtasks" : "Pokaži zaprte podrejene naloge",
+    "Hide closed subtasks" : "Skrij zaprte podrejene naloge",
     "Delete task" : "Izbriši nalogo",
     "Toggle starred" : "Preklopi oznako z zvezdico",
     "[Yesterday]" : "[Včeraj]",
