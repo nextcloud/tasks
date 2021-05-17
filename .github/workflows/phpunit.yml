@@ -5,228 +5,78 @@ on:
   push:
     branches:
       - master
-      - stable*
-
-env:
-  APP_NAME: tasks
 
 jobs:
-  sqlite:
+  unit-tests:
     runs-on: ubuntu-latest
-
     strategy:
-      # do not stop on another job's failure
-      fail-fast: false
       matrix:
         php-versions: ['7.3', '7.4']
-        databases: ['sqlite']
-        server-versions: ['stable20', 'stable21', 'master']
+        nextcloud-versions: ['stable20', 'stable21', 'master']
         include:
           - php-versions: '7.2'
-            databases: 'sqlite'
-            server-versions: 'stable20'
-# PHP8 needs an updated composer lock-file
-#          - php-versions: '8.0'
-#            databases: 'sqlite'
-#            server-versions: 'stable21'
-#          - php-versions: '8.0'
-#            databases: 'sqlite'
-#            server-versions: 'master'
-  
-    name: php${{ matrix.php-versions }}-${{ matrix.databases }}-${{ matrix.server-versions }}
-
+            nextcloud-versions: 'stable20'
+          # - php-versions: '8.0'
+          #   nextcloud-versions: 'stable21'
+          # - php-versions: '8.0'
+          #   nextcloud-versions: 'master'
+    name: php${{ matrix.php-versions }} on ${{ matrix.nextcloud-versions }} unit tests
+    env:
+      CI: true
+      XDEBUG_MODE: coverage
     steps:
-      - name: Checkout server
-        uses: actions/checkout@v2
-        with:
-          repository: nextcloud/server
-          ref: ${{ matrix.server-versions }}
+    - name: Set up php${{ matrix.php-versions }}
+      uses: shivammathur/setup-php@master
+      with:
+        php-version: ${{ matrix.php-versions }}
+        extensions: ctype, curl, dom, gd, gmp, iconv, intl, json, mbstring, openssl, pdo_sqlite, posix, sqlite, xml, zip
+        coverage: xdebug
 
-      - name: Checkout submodules
-        shell: bash
-        run: |
-          auth_header="$(git config --local --get http.https://github.com/.extraheader)"
-          git submodule sync --recursive
-          git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
+    - name: Checkout server
+      uses: actions/checkout@master
+      with:
+        repository: nextcloud/server
+        ref: ${{ matrix.nextcloud-versions }}
+        path: nextcloud
+        submodules: recursive
 
-      - name: Checkout app
-        uses: actions/checkout@v2
-        with:
-          path: apps/${{ env.APP_NAME }}
+    - name: Checkout the app
+      uses: actions/checkout@master
+      with:
+        path: nextcloud/apps/tasks
 
-      - name: Set up php ${{ matrix.php-versions }}
-        uses: shivammathur/setup-php@v1
-        with:
-          php-version: ${{ matrix.php-versions }}
-          tools: phpunit
-          extensions: mbstring, iconv, fileinfo, intl, sqlite, pdo_sqlite, gd, zip
-          coverage: xdebug
+    - name: Install Nextcloud
+      run: php -f nextcloud/occ maintenance:install --database-name oc_autotest --database-user oc_autotest --admin-user admin --admin-pass admin --database sqlite --database-pass=''
 
-      - name: Set up PHPUnit
-        working-directory: apps/${{ env.APP_NAME }}
-        run: composer i
+    - name: Enable app
+      run: php -f nextcloud/occ app:enable tasks
 
-      - name: Set up Nextcloud
-        env:
-          DB_PORT: 4444
-        run: |
-          mkdir data
-          ./occ maintenance:install --verbose --database=${{ matrix.databases }} --database-name=nextcloud --database-host=127.0.0.1 --database-port=$DB_PORT --database-user=root --database-pass=rootpassword --admin-user admin --admin-pass password 
-          ./occ app:enable ${{ env.APP_NAME }}
-          php -S localhost:8080 &
+    - name: Fix php-parser on stable20 incompatibility with phpunit 9.3+
+      if: ${{ matrix.nextcloud-versions == 'stable20' }}
+      working-directory: nextcloud/3rdparty
+      run: composer require nikic/php-parser:4.10
 
-      - name: PHPUnit unit & integration
-        working-directory: apps/${{ env.APP_NAME }}
-        run: |
-          ./vendor/phpunit/phpunit/phpunit -c phpunit.xml
-          ./vendor/phpunit/phpunit/phpunit -c phpunit.integration.xml
+    - name: Downgrade phpunit for php7.2
+      if: ${{ matrix.php-versions == '7.2' }}
+      working-directory: nextcloud/apps/tasks
+      run: composer update christophwurst/nextcloud_testing -W
 
-      - name: Upload coverage to Codecov
-        if: ${{ matrix.server-versions == 'master' }}
-        uses: codecov/codecov-action@v1
-        with:
-          file: apps/${{ env.APP_NAME }}/clover.unit.xml
-          flags: php
-          fail_ci_if_error: true
+    - name: Install dependencies
+      working-directory: nextcloud/apps/tasks
+      run: composer install
 
-  mysql:
-    runs-on: ubuntu-latest
+    - name: Run unit tests
+      working-directory: nextcloud/apps/tasks
+      run: composer run test:unit
 
-    strategy:
-      # do not stop on another job's failure
-      fail-fast: false
-      matrix:
-        php-versions: ['7.3', '7.4']
-        databases: ['mysql']
-        server-versions: ['master']
-  
-    name: php${{ matrix.php-versions }}-${{ matrix.databases }}-${{ matrix.server-versions }}
+    - name: Run integration tests
+      working-directory: nextcloud/apps/tasks
+      run: composer run test:integration
 
-    services:
-      mysql:
-        image: mariadb
-        ports:
-          - 4444:3306/tcp
-        env:
-          MYSQL_ROOT_PASSWORD: rootpassword
-        options: --health-cmd="mysqladmin ping" --health-interval 5s --health-timeout 2s --health-retries 5
-
-    steps:
-      - name: Checkout server
-        uses: actions/checkout@v2
-        with:
-          repository: nextcloud/server
-          ref: ${{ matrix.server-versions }}
-
-      - name: Checkout submodules
-        shell: bash
-        run: |
-          auth_header="$(git config --local --get http.https://github.com/.extraheader)"
-          git submodule sync --recursive
-          git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
-
-      - name: Checkout app
-        uses: actions/checkout@v2
-        with:
-          path: apps/${{ env.APP_NAME }}
-
-      - name: Set up php ${{ matrix.php-versions }}
-        uses: shivammathur/setup-php@v1
-        with:
-          php-version: ${{ matrix.php-versions }}
-          tools: phpunit
-          extensions: mbstring, iconv, fileinfo, intl, mysql, pdo_mysql, gd, zip
-          coverage: none
-
-      - name: Set up PHPUnit
-        working-directory: apps/${{ env.APP_NAME }}
-        run: composer i
-
-      - name: Set up Nextcloud
-        env:
-          DB_PORT: 4444
-        run: |
-          mkdir data
-          ./occ maintenance:install --verbose --database=${{ matrix.databases }} --database-name=nextcloud --database-host=127.0.0.1 --database-port=$DB_PORT --database-user=root --database-pass=rootpassword --admin-user admin --admin-pass password 
-          ./occ app:enable ${{ env.APP_NAME }}
-          php -S localhost:8080 &
-
-      - name: PHPUnit
-        working-directory: apps/${{ env.APP_NAME }}
-        run: ./vendor/phpunit/phpunit/phpunit -c phpunit.xml
-
-      - name: PHPUnit integration
-        working-directory: apps/${{ env.APP_NAME }}
-        run: ./vendor/phpunit/phpunit/phpunit -c phpunit.integration.xml
-
-  pgsql:
-    runs-on: ubuntu-latest
-
-    strategy:
-      # do not stop on another job's failure
-      fail-fast: false
-      matrix:
-        php-versions: ['7.4']
-        databases: ['pgsql']
-        server-versions: ['master']
-  
-    name: php${{ matrix.php-versions }}-${{ matrix.databases }}-${{ matrix.server-versions }}
-
-    services:
-      postgres:
-        image: postgres
-        ports:
-          - 4444:5432/tcp
-        env:
-          POSTGRES_USER: root
-          POSTGRES_PASSWORD: rootpassword
-          POSTGRES_DB: nextcloud
-        options: --health-cmd pg_isready --health-interval 5s --health-timeout 2s --health-retries 5
-
-    steps:
-      - name: Checkout server
-        uses: actions/checkout@v2
-        with:
-          repository: nextcloud/server
-          ref: ${{ matrix.server-versions }}
-
-      - name: Checkout submodules
-        shell: bash
-        run: |
-          auth_header="$(git config --local --get http.https://github.com/.extraheader)"
-          git submodule sync --recursive
-          git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
-
-      - name: Checkout app
-        uses: actions/checkout@v2
-        with:
-          path: apps/${{ env.APP_NAME }}
-
-      - name: Set up php ${{ matrix.php-versions }}
-        uses: shivammathur/setup-php@v1
-        with:
-          php-version: ${{ matrix.php-versions }}
-          tools: phpunit
-          extensions: mbstring, iconv, fileinfo, intl, pgsql, pdo_pgsql, gd, zip
-          coverage: none
-
-      - name: Set up PHPUnit
-        working-directory: apps/${{ env.APP_NAME }}
-        run: composer i
-
-      - name: Set up Nextcloud
-        env:
-          DB_PORT: 4444
-        run: |
-          mkdir data
-          ./occ maintenance:install --verbose --database=${{ matrix.databases }} --database-name=nextcloud --database-host=127.0.0.1 --database-port=$DB_PORT --database-user=root --database-pass=rootpassword --admin-user admin --admin-pass password 
-          ./occ app:enable ${{ env.APP_NAME }}
-          php -S localhost:8080 &
-
-      - name: PHPUnit
-        working-directory: apps/${{ env.APP_NAME }}
-        run: ./vendor/phpunit/phpunit/phpunit -c phpunit.xml
-
-      - name: PHPUnit integration
-        working-directory: apps/${{ env.APP_NAME }}
-        run: ./vendor/phpunit/phpunit/phpunit -c phpunit.integration.xml
+    - name: Upload coverage to Codecov
+      if: ${{ matrix.nextcloud-versions == 'master' }}
+      uses: codecov/codecov-action@v1
+      with:
+        file: nextcloud/apps/tasks/clover.unit.xml
+        flags: php
+        fail_ci_if_error: true
