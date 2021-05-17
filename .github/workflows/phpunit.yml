@@ -78,9 +78,16 @@ jobs:
       - name: PHPUnit unit & integration
         working-directory: apps/${{ env.APP_NAME }}
         run: |
-          ./vendor/phpunit/phpunit/phpunit -c phpunit.xml --coverage-clover=coverage-unit.xml
-          ./vendor/phpunit/phpunit/phpunit -c phpunit.integration.xml --coverage-clover=coverage-integration.xml
-          bash <(curl -s https://codecov.io/bash) -cF php -t ${{ secrets.CODECOV_TOKEN }};
+          ./vendor/phpunit/phpunit/phpunit -c phpunit.xml
+          ./vendor/phpunit/phpunit/phpunit -c phpunit.integration.xml
+
+      - name: Upload coverage to Codecov
+        if: ${{ matrix.server-versions == 'master' }}
+        uses: codecov/codecov-action@v1
+        with:
+          file: apps/${{ env.APP_NAME }}/clover.unit.xml
+          flags: php
+          fail_ci_if_error: true
 
   mysql:
     runs-on: ubuntu-latest

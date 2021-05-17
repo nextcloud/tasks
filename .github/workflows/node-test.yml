@@ -27,11 +27,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Set up Codecov
-        run: npm install -g codecov
       - name: Test
         run: npm run test
         env:
           CI: true
-      - name: Upload coverage
-        run: bash <(curl -s https://codecov.io/bash) -cF javascript -t ${{ secrets.CODECOV_TOKEN }};
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          file: ./coverage/coverage-final.json
+          flags: javascript
+          fail_ci_if_error: true
