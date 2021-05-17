@@ -21,6 +21,8 @@
     "scripts": {
         "cs:check": "php-cs-fixer fix --dry-run --verbose",
         "cs:fix": "php-cs-fixer fix",
-        "lint": "find . -name \\*.php -not -path './vendor/*' -print0 | xargs -0 -n1 php -l"
+        "lint": "find . -name \\*.php -not -path './vendor/*' -print0 | xargs -0 -n1 php -l",
+        "test:unit": "phpunit --configuration phpunit.xml --fail-on-warning",
+        "test:integration": "phpunit --configuration phpunit.integration.xml --fail-on-warning"
     }
 }
