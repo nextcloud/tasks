@@ -83,6 +83,7 @@ OC.L10N.register(
     "New List" : "新規リスト",
     "All day" : "終日",
     "Select a classification" : "分類を選択",
+    "Notes" : "ノート",
     "When shared show full event" : "共有時にすべてのイベントを表示",
     "When shared show only busy" : "共有時に実行中のみを表示",
     "When shared hide this event" : "共有時にこのイベントを隠す",
