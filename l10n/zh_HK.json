@@ -1,10 +1,10 @@
 { "translations": {
     "Important" : "重要",
     "Today" : "今日",
-    "Week" : "星期",
-    "All" : "所有",
+    "Week" : "本星期",
+    "All" : "全部",
     "Current" : "目前",
-    "Completed" : "完成",
+    "Completed" : "已完成",
     "Tasks" : "任務",
     "The Tasks app for Nextcloud" : "Nextcloud 的任務應用程式",
     "Once enabled, a new Tasks menu will appear in your Nextcloud apps menu. From there you can add and delete tasks, edit their title, description, start and due dates and mark them as important. Tasks can be shared between users. Tasks can be synchronized using CalDav (each task list is linked to an Nextcloud calendar, to sync it to your local client - Thunderbird, Evolution, KDE Kontact, iCal, … - just add the calendar as a remote calendar in your client). You can download your tasks as ICS files using the download button for each calendar." : "一經啟用，新的「任務」選單將會出現在您 Nextcloud 應用程式選單中。在此，您可以新增與刪除任務、編輯它們的標題、描述、開始與結束日期、標記它們的重要程度。任務可在用戶間分享。任務可使用 CalDav 同步（每個任務列表都會連結到一個 Nextcloud 日曆，用來與您的本機客戶端同步，如 Thunderbird、Evolution、KDE Kontact、iCal 等，只要在您的客戶端中以遠端日曆的形式新增日曆即可）。您可以 ICS 檔案的形式下載您的任務，只要按下每個日曆的下載按鈕就好。",
