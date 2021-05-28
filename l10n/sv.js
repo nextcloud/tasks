@@ -85,6 +85,7 @@ OC.L10N.register(
     "Add List…" : "Lägg till lista...",
     "New List" : "Ny lista",
     "All day" : "Hela dagen",
+    "Details" : "Detaljer",
     "Select a classification" : "Välj en klassificering",
     "Select a status" : "Välj en status",
     "When shared show full event" : "Om delad, visa hela händelsen",
