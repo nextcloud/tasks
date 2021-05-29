@@ -39,7 +39,7 @@
     "Delete completed tasks." : "完了したタスクを削除",
     "Deleted all completed tasks from calendar \"{calendar}\"." : "カレンダー \"{calendar}\" から完了したタスクをすべて削除しました。",
     "No errors" : "エラーはありません",
-    "Open your browser console for more details" : "詳細はブラウザコンソールを開きます",
+    "Open your browser console for more details" : "詳細はブラウザーコンソールを開きます",
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["{failedCount} 個のタスクが削除できませんでした"],
     "Load all completed tasks." : "完了済みタスクを読み込み",
     "Change sort order" : "並び順を変更",
