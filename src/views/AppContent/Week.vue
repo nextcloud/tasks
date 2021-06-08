@@ -42,7 +42,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import { isTaskInList } from '../../store/storeHelper.js'
-import Header from './Header.vue'
+import Header from '../../components/Header.vue'
 import TaskDragContainer from '../../components/TaskDragContainer.vue'
 
 import moment from '@nextcloud/moment'

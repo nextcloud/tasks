@@ -46,7 +46,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import { isTaskInList, isParentInList } from '../../store/storeHelper.js'
-import Header from './Header.vue'
+import Header from '../../components/Header.vue'
 import LoadCompletedButton from '../../components/LoadCompletedButton.vue'
 import TaskDragContainer from '../../components/TaskDragContainer.vue'
 
