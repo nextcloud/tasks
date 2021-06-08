@@ -54,7 +54,7 @@ export default {
 	},
 	computed: {
 		...mapGetters({
-			calendar: 'getDefaultCalendar',
+			calendar: 'getCalendarByRoute',
 		}),
 
 		placeholder() {
