@@ -37,7 +37,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import SortorderDropdown from '../../components/SortorderDropdown.vue'
+import SortorderDropdown from './SortorderDropdown.vue'
 
 import moment from '@nextcloud/moment'
 
@@ -54,7 +54,7 @@ export default {
 	},
 	computed: {
 		...mapGetters({
-			calendar: 'getDefaultCalendar',
+			calendar: 'getCalendarByRoute',
 		}),
 
 		placeholder() {

@@ -286,6 +286,9 @@ const getters = {
 	 * @returns {Calendar} The calendar by route
 	 */
 	getCalendarByRoute: (state, getters, rootState) => {
+		if (rootState.route.params.collectionId) {
+			return getters.getDefaultCalendar
+		}
 		return getters.getCalendarById(rootState.route.params.calendarId)
 	},
 
