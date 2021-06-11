@@ -19,7 +19,7 @@ OC.L10N.register(
     "No users or groups" : "Keine Benutzer oder Gruppen",
     "Can edit" : "Kann bearbeiten",
     "Unshare with {displayName}" : "Mit {displayName} nicht mehr teilen",
-    "Unable to delete the share." : "Freigabe kann nicht gelöscht werden.",
+    "Unable to delete the share." : "Freigabe konnte nicht gelöscht werden.",
     "Unable to change permissions." : "Berechtigungen können nicht geändert werden.",
     "Edit" : "Bearbeiten",
     "Copy private link" : "Privaten Link kopieren",
