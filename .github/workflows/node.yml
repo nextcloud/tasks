@@ -20,15 +20,17 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Set up node ${{ matrix.node-versions }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-versions }}
+
+      - name: Set up npm7
+        run: npm i -g npm@7
 
       - name: Install dependencies & build
         run: |
           npm ci
           npm run build --if-present
-          npm run svg_sprite --if-present
       - name: Check webpack build changes
         run: |
           bash -c "[[ ! \"`git status --porcelain `\" ]] || ( echo 'Uncommited changes in webpack build' && git status && exit 1 )"
