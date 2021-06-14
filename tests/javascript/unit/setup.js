@@ -3,6 +3,8 @@ import { OC } from './OC.js'
 import { config } from '@vue/test-utils'
 // eslint-disable-next-line node/no-unpublished-import
 import MockDate from 'mockdate'
+// eslint-disable-next-line node/no-unpublished-import
+import 'regenerator-runtime/runtime'
 
 // Set date to fixed value
 MockDate.set(new Date('2019-01-01T12:34:56'))
