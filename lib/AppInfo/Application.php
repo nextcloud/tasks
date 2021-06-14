@@ -22,14 +22,28 @@
 
 namespace OCA\Tasks\AppInfo;
 
+use OCA\Tasks\Dashboard\TasksWidget;
 use OCP\AppFramework\App;
+use OCP\AppFramework\Bootstrap\IBootContext;
+use OCP\AppFramework\Bootstrap\IBootstrap;
+use OCP\AppFramework\Bootstrap\IRegistrationContext;
 
-class Application extends App {
+class Application extends App implements IBootstrap {
+
+	/** @var string */
+	public const APP_ID = 'tasks';
 
 	/**
 	 * @param array $params
 	 */
 	public function __construct(array $params=[]) {
-		parent::__construct('tasks', $params);
+		parent::__construct(self::APP_ID, $params);
+	}
+
+	public function register(IRegistrationContext $context): void {
+		$context->registerDashboardWidget(TasksWidget::class);
+	}
+
+	public function boot(IBootContext $context): void {
 	}
 }
