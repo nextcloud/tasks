@@ -22,6 +22,7 @@ OC.L10N.register(
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n prètzfach acabat","%n prètzfaches acabats"],
     "Tomorrow" : "Deman",
     "New List" : "Novèla lista",
+    "Canceled" : "Anullat",
     "Task not found!" : "Prètzfach pas trobat !",
     "Set start date" : "Especificar la data de començament",
     "Set due date" : "Especificar la data d'escasença"
