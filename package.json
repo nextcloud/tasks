@@ -33,7 +33,7 @@
 		"@nextcloud/moment": "^1.1.1",
 		"@nextcloud/router": "^2.0.0",
 		"@nextcloud/vue": "^4.0.2",
-		"@vue/test-utils": "^1.2.0",
+		"@vue/test-utils": "^1.2.1",
 		"cdav-library": "github:nextcloud/cdav-library",
 		"color-convert": "^2.0.1",
 		"debounce": "^1.2.1",
