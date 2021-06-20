@@ -123,7 +123,10 @@ appstore: clean build-js-production
 	--exclude=/.travis.yml \
 	--exclude=/.tx \
 	--exclude=/.v8flags*.json \
+	--exclude=/babel.config.js \
 	--exclude=/build.xml \
+	--exclude=/clover.integration.xml \
+	--exclude=/clover.unit.xml \
 	--exclude=/composer.json \
 	--exclude=/composer.lock \
 	--exclude=/composer.phar \
@@ -136,10 +139,8 @@ appstore: clean build-js-production
 	--exclude=/phpunit.xml \
 	--exclude=/phpunit.integration.xml \
 	--exclude=/README.md \
+	--exclude=/stylelint.config.js \
 	--exclude=/webpack.js \
-	--exclude=/webpack.common.js \
-	--exclude=/webpack.prod.js \
-	--exclude=/webpack.dev.js \
 	--exclude=/build \
 	--exclude=/coverage \
 	--exclude=/img/src \
