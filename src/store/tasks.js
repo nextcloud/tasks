@@ -28,6 +28,7 @@ import { findVTODObyUid } from './cdav-requests.js'
 
 import { showError } from '@nextcloud/dialogs'
 import { emit } from '@nextcloud/event-bus'
+import { translate as t } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
 
 import ICAL from 'ical.js'
@@ -702,36 +703,34 @@ const actions = {
 		const vData = ICAL.stringify(task.jCal)
 
 		if (!task.dav) {
-			await task.calendar.dav.createVObject(vData)
-				.then((response) => {
-					Vue.set(task, 'dav', response)
-					task.syncStatus = new SyncStatus('success', OCA.Tasks.$t('tasks', 'Successfully created the task.'))
-					context.commit('appendTask', task)
-					context.commit('addTaskToCalendar', task)
-					const parent = context.getters.getTaskByUid(task.related)
-					context.commit('addTaskToParent', { task, parent })
+			const response = await task.calendar.dav.createVObject(vData)
+			Vue.set(task, 'dav', response)
+			task.syncStatus = new SyncStatus('success', t('tasks', 'Successfully created the task.'))
+			context.commit('appendTask', task)
+			context.commit('addTaskToCalendar', task)
+			const parent = context.getters.getTaskByUid(task.related)
+			context.commit('addTaskToParent', { task, parent })
 
-					// Open the details view for the new task
-					const calendarId = context.rootState.route.params.calendarId
-					const collectionId = context.rootState.route.params.collectionId
-					// Only open the details view if there is enough space or if it is already open.
-					if (document.documentElement.clientWidth >= 768 || context.rootState.route.params.taskId !== undefined) {
-						if (calendarId) {
-							router.push({ name: 'calendarsTask', params: { calendarId, taskId: task.uri } })
-						} else if (collectionId) {
-							if (collectionId === 'week') {
-								router.push({
-									name: 'collectionsParamTask',
-									params: { collectionId, taskId: task.uri, collectionParam: '0' },
-								})
-							} else {
-								router.push({ name: 'collectionsTask', params: { collectionId, taskId: task.uri } })
-							}
-						}
+			// In case the task is created in Talk, we don't have a route
+			// Only open the details view if there is enough space or if it is already open.
+			if (context.rootState.route !== undefined && (document.documentElement.clientWidth >= 768 || context.rootState.route?.params.taskId !== undefined)) {
+				// Open the details view for the new task
+				const calendarId = context.rootState.route.params.calendarId
+				const collectionId = context.rootState.route.params.collectionId
+				if (calendarId) {
+					router.push({ name: 'calendarsTask', params: { calendarId, taskId: task.uri } })
+				} else if (collectionId) {
+					if (collectionId === 'week') {
+						router.push({
+							name: 'collectionsParamTask',
+							params: { collectionId, taskId: task.uri, collectionParam: '0' },
+						})
+					} else {
+						router.push({ name: 'collectionsTask', params: { collectionId, taskId: task.uri } })
 					}
-
-				})
-				.catch((error) => { throw error })
+				}
+			}
+			return task
 		}
 	},
 
@@ -783,7 +782,7 @@ const actions = {
 				})
 				.catch((error) => {
 					console.debug(error)
-					task.syncStatus = new SyncStatus('error', OCA.Tasks.$t('tasks', 'Could not delete the task.'))
+					task.syncStatus = new SyncStatus('error', t('tasks', 'Could not delete the task.'))
 				})
 		} else {
 			deleteTaskFromStore()
@@ -875,10 +874,10 @@ const actions = {
 
 		if (!task.conflict) {
 			task.dav.data = vCalendar
-			task.syncStatus = new SyncStatus('sync', OCA.Tasks.$t('tasks', 'Synchronizing to the server.'))
+			task.syncStatus = new SyncStatus('sync', t('tasks', 'Synchronizing to the server.'))
 			return task.dav.update()
 				.then((response) => {
-					task.syncStatus = new SyncStatus('success', OCA.Tasks.$t('tasks', 'Task successfully saved to server.'))
+					task.syncStatus = new SyncStatus('success', t('tasks', 'Task successfully saved to server.'))
 				})
 				.catch((error) => {
 					// Wrong etag, we most likely have a conflict
@@ -886,13 +885,13 @@ const actions = {
 						// Saving the new etag so that the user can manually
 						// trigger a fetchCompleteData without any further errors
 						task.conflict = error.xhr.getResponseHeader('etag')
-						task.syncStatus = new SyncStatus('conflict', OCA.Tasks.$t('tasks', 'Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded.'))
+						task.syncStatus = new SyncStatus('conflict', t('tasks', 'Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded.'))
 					} else {
-						task.syncStatus = new SyncStatus('error', OCA.Tasks.$t('tasks', 'Could not update the task.'))
+						task.syncStatus = new SyncStatus('error', t('tasks', 'Could not update the task.'))
 					}
 				})
 		} else {
-			task.syncStatus = new SyncStatus('conflict', OCA.Tasks.$t('tasks', 'Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded.'))
+			task.syncStatus = new SyncStatus('conflict', t('tasks', 'Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded.'))
 		}
 	},
 
@@ -1304,7 +1303,7 @@ const actions = {
 		return task.dav.fetchCompleteData()
 			.then((response) => {
 				const newTask = new Task(task.dav.data, task.calendar)
-				task.syncStatus = new SyncStatus('success', OCA.Tasks.$t('tasks', 'Successfully updated the task.'))
+				task.syncStatus = new SyncStatus('success', t('tasks', 'Successfully updated the task.'))
 				task.conflict = false
 				context.commit('updateTask', newTask)
 			})
@@ -1376,11 +1375,11 @@ const actions = {
 					// Remove the task from the calendar, add it to the new one
 					context.commit('addTaskToCalendar', task)
 					context.commit('appendTask', task)
-					task.syncStatus = new SyncStatus('success', OCA.Tasks.$t('tasks', 'Task successfully moved to new calendar.'))
+					task.syncStatus = new SyncStatus('success', t('tasks', 'Task successfully moved to new calendar.'))
 				})
 				.catch((error) => {
 					console.error(error)
-					showError(OCA.Tasks.$t('tasks', 'An error occurred'))
+					showError(t('tasks', 'An error occurred'))
 				})
 		}
 
