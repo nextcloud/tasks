@@ -91,6 +91,9 @@ clean:
 	rm -f ./js/tasks-main.js
 	rm -f ./js/tasks-main.js.map
 	rm -f ./js/tasks-main.js.LICENSE.txt
+	rm -f ./js/tasks-dashboard.js
+	rm -f ./js/tasks-dashboard.js.map
+	rm -f ./js/tasks-dashboard.js.LICENSE.txt
 	rm -rf $(build_directory)
 
 # Same as clean but also removes dependencies installed by npm
