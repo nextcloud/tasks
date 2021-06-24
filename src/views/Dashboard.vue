@@ -27,7 +27,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		:items="tasks"
 		empty-content-icon="icon-tasks"
 		:empty-content-message="t('tasks', 'No upcoming tasks')"
-		:show-more-text="t('tasks', 'upcoming tasks')"
+		:show-more-text="t('tasks', 'Upcoming tasks')"
 		:loading="loading"
 		:show-items-and-empty-content="!hasTaskToday"
 		:half-empty-content-message="t('tasks', 'No tasks today')">
