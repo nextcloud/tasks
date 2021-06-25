@@ -206,7 +206,7 @@ export default {
 		async findShareesFromCircles(query, hiddenPrincipals, hiddenUrls) {
 			let results
 			try {
-				results = await Axios.get(generateOcsUrl('apps/files_sharing/api/v1') + 'sharees', {
+				results = await Axios.get(generateOcsUrl('apps/files_sharing/api/v1/') + 'sharees', {
 					params: {
 						format: 'json',
 						search: query,
