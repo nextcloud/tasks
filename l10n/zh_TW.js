@@ -1,6 +1,7 @@
 OC.L10N.register(
     "tasks",
     {
+    "Upcoming tasks" : "接下來的工作",
     "Important" : "重要",
     "Today" : "今天",
     "Week" : "週",
@@ -184,6 +185,9 @@ OC.L10N.register(
     "Priority {priority}: high" : "優先程度 {priority}：高",
     "No priority assigned" : "未指定優先程度",
     "{percent} % completed" : "{percent} % 完成",
+    "No upcoming tasks" : "沒有接下來的工作",
+    "upcoming tasks" : "接下來的工作",
+    "No tasks today" : "今日無工作",
     "Successfully created the task." : "成功建立工作項目。",
     "Could not delete the task." : "無法刪除工作項目。",
     "Synchronizing to the server." : "與伺服器同步。",

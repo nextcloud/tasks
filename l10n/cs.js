@@ -1,6 +1,7 @@
 OC.L10N.register(
     "tasks",
     {
+    "Upcoming tasks" : "Nadcházející úkoly",
     "Important" : "Důležité",
     "Today" : "Dnes",
     "Week" : "Týden",
@@ -184,6 +185,9 @@ OC.L10N.register(
     "Priority {priority}: high" : "Priorita {priority}: vysoká",
     "No priority assigned" : "Nepřiřazena žádná priorita",
     "{percent} % completed" : "{percent} % dokončeno",
+    "No upcoming tasks" : "Žádné nadcházející úkoly",
+    "upcoming tasks" : "nadcházející úkoly",
+    "No tasks today" : "Dnes žádné úkoly",
     "Successfully created the task." : "Úkol úspěšně vytvořen.",
     "Could not delete the task." : "Úkol se nedaří smazat.",
     "Synchronizing to the server." : "Synchronizuje se se serverem.",

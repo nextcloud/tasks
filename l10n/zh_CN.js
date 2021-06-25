@@ -1,6 +1,7 @@
 OC.L10N.register(
     "tasks",
     {
+    "Upcoming tasks" : "即将到来的任务",
     "Important" : "重要",
     "Today" : "今天",
     "Week" : "星期",
@@ -171,6 +172,9 @@ OC.L10N.register(
     "Priority {priority}: high" : "优先级 {priority}：高",
     "No priority assigned" : "未设置优先级",
     "{percent} % completed" : "{percent} % 已完成",
+    "No upcoming tasks" : "没有即将到来的任务",
+    "upcoming tasks" : "即将到来的任务",
+    "No tasks today" : "今天没有任务",
     "Successfully created the task." : "成功创建任务。",
     "Could not delete the task." : "无法删除任务。",
     "Synchronizing to the server." : "正在同步到服务器。",
