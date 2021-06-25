@@ -121,15 +121,8 @@ OCA.Tasks.App = new Vue({
 		}
 	},
 	mounted() {
-		const version = this.$OC.config.version.split('.')
-
-		if (version[0] >= 20) {
-			// Hook to new global event for unified search
-			subscribe('nextcloud:unified-search.search', this.filterProxy)
-			subscribe('nextcloud:unified-search.reset', this.cleanSearch)
-		} else {
-			this.$OC.Search = new OCA.Search(this.filter, this.cleanSearch)
-		}
+		subscribe('nextcloud:unified-search.search', this.filterProxy)
+		subscribe('nextcloud:unified-search.reset', this.cleanSearch)
 	},
 	beforeMount() {
 		this.$store.dispatch('loadCollections')
