@@ -186,7 +186,7 @@ OC.L10N.register(
     "No priority assigned" : "Keine Priorität zugewiesen",
     "{percent} % completed" : "{percent} % fertiggestellt",
     "No upcoming tasks" : "Keine anstehenden Aufgaben",
-    "upcoming tasks" : "anstehende Aufgaben",
+    "upcoming tasks" : "Anstehende Aufgaben",
     "No tasks today" : "Heute keine Aufgaben",
     "Successfully created the task." : "Aufgabe erstellt.",
     "Could not delete the task." : "Aufgabe konnte nicht gelöscht werden.",
