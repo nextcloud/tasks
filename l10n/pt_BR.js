@@ -1,6 +1,7 @@
 OC.L10N.register(
     "tasks",
     {
+    "Upcoming tasks" : "Próximas tarefas",
     "Important" : "Importante",
     "Today" : "Hoje",
     "Week" : "Semana",
@@ -184,6 +185,9 @@ OC.L10N.register(
     "Priority {priority}: high" : "Prioridade {priority}: alta",
     "No priority assigned" : "Sem prioridade definida",
     "{percent} % completed" : "{percent} % finalizado",
+    "No upcoming tasks" : "Sem tarefas futuras",
+    "upcoming tasks" : "próximas tarefas",
+    "No tasks today" : "Sem tarefas hoje",
     "Successfully created the task." : "Tarefa criada com sucesso.",
     "Could not delete the task." : "Não foi possível excluir a tarefa.",
     "Synchronizing to the server." : "Sincronizando com o servidor.",

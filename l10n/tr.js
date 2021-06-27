@@ -1,6 +1,7 @@
 OC.L10N.register(
     "tasks",
     {
+    "Upcoming tasks" : "Yaklaşan görevler",
     "Important" : "Önemli",
     "Today" : "Bugün",
     "Week" : "Hafta",
@@ -184,6 +185,9 @@ OC.L10N.register(
     "Priority {priority}: high" : "Öncelik {priority}: Yüksek",
     "No priority assigned" : "Henüz bir öncelik atanmamış",
     "{percent} % completed" : "% {percent} tamamlandı",
+    "No upcoming tasks" : "Yaklaşan bir görev yok",
+    "upcoming tasks" : "yaklaşan görevler",
+    "No tasks today" : "Bugün için bir görev yok",
     "Successfully created the task." : "Görev oluşturuldu.",
     "Could not delete the task." : "Görev silinemedi.",
     "Synchronizing to the server." : "Sunucu ile eşitleniyor.",

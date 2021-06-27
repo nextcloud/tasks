@@ -1,6 +1,7 @@
 OC.L10N.register(
     "tasks",
     {
+    "Upcoming tasks" : "Fainas imbenientes",
     "Important" : "Importante",
     "Today" : "Oe",
     "Week" : "Chida",
@@ -184,6 +185,9 @@ OC.L10N.register(
     "Priority {priority}: high" : "Prioridade {priority}: arta",
     "No priority assigned" : "Peruna prioridade assignada",
     "{percent} % completed" : "{percent} % cumpletadu",
+    "No upcoming tasks" : "Peruna faina imbeniente",
+    "upcoming tasks" : "fainas imbenientes",
+    "No tasks today" : "Peruna faina oe",
     "Successfully created the task." : "Faina creada.",
     "Could not delete the task." : "No at fatu a cantzellare sa faina.",
     "Synchronizing to the server." : "Sincronizatzione cun su serbidore.",
