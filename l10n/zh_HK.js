@@ -57,7 +57,7 @@ OC.L10N.register(
     "Set value" : "設置值",
     "Delete value" : "刪除值",
     "Add this as a new tag" : "將此加入為新標籤",
-    "No tag available. Create one!" : "沒有可用的標籤。 創建一個！",
+    "No tag available. Create one!" : "沒有可用的標籤。創建一個！",
     "Delete all completed tasks." : "刪除所有已完成的任務。",
     "Delete completed tasks." : "刪除已完成的任務。",
     "Deleted all completed tasks from calendar \"{calendar}\"." : "從日曆「{calendar}」刪除了所有已完成的任務。",
