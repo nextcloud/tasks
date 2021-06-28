@@ -70,7 +70,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				@changeCalendar="changeCalendar" />
 		</template>
 
-		<template #secondary-actions>
+		<template v-if="!task || (task && task.deleteCountdown === null)" #secondary-actions>
 			<ActionButton v-if="!readOnly"
 				@click="togglePinned(task)">
 				<PinOff v-if="task.pinned"
@@ -103,9 +103,17 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				{{ $t('tasks', 'Download') }}
 			</ActionLink>
 			<ActionButton v-if="!readOnly"
-				@click="removeTask">
+				@click="scheduleTaskDeletion(task)">
 				<Delete slot="icon" :size="24" decorative />
 				{{ $t('tasks', 'Delete') }}
+			</ActionButton>
+		</template>
+		<template v-else #secondary-actions>
+			<ActionButton
+				class="reactive no-nav"
+				@click.prevent.stop="clearTaskDeletion(task)">
+				<Undo slot="icon" :size="24" decorative />
+				{{ $n('tasks', 'Deleting the task in {countdown} second', 'Deleting the task in {countdown} seconds', task.deleteCountdown, { countdown: task.deleteCountdown }) }}
 			</ActionButton>
 		</template>
 
@@ -252,6 +260,7 @@ import Star from 'vue-material-design-icons/Star.vue'
 import Percent from 'vue-material-design-icons/Percent.vue'
 import TextBoxOutline from 'vue-material-design-icons/TextBoxOutline.vue'
 import InformationOutline from 'vue-material-design-icons/InformationOutline.vue'
+import Undo from 'vue-material-design-icons/Undo.vue'
 
 import { mapGetters, mapActions } from 'vuex'
 
@@ -276,6 +285,7 @@ export default {
 		Percent,
 		TextBoxOutline,
 		InformationOutline,
+		Undo,
 		EmptyContent,
 		MultiselectItem,
 		SliderItem,
@@ -669,7 +679,8 @@ export default {
 	},
 	methods: {
 		...mapActions([
-			'deleteTask',
+			'scheduleTaskDeletion',
+			'clearTaskDeletion',
 			'toggleCompleted',
 			'toggleStarred',
 			'setSummary',
@@ -705,11 +716,6 @@ export default {
 				}
 				this.loading = false
 			}
-		},
-
-		removeTask() {
-			this.deleteTask({ task: this.task, dav: true })
-			this.closeAppSidebar()
 		},
 
 		closeAppSidebar() {
