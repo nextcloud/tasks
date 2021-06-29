@@ -27,6 +27,7 @@ import router from '../router.js'
 import { findVTODObyUid } from './cdav-requests.js'
 
 import { showError } from '@nextcloud/dialogs'
+import { emit } from '@nextcloud/event-bus'
 import moment from '@nextcloud/moment'
 
 import ICAL from 'ical.js'
@@ -38,6 +39,8 @@ Vue.use(Vuex)
 const state = {
 	tasks: {},
 	searchQuery: '',
+	deletedTasks: {},
+	deleteInterval: null,
 }
 
 const getters = {
@@ -621,6 +624,27 @@ const mutations = {
 	setSearchQuery(state, searchQuery) {
 		state.searchQuery = searchQuery
 	},
+
+	addTaskForDeletion(state, { task }) {
+		Vue.set(state.deletedTasks, task.key, task)
+	},
+
+	clearTaskFromDeletion(state, { task }) {
+		if (state.deletedTasks[task.key] && task instanceof Task) {
+			Vue.delete(state.deletedTasks, task.key)
+		}
+	},
+
+	/**
+	 * Sets the delete countdown value
+	 *
+	 * @param {Object} state The store data
+	 * @param {Task} task The task
+	 * @param {Number} countdown The countdown value
+	 */
+	setTaskDeleteCountdown(state, { task, countdown }) {
+		Vue.set(task, 'deleteCountdown', countdown)
+	},
 }
 
 const actions = {
@@ -729,17 +753,29 @@ const actions = {
 			return
 		}
 
+		// Clear task from deletion array
+		context.dispatch('clearTaskDeletion', task)
+
 		function deleteTaskFromStore() {
 			context.commit('deleteTask', task)
 			const parent = context.getters.getTaskByUid(task.related)
 			context.commit('deleteTaskFromParent', { task, parent })
 			context.commit('deleteTaskFromCalendar', task)
+			// If the task is open in the sidebar, close the sidebar
+			if (context.rootState.route.params.taskId === task.uri) {
+				emit('tasks:close-appsidebar')
+			}
+			// Stop the delete timeout if no tasks are scheduled for deletion anymore
+			if (Object.values(context.state.deletedTasks).length < 1) {
+				clearInterval(context.state.deleteInterval)
+				context.state.deleteInterval = null
+			}
 		}
-		// delete all subtasks first
+		// Delete all subtasks first
 		await Promise.all(Object.values(task.subTasks).map(async(subTask) => {
 			await context.dispatch('deleteTask', { task: subTask, dav: true })
 		}))
-		// only local delete if the task doesn't exists on the server
+		// Only local delete if the task does not exist on the server
 		if (task.dav && dav) {
 			await task.dav.delete()
 				.then(() => {
@@ -751,6 +787,55 @@ const actions = {
 				})
 		} else {
 			deleteTaskFromStore()
+		}
+	},
+
+	/**
+	 * Schedules a task for deletion
+	 *
+	 * @param {Object} context The store context
+	 * @param {Task} task The task to delete
+	 * @returns {Promise}
+	 */
+	async scheduleTaskDeletion(context, task) {
+		// Don't try to delete tasks in read-only calendars
+		if (task.calendar.readOnly) {
+			return
+		}
+		// Don't delete tasks in shared calendars with access class not PUBLIC
+		if (task.calendar.isSharedWithMe && task.class !== 'PUBLIC') {
+			return
+		}
+
+		context.commit('addTaskForDeletion', { task })
+		context.commit('setTaskDeleteCountdown', { task, countdown: 7 })
+		// Start the delete timeout if it is not running
+		if (context.state.deleteInterval === null) {
+			context.state.deleteInterval = setInterval(async() => {
+				Object.values(context.state.deletedTasks).forEach(task => {
+					context.commit('setTaskDeleteCountdown', { task, countdown: --task.deleteCountdown })
+					if (task.deleteCountdown <= 0) {
+						context.dispatch('deleteTask', { task, dav: true })
+					}
+				})
+			}, 1000)
+		}
+	},
+
+	/**
+	 * Cancels a scheduled task deletion
+	 *
+	 * @param {Object} context The store context
+	 * @param {Task} task The task to not delete
+	 * @returns {Promise}
+	 */
+	async clearTaskDeletion(context, task) {
+		context.commit('clearTaskFromDeletion', { task })
+		context.commit('setTaskDeleteCountdown', { task, countdown: null })
+		// Stop the delete timeout if no tasks scheduled for deletion are left
+		if (Object.values(context.state.deletedTasks).length === 0) {
+			clearInterval(context.state.deleteInterval)
+			context.state.deleteInterval = null
 		}
 	},
 

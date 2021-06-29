@@ -61,6 +61,9 @@ export default class Task {
 
 		this.syncStatus = null
 
+		// Time in seconds before the task is going to be deleted
+		this.deleteCountdown = null
+
 		// Queue for update requests with concurrency 1,
 		// because we only want to allow one request at a time
 		// (otherwise we will run into problems with changed ETags).
