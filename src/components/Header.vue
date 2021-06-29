@@ -116,7 +116,7 @@ export default {
 $breakpoint-mobile: 1024px;
 
 .header {
-	padding: 12px 15px 12px 44px;
+	padding: 12px 15px 12px 59px;
 	position: sticky;
 	top: 50px;
 	background-color: var(--color-background-dark);
@@ -125,6 +125,7 @@ $breakpoint-mobile: 1024px;
 
 	@media only screen and (max-width: $breakpoint-mobile) {
 		padding-right: 0;
+		padding-left: 44px;
 	}
 
 	&__input {
