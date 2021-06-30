@@ -98,7 +98,6 @@ OC.L10N.register(
     "[Completed tomorrow at] LT" : "[Završeno sutra u] LT",
     "[Completed] L [at] LT" : "[Završeno] L [u] LT",
     "Add a subtask to \"{task}\"…" : "Dodaj podzadatak u „{task}”...",
-    "An error occurred, unable to delete the task." : "Došlo je do pogreške, nije moguće izbrisati zadatak.",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["Brisanje zadatka za {countdown} sekundu","Brisanje zadatka za {countdown} sekunde","Brisanje zadatka za {countdown} sekundi"],
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n završeni zadatak","%n završenih zadataka","%n završenih zadataka"],
     "Tomorrow" : "Sutra",

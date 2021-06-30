@@ -116,7 +116,6 @@ OC.L10N.register(
     "[Completed tomorrow at] LT" : "[已完成于明天的] LT",
     "[Completed] L [at] LT" : "[已完成] L [于] LT",
     "Add a subtask to \"{task}\"…" : "添加子任务到 \"{task}\" ...",
-    "An error occurred, unable to delete the task." : "发生错误，无法删除任务。",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["在 {countdown} 秒后删除任务"],
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n 任务完成"],
     "Tomorrow" : "明天",

@@ -97,7 +97,6 @@ OC.L10N.register(
     "[Completed tomorrow at] LT" : "[תושלם מחר בשעה] LT",
     "[Completed] L [at] LT" : "[הושלמה] L [בשעה] LT",
     "Add a subtask to \"{task}\"…" : "הוספת תת־משימה אל „{task}”",
-    "An error occurred, unable to delete the task." : "אירעה שגיאה, אין אפשרות למחוק את המשימה.",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["המשימה תימחק בעוד שנייה","המשימה תימחק בעוד {countdown} שניות","המשימה תימחק בעוד {countdown} שניות","המשימה תימחק בעוד {countdown} שניות"],
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n פעילות מושלמת","%n פעילויות הושלמו","%n פעילויות הושלמו","%n פעילויות הושלמו"],
     "Tomorrow" : "מחר",

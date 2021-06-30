@@ -98,7 +98,6 @@ OC.L10N.register(
     "[Completed tomorrow at] LT" : "[Ολοκληρώνεται αύριο στις] LT",
     "[Completed] L [at] LT" : "[Ολοκληρώθηκε] L [στις] LT",
     "Add a subtask to \"{task}\"…" : "Προσθήκη υποέργου σε \"{task}\"…",
-    "An error occurred, unable to delete the task." : "Παρουσιάστηκε σφάλμα, αδύνατη η διαγραφή εργασίας.",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["Διαγραφή εργασίας σε {countdown} δεύτερα","Διαγραφή εργασίας σε {countdown} δεύτερα"],
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n Ολοκληρωμένη Εργασία","%n Ολοκληρωμένες Εργασίες"],
     "Tomorrow" : "Αύριο",

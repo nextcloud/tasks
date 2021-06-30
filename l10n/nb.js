@@ -56,7 +56,6 @@ OC.L10N.register(
     "Hide subtasks" : "Skjul underoppgaver",
     "Delete task" : "Slett oppgave",
     "Add a subtask to \"{task}\"…" : "Legg til en underoppgave i \"{task}\"...",
-    "An error occurred, unable to delete the task." : "Det oppstod en feil, kunne ikke slette oppgaven.",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n utført oppgave","%n avsluttede oppgaver"],
     "Tomorrow" : "I morgen",
     "Add List…" : "Legg til liste...",

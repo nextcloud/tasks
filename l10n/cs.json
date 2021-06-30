@@ -114,7 +114,6 @@
     "[Completed tomorrow at] LT" : "[Bude dokončeno zítra v] LT",
     "[Completed] L [at] LT" : "[Dokončeno] L [v] LT",
     "Add a subtask to \"{task}\"…" : "Přidat dílčí úkol k „{task}“…",
-    "An error occurred, unable to delete the task." : "Došlo k chybě, úkol se nepodařilo smazat.",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["Úkol bude smazán za {countdown} sekundu","Úkol bude smazán za {countdown} sekundy","Úkol bude smazán za {countdown} sekund","Úkol bude smazán za {countdown} sekundy"],
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n dokončený úkol","%n dokončené úkoly","%n dokončených úkolů","%n dokončené úkoly"],
     "Tomorrow" : "Zítra",

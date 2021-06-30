@@ -94,7 +94,6 @@
     "[Completed tomorrow at] LT" : "[Completada demà a] LT",
     "[Completed] L [at] LT" : "[Completada] L [a] LT",
     "Add a subtask to \"{task}\"…" : "Afegeix una subtasca a \"{task}”…",
-    "An error occurred, unable to delete the task." : "S'ha produït un error, no es pot suprimir la tasca.",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["Supressió de la tasca en {countdown} segon","Supressió de les tasques en {countdown} segons"],
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n Tasca Completada","%n Tasques Completades"],
     "Tomorrow" : "Demà",

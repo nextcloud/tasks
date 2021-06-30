@@ -116,7 +116,6 @@ OC.L10N.register(
     "[Completed tomorrow at] LT" : "[Yarın şu saatte tamamlanacaklar] LT",
     "[Completed] L [at] LT" : "[Tamamlandı] L LT [saatinde] ",
     "Add a subtask to \"{task}\"…" : "\"{task}\" görevine bir alt görev ekle …",
-    "An error occurred, unable to delete the task." : "Bir sorun çıktı. Görev silinemedi.",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["Görev {countdown} saniye içinde silinecek","Görev {countdown} saniye içinde silinecek"],
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n Tamamlanmış Görev","%n Tamamlanmış Görev"],
     "Tomorrow" : "Yarın",

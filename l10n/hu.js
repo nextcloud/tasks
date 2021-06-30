@@ -99,7 +99,6 @@ OC.L10N.register(
     "[Completed tomorrow at] LT" : "[Holnap elkészül] LT",
     "[Completed] L [at] LT" : "[Ellkészült ] L ekkor: LT",
     "Add a subtask to \"{task}\"…" : "Adjon hozzá egy részfeladatot a(z) „{task}” elemhez…",
-    "An error occurred, unable to delete the task." : "Hiba történt, nem sikerült törölni a feladatot.",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["A feladat törlése {countdown} másodperc múlva","A feladat törlése {countdown} másodperc múlva"],
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n befejezett feladat","%n befejezett feladat"],
     "Tomorrow" : "Holnap",

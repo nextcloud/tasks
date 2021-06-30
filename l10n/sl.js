@@ -115,7 +115,6 @@ OC.L10N.register(
     "[Completed tomorrow at] LT" : "[Konča se jutri ob] LT",
     "[Completed] L [at] LT" : "[Končano] L [ob] LT",
     "Add a subtask to \"{task}\"…" : "Dodaj podrejeno nalogo k nalogi »{task}« ...",
-    "An error occurred, unable to delete the task." : "Prišlo je do napake, naloge ni mogoče izbrisati.",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["Naloga bo izbrisana čez {countdown} sekundo","Naloga bo izbrisana čez {countdown} sekundi","Naloga bo izbrisana čez {countdown} sekunde","Naloga bo izbrisana čez {countdown} sekund"],
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n končana naloga","%n končani nalogi","%n končane naloge","%n končanih nalog"],
     "Tomorrow" : "Jutri",

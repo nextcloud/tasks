@@ -114,7 +114,6 @@
     "[Completed tomorrow at] LT" : "[Bihar bukatuta ordu honetan] LT",
     "[Completed] L [at] LT" : "[Bukatuta] L [ordu honetan] LT",
     "Add a subtask to \"{task}\"…" : "Gehitu azpizeregin bat \"{task}\" zereginari…",
-    "An error occurred, unable to delete the task." : "Errorea gertatu da, ezin izan da zeregina ezabatu.",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["Zeregina ezabatuko da {countdown} segundo barru","Zeregina ezabatuko da {countdown} segundo barru"],
     "_%n Completed Task_::_%n Completed Tasks_" : ["Ataza %n osatuta","%n zeregina osatuta"],
     "Tomorrow" : "Bihar",

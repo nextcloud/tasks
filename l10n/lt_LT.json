@@ -81,7 +81,6 @@
     "[Today]" : "[Šiandien]",
     "[Tomorrow]" : "[Rytoj]",
     "Add a subtask to \"{task}\"…" : "Pridėti dalinę užduotį į \"{task}\"…",
-    "An error occurred, unable to delete the task." : "Įvyko klaida, nepavyko ištrinti užduoties.",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["Užduotis ištrinama po {countdown} sekundės","Užduotis ištrinama po {countdown} sekundžių","Užduotis ištrinama po {countdown} sekundžių","Užduotis ištrinama po {countdown} sekundės"],
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n atlikta užduotis","%n atliktos užduotys","%n atliktų užduočių","%n atlikta užduotis"],
     "Tomorrow" : "Rytoj",

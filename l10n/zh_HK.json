@@ -114,7 +114,6 @@
     "[Completed tomorrow at] LT" : "[明日完成於] LT",
     "[Completed] L [at] LT" : "[完成] L [於] LT",
     "Add a subtask to \"{task}\"…" : "新增子任務到「{task}」……",
-    "An error occurred, unable to delete the task." : "發生錯誤，無法刪除任務。",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["將在 {countdown} 秒後刪除任務"],
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n 項已完成的任務"],
     "Tomorrow" : "明日",

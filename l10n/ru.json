@@ -97,7 +97,6 @@
     "[Completed tomorrow at] LT" : "[Завершено завтра в] LT",
     "[Completed] L [at] LT" : "[Завершено] L [в] LT",
     "Add a subtask to \"{task}\"…" : "Добавить вложенную задачу в «{task}»…",
-    "An error occurred, unable to delete the task." : "Не удалось удалить задачу.",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["Задача будет удалена через {countdown} секунду","Задача будет удалена через {countdown} секунды","Задача будет удалена через {countdown} секунд","Задача будет удалена через {countdown} секунды"],
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n завершённая задача","%n завершённых задачи","%n завершённых задач","%n завершённых задач"],
     "Tomorrow" : "Завтра",

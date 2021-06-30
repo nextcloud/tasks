@@ -114,7 +114,6 @@
     "[Completed tomorrow at] LT" : "[Cumpletadu cras a is] LT",
     "[Completed] L [at] LT" : "[Cumpletadu] L [a is] LT",
     "Add a subtask to \"{task}\"…" : "Agiunghe una suta-faina a \"{task}\"…",
-    "An error occurred, unable to delete the task." : "B'at àpidu un'errore, no at fatu a cantzellare sa faina.",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["Sa faina s'at a cantzellare intre {countdown} segundu","Sa faina s'at a cantzellare intre {countdown} segundos"],
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n Faina cumpletada","%n Fainas cumpletadas"],
     "Tomorrow" : "Cras",

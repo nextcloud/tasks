@@ -114,7 +114,6 @@
     "[Completed tomorrow at] LT" : "[Zakończone będzie jutro o] LT",
     "[Completed] L [at] LT" : "[Zakończone] L [o] LT",
     "Add a subtask to \"{task}\"…" : "Dodaj podzadanie do \"{task}\"…",
-    "An error occurred, unable to delete the task." : "Wystąpił błąd, nie można usunąć zadania.",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["Usunięcie zadania za {countdown} sekundę","Usunięcie zadania za {countdown} sekundy","Usunięcie zadania za {countdown} sekund","Usuwanie zadania za {countdown} sekund"],
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n zakończone zadanie","%n zakończonych zadań","%n zakończonych zadań","%n zakończonych zadań"],
     "Tomorrow" : "Jutro",

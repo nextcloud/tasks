@@ -115,7 +115,6 @@ OC.L10N.register(
     "[Completed tomorrow at] LT" : "[Morgen afgewerkt om] LT",
     "[Completed] L [at] LT" : "[Afgewerkt op] L [om] LT",
     "Add a subtask to \"{task}\"…" : "Voeg een subtaak toe aan \"{task}\"…",
-    "An error occurred, unable to delete the task." : "Er is een fout opgetreden, taak kan niet verwijderd worden.",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["De taak wordt verwijderd over {countdown} seconde","De taak wordt verwijderd over {countdown} seconden"],
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n afgeronde taak","%n afgeronde taken"],
     "Tomorrow" : "Morgen",

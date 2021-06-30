@@ -98,7 +98,6 @@ OC.L10N.register(
     "[Completed tomorrow at] LT" : "[Завършен утре в] LT ",
     "[Completed] L [at] LT" : "[Завършен] L [at] LT",
     "Add a subtask to \"{task}\"…" : "Добави подзадача към \"{task}\"...",
-    "An error occurred, unable to delete the task." : "Възникна грешка, невъзможност да се изтрие задачата.",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["Изтриване на задача след {countdown} секундии","Изтриване на задача след {countdown} секундии"],
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n Завършена задача","%n Завършени задачи"],
     "Tomorrow" : "Утре",

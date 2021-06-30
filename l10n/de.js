@@ -116,7 +116,6 @@ OC.L10N.register(
     "[Completed tomorrow at] LT" : "[Morgen erledigt um] LT",
     "[Completed] L [at] LT" : "L [erledigt] [um] LT",
     "Add a subtask to \"{task}\"…" : "Eine Unteraufgabe zu \"{task}\" hinzufügen…",
-    "An error occurred, unable to delete the task." : "Es ist ein Fehler aufgetreten, die Aufgabe konnte nicht gelöscht werden.",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["Lösche die Aufgabe in {countdown} Sekunde","Lösche die Aufgabe in {countdown} Sekunden"],
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n erledigte Aufgabe","%n erledigte Aufgaben"],
     "Tomorrow" : "Morgen",

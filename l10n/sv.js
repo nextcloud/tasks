@@ -78,7 +78,6 @@ OC.L10N.register(
     "[Today]" : "[Idag]",
     "[Tomorrow]" : "[Imorgon]",
     "Add a subtask to \"{task}\"…" : "Lägg till en underuppgift till \"{task}\"…",
-    "An error occurred, unable to delete the task." : "Ett fel uppstod, kunde inte radera uppgiften.",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["Raderar uppgiften om {countdown} sekund","Raderar uppgiften om {countdown} sekunder"],
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n slutförda uppgifter","%n slutförda uppgifter"],
     "Tomorrow" : "Imorgon",

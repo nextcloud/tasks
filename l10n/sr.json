@@ -96,7 +96,6 @@
     "[Completed tomorrow at] LT" : "[Завршено сутра у] LT",
     "[Completed] L [at] LT" : "[Завршено] L [у] LT",
     "Add a subtask to \"{task}\"…" : "Додај подзадатак на задатак „{task}“…",
-    "An error occurred, unable to delete the task." : "Догодила се грешка, не могу да обришем задатак.",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["Бришем задатак за {countdown} секунду","Бришем задатак за {countdown} секунде","Бришем задатак за {countdown} секунди"],
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n завршен задатак","%n завршена задатка","%n завршених задатака"],
     "Tomorrow" : "сутра",

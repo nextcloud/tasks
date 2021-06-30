@@ -59,7 +59,6 @@ OC.L10N.register(
     "[Today]" : "[Tänään]",
     "[Tomorrow]" : "[Huomenna]",
     "Add a subtask to \"{task}\"…" : "Lisää alitehtävä tehtävään \"{task}\"…",
-    "An error occurred, unable to delete the task." : "Tapahtui virhe. Tehtävän poistaminen ei onnistunut.",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n valmistunut tehtävä","%n valmistunutta tehtävää"],
     "Tomorrow" : "Huomenna",
     "Add List…" : "Lisää lista…",
