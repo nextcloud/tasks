@@ -34,7 +34,7 @@ OC.L10N.register(
     "Alphabetically" : "Alfabētiskā secībā",
     "Manually" : "Manuāli",
     "Task is completed" : "Uzdevums pabeigts",
-    "_%n Completed Task_::_%n Completed Tasks_" : ["%n paeigts uzdevums","%n pabeigti uzvedumi"],
+    "_%n Completed Task_::_%n Completed Tasks_" : ["neviena pabeigta uzdevuma","%n paeigts uzdevums","%n pabeigti uzvedumi"],
     "Tomorrow" : "Rīt",
     "New List" : "Jauns saraksts",
     "All day" : "Visas dienas",
