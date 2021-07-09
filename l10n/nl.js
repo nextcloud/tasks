@@ -1,6 +1,7 @@
 OC.L10N.register(
     "tasks",
     {
+    "Upcoming tasks" : "Aanstaande taken",
     "Important" : "Belangrijk",
     "Today" : "Vandaag",
     "Week" : "Week",
@@ -183,6 +184,9 @@ OC.L10N.register(
     "Priority {priority}: high" : "Prioriteit {priority}: hoog",
     "No priority assigned" : "Geen prioriteit toegewezen",
     "{percent} % completed" : "{percent} % gereed",
+    "No upcoming tasks" : "Geen aanstaande taken",
+    "upcoming tasks" : "aanstaande taken",
+    "No tasks today" : "Vandaag geen taken",
     "Successfully created the task." : "Taak succesvol aangemaakt",
     "Could not delete the task." : "Kon de taak niet verwijderen.",
     "Synchronizing to the server." : "Synchroniseren met de server.",
