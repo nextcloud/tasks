@@ -30,7 +30,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			:disabled="isDisabled"
 			:options="calendars"
 			:value="calendar"
-			:placeholder="$t('tasks', 'Select a calendar')"
+			:placeholder="translate('tasks', 'Select a calendar')"
 			@select="change">
 			<template slot="singleLabel" slot-scope="scope">
 				<CalendarPickerOption v-bind="scope.option" />
@@ -43,7 +43,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					color=""
 					owner=""
 					:is-shared-with-me="false"
-					:display-name="$t('tasks', 'No calendar matches the search.')" />
+					:display-name="translate('tasks', 'No calendar matches the search.')" />
 			</template>
 		</Multiselect>
 	</div>
@@ -52,6 +52,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 <script>
 import CalendarPickerOption from './CalendarPickerOption.vue'
 
+import { translate } from '@nextcloud/l10n'
 import Multiselect from '@nextcloud/vue/dist/Components/Multiselect'
 
 export default {
@@ -62,7 +63,7 @@ export default {
 	props: {
 		calendar: {
 			type: Object,
-			required: true,
+			default: null,
 		},
 		calendars: {
 			type: Array,
@@ -79,6 +80,7 @@ export default {
 		},
 	},
 	methods: {
+		translate,
 		/**
 		 * TODO: this should emit the calendar id instead
 		 * @param {Object} newCalendar The selected calendar

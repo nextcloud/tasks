@@ -320,7 +320,14 @@ const mutations = {
 	 */
 	addCalendar(state, calendar) {
 		// extend the calendar to the default model
-		state.calendars.push(Object.assign({}, calendarModel, calendar))
+		calendar = Object.assign({}, calendarModel, calendar)
+		// Only add the calendar if it is not already present
+		if (state.calendars.some(cal => {
+			return cal.id === calendar.id
+		})) {
+			return
+		}
+		state.calendars.push(calendar)
 	},
 
 	/**
