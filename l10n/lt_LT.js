@@ -42,7 +42,6 @@ OC.L10N.register(
     "An error occurred, unable to delete the calendar." : "Įvyko klaida, nepavyko ištrinti kalendorių.",
     "An error occurred, unable to delete the list." : "Įvyko klaida, nepavyko ištrinti sąrašo.",
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Bendrinama su {num} esybe","Bendrinama su {num} esybėmis","Bendrinama su {num} esybių","Bendrinama su {num} esybe"],
-    "Select a calendar" : "Pasirinkite kalendorių",
     "Set date" : "Nustatyti datą",
     "Set time" : "Nustatyti laiką",
     "Delete date" : "Ištrinti datą",

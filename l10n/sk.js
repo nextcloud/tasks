@@ -48,7 +48,6 @@ OC.L10N.register(
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Zoznam sa odstráni o {countdown} sekundu","Zoznam sa odstráni o {countdown} sekundy","Zoznam sa odstráni o {countdown} sekundy","Zoznam sa odstráni o {countdown} sekúnd"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Zrušenie zdieľania zoznamu o {countdown} sekundu","Zrušenie zdieľania zoznamu o {countdown} sekundy","Zrušenie zdieľania zoznamu o {countdown} sekundy","Zrušenie zdieľania zoznamu o {countdown} sekúnd"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Zdieľané s {num} entitou","Zdieľané s {num} entitami","Zdieľané s {num} entitami","Zdieľané s {num} entitami"],
-    "Select a calendar" : "Vybrať kalendár",
     "Set date" : "Nastaviť dátum",
     "Set time" : "Nastaviť čas",
     "Delete date" : "Zmazať dátum",

@@ -45,7 +45,6 @@ OC.L10N.register(
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Изтриване на списък след {countdown} секундии","Изтриване на списък след {countdown} секундии"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Прекратяване на споделянето на списък след {countdown} секунди","Прекратяване на споделянето на списък след {countdown} секунди"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Споделено с {num} обекта","Споделено с {num} обекта"],
-    "Select a calendar" : "Избор на календар",
     "Delete all completed tasks." : "Изтрива всички завършени задачи.",
     "Delete completed tasks." : "Изтрива всички задачи.",
     "Deleted all completed tasks from calendar \"{calendar}\"." : "Всички изпълнени задачи бяха изтрити от календар \"{calendar}\".",

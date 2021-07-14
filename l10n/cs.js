@@ -48,8 +48,6 @@ OC.L10N.register(
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Seznam bude smazán za {countdown} sekundu","Seznam bude smazán za {countdown} sekundy","Seznam bude smazán za {countdown} sekund","Seznam bude smazán za {countdown} sekundy"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Sdílení seznamu bude zrušeno za {countdown} sekundu","Sdílení seznamu bude zrušeno za {countdown} sekundy","Sdílení seznamu bude zrušeno za {countdown} sekund","Sdílení seznamu bude zrušeno za {countdown} sekundy"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Sdíleno s {num} entitou","Sdíleno s {num} entitami","Sdíleno s {num} entitami","Sdíleno s {num} entitami"],
-    "Select a calendar" : "Vybrat kalendář",
-    "No calendar matches the search." : "Vyhledávanému neodpovídá žádný z kalendářů.",
     "Set date" : "Nastavit datum",
     "Set time" : "Nastavit čas",
     "Delete date" : "Smazat datum",

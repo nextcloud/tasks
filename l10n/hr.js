@@ -45,7 +45,6 @@ OC.L10N.register(
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Brisanje popisa za {countdown} sekundu","Brisanje popisa za {countdown} sekunde","Brisanje popisa za {countdown} sekundi"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Prestanak dijeljenja popisa za {countdown} sekundu","Prestanak dijeljenja popisa za {countdown} sekunde","Prestanak dijeljenja popisa za {countdown} sekundi"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Dijeljeno s {num} entitetom","Dijeljeno s {num} entiteta","Dijeljeno s {num} entiteta"],
-    "Select a calendar" : "Odaberi kalendar",
     "Delete all completed tasks." : "Izbriši sve završene zadatke.",
     "Delete completed tasks." : "Izbriši završene zadatke.",
     "Deleted all completed tasks from calendar \"{calendar}\"." : "Izbrisani su svi završeni zadaci iz kalendara „{calendar}”.",

@@ -43,7 +43,6 @@
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Διαγραφή λίστας σε {countdown} δεύτερα","Διαγραφή λίστας σε {countdown} δεύτερα"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Κατάργηση κοινής χρήσης λίστας σε {countdown} δεύτερα","Κατάργηση κοινής χρήσης λίστας σε {countdown} δεύτερα"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Κοινη χρήση με {num} οντότητα","Κοινη χρήση με {num} οντότητες"],
-    "Select a calendar" : "Επιλογή ημερολογίου",
     "Delete all completed tasks." : "Διαγραφή όλων των ολοκληρωμένων εργασιών.",
     "Delete completed tasks." : "Διαγραφή ολοκληρωμένων εργασιών.",
     "Deleted all completed tasks from calendar \"{calendar}\"." : "Διαγραφή όλων των ολοκληρωμένων εργασιών από το ημερολόγιο \"{calendar}\".",

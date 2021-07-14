@@ -47,7 +47,6 @@ OC.L10N.register(
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Eliminazione dell'elenco in {countdown} secondo","Eliminazione dell'elenco in {countdown} secondi"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Rimozione della condivisione dell'elenco in {countdown} secondo","Rimozione della condivisione dell'elenco in {countdown} secondi"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Condiviso con {num} entità","Condiviso con {num} entità"],
-    "Select a calendar" : "Seleziona un calendario",
     "Set date" : "Imposta data",
     "Set time" : "Imposta ora",
     "Delete date" : "Elimina data",

@@ -48,8 +48,6 @@ OC.L10N.register(
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Liste {countdown} saniye içinde silinecek","Liste {countdown} saniye içinde silinecek"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Liste {countdown} saniye içinde paylaşımdan kaldırılacak","Liste {countdown} saniye içinde paylaşımdan kaldırılacak"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["{num} varlık ile paylaşılmış","{num} varlık ile paylaşılmış"],
-    "Select a calendar" : "Bir takvim seçin",
-    "No calendar matches the search." : "Arama ile eşleşen bir takvim bulunamadı.",
     "Set date" : "Tarihi ayarla",
     "Set time" : "Saati ayarla",
     "Delete date" : "Tarihi sil",

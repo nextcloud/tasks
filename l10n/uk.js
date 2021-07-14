@@ -31,7 +31,6 @@ OC.L10N.register(
     "Calendar link could not be copied to clipboard." : "Посилання на календар не може бути зкопійоване до буфера обміну",
     "An empty name is not allowed." : "Порожнє поле не допускається.",
     "An error occurred, unable to delete the calendar." : "Помилка: неможливо вилучити календар.",
-    "Select a calendar" : "Вибрати календар",
     "No errors" : "Без помилок",
     "Open your browser console for more details" : "Відкрийте консоль браузера для докладної інформації",
     "Change sort order" : "Зміна порядку сортування",

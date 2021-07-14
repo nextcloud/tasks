@@ -46,8 +46,6 @@
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Apagando a lista em {countdown} segundo","Apagando a lista em {countdown} segundos"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Descompartilhando a lista em {countdown} segundo","Descompartilhando a lista em {countdown} segundos"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Compartilhado com {num} entidade","Compartilhado com {num} entidades"],
-    "Select a calendar" : "Selecionar um calendário",
-    "No calendar matches the search." : "Nenhum calendário corresponde à pesquisa. ",
     "Set date" : "Definir data ",
     "Set time" : "Definir tempo ",
     "Delete date" : "Apagar data ",

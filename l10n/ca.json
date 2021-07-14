@@ -41,7 +41,6 @@
     "_Deleting the calendar in {countdown} second_::_Deleting the calendar in {countdown} seconds_" : ["Supressió del calendari en {countdown} segon","Supressió dels calendaris en {countdown} segons"],
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Deixant de compartir el calendari en {countdown} segon","Deixant de compartir els calendaris en {countdown} segons"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Compartit amb {num} entitats","Compartit amb [num] entitats"],
-    "Select a calendar" : "Selecciona un calendari",
     "Delete all completed tasks." : "Suprimeix totes les tasques completades.",
     "Delete completed tasks." : "Suprimeix les tasques completades.",
     "Deleted all completed tasks from calendar \"{calendar}\"." : "S'han suprimit totes les tasques completades del calendari \"{calendar}\".",

@@ -46,8 +46,6 @@
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["將在 {countdown} 秒後刪除清單"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["將在 {countdown} 秒後取消分享清單"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["與 {num} 個實體分享了"],
-    "Select a calendar" : "選擇日曆",
-    "No calendar matches the search." : "沒有日曆與搜尋匹配。",
     "Set date" : "設定日期",
     "Set time" : "設定時間",
     "Delete date" : "刪除日期",

@@ -32,7 +32,6 @@ OC.L10N.register(
     "The name \"{calendar}\" is already used." : "Navnet \"{calendar}\" er allerede i bruk.",
     "An empty name is not allowed." : "Et tomt navn er ikke tillatt.",
     "An error occurred, unable to delete the calendar." : "En feil oppstod, kan ikke slette kalenderen. ",
-    "Select a calendar" : "Velg en kalender",
     "Delete all completed tasks." : "Slett alle fullførte oppgaver.",
     "Delete completed tasks." : "Slett fullførte oppgaver.",
     "Deleted all completed tasks from calendar \"{calendar}\"." : "Slett alle fullførte oppgaver fra kalender \"{calendar}\".",

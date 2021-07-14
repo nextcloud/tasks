@@ -48,8 +48,6 @@ OC.L10N.register(
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["將在 {countdown} 秒後刪除列表"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["將在 {countdown} 秒後取消分享列表"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["與 {num} 個實體分享"],
-    "Select a calendar" : "選取日曆",
-    "No calendar matches the search." : "沒有與搜尋相符的日曆。",
     "Set date" : "設定日期",
     "Set time" : "設定時間",
     "Delete date" : "刪除日期",

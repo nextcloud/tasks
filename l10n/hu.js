@@ -46,7 +46,6 @@ OC.L10N.register(
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["A lista törlése {countdown} másodpercen belül megtörténik","A lista törlése {countdown} másodpercen belül megtörténik"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["A lista megosztásának megszüntetése {countdown} másodperc múlva","A lista megosztásának megszüntetése {countdown} másodperc múlva"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Megosztva {num} entitással","Megosztva {num} entitással"],
-    "Select a calendar" : "Naptár kiválasztása",
     "Delete all completed tasks." : "Összes befejezett feladat törlése.",
     "Delete completed tasks." : "Befejezett feladatok törlése.",
     "Deleted all completed tasks from calendar \"{calendar}\"." : "Az összes befejezett feladatot törölte a(z) \"{calendar}\" naptárból.",

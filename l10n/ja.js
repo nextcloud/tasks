@@ -36,7 +36,6 @@ OC.L10N.register(
     "An empty name is not allowed." : "件名を入力してください。",
     "An error occurred, unable to delete the calendar." : "エラーが発生したため、カレンダーを削除できません。",
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["{num}個のエンティティと共有"],
-    "Select a calendar" : "カレンダーを選択",
     "Delete all completed tasks." : "全ての完了したタスクを削除",
     "Delete completed tasks." : "完了したタスクを削除",
     "Deleted all completed tasks from calendar \"{calendar}\"." : "カレンダー \"{calendar}\" から完了したタスクをすべて削除しました。",

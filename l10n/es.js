@@ -47,8 +47,6 @@ OC.L10N.register(
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Borrando la lista en {countdown} segundo","Borrando la lista en {countdown} segundos"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Dejando de compartir la lista en {countdown} segundo","Dejando de compartir la lista en {countdown} segundos"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Compartido con {num} entidades","Compartido con {num} entidades"],
-    "Select a calendar" : "Seleccionar un calendario",
-    "No calendar matches the search." : "No hay calendarios que coincidan con tu búsqueda.",
     "Set date" : "Establecer fecha",
     "Set time" : "Establecer hora",
     "Delete date" : "Borrar fecha",

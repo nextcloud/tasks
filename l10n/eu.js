@@ -48,8 +48,6 @@ OC.L10N.register(
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Zerrenda ezabatzen segundu {countdown}ean","Zerrenda ezabatzen {countdown} segundutan"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Zerrenda partekatzea kenduko da {countdown} segundo barru ","Zerrenda partekatzea kenduko da {countdown} segundo barru "],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Entitate {num}ekin partekatua","{num} entitaterekin partekatua"],
-    "Select a calendar" : "Hautatu egutegi bat",
-    "No calendar matches the search." : "Ez dago bilaketarekin bat datorren egutegirik.",
     "Set date" : "Ezarri data",
     "Set time" : "Ezarri denbora",
     "Delete date" : "Ezabatu data",

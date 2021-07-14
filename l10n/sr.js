@@ -45,7 +45,6 @@ OC.L10N.register(
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Брисање списка за {countdown} секунду","Брисање списка за {countdown} секунде","Брисање списка за {countdown} секунди"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Уклањем дељење списка за {countdown} секунду","Уклањем дељење списка за {countdown} секунде","Уклањем дељење списка за {countdown} секунди"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Дељено са {num} ентитетом","Дељено са {num} ентитета","Дељено са {num} ентитета"],
-    "Select a calendar" : "Одаберите календар",
     "Delete all completed tasks." : "Обриши све завршене задатке.",
     "Delete completed tasks." : "Обриши завршене задатке.",
     "Deleted all completed tasks from calendar \"{calendar}\"." : "Обриши све завршене задатке из календара „{calendar}“.",

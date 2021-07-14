@@ -46,8 +46,6 @@
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Sa lista s'at a cantzellare intre {countdown} segundu","Sa lista s'at a cantzellare intre {countdown} segundos"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Sa lista s'at a cantzellare intre {countdown} segundu","Annullamentu de sa cumpartzidura de sa lista intre {countdown} segundos"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Cumpartzidu cun {num} entidade","Cumpartzidu cun {num} entidades"],
-    "Select a calendar" : "Seletziona unu calendàriu",
-    "No calendar matches the search." : "Perunu calendàriu currispondet a sa chirca.",
     "Set date" : "Imposta data",
     "Set time" : "Imposta ora",
     "Delete date" : "Cantzella data",

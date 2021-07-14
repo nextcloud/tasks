@@ -33,7 +33,6 @@ OC.L10N.register(
     "An empty name is not allowed." : "Nimi ei voi olla tyhjä.",
     "An error occurred, unable to delete the calendar." : "Tapahtui virhe, kalenteria ei voitu poistaa.",
     "_Deleting the calendar in {countdown} second_::_Deleting the calendar in {countdown} seconds_" : ["Poistetaan kalenteri {countdown} sekunnissa","Poistetaan kalenteri {countdown} sekunnissa"],
-    "Select a calendar" : "Valitse kalenteri",
     "Delete all completed tasks." : "Poista kaikki valmistuneet tehtävät.",
     "Delete completed tasks." : "Poista valmistuneet tehtävät.",
     "Deleted all completed tasks from calendar \"{calendar}\"." : "Poista kaikki valmistuneet tehtävät kalenterista \"{calendar}\".",

@@ -46,8 +46,6 @@
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["De lijst wordt verwijderd over {countdown} seconde","De lijst wordt verwijderd over {countdown} seconden"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Het delen van de lijst wordt over {countdown} seconde gestopt","Het delen van de lijst wordt over {countdown} seconden gestopt"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Gedeeld met {num} object","Gedeeld met {num} objecten"],
-    "Select a calendar" : "Selecteer een kalender",
-    "No calendar matches the search." : "Geen overeenkomstige agenda gevonden,",
     "Set date" : "Instellen datum",
     "Set time" : "Instellen tijd",
     "Delete date" : "Verwijderdatum",

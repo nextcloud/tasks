@@ -46,7 +46,6 @@ OC.L10N.register(
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Удаление списка через {countdown} сек.","Удаление списка через {countdown} сек.","Удаление списка через {countdown} сек.","Удаление списка через {countdown} сек."],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Отмена публикации списка через {countdown} сек.","Отмена публикации списка через {countdown} сек.","Отмена публикации списка через {countdown} сек.","Отмена публикации списка через {countdown} сек."],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Совместный доступ с {num} получателем","Совместный доступ с {num} получателями","Совместный доступ с {num} получателями","Совместный доступ с {num} получателями"],
-    "Select a calendar" : "Выбрать календарь",
     "Delete all completed tasks." : "Удалить все завершённые задачи",
     "Delete completed tasks." : "Удалить все завершённые задачи",
     "Deleted all completed tasks from calendar \"{calendar}\"." : "Из календаря {calendar} удалены все завершённые задачи.",

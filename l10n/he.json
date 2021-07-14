@@ -42,7 +42,6 @@
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["הרשימה תימחק בעוד שנייה","הרשימה תימחק בעוד שתי שניות","הרשימה תימחק בעוד {countdown} שניות","הרשימה תימחק בעוד {countdown} שניות"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["שיתוף הרשומה יבוטל בעוד שנייה אחת","שיתוף הרשומה יבוטל בעוד שתי שניות","שיתוף הרשומה יבוטל בעוד {countdown} שניות","שיתוף הרשומה יבוטל בעוד {countdown} שניות"],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["משותף עם ישות אחת","משותף עם {num} ישויות","משותף עם {num} ישויות","משותף עם {num} ישויות"],
-    "Select a calendar" : "הגדרת יומן",
     "Delete all completed tasks." : "מחיקת כל המשימות שהושלמו.",
     "Delete completed tasks." : "מחיקת המשימות שהושלמו.",
     "Deleted all completed tasks from calendar \"{calendar}\"." : "כל המשימות שהושלמו נמחקו מהיומן „{calendar}”.",

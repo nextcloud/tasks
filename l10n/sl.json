@@ -45,8 +45,6 @@
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Seznam bo izbrisan čez {countdown} sekundo.","Seznam bo izbrisan čez {countdown} sekundi.","Seznam bo izbrisan čez {countdown} sekunde.","Seznam bo izbrisan čez {countdown} sekund."],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Souporaba seznama bo onemogočena čez {countdown} sekundo.","Souporaba seznama bo onemogočena čez {countdown} sekundi.","Souporaba seznama bo onemogočena čez {countdown} sekunde.","Souporaba seznama bo onemogočena čez {countdown} sekund."],
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["V souporabi s skupno {num} odjemalcem","V souporabi s skupno {num} odjemalcema","V souporabi s skupno {num} odjemalci","V souporabi s skupno {num} odjemalci"],
-    "Select a calendar" : "Izbor koledarja",
-    "No calendar matches the search." : "Ni koledarja, skladnega z iskalnim nizom.",
     "Set date" : "Nastavi datum",
     "Set time" : "Nastavi čas",
     "Delete date" : "Izbriši datum",

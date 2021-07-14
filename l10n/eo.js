@@ -32,7 +32,6 @@ OC.L10N.register(
     "The name \"{calendar}\" is already used." : "La nomo „{calendar}“ jam uziĝas.",
     "An empty name is not allowed." : "Malplena nomo ne permesatas.",
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Kunhavigitaj kun {num} ento","Kunhavigitaj kun {num} entoj"],
-    "Select a calendar" : "Elekti kalendaron",
     "Delete all completed tasks." : "Forigi ĉiujn plenumitajn taskojn.",
     "Delete completed tasks." : "Forigi plenumitajn taskojn.",
     "Deleted all completed tasks from calendar \"{calendar}\"." : "Forigi ĉiujn plenumitajn taskojn el kalendaro „{calendar}“.",

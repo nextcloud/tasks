@@ -34,7 +34,6 @@
     "An empty name is not allowed." : "Ett tomt namn är inte tillåtet.",
     "An error occurred, unable to delete the calendar." : "Ett fel inträffade, kunde inte radera kalendern.",
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Delad med {num} enhet","Delad med {num} enheter"],
-    "Select a calendar" : "Välj en kalender",
     "Delete all completed tasks." : "Ta bort alla slutförda uppgifter.",
     "Delete completed tasks." : "Ta bort slutförda uppgifter.",
     "Deleted all completed tasks from calendar \"{calendar}\"." : "Ta bort alla slutförda uppgifter från kalender \"{calendar}\".",
