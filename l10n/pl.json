@@ -113,6 +113,12 @@
     "[Completed] L [at] LT" : "[Zakończone] L [o] LT",
     "Add a subtask to \"{task}\"…" : "Dodaj podzadanie do \"{task}\"…",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["Usunięcie zadania za {countdown} sekundę","Usunięcie zadania za {countdown} sekundy","Usunięcie zadania za {countdown} sekund","Usuwanie zadania za {countdown} sekund"],
+    "Create a new task" : "Utwórz nowe zadanie",
+    "Create task" : "Utwórz zadanie",
+    "Creating the new task…" : "Tworzenie nowego zadania…",
+    "\"{task}\" was added to \"{calendar}\"" : "\"{task}\" zostało dodane do \"{calendar}\"",
+    "Open task" : "Otwórz zadanie",
+    "Close" : "Zamknij",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n zakończone zadanie","%n zakończonych zadań","%n zakończonych zadań","%n zakończonych zadań"],
     "Tomorrow" : "Jutro",
     "Add List…" : "Dodaj listę…",
@@ -191,6 +197,8 @@
     "Could not update the task." : "Nie można zaktualizować zadania.",
     "Successfully updated the task." : "Pomyślnie zaktualizowano zadanie.",
     "Task successfully moved to new calendar." : "Zadanie zostało pomyślnie przeniesione do nowego kalendarza.",
-    "An error occurred" : "Wystąpił błąd"
+    "An error occurred" : "Wystąpił błąd",
+    "Create a task" : "Utwórz zadanie",
+    "Message from {author} in {conversationName}" : "Wiadomość od {author} w {conversationName}"
 },"pluralForm" :"nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);"
 }

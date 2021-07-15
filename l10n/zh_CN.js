@@ -115,6 +115,12 @@ OC.L10N.register(
     "[Completed] L [at] LT" : "[已完成] L [于] LT",
     "Add a subtask to \"{task}\"…" : "添加子任务到 \"{task}\" ...",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["在 {countdown} 秒后删除任务"],
+    "Create a new task" : "创建一个新任务",
+    "Create task" : "创建任务",
+    "Creating the new task…" : "正在创建新任务…",
+    "\"{task}\" was added to \"{calendar}\"" : "\"{task}\" 已被添加至  \"{calendar}\"",
+    "Open task" : "打开任务",
+    "Close" : "关闭",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n 任务完成"],
     "Tomorrow" : "明天",
     "Add List…" : "添加列表 ...",
@@ -180,6 +186,7 @@ OC.L10N.register(
     "Could not update the task." : "无法更新任务。",
     "Successfully updated the task." : "成功更新任务。",
     "Task successfully moved to new calendar." : "任务已成功移至新日历。",
-    "An error occurred" : "发生了一个错误"
+    "An error occurred" : "发生了一个错误",
+    "Create a task" : "创建一个任务"
 },
 "nplurals=1; plural=0;");

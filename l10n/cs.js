@@ -115,6 +115,12 @@ OC.L10N.register(
     "[Completed] L [at] LT" : "[Dokončeno] L [v] LT",
     "Add a subtask to \"{task}\"…" : "Přidat dílčí úkol k „{task}“…",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["Úkol bude smazán za {countdown} sekundu","Úkol bude smazán za {countdown} sekundy","Úkol bude smazán za {countdown} sekund","Úkol bude smazán za {countdown} sekundy"],
+    "Create a new task" : "Vytvořit nový úkol",
+    "Create task" : "Vytvořit úkol",
+    "Creating the new task…" : "Vytváření nového úkolu…",
+    "\"{task}\" was added to \"{calendar}\"" : "„{task}“ bylo přidáno do „{calendar}“",
+    "Open task" : "Otevřít úkol",
+    "Close" : "Zavřít",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n dokončený úkol","%n dokončené úkoly","%n dokončených úkolů","%n dokončené úkoly"],
     "Tomorrow" : "Zítra",
     "Add List…" : "Přidat seznam…",
@@ -193,6 +199,8 @@ OC.L10N.register(
     "Could not update the task." : "Úkol se nedaří aktualizovat.",
     "Successfully updated the task." : "Úkol úspěšně aktualizován.",
     "Task successfully moved to new calendar." : "Úkol úspěšně přesunut do nového kalendáře.",
-    "An error occurred" : "Došlo k chybě"
+    "An error occurred" : "Došlo k chybě",
+    "Create a task" : "Vytvořit úkol",
+    "Message from {author} in {conversationName}" : "Zpráva od {author} v {conversationName}"
 },
 "nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;");

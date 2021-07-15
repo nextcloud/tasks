@@ -115,6 +115,12 @@ OC.L10N.register(
     "[Completed] L [at] LT" : "L [erledigt] [um] LT",
     "Add a subtask to \"{task}\"…" : "Eine Unteraufgabe zu \"{task}\" hinzufügen…",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["Lösche die Aufgabe in {countdown} Sekunde","Lösche die Aufgabe in {countdown} Sekunden"],
+    "Create a new task" : "Neue Aufgabe erstellen",
+    "Create task" : "Aufgabe erstellen",
+    "Creating the new task…" : "Neue Aufgabe wird erstellt …",
+    "\"{task}\" was added to \"{calendar}\"" : "\"{task}\" wurde \"{calendar}\" hinzugefügt",
+    "Open task" : "Aufgabe öffnen",
+    "Close" : "Schließen",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n erledigte Aufgabe","%n erledigte Aufgaben"],
     "Tomorrow" : "Morgen",
     "Add List…" : "Liste hinzufügen…",
@@ -193,6 +199,8 @@ OC.L10N.register(
     "Could not update the task." : "Aufgabe konnte nicht aktualisiert werden.",
     "Successfully updated the task." : "Aufgabe aktualisiert.",
     "Task successfully moved to new calendar." : "Aufgabe in neuen Kalender verschoben.",
-    "An error occurred" : "Es ist ein Fehler aufgetreten"
+    "An error occurred" : "Es ist ein Fehler aufgetreten",
+    "Create a task" : "Aufgabe erstellen",
+    "Message from {author} in {conversationName}" : "Nachricht von {author} in {conversationName}"
 },
 "nplurals=2; plural=(n != 1);");
