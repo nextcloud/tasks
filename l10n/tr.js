@@ -115,6 +115,12 @@ OC.L10N.register(
     "[Completed] L [at] LT" : "[Tamamlandı] L LT [saatinde] ",
     "Add a subtask to \"{task}\"…" : "\"{task}\" görevine bir alt görev ekle …",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["Görev {countdown} saniye içinde silinecek","Görev {countdown} saniye içinde silinecek"],
+    "Create a new task" : "Görev ekle",
+    "Create task" : "Görev ekle",
+    "Creating the new task…" : "Yeni görev ekleniyor…",
+    "\"{task}\" was added to \"{calendar}\"" : "\"{task}\" görevi \"{calendar}\" takvimine eklendi",
+    "Open task" : "Görevi aç",
+    "Close" : "Kapat",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n Tamamlanmış Görev","%n Tamamlanmış Görev"],
     "Tomorrow" : "Yarın",
     "Add List…" : "Liste ekle …",
@@ -193,6 +199,8 @@ OC.L10N.register(
     "Could not update the task." : "Görev güncellenemedi.",
     "Successfully updated the task." : "Görev güncellendi.",
     "Task successfully moved to new calendar." : "Görev yeni takvime taşındı.",
-    "An error occurred" : "Bir sorun çıktı"
+    "An error occurred" : "Bir sorun çıktı",
+    "Create a task" : "Bir görev ekle",
+    "Message from {author} in {conversationName}" : "{conversationName} görüşmesinde {author} iletisi"
 },
 "nplurals=2; plural=(n > 1);");
