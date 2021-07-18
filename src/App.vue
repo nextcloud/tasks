@@ -57,7 +57,7 @@ export default {
 		// get calendars then get tasks
 		await client.connect({ enableCalDAV: true })
 		await this.$store.dispatch('fetchCurrentUserPrincipal')
-		const calendars = await this.$store.dispatch('getCalendars')
+		const { calendars } = await this.$store.dispatch('getCalendarsAndTrashBin')
 		const owners = []
 		calendars.forEach((calendar) => {
 			if (owners.indexOf(calendar.owner) === -1) {

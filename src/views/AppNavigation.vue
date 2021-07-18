@@ -91,6 +91,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<Colorpicker :selected-color="selectedColor" @color-selected="setColor(...arguments)" />
 				</div>
 			</AppNavigationItem>
+			<Trashbin v-if="hasTrashBin" />
 		</template>
 		<template #footer>
 			<AppNavigationSettings />
@@ -102,6 +103,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 import ListItemCalendar from '../components/AppNavigation/ListItemCalendar.vue'
 import Colorpicker from '../components/AppNavigation/Colorpicker.vue'
 import AppNavigationSettings from '../components/AppNavigation/AppNavigationSettings.vue'
+import Trashbin from '../components/AppNavigation/Trashbin.vue'
 
 import AppNavigation from '@nextcloud/vue/dist/Components/AppNavigation'
 import AppNavigationCounter from '@nextcloud/vue/dist/Components/AppNavigationCounter'
@@ -123,6 +125,7 @@ export default {
 	components: {
 		ListItemCalendar,
 		Colorpicker,
+		Trashbin,
 		AppNavigation,
 		AppNavigationItem,
 		AppNavigationCounter,
@@ -176,6 +179,7 @@ export default {
 			isCalendarNameUsed: 'isCalendarNameUsed',
 			getTask: 'getTaskByUri',
 			initialRoute: 'initialRoute',
+			hasTrashBin: 'hasTrashBin',
 		}),
 	},
 	methods: {

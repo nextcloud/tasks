@@ -36,6 +36,7 @@ import { isParentInList, searchSubTasks } from './storeHelper.js'
 import { findVTODObyState } from './cdav-requests.js'
 import router from '../router.js'
 import { detectColor, uidToHexColor } from '../utils/color.js'
+import { mapCDavObjectToCalendarObject } from '../models/calendarObject'
 
 import ICAL from 'ical.js'
 import pLimit from 'p-limit'
@@ -65,6 +66,9 @@ const calendarModel = {
 
 const state = {
 	calendars: [],
+	trashBin: undefined,
+	deletedCalendars: [],
+	deletedCalendarObjects: [],
 }
 
 /**
@@ -308,6 +312,45 @@ const getters = {
 		}
 		return defaultCalendar
 	},
+
+	hasTrashBin: (state) => {
+		return state.trashBin !== undefined && state.trashBin.retentionDuration !== 0
+	},
+
+	trashBin: (state) => {
+		return state.trashBin
+	},
+
+	/**
+	 * List of deleted sorted calendars
+	 *
+	 * @param {Object} state the store data
+	 * @returns {Array}
+	 */
+	sortedDeletedCalendars(state) {
+		return state.deletedCalendars
+			.sort((a, b) => a.deletedAt - b.deletedAt)
+	},
+
+	/**
+	 * List of deleted calendars objects
+	 *
+	 * @param {Object} state the store data
+	 * @returns {Array}
+	 */
+	deletedCalendarObjects(state) {
+		const calendarUriMap = {}
+		state.calendars.forEach(calendar => {
+			const withoutTrail = calendar.url.replace(/\/$/, '')
+			const uri = withoutTrail.substr(withoutTrail.lastIndexOf('/') + 1)
+			calendarUriMap[uri] = calendar
+		})
+
+		return state.deletedCalendarObjects.map(obj => ({
+			calendar: calendarUriMap[obj.dav._props['{http://nextcloud.com/ns}calendar-uri']],
+			...obj,
+		}))
+	},
 }
 
 const mutations = {
@@ -338,6 +381,62 @@ const mutations = {
 	 */
 	deleteCalendar(state, calendar) {
 		state.calendars.splice(state.calendars.indexOf(calendar), 1)
+	},
+
+	addTrashBin(state, { trashBin }) {
+		state.trashBin = trashBin
+	},
+
+	/**
+	 * Adds deleted calendar into state
+	 *
+	 * @param {Object} state the store data
+	 * @param {Object} data destructuring object
+	 * @param {Object} data.calendar calendar the calendar to add
+	 */
+	addDeletedCalendar(state, { calendar }) {
+		if (state.deletedCalendars.some(c => c.url === calendar.url)) {
+			// This calendar is already known
+			return
+		}
+		state.deletedCalendars.push(calendar)
+	},
+
+	/**
+	 * Removes a deleted calendar
+	 *
+	 * @param {Object} state the store data
+	 * @param {Object} data destructuring object
+	 * @param {Object} data.calendar the deleted calendar to remove
+	 */
+	removeDeletedCalendar(state, { calendar }) {
+		state.deletedCalendars = state.deletedCalendars.filter(c => c !== calendar)
+	},
+
+	/**
+	 * Removes a deleted calendar object
+	 *
+	 * @param {Object} state the store data
+	 * @param {Object} data destructuring object
+	 * @param {Object} data.vobject the deleted calendar object to remove
+	 */
+	removeDeletedCalendarObject(state, { vobject }) {
+		state.deletedCalendarObjects = state.deletedCalendarObjects.filter(vo => vo.id !== vobject.id)
+	},
+
+	/**
+	 * Adds a deleted vobject into state
+	 *
+	 * @param {Object} state the store data
+	 * @param {Object} data destructuring object
+	 * @param {Object} data.vobject the calendar vobject to add
+	 */
+	addDeletedCalendarObject(state, { vobject }) {
+		if (state.deletedCalendarObjects.some(c => c.uri === vobject.uri)) {
+			// This vobject is already known
+			return
+		}
+		state.deletedCalendarObjects.push(vobject)
 	},
 
 	/**
@@ -479,22 +578,56 @@ const actions = {
 	 * @param {Object} context The store mutations
 	 * @returns {Promise<Array>} The calendars
 	 */
-	async getCalendars(context) {
-		let calendars = await client.calendarHomes[0].findAllCalendars()
-			.then(calendars => {
-				return calendars.map(calendar => {
-					return mapDavCollectionToCalendar(calendar, context.getters.getCurrentUserPrincipal)
-				})
-			})
+	async getCalendarsAndTrashBin({ commit, state, getters }) {
+		let { calendars, trashBins } = await client.calendarHomes[0].findAllCalDAVCollectionsGrouped()
+		calendars = calendars.map(calendar => {
+			return mapDavCollectionToCalendar(calendar, getters.getCurrentUserPrincipal)
+		})
 
 		// Remove calendars which don't support tasks
 		calendars = calendars.filter(calendar => calendar.supportsTasks)
 
 		calendars.forEach(calendar => {
-			context.commit('addCalendar', calendar)
+			commit('addCalendar', calendar)
 		})
 
-		return calendars
+		if (trashBins.length) {
+			commit('addTrashBin', { trashBin: trashBins[0] })
+		}
+
+		return {
+			calendars: state.calendars,
+			trashBin: state.trashBin,
+		}
+	},
+
+	/**
+	 * Retrieve and commit deleted calendars
+	 *
+	 * @param {Object} context the store mutations
+	 * @returns {Promise<Array>} the calendars
+	 */
+	async loadDeletedCalendars({ commit }) {
+		const calendars = await client.calendarHomes[0].findAllDeletedCalendars()
+
+		calendars.forEach(calendar => commit('addDeletedCalendar', { calendar }))
+	},
+
+	/**
+	 * Retrieve and commit deleted calendar objects
+	 */
+	async loadDeletedCalendarObjects({ commit, state }) {
+		const vobjects = await state.trashBin.findDeletedObjects()
+		console.info('vobjects loaded', { vobjects })
+
+		vobjects.forEach(vobject => {
+			try {
+				const calendarObject = mapCDavObjectToCalendarObject(vobject, undefined)
+				commit('addDeletedCalendarObject', { vobject: calendarObject })
+			} catch (error) {
+				console.error('could not convert calendar object', vobject, error)
+			}
+		})
 	},
 
 	/**
@@ -531,6 +664,56 @@ const actions = {
 				context.commit('deleteCalendar', calendar)
 			})
 			.catch((error) => { throw error })
+	},
+
+	/**
+	 * Delete a calendar in the trash bin
+	 *
+	 * @param {Object} context the store mutations Current context
+	 * @param {Object} data destructuring object
+	 * @param {Object} data.calendar the calendar to delete
+	 * @returns {Promise}
+	 */
+	async deleteCalendarPermanently(context, { calendar }) {
+		await calendar.delete({
+			'X-NC-CalDAV-No-Trashbin': 1,
+		})
+
+		context.commit('removeDeletedCalendar', { calendar })
+	},
+
+	async restoreCalendar({ commit, state }, { calendar }) {
+		await state.trashBin.restore(calendar.url)
+
+		commit('removeDeletedCalendar', { calendar })
+	},
+
+	async restoreCalendarObject({ commit, state, dispatch }, { vobject }) {
+		await state.trashBin.restore(vobject.uri)
+
+		// Clean up the data locally
+		commit('removeDeletedCalendarObject', { vobject })
+
+		// It would be more elegant to only add the restored task
+		if (vobject.isTodo) {
+			dispatch('getTasksFromCalendar', { calendar: vobject.calendar })
+		}
+	},
+
+	/**
+	 * Deletes a calendar-object permanently
+	 *
+	 * @param {Object} context the store mutations
+	 * @param {Object} data destructuring object
+	 * @param {vobject} data.vobject Calendar-object to delete
+	 * @returns {Promise<void>}
+	 */
+	async deleteCalendarObjectPermanently(context, { vobject }) {
+		await vobject.dav.delete({
+			'X-NC-CalDAV-No-Trashbin': 1,
+		})
+
+		context.commit('removeDeletedCalendarObject', { vobject })
 	},
 
 	/**
