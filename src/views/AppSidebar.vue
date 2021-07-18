@@ -25,6 +25,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		:title-editable="editingTitle"
 		:linkify-title="true"
 		:subtitle="subtitle"
+		:title-tooltip="title"
 		:empty="!task"
 		@start-editing="newTitle = task.summary"
 		@update:titleEditable="editTitle"
