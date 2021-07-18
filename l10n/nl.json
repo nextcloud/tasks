@@ -113,6 +113,12 @@
     "[Completed] L [at] LT" : "[Afgewerkt op] L [om] LT",
     "Add a subtask to \"{task}\"…" : "Voeg een subtaak toe aan \"{task}\"…",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["De taak wordt verwijderd over {countdown} seconde","De taak wordt verwijderd over {countdown} seconden"],
+    "Create a new task" : "Maak een nieuwe taak aan",
+    "Create task" : "Aanmaken taak",
+    "Creating the new task…" : "Aanmaken nieuwe taak...",
+    "\"{task}\" was added to \"{calendar}\"" : "\"{task}\" is toegevoegd aan \"{calendar}\"",
+    "Open task" : "Open taak",
+    "Close" : "Sluiten",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n afgeronde taak","%n afgeronde taken"],
     "Tomorrow" : "Morgen",
     "Add List…" : "Toevoegen lijst...",
@@ -191,6 +197,8 @@
     "Could not update the task." : "Kon de taak niet bewerken.",
     "Successfully updated the task." : "Taak succesvol bijgewerkt.",
     "Task successfully moved to new calendar." : "Taak succesvol verplaatst naar de nieuwe agenda.",
-    "An error occurred" : "Er is een fout opgetreden"
+    "An error occurred" : "Er is een fout opgetreden",
+    "Create a task" : "Maak een taak aan",
+    "Message from {author} in {conversationName}" : "Bericht van {author} in {conversationName}"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
