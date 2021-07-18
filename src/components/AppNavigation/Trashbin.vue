@@ -48,14 +48,14 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 							<div class="table__header">
 								{{ t('tasks', 'Name') }}
 							</div>
-							<div class="table__header deletedAt">
+							<div class="table__header table__header--deletedAt">
 								{{ t('tasks', 'Deleted') }}
 							</div>
 							<div class="table__header">
 								&nbsp;
 							</div>
 							<template v-for="item in items" class="row">
-								<div :key="`${item.url}desc`">
+								<div :key="`${item.url}desc`" class="table__body">
 									<div
 										class="icon-bullet"
 										:style="{ 'background-color': item.color }" />
@@ -68,10 +68,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 										</div>
 									</div>
 								</div>
-								<div :key="`${item.url}date`" class="deletedAt">
+								<div :key="`${item.url}date`" class="table__body table__body--deletedAt">
 									<Moment class="timestamp" :timestamp="item.deletedAt" />
 								</div>
-								<div :key="`${item.url}action`">
+								<div :key="`${item.url}action`" class="table__body">
 									<button @click="restore(item)">
 										{{ t('tasks','Restore') }}
 									</button>
@@ -284,6 +284,13 @@ export default {
 		z-index: 1;
 	}
 
+	&__header,
+	&__body {
+		&--deletedAt {
+			justify-content: right;
+		}
+	}
+
 	& > div {
 		display: flex;
 		align-items: center;
@@ -304,10 +311,6 @@ export default {
 	&__subline {
 		color: var(--color-text-maxcontrast);
 	}
-}
-
-.deletedAt {
-	text-align: right;
 }
 
 .footer {
