@@ -50,7 +50,7 @@ describe('TaskDragContainer.vue', () => {
 		})
 	})
 
-	it('Checks that the tasks are sorted correctly on manual sort.', async() => {
+	it('Checks that the tasks are sorted correctly on manual sort.', async () => {
 		const wrapper = shallowMount(TaskDragContainer, {
 			localVue,
 			store,
@@ -70,7 +70,7 @@ describe('TaskDragContainer.vue', () => {
 		expect(sortOrder).toEqual([1, 2, 6, 564345550, 564345559])
 	})
 
-	it('Checks that tasks are properly reordered.', async() => {
+	it('Checks that tasks are properly reordered.', async () => {
 		const wrapper = shallowMount(TaskDragContainer, {
 			localVue,
 			store,

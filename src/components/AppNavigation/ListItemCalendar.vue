@@ -505,7 +505,7 @@ export default {
 					this.countdown = 0
 				}
 			}, 1000)
-			this.deleteTimeout = setTimeout(async() => {
+			this.deleteTimeout = setTimeout(async () => {
 				try {
 					await this.deleteCalendar(this.calendar)
 				} catch (error) {
