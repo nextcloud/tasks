@@ -1,4 +1,31 @@
-## 0.13.6 -2020-11-11
+## 0.14.0 - 2021-07-18
+
+### Added
+- Completely new AppSidebar using Nextcloud style #1030
+- Added GUI for the trash bin #1675
+- Dashboard widget #1641
+- Allow to create tasks from Talk messages #1649
+- Show week number in date picker #1556
+- Allow to download/export a single task #103
+- Add link to calendar for tasks with due date #803
+
+### Changed
+- Treat cancelled tasks as completed #1553
+- Allow to remove status property #1510
+- Move task delete action into dropdown menu #1328
+- Adjust the app-navigation-toggle alignment #1668
+- Rename categories to tags #1526
+- Require Nextcloud server v20 or newer #1655
+- Use NPM7 and simplify build configuration #1638
+- Use Codecov action instead of bash uploader #1594
+- Updated translations
+- Updated dependencies
+
+### Fixed
+- Correctly show sunday column in Datepicker #935
+- Fix moving tasks between calendars #1581
+
+## 0.13.6 - 2020-11-11
 
 ### Added
 - Updated translations
