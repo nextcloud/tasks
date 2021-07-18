@@ -1366,7 +1366,9 @@ const actions = {
 				await context.dispatch('moveTask', { task: subTask, calendar, parent: task })
 			}))
 
-			await task.dav.move(calendar.dav)
+			await task.dav.move(calendar.dav, true, {
+				'X-NC-CalDAV-No-Trashbin': 1,
+			})
 				.then((response) => {
 					context.commit('deleteTaskFromCalendar', task)
 					context.commit('deleteTask', task)

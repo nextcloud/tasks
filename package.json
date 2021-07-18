@@ -39,7 +39,7 @@
 		"@nextcloud/vue-dashboard": "^2.0.1",
 		"@vue/test-utils": "^1.2.1",
 		"calendar-js": "github:nextcloud/calendar-js",
-		"cdav-library": "github:nextcloud/cdav-library",
+		"cdav-library": "github:nextcloud/cdav-library#82c0d19b1e92a57109380a8243b37a8f917c3997",
 		"color-convert": "^2.0.1",
 		"debounce": "^1.2.1",
 		"ical.js": "github:raimund-schluessler/ical.js#306bd3f02287f75911c49078bd483f966a025438",
