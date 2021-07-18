@@ -893,4 +893,14 @@ $blue: #4271a6;
 	// This should go into @nextcloud/vue
 	height: 100%;
 }
+
+.app-sidebar::v-deep .app-sidebar-header__title-container {
+    top: -6px;
+    position: relative;
+}
+
+.app-sidebar::v-deep .app-sidebar-header__tertiary-actions {
+    top: -12px;
+    position: relative;
+}
 </style>
