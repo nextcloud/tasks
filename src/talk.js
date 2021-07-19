@@ -3,10 +3,8 @@
  *
  * @author Julius Härtl
  * @copyright 2021 Julius Härtl <jus@bitgrid.net>
- *
  * @author Jakob Röhrl
  * @copyright 2021 Jakob Röhrl <jakob.roehrl@web.de>
- *
  * @author Raimund Schlüßler
  * @copyright 2021 Raimund Schlüßler <raimund.schluessler@mailbox.org>
  *
@@ -22,7 +20,6 @@
  *
  * You should have received a copy of the GNU Affero General Public
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 import TaskCreateDialog from './components/TaskCreateDialog'

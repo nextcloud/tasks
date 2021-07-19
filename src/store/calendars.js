@@ -3,13 +3,10 @@
  *
  * @author Raimund Schlüßler
  * @copyright 2018 Raimund Schlüßler <raimund.schluessler@mailbox.org>
- *
  * @author John Molakvoæ
  * @copyright 2018 John Molakvoæ <skjnldsv@protonmail.com>
- *
  * @author Georg Ehrke
  * @copyright 2018 Georg Ehrke <oc.list@georgehrke.com>
- *
  * @author Thomas Citharel <tcit@tcit.fr>
  * @copyright 2018 Thomas Citharel <tcit@tcit.fr>
  *
@@ -25,7 +22,6 @@
  *
  * You should have received a copy of the GNU Affero General Public
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
 'use strict'
 
