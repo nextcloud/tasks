@@ -113,6 +113,12 @@
     "[Completed] L [at] LT" : "[Bukatuta] L [ordu honetan] LT",
     "Add a subtask to \"{task}\"…" : "Gehitu azpizeregin bat \"{task}\" zereginari…",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["Zeregina ezabatuko da {countdown} segundo barru","Zeregina ezabatuko da {countdown} segundo barru"],
+    "Create a new task" : "Sortu zeregin berria",
+    "Create task" : "Sortu zeregina",
+    "Creating the new task…" : "Zeregin berria sortzen…",
+    "\"{task}\" was added to \"{calendar}\"" : "\"{task}\" \"{calendar}\" atalean gehitu da",
+    "Open task" : "Ireki zeregina",
+    "Close" : "Itxi",
     "_%n Completed Task_::_%n Completed Tasks_" : ["Ataza %n osatuta","%n zeregina osatuta"],
     "Tomorrow" : "Bihar",
     "Add List…" : "Gehitu zerrenda...",
@@ -191,6 +197,8 @@
     "Could not update the task." : "Ezin izan da zeregina eguneratu.",
     "Successfully updated the task." : "Zeregina ondo eguneratu da.",
     "Task successfully moved to new calendar." : "Zeregina ondo eraman da egutegi berrira.",
-    "An error occurred" : "Errore bat gertatu da"
+    "An error occurred" : "Errore bat gertatu da",
+    "Create a task" : "Sortu zeregin bat",
+    "Message from {author} in {conversationName}" : "{Author} erabiltzailearen mezua {conversationName} atalean"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
