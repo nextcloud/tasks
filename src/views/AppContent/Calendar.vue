@@ -84,7 +84,7 @@ export default {
 		/**
 		 * Returns the string for closed tasks
 		 *
-	 	 * @returns {String} The string to show for the completed tasks count
+		 * @returns {String} The string to show for the completed tasks count
 		 */
 		closedCountString() {
 			return this.$n('tasks', '%n Completed Task', '%n Completed Tasks', this.closedCount(this.calendarId))
