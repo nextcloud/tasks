@@ -650,6 +650,7 @@ const actions = {
 
 	/**
 	 * Delete calendar
+	 *
 	 * @param {Object} context The store mutations Current context
 	 * @param {Calendar} calendar The calendar to delete
 	 * @returns {Promise}
@@ -718,6 +719,7 @@ const actions = {
 
 	/**
 	 * Toggles whether a calendar is enabled
+	 *
 	 * @param {Object} context The store mutations current context
 	 * @param {Calendar} calendar The calendar to toggle
 	 * @returns {Promise}

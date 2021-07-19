@@ -83,6 +83,7 @@ export default {
 		translate,
 		/**
 		 * TODO: this should emit the calendar id instead
+		 *
 		 * @param {Object} newCalendar The selected calendar
 		 */
 		change(newCalendar) {
