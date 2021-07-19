@@ -43,7 +43,7 @@ const getters = {
 	 * Returns the sort order how to sort tasks
 	 *
 	 * @param {object} state The store data
-	 * @returns {string} The sort order
+	 * @return {string} The sort order
 	 */
 	sortOrder: (state) => state.settings.sortOrder,
 
@@ -51,7 +51,7 @@ const getters = {
 	 * Returns the sort direction how to sort tasks
 	 *
 	 * @param {object} state The store data
-	 * @returns {string} The sort direction
+	 * @return {string} The sort direction
 	 */
 	sortDirection: (state) => state.settings.sortDirection,
 
@@ -59,7 +59,7 @@ const getters = {
 	 * Returns if all-day is default
 	 *
 	 * @param {object} state The store data
-	 * @returns {string} Whether all-day is default
+	 * @return {string} Whether all-day is default
 	 */
 	allDay: (state) => state.settings.allDay,
 
@@ -67,7 +67,7 @@ const getters = {
 	 * Returns the initial route
 	 *
 	 * @param {object} state The store data
-	 * @returns {string} Whether all-day is default
+	 * @return {string} Whether all-day is default
 	 */
 	initialRoute: (state) => state.settings.initialRoute,
 
@@ -75,7 +75,7 @@ const getters = {
 	 * Returns whether we can show tasks in the Calendar app
 	 *
 	 * @param {object} state The store data
-	 * @returns {boolean} Whether we can show tasks in Calendar app
+	 * @return {boolean} Whether we can show tasks in Calendar app
 	 */
 	showTaskInCalendar: (state) => state.settings.calendarEnabled && state.settings.showTasks,
 
@@ -83,7 +83,7 @@ const getters = {
 	 * Returns the current view of the Calendar app
 	 *
 	 * @param {object} state The store data
-	 * @returns {string} The current view of the Calendar app
+	 * @return {string} The current view of the Calendar app
 	 */
 	calendarView: (state) => state.settings.calendarView,
 }
@@ -116,7 +116,7 @@ const actions = {
 	 *
 	 * @param {object} context The store context
 	 * @param {object} payload The setting to save
-	 * @returns {Promise}
+	 * @return {Promise}
 	 */
 	setSetting(context, payload) {
 		context.commit('setSetting', payload)

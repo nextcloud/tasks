@@ -47,7 +47,7 @@ const getters = {
 	 * @param {object} getters The store getters
 	 * @param {object} rootState The store root state
 	 * @param {string} collectionId The id of the collection in question
-	 * @returns {Integer} Count of tasks in the collection
+	 * @return {Integer} Count of tasks in the collection
 	 */
 	getCollectionCount: (state, getters, rootState) => (collectionId) => {
 		let count = 0
@@ -98,7 +98,7 @@ const actions = {
 	 * Requests all collections from the server
 	 *
 	 * @param {object} commit The store mutations
-	 * @returns {Promise}
+	 * @return {Promise}
 	 */
 	loadCollections({ commit }) {
 		return new Promise(function(resolve) {
@@ -117,7 +117,7 @@ const actions = {
 	 *
 	 * @param {object} context The store mutations
 	 * @param {Collection} collection The collection to change
-	 * @returns {Promise}
+	 * @return {Promise}
 	 */
 	setVisibility(context, collection) {
 		context.commit('setVisibility', collection)

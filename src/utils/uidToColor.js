@@ -97,7 +97,7 @@ function mixPalette(steps, color1, color2) {
  * 3 colors * 6 will result in 18 generated colors
  *
  * @param {number} [steps=6] Number of steps to go from a color to another
- * @returns {object[]}
+ * @return {object[]}
  */
 function GenColors(steps) {
 	if (!steps) {

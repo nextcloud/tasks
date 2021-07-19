@@ -28,7 +28,7 @@ import { namespaces as NS } from 'cdav-library'
  * @param {object} calendar The calendar
  * @param {Bool} completed Completed state of the VTODOs
  * @param {string} related uid of the parent VTODO
- * @returns {Promise<VTODO[]>}
+ * @return {Promise<VTODO[]>}
  */
 function findVTODObyState(calendar, completed, related) {
 	const query = {

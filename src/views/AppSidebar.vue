@@ -411,7 +411,7 @@ export default {
 		/**
 		 * Returns the download url as a string or null if event is loading or does not exist on the server (yet)
 		 *
-		 * @returns {string|null}
+		 * @return {string|null}
 		 */
 		downloadURL() {
 			if (!this.task) {
@@ -422,7 +422,7 @@ export default {
 		/**
 		 * Initializes the start date of a task
 		 *
-		 * @returns {Date} The start date moment
+		 * @return {Date} The start date moment
 		 */
 		newStartDate() {
 			const start = this.task.startMoment
@@ -441,7 +441,7 @@ export default {
 		/**
 		 * Initializes the due date of a task
 		 *
-		 * @returns {Date} The due date moment
+		 * @return {Date} The due date moment
 		 */
 		newDueDate() {
 			const due = this.task.dueMoment
@@ -468,7 +468,7 @@ export default {
 		 * We also treat tasks in shared calendars with an access class other than 'PUBLIC'
 		 * as read-only.
 		 *
-		 * @returns {boolean} Is the task read-only
+		 * @return {boolean} Is the task read-only
 		 */
 		readOnly() {
 			return this.task.calendar.readOnly || (this.task.calendar.isSharedWithMe && this.task.class !== 'PUBLIC')
@@ -477,7 +477,7 @@ export default {
 		 * Whether the dates of a task are all-day
 		 * When no dates are set, we consider the last used value.
 		 *
-		 * @returns {boolean} Are the dates all-day
+		 * @return {boolean} Are the dates all-day
 		 */
 		allDay() {
 			if (this.task.startMoment.isValid() || this.task.dueMoment.isValid()) {

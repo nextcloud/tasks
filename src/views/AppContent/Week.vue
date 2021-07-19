@@ -63,7 +63,7 @@ export default {
 		/**
 		 * Returns an array with an entry for every day which has tasks for this day.
 		 *
-		 * @returns {Array} the array with the days
+		 * @return {Array} the array with the days
 		 */
 		days() {
 			// Get all open root tasks

@@ -159,7 +159,7 @@ export default {
 		 * @param {string} query The search query
 		 * @param {string[]} hiddenPrincipals A list of principals to exclude from search results
 		 * @param {string[]} hiddenUrls A list of urls to exclude from search results
-		 * @returns {Promise<object[]>}
+		 * @return {Promise<object[]>}
 		 */
 		async findShareesFromDav(query, hiddenPrincipals, hiddenUrls) {
 			let results
@@ -201,7 +201,7 @@ export default {
 		 * @param {string} query The search query
 		 * @param {string[]} hiddenPrincipals A list of principals to exclude from search results
 		 * @param {string[]} hiddenUrls A list of urls to exclude from search results
-		 * @returns {Promise<object[]>}
+		 * @return {Promise<object[]>}
 		 */
 		async findShareesFromCircles(query, hiddenPrincipals, hiddenUrls) {
 			let results

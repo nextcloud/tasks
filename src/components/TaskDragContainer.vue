@@ -50,7 +50,7 @@ export default {
 		 *
 		 * We load it "eager", because the TaskBody will always be required.
 		 *
-		 * @returns {object} The TaskBody component
+		 * @return {object} The TaskBody component
 		 */
 		TaskBody: () => import(/* webpackMode: "eager" */ './TaskBody'),
 		draggable,
@@ -217,7 +217,7 @@ export default {
 		 * is forbidden.
 		 *
 		 * @param {object} $event The event which caused the move
-		 * @returns {boolean} If the drop is allowed
+		 * @return {boolean} If the drop is allowed
 		 */
 		onMove($event) {
 			// The task to move

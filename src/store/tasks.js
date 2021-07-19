@@ -52,7 +52,7 @@ const getters = {
 	 * @param {object} getters The store getters
 	 * @param {object} rootState The store root state
 	 * @param {string} calendarId The Id of the calendar in question
-	 * @returns {Array} The tasks
+	 * @return {Array} The tasks
 	 */
 	getTasksByCalendarId: (state, getters, rootState) => (calendarId) => {
 		const calendar = getters.getCalendarById(calendarId)
@@ -67,7 +67,7 @@ const getters = {
 	 * @param {object} state The store data
 	 * @param {object} getters The store getters
 	 * @param {object} rootState The store root state
-	 * @returns {Array} The tasks
+	 * @return {Array} The tasks
 	 */
 	getTasksByRoute: (state, getters, rootState) => {
 		return getters.getTasksByCalendarId(rootState.route.params.calendarId)
@@ -80,7 +80,7 @@ const getters = {
 	 * @param {object} getters The store getters
 	 * @param {object} rootState The store root state
 	 * @param {object} parent The parent task
-	 * @returns {Array} The sub-tasks of the current task
+	 * @return {Array} The sub-tasks of the current task
 	 */
 	getTasksByParent: (state, getters, rootState) => (parent) => {
 		return getters.getTasksByCalendarId(parent.calendar.id)
@@ -95,7 +95,7 @@ const getters = {
 	 * @param {object} state The store data
 	 * @param {object} getters The store getters
 	 * @param {object} rootState The store root state
-	 * @returns {Array} All tasks in store
+	 * @return {Array} All tasks in store
 	 */
 	getAllTasks: (state, getters, rootState) => {
 		let tasks = []
@@ -111,7 +111,7 @@ const getters = {
 	 * @param {object} state The store data
 	 * @param {object} getters The store getters
 	 * @param {object} rootState The store root state
-	 * @returns {Task} The task
+	 * @return {Task} The task
 	 */
 	getTaskByRoute: (state, getters, rootState) => {
 		// If a calendar is given, only search in that calendar.
@@ -135,7 +135,7 @@ const getters = {
 	 * @param {object} getters The store getters
 	 * @param {object} rootState The store root state
 	 * @param {string} taskUri The Uri of the task in question
-	 * @returns {Task} The task
+	 * @return {Task} The task
 	 */
 	getTaskByUri: (state, getters, rootState) => (taskUri) => {
 		// We have to search in all calendars
@@ -156,7 +156,7 @@ const getters = {
 	 * @param {object} getters The store getters
 	 * @param {object} rootState The store root state
 	 * @param {string} taskUid The Uid of the task in question
-	 * @returns {Task} The task
+	 * @return {Task} The task
 	 */
 	getTaskByUid: (state, getters, rootState) => (taskUid) => {
 		// We have to search in all calendars
@@ -174,7 +174,7 @@ const getters = {
 	 * Returns the root tasks from a given object
 	 *
 	 * @param {object} tasks The tasks to search in
-	 * @returns {Array}
+	 * @return {Array}
 	 */
 	findRootTasks: () => (tasks) => {
 		return Object.values(tasks).filter(task => {
@@ -191,7 +191,7 @@ const getters = {
 	 * Returns the closed root tasks from a given object
 	 *
 	 * @param {object} tasks The tasks to search in
-	 * @returns {Array}
+	 * @return {Array}
 	 */
 	findClosedRootTasks: () => (tasks) => {
 		return Object.values(tasks).filter(task => {
@@ -208,7 +208,7 @@ const getters = {
 	 * Returns the not closed root tasks from a given object
 	 *
 	 * @param {object} tasks The tasks to search in
-	 * @returns {Array}
+	 * @return {Array}
 	 */
 	findOpenRootTasks: () => (tasks) => {
 		return Object.values(tasks).filter(task => {
@@ -225,7 +225,7 @@ const getters = {
 	 * Returns the parent task of a given task
 	 *
 	 * @param {Task} task The task of which to find the parent
-	 * @returns {Task} The parent task
+	 * @return {Task} The parent task
 	 */
 	getParentTask: () => (task) => {
 		const tasks = task.calendar.tasks
@@ -238,7 +238,7 @@ const getters = {
 	 * @param {object} state The store data
 	 * @param {object} getters The store getters
 	 * @param {object} rootState The store root state
-	 * @returns {string} The current search query
+	 * @return {string} The current search query
 	 */
 	searchQuery: (state, getters, rootState) => {
 		return state.searchQuery
@@ -249,7 +249,7 @@ const getters = {
 	 *
 	 * @param {object} state The store data
 	 * @param {object} getters The store getters
-	 * @returns {Array} All tags
+	 * @return {Array} All tags
 	 */
 	tags: (state, getters) => {
 		const tasks = getters.getAllTasks
@@ -655,7 +655,7 @@ const actions = {
 	 *
 	 * @param {object} context The store mutations
 	 * @param {object} taskData The data of the new task
-	 * @returns {Promise}
+	 * @return {Promise}
 	 */
 	async createTask(context, taskData) {
 		if (!taskData.calendar) {
@@ -794,7 +794,7 @@ const actions = {
 	 *
 	 * @param {object} context The store context
 	 * @param {Task} task The task to delete
-	 * @returns {Promise}
+	 * @return {Promise}
 	 */
 	async scheduleTaskDeletion(context, task) {
 		// Don't try to delete tasks in read-only calendars
@@ -826,7 +826,7 @@ const actions = {
 	 *
 	 * @param {object} context The store context
 	 * @param {Task} task The task to not delete
-	 * @returns {Promise}
+	 * @return {Promise}
 	 */
 	async clearTaskDeletion(context, task) {
 		context.commit('clearTaskFromDeletion', { task })
@@ -843,7 +843,7 @@ const actions = {
 	 *
 	 * @param {object} context The store context
 	 * @param {Task} task The task to update
-	 * @returns {Promise}
+	 * @return {Promise}
 	 */
 	async scheduleTaskUpdate(context, task) {
 		// If there already is an update request scheduled that has not started yet,
@@ -858,7 +858,7 @@ const actions = {
 	 *
 	 * @param {object} context The store context
 	 * @param {Task} task The task to update
-	 * @returns {Promise}
+	 * @return {Promise}
 	 */
 	async updateTask(context, task) {
 		// Don't try to update tasks in read-only calendars
@@ -903,7 +903,7 @@ const actions = {
 	 * @param {object} data Destructuring object
 	 * @param {Calendar} data.calendar The calendar
 	 * @param {string} data.taskUri The uri of the requested task
-	 * @returns {Task}
+	 * @return {Task}
 	 */
 	async getTaskByUri(context, { calendar, taskUri }) {
 		const response = await calendar.dav.find(taskUri)
@@ -943,7 +943,7 @@ const actions = {
 	 * @param {object} data Destructuring object
 	 * @param {Calendar} data.calendar The calendar
 	 * @param {string} data.taskUid The uid of the requested task
-	 * @returns {Task}
+	 * @return {Task}
 	 */
 	async getTaskByUid(context, { calendar, taskUid }) {
 		const response = await findVTODObyUid(calendar, taskUid)
@@ -1294,7 +1294,7 @@ const actions = {
 	 * @param {object} data Destructuring object
 	 * @param {Task} data.task The task to fetch
 	 * @param {string} data.etag The task etag to override in case of conflict
-	 * @returns {Promise}
+	 * @return {Promise}
 	 */
 	async fetchFullTask(context, { task }) {
 		if (task.conflict !== '') {
@@ -1348,7 +1348,7 @@ const actions = {
 	 * @param {Task} data.task The task to move
 	 * @param {Calendar} data.calendar The calendar to move the task to
 	 * @param {Task} data.parent The new parent task
-	 * @returns {Task} The moved task
+	 * @return {Task} The moved task
 	 */
 	async moveTask(context, { task, calendar, parent = null }) {
 		// Don't try to move tasks from read-only calendars

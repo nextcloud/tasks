@@ -28,7 +28,7 @@ import convert from 'color-convert'
  * Generates a hex color based on RGB string
  *
  * @param {string} uid The string to generate a color from
- * @returns {string} The hex color
+ * @return {string} The hex color
  */
 export function uidToHexColor(uid) {
 	const color = uidToColor(uid)
@@ -39,7 +39,7 @@ export function uidToHexColor(uid) {
  * Detects a color from a given string
  *
  * @param {string} color The color to get the real RGB hex string from
- * @returns {string|boolean|*} String if color detected, boolean if not
+ * @return {string|boolean|*} String if color detected, boolean if not
  */
 export function detectColor(color) {
 	if (/^(#)((?:[A-Fa-f0-9]{3}){1,2})$/.test(color)) { // #ff00ff and #f0f

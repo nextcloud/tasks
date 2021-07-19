@@ -285,7 +285,7 @@ export default {
 		/**
 		 * Whether or not the information about the owner principal was loaded
 		 *
-		 * @returns {boolean}
+		 * @return {boolean}
 		 */
 		loadedOwnerPrincipal() {
 			return this.getPrincipalByUrl(this.calendar.owner) !== undefined
@@ -315,7 +315,7 @@ export default {
 		 * Handle the drag over
 		 *
 		 * @param {object} e The event object
-		 * @returns {boolean}
+		 * @return {boolean}
 		 */
 		dragOver(e) {
 			if (e.preventDefault) {

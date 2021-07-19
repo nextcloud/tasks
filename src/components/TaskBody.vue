@@ -349,7 +349,7 @@ export default {
 		 * Returns the placeholder string shown in the subtasks input field
 		 *
 		 * @param {string} task the name of the parent task
-		 * @returns {string} the placeholder string to show
+		 * @return {string} the placeholder string to show
 		 */
 		subtasksCreationPlaceholder() {
 			return this.$t('tasks', 'Add a subtask to "{task}"…', { task: this.task.summary }, undefined, { sanitize: false, escape: false })
@@ -360,7 +360,7 @@ export default {
 		 * filtered by collections (for week, today, important and current) when
 		 * the task is not opened in details view.
 		 *
-		 * @returns {Array} the array with the filtered subtasks
+		 * @return {Array} the array with the filtered subtasks
 		 */
 		filteredSubtasks() {
 			let subTasks = Object.values(this.task.subTasks)
@@ -381,7 +381,7 @@ export default {
 		/**
 		 * Returns the filtered subtasks or an empty array if the subtasks should be hidden.
 		 *
-		 * @returns {Array} the array with the subtasks to show
+		 * @return {Array} the array with the subtasks to show
 		 */
 		filteredSubtasksShown() {
 			 if (this.showSubtasks) {
@@ -393,7 +393,7 @@ export default {
 		/**
 		 * Indicates whether we show the task because it matches the search.
 		 *
-		 * @returns {boolean} If the task matches
+		 * @return {boolean} If the task matches
 		 */
 		showTask() {
 			// If the task directly matches the search, we show it.
@@ -407,7 +407,7 @@ export default {
 		/**
 		 * Checks whether we show the subtasks
 		 *
-		 * @returns {boolean} If we show the subtasks
+		 * @return {boolean} If we show the subtasks
 		 */
 		showSubtasks() {
 			if (!this.task.hideSubtasks || this.searchQuery || this.isTaskOpen() || this.isDescendantOpen()) {
@@ -422,7 +422,7 @@ export default {
 		 * We also treat tasks in shared calendars with an access class other than 'PUBLIC'
 		 * as read-only.
 		 *
-		 * @returns {boolean} Is the task read-only
+		 * @return {boolean} Is the task read-only
 		 */
 		readOnly() {
 			return this.task.calendar.readOnly || (this.task.calendar.isSharedWithMe && this.task.class !== 'PUBLIC')
@@ -481,7 +481,7 @@ export default {
 		 *
 		 * @param {Task} task The task to search in
 		 * @param {string} searchQuery The string to find
-		 * @returns {boolean} If the task matches
+		 * @return {boolean} If the task matches
 		 */
 		searchSubTasks,
 
@@ -489,7 +489,7 @@ export default {
 		 * Checks whether the task is currently open in the details view
 		 *
 		 * @param {Task} task The task to check
-		 * @returns {boolean} If it is open
+		 * @return {boolean} If it is open
 		 */
 		isTaskOpen(task = this.task) {
 			return (task.uri === this.$route.params.taskId) && (this.collectionParam === this.$route.params.collectionParam)
@@ -499,7 +499,7 @@ export default {
 		 * Checks whether one of the tasks descendants is currently open in the details view
 		 *
 		 * @param {Task} task The task to check
-		 * @returns {boolean} If a descendeant is open
+		 * @return {boolean} If a descendeant is open
 		 */
 		isDescendantOpen(task = this.task) {
 			if (this.collectionParam !== this.$route.params.collectionParam) {

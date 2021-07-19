@@ -73,7 +73,7 @@ const getters = {
 	 * Gets a principal object by its url
 	 *
 	 * @param {object} state the store data
-	 * @returns {function({String}): {Object}}
+	 * @return {function({String}): {Object}}
 	 */
 	getPrincipalByUrl: (state) => (url) => state.principals.find((principal) => principal.url === url),
 
@@ -81,7 +81,7 @@ const getters = {
 	 * Gets a principal object by its id
 	 *
 	 * @param {object} state the store data
-	 * @returns {function({String}): {Object}}
+	 * @return {function({String}): {Object}}
 	 */
 	getPrincipalById: (state) => (id) => state.principalsById[id],
 
@@ -89,7 +89,7 @@ const getters = {
 	 * Gets the principal object of the current-user-principal
 	 *
 	 * @param {object} state the store data
-	 * @returns {{Object}}
+	 * @return {{Object}}
 	 */
 	getCurrentUserPrincipal: (state) => state.principalsById[state.currentUserPrincipal],
 
@@ -97,7 +97,7 @@ const getters = {
 	 * Gets the email-address of the current-user-principal
 	 *
 	 * @param {object} state the store data
-	 * @returns {string}
+	 * @return {string}
 	 */
 	getCurrentUserPrincipalEmail: (state) => state.principalsById[state.currentUserPrincipal].emailAddress,
 }
@@ -109,7 +109,7 @@ const actions = {
 	 *
 	 * @param {object} context The vuex context
 	 * @param {string} url The URL of the principal
-	 * @returns {Promise<void>}
+	 * @return {Promise<void>}
 	 */
 	async fetchPrincipalByUrl(context, { url }) {
 		// Don't refetch principals we already have
@@ -132,7 +132,7 @@ const actions = {
 	 * Fetches the current-user-principal
 	 *
 	 * @param {object} context The vuex context
-	 * @returns {Promise<void>}
+	 * @return {Promise<void>}
 	 */
 	async fetchCurrentUserPrincipal(context) {
 		const currentUserPrincipal = client.currentUserPrincipal

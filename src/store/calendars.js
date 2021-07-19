@@ -76,7 +76,7 @@ const state = {
  *
  * @param {object} calendar The calendar object from the cdav library
  * @param {object} currentUserPrincipal The principal model of the current user principal
- * @returns {object}
+ * @return {object}
  */
 export function mapDavCollectionToCalendar(calendar, currentUserPrincipal) {
 	const owner = calendar.owner
@@ -135,7 +135,7 @@ export function mapDavCollectionToCalendar(calendar, currentUserPrincipal) {
  * Maps a dav collection to the sharee array
  *
  * @param {object} sharee The sharee object from the cdav library shares
- * @returns {object}
+ * @return {object}
  */
 export function mapDavShareeToSharee(sharee) {
 	const id = sharee.href.split('/').slice(-1)[0]
@@ -161,7 +161,7 @@ export function mapDavShareeToSharee(sharee) {
  * Gets the calendar uri from the url
  *
  * @param {string} url The url to get calendar uri from
- * @returns {string}
+ * @return {string}
  */
 function getCalendarUriFromUrl(url) {
 	if (url.endsWith('/')) {
@@ -177,7 +177,7 @@ const getters = {
 	 * Returns the calendars sorted alphabetically
 	 *
 	 * @param {object} state The store data
-	 * @returns {Array<Calendar>} Array of the calendars sorted alphabetically
+	 * @return {Array<Calendar>} Array of the calendars sorted alphabetically
 	 */
 	getSortedCalendars: state => {
 		return state.calendars.sort(function(cal1, cal2) {
@@ -191,7 +191,7 @@ const getters = {
 	 * Returns the calendars sorted alphabetically
 	 *
 	 * @param {object} state The store data
-	 * @returns {Array<Calendar>} Array of the calendars sorted alphabetically
+	 * @return {Array<Calendar>} Array of the calendars sorted alphabetically
 	 */
 	getSortedWritableCalendars: state => {
 		return state.calendars.filter(calendar => {
@@ -209,7 +209,7 @@ const getters = {
 	 *
 	 * @param {object} state The store data
 	 * @param {string} calendarId The id of the requested calendar
-	 * @returns {Calendar} The requested calendar
+	 * @return {Calendar} The requested calendar
 	 */
 	getCalendarById: state => (calendarId) => {
 		const calendar = state.calendars.find(search => search.id === calendarId)
@@ -227,7 +227,7 @@ const getters = {
 	 * @param {object} getters The store getters
 	 * @param {object} rootState The store root state
 	 * @param {string} calendarId The id of the requested calendar
-	 * @returns {Integer} The number of tasks
+	 * @return {Integer} The number of tasks
 	 */
 	getCalendarCount: (state, getters, rootState) => (calendarId) => {
 		const calendar = getters.getCalendarById(calendarId)
@@ -257,7 +257,7 @@ const getters = {
 	 * @param {object} state The store data
 	 * @param {object} getters The store getters
 	 * @param {string} calendarId The id of the calendar in question
-	 * @returns {Integer} The count of closed tasks in a calendar
+	 * @return {Integer} The count of closed tasks in a calendar
 	 */
 	getCalendarCountClosed: (state, getters) => (calendarId) => {
 		const calendar = getters.getCalendarById(calendarId)
@@ -273,7 +273,7 @@ const getters = {
 	 * @param {object} state The store data
 	 * @param {string} name The name to check
 	 * @param {string} id The id of the calendar to exclude
-	 * @returns {boolean} If a calendar name is already used
+	 * @return {boolean} If a calendar name is already used
 	 */
 	isCalendarNameUsed: state => (name, id) => {
 		return state.calendars.some(calendar => {
@@ -287,7 +287,7 @@ const getters = {
 	 * @param {object} state The store data
 	 * @param {object} getters The store getters
 	 * @param {object} rootState The store root state
-	 * @returns {Calendar} The calendar by route
+	 * @return {Calendar} The calendar by route
 	 */
 	getCalendarByRoute: (state, getters, rootState) => {
 		if (rootState.route.params.collectionId) {
@@ -302,7 +302,7 @@ const getters = {
 	 * @param {object} state The store data
 	 * @param {object} getters The store getters
 	 * @param {object} rootState The store root state
-	 * @returns {Calendar} The default calendar
+	 * @return {Calendar} The default calendar
 	 */
 	getDefaultCalendar: (state, getters, rootState) => {
 		const defaultCalendar = getters.getCalendarById(rootState.settings.settings.defaultCalendarId)
@@ -325,7 +325,7 @@ const getters = {
 	 * List of deleted sorted calendars
 	 *
 	 * @param {object} state the store data
-	 * @returns {Array}
+	 * @return {Array}
 	 */
 	sortedDeletedCalendars(state) {
 		return state.deletedCalendars
@@ -336,7 +336,7 @@ const getters = {
 	 * List of deleted calendars objects
 	 *
 	 * @param {object} state the store data
-	 * @returns {Array}
+	 * @return {Array}
 	 */
 	deletedCalendarObjects(state) {
 		const calendarUriMap = {}
@@ -576,7 +576,7 @@ const actions = {
 	 * Retrieves and commits calendars
 	 *
 	 * @param {object} context The store mutations
-	 * @returns {Promise<Array>} The calendars
+	 * @return {Promise<Array>} The calendars
 	 */
 	async getCalendarsAndTrashBin({ commit, state, getters }) {
 		let { calendars, trashBins } = await client.calendarHomes[0].findAllCalDAVCollectionsGrouped()
@@ -605,7 +605,7 @@ const actions = {
 	 * Retrieve and commit deleted calendars
 	 *
 	 * @param {object} context the store mutations
-	 * @returns {Promise<Array>} the calendars
+	 * @return {Promise<Array>} the calendars
 	 */
 	async loadDeletedCalendars({ commit }) {
 		const calendars = await client.calendarHomes[0].findAllDeletedCalendars()
@@ -635,7 +635,7 @@ const actions = {
 	 *
 	 * @param {object} context The store mutations
 	 * @param {Calendar} calendar The calendar to append
-	 * @returns {Promise}
+	 * @return {Promise}
 	 */
 	async appendCalendar(context, calendar) {
 		return client.calendarHomes[0].createCalendarCollection(calendar.displayName, calendar.color, ['VTODO'])
@@ -653,7 +653,7 @@ const actions = {
 	 *
 	 * @param {object} context The store mutations Current context
 	 * @param {Calendar} calendar The calendar to delete
-	 * @returns {Promise}
+	 * @return {Promise}
 	 */
 	async deleteCalendar(context, calendar) {
 		return calendar.dav.delete()
@@ -673,7 +673,7 @@ const actions = {
 	 * @param {object} context the store mutations Current context
 	 * @param {object} data destructuring object
 	 * @param {object} data.calendar the calendar to delete
-	 * @returns {Promise}
+	 * @return {Promise}
 	 */
 	async deleteCalendarPermanently(context, { calendar }) {
 		await calendar.delete({
@@ -707,7 +707,7 @@ const actions = {
 	 * @param {object} context the store mutations
 	 * @param {object} data destructuring object
 	 * @param {vobject} data.vobject Calendar-object to delete
-	 * @returns {Promise<void>}
+	 * @return {Promise<void>}
 	 */
 	async deleteCalendarObjectPermanently(context, { vobject }) {
 		await vobject.dav.delete({
@@ -722,7 +722,7 @@ const actions = {
 	 *
 	 * @param {object} context The store mutations current context
 	 * @param {Calendar} calendar The calendar to toggle
-	 * @returns {Promise}
+	 * @return {Promise}
 	 */
 	async toggleCalendarEnabled(context, calendar) {
 		calendar.dav.enabled = !calendar.dav.enabled
@@ -738,7 +738,7 @@ const actions = {
 	 * @param {Calendar} data.calendar The calendar to change
 	 * @param {string} data.newName The new name of the calendar
 	 * @param {string} data.newColor The new color of the calendar
-	 * @returns {Promise}
+	 * @return {Promise}
 	 */
 	async changeCalendar(context, { calendar, newName, newColor }) {
 		calendar.dav.displayname = newName
@@ -757,7 +757,7 @@ const actions = {
 	 * @param {Calendar} data.calendar The calendar
 	 * @param {string} data.completed Are the requested tasks completed
 	 * @param {string} data.related The uid of the parent task
-	 * @returns {Promise}
+	 * @return {Promise}
 	 */
 	async getTasksFromCalendar(context, { calendar, completed = false, related = null }) {
 		try {

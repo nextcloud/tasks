@@ -26,7 +26,7 @@ const fs = require('fs')
  * global helper function to load an ics asset by name
  *
  * @param {string} assetName The asset to load
- * @returns {string}
+ * @return {string}
  */
 const loadICS = (assetName) => {
 	return fs.readFileSync('tests/assets/ics/' + assetName + '.ics', 'UTF8')

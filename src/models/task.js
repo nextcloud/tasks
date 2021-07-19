@@ -153,7 +153,7 @@ export default class Task {
 	 * e.g. ORG:ABC\, Inc.; will output an array because of the semi-colon
 	 *
 	 * @param {Array|string} data the data to normalize
-	 * @returns {string}
+	 * @return {string}
 	 * @memberof Task
 	 */
 	firstIfArray(data) {
@@ -648,7 +648,7 @@ export default class Task {
 	 * Construct the default value for the sort order
 	 * from the created date.
 	 *
-	 * @returns {Integer} The sort order
+	 * @return {Integer} The sort order
 	 */
 	getSortOrder() {
 		// If there is no created date we return 0.
@@ -672,7 +672,7 @@ export default class Task {
 	 * Checks if the task matches the search query
 	 *
 	 * @param {string} searchQuery The search string
-	 * @returns {boolean} If the task matches
+	 * @return {boolean} If the task matches
 	 */
 	matches(searchQuery) {
 		// If the search query maches the previous search, we don't have to search again.

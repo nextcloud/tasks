@@ -69,7 +69,7 @@ export default {
 		 * - is a root task
 		 * - is uncompleted
 		 *
-		 * @returns {Array} the calendars which should be shown in the collection
+		 * @return {Array} the calendars which should be shown in the collection
 		 */
 		filteredCalendars() {
 			const filteredCalendars = []

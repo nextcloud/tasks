@@ -259,7 +259,7 @@ export default {
 		 * Handle the drag start
 		 *
 		 * @param {object} e The event object
-		 * @returns {boolean}
+		 * @return {boolean}
 		 */
 		dragStart(e) {
 			e.stopPropagation()
@@ -270,7 +270,7 @@ export default {
 		 * Handle the drag over
 		 *
 		 * @param {object} e The event object
-		 * @returns {boolean}
+		 * @return {boolean}
 		 */
 		dragOver(e) {
 			if (e.preventDefault) {
