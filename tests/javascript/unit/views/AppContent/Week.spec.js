@@ -48,7 +48,7 @@ describe('Week.vue', () => {
 		expect(wrapper.find('div[day="6"] li[task-id="pwen4kz22g.ics"]').exists()).toBe(true) // Starts in 7 days --> shown
 	})
 
-	it('Checks that only the clicked task is marked active', async() => {
+	it('Checks that only the clicked task is marked active', async () => {
 		const wrapper = mount(Week, { localVue, store, router })
 		const taskAtDay0 = wrapper.find('div[day="0"] li[task-id="pwen8kz22g.ics"] > div')
 		const taskAtDay2 = wrapper.find('div[day="2"] li[task-id="pwen8kz22g.ics"] > div')
@@ -61,7 +61,7 @@ describe('Week.vue', () => {
 		expect(taskAtDay2.classes('task-item__body--active')).toBe(false) // Shouldn't be shown active, since it was not clicked
 	})
 
-	it('Checks that not matching subtasks are only shown for active tasks', async() => {
+	it('Checks that not matching subtasks are only shown for active tasks', async () => {
 		const wrapper = mount(Week, { localVue, store, router })
 		const taskAtDay0 = wrapper.find('div[day="0"] li[task-id="pwen8kz22g.ics"] > div')
 
@@ -85,7 +85,7 @@ describe('Week.vue', () => {
 		expect(wrapper.find('div[day="2"] li[task-id="pwen2kz37g.ics"]').exists()).toBe(false) // Not shown, since parent is not active
 	})
 
-	it('Checks that an active task and its ancestors are shown', async() => {
+	it('Checks that an active task and its ancestors are shown', async () => {
 		const wrapper = mount(Week, { localVue, store, router })
 		const taskAtDay0 = wrapper.find('div[day="0"] li[task-id="pwen8kz22g.ics"] > div')
 

@@ -771,7 +771,7 @@ const actions = {
 			}
 		}
 		// Delete all subtasks first
-		await Promise.all(Object.values(task.subTasks).map(async(subTask) => {
+		await Promise.all(Object.values(task.subTasks).map(async (subTask) => {
 			await context.dispatch('deleteTask', { task: subTask, dav: true })
 		}))
 		// Only local delete if the task does not exist on the server
@@ -810,7 +810,7 @@ const actions = {
 		context.commit('setTaskDeleteCountdown', { task, countdown: 7 })
 		// Start the delete timeout if it is not running
 		if (context.state.deleteInterval === null) {
-			context.state.deleteInterval = setInterval(async() => {
+			context.state.deleteInterval = setInterval(async () => {
 				Object.values(context.state.deletedTasks).forEach(task => {
 					context.commit('setTaskDeleteCountdown', { task, countdown: --task.deleteCountdown })
 					if (task.deleteCountdown <= 0) {
@@ -1017,7 +1017,7 @@ const actions = {
 			}
 		} else {
 			// complete all sub tasks
-			await Promise.all(Object.values(task.subTasks).map(async(subTask) => {
+			await Promise.all(Object.values(task.subTasks).map(async (subTask) => {
 				if (!subTask.closed) {
 					await context.dispatch('setPercentComplete', { task: subTask, complete: 100 })
 				}
@@ -1180,7 +1180,7 @@ const actions = {
 			}
 		} else {
 			// set all open subtasks to cancelled
-			await Promise.all(Object.values(task.subTasks).map(async(subTask) => {
+			await Promise.all(Object.values(task.subTasks).map(async (subTask) => {
 				if (!subTask.closed) {
 					await context.dispatch('setStatus', { task: subTask, status: 'CANCELLED' })
 				}
@@ -1362,7 +1362,7 @@ const actions = {
 		// Don't move if source and target calendar are the same.
 		if (task.dav && task.calendar !== calendar) {
 			// Move all subtasks first
-			await Promise.all(Object.values(task.subTasks).map(async(subTask) => {
+			await Promise.all(Object.values(task.subTasks).map(async (subTask) => {
 				await context.dispatch('moveTask', { task: subTask, calendar, parent: task })
 			}))
 
