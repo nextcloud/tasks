@@ -86,7 +86,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</div>
 				<SortVariant v-if="hasHiddenSubtasks" :size="24" :title="$t('tasks', 'Task has hidden subtasks')" />
 				<Pin v-if="task.pinned" :size="24" :title="$t('tasks', 'Task is pinned')" />
-				<TextBoxOutline v-if="task.note!=''" :size="24" :title="$t('tasks', 'Task has a note')" />
+				<TextBoxOutline
+					v-if="task.note!=''"
+					:size="24"
+					:title="$t('tasks', 'Task has a note')"
+					class="icon-note"
+					@click.stop="openAppSidebarTab($event, 'app-sidebar-tab-notes')" />
 				<div v-if="task.due || task.completed" :class="{'date--overdue': overdue(task.dueMoment) && !task.completed}" class="date">
 					<span class="date__short" :class="{ 'date__short--completed': task.completed }">{{ dueDateShort }}</span>
 					<span class="date__long" :class="{ 'date__long--date-only': task.allDay && !task.completed, 'date__long--completed': task.completed }">{{ dueDateLong }}</span>
@@ -164,6 +169,7 @@ import { linkify } from '../directives/linkify.js'
 import TaskStatusDisplay from './TaskStatusDisplay.vue'
 import TaskDragContainer from './TaskDragContainer.vue'
 
+import { emit } from '@nextcloud/event-bus'
 import moment from '@nextcloud/moment'
 import Actions from '@nextcloud/vue/dist/Components/Actions'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
@@ -519,27 +525,53 @@ export default {
 		 * Navigates to a different route, but checks if navigation is desired
 		 *
 		 * @param {Object} $event the event that triggered navigation
-		 * @param {String} route the route to navigate to
+		 * @param {String} active the tab active in the AppSidebar
 		 */
-		navigate($event) {
+		navigate($event, active) {
 			if (!$event.target.closest('.no-nav')
 				&& (this.$route.params.taskId !== this.task.uri || this.$route.params.collectionParam !== this.collectionParam)) {
 				if (!this.task.loadedCompleted) {
 					this.getTasksFromCalendar({ calendar: this.task.calendar, completed: true, related: this.task.uid })
 				}
 				if (this.$route.params.calendarId) {
-					this.$router.push({ name: 'calendarsTask', params: { calendarId: this.$route.params.calendarId, taskId: this.task.uri } })
+					this.$router.push({
+						name: 'calendarsTask',
+						params: {
+							calendarId: this.$route.params.calendarId,
+							taskId: this.task.uri,
+							active,
+						},
+					})
 				} else if (this.collectionId) {
 					if (this.collectionParam) {
 						this.$router.push({
 							name: 'collectionsParamTask',
-							params: { collectionId: this.collectionId, collectionParam: this.collectionParam, taskId: this.task.uri },
+							params: {
+								collectionId: this.collectionId,
+								collectionParam: this.collectionParam,
+								taskId: this.task.uri,
+								active,
+							},
 						})
 					} else {
-						this.$router.push({ name: 'collectionsTask', params: { collectionId: this.collectionId, taskId: this.task.uri } })
+						this.$router.push({
+							name: 'collectionsTask',
+							params: {
+								collectionId: this.collectionId,
+								taskId: this.task.uri,
+								active,
+							},
+						})
 					}
 				}
 			}
+		},
+
+		openAppSidebarTab($event, tab) {
+			// Open the AppSidebar
+			this.navigate($event, tab)
+			// In case it is already open, we also have to emit an event to show the tab
+			emit('tasks:open-appsidebar-tab', { tab })
 		},
 
 		openSubtaskInput() {
@@ -848,6 +880,10 @@ $breakpoint-mobile: 1024px;
 
 				& > .material-design-icon {
 					opacity: .5;
+
+					&.text-box-outline-icon {
+						cursor: pointer;
+					}
 				}
 
 				& > div.task-status-container {
