@@ -27,6 +27,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		:subtitle="subtitle"
 		:title-tooltip="title"
 		:empty="!task"
+		:active.sync="activeTab"
 		@start-editing="newTitle = task.summary"
 		@update:titleEditable="editTitle"
 		@update:title="updateTitle"
@@ -295,6 +296,12 @@ export default {
 		NotesItem,
 		// TaskStatusDisplay,
 	},
+	props: {
+		active: {
+			type: String,
+			default: '',
+		},
+	},
 	data() {
 		return {
 			editingTitle: false,
@@ -321,6 +328,7 @@ export default {
 				},
 			],
 			newTitle: '',
+			activeTab: this.active,
 		}
 	},
 	computed: {
@@ -671,9 +679,11 @@ export default {
 	},
 	mounted() {
 		subscribe('tasks:close-appsidebar', this.closeAppSidebar)
+		subscribe('tasks:open-appsidebar-tab', this.openAppSidebarTab)
 	},
 	beforeDestroy() {
 		unsubscribe('tasks:close-appsidebar', this.closeAppSidebar)
+		unsubscribe('tasks:open-appsidebar-tab', this.openAppSidebarTab)
 	},
 	created() {
 		this.loadTask()
@@ -725,6 +735,10 @@ export default {
 			} else {
 				this.$router.push({ name: 'collections', params: { collectionId: this.$route.params.collectionId } })
 			}
+		},
+
+		openAppSidebarTab({ tab }) {
+			this.activeTab = tab
 		},
 
 		editTitle(editing) {

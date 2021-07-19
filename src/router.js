@@ -40,16 +40,26 @@ const routes = [
 		name: 'collectionsTask',
 		path: '/collections/:collectionId/tasks/:taskId',
 		components: { default: Collections, sidebar: AppSidebar },
-		props: { default: true },
+		props: { default: true, sidebar: true },
 	},
 	{
 		name: 'collectionsParamTask',
 		path: '/collections/:collectionId/:collectionParam/tasks/:taskId',
 		components: { default: Collections, sidebar: AppSidebar },
-		props: { default: true },
+		props: { default: true, sidebar: true },
 	},
-	{ name: 'calendars', path: '/calendars/:calendarId', component: Calendar, props: true },
-	{ name: 'calendarsTask', path: '/calendars/:calendarId/tasks/:taskId', components: { default: Calendar, sidebar: AppSidebar }, props: { default: true } },
+	{
+		name: 'calendars',
+		path: '/calendars/:calendarId',
+		component: Calendar,
+		props: true,
+	},
+	{
+		name: 'calendarsTask',
+		path: '/calendars/:calendarId/tasks/:taskId',
+		components: { default: Calendar, sidebar: AppSidebar },
+		props: { default: true, sidebar: true },
+	},
 ]
 
 Vue.use(VueRouter)
