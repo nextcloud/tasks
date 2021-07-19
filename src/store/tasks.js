@@ -48,10 +48,10 @@ const getters = {
 	/**
 	 * Returns all tasks corresponding to the calendar
 	 *
-	 * @param {Object} state The store data
-	 * @param {Object} getters The store getters
-	 * @param {Object} rootState The store root state
-	 * @param {String} calendarId The Id of the calendar in question
+	 * @param {object} state The store data
+	 * @param {object} getters The store getters
+	 * @param {object} rootState The store root state
+	 * @param {string} calendarId The Id of the calendar in question
 	 * @returns {Array} The tasks
 	 */
 	getTasksByCalendarId: (state, getters, rootState) => (calendarId) => {
@@ -64,9 +64,9 @@ const getters = {
 	/**
 	 * Returns all tasks corresponding to current route value
 	 *
-	 * @param {Object} state The store data
-	 * @param {Object} getters The store getters
-	 * @param {Object} rootState The store root state
+	 * @param {object} state The store data
+	 * @param {object} getters The store getters
+	 * @param {object} rootState The store root state
 	 * @returns {Array} The tasks
 	 */
 	getTasksByRoute: (state, getters, rootState) => {
@@ -76,10 +76,10 @@ const getters = {
 	/**
 	 * Returns all tasks which are direct children of the current task
 	 *
-	 * @param {Object} state The store data
-	 * @param {Object} getters The store getters
-	 * @param {Object} rootState The store root state
-	 * @param {Object} parent The parent task
+	 * @param {object} state The store data
+	 * @param {object} getters The store getters
+	 * @param {object} rootState The store root state
+	 * @param {object} parent The parent task
 	 * @returns {Array} The sub-tasks of the current task
 	 */
 	getTasksByParent: (state, getters, rootState) => (parent) => {
@@ -92,9 +92,9 @@ const getters = {
 	/**
 	 * Returns all tasks of all calendars
 	 *
-	 * @param {Object} state The store data
-	 * @param {Object} getters The store getters
-	 * @param {Object} rootState The store root state
+	 * @param {object} state The store data
+	 * @param {object} getters The store getters
+	 * @param {object} rootState The store root state
 	 * @returns {Array} All tasks in store
 	 */
 	getAllTasks: (state, getters, rootState) => {
@@ -108,9 +108,9 @@ const getters = {
 	/**
 	 * Returns the task currently opened by route
 	 *
-	 * @param {Object} state The store data
-	 * @param {Object} getters The store getters
-	 * @param {Object} rootState The store root state
+	 * @param {object} state The store data
+	 * @param {object} getters The store getters
+	 * @param {object} rootState The store root state
 	 * @returns {Task} The task
 	 */
 	getTaskByRoute: (state, getters, rootState) => {
@@ -131,10 +131,10 @@ const getters = {
 	/**
 	 * Returns the task by Uri
 	 *
-	 * @param {Object} state The store data
-	 * @param {Object} getters The store getters
-	 * @param {Object} rootState The store root state
-	 * @param {String} taskUri The Uri of the task in question
+	 * @param {object} state The store data
+	 * @param {object} getters The store getters
+	 * @param {object} rootState The store root state
+	 * @param {string} taskUri The Uri of the task in question
 	 * @returns {Task} The task
 	 */
 	getTaskByUri: (state, getters, rootState) => (taskUri) => {
@@ -152,10 +152,10 @@ const getters = {
 	/**
 	 * Returns the task by Uri
 	 *
-	 * @param {Object} state The store data
-	 * @param {Object} getters The store getters
-	 * @param {Object} rootState The store root state
-	 * @param {String} taskUid The Uid of the task in question
+	 * @param {object} state The store data
+	 * @param {object} getters The store getters
+	 * @param {object} rootState The store root state
+	 * @param {string} taskUid The Uid of the task in question
 	 * @returns {Task} The task
 	 */
 	getTaskByUid: (state, getters, rootState) => (taskUid) => {
@@ -173,7 +173,7 @@ const getters = {
 	/**
 	 * Returns the root tasks from a given object
 	 *
-	 * @param {Object} tasks The tasks to search in
+	 * @param {object} tasks The tasks to search in
 	 * @returns {Array}
 	 */
 	findRootTasks: () => (tasks) => {
@@ -190,7 +190,7 @@ const getters = {
 	/**
 	 * Returns the closed root tasks from a given object
 	 *
-	 * @param {Object} tasks The tasks to search in
+	 * @param {object} tasks The tasks to search in
 	 * @returns {Array}
 	 */
 	findClosedRootTasks: () => (tasks) => {
@@ -207,7 +207,7 @@ const getters = {
 	/**
 	 * Returns the not closed root tasks from a given object
 	 *
-	 * @param {Object} tasks The tasks to search in
+	 * @param {object} tasks The tasks to search in
 	 * @returns {Array}
 	 */
 	findOpenRootTasks: () => (tasks) => {
@@ -235,10 +235,10 @@ const getters = {
 	/**
 	 * Returns the current search query
 	 *
-	 * @param {Object} state The store data
-	 * @param {Object} getters The store getters
-	 * @param {Object} rootState The store root state
-	 * @returns {String} The current search query
+	 * @param {object} state The store data
+	 * @param {object} getters The store getters
+	 * @param {object} rootState The store root state
+	 * @returns {string} The current search query
 	 */
 	searchQuery: (state, getters, rootState) => {
 		return state.searchQuery
@@ -247,8 +247,8 @@ const getters = {
 	/**
 	 * Returns all tags of all tasks
 	 *
-	 * @param {Object} state The store data
-	 * @param {Object} getters The store getters
+	 * @param {object} state The store data
+	 * @param {object} getters The store getters
 	 * @returns {Array} All tags
 	 */
 	tags: (state, getters) => {
@@ -270,7 +270,7 @@ const mutations = {
 	/**
 	 * Stores tasks into state
 	 *
-	 * @param {Object} state Default state
+	 * @param {object} state Default state
 	 * @param {Array<Task>} tasks Tasks
 	 */
 	appendTasks(state, tasks = []) {
@@ -287,7 +287,7 @@ const mutations = {
 	/**
 	 * Stores task into state
 	 *
-	 * @param {Object} state Default state
+	 * @param {object} state Default state
 	 * @param {Task} task The task to append
 	 */
 	appendTask(state, task) {
@@ -297,7 +297,7 @@ const mutations = {
 	/**
 	 * Deletes a task from state
 	 *
-	 * @param {Object} state Default state
+	 * @param {object} state Default state
 	 * @param {Task} task The task to delete
 	 */
 	deleteTask(state, task) {
@@ -309,7 +309,7 @@ const mutations = {
 	/**
 	 * Deletes a task from the parent
 	 *
-	 * @param {Object} state The store data
+	 * @param {object} state The store data
 	 * @param {Task} task The task to delete from the parents subtask list
 	 * @param {Task} parent The paren task
 	 */
@@ -325,7 +325,7 @@ const mutations = {
 	/**
 	 * Adds a task to parent task as subtask
 	 *
-	 * @param {Object} state The store data
+	 * @param {object} state The store data
 	 * @param {Task} task The task to add to the parents subtask list
 	 * @param {Task} parent The paren task
 	 */
@@ -338,7 +338,7 @@ const mutations = {
 	/**
 	 * Toggles the completed state of a task
 	 *
-	 * @param {Object} state The store data
+	 * @param {object} state The store data
 	 * @param {Task} task The task
 	 */
 	setComplete(state, { task, complete }) {
@@ -348,7 +348,7 @@ const mutations = {
 	/**
 	 * Toggles the starred state of a task
 	 *
-	 * @param {Object} state The store data
+	 * @param {object} state The store data
 	 * @param {Task} task The task
 	 */
 	toggleStarred(state, task) {
@@ -362,7 +362,7 @@ const mutations = {
 	/**
 	 * Toggles the pinned state of a task
 	 *
-	 * @param {Object} state The store data
+	 * @param {object} state The store data
 	 * @param {Task} task The task
 	 */
 	togglePinned(state, task) {
@@ -372,7 +372,7 @@ const mutations = {
 	/**
 	 * Toggles the visibility of the subtasks
 	 *
-	 * @param {Object} state The store data
+	 * @param {object} state The store data
 	 * @param {Task} task The task
 	 */
 	toggleSubtasksVisibility(state, task) {
@@ -382,7 +382,7 @@ const mutations = {
 	/**
 	 * Toggles the visibility of the completed subtasks
 	 *
-	 * @param {Object} state The store data
+	 * @param {object} state The store data
 	 * @param {Task} task The task
 	 */
 	toggleCompletedSubtasksVisibility(state, task) {
@@ -392,9 +392,9 @@ const mutations = {
 	/**
 	 * Sets the summary of a task
 	 *
-	 * @param {Object} state The store data
+	 * @param {object} state The store data
 	 * @param {Task} task The task
-	 * @param {String} summary The summary
+	 * @param {string} summary The summary
 	 */
 	setSummary(state, { task, summary }) {
 		Vue.set(task, 'summary', summary)
@@ -403,9 +403,9 @@ const mutations = {
 	/**
 	 * Sets the note of a task
 	 *
-	 * @param {Object} state The store data
+	 * @param {object} state The store data
 	 * @param {Task} task The task
-	 * @param {String} note The note
+	 * @param {string} note The note
 	 */
 	setNote(state, { task, note }) {
 		Vue.set(task, 'note', note)
@@ -414,7 +414,7 @@ const mutations = {
 	/**
 	 * Sets the tags of a task
 	 *
-	 * @param {Object} state The store data
+	 * @param {object} state The store data
 	 * @param {Task} task The task
 	 * @param {Array} tags The array of tags
 	 */
@@ -425,9 +425,9 @@ const mutations = {
 	/**
 	 * Adds a tag to a task
 	 *
-	 * @param {Object} state The store data
+	 * @param {object} state The store data
 	 * @param {Task} task The task
-	 * @param {String} tag The tag to add
+	 * @param {string} tag The tag to add
 	 */
 	addTag(state, { task, tag }) {
 		Vue.set(task, 'tags', task.tags.concat([tag]))
@@ -436,9 +436,9 @@ const mutations = {
 	/**
 	 * Sets the priority of a task
 	 *
-	 * @param {Object} state The store data
+	 * @param {object} state The store data
 	 * @param {Task} task The task
-	 * @param {String} priority The priority
+	 * @param {string} priority The priority
 	 */
 	setPriority(state, { task, priority }) {
 		Vue.set(task, 'priority', priority)
@@ -447,9 +447,9 @@ const mutations = {
 	/**
 	 * Sets the classification of a task
 	 *
-	 * @param {Object} state The store data
+	 * @param {object} state The store data
 	 * @param {Task} task The task
-	 * @param {String} classification The classification
+	 * @param {string} classification The classification
 	 */
 	setClassification(state, { task, classification }) {
 		Vue.set(task, 'class', classification)
@@ -458,9 +458,9 @@ const mutations = {
 	/**
 	 * Sets the status of a task
 	 *
-	 * @param {Object} state The store data
+	 * @param {object} state The store data
 	 * @param {Task} task The task
-	 * @param {String} status The status
+	 * @param {string} status The status
 	 */
 	setStatus(state, { task, status }) {
 		Vue.set(task, 'status', status)
@@ -469,7 +469,7 @@ const mutations = {
 	/**
 	 * Sets the sort order of a task
 	 *
-	 * @param {Object} state The store data
+	 * @param {object} state The store data
 	 * @param {Task} task The task
 	 * @param {Integer} order The sort order
 	 */
@@ -480,10 +480,10 @@ const mutations = {
 	/**
 	 * Sets the due date of a task
 	 *
-	 * @param {Object} state The store data
+	 * @param {object} state The store data
 	 * @param {Task} task The task
 	 * @param {Moment} due The due date moment
-	 * @param {Boolean} allDay Whether the date is all-day
+	 * @param {boolean} allDay Whether the date is all-day
 	 */
 	setDue(state, { task, due, allDay }) {
 		if (due === null) {
@@ -510,10 +510,10 @@ const mutations = {
 	/**
 	 * Sets the start date of a task
 	 *
-	 * @param {Object} state The store data
+	 * @param {object} state The store data
 	 * @param {Task} task The task
 	 * @param {Moment} start The start date moment
-	 * @param {Boolean} allDay Whether the date is all-day
+	 * @param {boolean} allDay Whether the date is all-day
 	 */
 	setStart(state, { task, start, allDay }) {
 		if (start === null) {
@@ -540,7 +540,7 @@ const mutations = {
 	/**
 	 * Toggles if the start and due dates of a task are all day
 	 *
-	 * @param {Object} state The store data
+	 * @param {object} state The store data
 	 * @param {Task} task The task
 	 */
 	toggleAllDay(state, task) {
@@ -550,7 +550,7 @@ const mutations = {
 	/**
 	 * Move task to a different calendar
 	 *
-	 * @param {Object} state The store data
+	 * @param {object} state The store data
 	 * @param {Task} task The task
 	 * @param {Calendar} calendar The calendar to move the task to
 	 */
@@ -561,9 +561,9 @@ const mutations = {
 	/**
 	 * Move task to a different calendar
 	 *
-	 * @param {Object} state The store data
+	 * @param {object} state The store data
 	 * @param {Task} task The task
-	 * @param {String} related The uid of the related task
+	 * @param {string} related The uid of the related task
 	 */
 	setTaskParent(state, { task, related }) {
 		Vue.set(task, 'related', related)
@@ -572,8 +572,8 @@ const mutations = {
 	/**
 	 * Update a task etag
 	 *
-	 * @param {Object} state The store data
-	 * @param {Object} data Destructuring object
+	 * @param {object} state The store data
+	 * @param {object} data Destructuring object
 	 * @param {Task} task The task to update
 	 * @param {string} etag The task etag
 	 */
@@ -589,8 +589,8 @@ const mutations = {
 	/**
 	 * Resets the sync status
 	 *
-	 * @param {Object} state The store data
-	 * @param {Object} data Destructuring object
+	 * @param {object} state The store data
+	 * @param {object} data Destructuring object
 	 * @param {Task} task The task to update
 	 */
 	resetStatus(state, { task }) {
@@ -603,7 +603,7 @@ const mutations = {
 	/**
 	 * Update a task
 	 *
-	 * @param {Object} state The store data
+	 * @param {object} state The store data
 	 * @param {Task} task The task to update
 	 */
 	updateTask(state, task) {
@@ -619,8 +619,8 @@ const mutations = {
 	/**
 	 * Sets the search query
 	 *
-	 * @param {Object} state The store data
-	 * @param {String} searchQuery The search query
+	 * @param {object} state The store data
+	 * @param {string} searchQuery The search query
 	 */
 	setSearchQuery(state, searchQuery) {
 		state.searchQuery = searchQuery
@@ -639,9 +639,9 @@ const mutations = {
 	/**
 	 * Sets the delete countdown value
 	 *
-	 * @param {Object} state The store data
+	 * @param {object} state The store data
 	 * @param {Task} task The task
-	 * @param {Number} countdown The countdown value
+	 * @param {number} countdown The countdown value
 	 */
 	setTaskDeleteCountdown(state, { task, countdown }) {
 		Vue.set(task, 'deleteCountdown', countdown)
@@ -653,8 +653,8 @@ const actions = {
 	/**
 	 * Creates a new task
 	 *
-	 * @param {Object} context The store mutations
-	 * @param {Object} taskData The data of the new task
+	 * @param {object} context The store mutations
+	 * @param {object} taskData The data of the new task
 	 * @returns {Promise}
 	 */
 	async createTask(context, taskData) {
@@ -737,10 +737,10 @@ const actions = {
 	/**
 	 * Deletes a task
 	 *
-	 * @param {Object} context The store mutations
-	 * @param {Object} data Destructuring object
+	 * @param {object} context The store mutations
+	 * @param {object} data Destructuring object
 	 * @param {Task} data.task The task to delete
-	 * @param {Boolean} [data.dav = true] Trigger a dav deletion
+	 * @param {boolean} [data.dav = true] Trigger a dav deletion
 	 */
 	async deleteTask(context, { task, dav = true }) {
 		// Don't try to delete tasks in read-only calendars
@@ -792,7 +792,7 @@ const actions = {
 	/**
 	 * Schedules a task for deletion
 	 *
-	 * @param {Object} context The store context
+	 * @param {object} context The store context
 	 * @param {Task} task The task to delete
 	 * @returns {Promise}
 	 */
@@ -824,7 +824,7 @@ const actions = {
 	/**
 	 * Cancels a scheduled task deletion
 	 *
-	 * @param {Object} context The store context
+	 * @param {object} context The store context
 	 * @param {Task} task The task to not delete
 	 * @returns {Promise}
 	 */
@@ -841,7 +841,7 @@ const actions = {
 	/**
 	 * Schedules an update request for a given task
 	 *
-	 * @param {Object} context The store context
+	 * @param {object} context The store context
 	 * @param {Task} task The task to update
 	 * @returns {Promise}
 	 */
@@ -856,7 +856,7 @@ const actions = {
 	/**
 	 * Updates a task
 	 *
-	 * @param {Object} context The store context
+	 * @param {object} context The store context
 	 * @param {Task} task The task to update
 	 * @returns {Promise}
 	 */
@@ -899,10 +899,10 @@ const actions = {
 	 * Retrieves the task with the given uri from the given calendar
 	 * and commits the result
 	 *
-	 * @param {Object} context The store mutations
-	 * @param {Object} data Destructuring object
+	 * @param {object} context The store mutations
+	 * @param {object} data Destructuring object
 	 * @param {Calendar} data.calendar The calendar
-	 * @param {String} data.taskUri The uri of the requested task
+	 * @param {string} data.taskUri The uri of the requested task
 	 * @returns {Task}
 	 */
 	async getTaskByUri(context, { calendar, taskUri }) {
@@ -939,10 +939,10 @@ const actions = {
 	 * Retrieves the task with the given uid from the given calendar
 	 * and commits the result
 	 *
-	 * @param {Object} context The store mutations
-	 * @param {Object} data Destructuring object
+	 * @param {object} context The store mutations
+	 * @param {object} data Destructuring object
 	 * @param {Calendar} data.calendar The calendar
-	 * @param {String} data.taskUid The uid of the requested task
+	 * @param {string} data.taskUid The uid of the requested task
 	 * @returns {Task}
 	 */
 	async getTaskByUid(context, { calendar, taskUid }) {
@@ -980,7 +980,7 @@ const actions = {
 	/**
 	 * Toggles the completed state of a task
 	 *
-	 * @param {Object} context The store context
+	 * @param {object} context The store context
 	 * @param {Task} task The task to update
 	 */
 	async toggleCompleted(context, task) {
@@ -1002,7 +1002,7 @@ const actions = {
 	/**
 	 * Sets the percent complete property of a task
 	 *
-	 * @param {Object} context The store context
+	 * @param {object} context The store context
 	 * @param {Task} task The task to update
 	 */
 	async setPercentComplete(context, { task, complete }) {
@@ -1030,7 +1030,7 @@ const actions = {
 	/**
 	 * Toggles the visibility of a tasks subtasks
 	 *
-	 * @param {Object} context The store context
+	 * @param {object} context The store context
 	 * @param {Task} task The task to update
 	 */
 	async toggleSubtasksVisibility(context, task) {
@@ -1041,7 +1041,7 @@ const actions = {
 	/**
 	 * Toggles the visibility of a tasks completed subtasks
 	 *
-	 * @param {Object} context The store context
+	 * @param {object} context The store context
 	 * @param {Task} task The task to update
 	 */
 	async toggleCompletedSubtasksVisibility(context, task) {
@@ -1052,7 +1052,7 @@ const actions = {
 	/**
 	 * Toggles the starred state of a task
 	 *
-	 * @param {Object} context The store context
+	 * @param {object} context The store context
 	 * @param {Task} task The task to update
 	 */
 	async toggleStarred(context, task) {
@@ -1071,7 +1071,7 @@ const actions = {
 	/**
 	 * Toggles the pinned state of a task
 	 *
-	 * @param {Object} context The store context
+	 * @param {object} context The store context
 	 * @param {Task} task The task to update
 	 */
 	async togglePinned(context, task) {
@@ -1090,7 +1090,7 @@ const actions = {
 	/**
 	 * Sets the summary of a task
 	 *
-	 * @param {Object} context The store context
+	 * @param {object} context The store context
 	 * @param {Task} task The task to update
 	 */
 	async setSummary(context, { task, summary }) {
@@ -1101,7 +1101,7 @@ const actions = {
 	/**
 	 * Sets the note of a task
 	 *
-	 * @param {Object} context The store context
+	 * @param {object} context The store context
 	 * @param {Task} task The task to update
 	 */
 	async setNote(context, { task, note }) {
@@ -1115,7 +1115,7 @@ const actions = {
 	/**
 	 * Sets the tags of a task
 	 *
-	 * @param {Object} context The store context
+	 * @param {object} context The store context
 	 * @param {Task} task The task to update
 	 */
 	async setTags(context, { task, tags }) {
@@ -1126,7 +1126,7 @@ const actions = {
 	/**
 	 * Adds a tag to a task
 	 *
-	 * @param {Object} context The store context
+	 * @param {object} context The store context
 	 * @param {Task} task The task to update
 	 */
 	async addTag(context, { task, tag }) {
@@ -1137,7 +1137,7 @@ const actions = {
 	/**
 	 * Sets the priority of a task
 	 *
-	 * @param {Object} context The store context
+	 * @param {object} context The store context
 	 * @param {Task} task The task to update
 	 */
 	async setPriority(context, { task, priority }) {
@@ -1153,7 +1153,7 @@ const actions = {
 	/**
 	 * Sets the classification of a task
 	 *
-	 * @param {Object} context The store context
+	 * @param {object} context The store context
 	 * @param {Task} task The task to update
 	 */
 	async setClassification(context, { task, classification }) {
@@ -1166,7 +1166,7 @@ const actions = {
 	/**
 	 * Sets the status of a task
 	 *
-	 * @param {Object} context The store context
+	 * @param {object} context The store context
 	 * @param {Task} task The task to update
 	 */
 	async setStatus(context, { task, status }) {
@@ -1193,7 +1193,7 @@ const actions = {
 	/**
 	 * Sets the sort order of a task
 	 *
-	 * @param {Object} context The store context
+	 * @param {object} context The store context
 	 * @param {Task} task The task to update
 	 * @param {Integer} order The sort order
 	 */
@@ -1208,7 +1208,7 @@ const actions = {
 	/**
 	 * Sets the due date of a task
 	 *
-	 * @param {Object} context The store context
+	 * @param {object} context The store context
 	 * @param {Task} task The task to update
 	 */
 	async setDue(context, { task, due, allDay }) {
@@ -1219,7 +1219,7 @@ const actions = {
 	/**
 	 * Sets the start date of a task
 	 *
-	 * @param {Object} context The store context
+	 * @param {object} context The store context
 	 * @param {Task} task The task to update
 	 */
 	async setStart(context, { task, start, allDay }) {
@@ -1230,7 +1230,7 @@ const actions = {
 	/**
 	 * Sets the start or due date to the given day
 	 *
-	 * @param {Object} context The store context
+	 * @param {object} context The store context
 	 * @param {Task} task The task to update
 	 * @param {Integer} day The day to set
 	 */
@@ -1268,7 +1268,7 @@ const actions = {
 	/**
 	 * Toggles if due and start date of a task are all-day
 	 *
-	 * @param {Object} context The store context
+	 * @param {object} context The store context
 	 * @param {Task} task The task to update
 	 */
 	async toggleAllDay(context, task) {
@@ -1290,8 +1290,8 @@ const actions = {
 	/**
 	 * Fetch the full vObject from the dav server
 	 *
-	 * @param {Object} context The store mutations
-	 * @param {Object} data Destructuring object
+	 * @param {object} context The store mutations
+	 * @param {object} data Destructuring object
 	 * @param {Task} data.task The task to fetch
 	 * @param {string} data.etag The task etag to override in case of conflict
 	 * @returns {Promise}
@@ -1313,8 +1313,8 @@ const actions = {
 	/**
 	 * Moves a task to a new parent task
 	 *
-	 * @param {Object} context The store mutations
-	 * @param {Object} data Destructuring object
+	 * @param {object} context The store mutations
+	 * @param {object} data Destructuring object
 	 * @param {Task} data.task The task to move
 	 * @param {Task} data.parent The new parent task
 	 */
@@ -1343,8 +1343,8 @@ const actions = {
 	/**
 	 * Moves a task to a new calendar or parent task
 	 *
-	 * @param {Object} context The store mutations
-	 * @param {Object} data Destructuring object
+	 * @param {object} context The store mutations
+	 * @param {object} data Destructuring object
 	 * @param {Task} data.task The task to move
 	 * @param {Calendar} data.calendar The calendar to move the task to
 	 * @param {Task} data.parent The new parent task

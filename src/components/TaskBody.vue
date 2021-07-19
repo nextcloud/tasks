@@ -348,8 +348,8 @@ export default {
 		/**
 		 * Returns the placeholder string shown in the subtasks input field
 		 *
-		 * @param {String} task the name of the parent task
-		 * @returns {String} the placeholder string to show
+		 * @param {string} task the name of the parent task
+		 * @returns {string} the placeholder string to show
 		 */
 		subtasksCreationPlaceholder() {
 			return this.$t('tasks', 'Add a subtask to "{task}"…', { task: this.task.summary }, undefined, { sanitize: false, escape: false })
@@ -393,7 +393,7 @@ export default {
 		/**
 		 * Indicates whether we show the task because it matches the search.
 		 *
-		 * @returns {Boolean} If the task matches
+		 * @returns {boolean} If the task matches
 		 */
 		showTask() {
 			// If the task directly matches the search, we show it.
@@ -407,7 +407,7 @@ export default {
 		/**
 		 * Checks whether we show the subtasks
 		 *
-		 * @returns {Boolean} If we show the subtasks
+		 * @returns {boolean} If we show the subtasks
 		 */
 		showSubtasks() {
 			if (!this.task.hideSubtasks || this.searchQuery || this.isTaskOpen() || this.isDescendantOpen()) {
@@ -422,7 +422,7 @@ export default {
 		 * We also treat tasks in shared calendars with an access class other than 'PUBLIC'
 		 * as read-only.
 		 *
-		 * @returns {Boolean} Is the task read-only
+		 * @returns {boolean} Is the task read-only
 		 */
 		readOnly() {
 			return this.task.calendar.readOnly || (this.task.calendar.isSharedWithMe && this.task.class !== 'PUBLIC')
@@ -465,7 +465,7 @@ export default {
 		 * so we can get it when dropped on an
 		 * app-navigation-item
 		 *
-		 * @param {Object} e The drag event
+		 * @param {object} e The drag event
 		 */
 		dragStart(e) {
 			// Only set the uri if it's the closest task to the drag event
@@ -480,8 +480,8 @@ export default {
 		 * Checks if one of the tasks sub(sub-...)tasks matches the search query
 		 *
 		 * @param {Task} task The task to search in
-		 * @param {String} searchQuery The string to find
-		 * @returns {Boolean} If the task matches
+		 * @param {string} searchQuery The string to find
+		 * @returns {boolean} If the task matches
 		 */
 		searchSubTasks,
 
@@ -489,7 +489,7 @@ export default {
 		 * Checks whether the task is currently open in the details view
 		 *
 		 * @param {Task} task The task to check
-		 * @returns {Boolean} If it is open
+		 * @returns {boolean} If it is open
 		 */
 		isTaskOpen(task = this.task) {
 			return (task.uri === this.$route.params.taskId) && (this.collectionParam === this.$route.params.collectionParam)
@@ -499,7 +499,7 @@ export default {
 		 * Checks whether one of the tasks descendants is currently open in the details view
 		 *
 		 * @param {Task} task The task to check
-		 * @returns {Boolean} If a descendeant is open
+		 * @returns {boolean} If a descendeant is open
 		 */
 		isDescendantOpen(task = this.task) {
 			if (this.collectionParam !== this.$route.params.collectionParam) {
@@ -524,8 +524,8 @@ export default {
 		/**
 		 * Navigates to a different route, but checks if navigation is desired
 		 *
-		 * @param {Object} $event the event that triggered navigation
-		 * @param {String} active the tab active in the AppSidebar
+		 * @param {object} $event the event that triggered navigation
+		 * @param {string} active the tab active in the AppSidebar
 		 */
 		navigate($event, active) {
 			if (!$event.target.closest('.no-nav')

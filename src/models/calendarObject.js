@@ -29,8 +29,8 @@ import {
 /**
  * Creates a complete calendar-object-object based on given props
  *
- * @param {Object} props Calendar-object-props already provided
- * @returns {Object}
+ * @param {object} props Calendar-object-props already provided
+ * @returns {object}
  */
 const getDefaultCalendarObjectObject = (props = {}) => Object.assign({}, {
 	// Id of this calendar-object
@@ -61,8 +61,8 @@ const getDefaultCalendarObjectObject = (props = {}) => Object.assign({}, {
  * Maps a calendar-object from c-dav to our calendar-object object
  *
  * @param {VObject} dav The c-dav VObject
- * @param {String} calendarId The calendar-id this object is associated with
- * @returns {Object}
+ * @param {string} calendarId The calendar-id this object is associated with
+ * @returns {object}
  */
 const mapCDavObjectToCalendarObject = (dav, calendarId) => {
 	const parserManager = getParserManager()

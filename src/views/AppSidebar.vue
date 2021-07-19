@@ -468,7 +468,7 @@ export default {
 		 * We also treat tasks in shared calendars with an access class other than 'PUBLIC'
 		 * as read-only.
 		 *
-		 * @returns {Boolean} Is the task read-only
+		 * @returns {boolean} Is the task read-only
 		 */
 		readOnly() {
 			return this.task.calendar.readOnly || (this.task.calendar.isSharedWithMe && this.task.class !== 'PUBLIC')
@@ -477,7 +477,7 @@ export default {
 		 * Whether the dates of a task are all-day
 		 * When no dates are set, we consider the last used value.
 		 *
-		 * @returns {Boolean} Are the dates all-day
+		 * @returns {boolean} Are the dates all-day
 		 */
 		allDay() {
 			if (this.task.startMoment.isValid() || this.task.dueMoment.isValid()) {
@@ -815,7 +815,7 @@ export default {
 		/**
 		 * Adds a tag to the list of tags
 		 *
-		 * @param {String} tag The name of the tag to add
+		 * @param {string} tag The name of the tag to add
 		 */
 		updateTag(tag) {
 			this.addTag({ task: this.task, tag })

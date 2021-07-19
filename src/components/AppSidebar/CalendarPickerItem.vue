@@ -84,7 +84,7 @@ export default {
 		/**
 		 * TODO: this should emit the calendar id instead
 		 *
-		 * @param {Object} newCalendar The selected calendar
+		 * @param {object} newCalendar The selected calendar
 		 */
 		change(newCalendar) {
 			if (!newCalendar) {

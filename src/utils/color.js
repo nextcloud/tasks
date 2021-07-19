@@ -27,7 +27,7 @@ import convert from 'color-convert'
 /**
  * Generates a hex color based on RGB string
  *
- * @param {String} uid The string to generate a color from
+ * @param {string} uid The string to generate a color from
  * @returns {string} The hex color
  */
 export function uidToHexColor(uid) {
@@ -38,7 +38,7 @@ export function uidToHexColor(uid) {
 /**
  * Detects a color from a given string
  *
- * @param {String} color The color to get the real RGB hex string from
+ * @param {string} color The color to get the real RGB hex string from
  * @returns {string|boolean|*} String if color detected, boolean if not
  */
 export function detectColor(color) {

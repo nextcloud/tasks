@@ -43,10 +43,10 @@ const getters = {
 	 * - belong to a collection
 	 * - be uncompleted
 	 *
-	 * @param {Object} state The store data
-	 * @param {Object} getters The store getters
-	 * @param {Object} rootState The store root state
-	 * @param {String} collectionId The id of the collection in question
+	 * @param {object} state The store data
+	 * @param {object} getters The store getters
+	 * @param {object} rootState The store root state
+	 * @param {string} collectionId The id of the collection in question
 	 * @returns {Integer} Count of tasks in the collection
 	 */
 	getCollectionCount: (state, getters, rootState) => (collectionId) => {
@@ -74,8 +74,8 @@ const mutations = {
 	/**
 	 * Stores all available collections in the state
 	 *
-	 * @param {Object} state The store data
-	 * @param {Object} payload The collections payload
+	 * @param {object} state The store data
+	 * @param {object} payload The collections payload
 	 */
 	setCollections(state, payload) {
 		state.collections = payload.collections
@@ -84,7 +84,7 @@ const mutations = {
 	/**
 	 * Sets the visibility of a collection
 	 *
-	 * @param {Object} state The store data
+	 * @param {object} state The store data
 	 * @param {Collection} newCollection The collection to update
 	 */
 	setVisibility(state, newCollection) {
@@ -97,7 +97,7 @@ const actions = {
 	/**
 	 * Requests all collections from the server
 	 *
-	 * @param {Object} commit The store mutations
+	 * @param {object} commit The store mutations
 	 * @returns {Promise}
 	 */
 	loadCollections({ commit }) {
@@ -115,7 +115,7 @@ const actions = {
 	/**
 	 * Writes the visibility of a collection to the server
 	 *
-	 * @param {Object} context The store mutations
+	 * @param {object} context The store mutations
 	 * @param {Collection} collection The collection to change
 	 * @returns {Promise}
 	 */

@@ -285,7 +285,7 @@ export default {
 		/**
 		 * Whether or not the information about the owner principal was loaded
 		 *
-		 * @returns {Boolean}
+		 * @returns {boolean}
 		 */
 		loadedOwnerPrincipal() {
 			return this.getPrincipalByUrl(this.calendar.owner) !== undefined
@@ -314,8 +314,8 @@ export default {
 		/**
 		 * Handle the drag over
 		 *
-		 * @param {Object} e The event object
-		 * @returns {Boolean}
+		 * @param {object} e The event object
+		 * @returns {boolean}
 		 */
 		dragOver(e) {
 			if (e.preventDefault) {
@@ -326,7 +326,7 @@ export default {
 		/**
 		 * Set the appropriate class on hovering
 		 *
-		 * @param {Object} e The event object
+		 * @param {object} e The event object
 		 */
 		dragEnter(e) {
 			// Check if dropping here is allowed
@@ -355,7 +355,7 @@ export default {
 		/**
 		 * Remove the hovering class after leaving
 		 *
-		 * @param {Object} e The event object
+		 * @param {object} e The event object
 		 */
 		dragLeave(e) {
 			// Don't do anything if we leave towards a child element.
@@ -374,7 +374,7 @@ export default {
 		/**
 		 * Drop a task on a calendar
 		 *
-		 * @param {Object} e The event object
+		 * @param {object} e The event object
 		 */
 		dropTask(e) {
 			// Remove all hover classes

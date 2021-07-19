@@ -110,8 +110,8 @@ export default {
 		/**
 		 * Sets the editing mode if allowed.
 		 *
-		 * @param {Boolean} editing If editing is enabled
-		 * @param {Object} $event The event which triggered the function
+		 * @param {boolean} editing If editing is enabled
+		 * @param {object} $event The event which triggered the function
 		 */
 		setEditing(editing, $event) {
 			if (this.readOnly) { return }

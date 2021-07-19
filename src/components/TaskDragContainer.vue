@@ -50,7 +50,7 @@ export default {
 		 *
 		 * We load it "eager", because the TaskBody will always be required.
 		 *
-		 * @returns {Object} The TaskBody component
+		 * @returns {object} The TaskBody component
 		 */
 		TaskBody: () => import(/* webpackMode: "eager" */ './TaskBody'),
 		draggable,
@@ -169,7 +169,7 @@ export default {
 		 * Called when a task is dropped.
 		 * We only handle sorting tasks here.
 		 *
-		 * @param {Object} $event The event which caused the drop
+		 * @param {object} $event The event which caused the drop
 		 */
 		onEnd($event) {
 			// Don't do anything if the tasks are not sorted but moved.
@@ -189,7 +189,7 @@ export default {
 		 * and also have to sort a task to the correct position
 		 * in case of manual sort order.
 		 *
-		 * @param {Object} $event The event which caused the drop
+		 * @param {object} $event The event which caused the drop
 		 */
 		onAdd($event) {
 			let task
@@ -216,8 +216,8 @@ export default {
 		 * Dropping tasks with class not PUBLIC onto calendars shared with me
 		 * is forbidden.
 		 *
-		 * @param {Object} $event The event which caused the move
-		 * @returns {Boolean} If the drop is allowed
+		 * @param {object} $event The event which caused the move
+		 * @returns {boolean} If the drop is allowed
 		 */
 		onMove($event) {
 			// The task to move
@@ -251,7 +251,7 @@ export default {
 		 * Function to move a task to a new calendar or parent
 		 *
 		 * @param {Task} task The task to change
-		 * @param {Object} $event The event which caused the move
+		 * @param {object} $event The event which caused the move
 		 */
 		prepareMoving(task, $event) {
 			let parent, calendar
@@ -279,7 +279,7 @@ export default {
 		 * Function to add a task to a collection.
 		 *
 		 * @param {Task} task The task to change
-		 * @param {Object} $event The event which caused the change
+		 * @param {object} $event The event which caused the change
 		 */
 		prepareCollecting(task, $event) {
 			// The new collection --> make the moved task a member of this collection

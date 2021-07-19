@@ -140,7 +140,7 @@ export default class Task {
 	/**
 	 * Update linked calendar of this task
 	 *
-	 * @param {Object} calendar the calendar
+	 * @param {object} calendar the calendar
 	 * @memberof Contact
 	 */
 	updateCalendar(calendar) {
@@ -671,8 +671,8 @@ export default class Task {
 	/**
 	 * Checks if the task matches the search query
 	 *
-	 * @param {String} searchQuery The search string
-	 * @returns {Boolean} If the task matches
+	 * @param {string} searchQuery The search string
+	 * @returns {boolean} If the task matches
 	 */
 	matches(searchQuery) {
 		// If the search query maches the previous search, we don't have to search again.

@@ -25,7 +25,7 @@
 /**
  * Creates a complete principal-object based on given props
  *
- * @param {Object} props Principal-props already provided
+ * @param {object} props Principal-props already provided
  * @returns {any}
  */
 export const getDefaultPrincipalObject = (props) => Object.assign({}, {
@@ -50,7 +50,7 @@ export const getDefaultPrincipalObject = (props) => Object.assign({}, {
 /**
  * converts a dav principal into a vuex object
  *
- * @param {Object} principal cdav-library Principal object
+ * @param {object} principal cdav-library Principal object
  * @returns {{emailAddress: *, displayname: *, dav: *, id: *, calendarUserType: *, userId: *, url: *}}
  */
 export function mapDavToPrincipal(principal) {

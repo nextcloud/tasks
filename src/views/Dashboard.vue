@@ -118,8 +118,8 @@ export default {
 			})
 		},
 		/**
-		 * @param {Object} task The task to format
-		 * @returns {String}
+		 * @param {object} task The task to format
+		 * @returns {string}
 		 */
 		formatSubtext(task) {
 			if (!task.dueMoment.isValid()) {
@@ -155,7 +155,7 @@ export default {
 			}
 		},
 		/**
-		 * @param {Object} task The task to generate the URL for
+		 * @param {object} task The task to generate the URL for
 		 * @returns {string}
 		 */
 		getTasksAppUrl(task) {

@@ -90,7 +90,7 @@ export default {
 	},
 	methods: {
 		/**
-		 * @param {Object} value The selected value
+		 * @param {object} value The selected value
 		 */
 		change(value) {
 			if (!value) {

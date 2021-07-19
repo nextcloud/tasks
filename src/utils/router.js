@@ -29,7 +29,7 @@ import { loadState } from '@nextcloud/initial-state'
 /**
  * Gets the initial route
  *
- * @returns {String}
+ * @returns {string}
  */
 export function getInitialRoute() {
 	try {

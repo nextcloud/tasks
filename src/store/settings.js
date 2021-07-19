@@ -42,48 +42,48 @@ const getters = {
 	/**
 	 * Returns the sort order how to sort tasks
 	 *
-	 * @param {Object} state The store data
-	 * @returns {String} The sort order
+	 * @param {object} state The store data
+	 * @returns {string} The sort order
 	 */
 	sortOrder: (state) => state.settings.sortOrder,
 
 	/**
 	 * Returns the sort direction how to sort tasks
 	 *
-	 * @param {Object} state The store data
-	 * @returns {String} The sort direction
+	 * @param {object} state The store data
+	 * @returns {string} The sort direction
 	 */
 	sortDirection: (state) => state.settings.sortDirection,
 
 	/**
 	 * Returns if all-day is default
 	 *
-	 * @param {Object} state The store data
-	 * @returns {String} Whether all-day is default
+	 * @param {object} state The store data
+	 * @returns {string} Whether all-day is default
 	 */
 	allDay: (state) => state.settings.allDay,
 
 	/**
 	 * Returns the initial route
 	 *
-	 * @param {Object} state The store data
-	 * @returns {String} Whether all-day is default
+	 * @param {object} state The store data
+	 * @returns {string} Whether all-day is default
 	 */
 	initialRoute: (state) => state.settings.initialRoute,
 
 	/**
 	 * Returns whether we can show tasks in the Calendar app
 	 *
-	 * @param {Object} state The store data
-	 * @returns {Boolean} Whether we can show tasks in Calendar app
+	 * @param {object} state The store data
+	 * @returns {boolean} Whether we can show tasks in Calendar app
 	 */
 	showTaskInCalendar: (state) => state.settings.calendarEnabled && state.settings.showTasks,
 
 	/**
 	 * Returns the current view of the Calendar app
 	 *
-	 * @param {Object} state The store data
-	 * @returns {String} The current view of the Calendar app
+	 * @param {object} state The store data
+	 * @returns {string} The current view of the Calendar app
 	 */
 	calendarView: (state) => state.settings.calendarView,
 }
@@ -92,8 +92,8 @@ const mutations = {
 	/**
 	 * Sets all settings
 	 *
-	 * @param {Object} state Default state
-	 * @param {Object} settings The settings object
+	 * @param {object} state Default state
+	 * @param {object} settings The settings object
 	 */
 	setSettings(state, settings) {
 		state.settings = settings
@@ -102,8 +102,8 @@ const mutations = {
 	/**
 	 * Sets a setting value
 	 *
-	 * @param {Object} state Default state
-	 * @param {Object} payload The setting object
+	 * @param {object} state Default state
+	 * @param {object} payload The setting object
 	 */
 	setSetting(state, payload) {
 		state.settings[payload.type] = payload.value
@@ -114,8 +114,8 @@ const actions = {
 	/**
 	 * Writes a setting to the server
 	 *
-	 * @param {Object} context The store context
-	 * @param {Object} payload The setting to save
+	 * @param {object} context The store context
+	 * @param {object} payload The setting to save
 	 * @returns {Promise}
 	 */
 	setSetting(context, payload) {
@@ -128,7 +128,7 @@ const actions = {
 	/**
 	 * Requests all app settings from the server
 	 *
-	 * @param {Object} commit The store mutations
+	 * @param {object} commit The store mutations
 	 */
 	loadSettings({ commit }) {
 		commit('setSettings', {

@@ -141,7 +141,7 @@ export default {
 		 * Checks if the click originated from the datepicker
 		 * and sets the value if not.
 		 *
-		 * @param {Object} $event The click event
+		 * @param {object} $event The click event
 		 */
 		checkOutsideClick($event) {
 			/**
