@@ -70,6 +70,13 @@ function findVTODObyState(calendar, completed, related) {
 	return calendar.dav.calendarQuery([query])
 }
 
+/**
+ * Finds a VTODO by the uid
+ *
+ * @param {object} calendar The calendar to search in
+ * @param {string} taskUid The UID
+ * @return {object} The dav query
+ */
 function findVTODObyUid(calendar, taskUid) {
 	const query = {
 		name: [NS.IETF_CALDAV, 'comp-filter'],

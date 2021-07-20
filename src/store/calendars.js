@@ -25,7 +25,6 @@
  */
 'use strict'
 
-import parseIcs from '../services/parseIcs.js'
 import client from '../services/cdav.js'
 import Task from '../models/task.js'
 import { isParentInList, searchSubTasks } from './storeHelper.js'
@@ -34,8 +33,6 @@ import router from '../router.js'
 import { detectColor, uidToHexColor } from '../utils/color.js'
 import { mapCDavObjectToCalendarObject } from '../models/calendarObject'
 
-import ICAL from 'ical.js'
-import pLimit from 'p-limit'
 import Vue from 'vue'
 
 const calendarModel = {
@@ -824,52 +821,6 @@ const actions = {
 			context.commit('deleteCalendar', calendar)
 			console.error(error)
 		}
-	},
-
-	/**
-	 * Imports tasks into a calendar from an ics file
-	 *
-	 * @param {object} context The store mutations
-	 * @param {object} importDetails = { ics, calendar }
-	 */
-	async importTasksIntoCalendar(context, { ics, calendar }) {
-		const tasks = parseIcs(ics, calendar)
-		context.commit('changeStage', 'importing')
-
-		// max simultaneous requests
-		const limit = pLimit(3)
-		const requests = []
-
-		// create the array of requests to send
-		tasks.map(async task => {
-			// Get vcard string
-			try {
-				const vData = ICAL.stringify(task.vCard.jCal)
-				// push task to server and use limit
-				requests.push(limit(() => task.calendar.dav.createVCard(vData)
-					.then((response) => {
-						// setting the task dav property
-						Vue.set(task, 'dav', response)
-
-						// success, update store
-						context.commit('addTask', task)
-						context.commit('addTaskToCalendar', task)
-						context.commit('incrementAccepted')
-					})
-					.catch((error) => {
-						// error
-						context.commit('incrementDenied')
-						console.error(error)
-					})
-				))
-			} catch (e) {
-				context.commit('incrementDenied')
-			}
-		})
-
-		Promise.all(requests).then(() => {
-			context.commit('changeStage', 'default')
-		})
 	},
 
 	/**

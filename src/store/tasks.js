@@ -754,6 +754,9 @@ const actions = {
 		// Clear task from deletion array
 		context.dispatch('clearTaskDeletion', task)
 
+		/**
+		 * Deletes a task from the store
+		 */
 		function deleteTaskFromStore() {
 			context.commit('deleteTask', task)
 			const parent = context.getters.getTaskByUid(task.related)

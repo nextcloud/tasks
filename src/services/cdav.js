@@ -21,6 +21,12 @@ import { generateRemoteUrl } from '@nextcloud/router'
 
 import DavClient from 'cdav-library'
 
+/**
+ * Function to create an XML http request with the correct
+ * headers
+ *
+ * @return {object} the XML http request
+ */
 function xhrProvider() {
 	const headers = {
 		'X-Requested-With': 'XMLHttpRequest',

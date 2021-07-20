@@ -155,6 +155,12 @@ function isTaskDay(task, day) {
 	return diff === day
 }
 
+/**
+ * Returns the days from today the task is due or started
+ *
+ * @param {object} task The task to check
+ * @return {integer} The days from today
+ */
 function dayOfTask(task) {
 	let diff, startdiff, duediff
 	const start = task.startMoment.startOf('day')
