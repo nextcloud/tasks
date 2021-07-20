@@ -1,6 +1,7 @@
 OC.L10N.register(
     "tasks",
     {
+    "Upcoming tasks" : "Artėjančios užduotys",
     "Important" : "Svarbios",
     "Today" : "Šiandien",
     "Week" : "Savaitė",
@@ -42,6 +43,8 @@ OC.L10N.register(
     "An error occurred, unable to delete the calendar." : "Įvyko klaida, nepavyko ištrinti kalendorių.",
     "An error occurred, unable to delete the list." : "Įvyko klaida, nepavyko ištrinti sąrašo.",
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Bendrinama su {num} esybe","Bendrinama su {num} esybėmis","Bendrinama su {num} esybių","Bendrinama su {num} esybe"],
+    "Could not load deleted calendars and objects" : "Nepavyko įkelti ištrintų kalendorių ir objektų",
+    "Could not restore calendar or event" : "Nepavyko atkurti kalendoriaus ar įvykio",
     "Set date" : "Nustatyti datą",
     "Set time" : "Nustatyti laiką",
     "Delete date" : "Ištrinti datą",
@@ -86,6 +89,9 @@ OC.L10N.register(
     "[Tomorrow]" : "[Rytoj]",
     "Add a subtask to \"{task}\"…" : "Pridėti dalinę užduotį į \"{task}\"…",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["Užduotis ištrinama po {countdown} sekundės","Užduotis ištrinama po {countdown} sekundžių","Užduotis ištrinama po {countdown} sekundžių","Užduotis ištrinama po {countdown} sekundės"],
+    "Create a new task" : "Sukurti naują užduotį",
+    "Create task" : "Sukurti užduotį",
+    "Creating the new task…" : "Kuriama nauja užduotis…",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n atlikta užduotis","%n atliktos užduotys","%n atliktų užduočių","%n atlikta užduotis"],
     "Tomorrow" : "Rytoj",
     "Add List…" : "Pridėti sąrašą…",
@@ -93,6 +99,7 @@ OC.L10N.register(
     "All day" : "Visą dieną",
     "Unpin" : "Atsegti",
     "Pin" : "Prisegti",
+    "Show in Calendar" : "Rodyti kalendoriuje",
     "Select a classification" : "Pasirinkite klasifikavimą",
     "Select a status" : "Pasirinkite būseną",
     "When shared show full event" : "Bendrinant, rodyti visą įvykio informaciją",
@@ -132,6 +139,7 @@ OC.L10N.register(
     "Priority {priority}: high" : "Pirmenybė {priority}: aukšta",
     "No priority assigned" : "Pirmenybė nepriskirta",
     "{percent} % completed" : "{percent} % atlikta",
+    "No upcoming tasks" : "Artėjančių užduočių nėra",
     "Successfully created the task." : "Užduotis sėkmingai sukurta.",
     "Could not delete the task." : "Nepavyko ištrinti užduoties.",
     "Synchronizing to the server." : "Sinchronizuojama į serverį.",
@@ -140,6 +148,7 @@ OC.L10N.register(
     "Could not update the task." : "Nepavyko atnaujinti užduoties.",
     "Successfully updated the task." : "Užduotis sėkmingai atnaujinta.",
     "Task successfully moved to new calendar." : "Užduotis sėkmingai perkelta į naują kalendorių.",
-    "An error occurred" : "Įvyko klaida"
+    "An error occurred" : "Įvyko klaida",
+    "Create a task" : "Sukurti užduotį"
 },
 "nplurals=4; plural=(n % 10 == 1 && (n % 100 > 19 || n % 100 < 11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? 1 : n % 1 != 0 ? 2: 3);");
