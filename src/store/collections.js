@@ -96,7 +96,8 @@ const actions = {
 	/**
 	 * Requests all collections from the server
 	 *
-	 * @param {object} commit The store mutations
+	 * @param {object} context The store object
+	 * @param {object} context.commit The store mutations
 	 * @return {Promise}
 	 */
 	loadCollections({ commit }) {

@@ -571,9 +571,9 @@ const mutations = {
 	/**
 	 * Update a task etag
 	 *
-	 * @param {object} state The store data
+	 * @param {object} state The store object
 	 * @param {object} data Destructuring object
-	 * @param {Task} task The task to update
+	 * @param {Task} data.task The task to update
 	 * @param {string} etag The task etag
 	 */
 	updateTaskEtag(state, { task }) {
@@ -588,9 +588,9 @@ const mutations = {
 	/**
 	 * Resets the sync status
 	 *
-	 * @param {object} state The store data
+	 * @param {object} state The store object
 	 * @param {object} data Destructuring object
-	 * @param {Task} task The task to update
+	 * @param {Task} data.task The task to update
 	 */
 	resetStatus(state, { task }) {
 		if (state.tasks[task.key] && task instanceof Task) {

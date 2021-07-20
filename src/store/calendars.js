@@ -568,7 +568,10 @@ const actions = {
 	/**
 	 * Retrieves and commits calendars
 	 *
-	 * @param {object} context The store mutations
+	 * @param {object} context The store object
+	 * @param {object} context.commit The store mutations
+	 * @param {object} context.state The store state
+	 * @param {object} context.getters The store getters
 	 * @return {Promise<Array>} The calendars
 	 */
 	async getCalendarsAndTrashBin({ commit, state, getters }) {
@@ -597,7 +600,8 @@ const actions = {
 	/**
 	 * Retrieve and commit deleted calendars
 	 *
-	 * @param {object} context the store mutations
+	 * @param {object} context The store object
+	 * @param {object} context.commit The store mutations
 	 * @return {Promise<Array>} the calendars
 	 */
 	async loadDeletedCalendars({ commit }) {
@@ -608,6 +612,10 @@ const actions = {
 
 	/**
 	 * Retrieve and commit deleted calendar objects
+	 *
+	 * @param {object} context The store object
+	 * @param {object} context.commit The store mutations
+	 * @param {object} context.state The store state
 	 */
 	async loadDeletedCalendarObjects({ commit, state }) {
 		const vobjects = await state.trashBin.findDeletedObjects()
