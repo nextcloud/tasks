@@ -151,7 +151,7 @@ export default {
 					id: 'alphabetically',
 					icon: 'OrderAlphabeticalAscending',
 					text: this.$t('tasks', 'Alphabetically'),
-					hint: this.$t('tasks', 'Sort by summary and priority.'),
+					hint: this.$t('tasks', 'Sort by alphabet.'),
 				},
 				{
 					id: 'manual',
