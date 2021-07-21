@@ -9,7 +9,7 @@
 @author Jakob Röhrl <jakob.roehrl@web.de>
 @author Raimund Schlüßler <raimund.schluessler@mailbox.org>
 
-@license GNU AGPL version 3 or any later version
+@license GNU Affero General Public License v3.0 or later
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as
