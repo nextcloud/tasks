@@ -765,8 +765,9 @@ export default {
 		 * Sets the start date to the given Date
 		 * or to null
 		 *
-		 * @param {Task} task The task for which to set the date
-		 * @param {Date} date The new start date
+		 * @param {object} context The data object
+		 * @param {Task} context.task The task for which to set the date
+		 * @param {Date} context.value The new start date
 		 */
 		setStartDate({ task, value: date }) {
 			if (date) {
@@ -782,8 +783,9 @@ export default {
 		 * Sets the due date to the given Date
 		 * or to null
 		 *
-		 * @param {Task} task The task for which to set the date
-		 * @param {Date} date The new due date
+		 * @param {object} context The data object
+		 * @param {Task} context.task The task for which to set the date
+		 * @param {Date} context.value The new due date
 		 */
 		setDueDate({ task, value: date }) {
 			if (date) {

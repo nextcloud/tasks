@@ -45,28 +45,32 @@ const getters = {
 	 * @param {object} state The store data
 	 * @param {object} getters The store getters
 	 * @param {object} rootState The store root state
-	 * @param {string} collectionId The id of the collection in question
 	 * @return {Integer} Count of tasks in the collection
 	 */
-	getCollectionCount: (state, getters, rootState) => (collectionId) => {
-		let count = 0
-		rootState.calendars.calendars.forEach(calendar => {
-			let tasks = Object.values(calendar.tasks).filter(task => {
-				return isTaskInList(task, collectionId, false)
-			})
-			if (rootState.tasks.searchQuery) {
-				tasks = tasks.filter(task => {
-					if (task.matches(rootState.tasks.searchQuery)) {
-						return true
-					}
-					// We also have to show tasks for which one sub(sub...)task matches.
-					return searchSubTasks(task, rootState.tasks.searchQuery)
+	getCollectionCount: (state, getters, rootState) =>
+		/**
+		 * @param {string} collectionId The id of the collection in question
+		 * @return {Integer} Count of tasks in the collection
+		 */
+		(collectionId) => {
+			let count = 0
+			rootState.calendars.calendars.forEach(calendar => {
+				let tasks = Object.values(calendar.tasks).filter(task => {
+					return isTaskInList(task, collectionId, false)
 				})
-			}
-			count += tasks.length
-		})
-		return count
-	},
+				if (rootState.tasks.searchQuery) {
+					tasks = tasks.filter(task => {
+						if (task.matches(rootState.tasks.searchQuery)) {
+							return true
+						}
+						// We also have to show tasks for which one sub(sub...)task matches.
+						return searchSubTasks(task, rootState.tasks.searchQuery)
+					})
+				}
+				count += tasks.length
+			})
+			return count
+		},
 }
 
 const mutations = {

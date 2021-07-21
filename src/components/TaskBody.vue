@@ -348,7 +348,6 @@ export default {
 		/**
 		 * Returns the placeholder string shown in the subtasks input field
 		 *
-		 * @param {string} task the name of the parent task
 		 * @return {string} the placeholder string to show
 		 */
 		subtasksCreationPlaceholder() {

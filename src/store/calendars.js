@@ -201,13 +201,17 @@ const getters = {
 	 * Returns the calendar with the given calendarId
 	 *
 	 * @param {object} state The store data
-	 * @param {string} calendarId The id of the requested calendar
 	 * @return {Calendar} The requested calendar
 	 */
-	getCalendarById: state => (calendarId) => {
-		const calendar = state.calendars.find(search => search.id === calendarId)
-		return calendar
-	},
+	getCalendarById: state =>
+		/**
+		 * @param {string} calendarId The id of the calendar
+		 * @return {Calendar} The requested calendar
+		 */
+		(calendarId) => {
+			const calendar = state.calendars.find(search => search.id === calendarId)
+			return calendar
+		},
 
 	/**
 	 * Returns the number of tasks in a calendar
@@ -219,26 +223,30 @@ const getters = {
 	 * @param {object} state The store data
 	 * @param {object} getters The store getters
 	 * @param {object} rootState The store root state
-	 * @param {string} calendarId The id of the requested calendar
 	 * @return {Integer} The number of tasks
 	 */
-	getCalendarCount: (state, getters, rootState) => (calendarId) => {
-		const calendar = getters.getCalendarById(calendarId)
-		let tasks = Object.values(calendar.tasks)
-			.filter(task => {
-				return task.closed === false && (!task.related || !isParentInList(task, calendar.tasks))
-			})
-		if (rootState.tasks.searchQuery) {
-			tasks = tasks.filter(task => {
-				if (task.matches(rootState.tasks.searchQuery)) {
-					return true
-				}
-				// We also have to show tasks for which one sub(sub...)task matches.
-				return searchSubTasks(task, rootState.tasks.searchQuery)
-			})
-		}
-		return tasks.length
-	},
+	getCalendarCount: (state, getters, rootState) =>
+		/**
+		 * @param {string} calendarId The id of the requested calendar
+		 * @return {Integer} The number of tasks
+		 */
+		(calendarId) => {
+			const calendar = getters.getCalendarById(calendarId)
+			let tasks = Object.values(calendar.tasks)
+				.filter(task => {
+					return task.closed === false && (!task.related || !isParentInList(task, calendar.tasks))
+				})
+			if (rootState.tasks.searchQuery) {
+				tasks = tasks.filter(task => {
+					if (task.matches(rootState.tasks.searchQuery)) {
+						return true
+					}
+					// We also have to show tasks for which one sub(sub...)task matches.
+					return searchSubTasks(task, rootState.tasks.searchQuery)
+				})
+			}
+			return tasks.length
+		},
 
 	/**
 	 * Returns the count of closed tasks in a calendar
@@ -249,30 +257,38 @@ const getters = {
 	 *
 	 * @param {object} state The store data
 	 * @param {object} getters The store getters
-	 * @param {string} calendarId The id of the calendar in question
 	 * @return {Integer} The count of closed tasks in a calendar
 	 */
-	getCalendarCountClosed: (state, getters) => (calendarId) => {
-		const calendar = getters.getCalendarById(calendarId)
-		return Object.values(calendar.tasks)
-			.filter(task => {
-				return task.closed === true && (!task.related || !isParentInList(task, calendar.tasks))
-			}).length
-	},
+	getCalendarCountClosed: (state, getters) =>
+		/**
+		 * @param {string} calendarId The id of the calendar in question
+		 * @return {Integer} The count of closed tasks in a calendar
+		 */
+		(calendarId) => {
+			const calendar = getters.getCalendarById(calendarId)
+			return Object.values(calendar.tasks)
+				.filter(task => {
+					return task.closed === true && (!task.related || !isParentInList(task, calendar.tasks))
+				}).length
+		},
 
 	/**
 	 * Returns if a calendar name is already used by an other calendar
 	 *
 	 * @param {object} state The store data
-	 * @param {string} name The name to check
-	 * @param {string} id The id of the calendar to exclude
 	 * @return {boolean} If a calendar name is already used
 	 */
-	isCalendarNameUsed: state => (name, id) => {
-		return state.calendars.some(calendar => {
-			return (calendar.displayName === name && calendar.id !== id)
-		})
-	},
+	isCalendarNameUsed: state =>
+		/**
+		 * @param {string} name The name to check
+		 * @param {string} id The id of the calendar to exclude
+		 * @return {boolean} If a calendar name is already used
+		 */
+		(name, id) => {
+			return state.calendars.some(calendar => {
+				return (calendar.displayName === name && calendar.id !== id)
+			})
+		},
 
 	/**
 	 * Returns the current calendar
@@ -556,8 +572,9 @@ const mutations = {
 	 * Sets the sort order of a calendar
 	 *
 	 * @param {object} state The store data
-	 * @param {Calendar} calendar The calendar
-	 * @param {Integer} order The sort order
+	 * @param {object} data Destructuring object
+	 * @param {Calendar} data.calendar The calendar
+	 * @param {Integer} data.order The sort order
 	 */
 	setCalendarOrder(state, { calendar, order }) {
 		Vue.set(calendar, 'order', order)
@@ -736,6 +753,7 @@ const actions = {
 	 * Changes the name and the color of a calendar
 	 *
 	 * @param {object} context The store mutations Current context
+	 * @param {object} data Destructuring object
 	 * @param {Calendar} data.calendar The calendar to change
 	 * @param {string} data.newName The new name of the calendar
 	 * @param {string} data.newColor The new color of the calendar
@@ -862,6 +880,7 @@ const actions = {
 	 * Shares a calendar with a user or a group
 	 *
 	 * @param {object} context The store mutations Current context
+	 * @param {object} data Destructuring object
 	 * @param {Calendar} data.calendar The calendar
 	 * @param {string} data.user The userId
 	 * @param {string} data.displayName The displayName
@@ -879,8 +898,9 @@ const actions = {
 	 * Sets the sort order of a calendar
 	 *
 	 * @param {object} context The store context
-	 * @param {Calendar} calendar The calendar to update
-	 * @param {Integer} order The sort order
+	 * @param {object} data Destructuring object
+	 * @param {Calendar} data.calendar The calendar to update
+	 * @param {Integer} data.order The sort order
 	 */
 	async setCalendarOrder(context, { calendar, order }) {
 		if (calendar.order === order) {
