@@ -16,12 +16,17 @@
  *
  * You should have received a copy of the GNU Affero General Public
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
 'use strict'
 
 import linkifyStr from 'linkifyjs/string.js'
 
+/**
+ * Directive to linkify innerHTML strings
+ *
+ * @param {object} el the bound element
+ * @param {object} binding Object containing directive parameters
+ */
 function linkify(el, binding) {
 	el.innerHTML = linkifyStr(binding.value, {
 		defaultProtocol: 'https',

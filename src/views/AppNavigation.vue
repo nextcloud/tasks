@@ -195,7 +195,7 @@ export default {
 		/**
 		 * Indicate that we drag a calendar item
 		 *
-		 * @param {Object} dataTransfer The dataTransfer object
+		 * @param {object} dataTransfer The dataTransfer object
 		 */
 		setData(dataTransfer) {
 			dataTransfer.setData('text/plain', 'calendar')
@@ -204,7 +204,7 @@ export default {
 		/**
 		 * Called when the calendar list order is changed.
 		 *
-		 * @param {Object} $event The event which caused the sorting
+		 * @param {object} $event The event which caused the sorting
 		 */
 		update($event) {
 			const newIndex = $event.newIndex
@@ -258,8 +258,8 @@ export default {
 		/**
 		 * Handle the drag start
 		 *
-		 * @param {Object} e The event object
-		 * @returns {Boolean}
+		 * @param {object} e The event object
+		 * @return {boolean}
 		 */
 		dragStart(e) {
 			e.stopPropagation()
@@ -269,8 +269,8 @@ export default {
 		/**
 		 * Handle the drag over
 		 *
-		 * @param {Object} e The event object
-		 * @returns {Boolean}
+		 * @param {object} e The event object
+		 * @return {boolean}
 		 */
 		dragOver(e) {
 			if (e.preventDefault) {
@@ -281,8 +281,8 @@ export default {
 		/**
 		 * Set the appropriate class on hovering
 		 *
-		 * @param {Object} e The event object
-		 * @param {Object} collection The collection on which the task was dropped
+		 * @param {object} e The event object
+		 * @param {object} collection The collection on which the task was dropped
 		 */
 		dragEnter(e, collection) {
 			// Check if dropping here is allowed
@@ -306,7 +306,7 @@ export default {
 		/**
 		 * Remove the hovering class after leaving
 		 *
-		 * @param {Object} e The event object
+		 * @param {object} e The event object
 		 */
 		dragLeave(e) {
 			// Don't do anything if we leave towards a child element.
@@ -325,8 +325,8 @@ export default {
 		/**
 		 * Drop a task on a collection
 		 *
-		 * @param {Object} e The event object
-		 * @param {Object} collection The collection
+		 * @param {object} e The event object
+		 * @param {object} collection The collection
 		 */
 		dropTaskOnCollection(e, collection) {
 			// Remove all hover classes
@@ -433,7 +433,7 @@ export default {
 		/**
 		 * Saves the current route as new initial route
 		 *
-		 * @param {String} route The new initial route
+		 * @param {string} route The new initial route
 		 */
 		setInitialRoute(route) {
 			if (route === this.initialRoute) {

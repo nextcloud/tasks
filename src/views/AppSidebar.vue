@@ -239,6 +239,7 @@ import SliderItem from '../components/AppSidebar/SliderItem.vue'
 import TagsItem from '../components/AppSidebar/TagsItem.vue'
 import NotesItem from '../components/AppSidebar/NotesItem.vue'
 // import TaskStatusDisplay from '../components/TaskStatusDisplay.vue'
+import Task from '../models/task.js'
 
 import { subscribe, unsubscribe } from '@nextcloud/event-bus'
 import moment from '@nextcloud/moment'
@@ -411,7 +412,7 @@ export default {
 		/**
 		 * Returns the download url as a string or null if event is loading or does not exist on the server (yet)
 		 *
-		 * @returns {string|null}
+		 * @return {string|null}
 		 */
 		downloadURL() {
 			if (!this.task) {
@@ -422,7 +423,7 @@ export default {
 		/**
 		 * Initializes the start date of a task
 		 *
-		 * @returns {Date} The start date moment
+		 * @return {Date} The start date moment
 		 */
 		newStartDate() {
 			const start = this.task.startMoment
@@ -441,7 +442,7 @@ export default {
 		/**
 		 * Initializes the due date of a task
 		 *
-		 * @returns {Date} The due date moment
+		 * @return {Date} The due date moment
 		 */
 		newDueDate() {
 			const due = this.task.dueMoment
@@ -468,7 +469,7 @@ export default {
 		 * We also treat tasks in shared calendars with an access class other than 'PUBLIC'
 		 * as read-only.
 		 *
-		 * @returns {Boolean} Is the task read-only
+		 * @return {boolean} Is the task read-only
 		 */
 		readOnly() {
 			return this.task.calendar.readOnly || (this.task.calendar.isSharedWithMe && this.task.class !== 'PUBLIC')
@@ -477,7 +478,7 @@ export default {
 		 * Whether the dates of a task are all-day
 		 * When no dates are set, we consider the last used value.
 		 *
-		 * @returns {Boolean} Are the dates all-day
+		 * @return {boolean} Are the dates all-day
 		 */
 		allDay() {
 			if (this.task.startMoment.isValid() || this.task.dueMoment.isValid()) {
@@ -765,8 +766,9 @@ export default {
 		 * Sets the start date to the given Date
 		 * or to null
 		 *
-		 * @param {Task} task The task for which to set the date
-		 * @param {Date} date The new start date
+		 * @param {object} context The data object
+		 * @param {Task} context.task The task for which to set the date
+		 * @param {Date} context.value The new start date
 		 */
 		setStartDate({ task, value: date }) {
 			if (date) {
@@ -782,8 +784,9 @@ export default {
 		 * Sets the due date to the given Date
 		 * or to null
 		 *
-		 * @param {Task} task The task for which to set the date
-		 * @param {Date} date The new due date
+		 * @param {object} context The data object
+		 * @param {Task} context.task The task for which to set the date
+		 * @param {Date} context.value The new due date
 		 */
 		setDueDate({ task, value: date }) {
 			if (date) {
@@ -815,7 +818,7 @@ export default {
 		/**
 		 * Adds a tag to the list of tags
 		 *
-		 * @param {String} tag The name of the tag to add
+		 * @param {string} tag The name of the tag to add
 		 */
 		updateTag(tag) {
 			this.addTag({ task: this.task, tag })

@@ -1,9 +1,9 @@
-/*
- * @copyright Copyright (c) 2021 Jakob Röhrl <jakob.roehrl@web.de>
+/**
+ * Nextcloud - Tasks
  *
+ * @copyright Copyright (c) 2021 Jakob Röhrl
  * @author Jakob Röhrl <jakob.roehrl@web.de>
- *
- * @license GNU AGPL version 3 or any later version
+ * @license AGPL-3.0-or-later
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -17,7 +17,6 @@
  *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 import Dashboard from './views/Dashboard'

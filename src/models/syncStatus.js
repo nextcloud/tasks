@@ -3,7 +3,6 @@
  *
  * @author John Molakvoæ
  * @copyright 2018 John Molakvoæ <skjnldsv@protonmail.com>
- *
  * @author Raimund Schlüßler
  * @copyright 2021 Raimund Schlüßler <raimund.schluessler@mailbox.org>
  *
@@ -19,7 +18,6 @@
  *
  * You should have received a copy of the GNU Affero General Public
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 export default class SyncStatus {
@@ -27,8 +25,8 @@ export default class SyncStatus {
 	/**
 	 * Creates an instance of a SyncStatus
 	 *
-	 * @param {String} status The type of the status
-	 * @param {String} message The message to show
+	 * @param {string} status The type of the status
+	 * @param {string} message The message to show
 	 * @memberof SyncStatus
 	 */
 	constructor(status, message) {

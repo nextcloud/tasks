@@ -1,9 +1,9 @@
 /**
+ * Nextcloud - Tasks
+ *
  * @copyright Copyright (c) 2019 Georg Ehrke
- *
  * @author Georg Ehrke <oc.list@georgehrke.com>
- *
- * @license GNU AGPL version 3 or any later version
+ * @license AGPL-3.0-or-later
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -17,7 +17,6 @@
  *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 import { uidToColor } from './uidToColor.js'
@@ -27,8 +26,8 @@ import convert from 'color-convert'
 /**
  * Generates a hex color based on RGB string
  *
- * @param {String} uid The string to generate a color from
- * @returns {string} The hex color
+ * @param {string} uid The string to generate a color from
+ * @return {string} The hex color
  */
 export function uidToHexColor(uid) {
 	const color = uidToColor(uid)
@@ -38,8 +37,8 @@ export function uidToHexColor(uid) {
 /**
  * Detects a color from a given string
  *
- * @param {String} color The color to get the real RGB hex string from
- * @returns {string|boolean|*} String if color detected, boolean if not
+ * @param {string} color The color to get the real RGB hex string from
+ * @return {string|boolean|*} String if color detected, boolean if not
  */
 export function detectColor(color) {
 	if (/^(#)((?:[A-Fa-f0-9]{3}){1,2})$/.test(color)) { // #ff00ff and #f0f

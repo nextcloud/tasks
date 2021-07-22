@@ -9,7 +9,7 @@
 @author Jakob Röhrl <jakob.roehrl@web.de>
 @author Raimund Schlüßler <raimund.schluessler@mailbox.org>
 
-@license GNU AGPL version 3 or any later version
+@license GNU Affero General Public License v3.0 or later
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as
@@ -102,12 +102,12 @@ export default {
 		/**
 		 * Share calendar
 		 *
-		 * @param {Object} data destructuring object
-		 * @param {String} data.user the userId
-		 * @param {String} data.displayName the displayName
-		 * @param {String} data.uri the sharing principalScheme uri
-		 * @param {Boolean} data.isGroup is this a group ?
-		 * @param {Boolean} data.isCircle is this a circle?
+		 * @param {object} data destructuring object
+		 * @param {string} data.user the userId
+		 * @param {string} data.displayName the displayName
+		 * @param {string} data.uri the sharing principalScheme uri
+		 * @param {boolean} data.isGroup is this a group ?
+		 * @param {boolean} data.isCircle is this a circle?
 		 */
 		shareCalendar({ user, displayName, uri, isGroup, isCircle }) {
 			const calendar = this.calendar
@@ -119,7 +119,7 @@ export default {
 		/**
 		 * Use the cdav client call to find matches to the query from the existing Users & Groups
 		 *
-		 * @param {String} query
+		 * @param {string} query
 		 */
 		findSharee: debounce(async function(query) {
 			const hiddenPrincipalSchemes = []
@@ -156,10 +156,10 @@ export default {
 		}, 500),
 		/**
 		 *
-		 * @param {String} query The search query
-		 * @param {String[]} hiddenPrincipals A list of principals to exclude from search results
-		 * @param {String[]} hiddenUrls A list of urls to exclude from search results
-		 * @returns {Promise<Object[]>}
+		 * @param {string} query The search query
+		 * @param {string[]} hiddenPrincipals A list of principals to exclude from search results
+		 * @param {string[]} hiddenUrls A list of urls to exclude from search results
+		 * @return {Promise<object[]>}
 		 */
 		async findShareesFromDav(query, hiddenPrincipals, hiddenUrls) {
 			let results
@@ -198,10 +198,10 @@ export default {
 		},
 		/**
 		 *
-		 * @param {String} query The search query
-		 * @param {String[]} hiddenPrincipals A list of principals to exclude from search results
-		 * @param {String[]} hiddenUrls A list of urls to exclude from search results
-		 * @returns {Promise<Object[]>}
+		 * @param {string} query The search query
+		 * @param {string[]} hiddenPrincipals A list of principals to exclude from search results
+		 * @param {string[]} hiddenUrls A list of urls to exclude from search results
+		 * @return {Promise<object[]>}
 		 */
 		async findShareesFromCircles(query, hiddenPrincipals, hiddenUrls) {
 			let results

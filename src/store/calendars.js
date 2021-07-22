@@ -3,13 +3,10 @@
  *
  * @author Raimund Schlüßler
  * @copyright 2018 Raimund Schlüßler <raimund.schluessler@mailbox.org>
- *
  * @author John Molakvoæ
  * @copyright 2018 John Molakvoæ <skjnldsv@protonmail.com>
- *
  * @author Georg Ehrke
  * @copyright 2018 Georg Ehrke <oc.list@georgehrke.com>
- *
  * @author Thomas Citharel <tcit@tcit.fr>
  * @copyright 2018 Thomas Citharel <tcit@tcit.fr>
  *
@@ -25,11 +22,9 @@
  *
  * You should have received a copy of the GNU Affero General Public
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
 'use strict'
 
-import parseIcs from '../services/parseIcs.js'
 import client from '../services/cdav.js'
 import Task from '../models/task.js'
 import { isParentInList, searchSubTasks } from './storeHelper.js'
@@ -38,8 +33,6 @@ import router from '../router.js'
 import { detectColor, uidToHexColor } from '../utils/color.js'
 import { mapCDavObjectToCalendarObject } from '../models/calendarObject'
 
-import ICAL from 'ical.js'
-import pLimit from 'p-limit'
 import Vue from 'vue'
 
 const calendarModel = {
@@ -74,11 +67,11 @@ const state = {
 /**
  * Maps a dav collection to our calendar object model
  *
- * @param {Object} calendar The calendar object from the cdav library
- * @param {Object} currentUserPrincipal The principal model of the current user principal
- * @returns {Object}
+ * @param {object} calendar The calendar object from the cdav library
+ * @param {object} currentUserPrincipal The principal model of the current user principal
+ * @return {object}
  */
-export function mapDavCollectionToCalendar(calendar, currentUserPrincipal) {
+export function Calendar(calendar, currentUserPrincipal) {
 	const owner = calendar.owner
 	let isSharedWithMe = false
 	if (!currentUserPrincipal) {
@@ -134,8 +127,8 @@ export function mapDavCollectionToCalendar(calendar, currentUserPrincipal) {
 /**
  * Maps a dav collection to the sharee array
  *
- * @param {Object} sharee The sharee object from the cdav library shares
- * @returns {Object}
+ * @param {object} sharee The sharee object from the cdav library shares
+ * @return {object}
  */
 export function mapDavShareeToSharee(sharee) {
 	const id = sharee.href.split('/').slice(-1)[0]
@@ -160,8 +153,8 @@ export function mapDavShareeToSharee(sharee) {
 /**
  * Gets the calendar uri from the url
  *
- * @param {String} url The url to get calendar uri from
- * @returns {string}
+ * @param {string} url The url to get calendar uri from
+ * @return {string}
  */
 function getCalendarUriFromUrl(url) {
 	if (url.endsWith('/')) {
@@ -176,8 +169,8 @@ const getters = {
 	/**
 	 * Returns the calendars sorted alphabetically
 	 *
-	 * @param {Object} state The store data
-	 * @returns {Array<Calendar>} Array of the calendars sorted alphabetically
+	 * @param {object} state The store data
+	 * @return {Array<Calendar>} Array of the calendars sorted alphabetically
 	 */
 	getSortedCalendars: state => {
 		return state.calendars.sort(function(cal1, cal2) {
@@ -190,8 +183,8 @@ const getters = {
 	/**
 	 * Returns the calendars sorted alphabetically
 	 *
-	 * @param {Object} state The store data
-	 * @returns {Array<Calendar>} Array of the calendars sorted alphabetically
+	 * @param {object} state The store data
+	 * @return {Array<Calendar>} Array of the calendars sorted alphabetically
 	 */
 	getSortedWritableCalendars: state => {
 		return state.calendars.filter(calendar => {
@@ -207,14 +200,18 @@ const getters = {
 	/**
 	 * Returns the calendar with the given calendarId
 	 *
-	 * @param {Object} state The store data
-	 * @param {String} calendarId The id of the requested calendar
-	 * @returns {Calendar} The requested calendar
+	 * @param {object} state The store data
+	 * @return {Calendar} The requested calendar
 	 */
-	getCalendarById: state => (calendarId) => {
-		const calendar = state.calendars.find(search => search.id === calendarId)
-		return calendar
-	},
+	getCalendarById: state =>
+		/**
+		 * @param {string} calendarId The id of the calendar
+		 * @return {Calendar} The requested calendar
+		 */
+		(calendarId) => {
+			const calendar = state.calendars.find(search => search.id === calendarId)
+			return calendar
+		},
 
 	/**
 	 * Returns the number of tasks in a calendar
@@ -223,29 +220,33 @@ const getters = {
 	 * - a root task
 	 * - uncompleted
 	 *
-	 * @param {Object} state The store data
-	 * @param {Object} getters The store getters
-	 * @param {Object} rootState The store root state
-	 * @param {String} calendarId The id of the requested calendar
-	 * @returns {Integer} The number of tasks
+	 * @param {object} state The store data
+	 * @param {object} getters The store getters
+	 * @param {object} rootState The store root state
+	 * @return {number} The number of tasks
 	 */
-	getCalendarCount: (state, getters, rootState) => (calendarId) => {
-		const calendar = getters.getCalendarById(calendarId)
-		let tasks = Object.values(calendar.tasks)
-			.filter(task => {
-				return task.closed === false && (!task.related || !isParentInList(task, calendar.tasks))
-			})
-		if (rootState.tasks.searchQuery) {
-			tasks = tasks.filter(task => {
-				if (task.matches(rootState.tasks.searchQuery)) {
-					return true
-				}
-				// We also have to show tasks for which one sub(sub...)task matches.
-				return searchSubTasks(task, rootState.tasks.searchQuery)
-			})
-		}
-		return tasks.length
-	},
+	getCalendarCount: (state, getters, rootState) =>
+		/**
+		 * @param {string} calendarId The id of the requested calendar
+		 * @return {number} The number of tasks
+		 */
+		(calendarId) => {
+			const calendar = getters.getCalendarById(calendarId)
+			let tasks = Object.values(calendar.tasks)
+				.filter(task => {
+					return task.closed === false && (!task.related || !isParentInList(task, calendar.tasks))
+				})
+			if (rootState.tasks.searchQuery) {
+				tasks = tasks.filter(task => {
+					if (task.matches(rootState.tasks.searchQuery)) {
+						return true
+					}
+					// We also have to show tasks for which one sub(sub...)task matches.
+					return searchSubTasks(task, rootState.tasks.searchQuery)
+				})
+			}
+			return tasks.length
+		},
 
 	/**
 	 * Returns the count of closed tasks in a calendar
@@ -254,40 +255,48 @@ const getters = {
 	 * - a root task
 	 * - closed
 	 *
-	 * @param {Object} state The store data
-	 * @param {Object} getters The store getters
-	 * @param {String} calendarId The id of the calendar in question
-	 * @returns {Integer} The count of closed tasks in a calendar
+	 * @param {object} state The store data
+	 * @param {object} getters The store getters
+	 * @return {number} The count of closed tasks in a calendar
 	 */
-	getCalendarCountClosed: (state, getters) => (calendarId) => {
-		const calendar = getters.getCalendarById(calendarId)
-		return Object.values(calendar.tasks)
-			.filter(task => {
-				return task.closed === true && (!task.related || !isParentInList(task, calendar.tasks))
-			}).length
-	},
+	getCalendarCountClosed: (state, getters) =>
+		/**
+		 * @param {string} calendarId The id of the calendar in question
+		 * @return {number} The count of closed tasks in a calendar
+		 */
+		(calendarId) => {
+			const calendar = getters.getCalendarById(calendarId)
+			return Object.values(calendar.tasks)
+				.filter(task => {
+					return task.closed === true && (!task.related || !isParentInList(task, calendar.tasks))
+				}).length
+		},
 
 	/**
 	 * Returns if a calendar name is already used by an other calendar
 	 *
-	 * @param {Object} state The store data
-	 * @param {String} name The name to check
-	 * @param {String} id The id of the calendar to exclude
-	 * @returns {Boolean} If a calendar name is already used
+	 * @param {object} state The store data
+	 * @return {boolean} If a calendar name is already used
 	 */
-	isCalendarNameUsed: state => (name, id) => {
-		return state.calendars.some(calendar => {
-			return (calendar.displayName === name && calendar.id !== id)
-		})
-	},
+	isCalendarNameUsed: state =>
+		/**
+		 * @param {string} name The name to check
+		 * @param {string} id The id of the calendar to exclude
+		 * @return {boolean} If a calendar name is already used
+		 */
+		(name, id) => {
+			return state.calendars.some(calendar => {
+				return (calendar.displayName === name && calendar.id !== id)
+			})
+		},
 
 	/**
 	 * Returns the current calendar
 	 *
-	 * @param {Object} state The store data
-	 * @param {Object} getters The store getters
-	 * @param {Object} rootState The store root state
-	 * @returns {Calendar} The calendar by route
+	 * @param {object} state The store data
+	 * @param {object} getters The store getters
+	 * @param {object} rootState The store root state
+	 * @return {Calendar} The calendar by route
 	 */
 	getCalendarByRoute: (state, getters, rootState) => {
 		if (rootState.route.params.collectionId) {
@@ -299,10 +308,10 @@ const getters = {
 	/**
 	 * Returns the default calendar
 	 *
-	 * @param {Object} state The store data
-	 * @param {Object} getters The store getters
-	 * @param {Object} rootState The store root state
-	 * @returns {Calendar} The default calendar
+	 * @param {object} state The store data
+	 * @param {object} getters The store getters
+	 * @param {object} rootState The store root state
+	 * @return {Calendar} The default calendar
 	 */
 	getDefaultCalendar: (state, getters, rootState) => {
 		const defaultCalendar = getters.getCalendarById(rootState.settings.settings.defaultCalendarId)
@@ -324,8 +333,8 @@ const getters = {
 	/**
 	 * List of deleted sorted calendars
 	 *
-	 * @param {Object} state the store data
-	 * @returns {Array}
+	 * @param {object} state the store data
+	 * @return {Array}
 	 */
 	sortedDeletedCalendars(state) {
 		return state.deletedCalendars
@@ -335,8 +344,8 @@ const getters = {
 	/**
 	 * List of deleted calendars objects
 	 *
-	 * @param {Object} state the store data
-	 * @returns {Array}
+	 * @param {object} state the store data
+	 * @return {Array}
 	 */
 	deletedCalendarObjects(state) {
 		const calendarUriMap = {}
@@ -358,7 +367,7 @@ const mutations = {
 	/**
 	 * Adds a calendar to the state
 	 *
-	 * @param {Object} state The store data
+	 * @param {object} state The store data
 	 * @param {Calendar} calendar The calendar to add
 	 */
 	addCalendar(state, calendar) {
@@ -376,7 +385,7 @@ const mutations = {
 	/**
 	 * Delete calendar
 	 *
-	 * @param {Object} state The store data
+	 * @param {object} state The store data
 	 * @param {Calendar} calendar The calendar to delete
 	 */
 	deleteCalendar(state, calendar) {
@@ -390,9 +399,9 @@ const mutations = {
 	/**
 	 * Adds deleted calendar into state
 	 *
-	 * @param {Object} state the store data
-	 * @param {Object} data destructuring object
-	 * @param {Object} data.calendar calendar the calendar to add
+	 * @param {object} state the store data
+	 * @param {object} data destructuring object
+	 * @param {object} data.calendar calendar the calendar to add
 	 */
 	addDeletedCalendar(state, { calendar }) {
 		if (state.deletedCalendars.some(c => c.url === calendar.url)) {
@@ -405,9 +414,9 @@ const mutations = {
 	/**
 	 * Removes a deleted calendar
 	 *
-	 * @param {Object} state the store data
-	 * @param {Object} data destructuring object
-	 * @param {Object} data.calendar the deleted calendar to remove
+	 * @param {object} state the store data
+	 * @param {object} data destructuring object
+	 * @param {object} data.calendar the deleted calendar to remove
 	 */
 	removeDeletedCalendar(state, { calendar }) {
 		state.deletedCalendars = state.deletedCalendars.filter(c => c !== calendar)
@@ -416,9 +425,9 @@ const mutations = {
 	/**
 	 * Removes a deleted calendar object
 	 *
-	 * @param {Object} state the store data
-	 * @param {Object} data destructuring object
-	 * @param {Object} data.vobject the deleted calendar object to remove
+	 * @param {object} state the store data
+	 * @param {object} data destructuring object
+	 * @param {object} data.vobject the deleted calendar object to remove
 	 */
 	removeDeletedCalendarObject(state, { vobject }) {
 		state.deletedCalendarObjects = state.deletedCalendarObjects.filter(vo => vo.id !== vobject.id)
@@ -427,9 +436,9 @@ const mutations = {
 	/**
 	 * Adds a deleted vobject into state
 	 *
-	 * @param {Object} state the store data
-	 * @param {Object} data destructuring object
-	 * @param {Object} data.vobject the calendar vobject to add
+	 * @param {object} state the store data
+	 * @param {object} data destructuring object
+	 * @param {object} data.vobject the calendar vobject to add
 	 */
 	addDeletedCalendarObject(state, { vobject }) {
 		if (state.deletedCalendarObjects.some(c => c.uri === vobject.uri)) {
@@ -442,7 +451,7 @@ const mutations = {
 	/**
 	 * Toggles whether a calendar is enabled
 	 *
-	 * @param {Object} context The store mutations
+	 * @param {object} context The store mutations
 	 * @param {Calendar} calendar The calendar to toggle
 	 */
 	toggleCalendarEnabled(context, calendar) {
@@ -452,11 +461,11 @@ const mutations = {
 	/**
 	 * Changes the name and the color of a calendar
 	 *
-	 * @param {Object} context The store mutations
-	 * @param {Object} data Destructuring object
+	 * @param {object} context The store mutations
+	 * @param {object} data Destructuring object
 	 * @param {Calendar} data.calendar The calendar to change
-	 * @param {String} data.newName The new name of the calendar
-	 * @param {String} data.newColor The new color of the calendar
+	 * @param {string} data.newName The new name of the calendar
+	 * @param {string} data.newColor The new color of the calendar
 	 */
 	renameCalendar(context, { calendar, newName, newColor }) {
 		calendar.displayName = newName
@@ -467,8 +476,8 @@ const mutations = {
 	 * Appends a list of tasks to a calendar
 	 * and removes duplicates
 	 *
-	 * @param {Object} state The store data
-	 * @param {Object} data Destructuring object
+	 * @param {object} state The store data
+	 * @param {object} data Destructuring object
 	 * @param {Calendar} data.calendar The calendar to add the tasks to
 	 * @param {Task[]} data.tasks Array of tasks to append
 	 */
@@ -487,7 +496,7 @@ const mutations = {
 	/**
 	 * Adds a task to a calendar and overwrites if duplicate uid
 	 *
-	 * @param {Object} state The store data
+	 * @param {object} state The store data
 	 * @param {Task} task The task to add
 	 */
 	addTaskToCalendar(state, task) {
@@ -497,7 +506,7 @@ const mutations = {
 	/**
 	 * Deletes a task from its calendar
 	 *
-	 * @param {Object} state The store data
+	 * @param {object} state The store data
 	 * @param {Task} task The task to delete
 	 */
 	deleteTaskFromCalendar(state, task) {
@@ -507,14 +516,14 @@ const mutations = {
 	/**
 	 * Shares a calendar with a user or group
 	 *
-	 * @param {Object} state The store data
-	 * @param {Object} data Destructuring object
+	 * @param {object} state The store data
+	 * @param {object} data Destructuring object
 	 * @param {Calendar} data.calendar The calendar
-	 * @param {String} data.user The userId
-	 * @param {String} data.displayName The displayName
-	 * @param {String} data.uri The sharing principalScheme uri
-	 * @param {Boolean} data.isGroup Is this a group ?
-	 * @param {Boolean} data.isCircle Is this a circle?
+	 * @param {string} data.user The userId
+	 * @param {string} data.displayName The displayName
+	 * @param {string} data.uri The sharing principalScheme uri
+	 * @param {boolean} data.isGroup Is this a group ?
+	 * @param {boolean} data.isCircle Is this a circle?
 	 */
 	shareCalendar(state, { calendar, user, displayName, uri, isGroup, isCircle }) {
 		calendar = state.calendars.find(search => search.id === calendar.id)
@@ -534,10 +543,10 @@ const mutations = {
 	/**
 	 * Removes a sharee from calendar shares list
 	 *
-	 * @param {Object} state The store data
-	 * @param {Object} data Destructuring object
+	 * @param {object} state The store data
+	 * @param {object} data Destructuring object
 	 * @param {Calendar} data.calendar The calendar
-	 * @param {String} data.uri The sharee uri
+	 * @param {string} data.uri The sharee uri
 	 */
 	removeSharee(state, { calendar, uri }) {
 		calendar = state.calendars.find(search => search.id === calendar.id)
@@ -548,10 +557,10 @@ const mutations = {
 	/**
 	 * Toggles sharee's writable permission
 	 *
-	 * @param {Object} state The store data
-	 * @param {Object} data Destructuring object
-	 * @param {Object} data.calendar The calendar
-	 * @param {String} data.uri The sharee uri
+	 * @param {object} state The store data
+	 * @param {object} data Destructuring object
+	 * @param {object} data.calendar The calendar
+	 * @param {string} data.uri The sharee uri
 	 */
 	updateShareeWritable(state, { calendar, uri }) {
 		calendar = state.calendars.find(search => search.id === calendar.id)
@@ -562,9 +571,10 @@ const mutations = {
 	/**
 	 * Sets the sort order of a calendar
 	 *
-	 * @param {Object} state The store data
-	 * @param {Calendar} calendar The calendar
-	 * @param {Integer} order The sort order
+	 * @param {object} state The store data
+	 * @param {object} data Destructuring object
+	 * @param {Calendar} data.calendar The calendar
+	 * @param {number} data.order The sort order
 	 */
 	setCalendarOrder(state, { calendar, order }) {
 		Vue.set(calendar, 'order', order)
@@ -575,13 +585,16 @@ const actions = {
 	/**
 	 * Retrieves and commits calendars
 	 *
-	 * @param {Object} context The store mutations
-	 * @returns {Promise<Array>} The calendars
+	 * @param {object} context The store object
+	 * @param {object} context.commit The store mutations
+	 * @param {object} context.state The store state
+	 * @param {object} context.getters The store getters
+	 * @return {Promise<Array>} The calendars
 	 */
 	async getCalendarsAndTrashBin({ commit, state, getters }) {
 		let { calendars, trashBins } = await client.calendarHomes[0].findAllCalDAVCollectionsGrouped()
 		calendars = calendars.map(calendar => {
-			return mapDavCollectionToCalendar(calendar, getters.getCurrentUserPrincipal)
+			return Calendar(calendar, getters.getCurrentUserPrincipal)
 		})
 
 		// Remove calendars which don't support tasks
@@ -604,8 +617,9 @@ const actions = {
 	/**
 	 * Retrieve and commit deleted calendars
 	 *
-	 * @param {Object} context the store mutations
-	 * @returns {Promise<Array>} the calendars
+	 * @param {object} context The store object
+	 * @param {object} context.commit The store mutations
+	 * @return {Promise<Array>} the calendars
 	 */
 	async loadDeletedCalendars({ commit }) {
 		const calendars = await client.calendarHomes[0].findAllDeletedCalendars()
@@ -615,6 +629,10 @@ const actions = {
 
 	/**
 	 * Retrieve and commit deleted calendar objects
+	 *
+	 * @param {object} context The store object
+	 * @param {object} context.commit The store mutations
+	 * @param {object} context.state The store state
 	 */
 	async loadDeletedCalendarObjects({ commit, state }) {
 		const vobjects = await state.trashBin.findDeletedObjects()
@@ -633,14 +651,14 @@ const actions = {
 	/**
 	 * Appends a new calendar to array of existing calendars
 	 *
-	 * @param {Object} context The store mutations
+	 * @param {object} context The store mutations
 	 * @param {Calendar} calendar The calendar to append
-	 * @returns {Promise}
+	 * @return {Promise}
 	 */
 	async appendCalendar(context, calendar) {
 		return client.calendarHomes[0].createCalendarCollection(calendar.displayName, calendar.color, ['VTODO'])
 			.then((response) => {
-				calendar = mapDavCollectionToCalendar(response, context.getters.getCurrentUserPrincipal)
+				calendar = Calendar(response, context.getters.getCurrentUserPrincipal)
 				context.commit('addCalendar', calendar)
 				// Open the calendar
 				router.push({ name: 'calendars', params: { calendarId: calendar.id } })
@@ -650,9 +668,10 @@ const actions = {
 
 	/**
 	 * Delete calendar
-	 * @param {Object} context The store mutations Current context
+	 *
+	 * @param {object} context The store mutations Current context
 	 * @param {Calendar} calendar The calendar to delete
-	 * @returns {Promise}
+	 * @return {Promise}
 	 */
 	async deleteCalendar(context, calendar) {
 		return calendar.dav.delete()
@@ -669,10 +688,10 @@ const actions = {
 	/**
 	 * Delete a calendar in the trash bin
 	 *
-	 * @param {Object} context the store mutations Current context
-	 * @param {Object} data destructuring object
-	 * @param {Object} data.calendar the calendar to delete
-	 * @returns {Promise}
+	 * @param {object} context the store mutations Current context
+	 * @param {object} data destructuring object
+	 * @param {object} data.calendar the calendar to delete
+	 * @return {Promise}
 	 */
 	async deleteCalendarPermanently(context, { calendar }) {
 		await calendar.delete({
@@ -703,10 +722,10 @@ const actions = {
 	/**
 	 * Deletes a calendar-object permanently
 	 *
-	 * @param {Object} context the store mutations
-	 * @param {Object} data destructuring object
-	 * @param {vobject} data.vobject Calendar-object to delete
-	 * @returns {Promise<void>}
+	 * @param {object} context the store mutations
+	 * @param {object} data destructuring object
+	 * @param {object} data.vobject Calendar-object to delete
+	 * @return {Promise<void>}
 	 */
 	async deleteCalendarObjectPermanently(context, { vobject }) {
 		await vobject.dav.delete({
@@ -718,9 +737,10 @@ const actions = {
 
 	/**
 	 * Toggles whether a calendar is enabled
-	 * @param {Object} context The store mutations current context
+	 *
+	 * @param {object} context The store mutations current context
 	 * @param {Calendar} calendar The calendar to toggle
-	 * @returns {Promise}
+	 * @return {Promise}
 	 */
 	async toggleCalendarEnabled(context, calendar) {
 		calendar.dav.enabled = !calendar.dav.enabled
@@ -732,11 +752,12 @@ const actions = {
 	/**
 	 * Changes the name and the color of a calendar
 	 *
-	 * @param {Object} context The store mutations Current context
+	 * @param {object} context The store mutations Current context
+	 * @param {object} data Destructuring object
 	 * @param {Calendar} data.calendar The calendar to change
-	 * @param {String} data.newName The new name of the calendar
-	 * @param {String} data.newColor The new color of the calendar
-	 * @returns {Promise}
+	 * @param {string} data.newName The new name of the calendar
+	 * @param {string} data.newColor The new color of the calendar
+	 * @return {Promise}
 	 */
 	async changeCalendar(context, { calendar, newName, newColor }) {
 		calendar.dav.displayname = newName
@@ -750,12 +771,12 @@ const actions = {
 	 * Retrieves the tasks of the specified calendar
 	 * and commits the results
 	 *
-	 * @param {Object} context The store mutations
-	 * @param {Object} data Destructuring object
+	 * @param {object} context The store mutations
+	 * @param {object} data Destructuring object
 	 * @param {Calendar} data.calendar The calendar
-	 * @param {String} data.completed Are the requested tasks completed
-	 * @param {String} data.related The uid of the parent task
-	 * @returns {Promise}
+	 * @param {string} data.completed Are the requested tasks completed
+	 * @param {string} data.related The uid of the parent task
+	 * @return {Promise}
 	 */
 	async getTasksFromCalendar(context, { calendar, completed = false, related = null }) {
 		try {
@@ -829,58 +850,12 @@ const actions = {
 	},
 
 	/**
-	 * Imports tasks into a calendar from an ics file
-	 *
-	 * @param {Object} context The store mutations
-	 * @param {Object} importDetails = { ics, calendar }
-	 */
-	async importTasksIntoCalendar(context, { ics, calendar }) {
-		const tasks = parseIcs(ics, calendar)
-		context.commit('changeStage', 'importing')
-
-		// max simultaneous requests
-		const limit = pLimit(3)
-		const requests = []
-
-		// create the array of requests to send
-		tasks.map(async task => {
-			// Get vcard string
-			try {
-				const vData = ICAL.stringify(task.vCard.jCal)
-				// push task to server and use limit
-				requests.push(limit(() => task.calendar.dav.createVCard(vData)
-					.then((response) => {
-						// setting the task dav property
-						Vue.set(task, 'dav', response)
-
-						// success, update store
-						context.commit('addTask', task)
-						context.commit('addTaskToCalendar', task)
-						context.commit('incrementAccepted')
-					})
-					.catch((error) => {
-						// error
-						context.commit('incrementDenied')
-						console.error(error)
-					})
-				))
-			} catch (e) {
-				context.commit('incrementDenied')
-			}
-		})
-
-		Promise.all(requests).then(() => {
-			context.commit('changeStage', 'default')
-		})
-	},
-
-	/**
 	 * Removes a sharee from a calendar
 	 *
-	 * @param {Object} context The store mutations Current context
-	 * @param {Object} data Destructuring object
-	 * @param {Object} data.calendar The calendar
-	 * @param {String} data.uri The sharee uri
+	 * @param {object} context The store mutations Current context
+	 * @param {object} data Destructuring object
+	 * @param {object} data.calendar The calendar
+	 * @param {string} data.uri The sharee uri
 	 */
 	async removeSharee(context, { calendar, uri }) {
 		await calendar.dav.unshare(uri)
@@ -890,11 +865,11 @@ const actions = {
 	/**
 	 * Toggles permissions of calendar sharees writeable rights
 	 *
-	 * @param {Object} context The store mutations Current context
-	 * @param {Object} data Destructuring object
-	 * @param {Object} data.calendar The calendar
-	 * @param {String} data.uri The sharee uri
-	 * @param {Boolean} data.writeable The sharee permission
+	 * @param {object} context The store mutations Current context
+	 * @param {object} data Destructuring object
+	 * @param {object} data.calendar The calendar
+	 * @param {string} data.uri The sharee uri
+	 * @param {boolean} data.writeable The sharee permission
 	 */
 	async toggleShareeWritable(context, { calendar, uri, writeable }) {
 		await calendar.dav.share(uri, writeable)
@@ -904,13 +879,14 @@ const actions = {
 	/**
 	 * Shares a calendar with a user or a group
 	 *
-	 * @param {Object} context The store mutations Current context
+	 * @param {object} context The store mutations Current context
+	 * @param {object} data Destructuring object
 	 * @param {Calendar} data.calendar The calendar
-	 * @param {String} data.user The userId
-	 * @param {String} data.displayName The displayName
-	 * @param {String} data.uri The sharing principalScheme uri
-	 * @param {Boolean} data.isGroup Is this a group ?
-	 * @param {Boolean} data.isCircle Is this a circle?
+	 * @param {string} data.user The userId
+	 * @param {string} data.displayName The displayName
+	 * @param {string} data.uri The sharing principalScheme uri
+	 * @param {boolean} data.isGroup Is this a group ?
+	 * @param {boolean} data.isCircle Is this a circle?
 	 */
 	async shareCalendar(context, { calendar, user, displayName, uri, isGroup, isCircle }) {
 		// Share calendar with entered group or user
@@ -921,9 +897,10 @@ const actions = {
 	/**
 	 * Sets the sort order of a calendar
 	 *
-	 * @param {Object} context The store context
-	 * @param {Calendar} calendar The calendar to update
-	 * @param {Integer} order The sort order
+	 * @param {object} context The store context
+	 * @param {object} data Destructuring object
+	 * @param {Calendar} data.calendar The calendar to update
+	 * @param {number} data.order The sort order
 	 */
 	async setCalendarOrder(context, { calendar, order }) {
 		if (calendar.order === order) {

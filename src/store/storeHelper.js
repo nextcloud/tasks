@@ -18,9 +18,10 @@
  *
  * You should have received a copy of the GNU Affero General Public
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
 'use strict'
+
+import Task from '../models/task.js'
 
 import moment from '@nextcloud/moment'
 
@@ -29,10 +30,10 @@ import ICAL from 'ical.js'
 /**
  * Returns if a task belongs to a list
  *
- * @param {Object} task The task to check
- * @param {String} listId The id of the list in question
- * @param {Boolean} checkSubtasks Whether we also check if a descendant task matches
- * @returns {Boolean}
+ * @param {object} task The task to check
+ * @param {string} listId The id of the list in question
+ * @param {boolean} checkSubtasks Whether we also check if a descendant task matches
+ * @return {boolean}
  */
 function isTaskInList(task, listId, checkSubtasks = true) {
 	const parts = listId.split('-')
@@ -63,10 +64,10 @@ function isTaskInList(task, listId, checkSubtasks = true) {
 /**
  * Checks for a task (and possibly its subtasks) if the given test function returns true
  *
- * @param {Object} task The task to check
+ * @param {object} task The task to check
  * @param {Function} testFunction The function to apply on the task
- * @param {Boolean} checkSubtasks Whether to check subtasks
- * @returns {Boolean}
+ * @param {boolean} checkSubtasks Whether to check subtasks
+ * @return {boolean}
  */
 function testTask(task, testFunction, checkSubtasks = false) {
 	if (!task.closed && testFunction(task)) {
@@ -86,8 +87,8 @@ function testTask(task, testFunction, checkSubtasks = false) {
 /**
  * Checks if the task has a high priority
  *
- * @param {Object} task The task to check
- * @returns {Boolean}
+ * @param {object} task The task to check
+ * @return {boolean}
  */
 function isTaskPriority(task) {
 	return (task.priority > 0 && task.priority < 5)
@@ -96,8 +97,8 @@ function isTaskPriority(task) {
 /**
  * Checks if the start or due date have already passed
  *
- * @param {Object} task The task to check
- * @returns {Boolean}
+ * @param {object} task The task to check
+ * @return {boolean}
  */
 function isTaskCurrent(task) {
 	return !task.startMoment.isValid() || task.startMoment.diff(moment(), 'days', true) < 0 || task.dueMoment.diff(moment(), 'days', true) < 0
@@ -106,8 +107,8 @@ function isTaskCurrent(task) {
 /**
  * Checks if the start or due date of a task are today
  *
- * @param {Object} task The task to check
- * @returns {Boolean}
+ * @param {object} task The task to check
+ * @return {boolean}
  */
 function isTaskToday(task) {
 	return (today(task.startMoment) || today(task.dueMoment))
@@ -116,8 +117,8 @@ function isTaskToday(task) {
 /**
  * Checks if a date is today
  *
- * @param {Moment} date The date as moment
- * @returns {Boolean}
+ * @param {moment} date The date as moment
+ * @return {boolean}
  */
 function today(date) {
 	return date.isValid() && date.diff(moment().startOf('day'), 'days', true) < 1
@@ -126,8 +127,8 @@ function today(date) {
 /**
  * Checks if the start or due date of a task are this week
  *
- * @param {Object} task The task to check
- * @returns {Boolean}
+ * @param {object} task The task to check
+ * @return {boolean}
  */
 function isTaskWeek(task) {
 	return (week(task.startMoment) || week(task.dueMoment))
@@ -136,8 +137,8 @@ function isTaskWeek(task) {
 /**
  * Checks if a date lies within the next week
  *
- * @param {Moment} date The date as moment
- * @returns {Boolean}
+ * @param {moment} date The date as moment
+ * @return {boolean}
  */
 function week(date) {
 	return date.isValid() && date.diff(moment().startOf('day'), 'days', true) < 7
@@ -146,9 +147,9 @@ function week(date) {
 /**
  * Checks if the start or due date of a task are at a given day
  *
- * @param {Object} task The task to check
- * @param {Integer} day The day
- * @returns {Boolean}
+ * @param {object} task The task to check
+ * @param {number} day The day
+ * @return {boolean}
  */
 function isTaskDay(task, day) {
 	let diff = dayOfTask(task)
@@ -156,6 +157,12 @@ function isTaskDay(task, day) {
 	return diff === day
 }
 
+/**
+ * Returns the days from today the task is due or started
+ *
+ * @param {object} task The task to check
+ * @return {number} The days from today
+ */
 function dayOfTask(task) {
 	let diff, startdiff, duediff
 	const start = task.startMoment.startOf('day')
@@ -186,8 +193,8 @@ function dayOfTask(task) {
 /**
  * Checks if a date is overdue
  *
- * @param {Moment} date The date
- * @returns {Boolean}
+ * @param {moment} date The date
+ * @return {boolean}
  */
 function overdue(date) {
 	return date.isValid() && date.diff(moment()) < 0
@@ -197,8 +204,8 @@ function overdue(date) {
  * Checks if for a given task the parent is found in the given Object
  *
  * @param {Task} task The task
- * @param {Object} tasks The tasks to search in
- * @returns {Boolean}
+ * @param {object} tasks The tasks to search in
+ * @return {boolean}
  */
 function isParentInList(task, tasks) {
 	return Object.values(tasks).some(t => {
@@ -210,9 +217,9 @@ function isParentInList(task, tasks) {
  * Sorts tasks in specified order type
  *
  * @param {Array<Task>} tasks The tasks to sort
- * @param {String} sortOrder The sorting order type
- * @param {Boolean} sortDirection The sorting direction
- * @returns {Array}
+ * @param {string} sortOrder The sorting order type
+ * @param {boolean} sortDirection The sorting direction
+ * @return {Array}
  */
 function sort(tasks, sortOrder, sortDirection) {
 	let comparators
@@ -269,7 +276,7 @@ function sort(tasks, sortOrder, sortDirection) {
  *
  * @param {Task} taskA The first task
  * @param {Task} taskB The second task
- * @returns {Integer}
+ * @return {number}
  */
 function sortByPinned(taskA, taskB) {
 	if (taskA.pinned && taskB.pinned) return 0
@@ -283,7 +290,7 @@ function sortByPinned(taskA, taskB) {
  *
  * @param {Task} taskA The first task
  * @param {Task} taskB The second task
- * @returns {Integer}
+ * @return {number}
  */
 function sortByCompleted(taskA, taskB) {
 	return taskA.completed - taskB.completed
@@ -298,7 +305,7 @@ function sortByCompleted(taskA, taskB) {
  *
  * @param {Task} taskA The first task
  * @param {Task} taskB The second task
- * @returns {Integer}
+ * @return {number}
  */
 function sortByPriority(taskA, taskB) {
 	if (-taskA.priority === -taskB.priority) return 0
@@ -312,7 +319,7 @@ function sortByPriority(taskA, taskB) {
  *
  * @param {Task} taskA The first task
  * @param {Task} taskB The second task
- * @returns {Integer}
+ * @return {number}
  */
 function sortAlphabetically(taskA, taskB) {
 	return taskA.summary.toLowerCase().localeCompare(taskB.summary.toLowerCase())
@@ -323,7 +330,7 @@ function sortAlphabetically(taskA, taskB) {
  *
  * @param {Task} taskA The first task
  * @param {Task} taskB The second task
- * @returns {Integer}
+ * @return {number}
  */
 function sortByDue(taskA, taskB) {
 	return sortByDate(taskA, taskB, 'due')
@@ -334,7 +341,7 @@ function sortByDue(taskA, taskB) {
  *
  * @param {Task} taskA The first task
  * @param {Task} taskB The second task
- * @returns {Integer}
+ * @return {number}
  */
 function sortByStart(taskA, taskB) {
 	return sortByDate(taskA, taskB, 'start')
@@ -345,7 +352,7 @@ function sortByStart(taskA, taskB) {
  *
  * @param {Task} taskA The first task
  * @param {Task} taskB The second task
- * @returns {Integer}
+ * @return {number}
  */
 function sortByModified(taskA, taskB) {
 	return sortByDate(taskA, taskB, 'modified')
@@ -356,7 +363,7 @@ function sortByModified(taskA, taskB) {
  *
  * @param {Task} taskA The first task
  * @param {Task} taskB The second task
- * @returns {Integer}
+ * @return {number}
  */
 function sortByCompletedDate(taskA, taskB) {
 	return sortByDate(taskA, taskB, 'completedDate')
@@ -367,7 +374,7 @@ function sortByCompletedDate(taskA, taskB) {
  *
  * @param {Task} taskA The first task
  * @param {Task} taskB The second task
- * @returns {Integer}
+ * @return {number}
  */
 function sortByCreated(taskA, taskB) {
 	return sortByDate(taskA, taskB, 'created')
@@ -378,8 +385,8 @@ function sortByCreated(taskA, taskB) {
  *
  * @param {Task} taskA The first task
  * @param {Task} taskB The second task
- * @param {String} date The date sort type
- * @returns {Integer}
+ * @param {string} date The date sort type
+ * @return {number}
  */
 function sortByDate(taskA, taskB, date) {
 	if (taskA[date] === null && taskB[date] !== null) {
@@ -401,7 +408,7 @@ function sortByDate(taskA, taskB, date) {
  *
  * @param {Task} taskA The first task
  * @param {Task} taskB The second task
- * @returns {Integer}
+ * @return {number}
  */
 function sortBySortOrder(taskA, taskB) {
 	return taskA.sortOrder - taskB.sortOrder
@@ -410,9 +417,9 @@ function sortBySortOrder(taskA, taskB) {
 /**
  * Function to convert a moment to a ICAL Time
  *
- * @param {Moment} moment The moment to convert
- * @param {Bool} asDate Is the moment all day
- * @returns {ICAL.Time}
+ * @param {moment} moment The moment to convert
+ * @param {boolean} asDate Is the moment all day
+ * @return {ICAL.Time}
  */
 function momentToICALTime(moment, asDate) {
 	if (asDate) {
@@ -426,8 +433,8 @@ function momentToICALTime(moment, asDate) {
  * Checks if one of the tasks sub(sub-...)tasks matches the search query
  *
  * @param {Task} task The task to search in
- * @param {String} searchQuery The string to find
- * @returns {Boolean} If the task matches
+ * @param {string} searchQuery The string to find
+ * @return {boolean} If the task matches
  */
 function searchSubTasks(task, searchQuery) {
 	return Object.values(task.subTasks).some((subTask) => {

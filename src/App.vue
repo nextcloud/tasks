@@ -99,7 +99,7 @@ export default {
 		/**
 		 * Close the details view
 		 *
-		 * @param {Object} $event the event
+		 * @param {object} $event the event
 		 */
 		closeAppSidebar($event) {
 			if (!($event.target.closest('.reactive') || $event.target.classList.contains('reactive')) && this.$route.params.taskId) {

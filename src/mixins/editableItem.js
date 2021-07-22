@@ -16,8 +16,9 @@
  *
  * You should have received a copy of the GNU Affero General Public
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
+import Task from '../models/task.js'
+
 import Actions from '@nextcloud/vue/dist/Components/Actions'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
 
@@ -110,8 +111,8 @@ export default {
 		/**
 		 * Sets the editing mode if allowed.
 		 *
-		 * @param {Boolean} editing If editing is enabled
-		 * @param {Object} $event The event which triggered the function
+		 * @param {boolean} editing If editing is enabled
+		 * @param {object} $event The event which triggered the function
 		 */
 		setEditing(editing, $event) {
 			if (this.readOnly) { return }

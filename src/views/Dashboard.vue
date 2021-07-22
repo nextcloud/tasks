@@ -118,8 +118,8 @@ export default {
 			})
 		},
 		/**
-		 * @param {Object} task The task to format
-		 * @returns {String}
+		 * @param {object} task The task to format
+		 * @return {string}
 		 */
 		formatSubtext(task) {
 			if (!task.dueMoment.isValid()) {
@@ -155,8 +155,8 @@ export default {
 			}
 		},
 		/**
-		 * @param {Object} task The task to generate the URL for
-		 * @returns {string}
+		 * @param {object} task The task to generate the URL for
+		 * @return {string}
 		 */
 		getTasksAppUrl(task) {
 			return generateUrl('apps/tasks') + `/#/calendars/${task.calendar.id}/tasks/${task.uri}`

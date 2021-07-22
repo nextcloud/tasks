@@ -3,7 +3,6 @@
  *
  * @author John Molakvoæ
  * @copyright 2018 John Molakvoæ <skjnldsv@protonmail.com>
- *
  * @author Raimund Schlüßler
  * @copyright 2021 Raimund Schlüßler <raimund.schluessler@mailbox.org>
  *
@@ -19,7 +18,6 @@
  *
  * You should have received a copy of the GNU Affero General Public
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 import moment from '@nextcloud/moment'
@@ -140,7 +138,7 @@ export default class Task {
 	/**
 	 * Update linked calendar of this task
 	 *
-	 * @param {Object} calendar the calendar
+	 * @param {object} calendar the calendar
 	 * @memberof Contact
 	 */
 	updateCalendar(calendar) {
@@ -153,7 +151,7 @@ export default class Task {
 	 * e.g. ORG:ABC\, Inc.; will output an array because of the semi-colon
 	 *
 	 * @param {Array|string} data the data to normalize
-	 * @returns {string}
+	 * @return {string}
 	 * @memberof Task
 	 */
 	firstIfArray(data) {
@@ -631,7 +629,7 @@ export default class Task {
 	}
 
 	set sortOrder(sortOrder) {
-		// We expect an integer for the sort order.
+		// We expect a number for the sort order.
 		sortOrder = parseInt(sortOrder)
 		if (isNaN(sortOrder)) {
 			this.vtodo.removeProperty('x-apple-sort-order')
@@ -648,7 +646,7 @@ export default class Task {
 	 * Construct the default value for the sort order
 	 * from the created date.
 	 *
-	 * @returns {Integer} The sort order
+	 * @return {number} The sort order
 	 */
 	getSortOrder() {
 		// If there is no created date we return 0.
@@ -671,8 +669,8 @@ export default class Task {
 	/**
 	 * Checks if the task matches the search query
 	 *
-	 * @param {String} searchQuery The search string
-	 * @returns {Boolean} If the task matches
+	 * @param {string} searchQuery The search string
+	 * @return {boolean} If the task matches
 	 */
 	matches(searchQuery) {
 		// If the search query maches the previous search, we don't have to search again.

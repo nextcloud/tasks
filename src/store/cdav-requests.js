@@ -16,7 +16,6 @@
  *
  * You should have received a copy of the GNU Affero General Public
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
 'use strict'
 
@@ -25,10 +24,10 @@ import { namespaces as NS } from 'cdav-library'
 /**
  * Finds all VTODOs in a calendar with requested state and relation
  *
- * @param {Object} calendar The calendar
- * @param {Bool} completed Completed state of the VTODOs
- * @param {String} related uid of the parent VTODO
- * @returns {Promise<VTODO[]>}
+ * @param {object} calendar The calendar
+ * @param {boolean} completed Completed state of the VTODOs
+ * @param {string} related uid of the parent VTODO
+ * @return {Promise}
  */
 function findVTODObyState(calendar, completed, related) {
 	const query = {
@@ -71,6 +70,13 @@ function findVTODObyState(calendar, completed, related) {
 	return calendar.dav.calendarQuery([query])
 }
 
+/**
+ * Finds a VTODO by the uid
+ *
+ * @param {object} calendar The calendar to search in
+ * @param {string} taskUid The UID
+ * @return {object} The dav query
+ */
 function findVTODObyUid(calendar, taskUid) {
 	const query = {
 		name: [NS.IETF_CALDAV, 'comp-filter'],

@@ -1,4 +1,4 @@
-import calendars, { mapDavCollectionToCalendar } from 'Store/calendars.js'
+import calendars, { Calendar } from 'Store/calendars.js'
 import collections from 'Store/collections.js'
 import tasks from 'Store/tasks.js'
 import settings from 'Store/settings.js'
@@ -73,7 +73,7 @@ const calendarsData = [
 ]
 
 calendarsData.forEach(calendarData => {
-	const calendar = mapDavCollectionToCalendar(calendarData)
+	const calendar = Calendar(calendarData)
 	const tasks = calendarData.tasks.map(taskData => {
 		const task = new Task(taskData, calendar)
 		const response = {
