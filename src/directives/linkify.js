@@ -25,7 +25,7 @@ import linkifyStr from 'linkifyjs/string.js'
  * Directive to linkify innerHTML strings
  *
  * @param {object} el the bound element
- * @param {object} binding
+ * @param {object} binding Object containing directive parameters
  */
 function linkify(el, binding) {
 	el.innerHTML = linkifyStr(binding.value, {
