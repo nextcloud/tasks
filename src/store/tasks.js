@@ -19,9 +19,10 @@
  */
 'use strict'
 
-import Task from '../models/task.js'
 import { isParentInList, momentToICALTime } from './storeHelper.js'
 import SyncStatus from '../models/syncStatus.js'
+import Task from '../models/task.js'
+import { Calendar } from './calendars.js'
 import router from '../router.js'
 import { findVTODObyUid } from './cdav-requests.js'
 
@@ -514,7 +515,7 @@ const mutations = {
 	 * @param {object} state The store data
 	 * @param {object} data Destructuring object
 	 * @param {Task} data.task The task
-	 * @param {Integer} data.order The sort order
+	 * @param {number} data.order The sort order
 	 */
 	setSortOrder(state, { task, order }) {
 		Vue.set(task, 'sortOrder', order)
@@ -526,7 +527,7 @@ const mutations = {
 	 * @param {object} state The store data
 	 * @param {object} data Destructuring object
 	 * @param {Task} data.task The task
-	 * @param {Moment} data.due The due date moment
+	 * @param {moment} data.due The due date moment
 	 * @param {boolean} data.allDay Whether the date is all-day
 	 */
 	setDue(state, { task, due, allDay }) {
@@ -557,7 +558,7 @@ const mutations = {
 	 * @param {object} state The store data
 	 * @param {object} data Destructuring object
 	 * @param {Task} data.task The task
-	 * @param {Moment} data.start The start date moment
+	 * @param {moment} data.start The start date moment
 	 * @param {boolean} data.allDay Whether the date is all-day
 	 */
 	setStart(state, { task, start, allDay }) {
@@ -1246,7 +1247,7 @@ const actions = {
 	 * @param {object} context The store context
 	 * @param {object} data Destructuring object
 	 * @param {Task} data.task The task to update
-	 * @param {Integer} data.order The sort order
+	 * @param {number} data.order The sort order
 	 */
 	async setSortOrder(context, { task, order }) {
 		if (task.sortOrder === order) {
@@ -1284,7 +1285,7 @@ const actions = {
 	 * @param {object} context The store context
 	 * @param {object} data Destructuring object
 	 * @param {Task} data.task The task to update
-	 * @param {Integer} data.day The day to set
+	 * @param {number} data.day The day to set
 	 */
 	async setDate(context, { task, day }) {
 		const start = task.startMoment.startOf('day')

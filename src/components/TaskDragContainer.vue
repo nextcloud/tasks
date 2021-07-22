@@ -35,6 +35,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
+import Task from '../models/task.js'
 import { sort } from '../store/storeHelper.js'
 
 import draggable from 'vuedraggable'

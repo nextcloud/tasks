@@ -239,6 +239,7 @@ import SliderItem from '../components/AppSidebar/SliderItem.vue'
 import TagsItem from '../components/AppSidebar/TagsItem.vue'
 import NotesItem from '../components/AppSidebar/NotesItem.vue'
 // import TaskStatusDisplay from '../components/TaskStatusDisplay.vue'
+import Task from '../models/task.js'
 
 import { subscribe, unsubscribe } from '@nextcloud/event-bus'
 import moment from '@nextcloud/moment'

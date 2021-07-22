@@ -168,6 +168,7 @@ import { overdue, sort, searchSubTasks, isTaskInList } from '../store/storeHelpe
 import { linkify } from '../directives/linkify.js'
 import TaskStatusDisplay from './TaskStatusDisplay.vue'
 import TaskDragContainer from './TaskDragContainer.vue'
+import Task from '../models/task.js'
 
 import { emit } from '@nextcloud/event-bus'
 import moment from '@nextcloud/moment'

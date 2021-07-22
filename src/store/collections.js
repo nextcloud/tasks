@@ -45,12 +45,12 @@ const getters = {
 	 * @param {object} state The store data
 	 * @param {object} getters The store getters
 	 * @param {object} rootState The store root state
-	 * @return {Integer} Count of tasks in the collection
+	 * @return {number} Count of tasks in the collection
 	 */
 	getCollectionCount: (state, getters, rootState) =>
 		/**
 		 * @param {string} collectionId The id of the collection in question
-		 * @return {Integer} Count of tasks in the collection
+		 * @return {number} Count of tasks in the collection
 		 */
 		(collectionId) => {
 			let count = 0
@@ -88,7 +88,7 @@ const mutations = {
 	 * Sets the visibility of a collection
 	 *
 	 * @param {object} state The store data
-	 * @param {Collection} newCollection The collection to update
+	 * @param {object} newCollection The collection to update
 	 */
 	setVisibility(state, newCollection) {
 		const collection = state.collections.find(search => search.id === newCollection.id)
@@ -120,7 +120,7 @@ const actions = {
 	 * Writes the visibility of a collection to the server
 	 *
 	 * @param {object} context The store mutations
-	 * @param {Collection} collection The collection to change
+	 * @param {object} collection The collection to change
 	 * @return {Promise}
 	 */
 	setVisibility(context, collection) {

@@ -71,7 +71,7 @@ const state = {
  * @param {object} currentUserPrincipal The principal model of the current user principal
  * @return {object}
  */
-export function mapDavCollectionToCalendar(calendar, currentUserPrincipal) {
+export function Calendar(calendar, currentUserPrincipal) {
 	const owner = calendar.owner
 	let isSharedWithMe = false
 	if (!currentUserPrincipal) {
@@ -223,12 +223,12 @@ const getters = {
 	 * @param {object} state The store data
 	 * @param {object} getters The store getters
 	 * @param {object} rootState The store root state
-	 * @return {Integer} The number of tasks
+	 * @return {number} The number of tasks
 	 */
 	getCalendarCount: (state, getters, rootState) =>
 		/**
 		 * @param {string} calendarId The id of the requested calendar
-		 * @return {Integer} The number of tasks
+		 * @return {number} The number of tasks
 		 */
 		(calendarId) => {
 			const calendar = getters.getCalendarById(calendarId)
@@ -257,12 +257,12 @@ const getters = {
 	 *
 	 * @param {object} state The store data
 	 * @param {object} getters The store getters
-	 * @return {Integer} The count of closed tasks in a calendar
+	 * @return {number} The count of closed tasks in a calendar
 	 */
 	getCalendarCountClosed: (state, getters) =>
 		/**
 		 * @param {string} calendarId The id of the calendar in question
-		 * @return {Integer} The count of closed tasks in a calendar
+		 * @return {number} The count of closed tasks in a calendar
 		 */
 		(calendarId) => {
 			const calendar = getters.getCalendarById(calendarId)
@@ -574,7 +574,7 @@ const mutations = {
 	 * @param {object} state The store data
 	 * @param {object} data Destructuring object
 	 * @param {Calendar} data.calendar The calendar
-	 * @param {Integer} data.order The sort order
+	 * @param {number} data.order The sort order
 	 */
 	setCalendarOrder(state, { calendar, order }) {
 		Vue.set(calendar, 'order', order)
@@ -594,7 +594,7 @@ const actions = {
 	async getCalendarsAndTrashBin({ commit, state, getters }) {
 		let { calendars, trashBins } = await client.calendarHomes[0].findAllCalDAVCollectionsGrouped()
 		calendars = calendars.map(calendar => {
-			return mapDavCollectionToCalendar(calendar, getters.getCurrentUserPrincipal)
+			return Calendar(calendar, getters.getCurrentUserPrincipal)
 		})
 
 		// Remove calendars which don't support tasks
@@ -658,7 +658,7 @@ const actions = {
 	async appendCalendar(context, calendar) {
 		return client.calendarHomes[0].createCalendarCollection(calendar.displayName, calendar.color, ['VTODO'])
 			.then((response) => {
-				calendar = mapDavCollectionToCalendar(response, context.getters.getCurrentUserPrincipal)
+				calendar = Calendar(response, context.getters.getCurrentUserPrincipal)
 				context.commit('addCalendar', calendar)
 				// Open the calendar
 				router.push({ name: 'calendars', params: { calendarId: calendar.id } })
@@ -724,7 +724,7 @@ const actions = {
 	 *
 	 * @param {object} context the store mutations
 	 * @param {object} data destructuring object
-	 * @param {vobject} data.vobject Calendar-object to delete
+	 * @param {object} data.vobject Calendar-object to delete
 	 * @return {Promise<void>}
 	 */
 	async deleteCalendarObjectPermanently(context, { vobject }) {
@@ -900,7 +900,7 @@ const actions = {
 	 * @param {object} context The store context
 	 * @param {object} data Destructuring object
 	 * @param {Calendar} data.calendar The calendar to update
-	 * @param {Integer} data.order The sort order
+	 * @param {number} data.order The sort order
 	 */
 	async setCalendarOrder(context, { calendar, order }) {
 		if (calendar.order === order) {

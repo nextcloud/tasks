@@ -59,7 +59,7 @@ const getDefaultCalendarObjectObject = (props = {}) => Object.assign({}, {
 /**
  * Maps a calendar-object from c-dav to our calendar-object object
  *
- * @param {VObject} dav The c-dav VObject
+ * @param {object} dav The c-dav VObject
  * @param {string} calendarId The calendar-id this object is associated with
  * @return {object}
  */

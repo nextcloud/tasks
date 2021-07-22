@@ -43,8 +43,8 @@ export const uidToColor = (uid) => {
 	 * Convert a string to an integer evenly
 	 *
 	 * @param {string} hash The string to convert
-	 * @param {integer} maximum The maximum value
-	 * @return {integer} The integer calculated
+	 * @param {number} maximum The maximum value
+	 * @return {number} The integer calculated
 	 */
 	function hashToInt(hash, maximum) {
 		let finalInt = 0
@@ -71,9 +71,9 @@ export const uidToColor = (uid) => {
 /**
  * Color object
  *
- * @param {integer} r The red value
- * @param {integer} g The green value
- * @param {integer} b The blue value
+ * @param {number} r The red value
+ * @param {number} g The green value
+ * @param {number} b The blue value
  */
 function Color(r, g, b) {
 	this.r = r
@@ -84,7 +84,7 @@ function Color(r, g, b) {
 /**
  * Calculate the number of steps
  *
- * @param {integer} steps The number of steps
+ * @param {number} steps The number of steps
  * @param {Array} ends The ends
  * @return {Array} Array containing the number of steps per color
  */
@@ -99,7 +99,7 @@ function stepCalc(steps, ends) {
 /**
  * Create a color palette from two colors
  *
- * @param {integer} steps The number of steps the palette has
+ * @param {number} steps The number of steps the palette has
  * @param {string} color1 The first color
  * @param {string} color2 The second color
  * @return {Array} The created palette array

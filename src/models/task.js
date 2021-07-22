@@ -629,7 +629,7 @@ export default class Task {
 	}
 
 	set sortOrder(sortOrder) {
-		// We expect an integer for the sort order.
+		// We expect a number for the sort order.
 		sortOrder = parseInt(sortOrder)
 		if (isNaN(sortOrder)) {
 			this.vtodo.removeProperty('x-apple-sort-order')
@@ -646,7 +646,7 @@ export default class Task {
 	 * Construct the default value for the sort order
 	 * from the created date.
 	 *
-	 * @return {Integer} The sort order
+	 * @return {number} The sort order
 	 */
 	getSortOrder() {
 		// If there is no created date we return 0.
