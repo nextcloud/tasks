@@ -24,6 +24,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		<div v-if="$route.params.collectionId !== 'completed' && calendar && !calendar.readOnly"
 			class="header__input">
 			<form @submit.prevent="addTask">
+				<Plus slot="icon" :size="24" decorative />
 				<input
 					v-model="newTaskName"
 					:placeholder="placeholder"
@@ -41,11 +42,14 @@ import SortorderDropdown from './SortorderDropdown.vue'
 
 import moment from '@nextcloud/moment'
 
+import Plus from 'vue-material-design-icons/Plus.vue'
+
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
 	components: {
 		SortorderDropdown,
+		Plus,
 	},
 	data() {
 		return {
@@ -132,6 +136,12 @@ $breakpoint-mobile: 1024px;
 		position: relative;
 		width: calc(100% - 44px);
 
+		.material-design-icon {
+			position: absolute;
+			top: 10px;
+			left: 10px;
+		}
+
 		input {
 			box-shadow: 0 0 1px var(--color-box-shadow);
 			border: medium none !important;
@@ -140,7 +150,7 @@ $breakpoint-mobile: 1024px;
 			cursor: text;
 			font-size: 100%;
 			margin: 0;
-			padding: 0 15px;
+			padding: 0 15px 0 44px;
 			width: 100%;
 			min-height: 44px;
 			overflow: hidden;
