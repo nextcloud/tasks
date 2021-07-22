@@ -146,6 +146,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				v-click-outside="{ handler: closeSubtaskInput, middleware: clickOutsideMiddleware }"
 				class="task-item task-item--input">
 				<form name="addTaskForm" @submit.prevent="addTask">
+					<Plus slot="icon" :size="24" decorative />
 					<input ref="input"
 						v-model="newTaskName"
 						:placeholder="subtasksCreationPlaceholder"
@@ -635,6 +636,7 @@ $breakpoint-mobile: 1024px;
 }
 
 .task-item {
+	position: relative;
 	cursor: default;
 	list-style: none outside none;
 
@@ -657,6 +659,12 @@ $breakpoint-mobile: 1024px;
 	&--input {
 		border-top: 1px solid var(--color-border);
 
+		.material-design-icon {
+			position: absolute;
+			top: 10px;
+			left: 10px;
+		}
+
 		input {
 			border-radius: 0;
 			border: medium none !important;
@@ -665,7 +673,7 @@ $breakpoint-mobile: 1024px;
 			cursor: text;
 			font-size: 100%;
 			margin: 0;
-			padding: 0 15px;
+			padding: 0 15px 0 44px;
 			width: 100%;
 			min-height: 44px;
 			overflow: hidden;
