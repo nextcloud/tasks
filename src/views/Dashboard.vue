@@ -22,38 +22,46 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
 <template>
-	<DashboardWidget
-		id="tasks_panel"
-		:items="tasks"
-		empty-content-icon="icon-tasks"
-		:empty-content-message="t('tasks', 'No upcoming tasks')"
-		:show-more-text="t('tasks', 'upcoming tasks')"
-		:loading="loading"
-		:show-items-and-empty-content="!hasTaskToday"
-		:half-empty-content-message="t('tasks', 'No tasks today')">
-		<template #default="{ item }">
-			<DashboardWidgetItem
-				:main-text="item.summary"
-				:sub-text="formatSubtext(item)"
-				:target-url="getTasksAppUrl(item)">
-				<template #avatar>
-					<div
-						class="calendar-dot"
-						:style="{'background-color': item.calendar.color}"
-						:title="item.calendar.displayName" />
-				</template>
-			</DashboardWidgetItem>
-		</template>
-	</DashboardWidget>
+	<div>
+		<DashboardWidget
+			id="tasks_panel"
+			:items="tasks"
+			empty-content-icon="icon-tasks"
+			:empty-content-message="t('tasks', 'No upcoming tasks')"
+			:show-more-text="t('tasks', 'upcoming tasks')"
+			:loading="loading"
+			:show-items-and-empty-content="!hasTaskToday"
+			:half-empty-content-message="t('tasks', 'No tasks today')">
+			<template #default="{ item }">
+				<DashboardWidgetItem
+					:main-text="item.summary"
+					:sub-text="formatSubtext(item)"
+					:target-url="getTasksAppUrl(item)">
+					<template #avatar>
+						<div
+							class="calendar-dot"
+							:style="{'background-color': item.calendar.color}"
+							:title="item.calendar.displayName" />
+					</template>
+				</DashboardWidgetItem>
+			</template>
+		</DashboardWidget>
+		<div class="center-button">
+			<button @click="toggleAddTaskModel">
+				{{ t('tasks', 'Create a new task') }}
+			</button>
+			<TaskCreateDialog v-if="showAddTaskModal" @close="toggleAddTaskModel" />
+		</div>
+	</div>
 </template>
 
 <script>
 import { sort, isTaskInList } from '../store/storeHelper.js'
 import client from '../services/cdav.js'
-
+import TaskCreateDialog from '../components/TaskCreateDialog.vue'
 import { generateUrl } from '@nextcloud/router'
 import { DashboardWidget, DashboardWidgetItem } from '@nextcloud/vue-dashboard'
-import { translate } from '@nextcloud/l10n'
+import { translate as t } from '@nextcloud/l10n'
 
 import { mapState } from 'vuex'
 
@@ -62,11 +70,13 @@ export default {
 	components: {
 		DashboardWidget,
 		DashboardWidgetItem,
+		TaskCreateDialog,
 	},
 	data() {
 		return {
 			loading: true,
 			tasks: [],
+			showAddTaskModal: false,
 		}
 	},
 	computed: {
@@ -102,7 +112,7 @@ export default {
 				if (this.$OCA.Theming) {
 					color = this.$OCA.Theming.color
 				}
-				await this.$store.dispatch('appendCalendar', { displayName: translate('tasks', 'Tasks'), color })
+				await this.$store.dispatch('appendCalendar', { displayName: t('tasks', 'Tasks'), color })
 				this.fetchTasks()
 			// else, let's get those tasks!
 			} else {
@@ -113,7 +123,7 @@ export default {
 			Promise.all(this.calendars.map(calendar =>
 				this.$store.dispatch('getTasksFromCalendar', { calendar, completed: false, related: null })
 			)).then(results => {
-				this.tasks = sort([...results.flat().filter(task => !task.closed)])
+				this.tasks = sort([...results.flat().filter(task => !task.closed)]).slice(0, 6)
 				this.loading = false
 			})
 		},
@@ -123,34 +133,34 @@ export default {
 		 */
 		formatSubtext(task) {
 			if (!task.dueMoment.isValid()) {
-				return translate('tasks', 'No due date assigned')
+				return t('tasks', 'No due date assigned')
 			}
 			if (task.allDay) {
 				return task.dueMoment.calendar(null, {
-					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-					lastDay: translate('tasks', '[Due yesterday]'),
-					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-					sameDay: translate('tasks', '[Due today]'),
-					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-					nextDay: translate('tasks', '[Due tomorrow]'),
-					lastWeek: translate('tasks', '[Due] L'),
-					nextWeek: translate('tasks', '[Due] L'),
-					sameElse: translate('tasks', '[Due] L'),
+					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please t the string and keep the brackets.
+					lastDay: t('tasks', '[Due yesterday]'),
+					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please t the string and keep the brackets.
+					sameDay: t('tasks', '[Due today]'),
+					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please t the string and keep the brackets.
+					nextDay: t('tasks', '[Due tomorrow]'),
+					lastWeek: t('tasks', '[Due] L'),
+					nextWeek: t('tasks', '[Due] L'),
+					sameElse: t('tasks', '[Due] L'),
 				})
 			} else {
 				return task.dueMoment.calendar(null, {
-					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-					lastDay: translate('tasks', '[Due yesterday at] LT'),
-					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-					sameDay: translate('tasks', '[Due today at] LT'),
-					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-					nextDay: translate('tasks', '[Due tomorrow at] LT'),
-					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-					lastWeek: translate('tasks', '[Due] L [at] LT'),
-					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-					nextWeek: translate('tasks', '[Due] L [at] LT'),
-					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-					sameElse: translate('tasks', '[Due] L [at] LT'),
+					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please t the string and keep the brackets.
+					lastDay: t('tasks', '[Due yesterday at] LT'),
+					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please t the string and keep the brackets.
+					sameDay: t('tasks', '[Due today at] LT'),
+					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please t the string and keep the brackets.
+					nextDay: t('tasks', '[Due tomorrow at] LT'),
+					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please t the string and keep the brackets.
+					lastWeek: t('tasks', '[Due] L [at] LT'),
+					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please t the string and keep the brackets.
+					nextWeek: t('tasks', '[Due] L [at] LT'),
+					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please t the string and keep the brackets.
+					sameElse: t('tasks', '[Due] L [at] LT'),
 				})
 			}
 		},
@@ -160,6 +170,10 @@ export default {
 		 */
 		getTasksAppUrl(task) {
 			return generateUrl('apps/tasks') + `/#/calendars/${task.calendar.id}/tasks/${task.uri}`
+		},
+
+		toggleAddTaskModel() {
+			this.showAddTaskModal = !this.showAddTaskModal
 		},
 	},
 
@@ -176,5 +190,10 @@ export default {
 		min-width: 1rem;
 		min-height: 1rem;
 	}
+}
+
+.center-button {
+	text-align: center;
+	margin-top: 10px;
 }
 </style>

@@ -144,6 +144,7 @@ export default {
 		},
 
 		close() {
+			this.$emit('close')
 			this.$root.$emit('close')
 		},
 
