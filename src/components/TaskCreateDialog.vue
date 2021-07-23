@@ -37,22 +37,28 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					:calendars="writableCalendars"
 					@changeCalendar="changeCalendar" />
 
-				<input v-model="pendingTitle"
-					type="text"
-					:placeholder="t('tasks', 'Create a new task')"
-					:disabled="loading">
+				<div class="property property__summary">
+					<ViewHeadline slot="icon" :size="24" decorative />
+					<input v-model="pendingTitle"
+						type="text"
+						:placeholder="t('tasks', 'Task summary')"
+						:disabled="loading">
+				</div>
 
-				<textarea v-model="pendingDescription"
-					:disabled="loading" />
-				<div class="modal-buttons">
-					<button @click="close">
-						{{ t('tasks', 'Cancel') }}
-					</button>
-					<button :disabled="loading"
-						class="primary"
-						@click="addTask">
-						{{ t('tasks', 'Create task') }}
-					</button>
+				<div class="property property__notes">
+					<TextBoxOutline slot="icon" :size="24" decorative />
+					<textarea v-model="pendingDescription"
+						:disabled="loading" />
+					<div class="modal-buttons">
+						<button @click="close">
+							{{ t('tasks', 'Cancel') }}
+						</button>
+						<button :disabled="loading"
+							class="primary"
+							@click="addTask">
+							{{ t('tasks', 'Create task') }}
+						</button>
+					</div>
 				</div>
 			</div>
 			<div v-else id="modal-inner">
@@ -85,6 +91,9 @@ import { generateUrl } from '@nextcloud/router'
 import EmptyContent from '@nextcloud/vue/dist/Components/EmptyContent'
 import Modal from '@nextcloud/vue/dist/Components/Modal'
 
+import TextBoxOutline from 'vue-material-design-icons/TextBoxOutline.vue'
+import ViewHeadline from 'vue-material-design-icons/ViewHeadline.vue'
+
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -93,6 +102,8 @@ export default {
 		CalendarPickerItem,
 		EmptyContent,
 		Modal,
+		TextBoxOutline,
+		ViewHeadline,
 	},
 	props: {
 		title: {
@@ -191,9 +202,42 @@ export default {
 		min-height: 200px;
 	}
 
-	input, textarea {
-		width: 100%;
-		margin-bottom: 10px !important;
+	.property__item {
+		border-bottom: none;
+		margin-bottom: 3px;
+
+		&::v-deep .multiselect {
+			border: 1px solid var(--color-border-dark);
+			border-radius: var(--border-radius);
+		}
+	}
+
+	.property {
+		position: relative;
+
+		.material-design-icon {
+			position: absolute;
+			top: 10px;
+			left: 10px;
+		}
+
+		input,
+		textarea {
+			width: 100%;
+			font-size: var(--default-font-size);
+			padding-left: 44px;
+		}
+
+		input {
+			height: 44px !important;
+			margin: 0;
+		}
+
+		textarea {
+			min-width: 100%;
+			max-width: 100%;
+			min-height: 100px;
+		}
 	}
 
 	.modal-buttons {
@@ -203,5 +247,12 @@ export default {
 
 	.task-selector::v-deep .modal-container {
 		overflow: visible !important;
+	}
+
+	::v-deep {
+		.calendar-picker-option__label,
+		.property__item .multiselect__tags input.multiselect__input {
+			font-weight: normal;
+		}
 	}
 </style>
