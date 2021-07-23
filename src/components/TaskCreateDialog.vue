@@ -151,7 +151,7 @@ export default {
 			this.loading = true
 			await client.connect({ enableCalDAV: true })
 			await this.$store.dispatch('fetchCurrentUserPrincipal')
-			await this.$store.dispatch('getCalendars')
+			await this.$store.dispatch('getCalendarsAndTrashBin')
 			// TODO: Would be good to select the default calendar instead of the first one
 			this.pendingCalendar = this.writableCalendars[0]
 			this.loading = false
