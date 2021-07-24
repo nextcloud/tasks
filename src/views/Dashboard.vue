@@ -123,7 +123,7 @@ export default {
 			Promise.all(this.calendars.map(calendar =>
 				this.$store.dispatch('getTasksFromCalendar', { calendar, completed: false, related: null })
 			)).then(results => {
-				this.tasks = sort([...results.flat().filter(task => !task.closed)]).slice(0, 6)
+				this.tasks = sort([...results.flat().filter(task => !task.closed)]).slice(0, this.hasTaskToday ? 6 : 4)
 				this.loading = false
 			})
 		},
