@@ -31,7 +31,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		@start-editing="newTitle = task.summary"
 		@update:titleEditable="editTitle"
 		@update:title="updateTitle"
-		@submit-title="saveTitle"
+		@submit-title="saveTitle()"
 		@close="closeAppSidebar()">
 		<template v-if="task" #description>
 			<DatetimePickerItem
@@ -297,6 +297,17 @@ export default {
 		NotesItem,
 		// TaskStatusDisplay,
 	},
+	/**
+	 * Before we navigate to a new task, we save possible edits to the task title.
+	 *
+	 * @param {object} to The target Route Object being navigated to.
+	 * @param {object} from The current route being navigated away from.
+	 * @param {Function} next This function must be called to resolve the hook.
+	 */
+	beforeRouteUpdate(to, from, next) {
+		this.saveTitle()
+		next()
+	},
 	props: {
 		active: {
 			type: String,
@@ -329,6 +340,7 @@ export default {
 				},
 			],
 			newTitle: '',
+			titleSaved: true,
 			activeTab: this.active,
 		}
 	},
@@ -731,6 +743,7 @@ export default {
 		},
 
 		closeAppSidebar() {
+			this.saveTitle()
 			if (this.$route.params.calendarId) {
 				this.$router.push({ name: 'calendars', params: { calendarId: this.$route.params.calendarId } })
 			} else {
@@ -746,20 +759,22 @@ export default {
 			if (this.readOnly) {
 				return
 			}
-			this.editingTitle = editing
-			if (this.editingTitle) {
+			if (!this.editingTitle && editing) {
 				this.newTitle = this.task.summary
 			}
+			this.editingTitle = editing
 		},
 
 		updateTitle(title) {
 			this.newTitle = title
+			this.titleSaved = false
 		},
 
-		saveTitle() {
-			if (this.newTitle !== this.task.summary) {
-				this.setSummary({ task: this.task, summary: this.newTitle })
+		saveTitle(task = this.task) {
+			if (!this.titleSaved && this.newTitle !== task.summary) {
+				this.setSummary({ task, summary: this.newTitle })
 			}
+			this.titleSaved = true
 		},
 
 		/**
