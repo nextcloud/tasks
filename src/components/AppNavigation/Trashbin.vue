@@ -32,7 +32,6 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			<Modal v-if="showModal"
 				@close="showModal = false">
 				<div class="modal__content">
-					<h2>{{ t('tasks', 'Trash bin') }}</h2>
 					<EmptyContent v-if="loading" icon="icon-loading">
 						{{ t('tasks', 'Loading deleted calendars, tasks and events.') }}
 					</EmptyContent>
@@ -44,6 +43,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						{{ t('tasks', 'You do not have any deleted calendars, tasks or events.') }}
 					</EmptyContent>
 					<template v-else>
+						<h2>{{ t('tasks', 'Trash bin') }}</h2>
 						<div class="table">
 							<div class="table__header">
 								{{ t('tasks', 'Name') }}
