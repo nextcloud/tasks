@@ -82,12 +82,22 @@ const mapCDavObjectToCalendarObject = (dav, calendarId) => {
 	const vObjectIterator = calendarComponent.getVObjectIterator()
 	const firstVObject = vObjectIterator.next().value
 
+	// Find the parent id if any
+	let parent = null
+	for (const rel of firstVObject.getRelationIterator()) {
+		if (rel.relationType === 'PARENT') {
+			parent = rel.relatedId
+			break
+		}
+	}
+
 	return getDefaultCalendarObjectObject({
 		id: btoa(dav.url),
 		calendarId,
 		dav,
 		calendarComponent,
 		uid: firstVObject.uid,
+		parent,
 		uri: dav.url,
 		objectType: firstVObject.name,
 		isEvent: firstVObject.name === COMPONENT_NAME_EVENT,

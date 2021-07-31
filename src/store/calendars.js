@@ -708,15 +708,54 @@ const actions = {
 	},
 
 	async restoreCalendarObject({ commit, state, dispatch }, { vobject }) {
+
+		// Restore the direct ancestor(s)
+		await dispatch('restoreCalendarObjectAncestor', { vobject })
+
+		// Restore the object itself
 		await state.trashBin.restore(vobject.uri)
 
 		// Clean up the data locally
 		commit('removeDeletedCalendarObject', { vobject })
 
-		// It would be more elegant to only add the restored task
+		// Restore all children
+		await dispatch('restoreCalendarObjectChildren', { vobject })
+
 		if (vobject.isTodo) {
 			dispatch('getTasksFromCalendar', { calendar: vobject.calendar })
 		}
+	},
+
+	async restoreCalendarObjectAncestor({ dispatch, commit }, { vobject }) {
+		// Find the direct ancestor(s)
+		const ancestors = state.deletedCalendarObjects.filter(v => {
+			return v.uid === vobject.parent
+		})
+		// Restore the ancestor(s)
+		await Promise.all(ancestors.map(async ancestor => {
+			await dispatch('restoreCalendarObjectAncestor', { vobject: ancestor })
+
+			// Restore the ancestor
+			await state.trashBin.restore(ancestor.uri)
+			// Clean up the data locally
+			commit('removeDeletedCalendarObject', { vobject: ancestor })
+		}))
+	},
+
+	async restoreCalendarObjectChildren({ state, dispatch, commit }, { vobject }) {
+		// Find the children
+		const children = state.deletedCalendarObjects.filter(v => {
+			return v.parent === vobject.uid
+		})
+		// Restore the children
+		await Promise.all(children.map(async child => {
+			// Restore the child
+			await state.trashBin.restore(child.uri)
+			// Clean up the data locally
+			commit('removeDeletedCalendarObject', { vobject: child })
+
+			return await dispatch('restoreCalendarObjectChildren', { vobject: child })
+		}))
 	},
 
 	/**
