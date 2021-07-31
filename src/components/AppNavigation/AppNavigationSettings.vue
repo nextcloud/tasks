@@ -140,7 +140,7 @@ li {
 
 	&.collection {
 		.material-design-icon {
-			margin-right: 10px;
+			margin-right: 16px;
 		}
 
 		.label-container {
