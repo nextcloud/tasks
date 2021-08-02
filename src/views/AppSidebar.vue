@@ -44,7 +44,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				:task="task"
 				@editing="(editing) => editingStart = editing"
 				@setValue="setStartDate">
-				<CalendarStart slot="icon" :size="24" decorative />
+				<template #icon>
+					<CalendarStart :size="24" decorative />
+				</template>
 			</DatetimePickerItem>
 			<DatetimePickerItem
 				v-show="!readOnly || task.due"
@@ -56,7 +58,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				:task="task"
 				@editing="(editing) => editingDue = editing"
 				@setValue="setDueDate">
-				<CalendarEnd slot="icon" :size="24" decorative />
+				<template #icon>
+					<CalendarEnd :size="24" decorative />
+				</template>
 			</DatetimePickerItem>
 			<CheckboxItem
 				v-show="showAllDayToggle"
@@ -75,38 +79,44 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		<template v-if="!task || (task && task.deleteCountdown === null)" #secondary-actions>
 			<ActionButton v-if="!readOnly"
 				@click="togglePinned(task)">
-				<PinOff v-if="task.pinned"
-					slot="icon"
-					:size="24"
-					decorative />
-				<Pin v-else
-					slot="icon"
-					:size="24"
-					decorative />
+				<template v-if="task.pinned" #icon>
+					<PinOff :size="24" decorative />
+				</template>
+				<template v-else #icon>
+					<Pin :size="24" decorative />
+				</template>
 				{{ task.pinned ? $t('tasks', 'Unpin') : $t('tasks', 'Pin') }}
 			</ActionButton>
 			<ActionLink v-if="showInCalendar"
 				:href="calendarLink"
 				:close-after-click="true"
 				target="_blank">
-				<Calendar slot="icon" :size="24" decorative />
+				<template #icon>
+					<Calendar :size="24" decorative />
+				</template>
 				{{ $t('tasks', 'Show in Calendar') }}
 			</ActionLink>
 			<ActionButton v-if="!readOnly"
 				:close-after-click="true"
 				@click="editTitle(true)">
-				<Pencil slot="icon" :size="24" decorative />
+				<template #icon>
+					<Pencil :size="24" decorative />
+				</template>
 				{{ $t('tasks', 'Edit title') }}
 			</ActionButton>
 			<ActionLink
 				:href="downloadURL"
 				:close-after-click="true">
-				<Download slot="icon" :size="24" decorative />
+				<template #icon>
+					<Download :size="24" decorative />
+				</template>
 				{{ $t('tasks', 'Download') }}
 			</ActionLink>
 			<ActionButton v-if="!readOnly"
 				@click="scheduleTaskDeletion(task)">
-				<Delete slot="icon" :size="24" decorative />
+				<template #icon>
+					<Delete :size="24" decorative />
+				</template>
 				{{ $t('tasks', 'Delete') }}
 			</ActionButton>
 		</template>
@@ -114,7 +124,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			<ActionButton
 				class="reactive no-nav"
 				@click.prevent.stop="clearTaskDeletion(task)">
-				<Undo slot="icon" :size="24" decorative />
+				<template #icon>
+					<Undo :size="24" decorative />
+				</template>
 				{{ $n('tasks', 'Deleting the task in {countdown} second', 'Deleting the task in {countdown} seconds', task.deleteCountdown, { countdown: task.deleteCountdown }) }}
 			</ActionButton>
 		</template>
@@ -141,7 +153,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			class="app-sidebar-tab"
 			:name="$t('tasks', 'Details')"
 			:order="0">
-			<InformationOutline slot="icon" :size="24" decorative />
+			<template #icon>
+				<InformationOutline :size="24" decorative />
+			</template>
 			<div>
 				<MultiselectItem
 					v-show="!readOnly || task.class !== 'PUBLIC'"
@@ -169,7 +183,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					:color="priorityColor"
 					:task="task"
 					@setValue="({task, value}) => setPriority({ task, priority: value })">
-					<Star slot="icon" :size="24" decorative />
+					<template #icon>
+						<Star :size="24" decorative />
+					</template>
 				</SliderItem>
 				<SliderItem
 					v-show="!readOnly || task.complete"
@@ -181,7 +197,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					:color="task.complete > 0 ? '#4271a6' : null"
 					:task="task"
 					@setValue="({task, value}) => setPercentComplete({ task, complete: value })">
-					<Percent slot="icon" :size="24" decorative />
+					<template #icon>
+						<Percent :size="24" decorative />
+					</template>
 				</SliderItem>
 				<TagsItem
 					v-show="!readOnly || task.tags.length > 0"
@@ -203,7 +221,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			class="app-sidebar-tab"
 			:name="$t('tasks', 'Notes')"
 			:order="1">
-			<TextBoxOutline slot="icon" :size="24" decorative />
+			<template #icon>
+				<TextBoxOutline :size="24" decorative />
+			</template>
 			<NotesItem
 				v-show="!readOnly || task.note"
 				:value="task.note"

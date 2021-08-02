@@ -38,13 +38,13 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			track-by="type"
 			@input="change"
 			@tag="change">
-			<template slot="placeholder">
+			<template #placeholder>
 				<MultiselectOption :display-name="placeholder" :icon="icon" />
 			</template>
-			<template slot="singleLabel" slot-scope="scope">
+			<template #singleLabel="scope">
 				<MultiselectOption v-bind="scope.option" />
 			</template>
-			<template slot="option" slot-scope="scope">
+			<template #option="scope">
 				<MultiselectOption v-bind="scope.option" />
 			</template>
 		</Multiselect>

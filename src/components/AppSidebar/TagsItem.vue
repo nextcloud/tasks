@@ -35,15 +35,15 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			:tag-placeholder="$t('tasks', 'Add this as a new tag')"
 			@input="setTags"
 			@tag="addTag">
-			<template slot="placeholder">
+			<template #placeholder>
 				<MultiselectOption :display-name="placeholder" :icon="icon" />
 			</template>
-			<template slot="clear">
+			<template #clear>
 				<div v-if="tags.length" class="multiselect__icon">
 					<Tag :size="24" decorative />
 				</div>
 			</template>
-			<template slot="noOptions">
+			<template #noOptions>
 				{{ $t('tasks', 'No tag available. Create one!') }}
 			</template>
 		</Multiselect>

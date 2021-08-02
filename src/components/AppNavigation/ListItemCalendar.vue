@@ -32,15 +32,19 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		@dragover.native="dragOver"
 		@dragenter.native="dragEnter"
 		@dragleave.native="dragLeave">
-		<AppNavigationIconBullet slot="icon" :color="calendar.color" />
+		<template #icon>
+			<AppNavigationIconBullet :color="calendar.color" />
+		</template>
 
-		<template v-if="!deleteTimeout" slot="counter">
+		<template v-if="!deleteTimeout" #counter>
 			<Actions v-if="calendar.canBeShared"
 				:class="{shared: hasShares}"
 				class="sharing">
 				<ActionButton
 					@click="toggleShare">
-					<ShareVariant slot="icon" :size="24" decorative />
+					<template #icon>
+						<ShareVariant :size="24" decorative />
+					</template>
 					{{ sharedWithTooltip }}
 				</ActionButton>
 			</Actions>
@@ -51,20 +55,24 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			</AppNavigationCounter>
 		</template>
 
-		<template v-if="!deleteTimeout" slot="actions">
+		<template v-if="!deleteTimeout" #actions>
 			<ActionButton
 				v-if="!calendar.readOnly"
 				icon="icon-rename"
 				class="edit-calendar"
 				:close-after-click="true"
 				@click="editCalendar">
-				<Pencil slot="icon" :size="24" decorative />
+				<template #icon>
+					<Pencil :size="24" decorative />
+				</template>
 				{{ $t('tasks', 'Edit') }}
 			</ActionButton>
 			<ActionButton
 				:close-after-click="true"
 				@click="copyCalDAVUrl($event, calendar)">
-				<LinkVariant slot="icon" :size="24" decorative />
+				<template #icon>
+					<LinkVariant :size="24" decorative />
+				</template>
 				{{ !copied
 					? $t('tasks', 'Copy private link')
 					: copySuccess
@@ -75,7 +83,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				icon="icon-download"
 				:close-after-click="true"
 				:href="exportUrl">
-				<Download slot="icon" :size="24" decorative />
+				<template #icon>
+					<Download :size="24" decorative />
+				</template>
 				{{ $t('tasks', 'Download') }}
 			</ActionLink>
 			<ActionButton
@@ -86,24 +96,22 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					content: deleteMessage
 				}"
 				@click="scheduleDelete">
-				<Delete
-					v-if="!calendar.isSharedWithMe"
-					slot="icon"
-					:size="24"
-					decorative />
-				<Close
-					v-else
-					slot="icon"
-					:size="24"
-					decorative />
+				<template v-if="!calendar.isSharedWithMe" #icon>
+					<Delete :size="24" decorative />
+				</template>
+				<template v-else #icon>
+					<Close :size="24" decorative />
+				</template>
 				{{ !calendar.isSharedWithMe ? $t('tasks', 'Delete') : $t('tasks', 'Unshare') }}
 			</ActionButton>
 		</template>
 
-		<template v-if="!!deleteTimeout" slot="actions">
+		<template v-else #actions>
 			<ActionButton
 				@click.prevent.stop="cancelDelete">
-				<Undo slot="icon" :size="24" decorative />
+				<template #icon>
+					<Undo :size="24" decorative />
+				</template>
 				{{ undoDeleteMessage }}
 			</ActionButton>
 		</template>

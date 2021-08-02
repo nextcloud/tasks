@@ -24,7 +24,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 		:title="$t('tasks', 'Change sort order')"
 		container=".header"
 		menu-align="right">
-		<template slot="icon">
+		<template #icon>
 			<component :is="sortOrderIcon" :size="24" decorative />
 			<MenuDown
 				v-if="sortDirection"
@@ -48,7 +48,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 			:class="{selected: sortOrder === order.id}"
 			:close-after-click="true"
 			@click="setSortOrder(order.id)">
-			<template slot="icon">
+			<template #icon>
 				<component :is="order.icon" :size="24" decorative />
 				<MenuDown
 					v-if="order.id == sortOrder && sortDirection"

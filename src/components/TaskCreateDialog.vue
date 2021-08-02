@@ -38,7 +38,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					@changeCalendar="changeCalendar" />
 
 				<div class="property property__summary">
-					<ViewHeadline slot="icon" :size="24" decorative />
+					<ViewHeadline :size="24" decorative />
 					<input v-model="pendingTitle"
 						type="text"
 						:placeholder="t('tasks', 'Task summary')"
@@ -46,7 +46,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				</div>
 
 				<div class="property property__notes">
-					<TextBoxOutline slot="icon" :size="24" decorative />
+					<TextBoxOutline :size="24" decorative />
 					<textarea v-model="pendingDescription"
 						:disabled="loading" />
 					<div class="modal-buttons">

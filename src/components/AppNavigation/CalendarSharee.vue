@@ -27,7 +27,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 <template>
 	<AppNavigationItem
 		:title="sharee.displayName">
-		<template slot="icon">
+		<template #icon>
 			<div v-if="sharee.isGroup" class="avatar icon-group" />
 			<div v-else-if="sharee.isCircle" class="avatar icon-circle" />
 			<Avatar v-else
@@ -36,7 +36,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 				:disable-menu="true" />
 		</template>
 
-		<template slot="counter">
+		<template #counter>
 			<ActionCheckbox
 				:disabled="loading"
 				:checked="writeable"
@@ -45,11 +45,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 			</ActionCheckbox>
 		</template>
 
-		<template slot="actions">
+		<template #actions>
 			<ActionButton
 				:disabled="loading"
 				@click.prevent.stop="deleteSharee">
-				<Delete slot="icon" :size="24" decorative />
+				<template #icon>
+					<Delete :size="24" decorative />
+				</template>
 				{{ $t('tasks', 'Unshare with {displayName}', { displayName: sharee.displayName }) }}
 			</ActionButton>
 		</template>

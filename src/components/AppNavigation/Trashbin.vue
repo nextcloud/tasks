@@ -24,10 +24,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 	<AppNavigationItem :title="t('tasks', 'Trash bin')"
 		:pinned="true"
 		@click.prevent="onShow">
-		<Delete
-			slot="icon"
-			:size="24"
-			decorative />
+		<template #icon>
+			<Delete :size="24" decorative />
+		</template>
 		<template #extra>
 			<Modal v-if="showModal"
 				@close="showModal = false">
@@ -36,10 +35,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						{{ t('tasks', 'Loading deleted calendars, tasks and events.') }}
 					</EmptyContent>
 					<EmptyContent v-else-if="!items.length">
-						<Delete
-							slot="icon"
-							:size="24"
-							decorative />
+						<template #icon>
+							<Delete :size="24" decorative />
+						</template>
 						{{ t('tasks', 'You do not have any deleted calendars, tasks or events.') }}
 					</EmptyContent>
 					<template v-else>
@@ -78,10 +76,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 									<Actions :force-menu="true">
 										<ActionButton
 											@click="onDeletePermanently(item)">
-											<Delete
-												slot="icon"
-												:size="24"
-												decorative />
+											<template #icon>
+												<Delete :size="24" decorative />
+											</template>
 											{{ t('tasks','Delete permanently') }}
 										</ActionButton>
 									</Actions>

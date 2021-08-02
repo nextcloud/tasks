@@ -51,12 +51,16 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		<div class="item__actions">
 			<Actions v-show="editing" class="actions__set">
 				<ActionButton @click="setValue()">
-					<Check slot="icon" :size="24" decorative />
+					<template #icon>
+						<Check :size="24" decorative />
+					</template>
 					{{ $t('tasks', 'Set value') }}
 				</ActionButton>
 			</Actions><Actions v-show="editing" class="actions__clear">
 				<ActionButton @click="clearValue">
-					<Delete slot="icon" :size="24" decorative />
+					<template #icon>
+						<Delete :size="24" decorative />
+					</template>
 					{{ $t('tasks', 'Delete value') }}
 				</ActionButton>
 			</Actions>
