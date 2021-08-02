@@ -1,3 +1,24 @@
+## 0.14.1 - 2021-08-02
+
+### Added
+- Restore ancestors and children when restoring a task #1728
+- Show task title in appsidebar title tooltip #1702
+- Open notes tab in appsidebar on notes icon click #1703
+- Allow to add task from dashboard #1688
+- Improve task creation dialog styling #1709
+- Add plus icon to task input field #1705
+
+### Changed
+- Don't show trash bin header while loading or empty #1720
+- Code cleanup #1690 #1706 #1735
+
+### Fixed
+- Don't overwrite title if navigating while editing #1716
+- Fix task creation from talk message #1708
+- Properly decode sharee name in sharee search #1734
+- Correctly align settings label #1719
+- Use correct icon for dark theme dashboard #1718
+
 ## 0.14.0 - 2021-07-18
 
 ### Added
