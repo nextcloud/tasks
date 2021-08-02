@@ -101,25 +101,33 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 						:close-after-click="true"
 						class="reactive no-nav open-input"
 						@click="openSubtaskInput">
-						<Plus slot="icon" :size="24" decorative />
+						<template #icon>
+							<Plus :size="24" decorative />
+						</template>
 						{{ $t('tasks', 'Add subtask') }}
 					</ActionButton>
 					<ActionButton v-if="Object.values(task.subTasks).length"
 						class="reactive no-nav"
 						@click="toggleSubtasksVisibility(task)">
-						<SortVariant slot="icon" :size="24" decorative />
+						<template #icon>
+							<SortVariant :size="24" decorative />
+						</template>
 						{{ task.hideSubtasks ? $t('tasks', 'Show subtasks') : $t('tasks', 'Hide subtasks') }}
 					</ActionButton>
 					<ActionButton v-if="hasCompletedSubtasks"
 						class="reactive no-nav"
 						@click="toggleCompletedSubtasksVisibility(task)">
-						<Eye slot="icon" :size="24" decorative />
+						<template #icon>
+							<Eye :size="24" decorative />
+						</template>
 						{{ task.hideCompletedSubtasks ? $t('tasks', 'Show closed subtasks') : $t('tasks', 'Hide closed subtasks') }}
 					</ActionButton>
 					<ActionButton v-if="!readOnly"
 						class="reactive no-nav"
 						@click="scheduleTaskDeletion(task)">
-						<Delete slot="icon" :size="24" decorative />
+						<template #icon>
+							<Delete :size="24" decorative />
+						</template>
 						{{ $t('tasks', 'Delete task') }}
 					</ActionButton>
 				</Actions>
@@ -127,7 +135,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<ActionButton
 						class="reactive no-nav"
 						@click.prevent.stop="clearTaskDeletion(task)">
-						<Undo slot="icon" :size="24" decorative />
+						<template #icon>
+							<Undo :size="24" decorative />
+						</template>
 						{{ $n('tasks', 'Deleting the task in {countdown} second', 'Deleting the task in {countdown} seconds', task.deleteCountdown, { countdown: task.deleteCountdown }) }}
 					</ActionButton>
 				</Actions>
@@ -135,7 +145,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					<ActionButton
 						:disabled="readOnly"
 						@click="toggleStarred(task)">
-						<Star slot="icon" :size="24" decorative />
+						<template #icon>
+							<Star :size="24" decorative />
+						</template>
 						{{ $t('tasks', 'Toggle starred') }}
 					</ActionButton>
 				</Actions>
@@ -146,7 +158,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				v-click-outside="{ handler: closeSubtaskInput, middleware: clickOutsideMiddleware }"
 				class="task-item task-item--input">
 				<form name="addTaskForm" @submit.prevent="addTask">
-					<Plus slot="icon" :size="24" decorative />
+					<Plus :size="24" decorative />
 					<input ref="input"
 						v-model="newTaskName"
 						:placeholder="subtasksCreationPlaceholder"

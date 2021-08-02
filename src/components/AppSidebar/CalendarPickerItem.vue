@@ -32,13 +32,13 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			:value="calendar"
 			:placeholder="translate('tasks', 'Select a calendar')"
 			@select="change">
-			<template slot="singleLabel" slot-scope="scope">
+			<template #singleLabel="scope">
 				<CalendarPickerOption v-bind="scope.option" />
 			</template>
-			<template slot="option" slot-scope="scope">
+			<template #option="scope">
 				<CalendarPickerOption v-bind="scope.option" />
 			</template>
-			<template slot="noResult">
+			<template #noResult>
 				<CalendarPickerOption
 					color=""
 					owner=""

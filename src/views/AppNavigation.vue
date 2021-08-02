@@ -38,14 +38,17 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				@dragenter.native="dragEnter(...arguments, collection)"
 				@dragleave.native="dragLeave"
 				@click="setInitialRoute(`/collections/${collection.id}`)">
-				<component
-					:is="collection.icon"
-					slot="icon"
-					:size="24"
-					decorative />
-				<AppNavigationCounter v-show="collectionCount(collection.id)" slot="counter">
-					{{ collectionCount(collection.id) | counterFormatter }}
-				</AppNavigationCounter>
+				<template #icon>
+					<component
+						:is="collection.icon"
+						:size="24"
+						decorative />
+				</template>
+				<template #counter>
+					<AppNavigationCounter v-show="collectionCount(collection.id)">
+						{{ collectionCount(collection.id) | counterFormatter }}
+					</AppNavigationCounter>
+				</template>
 			</AppNavigationItem>
 			<draggable
 				class="draggable-container"
@@ -63,7 +66,9 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				:class="{'collection--edit': creating}"
 				class="collection reactive"
 				@click="startCreate($event)">
-				<Plus slot="icon" :size="24" decorative />
+				<template #icon>
+					<Plus :size="24" decorative />
+				</template>
 				<div :class="{error: nameError}" class="app-navigation-entry-edit">
 					<form>
 						<input id="newListInput"
