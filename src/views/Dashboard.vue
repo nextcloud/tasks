@@ -25,7 +25,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 	<div>
 		<DashboardWidget
 			id="tasks_panel"
-			:items="tasks"
+			:items="tasks.slice(0, hasTaskToday ? 6 : 4)"
 			empty-content-icon="icon-tasks"
 			:empty-content-message="t('tasks', 'No upcoming tasks')"
 			:show-more-text="t('tasks', 'upcoming tasks')"
@@ -119,13 +119,13 @@ export default {
 				this.fetchTasks()
 			}
 		},
-		fetchTasks() {
-			Promise.all(this.calendars.map(calendar =>
+		async fetchTasks() {
+			this.loading = true
+			const results = await Promise.all(this.calendars.map(calendar =>
 				this.$store.dispatch('getTasksFromCalendar', { calendar, completed: false, related: null })
-			)).then(results => {
-				this.tasks = sort([...results.flat().filter(task => !task.closed)]).slice(0, this.hasTaskToday ? 6 : 4)
-				this.loading = false
-			})
+			))
+			this.tasks = sort([...results.flat().filter(task => !task.closed)])
+			this.loading = false
 		},
 		/**
 		 * @param {object} task The task to format
@@ -137,11 +137,11 @@ export default {
 			}
 			if (task.allDay) {
 				return task.dueMoment.calendar(null, {
-					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please t the string and keep the brackets.
+					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 					lastDay: t('tasks', '[Due yesterday]'),
-					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please t the string and keep the brackets.
+					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 					sameDay: t('tasks', '[Due today]'),
-					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please t the string and keep the brackets.
+					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 					nextDay: t('tasks', '[Due tomorrow]'),
 					lastWeek: t('tasks', '[Due] L'),
 					nextWeek: t('tasks', '[Due] L'),
@@ -149,17 +149,17 @@ export default {
 				})
 			} else {
 				return task.dueMoment.calendar(null, {
-					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please t the string and keep the brackets.
+					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 					lastDay: t('tasks', '[Due yesterday at] LT'),
-					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please t the string and keep the brackets.
+					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 					sameDay: t('tasks', '[Due today at] LT'),
-					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please t the string and keep the brackets.
+					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 					nextDay: t('tasks', '[Due tomorrow at] LT'),
-					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please t the string and keep the brackets.
+					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 					lastWeek: t('tasks', '[Due] L [at] LT'),
-					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please t the string and keep the brackets.
+					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 					nextWeek: t('tasks', '[Due] L [at] LT'),
-					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please t the string and keep the brackets.
+					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 					sameElse: t('tasks', '[Due] L [at] LT'),
 				})
 			}
