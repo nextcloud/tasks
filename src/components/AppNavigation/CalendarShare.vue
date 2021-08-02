@@ -42,9 +42,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 					:user-select="true"
 					open-direction="bottom"
 					track-by="user"
-					label="user"
+					label="displayName"
 					@search-change="findSharee"
-					@change="shareCalendar" />
+					@change="shareCalendar">
+					<template #noResult>
+						<span>{{ noResult }}</span>
+					</template>
+				</Multiselect>
 			</li>
 			<!-- list of user or groups calendar is shared with -->
 			<CalendarSharee v-for="sharee in calendar.shares"
@@ -58,6 +62,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 <script>
 import CalendarSharee from './CalendarSharee.vue'
 import client from '../../services/cdav.js'
+import { urldecode } from '../../utils/url'
 
 import Axios from '@nextcloud/axios'
 import { generateOcsUrl } from '@nextcloud/router'
@@ -110,10 +115,7 @@ export default {
 		 * @param {boolean} data.isCircle is this a circle?
 		 */
 		shareCalendar({ user, displayName, uri, isGroup, isCircle }) {
-			const calendar = this.calendar
-			uri = decodeURI(uri)
-			user = decodeURI(user)
-			this.$store.dispatch('shareCalendar', { calendar, user, displayName, uri, isGroup, isCircle })
+			this.$store.dispatch('shareCalendar', { calendar: this.calendar, user, displayName, uri, isGroup, isCircle })
 		},
 
 		/**
@@ -170,7 +172,17 @@ export default {
 			}
 
 			return results.reduce((list, result) => {
-				if (hiddenPrincipals.includes(decodeURI(result.principalScheme))) {
+				if (['ROOM', 'RESOURCE'].includes(result.calendarUserType)) {
+					return list
+				}
+
+				const isGroup = result.calendarUserType === 'GROUP'
+
+				// TODO: Why do we have to decode those two values?
+				const user = urldecode(result[isGroup ? 'groupId' : 'userId'])
+				const decodedPrincipalScheme = urldecode(result.principalScheme)
+
+				if (hiddenPrincipals.includes(decodedPrincipalScheme)) {
 					return list
 				}
 				if (hiddenUrls.includes(result.url)) {
@@ -182,12 +194,11 @@ export default {
 					return list
 				}
 
-				const isGroup = result.calendarUserType === 'GROUP'
 				list.push({
-					user: result[isGroup ? 'groupId' : 'userId'],
+					user,
 					displayName: result.displayname,
 					icon: isGroup ? 'icon-group' : 'icon-user',
-					uri: result.principalScheme,
+					uri: decodedPrincipalScheme,
 					isGroup,
 					isCircle: false,
 					isNoUser: isGroup,
