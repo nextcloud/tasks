@@ -202,6 +202,7 @@ OC.L10N.register(
     "No upcoming tasks" : "Žiadne nadchádzajúce úlohy",
     "upcoming tasks" : "nadchádzajúce úlohy",
     "No tasks today" : "Dnes žiadne úlohy",
+    "No due date assigned" : "Nie je priradený žiadny dátum platnosti",
     "Successfully created the task." : "Úloha bola úspešne vytvorená.",
     "Could not delete the task." : "Nepodarilo sa zmazať úlohu.",
     "Synchronizing to the server." : "Synchronizácia so serverom.",
