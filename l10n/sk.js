@@ -58,6 +58,7 @@ OC.L10N.register(
     "Untitled item" : "Položka bez názvu",
     "Could not load deleted calendars and objects" : "Nie je možné načítať zmazané kalendáre a objekty",
     "Could not restore calendar or event" : "Nie je možné obnoviť kalendár alebo udalosť",
+    "_Elements in the trash bin are deleted after {numDays} day_::_Elements in the trash bin are deleted after {numDays} days_" : ["Položky v odpadkovom koši budú odstránené po {numDays} dni","Položky v odpadkovom koši budú odstránené po {numDays} dňoch","Položky v odpadkovom koši budú odstránené po {numDays} dňoch","Položky v odpadkovom koši budú odstránené po {numDays} dňoch"],
     "Set date" : "Nastaviť dátum",
     "Set time" : "Nastaviť čas",
     "Delete date" : "Zmazať dátum",
