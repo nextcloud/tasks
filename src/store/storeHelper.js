@@ -2,8 +2,11 @@
  * Nextcloud - Tasks
  *
  * @author Raimund Schlüßler
+ *
  * @copyright 2021 Jonas Thelemann <e-mail@jonas-thelemann.de>
+ *
  * @copyright 2019 Raimund Schlüßler <raimund.schluessler@mailbox.org>
+ *
  * @copyright 2018 Vadim Nicolai <contact@vadimnicolai.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -13,11 +16,12 @@
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU AFFERO GENERAL PUBLIC LICENSE for more details.
  *
  * You should have received a copy of the GNU Affero General Public
- * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
+ * License along with this library. If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 'use strict'
 

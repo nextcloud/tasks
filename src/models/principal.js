@@ -2,7 +2,9 @@
  * Nextcloud - Tasks
  *
  * @copyright Copyright (c) 2019 Georg Ehrke
+ *
  * @author Georg Ehrke <oc.list@georgehrke.com>
+ *
  * @license AGPL-3.0-or-later
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,6 +19,7 @@
  *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 /**
