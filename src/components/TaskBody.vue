@@ -78,8 +78,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<TaskStatusDisplay
 					:status="task.syncStatus"
 					class="reactive no-nav"
-					@statusClicked="updateTask"
-					@resetStatus="resetStatus({ task })" />
+					@status-clicked="updateTask"
+					@reset-status="resetStatus({ task })" />
 				<div v-if="collectionId=='week'" class="calendar">
 					<span :style="{'background-color': task.calendar.color}" class="calendar__indicator" />
 					<span class="calendar__name">{{ task.calendar.displayName }}</span>

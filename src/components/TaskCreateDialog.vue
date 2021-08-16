@@ -35,7 +35,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					:disabled="loading"
 					:calendar="pendingCalendar"
 					:calendars="writableCalendars"
-					@changeCalendar="changeCalendar" />
+					@change-calendar="changeCalendar" />
 
 				<div class="property property__summary">
 					<ViewHeadline :size="24" decorative />

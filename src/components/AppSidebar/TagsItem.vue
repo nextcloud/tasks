@@ -87,10 +87,10 @@ export default {
 	},
 	methods: {
 		addTag(tag) {
-			this.$emit('addTag', tag)
+			this.$emit('add-tag', tag)
 		},
 		setTags(tags) {
-			this.$emit('setTags', tags)
+			this.$emit('set-tags', tags)
 		},
 	},
 }

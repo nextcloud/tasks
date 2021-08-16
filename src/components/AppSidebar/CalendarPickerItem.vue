@@ -90,7 +90,7 @@ export default {
 			if (!newCalendar) {
 				return
 			}
-			this.$emit('changeCalendar', newCalendar)
+			this.$emit('change-calendar', newCalendar)
 		},
 	},
 }

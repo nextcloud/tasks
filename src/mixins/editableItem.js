@@ -97,7 +97,7 @@ export default {
 		setValue(task = this.task) {
 			// Set the property if editing is active.
 			if (this.editing) {
-				this.$emit('setValue', { task, value: this.newValue })
+				this.$emit('set-value', { task, value: this.newValue })
 			}
 			this.setEditing(false)
 		},
@@ -105,7 +105,7 @@ export default {
 		 * Removes the value
 		 */
 		clearValue() {
-			this.$emit('setValue', { task: this.task, value: null })
+			this.$emit('set-value', { task: this.task, value: null })
 			this.setEditing(false)
 		},
 		/**

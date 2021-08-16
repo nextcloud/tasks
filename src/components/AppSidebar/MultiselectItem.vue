@@ -96,7 +96,7 @@ export default {
 			if (!value) {
 				return
 			}
-			this.$emit('changeValue', value)
+			this.$emit('change-value', value)
 		},
 	},
 }

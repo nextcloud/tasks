@@ -68,12 +68,12 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				:checked="allDay"
 				:read-only="readOnly"
 				:property-string="$t('tasks', 'All day')"
-				@setChecked="toggleAllDay(task)" />
+				@set-checked="toggleAllDay(task)" />
 			<CalendarPickerItem
 				:disabled="readOnly"
 				:calendar="task.calendar"
 				:calendars="targetCalendars"
-				@changeCalendar="changeCalendar" />
+				@change-calendar="changeCalendar" />
 		</template>
 
 		<template v-if="!task || (task && task.deleteCountdown === null)" #secondary-actions>
@@ -164,7 +164,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					:disabled="readOnly || task.calendar.isSharedWithMe"
 					:placeholder="$t('tasks', 'Select a classification')"
 					icon="IconEye"
-					@changeValue="changeClass" />
+					@change-value="changeClass" />
 				<MultiselectItem
 					v-show="!readOnly || task.status"
 					:value="statusOptions.find( _ => _.type === task.status )"
@@ -172,7 +172,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					:disabled="readOnly"
 					:placeholder="$t('tasks', 'Select a status')"
 					icon="IconPulse"
-					@changeValue="changeStatus" />
+					@change-value="changeStatus" />
 				<SliderItem
 					v-show="!readOnly || task.priority"
 					:value="task.priority"
@@ -182,7 +182,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					:max-value="9"
 					:color="priorityColor"
 					:task="task"
-					@setValue="({task, value}) => setPriority({ task, priority: value })">
+					@set-value="({task, value}) => setPriority({ task, priority: value })">
 					<template #icon>
 						<Star :size="24" decorative />
 					</template>
@@ -196,7 +196,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					:max-value="100"
 					:color="task.complete > 0 ? '#4271a6' : null"
 					:task="task"
-					@setValue="({task, value}) => setPercentComplete({ task, complete: value })">
+					@set-value="({task, value}) => setPercentComplete({ task, complete: value })">
 					<template #icon>
 						<Percent :size="24" decorative />
 					</template>
@@ -208,8 +208,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 					:disabled="readOnly"
 					:placeholder="$t('tasks', 'Select tags')"
 					icon="IconTag"
-					@addTag="updateTag"
-					@setTags="updateTags" />
+					@add-tag="updateTag"
+					@set-tags="updateTags" />
 			</div>
 		</AppSidebarTab>
 		<EmptyContent v-else
