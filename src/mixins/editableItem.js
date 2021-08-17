@@ -2,6 +2,7 @@
  * Nextcloud - Tasks
  *
  * @author Raimund Schlüßler
+ *
  * @copyright 2021 Raimund Schlüßler <raimund.schluessler@mailbox.org>
  *
  * This library is free software; you can redistribute it and/or
@@ -11,11 +12,12 @@
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU AFFERO GENERAL PUBLIC LICENSE for more details.
  *
  * You should have received a copy of the GNU Affero General Public
- * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
+ * License along with this library. If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 import Task from '../models/task.js'
 
@@ -97,7 +99,7 @@ export default {
 		setValue(task = this.task) {
 			// Set the property if editing is active.
 			if (this.editing) {
-				this.$emit('setValue', { task, value: this.newValue })
+				this.$emit('set-value', { task, value: this.newValue })
 			}
 			this.setEditing(false)
 		},
@@ -105,7 +107,7 @@ export default {
 		 * Removes the value
 		 */
 		clearValue() {
-			this.$emit('setValue', { task: this.task, value: null })
+			this.$emit('set-value', { task: this.task, value: null })
 			this.setEditing(false)
 		},
 		/**

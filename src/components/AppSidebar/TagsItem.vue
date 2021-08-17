@@ -14,7 +14,7 @@ version 3 of the License, or any later version.
 
 This library is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU AFFERO GENERAL PUBLIC LICENSE for more details.
 
 You should have received a copy of the GNU Affero General Public
@@ -87,10 +87,10 @@ export default {
 	},
 	methods: {
 		addTag(tag) {
-			this.$emit('addTag', tag)
+			this.$emit('add-tag', tag)
 		},
 		setTags(tags) {
-			this.$emit('setTags', tags)
+			this.$emit('set-tags', tags)
 		},
 	},
 }

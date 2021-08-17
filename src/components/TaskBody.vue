@@ -12,11 +12,11 @@ version 3 of the License, or any later version.
 
 This library is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU AFFERO GENERAL PUBLIC LICENSE for more details.
 
 You should have received a copy of the GNU Affero General Public
-License along with this library.  If not, see <http://www.gnu.org/licenses/>.
+License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 -->
 
@@ -78,8 +78,8 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 				<TaskStatusDisplay
 					:status="task.syncStatus"
 					class="reactive no-nav"
-					@statusClicked="updateTask"
-					@resetStatus="resetStatus({ task })" />
+					@status-clicked="updateTask"
+					@reset-status="resetStatus({ task })" />
 				<div v-if="collectionId=='week'" class="calendar">
 					<span :style="{'background-color': task.calendar.color}" class="calendar__indicator" />
 					<span class="calendar__name">{{ task.calendar.displayName }}</span>

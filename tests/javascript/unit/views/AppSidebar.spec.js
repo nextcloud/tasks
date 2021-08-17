@@ -2,6 +2,7 @@
  * Nextcloud - Tasks
  *
  * @author Raimund Schlüßler
+ *
  * @copyright 2021 Raimund Schlüßler <raimund.schluessler@mailbox.org>
  *
  * This library is free software; you can redistribute it and/or
@@ -16,6 +17,7 @@
  *
  * You should have received a copy of the GNU Affero General Public
  * License along with this library. If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 import AppSidebar from 'Views/AppSidebar.vue'
 import router from '@/router.js'
