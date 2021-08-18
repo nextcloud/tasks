@@ -34,6 +34,8 @@ OC.L10N.register(
     "Alphabetically" : "Alfabētiskā secībā",
     "Manually" : "Manuāli",
     "Task is completed" : "Uzdevums pabeigts",
+    "Hide subtasks" : "Slēpt apakšuzdevumus",
+    "Hide closed subtasks" : "Slēpt slēgtos apakšuzdevumus",
     "_%n Completed Task_::_%n Completed Tasks_" : ["neviena pabeigta uzdevuma","%n paeigts uzdevums","%n pabeigti uzvedumi"],
     "Tomorrow" : "Rīt",
     "New List" : "Jauns saraksts",
@@ -44,6 +46,7 @@ OC.L10N.register(
     "Task not found!" : "Uzdevums nav atrasts!",
     "Set start date" : "Uzstādīt sākuma datumu",
     "Set due date" : "Uzstādīt izpildes termiņu",
+    "Task successfully moved to new calendar." : "Uzdevums veiksmīgi pārvietots uz jaunu kalendāru.",
     "An error occurred" : "Gadījās kļūda"
 },
 "nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);");
