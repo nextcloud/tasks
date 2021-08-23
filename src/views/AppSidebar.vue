@@ -26,6 +26,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		:linkify-title="true"
 		:subtitle="subtitle"
 		:title-tooltip="title"
+		:subtitle-tooltip="subtitleTooltip"
 		:empty="!task"
 		:active.sync="activeTab"
 		@start-editing="newTitle = task.summary"
@@ -369,9 +370,31 @@ export default {
 			return this.task ? this.task.summary : ''
 		},
 		subtitle() {
-			if (!this.task) {
-				return ''
+			if (this.completedString) {
+				return this.completedString
 			}
+			if (this.modifiedString) {
+				return this.modifiedString
+			}
+			if (this.createdString) {
+				return this.createdString
+			}
+			return ''
+		},
+		subtitleTooltip() {
+			const tooltip = []
+			if (this.completedString) {
+				tooltip.push(this.completedString)
+			}
+			if (this.modifiedString) {
+				tooltip.push(this.modifiedString)
+			}
+			if (this.createdString) {
+				tooltip.push(this.createdString)
+			}
+			return tooltip.join('\n')
+		},
+		completedString() {
 			if (this.task?.completed && this.task.completedDateMoment.isValid()) {
 				return this.task.completedDateMoment.calendar(null, {
 					lastDay: this.$t('tasks', '[Completed yesterday at] LT'),
@@ -382,6 +405,9 @@ export default {
 					sameElse: this.$t('tasks', '[Completed] L'),
 				})
 			}
+			return ''
+		},
+		modifiedString() {
 			if (this.task?.modifiedMoment.isValid()) {
 				return this.task.modifiedMoment.calendar(null, {
 					lastDay: this.$t('tasks', '[Last modified yesterday at] LT'),
@@ -392,6 +418,9 @@ export default {
 					sameElse: this.$t('tasks', '[Last modified] L'),
 				})
 			}
+			return ''
+		},
+		createdString() {
 			if (this.task?.createdMoment.isValid()) {
 				return this.task.createdMoment.calendar(null, {
 					lastDay: this.$t('tasks', '[Created yesterday at] LT'),
