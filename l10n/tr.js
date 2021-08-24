@@ -23,7 +23,7 @@ OC.L10N.register(
     "Unable to delete the share." : "Paylaşım silinemedi.",
     "Unable to change permissions." : "İzinler değiştirilemedi.",
     "Edit" : "Düzenle",
-    "Copy private link" : "Özel bağlantıyı kopyala",
+    "Copy private link" : "Kişisel bağlantıyı kopyala",
     "Copied" : "Kopyalandı",
     "Cannot copy" : "Kopyalanamadı",
     "Download" : "İndir",
