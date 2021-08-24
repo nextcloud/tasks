@@ -44,7 +44,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:read-only="readOnly"
 				:task="task"
 				@editing="(editing) => editingStart = editing"
-				@setValue="setStartDate">
+				@set-value="setStartDate">
 				<template #icon>
 					<CalendarStart :size="24" decorative />
 				</template>
@@ -58,7 +58,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:read-only="readOnly"
 				:task="task"
 				@editing="(editing) => editingDue = editing"
-				@setValue="setDueDate">
+				@set-value="setDueDate">
 				<template #icon>
 					<CalendarEnd :size="24" decorative />
 				</template>
@@ -230,7 +230,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:value="task.note"
 				:read-only="readOnly"
 				:task="task"
-				@setValue="({task, value}) => setNote({ task, note: value })" />
+				@set-value="({task, value}) => setNote({ task, note: value })" />
 		</AppSidebarTab>
 		<!-- <AppSidebarTab v-if="task"
 			id="app-sidebar-tab-reminder"
