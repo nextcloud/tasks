@@ -35,7 +35,7 @@
 		"@nextcloud/logger": "^2.0.0",
 		"@nextcloud/moment": "^1.1.1",
 		"@nextcloud/router": "^2.0.0",
-		"@nextcloud/vue": "^4.0.3",
+		"@nextcloud/vue": "^4.1.0",
 		"@nextcloud/vue-dashboard": "^2.0.1",
 		"@vue/test-utils": "^1.2.1",
 		"calendar-js": "github:nextcloud/calendar-js",
@@ -106,7 +106,7 @@
 			".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
 		},
 		"transformIgnorePatterns": [
-			"/node_modules/(?!(calendar-js)|(vue-material-design-icons))"
+			"/node_modules/(?!(calendar-js)|(@nextcloud/calendar-js)|(vue-material-design-icons))"
 		],
 		"snapshotSerializers": [
 			"<rootDir>/node_modules/jest-serializer-vue"
