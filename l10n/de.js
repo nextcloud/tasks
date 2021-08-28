@@ -202,6 +202,7 @@ OC.L10N.register(
     "No upcoming tasks" : "Keine anstehenden Aufgaben",
     "upcoming tasks" : "Anstehende Aufgaben",
     "No tasks today" : "Heute keine anstehenden Aufgaben",
+    "No due date assigned" : "Kein Fälligkeitsdatum zugewiesen",
     "Successfully created the task." : "Aufgabe erstellt.",
     "Could not delete the task." : "Aufgabe konnte nicht gelöscht werden.",
     "Synchronizing to the server." : "Synchronisiere mit dem Server.",
