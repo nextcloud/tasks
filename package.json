@@ -106,7 +106,7 @@
 			".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
 		},
 		"transformIgnorePatterns": [
-			"/node_modules/(?!(calendar-js)|(vue-material-design-icons))"
+			"/node_modules/(?!(calendar-js)|(@nextcloud/calendar-js)|(vue-material-design-icons))"
 		],
 		"snapshotSerializers": [
 			"<rootDir>/node_modules/jest-serializer-vue"
