@@ -1,3 +1,15 @@
+## 0.14.2 - 2021-08-29
+
+### Added
+- Show created, modified and completed date in AppSidebar subtitle tooltip #1746
+
+### Changed
+- Updated translations
+- Updated dependencies
+
+### Fixed
+- Send correct content type for PUT requests https://github.com/nextcloud/cdav-library/issues/539
+
 ## 0.14.1 - 2021-08-02
 
 ### Added
