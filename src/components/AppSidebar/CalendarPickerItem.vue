@@ -118,7 +118,7 @@ export default {
 			}
 		}
 
-		&__tags {
+		.multiselect__tags {
 			border: 1px solid transparent;
 			height: 44px;
 
@@ -136,7 +136,7 @@ export default {
 			}
 		}
 
-		&__content-wrapper li > span {
+		.multiselect__content-wrapper li > span {
 			padding: 0;
 
 			&.multiselect__option--selected {
