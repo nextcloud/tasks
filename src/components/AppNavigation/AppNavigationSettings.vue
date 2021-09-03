@@ -66,11 +66,11 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 import moment from '@nextcloud/moment'
 import AppNavigationSettings from '@nextcloud/vue/dist/Components/AppNavigationSettings'
 
-import Star from 'vue-material-design-icons/Star.vue'
 import CalendarToday from 'vue-material-design-icons/CalendarToday.vue'
 import CalendarWeek from 'vue-material-design-icons/CalendarWeek.vue'
 import CircleOutline from 'vue-material-design-icons/CircleOutline.vue'
 import Check from 'vue-material-design-icons/Check.vue'
+import Star from 'vue-material-design-icons/Star.vue'
 import TrendingUp from 'vue-material-design-icons/TrendingUp.vue'
 
 import { mapState, mapGetters, mapActions } from 'vuex'
@@ -78,11 +78,11 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 export default {
 	components: {
 		AppNavigationSettings,
-		Star,
 		CalendarToday,
 		CalendarWeek,
 		CircleOutline,
 		Check,
+		Star,
 		TrendingUp,
 	},
 	data() {
