@@ -114,13 +114,13 @@ import AppNavigation from '@nextcloud/vue/dist/Components/AppNavigation'
 import AppNavigationCounter from '@nextcloud/vue/dist/Components/AppNavigationCounter'
 import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
 
-import Star from 'vue-material-design-icons/Star.vue'
 import CalendarToday from 'vue-material-design-icons/CalendarToday.vue'
 import CalendarWeek from 'vue-material-design-icons/CalendarWeek.vue'
-import CircleOutline from 'vue-material-design-icons/CircleOutline.vue'
 import Check from 'vue-material-design-icons/Check.vue'
-import TrendingUp from 'vue-material-design-icons/TrendingUp.vue'
+import CircleOutline from 'vue-material-design-icons/CircleOutline.vue'
 import Plus from 'vue-material-design-icons/Plus.vue'
+import Star from 'vue-material-design-icons/Star.vue'
+import TrendingUp from 'vue-material-design-icons/TrendingUp.vue'
 
 import draggable from 'vuedraggable'
 import ClickOutside from 'v-click-outside'
@@ -136,13 +136,13 @@ export default {
 		AppNavigationCounter,
 		AppNavigationSettings,
 		draggable,
-		Star,
 		CalendarToday,
 		CalendarWeek,
-		CircleOutline,
 		Check,
-		TrendingUp,
+		CircleOutline,
 		Plus,
+		TrendingUp,
+		Star,
 	},
 	directives: {
 		clickOutside: ClickOutside.directive,

@@ -28,16 +28,16 @@ import store from './store/store.js'
 import { subscribe, unsubscribe } from '@nextcloud/event-bus'
 import { linkTo } from '@nextcloud/router'
 
-import Eye from 'vue-material-design-icons/Eye.vue'
-import EyeOff from 'vue-material-design-icons/EyeOff.vue'
+import AlertBoxOutline from 'vue-material-design-icons/AlertBoxOutline.vue'
 import CalendarRemove from 'vue-material-design-icons/CalendarRemove.vue'
 import Cancel from 'vue-material-design-icons/Cancel.vue'
 import Check from 'vue-material-design-icons/Check.vue'
-import TrendingUp from 'vue-material-design-icons/TrendingUp.vue'
-import AlertBoxOutline from 'vue-material-design-icons/AlertBoxOutline.vue'
+import Delete from 'vue-material-design-icons/Delete.vue'
+import Eye from 'vue-material-design-icons/Eye.vue'
+import EyeOff from 'vue-material-design-icons/EyeOff.vue'
 import Pulse from 'vue-material-design-icons/Pulse.vue'
 import Tag from 'vue-material-design-icons/Tag.vue'
-import Delete from 'vue-material-design-icons/Delete.vue'
+import TrendingUp from 'vue-material-design-icons/TrendingUp.vue'
 
 import Vue from 'vue'
 import { sync } from 'vuex-router-sync'
@@ -70,9 +70,7 @@ Vue.use(VueClipboard)
  * in the MultiselectOption component.
  */
 // eslint-disable-next-line vue/match-component-file-name
-Vue.component('IconEye', Eye)
-// eslint-disable-next-line vue/match-component-file-name
-Vue.component('IconEyeOff', EyeOff)
+Vue.component('IconAlertBoxOutline', AlertBoxOutline)
 // eslint-disable-next-line vue/match-component-file-name
 Vue.component('IconCalendarRemove', CalendarRemove)
 // eslint-disable-next-line vue/match-component-file-name
@@ -80,15 +78,17 @@ Vue.component('IconCancel', Cancel)
 // eslint-disable-next-line vue/match-component-file-name
 Vue.component('IconCheck', Check)
 // eslint-disable-next-line vue/match-component-file-name
-Vue.component('IconTrendingUp', TrendingUp)
+Vue.component('IconDelete', Delete)
 // eslint-disable-next-line vue/match-component-file-name
-Vue.component('IconAlertBoxOutline', AlertBoxOutline)
+Vue.component('IconEye', Eye)
+// eslint-disable-next-line vue/match-component-file-name
+Vue.component('IconEyeOff', EyeOff)
 // eslint-disable-next-line vue/match-component-file-name
 Vue.component('IconPulse', Pulse)
 // eslint-disable-next-line vue/match-component-file-name
 Vue.component('IconTag', Tag)
 // eslint-disable-next-line vue/match-component-file-name
-Vue.component('IconDelete', Delete)
+Vue.component('IconTrendingUp', TrendingUp)
 
 if (!OCA.Tasks) {
 	/**

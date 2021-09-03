@@ -188,9 +188,9 @@ import moment from '@nextcloud/moment'
 import Actions from '@nextcloud/vue/dist/Components/Actions'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
 
-import Eye from 'vue-material-design-icons/Eye.vue'
 import Cancel from 'vue-material-design-icons/Cancel.vue'
 import Delete from 'vue-material-design-icons/Delete.vue'
+import Eye from 'vue-material-design-icons/Eye.vue'
 import Pin from 'vue-material-design-icons/Pin.vue'
 import Plus from 'vue-material-design-icons/Plus.vue'
 import TextBoxOutline from 'vue-material-design-icons/TextBoxOutline.vue'
@@ -212,9 +212,9 @@ export default {
 		TaskDragContainer,
 		Actions,
 		ActionButton,
+		Cancel,
 		Delete,
 		Eye,
-		Cancel,
 		Pin,
 		Plus,
 		TextBoxOutline,

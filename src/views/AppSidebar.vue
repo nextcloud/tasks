@@ -272,18 +272,18 @@ import AppSidebarTab from '@nextcloud/vue/dist/Components/AppSidebarTab'
 import { generateUrl } from '@nextcloud/router'
 
 import Calendar from 'vue-material-design-icons/Calendar.vue'
-import CalendarStart from 'vue-material-design-icons/CalendarStart.vue'
 import CalendarEnd from 'vue-material-design-icons/CalendarEnd.vue'
+import CalendarStart from 'vue-material-design-icons/CalendarStart.vue'
 import Cancel from 'vue-material-design-icons/Cancel.vue'
 import Delete from 'vue-material-design-icons/Delete.vue'
 import Download from 'vue-material-design-icons/Download.vue'
+import InformationOutline from 'vue-material-design-icons/InformationOutline.vue'
 import Pencil from 'vue-material-design-icons/Pencil.vue'
+import Percent from 'vue-material-design-icons/Percent.vue'
 import Pin from 'vue-material-design-icons/Pin.vue'
 import PinOff from 'vue-material-design-icons/PinOff.vue'
 import Star from 'vue-material-design-icons/Star.vue'
-import Percent from 'vue-material-design-icons/Percent.vue'
 import TextBoxOutline from 'vue-material-design-icons/TextBoxOutline.vue'
-import InformationOutline from 'vue-material-design-icons/InformationOutline.vue'
 import Undo from 'vue-material-design-icons/Undo.vue'
 
 import { mapGetters, mapActions } from 'vuex'
@@ -297,18 +297,18 @@ export default {
 		CheckboxItem,
 		DatetimePickerItem,
 		Calendar,
-		CalendarStart,
 		CalendarEnd,
+		CalendarStart,
 		Cancel,
 		Delete,
 		Download,
+		InformationOutline,
 		Pencil,
+		Percent,
 		Pin,
 		PinOff,
 		Star,
-		Percent,
 		TextBoxOutline,
-		InformationOutline,
 		Undo,
 		EmptyContent,
 		MultiselectItem,
