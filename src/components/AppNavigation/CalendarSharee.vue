@@ -28,7 +28,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 	<AppNavigationItem
 		:title="sharee.displayName">
 		<template #icon>
-			<div v-if="sharee.isGroup" class="avatar icon-group" />
+			<AccountMultiple
+				v-if="sharee.isGroup"
+				:size="20"
+				decorative
+				class="avatar" />
 			<div v-else-if="sharee.isCircle" class="avatar icon-circle" />
 			<Avatar v-else
 				:user="sharee.id"
@@ -65,6 +69,7 @@ import ActionCheckbox from '@nextcloud/vue/dist/Components/ActionCheckbox'
 import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
 import Avatar from '@nextcloud/vue/dist/Components/Avatar'
 
+import AccountMultiple from 'vue-material-design-icons/AccountMultiple.vue'
 import Delete from 'vue-material-design-icons/Delete.vue'
 
 export default {
@@ -74,6 +79,7 @@ export default {
 		ActionCheckbox,
 		AppNavigationItem,
 		Avatar,
+		AccountMultiple,
 		Delete,
 	},
 	props: {
@@ -139,3 +145,12 @@ export default {
 	},
 }
 </script>
+
+<style lang="scss" scoped>
+.app-navigation-entry .avatar {
+	width: 32px;
+	height: 32px;
+	background-color: var(--color-border-dark);
+	background-size: 16px;
+}
+</style>
