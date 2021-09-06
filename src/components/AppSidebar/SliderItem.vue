@@ -40,7 +40,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:min="minValue"
 					:max="maxValue"
 					@keyup.27="setEditing(false)"
-					@keydown.enter.prevent="setEditing(false)">
+					@keydown.enter.prevent="setValue()">
 				<input v-model="newValue"
 					type="range"
 					:min="minValue"
