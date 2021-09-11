@@ -36,6 +36,7 @@ import AppNavigation from './views/AppNavigation.vue'
 import client from './services/cdav.js'
 
 import { emit } from '@nextcloud/event-bus'
+import { translate as t } from '@nextcloud/l10n'
 import AppContent from '@nextcloud/vue/dist/Components/AppContent'
 import Content from '@nextcloud/vue/dist/Components/Content'
 
@@ -75,7 +76,7 @@ export default {
 			if (this.$OCA.Theming) {
 				color = this.$OCA.Theming.color
 			}
-			await this.$store.dispatch('appendCalendar', { displayName: this.$t('tasks', 'Tasks'), color })
+			await this.$store.dispatch('appendCalendar', { displayName: t('tasks', 'Tasks'), color })
 			this.fetchTasks()
 		// else, let's get those tasks!
 		} else {

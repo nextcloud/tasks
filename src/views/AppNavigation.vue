@@ -62,7 +62,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					@click.native="setInitialRoute(`/calendars/${calendar.id}`)" />
 			</draggable>
 			<AppNavigationItem v-click-outside="cancelCreate"
-				:title="$t('tasks', 'Add List…')"
+				:title="t('tasks', 'Add List…')"
 				:class="{'collection--edit': creating}"
 				class="collection reactive"
 				@click="startCreate($event)">
@@ -78,16 +78,16 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 								show: showTooltip('list_'),
 								trigger: 'manual'
 							}"
-							:placeholder="$t('tasks', 'New List')"
+							:placeholder="t('tasks', 'New List')"
 							class="edit"
 							type="text"
 							@keyup="checkName($event, null, create)">
-						<input :title="$t('tasks', 'Cancel')"
+						<input :title="t('tasks', 'Cancel')"
 							type="cancel"
 							value=""
 							class="action icon-close"
 							@click="cancelCreate">
-						<input :title="$t('tasks', 'Save')"
+						<input :title="t('tasks', 'Save')"
 							type="button"
 							value=""
 							class="action icon-checkmark"
@@ -110,6 +110,7 @@ import Colorpicker from '../components/AppNavigation/Colorpicker.vue'
 import AppNavigationSettings from '../components/AppNavigation/AppNavigationSettings.vue'
 import Trashbin from '../components/AppNavigation/Trashbin.vue'
 
+import { translate as t } from '@nextcloud/l10n'
 import AppNavigation from '@nextcloud/vue/dist/Components/AppNavigation'
 import AppNavigationCounter from '@nextcloud/vue/dist/Components/AppNavigationCounter'
 import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
@@ -188,6 +189,8 @@ export default {
 		}),
 	},
 	methods: {
+		t,
+
 		...mapActions([
 			'appendCalendar',
 			'setPriority',
@@ -424,9 +427,9 @@ export default {
 				msg: '',
 			}
 			if (this.isCalendarNameUsed(name, id)) {
-				check.msg = this.$t('tasks', 'The name "{calendar}" is already used.', { calendar: name }, undefined, { sanitize: false, escape: false })
+				check.msg = t('tasks', 'The name "{calendar}" is already used.', { calendar: name }, undefined, { sanitize: false, escape: false })
 			} else if (!name) {
-				check.msg = this.$t('tasks', 'An empty name is not allowed.')
+				check.msg = t('tasks', 'An empty name is not allowed.')
 			} else {
 				check.allowed = true
 			}

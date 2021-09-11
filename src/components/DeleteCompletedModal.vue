@@ -22,7 +22,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 <template>
 	<div class="loadmore reactive">
 		<span v-show="completedTasksCount" @click="openModal">
-			{{ $t('tasks', 'Delete all completed tasks.') }}
+			{{ t('tasks', 'Delete all completed tasks.') }}
 		</span>
 		<Modal v-if="modalOpen"
 			:out-transition="true"
@@ -31,17 +31,17 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<p class="icon-delete" />
 				<div v-if="completedTasksCount">
 					<h3 class="delete-completed__header">
-						{{ $n('tasks', 'This will delete {taskCount} completed task and its subtasks from calendar "{calendar}".', 'This will delete {taskCount} completed tasks and their subtasks from calendar "{calendar}".', initialCompletedRootTasksCount, {taskCount: initialCompletedRootTasksCount, calendar: calendar.displayName}, { sanitize: false, escape: false }) }}
+						{{ n('tasks', 'This will delete {taskCount} completed task and its subtasks from calendar "{calendar}".', 'This will delete {taskCount} completed tasks and their subtasks from calendar "{calendar}".', initialCompletedRootTasksCount, {taskCount: initialCompletedRootTasksCount, calendar: calendar.displayName}, { sanitize: false, escape: false }) }}
 					</h3>
 					<button class="delete-completed__button icon-delete"
 						type="button"
 						@click="deleteCompletedTasks">
-						{{ $t('tasks', 'Delete completed tasks.') }}
+						{{ t('tasks', 'Delete completed tasks.') }}
 					</button>
 				</div>
 				<div v-else>
 					<h3 class="delete-completed__header">
-						{{ $t('tasks', 'Deleted all completed tasks from calendar "{calendar}".', { calendar: calendar.displayName }, undefined, { sanitize: false, escape: false }) }}
+						{{ t('tasks', 'Deleted all completed tasks from calendar "{calendar}".', { calendar: calendar.displayName }, undefined, { sanitize: false, escape: false }) }}
 					</h3>
 				</div>
 				<div>
@@ -49,10 +49,10 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<p class="delete-completed__tracker">
 						<span>{{ percentage }} %</span>
 						<span v-if="failed === 0">
-							{{ $t('tasks', 'No errors') }}
+							{{ t('tasks', 'No errors') }}
 						</span>
-						<span v-else v-tooltip.auto="$t('tasks', 'Open your browser console for more details')">
-							{{ $n('tasks', 'Could not delete {failedCount} task.', 'Could not delete {failedCount} tasks.', failed, { failedCount: failed }) }}
+						<span v-else v-tooltip.auto="t('tasks', 'Open your browser console for more details')">
+							{{ n('tasks', 'Could not delete {failedCount} task.', 'Could not delete {failedCount} tasks.', failed, { failedCount: failed }) }}
 						</span>
 					</p>
 				</div>
@@ -62,6 +62,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
+import { translate as t, translatePlural as n } from '@nextcloud/l10n'
 import Modal from '@nextcloud/vue/dist/Components/Modal'
 
 import { mapGetters, mapActions } from 'vuex'
@@ -117,6 +118,9 @@ export default {
 		}),
 	},
 	methods: {
+		t,
+		n,
+
 		...mapActions([
 			'deleteTask',
 		]),

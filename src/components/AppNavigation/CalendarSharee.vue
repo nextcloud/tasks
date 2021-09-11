@@ -45,7 +45,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 				:disabled="loading"
 				:checked="writeable"
 				@update:checked="editSharee">
-				{{ $t('tasks', 'Can edit') }}
+				{{ t('tasks', 'Can edit') }}
 			</ActionCheckbox>
 		</template>
 
@@ -56,7 +56,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 				<template #icon>
 					<Delete :size="24" decorative />
 				</template>
-				{{ $t('tasks', 'Unshare with {displayName}', { displayName: sharee.displayName }) }}
+				{{ t('tasks', 'Unshare with {displayName}', { displayName: sharee.displayName }) }}
 			</ActionButton>
 		</template>
 	</AppNavigationItem>
@@ -64,6 +64,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import { showError } from '@nextcloud/dialogs'
+import { translate as t } from '@nextcloud/l10n'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
 import ActionCheckbox from '@nextcloud/vue/dist/Components/ActionCheckbox'
 import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
@@ -119,7 +120,7 @@ export default {
 				})
 			} catch (error) {
 				console.error(error)
-				showError(this.$t('tasks', 'Unable to delete the share.'))
+				showError(t('tasks', 'Unable to delete the share.'))
 			} finally {
 				this.loading = false
 			}
@@ -137,7 +138,7 @@ export default {
 				})
 			} catch (error) {
 				console.error(error)
-				showError(this.$t('tasks', 'Unable to change permissions.'))
+				showError(t('tasks', 'Unable to change permissions.'))
 			} finally {
 				this.loading = false
 			}

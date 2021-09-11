@@ -48,7 +48,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:checked="task.completed"
 					:aria-checked="task.completed"
 					:disabled="readOnly"
-					:aria-label="$t('tasks', 'Task is completed')"
+					:aria-label="t('tasks', 'Task is completed')"
 					@click="toggleCompleted(task)">
 				<label :class="[priorityClass, 'reactive no-nav']" :for="'toggleCompleted_' + task.uid">
 					<Cancel v-if="task.status === 'CANCELLED' && !task.completed" :size="24" decorative />
@@ -69,7 +69,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<div v-if="task.complete > 0" class="percentbar">
 					<div :style="{ width: task.complete + '%', 'background-color': task.calendar.color }"
 						:class="{'completed': task.completed}"
-						:aria-label="$t('tasks', '{complete} % completed', {complete: task.complete})"
+						:aria-label="t('tasks', '{complete} % completed', {complete: task.complete})"
 						class="percentbar__done" />
 				</div>
 			</div>
@@ -84,12 +84,12 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<span :style="{'background-color': task.calendar.color}" class="calendar__indicator" />
 					<span class="calendar__name">{{ task.calendar.displayName }}</span>
 				</div>
-				<SortVariant v-if="hasHiddenSubtasks" :size="24" :title="$t('tasks', 'Task has hidden subtasks')" />
-				<Pin v-if="task.pinned" :size="24" :title="$t('tasks', 'Task is pinned')" />
+				<SortVariant v-if="hasHiddenSubtasks" :size="24" :title="t('tasks', 'Task has hidden subtasks')" />
+				<Pin v-if="task.pinned" :size="24" :title="t('tasks', 'Task is pinned')" />
 				<TextBoxOutline
 					v-if="task.note!=''"
 					:size="24"
-					:title="$t('tasks', 'Task has a note')"
+					:title="t('tasks', 'Task has a note')"
 					class="icon-note"
 					@click.stop="openAppSidebarTab($event, 'app-sidebar-tab-notes')" />
 				<div v-if="task.due || task.completed" :class="{'date--overdue': overdue(task.dueMoment) && !task.completed}" class="date">
@@ -104,7 +104,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						<template #icon>
 							<Plus :size="24" decorative />
 						</template>
-						{{ $t('tasks', 'Add subtask') }}
+						{{ t('tasks', 'Add subtask') }}
 					</ActionButton>
 					<ActionButton v-if="Object.values(task.subTasks).length"
 						class="reactive no-nav"
@@ -112,7 +112,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						<template #icon>
 							<SortVariant :size="24" decorative />
 						</template>
-						{{ task.hideSubtasks ? $t('tasks', 'Show subtasks') : $t('tasks', 'Hide subtasks') }}
+						{{ task.hideSubtasks ? t('tasks', 'Show subtasks') : t('tasks', 'Hide subtasks') }}
 					</ActionButton>
 					<ActionButton v-if="hasCompletedSubtasks"
 						class="reactive no-nav"
@@ -120,7 +120,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						<template #icon>
 							<Eye :size="24" decorative />
 						</template>
-						{{ task.hideCompletedSubtasks ? $t('tasks', 'Show closed subtasks') : $t('tasks', 'Hide closed subtasks') }}
+						{{ task.hideCompletedSubtasks ? t('tasks', 'Show closed subtasks') : t('tasks', 'Hide closed subtasks') }}
 					</ActionButton>
 					<ActionButton v-if="!readOnly"
 						class="reactive no-nav"
@@ -128,7 +128,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						<template #icon>
 							<Delete :size="24" decorative />
 						</template>
-						{{ $t('tasks', 'Delete task') }}
+						{{ t('tasks', 'Delete task') }}
 					</ActionButton>
 				</Actions>
 				<Actions v-if="task.deleteCountdown !== null">
@@ -138,7 +138,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						<template #icon>
 							<Undo :size="24" decorative />
 						</template>
-						{{ $n('tasks', 'Deleting the task in {countdown} second', 'Deleting the task in {countdown} seconds', task.deleteCountdown, { countdown: task.deleteCountdown }) }}
+						{{ n('tasks', 'Deleting the task in {countdown} second', 'Deleting the task in {countdown} seconds', task.deleteCountdown, { countdown: task.deleteCountdown }) }}
 					</ActionButton>
 				</Actions>
 				<Actions :disabled="readOnly" :class="[{ priority: task.priority }, priorityClass]" class="reactive no-nav">
@@ -148,7 +148,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						<template #icon>
 							<Star :size="24" decorative />
 						</template>
-						{{ $t('tasks', 'Toggle starred') }}
+						{{ t('tasks', 'Toggle starred') }}
 					</ActionButton>
 				</Actions>
 			</div>
@@ -184,6 +184,7 @@ import TaskDragContainer from './TaskDragContainer.vue'
 import Task from '../models/task.js'
 
 import { emit } from '@nextcloud/event-bus'
+import { translate as t, translatePlural as n } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
 import Actions from '@nextcloud/vue/dist/Components/Actions'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
@@ -249,11 +250,11 @@ export default {
 				return this.task.dueMoment.isValid()
 					? this.task.dueMoment.calendar(null, {
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-						lastDay: this.$t('tasks', '[Yesterday]'),
+						lastDay: t('tasks', '[Yesterday]'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-						sameDay: this.$t('tasks', '[Today]'),
+						sameDay: t('tasks', '[Today]'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-						nextDay: this.$t('tasks', '[Tomorrow]'),
+						nextDay: t('tasks', '[Tomorrow]'),
 						lastWeek: 'L',
 						nextWeek: 'L',
 						sameElse: 'L',
@@ -263,11 +264,11 @@ export default {
 				return this.task.completedDateMoment.isValid()
 					? this.task.completedDateMoment.calendar(null, {
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-						lastDay: this.$t('tasks', '[Completed yesterday]'),
+						lastDay: t('tasks', '[Completed yesterday]'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-						sameDay: this.$t('tasks', '[Completed today]'),
+						sameDay: t('tasks', '[Completed today]'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-						nextDay: this.$t('tasks', '[Completed tomorrow]'),
+						nextDay: t('tasks', '[Completed tomorrow]'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						lastWeek: '[Completed] L',
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
@@ -287,34 +288,34 @@ export default {
 				return this.task.dueMoment.isValid()
 					? this.task.dueMoment.calendar(null, {
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-						lastDay: this.$t('tasks', '[Yesterday at] LT'),
+						lastDay: t('tasks', '[Yesterday at] LT'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-						sameDay: this.$t('tasks', '[Today at] LT'),
+						sameDay: t('tasks', '[Today at] LT'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-						nextDay: this.$t('tasks', '[Tomorrow at] LT'),
+						nextDay: t('tasks', '[Tomorrow at] LT'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-						lastWeek: this.$t('tasks', 'L [at] LT'),
+						lastWeek: t('tasks', 'L [at] LT'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-						nextWeek: this.$t('tasks', 'L [at] LT'),
+						nextWeek: t('tasks', 'L [at] LT'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-						sameElse: this.$t('tasks', 'L [at] LT'),
+						sameElse: t('tasks', 'L [at] LT'),
 					})
 					: ''
 			} else {
 				return this.task.completedDateMoment.isValid()
 					? this.task.completedDateMoment.calendar(null, {
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-						lastDay: this.$t('tasks', '[Completed yesterday at] LT'),
+						lastDay: t('tasks', '[Completed yesterday at] LT'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-						sameDay: this.$t('tasks', '[Completed today at] LT'),
+						sameDay: t('tasks', '[Completed today at] LT'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-						nextDay: this.$t('tasks', '[Completed tomorrow at] LT'),
+						nextDay: t('tasks', '[Completed tomorrow at] LT'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-						lastWeek: this.$t('tasks', '[Completed] L [at] LT'),
+						lastWeek: t('tasks', '[Completed] L [at] LT'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-						nextWeek: this.$t('tasks', '[Completed] L [at] LT'),
+						nextWeek: t('tasks', '[Completed] L [at] LT'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
-						sameElse: this.$t('tasks', '[Completed] L [at] LT'),
+						sameElse: t('tasks', '[Completed] L [at] LT'),
 					})
 					: ''
 			}
@@ -365,7 +366,7 @@ export default {
 		 * @return {string} the placeholder string to show
 		 */
 		subtasksCreationPlaceholder() {
-			return this.$t('tasks', 'Add a subtask to "{task}"…', { task: this.task.summary }, undefined, { sanitize: false, escape: false })
+			return t('tasks', 'Add a subtask to "{task}"…', { task: this.task.summary }, undefined, { sanitize: false, escape: false })
 		},
 
 		/**
@@ -449,6 +450,9 @@ export default {
 	},
 
 	methods: {
+		t,
+		n,
+
 		...mapActions([
 			'toggleCompleted',
 			'toggleStarred',

@@ -54,14 +54,14 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<template #icon>
 						<Check :size="24" decorative />
 					</template>
-					{{ $t('tasks', 'Set value') }}
+					{{ t('tasks', 'Set value') }}
 				</ActionButton>
 			</Actions><Actions v-show="editing" class="actions__clear">
 				<ActionButton @click="clearValue">
 					<template #icon>
 						<Delete :size="24" decorative />
 					</template>
-					{{ $t('tasks', 'Delete value') }}
+					{{ t('tasks', 'Delete value') }}
 				</ActionButton>
 			</Actions>
 		</div>
@@ -70,6 +70,8 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import editableItem from '../../mixins/editableItem.js'
+
+import { translate as t } from '@nextcloud/l10n'
 
 export default {
 	name: 'SliderItem',
@@ -99,6 +101,9 @@ export default {
 		isValid() {
 			return this.value > 0
 		},
+	},
+	methods: {
+		t,
 	},
 }
 </script>

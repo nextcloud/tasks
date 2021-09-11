@@ -40,6 +40,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 <script>
 import SortorderDropdown from './SortorderDropdown.vue'
 
+import { translate as t } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
 
 import Plus from 'vue-material-design-icons/Plus.vue'
@@ -64,14 +65,14 @@ export default {
 		placeholder() {
 			switch (this.$route.params.collectionId) {
 			case 'starred':
-				return this.$t('tasks', 'Add an important task to "{calendar}"…', { calendar: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
+				return t('tasks', 'Add an important task to "{calendar}"…', { calendar: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
 			case 'week':
 			case 'today':
-				return this.$t('tasks', 'Add a task due today to "{calendar}"…', { calendar: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
+				return t('tasks', 'Add a task due today to "{calendar}"…', { calendar: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
 			case 'current':
-				return this.$t('tasks', 'Add a current task to "{calendar}"…', { calendar: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
+				return t('tasks', 'Add a current task to "{calendar}"…', { calendar: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
 			default:
-				return this.$t('tasks', 'Add a task to "{calendar}"…', { calendar: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
+				return t('tasks', 'Add a task to "{calendar}"…', { calendar: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
 			}
 		},
 	},
