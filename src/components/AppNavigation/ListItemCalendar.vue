@@ -58,7 +58,6 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		<template v-if="!deleteTimeout" #actions>
 			<ActionButton
 				v-if="!calendar.readOnly"
-				icon="icon-rename"
 				class="edit-calendar"
 				:close-after-click="true"
 				@click="editCalendar">

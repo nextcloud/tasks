@@ -90,7 +90,6 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					v-if="task.note!=''"
 					:size="24"
 					:title="t('tasks', 'Task has a note')"
-					class="icon-note"
 					@click.stop="openAppSidebarTab($event, 'app-sidebar-tab-notes')" />
 				<div v-if="task.due || task.completed" :class="{'date--overdue': overdue(task.dueMoment) && !task.completed}" class="date">
 					<span class="date__short" :class="{ 'date__short--completed': task.completed }">{{ dueDateShort }}</span>
