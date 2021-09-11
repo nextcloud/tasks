@@ -47,6 +47,8 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 <script>
 import editableItem from '../../mixins/editableItem.js'
 
+import { translate as t } from '@nextcloud/l10n'
+
 import MarkdownIt from 'markdown-it'
 import Mila from 'markdown-it-link-attributes'
 import MarkdownItEmoji from 'markdown-it-emoji'
@@ -90,7 +92,7 @@ export default {
 				this.$nextTick(_ => {
 					// Show placeholder if note is empty
 					if (!val.trim()) {
-						val = this.$t('tasks', 'Click here to add a note.')
+						val = t('tasks', 'Click here to add a note.')
 					}
 					this.$refs.note__viewer.innerHTML = this.md.render(val)
 				})

@@ -21,7 +21,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<Actions class="sortorder reactive"
-		:title="$t('tasks', 'Change sort order')"
+		:title="t('tasks', 'Change sort order')"
 		container=".header"
 		menu-align="right">
 		<template #icon>
@@ -67,6 +67,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
+import { translate as t } from '@nextcloud/l10n'
 import Actions from '@nextcloud/vue/dist/Components/Actions'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
 
@@ -107,57 +108,57 @@ export default {
 				{
 					id: 'default',
 					icon: 'Bookmark',
-					text: this.$t('tasks', 'Relevance'),
-					hint: this.$t('tasks', 'Sort by completed state, due date, priority, start date and summary.'),
+					text: t('tasks', 'Relevance'),
+					hint: t('tasks', 'Sort by completed state, due date, priority, start date and summary.'),
 				},
 				{
 					id: 'start',
 					icon: 'CalendarStart',
-					text: this.$t('tasks', 'Start date'),
-					hint: this.$t('tasks', 'Sort by start date and summary.'),
+					text: t('tasks', 'Start date'),
+					hint: t('tasks', 'Sort by start date and summary.'),
 				},
 				{
 					id: 'due',
 					icon: 'CalendarEnd',
-					text: this.$t('tasks', 'Due date'),
-					hint: this.$t('tasks', 'Sort by due date and summary.'),
+					text: t('tasks', 'Due date'),
+					hint: t('tasks', 'Sort by due date and summary.'),
 				},
 				{
 					id: 'created',
 					icon: 'Plus',
 					// TRANSLATORS The date at which a task was created.
-					text: this.$t('tasks', 'Created date'),
-					hint: this.$t('tasks', 'Sort by created date and summary.'),
+					text: t('tasks', 'Created date'),
+					hint: t('tasks', 'Sort by created date and summary.'),
 				},
 				{
 					id: 'modified',
 					icon: 'Pencil',
-					text: this.$t('tasks', 'Last modified'),
-					hint: this.$t('tasks', 'Sort by last-modified date and summary.'),
+					text: t('tasks', 'Last modified'),
+					hint: t('tasks', 'Sort by last-modified date and summary.'),
 				},
 				{
 					id: 'completedDate',
 					icon: 'Check',
-					text: this.$t('tasks', 'Completed date'),
-					hint: this.$t('tasks', 'Sort by completed date.'),
+					text: t('tasks', 'Completed date'),
+					hint: t('tasks', 'Sort by completed date.'),
 				},
 				{
 					id: 'priority',
 					icon: 'Star',
-					text: this.$t('tasks', 'Priority'),
-					hint: this.$t('tasks', 'Sort by priority and summary.'),
+					text: t('tasks', 'Priority'),
+					hint: t('tasks', 'Sort by priority and summary.'),
 				},
 				{
 					id: 'alphabetically',
 					icon: 'OrderAlphabeticalAscending',
-					text: this.$t('tasks', 'Alphabetically'),
-					hint: this.$t('tasks', 'Sort by summary and priority.'),
+					text: t('tasks', 'Alphabetically'),
+					hint: t('tasks', 'Sort by summary and priority.'),
 				},
 				{
 					id: 'manual',
 					icon: 'AnimationOutline',
-					text: this.$t('tasks', 'Manually'),
-					hint: this.$t('tasks', 'Sort by manual order.'),
+					text: t('tasks', 'Manually'),
+					hint: t('tasks', 'Sort by manual order.'),
 				},
 			],
 		}
@@ -194,6 +195,8 @@ export default {
 		},
 	},
 	methods: {
+		t,
+
 		setSortOrder(order) {
 			// If the sort order was already set, toggle the sort direction, otherwise reset it.
 			this.sortDirection = (this.sortOrder === order) ? !this.sortDirection : false

@@ -65,7 +65,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<template #icon>
 					<Pencil :size="24" decorative />
 				</template>
-				{{ $t('tasks', 'Edit') }}
+				{{ t('tasks', 'Edit') }}
 			</ActionButton>
 			<ActionButton
 				:close-after-click="true"
@@ -74,10 +74,10 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<LinkVariant :size="24" decorative />
 				</template>
 				{{ !copied
-					? $t('tasks', 'Copy private link')
+					? t('tasks', 'Copy private link')
 					: copySuccess
-						? $t('tasks', 'Copied')
-						: $t('tasks', 'Cannot copy') }}
+						? t('tasks', 'Copied')
+						: t('tasks', 'Cannot copy') }}
 			</ActionButton>
 			<ActionLink
 				:close-after-click="true"
@@ -85,7 +85,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<template #icon>
 					<Download :size="24" decorative />
 				</template>
-				{{ $t('tasks', 'Download') }}
+				{{ t('tasks', 'Download') }}
 			</ActionLink>
 			<ActionButton
 				v-if="!calendar.readOnly || calendar.isSharedWithMe"
@@ -101,7 +101,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<template v-else #icon>
 					<Close :size="24" decorative />
 				</template>
-				{{ !calendar.isSharedWithMe ? $t('tasks', 'Delete') : $t('tasks', 'Unshare') }}
+				{{ !calendar.isSharedWithMe ? t('tasks', 'Delete') : t('tasks', 'Unshare') }}
 			</ActionButton>
 		</template>
 
@@ -128,12 +128,12 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					class="edit"
 					type="text"
 					@keyup="checkName($event, calendar, save)">
-				<input :title="$t('tasks', 'Cancel')"
+				<input :title="t('tasks', 'Cancel')"
 					type="cancel"
 					value=""
 					class="action icon-close"
 					@click="resetView">
-				<input :title="$t('tasks', 'Save')"
+				<input :title="t('tasks', 'Save')"
 					type="button"
 					value=""
 					class="action icon-checkmark"
@@ -149,6 +149,7 @@ import Colorpicker from './Colorpicker.vue'
 import ShareCalendar from './CalendarShare.vue'
 
 import { showSuccess, showError } from '@nextcloud/dialogs'
+import { translate as t, translatePlural as n } from '@nextcloud/l10n'
 import { generateRemoteUrl } from '@nextcloud/router'
 import Avatar from '@nextcloud/vue/dist/Components/Avatar'
 import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
@@ -243,23 +244,23 @@ export default {
 		deleteMessage() {
 			if (this.calendar.supportsEvents) {
 				return !this.calendar.isSharedWithMe
-					? this.$t('tasks', 'This will delete the calendar "{calendar}" and all corresponding events and tasks.', { calendar: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
-					: this.$t('tasks', 'This will unshare the calendar "{calendar}".', { calendar: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
+					? t('tasks', 'This will delete the calendar "{calendar}" and all corresponding events and tasks.', { calendar: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
+					: t('tasks', 'This will unshare the calendar "{calendar}".', { calendar: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
 			} else {
 				return !this.calendar.isSharedWithMe
-					? this.$t('tasks', 'This will delete the list "{list}" and all corresponding tasks.', { list: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
-					: this.$t('tasks', 'This will unshare the list "{list}".', { list: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
+					? t('tasks', 'This will delete the list "{list}" and all corresponding tasks.', { list: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
+					: t('tasks', 'This will unshare the list "{list}".', { list: this.calendar.displayName }, undefined, { sanitize: false, escape: false })
 			}
 		},
 		undoDeleteMessage() {
 			if (this.calendar.supportsEvents) {
 				return !this.calendar.isSharedWithMe
-					? this.$n('tasks', 'Deleting the calendar in {countdown} second', 'Deleting the calendar in {countdown} seconds', this.countdown, { countdown: this.countdown })
-					: this.$n('tasks', 'Unsharing the calendar in {countdown} second', 'Unsharing the calendar in {countdown} seconds', this.countdown, { countdown: this.countdown })
+					? n('tasks', 'Deleting the calendar in {countdown} second', 'Deleting the calendar in {countdown} seconds', this.countdown, { countdown: this.countdown })
+					: n('tasks', 'Unsharing the calendar in {countdown} second', 'Unsharing the calendar in {countdown} seconds', this.countdown, { countdown: this.countdown })
 			} else {
 				return !this.calendar.isSharedWithMe
-					? this.$n('tasks', 'Deleting the list in {countdown} second', 'Deleting the list in {countdown} seconds', this.countdown, { countdown: this.countdown })
-					: this.$n('tasks', 'Unsharing the list in {countdown} second', 'Unsharing the list in {countdown} seconds', this.countdown, { countdown: this.countdown })
+					? n('tasks', 'Deleting the list in {countdown} second', 'Deleting the list in {countdown} seconds', this.countdown, { countdown: this.countdown })
+					: n('tasks', 'Unsharing the list in {countdown} second', 'Unsharing the list in {countdown} seconds', this.countdown, { countdown: this.countdown })
 			}
 		},
 		exportUrl() {
@@ -281,7 +282,7 @@ export default {
 		// info tooltip about number of shares
 		sharedWithTooltip() {
 			return this.hasShares
-				? this.$n('tasks',
+				? n('tasks',
 					'Shared with {num} entity',
 					'Shared with {num} entities',
 					this.calendar.shares.length, {
@@ -313,6 +314,8 @@ export default {
 		},
 	},
 	methods: {
+		t,
+
 		...mapActions([
 			'changeCalendar',
 			'deleteCalendar',
@@ -437,16 +440,16 @@ export default {
 					this.copied = true
 					// Notify calendar url was copied
 					const msg = this.calendar.supportsEvents
-						? this.$t('tasks', 'Calendar link copied to clipboard.')
-						: this.$t('tasks', 'List link copied to clipboard.')
+						? t('tasks', 'Calendar link copied to clipboard.')
+						: t('tasks', 'List link copied to clipboard.')
 					console.debug(msg)
 					showSuccess(msg)
 				}, e => {
 					this.copySuccess = false
 					this.copied = true
 					const msg = this.calendar.supportsEvents
-						? this.$t('tasks', 'Calendar link could not be copied to clipboard.')
-						: this.$t('tasks', 'List link could not be copied to clipboard.')
+						? t('tasks', 'Calendar link could not be copied to clipboard.')
+						: t('tasks', 'List link could not be copied to clipboard.')
 					showError(msg)
 				}).then(() => {
 					setTimeout(() => {
@@ -493,9 +496,9 @@ export default {
 				msg: '',
 			}
 			if (this.isCalendarNameUsed(name, id)) {
-				check.msg = this.$t('tasks', 'The name "{calendar}" is already used.', { calendar: name })
+				check.msg = t('tasks', 'The name "{calendar}" is already used.', { calendar: name })
 			} else if (!name) {
-				check.msg = this.$t('tasks', 'An empty name is not allowed.')
+				check.msg = t('tasks', 'An empty name is not allowed.')
 			} else {
 				check.allowed = true
 			}
@@ -517,8 +520,8 @@ export default {
 					await this.deleteCalendar(this.calendar)
 				} catch (error) {
 					const msg = this.calendar.supportsEvents
-						? this.$t('tasks', 'An error occurred, unable to delete the calendar.')
-						: this.$t('tasks', 'An error occurred, unable to delete the list.')
+						? t('tasks', 'An error occurred, unable to delete the calendar.')
+						: t('tasks', 'An error occurred, unable to delete the list.')
 					showError(msg)
 					console.error(error)
 				} finally {

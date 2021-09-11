@@ -32,7 +32,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			:placeholder="placeholder"
 			:multiple="true"
 			:close-on-select="false"
-			:tag-placeholder="$t('tasks', 'Add this as a new tag')"
+			:tag-placeholder="t('tasks', 'Add this as a new tag')"
 			@input="setTags"
 			@tag="addTag">
 			<template #placeholder>
@@ -44,7 +44,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				</div>
 			</template>
 			<template #noOptions>
-				{{ $t('tasks', 'No tag available. Create one!') }}
+				{{ t('tasks', 'No tag available. Create one!') }}
 			</template>
 		</Multiselect>
 	</div>
@@ -53,6 +53,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 <script>
 import MultiselectOption from './MultiselectOption.vue'
 
+import { translate as t } from '@nextcloud/l10n'
 import Multiselect from '@nextcloud/vue/dist/Components/Multiselect'
 
 import Tag from 'vue-material-design-icons/Tag.vue'
@@ -86,6 +87,8 @@ export default {
 		},
 	},
 	methods: {
+		t,
+
 		addTag(tag) {
 			this.$emit('add-tag', tag)
 		},

@@ -22,12 +22,14 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 <template>
 	<div v-show="!loadedCompleted" class="loadmore reactive">
 		<span @click="loadCompletedTasks">
-			{{ $t('tasks', 'Load all completed tasks.') }}
+			{{ t('tasks', 'Load all completed tasks.') }}
 		</span>
 	</div>
 </template>
 
 <script>
+import { translate as t } from '@nextcloud/l10n'
+
 import { mapActions } from 'vuex'
 
 export default {
@@ -43,6 +45,8 @@ export default {
 		},
 	},
 	methods: {
+		t,
+
 		...mapActions([
 			'getTasksFromCalendar',
 		]),

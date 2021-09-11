@@ -45,6 +45,7 @@ import { isTaskInList } from '../../store/storeHelper.js'
 import Header from '../../components/Header.vue'
 import TaskDragContainer from '../../components/TaskDragContainer.vue'
 
+import { translate as t } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
 
 import { mapGetters } from 'vuex'
@@ -91,9 +92,9 @@ export default {
 			const date = moment().add(day, 'day')
 			let dayString
 			if (day === 0) {
-				dayString = this.$t('tasks', 'Today')
+				dayString = t('tasks', 'Today')
 			} else if (day === 1) {
-				dayString = this.$t('tasks', 'Tomorrow')
+				dayString = t('tasks', 'Tomorrow')
 			} else {
 				dayString = date.format('dddd')
 			}

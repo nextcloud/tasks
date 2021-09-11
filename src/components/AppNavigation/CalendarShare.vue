@@ -65,6 +65,7 @@ import client from '../../services/cdav.js'
 import { urldecode } from '../../utils/url'
 
 import Axios from '@nextcloud/axios'
+import { translate as t } from '@nextcloud/l10n'
 import { generateOcsUrl } from '@nextcloud/router'
 import Multiselect from '@nextcloud/vue/dist/Components/Multiselect'
 
@@ -93,10 +94,10 @@ export default {
 	},
 	computed: {
 		placeholder() {
-			return this.$t('tasks', 'Share with users or groups')
+			return t('tasks', 'Share with users or groups')
 		},
 		noResult() {
-			return this.$t('tasks', 'No users or groups')
+			return t('tasks', 'No users or groups')
 		},
 	},
 	mounted() {

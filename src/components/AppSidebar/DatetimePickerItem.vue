@@ -43,7 +43,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:append-to-body="true"
 					:show-week-number="true"
 					type="date"
-					:placeholder="$t('tasks', 'Set date')"
+					:placeholder="t('tasks', 'Set date')"
 					class="date"
 					@change="setDate" />
 				<DatetimePicker v-if="!allDay"
@@ -54,7 +54,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:append-to-body="true"
 					:time-picker-options="timePickerOptions"
 					type="time"
-					:placeholder="$t('tasks', 'Set time')"
+					:placeholder="t('tasks', 'Set time')"
 					class="time" />
 			</div>
 		</div>
@@ -64,14 +64,14 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<template #icon>
 						<Check :size="24" decorative />
 					</template>
-					{{ $t('tasks', 'Set date') }}
+					{{ t('tasks', 'Set date') }}
 				</ActionButton>
 			</Actions><Actions v-show="editing" class="actions__clear">
 				<ActionButton @click="clearValue">
 					<template #icon>
 						<Delete :size="24" decorative />
 					</template>
-					{{ $t('tasks', 'Delete date') }}
+					{{ t('tasks', 'Delete date') }}
 				</ActionButton>
 			</Actions>
 		</div>
@@ -82,6 +82,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 import editableItem from '../../mixins/editableItem.js'
 import { overdue } from '../../store/storeHelper.js'
 
+import { translate as t } from '@nextcloud/l10n'
 import DatetimePicker from '@nextcloud/vue/dist/Components/DatetimePicker'
 import moment from '@nextcloud/moment'
 
@@ -141,6 +142,8 @@ export default {
 		},
 	},
 	methods: {
+		t,
+
 		/**
 		 * Checks if the click originated from the datepicker
 		 * and sets the value if not.

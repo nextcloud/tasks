@@ -53,6 +53,8 @@ import DeleteCompletedModal from '../../components/DeleteCompletedModal.vue'
 import LoadCompletedButton from '../../components/LoadCompletedButton.vue'
 import TaskDragContainer from '../../components/TaskDragContainer.vue'
 
+import { translatePlural as n } from '@nextcloud/l10n'
+
 import { mapGetters } from 'vuex'
 
 export default {
@@ -87,7 +89,7 @@ export default {
 		 * @return {string} The string to show for the completed tasks count
 		 */
 		closedCountString() {
-			return this.$n('tasks', '%n Completed Task', '%n Completed Tasks', this.closedCount(this.calendarId))
+			return n('tasks', '%n Completed Task', '%n Completed Tasks', this.closedCount(this.calendarId))
 		},
 		...mapGetters({
 			closedCount: 'getCalendarCountClosed',
