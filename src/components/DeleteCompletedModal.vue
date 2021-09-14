@@ -144,16 +144,15 @@ export default {
 
 <style lang="scss" scoped>
 .loadmore {
-	font-size: 11px;
-	margin-top: 10px;
 	text-align: center;
-	height: 21px;
+	top: 20px;
+	position: relative;
 
 	span {
 		color: var(--color-text-lighter);
 		background-color: var(--color-main-background);
 		border-radius: var(--border-radius-pill);
-		padding: 3px 6px;
+		padding: 10px;
 
 		&:hover {
 			cursor: pointer;
