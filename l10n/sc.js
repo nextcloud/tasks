@@ -167,7 +167,7 @@ OC.L10N.register(
     "[Created] dddd [at] LT" : "[Creadu] dddd [a is] LT",
     "Needs action" : "Tenet bisòngiu de un'atzione",
     "In process" : "In cursu",
-    "Canceled" : "Cantzelladu",
+    "Canceled" : "Annulladu",
     "Clear status" : "Lìmpia istadu",
     "Loading task from server." : "Carrighende is fainas dae su serbidore.",
     "Task not found!" : "Faina no agatada!",
