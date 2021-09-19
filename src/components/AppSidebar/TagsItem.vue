@@ -40,7 +40,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			</template>
 			<template #clear>
 				<div v-if="tags.length" class="multiselect__icon">
-					<Tag :size="24" decorative />
+					<Tag :size="20" decorative />
 				</div>
 			</template>
 			<template #noOptions>

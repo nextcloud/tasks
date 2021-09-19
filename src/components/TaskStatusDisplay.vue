@@ -23,10 +23,10 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 	<Actions v-if="status" :disabled="isDisabled">
 		<ActionButton :key="status.status" :disabled="isDisabled" @click="statusClicked">
 			<template #icon>
-				<AlertCircleOutline v-if="status.status==='error'" :size="24" class="status--error" />
-				<Check v-if="status.status==='success'" :size="24" class="status--success" />
-				<Loading v-if="status.status==='sync'" :size="24" class="status--sync" />
-				<SyncAlert v-if="status.status==='conflict'" :size="24" class="status--conflict" />
+				<AlertCircleOutline v-if="status.status==='error'" :size="20" class="status--error" />
+				<Check v-if="status.status==='success'" :size="20" class="status--success" />
+				<Loading v-if="status.status==='sync'" :size="20" class="status--sync" />
+				<SyncAlert v-if="status.status==='conflict'" :size="20" class="status--conflict" />
 			</template>
 			{{ status.message }}
 		</ActionButton>

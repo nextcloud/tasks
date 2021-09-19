@@ -54,7 +54,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 				:disabled="loading"
 				@click.prevent.stop="deleteSharee">
 				<template #icon>
-					<Delete :size="24" decorative />
+					<Delete :size="20" decorative />
 				</template>
 				{{ t('tasks', 'Unshare with {displayName}', { displayName: sharee.displayName }) }}
 			</ActionButton>
