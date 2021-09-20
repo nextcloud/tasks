@@ -45,6 +45,20 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						:disabled="loading">
 				</div>
 
+				<DatetimePickerItem
+					:all-day="allDay"
+					:task="newTask">
+					<template #icon>
+						<CalendarEnd :size="20" decorative />
+					</template>
+				</DatetimePickerItem>
+
+				<CheckboxItem
+					id="allDayToggle"
+					:checked="allDay"
+					:property-string="t('tasks', 'All day')"
+					@set-checked="allDay = !allDay" />
+
 				<div class="property property__notes">
 					<TextBoxOutline :size="20" decorative />
 					<textarea v-model="pendingDescription"
@@ -84,6 +98,8 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 <script>
 
 import CalendarPickerItem from './AppSidebar/CalendarPickerItem.vue'
+import DatetimePickerItem from './AppSidebar/DatetimePickerItem.vue'
+import CheckboxItem from './AppSidebar/CheckboxItem.vue'
 import client from '../services/cdav.js'
 
 import { translate as t } from '@nextcloud/l10n'
@@ -93,6 +109,7 @@ import Modal from '@nextcloud/vue/dist/Components/Modal'
 
 import TextBoxOutline from 'vue-material-design-icons/TextBoxOutline.vue'
 import ViewHeadline from 'vue-material-design-icons/ViewHeadline.vue'
+import CalendarEnd from 'vue-material-design-icons/CalendarEnd.vue'
 
 import { mapGetters, mapActions } from 'vuex'
 
@@ -104,6 +121,9 @@ export default {
 		Modal,
 		TextBoxOutline,
 		ViewHeadline,
+		DatetimePickerItem,
+		CalendarEnd,
+		CheckboxItem,
 	},
 	props: {
 		title: {
@@ -123,7 +143,10 @@ export default {
 			loading: true,
 			creating: false,
 			created: false,
-			newTask: null,
+			newTask: {
+				isValid: true,
+			},
+			allDay: true,
 		}
 	},
 
