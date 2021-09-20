@@ -46,7 +46,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				@editing="(editing) => editingStart = editing"
 				@set-value="setStartDate">
 				<template #icon>
-					<CalendarStart :size="24" decorative />
+					<CalendarStart :size="20" decorative />
 				</template>
 			</DatetimePickerItem>
 			<DatetimePickerItem
@@ -60,7 +60,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				@editing="(editing) => editingDue = editing"
 				@set-value="setDueDate">
 				<template #icon>
-					<CalendarEnd :size="24" decorative />
+					<CalendarEnd :size="20" decorative />
 				</template>
 			</DatetimePickerItem>
 			<CheckboxItem
@@ -81,10 +81,10 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			<ActionButton v-if="!readOnly"
 				@click="togglePinned(task)">
 				<template v-if="task.pinned" #icon>
-					<PinOff :size="24" decorative />
+					<PinOff :size="20" decorative />
 				</template>
 				<template v-else #icon>
-					<Pin :size="24" decorative />
+					<Pin :size="20" decorative />
 				</template>
 				{{ task.pinned ? t('tasks', 'Unpin') : t('tasks', 'Pin') }}
 			</ActionButton>
@@ -93,7 +93,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:close-after-click="true"
 				target="_blank">
 				<template #icon>
-					<Calendar :size="24" decorative />
+					<Calendar :size="20" decorative />
 				</template>
 				{{ t('tasks', 'Show in Calendar') }}
 			</ActionLink>
@@ -101,7 +101,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:close-after-click="true"
 				@click="editTitle(true)">
 				<template #icon>
-					<Pencil :size="24" decorative />
+					<Pencil :size="20" decorative />
 				</template>
 				{{ t('tasks', 'Edit title') }}
 			</ActionButton>
@@ -109,14 +109,14 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:href="downloadURL"
 				:close-after-click="true">
 				<template #icon>
-					<Download :size="24" decorative />
+					<Download :size="20" decorative />
 				</template>
 				{{ t('tasks', 'Download') }}
 			</ActionLink>
 			<ActionButton v-if="!readOnly"
 				@click="scheduleTaskDeletion(task)">
 				<template #icon>
-					<Delete :size="24" decorative />
+					<Delete :size="20" decorative />
 				</template>
 				{{ t('tasks', 'Delete') }}
 			</ActionButton>
@@ -126,7 +126,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				class="reactive no-nav"
 				@click.prevent.stop="clearTaskDeletion(task)">
 				<template #icon>
-					<Undo :size="24" decorative />
+					<Undo :size="20" decorative />
 				</template>
 				{{ n('tasks', 'Deleting the task in {countdown} second', 'Deleting the task in {countdown} seconds', task.deleteCountdown, { countdown: task.deleteCountdown }) }}
 			</ActionButton>
@@ -144,7 +144,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:aria-label="t('tasks', 'Task is completed')"
 					@click="toggleCompleted(task)">
 				<label :class="[priorityClass]" :for="'detailsToggleCompleted_' + task.uid">
-					<Cancel v-if="task.status === 'CANCELLED' && !task.completed" :size="24" decorative />
+					<Cancel v-if="task.status === 'CANCELLED' && !task.completed" :size="20" decorative />
 				</label>
 			</span>
 		</template>
@@ -155,7 +155,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			:name="t('tasks', 'Details')"
 			:order="0">
 			<template #icon>
-				<InformationOutline :size="24" decorative />
+				<InformationOutline :size="20" decorative />
 			</template>
 			<div>
 				<MultiselectItem
@@ -185,7 +185,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:task="task"
 					@set-value="({task, value}) => setPriority({ task, priority: value })">
 					<template #icon>
-						<Star :size="24" decorative />
+						<Star :size="20" decorative />
 					</template>
 				</SliderItem>
 				<SliderItem
@@ -199,7 +199,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:task="task"
 					@set-value="({task, value}) => setPercentComplete({ task, complete: value })">
 					<template #icon>
-						<Percent :size="24" decorative />
+						<Percent :size="20" decorative />
 					</template>
 				</SliderItem>
 				<TagsItem
@@ -223,7 +223,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			:name="t('tasks', 'Notes')"
 			:order="1">
 			<template #icon>
-				<TextBoxOutline :size="24" decorative />
+				<TextBoxOutline :size="20" decorative />
 			</template>
 			<NotesItem
 				v-show="!readOnly || task.note"

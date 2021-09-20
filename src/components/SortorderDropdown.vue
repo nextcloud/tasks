@@ -25,7 +25,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		container=".header"
 		menu-align="right">
 		<template #icon>
-			<component :is="sortOrderIcon" :size="24" decorative />
+			<component :is="sortOrderIcon" :size="20" decorative />
 			<MenuDown
 				v-if="sortDirection"
 				class="sort-direction"
@@ -49,7 +49,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			:close-after-click="true"
 			@click="setSortOrder(order.id)">
 			<template #icon>
-				<component :is="order.icon" :size="24" decorative />
+				<component :is="order.icon" :size="20" decorative />
 				<MenuDown
 					v-if="order.id == sortOrder && sortDirection"
 					class="sort-direction"

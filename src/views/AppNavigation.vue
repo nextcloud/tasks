@@ -41,7 +41,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<template #icon>
 					<component
 						:is="collection.icon"
-						:size="24"
+						:size="20"
 						decorative />
 				</template>
 				<template #counter>
@@ -67,7 +67,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				class="collection reactive"
 				@click="startCreate($event)">
 				<template #icon>
-					<Plus :size="24" decorative />
+					<Plus :size="20" decorative />
 				</template>
 				<div :class="{error: nameError}" class="app-navigation-entry-edit">
 					<form>
