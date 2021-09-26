@@ -45,7 +45,6 @@
 		"ical.js": "github:raimund-schluessler/ical.js#306bd3f02287f75911c49078bd483f966a025438",
 		"jstimezonedetect": "",
 		"linkify-it": "~3.0.2",
-		"linkifyjs": "~2.1.9",
 		"markdown-it": "~12.2.0",
 		"markdown-it-emoji": "~2.0.0",
 		"markdown-it-link-attributes": "~3.0.0",
