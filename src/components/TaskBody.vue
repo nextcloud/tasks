@@ -57,7 +57,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			<!-- Info: title, progress & tags -->
 			<div class="task-body__info">
 				<div class="title">
-					<span v-linkify="task.summary" />
+					<span v-linkify="{text: task.summary, linkify: true}" />
 				</div>
 				<div v-if="task.tags.length > 0" class="tags-list">
 					<span v-for="(tag, index) in task.tags" :key="index" class="tag">
@@ -177,7 +177,6 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import { overdue, sort, searchSubTasks, isTaskInList } from '../store/storeHelper.js'
-import { linkify } from '../directives/linkify.js'
 import TaskStatusDisplay from './TaskStatusDisplay.vue'
 import TaskDragContainer from './TaskDragContainer.vue'
 import Task from '../models/task.js'
@@ -187,6 +186,7 @@ import { translate as t, translatePlural as n } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
 import Actions from '@nextcloud/vue/dist/Components/Actions'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
+import Linkify from '@nextcloud/vue/dist/Directives/Linkify'
 
 import Cancel from 'vue-material-design-icons/Cancel.vue'
 import Delete from 'vue-material-design-icons/Delete.vue'
@@ -205,7 +205,7 @@ export default {
 	name: 'TaskBody',
 	directives: {
 		clickOutside: ClickOutside.directive,
-		linkify,
+		Linkify,
 	},
 	components: {
 		TaskStatusDisplay,
