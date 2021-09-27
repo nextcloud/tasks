@@ -25,7 +25,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 	<div>
 		<DashboardWidget
 			id="tasks_panel"
-			:items="tasks.slice(0, hasTaskToday ? 6 : 4)"
+			:items="filteredTasks.slice(0, hasTaskToday ? 6 : 4)"
 			empty-content-icon="icon-tasks"
 			:empty-content-message="t('tasks', 'No upcoming tasks')"
 			:show-more-text="t('tasks', 'upcoming tasks')"
@@ -36,7 +36,9 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<DashboardWidgetItem
 					:main-text="item.summary"
 					:sub-text="formatSubtext(item)"
-					:target-url="getTasksAppUrl(item)">
+					:target-url="getTasksAppUrl(item)"
+					:item-menu="itemMenu"
+					@markAsDone="onMarkAsDone(item)">
 					<template #avatar>
 						<div
 							class="calendar-dot"
@@ -63,7 +65,7 @@ import { generateUrl } from '@nextcloud/router'
 import { DashboardWidget, DashboardWidgetItem } from '@nextcloud/vue-dashboard'
 import { translate as t } from '@nextcloud/l10n'
 
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
 	name: 'Dashboard',
@@ -77,6 +79,12 @@ export default {
 			loading: true,
 			tasks: [],
 			showAddTaskModal: false,
+			itemMenu: {
+				markAsDone: {
+					text: t('tasks', 'Mark as done'),
+					icon: 'icon-checkmark',
+				},
+			},
 		}
 	},
 	computed: {
@@ -84,13 +92,22 @@ export default {
 			calendars: state => state.calendars.calendars,
 		}),
 		hasTaskToday() {
-			return this.tasks.some(task => isTaskInList(task, 'today'))
+			return this.filteredTasks.some(task => isTaskInList(task, 'today'))
+		},
+		filteredTasks() {
+			return sort(this.tasks.filter(task => !task.closed))
 		},
 	},
 	mounted() {
 		this.initializeEnvironment()
 	},
 	methods: {
+		t,
+
+		...mapActions([
+			'toggleCompleted',
+		]),
+
 		async initializeEnvironment() {
 			await client.connect({ enableCalDAV: true })
 			await this.$store.dispatch('fetchCurrentUserPrincipal')
@@ -108,23 +125,17 @@ export default {
 			})
 			// No calendars? Create a new one!
 			if (calendars.length === 0) {
-				let color = '#0082C9'
-				if (this.$OCA.Theming) {
-					color = this.$OCA.Theming.color
-				}
+				const color = this.$OCA.Theming?.color || '#0082C9'
 				await this.$store.dispatch('appendCalendar', { displayName: t('tasks', 'Tasks'), color })
-				this.fetchTasks()
-			// else, let's get those tasks!
-			} else {
-				this.fetchTasks()
 			}
+			await this.fetchTasks()
 		},
 		async fetchTasks() {
 			this.loading = true
 			const results = await Promise.all(this.calendars.map(calendar =>
 				this.$store.dispatch('getTasksFromCalendar', { calendar, completed: false, related: null })
 			))
-			this.tasks = sort([...results.flat().filter(task => !task.closed)])
+			this.tasks = [...results.flat()]
 			this.loading = false
 		},
 		/**
@@ -174,6 +185,11 @@ export default {
 
 		toggleAddTaskModel() {
 			this.showAddTaskModal = !this.showAddTaskModal
+		},
+
+		async onMarkAsDone(item) {
+			await this.toggleCompleted(item)
+			await this.fetchTasks()
 		},
 	},
 

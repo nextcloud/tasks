@@ -44,8 +44,8 @@ __webpack_public_path__ = generateFilePath('tasks', '', 'js/')
 
 Vue.prototype.t = translate
 Vue.prototype.n = translatePlural
-Vue.prototype.OC = OC
-Vue.prototype.OCA = OCA
+Vue.prototype.$OC = OC
+Vue.prototype.$OCA = OCA
 
 document.addEventListener('DOMContentLoaded', () => {
 	OCA.Dashboard.register('tasks', (el) => {
