@@ -85,9 +85,14 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 								</div>
 							</template>
 						</div>
-						<p v-if="retentionDuration" class="footer">
-							{{ n('calendar', 'Elements in the trash bin are deleted after {numDays} day', 'Elements in the trash bin are deleted after {numDays} days', retentionDuration, { numDays: retentionDuration }) }}
-						</p>
+						<div class="footer">
+							<p v-if="retentionDuration">
+								{{ n('calendar', 'Elements in the trash bin are deleted after {numDays} day', 'Elements in the trash bin are deleted after {numDays} days', retentionDuration, { numDays: retentionDuration }) }}
+							</p>
+							<button @click="onEmptyTrashBin()">
+								{{ t('tasks','Empty trash bin') }}
+							</button>
+						</div>
 					</template>
 				</div>
 			</Modal>
@@ -251,6 +256,23 @@ export default {
 				showError(t('tasks', 'Could not restore calendar or event'))
 			}
 		},
+		onEmptyTrashBin() {
+			OC.dialogs.confirm(
+				t('tasks', 'Do you really want to empty the trash bin?'),
+				t('tasks', 'Empty trash bin'),
+				this.emptyTrashBin,
+				true
+			)
+		},
+
+		emptyTrashBin(confirm) {
+			if (!confirm) {
+				return
+			}
+			this.items.forEach((item) => {
+				this.onDeletePermanently(item)
+			})
+		},
 	},
 }
 </script>
@@ -315,6 +337,9 @@ export default {
 	text-align: center;
 	font-size: small;
 	margin-top: 16px;
+	& > p {
+		margin-bottom: 12px;
+	}
 }
 
 .icon-bullet {
