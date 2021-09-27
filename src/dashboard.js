@@ -29,7 +29,7 @@ import './css/dashboard.scss'
 
 import { generateFilePath } from '@nextcloud/router'
 import { getRequestToken } from '@nextcloud/auth'
-import { translate, translatePlural } from '@nextcloud/l10n'
+import { translate as t, translatePlural as n } from '@nextcloud/l10n'
 
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -42,10 +42,11 @@ __webpack_nonce__ = btoa(getRequestToken())
 // eslint-disable-next-line
 __webpack_public_path__ = generateFilePath('tasks', '', 'js/')
 
-Vue.prototype.t = translate
-Vue.prototype.n = translatePlural
+Vue.prototype.t = t
+Vue.prototype.n = n
 Vue.prototype.$OC = OC
 Vue.prototype.$OCA = OCA
+Vue.prototype.$appVersion = appVersion
 
 document.addEventListener('DOMContentLoaded', () => {
 	OCA.Dashboard.register('tasks', (el) => {
