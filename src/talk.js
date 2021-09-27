@@ -45,7 +45,9 @@ __webpack_public_path__ = generateFilePath('tasks', '', 'js/')
 
 Vue.prototype.t = t
 Vue.prototype.n = n
-Vue.prototype.OC = OC
+Vue.prototype.$OC = OC
+Vue.prototype.$OCA = OCA
+Vue.prototype.$appVersion = appVersion
 
 window.addEventListener('DOMContentLoaded', () => {
 	if (!window.OCA?.Talk?.registerMessageAction) {
