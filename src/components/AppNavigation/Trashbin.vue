@@ -222,9 +222,9 @@ export default {
 					break
 				}
 			} catch (error) {
-				logger.error('could not restore ' + item.url, { error })
+				logger.error('could not delete ' + item.url, { error })
 
-				showError(t('tasks', 'Could not restore calendar or event'))
+				showError(t('tasks', 'Could not delete calendar or event'))
 			}
 		},
 		async restore(item) {
