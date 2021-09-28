@@ -22,4 +22,4 @@ Help us to maximize the effort we can spend fixing issues and adding new feature
 [irc]: https://webchat.freenode.net/?channels=nextcloud&uio=d4
 
 ### Contribute Code and translations
-Please check [core's contribution guidelines](https://github.com/nextcloud/core/blob/master/CONTRIBUTING.md) for further information about contributing code and translations.
+Please check [server's contribution guidelines](https://github.com/nextcloud/server/blob/master/.github/CONTRIBUTING.md) for further information about contributing code and translations.
