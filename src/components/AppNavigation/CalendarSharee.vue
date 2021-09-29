@@ -108,6 +108,8 @@ export default {
 		},
 	},
 	methods: {
+		t,
+
 		async deleteSharee() {
 			if (this.loading) {
 				return false

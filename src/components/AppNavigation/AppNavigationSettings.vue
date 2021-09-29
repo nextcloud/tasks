@@ -122,10 +122,13 @@ export default {
 			calendars: 'getSortedWritableCalendars',
 		}),
 	},
-	methods:
-		mapActions([
+	methods: {
+		t,
+
+		...mapActions([
 			'setVisibility',
 		]),
+	},
 }
 </script>
 
