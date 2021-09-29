@@ -203,6 +203,7 @@ OC.L10N.register(
     "No upcoming tasks" : "沒有接下來的工作",
     "upcoming tasks" : "接下來的工作",
     "No tasks today" : "今日無工作",
+    "Mark as done" : "標記為完成",
     "No due date assigned" : "未指定到期日",
     "[Due yesterday]" : "[昨天截止]",
     "[Due] L" : "[截止於] L",

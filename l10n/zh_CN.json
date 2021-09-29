@@ -188,6 +188,7 @@
     "No upcoming tasks" : "没有即将到来的任务",
     "upcoming tasks" : "即将到来的任务",
     "No tasks today" : "今天没有任务",
+    "Mark as done" : "标记为已完成",
     "No due date assigned" : "未分配到期日",
     "Successfully created the task." : "成功创建任务。",
     "Could not delete the task." : "无法删除任务。",
@@ -198,6 +199,7 @@
     "Successfully updated the task." : "成功更新任务。",
     "Task successfully moved to new calendar." : "任务已成功移至新日历。",
     "An error occurred" : "发生了一个错误",
-    "Create a task" : "创建一个任务"
+    "Create a task" : "创建一个任务",
+    "Message from {author} in {conversationName}" : "{conversationName} 中来自 {author} 的消息"
 },"pluralForm" :"nplurals=1; plural=0;"
 }

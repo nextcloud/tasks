@@ -203,6 +203,7 @@ OC.L10N.register(
     "No upcoming tasks" : "Ez dago hurrengo zereginik",
     "upcoming tasks" : "hurrengo zereginak",
     "No tasks today" : "Zereginik ez gaurko",
+    "Mark as done" : "Markatu eginda",
     "No due date assigned" : "Ez da epemuga esleitu",
     "[Due yesterday]" : "[Epemuga atzo]",
     "[Due] L" : "[Epemuga] L",

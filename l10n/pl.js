@@ -203,6 +203,7 @@ OC.L10N.register(
     "No upcoming tasks" : "Brak nadchodzących zadań",
     "upcoming tasks" : "nadchodzących zadań",
     "No tasks today" : "Dzisiaj brak zadań",
+    "Mark as done" : "Oznacz jako wykonane",
     "No due date assigned" : "Nie przydzielono terminu",
     "[Due yesterday]" : "[Na wczoraj]",
     "[Due] L" : "[Na dzień] L",

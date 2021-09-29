@@ -203,6 +203,7 @@ OC.L10N.register(
     "No upcoming tasks" : "Yaklaşan bir görev yok",
     "upcoming tasks" : "yaklaşan görevler",
     "No tasks today" : "Bugün için bir görev yok",
+    "Mark as done" : "Tamamlanmış olarak işaretle",
     "No due date assigned" : "Bitiş tarihi atanmamış",
     "[Due yesterday]" : "[Dün biten]",
     "[Due] L" : "L [gününde biten] ",
