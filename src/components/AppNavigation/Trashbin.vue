@@ -101,7 +101,7 @@ import { uidToHexColor } from '../../utils/color'
 import logger from '../../utils/logger'
 
 import { showError } from '@nextcloud/dialogs'
-import { translate as t } from '@nextcloud/l10n'
+import { translate as t, translatePlural as n } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
 import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
 import Actions from '@nextcloud/vue/dist/Components/Actions'
@@ -187,6 +187,9 @@ export default {
 		},
 	},
 	methods: {
+		t,
+		n,
+
 		async onShow() {
 			this.showModal = true
 

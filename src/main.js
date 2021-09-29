@@ -97,12 +97,6 @@ if (!OCA.Tasks) {
 	OCA.Tasks = {}
 }
 
-Vue.prototype.t = function() {
-	return t.apply(null, arguments).toString()
-}
-Vue.prototype.n = function() {
-	return n.apply(null, arguments).toString()
-}
 Vue.prototype.$OC = OC
 Vue.prototype.$OCA = OCA
 Vue.prototype.$appVersion = appVersion

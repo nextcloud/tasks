@@ -456,10 +456,6 @@ export default {
 <style lang="scss" scoped>
 $color-error: #e9322d;
 
-#app-settings::v-deep #app-settings-header .settings-button {
-	padding-left: 50px;
-}
-
 .collection::v-deep {
 	&.collection--edit {
 		.app-navigation-entry-link {
