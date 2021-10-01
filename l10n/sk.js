@@ -203,6 +203,7 @@ OC.L10N.register(
     "No upcoming tasks" : "Žiadne nadchádzajúce úlohy",
     "upcoming tasks" : "nadchádzajúce úlohy",
     "No tasks today" : "Dnes žiadne úlohy",
+    "Mark as done" : "Označiť ako dokončené",
     "No due date assigned" : "Nie je priradený žiadny dátum platnosti",
     "[Due yesterday]" : "[Termín včera]",
     "[Due] L" : "[Termín] L",
