@@ -211,9 +211,7 @@ li.action::v-deep {
 	// indicate which sort order is selected
 	&.selected .action-button {
 		opacity: 1;
-	}
-	// allow to absolute position the sort direction icon
-	.action-button__icon {
+		// allow to absolute position the sort direction icon
 		position: relative;
 	}
 }
