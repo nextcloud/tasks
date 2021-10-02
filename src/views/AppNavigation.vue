@@ -105,23 +105,23 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import ListItemCalendar from '../components/AppNavigation/ListItemCalendar.vue'
-import Colorpicker from '../components/AppNavigation/Colorpicker.vue'
-import AppNavigationSettings from '../components/AppNavigation/AppNavigationSettings.vue'
-import Trashbin from '../components/AppNavigation/Trashbin.vue'
+import ListItemCalendar from '../components/AppNavigation/ListItemCalendar'
+import Colorpicker from '../components/AppNavigation/Colorpicker'
+import AppNavigationSettings from '../components/AppNavigation/AppNavigationSettings'
+import Trashbin from '../components/AppNavigation/Trashbin'
 
 import { translate as t } from '@nextcloud/l10n'
 import AppNavigation from '@nextcloud/vue/dist/Components/AppNavigation'
 import AppNavigationCounter from '@nextcloud/vue/dist/Components/AppNavigationCounter'
 import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
 
-import CalendarToday from 'vue-material-design-icons/CalendarToday.vue'
-import CalendarWeek from 'vue-material-design-icons/CalendarWeek.vue'
-import Check from 'vue-material-design-icons/Check.vue'
-import CircleOutline from 'vue-material-design-icons/CircleOutline.vue'
-import Plus from 'vue-material-design-icons/Plus.vue'
-import Star from 'vue-material-design-icons/Star.vue'
-import TrendingUp from 'vue-material-design-icons/TrendingUp.vue'
+import CalendarToday from 'vue-material-design-icons/CalendarToday'
+import CalendarWeek from 'vue-material-design-icons/CalendarWeek'
+import Check from 'vue-material-design-icons/Check'
+import CircleOutline from 'vue-material-design-icons/CircleOutline'
+import Plus from 'vue-material-design-icons/Plus'
+import Star from 'vue-material-design-icons/Star'
+import TrendingUp from 'vue-material-design-icons/TrendingUp'
 
 import draggable from 'vuedraggable'
 import ClickOutside from 'v-click-outside'

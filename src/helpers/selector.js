@@ -24,7 +24,7 @@
  *
  */
 import Vue from 'vue'
-import store from '../store/store.js'
+import store from '../store/store'
 
 const buildSelector = (selector, propsData = {}) => {
 	return new Promise((resolve, reject) => {

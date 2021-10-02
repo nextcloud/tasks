@@ -60,8 +60,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import CalendarSharee from './CalendarSharee.vue'
-import client from '../../services/cdav.js'
+import CalendarSharee from './CalendarSharee'
+import client from '../../services/cdav'
 import { urldecode } from '../../utils/url'
 
 import Axios from '@nextcloud/axios'

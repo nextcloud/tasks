@@ -144,8 +144,8 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import Colorpicker from './Colorpicker.vue'
-import ShareCalendar from './CalendarShare.vue'
+import Colorpicker from './Colorpicker'
+import ShareCalendar from './CalendarShare'
 
 import { showSuccess, showError } from '@nextcloud/dialogs'
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'
@@ -158,13 +158,13 @@ import Actions from '@nextcloud/vue/dist/Components/Actions'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
 import ActionLink from '@nextcloud/vue/dist/Components/ActionLink'
 
-import Close from 'vue-material-design-icons/Close.vue'
-import Delete from 'vue-material-design-icons/Delete.vue'
-import Download from 'vue-material-design-icons/Download.vue'
-import LinkVariant from 'vue-material-design-icons/LinkVariant.vue'
-import Pencil from 'vue-material-design-icons/Pencil.vue'
-import ShareVariant from 'vue-material-design-icons/ShareVariant.vue'
-import Undo from 'vue-material-design-icons/Undo.vue'
+import Close from 'vue-material-design-icons/Close'
+import Delete from 'vue-material-design-icons/Delete'
+import Download from 'vue-material-design-icons/Download'
+import LinkVariant from 'vue-material-design-icons/LinkVariant'
+import Pencil from 'vue-material-design-icons/Pencil'
+import ShareVariant from 'vue-material-design-icons/ShareVariant'
+import Undo from 'vue-material-design-icons/Undo'
 
 import ClickOutside from 'v-click-outside'
 import { mapGetters, mapActions } from 'vuex'

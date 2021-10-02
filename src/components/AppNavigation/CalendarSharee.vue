@@ -70,8 +70,8 @@ import ActionCheckbox from '@nextcloud/vue/dist/Components/ActionCheckbox'
 import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
 import Avatar from '@nextcloud/vue/dist/Components/Avatar'
 
-import AccountMultiple from 'vue-material-design-icons/AccountMultiple.vue'
-import Delete from 'vue-material-design-icons/Delete.vue'
+import AccountMultiple from 'vue-material-design-icons/AccountMultiple'
+import Delete from 'vue-material-design-icons/Delete'
 
 export default {
 	name: 'CalendarSharee',

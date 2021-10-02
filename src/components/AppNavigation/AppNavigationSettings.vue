@@ -67,12 +67,12 @@ import { translate as t } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
 import AppNavigationSettings from '@nextcloud/vue/dist/Components/AppNavigationSettings'
 
-import CalendarToday from 'vue-material-design-icons/CalendarToday.vue'
-import CalendarWeek from 'vue-material-design-icons/CalendarWeek.vue'
-import CircleOutline from 'vue-material-design-icons/CircleOutline.vue'
-import Check from 'vue-material-design-icons/Check.vue'
-import Star from 'vue-material-design-icons/Star.vue'
-import TrendingUp from 'vue-material-design-icons/TrendingUp.vue'
+import CalendarToday from 'vue-material-design-icons/CalendarToday'
+import CalendarWeek from 'vue-material-design-icons/CalendarWeek'
+import CircleOutline from 'vue-material-design-icons/CircleOutline'
+import Check from 'vue-material-design-icons/Check'
+import Star from 'vue-material-design-icons/Star'
+import TrendingUp from 'vue-material-design-icons/TrendingUp'
 
 import { mapState, mapGetters, mapActions } from 'vuex'
 

@@ -26,7 +26,7 @@ import {
 	COMPONENT_NAME_EVENT,
 	COMPONENT_NAME_JOURNAL,
 	COMPONENT_NAME_VTODO,
-} from './consts.js'
+} from './consts'
 
 /**
  * Creates a complete calendar-object-object based on given props

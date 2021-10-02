@@ -37,10 +37,10 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 import Actions from '@nextcloud/vue/dist/Components/Actions'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
 
-import AlertCircleOutline from 'vue-material-design-icons/AlertCircleOutline.vue'
-import Check from 'vue-material-design-icons/Check.vue'
-import Loading from 'vue-material-design-icons/Loading.vue'
-import SyncAlert from 'vue-material-design-icons/SyncAlert.vue'
+import AlertCircleOutline from 'vue-material-design-icons/AlertCircleOutline'
+import Check from 'vue-material-design-icons/Check'
+import Loading from 'vue-material-design-icons/Loading'
+import SyncAlert from 'vue-material-design-icons/SyncAlert'
 
 export default {
 	name: 'TaskStatusDisplay',

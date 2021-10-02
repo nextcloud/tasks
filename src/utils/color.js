@@ -22,7 +22,7 @@
  *
  */
 
-import { uidToColor } from './uidToColor.js'
+import { uidToColor } from './uidToColor'
 
 import convert from 'color-convert'
 

@@ -58,12 +58,13 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { sort, isTaskInList } from '../store/storeHelper.js'
-import client from '../services/cdav.js'
-import TaskCreateDialog from '../components/TaskCreateDialog.vue'
+import TaskCreateDialog from '../components/TaskCreateDialog'
+import client from '../services/cdav'
+import { sort, isTaskInList } from '../store/storeHelper'
+
+import { translate as t } from '@nextcloud/l10n'
 import { generateUrl } from '@nextcloud/router'
 import { DashboardWidget, DashboardWidgetItem } from '@nextcloud/vue-dashboard'
-import { translate as t } from '@nextcloud/l10n'
 
 import { mapState, mapActions } from 'vuex'
 
