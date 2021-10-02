@@ -114,7 +114,7 @@ import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
 import EmptyContent from '@nextcloud/vue/dist/Components/EmptyContent'
 import Modal from '@nextcloud/vue/dist/Components/Modal'
 
-import Delete from 'vue-material-design-icons/Delete.vue'
+import Delete from 'vue-material-design-icons/Delete'
 
 import { mapGetters } from 'vuex'
 

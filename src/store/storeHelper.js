@@ -25,7 +25,7 @@
  */
 'use strict'
 
-import Task from '../models/task.js'
+import Task from '../models/task'
 
 import moment from '@nextcloud/moment'
 

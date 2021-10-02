@@ -83,16 +83,16 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 
-import CalendarPickerItem from './AppSidebar/CalendarPickerItem.vue'
-import client from '../services/cdav.js'
+import CalendarPickerItem from './AppSidebar/CalendarPickerItem'
+import client from '../services/cdav'
 
 import { translate as t } from '@nextcloud/l10n'
 import { generateUrl } from '@nextcloud/router'
 import EmptyContent from '@nextcloud/vue/dist/Components/EmptyContent'
 import Modal from '@nextcloud/vue/dist/Components/Modal'
 
-import TextBoxOutline from 'vue-material-design-icons/TextBoxOutline.vue'
-import ViewHeadline from 'vue-material-design-icons/ViewHeadline.vue'
+import TextBoxOutline from 'vue-material-design-icons/TextBoxOutline'
+import ViewHeadline from 'vue-material-design-icons/ViewHeadline'
 
 import { mapGetters, mapActions } from 'vuex'
 

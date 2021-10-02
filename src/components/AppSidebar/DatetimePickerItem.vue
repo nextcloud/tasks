@@ -79,12 +79,12 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import editableItem from '../../mixins/editableItem.js'
-import { overdue } from '../../store/storeHelper.js'
+import editableItem from '../../mixins/editableItem'
+import { overdue } from '../../store/storeHelper'
 
 import { translate as t } from '@nextcloud/l10n'
-import DatetimePicker from '@nextcloud/vue/dist/Components/DatetimePicker'
 import moment from '@nextcloud/moment'
+import DatetimePicker from '@nextcloud/vue/dist/Components/DatetimePicker'
 
 export default {
 	name: 'DatetimePickerItem',

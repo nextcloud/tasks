@@ -33,12 +33,12 @@
  */
 'use strict'
 
-import client from '../services/cdav.js'
-import Task from '../models/task.js'
-import { isParentInList, searchSubTasks } from './storeHelper.js'
-import { findVTODObyState } from './cdav-requests.js'
-import router from '../router.js'
-import { detectColor, uidToHexColor } from '../utils/color.js'
+import client from '../services/cdav'
+import Task from '../models/task'
+import { isParentInList, searchSubTasks } from './storeHelper'
+import { findVTODObyState } from './cdav-requests'
+import router from '../router'
+import { detectColor, uidToHexColor } from '../utils/color'
 import { mapCDavObjectToCalendarObject } from '../models/calendarObject'
 
 import Vue from 'vue'

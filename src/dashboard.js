@@ -23,7 +23,7 @@
  */
 
 import Dashboard from './views/Dashboard'
-import store from './store/store.js'
+import store from './store/store'
 
 import './css/dashboard.scss'
 
