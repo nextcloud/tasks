@@ -87,7 +87,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						</div>
 						<div class="footer">
 							<p v-if="retentionDuration">
-								{{ n('calendar', 'Elements in the trash bin are deleted after {numDays} day', 'Elements in the trash bin are deleted after {numDays} days', retentionDuration, { numDays: retentionDuration }) }}
+								{{ n('tasks', 'Elements in the trash bin are deleted after {numDays} day', 'Elements in the trash bin are deleted after {numDays} days', retentionDuration, { numDays: retentionDuration }) }}
 							</p>
 							<button @click="onEmptyTrashBin()">
 								{{ t('tasks','Empty trash bin') }}
