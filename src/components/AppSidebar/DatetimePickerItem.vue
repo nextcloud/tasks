@@ -47,7 +47,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					class="date"
 					@change="setDate" />
 				<DatetimePicker v-if="!allDay"
-					v-model="newValue"
+					:value="newValue"
 					:lang="lang"
 					:format="timeFormat"
 					:clearable="false"
@@ -55,7 +55,8 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:time-picker-options="timePickerOptions"
 					type="time"
 					:placeholder="t('tasks', 'Set time')"
-					class="time" />
+					class="time"
+					@change="setTime" />
 			</div>
 		</div>
 		<div class="item__actions">
@@ -172,6 +173,21 @@ export default {
 		setDate(date) {
 			date.setHours(this.newValue.getHours(), this.newValue.getMinutes())
 			this.newValue = date
+		},
+		/**
+		 * When selecting a new time with the keyboard, the date is set to the current day.
+		 * So we only get hours and minutes from the new date.
+		 *
+		 * @param {Date} date The new date (hours & minutes)
+		 */
+		setTime(date) {
+			/**
+			 * Simply mutating newValue doesn't make vue pick up the changes,
+			 * so we create a new object, mutate it and assign it to newValue.
+			 */
+			const newDate = new Date(this.newValue.getTime())
+			newDate.setHours(date.getHours(), date.getMinutes())
+			this.newValue = newDate
 		},
 	},
 }
