@@ -55,7 +55,7 @@ OC.L10N.register(
     "Deleted" : "Gelöscht",
     "Restore" : "Wiederherstellen",
     "Delete permanently" : "Endgültig löschen",
-    "Empty trash bin" : "Papierkorb ist leer",
+    "Empty trash bin" : "Papierkorb leeren",
     "Untitled item" : "Eintrag ohne Namen",
     "Could not load deleted calendars and objects" : "Gelöschte Kalender und Objekte konnten nicht geladen werden",
     "Could not delete calendar or event" : "Kalender oder Termin konnte nicht gelöscht werden",
