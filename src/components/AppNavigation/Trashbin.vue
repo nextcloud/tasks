@@ -70,9 +70,12 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 									<Moment class="timestamp" :timestamp="item.deletedAt" />
 								</div>
 								<div :key="`${item.url}action`" class="table__body">
-									<button @click="restore(item)">
+									<ButtonVue @click="restore(item)">
+										<template #icon>
+											<Undo :size="20" />
+										</template>
 										{{ t('tasks','Restore') }}
-									</button>
+									</ButtonVue>
 									<Actions :force-menu="true">
 										<ActionButton @click="onDeletePermanently(item)">
 											<template #icon>
@@ -88,9 +91,12 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 							<p v-if="retentionDuration">
 								{{ n('tasks', 'Elements in the trash bin are deleted after {numDays} day', 'Elements in the trash bin are deleted after {numDays} days', retentionDuration, { numDays: retentionDuration }) }}
 							</p>
-							<button @click="onEmptyTrashBin()">
+							<ButtonVue type="primary" @click="onEmptyTrashBin()">
+								<template #icon>
+									<DeleteForever :size="20" />
+								</template>
 								{{ t('tasks','Empty trash bin') }}
-							</button>
+							</ButtonVue>
 						</div>
 					</template>
 				</div>
@@ -110,10 +116,13 @@ import moment from '@nextcloud/moment'
 import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
 import Actions from '@nextcloud/vue/dist/Components/Actions'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
+import ButtonVue from '@nextcloud/vue/dist/Components/ButtonVue'
 import EmptyContent from '@nextcloud/vue/dist/Components/EmptyContent'
 import Modal from '@nextcloud/vue/dist/Components/Modal'
 
 import Delete from 'vue-material-design-icons/Delete'
+import DeleteForever from 'vue-material-design-icons/DeleteForever'
+import Undo from 'vue-material-design-icons/Undo'
 
 import { mapGetters } from 'vuex'
 
@@ -127,6 +136,9 @@ export default {
 		Moment,
 		Actions,
 		ActionButton,
+		ButtonVue,
+		DeleteForever,
+		Undo,
 	},
 	data() {
 		return {
@@ -340,8 +352,10 @@ export default {
 }
 
 .footer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	color: var(--color-text-lighter);
-	text-align: center;
 	font-size: small;
 	margin-top: 16px;
 	& > p {
