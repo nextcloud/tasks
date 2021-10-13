@@ -1,6 +1,7 @@
 OC.L10N.register(
     "tasks",
     {
+    "Upcoming tasks" : "Próximas tarefas",
     "Important" : "Importante",
     "Today" : "Hoje",
     "Week" : "Semana",
@@ -8,6 +9,7 @@ OC.L10N.register(
     "Current" : "Actual",
     "Completed" : "Concluída",
     "Tasks" : "Tarefas",
+    "The Tasks app for Nextcloud" : "A aplicação Tarefas para Nextcloud",
     "Visibility of Smart Collections" : "Visibilidade das Coleções Inteligentes",
     "Hidden" : "Escondido",
     "Visible" : "Visível",
