@@ -18,7 +18,7 @@ OC.L10N.register(
     "Share with users or groups" : "Сподели с потребители или групи",
     "No users or groups" : "Няма потребители или групи",
     "Unshare with {displayName}" : "Прекратява споделянето с {displayName}",
-    "Unable to delete the share." : "Неуспешно изтриване на споделяне.",
+    "Unable to delete the share." : "Неуспешно изтриване на споделянето.",
     "Unable to change permissions." : "Неуспешна промяна на права.",
     "Edit" : "Редакция",
     "Copy private link" : "Копирай скритата връзка",
