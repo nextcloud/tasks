@@ -308,7 +308,7 @@ const mutations = {
 	 * @param {Array<Task>} tasks Tasks
 	 */
 	appendTasks(state, tasks = []) {
-		state.tasks = tasks.reduce(function(list, task) {
+		state.tasks = tasks.reduce(function (list, task) {
 			if (task instanceof Task) {
 				Vue.set(list, task.key, task)
 			} else {
@@ -749,6 +749,32 @@ const actions = {
 				}
 			}
 		}
+
+		/* WIP! 
+			* Tags should be annotated by an '@'
+			* How to get the correct calender? Is automatching possible?
+			* Due Date is even more WIP. Since every special case needs to be handled
+				Maybe simplify it to: today, tomorrow, next week (monday), next month or dd/mm or dd/mm/yyyy for now?
+		*/
+
+		let tags = [];
+		let calender;
+		let splits = task.summary.split(" ");
+		var s;
+
+		for (s in splits()) {
+			let entry = splits[s];
+			if (entry.startsWith("@")) {
+				tags.push(entry.substr(1));
+			}
+			if (entry.startsWith("#")) {
+				calender = entry.substr(1);
+			}
+			if (entry.startsWith("tomorrow")) {
+				/* TODO */
+			}
+		}
+		task.tags = tags;
 
 		const vData = ICAL.stringify(task.jCal)
 
@@ -1304,7 +1330,7 @@ const actions = {
 				context.commit('setStart', { task, start: newStart })
 				context.dispatch('scheduleTaskUpdate', task)
 			}
-		// Adjust due date
+			// Adjust due date
 		} else if (due.isValid()) {
 			diff = due.diff(moment().startOf('day'), 'days')
 			diff = diff < 0 ? 0 : diff
@@ -1313,7 +1339,7 @@ const actions = {
 				context.commit('setDue', { task, due: newDue })
 				context.dispatch('scheduleTaskUpdate', task)
 			}
-		// Set the due date to appropriate value
+			// Set the due date to appropriate value
 		} else {
 			context.commit('setDue', { task, due: day })
 			context.dispatch('scheduleTaskUpdate', task)
