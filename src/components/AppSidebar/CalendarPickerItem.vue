@@ -26,11 +26,11 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 	<div class="property__item">
 		<Multiselect
 			label="displayName"
-			track-by="displayName"
+			track-by="url"
 			:disabled="isDisabled"
 			:options="calendars"
 			:value="calendar"
-			:placeholder="translate('tasks', 'Select a calendar')"
+			:placeholder="t('tasks', 'Select a calendar')"
 			@select="change">
 			<template #singleLabel="scope">
 				<CalendarPickerOption v-bind="scope.option" />
@@ -43,7 +43,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					color=""
 					owner=""
 					:is-shared-with-me="false"
-					:display-name="translate('tasks', 'No calendar matches the search.')" />
+					:display-name="t('tasks', 'No calendar matches the search.')" />
 			</template>
 		</Multiselect>
 	</div>
@@ -52,7 +52,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 <script>
 import CalendarPickerOption from './CalendarPickerOption'
 
-import { translate } from '@nextcloud/l10n'
+import { translate as t } from '@nextcloud/l10n'
 import Multiselect from '@nextcloud/vue/dist/Components/Multiselect'
 
 export default {
@@ -80,7 +80,8 @@ export default {
 		},
 	},
 	methods: {
-		translate,
+		t,
+
 		/**
 		 * TODO: this should emit the calendar id instead
 		 *
