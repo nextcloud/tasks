@@ -42,7 +42,7 @@
 		"cdav-library": "github:nextcloud/cdav-library",
 		"color-convert": "^2.0.1",
 		"debounce": "^1.2.1",
-		"ical.js": "github:raimund-schluessler/ical.js#306bd3f02287f75911c49078bd483f966a025438",
+		"ical.js": "^1.4.0",
 		"jstimezonedetect": "",
 		"linkify-it": "~3.0.3",
 		"markdown-it": "~12.2.0",
