@@ -555,11 +555,8 @@ $color-error: #e9322d;
 		margin: -1px;
 	}
 
-	&:not(.active) {
-		.app-navigation-entry__utils .action-item,
-		.calendar__share {
-			display: none;
-		}
+	&:not(.active) > .app-navigation-entry__utils .action-item:not(.shared) {
+		display: none;
 	}
 
 	&.list--edit {
