@@ -152,11 +152,21 @@ export default {
 				color: calendar.color ?? uidToHexColor(calendar.displayname),
 			}))
 			const formattedCalendarObjects = this.objects.map(vobject => {
-				let eventSummary = t('tasks', 'Untitled item')
+				let name
 				try {
-					eventSummary = vobject?.calendarComponent.getComponentIterator().next().value?.title
+					name = vobject?.calendarComponent.getComponentIterator().next().value?.title
 				} catch (e) {
-					// ignore
+				}
+				if (!name) {
+					if (vobject.objectType === 'VTODO') {
+						name = t('tasks', 'Untitled task')
+					} else if (vobject.objectType === 'VEVENT') {
+						name = t('tasks', 'Untitled event')
+					} else if (vobject.objectType === 'VJOURNAL') {
+						name = t('tasks', 'Untitled journal')
+					} else {
+						name = t('tasks', 'Untitled item')
+					}
 				}
 				let subline = vobject.calendar?.displayName || t('tasks', 'Unknown calendar')
 				if (vobject.isEvent) {
@@ -174,7 +184,7 @@ export default {
 					vobject,
 					type: 'object',
 					key: vobject.id,
-					name: eventSummary,
+					name,
 					subline,
 					url: vobject.uri,
 					deletedAt: vobject.dav._props['{http://nextcloud.com/ns}deleted-at'],
