@@ -24,7 +24,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		<div v-if="$route.params.collectionId !== 'completed' && calendar && !calendar.readOnly"
 			class="header__input">
 			<form @submit.prevent="addTask">
-				<Plus :size="20" decorative />
+				<Plus :size="20" />
 				<input
 					v-model="newTaskName"
 					:placeholder="placeholder"

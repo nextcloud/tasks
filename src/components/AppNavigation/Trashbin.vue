@@ -25,7 +25,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		:pinned="true"
 		@click.prevent="onShow">
 		<template #icon>
-			<Delete :size="20" decorative />
+			<Delete :size="20" />
 		</template>
 		<template #extra>
 			<Modal v-if="showModal"
@@ -36,7 +36,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					</EmptyContent>
 					<EmptyContent v-else-if="!items.length">
 						<template #icon>
-							<Delete :size="20" decorative />
+							<Delete :size="20" />
 						</template>
 						{{ t('tasks', 'You do not have any deleted calendars, tasks or events.') }}
 					</EmptyContent>
@@ -77,7 +77,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 										<ActionButton
 											@click="onDeletePermanently(item)">
 											<template #icon>
-												<Delete :size="20" decorative />
+												<Delete :size="20" />
 											</template>
 											{{ t('tasks','Delete permanently') }}
 										</ActionButton>

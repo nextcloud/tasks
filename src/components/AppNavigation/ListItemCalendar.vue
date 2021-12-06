@@ -43,7 +43,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<ActionButton
 					@click="toggleShare">
 					<template #icon>
-						<ShareVariant :size="20" decorative />
+						<ShareVariant :size="20" />
 					</template>
 					{{ sharedWithTooltip }}
 				</ActionButton>
@@ -62,7 +62,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:close-after-click="true"
 				@click="editCalendar">
 				<template #icon>
-					<Pencil :size="20" decorative />
+					<Pencil :size="20" />
 				</template>
 				{{ t('tasks', 'Edit') }}
 			</ActionButton>
@@ -70,7 +70,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:close-after-click="true"
 				@click="copyCalDAVUrl($event, calendar)">
 				<template #icon>
-					<LinkVariant :size="20" decorative />
+					<LinkVariant :size="20" />
 				</template>
 				{{ !copied
 					? t('tasks', 'Copy private link')
@@ -82,7 +82,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:close-after-click="true"
 				:href="exportUrl">
 				<template #icon>
-					<Download :size="20" decorative />
+					<Download :size="20" />
 				</template>
 				{{ t('tasks', 'Download') }}
 			</ActionLink>
@@ -95,10 +95,10 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				}"
 				@click="scheduleDelete">
 				<template v-if="!calendar.isSharedWithMe" #icon>
-					<Delete :size="20" decorative />
+					<Delete :size="20" />
 				</template>
 				<template v-else #icon>
-					<Close :size="20" decorative />
+					<Close :size="20" />
 				</template>
 				{{ !calendar.isSharedWithMe ? t('tasks', 'Delete') : t('tasks', 'Unshare') }}
 			</ActionButton>
@@ -108,7 +108,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			<ActionButton
 				@click.prevent.stop="cancelDelete">
 				<template #icon>
-					<Undo :size="20" decorative />
+					<Undo :size="20" />
 				</template>
 				{{ undoDeleteMessage }}
 			</ActionButton>

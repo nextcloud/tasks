@@ -41,8 +41,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<template #icon>
 					<component
 						:is="collection.icon"
-						:size="20"
-						decorative />
+						:size="20" />
 				</template>
 				<template #counter>
 					<AppNavigationCounter v-show="collectionCount(collection.id)">
@@ -67,7 +66,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				class="collection reactive"
 				@click="startCreate($event)">
 				<template #icon>
-					<Plus :size="20" decorative />
+					<Plus :size="20" />
 				</template>
 				<div :class="{error: nameError}" class="app-navigation-entry-edit">
 					<form>

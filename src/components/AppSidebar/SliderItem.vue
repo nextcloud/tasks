@@ -52,14 +52,14 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			<Actions v-show="editing" class="actions__set">
 				<ActionButton @click="setValue()">
 					<template #icon>
-						<Check :size="20" decorative />
+						<Check :size="20" />
 					</template>
 					{{ t('tasks', 'Set value') }}
 				</ActionButton>
 			</Actions><Actions v-show="editing" class="actions__clear">
 				<ActionButton @click="clearValue">
 					<template #icon>
-						<Delete :size="20" decorative />
+						<Delete :size="20" />
 					</template>
 					{{ t('tasks', 'Delete value') }}
 				</ActionButton>

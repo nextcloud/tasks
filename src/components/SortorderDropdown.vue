@@ -25,17 +25,15 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		container=".header"
 		menu-align="right">
 		<template #icon>
-			<component :is="sortOrderIcon" :size="20" decorative />
+			<component :is="sortOrderIcon" :size="20" />
 			<MenuDown
 				v-if="sortDirection"
 				class="sort-direction"
-				:size="18"
-				decorative />
+				:size="18" />
 			<MenuUp
 				v-else
 				class="sort-direction"
-				:size="18"
-				decorative />
+				:size="18" />
 		</template>
 		<ActionButton v-for="order in orders"
 			:key="order.id"
@@ -49,17 +47,15 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			:close-after-click="true"
 			@click="setSortOrder(order.id)">
 			<template #icon>
-				<component :is="order.icon" :size="20" decorative />
+				<component :is="order.icon" :size="20" />
 				<MenuDown
 					v-if="order.id == sortOrder && sortDirection"
 					class="sort-direction"
-					:size="18"
-					decorative />
+					:size="18" />
 				<MenuUp
 					v-if="order.id == sortOrder && !sortDirection"
 					class="sort-direction"
-					:size="18"
-					decorative />
+					:size="18" />
 			</template>
 			{{ order.text }}
 		</ActionButton>

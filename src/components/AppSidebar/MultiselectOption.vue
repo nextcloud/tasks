@@ -25,7 +25,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 <template>
 	<div :class="optionClass" class="multiselect-picker-option">
 		<span class="multiselect-picker-option__icon">
-			<component :is="icon" :size="20" decorative />
+			<component :is="icon" :size="20" />
 		</span>
 		<span
 			class="multiselect-picker-option__label">
