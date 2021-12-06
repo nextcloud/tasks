@@ -62,6 +62,8 @@ OC.L10N.register(
     "Could not restore calendar or event" : "無法復原日曆或活動",
     "Do you really want to empty the trash bin?" : "您真的想要清空回收桶嗎？",
     "_Elements in the trash bin are deleted after {numDays} day_::_Elements in the trash bin are deleted after {numDays} days_" : ["回收桶中的項目會在 {numDays} 天後被刪除"],
+    "Select a calendar" : "選擇日曆",
+    "No calendar matches the search." : "沒有日曆與搜尋匹配。",
     "Set date" : "設定日期",
     "Set time" : "設定時間",
     "Delete date" : "刪除日期",

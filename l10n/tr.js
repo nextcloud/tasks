@@ -62,6 +62,8 @@ OC.L10N.register(
     "Could not restore calendar or event" : "Takvim ya da etkinlik geri yüklenemedi",
     "Do you really want to empty the trash bin?" : "Çöp kutusunu boşaltmak istediğinize emin misiniz?",
     "_Elements in the trash bin are deleted after {numDays} day_::_Elements in the trash bin are deleted after {numDays} days_" : ["Çöp kutusundaki ögeler {numDays} gün sonra silinir","Çöp kutusundaki ögeler {numDays} gün sonra silinir"],
+    "Select a calendar" : "Bir takvim seçin",
+    "No calendar matches the search." : "Arama ile eşleşen bir takvim bulunamadı.",
     "Set date" : "Tarihi ayarla",
     "Set time" : "Saati ayarla",
     "Delete date" : "Tarihi sil",

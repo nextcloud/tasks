@@ -60,6 +60,8 @@
     "Could not restore calendar or event" : "Nie je možné obnoviť kalendár alebo udalosť",
     "Do you really want to empty the trash bin?" : "Naozaj chcete vymazať kôš?",
     "_Elements in the trash bin are deleted after {numDays} day_::_Elements in the trash bin are deleted after {numDays} days_" : ["Položky v odpadkovom koši budú odstránené po {numDays} dni","Položky v odpadkovom koši budú odstránené po {numDays} dňoch","Položky v odpadkovom koši budú odstránené po {numDays} dňoch","Položky v odpadkovom koši budú odstránené po {numDays} dňoch"],
+    "Select a calendar" : "Vybrať kalendár",
+    "No calendar matches the search." : "Vyhľadávaniu nezodpovedá žiadny kalendár.",
     "Set date" : "Nastaviť dátum",
     "Set time" : "Nastaviť čas",
     "Delete date" : "Zmazať dátum",

@@ -62,6 +62,8 @@ OC.L10N.register(
     "Could not restore calendar or event" : "Kalender oder Termin konnte nicht wiederhergestellt werden",
     "Do you really want to empty the trash bin?" : "Möchten Sie wirklich den Papierkorb leeren?",
     "_Elements in the trash bin are deleted after {numDays} day_::_Elements in the trash bin are deleted after {numDays} days_" : ["Elemente im Papierkorb werden nach {numDays} Tag gelöscht","Elemente im Papierkorb werden nach {numDays} Tagen gelöscht"],
+    "Select a calendar" : "Kalender auswählen",
+    "No calendar matches the search." : "Kein Kalender entspricht der Suche.",
     "Set date" : "Datum setzen",
     "Set time" : "Zeit setzen",
     "Delete date" : "Datum löschen",
