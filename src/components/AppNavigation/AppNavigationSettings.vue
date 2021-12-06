@@ -41,7 +41,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<li v-for="collection in collections"
 					:key="collection.id"
 					class="collection">
-					<component :is="collection.icon" :size="20" decorative />
+					<component :is="collection.icon" :size="20" />
 					<span class="label-container">
 						<label :for="'visibilityCollection-' + collection.id" class="title">
 							{{ collection.displayName }}

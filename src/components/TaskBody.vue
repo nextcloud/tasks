@@ -51,7 +51,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:aria-label="t('tasks', 'Task is completed')"
 					@click="toggleCompleted(task)">
 				<label :class="[priorityClass, 'reactive no-nav']" :for="'toggleCompleted_' + task.uid">
-					<Cancel v-if="task.status === 'CANCELLED' && !task.completed" :size="20" decorative />
+					<Cancel v-if="task.status === 'CANCELLED' && !task.completed" :size="20" />
 				</label>
 			</div>
 			<!-- Info: title, progress & tags -->
@@ -101,7 +101,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						class="reactive no-nav open-input"
 						@click="openSubtaskInput">
 						<template #icon>
-							<Plus :size="20" decorative />
+							<Plus :size="20" />
 						</template>
 						{{ t('tasks', 'Add subtask') }}
 					</ActionButton>
@@ -109,7 +109,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						class="reactive no-nav"
 						@click="toggleSubtasksVisibility(task)">
 						<template #icon>
-							<SortVariant :size="20" decorative />
+							<SortVariant :size="20" />
 						</template>
 						{{ task.hideSubtasks ? t('tasks', 'Show subtasks') : t('tasks', 'Hide subtasks') }}
 					</ActionButton>
@@ -117,7 +117,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						class="reactive no-nav"
 						@click="toggleCompletedSubtasksVisibility(task)">
 						<template #icon>
-							<Eye :size="20" decorative />
+							<Eye :size="20" />
 						</template>
 						{{ task.hideCompletedSubtasks ? t('tasks', 'Show closed subtasks') : t('tasks', 'Hide closed subtasks') }}
 					</ActionButton>
@@ -125,7 +125,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						class="reactive no-nav"
 						@click="scheduleTaskDeletion(task)">
 						<template #icon>
-							<Delete :size="20" decorative />
+							<Delete :size="20" />
 						</template>
 						{{ t('tasks', 'Delete task') }}
 					</ActionButton>
@@ -135,7 +135,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						class="reactive no-nav"
 						@click.prevent.stop="clearTaskDeletion(task)">
 						<template #icon>
-							<Undo :size="20" decorative />
+							<Undo :size="20" />
 						</template>
 						{{ n('tasks', 'Deleting the task in {countdown} second', 'Deleting the task in {countdown} seconds', task.deleteCountdown, { countdown: task.deleteCountdown }) }}
 					</ActionButton>
@@ -145,7 +145,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						:disabled="readOnly"
 						@click="toggleStarred(task)">
 						<template #icon>
-							<Star :size="20" decorative />
+							<Star :size="20" />
 						</template>
 						{{ t('tasks', 'Toggle starred') }}
 					</ActionButton>
@@ -157,7 +157,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				v-click-outside="{ handler: closeSubtaskInput, middleware: clickOutsideMiddleware }"
 				class="task-item task-item--input">
 				<form name="addTaskForm" @submit.prevent="addTask">
-					<Plus :size="20" decorative />
+					<Plus :size="20" />
 					<input ref="input"
 						v-model="newTaskName"
 						:placeholder="subtasksCreationPlaceholder"

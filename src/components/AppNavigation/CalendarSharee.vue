@@ -31,7 +31,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 			<AccountMultiple
 				v-if="sharee.isGroup"
 				:size="18"
-				decorative
 				class="avatar" />
 			<div v-else-if="sharee.isCircle" class="avatar icon-circle" />
 			<Avatar v-else
@@ -54,7 +53,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 				:disabled="loading"
 				@click.prevent.stop="deleteSharee">
 				<template #icon>
-					<Delete :size="20" decorative />
+					<Delete :size="20" />
 				</template>
 				{{ t('tasks', 'Unshare with {displayName}', { displayName: sharee.displayName }) }}
 			</ActionButton>
