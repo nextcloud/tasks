@@ -56,6 +56,8 @@ OC.L10N.register(
     "Restore" : "Berezarri",
     "Delete permanently" : "Ezabatu betirako",
     "Empty trash bin" : "Hustu zakarrontzia",
+    "Untitled task" : "Izenik gabeko zeregina",
+    "Untitled event" : "Izenik gabeko gertaera",
     "Untitled item" : "Izen gabeko elementua",
     "Could not load deleted calendars and objects" : "Ezin izan dira ezabatutako egutegi eta elementuak kargatu",
     "Could not delete calendar or event" : "Ezin izan da egutegi edo gertaera ezabatu",
