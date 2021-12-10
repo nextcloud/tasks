@@ -58,6 +58,7 @@ OC.L10N.register(
     "Empty trash bin" : "Svuota cestino",
     "Untitled task" : "Attività senza titolo",
     "Untitled event" : "Evento senza titolo",
+    "Untitled journal" : "Documento senza titolo",
     "Untitled item" : "Elemento senza titolo",
     "Unknown calendar" : "Calendario sconosciuto",
     "Could not load deleted calendars and objects" : "Impossibile caricare i calendari e gli oggetti eliminati",
