@@ -45,7 +45,7 @@
 		"ical.js": "^1.4.0",
 		"jstimezonedetect": "",
 		"linkify-it": "~3.0.3",
-		"markdown-it": "~12.2.0",
+		"markdown-it": "~12.3.0",
 		"markdown-it-emoji": "~2.0.0",
 		"markdown-it-link-attributes": "~3.0.0",
 		"markdown-it-task-lists": "~2.1.1",
