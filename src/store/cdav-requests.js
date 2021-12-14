@@ -21,7 +21,7 @@
  */
 'use strict'
 
-import { namespaces as NS } from 'cdav-library'
+import { namespaces as NS } from '@nextcloud/cdav-library'
 
 /**
  * Finds all VTODOs in a calendar with requested state and relation

@@ -22,9 +22,8 @@
  *
  */
 
+import DavClient from '@nextcloud/cdav-library'
 import { generateRemoteUrl } from '@nextcloud/router'
-
-import DavClient from 'cdav-library'
 
 /**
  * Function to create an XML http request with the correct
