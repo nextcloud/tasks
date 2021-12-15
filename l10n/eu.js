@@ -59,6 +59,7 @@ OC.L10N.register(
     "Untitled task" : "Izenik gabeko zeregina",
     "Untitled event" : "Izenik gabeko gertaera",
     "Untitled item" : "Izen gabeko elementua",
+    "Unknown calendar" : "Egutegi ezezaguna",
     "Could not load deleted calendars and objects" : "Ezin izan dira ezabatutako egutegi eta elementuak kargatu",
     "Could not delete calendar or event" : "Ezin izan da egutegi edo gertaera ezabatu",
     "Could not restore calendar or event" : "Ezin izan da egutegia edo gertaera berezarri",
