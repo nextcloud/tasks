@@ -36,7 +36,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					</EmptyContent>
 					<EmptyContent v-else-if="!items.length">
 						<template #icon>
-							<Delete :size="20" />
+							<Delete :size="64" />
 						</template>
 						{{ t('tasks', 'You do not have any deleted calendars, tasks or events.') }}
 					</EmptyContent>
