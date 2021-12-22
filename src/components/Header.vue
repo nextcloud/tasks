@@ -139,8 +139,7 @@ $breakpoint-mobile: 1024px;
 
 		.material-design-icon {
 			position: absolute;
-			top: 10px;
-			left: 10px;
+			padding: 12px;
 		}
 
 		input {
