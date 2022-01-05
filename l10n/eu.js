@@ -65,6 +65,7 @@ OC.L10N.register(
     "Could not restore calendar or event" : "Ezin izan da egutegia edo gertaera berezarri",
     "Do you really want to empty the trash bin?" : "Ziur zaude zakarrontzia hustu nahi duzula?",
     "_Elements in the trash bin are deleted after {numDays} day_::_Elements in the trash bin are deleted after {numDays} days_" : ["Zakarrontziko elementuak egun {numDays} igaro ondoren ezabatzen dira","Zakarrontziko elementuak {numDays} egun igaro ondoren ezabatzen dira"],
+    "Select a calendar" : "Hautatu egutegi bat",
     "Set date" : "Ezarri data",
     "Set time" : "Ezarri denbora",
     "Delete date" : "Ezabatu data",
