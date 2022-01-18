@@ -144,7 +144,7 @@ OC.L10N.register(
     "Close" : "Sluiten",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n afgeronde taak","%n afgeronde taken"],
     "Tomorrow" : "Morgen",
-    "Add List…" : "Lijst toevoegen...",
+    "Add List…" : "Lijst toevoegen",
     "New List" : "Nieuwe lijst",
     "All day" : "Hele dag",
     "Unpin" : "Losmaken",
