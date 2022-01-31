@@ -366,8 +366,9 @@ export default class Task {
 	}
 
 	set note(note) {
-		this.vtodo.updatePropertyWithValue('description', note)
-		this.vtodo.getFirstProperty('description').removeParameter('altrep')
+		// To avoid inconsistent parameters, delete complete property, then recreate
+		this.vtodo.removeProperty('description')
+		this.vtodo.addPropertyWithValue('description', note)
 		this.updateLastModified()
 		this._note = this.vtodo.getFirstPropertyValue('description') || ''
 	}
