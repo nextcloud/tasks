@@ -366,7 +366,7 @@ export default class Task {
 	}
 
 	set note(note) {
-		// To avoid inconsistent parameters, delete complete property, then recreate
+		// To avoid inconsistent property parameters (bug #3863 in nextcloud/calendar), delete the property, then recreate
 		this.vtodo.removeProperty('description')
 		this.vtodo.addPropertyWithValue('description', note)
 		this.updateLastModified()
