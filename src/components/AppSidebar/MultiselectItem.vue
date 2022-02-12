@@ -24,8 +24,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div class="property__item">
-		<Multiselect
-			label="displayName"
+		<Multiselect label="displayName"
 			:disabled="isDisabled"
 			:options="options"
 			:value="value"

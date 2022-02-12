@@ -27,8 +27,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		<span class="multiselect-picker-option__icon">
 			<component :is="icon" :size="20" />
 		</span>
-		<span
-			class="multiselect-picker-option__label">
+		<span class="multiselect-picker-option__label">
 			{{ displayName }}
 		</span>
 	</div>

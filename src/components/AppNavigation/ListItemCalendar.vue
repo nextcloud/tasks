@@ -20,8 +20,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<AppNavigationItem
-		:id="'list_' + calendar.id"
+	<AppNavigationItem :id="'list_' + calendar.id"
 		v-click-outside="{ handler: resetView, middleware: clickOutsideMiddleware }"
 		:calendar-id="calendar.id"
 		:to="{ name: 'calendars', params: { calendarId: calendar.id } }"
@@ -40,8 +39,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			<Actions v-if="calendar.canBeShared"
 				:class="{shared: hasShares}"
 				class="sharing">
-				<ActionButton
-					@click="toggleShare">
+				<ActionButton @click="toggleShare">
 					<template #icon>
 						<ShareVariant :size="20" />
 					</template>
@@ -56,8 +54,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		</template>
 
 		<template v-if="!deleteTimeout" #actions>
-			<ActionButton
-				v-if="!calendar.readOnly"
+			<ActionButton v-if="!calendar.readOnly"
 				class="edit-calendar"
 				:close-after-click="true"
 				@click="editCalendar">
@@ -66,8 +63,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				</template>
 				{{ t('tasks', 'Edit') }}
 			</ActionButton>
-			<ActionButton
-				:close-after-click="true"
+			<ActionButton :close-after-click="true"
 				@click="copyCalDAVUrl($event, calendar)">
 				<template #icon>
 					<LinkVariant :size="20" />
@@ -78,16 +74,14 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						? t('tasks', 'Copied')
 						: t('tasks', 'Cannot copy') }}
 			</ActionButton>
-			<ActionLink
-				:close-after-click="true"
+			<ActionLink :close-after-click="true"
 				:href="exportUrl">
 				<template #icon>
 					<Download :size="20" />
 				</template>
 				{{ t('tasks', 'Download') }}
 			</ActionLink>
-			<ActionButton
-				v-if="!calendar.readOnly || calendar.isSharedWithMe"
+			<ActionButton v-if="!calendar.readOnly || calendar.isSharedWithMe"
 				v-tooltip="{
 					placement: 'left',
 					boundariesElement: 'body',
@@ -105,8 +99,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		</template>
 
 		<template v-else #actions>
-			<ActionButton
-				@click.prevent.stop="cancelDelete">
+			<ActionButton @click.prevent.stop="cancelDelete">
 				<template #icon>
 					<Undo :size="20" />
 				</template>

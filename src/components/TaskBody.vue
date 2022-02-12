@@ -75,8 +75,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			</div>
 			<!-- Icons: sync-status, calendarname, date, note, subtask-show-completed, subtask-visibility, add-subtask, starred -->
 			<div class="task-body__icons">
-				<TaskStatusDisplay
-					:status="task.syncStatus"
+				<TaskStatusDisplay :status="task.syncStatus"
 					class="reactive no-nav"
 					@status-clicked="updateTask"
 					@reset-status="resetStatus({ task })" />
@@ -86,8 +85,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				</div>
 				<SortVariant v-if="hasHiddenSubtasks" :size="20" :title="t('tasks', 'Task has hidden subtasks')" />
 				<Pin v-if="task.pinned" :size="20" :title="t('tasks', 'Task is pinned')" />
-				<TextBoxOutline
-					v-if="task.note!=''"
+				<TextBoxOutline v-if="task.note!=''"
 					:size="20"
 					:title="t('tasks', 'Task has a note')"
 					@click.stop="openAppSidebarTab($event, 'app-sidebar-tab-notes')" />
@@ -131,8 +129,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					</ActionButton>
 				</Actions>
 				<Actions v-if="task.deleteCountdown !== null">
-					<ActionButton
-						class="reactive no-nav"
+					<ActionButton class="reactive no-nav"
 						@click.prevent.stop="clearTaskDeletion(task)">
 						<template #icon>
 							<Undo :size="20" />
@@ -141,8 +138,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					</ActionButton>
 				</Actions>
 				<Actions :disabled="readOnly" :class="[{ priority: task.priority }, priorityClass]" class="reactive no-nav">
-					<ActionButton
-						:disabled="readOnly"
+					<ActionButton :disabled="readOnly"
 						@click="toggleStarred(task)">
 						<template #icon>
 							<Star :size="20" />
@@ -165,8 +161,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						@keyup.27="showSubtaskInput = false">
 				</form>
 			</div>
-			<TaskDragContainer
-				:tasks="filteredSubtasksShown"
+			<TaskDragContainer :tasks="filteredSubtasksShown"
 				:disabled="task.calendar.readOnly"
 				:collection-string="collectionString"
 				:task-id="task.uri"

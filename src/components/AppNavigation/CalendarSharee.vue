@@ -25,11 +25,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<AppNavigationItem
-		:title="sharee.displayName">
+	<AppNavigationItem :title="sharee.displayName">
 		<template #icon>
-			<AccountMultiple
-				v-if="sharee.isGroup"
+			<AccountMultiple v-if="sharee.isGroup"
 				:size="18"
 				class="avatar" />
 			<div v-else-if="sharee.isCircle" class="avatar icon-circle" />
@@ -40,8 +38,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 		</template>
 
 		<template #counter>
-			<ActionCheckbox
-				:disabled="loading"
+			<ActionCheckbox :disabled="loading"
 				:checked="writeable"
 				@update:checked="editSharee">
 				{{ t('tasks', 'Can edit') }}
@@ -49,8 +46,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 		</template>
 
 		<template #actions>
-			<ActionButton
-				:disabled="loading"
+			<ActionButton :disabled="loading"
 				@click.prevent.stop="deleteSharee">
 				<template #icon>
 					<Delete :size="20" />

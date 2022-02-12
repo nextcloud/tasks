@@ -24,8 +24,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div class="property__item">
-		<Multiselect
-			label="displayName"
+		<Multiselect label="displayName"
 			track-by="url"
 			:disabled="isDisabled"
 			:options="calendars"
@@ -39,8 +38,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<CalendarPickerOption v-bind="scope.option" />
 			</template>
 			<template #noResult>
-				<CalendarPickerOption
-					color=""
+				<CalendarPickerOption color=""
 					owner=""
 					:is-shared-with-me="false"
 					:display-name="t('tasks', 'No calendar matches the search.')" />
