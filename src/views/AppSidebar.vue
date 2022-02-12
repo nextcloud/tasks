@@ -20,8 +20,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<AppSidebar
-		:title="title"
+	<AppSidebar :title="title"
 		:title-editable="editingTitle"
 		:linkify-title="true"
 		:subtitle="subtitle"
@@ -35,8 +34,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		@submit-title="saveTitle()"
 		@close="closeAppSidebar()">
 		<template v-if="task" #description>
-			<DatetimePickerItem
-				v-show="!readOnly || task.start"
+			<DatetimePickerItem v-show="!readOnly || task.start"
 				:date="task.startMoment"
 				:value="newStartDate"
 				:all-day="allDay"
@@ -49,8 +47,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<CalendarStart :size="20" />
 				</template>
 			</DatetimePickerItem>
-			<DatetimePickerItem
-				v-show="!readOnly || task.due"
+			<DatetimePickerItem v-show="!readOnly || task.due"
 				:date="task.dueMoment"
 				:value="newDueDate"
 				:all-day="allDay"
@@ -63,15 +60,13 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<CalendarEnd :size="20" />
 				</template>
 			</DatetimePickerItem>
-			<CheckboxItem
-				v-show="showAllDayToggle"
+			<CheckboxItem v-show="showAllDayToggle"
 				id="allDayToggle"
 				:checked="allDay"
 				:read-only="readOnly"
 				:property-string="t('tasks', 'All day')"
 				@set-checked="toggleAllDay(task)" />
-			<CalendarPickerItem
-				:disabled="readOnly"
+			<CalendarPickerItem :disabled="readOnly"
 				:calendar="task.calendar"
 				:calendars="targetCalendars"
 				@change-calendar="changeCalendar" />
@@ -105,8 +100,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				</template>
 				{{ t('tasks', 'Edit title') }}
 			</ActionButton>
-			<ActionLink
-				:href="downloadURL"
+			<ActionLink :href="downloadURL"
 				:close-after-click="true">
 				<template #icon>
 					<Download :size="20" />
@@ -122,8 +116,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			</ActionButton>
 		</template>
 		<template v-else #secondary-actions>
-			<ActionButton
-				class="reactive no-nav"
+			<ActionButton class="reactive no-nav"
 				@click.prevent.stop="clearTaskDeletion(task)">
 				<template #icon>
 					<Undo :size="20" />
@@ -158,24 +151,21 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<InformationOutline :size="20" />
 			</template>
 			<div>
-				<MultiselectItem
-					v-show="!readOnly || task.class !== 'PUBLIC'"
+				<MultiselectItem v-show="!readOnly || task.class !== 'PUBLIC'"
 					:value="classSelect.find( _ => _.type === task.class )"
 					:options="classSelect"
 					:disabled="readOnly || task.calendar.isSharedWithMe"
 					:placeholder="t('tasks', 'Select a classification')"
 					icon="IconEye"
 					@change-value="changeClass" />
-				<MultiselectItem
-					v-show="!readOnly || task.status"
+				<MultiselectItem v-show="!readOnly || task.status"
 					:value="statusOptions.find( _ => _.type === task.status )"
 					:options="statusOptions"
 					:disabled="readOnly"
 					:placeholder="t('tasks', 'Select a status')"
 					icon="IconPulse"
 					@change-value="changeStatus" />
-				<SliderItem
-					v-show="!readOnly || task.priority"
+				<SliderItem v-show="!readOnly || task.priority"
 					:value="task.priority"
 					:property-string="priorityString"
 					:read-only="readOnly"
@@ -188,8 +178,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						<Star :size="20" />
 					</template>
 				</SliderItem>
-				<SliderItem
-					v-show="!readOnly || task.complete"
+				<SliderItem v-show="!readOnly || task.complete"
 					:value="task.complete"
 					:property-string="completeString"
 					:read-only="readOnly"
@@ -202,8 +191,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						<Percent :size="20" />
 					</template>
 				</SliderItem>
-				<TagsItem
-					v-show="!readOnly || task.tags.length > 0"
+				<TagsItem v-show="!readOnly || task.tags.length > 0"
 					:options="tags"
 					:tags="task.tags"
 					:disabled="readOnly"
@@ -225,8 +213,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			<template #icon>
 				<TextBoxOutline :size="20" />
 			</template>
-			<NotesItem
-				v-show="!readOnly || task.note"
+			<NotesItem v-show="!readOnly || task.note"
 				:value="task.note"
 				:read-only="readOnly"
 				:task="task"

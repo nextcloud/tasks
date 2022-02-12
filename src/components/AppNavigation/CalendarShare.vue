@@ -30,8 +30,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 	<div class="calendar-shares">
 		<ul>
 			<li class="app-navigation-entry__multiselect">
-				<Multiselect
-					id="users-groups-search"
+				<Multiselect id="users-groups-search"
 					:options="usersOrGroups"
 					:searchable="true"
 					:internal-search="false"

@@ -31,8 +31,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			<div v-if="!creating && !created" id="modal-inner" :class="{ 'icon-loading': loading }">
 				<h3>{{ t('tasks', 'Create a new task') }}</h3>
 
-				<CalendarPickerItem
-					:disabled="loading"
+				<CalendarPickerItem :disabled="loading"
 					:calendar="pendingCalendar"
 					:calendars="writableCalendars"
 					@change-calendar="changeCalendar" />

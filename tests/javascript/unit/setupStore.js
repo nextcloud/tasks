@@ -8,13 +8,13 @@ import router from '@/router.js'
 import { loadICS } from '../../assets/loadAsset.js'
 
 import { createLocalVue } from '@vue/test-utils'
-import Vuex from 'vuex'
+import Vuex, { Store } from 'vuex'
 import { sync } from 'vuex-router-sync'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
 
-const store = new Vuex.Store({
+const store = new Store({
 	modules: {
 		calendars,
 		collections,

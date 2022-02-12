@@ -32,8 +32,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<span class="heading__icon-bullet" :style="{'background-color': calendar.color }" />
 					<span class="heading__title">{{ calendar.displayName }}</span>
 				</h2>
-				<TaskDragContainer
-					:tasks="calendar.filteredTasks"
+				<TaskDragContainer :tasks="calendar.filteredTasks"
 					:disabled="calendar.readOnly"
 					:collection-string="collectionId"
 					:calendar-id="calendar.id"

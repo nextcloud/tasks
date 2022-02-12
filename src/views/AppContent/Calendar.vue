@@ -26,8 +26,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		<Header />
 		<div class="task-list">
 			<div class="grouped-tasks">
-				<TaskDragContainer
-					:tasks="openRootTasks(calendar.tasks)"
+				<TaskDragContainer :tasks="openRootTasks(calendar.tasks)"
 					:calendar-id="calendarId"
 					:disabled="calendar.readOnly"
 					collection-id="uncompleted" />

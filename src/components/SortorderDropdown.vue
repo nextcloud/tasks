@@ -26,12 +26,10 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		menu-align="right">
 		<template #icon>
 			<component :is="sortOrderIcon" :size="20" />
-			<MenuDown
-				v-if="sortDirection"
+			<MenuDown v-if="sortDirection"
 				class="sort-direction"
 				:size="18" />
-			<MenuUp
-				v-else
+			<MenuUp v-else
 				class="sort-direction"
 				:size="18" />
 		</template>
@@ -48,12 +46,10 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			@click="setSortOrder(order.id)">
 			<template #icon>
 				<component :is="order.icon" :size="20" />
-				<MenuDown
-					v-if="order.id == sortOrder && sortDirection"
+				<MenuDown v-if="order.id == sortOrder && sortDirection"
 					class="sort-direction"
 					:size="18" />
-				<MenuUp
-					v-if="order.id == sortOrder && !sortDirection"
+				<MenuUp v-if="order.id == sortOrder && !sortDirection"
 					class="sort-direction"
 					:size="18" />
 			</template>

@@ -22,8 +22,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 <template>
 	<AppNavigation>
 		<template #list>
-			<AppNavigationItem
-				v-for="collection in collections"
+			<AppNavigationItem v-for="collection in collections"
 				v-show="!hideCollection(collection)"
 				:id="'collection_' + collection.id"
 				:key="collection.id"
@@ -39,8 +38,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				@dragleave.native="dragLeave"
 				@click="setInitialRoute(`/collections/${collection.id}`)">
 				<template #icon>
-					<component
-						:is="collection.icon"
+					<component :is="collection.icon"
 						:size="20" />
 				</template>
 				<template #counter>
@@ -49,13 +47,11 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					</AppNavigationCounter>
 				</template>
 			</AppNavigationItem>
-			<draggable
-				class="draggable-container"
+			<draggable class="draggable-container"
 				:set-data="setData"
 				v-bind="{swapThreshold: 0.30, delay: 500, delayOnTouchOnly: true, touchStartThreshold: 3}"
 				@update="update">
-				<ListItemCalendar
-					v-for="calendar in calendars"
+				<ListItemCalendar v-for="calendar in calendars"
 					:key="calendar.id"
 					:calendar="calendar"
 					@click.native="setInitialRoute(`/calendars/${calendar.id}`)" />

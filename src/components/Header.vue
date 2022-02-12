@@ -25,8 +25,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			class="header__input">
 			<form @submit.prevent="addTask">
 				<Plus :size="20" />
-				<input
-					v-model="newTaskName"
+				<input v-model="newTaskName"
 					:placeholder="placeholder"
 					autocomplete="off"
 					class="transparent reactive"

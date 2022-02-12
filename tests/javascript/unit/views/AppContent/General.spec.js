@@ -4,6 +4,7 @@ import router from '@/router.js'
 import { store, localVue } from '../../setupStore.js'
 
 import { mount } from '@vue/test-utils'
+// eslint-disable-next-line import/no-named-as-default
 import VTooltip from 'v-tooltip'
 
 localVue.use(VTooltip)

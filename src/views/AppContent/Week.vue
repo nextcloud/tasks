@@ -31,8 +31,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<h2 class="heading">
 					<span class="heading__title">{{ dayString(day.diff) }}</span>
 				</h2>
-				<TaskDragContainer
-					:tasks="day.tasks"
+				<TaskDragContainer :tasks="day.tasks"
 					:collection-string="`week-${day.diff}`"
 					:collection-id="`week-${day.diff}`" />
 			</div>

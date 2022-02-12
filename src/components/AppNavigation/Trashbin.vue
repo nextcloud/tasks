@@ -52,10 +52,9 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 							<div class="table__header">
 								&nbsp;
 							</div>
-							<template v-for="item in items" class="row">
+							<template v-for="item in items">
 								<div :key="`${item.url}desc`" class="table__body">
-									<div
-										class="icon-bullet"
+									<div class="icon-bullet"
 										:style="{ 'background-color': item.color }" />
 									<div class="item-description">
 										<div class="item-description__mainline">
@@ -74,8 +73,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 										{{ t('tasks','Restore') }}
 									</button>
 									<Actions :force-menu="true">
-										<ActionButton
-											@click="onDeletePermanently(item)">
+										<ActionButton @click="onDeletePermanently(item)">
 											<template #icon>
 												<Delete :size="20" />
 											</template>

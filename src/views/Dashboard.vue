@@ -23,8 +23,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 -->
 <template>
 	<div>
-		<DashboardWidget
-			id="tasks_panel"
+		<DashboardWidget id="tasks_panel"
 			:items="filteredTasks.slice(0, hasTaskToday ? 6 : 4)"
 			empty-content-icon="icon-tasks"
 			:empty-content-message="t('tasks', 'No upcoming tasks')"
@@ -33,15 +32,13 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			:show-items-and-empty-content="!hasTaskToday"
 			:half-empty-content-message="t('tasks', 'No tasks today')">
 			<template #default="{ item }">
-				<DashboardWidgetItem
-					:main-text="item.summary"
+				<DashboardWidgetItem :main-text="item.summary"
 					:sub-text="formatSubtext(item)"
 					:target-url="getTasksAppUrl(item)"
 					:item-menu="itemMenu"
 					@markAsDone="onMarkAsDone(item)">
 					<template #avatar>
-						<div
-							class="calendar-dot"
+						<div class="calendar-dot"
 							:style="{'background-color': item.calendar.color}"
 							:title="item.calendar.displayName" />
 					</template>

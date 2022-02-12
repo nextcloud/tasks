@@ -25,16 +25,14 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		<div :class="{'content__note--editing': editing}"
 			class="content__note"
 			@click="setEditing(true, $event)">
-			<div
-				id="note__viewer"
+			<div id="note__viewer"
 				ref="note__viewer"
 				:source="value"
 				class="note__viewer"
 				:class="{'note__viewer--empty': !value.trim()}" />
 			<div class="note__editor">
 				<pre><span>{{ newValue }}</span><br><br></pre>
-				<textarea
-					ref="note__editor"
+				<textarea ref="note__editor"
 					v-model="newValue"
 					@keyup.27="setEditing(false)"
 					@keydown.enter.ctrl.prevent="setValue()"

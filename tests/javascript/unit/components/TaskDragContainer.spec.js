@@ -10,7 +10,7 @@ import router from '@/router.js'
 import { loadICS } from '../../../assets/loadAsset.js'
 
 import { shallowMount, createLocalVue } from '@vue/test-utils'
-import Vuex from 'vuex'
+import Vuex, { Store } from 'vuex'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
@@ -39,7 +39,7 @@ describe('TaskDragContainer.vue', () => {
 		// Override the "scheduleTaskUpdate" method so we don't get warnings about unresolved promises.
 		tasks.actions.scheduleTaskUpdate = jest.fn()
 
-		store = new Vuex.Store({
+		store = new Store({
 			modules: {
 				calendars,
 				collections,
