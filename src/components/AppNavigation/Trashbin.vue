@@ -52,7 +52,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 							<div class="table__header">
 								&nbsp;
 							</div>
-							<template v-for="item in items" class="row">
+							<template v-for="item in items">
 								<div :key="`${item.url}desc`" class="table__body">
 									<div class="icon-bullet"
 										:style="{ 'background-color': item.color }" />
