@@ -146,7 +146,7 @@ appstore: clean build-js-production
 	--exclude=/phpunit.integration.xml \
 	--exclude=/README.md \
 	--exclude=/stylelint.config.js \
-	--exclude=/webpack.js \
+	--exclude=/webpack.config.js \
 	--exclude=/build \
 	--exclude=/coverage \
 	--exclude=/img/src \
