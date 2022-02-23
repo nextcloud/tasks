@@ -10,7 +10,6 @@ OC.L10N.register(
     "Completed" : "完了",
     "Tasks" : "タスク",
     "The Tasks app for Nextcloud" : "Nextcloud用のタスクアプリ",
-    "Once enabled, a new Tasks menu will appear in your Nextcloud apps menu. From there you can add and delete tasks, edit their title, description, start and due dates and mark them as important. Tasks can be shared between users. Tasks can be synchronized using CalDav (each task list is linked to an Nextcloud calendar, to sync it to your local client - Thunderbird, Evolution, KDE Kontact, iCal, … - just add the calendar as a remote calendar in your client). You can download your tasks as ICS files using the download button for each calendar." : "有効にすると、Nextcloudアプリのメニューに新しいタスクメニューが表示されます。 そこからタスクの追加や削除、タイトル、説明、開始日、期限を編集して重要なタスクとしてマークすることができます。 タスクはユーザー間で共有することができます。 タスクはCalDavを使って同期することができます。 各タスクリストはNextcloudのカレンダーにリンクされており、ローカルクライアント（Thunderbird、Evolution、KDE Kontact、iCalなど）と同期するには、クライアントのリモートカレンダーとしてカレンダーを追加します。 各カレンダーのダウンロードボタンを使って、タスクをICSファイルとしてダウンロードすることができます。",
     "Default list" : "デフォルトリスト",
     "Visibility of Smart Collections" : "スマートコレクションの表示",
     "Hidden" : "隠す",

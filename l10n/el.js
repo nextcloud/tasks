@@ -9,7 +9,6 @@ OC.L10N.register(
     "Completed" : "Ολοκληρωμένες",
     "Tasks" : "Εργασίες",
     "The Tasks app for Nextcloud" : "Η εφαρμογή Εργασίες για το Nextcloud",
-    "Once enabled, a new Tasks menu will appear in your Nextcloud apps menu. From there you can add and delete tasks, edit their title, description, start and due dates and mark them as important. Tasks can be shared between users. Tasks can be synchronized using CalDav (each task list is linked to an Nextcloud calendar, to sync it to your local client - Thunderbird, Evolution, KDE Kontact, iCal, … - just add the calendar as a remote calendar in your client). You can download your tasks as ICS files using the download button for each calendar." : "Μόλις ενεργοποιηθεί, θα εμφανιστεί ένα νέο μενού Εργασίες στο μενού εφαρμογών του Nextcloud. Από εκεί μπορείτε να προσθέσετε και να διαγράψετε εργασίες, να επεξεργαστείτε τον τίτλο, την περιγραφή, τις ημερομηνίες έναρξης και λήξης και να τις σημειώσετε ως σημαντικές. Μπορούν να μοιράζονται μεταξύ των χρηστών. Μπορούν να συγχρονιστούν χρησιμοποιώντας το CalDav (κάθε λίστα εργασιών συνδέεται με ένα ημερολόγιο Nextcloud, για να συγχρονιστεί με την τοπική εφαρμογή - Thunderbird, Evolution, KDE Kontact, iCal, ... - απλά προσθέστε το ημερολόγιο ως απομακρυσμένο ημερολόγιο στην εφαρμογή σας). Μπορείτε να κατεβάσετε τις εργασίες σας ως αρχεία ICS χρησιμοποιώντας το κουμπί λήψης για κάθε ημερολόγιο.",
     "Default list" : "Προεπιλεγμένη λίστα",
     "Visibility of Smart Collections" : "Ορατότητα Έξυπνων Συλλογών",
     "Hidden" : "Κρυφό",

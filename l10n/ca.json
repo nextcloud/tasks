@@ -7,7 +7,6 @@
     "Completed" : "Completades",
     "Tasks" : "Tasques",
     "The Tasks app for Nextcloud" : "L'app de tasques per Nextcloud",
-    "Once enabled, a new Tasks menu will appear in your Nextcloud apps menu. From there you can add and delete tasks, edit their title, description, start and due dates and mark them as important. Tasks can be shared between users. Tasks can be synchronized using CalDav (each task list is linked to an Nextcloud calendar, to sync it to your local client - Thunderbird, Evolution, KDE Kontact, iCal, … - just add the calendar as a remote calendar in your client). You can download your tasks as ICS files using the download button for each calendar." : "Un cop habilitat, apareixerà un nou menú Tasques al menú Aplicacions de Nextcloud. Des d'allà podeu afegir i suprimir tasques, editar el títol, la descripció, les dates d'inici i de venciment i marcar-les com a importants. Les tasques es poden compartir entre usuaris. Les tasques es poden sincronitzar utilitzant CalDav (cada llista de tasques està enllaçada a un calendari Nextcloud, per sincronitzar-lo amb el vostre client local - Thunderbird, Evolution, KDE Kontact, iCal, ... - només cal afegir el calendari com a calendari remot al vostre client). Podeu descarregar les vostres tasques com a fitxers ICS mitjançant el botó de descàrrega de cada calendari.",
     "Default list" : "Llista per defecte",
     "Visibility of Smart Collections" : "Visibilitat de les col·leccions intel·ligents",
     "Hidden" : "Ocult",

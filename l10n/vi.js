@@ -9,7 +9,6 @@ OC.L10N.register(
     "Completed" : "Hoàn thành",
     "Tasks" : "Nhiệm vụ",
     "The Tasks app for Nextcloud" : "Ứng dụng Nhiệm vụ cho Nextcloud",
-    "Once enabled, a new Tasks menu will appear in your Nextcloud apps menu. From there you can add and delete tasks, edit their title, description, start and due dates and mark them as important. Tasks can be shared between users. Tasks can be synchronized using CalDav (each task list is linked to an Nextcloud calendar, to sync it to your local client - Thunderbird, Evolution, KDE Kontact, iCal, … - just add the calendar as a remote calendar in your client). You can download your tasks as ICS files using the download button for each calendar." : "Một khi được kích hoạt, một bảng chọn Nhiệm vụ mới sẽ xuất hiện trong bảng chọn ứng dụng trong Nextcloud của bạn. Từ đó bạn có thể thêm vào và xóa các nhiệm vụ, sửa đổi các tiêu đề, mô tả, các ngày bắt đầu và ngày đến hạn và gắn dấu quan trọng cho chúng. Nhiệm vụ có thể được chia sẻ giữa các người dùng. Nhiệm vụ có thể được đồng bộ bằng cách sử dụng qua CalDAV (mỗi danh sách nhiệm vụ được liên kết với một lịch Nextcloud, để đồng bộ nó vào máy khách cục bộ ). Bạn có thể tải xuống các nhiệm vụ của bạn dưới dạng tệp ICS bằng cách sử dụng nút tải xuống cho mỗi lịch.",
     "Hidden" : "Ẩn",
     "Automatic" : "Tự động",
     "Share with users or groups" : "Chia sẽ với người dùng hoặc nhóm",

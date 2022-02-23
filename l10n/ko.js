@@ -10,7 +10,6 @@ OC.L10N.register(
     "Completed" : "완료됨",
     "Tasks" : "작업",
     "The Tasks app for Nextcloud" : "Nextcloud 작업 앱",
-    "Once enabled, a new Tasks menu will appear in your Nextcloud apps menu. From there you can add and delete tasks, edit their title, description, start and due dates and mark them as important. Tasks can be shared between users. Tasks can be synchronized using CalDav (each task list is linked to an Nextcloud calendar, to sync it to your local client - Thunderbird, Evolution, KDE Kontact, iCal, … - just add the calendar as a remote calendar in your client). You can download your tasks as ICS files using the download button for each calendar." : "활성화 하면, 새로운 '작업' 메뉴가 Nextcloud 앱 메뉴에 나타납니다. 작업을 추가하거나 삭제할 수 있고, 제목, 설명, 시작일과 마감일을 입력할 수 있으며, 중요한 것으로 지정할 수 있습니다. 작업은 사용자끼리 공유할 수 있습니다. CalDav를 이용하여 작업을 동기화 할 수  있습니다 (각 작업 목록은 Nextcloud 달력과 연결되어 있고, 로컬 클라이언트와 동기화 할 수 있습니다. - Thunderbird, Evolution, KDE Kontact, iCal, ... - 클라이언트에 원격 달력으로 추가하세요). 각 달력에서 다운로드 버튼을 눌러 작업을 ICS 파일로 다운로드 받을 수 있습니다.",
     "Default list" : "기본 리스트",
     "Visibility of Smart Collections" : "똑똑한 모음집 표시 여부",
     "Hidden" : "숨김",

@@ -10,7 +10,6 @@ OC.L10N.register(
     "Completed" : "Cumpletadu",
     "Tasks" : "Fainas",
     "The Tasks app for Nextcloud" : "S'aplicatzione de is fainas de Nextcloud",
-    "Once enabled, a new Tasks menu will appear in your Nextcloud apps menu. From there you can add and delete tasks, edit their title, description, start and due dates and mark them as important. Tasks can be shared between users. Tasks can be synchronized using CalDav (each task list is linked to an Nextcloud calendar, to sync it to your local client - Thunderbird, Evolution, KDE Kontact, iCal, … - just add the calendar as a remote calendar in your client). You can download your tasks as ICS files using the download button for each calendar." : "Candu ativadu, unu menu Fainas nou at a aparèssere in su menu de is aplicatziones de Nextcloud. Dae cue podes agiùnghere o cantzellare fainas, modificare tìtulu, descritzione, datas de cumintzu e fine e ddas podes marcare comente de importu. Faghet a cumpartzire is fainas intre utentes. Faghet a ddas sincronizare cun CalDav (ogni lista de faina est collegada a unu calendàriu Nextcloud, pro ddu sincronizare cun su cliente locale tuo - Thunderbird, Evolution, KDE Kontact, iCal, … - bastat a agiùnghere su calendàriu comente unu calendàriu remotu in su cliente tuo). Podes iscarrigare is fainas tuas comente archìvios ICS impreende su butone de iscarrigamentu pro ogni calendàriu.",
     "Default list" : "Lista predefinida",
     "Visibility of Smart Collections" : "Visibilidade de colletziones intelligentes",
     "Hidden" : "Cuadu",

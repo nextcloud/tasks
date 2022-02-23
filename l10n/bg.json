@@ -8,7 +8,6 @@
     "Completed" : "Завършено",
     "Tasks" : "Задачи",
     "The Tasks app for Nextcloud" : "Задачи за NextCloud",
-    "Once enabled, a new Tasks menu will appear in your Nextcloud apps menu. From there you can add and delete tasks, edit their title, description, start and due dates and mark them as important. Tasks can be shared between users. Tasks can be synchronized using CalDav (each task list is linked to an Nextcloud calendar, to sync it to your local client - Thunderbird, Evolution, KDE Kontact, iCal, … - just add the calendar as a remote calendar in your client). You can download your tasks as ICS files using the download button for each calendar." : "След като бъде активирано, в менюто ви с приложения Nextcloud ще се появи ново меню Задачи. Оттам можете да добавяте и изтривате задачи, да редактирате тяхното заглавие, описание, начални и крайни дати и да ги маркирате като важни. Задачите могат да се споделят между потребителите. Задачите могат да се синхронизират с помощта на CalDav (всеки списък със задачи е свързан с календар Nextcloud, за да се синхронизира с вашия локален клиент - Thunderbird, Evolution, KDE Kontact, iCal, ... - просто добавете календара като отдалечен календар във вашия клиент). Можете да изтеглите задачите си като ICS файлове, като използвате бутона за изтегляне за всеки календар.",
     "Default list" : "Списък по подразбиране",
     "Visibility of Smart Collections" : "Видимост на \"Smart\" колекции",
     "Hidden" : "Скрито",
