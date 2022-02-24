@@ -8,6 +8,7 @@
     "Completed" : "完成",
     "Tasks" : "工作項目",
     "The Tasks app for Nextcloud" : "Nextcloud 的工作項目應用程式",
+    "Once enabled, a new Tasks menu will appear in your Nextcloud apps menu. From there you can add and delete tasks, edit their title, description, start and due dates and mark them as important. Tasks can be shared between users. Tasks can be synchronized using CalDav (each task list is linked to an Nextcloud calendar, to sync it to your local client: Thunderbird, Evolution, KDE Kontact, iCal … - just add the calendar as a remote calendar in your client). You can download your tasks as ICS files using the download button for each calendar." : "一經啟用，新的「工作項目」選單將會出現在您 Nextcloud 應用程式選單中。在此，您可以新增與刪除工作項目、編輯它們的標題、描述、開始與結束日期、標記它們的重要程度。工作項目可在使用者間分享。工作項目可使用 CalDav 同步（每個工作項目列表都會連結到一個 Nextcloud 日曆，用來與您的本機客戶端同步，如 Thunderbird、Evolution、KDE Kontact、iCal 等，只要在您的客戶端中以遠端日曆的形式新增日曆即可）。您可以 ICS 檔案的形式下載您的工作項目，只要按下每個日曆的下載按鈕就好。",
     "Default list" : "預設列表",
     "Visibility of Smart Collections" : "智慧型收藏的能見度",
     "Hidden" : "隱藏",
