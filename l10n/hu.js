@@ -10,6 +10,7 @@ OC.L10N.register(
     "Completed" : "Befejezve",
     "Tasks" : "Feladatok",
     "The Tasks app for Nextcloud" : "Feladatok alkalmazás a Nextcloudhoz",
+    "Once enabled, a new Tasks menu will appear in your Nextcloud apps menu. From there you can add and delete tasks, edit their title, description, start and due dates and mark them as important. Tasks can be shared between users. Tasks can be synchronized using CalDav (each task list is linked to an Nextcloud calendar, to sync it to your local client: Thunderbird, Evolution, KDE Kontact, iCal … - just add the calendar as a remote calendar in your client). You can download your tasks as ICS files using the download button for each calendar." : "Engedélyezés esetén egy új Feladatok menü jelenik meg a Nextcloud alkalmazásmenüben. A menüből feladatokat tud létrehozni és törölni, szerkesztheti a címeiket, a leírásokat, a kezdő dátumokat és a határidőket. emlékeztetőket állíthat be. megjelölheti fontosnak és jegyzeteket tud hozzájuk fűzni. A feladatok megoszthatók a felhasználók között. A feladatok szinkronizálhatók CalDav használatával (minden egyes feladatlista hozzá van rendelve egy Nextcloud-naptárhoz, és szinkronizálható egy helyi klienssel: Thunderbird, Evolution, KDE Kontakt, iCal… – csak hozzá kell adnia távoli naptárként. A letöltés gomb segítségével minden egyes naptári feladat letölthető ICS-fájlként.",
     "Default list" : "Alapértelmezett lista",
     "Visibility of Smart Collections" : "Az okos gyűjtemények láthatósága",
     "Hidden" : "Rejtett",
