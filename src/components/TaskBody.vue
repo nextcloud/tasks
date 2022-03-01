@@ -38,22 +38,12 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			class="task-item__body reactive"
 			type="task"
 			@click="navigate($event)">
-			<!-- Checkbox with divider -->
-			<div class="task-body__checkbox">
-				<input :id="'toggleCompleted_' + task.uid"
-					type="checkbox"
-					class="checkbox no-nav"
-					name="toggleCompleted"
-					:class="{'disabled': readOnly}"
-					:checked="task.completed"
-					:aria-checked="task.completed"
-					:disabled="readOnly"
-					:aria-label="t('tasks', 'Task is completed')"
-					@click="toggleCompleted(task)">
-				<label :class="[priorityClass, 'reactive no-nav']" :for="'toggleCompleted_' + task.uid">
-					<Cancel v-if="task.status === 'CANCELLED' && !task.completed" :size="20" />
-				</label>
-			</div>
+			<!-- Checkbox -->
+			<TaskCheckbox :completed="task.completed"
+				:cancelled="task.status === 'CANCELLED'"
+				:read-only="readOnly"
+				:priority-class="priorityClass"
+				@toggle-completed="toggleCompleted(task)" />
 			<!-- Info: title, progress & tags -->
 			<div class="task-body__info">
 				<div class="title">
@@ -172,6 +162,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import { overdue, sort, searchSubTasks, isTaskInList } from '../store/storeHelper'
+import TaskCheckbox from './TaskCheckbox'
 import TaskStatusDisplay from './TaskStatusDisplay'
 import TaskDragContainer from './TaskDragContainer'
 import Task from '../models/task'
@@ -183,7 +174,6 @@ import Actions from '@nextcloud/vue/dist/Components/Actions'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
 import Linkify from '@nextcloud/vue/dist/Directives/Linkify'
 
-import Cancel from 'vue-material-design-icons/Cancel'
 import Delete from 'vue-material-design-icons/Delete'
 import Eye from 'vue-material-design-icons/Eye'
 import Pin from 'vue-material-design-icons/Pin'
@@ -203,11 +193,11 @@ export default {
 		Linkify,
 	},
 	components: {
+		TaskCheckbox,
 		TaskStatusDisplay,
 		TaskDragContainer,
 		Actions,
 		ActionButton,
-		Cancel,
 		Delete,
 		Eye,
 		Pin,
@@ -747,63 +737,6 @@ $breakpoint-mobile: 1024px;
 		}
 
 		.task-body {
-			&__checkbox {
-				display: flex;
-				height: 44px;
-				width: 44px;
-				justify-content: center;
-				flex-shrink: 0;
-
-				input[type='checkbox'].checkbox {
-					&:checked + label::before {
-						background-image: var(--icon-checkmark-000) !important;
-						background-color: unset;
-						border-color: unset;
-					}
-					&:disabled + label::before {
-						background-color: var(--color-background-darker) !important;
-					}
-					+ label {
-						display: flex;
-						align-items: center;
-
-						.material-design-icon {
-							position: absolute;
-							height: 18px;
-							width: 18px;
-							opacity: .7;
-						}
-
-						&::before {
-							margin: 0;
-							border-width: 2px;
-							border-radius: var(--border-radius);
-							border-color: var(--color-border-dark);
-							height: 14px;
-							width: 14px;
-						}
-
-						&:hover {
-							border-color: var(--color-border-dark);
-						}
-
-						&.priority {
-							&--high::before {
-								border-color: $red_overdue;
-							}
-
-							&--medium::before {
-								border-color: $yellow;
-							}
-
-							&--low::before {
-								border-color: $blue_due;
-							}
-						}
-					}
-				}
-			}
-
 			&__info {
 				display: flex;
 				flex-grow: 1;
