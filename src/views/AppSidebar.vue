@@ -126,20 +126,11 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		</template>
 
 		<template #tertiary-actions>
-			<span class="app-sidebar-header__checkbox">
-				<input :id="'detailsToggleCompleted_' + task.uid"
-					type="checkbox"
-					class="checkbox"
-					:class="{'disabled': readOnly}"
-					:checked="task.completed"
-					:aria-checked="task.completed"
-					:disabled="readOnly"
-					:aria-label="t('tasks', 'Task is completed')"
-					@click="toggleCompleted(task)">
-				<label :class="[priorityClass]" :for="'detailsToggleCompleted_' + task.uid">
-					<Cancel v-if="task.status === 'CANCELLED' && !task.completed" :size="20" />
-				</label>
-			</span>
+			<TaskCheckbox :completed="task.completed"
+				:cancelled="task.status === 'CANCELLED'"
+				:read-only="readOnly"
+				:priority-class="priorityClass"
+				@toggle-completed="toggleCompleted(task)" />
 		</template>
 
 		<AppSidebarTab v-if="task"
@@ -246,6 +237,7 @@ import MultiselectItem from '../components/AppSidebar/MultiselectItem'
 import SliderItem from '../components/AppSidebar/SliderItem'
 import TagsItem from '../components/AppSidebar/TagsItem'
 import NotesItem from '../components/AppSidebar/NotesItem'
+import TaskCheckbox from '../components/TaskCheckbox'
 // import TaskStatusDisplay from '../components/TaskStatusDisplay'
 import Task from '../models/task'
 
@@ -262,7 +254,6 @@ import { generateUrl } from '@nextcloud/router'
 import Calendar from 'vue-material-design-icons/Calendar'
 import CalendarEnd from 'vue-material-design-icons/CalendarEnd'
 import CalendarStart from 'vue-material-design-icons/CalendarStart'
-import Cancel from 'vue-material-design-icons/Cancel'
 import Delete from 'vue-material-design-icons/Delete'
 import Download from 'vue-material-design-icons/Download'
 import InformationOutline from 'vue-material-design-icons/InformationOutline'
@@ -287,7 +278,6 @@ export default {
 		Calendar,
 		CalendarEnd,
 		CalendarStart,
-		Cancel,
 		Delete,
 		Download,
 		InformationOutline,
@@ -304,6 +294,7 @@ export default {
 		TagsItem,
 		CalendarPickerItem,
 		NotesItem,
+		TaskCheckbox,
 		// TaskStatusDisplay,
 	},
 	/**
@@ -889,67 +880,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$red: #b3312d;
-$yellow: #fd0;
-$blue: #4271a6;
-
-.app-sidebar-header__desc .app-sidebar-header__checkbox {
-	display: flex;
-	height: 44px;
-	width: 44px;
-	justify-content: center;
-	flex-shrink: 0;
-
-	input[type='checkbox'].checkbox {
-		&:checked + label::before {
-			background-image: var(--icon-checkmark-000) !important;
-			background-color: unset;
-			border-color: unset;
-		}
-		&:disabled + label::before {
-			background-color: var(--color-background-darker) !important;
-		}
-		+ label {
-			display: flex;
-			align-items: center;
-
-			.material-design-icon {
-				position: absolute;
-				height: 18px;
-				width: 18px;
-				opacity: .7;
-			}
-
-			&::before {
-				margin: 0;
-				border-width: 2px;
-				border-radius: var(--border-radius);
-				border-color: var(--color-border-dark);
-				height: 14px;
-				width: 14px;
-			}
-
-			&:hover {
-				border-color: var(--color-border-dark);
-			}
-
-			&.priority {
-				&--high::before {
-					border-color: $red;
-				}
-
-				&--medium::before {
-					border-color: $yellow;
-				}
-
-				&--low::before {
-					border-color: $blue;
-				}
-			}
-		}
-	}
-}
-
 .app-sidebar::v-deep .app-sidebar-header__description {
 	flex-wrap: wrap;
 	margin: 0;
@@ -961,7 +891,5 @@ $blue: #4271a6;
 
 .app-sidebar__tab {
 	padding: 0;
-	// This should go into @nextcloud/vue
-	height: 100%;
 }
 </style>
