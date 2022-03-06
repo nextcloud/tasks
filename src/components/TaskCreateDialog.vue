@@ -26,56 +26,54 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<Modal class="task-selector" @close="close">
-		<div class="modal-scroller">
-			<div v-if="!creating && !created" id="modal-inner" :class="{ 'icon-loading': loading }">
-				<h3>{{ t('tasks', 'Create a new task') }}</h3>
+	<Modal class="task-selector" size="small" @close="close">
+		<div v-if="!creating && !created" id="modal-inner" :class="{ 'icon-loading': loading }">
+			<h3>{{ t('tasks', 'Create a new task') }}</h3>
 
-				<CalendarPickerItem :disabled="loading"
-					:calendar="pendingCalendar"
-					:calendars="writableCalendars"
-					@change-calendar="changeCalendar" />
+			<CalendarPickerItem :disabled="loading"
+				:calendar="pendingCalendar"
+				:calendars="writableCalendars"
+				@change-calendar="changeCalendar" />
 
-				<div class="property property__summary">
-					<ViewHeadline :size="20" />
-					<input v-model="pendingTitle"
-						type="text"
-						:placeholder="t('tasks', 'Task summary')"
-						:disabled="loading">
-				</div>
-
-				<div class="property property__notes">
-					<TextBoxOutline :size="20" />
-					<textarea v-model="pendingDescription"
-						:disabled="loading" />
-					<div class="modal-buttons">
-						<button @click="close">
-							{{ t('tasks', 'Cancel') }}
-						</button>
-						<button :disabled="loading"
-							class="primary"
-							@click="addTask">
-							{{ t('tasks', 'Create task') }}
-						</button>
-					</div>
-				</div>
+			<div class="property property__summary">
+				<ViewHeadline :size="20" />
+				<input v-model="pendingTitle"
+					type="text"
+					:placeholder="t('tasks', 'Task summary')"
+					:disabled="loading">
 			</div>
-			<div v-else id="modal-inner">
-				<EmptyContent v-if="creating" icon="icon-loading">
-					{{ t('tasks', 'Creating the new task…') }}
-				</EmptyContent>
-				<EmptyContent v-else-if="created" icon="icon-checkmark">
-					{{ t('tasks', '"{task}" was added to "{calendar}"', { task: pendingTitle, calendar: pendingCalendar.displayName }, undefined, { sanitize: false, escape: false }) }}
-					<template #desc>
-						<button class="primary" @click="openNewTask">
-							{{ t('tasks', 'Open task') }}
-						</button>
-						<button @click="close">
-							{{ t('tasks', 'Close') }}
-						</button>
-					</template>
-				</EmptyContent>
+
+			<div class="property property__notes">
+				<TextBoxOutline :size="20" />
+				<textarea v-model="pendingDescription"
+					:disabled="loading" />
 			</div>
+			<div class="modal-buttons">
+				<button @click="close">
+					{{ t('tasks', 'Cancel') }}
+				</button>
+				<button :disabled="loading"
+					class="primary"
+					@click="addTask">
+					{{ t('tasks', 'Create task') }}
+				</button>
+			</div>
+		</div>
+		<div v-else id="modal-inner">
+			<EmptyContent v-if="creating" icon="icon-loading">
+				{{ t('tasks', 'Creating the new task…') }}
+			</EmptyContent>
+			<EmptyContent v-else-if="created" icon="icon-checkmark">
+				{{ t('tasks', '"{task}" was added to "{calendar}"', { task: pendingTitle, calendar: pendingCalendar.displayName }, undefined, { sanitize: false, escape: false }) }}
+				<template #desc>
+					<button class="primary" @click="openNewTask">
+						{{ t('tasks', 'Open task') }}
+					</button>
+					<button @click="close">
+						{{ t('tasks', 'Close') }}
+					</button>
+				</template>
+			</EmptyContent>
 		</div>
 	</Modal>
 </template>
@@ -188,17 +186,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-	.modal-scroller {
-		overflow: scroll;
-		max-height: calc(80vh - 40px);
-		margin: 10px;
-	}
 
 	#modal-inner {
-		width: 90vw;
-		max-width: 400px;
-		padding: 10px;
-		min-height: 200px;
+		display: flex;
+		flex-direction: column;
+		padding: 20px;
 	}
 
 	.property__item {
@@ -216,8 +208,8 @@ export default {
 
 		.material-design-icon {
 			position: absolute;
-			top: 10px;
-			left: 10px;
+			top: 12px;
+			left: 12px;
 		}
 
 		input,
@@ -242,10 +234,6 @@ export default {
 	.modal-buttons {
 		display: flex;
 		justify-content: flex-end;
-	}
-
-	.task-selector::v-deep .modal-container {
-		overflow: visible !important;
 	}
 
 	::v-deep {

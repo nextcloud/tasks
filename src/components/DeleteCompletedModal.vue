@@ -25,22 +25,24 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			{{ t('tasks', 'Delete all completed tasks.') }}
 		</span>
 		<Modal v-if="modalOpen"
+			size="normal"
 			:out-transition="true"
 			@close="closeModal">
-			<div class="emptycontent delete-completed">
-				<p class="icon-delete" />
-				<div v-if="completedTasksCount">
-					<h3 class="delete-completed__header">
+			<div class="delete-completed">
+				<Delete :size="64" />
+				<div v-if="completedTasksCount" class="delete-completed__header">
+					<h3>
 						{{ n('tasks', 'This will delete {taskCount} completed task and its subtasks from calendar "{calendar}".', 'This will delete {taskCount} completed tasks and their subtasks from calendar "{calendar}".', initialCompletedRootTasksCount, {taskCount: initialCompletedRootTasksCount, calendar: calendar.displayName}, { sanitize: false, escape: false }) }}
 					</h3>
-					<button class="delete-completed__button icon-delete"
+					<button class="delete-completed__button"
 						type="button"
 						@click="deleteCompletedTasks">
+						<Delete :size="20" />
 						{{ t('tasks', 'Delete completed tasks.') }}
 					</button>
 				</div>
 				<div v-else>
-					<h3 class="delete-completed__header">
+					<h3>
 						{{ t('tasks', 'Deleted all completed tasks from calendar "{calendar}".', { calendar: calendar.displayName }, undefined, { sanitize: false, escape: false }) }}
 					</h3>
 				</div>
@@ -65,10 +67,13 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'
 import Modal from '@nextcloud/vue/dist/Components/Modal'
 
+import Delete from 'vue-material-design-icons/Delete'
+
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
 	components: {
+		Delete,
 		Modal,
 	},
 	props: {
@@ -162,10 +167,11 @@ export default {
 }
 
 .delete-completed {
-	margin: 50px;
+	padding: 20px;
 	width: auto;
 	min-width: 30vw;
 	&__button {
+		position: relative;
 		display: inline-block;
 		padding: 10px;
 		padding-left: 34px;
@@ -175,8 +181,18 @@ export default {
 		width: unset !important;
 		height: unset !important;
 		background-size: unset !important;
+
+		.material-design-icon {
+			position: absolute;
+			top: 7px;
+			left: 8px;
+		}
 	}
 	&__header {
+		text-align: center;
+		margin-bottom: 20px;
+	}
+	h3 {
 		padding-top: 20px;
 		max-width: 80%;
 		margin: 12px auto;

@@ -29,6 +29,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		</template>
 		<template #extra>
 			<Modal v-if="showModal"
+				size="large"
 				@close="showModal = false">
 				<div class="modal__content">
 					<EmptyContent v-if="loading" icon="icon-loading">
@@ -289,16 +290,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-::v-deep .modal-container {
-	height: 80%;
-}
 
 .modal__content {
 	display: flex;
 	flex-direction: column;
 	margin: 2vw;
-	height: calc(100% - 4vw);
-	max-height: calc(100% - 4vw);
 }
 
 .table {
