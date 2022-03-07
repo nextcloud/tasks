@@ -74,11 +74,11 @@ export default {
 	computed: {
 		ariaLabel() {
 			if (this.cancelled && !this.completed) {
-				return t('tasks', 'Task is cancelled.')
+				return t('tasks', 'Task is cancelled')
 			} else if (this.completed) {
 				return t('tasks', 'Task is completed')
 			} else if (this.readOnly) {
-				return t('tasks', 'Task is read-only.')
+				return t('tasks', 'Task is read-only')
 			}
 			return t('tasks', 'Task is not completed')
 		},
