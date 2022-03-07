@@ -1,7 +1,7 @@
 { "translations": {
     "Important" : "Importants",
     "Today" : "Avui",
-    "Week" : "Setmana",
+    "Week" : "Aquesta setmana",
     "All" : "Totes",
     "Current" : "Actuals",
     "Completed" : "Completades",
@@ -21,7 +21,7 @@
     "Copy private link" : "Copia l'enllaç privat",
     "Copied" : "Copiat",
     "Download" : "Baixa",
-    "Delete" : "Esborra",
+    "Delete" : "Suprimeix",
     "Unshare" : "Deixa de compartir",
     "Cancel" : "Cancel·la",
     "Save" : "Desa",

@@ -3,7 +3,7 @@ OC.L10N.register(
     {
     "Important" : "Importants",
     "Today" : "Avui",
-    "Week" : "Setmana",
+    "Week" : "Aquesta setmana",
     "All" : "Totes",
     "Current" : "Actuals",
     "Completed" : "Completades",
@@ -23,7 +23,7 @@ OC.L10N.register(
     "Copy private link" : "Copia l'enllaç privat",
     "Copied" : "Copiat",
     "Download" : "Baixa",
-    "Delete" : "Esborra",
+    "Delete" : "Suprimeix",
     "Unshare" : "Deixa de compartir",
     "Cancel" : "Cancel·la",
     "Save" : "Desa",
