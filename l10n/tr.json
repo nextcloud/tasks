@@ -133,6 +133,7 @@
     "Add a subtask to \"{task}\"…" : "\"{task}\" görevine bir alt görev ekle …",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["Görev {countdown} saniye içinde silinecek","Görev {countdown} saniye içinde silinecek"],
     "Task is completed" : "Görev tamamlandı",
+    "Task is not completed" : "Görev tamamlanmadı",
     "Create a new task" : "Görev ekle",
     "Task summary" : "Görev özeti",
     "Create task" : "Görev ekle",

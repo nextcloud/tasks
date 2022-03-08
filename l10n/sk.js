@@ -135,6 +135,7 @@ OC.L10N.register(
     "Add a subtask to \"{task}\"…" : "Pridať čiastkovú úlohu do  \"{task}\"…",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["Odstránenie úlohy o {countdown} sekundu","Odstránenie úlohy o {countdown} sekundy","Odstránenie úlohy o {countdown} sekundy","Odstránenie úlohy o {countdown} sekúnd"],
     "Task is completed" : "Úloha je dokončená",
+    "Task is not completed" : "Úloha nie je dokončená",
     "Create a new task" : "Vytvoriť novú úlohu",
     "Task summary" : "Zhrnutie úlohy",
     "Create task" : "Vytvoriť úlohu",
