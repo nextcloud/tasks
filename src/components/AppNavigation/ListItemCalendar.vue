@@ -79,7 +79,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<template #icon>
 					<Download :size="20" />
 				</template>
-				{{ t('tasks', 'Download') }}
+				{{ t('tasks', 'Export') }}
 			</ActionLink>
 			<ActionButton v-if="!calendar.readOnly || calendar.isSharedWithMe"
 				v-tooltip="{
