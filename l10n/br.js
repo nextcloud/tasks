@@ -11,7 +11,6 @@ OC.L10N.register(
     "Unshare with {displayName}" : "Dirannañ gant {displayName}",
     "Edit" : "Cheñch",
     "Copy private link" : "Eilañ al liamm prevez",
-    "Download" : "Pellgargañ",
     "Delete" : "Dilemel",
     "Unshare" : "Nag eskemm ken",
     "Cancel" : "Arrest",

@@ -9,7 +9,6 @@ OC.L10N.register(
     "Completed" : "Zavrženo",
     "Tasks" : "Zadaci",
     "Edit" : "Izmjeni",
-    "Download" : "Preuzmi",
     "Delete" : "Obriši",
     "Unshare" : "Prestani  dijeliti",
     "Cancel" : "Odustani",

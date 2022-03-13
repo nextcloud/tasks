@@ -22,7 +22,6 @@ OC.L10N.register(
     "Edit" : "Ändra",
     "Copy private link" : "Kopiera privat länk",
     "Copied" : "Kopierad",
-    "Download" : "Hämta",
     "Delete" : "Ta bort",
     "Unshare" : "Sluta dela",
     "Cancel" : "Avbryt",

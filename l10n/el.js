@@ -22,7 +22,6 @@ OC.L10N.register(
     "Edit" : "Επεξεργασία",
     "Copy private link" : "Αντιγραφή ιδιωτικού συνδέσμου",
     "Copied" : "Αντιγράφηκε",
-    "Download" : "Λήψη",
     "Delete" : "Διαγραφή",
     "Unshare" : "Αναίρεση διαμοιρασμού",
     "Cancel" : "Aκύρωση",

@@ -13,7 +13,6 @@ OC.L10N.register(
     "Visible" : "দর্শনযোগ্য",
     "Automatic" : "স্বয়ংক্রিয়",
     "Edit" : "সম্পাদনা",
-    "Download" : "ডাউনলোড",
     "Delete" : "মুছে",
     "Unshare" : "ভাগাভাগি বাতিল ",
     "Cancel" : "বাতিল",

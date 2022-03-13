@@ -22,7 +22,6 @@ OC.L10N.register(
     "Edit" : "Edita",
     "Copy private link" : "Copia l'enllaç privat",
     "Copied" : "Copiat",
-    "Download" : "Baixa",
     "Delete" : "Suprimeix",
     "Unshare" : "Deixa de compartir",
     "Cancel" : "Cancel·la",

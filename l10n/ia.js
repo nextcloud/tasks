@@ -13,7 +13,6 @@ OC.L10N.register(
     "Automatic" : "Automatic",
     "Share with users or groups" : "Compartir con usatores o gruppos",
     "Edit" : "Modificar",
-    "Download" : "Discargar",
     "Delete" : "Deler",
     "Unshare" : "Cessa de compartir",
     "Cancel" : "Cancellar",

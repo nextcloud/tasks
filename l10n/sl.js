@@ -25,7 +25,6 @@ OC.L10N.register(
     "Copy private link" : "Kopiraj zasebno povezavo",
     "Copied" : "Kopirano!",
     "Cannot copy" : "Predmeta ni mogoče kopirati",
-    "Download" : "Prejmi",
     "Delete" : "Izbriši",
     "Unshare" : "Prekini souporabo",
     "Cancel" : "Prekliči",

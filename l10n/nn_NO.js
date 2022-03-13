@@ -7,7 +7,6 @@ OC.L10N.register(
     "All" : "Alle",
     "Tasks" : "Oppgåver",
     "Edit" : "Endra",
-    "Download" : "Last ned",
     "Delete" : "Slett",
     "Unshare" : "Fjern deling",
     "Cancel" : "Avbryt",

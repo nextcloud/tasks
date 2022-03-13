@@ -21,7 +21,6 @@ OC.L10N.register(
     "Edit" : "Redakti",
     "Copy private link" : "Kopii privatan ligilon",
     "Copied" : "Kopiita",
-    "Download" : "Elŝuti",
     "Delete" : "Forigi",
     "Unshare" : "Malkunhavigi",
     "Cancel" : "Nuligi",

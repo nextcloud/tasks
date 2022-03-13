@@ -13,7 +13,6 @@ OC.L10N.register(
     "Automatic" : "Automatesch",
     "Share with users or groups" : "Mat Benotzer oder Gruppen deelen",
     "Edit" : "Änneren",
-    "Download" : "Eroflueden",
     "Delete" : "Läschen",
     "Unshare" : "Net méi deelen",
     "Cancel" : "Ofbriechen",

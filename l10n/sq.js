@@ -14,7 +14,6 @@ OC.L10N.register(
     "Automatic" : "Automatike",
     "Share with users or groups" : "Nda me përdoruesit ose grupet",
     "Edit" : "Përpunoni",
-    "Download" : "Shkarkoje",
     "Delete" : "Fshije",
     "Unshare" : "Hiqe ndarjen",
     "Cancel" : "Anuloje",

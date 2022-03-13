@@ -16,7 +16,6 @@ OC.L10N.register(
     "No users or groups" : "Geen gebruikers of groepe",
     "Edit" : "Wysig",
     "Copied" : "Gekopieer",
-    "Download" : "Laai Af",
     "Delete" : "Skrap",
     "Unshare" : "Ontdeel",
     "Cancel" : "Kanselleer",

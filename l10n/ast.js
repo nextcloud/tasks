@@ -14,7 +14,6 @@ OC.L10N.register(
     "Automatic" : "Automáticu",
     "Share with users or groups" : "Compartir con usuarios y grupos",
     "Edit" : "Editar",
-    "Download" : "Baxar",
     "Delete" : "Desaniciar",
     "Unshare" : "Dexar de compartir",
     "Cancel" : "Encaboxar",

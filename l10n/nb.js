@@ -24,7 +24,6 @@ OC.L10N.register(
     "Copy private link" : "Kopier privat lenke",
     "Copied" : "Kopiert",
     "Cannot copy" : "Kan ikke kopiere",
-    "Download" : "Last ned",
     "Delete" : "Slett",
     "Unshare" : "Opphev deling",
     "Cancel" : "Avbryt",

@@ -18,7 +18,6 @@ OC.L10N.register(
     "Unshare with {displayName}" : "Batal berbagi dengan {displayName}",
     "Edit" : "Sunting",
     "Copy private link" : "Salin tautan privat",
-    "Download" : "Unduh",
     "Delete" : "Hapus",
     "Unshare" : "Batalkan berbagi",
     "Cancel" : "Batal",

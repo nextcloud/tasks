@@ -24,7 +24,6 @@ OC.L10N.register(
     "Copy private link" : "プライベートリンクをコピー",
     "Copied" : "コピーしました",
     "Cannot copy" : "コピーできません",
-    "Download" : "ダウンロード",
     "Delete" : "削除",
     "Unshare" : "共有を解除",
     "Cancel" : "キャンセル",

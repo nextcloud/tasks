@@ -26,7 +26,6 @@ OC.L10N.register(
     "Copy private link" : "Személyes hivatkozás másolása",
     "Copied" : "Másolva",
     "Cannot copy" : "Nem lehet másolni",
-    "Download" : "Letöltés",
     "Delete" : "Törlés",
     "Unshare" : "Megosztás visszavonása",
     "Cancel" : "Mégse",

@@ -13,7 +13,6 @@ OC.L10N.register(
     "Visible" : "Görünən",
     "Automatic" : "Avtomatik",
     "Edit" : "Dəyişiklik et",
-    "Download" : "Yüklə",
     "Delete" : "Sil",
     "Unshare" : "Paylaşımı durdur",
     "Cancel" : "Dayandır",

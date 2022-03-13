@@ -16,7 +16,6 @@ OC.L10N.register(
     "Edit" : "ویرایش",
     "Copy private link" : "پیوند خصوصی را کپی کنید",
     "Copied" : "کپی شد",
-    "Download" : "دانلود",
     "Delete" : "حذف",
     "Unshare" : "لغو اشتراک",
     "Cancel" : "لغو",

@@ -17,7 +17,6 @@ OC.L10N.register(
     "Unshare with {displayName}" : "Lõpeta jagamine kasutajaga: {displayName}",
     "Edit" : "Muuda",
     "Copy private link" : "Kopeeri privaatne link",
-    "Download" : "Lae alla",
     "Delete" : "Kustuta",
     "Unshare" : "Lõpeta jagamine",
     "Cancel" : "Loobu",

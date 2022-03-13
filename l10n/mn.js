@@ -9,7 +9,6 @@ OC.L10N.register(
     "Hidden" : "Далд",
     "Share with users or groups" : "Бусад хэрэглэгч, бүлэгт хуваалцах",
     "Edit" : "засварлах",
-    "Download" : "татаж авах",
     "Delete" : "устгах",
     "Unshare" : "Түгээлтийг зогсоох",
     "Cancel" : "цуцлах",

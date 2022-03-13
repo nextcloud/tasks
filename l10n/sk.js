@@ -26,7 +26,6 @@ OC.L10N.register(
     "Copy private link" : "Kopírovať privátny odkaz",
     "Copied" : "Skopírované",
     "Cannot copy" : "Nemôže kopírovať",
-    "Download" : "Stiahnuť",
     "Delete" : "Zmazať",
     "Unshare" : "Zneprístupniť",
     "Cancel" : "Zrušiť",

@@ -25,7 +25,6 @@ OC.L10N.register(
     "Copy private link" : "Còpia ligòngiu privadu",
     "Copied" : "Copiadu",
     "Cannot copy" : "Non faghet a copiare",
-    "Download" : "Iscàrriga",
     "Delete" : "Cantzella",
     "Unshare" : "Annulla sa cumpartzidura",
     "Cancel" : "Annulla",

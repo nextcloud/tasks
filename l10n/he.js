@@ -22,7 +22,6 @@ OC.L10N.register(
     "Edit" : "עריכה",
     "Copy private link" : "העתקת קישור פרטי",
     "Copied" : "הועתק",
-    "Download" : "הורדה",
     "Delete" : "מחיקה",
     "Unshare" : "ביטול שיתוף",
     "Cancel" : "ביטול",

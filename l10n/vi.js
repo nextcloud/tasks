@@ -19,7 +19,6 @@ OC.L10N.register(
     "Edit" : "Sửa",
     "Copy private link" : "Sao chép liên kết riêng tư",
     "Copied" : "Đã sao chép",
-    "Download" : "Tải về",
     "Delete" : "Xóa",
     "Unshare" : "Bỏ chia sẽ",
     "Cancel" : "Hủy",

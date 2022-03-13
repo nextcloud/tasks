@@ -22,7 +22,6 @@ OC.L10N.register(
     "Edit" : "Уреди",
     "Copy private link" : "Копирај приватну везу",
     "Copied" : "Копирано",
-    "Download" : "Преузми",
     "Delete" : "Обриши",
     "Unshare" : "Укини дељење",
     "Cancel" : "Откажи",

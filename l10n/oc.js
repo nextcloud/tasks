@@ -13,7 +13,6 @@ OC.L10N.register(
     "Visible" : "Visible",
     "Automatic" : "Automatic",
     "Edit" : "Modificar",
-    "Download" : "Telecargar",
     "Delete" : "Suprimir",
     "Unshare" : "Partejar pas",
     "Cancel" : "Anullar",

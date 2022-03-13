@@ -14,7 +14,6 @@ OC.L10N.register(
     "Automatic" : "อัตโนมัติ",
     "Share with users or groups" : "แชร์กับผู้ใช้หรือกลุ่ม",
     "Edit" : "แก้ไข",
-    "Download" : "ดาวน์โหลด",
     "Delete" : "ลบ",
     "Unshare" : "ยกเลิกการแชร์",
     "Cancel" : "ยกเลิก",

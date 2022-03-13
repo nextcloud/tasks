@@ -24,7 +24,6 @@ OC.L10N.register(
     "Copy private link" : "Kopijuoti privačią nuorodą",
     "Copied" : "Nukopijuota",
     "Cannot copy" : "Nepavyksta nukopijuoti",
-    "Download" : "Atsisiųsti",
     "Delete" : "Ištrinti",
     "Unshare" : "Nustoti bendrinti",
     "Cancel" : "Atsisakyti",

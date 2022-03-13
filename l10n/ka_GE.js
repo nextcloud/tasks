@@ -14,7 +14,6 @@ OC.L10N.register(
     "Automatic" : "ავტომატური",
     "Share with users or groups" : "გაზიარება მოხმარებლებთან ან ჯგუფებთან",
     "Edit" : "რედაქტირება",
-    "Download" : "ჩამოტვირთვა",
     "Delete" : "წაშლა",
     "Unshare" : "გაზიარების შეწყვეტა",
     "Cancel" : "უარყოფა",

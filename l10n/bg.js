@@ -25,7 +25,6 @@ OC.L10N.register(
     "Copy private link" : "Копирай скритата връзка",
     "Copied" : "Копирано",
     "Cannot copy" : "Не може да се копира",
-    "Download" : "Изтегляне",
     "Delete" : "Изтриване",
     "Unshare" : "Прекрати споделянето",
     "Cancel" : "Отказ",
