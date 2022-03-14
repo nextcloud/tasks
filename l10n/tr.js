@@ -26,6 +26,7 @@ OC.L10N.register(
     "Copy private link" : "Kişisel bağlantıyı kopyala",
     "Copied" : "Kopyalandı",
     "Cannot copy" : "Kopyalanamadı",
+    "Export" : "Dışa aktar",
     "Delete" : "Sil",
     "Unshare" : "Paylaşımı kaldır",
     "Cancel" : "İptal",
