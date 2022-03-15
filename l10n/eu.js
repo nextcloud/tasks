@@ -25,6 +25,7 @@ OC.L10N.register(
     "Copy private link" : "Kopiatu esteka pribatua",
     "Copied" : "Kopiatuta",
     "Cannot copy" : "Ezin da kopiatu",
+    "Export" : "Esportatu",
     "Delete" : "Ezabatu",
     "Unshare" : "Ez partekatu",
     "Cancel" : "Ezeztatu",
