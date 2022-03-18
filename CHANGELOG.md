@@ -1,3 +1,33 @@
+## 0.14.3 - 2022-03-18
+
+### Added
+- Allow to complete tasks from the Dashboard #1790
+- Allow to empty the trash bin #1802
+
+### Changed
+- Increase size of load all completed tasks button #1777
+- Always show sharing icon for shared lists #1877
+- Adjust material design icon size to 20 #1789
+- Use material design checkboxes #1933
+- Rename download to export #1941
+- Updated translations
+- Updated dependencies
+- Code cleanup #1763 #1775 #1795 #1804 #1814 #1837 #1871 #1887 #1914
+
+### Fixed
+- Confirm slider value by pressing enter #1769
+- Don't reset date when setting time with keyboard #1819
+- Use material design icon for group avatar #1762
+- Fix calendar picker style in dashboard #1764
+- Fix sort order direction icon position #1815
+- Fix undefined Tasks version when creating a task from Dashboard or Talk #1797
+- Track calendars by url in Multiselect #1872
+- Don't break trash bin if calendar is undefined #1873
+- Load all calendars for trash bin #1943
+- Fix locale en_SG #1938
+- Correctly show untitled items in trash bin #1876
+- Correctly align plus icon in task input field #1895
+
 ## 0.14.2 - 2021-08-29
 
 ### Added
