@@ -63,7 +63,7 @@ import { translate as t } from '@nextcloud/l10n'
 import { generateUrl } from '@nextcloud/router'
 import { DashboardWidget, DashboardWidgetItem } from '@nextcloud/vue-dashboard'
 
-import { mapState, mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
 	name: 'Dashboard',
@@ -86,8 +86,8 @@ export default {
 		}
 	},
 	computed: {
-		...mapState({
-			calendars: state => state.calendars.calendars,
+		...mapGetters({
+			calendars: 'getTaskCalendars',
 		}),
 		hasTaskToday() {
 			return this.filteredTasks.some(task => isTaskInList(task, 'today'))
@@ -109,7 +109,8 @@ export default {
 		async initializeEnvironment() {
 			await client.connect({ enableCalDAV: true })
 			await this.$store.dispatch('fetchCurrentUserPrincipal')
-			const { calendars } = await this.$store.dispatch('getCalendarsAndTrashBin')
+			let { calendars } = await this.$store.dispatch('getCalendarsAndTrashBin')
+			calendars = calendars.filter(calendar => calendar.supportsTasks)
 			const owners = []
 			calendars.forEach((calendar) => {
 				if (owners.indexOf(calendar.owner) === -1) {

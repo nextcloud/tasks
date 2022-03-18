@@ -104,12 +104,11 @@ const getters = {
 	 *
 	 * @param {object} state The store data
 	 * @param {object} getters The store getters
-	 * @param {object} rootState The store root state
 	 * @return {Array} All tasks in store
 	 */
-	getAllTasks: (state, getters, rootState) => {
+	getAllTasks: (state, getters) => {
 		let tasks = []
-		rootState.calendars.calendars.forEach(calendar => {
+		getters.getTaskCalendars.forEach(calendar => {
 			tasks = tasks.concat(Object.values(calendar.tasks))
 		})
 		return tasks
@@ -143,10 +142,9 @@ const getters = {
 	 *
 	 * @param {object} state The store data
 	 * @param {object} getters The store getters
-	 * @param {object} rootState The store root state
 	 * @return {Task} The task
 	 */
-	getTaskByUri: (state, getters, rootState) =>
+	getTaskByUri: (state, getters) =>
 		/**
 		 * @param {string} taskUri The Uri of the task in question
 		 * @return {Task} The task
@@ -154,7 +152,7 @@ const getters = {
 		(taskUri) => {
 			// We have to search in all calendars
 			let task
-			for (const calendar of rootState.calendars.calendars) {
+			for (const calendar of getters.getTaskCalendars) {
 				task = Object.values(calendar.tasks).find(task => {
 					return task.uri === taskUri
 				})
@@ -168,10 +166,9 @@ const getters = {
 	 *
 	 * @param {object} state The store data
 	 * @param {object} getters The store getters
-	 * @param {object} rootState The store root state
 	 * @return {Task} The task
 	 */
-	getTaskByUid: (state, getters, rootState) =>
+	getTaskByUid: (state, getters) =>
 		/**
 		 * @param {string} taskUid The Uid of the task in question
 		 * @return {Task} The task
@@ -179,7 +176,7 @@ const getters = {
 		(taskUid) => {
 			// We have to search in all calendars
 			let task
-			for (const calendar of rootState.calendars.calendars) {
+			for (const calendar of getters.getTaskCalendars) {
 				task = Object.values(calendar.tasks).find(task => {
 					return task.uid === taskUid
 				})

@@ -253,7 +253,7 @@ export default {
 					const { calendars } = await this.$store.dispatch('getCalendarsAndTrashBin')
 					// Load the tasks of the restored calendar
 					const calendar = calendars.find(cal => cal.url === item.calendar.url)
-					if (calendar) {
+					if (calendar?.supportsTasks) {
 						await this.$store.dispatch('getTasksFromCalendar', { calendar, completed: false, related: null })
 					}
 					break
