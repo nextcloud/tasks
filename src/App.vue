@@ -40,7 +40,7 @@ import { translate as t } from '@nextcloud/l10n'
 import AppContent from '@nextcloud/vue/dist/Components/AppContent'
 import Content from '@nextcloud/vue/dist/Components/Content'
 
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
 	name: 'App',
@@ -50,15 +50,16 @@ export default {
 		Content,
 	},
 	computed: {
-		...mapState({
-			calendars: state => state.calendars.calendars,
+		...mapGetters({
+			calendars: 'getTaskCalendars',
 		}),
 	},
 	async beforeMount() {
 		// get calendars then get tasks
 		await client.connect({ enableCalDAV: true })
 		await this.$store.dispatch('fetchCurrentUserPrincipal')
-		const { calendars } = await this.$store.dispatch('getCalendarsAndTrashBin')
+		let { calendars } = await this.$store.dispatch('getCalendarsAndTrashBin')
+		calendars = calendars.filter(calendar => calendar.supportsTasks)
 		const owners = []
 		calendars.forEach((calendar) => {
 			if (owners.indexOf(calendar.owner) === -1) {

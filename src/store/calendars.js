@@ -175,13 +175,26 @@ function getCalendarUriFromUrl(url) {
 const getters = {
 
 	/**
+	 * Returns all calendars supporting VTODOs
+	 *
+	 * @param {object} state The store data
+	 * @return {Array<Calendar>} The calendars supporting tasks
+	 */
+	getTaskCalendars: state => {
+		return state.calendars.filter(calendar => {
+			return calendar.supportsTasks
+		})
+	},
+
+	/**
 	 * Returns the calendars sorted alphabetically
 	 *
 	 * @param {object} state The store data
+	 * @param {object} getters The store getters
 	 * @return {Array<Calendar>} Array of the calendars sorted alphabetically
 	 */
-	getSortedCalendars: state => {
-		return state.calendars.sort(function(cal1, cal2) {
+	getSortedCalendars: (state, getters) => {
+		return getters.getTaskCalendars.sort(function(cal1, cal2) {
 			const n1 = cal1.order
 			const n2 = cal2.order
 			return (n1 < n2) ? -1 : (n1 > n2) ? 1 : 0
@@ -192,10 +205,11 @@ const getters = {
 	 * Returns the calendars sorted alphabetically
 	 *
 	 * @param {object} state The store data
+	 * @param {object} getters The store getters
 	 * @return {Array<Calendar>} Array of the calendars sorted alphabetically
 	 */
-	getSortedWritableCalendars: state => {
-		return state.calendars.filter(calendar => {
+	getSortedWritableCalendars: (state, getters) => {
+		return getters.getTaskCalendars.filter(calendar => {
 			return !calendar.readOnly
 		})
 			.sort(function(cal1, cal2) {
@@ -284,16 +298,17 @@ const getters = {
 	 * Returns if a calendar name is already used by an other calendar
 	 *
 	 * @param {object} state The store data
+	 * @param {object} getters The store getters
 	 * @return {boolean} If a calendar name is already used
 	 */
-	isCalendarNameUsed: state =>
+	isCalendarNameUsed: (state, getters) =>
 		/**
 		 * @param {string} name The name to check
 		 * @param {string} id The id of the calendar to exclude
 		 * @return {boolean} If a calendar name is already used
 		 */
 		(name, id) => {
-			return state.calendars.some(calendar => {
+			return getters.getTaskCalendars.some(calendar => {
 				return (calendar.displayName === name && calendar.id !== id)
 			})
 		},
@@ -345,6 +360,7 @@ const getters = {
 	 * @return {Array}
 	 */
 	sortedDeletedCalendars(state) {
+		console.debug(state.deletedCalendars)
 		return state.deletedCalendars
 			.sort((a, b) => a.deletedAt - b.deletedAt)
 	},
@@ -604,9 +620,6 @@ const actions = {
 		calendars = calendars.map(calendar => {
 			return Calendar(calendar, getters.getCurrentUserPrincipal)
 		})
-
-		// Remove calendars which don't support tasks
-		calendars = calendars.filter(calendar => calendar.supportsTasks)
 
 		calendars.forEach(calendar => {
 			commit('addCalendar', calendar)

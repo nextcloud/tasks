@@ -56,7 +56,7 @@ const getters = {
 		 */
 		(collectionId) => {
 			let count = 0
-			rootState.calendars.calendars.forEach(calendar => {
+			getters.getTaskCalendars.forEach(calendar => {
 				let tasks = Object.values(calendar.tasks).filter(task => {
 					return isTaskInList(task, collectionId, false)
 				})
