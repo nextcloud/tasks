@@ -1,3 +1,8 @@
+## 0.14.4 - 2022-03-19
+
+### Fixed
+- Don't open sidebar when completing task #1948
+
 ## 0.14.3 - 2022-03-18
 
 ### Added
