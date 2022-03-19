@@ -40,6 +40,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			@click="navigate($event)">
 			<!-- Checkbox -->
 			<TaskCheckbox :completed="task.completed"
+				class="no-nav"
 				:cancelled="task.status === 'CANCELLED'"
 				:read-only="readOnly"
 				:priority-class="priorityClass"
