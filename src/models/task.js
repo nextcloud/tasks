@@ -193,7 +193,7 @@ export default class Task {
 	 */
 	get uri() {
 		if (this.dav) {
-			return this.dav.url.substr(this.dav.url.lastIndexOf('/') + 1)
+			return this.dav.url.slice(this.dav.url.lastIndexOf('/') + 1)
 		}
 		return ''
 	}

@@ -89,7 +89,7 @@ export default {
 			return 'checkbox-' + Math.random()
 				.toString(36)
 				.replace(/[^a-z]+/g, '')
-				.substr(0, 6)
+				.slice(0, 6)
 		},
 	},
 	methods: {

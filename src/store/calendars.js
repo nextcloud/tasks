@@ -145,7 +145,7 @@ export function mapDavShareeToSharee(sharee) {
 		: sharee.href
 
 	if (sharee.href.startsWith('principal:principals/groups/') && name === sharee.href) {
-		name = sharee.href.substr(28)
+		name = sharee.href.slice(28)
 	}
 
 	return {
@@ -375,7 +375,7 @@ const getters = {
 		const calendarUriMap = {}
 		state.calendars.forEach(calendar => {
 			const withoutTrail = calendar.url.replace(/\/$/, '')
-			const uri = withoutTrail.substr(withoutTrail.lastIndexOf('/') + 1)
+			const uri = withoutTrail.slice(withoutTrail.lastIndexOf('/') + 1)
 			calendarUriMap[uri] = calendar
 		})
 
