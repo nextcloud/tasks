@@ -59,7 +59,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		icon: 'icon-tasks',
 		async callback({ message: { message, actorDisplayName }, metadata: { name: conversationName, token: conversationToken } }) {
 			const shortenedMessageCandidate = message.replace(/^(.{255}[^\s]*).*/, '$1')
-			const shortenedMessage = shortenedMessageCandidate === '' ? message.substr(0, 255) : shortenedMessageCandidate
+			const shortenedMessage = shortenedMessageCandidate === '' ? message.slice(0, 255) : shortenedMessageCandidate
 			try {
 				await buildSelector(TaskCreateDialog, {
 					title: shortenedMessage,
