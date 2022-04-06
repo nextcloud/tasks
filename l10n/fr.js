@@ -227,4 +227,4 @@ OC.L10N.register(
     "Create a task" : "Créer une tâche",
     "Message from {author} in {conversationName}" : "Message de {author} dans {conversationName}"
 },
-"nplurals=3; plural=(n==0 || n==1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");
+"nplurals=2; plural=(n > 1);");
