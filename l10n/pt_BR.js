@@ -26,6 +26,7 @@ OC.L10N.register(
     "Copy private link" : "Copiar link privado",
     "Copied" : "Copiado",
     "Cannot copy" : "Não pode copiar",
+    "Export" : "Exportar",
     "Delete" : "Excluir",
     "Unshare" : "Descompartilhar",
     "Cancel" : "Cancelar",
