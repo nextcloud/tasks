@@ -37,7 +37,7 @@ OC.L10N.register(
     "This will unshare the list \"{list}\"." : "Spowoduje to zatrzymanie udostępnienia listy \"{list}\".",
     "Calendar link copied to clipboard." : "Link do kalendarza skopiowany do schowka.",
     "List link copied to clipboard." : "Link do listy skopiowany do schowka.",
-    "Calendar link could not be copied to clipboard." : "Link do kalendarza nie mógł zostać skopiowany do schowka.",
+    "Calendar link could not be copied to clipboard." : "Nie udało się skopiować linku do kalendarza do schowka.",
     "List link could not be copied to clipboard." : "Nie udało się skopiować linku do listy do schowka.",
     "The name \"{calendar}\" is already used." : "Nazwa \"{calendar}\" jest już używana.",
     "An empty name is not allowed." : "Pusta nazwa nie jest dozwolona.",
