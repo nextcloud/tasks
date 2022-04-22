@@ -24,7 +24,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		<div v-if="$route.params.collectionId !== 'completed' && calendar && !calendar.readOnly"
 			class="header__input">
 			<NcTextField ref="input"
-				:value.sync="newTaskName"
+				v-model="newTaskName"
 				:label="placeholder"
 				autocomplete="off"
 				class="reactive"
@@ -35,7 +35,9 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				@keyup.esc="clearNewTask($event)"
 				@keyup.enter="addTask"
 				@paste.stop="addMultipleTasks">
-				<Plus :size="20" />
+				<template #icon>
+					<Plus :size="20" />
+				</template>
 			</NcTextField>
 		</div>
 		<FilterDropdown />

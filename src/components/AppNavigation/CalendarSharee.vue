@@ -39,8 +39,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 		<template #counter>
 			<NcCheckboxRadioSwitch :disabled="loading"
-				:checked="writeable"
-				@update:checked="editSharee">
+				:model-value="writeable"
+				@update:model-value="editSharee">
 				{{ t('tasks', 'Can edit') }}
 			</NcCheckboxRadioSwitch>
 		</template>

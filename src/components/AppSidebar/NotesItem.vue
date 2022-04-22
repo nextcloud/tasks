@@ -34,7 +34,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<pre><span>{{ newValue }}</span><br><br></pre>
 				<textarea ref="note__editor"
 					v-model="newValue"
-					@keyup.27="setEditing(false)"
+					@keyup.escape="setEditing(false)"
 					@keydown.enter.ctrl.prevent="setValue()"
 					@change="setValue()" />
 			</div>
@@ -101,7 +101,7 @@ export default {
 	mounted() {
 		subscribe('tasks:edit-appsidebar-notes', this.setNotes)
 	},
-	beforeDestroy() {
+	beforeUnmount() {
 		unsubscribe('tasks:edit-appsidebar-notes', this.setNotes)
 	},
 	methods: {

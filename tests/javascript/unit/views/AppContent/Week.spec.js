@@ -1,20 +1,33 @@
 import Week from '../../../../../src/views/AppContent/Week.vue'
-import router from '../../../../../src/router.js'
+import { routes } from '../../../../../src/router.js'
 import TaskBody from '../../../../../src/components/TaskBody.vue'
 
-import { store, localVue } from '../../setupStore.js'
+import { createRouter, createWebHistory } from 'vue-router'
 
-import { mount } from '@vue/test-utils'
+import { store } from '../../setupStore.js'
+
+import { mount, flushPromises } from '@vue/test-utils'
 
 import { describe, expect, it, vi } from 'vitest'
-
-import Vue from 'vue'
-Vue.component('TaskBody', TaskBody)
+const router = createRouter({
+	history: createWebHistory(),
+	routes,
+})
 
 describe('Week.vue', async () => {
 	'use strict'
 
-	const wrapper = mount(Week, { localVue, store, router })
+	await router.push('/')
+	await router.isReady()
+
+	const wrapper = mount(Week, {
+		global: {
+			plugins: [store, router],
+			components: {
+				TaskBody,
+			},
+		},
+	})
 	await vi.dynamicImportSettled()
 
 	it('Checks that the correct tasks are shown for day 0 (today)', () => {
@@ -46,8 +59,8 @@ describe('Week.vue', async () => {
 		const taskAtDay2 = wrapper.find('div[day="2"] li[task-id="pwen8kz22g.ics"] > div')
 
 		// Click on first task to open it
-		taskAtDay0.trigger('click')
-		await localVue.nextTick()
+		await taskAtDay0.trigger('click')
+		await flushPromises()
 
 		expect(taskAtDay0.classes('task-item__body--active')).toBe(true) // Should be shown active, since it was clicked
 		expect(taskAtDay2.classes('task-item__body--active')).toBe(false) // Shouldn't be shown active, since it was not clicked
@@ -58,12 +71,12 @@ describe('Week.vue', async () => {
 		const taskAtDay2 = wrapper.find('div[day="2"] li[task-id="pwen8kz22g.ics"] > div')
 
 		// Click on different task to open it
-		taskAtDay2.trigger('click')
-		await localVue.nextTick()
+		await taskAtDay2.trigger('click')
+		await flushPromises()
 
 		if (wrapper.vm.$route.params.taskId !== null && wrapper.vm.$route.params.collectionId !== 'week') {
 			await router.push({ name: 'collections', params: { collectionId: 'week' } })
-			await localVue.nextTick()
+			await flushPromises()
 		}
 		expect(taskAtDay0.classes('task-item__body--active')).toBe(false)
 
@@ -72,8 +85,8 @@ describe('Week.vue', async () => {
 		expect(wrapper.find('div[day="2"] li[task-id="pwen7kz22g.ics"]').exists()).toBe(true) // Shown, since it is due in 2 days
 
 		// Click on first task to open it
-		taskAtDay0.trigger('click')
-		await localVue.nextTick()
+		await taskAtDay0.trigger('click')
+		await flushPromises()
 		expect(taskAtDay0.classes('task-item__body--active')).toBe(true)
 
 		expect(wrapper.find('div[day="0"] li[task-id="pwen7kz22g.ics"]').exists()).toBe(true) // Shown now, because parent is active
@@ -86,12 +99,12 @@ describe('Week.vue', async () => {
 		const taskAtDay2 = wrapper.find('div[day="2"] li[task-id="pwen8kz22g.ics"] > div')
 
 		// Click on different task to open it
-		taskAtDay2.trigger('click')
-		await localVue.nextTick()
+		await taskAtDay2.trigger('click')
+		await flushPromises()
 
 		if (wrapper.vm.$route.params.taskId !== null && wrapper.vm.$route.params.collectionId !== 'week') {
 			await router.push({ name: 'collections', params: { collectionId: 'week' } })
-			await localVue.nextTick()
+			await flushPromises()
 		}
 		expect(taskAtDay0.classes('task-item__body--active')).toBe(false)
 
@@ -100,8 +113,8 @@ describe('Week.vue', async () => {
 		expect(wrapper.find('div[day="0"] li[task-id="pwen2kz38g.ics"]').exists()).toBe(false) // Not shown, since it is not due at all
 
 		// Click on first task to open it
-		taskAtDay0.trigger('click')
-		await localVue.nextTick()
+		await taskAtDay0.trigger('click')
+		await flushPromises()
 		expect(taskAtDay0.classes('task-item__body--active')).toBe(true)
 
 		expect(wrapper.find('div[day="0"] li[task-id="pwen2kz37g.ics"]').exists()).toBe(true) // Shown now, since parent is active
@@ -109,8 +122,8 @@ describe('Week.vue', async () => {
 
 		const subtaskAtDay0 = wrapper.find('div[day="0"] li[task-id="pwen2kz37g.ics"] > div')
 		// Click on subtask to open it
-		subtaskAtDay0.trigger('click')
-		await localVue.nextTick()
+		await subtaskAtDay0.trigger('click')
+		await flushPromises()
 		expect(subtaskAtDay0.classes('task-item__body--active')).toBe(true)
 
 		expect(wrapper.find('div[day="0"] li[task-id="pwen2kz38g.ics"]').exists()).toBe(true) // Shown now, since parent is active
@@ -118,8 +131,8 @@ describe('Week.vue', async () => {
 
 		const subsubtaskAtDay0 = wrapper.find('div[day="0"] li[task-id="pwen2kz38g.ics"] > div')
 		// Click on subtask to open it
-		subsubtaskAtDay0.trigger('click')
-		await localVue.nextTick()
+		await subsubtaskAtDay0.trigger('click')
+		await flushPromises()
 		expect(subsubtaskAtDay0.classes('task-item__body--active')).toBe(true)
 
 		expect(wrapper.find('div[day="0"] li[task-id="pwen8kz22g.ics"]').exists()).toBe(true) // Shown, since it is due today

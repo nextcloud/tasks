@@ -28,11 +28,6 @@ import Requests from '../services/requests.js'
 import { loadState } from '@nextcloud/initial-state'
 import { generateUrl } from '@nextcloud/router'
 
-import Vue from 'vue'
-import Vuex from 'vuex'
-
-Vue.use(Vuex)
-
 const state = {
 	settings: {
 		sortOrder: 'default',

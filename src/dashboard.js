@@ -25,21 +25,13 @@
 import Dashboard from './views/Dashboard.vue'
 import store from './store/store.js'
 
-import Vue from 'vue'
-import Vuex from 'vuex'
-
-Vue.use(Vuex)
-
-Vue.prototype.$OC = OC
-Vue.prototype.$OCA = OCA
+import { createApp } from 'vue'
 
 document.addEventListener('DOMContentLoaded', () => {
 	OCA.Dashboard.register('tasks', (el) => {
-		const View = Vue.extend(Dashboard)
-		const vm = new View({
-			propsData: {},
-			store,
-		}).$mount(el)
-		return vm
+		const item = createApp(Dashboard)
+			.use(store)
+			.mount(el)
+		return item
 	})
 })

@@ -29,8 +29,6 @@
 import client from '../services/cdav.js'
 import { getDefaultPrincipalObject, mapDavToPrincipal } from '../models/principal.js'
 
-import Vue from 'vue'
-
 const state = {
 	principals: [],
 	principalsById: {},
@@ -54,7 +52,7 @@ const mutations = {
 		}
 
 		state.principals.push(object)
-		Vue.set(state.principalsById, object.id, object)
+		state.principalsById[object.id] = object
 	},
 
 	/**

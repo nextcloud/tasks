@@ -21,9 +21,9 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<NcContent app-name="tasks">
-		<AppNavigation @click.native="closeAppSidebar($event)" />
+		<AppNavigation @click="closeAppSidebar($event)" />
 
-		<NcAppContent @click.native="closeAppSidebar($event)">
+		<NcAppContent @click="closeAppSidebar($event)">
 			<RouterView />
 		</NcAppContent>
 
@@ -49,6 +49,7 @@ export default {
 		NcAppContent,
 		NcContent,
 	},
+	inject: ['$OCA'],
 	data() {
 		return {
 			searchString: '',

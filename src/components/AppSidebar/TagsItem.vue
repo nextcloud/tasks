@@ -27,7 +27,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		<div class="multiselect__icon">
 			<component :is="icon" :size="20" />
 		</div>
-		<NcSelect :value="tags"
+		<NcSelect :model-value="tags"
 			taggable
 			:disabled="disabled"
 			:options="options"
@@ -36,7 +36,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			:close-on-select="false"
 			:append-to-body="false"
 			:tag-placeholder="t('tasks', 'Add this as a new tag')"
-			@input="setTags"
+			@update:model-value="setTags"
 			@tag="addTag">
 			<template #no-options>
 				{{ t('tasks', 'No tag available. Create one!') }}

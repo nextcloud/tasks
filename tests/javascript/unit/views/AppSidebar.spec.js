@@ -22,7 +22,7 @@
 import AppSidebar from '../../../../src/views/AppSidebar.vue'
 import router from '../../../../src/router.js'
 
-import { store, localVue } from '../setupStore.js'
+import { store } from '../setupStore.js'
 
 import { shallowMount } from '@vue/test-utils'
 
@@ -36,7 +36,11 @@ describe('AppSidebar.vue', () => {
 	router.push({ name: 'calendarsTask', params: { calendarId: 'calendar-1', taskId: 'pwen4kz18g.ics' } })
 
 	it('Returns the correct value for the new dates', () => {
-		const wrapper = shallowMount(AppSidebar, { localVue, store, router })
+		const wrapper = shallowMount(AppSidebar, {
+			global: {
+				plugins: [store, router],
+			},
+		})
 
 		let actual = wrapper.vm.newStartDate
 		let expected = new Date('2019-01-01T12:00:00')

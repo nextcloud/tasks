@@ -15,7 +15,6 @@ export default createAppConfig({
 			},
 			environment: 'happy-dom',
 			setupFiles: resolve(__dirname, './tests/javascript/unit/setup.js'),
-			alias: [{ find: /^vue$/, replacement: 'vue/dist/vue.runtime.common.js' }],
 			server: {
 			  deps: {
 				inline: ['@nextcloud/vue'],

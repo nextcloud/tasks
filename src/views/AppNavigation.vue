@@ -31,11 +31,11 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:name="collection.displayName"
 				class="collection reactive"
 				draggable="false"
-				@dragstart.native="dragStart"
-				@drop.native="dropTaskOnCollection(...arguments, collection)"
-				@dragover.native="dragOver"
-				@dragenter.native="dragEnter(...arguments, collection)"
-				@dragleave.native="dragLeave"
+				@dragstart="dragStart"
+				@drop="dropTaskOnCollection(...arguments, collection)"
+				@dragover="dragOver"
+				@dragenter="dragEnter(...arguments, collection)"
+				@dragleave="dragLeave"
 				@click="setInitialRoute(`/collections/${collection.id}`)">
 				<template #icon>
 					<component :is="collection.icon"
@@ -47,15 +47,17 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					</NcCounterBubble>
 				</template>
 			</NcAppNavigationItem>
-			<draggable class="draggable-container"
+			<Sortable class="draggable-container"
+				:list="calendars"
 				:set-data="setData"
-				v-bind="{swapThreshold: 0.30, delay: 500, delayOnTouchOnly: true, touchStartThreshold: 3}"
+				item-key="id"
+				:options="{swapThreshold: 0.30, delay: 500, delayOnTouchOnly: true, touchStartThreshold: 3}"
 				@update="update">
-				<ListItemCalendar v-for="calendar in calendars"
-					:key="calendar.id"
-					:calendar="calendar"
-					@click.native="setInitialRoute(`/calendars/${calendar.id}`)" />
-			</draggable>
+				<template #item="{element}">
+					<ListItemCalendar :calendar="element"
+						@click="setInitialRoute(`/calendars/${element.id}`)" />
+				</template>
+			</Sortable>
 			<NcAppNavigationItem v-click-outside="() => {creating = false}"
 				:name="t('tasks', 'Add List…')"
 				:class="{'collection--edit': creating}"
@@ -67,6 +69,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<li>
 					<div class="app-navigation-entry-edit">
 						<NcTextField ref="newListInput"
+							v-model="newCalendarName"
 							v-tooltip="{
 								content: tooltipMessage,
 								shown: showTooltip('list_new'),
@@ -75,7 +78,6 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 							type="text"
 							:show-trailing-button="newCalendarName !== ''"
 							trailing-button-icon="arrowRight"
-							:value.sync="newCalendarName"
 							:error="nameError"
 							:label="t('tasks', 'New list')"
 							@trailing-button-click="create()"
@@ -115,7 +117,7 @@ import Plus from 'vue-material-design-icons/Plus.vue'
 import Star from 'vue-material-design-icons/Star.vue'
 import TrendingUp from 'vue-material-design-icons/TrendingUp.vue'
 
-import draggable from 'vuedraggable'
+import { Sortable } from 'sortablejs-vue3'
 import { vOnClickOutside as ClickOutside } from '@vueuse/components'
 import { mapState, mapGetters, mapActions } from 'vuex'
 
@@ -129,7 +131,7 @@ export default {
 		NcCounterBubble,
 		NcTextField,
 		AppNavigationSettings,
-		draggable,
+		Sortable,
 		CalendarToday,
 		CalendarWeek,
 		Check,
@@ -142,6 +144,7 @@ export default {
 		ClickOutside,
 		Tooltip,
 	},
+	inject: ['$OCA'],
 	data() {
 		return {
 			editing: '',

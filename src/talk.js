@@ -34,11 +34,6 @@ import { buildSelector } from './helpers/selector.js'
 import { translate as t } from '@nextcloud/l10n'
 import { generateUrl } from '@nextcloud/router'
 
-import Vue from 'vue'
-
-Vue.prototype.$OC = OC
-Vue.prototype.$OCA = OCA
-
 window.addEventListener('DOMContentLoaded', () => {
 	if (!window.OCA?.Talk?.registerMessageAction) {
 		return

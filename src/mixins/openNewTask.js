@@ -24,10 +24,10 @@ export default {
 	methods: {
 		openNewTask(task) {
 			// Only open the details view if there is enough space or if it is already open.
-			if (this.$route !== undefined && (document.documentElement.clientWidth >= 768 || this.$route?.params.taskId !== undefined)) {
+			if (this.$route.value !== undefined && (document.documentElement.clientWidth >= 768 || this.$route.value?.params.taskId !== undefined)) {
 				// Open the details view for the new task
-				const calendarId = this.$route.params.calendarId
-				const collectionId = this.$route.params.collectionId
+				const calendarId = this.$route.value.params.calendarId
+				const collectionId = this.$route.value.params.collectionId
 				if (calendarId) {
 					this.$router.push({ name: 'calendarsTask', params: { calendarId, taskId: task.uri } })
 				} else if (collectionId) {
