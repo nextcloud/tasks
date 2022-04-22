@@ -28,8 +28,8 @@
  *
  */
 
-import TaskCreateDialog from './components/TaskCreateDialog'
-import { buildSelector } from './helpers/selector'
+import TaskCreateDialog from './components/TaskCreateDialog.vue'
+import { buildSelector } from './helpers/selector.js'
 
 import { getRequestToken } from '@nextcloud/auth'
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'

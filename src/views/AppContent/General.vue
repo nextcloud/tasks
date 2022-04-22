@@ -44,10 +44,10 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import Header from '../../components/Header'
-import LoadCompletedButton from '../../components/LoadCompletedButton'
-import TaskDragContainer from '../../components/TaskDragContainer'
-import { isTaskInList, isParentInList } from '../../store/storeHelper'
+import Header from '../../components/Header.vue'
+import LoadCompletedButton from '../../components/LoadCompletedButton.vue'
+import TaskDragContainer from '../../components/TaskDragContainer.vue'
+import { isTaskInList, isParentInList } from '../../store/storeHelper.js'
 
 import { mapGetters } from 'vuex'
 

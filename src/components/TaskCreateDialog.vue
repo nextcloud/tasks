@@ -80,8 +80,8 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 
-import CalendarPickerItem from './AppSidebar/CalendarPickerItem'
-import client from '../services/cdav'
+import CalendarPickerItem from './AppSidebar/CalendarPickerItem.vue'
+import client from '../services/cdav.js'
 
 import { translate as t } from '@nextcloud/l10n'
 import { generateUrl } from '@nextcloud/router'

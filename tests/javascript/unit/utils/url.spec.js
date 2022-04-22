@@ -20,7 +20,7 @@
  *
  */
 
-import { urldecode } from '../../../../src/utils/url'
+import { urldecode } from '../../../../src/utils/url.js'
 
 describe('utils/url test suite', () => {
 	it('should decode urls encoded by php', () => {

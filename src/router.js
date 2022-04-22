@@ -20,10 +20,10 @@
  *
  */
 
-import { getInitialRoute } from './utils/router'
-import AppSidebar from './views/AppSidebar'
-import Calendar from './views/AppContent/Calendar'
-import Collections from './views/AppContent/Collections'
+import { getInitialRoute } from './utils/router.js'
+import AppSidebar from './views/AppSidebar.vue'
+import Calendar from './views/AppContent/Calendar.vue'
+import Collections from './views/AppContent/Collections.vue'
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'

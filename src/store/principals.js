@@ -26,8 +26,8 @@
  *
  */
 
-import client from '../services/cdav'
-import { getDefaultPrincipalObject, mapDavToPrincipal } from '../models/principal'
+import client from '../services/cdav.js'
+import { getDefaultPrincipalObject, mapDavToPrincipal } from '../models/principal.js'
 
 import Vue from 'vue'
 

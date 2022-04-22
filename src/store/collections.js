@@ -21,8 +21,8 @@
  */
 'use strict'
 
-import Requests from '../services/requests'
-import { isTaskInList, searchSubTasks } from './storeHelper'
+import Requests from '../services/requests.js'
+import { isTaskInList, searchSubTasks } from './storeHelper.js'
 
 import { generateUrl } from '@nextcloud/router'
 
