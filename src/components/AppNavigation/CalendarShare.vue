@@ -59,9 +59,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import CalendarSharee from './CalendarSharee'
-import client from '../../services/cdav'
-import { urldecode } from '../../utils/url'
+import CalendarSharee from './CalendarSharee.vue'
+import client from '../../services/cdav.js'
+import { urldecode } from '../../utils/url.js'
 
 import Axios from '@nextcloud/axios'
 import { translate as t } from '@nextcloud/l10n'

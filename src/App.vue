@@ -32,8 +32,8 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import AppNavigation from './views/AppNavigation'
-import client from './services/cdav'
+import AppNavigation from './views/AppNavigation.vue'
+import client from './services/cdav.js'
 
 import { emit } from '@nextcloud/event-bus'
 import { translate as t } from '@nextcloud/l10n'

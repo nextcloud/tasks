@@ -23,7 +23,7 @@
  */
 'use strict'
 
-import Requests from '../services/requests'
+import Requests from '../services/requests.js'
 
 import { loadState } from '@nextcloud/initial-state'
 import { generateUrl } from '@nextcloud/router'

@@ -21,12 +21,13 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
  */
-import { getParserManager } from '@nextcloud/calendar-js'
 import {
 	COMPONENT_NAME_EVENT,
 	COMPONENT_NAME_JOURNAL,
 	COMPONENT_NAME_VTODO,
-} from './consts'
+} from './consts.js'
+
+import { getParserManager } from '@nextcloud/calendar-js'
 
 /**
  * Creates a complete calendar-object-object based on given props

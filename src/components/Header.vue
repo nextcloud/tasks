@@ -37,7 +37,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import SortorderDropdown from './SortorderDropdown'
+import SortorderDropdown from './SortorderDropdown.vue'
 
 import { translate as t } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'

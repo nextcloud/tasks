@@ -23,8 +23,9 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
  */
+import store from '../store/store.js'
+
 import Vue from 'vue'
-import store from '../store/store'
 
 const buildSelector = (selector, propsData = {}) => {
 	return new Promise((resolve, reject) => {

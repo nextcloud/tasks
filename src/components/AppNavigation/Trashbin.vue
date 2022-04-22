@@ -100,9 +100,9 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import Moment from './Moment'
-import { uidToHexColor } from '../../utils/color'
-import logger from '../../utils/logger'
+import Moment from './Moment.vue'
+import { uidToHexColor } from '../../utils/color.js'
+import logger from '../../utils/logger.js'
 
 import { showError } from '@nextcloud/dialogs'
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'

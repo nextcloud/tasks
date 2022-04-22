@@ -230,16 +230,16 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import CheckboxItem from '../components/AppSidebar/CheckboxItem'
-import DatetimePickerItem from '../components/AppSidebar/DatetimePickerItem'
-import CalendarPickerItem from '../components/AppSidebar/CalendarPickerItem'
-import MultiselectItem from '../components/AppSidebar/MultiselectItem'
-import SliderItem from '../components/AppSidebar/SliderItem'
-import TagsItem from '../components/AppSidebar/TagsItem'
-import NotesItem from '../components/AppSidebar/NotesItem'
-import TaskCheckbox from '../components/TaskCheckbox'
+import CheckboxItem from '../components/AppSidebar/CheckboxItem.vue'
+import DatetimePickerItem from '../components/AppSidebar/DatetimePickerItem.vue'
+import CalendarPickerItem from '../components/AppSidebar/CalendarPickerItem.vue'
+import MultiselectItem from '../components/AppSidebar/MultiselectItem.vue'
+import SliderItem from '../components/AppSidebar/SliderItem.vue'
+import TagsItem from '../components/AppSidebar/TagsItem.vue'
+import NotesItem from '../components/AppSidebar/NotesItem.vue'
+import TaskCheckbox from '../components/TaskCheckbox.vue'
 // import TaskStatusDisplay from '../components/TaskStatusDisplay'
-import Task from '../models/task'
+import Task from '../models/task.js'
 
 import { subscribe, unsubscribe } from '@nextcloud/event-bus'
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'

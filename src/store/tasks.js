@@ -21,12 +21,12 @@
  */
 'use strict'
 
-import { Calendar } from './calendars'
-import { findVTODObyUid } from './cdav-requests'
-import { isParentInList, momentToICALTime } from './storeHelper'
-import SyncStatus from '../models/syncStatus'
-import Task from '../models/task'
-import router from '../router'
+import { Calendar } from './calendars.js'
+import { findVTODObyUid } from './cdav-requests.js'
+import { isParentInList, momentToICALTime } from './storeHelper.js'
+import SyncStatus from '../models/syncStatus.js'
+import Task from '../models/task.js'
+import router from '../router.js'
 
 import { showError } from '@nextcloud/dialogs'
 import { emit } from '@nextcloud/event-bus'

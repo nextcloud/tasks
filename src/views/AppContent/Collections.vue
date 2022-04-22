@@ -24,8 +24,8 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import General from './General'
-import Week from './Week'
+import General from './General.vue'
+import Week from './Week.vue'
 
 export default {
 	components: {

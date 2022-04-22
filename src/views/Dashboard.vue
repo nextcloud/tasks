@@ -55,9 +55,9 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import TaskCreateDialog from '../components/TaskCreateDialog'
-import client from '../services/cdav'
-import { sort, isTaskInList } from '../store/storeHelper'
+import TaskCreateDialog from '../components/TaskCreateDialog.vue'
+import client from '../services/cdav.js'
+import { sort, isTaskInList } from '../store/storeHelper.js'
 
 import { translate as t } from '@nextcloud/l10n'
 import { generateUrl } from '@nextcloud/router'

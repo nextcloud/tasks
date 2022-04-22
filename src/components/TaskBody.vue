@@ -162,11 +162,11 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { overdue, sort, searchSubTasks, isTaskInList } from '../store/storeHelper'
-import TaskCheckbox from './TaskCheckbox'
-import TaskStatusDisplay from './TaskStatusDisplay'
-import TaskDragContainer from './TaskDragContainer'
-import Task from '../models/task'
+import { overdue, sort, searchSubTasks, isTaskInList } from '../store/storeHelper.js'
+import TaskCheckbox from './TaskCheckbox.vue'
+import TaskStatusDisplay from './TaskStatusDisplay.vue'
+import TaskDragContainer from './TaskDragContainer.vue'
+import Task from '../models/task.js'
 
 import { emit } from '@nextcloud/event-bus'
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'

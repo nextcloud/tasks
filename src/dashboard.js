@@ -22,8 +22,8 @@
  *
  */
 
-import Dashboard from './views/Dashboard'
-import store from './store/store'
+import Dashboard from './views/Dashboard.vue'
+import store from './store/store.js'
 
 import './css/dashboard.scss'
 

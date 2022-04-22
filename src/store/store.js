@@ -21,11 +21,11 @@
  */
 'use strict'
 
-import calendars from './calendars'
-import collections from './collections'
-import tasks from './tasks'
-import settings from './settings'
-import principals from './principals'
+import calendars from './calendars.js'
+import collections from './collections.js'
+import tasks from './tasks.js'
+import settings from './settings.js'
+import principals from './principals.js'
 
 import Vue from 'vue'
 import Vuex, { Store } from 'vuex'

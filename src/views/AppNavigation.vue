@@ -100,10 +100,10 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import ListItemCalendar from '../components/AppNavigation/ListItemCalendar'
-import Colorpicker from '../components/AppNavigation/Colorpicker'
-import AppNavigationSettings from '../components/AppNavigation/AppNavigationSettings'
-import Trashbin from '../components/AppNavigation/Trashbin'
+import ListItemCalendar from '../components/AppNavigation/ListItemCalendar.vue'
+import Colorpicker from '../components/AppNavigation/Colorpicker.vue'
+import AppNavigationSettings from '../components/AppNavigation/AppNavigationSettings.vue'
+import Trashbin from '../components/AppNavigation/Trashbin.vue'
 
 import { translate as t } from '@nextcloud/l10n'
 import AppNavigation from '@nextcloud/vue/dist/Components/AppNavigation'

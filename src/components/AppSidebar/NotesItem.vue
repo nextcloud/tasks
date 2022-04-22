@@ -43,7 +43,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import editableItem from '../../mixins/editableItem'
+import editableItem from '../../mixins/editableItem.js'
 
 import { translate as t } from '@nextcloud/l10n'
 
