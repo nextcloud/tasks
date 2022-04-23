@@ -134,7 +134,7 @@ OC.L10N.register(
     "[Completed] L [at] LT" : "L [erledigt] [um] LT",
     "Add a subtask to \"{task}\"…" : "Eine Unteraufgabe zu \"{task}\" hinzufügen…",
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["Lösche die Aufgabe in {countdown} Sekunde","Lösche die Aufgabe in {countdown} Sekunden"],
-    "Task is cancelled" : "Aufgabe abgebrochen",
+    "Task is cancelled" : "Aufgabe ist abgebrochen",
     "Task is completed" : "Aufgabe fertiggestellt",
     "Task is read-only" : "Aufgabe ist schreibgeschützt",
     "Task is not completed" : "Aufgabe ist nicht fertiggestellt",
