@@ -1,0 +1,26 @@
+OC.L10N.register(
+    "tasks",
+    {
+    "Today" : "Այսօր",
+    "Week" : "Շաբաթ",
+    "Current" : "Ընթացիկ",
+    "Completed" : "Ավարտվեց",
+    "Share with users or groups" : "Կիսվել օգտատերերի կամ խմբերի հետ",
+    "Can edit" : "Can edit",
+    "Edit" : "Խմբագրել",
+    "Export" : "Արտահանում",
+    "Delete" : "Ջնջել",
+    "Unshare" : "Չկիսվել",
+    "Cancel" : "Չեղարկել",
+    "Save" : "Պահել",
+    "Name" : "Անուն",
+    "Deleted" : "Ջնջված",
+    "Restore" : "Վերականգնել",
+    "Delete permanently" : "Ջնջել ընդմիշտ",
+    "Close" : "Փակել",
+    "Details" : "Մանրամասներ",
+    "Notes" : "Notes",
+    "Reminders" : "Հիշեցումներ",
+    "Repeat" : "Կրկնել"
+},
+"nplurals=2; plural=(n != 1);");
