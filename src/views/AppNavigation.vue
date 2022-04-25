@@ -143,9 +143,6 @@ export default {
 	directives: {
 		clickOutside: ClickOutside.directive,
 	},
-	filters: {
-
-	},
 	data() {
 		return {
 			editing: '',
