@@ -754,17 +754,20 @@ export default {
 
 		async loadTask() {
 			if (this.task === undefined || this.task === null) {
+				// If the taskUri is undefined, we cannot search
+				const taskUri = this.$route.params.taskId
+				if (!taskUri) return
 				const calendars = this.calendar ? [this.calendar] : this.calendars
 				for (const calendar of calendars) {
 					this.loading = true
 					try {
-						const task = await this.getTaskByUri({ calendar, taskUri: this.$route.params.taskId })
+						const task = await this.getTaskByUri({ calendar, taskUri })
 						// If we found the task, we don't need to query the other calendars.
 						if (task) {
 							break
 						}
 					} catch {
-						console.debug('Task ' + this.$route.params.taskId + ' not found in calendar ' + calendar.displayName + '.')
+						console.debug('Task ' + taskUri + ' not found in calendar ' + calendar.displayName + '.')
 					}
 				}
 				this.loading = false
