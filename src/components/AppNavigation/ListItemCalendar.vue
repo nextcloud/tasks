@@ -49,7 +49,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			<Avatar v-if="calendar.isSharedWithMe && loadedOwnerPrincipal" :user="ownerUserId" :display-name="ownerDisplayname" />
 			<div v-if="calendar.isSharedWithMe && !loadedOwnerPrincipal" class="icon icon-loading" />
 			<AppNavigationCounter v-if="calendarCount">
-				{{ calendarCount | counterFormatter }}
+				{{ counterFormatter(calendarCount) }}
 			</AppNavigationCounter>
 		</template>
 
@@ -186,18 +186,6 @@ export default {
 	directives: {
 		clickOutside: ClickOutside.directive,
 	},
-	filters: {
-		counterFormatter(count) {
-			switch (false) {
-			case count !== 0:
-				return ''
-			case count < 999:
-				return '999+'
-			default:
-				return count
-			}
-		},
-	},
 	props: {
 		calendar: {
 			type: Object,
@@ -309,6 +297,22 @@ export default {
 			'deleteCalendar',
 			'moveTask',
 		]),
+
+		/**
+		 * Format the task counter
+		 *
+		 * @param {number} count The number of tasks
+		 */
+		counterFormatter(count) {
+			switch (false) {
+			case count !== 0:
+				return ''
+			case count < 999:
+				return '999+'
+			default:
+				return count
+			}
+		},
 		/**
 		 * Handle the drag over
 		 *

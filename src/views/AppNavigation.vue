@@ -43,7 +43,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				</template>
 				<template #counter>
 					<AppNavigationCounter v-show="collectionCount(collection.id)">
-						{{ collectionCount(collection.id) | counterFormatter }}
+						{{ counterFormatter(collectionCount(collection.id)) }}
 					</AppNavigationCounter>
 				</template>
 			</AppNavigationItem>
@@ -144,16 +144,7 @@ export default {
 		clickOutside: ClickOutside.directive,
 	},
 	filters: {
-		counterFormatter(count) {
-			switch (false) {
-			case count !== 0:
-				return ''
-			case count < 999:
-				return '999+'
-			default:
-				return count
-			}
-		},
+
 	},
 	data() {
 		return {
@@ -194,6 +185,22 @@ export default {
 			'setSetting',
 			'setCalendarOrder',
 		]),
+
+		/**
+		 * Format the task counter
+		 *
+		 * @param {number} count The number of tasks
+		 */
+		counterFormatter(count) {
+			switch (false) {
+			case count !== 0:
+				return ''
+			case count < 999:
+				return '999+'
+			default:
+				return count
+			}
+		},
 
 		/**
 		 * Indicate that we drag a calendar item
