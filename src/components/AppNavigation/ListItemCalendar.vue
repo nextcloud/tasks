@@ -264,10 +264,6 @@ export default {
 			url += '?export'
 			return url
 		},
-		url() {
-			const rootURL = generateRemoteUrl('dav')
-			return new URL(this.calendar.url, rootURL)
-		},
 		hasShares() {
 			return this.calendar.shares.length > 0
 		},
@@ -418,37 +414,37 @@ export default {
 		clickOutsideMiddleware(event) {
 			return !event.target.closest('.edit-calendar')
 		},
-		copyCalDAVUrl(event) {
+		async copyCalDAVUrl(event) {
 			// change to loading status
 			event.stopPropagation()
 
-			const url = this.url
+			const url = String(new URL(this.calendar.url, generateRemoteUrl('dav')))
 
 			// copy link for calendar to clipboard
-			this.$copyText(url)
-				.then(e => {
-					event.preventDefault()
-					this.copySuccess = true
-					this.copied = true
-					// Notify calendar url was copied
-					const msg = this.calendar.supportsEvents
-						? t('tasks', 'Calendar link copied to clipboard.')
-						: t('tasks', 'List link copied to clipboard.')
-					console.debug(msg)
-					showSuccess(msg)
-				}, e => {
-					this.copySuccess = false
-					this.copied = true
-					const msg = this.calendar.supportsEvents
-						? t('tasks', 'Calendar link could not be copied to clipboard.')
-						: t('tasks', 'List link could not be copied to clipboard.')
-					showError(msg)
-				}).then(() => {
-					setTimeout(() => {
-						// stop loading status regardless of outcome
-						this.copied = false
-					}, 2000)
-				})
+			try {
+				await this.$copyText(url)
+				event.preventDefault()
+				this.copySuccess = true
+				this.copied = true
+				// Notify calendar url was copied
+				const msg = this.calendar.supportsEvents
+					? t('tasks', 'Calendar link copied to clipboard.')
+					: t('tasks', 'List link copied to clipboard.')
+				console.debug(msg)
+				showSuccess(msg)
+			} catch (e) {
+				this.copySuccess = false
+				this.copied = true
+				const msg = this.calendar.supportsEvents
+					? t('tasks', 'Calendar link could not be copied to clipboard.')
+					: t('tasks', 'List link could not be copied to clipboard.')
+				showError(msg)
+			} finally {
+				setTimeout(() => {
+					// stop loading status regardless of outcome
+					this.copied = false
+				}, 2000)
+			}
 		},
 		setColor(color) {
 			this.selectedColor = color
