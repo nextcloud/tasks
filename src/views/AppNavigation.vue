@@ -109,6 +109,7 @@ import { translate as t } from '@nextcloud/l10n'
 import AppNavigation from '@nextcloud/vue/dist/Components/AppNavigation'
 import AppNavigationCounter from '@nextcloud/vue/dist/Components/AppNavigationCounter'
 import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
+import Tooltip from '@nextcloud/vue/dist/Directives/Tooltip'
 
 import CalendarToday from 'vue-material-design-icons/CalendarToday'
 import CalendarWeek from 'vue-material-design-icons/CalendarWeek'
@@ -142,6 +143,7 @@ export default {
 	},
 	directives: {
 		clickOutside: ClickOutside.directive,
+		Tooltip,
 	},
 	data() {
 		return {

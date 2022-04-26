@@ -42,7 +42,6 @@ import TrendingUp from 'vue-material-design-icons/TrendingUp'
 import Vue from 'vue'
 import { sync } from 'vuex-router-sync'
 // eslint-disable-next-line import/no-named-as-default
-import VTooltip from 'v-tooltip'
 import VueClipboard from 'vue-clipboard2'
 
 // Disable on production
@@ -62,7 +61,6 @@ __webpack_public_path__ = linkTo('tasks', 'js/')
 
 sync(store, router)
 
-Vue.use(VTooltip)
 Vue.use(VueClipboard)
 
 /**

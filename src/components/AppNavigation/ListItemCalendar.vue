@@ -150,6 +150,7 @@ import AppNavigationIconBullet from '@nextcloud/vue/dist/Components/AppNavigatio
 import Actions from '@nextcloud/vue/dist/Components/Actions'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
 import ActionLink from '@nextcloud/vue/dist/Components/ActionLink'
+import Tooltip from '@nextcloud/vue/dist/Directives/Tooltip'
 
 import Close from 'vue-material-design-icons/Close'
 import Delete from 'vue-material-design-icons/Delete'
@@ -185,6 +186,7 @@ export default {
 	},
 	directives: {
 		clickOutside: ClickOutside.directive,
+		Tooltip,
 	},
 	props: {
 		calendar: {
