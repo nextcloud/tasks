@@ -31,6 +31,8 @@ Then open the Tasks app from the app menu.
 * [BusyCal](https://www.busymac.com/busycal) (MacOS)
 * [aCalendar+](https://acalendar.tapirapps.de/de/support/home) (via Davx5) [(Android)](https://play.google.com/store/apps/details?id=org.withouthat.acalendarplus)
 * [GNOME Todo](https://wiki.gnome.org/Apps/Todo) (via [GNOME Online Accounts](https://wiki.gnome.org/Design/SystemSettings/OnlineAccounts)) (Linux)
+* [Kalendar](https://apps.kde.org/kalendar/) (Linux)
+
 
 ## Maintainers
 
