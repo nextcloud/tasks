@@ -110,17 +110,19 @@ export default {
 		&--success {
 			color: var(--color-success);
 		}
-		&--sync svg,
-		&--conflict svg {
-			animation-iteration-count: infinite;
-			animation-duration: 1s;
+		&--sync,
+		&--conflict {
+			::v-deep svg {
+				animation-iteration-count: infinite;
+				animation-duration: 1s;
+			}
 		}
-		&--sync svg {
+		&--sync ::v-deep svg {
 			animation-name: spin;
 		}
 		&--conflict {
 			color: var(--color-warning);
-			svg {
+			::v-deep svg {
 				animation-name: pulse;
 				border-radius: 50%;
 			}
