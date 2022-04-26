@@ -66,6 +66,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 <script>
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'
 import Modal from '@nextcloud/vue/dist/Components/Modal'
+import Tooltip from '@nextcloud/vue/dist/Directives/Tooltip'
 
 import Delete from 'vue-material-design-icons/Delete'
 
@@ -75,6 +76,9 @@ export default {
 	components: {
 		Delete,
 		Modal,
+	},
+	directives: {
+		Tooltip,
 	},
 	props: {
 		calendar: {

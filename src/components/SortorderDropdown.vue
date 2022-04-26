@@ -62,6 +62,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 import { translate as t } from '@nextcloud/l10n'
 import Actions from '@nextcloud/vue/dist/Components/Actions'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
+import Tooltip from '@nextcloud/vue/dist/Directives/Tooltip'
 
 import AnimationOutline from 'vue-material-design-icons/AnimationOutline'
 import Bookmark from 'vue-material-design-icons/Bookmark'
@@ -93,6 +94,9 @@ export default {
 		Pencil,
 		Plus,
 		Star,
+	},
+	directives: {
+		Tooltip,
 	},
 	data() {
 		return {
