@@ -26,6 +26,7 @@ OC.L10N.register(
     "Repeat" : "Gjenta",
     "When shared show full event" : "Når delt, vis heile hendinga",
     "When shared show only busy" : "Når delt, vis berre oppteken",
-    "When shared hide this event" : "Når delt, gøym denne hendinga"
+    "When shared hide this event" : "Når delt, gøym denne hendinga",
+    "An error occurred" : "Det oppstod ein feil"
 },
 "nplurals=2; plural=(n != 1);");
