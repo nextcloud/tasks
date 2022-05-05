@@ -162,7 +162,7 @@ OC.L10N.register(
     "Reminders" : "Anımsatıcılar",
     "Repeat" : "Yineleme",
     "When shared show full event" : "Paylaşılırken tüm işlemler görüntülensin",
-    "When shared show only busy" : "Paylaşılırken yalnız meşgul olarak görüntülensin",
+    "When shared show only busy" : "Paylaşılırken yalnızca meşgul olarak görüntülensin",
     "When shared hide this event" : "Paylaşılırken bu işlem gizlensin",
     "[Completed] L" : "[Tamamlandı] L",
     "[Completed last] dddd [at] LT" : "[Tamamlandı son olarak] dddd LT [zamanında]",
