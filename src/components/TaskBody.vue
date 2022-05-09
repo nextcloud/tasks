@@ -28,7 +28,8 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			'task-item--closed': task.closed,
 			'task-item--deleted': task.deleteCountdown !== null,
 			'task-item--input-visible': (filteredSubtasksShown.length || showSubtaskInput),
-			'task-item--subtasks-visible': filteredSubtasksShown.length
+			'task-item--subtasks-visible': filteredSubtasksShown.length,
+			'task-item--non-started': !overdue(task.startMoment) && task.start
 		}"
 		:data-priority="[task.priority]"
 		class="task-item"
@@ -652,6 +653,27 @@ $breakpoint-mobile: 1024px;
 		opacity: .6;
 	}
 
+	&--non-started .title {
+		opacity: .7;
+		font-style: italic;
+	}
+
+	&--non-started .title:before {
+		content: '⏱️';
+		font-style: normal;
+		position: absolute;
+		right: 5px;
+		top: 13px;
+	}
+
+	&--non-started > .task-item__body {
+		opacity: .9;
+	}
+
+	&--non-started .task-checkbox {
+		opacity: .2;
+	}
+	
 	&.sortable-ghost {
 		filter: drop-shadow(0 0 3px var(--color-primary));
 		z-index: 5;
