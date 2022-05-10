@@ -654,7 +654,7 @@ $breakpoint-mobile: 1024px;
 	}
 
 	&--non-started .title {
-		opacity: .7;
+		color: var(--color-placeholder-dark);
 		font-style: italic;
 	}
 
@@ -667,7 +667,7 @@ $breakpoint-mobile: 1024px;
 	}
 
 	&--non-started > .task-item__body {
-		opacity: .9;
+		background-color: var(--color-background-dark);
 	}
 
 	&--non-started .task-checkbox {
