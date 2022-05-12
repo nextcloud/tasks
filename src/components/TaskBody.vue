@@ -656,16 +656,18 @@ $breakpoint-mobile: 1024px;
 		opacity: .6;
 	}
 
-	&--non-started .title {
-		color: var(--color-placeholder-dark);
-	}
+	&--non-started {
+		.title {
+			color: var(--color-placeholder-dark);
+		}
 
-	&--non-started > .task-item__body {
-		background-color: var(--color-background-dark);
-	}
+		> .task-item__body {
+			background-color: var(--color-background-dark);
+		}
 
-	&--non-started .task-checkbox {
-		opacity: .2;
+		.task-checkbox {
+			opacity: .2;
+		}
 	}
 
 	&.sortable-ghost {
