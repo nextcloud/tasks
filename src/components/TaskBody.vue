@@ -655,7 +655,6 @@ $breakpoint-mobile: 1024px;
 
 	&--non-started .title {
 		color: var(--color-placeholder-dark);
-		font-style: italic;
 	}
 
 	&--non-started .title:before {
