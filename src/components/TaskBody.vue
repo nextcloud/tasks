@@ -673,7 +673,7 @@ $breakpoint-mobile: 1024px;
 	&--non-started .task-checkbox {
 		opacity: .2;
 	}
-	
+
 	&.sortable-ghost {
 		filter: drop-shadow(0 0 3px var(--color-primary));
 		z-index: 5;
