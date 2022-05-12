@@ -76,6 +76,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<span class="calendar__name">{{ task.calendar.displayName }}</span>
 				</div>
 				<SortVariant v-if="hasHiddenSubtasks" :size="20" :title="t('tasks', 'Task has hidden subtasks')" />
+				<CalendarClock v-if="!overdue(task.startMoment) && task.start" :size="20" :title="t('tasks', 'Task has not yet started')" />
 				<Pin v-if="task.pinned" :size="20" :title="t('tasks', 'Task is pinned')" />
 				<TextBoxOutline v-if="task.note!=''"
 					:size="20"
@@ -182,6 +183,7 @@ import Pin from 'vue-material-design-icons/Pin'
 import Plus from 'vue-material-design-icons/Plus'
 import TextBoxOutline from 'vue-material-design-icons/TextBoxOutline'
 import SortVariant from 'vue-material-design-icons/SortVariant'
+import CalendarClock from 'vue-material-design-icons/CalendarClock'
 import Star from 'vue-material-design-icons/Star'
 import Undo from 'vue-material-design-icons/Undo'
 
@@ -206,6 +208,7 @@ export default {
 		Plus,
 		TextBoxOutline,
 		SortVariant,
+		CalendarClock,
 		Star,
 		Undo,
 	},
@@ -655,14 +658,6 @@ $breakpoint-mobile: 1024px;
 
 	&--non-started .title {
 		color: var(--color-placeholder-dark);
-	}
-
-	&--non-started .title:before {
-		content: '⏱️';
-		font-style: normal;
-		position: absolute;
-		right: 5px;
-		top: 13px;
 	}
 
 	&--non-started > .task-item__body {
