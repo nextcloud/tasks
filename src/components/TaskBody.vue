@@ -658,11 +658,7 @@ $breakpoint-mobile: 1024px;
 
 	&--non-started {
 		.title {
-			color: var(--color-placeholder-dark);
-		}
-
-		> .task-item__body {
-			background-color: var(--color-background-dark);
+			color: var(--color-text-maxcontrast);
 		}
 
 		.task-checkbox {
