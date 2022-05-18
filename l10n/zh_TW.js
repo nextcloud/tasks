@@ -109,6 +109,7 @@ OC.L10N.register(
     "Sort by manual order." : "手動排序。",
     "{complete} % completed" : "{complete} % 完成",
     "Task has hidden subtasks" : "工作項目有隱藏的子工作項目",
+    "Task has not yet started" : "工作項目尚未開始",
     "Task is pinned" : "工作項目已釘選",
     "Task has a note" : "工作項目有註記",
     "Add subtask" : "新增子工作項目",

@@ -109,6 +109,7 @@ OC.L10N.register(
     "Sort by manual order." : "El belirtilen sıraya göre sıralar.",
     "{complete} % completed" : "% {complete} tamamlandı",
     "Task has hidden subtasks" : "Görevin gizlenmiş alt görevleri var",
+    "Task has not yet started" : "Görev henüz başlatılmamış",
     "Task is pinned" : "Görev sabitlenmiş",
     "Task has a note" : "Görevin bir notu var",
     "Add subtask" : "Alt görev ekle",

@@ -107,6 +107,7 @@
     "Sort by manual order." : "手動排序。",
     "{complete} % completed" : "{complete}% 完成",
     "Task has hidden subtasks" : "任務具有隱藏的子任務",
+    "Task has not yet started" : "任務尚未開始",
     "Task is pinned" : "任務被標記為固定",
     "Task has a note" : "任務有註釋",
     "Add subtask" : "新增子任務",

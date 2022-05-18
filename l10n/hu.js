@@ -109,6 +109,7 @@ OC.L10N.register(
     "Sort by manual order." : "Rendezés kézi sorrend szerint.",
     "{complete} % completed" : "{complete}% kész",
     "Task has hidden subtasks" : "A feladatnak rejtett részfeladatai vannak",
+    "Task has not yet started" : "A feladat még nem kezdődött el",
     "Task is pinned" : "A feladat rögzített",
     "Task has a note" : "A feladathoz jegyzet tartozik",
     "Add subtask" : "Részfeladat hozzáadása",
