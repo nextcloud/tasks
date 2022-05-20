@@ -470,7 +470,7 @@ $color-error: #e9322d;
 
 .collection::v-deep {
 	&.collection--edit {
-		.app-navigation-entry-link {
+		.app-navigation-entry {
 			display: none;
 		}
 
