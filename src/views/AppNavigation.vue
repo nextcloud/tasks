@@ -64,32 +64,34 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<template #icon>
 					<Plus :size="20" />
 				</template>
-				<div :class="{error: nameError}" class="app-navigation-entry-edit">
-					<form>
-						<input id="newListInput"
-							v-model="newCalendarName"
-							v-tooltip="{
-								content: tooltipMessage,
-								show: showTooltip('list_'),
-								trigger: 'manual'
-							}"
-							:placeholder="t('tasks', 'New List')"
-							class="edit"
-							type="text"
-							@keyup="checkName($event, null, create)">
-						<input :title="t('tasks', 'Cancel')"
-							type="cancel"
-							value=""
-							class="action icon-close"
-							@click="cancelCreate">
-						<input :title="t('tasks', 'Save')"
-							type="button"
-							value=""
-							class="action icon-checkmark"
-							@click="create($event)">
-					</form>
-					<Colorpicker :selected-color="selectedColor" @color-selected="setColor(...arguments)" />
-				</div>
+				<li>
+					<div :class="{error: nameError}" class="app-navigation-entry-edit">
+						<form>
+							<input id="newListInput"
+								v-model="newCalendarName"
+								v-tooltip="{
+									content: tooltipMessage,
+									show: showTooltip('list_'),
+									trigger: 'manual'
+								}"
+								:placeholder="t('tasks', 'New List')"
+								class="edit"
+								type="text"
+								@keyup="checkName($event, null, create)">
+							<input :title="t('tasks', 'Cancel')"
+								type="cancel"
+								value=""
+								class="action icon-close"
+								@click="cancelCreate">
+							<input :title="t('tasks', 'Save')"
+								type="button"
+								value=""
+								class="action icon-checkmark"
+								@click="create($event)">
+						</form>
+						<Colorpicker :selected-color="selectedColor" @color-selected="setColor(...arguments)" />
+					</div>
+				</li>
 			</AppNavigationItem>
 			<Trashbin v-if="hasTrashBin" />
 		</template>
@@ -465,6 +467,7 @@ $color-error: #e9322d;
 
 		.app-navigation-entry-edit {
 			display: inline-block;
+			width: 100%;
 		}
 	}
 
