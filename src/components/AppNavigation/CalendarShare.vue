@@ -291,7 +291,7 @@ export default {
 			padding-left: 6px !important;
 
 			.multiselect {
-				width: calc(100% - 14px);
+				width: 100%;
 				margin: 0;
 				.multiselect__tags:focus-within,
 				.multiselect__tags:hover {
