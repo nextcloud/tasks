@@ -107,32 +107,33 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			</ActionButton>
 		</template>
 
-		<ShareCalendar v-if="shareOpen && !calendar.readOnly && !deleteTimeout" :calendar="calendar" />
-
-		<div v-if="!deleteTimeout" :class="{error: nameError}" class="app-navigation-entry-edit">
-			<form>
-				<input v-model="newCalendarName"
-					v-tooltip="{
-						content: tooltipMessage,
-						show: showTooltip('list_' + calendar.id),
-						trigger: 'manual'
-					}"
-					class="edit"
-					type="text"
-					@keyup="checkName($event, calendar, save)">
-				<input :title="t('tasks', 'Cancel')"
-					type="cancel"
-					value=""
-					class="action icon-close"
-					@click="resetView">
-				<input :title="t('tasks', 'Save')"
-					type="button"
-					value=""
-					class="action icon-checkmark"
-					@click="save(calendar)">
-			</form>
-			<Colorpicker :selected-color="selectedColor" @color-selected="setColor(...arguments)" />
-		</div>
+		<li>
+			<ShareCalendar v-if="shareOpen && !calendar.readOnly && !deleteTimeout" :calendar="calendar" />
+			<div v-if="!deleteTimeout" :class="{error: nameError}" class="app-navigation-entry-edit">
+				<form>
+					<input v-model="newCalendarName"
+						v-tooltip="{
+							content: tooltipMessage,
+							show: showTooltip('list_' + calendar.id),
+							trigger: 'manual'
+						}"
+						class="edit"
+						type="text"
+						@keyup="checkName($event, calendar, save)">
+					<input :title="t('tasks', 'Cancel')"
+						type="cancel"
+						value=""
+						class="action icon-close"
+						@click="resetView">
+					<input :title="t('tasks', 'Save')"
+						type="button"
+						value=""
+						class="action icon-checkmark"
+						@click="save(calendar)">
+				</form>
+				<Colorpicker :selected-color="selectedColor" @color-selected="setColor(...arguments)" />
+			</div>
+		</li>
 	</AppNavigationItem>
 </template>
 
@@ -562,6 +563,7 @@ $color-error: #e9322d;
 
 		.app-navigation-entry-edit {
 			display: inline-block;
+			width: 100%;
 		}
 	}
 
