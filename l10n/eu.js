@@ -109,6 +109,7 @@ OC.L10N.register(
     "Sort by manual order." : "Ordenatu eskuz.",
     "{complete} % completed" : "% {complete} osatuta",
     "Task has hidden subtasks" : "Zereginak ezkutuko azpizereginak ditu",
+    "Task has not yet started" : "Zeregin oraindik ez da hasi",
     "Task is pinned" : "Zeregina ainguratuta dago",
     "Task has a note" : "Zereginak ohar bat du",
     "Add subtask" : "Gehitu azpizeregina",
