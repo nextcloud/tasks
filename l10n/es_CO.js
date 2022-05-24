@@ -35,7 +35,7 @@ OC.L10N.register(
     "Manually" : "Manualmente",
     "Task is completed" : "La tarea ha sido completada",
     "Close" : "Cerrar",
-    "_%n Completed Task_::_%n Completed Tasks_" : ["%n Tarea Completada","%n Tareas Completadas"],
+    "_%n Completed Task_::_%n Completed Tasks_" : ["%n Tarea Completada","%n Tareas Completadas","%n Tareas Completadas"],
     "Tomorrow" : "Mañana",
     "New List" : "Nueva Lista",
     "All day" : "Todo el día",
@@ -51,4 +51,4 @@ OC.L10N.register(
     "Set start date" : "Establecer fecha de inicio",
     "Set due date" : "Establecer fecha de vencimiento"
 },
-"nplurals=2; plural=(n != 1);");
+"nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");

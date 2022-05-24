@@ -43,7 +43,7 @@ OC.L10N.register(
     "Due date" : "Data limite",
     "Last modified" : "Última modificação",
     "Close" : "Fechar",
-    "_%n Completed Task_::_%n Completed Tasks_" : ["%n Tarefa Concluída","%n Tarefas Concluídas"],
+    "_%n Completed Task_::_%n Completed Tasks_" : ["%n Tarefa Concluída","%n Tarefas Concluídas","%n Tarefas Concluídas"],
     "Tomorrow" : "Amanhã",
     "New List" : "Nova Lista",
     "All day" : "Todo o dia",
@@ -60,4 +60,4 @@ OC.L10N.register(
     "Set due date" : "Definir data de expiração",
     "An error occurred" : "Ocorreu um erro"
 },
-"nplurals=2; plural=(n != 1);");
+"nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");

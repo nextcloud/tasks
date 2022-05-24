@@ -37,6 +37,7 @@ OC.L10N.register(
     "Untitled event" : "Acara tanpa judul",
     "Due date" : "Tenggat",
     "Last modified" : "Terakhir diubah",
+    "[Today]" : "[Hari ini]",
     "Close" : "Tutup",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n Tugas Diselesaikan"],
     "Tomorrow" : "Besok",
@@ -47,6 +48,7 @@ OC.L10N.register(
     "Reminders" : "Pengingat",
     "Repeat" : "Ulang",
     "Task not found!" : "Tugas tidak ditemukan!",
+    "[Starts today]" : "[Dimulai hari ini]",
     "Set start date" : "Atur tanggal mulai",
     "Set due date" : "Atur tanggal jatuh tempo",
     "An error occurred" : "Terjadi kesalahan"
