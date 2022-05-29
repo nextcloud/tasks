@@ -30,7 +30,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 			<AccountMultiple v-if="sharee.isGroup"
 				:size="18"
 				class="avatar" />
-			<div v-else-if="sharee.isCircle" class="avatar icon-circle" />
+			<div v-else-if="sharee.isCircle" class="avatar icon-circles" />
 			<Avatar v-else
 				:user="sharee.id"
 				:display-name="sharee.displayName"
