@@ -1,0 +1,78 @@
+/**
+ * Since CSS variables can't be used in media queries (yet, see e.g.
+ * https://stackoverflow.com/questions/40722882/css-native-variables-not-working-in-media-queries),
+ * and var(--breakpoint-mobile) can be used with server v25 upwards only anyway,
+ * we have to redefine the value here.
+ */
+$breakpoint-mobile: 1024px;
+
+.app-content .task-list {
+	width: 100%;
+	padding: 0 15px;
+
+	@media only screen and (max-width: $breakpoint-mobile) {
+		padding: 0;
+	}
+
+	.grouped-tasks {
+		position: relative;
+		padding-top: 2px;
+
+		> ol {
+			filter: drop-shadow(0 0 1px var(--color-box-shadow));
+			z-index: 1;
+
+			&:hover {
+				z-index: 10;
+			}
+
+			&.completed {
+				margin-top: 12px;
+			}
+		}
+	}
+
+	.heading {
+		display: flex;
+		align-items: center;
+		margin-top: 20px !important;
+
+		@media only screen and (max-width: $breakpoint-mobile) {
+			padding-left: 15px;
+		}
+
+		&--hiddentasks {
+			margin-bottom: 0;
+
+			.heading__title {
+				display: inline-block;
+				padding-right: 16px;
+				background-position: right center;
+				cursor: pointer;
+				&:hover {
+					opacity: .7;
+				}
+			}
+		}
+
+		&__title {
+			font-weight: bold;
+			font-size: 16px;
+			word-wrap: break-word;
+			opacity: .5;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+
+		}
+
+		&__icon-bullet {
+			width: 14px;
+			min-width: 14px;
+			height: 14px;
+			border: none;
+			border-radius: 50%;
+			margin-right: 8px;
+		}
+	}
+}
