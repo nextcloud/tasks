@@ -108,3 +108,41 @@ export default {
 	},
 }
 </script>
+
+<style lang="scss">
+/**
+ * Since CSS variables can't be used in media queries (yet, see e.g.
+ * https://stackoverflow.com/questions/40722882/css-native-variables-not-working-in-media-queries),
+ * and var(--breakpoint-mobile) can be used with server v25 upwards only anyway,
+ * we have to redefine the value here.
+ */
+$breakpoint-mobile: 1024px;
+
+// Adjust app-navigation-toggle position
+#app-navigation-vue .app-navigation-toggle {
+	top: 12px !important;
+	right: -15px !important;
+
+	@media only screen and (max-width: $breakpoint-mobile) {
+		right: 0 !important;
+	}
+}
+
+// Hack for https://github.com/nextcloud/nextcloud-vue/issues/1384
+body {
+	min-height: 100%;
+	height: auto;
+}
+
+</style>
+
+<style lang="scss" scoped>
+.app-content {
+	background-color: var(--color-background-dark) !important;
+
+	> div {
+		box-sizing: border-box;
+		padding-bottom: 75px;
+	}
+}
+</style>

@@ -51,6 +51,7 @@ import Header from '../../components/Header.vue'
 import DeleteCompletedModal from '../../components/DeleteCompletedModal.vue'
 import LoadCompletedButton from '../../components/LoadCompletedButton.vue'
 import TaskDragContainer from '../../components/TaskDragContainer.vue'
+import './task-list.scss'
 
 import { translatePlural as n } from '@nextcloud/l10n'
 

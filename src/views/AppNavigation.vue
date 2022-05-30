@@ -459,6 +459,15 @@ export default {
 <style lang="scss" scoped>
 $color-error: #e9322d;
 
+.app-navigation li {
+	&.dnd-hover,
+	&.sortable-ghost {
+		background-color: var(--color-primary-light);
+		box-shadow: 0 0 3px var(--color-primary);
+		z-index: 1000;
+	}
+}
+
 .collection::v-deep {
 	&.collection--edit {
 		.app-navigation-entry-link {

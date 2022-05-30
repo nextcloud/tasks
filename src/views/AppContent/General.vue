@@ -48,6 +48,7 @@ import Header from '../../components/Header.vue'
 import LoadCompletedButton from '../../components/LoadCompletedButton.vue'
 import TaskDragContainer from '../../components/TaskDragContainer.vue'
 import { isTaskInList, isParentInList } from '../../store/storeHelper.js'
+import './task-list.scss'
 
 import { mapGetters } from 'vuex'
 
