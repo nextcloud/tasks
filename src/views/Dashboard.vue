@@ -34,13 +34,21 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			<template #default="{ item }">
 				<DashboardWidgetItem :main-text="item.summary"
 					:sub-text="formatSubtext(item)"
-					:target-url="getTasksAppUrl(item)"
-					:item-menu="itemMenu"
-					@markAsDone="onMarkAsDone(item)">
+					:target-url="getTasksAppUrl(item)">
 					<template #avatar>
 						<div class="calendar-dot"
 							:style="{'background-color': item.calendar.color}"
 							:title="item.calendar.displayName" />
+					</template>
+					<template #actions>
+						<ActionButton v-if="!item.calendar.readOnly && !(item.calendar.isSharedWithMe && item.class !== 'PUBLIC')"
+							:close-after-click="true"
+							@click="onMarkAsDone(item)">
+							<template #icon>
+								<Check :size="20" decorative />
+							</template>
+							{{ t('tasks', 'Mark as done') }}
+						</ActionButton>
 					</template>
 				</DashboardWidgetItem>
 			</template>
@@ -61,14 +69,19 @@ import { sort, isTaskInList } from '../store/storeHelper.js'
 
 import { translate as t } from '@nextcloud/l10n'
 import { generateUrl } from '@nextcloud/router'
+import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
 import DashboardWidget from '@nextcloud/vue/dist/Components/DashboardWidget'
 import DashboardWidgetItem from '@nextcloud/vue/dist/Components/DashboardWidgetItem'
+
+import Check from 'vue-material-design-icons/Check'
 
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
 	name: 'Dashboard',
 	components: {
+		ActionButton,
+		Check,
 		DashboardWidget,
 		DashboardWidgetItem,
 		TaskCreateDialog,
