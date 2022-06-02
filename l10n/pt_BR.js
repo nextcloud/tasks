@@ -109,6 +109,7 @@ OC.L10N.register(
     "Sort by manual order." : "Ordenar manualmente.",
     "{complete} % completed" : "{complete} % completo",
     "Task has hidden subtasks" : "A tarefa tem subtarefas ocultas ",
+    "Task has not yet started" : "A tarefa ainda não foi iniciada",
     "Task is pinned" : "Tarefa marcada ",
     "Task has a note" : "A tarefa tem uma nota ",
     "Add subtask" : "Adicionar subtarefas",
