@@ -36,6 +36,7 @@
     "Empty trash bin" : "Dọn thùng rác",
     "Untitled task" : "Nhiệm vụ không tiêu đề",
     "Untitled event" : "Sự kiện không tiêu đề",
+    "Unknown calendar" : "Lịch không rõ nguồn",
     "Could not load deleted calendars and objects" : "Không thể hiển thị lịch hoặc các đối tượng đã xoá",
     "Could not restore calendar or event" : "Không thể khôi phục lịch hoặc sự kiện",
     "Do you really want to empty the trash bin?" : "Bạn có chắc là muốn dọn sạch thùng rác hay không?",
