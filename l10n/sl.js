@@ -58,6 +58,7 @@ OC.L10N.register(
     "Untitled task" : "Neimenovana naloga",
     "Untitled event" : "Neimenovan dogodek",
     "Untitled item" : "Neimenovan predmet",
+    "Unknown calendar" : "Neznan koledar",
     "Could not load deleted calendars and objects" : "Ni mogoče naložiti izbrisanih koledarjev in predmetov",
     "Could not delete calendar or event" : "Ni mogoče izbrisati koledarja ali dogodka",
     "Could not restore calendar or event" : "Ni mogoče obnoviti koledarja ali dogodka",
