@@ -53,6 +53,7 @@ OC.L10N.register(
     "Empty trash bin" : "Испразни ја корпата со отпадоци",
     "Untitled task" : "Неименувана задача",
     "Untitled event" : "Неименуван настан",
+    "Unknown calendar" : "Непознат календар",
     "Select a calendar" : "Избери календар",
     "Add this as a new tag" : "Додади ја како нова ознака",
     "Delete all completed tasks." : "Избриши ги сите завршени задачи.",
