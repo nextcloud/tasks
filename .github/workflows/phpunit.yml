@@ -75,11 +75,3 @@ jobs:
     - name: Run integration tests
       working-directory: nextcloud/apps/tasks
       run: composer run test:integration
-
-    - name: Upload coverage to Codecov
-      if: ${{ matrix.nextcloud-versions == 'master' }}
-      uses: codecov/codecov-action@v3
-      with:
-        file: nextcloud/apps/tasks/clover.unit.xml
-        flags: php
-        fail_ci_if_error: true
