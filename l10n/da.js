@@ -47,6 +47,8 @@ OC.L10N.register(
     "Priority" : "Prioritet",
     "Alphabetically" : "Alfabetisk",
     "Manually" : "Manuelt",
+    "[Today]" : "[i dag]",
+    "[Tomorrow]" : "[I Morgen]",
     "Task is completed" : "Denne opgave er udført",
     "Close" : "Luk",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n fuldført opgave","%n fuldførte opgaver"],
