@@ -109,6 +109,7 @@ OC.L10N.register(
     "Sort by manual order." : "Сортиране по ръчна поръчка.",
     "{complete} % completed" : "{complete} % завършени",
     "Task has hidden subtasks" : "Задачата има скрити подзадачи",
+    "Task has not yet started" : "Задачата все още не е започнала",
     "Task is pinned" : "Задачата е закачена",
     "Task has a note" : "Задачата има бележка",
     "Add subtask" : "Добавя подзадача",
