@@ -20,7 +20,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<AppNavigationSettings>
+	<AppNavigationSettings :title="appNavigationSettingsTitle">
 		<div class="reactive">
 			<ul>
 				<li>
@@ -106,6 +106,10 @@ export default {
 		}
 	},
 	computed: {
+		appNavigationSettingsTitle() {
+			return t('tasks', 'Tasks settings')
+		},
+
 		defaultCalendarId: {
 			get() {
 				const cal = this.$store.getters.getDefaultCalendar
