@@ -5,6 +5,8 @@ OC.L10N.register(
     "Today" : "I dag",
     "Week" : "Veke",
     "All" : "Alle",
+    "Current" : "Gjeldande",
+    "Completed" : "Fullført",
     "Tasks" : "Oppgåver",
     "Can edit" : "Can edit",
     "Edit" : "Endra",
