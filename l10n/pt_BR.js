@@ -16,6 +16,7 @@ OC.L10N.register(
     "Hidden" : "Oculto",
     "Visible" : "Visível",
     "Automatic" : "Automático",
+    "Tasks settings" : "Configurações de tarefas",
     "Share with users or groups" : "Compartilhar com usuários ou grupos",
     "No users or groups" : "Sem usuários ou grupos",
     "Can edit" : "Pode editar ",

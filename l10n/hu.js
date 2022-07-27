@@ -16,6 +16,7 @@ OC.L10N.register(
     "Hidden" : "Rejtett",
     "Visible" : "Látható",
     "Automatic" : "Automatikus",
+    "Tasks settings" : "Feladatok beállításai",
     "Share with users or groups" : "Megosztás felhasználókkal vagy csoportokkal",
     "No users or groups" : "Nincsenek felhasználók vagy csoportok",
     "Can edit" : "Szerkesztheti",

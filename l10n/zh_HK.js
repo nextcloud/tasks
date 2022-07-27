@@ -16,6 +16,7 @@ OC.L10N.register(
     "Hidden" : "隱藏",
     "Visible" : "顯示",
     "Automatic" : "自動",
+    "Tasks settings" : "任務設定",
     "Share with users or groups" : "與用戶或群組分享",
     "No users or groups" : "沒有用戶或群組",
     "Can edit" : "可編輯",

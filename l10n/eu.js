@@ -16,6 +16,7 @@ OC.L10N.register(
     "Hidden" : "Ezkutuan",
     "Visible" : "Ikusgai",
     "Automatic" : "Automatikoa",
+    "Tasks settings" : "Zereginen ezarpenak",
     "Share with users or groups" : "Partekatu erabiltzaile edo taldeekin",
     "No users or groups" : "Ez dago erabiltzaile edo talderik",
     "Can edit" : "Editatu dezake",
