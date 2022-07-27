@@ -37,7 +37,7 @@
 		"@nextcloud/logger": "^2.1.0",
 		"@nextcloud/moment": "^1.2.1",
 		"@nextcloud/router": "^2.0.0",
-		"@nextcloud/vue": "^5.3.1",
+		"@nextcloud/vue": "^6.0.0-alpha.0",
 		"@nextcloud/vue-dashboard": "^2.0.1",
 		"color-convert": "^2.0.1",
 		"debounce": "^1.2.1",
