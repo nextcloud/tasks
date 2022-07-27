@@ -268,22 +268,20 @@ export default {
 	}
 
 	.app-navigation-entry {
-		padding-left: 0 !important;
 
-		.avatar {
-			width: 32px;
-			height: 32px;
-			background-color: var(--color-border-dark);
-			background-size: 16px;
-		}
+		&-wrapper::v-deep {
+			.app-navigation-entry {
+				padding-left: 0 !important;
 
-		&__utils {
-			.action-checkbox__label {
-				padding-right: 0 !important;
-			}
+				&__utils {
+					.action-checkbox__label {
+						padding-right: 0 !important;
+					}
 
-			.action-checkbox__label::before {
-				margin: 4px 4px 0 !important;
+					.action-checkbox__label::before {
+						margin: 4px 4px 0 !important;
+					}
+				}
 			}
 		}
 
@@ -293,6 +291,7 @@ export default {
 			.multiselect {
 				width: 100%;
 				margin: 0;
+				padding-right: 8px !important;
 				.multiselect__tags:focus-within,
 				.multiselect__tags:hover {
 					border-color: var(--color-primary-element);

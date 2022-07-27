@@ -545,19 +545,18 @@ export default {
 $color-error: #e9322d;
 
 .list::v-deep {
-	&.active .app-navigation-entry__icon-bullet > div {
+	div.active .app-navigation-entry__icon-bullet > div {
 		height: 16px;
 		width: 16px;
 		margin: -1px;
 	}
 
-	&:not(.active) > .app-navigation-entry__utils .action-item:not(.shared) {
+	> div:not(.active) > .app-navigation-entry__utils .action-item:not(.shared) {
 		display: none;
 	}
 
 	&.list--edit {
-		.app-navigation-entry__utils,
-		.app-navigation-entry-link {
+		.app-navigation-entry {
 			display: none;
 		}
 
