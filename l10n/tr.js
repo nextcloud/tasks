@@ -16,6 +16,7 @@ OC.L10N.register(
     "Hidden" : "Gizli",
     "Visible" : "Görünür",
     "Automatic" : "Otomatik",
+    "Tasks settings" : "Görevler ayarları",
     "Share with users or groups" : "Kullanıcı ya da gruplarla paylaş",
     "No users or groups" : "Hiçbir kullanıcı ya da grupla",
     "Can edit" : "Düzenleyebilir",

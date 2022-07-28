@@ -16,6 +16,7 @@ OC.L10N.register(
     "Hidden" : "Skrytý",
     "Visible" : "Viditelný",
     "Automatic" : "Automatický",
+    "Tasks settings" : "Nastavení pro Úkoly",
     "Share with users or groups" : "Sdílet s uživateli či skupinami",
     "No users or groups" : "Žádní uživatelé či skupiny",
     "Can edit" : "Může upravovat",
