@@ -53,10 +53,13 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				</DashboardWidgetItem>
 			</template>
 		</DashboardWidget>
-		<div class="center-button">
-			<button @click="toggleAddTaskModel">
+		<div v-if="!loading" class="center-button">
+			<ButtonVue @click="toggleAddTaskModel">
+				<template #icon>
+					<Plus :size="20" decorative />
+				</template>
 				{{ t('tasks', 'Create a new task') }}
-			</button>
+			</ButtonVue>
 			<TaskCreateDialog v-if="showAddTaskModal" @close="toggleAddTaskModel" />
 		</div>
 	</div>
@@ -70,10 +73,12 @@ import { sort, isTaskInList } from '../store/storeHelper.js'
 import { translate as t } from '@nextcloud/l10n'
 import { generateUrl } from '@nextcloud/router'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
+import ButtonVue from '@nextcloud/vue/dist/Components/Button'
 import DashboardWidget from '@nextcloud/vue/dist/Components/DashboardWidget'
 import DashboardWidgetItem from '@nextcloud/vue/dist/Components/DashboardWidgetItem'
 
 import Check from 'vue-material-design-icons/Check'
+import Plus from 'vue-material-design-icons/Plus'
 
 import { mapGetters, mapActions } from 'vuex'
 
@@ -81,10 +86,12 @@ export default {
 	name: 'Dashboard',
 	components: {
 		ActionButton,
+		ButtonVue,
 		Check,
 		DashboardWidget,
 		DashboardWidgetItem,
 		TaskCreateDialog,
+		Plus,
 	},
 	data() {
 		return {
@@ -222,7 +229,8 @@ export default {
 }
 
 .center-button {
-	text-align: center;
+	display: flex;
+	justify-content: center;
 	margin-top: 10px;
 }
 </style>
