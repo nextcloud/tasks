@@ -73,7 +73,7 @@ import { sort, isTaskInList } from '../store/storeHelper.js'
 import { translate as t } from '@nextcloud/l10n'
 import { generateUrl } from '@nextcloud/router'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
-import ButtonVue from '@nextcloud/vue/dist/Components/Button'
+import ButtonVue from '@nextcloud/vue/dist/Components/ButtonVue'
 import DashboardWidget from '@nextcloud/vue/dist/Components/DashboardWidget'
 import DashboardWidgetItem from '@nextcloud/vue/dist/Components/DashboardWidgetItem'
 
