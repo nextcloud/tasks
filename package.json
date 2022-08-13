@@ -78,8 +78,8 @@
 		"regenerator-runtime": "^0.13.9"
 	},
 	"engines": {
-		"node": "^14.0.0",
-		"npm": "^7.0.0"
+		"node": "^16.0.0",
+		"npm": "^7.0.0 || ^8.0.0"
 	},
 	"jest": {
 		"moduleFileExtensions": [
