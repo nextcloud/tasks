@@ -45,7 +45,7 @@
 		"linkify-it": "^4.0.1",
 		"markdown-it": "^13.0.1",
 		"markdown-it-emoji": "^2.0.2",
-		"markdown-it-link-attributes": "^4.0.0",
+		"markdown-it-link-attributes": "^4.0.1",
 		"markdown-it-task-lists": "^2.1.1",
 		"md5": "^2.3.0",
 		"p-limit": "^4.0.0",
