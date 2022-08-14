@@ -25,7 +25,6 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 	<div>
 		<DashboardWidget id="tasks_panel"
 			:items="filteredTasks.slice(0, hasTaskToday ? 6 : 4)"
-			empty-content-icon="icon-tasks"
 			:empty-content-message="t('tasks', 'No upcoming tasks')"
 			:show-more-text="t('tasks', 'upcoming tasks')"
 			:loading="loading"
@@ -52,6 +51,9 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					</template>
 				</DashboardWidgetItem>
 			</template>
+			<template #emptyContentIcon>
+				<TaskIcon />
+			</template>
 		</DashboardWidget>
 		<div v-if="!loading" class="center-button">
 			<ButtonVue @click="toggleAddTaskModel">
@@ -67,6 +69,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import TaskCreateDialog from '../components/TaskCreateDialog.vue'
+import TaskIcon from '../components/TaskIcon.vue'
 import client from '../services/cdav.js'
 import { sort, isTaskInList } from '../store/storeHelper.js'
 
@@ -92,6 +95,7 @@ export default {
 		DashboardWidgetItem,
 		TaskCreateDialog,
 		Plus,
+		TaskIcon,
 	},
 	data() {
 		return {
