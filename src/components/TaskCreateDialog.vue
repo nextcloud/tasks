@@ -27,7 +27,10 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<Modal class="task-selector" size="small" @close="close">
-		<div v-if="!creating && !created" id="modal-inner" :class="{ 'icon-loading': loading }">
+		<div v-if="!creating && !created" id="modal-inner">
+			<div v-if="loading" class="loading-overlay">
+				<LoadingIcon :size="40" />
+			</div>
 			<h3>{{ t('tasks', 'Create a new task') }}</h3>
 
 			<CalendarPickerItem :disabled="loading"
@@ -49,29 +52,36 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:disabled="loading" />
 			</div>
 			<div class="modal-buttons">
-				<button @click="close">
+				<ButtonVue @click="close">
 					{{ t('tasks', 'Cancel') }}
-				</button>
-				<button :disabled="loading"
-					class="primary"
+				</ButtonVue>
+				<ButtonVue :disabled="loading"
+					type="primary"
 					@click="addTask">
 					{{ t('tasks', 'Create task') }}
-				</button>
+				</ButtonVue>
 			</div>
 		</div>
 		<div v-else id="modal-inner">
-			<EmptyContent v-if="creating" icon="icon-loading">
+			<EmptyContent v-if="creating" key="creating">
 				{{ t('tasks', 'Creating the new task…') }}
+				<template #icon>
+					<LoadingIcon />
+				</template>
 			</EmptyContent>
-			<EmptyContent v-else-if="created" icon="icon-checkmark">
+			<EmptyContent v-else-if="created" key="created">
 				{{ t('tasks', '"{task}" was added to "{calendar}"', { task: pendingTitle, calendar: pendingCalendar.displayName }, undefined, { sanitize: false, escape: false }) }}
+				<template #icon>
+					<Check />
+				</template>
 				<template #desc>
-					<button class="primary" @click="openNewTask">
-						{{ t('tasks', 'Open task') }}
-					</button>
-					<button @click="close">
+&nbsp;
+					<ButtonVue @click="close">
 						{{ t('tasks', 'Close') }}
-					</button>
+					</ButtonVue>
+					<ButtonVue type="primary" @click="openNewTask">
+						{{ t('tasks', 'Open task') }}
+					</ButtonVue>
 				</template>
 			</EmptyContent>
 		</div>
@@ -85,9 +95,12 @@ import client from '../services/cdav.js'
 
 import { translate as t } from '@nextcloud/l10n'
 import { generateUrl } from '@nextcloud/router'
+import ButtonVue from '@nextcloud/vue/dist/Components/ButtonVue'
 import EmptyContent from '@nextcloud/vue/dist/Components/EmptyContent'
+import LoadingIcon from '@nextcloud/vue/dist/Components/LoadingIcon'
 import Modal from '@nextcloud/vue/dist/Components/Modal'
 
+import Check from 'vue-material-design-icons/Check'
 import TextBoxOutline from 'vue-material-design-icons/TextBoxOutline'
 import ViewHeadline from 'vue-material-design-icons/ViewHeadline'
 
@@ -97,7 +110,10 @@ export default {
 	name: 'TaskCreateDialog',
 	components: {
 		CalendarPickerItem,
+		Check,
+		ButtonVue,
 		EmptyContent,
+		LoadingIcon,
 		Modal,
 		TextBoxOutline,
 		ViewHeadline,
@@ -191,6 +207,22 @@ export default {
 		display: flex;
 		flex-direction: column;
 		padding: 20px;
+
+		.loading-overlay {
+			position: absolute;
+			top: calc(50% - 20px);
+			left: calc(50% - 20px);
+			z-index: 1000;
+		}
+
+		.empty-content {
+			margin: 10vh 0;
+
+			::v-deep p {
+				display: flex;
+				justify-content: flex-end;
+			}
+		}
 	}
 
 	.property__item {
