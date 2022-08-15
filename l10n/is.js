@@ -44,6 +44,7 @@ OC.L10N.register(
     "Unknown calendar" : "Óþekkt dagatal",
     "Could not load deleted calendars and objects" : "Gat ekki hlaðið inn eyddum dagatölum og hlutum",
     "Could not restore calendar or event" : "Gat ekki endurheimt dagatal eða atburð",
+    "Do you really want to empty the trash bin?" : "Viltu örugglega tæma ruslið?",
     "Select a calendar" : "Veldu dagatal",
     "Delete all completed tasks." : "Eyða öllum loknum verkum.",
     "Delete completed tasks." : "Eyða loknum verkum.",
