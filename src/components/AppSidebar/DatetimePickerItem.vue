@@ -36,7 +36,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				{{ propertyString }}
 			</span>
 			<div v-if="editing" class="content__input">
-				<DatetimePicker :value="newValue"
+				<NcDatetimePicker :value="newValue"
 					:lang="lang"
 					:format="dateFormat"
 					:clearable="false"
@@ -46,7 +46,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:placeholder="t('tasks', 'Set date')"
 					class="date"
 					@change="setDate" />
-				<DatetimePicker v-if="!allDay"
+				<NcDatetimePicker v-if="!allDay"
 					:value="newValue"
 					:lang="lang"
 					:format="timeFormat"
@@ -60,21 +60,21 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			</div>
 		</div>
 		<div class="item__actions">
-			<Actions v-show="editing" class="actions__set">
-				<ActionButton @click="setValue()">
+			<NcActions v-show="editing" class="actions__set">
+				<NcActionButton @click="setValue()">
 					<template #icon>
 						<Check :size="20" />
 					</template>
 					{{ t('tasks', 'Set date') }}
-				</ActionButton>
-			</Actions><Actions v-show="editing" class="actions__clear">
-				<ActionButton @click="clearValue">
+				</NcActionButton>
+			</NcActions><NcActions v-show="editing" class="actions__clear">
+				<NcActionButton @click="clearValue">
 					<template #icon>
 						<Delete :size="20" />
 					</template>
 					{{ t('tasks', 'Delete date') }}
-				</ActionButton>
-			</Actions>
+				</NcActionButton>
+			</NcActions>
 		</div>
 	</div>
 </template>
@@ -85,12 +85,12 @@ import { overdue } from '../../store/storeHelper.js'
 
 import { translate as t } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
-import DatetimePicker from '@nextcloud/vue/dist/Components/DatetimePicker'
+import NcDatetimePicker from '@nextcloud/vue/dist/Components/NcDatetimePicker'
 
 export default {
 	name: 'DatetimePickerItem',
 	components: {
-		DatetimePicker,
+		NcDatetimePicker,
 	},
 	mixins: [editableItem],
 	props: {

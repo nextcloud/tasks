@@ -20,7 +20,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<AppNavigationSettings :title="appNavigationSettingsTitle">
+	<NcAppNavigationSettings :title="appNavigationSettingsTitle">
 		<div class="reactive">
 			<ul>
 				<li>
@@ -59,13 +59,13 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				</li>
 			</ul>
 		</div>
-	</AppNavigationSettings>
+	</NcAppNavigationSettings>
 </template>
 
 <script>
 import { translate as t } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
-import AppNavigationSettings from '@nextcloud/vue/dist/Components/AppNavigationSettings'
+import NcAppNavigationSettings from '@nextcloud/vue/dist/Components/NcAppNavigationSettings'
 
 import CalendarToday from 'vue-material-design-icons/CalendarToday'
 import CalendarWeek from 'vue-material-design-icons/CalendarWeek'
@@ -78,7 +78,7 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
 	components: {
-		AppNavigationSettings,
+		NcAppNavigationSettings,
 		CalendarToday,
 		CalendarWeek,
 		CircleOutline,

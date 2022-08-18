@@ -20,15 +20,15 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<Content app-name="tasks">
+	<NcContent app-name="tasks">
 		<AppNavigation @click.native="closeAppSidebar($event)" />
 
-		<AppContent @click.native="closeAppSidebar($event)">
+		<NcAppContent @click.native="closeAppSidebar($event)">
 			<RouterView />
-		</AppContent>
+		</NcAppContent>
 
 		<RouterView name="sidebar" />
-	</Content>
+	</NcContent>
 </template>
 
 <script>
@@ -37,8 +37,8 @@ import client from './services/cdav.js'
 
 import { emit } from '@nextcloud/event-bus'
 import { translate as t } from '@nextcloud/l10n'
-import AppContent from '@nextcloud/vue/dist/Components/AppContent'
-import Content from '@nextcloud/vue/dist/Components/Content'
+import NcAppContent from '@nextcloud/vue/dist/Components/NcAppContent'
+import NcContent from '@nextcloud/vue/dist/Components/NcContent'
 
 import { mapGetters } from 'vuex'
 
@@ -46,8 +46,8 @@ export default {
 	name: 'App',
 	components: {
 		AppNavigation,
-		AppContent,
-		Content,
+		NcAppContent,
+		NcContent,
 	},
 	computed: {
 		...mapGetters({

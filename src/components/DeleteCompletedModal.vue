@@ -21,15 +21,15 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div class="loadmore reactive">
-		<ButtonVue v-show="completedTasksCount"
+		<NcButton v-show="completedTasksCount"
 			type="tertiary"
 			@click="openModal">
 			<template #icon>
 				<Delete :size="20" />
 			</template>
 			{{ t('tasks', 'Delete all completed tasks.') }}
-		</ButtonVue>
-		<Modal v-if="modalOpen"
+		</NcButton>
+		<NcModal v-if="modalOpen"
 			size="normal"
 			:out-transition="true"
 			@close="closeModal">
@@ -39,14 +39,14 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<h3>
 						{{ n('tasks', 'This will delete {taskCount} completed task and its subtasks from calendar "{calendar}".', 'This will delete {taskCount} completed tasks and their subtasks from calendar "{calendar}".', initialCompletedRootTasksCount, {taskCount: initialCompletedRootTasksCount, calendar: calendar.displayName}, { sanitize: false, escape: false }) }}
 					</h3>
-					<ButtonVue type="primary"
+					<NcButton type="primary"
 						class="delete-completed__button"
 						@click="deleteCompletedTasks">
 						<template #icon>
 							<Delete :size="20" />
 						</template>
 						{{ t('tasks', 'Delete completed tasks.') }}
-					</ButtonVue>
+					</NcButton>
 				</div>
 				<div v-else>
 					<h3>
@@ -66,14 +66,14 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					</p>
 				</div>
 			</div>
-		</Modal>
+		</NcModal>
 	</div>
 </template>
 
 <script>
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'
-import ButtonVue from '@nextcloud/vue/dist/Components/ButtonVue'
-import Modal from '@nextcloud/vue/dist/Components/Modal'
+import NcButton from '@nextcloud/vue/dist/Components/NcButton'
+import NcModal from '@nextcloud/vue/dist/Components/NcModal'
 import Tooltip from '@nextcloud/vue/dist/Directives/Tooltip'
 
 import Delete from 'vue-material-design-icons/Delete'
@@ -82,9 +82,9 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
 	components: {
-		ButtonVue,
+		NcButton,
 		Delete,
-		Modal,
+		NcModal,
 	},
 	directives: {
 		Tooltip,

@@ -30,7 +30,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 	<div class="calendar-shares">
 		<ul>
 			<li class="app-navigation-entry__multiselect">
-				<Multiselect id="users-groups-search"
+				<NcMultiselect id="users-groups-search"
 					:options="usersOrGroups"
 					:searchable="true"
 					:internal-search="false"
@@ -47,7 +47,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 					<template #noResult>
 						<span>{{ noResult }}</span>
 					</template>
-				</Multiselect>
+				</NcMultiselect>
 			</li>
 			<!-- list of user or groups calendar is shared with -->
 			<CalendarSharee v-for="sharee in calendar.shares"
@@ -66,7 +66,7 @@ import { urldecode } from '../../utils/url.js'
 import Axios from '@nextcloud/axios'
 import { translate as t } from '@nextcloud/l10n'
 import { generateOcsUrl } from '@nextcloud/router'
-import Multiselect from '@nextcloud/vue/dist/Components/Multiselect'
+import NcMultiselect from '@nextcloud/vue/dist/Components/NcMultiselect'
 
 import debounce from 'debounce'
 
@@ -74,7 +74,7 @@ export default {
 	name: 'CalendarShare',
 	components: {
 		CalendarSharee,
-		Multiselect,
+		NcMultiselect,
 	},
 	props: {
 		calendar: {

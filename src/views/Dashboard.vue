@@ -23,7 +23,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 -->
 <template>
 	<div>
-		<DashboardWidget id="tasks_panel"
+		<NcDashboardWidget id="tasks_panel"
 			:items="filteredTasks.slice(0, hasTaskToday ? 6 : 4)"
 			:empty-content-message="t('tasks', 'No upcoming tasks')"
 			:show-more-text="t('tasks', 'upcoming tasks')"
@@ -31,7 +31,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			:show-items-and-empty-content="!hasTaskToday"
 			:half-empty-content-message="t('tasks', 'No tasks today')">
 			<template #default="{ item }">
-				<DashboardWidgetItem :main-text="item.summary"
+				<NcDashboardWidgetItem :main-text="item.summary"
 					:sub-text="formatSubtext(item)"
 					:target-url="getTasksAppUrl(item)">
 					<template #avatar>
@@ -40,28 +40,28 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 							:title="item.calendar.displayName" />
 					</template>
 					<template #actions>
-						<ActionButton v-if="!item.calendar.readOnly && !(item.calendar.isSharedWithMe && item.class !== 'PUBLIC')"
+						<NcActionButton v-if="!item.calendar.readOnly && !(item.calendar.isSharedWithMe && item.class !== 'PUBLIC')"
 							:close-after-click="true"
 							@click="onMarkAsDone(item)">
 							<template #icon>
 								<Check :size="20" decorative />
 							</template>
 							{{ t('tasks', 'Mark as done') }}
-						</ActionButton>
+						</NcActionButton>
 					</template>
-				</DashboardWidgetItem>
+				</NcDashboardWidgetItem>
 			</template>
 			<template #emptyContentIcon>
 				<TaskIcon />
 			</template>
-		</DashboardWidget>
+		</NcDashboardWidget>
 		<div v-if="!loading" class="center-button">
-			<ButtonVue @click="toggleAddTaskModel">
+			<NcButton @click="toggleAddTaskModel">
 				<template #icon>
 					<Plus :size="20" decorative />
 				</template>
 				{{ t('tasks', 'Create a new task') }}
-			</ButtonVue>
+			</NcButton>
 			<TaskCreateDialog v-if="showAddTaskModal" @close="toggleAddTaskModel" />
 		</div>
 	</div>
@@ -75,10 +75,10 @@ import { sort, isTaskInList } from '../store/storeHelper.js'
 
 import { translate as t } from '@nextcloud/l10n'
 import { generateUrl } from '@nextcloud/router'
-import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
-import ButtonVue from '@nextcloud/vue/dist/Components/ButtonVue'
-import DashboardWidget from '@nextcloud/vue/dist/Components/DashboardWidget'
-import DashboardWidgetItem from '@nextcloud/vue/dist/Components/DashboardWidgetItem'
+import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton'
+import NcButton from '@nextcloud/vue/dist/Components/NcButton'
+import NcDashboardWidget from '@nextcloud/vue/dist/Components/NcDashboardWidget'
+import NcDashboardWidgetItem from '@nextcloud/vue/dist/Components/NcDashboardWidgetItem'
 
 import Check from 'vue-material-design-icons/Check'
 import Plus from 'vue-material-design-icons/Plus'
@@ -88,11 +88,11 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
 	name: 'Dashboard',
 	components: {
-		ActionButton,
-		ButtonVue,
+		NcActionButton,
+		NcButton,
 		Check,
-		DashboardWidget,
-		DashboardWidgetItem,
+		NcDashboardWidget,
+		NcDashboardWidgetItem,
 		TaskCreateDialog,
 		Plus,
 		TaskIcon,

@@ -24,7 +24,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div class="property__item">
-		<Multiselect :value="tags"
+		<NcMultiselect :value="tags"
 			:taggable="true"
 			:disabled="disabled"
 			:options="options"
@@ -45,7 +45,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			<template #noOptions>
 				{{ t('tasks', 'No tag available. Create one!') }}
 			</template>
-		</Multiselect>
+		</NcMultiselect>
 	</div>
 </template>
 
@@ -53,13 +53,13 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 import MultiselectOption from './MultiselectOption.vue'
 
 import { translate as t } from '@nextcloud/l10n'
-import Multiselect from '@nextcloud/vue/dist/Components/Multiselect'
+import NcMultiselect from '@nextcloud/vue/dist/Components/NcMultiselect'
 
 import Tag from 'vue-material-design-icons/Tag'
 
 export default {
 	components: {
-		Multiselect,
+		NcMultiselect,
 		MultiselectOption,
 		Tag,
 	},

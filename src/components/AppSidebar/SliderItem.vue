@@ -49,21 +49,21 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			</div>
 		</div>
 		<div class="item__actions">
-			<Actions v-show="editing" class="actions__set">
-				<ActionButton @click="setValue()">
+			<NcActions v-show="editing" class="actions__set">
+				<NcActionButton @click="setValue()">
 					<template #icon>
 						<Check :size="20" />
 					</template>
 					{{ t('tasks', 'Set value') }}
-				</ActionButton>
-			</Actions><Actions v-show="editing" class="actions__clear">
-				<ActionButton @click="clearValue">
+				</NcActionButton>
+			</NcActions><NcActions v-show="editing" class="actions__clear">
+				<NcActionButton @click="clearValue">
 					<template #icon>
 						<Delete :size="20" />
 					</template>
 					{{ t('tasks', 'Delete value') }}
-				</ActionButton>
-			</Actions>
+				</NcActionButton>
+			</NcActions>
 		</div>
 	</div>
 </template>

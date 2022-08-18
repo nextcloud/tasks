@@ -25,45 +25,45 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<AppNavigationItem :title="sharee.displayName">
+	<NcAppNavigationItem :title="sharee.displayName">
 		<template #icon>
 			<AccountMultiple v-if="sharee.isGroup"
 				:size="18"
 				class="avatar" />
 			<div v-else-if="sharee.isCircle" class="avatar icon-circles" />
-			<Avatar v-else
+			<NcAvatar v-else
 				:user="sharee.id"
 				:display-name="sharee.displayName"
 				:disable-menu="true" />
 		</template>
 
 		<template #counter>
-			<ActionCheckbox :disabled="loading"
+			<NcActionCheckbox :disabled="loading"
 				:checked="writeable"
 				@update:checked="editSharee">
 				{{ t('tasks', 'Can edit') }}
-			</ActionCheckbox>
+			</NcActionCheckbox>
 		</template>
 
 		<template #actions>
-			<ActionButton :disabled="loading"
+			<NcActionButton :disabled="loading"
 				@click.prevent.stop="deleteSharee">
 				<template #icon>
 					<Delete :size="20" />
 				</template>
 				{{ t('tasks', 'Unshare with {displayName}', { displayName: sharee.displayName }) }}
-			</ActionButton>
+			</NcActionButton>
 		</template>
-	</AppNavigationItem>
+	</NcAppNavigationItem>
 </template>
 
 <script>
 import { showError } from '@nextcloud/dialogs'
 import { translate as t } from '@nextcloud/l10n'
-import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
-import ActionCheckbox from '@nextcloud/vue/dist/Components/ActionCheckbox'
-import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
-import Avatar from '@nextcloud/vue/dist/Components/Avatar'
+import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton'
+import NcActionCheckbox from '@nextcloud/vue/dist/Components/NcActionCheckbox'
+import NcAppNavigationItem from '@nextcloud/vue/dist/Components/NcAppNavigationItem'
+import NcAvatar from '@nextcloud/vue/dist/Components/NcAvatar'
 
 import AccountMultiple from 'vue-material-design-icons/AccountMultiple'
 import Delete from 'vue-material-design-icons/Delete'
@@ -71,10 +71,10 @@ import Delete from 'vue-material-design-icons/Delete'
 export default {
 	name: 'CalendarSharee',
 	components: {
-		ActionButton,
-		ActionCheckbox,
-		AppNavigationItem,
-		Avatar,
+		NcActionButton,
+		NcActionCheckbox,
+		NcAppNavigationItem,
+		NcAvatar,
 		AccountMultiple,
 		Delete,
 	},
