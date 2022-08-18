@@ -20,9 +20,9 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<AppNavigation>
+	<NcAppNavigation>
 		<template #list>
-			<AppNavigationItem v-for="collection in collections"
+			<NcAppNavigationItem v-for="collection in collections"
 				v-show="!hideCollection(collection)"
 				:id="'collection_' + collection.id"
 				:key="collection.id"
@@ -42,11 +42,11 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						:size="20" />
 				</template>
 				<template #counter>
-					<AppNavigationCounter v-show="collectionCount(collection.id)">
+					<NcAppNavigationCounter v-show="collectionCount(collection.id)">
 						{{ counterFormatter(collectionCount(collection.id)) }}
-					</AppNavigationCounter>
+					</NcAppNavigationCounter>
 				</template>
-			</AppNavigationItem>
+			</NcAppNavigationItem>
 			<draggable class="draggable-container"
 				:set-data="setData"
 				v-bind="{swapThreshold: 0.30, delay: 500, delayOnTouchOnly: true, touchStartThreshold: 3}"
@@ -56,7 +56,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:calendar="calendar"
 					@click.native="setInitialRoute(`/calendars/${calendar.id}`)" />
 			</draggable>
-			<AppNavigationItem v-click-outside="cancelCreate"
+			<NcAppNavigationItem v-click-outside="cancelCreate"
 				:title="t('tasks', 'Add List…')"
 				:class="{'collection--edit': creating}"
 				class="collection reactive"
@@ -92,13 +92,13 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						<Colorpicker :selected-color="selectedColor" @color-selected="setColor(...arguments)" />
 					</div>
 				</li>
-			</AppNavigationItem>
+			</NcAppNavigationItem>
 			<Trashbin v-if="hasTrashBin" />
 		</template>
 		<template #footer>
 			<AppNavigationSettings />
 		</template>
-	</AppNavigation>
+	</NcAppNavigation>
 </template>
 
 <script>
@@ -108,9 +108,9 @@ import AppNavigationSettings from '../components/AppNavigation/AppNavigationSett
 import Trashbin from '../components/AppNavigation/Trashbin.vue'
 
 import { translate as t } from '@nextcloud/l10n'
-import AppNavigation from '@nextcloud/vue/dist/Components/AppNavigation'
-import AppNavigationCounter from '@nextcloud/vue/dist/Components/AppNavigationCounter'
-import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
+import NcAppNavigation from '@nextcloud/vue/dist/Components/NcAppNavigation'
+import NcAppNavigationCounter from '@nextcloud/vue/dist/Components/NcAppNavigationCounter'
+import NcAppNavigationItem from '@nextcloud/vue/dist/Components/NcAppNavigationItem'
 import Tooltip from '@nextcloud/vue/dist/Directives/Tooltip'
 
 import CalendarToday from 'vue-material-design-icons/CalendarToday'
@@ -130,9 +130,9 @@ export default {
 		ListItemCalendar,
 		Colorpicker,
 		Trashbin,
-		AppNavigation,
-		AppNavigationItem,
-		AppNavigationCounter,
+		NcAppNavigation,
+		NcAppNavigationItem,
+		NcAppNavigationCounter,
 		AppNavigationSettings,
 		draggable,
 		CalendarToday,

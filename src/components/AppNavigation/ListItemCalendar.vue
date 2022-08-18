@@ -20,7 +20,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<AppNavigationItem :id="'list_' + calendar.id"
+	<NcAppNavigationItem :id="'list_' + calendar.id"
 		v-click-outside="{ handler: resetView, middleware: clickOutsideMiddleware }"
 		:calendar-id="calendar.id"
 		:to="{ name: 'calendars', params: { calendarId: calendar.id } }"
@@ -32,29 +32,29 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		@dragenter.native="dragEnter"
 		@dragleave.native="dragLeave">
 		<template #icon>
-			<AppNavigationIconBullet :color="calendar.color" />
+			<NcAppNavigationIconBullet :color="calendar.color" />
 		</template>
 
 		<template v-if="!deleteTimeout" #counter>
-			<Actions v-if="calendar.canBeShared"
+			<NcActions v-if="calendar.canBeShared"
 				:class="{shared: hasShares}"
 				class="sharing">
-				<ActionButton @click="toggleShare">
+				<NcActionButton @click="toggleShare">
 					<template #icon>
 						<ShareVariant :size="20" />
 					</template>
 					{{ sharedWithTooltip }}
-				</ActionButton>
-			</Actions>
-			<Avatar v-if="calendar.isSharedWithMe && loadedOwnerPrincipal" :user="ownerUserId" :display-name="ownerDisplayname" />
+				</NcActionButton>
+			</NcActions>
+			<NcAvatar v-if="calendar.isSharedWithMe && loadedOwnerPrincipal" :user="ownerUserId" :display-name="ownerDisplayname" />
 			<div v-if="calendar.isSharedWithMe && !loadedOwnerPrincipal" class="icon icon-loading" />
-			<AppNavigationCounter v-if="calendarCount">
+			<NcAppNavigationCounter v-if="calendarCount">
 				{{ counterFormatter(calendarCount) }}
-			</AppNavigationCounter>
+			</NcAppNavigationCounter>
 		</template>
 
 		<template v-if="!deleteTimeout" #actions>
-			<ActionButton v-if="!calendar.readOnly"
+			<NcActionButton v-if="!calendar.readOnly"
 				class="edit-calendar"
 				:close-after-click="true"
 				@click="editCalendar">
@@ -62,8 +62,8 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<Pencil :size="20" />
 				</template>
 				{{ t('tasks', 'Edit') }}
-			</ActionButton>
-			<ActionButton :close-after-click="true"
+			</NcActionButton>
+			<NcActionButton :close-after-click="true"
 				@click="copyCalDAVUrl($event, calendar)">
 				<template #icon>
 					<LinkVariant :size="20" />
@@ -73,15 +73,15 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					: copySuccess
 						? t('tasks', 'Copied')
 						: t('tasks', 'Cannot copy') }}
-			</ActionButton>
-			<ActionLink :close-after-click="true"
+			</NcActionButton>
+			<NcActionLink :close-after-click="true"
 				:href="exportUrl">
 				<template #icon>
 					<Download :size="20" />
 				</template>
 				{{ t('tasks', 'Export') }}
-			</ActionLink>
-			<ActionButton v-if="!calendar.readOnly || calendar.isSharedWithMe"
+			</NcActionLink>
+			<NcActionButton v-if="!calendar.readOnly || calendar.isSharedWithMe"
 				v-tooltip="{
 					placement: 'left',
 					boundariesElement: 'body',
@@ -95,16 +95,16 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<Close :size="20" />
 				</template>
 				{{ !calendar.isSharedWithMe ? t('tasks', 'Delete') : t('tasks', 'Unshare') }}
-			</ActionButton>
+			</NcActionButton>
 		</template>
 
 		<template v-else #actions>
-			<ActionButton @click.prevent.stop="cancelDelete">
+			<NcActionButton @click.prevent.stop="cancelDelete">
 				<template #icon>
 					<Undo :size="20" />
 				</template>
 				{{ undoDeleteMessage }}
-			</ActionButton>
+			</NcActionButton>
 		</template>
 
 		<li>
@@ -134,7 +134,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<Colorpicker :selected-color="selectedColor" @color-selected="setColor(...arguments)" />
 			</div>
 		</li>
-	</AppNavigationItem>
+	</NcAppNavigationItem>
 </template>
 
 <script>
@@ -144,13 +144,13 @@ import ShareCalendar from './CalendarShare.vue'
 import { showSuccess, showError } from '@nextcloud/dialogs'
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'
 import { generateRemoteUrl } from '@nextcloud/router'
-import Avatar from '@nextcloud/vue/dist/Components/Avatar'
-import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
-import AppNavigationCounter from '@nextcloud/vue/dist/Components/AppNavigationCounter'
-import AppNavigationIconBullet from '@nextcloud/vue/dist/Components/AppNavigationIconBullet'
-import Actions from '@nextcloud/vue/dist/Components/Actions'
-import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
-import ActionLink from '@nextcloud/vue/dist/Components/ActionLink'
+import NcAvatar from '@nextcloud/vue/dist/Components/NcAvatar'
+import NcAppNavigationItem from '@nextcloud/vue/dist/Components/NcAppNavigationItem'
+import NcAppNavigationCounter from '@nextcloud/vue/dist/Components/NcAppNavigationCounter'
+import NcAppNavigationIconBullet from '@nextcloud/vue/dist/Components/NcAppNavigationIconBullet'
+import NcActions from '@nextcloud/vue/dist/Components/NcActions'
+import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton'
+import NcActionLink from '@nextcloud/vue/dist/Components/NcActionLink'
 import Tooltip from '@nextcloud/vue/dist/Directives/Tooltip'
 
 import Close from 'vue-material-design-icons/Close'
@@ -170,13 +170,13 @@ export default {
 	components: {
 		Colorpicker,
 		ShareCalendar,
-		Avatar,
-		AppNavigationItem,
-		AppNavigationCounter,
-		AppNavigationIconBullet,
-		Actions,
-		ActionButton,
-		ActionLink,
+		NcAvatar,
+		NcAppNavigationItem,
+		NcAppNavigationCounter,
+		NcAppNavigationIconBullet,
+		NcActions,
+		NcActionButton,
+		NcActionLink,
 		Close,
 		Delete,
 		Download,

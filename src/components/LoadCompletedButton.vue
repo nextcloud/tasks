@@ -21,19 +21,19 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div v-show="!loadedCompleted" class="loadmore reactive">
-		<ButtonVue type="tertiary"
+		<NcButton type="tertiary"
 			@click="loadCompletedTasks">
 			<template #icon>
 				<CloudDownload :size="20" />
 			</template>
 			{{ t('tasks', 'Load all completed tasks.') }}
-		</ButtonVue>
+		</NcButton>
 	</div>
 </template>
 
 <script>
 import { translate as t } from '@nextcloud/l10n'
-import ButtonVue from '@nextcloud/vue/dist/Components/ButtonVue'
+import NcButton from '@nextcloud/vue/dist/Components/NcButton'
 
 import CloudDownload from 'vue-material-design-icons/CloudDownload'
 
@@ -41,7 +41,7 @@ import { mapActions } from 'vuex'
 
 export default {
 	components: {
-		ButtonVue,
+		NcButton,
 		CloudDownload,
 	},
 	props: {

@@ -21,26 +21,26 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<AppNavigationItem :title="t('tasks', 'Trash bin')"
+	<NcAppNavigationItem :title="t('tasks', 'Trash bin')"
 		:pinned="true"
 		@click.prevent="onShow">
 		<template #icon>
 			<Delete :size="20" />
 		</template>
 		<template #extra>
-			<Modal v-if="showModal"
+			<NcModal v-if="showModal"
 				size="large"
 				@close="showModal = false">
 				<div class="modal__content">
-					<EmptyContent v-if="loading" icon="icon-loading">
+					<NcEmptyContent v-if="loading" icon="icon-loading">
 						{{ t('tasks', 'Loading deleted calendars, tasks and events.') }}
-					</EmptyContent>
-					<EmptyContent v-else-if="!items.length">
+					</NcEmptyContent>
+					<NcEmptyContent v-else-if="!items.length">
 						<template #icon>
 							<Delete :size="64" />
 						</template>
 						{{ t('tasks', 'You do not have any deleted calendars, tasks or events.') }}
-					</EmptyContent>
+					</NcEmptyContent>
 					<template v-else>
 						<h2>{{ t('tasks', 'Trash bin') }}</h2>
 						<div class="table">
@@ -70,20 +70,20 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 									<Moment class="timestamp" :timestamp="item.deletedAt" />
 								</div>
 								<div :key="`${item.url}action`" class="table__body">
-									<ButtonVue @click="restore(item)">
+									<NcButton @click="restore(item)">
 										<template #icon>
 											<Undo :size="20" />
 										</template>
 										{{ t('tasks','Restore') }}
-									</ButtonVue>
-									<Actions :force-menu="true">
-										<ActionButton @click="onDeletePermanently(item)">
+									</NcButton>
+									<NcActions :force-menu="true">
+										<NcActionButton @click="onDeletePermanently(item)">
 											<template #icon>
 												<Delete :size="20" />
 											</template>
 											{{ t('tasks','Delete permanently') }}
-										</ActionButton>
-									</Actions>
+										</NcActionButton>
+									</NcActions>
 								</div>
 							</template>
 						</div>
@@ -91,18 +91,18 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 							<p v-if="retentionDuration">
 								{{ n('tasks', 'Elements in the trash bin are deleted after {numDays} day', 'Elements in the trash bin are deleted after {numDays} days', retentionDuration, { numDays: retentionDuration }) }}
 							</p>
-							<ButtonVue type="primary" @click="onEmptyTrashBin()">
+							<NcButton type="primary" @click="onEmptyTrashBin()">
 								<template #icon>
 									<DeleteForever :size="20" />
 								</template>
 								{{ t('tasks','Empty trash bin') }}
-							</ButtonVue>
+							</NcButton>
 						</div>
 					</template>
 				</div>
-			</Modal>
+			</NcModal>
 		</template>
-	</AppNavigationItem>
+	</NcAppNavigationItem>
 </template>
 
 <script>
@@ -113,12 +113,12 @@ import logger from '../../utils/logger.js'
 import { showError } from '@nextcloud/dialogs'
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
-import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
-import Actions from '@nextcloud/vue/dist/Components/Actions'
-import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
-import ButtonVue from '@nextcloud/vue/dist/Components/ButtonVue'
-import EmptyContent from '@nextcloud/vue/dist/Components/EmptyContent'
-import Modal from '@nextcloud/vue/dist/Components/Modal'
+import NcAppNavigationItem from '@nextcloud/vue/dist/Components/NcAppNavigationItem'
+import NcActions from '@nextcloud/vue/dist/Components/NcActions'
+import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton'
+import NcButton from '@nextcloud/vue/dist/Components/NcButton'
+import NcEmptyContent from '@nextcloud/vue/dist/Components/NcEmptyContent'
+import NcModal from '@nextcloud/vue/dist/Components/NcModal'
 
 import Delete from 'vue-material-design-icons/Delete'
 import DeleteForever from 'vue-material-design-icons/DeleteForever'
@@ -129,14 +129,14 @@ import { mapGetters } from 'vuex'
 export default {
 	name: 'Trashbin',
 	components: {
-		AppNavigationItem,
+		NcAppNavigationItem,
 		Delete,
-		EmptyContent,
-		Modal,
+		NcEmptyContent,
+		NcModal,
 		Moment,
-		Actions,
-		ActionButton,
-		ButtonVue,
+		NcActions,
+		NcActionButton,
+		NcButton,
 		DeleteForever,
 		Undo,
 	},

@@ -21,8 +21,8 @@
  */
 import Task from '../models/task.js'
 
-import Actions from '@nextcloud/vue/dist/Components/Actions'
-import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
+import NcActions from '@nextcloud/vue/dist/Components/NcActions'
+import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton'
 
 import Check from 'vue-material-design-icons/Check'
 import Delete from 'vue-material-design-icons/Delete'
@@ -31,8 +31,8 @@ import ClickOutside from 'v-click-outside'
 
 export default {
 	components: {
-		Actions,
-		ActionButton,
+		NcActions,
+		NcActionButton,
 		Check,
 		Delete,
 	},

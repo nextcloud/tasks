@@ -24,7 +24,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div class="property__item">
-		<Multiselect label="displayName"
+		<NcMultiselect label="displayName"
 			track-by="url"
 			:disabled="isDisabled"
 			:options="calendars"
@@ -43,7 +43,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:is-shared-with-me="false"
 					:display-name="t('tasks', 'No calendar matches the search.')" />
 			</template>
-		</Multiselect>
+		</NcMultiselect>
 	</div>
 </template>
 
@@ -51,12 +51,12 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 import CalendarPickerOption from './CalendarPickerOption.vue'
 
 import { translate as t } from '@nextcloud/l10n'
-import Multiselect from '@nextcloud/vue/dist/Components/Multiselect'
+import NcMultiselect from '@nextcloud/vue/dist/Components/NcMultiselect'
 
 export default {
 	components: {
 		CalendarPickerOption,
-		Multiselect,
+		NcMultiselect,
 	},
 	props: {
 		calendar: {
