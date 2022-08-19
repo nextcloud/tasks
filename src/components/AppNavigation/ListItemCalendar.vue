@@ -110,27 +110,22 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		<li>
 			<ShareCalendar v-if="shareOpen && !calendar.readOnly && !deleteTimeout" :calendar="calendar" />
 			<div v-if="!deleteTimeout" :class="{error: nameError}" class="app-navigation-entry-edit">
-				<form>
-					<input v-model="newCalendarName"
-						v-tooltip="{
-							content: tooltipMessage,
-							show: showTooltip('list_' + calendar.id),
-							trigger: 'manual'
-						}"
-						class="edit"
-						type="text"
-						@keyup="checkName($event, calendar, save)">
-					<input :title="t('tasks', 'Cancel')"
-						type="cancel"
-						value=""
-						class="action icon-close"
-						@click="resetView">
-					<input :title="t('tasks', 'Save')"
-						type="button"
-						value=""
-						class="action icon-checkmark"
-						@click="save(calendar)">
-				</form>
+				<NcTextField ref="editListInput"
+					v-tooltip="{
+						content: tooltipMessage,
+						shown: showTooltip('list_' + calendar.id),
+						trigger: 'manual'
+					}"
+					type="text"
+					:show-trailing-button="newCalendarName !== ''"
+					trailing-button-icon="arrowRight"
+					:value.sync="newCalendarName"
+					:error="nameError"
+					:placeholder="t('tasks', 'Save')"
+					@trailing-button-click="save(calendar)"
+					@keyup="checkName($event, calendar)">
+					<Pencil :size="16" />
+				</NcTextField>
 				<Colorpicker :selected-color="selectedColor" @color-selected="setColor(...arguments)" />
 			</div>
 		</li>
@@ -151,6 +146,7 @@ import NcAppNavigationIconBullet from '@nextcloud/vue/dist/Components/NcAppNavig
 import NcActions from '@nextcloud/vue/dist/Components/NcActions'
 import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton'
 import NcActionLink from '@nextcloud/vue/dist/Components/NcActionLink'
+import NcTextField from '@nextcloud/vue/dist/Components/NcTextField'
 import Tooltip from '@nextcloud/vue/dist/Directives/Tooltip'
 
 import Close from 'vue-material-design-icons/Close'
@@ -177,6 +173,7 @@ export default {
 		NcActions,
 		NcActionButton,
 		NcActionLink,
+		NcTextField,
 		Close,
 		Delete,
 		Download,
@@ -403,7 +400,7 @@ export default {
 			this.nameError = false
 			this.tooltipTarget = ''
 			this.$nextTick(
-				() => document.querySelector('#list_' + this.calendar.id + ' input.edit').focus()
+				() => this.$refs.editListInput.$refs.inputField.$refs.input.focus()
 			)
 		},
 
@@ -463,19 +460,18 @@ export default {
 			this.changeCalendar({ calendar: this.calendar, newName: this.newCalendarName, newColor: this.selectedColor })
 			this.editing = false
 		},
-		checkName(event, calendar, callback) {
-			const calendarId = calendar ? calendar.id : ''
-			const check = this.isNameAllowed(this.newCalendarName, calendarId)
+		checkName(event, calendar) {
+			const check = this.isNameAllowed(this.newCalendarName, calendar.id)
 			this.tooltipMessage = check.msg
 			if (!check.allowed) {
-				this.tooltipTarget = 'list_' + calendarId
+				this.tooltipTarget = 'list_' + calendar.id
 				this.nameError = true
 			} else {
 				this.tooltipTarget = ''
 				this.nameError = false
 			}
 			if (event.keyCode === 13) {
-				callback(calendar)
+				this.save(calendar)
 			}
 			if (event.keyCode === 27) {
 				event.preventDefault()
