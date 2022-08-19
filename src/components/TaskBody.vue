@@ -58,12 +58,10 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						</span>
 					</span>
 				</div>
-				<div v-if="task.complete > 0" class="percentbar">
-					<div :style="{ width: task.complete + '%', 'background-color': task.calendar.color }"
-						:class="{'completed': task.completed}"
-						:aria-label="t('tasks', '{complete} % completed', {complete: task.complete})"
-						class="percentbar__done" />
-				</div>
+				<NcProgressBar v-if="task.complete > 0"
+					:value="task.complete"
+					:aria-label="t('tasks', '{complete} % completed', {complete: task.complete})"
+					:style="{'--progress-bar-color': task.calendar.color }" />
 			</div>
 			<!-- Icons: sync-status, calendarname, date, note, subtask-show-completed, subtask-visibility, add-subtask, starred -->
 			<div class="task-body__icons">
@@ -175,6 +173,7 @@ import { translate as t, translatePlural as n } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
 import NcActions from '@nextcloud/vue/dist/Components/NcActions'
 import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton'
+import NcProgressBar from '@nextcloud/vue/dist/Components/NcProgressBar'
 import Linkify from '@nextcloud/vue/dist/Directives/Linkify'
 
 import Delete from 'vue-material-design-icons/Delete'
@@ -202,6 +201,7 @@ export default {
 		TaskDragContainer,
 		NcActions,
 		NcActionButton,
+		NcProgressBar,
 		Delete,
 		Eye,
 		Pin,
@@ -810,23 +810,18 @@ $breakpoint-mobile: 1024px;
 					}
 				}
 
-				.percentbar {
+				.progress-bar {
 					height: 3px;
 					position: absolute;
 					bottom: 3px;
-					left: 0;
-					right: 10px;
 					background-color: var(--color-background-darker);
-					border-radius: 2px;
 
-					&__done {
-						height: 3px;
-						border-radius: 2px 0 0 2px;
-						background-color: var(--color-primary);
-
-						&.completed {
-							border-radius: 2px;
-						}
+					// Override previous values
+					&::-moz-progress-bar {
+						background: var(--progress-bar-color) !important;
+					}
+					&::-webkit-progress-value {
+						background: var(--progress-bar-color) !important;
 					}
 				}
 			}
