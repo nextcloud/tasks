@@ -54,7 +54,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					</h3>
 				</div>
 				<div>
-					<progress :max="initialCompletedTasksCount" :value="progress" class="delete-completed__progress" />
+					<NcProgressBar :value="percentage" class="delete-completed__progress" />
 					<p class="delete-completed__tracker">
 						<span>{{ percentage }} %</span>
 						<span v-if="failed === 0">
@@ -179,6 +179,7 @@ export default {
 		padding-top: 20px;
 		max-width: 80%;
 		margin: 12px auto;
+		text-align: center;
 	}
 	&__button {
 		margin: 0 auto;
