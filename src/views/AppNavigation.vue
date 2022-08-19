@@ -42,9 +42,9 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						:size="20" />
 				</template>
 				<template #counter>
-					<NcAppNavigationCounter v-show="collectionCount(collection.id)">
+					<NcCounterBubble v-show="collectionCount(collection.id)">
 						{{ counterFormatter(collectionCount(collection.id)) }}
-					</NcAppNavigationCounter>
+					</NcCounterBubble>
 				</template>
 			</NcAppNavigationItem>
 			<draggable class="draggable-container"
@@ -109,8 +109,8 @@ import Trashbin from '../components/AppNavigation/Trashbin.vue'
 
 import { translate as t } from '@nextcloud/l10n'
 import NcAppNavigation from '@nextcloud/vue/dist/Components/NcAppNavigation'
-import NcAppNavigationCounter from '@nextcloud/vue/dist/Components/NcAppNavigationCounter'
 import NcAppNavigationItem from '@nextcloud/vue/dist/Components/NcAppNavigationItem'
+import NcCounterBubble from '@nextcloud/vue/dist/Components/NcCounterBubble'
 import Tooltip from '@nextcloud/vue/dist/Directives/Tooltip'
 
 import CalendarToday from 'vue-material-design-icons/CalendarToday'
@@ -132,7 +132,7 @@ export default {
 		Trashbin,
 		NcAppNavigation,
 		NcAppNavigationItem,
-		NcAppNavigationCounter,
+		NcCounterBubble,
 		AppNavigationSettings,
 		draggable,
 		CalendarToday,

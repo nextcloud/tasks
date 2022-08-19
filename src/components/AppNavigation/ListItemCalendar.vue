@@ -48,9 +48,9 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			</NcActions>
 			<NcAvatar v-if="calendar.isSharedWithMe && loadedOwnerPrincipal" :user="ownerUserId" :display-name="ownerDisplayname" />
 			<div v-if="calendar.isSharedWithMe && !loadedOwnerPrincipal" class="icon icon-loading" />
-			<NcAppNavigationCounter v-if="calendarCount">
+			<NcCounterBubble v-if="calendarCount">
 				{{ counterFormatter(calendarCount) }}
-			</NcAppNavigationCounter>
+			</NcCounterBubble>
 		</template>
 
 		<template v-if="!deleteTimeout" #actions>
@@ -146,7 +146,7 @@ import { translate as t, translatePlural as n } from '@nextcloud/l10n'
 import { generateRemoteUrl } from '@nextcloud/router'
 import NcAvatar from '@nextcloud/vue/dist/Components/NcAvatar'
 import NcAppNavigationItem from '@nextcloud/vue/dist/Components/NcAppNavigationItem'
-import NcAppNavigationCounter from '@nextcloud/vue/dist/Components/NcAppNavigationCounter'
+import NcCounterBubble from '@nextcloud/vue/dist/Components/NcCounterBubble'
 import NcAppNavigationIconBullet from '@nextcloud/vue/dist/Components/NcAppNavigationIconBullet'
 import NcActions from '@nextcloud/vue/dist/Components/NcActions'
 import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton'
@@ -172,7 +172,7 @@ export default {
 		ShareCalendar,
 		NcAvatar,
 		NcAppNavigationItem,
-		NcAppNavigationCounter,
+		NcCounterBubble,
 		NcAppNavigationIconBullet,
 		NcActions,
 		NcActionButton,
