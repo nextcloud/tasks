@@ -267,7 +267,7 @@ export default {
 					this.calendar.shares.length, {
 						num: this.calendar.shares.length,
 					})
-				: '' // disable the tooltip
+				: this.calendar.supportsEvents ? t('tasks', 'Share this calendar') : t('tasks', 'Share this list')
 		},
 		/**
 		 * Whether or not the information about the owner principal was loaded
