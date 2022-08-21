@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        php-versions: ['7.3', '7.4']
+        php-versions: ['8.0', '8.1']
   
     name: php${{ matrix.php-versions }}
     steps:
@@ -50,7 +50,7 @@ jobs:
       - name: Set up php
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.4
+          php-version: 8.0
           coverage: none
       - name: Install dependencies
         run: composer i
