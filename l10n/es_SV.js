@@ -18,7 +18,6 @@ OC.L10N.register(
     "Export" : "Exportar",
     "Delete" : "Borrar",
     "Unshare" : "Dejar de compartir",
-    "Cancel" : "Cancelar",
     "Save" : "Guardar",
     "An empty name is not allowed." : "No se permite un nombre vacío.",
     "Name" : "Nombre",
@@ -33,6 +32,7 @@ OC.L10N.register(
     "Alphabetically" : "Alfabéticamente",
     "Manually" : "Manualmente",
     "Task is completed" : "La tarea ha sido completada",
+    "Cancel" : "Cancelar",
     "Close" : "Cerrar",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n Tarea Completada","%n Tareas Completadas","%n Tareas Completadas"],
     "Tomorrow" : "Mañana",
@@ -50,4 +50,4 @@ OC.L10N.register(
     "Set start date" : "Establecer fecha de inicio",
     "Set due date" : "Establecer fecha de vencimiento"
 },
-"nplurals=2; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");
+"nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");

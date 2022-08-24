@@ -8,10 +8,10 @@ OC.L10N.register(
     "Export" : "ರಫ್ತು",
     "Delete" : "﻿ಅಳಿಸಿ",
     "Unshare" : "ಹಂಚಿಕೆಯನ್ನು ಹಿಂತೆಗೆ",
-    "Cancel" : "﻿ರದ್ದು",
     "Save" : "﻿ಉಳಿಸಿ",
     "Name" : "﻿ಹೆಸರು",
     "Restore" : "ಮರುಸ್ಥಾಪಿಸು",
+    "Cancel" : "﻿ರದ್ದು",
     "Close" : "ಮುಚ್ಚು",
     "Notes" : "Notes"
 },
