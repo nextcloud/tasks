@@ -17,7 +17,6 @@ OC.L10N.register(
     "Automatic" : "Automatiškai",
     "Share with users or groups" : "Bendrinti su naudotojais ar grupėmis",
     "No users or groups" : "Nėra jokių naudotojų ar grupių",
-    "Can edit" : "Galima redaguoti",
     "Unshare with {displayName}" : "Nustoti bendrinti su {displayName}",
     "Unable to delete the share." : "Nepavyko ištrinti viešinio.",
     "Unable to change permissions." : "Nepavyko pakeisti leidimų.",
