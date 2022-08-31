@@ -57,7 +57,7 @@ OC.L10N.register(
     "Delete permanently" : "Endgültig löschen",
     "Empty trash bin" : "Papierkorb leeren",
     "Untitled task" : "Aufgabe ohne Namen",
-    "Untitled event" : "Termin ohne Namen",
+    "Untitled event" : "Unbenannter Termin",
     "Untitled journal" : "Journal ohne Namen",
     "Untitled item" : "Eintrag ohne Namen",
     "Unknown calendar" : "Unbekannter Kalender",
