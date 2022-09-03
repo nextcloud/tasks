@@ -160,7 +160,7 @@ import Undo from 'vue-material-design-icons/Undo'
 import ClickOutside from 'v-click-outside'
 import { mapGetters, mapActions } from 'vuex'
 
-const CD_DURATION = 7
+const CD_DURATION = 700
 
 export default {
 	components: {
@@ -547,7 +547,7 @@ $color-error: #e9322d;
 		margin: -1px;
 	}
 
-	> div:not(.active) > .app-navigation-entry__utils .action-item:not(.shared) {
+	> div:not(.active) > .app-navigation-entry__utils .action-item.sharing:not(.shared) {
 		display: none;
 	}
 
@@ -569,6 +569,10 @@ $color-error: #e9322d;
 
 		.app-navigation-entry__icon-bullet {
 			opacity: .3;
+		}
+
+		.action-item.app-navigation-entry__actions {
+			display: inline-block;
 		}
 	}
 
