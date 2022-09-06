@@ -160,7 +160,7 @@ import Undo from 'vue-material-design-icons/Undo'
 import ClickOutside from 'v-click-outside'
 import { mapGetters, mapActions } from 'vuex'
 
-const CD_DURATION = 700
+const CD_DURATION = 7
 
 export default {
 	components: {
