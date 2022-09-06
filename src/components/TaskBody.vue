@@ -628,8 +628,8 @@ $breakpoint-mobile: 1024px;
 // Show round corners for first root task
 .grouped-tasks > ol > .task-item {
 	&:first-child > .task-item__body {
-		border-top-left-radius: var(--border-radius);
-		border-top-right-radius: var(--border-radius);
+		border-top-left-radius: var(--border-radius-large);
+		border-top-right-radius: var(--border-radius-large);
 		border-top: none;
 	}
 
@@ -699,13 +699,13 @@ $breakpoint-mobile: 1024px;
 
 	// Show round corners if a task is the last in the (sub-)list
 	&:last-child .task-item__body {
-		border-bottom-left-radius: var(--border-radius);
-		border-bottom-right-radius: var(--border-radius);
+		border-bottom-left-radius: var(--border-radius-large);
+		border-bottom-right-radius: var(--border-radius-large);
 	}
 
 	&:not(.task-item--subtasks-visible).task-item--input input {
-		border-bottom-left-radius: var(--border-radius);
-		border-bottom-right-radius: var(--border-radius);
+		border-bottom-left-radius: var(--border-radius-large);
+		border-bottom-right-radius: var(--border-radius-large);
 	}
 
 	// Don't show round corners if any of the ancestors is not the last in the (sub-)list
@@ -724,12 +724,12 @@ $breakpoint-mobile: 1024px;
 	// the next task in the list
 	&.task-item--input-visible {
 		& > .task-item__body {
-			border-bottom-left-radius: var(--border-radius);
+			border-bottom-left-radius: var(--border-radius-large);
 			border-bottom-right-radius: 0;
 		}
 
 		& + .task-item > .task-item__body {
-			border-top-left-radius: var(--border-radius);
+			border-top-left-radius: var(--border-radius-large);
 		}
 	}
 
