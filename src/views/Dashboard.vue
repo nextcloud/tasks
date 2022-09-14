@@ -23,32 +23,45 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 -->
 <template>
 	<div>
-		<DashboardWidget id="tasks_panel"
+		<NcDashboardWidget id="tasks_panel"
 			:items="filteredTasks.slice(0, hasTaskToday ? 6 : 4)"
-			empty-content-icon="icon-tasks"
 			:empty-content-message="t('tasks', 'No upcoming tasks')"
 			:show-more-text="t('tasks', 'upcoming tasks')"
 			:loading="loading"
 			:show-items-and-empty-content="!hasTaskToday"
 			:half-empty-content-message="t('tasks', 'No tasks today')">
 			<template #default="{ item }">
-				<DashboardWidgetItem :main-text="item.summary"
+				<NcDashboardWidgetItem :main-text="item.summary"
 					:sub-text="formatSubtext(item)"
-					:target-url="getTasksAppUrl(item)"
-					:item-menu="itemMenu"
-					@markAsDone="onMarkAsDone(item)">
+					:target-url="getTasksAppUrl(item)">
 					<template #avatar>
 						<div class="calendar-dot"
 							:style="{'background-color': item.calendar.color}"
 							:title="item.calendar.displayName" />
 					</template>
-				</DashboardWidgetItem>
+					<template #actions>
+						<NcActionButton v-if="!item.calendar.readOnly && !(item.calendar.isSharedWithMe && item.class !== 'PUBLIC')"
+							:close-after-click="true"
+							@click="onMarkAsDone(item)">
+							<template #icon>
+								<Check :size="20" decorative />
+							</template>
+							{{ t('tasks', 'Mark as done') }}
+						</NcActionButton>
+					</template>
+				</NcDashboardWidgetItem>
 			</template>
-		</DashboardWidget>
-		<div class="center-button">
-			<button @click="toggleAddTaskModel">
+			<template #emptyContentIcon>
+				<TaskIcon />
+			</template>
+		</NcDashboardWidget>
+		<div v-if="!loading" class="center-button">
+			<NcButton @click="toggleAddTaskModel">
+				<template #icon>
+					<Plus :size="20" decorative />
+				</template>
 				{{ t('tasks', 'Create a new task') }}
-			</button>
+			</NcButton>
 			<TaskCreateDialog v-if="showAddTaskModal" @close="toggleAddTaskModel" />
 		</div>
 	</div>
@@ -56,21 +69,33 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import TaskCreateDialog from '../components/TaskCreateDialog.vue'
+import TaskIcon from '../components/TaskIcon.vue'
 import client from '../services/cdav.js'
 import { sort, isTaskInList } from '../store/storeHelper.js'
 
 import { translate as t } from '@nextcloud/l10n'
 import { generateUrl } from '@nextcloud/router'
-import { DashboardWidget, DashboardWidgetItem } from '@nextcloud/vue-dashboard'
+import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton'
+import NcButton from '@nextcloud/vue/dist/Components/NcButton'
+import NcDashboardWidget from '@nextcloud/vue/dist/Components/NcDashboardWidget'
+import NcDashboardWidgetItem from '@nextcloud/vue/dist/Components/NcDashboardWidgetItem'
+
+import Check from 'vue-material-design-icons/Check'
+import Plus from 'vue-material-design-icons/Plus'
 
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
 	name: 'Dashboard',
 	components: {
-		DashboardWidget,
-		DashboardWidgetItem,
+		NcActionButton,
+		NcButton,
+		Check,
+		NcDashboardWidget,
+		NcDashboardWidgetItem,
 		TaskCreateDialog,
+		Plus,
+		TaskIcon,
 	},
 	data() {
 		return {
@@ -208,7 +233,8 @@ export default {
 }
 
 .center-button {
-	text-align: center;
+	display: flex;
+	justify-content: center;
 	margin-top: 10px;
 }
 </style>

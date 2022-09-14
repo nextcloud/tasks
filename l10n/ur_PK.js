@@ -9,11 +9,11 @@ OC.L10N.register(
     "Edit" : "تدوین کریں",
     "Delete" : "حذف کریں",
     "Unshare" : "شئیرنگ ختم کریں",
-    "Cancel" : "منسوخ کریں",
     "Save" : "حفظ",
     "Name" : "اسم",
     "Deleted" : "حذف شدہ ",
     "Restore" : "بحال",
+    "Cancel" : "منسوخ کریں",
     "Close" : "بند ",
     "Notes" : "Notes",
     "Repeat" : "دہرایں"

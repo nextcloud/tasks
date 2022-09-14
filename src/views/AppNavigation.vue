@@ -20,9 +20,9 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<AppNavigation>
+	<NcAppNavigation>
 		<template #list>
-			<AppNavigationItem v-for="collection in collections"
+			<NcAppNavigationItem v-for="collection in collections"
 				v-show="!hideCollection(collection)"
 				:id="'collection_' + collection.id"
 				:key="collection.id"
@@ -42,11 +42,11 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						:size="20" />
 				</template>
 				<template #counter>
-					<AppNavigationCounter v-show="collectionCount(collection.id)">
+					<NcCounterBubble v-show="collectionCount(collection.id)">
 						{{ counterFormatter(collectionCount(collection.id)) }}
-					</AppNavigationCounter>
+					</NcCounterBubble>
 				</template>
-			</AppNavigationItem>
+			</NcAppNavigationItem>
 			<draggable class="draggable-container"
 				:set-data="setData"
 				v-bind="{swapThreshold: 0.30, delay: 500, delayOnTouchOnly: true, touchStartThreshold: 3}"
@@ -56,7 +56,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:calendar="calendar"
 					@click.native="setInitialRoute(`/calendars/${calendar.id}`)" />
 			</draggable>
-			<AppNavigationItem v-click-outside="cancelCreate"
+			<NcAppNavigationItem v-click-outside="() => {creating = false}"
 				:title="t('tasks', 'Add List…')"
 				:class="{'collection--edit': creating}"
 				class="collection reactive"
@@ -65,40 +65,33 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<Plus :size="20" />
 				</template>
 				<li>
-					<div :class="{error: nameError}" class="app-navigation-entry-edit">
-						<form>
-							<input id="newListInput"
-								v-model="newCalendarName"
-								v-tooltip="{
-									content: tooltipMessage,
-									show: showTooltip('list_'),
-									trigger: 'manual'
-								}"
-								:placeholder="t('tasks', 'New List')"
-								class="edit"
-								type="text"
-								@keyup="checkName($event, null, create)">
-							<input :title="t('tasks', 'Cancel')"
-								type="cancel"
-								value=""
-								class="action icon-close"
-								@click="cancelCreate">
-							<input :title="t('tasks', 'Save')"
-								type="button"
-								value=""
-								class="action icon-checkmark"
-								@click="create($event)">
-						</form>
+					<div class="app-navigation-entry-edit">
+						<NcTextField ref="newListInput"
+							v-tooltip="{
+								content: tooltipMessage,
+								shown: showTooltip('list_new'),
+								trigger: 'manual'
+							}"
+							type="text"
+							:show-trailing-button="newCalendarName !== ''"
+							trailing-button-icon="arrowRight"
+							:value.sync="newCalendarName"
+							:error="nameError"
+							:placeholder="t('tasks', 'New List')"
+							@trailing-button-click="create()"
+							@keyup="checkName($event)">
+							<Plus :size="16" />
+						</NcTextField>
 						<Colorpicker :selected-color="selectedColor" @color-selected="setColor(...arguments)" />
 					</div>
 				</li>
-			</AppNavigationItem>
+			</NcAppNavigationItem>
 			<Trashbin v-if="hasTrashBin" />
 		</template>
 		<template #footer>
 			<AppNavigationSettings />
 		</template>
-	</AppNavigation>
+	</NcAppNavigation>
 </template>
 
 <script>
@@ -108,9 +101,10 @@ import AppNavigationSettings from '../components/AppNavigation/AppNavigationSett
 import Trashbin from '../components/AppNavigation/Trashbin.vue'
 
 import { translate as t } from '@nextcloud/l10n'
-import AppNavigation from '@nextcloud/vue/dist/Components/AppNavigation'
-import AppNavigationCounter from '@nextcloud/vue/dist/Components/AppNavigationCounter'
-import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
+import NcAppNavigation from '@nextcloud/vue/dist/Components/NcAppNavigation'
+import NcAppNavigationItem from '@nextcloud/vue/dist/Components/NcAppNavigationItem'
+import NcCounterBubble from '@nextcloud/vue/dist/Components/NcCounterBubble'
+import NcTextField from '@nextcloud/vue/dist/Components/NcTextField'
 import Tooltip from '@nextcloud/vue/dist/Directives/Tooltip'
 
 import CalendarToday from 'vue-material-design-icons/CalendarToday'
@@ -130,9 +124,10 @@ export default {
 		ListItemCalendar,
 		Colorpicker,
 		Trashbin,
-		AppNavigation,
-		AppNavigationItem,
-		AppNavigationCounter,
+		NcAppNavigation,
+		NcAppNavigationItem,
+		NcCounterBubble,
+		NcTextField,
 		AppNavigationSettings,
 		draggable,
 		CalendarToday,
@@ -388,33 +383,29 @@ export default {
 			this.newCalendarName = ''
 			this.creating = true
 			this.$nextTick(
-				() => document.getElementById('newListInput').focus()
+				() => this.$refs.newListInput.$refs.inputField.$refs.input.focus()
 			)
 			e.stopPropagation()
 		},
-		cancelCreate() {
-			this.creating = false
-		},
 		create() {
-			if (!this.isNameAllowed(this.newCalendarName, 'new').allowed) {
+			if (!this.isNameAllowed(this.newCalendarName).allowed) {
 				return
 			}
 			this.appendCalendar({ displayName: this.newCalendarName, color: this.selectedColor })
 			this.creating = false
 		},
-		checkName(event, calendar, callback) {
-			const calendarId = calendar ? calendar.id : ''
-			const check = this.isNameAllowed(this.newCalendarName, calendarId)
+		checkName(event) {
+			const check = this.isNameAllowed(this.newCalendarName)
 			this.tooltipMessage = check.msg
 			if (!check.allowed) {
-				this.tooltipTarget = 'list_' + calendarId
+				this.tooltipTarget = 'list_new'
 				this.nameError = true
 			} else {
 				this.tooltipTarget = ''
 				this.nameError = false
 			}
 			if (event.keyCode === 13) {
-				callback(calendar)
+				this.create()
 			}
 			if (event.keyCode === 27) {
 				event.preventDefault()
@@ -424,12 +415,12 @@ export default {
 				this.nameError = false
 			}
 		},
-		isNameAllowed(name, id) {
+		isNameAllowed(name) {
 			const check = {
 				allowed: false,
 				msg: '',
 			}
-			if (this.isCalendarNameUsed(name, id)) {
+			if (this.isCalendarNameUsed(name)) {
 				check.msg = t('tasks', 'The name "{calendar}" is already used.', { calendar: name }, undefined, { sanitize: false, escape: false })
 			} else if (!name) {
 				check.msg = t('tasks', 'An empty name is not allowed.')
@@ -470,7 +461,7 @@ $color-error: #e9322d;
 
 .collection::v-deep {
 	&.collection--edit {
-		.app-navigation-entry-link {
+		.app-navigation-entry {
 			display: none;
 		}
 
@@ -484,38 +475,6 @@ $color-error: #e9322d;
 		padding-left: 5px !important;
 		display: none;
 		position: relative;
-
-		&.error input.edit {
-			color: var(--color-error);
-			border-color: var(--color-error) !important;
-			box-shadow: 0 0 6px transparentize( $color-error, .7 );
-		}
-
-		form {
-			display: flex;
-
-			input {
-				margin-right: 0;
-
-				&[type='text'] {
-					flex-grow: 1;
-				}
-
-				&.action {
-					background-color: var(--color-background-dark);
-					width: 36px;
-					border-left: 0 none;
-					background-position: center;
-					cursor: pointer;
-
-					&:hover {
-						border-left: 1px solid;
-						margin-left: -1px;
-						width: 37px;
-					}
-				}
-			}
-		}
 	}
 }
 </style>

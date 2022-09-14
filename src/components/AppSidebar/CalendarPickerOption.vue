@@ -31,7 +31,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			{{ displayName }}
 		</span>
 
-		<Avatar v-if="isSharedWithMe"
+		<NcAvatar v-if="isSharedWithMe"
 			class="calendar-picker-option__avatar"
 			:disable-menu="true"
 			:disable-tooltip="true"
@@ -42,11 +42,11 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import Avatar from '@nextcloud/vue/dist/Components/Avatar'
+import NcAvatar from '@nextcloud/vue/dist/Components/NcAvatar'
 export default {
 	name: 'CalendarPickerOption',
 	components: {
-		Avatar,
+		NcAvatar,
 	},
 	props: {
 		color: {

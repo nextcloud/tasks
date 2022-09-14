@@ -21,10 +21,15 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div class="loadmore reactive">
-		<span v-show="completedTasksCount" @click="openModal">
+		<NcButton v-show="completedTasksCount"
+			type="tertiary"
+			@click="openModal">
+			<template #icon>
+				<Delete :size="20" />
+			</template>
 			{{ t('tasks', 'Delete all completed tasks.') }}
-		</span>
-		<Modal v-if="modalOpen"
+		</NcButton>
+		<NcModal v-if="modalOpen"
 			size="normal"
 			:out-transition="true"
 			@close="closeModal">
@@ -34,12 +39,14 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<h3>
 						{{ n('tasks', 'This will delete {taskCount} completed task and its subtasks from calendar "{calendar}".', 'This will delete {taskCount} completed tasks and their subtasks from calendar "{calendar}".', initialCompletedRootTasksCount, {taskCount: initialCompletedRootTasksCount, calendar: calendar.displayName}, { sanitize: false, escape: false }) }}
 					</h3>
-					<button class="delete-completed__button"
-						type="button"
+					<NcButton type="primary"
+						class="delete-completed__button"
 						@click="deleteCompletedTasks">
-						<Delete :size="20" />
+						<template #icon>
+							<Delete :size="20" />
+						</template>
 						{{ t('tasks', 'Delete completed tasks.') }}
-					</button>
+					</NcButton>
 				</div>
 				<div v-else>
 					<h3>
@@ -47,7 +54,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					</h3>
 				</div>
 				<div>
-					<progress :max="initialCompletedTasksCount" :value="progress" class="delete-completed__progress" />
+					<NcProgressBar :value="percentage" class="delete-completed__progress" />
 					<p class="delete-completed__tracker">
 						<span>{{ percentage }} %</span>
 						<span v-if="failed === 0">
@@ -59,13 +66,14 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					</p>
 				</div>
 			</div>
-		</Modal>
+		</NcModal>
 	</div>
 </template>
 
 <script>
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'
-import Modal from '@nextcloud/vue/dist/Components/Modal'
+import NcButton from '@nextcloud/vue/dist/Components/NcButton'
+import NcModal from '@nextcloud/vue/dist/Components/NcModal'
 import Tooltip from '@nextcloud/vue/dist/Directives/Tooltip'
 
 import Delete from 'vue-material-design-icons/Delete'
@@ -74,8 +82,9 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
 	components: {
+		NcButton,
 		Delete,
-		Modal,
+		NcModal,
 	},
 	directives: {
 		Tooltip,
@@ -153,45 +162,15 @@ export default {
 
 <style lang="scss" scoped>
 .loadmore {
-	text-align: center;
+	display: flex;
+	justify-content: center;
 	top: 20px;
 	position: relative;
-
-	span {
-		color: var(--color-text-lighter);
-		background-color: var(--color-main-background);
-		border-radius: var(--border-radius-pill);
-		padding: 10px;
-
-		&:hover {
-			cursor: pointer;
-			color: var(--color-main-text);
-		}
-	}
 }
 
 .delete-completed {
 	padding: 20px;
-	width: auto;
-	min-width: 30vw;
-	&__button {
-		position: relative;
-		display: inline-block;
-		padding: 10px;
-		padding-left: 34px;
-		background-position: 10px center;
-		text-align: left;
-		margin: 0;
-		width: unset !important;
-		height: unset !important;
-		background-size: unset !important;
-
-		.material-design-icon {
-			position: absolute;
-			top: 7px;
-			left: 8px;
-		}
-	}
+	padding-top: 40px;
 	&__header {
 		text-align: center;
 		margin-bottom: 20px;
@@ -200,10 +179,14 @@ export default {
 		padding-top: 20px;
 		max-width: 80%;
 		margin: 12px auto;
+		text-align: center;
+	}
+	&__button {
+		margin: 0 auto;
 	}
 	&__progress {
 		width: 80%;
-		margin: auto;
+		margin: 20px auto;
 	}
 	&__tracker {
 		display: flex;

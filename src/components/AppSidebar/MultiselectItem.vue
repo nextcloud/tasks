@@ -24,7 +24,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div class="property__item">
-		<Multiselect label="displayName"
+		<NcMultiselect label="displayName"
 			:disabled="isDisabled"
 			:options="options"
 			:value="value"
@@ -46,18 +46,18 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			<template #option="scope">
 				<MultiselectOption v-bind="scope.option" />
 			</template>
-		</Multiselect>
+		</NcMultiselect>
 	</div>
 </template>
 
 <script>
 import MultiselectOption from './MultiselectOption.vue'
 
-import Multiselect from '@nextcloud/vue/dist/Components/Multiselect'
+import NcMultiselect from '@nextcloud/vue/dist/Components/NcMultiselect'
 
 export default {
 	components: {
-		Multiselect,
+		NcMultiselect,
 		MultiselectOption,
 	},
 	props: {

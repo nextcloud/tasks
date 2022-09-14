@@ -8,12 +8,12 @@ OC.L10N.register(
     "Edit" : "Uredi",
     "Delete" : "Delete",
     "Unshare" : "Ukini deljenje",
-    "Cancel" : "Cancel",
     "Save" : "Save",
     "Name" : "Ime",
     "Deleted" : "Obrisano",
     "Delete permanently" : "Obriši zauvek",
     "Due date" : "Rok",
+    "Cancel" : "Cancel",
     "Close" : "Zatvori",
     "Details" : "Detalji",
     "Notes" : "Beleške"

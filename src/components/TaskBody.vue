@@ -58,12 +58,10 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						</span>
 					</span>
 				</div>
-				<div v-if="task.complete > 0" class="percentbar">
-					<div :style="{ width: task.complete + '%', 'background-color': task.calendar.color }"
-						:class="{'completed': task.completed}"
-						:aria-label="t('tasks', '{complete} % completed', {complete: task.complete})"
-						class="percentbar__done" />
-				</div>
+				<NcProgressBar v-if="task.complete > 0"
+					:value="task.complete"
+					:aria-label="t('tasks', '{complete} % completed', {complete: task.complete})"
+					:style="{'--progress-bar-color': task.calendar.color }" />
 			</div>
 			<!-- Icons: sync-status, calendarname, date, note, subtask-show-completed, subtask-visibility, add-subtask, starred -->
 			<div class="task-body__icons">
@@ -86,8 +84,8 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<span class="date__short" :class="{ 'date__short--completed': task.completed }">{{ dueDateShort }}</span>
 					<span class="date__long" :class="{ 'date__long--date-only': task.allDay && !task.completed, 'date__long--completed': task.completed }">{{ dueDateLong }}</span>
 				</div>
-				<Actions v-if="task.deleteCountdown === null" class="reactive no-nav" menu-align="right">
-					<ActionButton v-if="!task.calendar.readOnly"
+				<NcActions v-if="task.deleteCountdown === null" class="reactive no-nav" menu-align="right">
+					<NcActionButton v-if="!task.calendar.readOnly"
 						:close-after-click="true"
 						class="reactive no-nav open-input"
 						@click="openSubtaskInput">
@@ -95,50 +93,50 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 							<Plus :size="20" />
 						</template>
 						{{ t('tasks', 'Add subtask') }}
-					</ActionButton>
-					<ActionButton v-if="Object.values(task.subTasks).length"
+					</NcActionButton>
+					<NcActionButton v-if="Object.values(task.subTasks).length"
 						class="reactive no-nav"
 						@click="toggleSubtasksVisibility(task)">
 						<template #icon>
 							<SortVariant :size="20" />
 						</template>
 						{{ task.hideSubtasks ? t('tasks', 'Show subtasks') : t('tasks', 'Hide subtasks') }}
-					</ActionButton>
-					<ActionButton v-if="hasCompletedSubtasks"
+					</NcActionButton>
+					<NcActionButton v-if="hasCompletedSubtasks"
 						class="reactive no-nav"
 						@click="toggleCompletedSubtasksVisibility(task)">
 						<template #icon>
 							<Eye :size="20" />
 						</template>
 						{{ task.hideCompletedSubtasks ? t('tasks', 'Show closed subtasks') : t('tasks', 'Hide closed subtasks') }}
-					</ActionButton>
-					<ActionButton v-if="!readOnly"
+					</NcActionButton>
+					<NcActionButton v-if="!readOnly"
 						class="reactive no-nav"
 						@click="scheduleTaskDeletion(task)">
 						<template #icon>
 							<Delete :size="20" />
 						</template>
 						{{ t('tasks', 'Delete task') }}
-					</ActionButton>
-				</Actions>
-				<Actions v-if="task.deleteCountdown !== null">
-					<ActionButton class="reactive no-nav"
+					</NcActionButton>
+				</NcActions>
+				<NcActions v-if="task.deleteCountdown !== null">
+					<NcActionButton class="reactive no-nav"
 						@click.prevent.stop="clearTaskDeletion(task)">
 						<template #icon>
 							<Undo :size="20" />
 						</template>
 						{{ n('tasks', 'Deleting the task in {countdown} second', 'Deleting the task in {countdown} seconds', task.deleteCountdown, { countdown: task.deleteCountdown }) }}
-					</ActionButton>
-				</Actions>
-				<Actions :disabled="readOnly" :class="[{ priority: task.priority }, priorityClass]" class="reactive no-nav">
-					<ActionButton :disabled="readOnly"
+					</NcActionButton>
+				</NcActions>
+				<NcActions :disabled="readOnly" :class="[{ priority: task.priority }, priorityClass]" class="reactive no-nav">
+					<NcActionButton :disabled="readOnly"
 						@click="toggleStarred(task)">
 						<template #icon>
 							<Star :size="20" />
 						</template>
 						{{ t('tasks', 'Toggle starred') }}
-					</ActionButton>
-				</Actions>
+					</NcActionButton>
+				</NcActions>
 			</div>
 		</div>
 		<div class="task-item__subtasks">
@@ -173,8 +171,9 @@ import Task from '../models/task.js'
 import { emit } from '@nextcloud/event-bus'
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
-import Actions from '@nextcloud/vue/dist/Components/Actions'
-import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
+import NcActions from '@nextcloud/vue/dist/Components/NcActions'
+import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton'
+import NcProgressBar from '@nextcloud/vue/dist/Components/NcProgressBar'
 import Linkify from '@nextcloud/vue/dist/Directives/Linkify'
 
 import Delete from 'vue-material-design-icons/Delete'
@@ -200,8 +199,9 @@ export default {
 		TaskCheckbox,
 		TaskStatusDisplay,
 		TaskDragContainer,
-		Actions,
-		ActionButton,
+		NcActions,
+		NcActionButton,
+		NcProgressBar,
 		Delete,
 		Eye,
 		Pin,
@@ -628,8 +628,8 @@ $breakpoint-mobile: 1024px;
 // Show round corners for first root task
 .grouped-tasks > ol > .task-item {
 	&:first-child > .task-item__body {
-		border-top-left-radius: var(--border-radius);
-		border-top-right-radius: var(--border-radius);
+		border-top-left-radius: var(--border-radius-large);
+		border-top-right-radius: var(--border-radius-large);
 		border-top: none;
 	}
 
@@ -699,13 +699,13 @@ $breakpoint-mobile: 1024px;
 
 	// Show round corners if a task is the last in the (sub-)list
 	&:last-child .task-item__body {
-		border-bottom-left-radius: var(--border-radius);
-		border-bottom-right-radius: var(--border-radius);
+		border-bottom-left-radius: var(--border-radius-large);
+		border-bottom-right-radius: var(--border-radius-large);
 	}
 
 	&:not(.task-item--subtasks-visible).task-item--input input {
-		border-bottom-left-radius: var(--border-radius);
-		border-bottom-right-radius: var(--border-radius);
+		border-bottom-left-radius: var(--border-radius-large);
+		border-bottom-right-radius: var(--border-radius-large);
 	}
 
 	// Don't show round corners if any of the ancestors is not the last in the (sub-)list
@@ -724,12 +724,12 @@ $breakpoint-mobile: 1024px;
 	// the next task in the list
 	&.task-item--input-visible {
 		& > .task-item__body {
-			border-bottom-left-radius: var(--border-radius);
+			border-bottom-left-radius: var(--border-radius-large);
 			border-bottom-right-radius: 0;
 		}
 
 		& + .task-item > .task-item__body {
-			border-top-left-radius: var(--border-radius);
+			border-top-left-radius: var(--border-radius-large);
 		}
 	}
 
@@ -810,23 +810,18 @@ $breakpoint-mobile: 1024px;
 					}
 				}
 
-				.percentbar {
+				.progress-bar {
 					height: 3px;
 					position: absolute;
 					bottom: 3px;
-					left: 0;
-					right: 10px;
 					background-color: var(--color-background-darker);
-					border-radius: 2px;
 
-					&__done {
-						height: 3px;
-						border-radius: 2px 0 0 2px;
-						background-color: var(--color-primary);
-
-						&.completed {
-							border-radius: 2px;
-						}
+					// Override previous values
+					&::-moz-progress-bar {
+						background: var(--progress-bar-color) !important;
+					}
+					&::-webkit-progress-value {
+						background: var(--progress-bar-color) !important;
 					}
 				}
 			}

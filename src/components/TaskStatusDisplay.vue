@@ -20,8 +20,8 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<Actions v-if="status" :disabled="isDisabled">
-		<ActionButton :key="status.status" :disabled="isDisabled" @click="statusClicked">
+	<NcActions v-if="status" :disabled="isDisabled">
+		<NcActionButton :key="status.status" :disabled="isDisabled" @click="statusClicked">
 			<template #icon>
 				<AlertCircleOutline v-if="status.status==='error'" :size="20" class="status--error" />
 				<Check v-if="status.status==='success'" :size="20" class="status--success" />
@@ -29,13 +29,13 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<SyncAlert v-if="status.status==='conflict'" :size="20" class="status--conflict" />
 			</template>
 			{{ status.message }}
-		</ActionButton>
-	</Actions>
+		</NcActionButton>
+	</NcActions>
 </template>
 
 <script>
-import Actions from '@nextcloud/vue/dist/Components/Actions'
-import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
+import NcActions from '@nextcloud/vue/dist/Components/NcActions'
+import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton'
 
 import AlertCircleOutline from 'vue-material-design-icons/AlertCircleOutline'
 import Check from 'vue-material-design-icons/Check'
@@ -45,8 +45,8 @@ import SyncAlert from 'vue-material-design-icons/SyncAlert'
 export default {
 	name: 'TaskStatusDisplay',
 	components: {
-		Actions,
-		ActionButton,
+		NcActions,
+		NcActionButton,
 		AlertCircleOutline,
 		Check,
 		Loading,

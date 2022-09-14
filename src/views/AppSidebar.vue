@@ -20,7 +20,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<AppSidebar :title="title"
+	<NcAppSidebar :title="title"
 		:title-editable="editingTitle"
 		:linkify-title="true"
 		:subtitle="subtitle"
@@ -73,7 +73,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		</template>
 
 		<template v-if="!task || (task && task.deleteCountdown === null)" #secondary-actions>
-			<ActionButton v-if="!readOnly"
+			<NcActionButton v-if="!readOnly"
 				@click="togglePinned(task)">
 				<template v-if="task.pinned" #icon>
 					<PinOff :size="20" />
@@ -82,8 +82,8 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<Pin :size="20" />
 				</template>
 				{{ task.pinned ? t('tasks', 'Unpin') : t('tasks', 'Pin') }}
-			</ActionButton>
-			<ActionLink v-if="showInCalendar"
+			</NcActionButton>
+			<NcActionLink v-if="showInCalendar"
 				:href="calendarLink"
 				:close-after-click="true"
 				target="_blank">
@@ -91,38 +91,38 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<Calendar :size="20" />
 				</template>
 				{{ t('tasks', 'Show in Calendar') }}
-			</ActionLink>
-			<ActionButton v-if="!readOnly"
+			</NcActionLink>
+			<NcActionButton v-if="!readOnly"
 				:close-after-click="true"
 				@click="editTitle(true)">
 				<template #icon>
 					<Pencil :size="20" />
 				</template>
 				{{ t('tasks', 'Edit title') }}
-			</ActionButton>
-			<ActionLink :href="downloadURL"
+			</NcActionButton>
+			<NcActionLink :href="downloadURL"
 				:close-after-click="true">
 				<template #icon>
 					<Download :size="20" />
 				</template>
 				{{ t('tasks', 'Export') }}
-			</ActionLink>
-			<ActionButton v-if="!readOnly"
+			</NcActionLink>
+			<NcActionButton v-if="!readOnly"
 				@click="scheduleTaskDeletion(task)">
 				<template #icon>
 					<Delete :size="20" />
 				</template>
 				{{ t('tasks', 'Delete') }}
-			</ActionButton>
+			</NcActionButton>
 		</template>
 		<template v-else #secondary-actions>
-			<ActionButton class="reactive no-nav"
+			<NcActionButton class="reactive no-nav"
 				@click.prevent.stop="clearTaskDeletion(task)">
 				<template #icon>
 					<Undo :size="20" />
 				</template>
 				{{ n('tasks', 'Deleting the task in {countdown} second', 'Deleting the task in {countdown} seconds', task.deleteCountdown, { countdown: task.deleteCountdown }) }}
-			</ActionButton>
+			</NcActionButton>
 		</template>
 
 		<template #tertiary-actions>
@@ -133,7 +133,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				@toggle-completed="toggleCompleted(task)" />
 		</template>
 
-		<AppSidebarTab v-if="task"
+		<NcAppSidebarTab v-if="task"
 			id="app-sidebar-tab-details"
 			class="app-sidebar-tab"
 			:name="t('tasks', 'Details')"
@@ -191,12 +191,12 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					@add-tag="updateTag"
 					@set-tags="updateTags" />
 			</div>
-		</AppSidebarTab>
-		<EmptyContent v-else
+		</NcAppSidebarTab>
+		<NcEmptyContent v-else
 			:icon="taskStatusIcon">
 			{{ taskStatusLabel }}
-		</EmptyContent>
-		<AppSidebarTab v-if="task && (!readOnly || task.note)"
+		</NcEmptyContent>
+		<NcAppSidebarTab v-if="task && (!readOnly || task.note)"
 			id="app-sidebar-tab-notes"
 			class="app-sidebar-tab"
 			:name="t('tasks', 'Notes')"
@@ -209,24 +209,24 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:read-only="readOnly"
 				:task="task"
 				@set-value="({task, value}) => setNote({ task, note: value })" />
-		</AppSidebarTab>
-		<!-- <AppSidebarTab v-if="task"
+		</NcAppSidebarTab>
+		<!-- <NcAppSidebarTab v-if="task"
 			id="app-sidebar-tab-reminder"
 			class="app-sidebar-tab"
 			icon="icon-reminder"
 			:name="t('tasks', 'Reminders')"
 			:order="2">
 			Reminders
-		</AppSidebarTab>
-		<AppSidebarTab v-if="task"
+		</NcAppSidebarTab>
+		<NcAppSidebarTab v-if="task"
 			id="app-sidebar-tab-repeat"
 			class="app-sidebar-tab"
 			icon="icon-repeat"
 			:name="t('tasks', 'Repeat')"
 			:order="3">
 			Repeat
-		</AppSidebarTab> -->
-	</AppSidebar>
+		</NcAppSidebarTab> -->
+	</NcAppSidebar>
 </template>
 
 <script>
@@ -244,11 +244,11 @@ import Task from '../models/task.js'
 import { subscribe, unsubscribe } from '@nextcloud/event-bus'
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
-import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
-import ActionLink from '@nextcloud/vue/dist/Components/ActionLink'
-import EmptyContent from '@nextcloud/vue/dist/Components/EmptyContent'
-import AppSidebar from '@nextcloud/vue/dist/Components/AppSidebar'
-import AppSidebarTab from '@nextcloud/vue/dist/Components/AppSidebarTab'
+import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton'
+import NcActionLink from '@nextcloud/vue/dist/Components/NcActionLink'
+import NcEmptyContent from '@nextcloud/vue/dist/Components/NcEmptyContent'
+import NcAppSidebar from '@nextcloud/vue/dist/Components/NcAppSidebar'
+import NcAppSidebarTab from '@nextcloud/vue/dist/Components/NcAppSidebarTab'
 import { generateUrl } from '@nextcloud/router'
 
 import Calendar from 'vue-material-design-icons/Calendar'
@@ -269,10 +269,10 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
 	components: {
-		AppSidebar,
-		AppSidebarTab,
-		ActionButton,
-		ActionLink,
+		NcAppSidebar,
+		NcAppSidebarTab,
+		NcActionButton,
+		NcActionLink,
 		CheckboxItem,
 		DatetimePickerItem,
 		Calendar,
@@ -288,7 +288,7 @@ export default {
 		Star,
 		TextBoxOutline,
 		Undo,
-		EmptyContent,
+		NcEmptyContent,
 		MultiselectItem,
 		SliderItem,
 		TagsItem,

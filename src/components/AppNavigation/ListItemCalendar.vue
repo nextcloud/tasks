@@ -20,7 +20,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<AppNavigationItem :id="'list_' + calendar.id"
+	<NcAppNavigationItem :id="'list_' + calendar.id"
 		v-click-outside="{ handler: resetView, middleware: clickOutsideMiddleware }"
 		:calendar-id="calendar.id"
 		:to="{ name: 'calendars', params: { calendarId: calendar.id } }"
@@ -32,29 +32,29 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		@dragenter.native="dragEnter"
 		@dragleave.native="dragLeave">
 		<template #icon>
-			<AppNavigationIconBullet :color="calendar.color" />
+			<NcAppNavigationIconBullet :color="calendar.color" />
 		</template>
 
 		<template v-if="!deleteTimeout" #counter>
-			<Actions v-if="calendar.canBeShared"
+			<NcActions v-if="calendar.canBeShared"
 				:class="{shared: hasShares}"
 				class="sharing">
-				<ActionButton @click="toggleShare">
+				<NcActionButton @click="toggleShare">
 					<template #icon>
 						<ShareVariant :size="20" />
 					</template>
 					{{ sharedWithTooltip }}
-				</ActionButton>
-			</Actions>
-			<Avatar v-if="calendar.isSharedWithMe && loadedOwnerPrincipal" :user="ownerUserId" :display-name="ownerDisplayname" />
+				</NcActionButton>
+			</NcActions>
+			<NcAvatar v-if="calendar.isSharedWithMe && loadedOwnerPrincipal" :user="ownerUserId" :display-name="ownerDisplayname" />
 			<div v-if="calendar.isSharedWithMe && !loadedOwnerPrincipal" class="icon icon-loading" />
-			<AppNavigationCounter v-if="calendarCount">
+			<NcCounterBubble v-if="calendarCount">
 				{{ counterFormatter(calendarCount) }}
-			</AppNavigationCounter>
+			</NcCounterBubble>
 		</template>
 
 		<template v-if="!deleteTimeout" #actions>
-			<ActionButton v-if="!calendar.readOnly"
+			<NcActionButton v-if="!calendar.readOnly"
 				class="edit-calendar"
 				:close-after-click="true"
 				@click="editCalendar">
@@ -62,8 +62,8 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<Pencil :size="20" />
 				</template>
 				{{ t('tasks', 'Edit') }}
-			</ActionButton>
-			<ActionButton :close-after-click="true"
+			</NcActionButton>
+			<NcActionButton :close-after-click="true"
 				@click="copyCalDAVUrl($event, calendar)">
 				<template #icon>
 					<LinkVariant :size="20" />
@@ -73,15 +73,15 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					: copySuccess
 						? t('tasks', 'Copied')
 						: t('tasks', 'Cannot copy') }}
-			</ActionButton>
-			<ActionLink :close-after-click="true"
+			</NcActionButton>
+			<NcActionLink :close-after-click="true"
 				:href="exportUrl">
 				<template #icon>
 					<Download :size="20" />
 				</template>
 				{{ t('tasks', 'Export') }}
-			</ActionLink>
-			<ActionButton v-if="!calendar.readOnly || calendar.isSharedWithMe"
+			</NcActionLink>
+			<NcActionButton v-if="!calendar.readOnly || calendar.isSharedWithMe"
 				v-tooltip="{
 					placement: 'left',
 					boundariesElement: 'body',
@@ -95,46 +95,41 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<Close :size="20" />
 				</template>
 				{{ !calendar.isSharedWithMe ? t('tasks', 'Delete') : t('tasks', 'Unshare') }}
-			</ActionButton>
+			</NcActionButton>
 		</template>
 
 		<template v-else #actions>
-			<ActionButton @click.prevent.stop="cancelDelete">
+			<NcActionButton @click.prevent.stop="cancelDelete">
 				<template #icon>
 					<Undo :size="20" />
 				</template>
 				{{ undoDeleteMessage }}
-			</ActionButton>
+			</NcActionButton>
 		</template>
 
 		<li>
 			<ShareCalendar v-if="shareOpen && !calendar.readOnly && !deleteTimeout" :calendar="calendar" />
 			<div v-if="!deleteTimeout" :class="{error: nameError}" class="app-navigation-entry-edit">
-				<form>
-					<input v-model="newCalendarName"
-						v-tooltip="{
-							content: tooltipMessage,
-							show: showTooltip('list_' + calendar.id),
-							trigger: 'manual'
-						}"
-						class="edit"
-						type="text"
-						@keyup="checkName($event, calendar, save)">
-					<input :title="t('tasks', 'Cancel')"
-						type="cancel"
-						value=""
-						class="action icon-close"
-						@click="resetView">
-					<input :title="t('tasks', 'Save')"
-						type="button"
-						value=""
-						class="action icon-checkmark"
-						@click="save(calendar)">
-				</form>
+				<NcTextField ref="editListInput"
+					v-tooltip="{
+						content: tooltipMessage,
+						shown: showTooltip('list_' + calendar.id),
+						trigger: 'manual'
+					}"
+					type="text"
+					:show-trailing-button="newCalendarName !== ''"
+					trailing-button-icon="arrowRight"
+					:value.sync="newCalendarName"
+					:error="nameError"
+					:placeholder="t('tasks', 'Save')"
+					@trailing-button-click="save(calendar)"
+					@keyup="checkName($event, calendar)">
+					<Pencil :size="16" />
+				</NcTextField>
 				<Colorpicker :selected-color="selectedColor" @color-selected="setColor(...arguments)" />
 			</div>
 		</li>
-	</AppNavigationItem>
+	</NcAppNavigationItem>
 </template>
 
 <script>
@@ -144,13 +139,14 @@ import ShareCalendar from './CalendarShare.vue'
 import { showSuccess, showError } from '@nextcloud/dialogs'
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'
 import { generateRemoteUrl } from '@nextcloud/router'
-import Avatar from '@nextcloud/vue/dist/Components/Avatar'
-import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
-import AppNavigationCounter from '@nextcloud/vue/dist/Components/AppNavigationCounter'
-import AppNavigationIconBullet from '@nextcloud/vue/dist/Components/AppNavigationIconBullet'
-import Actions from '@nextcloud/vue/dist/Components/Actions'
-import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
-import ActionLink from '@nextcloud/vue/dist/Components/ActionLink'
+import NcAvatar from '@nextcloud/vue/dist/Components/NcAvatar'
+import NcAppNavigationItem from '@nextcloud/vue/dist/Components/NcAppNavigationItem'
+import NcCounterBubble from '@nextcloud/vue/dist/Components/NcCounterBubble'
+import NcAppNavigationIconBullet from '@nextcloud/vue/dist/Components/NcAppNavigationIconBullet'
+import NcActions from '@nextcloud/vue/dist/Components/NcActions'
+import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton'
+import NcActionLink from '@nextcloud/vue/dist/Components/NcActionLink'
+import NcTextField from '@nextcloud/vue/dist/Components/NcTextField'
 import Tooltip from '@nextcloud/vue/dist/Directives/Tooltip'
 
 import Close from 'vue-material-design-icons/Close'
@@ -170,13 +166,14 @@ export default {
 	components: {
 		Colorpicker,
 		ShareCalendar,
-		Avatar,
-		AppNavigationItem,
-		AppNavigationCounter,
-		AppNavigationIconBullet,
-		Actions,
-		ActionButton,
-		ActionLink,
+		NcAvatar,
+		NcAppNavigationItem,
+		NcCounterBubble,
+		NcAppNavigationIconBullet,
+		NcActions,
+		NcActionButton,
+		NcActionLink,
+		NcTextField,
 		Close,
 		Delete,
 		Download,
@@ -267,7 +264,7 @@ export default {
 					this.calendar.shares.length, {
 						num: this.calendar.shares.length,
 					})
-				: '' // disable the tooltip
+				: this.calendar.supportsEvents ? t('tasks', 'Share this calendar') : t('tasks', 'Share this list')
 		},
 		/**
 		 * Whether or not the information about the owner principal was loaded
@@ -403,7 +400,7 @@ export default {
 			this.nameError = false
 			this.tooltipTarget = ''
 			this.$nextTick(
-				() => document.querySelector('#list_' + this.calendar.id + ' input.edit').focus()
+				() => this.$refs.editListInput.$refs.inputField.$refs.input.focus()
 			)
 		},
 
@@ -463,19 +460,18 @@ export default {
 			this.changeCalendar({ calendar: this.calendar, newName: this.newCalendarName, newColor: this.selectedColor })
 			this.editing = false
 		},
-		checkName(event, calendar, callback) {
-			const calendarId = calendar ? calendar.id : ''
-			const check = this.isNameAllowed(this.newCalendarName, calendarId)
+		checkName(event, calendar) {
+			const check = this.isNameAllowed(this.newCalendarName, calendar.id)
 			this.tooltipMessage = check.msg
 			if (!check.allowed) {
-				this.tooltipTarget = 'list_' + calendarId
+				this.tooltipTarget = 'list_' + calendar.id
 				this.nameError = true
 			} else {
 				this.tooltipTarget = ''
 				this.nameError = false
 			}
 			if (event.keyCode === 13) {
-				callback(calendar)
+				this.save(calendar)
 			}
 			if (event.keyCode === 27) {
 				event.preventDefault()
@@ -545,19 +541,18 @@ export default {
 $color-error: #e9322d;
 
 .list::v-deep {
-	&.active .app-navigation-entry__icon-bullet > div {
+	div.active .app-navigation-entry__icon-bullet > div {
 		height: 16px;
 		width: 16px;
 		margin: -1px;
 	}
 
-	&:not(.active) > .app-navigation-entry__utils .action-item:not(.shared) {
+	> div:not(.active) > .app-navigation-entry__utils .action-item.sharing:not(.shared) {
 		display: none;
 	}
 
 	&.list--edit {
-		.app-navigation-entry__utils,
-		.app-navigation-entry-link {
+		.app-navigation-entry {
 			display: none;
 		}
 
@@ -574,6 +569,10 @@ $color-error: #e9322d;
 
 		.app-navigation-entry__icon-bullet {
 			opacity: .3;
+		}
+
+		.action-item.app-navigation-entry__actions {
+			display: inline-block;
 		}
 	}
 

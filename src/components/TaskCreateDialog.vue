@@ -26,8 +26,11 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<Modal class="task-selector" size="small" @close="close">
-		<div v-if="!creating && !created" id="modal-inner" :class="{ 'icon-loading': loading }">
+	<NcModal class="task-selector" size="small" @close="close">
+		<div v-if="!creating && !created" id="modal-inner">
+			<div v-if="loading" class="loading-overlay">
+				<NcLoadingIcon :size="40" />
+			</div>
 			<h3>{{ t('tasks', 'Create a new task') }}</h3>
 
 			<CalendarPickerItem :disabled="loading"
@@ -49,33 +52,40 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:disabled="loading" />
 			</div>
 			<div class="modal-buttons">
-				<button @click="close">
+				<NcButton @click="close">
 					{{ t('tasks', 'Cancel') }}
-				</button>
-				<button :disabled="loading"
-					class="primary"
+				</NcButton>
+				<NcButton :disabled="loading"
+					type="primary"
 					@click="addTask">
 					{{ t('tasks', 'Create task') }}
-				</button>
+				</NcButton>
 			</div>
 		</div>
 		<div v-else id="modal-inner">
-			<EmptyContent v-if="creating" icon="icon-loading">
+			<NcEmptyContent v-if="creating" key="creating">
 				{{ t('tasks', 'Creating the new task…') }}
-			</EmptyContent>
-			<EmptyContent v-else-if="created" icon="icon-checkmark">
-				{{ t('tasks', '"{task}" was added to "{calendar}"', { task: pendingTitle, calendar: pendingCalendar.displayName }, undefined, { sanitize: false, escape: false }) }}
-				<template #desc>
-					<button class="primary" @click="openNewTask">
-						{{ t('tasks', 'Open task') }}
-					</button>
-					<button @click="close">
-						{{ t('tasks', 'Close') }}
-					</button>
+				<template #icon>
+					<NcLoadingIcon />
 				</template>
-			</EmptyContent>
+			</NcEmptyContent>
+			<NcEmptyContent v-else-if="created" key="created">
+				{{ t('tasks', '"{task}" was added to "{calendar}"', { task: pendingTitle, calendar: pendingCalendar.displayName }, undefined, { sanitize: false, escape: false }) }}
+				<template #icon>
+					<Check />
+				</template>
+				<template #desc>
+&nbsp;
+					<NcButton @click="close">
+						{{ t('tasks', 'Close') }}
+					</NcButton>
+					<NcButton type="primary" @click="openNewTask">
+						{{ t('tasks', 'Open task') }}
+					</NcButton>
+				</template>
+			</NcEmptyContent>
 		</div>
-	</Modal>
+	</NcModal>
 </template>
 
 <script>
@@ -85,9 +95,12 @@ import client from '../services/cdav.js'
 
 import { translate as t } from '@nextcloud/l10n'
 import { generateUrl } from '@nextcloud/router'
-import EmptyContent from '@nextcloud/vue/dist/Components/EmptyContent'
-import Modal from '@nextcloud/vue/dist/Components/Modal'
+import NcButton from '@nextcloud/vue/dist/Components/NcButton'
+import NcEmptyContent from '@nextcloud/vue/dist/Components/NcEmptyContent'
+import NcLoadingIcon from '@nextcloud/vue/dist/Components/NcLoadingIcon'
+import NcModal from '@nextcloud/vue/dist/Components/NcModal'
 
+import Check from 'vue-material-design-icons/Check'
 import TextBoxOutline from 'vue-material-design-icons/TextBoxOutline'
 import ViewHeadline from 'vue-material-design-icons/ViewHeadline'
 
@@ -97,8 +110,11 @@ export default {
 	name: 'TaskCreateDialog',
 	components: {
 		CalendarPickerItem,
-		EmptyContent,
-		Modal,
+		Check,
+		NcButton,
+		NcEmptyContent,
+		NcLoadingIcon,
+		NcModal,
 		TextBoxOutline,
 		ViewHeadline,
 	},
@@ -191,6 +207,22 @@ export default {
 		display: flex;
 		flex-direction: column;
 		padding: 20px;
+
+		.loading-overlay {
+			position: absolute;
+			top: calc(50% - 20px);
+			left: calc(50% - 20px);
+			z-index: 1000;
+		}
+
+		.empty-content {
+			margin: 10vh 0;
+
+			::v-deep p {
+				display: flex;
+				justify-content: flex-end;
+			}
+		}
 	}
 
 	.property__item {

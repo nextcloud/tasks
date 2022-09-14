@@ -30,7 +30,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 	<div class="calendar-shares">
 		<ul>
 			<li class="app-navigation-entry__multiselect">
-				<Multiselect id="users-groups-search"
+				<NcMultiselect id="users-groups-search"
 					:options="usersOrGroups"
 					:searchable="true"
 					:internal-search="false"
@@ -47,7 +47,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 					<template #noResult>
 						<span>{{ noResult }}</span>
 					</template>
-				</Multiselect>
+				</NcMultiselect>
 			</li>
 			<!-- list of user or groups calendar is shared with -->
 			<CalendarSharee v-for="sharee in calendar.shares"
@@ -66,7 +66,7 @@ import { urldecode } from '../../utils/url.js'
 import Axios from '@nextcloud/axios'
 import { translate as t } from '@nextcloud/l10n'
 import { generateOcsUrl } from '@nextcloud/router'
-import Multiselect from '@nextcloud/vue/dist/Components/Multiselect'
+import NcMultiselect from '@nextcloud/vue/dist/Components/NcMultiselect'
 
 import debounce from 'debounce'
 
@@ -74,7 +74,7 @@ export default {
 	name: 'CalendarShare',
 	components: {
 		CalendarSharee,
-		Multiselect,
+		NcMultiselect,
 	},
 	props: {
 		calendar: {
@@ -268,22 +268,20 @@ export default {
 	}
 
 	.app-navigation-entry {
-		padding-left: 0 !important;
 
-		.avatar {
-			width: 32px;
-			height: 32px;
-			background-color: var(--color-border-dark);
-			background-size: 16px;
-		}
+		&-wrapper::v-deep {
+			.app-navigation-entry {
+				padding-left: 0 !important;
 
-		&__utils {
-			.action-checkbox__label {
-				padding-right: 0 !important;
-			}
+				&__utils {
+					.action-checkbox__label {
+						padding-right: 0 !important;
+					}
 
-			.action-checkbox__label::before {
-				margin: 4px 4px 0 !important;
+					.action-checkbox__label::before {
+						margin: 4px 4px 0 !important;
+					}
+				}
 			}
 		}
 
@@ -293,6 +291,7 @@ export default {
 			.multiselect {
 				width: 100%;
 				margin: 0;
+				padding-right: 8px !important;
 				.multiselect__tags:focus-within,
 				.multiselect__tags:hover {
 					border-color: var(--color-primary-element);

@@ -20,7 +20,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<Actions class="sortorder reactive"
+	<NcActions class="sortorder reactive"
 		:title="t('tasks', 'Change sort order')"
 		container=".header"
 		menu-align="right">
@@ -33,7 +33,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				class="sort-direction"
 				:size="18" />
 		</template>
-		<ActionButton v-for="order in orders"
+		<NcActionButton v-for="order in orders"
 			:key="order.id"
 			v-tooltip="{
 				placement: 'left',
@@ -54,14 +54,14 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:size="18" />
 			</template>
 			{{ order.text }}
-		</ActionButton>
-	</Actions>
+		</NcActionButton>
+	</NcActions>
 </template>
 
 <script>
 import { translate as t } from '@nextcloud/l10n'
-import Actions from '@nextcloud/vue/dist/Components/Actions'
-import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
+import NcActions from '@nextcloud/vue/dist/Components/NcActions'
+import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton'
 import Tooltip from '@nextcloud/vue/dist/Directives/Tooltip'
 
 import AnimationOutline from 'vue-material-design-icons/AnimationOutline'
@@ -81,8 +81,8 @@ import { mapGetters } from 'vuex'
 export default {
 	name: 'SortorderDropdown',
 	components: {
-		Actions,
-		ActionButton,
+		NcActions,
+		NcActionButton,
 		AnimationOutline,
 		Bookmark,
 		CalendarStart,

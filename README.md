@@ -34,6 +34,14 @@ Then open the Tasks app from the app menu.
 * [Kalendar](https://apps.kde.org/kalendar/) (Linux)
 
 
+## ETag (or: problem with non-existing conflicts)
+
+This app uses `ETag` HTTP header to work properly (mostly for detecting conflicts). If `ETag`s are modified or removed, the app will report non-existing conflicts.
+
+Some anti-tracking client side extensions are known to remove/replace `ETag` header to avoid tracking via cache (e.g., [CleanURLs is known to create problems](https://github.com/nextcloud/tasks/issues/2077)). You'll need to add an exception for NC Tasks.
+
+Also, `ETag` may be modified by a server-side configuration. If you manage your server you'll need to change its configuration (see https://github.com/nextcloud/tasks/issues/167).
+
 ## Maintainers
 
 [Raimund Schlüßler](https://github.com/raimund-schluessler) [and many more](https://github.com/nextcloud/tasks/graphs/contributors)

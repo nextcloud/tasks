@@ -11,11 +11,11 @@ OC.L10N.register(
     "Export" : "چىقار",
     "Delete" : "ئۆچۈر",
     "Unshare" : "ھەمبەھىرلىمە",
-    "Cancel" : "ۋاز كەچ",
     "Save" : "ساقلا",
     "Name" : "ئاتى",
     "Deleted" : "ئۆچۈرۈلدى",
     "Delete permanently" : "مەڭگۈلۈك ئۆچۈر",
+    "Cancel" : "ۋاز كەچ",
     "Close" : "ياپ",
     "Notes" : "ئىزاھاتلار",
     "Repeat" : "قايتىلا"
