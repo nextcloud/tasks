@@ -33,6 +33,8 @@
     "This will unshare the calendar \"{calendar}\"." : "L'agenda \"{calendar}\" ne sera plus partagé.",
     "This will delete the list \"{list}\" and all corresponding tasks." : "Cette action va supprimer la liste \"{list}\" et toutes les tâches associées.",
     "This will unshare the list \"{list}\"." : "Cette action va supprimer le partage de la liste \"{list}\".",
+    "Share this calendar" : "Partager cet agenda",
+    "Share this list" : "Partager cette liste",
     "Calendar link copied to clipboard." : "Lien de l'agenda copié dans le presse-papier.",
     "List link copied to clipboard." : "Lien vers la liste copié dans le presse-papiers.",
     "Calendar link could not be copied to clipboard." : "Impossible de copier le lien de l'agenda dans le presse-papier.",
