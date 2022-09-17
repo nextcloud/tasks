@@ -47,7 +47,8 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:priority-class="priorityClass"
 				@toggle-completed="toggleCompleted(task)" />
 			<!-- Info: title, progress & tags -->
-			<div class="task-body__info">
+			<div class="task-body__info"
+				@dblclick="editTitle()">		
 				<div class="title">
 					<span v-linkify="{text: task.summary, linkify: true}" />
 				</div>
@@ -227,6 +228,9 @@ export default {
 			showSubtaskInput: false,
 			newTaskName: '',
 			isAddingTask: false,
+			clicks: 0,
+			clickDelay: 250,
+			clickTimer: null
 		}
 	},
 	computed: {
@@ -578,6 +582,23 @@ export default {
 			this.navigate($event, tab)
 			// In case it is already open, we also have to emit an event to show the tab
 			emit('tasks:open-appsidebar-tab', { tab })
+			this.clicks++;
+          	if (this.clicks === 1) {
+            	this.clickTimer = setTimeout( () => {
+					// single click reset
+					this.clicks = 0
+				}, this.clickDelay);
+			} else {
+				clearTimeout(this.clickTimer);  
+				// double click emits an event to edit the task notes
+				emit('tasks:edit-appsidebar-notes', $event)
+				this.clicks = 0;
+          	}         
+		},    
+
+		editTitle() {
+			// emit an event to edit the task title
+			emit('tasks:edit-appsidebar-title', true)
 		},
 
 		openSubtaskInput() {

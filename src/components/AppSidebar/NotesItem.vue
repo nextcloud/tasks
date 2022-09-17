@@ -45,6 +45,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 <script>
 import editableItem from '../../mixins/editableItem.js'
 
+import { subscribe, unsubscribe } from '@nextcloud/event-bus'
 import { translate as t } from '@nextcloud/l10n'
 
 import MarkdownIt from 'markdown-it'
@@ -97,6 +98,12 @@ export default {
 			},
 		},
 	},
+	mounted() {
+		subscribe('tasks:edit-appsidebar-notes', this.setNotes)
+	},
+	beforeDestroy() {
+		unsubscribe('tasks:edit-appsidebar-notes', this.setNotes)
+	},
 	methods: {
 		/**
 		 * Focus the notes field after editing is enabled
@@ -111,6 +118,9 @@ export default {
 				)
 			}
 		},
+		setNotes($event) {
+			this.setEditing(true, $event)
+		}
 	},
 }
 </script>
