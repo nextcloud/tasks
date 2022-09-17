@@ -23,7 +23,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div v-if="calendar">
-		<Header />
+		<HeaderBar />
 		<div class="task-list">
 			<div class="grouped-tasks">
 				<TaskDragContainer :tasks="openRootTasks(calendar.tasks)"
@@ -47,7 +47,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import Header from '../../components/Header.vue'
+import HeaderBar from '../../components/HeaderBar.vue'
 import DeleteCompletedModal from '../../components/DeleteCompletedModal.vue'
 import LoadCompletedButton from '../../components/LoadCompletedButton.vue'
 import TaskDragContainer from '../../components/TaskDragContainer.vue'
@@ -59,7 +59,7 @@ import { mapGetters } from 'vuex'
 
 export default {
 	components: {
-		Header,
+		HeaderBar,
 		LoadCompletedButton,
 		TaskDragContainer,
 		DeleteCompletedModal,

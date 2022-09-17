@@ -41,10 +41,10 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 <script>
 import { translate as t } from '@nextcloud/l10n'
 
-import CheckboxBlank from 'vue-material-design-icons/CheckboxBlank'
-import CheckboxBlankOffOutline from 'vue-material-design-icons/CheckboxBlankOffOutline'
-import CheckboxBlankOutline from 'vue-material-design-icons/CheckboxBlankOutline'
-import CheckboxOutline from 'vue-material-design-icons/CheckboxOutline'
+import CheckboxBlank from 'vue-material-design-icons/CheckboxBlank.vue'
+import CheckboxBlankOffOutline from 'vue-material-design-icons/CheckboxBlankOffOutline.vue'
+import CheckboxBlankOutline from 'vue-material-design-icons/CheckboxBlankOutline.vue'
+import CheckboxOutline from 'vue-material-design-icons/CheckboxOutline.vue'
 
 export default {
 	components: {

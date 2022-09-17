@@ -21,11 +21,11 @@
  */
 import Task from '../models/task.js'
 
-import NcActions from '@nextcloud/vue/dist/Components/NcActions'
-import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton'
+import NcActions from '@nextcloud/vue/dist/Components/NcActions.js'
+import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton.js'
 
-import Check from 'vue-material-design-icons/Check'
-import Delete from 'vue-material-design-icons/Delete'
+import Check from 'vue-material-design-icons/Check.vue'
+import Delete from 'vue-material-design-icons/Delete.vue'
 
 import ClickOutside from 'v-click-outside'
 

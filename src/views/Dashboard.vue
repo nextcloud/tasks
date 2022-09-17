@@ -75,13 +75,13 @@ import { sort, isTaskInList } from '../store/storeHelper.js'
 
 import { translate as t } from '@nextcloud/l10n'
 import { generateUrl } from '@nextcloud/router'
-import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton'
-import NcButton from '@nextcloud/vue/dist/Components/NcButton'
-import NcDashboardWidget from '@nextcloud/vue/dist/Components/NcDashboardWidget'
-import NcDashboardWidgetItem from '@nextcloud/vue/dist/Components/NcDashboardWidgetItem'
+import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton.js'
+import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
+import NcDashboardWidget from '@nextcloud/vue/dist/Components/NcDashboardWidget.js'
+import NcDashboardWidgetItem from '@nextcloud/vue/dist/Components/NcDashboardWidgetItem.js'
 
-import Check from 'vue-material-design-icons/Check'
-import Plus from 'vue-material-design-icons/Plus'
+import Check from 'vue-material-design-icons/Check.vue'
+import Plus from 'vue-material-design-icons/Plus.vue'
 
 import { mapGetters, mapActions } from 'vuex'
 

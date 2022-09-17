@@ -22,7 +22,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div>
-		<Header />
+		<HeaderBar />
 		<div class="task-list">
 			<div v-for="calendar in filteredCalendars"
 				:key="calendar.id"
@@ -44,7 +44,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import Header from '../../components/Header.vue'
+import HeaderBar from '../../components/HeaderBar.vue'
 import LoadCompletedButton from '../../components/LoadCompletedButton.vue'
 import TaskDragContainer from '../../components/TaskDragContainer.vue'
 import { isTaskInList, isParentInList } from '../../store/storeHelper.js'
@@ -54,7 +54,7 @@ import { mapGetters } from 'vuex'
 
 export default {
 	components: {
-		Header,
+		HeaderBar,
 		LoadCompletedButton,
 		TaskDragContainer,
 	},
