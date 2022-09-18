@@ -180,6 +180,16 @@ UpgradeLog*.htm
 App_Data/*.mdf
 App_Data/*.ldf
 
+######################
+## Visual Studio Code
+######################
+
+# Settings and configuration files
+.vscode/
+
+# Dev container files
+.devcontainer/
+
 #############
 ## Windows detritus
 #############
