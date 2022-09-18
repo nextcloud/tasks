@@ -42,7 +42,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import NcAvatar from '@nextcloud/vue/dist/Components/NcAvatar'
+import NcAvatar from '@nextcloud/vue/dist/Components/NcAvatar.js'
 export default {
 	name: 'CalendarPickerOption',
 	components: {

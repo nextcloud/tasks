@@ -65,14 +65,14 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 <script>
 import { translate as t } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
-import NcAppNavigationSettings from '@nextcloud/vue/dist/Components/NcAppNavigationSettings'
+import NcAppNavigationSettings from '@nextcloud/vue/dist/Components/NcAppNavigationSettings.js'
 
-import CalendarToday from 'vue-material-design-icons/CalendarToday'
-import CalendarWeek from 'vue-material-design-icons/CalendarWeek'
-import CircleOutline from 'vue-material-design-icons/CircleOutline'
-import Check from 'vue-material-design-icons/Check'
-import Star from 'vue-material-design-icons/Star'
-import TrendingUp from 'vue-material-design-icons/TrendingUp'
+import CalendarToday from 'vue-material-design-icons/CalendarToday.vue'
+import CalendarWeek from 'vue-material-design-icons/CalendarWeek.vue'
+import CircleOutline from 'vue-material-design-icons/CircleOutline.vue'
+import Check from 'vue-material-design-icons/Check.vue'
+import Star from 'vue-material-design-icons/Star.vue'
+import TrendingUp from 'vue-material-design-icons/TrendingUp.vue'
 
 import { mapState, mapGetters, mapActions } from 'vuex'
 
