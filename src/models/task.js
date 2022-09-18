@@ -9,6 +9,10 @@
  *
  * @copyright 2021 Raimund Schlüßler <raimund.schluessler@mailbox.org>
  *
+ * @author Bader Zaidan
+ *
+ * @copyright 2022 Bader Zaidan <bader@zaidan.pw>
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
  * License as published by the Free Software Foundation; either
