@@ -35,7 +35,7 @@ import ICAL from 'ical.js'
 import PQueue from 'p-queue'
 import { AbstractRecurringComponent, DateTimeValue, ToDoComponent } from '@nextcloud/calendar-js'
 
-export default class Task {
+class Task {
 
 	/**
 	 * Creates an instance of Task
@@ -867,4 +867,5 @@ export {
 	getDefaultTaskObject,
 	mapToDoComponentToTaskObject,
 	copyCalendarObjectInstanceIntoTaskComponent,
+	Task,
 }
