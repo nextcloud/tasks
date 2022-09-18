@@ -40,11 +40,11 @@ const getDefaultCalendarObject = (props = {}) => Object.assign({}, {
 	// Whether or not the calendar is loading events at the moment
 	loading: false,
 	// Whether this calendar supports VEvents
-	supportsEvents: true,
+	supportsEvents: false,
 	// Whether this calendar supports VJournals
 	supportsJournals: false,
 	// Whether this calendar supports VTodos
-	supportsTasks: false,
+	supportsTasks: true,
 	// The principal uri of the owner
 	owner: '',
 	// Timezone set for this calendar
