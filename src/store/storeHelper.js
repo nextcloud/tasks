@@ -28,6 +28,7 @@
 import Task from '../models/task.js'
 
 import moment from '@nextcloud/moment'
+import { DateTimeValue } from '@nextcloud/calendar-js'
 
 import ICAL from 'ical.js'
 
@@ -434,6 +435,25 @@ function momentToICALTime(moment, asDate) {
 }
 
 /**
+ * Function to convert a moment to a ICAL Time
+ *
+ * @todo test this function before usage.
+ * @param {moment} momentvalue The moment to convert
+ * @param {boolean} asDate Is the moment all day
+ * @return {DateTimeValue}
+ */
+function momentToDateTimeValue(momentvalue, asDate) {
+	if (!(momentvalue instanceof moment)) {
+		throw new Error('Date given is not a moment object')
+	}
+
+	const datetime = moment.toDate()
+	datetime.isDate = !!asDate
+
+	return datetime
+}
+
+/**
  * Checks if one of the tasks sub(sub-...)tasks matches the search query
  *
  * @param {Task} task The task to search in
@@ -455,5 +475,6 @@ export {
 	isParentInList,
 	sort,
 	momentToICALTime,
+	momentToDateTimeValue,
 	searchSubTasks,
 }
