@@ -35,7 +35,7 @@ import ICAL from 'ical.js'
 import PQueue from 'p-queue'
 import { AbstractRecurringComponent, DateTimeValue, ToDoComponent } from '@nextcloud/calendar-js'
 
-class Task {
+export default class Task {
 
 	/**
 	 * Creates an instance of Task
@@ -727,7 +727,7 @@ class Task {
  * @param {object} props The props already provided
  * @return {object}
  */
-const getDefaultTaskObject = (props = {}) => Object.assign({}, {
+export const getDefaultTaskObject = (props = {}) => Object.assign({}, {
 	// calendar-js component
 	toDoComponent: null,
 	// cdav calendar
@@ -776,7 +776,7 @@ const getDefaultTaskObject = (props = {}) => Object.assign({}, {
  * @param {ToDoComponent} toDoComponent The calendar-js ToDoComponent
  * @return {object}
  */
-const mapToDoComponentToTaskObject = (toDoComponent) => {
+export const mapToDoComponentToTaskObject = (toDoComponent) => {
 	if (!(toDoComponent instanceof AbstractRecurringComponent)) {
 		throw new Error('Component provided is not a CalendarJS component')
 	}
@@ -837,7 +837,7 @@ const mapToDoComponentToTaskObject = (toDoComponent) => {
  * @param {object} taskObject The calendar-object-instance object
  * @param {ToDoComponent} toDoComponent The calendar-js ToDoComponent object
  */
-const copyCalendarObjectInstanceIntoTaskComponent = (taskObject, toDoComponent) => {
+export const copyCalendarObjectInstanceIntoTaskComponent = (taskObject, toDoComponent) => {
 	if (!(toDoComponent instanceof AbstractRecurringComponent)) {
 		throw new Error('Component provided is not a CalendarJS component')
 	}
@@ -861,11 +861,4 @@ const copyCalendarObjectInstanceIntoTaskComponent = (taskObject, toDoComponent) 
 	}
 
 	toDoComponent.updatePropertyWithValue('x-apple-sort-order', taskObject.sortOrder)
-}
-
-export {
-	getDefaultTaskObject,
-	mapToDoComponentToTaskObject,
-	copyCalendarObjectInstanceIntoTaskComponent,
-	Task,
 }

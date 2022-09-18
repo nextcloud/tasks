@@ -34,7 +34,7 @@
 'use strict'
 
 import client from '../services/cdav.js'
-import { Task } from '../models/task.js'
+import Task from '../models/task.js'
 import { isParentInList, searchSubTasks } from './storeHelper.js'
 import { findVTODObyState } from './cdav-requests.js'
 import router from '../router.js'
