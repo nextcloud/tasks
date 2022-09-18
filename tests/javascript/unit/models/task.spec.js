@@ -4,6 +4,9 @@ import { loadICS } from '../../../assets/loadAsset.js'
 
 import ICAL from 'ical.js'
 
+import { CalendarComponent, RecurrenceManager, ToDoComponent } from '@nextcloud/calendar-js'
+import { copyCalendarObjectInstanceIntoTaskComponent } from '../../../../src/models/task.js'
+
 describe('task', () => {
 	'use strict'
 
@@ -221,5 +224,29 @@ describe('task', () => {
 		expect(task.closed).toEqual(false)
 		task.complete = 100
 		expect(task.closed).toEqual(true)
+	})
+
+	it('Should map object to cal-js component correctly', () => {
+		const todo = new ToDoComponent('VTODO')
+		const calendar = new CalendarComponent('VCALENDAR')
+		todo.recurrenceManager = new RecurrenceManager(todo)
+		calendar.addComponent(todo)
+
+		const task = new Task(loadICS('vcalendars/vcalendar-default'), {})
+		copyCalendarObjectInstanceIntoTaskComponent(task, todo)
+
+		expect(todo.uid).toEqual(task.uid)
+		expect(todo.title).toEqual(task.summary)
+		expect(todo.status).toEqual(task.status)
+
+		// CalendarJS returns true if start or due dates are null
+		expect(todo.startDate !== null && todo.dueTime !== null ? todo.isAllDay() : false).toEqual(task.allDay)
+
+		expect(todo.startDate?.toICALJs() ?? null).toEqual(task.start)
+		expect(todo.dueTime?.toICALJs() ?? null).toEqual(task.due)
+		expect(todo.creationTime?.toICALJs() ?? null).toEqual(task.created)
+
+		// CalendarJS sets percent to null if we assign 0.
+		expect(todo.percent || 0).toEqual(task.complete)
 	})
 })
