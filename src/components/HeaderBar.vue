@@ -42,7 +42,7 @@ import SortorderDropdown from './SortorderDropdown.vue'
 import { translate as t } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
 
-import Plus from 'vue-material-design-icons/Plus'
+import Plus from 'vue-material-design-icons/Plus.vue'
 
 import { mapGetters, mapActions } from 'vuex'
 

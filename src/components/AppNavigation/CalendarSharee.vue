@@ -25,7 +25,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<NcAppNavigationItem :title="sharee.displayName" forceDisplayActions>
+	<NcAppNavigationItem :title="sharee.displayName" force-display-actions>
 		<template #icon>
 			<AccountMultiple v-if="sharee.isGroup"
 				:size="18"
@@ -60,13 +60,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 <script>
 import { showError } from '@nextcloud/dialogs'
 import { translate as t } from '@nextcloud/l10n'
-import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton'
-import NcActionCheckbox from '@nextcloud/vue/dist/Components/NcActionCheckbox'
-import NcAppNavigationItem from '@nextcloud/vue/dist/Components/NcAppNavigationItem'
-import NcAvatar from '@nextcloud/vue/dist/Components/NcAvatar'
+import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton.js'
+import NcActionCheckbox from '@nextcloud/vue/dist/Components/NcActionCheckbox.js'
+import NcAppNavigationItem from '@nextcloud/vue/dist/Components/NcAppNavigationItem.js'
+import NcAvatar from '@nextcloud/vue/dist/Components/NcAvatar.js'
 
-import AccountMultiple from 'vue-material-design-icons/AccountMultiple'
-import Delete from 'vue-material-design-icons/Delete'
+import AccountMultiple from 'vue-material-design-icons/AccountMultiple.vue'
+import Delete from 'vue-material-design-icons/Delete.vue'
 
 export default {
 	name: 'CalendarSharee',

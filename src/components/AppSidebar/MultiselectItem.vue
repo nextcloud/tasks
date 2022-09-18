@@ -53,7 +53,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 <script>
 import MultiselectOption from './MultiselectOption.vue'
 
-import NcMultiselect from '@nextcloud/vue/dist/Components/NcMultiselect'
+import NcMultiselect from '@nextcloud/vue/dist/Components/NcMultiselect.js'
 
 export default {
 	components: {

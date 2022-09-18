@@ -1,8 +1,8 @@
 import { OC } from './OC.js'
 
-// eslint-disable-next-line node/no-unpublished-import
+// eslint-disable-next-line n/no-unpublished-import
 import MockDate from 'mockdate'
-// eslint-disable-next-line node/no-unpublished-import
+// eslint-disable-next-line n/no-unpublished-import
 import 'regenerator-runtime/runtime'
 
 // Set date to fixed value

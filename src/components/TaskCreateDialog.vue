@@ -95,14 +95,14 @@ import client from '../services/cdav.js'
 
 import { translate as t } from '@nextcloud/l10n'
 import { generateUrl } from '@nextcloud/router'
-import NcButton from '@nextcloud/vue/dist/Components/NcButton'
-import NcEmptyContent from '@nextcloud/vue/dist/Components/NcEmptyContent'
-import NcLoadingIcon from '@nextcloud/vue/dist/Components/NcLoadingIcon'
-import NcModal from '@nextcloud/vue/dist/Components/NcModal'
+import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
+import NcEmptyContent from '@nextcloud/vue/dist/Components/NcEmptyContent.js'
+import NcLoadingIcon from '@nextcloud/vue/dist/Components/NcLoadingIcon.js'
+import NcModal from '@nextcloud/vue/dist/Components/NcModal.js'
 
-import Check from 'vue-material-design-icons/Check'
-import TextBoxOutline from 'vue-material-design-icons/TextBoxOutline'
-import ViewHeadline from 'vue-material-design-icons/ViewHeadline'
+import Check from 'vue-material-design-icons/Check.vue'
+import TextBoxOutline from 'vue-material-design-icons/TextBoxOutline.vue'
+import ViewHeadline from 'vue-material-design-icons/ViewHeadline.vue'
 
 import { mapGetters, mapActions } from 'vuex'
 
