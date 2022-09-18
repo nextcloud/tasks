@@ -25,7 +25,7 @@ import { Calendar } from './calendars.js'
 import { findVTODObyUid } from './cdav-requests.js'
 import { isParentInList, momentToICALTime } from './storeHelper.js'
 import SyncStatus from '../models/syncStatus.js'
-import Task from '../models/task.js'
+import { Task } from '../models/task.js'
 import router from '../router.js'
 
 import { showError } from '@nextcloud/dialogs'
