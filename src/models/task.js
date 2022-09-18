@@ -386,7 +386,7 @@ export default class Task {
 			} else {
 				this.vtodo.removeProperty(parent)
 			}
-		// Otherwise create a new property, so we don't overwrite RELTYPE=CHILD/SIBLING entries.
+			// Otherwise create a new property, so we don't overwrite RELTYPE=CHILD/SIBLING entries.
 		} else {
 			if (related) {
 				this.vtodo.addPropertyWithValue('related-to', related)
@@ -554,11 +554,11 @@ export default class Task {
 				const prop = new ICAL.Property('categories')
 				prop.setValues(newTags)
 				tags = this.vtodo.addProperty(prop)
-			// If there is only one tags property, overwrite it
+				// If there is only one tags property, overwrite it
 			} else if (tags.length < 2) {
 				tags[0].setValues(newTags)
-			// If there are multiple tags properties, we have to iterate over all
-			// and remove unwanted tags and add new ones
+				// If there are multiple tags properties, we have to iterate over all
+				// and remove unwanted tags and add new ones
 			} else {
 				const toRemove = this._tags.filter(c => !newTags.includes(c))
 				const toAdd = newTags.filter(c => !this._tags.includes(c))
