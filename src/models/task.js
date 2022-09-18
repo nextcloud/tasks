@@ -33,6 +33,7 @@ import moment from '@nextcloud/moment'
 import { v4 as uuid } from 'uuid'
 import ICAL from 'ical.js'
 import PQueue from 'p-queue'
+import { AbstractRecurringComponent, DateTimeValue, ToDoComponent } from '@nextcloud/calendar-js'
 
 export default class Task {
 
@@ -718,4 +719,152 @@ export default class Task {
 		return this._matchesSearchQuery
 	}
 
+}
+
+/**
+ * Creates a complete calendar-object-instance-object based on given props
+ *
+ * @param {object} props The props already provided
+ * @return {object}
+ */
+const getDefaultTaskObject = (props = {}) => Object.assign({}, {
+	// calendar-js component
+	toDoComponent: null,
+	// cdav calendar
+	calendar: null,
+	// ICAL.JS component
+	vCalendar: null,
+	subTasks: {},
+	conflict: false,
+	syncStatus: null,
+	deleteCountdown: null,
+	updateQueue: null,
+	// ICAL.Component('vtodo')
+	vtodo: null,
+	uid: '',
+	summary: '',
+	priority: 0,
+	complete: 0,
+	completed: false,
+	completedDate: null,
+	completedDateMoment: null,
+	status: null,
+	note: null,
+	related: null,
+	hideSubtasks: 0,
+	hideCompletedSubtasks: 0,
+	start: null,
+	startMoment: null,
+	due: null,
+	dueMoment: null,
+	allDay: false,
+	loaded: false,
+	tags: [],
+	modified: null,
+	modifiedMoment: null,
+	created: null,
+	createdMoment: null,
+	class: 'PUBLIC',
+	pinned: false,
+	sortOrder: 0,
+	searchQuery: '',
+	matchesSearchQuery: true,
+}, props)
+
+/**
+ *
+ * @param {ToDoComponent} toDoComponent The calendar-js ToDoComponent
+ * @return {object}
+ */
+const mapToDoComponentToTaskObject = (toDoComponent) => {
+	if (!(toDoComponent instanceof AbstractRecurringComponent)) {
+		throw new Error('Component provided is not a CalendarJS component')
+	}
+	const taskObject = getDefaultTaskObject({
+		toDoComponent,
+		summary: toDoComponent.title || '',
+		uid: toDoComponent.uid || '',
+		priority: toDoComponent.priority,
+		complete: toDoComponent.percent || 0,
+		completed: toDoComponent.percent === 100 || toDoComponent.status === 'COMPLETED',
+		completedDate: toDoComponent.completedTime.clone().toICALJs(),
+		completedDateMoment: moment(toDoComponent.completedTime.clone().toICALJs()),
+		status: toDoComponent.status || 'NEEDS-ACTION',
+		note: toDoComponent.description || '',
+		start: toDoComponent.startDate.clone()?.toICALJs(),
+		startMoment: moment(toDoComponent.startDate.clone()?.toICALJs()),
+		due: toDoComponent.dueTime.clone()?.toICALJs(),
+		dueMoment: moment(toDoComponent.dueTime.clone()?.toICALJs()),
+		tags: toDoComponent.getCategoryList(),
+		modified: toDoComponent.modificationTime.clone()?.toICALJs(),
+		modifiedMoment: moment(toDoComponent.modificationTime.clone()),
+		created: toDoComponent.creationTime.clone()?.toICALJs(),
+		createdMoment: moment(toDoComponent.creationTime.clone()?.toICALJs()),
+		class: toDoComponent.accessClass || 'PUBLIC',
+		pinned: toDoComponent.getFirstPropertyFirstValue('x-pinned') === 'true',
+		allDay: toDoComponent.dueTime !== null && toDoComponent.startDate !== null ? toDoComponent.isAllDay() : true,
+		searchQuery: '',
+		matchesSearchQuery: true,
+	})
+
+	let sortOrder = taskObject.getFirstPropertyFirstValue('x-apple-sort-order')
+	if (sortOrder === null) {
+		if (taskObject.created === null) {
+			sortOrder = 0
+		} else {
+			sortOrder = this.created.subtractDate(
+				new ICAL.Time({
+					year: 2001,
+					month: 1,
+					day: 1,
+					hour: 0,
+					minute: 0,
+					second: 0,
+					isDate: false,
+				})
+			).toSeconds()
+		}
+	}
+
+	taskObject.sortOrder = +sortOrder
+
+	return taskObject
+}
+
+/**
+ * Copy data from a calendar-object-instance into a calendar-js todo component
+ *
+ * @param {object} taskObject The calendar-object-instance object
+ * @param {ToDoComponent} toDoComponent The calendar-js ToDoComponent object
+ */
+const copyCalendarObjectInstanceIntoTaskComponent = (taskObject, toDoComponent) => {
+	if (!(toDoComponent instanceof AbstractRecurringComponent)) {
+		throw new Error('Component provided is not a CalendarJS component')
+	}
+	toDoComponent.uid = taskObject.uid
+	toDoComponent.title = taskObject.summary
+	toDoComponent.description = taskObject.note
+	toDoComponent.status = taskObject.status
+	toDoComponent.percent = taskObject.complete
+	toDoComponent.priority = taskObject.priority
+
+	if (taskObject.start) toDoComponent.startDate = DateTimeValue.fromICALJs(taskObject.start, true)
+	if (taskObject.due) toDoComponent.dueTime = DateTimeValue.fromICALJs(taskObject.due, true)
+	if (taskObject.completedDate) toDoComponent.completedTime = DateTimeValue.fromICALJs(taskObject.completedDate, true)
+	if (taskObject.modified) toDoComponent.modificationTime = DateTimeValue.fromICALJs(taskObject.modified, true)
+	if (taskObject.created) toDoComponent.creationTime = DateTimeValue.fromICALJs(taskObject.created, true)
+
+	toDoComponent.accessClass = taskObject.class
+	toDoComponent.clearAllCategories()
+	for (const tag in taskObject.tags) {
+		toDoComponent.addCategory(tag)
+	}
+
+	toDoComponent.updatePropertyWithValue('x-apple-sort-order', taskObject.sortOrder)
+}
+
+export {
+	getDefaultTaskObject,
+	mapToDoComponentToTaskObject,
+	copyCalendarObjectInstanceIntoTaskComponent,
 }
