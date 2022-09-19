@@ -883,12 +883,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.app-sidebar::v-deep .app-sidebar-header__description {
+.app-sidebar :deep(.app-sidebar-header__description) {
 	flex-wrap: wrap;
 	margin: 0;
 }
 
-.app-sidebar::v-deep .app-sidebar-tabs {
+.app-sidebar  :deep(.app-sidebar-tabs) {
 	min-height: 160px !important;
 }
 

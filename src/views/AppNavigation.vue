@@ -459,7 +459,7 @@ $color-error: #e9322d;
 	}
 }
 
-.collection::v-deep {
+:deep(.collection) {
 	&.collection--edit {
 		.app-navigation-entry {
 			display: none;

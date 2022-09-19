@@ -196,7 +196,7 @@ export default {
 	}
 }
 
-#note__viewer::v-deep {
+:deep(#note__viewer) {
 	width: 100% !important;
 	min-height: 40px;
 	cursor: text;

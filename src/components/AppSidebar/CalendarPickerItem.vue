@@ -96,20 +96,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.property__item::v-deep {
+.property__item {
 	display: flex;
 	border-bottom: 1px solid var(--color-border);
 	width: 100%;
 
-	.multiselect {
+	:deep(.multiselect) {
 		width: 100%;
 
-		&--active .multiselect__tags {
+		.multiselect--active .multiselect__tags {
 			border: 1px solid var(--color-border-dark);
 		}
 
-		&--disabled,
-		&--disabled .multiselect__single {
+		.multiselect--disabled,
+		.multiselect--disabled .multiselect__single {
 			background-color: var(--color-main-background) !important;
 
 			& * {
