@@ -30,7 +30,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 	<div class="calendar-shares">
 		<ul>
 			<li class="app-navigation-entry__multiselect">
-				<NcMultiselect id="users-groups-search"
+				<NcMultiselect ref="multiselect"
 					:options="usersOrGroups"
 					:searchable="true"
 					:internal-search="false"
@@ -101,7 +101,7 @@ export default {
 	},
 	mounted() {
 		// This ensures that the multiselect input is in focus as soon as the user clicks share
-		document.getElementById('users-groups-search').focus()
+		this.$refs.multiselect?.focus?.()
 	},
 	methods: {
 		/**
