@@ -203,7 +203,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-	// indicate which sort order is selected
+// indicate which sort order is selected
 li.action.selected :deep(.action-button) {
 		opacity: 1;
 		// allow to absolute position the sort direction icon
