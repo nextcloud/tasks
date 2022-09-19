@@ -72,6 +72,7 @@ export default {
 			required: false,
 		},
 	},
+	emits: ['change-calendar'],
 	computed: {
 		isDisabled() {
 			return this.calendars.length < 2 || this.disabled

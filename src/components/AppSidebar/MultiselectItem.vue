@@ -82,6 +82,7 @@ export default {
 			default: null,
 		},
 	},
+	emits: ['change-value'],
 	computed: {
 		isDisabled() {
 			return this.options.length < 2 || this.disabled

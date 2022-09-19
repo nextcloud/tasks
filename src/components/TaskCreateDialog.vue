@@ -128,6 +128,7 @@ export default {
 			default: '',
 		},
 	},
+	emits: ['close'],
 	data() {
 		return {
 			pendingTitle: '',
@@ -270,6 +271,6 @@ export default {
 
 	:deep(.calendar-picker-option__label),
 	:deep(.property__item .multiselect__tags) input.multiselect__input {
-			font-weight: normal;
+		font-weight: normal;
 	}
 </style>

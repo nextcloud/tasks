@@ -58,6 +58,10 @@ export default {
 			default: null,
 		},
 	},
+	emits: [
+		'status-clicked',
+		'reset-status',
+	],
 	data() {
 		return {
 			resetStatusTimeout: null,

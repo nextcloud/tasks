@@ -56,6 +56,7 @@ export default {
 			default: '',
 		},
 	},
+	emits: ['set-checked'],
 }
 </script>
 

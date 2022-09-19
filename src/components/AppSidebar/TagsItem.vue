@@ -85,6 +85,10 @@ export default {
 			default: null,
 		},
 	},
+	emits: [
+		'add-tag',
+		'set-tags',
+	],
 	methods: {
 		t,
 
