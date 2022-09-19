@@ -40,14 +40,14 @@ const routes = [
 	{
 		name: 'collectionsTask',
 		path: '/collections/:collectionId/tasks/:taskId',
-		components: { default: Collections, sidebar: AppSidebar },
-		props: { default: true, sidebar: true },
+		components: { default: Collections, AppSidebar },
+		props: { default: true, AppSidebar: true },
 	},
 	{
 		name: 'collectionsParamTask',
 		path: '/collections/:collectionId/:collectionParam/tasks/:taskId',
-		components: { default: Collections, sidebar: AppSidebar },
-		props: { default: true, sidebar: true },
+		components: { default: Collections, AppSidebar },
+		props: { default: true, AppSidebar: true },
 	},
 	{
 		name: 'calendars',
@@ -58,8 +58,8 @@ const routes = [
 	{
 		name: 'calendarsTask',
 		path: '/calendars/:calendarId/tasks/:taskId',
-		components: { default: Calendar, sidebar: AppSidebar },
-		props: { default: true, sidebar: true },
+		components: { default: Calendar, AppSidebar },
+		props: { default: true, AppSidebar: true },
 	},
 ]
 

@@ -27,7 +27,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			<RouterView />
 		</NcAppContent>
 
-		<RouterView name="sidebar" />
+		<RouterView name="AppSidebar" />
 	</NcContent>
 </template>
 
