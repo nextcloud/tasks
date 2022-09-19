@@ -120,7 +120,7 @@ export default {
 		},
 		setNotes($event) {
 			this.setEditing(true, $event)
-		}
+		},
 	},
 }
 </script>
