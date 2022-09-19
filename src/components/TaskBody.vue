@@ -774,8 +774,8 @@ $breakpoint-mobile: 1024px;
 						overflow: hidden;
 						text-overflow: ellipsis;
 
-						// We need v-deep as it comes from a directive
-						&::v-deep a {
+						// We need deep as it comes from a directive
+						:deep(a) {
 							cursor: pointer;
 							text-decoration: underline;
 						}

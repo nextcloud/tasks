@@ -203,13 +203,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-li.action::v-deep {
 	// indicate which sort order is selected
-	&.selected .action-button {
+li.action.selected :deep(.action-button) {
 		opacity: 1;
 		// allow to absolute position the sort direction icon
 		position: relative;
-	}
 }
 // overlay the sort direction icon with the sort order icon
 .material-design-icon.sort-direction {

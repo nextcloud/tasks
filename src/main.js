@@ -25,7 +25,6 @@ import App from './App.vue'
 import router from './router.js'
 import store from './store/store.js'
 
-import { subscribe, unsubscribe } from '@nextcloud/event-bus'
 import { linkTo } from '@nextcloud/router'
 
 import AlertBoxOutline from 'vue-material-design-icons/AlertBoxOutline.vue'
@@ -104,33 +103,5 @@ OCA.Tasks.App = new Vue({
 	el: '.app-tasks',
 	router,
 	store,
-	data() {
-		return {
-			searchString: '',
-		}
-	},
-	mounted() {
-		subscribe('nextcloud:unified-search.search', this.filterProxy)
-		subscribe('nextcloud:unified-search.reset', this.cleanSearch)
-	},
-	beforeMount() {
-		this.$store.dispatch('loadCollections')
-		this.$store.dispatch('loadSettings')
-	},
-	beforeDestroy() {
-		unsubscribe('nextcloud:unified-search.search', this.filterProxy)
-		unsubscribe('nextcloud:unified-search.reset', this.cleanSearch)
-	},
-	methods: {
-		filterProxy({ query }) {
-			this.filter(query)
-		},
-		filter(query) {
-			this.$store.commit('setSearchQuery', query)
-		},
-		cleanSearch() {
-			this.$store.commit('setSearchQuery', '')
-		},
-	},
 	render: h => h(App),
 })

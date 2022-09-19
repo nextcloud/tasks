@@ -128,6 +128,7 @@ export default {
 			default: '',
 		},
 	},
+	emits: ['close'],
 	data() {
 		return {
 			pendingTitle: '',
@@ -229,7 +230,7 @@ export default {
 		border-bottom: none;
 		margin-bottom: 3px;
 
-		&::v-deep .multiselect {
+		:deep(.multiselect) {
 			border: 1px solid var(--color-border-dark);
 			border-radius: var(--border-radius);
 		}
@@ -268,10 +269,8 @@ export default {
 		justify-content: flex-end;
 	}
 
-	::v-deep {
-		.calendar-picker-option__label,
-		.property__item .multiselect__tags input.multiselect__input {
-			font-weight: normal;
-		}
+	:deep(.calendar-picker-option__label),
+	:deep(.property__item .multiselect__tags) input.multiselect__input {
+		font-weight: normal;
 	}
 </style>

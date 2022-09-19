@@ -85,6 +85,10 @@ export default {
 			default: null,
 		},
 	},
+	emits: [
+		'add-tag',
+		'set-tags',
+	],
 	methods: {
 		t,
 
@@ -99,20 +103,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.property__item::v-deep {
+.property__item {
 	display: flex;
 	border-bottom: 1px solid var(--color-border);
 	width: 100%;
 	color: var(--color-text-lighter);
 
-	.multiselect {
+	:deep(.multiselect) {
 		width: 100%;
 
 		&:hover .multiselect__placeholder {
 			color: var(--color-text-lighter);
 		}
 
-		&--active {
+		.multiselect--active {
 			.multiselect__tags {
 				border: 1px solid var(--color-border-dark);
 			}
@@ -122,8 +126,8 @@ export default {
 			}
 		}
 
-		&--disabled,
-		&--disabled .multiselect__single {
+		.multiselect--disabled,
+		.multiselect--disabled .multiselect__single {
 			background-color: var(--color-main-background) !important;
 
 			& * {
@@ -131,7 +135,7 @@ export default {
 			}
 		}
 
-		&__icon {
+		.multiselect__icon {
 			position: absolute;
 			display: flex;
 			width: 44px;
@@ -141,7 +145,7 @@ export default {
 			justify-content: center;
 		}
 
-		&__tags {
+		.multiselect__tags {
 			border: 1px solid transparent;
 			height: 44px;
 			flex-grow: 1;
@@ -174,7 +178,7 @@ export default {
 			}
 		}
 
-		&__content-wrapper {
+		.multiselect__content-wrapper {
 			// We need this so the options list is not cut off
 			// by the tabs header
 			max-height: 170px !important;
