@@ -142,7 +142,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		<div class="task-item__subtasks">
 			<div v-if="showSubtaskInput"
 				v-click-outside="{ handler: closeSubtaskInput, middleware: clickOutsideMiddleware }"
-				class="task-item task-item--input">
+				class="task-item task-item__input">
 				<form name="addTaskForm" @submit.prevent="addTask">
 					<Plus :size="20" />
 					<input ref="input"
@@ -671,8 +671,10 @@ $breakpoint-mobile: 1024px;
 		z-index: 5;
 	}
 
-	&--input {
+	&__input {
 		border-top: 1px solid var(--color-border);
+		overflow: hidden;
+		border-radius: 0;
 
 		.material-design-icon {
 			position: absolute;
@@ -680,14 +682,14 @@ $breakpoint-mobile: 1024px;
 		}
 
 		input {
-			border-radius: 0;
+			border-radius: 0 !important;
 			border: medium none !important;
 			box-sizing: border-box;
 			color: var(--color-main-text);
 			cursor: text;
 			font-size: 100%;
-			margin: 0;
-			padding: 0 15px 0 44px;
+			margin: 0 !important;
+			padding: 0 15px 0 44px !important;
 			width: 100%;
 			min-height: 44px;
 			overflow: hidden;
@@ -703,14 +705,14 @@ $breakpoint-mobile: 1024px;
 		border-bottom-right-radius: var(--border-radius-large);
 	}
 
-	&:not(.task-item--subtasks-visible).task-item--input input {
+	&:not(.task-item--subtasks-visible).task-item__input {
 		border-bottom-left-radius: var(--border-radius-large);
 		border-bottom-right-radius: var(--border-radius-large);
 	}
 
 	// Don't show round corners if any of the ancestors is not the last in the (sub-)list
 	&:not(:last-child) {
-		.task-item--input input {
+		.task-item__input {
 			border-bottom-left-radius: 0;
 			border-bottom-right-radius: 0;
 		}

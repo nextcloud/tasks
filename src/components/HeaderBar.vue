@@ -28,7 +28,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<input v-model="newTaskName"
 					:placeholder="placeholder"
 					autocomplete="off"
-					class="transparent reactive"
+					class="reactive"
 					@keyup.27="clearNewTask($event)">
 			</form>
 		</div>
@@ -122,7 +122,7 @@ $breakpoint-mobile: 1024px;
 .header {
 	padding: 12px 15px 12px 59px;
 	position: sticky;
-	top: 50px;
+	top: 0;
 	background-color: var(--color-background-dark);
 	z-index: 1000;
 	display: flex;
@@ -148,8 +148,8 @@ $breakpoint-mobile: 1024px;
 			color: var(--color-main-text);
 			cursor: text;
 			font-size: 100%;
-			margin: 0;
-			padding: 0 15px 0 44px;
+			margin: 0 !important;
+			padding: 0 15px 0 44px !important;
 			width: 100%;
 			min-height: 44px;
 			overflow: hidden;

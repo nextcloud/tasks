@@ -156,12 +156,21 @@ $breakpoint-mobile: 1024px;
 body {
 	min-height: 100%;
 	height: auto;
+	// Adjustment necessary to use nc/vue@6 with NC25
+	position: initial;
 }
 
 </style>
 
 <style lang="scss" scoped>
+// Adjustment necessary to use nc/vue@6 with NC25
+#content-vue {
+	max-height: 100vh;
+}
+
 .app-content {
+	// Adjustment necessary to use nc/vue@6 with NC25
+	overflow-y: scroll;
 	background-color: var(--color-background-dark) !important;
 
 	> div {
