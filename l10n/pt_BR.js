@@ -35,6 +35,8 @@ OC.L10N.register(
     "This will unshare the calendar \"{calendar}\"." : "Isso irá descompartilhar o calendário \"{calendar}\".",
     "This will delete the list \"{list}\" and all corresponding tasks." : "Essa ação vai apagar a lista \"{list}\" e todas as tarefas correspondentes.",
     "This will unshare the list \"{list}\"." : "Essa ação vai descompartilhar a lista \"{list}\".",
+    "Share this calendar" : "Compartilhar este calendário",
+    "Share this list" : "Compartilhar esta lista",
     "Calendar link copied to clipboard." : "Link do calendário copiado para a área de transferência.",
     "List link copied to clipboard." : "Link para a lista copiado para a área de transferência.",
     "Calendar link could not be copied to clipboard." : "O link do calendário não pôde ser copiado para a área de transferência.",
