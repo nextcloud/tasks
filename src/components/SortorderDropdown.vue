@@ -25,13 +25,15 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		container=".header"
 		menu-align="right">
 		<template #icon>
-			<component :is="sortOrderIcon" :size="20" />
-			<MenuDown v-if="sortDirection"
-				class="sort-direction"
-				:size="18" />
-			<MenuUp v-else
-				class="sort-direction"
-				:size="18" />
+			<span class="material-design-icon">
+				<component :is="sortOrderIcon" :size="20" />
+				<MenuDown v-if="sortDirection"
+					class="sort-direction"
+					:size="18" />
+				<MenuUp v-else
+					class="sort-direction"
+					:size="18" />
+			</span>
 		</template>
 		<NcActionButton v-for="order in orders"
 			:key="order.id"
@@ -210,9 +212,14 @@ li.action.selected :deep(.action-button) {
 		position: relative;
 }
 // overlay the sort direction icon with the sort order icon
-.material-design-icon.sort-direction {
-	position: absolute;
-	top: 0;
-	justify-content: right;
+.material-design-icon {
+	width: 44px;
+	height: 44px;
+
+	&.sort-direction {
+		position: absolute;
+		top: 0;
+		justify-content: right;
+	}
 }
 </style>
