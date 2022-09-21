@@ -426,7 +426,7 @@ export default {
 
 			// copy link for calendar to clipboard
 			try {
-				await this.$copyText(url)
+				await navigator.clipboard.writeText(url)
 				event.preventDefault()
 				this.copySuccess = true
 				this.copied = true
