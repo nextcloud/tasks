@@ -575,7 +575,7 @@ export default {
 			}
 		},
 
-		openAppSidebarTab($event, tab, edit=false) {
+		openAppSidebarTab($event, tab, edit = false) {
 			// Open the AppSidebar
 			this.navigate($event, tab)
 			// In case it is already open, we also have to emit an event to show the tab
