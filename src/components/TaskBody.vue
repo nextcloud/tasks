@@ -47,7 +47,8 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:priority-class="priorityClass"
 				@toggle-completed="toggleCompleted(task)" />
 			<!-- Info: title, progress & tags -->
-			<div class="task-body__info">
+			<div class="task-body__info"
+				@dblclick="editTitle()">
 				<div class="title">
 					<span v-linkify="{text: task.summary, linkify: true}" />
 				</div>
@@ -79,7 +80,8 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<TextBoxOutline v-if="task.note!=''"
 					:size="20"
 					:title="t('tasks', 'Task has a note')"
-					@click.stop="openAppSidebarTab($event, 'app-sidebar-tab-notes')" />
+					@click="openAppSidebarTab($event, 'app-sidebar-tab-notes')"
+					@dblclick.native.stop="openAppSidebarTab($event, 'app-sidebar-tab-notes', true)" />
 				<div v-if="task.due || task.completed" :class="{'date--overdue': overdue(task.dueMoment) && !task.completed}" class="date">
 					<span class="date__short" :class="{ 'date__short--completed': task.completed }">{{ dueDateShort }}</span>
 					<span class="date__long" :class="{ 'date__long--date-only': task.allDay && !task.completed, 'date__long--completed': task.completed }">{{ dueDateLong }}</span>
@@ -573,11 +575,19 @@ export default {
 			}
 		},
 
-		openAppSidebarTab($event, tab) {
+		openAppSidebarTab($event, tab, edit = false) {
 			// Open the AppSidebar
 			this.navigate($event, tab)
 			// In case it is already open, we also have to emit an event to show the tab
 			emit('tasks:open-appsidebar-tab', { tab })
+			if (edit) {
+				emit('tasks:edit-appsidebar-notes', $event)
+			}
+		},
+
+		editTitle() {
+			// emit an event to edit the task title
+			emit('tasks:edit-appsidebar-title', true)
 		},
 
 		openSubtaskInput() {

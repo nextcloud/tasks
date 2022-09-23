@@ -719,10 +719,12 @@ export default {
 	mounted() {
 		subscribe('tasks:close-appsidebar', this.closeAppSidebar)
 		subscribe('tasks:open-appsidebar-tab', this.openAppSidebarTab)
+		subscribe('tasks:edit-appsidebar-title', this.editTitle)
 	},
 	beforeDestroy() {
 		unsubscribe('tasks:close-appsidebar', this.closeAppSidebar)
 		unsubscribe('tasks:open-appsidebar-tab', this.openAppSidebarTab)
+		unsubscribe('tasks:edit-appsidebar-title', this.editTitle)
 	},
 	created() {
 		this.loadTask()
