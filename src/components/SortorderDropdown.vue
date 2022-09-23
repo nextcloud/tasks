@@ -62,9 +62,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import { translate as t } from '@nextcloud/l10n'
-import NcActions from '@nextcloud/vue/dist/Components/NcActions.js'
-import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton.js'
-import Tooltip from '@nextcloud/vue/dist/Directives/Tooltip.js'
+import { NcActions, NcActionButton, Tooltip } from '@nextcloud/vue'
 
 import AnimationOutline from 'vue-material-design-icons/AnimationOutline.vue'
 import Bookmark from 'vue-material-design-icons/Bookmark.vue'

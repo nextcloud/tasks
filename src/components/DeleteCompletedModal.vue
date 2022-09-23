@@ -72,9 +72,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'
-import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
-import NcModal from '@nextcloud/vue/dist/Components/NcModal.js'
-import Tooltip from '@nextcloud/vue/dist/Directives/Tooltip.js'
+import { NcButton, NcModal, Tooltip } from '@nextcloud/vue'
 
 import Delete from 'vue-material-design-icons/Delete.vue'
 

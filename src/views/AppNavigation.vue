@@ -101,11 +101,7 @@ import AppNavigationSettings from '../components/AppNavigation/AppNavigationSett
 import Trashbin from '../components/AppNavigation/Trashbin.vue'
 
 import { translate as t } from '@nextcloud/l10n'
-import NcAppNavigation from '@nextcloud/vue/dist/Components/NcAppNavigation.js'
-import NcAppNavigationItem from '@nextcloud/vue/dist/Components/NcAppNavigationItem.js'
-import NcCounterBubble from '@nextcloud/vue/dist/Components/NcCounterBubble.js'
-import NcTextField from '@nextcloud/vue/dist/Components/NcTextField.js'
-import Tooltip from '@nextcloud/vue/dist/Directives/Tooltip.js'
+import { NcAppNavigation, NcAppNavigationItem, NcCounterBubble, NcTextField, Tooltip } from '@nextcloud/vue'
 
 import CalendarToday from 'vue-material-design-icons/CalendarToday.vue'
 import CalendarWeek from 'vue-material-design-icons/CalendarWeek.vue'

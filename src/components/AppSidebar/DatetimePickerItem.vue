@@ -85,7 +85,7 @@ import { overdue } from '../../store/storeHelper.js'
 
 import { translate as t } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
-import NcDatetimePicker from '@nextcloud/vue/dist/Components/NcDatetimePicker.js'
+import { NcDatetimePicker } from '@nextcloud/vue'
 
 export default {
 	name: 'DatetimePickerItem',
