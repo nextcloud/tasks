@@ -51,6 +51,7 @@ OC.L10N.register(
     "Empty trash bin" : "Buida la paperera",
     "Untitled task" : "Tasca sense títol",
     "Untitled event" : "Esdeveniment sense títol",
+    "Untitled item" : "Element sense títol",
     "Unknown calendar" : "Calendari desconegut",
     "Could not load deleted calendars and objects" : "No s'han pogut carregar els calendaris i els objectes suprimits",
     "Could not restore calendar or event" : "No s'ha pogut restaurar el calendari o l'esdeveniment",
