@@ -48,6 +48,7 @@ OC.L10N.register(
     "Empty trash bin" : "Tyhjennä roskakori",
     "Untitled task" : "Nimetön tehtävä",
     "Untitled event" : "Nimetön tapahtuma",
+    "Untitled item" : "Nimetön kohde",
     "Unknown calendar" : "Tuntematon kalenteri",
     "Could not load deleted calendars and objects" : "Ei voitu ladata poistettuja kalentereita ja objekteja",
     "Could not delete calendar or event" : "Kalenteria tai tapahtumaa ei voitu poistaa",
