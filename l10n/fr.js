@@ -120,7 +120,7 @@ OC.L10N.register(
     "Show closed subtasks" : "Afficher les sous-tâches fermées",
     "Hide closed subtasks" : "Masquer les sous-tâches fermées",
     "Delete task" : "Supprimer la tâche",
-    "Toggle starred" : "Épingler / Désépingler",
+    "Toggle starred" : "Épingler/Désépingler",
     "[Yesterday]" : "[Hier]",
     "[Today]" : "[Aujourd'hui]",
     "[Tomorrow]" : "[Demain]",
