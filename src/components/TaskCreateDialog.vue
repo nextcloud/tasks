@@ -63,19 +63,16 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			</div>
 		</div>
 		<div v-else id="modal-inner">
-			<NcEmptyContent v-if="creating" key="creating">
-				{{ t('tasks', 'Creating the new task…') }}
+			<NcEmptyContent v-if="creating" key="creating" :description="t('tasks', 'Creating the new task…')">
 				<template #icon>
 					<NcLoadingIcon />
 				</template>
 			</NcEmptyContent>
-			<NcEmptyContent v-else-if="created" key="created">
-				{{ t('tasks', '"{task}" was added to "{calendar}"', { task: pendingTitle, calendar: pendingCalendar.displayName }, undefined, { sanitize: false, escape: false }) }}
+			<NcEmptyContent v-else-if="created" key="created" :description="createdMessage">
 				<template #icon>
 					<Check />
 				</template>
-				<template #desc>
-&nbsp;
+				<template #action>
 					<NcButton @click="close">
 						{{ t('tasks', 'Close') }}
 					</NcButton>
@@ -146,6 +143,9 @@ export default {
 			writableCalendars: 'getSortedWritableCalendars',
 			defaultCalendar: 'getDefaultCalendar',
 		}),
+		createdMessage() {
+			return t('tasks', '"{task}" was added to "{calendar}"', { task: this.pendingTitle, calendar: this.pendingCalendar.displayName }, undefined, { sanitize: false, escape: false })
+		},
 	},
 
 	beforeMount() {
@@ -219,9 +219,8 @@ export default {
 		.empty-content {
 			margin: 10vh 0;
 
-			::v-deep p {
+			:deep(.empty-content__action) {
 				display: flex;
-				justify-content: flex-end;
 			}
 		}
 	}
@@ -230,9 +229,8 @@ export default {
 		border-bottom: none;
 		margin-bottom: 3px;
 
-		:deep(.multiselect) {
-			border: 1px solid var(--color-border-dark);
-			border-radius: var(--border-radius);
+		:deep(.multiselect .multiselect__tags) {
+			border: 2px solid var(--color-border-dark);
 		}
 	}
 
@@ -241,15 +239,14 @@ export default {
 
 		.material-design-icon {
 			position: absolute;
-			top: 12px;
-			left: 12px;
+			top: 14px;
+			left: 14px;
 		}
 
 		input,
 		textarea {
 			width: 100%;
-			font-size: var(--default-font-size);
-			padding-left: 44px;
+			padding-left: 44px !important;
 		}
 
 		input {
@@ -264,10 +261,10 @@ export default {
 		}
 	}
 
-	.modal-buttons {
-		display: flex;
-		justify-content: flex-end;
-	}
+.modal-buttons {
+	display: flex;
+	justify-content: flex-end;
+}
 
 	:deep(.calendar-picker-option__label),
 	:deep(.property__item .multiselect__tags) input.multiselect__input {

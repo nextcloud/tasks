@@ -131,6 +131,7 @@ export default {
 		.multiselect__tags {
 			border: 1px solid transparent;
 			height: 44px;
+			padding: 0 !important;
 
 			.multiselect__single {
 				padding: 0;
