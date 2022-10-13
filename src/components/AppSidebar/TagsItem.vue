@@ -148,6 +148,7 @@ export default {
 		.multiselect__tags {
 			border: 1px solid transparent;
 			height: 44px;
+			padding: 0 !important;
 			flex-grow: 1;
 
 			.multiselect__single {
@@ -166,6 +167,7 @@ export default {
 				position: absolute !important;
 				font-weight: bold;
 				font-size: var(--default-font-size);
+				line-height: 44px;
 			}
 
 			.multiselect__tags-wrap {
