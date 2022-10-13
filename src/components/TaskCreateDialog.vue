@@ -63,19 +63,16 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			</div>
 		</div>
 		<div v-else id="modal-inner">
-			<NcEmptyContent v-if="creating" key="creating">
-				{{ t('tasks', 'Creating the new task…') }}
+			<NcEmptyContent v-if="creating" key="creating" :description="t('tasks', 'Creating the new task…')">
 				<template #icon>
 					<NcLoadingIcon />
 				</template>
 			</NcEmptyContent>
-			<NcEmptyContent v-else-if="created" key="created">
-				{{ t('tasks', '"{task}" was added to "{calendar}"', { task: pendingTitle, calendar: pendingCalendar.displayName }, undefined, { sanitize: false, escape: false }) }}
+			<NcEmptyContent v-else-if="created" key="created" :description="createdMessage">
 				<template #icon>
 					<Check />
 				</template>
-				<template #desc>
-&nbsp;
+				<template #action>
 					<NcButton @click="close">
 						{{ t('tasks', 'Close') }}
 					</NcButton>
@@ -146,6 +143,9 @@ export default {
 			writableCalendars: 'getSortedWritableCalendars',
 			defaultCalendar: 'getDefaultCalendar',
 		}),
+		createdMessage() {
+			return t('tasks', '"{task}" was added to "{calendar}"', { task: this.pendingTitle, calendar: this.pendingCalendar.displayName }, undefined, { sanitize: false, escape: false })
+		},
 	},
 
 	beforeMount() {
