@@ -32,7 +32,6 @@ use \OCP\IRequest;
  * Controller class for main page.
  */
 class PageController extends Controller {
-
 	/**
 	 * @var IInitialStateService
 	 */

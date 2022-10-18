@@ -13,7 +13,7 @@
         "php": ">=7.3 <=8.1"
     },
     "require-dev": {
-        "nextcloud/coding-standard": "^0.3.0",
+        "nextcloud/coding-standard": "^1.0.0",
         "phpunit/phpunit": "^9.5"
     },
     "config": {

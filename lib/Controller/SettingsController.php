@@ -27,7 +27,6 @@ use \OCP\AppFramework\Controller;
 use \OCP\IRequest;
 
 class SettingsController extends Controller {
-	
 	/**
 	 * @var SettingsService
 	 */

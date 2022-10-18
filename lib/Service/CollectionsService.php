@@ -26,7 +26,6 @@ use OCP\IConfig;
 use OCP\IL10N;
 
 class CollectionsService {
-
 	/**
 	 * @var string
 	 */
@@ -99,9 +98,9 @@ class CollectionsService {
 				'icon' => 'Check']
 		];
 		foreach ($collections as $key => $collection) {
-			$tmp = $this->settings->getUserValue($this->userId, $this->appName,'show_'.$collection['id']);
+			$tmp = $this->settings->getUserValue($this->userId, $this->appName, 'show_'.$collection['id']);
 			if (!in_array($tmp, ['0','1','2'])) {
-				$this->settings->setUserValue($this->userId, $this->appName,'show_'.$collection['id'],$collections[$key]['show']);
+				$this->settings->setUserValue($this->userId, $this->appName, 'show_'.$collection['id'], $collections[$key]['show']);
 			} else {
 				$collections[$key]['show'] = (int)$tmp;
 			}
@@ -118,7 +117,7 @@ class CollectionsService {
 	 */
 	public function setVisibility(string $collectionID, int $visibility):bool {
 		if (in_array($visibility, [0,1,2])) {
-			$this->settings->setUserValue($this->userId, $this->appName,'show_'.$collectionID,$visibility);
+			$this->settings->setUserValue($this->userId, $this->appName, 'show_'.$collectionID, $visibility);
 		}
 		return true;
 	}
