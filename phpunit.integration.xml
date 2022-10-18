@@ -1,26 +1,17 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<phpunit bootstrap="tests/php/bootstrap.php"
-		 verbose="true"
-		 colors="true"
-		 timeoutForSmallTests="900"
-		 timeoutForMediumTests="900"
-		 timeoutForLargeTests="900">
-	<testsuite name='Tasks app integration tests'>
-		<directory>./tests/php/integration</directory>
-	</testsuite>
-	<!-- filters for code coverage -->
-	<filter>
-		<whitelist>
-			<directory suffix=".php">./</directory>
-			<exclude>
-				<directory suffix=".php">./l10n</directory>
-				<directory suffix=".php">./templates</directory>
-				<directory suffix=".php">./tests</directory>
-			</exclude>
-		</whitelist>
-	</filter>
-	<logging>
-		<!-- and this is where your report will be written -->
-		<log type="coverage-clover" target="./clover.integration.xml"/>
-	</logging>
+<?xml version="1.0" encoding="utf-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         bootstrap="tests/php/bootstrap.php"
+         verbose="true"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+  <coverage>
+    <include>
+      <directory suffix=".php">./lib</directory>
+    </include>
+    <report>
+      <clover outputFile="./clover.integration.xml"/>
+    </report>
+  </coverage>
+  <testsuite name="Tasks app integration tests">
+    <directory>./tests/php/integration</directory>
+  </testsuite>
 </phpunit>
