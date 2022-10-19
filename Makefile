@@ -119,8 +119,8 @@ appstore: clean build-js-production
 	--exclude=/.gitattributes \
 	--exclude=/.gitignore \
 	--exclude=/.phpunit.result.cache \
-	--exclude=/.php_cs.cache \
-	--exclude=/.php_cs.dist \
+	--exclude=/.php-cs-fixer.dist.php.cache \
+	--exclude=/.php-cs-fixer.dist.php \
 	--exclude=/.gitlab-ci.yml \
 	--exclude=/.prettierrc.js \
 	--exclude=/.scrutinizer.yml \
