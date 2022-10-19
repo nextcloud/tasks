@@ -31,14 +31,13 @@ use OCP\AppFramework\Bootstrap\IRegistrationContext;
 use OCP\AppFramework\Http\Events\BeforeTemplateRenderedEvent;
 
 class Application extends App implements IBootstrap {
-
 	/** @var string */
 	public const APP_ID = 'tasks';
 
 	/**
 	 * @param array $params
 	 */
-	public function __construct(array $params=[]) {
+	public function __construct(array $params = []) {
 		parent::__construct(self::APP_ID, $params);
 	}
 

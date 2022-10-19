@@ -9,12 +9,17 @@
             "email": "dev@bernhard-posselt.com"
         }
     ],
-    "require": {},
+    "require": {
+        "php": ">=7.3 <=8.1"
+    },
     "require-dev": {
-        "nextcloud/coding-standard": "^0.3.0",
-        "phpunit/phpunit": "^7.5"
+        "nextcloud/coding-standard": "^1.0.0",
+        "phpunit/phpunit": "^9.5"
     },
     "config": {
+        "platform": {
+            "php": "7.4"
+        },
         "optimize-autoloader": true,
         "classmap-authoritative": true
     },

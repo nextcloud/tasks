@@ -1,3 +1,3 @@
 <?php
 
-	script('tasks', 'tasks-main');
+script('tasks', 'tasks-main');
