@@ -1,3 +1,30 @@
+## 0.14.5 - 2022-10-19
+
+### Added
+- Compatibility with Nextcloud server 25 #2114
+- Allow to double click task title or notes icon to edit title and notes in AppSidebar #2112
+
+### Changed
+- User border-radius-large for task body #2104
+- Indicate tasks with future start date #1998
+- Update to nextcloud/vue@6 #2127
+- Use `NcTextfield` for new calendar name input #2086
+- Use `NcProgressBar` instead of HTML progress #2082
+- Use `CounterBubble` instead of `NcAppNavigationCounter` #2081
+- Use nextcloud/vue buttons #1820
+- Migrate to DashboardWidget from nextcloud/vue #1985
+- Adjust server versions to test PHP code for #2073 
+- Updated translations
+- Updated dependencies
+- Code cleanup #1963 #1964 #1974 #1975 #2016 #2113
+
+### Fixed
+- Check that taskUri is defined before searching #1973
+- Fix sharing tooltip #2090
+- Fix talk integration #1999
+- Fix the task status display animation #1979
+- Don't show dashboard actions for read-only tasks #2017
+
 ## 0.14.4 - 2022-03-19
 
 ### Fixed
