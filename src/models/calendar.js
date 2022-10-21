@@ -38,7 +38,7 @@ const getDefaultCalendarObject = (props = {}) => Object.assign({}, {
 	// Whether or not the calendar is visible in the grid
 	enabled: true,
 	// Whether or not the calendar is loading events at the moment
-	loading: false,
+	loadedCompleted: false,
 	// Whether this calendar supports VEvents
 	supportsEvents: false,
 	// Whether this calendar supports VJournals
