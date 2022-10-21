@@ -784,7 +784,7 @@ export const mapToDoComponentToTaskObject = (toDoComponent) => {
 		toDoComponent,
 		summary: toDoComponent.title || '',
 		uid: toDoComponent.uid || '',
-		priority: toDoComponent.priority,
+		priority: toDoComponent.priority || 0,
 		complete: toDoComponent.percent || 0,
 		completed: toDoComponent.percent === 100 || toDoComponent.status === 'COMPLETED',
 		completedDate: toDoComponent.completedTime.clone().toICALJs(),
@@ -807,7 +807,7 @@ export const mapToDoComponentToTaskObject = (toDoComponent) => {
 		matchesSearchQuery: true,
 	})
 
-	let sortOrder = taskObject.getFirstPropertyFirstValue('x-apple-sort-order')
+	let sortOrder = toDoComponent.getFirstPropertyFirstValue('x-apple-sort-order')
 	if (sortOrder === null) {
 		if (taskObject.created === null) {
 			sortOrder = 0
@@ -841,24 +841,23 @@ export const copyCalendarObjectInstanceIntoTaskComponent = (taskObject, toDoComp
 	if (!(toDoComponent instanceof AbstractRecurringComponent)) {
 		throw new Error('Component provided is not a CalendarJS component')
 	}
-	toDoComponent.uid = taskObject.uid
-	toDoComponent.title = taskObject.summary
-	toDoComponent.description = taskObject.note
-	toDoComponent.status = taskObject.status
-	toDoComponent.percent = taskObject.complete
-	toDoComponent.priority = taskObject.priority
+	if (taskObject.uid) toDoComponent.uid = taskObject.uid
+	if (taskObject.title) toDoComponent.title = taskObject.summary
+	if (taskObject.description) toDoComponent.description = taskObject.note
+	if (taskObject.status) toDoComponent.status = taskObject.status
+	if (taskObject.complete) toDoComponent.percent = taskObject.complete
+	if (!isNaN(taskObject.priority)) toDoComponent.priority = taskObject.priority
 
 	if (taskObject.start) toDoComponent.startDate = DateTimeValue.fromICALJs(taskObject.start, true)
 	if (taskObject.due) toDoComponent.dueTime = DateTimeValue.fromICALJs(taskObject.due, true)
 	if (taskObject.completedDate) toDoComponent.completedTime = DateTimeValue.fromICALJs(taskObject.completedDate, true)
 	if (taskObject.modified) toDoComponent.modificationTime = DateTimeValue.fromICALJs(taskObject.modified, true)
 	if (taskObject.created) toDoComponent.creationTime = DateTimeValue.fromICALJs(taskObject.created, true)
-
-	toDoComponent.accessClass = taskObject.class
+	if (taskObject.class) toDoComponent.accessClass = taskObject.class
 	toDoComponent.clearAllCategories()
 	for (const tag in taskObject.tags) {
 		toDoComponent.addCategory(tag)
 	}
 
-	toDoComponent.updatePropertyWithValue('x-apple-sort-order', taskObject.sortOrder)
+	if (taskObject.sortOrder) toDoComponent.updatePropertyWithValue('x-apple-sort-order', taskObject.sortOrder) // else { toDoComponent.updatePropertyWithValue('x-apple-sort-order', 0) }
 }
