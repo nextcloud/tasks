@@ -27,6 +27,8 @@ import { isParentInList, momentToICALTime } from './storeHelper.js'
 import SyncStatus from '../models/syncStatus.js'
 import Task, { copyCalendarObjectInstanceIntoTaskComponent } from '../models/task.js'
 import router from '../router.js'
+import { createStandardToDoComponent } from '../utils/task.js'
+import { dateTimeFactory } from '../utils/datetime.js'
 
 import { showError } from '@nextcloud/dialogs'
 import { emit } from '@nextcloud/event-bus'
@@ -715,37 +717,9 @@ const actions = {
 		}
 		const task = new Task('BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Nextcloud Tasks v' + this._vm.$appVersion + '\nEND:VCALENDAR', taskData.calendar)
 
-		task.created = ICAL.Time.now()
-		task.summary = taskData.summary
-		task.hidesubtasks = 0
-		if (taskData.priority) {
-			task.priority = taskData.priority
-		}
-		if (taskData.complete) {
-			task.complete = taskData.complete
-		}
-		if (taskData.note) {
-			task.note = taskData.note
-		}
-		if (taskData.due) {
-			task.due = taskData.due
-		}
-		if (taskData.start) {
-			task.start = taskData.start
-		}
-		if (taskData.allDay) {
-			task.allDay = taskData.allDay
-		}
-		if (taskData.related) {
-			task.related = taskData.related
-			// Check that parent task is not completed, uncomplete if necessary.
-			if (task.complete !== 100) {
-				const parent = context.getters.getParentTask(task)
-				if (parent && parent.completed) {
-					await context.dispatch('setPercentComplete', { task: parent, complete: 0 })
-				}
-			}
-		}
+		const todo = createStandardToDoComponent(this._vm.$appVersion)
+		copyCalendarObjectInstanceIntoTaskComponent(taskData, todo)
+		todo.creationTime = dateTimeFactory()
 
 		const vData = ICAL.stringify(task.jCal)
 
@@ -786,32 +760,32 @@ const actions = {
 	 *
 	 * @param {object} context The store mutations
 	 * @param {object} data Destructuring object
-	 * @param {Task} data.task The task to delete
+	 * @param {Task} data.taskObject The task to delete
 	 * @param {boolean} [data.dav = true] Trigger a dav deletion
 	 */
-	async deleteTask(context, { task, dav = true }) {
+	async deleteTask(context, { taskObject, dav = true }) {
 		// Don't try to delete tasks in read-only calendars
-		if (task.calendar.readOnly) {
+		if (taskObject.calendar.readOnly) {
 			return
 		}
 		// Don't delete tasks in shared calendars with access class not PUBLIC
-		if (task.calendar.isSharedWithMe && task.class !== 'PUBLIC') {
+		if (taskObject.calendar.isSharedWithMe && taskObject.class !== 'PUBLIC') {
 			return
 		}
 
 		// Clear task from deletion array
-		context.dispatch('clearTaskDeletion', task)
+		context.dispatch('clearTaskDeletion', taskObject)
 
 		/**
 		 * Deletes a task from the store
 		 */
 		function deleteTaskFromStore() {
-			context.commit('deleteTask', task)
-			const parent = context.getters.getTaskByUid(task.related)
-			context.commit('deleteTaskFromParent', { task, parent })
-			context.commit('deleteTaskFromCalendar', task)
+			context.commit('deleteTask', taskObject)
+			const parent = context.getters.getTaskByUid(taskObject.related)
+			context.commit('deleteTaskFromParent', { taskObject, parent })
+			context.commit('deleteTaskFromCalendar', taskObject)
 			// If the task is open in the sidebar, close the sidebar
-			if (context.rootState.route.params.taskId === task.uri) {
+			if (context.rootState.route.params.taskId === taskObject.uri) {
 				emit('tasks:close-appsidebar')
 			}
 			// Stop the delete timeout if no tasks are scheduled for deletion anymore
@@ -821,18 +795,18 @@ const actions = {
 			}
 		}
 		// Delete all subtasks first
-		await Promise.all(Object.values(task.subTasks).map(async (subTask) => {
+		await Promise.all(Object.values(taskObject.subTasks).map(async (subTask) => {
 			await context.dispatch('deleteTask', { task: subTask, dav: true })
 		}))
 		// Only local delete if the task does not exist on the server
-		if (task.dav && dav) {
-			await task.dav.delete()
+		if (taskObject.dav && dav) {
+			await taskObject.dav.delete()
 				.then(() => {
 					deleteTaskFromStore()
 				})
 				.catch((error) => {
 					console.debug(error)
-					task.syncStatus = new SyncStatus('error', t('tasks', 'Could not delete the task.'))
+					taskObject.syncStatus = new SyncStatus('error', t('tasks', 'Could not delete the task.'))
 				})
 		} else {
 			deleteTaskFromStore()
