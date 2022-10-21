@@ -59,6 +59,7 @@ export default {
 			default: '#31CC7C',
 		},
 	},
+	emits: ['color-selected'],
 	data() {
 		return {
 			random: '#31CC7C',

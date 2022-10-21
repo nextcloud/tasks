@@ -106,6 +106,7 @@ OC.L10N.register(
     "No priority assigned" : "Ingen tildelt prioritet",
     "{percent} % completed" : "{percent} % utført",
     "Could not delete the task." : "Kunne ikke slette oppgaven.",
-    "An error occurred" : "En feil oppstod"
+    "An error occurred" : "En feil oppstod",
+    "Message from {author} in {conversationName}" : "Melding fra {author} i {conversationName}"
 },
 "nplurals=2; plural=(n != 1);");

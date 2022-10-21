@@ -192,9 +192,11 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					@set-tags="updateTags" />
 			</div>
 		</NcAppSidebarTab>
-		<NcEmptyContent v-else
-			:icon="taskStatusIcon">
-			{{ taskStatusLabel }}
+		<NcEmptyContent v-else :description="taskStatusLabel">
+			<template #icon>
+				<NcLoadingIcon v-if="loading" />
+				<Magnify v-else />
+			</template>
 		</NcEmptyContent>
 		<NcAppSidebarTab v-if="task && (!readOnly || task.note)"
 			id="app-sidebar-tab-notes"
@@ -249,6 +251,7 @@ import NcActionLink from '@nextcloud/vue/dist/Components/NcActionLink.js'
 import NcEmptyContent from '@nextcloud/vue/dist/Components/NcEmptyContent.js'
 import NcAppSidebar from '@nextcloud/vue/dist/Components/NcAppSidebar.js'
 import NcAppSidebarTab from '@nextcloud/vue/dist/Components/NcAppSidebarTab.js'
+import NcLoadingIcon from '@nextcloud/vue/dist/Components/NcLoadingIcon.js'
 import { generateUrl } from '@nextcloud/router'
 
 import Calendar from 'vue-material-design-icons/Calendar.vue'
@@ -257,6 +260,7 @@ import CalendarStart from 'vue-material-design-icons/CalendarStart.vue'
 import Delete from 'vue-material-design-icons/Delete.vue'
 import Download from 'vue-material-design-icons/Download.vue'
 import InformationOutline from 'vue-material-design-icons/InformationOutline.vue'
+import Magnify from 'vue-material-design-icons/Magnify.vue'
 import Pencil from 'vue-material-design-icons/Pencil.vue'
 import Percent from 'vue-material-design-icons/Percent.vue'
 import Pin from 'vue-material-design-icons/Pin.vue'
@@ -273,6 +277,7 @@ export default {
 		NcAppSidebarTab,
 		NcActionButton,
 		NcActionLink,
+		NcLoadingIcon,
 		CheckboxItem,
 		DatetimePickerItem,
 		Calendar,
@@ -281,6 +286,7 @@ export default {
 		Delete,
 		Download,
 		InformationOutline,
+		Magnify,
 		Pencil,
 		Percent,
 		Pin,
@@ -501,9 +507,6 @@ export default {
 		taskStatusLabel() {
 			return this.loading ? t('tasks', 'Loading task from server.') : t('tasks', 'Task not found!')
 		},
-		taskStatusIcon() {
-			return this.loading ? 'icon-loading' : 'icon-search'
-		},
 		/**
 		 * Whether we treat the task as read-only.
 		 * We also treat tasks in shared calendars with an access class other than 'PUBLIC'
@@ -719,10 +722,12 @@ export default {
 	mounted() {
 		subscribe('tasks:close-appsidebar', this.closeAppSidebar)
 		subscribe('tasks:open-appsidebar-tab', this.openAppSidebarTab)
+		subscribe('tasks:edit-appsidebar-title', this.editTitle)
 	},
 	beforeDestroy() {
 		unsubscribe('tasks:close-appsidebar', this.closeAppSidebar)
 		unsubscribe('tasks:open-appsidebar-tab', this.openAppSidebarTab)
+		unsubscribe('tasks:edit-appsidebar-title', this.editTitle)
 	},
 	created() {
 		this.loadTask()
@@ -883,12 +888,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.app-sidebar::v-deep .app-sidebar-header__description {
+.app-sidebar :deep(.app-sidebar-header__description) {
 	flex-wrap: wrap;
 	margin: 0;
 }
 
-.app-sidebar::v-deep .app-sidebar-tabs {
+.app-sidebar  :deep(.app-sidebar-tabs) {
 	min-height: 160px !important;
 }
 

@@ -32,14 +32,15 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				size="large"
 				@close="showModal = false">
 				<div class="modal__content">
-					<NcEmptyContent v-if="loading" icon="icon-loading">
-						{{ t('tasks', 'Loading deleted calendars, tasks and events.') }}
+					<NcEmptyContent v-if="loading" :description="t('tasks', 'Loading deleted calendars, tasks and events.')">
+						<template #icon>
+							<NcLoadingIcon :size="64" />
+						</template>
 					</NcEmptyContent>
-					<NcEmptyContent v-else-if="!items.length">
+					<NcEmptyContent v-else-if="!items.length" :description="t('tasks', 'You do not have any deleted calendars, tasks or events.')">
 						<template #icon>
 							<Delete :size="64" />
 						</template>
-						{{ t('tasks', 'You do not have any deleted calendars, tasks or events.') }}
 					</NcEmptyContent>
 					<template v-else>
 						<h2>{{ t('tasks', 'Trash bin') }}</h2>
@@ -118,6 +119,7 @@ import NcActions from '@nextcloud/vue/dist/Components/NcActions.js'
 import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton.js'
 import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
 import NcEmptyContent from '@nextcloud/vue/dist/Components/NcEmptyContent.js'
+import NcLoadingIcon from '@nextcloud/vue/dist/Components/NcLoadingIcon.js'
 import NcModal from '@nextcloud/vue/dist/Components/NcModal.js'
 
 import Delete from 'vue-material-design-icons/Delete.vue'
@@ -132,6 +134,7 @@ export default {
 		NcAppNavigationItem,
 		Delete,
 		NcEmptyContent,
+		NcLoadingIcon,
 		NcModal,
 		Moment,
 		NcActions,

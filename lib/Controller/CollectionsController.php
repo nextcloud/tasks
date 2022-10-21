@@ -27,7 +27,6 @@ use \OCP\IRequest;
 use \OCP\AppFramework\Controller;
 
 class CollectionsController extends Controller {
-
 	/**
 	 * @var CollectionsService
 	 */

@@ -25,7 +25,6 @@ import App from './App.vue'
 import router from './router.js'
 import store from './store/store.js'
 
-import { subscribe, unsubscribe } from '@nextcloud/event-bus'
 import { linkTo } from '@nextcloud/router'
 
 import AlertBoxOutline from 'vue-material-design-icons/AlertBoxOutline.vue'
@@ -41,8 +40,6 @@ import TrendingUp from 'vue-material-design-icons/TrendingUp.vue'
 
 import Vue from 'vue'
 import { sync } from 'vuex-router-sync'
-// eslint-disable-next-line import/no-named-as-default
-import VueClipboard from 'vue-clipboard2'
 
 // Disable on production
 Vue.config.devtools = true
@@ -60,8 +57,6 @@ __webpack_nonce__ = btoa(OC.requestToken)
 __webpack_public_path__ = linkTo('tasks', 'js/')
 
 sync(store, router)
-
-Vue.use(VueClipboard)
 
 /**
  * We have to globally register these material design icons
@@ -104,33 +99,5 @@ OCA.Tasks.App = new Vue({
 	el: '.app-tasks',
 	router,
 	store,
-	data() {
-		return {
-			searchString: '',
-		}
-	},
-	mounted() {
-		subscribe('nextcloud:unified-search.search', this.filterProxy)
-		subscribe('nextcloud:unified-search.reset', this.cleanSearch)
-	},
-	beforeMount() {
-		this.$store.dispatch('loadCollections')
-		this.$store.dispatch('loadSettings')
-	},
-	beforeDestroy() {
-		unsubscribe('nextcloud:unified-search.search', this.filterProxy)
-		unsubscribe('nextcloud:unified-search.reset', this.cleanSearch)
-	},
-	methods: {
-		filterProxy({ query }) {
-			this.filter(query)
-		},
-		filter(query) {
-			this.$store.commit('setSearchQuery', query)
-		},
-		cleanSearch() {
-			this.$store.commit('setSearchQuery', '')
-		},
-	},
 	render: h => h(App),
 })

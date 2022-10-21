@@ -27,7 +27,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			<RouterView />
 		</NcAppContent>
 
-		<RouterView name="sidebar" />
+		<RouterView name="AppSidebar" />
 	</NcContent>
 </template>
 
@@ -35,7 +35,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 import AppNavigation from './views/AppNavigation.vue'
 import client from './services/cdav.js'
 
-import { emit } from '@nextcloud/event-bus'
+import { emit, subscribe, unsubscribe } from '@nextcloud/event-bus'
 import { translate as t } from '@nextcloud/l10n'
 import NcAppContent from '@nextcloud/vue/dist/Components/NcAppContent.js'
 import NcContent from '@nextcloud/vue/dist/Components/NcContent.js'
@@ -49,12 +49,27 @@ export default {
 		NcAppContent,
 		NcContent,
 	},
+	data() {
+		return {
+			searchString: '',
+		}
+	},
 	computed: {
 		...mapGetters({
 			calendars: 'getTaskCalendars',
 		}),
 	},
+	mounted() {
+		subscribe('nextcloud:unified-search.search', this.filterProxy)
+		subscribe('nextcloud:unified-search.reset', this.cleanSearch)
+	},
+	beforeUnmount() {
+		unsubscribe('nextcloud:unified-search.search', this.filterProxy)
+		unsubscribe('nextcloud:unified-search.reset', this.cleanSearch)
+	},
 	async beforeMount() {
+		this.$store.dispatch('loadCollections')
+		this.$store.dispatch('loadSettings')
 		// get calendars then get tasks
 		await client.connect({ enableCalDAV: true })
 		await this.$store.dispatch('fetchCurrentUserPrincipal')
@@ -105,6 +120,15 @@ export default {
 				emit('tasks:close-appsidebar')
 			}
 		},
+		filterProxy({ query }) {
+			this.filter(query)
+		},
+		filter(query) {
+			this.$store.commit('setSearchQuery', query)
+		},
+		cleanSearch() {
+			this.$store.commit('setSearchQuery', '')
+		},
 	},
 }
 </script>
@@ -132,12 +156,21 @@ $breakpoint-mobile: 1024px;
 body {
 	min-height: 100%;
 	height: auto;
+	// Adjustment necessary to use nc/vue@6 with NC25
+	position: initial;
 }
 
 </style>
 
 <style lang="scss" scoped>
+// Adjustment necessary to use nc/vue@6 with NC25
+#content-vue {
+	max-height: 100vh;
+}
+
 .app-content {
+	// Adjustment necessary to use nc/vue@6 with NC25
+	overflow-y: scroll;
 	background-color: var(--color-background-dark) !important;
 
 	> div {

@@ -426,7 +426,7 @@ export default {
 
 			// copy link for calendar to clipboard
 			try {
-				await this.$copyText(url)
+				await navigator.clipboard.writeText(url)
 				event.preventDefault()
 				this.copySuccess = true
 				this.copied = true
@@ -537,10 +537,10 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 $color-error: #e9322d;
 
-.list::v-deep {
+.list {
 	div.active .app-navigation-entry__icon-bullet > div {
 		height: 16px;
 		width: 16px;

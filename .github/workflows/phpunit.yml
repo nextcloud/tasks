@@ -14,13 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-versions: ['7.4']
-        nextcloud-versions: ['stable23', 'stable24', 'master']
+        php-versions: ['7.4', '8.0', '8.1']
+        nextcloud-versions: ['stable23', 'stable24', 'stable25', 'master']
         include:
           - php-versions: '7.3'
             nextcloud-versions: 'stable23'
-          # - php-versions: '8.0'
-          #   nextcloud-versions: 'master'
+        exclude:
+          - php-versions: '8.1'
+            nextcloud-versions: 'stable23'
     name: php${{ matrix.php-versions }} on ${{ matrix.nextcloud-versions }} unit tests
     env:
       CI: true
@@ -51,11 +52,6 @@ jobs:
 
     - name: Enable app
       run: php -f nextcloud/occ app:enable tasks
-
-    - name: Downgrade phpunit for php7.2
-      if: ${{ matrix.php-versions == '7.2' }}
-      working-directory: nextcloud/apps/tasks
-      run: composer update christophwurst/nextcloud_testing -W
 
     - name: Install dependencies
       working-directory: nextcloud/apps/tasks

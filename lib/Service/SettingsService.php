@@ -26,7 +26,6 @@ use OCP\App\IAppManager;
 use OCP\IConfig;
 
 class SettingsService {
-
 	/**
 	 * @var ?string
 	 */

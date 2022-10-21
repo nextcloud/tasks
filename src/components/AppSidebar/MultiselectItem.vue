@@ -82,6 +82,7 @@ export default {
 			default: null,
 		},
 	},
+	emits: ['change-value'],
 	computed: {
 		isDisabled() {
 			return this.options.length < 2 || this.disabled
@@ -102,24 +103,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.property__item::v-deep {
+.property__item {
 	display: flex;
 	border-bottom: 1px solid var(--color-border);
 	width: 100%;
 
-	.multiselect {
+	:deep(.multiselect) {
 		width: 100%;
 
 		&:hover .multiselect__placeholder {
 			color: var(--color-text-lighter);
 		}
 
-		&--active .multiselect__tags {
+		.multiselect--active .multiselect__tags {
 			border: 1px solid var(--color-border-dark);
 		}
 
-		&--disabled,
-		&--disabled .multiselect__single {
+		.multiselect--disabled,
+		.multiselect--disabled .multiselect__single {
 			background-color: var(--color-main-background) !important;
 
 			& * {
@@ -127,9 +128,10 @@ export default {
 			}
 		}
 
-		&__tags {
+		.multiselect__tags {
 			border: 1px solid transparent;
 			height: 44px;
+			padding: 0 !important;
 
 			.multiselect__single {
 				padding: 0;
@@ -150,7 +152,7 @@ export default {
 			}
 		}
 
-		&__content-wrapper li > span {
+		.multiselect__content-wrapper li > span {
 			padding: 0;
 
 			&.multiselect__option--selected {

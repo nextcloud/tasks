@@ -58,6 +58,10 @@ export default {
 			default: null,
 		},
 	},
+	emits: [
+		'status-clicked',
+		'reset-status',
+	],
 	data() {
 		return {
 			resetStatusTimeout: null,
@@ -112,17 +116,17 @@ export default {
 		}
 		&--sync,
 		&--conflict {
-			::v-deep svg {
+			:deep(svg) {
 				animation-iteration-count: infinite;
 				animation-duration: 1s;
 			}
 		}
-		&--sync ::v-deep svg {
+		&--sync :deep(svg) {
 			animation-name: spin;
 		}
 		&--conflict {
 			color: var(--color-warning);
-			::v-deep svg {
+			:deep(svg) {
 				animation-name: pulse;
 				border-radius: 50%;
 			}

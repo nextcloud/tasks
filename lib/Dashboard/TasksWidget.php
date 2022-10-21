@@ -30,7 +30,6 @@ use OCP\Dashboard\IWidget;
 use OCP\IL10N;
 
 class TasksWidget implements IWidget {
-
 	/**
 	 * @var IL10N
 	 */

@@ -72,6 +72,7 @@ export default {
 			required: false,
 		},
 	},
+	emits: ['change-calendar'],
 	computed: {
 		isDisabled() {
 			return this.calendars.length < 2 || this.disabled
@@ -96,20 +97,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.property__item::v-deep {
+.property__item {
 	display: flex;
 	border-bottom: 1px solid var(--color-border);
 	width: 100%;
 
-	.multiselect {
+	:deep(.multiselect) {
 		width: 100%;
 
-		&--active .multiselect__tags {
+		.multiselect--active .multiselect__tags {
 			border: 1px solid var(--color-border-dark);
 		}
 
-		&--disabled,
-		&--disabled .multiselect__single {
+		.multiselect--disabled,
+		.multiselect--disabled .multiselect__single {
 			background-color: var(--color-main-background) !important;
 
 			& * {
@@ -120,6 +121,7 @@ export default {
 		.multiselect__tags {
 			border: 1px solid transparent;
 			height: 44px;
+			padding: 0 !important;
 
 			.multiselect__single {
 				padding: 0;
@@ -132,6 +134,7 @@ export default {
 				position: absolute !important;
 				font-weight: bold;
 				font-size: var(--default-font-size);
+				line-height: 44px;
 			}
 		}
 

@@ -47,7 +47,8 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:priority-class="priorityClass"
 				@toggle-completed="toggleCompleted(task)" />
 			<!-- Info: title, progress & tags -->
-			<div class="task-body__info">
+			<div class="task-body__info"
+				@dblclick="editTitle()">
 				<div class="title">
 					<span v-linkify="{text: task.summary, linkify: true}" />
 				</div>
@@ -79,7 +80,8 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<TextBoxOutline v-if="task.note!=''"
 					:size="20"
 					:title="t('tasks', 'Task has a note')"
-					@click.stop="openAppSidebarTab($event, 'app-sidebar-tab-notes')" />
+					@click="openAppSidebarTab($event, 'app-sidebar-tab-notes')"
+					@dblclick.native.stop="openAppSidebarTab($event, 'app-sidebar-tab-notes', true)" />
 				<div v-if="task.due || task.completed" :class="{'date--overdue': overdue(task.dueMoment) && !task.completed}" class="date">
 					<span class="date__short" :class="{ 'date__short--completed': task.completed }">{{ dueDateShort }}</span>
 					<span class="date__long" :class="{ 'date__long--date-only': task.allDay && !task.completed, 'date__long--completed': task.completed }">{{ dueDateLong }}</span>
@@ -142,7 +144,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		<div class="task-item__subtasks">
 			<div v-if="showSubtaskInput"
 				v-click-outside="{ handler: closeSubtaskInput, middleware: clickOutsideMiddleware }"
-				class="task-item task-item--input">
+				class="task-item task-item__input">
 				<form name="addTaskForm" @submit.prevent="addTask">
 					<Plus :size="20" />
 					<input ref="input"
@@ -573,11 +575,19 @@ export default {
 			}
 		},
 
-		openAppSidebarTab($event, tab) {
+		openAppSidebarTab($event, tab, edit = false) {
 			// Open the AppSidebar
 			this.navigate($event, tab)
 			// In case it is already open, we also have to emit an event to show the tab
 			emit('tasks:open-appsidebar-tab', { tab })
+			if (edit) {
+				emit('tasks:edit-appsidebar-notes', $event)
+			}
+		},
+
+		editTitle() {
+			// emit an event to edit the task title
+			emit('tasks:edit-appsidebar-title', true)
 		},
 
 		openSubtaskInput() {
@@ -671,8 +681,10 @@ $breakpoint-mobile: 1024px;
 		z-index: 5;
 	}
 
-	&--input {
+	&__input {
 		border-top: 1px solid var(--color-border);
+		overflow: hidden;
+		border-radius: 0;
 
 		.material-design-icon {
 			position: absolute;
@@ -680,14 +692,14 @@ $breakpoint-mobile: 1024px;
 		}
 
 		input {
-			border-radius: 0;
+			border-radius: 0 !important;
 			border: medium none !important;
 			box-sizing: border-box;
 			color: var(--color-main-text);
 			cursor: text;
 			font-size: 100%;
-			margin: 0;
-			padding: 0 15px 0 44px;
+			margin: 0 !important;
+			padding: 0 15px 0 44px !important;
 			width: 100%;
 			min-height: 44px;
 			overflow: hidden;
@@ -703,14 +715,14 @@ $breakpoint-mobile: 1024px;
 		border-bottom-right-radius: var(--border-radius-large);
 	}
 
-	&:not(.task-item--subtasks-visible).task-item--input input {
+	&:not(.task-item--subtasks-visible).task-item__input {
 		border-bottom-left-radius: var(--border-radius-large);
 		border-bottom-right-radius: var(--border-radius-large);
 	}
 
 	// Don't show round corners if any of the ancestors is not the last in the (sub-)list
 	&:not(:last-child) {
-		.task-item--input input {
+		.task-item__input {
 			border-bottom-left-radius: 0;
 			border-bottom-right-radius: 0;
 		}
@@ -774,8 +786,8 @@ $breakpoint-mobile: 1024px;
 						overflow: hidden;
 						text-overflow: ellipsis;
 
-						// We need v-deep as it comes from a directive
-						&::v-deep a {
+						// We need deep as it comes from a directive
+						:deep(a) {
 							cursor: pointer;
 							text-decoration: underline;
 						}
