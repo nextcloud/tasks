@@ -842,7 +842,7 @@ export const copyCalendarObjectInstanceIntoTaskComponent = (taskObject, toDoComp
 		throw new Error('Component provided is not a CalendarJS component')
 	}
 	if (taskObject.uid) toDoComponent.uid = taskObject.uid
-	if (taskObject.title) toDoComponent.title = taskObject.summary
+	if (taskObject.summary) toDoComponent.title = taskObject.summary
 	if (taskObject.description) toDoComponent.description = taskObject.note
 	if (taskObject.status) toDoComponent.status = taskObject.status
 	if (taskObject.complete) toDoComponent.percent = taskObject.complete

@@ -760,32 +760,32 @@ const actions = {
 	 *
 	 * @param {object} context The store mutations
 	 * @param {object} data Destructuring object
-	 * @param {Task} data.taskObject The task to delete
+	 * @param {Task} data.task The task to delete
 	 * @param {boolean} [data.dav = true] Trigger a dav deletion
 	 */
-	async deleteTask(context, { taskObject, dav = true }) {
+	async deleteTask(context, { task, dav = true }) {
 		// Don't try to delete tasks in read-only calendars
-		if (taskObject.calendar.readOnly) {
+		if (task.calendar.readOnly) {
 			return
 		}
 		// Don't delete tasks in shared calendars with access class not PUBLIC
-		if (taskObject.calendar.isSharedWithMe && taskObject.class !== 'PUBLIC') {
+		if (task.calendar.isSharedWithMe && task.class !== 'PUBLIC') {
 			return
 		}
 
 		// Clear task from deletion array
-		context.dispatch('clearTaskDeletion', taskObject)
+		context.dispatch('clearTaskDeletion', task)
 
 		/**
 		 * Deletes a task from the store
 		 */
 		function deleteTaskFromStore() {
-			context.commit('deleteTask', taskObject)
-			const parent = context.getters.getTaskByUid(taskObject.related)
-			context.commit('deleteTaskFromParent', { taskObject, parent })
-			context.commit('deleteTaskFromCalendar', taskObject)
+			context.commit('deleteTask', task)
+			const parent = context.getters.getTaskByUid(task.related)
+			context.commit('deleteTaskFromParent', { task, parent })
+			context.commit('deleteTaskFromCalendar', task)
 			// If the task is open in the sidebar, close the sidebar
-			if (context.rootState.route.params.taskId === taskObject.uri) {
+			if (context.rootState.route.params.taskId === task.uri) {
 				emit('tasks:close-appsidebar')
 			}
 			// Stop the delete timeout if no tasks are scheduled for deletion anymore
@@ -795,18 +795,18 @@ const actions = {
 			}
 		}
 		// Delete all subtasks first
-		await Promise.all(Object.values(taskObject.subTasks).map(async (subTask) => {
+		await Promise.all(Object.values(task.subTasks).map(async (subTask) => {
 			await context.dispatch('deleteTask', { task: subTask, dav: true })
 		}))
 		// Only local delete if the task does not exist on the server
-		if (taskObject.dav && dav) {
-			await taskObject.dav.delete()
+		if (task.dav && dav) {
+			await task.dav.delete()
 				.then(() => {
 					deleteTaskFromStore()
 				})
 				.catch((error) => {
 					console.debug(error)
-					taskObject.syncStatus = new SyncStatus('error', t('tasks', 'Could not delete the task.'))
+					task.syncStatus = new SyncStatus('error', t('tasks', 'Could not delete the task.'))
 				})
 		} else {
 			deleteTaskFromStore()
