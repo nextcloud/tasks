@@ -721,7 +721,7 @@ const actions = {
 		copyCalendarObjectInstanceIntoTaskComponent(taskData, todo)
 		todo.creationTime = dateTimeFactory()
 
-		const vData = ICAL.stringify(task.jCal)
+		const vData = todo.root.toICS()
 
 		if (!task.dav) {
 			const response = await task.calendar.dav.createVObject(vData)
