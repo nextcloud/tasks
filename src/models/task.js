@@ -33,7 +33,7 @@ import moment from '@nextcloud/moment'
 import { v4 as uuid } from 'uuid'
 import ICAL from 'ical.js'
 import PQueue from 'p-queue'
-import { AbstractRecurringComponent, DateTimeValue, ToDoComponent } from '@nextcloud/calendar-js'
+import { AbstractRecurringComponent, DateTimeValue, Timezone, ToDoComponent } from '@nextcloud/calendar-js'
 
 export default class Task {
 
@@ -821,7 +821,7 @@ export const mapToDoComponentToTaskObject = (toDoComponent) => {
 					minute: 0,
 					second: 0,
 					isDate: false,
-				})
+				}, Timezone.utc)
 			).toSeconds()
 		}
 	}
@@ -847,17 +847,23 @@ export const copyCalendarObjectInstanceIntoTaskComponent = (taskObject, toDoComp
 	if (taskObject.status) toDoComponent.status = taskObject.status
 	if (taskObject.complete) toDoComponent.percent = taskObject.complete
 	if (!isNaN(taskObject.priority)) toDoComponent.priority = taskObject.priority
+	if (taskObject.related) toDoComponent.addRelation('PARENT', taskObject.related)
 
-	if (taskObject.start) toDoComponent.startDate = DateTimeValue.fromICALJs(taskObject.start, true)
-	if (taskObject.due) toDoComponent.dueTime = DateTimeValue.fromICALJs(taskObject.due, true)
-	if (taskObject.completedDate) toDoComponent.completedTime = DateTimeValue.fromICALJs(taskObject.completedDate, true)
-	if (taskObject.modified) toDoComponent.modificationTime = DateTimeValue.fromICALJs(taskObject.modified, true)
-	if (taskObject.created) toDoComponent.creationTime = DateTimeValue.fromICALJs(taskObject.created, true)
+	// TODO: error while adding task w start date (today pane) recurrence item has a null start date. error: 'other is null'.
+	if (taskObject.start) {
+		if (!toDoComponent.root.startDate) toDoComponent.root.startDate = DateTimeValue.fromICALJs(taskObject.start, Timezone.utc)
+		else toDoComponent.startDate = DateTimeValue.fromICALJs(taskObject.start, Timezone.utc)
+	}
+	if (taskObject.due) toDoComponent.dueTime = DateTimeValue.fromICALJs(taskObject.due, Timezone.utc)
+	if (taskObject.completedDate) toDoComponent.completedTime = DateTimeValue.fromICALJs(taskObject.completedDate, Timezone.utc)
+	if (taskObject.modified) toDoComponent.modificationTime = DateTimeValue.fromICALJs(taskObject.modified, Timezone.utc)
+	if (taskObject.created) toDoComponent.creationTime = DateTimeValue.fromICALJs(taskObject.created, Timezone.utc)
 	if (taskObject.class) toDoComponent.accessClass = taskObject.class
+	if (taskObject.sortOrder) toDoComponent.updatePropertyWithValue('x-apple-sort-order', taskObject.sortOrder)
+
 	toDoComponent.clearAllCategories()
 	for (const tag in taskObject.tags) {
 		toDoComponent.addCategory(tag)
 	}
 
-	if (taskObject.sortOrder) toDoComponent.updatePropertyWithValue('x-apple-sort-order', taskObject.sortOrder) // else { toDoComponent.updatePropertyWithValue('x-apple-sort-order', 0) }
 }
