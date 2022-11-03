@@ -44,6 +44,7 @@ OC.L10N.register(
     "Empty trash bin" : "Töm papperskorgen",
     "Untitled task" : "Namnlös uppgift",
     "Untitled event" : "Namnlös händelse",
+    "Untitled item" : "Namnlöst objekt",
     "Unknown calendar" : "Okänd kalender",
     "Could not load deleted calendars and objects" : "Kunde inte ladda borttagna kalendrar och objekt",
     "Could not restore calendar or event" : "Kunde inte återställa kalender eller händelse",
