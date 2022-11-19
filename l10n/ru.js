@@ -16,6 +16,7 @@ OC.L10N.register(
     "Hidden" : "Скрывать",
     "Visible" : "Показывать",
     "Automatic" : "Автоматически",
+    "Tasks settings" : "Параметры задач",
     "Share with users or groups" : "Поделиться с пользователями или группами",
     "No users or groups" : "Пользователи или группы отсутствуют",
     "Can edit" : "Разрешить редактировать",
