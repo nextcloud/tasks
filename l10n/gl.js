@@ -49,6 +49,7 @@ OC.L10N.register(
     "Deleted" : "Eliminada",
     "Restore" : "Restaurar",
     "Delete permanently" : "Eliminar de xeito permanente",
+    "Empty trash bin" : "Lixo baleiro",
     "Untitled task" : "Tarefa sen título",
     "Untitled event" : "Evento sen título",
     "Select a calendar" : "Seleccione un calendario.",
