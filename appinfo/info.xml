@@ -20,7 +20,7 @@
     <repository>https://github.com/nextcloud/tasks.git</repository>
     <screenshot>https://raw.githubusercontent.com/nextcloud/tasks/master/screenshots/tasks-1.png</screenshot>
     <dependencies>
-        <nextcloud min-version="23" max-version="26"/>
+        <nextcloud min-version="25" max-version="27"/>
     </dependencies>
     <navigations>
         <navigation>
