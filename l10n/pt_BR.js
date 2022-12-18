@@ -120,7 +120,7 @@ OC.L10N.register(
     "Show closed subtasks" : "Mostrar subtarefas fechadas ",
     "Hide closed subtasks" : "Esconder subtarefas fechadas ",
     "Delete task" : "Excluir tarefa",
-    "Toggle starred" : "Alternar com estrela ",
+    "Toggle starred" : "Alternar destaque",
     "[Yesterday]" : "[Ontem]",
     "[Today]" : "[Hoje]",
     "[Tomorrow]" : "[Amanhã]",
