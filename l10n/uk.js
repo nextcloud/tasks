@@ -99,7 +99,7 @@ OC.L10N.register(
     "Sort by due date and summary." : "Впорядкувати за датою завершення та описом.",
     "Created date" : "Дата створення",
     "Sort by created date and summary." : "Впорядкувати за датою створення та описом.",
-    "Last modified" : "Останні зміни",
+    "Last modified" : "Востаннє змінено",
     "Sort by last-modified date and summary." : "Впорядкувати за датою останньої зміни та описом.",
     "Completed date" : "Завершена дата",
     "Sort by completed date." : "Впорядкувати за датою завершення.",
