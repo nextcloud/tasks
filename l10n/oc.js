@@ -1,6 +1,7 @@
 OC.L10N.register(
     "tasks",
     {
+    "Upcoming tasks" : "Prètzfaches venents",
     "Important" : "Important",
     "Today" : "Uèi",
     "Week" : "Aquesta setmana",
@@ -45,6 +46,9 @@ OC.L10N.register(
     "Task not found!" : "Prètzfach pas trobat !",
     "Set start date" : "Especificar la data de començament",
     "Set due date" : "Especificar la data d'escasença",
+    "No upcoming tasks" : "Cap de prètzfach venent",
+    "upcoming tasks" : "prètzfaches venents",
+    "No tasks today" : "Cap de prètzfach uèi",
     "An error occurred" : "Una error s’es producha"
 },
 "nplurals=2; plural=(n > 1);");
