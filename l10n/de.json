@@ -33,6 +33,8 @@
     "This will unshare the calendar \"{calendar}\"." : "Die Freigabe des Kalenders \"{calendar}\" wird aufgehoben.",
     "This will delete the list \"{list}\" and all corresponding tasks." : "Hiermit werden die Liste \"{list}\" und alle dazugehörigen Aufgaben gelöscht.",
     "This will unshare the list \"{list}\"." : "Dies wird die Listen-Freigabe \"{list}\" aufheben.",
+    "Share this calendar" : "Teile diesen Kalender",
+    "Share this list" : "Teile diese liste",
     "Calendar link copied to clipboard." : "Kalender-Link in die Zwischenablage kopiert.",
     "List link copied to clipboard." : "Listen-Link in die Zwischenablage kopiert.",
     "Calendar link could not be copied to clipboard." : "Kalender-Link konnte nicht in die Zwischenablage kopiert werden.",
