@@ -1,6 +1,7 @@
 OC.L10N.register(
     "tasks",
     {
+    "Upcoming tasks" : "Próximas tareas",
     "Important" : "Importante",
     "Today" : "Hoy",
     "Week" : "Semana",
@@ -34,6 +35,7 @@ OC.L10N.register(
     "Alphabetically" : "Alfabéticamente",
     "Manually" : "Manualmente",
     "Task is completed" : "La tarea ha sido completada",
+    "Create a new task" : "Crear una tarea nueva",
     "Cancel" : "Cancelar",
     "Close" : "Cerrar",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n Tarea Completada","%n Tareas Completadas","%n Tareas Completadas"],
@@ -52,6 +54,10 @@ OC.L10N.register(
     "Task not found!" : "¡Tarea no encontrada!",
     "Set start date" : "Establecer fecha de inicio",
     "Set due date" : "Establecer fecha de vencimiento",
+    "No upcoming tasks" : "No hay tareas próximas",
+    "upcoming tasks" : "tareas próximas",
+    "Mark as done" : "Marcar como hecho",
+    "No due date assigned" : "Fecha de vencimiento sin especificar",
     "An error occurred" : "Ha ocurrido un error"
 },
 "nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");
