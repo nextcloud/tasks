@@ -1,7 +1,4 @@
-.icon-tasks {
+.app-icon-tasks {
 	background-image: url(./../../img/tasks-dark.svg);
-}
-
-body.theme--dark .icon-tasks {
-	background-image: url(./../../img/tasks.svg);
+	filter: var(--background-invert-if-dark);
 }
