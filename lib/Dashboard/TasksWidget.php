@@ -68,7 +68,7 @@ class TasksWidget implements IWidget {
 	 * @inheritDoc
 	 */
 	public function getIconClass(): string {
-		return 'icon-tasks';
+		return 'app-icon-tasks';
 	}
 
 	/**
