@@ -21,7 +21,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<NcAppNavigationItem :title="t('tasks', 'Trash bin')"
+	<NcAppNavigationItem :name="t('tasks', 'Trash bin')"
 		:pinned="true"
 		@click.prevent="onShow">
 		<template #icon>

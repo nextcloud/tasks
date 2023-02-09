@@ -24,7 +24,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		v-click-outside="{ handler: resetView, middleware: clickOutsideMiddleware }"
 		:calendar-id="calendar.id"
 		:to="{ name: 'calendars', params: { calendarId: calendar.id } }"
-		:title="calendar.displayName"
+		:name="calendar.displayName"
 		:class="{'list--edit': editing, 'list--deleted': !!deleteTimeout}"
 		class="list reactive"
 		@drop.native="dropTask"

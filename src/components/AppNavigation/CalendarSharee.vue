@@ -25,7 +25,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<NcAppNavigationItem :title="sharee.displayName" force-display-actions>
+	<NcAppNavigationItem :name="sharee.displayName" force-display-actions>
 		<template #icon>
 			<AccountMultiple v-if="sharee.isGroup"
 				:size="18"
