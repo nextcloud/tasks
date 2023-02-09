@@ -29,25 +29,17 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 <template>
 	<div class="calendar-shares">
 		<ul>
-			<li class="app-navigation-entry__multiselect">
-				<NcMultiselect ref="multiselect"
+			<li class="app-navigation-entry__select">
+				<NcSelect ref="select"
 					:options="usersOrGroups"
-					:searchable="true"
-					:internal-search="false"
-					:max-height="600"
-					:show-no-results="true"
 					:placeholder="placeholder"
-					:class="{ 'showContent': inputGiven, 'icon-loading': isLoading }"
 					:user-select="true"
-					open-direction="bottom"
-					track-by="user"
-					label="displayName"
-					@search-change="findSharee"
-					@change="shareCalendar">
-					<template #noResult>
+					@search="findSharee"
+					@option:selected="shareCalendar">
+					<template #no-options>
 						<span>{{ noResult }}</span>
 					</template>
-				</NcMultiselect>
+				</NcSelect>
 			</li>
 			<!-- list of user or groups calendar is shared with -->
 			<CalendarSharee v-for="sharee in calendar.shares"
@@ -66,7 +58,7 @@ import { urldecode } from '../../utils/url.js'
 import Axios from '@nextcloud/axios'
 import { translate as t } from '@nextcloud/l10n'
 import { generateOcsUrl } from '@nextcloud/router'
-import NcMultiselect from '@nextcloud/vue/dist/Components/NcMultiselect.js'
+import NcSelect from '@nextcloud/vue/dist/Components/NcSelect.js'
 
 import debounce from 'debounce'
 
@@ -74,7 +66,7 @@ export default {
 	name: 'CalendarShare',
 	components: {
 		CalendarSharee,
-		NcMultiselect,
+		NcSelect,
 	},
 	props: {
 		calendar: {
@@ -86,8 +78,6 @@ export default {
 	},
 	data() {
 		return {
-			isLoading: false,
-			inputGiven: false,
 			usersOrGroups: [],
 		}
 	},
@@ -100,8 +90,8 @@ export default {
 		},
 	},
 	mounted() {
-		// This ensures that the multiselect input is in focus as soon as the user clicks share
-		this.$refs.multiselect?.focus?.()
+		// This ensures that the select input is in focus as soon as the user clicks share
+		this.$refs.select?.focus?.()
 	},
 	methods: {
 		/**
@@ -121,9 +111,9 @@ export default {
 		/**
 		 * Use the cdav client call to find matches to the query from the existing Users & Groups
 		 *
-		 * @param {string} query
+		 * @param {string} search
 		 */
-		findSharee: debounce(async function(query) {
+		findSharee: debounce(async function(search, loading) {
 			const hiddenPrincipalSchemes = []
 			const hiddenUrls = []
 			this.calendar.shares.forEach((share) => {
@@ -136,24 +126,19 @@ export default {
 				hiddenUrls.push(this.calendar.owner)
 			}
 
-			this.isLoading = true
 			this.usersOrGroups = []
 
-			if (query.length > 0) {
-				const davPromise = this.findShareesFromDav(query, hiddenPrincipalSchemes, hiddenUrls)
-				const ocsPromise = this.findShareesFromCircles(query, hiddenPrincipalSchemes, hiddenUrls)
+			if (search.length > 0) {
+				loading(true)
+				const davPromise = this.findShareesFromDav(search, hiddenPrincipalSchemes, hiddenUrls)
+				const ocsPromise = this.findShareesFromCircles(search, hiddenPrincipalSchemes, hiddenUrls)
 
 				const [davResults, ocsResults] = await Promise.all([davPromise, ocsPromise])
 				this.usersOrGroups = [
 					...davResults,
 					...ocsResults,
 				]
-
-				this.isLoading = false
-				this.inputGiven = true
-			} else {
-				this.inputGiven = false
-				this.isLoading = false
+				loading(false)
 			}
 		}, 500),
 		/**
@@ -262,50 +247,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.calendar-shares {
-	&__shareematch--bold {
-		font-weight: bold;
+.calendar-shares .app-navigation-entry {
+
+	&-wrapper::v-deep {
+		.app-navigation-entry {
+			padding-left: 0 !important;
+
+			&__utils {
+				.action-checkbox__label {
+					padding-right: 0 !important;
+				}
+
+				.action-checkbox__label::before {
+					margin: 4px 4px 0 !important;
+				}
+			}
+		}
 	}
 
-	.app-navigation-entry {
-
-		&-wrapper::v-deep {
-			.app-navigation-entry {
-				padding-left: 0 !important;
-
-				&__utils {
-					.action-checkbox__label {
-						padding-right: 0 !important;
-					}
-
-					.action-checkbox__label::before {
-						margin: 4px 4px 0 !important;
-					}
-				}
-			}
-		}
-
-		&__multiselect::v-deep {
-			padding-left: 6px !important;
-
-			.multiselect {
-				width: 100%;
-				margin: 0;
-				padding-right: 8px !important;
-				.multiselect__tags:focus-within,
-				.multiselect__tags:hover {
-					border-color: var(--color-primary-element);
-				}
-
-				&:not(.showContent) .multiselect__content-wrapper {
-					display: none;
-				}
-
-				.multiselect__content-wrapper {
-					z-index: 101 !important;
-				}
-			}
-		}
+	&__select::v-deep .v-select {
+		width: 100%;
 	}
 }
 </style>
