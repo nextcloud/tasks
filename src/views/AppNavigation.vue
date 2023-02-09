@@ -28,7 +28,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:key="collection.id"
 				:collection-id="collection.id"
 				:to="{ name: 'collections', params: { collectionId: collection.id } }"
-				:title="collection.displayName"
+				:name="collection.displayName"
 				class="collection reactive"
 				draggable="false"
 				@dragstart.native="dragStart"
@@ -57,7 +57,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					@click.native="setInitialRoute(`/calendars/${calendar.id}`)" />
 			</draggable>
 			<NcAppNavigationItem v-click-outside="() => {creating = false}"
-				:title="t('tasks', 'Add List…')"
+				:name="t('tasks', 'Add List…')"
 				:class="{'collection--edit': creating}"
 				class="collection reactive"
 				@click="startCreate($event)">
