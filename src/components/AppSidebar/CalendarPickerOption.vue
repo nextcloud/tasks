@@ -107,6 +107,7 @@ export default {
 	align-items: center;
 	flex-grow: 1;
 	width: 100%;
+	cursor: pointer;
 
 	&__color-indicator {
 		width: 16px;
@@ -116,6 +117,7 @@ export default {
 		flex-basis: 16px;
 		flex-shrink: 0;
 		margin: 14px;
+		cursor: pointer;
 	}
 
 	&__label {
@@ -124,6 +126,8 @@ export default {
 		flex-grow: 1;
 		font-weight: bold;
 		white-space: nowrap;
+		color: var(--color-text-lighter);
+		cursor: pointer;
 	}
 
 	&__avatar {
