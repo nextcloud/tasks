@@ -38,6 +38,7 @@ OC.L10N.register(
     "Restore" : "Restaurar",
     "Delete permanently" : "Eliminar permanentemente",
     "Empty trash bin" : "Esvaziar a reciclagem",
+    "Untitled item" : "Item sem título ",
     "Unknown calendar" : "Calendário desconhecido",
     "Could not load deleted calendars and objects" : "Não foi possível carregar calendários e objetos apagados ",
     "Could not restore calendar or event" : "Não foi possível restaurar o calendário ou evento ",
