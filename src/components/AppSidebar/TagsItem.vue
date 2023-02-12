@@ -24,8 +24,10 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div class="property__item">
-		<NcMultiselect :value="tags"
-			:taggable="true"
+		<div class="multiselect__icon">
+			<component :is="icon" :size="20" />
+		</div>
+		<NcSelect :value="tags"
 			:disabled="disabled"
 			:options="options"
 			:placeholder="placeholder"
@@ -34,18 +36,10 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			:tag-placeholder="t('tasks', 'Add this as a new tag')"
 			@input="setTags"
 			@tag="addTag">
-			<template #placeholder>
-				<MultiselectOption :display-name="placeholder" :icon="icon" />
-			</template>
-			<template #clear>
-				<div v-if="tags.length" class="multiselect__icon">
-					<Tag :size="20" />
-				</div>
-			</template>
-			<template #noOptions>
+			<template #no-options>
 				{{ t('tasks', 'No tag available. Create one!') }}
 			</template>
-		</NcMultiselect>
+		</NcSelect>
 	</div>
 </template>
 
@@ -53,13 +47,13 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 import MultiselectOption from './MultiselectOption.vue'
 
 import { translate as t } from '@nextcloud/l10n'
-import NcMultiselect from '@nextcloud/vue/dist/Components/NcMultiselect.js'
+import NcSelect from '@nextcloud/vue/dist/Components/NcSelect.js'
 
 import Tag from 'vue-material-design-icons/Tag.vue'
 
 export default {
 	components: {
-		NcMultiselect,
+		NcSelect,
 		MultiselectOption,
 		Tag,
 	},
@@ -109,93 +103,45 @@ export default {
 	width: 100%;
 	color: var(--color-text-lighter);
 
-	:deep(.multiselect) {
+	.multiselect__icon {
+		display: flex;
+		height: 44px;
+		width: 44px;
+		justify-content: center;
+		flex-basis: 44px;
+		flex-shrink: 0;
+	}
+
+	:deep(.v-select.select) {
 		width: 100%;
+		margin-left: -44px;
 
-		&:hover .multiselect__placeholder {
-			color: var(--color-text-lighter);
-		}
+		.vs {
+			&__dropdown-toggle {
+				margin:  0;
+				padding: 0;
+				border: none;
+				margin-left: 44px;
+				margin-bottom: 4px;
+			}
 
-		.multiselect--active {
-			.multiselect__tags {
+			&__dropdown-menu {
+				border-radius: 0;
+				box-shadow: none;
 				border: 1px solid var(--color-border-dark);
 			}
 
-			.multiselect__icon {
-				display: none;
-			}
-		}
-
-		.multiselect--disabled,
-		.multiselect--disabled .multiselect__single {
-			background-color: var(--color-main-background) !important;
-
-			& * {
-				cursor: default !important;
-			}
-		}
-
-		.multiselect__icon {
-			position: absolute;
-			display: flex;
-			width: 44px;
-			flex-basis: 44px;
-			flex-shrink: 0;
-			height: 44px;
-			justify-content: center;
-		}
-
-		.multiselect__tags {
-			border: 1px solid transparent;
-			height: 44px;
-			padding: 0 !important;
-			flex-grow: 1;
-
-			.multiselect__single {
-				padding: 0;
+			&__selected-options {
+				padding-left: 0;
 			}
 
-			.multiselect__placeholder {
-				display: flex !important;
-				padding: 0;
-			}
+			&__search {
+				padding-left: 0;
 
-			input.multiselect__input {
-				padding: 0 !important;
-				padding-left: 44px !important;
-				width: 100% !important;
-				position: absolute !important;
-				font-weight: bold;
-				font-size: var(--default-font-size);
-				line-height: 44px;
-			}
-
-			.multiselect__tags-wrap {
-				padding: 0;
-				padding-left: 44px;
-
-				.multiselect__tag {
-					margin-bottom: 0;
-				}
-			}
-		}
-
-		.multiselect__content-wrapper {
-			// We need this so the options list is not cut off
-			// by the tabs header
-			max-height: 170px !important;
-
-			li > span {
-				padding: 0;
-				height: 44px;
-
-				&::before {
-					min-width: 44px;
-					margin-right: 0;
-				}
-
-				&.multiselect__option--selected {
-					color: var(--color-main-text);
+				&::placeholder {
+					color: var(--color-text-lighter);
+					opacity: 1;
+					font-weight: bold;
 				}
 			}
 		}
