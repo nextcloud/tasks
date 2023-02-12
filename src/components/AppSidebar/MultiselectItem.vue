@@ -24,40 +24,43 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div class="property__item">
-		<NcMultiselect label="displayName"
+		<NcSelect label="displayName"
 			:disabled="isDisabled"
 			:options="options"
 			:value="value"
 			:placeholder="placeholder"
 			:multiple="false"
 			:searchable="false"
-			:allow-empty="false"
+			:clearable="false"
 			:close-on-select="true"
-			open-direction="below"
-			track-by="type"
-			@input="change"
-			@tag="change">
-			<template #placeholder>
-				<MultiselectOption :display-name="placeholder" :icon="icon" />
+			@option:selected="change">
+			<template #search="{ attributes, events }">
+				<span v-if="!value" class="placeholder__icon">
+					<component :is="icon" :size="20" />
+				</span>
+				<input maxlength="1"
+					class="vs__search"
+					v-bind="attributes"
+					v-on="events">
 			</template>
-			<template #singleLabel="scope">
-				<MultiselectOption v-bind="scope.option" />
+			<template #selected-option="option">
+				<MultiselectOption v-bind="option" />
 			</template>
-			<template #option="scope">
-				<MultiselectOption v-bind="scope.option" />
+			<template #option="option">
+				<MultiselectOption v-bind="option" />
 			</template>
-		</NcMultiselect>
+		</NcSelect>
 	</div>
 </template>
 
 <script>
 import MultiselectOption from './MultiselectOption.vue'
 
-import NcMultiselect from '@nextcloud/vue/dist/Components/NcMultiselect.js'
+import NcSelect from '@nextcloud/vue/dist/Components/NcSelect.js'
 
 export default {
 	components: {
-		NcMultiselect,
+		NcSelect,
 		MultiselectOption,
 	},
 	props: {
@@ -108,55 +111,68 @@ export default {
 	border-bottom: 1px solid var(--color-border);
 	width: 100%;
 
-	:deep(.multiselect) {
+	:deep(.v-select.select) {
 		width: 100%;
 
-		&:hover .multiselect__placeholder {
-			color: var(--color-text-lighter);
-		}
-
-		.multiselect--active .multiselect__tags {
-			border: 1px solid var(--color-border-dark);
-		}
-
-		.multiselect--disabled,
-		.multiselect--disabled .multiselect__single {
-			background-color: var(--color-main-background) !important;
-
-			& * {
-				cursor: default !important;
-			}
-		}
-
-		.multiselect__tags {
-			border: 1px solid transparent;
+		.placeholder__icon {
+			display: flex;
 			height: 44px;
-			padding: 0 !important;
-
-			.multiselect__single {
-				padding: 0;
-			}
-
-			.multiselect__placeholder {
-				display: flex !important;
-				padding: 0;
-			}
-
-			input.multiselect__input {
-				padding: 0 !important;
-				padding-left: 44px !important;
-				width: 100% !important;
-				position: absolute !important;
-				font-weight: bold;
-				font-size: var(--default-font-size);
-			}
+			width: 44px;
+			justify-content: center;
+			flex-basis: 44px;
+			flex-shrink: 0;
 		}
 
-		.multiselect__content-wrapper li > span {
-			padding: 0;
+		.vs {
+			&__dropdown-menu,
+			&__dropdown-option,
+			&__dropdown-toggle,
+			&__selected-options,
+			&__selected {
+				margin:  0;
+				padding: 0;
+				border: none;
+			}
 
-			&.multiselect__option--selected {
-				color: var(--color-main-text);
+			&__selected-options {
+				width: calc(100% - 35px);
+				height: 44px;
+			}
+			&__selected {
+				width: 100%;
+			}
+
+			&__dropdown-menu {
+				border-radius: 0;
+				box-shadow: none;
+				border: 1px solid var(--color-border-dark);
+			}
+
+			&__dropdown-option {
+				margin-left: -1px;
+			}
+
+			&__search {
+				padding-left: 44px;
+				margin: 0;
+				height: 44px !important;
+				line-height: 44px;
+				font-weight: bold;
+				position: absolute;
+				width: 100%;
+
+				&::placeholder {
+					color: var(--color-text-lighter);
+					opacity: 1;
+				}
+			}
+
+			&__actions {
+				cursor: pointer;
+
+				span {
+					cursor: pointer;
+				}
 			}
 		}
 	}

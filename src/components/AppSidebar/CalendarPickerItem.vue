@@ -24,26 +24,26 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div class="property__item">
-		<NcMultiselect label="displayName"
-			track-by="url"
+		<NcSelect label="displayName"
 			:disabled="isDisabled"
-			:options="calendars"
-			:value="calendar"
+			:clearable="false"
+			:options="calendarsMap"
+			:value="calendarMap"
 			:placeholder="t('tasks', 'Select a calendar')"
-			@select="change">
-			<template #singleLabel="scope">
-				<CalendarPickerOption v-bind="scope.option" />
+			@option:selected="change">
+			<template #selected-option="option">
+				<CalendarPickerOption v-bind="option" />
 			</template>
-			<template #option="scope">
-				<CalendarPickerOption v-bind="scope.option" />
+			<template #option="option">
+				<CalendarPickerOption v-bind="option" />
 			</template>
-			<template #noResult>
+			<template #no-options>
 				<CalendarPickerOption color=""
 					owner=""
 					:is-shared-with-me="false"
 					:display-name="t('tasks', 'No calendar matches the search.')" />
 			</template>
-		</NcMultiselect>
+		</NcSelect>
 	</div>
 </template>
 
@@ -51,12 +51,12 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 import CalendarPickerOption from './CalendarPickerOption.vue'
 
 import { translate as t } from '@nextcloud/l10n'
-import NcMultiselect from '@nextcloud/vue/dist/Components/NcMultiselect.js'
+import NcSelect from '@nextcloud/vue/dist/Components/NcSelect.js'
 
 export default {
 	components: {
 		CalendarPickerOption,
-		NcMultiselect,
+		NcSelect,
 	},
 	props: {
 		calendar: {
@@ -77,20 +77,37 @@ export default {
 		isDisabled() {
 			return this.calendars.length < 2 || this.disabled
 		},
+		calendarsMap() {
+			return this.calendars.map(calendar => this.stubCalendar(calendar))
+		},
+		calendarMap() {
+			return this.stubCalendar(this.calendar)
+		},
 	},
 	methods: {
 		t,
 
+		stubCalendar(calendar) {
+			return {
+				id: calendar.url,
+				displayName: calendar.displayName,
+				color: calendar.color,
+				isSharedWithMe: calendar.isSharedWithMe,
+				owner: calendar.owner,
+			}
+		},
+
 		/**
 		 * TODO: this should emit the calendar id instead
 		 *
-		 * @param {object} newCalendar The selected calendar
+		 * @param {object} calendarMap The selected calendar
 		 */
-		change(newCalendar) {
-			if (!newCalendar) {
+		change(calendarMap) {
+			const calendar = this.calendars.find(calendar => calendar.url === calendarMap.id)
+			if (!calendar) {
 				return
 			}
-			this.$emit('change-calendar', newCalendar)
+			this.$emit('change-calendar', calendar)
 		},
 	},
 }
@@ -102,47 +119,44 @@ export default {
 	border-bottom: 1px solid var(--color-border);
 	width: 100%;
 
-	:deep(.multiselect) {
+	:deep(.v-select.select) {
 		width: 100%;
 
-		.multiselect--active .multiselect__tags {
-			border: 1px solid var(--color-border-dark);
-		}
-
-		.multiselect--disabled,
-		.multiselect--disabled .multiselect__single {
-			background-color: var(--color-main-background) !important;
-
-			& * {
-				cursor: default !important;
-			}
-		}
-
-		.multiselect__tags {
-			border: 1px solid transparent;
-			height: 44px;
-			padding: 0 !important;
-
-			.multiselect__single {
+		.vs {
+			&__dropdown-menu,
+			&__dropdown-option,
+			&__dropdown-toggle,
+			&__selected-options,
+			&__selected {
+				margin:  0;
 				padding: 0;
+				border: none;
 			}
 
-			input.multiselect__input {
-				padding: 0 !important;
-				padding-left: 44px !important;
-				width: 100% !important;
-				position: absolute !important;
-				font-weight: bold;
-				font-size: var(--default-font-size);
+			&__dropdown-menu {
+				border-radius: 0;
+				box-shadow: none;
+				border: 1px solid var(--color-border-dark);
+			}
+
+			&__dropdown-option {
+				margin-left: -1px;
+			}
+
+			&__search {
+				padding-left: 44px;
+				margin: 0;
+				height: 44px !important;
 				line-height: 44px;
+				font-weight: bold;
 			}
-		}
 
-		.multiselect__content-wrapper li > span {
-			padding: 0;
+			&__actions {
+				cursor: pointer;
 
-			&.multiselect__option--selected {
-				color: var(--color-main-text);
+				span {
+					cursor: pointer;
+				}
 			}
 		}
 	}

@@ -60,6 +60,7 @@ export default {
 	flex-grow: 1;
 	width: 100%;
 	cursor: pointer;
+	color: var(--color-text-lighter);
 
 	&.active {
 		color: #4271a6;
