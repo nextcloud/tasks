@@ -33,6 +33,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			:placeholder="placeholder"
 			:multiple="true"
 			:close-on-select="false"
+			:append-to-body="false"
 			:tag-placeholder="t('tasks', 'Add this as a new tag')"
 			@input="setTags"
 			@tag="addTag">

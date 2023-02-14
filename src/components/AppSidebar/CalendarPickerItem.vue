@@ -30,6 +30,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			:options="calendarsMap"
 			:value="calendarMap"
 			:placeholder="t('tasks', 'Select a calendar')"
+			:append-to-body="false"
 			@option:selected="change">
 			<template #selected-option="option">
 				<CalendarPickerOption v-bind="option" />

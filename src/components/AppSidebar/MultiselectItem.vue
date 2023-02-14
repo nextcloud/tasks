@@ -33,6 +33,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			:searchable="false"
 			:clearable="false"
 			:close-on-select="true"
+			:append-to-body="false"
 			@option:selected="change">
 			<template #search="{ attributes, events }">
 				<span v-if="!value" class="placeholder__icon">
