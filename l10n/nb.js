@@ -49,6 +49,7 @@ OC.L10N.register(
     "Empty trash bin" : "Tøm papirkurv",
     "Untitled task" : "Oppgave uten tittel",
     "Untitled event" : "Hendelse uten tittel",
+    "Untitled item" : "Element uten navn",
     "Unknown calendar" : "Ukjent kalender",
     "Could not load deleted calendars and objects" : "Kunne ikke laste slettede kalendere og objekter",
     "Could not restore calendar or event" : "Kunne ikke gjenopprette kalender eller hendelse",
