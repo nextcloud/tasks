@@ -35,8 +35,8 @@ OC.L10N.register(
     "List link could not be copied to clipboard." : "Lenke kunne ikke kopieres til utklippstavlen.",
     "The name \"{calendar}\" is already used." : "Navnet \"{calendar}\" er allerede i bruk.",
     "An empty name is not allowed." : "Et tomt navn er ikke tillatt.",
-    "An error occurred, unable to delete the calendar." : "En feil oppstod, kan ikke slette kalenderen. ",
-    "An error occurred, unable to delete the list." : "En feil oppstod, kunne ikke slette listen.",
+    "An error occurred, unable to delete the calendar." : "En feil oppsto, kan ikke slette kalenderen. ",
+    "An error occurred, unable to delete the list." : "En feil oppsto, kunne ikke slette listen.",
     "_Deleting the calendar in {countdown} second_::_Deleting the calendar in {countdown} seconds_" : ["Sletter kalenderen om {countdown} sekund","Sletter kalenderen om {countdown} sekunder"],
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Fjerner deling av kalenderen om {countdown} sekund","Fjerner deling av kalenderen om {countdown} sekunder"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Sletter listen om {countdown} sekund","Sletter listen om {countdown} sekunder"],
@@ -110,7 +110,7 @@ OC.L10N.register(
     "No priority assigned" : "Ingen tildelt prioritet",
     "{percent} % completed" : "{percent} % utført",
     "Could not delete the task." : "Kunne ikke slette oppgaven.",
-    "An error occurred" : "En feil oppstod",
+    "An error occurred" : "En feil oppsto",
     "Message from {author} in {conversationName}" : "Melding fra {author} i {conversationName}"
 },
 "nplurals=2; plural=(n != 1);");
