@@ -32,6 +32,7 @@ Then open the Tasks app from the app menu.
 * [aCalendar+](https://acalendar.tapirapps.de/de/support/home) (via Davx5) [(Android)](https://play.google.com/store/apps/details?id=org.withouthat.acalendarplus)
 * [GNOME Todo](https://wiki.gnome.org/Apps/Todo) (via [GNOME Online Accounts](https://wiki.gnome.org/Design/SystemSettings/OnlineAccounts)) (Linux)
 * [Kalendar](https://apps.kde.org/kalendar/) (Linux)
+* [vdirsyncer](https://vdirsyncer.pimutils.org/en/stable/) (Linux and BSD)
 
 
 ## ETag (or: problem with non-existing conflicts)
