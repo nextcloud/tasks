@@ -48,6 +48,7 @@ OC.L10N.register(
     "Deleted" : "Обрисано",
     "Restore" : "Врати",
     "Delete permanently" : "Обриши заувек",
+    "Empty trash bin" : "Испразни корпу за отпатке",
     "Untitled task" : "Неименовани задатак",
     "Untitled event" : "Неименовани догађај",
     "Select a calendar" : "Одаберите календар",
