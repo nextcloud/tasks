@@ -290,7 +290,7 @@ export default {
 
 	input[type=checkbox] {
 		margin-right: 7px;
-		vertical-align: -2px;
+		height: auto;
 		line-height: 10px;
 		font-size: 10px;
 		display: inline-block;
