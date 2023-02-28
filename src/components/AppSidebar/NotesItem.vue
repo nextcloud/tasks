@@ -165,7 +165,6 @@ export default {
 			&__editor {
 				display: none;
 				position: relative;
-				margin-left: -1px;
 
 				textarea,
 				pre {
@@ -189,7 +188,6 @@ export default {
 					top: 0;
 					width: 100%;
 					color: var(--color-main-text);
-					font-weight: 500;
 					outline: medium none;
 				}
 
@@ -200,6 +198,7 @@ export default {
 					outline: 0 none;
 					padding: 0 !important;
 					visibility: hidden;
+					padding-bottom: 50px !important;
 				}
 			}
 		}
@@ -210,6 +209,8 @@ export default {
 	width: 100% !important;
 	min-height: 40px;
 	cursor: text;
+	font-size: var(--default-font-size);
+	margin-left: 1px;
 
 	* {
 		white-space: normal;
