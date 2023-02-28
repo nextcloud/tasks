@@ -237,23 +237,23 @@ function sort(tasks, sortOrder, sortDirection) {
 		break
 	}
 	case 'due': {
-		comparators = [sortByPinned, sortByDue, sortAlphabetically]
+		comparators = [sortByPinned, sortByDue, sortByPriority, sortAlphabetically]
 		break
 	}
 	case 'start': {
-		comparators = [sortByPinned, sortByStart, sortAlphabetically]
+		comparators = [sortByPinned, sortByStart, sortByPriority, sortAlphabetically]
 		break
 	}
 	case 'created': {
-		comparators = [sortByPinned, sortByCreated, sortAlphabetically]
+		comparators = [sortByPinned, sortByCreated, sortByPriority, sortAlphabetically]
 		break
 	}
 	case 'modified': {
-		comparators = [sortByPinned, sortByModified, sortAlphabetically]
+		comparators = [sortByPinned, sortByModified, sortByPriority, sortAlphabetically]
 		break
 	}
 	case 'completedDate': {
-		comparators = [sortByPinned, sortByCompletedDate, sortAlphabetically]
+		comparators = [sortByPinned, sortByCompletedDate, sortByPriority, sortAlphabetically]
 		break
 	}
 	case 'manual': {

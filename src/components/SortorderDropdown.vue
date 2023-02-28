@@ -113,32 +113,32 @@ export default {
 					id: 'start',
 					icon: 'CalendarStart',
 					text: t('tasks', 'Start date'),
-					hint: t('tasks', 'Sort by start date and summary.'),
+					hint: t('tasks', 'Sort by start date, priority and summary.'),
 				},
 				{
 					id: 'due',
 					icon: 'CalendarEnd',
 					text: t('tasks', 'Due date'),
-					hint: t('tasks', 'Sort by due date and summary.'),
+					hint: t('tasks', 'Sort by due date, priority and summary.'),
 				},
 				{
 					id: 'created',
 					icon: 'Plus',
 					// TRANSLATORS The date at which a task was created.
 					text: t('tasks', 'Created date'),
-					hint: t('tasks', 'Sort by created date and summary.'),
+					hint: t('tasks', 'Sort by created date, priority and summary.'),
 				},
 				{
 					id: 'modified',
 					icon: 'Pencil',
 					text: t('tasks', 'Last modified'),
-					hint: t('tasks', 'Sort by last-modified date and summary.'),
+					hint: t('tasks', 'Sort by last-modified date, priority and summary.'),
 				},
 				{
 					id: 'completedDate',
 					icon: 'Check',
 					text: t('tasks', 'Completed date'),
-					hint: t('tasks', 'Sort by completed date.'),
+					hint: t('tasks', 'Sort by completed date, priority and summary.'),
 				},
 				{
 					id: 'priority',
