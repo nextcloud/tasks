@@ -28,6 +28,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			<component :is="icon" :size="20" />
 		</div>
 		<NcSelect :value="tags"
+			taggable
 			:disabled="disabled"
 			:options="options"
 			:placeholder="placeholder"
