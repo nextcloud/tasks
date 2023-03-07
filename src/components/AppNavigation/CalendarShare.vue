@@ -247,26 +247,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.calendar-shares .app-navigation-entry {
-
-	&-wrapper::v-deep {
-		.app-navigation-entry {
-			padding-left: 0 !important;
-
-			&__utils {
-				.action-checkbox__label {
-					padding-right: 0 !important;
-				}
-
-				.action-checkbox__label::before {
-					margin: 4px 4px 0 !important;
-				}
-			}
-		}
-	}
-
-	&__select::v-deep .v-select {
-		width: 100%;
-	}
+.calendar-shares .app-navigation-entry__select :deep(.v-select) {
+	width: 100%;
 }
 </style>
