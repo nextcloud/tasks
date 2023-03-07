@@ -115,6 +115,16 @@ export default {
 	:deep(.v-select.select) {
 		width: 100%;
 
+		&.vs--disabled .vs {
+			&__search,
+			&__dropdown-toggle {
+				background-color: transparent;
+			}
+			&__actions {
+				display: none;
+			}
+		}
+
 		.placeholder__icon {
 			display: flex;
 			height: 44px;
