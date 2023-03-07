@@ -533,41 +533,37 @@ export default {
 		 * Navigates to a different route, but checks if navigation is desired
 		 *
 		 * @param {object} $event the event that triggered navigation
-		 * @param {string} active the tab active in the AppSidebar
 		 */
-		navigate($event, active) {
+		async navigate($event) {
 			if (!$event.target.closest('.no-nav')
 				&& (this.$route.params.taskId !== this.task.uri || this.$route.params.collectionParam !== this.collectionParam)) {
 				if (!this.task.loadedCompleted) {
 					this.getTasksFromCalendar({ calendar: this.task.calendar, completed: true, related: this.task.uid })
 				}
 				if (this.$route.params.calendarId) {
-					this.$router.push({
+					await this.$router.push({
 						name: 'calendarsTask',
 						params: {
 							calendarId: this.$route.params.calendarId,
 							taskId: this.task.uri,
-							active,
 						},
 					})
 				} else if (this.collectionId) {
 					if (this.collectionParam) {
-						this.$router.push({
+						await this.$router.push({
 							name: 'collectionsParamTask',
 							params: {
 								collectionId: this.collectionId,
 								collectionParam: this.collectionParam,
 								taskId: this.task.uri,
-								active,
 							},
 						})
 					} else {
-						this.$router.push({
+						await this.$router.push({
 							name: 'collectionsTask',
 							params: {
 								collectionId: this.collectionId,
 								taskId: this.task.uri,
-								active,
 							},
 						})
 					}
@@ -575,11 +571,11 @@ export default {
 			}
 		},
 
-		openAppSidebarTab($event, tab, edit = false) {
-			// Open the AppSidebar
-			this.navigate($event, tab)
-			// In case it is already open, we also have to emit an event to show the tab
-			emit('tasks:open-appsidebar-tab', { tab })
+		async openAppSidebarTab($event, tab, edit = false) {
+			// Open the AppSidebar and wait for it to be mounted
+			await this.navigate($event)
+			// Emit event to show the tab
+			emit('tasks:open-appsidebar-tab', tab)
 			if (edit) {
 				emit('tasks:edit-appsidebar-notes', $event)
 			}
