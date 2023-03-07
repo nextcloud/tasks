@@ -38,11 +38,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 		</template>
 
 		<template #counter>
-			<NcActionCheckbox :disabled="loading"
+			<NcCheckboxRadioSwitch :disabled="loading"
 				:checked="writeable"
 				@update:checked="editSharee">
 				{{ t('tasks', 'Can edit') }}
-			</NcActionCheckbox>
+			</NcCheckboxRadioSwitch>
 		</template>
 
 		<template #actions>
@@ -61,9 +61,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 import { showError } from '@nextcloud/dialogs'
 import { translate as t } from '@nextcloud/l10n'
 import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton.js'
-import NcActionCheckbox from '@nextcloud/vue/dist/Components/NcActionCheckbox.js'
 import NcAppNavigationItem from '@nextcloud/vue/dist/Components/NcAppNavigationItem.js'
 import NcAvatar from '@nextcloud/vue/dist/Components/NcAvatar.js'
+import NcCheckboxRadioSwitch from '@nextcloud/vue/dist/Components/NcCheckboxRadioSwitch.js'
 
 import AccountMultiple from 'vue-material-design-icons/AccountMultiple.vue'
 import Delete from 'vue-material-design-icons/Delete.vue'
@@ -72,9 +72,9 @@ export default {
 	name: 'CalendarSharee',
 	components: {
 		NcActionButton,
-		NcActionCheckbox,
 		NcAppNavigationItem,
 		NcAvatar,
+		NcCheckboxRadioSwitch,
 		AccountMultiple,
 		Delete,
 	},
@@ -145,10 +145,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.app-navigation-entry .avatar {
-	width: 32px;
-	height: 32px;
-	background-color: var(--color-border-dark);
-	background-size: 16px;
+
+.app-navigation-entry {
+	.avatar {
+		width: 32px;
+		height: 32px;
+		background-color: var(--color-border-dark);
+		background-size: 16px;
+	}
+
+	&-wrapper :deep() .app-navigation-entry {
+		padding-left: 0;
+	}
 }
 </style>
