@@ -146,6 +146,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:value="classSelect.find( _ => _.type === task.class )"
 					:options="classSelect"
 					:disabled="readOnly || task.calendar.isSharedWithMe"
+					:title="task.calendar.isSharedWithMe ? t('tasks', 'Selecting a classification is forbidden, because the task was shared with you.') : null"
 					:placeholder="t('tasks', 'Select a classification')"
 					icon="IconEye"
 					@change-value="changeClass" />
