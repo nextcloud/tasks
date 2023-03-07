@@ -788,7 +788,7 @@ export default {
 			}
 		},
 
-		openAppSidebarTab({ tab }) {
+		openAppSidebarTab(tab) {
 			this.activeTab = tab
 		},
 
