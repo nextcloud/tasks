@@ -157,6 +157,7 @@
     "Show in Calendar" : "在日曆上顯示",
     "Edit title" : "編輯標題",
     "Details" : "細節",
+    "Selecting a classification is forbidden, because the task was shared with you." : "由於任務已與您共享，您無法選擇分類。",
     "Select a classification" : "選擇等級",
     "Select a status" : "選擇狀態",
     "Select tags" : "選擇標籤",

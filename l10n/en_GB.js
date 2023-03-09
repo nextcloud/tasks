@@ -159,6 +159,7 @@ OC.L10N.register(
     "Show in Calendar" : "Show in Calendar",
     "Edit title" : "Edit title",
     "Details" : "Details",
+    "Selecting a classification is forbidden, because the task was shared with you." : "Selecting a classification is forbidden, because the task was shared with you.",
     "Select a classification" : "Select a classification",
     "Select a status" : "Select a status",
     "Select tags" : "Select tags",
