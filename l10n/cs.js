@@ -159,6 +159,7 @@ OC.L10N.register(
     "Show in Calendar" : "Zobrazit v kalendáři",
     "Edit title" : "Upravit nadpis",
     "Details" : "Podrobnosti",
+    "Selecting a classification is forbidden, because the task was shared with you." : "Nemůžete vybrat stupeň důvěrnosti, protože úkol vám je pouze nasdílen.",
     "Select a classification" : "Vybrat klasifikaci",
     "Select a status" : "Vybrat stav",
     "Select tags" : "Výběr štítků",
