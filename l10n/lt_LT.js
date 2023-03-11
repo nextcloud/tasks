@@ -168,6 +168,7 @@ OC.L10N.register(
     "No priority assigned" : "Pirmenybė nepriskirta",
     "{percent} % completed" : "{percent} % atlikta",
     "No upcoming tasks" : "Artėjančių užduočių nėra",
+    "Mark as done" : "Žymėti kaip atliktą",
     "Successfully created the task." : "Užduotis sėkmingai sukurta.",
     "Could not delete the task." : "Nepavyko ištrinti užduoties.",
     "Synchronizing to the server." : "Sinchronizuojama į serverį.",
