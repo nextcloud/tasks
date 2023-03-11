@@ -21,9 +21,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<NcActions class="sortorder reactive"
-		:title="t('tasks', 'Change sort order')"
-		container=".header"
-		menu-align="right">
+		:title="t('tasks', 'Change sort order')">
 		<template #icon>
 			<span class="material-design-icon">
 				<component :is="sortOrderIcon" :size="20" />
