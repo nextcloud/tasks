@@ -145,14 +145,20 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			<div v-if="showSubtaskInput"
 				v-click-outside="{ handler: closeSubtaskInput, middleware: clickOutsideMiddleware }"
 				class="task-item task-item__input">
-				<form name="addTaskForm" @submit.prevent="addTask">
+				<NcTextField ref="input"
+					:value.sync="newTaskName"
+					:label="subtasksCreationPlaceholder"
+					:disabled="isAddingTask"
+					autocomplete="off"
+					class="reactive"
+					trailing-button-icon="arrowRight"
+					:show-trailing-button="newTaskName !== ''"
+					:trailing-button-label="subtasksCreationPlaceholder"
+					@trailing-button-click="addTask"
+					@keyup.27="showSubtaskInput = false"
+					@keyup.13="addTask">
 					<Plus :size="20" />
-					<input ref="input"
-						v-model="newTaskName"
-						:placeholder="subtasksCreationPlaceholder"
-						:disabled="isAddingTask"
-						@keyup.27="showSubtaskInput = false">
-				</form>
+				</NcTextField>
 			</div>
 			<TaskDragContainer :tasks="filteredSubtasksShown"
 				:disabled="task.calendar.readOnly"
@@ -176,6 +182,7 @@ import moment from '@nextcloud/moment'
 import NcActions from '@nextcloud/vue/dist/Components/NcActions.js'
 import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton.js'
 import NcProgressBar from '@nextcloud/vue/dist/Components/NcProgressBar.js'
+import NcTextField from '@nextcloud/vue/dist/Components/NcTextField.js'
 import Linkify from '@nextcloud/vue/dist/Directives/Linkify.js'
 
 import Delete from 'vue-material-design-icons/Delete.vue'
@@ -204,6 +211,7 @@ export default {
 		NcActions,
 		NcActionButton,
 		NcProgressBar,
+		NcTextField,
 		Delete,
 		Eye,
 		Pin,
@@ -586,11 +594,10 @@ export default {
 			emit('tasks:edit-appsidebar-title', true)
 		},
 
-		openSubtaskInput() {
+		async openSubtaskInput() {
 			this.showSubtaskInput = true
-			this.$nextTick(
-				() => this.$refs.input.focus()
-			)
+			await this.$nextTick()
+			this.$refs.input.$refs.inputField.$refs.input.focus()
 		},
 
 		closeSubtaskInput() {
@@ -601,7 +608,8 @@ export default {
 			return !event.target.closest('.open-input')
 		},
 
-		addTask() {
+		addTask($event) {
+			$event?.stopPropagation()
 			const task = { summary: this.newTaskName, calendar: this.task.calendar, related: this.task.uid }
 
 			// If the task is created in a collection view,
@@ -618,6 +626,8 @@ export default {
 
 			this.createTask(task)
 			this.newTaskName = ''
+			// Focus the input field again, in case we clicked on the trailing-icon-button
+			this.$refs.input.$refs.inputField.$refs.input.focus()
 		},
 	},
 }
@@ -682,26 +692,26 @@ $breakpoint-mobile: 1024px;
 		overflow: hidden;
 		border-radius: 0;
 
-		.material-design-icon {
-			position: absolute;
-			padding: 12px;
-		}
+		:deep() .input-field {
+			&__main-wrapper,
+			&__input {
+				height: 44px !important;
+			}
 
-		input {
-			border-radius: 0 !important;
-			border: medium none !important;
-			box-sizing: border-box;
-			color: var(--color-main-text);
-			cursor: text;
-			font-size: 100%;
-			margin: 0 !important;
-			padding: 0 15px 0 44px !important;
-			width: 100%;
-			min-height: 44px;
-			overflow: hidden;
-			white-space: nowrap;
-			text-overflow: ellipsis;
-			outline: none;
+			&__input {
+				border: none;
+				border-radius: 0;
+			}
+
+			&__icon,
+			&__clear-button.button-vue {
+				height: 40px !important;
+				width: 40px !important;
+			}
+
+			&__input--leading-icon {
+				padding-left: 44px;
+			}
 		}
 	}
 
