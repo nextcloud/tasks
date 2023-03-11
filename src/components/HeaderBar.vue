@@ -23,14 +23,18 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 	<div class="header">
 		<div v-if="$route.params.collectionId !== 'completed' && calendar && !calendar.readOnly"
 			class="header__input">
-			<form @submit.prevent="addTask">
+			<NcTextField :value.sync="newTaskName"
+				:label="placeholder"
+				autocomplete="off"
+				class="reactive"
+				trailing-button-icon="arrowRight"
+				:show-trailing-button="newTaskName !== ''"
+				:trailing-button-label="placeholder"
+				@trailing-button-click="addTask"
+				@keyup.27="clearNewTask($event)"
+				@keyup.13="addTask">
 				<Plus :size="20" />
-				<input v-model="newTaskName"
-					:placeholder="placeholder"
-					autocomplete="off"
-					class="reactive"
-					@keyup.27="clearNewTask($event)">
-			</form>
+			</NcTextField>
 		</div>
 		<SortorderDropdown />
 	</div>
@@ -41,6 +45,7 @@ import SortorderDropdown from './SortorderDropdown.vue'
 
 import { translate as t } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
+import NcTextField from '@nextcloud/vue/dist/Components/NcTextField.js'
 
 import Plus from 'vue-material-design-icons/Plus.vue'
 
@@ -48,6 +53,7 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
 	components: {
+		NcTextField,
 		SortorderDropdown,
 		Plus,
 	},
@@ -136,27 +142,21 @@ $breakpoint-mobile: 1024px;
 		position: relative;
 		width: calc(100% - 44px);
 
-		.material-design-icon {
-			position: absolute;
-			padding: 12px;
-		}
+		:deep() .input-field {
+			&__main-wrapper,
+			&__input {
+				height: 44px !important;
+			}
 
-		input {
-			box-shadow: 0 0 1px var(--color-box-shadow);
-			border: medium none !important;
-			box-sizing: border-box;
-			color: var(--color-main-text);
-			cursor: text;
-			font-size: 100%;
-			margin: 0 !important;
-			padding: 0 15px 0 44px !important;
-			width: 100%;
-			min-height: 44px;
-			overflow: hidden;
-			white-space: nowrap;
-			text-overflow: ellipsis;
-			outline: none;
-			border-radius: var(--border-radius);
+			&__icon,
+			&__clear-button.button-vue {
+				height: 40px !important;
+				width: 40px !important;
+			}
+
+			&__input--leading-icon {
+				padding-left: 40px;
+			}
 		}
 	}
 
