@@ -50,6 +50,7 @@ OC.L10N.register(
     "Could not restore calendar or event" : "Kunde inte återställa kalender eller händelse",
     "Do you really want to empty the trash bin?" : "Vill du verkligen tömma papperskorgen?",
     "Select a calendar" : "Välj en kalender",
+    "No calendar matches the search." : "Ingen kalender matchar sökningen.",
     "Delete all completed tasks." : "Ta bort alla slutförda uppgifter.",
     "Delete completed tasks." : "Ta bort slutförda uppgifter.",
     "Deleted all completed tasks from calendar \"{calendar}\"." : "Ta bort alla slutförda uppgifter från kalender \"{calendar}\".",
