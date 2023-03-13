@@ -20,13 +20,15 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<div v-show="!loadedCompleted" class="loadmore reactive">
+	<div v-show="!loadedCompleted"
+		v-tooltip.auto="t('tasks', 'Loading the completed tasks of all lists might slow down the app.')"
+		class="loadmore reactive">
 		<NcButton type="tertiary"
 			@click="loadCompletedTasks">
 			<template #icon>
 				<CloudDownload :size="20" />
 			</template>
-			{{ t('tasks', 'Load all completed tasks.') }}
+			{{ calendars.length > 1 ? t('tasks', 'Load completed tasks for all lists.') : t('tasks', 'Load all completed tasks.') }}
 		</NcButton>
 	</div>
 </template>
@@ -34,6 +36,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 <script>
 import { translate as t } from '@nextcloud/l10n'
 import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
+import Tooltip from '@nextcloud/vue/dist/Directives/Tooltip.js'
 
 import CloudDownload from 'vue-material-design-icons/CloudDownload.vue'
 
@@ -44,15 +47,18 @@ export default {
 		NcButton,
 		CloudDownload,
 	},
+	directives: {
+		Tooltip,
+	},
 	props: {
-		calendar: {
-			type: Object,
+		calendars: {
+			type: Array,
 			required: true,
 		},
 	},
 	computed: {
 		loadedCompleted() {
-			return this.calendar.loadedCompleted
+			return this.calendars.every(calendar => calendar.loadedCompleted)
 		},
 	},
 	methods: {
@@ -62,7 +68,9 @@ export default {
 			'getTasksFromCalendar',
 		]),
 		loadCompletedTasks() {
-			this.getTasksFromCalendar({ calendar: this.calendar, completed: true, related: null })
+			this.calendars.forEach(
+				calendar => this.getTasksFromCalendar({ calendar, completed: true, related: null })
+			)
 		},
 	},
 }

@@ -39,7 +39,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:disabled="calendar.readOnly"
 					class="completed"
 					collection-id="completed" />
-				<LoadCompletedButton :calendar="calendar" />
+				<LoadCompletedButton :calendars="[calendar]" />
 				<DeleteCompletedModal v-if="calendar.loadedCompleted && !calendar.readOnly" :calendar="calendar" />
 			</div>
 		</div>
