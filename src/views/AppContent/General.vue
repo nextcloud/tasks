@@ -37,9 +37,10 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:collection-string="collectionId"
 					:calendar-id="calendar.id"
 					:collection-id="collectionId" />
-				<LoadCompletedButton v-if="collectionId === 'completed'" :calendar="calendar" />
+				<LoadCompletedButton v-if="collectionId === 'completed'" :calendars="[calendar]" />
 			</div>
 		</div>
+		<LoadCompletedButton v-if="collectionId === 'completed'" :calendars="calendars" />
 	</div>
 </template>
 
