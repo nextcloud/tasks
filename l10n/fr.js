@@ -89,6 +89,8 @@ OC.L10N.register(
     "Add a task due today to \"{calendar}\"…" : "Ajouter une tâche pour aujourd'hui dans \"{calendar}\"...",
     "Add a current task to \"{calendar}\"…" : "Ajouter une tâche courante dans \"{calendar}\"...",
     "Add a task to \"{calendar}\"…" : "Ajouter une tâche dans \"{calendar}\"…",
+    "Loading the completed tasks of all lists might slow down the app." : "Charger les tâches accomplies de toutes les listes pourrait ralentir l'application.",
+    "Load completed tasks for all lists." : "Charger les tâches accomplies pour toutes les listes.",
     "Load all completed tasks." : "Charger toutes les tâches terminées.",
     "Change sort order" : "Modifier l'ordre de tri",
     "Relevance" : "Pertinence",

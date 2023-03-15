@@ -52,6 +52,7 @@ OC.L10N.register(
     "[Starts today]" : "[Dimulai hari ini]",
     "Set start date" : "Atur tanggal mulai",
     "Set due date" : "Atur tanggal jatuh tempo",
+    "Mark as done" : "Tandai sebagai selesai",
     "An error occurred" : "Terjadi kesalahan"
 },
 "nplurals=1; plural=0;");

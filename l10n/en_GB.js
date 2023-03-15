@@ -89,6 +89,8 @@ OC.L10N.register(
     "Add a task due today to \"{calendar}\"…" : "Add a task due today to \"{calendar}\"…",
     "Add a current task to \"{calendar}\"…" : "Add a current task to \"{calendar}\"…",
     "Add a task to \"{calendar}\"…" : "Add a task to \"{calendar}\"…",
+    "Loading the completed tasks of all lists might slow down the app." : "Loading the completed tasks of all lists might slow down the app.",
+    "Load completed tasks for all lists." : "Load completed tasks for all lists.",
     "Load all completed tasks." : "Load all completed tasks.",
     "Change sort order" : "Change sort order",
     "Relevance" : "Relevance",

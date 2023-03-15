@@ -89,6 +89,8 @@ OC.L10N.register(
     "Add a task due today to \"{calendar}\"…" : "新增今天到期的工作項目到「{calendar}」……",
     "Add a current task to \"{calendar}\"…" : "新增目前的工作項目到「{calendar}」……",
     "Add a task to \"{calendar}\"…" : "新增工作項目到「{calendar}」……",
+    "Loading the completed tasks of all lists might slow down the app." : "載入所有清單的已完成工作可能會拖慢應用程式的速度。",
+    "Load completed tasks for all lists." : "載入所有清單的已完成工作。",
     "Load all completed tasks." : "載入所有已完成的工作項目。",
     "Change sort order" : "改變分類順序",
     "Relevance" : "關聯",

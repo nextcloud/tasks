@@ -89,6 +89,8 @@ OC.L10N.register(
     "Add a task due today to \"{calendar}\"…" : "\"{calendar}\" takvimine bugün bitecek bir görev ekle …",
     "Add a current task to \"{calendar}\"…" : "\"{calendar}\" takvimine geçerli bir görevi ekle …",
     "Add a task to \"{calendar}\"…" : "\"{calendar}\" takvimine bir görev ekle …",
+    "Loading the completed tasks of all lists might slow down the app." : "Tüm listelerdeki tamamlanmış görevleri yüklemek, uygulamayı yavaşlatabilir.",
+    "Load completed tasks for all lists." : "Tüm listelerdeki tamamlanmış görevleri yükle.",
     "Load all completed tasks." : "Tüm tamamlanmış görevleri yükler.",
     "Change sort order" : "Sıralamayı değiştir",
     "Relevance" : "İlişki",
