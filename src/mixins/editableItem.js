@@ -27,7 +27,7 @@ import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton.js'
 import Check from 'vue-material-design-icons/Check.vue'
 import Delete from 'vue-material-design-icons/Delete.vue'
 
-import ClickOutside from 'v-click-outside'
+import { vOnClickOutside as ClickOutside } from '@vueuse/components'
 
 export default {
 	components: {
@@ -37,7 +37,7 @@ export default {
 		Delete,
 	},
 	directives: {
-		clickOutside: ClickOutside.directive,
+		ClickOutside,
 	},
 	props: {
 		/**

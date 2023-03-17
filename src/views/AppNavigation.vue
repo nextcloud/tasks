@@ -116,7 +116,7 @@ import Star from 'vue-material-design-icons/Star.vue'
 import TrendingUp from 'vue-material-design-icons/TrendingUp.vue'
 
 import draggable from 'vuedraggable'
-import ClickOutside from 'v-click-outside'
+import { vOnClickOutside as ClickOutside } from '@vueuse/components'
 import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -139,7 +139,7 @@ export default {
 		Star,
 	},
 	directives: {
-		clickOutside: ClickOutside.directive,
+		ClickOutside,
 		Tooltip,
 	},
 	data() {
