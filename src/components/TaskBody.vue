@@ -143,7 +143,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		</div>
 		<div class="task-item__subtasks">
 			<div v-if="showSubtaskInput"
-				v-click-outside="{ handler: closeSubtaskInput, middleware: clickOutsideMiddleware }"
+				v-click-outside="closeSubtaskInput"
 				class="task-item task-item__input">
 				<NcTextField ref="input"
 					:value.sync="newTaskName"
@@ -195,13 +195,13 @@ import CalendarClock from 'vue-material-design-icons/CalendarClock.vue'
 import Star from 'vue-material-design-icons/Star.vue'
 import Undo from 'vue-material-design-icons/Undo.vue'
 
-import ClickOutside from 'v-click-outside'
+import { vOnClickOutside as ClickOutside } from '@vueuse/components'
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 export default {
 	name: 'TaskBody',
 	directives: {
-		clickOutside: ClickOutside.directive,
+		ClickOutside,
 		Linkify,
 	},
 	components: {
@@ -602,10 +602,6 @@ export default {
 
 		closeSubtaskInput() {
 			this.showSubtaskInput = false
-		},
-
-		clickOutsideMiddleware(event) {
-			return !event.target.closest('.open-input')
 		},
 
 		addTask($event) {

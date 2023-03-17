@@ -53,12 +53,12 @@ import Mila from 'markdown-it-link-attributes'
 import MarkdownItEmoji from 'markdown-it-emoji'
 import Mitl from 'markdown-it-task-lists'
 
-import ClickOutside from 'v-click-outside'
+import { vOnClickOutside as ClickOutside } from '@vueuse/components'
 
 export default {
 	name: 'NotesItem',
 	directives: {
-		clickOutside: ClickOutside.directive,
+		ClickOutside,
 	},
 	mixins: [editableItem],
 	props: {

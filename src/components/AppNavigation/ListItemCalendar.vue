@@ -21,7 +21,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<NcAppNavigationItem :id="'list_' + calendar.id"
-		v-click-outside="{ handler: resetView, middleware: clickOutsideMiddleware }"
+		v-click-outside="resetView"
 		:calendar-id="calendar.id"
 		:to="{ name: 'calendars', params: { calendarId: calendar.id } }"
 		:name="calendar.displayName"
@@ -157,7 +157,7 @@ import Pencil from 'vue-material-design-icons/Pencil.vue'
 import ShareVariant from 'vue-material-design-icons/ShareVariant.vue'
 import Undo from 'vue-material-design-icons/Undo.vue'
 
-import ClickOutside from 'v-click-outside'
+import { vOnClickOutside as ClickOutside } from '@vueuse/components'
 import { mapGetters, mapActions } from 'vuex'
 
 const CD_DURATION = 7
@@ -183,7 +183,7 @@ export default {
 		Undo,
 	},
 	directives: {
-		clickOutside: ClickOutside.directive,
+		ClickOutside,
 		Tooltip,
 	},
 	props: {
@@ -414,9 +414,6 @@ export default {
 			this.editing = false
 			this.shareOpen = false
 			this.tooltipTarget = ''
-		},
-		clickOutsideMiddleware(event) {
-			return !event.target.closest('.edit-calendar')
 		},
 		async copyCalDAVUrl(event) {
 			// change to loading status
