@@ -89,6 +89,8 @@ OC.L10N.register(
     "Add a task due today to \"{calendar}\"…" : "Додај задатак са роком за данас на календар „{calendar}“…",
     "Add a current task to \"{calendar}\"…" : "Додај тренутни задатак на календар „{calendar}“…",
     "Add a task to \"{calendar}\"…" : "Додај задатак на календар „{calendar}“…",
+    "Loading the completed tasks of all lists might slow down the app." : "Учитавање завршених задатака свих листи може да успори апликацију.",
+    "Load completed tasks for all lists." : "Учитај завршене задатке за све листе.",
     "Load all completed tasks." : "Учитај све завршене задатке.",
     "Change sort order" : "Промени сортирање",
     "Relevance" : "Релевантност",
