@@ -50,7 +50,7 @@
 		"markdown-it-task-lists": "^2.1.1",
 		"md5": "^2.3.0",
 		"p-limit": "^4.0.0",
-		"p-queue": "^6.6.2",
+		"p-queue": "^7.3.4",
 		"uuid": "^8.3.2",
 		"vue": "^2.7.14",
 		"vue-material-design-icons": "^5.2.0",
