@@ -50,7 +50,7 @@
 		"markdown-it-task-lists": "^2.1.1",
 		"md5": "^2.3.0",
 		"p-limit": "^4.0.0",
-		"p-queue": "^6.6.2",
+		"p-queue": "^7.3.4",
 		"uuid": "^8.3.2",
 		"vue": "^2.7.14",
 		"vue-material-design-icons": "^5.2.0",
@@ -104,7 +104,7 @@
 			".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub"
 		},
 		"transformIgnorePatterns": [
-			"/node_modules/(?!(.*vue-material-design-icons)|(uuid)|(.*vue-select))"
+			"/node_modules/(?!(.*vue-material-design-icons)|(uuid)|(.*vue-select)|(.*p-*))"
 		],
 		"snapshotSerializers": [
 			"<rootDir>/node_modules/jest-serializer-vue"
