@@ -366,6 +366,8 @@ export default class Task {
 	}
 
 	set note(note) {
+		// Delete custom description property
+		this.vtodo.removeProperty('x-alt-desc')
 		// To avoid inconsistent property parameters (bug #3863 in nextcloud/calendar), delete the property, then recreate
 		this.vtodo.removeProperty('description')
 		this.vtodo.addPropertyWithValue('description', note)
