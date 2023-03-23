@@ -57,7 +57,7 @@ OC.L10N.register(
     "Deleted" : "Slettet",
     "Restore" : "Gendan",
     "Delete permanently" : "Slet permanent",
-    "Empty trash bin" : "Tom papirkurv",
+    "Empty trash bin" : "Tøm papirkurv",
     "Untitled task" : "Unavngivet opgave",
     "Untitled event" : "Unavngiven begivenhed",
     "Untitled journal" : "Unavngivet journal",
