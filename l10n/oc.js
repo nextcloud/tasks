@@ -18,7 +18,7 @@ OC.L10N.register(
     "Copy private link" : "Copiar lo ligam privat",
     "Export" : "Exportar",
     "Delete" : "Suprimir",
-    "Unshare" : "Partejar pas",
+    "Unshare" : "Partejar pas mai",
     "Save" : "Enregistrar",
     "An empty name is not allowed." : "Un nom void es pas autorizat.",
     "Name" : "Nom",
