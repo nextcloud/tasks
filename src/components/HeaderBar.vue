@@ -31,8 +31,8 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:show-trailing-button="newTaskName !== ''"
 				:trailing-button-label="placeholder"
 				@trailing-button-click="addTask"
-				@keyup.27="clearNewTask($event)"
-				@keyup.13="addTask">
+				@keyup.esc="clearNewTask($event)"
+				@keyup.enter="addTask">
 				<Plus :size="20" />
 			</NcTextField>
 		</div>

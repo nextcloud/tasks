@@ -155,8 +155,8 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:show-trailing-button="newTaskName !== ''"
 					:trailing-button-label="subtasksCreationPlaceholder"
 					@trailing-button-click="addTask"
-					@keyup.27="showSubtaskInput = false"
-					@keyup.13="addTask">
+					@keyup.esc="showSubtaskInput = false"
+					@keyup.enter="addTask">
 					<Plus :size="20" />
 				</NcTextField>
 			</div>
