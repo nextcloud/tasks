@@ -12,6 +12,7 @@ OC.L10N.register(
     "Name" : "ຊື່",
     "Deleted" : "ລືບ",
     "Restore" : "ການກຸ້ຄຶນ",
+    "Empty trash bin" : "ລ້າງຖັງຂີ້ເຫຍື່ອ",
     "Cancel" : "ຍົກເລີກ",
     "Close" : "ປິດ",
     "Details" : "ລາຍລະອຽດ"
