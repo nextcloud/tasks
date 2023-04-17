@@ -21,14 +21,14 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div v-show="!loadedCompleted"
-		v-tooltip.auto="t('tasks', 'Loading the completed tasks of all lists might slow down the app.')"
+		v-tooltip.auto="buttonStrings.tooltip"
 		class="loadmore reactive">
 		<NcButton type="tertiary"
 			@click="loadCompletedTasks">
 			<template #icon>
 				<CloudDownload :size="20" />
 			</template>
-			{{ calendars.length > 1 ? t('tasks', 'Load completed tasks for all lists.') : t('tasks', 'Load all completed tasks.') }}
+			{{ buttonStrings.text }}
 		</NcButton>
 	</div>
 </template>
@@ -59,6 +59,19 @@ export default {
 	computed: {
 		loadedCompleted() {
 			return this.calendars.every(calendar => calendar.loadedCompleted)
+		},
+		buttonStrings() {
+			if (this.calendars.length > 1) {
+				return {
+					text: t('tasks', 'Load the completed tasks of all lists.'),
+					tooltip: t('tasks', 'Loading the completed tasks of all lists might slow down the app.'),
+				}
+			} else {
+				return {
+					text: t('tasks', 'Load the completed tasks of list "{calendar}".', { calendar: this.calendars?.[0]?.displayName }),
+					tooltip: ('tasks', 'Loading the completed tasks might slow down the app.'),
+				}
+			}
 		},
 	},
 	methods: {
