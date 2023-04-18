@@ -63,7 +63,6 @@ OC.L10N.register(
     "Add a task due today to \"{calendar}\"…" : "הוספה משימה שמועד תפוגתה הוא היום אל „{calendar}”",
     "Add a current task to \"{calendar}\"…" : "הוספת משימה נוכחית אל „{calendar}”",
     "Add a task to \"{calendar}\"…" : "הוספת משימה אל „{calendar}”",
-    "Load all completed tasks." : "טעינת כל המשימות שהושלמו.",
     "Change sort order" : "שינוי סדר מיון",
     "Relevance" : "רלוונטיות",
     "Sort by completed state, due date, priority, start date and summary." : "מיון לפי מצב ההשלמה, תאריך הסיום, עדיפות, תאריך ההתחלה והתקציר.",

@@ -89,7 +89,6 @@ OC.L10N.register(
     "Add a task due today to \"{calendar}\"…" : "Dodaj nalogo, ki poteče danes, v koledar »{calendar}« ...",
     "Add a current task to \"{calendar}\"…" : "Dodaj trenutno nalogo v koledar »{calendar}« ...",
     "Add a task to \"{calendar}\"…" : "Dodaj nalogo v koledar »{calendar}« ...",
-    "Load all completed tasks." : "Naloži vse končane naloge.",
     "Change sort order" : "Spremeni vrstni red razvrščanja",
     "Relevance" : "Pomembnost",
     "Sort by completed state, due date, priority, start date and summary." : "Razvrsti po stanju opravljenosti, po datumu konca, prednosti, začetku in povzetku.",

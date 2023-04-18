@@ -89,7 +89,6 @@ OC.L10N.register(
     "Add a task due today to \"{calendar}\"…" : "Gehitu gaurko epemuga bat duen zeregin bat \"{calendar}\" egutegiari…",
     "Add a current task to \"{calendar}\"…" : "Gehitu uneko zeregin bat \"{calendar}\" egutegiari…",
     "Add a task to \"{calendar}\"…" : "Gehitu zeregin bat \"{calendar}\" egutegiari…",
-    "Load all completed tasks." : "Kargatu osatutako zeregin guztiak.",
     "Change sort order" : "Aldatu ordenatzeko irizpidea",
     "Relevance" : "Garrantzia",
     "Sort by completed state, due date, priority, start date and summary." : "Ordenatu osatutako egoera, epemuga, lehentasuna, hasiera-data eta laburpenaren arabera.",

@@ -89,7 +89,6 @@ OC.L10N.register(
     "Add a task due today to \"{calendar}\"…" : "Προσθέστε εργασία για σήμερα στο \"{calendar}\"…",
     "Add a current task to \"{calendar}\"…" : "Προσθήκη τρέχουσας εργασίας στο \"{calendar}\"…",
     "Add a task to \"{calendar}\"…" : "Προσθήκη έργασίας στο \"{calendar}\"…",
-    "Load all completed tasks." : "Φόρτωση όλων των ολοκληρωμένων εργασιών.",
     "Change sort order" : "Αλλαγή σειράς ταξινόμησης",
     "Relevance" : "Συνάφεια",
     "Sort by completed state, due date, priority, start date and summary." : "Ταξινόμηση κατά ολοκληρωμένη κατάσταση, ημερομηνία λήξης, προτεραιότητα, ημερομηνία έναρξης και σύνοψη.",

@@ -87,7 +87,6 @@
     "Add a task due today to \"{calendar}\"…" : "Додайте завдання до \"{calendar}\"…",
     "Add a current task to \"{calendar}\"…" : "Додати поточне завдання до \"{calendar}\"…",
     "Add a task to \"{calendar}\"…" : "Додати завдання до \"{calendar}\"…",
-    "Load all completed tasks." : "Завантажити всі виконані завдання.",
     "Change sort order" : "Зміна порядку сортування",
     "Relevance" : "Відповідність",
     "Sort by completed state, due date, priority, start date and summary." : "Сортуйте за завершеним станом, терміном виконання, пріоритетом, датою початку та підсумком.",

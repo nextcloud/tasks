@@ -78,7 +78,6 @@
     "Add a task due today to \"{calendar}\"…" : "Pridėti užduotį, kurios galutinis terminas šiandien į kalendorių „{calendar}“…",
     "Add a current task to \"{calendar}\"…" : "Pridėti dabartinę užduotį į „{calendar}“…",
     "Add a task to \"{calendar}\"…" : "Pridėti užduotį į „{calendar}“…",
-    "Load all completed tasks." : "Įkelti visas atliktas užduotis.",
     "Change sort order" : "Keisti rikiavimo tvarką",
     "Relevance" : "Aktualumas",
     "Sort by completed state, due date, priority, start date and summary." : "Rikiuoti pagal atlikimo būseną, galutinio termino datą, pirmenybę, pradžios datą bei santrauką.",

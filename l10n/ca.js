@@ -90,8 +90,6 @@ OC.L10N.register(
     "Add a current task to \"{calendar}\"…" : "Afegeix una tasca en curs a \"{calendar}\"…",
     "Add a task to \"{calendar}\"…" : "Afegeix una tasca a \"{calendar}”…",
     "Loading the completed tasks of all lists might slow down the app." : "Carregant les tasques completades de totes les llistes pot alentir l'aplicació.",
-    "Load completed tasks for all lists." : "Carrega les tasques completades per a totes les llistes.",
-    "Load all completed tasks." : "Carrega totes les tasques completades.",
     "Change sort order" : "Canvia l'ordre",
     "Relevance" : "Rellevància",
     "Sort by completed state, due date, priority, start date and summary." : "Ordena per estat de completat, data de caducitat, prioritat, data d'inici i resum.",

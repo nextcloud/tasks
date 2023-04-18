@@ -90,8 +90,6 @@ OC.L10N.register(
     "Add a current task to \"{calendar}\"…" : "Egy aktuális feladat hozzáadása a(z) „{calendar}” naptárhoz…",
     "Add a task to \"{calendar}\"…" : "Feladat hozzáadása a(z) „{calendar}” naptárhoz…",
     "Loading the completed tasks of all lists might slow down the app." : "Az összes lista teljesített feladatainak betöltése lehet, hogy lelassítja az alkalmazást.",
-    "Load completed tasks for all lists." : "Az összes lista teljesített feladatainak betöltése.",
-    "Load all completed tasks." : "Összes teljesített feladat betöltése.",
     "Change sort order" : "Rendezési sorrend váltása",
     "Relevance" : "Relevancia",
     "Sort by completed state, due date, priority, start date and summary." : "Rendezés a teljesítési állapot, a határidő, a prioritás, a kezdés ideje és az összefoglaló szerint.",

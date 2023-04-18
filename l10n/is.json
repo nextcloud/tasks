@@ -52,7 +52,6 @@
     "Add a task due today to \"{calendar}\"…" : "Bæta verkefni sem á að klára í dag við \"{calendar}\"...",
     "Add a current task to \"{calendar}\"…" : "Bæta fyrirliggjandi verkefni við \"{calendar}\"...",
     "Add a task to \"{calendar}\"…" : "Bæta verkefni við \"{calendar}\"...",
-    "Load all completed tasks." : "Hlaða inn öllum loknum verkum.",
     "Change sort order" : "Breyta röðun",
     "Sort by completed state, due date, priority, start date and summary." : "Raða eftir framvindustöðu, skiladegi, forgangi, upphafsdagsetningu og yfirliti.",
     "Start date" : "Upphafsdagur",

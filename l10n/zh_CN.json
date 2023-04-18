@@ -83,7 +83,6 @@
     "Add a task due today to \"{calendar}\"…" : "添加今天截止的任务到 \"{calendar}\" ...",
     "Add a current task to \"{calendar}\"…" : "添加当前任务到 \"{calendar}\" ...",
     "Add a task to \"{calendar}\"…" : "添加任务到 \"{calendar}\" ...",
-    "Load all completed tasks." : "载入所有已完成任务。",
     "Change sort order" : "更改排序",
     "Relevance" : "相关联",
     "Sort by completed state, due date, priority, start date and summary." : "按已完成状态，截止日期，优先级，开始日期及概况排序",

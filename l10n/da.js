@@ -89,7 +89,6 @@ OC.L10N.register(
     "Add a task due today to \"{calendar}\"…" : "Tilføj en opgave i dag til \"{calendar}\"...",
     "Add a current task to \"{calendar}\"…" : "Føj en aktuel opgave til \"{calendar}\"...",
     "Add a task to \"{calendar}\"…" : "Føj en opgave til \"{calendar}\"...",
-    "Load all completed tasks." : "Indlæs alle udførte opgaver.",
     "Change sort order" : "Skift sorteringsrækkefølge",
     "Relevance" : "Relevans",
     "Sort by completed state, due date, priority, start date and summary." : "Sorter efter afsluttet tilstand, forfaldsdato, prioritet, startdato og oversigt.",

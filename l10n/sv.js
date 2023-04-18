@@ -62,7 +62,6 @@ OC.L10N.register(
     "Add a task due today to \"{calendar}\"…" : "Lägg till en uppgift som förfaller idag i \"{calendar}\"…",
     "Add a current task to \"{calendar}\"…" : "Lägg till en aktuell uppgift i \"{calendar}\"…",
     "Add a task to \"{calendar}\"…" : "Lägg till en uppgift i \"{calendar}\"…",
-    "Load all completed tasks." : "Läs in alla slutförda uppgifter.",
     "Change sort order" : "Ändra sorteringsordning",
     "Relevance" : "Relevans",
     "Sort by completed state, due date, priority, start date and summary." : "Sortera efter slutförd status, förfallodag, prioritet, startdatum och sammanfattning.",

@@ -62,7 +62,6 @@
     "Add a task due today to \"{calendar}\"…" : "Engadir unha tarefa que caduca hoxe a «{calendar}»…",
     "Add a current task to \"{calendar}\"…" : "Engadir  unha tarefa actual a «{calendar}»…",
     "Add a task to \"{calendar}\"…" : "Engadir unha tarefa a «{calendar}»…",
-    "Load all completed tasks." : "Cargar todas as tarefas completadas.",
     "Change sort order" : "Cambiar o criterio de ordenación",
     "Relevance" : "Relevancia",
     "Sort by completed state, due date, priority, start date and summary." : "Ordenar polo estado de completado, data de caducidade, prioridade, data de inicio e resumo.",

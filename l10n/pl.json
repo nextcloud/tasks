@@ -88,8 +88,6 @@
     "Add a current task to \"{calendar}\"…" : "Dodaj bieżące zadanie do \"{calendar}\"…",
     "Add a task to \"{calendar}\"…" : "Dodaj zadanie do \"{calendar}\"…",
     "Loading the completed tasks of all lists might slow down the app." : "Wczytywanie ukończonych zadań ze wszystkich list może spowolnić działanie aplikacji.",
-    "Load completed tasks for all lists." : "Załaduj ukończone zadania ze wszystkich list.",
-    "Load all completed tasks." : "Wczytaj wszystkie zakończone zadania.",
     "Change sort order" : "Zmień kierunek sortowania",
     "Relevance" : "Ważne",
     "Sort by completed state, due date, priority, start date and summary." : "Sortuj według zakończonego stanu, terminu, priorytetu, daty rozpoczęcia i podsumowania.",

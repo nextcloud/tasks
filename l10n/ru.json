@@ -85,7 +85,6 @@
     "Add a task due today to \"{calendar}\"…" : "Добавить в «{calendar}» задачу на сегодня… ",
     "Add a current task to \"{calendar}\"…" : "Добавить в «{calendar}» текущую задачу…",
     "Add a task to \"{calendar}\"…" : "Создать задачу в календаре «{calendar}»…",
-    "Load all completed tasks." : "Показать завершённые задачи",
     "Change sort order" : "Изменение порядка сортировки.",
     "Relevance" : "Актуальность",
     "Sort by completed state, due date, priority, start date and summary." : "Сортировка по состоянию, дате окончания, приоритету, дате начала и описанию.",

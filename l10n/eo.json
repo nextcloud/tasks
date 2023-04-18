@@ -47,7 +47,6 @@
     "Add a task due today to \"{calendar}\"…" : "Aldoni taskon kun hodiaŭa limdato al „{calendar}“...",
     "Add a current task to \"{calendar}\"…" : "Aldoni nunan taskon al „{calendar}“...",
     "Add a task to \"{calendar}\"…" : "Aldoni taskon al „{calendar}“...",
-    "Load all completed tasks." : "Ŝargi ĉiujn plenumitajn taskojn.",
     "Change sort order" : "Ŝanĝi ordigon",
     "Sort by completed state, due date, priority, start date and summary." : "Ordigi laŭ plenumstato, limdato, prioritato, komencdato kaj resumo.",
     "Start date" : "Komencdato",

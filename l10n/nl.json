@@ -88,8 +88,6 @@
     "Add a current task to \"{calendar}\"…" : "Voeg een actuele taak toe aan \"{calendar}\"…",
     "Add a task to \"{calendar}\"…" : "Voeg een taak toe aan \"{calendar}\"…",
     "Loading the completed tasks of all lists might slow down the app." : "Het laden van afgewerkte taken van alle lijsten kan de app vertragen.",
-    "Load completed tasks for all lists." : "Laad afgewerkte taken voor alle lijsten.",
-    "Load all completed tasks." : "Laad alle voltooide taken.",
     "Change sort order" : "Volgorde wijzigen",
     "Relevance" : "Relevantie",
     "Sort by completed state, due date, priority, start date and summary." : "Sorteren op status, vervaldatum, prioriteit, startdatum en samenvatting.",

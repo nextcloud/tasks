@@ -81,7 +81,6 @@ OC.L10N.register(
     "Add a task due today to \"{calendar}\"…" : "Agiunghe una faina chi agabbat oe a \"{calendar}\"…",
     "Add a current task to \"{calendar}\"…" : "Agiunghe una faina atuale in \"{calendar}\"…",
     "Add a task to \"{calendar}\"…" : "Agiunghe una faina a \"{calendar}\"…",
-    "Load all completed tasks." : "Càrriga totu is fainas cumpletadas.",
     "Change sort order" : "Càmbia s'ordinamentu",
     "Relevance" : "Importàntzia",
     "Sort by completed state, due date, priority, start date and summary." : "Assenta segundu istadu cumpletadu, data de fine, prioridade, data e cumintzu e resumu.",

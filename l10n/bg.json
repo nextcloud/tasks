@@ -88,8 +88,6 @@
     "Add a current task to \"{calendar}\"…" : "Добавя текуща задача към \"{calendar}\"…",
     "Add a task to \"{calendar}\"…" : "Добавя задача към \"{calendar}\"...",
     "Loading the completed tasks of all lists might slow down the app." : "Зареждането на завършените задачи от всички списъци, може да забави работата на приложението.",
-    "Load completed tasks for all lists." : "Зареждане на завършените задачи за всички списъци.",
-    "Load all completed tasks." : "Зареди всички завършени задачи.",
     "Change sort order" : "Промени подредбата",
     "Relevance" : " Съответствие",
     "Sort by completed state, due date, priority, start date and summary." : "Сортиране по състояние на завършеност , краен срок, приоритет, начална дата и обобщение.",

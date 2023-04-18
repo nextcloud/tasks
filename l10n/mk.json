@@ -85,7 +85,6 @@
     "Add a task due today to \"{calendar}\"…" : "Додади краен рон на задачите во \"{calendar}\"…",
     "Add a current task to \"{calendar}\"…" : "Додади моментална задача во \"{calendar}\"…",
     "Add a task to \"{calendar}\"…" : "Додади задача во \"{calendar}\"…",
-    "Load all completed tasks." : "Вчитај ги сите завршени задачи.",
     "Change sort order" : "Променете го редоследот",
     "Relevance" : "Релевантност",
     "Sort by completed state, due date, priority, start date and summary." : "Подреди по завршена состојба, краен рок, приоритет, датум на започнување и резиме.",

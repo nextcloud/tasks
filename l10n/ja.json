@@ -59,7 +59,6 @@
     "Add a task due today to \"{calendar}\"…" : "\"{calendar}\"に今日が期限のタスクを追加する",
     "Add a current task to \"{calendar}\"…" : "\"{calendar}\"に現在のタスクを追加する",
     "Add a task to \"{calendar}\"…" : "\"{calendar}\"にタスクを追加する",
-    "Load all completed tasks." : "完了済みタスクを読み込み",
     "Change sort order" : "並び順を変更",
     "Relevance" : "関連性",
     "Sort by completed state, due date, priority, start date and summary." : "完了状態、期日、優先順位、開始日、および要約で並べ替えます。",

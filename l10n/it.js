@@ -86,7 +86,6 @@ OC.L10N.register(
     "Add a task due today to \"{calendar}\"…" : "Aggiungi un'attività che scade oggi a \"{calendar}\"...",
     "Add a current task to \"{calendar}\"…" : "Aggiungi un'attività attuale a \"{calendar}\"...",
     "Add a task to \"{calendar}\"…" : "Aggiungi un'attività a \"{calendar}\"...",
-    "Load all completed tasks." : "Carica tutte le attività completate.",
     "Change sort order" : "Cambia l'ordinamento",
     "Relevance" : "Importanza",
     "Sort by completed state, due date, priority, start date and summary." : "Ordina per stato di completamento, data di scadenza, priorità, data di inizio e riepilogo.",

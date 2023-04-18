@@ -89,7 +89,6 @@ OC.L10N.register(
     "Add a task due today to \"{calendar}\"…" : "Pridať úlohu s termínom ukončenia dnes do kalendára \"{calendar}\"…",
     "Add a current task to \"{calendar}\"…" : "Pridať aktuálnu úlohu do kalendára \"{calendar}\"…",
     "Add a task to \"{calendar}\"…" : "Pridať úlohu do \"{calendar}\"…",
-    "Load all completed tasks." : "Načítať všetky ukončené úlohy",
     "Change sort order" : "Zmeniť spôsob zoradenia",
     "Relevance" : "Relevantnosť",
     "Sort by completed state, due date, priority, start date and summary." : "Zoradiť podľa stavu dokončenia, termínu dokončenia, priority, dátumu začiatku a súhrnu.",

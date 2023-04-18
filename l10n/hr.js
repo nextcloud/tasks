@@ -81,7 +81,6 @@ OC.L10N.register(
     "Add a task due today to \"{calendar}\"…" : "Dodajte zadatak za danas u „{calendar}”...",
     "Add a current task to \"{calendar}\"…" : "Dodaj trenutni zadatak u „{calendar}”...",
     "Add a task to \"{calendar}\"…" : "Dodajte zadatak u „{calendar}”...",
-    "Load all completed tasks." : "Učitaj sve završene zadatke.",
     "Change sort order" : "Promijeni redoslijed razvrstavanja",
     "Relevance" : "Važnost",
     "Sort by completed state, due date, priority, start date and summary." : "Razvrstaj prema stanju, datumu dospijeća, prioritetu, datumu početka i sažetku.",

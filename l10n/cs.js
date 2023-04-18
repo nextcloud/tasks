@@ -90,8 +90,6 @@ OC.L10N.register(
     "Add a current task to \"{calendar}\"…" : "Přidat stávající úkol do „{calendar}“…",
     "Add a task to \"{calendar}\"…" : "Přidat úkol do „{calendar}“…",
     "Loading the completed tasks of all lists might slow down the app." : "Načítání dokončených úkolů ze všech seznamů může aplikaci zpomalit.",
-    "Load completed tasks for all lists." : "Načíst dokončené úkoly pro všechny seznamy.",
-    "Load all completed tasks." : "Načíst všechny dokončené úkoly.",
     "Change sort order" : "Změnit řazení",
     "Relevance" : "Relevantnost",
     "Sort by completed state, due date, priority, start date and summary." : "Seřadit podle stupně dokončenosti, termínu, priority, data zahájení a shrnutí.",

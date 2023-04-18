@@ -90,8 +90,6 @@ OC.L10N.register(
     "Add a current task to \"{calendar}\"…" : "Eine aktuelle Aufgabe zu \"{calendar}\" hinzufügen…",
     "Add a task to \"{calendar}\"…" : "Eine Aufgabe zu \"{calendar}\" hinzufügen…",
     "Loading the completed tasks of all lists might slow down the app." : "Das Laden der abgeschlossenen Aufgaben aller Listen kann die App verlangsamen.",
-    "Load completed tasks for all lists." : "Erledigte Aufgaben für alle Listen laden.",
-    "Load all completed tasks." : "Alle abgeschlossenen Aufgaben laden.",
     "Change sort order" : "Sortierreihenfolge ändern",
     "Relevance" : "Wichtigkeit",
     "Sort by completed state, due date, priority, start date and summary." : "Sortieren nach Abgeschlossen-Status, Fälligkeitsdatum, Priorität, Startdatum und Zusammenfassung.",
