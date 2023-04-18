@@ -77,7 +77,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 							trailing-button-icon="arrowRight"
 							:value.sync="newCalendarName"
 							:error="nameError"
-							:placeholder="t('tasks', 'New List')"
+							:label="t('tasks', 'New list')"
 							@trailing-button-click="create()"
 							@keyup="checkName($event)">
 							<Plus :size="16" />
