@@ -7,7 +7,6 @@ OC.L10N.register(
     "Can edit" : "Can edit",
     "Delete" : "Delete",
     "Unshare" : "Unshare",
-    "Save" : "Save",
     "Name" : "Name",
     "Cancel" : "Cancel",
     "Close" : "Close",

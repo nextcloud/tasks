@@ -11,7 +11,6 @@ OC.L10N.register(
     "Export" : "Արտահանում",
     "Delete" : "Ջնջել",
     "Unshare" : "Չկիսվել",
-    "Save" : "Պահել",
     "Name" : "Անուն",
     "Deleted" : "Ջնջված",
     "Restore" : "Վերականգնել",

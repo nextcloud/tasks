@@ -8,7 +8,6 @@ OC.L10N.register(
     "Edit" : "Uredi",
     "Delete" : "Delete",
     "Unshare" : "Ukini deljenje",
-    "Save" : "Save",
     "Name" : "Ime",
     "Deleted" : "Obrisano",
     "Delete permanently" : "Obriši zauvek",

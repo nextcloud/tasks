@@ -7,7 +7,6 @@ OC.L10N.register(
     "Edit" : "Redaktirläň",
     "Delete" : "Pozmak",
     "Unshare" : "Paýlaşma",
-    "Save" : "Saklamak",
     "Name" : "Ady",
     "Deleted" : "Öçürildi",
     "Cancel" : "ýatyrmak",

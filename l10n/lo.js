@@ -8,7 +8,6 @@ OC.L10N.register(
     "Edit" : "ແກ້ໄຂ",
     "Delete" : "ລຶບ",
     "Unshare" : "ຍົກເລີກການແບ່ງປັນ",
-    "Save" : "ບັນທຶກ",
     "Name" : "ຊື່",
     "Deleted" : "ລືບ",
     "Restore" : "ການກຸ້ຄຶນ",

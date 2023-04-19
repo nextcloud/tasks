@@ -13,7 +13,6 @@ OC.L10N.register(
     "Export" : "Eksporter",
     "Delete" : "Slett",
     "Unshare" : "Fjern deling",
-    "Save" : "Lagra",
     "Name" : "Namn",
     "Deleted" : "Sletta",
     "Restore" : "Gjenopprett",

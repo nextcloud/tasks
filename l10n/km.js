@@ -11,7 +11,6 @@ OC.L10N.register(
     "Export" : "នាំចេញ",
     "Delete" : "លុប",
     "Unshare" : "លែង​ចែក​រំលែក",
-    "Save" : "រក្សាទុក",
     "Name" : "ឈ្មោះ",
     "Deleted" : "បាន​លុប",
     "Restore" : "ស្ដារ​មក​វិញ",

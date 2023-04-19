@@ -7,7 +7,6 @@ OC.L10N.register(
     "Edit" : "Deasaich",
     "Delete" : "Sguab às",
     "Unshare" : "Na co-roinn tuilleadh",
-    "Save" : "Sàbhail",
     "Name" : "Ainm",
     "Deleted" : "Chaidh a sguabadh às",
     "Empty trash bin" : "Falamhaich an sgudal",

@@ -7,7 +7,6 @@ OC.L10N.register(
     "Completed" : "Yemmed",
     "Edit" : "Ẓreg",
     "Delete" : "Kkes",
-    "Save" : "Sekles",
     "Name" : "Nom",
     "Deleted" : "Yettwakkes",
     "Cancel" : "Sefsex",

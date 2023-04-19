@@ -11,7 +11,6 @@ OC.L10N.register(
     "Export" : "چىقار",
     "Delete" : "ئۆچۈر",
     "Unshare" : "ھەمبەھىرلىمە",
-    "Save" : "ساقلا",
     "Name" : "ئاتى",
     "Deleted" : "ئۆچۈرۈلدى",
     "Delete permanently" : "مەڭگۈلۈك ئۆچۈر",

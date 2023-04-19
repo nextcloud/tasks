@@ -9,7 +9,6 @@ OC.L10N.register(
     "Edit" : "تدوین کریں",
     "Delete" : "حذف کریں",
     "Unshare" : "شئیرنگ ختم کریں",
-    "Save" : "حفظ",
     "Name" : "اسم",
     "Deleted" : "حذف شدہ ",
     "Restore" : "بحال",

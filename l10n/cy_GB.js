@@ -17,7 +17,6 @@ OC.L10N.register(
     "Export" : "Allforio",
     "Delete" : "Dileu",
     "Unshare" : "Dad-rannu",
-    "Save" : "Cadw",
     "Calendar link copied to clipboard." : "Dolen calendr wedi'i chopïo i'r clipfwrdd.",
     "Calendar link could not be copied to clipboard." : "Nid oedd modd copïo dolen calendr i'r clipfwrdd.",
     "An error occurred, unable to delete the calendar." : "Bu gwall, ni fu modd dileu'r calendr.",
