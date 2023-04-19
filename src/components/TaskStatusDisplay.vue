@@ -2,7 +2,7 @@
 Nextcloud - Tasks
 
 @author Raimund Schlüßler
-@copyright 2021 Raimund Schlüßler <raimund.schluessler@mailbox.org>
+@copyright 2023 Raimund Schlüßler <raimund.schluessler@mailbox.org>
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -20,37 +20,41 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<NcActions v-if="status" :disabled="isDisabled">
-		<NcActionButton :key="status.status" :disabled="isDisabled" @click="statusClicked">
-			<template #icon>
-				<AlertCircleOutline v-if="status.status==='error'" :size="20" class="status--error" />
-				<Check v-if="status.status==='success'" :size="20" class="status--success" />
-				<Loading v-if="status.status==='sync'" :size="20" class="status--sync" />
-				<SyncAlert v-if="status.status==='conflict'" :size="20" class="status--conflict" />
-			</template>
-			{{ status.message }}
-		</NcActionButton>
-	</NcActions>
+	<NcButton v-if="status"
+		v-tooltip="status.message"
+		:disabled="isDisabled"
+		type="tertiary"
+		:aria-label="status.message"
+		@click="statusClicked">
+		<template #icon>
+			<AlertCircleOutline v-if="status.status==='error'" :size="20" class="status--error" />
+			<Check v-if="status.status==='success'" :size="20" class="status--success" />
+			<NcLoadingIcon v-if="status.status==='sync'" :size="20" class="status--sync" />
+			<SyncAlert v-if="status.status==='conflict'" :size="20" class="status--conflict" />
+		</template>
+	</NcButton>
 </template>
 
 <script>
-import NcActions from '@nextcloud/vue/dist/Components/NcActions.js'
-import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton.js'
+import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
+import NcLoadingIcon from '@nextcloud/vue/dist/Components/NcLoadingIcon.js'
+import Tooltip from '@nextcloud/vue/dist/Directives/Tooltip.js'
 
 import AlertCircleOutline from 'vue-material-design-icons/AlertCircleOutline.vue'
 import Check from 'vue-material-design-icons/Check.vue'
-import Loading from 'vue-material-design-icons/Loading.vue'
 import SyncAlert from 'vue-material-design-icons/SyncAlert.vue'
 
 export default {
 	name: 'TaskStatusDisplay',
 	components: {
-		NcActions,
-		NcActionButton,
+		NcButton,
+		NcLoadingIcon,
 		AlertCircleOutline,
 		Check,
-		Loading,
 		SyncAlert,
+	},
+	directives: {
+		Tooltip,
 	},
 	props: {
 		status: {
@@ -103,7 +107,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.action-item {
+.button-vue {
 	&:disabled {
 		opacity: 1 !important;
 	}
@@ -114,31 +118,12 @@ export default {
 		&--success {
 			color: var(--color-success);
 		}
-		&--sync,
-		&--conflict {
-			:deep(svg) {
-				animation-iteration-count: infinite;
-				animation-duration: 1s;
-			}
+		&--conflict svg {
+			animation-iteration-count: infinite;
+			animation-duration: 1s;
+			animation-name: pulse;
+			border-radius: 50%;
 		}
-		&--sync :deep(svg) {
-			animation-name: spin;
-		}
-		&--conflict {
-			color: var(--color-warning);
-			:deep(svg) {
-				animation-name: pulse;
-				border-radius: 50%;
-			}
-		}
-	}
-}
-@keyframes spin {
-	0% {
-		transform: rotate(0deg);
-	}
-	100% {
-		transform: rotate(360deg);
 	}
 }
 @keyframes pulse {
