@@ -28,7 +28,6 @@ import moment from '@nextcloud/moment'
 
 import { v4 as uuid } from 'uuid'
 import ICAL from 'ical.js'
-import PQueue from 'p-queue'
 
 export default class Task {
 
@@ -66,10 +65,11 @@ export default class Task {
 		// Time in seconds before the task is going to be deleted
 		this.deleteCountdown = null
 
-		// Queue for update requests with concurrency 1,
-		// because we only want to allow one request at a time
+		// Flags if an update is currently running or scheduled,
+		// because we only want to allow one update at a time
 		// (otherwise we will run into problems with changed ETags).
-		this.updateQueue = new PQueue({ concurrency: 1 })
+		this.updateRunning = false
+		this.updateScheduled = false
 	}
 
 	initTodo() {

@@ -36,8 +36,8 @@ describe('TaskDragContainer.vue', () => {
 
 	let store
 	beforeEach(() => {
-		// Override the "scheduleTaskUpdate" method so we don't get warnings about unresolved promises.
-		tasks.actions.scheduleTaskUpdate = jest.fn()
+		// Override the "updateTask" method so we don't get warnings about unresolved promises.
+		tasks.actions.updateTask = jest.fn()
 
 		store = new Store({
 			modules: {

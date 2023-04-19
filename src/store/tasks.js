@@ -889,21 +889,6 @@ const actions = {
 	},
 
 	/**
-	 * Schedules an update request for a given task
-	 *
-	 * @param {object} context The store context
-	 * @param {Task} task The task to update
-	 * @return {Promise}
-	 */
-	async scheduleTaskUpdate(context, task) {
-		// If there already is an update request scheduled that has not started yet,
-		// we don't have to schedule another one.
-		if (!task.updateQueue.size) {
-			task.updateQueue.add(() => context.dispatch('updateTask', task))
-		}
-	},
-
-	/**
 	 * Updates a task
 	 *
 	 * @param {object} context The store context
@@ -911,6 +896,13 @@ const actions = {
 	 * @return {Promise}
 	 */
 	async updateTask(context, task) {
+		// If an update is currently running, we schedule another one an return
+		if (task.updateRunning) {
+			task.updateScheduled = true
+			return
+		}
+		task.updateRunning = true
+		task.updateScheduled = false
 		// Don't try to update tasks in read-only calendars
 		if (task.calendar.readOnly) {
 			return
@@ -925,23 +917,27 @@ const actions = {
 		if (!task.conflict) {
 			task.dav.data = vCalendar
 			task.syncStatus = new SyncStatus('sync', t('tasks', 'Synchronizing to the server.'))
-			return task.dav.update()
-				.then((response) => {
-					task.syncStatus = new SyncStatus('success', t('tasks', 'Task successfully saved to server.'))
-				})
-				.catch((error) => {
-					// Wrong etag, we most likely have a conflict
-					if (error && error.status === 412) {
-						// Saving the new etag so that the user can manually
-						// trigger a fetchCompleteData without any further errors
-						task.conflict = error.xhr.getResponseHeader('etag')
-						task.syncStatus = new SyncStatus('conflict', t('tasks', 'Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded.'))
-					} else {
-						task.syncStatus = new SyncStatus('error', t('tasks', 'Could not update the task.'))
-					}
-				})
+			try {
+				await task.dav.update()
+				task.syncStatus = new SyncStatus('success', t('tasks', 'Task successfully saved to server.'))
+			} catch (error) {
+				// Wrong etag, we most likely have a conflict
+				if (error && error.status === 412) {
+					// Saving the new etag so that the user can manually
+					// trigger a fetchCompleteData without any further errors
+					task.conflict = error.xhr.getResponseHeader('etag')
+					task.syncStatus = new SyncStatus('conflict', t('tasks', 'Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded.'))
+				} else {
+					task.syncStatus = new SyncStatus('error', t('tasks', 'Could not update the task.'))
+				}
+			}
 		} else {
 			task.syncStatus = new SyncStatus('conflict', t('tasks', 'Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded.'))
+		}
+		task.updateRunning = false
+		// We have to run again if an update was scheduled in the meantime.
+		if (task.updateScheduled) {
+			await context.dispatch('updateTask', task)
 		}
 	},
 
@@ -1074,7 +1070,7 @@ const actions = {
 			}))
 		}
 		context.commit('setComplete', { task, complete })
-		context.dispatch('scheduleTaskUpdate', task)
+		context.dispatch('updateTask', task)
 	},
 
 	/**
@@ -1085,7 +1081,7 @@ const actions = {
 	 */
 	async toggleSubtasksVisibility(context, task) {
 		context.commit('toggleSubtasksVisibility', task)
-		context.dispatch('scheduleTaskUpdate', task)
+		context.dispatch('updateTask', task)
 	},
 
 	/**
@@ -1096,7 +1092,7 @@ const actions = {
 	 */
 	async toggleCompletedSubtasksVisibility(context, task) {
 		context.commit('toggleCompletedSubtasksVisibility', task)
-		context.dispatch('scheduleTaskUpdate', task)
+		context.dispatch('updateTask', task)
 	},
 
 	/**
@@ -1115,7 +1111,7 @@ const actions = {
 			return
 		}
 		context.commit('toggleStarred', task)
-		context.dispatch('scheduleTaskUpdate', task)
+		context.dispatch('updateTask', task)
 	},
 
 	/**
@@ -1134,7 +1130,7 @@ const actions = {
 			return
 		}
 		context.commit('togglePinned', task)
-		context.dispatch('scheduleTaskUpdate', task)
+		context.dispatch('updateTask', task)
 	},
 
 	/**
@@ -1145,7 +1141,7 @@ const actions = {
 	 */
 	async setSummary(context, { task, summary }) {
 		context.commit('setSummary', { task, summary })
-		context.dispatch('scheduleTaskUpdate', task)
+		context.dispatch('updateTask', task)
 	},
 
 	/**
@@ -1159,7 +1155,7 @@ const actions = {
 			return
 		}
 		context.commit('setNote', { task, note })
-		context.dispatch('scheduleTaskUpdate', task)
+		context.dispatch('updateTask', task)
 	},
 
 	/**
@@ -1170,7 +1166,7 @@ const actions = {
 	 */
 	async setTags(context, { task, tags }) {
 		context.commit('setTags', { task, tags })
-		context.dispatch('scheduleTaskUpdate', task)
+		context.dispatch('updateTask', task)
 	},
 
 	/**
@@ -1181,7 +1177,7 @@ const actions = {
 	 */
 	async addTag(context, { task, tag }) {
 		context.commit('addTag', { task, tag })
-		context.dispatch('scheduleTaskUpdate', task)
+		context.dispatch('updateTask', task)
 	},
 
 	/**
@@ -1197,7 +1193,7 @@ const actions = {
 		// check priority to comply with RFC5545 (to be between 0 and 9)
 		priority = (+priority < 0) ? 0 : (+priority > 9) ? 9 : Math.round(+priority)
 		context.commit('setPriority', { task, priority })
-		context.dispatch('scheduleTaskUpdate', task)
+		context.dispatch('updateTask', task)
 	},
 
 	/**
@@ -1210,7 +1206,7 @@ const actions = {
 		// check classification to comply with RFC5545 values
 		classification = (['PUBLIC', 'PRIVATE', 'CONFIDENTIAL'].indexOf(classification) > -1) ? classification : null
 		context.commit('setClassification', { task, classification })
-		context.dispatch('scheduleTaskUpdate', task)
+		context.dispatch('updateTask', task)
 	},
 
 	/**
@@ -1237,7 +1233,7 @@ const actions = {
 			}))
 		}
 		context.commit('setStatus', { task, status })
-		context.dispatch('scheduleTaskUpdate', task)
+		context.dispatch('updateTask', task)
 	},
 
 	/**
@@ -1253,7 +1249,7 @@ const actions = {
 			return
 		}
 		context.commit('setSortOrder', { task, order })
-		context.dispatch('scheduleTaskUpdate', task)
+		context.dispatch('updateTask', task)
 	},
 
 	/**
@@ -1264,7 +1260,7 @@ const actions = {
 	 */
 	async setDue(context, { task, due, allDay }) {
 		context.commit('setDue', { task, due, allDay })
-		context.dispatch('scheduleTaskUpdate', task)
+		context.dispatch('updateTask', task)
 	},
 
 	/**
@@ -1275,7 +1271,7 @@ const actions = {
 	 */
 	async setStart(context, { task, start, allDay }) {
 		context.commit('setStart', { task, start, allDay })
-		context.dispatch('scheduleTaskUpdate', task)
+		context.dispatch('updateTask', task)
 	},
 
 	/**
@@ -1299,7 +1295,7 @@ const actions = {
 			if (diff !== day) {
 				const newStart = task.startMoment.year(day.year()).month(day.month()).date(day.date())
 				context.commit('setStart', { task, start: newStart })
-				context.dispatch('scheduleTaskUpdate', task)
+				context.dispatch('updateTask', task)
 			}
 		// Adjust due date
 		} else if (due.isValid()) {
@@ -1308,12 +1304,12 @@ const actions = {
 			if (diff !== day) {
 				const newDue = task.dueMoment.year(day.year()).month(day.month()).date(day.date())
 				context.commit('setDue', { task, due: newDue })
-				context.dispatch('scheduleTaskUpdate', task)
+				context.dispatch('updateTask', task)
 			}
 		// Set the due date to appropriate value
 		} else {
 			context.commit('setDue', { task, due: day })
-			context.dispatch('scheduleTaskUpdate', task)
+			context.dispatch('updateTask', task)
 		}
 	},
 
@@ -1336,7 +1332,7 @@ const actions = {
 		if (+context.rootState.settings.settings.allDay !== +task.allDay) {
 			context.dispatch('setSetting', { type: 'allDay', value: +task.allDay })
 		}
-		context.dispatch('scheduleTaskUpdate', task)
+		context.dispatch('updateTask', task)
 	},
 
 	/**
@@ -1387,7 +1383,7 @@ const actions = {
 				}
 			}
 			// We have to send an update.
-			await context.dispatch('scheduleTaskUpdate', task)
+			await context.dispatch('updateTask', task)
 		}
 	},
 
