@@ -152,6 +152,7 @@
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n 項已完成的任務"],
     "Tomorrow" : "明日",
     "Add List…" : "增加清單...",
+    "New list" : "新清單",
     "All day" : "整日",
     "Unpin" : "取消固定",
     "Pin" : "固定",

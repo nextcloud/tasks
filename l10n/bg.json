@@ -28,6 +28,7 @@
     "Export" : "Експорт /изнасям/",
     "Delete" : "Изтриване",
     "Unshare" : "Прекрати споделянето",
+    "List name" : "Име на списък",
     "This will delete the calendar \"{calendar}\" and all corresponding events and tasks." : "Това ще изтрие календара \"{calendar}\" и всички съпътстващи събития и задачи.",
     "This will unshare the calendar \"{calendar}\"." : "Това ще откаже споделянето на календара \"{calendar}\"",
     "This will delete the list \"{list}\" and all corresponding tasks." : "Това ще изтрие списъкът \"{list}\" и всички съпътстващи задачи.",

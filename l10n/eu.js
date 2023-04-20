@@ -146,6 +146,7 @@ OC.L10N.register(
     "_%n Completed Task_::_%n Completed Tasks_" : ["Ataza %n osatuta","%n zeregina osatuta"],
     "Tomorrow" : "Bihar",
     "Add List…" : "Gehitu zerrenda...",
+    "New list" : "Zerrenda berria",
     "All day" : "Egun osoa",
     "Unpin" : "Kendu aingura",
     "Pin" : "Ainguratu",

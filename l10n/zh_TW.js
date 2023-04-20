@@ -154,6 +154,7 @@ OC.L10N.register(
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n 完成任務"],
     "Tomorrow" : "明天",
     "Add List…" : "增加清單...",
+    "New list" : "新清單",
     "All day" : "全天",
     "Unpin" : "取消釘選",
     "Pin" : "釘選",
