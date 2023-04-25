@@ -154,6 +154,7 @@ OC.L10N.register(
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n Tamamlanmış Görev","%n Tamamlanmış Görev"],
     "Tomorrow" : "Yarın",
     "Add List…" : "Liste ekle …",
+    "New list" : "Liste ekle",
     "All day" : "Tüm gün",
     "Unpin" : "Sabitlemeyi kaldır",
     "Pin" : "Sabitle",
