@@ -30,7 +30,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 	<div class="calendar-shares">
 		<ul>
 			<li class="app-navigation-entry__select">
-				<NcSelect ref="select"
+				<NcSelect :append-to-body="true"
 					:options="usersOrGroups"
 					:placeholder="placeholder"
 					:user-select="true"
@@ -88,10 +88,6 @@ export default {
 		noResult() {
 			return t('tasks', 'No users or groups')
 		},
-	},
-	mounted() {
-		// This ensures that the select input is in focus as soon as the user clicks share
-		this.$refs.select?.focus?.()
 	},
 	methods: {
 		/**
