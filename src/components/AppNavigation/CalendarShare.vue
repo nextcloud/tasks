@@ -30,7 +30,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 	<div class="calendar-shares">
 		<ul>
 			<li class="app-navigation-entry__select">
-				<NcSelect :append-to-body="true"
+				<NcSelect :append-to-body="false"
 					:options="usersOrGroups"
 					:placeholder="placeholder"
 					:user-select="true"
