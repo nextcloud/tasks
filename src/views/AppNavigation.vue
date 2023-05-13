@@ -453,8 +453,8 @@ $color-error: #e9322d;
 .app-navigation li {
 	&.dnd-hover,
 	&.sortable-ghost {
-		background-color: var(--color-primary-light);
-		box-shadow: 0 0 3px var(--color-primary);
+		background-color: var(--color-primary-element-light);
+		box-shadow: 0 0 3px var(--color-primary-element);
 		z-index: 1000;
 	}
 }

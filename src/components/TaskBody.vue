@@ -679,7 +679,7 @@ $breakpoint-mobile: 1024px;
 	}
 
 	&.sortable-ghost {
-		filter: drop-shadow(0 0 3px var(--color-primary));
+		filter: drop-shadow(0 0 3px var(--color-primary-element));
 		z-index: 5;
 	}
 
@@ -762,7 +762,7 @@ $breakpoint-mobile: 1024px;
 		}
 
 		&--active {
-			background-color: var(--color-primary-light) !important;
+			background-color: var(--color-primary-element-light) !important;
 		}
 
 		.task-body {
