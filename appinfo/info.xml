@@ -31,4 +31,10 @@
             <order>100</order>
         </navigation>
     </navigations>
+     <repair-steps>
+        <install>
+            <step>OCA\Tasks\Migration\CreateTasksCalendar</step>
+        </install>
+    </repair-steps>
+
 </info>

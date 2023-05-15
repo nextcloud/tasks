@@ -29,6 +29,12 @@ use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
 use OCP\AppFramework\Http\Events\BeforeTemplateRenderedEvent;
+use OCA\DAV\CalDAV\CalDavBackend;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
+use OCP\Defaults;
+use OCP\IDBConnection;
+use OCP\IUser;
 
 class Application extends App implements IBootstrap {
 	/** @var string */
