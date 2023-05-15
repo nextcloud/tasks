@@ -22,6 +22,7 @@
 
 namespace OCA\Tasks\AppInfo;
 
+use OCA\DAV\CalDAV\CalDavBackend;
 use OCA\Tasks\Dashboard\TasksWidget;
 use OCA\Tasks\Listeners\BeforeTemplateRenderedListener;
 use OCP\AppFramework\App;
@@ -29,12 +30,11 @@ use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
 use OCP\AppFramework\Http\Events\BeforeTemplateRenderedEvent;
-use OCA\DAV\CalDAV\CalDavBackend;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 use OCP\Defaults;
 use OCP\IDBConnection;
 use OCP\IUser;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 class Application extends App implements IBootstrap {
 	/** @var string */
@@ -87,7 +87,4 @@ class Application extends App implements IBootstrap {
 			}
 		});
 	}
-
-
-
 }
