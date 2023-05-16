@@ -88,7 +88,6 @@ class CreateTasksCalendar implements IRepairStep {
 			->from('calendars', 'c1')
 			->leftJoin('c1', 'calendars', 'c2', $expr->andX(
 				$expr->eq('c1.principaluri', 'c2.principaluri'),
-				$expr->eq('c2.uri', $query->createNamedParameter('tasks')),
 				$expr->eq('c2.components', $query->createNamedParameter('VTODO'))
 			)
 			)
