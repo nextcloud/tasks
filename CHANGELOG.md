@@ -1,3 +1,27 @@
+## 0.15.0 - 2023-05-16
+
+This version of Tasks is only compatible with Nextcloud server 25 and newer.
+
+### Added
+- Adjust style for Nextcloud 25 and above #2166 #2168
+- Use `NcTextField` for task create input, show submit button on the right #2226 
+
+### Changed
+- Adjust task list sharing interface #2219
+- Sort tasks by priority before sorting alphabetically #2210
+- Migrate from `NcMultiselect` to `NcSelect` #2193 #2197 #2217
+- Code cleanup #2192 #2218 #2254
+
+### Fixed
+- Fix closing tag list after selection #1796
+- Don't occlude sort order dropdown by sidebar #2227 
+- Correctly import `NcProgressBar` #2187
+- Fix Tasks icon color in Dashboard widget #2186
+- Fix markdown checkbox style #2206
+- Show notes equally in editing and preview mode #2209
+- Fix inconsistent property `X-ALT-DESC` #2240
+- Fix TaskStatusDisplay #2256
+
 ## 0.14.5 - 2022-10-19
 
 ### Added
