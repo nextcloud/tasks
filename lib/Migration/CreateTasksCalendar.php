@@ -37,7 +37,7 @@ use OCP\Migration\IRepairStep;
  * @package OCA\Tasks\Migration
  */
 class CreateTasksCalendar implements IRepairStep {
-	public const APP_ID = 'ecloud-accounts';
+	public const APP_ID = 'tasks';
 	public const TASKS_CALENDAR_URI = 'tasks';
 	public const TASKS_CALENDAR_NAME = 'Tasks';
 	public const TASKS_CALENDAR_COMPONENT = 'VTODO';
