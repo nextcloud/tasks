@@ -154,6 +154,7 @@ OC.L10N.register(
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n tâche terminée","%n tâches terminées","%n tâches terminées"],
     "Tomorrow" : "Demain",
     "Add List…" : "Ajouter une liste...",
+    "New list" : "Nouvelle liste",
     "All day" : "Toute la journée",
     "Unpin" : "Dépingler",
     "Pin" : "Épingler",
