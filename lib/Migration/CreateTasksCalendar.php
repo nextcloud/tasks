@@ -73,7 +73,7 @@ class CreateTasksCalendar implements IRepairStep {
 	 * @since 9.1.0
 	 */
 	public function getName() {
-		return 'Fix by creating Tasks calendar for user if not exist.';
+		return 'Creating task calendars where needed for users.';
 	}
 
 	/**
