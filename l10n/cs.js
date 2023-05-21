@@ -154,6 +154,7 @@ OC.L10N.register(
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n dokončený úkol","%n dokončené úkoly","%n dokončených úkolů","%n dokončené úkoly"],
     "Tomorrow" : "Zítra",
     "Add List…" : "Přidat seznam…",
+    "New list" : "Nový seznam",
     "All day" : "Celý den",
     "Unpin" : "Uvolnit",
     "Pin" : "Připnout",
