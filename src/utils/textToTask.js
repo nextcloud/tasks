@@ -50,6 +50,7 @@ export const textToTask = (text) => {
 		children: []
 	}
 	var curTask = rootTask
+	var numberOfTasks = 0
 
 	while(lines.length){
 		var line = lines.shift()
@@ -69,9 +70,10 @@ export const textToTask = (text) => {
 		}
 		curTask.children.push(nextTask)
 		curTask = nextTask
+		numberOfTasks++
 	}
 
-	return cleanTasks(rootTask.children)
+	return {numberOfTasks, tasks: cleanTasks(rootTask.children)}
 }
 
 const cleanTasks = (tasks) => tasks.map(t => ({

@@ -156,7 +156,8 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:trailing-button-label="subtasksCreationPlaceholder"
 					@trailing-button-click="addTask"
 					@keyup.esc="showSubtaskInput = false"
-					@keyup.enter="addTask">
+					@keyup.enter="addTask"
+					@paste="addMultipleTasks">
 					<Plus :size="20" />
 				</NcTextField>
 			</div>
@@ -166,6 +167,14 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:task-id="task.uri"
 				:calendar-id="task.calendar.uri" />
 		</div>
+		<CreateMultipleTasksDialog
+			v-if="showCreateMultipleTasksModal"
+			:root-task="task"
+			:calendar="task.calendar"
+			:tasks-to-create="multipleTasks"
+			:tasks-additional-properties="additionalTaskProperties"
+			@cancel="createMultipleTasksCancelled"
+			@close="createMultipleTasksSuccessful"/>
 	</li>
 </template>
 
@@ -198,6 +207,9 @@ import Undo from 'vue-material-design-icons/Undo.vue'
 import { vOnClickOutside as ClickOutside } from '@vueuse/components'
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 
+import { textToTask } from '../utils/textToTask.js'
+import CreateMultipleTasksDialog from "./CreateMultipleTasksDialog.vue";
+
 export default {
 	name: 'TaskBody',
 	directives: {
@@ -205,6 +217,7 @@ export default {
 		Linkify,
 	},
 	components: {
+		CreateMultipleTasksDialog,
 		TaskCheckbox,
 		TaskStatusDisplay,
 		TaskDragContainer,
@@ -237,6 +250,9 @@ export default {
 			showSubtaskInput: false,
 			newTaskName: '',
 			isAddingTask: false,
+			showCreateMultipleTasksModal: false,
+			multipleTasks: {numberOfTasks: 0, tasks: {}},
+			additionalTaskProperties: {},
 		}
 	},
 	computed: {
@@ -604,26 +620,61 @@ export default {
 			this.showSubtaskInput = false
 		},
 
+		addMultipleTasks($event) {
+			const pastedText = $event.clipboardData.getData('text')
+			const tasksFromText = textToTask(pastedText)
+
+			if (tasksFromText.numberOfTasks <= 1) {
+				return
+			}
+
+			$event.stopPropagation()
+
+			this.multipleTasks = tasksFromText
+			this.showCreateMultipleTasksModal = true
+			this.additionalTaskProperties = this.getAdditionalTaskProperties()
+		},
+
+		createMultipleTasksCancelled() {
+			this.showCreateMultipleTasksModal = false
+			this.multipleTasks = {numberOfTasks: 0, tasks: {}}
+			this.additionalTaskProperties = {}
+		},
+
+		createMultipleTasksSuccessful() {
+			this.showCreateMultipleTasksModal = false
+			this.multipleTasks = {numberOfTasks: 0, tasks: {}}
+			this.additionalTaskProperties = {}
+			this.newTaskName = ''
+		},
+
 		addTask($event) {
 			$event?.stopPropagation()
 			const task = { summary: this.newTaskName, calendar: this.task.calendar, related: this.task.uid }
 
-			// If the task is created in a collection view,
-			// set the appropriate properties.
-			if (this.collectionId === 'starred') {
-				task.priority = '1'
-			}
-			if (this.collectionId === 'today') {
-				task.due = moment().startOf('day').format('YYYY-MM-DDTHH:mm:ss')
-			}
-			if (this.collectionId === 'current') {
-				task.start = moment().format('YYYY-MM-DDTHH:mm:ss')
-			}
-
-			this.createTask(task)
+			this.createTask({
+				...task,
+				...this.getAdditionalTaskProperties()
+			})
 			this.newTaskName = ''
 			// Focus the input field again, in case we clicked on the trailing-icon-button
 			this.$refs.input.$refs.inputField.$refs.input.focus()
+		},
+
+		getAdditionalTaskProperties() {
+			const taskProperties = {}
+			// If the task is created in a collection view,
+			// set the appropriate properties.
+			if (this.collectionId === 'starred') {
+				taskProperties.priority = '1'
+			}
+			if (this.collectionId === 'today') {
+				taskProperties.due = moment().startOf('day').format('YYYY-MM-DDTHH:mm:ss')
+			}
+			if (this.collectionId === 'current') {
+				taskProperties.start = moment().format('YYYY-MM-DDTHH:mm:ss')
+			}
+			return taskProperties
 		},
 	},
 }

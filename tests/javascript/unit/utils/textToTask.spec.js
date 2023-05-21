@@ -30,11 +30,13 @@ describe('utils/textToTask test suite', () => {
 
 		const tasks = textToTask(text)
 
-		expect(tasks).toEqual([
-			{title: "task1", children: []},
-			{title: "task2", children: []},
-			{title: "task3", children: []}
-		])
+		expect(tasks).toEqual({
+			numberOfTasks: 3, tasks: [
+				{title: "task1", children: []},
+				{title: "task2", children: []},
+				{title: "task3", children: []}
+			]
+		})
 	})
 
 	it('should convert different prefixes', () => {
@@ -52,7 +54,7 @@ task
 		const tasks = textToTask(text)
 
 		const expectedTasks = Array(8).fill({title: "task", children: []})
-		expect(tasks).toEqual(expectedTasks)
+		expect(tasks).toEqual({numberOfTasks: 8, tasks: expectedTasks})
 	})
 
 	it('should convert lists with sub-tasks', () => {
@@ -76,7 +78,7 @@ task
 				]
 			},
 		]
-		expect(tasks).toEqual(expectedTasks)
+		expect(tasks).toEqual({numberOfTasks: 3, tasks: expectedTasks})
 	})
 
 	it('should convert lists with uneven indentation', () => {
@@ -106,7 +108,7 @@ task
 			},
 			{title: "task2", children: []},
 		]
-		expect(tasks).toEqual(expectedTasks)
+		expect(tasks).toEqual({numberOfTasks: 6, tasks: expectedTasks})
 	})
 
 	it('should convert complex lists with sub-tasks', () => {
@@ -153,6 +155,6 @@ task
 				]
 			},
 		]
-		expect(tasks).toEqual(expectedTasks)
+		expect(tasks).toEqual({numberOfTasks: 10, tasks: expectedTasks})
 	})
 })
