@@ -38,13 +38,12 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			</NcTextField>
 		</div>
 		<SortorderDropdown />
-		<CreateMultipleTasksDialog
-			v-if="showCreateMultipleTasksModal"
+		<CreateMultipleTasksDialog v-if="showCreateMultipleTasksModal"
 			:calendar="calendar"
 			:tasks-to-create="multipleTasks"
 			:tasks-additional-properties="additionalTaskProperties"
 			@cancel="createMultipleTasksCancelled"
-			@close="createMultipleTasksSuccessful"/>
+			@close="createMultipleTasksSuccessful" />
 	</div>
 </template>
 
@@ -60,7 +59,7 @@ import Plus from 'vue-material-design-icons/Plus.vue'
 import { mapGetters, mapActions } from 'vuex'
 
 import { textToTask } from '../utils/textToTask.js'
-import CreateMultipleTasksDialog from "./CreateMultipleTasksDialog.vue";
+import CreateMultipleTasksDialog from './CreateMultipleTasksDialog.vue'
 
 export default {
 	components: {
@@ -73,8 +72,8 @@ export default {
 		return {
 			newTaskName: '',
 			showCreateMultipleTasksModal: false,
-			multipleTasks: {numberOfTasks: 0, tasks: {}},
-			additionalTaskProperties: {}
+			multipleTasks: { numberOfTasks: 0, tasks: {} },
+			additionalTaskProperties: {},
 		}
 	},
 	computed: {
@@ -115,7 +114,7 @@ export default {
 
 			return this.createTask({
 				...task,
-				...this.getAdditionalTaskProperties()
+				...this.getAdditionalTaskProperties(),
 			})
 		},
 
@@ -159,13 +158,13 @@ export default {
 
 		createMultipleTasksCancelled() {
 			this.showCreateMultipleTasksModal = false
-			this.multipleTasks = {numberOfTasks: 0, tasks: {}}
+			this.multipleTasks = { numberOfTasks: 0, tasks: {} }
 			this.additionalTaskProperties = {}
 		},
 
 		createMultipleTasksSuccessful() {
 			this.showCreateMultipleTasksModal = false
-			this.multipleTasks = {numberOfTasks: 0, tasks: {}}
+			this.multipleTasks = { numberOfTasks: 0, tasks: {} }
 			this.additionalTaskProperties = {}
 			this.newTaskName = ''
 		},

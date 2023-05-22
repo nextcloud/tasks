@@ -167,14 +167,13 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:task-id="task.uri"
 				:calendar-id="task.calendar.uri" />
 		</div>
-		<CreateMultipleTasksDialog
-			v-if="showCreateMultipleTasksModal"
+		<CreateMultipleTasksDialog v-if="showCreateMultipleTasksModal"
 			:root-task="task"
 			:calendar="task.calendar"
 			:tasks-to-create="multipleTasks"
 			:tasks-additional-properties="additionalTaskProperties"
 			@cancel="createMultipleTasksCancelled"
-			@close="createMultipleTasksSuccessful"/>
+			@close="createMultipleTasksSuccessful" />
 	</li>
 </template>
 
@@ -208,7 +207,7 @@ import { vOnClickOutside as ClickOutside } from '@vueuse/components'
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 import { textToTask } from '../utils/textToTask.js'
-import CreateMultipleTasksDialog from "./CreateMultipleTasksDialog.vue";
+import CreateMultipleTasksDialog from './CreateMultipleTasksDialog.vue'
 
 export default {
 	name: 'TaskBody',
@@ -251,7 +250,7 @@ export default {
 			newTaskName: '',
 			isAddingTask: false,
 			showCreateMultipleTasksModal: false,
-			multipleTasks: {numberOfTasks: 0, tasks: {}},
+			multipleTasks: { numberOfTasks: 0, tasks: {} },
 			additionalTaskProperties: {},
 		}
 	},
@@ -637,13 +636,13 @@ export default {
 
 		createMultipleTasksCancelled() {
 			this.showCreateMultipleTasksModal = false
-			this.multipleTasks = {numberOfTasks: 0, tasks: {}}
+			this.multipleTasks = { numberOfTasks: 0, tasks: {} }
 			this.additionalTaskProperties = {}
 		},
 
 		createMultipleTasksSuccessful() {
 			this.showCreateMultipleTasksModal = false
-			this.multipleTasks = {numberOfTasks: 0, tasks: {}}
+			this.multipleTasks = { numberOfTasks: 0, tasks: {} }
 			this.additionalTaskProperties = {}
 			this.newTaskName = ''
 		},
@@ -654,7 +653,7 @@ export default {
 
 			this.createTask({
 				...task,
-				...this.getAdditionalTaskProperties()
+				...this.getAdditionalTaskProperties(),
 			})
 			this.newTaskName = ''
 			// Focus the input field again, in case we clicked on the trailing-icon-button

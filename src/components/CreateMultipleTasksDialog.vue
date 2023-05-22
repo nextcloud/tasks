@@ -27,8 +27,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<NcButton @click="cancel">
 					{{ t('tasks', 'Cancel') }}
 				</NcButton>
-				<NcButton
-					type="primary"
+				<NcButton type="primary"
 					@click="addTasks">
 					{{ t('tasks', 'Create tasks') }}
 				</NcButton>
@@ -63,8 +62,6 @@ import NcLoadingIcon from '@nextcloud/vue/dist/Components/NcLoadingIcon.js'
 import NcModal from '@nextcloud/vue/dist/Components/NcModal.js'
 
 import Check from 'vue-material-design-icons/Check.vue'
-import TextBoxOutline from 'vue-material-design-icons/TextBoxOutline.vue'
-import ViewHeadline from 'vue-material-design-icons/ViewHeadline.vue'
 
 import { mapActions } from 'vuex'
 
@@ -76,26 +73,26 @@ export default {
 		NcEmptyContent,
 		NcLoadingIcon,
 		NcModal,
-		TextBoxOutline,
-		ViewHeadline,
 	},
 	props: {
 		calendar: {
 			type: Object,
-			required: true
+			required: true,
 		},
 		tasksToCreate: {
 			type: Object,
-			required: true
+			required: true,
 		},
 		tasksAdditionalProperties: {
 			type: Object,
-			default: {}
+			default() {
+				return {}
+			},
 		},
 		rootTask: {
 			type: Object,
-			default: undefined
-		}
+			default: undefined,
+		},
 	},
 	emits: ['cancel', 'close'],
 	data() {
@@ -130,7 +127,7 @@ export default {
 
 		async addTasks() {
 			this.creating = true
-			Promise.all(this.tasksToCreate.tasks.map(task => this.addTaskWithParent(task, this.rootTask?.uid)))
+			await Promise.all(this.tasksToCreate.tasks.map(task => this.addTaskWithParent(task, this.rootTask?.uid)))
 				.then(() => {
 					this.creating = false
 					this.created = true
@@ -142,7 +139,7 @@ export default {
 				summary: task.title,
 				calendar: this.calendar,
 				related: parentUid,
-				...this.tasksAdditionalProperties
+				...this.tasksAdditionalProperties,
 			})
 			await Promise.all(task.children.map(child => this.addTaskWithParent(child, newParent?.uid)))
 		},
@@ -190,23 +187,6 @@ export default {
 			position: absolute;
 			top: 14px;
 			left: 14px;
-		}
-
-		input,
-		textarea {
-			width: 100%;
-			padding-left: 44px !important;
-		}
-
-		input {
-			height: 44px !important;
-			margin: 0;
-		}
-
-		textarea {
-			min-width: 100%;
-			max-width: 100%;
-			min-height: 100px;
 		}
 	}
 

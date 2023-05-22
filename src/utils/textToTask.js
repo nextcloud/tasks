@@ -18,67 +18,47 @@
  *
  */
 
-
-/*
-task
-- task
-+ task
-* task
-- [] task
-- [x] task
-- [X] task
-- [ ] task
-*/
-
-/*
-- task
-	- task
-	- task
-		- task
-	- task
-*/
-
 export const textToTask = (text) => {
-	var lines = text.split(/\r?\n/)
+	const lines = text.split(/\r?\n/)
 		.filter(isNotOnlyWhitespace)
 		.map(spaceToTab)
 
 	const rootTask = {
-		title: "ROOT",
+		title: 'ROOT',
 		parent: undefined,
 		depth: 0,
-		children: []
+		children: [],
 	}
-	var curTask = rootTask
-	var numberOfTasks = 0
+	let curTask = rootTask
+	let numberOfTasks = 0
 
-	while(lines.length){
-		var line = lines.shift()
-		var curDepth = countSpacesDepth(line)
+	while (lines.length) {
+		const line = lines.shift()
+		const curDepth = countSpacesDepth(line)
 
 		while (curTask.parent !== undefined && curDepth <= curTask.depth) {
 			curTask = curTask.parent
 		}
 
-		var prefix = listLikePrefix(line)
-		var title = line.substring(prefix.length)
-		var nextTask = {
-			title: title,
+		const prefix = listLikePrefix(line)
+		const title = line.substring(prefix.length)
+		const nextTask = {
+			title,
 			parent: curTask,
 			depth: curDepth,
-			children: []
+			children: [],
 		}
 		curTask.children.push(nextTask)
 		curTask = nextTask
 		numberOfTasks++
 	}
 
-	return {numberOfTasks, tasks: cleanTasks(rootTask.children)}
+	return { numberOfTasks, tasks: cleanTasks(rootTask.children) }
 }
 
 const cleanTasks = (tasks) => tasks.map(t => ({
 	title: t.title,
-	children: cleanTasks(t.children)
+	children: cleanTasks(t.children),
 }))
 
 const isNotOnlyWhitespace = (s) => {
@@ -88,6 +68,6 @@ const isNotOnlyWhitespace = (s) => {
 // tab counts as 4 spaces
 const spaceToTab = (s) => s.replace(/\t/g, '    ')
 
-const listLikePrefix = (s) => s.match(/^([-+*\s]*(\[(\s|x|X)?]\s*)?)/)?.[0] || ""
+const listLikePrefix = (s) => s.match(/^([-+*\s]*(\[(\s|x|X)?]\s*)?)/)?.[0] || ''
 
 const countSpacesDepth = (s) => s.match(/^(\s+)/)?.[0].length || 0

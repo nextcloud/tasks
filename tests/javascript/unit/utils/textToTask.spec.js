@@ -16,12 +16,12 @@
  *
  */
 
-import {textToTask} from '../../../../src/utils/textToTask.js'
+import { textToTask } from '../../../../src/utils/textToTask.js'
 
 describe('utils/textToTask test suite', () => {
 	it('should convert simple list with empty lines', () => {
-		const text =
-			`    
+		const text
+			= `    
 - task1
 	
 - task2
@@ -31,17 +31,18 @@ describe('utils/textToTask test suite', () => {
 		const tasks = textToTask(text)
 
 		expect(tasks).toEqual({
-			numberOfTasks: 3, tasks: [
-				{title: "task1", children: []},
-				{title: "task2", children: []},
-				{title: "task3", children: []}
-			]
+			numberOfTasks: 3,
+			tasks: [
+				{ title: 'task1', children: [] },
+				{ title: 'task2', children: [] },
+				{ title: 'task3', children: [] },
+			],
 		})
 	})
 
 	it('should convert different prefixes', () => {
-		const text =
-			`
+		const text
+			= `
 task
 - task
 + task
@@ -53,13 +54,13 @@ task
 
 		const tasks = textToTask(text)
 
-		const expectedTasks = Array(8).fill({title: "task", children: []})
-		expect(tasks).toEqual({numberOfTasks: 8, tasks: expectedTasks})
+		const expectedTasks = Array(8).fill({ title: 'task', children: [] })
+		expect(tasks).toEqual({ numberOfTasks: 8, tasks: expectedTasks })
 	})
 
 	it('should convert lists with sub-tasks', () => {
-		const text =
-			`
+		const text
+			= `
 - task1
 	- task1.1
 		- task1.1.1
@@ -69,21 +70,23 @@ task
 
 		const expectedTasks = [
 			{
-				title: "task1", children: [
+				title: 'task1',
+				children: [
 					{
-						title: "task1.1", children: [
-							{title: "task1.1.1", children: []},
-						]
+						title: 'task1.1',
+						children: [
+							{ title: 'task1.1.1', children: [] },
+						],
 					},
-				]
+				],
 			},
 		]
-		expect(tasks).toEqual({numberOfTasks: 3, tasks: expectedTasks})
+		expect(tasks).toEqual({ numberOfTasks: 3, tasks: expectedTasks })
 	})
 
 	it('should convert lists with uneven indentation', () => {
-		const text =
-			`
+		const text
+			= `
 -   task1
     - task1.1
      - task1.1.1
@@ -96,24 +99,26 @@ task
 
 		const expectedTasks = [
 			{
-				title: "task1", children: [
+				title: 'task1',
+				children: [
 					{
-						title: "task1.1", children: [
-							{title: "task1.1.1", children: []},
-						]
+						title: 'task1.1',
+						children: [
+							{ title: 'task1.1.1', children: [] },
+						],
 					},
-					{title: "task1.2", children: []},
-					{title: "task1.3", children: []},
+					{ title: 'task1.2', children: [] },
+					{ title: 'task1.3', children: [] },
 				],
 			},
-			{title: "task2", children: []},
+			{ title: 'task2', children: [] },
 		]
-		expect(tasks).toEqual({numberOfTasks: 6, tasks: expectedTasks})
+		expect(tasks).toEqual({ numberOfTasks: 6, tasks: expectedTasks })
 	})
 
 	it('should convert complex lists with sub-tasks', () => {
-		const text =
-			`
+		const text
+			= `
 - task1
 	- task1.1
 		- task1.1.1
@@ -130,31 +135,36 @@ task
 
 		const expectedTasks = [
 			{
-				title: "task1", children: [
+				title: 'task1',
+				children: [
 					{
-						title: "task1.1", children: [
-							{title: "task1.1.1", children: []},
-							{title: "task1.1.2", children: []},
-						]
+						title: 'task1.1',
+						children: [
+							{ title: 'task1.1.1', children: [] },
+							{ title: 'task1.1.2', children: [] },
+						],
 					},
 					{
-						title: "task1.2", children: [
-							{title: "task1.2.1", children: []},
-						]
+						title: 'task1.2',
+						children: [
+							{ title: 'task1.2.1', children: [] },
+						],
 					},
-				]
+				],
 			},
-			{title: "task2", children: []},
+			{ title: 'task2', children: [] },
 			{
-				title: "task3", children: [
+				title: 'task3',
+				children: [
 					{
-						title: "task3.1", children: [
-							{title: "task3.1.1", children: []},
-						]
+						title: 'task3.1',
+						children: [
+							{ title: 'task3.1.1', children: [] },
+						],
 					},
-				]
+				],
 			},
 		]
-		expect(tasks).toEqual({numberOfTasks: 10, tasks: expectedTasks})
+		expect(tasks).toEqual({ numberOfTasks: 10, tasks: expectedTasks })
 	})
 })
