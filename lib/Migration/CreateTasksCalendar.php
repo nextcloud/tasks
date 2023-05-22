@@ -88,7 +88,7 @@ class CreateTasksCalendar implements IRepairStep {
 			->from('calendars', 'c1')
 			->leftJoin('c1', 'calendars', 'c2', $expr->andX(
 				$expr->eq('c1.principaluri', 'c2.principaluri'),
-				$expr->eq('c2.components', $query->createNamedParameter('VTODO'))
+				$expr->eq('c2.components', $query->createNamedParameter(self::TASKS_CALENDAR_COMPONENT))
 			)
 			)
 			->where($query->expr()->isNull('c2.principaluri'));
@@ -145,7 +145,7 @@ class CreateTasksCalendar implements IRepairStep {
 			$this->calDav->createCalendar($principal, $taskUri, [
 				'{DAV:}displayname' => self::TASKS_CALENDAR_NAME,
 				'{http://apple.com/ns/ical/}calendar-color' => $this->themingDefaults->getColorPrimary(),
-				'components' => 'VTODO'
+				'components' => self::TASKS_CALENDAR_COMPONENT
 			]);
 		};
 		// if everything is done, no need to redo the repair during next upgrade
