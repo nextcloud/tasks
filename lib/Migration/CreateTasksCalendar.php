@@ -97,11 +97,13 @@ class CreateTasksCalendar implements IRepairStep {
 	}
 
 	/**
+	 *  @param string $principal
+	 * @param string $taskUri
 	 * Returns the unique Task Uri
 	 *
 	 * @return string
 	 */
-	private function getUniqueTaskUri($principal, $taskUri):string {
+	private function getUniqueTaskUri(string $principal, string $taskUri):string {
 		$qb = $this->connection->getQueryBuilder();
 		$qb->select('uri')
 		->from('calendars')
