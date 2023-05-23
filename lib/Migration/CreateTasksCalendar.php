@@ -145,7 +145,7 @@ class CreateTasksCalendar implements IRepairStep {
 		$result = $this->getPrincipalUriByCalendar();
 		foreach ($result as $row) {
 			$principal = $row['principaluri'];
-			$user = str_replace("principals/users/", "", $principal);
+			$user = str_replace('principals/users/', '', $principal);
 			if ($this->userManager->userExists($user)) {
 				$taskUri = $this->getUniqueTaskUri($principal, self::TASKS_CALENDAR_URI);
 				$this->calDav->createCalendar($principal, $taskUri, [
