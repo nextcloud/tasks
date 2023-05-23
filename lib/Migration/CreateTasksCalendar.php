@@ -1,8 +1,8 @@
 <?php
 /**
- * @copyright Copyright (c) 2017 Joas Schilling <coding@schilljs.com>
+ * @copyright Copyright (c) 2017 Avinash Gusain <e.foundation>
  *
- * @author Joas Schilling <coding@schilljs.com>
+ * @author Avinash Gusain <avinashg@murena.io>
  *
  * @license GNU AGPL version 3 or any later version
  *
