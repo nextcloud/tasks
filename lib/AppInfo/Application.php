@@ -31,7 +31,6 @@ use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
 use OCP\AppFramework\Http\Events\BeforeTemplateRenderedEvent;
 use OCP\Defaults;
-use OCP\IDBConnection;
 use OCP\IUser;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -60,8 +59,8 @@ class Application extends App implements IBootstrap {
 		$context->injectFn([$this, 'createTasksCalendar']);
 	}
 
-	public function createTasksCalendar(CalDavBackend $calDav, IDBConnection $db, Defaults $themingDefaults, EventDispatcherInterface $dispatcher): void {
-		$dispatcher->addListener(IUser::class . '::firstLogin', function (GenericEvent $event) use ($calDav, $themingDefaults, $db) {
+	public function createTasksCalendar(CalDavBackend $calDav, Defaults $themingDefaults, EventDispatcherInterface $dispatcher): void {
+		$dispatcher->addListener(IUser::class . '::firstLogin', function (GenericEvent $event) use ($calDav, $themingDefaults) {
 			$user = $event->getSubject();
 			if (!$user instanceof IUser) {
 				return;

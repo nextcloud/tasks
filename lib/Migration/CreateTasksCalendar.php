@@ -82,18 +82,24 @@ class CreateTasksCalendar implements IRepairStep {
 	 * @return array
 	 */
 	private function getPrincipalUriByCalendar():array {
+
 		$query = $this->connection->getQueryBuilder();
 		$expr = $query->expr();
 		$query->select($query->createFunction('DISTINCT ' . $query->getColumnName('c1.principaluri')))
 			->from('calendars', 'c1')
-			->leftJoin('c1', 'calendars', 'c2', $expr->andX(
-				$expr->eq('c1.principaluri', 'c2.principaluri'),
-				$expr->eq('c2.components', $query->createNamedParameter(self::TASKS_CALENDAR_COMPONENT))
-			)
+			->leftJoin(
+				'c1',
+				'calendars',
+				'c2',
+				$expr->andX(
+					$expr->eq('c1.principaluri', 'c2.principaluri'),
+					$expr->like('c2.components', $query->createNamedParameter('%'.self::TASKS_CALENDAR_COMPONENT.'%'))
+				)
 			)
 			->where($query->expr()->isNull('c2.principaluri'));
 		$stmt = $query->executeQuery();
 		return $stmt->fetchAll();
+
 	}
 
 	/**
@@ -141,12 +147,15 @@ class CreateTasksCalendar implements IRepairStep {
 		$result = $this->getPrincipalUriByCalendar();
 		foreach ($result as $row) {
 			$principal = $row['principaluri'];
-			$taskUri = $this->getUniqueTaskUri($principal, self::TASKS_CALENDAR_URI);
-			$this->calDav->createCalendar($principal, $taskUri, [
-				'{DAV:}displayname' => self::TASKS_CALENDAR_NAME,
-				'{http://apple.com/ns/ical/}calendar-color' => $this->themingDefaults->getColorPrimary(),
-				'components' => self::TASKS_CALENDAR_COMPONENT
-			]);
+			$user = str_replace("principals/users/", "", $principal);
+			if ($this->userManager->userExists($user)) {
+				$taskUri = $this->getUniqueTaskUri($principal, self::TASKS_CALENDAR_URI);
+				$this->calDav->createCalendar($principal, $taskUri, [
+					'{DAV:}displayname' => self::TASKS_CALENDAR_NAME,
+					'{http://apple.com/ns/ical/}calendar-color' => $this->themingDefaults->getColorPrimary(),
+					'components' => self::TASKS_CALENDAR_COMPONENT
+				]);
+			}
 		};
 		// if everything is done, no need to redo the repair during next upgrade
 		$this->config->setAppValue(self::APP_ID, 'CreateTasksHasRun', 'yes');
