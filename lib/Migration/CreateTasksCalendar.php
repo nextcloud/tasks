@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright (c) 2017 Avinash Gusain <e.foundation>
+ * @copyright Copyright (c) 2023 Avinash Gusain <e.foundation>
  *
  * @author Avinash Gusain <avinashg@murena.io>
  *
