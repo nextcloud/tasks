@@ -82,7 +82,6 @@ class CreateTasksCalendar implements IRepairStep {
 	 * @return array
 	 */
 	private function getPrincipalUriByCalendar():array {
-
 		$query = $this->connection->getQueryBuilder();
 		$expr = $query->expr();
 		$query->select($query->createFunction('DISTINCT ' . $query->getColumnName('c1.principaluri')))
@@ -99,7 +98,6 @@ class CreateTasksCalendar implements IRepairStep {
 			->where($query->expr()->isNull('c2.principaluri'));
 		$stmt = $query->executeQuery();
 		return $stmt->fetchAll();
-
 	}
 
 	/**
