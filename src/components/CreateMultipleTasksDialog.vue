@@ -128,15 +128,13 @@ export default {
 		async addTasks() {
 			this.creating = true
 			await Promise.all(this.tasksToCreate.tasks.map(task => this.addTaskWithParent(task, this.rootTask?.uid)))
-				.then(() => {
-					this.creating = false
-					this.created = true
-				})
+			this.creating = false
+			this.created = true
 		},
 
 		async addTaskWithParent(task, parentUid) {
 			const newParent = await this.createTask({
-				summary: task.title,
+				summary: task.summary,
 				calendar: this.calendar,
 				related: parentUid,
 				...this.tasksAdditionalProperties,

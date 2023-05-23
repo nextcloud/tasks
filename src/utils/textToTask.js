@@ -24,7 +24,7 @@ export const textToTask = (text) => {
 		.map(spaceToTab)
 
 	const rootTask = {
-		title: 'ROOT',
+		summary: 'ROOT',
 		parent: undefined,
 		depth: 0,
 		children: [],
@@ -41,9 +41,9 @@ export const textToTask = (text) => {
 		}
 
 		const prefix = listLikePrefix(line)
-		const title = line.substring(prefix.length)
+		const summary = line.substring(prefix.length)
 		const nextTask = {
-			title,
+			summary,
 			parent: curTask,
 			depth: curDepth,
 			children: [],
@@ -57,7 +57,7 @@ export const textToTask = (text) => {
 }
 
 const cleanTasks = (tasks) => tasks.map(t => ({
-	title: t.title,
+	summary: t.summary,
 	children: cleanTasks(t.children),
 }))
 

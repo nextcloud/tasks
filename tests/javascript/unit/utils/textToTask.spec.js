@@ -33,9 +33,9 @@ describe('utils/textToTask test suite', () => {
 		expect(tasks).toEqual({
 			numberOfTasks: 3,
 			tasks: [
-				{ title: 'task1', children: [] },
-				{ title: 'task2', children: [] },
-				{ title: 'task3', children: [] },
+				{ summary: 'task1', children: [] },
+				{ summary: 'task2', children: [] },
+				{ summary: 'task3', children: [] },
 			],
 		})
 	})
@@ -54,7 +54,7 @@ task
 
 		const tasks = textToTask(text)
 
-		const expectedTasks = Array(8).fill({ title: 'task', children: [] })
+		const expectedTasks = Array(8).fill({ summary: 'task', children: [] })
 		expect(tasks).toEqual({ numberOfTasks: 8, tasks: expectedTasks })
 	})
 
@@ -70,12 +70,12 @@ task
 
 		const expectedTasks = [
 			{
-				title: 'task1',
+				summary: 'task1',
 				children: [
 					{
-						title: 'task1.1',
+						summary: 'task1.1',
 						children: [
-							{ title: 'task1.1.1', children: [] },
+							{ summary: 'task1.1.1', children: [] },
 						],
 					},
 				],
@@ -99,19 +99,19 @@ task
 
 		const expectedTasks = [
 			{
-				title: 'task1',
+				summary: 'task1',
 				children: [
 					{
-						title: 'task1.1',
+						summary: 'task1.1',
 						children: [
-							{ title: 'task1.1.1', children: [] },
+							{ summary: 'task1.1.1', children: [] },
 						],
 					},
-					{ title: 'task1.2', children: [] },
-					{ title: 'task1.3', children: [] },
+					{ summary: 'task1.2', children: [] },
+					{ summary: 'task1.3', children: [] },
 				],
 			},
-			{ title: 'task2', children: [] },
+			{ summary: 'task2', children: [] },
 		]
 		expect(tasks).toEqual({ numberOfTasks: 6, tasks: expectedTasks })
 	})
@@ -135,31 +135,31 @@ task
 
 		const expectedTasks = [
 			{
-				title: 'task1',
+				summary: 'task1',
 				children: [
 					{
-						title: 'task1.1',
+						summary: 'task1.1',
 						children: [
-							{ title: 'task1.1.1', children: [] },
-							{ title: 'task1.1.2', children: [] },
+							{ summary: 'task1.1.1', children: [] },
+							{ summary: 'task1.1.2', children: [] },
 						],
 					},
 					{
-						title: 'task1.2',
+						summary: 'task1.2',
 						children: [
-							{ title: 'task1.2.1', children: [] },
+							{ summary: 'task1.2.1', children: [] },
 						],
 					},
 				],
 			},
-			{ title: 'task2', children: [] },
+			{ summary: 'task2', children: [] },
 			{
-				title: 'task3',
+				summary: 'task3',
 				children: [
 					{
-						title: 'task3.1',
+						summary: 'task3.1',
 						children: [
-							{ title: 'task3.1.1', children: [] },
+							{ summary: 'task3.1.1', children: [] },
 						],
 					},
 				],

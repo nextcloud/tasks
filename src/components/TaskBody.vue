@@ -157,7 +157,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					@trailing-button-click="addTask"
 					@keyup.esc="showSubtaskInput = false"
 					@keyup.enter="addTask"
-					@paste="addMultipleTasks">
+					@paste.stop="addMultipleTasks">
 					<Plus :size="20" />
 				</NcTextField>
 			</div>
@@ -626,8 +626,6 @@ export default {
 			if (tasksFromText.numberOfTasks <= 1) {
 				return
 			}
-
-			$event.stopPropagation()
 
 			this.multipleTasks = tasksFromText
 			this.showCreateMultipleTasksModal = true
