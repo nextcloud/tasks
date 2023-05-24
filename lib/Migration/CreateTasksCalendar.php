@@ -114,21 +114,21 @@ class CreateTasksCalendar implements IRepairStep {
 		->where($qb->expr()->eq('uri', $qb->createNamedParameter($taskUri)))
 		->andWhere($qb->expr()->eq('principaluri', $qb->createNamedParameter($principal)));
 		$count = $qb->execute()->fetchColumn();
-
-		// If the name already exists, add a suffix until you find an available task uri
 		if ($count > 0) {
-			$i = 1;
-			while ($count > 0) {
-				$newUriName = $taskUri . '-' . $i;
-				$qb->select('uri');
-				$qb->where($qb->expr()->eq('uri', $qb->createNamedParameter($newUriName)));
-				$qb->andWhere($qb->expr()->eq('principaluri', $qb->createNamedParameter($principal)));
-				$count = $qb->execute()->fetchColumn();
-				$i++;
-			}
-			$taskUri = $newUriName;
+			return $taskUri;
 		}
-		return $taskUri;
+		// If the name already exists, add a suffix until you find an available task uri
+		$index = 1;
+		$newTaskUri = $taskUri;
+		while ($count > 0) {
+			$newTaskUri = $taskUri . '-' . $index;
+			$qb->select('uri');
+			$qb->where($qb->expr()->eq('uri', $qb->createNamedParameter($newTaskUri)));
+			$qb->andWhere($qb->expr()->eq('principaluri', $qb->createNamedParameter($principal)));
+			$count = $qb->execute()->fetchColumn();
+			$index++;
+		}
+		return $newTaskUri;
 	}
 
 
