@@ -114,7 +114,7 @@ class CreateTasksCalendar implements IRepairStep {
 		->where($qb->expr()->eq('uri', $qb->createNamedParameter($taskUri)))
 		->andWhere($qb->expr()->eq('principaluri', $qb->createNamedParameter($principal)));
 		$count = $qb->execute()->fetchColumn();
-		if ($count > 0) {
+		if ($count === 0) {
 			return $taskUri;
 		}
 		// If the name already exists, add a suffix until you find an available task uri
