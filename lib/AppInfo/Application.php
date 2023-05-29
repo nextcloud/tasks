@@ -22,6 +22,7 @@
 
 namespace OCA\Tasks\AppInfo;
 
+use OCA\DAV\CalDAV\CalDavBackend;
 use OCA\Tasks\Dashboard\TasksWidget;
 use OCA\Tasks\Listeners\BeforeTemplateRenderedListener;
 use OCP\AppFramework\App;
@@ -29,10 +30,17 @@ use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
 use OCP\AppFramework\Http\Events\BeforeTemplateRenderedEvent;
+use OCP\Defaults;
+use OCP\IUser;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 class Application extends App implements IBootstrap {
 	/** @var string */
 	public const APP_ID = 'tasks';
+	public const TASKS_CALENDAR_URI = 'tasks';
+	public const TASKS_CALENDAR_NAME = 'Tasks';
+	public const TASKS_CALENDAR_COMPONENT = 'VTODO';
 
 	/**
 	 * @param array $params
@@ -48,5 +56,25 @@ class Application extends App implements IBootstrap {
 	}
 
 	public function boot(IBootContext $context): void {
+		$context->injectFn([$this, 'createTasksCalendar']);
+	}
+
+	public function createTasksCalendar(CalDavBackend $calDav, Defaults $themingDefaults, EventDispatcherInterface $dispatcher): void {
+		$dispatcher->addListener(IUser::class . '::firstLogin', function (GenericEvent $event) use ($calDav, $themingDefaults) {
+			$user = $event->getSubject();
+			if (!$user instanceof IUser) {
+				return;
+			}
+			$userId = $user->getUID();
+			$principal = 'principals/users/' . $userId;
+			$calendar = $calDav->getCalendarByUri($principal, self::TASKS_CALENDAR_URI);
+			if ($calendar === null) {
+				$calDav->createCalendar($principal, self::TASKS_CALENDAR_URI, [
+					'{DAV:}displayname' => self::TASKS_CALENDAR_NAME,
+					'{http://apple.com/ns/ical/}calendar-color' => $themingDefaults->getColorPrimary(),
+					'components' => self::TASKS_CALENDAR_COMPONENT
+				]);
+			}
+		});
 	}
 }

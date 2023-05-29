@@ -1,0 +1,9 @@
+variables:
+    TO_PACKAGE: 'appinfo css l10n lib templates js img'
+include:
+  - project: "e/infra/ecloud/nextcloud-apps/ci-templates"
+    ref: main
+    file: "nc-apps-lint-build-frontend.yml"
+  - project: "e/infra/ecloud/nextcloud-apps/ci-templates"
+    ref: main
+    file: "nc-apps-deploy.yml"
