@@ -44,6 +44,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				class="no-nav"
 				:cancelled="task.status === 'CANCELLED'"
 				:read-only="readOnly"
+				:recurring="task.recurring"
 				:priority-class="priorityClass"
 				@toggle-completed="toggleCompleted(task)" />
 			<!-- Info: summary, progress & tags -->

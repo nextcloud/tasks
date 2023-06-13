@@ -33,6 +33,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			<CheckboxBlankOffOutline v-if="cancelled && !completed" :size="22" />
 			<CheckboxOutline v-else-if="completed" :size="22" />
 			<CheckboxBlank v-else-if="readOnly" :size="22" />
+			<Repeat v-else-if="recurring" :size="22" />
 			<CheckboxBlankOutline v-else :size="22" />
 		</label>
 	</div>
@@ -45,6 +46,7 @@ import CheckboxBlank from 'vue-material-design-icons/CheckboxBlank.vue'
 import CheckboxBlankOffOutline from 'vue-material-design-icons/CheckboxBlankOffOutline.vue'
 import CheckboxBlankOutline from 'vue-material-design-icons/CheckboxBlankOutline.vue'
 import CheckboxOutline from 'vue-material-design-icons/CheckboxOutline.vue'
+import Repeat from 'vue-material-design-icons/Repeat.vue'
 
 export default {
 	components: {
@@ -52,6 +54,7 @@ export default {
 		CheckboxBlankOffOutline,
 		CheckboxBlankOutline,
 		CheckboxOutline,
+		Repeat,
 	},
 	props: {
 		completed: {
@@ -65,6 +68,10 @@ export default {
 		readOnly: {
 			type: Boolean,
 			required: true,
+		},
+		recurring: {
+			type: Boolean,
+			required: true
 		},
 		priorityClass: {
 			type: String,
