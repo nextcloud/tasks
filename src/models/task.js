@@ -95,6 +95,8 @@ export default class Task {
 		this._completed = !!comp
 		this._completedDate = comp ? comp.toJSDate() : null
 		this._completedDateMoment = moment(this._completedDate, 'YYYYMMDDTHHmmss')
+		const recur = this.vtodo.getFirstPropertyValue('rrule')
+		this._recurring = !!recur
 		this._status = this.vtodo.getFirstPropertyValue('status')
 		this._note = this.vtodo.getFirstPropertyValue('description') || ''
 		this._related = this.getParent()?.getFirstValue() || null
@@ -327,6 +329,10 @@ export default class Task {
 
 	get completedDateMoment() {
 		return this._completedDateMoment.clone()
+	}
+
+	get recurring() {
+		return this._recurring
 	}
 
 	get status() {

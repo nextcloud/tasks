@@ -129,6 +129,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			<TaskCheckbox :completed="task.completed"
 				:cancelled="task.status === 'CANCELLED'"
 				:read-only="readOnly"
+				:recurring="recurring"
 				:priority-class="priorityClass"
 				@toggle-completed="toggleCompleted(task)" />
 		</template>
@@ -517,6 +518,14 @@ export default {
 		 */
 		readOnly() {
 			return this.task.calendar.readOnly || (this.task.calendar.isSharedWithMe && this.task.class !== 'PUBLIC')
+		},
+		/**
+		 * Whether this is a recurring task.
+		 *
+		 * @return {boolean} Is the task recurring
+		 */
+		recurring() {
+			return this.task.recurring
 		},
 		/**
 		 * Whether the dates of a task are all-day
