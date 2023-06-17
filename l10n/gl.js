@@ -110,7 +110,7 @@ OC.L10N.register(
     "Close" : "Pechar",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n tarefa completada","%n tarefas completadas"],
     "Tomorrow" : "Mañá",
-    "Add List…" : "Engadir unha lista...",
+    "Add List…" : "Engadir unha lista…",
     "All day" : "Todo o día",
     "Edit title" : "Editar o título",
     "Details" : "Detalles",
