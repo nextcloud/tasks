@@ -36,7 +36,7 @@
 		"@nextcloud/l10n": "^2.1.0",
 		"@nextcloud/logger": "^2.5.0",
 		"@nextcloud/moment": "^1.2.1",
-		"@nextcloud/router": "^2.1.1",
+		"@nextcloud/router": "^2.1.2",
 		"@nextcloud/vue": "^7.11.6",
 		"@vueuse/components": "^10.1.2",
 		"color-convert": "^2.0.1",
