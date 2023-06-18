@@ -94,8 +94,7 @@ export default class Task {
 		this._completedDate = this.vtodo.getFirstPropertyValue('completed')
 		this._completedDateMoment = moment(this._completedDate, 'YYYYMMDDTHHmmssZ')
 		this._completed = !!this._completedDate
-		const recur = this.vtodo.getFirstPropertyValue('rrule')
-		this._recurring = !!recur
+		this._recurrence = this.vtodo.getFirstPropertyValue('rrule')
 		this._status = this.vtodo.getFirstPropertyValue('status')
 		this._note = this.vtodo.getFirstPropertyValue('description') || ''
 		this._related = this.getParent()?.getFirstValue() || null
@@ -331,8 +330,17 @@ export default class Task {
 		return this._completedDateMoment.clone()
 	}
 
+	get recurrence() {
+		return this._recurrence
+	}
+
 	get recurring() {
-		return this._recurring
+		if (this._start === null || this._recurrence === null) {
+			return false
+		}
+		const iter = this._recurrence.iterator(this.start)
+		iter.next()
+		return iter.next() !== null
 	}
 
 	get status() {
@@ -721,6 +729,27 @@ export default class Task {
 				isDate: false,
 			}),
 		).toSeconds()
+	}
+
+	/**
+	 * For completing a recurring task, tries to set the task start date to the next recurrence date.
+	 *
+	 * Does nothing if we are at the end of the recurrence (RRULE:UNTIL was reached).
+	 */
+	completeRecurring() {
+		// Get recurrence iterator, starting at start date
+		const iter = this.recurrence.iterator(this.start)
+		// Skip the start date itself
+		iter.next()
+		// If there is a next recurrence, update the start date to next recurrence date
+		const nextRecurrence = iter.next()
+		if (nextRecurrence !== null) {
+			this.start = nextRecurrence
+			// If the due date now lies before start date, clear it
+			if (this.due !== null && this.due.compare(this.start) < 0) {
+				this.due = null
+			}
+		}
 	}
 
 	/**

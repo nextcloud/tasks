@@ -1054,6 +1054,12 @@ const actions = {
 		if (task.calendar.isSharedWithMe && task.class !== 'PUBLIC') {
 			return
 		}
+		// Don't complete a task if it is still recurring, but update its start date instead
+		if (task.recurring) {
+			task.completeRecurring()
+			await context.dispatch('updateTask', task)
+			return
+		}
 		if (task.completed) {
 			await context.dispatch('setPercentComplete', { task, complete: 0 })
 		} else {
