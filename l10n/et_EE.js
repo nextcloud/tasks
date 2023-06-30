@@ -26,6 +26,7 @@ OC.L10N.register(
     "Deleted" : "Kustutatud",
     "Restore" : "Taasta",
     "Delete permanently" : "Kustuta jäädavalt",
+    "Empty trash bin" : "Tühjenda prügikast",
     "Change sort order" : "Muuda sorteerimisjärjekorda",
     "Start date" : "Alguskuupäev",
     "Due date" : "Tähtaeg",
