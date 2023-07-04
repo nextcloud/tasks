@@ -58,7 +58,7 @@ OC.L10N.register(
     "Untitled journal" : "سجل بدون عنوان",
     "Untitled item" : "بند غير معنون",
     "Unknown calendar" : "تقويم غير معروف",
-    "Could not load deleted calendars and objects" : "لم يُمكن تحميل التقاويم أو الكيانا المحذوفة ",
+    "Could not load deleted calendars and objects" : "لم يُمكن تحميل التقاويم أو الكيانات المحذوفة ",
     "Could not delete calendar or event" : "تعذّر حذف التقويم أو الحدث",
     "Could not restore calendar or event" : "تعذرت استعادة تقويم أو حدث",
     "Do you really want to empty the trash bin?" : "هل ترغب حقّاً في تفريغ سلة المهملات؟",
