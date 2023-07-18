@@ -23,6 +23,7 @@ OC.L10N.register(
     "Deleted" : "Borrado",
     "Restore" : "Restaurar",
     "Delete permanently" : "Borrar permanentemente",
+    "Empty trash bin" : "Eliminar papelera de reciclaje",
     "Change sort order" : "Cambiar el criterio para ordenar",
     "Start date" : "Fecha de inicio",
     "Due date" : "Fecha de vencimiento",
@@ -44,6 +45,7 @@ OC.L10N.register(
     "When shared show full event" : "Al compartir, mostrar el evento completo",
     "When shared show only busy" : "Al compartir, mostrar sólo como ocupado ",
     "When shared hide this event" : "Al compartir, ocultar este evento ",
+    "Canceled" : "Cancelada",
     "Task not found!" : "¡Tarea no encontrada!",
     "Set start date" : "Establecer fecha de inicio",
     "Set due date" : "Establecer fecha de vencimiento"
