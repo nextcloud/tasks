@@ -47,6 +47,7 @@ OC.L10N.register(
     "When shared show full event" : "هنگام اشتراک گذاری ، رویداد کامل را نشان می دهد",
     "When shared show only busy" : "وقتی نمایش اشتراکی فقط مشغول است",
     "When shared hide this event" : "هنگام اشتراک گذاری این رویداد را پنهان کنید",
+    "Canceled" : "لغو شد",
     "Task not found!" : "کار یافت نشد!",
     "Set due date" : "تعریف سر رسید",
     "An error occurred" : "خطایی روی داد"
