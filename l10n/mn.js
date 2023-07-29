@@ -6,6 +6,7 @@ OC.L10N.register(
     "All" : "бүх",
     "Current" : "Одоогийн",
     "Completed" : "Гүйцэтгэгдсэн",
+    "Tasks" : "Даалгавар",
     "Hidden" : "Далд",
     "Share with users or groups" : "Бусад хэрэглэгч, бүлэгт хуваалцах",
     "Can edit" : "Can edit",
