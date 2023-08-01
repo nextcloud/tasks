@@ -57,7 +57,7 @@ OC.L10N.register(
     "Deleted" : "Eliminada",
     "Restore" : "Restaurar",
     "Delete permanently" : "Eliminar definitivamente",
-    "Empty trash bin" : "Cesto do lixo baleiro",
+    "Empty trash bin" : "Baleirar o lixo",
     "Untitled task" : "Tarefa sen título",
     "Untitled event" : "Evento sen título",
     "Untitled journal" : "Diario sen título",
