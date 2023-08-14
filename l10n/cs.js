@@ -234,7 +234,7 @@ OC.L10N.register(
     "Task successfully saved to server." : "Úkol úspěšně uložen na server.",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Úkol se nepodařilo zaktualizovat, protože byl mezitím změněn na serveru. Kliknutím ho opětovně načtěte. Lokálně provedené změny žel budou ztraceny.",
     "Could not update the task." : "Úkol se nedaří aktualizovat.",
-    "Successfully updated the task." : "Úkol úspěšně aktualizován.",
+    "Successfully updated the task." : "Úkol úspěšně zaktualizován.",
     "Task successfully moved to new calendar." : "Úkol úspěšně přesunut do nového kalendáře.",
     "An error occurred" : "Došlo k chybě",
     "Create a task" : "Vytvořit úkol",
