@@ -88,15 +88,8 @@ update-composer: composer.phar
 # Removes the build directory and the compiled files
 .PHONY: clean
 clean:
-	rm -f ./js/tasks-main.js
-	rm -f ./js/tasks-main.js.map
-	rm -f ./js/tasks-main.js.LICENSE.txt
-	rm -f ./js/tasks-dashboard.js
-	rm -f ./js/tasks-dashboard.js.map
-	rm -f ./js/tasks-dashboard.js.LICENSE.txt
-	rm -f ./js/tasks-talk.js
-	rm -f ./js/tasks-talk.js.map
-	rm -f ./js/tasks-talk.js.LICENSE.txt
+	rm -rf ./js/*
+	ls -d ./css/* | grep -P '^((?!tasks-icon.css).)*$$' | xargs -r -d'\n' rm
 	rm -rf $(build_directory)
 
 # Same as clean but also removes dependencies installed by npm
@@ -115,7 +108,7 @@ appstore: clean build-js-production
 	--exclude=/.babelrc.js \
 	--exclude=/.codecov.yml \
 	--exclude=/.editorconfig \
-	--exclude=/.eslintrc.js \
+	--exclude=/.eslintrc.cjs \
 	--exclude=/.gitattributes \
 	--exclude=/.gitignore \
 	--exclude=/.phpunit.result.cache \
@@ -129,7 +122,7 @@ appstore: clean build-js-production
 	--exclude=/.travis.yml \
 	--exclude=/.tx \
 	--exclude=/.v8flags*.json \
-	--exclude=/babel.config.js \
+	--exclude=/babel.config.cjs \
 	--exclude=/build.xml \
 	--exclude=/clover.integration.xml \
 	--exclude=/clover.unit.xml \
@@ -146,7 +139,7 @@ appstore: clean build-js-production
 	--exclude=/phpunit.integration.xml \
 	--exclude=/README.md \
 	--exclude=/stylelint.config.js \
-	--exclude=/webpack.config.js \
+	--exclude=/vite.config.mjs \
 	--exclude=/build \
 	--exclude=/coverage \
 	--exclude=/img/src \

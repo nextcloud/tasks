@@ -31,17 +31,10 @@
 import TaskCreateDialog from './components/TaskCreateDialog.vue'
 import { buildSelector } from './helpers/selector.js'
 
-import { getRequestToken } from '@nextcloud/auth'
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'
-import { generateUrl, generateFilePath } from '@nextcloud/router'
+import { generateUrl } from '@nextcloud/router'
 
 import Vue from 'vue'
-
-// eslint-disable-next-line
-__webpack_nonce__ = btoa(getRequestToken())
-
-// eslint-disable-next-line
-__webpack_public_path__ = generateFilePath('tasks', '', 'js/')
 
 Vue.prototype.t = t
 Vue.prototype.n = n

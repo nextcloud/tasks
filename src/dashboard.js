@@ -25,22 +25,12 @@
 import Dashboard from './views/Dashboard.vue'
 import store from './store/store.js'
 
-import './css/dashboard.scss'
-
-import { generateFilePath } from '@nextcloud/router'
-import { getRequestToken } from '@nextcloud/auth'
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'
 
 import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
-
-// eslint-disable-next-line
-__webpack_nonce__ = btoa(getRequestToken())
-
-// eslint-disable-next-line
-__webpack_public_path__ = generateFilePath('tasks', '', 'js/')
 
 Vue.prototype.t = t
 Vue.prototype.n = n

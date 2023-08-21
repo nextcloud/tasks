@@ -68,7 +68,7 @@ class TasksWidget implements IWidget {
 	 * @inheritDoc
 	 */
 	public function getIconClass(): string {
-		return 'app-icon-tasks';
+		return 'icon-tasks';
 	}
 
 	/**
@@ -83,5 +83,9 @@ class TasksWidget implements IWidget {
 	 */
 	public function load(): void {
 		\OCP\Util::addScript('tasks', 'tasks-dashboard');
+		\OCP\Util::addStyle('tasks', 'tasks-dashboard');
+		\OCP\Util::addStyle('tasks', 'tasks-store');
+		\OCP\Util::addStyle('tasks', 'tasks-icon');
+		\OCP\Util::addStyle('tasks', 'tasks-TaskCreateDialog');
 	}
 }

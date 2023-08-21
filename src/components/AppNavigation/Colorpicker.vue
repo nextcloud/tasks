@@ -41,6 +41,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			<label v-if="supportsColorPicker"
 				:style="{'background-color': selectedColor}"
 				class="color-selector">
+				<Eyedropper class="color-selector__icon" />
 				<input :value="selectedColor"
 					type="color"
 					class="color-selector__input"
@@ -51,8 +52,13 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
+import Eyedropper from 'vue-material-design-icons/Eyedropper.vue'
+
 export default {
 	name: 'Colorpicker',
+	components: {
+		Eyedropper,
+	},
 	props: {
 		selectedColor: {
 			type: String,
@@ -194,9 +200,6 @@ export default {
 			display: block;
 			height: 24px;
 			width: calc(100% / 9) !important;
-			background-image: url('../../../img/color_picker.svg');
-			background-repeat: no-repeat;
-			background-position: center center;
 
 			&__input {
 				visibility: hidden;
