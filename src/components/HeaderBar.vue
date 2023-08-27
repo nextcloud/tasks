@@ -23,7 +23,8 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 	<div class="header">
 		<div v-if="$route.params.collectionId !== 'completed' && calendar && !calendar.readOnly"
 			class="header__input">
-			<NcTextField :value.sync="newTaskName"
+			<NcTextField ref="input"
+				:value.sync="newTaskName"
 				:label="placeholder"
 				autocomplete="off"
 				class="reactive"
@@ -154,17 +155,21 @@ export default {
 			this.newTaskName = ''
 		},
 
-		createMultipleTasksCancelled() {
+		async createMultipleTasksCancelled() {
 			this.showCreateMultipleTasksModal = false
 			this.multipleTasks = { numberOfTasks: 0, tasks: {} }
 			this.additionalTaskProperties = {}
+			await this.$nextTick()
+			this.$refs.input.$refs.inputField.$refs.input.focus()
 		},
 
-		createMultipleTasksSuccessful() {
+		async createMultipleTasksSuccessful() {
 			this.showCreateMultipleTasksModal = false
 			this.multipleTasks = { numberOfTasks: 0, tasks: {} }
 			this.additionalTaskProperties = {}
 			this.newTaskName = ''
+			await this.$nextTick()
+			this.$refs.input.$refs.inputField.$refs.input.focus()
 		},
 	},
 }

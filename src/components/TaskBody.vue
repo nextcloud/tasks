@@ -636,6 +636,7 @@ export default {
 			this.showCreateMultipleTasksModal = false
 			this.multipleTasks = { numberOfTasks: 0, tasks: {} }
 			this.additionalTaskProperties = {}
+			this.openSubtaskInput()
 		},
 
 		createMultipleTasksSuccessful() {
@@ -643,6 +644,7 @@ export default {
 			this.multipleTasks = { numberOfTasks: 0, tasks: {} }
 			this.additionalTaskProperties = {}
 			this.newTaskName = ''
+			this.openSubtaskInput()
 		},
 
 		addTask($event) {

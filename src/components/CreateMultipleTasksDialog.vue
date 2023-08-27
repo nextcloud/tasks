@@ -23,8 +23,15 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 			<p>{{ t('tasks', 'Create {numberOfTasks} tasks from pasted text', { numberOfTasks: tasksToCreate.numberOfTasks }) }}</p>
 
+			<!-- Need to prevent keydown and keyup of first button.
+				The issue is that the first button will have focus and enter will trigger the button with keydown.
+				The input fields in HeaderBar and TaskBody which will get focus after closing the modal react on keyup.
+				Therefore an empty task would be created.
+			-->
 			<div class="modal-buttons">
-				<NcButton @click="cancel">
+				<NcButton @click="cancel"
+					@keydown.prevent
+					@keyup.prevent>
 					{{ t('tasks', 'Cancel') }}
 				</NcButton>
 				<NcButton type="primary"
