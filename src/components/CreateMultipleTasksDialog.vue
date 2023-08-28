@@ -17,7 +17,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<NcModal class="task-selector" size="small" @close="() => {created ? cancel() : close()}">
+	<NcModal class="task-selector" size="small" @close="() => {!created ? cancel() : close()}">
 		<div v-if="!creating && !created" id="modal-inner">
 			<h3>{{ t('tasks', 'Create new tasks') }}</h3>
 
