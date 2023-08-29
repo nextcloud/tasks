@@ -23,7 +23,8 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 	<div class="header">
 		<div v-if="$route.params.collectionId !== 'completed' && calendar && !calendar.readOnly"
 			class="header__input">
-			<NcTextField :value.sync="newTaskName"
+			<NcTextField ref="input"
+				:value.sync="newTaskName"
 				:label="placeholder"
 				autocomplete="off"
 				class="reactive"
@@ -32,11 +33,18 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:trailing-button-label="placeholder"
 				@trailing-button-click="addTask"
 				@keyup.esc="clearNewTask($event)"
-				@keyup.enter="addTask">
+				@keyup.enter="addTask"
+				@paste.stop="addMultipleTasks">
 				<Plus :size="20" />
 			</NcTextField>
 		</div>
 		<SortorderDropdown />
+		<CreateMultipleTasksDialog v-if="showCreateMultipleTasksModal"
+			:calendar="calendar"
+			:tasks-to-create="multipleTasks"
+			:tasks-additional-properties="additionalTaskProperties"
+			@cancel="createMultipleTasksCancelled"
+			@close="createMultipleTasksSuccessful" />
 	</div>
 </template>
 
@@ -51,8 +59,12 @@ import Plus from 'vue-material-design-icons/Plus.vue'
 
 import { mapGetters, mapActions } from 'vuex'
 
+import { textToTask } from '../utils/textToTask.js'
+import CreateMultipleTasksDialog from './CreateMultipleTasksDialog.vue'
+
 export default {
 	components: {
+		CreateMultipleTasksDialog,
 		NcTextField,
 		SortorderDropdown,
 		Plus,
@@ -60,6 +72,9 @@ export default {
 	data() {
 		return {
 			newTaskName: '',
+			showCreateMultipleTasksModal: false,
+			multipleTasks: { numberOfTasks: 0, tasks: {} },
+			additionalTaskProperties: {},
 		}
 	},
 	computed: {
@@ -91,31 +106,70 @@ export default {
 			this.newTaskName = ''
 		},
 
-		addTask() {
-			const task = { summary: this.newTaskName }
-
+		addTaskWithName(task) {
 			// If the task is created in the calendar view,
 			// we set the current calendar
 			if (this.$route.params.calendarId) {
 				task.calendar = this.calendar
 			}
 
+			return this.createTask({
+				...task,
+				...this.getAdditionalTaskProperties(),
+			})
+		},
+
+		getAdditionalTaskProperties() {
+			const taskProperties = {}
 			// If the task is created in a collection view,
 			// set the appropriate properties.
 			if (this.$route.params.collectionId === 'starred') {
-				task.priority = 1
+				taskProperties.priority = 1
 			}
 			if (this.$route.params.collectionId === 'today'
 				|| this.$route.params.collectionId === 'week') {
-				task.due = moment().startOf('day').format('YYYY-MM-DDTHH:mm:ss')
-				task.allDay = this.$store.state.settings.settings.allDay
+				taskProperties.due = moment().startOf('day').format('YYYY-MM-DDTHH:mm:ss')
+				taskProperties.allDay = this.$store.state.settings.settings.allDay
 			}
 			if (this.$route.params.collectionId === 'current') {
-				task.start = moment().format('YYYY-MM-DDTHH:mm:ss')
+				taskProperties.start = moment().format('YYYY-MM-DDTHH:mm:ss')
+			}
+			return taskProperties
+		},
+
+		addMultipleTasks($event) {
+			const pastedText = $event.clipboardData.getData('text')
+			const tasksFromText = textToTask(pastedText)
+
+			if (tasksFromText.numberOfTasks <= 1) {
+				return
 			}
 
-			this.createTask(task)
+			this.multipleTasks = tasksFromText
+			this.showCreateMultipleTasksModal = true
+			this.additionalTaskProperties = this.getAdditionalTaskProperties()
+		},
+
+		addTask() {
+			this.addTaskWithName({ summary: this.newTaskName })
 			this.newTaskName = ''
+		},
+
+		async createMultipleTasksCancelled() {
+			this.showCreateMultipleTasksModal = false
+			this.multipleTasks = { numberOfTasks: 0, tasks: {} }
+			this.additionalTaskProperties = {}
+			await this.$nextTick()
+			this.$refs.input.$refs.inputField.$refs.input.focus()
+		},
+
+		async createMultipleTasksSuccessful() {
+			this.showCreateMultipleTasksModal = false
+			this.multipleTasks = { numberOfTasks: 0, tasks: {} }
+			this.additionalTaskProperties = {}
+			this.newTaskName = ''
+			await this.$nextTick()
+			this.$refs.input.$refs.inputField.$refs.input.focus()
 		},
 	},
 }
