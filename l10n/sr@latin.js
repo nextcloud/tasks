@@ -11,9 +11,9 @@ OC.L10N.register(
     "Name" : "Ime",
     "Deleted" : "Obrisano",
     "Delete permanently" : "Obriši zauvek",
-    "Due date" : "Rok",
     "Cancel" : "Cancel",
     "Close" : "Zatvori",
+    "Due date" : "Rok",
     "Details" : "Detalji",
     "Notes" : "Beleške"
 },
