@@ -84,7 +84,7 @@ OC.L10N.register(
     "Create tasks" : "Aufgaben erstellen",
     "Creating new tasks…" : "Erstelle neue Aufgaben…",
     "Close" : "Schließen",
-    "{numberOfTasks} tasks have been added to \"{calendar}\"" : "{numberOfTasks} Aufgaben wurden zu „{calendar}“ hinzugefügt",
+    "{numberOfTasks} tasks have been added to \"{calendar}\"" : "{numberOfTasks} Aufgaben wurden zu \"{calendar}\" hinzugefügt",
     "Delete all completed tasks." : "Alle abgeschlossenen Aufgaben löschen.",
     "Delete completed tasks." : "Abgeschlossene Aufgaben löschen.",
     "Deleted all completed tasks from calendar \"{calendar}\"." : "Alle abgeschlossenen Aufgaben aus dem Kalender \"{calendar}\" gelöscht.",
