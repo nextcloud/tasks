@@ -125,6 +125,7 @@ export default {
 				border: none;
 				margin-left: 44px;
 				margin-bottom: 4px;
+				outline: none !important;
 			}
 
 			&__dropdown-menu {

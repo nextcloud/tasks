@@ -135,32 +135,42 @@ export default {
 		}
 
 		.vs {
-			&__dropdown-menu,
-			&__dropdown-option,
-			&__dropdown-toggle,
-			&__selected-options,
-			&__selected {
+			&__dropdown-toggle {
 				margin:  0;
 				padding: 0;
 				border: none;
+				outline: none !important;
 			}
 
 			&__selected-options {
 				width: calc(100% - 35px);
 				height: 44px;
+				margin:  0;
+				padding: 0;
+				border: none;
 			}
+
 			&__selected {
 				width: 100%;
+				height: 44px;
+				margin:  0;
+				padding: 0;
+				border: none;
 			}
 
 			&__dropdown-menu {
 				border-radius: 0;
 				box-shadow: none;
 				border: 1px solid var(--color-border-dark);
+				margin:  0;
+				padding: 0;
 			}
 
 			&__dropdown-option {
 				margin-left: -1px;
+				margin:  0;
+				padding: 0;
+				border: none;
 			}
 
 			&__search {

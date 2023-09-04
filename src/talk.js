@@ -74,7 +74,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			const shortenedMessage = shortenedMessageCandidate === '' ? parsedMessage.substr(0, 255) : shortenedMessageCandidate
 			try {
 				await buildSelector(TaskCreateDialog, {
-					title: shortenedMessage,
+					summary: shortenedMessage,
 					description: parsedMessage + '\n\n' + '['
 						+ t('tasks', 'Message from {author} in {conversationName}', { author: actorDisplayName, conversationName })
 						+ '](' + generateUrl('/call/' + conversationToken) + ')',

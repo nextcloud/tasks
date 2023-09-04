@@ -1,7 +1,7 @@
 {
   "name": "tasks",
   "description": "Nextcloud - Tasks",
-  "version": "0.15.0",
+  "version": "0.16.0-alpha.0",
   "author": {
     "name": "Raimund Schlüßler",
     "email": "raimund.schluessler@mailbox.org"
@@ -38,7 +38,7 @@
     "@nextcloud/logger": "^2.7.0",
     "@nextcloud/moment": "^1.2.2",
     "@nextcloud/router": "^2.2.0",
-    "@nextcloud/vue": "^7.12.7",
+    "@nextcloud/vue": "8.3.0",
     "@vueuse/components": "^10.7.0",
     "color-convert": "^2.0.1",
     "debounce": "^2.0.0",
@@ -104,7 +104,7 @@
       ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub"
     },
     "transformIgnorePatterns": [
-      "/node_modules/(?!(.*vue-material-design-icons)|(uuid)|(.*vue-select)|(.*p-*))"
+      "/node_modules/(?!(.*vue-material-design-icons)|(uuid)|(.*vue-select)|(@nextcloud/vue)|(.*p-*))"
     ],
     "snapshotSerializers": [
       "<rootDir>/node_modules/jest-serializer-vue"

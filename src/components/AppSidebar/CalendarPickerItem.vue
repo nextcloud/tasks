@@ -126,9 +126,21 @@ export default {
 		.vs {
 			&__dropdown-menu,
 			&__dropdown-option,
-			&__dropdown-toggle,
-			&__selected-options,
+			&__selected-options {
+				margin:  0;
+				padding: 0;
+				border: none;
+			}
+
+			&__dropdown-toggle {
+				margin:  0;
+				padding: 0;
+				border: none;
+				outline: none !important;
+			}
+
 			&__selected {
+				height: 44px;
 				margin:  0;
 				padding: 0;
 				border: none;

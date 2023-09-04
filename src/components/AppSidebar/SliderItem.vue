@@ -31,7 +31,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			<span class="content__icon">
 				<slot name="icon" />
 			</span>
-			<span v-show="!editing" class="content__title">
+			<span v-show="!editing" class="content__name">
 				{{ propertyString }}
 			</span>
 			<div v-if="editing" class="content__input">
@@ -142,7 +142,7 @@ export default {
 					}
 				}
 
-				&__title {
+				&__name {
 					font-weight: bold;
 					flex-grow: 1;
 					padding-right: 14px;

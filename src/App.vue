@@ -143,8 +143,8 @@ export default {
 $breakpoint-mobile: 1024px;
 
 // Adjust app-navigation-toggle position
-#app-navigation-vue .app-navigation-toggle {
-	top: 12px !important;
+.app-navigation-toggle {
+	top: 18px !important;
 	right: -15px !important;
 
 	@media only screen and (max-width: $breakpoint-mobile) {

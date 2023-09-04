@@ -195,27 +195,11 @@ $breakpoint-mobile: 1024px;
 	&__input {
 		position: relative;
 		width: calc(100% - 44px);
-
-		:deep() .input-field {
-			&__main-wrapper,
-			&__input {
-				height: 44px !important;
-			}
-
-			&__icon,
-			&__clear-button.button-vue {
-				height: 40px !important;
-				width: 40px !important;
-			}
-
-			&__input--leading-icon {
-				padding-left: 40px;
-			}
-		}
 	}
 
 	.sortorder {
 		margin-left: auto;
+		margin-top: 6px;
 	}
 }
 </style>

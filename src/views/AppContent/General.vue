@@ -30,7 +30,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				class="grouped-tasks ui-droppable">
 				<h2 class="heading">
 					<span class="heading__icon-bullet" :style="{'background-color': calendar.color }" />
-					<span class="heading__title">{{ calendar.displayName }}</span>
+					<span class="heading__name">{{ calendar.displayName }}</span>
 				</h2>
 				<TaskDragContainer :tasks="calendar.filteredTasks"
 					:disabled="calendar.readOnly"

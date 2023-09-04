@@ -32,11 +32,11 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			<span class="content__icon">
 				<slot name="icon" />
 			</span>
-			<span v-show="!editing" class="content__title">
+			<span v-show="!editing" class="content__name">
 				{{ propertyString }}
 			</span>
 			<div v-if="editing" class="content__input">
-				<NcDatetimePicker :value="newValue"
+				<NcDateTimePicker :value="newValue"
 					:lang="lang"
 					:format="dateFormat"
 					:clearable="false"
@@ -46,7 +46,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:placeholder="t('tasks', 'Set date')"
 					class="date"
 					@change="setDate" />
-				<NcDatetimePicker v-if="!allDay"
+				<NcDateTimePicker v-if="!allDay"
 					:value="newValue"
 					:lang="lang"
 					:format="timeFormat"
@@ -85,12 +85,12 @@ import { overdue } from '../../store/storeHelper.js'
 
 import { translate as t } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
-import NcDatetimePicker from '@nextcloud/vue/dist/Components/NcDatetimePicker.js'
+import NcDateTimePicker from '@nextcloud/vue/dist/Components/NcDateTimePicker.js'
 
 export default {
-	name: 'DatetimePickerItem',
+	name: 'DateTimePickerItem',
 	components: {
-		NcDatetimePicker,
+		NcDateTimePicker,
 	},
 	mixins: [editableItem],
 	props: {
@@ -234,7 +234,7 @@ $blue: #4271a6;
 					}
 				}
 
-				&__title {
+				&__name {
 					font-weight: bold;
 					flex-grow: 1;
 					padding-right: 14px;
