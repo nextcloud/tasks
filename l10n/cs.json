@@ -80,7 +80,7 @@
     "Create {numberOfTasks} tasks from pasted text" : "Vytvořit {numberOfTasks} úkolů z vloženého textu",
     "Cancel" : "Storno",
     "Create tasks" : "Vytvořit úkoly",
-    "Creating new tasks…" : "Vytváření nových úkolů",
+    "Creating new tasks…" : "Vytváření nových úkolů…",
     "Close" : "Zavřít",
     "{numberOfTasks} tasks have been added to \"{calendar}\"" : "{numberOfTasks} úkolů bylo přidáno do „{calendar}“",
     "Delete all completed tasks." : "Smazat všechny dokončené úlohy.",
