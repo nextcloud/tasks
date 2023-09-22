@@ -45,6 +45,7 @@ OC.L10N.register(
     "Empty trash bin" : "ゴミ箱を空にする",
     "Untitled task" : "タイトルなしタスク",
     "Untitled event" : "無題のイベント",
+    "Untitled item" : "無題の項目",
     "Unknown calendar" : "不明なカレンダー",
     "Could not load deleted calendars and objects" : "削除されたカレンダーとオブジェクトを読み込めませんでした。",
     "Could not restore calendar or event" : "カレンダーまたはイベントを復元できませんでした。",
