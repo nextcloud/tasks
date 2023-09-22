@@ -26,7 +26,6 @@ import { findVTODObyUid } from './cdav-requests.js'
 import { isParentInList, momentToICALTime } from './storeHelper.js'
 import SyncStatus from '../models/syncStatus.js'
 import Task from '../models/task.js'
-import router from '../router.js'
 
 import { showError } from '@nextcloud/dialogs'
 import { emit } from '@nextcloud/event-bus'
@@ -762,6 +761,7 @@ const actions = {
 			// Only open the details view if there is enough space or if it is already open.
 			if (context.rootState.route !== undefined && (document.documentElement.clientWidth >= 768 || context.rootState.route?.params.taskId !== undefined)) {
 				// Open the details view for the new task
+				const {router} = await import('../router.js')
 				const calendarId = context.rootState.route.params.calendarId
 				const collectionId = context.rootState.route.params.collectionId
 				if (calendarId) {
