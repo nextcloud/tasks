@@ -82,7 +82,7 @@ export default {
 		]),
 		loadCompletedTasks() {
 			this.calendars.forEach(
-				calendar => this.getTasksFromCalendar({ calendar, completed: true, related: null })
+				calendar => this.getTasksFromCalendar({ calendar, completed: true, related: null }),
 			)
 		},
 	},

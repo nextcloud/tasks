@@ -787,7 +787,7 @@ const actions = {
 	 * @param {object} context The store mutations
 	 * @param {object} data Destructuring object
 	 * @param {Task} data.task The task to delete
-	 * @param {boolean} [data.dav = true] Trigger a dav deletion
+	 * @param {boolean} [data.dav] Trigger a dav deletion
 	 */
 	async deleteTask(context, { task, dav = true }) {
 		// Don't try to delete tasks in read-only calendars
@@ -970,7 +970,7 @@ const actions = {
 			subTasksInStore.forEach(
 				subTask => {
 					context.commit('addTaskToParent', { task: subTask, parent: task })
-				}
+				},
 			)
 
 			context.commit('appendTasksToCalendar', { calendar, tasks: [task] })
@@ -1011,7 +1011,7 @@ const actions = {
 			subTasksInStore.forEach(
 				subTask => {
 					context.commit('addTaskToParent', { task: subTask, parent: task })
-				}
+				},
 			)
 
 			context.commit('appendTasksToCalendar', { calendar, tasks: [task] })
