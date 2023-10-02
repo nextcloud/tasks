@@ -157,7 +157,7 @@ export default {
 		async fetchTasks() {
 			this.loading = true
 			const results = await Promise.all(this.calendars.map(calendar =>
-				this.$store.dispatch('getTasksFromCalendar', { calendar, completed: false, related: null })
+				this.$store.dispatch('getTasksFromCalendar', { calendar, completed: false, related: null }),
 			))
 			this.tasks = [...results.flat()]
 			this.loading = false

@@ -114,7 +114,7 @@ export default {
 				this.$nextTick(
 					() => {
 						this.$refs.note__editor.focus()
-					}
+					},
 				)
 			}
 		},

@@ -211,7 +211,7 @@ export default {
 		},
 		retentionDuration() {
 			return Math.ceil(
-				this.trashBin.retentionDuration / (60 * 60 * 24)
+				this.trashBin.retentionDuration / (60 * 60 * 24),
 			)
 		},
 	},
@@ -288,7 +288,7 @@ export default {
 				t('tasks', 'Do you really want to empty the trash bin?'),
 				t('tasks', 'Empty trash bin'),
 				this.emptyTrashBin,
-				true
+				true,
 			)
 		},
 

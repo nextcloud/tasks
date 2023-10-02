@@ -670,7 +670,7 @@ export default class Task {
 				minute: 0,
 				second: 0,
 				isDate: false,
-			})
+			}),
 		).toSeconds()
 	}
 

@@ -383,7 +383,7 @@ export default {
 			this.newCalendarName = ''
 			this.creating = true
 			this.$nextTick(
-				() => this.$refs.newListInput.$refs.inputField.$refs.input.focus()
+				() => this.$refs.newListInput.$refs.inputField.$refs.input.focus(),
 			)
 			e.stopPropagation()
 		},

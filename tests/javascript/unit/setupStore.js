@@ -98,7 +98,7 @@ calendarsData.forEach(calendarData => {
 				localVue.set(list, task.uid, task)
 				return list
 			}, parent.subTasks)
-		}
+		},
 	)
 
 	store.commit('addCalendar', calendar)

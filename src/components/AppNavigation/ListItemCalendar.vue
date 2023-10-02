@@ -400,7 +400,7 @@ export default {
 			this.nameError = false
 			this.tooltipTarget = ''
 			this.$nextTick(
-				() => this.$refs.editListInput.$refs.inputField.$refs.input.focus()
+				() => this.$refs.editListInput.$refs.inputField.$refs.input.focus(),
 			)
 		},
 
