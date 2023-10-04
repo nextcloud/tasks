@@ -27,6 +27,7 @@ OC.L10N.register(
     "Deleted" : "Eliminado",
     "Restore" : "Restaurar",
     "Delete permanently" : "Borrar permanentemente",
+    "Empty trash bin" : "Vaciar la papelera",
     "Cancel" : "Cancelar",
     "Close" : "Cerrar",
     "No errors" : "Sin errores",
