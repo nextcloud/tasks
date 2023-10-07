@@ -37,7 +37,6 @@ import client from '../services/cdav.js'
 import Task from '../models/task.js'
 import { isParentInList, searchSubTasks } from './storeHelper.js'
 import { findVTODObyState } from './cdav-requests.js'
-import router from '../router.js'
 import { detectColor, uidToHexColor } from '../utils/color.js'
 import { mapCDavObjectToCalendarObject } from '../models/calendarObject.js'
 
@@ -676,15 +675,13 @@ const actions = {
 	 * @param {Calendar} calendar The calendar to append
 	 * @return {Promise}
 	 */
-	async appendCalendar(context, calendar) {
-		return client.calendarHomes[0].createCalendarCollection(calendar.displayName, calendar.color, ['VTODO'])
-			.then((response) => {
-				calendar = Calendar(response, context.getters.getCurrentUserPrincipal)
-				context.commit('addCalendar', calendar)
-				// Open the calendar
-				router.push({ name: 'calendars', params: { calendarId: calendar.id } })
-			})
-			.catch((error) => { throw error })
+	async appendCalendar(context, { displayName, color }) {
+		const response = await client.calendarHomes[0].createCalendarCollection(displayName, color, ['VTODO'])
+		if (response) {
+			const calendar = Calendar(response, context.getters.getCurrentUserPrincipal)
+			context.commit('addCalendar', calendar)
+			return calendar
+		}
 	},
 
 	/**

@@ -183,6 +183,7 @@ import TaskCheckbox from './TaskCheckbox.vue'
 import TaskStatusDisplay from './TaskStatusDisplay.vue'
 import TaskDragContainer from './TaskDragContainer.vue'
 import Task from '../models/task.js'
+import openNewTask from '../mixins/openNewTask.js'
 
 import { emit } from '@nextcloud/event-bus'
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'
@@ -234,6 +235,7 @@ export default {
 		Star,
 		Undo,
 	},
+	mixins: [openNewTask],
 	props: {
 		task: {
 			type: Object,
@@ -647,14 +649,16 @@ export default {
 			this.openSubtaskInput()
 		},
 
-		addTask($event) {
+		async addTask($event) {
 			$event?.stopPropagation()
-			const task = { summary: this.newTaskName, calendar: this.task.calendar, related: this.task.uid }
 
-			this.createTask({
-				...task,
+			const task = await this.createTask({
+				summary: this.newTaskName,
+				calendar: this.task.calendar,
+				related: this.task.uid,
 				...this.getAdditionalTaskProperties(),
 			})
+			this.openNewTask(task)
 			this.newTaskName = ''
 			// Focus the input field again, in case we clicked on the trailing-icon-button
 			this.$refs.input.$refs.inputField.$refs.input.focus()

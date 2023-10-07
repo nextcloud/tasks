@@ -50,6 +50,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import SortorderDropdown from './SortorderDropdown.vue'
+import openNewTask from '../mixins/openNewTask.js'
 
 import { translate as t } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
@@ -69,6 +70,7 @@ export default {
 		SortorderDropdown,
 		Plus,
 	},
+	mixins: [openNewTask],
 	data() {
 		return {
 			newTaskName: '',
@@ -106,17 +108,17 @@ export default {
 			this.newTaskName = ''
 		},
 
-		addTaskWithName(task) {
-			// If the task is created in the calendar view,
-			// we set the current calendar
-			if (this.$route.params.calendarId) {
-				task.calendar = this.calendar
-			}
-
-			return this.createTask({
-				...task,
+		async addTask() {
+			const data = {
+				summary: this.newTaskName,
+				// If the task is created in the calendar view,
+				// we set the current calendar
+				...(this.$route.params.calendarId && { calendar: this.calendar }),
 				...this.getAdditionalTaskProperties(),
-			})
+			}
+			const task = await this.createTask(data)
+			this.openNewTask(task)
+			this.newTaskName = ''
 		},
 
 		getAdditionalTaskProperties() {
@@ -148,11 +150,6 @@ export default {
 			this.multipleTasks = tasksFromText
 			this.showCreateMultipleTasksModal = true
 			this.additionalTaskProperties = this.getAdditionalTaskProperties()
-		},
-
-		addTask() {
-			this.addTaskWithName({ summary: this.newTaskName })
-			this.newTaskName = ''
 		},
 
 		async createMultipleTasksCancelled() {
