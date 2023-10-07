@@ -223,6 +223,11 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					icon="TagMultiple"
 					@add-tag="updateTag"
 					@set-tags="updateTags" />
+				<RepeatItem v-show="!readOnly || task.recurring"
+					:recurrence="task.recurrence == null ? null : task.recurrence.toString()"
+					:disabled="readOnly"
+					:placeholder="t('tasks', 'No recurrence')"
+					icon="IconRepeat" />
 			</div>
 		</NcAppSidebarTab>
 		<NcEmptyContent v-else :description="taskStatusLabel">
@@ -272,6 +277,7 @@ import MultiselectItem from '../components/AppSidebar/MultiselectItem.vue'
 import SliderItem from '../components/AppSidebar/SliderItem.vue'
 import TagsItem from '../components/AppSidebar/TagsItem.vue'
 import TextItem from '../components/AppSidebar/TextItem.vue'
+import RepeatItem from '../components/AppSidebar/RepeatItem.vue'
 import NotesItem from '../components/AppSidebar/NotesItem.vue'
 import TaskCheckbox from '../components/TaskCheckbox.vue'
 // import TaskStatusDisplay from '../components/TaskStatusDisplay'
@@ -338,6 +344,7 @@ export default {
 		SliderItem,
 		TagsItem,
 		TextItem,
+		RepeatItem,
 		CalendarPickerItem,
 		NotesItem,
 		TaskCheckbox,
@@ -675,6 +682,7 @@ export default {
 			getCalendarByRoute: 'getCalendarByRoute',
 			calendars: 'getSortedCalendars',
 			tags: 'tags',
+			recurrence: 'recurrence',
 			showTaskInCalendar: 'showTaskInCalendar',
 			calendarView: 'calendarView',
 		}),

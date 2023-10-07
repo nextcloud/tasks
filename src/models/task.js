@@ -329,10 +329,22 @@ export default class Task {
 		return this._completedDateMoment.clone()
 	}
 
+	/**
+	 * Return the recurrence
+	 *
+	 * @readonly
+	 * @memberof Task
+	 */
 	get recurrence() {
 		return this._recurrence
 	}
 
+	/**
+	 * Whether this task repeats
+	 *
+	 * @readonly
+	 * @memberof Task
+	 */
 	get recurring() {
 		if (this._start === null || this._recurrence === null) {
 			return false
