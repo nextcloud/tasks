@@ -39,14 +39,24 @@ describe('task', () => {
 		expect(task.completedDate).not.toEqual(null)
 	})
 
-	it('Should set complete to 0 when status is "NEEDS-ACTION".', () => {
+	it('Should set complete to <100 when status is "NEEDS-ACTION".', () => {
 		const task = new Task(loadICS('vcalendars/vcalendar-default'), {})
 		task.complete = 100
 		task.status = 'NEEDS-ACTION'
-		expect(task.complete).toEqual(0)
-		// Check that property gets removed instead of being set to zero
+		expect(task.complete).toBeLessThan(100)
 		const complete = task.vtodo.getFirstPropertyValue('percent-complete')
-		expect(complete).toEqual(null)
+		expect(complete).toEqual(99)
+		expect(task.completed).toEqual(false)
+		expect(task.completedDate).toEqual(null)
+	})
+
+	it('Should not adjust complete when not completed and status is "NEEDS-ACTION".', () => {
+		const task = new Task(loadICS('vcalendars/vcalendar-default'), {})
+		task.complete = 90
+		task.status = 'NEEDS-ACTION'
+		expect(task.complete).toBeLessThan(100)
+		const complete = task.vtodo.getFirstPropertyValue('percent-complete')
+		expect(complete).toEqual(90)
 		expect(task.completed).toEqual(false)
 		expect(task.completedDate).toEqual(null)
 	})
@@ -213,7 +223,7 @@ describe('task', () => {
 		expect(complete).toEqual(null)
 	})
 
-	it('Indicates cloesed when completed or cancelled', () => {
+	it('Indicates closed when completed or cancelled', () => {
 		const task = new Task(loadICS('vcalendars/vcalendar-default'), {})
 		task.status = 'CANCELLED'
 		expect(task.closed).toEqual(true)

@@ -346,8 +346,10 @@ export default class Task {
 				this.setComplete(1)
 			}
 		} else if (status === 'NEEDS-ACTION' || status === null) {
-			this.setComplete(0)
 			this.setCompleted(false)
+			if (this.complete === 100) {
+				this.setComplete(99)
+			}
 		}
 	}
 
