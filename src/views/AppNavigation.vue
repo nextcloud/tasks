@@ -387,11 +387,14 @@ export default {
 			)
 			e.stopPropagation()
 		},
-		create() {
+		async create() {
 			if (!this.isNameAllowed(this.newCalendarName).allowed) {
 				return
 			}
-			this.appendCalendar({ displayName: this.newCalendarName, color: this.selectedColor })
+			const { id: calendarId } = await this.appendCalendar({ displayName: this.newCalendarName, color: this.selectedColor })
+			if (calendarId) {
+				await this.$router.push({ name: 'calendars', params: { calendarId } })
+			}
 			this.creating = false
 		},
 		checkName(event) {
