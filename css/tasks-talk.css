@@ -1,0 +1,9 @@
+.icon-tasks {
+	background-image: url(../img/tasks-dark.svg);
+	filter: var(--background-invert-if-dark);
+}
+
+.icon-tasks-white, .icon-tasks.icon-white {
+	background-image: url(../img/tasks.svg);
+	filter: var(--background-invert-if-dark);
+}
