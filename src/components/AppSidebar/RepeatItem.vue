@@ -3,6 +3,8 @@ Nextcloud - Tasks
 
 @author Sunik Kupfer
 @copyright 2023 Sunik Kupfer <mail@sunik.de>
+@author Raimund Schlüßler
+@copyright 2018 Raimund Schlüßler <raimund.schluessler@mailbox.org>
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -24,21 +26,24 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		<div class="repeat__icon">
 			<component :is="icon" :size="20" />
 		</div>
-		{{ recurrence }}
+		<RepeatSummary class="property-repeat__summary__content"
+			:recurrence-rule="recurrence" />
 	</div>
 </template>
 
 <script>
 
 import { translate as t } from '@nextcloud/l10n'
+import RepeatSummary from './RepeatItem/RepeatSummary.vue'
 
 export default {
 	components: {
+		RepeatSummary,
 	},
 	props: {
 		recurrence: {
-			type: String,
-			default: null,
+			type: Object,
+			required: true,
 		},
 		disabled: {
 			type: Boolean,
@@ -73,6 +78,12 @@ export default {
 		justify-content: center;
 		flex-basis: 44px;
 		flex-shrink: 0;
+	}
+
+	.property-repeat__summary__content {
+		display: flex;
+		align-items: center;
+		margin-bottom: 5px;
 	}
 }
 </style>
