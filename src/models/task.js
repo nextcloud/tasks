@@ -28,6 +28,8 @@ import moment from '@nextcloud/moment'
 
 import { v4 as uuid } from 'uuid'
 import ICAL from 'ical.js'
+import { getDefaultRecurrenceRuleObject, mapRecurrenceRuleValueToRecurrenceRuleObject } from './recurrenceRule.js'
+import { ToDoComponent } from '@nextcloud/calendar-js'
 
 export default class Task {
 
@@ -80,6 +82,7 @@ export default class Task {
 			this.vtodo = new ICAL.Component('vtodo')
 			this.vCalendar.addSubcomponent(this.vtodo)
 		}
+		this.todoComponent = ToDoComponent.fromICALJs(this.vtodo)
 
 		if (!this.vtodo.hasProperty('uid')) {
 			console.debug('This task did not have a proper uid. Setting a new one for ', this)
@@ -95,7 +98,7 @@ export default class Task {
 		this._completed = !!comp
 		this._completedDate = comp ? comp.toJSDate() : null
 		this._completedDateMoment = moment(this._completedDate, 'YYYYMMDDTHHmmssZ')
-		this._recurrence = this.vtodo.getFirstPropertyValue('rrule')
+		this._recurrence = this.todoComponent.getPropertyIterator('RRULE').next().value
 		this._status = this.vtodo.getFirstPropertyValue('status')
 		this._note = this.vtodo.getFirstPropertyValue('description') || ''
 		this._related = this.getParent()?.getFirstValue() || null
@@ -336,7 +339,10 @@ export default class Task {
 	 * @memberof Task
 	 */
 	get recurrence() {
-		return this._recurrence
+		if (this._recurrence === undefined || this._recurrence === null) {
+			return getDefaultRecurrenceRuleObject()
+		}
+		return mapRecurrenceRuleValueToRecurrenceRuleObject(this._recurrence.getFirstValue(), this._start)
 	}
 
 	/**
@@ -346,12 +352,7 @@ export default class Task {
 	 * @memberof Task
 	 */
 	get recurring() {
-		if (this._start === null || this._recurrence === null) {
-			return false
-		}
-		const iter = this._recurrence.iterator(this.start)
-		iter.next()
-		return iter.next() !== null
+		return this.todoComponent.isRecurring()
 	}
 
 	get status() {
