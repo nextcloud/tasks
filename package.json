@@ -38,7 +38,7 @@
     "@nextcloud/moment": "^1.2.1",
     "@nextcloud/router": "^2.2.0",
     "@nextcloud/vue": "^7.12.6",
-    "@vueuse/components": "^10.4.1",
+    "@vueuse/components": "^10.5.0",
     "color-convert": "^2.0.1",
     "debounce": "^1.2.1",
     "ical.js": "^1.5.0",
