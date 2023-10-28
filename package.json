@@ -51,7 +51,7 @@
     "md5": "^2.3.0",
     "p-limit": "^4.0.0",
     "uuid": "^9.0.1",
-    "vue": "^2.7.14",
+    "vue": "^2.7.15",
     "vue-material-design-icons": "^5.2.0",
     "vue-router": "^3.6.5",
     "vuedraggable": "^2.24.3",
