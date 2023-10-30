@@ -22,6 +22,7 @@ OC.L10N.register(
     "Delete" : "Kustuta",
     "Unshare" : "Lõpeta jagamine",
     "An empty name is not allowed." : "Nime lahter ei tohi olla tühi.",
+    "Trash bin" : "Prügikast",
     "Name" : "Nimi",
     "Deleted" : "Kustutatud",
     "Restore" : "Taasta",
