@@ -3,10 +3,12 @@ OC.L10N.register(
     {
     "Today" : "Güei",
     "Tasks" : "Xeres",
+    "Edit" : "Editar",
     "Delete" : "Desaniciar",
     "An empty name is not allowed." : "Nun se permite nengún nome baleru.",
     "Trash bin" : "Papelera",
     "Name" : "Nome",
+    "Cancel" : "Encaboxar",
     "Priority" : "Prioridá",
     "[Yesterday]" : "[Ayeri]",
     "[Today]" : "[Güei]",
