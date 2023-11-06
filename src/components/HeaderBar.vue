@@ -80,8 +80,11 @@ export default {
 		}
 	},
 	computed: {
+		calendar() {
+			return this.getCalendarByRoute(this.$route)
+		},
 		...mapGetters({
-			calendar: 'getCalendarByRoute',
+			getCalendarByRoute: 'getCalendarByRoute',
 		}),
 
 		placeholder() {

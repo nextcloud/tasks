@@ -75,6 +75,9 @@ export default {
 		},
 	},
 	computed: {
+		calendar() {
+			return this.getCalendarByRoute(this.$route)
+		},
 		showHidden: {
 			get() {
 				return this.$store.state.settings.settings.showHidden
@@ -93,7 +96,7 @@ export default {
 		},
 		...mapGetters({
 			closedCount: 'getCalendarCountClosed',
-			calendar: 'getCalendarByRoute',
+			getCalendarByRoute: 'getCalendarByRoute',
 			openRootTasks: 'findOpenRootTasks',
 			closedRootTasks: 'findClosedRootTasks',
 		}),
