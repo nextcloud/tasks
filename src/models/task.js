@@ -309,15 +309,15 @@ export default class Task {
 	}
 
 	setCompleted(completed) {
+		const now = ICAL.Time.now()
 		if (completed) {
-			this.vtodo.updatePropertyWithValue('completed', ICAL.Time.now())
+			this.vtodo.updatePropertyWithValue('completed', now)
 		} else {
 			this.vtodo.removeProperty('completed')
 		}
 		this.updateLastModified()
-		const comp = this.vtodo.getFirstPropertyValue('completed')
-		this._completed = !!comp
-		this._completedDate = comp ? comp.toJSDate() : null
+		this._completed = completed
+		this._completedDate = completed ? now.toJSDate() : null
 		this._completedDateMoment = moment(this._completedDate, 'YYYYMMDDTHHmmss')
 	}
 
