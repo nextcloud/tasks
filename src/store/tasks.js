@@ -68,18 +68,6 @@ const getters = {
 		},
 
 	/**
-	 * Returns all tasks corresponding to current route value
-	 *
-	 * @param {object} state The store data
-	 * @param {object} getters The store getters
-	 * @param {object} rootState The store root state
-	 * @return {Array<Task>} The tasks
-	 */
-	getTasksByRoute: (state, getters, rootState) => {
-		return getters.getTasksByCalendarId(rootState.route.params.calendarId)
-	},
-
-	/**
 	 * Returns all tasks which are direct children of the current task
 	 *
 	 * @param {object} state The store data
@@ -122,19 +110,19 @@ const getters = {
 	 * @param {object} rootState The store root state
 	 * @return {Task} The task
 	 */
-	getTaskByRoute: (state, getters, rootState) => {
+	getTaskByRoute: (state, getters, rootState) => (route) => {
 		// If a calendar is given, only search in that calendar.
-		if (rootState.route.params.calendarId) {
-			const calendar = getters.getCalendarById(rootState.route.params.calendarId)
+		if (route.params.calendarId) {
+			const calendar = getters.getCalendarById(route.params.calendarId)
 			if (!calendar) {
 				return null
 			}
 			return Object.values(calendar.tasks).find(task => {
-				return task.uri === rootState.route.params.taskId
+				return task.uri === route.params.taskId
 			})
 		}
 		// Else, we have to search all calendars
-		return getters.getTaskByUri(rootState.route.params.taskId)
+		return getters.getTaskByUri(route.params.taskId)
 	},
 
 	/**
@@ -791,10 +779,8 @@ const actions = {
 			const parent = context.getters.getTaskByUid(task.related)
 			context.commit('deleteTaskFromParent', { task, parent })
 			context.commit('deleteTaskFromCalendar', task)
-			// If the task is open in the sidebar, close the sidebar
-			if (context.rootState.route.params.taskId === task.uri) {
-				emit('tasks:close-appsidebar')
-			}
+			// We emit the id of the deleted task, to close the sidebar in case it's open.
+			emit('tasks:task:deleted', { taskId: task.uri })
 			// Stop the delete timeout if no tasks are scheduled for deletion anymore
 			if (Object.values(context.state.deletedTasks).length < 1) {
 				clearInterval(context.state.deleteInterval)

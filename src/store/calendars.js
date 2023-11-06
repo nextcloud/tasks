@@ -320,12 +320,13 @@ const getters = {
 	 * @param {object} rootState The store root state
 	 * @return {Calendar} The calendar by route
 	 */
-	getCalendarByRoute: (state, getters, rootState) => {
-		if (rootState.route.params.collectionId) {
-			return getters.getDefaultCalendar
-		}
-		return getters.getCalendarById(rootState.route.params.calendarId)
-	},
+	getCalendarByRoute: (state, getters, rootState) =>
+		(route) => {
+			if (route.params.collectionId) {
+				return getters.getDefaultCalendar
+			}
+			return getters.getCalendarById(route.params.calendarId)
+		},
 
 	/**
 	 * Returns the default calendar

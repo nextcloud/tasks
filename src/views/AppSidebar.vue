@@ -352,6 +352,12 @@ export default {
 		}
 	},
 	computed: {
+		calendar() {
+			return this.getCalendarByRoute(this.$route)
+		},
+		task() {
+			return this.getTaskByRoute(this.$route)
+		},
 		title() {
 			return this.task ? this.task.summary : ''
 		},
@@ -707,8 +713,8 @@ export default {
 		},
 		...mapGetters({
 			writableCalendars: 'getSortedWritableCalendars',
-			task: 'getTaskByRoute',
-			calendar: 'getCalendarByRoute',
+			getTaskByRoute: 'getTaskByRoute',
+			getCalendarByRoute: 'getCalendarByRoute',
 			calendars: 'getSortedCalendars',
 			tags: 'tags',
 			showTaskInCalendar: 'showTaskInCalendar',
@@ -722,11 +728,13 @@ export default {
 	},
 	mounted() {
 		subscribe('tasks:close-appsidebar', this.closeAppSidebar)
+		subscribe('tasks:task:deleted', this.handleTaskDeletion)
 		subscribe('tasks:open-appsidebar-tab', this.openAppSidebarTab)
 		subscribe('tasks:edit-appsidebar-title', this.editTitle)
 	},
 	beforeDestroy() {
 		unsubscribe('tasks:close-appsidebar', this.closeAppSidebar)
+		unsubscribe('tasks:task:deleted', this.handleTaskDeletion)
 		unsubscribe('tasks:open-appsidebar-tab', this.openAppSidebarTab)
 		unsubscribe('tasks:edit-appsidebar-title', this.editTitle)
 	},
@@ -777,6 +785,13 @@ export default {
 					}
 				}
 				this.loading = false
+			}
+		},
+
+		handleTaskDeletion({ taskId }) {
+			// Close the sidebar if the taskId matches
+			if (taskId === this.$route.params.taskId) {
+				this.closeAppSidebar()
 			}
 		},
 
