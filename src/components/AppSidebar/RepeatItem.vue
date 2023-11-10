@@ -28,6 +28,18 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		</div>
 		<RepeatSummary class="property-repeat__summary__content"
 			:recurrence-rule="recurrence" />
+		<Actions>
+			<ActionButton @click="toggleOptions">
+				<template #icon>
+					<component :is="toggleIcon" :size="20" decorative />
+				</template>
+				{{ toggleTitle }}
+			</ActionButton>
+		</Actions>
+
+		<div v-if="showOptions" class="property-repeat__options">
+			options
+		</div>
 	</div>
 </template>
 
@@ -35,10 +47,17 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 import { translate as t } from '@nextcloud/l10n'
 import RepeatSummary from './RepeatItem/RepeatSummary.vue'
+import Pencil from 'vue-material-design-icons/Pencil.vue'
+import Check from 'vue-material-design-icons/Check.vue'
+import { NcActions as Actions, NcActionButton as ActionButton } from '@nextcloud/vue'
 
 export default {
 	components: {
 		RepeatSummary,
+		Actions,
+		ActionButton,
+		Pencil,
+		Check,
 	},
 	props: {
 		recurrence: {
@@ -58,8 +77,43 @@ export default {
 			default: null,
 		},
 	},
+	data() {
+		return {
+			showOptions: false,
+		}
+	},
+	computed: {
+		/**
+		 * The name of the icon for the toggle options button
+		 *
+		 * @return {string}
+		 */
+		toggleIcon() {
+			if (this.showOptions) {
+				return 'Check'
+			}
+			return 'Pencil'
+		},
+		/**
+		 * The text of the toggle options button
+		 *
+		 * @return {string}
+		 */
+		toggleTitle() {
+			if (this.showOptions) {
+				return this.t('calendar', 'Save')
+			}
+			return this.t('calendar', 'Edit')
+		},
+	},
 	methods: {
 		t,
+		/**
+		 * Toggle visibility of the options
+		 */
+		toggleOptions() {
+			this.showOptions = !this.showOptions
+		},
 	},
 }
 </script>
@@ -80,10 +134,33 @@ export default {
 		flex-shrink: 0;
 	}
 
-	.property-repeat__summary__content {
-		display: flex;
-		align-items: center;
-		margin-bottom: 5px;
+	.property-repeat {
+		width: 100%;
+
+		&__summary {
+			display: flex;
+			align-items: center;
+			margin-bottom: 5px;
+
+			&__icon {
+				width: 34px;
+				height: 34px;
+				margin-left: -5px;
+				margin-right: 5px;
+			}
+
+			&__content {
+				flex: 1 auto;
+				padding: 0 7px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+		}
+
+		&__options {
+			margin-bottom: 5px;
+		}
 	}
 }
 </style>
