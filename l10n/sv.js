@@ -161,6 +161,7 @@ OC.L10N.register(
     "Priority {priority}: high" : "Prioritet {priority}: hög",
     "No priority assigned" : "Ingen prioritet tilldelad",
     "{percent} % completed" : "{percent} % slutfört",
+    "Mark as done" : "Markera som klar",
     "Successfully created the task." : "Uppgiften skapad.",
     "Could not delete the task." : "Kunde inte radera uppgiften.",
     "Synchronizing to the server." : "Synkroniserar till servern.",
