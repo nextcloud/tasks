@@ -10,7 +10,7 @@
     "The Tasks app for Nextcloud" : "Aplikace Úkoly pro Nextcloud",
     "Once enabled, a new Tasks menu will appear in your Nextcloud apps menu. From there you can add and delete tasks, edit their title, description, start and due dates and mark them as important. Tasks can be shared between users. Tasks can be synchronized using CalDav (each task list is linked to an Nextcloud calendar, to sync it to your local client: Thunderbird, Evolution, KDE Kontact, iCal … - just add the calendar as a remote calendar in your client). You can download your tasks as ICS files using the download button for each calendar." : "Jakmile je zapnuto, zobrazí se nová nabídky Úkoly v nabídce Nextcloud aplikací. Odtud je možné přidávat a mazat úkoly, upravovat jejich nadpis, popis, data zahájení a termínu a označovat  je jako důležité. Úkoly je možné sdílet mezi uživateli. Úkoly je možné synchronizovat pomocí CalDav (každý seznam úkolů je připojen jako Nextcloud kalendář, pro synchronizaci na místního klienta: Thunderbird, Evolution, KDE Kontact, iCal… – stačí v klientovi přidat kalendář jako vzdálený kalendář). Své úkoly si můžete stáhnout jako ICS soubory pomocí tlačítka stahování u každého kalendáře.",
     "Default list" : "Výchozí seznam",
-    "Visibility of Smart Collections" : "Viditelnost Chytrých kolekcí",
+    "Visibility of Smart Collections" : "Viditelnost Inteligenžních kolekcí",
     "Hidden" : "Skrytý",
     "Visible" : "Viditelný",
     "Automatic" : "Automatický",
