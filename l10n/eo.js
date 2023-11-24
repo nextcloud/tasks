@@ -35,6 +35,7 @@ OC.L10N.register(
     "Deleted" : "Forigita",
     "Restore" : "Restaŭri",
     "Delete permanently" : "Forigi por ĉiam",
+    "Empty trash bin" : "Malpleni rubujon",
     "Untitled event" : "Sentitola okazaĵo",
     "Select a calendar" : "Elekti kalendaron",
     "Cancel" : "Nuligi",

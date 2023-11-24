@@ -1,6 +1,7 @@
 OC.L10N.register(
     "tasks",
     {
+    "Upcoming tasks" : "Sarcini care urmează",
     "Important" : "Important",
     "Today" : "Astăzi",
     "Week" : "Săptămâna",
@@ -8,17 +9,23 @@ OC.L10N.register(
     "Current" : "Curent",
     "Completed" : "Terminat",
     "Tasks" : "Sarcini",
+    "The Tasks app for Nextcloud" : "Aplicația Tasks pentru Nextcloud",
+    "Default list" : "Lista implicită",
     "Visibility of Smart Collections" : "Vizibilitatea colecțiilor inteligente",
     "Hidden" : "Ascuns",
     "Visible" : "Vizibil",
     "Automatic" : "Automat",
+    "Tasks settings" : "Setările Tasks",
     "Share with users or groups" : "Partajează cu utilizatori sau grupuri",
     "No users or groups" : "Nu sunt utilizatori sau grupuri",
     "Can edit" : "Poate edita",
     "Unshare with {displayName}" : "Retrage cu {displayName}",
+    "Unable to delete the share." : "Eroare la ștergerea partajării.",
+    "Unable to change permissions." : "Eroare la schimbarea permisiunilor.",
     "Edit" : "Editează",
     "Copy private link" : "Copiază link privat",
     "Copied" : "Copiat",
+    "Cannot copy" : "Nu s-a putut copia",
     "Export" : "Exportă",
     "Delete" : "Șterge",
     "Unshare" : "Oprește partajarea",
@@ -62,6 +69,9 @@ OC.L10N.register(
     "Canceled" : "Anulat",
     "Task not found!" : "Sarcina nu a fost găsită!",
     "Set start date" : "Setează data de început",
-    "Set due date" : "Setează termenul limită"
+    "Set due date" : "Setează termenul limită",
+    "Mark as done" : "Marchează ca efectuat",
+    "An error occurred" : "A apărut o eraore",
+    "Message from {author} in {conversationName}" : "Mesaj de la {author} în {conversationName}"
 },
 "nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));");
