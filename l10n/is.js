@@ -40,6 +40,7 @@ OC.L10N.register(
     "Empty trash bin" : "Tæma ruslið",
     "Untitled task" : "Ónefnt verkefni",
     "Untitled event" : "Ónefndur atburður",
+    "Untitled item" : "Ónefnt atriði",
     "Unknown calendar" : "Óþekkt dagatal",
     "Could not load deleted calendars and objects" : "Gat ekki hlaðið inn eyddum dagatölum og hlutum",
     "Could not restore calendar or event" : "Gat ekki endurheimt dagatal eða atburð",

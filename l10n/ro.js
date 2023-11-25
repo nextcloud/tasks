@@ -50,6 +50,7 @@ OC.L10N.register(
     "Cancel" : "Anulează",
     "Close" : "Închide",
     "Due date" : "Data scadenței",
+    "Alphabetically" : "Alfabetic",
     "[Yesterday]" : "[Ieri]",
     "[Today]" : "[Astăzi]",
     "[Tomorrow]" : "[Mâine]",
