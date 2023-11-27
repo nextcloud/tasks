@@ -71,6 +71,7 @@ OC.L10N.register(
     "Manually" : "Handvirkt",
     "Sort by manual order." : "Raða eftir handvirkri röð.",
     "{complete} % completed" : "{complete} % lokið",
+    "Delete task" : "Eyða verki",
     "[Yesterday]" : "[Í gær]",
     "[Today]" : "[Í dag]",
     "[Tomorrow]" : "[Á morgun]",
