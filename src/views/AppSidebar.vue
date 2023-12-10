@@ -906,7 +906,7 @@ export default {
 <style lang="scss" scoped>
 .app-sidebar :deep(.app-sidebar-header__description) {
 	flex-wrap: wrap;
-	margin: 0;
+	margin: 0 !important;
 }
 
 .app-sidebar  :deep(.app-sidebar-tabs) {
@@ -914,6 +914,6 @@ export default {
 }
 
 .app-sidebar__tab {
-	padding: 0;
+	padding: 0 !important;
 }
 </style>

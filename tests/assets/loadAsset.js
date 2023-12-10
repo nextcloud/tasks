@@ -22,7 +22,7 @@
  *
  */
 
-const fs = require('fs')
+import fs from 'fs'
 
 /**
  * global helper function to load an ics asset by name
