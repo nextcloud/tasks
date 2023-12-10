@@ -50,7 +50,7 @@ import { translate as t } from '@nextcloud/l10n'
 
 import MarkdownIt from 'markdown-it'
 import Mila from 'markdown-it-link-attributes'
-import MarkdownItEmoji from 'markdown-it-emoji'
+import { full as emoji } from 'markdown-it-emoji'
 import Mitl from 'markdown-it-task-lists'
 
 import { vOnClickOutside as ClickOutside } from '@vueuse/components'
@@ -72,7 +72,7 @@ export default {
 			linkify: true,
 			breaks: true,
 		})
-			.use(MarkdownItEmoji)
+			.use(emoji)
 			.use(Mila, {
 				attrs: {
 					target: '_blank',
