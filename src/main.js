@@ -80,7 +80,6 @@ if (!OCA.Tasks) {
 
 Vue.prototype.$OC = OC
 Vue.prototype.$OCA = OCA
-Vue.prototype.$appVersion = appVersion
 
 OCA.Tasks.App = new Vue({
 	el: '.app-tasks',

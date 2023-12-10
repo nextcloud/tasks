@@ -1,5 +1,4 @@
-// import { shallowMount } from '@vue/test-utils'
-// import Colorpicker from '../../src/components/Colorpicker'
+import { describe, expect, it } from 'vitest'
 
 describe('colorpicker.vue', () => {
 	'use strict'

@@ -1,9 +1,9 @@
-import calendars, { Calendar } from 'Store/calendars.js'
-import collections from 'Store/collections.js'
-import tasks from 'Store/tasks.js'
-import settings from 'Store/settings.js'
-import Task from 'Models/task.js'
-import router from '@/router.js'
+import calendars, { Calendar } from '../../../src/store/calendars.js'
+import collections from '../../../src/store/collections.js'
+import tasks from '../../../src/store/tasks.js'
+import settings from '../../../src/store/settings.js'
+import Task from '../../../src/models/task.js'
+import router from '../../../src/router.js'
 
 import { loadICS } from '../../assets/loadAsset.js'
 

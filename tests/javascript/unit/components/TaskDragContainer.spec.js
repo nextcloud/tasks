@@ -1,14 +1,15 @@
-import TaskDragContainer from 'Components/TaskDragContainer.vue'
-import Task from 'Models/task.js'
-import calendars from 'Store/calendars.js'
-import collections from 'Store/collections.js'
-import tasks from 'Store/tasks.js'
-import settings from 'Store/settings.js'
-import principals from 'Store/principals.js'
-import router from '@/router.js'
+import TaskDragContainer from '../../../../src/components/TaskDragContainer.vue'
+import Task from '../../../../src/models/task.js'
+import calendars from '../../../../src/store/calendars.js'
+import collections from '../../../../src/store/collections.js'
+import tasks from '../../../../src/store/tasks.js'
+import settings from '../../../../src/store/settings.js'
+import principals from '../../../../src/store/principals.js'
+import router from '../../../../src/router.js'
 
 import { loadICS } from '../../../assets/loadAsset.js'
 
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Vuex, { Store } from 'vuex'
 
@@ -29,7 +30,7 @@ const vCalendarNames = [
 	'vcalendars/vcalendar-sortOrderByCreated2',
 ]
 
-const taskItems = vCalendarNames.map((vCalendar) => { return new Task(loadICS(vCalendar), calendar) })
+const taskItems = vCalendarNames.map(vCalendar => new Task(loadICS(vCalendar), calendar))
 
 describe('TaskDragContainer.vue', () => {
 	'use strict'
@@ -37,7 +38,7 @@ describe('TaskDragContainer.vue', () => {
 	let store
 	beforeEach(() => {
 		// Override the "updateTask" method so we don't get warnings about unresolved promises.
-		tasks.actions.updateTask = jest.fn()
+		tasks.actions.updateTask = vi.fn()
 
 		store = new Store({
 			modules: {

@@ -41,19 +41,23 @@ import { sort } from '../store/storeHelper.js'
 import draggable from 'vuedraggable'
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 
+import { defineAsyncComponent } from 'vue'
+
+/**
+ * We asynchronously import here, because we have a circular dependency
+ * between TaskDragContainer and TaskBody which otherwise cannot be resolved.
+ * See https://vuejs.org/guide/components/async.html#basic-usage
+ *
+ * @return {object} The TaskBody component
+ */
+const TaskBody = defineAsyncComponent(() =>
+	import('./TaskBody.vue'),
+)
+
 export default {
 	name: 'TaskDragContainer',
 	components: {
-		/**
-		 * We asynchronously import here, because we have a circular dependency
-		 * between TaskDragContainer and TaskBody which otherwise cannot be resolved.
-		 * See https://vuejs.org/v2/guide/components-edge-cases.html#Circular-References-Between-Components
-		 *
-		 * We load it "eager", because the TaskBody will always be required.
-		 *
-		 * @return {object} The TaskBody component
-		 */
-		TaskBody: () => import(/* webpackMode: "eager" */ './TaskBody.vue'),
+		TaskBody,
 		draggable,
 	},
 	props: {

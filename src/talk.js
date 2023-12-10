@@ -38,7 +38,6 @@ import Vue from 'vue'
 
 Vue.prototype.$OC = OC
 Vue.prototype.$OCA = OCA
-Vue.prototype.$appVersion = appVersion
 
 window.addEventListener('DOMContentLoaded', () => {
 	if (!window.OCA?.Talk?.registerMessageAction) {
