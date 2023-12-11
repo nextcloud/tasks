@@ -31,13 +31,11 @@
 import TaskCreateDialog from './components/TaskCreateDialog.vue'
 import { buildSelector } from './helpers/selector.js'
 
-import { translate as t, translatePlural as n } from '@nextcloud/l10n'
+import { translate as t } from '@nextcloud/l10n'
 import { generateUrl } from '@nextcloud/router'
 
 import Vue from 'vue'
 
-Vue.prototype.t = t
-Vue.prototype.n = n
 Vue.prototype.$OC = OC
 Vue.prototype.$OCA = OCA
 Vue.prototype.$appVersion = appVersion

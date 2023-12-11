@@ -25,15 +25,11 @@
 import Dashboard from './views/Dashboard.vue'
 import store from './store/store.js'
 
-import { translate as t, translatePlural as n } from '@nextcloud/l10n'
-
 import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-Vue.prototype.t = t
-Vue.prototype.n = n
 Vue.prototype.$OC = OC
 Vue.prototype.$OCA = OCA
 Vue.prototype.$appVersion = appVersion
