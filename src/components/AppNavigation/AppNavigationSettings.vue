@@ -20,7 +20,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<NcAppNavigationSettings :title="appNavigationSettingsTitle">
+	<NcAppNavigationSettings :name="appNavigationSettingsName">
 		<div class="reactive">
 			<ul>
 				<li>
@@ -43,7 +43,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					class="collection">
 					<component :is="collection.icon" :size="20" />
 					<span class="label-container">
-						<label :for="'visibilityCollection-' + collection.id" class="title">
+						<label :for="'visibilityCollection-' + collection.id">
 							{{ collection.displayName }}
 						</label>
 					</span>
@@ -106,7 +106,7 @@ export default {
 		}
 	},
 	computed: {
-		appNavigationSettingsTitle() {
+		appNavigationSettingsName() {
 			return t('tasks', 'Tasks settings')
 		},
 

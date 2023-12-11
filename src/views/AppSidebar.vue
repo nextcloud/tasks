@@ -20,21 +20,21 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<NcAppSidebar :title="title"
-		:title-editable="editingTitle"
-		:linkify-title="true"
-		:subtitle="subtitle"
-		:title-tooltip="title"
-		:subtitle-tooltip="subtitleTooltip"
+	<NcAppSidebar :name="summary"
+		:name-editable="editingSummary"
+		:linkify-name="true"
+		:subname="subsummary"
+		:name-tooltip="summary"
+		:subname-tooltip="subsummaryTooltip"
 		:empty="!task"
 		:active.sync="activeTab"
-		@start-editing="newTitle = task.summary"
-		@update:titleEditable="editTitle"
-		@update:title="updateTitle"
-		@submit-title="saveTitle()"
+		@start-editing="newSummary = task.summary"
+		@update:nameEditable="editSummary"
+		@update:name="updateSummary"
+		@submit-name="saveSummary()"
 		@close="closeAppSidebar()">
 		<template v-if="task" #description>
-			<DatetimePickerItem v-show="!readOnly || task.start"
+			<DateTimePickerItem v-show="!readOnly || task.start"
 				:date="task.startMoment"
 				:value="newStartDate"
 				:all-day="allDay"
@@ -46,8 +46,8 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<template #icon>
 					<CalendarStart :size="20" />
 				</template>
-			</DatetimePickerItem>
-			<DatetimePickerItem v-show="!readOnly || task.due"
+			</DateTimePickerItem>
+			<DateTimePickerItem v-show="!readOnly || task.due"
 				:date="task.dueMoment"
 				:value="newDueDate"
 				:all-day="allDay"
@@ -59,7 +59,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<template #icon>
 					<CalendarEnd :size="20" />
 				</template>
-			</DatetimePickerItem>
+			</DateTimePickerItem>
 			<CheckboxItem v-show="showAllDayToggle"
 				id="allDayToggle"
 				:checked="allDay"
@@ -94,11 +94,11 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			</NcActionLink>
 			<NcActionButton v-if="!readOnly"
 				:close-after-click="true"
-				@click="editTitle(true)">
+				@click="editSummary(true)">
 				<template #icon>
 					<Pencil :size="20" />
 				</template>
-				{{ t('tasks', 'Edit title') }}
+				{{ t('tasks', 'Edit summary') }}
 			</NcActionButton>
 			<NcActionLink :href="downloadURL"
 				:close-after-click="true">
@@ -234,7 +234,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import CheckboxItem from '../components/AppSidebar/CheckboxItem.vue'
-import DatetimePickerItem from '../components/AppSidebar/DatetimePickerItem.vue'
+import DateTimePickerItem from '../components/AppSidebar/DateTimePickerItem.vue'
 import CalendarPickerItem from '../components/AppSidebar/CalendarPickerItem.vue'
 import MultiselectItem from '../components/AppSidebar/MultiselectItem.vue'
 import SliderItem from '../components/AppSidebar/SliderItem.vue'
@@ -280,7 +280,7 @@ export default {
 		NcActionLink,
 		NcLoadingIcon,
 		CheckboxItem,
-		DatetimePickerItem,
+		DateTimePickerItem,
 		Calendar,
 		CalendarEnd,
 		CalendarStart,
@@ -305,14 +305,14 @@ export default {
 		// TaskStatusDisplay,
 	},
 	/**
-	 * Before we navigate to a new task, we save possible edits to the task title.
+	 * Before we navigate to a new task, we save possible edits to the task summary.
 	 *
 	 * @param {object} to The target Route Object being navigated to.
 	 * @param {object} from The current route being navigated away from.
 	 * @param {Function} next This function must be called to resolve the hook.
 	 */
 	beforeRouteUpdate(to, from, next) {
-		this.saveTitle()
+		this.saveSummary()
 		next()
 	},
 	props: {
@@ -323,7 +323,7 @@ export default {
 	},
 	data() {
 		return {
-			editingTitle: false,
+			editingSummary: false,
 			editingStart: false,
 			editingDue: false,
 			loading: false,
@@ -346,8 +346,8 @@ export default {
 					optionClass: 'active',
 				},
 			],
-			newTitle: '',
-			titleSaved: true,
+			newSummary: '',
+			summarySaved: true,
 			activeTab: this.active,
 		}
 	},
@@ -358,10 +358,10 @@ export default {
 		task() {
 			return this.getTaskByRoute(this.$route)
 		},
-		title() {
+		summary() {
 			return this.task ? this.task.summary : ''
 		},
-		subtitle() {
+		subsummary() {
 			if (this.completedString) {
 				return this.completedString
 			}
@@ -373,7 +373,7 @@ export default {
 			}
 			return ''
 		},
-		subtitleTooltip() {
+		subsummaryTooltip() {
 			const tooltip = []
 			if (this.completedString) {
 				tooltip.push(this.completedString)
@@ -730,13 +730,13 @@ export default {
 		subscribe('tasks:close-appsidebar', this.closeAppSidebar)
 		subscribe('tasks:task:deleted', this.handleTaskDeletion)
 		subscribe('tasks:open-appsidebar-tab', this.openAppSidebarTab)
-		subscribe('tasks:edit-appsidebar-title', this.editTitle)
+		subscribe('tasks:edit-appsidebar-summary', this.editSummary)
 	},
 	beforeDestroy() {
 		unsubscribe('tasks:close-appsidebar', this.closeAppSidebar)
 		unsubscribe('tasks:task:deleted', this.handleTaskDeletion)
 		unsubscribe('tasks:open-appsidebar-tab', this.openAppSidebarTab)
-		unsubscribe('tasks:edit-appsidebar-title', this.editTitle)
+		unsubscribe('tasks:edit-appsidebar-summary', this.editSummary)
 	},
 	created() {
 		this.loadTask()
@@ -796,7 +796,7 @@ export default {
 		},
 
 		closeAppSidebar() {
-			this.saveTitle()
+			this.saveSummary()
 			if (this.$route.params.calendarId) {
 				this.$router.push({ name: 'calendars', params: { calendarId: this.$route.params.calendarId } })
 			} else {
@@ -808,26 +808,26 @@ export default {
 			this.activeTab = tab
 		},
 
-		editTitle(editing) {
+		editSummary(editing) {
 			if (this.readOnly) {
 				return
 			}
-			if (!this.editingTitle && editing) {
-				this.newTitle = this.task.summary
+			if (!this.editingSummary && editing) {
+				this.newSummary = this.task.summary
 			}
-			this.editingTitle = editing
+			this.editingSummary = editing
 		},
 
-		updateTitle(title) {
-			this.newTitle = title
-			this.titleSaved = false
+		updateSummary(summary) {
+			this.newSummary = summary
+			this.summarySaved = false
 		},
 
-		saveTitle(task = this.task) {
-			if (!this.titleSaved && this.newTitle !== task.summary) {
-				this.setSummary({ task, summary: this.newTitle })
+		saveSummary(task = this.task) {
+			if (!this.summarySaved && this.newSummary !== task.summary) {
+				this.setSummary({ task, summary: this.newSummary })
 			}
-			this.titleSaved = true
+			this.summarySaved = true
 		},
 
 		/**
@@ -904,16 +904,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.app-sidebar :deep(.app-sidebar-header__description) {
-	flex-wrap: wrap;
-	margin: 0 !important;
-}
+.app-sidebar {
+	:deep() {
+		.app-sidebar {
+			&__tab {
+				padding: 0 !important;
+				width: 100%;
+			}
 
-.app-sidebar  :deep(.app-sidebar-tabs) {
-	min-height: 160px !important;
-}
+			&-header__description {
+				flex-wrap: wrap;
+				margin: 0 !important;
+			}
 
-.app-sidebar__tab {
-	padding: 0 !important;
+			&-tabs {
+				min-height: 160px !important;
+
+				&__content {
+					display: flex;
+				}
+			}
+		}
+	}
 }
 </style>

@@ -46,10 +46,10 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:read-only="readOnly"
 				:priority-class="priorityClass"
 				@toggle-completed="toggleCompleted(task)" />
-			<!-- Info: title, progress & tags -->
+			<!-- Info: summary, progress & tags -->
 			<div class="task-body__info"
-				@dblclick="editTitle()">
-				<div class="title">
+				@dblclick="editSummary()">
+				<div class="summary">
 					<span v-linkify="{text: task.summary, linkify: true}" />
 				</div>
 				<div v-if="task.tags.length > 0" class="tags-list">
@@ -147,7 +147,8 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				class="task-item task-item__input">
 				<NcTextField ref="input"
 					:value.sync="newTaskName"
-					:label="subtasksCreationPlaceholder"
+					:placeholder="subtasksCreationPlaceholder"
+					:label-outside="true"
 					:disabled="isAddingTask"
 					autocomplete="off"
 					class="reactive"
@@ -606,9 +607,9 @@ export default {
 			}
 		},
 
-		editTitle() {
-			// emit an event to edit the task title
-			emit('tasks:edit-appsidebar-title', true)
+		editSummary() {
+			// emit an event to edit the task summary
+			emit('tasks:edit-appsidebar-summary', true)
 		},
 
 		async openSubtaskInput() {
@@ -713,7 +714,7 @@ $breakpoint-mobile: 1024px;
 
 	&--closed .task-item__body .task-body__info {
 		opacity: .6;
-		.title {
+		.summary {
 			text-decoration: line-through;
 		}
 	}
@@ -723,7 +724,7 @@ $breakpoint-mobile: 1024px;
 	}
 
 	&--non-started {
-		.title {
+		.summary {
 			color: var(--color-text-maxcontrast);
 		}
 
@@ -743,6 +744,8 @@ $breakpoint-mobile: 1024px;
 		border-radius: 0;
 
 		:deep() .input-field {
+			margin-block-start: 0 !important;
+
 			&__main-wrapper,
 			&__input {
 				height: 44px !important;
@@ -753,10 +756,8 @@ $breakpoint-mobile: 1024px;
 				border-radius: 0;
 			}
 
-			&__icon,
-			&__clear-button.button-vue {
-				height: 40px !important;
-				width: 40px !important;
+			&__icon--leading {
+				inset-inline-start: 0 !important;
 			}
 
 			&__input--leading-icon {
@@ -771,7 +772,7 @@ $breakpoint-mobile: 1024px;
 		border-bottom-right-radius: var(--border-radius-large);
 	}
 
-	&:not(.task-item--subtasks-visible).task-item__input {
+	&:not(.task-item--subtasks-visible) .task-item__input {
 		border-bottom-left-radius: var(--border-radius-large);
 		border-bottom-right-radius: var(--border-radius-large);
 	}
@@ -831,7 +832,7 @@ $breakpoint-mobile: 1024px;
 				position: relative;
 				white-space: nowrap;
 
-				.title {
+				.summary {
 					cursor: text;
 					display: inline-flex;
 					padding: 10px 10px 10px 0;

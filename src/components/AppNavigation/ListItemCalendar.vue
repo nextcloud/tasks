@@ -560,7 +560,7 @@ $color-error: #e9322d;
 	}
 
 	&.list--deleted {
-		.app-navigation-entry__title {
+		.app-navigation-entry__name {
 			text-decoration: line-through;
 		}
 

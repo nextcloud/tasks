@@ -31,7 +31,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:disabled="calendar.readOnly"
 					collection-id="uncompleted" />
 				<h2 v-show="closedCount(calendarId)" class="heading heading--hiddentasks reactive" @click="toggleHidden">
-					<span class="heading__title icon-triangle-s">{{ closedCountString }}</span>
+					<span class="heading__name icon-triangle-s">{{ closedCountString }}</span>
 				</h2>
 				<TaskDragContainer v-if="showHidden"
 					:tasks="closedRootTasks(calendar.tasks)"

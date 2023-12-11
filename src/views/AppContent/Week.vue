@@ -29,7 +29,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:day="day.diff"
 				class="grouped-tasks ui-droppable">
 				<h2 class="heading">
-					<span class="heading__title">{{ dayString(day.diff) }}</span>
+					<span class="heading__name">{{ dayString(day.diff) }}</span>
 				</h2>
 				<TaskDragContainer :tasks="day.tasks"
 					:collection-string="`week-${day.diff}`"

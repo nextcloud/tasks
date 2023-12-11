@@ -40,7 +40,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 			<div class="property property__summary">
 				<ViewHeadline :size="20" />
-				<input v-model="pendingTitle"
+				<input v-model="pendingSummary"
 					type="text"
 					:placeholder="t('tasks', 'Task summary')"
 					:disabled="loading">
@@ -116,7 +116,7 @@ export default {
 		ViewHeadline,
 	},
 	props: {
-		title: {
+		summary: {
 			type: String,
 			default: '',
 		},
@@ -128,7 +128,7 @@ export default {
 	emits: ['close'],
 	data() {
 		return {
-			pendingTitle: '',
+			pendingSummary: '',
 			pendingDescription: '',
 			pendingCalendar: null,
 			loading: true,
@@ -144,7 +144,7 @@ export default {
 			defaultCalendar: 'getDefaultCalendar',
 		}),
 		createdMessage() {
-			return t('tasks', '"{task}" was added to "{calendar}"', { task: this.pendingTitle, calendar: this.pendingCalendar.displayName }, undefined, { sanitize: false, escape: false })
+			return t('tasks', '"{task}" was added to "{calendar}"', { task: this.pendingSummary, calendar: this.pendingCalendar.displayName }, undefined, { sanitize: false, escape: false })
 		},
 	},
 
@@ -153,7 +153,7 @@ export default {
 	},
 
 	mounted() {
-		this.pendingTitle = this.title
+		this.pendingSummary = this.summary
 		this.pendingDescription = this.description
 	},
 
@@ -186,7 +186,7 @@ export default {
 		async addTask() {
 			this.creating = true
 			const task = {
-				summary: this.pendingTitle,
+				summary: this.pendingSummary,
 				note: this.pendingDescription,
 				calendar: this.pendingCalendar,
 			}

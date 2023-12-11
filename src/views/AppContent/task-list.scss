@@ -44,7 +44,7 @@ $breakpoint-mobile: 1024px;
 		&--hiddentasks {
 			margin-bottom: 0;
 
-			.heading__title {
+			.heading__name {
 				display: inline-block;
 				padding-right: 16px;
 				background-position: right center;
@@ -55,7 +55,7 @@ $breakpoint-mobile: 1024px;
 			}
 		}
 
-		&__title {
+		&__name {
 			font-weight: bold;
 			font-size: 16px;
 			word-wrap: break-word;
