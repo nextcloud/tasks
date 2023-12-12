@@ -120,7 +120,6 @@ OC.L10N.register(
     "Unpin" : "Atsegti",
     "Pin" : "Prisegti",
     "Show in Calendar" : "Rodyti kalendoriuje",
-    "Edit title" : "Redaguoti pavadinimą",
     "Details" : "Išsamiau",
     "Select a classification" : "Pasirinkite klasifikavimą",
     "Select a status" : "Pasirinkite būseną",

@@ -35,7 +35,6 @@ OC.L10N.register(
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n prètzfach acabat","%n prètzfaches acabats"],
     "Tomorrow" : "Deman",
     "All day" : "Tota la jornada",
-    "Edit title" : "Modificar lo títol",
     "Details" : "Detalhs",
     "Notes" : "Nòtas",
     "Reminders" : "Rapèls",

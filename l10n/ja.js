@@ -100,7 +100,6 @@ OC.L10N.register(
     "Unpin" : "ピンの解除",
     "Pin" : "ピン",
     "Show in Calendar" : "カレンダーに表示する",
-    "Edit title" : "タイトルを編集",
     "Details" : "詳細",
     "Select a classification" : "分類を選択",
     "Select a status" : "ステータスを選択",

@@ -146,7 +146,6 @@ OC.L10N.register(
     "Unpin" : "Rimuovi",
     "Pin" : "Fissa",
     "Show in Calendar" : "Mostra nel calendario",
-    "Edit title" : "Modifica titolo",
     "Details" : "Dettagli",
     "Select a classification" : "Seleziona una classificazione",
     "Select a status" : "Seleziona uno stato",

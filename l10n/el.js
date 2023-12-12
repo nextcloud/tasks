@@ -150,7 +150,6 @@ OC.L10N.register(
     "Unpin" : "Ξεκαρφίτσωμα",
     "Pin" : "Καρφίτσωμα",
     "Show in Calendar" : "Εμφάνιση στο ημερολόγιο",
-    "Edit title" : "Επεξεργασία τίτλου",
     "Details" : "Λεπτομέρειες",
     "Select a classification" : "Επιλέξτε μια ταξινόμηση",
     "Select a status" : "Επιλέξτε κατάσταση",

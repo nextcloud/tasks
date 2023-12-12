@@ -82,7 +82,6 @@ OC.L10N.register(
     "Tomorrow" : "내일",
     "Add List…" : "리스트 더하기...",
     "All day" : "하루 종일",
-    "Edit title" : "제목 수정",
     "Details" : "세부사항",
     "Select tags" : "태그 선택",
     "Notes" : "Notes",

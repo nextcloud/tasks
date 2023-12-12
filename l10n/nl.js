@@ -156,7 +156,6 @@ OC.L10N.register(
     "Unpin" : "Losmaken",
     "Pin" : "Pin",
     "Show in Calendar" : "In agenda tonen",
-    "Edit title" : "Titel bewerken",
     "Details" : "Details",
     "Selecting a classification is forbidden, because the task was shared with you." : "Het kiezen van een cassificatie is niet toegelaten, omdat de taak met u gedeeld was.",
     "Select a classification" : "Selecteer een classificatie",

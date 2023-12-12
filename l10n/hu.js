@@ -164,7 +164,6 @@ OC.L10N.register(
     "Unpin" : "Rögzítés feloldása",
     "Pin" : "Rögzítés",
     "Show in Calendar" : "Megjelenítés a Naptárban",
-    "Edit title" : "Cím szerkesztése",
     "Details" : "Részletek",
     "Selecting a classification is forbidden, because the task was shared with you." : "A besorolás kiválasztása nem engedélyezett, mert a feladatot megosztották Önnel.",
     "Select a classification" : "Besorolás kiválasztása",

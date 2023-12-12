@@ -159,7 +159,6 @@ OC.L10N.register(
     "Unpin" : "Frigør",
     "Pin" : "Fastgør",
     "Show in Calendar" : "Vis i Kalender",
-    "Edit title" : "Rediger titel",
     "Details" : "Detaljer",
     "Selecting a classification is forbidden, because the task was shared with you." : "Det er forbudt at vælge en klassifikation, fordi opgaven blev delt med dig.",
     "Select a classification" : "Vælg en klassifikation",

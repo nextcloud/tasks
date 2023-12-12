@@ -164,7 +164,6 @@ OC.L10N.register(
     "Unpin" : "Відкріпити",
     "Pin" : "Закріпити",
     "Show in Calendar" : "Показати в Календарі",
-    "Edit title" : "Змінити назву",
     "Details" : "Деталі",
     "Selecting a classification is forbidden, because the task was shared with you." : "Неможливо вибрати категорію, оскільки цим завданням поділилися з вами.",
     "Select a classification" : "Виберіть класифікацію",

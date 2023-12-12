@@ -154,7 +154,6 @@ OC.L10N.register(
     "Unpin" : "Odopnúť",
     "Pin" : "Pripnúť",
     "Show in Calendar" : "Zobraziť v Kalendári",
-    "Edit title" : "Upraviť názov",
     "Details" : "Podrobnosti",
     "Select a classification" : "Vybrať klasifikáciu",
     "Select a status" : "Vybrať status",

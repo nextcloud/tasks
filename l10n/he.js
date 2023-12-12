@@ -105,7 +105,6 @@ OC.L10N.register(
     "Tomorrow" : "מחר",
     "Add List…" : "הוספת רשימה…",
     "All day" : "כל היום",
-    "Edit title" : "עריכת כותרת",
     "Details" : "פרטים",
     "Select a classification" : "בחירת סיווג",
     "Select a status" : "בחירת מצב",

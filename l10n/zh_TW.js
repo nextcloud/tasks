@@ -164,7 +164,6 @@ OC.L10N.register(
     "Unpin" : "取消釘選",
     "Pin" : "釘選",
     "Show in Calendar" : "在日曆中顯示",
-    "Edit title" : "編輯標題",
     "Details" : "詳細資料",
     "Selecting a classification is forbidden, because the task was shared with you." : "因為工作已與您分享，因此您無法選取分類。",
     "Select a classification" : "選取分類",

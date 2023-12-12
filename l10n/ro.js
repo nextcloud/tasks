@@ -73,7 +73,6 @@ OC.L10N.register(
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n sarcină realizată","%n sarcini realizate","%n sarcini realizate"],
     "Tomorrow" : "Mâine",
     "All day" : "Toată ziua",
-    "Edit title" : "Editează titlul",
     "Details" : "Detalii",
     "Select tags" : "Selectează etichete",
     "Notes" : "Notițe",

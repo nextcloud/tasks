@@ -138,7 +138,6 @@ OC.L10N.register(
     "Unpin" : "No apicare",
     "Pin" : "Apica",
     "Show in Calendar" : "Mustra in calendàriu",
-    "Edit title" : "Modìfica tìtulu",
     "Details" : "Detàllios",
     "Select a classification" : "Seletziona una classificatzione",
     "Select a status" : "Seletziona un'istadu",

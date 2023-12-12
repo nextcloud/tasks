@@ -164,7 +164,6 @@ OC.L10N.register(
     "Unpin" : "Soltar",
     "Pin" : "Fixar",
     "Show in Calendar" : "Amosar no calendario",
-    "Edit title" : "Editar o título",
     "Details" : "Detalles",
     "Selecting a classification is forbidden, because the task was shared with you." : "Está prohibido seleccionar unha clasificación, porque a tarefa foi compartida contigo.",
     "Select a classification" : "Seleccione unha clasificación",

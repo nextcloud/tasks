@@ -115,7 +115,6 @@ OC.L10N.register(
     "Add List…" : "Lägg till lista...",
     "All day" : "Hela dagen",
     "Show in Calendar" : "Visa i kalender",
-    "Edit title" : "Redigera titel",
     "Details" : "Detaljer",
     "Select a classification" : "Välj en klassificering",
     "Select a status" : "Välj en status",

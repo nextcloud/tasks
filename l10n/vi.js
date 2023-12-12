@@ -55,7 +55,6 @@ OC.L10N.register(
     "Tomorrow" : "Ngày mai",
     "Add List…" : "Thêm vào danh sách…",
     "All day" : "Cả ngày",
-    "Edit title" : "Chỉnh sửa tiêu đề",
     "Details" : "Chi tiết",
     "Select tags" : "Chọn một thẻ",
     "Notes" : "Ghi chú",

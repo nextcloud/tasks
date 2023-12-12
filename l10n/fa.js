@@ -159,7 +159,6 @@ OC.L10N.register(
     "Unpin" : "پین را بردارید",
     "Pin" : "Pin",
     "Show in Calendar" : "نمایش در تقویم",
-    "Edit title" : "ویرایش عنوان",
     "Details" : "جزئیات",
     "Selecting a classification is forbidden, because the task was shared with you." : "انتخاب یک طبقه بندی ممنوع است، زیرا کار با شما به اشتراک گذاشته شده است.",
     "Select a classification" : "یک طبقه بندی را انتخاب کنید",

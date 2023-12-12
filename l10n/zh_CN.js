@@ -143,7 +143,6 @@ OC.L10N.register(
     "Unpin" : "取消固定",
     "Pin" : "固定",
     "Show in Calendar" : "在日历中显示",
-    "Edit title" : "编辑标题",
     "Details" : "详情",
     "Select a classification" : "选择类别",
     "Select a status" : "选择一个状态",

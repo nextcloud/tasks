@@ -158,7 +158,6 @@ OC.L10N.register(
     "Unpin" : "Kendu aingura",
     "Pin" : "Ainguratu",
     "Show in Calendar" : "Erakutsi egutegian",
-    "Edit title" : "Editatu izenburua",
     "Details" : "Xehetasunak",
     "Select a classification" : "Hautatu sailkapen bat",
     "Select a status" : "Hautatu egoera bat",

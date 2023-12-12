@@ -86,7 +86,6 @@ OC.L10N.register(
     "Tomorrow" : "I morgen",
     "Add List…" : "Legg til liste...",
     "All day" : "Hele dagen",
-    "Edit title" : "Rediger tittel",
     "Details" : "Detaljer",
     "Select a status" : "Velg en status",
     "Select tags" : "Velg merkelapper",

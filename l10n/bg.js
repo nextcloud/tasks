@@ -159,7 +159,6 @@ OC.L10N.register(
     "Unpin" : "Отмяна на закачване",
     "Pin" : " Закачване",
     "Show in Calendar" : "Показване в Календар",
-    "Edit title" : "Редактиране на заглавието",
     "Details" : "Подробности",
     "Selecting a classification is forbidden, because the task was shared with you." : "Избирането на класификация е забранено, тъй като задачата е била споделена с вас.",
     "Select a classification" : "Избор на класификация",

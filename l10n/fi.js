@@ -114,7 +114,6 @@ OC.L10N.register(
     "Unpin" : "Poista kiinnitys",
     "Pin" : "Kiinnitä",
     "Show in Calendar" : "Näytä Kalenterissa",
-    "Edit title" : "Muokkaa otsikkoa",
     "Details" : "Tiedot",
     "Select a classification" : "Valitse luokittelu",
     "Select a status" : "Valitse tila",

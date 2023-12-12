@@ -150,7 +150,6 @@ OC.L10N.register(
     "Unpin" : "Odpni",
     "Pin" : "Pripni",
     "Show in Calendar" : "Pokaži v koledarju",
-    "Edit title" : "Uredi naslov",
     "Details" : "Podrobnosti",
     "Select a classification" : "Izbor preikaza",
     "Select a status" : "Izbor stanja",

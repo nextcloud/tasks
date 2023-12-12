@@ -164,7 +164,6 @@ OC.L10N.register(
     "Unpin" : "Sabitlemeyi kaldır",
     "Pin" : "Sabitle",
     "Show in Calendar" : "Takvimde görüntülensin",
-    "Edit title" : "Başlığı düzenle",
     "Details" : "Ayrıntılar",
     "Selecting a classification is forbidden, because the task was shared with you." : "Bu görev sizinle paylaşılmış bir görev olduğundan sınıflandırma seçmenize izin verilmiyor.",
     "Select a classification" : "Bir sınıflandırma seçin",

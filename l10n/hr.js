@@ -138,7 +138,6 @@ OC.L10N.register(
     "Unpin" : "Otkvači",
     "Pin" : "Prikvači",
     "Show in Calendar" : "Prikaži u kalendaru",
-    "Edit title" : "Uredi naslov",
     "Details" : "Pojedinosti",
     "Select a classification" : "Odaberi klasifikaciju",
     "Select a status" : "Odaberi status",
