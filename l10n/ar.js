@@ -164,6 +164,7 @@ OC.L10N.register(
     "Unpin" : "فك التثبيت",
     "Pin" : "تثبيت",
     "Show in Calendar" : "عرض في التقويم",
+    "Edit summary" : "تعديل الخُلاصة",
     "Details" : "التفاصيل",
     "Selecting a classification is forbidden, because the task was shared with you." : "إختيار التصنيف ممنوع لأن المهمة مُشارَكةٌ معك.",
     "Select a classification" : "إختيار تصنيف classification",
