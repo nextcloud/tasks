@@ -27,6 +27,8 @@ OC.L10N.register(
     "Deleted" : "Dzēstie",
     "Restore" : "Atjaunot",
     "Delete permanently" : "Dzēst pavisam",
+    "Untitled event" : "Nenosaukts notikums",
+    "Could not restore calendar or event" : "Nevarēja atjaunot kalendāru vai notikumu.",
     "Cancel" : "Atcelt",
     "Close" : "Aizvērt",
     "No errors" : "Nav kļūdu",
