@@ -153,6 +153,7 @@ OC.L10N.register(
     "Unpin" : "Од-ппинувај",
     "Pin" : "Пинувај",
     "Show in Calendar" : "Прикажи во календар",
+    "Edit summary" : "Уреди резиме",
     "Details" : "Детали",
     "Select a classification" : "Избери класификација",
     "Select a status" : "Избери статус",
