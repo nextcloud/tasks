@@ -24,6 +24,8 @@ OC.L10N.register(
     "Delete permanently" : "Həmişəlik sil",
     "Cancel" : "Dayandır",
     "Close" : "Bağla",
+    "Priority" : "Prioritet",
+    "Manually" : "Əl ilə",
     "_%n Completed Task_::_%n Completed Tasks_" : ["\"%s\" Bitmiş Tapşırıqlar","Completed Tasks"],
     "Tomorrow" : "Sabah",
     "Details" : "Detallar",

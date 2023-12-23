@@ -4,6 +4,7 @@ OC.L10N.register(
     "Today" : "Güei",
     "Tasks" : "Xeres",
     "Edit" : "Editar",
+    "Export" : "Esportar",
     "Delete" : "Desaniciar",
     "An empty name is not allowed." : "Nun se permite nengún nome baleru.",
     "Trash bin" : "Papelera",
