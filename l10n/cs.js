@@ -164,6 +164,7 @@ OC.L10N.register(
     "Unpin" : "Uvolnit",
     "Pin" : "Připnout",
     "Show in Calendar" : "Zobrazit v kalendáři",
+    "Edit summary" : "Upravit souhrn",
     "Details" : "Podrobnosti",
     "Selecting a classification is forbidden, because the task was shared with you." : "Nemůžete vybrat stupeň důvěrnosti, protože úkol vám je pouze nasdílen.",
     "Select a classification" : "Vybrat klasifikaci",
