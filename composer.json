@@ -14,7 +14,8 @@
     },
     "require-dev": {
         "nextcloud/coding-standard": "^1.0.0",
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.5",
+        "friendsofphp/php-cs-fixer": "3.42.0"
     },
     "config": {
         "platform": {
