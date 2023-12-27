@@ -23,8 +23,8 @@
 namespace OCA\Tasks\Controller;
 
 use \OCA\Tasks\Service\CollectionsService;
-use \OCP\IRequest;
 use \OCP\AppFramework\Controller;
+use \OCP\IRequest;
 
 class CollectionsController extends Controller {
 	/**
