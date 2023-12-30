@@ -11,6 +11,7 @@ OC.L10N.register(
     "Name" : "Nome",
     "Cancel" : "Encaboxar",
     "Priority" : "Prioridá",
+    "Alphabetically" : "Alfabéticamente",
     "[Yesterday]" : "[Ayeri]",
     "[Today]" : "[Güei]",
     "[Tomorrow]" : "[Mañana]",
