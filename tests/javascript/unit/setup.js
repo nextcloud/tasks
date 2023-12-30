@@ -5,6 +5,8 @@ import MockDate from 'mockdate'
 // eslint-disable-next-line n/no-unpublished-import
 import 'regenerator-runtime/runtime'
 
+import { afterAll } from 'vitest'
+
 // Set date to fixed value
 MockDate.set(new Date('2019-01-01T12:34:56'))
 

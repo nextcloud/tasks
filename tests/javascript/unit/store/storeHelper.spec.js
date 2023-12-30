@@ -1,7 +1,9 @@
-import { sort } from 'Store/storeHelper.js'
-import Task from 'Models/task.js'
+import { sort } from '../../../../src/store/storeHelper.js'
+import Task from '../../../../src/models/task.js'
 
 import { loadICS } from '../../../assets/loadAsset.js'
+
+import { describe, expect, it } from 'vitest'
 
 const vCalendarNames = [
 	'vcalendars/vcalendar-due-2019',

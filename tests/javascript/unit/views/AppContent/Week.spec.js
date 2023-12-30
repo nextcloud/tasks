@@ -1,24 +1,19 @@
-import Week from 'Views/AppContent/Week.vue'
-import router from '@/router.js'
+import Week from '../../../../../src/views/AppContent/Week.vue'
+import router from '../../../../../src/router.js'
 
 import { store, localVue } from '../../setupStore.js'
 
 import { mount } from '@vue/test-utils'
 
-describe('Week.vue', () => {
+import { describe, expect, it, vi } from 'vitest'
+
+describe('Week.vue', async () => {
 	'use strict'
 
-	/**
-	 * We asynchronously import the "TaskBody" component inside "TaskDragContainer",
-	 * so the first test always fails, since "TaskBody" is not loaded yet.
-	 * I didn't find a proper solution yet, but mounting once before the actual tests
-	 * mitigates the error.
-	 * Proper solutions welcome, though.
-	 */
-	mount(Week, { localVue, store, router })
+	const wrapper = mount(Week, { localVue, store, router })
+	await vi.dynamicImportSettled()
 
 	it('Checks that the correct tasks are shown for day 0 (today)', () => {
-		const wrapper = mount(Week, { localVue, store, router })
 		expect(wrapper.find('div[day="0"] li[task-id="pwen4kz18g.ics"]').exists()).toBe(true) // Was due today --> shown
 		expect(wrapper.find('div[day="0"] li[task-id="pwen4kz20g.ics"]').exists()).toBe(true) // Has a due subtask --> shown
 		expect(wrapper.find('div[day="0"] li[task-id="pwen4kz23g.ics"]').exists()).toBe(true) // Due subtask --> shown
@@ -28,12 +23,10 @@ describe('Week.vue', () => {
 	})
 
 	it('Checks that the correct tasks are shown for day 1 (tomorrow)', () => {
-		const wrapper = mount(Week, { localVue, store, router })
 		expect(wrapper.find('div[day="1"] li[task-id="pwen4kz41g.ics"]').exists()).toBe(true) // Starts tomorrow --> shown
 	})
 
 	it('Checks that the correct tasks are shown for day 2 (day after tomorrow)', () => {
-		const wrapper = mount(Week, { localVue, store, router })
 		expect(wrapper.find('div[day="2"] li[task-id="pwen4kz21g.ics"]').exists()).toBe(true) // Start the day after tomorrow --> shown
 		expect(wrapper.find('div[day="2"] li[task-id="pwen8kz22g.ics"]').exists()).toBe(true) // Was due today, but has subtask due in 2 days --> shown
 		expect(wrapper.find('div[day="2"] li[task-id="pwen7kz22g.ics"]').exists()).toBe(true) // Subtask due in 2 days --> shown
@@ -41,12 +34,10 @@ describe('Week.vue', () => {
 	})
 
 	it('Checks that the correct tasks are shown for day 6', () => {
-		const wrapper = mount(Week, { localVue, store, router })
 		expect(wrapper.find('div[day="6"] li[task-id="pwen4kz22g.ics"]').exists()).toBe(true) // Starts in 7 days --> shown
 	})
 
 	it('Checks that only the clicked task is marked active', async () => {
-		const wrapper = mount(Week, { localVue, store, router })
 		const taskAtDay0 = wrapper.find('div[day="0"] li[task-id="pwen8kz22g.ics"] > div')
 		const taskAtDay2 = wrapper.find('div[day="2"] li[task-id="pwen8kz22g.ics"] > div')
 
@@ -59,10 +50,14 @@ describe('Week.vue', () => {
 	})
 
 	it('Checks that not matching subtasks are only shown for active tasks', async () => {
-		const wrapper = mount(Week, { localVue, store, router })
 		const taskAtDay0 = wrapper.find('div[day="0"] li[task-id="pwen8kz22g.ics"] > div')
+		const taskAtDay2 = wrapper.find('div[day="2"] li[task-id="pwen8kz22g.ics"] > div')
 
-		if (wrapper.vm.$route.params.taskId !== null) {
+		// Click on different task to open it
+		taskAtDay2.trigger('click')
+		await localVue.nextTick()
+
+		if (wrapper.vm.$route.params.taskId !== null && wrapper.vm.$route.params.collectionId !== 'week') {
 			router.push({ name: 'collections', params: { collectionId: 'week' } })
 			await localVue.nextTick()
 		}
@@ -83,10 +78,14 @@ describe('Week.vue', () => {
 	})
 
 	it('Checks that an active task and its ancestors are shown', async () => {
-		const wrapper = mount(Week, { localVue, store, router })
 		const taskAtDay0 = wrapper.find('div[day="0"] li[task-id="pwen8kz22g.ics"] > div')
+		const taskAtDay2 = wrapper.find('div[day="2"] li[task-id="pwen8kz22g.ics"] > div')
 
-		if (wrapper.vm.$route.params.taskId !== null) {
+		// Click on different task to open it
+		taskAtDay2.trigger('click')
+		await localVue.nextTick()
+
+		if (wrapper.vm.$route.params.taskId !== null && wrapper.vm.$route.params.collectionId !== 'week') {
 			router.push({ name: 'collections', params: { collectionId: 'week' } })
 			await localVue.nextTick()
 		}

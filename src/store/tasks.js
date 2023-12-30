@@ -701,7 +701,7 @@ const actions = {
 		if (taskData.calendar.readOnly) {
 			return
 		}
-		const task = new Task('BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Nextcloud Tasks v' + this._vm.$appVersion + '\nEND:VCALENDAR', taskData.calendar)
+		const task = new Task('BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Nextcloud Tasks v' + appVersion + '\nEND:VCALENDAR', taskData.calendar)
 
 		task.created = ICAL.Time.now()
 		task.summary = taskData.summary

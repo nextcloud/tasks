@@ -32,7 +32,6 @@ Vue.use(Vuex)
 
 Vue.prototype.$OC = OC
 Vue.prototype.$OCA = OCA
-Vue.prototype.$appVersion = appVersion
 
 document.addEventListener('DOMContentLoaded', () => {
 	OCA.Dashboard.register('tasks', (el) => {

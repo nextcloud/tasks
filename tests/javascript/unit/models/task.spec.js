@@ -1,8 +1,9 @@
-import Task from 'Models/task.js'
+import Task from '../../../../src/models/task.js'
 
 import { loadICS } from '../../../assets/loadAsset.js'
 
 import ICAL from 'ical.js'
+import { describe, expect, it } from 'vitest'
 
 describe('task', () => {
 	'use strict'

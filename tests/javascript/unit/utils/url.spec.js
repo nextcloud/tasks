@@ -22,6 +22,8 @@
 
 import { urldecode } from '../../../../src/utils/url.js'
 
+import { describe, expect, it } from 'vitest'
+
 describe('utils/url test suite', () => {
 	it('should decode urls encoded by php', () => {
 		const testData = [

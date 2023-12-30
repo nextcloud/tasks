@@ -19,12 +19,14 @@
  * License along with this library. If not, see <http://www.gnu.org/licenses/>.
  *
  */
-import AppSidebar from 'Views/AppSidebar.vue'
-import router from '@/router.js'
+import AppSidebar from '../../../../src/views/AppSidebar.vue'
+import router from '../../../../src/router.js'
 
 import { store, localVue } from '../setupStore.js'
 
 import { shallowMount } from '@vue/test-utils'
+
+import { describe, expect, it } from 'vitest'
 
 describe('AppSidebar.vue', () => {
 	'use strict'

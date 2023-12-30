@@ -18,6 +18,8 @@
 
 import { textToTask } from '../../../../src/utils/textToTask.js'
 
+import { describe, expect, it } from 'vitest'
+
 describe('utils/textToTask test suite', () => {
 	it('should convert simple list with empty lines', () => {
 		const text
