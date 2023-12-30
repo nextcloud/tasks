@@ -449,6 +449,27 @@ function searchSubTasks(task, searchQuery) {
 	})
 }
 
+/**
+ * Parses a string to extract tags and a summary
+ *
+ * @param {string} str The string
+ * @return {object} The object containing the parsed results
+ */
+function parseString(str) {
+	const matches = str.matchAll(/\s?#([^\s#]+)/g)
+	let summary = str
+	const tags = []
+	for (const match of matches) {
+	  tags.push(match[1])
+	  summary = summary.replace(match[0], '')
+	}
+	summary = summary.trim()
+	return {
+		summary,
+		tags,
+	}
+}
+
 export {
 	isTaskInList,
 	overdue,
@@ -456,4 +477,5 @@ export {
 	sort,
 	momentToICALTime,
 	searchSubTasks,
+	parseString,
 }
