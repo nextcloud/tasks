@@ -23,7 +23,7 @@
 
 import { Calendar } from './calendars.js'
 import { findVTODObyUid } from './cdav-requests.js'
-import { isParentInList, momentToICALTime } from './storeHelper.js'
+import { isParentInList, momentToICALTime, parseString } from './storeHelper.js'
 import SyncStatus from '../models/syncStatus.js'
 import Task from '../models/task.js'
 
@@ -703,8 +703,11 @@ const actions = {
 		}
 		const task = new Task('BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Nextcloud Tasks v' + appVersion + '\nEND:VCALENDAR', taskData.calendar)
 
+		const parsed = parseString(taskData.summary)
+
 		task.created = ICAL.Time.now()
-		task.summary = taskData.summary
+		task.summary = parsed.summary
+		task.tags = parsed.tags
 		task.hidesubtasks = 0
 		if (taskData.priority) {
 			task.priority = taskData.priority
