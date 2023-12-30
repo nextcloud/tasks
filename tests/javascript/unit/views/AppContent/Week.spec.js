@@ -58,7 +58,7 @@ describe('Week.vue', async () => {
 		await localVue.nextTick()
 
 		if (wrapper.vm.$route.params.taskId !== null && wrapper.vm.$route.params.collectionId !== 'week') {
-			router.push({ name: 'collections', params: { collectionId: 'week' } })
+			await router.push({ name: 'collections', params: { collectionId: 'week' } })
 			await localVue.nextTick()
 		}
 		expect(taskAtDay0.classes('task-item__body--active')).toBe(false)
@@ -86,7 +86,7 @@ describe('Week.vue', async () => {
 		await localVue.nextTick()
 
 		if (wrapper.vm.$route.params.taskId !== null && wrapper.vm.$route.params.collectionId !== 'week') {
-			router.push({ name: 'collections', params: { collectionId: 'week' } })
+			await router.push({ name: 'collections', params: { collectionId: 'week' } })
 			await localVue.nextTick()
 		}
 		expect(taskAtDay0.classes('task-item__body--active')).toBe(false)
