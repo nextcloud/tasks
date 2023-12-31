@@ -818,6 +818,10 @@ $breakpoint-mobile: 1024px;
 
 		&--active {
 			background-color: var(--color-primary-element-light) !important;
+
+			.tag {
+				background-color: var(--color-main-background) !important;
+			}
 		}
 
 		.task-body {
@@ -857,19 +861,17 @@ $breakpoint-mobile: 1024px;
 					max-width: 50%;
 
 					.tag {
-						height: 22px;
+						height: 32px;
 						overflow: hidden;
-						display: inline-flex;
-						min-width: 45px;
-						background-color: var(--color-background-dark);
-						border: 1px solid var(--color-border-dark);
-						border-radius: 2px;
-						margin: 0 4px;
+						display: flex;
+						padding: 0 8px 0 12px;
+						background-color: var(--color-primary-element-light);
+						border: none;
+						border-radius: 18px !important;
+						margin: 4px 2px;
+						align-items: center;
 
 						.tag-label {
-							color: var(--color-text-lighter);
-							font-weight: bold;
-							padding: 2px 4px;
 							text-overflow: ellipsis;
 							overflow: hidden;
 							white-space: nowrap;
