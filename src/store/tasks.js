@@ -41,6 +41,9 @@ Vue.use(Vuex)
 const state = {
 	tasks: {},
 	searchQuery: '',
+	filter: {
+		tags: [],
+	},
 	deletedTasks: {},
 	deleteInterval: null,
 }
@@ -261,6 +264,18 @@ const getters = {
 	 */
 	searchQuery: (state, getters, rootState) => {
 		return state.searchQuery
+	},
+
+	/**
+	 * Returns the current filter
+	 *
+	 * @param {object} state The store data
+	 * @param {object} getters The store getters
+	 * @param {object} rootState The store root state
+	 * @return {string} The current filter
+	 */
+	filter: (state, getters, rootState) => {
+		return state.filter
 	},
 
 	/**
@@ -658,6 +673,17 @@ const mutations = {
 	 */
 	setSearchQuery(state, searchQuery) {
 		state.searchQuery = searchQuery
+	},
+
+	/**
+	 * Sets the filter
+	 *
+	 * @param {object} state The store data
+	 * @param {string} filter The filter
+	 */
+	setFilter(state, filter) {
+		Vue.set(state.filter, 'tags', filter.tags)
+		state.filter = filter
 	},
 
 	addTaskForDeletion(state, { task }) {

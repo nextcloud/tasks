@@ -239,4 +239,13 @@ describe('task', () => {
 		expect(task.closed).toEqual(true)
 		expect(task.completed).toEqual(true)
 	})
+
+	it('Should filter by tags.', () => {
+		const task = new Task(loadICS('vcalendars/vcalendar-categories-multiple'), {})
+		expect(task.tags.length).toEqual(3)
+		expect(task.matches('', { tags: [] })).toEqual(true)
+		expect(task.matches('', { tags: ['cat1'] })).toEqual(true)
+		expect(task.matches('', { tags: ['cat1', 'cat2', 'cat3'] })).toEqual(true)
+		expect(task.matches('', { tags: ['cat1', 'cat2', 'cat3', 'cat4'] })).toEqual(false)
+	})
 })

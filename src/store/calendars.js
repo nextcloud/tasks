@@ -257,13 +257,13 @@ const getters = {
 				.filter(task => {
 					return task.closed === false && (!task.related || !isParentInList(task, calendar.tasks))
 				})
-			if (rootState.tasks.searchQuery) {
+			if (rootState.tasks.searchQuery || rootState.tasks.filter.tags.length) {
 				tasks = tasks.filter(task => {
-					if (task.matches(rootState.tasks.searchQuery)) {
+					if (task.matches(rootState.tasks.searchQuery, rootState.tasks.filter)) {
 						return true
 					}
 					// We also have to show tasks for which one sub(sub...)task matches.
-					return searchSubTasks(task, rootState.tasks.searchQuery)
+					return searchSubTasks(task, rootState.tasks.searchQuery, rootState.tasks.filter)
 				})
 			}
 			return tasks.length

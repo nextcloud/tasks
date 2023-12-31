@@ -38,6 +38,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<Plus :size="20" />
 			</NcTextField>
 		</div>
+		<FilterDropdown />
 		<SortorderDropdown />
 		<CreateMultipleTasksDialog v-if="showCreateMultipleTasksModal"
 			:calendar="calendar"
@@ -49,6 +50,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
+import FilterDropdown from './FilterDropdown.vue'
 import SortorderDropdown from './SortorderDropdown.vue'
 import openNewTask from '../mixins/openNewTask.js'
 
@@ -67,6 +69,7 @@ export default {
 	components: {
 		CreateMultipleTasksDialog,
 		NcTextField,
+		FilterDropdown,
 		SortorderDropdown,
 		Plus,
 	},
@@ -194,12 +197,16 @@ $breakpoint-mobile: 1024px;
 
 	&__input {
 		position: relative;
-		width: calc(100% - 44px);
+		width: calc(100% - 88px);
 	}
 
-	.sortorder {
-		margin-left: auto;
+	.sortorder,
+	.filter {
 		margin-top: 6px;
+	}
+
+	.filter {
+		margin-left: auto;
 	}
 }
 </style>
