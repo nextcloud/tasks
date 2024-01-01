@@ -295,7 +295,7 @@ const getters = {
 				}
 			})
 			return tags
-		}, [])
+		}, []).sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }))
 	},
 }
 
