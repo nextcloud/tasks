@@ -257,7 +257,7 @@ export default class Task {
 	}
 
 	get closed() {
-		return this._completed || this._status === 'CANCELLED'
+		return this.completed || this._status === 'CANCELLED'
 	}
 
 	get complete() {
@@ -292,7 +292,7 @@ export default class Task {
 	}
 
 	get completed() {
-		return this._completed
+		return this._completed || this._status === 'COMPLETED'
 	}
 
 	set completed(completed) {
