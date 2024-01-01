@@ -21,7 +21,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<li v-show="showTask"
+	<li v-if="showTask"
 		ref="taskItem"
 		:task-id="task.uri"
 		:class="{
