@@ -122,9 +122,6 @@ export default class Task {
 			sortOrder = this.getSortOrder()
 		}
 		this._sortOrder = +sortOrder
-
-		this._searchQuery = ''
-		this._matchesSearchQuery = true
 	}
 
 	/**
@@ -680,19 +677,21 @@ export default class Task {
 	 * Checks if the task matches the search query
 	 *
 	 * @param {string} searchQuery The search string
+	 * @param {object} filter Object containing the filter parameters
 	 * @return {boolean} If the task matches
 	 */
-	matches(searchQuery) {
-		// If the search query maches the previous search, we don't have to search again.
-		if (this._searchQuery === searchQuery) {
-			return this._matchesSearchQuery
+	matches(searchQuery, filter) {
+		// Check whether the filter matches
+		// Needs to match all tags
+		for (const tag of (filter?.tags || {})) {
+			if (!this.tags.includes(tag)) {
+				return false
+			}
 		}
-		// We cache the current search query for faster future comparison.
-		this._searchQuery = searchQuery
+
 		// If the search query is empty, the task matches by default.
 		if (!searchQuery) {
-			this._matchesSearchQuery = true
-			return this._matchesSearchQuery
+			return true
 		}
 		// We search in these task properties
 		const keys = ['summary', 'note', 'tags']
@@ -702,20 +701,17 @@ export default class Task {
 			// For the tags search the array
 			if (key === 'tags') {
 				for (const tag of this[key]) {
-					if (tag.toLowerCase().indexOf(searchQuery) > -1) {
-						this._matchesSearchQuery = true
-						return this._matchesSearchQuery
+					if (tag.toLowerCase().includes(searchQuery)) {
+						return true
 					}
 				}
 			} else {
-				if (this[key].toLowerCase().indexOf(searchQuery) > -1) {
-					this._matchesSearchQuery = true
-					return this._matchesSearchQuery
+				if (this[key].toLowerCase().includes(searchQuery)) {
+					return true
 				}
 			}
 		}
-		this._matchesSearchQuery = false
-		return this._matchesSearchQuery
+		return false
 	}
 
 }

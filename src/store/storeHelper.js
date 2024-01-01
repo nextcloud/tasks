@@ -438,14 +438,15 @@ function momentToICALTime(moment, asDate) {
  *
  * @param {Task} task The task to search in
  * @param {string} searchQuery The string to find
+ * @param {object} filter The filter to apply to the task
  * @return {boolean} If the task matches
  */
-function searchSubTasks(task, searchQuery) {
+function searchSubTasks(task, searchQuery, filter) {
 	return Object.values(task.subTasks).some((subTask) => {
-		if (subTask.matches(searchQuery)) {
+		if (subTask.matches(searchQuery, filter)) {
 			return true
 		}
-		return searchSubTasks(subTask, searchQuery)
+		return searchSubTasks(subTask, searchQuery, filter)
 	})
 }
 

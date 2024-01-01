@@ -53,7 +53,10 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<span v-linkify="{text: task.summary, linkify: true}" />
 				</div>
 				<div v-if="task.tags.length > 0" class="tags-list">
-					<span v-for="(tag, index) in task.tags" :key="index" class="tag">
+					<span v-for="(tag, index) in task.tags"
+						:key="index"
+						class="tag no-nav"
+						@click="addTagToFilter(tag)">
 						<span :title="tag" class="tag-label">
 							{{ tag }}
 						</span>
@@ -260,6 +263,7 @@ export default {
 	computed: {
 		...mapGetters({
 			searchQuery: 'searchQuery',
+			filter: 'filter',
 		}),
 
 		dueDateShort() {
@@ -428,11 +432,11 @@ export default {
 		 */
 		showTask() {
 			// If the task directly matches the search, we show it.
-			if (this.task.matches(this.searchQuery)) {
+			if (this.task.matches(this.searchQuery, this.filter)) {
 				return true
 			}
 			// We also have to show tasks for which one sub(sub...)task matches.
-			return this.searchSubTasks(this.task, this.searchQuery)
+			return this.searchSubTasks(this.task, this.searchQuery, this.filter)
 		},
 
 		/**
@@ -481,7 +485,7 @@ export default {
 			'clearTaskDeletion',
 			'fetchFullTask',
 		]),
-		...mapMutations(['resetStatus']),
+		...mapMutations(['resetStatus', 'setFilter']),
 		sort,
 		/**
 		 * Checks if a date is overdue
@@ -491,6 +495,14 @@ export default {
 		updateTask() {
 			if (this.task.syncStatus?.status === 'conflict') {
 				this.fetchFullTask({ task: this.task })
+			}
+		},
+
+		addTagToFilter(tag) {
+			const filter = this.filter
+			if (!this.filter?.tags.includes(tag)) {
+				filter.tags.push(tag)
+				this.setFilter(filter)
 			}
 		},
 
@@ -870,6 +882,7 @@ $breakpoint-mobile: 1024px;
 						border-radius: 18px !important;
 						margin: 4px 2px;
 						align-items: center;
+						cursor: pointer;
 
 						.tag-label {
 							text-overflow: ellipsis;
@@ -877,6 +890,7 @@ $breakpoint-mobile: 1024px;
 							white-space: nowrap;
 							width: 100%;
 							text-align: center;
+							cursor: pointer;
 						}
 					}
 				}
