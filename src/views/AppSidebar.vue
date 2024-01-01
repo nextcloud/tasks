@@ -188,7 +188,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:tags="task.tags"
 					:disabled="readOnly"
 					:placeholder="t('tasks', 'Select tags')"
-					icon="IconTag"
+					icon="TagMultiple"
 					@add-tag="updateTag"
 					@set-tags="updateTags" />
 			</div>

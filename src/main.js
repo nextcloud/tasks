@@ -33,7 +33,6 @@ import Delete from 'vue-material-design-icons/Delete.vue'
 import Eye from 'vue-material-design-icons/Eye.vue'
 import EyeOff from 'vue-material-design-icons/EyeOff.vue'
 import Pulse from 'vue-material-design-icons/Pulse.vue'
-import Tag from 'vue-material-design-icons/Tag.vue'
 import TrendingUp from 'vue-material-design-icons/TrendingUp.vue'
 
 import Vue from 'vue'
@@ -66,8 +65,6 @@ Vue.component('IconEye', Eye)
 Vue.component('IconEyeOff', EyeOff)
 // eslint-disable-next-line vue/match-component-file-name
 Vue.component('IconPulse', Pulse)
-// eslint-disable-next-line vue/match-component-file-name
-Vue.component('IconTag', Tag)
 // eslint-disable-next-line vue/match-component-file-name
 Vue.component('IconTrendingUp', TrendingUp)
 
