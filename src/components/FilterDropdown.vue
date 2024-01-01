@@ -82,14 +82,15 @@ export default {
 		...mapGetters({
 			tags: 'tags',
 			filter: 'filter',
+			searchQuery: 'searchQuery',
 		}),
 		isFilterActive() {
-			return this.filter.tags.length
+			return this.filter.tags.length || this.searchQuery
 		},
 	},
 	methods: {
 		t,
-		...mapMutations(['setFilter']),
+		...mapMutations(['setFilter', 'setSearchQuery']),
 
 		setTags(tags) {
 			const filter = this.filter
@@ -99,6 +100,7 @@ export default {
 
 		resetFilter() {
 			this.setFilter({ tags: [] })
+			this.setSearchQuery('')
 		},
 	},
 }
