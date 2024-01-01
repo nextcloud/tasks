@@ -233,4 +233,10 @@ describe('task', () => {
 		task.complete = 100
 		expect(task.closed).toEqual(true)
 	})
+
+	it('Should show completed when status is completed', () => {
+		const task = new Task(loadICS('vcalendars/vcalendar-status-completed'), {})
+		expect(task.closed).toEqual(true)
+		expect(task.completed).toEqual(true)
+	})
 })
