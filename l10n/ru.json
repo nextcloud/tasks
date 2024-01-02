@@ -90,6 +90,7 @@
     "Open your browser console for more details" : "Подробные сведения приведены в консоли браузера",
     "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["Это действие приведёт к удалению {taskCount} завершённой задачи и её подзадач из календаря «{calendar}».","Это действие приведёт к удалению {taskCount} завершённых задач и их подзадач из календаря «{calendar}».","Это действие приведёт к удалению {taskCount} завершённых задач и их подзадач из календаря «{calendar}».","Это действие приведёт к удалению {taskCount} завершённых задач и их подзадач из календаря «{calendar}»."],
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["Не удалось удалить {failedCount} задачу.","Не удалось удалить {failedCount} задач.","Не удалось удалить {failedCount} задач.","Не удалось удалить {failedCount} задач."],
+    "Select tags to filter by" : "Выберите метки для отбора",
     "Add an important task to \"{calendar}\"…" : "Добавить в «{calentar}» важную задачу…",
     "Add a task due today to \"{calendar}\"…" : "Добавить в «{calendar}» задачу на сегодня… ",
     "Add a current task to \"{calendar}\"…" : "Добавить в «{calendar}» текущую задачу…",

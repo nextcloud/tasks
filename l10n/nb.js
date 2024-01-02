@@ -62,6 +62,7 @@ OC.L10N.register(
     "Deleted all completed tasks from calendar \"{calendar}\"." : "Slett alle fullførte oppgaver fra kalender \"{calendar}\".",
     "No errors" : "Ingen feil",
     "Open your browser console for more details" : "Åpne din nettlesers konsoll for flere detaljer",
+    "Select tags to filter by" : "Velg merkelapper å filtrere etter",
     "Change sort order" : "Endre sorteringsrekkefølge",
     "Relevance" : "Relevans",
     "Start date" : "Startdato",

@@ -64,6 +64,7 @@ OC.L10N.register(
     "Deleted all completed tasks from calendar \"{calendar}\"." : "\"{calendar}\" 달력의 모든 완료된 일 지우기",
     "No errors" : "오류 없음",
     "Open your browser console for more details" : "자세한 정보를 보려면 브라우저 콘솔을 여세요.",
+    "Select tags to filter by" : "필터링할 태그 선택",
     "Change sort order" : "정렬 순서 변경",
     "Start date" : "시작 날짜",
     "Due date" : "마감 날짜",

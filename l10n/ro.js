@@ -64,6 +64,7 @@ OC.L10N.register(
     "Cancel" : "Anulează",
     "Create tasks" : "Creează sarcini",
     "Close" : "Închide",
+    "Select tags to filter by" : "Alege etichete după care să filtrezi",
     "Due date" : "Data scadenței",
     "Alphabetically" : "Alfabetic",
     "[Yesterday]" : "[Ieri]",

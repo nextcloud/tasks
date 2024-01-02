@@ -36,6 +36,7 @@ OC.L10N.register(
     "Close" : "Aizvērt",
     "No errors" : "Nav kļūdu",
     "Open your browser console for more details" : "Atveriet savas pārlūkprogrammas konsoli sīkākai informācijai",
+    "Select tags to filter by" : "Izvēlieties birkas, pēc kurām filtrēt",
     "Change sort order" : "Mainīt kārtošanas secību",
     "Start date" : "Sākuma datums",
     "Due date" : "Izpildes datums",

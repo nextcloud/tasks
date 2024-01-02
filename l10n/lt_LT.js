@@ -78,6 +78,7 @@ OC.L10N.register(
     "Open your browser console for more details" : "Išsamesnei informacijai, atverkite savo naršyklės pultą",
     "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["Tai ištrins {taskCount} atliktą užduotį ir jos dalines užduotis iš kalendoriaus „{calendar}“.","Tai ištrins {taskCount} atliktas užduotis ir jų dalines užduotis iš kalendoriaus „{calendar}“.","Tai ištrins {taskCount} atliktų užduočių ir jų dalines užduotis iš kalendoriaus „{calendar}“.","Tai ištrins {taskCount} atliktą užduotį ir jų dalines užduotis iš kalendoriaus „{calendar}“."],
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["Nepavyko ištrinti {failedCount} užduoties.","Nepavyko ištrinti {failedCount} užduočių.","Nepavyko ištrinti {failedCount} užduočių.","Nepavyko ištrinti {failedCount} užduoties."],
+    "Select tags to filter by" : "Pasirinkite žymes, pagal kurias filtruoti",
     "Add an important task to \"{calendar}\"…" : "Pridėti svarbią užduotį į „{calendar}“…",
     "Add a task due today to \"{calendar}\"…" : "Pridėti užduotį, kurios galutinis terminas šiandien į kalendorių „{calendar}“…",
     "Add a current task to \"{calendar}\"…" : "Pridėti dabartinę užduotį į „{calendar}“…",

@@ -92,6 +92,7 @@ OC.L10N.register(
     "Open your browser console for more details" : "Nyissa meg a böngészőkonzolt a további részletekért",
     "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["Ez töröl {taskCount} befejezett feladatot (és annak a részfeladatait) a(z) „{calendar}” naptárból.","Ez töröl {taskCount} teljesített feladatot (és azok részfeladatait) a(z) „{calendar}” naptárból."],
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["{failCount} feladatot nem sikerült törölni.","{failCount} feladatot nem sikerült törölni."],
+    "Select tags to filter by" : "Válasszon címkéket a szűréshez:",
     "Add an important task to \"{calendar}\"…" : "Fontos feladat hozzáadása a(z) „{calendar}” naptárhoz…",
     "Add a task due today to \"{calendar}\"…" : "Egy ma esedékes feladat hozzáadása a(z) „{calendar}” naptárhoz…",
     "Add a current task to \"{calendar}\"…" : "Egy aktuális feladat hozzáadása a(z) „{calendar}” naptárhoz…",

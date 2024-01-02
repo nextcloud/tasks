@@ -85,6 +85,8 @@
     "Open your browser console for more details" : "Več podrobnosti je izpisanih v konzoli brskalnika",
     "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["Iz koledarja »{calendar}« boste zbrisali {taskCount} končano nalogo z vsemi podrejenimi.","Iz koledarja »{calendar}« boste zbrisali {taskCount} končani nalogi z vsemi podrejenimi.","Iz koledarja »{calendar}« boste zbrisali {taskCount} končane naloge z vsemi podrejenimi.","Iz koledarja »{calendar}« boste zbrisali {taskCount} končanih nalog z vsemi podrejenimi."],
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["Ni mogoče izbrisati {failedCount} naloge.","Ni mogoče izbrisati {failedCount} nalog.","Ni mogoče izbrisati {failedCount} nalog.","Ni mogoče izbrisati {failedCount} nalog."],
+    "Filter by tags" : "Filtriranje po oznakah",
+    "Select tags to filter by" : "Izbor oznak za filtriranje",
     "Add an important task to \"{calendar}\"…" : "Dodaj pomembno nalogo v koledar »{calendar}« ...",
     "Add a task due today to \"{calendar}\"…" : "Dodaj nalogo, ki poteče danes, v koledar »{calendar}« ...",
     "Add a current task to \"{calendar}\"…" : "Dodaj trenutno nalogo v koledar »{calendar}« ...",

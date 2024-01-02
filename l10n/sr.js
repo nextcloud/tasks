@@ -92,6 +92,7 @@ OC.L10N.register(
     "Open your browser console for more details" : "Отворите конзолу веб читача за више детаља",
     "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["Ово ће обрисати {taskCount} завршени задатак и све његове подзадатке из календара „{calendar}“.","Ово ће обрисати {taskCount} завршена задатка и све њихове подзадатке из календара „{calendar}“.","Ово ће обрисати {taskCount} завршених задатака и све њихове подзадатке из календара „{calendar}“."],
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["Нисам могао да обришем {failedCount} задатак.","Нисам могао да обришем {failedCount} задатка.","Нисам могао да обришем {failedCount} задатака."],
+    "Select tags to filter by" : "Одаберите ознаке по којима да се филтрира",
     "Add an important task to \"{calendar}\"…" : "Додај важан задатак на календар „{calendar}“…",
     "Add a task due today to \"{calendar}\"…" : "Додај задатак са роком за данас на календар „{calendar}“…",
     "Add a current task to \"{calendar}\"…" : "Додај тренутни задатак на календар „{calendar}“…",

@@ -72,6 +72,7 @@ OC.L10N.register(
     "Deleted all completed tasks from calendar \"{calendar}\"." : "Poista kaikki valmistuneet tehtävät kalenterista \"{calendar}\".",
     "No errors" : "Ei virheitä",
     "Open your browser console for more details" : "Avaa selaimesi konsoli nähdäksesi lisätietoja",
+    "Select tags to filter by" : "Valitse suodatettavat tunnisteet",
     "Add an important task to \"{calendar}\"…" : "Lisää tärkeä tehtävä kalenteriin \"{calendar}\"…",
     "Add a current task to \"{calendar}\"…" : "Lisää nykyinen tehtävä kalenteriin \"{calendar}\"…",
     "Add a task to \"{calendar}\"…" : "Lisää tehtävä kalenteriin \"{calendar}\"…",

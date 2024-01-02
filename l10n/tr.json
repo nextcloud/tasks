@@ -90,6 +90,8 @@
     "Open your browser console for more details" : "Ayrıntılı bilgi almak için tarayıcı konsolonu açın",
     "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["\"{calendar}\" takviminden {taskCount} tamamlanmış görev ve alt görevleri silindi.","\"{calendar}\" takviminden {taskCount}  tamamlanmış görev ve alt görevleri silindi."],
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["{failedCount} görev silinemedi.","{failedCount} görev silinemedi."],
+    "Filter by tags" : "Etikete göre süz",
+    "Select tags to filter by" : "Süzülecek etiketleri seçin",
     "Add an important task to \"{calendar}\"…" : "\"{calendar}\" takvimine önemli bir görev ekle …",
     "Add a task due today to \"{calendar}\"…" : "\"{calendar}\" takvimine bugün bitecek bir görev ekle …",
     "Add a current task to \"{calendar}\"…" : "\"{calendar}\" takvimine geçerli bir görevi ekle …",

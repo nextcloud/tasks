@@ -92,6 +92,8 @@ OC.L10N.register(
     "Open your browser console for more details" : "Ouvrez la console de votre navigateur pour plus d'informations",
     "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["Cela va supprimer {taskCount} tâche terminée et ses sous-tâches de l'agenda \"{calendar}\".","Cela va supprimer {taskCount} tâches terminées et ses sous-tâches de l'agenda \"{calendar}\".","Cela va supprimer {taskCount} tâches terminées et ses sous-tâches de l'agenda \"{calendar}\"."],
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["Impossible de supprimer {failedCount} tâche.","Impossible de supprimer {failedCount} tâches.","Impossible de supprimer {failedCount} tâches."],
+    "Filter by tags" : "Filtrer par étiquette",
+    "Select tags to filter by" : "Indiquez les étiquettes à filtrer",
     "Add an important task to \"{calendar}\"…" : "Ajouter une tâche importante dans l'agenda \"{calendar}\"…",
     "Add a task due today to \"{calendar}\"…" : "Ajouter une tâche pour aujourd'hui dans \"{calendar}\"...",
     "Add a current task to \"{calendar}\"…" : "Ajouter une tâche courante dans \"{calendar}\"...",

@@ -26,6 +26,7 @@ OC.L10N.register(
     "Empty trash bin" : "ล้างข้อมูลในถังขยะ",
     "Cancel" : "ยกเลิก",
     "Close" : "ปิด",
+    "Select tags to filter by" : "เลือกแท็กที่จะกรอง",
     "Change sort order" : "เปลี่ยนการเรียงลำดับ",
     "Start date" : "วันที่เริ่มต้น",
     "Due date" : "วันที่ครบกำหนด",

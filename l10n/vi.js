@@ -45,6 +45,7 @@ OC.L10N.register(
     "Close" : "Đóng",
     "No errors" : "Không có lỗi",
     "Open your browser console for more details" : "Mở trong trình duyệt để biết thêm chi tiết",
+    "Select tags to filter by" : "Chọn nhãn để lọc theo",
     "Due date" : "Thời hạn",
     "Last modified" : "Lần cuối chỉnh sửa",
     "Alphabetically" : "Theo bảng chữ cái",

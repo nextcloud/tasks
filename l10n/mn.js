@@ -22,6 +22,7 @@ OC.L10N.register(
     "Delete permanently" : "бүр мөсөн устгах",
     "Cancel" : "цуцлах",
     "Close" : "Хаах",
+    "Select tags to filter by" : "Хайлт хийх tag-үүдийг сонгоно уу",
     "Last modified" : "Сүүлд өөрчилсөн",
     "Tomorrow" : "маргааш",
     "Details" : "Дэлгэрэнгүй",

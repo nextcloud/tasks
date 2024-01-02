@@ -77,6 +77,7 @@
     "Open your browser console for more details" : "Za više pojedinosti otvorite konzolu preglednika",
     "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["Time ćete izbrisati {taskCount} završeni zadatak i njegove podzadatke iz kalendara „{calendar}”.","Time ćete izbrisati {taskCount} završenih zadataka i njihove podzadatke iz kalendara „{calendar}”.","Time ćete izbrisati {taskCount} završenih zadataka i njihove podzadatke iz kalendara „{calendar}”."],
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["Nije uspjelo brisanje {failedCount} zadatka.","Nije uspjelo brisanje {failedCount} zadataka.","Nije uspjelo brisanje {failedCount} zadataka."],
+    "Select tags to filter by" : "Odaberite oznake za filtriranje",
     "Add an important task to \"{calendar}\"…" : "Dodaj važan zadatak u „{calendar}”...",
     "Add a task due today to \"{calendar}\"…" : "Dodajte zadatak za danas u „{calendar}”...",
     "Add a current task to \"{calendar}\"…" : "Dodaj trenutni zadatak u „{calendar}”...",

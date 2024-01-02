@@ -47,6 +47,7 @@ OC.L10N.register(
     "Open your browser console for more details" : "Malfermu vian retumilan konzolon por pli da detaloj",
     "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["Tio forigos {taskCount} plenumitan taskon kaj ties subtaskojn el la kalendaro „{calendar}“.","Tio forigos {taskCount} plenumitajn taskojn kaj ties subtaskojn el la kalendaro „{calendar}“."],
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["Ne eblis forigi {failedCount} taskon.","Ne eblis forigi {failedCount} taskojn."],
+    "Select tags to filter by" : "Elekti etikedojn, per kiuj filtri",
     "Add an important task to \"{calendar}\"…" : "Aldoni gravan taskon al „{calendar}“...",
     "Add a task due today to \"{calendar}\"…" : "Aldoni taskon kun hodiaŭa limdato al „{calendar}“...",
     "Add a current task to \"{calendar}\"…" : "Aldoni nunan taskon al „{calendar}“...",

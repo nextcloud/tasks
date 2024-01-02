@@ -79,6 +79,7 @@ OC.L10N.register(
     "Open your browser console for more details" : "Aberi sa consolla de su navigadore pro àteros detàllios",
     "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["Custu at a cantzellare {taskCount} faina cumpletada e is suta-fainas suas dae su calendàriu \"{calendar}\".","Custu at a cantzellare {taskCount} fainas cumpletadas e is suta-fainas suas dae su calendàriu \"{calendar}\"."],
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["No at fatu a cantzellare {failedCount} faina.","No at fatu a cantzellare {failedCount} fainas."],
+    "Select tags to filter by" : "Seletziona etichetas pro filtrare",
     "Add an important task to \"{calendar}\"…" : "Agiunghe una faina importante in \"{calendar}\"…",
     "Add a task due today to \"{calendar}\"…" : "Agiunghe una faina chi agabbat oe a \"{calendar}\"…",
     "Add a current task to \"{calendar}\"…" : "Agiunghe una faina atuale in \"{calendar}\"…",

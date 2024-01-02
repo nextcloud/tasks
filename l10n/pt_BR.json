@@ -90,6 +90,8 @@
     "Open your browser console for more details" : "Abra o console do navegador para mais detalhes",
     "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["Isso excluirá {taskCount} tarefa1 concluída e suas subtarefas do calendário \"{calendar}\".","Isso excluirá {taskCount} tarefas concluídas e suas subtarefas do calendário \"{calendar}\".","Isso excluirá {taskCount} tarefas concluídas e suas subtarefas do calendário \"{calendar}\"."],
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["Não foi possível excluir {failedCount} tarefa.","Não foi possível excluir {failedCount} tarefas.","Não foi possível excluir {failedCount} tarefas."],
+    "Filter by tags" : "Filtrar por etiquetas",
+    "Select tags to filter by" : "Selecione etiquetas a filtrar",
     "Add an important task to \"{calendar}\"…" : "Adicionar uma tarefa importante em \"{calendar}\"…",
     "Add a task due today to \"{calendar}\"…" : "Adicionar uma tarefa para hoje em \"{calendar}\"…",
     "Add a current task to \"{calendar}\"…" : "Adicionar uma tarefa atual em \"{calendar}\"…",

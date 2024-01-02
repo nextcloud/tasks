@@ -90,6 +90,7 @@
     "Open your browser console for more details" : "Opnaðu stjórnborð vafrans þíns til að sjá frekari upplýsingar",
     "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["Þetta mun eyða {taskCount} loknu verkefni og undirverkefnum þess úr dagatalinu {calendar}.","Þetta mun eyða {taskCount} loknum verkefnum og undirverkefnum þeirra úr dagatalinu {calendar}."],
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["Gat ekki eytt {failedCount} verkefni.","Gat ekki eytt {failedCount} verkefnum."],
+    "Select tags to filter by" : "Veldu merki til að sía eftir",
     "Add an important task to \"{calendar}\"…" : "Bæta mikilvægu verkefni við \"{calendar}\"...",
     "Add a task due today to \"{calendar}\"…" : "Bæta verkefni sem á að klára í dag við \"{calendar}\"...",
     "Add a current task to \"{calendar}\"…" : "Bæta fyrirliggjandi verkefni við \"{calendar}\"...",

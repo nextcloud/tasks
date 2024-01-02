@@ -87,6 +87,7 @@
     "Open your browser console for more details" : "Pre podrobnejšie informácie otvorte konzolu vášho webového prehliadača",
     "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["Toto vymaže {taskCount} ukočenú úlohu a jej čiastkové úlohy z kalendára \"{calendar}\".","Toto vymaže {taskCount} ukočené úlohy a ich čiastkové úlohy z kalendára \"{calendar}\".","Toto vymaže {taskCount} ukočených úloh a ich čiastkové úlohy z kalendára \"{calendar}\".","Toto vymaže {taskCount} ukončených úloh a ich čiastkové úlohy z kalendára \"{calendar}\"."],
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["Nepodarilo sa zmazať {failedCount} úlohu.","Nepodarilo sa zmazať {failedCount} úlohy.","Nepodarilo sa zmazať {failedCount} úloh.","Nepodarilo sa zmazať {failedCount} úloh."],
+    "Select tags to filter by" : "Vybrať štítky na filtrovanie",
     "Add an important task to \"{calendar}\"…" : "Pridať dôležitú úlohu do kalendára \"{calendar}\"…",
     "Add a task due today to \"{calendar}\"…" : "Pridať úlohu s termínom ukončenia dnes do kalendára \"{calendar}\"…",
     "Add a current task to \"{calendar}\"…" : "Pridať aktuálnu úlohu do kalendára \"{calendar}\"…",

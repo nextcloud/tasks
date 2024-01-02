@@ -87,6 +87,7 @@ OC.L10N.register(
     "Open your browser console for more details" : "Ανοίξτε την κονσόλα του περιηγητή για περισσότερες λεπτομέρειες",
     "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["Θα διαγραφή η ολοκληρωμένη εργασία του {taskCount} και των υπο εργασιών από το ημερολόγιο \"{calendar}\".","Θα διαγραφούν ολοκληρωμένες εργασίες του {taskCount} και των υπο εργασιών από το ημερολόγιο \"{calendar}\"."],
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["Αδυναμία διαγραφής εργασίας {failedCount}.","Αδυναμία διαγραφής εργασιών {failedCount}."],
+    "Select tags to filter by" : "Επιλογή ετικετών για φιλτράρισμα με",
     "Add an important task to \"{calendar}\"…" : "Προσθήκη σημαντικής εργασίας στο \"{calendar}\"…",
     "Add a task due today to \"{calendar}\"…" : "Προσθέστε εργασία για σήμερα στο \"{calendar}\"…",
     "Add a current task to \"{calendar}\"…" : "Προσθήκη τρέχουσας εργασίας στο \"{calendar}\"…",

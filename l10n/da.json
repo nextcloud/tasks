@@ -85,6 +85,7 @@
     "Open your browser console for more details" : "Åbn din browsers konsol for flejre detaljer",
     "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["Dette vil slette {taskCount} fuldført opgave og deres underopgaver fra kalenderen \"{calendar}\".","Dette vil slette {taskCount} fuldførte opgaver og deres underopgaver fra kalenderen \"{calendar}\"."],
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["Kunne ikke slette {failedCount} opgave.","Kunne ikke slette {failedCount} opgaver."],
+    "Select tags to filter by" : "Vælg de mærker, der skal filtreres efter",
     "Add an important task to \"{calendar}\"…" : "Føj en vigtig opgave til \"{calendar}\"...",
     "Add a task due today to \"{calendar}\"…" : "Tilføj en opgave i dag til \"{calendar}\"...",
     "Add a current task to \"{calendar}\"…" : "Føj en aktuel opgave til \"{calendar}\"...",

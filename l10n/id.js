@@ -37,6 +37,7 @@ OC.L10N.register(
     "Untitled event" : "Acara tanpa judul",
     "Cancel" : "Batal",
     "Close" : "Tutup",
+    "Select tags to filter by" : "Pilih tag untuk disaring",
     "Due date" : "Tenggat",
     "Last modified" : "Terakhir diubah",
     "Alphabetically" : "Berdasarkan abjad",

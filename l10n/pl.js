@@ -92,6 +92,8 @@ OC.L10N.register(
     "Open your browser console for more details" : "Otwórz konsolę przeglądarki, aby uzyskać więcej szczegółów",
     "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["Spowoduje to usunięcie {taskCount} zakończonego zadania i jego podzadań z kalendarza \"{calendar}\".","Spowoduje to usunięcie {taskCount} zakończonych zadań i ich podzadań z kalendarza \"{calendar}\".","Spowoduje to usunięcie {taskCount} zakończonych zadań i ich podzadań z kalendarza \"{calendar}\".","Spowoduje to usunięcie {taskCount} zakończonych zadań i ich podzadań z kalendarza \"{calendar}\"."],
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["Nie można usunąć {failedCount} zadania.","Nie można usunąć {failedCount} zadań.","Nie można usunąć {failedCount} zadań.","Nie można usunąć {failedCount} zadań."],
+    "Filter by tags" : "Filtruj według etykiet",
+    "Select tags to filter by" : "Wybierz etykiety do filtrowania",
     "Add an important task to \"{calendar}\"…" : "Dodaj ważne zadanie do \"{calendar}\"…",
     "Add a task due today to \"{calendar}\"…" : "Dodaj zadanie na dzisiaj do \"{calendar}\"…",
     "Add a current task to \"{calendar}\"…" : "Dodaj bieżące zadanie do \"{calendar}\"…",

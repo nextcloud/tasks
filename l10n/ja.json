@@ -58,6 +58,7 @@
     "No errors" : "エラーはありません",
     "Open your browser console for more details" : "詳細はブラウザーコンソールを開きます",
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["{failedCount} 個のタスクが削除できませんでした"],
+    "Select tags to filter by" : "フィルターするタグを選択してください",
     "Add an important task to \"{calendar}\"…" : "\"{calendar}\"に重要なタスクを追加する",
     "Add a task due today to \"{calendar}\"…" : "\"{calendar}\"に今日が期限のタスクを追加する",
     "Add a current task to \"{calendar}\"…" : "\"{calendar}\"に現在のタスクを追加する",

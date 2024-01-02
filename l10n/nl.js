@@ -87,6 +87,8 @@ OC.L10N.register(
     "Open your browser console for more details" : "Open je browserconsole voor meer details.",
     "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["Dit verwijdert {taskCount} voltooide taak en subtaken uit agenda \"{calendar}\".","Dit verwijdert {taskCount} voltooide taken en subtaken uit agenda \"{calendar}\"."],
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["Kon {failedCount} taak niet verwijderen.","Kon {failedCount} taken niet verwijderen."],
+    "Filter by tags" : "Filter op tags",
+    "Select tags to filter by" : "Selecteer markering om op te filteren",
     "Add an important task to \"{calendar}\"…" : "Voeg een belangrijke taak toe aan \"{calendar}\"…",
     "Add a task due today to \"{calendar}\"…" : "Voeg een taak voor vandaag toe aan \"{calendar}\"…",
     "Add a current task to \"{calendar}\"…" : "Voeg een actuele taak toe aan \"{calendar}\"…",

@@ -82,6 +82,7 @@
     "Open your browser console for more details" : "打开您的浏览器控制台以获取更多详细信息",
     "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["此操作将从日历 \"{calendar}\" 中删除 {taskCount} 个已完成任务及其子任务。"],
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["无法删除 {failedCount} 个任务。"],
+    "Select tags to filter by" : "选择标签来筛选",
     "Add an important task to \"{calendar}\"…" : "添加重要任务到 \"{calendar}\" ...",
     "Add a task due today to \"{calendar}\"…" : "添加今天截止的任务到 \"{calendar}\" ...",
     "Add a current task to \"{calendar}\"…" : "添加当前任务到 \"{calendar}\" ...",

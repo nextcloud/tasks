@@ -25,6 +25,7 @@ OC.L10N.register(
     "Delete permanently" : "სამუდამოდ წაშლა",
     "Cancel" : "უარყოფა",
     "Close" : "დახურვა",
+    "Select tags to filter by" : "ფილტრაციისთვის აირჩიეთ ტეგები",
     "Change sort order" : "განლაგების შეცვლა",
     "Start date" : "დაწყების თარიღი",
     "Due date" : "განპირობებულია თარიღისთვის",

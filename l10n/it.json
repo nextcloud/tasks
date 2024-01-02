@@ -82,6 +82,8 @@
     "Open your browser console for more details" : "Apri la console del tuo browser per altri dettagli",
     "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["Questo eliminerà {taskCount} attività completata e le relative sottoattività dal calendario \"{calendar}\".","Questo eliminerà {taskCount} attività completate e le relative sottoattività dal calendario \"{calendar}\".","Questo eliminerà {taskCount} attività completate e le relative sottoattività dal calendario \"{calendar}\"."],
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["Impossibile eliminare {failedCount} attività.","Impossibile eliminare {failedCount} attività.","Impossibile eliminare {failedCount} attività."],
+    "Filter by tags" : "Filtra per etichette",
+    "Select tags to filter by" : "Seleziona le etichette per filtrare",
     "Add an important task to \"{calendar}\"…" : "Aggiungi un'attività importante a \"{calendar}\"...",
     "Add a task due today to \"{calendar}\"…" : "Aggiungi un'attività che scade oggi a \"{calendar}\"...",
     "Add a current task to \"{calendar}\"…" : "Aggiungi un'attività attuale a \"{calendar}\"...",

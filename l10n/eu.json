@@ -88,6 +88,8 @@
     "Open your browser console for more details" : "Ireki nabigatzailearen kontsola xehetasun gehiagorako",
     "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["Honek osatutako ataza {taskCount} eta beren azpi-atazak ezabatuko ditu \"{calendar}\" egutegitik.","Honek osatutako {taskCount} zeregin eta beren azpizereginak ezabatuko ditu \"{calendar}\" egutegitik."],
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["Ezin izan da ataza {failedCount} ezabatu.","Ezin izan dira {failedCount} zereginak ezabatu."],
+    "Filter by tags" : "Iragazi etiketen arabera",
+    "Select tags to filter by" : "Hautatu etiketak iragazteko",
     "Add an important task to \"{calendar}\"…" : "Gehitu zeregin garrantzitsu bat \"{calendar}\" egutegiari…",
     "Add a task due today to \"{calendar}\"…" : "Gehitu gaurko epemuga bat duen zeregin bat \"{calendar}\" egutegiari…",
     "Add a current task to \"{calendar}\"…" : "Gehitu uneko zeregin bat \"{calendar}\" egutegiari…",

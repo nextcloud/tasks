@@ -90,6 +90,7 @@
     "Open your browser console for more details" : "開啟您的瀏覽器主控台以取得詳細資訊",
     "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["這將會從日曆「{calendar}」刪除 {taskCount} 個已完成的任務與其子項目。"],
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["無法刪除 {failedCount} 個任務。"],
+    "Select tags to filter by" : "依照選擇的標籤篩選",
     "Add an important task to \"{calendar}\"…" : "新增重要任務到「{calendar}」……",
     "Add a task due today to \"{calendar}\"…" : "新增今日到期的任務到「{calendar}」…",
     "Add a current task to \"{calendar}\"…" : "新增當前的任務到「{calendar}」…",

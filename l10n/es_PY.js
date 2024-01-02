@@ -25,6 +25,7 @@ OC.L10N.register(
     "Delete permanently" : "Borrar permanentemente",
     "Cancel" : "Cancelar",
     "Close" : "Cerrar",
+    "Select tags to filter by" : "Selecciona las etiquetas del filtro",
     "Change sort order" : "Cambiar el criterio para ordenar",
     "Start date" : "Fecha de inicio",
     "Due date" : "Fecha de vencimiento",

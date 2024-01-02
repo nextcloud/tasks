@@ -46,6 +46,7 @@ OC.L10N.register(
     "Close" : "Fechar",
     "No errors" : "Sem erros",
     "Open your browser console for more details" : "Abra a consola do seu navegador para obter mais detalhes",
+    "Select tags to filter by" : "Selecionar etiquetas para filtrar",
     "Change sort order" : "Alterar ordenação",
     "Start date" : "Data de início",
     "Due date" : "Data limite",

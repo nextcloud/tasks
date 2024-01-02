@@ -24,6 +24,7 @@ OC.L10N.register(
     "Delete permanently" : "Deler permanentemente",
     "Cancel" : "Cancellar",
     "Close" : "Clauder",
+    "Select tags to filter by" : "Selectionar etiquettas a filtrar per",
     "Change sort order" : "Cambiar ordine de classification",
     "Priority" : "Prioritate",
     "Alphabetically" : "Alphabeticamente",

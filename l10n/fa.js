@@ -87,6 +87,7 @@ OC.L10N.register(
     "Open your browser console for more details" : "برای جزئیات بیشتر کنسول مرورگر خود را باز کنید",
     "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["با این کار {taskCount} کار تکمیل شده و وظایف فرعی آن از تقویم \"{calendar}\" حذف می شود.","با این کار {taskCount} کار تکمیل شده و وظایف فرعی آن از تقویم \"{calendar}\" حذف می شود."],
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["{failedCount} کار حذف نشد.","{failedCount} کار حذف نشد."],
+    "Select tags to filter by" : "Select tags to filter by",
     "Add an important task to \"{calendar}\"…" : "یک وظیفه مهم به \"{calendar}\" اضافه کنید…",
     "Add a task due today to \"{calendar}\"…" : "اضافه کردن وظیفه امروز به \"{calendar}\"…",
     "Add a current task to \"{calendar}\"…" : "یک وظیفه فعلی را به \"{calendar}\" اضافه کنید…",

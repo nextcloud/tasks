@@ -30,6 +30,7 @@ OC.L10N.register(
     "Empty trash bin" : "Tühjenda prügikast",
     "Cancel" : "Loobu",
     "Close" : "Sulge",
+    "Select tags to filter by" : "Vali sildid, mille järgi filtreerida",
     "Change sort order" : "Muuda sorteerimisjärjekorda",
     "Start date" : "Alguskuupäev",
     "Due date" : "Tähtaeg",
