@@ -30,9 +30,17 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:calendar-id="calendarId"
 					:disabled="calendar.readOnly"
 					collection-id="uncompleted" />
-				<h2 v-show="closedCount(calendarId)" class="heading heading--hiddentasks reactive" @click="toggleHidden">
-					<span class="heading__name icon-triangle-s">{{ closedCountString }}</span>
-				</h2>
+				<NcButton v-if="closedCount(calendarId)"
+					alignment="center-reverse"
+					type="tertiary"
+					class="reactive heading"
+					@click="toggleHidden">
+					<template #icon>
+						<ChevronUp v-if="showHidden" />
+						<ChevronDown v-else />
+					</template>
+					{{ closedCountString }}
+				</NcButton>
 				<TaskDragContainer v-if="showHidden"
 					:tasks="closedRootTasks(calendar.tasks)"
 					:calendar-id="calendarId"
@@ -53,6 +61,11 @@ import LoadCompletedButton from '../../components/LoadCompletedButton.vue'
 import TaskDragContainer from '../../components/TaskDragContainer.vue'
 import './task-list.scss'
 
+import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
+
+import ChevronDown from 'vue-material-design-icons/ChevronDown.vue'
+import ChevronUp from 'vue-material-design-icons/ChevronUp.vue'
+
 import { translatePlural as n } from '@nextcloud/l10n'
 
 import { mapGetters } from 'vuex'
@@ -63,6 +76,9 @@ export default {
 		LoadCompletedButton,
 		TaskDragContainer,
 		DeleteCompletedModal,
+		NcButton,
+		ChevronDown,
+		ChevronUp,
 	},
 	props: {
 		calendarId: {

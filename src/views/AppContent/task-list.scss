@@ -41,20 +41,6 @@ $breakpoint-mobile: 1024px;
 			padding-left: 15px;
 		}
 
-		&--hiddentasks {
-			margin-bottom: 0;
-
-			.heading__name {
-				display: inline-block;
-				padding-right: 16px;
-				background-position: right center;
-				cursor: pointer;
-				&:hover {
-					opacity: .7;
-				}
-			}
-		}
-
 		&__name {
 			font-weight: bold;
 			font-size: 16px;
