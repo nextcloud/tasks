@@ -90,6 +90,7 @@
     "Open your browser console for more details" : "Obriu la consola del navegador per veure més detalls",
     "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["Això esborrarà {taskCount} tasques i subtasques completades del calendari \"{calendar}\".","This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"."],
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["{failedCount} tasques no s'han pogut esborrar..","No s'han pogut suprimit {failedCount} tasques."],
+    "Select tags to filter by" : "Seleccioneu les etiquetes que voleu filtrar",
     "Add an important task to \"{calendar}\"…" : "Afegeix una tasca important a \"{calendar}”…",
     "Add a task due today to \"{calendar}\"…" : "Afegeix un tasca per a avui a \"{calendar}\"…",
     "Add a current task to \"{calendar}\"…" : "Afegeix una tasca en curs a \"{calendar}\"…",

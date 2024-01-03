@@ -87,6 +87,7 @@ OC.L10N.register(
     "Open your browser console for more details" : "Отворете конзолата на браузъра си за повече подробности",
     "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["Това ще изтрие {taskCount} завършените задачи и техните подзадачи от календара \"{calendar}\".","Това ще изтрие {taskCount} завършени задачи и техните подзадачи от календара \"{calendar}\"."],
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["Задачите от {failedCount} не можаха да бъдат изтрити.","Задачите от {failedCount} не можаха да бъдат изтрити."],
+    "Select tags to filter by" : "Филтриране по етикет",
     "Add an important task to \"{calendar}\"…" : "Добавя важна задача към \"{calendar}\"...",
     "Add a task due today to \"{calendar}\"…" : "Добавя задача с днешна дата на изпълнение към \"{calendar}\"...",
     "Add a current task to \"{calendar}\"…" : "Добавя текуща задача към \"{calendar}\"…",
