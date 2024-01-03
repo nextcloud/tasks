@@ -535,7 +535,7 @@ export default class Task {
 		let tags = []
 		for (const t of this.vtodo.getAllProperties('categories')) {
 			if (t) {
-				tags = tags.concat(t.getValues())
+				tags = tags.concat(t.getValues().filter(t => t))
 			}
 		}
 		return tags
