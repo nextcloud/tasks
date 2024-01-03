@@ -216,6 +216,11 @@ describe('task', () => {
 		expect(task.tags.length).toEqual(0)
 	})
 
+	it('Should show no tag if CATEGORIES parameter is empty.', () => {
+		const task = new Task(loadICS('vcalendars/vcalendar-categories-empty'), {})
+		expect(task.tags.length).toEqual(0)
+	})
+
 	it('Should remove status property when set to null', () => {
 		const task = new Task(loadICS('vcalendars/vcalendar-default'), {})
 		task.status = null
