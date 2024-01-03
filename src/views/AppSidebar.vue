@@ -92,6 +92,15 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				</template>
 				{{ t('tasks', 'Show in Calendar') }}
 			</NcActionLink>
+			<NcActionLink v-if="deckLink"
+				:href="deckLink"
+				:close-after-click="true"
+				target="_blank">
+				<template #icon>
+					<span class="material-design-icon icon-deck" />
+				</template>
+				{{ t('tasks', 'Show in Deck') }}
+			</NcActionLink>
 			<NcActionButton v-if="!readOnly"
 				:close-after-click="true"
 				@click="editSummary(true)">
@@ -543,6 +552,19 @@ export default {
 		},
 		calendarLink() {
 			return generateUrl(`apps/calendar/${this.calendarView}/${this.task.dueMoment.format('YYYY-MM-DD')}`)
+		},
+		deckLink() {
+			const deckAppPrefix = 'app-generated--deck--board-'
+			if (this.task.calendar.id.startsWith(deckAppPrefix)) {
+				const board = this.task.calendar.id.slice(deckAppPrefix.length)
+				if (this.task.uri.startsWith('card')) {
+					const card = this.task.uri.slice('card-'.length).replace('.ics', '')
+					return generateUrl(`apps/deck/#/board/${board}/card/${card}`)
+				} else {
+					return generateUrl(`apps/deck/#/board/${board}`)
+				}
+			}
+			return null
 		},
 		startDateString() {
 			if (this.task.startMoment.isValid()) {
