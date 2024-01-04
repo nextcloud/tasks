@@ -103,6 +103,7 @@ OC.L10N.register(
     "Load the completed tasks of all lists." : "加載所有列表的已完成任務。",
     "Loading the completed tasks of all lists might slow down the app." : "加載所有列表的已完成任務可能會降低應用程式的速度。",
     "Load the completed tasks of list \"{calendar}\"." : "加載「{calendar}」清單的已完成任務。",
+    "Loading the completed tasks might slow down the app." : "載入已完成工作可能會拖慢應用程式的速度。",
     "Change sort order" : "更改排序",
     "Relevance" : "相關性",
     "Sort by completed state, due date, priority, start date and summary." : "按完成狀態、到期日期、優先程度、開始日期與摘要排序。",

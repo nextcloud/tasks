@@ -1,6 +1,4 @@
-OC.L10N.register(
-    "tasks",
-    {
+{ "translations": {
     "Upcoming tasks" : "Upcoming tasks",
     "Important" : "Important",
     "Today" : "Today",
@@ -53,7 +51,7 @@ OC.L10N.register(
     "Trash bin" : "Trash bin",
     "Loading deleted calendars, tasks and events." : "Loading deleted calendars, tasks and events.",
     "You do not have any deleted calendars, tasks or events." : "You do not have any deleted calendars, tasks or events.",
-    "Name" : "Surname",
+    "Name" : "Name",
     "Deleted" : "Deleted",
     "Restore" : "Restore",
     "Delete permanently" : "Delete permanently",
@@ -249,5 +247,5 @@ OC.L10N.register(
     "An error occurred" : "An error occurred",
     "Create a task" : "Create a task",
     "Message from {author} in {conversationName}" : "Message from {author} in {conversationName}"
-},
-"nplurals=2; plural=(n != 1);");
+},"pluralForm" :"nplurals=2; plural=(n!=1);"
+}

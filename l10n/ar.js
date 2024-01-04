@@ -103,6 +103,7 @@ OC.L10N.register(
     "Load the completed tasks of all lists." : "حمّل المهام المُكتمِلة لجميع القوائم",
     "Loading the completed tasks of all lists might slow down the app." : "تحميل المهام المُكتمِلة لجميع القوائم يُمكن أن يُبطيء التطبيق.",
     "Load the completed tasks of list \"{calendar}\"." : "حمّل المهام المُكتملة للقائمة \"{calendar}\".",
+    "Loading the completed tasks might slow down the app." : "تحميل المهام المُنجزة يمكن أن يتسبب في تبطئة التطبيق.",
     "Change sort order" : "غيّر ترتيب الفرز",
     "Relevance" : "الصلة بالموضوع",
     "Sort by completed state, due date, priority, start date and summary." : "الترتيب بحسب الحالة إن كانت مكتملة أم لا، و تاريخ الاستحقاق، و الأولوية، و تاريخ البدء، و المُلخّص.",

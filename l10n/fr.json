@@ -101,6 +101,7 @@
     "Load the completed tasks of all lists." : "Charger les tâches accomplies pour toutes les listes.",
     "Loading the completed tasks of all lists might slow down the app." : "Charger les tâches accomplies de toutes les listes pourrait ralentir l'application.",
     "Load the completed tasks of list \"{calendar}\"." : "Charger les tâches accomplies de la liste \"{calendar}\".",
+    "Loading the completed tasks might slow down the app." : "Charger les tâches accomplies pourrait ralentir l'application.",
     "Change sort order" : "Modifier l'ordre de tri",
     "Relevance" : "Pertinence",
     "Sort by completed state, due date, priority, start date and summary." : "Trier par état d'avancement, date d'échéance, priorité, date de début et ordre alphabétique.",

@@ -101,6 +101,7 @@
     "Load the completed tasks of all lists." : "Load the completed tasks of all lists.",
     "Loading the completed tasks of all lists might slow down the app." : "Loading the completed tasks of all lists might slow down the app.",
     "Load the completed tasks of list \"{calendar}\"." : "Load the completed tasks of list \"{calendar}\".",
+    "Loading the completed tasks might slow down the app." : "Loading the completed tasks might slow down the app.",
     "Change sort order" : "Change sort order",
     "Relevance" : "Relevance",
     "Sort by completed state, due date, priority, start date and summary." : "Sort by completed state, due date, priority, start date and summary.",

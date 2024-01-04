@@ -53,7 +53,7 @@ OC.L10N.register(
     "Trash bin" : "Trash bin",
     "Loading deleted calendars, tasks and events." : "Loading deleted calendars, tasks and events.",
     "You do not have any deleted calendars, tasks or events." : "You do not have any deleted calendars, tasks or events.",
-    "Name" : "Surname",
+    "Name" : "Name",
     "Deleted" : "Deleted",
     "Restore" : "Restore",
     "Delete permanently" : "Delete permanently",
@@ -250,4 +250,4 @@ OC.L10N.register(
     "Create a task" : "Create a task",
     "Message from {author} in {conversationName}" : "Message from {author} in {conversationName}"
 },
-"nplurals=2; plural=(n != 1);");
+"nplurals=2; plural=(n!=1);");
