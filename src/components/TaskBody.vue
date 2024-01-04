@@ -78,7 +78,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<span class="calendar__name">{{ task.calendar.displayName }}</span>
 				</div>
 				<SortVariant v-if="hasHiddenSubtasks" :size="20" :title="t('tasks', 'Task has hidden subtasks')" />
-				<CalendarClock v-if="!overdue(task.startMoment) && task.start" :size="20" :title="t('tasks', 'Task has not yet started')" />
+				<CalendarClock v-if="!overdue(task.startMoment) && task.start" :size="20" :title="startDateString(task)" />
 				<Pin v-if="task.pinned" :size="20" :title="t('tasks', 'Task is pinned')" />
 				<TextBoxOutline v-if="task.note!=''"
 					:size="20"
@@ -188,6 +188,7 @@ import TaskStatusDisplay from './TaskStatusDisplay.vue'
 import TaskDragContainer from './TaskDragContainer.vue'
 import Task from '../models/task.js'
 import openNewTask from '../mixins/openNewTask.js'
+import { startDateString } from '../utils/dateStrings.js'
 
 import { emit } from '@nextcloud/event-bus'
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'
@@ -473,6 +474,7 @@ export default {
 	methods: {
 		t,
 		n,
+		startDateString,
 
 		...mapActions([
 			'toggleCompleted',
