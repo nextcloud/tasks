@@ -68,7 +68,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 									</div>
 								</div>
 								<div :key="`${item.url}date`" class="table__body table__body--deletedAt">
-									<Moment class="timestamp" :timestamp="item.deletedAt" />
+									<NcDateTime class="timestamp" :timestamp="item.deletedAt" :ignore-seconds="true" />
 								</div>
 								<div :key="`${item.url}action`" class="table__body">
 									<NcButton @click="restore(item)">
@@ -107,7 +107,6 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import Moment from './Moment.vue'
 import { uidToHexColor } from '../../utils/color.js'
 import logger from '../../utils/logger.js'
 
@@ -118,6 +117,7 @@ import NcAppNavigationItem from '@nextcloud/vue/dist/Components/NcAppNavigationI
 import NcActions from '@nextcloud/vue/dist/Components/NcActions.js'
 import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton.js'
 import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
+import NcDateTime from '@nextcloud/vue/dist/Components/NcDateTime.js'
 import NcEmptyContent from '@nextcloud/vue/dist/Components/NcEmptyContent.js'
 import NcLoadingIcon from '@nextcloud/vue/dist/Components/NcLoadingIcon.js'
 import NcModal from '@nextcloud/vue/dist/Components/NcModal.js'
@@ -136,10 +136,10 @@ export default {
 		NcEmptyContent,
 		NcLoadingIcon,
 		NcModal,
-		Moment,
 		NcActions,
 		NcActionButton,
 		NcButton,
+		NcDateTime,
 		DeleteForever,
 		Undo,
 	},
