@@ -114,14 +114,7 @@
     "Canceled" : "キャンセルされた",
     "Loading task from server." : "タスクをサーバーから読み込み中。",
     "Task not found!" : "タスクがありません！",
-    "[Starts today]" : "[今日開始]",
-    "[Starts tomorrow]" : "[明日開始]",
-    "[Started yesterday]" : "[昨日から]",
     "Set start date" : "開始日を設定",
-    "[Due today]" : "[今日まで]",
-    "[Due tomorrow]" : "[明日まで]",
-    "[Due on] LL" : "LL [まで]",
-    "[Was due yesterday]" : "[昨日が期限]",
     "Set due date" : "期限を設定",
     "Priority {priority}: low" : "優先度{priority}:低",
     "Priority {priority}: medium" : "優先度{priority}:中",
@@ -132,6 +125,8 @@
     "No tasks today" : "今日はタスクなし",
     "Mark as done" : "完了としてマーク",
     "No due date assigned" : "期限はありません",
+    "[Due today]" : "[今日まで]",
+    "[Due tomorrow]" : "[明日まで]",
     "[Due] L" : "L [まで]",
     "Successfully created the task." : "タスクの作成に成功しました",
     "Could not delete the task." : "タスクを削除できませんでした",
@@ -142,6 +137,11 @@
     "Successfully updated the task." : "タスクのアップデートに成功しました",
     "An error occurred" : "エラーが発生しました",
     "Create a task" : "タスクを作成する",
-    "Message from {author} in {conversationName}" : "{conversationName} で {author} からのメッセージ"
+    "Message from {author} in {conversationName}" : "{conversationName} で {author} からのメッセージ",
+    "[Due on] LL" : "LL [まで]",
+    "[Was due yesterday]" : "[昨日が期限]",
+    "[Starts today]" : "[今日開始]",
+    "[Starts tomorrow]" : "[明日開始]",
+    "[Started yesterday]" : "[昨日から]"
 },"pluralForm" :"nplurals=1; plural=0;"
 }

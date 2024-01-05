@@ -50,10 +50,10 @@ OC.L10N.register(
     "Reminders" : "Pengingat",
     "Repeat" : "Ulang",
     "Task not found!" : "Tugas tidak ditemukan!",
-    "[Starts today]" : "[Dimulai hari ini]",
     "Set start date" : "Atur tanggal mulai",
     "Set due date" : "Atur tanggal jatuh tempo",
     "Mark as done" : "Tandai sebagai selesai",
-    "An error occurred" : "Terjadi kesalahan"
+    "An error occurred" : "Terjadi kesalahan",
+    "[Starts today]" : "[Dimulai hari ini]"
 },
 "nplurals=1; plural=0;");
