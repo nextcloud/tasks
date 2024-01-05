@@ -101,9 +101,9 @@ export default {
 		 */
 		toggleTitle() {
 			if (this.showOptions) {
-				return this.t('calendar', 'Save')
+				return this.t('tasks', 'Save')
 			}
-			return this.t('calendar', 'Edit')
+			return this.t('tasks', 'Edit')
 		},
 	},
 	methods: {

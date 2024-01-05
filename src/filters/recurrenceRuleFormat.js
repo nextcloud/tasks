@@ -30,44 +30,44 @@ import moment from '@nextcloud/moment'
  */
 export default (recurrenceRule) => {
 	if (recurrenceRule.frequency === 'NONE') {
-		return t('calendar', 'Does not repeat')
+		return t('tasks', 'Does not repeat')
 	}
 
 	let freqPart = ''
 	if (recurrenceRule.interval === 1) {
 		switch (recurrenceRule.frequency) {
 		case 'DAILY':
-			freqPart = t('calendar', 'Daily')
+			freqPart = t('tasks', 'Daily')
 			break
 
 		case 'WEEKLY':
-			freqPart = t('calendar', 'Weekly')
+			freqPart = t('tasks', 'Weekly')
 			break
 
 		case 'MONTHLY':
-			freqPart = t('calendar', 'Monthly')
+			freqPart = t('tasks', 'Monthly')
 			break
 
 		case 'YEARLY':
-			freqPart = t('calendar', 'Yearly')
+			freqPart = t('tasks', 'Yearly')
 			break
 		}
 	} else {
 		switch (recurrenceRule.frequency) {
 		case 'DAILY':
-			freqPart = n('calendar', 'Every %n day', 'Every %n days', recurrenceRule.interval)
+			freqPart = n('tasks', 'Every %n day', 'Every %n days', recurrenceRule.interval)
 			break
 
 		case 'WEEKLY':
-			freqPart = n('calendar', 'Every %n week', 'Every %n weeks', recurrenceRule.interval)
+			freqPart = n('tasks', 'Every %n week', 'Every %n weeks', recurrenceRule.interval)
 			break
 
 		case 'MONTHLY':
-			freqPart = n('calendar', 'Every %n month', 'Every %n months', recurrenceRule.interval)
+			freqPart = n('tasks', 'Every %n month', 'Every %n months', recurrenceRule.interval)
 			break
 
 		case 'YEARLY':
-			freqPart = n('calendar', 'Every %n year', 'Every %n years', recurrenceRule.interval)
+			freqPart = n('tasks', 'Every %n year', 'Every %n years', recurrenceRule.interval)
 			break
 		}
 	}
@@ -76,7 +76,7 @@ export default (recurrenceRule) => {
 	if (recurrenceRule.frequency === 'WEEKLY' && recurrenceRule.byDay.length !== 0) {
 		const formattedDays = getTranslatedByDaySet(recurrenceRule.byDay)
 
-		limitPart = n('calendar', 'on {weekday}', 'on {weekdays}', recurrenceRule.byDay.length, {
+		limitPart = n('tasks', 'on {weekday}', 'on {weekdays}', recurrenceRule.byDay.length, {
 			weekday: formattedDays,
 			weekdays: formattedDays,
 		})
@@ -84,14 +84,14 @@ export default (recurrenceRule) => {
 		if (recurrenceRule.byMonthDay.length !== 0) {
 			const dayOfMonthList = recurrenceRule.byMonthDay.join(', ')
 
-			limitPart = n('calendar', 'on day {dayOfMonthList}', 'on days {dayOfMonthList}', recurrenceRule.byMonthDay.length, {
+			limitPart = n('tasks', 'on day {dayOfMonthList}', 'on days {dayOfMonthList}', recurrenceRule.byMonthDay.length, {
 				dayOfMonthList,
 			})
 		} else {
 			const ordinalNumber = getTranslatedOrdinalNumber(recurrenceRule.bySetPosition)
 			const byDaySet = getTranslatedByDaySet(recurrenceRule.byDay)
 
-			limitPart = t('calendar', 'on the {ordinalNumber} {byDaySet}', {
+			limitPart = t('tasks', 'on the {ordinalNumber} {byDaySet}', {
 				ordinalNumber,
 				byDaySet,
 			})
@@ -100,14 +100,14 @@ export default (recurrenceRule) => {
 		const monthNames = getTranslatedMonths(recurrenceRule.byMonth)
 
 		if (recurrenceRule.byDay.length === 0) {
-			limitPart = t('calendar', 'in {monthNames}', {
+			limitPart = t('tasks', 'in {monthNames}', {
 				monthNames,
 			})
 		} else {
 			const ordinalNumber = getTranslatedOrdinalNumber(recurrenceRule.bySetPosition)
 			const byDaySet = getTranslatedByDaySet(recurrenceRule.byDay)
 
-			limitPart = t('calendar', 'in {monthNames} on the {ordinalNumber} {byDaySet}', {
+			limitPart = t('tasks', 'in {monthNames} on the {ordinalNumber} {byDaySet}', {
 				monthNames,
 				ordinalNumber,
 				byDaySet,
@@ -119,11 +119,11 @@ export default (recurrenceRule) => {
 	if (recurrenceRule.until !== null) {
 		const untilDate = moment(recurrenceRule.until).format('L')
 
-		endPart = t('calendar', 'until {untilDate}', {
+		endPart = t('tasks', 'until {untilDate}', {
 			untilDate,
 		})
 	} else if (recurrenceRule.count !== null) {
-		endPart = n('calendar', '%n time', '%n times', recurrenceRule.count)
+		endPart = n('tasks', '%n time', '%n times', recurrenceRule.count)
 	}
 
 	return [
@@ -204,25 +204,25 @@ function getTranslatedMonths(byMonthList) {
 function getTranslatedOrdinalNumber(bySetPositionNum) {
 	switch (bySetPositionNum) {
 	case 1:
-		return t('calendar', 'first')
+		return t('tasks', 'first')
 
 	case 2:
-		return t('calendar', 'second')
+		return t('tasks', 'second')
 
 	case 3:
-		return t('calendar', 'third')
+		return t('tasks', 'third')
 
 	case 4:
-		return t('calendar', 'fourth')
+		return t('tasks', 'fourth')
 
 	case 5:
-		return t('calendar', 'fifth')
+		return t('tasks', 'fifth')
 
 	case -2:
-		return t('calendar', 'second to last')
+		return t('tasks', 'second to last')
 
 	case -1:
-		return t('calendar', 'last')
+		return t('tasks', 'last')
 
 	default:
 		return ''
