@@ -339,7 +339,7 @@ export default class Task {
 	 * @readonly
 	 * @memberof Task
 	 */
-	get recurrence() {
+	get recurrenceRule() {
 		if (this._recurrence === undefined || this._recurrence === null) {
 			return getDefaultRecurrenceRuleObject()
 		}
@@ -751,7 +751,7 @@ export default class Task {
 	 */
 	completeRecurring() {
 		// Get recurrence iterator, starting at start date
-		const iter = this.recurrence.iterator(this.start)
+		const iter = this.recurrenceRule.iterator(this.start)
 		// Skip the start date itself
 		iter.next()
 		// If there is a next recurrence, update the start date to next recurrence date
