@@ -45,12 +45,28 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<template v-else>
 						<h2>{{ t('tasks', 'Trash bin') }}</h2>
 						<div class="table">
-							<div class="table__header">
+							<NcButton class="table__header sort-button sort-button--summary"
+								:class="{ 'sort-button--active': sortOrder === 'summary' }"
+								alignment="center-reverse"
+								type="tertiary"
+								@click="setSortOrder('summary')">
+								<template #icon>
+									<MenuDown v-if="sortDirection && sortOrder === 'summary'" />
+									<MenuUp v-else />
+								</template>
 								{{ t('tasks', 'Name') }}
-							</div>
-							<div class="table__header table__header--deletedAt">
+							</NcButton>
+							<NcButton class="table__header table__header--deletedAt sort-button sort-button--deletedAt"
+								:class="{ 'sort-button--active': sortOrder === 'deletedAt' }"
+								alignment="center"
+								type="tertiary"
+								@click="setSortOrder('deletedAt')">
+								<template #icon>
+									<MenuDown v-if="sortDirection && sortOrder === 'deletedAt'" />
+									<MenuUp v-else />
+								</template>
 								{{ t('tasks', 'Deleted') }}
-							</div>
+							</NcButton>
 							<div class="table__header">
 								&nbsp;
 							</div>
@@ -60,7 +76,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 										:style="{ 'background-color': item.color }" />
 									<div class="item-description">
 										<div class="item-description__mainline">
-											{{ item.name }}
+											{{ item.summary }}
 										</div>
 										<div v-if="item.subline" class="item-description__subline">
 											{{ item.subline }}
@@ -109,6 +125,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 <script>
 import { uidToHexColor } from '../../utils/color.js'
 import logger from '../../utils/logger.js'
+import { sort } from '../../store/storeHelper.js'
 
 import { showError } from '@nextcloud/dialogs'
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'
@@ -124,6 +141,8 @@ import NcModal from '@nextcloud/vue/dist/Components/NcModal.js'
 
 import Delete from 'vue-material-design-icons/Delete.vue'
 import DeleteForever from 'vue-material-design-icons/DeleteForever.vue'
+import MenuDown from 'vue-material-design-icons/MenuDown.vue'
+import MenuUp from 'vue-material-design-icons/MenuUp.vue'
 import Undo from 'vue-material-design-icons/Undo.vue'
 
 import { mapGetters } from 'vuex'
@@ -141,12 +160,16 @@ export default {
 		NcButton,
 		NcDateTime,
 		DeleteForever,
+		MenuDown,
+		MenuUp,
 		Undo,
 	},
 	data() {
 		return {
 			showModal: false,
 			loading: true,
+			sortDirection: false,
+			sortOrder: 'deletedAt',
 		}
 	},
 	computed: {
@@ -160,26 +183,26 @@ export default {
 				calendar,
 				type: 'calendar',
 				key: calendar.url,
-				name: calendar.displayname,
+				summary: calendar.displayname,
 				url: calendar._url,
 				deletedAt: calendar._props['{http://nextcloud.com/ns}deleted-at'],
 				color: calendar.color ?? uidToHexColor(calendar.displayname),
 			}))
 			const formattedCalendarObjects = this.objects.map(vobject => {
-				let name
+				let summary
 				try {
-					name = vobject?.calendarComponent.getComponentIterator().next().value?.title
+					summary = vobject?.calendarComponent.getComponentIterator().next().value?.title
 				} catch (e) {
 				}
-				if (!name) {
+				if (!summary) {
 					if (vobject.objectType === 'VTODO') {
-						name = t('tasks', 'Untitled task')
+						summary = t('tasks', 'Untitled task')
 					} else if (vobject.objectType === 'VEVENT') {
-						name = t('tasks', 'Untitled event')
+						summary = t('tasks', 'Untitled event')
 					} else if (vobject.objectType === 'VJOURNAL') {
-						name = t('tasks', 'Untitled journal')
+						summary = t('tasks', 'Untitled journal')
 					} else {
-						name = t('tasks', 'Untitled item')
+						summary = t('tasks', 'Untitled item')
 					}
 				}
 				let subline = vobject.calendar?.displayName || t('tasks', 'Unknown calendar')
@@ -198,7 +221,7 @@ export default {
 					vobject,
 					type: 'object',
 					key: vobject.id,
-					name,
+					summary,
 					subline,
 					url: vobject.uri,
 					deletedAt: vobject.dav._props['{http://nextcloud.com/ns}deleted-at'],
@@ -206,7 +229,9 @@ export default {
 				}
 			})
 
-			return formattedCalendars.concat(formattedCalendarObjects).sort((item1, item2) => item2.deletedAt - item1.deletedAt)
+			const items = formattedCalendars.concat(formattedCalendarObjects).sort((item1, item2) => item2.deletedAt - item1.deletedAt)
+
+			return sort(items, this.sortOrder, this.sortDirection)
 
 		},
 		retentionDuration() {
@@ -218,6 +243,15 @@ export default {
 	methods: {
 		t,
 		n,
+
+		setSortOrder(sortOrder) {
+			if (this.sortOrder === sortOrder) {
+				this.sortDirection = !this.sortDirection
+			} else {
+				this.sortDirection = false
+				this.sortOrder = sortOrder
+			}
+		},
 
 		async onShow() {
 			this.showModal = true
@@ -312,6 +346,27 @@ export default {
 	margin: 2vw;
 }
 
+:deep(.table__header).sort-button {
+	.button-vue__icon {
+		transition-timing-function: linear;
+		transition-duration: .1s;
+		transition-property: opacity;
+		opacity: 0;
+	}
+
+	&--summary {
+		margin-left: 17px;
+	}
+
+	&:hover,
+	&--active,
+	&:active {
+		.button-vue__icon {
+			opacity: 1;
+		}
+	}
+}
+
 .table {
 	display: grid;
 	grid-template-columns: minmax(200px, 1fr) max-content max-content;
@@ -330,6 +385,10 @@ export default {
 		&--deletedAt {
 			justify-content: right;
 		}
+	}
+
+	&__body--deletedAt {
+		padding-right: 16px !important;
 	}
 
 	& > div {
