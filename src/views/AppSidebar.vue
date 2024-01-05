@@ -224,8 +224,8 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					@add-tag="updateTag"
 					@set-tags="updateTags" />
 				<RepeatItem v-show="!readOnly || task.recurring"
-					:recurrence="task.recurrence"
-					:disabled="readOnly"
+					:recurrence-rule="task.recurrenceRule"
+					:disabled="false"
 					:placeholder="t('tasks', 'No recurrence')"
 					icon="IconRepeat" />
 			</div>

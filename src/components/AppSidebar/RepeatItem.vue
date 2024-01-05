@@ -27,7 +27,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			<component :is="icon" :size="20" />
 		</div>
 		<RepeatSummary class="property-repeat__summary__content"
-			:recurrence-rule="recurrence" />
+			:recurrence-rule="recurrenceRule" />
 		<Actions>
 			<ActionButton @click="toggleOptions">
 				<template #icon>
@@ -38,7 +38,9 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		</Actions>
 
 		<div v-if="showOptions" class="property-repeat__options">
-			options
+			options {{ recurrenceRule.interval }}
+			<RepeatFreqInterval :frequency="recurrenceRule.frequency"
+				:interval="recurrenceRule.interval" />
 		</div>
 	</div>
 </template>
@@ -47,6 +49,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 import { translate as t } from '@nextcloud/l10n'
 import RepeatSummary from './RepeatItem/RepeatSummary.vue'
+import RepeatFreqInterval from './RepeatItem/RepeatFreqInterval.vue'
 import Pencil from 'vue-material-design-icons/Pencil.vue'
 import Check from 'vue-material-design-icons/Check.vue'
 import { NcActions as Actions, NcActionButton as ActionButton } from '@nextcloud/vue'
@@ -54,13 +57,14 @@ import { NcActions as Actions, NcActionButton as ActionButton } from '@nextcloud
 export default {
 	components: {
 		RepeatSummary,
+		RepeatFreqInterval,
 		Actions,
 		ActionButton,
 		Pencil,
 		Check,
 	},
 	props: {
-		recurrence: {
+		recurrenceRule: {
 			type: Object,
 			required: true,
 		},
