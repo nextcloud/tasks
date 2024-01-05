@@ -232,6 +232,10 @@ function sort(tasks, sortOrder, sortDirection) {
 		comparators = [sortByPinned, sortAlphabetically, sortByPriority]
 		break
 	}
+	case 'summary': { // Used in the trashbin
+		comparators = [sortAlphabetically, sortByPriority]
+		break
+	}
 	case 'priority': {
 		comparators = [sortByPinned, sortByPriority, sortAlphabetically]
 		break
@@ -254,6 +258,10 @@ function sort(tasks, sortOrder, sortDirection) {
 	}
 	case 'completedDate': {
 		comparators = [sortByPinned, sortByCompletedDate, sortByPriority, sortAlphabetically]
+		break
+	}
+	case 'deletedAt': {
+		comparators = [sortByDeletedAt]
 		break
 	}
 	case 'manual': {
@@ -416,6 +424,17 @@ function sortByDate(taskA, taskB, date) {
  */
 function sortBySortOrder(taskA, taskB) {
 	return taskA.sortOrder - taskB.sortOrder
+}
+
+/**
+ * Comparator to compare two tasks by their deleted date
+ *
+ * @param {Task} taskA The first task
+ * @param {Task} taskB The second task
+ * @return {number}
+ */
+function sortByDeletedAt(taskA, taskB) {
+	return taskB.deletedAt - taskA.deletedAt
 }
 
 /**
