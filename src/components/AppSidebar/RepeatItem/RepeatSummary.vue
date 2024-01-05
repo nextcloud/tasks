@@ -23,7 +23,7 @@
 
 <template>
 	<span v-if="display">
-		{{ recurrenceRule | formatRecurrenceRule }}
+		{{ formatRecurrenceRule(recurrenceRule) }}
 	</span>
 	<span v-else>
 		{{ t('tasks', 'No recurrence') }}
@@ -32,13 +32,10 @@
 
 <script>
 import { translate as t } from '@nextcloud/l10n'
-import formatRecurrenceRule from '../../../filters/recurrenceRuleFormat.js'
+import formatRecurrenceRule from '../../../utils/recurrenceRuleFormat.js'
 
 export default {
 	name: 'RepeatSummary',
-	filters: {
-		formatRecurrenceRule,
-	},
 	props: {
 		/**
 		 * The recurrence-rule object as defined on the eventComponent
@@ -61,6 +58,7 @@ export default {
 	},
 	methods: {
 		t,
+		formatRecurrenceRule,
 	},
 }
 </script>
