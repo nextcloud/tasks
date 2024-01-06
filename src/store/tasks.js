@@ -488,6 +488,18 @@ const mutations = {
 	},
 
 	/**
+	 * Sets the location of a task
+	 *
+	 * @param {object} state The store data
+	 * @param {object} data Destructuring object
+	 * @param {Task} data.task The task
+	 * @param {string} data.location The location
+	 */
+	setLocation(state, { task, location }) {
+		Vue.set(task, 'location', location)
+	},
+
+	/**
 	 * Sets the classification of a task
 	 *
 	 * @param {object} state The store data
@@ -1189,6 +1201,20 @@ const actions = {
 		// check priority to comply with RFC5545 (to be between 0 and 9)
 		priority = (+priority < 0) ? 0 : (+priority > 9) ? 9 : Math.round(+priority)
 		context.commit('setPriority', { task, priority })
+		context.dispatch('updateTask', task)
+	},
+
+	/**
+	 * Sets the location of a task
+	 *
+	 * @param {object} context The store context
+	 * @param {Task} task The task to update
+	 */
+	async setLocation(context, { task, location }) {
+		if (location === task.location) {
+			return
+		}
+		context.commit('setLocation', { task, location })
 		context.dispatch('updateTask', task)
 	},
 

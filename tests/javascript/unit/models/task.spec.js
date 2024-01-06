@@ -253,4 +253,17 @@ describe('task', () => {
 		expect(task.matches('', { tags: ['cat1', 'cat2', 'cat3'] })).toEqual(true)
 		expect(task.matches('', { tags: ['cat1', 'cat2', 'cat3', 'cat4'] })).toEqual(false)
 	})
+
+	it('Should get the location.', () => {
+		const task = new Task(loadICS('vcalendars/vcalendar-default-location'), {})
+		expect(task.location).toEqual('Nextcloud Headquarter')
+	})
+
+	it('Should set and return the location.', () => {
+		const task = new Task(loadICS('vcalendars/vcalendar-default'), {})
+		expect(task.location).toEqual('')
+		const expected = 'Nextcloud Headquarter'
+		task.location = expected
+		expect(task.location).toEqual(expected)
+	})
 })
