@@ -168,6 +168,7 @@ OC.L10N.register(
     "Unpin" : "取消固定",
     "Pin" : "固定",
     "Show in Calendar" : "在日曆上顯示",
+    "Show in Deck" : "顯示在 Deck 中",
     "Edit summary" : "編輯摘要",
     "Details" : "細節",
     "Selecting a classification is forbidden, because the task was shared with you." : "由於任務已與您共享，您無法選擇分類。",

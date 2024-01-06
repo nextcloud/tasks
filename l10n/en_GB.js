@@ -168,6 +168,7 @@ OC.L10N.register(
     "Unpin" : "Unpin",
     "Pin" : "Pin",
     "Show in Calendar" : "Show in Calendar",
+    "Show in Deck" : "Show in Deck",
     "Edit summary" : "Edit summary",
     "Details" : "Details",
     "Selecting a classification is forbidden, because the task was shared with you." : "Selecting a classification is forbidden, because the task was shared with you.",
