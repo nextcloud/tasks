@@ -24,6 +24,7 @@
 import App from './App.vue'
 import router from './router.js'
 import store from './store/store.js'
+import TaskBody from './components/TaskBody.vue'
 
 import AlertBoxOutline from 'vue-material-design-icons/AlertBoxOutline.vue'
 import CalendarRemove from 'vue-material-design-icons/CalendarRemove.vue'
@@ -67,6 +68,13 @@ Vue.component('IconEyeOff', EyeOff)
 Vue.component('IconPulse', Pulse)
 // eslint-disable-next-line vue/match-component-file-name
 Vue.component('IconTrendingUp', TrendingUp)
+
+/**
+ * We import TaskBody here globally, because we have a circular dependency
+ * between TaskDragContainer and TaskBody which otherwise cannot be resolved.
+ */
+// eslint-disable-next-line vue/match-component-file-name
+Vue.component('TaskBody', TaskBody)
 
 if (!OCA.Tasks) {
 	/**
