@@ -266,4 +266,17 @@ describe('task', () => {
 		task.location = expected
 		expect(task.location).toEqual(expected)
 	})
+
+	it('Should get the URL.', () => {
+		const task = new Task(loadICS('vcalendars/vcalendar-default-url'), {})
+		expect(task.customUrl).toEqual('www.nextcloud.com')
+	})
+
+	it('Should set and return the URL.', () => {
+		const task = new Task(loadICS('vcalendars/vcalendar-default'), {})
+		expect(task.customUrl).toEqual('')
+		const expected = 'www.nextcloud.com'
+		task.customUrl = expected
+		expect(task.customUrl).toEqual(expected)
+	})
 })

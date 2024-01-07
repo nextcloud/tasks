@@ -117,6 +117,7 @@ export default class Task {
 		this._class = this.vtodo.getFirstPropertyValue('class') || 'PUBLIC'
 		this._pinned = this.vtodo.getFirstPropertyValue('x-pinned') === 'true'
 		this._location = this.vtodo.getFirstPropertyValue('location') || ''
+		this._customUrl = this.vtodo.getFirstPropertyValue('url') || ''
 
 		let sortOrder = this.vtodo.getFirstPropertyValue('x-apple-sort-order')
 		if (sortOrder === null) {
@@ -373,6 +374,20 @@ export default class Task {
 		}
 		this.updateLastModified()
 		this._location = this.vtodo.getFirstPropertyValue('location') || ''
+	}
+
+	get customUrl() {
+		return this._customUrl
+	}
+
+	set customUrl(url) {
+		if (url === null) {
+			this.vtodo.removeProperty('url')
+		} else {
+			this.vtodo.updatePropertyWithValue('url', url)
+		}
+		this.updateLastModified()
+		this._customUrl = this.vtodo.getFirstPropertyValue('url') || ''
 	}
 
 	get note() {
