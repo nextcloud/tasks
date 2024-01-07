@@ -192,6 +192,17 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						<Percent :size="20" />
 					</template>
 				</SliderItem>
+				<TextItem v-show="!readOnly || task.location"
+					:value="task.location"
+					:property-string="task.location || t('tasks', 'Set a location')"
+					:read-only="readOnly"
+					:color="task.location ? '#4271a6' : null"
+					:task="task"
+					@set-value="({task, value}) => setLocation({ task, location: value })">
+					<template #icon>
+						<MapMarker :size="20" />
+					</template>
+				</TextItem>
 				<TagsItem v-show="!readOnly || task.tags.length > 0"
 					:options="tags"
 					:tags="task.tags"
@@ -248,6 +259,7 @@ import CalendarPickerItem from '../components/AppSidebar/CalendarPickerItem.vue'
 import MultiselectItem from '../components/AppSidebar/MultiselectItem.vue'
 import SliderItem from '../components/AppSidebar/SliderItem.vue'
 import TagsItem from '../components/AppSidebar/TagsItem.vue'
+import TextItem from '../components/AppSidebar/TextItem.vue'
 import NotesItem from '../components/AppSidebar/NotesItem.vue'
 import TaskCheckbox from '../components/TaskCheckbox.vue'
 // import TaskStatusDisplay from '../components/TaskStatusDisplay'
@@ -272,6 +284,7 @@ import Delete from 'vue-material-design-icons/Delete.vue'
 import Download from 'vue-material-design-icons/Download.vue'
 import InformationOutline from 'vue-material-design-icons/InformationOutline.vue'
 import Magnify from 'vue-material-design-icons/Magnify.vue'
+import MapMarker from 'vue-material-design-icons/MapMarker.vue'
 import Pencil from 'vue-material-design-icons/Pencil.vue'
 import Percent from 'vue-material-design-icons/Percent.vue'
 import Pin from 'vue-material-design-icons/Pin.vue'
@@ -298,6 +311,7 @@ export default {
 		Download,
 		InformationOutline,
 		Magnify,
+		MapMarker,
 		Pencil,
 		Percent,
 		Pin,
@@ -309,6 +323,7 @@ export default {
 		MultiselectItem,
 		SliderItem,
 		TagsItem,
+		TextItem,
 		CalendarPickerItem,
 		NotesItem,
 		TaskCheckbox,
@@ -674,6 +689,7 @@ export default {
 			'setSummary',
 			'setNote',
 			'setPriority',
+			'setLocation',
 			'setPercentComplete',
 			'setTags',
 			'addTag',

@@ -116,6 +116,7 @@ export default class Task {
 		this._createdMoment = moment(this._created, 'YYYYMMDDTHHmmss')
 		this._class = this.vtodo.getFirstPropertyValue('class') || 'PUBLIC'
 		this._pinned = this.vtodo.getFirstPropertyValue('x-pinned') === 'true'
+		this._location = this.vtodo.getFirstPropertyValue('location') || ''
 
 		let sortOrder = this.vtodo.getFirstPropertyValue('x-apple-sort-order')
 		if (sortOrder === null) {
@@ -140,7 +141,7 @@ export default class Task {
 	 * Update linked calendar of this task
 	 *
 	 * @param {object} calendar the calendar
-	 * @memberof Contact
+	 * @memberof Task
 	 */
 	updateCalendar(calendar) {
 		this.calendar = calendar
@@ -358,6 +359,20 @@ export default class Task {
 		}
 		this.updateLastModified()
 		this._status = this.vtodo.getFirstPropertyValue('status')
+	}
+
+	get location() {
+		return this._location
+	}
+
+	set location(location) {
+		if (location === null) {
+			this.vtodo.removeProperty('location')
+		} else {
+			this.vtodo.updatePropertyWithValue('location', location)
+		}
+		this.updateLastModified()
+		this._location = this.vtodo.getFirstPropertyValue('location') || ''
 	}
 
 	get note() {
