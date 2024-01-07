@@ -24,6 +24,7 @@ OC.L10N.register(
     "Export" : "Xuất ra",
     "Delete" : "Xóa",
     "Unshare" : "Bỏ chia sẽ",
+    "List name" : "Danh sách tên",
     "Calendar link copied to clipboard." : "Liên kết của lịch đã được sao chép vào bảng tạm.",
     "Calendar link could not be copied to clipboard." : "liên kết của lịch không thể sao chép vào bảng tạm.",
     "The name \"{calendar}\" is already used." : "Tên \"{calendar}\" đã được sử dụng.",
@@ -65,6 +66,8 @@ OC.L10N.register(
     "When shared show only busy" : "Khi được chia sẻ thì chỉ thể hiện đang bận",
     "When shared hide this event" : "Khi được chia sẻ thì ẩn sự kiện này đi",
     "Canceled" : "Đã bị hủy",
-    "An error occurred" : "Có lỗi đã xảy ra"
+    "Mark as done" : "Đánh dấu là đã hoàn thành",
+    "An error occurred" : "Có lỗi đã xảy ra",
+    "Message from {author} in {conversationName}" : "Tin nhắn từ {author} trong {conversationName}"
 },
 "nplurals=1; plural=0;");
