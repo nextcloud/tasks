@@ -2,3 +2,4 @@
 
 script('tasks', 'tasks-main');
 style('tasks', 'tasks-main');
+style('tasks', 'tasks-store');
