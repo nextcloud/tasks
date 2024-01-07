@@ -53,6 +53,18 @@ SUMMARY:Test 1
 LOCATION:Nextcloud Headquarter
 END:VTODO
 END:VCALENDAR`,
+		'vcalendars/vcalendar-default-url': `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Nextcloud Tasks 0.11.3
+BEGIN:VTODO
+CREATED:20181119T183919
+DTSTAMP:20190918T095816
+LAST-MODIFIED:20190918T095816
+UID:pwen4kz54g
+SUMMARY:Test 1
+URL:www.nextcloud.com
+END:VTODO
+END:VCALENDAR`,
 		'vcalendars/vcalendar-reltype-child': `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Nextcloud Tasks 0.11.3

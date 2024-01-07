@@ -500,6 +500,18 @@ const mutations = {
 	},
 
 	/**
+	 * Sets the url of a task
+	 *
+	 * @param {object} state The store data
+	 * @param {object} data Destructuring object
+	 * @param {Task} data.task The task
+	 * @param {string} data.url The url
+	 */
+	setUrl(state, { task, url }) {
+		Vue.set(task, 'customUrl', url)
+	},
+
+	/**
 	 * Sets the classification of a task
 	 *
 	 * @param {object} state The store data
@@ -1215,6 +1227,20 @@ const actions = {
 			return
 		}
 		context.commit('setLocation', { task, location })
+		context.dispatch('updateTask', task)
+	},
+
+	/**
+	 * Sets the URL of a task
+	 *
+	 * @param {object} context The store context
+	 * @param {Task} task The task to update
+	 */
+	async setUrl(context, { task, url }) {
+		if (url === task.customUrl) {
+			return
+		}
+		context.commit('setUrl', { task, url })
 		context.dispatch('updateTask', task)
 	},
 

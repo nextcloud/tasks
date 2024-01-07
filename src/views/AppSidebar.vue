@@ -203,6 +203,17 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						<MapMarker :size="20" />
 					</template>
 				</TextItem>
+				<TextItem v-show="!readOnly || task.customUrl"
+					:value="task.customUrl"
+					:property-string="task.customUrl || t('tasks', 'Set a URL')"
+					:read-only="readOnly"
+					:color="task.customUrl ? '#4271a6' : null"
+					:task="task"
+					@set-value="({task, value}) => setUrl({ task, url: value })">
+					<template #icon>
+						<Web :size="20" />
+					</template>
+				</TextItem>
 				<TagsItem v-show="!readOnly || task.tags.length > 0"
 					:options="tags"
 					:tags="task.tags"
@@ -292,6 +303,7 @@ import PinOff from 'vue-material-design-icons/PinOff.vue'
 import Star from 'vue-material-design-icons/Star.vue'
 import TextBoxOutline from 'vue-material-design-icons/TextBoxOutline.vue'
 import Undo from 'vue-material-design-icons/Undo.vue'
+import Web from 'vue-material-design-icons/Web.vue'
 
 import { mapGetters, mapActions } from 'vuex'
 
@@ -319,6 +331,7 @@ export default {
 		Star,
 		TextBoxOutline,
 		Undo,
+		Web,
 		NcEmptyContent,
 		MultiselectItem,
 		SliderItem,
@@ -690,6 +703,7 @@ export default {
 			'setNote',
 			'setPriority',
 			'setLocation',
+			'setUrl',
 			'setPercentComplete',
 			'setTags',
 			'addTag',
