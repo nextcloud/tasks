@@ -1,11 +1,15 @@
 import Week from '../../../../../src/views/AppContent/Week.vue'
 import router from '../../../../../src/router.js'
+import TaskBody from '../../../../../src/components/TaskBody.vue'
 
 import { store, localVue } from '../../setupStore.js'
 
 import { mount } from '@vue/test-utils'
 
 import { describe, expect, it, vi } from 'vitest'
+
+import Vue from 'vue'
+Vue.component('TaskBody', TaskBody)
 
 describe('Week.vue', async () => {
 	'use strict'
