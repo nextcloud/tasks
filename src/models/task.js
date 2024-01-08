@@ -94,16 +94,16 @@ export default class Task {
 		const comp = this.vtodo.getFirstPropertyValue('completed')
 		this._completed = !!comp
 		this._completedDate = comp ? comp.toJSDate() : null
-		this._completedDateMoment = moment(this._completedDate, 'YYYYMMDDTHHmmss')
+		this._completedDateMoment = moment(this._completedDate, 'YYYYMMDDTHHmmssZ')
 		this._status = this.vtodo.getFirstPropertyValue('status')
 		this._note = this.vtodo.getFirstPropertyValue('description') || ''
 		this._related = this.getParent()?.getFirstValue() || null
 		this._hideSubtaks = +this.vtodo.getFirstPropertyValue('x-oc-hidesubtasks') || 0
 		this._hideCompletedSubtaks = +this.vtodo.getFirstPropertyValue('x-oc-hidecompletedsubtasks') || 0
 		this._start = this.vtodo.getFirstPropertyValue('dtstart')
-		this._startMoment = moment(this._start, 'YYYYMMDDTHHmmss')
+		this._startMoment = moment(this._start, 'YYYYMMDDTHHmmssZ')
 		this._due = this.vtodo.getFirstPropertyValue('due')
-		this._dueMoment = moment(this._due, 'YYYYMMDDTHHmmss')
+		this._dueMoment = moment(this._due, 'YYYYMMDDTHHmmssZ')
 		const start = this.vtodo.getFirstPropertyValue('dtstart')
 		const due = this.vtodo.getFirstPropertyValue('due')
 		const d = due || start
@@ -111,9 +111,9 @@ export default class Task {
 		this._loaded = false
 		this._tags = this.getTags()
 		this._modified = this.vtodo.getFirstPropertyValue('last-modified')
-		this._modifiedMoment = moment(this._modified, 'YYYYMMDDTHHmmss')
+		this._modifiedMoment = moment(this._modified, 'YYYYMMDDTHHmmssZ')
 		this._created = this.vtodo.getFirstPropertyValue('created')
-		this._createdMoment = moment(this._created, 'YYYYMMDDTHHmmss')
+		this._createdMoment = moment(this._created, 'YYYYMMDDTHHmmssZ')
 		this._class = this.vtodo.getFirstPropertyValue('class') || 'PUBLIC'
 		this._pinned = this.vtodo.getFirstPropertyValue('x-pinned') === 'true'
 		this._location = this.vtodo.getFirstPropertyValue('location') || ''
@@ -308,7 +308,7 @@ export default class Task {
 	}
 
 	setCompleted(completed) {
-		const now = ICAL.Time.now()
+		const now = ICAL.Time.fromJSDate(new Date(), true)
 		if (completed) {
 			this.vtodo.updatePropertyWithValue('completed', now)
 		} else {
@@ -317,7 +317,7 @@ export default class Task {
 		this.updateLastModified()
 		this._completed = completed
 		this._completedDate = completed ? now.toJSDate() : null
-		this._completedDateMoment = moment(this._completedDate, 'YYYYMMDDTHHmmss')
+		this._completedDateMoment = moment(this._completedDate, 'YYYYMMDDTHHmmssZ')
 	}
 
 	get completedDate() {
@@ -474,6 +474,10 @@ export default class Task {
 	}
 
 	set start(start) {
+		this.setStart(start)
+	}
+
+	setStart(start) {
 		if (start) {
 			this.vtodo.updatePropertyWithValue('dtstart', start)
 		} else {
@@ -481,7 +485,7 @@ export default class Task {
 		}
 		this.updateLastModified()
 		this._start = this.vtodo.getFirstPropertyValue('dtstart')
-		this._startMoment = moment(this._start, 'YYYYMMDDTHHmmss')
+		this._startMoment = moment(this._start, 'YYYYMMDDTHHmmssZ')
 		// Check all day setting
 		const d = this._due || this._start
 		this._allDay = d !== null && d.isDate
@@ -496,6 +500,10 @@ export default class Task {
 	}
 
 	set due(due) {
+		this.setDue(due)
+	}
+
+	setDue(due) {
 		if (due) {
 			this.vtodo.updatePropertyWithValue('due', due)
 		} else {
@@ -503,7 +511,7 @@ export default class Task {
 		}
 		this.updateLastModified()
 		this._due = this.vtodo.getFirstPropertyValue('due')
-		this._dueMoment = moment(this._due, 'YYYYMMDDTHHmmss')
+		this._dueMoment = moment(this._due, 'YYYYMMDDTHHmmssZ')
 		// Check all day setting
 		const d = this._due || this._start
 		this._allDay = d !== null && d.isDate
@@ -518,21 +526,30 @@ export default class Task {
 	}
 
 	set allDay(allDay) {
-		let start = this.vtodo.getFirstPropertyValue('dtstart')
+		const start = this.vtodo.getFirstPropertyValue('dtstart')
 		if (start) {
 			start.isDate = allDay
-			this.vtodo.updatePropertyWithValue('dtstart', start)
+			if (!allDay) {
+				// If we converted to datetime, we set the hour to zero in the current timezone.
+				const startJs = start.toJSDate()
+				startJs.setHours(0)
+				this.setStart(ICAL.Time.fromJSDate(startJs, true))
+			} else {
+				this.setStart(start)
+			}
 		}
-		let due = this.vtodo.getFirstPropertyValue('due')
+		const due = this.vtodo.getFirstPropertyValue('due')
 		if (due) {
 			due.isDate = allDay
-			this.vtodo.updatePropertyWithValue('due', due)
+			if (!allDay) {
+				// If we converted to datetime, we set the hour to zero in the current timezone.
+				const dueJs = due.toJSDate()
+				dueJs.setHours(0)
+				this.setDue(ICAL.Time.fromJSDate(dueJs, true))
+			} else {
+				this.setDue(due)
+			}
 		}
-		this.updateLastModified()
-		start = this.vtodo.getFirstPropertyValue('dtstart')
-		due = this.vtodo.getFirstPropertyValue('due')
-		const d = due || start
-		this._allDay = d !== null && d.isDate
 	}
 
 	get comments() {
@@ -613,11 +630,11 @@ export default class Task {
 	}
 
 	updateLastModified() {
-		const now = ICAL.Time.now()
+		const now = ICAL.Time.fromJSDate(new Date(), true)
 		this.vtodo.updatePropertyWithValue('last-modified', now)
 		this.vtodo.updatePropertyWithValue('dtstamp', now)
 		this._modified = now
-		this._modifiedMoment = moment(this._modified, 'YYYYMMDDTHHmmss')
+		this._modifiedMoment = moment(this._modified, 'YYYYMMDDTHHmmssZ')
 	}
 
 	get modified() {
@@ -640,7 +657,7 @@ export default class Task {
 		this.vtodo.updatePropertyWithValue('created', createdDate)
 		this.updateLastModified()
 		this._created = this.vtodo.getFirstPropertyValue('created')
-		this._createdMoment = moment(this._created, 'YYYYMMDDTHHmmss')
+		this._createdMoment = moment(this._created, 'YYYYMMDDTHHmmssZ')
 		// Update the sortorder if necessary
 		if (this.vtodo.getFirstPropertyValue('x-apple-sort-order') === null) {
 			this._sortOrder = this.getSortOrder()
