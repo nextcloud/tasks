@@ -755,7 +755,7 @@ const actions = {
 
 		const parsed = parseString(taskData.summary)
 
-		task.created = ICAL.Time.now()
+		task.created = ICAL.Time.fromJSDate(new Date(), true)
 		task.summary = parsed.summary
 		task.tags = parsed.tags
 		task.hidesubtasks = 0
