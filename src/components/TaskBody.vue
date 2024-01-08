@@ -878,7 +878,7 @@ $breakpoint-mobile: 1024px;
 						height: 32px;
 						overflow: hidden;
 						display: flex;
-						padding: 0 8px 0 12px;
+						padding: 0 12px;
 						background-color: var(--color-primary-element-light);
 						border: none;
 						border-radius: 18px !important;
