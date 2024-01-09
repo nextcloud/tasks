@@ -174,6 +174,8 @@ OC.L10N.register(
     "Selecting a classification is forbidden, because the task was shared with you." : "由於任務已與您共享，您無法選擇分類。",
     "Select a classification" : "選擇等級",
     "Select a status" : "選擇狀態",
+    "Set a location" : "設置地點",
+    "Set a URL" : "設置 URL",
     "Select tags" : "選擇標籤",
     "Notes" : "備註",
     "Reminders" : "提醒",

@@ -174,6 +174,8 @@ OC.L10N.register(
     "Selecting a classification is forbidden, because the task was shared with you." : "Choisir une catégorie est interdit parce que cette tâche a été partagée avec vous.",
     "Select a classification" : "Sélectionner une catégorie",
     "Select a status" : "Sélectionner un statut",
+    "Set a location" : "Définir un lieu",
+    "Set a URL" : "Définir une URL",
     "Select tags" : "Sélectionner les étiquettes",
     "Notes" : "Remarques",
     "Reminders" : "Rappels",
