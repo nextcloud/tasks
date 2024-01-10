@@ -172,6 +172,8 @@
     "Selecting a classification is forbidden, because the task was shared with you." : "因為工作已與您分享，因此您無法選取分類。",
     "Select a classification" : "選取分類",
     "Select a status" : "選取狀態",
+    "Set a location" : "設定位置",
+    "Set a URL" : "設定 URL",
     "Select tags" : "選取標籤",
     "Notes" : "註解",
     "Reminders" : "提醒",
