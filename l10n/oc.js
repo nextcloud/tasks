@@ -16,6 +16,7 @@ OC.L10N.register(
     "Can edit" : "Pòt modificar",
     "Edit" : "Modificar",
     "Copy private link" : "Copiar lo ligam privat",
+    "Copied" : "Copiat",
     "Export" : "Exportar",
     "Delete" : "Suprimir",
     "Unshare" : "Partejar pas mai",
