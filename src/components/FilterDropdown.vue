@@ -34,7 +34,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			:label="t('tasks', 'Filter by tags')"
 			track-by="id"
 			:multiple="true"
-			append-to-body
+			:append-to-body="true"
 			:options="tags"
 			:value="filter.tags"
 			@input="setTags">
@@ -111,5 +111,12 @@ export default {
 .material-design-icon {
 	width: 44px;
 	height: 44px;
+}
+</style>
+
+<style lang="scss">
+.vs__dropdown-menu,
+.vs__dropdown-menu--floating {
+  z-index:100000 !important
 }
 </style>
