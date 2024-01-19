@@ -173,6 +173,8 @@ OC.L10N.register(
     "Selecting a classification is forbidden, because the task was shared with you." : "Nemůžete vybrat stupeň důvěrnosti, protože úkol vám je pouze nasdílen.",
     "Select a classification" : "Vybrat klasifikaci",
     "Select a status" : "Vybrat stav",
+    "Set a location" : "Nastavit umístění",
+    "Set a URL" : "Nastavit URL",
     "Select tags" : "Výběr štítků",
     "Notes" : "Poznámky",
     "Reminders" : "Připomínky",
