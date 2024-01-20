@@ -70,7 +70,7 @@
     "happy-dom": "^13.0.4",
     "mockdate": "^3.0.5",
     "regenerator-runtime": "^0.14.1",
-    "vitest": "^1.2.0"
+    "vitest": "^1.2.1"
   },
   "engines": {
     "node": "^20.0.0",
