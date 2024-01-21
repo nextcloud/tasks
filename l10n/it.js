@@ -90,6 +90,8 @@ OC.L10N.register(
     "Add a task due today to \"{calendar}\"…" : "Aggiungi un'attività che scade oggi a \"{calendar}\"...",
     "Add a current task to \"{calendar}\"…" : "Aggiungi un'attività attuale a \"{calendar}\"...",
     "Add a task to \"{calendar}\"…" : "Aggiungi un'attività a \"{calendar}\"...",
+    "Loading the completed tasks of all lists might slow down the app." : "Caricamento delle attività completate di tutti gli elenchi potrebbe rallentare l'applicazione.",
+    "Loading the completed tasks might slow down the app." : "Caricamento delle attività completate potrebbe rallentare l'applicazione.",
     "Change sort order" : "Cambia l'ordinamento",
     "Relevance" : "Importanza",
     "Sort by completed state, due date, priority, start date and summary." : "Ordina per stato di completamento, data di scadenza, priorità, data di inizio e riepilogo.",
