@@ -103,6 +103,7 @@ OC.L10N.register(
     "Load the completed tasks of all lists." : "Načíst dokončené úkoly ze všech seznamů.",
     "Loading the completed tasks of all lists might slow down the app." : "Načítání dokončených úkolů ze všech seznamů může aplikaci zpomalit.",
     "Load the completed tasks of list \"{calendar}\"." : "Načíst dokončené úkoly ze seznamu „{calendar}“.",
+    "Loading the completed tasks might slow down the app." : "Načítání dokončených úkolů může aplikaci zpomalit.",
     "Change sort order" : "Změnit řazení",
     "Relevance" : "Relevantnost",
     "Sort by completed state, due date, priority, start date and summary." : "Seřadit podle stupně dokončenosti, termínu, priority, data zahájení a shrnutí.",
