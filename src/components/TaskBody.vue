@@ -62,10 +62,6 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						</span>
 					</span>
 				</div>
-				<NcProgressBar v-if="task.complete > 0"
-					:value="task.complete"
-					:aria-label="t('tasks', '{complete} % completed', {complete: task.complete})"
-					:style="{'--progress-bar-color': task.calendar.color }" />
 			</div>
 			<!-- Icons: sync-status, calendarname, date, note, subtask-show-completed, subtask-visibility, add-subtask, starred -->
 			<div class="task-body__icons">
@@ -73,6 +69,12 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					class="reactive no-nav"
 					@status-clicked="updateTask"
 					@reset-status="resetStatus({ task })" />
+				<NcProgressBar v-if="task.complete > 0"
+					type="circular"
+					:value="task.complete"
+					:aria-label="t('tasks', '{complete} % completed', {complete: task.complete})"
+					:title="t('tasks', '{complete} % completed', {complete: task.complete})"
+					:color="task.calendar.color" />
 				<div v-if="collectionId=='week'" class="calendar">
 					<span :style="{'background-color': task.calendar.color}" class="calendar__indicator" />
 					<span class="calendar__name">{{ task.calendar.displayName }}</span>
@@ -195,7 +197,7 @@ import { translate as t, translatePlural as n } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
 import NcActions from '@nextcloud/vue/dist/Components/NcActions.js'
 import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton.js'
-import NcProgressBar from '@nextcloud/vue/dist/Components/NcProgressBar.js'
+import NcProgressBar from './NcProgressBar.vue'
 import NcTextField from '@nextcloud/vue/dist/Components/NcTextField.js'
 import Linkify from '@nextcloud/vue/dist/Directives/Linkify.js'
 
@@ -897,20 +899,6 @@ $breakpoint-mobile: 1024px;
 					}
 				}
 
-				.progress-bar {
-					height: 3px;
-					position: absolute;
-					bottom: 3px;
-					background-color: var(--color-background-darker);
-
-					// Override previous values
-					&::-moz-progress-bar {
-						background: var(--progress-bar-color) !important;
-					}
-					&::-webkit-progress-value {
-						background: var(--progress-bar-color) !important;
-					}
-				}
 			}
 			&__icons {
 				display: flex;
