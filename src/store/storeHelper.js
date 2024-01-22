@@ -446,7 +446,7 @@ function sortByDeletedAt(taskA, taskB) {
  */
 function momentToICALTime(moment, asDate) {
 	if (asDate) {
-		return ICAL.Time.fromJSDate(moment.toDate(), true)
+		return ICAL.Time.fromDateString(moment.format('YYYY-MM-DD'))
 	} else {
 		return ICAL.Time.fromJSDate(moment.toDate(), true)
 	}
