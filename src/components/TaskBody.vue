@@ -69,12 +69,6 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					class="reactive no-nav"
 					@status-clicked="updateTask"
 					@reset-status="resetStatus({ task })" />
-				<NcProgressBar v-if="task.complete > 0"
-					type="circular"
-					:value="task.complete"
-					:aria-label="t('tasks', '{complete} % completed', {complete: task.complete})"
-					:title="t('tasks', '{complete} % completed', {complete: task.complete})"
-					:color="task.calendar.color" />
 				<div v-if="collectionId=='week'" class="calendar">
 					<span :style="{'background-color': task.calendar.color}" class="calendar__indicator" />
 					<span class="calendar__name">{{ task.calendar.displayName }}</span>
@@ -91,6 +85,12 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<span class="date__short" :class="{ 'date__short--completed': task.completed }">{{ dueDateShort }}</span>
 					<span class="date__long" :class="{ 'date__long--date-only': task.allDay && !task.completed, 'date__long--completed': task.completed }">{{ dueDateLong }}</span>
 				</div>
+				<NcProgressBar v-if="task.complete > 0"
+					type="circular"
+					:value="task.complete"
+					:aria-label="t('tasks', '{complete} % completed', {complete: task.complete})"
+					:title="t('tasks', '{complete} % completed', {complete: task.complete})"
+					:color="task.calendar.color" />
 				<NcActions v-if="task.deleteCountdown === null" class="reactive no-nav" menu-align="right">
 					<NcActionButton v-if="!task.calendar.readOnly"
 						:close-after-click="true"
