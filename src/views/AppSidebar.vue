@@ -789,14 +789,14 @@ export default {
 		 * @param {Task} context.task The task for which to set the date
 		 * @param {Date} context.value The new start date
 		 */
-		setStartDate({ task, value: date }) {
-			if (date) {
-				date = moment(date)
+		setStartDate({ task, value: start }) {
+			if (start) {
+				start = moment(start)
 			}
-			if (this.task.startMoment.isSame(date)) {
+			if (this.task.startMoment.isSame(start)) {
 				return
 			}
-			this.setStart({ task, start: date, allDay: this.allDay })
+			this.setStart({ task, start, allDay: this.allDay })
 		},
 
 		/**
@@ -807,14 +807,14 @@ export default {
 		 * @param {Task} context.task The task for which to set the date
 		 * @param {Date} context.value The new due date
 		 */
-		setDueDate({ task, value: date }) {
-			if (date) {
-				date = moment(date)
+		setDueDate({ task, value: due }) {
+			if (due) {
+				due = moment(due)
 			}
-			if (this.task.dueMoment.isSame(date)) {
+			if (this.task.dueMoment.isSame(due)) {
 				return
 			}
-			this.setDue({ task, due: date, allDay: this.allDay })
+			this.setDue({ task, due, allDay: this.allDay })
 		},
 
 		changeClass(classification) {
