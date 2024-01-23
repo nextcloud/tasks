@@ -535,7 +535,7 @@ export default class Task {
 				startJs.setHours(0)
 				this.setStart(ICAL.Time.fromJSDate(startJs, true))
 			} else {
-				this.setStart(start)
+				this.setStart(ICAL.Time.fromDateString(this._startMoment.format('YYYY-MM-DD')))
 			}
 		}
 		const due = this.vtodo.getFirstPropertyValue('due')
@@ -547,7 +547,7 @@ export default class Task {
 				dueJs.setHours(0)
 				this.setDue(ICAL.Time.fromJSDate(dueJs, true))
 			} else {
-				this.setDue(due)
+				this.setDue(ICAL.Time.fromDateString(this._dueMoment.format('YYYY-MM-DD')))
 			}
 		}
 	}
