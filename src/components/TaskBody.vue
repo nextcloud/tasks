@@ -197,7 +197,7 @@ import { translate as t, translatePlural as n } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
 import NcActions from '@nextcloud/vue/dist/Components/NcActions.js'
 import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton.js'
-import NcProgressBar from './NcProgressBar.vue'
+import NcProgressBar from '@nextcloud/vue/dist/Components/NcProgressBar.js'
 import NcTextField from '@nextcloud/vue/dist/Components/NcTextField.js'
 import Linkify from '@nextcloud/vue/dist/Directives/Linkify.js'
 
