@@ -87,5 +87,6 @@ class TasksWidget implements IWidget {
 		\OCP\Util::addStyle('tasks', 'tasks-store');
 		\OCP\Util::addStyle('tasks', 'tasks-icon');
 		\OCP\Util::addStyle('tasks', 'tasks-TaskCreateDialog');
+		\OCP\Util::addStyle('tasks', 'tasks-Plus');
 	}
 }
