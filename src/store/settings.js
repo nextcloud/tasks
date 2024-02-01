@@ -118,7 +118,7 @@ const actions = {
 	setSetting(context, payload) {
 		context.commit('setSetting', payload)
 		return new Promise(function() {
-			Requests.post(generateUrl('apps/tasks/settings/{type}', payload), { value: payload.value })
+			Requests.post(generateUrl('apps/tasks/api/v1/settings/{type}', payload), { value: payload.value })
 		})
 	},
 
