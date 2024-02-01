@@ -71,7 +71,7 @@ export default {
 		},
 		recurring: {
 			type: Boolean,
-			required: true
+			required: true,
 		},
 		priorityClass: {
 			type: String,
