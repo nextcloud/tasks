@@ -2,19 +2,27 @@ import General from '../../../../../src/views/AppContent/General.vue'
 import router from '../../../../../src/router.js'
 import TaskBody from '../../../../../src/components/TaskBody.vue'
 
-import { store, localVue } from '../../setupStore.js'
+import { store } from '../../setupStore.js'
 
 import { mount } from '@vue/test-utils'
 
 import { describe, expect, it, vi } from 'vitest'
 
-import Vue from 'vue'
-Vue.component('TaskBody', TaskBody)
-
 describe('General.vue', async () => {
 	'use strict'
 
-	const wrapper = mount(General, { localVue, store, router })
+	await router.push('/')
+	// After this line, router is ready
+	await router.isReady()
+
+	const wrapper = mount(General, {
+		global: {
+			plugins: [store, router],
+			components: {
+				TaskBody,
+			},
+		},
+	})
 	await vi.dynamicImportSettled()
 
 	/*

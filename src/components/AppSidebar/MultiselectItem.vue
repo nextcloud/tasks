@@ -27,7 +27,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		<NcSelect label="displayName"
 			:disabled="isDisabled"
 			:options="options"
-			:value="value"
+			:model-value="value"
 			:placeholder="placeholder"
 			:multiple="false"
 			:searchable="false"

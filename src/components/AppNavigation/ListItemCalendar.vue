@@ -27,10 +27,10 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		:name="calendar.displayName"
 		:class="{'list--edit': editing, 'list--deleted': !!deleteTimeout}"
 		class="list reactive"
-		@drop.native="dropTask"
-		@dragover.native="dragOver"
-		@dragenter.native="dragEnter"
-		@dragleave.native="dragLeave">
+		@drop="dropTask"
+		@dragover="dragOver"
+		@dragenter="dragEnter"
+		@dragleave="dragLeave">
 		<template #icon>
 			<NcAppNavigationIconBullet :color="calendar.color" />
 		</template>
@@ -111,6 +111,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			<ShareCalendar v-if="shareOpen && !calendar.readOnly && !deleteTimeout" :calendar="calendar" />
 			<div v-if="!deleteTimeout" :class="{error: nameError}" class="app-navigation-entry-edit">
 				<NcTextField ref="editListInput"
+					v-model="newCalendarName"
 					v-tooltip="{
 						content: tooltipMessage,
 						shown: showTooltip('list_' + calendar.id),
@@ -119,14 +120,13 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					type="text"
 					:show-trailing-button="newCalendarName !== ''"
 					trailing-button-icon="arrowRight"
-					:value.sync="newCalendarName"
 					:error="nameError"
 					:label="t('tasks', 'List name')"
 					@trailing-button-click="save(calendar)"
 					@keyup="checkName($event, calendar)">
 					<Pencil :size="16" />
 				</NcTextField>
-				<Colorpicker :selected-color="selectedColor" @color-selected="setColor(...arguments)" />
+				<Colorpicker :selected-color="selectedColor" @color-selected="setColor" />
 			</div>
 		</li>
 	</NcAppNavigationItem>

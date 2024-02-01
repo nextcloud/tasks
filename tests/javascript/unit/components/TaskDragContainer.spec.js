@@ -10,11 +10,8 @@ import router from '../../../../src/router.js'
 import { loadICS } from '../../../assets/loadAsset.js'
 
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { shallowMount, createLocalVue } from '@vue/test-utils'
-import Vuex, { Store } from 'vuex'
-
-const localVue = createLocalVue()
-localVue.use(Vuex)
+import { shallowMount } from '@vue/test-utils'
+import { createStore } from 'vuex'
 
 const calendar = {
 	url: 'calendar-1/tmp',
@@ -40,7 +37,7 @@ describe('TaskDragContainer.vue', () => {
 		// Override the "updateTask" method so we don't get warnings about unresolved promises.
 		tasks.actions.updateTask = vi.fn()
 
-		store = new Store({
+		store = createStore({
 			modules: {
 				calendars,
 				collections,
@@ -53,10 +50,10 @@ describe('TaskDragContainer.vue', () => {
 
 	it('Checks that the tasks are sorted correctly on manual sort.', async () => {
 		const wrapper = shallowMount(TaskDragContainer, {
-			localVue,
-			store,
-			router,
-			propsData: {
+			global: {
+				plugins: [store, router],
+			},
+			props: {
 				tasks: taskItems,
 			},
 		})
@@ -73,10 +70,10 @@ describe('TaskDragContainer.vue', () => {
 
 	it('Checks that tasks are properly reordered.', async () => {
 		const wrapper = shallowMount(TaskDragContainer, {
-			localVue,
-			store,
-			router,
-			propsData: {
+			global: {
+				plugins: [store, router],
+			},
+			props: {
 				tasks: taskItems,
 			},
 		})

@@ -25,27 +25,21 @@
  */
 import store from '../store/store.js'
 
-import Vue from 'vue'
+import { createApp } from 'vue'
 
 const buildSelector = (selector, propsData = {}) => {
 	return new Promise((resolve, reject) => {
 		const container = document.createElement('div')
 		document.getElementById('body-user').append(container)
-		const View = Vue.extend(selector)
-		const ComponentVM = new View({
-			propsData,
-			store,
-		}).$mount(container)
-		ComponentVM.$root.$on('close', () => {
-			ComponentVM.$el.remove()
-			ComponentVM.$destroy()
-			reject(new Error('Selection canceled'))
+		const dialog = createApp(selector, {
+			...propsData,
+			onClose() {
+				dialog.$el.remove()
+				reject(new Error('Selection canceled'))
+			},
 		})
-		ComponentVM.$root.$on('select', (id) => {
-			ComponentVM.$el.remove()
-			ComponentVM.$destroy()
-			resolve(id)
-		})
+			.use(store)
+			.mount(container)
 	})
 }
 

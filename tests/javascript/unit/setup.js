@@ -2,8 +2,6 @@ import { OC } from './OC.js'
 
 // eslint-disable-next-line n/no-unpublished-import
 import MockDate from 'mockdate'
-// eslint-disable-next-line n/no-unpublished-import
-import 'regenerator-runtime/runtime'
 
 import { afterAll } from 'vitest'
 

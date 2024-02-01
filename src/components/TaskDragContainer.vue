@@ -20,31 +20,32 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<draggable tag="ol"
-		:list="['']"
+	<Sortable tag="ol"
+		:list="sortedTasks"
 		:set-data="setDragData"
-		v-bind="{group: 'tasks', swapThreshold: 0.30, delay: 500, delayOnTouchOnly: true, touchStartThreshold: 3, disabled: disabled, filter: '.readOnly'}"
-		:move="onMove"
+		item-key="key"
+		:options="{group: 'tasks', swapThreshold: 0.30, delay: 500, delayOnTouchOnly: true, touchStartThreshold: 3, disabled: disabled, filter: '.readOnly'}"
+		@move="onMove"
 		@add="onAdd"
 		@end="onEnd">
-		<TaskBody v-for="task in sortedTasks"
-			:key="task.key"
-			:task="task"
-			:collection-string="collectionString" />
-	</draggable>
+		<template #item="{element}">
+			<TaskBody :task="element"
+				:collection-string="collectionString" />
+		</template>
+	</Sortable>
 </template>
 
 <script>
 import Task from '../models/task.js'
 import { sort } from '../store/storeHelper.js'
 
-import draggable from 'vuedraggable'
+import { Sortable } from 'sortablejs-vue3'
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 export default {
 	name: 'TaskDragContainer',
 	components: {
-		draggable,
+		Sortable,
 	},
 	props: {
 		tasks: {
@@ -182,20 +183,23 @@ export default {
 		 *
 		 * @param {object} $event The event which caused the drop
 		 */
-		onAdd($event) {
+		async onAdd($event) {
 			let task
 			// The task to move
 			const taskAttribute = $event.item.attributes['task-id']
 			if (taskAttribute) {
 				task = this.getTask(taskAttribute.value)
 			}
+			// Remove the drag item from the DOM, so it doesn't show up twice.
+			const item = $event.item
+			item.parentElement?.removeChild(item)
 			/**
 			 * We have to adjust the sortOrder property of the tasks
 			 * to achieve the desired sort order.
 			 */
 			this.adjustSortOrder(task, $event.newIndex, -1)
 			// Move the task to a new calendar or parent.
-			this.prepareMoving(task, $event)
+			await this.prepareMoving(task, $event)
 			this.prepareCollecting(task, $event)
 			$event.stopPropagation()
 		},
@@ -244,7 +248,7 @@ export default {
 		 * @param {Task} task The task to change
 		 * @param {object} $event The event which caused the move
 		 */
-		prepareMoving(task, $event) {
+		async prepareMoving(task, $event) {
 			let parent, calendar
 			// The new calendar --> make the moved task a root task
 			const calendarAttribute = $event.to.attributes['calendar-id']
@@ -263,7 +267,7 @@ export default {
 				calendar = task.calendar
 			}
 			// Move the task to the appropriate calendar and parent.
-			this.moveTask({ task, calendar, parent })
+			await this.moveTask({ task, calendar, parent })
 		},
 
 		/**

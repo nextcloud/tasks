@@ -27,12 +27,9 @@ import tasks from './tasks.js'
 import settings from './settings.js'
 import principals from './principals.js'
 
-import Vue from 'vue'
-import Vuex, { Store } from 'vuex'
+import { createStore } from 'vuex'
 
-Vue.use(Vuex)
-
-export default new Store({
+export default createStore({
 	modules: {
 		calendars,
 		collections,

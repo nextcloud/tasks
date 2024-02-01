@@ -26,11 +26,6 @@ import { isTaskInList, searchSubTasks } from './storeHelper.js'
 
 import { generateUrl } from '@nextcloud/router'
 
-import Vue from 'vue'
-import Vuex from 'vuex'
-
-Vue.use(Vuex)
-
 const state = {
 	collections: [],
 }
@@ -94,7 +89,7 @@ const mutations = {
 	 */
 	setVisibility(state, newCollection) {
 		const collection = state.collections.find(search => search.id === newCollection.id)
-		Vue.set(collection, 'show', newCollection.show)
+		collection.show = newCollection.show
 	},
 }
 

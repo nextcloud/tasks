@@ -28,7 +28,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			:disabled="isDisabled"
 			:clearable="false"
 			:options="calendarsMap"
-			:value="calendarMap"
+			:model-value="calendarMap"
 			:placeholder="t('tasks', 'Select a calendar')"
 			:append-to-body="false"
 			@option:selected="change">

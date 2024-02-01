@@ -80,7 +80,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:size="20"
 					:title="t('tasks', 'Task has a note')"
 					@click="openAppSidebarTab($event, 'app-sidebar-tab-notes')"
-					@dblclick.native.stop="openAppSidebarTab($event, 'app-sidebar-tab-notes', true)" />
+					@dblclick.stop="openAppSidebarTab($event, 'app-sidebar-tab-notes', true)" />
 				<div v-if="task.due || task.completed" :class="{'date--overdue': overdue(task.dueMoment) && !task.completed}" class="date">
 					<span class="date__short" :class="{ 'date__short--completed': task.completed }">{{ dueDateShort }}</span>
 					<span class="date__long" :class="{ 'date__long--date-only': task.allDay && !task.completed, 'date__long--completed': task.completed }">{{ dueDateLong }}</span>
@@ -151,7 +151,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				v-click-outside="closeSubtaskInput"
 				class="task-item task-item__input">
 				<NcTextField ref="input"
-					:value.sync="newTaskName"
+					v-model="newTaskName"
 					:placeholder="subtasksCreationPlaceholder"
 					:label-outside="true"
 					:disabled="isAddingTask"
@@ -164,7 +164,9 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					@keyup.esc="showSubtaskInput = false"
 					@keyup.enter="addTask"
 					@paste.stop="addMultipleTasks">
-					<Plus :size="20" />
+					<template #icon>
+						<Plus :size="20" />
+					</template>
 				</NcTextField>
 			</div>
 			<TaskDragContainer :tasks="filteredSubtasksShown"

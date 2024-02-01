@@ -40,8 +40,6 @@ import { findVTODObyState } from './cdav-requests.js'
 import { detectColor, uidToHexColor } from '../utils/color.js'
 import { mapCDavObjectToCalendarObject } from '../models/calendarObject.js'
 
-import Vue from 'vue'
-
 const calendarModel = {
 	id: '',
 	color: '',
@@ -180,9 +178,7 @@ const getters = {
 	 * @return {Array<Calendar>} The calendars supporting tasks
 	 */
 	getTaskCalendars: state => {
-		return state.calendars.filter(calendar => {
-			return calendar.supportsTasks
-		})
+		return state.calendars.filter(c => c.supportsTasks)
 	},
 
 	/**
@@ -193,11 +189,7 @@ const getters = {
 	 * @return {Array<Calendar>} Array of the calendars sorted alphabetically
 	 */
 	getSortedCalendars: (state, getters) => {
-		return getters.getTaskCalendars.sort(function(cal1, cal2) {
-			const n1 = cal1.order
-			const n2 = cal2.order
-			return (n1 < n2) ? -1 : (n1 > n2) ? 1 : 0
-		})
+		return [...getters.getTaskCalendars].sort((c1, c2) => c1.order - c2.order)
 	},
 
 	/**
@@ -208,14 +200,7 @@ const getters = {
 	 * @return {Array<Calendar>} Array of the calendars sorted alphabetically
 	 */
 	getSortedWritableCalendars: (state, getters) => {
-		return getters.getTaskCalendars.filter(calendar => {
-			return !calendar.readOnly
-		})
-			.sort(function(cal1, cal2) {
-				const n1 = cal1.order
-				const n2 = cal2.order
-				return (n1 < n2) ? -1 : (n1 > n2) ? 1 : 0
-			})
+		return getters.getSortedCalendars.filter(c => !c.readOnly)
 	},
 
 	/**
@@ -230,8 +215,7 @@ const getters = {
 		 * @return {Calendar} The requested calendar
 		 */
 		(calendarId) => {
-			const calendar = state.calendars.find(search => search.id === calendarId)
-			return calendar
+			return state.calendars.find(c => c.id === calendarId)
 		},
 
 	/**
@@ -360,9 +344,7 @@ const getters = {
 	 * @return {Array}
 	 */
 	sortedDeletedCalendars(state) {
-		console.debug(state.deletedCalendars)
-		return state.deletedCalendars
-			.sort((a, b) => a.deletedAt - b.deletedAt)
+		return [...state.deletedCalendars].sort((a, b) => a.deletedAt - b.deletedAt)
 	},
 
 	/**
@@ -511,7 +493,7 @@ const mutations = {
 			if (list[task.uid]) {
 				console.debug('Duplicate task overridden', list[task.uid], task)
 			}
-			Vue.set(list, task.uid, task)
+			list[task.uid] = task
 			return list
 		}, calendar.tasks)
 
@@ -524,7 +506,7 @@ const mutations = {
 	 * @param {Task} task The task to add
 	 */
 	addTaskToCalendar(state, task) {
-		Vue.set(task.calendar.tasks, task.uid, task)
+		task.calendar.tasks[task.uid] = task
 	},
 
 	/**
@@ -534,7 +516,7 @@ const mutations = {
 	 * @param {Task} task The task to delete
 	 */
 	deleteTaskFromCalendar(state, task) {
-		Vue.delete(task.calendar.tasks, task.uid)
+		delete task.calendar.tasks[task.uid]
 	},
 
 	/**
@@ -601,7 +583,7 @@ const mutations = {
 	 * @param {number} data.order The sort order
 	 */
 	setCalendarOrder(state, { calendar, order }) {
-		Vue.set(calendar, 'order', order)
+		calendar.order = order
 	},
 }
 
@@ -693,15 +675,12 @@ const actions = {
 	 * @return {Promise}
 	 */
 	async deleteCalendar(context, calendar) {
-		return calendar.dav.delete()
-			.then((response) => {
-				// Delete all the tasks from the store that belong to this calendar
-				Object.values(calendar.tasks)
-					.forEach(task => context.commit('deleteTask', task))
-				// Then delete the calendar
-				context.commit('deleteCalendar', calendar)
-			})
-			.catch((error) => { throw error })
+		await calendar.dav.delete()
+		// Delete all the tasks from the store that belong to this calendar
+		Object.values(calendar.tasks)
+			.forEach(task => context.commit('deleteTask', task))
+		// Then delete the calendar
+		context.commit('deleteCalendar', calendar)
 	},
 
 	/**
@@ -802,9 +781,8 @@ const actions = {
 	 */
 	async toggleCalendarEnabled(context, calendar) {
 		calendar.dav.enabled = !calendar.dav.enabled
-		return calendar.dav.update()
-			.then((response) => context.commit('toggleCalendarEnabled', calendar))
-			.catch((error) => { throw error })
+		await calendar.dav.update()
+		context.commit('toggleCalendarEnabled', calendar)
 	},
 
 	/**
@@ -820,9 +798,8 @@ const actions = {
 	async changeCalendar(context, { calendar, newName, newColor }) {
 		calendar.dav.displayname = newName
 		calendar.dav.color = newColor
-		return calendar.dav.update()
-			.then((response) => context.commit('renameCalendar', { calendar, newName, newColor }))
-			.catch((error) => { throw error })
+		await calendar.dav.update()
+		context.commit('renameCalendar', { calendar, newName, newColor })
 	},
 
 	/**
@@ -848,7 +825,7 @@ const actions = {
 				// so we need to parse one by one
 				const tasks = response.map(item => {
 					const task = new Task(item.data, calendar)
-					Vue.set(task, 'dav', item)
+					task.dav = item
 					return task
 				})
 
@@ -865,7 +842,7 @@ const actions = {
 							if (list[task.uid]) {
 								console.debug('Duplicate task overridden', list[task.uid], task)
 							}
-							Vue.set(list, task.uid, task)
+							list[task.uid] = task
 							return list
 						}, parent.subTasks)
 
@@ -890,7 +867,7 @@ const actions = {
 					const parent = Object.values(calendar.tasks).find(search => search.uid === related)
 					if (parent) {
 						parent.loadedCompleted = true
-						tasks.map(task => Vue.set(parent.subTasks, task.uid, task))
+						tasks.forEach(task => { parent.subTasks[task.uid] = task })
 					}
 				}
 

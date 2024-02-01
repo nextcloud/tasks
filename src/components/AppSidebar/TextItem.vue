@@ -36,7 +36,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<input ref="input"
 					v-model="newValue"
 					type="string"
-					@keyup.27="setEditing(false)"
+					@keyup.escape="setEditing(false)"
 					@keydown.enter.prevent="setValue()">
 			</div>
 		</div>
