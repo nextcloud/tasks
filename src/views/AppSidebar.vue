@@ -223,11 +223,6 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					icon="TagMultiple"
 					@add-tag="updateTag"
 					@set-tags="updateTags" />
-				<RepeatItem v-show="!readOnly || task.recurring"
-					:recurrence-rule="task.recurrenceRule"
-					:disabled="false"
-					:placeholder="t('tasks', 'No recurrence')"
-					icon="IconRepeat" />
 			</div>
 		</NcAppSidebarTab>
 		<NcEmptyContent v-else :description="taskStatusLabel">
@@ -257,15 +252,20 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			:name="t('tasks', 'Reminders')"
 			:order="2">
 			Reminders
-		</NcAppSidebarTab>
-		<NcAppSidebarTab v-if="task"
+		</NcAppSidebarTab> -->
+		<NcAppSidebarTab v-if="task && (!readOnly || task.recurring)"
 			id="app-sidebar-tab-repeat"
 			class="app-sidebar-tab"
-			icon="icon-repeat"
 			:name="t('tasks', 'Repeat')"
 			:order="3">
-			Repeat
-		</NcAppSidebarTab> -->
+			<template #icon>
+				<Repeat :size="20" />
+			</template>
+			<RepeatItem :recurrence-rule="task.recurrenceRule"
+				:disabled="false"
+				:placeholder="t('tasks', 'No recurrence')"
+				icon="IconRepeat" />
+		</NcAppSidebarTab>
 	</NcAppSidebar>
 </template>
 
@@ -307,6 +307,7 @@ import Pencil from 'vue-material-design-icons/Pencil.vue'
 import Percent from 'vue-material-design-icons/Percent.vue'
 import Pin from 'vue-material-design-icons/Pin.vue'
 import PinOff from 'vue-material-design-icons/PinOff.vue'
+import Repeat from 'vue-material-design-icons/Repeat.vue'
 import Star from 'vue-material-design-icons/Star.vue'
 import TextBoxOutline from 'vue-material-design-icons/TextBoxOutline.vue'
 import Undo from 'vue-material-design-icons/Undo.vue'
@@ -335,6 +336,7 @@ export default {
 		Percent,
 		Pin,
 		PinOff,
+		Repeat,
 		Star,
 		TextBoxOutline,
 		Undo,
