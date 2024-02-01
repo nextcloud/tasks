@@ -25,8 +25,16 @@ import AppSidebar from './views/AppSidebar.vue'
 import Calendar from './views/AppContent/Calendar.vue'
 import Collections from './views/AppContent/Collections.vue'
 
+import { getRootUrl, generateUrl } from '@nextcloud/router'
+
 import { h } from 'vue'
-import { createWebHashHistory, createRouter, RouterView } from 'vue-router'
+import { createWebHistory, createRouter, RouterView } from 'vue-router'
+
+const webRootWithIndexPHP = getRootUrl() + '/index.php'
+const doesURLContainIndexPHP = window.location.pathname.startsWith(webRootWithIndexPHP)
+const base = generateUrl('apps/tasks', {}, {
+	noRewrite: doesURLContainIndexPHP,
+})
 
 const routes = [
 	{ path: '/', redirect: getInitialRoute() },
@@ -81,7 +89,7 @@ const routes = [
 ]
 
 const router = createRouter({
-	history: createWebHashHistory(),
+	history: createWebHistory(base),
 	routes,
 })
 

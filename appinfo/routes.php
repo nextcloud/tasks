@@ -21,10 +21,29 @@
  */
 return [
 	'routes' => [
-		['name' => 'page#index',				'url' => '/',													'verb' => 'GET'],
-		['name' => 'collections#getCollections','url' => '/collections',										'verb' => 'GET'],
-		['name' => 'collections#setVisibility',	'url' => '/collection/{collectionID}/visibility/{visibility}',	'verb' => 'POST'],
-		['name' => 'settings#get',				'url' => '/settings',											'verb' => 'GET'],
-		['name' => 'settings#set',				'url' => '/settings/{setting}',									'verb' => 'POST'],
+		['name' => 'page#index',				'url' => '/',				'verb' => 'GET'],
+		['name' => 'page#index',				'url' => '/calendars',	'verb' => 'GET', 'postfix' => 'view.calendars'],
+		['name' => 'page#index',				'url' => '/calendars/',	'verb' => 'GET', 'postfix' => 'view.calendars./'],
+		[
+			'name' => 'page#index',
+			'url' => '/calendars/{calendar}',
+			'verb' => 'GET',
+			'postfix' => 'view.calendars.calendar',
+			'requirements' => array('calendar' => '.+')
+		],
+		['name' => 'page#index',				'url' => '/collections',	'verb' => 'GET', 'postfix' => 'view.collections'],
+		['name' => 'page#index',				'url' => '/collections/',	'verb' => 'GET', 'postfix' => 'view.collections./'],
+		[
+			'name' => 'page#index',
+			'url' => '/collections/{collection}',
+			'verb' => 'GET',
+			'postfix' => 'view.collections.collection',
+			'requirements' => array('collection' => '.+')
+		],
+
+		['name' => 'collections#getCollections','url' => '/api/v1/collections',										'verb' => 'GET'],
+		['name' => 'collections#setVisibility',	'url' => '/api/v1/collection/{collectionID}/visibility/{visibility}',	'verb' => 'POST'],
+		['name' => 'settings#get',				'url' => '/api/v1/settings',									'verb' => 'GET'],
+		['name' => 'settings#set',				'url' => '/api/v1/settings/{setting}',							'verb' => 'POST'],
 	]
 ];
