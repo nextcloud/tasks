@@ -148,7 +148,7 @@ OC.L10N.register(
     "Select a classification" : "选择类别",
     "Select a status" : "选择一个状态",
     "Select tags" : "选择标签",
-    "Notes" : "笔记",
+    "Notes" : "附注",
     "Reminders" : "提醒",
     "Repeat" : "重复",
     "When shared show full event" : "共享时显示完整事件",
