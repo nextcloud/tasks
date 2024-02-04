@@ -81,6 +81,7 @@
     "[Tomorrow]" : "[Tomorrow]",
     "Add a subtask to \"{task}\"…" : "Legg til en underoppgave i \"{task}\"...",
     "Task is completed" : "Oppgaven er fullført",
+    "Create task" : "Opprett oppgave",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n utført oppgave","%n avsluttede oppgaver"],
     "Tomorrow" : "I morgen",
     "Add List…" : "Legg til liste...",
