@@ -263,6 +263,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			</template>
 			<RepeatItem :recurrence-rule="task.recurrenceRule"
 				:disabled="false"
+				:read-only="readOnly"
 				:placeholder="t('tasks', 'No recurrence')"
 				icon="IconRepeat" />
 		</NcAppSidebarTab>
