@@ -21,57 +21,66 @@
   -->
 
 <template>
-	<div class="repeat-option-set repeat-option-set--interval-freq">
-		<span class="repeat-option-set__label">
-			{{ repeatEveryLabel }}
-		</span>
-		<input v-if="!isIntervalDisabled"
-			class="intervalInput"
-			type="number"
-			min="1"
-			max="366"
-			:value="interval"
-			@input="changeInterval">
-		<RepeatFreqSelect :freq="frequency"
-			:count="interval"
-			@change="changeFrequency" />
-	</div>
+	<NcSelect v-show="true"
+		display-name="green"
+		:clearable="false"
+		:options="options"
+		:model-value="selected"
+		:placeholder="t('tasks', 'Select something')"
+		:append-to-body="false"
+		@option:selected="select" />
 </template>
 
 <script>
-import RepeatFreqSelect from './RepeatFreqSelect.vue'
+import { NcSelect } from '@nextcloud/vue'
+import { translate as t } from '@nextcloud/l10n'
 
 export default {
-	name: 'RepeatFreqInterval',
-	components: { RepeatFreqSelect },
+	name: 'RepeatFreqSelect',
+	components: {
+		NcSelect,
+	},
 	props: {
-		frequency: {
+		freq: {
 			type: String,
 			required: true,
 		},
-		interval: {
+		count: {
 			type: Number,
 			required: true,
 		},
 	},
-	emits: ['change-frequency', 'change-interval'],
+	emits: ['change'],
 	computed: {
-		repeatEveryLabel() {
-			if (this.frequency === 'NONE') {
-				return t('tasks', 'Repeat')
-			}
-			return t('tasks', 'Repeat every')
+		options() {
+			return [{
+				label: t('tasks', 'never'),
+				freq: 'NONE',
+			}, {
+				label: n('tasks', 'day', 'days', this.count),
+				freq: 'DAILY',
+			}, {
+				label: n('tasks', 'week', 'weeks', this.count),
+				freq: 'WEEKLY',
+			}, {
+				label: n('tasks', 'month', 'months', this.count),
+				freq: 'MONTHLY',
+			}, {
+				label: n('tasks', 'year', 'years', this.count),
+				freq: 'YEARLY',
+			}]
 		},
-		isIntervalDisabled() {
-			return this.frequency === 'NONE'
+		selected() {
+			return this.options.find(o => o.freq === this.freq)
 		},
 	},
 	methods: {
-		changeFrequency(value) {
-			this.$emit('change-frequency', value)
-		},
-		changeInterval(value) {
-			this.$emit('change-interval', value)
+		t,
+		select(value) {
+			if (!value) {
+				return
+			}
+			this.$emit('change', value.freq)
 		},
 	},
 }
