@@ -57,6 +57,7 @@ OC.L10N.register(
     "upcoming tasks" : "tareas próximas",
     "Mark as done" : "Marcar como hecho",
     "No due date assigned" : "Fecha de vencimiento sin especificar",
+    "Synchronizing to the server." : "Sincronizando con el servidor.",
     "An error occurred" : "Ha ocurrido un error"
 },
 "nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");
