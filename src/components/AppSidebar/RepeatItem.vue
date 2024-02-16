@@ -39,7 +39,9 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			<div v-if="editing" class="content__input">
 				<RepeatFreqInterval v-if="!readOnly && !disabled"
 					:frequency="frequency"
-					:interval="interval" />
+					:interval="interval"
+					@change-frequency="changeFrequency"
+					@change-interval="changeInterval" />
 			</div>
 		</div>
 		<div class="item__actions">
@@ -109,13 +111,21 @@ export default {
 	data() {
 		return {
 			frequency: 'NONE',
-			interval: -1,
+			interval: 0,
 		}
 	},
 	methods: {
 		t,
 		isRecurring() {
 			return this.recurrenceRule.frequency !== 'NONE'
+		},
+		changeFrequency(value) {
+			this.frequency = value
+			// this.setValue()
+		},
+		changeInterval(value) {
+			this.interval = value
+			// this.setValue()
 		},
 	},
 }
