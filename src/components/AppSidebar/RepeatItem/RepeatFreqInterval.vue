@@ -26,12 +26,11 @@
 			{{ repeatEveryLabel }}
 		</span>
 		<input v-if="!isIntervalDisabled"
-			class="intervalInput"
+			:value="interval"
 			type="number"
 			min="1"
 			max="366"
-			:value="interval"
-			@input="changeInterval">
+			@input="$emit('update:interval', $event.target.value)">
 		<RepeatFreqSelect :freq="frequency"
 			:count="interval"
 			@change="changeFrequency" />
@@ -54,7 +53,7 @@ export default {
 			required: true,
 		},
 	},
-	emits: ['change-frequency', 'change-interval'],
+	emits: ['update:frequency', 'update:interval'],
 	computed: {
 		repeatEveryLabel() {
 			if (this.frequency === 'NONE') {
@@ -68,10 +67,7 @@ export default {
 	},
 	methods: {
 		changeFrequency(value) {
-			this.$emit('change-frequency', value)
-		},
-		changeInterval(value) {
-			this.$emit('change-interval', value)
+			this.$emit('update:frequency', value)
 		},
 	},
 }
