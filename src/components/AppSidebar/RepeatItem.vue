@@ -34,12 +34,12 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			</div>
 			<span v-show="!editing" class="content__name">
 				<RepeatSummary class="property-repeat__summary__content"
-					:recurrence-rule="recurrenceRule" />
+					:recurrence-rule="value" />
 			</span>
 			<div v-if="editing" class="content__input">
 				<RepeatFreqInterval v-if="!readOnly && !disabled"
-					:frequency="frequency"
-					:interval="interval"
+					v-model:frequency="frequency"
+					v-model:interval="interval"
 					@change-frequency="changeFrequency"
 					@change-interval="changeInterval" />
 			</div>
@@ -74,6 +74,7 @@ import Pencil from 'vue-material-design-icons/Pencil.vue'
 import Check from 'vue-material-design-icons/Check.vue'
 import { NcActions as Actions, NcActionButton as ActionButton } from '@nextcloud/vue'
 import editableItem from '../../mixins/editableItem.js'
+import logger from '../../utils/logger.js'
 
 export default {
 	name: 'RepeatItem',
@@ -87,7 +88,10 @@ export default {
 	},
 	mixins: [editableItem],
 	props: {
-		recurrenceRule: {
+		/**
+		 * The Recurrence object
+		 */
+		value: {
 			type: Object,
 			required: true,
 		},
@@ -110,22 +114,23 @@ export default {
 	},
 	data() {
 		return {
-			frequency: 'NONE',
-			interval: 0,
+			frequency: this.value.frequency,
+			interval: this.value.interval,
 		}
 	},
 	methods: {
 		t,
 		isRecurring() {
-			return this.recurrenceRule.frequency !== 'NONE'
+			return this.value.frequency !== 'NONE'
 		},
 		changeFrequency(value) {
 			this.frequency = value
-			// this.setValue()
+			// this.newValue = this.value.copy(interval = value)
 		},
 		changeInterval(value) {
+			logger.info('change Interval to ' + value)
 			this.interval = value
-			// this.setValue()
+			// this.newValue = this.value.copy(interval = value)
 		},
 	},
 }

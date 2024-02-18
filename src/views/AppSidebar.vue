@@ -261,10 +261,11 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			<template #icon>
 				<Repeat :size="20" />
 			</template>
-			<RepeatItem :recurrence-rule="task.recurrenceRule"
-				:disabled="false"
+			<RepeatItem :value="task.recurrenceRule"
+				:disabled="readOnly"
 				:read-only="readOnly"
 				:placeholder="t('tasks', 'No recurrence')"
+				:task="task"
 				icon="IconRepeat" />
 		</NcAppSidebarTab>
 	</NcAppSidebar>
