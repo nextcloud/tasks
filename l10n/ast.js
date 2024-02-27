@@ -10,6 +10,7 @@ OC.L10N.register(
     "Trash bin" : "Papelera",
     "Name" : "Nome",
     "Cancel" : "Encaboxar",
+    "Close" : "Zarrar",
     "Priority" : "Prioridá",
     "Alphabetically" : "Alfabéticamente",
     "[Yesterday]" : "[Ayeri]",
