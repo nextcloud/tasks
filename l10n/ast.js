@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Today" : "Güei",
     "Tasks" : "Xeres",
+    "Visible" : "Visible",
     "Edit" : "Editar",
     "Export" : "Esportar",
     "Delete" : "Desaniciar",
