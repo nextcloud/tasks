@@ -2,6 +2,7 @@ OC.L10N.register(
     "tasks",
     {
     "Today" : "Güei",
+    "All" : "Too",
     "Tasks" : "Xeres",
     "Visible" : "Visible",
     "Edit" : "Editar",
