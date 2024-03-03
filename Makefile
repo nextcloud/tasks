@@ -54,7 +54,7 @@ endif
 .PHONY: all
 all: dev-setup build-js-production
 
-# cleanup and generate a clean developement setup
+# cleanup and generate a clean development setup
 dev-setup: clean clean-dev npm-init
 
 npm-init:
