@@ -82,6 +82,8 @@ export default class Task {
 			this.vtodo = new ICAL.Component('vtodo')
 			this.vCalendar.addSubcomponent(this.vtodo)
 		}
+
+		// From NC calendar-js
 		this.todoComponent = ToDoComponent.fromICALJs(this.vtodo)
 
 		if (!this.vtodo.hasProperty('uid')) {
@@ -333,16 +335,34 @@ export default class Task {
 	}
 
 	/**
-	 * Return the recurrence
+	 * Get the recurrence
 	 *
 	 * @readonly
 	 * @memberof Task
 	 */
-	get recurrenceRule() {
+	get recurrenceRuleObject() {
 		if (this._recurrence === undefined || this._recurrence === null) {
 			return getDefaultRecurrenceRuleObject()
 		}
 		return mapRecurrenceRuleValueToRecurrenceRuleObject(this._recurrence.getFirstValue(), this._start)
+	}
+
+	/**
+	 * Set the recurrence
+	 *
+	 * @readonly
+	 * @memberof Task
+	 */
+	set recurrenceRuleObject(rruleObject) {
+		if (rruleObject === null) {
+			this.vtodo.removeProperty('rrule')
+		} else {
+			// FIXME: rruleObject.recurrenceRuleValue should not be null
+			this.vtodo.updatePropertyWithValue('rrule', rruleObject.recurrenceRuleValue)
+		}
+		this.todoComponent = ToDoComponent.fromICALJs(this.vtodo)
+		this._recurrence = this.todoComponent.getPropertyIterator('RRULE').next().value
+		this.updateLastModified()
 	}
 
 	/**
@@ -754,7 +774,7 @@ export default class Task {
 	 */
 	completeRecurring() {
 		// Get recurrence iterator, starting at start date
-		const iter = this.recurrenceRule.iterator(this.start)
+		const iter = this.recurrenceRuleObject.iterator(this.start)
 		// Skip the start date itself
 		iter.next()
 		// If there is a next recurrence, update the start date to next recurrence date

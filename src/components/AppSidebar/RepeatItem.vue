@@ -125,12 +125,15 @@ export default {
 		},
 		changeFrequency(value) {
 			this.frequency = value
-			// this.newValue = this.value.copy(interval = value)
+			// TODO: There should be a better way than using structuredClone
+			this.newValue = structuredClone(this.value)
+			this.newValue.frequency = value
 		},
 		changeInterval(value) {
 			logger.info('change Interval to ' + value)
 			this.interval = value
-			// this.newValue = this.value.copy(interval = value)
+			this.newValue = structuredClone(this.value)
+			this.newValue.interval = value
 		},
 	},
 }
