@@ -16,6 +16,7 @@ OC.L10N.register(
     "Deleted" : "Desanicióse",
     "Restore" : "Restaurar",
     "Delete permanently" : "Desaniciar permanentemente",
+    "Untitled task" : "Xera ensin títulu",
     "Untitled event" : "Eventu ensin títulu",
     "Cancel" : "Encaboxar",
     "Close" : "Zarrar",
