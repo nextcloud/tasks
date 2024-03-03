@@ -496,6 +496,18 @@ const mutations = {
 	},
 
 	/**
+	 * Sets the recurrence rule of a task
+	 *
+	 * @param {object} state The store data
+	 * @param {object} data Destructuring object
+	 * @param {Task} data.task The task
+	 * @param {string} data.rruleObject The recurrence rule object from NC calendar-js
+	 */
+	setRecurrence(state, { task, rruleObject }) {
+		task.recurrenceRuleObject = rruleObject
+	},
+
+	/**
 	 * Sets the url of a task
 	 *
 	 * @param {object} state The store data
@@ -1229,6 +1241,20 @@ const actions = {
 			return
 		}
 		context.commit('setLocation', { task, location })
+		context.dispatch('updateTask', task)
+	},
+
+	/**
+	 * Sets the location of a task
+	 *
+	 * @param {object} context The store context
+	 * @param {Task} task The task to update
+	 */
+	async setRecurrence(context, { task, rruleObject }) {
+		if (rruleObject === task.recurrenceRuleObject) {
+			return
+		}
+		context.commit('setRecurrence', { task, rruleObject })
 		context.dispatch('updateTask', task)
 	},
 

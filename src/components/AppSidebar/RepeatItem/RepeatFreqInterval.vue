@@ -30,7 +30,7 @@
 			type="number"
 			min="1"
 			max="366"
-			@input="$emit('update:interval', $event.target.value)">
+			@input="$emit('change-interval', $event.target.value)">
 		<RepeatFreqSelect :freq="frequency"
 			:count="interval"
 			@change="changeFrequency" />
@@ -53,7 +53,7 @@ export default {
 			required: true,
 		},
 	},
-	emits: ['update:frequency', 'update:interval'],
+	emits: ['change-frequency', 'change-interval'],
 	computed: {
 		repeatEveryLabel() {
 			if (this.frequency === 'NONE') {
@@ -67,7 +67,7 @@ export default {
 	},
 	methods: {
 		changeFrequency(value) {
-			this.$emit('update:frequency', value)
+			this.$emit('change-frequency', value)
 		},
 	},
 }

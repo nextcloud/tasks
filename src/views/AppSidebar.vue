@@ -261,12 +261,13 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			<template #icon>
 				<Repeat :size="20" />
 			</template>
-			<RepeatItem :value="task.recurrenceRule"
+			<RepeatItem :value="task.recurrenceRuleObject"
 				:disabled="readOnly"
 				:read-only="readOnly"
 				:placeholder="t('tasks', 'No recurrence')"
 				:task="task"
-				icon="IconRepeat" />
+				icon="IconRepeat"
+				@set-value="({task, value}) => setRecurrence({ task, rruleObject: value })" />
 		</NcAppSidebarTab>
 	</NcAppSidebar>
 </template>
@@ -724,6 +725,7 @@ export default {
 			'setNote',
 			'setPriority',
 			'setLocation',
+			'setRecurrence',
 			'setUrl',
 			'setPercentComplete',
 			'setTags',
