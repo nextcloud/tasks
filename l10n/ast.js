@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Today" : "Güei",
     "All" : "Too",
+    "Completed" : "Completóse",
     "Tasks" : "Xeres",
     "Visible" : "Visible",
     "Edit" : "Editar",
