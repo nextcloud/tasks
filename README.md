@@ -33,6 +33,7 @@ Then open the Tasks app from the app menu.
 * [GNOME Todo](https://wiki.gnome.org/Apps/Todo) (via [GNOME Online Accounts](https://wiki.gnome.org/Design/SystemSettings/OnlineAccounts)) (Linux)
 * [Kalendar](https://apps.kde.org/kalendar/) (Linux)
 * [vdirsyncer](https://vdirsyncer.pimutils.org/en/stable/) (Linux and BSD)
+* [Planify](https://github.com/alainm23/planify/releases) (Linux)
 
 
 ## ETag (or: problem with non-existing conflicts)
