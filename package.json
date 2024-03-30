@@ -65,7 +65,7 @@
     "@nextcloud/stylelint-config": "^2.4.0",
     "@nextcloud/vite-config": "github:nextcloud-libraries/nextcloud-vite-config#vue3",
     "@vue/test-utils": "^2.4.4",
-    "happy-dom": "^14.3.1",
+    "happy-dom": "^14.3.9",
     "mockdate": "^3.0.5",
     "vitest": "^1.4.0"
   },
