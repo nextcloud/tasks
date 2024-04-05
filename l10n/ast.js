@@ -12,6 +12,7 @@ OC.L10N.register(
     "The Tasks app for Nextcloud" : "L'aplicación Xeres pa Nextcloud",
     "Default list" : "Llista predeterminada",
     "Visibility of Smart Collections" : "Visibilidá de les coleiciones intelixentes",
+    "Hidden" : "Anubrióse",
     "Visible" : "Visible",
     "Tasks settings" : "Configuración de les xeres",
     "Share with users or groups" : "Compartir con usuarios o grupos",
