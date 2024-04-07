@@ -36,6 +36,7 @@ OC.L10N.register(
     "Priority" : "Prioridad",
     "Alphabetically" : "Alfabéticamente",
     "Manually" : "Manualmente",
+    "Delete task" : "Eliminar tarea",
     "Task is completed" : "La tarea ha sido completada",
     "Create a new task" : "Crear una tarea nueva",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n Tarea Completada","%n Tareas Completadas","%n Tareas Completadas"],
