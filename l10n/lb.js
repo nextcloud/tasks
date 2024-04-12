@@ -22,6 +22,7 @@ OC.L10N.register(
     "Deleted" : "Geläscht",
     "Restore" : "Zrécksetzen",
     "Delete permanently" : "Permanent läschen",
+    "Empty trash bin" : "Eidel Dreckskëscht",
     "Cancel" : "Ofbriechen",
     "Close" : "Zoumaachen",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n erfëllt Aufgab","%n erfëllten Aufgaben"],
