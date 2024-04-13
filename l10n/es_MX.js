@@ -26,6 +26,7 @@ OC.L10N.register(
     "Restore" : "Restaurar",
     "Delete permanently" : "Borrar permanentemente",
     "Empty trash bin" : "Vaciar la papelera de reciclaje",
+    "Untitled task" : "Tarea sin título",
     "Untitled event" : "Evento sin título",
     "Cancel" : "Cancelar",
     "Close" : "Cerrar",
