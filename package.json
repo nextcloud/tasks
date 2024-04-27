@@ -60,7 +60,7 @@
   },
   "devDependencies": {
     "@nextcloud/babel-config": "^1.0.0",
-    "@nextcloud/browserslist-config": "^3.0.0",
+    "@nextcloud/browserslist-config": "^3.0.1",
     "@nextcloud/eslint-config": "github:nextcloud-libraries/eslint-config#vue3",
     "@nextcloud/stylelint-config": "^2.4.0",
     "@nextcloud/vite-config": "github:nextcloud-libraries/nextcloud-vite-config#vue3",
