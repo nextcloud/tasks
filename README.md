@@ -27,7 +27,6 @@ Then open the Tasks app from the app menu.
 * [Tasks: Astrid Todo List Clone](https://tasks.org/)  [(Android)](https://play.google.com/store/apps/details?id=org.tasks&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1) (Requires subscription if not downloaded via F-Droid)
 * [Qownnotes](https://www.qownnotes.org/) (Read-only, Cross Platform Desktop App)
 * [Thunderbird Lightning](https://www.thunderbird.net/en-US/calendar/) (Cross Platform Desktop App)
-* [Vdirsyncer](https://vdirsyncer.pimutils.org/en/stable/) (Linux)
 * [BusyCal](https://www.busymac.com/busycal) (MacOS)
 * [aCalendar+](https://acalendar.tapirapps.de/de/support/home) (via Davx5) [(Android)](https://play.google.com/store/apps/details?id=org.withouthat.acalendarplus)
 * [GNOME Todo](https://wiki.gnome.org/Apps/Todo) (via [GNOME Online Accounts](https://wiki.gnome.org/Design/SystemSettings/OnlineAccounts)) (Linux)
