@@ -869,6 +869,7 @@ $breakpoint-mobile: 1024px;
 						:deep(a) {
 							cursor: pointer;
 							text-decoration: underline;
+							margin: 0;
 						}
 					}
 				}
