@@ -125,8 +125,9 @@ export default {
 				...this.getAdditionalTaskProperties(),
 			}
 			const task = await this.createTask(data)
-			this.openNewTask(task)
+			await this.openNewTask(task)
 			this.newTaskName = ''
+			this.$refs.input.$refs.inputField.$refs.input.focus()
 		},
 
 		getAdditionalTaskProperties() {

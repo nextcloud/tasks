@@ -22,22 +22,22 @@
 
 export default {
 	methods: {
-		openNewTask(task) {
+		async openNewTask(task) {
 			// Only open the details view if there is enough space or if it is already open.
 			if (this.$route.params !== undefined && (document.documentElement.clientWidth >= 768 || this.$route.params.taskId !== undefined)) {
 				// Open the details view for the new task
 				const calendarId = this.$route.params.calendarId
 				const collectionId = this.$route.params.collectionId
 				if (calendarId) {
-					this.$router.push({ name: 'calendarsTask', params: { calendarId, taskId: task.uri } })
+					await this.$router.push({ name: 'calendarsTask', params: { calendarId, taskId: task.uri } })
 				} else if (collectionId) {
 					if (collectionId === 'week') {
-						this.$router.push({
+						await this.$router.push({
 							name: 'collectionsParamTask',
 							params: { collectionId, taskId: task.uri, collectionParam: '0' },
 						})
 					} else {
-						this.$router.push({ name: 'collectionsTask', params: { collectionId, taskId: task.uri } })
+						await this.$router.push({ name: 'collectionsTask', params: { collectionId, taskId: task.uri } })
 					}
 				}
 			}
