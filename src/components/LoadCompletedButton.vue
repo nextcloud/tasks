@@ -68,7 +68,7 @@ export default {
 				}
 			} else {
 				return {
-					text: t('tasks', 'Load the completed tasks of list "{calendar}".', { calendar: this.calendars?.[0]?.displayName }),
+					text: t('tasks', 'Load the completed tasks of list "{calendar}".', { calendar: this.calendars?.[0]?.displayName }, undefined, { sanitize: false, escape: false }),
 					tooltip: t('tasks', 'Loading the completed tasks might slow down the app.'),
 				}
 			}
