@@ -677,7 +677,7 @@ export default {
 				related: this.task.uid,
 				...this.getAdditionalTaskProperties(),
 			})
-			this.openNewTask(task)
+			await this.openNewTask(task)
 			this.newTaskName = ''
 			// Focus the input field again, in case we clicked on the trailing-icon-button
 			this.$refs.input.$refs.inputField.$refs.input.focus()
