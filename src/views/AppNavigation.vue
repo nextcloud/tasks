@@ -32,9 +32,9 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				class="collection reactive"
 				draggable="false"
 				@dragstart="dragStart"
-				@drop="dropTaskOnCollection(...arguments, collection)"
+				@drop="(e) => dropTaskOnCollection(e, collection)"
 				@dragover="dragOver"
-				@dragenter="dragEnter(...arguments, collection)"
+				@dragenter="(e) => dragEnter(e, collection)"
 				@dragleave="dragLeave"
 				@click="setInitialRoute(`/collections/${collection.id}`)">
 				<template #icon>
@@ -49,9 +49,9 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			</NcAppNavigationItem>
 			<Sortable class="draggable-container"
 				:list="calendars"
-				:set-data="setData"
 				item-key="id"
 				:options="{swapThreshold: 0.30, delay: 500, delayOnTouchOnly: true, touchStartThreshold: 3}"
+				@dragstart="setData($event)"
 				@update="update">
 				<template #item="{element}">
 					<ListItemCalendar :calendar="element"
@@ -204,10 +204,10 @@ export default {
 		/**
 		 * Indicate that we drag a calendar item
 		 *
-		 * @param {object} dataTransfer The dataTransfer object
+		 * @param {object} e The event object
 		 */
-		setData(dataTransfer) {
-			dataTransfer.setData('text/plain', 'calendar')
+		setData(e) {
+			e.dataTransfer.setData('text/calendar', 'calendar')
 		},
 
 		/**
@@ -299,7 +299,7 @@ export default {
 				return
 			}
 			// Dragging calendars has no effect
-			if (e.dataTransfer.getData('text/plain') === 'calendar') {
+			if (e.dataTransfer.getData('text/calendar') === 'calendar') {
 				return
 			}
 			// Get the correct element, in case we hover a child.
@@ -345,7 +345,7 @@ export default {
 			if (!['starred', 'completed', 'today', 'week'].includes(collection.id)) {
 				return
 			}
-			const taskUri = e.dataTransfer.getData('text/plain')
+			const taskUri = e.dataTransfer.getData('text/uri')
 			if (taskUri) {
 				const task = this.getTask(taskUri)
 				switch (collection.id) {

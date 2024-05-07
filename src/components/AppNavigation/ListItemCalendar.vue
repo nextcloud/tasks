@@ -382,7 +382,7 @@ export default {
 			// Remove all hover classes
 			const calendars = document.querySelectorAll('li.list')
 			calendars.forEach((f) => { f.classList.remove('dnd-hover') })
-			const taskUri = e.dataTransfer.getData('text/plain')
+			const taskUri = e.dataTransfer.getData('text/uri')
 			if (taskUri) {
 				const task = this.getTask(taskUri)
 				if (task && this.calendar !== task.calendar) {

@@ -525,7 +525,7 @@ export default {
 			if (e.target.closest('.task-item') !== this.$refs.taskItem) {
 				return
 			}
-			e.dataTransfer.setData('text/plain', this.task.uri)
+			e.dataTransfer.setData('text/uri', this.task.uri)
 		},
 
 		/**
