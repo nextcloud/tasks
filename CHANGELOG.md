@@ -1,3 +1,49 @@
+## 0.16.0 - 2024-05-08
+
+This version of Tasks is only compatible with Nextcloud server 28 and newer.
+
+### Breaking
+- Hard-links to tasks or lists have changed, because the app now uses router web history instead of web hash history mode #2480
+
+### Added
+- Implement bulk task creation #2273
+- Extract tags from task summary #2425
+- Implement filtering by tags #2427
+- Allow to clear global search in filter menu #2431
+- Show link to Deck for deck cards #2436
+- Show start date as label in task body #2438
+- Implement sorting trash bin items #2440
+- Implement setting task location #2442
+- Implement setting task URL #2443 
+
+### Changed
+- Migrate the app to vue 3 #1971
+- Use router web history instead of web hash history mode #2480
+- Unify style of tags in task body with sidebar #2426
+- Use circular progress bar instead of linear bar #2464
+- Treat tasks with `STATUS:COMPLETED` as completed #2429
+- Use `TagMultiple` icon consistently #2432
+- Sort tags in dropdown alphabetically #2433
+- Use `NcButton` component to toggle completed tasks visibility #2434
+- Update issue templates #2363
+- Migrate from webpack to vite #2321
+- Migrate from jest to vitest #2409
+- Updated translations
+- Updated dependencies
+
+### Fixed
+- Correctly handle timezones #2446
+- Fix missing tasks icon in talk app #2364
+- Do not use the router in the store #2362
+- Don't set percent to `0` for `NEEDS-ACTION` #2365
+- Correctly show task body corners when tasks are hidden #2430
+- Correctly translate the loading completed tooltip #2435
+- Don't show empty category for empty `CATEGORIES` param #2437
+- Use `NcDateTime` to show time in trashbin #2439
+- Show correct calendar weeks in date picker #2366
+- Show completed button label correctly #2558
+- Remove margin from link in task body summary #2559
+
 ## 0.15.0 - 2023-05-16
 
 This version of Tasks is only compatible with Nextcloud server 25 and newer.
