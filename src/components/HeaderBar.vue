@@ -33,8 +33,10 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:show-trailing-button="newTaskName !== ''"
 				:trailing-button-label="placeholder"
 				@trailing-button-click="addTask"
-				@keyup.esc="clearNewTask($event)"
-				@keyup.enter="addTask"
+				@compositionstart="compositionstart($event)"
+				@compositionend="compositionend($event)"
+				@keydown.esc="clearNewTask($event)"
+				@keydown.enter="addTask"
 				@paste.stop="addMultipleTasks">
 				<template #icon>
 					<Plus :size="20" />
@@ -83,6 +85,7 @@ export default {
 			showCreateMultipleTasksModal: false,
 			multipleTasks: { numberOfTasks: 0, tasks: {} },
 			additionalTaskProperties: {},
+			compositing: false,
 		}
 	},
 	computed: {
@@ -112,12 +115,27 @@ export default {
 			'createTask',
 		]),
 
+		compositionstart($event) {
+			this.compositing = true;
+		},
+		compositionend($event) {
+			this.compositing = false;
+		},
+
 		clearNewTask(event) {
+			if (this.compositing) {
+				return;
+			}
+
 			event.target.blur()
 			this.newTaskName = ''
 		},
 
 		async addTask() {
+			if (this.compositing) {
+				return;
+			}
+
 			const data = {
 				summary: this.newTaskName,
 				// If the task is created in the calendar view,

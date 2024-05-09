@@ -35,7 +35,9 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<textarea ref="note__editor"
 					v-model="newValue"
 					:maxlength="100000"
-					@keyup.escape="setEditing(false)"
+					@compositionstart="compositionstart($event)"
+					@compositionend="compositionend($event)"
+					@keydown.escape="escKeyDown($event)"
 					@keydown.enter.ctrl.prevent="setValue()"
 					@change="setValue()" />
 			</div>
@@ -86,6 +88,7 @@ export default {
 			.use(Mitl)
 		return {
 			md,
+			compositing: false,
 		}
 	},
 	watch: {
@@ -128,6 +131,18 @@ export default {
 		},
 		setNotes($event) {
 			this.setEditing(true, $event)
+		},
+		// Inspired by https://gist.github.com/gotraveltoworld/ecbd2ddc6a0d9bcee8baf396d683e1ba
+		compositionstart($event) {
+			this.compositing = true;
+		},
+		compositionend($event) {
+			this.compositing = false;
+		},
+		escKeyDown($event) {
+			if (!this.compositing) {
+				this.setEditing(false);
+			}
 		},
 	},
 }
