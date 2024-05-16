@@ -63,7 +63,7 @@ OC.L10N.register(
     "Untitled journal" : "Dziennik bez tytułu",
     "Untitled item" : "Pozycja bez tytułu",
     "Unknown calendar" : "Kalendarz nieznany",
-    "Could not load deleted calendars and objects" : "Nie można załadować usuniętych kalendarzy i obiektów",
+    "Could not load deleted calendars and objects" : "Nie można wczytać usuniętych kalendarzy i obiektów",
     "Could not delete calendar or event" : "Nie udało się usunąć kalendarza lub wydarzenia",
     "Could not restore calendar or event" : "Nie udało się przywrócić kalendarza lub wydarzenia",
     "Do you really want to empty the trash bin?" : "Czy na pewno chcesz opróżnić kosz?",
