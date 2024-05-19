@@ -33,7 +33,7 @@ Then open the Tasks app from the app menu.
 * [Kalendar](https://apps.kde.org/kalendar/) (Linux)
 * [vdirsyncer](https://vdirsyncer.pimutils.org/en/stable/) (Linux and BSD)
 * [planify](https://github.com/alainm23/planify) (Linux)
-
+* [jtx Board](https://jtx.techbee.at/) [(Android)](https://play.google.com/store/apps/details?id=at.techbee.jtx)
 
 ## ETag (or: problem with non-existing conflicts)
 
