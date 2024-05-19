@@ -22,7 +22,7 @@ Then open the Tasks app from the app menu.
 * Apple Reminders (iOS, MacOS)
 * [2Do](https://www.2doapp.com/) (Android, iOS, MacOS)
 * [Davx5](https://www.davx5.com/) (Android)
-* [OpenTasks](https://opentasks.app/) [(Android)](https://play.google.com/store/apps/details?id=org.dmfs.tasks)
+* [OpenTasks](https://opentasks.app/) [(Android)](https://f-droid.org/packages/org.dmfs.tasks/)
 * [Outlook Caldav Synchronizer](https://caldavsynchronizer.org/)  (Windows)
 * [Tasks: Astrid Todo List Clone](https://tasks.org/)  [(Android)](https://play.google.com/store/apps/details?id=org.tasks&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1) (Requires subscription if not downloaded via F-Droid)
 * [Qownnotes](https://www.qownnotes.org/) (Read-only, Cross Platform Desktop App)
