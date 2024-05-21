@@ -23,6 +23,7 @@ OC.L10N.register(
     "Deleted" : "Borrado",
     "Restore" : "Restaurar",
     "Delete permanently" : "Borrar permanentemente",
+    "Empty trash bin" : "Vaciar papelera de reciclaje",
     "Cancel" : "Cancelar",
     "Close" : "Cerrar",
     "Select tags to filter by" : "Selecciona las etiquetas del filtro",
