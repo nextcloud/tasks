@@ -52,7 +52,7 @@ OC.L10N.register(
     "_Shared with {num} entity_::_Shared with {num} entities_" : ["Compartido con {num} entidades","Compartido con {num} entidades","Compartido con {num} entidades"],
     "Trash bin" : "Papelera de reciclaje",
     "Loading deleted calendars, tasks and events." : "Se están cargando los calendarios, las tareas y los eventos eliminados.",
-    "You do not have any deleted calendars, tasks or events." : "No tienes ningún calendario, tarea o evento eliminado.",
+    "You do not have any deleted calendars, tasks or events." : "No tiene ningún calendario, tarea o evento eliminado.",
     "Name" : "Nombre",
     "Deleted" : "Eliminados",
     "Restore" : "Restaurar",
