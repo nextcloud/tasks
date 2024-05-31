@@ -17,6 +17,8 @@ OC.L10N.register(
     "Restore" : "Athchóirigh",
     "Delete permanently" : "Scrios go buan",
     "Empty trash bin" : "Bruscar folamh",
+    "Untitled task" : "Tasc gan teideal",
+    "Untitled event" : "Imeacht gan teideal",
     "Cancel" : "Cealaigh",
     "Close" : "Dún",
     "Select tags to filter by" : "Roghnaigh clibeanna le scagadh de réir",
