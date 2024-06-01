@@ -12,6 +12,7 @@ OC.L10N.register(
     "Edit" : "Cuir in eagar",
     "Export" : "Easpórtáil",
     "Delete" : "Scrios",
+    "Unshare" : "Díroinnte",
     "Name" : "Ainm",
     "Deleted" : "Scriosta",
     "Restore" : "Athchóirigh",
