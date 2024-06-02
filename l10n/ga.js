@@ -29,6 +29,7 @@ OC.L10N.register(
     "Tomorrow" : "Amárach",
     "Details" : "Sonraí",
     "Notes" : "Nótaí",
-    "Mark as done" : "Marcáil mar a rinneadh"
+    "Mark as done" : "Marcáil mar a rinneadh",
+    "An error occurred" : "Tharla earráid"
 },
 "nplurals=5; plural=(n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n<11 ? 3 : 4);");
