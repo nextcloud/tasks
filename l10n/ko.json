@@ -107,6 +107,8 @@
     "Task not found!" : "작업을 찾을 수 없습니다!",
     "Set start date" : "시작 날짜 지점",
     "Set due date" : "만료 기한 설정",
-    "An error occurred" : "오류가 발생함"
+    "Mark as done" : "완료된 것으로 표시",
+    "An error occurred" : "오류가 발생함",
+    "Message from {author} in {conversationName}" : "{conversationName}에서 {author}가 보낸 메시지"
 },"pluralForm" :"nplurals=1; plural=0;"
 }
