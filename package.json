@@ -50,7 +50,7 @@
     "markdown-it-link-attributes": "^4.0.1",
     "markdown-it-task-lists": "^2.1.1",
     "md5": "^2.3.0",
-    "p-limit": "^5.0.0",
+    "p-limit": "^6.1.0",
     "sortablejs-vue3": "^1.2.11",
     "uuid": "^9.0.1",
     "vue": "^3.4.31",
