@@ -153,6 +153,7 @@ OC.L10N.register(
     "Successfully updated the task." : "Uppgiften uppdaterad.",
     "Task successfully moved to new calendar." : "Uppgiften flyttad till en ny kalender.",
     "An error occurred" : "Ett fel uppstod",
+    "Create a task" : "Skapa en uppgift",
     "Message from {author} in {conversationName}" : "Meddelande från {author} i {conversationName}",
     "[Due on] LL" : "[Förfaller på] LL",
     "[Was due yesterday]" : "[Förföll igår]",
