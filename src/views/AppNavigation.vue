@@ -102,6 +102,7 @@ import Colorpicker from '../components/AppNavigation/Colorpicker.vue'
 import AppNavigationSettings from '../components/AppNavigation/AppNavigationSettings.vue'
 import Trashbin from '../components/AppNavigation/Trashbin.vue'
 
+import { showError } from '@nextcloud/dialogs'
 import { translate as t } from '@nextcloud/l10n'
 import NcAppNavigation from '@nextcloud/vue/dist/Components/NcAppNavigation.js'
 import NcAppNavigationItem from '@nextcloud/vue/dist/Components/NcAppNavigationItem.js'
@@ -394,11 +395,17 @@ export default {
 			if (!this.isNameAllowed(this.newCalendarName).allowed) {
 				return
 			}
-			const { id: calendarId } = await this.appendCalendar({ displayName: this.newCalendarName, color: this.selectedColor })
-			if (calendarId) {
-				await this.$router.push({ name: 'calendars', params: { calendarId } })
+			try {
+				const { id: calendarId } = await this.appendCalendar({ displayName: this.newCalendarName, color: this.selectedColor })
+				if (calendarId) {
+					await this.$router.push({ name: 'calendars', params: { calendarId } })
+				}
+			} catch (error) {
+				console.debug(error)
+				showError(t('tasks', 'An error occurred, unable to create the list.'))
+			} finally {
+				this.creating = false
 			}
-			this.creating = false
 		},
 		checkName(event) {
 			const check = this.isNameAllowed(this.newCalendarName)
