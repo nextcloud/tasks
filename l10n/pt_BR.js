@@ -164,6 +164,7 @@ OC.L10N.register(
     "Tomorrow" : "Amanhã",
     "Add List…" : "Adicionar Lista...",
     "New list" : "Nova lista",
+    "An error occurred, unable to create the list." : "Ocorreu um erro, não foi possível criar a lista.",
     "All day" : "Todo dia",
     "Unpin" : "Desmarcar",
     "Pin" : "Pino",

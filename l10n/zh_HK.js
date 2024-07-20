@@ -164,6 +164,7 @@ OC.L10N.register(
     "Tomorrow" : "明日",
     "Add List…" : "增加清單...",
     "New list" : "新清單",
+    "An error occurred, unable to create the list." : "遇到錯誤，無法建立清單。",
     "All day" : "整日",
     "Unpin" : "取消固定",
     "Pin" : "固定",

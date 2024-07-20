@@ -164,6 +164,7 @@ OC.L10N.register(
     "Tomorrow" : "сутра",
     "Add List…" : "Додај листу…",
     "New list" : "Нова листа",
+    "An error occurred, unable to create the list." : "Дошло је до грешке, не може да се креира листа.",
     "All day" : "Цео дан",
     "Unpin" : "Откачи",
     "Pin" : "Закачи",

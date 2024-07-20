@@ -164,6 +164,7 @@ OC.L10N.register(
     "Tomorrow" : "غدا",
     "Add List…" : "أضف قائمة ...",
     "New list" : "قائمة جديدة",
+    "An error occurred, unable to create the list." : "حدث خطأ؛ يتعذّر إنشاء القائمة.",
     "All day" : "اليوم بأكمله",
     "Unpin" : "فك التثبيت",
     "Pin" : "تثبيت",
