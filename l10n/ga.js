@@ -164,6 +164,7 @@ OC.L10N.register(
     "Tomorrow" : "Amárach",
     "Add List…" : "Cuir Liosta leis…",
     "New list" : "Liosta nua",
+    "An error occurred, unable to create the list." : "Tharla earráid, níorbh fhéidir an liosta a chruthú.",
     "All day" : "An lá ar fad",
     "Unpin" : "Díbhioráil",
     "Pin" : "Bioráil",
