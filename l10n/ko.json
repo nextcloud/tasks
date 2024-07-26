@@ -15,7 +15,7 @@
     "Automatic" : "자동",
     "Share with users or groups" : "사용자 및 그룹과 공유",
     "No users or groups" : "사용자나 그룹 없음",
-    "Can edit" : "수정할 수 있음",
+    "Can edit" : "편집 허용",
     "Unshare with {displayName}" : "{displayName}와(과) 공유 중단",
     "Unable to delete the share." : "이 공유를 삭제할 수 없습니다.",
     "Unable to change permissions." : "권한을 변경할 수 없습니다.",
