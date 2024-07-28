@@ -340,9 +340,10 @@ export default class Task {
 	 *
 	 * @readonly
 	 * @memberof Task
+	 * @return {object}
 	 */
 	get recurrenceRuleObject() {
-		if (this._recurrence === undefined || this._recurrence === null) {
+		if (this._recurrence == null) {
 			return getDefaultRecurrenceRuleObject()
 		}
 		return mapRecurrenceRuleValueToRecurrenceRuleObject(this._recurrence.getFirstValue(), this._start)
@@ -357,13 +358,13 @@ export default class Task {
 	set recurrenceRuleObject(rruleObject) {
 		if (rruleObject === null) {
 			this.vtodo.removeProperty('rrule')
+			this._recurrence = null
 		} else {
-			// FIXME: rruleObject.recurrenceRuleValue should not be null
-			this.vtodo.updatePropertyWithValue('rrule', rruleObject.recurrenceRuleValue)
+			this.vtodo.updatePropertyWithValue('rrule', rruleObject.recurrenceRuleValue.toICALJs())
 		}
 		this.todoComponent = ToDoComponent.fromICALJs(this.vtodo)
-		this._recurrence = this.todoComponent.getPropertyIterator('RRULE').next().value
 		this.updateLastModified()
+		this._recurrence = this.todoComponent.getPropertyIterator('RRULE').next().value
 	}
 
 	/**

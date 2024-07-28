@@ -33,6 +33,7 @@ import { translate as t } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
 
 import ICAL from 'ical.js'
+import { RecurValue } from '@nextcloud/calendar-js'
 
 const state = {
 	tasks: {},
@@ -501,9 +502,37 @@ const mutations = {
 	 * @param {object} state The store data
 	 * @param {object} data Destructuring object
 	 * @param {Task} data.task The task
-	 * @param {string} data.rruleObject The recurrence rule object from NC calendar-js
+	 * @param {object} data.rruleObject The recurrence rule object from NC calendar-js
 	 */
 	setRecurrence(state, { task, rruleObject }) {
+		if (rruleObject == null) {
+			task.recurrenceRuleObject = null
+			return
+		}
+		// Set the ICAL recur value from changed params
+		const data = {}
+		if (rruleObject.frequency != null) { data.freq = rruleObject.frequency }
+		if (rruleObject.interval != null) { data.interval = rruleObject.interval }
+		// wkst
+		if (rruleObject.until != null) { data.until = rruleObject.until }
+		if (rruleObject.count != null) { data.count = rruleObject.count }
+		// bysecond
+		// byminute
+		// byhour
+		if (rruleObject.byDay != null) { data.byday = rruleObject.byDay }
+		if (rruleObject.bymonthday != null) { data.bymonthday = rruleObject.bymonthday }
+		// byyearday
+		// byweekno
+		if (rruleObject.byMonth != null) { data.bymonth = rruleObject.byMonth }
+		if (rruleObject.bySetPosition != null) { data.bysetpos = rruleObject.bySetPosition }
+
+		rruleObject.recurrenceRuleValue = RecurValue.fromData(data)
+		if (!rruleObject.recurrenceRuleValue.isRuleValid()) {
+			// Don't save an invalid RRULE (For development, remove after)
+			// console.log('Invalid rrule')
+			// console.log(rruleObject.recurrenceRuleValue.toICALJs().toString())
+			return
+		}
 		task.recurrenceRuleObject = rruleObject
 	},
 
