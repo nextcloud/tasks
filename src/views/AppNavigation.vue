@@ -84,7 +84,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 							@keyup="checkName($event)">
 							<Plus :size="16" />
 						</NcTextField>
-						<Colorpicker :selected-color="selectedColor" @color-selected="setColor(...arguments)" />
+						<Colorpicker :selected-color="selectedColor" @color-selected="setColor" />
 					</div>
 				</li>
 			</NcAppNavigationItem>
