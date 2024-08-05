@@ -483,9 +483,9 @@ export default class Task {
 		} else {
 			this.vtodo.removeProperty('dtstart')
 		}
+		this._start = start
+		this._startMoment = moment(start, 'YYYYMMDDTHHmmssZ')
 		this.updateLastModified()
-		this._start = this.vtodo.getFirstPropertyValue('dtstart')
-		this._startMoment = moment(this._start, 'YYYYMMDDTHHmmssZ')
 		// Check all day setting
 		const d = this._due || this._start
 		this._allDay = d !== null && d.isDate
@@ -509,9 +509,9 @@ export default class Task {
 		} else {
 			this.vtodo.removeProperty('due')
 		}
+		this._due = due
+		this._dueMoment = moment(due, 'YYYYMMDDTHHmmssZ')
 		this.updateLastModified()
-		this._due = this.vtodo.getFirstPropertyValue('due')
-		this._dueMoment = moment(this._due, 'YYYYMMDDTHHmmssZ')
 		// Check all day setting
 		const d = this._due || this._start
 		this._allDay = d !== null && d.isDate
@@ -531,9 +531,7 @@ export default class Task {
 			start.isDate = allDay
 			if (!allDay) {
 				// If we converted to datetime, we set the hour to zero in the current timezone.
-				const startJs = start.toJSDate()
-				startJs.setHours(0)
-				this.setStart(ICAL.Time.fromJSDate(startJs, true))
+				this.setStart(ICAL.Time.fromJSDate(moment(start, 'YYYYMMDDTHHmmssZ').toDate(), true))
 			} else {
 				this.setStart(ICAL.Time.fromDateString(this._startMoment.format('YYYY-MM-DD')))
 			}
@@ -543,9 +541,7 @@ export default class Task {
 			due.isDate = allDay
 			if (!allDay) {
 				// If we converted to datetime, we set the hour to zero in the current timezone.
-				const dueJs = due.toJSDate()
-				dueJs.setHours(0)
-				this.setDue(ICAL.Time.fromJSDate(dueJs, true))
+				this.setDue(ICAL.Time.fromJSDate(moment(due, 'YYYYMMDDTHHmmssZ').toDate(), true))
 			} else {
 				this.setDue(ICAL.Time.fromDateString(this._dueMoment.format('YYYY-MM-DD')))
 			}
