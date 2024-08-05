@@ -91,10 +91,9 @@ export default class Task {
 		this._summary = this.vtodo.getFirstPropertyValue('summary') || ''
 		this._priority = this.vtodo.getFirstPropertyValue('priority') || 0
 		this._complete = this.vtodo.getFirstPropertyValue('percent-complete') || 0
-		const comp = this.vtodo.getFirstPropertyValue('completed')
-		this._completed = !!comp
-		this._completedDate = comp ? comp.toJSDate() : null
+		this._completedDate = this.vtodo.getFirstPropertyValue('completed')
 		this._completedDateMoment = moment(this._completedDate, 'YYYYMMDDTHHmmssZ')
+		this._completed = !!this._completedDate
 		this._status = this.vtodo.getFirstPropertyValue('status')
 		this._note = this.vtodo.getFirstPropertyValue('description') || ''
 		this._related = this.getParent()?.getFirstValue() || null
@@ -308,15 +307,16 @@ export default class Task {
 	}
 
 	setCompleted(completed) {
-		const now = ICAL.Time.fromJSDate(new Date(), true)
 		if (completed) {
+			const now = ICAL.Time.fromJSDate(new Date(), true)
 			this.vtodo.updatePropertyWithValue('completed', now)
+			this._completedDate = now
 		} else {
 			this.vtodo.removeProperty('completed')
+			this._completedDate = null
 		}
 		this.updateLastModified()
 		this._completed = completed
-		this._completedDate = completed ? now.toJSDate() : null
 		this._completedDateMoment = moment(this._completedDate, 'YYYYMMDDTHHmmssZ')
 	}
 
