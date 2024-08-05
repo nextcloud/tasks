@@ -311,13 +311,14 @@ export default class Task {
 			const now = ICAL.Time.fromJSDate(new Date(), true)
 			this.vtodo.updatePropertyWithValue('completed', now)
 			this._completedDate = now
+			this._completedDateMoment = moment(now, 'YYYYMMDDTHHmmssZ')
 		} else {
 			this.vtodo.removeProperty('completed')
 			this._completedDate = null
+			this._completedDateMoment = moment(null)
 		}
-		this.updateLastModified()
 		this._completed = completed
-		this._completedDateMoment = moment(this._completedDate, 'YYYYMMDDTHHmmssZ')
+		this.updateLastModified()
 	}
 
 	get completedDate() {
@@ -630,7 +631,7 @@ export default class Task {
 		this.vtodo.updatePropertyWithValue('last-modified', now)
 		this.vtodo.updatePropertyWithValue('dtstamp', now)
 		this._modified = now
-		this._modifiedMoment = moment(this._modified, 'YYYYMMDDTHHmmssZ')
+		this._modifiedMoment = moment(now, 'YYYYMMDDTHHmmssZ')
 	}
 
 	get modified() {
@@ -651,13 +652,13 @@ export default class Task {
 
 	set created(createdDate) {
 		this.vtodo.updatePropertyWithValue('created', createdDate)
-		this.updateLastModified()
-		this._created = this.vtodo.getFirstPropertyValue('created')
-		this._createdMoment = moment(this._created, 'YYYYMMDDTHHmmssZ')
+		this._created = createdDate
+		this._createdMoment = moment(createdDate, 'YYYYMMDDTHHmmssZ')
 		// Update the sortorder if necessary
 		if (this.vtodo.getFirstPropertyValue('x-apple-sort-order') === null) {
 			this._sortOrder = this.getSortOrder()
 		}
+		this.updateLastModified()
 	}
 
 	get class() {
