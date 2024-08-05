@@ -8,6 +8,6 @@ module.exports = {
 		appVersion: true,
 	},
 	extends: [
-		'@nextcloud',
+		'@nextcloud/eslint-config/vue3',
 	],
 };

@@ -88,7 +88,7 @@ export default {
 		value: {
 			immediate: true,
 			handler(val) {
-				this.$nextTick(_ => {
+				this.$nextTick(() => {
 					// Show placeholder if note is empty
 					if (!val.trim()) {
 						val = t('tasks', 'Click here to add a note.')

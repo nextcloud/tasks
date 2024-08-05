@@ -86,7 +86,7 @@ export default {
 			commitSortOrder: 'setSortOrder',
 		}),
 
-		setDragData: (dataTransfer) => {
+		setDragData: () => {
 			// We do nothing here, this just prevents
 			// vue.draggable from setting data on the
 			// dataTransfer object.
