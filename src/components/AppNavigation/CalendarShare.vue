@@ -192,10 +192,9 @@ export default {
 		 *
 		 * @param {string} query The search query
 		 * @param {string[]} hiddenPrincipals A list of principals to exclude from search results
-		 * @param {string[]} hiddenUrls A list of urls to exclude from search results
 		 * @return {Promise<object[]>}
 		 */
-		async findShareesFromCircles(query, hiddenPrincipals, hiddenUrls) {
+		async findShareesFromCircles(query, hiddenPrincipals) {
 			let results
 			try {
 				results = await Axios.get(generateOcsUrl('apps/files_sharing/api/v1/') + 'sharees', {

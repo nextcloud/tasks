@@ -105,9 +105,8 @@ export default {
 			// wait for all calendars to have fetch their tasks
 			Promise.all(this.calendars.map(calendar =>
 				this.$store.dispatch('getTasksFromCalendar', { calendar, completed: false, related: null }),
-			)).then(results => {
+			)).then(() => {
 				this.loading = false
-				// console.log(results)
 			})
 		},
 
