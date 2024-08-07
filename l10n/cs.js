@@ -164,6 +164,7 @@ OC.L10N.register(
     "Tomorrow" : "Zítra",
     "Add List…" : "Přidat seznam…",
     "New list" : "Nový seznam",
+    "An error occurred, unable to create the list." : "Doško k chybě – seznam se nepodařilo vytvořit.",
     "All day" : "Celý den",
     "Unpin" : "Uvolnit",
     "Pin" : "Připnout",
