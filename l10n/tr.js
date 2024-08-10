@@ -164,6 +164,7 @@ OC.L10N.register(
     "Tomorrow" : "Yarın",
     "Add List…" : "Liste ekle …",
     "New list" : "Liste ekle",
+    "An error occurred, unable to create the list." : "Liste oluşturulurken bir sorun çıktı.",
     "All day" : "Tüm gün",
     "Unpin" : "Sabitlemeyi kaldır",
     "Pin" : "Sabitle",
