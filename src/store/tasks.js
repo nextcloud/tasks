@@ -527,12 +527,14 @@ const mutations = {
 		if (rruleObject.bySetPosition != null) { data.bysetpos = rruleObject.bySetPosition }
 
 		rruleObject.recurrenceRuleValue = RecurValue.fromData(data)
-		if (!rruleObject.recurrenceRuleValue.isRuleValid()) {
-			// Don't save an invalid RRULE (For development, remove after)
-			// console.log('Invalid rrule')
-			// console.log(rruleObject.recurrenceRuleValue.toICALJs().toString())
+		// Don't save an invalid RRULE (For development, remove after)
+		if (!rruleObject.recurrenceRuleValue.isRuleValid() || rruleObject.recurrenceRuleValue.frequency === 'NONE') {
+			console.log('Rrule invalid or freq="NONE". Not saving.')
+			console.log(rruleObject.recurrenceRuleValue.toICALJs().toString())
 			return
 		}
+		console.log('Saving rrule:')
+		console.log(rruleObject.recurrenceRuleValue.toICALJs().toString())
 		task.recurrenceRuleObject = rruleObject
 	},
 
