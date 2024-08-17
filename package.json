@@ -53,7 +53,7 @@
     "p-limit": "^6.1.0",
     "sortablejs-vue3": "^1.2.11",
     "uuid": "^10.0.0",
-    "vue": "^3.4.37",
+    "vue": "^3.4.38",
     "vue-material-design-icons": "^5.3.0",
     "vue-router": "^4.4.3",
     "vuex": "^4.1.0"
