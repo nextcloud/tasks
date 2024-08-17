@@ -211,7 +211,7 @@ OC.L10N.register(
     "{percent} % completed" : "Terminé à {percent} %",
     "No upcoming tasks" : "Pas de tâches à venir",
     "upcoming tasks" : "Tâches à venir",
-    "No tasks today" : "Pas de tâches aujourd'hui",
+    "No tasks today" : "Aucune tâche aujourd'hui",
     "Mark as done" : "Marquer comme fait",
     "No due date assigned" : "Aucune date d’échéance attribuée",
     "[Due yesterday]" : "[Échéance hier]",
