@@ -1,7 +1,7 @@
 {
   "name": "tasks",
   "description": "Nextcloud - Tasks",
-  "version": "0.16.0",
+  "version": "0.16.1",
   "author": {
     "name": "Raimund Schlüßler",
     "email": "raimund.schluessler@mailbox.org"

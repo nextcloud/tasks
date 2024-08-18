@@ -1,3 +1,19 @@
+## 0.16.1 - 2024-08-18
+
+### Added
+- Display error dialog to user when creating calendar for new list fails #2607
+
+### Changed
+- Updated translations
+- Updated dependencies
+
+### Fixed
+- Fix selecting color when creating list #2635
+- Fix selecting all-day and wrong time zone #2636
+- Correctly handle timezone of created, modified and complete dates #2638
+- Bring back titles in sidebar #2639
+- Fix `this.$refs.menuButton is null` error #2634
+
 ## 0.16.0 - 2024-05-08
 
 This version of Tasks is only compatible with Nextcloud server 28 and newer.
