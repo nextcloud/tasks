@@ -91,6 +91,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:aria-label="t('tasks', '{complete} % completed', {complete: task.complete})"
 					:title="t('tasks', '{complete} % completed', {complete: task.complete})"
 					:color="task.calendar.color" />
+				<Bell v-if="task.alarms.length > 0" :size="20" :title="t('tasks', 'Task has one or more reminders')" />
 				<NcActions v-if="task.deleteCountdown === null" class="reactive no-nav" menu-align="right">
 					<NcActionButton v-if="!task.calendar.readOnly"
 						:close-after-click="true"
@@ -203,6 +204,7 @@ import NcProgressBar from '@nextcloud/vue/dist/Components/NcProgressBar.js'
 import NcTextField from '@nextcloud/vue/dist/Components/NcTextField.js'
 import Linkify from '@nextcloud/vue/dist/Directives/Linkify.js'
 
+import Bell from 'vue-material-design-icons/Bell.vue'
 import Delete from 'vue-material-design-icons/Delete.vue'
 import Eye from 'vue-material-design-icons/Eye.vue'
 import Pin from 'vue-material-design-icons/Pin.vue'
@@ -234,6 +236,7 @@ export default {
 		NcActionButton,
 		NcProgressBar,
 		NcTextField,
+		Bell,
 		Delete,
 		Eye,
 		Pin,
@@ -918,6 +921,7 @@ $breakpoint-mobile: 1024px;
 
 				& > .material-design-icon {
 					opacity: .5;
+					margin-inline: 4px;
 
 					&.text-box-outline-icon {
 						cursor: pointer;

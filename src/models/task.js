@@ -86,6 +86,9 @@ export default class Task {
 			this.vtodo.addPropertyWithValue('uid', uuid())
 		}
 
+		// Define components
+		this._alarms = this.getAlarms()
+
 		// Define properties, so Vue reacts to changes of them
 		this._uid = this.vtodo.getFirstPropertyValue('uid') || ''
 		this._summary = this.vtodo.getFirstPropertyValue('summary') || ''
@@ -561,8 +564,60 @@ export default class Task {
 		this._loaded = loadedCompleted
 	}
 
-	get reminder() {
-		return null
+	get alarms() {
+		return this._alarms
+	}
+
+	getAlarms() {
+		return this.vCalendar.getAllSubcomponents('valarm') || []
+	}
+
+	/**
+	 * Add an alarm
+	 *
+	 * @param {{ action: "AUDIO"|"DISPLAY"|"EMAIL"|"PROCEDURE", repeat: number, trigger: { value: ICAL.Duration|ICAL.Time, parameter: object }}} alarm The alarm
+	 */
+	addAlarm({ action, repeat, trigger }) {
+		const valarm = new ICAL.Component('valarm')
+		valarm.addPropertyWithValue('action', action)
+		valarm.addPropertyWithValue('repeat', repeat)
+		const triggerProperty = valarm.addPropertyWithValue('trigger', trigger.value)
+		if (trigger.parameter) {
+			triggerProperty.setParameter(trigger.parameter.name, trigger.parameter.value)
+		}
+		this.vCalendar.addSubcomponent(valarm)
+
+		this.updateLastModified()
+		this._alarms = this.getAlarms()
+	}
+
+	updateAlarm({ action, repeat, trigger }, index) {
+		const valarms = this.vCalendar.getAllSubcomponents('valarm')
+		const valarmToUpdate = valarms[index]
+
+		if (valarmToUpdate) {
+			valarmToUpdate.updatePropertyWithValue('trigger', trigger.value)
+
+			this.updateLastModified()
+			this._alarms = this.getAlarms()
+		}
+	}
+
+	/**
+	 * Remove an alarm
+	 *
+	 * @param {number} index The index of the alarm-list
+	 */
+	removeAlarm(index) {
+		const valarms = this.vCalendar.getAllSubcomponents('valarm')
+		const valarmToDelete = valarms[index]
+
+		if (valarmToDelete) {
+			this.vCalendar.removeSubcomponent(valarms[index])
+
+			this.updateLastModified()
+			this._alarms = this.getAlarms()
+		}
 	}
 
 	/**
@@ -588,7 +643,7 @@ export default class Task {
 	/**
 	 * Set the tags
 	 *
-	 * * @param {string[]} newTags The new tags to set
+	 * @param {string[]} newTags The new tags to set
 	 * @memberof Task
 	 */
 	set tags(newTags) {
