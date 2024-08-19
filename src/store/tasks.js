@@ -472,6 +472,43 @@ const mutations = {
 	},
 
 	/**
+	 * Adds an alarm to a task
+	 *
+	 * @param {object} state The store data
+	 * @param {object} data Destructuring object
+	 * @param {Task} data.task The task
+	 * @param {object} data.alarm The alarm to add
+	 */
+	addAlarm(state, { task, alarm }) {
+		task.addAlarm(alarm)
+	},
+
+	/**
+	 * Adds an alarm to a task
+	 *
+	 * @param {object} state The store data
+	 * @param {object} data Destructuring object
+	 * @param {Task} data.task The task
+	 * @param {object} data.alarm The alarm to add
+	 * @param {number} data.index The index of the alarm-item to remove
+	 */
+	updateAlarm(state, { task, alarm, index }) {
+		task.updateAlarm(alarm, index)
+	},
+
+	/**
+	 * Removes an alarm from a task
+	 *
+	 * @param {object} state The store data
+	 * @param {object} data Destructuring object
+	 * @param {Task} data.task The task
+	 * @param {number} data.index The index of the alarm-item to remove
+	 */
+	removeAlarm(state, { task, index }) {
+		task.removeAlarm(index)
+	},
+
+	/**
 	 * Sets the priority of a task
 	 *
 	 * @param {object} state The store data
@@ -1193,6 +1230,39 @@ const actions = {
 	 */
 	async addTag(context, { task, tag }) {
 		context.commit('addTag', { task, tag })
+		context.dispatch('updateTask', task)
+	},
+
+	/**
+	 * Adds an alarm to a task
+	 *
+	 * @param {object} context The store context
+	 * @param {Task} task The task to update
+	 */
+	async addAlarm(context, { task, alarm }) {
+		context.commit('addAlarm', { task, alarm })
+		context.dispatch('updateTask', task)
+	},
+
+	/**
+	 * Adds an alarm to a task
+	 *
+	 * @param {object} context The store context
+	 * @param {Task} task The task to update
+	 */
+	async updateAlarm(context, { task, alarm, index }) {
+		context.commit('updateAlarm', { task, alarm, index })
+		context.dispatch('updateTask', task)
+	},
+
+	/**
+	 * Removes an alarm from a task
+	 *
+	 * @param {object} context The store context
+	 * @param {Task} task The task to update
+	 */
+	async removeAlarm(context, { task, index }) {
+		context.commit('removeAlarm', { task, index })
 		context.dispatch('updateTask', task)
 	},
 
