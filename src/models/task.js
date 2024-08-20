@@ -588,7 +588,7 @@ export default class Task {
 	/**
 	 * Set the tags
 	 *
-	 * @param {string} newTags The tags
+	 * * @param {string[]} newTags The new tags to set
 	 * @memberof Task
 	 */
 	set tags(newTags) {
