@@ -53,8 +53,6 @@ class BeforeTemplateRenderedListener implements IEventListener {
 		if (strpos($pathInfo, '/call/') === 0 || strpos($pathInfo, '/apps/spreed') === 0) {
 			Util::addScript('tasks', 'tasks-talk');
 			Util::addStyle('tasks', 'tasks-icon');
-			Util::addStyle('tasks', 'tasks-store');
-			Util::addStyle('tasks', 'tasks-TaskCreateDialog');
 		}
 	}
 }
