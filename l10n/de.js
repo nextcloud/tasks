@@ -204,7 +204,7 @@ OC.L10N.register(
     "Loading task from server." : "Aufgabe wird vom Server geladen.",
     "Task not found!" : "Aufgabe nicht gefunden!",
     "Set start date" : "Startdatum setzen",
-    "Set due date" : "Ablaufdatum setzen",
+    "Set due date" : "Fälligkeitsdatum setzen",
     "Priority {priority}: low" : "Priorität {priority}: niedrig",
     "Priority {priority}: medium" : "Priorität {priority}: mittel",
     "Priority {priority}: high" : "Priorität {priority}: hoch",
