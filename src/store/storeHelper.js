@@ -427,21 +427,20 @@ function sortByDate(taskA, taskB, date) {
  * @return {number}
  */
 function sortByTags(taskA, taskB) {
-	const tagsA = taskA.tags.sort();
-	const tagsB = taskB.tags.sort();
+	const tagsA = taskA.tags.sort()
+	const tagsB = taskB.tags.sort()
 
 	// Compare each tag in order
 	for (let i = 0; i < Math.min(tagsA.length, tagsB.length); i++) {
-		const comparison = tagsA[i].toLowerCase().localeCompare(tagsB[i].toLowerCase());
+		const comparison = tagsA[i].toLowerCase().localeCompare(tagsB[i].toLowerCase())
 		if (comparison !== 0) {
-			return comparison;
+			return comparison
 		}
 	}
 
 	// If all compared tags are equal, shorter tag list comes first
-	return tagsA.length - tagsB.length;
+	return tagsA.length - tagsB.length
 }
-
 
 /**
  * Comparator to compare two tasks by sort order in ascending order
