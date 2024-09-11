@@ -49,7 +49,6 @@ OC.L10N.register(
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Dejar de compartir el calendario en {countdown} segundo","Dejar de compartir el calendario en {countdown} segundos","Dejar de compartir el calendario en {countdown} segundos"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Eliminando la lista en {countdown} segundo","Eliminando la lista en {countdown} segundos","Eliminando la lista en {countdown} segundos"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Dejando de compartir la lista en {countdown} segundo","Dejando de compartir la lista en {countdown} segundos","Dejando de compartir la lista en {countdown} segundos"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Compartido con {num} entidad","Compartido con {num} entidades","Compartido con {num} entidades"],
     "Trash bin" : "Papelera",
     "Loading deleted calendars, tasks and events." : "Cargando calendarios, tareas y eventos eliminados.",
     "You do not have any deleted calendars, tasks or events." : "No tienes calendarios, tareas o eventos eliminados.",

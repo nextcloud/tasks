@@ -49,7 +49,6 @@ OC.L10N.register(
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Скасування доступу до календаря через {countdown} секунду","Скасування доступу до календаря через {countdown} секунд","Скасування доступу до календаря через {countdown} секунд","Скасування доступу до календаря через {countdown} секунд"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Список завдань буде вилучено через {countdown} секунду","Список завдань буде вилучено через {countdown} секунди","Список завдань буде вилучено через {countdown} секунд","Список завдань буде вилучено через {countdown} секунд"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Скасування доступу до списку через {countdown} секунду","Скасування доступу до списку через {countdown} секунд","Скасування доступу до списку через {countdown} секунд","Скасування доступу до списку через {countdown} секунд"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Надано доступ {num} об’єкту","Надано доступ {num} об’єктам","Надано доступ {num} об’єктам","Надано доступ {num} об’єктам"],
     "Trash bin" : "Кошик",
     "Loading deleted calendars, tasks and events." : "Завантаження календарів, завдань та подій, які було вилучено.",
     "You do not have any deleted calendars, tasks or events." : "У вас немає календарів, завдань або подій, які було вилучено.",

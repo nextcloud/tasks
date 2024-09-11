@@ -47,7 +47,6 @@
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["将在{countdown}秒后取消共享这个日历"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["将在{countdown}秒后删除列表"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["将在{countdown}秒后取消共享这个列表"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["与 {num} 个实体共享"],
     "Trash bin" : "垃圾箱",
     "Loading deleted calendars, tasks and events." : "正在加载已删除的日历、任务和事件",
     "You do not have any deleted calendars, tasks or events." : "您没有任何已删除的日历、任务或事件。",

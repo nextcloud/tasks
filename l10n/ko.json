@@ -43,7 +43,6 @@
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["{countdown}초 후 달력 공유 해제"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["{countdown}초 후 목록 삭제"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["{countdown}초 후 목록 공유 해제"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["{num}명과 공유함"],
     "Trash bin" : "휴지통",
     "Name" : "이름",
     "Deleted" : "삭제됨",

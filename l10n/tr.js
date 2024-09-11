@@ -49,7 +49,6 @@ OC.L10N.register(
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Takvim {countdown} saniye içinde paylaşımdan kaldırılacak","Takvim {countdown} saniye içinde paylaşımdan kaldırılacak"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Liste {countdown} saniye içinde silinecek","Liste {countdown} saniye içinde silinecek"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Liste {countdown} saniye içinde paylaşımdan kaldırılacak","Liste {countdown} saniye içinde paylaşımdan kaldırılacak"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["{num} varlık ile paylaşılmış","{num} varlık ile paylaşılmış"],
     "Trash bin" : "Çöp kutusu",
     "Loading deleted calendars, tasks and events." : "Silinmiş takvimler, görevler ve etkinlikler yükleniyor.",
     "You do not have any deleted calendars, tasks or events." : "Silinmiş herhangi bir takvim, görev ya da etkinlik yok.",

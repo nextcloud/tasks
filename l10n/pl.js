@@ -49,7 +49,6 @@ OC.L10N.register(
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Zatrzymywanie udostępnienia kalendarza za {countdown} sekundę","Zatrzymywanie udostępnienia kalendarza za {countdown} sekundy","Zatrzymywanie udostępnienia kalendarza za {countdown} sekund","Zatrzymywanie udostępnienia kalendarza za {countdown} sekund"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Usuwanie listy za {countdown} sekundę","Usuwanie listy za {countdown} sekundy","Usuwanie listy za {countdown} sekund","Usuwanie listy za {countdown} sekund"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Zatrzymywanie udostępnienia listy za {countdown} sekundę","Zatrzymywanie udostępnienia listy za {countdown} sekundy","Zatrzymywanie udostępnienia listy za {countdown} sekund","Zatrzymywanie udostępnienia listy za {countdown} sekund"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Udostępnione z {num} jednostką","Udostępnione z {num} jednostkami","Udostępnione z {num} jednostkami","Udostępnione z {num} jednostkami"],
     "Trash bin" : "Kosz",
     "Loading deleted calendars, tasks and events." : "Wczytywanie usuniętych kalendarzy, zadań i wydarzeń.",
     "You do not have any deleted calendars, tasks or events." : "Nie masz żadnych usuniętych kalendarzy, zadań ani wydarzeń.",

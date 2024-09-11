@@ -47,7 +47,6 @@
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Fin de partage de l'agenda dans {countdown} secondes.","Fin de partage de l'agenda dans {countdown} secondes.","Fin de partage de l'agenda dans {countdown} secondes."],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Suppression de la liste dans {countdown} seconde","Suppression de la liste dans {countdown} secondes","Suppression de la liste dans {countdown} secondes"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Suppression du partage de la liste dans {countdown} seconde","Suppression du partage de la liste dans {countdown} secondes","Suppression du partage de la liste dans {countdown} secondes"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Partagé avec {num} entité","Partagé avec {num} entités","Partagé avec {num} entités"],
     "Trash bin" : "Corbeille",
     "Loading deleted calendars, tasks and events." : "Chargement des calendriers, tâches et événements effacés.",
     "You do not have any deleted calendars, tasks or events." : "Vous n'avez aucun agenda, tâche ou événement effacé.",

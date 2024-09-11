@@ -47,7 +47,6 @@
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Κατάργηση κοινής χρήσης ημερολογίου σε {countdown} δεύτερα","Κατάργηση κοινής χρήσης ημερολογίου σε {countdown} δευτερόλεπτα"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Διαγραφή λίστας σε {countdown} δεύτερα","Διαγραφή λίστας σε {countdown} δευτερόλεπτα"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Κατάργηση κοινής χρήσης λίστας σε {countdown} δεύτερα","Κατάργηση κοινής χρήσης λίστας σε {countdown} δευτερόλεπτα"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Κοινη χρήση με {num} οντότητα","Κοινη χρήση με {num} οντότητες"],
     "Trash bin" : "Κάδος απορριμμάτων",
     "Loading deleted calendars, tasks and events." : "Φόρτωση διαγραμμένων ημερολογίων, εργασιών και συμβάντων.",
     "You do not have any deleted calendars, tasks or events." : "Δεν έχετε διαγραμμένα ημερολόγια, εργασίες ή συμβάντα.",

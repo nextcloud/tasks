@@ -49,7 +49,6 @@ OC.L10N.register(
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Общий доступ к календарю будет закрыт через {countdown} секунды","Общий доступ к календарям будет закрыт через {countdown} секунды","Общий доступ к календарям будет закрыт через {countdown} секунды","Общий доступ к календарю будет закрыт через {countdown} секунды"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Удаление списка через {countdown} сек.","Удаление списка через {countdown} сек.","Удаление списка через {countdown} сек.","Удаление списка через {countdown} сек."],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Отмена публикации списка через {countdown} сек.","Отмена публикации списка через {countdown} сек.","Отмена публикации списка через {countdown} сек.","Отмена публикации списка через {countdown} сек."],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Совместный доступ с {num} получателем","Совместный доступ с {num} получателями","Совместный доступ с {num} получателями","Совместный доступ с {num} получателями"],
     "Trash bin" : "Корзина",
     "Loading deleted calendars, tasks and events." : "Загрузка удалённых календарей, задач и событий.",
     "You do not have any deleted calendars, tasks or events." : "У вас нет удалённых календарей, задач или событий.",

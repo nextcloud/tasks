@@ -49,7 +49,6 @@ OC.L10N.register(
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Fjerner deling af kalenderen om {countdown} sekund","Fjerner deling af kalenderen om {countdown} sekunder"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Sletter listen om {countdown} sekund","Sletter listen om {countdown} sekunder"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Ophæver deling af listen om {countdown} sekund","Ophæver deling af listen om {countdown} sekunder"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Delt med {num} enhed","Delt med {num} enheder"],
     "Trash bin" : "Skraldespand",
     "Loading deleted calendars, tasks and events." : "Indlæser slettede kalendere, opgaver og begivenheder.",
     "You do not have any deleted calendars, tasks or events." : "Du har ingen slettede kalendere, opgaver eller begivenheder.",

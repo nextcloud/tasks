@@ -47,7 +47,6 @@
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Прекратяване на споделянето на календар след {countdown} секунди","Прекратяване на споделянето на календар след {countdown} секунди"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Изтриване на списък след {countdown} секундии","Изтриване на списък след {countdown} секундии"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Прекратяване на споделянето на списък след {countdown} секунди","Прекратяване на споделянето на списък след {countdown} секунди"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Споделено с {num} обекта","Споделено с {num} обекта"],
     "Trash bin" : "Кошче за бклук",
     "Loading deleted calendars, tasks and events." : "Зареждане на изтрити календари, задачи и събития.",
     "You do not have any deleted calendars, tasks or events." : "Нямате изтрити календари, задачи или събития.",

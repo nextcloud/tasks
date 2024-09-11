@@ -47,7 +47,6 @@
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Ag dí-roinnt an fhéilire i {comhaireamh síos} soicind","Ag dí-roinnt an fhéilire i {comhaireamh síos} soicind","Ag dí-roinnt an fhéilire i {comhaireamh síos} soicind","Ag dí-roinnt an fhéilire i {comhaireamh síos} soicind","Ag dí-roinnt an fhéilire i {comhaireamh síos} soicind"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["An liosta á scriosadh i {countdown} soicind","An liosta á scriosadh i {countdown} soicind","An liosta á scriosadh i {countdown} soicind","An liosta á scriosadh i {countdown} soicind","An liosta á scriosadh i {countdown} soicind"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Ag díroinnt an liosta i {countdown} soicind","Ag díroinnt an liosta i {countdown} soicind","Ag díroinnt an liosta i {countdown} soicind","Ag díroinnt an liosta i {countdown} soicind","Ag díroinnt an liosta i {countdown} soicind"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Roinnte le {num} eintiteas","Roinnte le {num} eintiteas","Roinnte le {num} eintiteas","Roinnte le {num} eintiteas","Roinnte le {num} eintiteas"],
     "Trash bin" : "Bruscar",
     "Loading deleted calendars, tasks and events." : "Féilirí, tascanna agus imeachtaí scriosta á lódáil.",
     "You do not have any deleted calendars, tasks or events." : "Níl aon fhéilirí, tascanna nó imeachtaí scriosta agat.",

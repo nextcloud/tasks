@@ -30,7 +30,6 @@ OC.L10N.register(
     "Calendar link could not be copied to clipboard." : "Kalendara ligilo ne eblis esti kopiita al tondujo",
     "The name \"{calendar}\" is already used." : "La nomo „{calendar}“ jam uziĝas.",
     "An empty name is not allowed." : "Malplena nomo ne permesatas.",
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Kunhavigitaj kun {num} ento","Kunhavigitaj kun {num} entoj"],
     "Name" : "Nomo",
     "Deleted" : "Forigita",
     "Restore" : "Restaŭri",

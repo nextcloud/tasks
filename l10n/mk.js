@@ -49,7 +49,6 @@ OC.L10N.register(
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Отстранување на споделување на календар за {countdown} секунда","Отстранување на споделување на календар за {countdown} секунди"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Бришење на листата за {countdown} секунда","Бришење на листата за {countdown} секунди"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Отстранување на споделување на листа за {countdown} секунда","Отстранување на споделување на листа за {countdown} секунди"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Споделено со 1 лице","Споделено со {num} лица"],
     "Trash bin" : "Корпа за отпадоци",
     "Loading deleted calendars, tasks and events." : "Вчитување на избришани календари, задачи и настани.",
     "You do not have any deleted calendars, tasks or events." : "Немате избришани календари, задачи или настани.",

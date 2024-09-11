@@ -47,7 +47,6 @@
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Kalenderfreigabe wird in {countdown} Sekunde aufgehoben","Kalenderfreigabe wird in {countdown} Sekunden aufgehoben"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Die Liste wird in {countdown} Sekunde gelöscht","Die Liste wird in {countdown} Sekunden gelöscht"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Listenfreigabe wird in {countdown} Sekunde aufgehoben","Listenfreigabe wird in {countdown} Sekunden aufgehoben"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Mit {num} Entität geteilt","Mit {num} Entitäten geteilt"],
     "Trash bin" : "Papierkorb",
     "Loading deleted calendars, tasks and events." : "Lade gelöschte Kalender, Aufgaben und Termine",
     "You do not have any deleted calendars, tasks or events." : "Du hast keine gelöschten Kalender, Aufgaben oder Termine.",

@@ -47,7 +47,6 @@
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Fjerner deling av kalenderen om {countdown} sekund","Fjerner deling av kalenderen om {countdown} sekunder"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Sletter listen om {countdown} sekund","Sletter listen om {countdown} sekunder"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Fjerner deling av listen om {countdown} sekund","Fjerner deling av listen om {countdown} sekunder"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Delt med {num} entitet","Delt med {num} entiteter"],
     "Trash bin" : "Papirkurv",
     "Loading deleted calendars, tasks and events." : "Laster slettede kalendere, oppgaver og hendelser.",
     "You do not have any deleted calendars, tasks or events." : "Du har ikke noen slettede kalendere, oppgaver eller hendelser.",

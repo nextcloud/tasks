@@ -43,7 +43,6 @@
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Prekid dijeljenja kalendara za {countdown} sekundu","Prekid dijeljenja kalendara za {countdown} sekundi","Prekid dijeljenja kalendara za {countdown} sekundi"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Brisanje popisa za {countdown} sekundu","Brisanje popisa za {countdown} sekunde","Brisanje popisa za {countdown} sekundi"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Prestanak dijeljenja popisa za {countdown} sekundu","Prestanak dijeljenja popisa za {countdown} sekunde","Prestanak dijeljenja popisa za {countdown} sekundi"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Dijeljeno s {num} entitetom","Dijeljeno s {num} entiteta","Dijeljeno s {num} entiteta"],
     "Trash bin" : "Kanta za smeće",
     "Loading deleted calendars, tasks and events." : "Učitavanje izbrisanih kalendara, zadataka i događaja.",
     "You do not have any deleted calendars, tasks or events." : "Nemate izbrisanih kalendara, zadataka ili događaja.",

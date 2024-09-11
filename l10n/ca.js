@@ -49,7 +49,6 @@ OC.L10N.register(
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Deixant de compartir el calendari en {countdown} segon","Deixant de compartir els calendaris en {countdown} segons"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Suprimint d'aquí a {countdown} segon","Suprimint d’aquí a {countdown} segons"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Deixant de compartir el calendari en {countdown} segon","Deixant de compartir el calendari en {countdown} segons"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Compartit amb {num} entitats","Compartit amb {num} entitats"],
     "Trash bin" : "Paperera",
     "Loading deleted calendars, tasks and events." : "Carregant calendaris, tasques i esdeveniments suprimits.",
     "You do not have any deleted calendars, tasks or events." : "No teniu cap calendari, tasca o esdeveniment suprimit.",

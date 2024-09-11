@@ -49,7 +49,6 @@ OC.L10N.register(
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Het delen van de agenda wordt over {countdown} seconde gestopt","Het delen van de agenda wordt over {countdown} seconden gestopt"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["De lijst wordt verwijderd over {countdown} seconde","De lijst wordt verwijderd over {countdown} seconden"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Het delen van de lijst wordt over {countdown} seconde gestopt","Het delen van de lijst wordt over {countdown} seconden gestopt"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Gedeeld met {num} object","Gedeeld met {num} objecten"],
     "Trash bin" : "Prullenbak",
     "Loading deleted calendars, tasks and events." : "Laden verwijderde agenda's, taken en afspraken.",
     "You do not have any deleted calendars, tasks or events." : "Je hebt geen verwijderde agenda, taken of afspraken.",

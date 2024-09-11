@@ -49,7 +49,6 @@ OC.L10N.register(
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["將在 {countdown} 秒後取消分享日曆"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["將在 {countdown} 秒後刪除列表"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["將在 {countdown} 秒後取消分享列表"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["與 {num} 個實體分享"],
     "Trash bin" : "回收桶",
     "Loading deleted calendars, tasks and events." : "正在載入已刪除的日曆、工作項目與活動。",
     "You do not have any deleted calendars, tasks or events." : "您沒有任何已刪除的日曆、工作項目或活動。",

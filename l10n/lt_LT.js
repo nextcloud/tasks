@@ -46,7 +46,6 @@ OC.L10N.register(
     "An error occurred, unable to delete the list." : "Įvyko klaida, nepavyko ištrinti sąrašo.",
     "_Deleting the calendar in {countdown} second_::_Deleting the calendar in {countdown} seconds_" : ["Kalendorius ištrinamas po {countdown} sekundės","Kalendorius ištrinamas po {countdown} sekundžių","Kalendorius ištrinamas po {countdown} sekundžių","Kalendorius ištrinamas po {countdown} sekundės"],
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Kalendorius nustojamas bendrinti po {countdown} sekundės","Kalendorius nustojamas bendrinti po {countdown} sekundžių","Kalendorius nustojamas bendrinti po {countdown} sekundžių","Kalendorius nustojamas bendrinti po {countdown} sekundės"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Bendrinama su {num} esybe","Bendrinama su {num} esybėmis","Bendrinama su {num} esybių","Bendrinama su {num} esybe"],
     "Trash bin" : "Šiukšlinė",
     "Loading deleted calendars, tasks and events." : "Įkeliami ištrinti kalendoriai, užduotys ir įvykiai.",
     "You do not have any deleted calendars, tasks or events." : "Jūs neturite jokių ištrintų kalendorių, užduočių ar įvykių.",

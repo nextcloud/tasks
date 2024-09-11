@@ -47,7 +47,6 @@
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Hætti að deila dagatalinu eftir {countdown} sekúndu","Hætti að deila dagatalinu eftir {countdown} sekúndur"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Eyði listanum eftir {countdown} sekúndu","Eyði listanum eftir {countdown} sekúndur"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Hætti að deila listanum eftir {countdown} sekúndu","Hætti að deila listanum eftir {countdown} sekúndur"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Deilt með {num} einindi","Deilt með {num} einindum"],
     "Trash bin" : "Ruslafata",
     "Loading deleted calendars, tasks and events." : "Hleð inn eyddum dagatölum, verkefnum og atburðum.",
     "You do not have any deleted calendars, tasks or events." : "Þú ert ekki með nein eydd dagatöl, verkefni eða atburði.",

@@ -49,7 +49,6 @@ OC.L10N.register(
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Sdílení kalendáře bude zrušeno za {countdown} sekundu","Sdílení kalendáře bude zrušeno za {countdown} sekundy","Sdílení kalendáře bude zrušeno za {countdown} sekund","Sdílení kalendáře bude zrušeno za {countdown} sekundy"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Seznam bude smazán za {countdown} sekundu","Seznam bude smazán za {countdown} sekundy","Seznam bude smazán za {countdown} sekund","Seznam bude smazán za {countdown} sekundy"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Sdílení seznamu bude zrušeno za {countdown} sekundu","Sdílení seznamu bude zrušeno za {countdown} sekundy","Sdílení seznamu bude zrušeno za {countdown} sekund","Sdílení seznamu bude zrušeno za {countdown} sekundy"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Sdíleno s {num} entitou","Sdíleno s {num} entitami","Sdíleno s {num} entitami","Sdíleno s {num} entitami"],
     "Trash bin" : "Koš",
     "Loading deleted calendars, tasks and events." : "Načítají se smazané kalendáře, úkoly a události.",
     "You do not have any deleted calendars, tasks or events." : "Nemáte žádné smazané kalendáře, úkoly nebo události.",

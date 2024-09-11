@@ -49,7 +49,6 @@ OC.L10N.register(
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Va dexar de compartise'l calendariu en {countdown} segundu","Va dexar de compartise'l calendariu en {countdown} segundos"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Va desaniciase la llista en {countdown} segundu","Va desaniciase la llista en {countdown} segundos"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Va dexar de compartise la llista en {countdown} segundu","Va dexar de compartise la llista  en {countdown} segundos"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Compartióse con {num} entidá","Compartióse con {num} entidaes"],
     "Trash bin" : "Papelera",
     "Loading deleted calendars, tasks and events." : "Cargando los calendarios, les xeres y los eventos desaniciaos.",
     "You do not have any deleted calendars, tasks or events." : "Nun tienes nengún calendariu, xera o eventu desaniciáu.",

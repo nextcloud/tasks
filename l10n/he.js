@@ -43,7 +43,6 @@ OC.L10N.register(
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["שיתוף לוח השנה יפסק בעוד שנייה","שיתוף לוח השנה יפסק בעוד {countdown} שניות","שיתוף לוח השנה יפסק בעוד {countdown} שניות"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["הרשימה תימחק בעוד שנייה","הרשימה תימחק בעוד שתי שניות","הרשימה תימחק בעוד {countdown} שניות","הרשימה תימחק בעוד {countdown} שניות"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["שיתוף הרשומה יבוטל בעוד שנייה אחת","שיתוף הרשומה יבוטל בעוד שתי שניות","שיתוף הרשומה יבוטל בעוד {countdown} שניות"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["משותף עם ישות אחת","משותף עם {num} ישויות","משותף עם {num} ישויות","משותף עם {num} ישויות"],
     "Trash bin" : "אשפה",
     "Name" : "שם",
     "Deleted" : "נמחק",

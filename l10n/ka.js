@@ -49,7 +49,6 @@ OC.L10N.register(
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Unsharing the calendar in {countdown} second","Unsharing the calendar in {countdown} seconds"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Deleting the list in {countdown} second","Deleting the list in {countdown} seconds"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Unsharing the list in {countdown} second","Unsharing the list in {countdown} seconds"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Shared with {num} entity","Shared with {num} entities"],
     "Trash bin" : "Trash bin",
     "Loading deleted calendars, tasks and events." : "Loading deleted calendars, tasks and events.",
     "You do not have any deleted calendars, tasks or events." : "You do not have any deleted calendars, tasks or events.",

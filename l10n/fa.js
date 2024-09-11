@@ -49,7 +49,6 @@ OC.L10N.register(
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["لغو اشتراک‌گذاری تقویم در {countdown} ثانیه","لغو اشتراک‌گذاری تقویم در {countdown} ثانیه"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["حذف لیست در {countdown} ثانیه","حذف لیست در {countdown} ثانیه"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["لغو اشتراک‌گذاری فهرست در {countdown} ثانیه","لغو اشتراک‌گذاری فهرست در {countdown} ثانیه"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["به اشتراک گذاشته شده با {num} نهاد","به اشتراک گذاشته شده با {num} نهاد"],
     "Trash bin" : "زباله‌دان",
     "Loading deleted calendars, tasks and events." : "بارگیری تقویم ها، وظایف و رویدادهای حذف شده",
     "You do not have any deleted calendars, tasks or events." : "شما هیچ تقویم، کار یا رویداد حذف شده ای ندارید.",

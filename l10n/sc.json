@@ -43,7 +43,6 @@
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Annullamentu de sa cumpartzidura de su calendàriu intre {countdown} segundu","Annullamentu de sa cumpartzidura de su calendàriu intre {countdown} segundos"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Sa lista s'at a cantzellare intre {countdown} segundu","Sa lista s'at a cantzellare intre {countdown} segundos"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Sa lista s'at a cantzellare intre {countdown} segundu","Annullamentu de sa cumpartzidura de sa lista intre {countdown} segundos"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Cumpartzidu cun {num} entidade","Cumpartzidu cun {num} entidades"],
     "Trash bin" : " Àliga",
     "Loading deleted calendars, tasks and events." : "Carrighende is calendàrios, fainas e eventos cantzellados.",
     "You do not have any deleted calendars, tasks or events." : "Non tenes perunu calendàriu, faina o eventu cantzelladu.",

@@ -49,7 +49,6 @@ OC.L10N.register(
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Egutegia partekatzea kenduko da {countdown} segundo barru","Egutegia partekatzea kenduko da {countdown} segundo barru"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Zerrenda ezabatzen segundu {countdown}ean","Zerrenda ezabatzen {countdown} segundutan"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Zerrenda partekatzea kenduko da {countdown} segundo barru ","Zerrenda partekatzea kenduko da {countdown} segundo barru "],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Entitate {num}ekin partekatua","{num} entitaterekin partekatua"],
     "Trash bin" : "Zakarrontzia",
     "Loading deleted calendars, tasks and events." : "Ezabatutako egutegi, zeregin eta gertaerak kargatzen.",
     "You do not have any deleted calendars, tasks or events." : "Ez duzu ezabatutako egutegi, zeregin edo gertaerarik.",

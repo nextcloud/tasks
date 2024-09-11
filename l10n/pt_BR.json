@@ -47,7 +47,6 @@
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Descompartilhando o calendário em {countdown} segundo","Descompartilhando o calendário em {countdown} segundos","Descompartilhando o calendário em {countdown} segundos"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Apagando a lista em {countdown} segundo","Apagando a lista em {countdown} segundos","Apagando a lista em {countdown} segundos"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Descompartilhando a lista em {countdown} segundo","Descompartilhando a lista em {countdown} segundos","Descompartilhando a lista em {countdown} segundos"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Compartilhado com {num} entidade","Compartilhado com {num} entidades","Compartilhado com {num} entidades"],
     "Trash bin" : "Lixeira",
     "Loading deleted calendars, tasks and events." : "Carregando calendários, tarefas e eventos excluídos. ",
     "You do not have any deleted calendars, tasks or events." : "Você não tem calendários, tarefas ou eventos excluídos. ",

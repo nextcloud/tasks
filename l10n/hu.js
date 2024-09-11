@@ -49,7 +49,6 @@ OC.L10N.register(
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["A naptár megosztásának megszüntetése {countdown} másodperc múlva","A naptár megosztásának megszüntetése {countdown} másodperc múlva"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["A lista törlése {countdown} másodperc múlva","A lista törlése {countdown} másodperc múlva"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["A lista megosztásának megszüntetése {countdown} másodperc múlva","A lista megosztásának megszüntetése {countdown} másodperc múlva"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Megosztva {num} entitással","Megosztva {num} entitással"],
     "Trash bin" : "Kuka",
     "Loading deleted calendars, tasks and events." : "Törölt naptárak, feladatok és események betöltése.",
     "You do not have any deleted calendars, tasks or events." : "Nincsenek törölt naptárak, feladatok vagy események",
