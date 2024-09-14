@@ -42,7 +42,7 @@
     "@vueuse/components": "^11.0.3",
     "color-convert": "^2.0.1",
     "debounce": "^2.1.1",
-    "ical.js": "^2.0.1",
+    "ical.js": "^2.1.0",
     "jstimezonedetect": "",
     "linkify-it": "^5.0.0",
     "markdown-it": "^14.1.0",
