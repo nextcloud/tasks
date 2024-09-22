@@ -606,6 +606,29 @@ const mutations = {
 	},
 
 	/**
+	 * Sets the completed date of a task
+	 *
+	 * @param {object} state The store data
+	 * @param {object} data Destructuring object
+	 * @param {Task} data.task The task
+	 * @param {moment|null} data.completedDate The completed date moment
+	 */
+	setCompletedDate(state, { task, completedDate }) {
+		if (completedDate !== null) {
+			// Check that the completed date is in the past.
+			let now = moment(ICAL.Time.fromJSDate(new Date(), true), 'YYYYMMDDTHHmmssZ')
+			if (completedDate.isAfter(now)) {
+				showError(t('tasks', 'Completion date must be in the past.'))
+				return
+			}
+			// Convert completed date to ICALTime first
+			completedDate = momentToICALTime(completedDate, false)
+		}
+		// Set the completed date
+		task.completedDate = completedDate
+	},
+
+	/**
 	 * Toggles if the start and due dates of a task are all day
 	 *
 	 * @param {object} state The store data
@@ -1315,6 +1338,17 @@ const actions = {
 	 */
 	async setStart(context, { task, start, allDay }) {
 		context.commit('setStart', { task, start, allDay })
+		context.dispatch('updateTask', task)
+	},
+
+	/**
+	 * Sets the completed date of a task
+	 *
+	 * @param {object} context The store context
+	 * @param {Task} task The task to update
+	 */
+	async setCompletedDate(context, { task, completedDate }) {
+		context.commit('setCompletedDate', { task, completedDate })
 		context.dispatch('updateTask', task)
 	},
 

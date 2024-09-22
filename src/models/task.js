@@ -306,12 +306,14 @@ export default class Task {
 		}
 	}
 
-	setCompleted(completed) {
+	setCompleted(completed, completedDate = null) {
 		if (completed) {
-			const now = ICAL.Time.fromJSDate(new Date(), true)
-			this.vtodo.updatePropertyWithValue('completed', now)
-			this._completedDate = now
-			this._completedDateMoment = moment(now, 'YYYYMMDDTHHmmssZ')
+			if (completedDate === null) {
+				completedDate = ICAL.Time.fromJSDate(new Date(), true)
+			}
+			this.vtodo.updatePropertyWithValue('completed', completedDate)
+			this._completedDate = completedDate
+			this._completedDateMoment = moment(completedDate, 'YYYYMMDDTHHmmssZ')
 		} else {
 			this.vtodo.removeProperty('completed')
 			this._completedDate = null
@@ -323,6 +325,20 @@ export default class Task {
 
 	get completedDate() {
 		return this._completedDate
+	}
+
+	set completedDate(completedDate) {
+		if (completedDate) {
+			this.setCompleted(true, completedDate)
+			this.setComplete(100)
+			this.setStatus('COMPLETED')
+		} else {
+			this.setCompleted(false)
+			if (this.complete === 100) {
+				this.setComplete(99)
+				this.setStatus('IN-PROCESS')
+			}
+		}
 	}
 
 	get completedDateMoment() {
