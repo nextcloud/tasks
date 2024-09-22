@@ -616,7 +616,7 @@ const mutations = {
 	setCompletedDate(state, { task, completedDate }) {
 		if (completedDate !== null) {
 			// Check that the completed date is in the past.
-			let now = moment(ICAL.Time.fromJSDate(new Date(), true), 'YYYYMMDDTHHmmssZ')
+			const now = moment(ICAL.Time.fromJSDate(new Date(), true), 'YYYYMMDDTHHmmssZ')
 			if (completedDate.isAfter(now)) {
 				showError(t('tasks', 'Completion date must be in the past.'))
 				return
@@ -1375,7 +1375,7 @@ const actions = {
 				context.commit('setStart', { task, start: newStart })
 				context.dispatch('updateTask', task)
 			}
-		// Adjust due date
+			// Adjust due date
 		} else if (due.isValid()) {
 			diff = due.diff(moment().startOf('day'), 'days')
 			diff = diff < 0 ? 0 : diff
@@ -1384,7 +1384,7 @@ const actions = {
 				context.commit('setDue', { task, due: newDue })
 				context.dispatch('updateTask', task)
 			}
-		// Set the due date to appropriate value
+			// Set the due date to appropriate value
 		} else {
 			context.commit('setDue', { task, due: day })
 			context.dispatch('updateTask', task)
