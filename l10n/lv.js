@@ -28,7 +28,7 @@ OC.L10N.register(
     "An empty name is not allowed." : "Nosaukums ir obligāts.",
     "An error occurred, unable to delete the calendar." : "Radās kļūda, neizdevās izdzēst kalendāru.",
     "Trash bin" : "Miskaste",
-    "Name" : "Vārds",
+    "Name" : "Nosaukums",
     "Deleted" : "Dzēstie",
     "Restore" : "Atjaunot",
     "Delete permanently" : "Dzēst pavisam",
