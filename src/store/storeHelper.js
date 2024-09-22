@@ -264,6 +264,10 @@ function sort(tasks, sortOrder, sortDirection) {
 		comparators = [sortByDeletedAt]
 		break
 	}
+	case 'tags': {
+		comparators = [sortByPinned, sortByTags, sortAlphabetically]
+		break
+	}
 	case 'manual': {
 		comparators = [sortBySortOrder]
 		break
@@ -413,6 +417,29 @@ function sortByDate(taskA, taskB, date) {
 		return 0
 	}
 	return taskA[date + 'Moment'].diff(taskB[date + 'Moment'])
+}
+
+/**
+ * Comparator to compare two tasks by tags in ascending order
+ *
+ * @param {Task} taskA The first task
+ * @param {Task} taskB The second task
+ * @return {number}
+ */
+function sortByTags(taskA, taskB) {
+	const tagsA = taskA.tags.sort()
+	const tagsB = taskB.tags.sort()
+
+	// Compare each tag in order
+	for (let i = 0; i < Math.min(tagsA.length, tagsB.length); i++) {
+		const comparison = tagsA[i].toLowerCase().localeCompare(tagsB[i].toLowerCase())
+		if (comparison !== 0) {
+			return comparison
+		}
+	}
+
+	// If all compared tags are equal, shorter tag list comes first
+	return tagsA.length - tagsB.length
 }
 
 /**

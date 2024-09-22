@@ -75,6 +75,7 @@ import OrderAlphabeticalAscending from 'vue-material-design-icons/OrderAlphabeti
 import Pencil from 'vue-material-design-icons/Pencil.vue'
 import Plus from 'vue-material-design-icons/Plus.vue'
 import Star from 'vue-material-design-icons/Star.vue'
+import TagMultiple from 'vue-material-design-icons/TagMultiple.vue'
 
 import { mapGetters } from 'vuex'
 
@@ -94,6 +95,7 @@ export default {
 		Pencil,
 		Plus,
 		Star,
+		TagMultiple
 	},
 	directives: {
 		Tooltip,
@@ -149,6 +151,12 @@ export default {
 					icon: 'OrderAlphabeticalAscending',
 					text: t('tasks', 'Alphabetically'),
 					hint: t('tasks', 'Sort by summary and priority.'),
+				},
+				{
+					id: 'tags',
+					icon: 'TagMultiple',
+					text: t('tasks', 'Tags'),
+					hint: t('tasks', 'Sort by tags.'),
 				},
 				{
 					id: 'manual',

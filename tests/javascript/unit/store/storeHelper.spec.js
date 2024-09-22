@@ -30,6 +30,26 @@ describe('storeHelper - sort', () => {
 		const receivedTasks = sort(clonedTasks, 'due', 1)
 		expect(receivedTasks).toEqual(expectedTasks)
 	})
+
+	it('Tests descending sort by tags', () => {
+		const clonedTasks = tasks.slice(0)
+
+		clonedTasks[0].tags = ['B', 'C']
+		clonedTasks[1].tags = ['A', 'D']
+		clonedTasks[2].tags = []
+		clonedTasks[3].tags = ['B']
+
+		const expectedOrder = [clonedTasks[2], clonedTasks[1], clonedTasks[3], clonedTasks[0]]
+		const receivedTasks = sort(clonedTasks.slice(), 'tags', 0)
+
+		expect(receivedTasks).toEqual(expectedOrder)
+		expect(receivedTasks[0].tags).toHaveLength(0)
+		expect(receivedTasks[1].tags[0]).toBe('A')
+		expect(receivedTasks[2].tags[0]).toBe('B')
+		expect(receivedTasks[3].tags[0]).toBe('B')
+		expect(receivedTasks[3].tags[1]).toBe('C')
+		expect(receivedTasks[3].tags).toHaveLength(2)
+	})
 })
 
 describe('storeHelper - parseString', () => {
