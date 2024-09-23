@@ -41,6 +41,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:property-string="startDateString"
 				:read-only="readOnly"
 				:task="task"
+				:check-overdue=true
 				@editing="(editing) => editingStart = editing"
 				@set-value="setStartDate">
 				<template #icon>
@@ -54,6 +55,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:property-string="dueDateString"
 				:read-only="readOnly"
 				:task="task"
+				:check-overdue=true
 				@editing="(editing) => editingDue = editing"
 				@set-value="setDueDate">
 				<template #icon>
