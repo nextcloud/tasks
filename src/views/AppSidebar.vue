@@ -166,19 +166,13 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:placeholder="t('tasks', 'Select a status')"
 					icon="IconPulse"
 					@change-value="changeStatus" />
-				<SliderItem v-show="!readOnly || task.priority"
-					:value="task.priority"
-					:property-string="priorityString"
-					:read-only="readOnly"
-					:min-value="0"
-					:max-value="9"
-					:color="priorityColor"
-					:task="task"
-					@set-value="({task, value}) => setPriority({ task, priority: value })">
-					<template #icon>
-						<Star :size="20" />
-					</template>
-				</SliderItem>
+				<MultiselectItem v-show="!readOnly || priority"
+					:value="priorityOptions.find( _ => _.value === priority )"
+					:options="priorityOptions"
+					:disabled="readOnly"
+					:placeholder="t('tasks', 'Select a priority')"
+					icon="IconStar"
+					@change-value="changePriority" />
 				<SliderItem v-show="!readOnly || task.complete"
 					:value="task.complete"
 					:property-string="completeString"
@@ -612,29 +606,17 @@ export default {
 		showAllDayToggle() {
 			return !this.readOnly && (this.task.due || this.task.start || this.editingStart || this.editingDue)
 		},
-		priorityColor() {
+		priority() {
 			if (+this.task.priority > 5) {
-				return '#4271a6'
+				return 9
 			}
 			if (+this.task.priority === 5) {
-				return '#fd0'
+				return 5
 			}
 			if (+this.task.priority > 0) {
-				return '#b3312d'
+				return 1
 			}
-			return null
-		},
-		priorityString() {
-			if (+this.task.priority > 5) {
-				return t('tasks', 'Priority {priority}: low', { priority: this.task.priority })
-			}
-			if (+this.task.priority === 5) {
-				return t('tasks', 'Priority {priority}: medium', { priority: this.task.priority })
-			}
-			if (+this.task.priority > 0) {
-				return t('tasks', 'Priority {priority}: high', { priority: this.task.priority })
-			}
-			return t('tasks', 'No priority assigned')
+			return 0
 		},
 		priorityClass() {
 			if (+this.task.priority > 5) {
@@ -647,6 +629,41 @@ export default {
 				return 'priority--high'
 			}
 			return null
+		},
+		priorityOptions() {
+			const priorityOptions = [
+				{
+					displayName: t('tasks', 'High'),
+					value: 1,
+					icon: 'IconStar',
+					optionClass: 'active',
+					color: '#b3312d'
+				},
+				{
+					displayName: t('tasks', 'Medium'),
+					value: 5,
+					icon: 'IconStar',
+					optionClass: 'active',
+					color: '#fd0',
+				},
+				{
+					displayName: t('tasks', 'Low'),
+					value: 9,
+					icon: 'IconStar',
+					optionClass: 'active',
+					color: '#4271a6',
+				},
+			]
+			if (this.task.priority) {
+				return priorityOptions.concat([{
+					displayName: t('tasks', 'Clear priority'),
+					value: null,
+					icon: 'IconDelete',
+					optionClass: 'center',
+					color: null,
+				}])
+			}
+			return priorityOptions
 		},
 		completeString() {
 			return t('tasks', '{percent} % completed', { percent: this.task.complete })
@@ -823,6 +840,10 @@ export default {
 
 		changeStatus(status) {
 			this.setStatus({ task: this.task, status: status.type })
+		},
+
+		changePriority(priority) {
+			this.setPriority({ task: this.task, priority: priority.value })
 		},
 
 		/**

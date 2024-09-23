@@ -23,7 +23,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<div :class="optionClass" class="multiselect-picker-option">
+	<div :style="{'color': color}" :class="optionClass" class="multiselect-picker-option">
 		<span class="multiselect-picker-option__icon">
 			<component :is="icon" :size="20" />
 		</span>
@@ -46,6 +46,10 @@ export default {
 			default: null,
 		},
 		optionClass: {
+			type: String,
+			default: null,
+		},
+		color: {
 			type: String,
 			default: null,
 		},
