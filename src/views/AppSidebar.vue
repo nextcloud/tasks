@@ -60,18 +60,6 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<CalendarEnd :size="20" />
 				</template>
 			</DateTimePickerItem>
-			<DateTimePickerItem v-show="task.completed"
-				:date="task.completedDateMoment"
-				:value="newCompletedDate"
-				:all-day=false
-				:property-string="completedString"
-				:read-only="readOnly"
-				:task="task"
-				@set-value="changeCompletedDate">
-				<template #icon>
-					<CalendarCheck :size="20" />
-				</template>
-			</DateTimePickerItem>
 			<CheckboxItem v-show="showAllDayToggle"
 				id="allDayToggle"
 				:checked="allDay"
@@ -178,6 +166,17 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:placeholder="t('tasks', 'Select a status')"
 					icon="IconPulse"
 					@change-value="changeStatus" />
+				<DateTimePickerItem v-show="task.completed"
+					:date="task.completedDateMoment"
+					:value="newCompletedDate"
+					:property-string="completedString"
+					:read-only="readOnly"
+					:task="task"
+					@set-value="changeCompletedDate">
+					<template #icon>
+						<CalendarCheck :size="20" />
+					</template>
+				</DateTimePickerItem>
 				<SliderItem v-show="!readOnly || task.priority"
 					:value="task.priority"
 					:property-string="priorityString"
