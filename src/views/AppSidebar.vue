@@ -567,7 +567,7 @@ export default {
 		/**
 		 * Initializes the completed date of a task
 		 *
-		 * @return {Date} The completed date moment
+		 * @return {Date|null} The completed date moment
 		 */
 		 newCompletedDate() {
 			const completedDate = this.task.completedDateMoment
