@@ -55,4 +55,39 @@ describe('AppSidebar.vue', () => {
 		actual = wrapper.vm.newDueDate
 		expect(actual.getTime()).toBe(newDueDate.getTime())
 	})
+
+	it('Task completed date is set correctly', () => {
+		const wrapper = shallowMount(AppSidebar, {
+			global: {
+				plugins: [store, router],
+			},
+		})
+
+		let actual = wrapper.vm.newCompletedDate
+		expect(actual).toBe(null)
+
+		const newCompletedDate = new Date('2019-01-01T12:00:00')
+		wrapper.vm.changeCompletedDate({ task: wrapper.vm.task, value: newCompletedDate })
+		
+		actual = wrapper.vm.newCompletedDate
+		expect(actual.getTime()).toBe(newCompletedDate.getTime())
+	})
+
+	it('Setting completed date to future is ignored', () => {
+		const wrapper = shallowMount(AppSidebar, {
+			global: {
+				plugins: [store, router],
+			},
+		})
+
+		let actual = wrapper.vm.newCompletedDate
+		const expected = new Date('2019-01-01T12:00:00')
+		expect(actual.getTime()).toBe(expected.getTime())
+
+		const newCompletedDate = new Date('2020-01-01T12:00:01')
+		wrapper.vm.changeCompletedDate({ task: wrapper.vm.task, value: newCompletedDate })
+
+		actual = wrapper.vm.newCompletedDate
+		expect(actual.getTime()).toBe(expected.getTime())
+	})
 })
