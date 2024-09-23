@@ -67,6 +67,7 @@ OC.L10N.register(
     "Select tags to filter by" : "Alege etichete după care să filtrezi",
     "Due date" : "Data scadenței",
     "Alphabetically" : "Alfabetic",
+    "Tags" : "Etichete",
     "[Yesterday]" : "[Ieri]",
     "[Today]" : "[Astăzi]",
     "[Tomorrow]" : "[Mâine]",

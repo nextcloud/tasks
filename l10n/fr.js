@@ -120,6 +120,7 @@ OC.L10N.register(
     "Sort by priority and summary." : "Trier par priorité puis par ordre alphabétique.",
     "Alphabetically" : "Ordre alphabétique",
     "Sort by summary and priority." : "Trier par ordre alphabétique puis par priorité.",
+    "Tags" : "Étiquettes",
     "Manually" : "Manuellement",
     "Sort by manual order." : "Trier par ordre manuel.",
     "Task has hidden subtasks" : "La tâche comporte des sous-tâches cachées",

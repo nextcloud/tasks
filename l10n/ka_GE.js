@@ -32,6 +32,7 @@ OC.L10N.register(
     "Last modified" : "ბოლო ცვლილება",
     "Priority" : "პრიორიტეტი",
     "Alphabetically" : "ანბანის მიხედვით",
+    "Tags" : "ტეგები",
     "Manually" : "ხელით",
     "Task is completed" : "დავალება დასრულებულია",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n დასრულებული დავალება","%n დასრულებული დავალება"],

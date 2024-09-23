@@ -95,6 +95,7 @@ OC.L10N.register(
     "Sort by priority and summary." : "Assenta segundu prioridade e resumu.",
     "Alphabetically" : "Òrdine alfabèticu",
     "Sort by summary and priority." : "Assenta segundu resumu e prioridade.",
+    "Tags" : "Etichetas",
     "Manually" : "A manu",
     "Sort by manual order." : "Assenta segundu ordine manuale.",
     "Task has hidden subtasks" : "Sa faina tenet suta-fainas cuadas",

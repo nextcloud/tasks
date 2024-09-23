@@ -83,6 +83,7 @@ OC.L10N.register(
     "Sort by priority and summary." : "מיון לפי עדיפות ותקציר.",
     "Alphabetically" : "בסדר האלף-בית",
     "Sort by summary and priority." : "מיון לפי תקציר ועדיפות.",
+    "Tags" : "תגיות",
     "Manually" : "באופן ידני",
     "Sort by manual order." : "מיון ידני.",
     "{complete} % completed" : "{complete} % הושלמו",

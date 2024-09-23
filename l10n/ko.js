@@ -86,6 +86,7 @@ OC.L10N.register(
     "Priority" : "우선 순위",
     "Sort by priority and summary." : "우선순위와 요약으로 정렬",
     "Alphabetically" : "가나다순",
+    "Tags" : "태그",
     "Manually" : "수동으로",
     "[Yesterday]" : "[어제]",
     "[Today]" : "[오늘]",

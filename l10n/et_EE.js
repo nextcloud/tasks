@@ -37,6 +37,7 @@ OC.L10N.register(
     "Last modified" : "Viimati muudetud",
     "Priority" : "Prioriteet",
     "Alphabetically" : "Tähestikujärjekorras",
+    "Tags" : "Sildid",
     "Manually" : "Käsitsi",
     "Task is completed" : "Ülesanne on tehtud",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n lõpetatud ülesanne","%n lõpetatud ülesannet"],

@@ -120,6 +120,7 @@ OC.L10N.register(
     "Sort by priority and summary." : "Ordenar por prioridade e resumo.",
     "Alphabetically" : "Alfabeticamente",
     "Sort by summary and priority." : "Ordenar por  resumo e prioridade.",
+    "Tags" : "Etiquetas",
     "Manually" : "Manualmente",
     "Sort by manual order." : "Ordenar manualmente.",
     "Task has hidden subtasks" : "A tarefa ten subtarefas agochadas",

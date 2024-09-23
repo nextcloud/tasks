@@ -16,6 +16,7 @@ OC.L10N.register(
     "Delete permanently" : "مەڭگۈلۈك ئۆچۈر",
     "Cancel" : "ۋاز كەچ",
     "Close" : "ياپ",
+    "Tags" : "بەلگەلەر",
     "Notes" : "ئىزاھاتلار",
     "Repeat" : "قايتىلا"
 },

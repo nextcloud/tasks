@@ -32,6 +32,7 @@ OC.L10N.register(
     "Due date" : "วันที่ครบกำหนด",
     "Priority" : "ลำดับความสำคัญ",
     "Alphabetically" : "เรียงตามตัวอักษร",
+    "Tags" : "แท็ก",
     "Manually" : "ด้วยตนเอง",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n งานที่เสร็จแล้ว"],
     "Tomorrow" : "พรุ่งนี้",

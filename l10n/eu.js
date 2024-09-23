@@ -120,6 +120,7 @@ OC.L10N.register(
     "Sort by priority and summary." : "Ordenatu lehentasuna eta laburpenaren arabera.",
     "Alphabetically" : "Alfabetikoki",
     "Sort by summary and priority." : "Ordenatu laburpena eta lehentasunaren arabera.",
+    "Tags" : "Etiketak",
     "Manually" : "Eskuz",
     "Sort by manual order." : "Ordenatu eskuz.",
     "Task has hidden subtasks" : "Zereginak ezkutuko azpizereginak ditu",

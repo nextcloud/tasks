@@ -14,6 +14,7 @@ OC.L10N.register(
     "Empty trash bin" : "ລ້າງຖັງຂີ້ເຫຍື່ອ",
     "Cancel" : "ຍົກເລີກ",
     "Close" : "ປິດ",
+    "Tags" : "ປ້າຍກຳກັບ",
     "Details" : "ລາຍລະອຽດ"
 },
 "nplurals=1; plural=0;");

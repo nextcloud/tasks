@@ -110,6 +110,7 @@ OC.L10N.register(
     "Sort by priority and summary." : "Sorteer op prioriteit en samenvatting.",
     "Alphabetically" : "Alfabetisch",
     "Sort by summary and priority." : "Sorteer op samenvatting en prioriteit.",
+    "Tags" : "Tags",
     "Manually" : "Handmatig",
     "Sort by manual order." : "Sorteer op handmatige volgorde.",
     "Task has hidden subtasks" : "Taak heeft verborgen subtaken",

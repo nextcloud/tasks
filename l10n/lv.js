@@ -51,6 +51,7 @@ OC.L10N.register(
     "Last modified" : "Pēdējoreiz modificēts",
     "Priority" : "Prioritāte",
     "Alphabetically" : "Alfabētiskā secībā",
+    "Tags" : "Birkas",
     "Manually" : "Manuāli",
     "Hide subtasks" : "Slēpt apakšuzdevumus",
     "Hide closed subtasks" : "Slēpt slēgtos apakšuzdevumus",

@@ -62,6 +62,7 @@ OC.L10N.register(
     "Sort by priority and summary." : "Ordigi laŭ prioritato kaj resumo.",
     "Alphabetically" : "Alfabete",
     "Sort by summary and priority." : "Ordigi laŭ resumo kaj prioritato.",
+    "Tags" : "Etikedoj",
     "Manually" : "Mane",
     "Sort by manual order." : "Ordigi permane",
     "{complete} % completed" : "{complete} % plenumita",

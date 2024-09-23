@@ -53,6 +53,7 @@ OC.L10N.register(
     "Last modified" : "Última modificação",
     "Priority" : "Prioridade",
     "Alphabetically" : "Alfabeticamente",
+    "Tags" : "Etiquetas",
     "Manually" : "Manual",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n Tarefa Concluída","%n Tarefas Concluídas","%n Tarefas Concluídas"],
     "Tomorrow" : "Amanhã",

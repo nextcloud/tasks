@@ -47,6 +47,7 @@ OC.L10N.register(
     "Due date" : "Tenggat",
     "Last modified" : "Terakhir diubah",
     "Alphabetically" : "Berdasarkan abjad",
+    "Tags" : "Tag",
     "[Today]" : "[Hari ini]",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n Tugas Diselesaikan"],
     "Tomorrow" : "Besok",

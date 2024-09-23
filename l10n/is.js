@@ -116,6 +116,7 @@ OC.L10N.register(
     "Sort by priority and summary." : "Raða eftir forgangi og yfirliti.",
     "Alphabetically" : "Í stafrófsröð",
     "Sort by summary and priority." : "Raða eftir yfirliti og forgangi.",
+    "Tags" : "Merki",
     "Manually" : "Handvirkt",
     "Sort by manual order." : "Raða eftir handvirkri röð.",
     "Task has hidden subtasks" : "Verkefnið er með falin undirverkefni",

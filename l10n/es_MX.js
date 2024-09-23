@@ -50,6 +50,7 @@ OC.L10N.register(
     "Last modified" : "Última modificación",
     "Priority" : "Prioridad",
     "Alphabetically" : "Alfabéticamente",
+    "Tags" : "Etiquetas",
     "Manually" : "Manualmente",
     "Delete task" : "Eliminar tarea",
     "[Yesterday]" : "[Ayer]",

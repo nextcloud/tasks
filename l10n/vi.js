@@ -50,6 +50,7 @@ OC.L10N.register(
     "Due date" : "Thời hạn",
     "Last modified" : "Lần cuối chỉnh sửa",
     "Alphabetically" : "Theo bảng chữ cái",
+    "Tags" : "Nhãn",
     "Delete task" : "Xóa nhiệm vụ",
     "[Yesterday]" : "[Hôm qua]",
     "[Today]" : "[Hôm nay]",

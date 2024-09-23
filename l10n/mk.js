@@ -106,6 +106,7 @@ OC.L10N.register(
     "Sort by priority and summary." : "Подреди по приоритет и резиме.",
     "Alphabetically" : "Азбучно",
     "Sort by summary and priority." : "Подреди по резиме и приоритет.",
+    "Tags" : "Ознаки",
     "Manually" : "Рачно",
     "Sort by manual order." : "Подреди по рачен редослед.",
     "Task has hidden subtasks" : "Задачата има скриена подзадача",

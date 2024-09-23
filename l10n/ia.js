@@ -28,6 +28,7 @@ OC.L10N.register(
     "Change sort order" : "Cambiar ordine de classification",
     "Priority" : "Prioritate",
     "Alphabetically" : "Alphabeticamente",
+    "Tags" : "Etiquettas",
     "Manually" : "Manualmente",
     "Tomorrow" : "Deman",
     "Details" : "Detalios",

@@ -18,6 +18,7 @@ OC.L10N.register(
     "Delete permanently" : "நிரந்தரமாக நீக்கவும்",
     "Cancel" : "இரத்து செய்க",
     "Close" : "மூடுக",
+    "Tags" : "சீட்டுகள்",
     "Details" : "விவரங்கள்",
     "Notes" : "குறிப்புகள்",
     "Repeat" : "மீண்டும்"

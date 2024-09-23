@@ -25,6 +25,7 @@ OC.L10N.register(
     "Empty trash bin" : "Eidel Dreckskëscht",
     "Cancel" : "Ofbriechen",
     "Close" : "Zoumaachen",
+    "Tags" : "Tags",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n erfëllt Aufgab","%n erfëllten Aufgaben"],
     "Tomorrow" : "Muer",
     "Details" : "Detailer",

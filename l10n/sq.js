@@ -35,6 +35,7 @@ OC.L10N.register(
     "Last modified" : "Ndryshuar së fundmi",
     "Priority" : "Përparësi",
     "Alphabetically" : "Alfabetikisht",
+    "Tags" : "Etiketat",
     "Manually" : "Dorazi",
     "Task is completed" : "Detyra është e plotësuar",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n Punë e Plotësuar","%n Punë të Plotësuara"],

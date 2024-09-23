@@ -119,6 +119,7 @@ OC.L10N.register(
     "Sort by priority and summary." : "Sortera efter prioritering och sammanfattning.",
     "Alphabetically" : "Alfabetisk",
     "Sort by summary and priority." : "Sortera efter sammanfattning och prioritering.",
+    "Tags" : "Taggar",
     "Manually" : "Manuellt",
     "Sort by manual order." : "Sortera efter manuell ordning.",
     "Task has hidden subtasks" : "Uppgiften har dolda underuppgifter",

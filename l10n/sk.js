@@ -120,6 +120,7 @@ OC.L10N.register(
     "Sort by priority and summary." : "Zoradiť podľa priority a súhrnu.",
     "Alphabetically" : "Abecedne",
     "Sort by summary and priority." : "Zoradiť podľa súhrnu a priority.",
+    "Tags" : "Štítky",
     "Manually" : "Manuálne",
     "Sort by manual order." : "Zoradiť manuálne.",
     "Task has hidden subtasks" : "Úloha ma skryté podúlohy",

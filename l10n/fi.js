@@ -86,6 +86,7 @@ OC.L10N.register(
     "Completed date" : "Valmistumispäivämäärä",
     "Priority" : "Tärkeys",
     "Alphabetically" : "Aakkosjärjestys",
+    "Tags" : "Tunnisteet",
     "Manually" : "Käsin",
     "Task has hidden subtasks" : "Tehtävällä on piilotettuja alitehtäviä",
     "Task is pinned" : "Tehtävä on kiinnitetty",

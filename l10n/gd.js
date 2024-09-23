@@ -12,6 +12,7 @@ OC.L10N.register(
     "Empty trash bin" : "Falamhaich an sgudal",
     "Cancel" : "Sguir dheth",
     "Close" : "Dùin",
+    "Tags" : "Tagaichean",
     "Details" : "Mion-fhiosrachadh",
     "Notes" : "Nòtaichean"
 },

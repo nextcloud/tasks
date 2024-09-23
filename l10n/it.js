@@ -108,6 +108,7 @@ OC.L10N.register(
     "Sort by priority and summary." : "Ordina per priorità e riepilogo.",
     "Alphabetically" : "Ordine alfabetico",
     "Sort by summary and priority." : "Ordina per riepilogo e priorità.",
+    "Tags" : "Etichette",
     "Manually" : "Manuale",
     "Sort by manual order." : "Ordina manualmente.",
     "Task has hidden subtasks" : "L'attività ha sotto-attività nascoste",

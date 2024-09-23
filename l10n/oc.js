@@ -30,6 +30,7 @@ OC.L10N.register(
     "Cancel" : "Anullar",
     "Close" : "Tampar",
     "Alphabetically" : "Alfabeticament",
+    "Tags" : "Etiquetas",
     "[Yesterday]" : "[Ièr]",
     "[Today]" : "[Uèi]",
     "[Tomorrow]" : "[Deman]",

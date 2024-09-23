@@ -103,6 +103,7 @@ OC.L10N.register(
     "Sort by priority and summary." : "Ταξινόμηση κατά προτεραιότητα και σύνοψη.",
     "Alphabetically" : "Αλφαβητικά",
     "Sort by summary and priority." : "Ταξινόμηση κατά σύνοψη και προτεραιότητα.",
+    "Tags" : "Ετικέτες",
     "Manually" : "Χειροκίνητα",
     "Sort by manual order." : "Ταξινόμηση με χειροκίνητη σειρά.",
     "Task has hidden subtasks" : "Η εργασίας έχει κρυφές δευτερεύουσες υποεργασίες",

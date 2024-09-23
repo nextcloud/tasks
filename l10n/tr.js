@@ -120,6 +120,7 @@ OC.L10N.register(
     "Sort by priority and summary." : "Öncelik ve özete göre sıralar.",
     "Alphabetically" : "Alfabetik",
     "Sort by summary and priority." : "Özellik ve önceliğe göre sıralar.",
+    "Tags" : "Etiketler",
     "Manually" : "El ile",
     "Sort by manual order." : "El belirtilen sıraya göre sıralar.",
     "Task has hidden subtasks" : "Görevin gizlenmiş alt görevleri var",

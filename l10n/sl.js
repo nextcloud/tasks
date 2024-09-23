@@ -104,6 +104,7 @@ OC.L10N.register(
     "Sort by priority and summary." : "Razvrsti po prednosti, nato po povzetku.",
     "Alphabetically" : "Abecedno",
     "Sort by summary and priority." : "Razvrsti po povzetku, nato po prednosti.",
+    "Tags" : "Oznake",
     "Manually" : "Ročno",
     "Sort by manual order." : "Razvrsti ročno",
     "Task has hidden subtasks" : "Naloga ima skrite podrejene naloge",

@@ -14,6 +14,7 @@ OC.L10N.register(
     "Cancel" : "Cancel",
     "Close" : "Zatvori",
     "Due date" : "Rok",
+    "Tags" : "Oznake",
     "Details" : "Detalji",
     "Notes" : "Beleške"
 },

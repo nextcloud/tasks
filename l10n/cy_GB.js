@@ -40,6 +40,7 @@ OC.L10N.register(
     "Open your browser console for more details" : "Agorwch eich consol porwr am fwy o fanylion",
     "Last modified" : "Newidiwyd diwethaf",
     "Alphabetically" : "Trefn yr Wyddor",
+    "Tags" : "Tagiau",
     "[Yesterday]" : "[Ddoe]",
     "[Today]" : "Heddiw",
     "[Tomorrow]" : "[Yfory]",

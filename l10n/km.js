@@ -17,6 +17,7 @@ OC.L10N.register(
     "Delete permanently" : "លុប​ជា​អចិន្ត្រៃយ៍",
     "Cancel" : "បោះបង់",
     "Close" : "បិទ",
+    "Tags" : "ស្លាក",
     "Details" : "ព័ត៌មាន​លម្អិត",
     "Notes" : "កំណត់​ចំណាំ",
     "Repeat" : "ធ្វើម្ដងទៀត"

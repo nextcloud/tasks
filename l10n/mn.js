@@ -24,6 +24,7 @@ OC.L10N.register(
     "Close" : "Хаах",
     "Select tags to filter by" : "Хайлт хийх tag-үүдийг сонгоно уу",
     "Last modified" : "Сүүлд өөрчилсөн",
+    "Tags" : "Tag-үүд",
     "Tomorrow" : "маргааш",
     "Details" : "Дэлгэрэнгүй",
     "Notes" : "Шинэ ",

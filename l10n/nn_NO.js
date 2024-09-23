@@ -21,6 +21,7 @@ OC.L10N.register(
     "Cancel" : "Avbryt",
     "Close" : "Lukk",
     "Last modified" : "Siste endra",
+    "Tags" : "Emneord",
     "Details" : "Detaljar",
     "Notes" : "Notat",
     "Reminders" : "Påminningar",
