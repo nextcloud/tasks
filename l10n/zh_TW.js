@@ -121,6 +121,7 @@ OC.L10N.register(
     "Alphabetically" : "字母",
     "Sort by summary and priority." : "按摘要與優先程度排序。",
     "Tags" : "標籤",
+    "Sort by tags." : "按照標籤排序。",
     "Manually" : "手動",
     "Sort by manual order." : "手動排序。",
     "Task has hidden subtasks" : "工作項目有隱藏的子工作項目",

@@ -121,6 +121,7 @@ OC.L10N.register(
     "Alphabetically" : "Betűrendben",
     "Sort by summary and priority." : "Rendezés az összefoglaló és a prioritás szerint.",
     "Tags" : "Címkék",
+    "Sort by tags." : "Rendezés címkék szerint",
     "Manually" : "Kézileg",
     "Sort by manual order." : "Rendezés kézi sorrend szerint.",
     "Task has hidden subtasks" : "A feladatnak rejtett részfeladatai vannak",

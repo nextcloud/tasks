@@ -120,6 +120,8 @@ OC.L10N.register(
     "Sort by priority and summary." : "الترتيب بحسب الأولوية و المُلخّص.",
     "Alphabetically" : "أبجديا",
     "Sort by summary and priority." : "الترتيب بحسب المُلخّص و الأولوية.",
+    "Tags" : "وُسُوم",
+    "Sort by tags." : "الترتيب بحسب الوسوم.",
     "Manually" : "يدويّاً",
     "Sort by manual order." : "الترتيب بحسب الفرز اليدوي.",
     "Task has hidden subtasks" : "مهمة بها مهام فرعية مخفية",

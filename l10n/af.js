@@ -33,6 +33,7 @@ OC.L10N.register(
     "Last modified" : "Laas gewysig",
     "Priority" : "Prioriteit",
     "Alphabetically" : "Alfabeties",
+    "Tags" : "Etikette",
     "Manually" : "Handmatig",
     "Task is completed" : "Taak is voltooid",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n Voltooide taak","%n Voltooide take"],

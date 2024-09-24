@@ -25,6 +25,7 @@ OC.L10N.register(
     "Cancel" : "Dayandır",
     "Close" : "Bağla",
     "Priority" : "Prioritet",
+    "Tags" : "Işarələr",
     "Manually" : "Əl ilə",
     "_%n Completed Task_::_%n Completed Tasks_" : ["\"%s\" Bitmiş Tapşırıqlar","Completed Tasks"],
     "Tomorrow" : "Sabah",
