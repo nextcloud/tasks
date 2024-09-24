@@ -635,7 +635,7 @@ export default {
 					value: 1,
 					icon: 'IconStar',
 					optionClass: 'active',
-					color: '#b3312d'
+					color: '#b3312d',
 				},
 				{
 					displayName: t('tasks', 'Medium'),
