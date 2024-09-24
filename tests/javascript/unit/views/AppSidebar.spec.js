@@ -68,7 +68,7 @@ describe('AppSidebar.vue', () => {
 
 		const newCompletedDate = new Date('2019-01-01T12:00:00')
 		wrapper.vm.changeCompletedDate({ task: wrapper.vm.task, value: newCompletedDate })
-		
+
 		actual = wrapper.vm.newCompletedDate
 		expect(actual.getTime()).toBe(newCompletedDate.getTime())
 	})
