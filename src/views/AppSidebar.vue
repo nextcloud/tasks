@@ -294,7 +294,6 @@ import Pencil from 'vue-material-design-icons/Pencil.vue'
 import Percent from 'vue-material-design-icons/Percent.vue'
 import Pin from 'vue-material-design-icons/Pin.vue'
 import PinOff from 'vue-material-design-icons/PinOff.vue'
-import Star from 'vue-material-design-icons/Star.vue'
 import TextBoxOutline from 'vue-material-design-icons/TextBoxOutline.vue'
 import Undo from 'vue-material-design-icons/Undo.vue'
 import Web from 'vue-material-design-icons/Web.vue'
@@ -322,7 +321,6 @@ export default {
 		Percent,
 		Pin,
 		PinOff,
-		Star,
 		TextBoxOutline,
 		Undo,
 		Web,
