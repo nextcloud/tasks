@@ -121,6 +121,7 @@ OC.L10N.register(
     "Alphabetically" : "In ord aibítre",
     "Sort by summary and priority." : "Sórtáil de réir achoimre agus tosaíochta.",
     "Tags" : "Clibeanna",
+    "Sort by tags." : "Sórtáil de réir clibeanna.",
     "Manually" : "Láimh",
     "Sort by manual order." : "Sórtáil de réir ordú láimhe.",
     "Task has hidden subtasks" : "Tá subtascanna folaithe ag Task",
