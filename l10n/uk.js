@@ -121,6 +121,7 @@ OC.L10N.register(
     "Alphabetically" : "Назва",
     "Sort by summary and priority." : "Впорядкувати за описом та пріоритетом.",
     "Tags" : "Мітки",
+    "Sort by tags." : "Впорядковувати за мітками.",
     "Manually" : "Вручну",
     "Sort by manual order." : "Впорядкувати вручну.",
     "Task has hidden subtasks" : "Завдання має приховані підзадачі",
