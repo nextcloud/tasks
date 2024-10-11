@@ -120,6 +120,8 @@ OC.L10N.register(
     "Sort by priority and summary." : "Seřadit podle priority a shrnutí.",
     "Alphabetically" : "Abecedně",
     "Sort by summary and priority." : "Seřadit podle shrnutí a priority.",
+    "Tags" : "Štítky",
+    "Sort by tags." : "Seřadit podle štítků.",
     "Manually" : "Ručně",
     "Sort by manual order." : "Seřadit ručně.",
     "Task has hidden subtasks" : "Úkol má skryté dílčí úkoly",
