@@ -24,6 +24,7 @@ OC.L10N.register(
     "Empty trash bin" : "Pod-lastez goullo",
     "Cancel" : "Arrest",
     "Close" : "Seriñ",
+    "Tags" : "Klavioù",
     "[Yesterday]" : "[Dec'h]",
     "[Today]" : "[Hiziv]",
     "[Tomorrow]" : "[Warc'hoazh]",

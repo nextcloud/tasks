@@ -116,6 +116,7 @@ OC.L10N.register(
     "Sort by priority and summary." : "Ordena per prioritat i resum.",
     "Alphabetically" : "Alfabèticament",
     "Sort by summary and priority." : "Ordena per resum i prioritat.",
+    "Tags" : "Etiquetes",
     "Manually" : "Manualment",
     "Sort by manual order." : "Ordena manualment.",
     "Task has hidden subtasks" : "La tasca té subtasques amagades",

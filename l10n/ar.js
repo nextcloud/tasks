@@ -78,7 +78,7 @@ OC.L10N.register(
     "Add this as a new tag" : "أضف هذا كوسم جديد",
     "No tag available. Create one!" : "لا توجد أي سمة tag حتى الآن. يمكنك إنشاء واحدة!",
     "Create new tasks" : "إنشاء مهام جديدة",
-    "Create {numberOfTasks} tasks from pasted text" : "أنشِيءْ  {numberOfTasks} مُهِمّة من النص المُلْصَق",
+    "Create {numberOfTasks} tasks from pasted text" : "إنشاء {numberOfTasks} مهمة من النص الملصق",
     "Cancel" : "إلغاء",
     "Create tasks" : "إنشاء مهام",
     "Creating new tasks…" : "جارٍ إنشاء مهام جديدة ...",

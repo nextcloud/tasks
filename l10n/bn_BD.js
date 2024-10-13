@@ -23,6 +23,7 @@ OC.L10N.register(
     "Restore" : "ফিরিয়ে দাও",
     "Cancel" : "বাতিল",
     "Close" : "বন্ধ",
+    "Tags" : "ট্যাগ",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n সুসম্পন্ন কাজ","%n সুসম্পন্ন কাজ"],
     "Tomorrow" : "আগামীকাল",
     "Details" : "বিসতারিত",
