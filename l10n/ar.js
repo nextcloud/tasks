@@ -41,7 +41,7 @@ OC.L10N.register(
     "List link copied to clipboard." : "تمّ نسخ رابط القائمة إلى الحافظة.",
     "Calendar link could not be copied to clipboard." : "تعذّر نسخ رابط التقويم إلى الحافظة.",
     "List link could not be copied to clipboard." : "تعذّر نسخ رابط القائمة إلى الحافظة.",
-    "The name \"{calendar}\" is already used." : "الإسم\"{calendar}\" يستخدم بالفعل.",
+    "The name \"{calendar}\" is already used." : "الاسم\"{calendar}\" يستخدم بالفعل.",
     "An empty name is not allowed." : "غير مسموح بإسم فارغ",
     "An error occurred, unable to delete the calendar." : "حدث خطأ، لا يمكن حذف التقويم.",
     "An error occurred, unable to delete the list." : "حدث خطأ؛ تعذّر حذف القائمة.",
