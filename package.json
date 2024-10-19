@@ -41,7 +41,7 @@
     "@nextcloud/vue": "9.0.0-alpha.5",
     "@vueuse/components": "^11.1.0",
     "color-convert": "^2.0.1",
-    "debounce": "^2.1.1",
+    "debounce": "^2.2.0",
     "ical.js": "^2.1.0",
     "jstimezonedetect": "",
     "linkify-it": "^5.0.0",
