@@ -30,7 +30,7 @@
     "Unshare" : "Zneprístupniť",
     "List name" : "Názov zoznamu",
     "This will delete the calendar \"{calendar}\" and all corresponding events and tasks." : "Táto operácia odstráni kalendár \"{calendar}\" a všetky jeho udalosti a úlohy.",
-    "This will unshare the calendar \"{calendar}\"." : "Toto zruší sprístupnenie kalendára \"{calendar}\" .",
+    "This will unshare the calendar \"{calendar}\"." : "Toto zruší zdieľanie kalendára \"{calendar}\" .",
     "This will delete the list \"{list}\" and all corresponding tasks." : "Táto operácia odstráni zoznam \"{list}\" a všetky príslušné úlohy.",
     "This will unshare the list \"{list}\"." : "Toto zruší zdieľanie zoznamu {list}.",
     "Share this calendar" : "Zdieľať tento kalendár",
