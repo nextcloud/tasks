@@ -81,7 +81,7 @@
     "Create tasks" : "Créer des tâches",
     "Creating new tasks…" : "Création de nouvelles tâches...",
     "Close" : "Fermer",
-    "{numberOfTasks} tasks have been added to \"{calendar}\"" : "{numberOfTasks} tâches ont été ajoutées à « {calendar} »",
+    "{numberOfTasks} tasks have been added to \"{calendar}\"" : "{numberOfTasks} tâches ont été ajoutées à \"{calendar}\"",
     "Delete all completed tasks." : "Supprimer toutes les tâches terminées.",
     "Delete completed tasks." : "Supprimer les tâches terminées.",
     "Deleted all completed tasks from calendar \"{calendar}\"." : "Supprimer toutes les tâches terminées de l'agenda \"{calendar}\".",
