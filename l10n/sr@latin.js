@@ -2,6 +2,7 @@ OC.L10N.register(
     "tasks",
     {
     "Today" : "Today",
+    "All" : "Sve",
     "Current" : "Tekuće",
     "Completed" : "Završeno",
     "Can edit" : "Can edit",
@@ -11,6 +12,7 @@ OC.L10N.register(
     "Name" : "Ime",
     "Deleted" : "Obrisano",
     "Delete permanently" : "Obriši zauvek",
+    "Empty trash bin" : "Isprazni kantu",
     "Cancel" : "Cancel",
     "Close" : "Zatvori",
     "Due date" : "Rok",
