@@ -58,6 +58,7 @@ OC.L10N.register(
     "[Tomorrow]" : "[Mañana]",
     "Task is completed" : "La tarea ha sido completada",
     "Create a new task" : "Crear una tarea nueva",
+    "Create task" : "Crear tarea",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n Tarea Completada","%n Tareas Completadas","%n Tareas Completadas"],
     "Tomorrow" : "Mañana",
     "Add List…" : "Crear Lista...",
