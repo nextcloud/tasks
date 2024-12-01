@@ -79,6 +79,7 @@ OC.L10N.register(
     "Add a current task to \"{calendar}\"…" : "Lisää nykyinen tehtävä kalenteriin \"{calendar}\"…",
     "Add a task to \"{calendar}\"…" : "Lisää tehtävä kalenteriin \"{calendar}\"…",
     "Change sort order" : "Muuta järjestystä",
+    "Relevance" : "Relevanssi",
     "Start date" : "Aloituspäivä",
     "Due date" : "Eräpäivä",
     "Created date" : "Luontipäivämäärä",
