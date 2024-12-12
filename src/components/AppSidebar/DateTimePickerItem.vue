@@ -115,6 +115,13 @@ export default {
 			type: Boolean,
 			default: false,
 		},
+		/**
+		 * Whether the date can be considered 'overdue'
+		 */
+		checkOverdue: {
+			type: Boolean,
+			default: true,
+		}
 	},
 	data() {
 		return {
@@ -139,7 +146,7 @@ export default {
 			return this.date.isValid()
 		},
 		isOverdue() {
-			return overdue(this.date)
+			return this.checkOverdue && overdue(this.date)
 		},
 	},
 	methods: {
