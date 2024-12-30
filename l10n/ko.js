@@ -88,6 +88,7 @@ OC.L10N.register(
     "Alphabetically" : "가나다순",
     "Tags" : "태그",
     "Manually" : "수동으로",
+    "Delete task" : "결과 삭제",
     "[Yesterday]" : "[어제]",
     "[Today]" : "[오늘]",
     "[Tomorrow]" : "[내일]",
