@@ -76,6 +76,7 @@
     "Select tags to filter by" : "필터링할 태그 선택",
     "Reset filter" : "필터 초기화",
     "Change sort order" : "정렬 순서 변경",
+    "Relevance" : "관련된",
     "Start date" : "시작 날짜",
     "Due date" : "마감 날짜",
     "Created date" : "생성된 날짜",
