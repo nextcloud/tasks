@@ -20,6 +20,10 @@
  *
  */
 
+import { translate as t, translatePlural as n } from '@nextcloud/l10n'
+import moment from '@nextcloud/moment'
+import { convertTimeZone } from './alarms.js'
+
 /**
  * Returns a formatted string for the due date
  *
@@ -138,6 +142,88 @@ export function startDateString(task) {
 					return t('tasks', '[Starts on] LL [at] LT')
 				}
 			},
+		})
+	}
+}
+
+/**
+ * Formats an alarm
+ *
+ * @param {object} alarm The alarm object to format
+ * @param {boolean} isAllDay Whether or not the event is all-day
+ * @param {string} currentUserTimezone The current timezone of the user
+ * @param {string} locale The locale to format it in
+ * @return {string}
+ */
+export function formatAlarm(alarm, isAllDay, currentUserTimezone, locale) {
+	if (alarm.relativeTrigger !== null) {
+		// Relative trigger
+		if (isAllDay && alarm.relativeIsRelatedToStart && alarm.relativeTrigger < 86400) {
+			if (alarm.relativeTrigger === 0) {
+				return t('tasks', 'Midnight on the day the task starts')
+			}
+
+			const date = new Date()
+			date.setHours(alarm.relativeHoursAllDay)
+			date.setMinutes(alarm.relativeMinutesAllDay)
+			date.setSeconds(0)
+			date.setMilliseconds(0)
+			const formattedHourMinute = moment(date).locale(locale).format('LT')
+
+			if (alarm.relativeTrigger < 0) {
+				if (alarm.relativeUnitAllDay === 'days') {
+					return n('tasks',
+						'%n day before the task at {formattedHourMinute}',
+						'%n days before the task at {formattedHourMinute}',
+						alarm.relativeAmountAllDay, {
+							formattedHourMinute,
+						})
+				} else {
+					return n('tasks',
+						'%n week before the task at {formattedHourMinute}',
+						'%n weeks before the task at {formattedHourMinute}',
+						alarm.relativeAmountAllDay, {
+							formattedHourMinute,
+						})
+				}
+			}
+			return t('tasks', 'on the day of the task at {formattedHourMinute}', {
+				formattedHourMinute,
+			})
+		} else {
+			// Alarms at the task's start or end
+			if (alarm.relativeTrigger === 0) {
+				if (alarm.relativeIsRelatedToStart) {
+					return t('tasks', 'at the task\'s start')
+				} else {
+					return t('tasks', 'when the task is due')
+				}
+			}
+
+			const time = moment.duration(Math.abs(alarm.relativeTrigger), 'seconds').locale(locale).humanize()
+
+			if (alarm.relativeTrigger < 0) {
+				if (alarm.relativeIsRelatedToStart) {
+					return t('tasks', '{time} before the task starts', { time })
+				} else {
+					return t('tasks', '{time} before the task is due', { time })
+				}
+			}
+
+			if (alarm.relativeIsRelatedToStart) {
+				return t('tasks', '{time} after the task starts', { time })
+			} else {
+				return t('tasks', '{time} after the task is due', { time })
+			}
+		}
+	} else {
+		// Absolute trigger
+		// There are no timezones in the VALARM component, since dates can only be relative or saved as UTC.
+		const currentUserTimezoneDate = convertTimeZone(alarm.absoluteDate, currentUserTimezone)
+		return t('tasks', '{time}', {
+			time: moment(currentUserTimezoneDate).locale(locale).calendar(null, {
+				sameElse: 'LLL', // Overwrites the default `DD/MM/YYYY` (which misses the time)
+			}),
 		})
 	}
 }

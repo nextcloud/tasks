@@ -95,7 +95,7 @@ export default {
 		Pencil,
 		Plus,
 		Star,
-		TagMultiple
+		TagMultiple,
 	},
 	directives: {
 		Tooltip,
