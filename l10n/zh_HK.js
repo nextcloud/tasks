@@ -97,7 +97,7 @@ OC.L10N.register(
     "Reset filter" : "重設過濾",
     "Add an important task to \"{calendar}\"…" : "新增重要任務到「{calendar}」……",
     "Add a task due today to \"{calendar}\"…" : "新增今日到期的任務到「{calendar}」…",
-    "Add a current task to \"{calendar}\"…" : "新增當前的任務到「{calendar}」…",
+    "Add a current task to \"{calendar}\"…" : "新增目前的任務到「{calendar}」…",
     "Add a task to \"{calendar}\"…" : "新增任務到「{calendar}」…",
     "Load the completed tasks of all lists." : "加載所有列表的已完成任務。",
     "Loading the completed tasks of all lists might slow down the app." : "加載所有列表的已完成任務可能會降低應用程式的速度。",
