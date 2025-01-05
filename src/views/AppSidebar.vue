@@ -166,6 +166,18 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:placeholder="t('tasks', 'Select a status')"
 					icon="IconPulse"
 					@change-value="changeStatus" />
+				<DateTimePickerItem v-show="task.completed"
+					:date="task.completedDateMoment"
+					:value="newCompletedDate"
+					:property-string="completedString"
+					:read-only="readOnly"
+					:task="task"
+					:check-overdue=false
+					@set-value="changeCompletedDate">
+					<template #icon>
+						<CalendarCheck :size="20" />
+					</template>
+				</DateTimePickerItem>
 				<SliderItem v-show="!readOnly || task.priority"
 					:value="task.priority"
 					:property-string="priorityString"
@@ -289,6 +301,7 @@ import NcLoadingIcon from '@nextcloud/vue/dist/Components/NcLoadingIcon.js'
 import { generateUrl } from '@nextcloud/router'
 
 import Calendar from 'vue-material-design-icons/Calendar.vue'
+import CalendarCheck from 'vue-material-design-icons/CalendarCheck.vue'
 import CalendarEnd from 'vue-material-design-icons/CalendarEnd.vue'
 import CalendarStart from 'vue-material-design-icons/CalendarStart.vue'
 import Delete from 'vue-material-design-icons/Delete.vue'
@@ -319,6 +332,7 @@ export default {
 		Calendar,
 		CalendarEnd,
 		CalendarStart,
+		CalendarCheck,
 		Delete,
 		Download,
 		InformationOutline,
@@ -549,6 +563,18 @@ export default {
 			}
 			return reference.toDate()
 		},
+		/**
+		 * Initializes the completed date of a task
+		 *
+		 * @return {Date|null} The completed date moment
+		 */
+		 newCompletedDate() {
+			const completedDate = this.task.completedDateMoment
+			if (completedDate.isValid()) {
+				return completedDate.toDate()
+			}
+			return null
+		},
 		taskStatusLabel() {
 			return this.loading ? t('tasks', 'Loading task from server.') : t('tasks', 'Task not found!')
 		},
@@ -709,6 +735,7 @@ export default {
 			'addTag',
 			'setDue',
 			'setStart',
+			'setCompletedDate',
 			'toggleAllDay',
 			'moveTask',
 			'setClassification',
@@ -815,6 +842,23 @@ export default {
 				return
 			}
 			this.setDue({ task, due, allDay: this.allDay })
+		},
+
+		/**
+		 * Sets the completed date to the given Date or to null
+		 *
+		 * @param {object} context The data object
+		 * @param {Task} context.task The task for which to set the date
+		 * @param {Date|null} context.value The new completed date
+		 */
+		 changeCompletedDate({ task, value: completedDate }) {
+			if (completedDate) {
+				completedDate = moment(completedDate)
+			}
+			if (this.task.completedDateMoment.isSame(completedDate)) {
+				return
+			}
+			this.setCompletedDate({ task, completedDate })
 		},
 
 		changeClass(classification) {
