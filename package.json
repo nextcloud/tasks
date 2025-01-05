@@ -29,7 +29,7 @@
   "dependencies": {
     "@nextcloud/auth": "^2.4.0",
     "@nextcloud/axios": "^2.5.1",
-    "@nextcloud/calendar-js": "8.0.2",
+    "@nextcloud/calendar-js": "8.0.3",
     "@nextcloud/cdav-library": "1.5.2",
     "@nextcloud/dialogs": "4.1.0",
     "@nextcloud/event-bus": "^3.3.1",
@@ -51,7 +51,7 @@
     "md5": "^2.3.0",
     "p-limit": "^6.2.0",
     "sortablejs-vue3": "^1.2.11",
-    "uuid": "^10.0.0",
+    "uuid": "^11.0.3",
     "vue": "^3.5.13",
     "vue-material-design-icons": "^5.3.1",
     "vue-router": "^4.5.0",
