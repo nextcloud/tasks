@@ -224,6 +224,7 @@ OC.L10N.register(
     "[Due today at] LT" : "[今天到期於] LT",
     "[Due tomorrow at] LT" : "[明天到期於] LT",
     "[Due] L [at] LT" : "[截止] L [於] LT",
+    "Completion date must be in the past." : "完成日期必須在過去。",
     "Successfully created the task." : "成功建立工作項目。",
     "Could not delete the task." : "無法刪除工作項目。",
     "Synchronizing to the server." : "與伺服器同步。",

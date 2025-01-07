@@ -224,6 +224,7 @@ OC.L10N.register(
     "[Due today at] LT" : "[Due today at] LT",
     "[Due tomorrow at] LT" : "[Due tomorrow at] LT",
     "[Due] L [at] LT" : "[Due] L [at] LT",
+    "Completion date must be in the past." : "Completion date must be in the past.",
     "Successfully created the task." : "Successfully created the task.",
     "Could not delete the task." : "Could not delete the task.",
     "Synchronizing to the server." : "Synchronizing to the server.",

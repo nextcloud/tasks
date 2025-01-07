@@ -222,6 +222,7 @@
     "[Due today at] LT" : "[مستحق اليوم عند] LT",
     "[Due tomorrow at] LT" : "[مطلوب غداً عند] LT",
     "[Due] L [at] LT" : "[مستحقٌ في] L [عند] LT",
+    "Completion date must be in the past." : "تاريخ إكمال المهمة يجب أن يكون في الماضي.",
     "Successfully created the task." : "تم إنشاء المهمّة بنجاح.",
     "Could not delete the task." : "تعذّر حذف المهمة.",
     "Synchronizing to the server." : "مُزامنة مع الخادم",

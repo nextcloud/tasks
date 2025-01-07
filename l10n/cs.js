@@ -224,6 +224,7 @@ OC.L10N.register(
     "[Due today at] LT" : "[Termín dnes v] LT",
     "[Due tomorrow at] LT" : "[Termín zítra v] LT",
     "[Due] L [at] LT" : "[Termín] L [v] LT",
+    "Completion date must be in the past." : "Je třeba, aby datum skončení platnosti bylo v minulosti.",
     "Successfully created the task." : "Úkol úspěšně vytvořen.",
     "Could not delete the task." : "Úkol se nedaří smazat.",
     "Synchronizing to the server." : "Synchronizování se serverem.",
