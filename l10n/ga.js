@@ -224,6 +224,7 @@ OC.L10N.register(
     "[Due today at] LT" : "[Dlite inniu ag] LT",
     "[Due tomorrow at] LT" : "[Dlite amárach ag] LT",
     "[Due] L [at] LT" : "[Dlite] L[ag]LT",
+    "Completion date must be in the past." : "Caithfidh an dáta críochnaithe a bheith san am atá thart.",
     "Successfully created the task." : "D'éirigh leis an tasc a chruthú.",
     "Could not delete the task." : "Níorbh fhéidir an tasc a scriosadh.",
     "Synchronizing to the server." : "Sioncrónú leis an bhfreastalaí.",
