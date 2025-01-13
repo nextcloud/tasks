@@ -222,6 +222,7 @@
     "[Due today at] LT" : "[До сьогодні о] LT",
     "[Due tomorrow at] LT" : "[До завтра о] LT",
     "[Due] L [at] LT" : "[До] L [,] LT",
+    "Completion date must be in the past." : "Дата завершення має бути ранішою",
     "Successfully created the task." : "Успішно додано завдання.",
     "Could not delete the task." : "Не вдалося вилучити завдання.",
     "Synchronizing to the server." : "Синхронізація з сервером.",
