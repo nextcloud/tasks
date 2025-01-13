@@ -138,6 +138,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			<TaskCheckbox :completed="task.completed"
 				:cancelled="task.status === 'CANCELLED'"
 				:read-only="readOnly"
+				:recurring="recurring"
 				:priority-class="priorityClass"
 				@toggle-completed="toggleCompleted(task)" />
 		</template>
@@ -263,15 +264,23 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			:name="t('tasks', 'Reminders')"
 			:order="2">
 			Reminders
-		</NcAppSidebarTab>
-		<NcAppSidebarTab v-if="task"
+		</NcAppSidebarTab> -->
+		<NcAppSidebarTab v-if="task && (!readOnly || task.recurring)"
 			id="app-sidebar-tab-repeat"
 			class="app-sidebar-tab"
-			icon="icon-repeat"
 			:name="t('tasks', 'Repeat')"
 			:order="3">
-			Repeat
-		</NcAppSidebarTab> -->
+			<template #icon>
+				<Repeat :size="20" />
+			</template>
+			<RepeatItem :value="task.recurrenceRuleObject"
+				:disabled="readOnly"
+				:read-only="readOnly"
+				:placeholder="t('tasks', 'No recurrence')"
+				:task="task"
+				icon="IconRepeat"
+				@set-value="({task, value}) => setRecurrence({ task, rruleObject: value })" />
+		</NcAppSidebarTab>
 	</NcAppSidebar>
 </template>
 
@@ -283,6 +292,7 @@ import MultiselectItem from '../components/AppSidebar/MultiselectItem.vue'
 import SliderItem from '../components/AppSidebar/SliderItem.vue'
 import TagsItem from '../components/AppSidebar/TagsItem.vue'
 import TextItem from '../components/AppSidebar/TextItem.vue'
+import RepeatItem from '../components/AppSidebar/RepeatItem.vue'
 import NotesItem from '../components/AppSidebar/NotesItem.vue'
 import TaskCheckbox from '../components/TaskCheckbox.vue'
 // import TaskStatusDisplay from '../components/TaskStatusDisplay'
@@ -313,6 +323,7 @@ import Pencil from 'vue-material-design-icons/Pencil.vue'
 import Percent from 'vue-material-design-icons/Percent.vue'
 import Pin from 'vue-material-design-icons/Pin.vue'
 import PinOff from 'vue-material-design-icons/PinOff.vue'
+import Repeat from 'vue-material-design-icons/Repeat.vue'
 import Star from 'vue-material-design-icons/Star.vue'
 import TextBoxOutline from 'vue-material-design-icons/TextBoxOutline.vue'
 import Undo from 'vue-material-design-icons/Undo.vue'
@@ -342,6 +353,7 @@ export default {
 		Percent,
 		Pin,
 		PinOff,
+		Repeat,
 		Star,
 		TextBoxOutline,
 		Undo,
@@ -351,6 +363,7 @@ export default {
 		SliderItem,
 		TagsItem,
 		TextItem,
+		RepeatItem,
 		CalendarPickerItem,
 		NotesItem,
 		TaskCheckbox,
@@ -589,6 +602,14 @@ export default {
 			return this.task.calendar.readOnly || (this.task.calendar.isSharedWithMe && this.task.class !== 'PUBLIC')
 		},
 		/**
+		 * Whether this is a recurring task.
+		 *
+		 * @return {boolean} Is the task recurring
+		 */
+		recurring() {
+			return this.task.recurring
+		},
+		/**
 		 * Whether the dates of a task are all-day
 		 * When no dates are set, we consider the last used value.
 		 *
@@ -692,6 +713,7 @@ export default {
 			getCalendarByRoute: 'getCalendarByRoute',
 			calendars: 'getSortedCalendars',
 			tags: 'tags',
+			recurrence: 'recurrence',
 			showTaskInCalendar: 'showTaskInCalendar',
 			calendarView: 'calendarView',
 		}),
@@ -729,6 +751,7 @@ export default {
 			'setNote',
 			'setPriority',
 			'setLocation',
+			'setRecurrence',
 			'setUrl',
 			'setPercentComplete',
 			'setTags',

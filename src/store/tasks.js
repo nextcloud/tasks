@@ -33,6 +33,7 @@ import { translate as t } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
 
 import ICAL from 'ical.js'
+import { RecurValue } from '@nextcloud/calendar-js'
 
 const state = {
 	tasks: {},
@@ -493,6 +494,48 @@ const mutations = {
 	 */
 	setLocation(state, { task, location }) {
 		task.location = location
+	},
+
+	/**
+	 * Sets the recurrence rule of a task
+	 *
+	 * @param {object} state The store data
+	 * @param {object} data Destructuring object
+	 * @param {Task} data.task The task
+	 * @param {object} data.rruleObject The recurrence rule object from NC calendar-js
+	 */
+	setRecurrence(state, { task, rruleObject }) {
+		if (rruleObject == null) {
+			task.recurrenceRuleObject = null
+			return
+		}
+		// Set the ICAL recur value from changed params
+		const data = {}
+		if (rruleObject.frequency != null) { data.freq = rruleObject.frequency }
+		if (rruleObject.interval != null) { data.interval = rruleObject.interval }
+		// wkst
+		if (rruleObject.until != null) { data.until = rruleObject.until }
+		if (rruleObject.count != null) { data.count = rruleObject.count }
+		// bysecond
+		// byminute
+		// byhour
+		if (rruleObject.byDay != null) { data.byday = rruleObject.byDay }
+		if (rruleObject.bymonthday != null) { data.bymonthday = rruleObject.bymonthday }
+		// byyearday
+		// byweekno
+		if (rruleObject.byMonth != null) { data.bymonth = rruleObject.byMonth }
+		if (rruleObject.bySetPosition != null) { data.bysetpos = rruleObject.bySetPosition }
+
+		rruleObject.recurrenceRuleValue = RecurValue.fromData(data)
+		// Don't save an invalid RRULE (For development, remove after)
+		if (!rruleObject.recurrenceRuleValue.isRuleValid() || rruleObject.recurrenceRuleValue.frequency === 'NONE') {
+			console.log('Rrule invalid or freq="NONE". Not saving.')
+			console.log(rruleObject.recurrenceRuleValue.toICALJs().toString())
+			return
+		}
+		console.log('Saving rrule:')
+		console.log(rruleObject.recurrenceRuleValue.toICALJs().toString())
+		task.recurrenceRuleObject = rruleObject
 	},
 
 	/**
@@ -1077,6 +1120,12 @@ const actions = {
 		if (task.calendar.isSharedWithMe && task.class !== 'PUBLIC') {
 			return
 		}
+		// Don't complete a task if it is still recurring, but update its start date instead
+		if (task.recurring) {
+			task.completeRecurring()
+			await context.dispatch('updateTask', task)
+			return
+		}
 		if (task.completed) {
 			await context.dispatch('setPercentComplete', { task, complete: 0 })
 		} else {
@@ -1246,6 +1295,20 @@ const actions = {
 			return
 		}
 		context.commit('setLocation', { task, location })
+		context.dispatch('updateTask', task)
+	},
+
+	/**
+	 * Sets the location of a task
+	 *
+	 * @param {object} context The store context
+	 * @param {Task} task The task to update
+	 */
+	async setRecurrence(context, { task, rruleObject }) {
+		if (rruleObject === task.recurrenceRuleObject) {
+			return
+		}
+		context.commit('setRecurrence', { task, rruleObject })
 		context.dispatch('updateTask', task)
 	},
 

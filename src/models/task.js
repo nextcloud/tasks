@@ -28,6 +28,8 @@ import moment from '@nextcloud/moment'
 
 import { v4 as uuid } from 'uuid'
 import ICAL from 'ical.js'
+import { getDefaultRecurrenceRuleObject, mapRecurrenceRuleValueToRecurrenceRuleObject } from './recurrenceRule.js'
+import { ToDoComponent } from '@nextcloud/calendar-js'
 
 export default class Task {
 
@@ -81,6 +83,9 @@ export default class Task {
 			this.vCalendar.addSubcomponent(this.vtodo)
 		}
 
+		// From NC calendar-js
+		this.todoComponent = ToDoComponent.fromICALJs(this.vtodo)
+
 		if (!this.vtodo.hasProperty('uid')) {
 			console.debug('This task did not have a proper uid. Setting a new one for ', this)
 			this.vtodo.addPropertyWithValue('uid', uuid())
@@ -94,6 +99,7 @@ export default class Task {
 		this._completedDate = this.vtodo.getFirstPropertyValue('completed')
 		this._completedDateMoment = moment(this._completedDate, 'YYYYMMDDTHHmmssZ')
 		this._completed = !!this._completedDate
+		this._recurrence = this.todoComponent.getPropertyIterator('RRULE').next().value
 		this._status = this.vtodo.getFirstPropertyValue('status')
 		this._note = this.vtodo.getFirstPropertyValue('description') || ''
 		this._related = this.getParent()?.getFirstValue() || null
@@ -343,6 +349,48 @@ export default class Task {
 
 	get completedDateMoment() {
 		return this._completedDateMoment.clone()
+	}
+
+	/**
+	 * Get the recurrence
+	 *
+	 * @readonly
+	 * @memberof Task
+	 * @return {object}
+	 */
+	get recurrenceRuleObject() {
+		if (this._recurrence == null) {
+			return getDefaultRecurrenceRuleObject()
+		}
+		return mapRecurrenceRuleValueToRecurrenceRuleObject(this._recurrence.getFirstValue(), this._start)
+	}
+
+	/**
+	 * Set the recurrence
+	 *
+	 * @readonly
+	 * @memberof Task
+	 */
+	set recurrenceRuleObject(rruleObject) {
+		if (rruleObject === null) {
+			this.vtodo.removeProperty('rrule')
+			this._recurrence = null
+		} else {
+			this.vtodo.updatePropertyWithValue('rrule', rruleObject.recurrenceRuleValue.toICALJs())
+		}
+		this.todoComponent = ToDoComponent.fromICALJs(this.vtodo)
+		this.updateLastModified()
+		this._recurrence = this.todoComponent.getPropertyIterator('RRULE').next().value
+	}
+
+	/**
+	 * Whether this task repeats
+	 *
+	 * @readonly
+	 * @memberof Task
+	 */
+	get recurring() {
+		return this.todoComponent.isRecurring()
 	}
 
 	get status() {
@@ -731,6 +779,27 @@ export default class Task {
 				isDate: false,
 			}),
 		).toSeconds()
+	}
+
+	/**
+	 * For completing a recurring task, tries to set the task start date to the next recurrence date.
+	 *
+	 * Does nothing if we are at the end of the recurrence (RRULE:UNTIL was reached).
+	 */
+	completeRecurring() {
+		// Get recurrence iterator, starting at start date
+		const iter = this.recurrenceRuleObject.iterator(this.start)
+		// Skip the start date itself
+		iter.next()
+		// If there is a next recurrence, update the start date to next recurrence date
+		const nextRecurrence = iter.next()
+		if (nextRecurrence !== null) {
+			this.start = nextRecurrence
+			// If the due date now lies before start date, clear it
+			if (this.due !== null && this.due.compare(this.start) < 0) {
+				this.due = null
+			}
+		}
 	}
 
 	/**
