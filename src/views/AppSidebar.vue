@@ -234,6 +234,18 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					icon="TagMultiple"
 					@add-tag="updateTag"
 					@set-tags="updateTags" />
+				<AlarmList :alarms="task.alarms"
+					:has-start-date="hasStartDate"
+					:has-due-date="hasDueDate"
+					:all-day="allDay"
+					:read-only="readOnly"
+					@add-alarm="addAlarmItem"
+					@update-alarm="updateAlarmItem"
+					@remove-alarm="removeAlarmItem">
+					<template #icon>
+						<Bell :size="20" />
+					</template>
+				</AlarmList>
 			</div>
 		</NcAppSidebarTab>
 		<NcEmptyContent v-else :description="taskStatusLabel">
@@ -256,26 +268,11 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:task="task"
 				@set-value="({task, value}) => setNote({ task, note: value })" />
 		</NcAppSidebarTab>
-		<!-- <NcAppSidebarTab v-if="task"
-			id="app-sidebar-tab-reminder"
-			class="app-sidebar-tab"
-			icon="icon-reminder"
-			:name="t('tasks', 'Reminders')"
-			:order="2">
-			Reminders
-		</NcAppSidebarTab>
-		<NcAppSidebarTab v-if="task"
-			id="app-sidebar-tab-repeat"
-			class="app-sidebar-tab"
-			icon="icon-repeat"
-			:name="t('tasks', 'Repeat')"
-			:order="3">
-			Repeat
-		</NcAppSidebarTab> -->
 	</NcAppSidebar>
 </template>
 
 <script>
+import AlarmList from '../components/AppSidebar/Alarm/AlarmList.vue'
 import CheckboxItem from '../components/AppSidebar/CheckboxItem.vue'
 import DateTimePickerItem from '../components/AppSidebar/DateTimePickerItem.vue'
 import CalendarPickerItem from '../components/AppSidebar/CalendarPickerItem.vue'
@@ -300,6 +297,7 @@ import NcAppSidebarTab from '@nextcloud/vue/dist/Components/NcAppSidebarTab.js'
 import NcLoadingIcon from '@nextcloud/vue/dist/Components/NcLoadingIcon.js'
 import { generateUrl } from '@nextcloud/router'
 
+import Bell from 'vue-material-design-icons/Bell.vue'
 import Calendar from 'vue-material-design-icons/Calendar.vue'
 import CalendarCheck from 'vue-material-design-icons/CalendarCheck.vue'
 import CalendarEnd from 'vue-material-design-icons/CalendarEnd.vue'
@@ -327,8 +325,10 @@ export default {
 		NcActionButton,
 		NcActionLink,
 		NcLoadingIcon,
+		AlarmList,
 		CheckboxItem,
 		DateTimePickerItem,
+		Bell,
 		Calendar,
 		CalendarEnd,
 		CalendarStart,
@@ -601,6 +601,12 @@ export default {
 				return !!this.$store.state.settings.settings.allDay
 			}
 		},
+		hasStartDate() {
+			return !!this.task.start
+		},
+		hasDueDate() {
+			return !!this.task.due
+		},
 		showInCalendar() {
 			// Only tasks with a due date show up in the calendar
 			return !!this.showTaskInCalendar && this.task.dueMoment.isValid()
@@ -731,6 +737,9 @@ export default {
 			'setLocation',
 			'setUrl',
 			'setPercentComplete',
+			'addAlarm',
+			'removeAlarm',
+			'updateAlarm',
 			'setTags',
 			'addTag',
 			'setDue',
@@ -885,6 +894,34 @@ export default {
 		 */
 		updateTag(tag) {
 			this.addTag({ task: this.task, tag })
+		},
+
+		/**
+		 * Adds an alarm to the task
+		 *
+		 * @param {object} alarm The alarm to add
+		 */
+		addAlarmItem(alarm) {
+			this.addAlarm({ task: this.task, alarm })
+		},
+
+		/**
+		 * Updates an alarm
+		 *
+		 * @param {object} alarm The alarm
+		 * @param {number} index The index of the alarm-item to update
+		 */
+		updateAlarmItem(alarm, index) {
+			this.updateAlarm({ task: this.task, alarm, index })
+		},
+
+		/**
+		 * Removes an alarm
+		 *
+		 * @param {number} index The index of the alarm-item to remove
+		 */
+		removeAlarmItem(index) {
+			this.removeAlarm({ task: this.task, index })
 		},
 
 		async changeCalendar(calendar) {
