@@ -42,9 +42,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						:size="20" />
 				</template>
 				<template #counter>
-					<NcCounterBubble v-show="collectionCount(collection.id)">
-						{{ counterFormatter(collectionCount(collection.id)) }}
-					</NcCounterBubble>
+					<NcCounterBubble v-show="collectionCount(collection.id)" :count="collectionCount(collection.id)" />
 				</template>
 			</NcAppNavigationItem>
 			<Sortable class="draggable-container"
@@ -185,22 +183,6 @@ export default {
 			'setSetting',
 			'setCalendarOrder',
 		]),
-
-		/**
-		 * Format the task counter
-		 *
-		 * @param {number} count The number of tasks
-		 */
-		counterFormatter(count) {
-			switch (false) {
-			case count !== 0:
-				return ''
-			case count < 999:
-				return '999+'
-			default:
-				return count
-			}
-		},
 
 		/**
 		 * Indicate that we drag a calendar item
