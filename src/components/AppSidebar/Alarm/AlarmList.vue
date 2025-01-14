@@ -104,7 +104,9 @@ export default {
 				action: 'DISPLAY',
 				// When the action is "DISPLAY", the alarm MUST also include a "DESCRIPTION" property
 				description: t('tasks', 'This is an event reminder.'),
+				// The "REPEAT" property is only valid in combination with a "DURATION" propery
 				repeat: 1,
+				duration: 'PT10M',
 				trigger: { value: undefined, parameter },
 			}
 
