@@ -585,7 +585,7 @@ export default class Task {
 	}
 
 	getAlarms() {
-		return this.vCalendar.getAllSubcomponents('valarm') || []
+		return this.vtodo.getAllSubcomponents('valarm') || []
 	}
 
 	/**
@@ -601,14 +601,14 @@ export default class Task {
 		if (trigger.parameter) {
 			triggerProperty.setParameter(trigger.parameter.name, trigger.parameter.value)
 		}
-		this.vCalendar.addSubcomponent(valarm)
+		this.vtodo.addSubcomponent(valarm)
 
 		this.updateLastModified()
 		this._alarms = this.getAlarms()
 	}
 
 	updateAlarm({ action, repeat, trigger }, index) {
-		const valarms = this.vCalendar.getAllSubcomponents('valarm')
+		const valarms = this.vtodo.getAllSubcomponents('valarm')
 		const valarmToUpdate = valarms[index]
 
 		if (valarmToUpdate) {
@@ -625,11 +625,11 @@ export default class Task {
 	 * @param {number} index The index of the alarm-list
 	 */
 	removeAlarm(index) {
-		const valarms = this.vCalendar.getAllSubcomponents('valarm')
+		const valarms = this.vtodo.getAllSubcomponents('valarm')
 		const valarmToDelete = valarms[index]
 
 		if (valarmToDelete) {
-			this.vCalendar.removeSubcomponent(valarms[index])
+			this.vtodo.removeSubcomponent(valarms[index])
 
 			this.updateLastModified()
 			this._alarms = this.getAlarms()
