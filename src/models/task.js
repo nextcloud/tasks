@@ -593,9 +593,10 @@ export default class Task {
 	 *
 	 * @param {{ action: "AUDIO"|"DISPLAY"|"EMAIL"|"PROCEDURE", repeat: number, trigger: { value: ICAL.Duration|ICAL.Time, parameter: object }}} alarm The alarm
 	 */
-	addAlarm({ action, repeat, trigger }) {
+	addAlarm({ action, description, repeat, trigger }) {
 		const valarm = new ICAL.Component('valarm')
 		valarm.addPropertyWithValue('action', action)
+		valarm.addPropertyWithValue('description', description)
 		valarm.addPropertyWithValue('repeat', repeat)
 		const triggerProperty = valarm.addPropertyWithValue('trigger', trigger.value)
 		if (trigger.parameter) {
