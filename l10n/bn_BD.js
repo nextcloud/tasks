@@ -28,7 +28,6 @@ OC.L10N.register(
     "Tomorrow" : "আগামীকাল",
     "Details" : "বিসতারিত",
     "Notes" : "নোট",
-    "Repeat" : "পূনঃসংঘটন",
     "Set start date" : "আরম্ভের তারিখ নির্ধারণ করুন",
     "Set due date" : "কার্যকারিতার তারিখ নির্ধারণ করুন"
 },

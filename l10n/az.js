@@ -31,7 +31,6 @@ OC.L10N.register(
     "Tomorrow" : "Sabah",
     "Details" : "Detallar",
     "Notes" : "Qeydlər",
-    "Repeat" : "Təkrar",
     "Task not found!" : "Tapşırıq tapılmadı!",
     "Set start date" : "Başlanğıc tarixini işə sal",
     "Set due date" : "Vaxtı təyin et"

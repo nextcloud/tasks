@@ -16,10 +16,9 @@ OC.L10N.register(
     "Restore" : "Վերականգնել",
     "Delete permanently" : "Ջնջել ընդմիշտ",
     "Cancel" : "Չեղարկել",
+    "Email" : "Էլ․փոստ",
     "Close" : "Փակել",
     "Details" : "Մանրամասներ",
-    "Notes" : "Notes",
-    "Reminders" : "Հիշեցումներ",
-    "Repeat" : "Կրկնել"
+    "Notes" : "Notes"
 },
 "nplurals=2; plural=(n != 1);");

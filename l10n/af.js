@@ -41,8 +41,6 @@ OC.L10N.register(
     "All day" : "Heeldag",
     "Details" : "Besonderhede",
     "Notes" : "Notas",
-    "Reminders" : "Herinneringe",
-    "Repeat" : "Herhaal",
     "Task not found!" : "Taak nie gevind!",
     "Set start date" : "Stel begindatum",
     "Set due date" : "Stel sperdatum",

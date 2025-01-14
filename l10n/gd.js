@@ -11,6 +11,7 @@ OC.L10N.register(
     "Deleted" : "Chaidh a sguabadh às",
     "Empty trash bin" : "Falamhaich an sgudal",
     "Cancel" : "Sguir dheth",
+    "Email" : "Post-d",
     "Close" : "Dùin",
     "Tags" : "Tagaichean",
     "Details" : "Mion-fhiosrachadh",

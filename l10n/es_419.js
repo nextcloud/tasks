@@ -41,8 +41,6 @@ OC.L10N.register(
     "Details" : "Detalles",
     "Select tags" : "Selecciona las etiquetas",
     "Notes" : "Notas",
-    "Reminders" : "Recordatorios",
-    "Repeat" : "Repetir",
     "When shared show full event" : "Al compartir, mostrar el evento completo",
     "When shared show only busy" : "Al compartir, mostrar sólo como ocupado ",
     "When shared hide this event" : "Al compartir, ocultar este evento ",

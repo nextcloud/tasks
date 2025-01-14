@@ -14,7 +14,6 @@ OC.L10N.register(
     "Restore" : "بحال",
     "Cancel" : "منسوخ کریں",
     "Close" : "بند ",
-    "Notes" : "Notes",
-    "Repeat" : "دہرایں"
+    "Notes" : "Notes"
 },
 "nplurals=2; plural=(n != 1);");

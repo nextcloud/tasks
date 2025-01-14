@@ -21,6 +21,7 @@ OC.L10N.register(
     "Restore" : "Сэргээх",
     "Delete permanently" : "бүр мөсөн устгах",
     "Cancel" : "цуцлах",
+    "Go back" : "Буцах",
     "Close" : "Хаах",
     "Select tags to filter by" : "Хайлт хийх tag-үүдийг сонгоно уу",
     "Last modified" : "Сүүлд өөрчилсөн",
@@ -28,8 +29,6 @@ OC.L10N.register(
     "Tomorrow" : "маргааш",
     "Details" : "Дэлгэрэнгүй",
     "Notes" : "Шинэ ",
-    "Reminders" : "Сануулагууд",
-    "Repeat" : "Давтах",
     "When shared show full event" : "Түгээсэн тохиолдолд үйл явдлыг бүтнээр нь харуул",
     "When shared show only busy" : "Түгээсэн тохиолдолд зөвхөн завгүй гэж харуул",
     "When shared hide this event" : "Түгээсэн тохиолдолд энэ үйл явдлыг нуу"

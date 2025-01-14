@@ -11,8 +11,9 @@ OC.L10N.register(
     "Deleted" : "Dipadam",
     "Restore" : "Pulihkan",
     "Cancel" : "Batal",
+    "Notification" : "Pemberitahuan",
+    "Email" : "Email",
     "Close" : "Tutup",
-    "Notes" : "Nota",
-    "Repeat" : "Ulang"
+    "Notes" : "Nota"
 },
 "nplurals=1; plural=0;");
