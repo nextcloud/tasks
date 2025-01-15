@@ -68,7 +68,6 @@ OC.L10N.register(
     "Do you really want to empty the trash bin?" : "Çöp kutusunu boşaltmak istediğinize emin misiniz?",
     "_Elements in the trash bin are deleted after {numDays} day_::_Elements in the trash bin are deleted after {numDays} days_" : ["Çöp kutusundaki ögeler {numDays} gün sonra silinir","Çöp kutusundaki ögeler {numDays} gün sonra silinir"],
     "Cancel" : "İptal",
-    "This is an event reminder." : "Bu bir etkinlik hatırlatıcısıdır.",
     "Notification" : "Bildirimler",
     "Email" : "E-posta",
     "Audio notification" : "Sesli bildirim",

@@ -51,7 +51,6 @@ OC.L10N.register(
     "Could not restore calendar or event" : "Nu s-a putut restaura calendarul sau evenimentul",
     "Do you really want to empty the trash bin?" : "Doriti sigur sa goliți conținutul coșului de gunoi ?",
     "Cancel" : "Anulează",
-    "This is an event reminder." : "Acesta este un memento pentru eveniment.",
     "Notification" : "Notificări",
     "Email" : "E-mail",
     "Audio notification" : "Notificări audio",

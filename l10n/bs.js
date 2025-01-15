@@ -16,6 +16,7 @@ OC.L10N.register(
     "Name" : "Ime",
     "Restore" : "Obnovi",
     "Cancel" : "Odustani",
+    "Email" : "E-pošta",
     "Close" : "Zatvori",
     "Tomorrow" : "Sutra",
     "Notes" : "Notes"

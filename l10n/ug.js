@@ -63,7 +63,6 @@ OC.L10N.register(
     "Could not restore calendar or event" : "كالېندار ياكى ھادىسىنى ئەسلىگە كەلتۈرەلمىدى",
     "Do you really want to empty the trash bin?" : "ئەخلەت ساندۇقىنى بوشاتماقچىمۇ؟",
     "Cancel" : "ۋاز كەچ",
-    "This is an event reminder." : "بۇ بىر ۋەقە ئەسكەرتىش.",
     "Notification" : "ئۇقتۇرۇش",
     "Email" : "تورخەت",
     "Audio notification" : "ئاۋازلىق ئۇقتۇرۇش",

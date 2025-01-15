@@ -68,7 +68,6 @@ OC.L10N.register(
     "Do you really want to empty the trash bin?" : "Naozaj chcete vymazať kôš?",
     "_Elements in the trash bin are deleted after {numDays} day_::_Elements in the trash bin are deleted after {numDays} days_" : ["Položky v odpadkovom koši budú odstránené po {numDays} dni","Položky v odpadkovom koši budú odstránené po {numDays} dňoch","Položky v odpadkovom koši budú odstránené po {numDays} dňoch","Položky v odpadkovom koši budú odstránené po {numDays} dňoch"],
     "Cancel" : "Zrušiť",
-    "This is an event reminder." : "Toto je pripomienka udalosti.",
     "Notification" : "Oznámenie",
     "Email" : "E-mail",
     "Audio notification" : "Hlasový oznam",

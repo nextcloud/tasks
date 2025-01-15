@@ -29,6 +29,7 @@ OC.L10N.register(
     "Delete permanently" : "Borrar permanentemente",
     "Empty trash bin" : "Vaciar la papelera",
     "Cancel" : "Cancelar",
+    "Email" : "Correo electrónico",
     "Go back" : "Regresar",
     "Close" : "Cerrar",
     "No errors" : "Sin errores",

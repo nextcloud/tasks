@@ -68,7 +68,6 @@ OC.L10N.register(
     "Do you really want to empty the trash bin?" : "Tem certeza de que deseja esvaziar a lixeira? ",
     "_Elements in the trash bin are deleted after {numDays} day_::_Elements in the trash bin are deleted after {numDays} days_" : ["Os elementos da lixeira são excluídos após {numDays} dia ","Os elementos da lixeira são excluídos após {numDays} dias ","Os elementos da lixeira são excluídos após {numDays} dias "],
     "Cancel" : "Cancelar",
-    "This is an event reminder." : "Este é um lembrete de evento.",
     "Notification" : "Notificação",
     "Email" : "E-mail",
     "Audio notification" : "Notificação de áudio",

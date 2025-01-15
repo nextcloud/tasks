@@ -23,6 +23,7 @@ OC.L10N.register(
     "Restore" : "Geri qaytar",
     "Delete permanently" : "Həmişəlik sil",
     "Cancel" : "Dayandır",
+    "Email" : "Email",
     "Close" : "Bağla",
     "Priority" : "Prioritet",
     "Tags" : "Işarələr",

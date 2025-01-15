@@ -68,7 +68,6 @@ OC.L10N.register(
     "Do you really want to empty the trash bin?" : "Ali zares želite izprazniti smetnjak?",
     "_Elements in the trash bin are deleted after {numDays} day_::_Elements in the trash bin are deleted after {numDays} days_" : ["Predmeti v smetnjaku se izbrišejo po {numDays} dnevu.","Predmeti v smetnjaku se izbrišejo po {numDays} dneh.","Predmeti v smetnjaku se izbrišejo po {numDays} dnevih.","Predmeti v smetnjaku se izbrišejo po {numDays} dnevih."],
     "Cancel" : "Prekliči",
-    "This is an event reminder." : "To je opomnik dogodka.",
     "Notification" : "Obvestilo",
     "Email" : "Elektronski naslov",
     "Audio notification" : "Zvočno obvestilo",

@@ -23,6 +23,8 @@ OC.L10N.register(
     "Delete permanently" : "Lamet da viken",
     "Empty trash bin" : "Pod-lastez goullo",
     "Cancel" : "Arrest",
+    "Notification" : "Kemennadenn",
+    "Email" : "Postel",
     "Close" : "Seriñ",
     "Tags" : "Klavioù",
     "[Yesterday]" : "[Dec'h]",

@@ -16,6 +16,7 @@ OC.L10N.register(
     "Restore" : "Վերականգնել",
     "Delete permanently" : "Ջնջել ընդմիշտ",
     "Cancel" : "Չեղարկել",
+    "Notification" : "Ծանուցում",
     "Email" : "Էլ․փոստ",
     "Close" : "Փակել",
     "Details" : "Մանրամասներ",

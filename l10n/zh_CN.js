@@ -68,7 +68,6 @@ OC.L10N.register(
     "Do you really want to empty the trash bin?" : "你真想清空回收站吗？",
     "_Elements in the trash bin are deleted after {numDays} day_::_Elements in the trash bin are deleted after {numDays} days_" : ["将于 {numDays} 后删除回收站内元素"],
     "Cancel" : "取消",
-    "This is an event reminder." : "这是一个事件提醒。",
     "Notification" : "通知",
     "Email" : "电子邮箱",
     "Audio notification" : "语音通知",

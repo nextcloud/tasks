@@ -68,7 +68,6 @@ OC.L10N.register(
     "Do you really want to empty the trash bin?" : "Подтвердите очистку корзины.",
     "_Elements in the trash bin are deleted after {numDays} day_::_Elements in the trash bin are deleted after {numDays} days_" : ["Объекты в корзине будут удалены через {numDays} день","Объекты в корзине будут удалены через {numDays} дня","Объекты в корзине будут удалены через {numDays} дней","Объекты в корзине будут удалены через {numDays} дня"],
     "Cancel" : "Отмена",
-    "This is an event reminder." : "Это напоминание о событии.",
     "Notification" : "Уведомление",
     "Email" : "Электронная почта",
     "Audio notification" : "Звуковое уведомление",

@@ -68,7 +68,6 @@ OC.L10N.register(
     "Do you really want to empty the trash bin?" : "Ви дійсно хочете очистити кошик?",
     "_Elements in the trash bin are deleted after {numDays} day_::_Elements in the trash bin are deleted after {numDays} days_" : ["Елементи в кошику буде вилучено за {numDays} день","Елементи в кошику буде вилучено за {numDays} дні","Елементи в кошику буде вилучено за {numDays} днів","Елементи в кошику буде вилучено через {numDays} днів"],
     "Cancel" : "Скасувати",
-    "This is an event reminder." : "Це нагадування про подію.",
     "Notification" : "Сповіщення",
     "Email" : "Ел.пошта",
     "Audio notification" : "Звукове сповіщення",

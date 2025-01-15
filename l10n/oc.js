@@ -32,6 +32,7 @@ OC.L10N.register(
     "Email" : "Adreiça electronica",
     "Audio notification" : "Notificacion àudio",
     "Other notification" : "Autras notificacions",
+    "Edit time" : "Modificar l’ora",
     "Remove reminder" : "Suprimir lo rapèl",
     "Go back" : "Revenir en arrière",
     "_second_::_seconds_" : ["segonda","segondas"],

@@ -68,7 +68,6 @@ OC.L10N.register(
     "Do you really want to empty the trash bin?" : "Vill du verkligen tömma papperskorgen?",
     "_Elements in the trash bin are deleted after {numDays} day_::_Elements in the trash bin are deleted after {numDays} days_" : ["Element i papperskorgen raderas efter {numDays} dag","Element i papperskorgen raderas efter {numDays} dagar"],
     "Cancel" : "Avbryt",
-    "This is an event reminder." : "Detta är en händelsepåminnelse.",
     "Notification" : "Notifiering",
     "Email" : "E-post",
     "Audio notification" : "Ljudmeddelande",

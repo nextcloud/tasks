@@ -26,6 +26,7 @@ OC.L10N.register(
     "Restore" : "Herstel",
     "Delete permanently" : "Skrap permanent",
     "Cancel" : "Kanselleer",
+    "Go back" : "Gaan terug",
     "Close" : "Sluit",
     "Change sort order" : "Verander sorteer volgorde",
     "Start date" : "Begindatum",

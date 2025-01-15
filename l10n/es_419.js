@@ -24,6 +24,7 @@ OC.L10N.register(
     "Restore" : "Restaurar",
     "Delete permanently" : "Borrar permanentemente",
     "Cancel" : "Cancelar",
+    "Go back" : "Regresar",
     "Close" : "Cerrar",
     "Select tags to filter by" : "Selecciona las etiquetas del filtro",
     "Change sort order" : "Cambiar el criterio para ordenar",

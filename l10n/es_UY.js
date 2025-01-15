@@ -25,6 +25,7 @@ OC.L10N.register(
     "Delete permanently" : "Borrar permanentemente",
     "Empty trash bin" : "Vaciar la papelera de reciclaje",
     "Cancel" : "Cancelar",
+    "Email" : "Correo electrónico",
     "Go back" : "Regresar",
     "Close" : "Cerrar",
     "Select tags to filter by" : "Selecciona las etiquetas del filtro",
