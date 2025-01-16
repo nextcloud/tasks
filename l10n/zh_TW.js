@@ -72,6 +72,7 @@ OC.L10N.register(
     "Set a reminder at a custom date and time:" : "在自訂日期與時間設定提醒：",
     "Cancel" : "取消",
     "No reminders" : "無提醒",
+    "This is a todo reminder." : "這是待辦事項提醒。",
     "Notification" : "通知",
     "Email" : "電子郵件",
     "Audio notification" : "音訊通知",

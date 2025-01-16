@@ -72,6 +72,7 @@ OC.L10N.register(
     "Set a reminder at a custom date and time:" : "Socraigh meabhrúchán ar dháta agus am saincheaptha:",
     "Cancel" : "Cealaigh",
     "No reminders" : "Socraigh meabhrúchán ar dháta agus am saincheaptha:",
+    "This is a todo reminder." : "Is meabhrúchán tado é seo.",
     "Notification" : "Fógraí",
     "Email" : "Ríomhphost",
     "Audio notification" : "Fógra fuaime",

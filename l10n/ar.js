@@ -72,6 +72,7 @@ OC.L10N.register(
     "Set a reminder at a custom date and time:" : "تعيين التذكير لوقت وتاريخ معين:",
     "Cancel" : "إلغاء",
     "No reminders" : "لا توجد أي تذكيرات",
+    "This is a todo reminder." : "هذا تذكير بمهام واجبة",
     "Notification" : "إشعار",
     "Email" : "البريد الإلكتروني",
     "Audio notification" : "تنبيه صوتي",
