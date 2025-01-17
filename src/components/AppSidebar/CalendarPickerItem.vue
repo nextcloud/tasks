@@ -73,7 +73,7 @@ export default {
 			required: false,
 		},
 	},
-	emits: ['change-calendar'],
+	emits: ['changeCalendar'],
 	computed: {
 		isDisabled() {
 			return this.calendars.length < 2 || this.disabled
@@ -108,7 +108,7 @@ export default {
 			if (!calendar) {
 				return
 			}
-			this.$emit('change-calendar', calendar)
+			this.$emit('changeCalendar', calendar)
 		},
 	},
 }

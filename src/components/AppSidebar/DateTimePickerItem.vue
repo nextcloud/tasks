@@ -121,7 +121,7 @@ export default {
 		checkOverdue: {
 			type: Boolean,
 			default: true,
-		}
+		},
 	},
 	data() {
 		return {

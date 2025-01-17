@@ -71,7 +71,7 @@ export default {
 			default: '',
 		},
 	},
-	emits: ['toggle-completed'],
+	emits: ['toggleCompleted'],
 	computed: {
 		ariaLabel() {
 			if (this.cancelled && !this.completed) {
@@ -97,7 +97,7 @@ export default {
 		t,
 
 		toggleCompleted() {
-			this.$emit('toggle-completed')
+			this.$emit('toggleCompleted')
 		},
 	},
 }

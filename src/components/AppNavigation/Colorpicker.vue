@@ -65,7 +65,7 @@ export default {
 			default: '#31CC7C',
 		},
 	},
-	emits: ['color-selected'],
+	emits: ['colorSelected'],
 	data() {
 		return {
 			random: '#31CC7C',
@@ -92,7 +92,7 @@ export default {
 			this.pick(this.random)
 		},
 		pick(color) {
-			this.$emit('color-selected', color)
+			this.$emit('colorSelected', color)
 		},
 		/*
 		* Generate a random colour with the core generator

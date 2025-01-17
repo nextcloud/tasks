@@ -82,17 +82,17 @@ export default {
 		},
 	},
 	emits: [
-		'add-tag',
-		'set-tags',
+		'addTag',
+		'setTags',
 	],
 	methods: {
 		t,
 
 		addTag(tag) {
-			this.$emit('add-tag', tag)
+			this.$emit('addTag', tag)
 		},
 		setTags(tags) {
-			this.$emit('set-tags', tags)
+			this.$emit('setTags', tags)
 		},
 	},
 }

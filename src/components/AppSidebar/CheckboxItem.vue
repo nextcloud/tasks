@@ -28,7 +28,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			:aria-checked="checked"
 			:checked="checked"
 			:disabled="readOnly"
-			@click="$emit('set-checked', checked)">
+			@click="$emit('setChecked', checked)">
 		<label :for="id">
 			<span>{{ propertyString }}</span>
 		</label>
@@ -56,7 +56,7 @@ export default {
 			default: '',
 		},
 	},
-	emits: ['set-checked'],
+	emits: ['setChecked'],
 }
 </script>
 
