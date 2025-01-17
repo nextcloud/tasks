@@ -22,8 +22,7 @@
  *
  */
 
-import { uidToColor } from './uidToColor.js'
-
+import { usernameToColor } from '@nextcloud/vue'
 import convert from 'color-convert'
 
 /**
@@ -33,7 +32,7 @@ import convert from 'color-convert'
  * @return {string} The hex color
  */
 export function uidToHexColor(uid) {
-	const color = uidToColor(uid)
+	const color = usernameToColor(uid)
 	return '#' + convert.rgb.hex(color.r, color.g, color.b)
 }
 
