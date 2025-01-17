@@ -67,7 +67,10 @@ OC.L10N.register(
     "Could not restore calendar or event" : "Kalendář nebo událost se nepodařilo obnovit",
     "Do you really want to empty the trash bin?" : "Opravdu chcete koš vyprázdnit?",
     "_Elements in the trash bin are deleted after {numDays} day_::_Elements in the trash bin are deleted after {numDays} days_" : ["Prvky v koši jsou smazány po uplynutí {numDays} dne","Prvky v koši jsou smazány po uplynutí {numDays} dnů","Prvky v koši jsou smazány po uplynutí {numDays} dnů","Prvky v koši jsou smazány po uplynutí {numDays} dnů"],
+    "Create reminder" : "Vytvořit připomínku",
+    "Update reminder" : "Aktualizovat připomínku",
     "Cancel" : "Storno",
+    "No reminders" : "Žádné připomínky",
     "Notification" : "Upozornění",
     "Email" : "E-mail",
     "Audio notification" : "Zvuková upozornění",
@@ -265,6 +268,7 @@ OC.L10N.register(
     "[Starts tomorrow at] LT" : "[Začíná zítra v] LT",
     "[Starts on] LL [at] LT" : "[Začíná v] LL [v] LT",
     "[Started yesterday at] LT" : "[Zahájeno včera v] LT",
-    "[Started on] LL [at] LT" : "[Zahájeno v] LL [v] LT"
+    "[Started on] LL [at] LT" : "[Zahájeno v] LL [v] LT",
+    "{time}" : "{time}"
 },
 "nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;");

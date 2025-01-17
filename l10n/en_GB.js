@@ -72,6 +72,7 @@ OC.L10N.register(
     "Set a reminder at a custom date and time:" : "Set a reminder at a custom date and time:",
     "Cancel" : "Cancel",
     "No reminders" : "No reminders",
+    "This is a todo reminder." : "This is a todo reminder.",
     "Notification" : "Notification",
     "Email" : "Email",
     "Audio notification" : "Audio notification",
