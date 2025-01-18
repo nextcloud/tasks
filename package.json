@@ -65,7 +65,7 @@
     "@vue/test-utils": "^2.4.6",
     "happy-dom": "^16.6.0",
     "mockdate": "^3.0.5",
-    "vitest": "^2.1.8"
+    "vitest": "^3.0.2"
   },
   "engines": {
     "node": "^20.0.0",
