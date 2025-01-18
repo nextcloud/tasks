@@ -48,7 +48,6 @@
     "markdown-it-emoji": "^3.0.0",
     "markdown-it-link-attributes": "^4.0.1",
     "markdown-it-task-lists": "^2.1.1",
-    "md5": "^2.3.0",
     "p-limit": "^6.2.0",
     "sortablejs-vue3": "^1.2.11",
     "uuid": "^11.0.5",
