@@ -60,6 +60,8 @@
     "Could not restore calendar or event" : "Nepavyko atkurti kalendoriaus ar įvykio",
     "Do you really want to empty the trash bin?" : "Ar tikrai norite išvalyti šiukšlinę?",
     "_Elements in the trash bin are deleted after {numDays} day_::_Elements in the trash bin are deleted after {numDays} days_" : ["Elementai šiukšlinėje yra ištrinami po {numDays} dienos","Elementai šiukšlinėje yra ištrinami po {numDays} dienų","Elementai šiukšlinėje yra ištrinami po {numDays} dienų","Elementai šiukšlinėje yra ištrinami po {numDays} dienos"],
+    "Create reminder" : "Sukurti priminimą",
+    "Update reminder" : "Atnaujinti priminimą",
     "Cancel" : "Atsisakyti",
     "Notification" : "Pranešimas",
     "Email" : "El. paštas",
@@ -79,6 +81,8 @@
     "Set date" : "Nustatyti datą",
     "Set time" : "Nustatyti laiką",
     "Delete date" : "Ištrinti datą",
+    "Set value" : "Nustatyti reikšmę",
+    "Delete value" : "Ištrinti reikšmę",
     "Add this as a new tag" : "Pridėti tai kaip naują žymę",
     "No tag available. Create one!" : "Nėra prieinamų žymių. Sukurkite žymę!",
     "Creating new tasks…" : "Kuriamos naujos užduotys…",
@@ -90,7 +94,9 @@
     "Open your browser console for more details" : "Išsamesnei informacijai, atverkite savo naršyklės pultą",
     "_This will delete {taskCount} completed task and its subtasks from calendar \"{calendar}\"._::_This will delete {taskCount} completed tasks and their subtasks from calendar \"{calendar}\"._" : ["Tai ištrins {taskCount} atliktą užduotį ir jos dalines užduotis iš kalendoriaus „{calendar}“.","Tai ištrins {taskCount} atliktas užduotis ir jų dalines užduotis iš kalendoriaus „{calendar}“.","Tai ištrins {taskCount} atliktų užduočių ir jų dalines užduotis iš kalendoriaus „{calendar}“.","Tai ištrins {taskCount} atliktą užduotį ir jų dalines užduotis iš kalendoriaus „{calendar}“."],
     "_Could not delete {failedCount} task._::_Could not delete {failedCount} tasks._" : ["Nepavyko ištrinti {failedCount} užduoties.","Nepavyko ištrinti {failedCount} užduočių.","Nepavyko ištrinti {failedCount} užduočių.","Nepavyko ištrinti {failedCount} užduoties."],
+    "Filter by tags" : "Filtruoti pagal žymes",
     "Select tags to filter by" : "Pasirinkite žymes, pagal kurias filtruoti",
+    "Reset filter" : "Atstatyti filtrą",
     "Add an important task to \"{calendar}\"…" : "Pridėti svarbią užduotį į „{calendar}“…",
     "Add a task due today to \"{calendar}\"…" : "Pridėti užduotį, kurios galutinis terminas šiandien į kalendorių „{calendar}“…",
     "Add a current task to \"{calendar}\"…" : "Pridėti dabartinę užduotį į „{calendar}“…",
@@ -133,6 +139,8 @@
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n atlikta užduotis","%n atliktos užduotys","%n atliktų užduočių","%n atlikta užduotis"],
     "Tomorrow" : "Rytoj",
     "Add List…" : "Pridėti sąrašą…",
+    "New list" : "Naujas sąrašas",
+    "An error occurred, unable to create the list." : "Įvyko klaida, nepavyko sukurti sąrašo.",
     "All day" : "Visą dieną",
     "Unpin" : "Atsegti",
     "Pin" : "Prisegti",
@@ -191,6 +199,7 @@
     "[Starts tomorrow at] LT" : "[Prasidės rytoj] LT",
     "[Starts on] LL [at] LT" : "[Prasidės] LL, LT",
     "[Started yesterday at] LT" : "[Prasidėjo vakar] LT",
-    "[Started on] LL [at] LT" : "[Prasidėjo] LL, LT"
+    "[Started on] LL [at] LT" : "[Prasidėjo] LL, LT",
+    "{time}" : "{time}"
 },"pluralForm" :"nplurals=4; plural=(n % 10 == 1 && (n % 100 > 19 || n % 100 < 11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? 1 : n % 1 != 0 ? 2: 3);"
 }
