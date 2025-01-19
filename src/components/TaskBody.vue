@@ -91,7 +91,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:aria-label="t('tasks', '{complete} % completed', {complete: task.complete})"
 					:title="t('tasks', '{complete} % completed', {complete: task.complete})"
 					:color="task.calendar.color" />
-				<Bell v-if="task.alarms.length > 0" :size="20" :title="t('tasks', 'Task has one or more reminders')" />
+				<Bell v-if="task.alarms.length > 0" :size="20" :title="n('tasks', 'Task has one reminder', 'Task has {n} reminders', task.alarms.length, { n: task.alarms.length })" />
 				<NcActions v-if="task.deleteCountdown === null" class="reactive no-nav" menu-align="right">
 					<NcActionButton v-if="!task.calendar.readOnly"
 						:close-after-click="true"
