@@ -63,8 +63,8 @@ export default {
 		},
 	},
 	emits: [
-		'status-clicked',
-		'reset-status',
+		'statusClicked',
+		'resetStatus',
 	],
 	data() {
 		return {
@@ -86,7 +86,7 @@ export default {
 	},
 	methods: {
 		statusClicked() {
-			this.$emit('status-clicked')
+			this.$emit('statusClicked')
 		},
 		checkTimeout(newStatus) {
 			if (newStatus) {
@@ -96,7 +96,7 @@ export default {
 				if (newStatus.status === 'success') {
 					this.resetStatusTimeout = setTimeout(
 						() => {
-							this.$emit('reset-status')
+							this.$emit('resetStatus')
 						}, 5000,
 					)
 				}

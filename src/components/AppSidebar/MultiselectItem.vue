@@ -86,7 +86,7 @@ export default {
 			default: null,
 		},
 	},
-	emits: ['change-value'],
+	emits: ['changeValue'],
 	computed: {
 		isDisabled() {
 			return this.options.length < 2 || this.disabled
@@ -100,7 +100,7 @@ export default {
 			if (!value) {
 				return
 			}
-			this.$emit('change-value', value)
+			this.$emit('changeValue', value)
 		},
 	},
 }

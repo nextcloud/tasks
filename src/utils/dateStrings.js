@@ -27,7 +27,7 @@ import { convertTimeZone } from './alarms.js'
 /**
  * Returns a formatted string for the due date
  *
- * @param {Task} task The task
+ * @param {import('../models/task.js').Task} task The task
  * @return {string} The formatted due date string
  */
 export function dueDateString(task) {
@@ -88,7 +88,7 @@ export function dueDateString(task) {
 /**
  * Returns a formatted string for the start date
  *
- * @param {Task} task The task
+ * @param {import('../models/task.js').Task} task The task
  * @return {string} The formatted start date string
  */
 export function startDateString(task) {

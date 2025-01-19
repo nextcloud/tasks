@@ -52,7 +52,7 @@ export default {
 		},
 	},
 	emits: [
-		'select-date-time',
+		'selectDateTime',
 		'close',
 	],
 	data() {
@@ -72,7 +72,7 @@ export default {
 		},
 
 		onSubmit() {
-			this.$emit('select-date-time', this.date)
+			this.$emit('selectDateTime', this.date)
 		},
 
 		onClose() {

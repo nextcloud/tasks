@@ -172,7 +172,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:property-string="completedString"
 					:read-only="readOnly"
 					:task="task"
-					:check-overdue=false
+					:check-overdue="false"
 					@set-value="changeCompletedDate">
 					<template #icon>
 						<CalendarCheck :size="20" />

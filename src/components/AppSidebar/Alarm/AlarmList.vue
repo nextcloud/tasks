@@ -71,9 +71,9 @@ export default {
 		},
 	},
 	emits: [
-		'add-alarm',
-		'remove-alarm',
-		'update-alarm',
+		'addAlarm',
+		'removeAlarm',
+		'updateAlarm',
 	],
 	computed: {
 		alarmComponents() {
@@ -125,7 +125,7 @@ export default {
 		 * @param {object} alarm The alarm time or duration
 		 */
 		addAlarm(alarm) {
-			this.$emit('add-alarm', this.generateVAlarm(alarm))
+			this.$emit('addAlarm', this.generateVAlarm(alarm))
 		},
 
 		/**
@@ -135,7 +135,7 @@ export default {
 		 * @param {number} index This index of the updated alarm-item
 		 */
 		updateAlarm(alarm, index) {
-			this.$emit('update-alarm', this.generateVAlarm(alarm), index)
+			this.$emit('updateAlarm', this.generateVAlarm(alarm), index)
 		},
 
 		/**
@@ -144,7 +144,7 @@ export default {
 		 * @param {number} index The index of the alarm-list
 		 */
 		removeAlarm(index) {
-			this.$emit('remove-alarm', index)
+			this.$emit('removeAlarm', index)
 		},
 	},
 }

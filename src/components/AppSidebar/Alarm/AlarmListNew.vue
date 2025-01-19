@@ -137,7 +137,7 @@ export default {
 		},
 	},
 	emits: [
-		'add-alarm',
+		'addAlarm',
 	],
 	data() {
 		return {
@@ -214,7 +214,7 @@ export default {
 		},
 
 		onAlarmOptionClick(alarm) {
-			this.$emit('add-alarm', alarm)
+			this.$emit('addAlarm', alarm)
 		},
 
 		onChooseDateAndTime(date) {
@@ -223,7 +223,7 @@ export default {
 				parameter: undefined, // ical.js sets the correct parameter for us when using a `ICAL.Time`-object
 			}
 
-			this.$emit('add-alarm', alarm)
+			this.$emit('addAlarm', alarm)
 			this.chooseDateTimeMenuIsOpen = false
 		},
 	},

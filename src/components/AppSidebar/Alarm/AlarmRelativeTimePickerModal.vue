@@ -85,7 +85,7 @@ export default {
 		},
 	},
 	emits: [
-		'select-date-time',
+		'selectDateTime',
 		'close',
 	],
 	data() {
@@ -149,7 +149,7 @@ export default {
 
 			const alarmObject = getAlarmObjectFromTriggerTime(seconds, this.alarm.relativeIsRelatedToStart)
 
-			this.$emit('select-date-time', alarmObject)
+			this.$emit('selectDateTime', alarmObject)
 		},
 
 		onClose() {

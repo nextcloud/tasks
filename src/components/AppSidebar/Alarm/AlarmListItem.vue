@@ -124,8 +124,8 @@ export default {
 		},
 	},
 	emits: [
-		'remove-alarm',
-		'update-alarm',
+		'removeAlarm',
+		'updateAlarm',
 	],
 	data() {
 		return {
@@ -210,7 +210,7 @@ export default {
 				parameter: undefined, // ical.js sets the correct parameter for us when using a `ICAL.Time`-object
 			}
 
-			this.$emit('update-alarm', alarm, this.index)
+			this.$emit('updateAlarm', alarm, this.index)
 			this.closeEditMode()
 		},
 
@@ -220,7 +220,7 @@ export default {
 				parameter: undefined, // We don't care about the params, since they currently can't be changed
 			}
 
-			this.$emit('update-alarm', alarm, this.index)
+			this.$emit('updateAlarm', alarm, this.index)
 			this.closeEditMode()
 		},
 
@@ -232,7 +232,7 @@ export default {
 		 * This method emits the removeAlarm event
 		 */
 		removeAlarm() {
-			this.$emit('remove-alarm', this.index)
+			this.$emit('removeAlarm', this.index)
 			this.showMenu = false
 		},
 	},
