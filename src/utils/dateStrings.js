@@ -220,10 +220,8 @@ export function formatAlarm(alarm, isAllDay, currentUserTimezone, locale) {
 		// Absolute trigger
 		// There are no timezones in the VALARM component, since dates can only be relative or saved as UTC.
 		const currentUserTimezoneDate = convertTimeZone(alarm.absoluteDate, currentUserTimezone)
-		return t('tasks', '{time}', {
-			time: moment(currentUserTimezoneDate).locale(locale).calendar(null, {
-				sameElse: 'LLL', // Overwrites the default `DD/MM/YYYY` (which misses the time)
-			}),
+		return moment(currentUserTimezoneDate).locale(locale).calendar(null, {
+			sameElse: 'LLL', // Overwrites the default `DD/MM/YYYY` (which misses the time)
 		})
 	}
 }
