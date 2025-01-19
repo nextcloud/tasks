@@ -89,13 +89,15 @@ export default {
 		t,
 
 		stubCalendar(calendar) {
-			return {
-				id: calendar.url,
-				displayName: calendar.displayName,
-				color: calendar.color,
-				isSharedWithMe: calendar.isSharedWithMe,
-				owner: calendar.owner,
-			}
+			return calendar
+				? {
+					id: calendar.url,
+					displayName: calendar.displayName,
+					color: calendar.color,
+					isSharedWithMe: calendar.isSharedWithMe,
+					owner: calendar.owner,
+				}
+				: null
 		},
 
 		/**
