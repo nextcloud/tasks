@@ -152,7 +152,6 @@ OC.L10N.register(
     "Task is pinned" : "Завдання закріплено",
     "Task has a note" : "Завдання має опис",
     "{complete} % completed" : "{complete}% виконання",
-    "Task has one or more reminders" : "Завдання має одне або кілька нагадувань",
     "Add subtask" : "Додати підзавдання",
     "Show subtasks" : "Показати підзавдання",
     "Hide subtasks" : "Приховати підзавдання",

@@ -152,7 +152,6 @@ OC.L10N.register(
     "Task is pinned" : "工作項目已釘選",
     "Task has a note" : "工作項目有註記",
     "{complete} % completed" : "{complete} % 完成",
-    "Task has one or more reminders" : "任務有一個或多個提醒",
     "Add subtask" : "新增子工作項目",
     "Show subtasks" : "顯示子工作項目",
     "Hide subtasks" : "隱藏子工作項目",
@@ -286,7 +285,6 @@ OC.L10N.register(
     "{time} before the task starts" : "任務開始前 {time}",
     "{time} before the task is due" : "任務截止前 {time}",
     "{time} after the task starts" : "任務開始後 {time}",
-    "{time} after the task is due" : "任務截止後 {time}",
-    "{time}" : "{time}"
+    "{time} after the task is due" : "任務截止後 {time}"
 },
 "nplurals=1; plural=0;");

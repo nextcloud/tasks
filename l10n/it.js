@@ -136,7 +136,6 @@ OC.L10N.register(
     "Task is pinned" : "L'attività è appuntata",
     "Task has a note" : "L'attività ha una nota",
     "{complete} % completed" : "{complete} % completato",
-    "Task has one or more reminders" : "L'attività ha uno o più promemoria",
     "Add subtask" : "Aggiungi sottoattività",
     "Show subtasks" : "Mostra sottoattività",
     "Hide subtasks" : "Nascondi sottoattività",

@@ -152,7 +152,6 @@ OC.L10N.register(
     "Task is pinned" : "المهمة مُثبّتة pinned",
     "Task has a note" : "المهمة بها ملاحظة",
     "{complete} % completed" : "{complete} % مكتمل",
-    "Task has one or more reminders" : "المهمة عليها تذكير أو أكثر",
     "Add subtask" : "أضف مهمة فرعية",
     "Show subtasks" : "أعرض المهام الفرعية",
     "Hide subtasks" : "إخْفِ المهام الفرعية",
@@ -286,7 +285,6 @@ OC.L10N.register(
     "{time} before the task starts" : "{time} قبل أن تبدأ المهمة",
     "{time} before the task is due" : "{time} قبل اكتمال المهمة",
     "{time} after the task starts" : "{time} بعد أن تبدأ المهمة",
-    "{time} after the task is due" : "{time} بعد اكتمال المهمة",
-    "{time}" : "{time}"
+    "{time} after the task is due" : "{time} بعد اكتمال المهمة"
 },
 "nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;");

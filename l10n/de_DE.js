@@ -152,7 +152,6 @@ OC.L10N.register(
     "Task is pinned" : "Aufgabe ist angeheftet",
     "Task has a note" : "Aufgabe hat eine Notiz",
     "{complete} % completed" : "{complete}% fertiggestellt",
-    "Task has one or more reminders" : "Aufgaben hat eine oder mehrere Erinnerungen",
     "Add subtask" : "Teilaufgabe hinzufügen",
     "Show subtasks" : "Teilaufgabe anzeigen",
     "Hide subtasks" : "Teilaufgaben ausblenden",
@@ -286,7 +285,6 @@ OC.L10N.register(
     "{time} before the task starts" : "{time} vor Beginn der Aufgabe",
     "{time} before the task is due" : "{time} bevor die Aufgabe fällig ist",
     "{time} after the task starts" : "{time} nach Beginn der Aufgabe",
-    "{time} after the task is due" : "{time} nachdem die Aufgabe fällig ist",
-    "{time}" : "{time}"
+    "{time} after the task is due" : "{time} nachdem die Aufgabe fällig ist"
 },
 "nplurals=2; plural=(n != 1);");

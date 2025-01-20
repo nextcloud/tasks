@@ -152,7 +152,6 @@ OC.L10N.register(
     "Task is pinned" : "Tá tasc pinn",
     "Task has a note" : "Tá nóta ag Tasc",
     "{complete} % completed" : "{complete} % críochnaithe",
-    "Task has one or more reminders" : "Tá meabhrúchán amháin nó níos mó ag Tasc",
     "Add subtask" : "Cuir fothasc leis",
     "Show subtasks" : "Taispeáin subtascanna",
     "Hide subtasks" : "Folaigh na subtascanna",
@@ -286,7 +285,6 @@ OC.L10N.register(
     "{time} before the task starts" : "{time} sula dtosaíonn an tasc",
     "{time} before the task is due" : "{time} sula mbeidh an tasc dlite",
     "{time} after the task starts" : "{time} tar éis tosú ar an tasc",
-    "{time} after the task is due" : "{time} tar éis an tasc dlite",
-    "{time}" : "{time}"
+    "{time} after the task is due" : "{time} tar éis an tasc dlite"
 },
 "nplurals=5; plural=(n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n<11 ? 3 : 4);");

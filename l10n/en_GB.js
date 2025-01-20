@@ -152,7 +152,6 @@ OC.L10N.register(
     "Task is pinned" : "Task is pinned",
     "Task has a note" : "Task has a note",
     "{complete} % completed" : "{complete} % completed",
-    "Task has one or more reminders" : "Task has one or more reminders",
     "Add subtask" : "Add subtask",
     "Show subtasks" : "Show subtasks",
     "Hide subtasks" : "Hide subtasks",
@@ -286,7 +285,6 @@ OC.L10N.register(
     "{time} before the task starts" : "{time} before the task starts",
     "{time} before the task is due" : "{time} before the task is due",
     "{time} after the task starts" : "{time} after the task starts",
-    "{time} after the task is due" : "{time} after the task is due",
-    "{time}" : "{time}"
+    "{time} after the task is due" : "{time} after the task is due"
 },
 "nplurals=2; plural=(n != 1);");

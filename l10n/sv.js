@@ -152,7 +152,6 @@ OC.L10N.register(
     "Task is pinned" : "Uppgiften är fäst",
     "Task has a note" : "Uppgiften har en anteckning",
     "{complete} % completed" : "{complete} % slutfört",
-    "Task has one or more reminders" : "Uppgiften har en eller flera påminnelser",
     "Add subtask" : "Lägg till underuppgift",
     "Show subtasks" : "Visa underuppgifter",
     "Hide subtasks" : "Dölj underuppgifter",
@@ -286,7 +285,6 @@ OC.L10N.register(
     "{time} before the task starts" : "{time} innan uppgiften startar",
     "{time} before the task is due" : "{time} innan uppgiften är klar",
     "{time} after the task starts" : "{time} efter att uppgiften startar",
-    "{time} after the task is due" : "{time} efter att uppgiften är klar",
-    "{time}" : "{time}"
+    "{time} after the task is due" : "{time} efter att uppgiften är klar"
 },
 "nplurals=2; plural=(n != 1);");

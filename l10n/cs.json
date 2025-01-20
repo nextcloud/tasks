@@ -69,6 +69,7 @@
     "Update reminder" : "Aktualizovat připomínku",
     "Cancel" : "Storno",
     "No reminders" : "Žádné připomínky",
+    "This is a todo reminder." : "Toto je připomínka úkolu.",
     "Notification" : "Upozornění",
     "Email" : "E-mail",
     "Audio notification" : "Zvuková upozornění",
@@ -76,6 +77,9 @@
     "Edit time" : "Upravit čas",
     "Remove reminder" : "Odebrat připomínku",
     "Add reminder" : "Přidat připomínku",
+    "Before the task starts" : "Před zahájením úkolu",
+    "Before the task is due" : "Před termínem úkolu",
+    "Select date and time" : "Vybrat datum a čas",
     "Go back" : "Jít zpět",
     "before at" : "před v",
     "_second_::_seconds_" : ["sekunda","sekundy","sekund","sekundy"],
@@ -267,6 +271,12 @@
     "[Starts on] LL [at] LT" : "[Začíná v] LL [v] LT",
     "[Started yesterday at] LT" : "[Zahájeno včera v] LT",
     "[Started on] LL [at] LT" : "[Zahájeno v] LL [v] LT",
-    "{time}" : "{time}"
+    "Midnight on the day the task starts" : "Půlnoc dne kdy úkol začíná",
+    "at the task's start" : "při zahájení úkolu",
+    "when the task is due" : "když se blíží termín úkolu",
+    "{time} before the task starts" : "{time} před zahájením úkolu",
+    "{time} before the task is due" : "{time} před termínem úkolu",
+    "{time} after the task starts" : "{time} po zahájení úkolu",
+    "{time} after the task is due" : "{time} po termínu úkolu"
 },"pluralForm" :"nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;"
 }
