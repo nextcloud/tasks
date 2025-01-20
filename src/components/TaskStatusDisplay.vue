@@ -36,9 +36,9 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
-import NcLoadingIcon from '@nextcloud/vue/dist/Components/NcLoadingIcon.js'
-import Tooltip from '@nextcloud/vue/dist/Directives/Tooltip.js'
+import NcButton from '@nextcloud/vue/components/NcButton'
+import NcLoadingIcon from '@nextcloud/vue/components/NcLoadingIcon'
+import Tooltip from '@nextcloud/vue/directives/Tooltip'
 
 import AlertCircleOutline from 'vue-material-design-icons/AlertCircleOutline.vue'
 import Check from 'vue-material-design-icons/Check.vue'

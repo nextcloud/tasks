@@ -58,7 +58,7 @@ import openNewTask from '../mixins/openNewTask.js'
 
 import { translate as t } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
-import NcTextField from '@nextcloud/vue/dist/Components/NcTextField.js'
+import NcTextField from '@nextcloud/vue/components/NcTextField'
 
 import Plus from 'vue-material-design-icons/Plus.vue'
 

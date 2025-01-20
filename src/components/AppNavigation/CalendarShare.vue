@@ -58,7 +58,7 @@ import { urldecode } from '../../utils/url.js'
 import Axios from '@nextcloud/axios'
 import { translate as t } from '@nextcloud/l10n'
 import { generateOcsUrl } from '@nextcloud/router'
-import NcSelect from '@nextcloud/vue/dist/Components/NcSelect.js'
+import NcSelect from '@nextcloud/vue/components/NcSelect'
 
 import debounce from 'debounce'
 

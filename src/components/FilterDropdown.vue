@@ -56,9 +56,9 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import { translate as t } from '@nextcloud/l10n'
-import NcActions from '@nextcloud/vue/dist/Components/NcActions.js'
-import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton.js'
-import NcActionInput from '@nextcloud/vue/dist/Components/NcActionInput.js'
+import NcActions from '@nextcloud/vue/components/NcActions'
+import NcActionButton from '@nextcloud/vue/components/NcActionButton'
+import NcActionInput from '@nextcloud/vue/components/NcActionInput'
 
 import Close from 'vue-material-design-icons/Close.vue'
 import FilterIcon from 'vue-material-design-icons/Filter.vue'

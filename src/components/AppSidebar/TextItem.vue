@@ -64,7 +64,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 import editableItem from '../../mixins/editableItem.js'
 
 import { translate as t } from '@nextcloud/l10n'
-import Linkify from '@nextcloud/vue/dist/Directives/Linkify.js'
+import Linkify from '@nextcloud/vue/directives/Linkify'
 
 export default {
 	name: 'TextItem',
