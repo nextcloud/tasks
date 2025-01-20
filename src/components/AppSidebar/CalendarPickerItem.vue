@@ -52,7 +52,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 import CalendarPickerOption from './CalendarPickerOption.vue'
 
 import { translate as t } from '@nextcloud/l10n'
-import NcSelect from '@nextcloud/vue/dist/Components/NcSelect.js'
+import NcSelect from '@nextcloud/vue/components/NcSelect'
 
 export default {
 	components: {

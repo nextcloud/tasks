@@ -65,7 +65,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 <script>
 import { translate as t } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
-import NcAppNavigationSettings from '@nextcloud/vue/dist/Components/NcAppNavigationSettings.js'
+import NcAppNavigationSettings from '@nextcloud/vue/components/NcAppNavigationSettings'
 
 import CalendarToday from 'vue-material-design-icons/CalendarToday.vue'
 import CalendarWeek from 'vue-material-design-icons/CalendarWeek.vue'

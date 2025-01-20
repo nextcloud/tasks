@@ -60,10 +60,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 <script>
 import { showError } from '@nextcloud/dialogs'
 import { translate as t } from '@nextcloud/l10n'
-import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton.js'
-import NcAppNavigationItem from '@nextcloud/vue/dist/Components/NcAppNavigationItem.js'
-import NcAvatar from '@nextcloud/vue/dist/Components/NcAvatar.js'
-import NcCheckboxRadioSwitch from '@nextcloud/vue/dist/Components/NcCheckboxRadioSwitch.js'
+import NcActionButton from '@nextcloud/vue/components/NcActionButton'
+import NcAppNavigationItem from '@nextcloud/vue/components/NcAppNavigationItem'
+import NcAvatar from '@nextcloud/vue/components/NcAvatar'
+import NcCheckboxRadioSwitch from '@nextcloud/vue/components/NcCheckboxRadioSwitch'
 
 import AccountMultiple from 'vue-material-design-icons/AccountMultiple.vue'
 import Delete from 'vue-material-design-icons/Delete.vue'
