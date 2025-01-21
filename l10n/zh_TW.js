@@ -174,6 +174,7 @@ OC.L10N.register(
     "[Completed tomorrow at] LT" : "[明天完成於] LT",
     "[Completed] L [at] LT" : "[完成] L [於] LT",
     "Add a subtask to \"{task}\"…" : "新增子工作項目到「{task}」……",
+    "_Task has one reminder_::_Task has {n} reminders_" : ["任務有 {n} 個提醒"],
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["將在 {countdown} 秒後刪除工作項目"],
     "Task is cancelled" : "工作項目已被取消",
     "Task is completed" : "工作項目已完成",

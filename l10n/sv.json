@@ -172,6 +172,7 @@
     "[Completed tomorrow at] LT" : "[Slutförd imorgon] LT",
     "[Completed] L [at] LT" : "[Slutförd] L [kl] LT",
     "Add a subtask to \"{task}\"…" : "Lägg till en underuppgift till \"{task}\"…",
+    "_Task has one reminder_::_Task has {n} reminders_" : ["Uppgiften har en påminnelse","Uppgiften har {n} påminnelser"],
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["Raderar uppgiften om {countdown} sekund","Raderar uppgiften om {countdown} sekunder"],
     "Task is cancelled" : "Uppgiften är avbruten",
     "Task is completed" : "Uppgiften är slutförd",
