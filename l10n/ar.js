@@ -174,6 +174,7 @@ OC.L10N.register(
     "[Completed tomorrow at] LT" : "[تكتمل غداً عند] LT",
     "[Completed] L [at] LT" : "[مُكتملة] L [عند] LT",
     "Add a subtask to \"{task}\"…" : "أضف مهمة فرعية إلى \"{task}\"…",
+    "_Task has one reminder_::_Task has {n} reminders_" : ["المهمة لها {n} تذكيرة","المهمة لها تذكيرة واحدة","المهمة لها {n} تذكيرة","المهمة لها {n} تذكيرات","المهمة لها {n} تذكيرة","المهمة لها {n} تذكيرة"],
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["حذف المهمة في {countdown} ثواني","حذف المهمة في {countdown} ثانية","حذف المهمة في {countdown} ثواني","حذف المهمة في {countdown} ثواني","حذف المهمة في {countdown} ثواني","حذف المهمة في {countdown} ثواني"],
     "Task is cancelled" : "تمّ إلغاء المهمة",
     "Task is completed" : "المهمة اكتملت",
