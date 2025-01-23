@@ -907,6 +907,7 @@ $breakpoint-mobile: 1024px;
 
 			}
 			&__icons {
+				align-items: center;
 				display: flex;
 				margin-left: auto;
 
