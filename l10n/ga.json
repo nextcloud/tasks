@@ -172,6 +172,7 @@
     "[Completed tomorrow at] LT" : "[Críochnaithe amárach ag] LT",
     "[Completed] L [at] LT" : "[Críochnaithe] L[ag]LT",
     "Add a subtask to \"{task}\"…" : "Cuir fothasc le \"{task}\"…",
+    "_Task has one reminder_::_Task has {n} reminders_" : ["Tá meabhrúchán amháin ag Tasc","Tá {n} meabhrúchán ag Tasc","Tá {n} meabhrúchán ag Tasc","Tá {n} meabhrúchán ag Tasc","Tá {n} meabhrúchán ag Tasc"],
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["An tasc á scriosadh i {countdown} soicind","An tasc á scriosadh i {countdown} soicind","An tasc á scriosadh i {countdown} soicind","An tasc á scriosadh i {countdown} soicind","An tasc á scriosadh i {countdown} soicind"],
     "Task is cancelled" : "Tá an tasc curtha ar ceal",
     "Task is completed" : "Tá an tasc críochnaithe",
