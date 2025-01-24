@@ -110,8 +110,8 @@ $blue_due: #4271a6; // due dates and low importance
 
 .task-checkbox {
 	display: flex;
-	height: 44px;
-	width: 44px;
+	height: var(--default-clickable-area);
+	width: var(--default-clickable-area);
 	justify-content: center;
 	flex-shrink: 0;
 
@@ -128,9 +128,9 @@ $blue_due: #4271a6; // due dates and low importance
 		+ label {
 			display: flex;
 			align-items: center;
-			height: 44px;
-			width: 44px;
-			padding: 11px;
+			height: var(--default-clickable-area);
+			width: var(--default-clickable-area);
+			justify-content: center;
 
 			.material-design-icon {
 				cursor: pointer;

@@ -769,7 +769,8 @@ $breakpoint-mobile: 1024px;
 
 			&__main-wrapper,
 			&__input {
-				height: 44px !important;
+				// prevent text jump on hover
+				--input-border-width-offset: calc(var(--border-width-input-focused, 2px) - var(--border-width-input, 2px)) !important;
 			}
 
 			&__input {
@@ -828,7 +829,7 @@ $breakpoint-mobile: 1024px;
 		flex-direction: row;
 		flex-wrap: nowrap;
 		align-items: center;
-		height: 44px;
+		height: var(--default-clickable-area);
 		position: relative;
 		background-color: var(--color-main-background);
 		border-top: 1px solid var(--color-border);
@@ -860,11 +861,10 @@ $breakpoint-mobile: 1024px;
 				.summary {
 					cursor: text;
 					display: inline-flex;
-					padding: 10px 10px 10px 0;
 					overflow: hidden;
 
 					span {
-						line-height: 24px;
+						line-height: var(--default-clickable-area);
 						overflow: hidden;
 						text-overflow: ellipsis;
 
@@ -1028,10 +1028,10 @@ $breakpoint-mobile: 1024px;
 	}
 
 	&__subtasks {
-		margin-left: 44px;
+		margin-left: var(--default-clickable-area);
 
 		@media only screen and (max-width: $breakpoint-mobile) {
-			margin-left: 14px;
+			margin-left: calc(0.5 * var(--default-clickable-area));
 		}
 	}
 }
