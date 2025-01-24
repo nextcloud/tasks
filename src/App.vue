@@ -142,16 +142,6 @@ export default {
  */
 $breakpoint-mobile: 1024px;
 
-// Adjust app-navigation-toggle position
-.app-navigation-toggle-wrapper {
-	top: 18px !important;
-	right: -15px !important;
-
-	@media only screen and (max-width: $breakpoint-mobile) {
-		right: 0 !important;
-	}
-}
-
 // Hack for https://github.com/nextcloud/nextcloud-vue/issues/1384
 body {
 	min-height: 100%;
