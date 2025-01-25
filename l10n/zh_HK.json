@@ -172,6 +172,7 @@
     "[Completed tomorrow at] LT" : "[明日完成於] LT",
     "[Completed] L [at] LT" : "[完成] L [於] LT",
     "Add a subtask to \"{task}\"…" : "新增子任務到「{task}」……",
+    "_Task has one reminder_::_Task has {n} reminders_" : ["任務有 {n} 個提醒"],
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["將在 {countdown} 秒後刪除任務"],
     "Task is cancelled" : "任務已取消",
     "Task is completed" : "任務已完成",
