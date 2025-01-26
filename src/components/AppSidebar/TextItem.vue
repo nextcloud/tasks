@@ -141,7 +141,6 @@ export default {
 				}
 
 				&__name {
-					font-weight: bold;
 					flex-grow: 1;
 					padding-right: 14px;
 					overflow: hidden;

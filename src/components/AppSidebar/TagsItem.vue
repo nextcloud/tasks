@@ -145,7 +145,6 @@ export default {
 				&::placeholder {
 					color: var(--color-text-lighter);
 					opacity: 1;
-					font-weight: bold;
 				}
 			}
 		}

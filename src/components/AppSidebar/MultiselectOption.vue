@@ -84,7 +84,6 @@ export default {
 	}
 
 	&__label {
-		font-weight: bold;
 		padding-right: 14px;
 		overflow: hidden;
 		text-overflow: ellipsis;
