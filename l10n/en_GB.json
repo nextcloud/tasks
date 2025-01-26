@@ -172,6 +172,7 @@
     "[Completed tomorrow at] LT" : "[Completed tomorrow at] LT",
     "[Completed] L [at] LT" : "[Completed] L [at] LT",
     "Add a subtask to \"{task}\"…" : "Add a subtask to \"{task}\"…",
+    "_Task has one reminder_::_Task has {n} reminders_" : ["Task has one reminder","Task has {n} reminders"],
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["Deleting the task in {countdown} second","Deleting the task in {countdown} seconds"],
     "Task is cancelled" : "Task is cancelled",
     "Task is completed" : "Task is completed",
