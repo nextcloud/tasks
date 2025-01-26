@@ -116,7 +116,7 @@ export default {
 		border: none;
 		flex-basis: 16px;
 		flex-shrink: 0;
-		margin: 14px;
+		margin: calc((var(--default-clickable-area) - 16px)/2);
 		cursor: pointer;
 	}
 
@@ -128,6 +128,7 @@ export default {
 		white-space: nowrap;
 		color: var(--color-text-lighter);
 		cursor: pointer;
+		margin-left: 4px;
 	}
 
 	&__avatar {

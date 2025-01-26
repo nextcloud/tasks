@@ -121,9 +121,11 @@ export default {
 	display: flex;
 	border-bottom: 1px solid var(--color-border);
 	width: 100%;
+	padding: 0 6px;
 
 	:deep(.v-select.select) {
 		width: 100%;
+		margin: 0 !important;
 
 		.vs {
 			&__dropdown-menu,
@@ -142,7 +144,7 @@ export default {
 			}
 
 			&__selected {
-				height: 44px;
+				height: var(--default-clickable-area);
 				margin:  0;
 				padding: 0;
 				border: none;
@@ -161,8 +163,8 @@ export default {
 			&__search {
 				padding-left: 44px;
 				margin: 0;
-				height: 44px !important;
-				line-height: 44px;
+				height: var(--default-clickable-area) !important;
+				line-height: var(--default-clickable-area);
 				font-weight: bold;
 			}
 

@@ -206,7 +206,7 @@ $blue: #4271a6;
 
 .property__item {
 	border-bottom: 1px solid var(--color-border);
-	padding: 0;
+	padding: 0 6px;
 	position: relative;
 	margin-bottom: 0;
 	width: 100%;
@@ -224,16 +224,17 @@ $blue: #4271a6;
 	.item {
 		&__content {
 			display: flex;
-			line-height: 44px;
+			line-height: var(--default-clickable-area);
 			min-width: 0;
 			flex-grow: 1;
+			gap: 0 4px;
 
 			.content {
 				&__icon {
 					display: flex;
-					height: 44px;
-					width: 44px;
-					min-width: 44px;
+					height: var(--default-clickable-area);
+					width: var(--default-clickable-area);
+					min-width: var(--default-clickable-area);
 					justify-content: center;
 
 					.material-design-icon__svg {
@@ -268,6 +269,9 @@ $blue: #4271a6;
 							flex-shrink: 2;
 							flex-basis: 65px;
 							flex-grow: 2;
+						}
+						:deep(input) {
+							margin: 0;
 						}
 					}
 				}
