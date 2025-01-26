@@ -124,7 +124,6 @@ export default {
 		overflow: hidden;
 		text-overflow: ellipsis;
 		flex-grow: 1;
-		font-weight: bold;
 		white-space: nowrap;
 		color: var(--color-text-lighter);
 		cursor: pointer;

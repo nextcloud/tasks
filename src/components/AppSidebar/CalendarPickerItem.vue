@@ -165,7 +165,6 @@ export default {
 				margin: 0;
 				height: var(--default-clickable-area) !important;
 				line-height: var(--default-clickable-area);
-				font-weight: bold;
 			}
 
 			&__actions {

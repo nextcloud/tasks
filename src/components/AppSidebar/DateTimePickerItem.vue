@@ -243,7 +243,6 @@ $blue: #4271a6;
 				}
 
 				&__name {
-					font-weight: bold;
 					flex-grow: 1;
 					padding-right: 14px;
 					overflow: hidden;

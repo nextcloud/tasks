@@ -87,7 +87,6 @@ export default {
 		}
 		> span {
 			margin-left: 4px;
-			font-weight: bold;
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
