@@ -76,10 +76,10 @@ export default {
 
 	&__icon {
 		display: flex;
-		height: 44px;
-		width: 44px;
+		height: var(--default-clickable-area);
+		width: var(--default-clickable-area);
 		justify-content: center;
-		flex-basis: 44px;
+		flex-basis: var(--default-clickable-area);
 		flex-shrink: 0;
 	}
 
@@ -89,6 +89,7 @@ export default {
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
+		margin-left: 4px;
 	}
 }
 </style>

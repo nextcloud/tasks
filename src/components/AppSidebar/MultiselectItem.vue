@@ -111,9 +111,11 @@ export default {
 	display: flex;
 	border-bottom: 1px solid var(--color-border);
 	width: 100%;
+	padding: 0 6px;
 
 	:deep(.v-select.select) {
 		width: 100%;
+		margin: 0;
 
 		&.vs--disabled .vs {
 			&__search,
@@ -127,10 +129,10 @@ export default {
 
 		.placeholder__icon {
 			display: flex;
-			height: 44px;
-			width: 44px;
+			height: var(--default-clickable-area);
+			width: var(--default-clickable-area);
 			justify-content: center;
-			flex-basis: 44px;
+			flex-basis: var(--default-clickable-area);
 			flex-shrink: 0;
 		}
 
@@ -144,7 +146,7 @@ export default {
 
 			&__selected-options {
 				width: calc(100% - 35px);
-				height: 44px;
+				height: var(--default-clickable-area);
 				margin:  0;
 				padding: 0;
 				border: none;
@@ -152,7 +154,7 @@ export default {
 
 			&__selected {
 				width: 100%;
-				height: 44px;
+				height: var(--default-clickable-area);
 				margin:  0;
 				padding: 0;
 				border: none;
@@ -176,8 +178,8 @@ export default {
 			&__search {
 				padding-left: 44px;
 				margin: 0;
-				height: 44px !important;
-				line-height: 44px;
+				height: var(--default-clickable-area) !important;
+				line-height: var(--default-clickable-area);
 				font-weight: bold;
 				position: absolute;
 				width: 100%;

@@ -113,6 +113,7 @@ export default {
 	width: 100%;
 	color: var(--color-text-lighter);
 	display: flex;
+	padding: 0 6px;
 
 	& * {
 		cursor: pointer;
@@ -121,16 +122,17 @@ export default {
 	.item {
 		&__content {
 			display: flex;
-			line-height: 44px;
+			line-height: var(--default-clickable-area);
 			min-width: 0;
 			flex-grow: 1;
+			gap: 0 4px;
 
 			.content {
 				&__icon {
 					display: flex;
-					height: 44px;
-					width: 44px;
-					min-width: 44px;
+					height: var(--default-clickable-area);
+					width: var(--default-clickable-area);
+					min-width: var(--default-clickable-area);
 					justify-content: center;
 
 					.material-design-icon__svg {
@@ -155,6 +157,7 @@ export default {
 
 					input {
 						flex-grow: 1;
+						margin: 0;
 					}
 				}
 			}
