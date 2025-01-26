@@ -156,13 +156,15 @@ export default {
 	border-bottom: 1px solid var(--color-border);
 	width: 100%;
 	color: var(--color-text-lighter);
+	padding: 0 6px;
+	gap: 0 4px;
 
 	.component {
 		&__icon {
 			display: flex;
-			height: 44px;
-			width: 44px;
-			min-width: 44px;
+			height: var(--default-clickable-area);
+			width: var(--default-clickable-area);
+			min-width: var(--default-clickable-area);
 			justify-content: center;
 
 			.material-design-icon__svg {
