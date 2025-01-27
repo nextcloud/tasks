@@ -29,6 +29,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			:clearable="false"
 			:options="calendarsMap"
 			:model-value="calendarMap"
+			:dropdownShouldOpen="() => true"
 			:placeholder="t('tasks', 'Select a calendar')"
 			:append-to-body="false"
 			@option:selected="change">
@@ -125,55 +126,64 @@ export default {
 
 	:deep(.v-select.select) {
 		width: 100%;
-		margin: 0 !important;
+		margin-bottom: 0;
+
+		&:not(.vs--open) .vs__dropdown-toggle {
+			border-color: transparent;
+		}
 
 		.vs {
-			&__dropdown-menu,
-			&__dropdown-option,
+			// &__dropdown-menu,
+			// &__dropdown-option,
 			&__selected-options {
 				margin:  0;
 				padding: 0;
-				border: none;
+				// border: none;
 			}
 
-			&__dropdown-toggle {
-				margin:  0;
-				padding: 0;
-				border: none;
-				outline: none !important;
+			&__dropdown-menu
+			&__dropdown-option {
+				padding-left: 4px;
 			}
+
+		// 	&__dropdown-toggle {
+		// 		margin:  0;
+		// 		padding: 0;
+		// 		border: none;
+		// 		outline: none !important;
+		// 	}
 
 			&__selected {
 				height: var(--default-clickable-area);
 				margin:  0;
 				padding: 0;
-				border: none;
+				// border: none;
 			}
 
-			&__dropdown-menu {
-				border-radius: 0;
-				box-shadow: none;
-				border: 1px solid var(--color-border-dark);
-			}
+		// 	&__dropdown-menu {
+		// 		border-radius: 0;
+		// 		box-shadow: none;
+		// 		border: 1px solid var(--color-border-dark);
+		// 	}
 
-			&__dropdown-option {
-				margin-left: -1px;
-			}
+		// 	&__dropdown-option {
+		// 		margin-left: -1px;
+		// 	}
 
-			&__search {
-				padding-left: 44px;
-				margin: 0;
-				height: var(--default-clickable-area) !important;
-				line-height: var(--default-clickable-area);
-			}
+		// 	&__search {
+		// 		padding-left: 44px;
+		// 		margin: 0;
+		// 		height: var(--default-clickable-area) !important;
+		// 		line-height: var(--default-clickable-area);
+		// 	}
 
-			&__actions {
-				cursor: pointer;
+		// 	&__actions {
+		// 		cursor: pointer;
 
-				span {
-					cursor: pointer;
-				}
-			}
+		// 		span {
+		// 			cursor: pointer;
+		// 		}
+		// 	}
 		}
 	}
 }
