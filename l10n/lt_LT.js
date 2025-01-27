@@ -119,6 +119,7 @@ OC.L10N.register(
     "Sort by tags." : "Rikiuoti pagal žymes.",
     "Manually" : "Rankiniu būdu",
     "Sort by manual order." : "Rikiuoti rankine tvarka.",
+    "Task has hidden subtasks" : "Užduotyje yra paslėptų dalinių užduočių",
     "Task is pinned" : "Užduotis prisegta",
     "{complete} % completed" : "{complete}% atlikta",
     "Add subtask" : "Pridėti dalinę užduotį",
