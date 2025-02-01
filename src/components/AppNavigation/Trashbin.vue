@@ -145,6 +145,7 @@ import MenuDown from 'vue-material-design-icons/MenuDown.vue'
 import MenuUp from 'vue-material-design-icons/MenuUp.vue'
 import Undo from 'vue-material-design-icons/Undo.vue'
 
+import { toRaw } from 'vue'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -207,7 +208,7 @@ export default {
 				}
 				let subline = vobject.calendar?.displayName || t('tasks', 'Unknown calendar')
 				if (vobject.isEvent) {
-					const event = vobject?.calendarComponent.getFirstComponent('VEVENT')
+					const event = toRaw(vobject?.calendarComponent.getFirstComponent('VEVENT'))
 					if (event?.startDate.jsDate && event?.isAllDay()) {
 						subline += ' · ' + moment(event.startDate.jsDate).format('LL')
 					} else if (event?.startDate.jsDate) {
