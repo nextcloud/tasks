@@ -40,7 +40,7 @@
     "@nextcloud/router": "^3.0.1",
     "@nextcloud/vue": "9.0.0-alpha.6",
     "@vueuse/components": "^12.4.0",
-    "color-convert": "^2.0.1",
+    "color-convert": "^3.0.1",
     "debounce": "^2.2.0",
     "ical.js": "^2.1.0",
     "linkify-it": "^5.0.0",
