@@ -6,7 +6,7 @@ OC.L10N.register(
     "Today" : "Hoje",
     "Week" : "Semana",
     "All" : "Todas",
-    "Current" : "Actual",
+    "Current" : "Atual",
     "Completed" : "Concluída",
     "Tasks" : "Tarefas",
     "The Tasks app for Nextcloud" : "A aplicação Tarefas para Nextcloud",
