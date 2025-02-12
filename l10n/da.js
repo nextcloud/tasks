@@ -163,6 +163,7 @@ OC.L10N.register(
     "[Completed tomorrow at] LT" : "[Afsluttet i morgen kl.] LT",
     "[Completed] L [at] LT" : "[Afsluttet] L [kl.] LT",
     "Add a subtask to \"{task}\"…" : "Føj en underopgave til \"{task}\"...",
+    "_Task has one reminder_::_Task has {n} reminders_" : ["Task has one reminder","Opgaven har {n} påmindelser"],
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["Sletter opgaven om {countdown} sekund","Sletter opgaven om {countdown} sekunder"],
     "Task is cancelled" : "Opgaven er annulleret",
     "Task is completed" : "Denne opgave er udført",
