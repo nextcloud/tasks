@@ -174,6 +174,7 @@ OC.L10N.register(
     "[Completed tomorrow at] LT" : "[Буде виконано завтра о] LT",
     "[Completed] L [at] LT" : "[Виконано] L [о] LT",
     "Add a subtask to \"{task}\"…" : "Додати підзавдання до \"{task}\"…",
+    "_Task has one reminder_::_Task has {n} reminders_" : ["Завдання має одне нагадування","Завдання має {n} нагадування","Завдання має {n} нагадувань","Завдання має {n} нагадувань"],
     "_Deleting the task in {countdown} second_::_Deleting the task in {countdown} seconds_" : ["Завдання буде вилучено через {countdown} секунду","Завдання буде вилучено через {countdown} секунди","Завдання буде вилучено через {countdown} секунд","Завдання буде вилучено через {countdown} секунд"],
     "Task is cancelled" : "Завдання скасовано",
     "Task is completed" : "Завдання виконано",
