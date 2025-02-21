@@ -192,7 +192,7 @@ OC.L10N.register(
     "New list" : "Lista nova",
     "An error occurred, unable to create the list." : "Produciuse un erro, non é posíbel crear a lista.",
     "All day" : "Todo o día",
-    "Unpin" : "Soltar",
+    "Unpin" : "Desprender",
     "Pin" : "Fixar",
     "Show in Calendar" : "Amosar no calendario",
     "Show in Deck" : "Amosar na Gabeta",
