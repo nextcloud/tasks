@@ -67,6 +67,8 @@ OC.L10N.register(
     "Could not restore calendar or event" : "Impossible de restaurer l'agenda ou l'événement",
     "Do you really want to empty the trash bin?" : "Voulez-vous vraiment vider la corbeille?",
     "_Elements in the trash bin are deleted after {numDays} day_::_Elements in the trash bin are deleted after {numDays} days_" : ["Les éléments dans la corbeille sont supprimés après {numDays} jour","Les éléments dans la corbeille sont supprimés après {numDays} jours","Les éléments dans la corbeille sont supprimés après {numDays} jours"],
+    "Create reminder" : "Créer un rappel",
+    "Update reminder" : "Mettre à jour le rappel",
     "Cancel" : "Annuler",
     "Notification" : "Notification",
     "Email" : "E-mail",
