@@ -27,10 +27,10 @@ OC.L10N.register(
     "Last modified" : "Сүүлд өөрчилсөн",
     "Tags" : "Tag-үүд",
     "Tomorrow" : "маргааш",
-    "Details" : "Дэлгэрэнгүй",
-    "Notes" : "Шинэ ",
     "When shared show full event" : "Түгээсэн тохиолдолд үйл явдлыг бүтнээр нь харуул",
     "When shared show only busy" : "Түгээсэн тохиолдолд зөвхөн завгүй гэж харуул",
-    "When shared hide this event" : "Түгээсэн тохиолдолд энэ үйл явдлыг нуу"
+    "When shared hide this event" : "Түгээсэн тохиолдолд энэ үйл явдлыг нуу",
+    "Details" : "Дэлгэрэнгүй",
+    "Notes" : "Шинэ "
 },
 "nplurals=2; plural=(n != 1);");
