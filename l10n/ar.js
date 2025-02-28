@@ -31,6 +31,7 @@ OC.L10N.register(
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["إلغاء مشاركة التقويم في {countdown} ثواني","إلغاء مشاركة التقويم في {countdown} ثانية","إلغاء مشاركة التقويم في {countdown} ثواني","إلغاء مشاركة التقويم في {countdown} ثواني","إلغاء مشاركة التقويم في {countdown} ثواني","إلغاء مشاركة التقويم في {countdown} ثواني"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["جار حذف القائمة في {countdown} ثواني","جار حذف القائمة في {countdown} ثانية","جار حذف القائمة في {countdown} ثواني","جار حذف القائمة في {countdown} ثواني","جار حذف القائمة في {countdown} ثواني","جار حذف القائمة في {countdown} ثواني"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["جار إلغاء مشاركة القائمة في {countdown} ثواني","جار إلغاء مشاركة القائمة في {countdown} ثانية","جار إلغاء مشاركة القائمة في {countdown} ثواني","جار إلغاء مشاركة القائمة في {countdown} ثواني","جار إلغاء مشاركة القائمة في {countdown} ثواني","جار إلغاء مشاركة القائمة في {countdown} ثواني"],
+    "_Shared with {num} entity_::_Shared with {num} entities_" : ["تم مشاركته مع {num} كيانات","تم مشاركته مع {num} كيان","تم مشاركته مع {num} كيانات","تم مشاركته مع {num} كيانات","تم مشاركته مع {num} كيانات","تم مشاركته مع {num} كيانات"],
     "Share this calendar" : "شارك هذا التقويم",
     "Share this list" : "شارك هذه القائمة",
     "Calendar link copied to clipboard." : "تمّ نسخ رابط التقويم إلى الحافظة.",

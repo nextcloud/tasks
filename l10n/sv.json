@@ -29,6 +29,7 @@
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Slutar dela kalendern om {countdown} sekund","Slutar dela kalendern om {countdown} sekunder"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Raderar listan om {countdown} sekund","Raderar listan om {countdown} sekunder"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Slutar dela listan om {countdown} sekund","Slutar dela listan om {countdown} sekunder"],
+    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Delad med {num} enhet","Delad med {num} enheter"],
     "Share this calendar" : "Dela denna kalender",
     "Share this list" : "Dela den här listan",
     "Calendar link copied to clipboard." : "Kalenderlänk kopierad till urklipp.",

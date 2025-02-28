@@ -29,6 +29,7 @@
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Прекратяване на споделянето на календар след {countdown} секунди","Прекратяване на споделянето на календар след {countdown} секунди"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Изтриване на списък след {countdown} секундии","Изтриване на списък след {countdown} секундии"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Прекратяване на споделянето на списък след {countdown} секунди","Прекратяване на споделянето на списък след {countdown} секунди"],
+    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Споделено с {num} обекта","Споделено с {num} обекта"],
     "Share this calendar" : "Споделяне на този календар",
     "Share this list" : "Споделяне на този списък",
     "Calendar link copied to clipboard." : "Копирано в клипборда",

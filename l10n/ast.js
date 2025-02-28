@@ -31,6 +31,7 @@ OC.L10N.register(
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Va dexar de compartise'l calendariu en {countdown} segundu","Va dexar de compartise'l calendariu en {countdown} segundos"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Va desaniciase la llista en {countdown} segundu","Va desaniciase la llista en {countdown} segundos"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Va dexar de compartise la llista en {countdown} segundu","Va dexar de compartise la llista  en {countdown} segundos"],
+    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Compartióse con {num} entidá","Compartióse con {num} entidaes"],
     "Share this calendar" : "Compartir esti calendariu",
     "Share this list" : "Compartir esta llista",
     "Calendar link copied to clipboard." : "L'enllaz del calendariu copióse nel cartafueyu.",
