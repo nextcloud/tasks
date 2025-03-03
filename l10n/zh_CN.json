@@ -29,6 +29,7 @@
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["将在{countdown}秒后取消共享这个日历"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["将在{countdown}秒后删除列表"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["将在{countdown}秒后取消共享这个列表"],
+    "_Shared with {num} entity_::_Shared with {num} entities_" : ["已与 {num} 个实体共享"],
     "Share this calendar" : "分享此日历",
     "Share this list" : "分享此列表",
     "Calendar link copied to clipboard." : "日历链接已复制到剪贴板。",
