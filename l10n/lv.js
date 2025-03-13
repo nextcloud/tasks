@@ -37,7 +37,7 @@ OC.L10N.register(
     "Empty trash bin" : "Izdzēst miskastes saturu",
     "Trash bin" : "Miskaste",
     "Name" : "Nosaukums",
-    "Deleted" : "Dzēstie",
+    "Deleted" : "Izdzēsts",
     "Restore" : "Atjaunot",
     "Delete permanently" : "Dzēst pavisam",
     "Cancel" : "Atcelt",
