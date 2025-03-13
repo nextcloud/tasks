@@ -21,9 +21,9 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<NcContent app-name="tasks">
-		<AppNavigation @click="closeAppSidebar($event)" />
+		<AppNavigation />
 
-		<NcAppContent @click="closeAppSidebar($event)">
+		<NcAppContent @click="closeAppNavigation">
 			<RouterView />
 		</NcAppContent>
 
@@ -41,6 +41,7 @@ import NcAppContent from '@nextcloud/vue/components/NcAppContent'
 import NcContent from '@nextcloud/vue/components/NcContent'
 
 import { mapGetters } from 'vuex'
+import { useIsMobile } from '@nextcloud/vue'
 
 export default {
 	name: 'App',
@@ -50,6 +51,12 @@ export default {
 		NcContent,
 	},
 	inject: ['$OCA'],
+	setup() {
+		const isMobile = useIsMobile()
+		return {
+			isMobile,
+		}
+	},
 	data() {
 		return {
 			searchString: '',
@@ -102,7 +109,7 @@ export default {
 		 * Fetch the tasks of each calendar
 		 */
 		fetchTasks() {
-			// wait for all calendars to have fetch their tasks
+			// wait for all calendars to have fetched their tasks
 			Promise.all(this.calendars.map(calendar =>
 				this.$store.dispatch('getTasksFromCalendar', { calendar, completed: false, related: null }),
 			)).then(() => {
@@ -111,13 +118,11 @@ export default {
 		},
 
 		/**
-		 * Close the details view
-		 *
-		 * @param {object} $event the event
+		 * Close the app navigation on mobile devices
 		 */
-		closeAppSidebar($event) {
-			if (!($event.target.closest('.reactive') || $event.target.classList.contains('reactive')) && this.$route.params.taskId) {
-				emit('tasks:close-appsidebar')
+		closeAppNavigation() {
+			if (this.isMobile) {
+				emit('toggle-navigation', { open: false })
 			}
 		},
 		filterProxy({ query }) {
