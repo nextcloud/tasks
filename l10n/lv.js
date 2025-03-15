@@ -80,7 +80,7 @@ OC.L10N.register(
     "Set a URL" : "Iestatīt URL",
     "Select tags" : "Atlasīt birkas",
     "Notes" : "Piezīmes",
-    "Task successfully moved to new calendar." : "Uzdevums veiksmīgi pārvietots uz jaunu kalendāru.",
+    "Task successfully moved to new calendar." : "Uzdevums sekmīgi pārvietots uz jaunu kalendāru.",
     "An error occurred" : "Gadījās kļūda"
 },
 "nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);");
