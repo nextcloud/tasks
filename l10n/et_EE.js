@@ -47,6 +47,7 @@ OC.L10N.register(
     "Tags" : "Sildid",
     "Manually" : "Käsitsi",
     "Change sort order" : "Muuda sorteerimisjärjekorda",
+    "Delete task" : "Kustuta ülesanne",
     "Task is completed" : "Ülesanne on tehtud",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n lõpetatud ülesanne","%n lõpetatud ülesannet"],
     "Tomorrow" : "Homme",
