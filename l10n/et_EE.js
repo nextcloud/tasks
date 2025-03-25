@@ -19,6 +19,7 @@ OC.L10N.register(
     "An empty name is not allowed." : "Nime lahter ei tohi olla tühi.",
     "Edit" : "Muuda",
     "Copy private link" : "Kopeeri privaatne link",
+    "Copied" : "Kopeeritud",
     "Export" : "Ekspordi",
     "Delete" : "Kustuta",
     "Unshare" : "Lõpeta jagamine",
