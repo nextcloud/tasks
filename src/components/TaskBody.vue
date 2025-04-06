@@ -993,6 +993,7 @@ $breakpoint-mobile: 1024px;
 					@media only screen and (min-width: $breakpoint-mobile) {
 						&__long {
 							display: inline-block;
+							width: auto;
 						}
 
 						&__short {
