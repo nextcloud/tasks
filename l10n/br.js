@@ -1,11 +1,14 @@
 OC.L10N.register(
     "tasks",
     {
+    "Important" : "Important",
     "Today" : "Hiziv",
     "Week" : "Sizun",
     "All" : "Pep tra",
     "Current" : "A red",
     "Completed" : "Achuet",
+    "Hidden" : "Koachet",
+    "Automatic" : "Otomatek",
     "Share with users or groups" : "Rannañ gant implijourienn pe strolladoù",
     "No users or groups" : "Implijourienn pe strodadoù ebet",
     "Can edit" : "Posuple eo embann",
@@ -26,6 +29,7 @@ OC.L10N.register(
     "Notification" : "Kemennadenn",
     "Email" : "Postel",
     "Close" : "Seriñ",
+    "Alphabetically" : "Urzh alfabetek",
     "Tags" : "Klavioù",
     "[Yesterday]" : "[Dec'h]",
     "[Today]" : "[Hiziv]",
