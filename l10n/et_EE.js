@@ -35,6 +35,7 @@ OC.L10N.register(
     "Unshare" : "Lõpeta jagamine",
     "List name" : "Nimekirja nimi",
     "Untitled task" : "Ilma nimeta pealkiri",
+    "Untitled event" : "Ilma nimeta sündmus",
     "Empty trash bin" : "Tühjenda prügikast",
     "Trash bin" : "Prügikast",
     "Name" : "Nimi",
