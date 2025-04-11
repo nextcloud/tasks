@@ -21,7 +21,7 @@ OC.L10N.register(
     "No users or groups" : "Жодного користувача або групм",
     "Unable to delete the share." : "Неможливо вилучити спільний елемент.",
     "Unable to change permissions." : "Неможливо змінити права доступу.",
-    "Can edit" : "Можна редагувати",
+    "Can edit" : "Може редагувати",
     "Unshare with {displayName}" : "Прибрати зі спільного доступу з {displayName}",
     "This will delete the calendar \"{calendar}\" and all corresponding events and tasks." : "Це призведе до вилучення календаря \"{calendar}\" і всіх відповідних подій і завдань.",
     "This will unshare the calendar \"{calendar}\"." : "Це припинить доступ до календаря \"{calendar}\".",

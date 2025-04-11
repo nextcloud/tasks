@@ -8,6 +8,7 @@ OC.L10N.register(
     "Current" : "Pašreizējais",
     "Completed" : "Pabeigts",
     "Tasks" : "Uzdevumi",
+    "Once enabled, a new Tasks menu will appear in your Nextcloud apps menu. From there you can add and delete tasks, edit their title, description, start and due dates and mark them as important. Tasks can be shared between users. Tasks can be synchronized using CalDav (each task list is linked to an Nextcloud calendar, to sync it to your local client: Thunderbird, Evolution, KDE Kontact, iCal … - just add the calendar as a remote calendar in your client). You can download your tasks as ICS files using the download button for each calendar." : "Tiklīdz iespējots, jauns izvēlnes vienums \"Uzdevumi\" parādīsies Nextcloud lietotņu izvēlnē. Tur var pievienot un izdzēst uzdevumus, labot to virsrakstu, parakstu, sākuma un beigu datumus un atzīmēt tos kā svarīgus. Uzdevumus var koplietot ar citiem lietotājiem. Uzdevumus var sinhronizēt ar CalDAV (katra uzdevuma saraksts ir sasaistīts ar Nextcloud kalendāru; lai to sinhronizētu ar vietēju klientu - Thunderbird, Evolution, KDE Kontact, iCAL, ... - kalendārs ir tikai jāpievieno kā attālais kalendārs). Uzdevumus var lejupielādēt kā ICS datnes ar lejupielādes pogu katrā atsevišķajā kalendārā.",
     "Hidden" : "Paslēpts",
     "Visible" : "Redzams",
     "Automatic" : "Automātisks",
