@@ -73,6 +73,7 @@
     "Hide closed subtasks" : "Paslēpt pabeigtos apakšuzdevumus",
     "Task is completed" : "Uzdevums pabeigts",
     "\"{task}\" was added to \"{calendar}\"" : "\"{task}\" tika pievienots \"{calendar}\"",
+    "Open task" : "Atvērt uzdevumu",
     "_%n Completed Task_::_%n Completed Tasks_" : ["neviena pabeigta uzdevuma","%n paeigts uzdevums","%n pabeigti uzvedumi"],
     "Tomorrow" : "Rīt",
     "When shared show full event" : "Ja kopīgots, tad rādīt pilnu notikumu",
