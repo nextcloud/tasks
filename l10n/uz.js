@@ -45,16 +45,19 @@ OC.L10N.register(
     "_day_::_days_" : ["kun"],
     "_week_::_weeks_" : ["hafta"],
     "Close" : "Close",
+    "Due date" : "Muddati",
     "Tags" : "Tags",
     "[Yesterday]" : "[Kecha]",
     "[Today]" : "[Bugun]",
     "[Tomorrow]" : "[Ertaga]",
+    "Tomorrow" : "Ertaga",
     "When shared show full event" : "Ulashganda toʻliq tadbir koʻrsatiladi",
     "When shared show only busy" : "Baham ko'rilganda shou faqat band",
     "When shared hide this event" : "Baham ko'rilganda, bu hodisani yashirish",
     "Canceled" : "Bekor qilingan",
     "All day" : "Butun kun",
     "Details" : "Details",
-    "Notes" : "Notes"
+    "Notes" : "Notes",
+    "Mark as done" : "Bajarildi deb belgilang"
 },
 "nplurals=1; plural=0;");

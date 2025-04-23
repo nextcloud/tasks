@@ -68,6 +68,7 @@ OC.L10N.register(
     "Tags" : "Etiquetas",
     "Manually" : "Manual",
     "Change sort order" : "Alterar ordenação",
+    "Delete task" : "Eliminar tarefa",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n Tarefa Concluída","%n Tarefas Concluídas","%n Tarefas Concluídas"],
     "Tomorrow" : "Amanhã",
     "When shared show full event" : "Quando partilhado, mostrar evento completo",
