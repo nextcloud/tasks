@@ -85,6 +85,7 @@ OC.L10N.register(
     "Filter by tags" : "Filtreeri siltide järgi",
     "Select tags to filter by" : "Vali sildid, mille järgi filtreerida",
     "Reset filter" : "Nulli filter",
+    "Relevance" : "Asjakohasus",
     "Start date" : "Alguskuupäev",
     "Due date" : "Tähtaeg",
     "Created date" : "Loomise kuupäev",
