@@ -19,6 +19,8 @@
     "Unable to change permissions." : "Õiguste muutmine ebaõnnestus.",
     "Can edit" : "Võib redigeerida",
     "Unshare with {displayName}" : "Lõpeta jagamine kasutajaga: {displayName}",
+    "_Deleting the calendar in {countdown} second_::_Deleting the calendar in {countdown} seconds_" : ["Kustutan kalendri {countdown} sekundi möödumisel","Kustutan kalendri {countdown} sekundi möödumisel"],
+    "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Lõpetan kalendri jagamise {countdown} sekundi möödumisel","Lõpetan kalendri jagamise {countdown} sekundi möödumisel"],
     "Share this calendar" : "Jaga seda kalendrit",
     "Share this list" : "Jaga seda nimekirja",
     "Calendar link copied to clipboard." : "Kalendri link kopeeriti lõikelauale.",
