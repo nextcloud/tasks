@@ -18,7 +18,7 @@ $breakpoint-mobile: 1024px;
 		position: relative;
 		padding-top: 2px;
 
-		> ol {
+		>ol {
 			filter: drop-shadow(0 0 1px var(--color-box-shadow));
 			z-index: 1;
 
@@ -30,6 +30,12 @@ $breakpoint-mobile: 1024px;
 				margin-top: 12px;
 			}
 		}
+	}
+
+	.grouped-tasks__bucketHeading {
+		font-size: 12px;
+		opacity: 0.7;
+		text-transform: uppercase;
 	}
 
 	.heading {

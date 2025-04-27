@@ -32,11 +32,14 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<span class="heading__icon-bullet" :style="{'background-color': calendar.color }" />
 					<span class="heading__name">{{ calendar.displayName }}</span>
 				</h2>
-				<TaskDragContainer :tasks="calendar.filteredTasks"
-					:disabled="calendar.readOnly"
-					:collection-string="collectionId"
-					:calendar-id="calendar.id"
-					:collection-id="collectionId" />
+				<div v-for="([moment, tasks]) in calendar.taskBuckets">
+					<h3 class="grouped-tasks__bucketHeading">{{ formatDaystamp(moment) }}</h3>
+					<TaskDragContainer :tasks="tasks"
+						:disabled="calendar.readOnly"
+						:collection-string="collectionId"
+						:calendar-id="calendar.id"
+						:collection-id="collectionId" />
+					</div>
 				<LoadCompletedButton v-if="collectionId === 'completed'" :calendars="[calendar]" />
 			</div>
 		</div>
@@ -59,6 +62,26 @@ export default {
 		LoadCompletedButton,
 		TaskDragContainer,
 	},
+	methods: {
+		formatDaystamp(timestamp) {
+			return timestamp
+				? timestamp.calendar(null, {
+					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
+					lastDay: t('tasks', '[Yesterday]'),
+					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
+					sameDay: t('tasks', '[Today]'),
+					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
+					nextDay: t('tasks', '[Tomorrow]'),
+					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
+					lastWeek: t('tasks', 'L'),
+					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
+					nextWeek: t('tasks', 'dddd'),
+					// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
+					sameElse: t('tasks', 'L'),
+				})
+				: t('tasks', 'No due date assigned');
+		},
+	},
 	computed: {
 
 		/**
@@ -78,6 +101,19 @@ export default {
 				calendar.filteredTasks = Object.values(calendar.tasks).filter(task => {
 					return isTaskInList(task, this.collectionId) && (!task.related || !isParentInList(task, calendar.tasks))
 				})
+				calendar.filteredTasks.sort((a,b) => a.dueMoment < b.dueMoment || !a.dueMoment ? -1 : 1);
+				calendar.taskBuckets = calendar.filteredTasks.reduce((acc, cur) => {
+					const dueDay = cur.dueMoment?.isValid() ? cur.dueMoment?.startOf('day') : null;
+					const existingItem = acc.find(i => (i[0] === null && dueDay === null) || (i[0] !== null && i[0].isSame(dueDay)));
+					if (!existingItem) {
+						acc.push([dueDay, [cur]]);
+					} else {
+						existingItem[1].push(cur);
+					}
+					return acc;
+				}, []);
+				calendar.taskBuckets.sort((a, b) => a[0] < b[0] && !!a[0] ? -1 : 1);
+
 				if (calendar.filteredTasks.length) {
 					filteredCalendars.push(calendar)
 				}
