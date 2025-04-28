@@ -26,8 +26,8 @@
 
 import moment from '@nextcloud/moment'
 
-import { v4 as uuid } from 'uuid'
 import ICAL from 'ical.js'
+import { randomUUID } from '../utils/crypto.js'
 
 export default class Task {
 
@@ -83,7 +83,7 @@ export default class Task {
 
 		if (!this.vtodo.hasProperty('uid')) {
 			console.debug('This task did not have a proper uid. Setting a new one for ', this)
-			this.vtodo.addPropertyWithValue('uid', uuid())
+			this.vtodo.addPropertyWithValue('uid', randomUUID())
 		}
 
 		// Define components
