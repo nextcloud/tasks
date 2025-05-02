@@ -12,6 +12,7 @@ OC.L10N.register(
     "Hidden" : "Paslēpts",
     "Visible" : "Redzams",
     "Automatic" : "Automātisks",
+    "Tasks settings" : "Uzdevumu iestatījumi",
     "Visibility of Smart Collections" : "Viedo kolekciju redzamība",
     "Share with users or groups" : "Koplietot ar lietotājiem vai grupām",
     "No users or groups" : "Nav lietotāji vai grupas",
