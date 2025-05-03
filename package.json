@@ -28,7 +28,7 @@
   "contributors": [],
   "dependencies": {
     "@nextcloud/axios": "^2.5.1",
-    "@nextcloud/calendar-js": "8.1.1",
+    "@nextcloud/calendar-js": "8.1.2",
     "@nextcloud/cdav-library": "1.5.3",
     "@nextcloud/dialogs": "4.1.0",
     "@nextcloud/event-bus": "^3.3.2",
