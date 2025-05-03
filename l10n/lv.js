@@ -70,6 +70,8 @@ OC.L10N.register(
     "Change sort order" : "Mainīt kārtošanas secību",
     "[Today]" : "[Šodien]",
     "[Tomorrow]" : "[Rīt]",
+    "[Completed today]" : "[Pabeigts šodien]",
+    "[Today at] LT" : "[Šodien] LT",
     "Add a subtask to \"{task}\"…" : "Pievienot apakšuzdevumu \"{task}\"…",
     "Add subtask" : "Pievienot apakšuzdevumu",
     "Hide subtasks" : "Paslēpt apakšuzdevumus",
