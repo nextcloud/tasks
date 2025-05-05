@@ -221,7 +221,7 @@ OC.L10N.register(
     "Priority {priority}: high" : "Prioridade {priority}: alta",
     "No priority assigned" : "Sem prioridade definida",
     "{percent} % completed" : "{percent} % finalizado",
-    "All day" : "Todo dia",
+    "All day" : "Dia inteiro",
     "Unpin" : "Desmarcar",
     "Pin" : "Pino",
     "Show in Calendar" : "Mostrar no Calendário ",
