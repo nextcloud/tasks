@@ -252,7 +252,7 @@ OC.L10N.register(
     "Successfully created the task." : "Aufgabe erstellt.",
     "Could not delete the task." : "Aufgabe konnte nicht gelöscht werden.",
     "Synchronizing to the server." : "Synchronisiere mit dem Server.",
-    "Task successfully saved to server." : "Aufgabe erfolgreich auf dem Server gespeichert.",
+    "Task successfully saved to server." : "Aufgabe auf dem Server gespeichert.",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Die Aufgabe konnte nicht aktualisiert werden, da sie auf dem Server geändert wurde. Bitte Aktualisieren drücken, damit die lokalen Änderungen verworfen werden.",
     "Could not update the task." : "Aufgabe konnte nicht aktualisiert werden.",
     "Successfully updated the task." : "Aufgabe aktualisiert.",
