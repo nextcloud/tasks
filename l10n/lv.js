@@ -1,6 +1,7 @@
 OC.L10N.register(
     "tasks",
     {
+    "Upcoming tasks" : "Gaidāmie uzdevumi",
     "Important" : "Svarīgi",
     "Today" : "Šodien",
     "Week" : "Nedēļa",
@@ -8,6 +9,7 @@ OC.L10N.register(
     "Current" : "Pašreizējais",
     "Completed" : "Pabeigts",
     "Tasks" : "Uzdevumi",
+    "The Tasks app for Nextcloud" : "Nextcloud uzdevumu lietotne",
     "Once enabled, a new Tasks menu will appear in your Nextcloud apps menu. From there you can add and delete tasks, edit their title, description, start and due dates and mark them as important. Tasks can be shared between users. Tasks can be synchronized using CalDav (each task list is linked to an Nextcloud calendar, to sync it to your local client: Thunderbird, Evolution, KDE Kontact, iCal … - just add the calendar as a remote calendar in your client). You can download your tasks as ICS files using the download button for each calendar." : "Tiklīdz iespējots, jauns izvēlnes vienums \"Uzdevumi\" parādīsies Nextcloud lietotņu izvēlnē. Tur var pievienot un izdzēst uzdevumus, labot to virsrakstu, parakstu, sākuma un beigu datumus un atzīmēt tos kā svarīgus. Uzdevumus var koplietot ar citiem lietotājiem. Uzdevumus var sinhronizēt ar CalDAV (katra uzdevuma saraksts ir sasaistīts ar Nextcloud kalendāru; lai to sinhronizētu ar vietēju klientu - Thunderbird, Evolution, KDE Kontact, iCAL, ... - kalendārs ir tikai jāpievieno kā attālais kalendārs). Uzdevumus var lejupielādēt kā ICS datnes ar lejupielādes pogu katrā atsevišķajā kalendārā.",
     "Hidden" : "Paslēpts",
     "Visible" : "Redzams",
@@ -52,6 +54,8 @@ OC.L10N.register(
     "Go back" : "Atpakaļ",
     "before at" : "pirms ",
     "{numberOfTasks} tasks have been added to \"{calendar}\"" : "{numberOfTasks} uzdevumi tika pievienoti \"{calendar}\"",
+    "Create new tasks" : "Izveidot jaunus uzdevumus",
+    "Create tasks" : "Izveidot uzdevumus",
     "Close" : "Aizvērt",
     "No errors" : "Nav kļūdu",
     "Open your browser console for more details" : "Jāatver savas pārlūkprogrammas konsole, lai uzzinātu vairāk",
@@ -66,7 +70,7 @@ OC.L10N.register(
     "Priority" : "Prioritāte",
     "Alphabetically" : "Alfabētiskā secībā",
     "Tags" : "Birkas",
-    "Manually" : "Manuāli",
+    "Manually" : "Pašrocīgi",
     "Change sort order" : "Mainīt kārtošanas secību",
     "[Today]" : "[Šodien]",
     "[Tomorrow]" : "[Rīt]",
@@ -95,6 +99,7 @@ OC.L10N.register(
     "Set a URL" : "Iestatīt URL",
     "Select tags" : "Atlasīt birkas",
     "Notes" : "Piezīmes",
+    "No tasks today" : "Šodien nav uzdevumu",
     "Task successfully moved to new calendar." : "Uzdevums sekmīgi pārvietots uz jaunu kalendāru.",
     "An error occurred" : "Gadījās kļūda"
 },
