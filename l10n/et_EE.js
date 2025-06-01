@@ -21,7 +21,7 @@ OC.L10N.register(
     "No users or groups" : "Ei ole kasutajaid või gruppe",
     "Unable to delete the share." : "Jagamise kustutamine ebaõnnestus.",
     "Unable to change permissions." : "Õiguste muutmine ebaõnnestus.",
-    "Can edit" : "Võib redigeerida",
+    "Can edit" : "Võib muuta",
     "Unshare with {displayName}" : "Lõpeta jagamine kasutajaga: {displayName}",
     "This will delete the calendar \"{calendar}\" and all corresponding events and tasks." : "Järgnevaga kustutad „{calendar}“ kalendri ja kõik selle sündmused ja ülesanded.",
     "This will unshare the calendar \"{calendar}\"." : "Järgnevaga lõppeb „{calendar}“ kalendri jagamine.",
