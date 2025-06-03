@@ -68,11 +68,6 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<div class="app-navigation-entry-edit">
 						<NcTextField ref="newListInput"
 							v-model="newCalendarName"
-							v-tooltip="{
-								content: tooltipMessage,
-								shown: showTooltip('list_new'),
-								trigger: 'manual'
-							}"
 							type="text"
 							:show-trailing-button="newCalendarName !== ''"
 							trailing-button-icon="arrowRight"
@@ -106,7 +101,6 @@ import NcAppNavigation from '@nextcloud/vue/components/NcAppNavigation'
 import NcAppNavigationItem from '@nextcloud/vue/components/NcAppNavigationItem'
 import NcCounterBubble from '@nextcloud/vue/components/NcCounterBubble'
 import NcTextField from '@nextcloud/vue/components/NcTextField'
-import Tooltip from '@nextcloud/vue/directives/Tooltip'
 
 import CalendarToday from 'vue-material-design-icons/CalendarToday.vue'
 import CalendarWeek from 'vue-material-design-icons/CalendarWeek.vue'
@@ -141,7 +135,6 @@ export default {
 	},
 	directives: {
 		ClickOutside,
-		Tooltip,
 	},
 	inject: ['$OCA'],
 	data() {
@@ -154,8 +147,6 @@ export default {
 			nameError: false,
 			newCalendarName: '',
 			selectedColor: '',
-			tooltipMessage: '',
-			tooltipTarget: '',
 		}
 	},
 	computed: {
@@ -357,9 +348,6 @@ export default {
 				return this.collectionCount(collection.id) < 1
 			}
 		},
-		showTooltip(target) {
-			return this.tooltipTarget === target
-		},
 		startCreate(e) {
 			if (this.$OCA.Theming) {
 				this.selectedColor = this.$OCA.Theming.color
@@ -391,12 +379,9 @@ export default {
 		},
 		checkName(event) {
 			const check = this.isNameAllowed(this.newCalendarName)
-			this.tooltipMessage = check.msg
 			if (!check.allowed) {
-				this.tooltipTarget = 'list_new'
 				this.nameError = true
 			} else {
-				this.tooltipTarget = ''
 				this.nameError = false
 			}
 			if (event.keyCode === 13) {
@@ -404,7 +389,6 @@ export default {
 			}
 			if (event.keyCode === 27) {
 				event.preventDefault()
-				this.tooltipTarget = ''
 				this.creating = false
 				this.editing = false
 				this.nameError = false

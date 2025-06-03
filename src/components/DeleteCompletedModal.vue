@@ -60,7 +60,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						<span v-if="failed === 0">
 							{{ t('tasks', 'No errors') }}
 						</span>
-						<span v-else v-tooltip.auto="t('tasks', 'Open your browser console for more details')">
+						<span v-else :title="t('tasks', 'Open your browser console for more details')">
 							{{ n('tasks', 'Could not delete {failedCount} task.', 'Could not delete {failedCount} tasks.', failed, { failedCount: failed }) }}
 						</span>
 					</p>
@@ -75,7 +75,6 @@ import { translate as t, translatePlural as n } from '@nextcloud/l10n'
 import NcButton from '@nextcloud/vue/components/NcButton'
 import NcModal from '@nextcloud/vue/components/NcModal'
 import NcProgressBar from '@nextcloud/vue/components/NcProgressBar'
-import Tooltip from '@nextcloud/vue/directives/Tooltip'
 
 import Delete from 'vue-material-design-icons/Delete.vue'
 
@@ -87,9 +86,6 @@ export default {
 		Delete,
 		NcModal,
 		NcProgressBar,
-	},
-	directives: {
-		Tooltip,
 	},
 	props: {
 		calendar: {
