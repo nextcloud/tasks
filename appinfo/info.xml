@@ -20,7 +20,8 @@
     <repository>https://github.com/nextcloud/tasks.git</repository>
     <screenshot>https://raw.githubusercontent.com/nextcloud/tasks/master/screenshots/tasks-1.png</screenshot>
     <dependencies>
-        <nextcloud min-version="29" max-version="32"/>
+		<php min-version="8.1" max-version="8.4" />
+        <nextcloud min-version="30" max-version="32"/>
         <backend>caldav</backend>
     </dependencies>
     <navigations>
