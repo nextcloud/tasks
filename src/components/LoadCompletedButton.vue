@@ -21,7 +21,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<div v-show="!loadedCompleted"
-		v-tooltip.auto="buttonStrings.tooltip"
+		:title="buttonStrings.tooltip"
 		class="loadmore reactive">
 		<NcButton type="tertiary"
 			@click="loadCompletedTasks">
@@ -36,7 +36,6 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 <script>
 import { translate as t } from '@nextcloud/l10n'
 import NcButton from '@nextcloud/vue/components/NcButton'
-import Tooltip from '@nextcloud/vue/directives/Tooltip'
 
 import CloudDownload from 'vue-material-design-icons/CloudDownload.vue'
 
@@ -46,9 +45,6 @@ export default {
 	components: {
 		NcButton,
 		CloudDownload,
-	},
-	directives: {
-		Tooltip,
 	},
 	props: {
 		calendars: {
