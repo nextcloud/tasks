@@ -23,7 +23,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 	<NcButton v-if="status"
 		:title="status.message"
 		:disabled="isDisabled"
-		type="tertiary"
+		variant="tertiary"
 		:aria-label="status.message"
 		@click="statusClicked">
 		<template #icon>

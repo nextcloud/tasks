@@ -23,7 +23,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 	<div v-show="!loadedCompleted"
 		:title="buttonStrings.tooltip"
 		class="loadmore reactive">
-		<NcButton type="tertiary"
+		<NcButton variant="tertiary"
 			@click="loadCompletedTasks">
 			<template #icon>
 				<CloudDownload :size="20" />

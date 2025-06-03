@@ -28,7 +28,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					{{ t('tasks', 'Cancel') }}
 				</NcButton>
 				<NcButton ref="createButton"
-					type="primary"
+					variant="primary"
 					@click="addTasks">
 					{{ t('tasks', 'Create tasks') }}
 				</NcButton>
