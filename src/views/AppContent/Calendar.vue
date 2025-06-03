@@ -32,7 +32,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					collection-id="uncompleted" />
 				<NcButton v-if="closedCount(calendarId)"
 					alignment="center-reverse"
-					type="tertiary"
+					variant="tertiary"
 					class="reactive heading"
 					@click="toggleHidden">
 					<template #icon>

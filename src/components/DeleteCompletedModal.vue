@@ -22,7 +22,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 <template>
 	<div class="loadmore reactive">
 		<NcButton v-show="completedTasksCount"
-			type="tertiary"
+			variant="tertiary"
 			@click="openModal">
 			<template #icon>
 				<Delete :size="20" />
@@ -39,7 +39,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<h3>
 						{{ n('tasks', 'This will delete {taskCount} completed task and its subtasks from calendar "{calendar}".', 'This will delete {taskCount} completed tasks and their subtasks from calendar "{calendar}".', initialCompletedRootTasksCount, {taskCount: initialCompletedRootTasksCount, calendar: calendar.displayName}, { sanitize: false, escape: false }) }}
 					</h3>
-					<NcButton type="primary"
+					<NcButton variant="primary"
 						class="delete-completed__button"
 						@click="deleteCompletedTasks">
 						<template #icon>
