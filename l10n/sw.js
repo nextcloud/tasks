@@ -3,10 +3,12 @@ OC.L10N.register(
     {
     "Today" : "Leo",
     "Week" : "Wiki",
+    "Completed" : "Kamilika",
     "Hidden" : "Iliyofichwa",
     "Automatic" : "Automatiki",
     "Share with users or groups" : "Shiriki na watumiaji au makundi",
     "No users or groups" : "Hakuna watumiaji au makundi",
+    "Can edit" : "Inaweza kuhariri",
     "Unshare with {displayName}" : "Acha kushirikisha na {displayName}",
     "Calendar link copied to clipboard." : "Kiungo cha kalenda kimenakiliwa kwenye clipboard.",
     "Calendar link could not be copied to clipboard." : "Kiungo cha kalenda hakikuweza kunakiliwa kwenye clipboard",
@@ -14,6 +16,7 @@ OC.L10N.register(
     "Edit" : "Hariri",
     "Export" : "Safirisha",
     "Delete" : "Futa",
+    "List name" : "Orodhesha majina",
     "Untitled task" : "Kazi zisizo na jina",
     "Untitled event" : "Tukio lisilotajwa",
     "Untitled item" : "Kipengele kisichotajwa",
@@ -38,7 +41,12 @@ OC.L10N.register(
     "Add reminder" : "Ongeza kikumbushio",
     "before at" : "kabla ya katika",
     "Close" : "Funga",
+    "Due date" : "Tarehe ya ukomo",
+    "Tags" : "Maoni",
+    "Tomorrow" : "Kesho",
     "All day" : "Siku yote",
-    "Details" : "Maelezo ya kina"
+    "Details" : "Maelezo ya kina",
+    "Mark as done" : "Weka alama kama iliyotendeka",
+    "Message from {author} in {conversationName}" : "Ujumbe kutoka {author}katika{conversationName}"
 },
 "nplurals=2; plural=(n != 1);");
