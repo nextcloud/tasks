@@ -47,6 +47,7 @@ OC.L10N.register(
     "All day" : "Siku yote",
     "Details" : "Maelezo ya kina",
     "Mark as done" : "Weka alama kama iliyotendeka",
+    "An error occurred" : "Hitilafu imetokea",
     "Message from {author} in {conversationName}" : "Ujumbe kutoka {author}katika{conversationName}"
 },
 "nplurals=2; plural=(n != 1);");
