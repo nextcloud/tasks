@@ -39,6 +39,7 @@ OC.L10N.register(
     "Edit time" : "Hariri muda",
     "Remove reminder" : "Ondoa kikumbushio",
     "Add reminder" : "Ongeza kikumbushio",
+    "Go back" : "Rudi nyuma",
     "before at" : "kabla ya katika",
     "Close" : "Funga",
     "Due date" : "Tarehe ya ukomo",
