@@ -36,27 +36,23 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				{{ propertyString }}
 			</span>
 			<div v-if="editing" class="content__input">
-				<NcDateTimePicker :value="newValue"
-					:lang="lang"
-					:format="dateFormat"
+				<NcDateTimePicker :model-value="newValue"
 					:clearable="false"
 					:append-to-body="true"
 					:show-week-number="true"
 					type="date"
 					:placeholder="t('tasks', 'Set date')"
 					class="date"
-					@change="setDate" />
+					@update:model-value="setDate" />
 				<NcDateTimePicker v-if="!allDay"
-					:value="newValue"
-					:lang="lang"
-					:format="timeFormat"
+					:model-value="newValue"
 					:clearable="false"
 					:append-to-body="true"
-					:time-picker-options="timePickerOptions"
+					:minute-step="30"
 					type="time"
 					:placeholder="t('tasks', 'Set time')"
 					class="time"
-					@change="setTime" />
+					@update:model-value="setTime" />
 			</div>
 		</div>
 		<div class="item__actions">
@@ -84,7 +80,6 @@ import editableItem from '../../mixins/editableItem.js'
 import { overdue } from '../../store/storeHelper.js'
 
 import { translate as t } from '@nextcloud/l10n'
-import moment from '@nextcloud/moment'
 import NcDateTimePicker from '@nextcloud/vue/components/NcDateTimePicker'
 
 export default {
@@ -123,24 +118,6 @@ export default {
 			default: true,
 		},
 	},
-	data() {
-		return {
-			lang: {
-				formatLocale: {
-					firstDayOfWeek: window.firstDay,
-				},
-				days: window.dayNamesShort, // provided by nextcloud
-				months: window.monthNamesShort, // provided by nextcloud
-			},
-			dateFormat: moment.localeData().longDateFormat('L'),
-			timeFormat: moment.localeData().longDateFormat('LT'),
-			timePickerOptions: {
-				start: '00:00',
-				step: '00:30',
-				end: '23:30',
-			},
-		}
-	},
 	computed: {
 		isValid() {
 			return this.date.isValid()
@@ -161,12 +138,8 @@ export default {
 		checkOutsideClick($event) {
 			/**
 			 * If the click originates from the datepicker, we do nothing.
-			 * Can be removed once https://github.com/nextcloud/nextcloud-vue/pull/1881
-			 * is merged and the datepicker is not attached to body anymore.
 			 */
-			if ($event.target.closest('.mx-datepicker-main')
-				|| $event.target.closest('.mx-table')
-				|| $event.target.classList.contains('mx-btn')) {
+			if ($event.target.closest('.dp__outer_menu_wrap')) {
 				return
 			}
 			this.setValue()
@@ -254,8 +227,9 @@ $blue: #4271a6;
 					display: flex;
 					flex-grow: 1;
 					flex-wrap: wrap;
+					grid-gap: var(--default-grid-baseline);
 
-					.mx-datepicker {
+					.dp__main {
 						width: auto;
 						&.date {
 							min-width: 100px;
