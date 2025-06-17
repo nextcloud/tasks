@@ -50,6 +50,8 @@
     "Remove reminder" : "Noņemt atgādinājumu",
     "Add reminder" : "Pievienot atgādinājumu",
     "Go back" : "Atpakaļ",
+    "Set a reminder relative to your tasks start date:" : "Iestatīt atgādinājum attiecībā pret uzdevuma sākuma datumu:",
+    "Set a reminder relative to your tasks due date:" : "Iestatīt atgādinājumu attiecībā pret uzdevuma izpildes datumu:",
     "before at" : "pirms ",
     "{numberOfTasks} tasks have been added to \"{calendar}\"" : "{numberOfTasks} uzdevumi tika pievienoti \"{calendar}\"",
     "Create new tasks" : "Izveidot jaunus uzdevumus",
