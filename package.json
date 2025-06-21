@@ -47,7 +47,7 @@
     "markdown-it-link-attributes": "^4.0.1",
     "markdown-it-task-lists": "^2.1.1",
     "sortablejs-vue3": "^1.2.11",
-    "vue": "^3.5.16",
+    "vue": "^3.5.17",
     "vue-material-design-icons": "^5.3.1",
     "vue-router": "^4.5.1",
     "vuex": "^4.1.0"
