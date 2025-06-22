@@ -16,6 +16,7 @@ OC.L10N.register(
     "Calendar link could not be copied to clipboard." : "Kiungo cha kalenda hakikuweza kunakiliwa kwenye clipboard",
     "An error occurred, unable to delete the calendar." : "Hitilafu imetokea, haiwezi kufuta kalenda",
     "Edit" : "Hariri",
+    "Copied" : "Iliyonakiliwa",
     "Export" : "Safirisha",
     "Delete" : "Futa",
     "List name" : "Orodhesha majina",
