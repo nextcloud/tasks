@@ -29,6 +29,7 @@
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Fin de partage de l'agenda dans {countdown} secondes.","Fin de partage de l'agenda dans {countdown} secondes.","Fin de partage de l'agenda dans {countdown} secondes."],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Suppression de la liste dans {countdown} seconde","Suppression de la liste dans {countdown} secondes","Suppression de la liste dans {countdown} secondes"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Suppression du partage de la liste dans {countdown} seconde","Suppression du partage de la liste dans {countdown} secondes","Suppression du partage de la liste dans {countdown} secondes"],
+    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Partagé avec {num} entité","Partagé avec {num} entités","Partagé avec {num} entités"],
     "Share this calendar" : "Partager cet agenda",
     "Share this list" : "Partager cette liste",
     "Calendar link copied to clipboard." : "Lien de l'agenda copié dans le presse-papier.",
@@ -69,6 +70,7 @@
     "Update reminder" : "Mettre à jour le rappel",
     "Set a reminder at a custom date and time:" : "Définir un rappel à une date et une heure personnalisées.",
     "Cancel" : "Annuler",
+    "This is a todo reminder." : "Ceci est un rappel de tâche à faire",
     "No reminders" : "Aucun rappel",
     "Notification" : "Notification",
     "Email" : "E-mail",
@@ -244,6 +246,7 @@
     "No upcoming tasks" : "Pas de tâches à venir",
     "upcoming tasks" : "Tâches à venir",
     "No tasks today" : "Aucune tâche aujourd'hui",
+    "Completion date must be in the past." : "La date d'achèvement doit être dans le passé",
     "Successfully created the task." : "Tâche créée avec succès.",
     "Could not delete the task." : "Impossible de supprimer la tâche.",
     "Synchronizing to the server." : "Synchronisation en cours avec le serveur.",
@@ -272,6 +275,16 @@
     "[Starts tomorrow at] LT" : "[Débute demain à] LT",
     "[Starts on] LL [at] LT" : "[Débute le] LL [à] LT",
     "[Started yesterday at] LT" : "[Débuté hier à] LT",
-    "[Started on] LL [at] LT" : "[Débuté le] LL [à] LT"
+    "[Started on] LL [at] LT" : "[Débuté le] LL [à] LT",
+    "Midnight on the day the task starts" : "Dès minuit le jour où débute la tâche",
+    "_%n day before the task at {formattedHourMinute}_::_%n days before the task at {formattedHourMinute}_" : ["Un jour avant le début de la tâche à {formattedHourMinute}","%n jours avant le début de la tâche à {formattedHourMinute}","%n jours avant le début de la tâche à {formattedHourMinute}"],
+    "_%n week before the task at {formattedHourMinute}_::_%n weeks before the task at {formattedHourMinute}_" : ["La semaine précédent le début de la tâche à {formattedHourMinute}","%n semaines avant le début de la tâche à {formattedHourMinute}","%n semaines avant le début de la tâche à {formattedHourMinute}"],
+    "on the day of the task at {formattedHourMinute}" : "le jour de la tâche à {formattedHourMinute}",
+    "at the task's start" : "au début de la tâche",
+    "when the task is due" : "quand la tâche doit être terminée",
+    "{time} before the task starts" : "{time} avant le début de la tâche",
+    "{time} before the task is due" : "{time} avant l'échéance de la tâche",
+    "{time} after the task starts" : "{time} après le début de la tâche",
+    "{time} after the task is due" : "{time} après l'échéance de la tâche"
 },"pluralForm" :"nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;"
 }
