@@ -31,6 +31,8 @@ OC.L10N.register(
     "Export" : "Exportar",
     "Delete" : "Eliminar ",
     "Unshare" : "Cancelar partilha",
+    "Untitled task" : "Untitled task",
+    "Untitled event" : "Evento sem título",
     "Untitled item" : "Item sem título ",
     "Unknown calendar" : "Calendário desconhecido",
     "Could not load deleted calendars and objects" : "Não foi possível carregar calendários e objetos apagados ",
