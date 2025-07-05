@@ -61,6 +61,7 @@ OC.L10N.register(
     "Alphabetically" : "Berdasarkan abjad",
     "Tags" : "Tag",
     "[Today]" : "[Hari ini]",
+    "Delete task" : "Hapus tugas",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n Tugas Diselesaikan"],
     "Tomorrow" : "Besok",
     "Task not found!" : "Tugas tidak ditemukan!",
