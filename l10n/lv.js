@@ -96,7 +96,7 @@ OC.L10N.register(
     "Set start date" : "Uzstādīt sākuma datumu",
     "Set due date" : "Uzstādīt beigu datumu",
     "All day" : "Visas dienas",
-    "Details" : "Detaļas",
+    "Details" : "Informācija",
     "Set a location" : "Iestatīt atrašanās vietu",
     "Set a URL" : "Iestatīt URL",
     "Select tags" : "Atlasīt birkas",
