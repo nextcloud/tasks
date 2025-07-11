@@ -43,7 +43,7 @@ OC.L10N.register(
     "Delete permanently" : "Hapus secara permanen",
     "Cancel" : "Batal",
     "Notification" : "Notifikasi",
-    "Email" : "Surel",
+    "Email" : "Email",
     "Audio notification" : "Notifikasi audio",
     "Other notification" : "Notifikasi lain",
     "Edit time" : "Edit waktu",
