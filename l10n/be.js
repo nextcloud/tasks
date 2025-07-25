@@ -2,9 +2,11 @@ OC.L10N.register(
     "tasks",
     {
     "Today" : "Сёння",
+    "Tasks" : "Задачы",
     "Can edit" : "Можа рэдагаваць",
     "Copy private link" : "Капіяваць прыватную спасылку",
     "Delete" : "Выдаліць",
+    "Untitled task" : "Задача без назвы",
     "Name" : "Назва",
     "Delete permanently" : "Выдаліць назаўжды",
     "Cancel" : "Скасаваць",
