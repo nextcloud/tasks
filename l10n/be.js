@@ -8,6 +8,8 @@ OC.L10N.register(
     "Delete" : "Выдаліць",
     "Untitled task" : "Задача без назвы",
     "Name" : "Назва",
+    "Deleted" : "Выдалены",
+    "Restore" : "Аднавіць",
     "Delete permanently" : "Выдаліць назаўжды",
     "Cancel" : "Скасаваць",
     "Notification" : "Апавяшчэнне",
