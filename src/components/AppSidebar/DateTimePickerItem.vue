@@ -229,7 +229,7 @@ $blue: #4271a6;
 					flex-wrap: wrap;
 					grid-gap: var(--default-grid-baseline);
 
-					.dp__main {
+					.vue-date-time-picker__wrapper {
 						width: auto;
 						&.date {
 							min-width: 100px;
