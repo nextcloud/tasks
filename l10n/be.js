@@ -4,6 +4,7 @@ OC.L10N.register(
     "Today" : "Сёння",
     "Tasks" : "Задачы",
     "Can edit" : "Можа рэдагаваць",
+    "Edit" : "Рэдагаваць",
     "Copy private link" : "Капіяваць прыватную спасылку",
     "Delete" : "Выдаліць",
     "Untitled task" : "Задача без назвы",
