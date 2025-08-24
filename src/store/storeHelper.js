@@ -503,7 +503,7 @@ function searchSubTasks(task, searchQuery, filter) {
  * @return {object} The object containing the parsed results
  */
 function parseString(str) {
-	const matches = str.matchAll(/\s?#([^\s#]+)/g)
+	const matches = str.matchAll(/(?:^|\s)+#([^\s#]+)/g)
 	let summary = str
 	const tags = []
 	for (const match of matches) {
