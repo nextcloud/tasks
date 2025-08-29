@@ -20,6 +20,7 @@
     "Close" : "Закрыць",
     "Tags" : "Тэгі",
     "Canceled" : "Скасавана",
+    "Details" : "Падрабязнасці",
     "Notes" : "Нататкі",
     "Could not update the task because it was changed on the server. Please click to refresh it, local changes will be discarded." : "Не атрымалася абнавіць заданне, бо яно было зменена на серверы. Націсніце, каб абнавіць яго. Лакальныя змены будуць адхілены.",
     "An error occurred" : "Узнікла памылка"
