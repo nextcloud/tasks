@@ -37,7 +37,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 import { translate as t } from '@nextcloud/l10n'
 import NcButton from '@nextcloud/vue/components/NcButton'
 
-import CloudDownload from 'vue-material-design-icons/CloudDownload.vue'
+import CloudDownload from 'vue-material-design-icons/CloudDownloadOutline.vue'
 
 import { mapActions } from 'vuex'
 

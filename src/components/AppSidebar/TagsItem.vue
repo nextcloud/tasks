@@ -51,7 +51,7 @@ import MultiselectOption from './MultiselectOption.vue'
 import { translate as t } from '@nextcloud/l10n'
 import NcSelect from '@nextcloud/vue/components/NcSelect'
 
-import TagMultiple from 'vue-material-design-icons/TagMultiple.vue'
+import TagMultiple from 'vue-material-design-icons/TagMultipleOutline.vue'
 
 export default {
 	components: {

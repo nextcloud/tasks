@@ -71,7 +71,7 @@ import CalendarToday from 'vue-material-design-icons/CalendarToday.vue'
 import CalendarWeek from 'vue-material-design-icons/CalendarWeek.vue'
 import CircleOutline from 'vue-material-design-icons/CircleOutline.vue'
 import Check from 'vue-material-design-icons/Check.vue'
-import Star from 'vue-material-design-icons/Star.vue'
+import Star from 'vue-material-design-icons/StarOutline.vue'
 import TrendingUp from 'vue-material-design-icons/TrendingUp.vue'
 
 import { mapState, mapGetters, mapActions } from 'vuex'
