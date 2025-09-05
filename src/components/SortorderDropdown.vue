@@ -69,7 +69,7 @@ import MenuUp from 'vue-material-design-icons/MenuUp.vue'
 import OrderAlphabeticalAscending from 'vue-material-design-icons/OrderAlphabeticalAscending.vue'
 import Pencil from 'vue-material-design-icons/PencilOutline.vue'
 import Plus from 'vue-material-design-icons/Plus.vue'
-import Star from 'vue-material-design-icons/Star.vue'
+import Star from 'vue-material-design-icons/StarOutline.vue'
 import TagMultiple from 'vue-material-design-icons/TagMultipleOutline.vue'
 
 import { mapGetters } from 'vuex'
