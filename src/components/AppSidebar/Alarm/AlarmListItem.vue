@@ -83,8 +83,8 @@ import {
 	NcActionRadio,
 	NcActionSeparator,
 } from '@nextcloud/vue'
-import Delete from 'vue-material-design-icons/Delete.vue'
-import Pencil from 'vue-material-design-icons/Pencil.vue'
+import Delete from 'vue-material-design-icons/TrashCanOutline.vue'
+import Pencil from 'vue-material-design-icons/PencilOutline.vue'
 
 import { getCanonicalLocale, translate as t } from '@nextcloud/l10n'
 import { vOnClickOutside as ClickOutside } from '@vueuse/components'

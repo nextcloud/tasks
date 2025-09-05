@@ -76,7 +76,7 @@ import NcButton from '@nextcloud/vue/components/NcButton'
 import NcModal from '@nextcloud/vue/components/NcModal'
 import NcProgressBar from '@nextcloud/vue/components/NcProgressBar'
 
-import Delete from 'vue-material-design-icons/Delete.vue'
+import Delete from 'vue-material-design-icons/TrashCanOutline.vue'
 
 import { mapGetters, mapActions } from 'vuex'
 
