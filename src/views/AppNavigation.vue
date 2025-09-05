@@ -107,7 +107,7 @@ import CalendarWeek from 'vue-material-design-icons/CalendarWeek.vue'
 import Check from 'vue-material-design-icons/Check.vue'
 import CircleOutline from 'vue-material-design-icons/CircleOutline.vue'
 import Plus from 'vue-material-design-icons/Plus.vue'
-import Star from 'vue-material-design-icons/Star.vue'
+import Star from 'vue-material-design-icons/StarOutline.vue'
 import TrendingUp from 'vue-material-design-icons/TrendingUp.vue'
 
 import { Sortable } from 'sortablejs-vue3'

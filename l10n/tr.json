@@ -103,7 +103,7 @@
     "No tag available. Create one!" : "Kullanılabilecek bir etiket yok. İsterseniz ekleyin!",
     "{numberOfTasks} tasks have been added to \"{calendar}\"" : "{numberOfTasks} görev \"{calendar}\" takvimine eklendi",
     "Create new tasks" : "Yeni görevler ekle",
-    "Create {numberOfTasks} tasks from pasted text" : "Yapıştırılan metinden {numberOfTasks} görev ekle",
+    "Create {numberOfTasks} tasks from pasted text" : "Yapıştırılan yazıdan {numberOfTasks} görev ekle",
     "Create tasks" : "Görevleri ekle",
     "Creating new tasks…" : "Yeni görevler ekleniyor…",
     "Close" : "Kapat",
