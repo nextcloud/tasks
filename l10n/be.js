@@ -15,6 +15,7 @@ OC.L10N.register(
     "Delete" : "Выдаліць",
     "Unshare" : "Cкасаваць абагульванне",
     "Untitled task" : "Задача без назвы",
+    "Untitled event" : "Падзея без назвы",
     "Name" : "Назва",
     "Deleted" : "Выдалены",
     "Restore" : "Аднавіць",
