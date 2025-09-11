@@ -165,6 +165,8 @@ export default {
 						background: none repeat scroll 0 0 var(--color-background-dark);
 						margin: 0;
 						min-height: 0;
+						padding: 0 4px;
+						text-align: center;
 					}
 
 					input[type='range'] {

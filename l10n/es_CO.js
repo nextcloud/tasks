@@ -37,6 +37,7 @@ OC.L10N.register(
     "Tags" : "Etiquetas",
     "Manually" : "Manualmente",
     "Change sort order" : "Cambiar el criterio para ordenar",
+    "Delete task" : "Eliminar tarea",
     "Task is completed" : "La tarea ha sido completada",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n Tarea Completada","%n Tareas Completadas","%n Tareas Completadas"],
     "Tomorrow" : "Mañana",

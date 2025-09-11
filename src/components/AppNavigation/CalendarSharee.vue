@@ -65,8 +65,8 @@ import NcAppNavigationItem from '@nextcloud/vue/components/NcAppNavigationItem'
 import NcAvatar from '@nextcloud/vue/components/NcAvatar'
 import NcCheckboxRadioSwitch from '@nextcloud/vue/components/NcCheckboxRadioSwitch'
 
-import AccountMultiple from 'vue-material-design-icons/AccountMultiple.vue'
-import Delete from 'vue-material-design-icons/Delete.vue'
+import AccountMultiple from 'vue-material-design-icons/AccountMultipleOutline.vue'
+import Delete from 'vue-material-design-icons/TrashCanOutline.vue'
 
 export default {
 	name: 'CalendarSharee',

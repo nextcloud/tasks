@@ -48,7 +48,7 @@
 				<NcButton @click="onClose()">
 					{{ t('tasks', 'Cancel') }}
 				</NcButton>
-				<NcButton type="primary" @click="onSelectDateTime">
+				<NcButton variant="primary" @click="onSelectDateTime">
 					{{ t('tasks', 'Update reminder') }}
 				</NcButton>
 			</div>

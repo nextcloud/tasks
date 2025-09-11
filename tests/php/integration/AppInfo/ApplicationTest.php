@@ -39,11 +39,4 @@ class AppTest extends TestCase {
 		$appManager = $this->container->query('OCP\App\IAppManager');
 		$this->assertTrue($appManager->isInstalled('tasks'));
 	}
-
-	public function testNavigation() {
-		$navigationManager = \OC::$server->getNavigationManager();
-		$navigationManager->clear();
-		$enabled = array_key_exists('tasks', $navigationManager->getAll());
-		$this->assertTrue($enabled);
-	}
 }

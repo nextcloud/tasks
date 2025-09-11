@@ -35,11 +35,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		</template>
 		<NcActionButton v-for="order in orders"
 			:key="order.id"
-			v-tooltip="{
-				placement: 'left',
-				content: order.hint,
-				delay: { show: 500, hide: 0 }
-			}"
+			:title="order.hint"
 			class="reactive"
 			:class="{selected: sortOrder === order.id}"
 			:close-after-click="true"
@@ -62,20 +58,19 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 import { translate as t } from '@nextcloud/l10n'
 import NcActions from '@nextcloud/vue/components/NcActions'
 import NcActionButton from '@nextcloud/vue/components/NcActionButton'
-import Tooltip from '@nextcloud/vue/directives/Tooltip'
 
 import AnimationOutline from 'vue-material-design-icons/AnimationOutline.vue'
-import Bookmark from 'vue-material-design-icons/Bookmark.vue'
+import Bookmark from 'vue-material-design-icons/BookmarkOutline.vue'
 import CalendarStart from 'vue-material-design-icons/CalendarStart.vue'
 import CalendarEnd from 'vue-material-design-icons/CalendarEnd.vue'
 import Check from 'vue-material-design-icons/Check.vue'
 import MenuDown from 'vue-material-design-icons/MenuDown.vue'
 import MenuUp from 'vue-material-design-icons/MenuUp.vue'
 import OrderAlphabeticalAscending from 'vue-material-design-icons/OrderAlphabeticalAscending.vue'
-import Pencil from 'vue-material-design-icons/Pencil.vue'
+import Pencil from 'vue-material-design-icons/PencilOutline.vue'
 import Plus from 'vue-material-design-icons/Plus.vue'
-import Star from 'vue-material-design-icons/Star.vue'
-import TagMultiple from 'vue-material-design-icons/TagMultiple.vue'
+import Star from 'vue-material-design-icons/StarOutline.vue'
+import TagMultiple from 'vue-material-design-icons/TagMultipleOutline.vue'
 
 import { mapGetters } from 'vuex'
 
@@ -96,9 +91,6 @@ export default {
 		Plus,
 		Star,
 		TagMultiple,
-	},
-	directives: {
-		Tooltip,
 	},
 	data() {
 		return {

@@ -20,7 +20,7 @@
 				<NcButton @click="onClose()">
 					{{ t('tasks', 'Cancel') }}
 				</NcButton>
-				<NcButton type="primary" native-type="submit">
+				<NcButton variant="primary" type="submit">
 					<template v-if="isNewAlarm">
 						{{ t('tasks', 'Create reminder') }}
 					</template>

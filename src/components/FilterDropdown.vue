@@ -61,9 +61,9 @@ import NcActionButton from '@nextcloud/vue/components/NcActionButton'
 import NcActionInput from '@nextcloud/vue/components/NcActionInput'
 
 import Close from 'vue-material-design-icons/Close.vue'
-import FilterIcon from 'vue-material-design-icons/Filter.vue'
-import FilterOffIcon from 'vue-material-design-icons/FilterOff.vue'
-import TagMultiple from 'vue-material-design-icons/TagMultiple.vue'
+import FilterIcon from 'vue-material-design-icons/FilterOutline.vue'
+import FilterOffIcon from 'vue-material-design-icons/FilterOffOutline.vue'
+import TagMultiple from 'vue-material-design-icons/TagMultipleOutline.vue'
 
 import { mapGetters, mapMutations } from 'vuex'
 

@@ -80,11 +80,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				{{ t('tasks', 'Export') }}
 			</NcActionLink>
 			<NcActionButton v-if="!calendar.readOnly || calendar.isSharedWithMe"
-				v-tooltip="{
-					placement: 'left',
-					boundariesElement: 'body',
-					content: deleteMessage
-				}"
+				:title="deleteMessage"
 				@click="scheduleDelete">
 				<template v-if="!calendar.isSharedWithMe" #icon>
 					<Delete :size="20" />
@@ -110,16 +106,13 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			<div v-if="!deleteTimeout" :class="{error: nameError}" class="app-navigation-entry-edit">
 				<NcTextField ref="editListInput"
 					v-model="newCalendarName"
-					v-tooltip="{
-						content: tooltipMessage,
-						shown: showTooltip('list_' + calendar.id),
-						trigger: 'manual'
-					}"
+					:title="tooltipMessage"
 					type="text"
 					:show-trailing-button="newCalendarName !== ''"
 					trailing-button-icon="arrowRight"
 					:error="nameError"
 					:label="t('tasks', 'List name')"
+					:placeholder="t('tasks', 'List name')"
 					@trailing-button-click="save(calendar)"
 					@keyup="checkName($event, calendar)">
 					<Pencil :size="16" />
@@ -145,14 +138,13 @@ import NcActions from '@nextcloud/vue/components/NcActions'
 import NcActionButton from '@nextcloud/vue/components/NcActionButton'
 import NcActionLink from '@nextcloud/vue/components/NcActionLink'
 import NcTextField from '@nextcloud/vue/components/NcTextField'
-import Tooltip from '@nextcloud/vue/directives/Tooltip'
 
 import Close from 'vue-material-design-icons/Close.vue'
-import Delete from 'vue-material-design-icons/Delete.vue'
-import Download from 'vue-material-design-icons/Download.vue'
-import LinkVariant from 'vue-material-design-icons/LinkVariant.vue'
-import Pencil from 'vue-material-design-icons/Pencil.vue'
-import ShareVariant from 'vue-material-design-icons/ShareVariant.vue'
+import Delete from 'vue-material-design-icons/TrashCanOutline.vue'
+import Download from 'vue-material-design-icons/TrayArrowDown.vue'
+import LinkVariant from 'vue-material-design-icons/Link.vue'
+import Pencil from 'vue-material-design-icons/PencilOutline.vue'
+import ShareVariant from 'vue-material-design-icons/ShareVariantOutline.vue'
 import Undo from 'vue-material-design-icons/Undo.vue'
 
 import { vOnClickOutside as ClickOutside } from '@vueuse/components'
@@ -182,7 +174,6 @@ export default {
 	},
 	directives: {
 		ClickOutside,
-		Tooltip,
 	},
 	props: {
 		calendar: {
@@ -200,7 +191,6 @@ export default {
 			newCalendarName: '',
 			selectedColor: '',
 			tooltipMessage: '',
-			tooltipTarget: '',
 			// Deleting
 			deleteInterval: null,
 			deleteTimeout: null,
@@ -373,15 +363,11 @@ export default {
 				}
 			}
 		},
-		showTooltip(target) {
-			return this.tooltipTarget === target
-		},
 		editCalendar() {
 			this.editing = true
 			this.newCalendarName = this.calendar.displayName
 			this.selectedColor = this.calendar.color
 			this.nameError = false
-			this.tooltipTarget = ''
 			this.$nextTick(
 				() => this.$refs.editListInput.$refs.inputField.$refs.input.focus(),
 			)
@@ -396,7 +382,6 @@ export default {
 		resetView() {
 			this.editing = false
 			this.shareOpen = false
-			this.tooltipTarget = ''
 		},
 		async copyCalDAVUrl(event) {
 			// change to loading status
@@ -444,10 +429,8 @@ export default {
 			const check = this.isNameAllowed(this.newCalendarName, calendar.id)
 			this.tooltipMessage = check.msg
 			if (!check.allowed) {
-				this.tooltipTarget = 'list_' + calendar.id
 				this.nameError = true
 			} else {
-				this.tooltipTarget = ''
 				this.nameError = false
 			}
 			if (event.keyCode === 13) {
@@ -455,7 +438,6 @@ export default {
 			}
 			if (event.keyCode === 27) {
 				event.preventDefault()
-				this.tooltipTarget = ''
 				this.creating = false
 				this.editing = false
 				this.nameError = false

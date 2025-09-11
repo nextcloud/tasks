@@ -204,7 +204,7 @@ export default {
 		 * @return {string}
 		 */
 		getTasksAppUrl(task) {
-			return generateUrl('apps/tasks') + `/#/calendars/${task.calendar.id}/tasks/${task.uri}`
+			return generateUrl('apps/tasks') + `/calendars/${task.calendar.id}/tasks/${task.uri}`
 		},
 
 		toggleAddTaskModel() {

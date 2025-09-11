@@ -17,7 +17,7 @@ export default createAppConfig({
 			setupFiles: resolve(__dirname, './tests/javascript/unit/setup.js'),
 			server: {
 			  deps: {
-				inline: ['@nextcloud/vue'],
+				inline: ['@nextcloud/vue', '@nextcloud/dialogs'],
 			  }
 			},
 		},

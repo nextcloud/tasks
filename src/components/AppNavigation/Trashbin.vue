@@ -48,7 +48,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 							<NcButton class="table__header sort-button sort-button--summary"
 								:class="{ 'sort-button--active': sortOrder === 'summary' }"
 								alignment="center-reverse"
-								type="tertiary"
+								variant="tertiary"
 								@click="setSortOrder('summary')">
 								<template #icon>
 									<MenuDown v-if="sortDirection && sortOrder === 'summary'" />
@@ -59,7 +59,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 							<NcButton class="table__header table__header--deletedAt sort-button sort-button--deletedAt"
 								:class="{ 'sort-button--active': sortOrder === 'deletedAt' }"
 								alignment="center"
-								type="tertiary"
+								variant="tertiary"
 								@click="setSortOrder('deletedAt')">
 								<template #icon>
 									<MenuDown v-if="sortDirection && sortOrder === 'deletedAt'" />
@@ -108,7 +108,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 							<p v-if="retentionDuration">
 								{{ n('tasks', 'Elements in the trash bin are deleted after {numDays} day', 'Elements in the trash bin are deleted after {numDays} days', retentionDuration, { numDays: retentionDuration }) }}
 							</p>
-							<NcButton type="primary" @click="onEmptyTrashBin()">
+							<NcButton variant="primary" @click="onEmptyTrashBin()">
 								<template #icon>
 									<DeleteForever :size="20" />
 								</template>
@@ -139,8 +139,8 @@ import NcEmptyContent from '@nextcloud/vue/components/NcEmptyContent'
 import NcLoadingIcon from '@nextcloud/vue/components/NcLoadingIcon'
 import NcModal from '@nextcloud/vue/components/NcModal'
 
-import Delete from 'vue-material-design-icons/Delete.vue'
-import DeleteForever from 'vue-material-design-icons/DeleteForever.vue'
+import Delete from 'vue-material-design-icons/TrashCanOutline.vue'
+import DeleteForever from 'vue-material-design-icons/DeleteForeverOutline.vue'
 import MenuDown from 'vue-material-design-icons/MenuDown.vue'
 import MenuUp from 'vue-material-design-icons/MenuUp.vue'
 import Undo from 'vue-material-design-icons/Undo.vue'

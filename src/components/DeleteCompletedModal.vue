@@ -22,7 +22,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 <template>
 	<div class="loadmore reactive">
 		<NcButton v-show="completedTasksCount"
-			type="tertiary"
+			variant="tertiary"
 			@click="openModal">
 			<template #icon>
 				<Delete :size="20" />
@@ -39,7 +39,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<h3>
 						{{ n('tasks', 'This will delete {taskCount} completed task and its subtasks from calendar "{calendar}".', 'This will delete {taskCount} completed tasks and their subtasks from calendar "{calendar}".', initialCompletedRootTasksCount, {taskCount: initialCompletedRootTasksCount, calendar: calendar.displayName}, { sanitize: false, escape: false }) }}
 					</h3>
-					<NcButton type="primary"
+					<NcButton variant="primary"
 						class="delete-completed__button"
 						@click="deleteCompletedTasks">
 						<template #icon>
@@ -60,7 +60,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						<span v-if="failed === 0">
 							{{ t('tasks', 'No errors') }}
 						</span>
-						<span v-else v-tooltip.auto="t('tasks', 'Open your browser console for more details')">
+						<span v-else :title="t('tasks', 'Open your browser console for more details')">
 							{{ n('tasks', 'Could not delete {failedCount} task.', 'Could not delete {failedCount} tasks.', failed, { failedCount: failed }) }}
 						</span>
 					</p>
@@ -75,9 +75,8 @@ import { translate as t, translatePlural as n } from '@nextcloud/l10n'
 import NcButton from '@nextcloud/vue/components/NcButton'
 import NcModal from '@nextcloud/vue/components/NcModal'
 import NcProgressBar from '@nextcloud/vue/components/NcProgressBar'
-import Tooltip from '@nextcloud/vue/directives/Tooltip'
 
-import Delete from 'vue-material-design-icons/Delete.vue'
+import Delete from 'vue-material-design-icons/TrashCanOutline.vue'
 
 import { mapGetters, mapActions } from 'vuex'
 
@@ -87,9 +86,6 @@ export default {
 		Delete,
 		NcModal,
 		NcProgressBar,
-	},
-	directives: {
-		Tooltip,
 	},
 	props: {
 		calendar: {

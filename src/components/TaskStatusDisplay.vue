@@ -21,9 +21,9 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <template>
 	<NcButton v-if="status"
-		v-tooltip="status.message"
+		:title="status.message"
 		:disabled="isDisabled"
-		type="tertiary"
+		variant="tertiary"
 		:aria-label="status.message"
 		@click="statusClicked">
 		<template #icon>
@@ -38,7 +38,6 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 <script>
 import NcButton from '@nextcloud/vue/components/NcButton'
 import NcLoadingIcon from '@nextcloud/vue/components/NcLoadingIcon'
-import Tooltip from '@nextcloud/vue/directives/Tooltip'
 
 import AlertCircleOutline from 'vue-material-design-icons/AlertCircleOutline.vue'
 import Check from 'vue-material-design-icons/Check.vue'
@@ -52,9 +51,6 @@ export default {
 		AlertCircleOutline,
 		Check,
 		SyncAlert,
-	},
-	directives: {
-		Tooltip,
 	},
 	props: {
 		status: {
