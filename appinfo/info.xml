@@ -21,7 +21,7 @@
     <screenshot>https://raw.githubusercontent.com/nextcloud/tasks/master/screenshots/tasks-1.png</screenshot>
     <dependencies>
 		<php min-version="8.1" max-version="8.4" />
-        <nextcloud min-version="30" max-version="32"/>
+        <nextcloud min-version="31" max-version="33"/>
         <backend>caldav</backend>
     </dependencies>
     <navigations>
