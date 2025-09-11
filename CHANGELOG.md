@@ -1,3 +1,23 @@
+## 0.17.0
+
+### Added
+- Allow to add reminders #154
+- Allow editing completion date #2686
+- Enable sorting by tags #2658
+- Require caldav backend #2621
+
+### Changed
+- Remove unused dependency #2707
+- Updated translations
+- Updated dependencies
+
+### Fixed
+- No need to include CSS chunks separately #2667 #2767
+- Trash bin with fullday event can be opened again #2784
+- Don't close sidebar when clicking outside #2785
+- Correctly open task from dashboard #2881
+
+
 ## 0.16.1 - 2024-08-18
 
 ### Added
