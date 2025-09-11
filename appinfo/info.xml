@@ -5,7 +5,7 @@
     <name>Tasks</name>
     <summary>The Tasks app for Nextcloud</summary>
     <description><![CDATA[Once enabled, a new Tasks menu will appear in your Nextcloud apps menu. From there you can add and delete tasks, edit their title, description, start and due dates and mark them as important. Tasks can be shared between users. Tasks can be synchronized using CalDav (each task list is linked to an Nextcloud calendar, to sync it to your local client: Thunderbird, Evolution, KDE Kontact, iCal … - just add the calendar as a remote calendar in your client). You can download your tasks as ICS files using the download button for each calendar.]]></description>
-    <version>0.16.1</version>
+    <version>0.17.0-alpha.0</version>
     <licence>agpl</licence>
     <author mail="raimund.schluessler@mailbox.org">Raimund Schlüßler</author>
     <namespace>Tasks</namespace>
@@ -21,7 +21,7 @@
     <screenshot>https://raw.githubusercontent.com/nextcloud/tasks/master/screenshots/tasks-1.png</screenshot>
     <dependencies>
 		<php min-version="8.1" max-version="8.4" />
-        <nextcloud min-version="30" max-version="32"/>
+        <nextcloud min-version="31" max-version="33"/>
         <backend>caldav</backend>
     </dependencies>
     <navigations>
