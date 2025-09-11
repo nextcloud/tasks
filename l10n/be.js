@@ -26,6 +26,7 @@ OC.L10N.register(
     "Go back" : "Назад",
     "Close" : "Закрыць",
     "Tags" : "Тэгі",
+    "Tomorrow" : "Заўтра",
     "Canceled" : "Скасавана",
     "Details" : "Падрабязнасці",
     "Notes" : "Нататкі",
