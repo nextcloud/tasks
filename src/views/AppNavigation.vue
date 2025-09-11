@@ -73,6 +73,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 							trailing-button-icon="arrowRight"
 							:error="nameError"
 							:label="t('tasks', 'New list')"
+							:placeholder="t('tasks', 'New list')"
 							@trailing-button-click="create()"
 							@keyup="checkName($event)">
 							<Plus :size="16" />

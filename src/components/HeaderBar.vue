@@ -26,6 +26,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			<NcTextField ref="input"
 				v-model="newTaskName"
 				:label="placeholder"
+				:placeholder="placeholder"
 				autocomplete="off"
 				class="reactive"
 				trailing-button-icon="arrowRight"
