@@ -25,6 +25,7 @@ OC.L10N.register(
     "Untitled item" : "Nomsiz element",
     "Unknown calendar" : "Noma'lum kalendar",
     "Could not load deleted calendars and objects" : "Oʻchirilgan kalendarlar va obyektlarni yuklab boʻlmadi",
+    "Could not delete calendar or event" : "Taqvim yoki tadbirni oʻchirib boʻlmadi",
     "Could not restore calendar or event" : "Taqvim yoki tadbirni tiklab bo‘lmadi",
     "Do you really want to empty the trash bin?" : "Haqiqatan ham o`chirilgan fayllar qutisini bo'shatmoqchimisiz?",
     "Empty trash bin" : "Axlat qutisini bo'shatish",
