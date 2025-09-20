@@ -39,7 +39,7 @@
     "@nextcloud/router": "^3.0.1",
     "@nextcloud/vue": "9.0.0-rc.9",
     "@vueuse/components": "^13.9.0",
-    "color-convert": "^3.1.0",
+    "color-convert": "^3.1.2",
     "debounce": "^2.2.0",
     "ical.js": "^2.2.0",
     "markdown-it": "^14.1.0",
