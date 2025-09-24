@@ -1,11 +1,13 @@
 { "translations": {
     "Today" : "Today",
+    "All" : "Sve",
     "Current" : "Tekuće",
     "Completed" : "Završeno",
     "Can edit" : "Can edit",
     "Edit" : "Uredi",
     "Delete" : "Delete",
     "Unshare" : "Ukini deljenje",
+    "Empty trash bin" : "Isprazni kantu",
     "Name" : "Ime",
     "Deleted" : "Obrisano",
     "Delete permanently" : "Obriši zauvek",

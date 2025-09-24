@@ -26,6 +26,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 			<NcTextField ref="input"
 				v-model="newTaskName"
 				:label="placeholder"
+				:placeholder="placeholder"
 				autocomplete="off"
 				class="reactive"
 				trailing-button-icon="arrowRight"
@@ -58,7 +59,7 @@ import openNewTask from '../mixins/openNewTask.js'
 
 import { translate as t } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
-import NcTextField from '@nextcloud/vue/dist/Components/NcTextField.js'
+import NcTextField from '@nextcloud/vue/components/NcTextField'
 
 import Plus from 'vue-material-design-icons/Plus.vue'
 
@@ -186,26 +187,26 @@ export default {
 $breakpoint-mobile: 1024px;
 
 .header {
-	padding: 12px 15px 12px 59px;
+	padding: calc(2* var(--default-grid-baseline));
+	padding-left: calc(4 * var(--default-grid-baseline) + var(--default-clickable-area)); // leave space for the app-nav-toggle
 	position: sticky;
-	top: 0;
 	background-color: var(--color-background-dark);
 	z-index: 1000;
 	display: flex;
 
 	@media only screen and (max-width: $breakpoint-mobile) {
 		padding-right: 0;
-		padding-left: 44px;
+		padding-left: calc(2 * var(--default-grid-baseline) + var(--default-clickable-area));
 	}
 
 	&__input {
 		position: relative;
-		width: calc(100% - 88px);
-	}
+		width: 100%;
+		margin-right: calc(2 * var(--default-grid-baseline));
 
-	.sortorder,
-	.filter {
-		margin-top: 6px;
+		.input-field {
+			margin-block-start: 0 !important;
+		}
 	}
 
 	.filter {

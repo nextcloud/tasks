@@ -16,10 +16,10 @@ OC.L10N.register(
     "Restore" : "ស្ដារ​មក​វិញ",
     "Delete permanently" : "លុប​ជា​អចិន្ត្រៃយ៍",
     "Cancel" : "បោះបង់",
+    "Email" : "អ៊ីមែល",
     "Close" : "បិទ",
     "Tags" : "ស្លាក",
     "Details" : "ព័ត៌មាន​លម្អិត",
-    "Notes" : "កំណត់​ចំណាំ",
-    "Repeat" : "ធ្វើម្ដងទៀត"
+    "Notes" : "កំណត់​ចំណាំ"
 },
 "nplurals=1; plural=0;");

@@ -56,7 +56,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					{{ t('tasks', 'Cancel') }}
 				</NcButton>
 				<NcButton :disabled="loading"
-					type="primary"
+					variant="primary"
 					@click="addTask">
 					{{ t('tasks', 'Create task') }}
 				</NcButton>
@@ -92,10 +92,10 @@ import client from '../services/cdav.js'
 
 import { translate as t } from '@nextcloud/l10n'
 import { generateUrl } from '@nextcloud/router'
-import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
-import NcEmptyContent from '@nextcloud/vue/dist/Components/NcEmptyContent.js'
-import NcLoadingIcon from '@nextcloud/vue/dist/Components/NcLoadingIcon.js'
-import NcModal from '@nextcloud/vue/dist/Components/NcModal.js'
+import NcButton from '@nextcloud/vue/components/NcButton'
+import NcEmptyContent from '@nextcloud/vue/components/NcEmptyContent'
+import NcLoadingIcon from '@nextcloud/vue/components/NcLoadingIcon'
+import NcModal from '@nextcloud/vue/components/NcModal'
 
 import Check from 'vue-material-design-icons/Check.vue'
 import TextBoxOutline from 'vue-material-design-icons/TextBoxOutline.vue'

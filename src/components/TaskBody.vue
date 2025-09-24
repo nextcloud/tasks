@@ -91,6 +91,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:aria-label="t('tasks', '{complete} % completed', {complete: task.complete})"
 					:title="t('tasks', '{complete} % completed', {complete: task.complete})"
 					:color="task.calendar.color" />
+				<Bell v-if="task.alarms.length > 0" :size="20" :title="n('tasks', 'Task has one reminder', 'Task has {n} reminders', task.alarms.length, { n: task.alarms.length })" />
 				<NcActions v-if="task.deleteCountdown === null" class="reactive no-nav" menu-align="right">
 					<NcActionButton v-if="!task.calendar.readOnly"
 						:close-after-click="true"
@@ -197,20 +198,21 @@ import { startDateString } from '../utils/dateStrings.js'
 import { emit } from '@nextcloud/event-bus'
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
-import NcActions from '@nextcloud/vue/dist/Components/NcActions.js'
-import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton.js'
-import NcProgressBar from '@nextcloud/vue/dist/Components/NcProgressBar.js'
-import NcTextField from '@nextcloud/vue/dist/Components/NcTextField.js'
-import Linkify from '@nextcloud/vue/dist/Directives/Linkify.js'
+import NcActions from '@nextcloud/vue/components/NcActions'
+import NcActionButton from '@nextcloud/vue/components/NcActionButton'
+import NcProgressBar from '@nextcloud/vue/components/NcProgressBar'
+import NcTextField from '@nextcloud/vue/components/NcTextField'
+import Linkify from '@nextcloud/vue/directives/Linkify'
 
-import Delete from 'vue-material-design-icons/Delete.vue'
-import Eye from 'vue-material-design-icons/Eye.vue'
-import Pin from 'vue-material-design-icons/Pin.vue'
+import Bell from 'vue-material-design-icons/BellOutline.vue'
+import Delete from 'vue-material-design-icons/TrashCanOutline.vue'
+import Eye from 'vue-material-design-icons/EyeOutline.vue'
+import Pin from 'vue-material-design-icons/PinOutline.vue'
 import Plus from 'vue-material-design-icons/Plus.vue'
 import TextBoxOutline from 'vue-material-design-icons/TextBoxOutline.vue'
 import SortVariant from 'vue-material-design-icons/SortVariant.vue'
 import CalendarClock from 'vue-material-design-icons/CalendarClock.vue'
-import Star from 'vue-material-design-icons/Star.vue'
+import Star from 'vue-material-design-icons/StarOutline.vue'
 import Undo from 'vue-material-design-icons/Undo.vue'
 
 import { vOnClickOutside as ClickOutside } from '@vueuse/components'
@@ -234,6 +236,7 @@ export default {
 		NcActionButton,
 		NcProgressBar,
 		NcTextField,
+		Bell,
 		Delete,
 		Eye,
 		Pin,
@@ -766,7 +769,8 @@ $breakpoint-mobile: 1024px;
 
 			&__main-wrapper,
 			&__input {
-				height: 44px !important;
+				// prevent text jump on hover
+				--input-border-width-offset: calc(var(--border-width-input-focused, 2px) - var(--border-width-input, 2px)) !important;
 			}
 
 			&__input {
@@ -825,7 +829,7 @@ $breakpoint-mobile: 1024px;
 		flex-direction: row;
 		flex-wrap: nowrap;
 		align-items: center;
-		height: 44px;
+		height: var(--default-clickable-area);
 		position: relative;
 		background-color: var(--color-main-background);
 		border-top: 1px solid var(--color-border);
@@ -857,11 +861,10 @@ $breakpoint-mobile: 1024px;
 				.summary {
 					cursor: text;
 					display: inline-flex;
-					padding: 10px 10px 10px 0;
 					overflow: hidden;
 
 					span {
-						line-height: 24px;
+						line-height: var(--default-clickable-area);
 						overflow: hidden;
 						text-overflow: ellipsis;
 
@@ -904,6 +907,7 @@ $breakpoint-mobile: 1024px;
 
 			}
 			&__icons {
+				align-items: center;
 				display: flex;
 				margin-left: auto;
 
@@ -918,6 +922,7 @@ $breakpoint-mobile: 1024px;
 
 				& > .material-design-icon {
 					opacity: .5;
+					margin-inline: 4px;
 
 					&.text-box-outline-icon {
 						cursor: pointer;
@@ -1023,10 +1028,10 @@ $breakpoint-mobile: 1024px;
 	}
 
 	&__subtasks {
-		margin-left: 44px;
+		margin-left: var(--default-clickable-area);
 
 		@media only screen and (max-width: $breakpoint-mobile) {
-			margin-left: 14px;
+			margin-left: calc(0.5 * var(--default-clickable-area));
 		}
 	}
 }

@@ -49,9 +49,9 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 import MultiselectOption from './MultiselectOption.vue'
 
 import { translate as t } from '@nextcloud/l10n'
-import NcSelect from '@nextcloud/vue/dist/Components/NcSelect.js'
+import NcSelect from '@nextcloud/vue/components/NcSelect'
 
-import TagMultiple from 'vue-material-design-icons/TagMultiple.vue'
+import TagMultiple from 'vue-material-design-icons/TagMultipleOutline.vue'
 
 export default {
 	components: {
@@ -82,17 +82,17 @@ export default {
 		},
 	},
 	emits: [
-		'add-tag',
-		'set-tags',
+		'addTag',
+		'setTags',
 	],
 	methods: {
 		t,
 
 		addTag(tag) {
-			this.$emit('add-tag', tag)
+			this.$emit('addTag', tag)
 		},
 		setTags(tags) {
-			this.$emit('set-tags', tags)
+			this.$emit('setTags', tags)
 		},
 	},
 }
@@ -104,27 +104,28 @@ export default {
 	border-bottom: 1px solid var(--color-border);
 	width: 100%;
 	color: var(--color-text-lighter);
+	padding: 0 6px;
 
 	.multiselect__icon {
 		display: flex;
-		height: 44px;
-		width: 44px;
+		height: var(--default-clickable-area);
+		width: var(--default-clickable-area);
 		justify-content: center;
-		flex-basis: 44px;
+		flex-basis: var(--default-clickable-area);
 		flex-shrink: 0;
 	}
 
 	:deep(.v-select.select) {
 		width: 100%;
-		margin-left: -44px;
+		margin: 0;
+		margin-left: calc(4px - var(--default-clickable-area));
 
 		.vs {
 			&__dropdown-toggle {
 				margin:  0;
 				padding: 0;
 				border: none;
-				margin-left: 44px;
-				margin-bottom: 4px;
+				margin-left: var(--default-clickable-area);
 				outline: none !important;
 			}
 
@@ -144,7 +145,6 @@ export default {
 				&::placeholder {
 					color: var(--color-text-lighter);
 					opacity: 1;
-					font-weight: bold;
 				}
 			}
 		}

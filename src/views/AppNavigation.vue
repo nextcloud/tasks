@@ -42,9 +42,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						:size="20" />
 				</template>
 				<template #counter>
-					<NcCounterBubble v-show="collectionCount(collection.id)">
-						{{ counterFormatter(collectionCount(collection.id)) }}
-					</NcCounterBubble>
+					<NcCounterBubble v-show="collectionCount(collection.id)" :count="collectionCount(collection.id)" />
 				</template>
 			</NcAppNavigationItem>
 			<Sortable class="draggable-container"
@@ -70,16 +68,12 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<div class="app-navigation-entry-edit">
 						<NcTextField ref="newListInput"
 							v-model="newCalendarName"
-							v-tooltip="{
-								content: tooltipMessage,
-								shown: showTooltip('list_new'),
-								trigger: 'manual'
-							}"
 							type="text"
 							:show-trailing-button="newCalendarName !== ''"
 							trailing-button-icon="arrowRight"
 							:error="nameError"
 							:label="t('tasks', 'New list')"
+							:placeholder="t('tasks', 'New list')"
 							@trailing-button-click="create()"
 							@keyup="checkName($event)">
 							<Plus :size="16" />
@@ -104,18 +98,17 @@ import Trashbin from '../components/AppNavigation/Trashbin.vue'
 
 import { showError } from '@nextcloud/dialogs'
 import { translate as t } from '@nextcloud/l10n'
-import NcAppNavigation from '@nextcloud/vue/dist/Components/NcAppNavigation.js'
-import NcAppNavigationItem from '@nextcloud/vue/dist/Components/NcAppNavigationItem.js'
-import NcCounterBubble from '@nextcloud/vue/dist/Components/NcCounterBubble.js'
-import NcTextField from '@nextcloud/vue/dist/Components/NcTextField.js'
-import Tooltip from '@nextcloud/vue/dist/Directives/Tooltip.js'
+import NcAppNavigation from '@nextcloud/vue/components/NcAppNavigation'
+import NcAppNavigationItem from '@nextcloud/vue/components/NcAppNavigationItem'
+import NcCounterBubble from '@nextcloud/vue/components/NcCounterBubble'
+import NcTextField from '@nextcloud/vue/components/NcTextField'
 
 import CalendarToday from 'vue-material-design-icons/CalendarToday.vue'
 import CalendarWeek from 'vue-material-design-icons/CalendarWeek.vue'
 import Check from 'vue-material-design-icons/Check.vue'
 import CircleOutline from 'vue-material-design-icons/CircleOutline.vue'
 import Plus from 'vue-material-design-icons/Plus.vue'
-import Star from 'vue-material-design-icons/Star.vue'
+import Star from 'vue-material-design-icons/StarOutline.vue'
 import TrendingUp from 'vue-material-design-icons/TrendingUp.vue'
 
 import { Sortable } from 'sortablejs-vue3'
@@ -143,7 +136,6 @@ export default {
 	},
 	directives: {
 		ClickOutside,
-		Tooltip,
 	},
 	inject: ['$OCA'],
 	data() {
@@ -156,8 +148,6 @@ export default {
 			nameError: false,
 			newCalendarName: '',
 			selectedColor: '',
-			tooltipMessage: '',
-			tooltipTarget: '',
 		}
 	},
 	computed: {
@@ -185,22 +175,6 @@ export default {
 			'setSetting',
 			'setCalendarOrder',
 		]),
-
-		/**
-		 * Format the task counter
-		 *
-		 * @param {number} count The number of tasks
-		 */
-		counterFormatter(count) {
-			switch (false) {
-			case count !== 0:
-				return ''
-			case count < 999:
-				return '999+'
-			default:
-				return count
-			}
-		},
 
 		/**
 		 * Indicate that we drag a calendar item
@@ -375,9 +349,6 @@ export default {
 				return this.collectionCount(collection.id) < 1
 			}
 		},
-		showTooltip(target) {
-			return this.tooltipTarget === target
-		},
 		startCreate(e) {
 			if (this.$OCA.Theming) {
 				this.selectedColor = this.$OCA.Theming.color
@@ -409,12 +380,9 @@ export default {
 		},
 		checkName(event) {
 			const check = this.isNameAllowed(this.newCalendarName)
-			this.tooltipMessage = check.msg
 			if (!check.allowed) {
-				this.tooltipTarget = 'list_new'
 				this.nameError = true
 			} else {
-				this.tooltipTarget = ''
 				this.nameError = false
 			}
 			if (event.keyCode === 13) {
@@ -422,7 +390,6 @@ export default {
 			}
 			if (event.keyCode === 27) {
 				event.preventDefault()
-				this.tooltipTarget = ''
 				this.creating = false
 				this.editing = false
 				this.nameError = false

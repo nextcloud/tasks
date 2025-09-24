@@ -52,7 +52,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 import CalendarPickerOption from './CalendarPickerOption.vue'
 
 import { translate as t } from '@nextcloud/l10n'
-import NcSelect from '@nextcloud/vue/dist/Components/NcSelect.js'
+import NcSelect from '@nextcloud/vue/components/NcSelect'
 
 export default {
 	components: {
@@ -73,7 +73,7 @@ export default {
 			required: false,
 		},
 	},
-	emits: ['change-calendar'],
+	emits: ['changeCalendar'],
 	computed: {
 		isDisabled() {
 			return this.calendars.length < 2 || this.disabled
@@ -89,13 +89,15 @@ export default {
 		t,
 
 		stubCalendar(calendar) {
-			return {
-				id: calendar.url,
-				displayName: calendar.displayName,
-				color: calendar.color,
-				isSharedWithMe: calendar.isSharedWithMe,
-				owner: calendar.owner,
-			}
+			return calendar
+				? {
+					id: calendar.url,
+					displayName: calendar.displayName,
+					color: calendar.color,
+					isSharedWithMe: calendar.isSharedWithMe,
+					owner: calendar.owner,
+				}
+				: null
 		},
 
 		/**
@@ -108,7 +110,7 @@ export default {
 			if (!calendar) {
 				return
 			}
-			this.$emit('change-calendar', calendar)
+			this.$emit('changeCalendar', calendar)
 		},
 	},
 }
@@ -119,9 +121,11 @@ export default {
 	display: flex;
 	border-bottom: 1px solid var(--color-border);
 	width: 100%;
+	padding: 0 6px;
 
 	:deep(.v-select.select) {
 		width: 100%;
+		margin: 0 !important;
 
 		.vs {
 			&__dropdown-menu,
@@ -140,7 +144,7 @@ export default {
 			}
 
 			&__selected {
-				height: 44px;
+				height: var(--default-clickable-area);
 				margin:  0;
 				padding: 0;
 				border: none;
@@ -159,9 +163,8 @@ export default {
 			&__search {
 				padding-left: 44px;
 				margin: 0;
-				height: 44px !important;
-				line-height: 44px;
-				font-weight: bold;
+				height: var(--default-clickable-area) !important;
+				line-height: var(--default-clickable-area);
 			}
 
 			&__actions {

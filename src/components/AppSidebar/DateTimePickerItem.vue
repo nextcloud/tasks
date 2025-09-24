@@ -36,27 +36,23 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				{{ propertyString }}
 			</span>
 			<div v-if="editing" class="content__input">
-				<NcDateTimePicker :value="newValue"
-					:lang="lang"
-					:format="dateFormat"
+				<NcDateTimePicker :model-value="newValue"
 					:clearable="false"
 					:append-to-body="true"
 					:show-week-number="true"
 					type="date"
 					:placeholder="t('tasks', 'Set date')"
 					class="date"
-					@change="setDate" />
+					@update:model-value="setDate" />
 				<NcDateTimePicker v-if="!allDay"
-					:value="newValue"
-					:lang="lang"
-					:format="timeFormat"
+					:model-value="newValue"
 					:clearable="false"
 					:append-to-body="true"
-					:time-picker-options="timePickerOptions"
+					:minute-step="30"
 					type="time"
 					:placeholder="t('tasks', 'Set time')"
 					class="time"
-					@change="setTime" />
+					@update:model-value="setTime" />
 			</div>
 		</div>
 		<div class="item__actions">
@@ -84,8 +80,7 @@ import editableItem from '../../mixins/editableItem.js'
 import { overdue } from '../../store/storeHelper.js'
 
 import { translate as t } from '@nextcloud/l10n'
-import moment from '@nextcloud/moment'
-import NcDateTimePicker from '@nextcloud/vue/dist/Components/NcDateTimePicker.js'
+import NcDateTimePicker from '@nextcloud/vue/components/NcDateTimePicker'
 
 export default {
 	name: 'DateTimePickerItem',
@@ -115,31 +110,20 @@ export default {
 			type: Boolean,
 			default: false,
 		},
-	},
-	data() {
-		return {
-			lang: {
-				formatLocale: {
-					firstDayOfWeek: window.firstDay,
-				},
-				days: window.dayNamesShort, // provided by nextcloud
-				months: window.monthNamesShort, // provided by nextcloud
-			},
-			dateFormat: moment.localeData().longDateFormat('L'),
-			timeFormat: moment.localeData().longDateFormat('LT'),
-			timePickerOptions: {
-				start: '00:00',
-				step: '00:30',
-				end: '23:30',
-			},
-		}
+		/**
+		 * Whether the date can be considered 'overdue'
+		 */
+		checkOverdue: {
+			type: Boolean,
+			default: true,
+		},
 	},
 	computed: {
 		isValid() {
 			return this.date.isValid()
 		},
 		isOverdue() {
-			return overdue(this.date)
+			return this.checkOverdue && overdue(this.date)
 		},
 	},
 	methods: {
@@ -154,12 +138,8 @@ export default {
 		checkOutsideClick($event) {
 			/**
 			 * If the click originates from the datepicker, we do nothing.
-			 * Can be removed once https://github.com/nextcloud/nextcloud-vue/pull/1881
-			 * is merged and the datepicker is not attached to body anymore.
 			 */
-			if ($event.target.closest('.mx-datepicker-main')
-				|| $event.target.closest('.mx-table')
-				|| $event.target.classList.contains('mx-btn')) {
+			if ($event.target.closest('.dp__outer_menu_wrap')) {
 				return
 			}
 			this.setValue()
@@ -199,7 +179,7 @@ $blue: #4271a6;
 
 .property__item {
 	border-bottom: 1px solid var(--color-border);
-	padding: 0;
+	padding: 0 6px;
 	position: relative;
 	margin-bottom: 0;
 	width: 100%;
@@ -217,16 +197,17 @@ $blue: #4271a6;
 	.item {
 		&__content {
 			display: flex;
-			line-height: 44px;
+			line-height: var(--default-clickable-area);
 			min-width: 0;
 			flex-grow: 1;
+			gap: 0 4px;
 
 			.content {
 				&__icon {
 					display: flex;
-					height: 44px;
-					width: 44px;
-					min-width: 44px;
+					height: var(--default-clickable-area);
+					width: var(--default-clickable-area);
+					min-width: var(--default-clickable-area);
 					justify-content: center;
 
 					.material-design-icon__svg {
@@ -235,7 +216,6 @@ $blue: #4271a6;
 				}
 
 				&__name {
-					font-weight: bold;
 					flex-grow: 1;
 					padding-right: 14px;
 					overflow: hidden;
@@ -247,8 +227,9 @@ $blue: #4271a6;
 					display: flex;
 					flex-grow: 1;
 					flex-wrap: wrap;
+					grid-gap: var(--default-grid-baseline);
 
-					.mx-datepicker {
+					.vue-date-time-picker__wrapper {
 						width: auto;
 						&.date {
 							min-width: 100px;
@@ -261,6 +242,9 @@ $blue: #4271a6;
 							flex-shrink: 2;
 							flex-basis: 65px;
 							flex-grow: 2;
+						}
+						:deep(input) {
+							margin: 0;
 						}
 					}
 				}

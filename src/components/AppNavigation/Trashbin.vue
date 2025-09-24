@@ -48,7 +48,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 							<NcButton class="table__header sort-button sort-button--summary"
 								:class="{ 'sort-button--active': sortOrder === 'summary' }"
 								alignment="center-reverse"
-								type="tertiary"
+								variant="tertiary"
 								@click="setSortOrder('summary')">
 								<template #icon>
 									<MenuDown v-if="sortDirection && sortOrder === 'summary'" />
@@ -59,7 +59,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 							<NcButton class="table__header table__header--deletedAt sort-button sort-button--deletedAt"
 								:class="{ 'sort-button--active': sortOrder === 'deletedAt' }"
 								alignment="center"
-								type="tertiary"
+								variant="tertiary"
 								@click="setSortOrder('deletedAt')">
 								<template #icon>
 									<MenuDown v-if="sortDirection && sortOrder === 'deletedAt'" />
@@ -108,7 +108,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 							<p v-if="retentionDuration">
 								{{ n('tasks', 'Elements in the trash bin are deleted after {numDays} day', 'Elements in the trash bin are deleted after {numDays} days', retentionDuration, { numDays: retentionDuration }) }}
 							</p>
-							<NcButton type="primary" @click="onEmptyTrashBin()">
+							<NcButton variant="primary" @click="onEmptyTrashBin()">
 								<template #icon>
 									<DeleteForever :size="20" />
 								</template>
@@ -130,21 +130,22 @@ import { sort } from '../../store/storeHelper.js'
 import { showError } from '@nextcloud/dialogs'
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
-import NcAppNavigationItem from '@nextcloud/vue/dist/Components/NcAppNavigationItem.js'
-import NcActions from '@nextcloud/vue/dist/Components/NcActions.js'
-import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton.js'
-import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
-import NcDateTime from '@nextcloud/vue/dist/Components/NcDateTime.js'
-import NcEmptyContent from '@nextcloud/vue/dist/Components/NcEmptyContent.js'
-import NcLoadingIcon from '@nextcloud/vue/dist/Components/NcLoadingIcon.js'
-import NcModal from '@nextcloud/vue/dist/Components/NcModal.js'
+import NcAppNavigationItem from '@nextcloud/vue/components/NcAppNavigationItem'
+import NcActions from '@nextcloud/vue/components/NcActions'
+import NcActionButton from '@nextcloud/vue/components/NcActionButton'
+import NcButton from '@nextcloud/vue/components/NcButton'
+import NcDateTime from '@nextcloud/vue/components/NcDateTime'
+import NcEmptyContent from '@nextcloud/vue/components/NcEmptyContent'
+import NcLoadingIcon from '@nextcloud/vue/components/NcLoadingIcon'
+import NcModal from '@nextcloud/vue/components/NcModal'
 
-import Delete from 'vue-material-design-icons/Delete.vue'
-import DeleteForever from 'vue-material-design-icons/DeleteForever.vue'
+import Delete from 'vue-material-design-icons/TrashCanOutline.vue'
+import DeleteForever from 'vue-material-design-icons/DeleteForeverOutline.vue'
 import MenuDown from 'vue-material-design-icons/MenuDown.vue'
 import MenuUp from 'vue-material-design-icons/MenuUp.vue'
 import Undo from 'vue-material-design-icons/Undo.vue'
 
+import { toRaw } from 'vue'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -207,7 +208,7 @@ export default {
 				}
 				let subline = vobject.calendar?.displayName || t('tasks', 'Unknown calendar')
 				if (vobject.isEvent) {
-					const event = vobject?.calendarComponent.getFirstComponent('VEVENT')
+					const event = toRaw(vobject?.calendarComponent.getFirstComponent('VEVENT'))
 					if (event?.startDate.jsDate && event?.isAllDay()) {
 						subline += ' · ' + moment(event.startDate.jsDate).format('LL')
 					} else if (event?.startDate.jsDate) {

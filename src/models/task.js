@@ -26,8 +26,8 @@
 
 import moment from '@nextcloud/moment'
 
-import { v4 as uuid } from 'uuid'
 import ICAL from 'ical.js'
+import { randomUUID } from '../utils/crypto.js'
 
 export default class Task {
 
@@ -83,8 +83,11 @@ export default class Task {
 
 		if (!this.vtodo.hasProperty('uid')) {
 			console.debug('This task did not have a proper uid. Setting a new one for ', this)
-			this.vtodo.addPropertyWithValue('uid', uuid())
+			this.vtodo.addPropertyWithValue('uid', randomUUID())
 		}
+
+		// Define components
+		this._alarms = this.getAlarms()
 
 		// Define properties, so Vue reacts to changes of them
 		this._uid = this.vtodo.getFirstPropertyValue('uid') || ''
@@ -306,12 +309,14 @@ export default class Task {
 		}
 	}
 
-	setCompleted(completed) {
+	setCompleted(completed, completedDate = null) {
 		if (completed) {
-			const now = ICAL.Time.fromJSDate(new Date(), true)
-			this.vtodo.updatePropertyWithValue('completed', now)
-			this._completedDate = now
-			this._completedDateMoment = moment(now, 'YYYYMMDDTHHmmssZ')
+			if (completedDate === null) {
+				completedDate = ICAL.Time.fromJSDate(new Date(), true)
+			}
+			this.vtodo.updatePropertyWithValue('completed', completedDate)
+			this._completedDate = completedDate
+			this._completedDateMoment = moment(completedDate, 'YYYYMMDDTHHmmssZ')
 		} else {
 			this.vtodo.removeProperty('completed')
 			this._completedDate = null
@@ -323,6 +328,20 @@ export default class Task {
 
 	get completedDate() {
 		return this._completedDate
+	}
+
+	set completedDate(completedDate) {
+		if (completedDate) {
+			this.setCompleted(true, completedDate)
+			this.setComplete(100)
+			this.setStatus('COMPLETED')
+		} else {
+			this.setCompleted(false)
+			if (this.complete === 100) {
+				this.setComplete(99)
+				this.setStatus('IN-PROCESS')
+			}
+		}
 	}
 
 	get completedDateMoment() {
@@ -561,8 +580,64 @@ export default class Task {
 		this._loaded = loadedCompleted
 	}
 
-	get reminder() {
-		return null
+	get alarms() {
+		return this._alarms
+	}
+
+	getAlarms() {
+		return this.vtodo.getAllSubcomponents('valarm') || []
+	}
+
+	/**
+	 * Add an alarm
+	 *
+	 * @param {{ action: "AUDIO"|"DISPLAY"|"EMAIL"|"PROCEDURE", repeat: number, trigger: { value: ICAL.Duration|ICAL.Time, parameter: object }}} alarm The alarm
+	 */
+	addAlarm({ action, description, duration, repeat, trigger }) {
+		const valarm = new ICAL.Component('valarm')
+		valarm.addPropertyWithValue('action', action)
+		valarm.addPropertyWithValue('description', description)
+		if (repeat > 1) {
+			valarm.addPropertyWithValue('repeat', repeat)
+			valarm.addPropertyWithValue('duration', duration)
+		}
+		const triggerProperty = valarm.addPropertyWithValue('trigger', trigger.value)
+		if (trigger.parameter) {
+			triggerProperty.setParameter(trigger.parameter.name, trigger.parameter.value)
+		}
+		this.vtodo.addSubcomponent(valarm)
+
+		this.updateLastModified()
+		this._alarms = this.getAlarms()
+	}
+
+	updateAlarm({ action, repeat, trigger }, index) {
+		const valarms = this.vtodo.getAllSubcomponents('valarm')
+		const valarmToUpdate = valarms[index]
+
+		if (valarmToUpdate) {
+			valarmToUpdate.updatePropertyWithValue('trigger', trigger.value)
+
+			this.updateLastModified()
+			this._alarms = this.getAlarms()
+		}
+	}
+
+	/**
+	 * Remove an alarm
+	 *
+	 * @param {number} index The index of the alarm-list
+	 */
+	removeAlarm(index) {
+		const valarms = this.vtodo.getAllSubcomponents('valarm')
+		const valarmToDelete = valarms[index]
+
+		if (valarmToDelete) {
+			this.vtodo.removeSubcomponent(valarms[index])
+
+			this.updateLastModified()
+			this._alarms = this.getAlarms()
+		}
 	}
 
 	/**
@@ -588,7 +663,7 @@ export default class Task {
 	/**
 	 * Set the tags
 	 *
-	 * * @param {string[]} newTags The new tags to set
+	 * @param {string[]} newTags The new tags to set
 	 * @memberof Task
 	 */
 	set tags(newTags) {

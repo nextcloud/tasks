@@ -64,7 +64,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 import editableItem from '../../mixins/editableItem.js'
 
 import { translate as t } from '@nextcloud/l10n'
-import Linkify from '@nextcloud/vue/dist/Directives/Linkify.js'
+import Linkify from '@nextcloud/vue/directives/Linkify'
 
 export default {
 	name: 'TextItem',
@@ -113,6 +113,7 @@ export default {
 	width: 100%;
 	color: var(--color-text-lighter);
 	display: flex;
+	padding: 0 6px;
 
 	& * {
 		cursor: pointer;
@@ -121,16 +122,17 @@ export default {
 	.item {
 		&__content {
 			display: flex;
-			line-height: 44px;
+			line-height: var(--default-clickable-area);
 			min-width: 0;
 			flex-grow: 1;
+			gap: 0 4px;
 
 			.content {
 				&__icon {
 					display: flex;
-					height: 44px;
-					width: 44px;
-					min-width: 44px;
+					height: var(--default-clickable-area);
+					width: var(--default-clickable-area);
+					min-width: var(--default-clickable-area);
 					justify-content: center;
 
 					.material-design-icon__svg {
@@ -139,7 +141,6 @@ export default {
 				}
 
 				&__name {
-					font-weight: bold;
 					flex-grow: 1;
 					padding-right: 14px;
 					overflow: hidden;
@@ -155,6 +156,7 @@ export default {
 
 					input {
 						flex-grow: 1;
+						margin: 0;
 					}
 				}
 			}

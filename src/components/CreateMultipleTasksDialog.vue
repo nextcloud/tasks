@@ -28,7 +28,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					{{ t('tasks', 'Cancel') }}
 				</NcButton>
 				<NcButton ref="createButton"
-					type="primary"
+					variant="primary"
 					@click="addTasks">
 					{{ t('tasks', 'Create tasks') }}
 				</NcButton>
@@ -57,10 +57,10 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 <script>
 
 import { translate as t } from '@nextcloud/l10n'
-import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
-import NcEmptyContent from '@nextcloud/vue/dist/Components/NcEmptyContent.js'
-import NcLoadingIcon from '@nextcloud/vue/dist/Components/NcLoadingIcon.js'
-import NcModal from '@nextcloud/vue/dist/Components/NcModal.js'
+import NcButton from '@nextcloud/vue/components/NcButton'
+import NcEmptyContent from '@nextcloud/vue/components/NcEmptyContent'
+import NcLoadingIcon from '@nextcloud/vue/components/NcLoadingIcon'
+import NcModal from '@nextcloud/vue/components/NcModal'
 
 import Check from 'vue-material-design-icons/Check.vue'
 

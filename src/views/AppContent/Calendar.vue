@@ -32,7 +32,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					collection-id="uncompleted" />
 				<NcButton v-if="closedCount(calendarId)"
 					alignment="center-reverse"
-					type="tertiary"
+					variant="tertiary"
 					class="reactive heading"
 					@click="toggleHidden">
 					<template #icon>
@@ -61,7 +61,7 @@ import LoadCompletedButton from '../../components/LoadCompletedButton.vue'
 import TaskDragContainer from '../../components/TaskDragContainer.vue'
 import './task-list.scss'
 
-import NcButton from '@nextcloud/vue/dist/Components/NcButton.js'
+import NcButton from '@nextcloud/vue/components/NcButton'
 
 import ChevronDown from 'vue-material-design-icons/ChevronDown.vue'
 import ChevronUp from 'vue-material-design-icons/ChevronUp.vue'

@@ -12,6 +12,7 @@ OC.L10N.register(
     "Name" : "නම",
     "Restore" : "ප්‍රතිෂ්ථාපනය",
     "Cancel" : "අවලංගු කරන්න",
+    "Go back" : "ආපසු යන්න",
     "Close" : "වසන්න",
     "Tomorrow" : "හෙට",
     "Details" : "විස්තර",

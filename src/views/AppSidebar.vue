@@ -173,6 +173,25 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:placeholder="t('tasks', 'Select a priority')"
 					icon="IconStar"
 					@change-value="changePriority" />
+				<DateTimePickerItem v-show="task.completed"
+					:date="task.completedDateMoment"
+					:value="newCompletedDate"
+					:property-string="completedString"
+					:read-only="readOnly"
+					:task="task"
+					:check-overdue="false"
+					@set-value="changeCompletedDate">
+					<template #icon>
+						<CalendarCheck :size="20" />
+					</template>
+				</DateTimePickerItem>
+				<MultiselectItem v-show="!readOnly || priority"
+					:value="priorityOptions.find( _ => _.value === priority )"
+					:options="priorityOptions"
+					:disabled="readOnly"
+					:placeholder="t('tasks', 'Select a priority')"
+					icon="IconStar"
+					@change-value="changePriority" />
 				<SliderItem v-show="!readOnly || task.complete"
 					:value="task.complete"
 					:property-string="completeString"
@@ -216,6 +235,18 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					icon="TagMultiple"
 					@add-tag="updateTag"
 					@set-tags="updateTags" />
+				<AlarmList :alarms="task.alarms"
+					:has-start-date="hasStartDate"
+					:has-due-date="hasDueDate"
+					:all-day="allDay"
+					:read-only="readOnly"
+					@add-alarm="addAlarmItem"
+					@update-alarm="updateAlarmItem"
+					@remove-alarm="removeAlarmItem">
+					<template #icon>
+						<Bell :size="20" />
+					</template>
+				</AlarmList>
 			</div>
 		</NcAppSidebarTab>
 		<NcEmptyContent v-else :description="taskStatusLabel">
@@ -238,26 +269,11 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:task="task"
 				@set-value="({task, value}) => setNote({ task, note: value })" />
 		</NcAppSidebarTab>
-		<!-- <NcAppSidebarTab v-if="task"
-			id="app-sidebar-tab-reminder"
-			class="app-sidebar-tab"
-			icon="icon-reminder"
-			:name="t('tasks', 'Reminders')"
-			:order="2">
-			Reminders
-		</NcAppSidebarTab>
-		<NcAppSidebarTab v-if="task"
-			id="app-sidebar-tab-repeat"
-			class="app-sidebar-tab"
-			icon="icon-repeat"
-			:name="t('tasks', 'Repeat')"
-			:order="3">
-			Repeat
-		</NcAppSidebarTab> -->
 	</NcAppSidebar>
 </template>
 
 <script>
+import AlarmList from '../components/AppSidebar/Alarm/AlarmList.vue'
 import CheckboxItem from '../components/AppSidebar/CheckboxItem.vue'
 import DateTimePickerItem from '../components/AppSidebar/DateTimePickerItem.vue'
 import CalendarPickerItem from '../components/AppSidebar/CalendarPickerItem.vue'
@@ -274,26 +290,30 @@ import { startDateString, dueDateString } from '../utils/dateStrings.js'
 import { subscribe, unsubscribe } from '@nextcloud/event-bus'
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
-import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton.js'
-import NcActionLink from '@nextcloud/vue/dist/Components/NcActionLink.js'
-import NcEmptyContent from '@nextcloud/vue/dist/Components/NcEmptyContent.js'
-import NcAppSidebar from '@nextcloud/vue/dist/Components/NcAppSidebar.js'
-import NcAppSidebarTab from '@nextcloud/vue/dist/Components/NcAppSidebarTab.js'
-import NcLoadingIcon from '@nextcloud/vue/dist/Components/NcLoadingIcon.js'
+import NcActionButton from '@nextcloud/vue/components/NcActionButton'
+import NcActionLink from '@nextcloud/vue/components/NcActionLink'
+import NcEmptyContent from '@nextcloud/vue/components/NcEmptyContent'
+import NcAppSidebar from '@nextcloud/vue/components/NcAppSidebar'
+import NcAppSidebarTab from '@nextcloud/vue/components/NcAppSidebarTab'
+import NcLoadingIcon from '@nextcloud/vue/components/NcLoadingIcon'
 import { generateUrl } from '@nextcloud/router'
 
+import Bell from 'vue-material-design-icons/BellOutline.vue'
 import Calendar from 'vue-material-design-icons/Calendar.vue'
+import CalendarCheck from 'vue-material-design-icons/CalendarCheck.vue'
 import CalendarEnd from 'vue-material-design-icons/CalendarEnd.vue'
 import CalendarStart from 'vue-material-design-icons/CalendarStart.vue'
-import Delete from 'vue-material-design-icons/Delete.vue'
-import Download from 'vue-material-design-icons/Download.vue'
+import Delete from 'vue-material-design-icons/TrashCanOutline.vue'
+import Download from 'vue-material-design-icons/TrayArrowDown.vue'
 import InformationOutline from 'vue-material-design-icons/InformationOutline.vue'
 import Magnify from 'vue-material-design-icons/Magnify.vue'
-import MapMarker from 'vue-material-design-icons/MapMarker.vue'
-import Pencil from 'vue-material-design-icons/Pencil.vue'
+import MapMarker from 'vue-material-design-icons/MapMarkerOutline.vue'
+import Pencil from 'vue-material-design-icons/PencilOutline.vue'
 import Percent from 'vue-material-design-icons/Percent.vue'
 import Pin from 'vue-material-design-icons/Pin.vue'
 import PinOff from 'vue-material-design-icons/PinOff.vue'
+import Pin from 'vue-material-design-icons/PinOutline.vue'
+import PinOff from 'vue-material-design-icons/PinOffOutline.vue'
 import TextBoxOutline from 'vue-material-design-icons/TextBoxOutline.vue'
 import Undo from 'vue-material-design-icons/Undo.vue'
 import Web from 'vue-material-design-icons/Web.vue'
@@ -307,11 +327,14 @@ export default {
 		NcActionButton,
 		NcActionLink,
 		NcLoadingIcon,
+		AlarmList,
 		CheckboxItem,
 		DateTimePickerItem,
+		Bell,
 		Calendar,
 		CalendarEnd,
 		CalendarStart,
+		CalendarCheck,
 		Delete,
 		Download,
 		InformationOutline,
@@ -541,6 +564,18 @@ export default {
 			}
 			return reference.toDate()
 		},
+		/**
+		 * Initializes the completed date of a task
+		 *
+		 * @return {Date|null} The completed date moment
+		 */
+		 newCompletedDate() {
+			const completedDate = this.task.completedDateMoment
+			if (completedDate.isValid()) {
+				return completedDate.toDate()
+			}
+			return null
+		},
 		taskStatusLabel() {
 			return this.loading ? t('tasks', 'Loading task from server.') : t('tasks', 'Task not found!')
 		},
@@ -566,6 +601,12 @@ export default {
 			} else {
 				return !!this.$store.state.settings.settings.allDay
 			}
+		},
+		hasStartDate() {
+			return !!this.task.start
+		},
+		hasDueDate() {
+			return !!this.task.due
 		},
 		showInCalendar() {
 			// Only tasks with a due date show up in the calendar
@@ -720,10 +761,14 @@ export default {
 			'setLocation',
 			'setUrl',
 			'setPercentComplete',
+			'addAlarm',
+			'removeAlarm',
+			'updateAlarm',
 			'setTags',
 			'addTag',
 			'setDue',
 			'setStart',
+			'setCompletedDate',
 			'toggleAllDay',
 			'moveTask',
 			'setClassification',
@@ -832,6 +877,23 @@ export default {
 			this.setDue({ task, due, allDay: this.allDay })
 		},
 
+		/**
+		 * Sets the completed date to the given Date or to null
+		 *
+		 * @param {object} context The data object
+		 * @param {Task} context.task The task for which to set the date
+		 * @param {Date|null} context.value The new completed date
+		 */
+		 changeCompletedDate({ task, value: completedDate }) {
+			if (completedDate) {
+				completedDate = moment(completedDate)
+			}
+			if (this.task.completedDateMoment.isSame(completedDate)) {
+				return
+			}
+			this.setCompletedDate({ task, completedDate })
+		},
+
 		changeClass(classification) {
 			this.setClassification({ task: this.task, classification: classification.type })
 		},
@@ -860,6 +922,34 @@ export default {
 		 */
 		updateTag(tag) {
 			this.addTag({ task: this.task, tag })
+		},
+
+		/**
+		 * Adds an alarm to the task
+		 *
+		 * @param {object} alarm The alarm to add
+		 */
+		addAlarmItem(alarm) {
+			this.addAlarm({ task: this.task, alarm })
+		},
+
+		/**
+		 * Updates an alarm
+		 *
+		 * @param {object} alarm The alarm
+		 * @param {number} index The index of the alarm-item to update
+		 */
+		updateAlarmItem(alarm, index) {
+			this.updateAlarm({ task: this.task, alarm, index })
+		},
+
+		/**
+		 * Removes an alarm
+		 *
+		 * @param {number} index The index of the alarm-item to remove
+		 */
+		removeAlarmItem(index) {
+			this.removeAlarm({ task: this.task, index })
 		},
 
 		async changeCalendar(calendar) {
