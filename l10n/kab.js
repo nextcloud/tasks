@@ -13,6 +13,7 @@ OC.L10N.register(
     "Cancel" : "Sefsex",
     "Notification" : "Ilɣa",
     "Email" : "Imayl",
+    "Go back" : "Tuɣalin",
     "Close" : "Mdel",
     "Tags" : "Tibzimin",
     "Details" : "Talqayt"
