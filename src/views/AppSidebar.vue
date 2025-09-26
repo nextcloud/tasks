@@ -234,9 +234,9 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					icon="TagMultiple"
 					@add-tag="updateTag"
 					@set-tags="updateTags" />
-				<AlarmList :alarms="task.alarms"
-					:has-start-date="hasStartDate"
-					:has-due-date="hasDueDate"
+				<AlarmList :alarms="alarms"
+					:start-date="task.start"
+					:due-date="task.due"
 					:all-day="allDay"
 					:read-only="readOnly"
 					@add-alarm="addAlarmItem"
@@ -282,7 +282,7 @@ import TagsItem from '../components/AppSidebar/TagsItem.vue'
 import TextItem from '../components/AppSidebar/TextItem.vue'
 import NotesItem from '../components/AppSidebar/NotesItem.vue'
 import TaskCheckbox from '../components/TaskCheckbox.vue'
-// import TaskStatusDisplay from '../components/TaskStatusDisplay'
+import { mapICALAlarmsToAlarmObjects } from '../models/alarm.js'
 import Task from '../models/task.js'
 import { startDateString, dueDateString } from '../utils/dateStrings.js'
 
@@ -354,7 +354,6 @@ export default {
 		CalendarPickerItem,
 		NotesItem,
 		TaskCheckbox,
-		// TaskStatusDisplay,
 	},
 	/**
 	 * Before we navigate to a new task, we save possible edits to the task summary.
@@ -409,6 +408,9 @@ export default {
 		},
 		task() {
 			return this.getTaskByRoute(this.$route)
+		},
+		alarms() {
+			return mapICALAlarmsToAlarmObjects(this.task.alarms)
 		},
 		summary() {
 			return this.task ? this.task.summary : ''
@@ -600,12 +602,6 @@ export default {
 			} else {
 				return !!this.$store.state.settings.settings.allDay
 			}
-		},
-		hasStartDate() {
-			return !!this.task.start
-		},
-		hasDueDate() {
-			return !!this.task.due
 		},
 		showInCalendar() {
 			// Only tasks with a due date show up in the calendar
