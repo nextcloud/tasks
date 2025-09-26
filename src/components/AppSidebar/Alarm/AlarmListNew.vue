@@ -4,7 +4,8 @@
 -->
 
 <template>
-	<NcActions type="tertiary"
+	<NcActions ref="actions"
+		type="tertiary"
 		:force-name="true"
 		:force-menu="true"
 		:menu-name="t('tasks', 'Add reminder')">
@@ -208,13 +209,12 @@ export default {
 		},
 
 		onBackToMenuClick() {
-			this.startDateMenuIsOpen = false
-			this.dueDateMenuIsOpen = false
-			this.chooseDateTimeMenuIsOpen = false
+			this.resetState()
 		},
 
 		onAlarmOptionClick(alarm) {
 			this.$emit('addAlarm', alarm)
+			this.resetState()
 		},
 
 		onChooseDateAndTime(date) {
@@ -224,6 +224,16 @@ export default {
 			}
 
 			this.$emit('addAlarm', alarm)
+			this.resetState()
+
+			// We have to close the menu manually because the `NcActions`-component isn't aware of what happens in
+			// the `AlarmDateTimePickerModal`-component and would stay open until one of its buttons are pressed.
+			this.$refs.actions.closeMenu()
+		},
+
+		resetState() {
+			this.startDateMenuIsOpen = false
+			this.dueDateMenuIsOpen = false
 			this.chooseDateTimeMenuIsOpen = false
 		},
 	},
