@@ -10,6 +10,7 @@ OC.L10N.register(
     "Delete" : "Kkes",
     "Name" : "Nom",
     "Deleted" : "Yettwakkes",
+    "Delete permanently" : "Kkes-it i lebda",
     "Cancel" : "Sefsex",
     "Notification" : "Ilɣa",
     "Email" : "Imayl",
