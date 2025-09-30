@@ -187,7 +187,7 @@ $breakpoint-mobile: 1024px;
 
 .header {
 	padding: calc(2* var(--default-grid-baseline));
-	padding-left: calc(4 * var(--default-grid-baseline) + var(--default-clickable-area)); // leave space for the app-nav-toggle
+	padding-left: calc(4 * var(--default-grid-baseline) + var(--default-clickable-area) + 5px); // leave space for the app-nav-toggle
 	position: sticky;
 	background-color: var(--color-background-dark);
 	z-index: 1000;
@@ -195,7 +195,7 @@ $breakpoint-mobile: 1024px;
 
 	@media only screen and (max-width: $breakpoint-mobile) {
 		padding-right: 0;
-		padding-left: calc(2 * var(--default-grid-baseline) + var(--default-clickable-area));
+		padding-left: calc(2 * var(--default-grid-baseline) + var(--default-clickable-area) + 5px);
 	}
 
 	&__input {
@@ -205,6 +205,7 @@ $breakpoint-mobile: 1024px;
 
 		.input-field {
 			margin-block-start: 0 !important;
+	 		margin-top: 5px;
 		}
 	}
 
