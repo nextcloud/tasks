@@ -68,6 +68,7 @@ OC.L10N.register(
     "Delete permanently" : "Избриши",
     "_Elements in the trash bin are deleted after {numDays} day_::_Elements in the trash bin are deleted after {numDays} days_" : ["Елементите од корпата за отпадоци ќе бидат избришани после 1 ден","Елементите од корпата за отпадоци ќе бидат избришани после  {numDays} дена"],
     "Cancel" : "Откажи",
+    "Notification" : "Известување",
     "Email" : "Е-пошта",
     "Audio notification" : "Аудио известување",
     "Other notification" : "Друго и звестување",
