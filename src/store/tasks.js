@@ -386,8 +386,12 @@ const mutations = {
 	 * @param {Task} task The task
 	 */
 	toggleStarred(state, task) {
-		if (+task.priority < 1 || +task.priority > 4) {
+		if (task.priority === 0) {
 			task.priority = 1
+		} else if (task.priority < 5) {
+			task.priority = 5
+		} else if (task.priority === 5) {
+			task.priority = 9
 		} else {
 			task.priority = 0
 		}
