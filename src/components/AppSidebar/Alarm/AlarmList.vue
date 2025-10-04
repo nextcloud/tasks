@@ -9,7 +9,7 @@
 			<slot name="icon" />
 		</div>
 		<div class="component__items">
-			<AlarmListItem v-for="(alarm, index) in alarmComponents"
+			<AlarmListItem v-for="(alarm, index) in alarms"
 				:key="index"
 				:index="index"
 				:alarm="alarm"
@@ -24,37 +24,42 @@
 					</p>
 				</div>
 				<AlarmListNew v-if="!readOnly"
-					:has-start-date="hasStartDate"
-					:has-due-date="hasDueDate"
+					:has-start-date="!!startDate"
+					:has-due-date="!!dueDate"
 					:is-all-day="allDay"
 					@add-alarm="addAlarm" />
 			</div>
 		</div>
+		<AlarmRelationDeletionModal v-if="alarmRelationDeletionModalIsOpen"
+			:alarms="relatedAlarms"
+			@keep="keepAlarms"
+			@discard="discardAlarms"
+			@close="cancelAlarmsModal" />
 	</div>
 </template>
 
 <script>
 import AlarmListNew from './AlarmListNew.vue'
 import AlarmListItem from './AlarmListItem.vue'
-import { mapAlarmComponentToAlarmObject } from '../../../models/alarm.js'
 
 import { translate as t } from '@nextcloud/l10n'
-import { AlarmComponent } from '@nextcloud/calendar-js'
 import ICAL from 'ical.js'
+import AlarmRelationDeletionModal from './AlarmRelationDeletionModal.vue'
 
 export default {
 	name: 'AlarmList',
 	components: {
+		AlarmRelationDeletionModal,
 		AlarmListItem,
 		AlarmListNew,
 	},
 	props: {
-		hasStartDate: {
-			type: Boolean,
+		startDate: {
+			type: [Date, null],
 			required: true,
 		},
-		hasDueDate: {
-			type: Boolean,
+		dueDate: {
+			type: [Date, null],
 			required: true,
 		},
 		readOnly: {
@@ -75,18 +80,18 @@ export default {
 		'removeAlarm',
 		'updateAlarm',
 	],
-	computed: {
-		alarmComponents() {
-			return this.alarms.map((alarm) => {
-				try {
-					return mapAlarmComponentToAlarmObject(AlarmComponent.fromICALJs(alarm))
-				} catch (e) {
-					// Instead of breaking the whole page when parsing an invalid alarm,
-					// we just print a warning on the console.
-					console.warn(e)
-					return false
-				}
-			}).filter(Boolean)
+	data() {
+		return {
+			alarmRelationDeletionModalIsOpen: false,
+			relatedAlarms: [],
+		}
+	},
+	watch: {
+		startDate(newStartDate) {
+			this.openModalIfAlarmsAreRelated(newStartDate, true)
+		},
+		dueDate(newDueDate) {
+			this.openModalIfAlarmsAreRelated(newDueDate, false)
 		},
 	},
 	methods: {
@@ -104,7 +109,7 @@ export default {
 				action: 'DISPLAY',
 				// When the action is "DISPLAY", the alarm MUST also include a "DESCRIPTION" property
 				description: t('tasks', 'This is a todo reminder.'),
-				// The "REPEAT" property is only valid in combination with a "DURATION" propery
+				// The "REPEAT" property is only valid in combination with a "DURATION" property
 				repeat: 1,
 				duration: 'PT10M',
 				trigger: { value: undefined, parameter },
@@ -145,6 +150,36 @@ export default {
 		 */
 		removeAlarm(index) {
 			this.$emit('removeAlarm', index)
+		},
+
+		keepAlarms() {
+			// TODO Implement
+			this.completeRelationDeletionModal()
+		},
+		discardAlarms() {
+			// TODO Implement
+			this.completeRelationDeletionModal()
+		},
+		cancelAlarmsModal() {
+			// TODO Restore date?
+			this.completeRelationDeletionModal()
+		},
+
+		/**
+		 * @param {Date|null} date The new date
+		 * @param {boolean} isRelatedToStart If the date is related to the start
+		 */
+		openModalIfAlarmsAreRelated(date, isRelatedToStart) {
+			const relatedAlarms = this.alarms.filter((alarm) => alarm.isRelative && (alarm.relativeIsRelatedToStart === isRelatedToStart))
+			if (date === null && relatedAlarms.length > 0) {
+				this.relatedAlarms = relatedAlarms
+				this.alarmRelationDeletionModalIsOpen = true
+			}
+		},
+
+		completeRelationDeletionModal() {
+			this.alarmRelationDeletionModalIsOpen = false
+			this.relatedAlarms = []
 		},
 	},
 }
