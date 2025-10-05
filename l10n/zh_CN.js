@@ -257,7 +257,7 @@ OC.L10N.register(
     "Could not update the task." : "无法更新任务。",
     "Successfully updated the task." : "成功更新任务。",
     "Task successfully moved to new calendar." : "任务已成功移至新日历。",
-    "An error occurred" : "发生了一个错误",
+    "An error occurred" : "发生错误",
     "Create a task" : "创建一个任务",
     "Message from {author} in {conversationName}" : "{conversationName} 中来自 {author} 的消息",
     "[Due on] LL" : "[截止于] LL",
