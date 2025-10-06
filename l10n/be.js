@@ -30,6 +30,7 @@ OC.L10N.register(
     "Tags" : "Тэгі",
     "[Tomorrow]" : "[Заўтра]",
     "[Tomorrow at] LT" : "[Заўтра ў] LT",
+    "Delete task" : "Выдаліць заданне",
     "Tomorrow" : "Заўтра",
     "An error occurred, unable to create the list." : "Узнікла памылка, немагчыма стварыць спіс.",
     "Add List…" : "Дадаць спіс…",
