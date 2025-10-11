@@ -30,6 +30,7 @@ OC.L10N.register(
     "Restore" : "Аднавіць",
     "Delete permanently" : "Выдаліць назаўжды",
     "Cancel" : "Скасаваць",
+    "This is a todo reminder." : "Гэта напамін пра задачу.",
     "Notification" : "Апавяшчэнне",
     "Email" : "Электронная пошта",
     "Before the task starts" : "Да пачытку задання",
