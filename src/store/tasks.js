@@ -502,10 +502,10 @@ const mutations = {
 	 * @param {object} state The store data
 	 * @param {object} data Destructuring object
 	 * @param {Task} data.task The task
-	 * @param {number} data.index The index of the alarm-item to remove
+	 * @param {number[]} data.indexes The indexes of the alarm-items to remove
 	 */
-	removeAlarm(state, { task, index }) {
-		task.removeAlarm(index)
+	removeAlarm(state, { task, indexes }) {
+		task.removeAlarm(indexes)
 	},
 
 	/**
@@ -1282,10 +1282,10 @@ const actions = {
 	 * Removes an alarm from a task
 	 *
 	 * @param {object} context The store context
-	 * @param {Task} task The task to update
+	 * @param {Task} task The task to remove
 	 */
-	async removeAlarm(context, { task, index }) {
-		context.commit('removeAlarm', { task, index })
+	async removeAlarm(context, { task, indexes }) {
+		context.commit('removeAlarm', { task, indexes })
 		context.dispatch('updateTask', task)
 	},
 

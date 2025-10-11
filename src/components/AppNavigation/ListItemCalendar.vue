@@ -552,12 +552,6 @@ $color-error: #e9322d;
 		display: none;
 		position: relative;
 
-		&.error input.edit {
-			color: var(--color-error);
-			border-color: var(--color-error) !important;
-			box-shadow: 0 0 6px transparentize( $color-error, .7 );
-		}
-
 		form {
 			display: flex;
 

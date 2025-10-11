@@ -258,3 +258,14 @@ export function getDateFromDateTimeValue(dateTimeValue) {
 		0,
 	)
 }
+
+/**
+ * Takes the related date and the relative trigger of an alarm and
+ * calculates the absolute date-time when the alarm will trigger.
+ *
+ * @param {Date} relatedDate Related date
+ * @param {number} relativeTrigger Relative trigger in seconds
+ */
+export function calculateAbsoluteDateFromRelativeTrigger(relatedDate, relativeTrigger) {
+	return new Date(((relatedDate.valueOf() / 1000) + relativeTrigger) * 1000)
+}

@@ -626,18 +626,21 @@ export default class Task {
 	/**
 	 * Remove an alarm
 	 *
-	 * @param {number} index The index of the alarm-list
+	 * @param {number[]} indexes The indexes of the alarm-list
 	 */
-	removeAlarm(index) {
+	removeAlarm(indexes) {
 		const valarms = this.vtodo.getAllSubcomponents('valarm')
-		const valarmToDelete = valarms[index]
 
-		if (valarmToDelete) {
-			this.vtodo.removeSubcomponent(valarms[index])
+		for (const index of indexes) {
+			const valarmToDelete = valarms[index]
 
-			this.updateLastModified()
-			this._alarms = this.getAlarms()
+			if (valarmToDelete) {
+				this.vtodo.removeSubcomponent(valarmToDelete)
+			}
 		}
+
+		this.updateLastModified()
+		this._alarms = this.getAlarms()
 	}
 
 	/**
