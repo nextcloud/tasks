@@ -8,6 +8,7 @@ import {
 	getDateFromDateTimeValue,
 } from '../utils/alarms.js'
 import { AlarmComponent } from '@nextcloud/calendar-js'
+import ICAL from 'ical.js'
 
 /**
  * Creates a complete alarm object based on given props
@@ -95,6 +96,22 @@ const mapAlarmComponentToAlarmObject = (alarmComponent) => {
 			absoluteDate,
 		})
 	}
+}
+
+/**
+ * @param {Array<ICAL.Component>} alarms ICAL.js alarms
+ */
+export function mapICALAlarmsToAlarmObjects(alarms) {
+	return alarms.map((alarm) => {
+		try {
+			return mapAlarmComponentToAlarmObject(AlarmComponent.fromICALJs(alarm))
+		} catch (e) {
+			// Instead of breaking the whole page when parsing an invalid alarm,
+			// we just print a warning on the console.
+			console.warn(e)
+			return false
+		}
+	}).filter(Boolean)
 }
 
 /**
