@@ -883,14 +883,14 @@ $breakpoint-mobile: 1024px;
 					max-width: 50%;
 
 					.tag {
-						height: 32px;
+						height: 28px;
 						overflow: hidden;
 						display: flex;
 						padding: 0 12px;
 						background-color: var(--color-primary-element-light);
 						border: none;
 						border-radius: 18px !important;
-						margin: 4px 2px;
+						margin: 0 4px;
 						align-items: center;
 						cursor: pointer;
 
