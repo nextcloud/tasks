@@ -1,4 +1,4 @@
-## 0.17.0
+## 0.17.0 - 2025-10-22
 
 ### Added
 - Allow to add reminders #154
