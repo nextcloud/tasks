@@ -774,7 +774,7 @@ $breakpoint-mobile: 1024px;
 			}
 
 			&__input {
-				border: none;
+				border: none !important;
 				border-radius: 0;
 			}
 
