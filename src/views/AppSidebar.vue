@@ -234,14 +234,15 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					icon="TagMultiple"
 					@add-tag="updateTag"
 					@set-tags="updateTags" />
-				<AlarmList :alarms="task.alarms"
-					:has-start-date="hasStartDate"
-					:has-due-date="hasDueDate"
+				<AlarmList :alarms="alarms"
+					:start-date="task.start"
+					:due-date="task.due"
 					:all-day="allDay"
 					:read-only="readOnly"
 					@add-alarm="addAlarmItem"
 					@update-alarm="updateAlarmItem"
-					@remove-alarm="removeAlarmItem">
+					@remove-alarm="removeAlarmItem"
+					@restore-date="restoreDate">
 					<template #icon>
 						<Bell :size="20" />
 					</template>
@@ -282,7 +283,7 @@ import TagsItem from '../components/AppSidebar/TagsItem.vue'
 import TextItem from '../components/AppSidebar/TextItem.vue'
 import NotesItem from '../components/AppSidebar/NotesItem.vue'
 import TaskCheckbox from '../components/TaskCheckbox.vue'
-// import TaskStatusDisplay from '../components/TaskStatusDisplay'
+import { mapICALAlarmsToAlarmObjects } from '../models/alarm.js'
 import Task from '../models/task.js'
 import { startDateString, dueDateString } from '../utils/dateStrings.js'
 
@@ -354,7 +355,6 @@ export default {
 		CalendarPickerItem,
 		NotesItem,
 		TaskCheckbox,
-		// TaskStatusDisplay,
 	},
 	/**
 	 * Before we navigate to a new task, we save possible edits to the task summary.
@@ -409,6 +409,9 @@ export default {
 		},
 		task() {
 			return this.getTaskByRoute(this.$route)
+		},
+		alarms() {
+			return mapICALAlarmsToAlarmObjects(this.task.alarms)
 		},
 		summary() {
 			return this.task ? this.task.summary : ''
@@ -600,12 +603,6 @@ export default {
 			} else {
 				return !!this.$store.state.settings.settings.allDay
 			}
-		},
-		hasStartDate() {
-			return !!this.task.start
-		},
-		hasDueDate() {
-			return !!this.task.due
 		},
 		showInCalendar() {
 			// Only tasks with a due date show up in the calendar
@@ -916,12 +913,30 @@ export default {
 		},
 
 		/**
-		 * Removes an alarm
+		 * Removes one or more alarms
 		 *
-		 * @param {number} index The index of the alarm-item to remove
+		 * @param {number[]} indexes The indexes of the alarm-items to remove
 		 */
-		removeAlarmItem(index) {
-			this.removeAlarm({ task: this.task, index })
+		removeAlarmItem(indexes) {
+			this.removeAlarm({ task: this.task, indexes })
+		},
+
+		/**
+		 * Restores the start or due-date
+		 *
+		 * This can happen if a start or due-date is deleted while there are still
+		 * alarms relating to it. In case the user cancels the triggered modal, we
+		 * have to restore the date.
+		 *
+		 * @param {Date} date The date previously deleted
+		 * @param {boolean} isRelatedToStart True if the date is a start-date
+		 */
+		restoreDate(date, isRelatedToStart) {
+			if (isRelatedToStart) {
+				this.setStartDate({ task: this.task, value: date })
+			} else {
+				this.setDueDate({ task: this.task, value: date })
+			}
 		},
 
 		async changeCalendar(calendar) {
