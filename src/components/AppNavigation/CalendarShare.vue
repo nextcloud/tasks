@@ -34,6 +34,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 					:options="usersOrGroups"
 					:placeholder="placeholder"
 					:user-select="true"
+					label="displayName"
 					@search="findSharee"
 					@option:selected="shareCalendar">
 					<template #no-options>
