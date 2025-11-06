@@ -56,6 +56,7 @@ OC.L10N.register(
     "Load the completed tasks of list \"{calendar}\"." : "Загрузіць выкананыя заданні са спісу \"{calendar}\".",
     "Loading the completed tasks might slow down the app." : "Загрузка выкананых заданняў можа запаволіць працу праграмы.",
     "Start date" : "Дата пачатку",
+    "Priority" : "Прыярытэт",
     "Tags" : "Тэгі",
     "[Tomorrow]" : "[Заўтра]",
     "[Tomorrow at] LT" : "[Заўтра ў] LT",
