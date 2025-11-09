@@ -1,3 +1,8 @@
+## 0.17.1 - 2025-11-09
+
+### Fixed
+- Show users in sharing search bar #2971
+
 ## 0.17.0 - 2025-10-22
 
 ### Added
