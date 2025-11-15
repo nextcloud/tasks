@@ -1,5 +1,6 @@
 { "translations": {
     "Today" : "ມື້ນີ້",
+    "Week" : "ອາທິດ",
     "Current" : "ປັດຈຸບັນ",
     "Completed" : "ສຳເລັດ",
     "Can edit" : "ແກ້ໄຂໄດ້",
@@ -11,8 +12,10 @@
     "Deleted" : "ລືບ",
     "Restore" : "ການກຸ້ຄຶນ",
     "Cancel" : "ຍົກເລີກ",
+    "Notification" : "ການແຈ້ງເຕືອນ",
     "Close" : "ປິດ",
     "Tags" : "ປ້າຍກຳກັບ",
+    "All day" : "ຕະຫຼອດມື້",
     "Details" : "ລາຍລະອຽດ"
 },"pluralForm" :"nplurals=1; plural=0;"
 }

@@ -2,6 +2,7 @@ OC.L10N.register(
     "tasks",
     {
     "Today" : "ມື້ນີ້",
+    "Week" : "ອາທິດ",
     "Current" : "ປັດຈຸບັນ",
     "Completed" : "ສຳເລັດ",
     "Can edit" : "ແກ້ໄຂໄດ້",
@@ -13,8 +14,10 @@ OC.L10N.register(
     "Deleted" : "ລືບ",
     "Restore" : "ການກຸ້ຄຶນ",
     "Cancel" : "ຍົກເລີກ",
+    "Notification" : "ການແຈ້ງເຕືອນ",
     "Close" : "ປິດ",
     "Tags" : "ປ້າຍກຳກັບ",
+    "All day" : "ຕະຫຼອດມື້",
     "Details" : "ລາຍລະອຽດ"
 },
 "nplurals=1; plural=0;");
