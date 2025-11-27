@@ -61,6 +61,7 @@ OC.L10N.register(
     "Close" : "Fechar",
     "No errors" : "Sem erros",
     "Open your browser console for more details" : "Abra a consola do seu navegador para obter mais detalhes",
+    "Filter by tags" : "Filtrar por etiquetas",
     "Select tags to filter by" : "Selecionar etiquetas para filtrar",
     "Start date" : "Data de início",
     "Due date" : "Data limite",
@@ -68,6 +69,7 @@ OC.L10N.register(
     "Priority" : "Prioridade",
     "Alphabetically" : "Alfabeticamente",
     "Tags" : "Etiquetas",
+    "Sort by tags." : "Ordenar por etiquetas.",
     "Manually" : "Manual",
     "Change sort order" : "Alterar ordenação",
     "Delete task" : "Eliminar tarefa",
@@ -82,6 +84,7 @@ OC.L10N.register(
     "Set due date" : "Definir data de expiração",
     "All day" : "Todo o dia",
     "Details" : "Detalhes",
+    "Select tags" : "Selecione etiquetas",
     "Notes" : "Notas",
     "An error occurred" : "Ocorreu um erro"
 },
