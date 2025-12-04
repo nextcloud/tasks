@@ -225,7 +225,7 @@ OC.L10N.register(
     "No priority assigned" : "Keine Priorität zugewiesen",
     "{percent} % completed" : "{percent} % fertiggestellt",
     "All day" : "Ganztägig",
-    "Unpin" : "Abheften",
+    "Unpin" : "Ablösen",
     "Pin" : "Anheften",
     "Show in Calendar" : "Im Kalender anzeigen",
     "Show in Deck" : "In Deck anzeigen",
