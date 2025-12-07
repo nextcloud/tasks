@@ -126,6 +126,15 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						</template>
 						{{ t('tasks', 'Delete task') }}
 					</NcActionButton>
+					<NcActionButton v-if="!readOnly"
+						:close-after-click="true"
+						class="reactive no-nav"
+						@click="duplicateTask({ task })">
+						<template #icon>
+							<ContentDuplicate :size="20" />
+						</template>
+						{{ t('tasks', 'Duplicate task') }}
+					</NcActionButton>
 				</NcActions>
 				<NcActions v-if="task.deleteCountdown !== null">
 					<NcActionButton class="reactive no-nav"
@@ -206,6 +215,7 @@ import Linkify from '@nextcloud/vue/directives/Linkify'
 
 import Bell from 'vue-material-design-icons/BellOutline.vue'
 import Delete from 'vue-material-design-icons/TrashCanOutline.vue'
+import ContentDuplicate from 'vue-material-design-icons/ContentDuplicate.vue'
 import Eye from 'vue-material-design-icons/EyeOutline.vue'
 import Pin from 'vue-material-design-icons/PinOutline.vue'
 import Plus from 'vue-material-design-icons/Plus.vue'
@@ -238,6 +248,7 @@ export default {
 		NcTextField,
 		Bell,
 		Delete,
+		ContentDuplicate,
 		Eye,
 		Pin,
 		Plus,
@@ -487,6 +498,7 @@ export default {
 			'toggleCompleted',
 			'toggleStarred',
 			'createTask',
+			'duplicateTask',
 			'getTasksFromCalendar',
 			'toggleSubtasksVisibility',
 			'toggleCompletedSubtasksVisibility',
