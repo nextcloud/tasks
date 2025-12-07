@@ -33,6 +33,7 @@ import { translate as t } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
 
 import ICAL from 'ical.js'
+import { randomUUID } from '../utils/crypto.js'
 
 const state = {
 	tasks: {},
@@ -857,6 +858,82 @@ const actions = {
 
 			return task
 		}
+	},
+
+	/**
+	 * Duplicates an existing task. Subtasks are duplicated recursively.
+	 *
+	 * @param {object} context The store context
+	 * @param {object} payload Destructuring object
+	 * @param {Task} payload.task The task to duplicate
+	 * @param {Calendar} [payload.calendar] The calendar to create the duplicate in (defaults to original task calendar)
+	 * @param {Task|null} [payload.parent] The parent task to attach the duplicate to (optional)
+	 * @return {Promise<Task>} The newly created duplicate task
+	 */
+	async duplicateTask(context, payload) {
+		// Support being called with either the Task directly or a payload object
+		// called as: duplicateTask(task) or duplicateTask({ task, calendar, parent })
+		const task = payload && payload.task ? payload.task : payload
+		const calendar = payload && payload.calendar ? payload.calendar : (task ? task.calendar : null)
+		const parent = payload && Object.prototype.hasOwnProperty.call(payload, 'parent') ? payload.parent : null
+
+		// Don't try to duplicate non-existing tasks
+		if (!task) {
+			return null
+		}
+		// Don't try to duplicate tasks into read-only calendars
+		if (!calendar || calendar.readOnly) {
+			return null
+		}
+		// Don't duplicate tasks with access class not PUBLIC into calendars shared with me
+		if (calendar.isSharedWithMe && task.class !== 'PUBLIC') {
+			return null
+		}
+
+		// Create a new Task from the existing task's jCal
+		const vData = ICAL.stringify(task.jCal)
+		const newTask = new Task(vData, calendar)
+
+		// Assign a new UID and created timestamp
+		newTask.uid = randomUUID()
+		newTask.created = ICAL.Time.fromJSDate(new Date(), true)
+		newTask.dav = null
+		newTask.conflict = false
+
+		// If a parent was provided, link to it. Otherwise, if the original task had
+		// a related parent and that parent exists in the target calendar, keep relation.
+		if (parent) {
+			newTask.related = parent.uid
+		} else if (task.related) {
+			const existingParent = context.getters.getTaskByUid(task.related)
+			if (existingParent && existingParent.calendar && existingParent.calendar.id === calendar.id) {
+				newTask.related = task.related
+			} else {
+				newTask.related = null
+			}
+		}
+
+		// Create the new vObject on the server
+		try {
+			const response = await calendar.dav.createVObject(ICAL.stringify(newTask.jCal))
+			newTask.dav = response
+			newTask.syncStatus = new SyncStatus('success', t('tasks', 'Successfully duplicated the task.'))
+			context.commit('appendTask', newTask)
+			context.commit('addTaskToCalendar', newTask)
+			const parentLocal = context.getters.getTaskByUid(newTask.related)
+			context.commit('addTaskToParent', { task: newTask, parent: parentLocal })
+		} catch (error) {
+			console.error(error)
+			showError(t('tasks', 'Could not duplicate the task.'))
+			return null
+		}
+
+		// Duplicate subtasks recursively, attaching them to the new parent
+		await Promise.all(Object.values(task.subTasks).map(async (subTask) => {
+			await context.dispatch('duplicateTask', { task: subTask, calendar, parent: newTask })
+		}))
+
+		return newTask
 	},
 
 	/**
