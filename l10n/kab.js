@@ -17,6 +17,7 @@ OC.L10N.register(
     "Go back" : "Tuɣalin",
     "Close" : "Mdel",
     "Tags" : "Tibzimin",
+    "Delete task" : "Kkes tawuri",
     "Details" : "Talqayt"
 },
 "nplurals=2; plural=(n != 1);");
