@@ -27,7 +27,12 @@
 import moment from '@nextcloud/moment'
 
 import ICAL from 'ical.js'
+import { RecurValue, DateTimeValue } from '@nextcloud/calendar-js'
 import { randomUUID } from '../utils/crypto.js'
+import {
+	getDefaultRecurrenceRuleObject,
+	mapRecurrenceRuleValueToRecurrenceRuleObject,
+} from './recurrenceRule.js'
 
 export default class Task {
 
@@ -120,6 +125,40 @@ export default class Task {
 		this._pinned = this.vtodo.getFirstPropertyValue('x-pinned') === 'true'
 		this._location = this.vtodo.getFirstPropertyValue('location') || ''
 		this._customUrl = this.vtodo.getFirstPropertyValue('url') || ''
+
+		// Check for RECURRENCE-ID property (this is an exception instance)
+		this._recurrenceId = this.vtodo.getFirstPropertyValue('recurrence-id')
+
+		// Extract recurrence-rule only if this is NOT an exception instance
+		if (this.vtodo && !this._recurrenceId) {
+			const recurrenceRules = this.vtodo.getAllProperties('rrule')
+			const firstRecurrenceRule = recurrenceRules?.[0]
+			
+			if (firstRecurrenceRule) {
+				try {
+					// Get the ICAL.Recur value and convert directly to RecurValue
+					const icalRecur = firstRecurrenceRule.getFirstValue()
+					const recurValue = RecurValue.fromICALJs(icalRecur)
+					
+					// Get reference date for the mapping function
+					const referenceDate = this._due || this._start
+					const jsDate = referenceDate?.toJSDate() || null
+					
+					this._recurrenceRule = mapRecurrenceRuleValueToRecurrenceRuleObject(recurValue, jsDate)
+					this._hasMultipleRRules = recurrenceRules.length > 1
+				} catch (e) {
+					console.warn('Failed to parse recurrence rule:', e)
+					this._recurrenceRule = getDefaultRecurrenceRuleObject()
+					this._hasMultipleRRules = false
+				}
+			}
+		}
+		
+		// Set default if not already set
+		if (!this._recurrenceRule) {
+			this._recurrenceRule = getDefaultRecurrenceRuleObject()
+			this._hasMultipleRRules = false
+		}
 
 		let sortOrder = this.vtodo.getFirstPropertyValue('x-apple-sort-order')
 		if (sortOrder === null) {
@@ -502,6 +541,12 @@ export default class Task {
 			this.vtodo.updatePropertyWithValue('dtstart', start)
 		} else {
 			this.vtodo.removeProperty('dtstart')
+			// Remove RRULE when start date is removed (if no due date exists)
+			if (!this._due) {
+				this.vtodo.removeAllProperties('rrule')
+				this._recurrenceRule = getDefaultRecurrenceRuleObject()
+				this._hasMultipleRRules = false
+			}
 		}
 		this._start = start
 		this._startMoment = moment(start, 'YYYYMMDDTHHmmssZ')
@@ -528,6 +573,12 @@ export default class Task {
 			this.vtodo.updatePropertyWithValue('due', due)
 		} else {
 			this.vtodo.removeProperty('due')
+			// Remove RRULE when due date is removed (if no start date exists)
+			if (!this._start) {
+				this.vtodo.removeAllProperties('rrule')
+				this._recurrenceRule = getDefaultRecurrenceRuleObject()
+				this._hasMultipleRRules = false
+			}
 		}
 		this._due = due
 		this._dueMoment = moment(due, 'YYYYMMDDTHHmmssZ')
@@ -769,6 +820,76 @@ export default class Task {
 		}
 		this.updateLastModified()
 		this._sortOrder = sortOrder
+	}
+
+	/**
+	 * Gets the recurrence rule
+	 *
+	 * @return {object} The recurrence rule
+	 */
+	get recurrenceRule() {
+		return this._recurrenceRule
+	}
+
+	/**
+	 * Sets the recurrence rule
+	 *
+	 * @param {object} recurrenceRule The recurrence rule
+	 */
+	set recurrenceRule(recurrenceRule) {
+		// Auto-set DTSTART if no date exists (Thunderbird compatibility)
+		if (!this._start && !this._due && recurrenceRule.frequency !== 'NONE') {
+			const now = ICAL.Time.now()
+			now.isDate = true // Make it all-day by default
+			this.setStart(now)
+		}
+		this._recurrenceRule = recurrenceRule
+	}
+
+	/**
+	 * Checks if the task is recurring
+	 *
+	 * @return {boolean} True if recurring
+	 */
+	get isRecurring() {
+		return this._recurrenceRule && this._recurrenceRule.frequency !== 'NONE'
+	}
+
+	/**
+	 * Checks if the task has multiple recurrence rules
+	 *
+	 * @return {boolean} True if has multiple RRULEs
+	 */
+	get hasMultipleRRules() {
+		return this._hasMultipleRRules
+	}
+
+	/**
+	 * Returns the recurrence ID of this task (if it's an exception instance)
+	 *
+	 * @return {ICAL.Time|null}
+	 */
+	get recurrenceId() {
+		return this._recurrenceId
+	}
+
+	/**
+	 * Checks if this task is a recurring exception instance
+	 *
+	 * @return {boolean}
+	 */
+	get isRecurrenceException() {
+		return this._recurrenceId !== null
+	}
+
+	/**
+	 * Checks if a recurrence exception can be created for this task
+	 *
+	 * @return {boolean} True if exception can be created
+	 */
+	get canCreateRecurrenceException() {
+		// Can create exception if task is recurring and not completed
+		return this.isRecurring && !this.completed
 	}
 
 	/**

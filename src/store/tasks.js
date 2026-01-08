@@ -1144,6 +1144,12 @@ const actions = {
 					await context.dispatch('setPercentComplete', { task: subTask, complete: 100 })
 				}
 			}))
+			
+			// Handle recurring tasks
+			if (task.isRecurring && task.recurrenceRule.recurrenceRuleValue) {
+				await context.dispatch('handleRecurringTaskCompletion', { task })
+				return // The handler will update the task
+			}
 		}
 		context.commit('setComplete', { task, complete })
 		context.dispatch('updateTask', task)
@@ -1445,7 +1451,7 @@ const actions = {
 				context.commit('setStart', { task, start: newStart })
 				context.dispatch('updateTask', task)
 			}
-		// Adjust due date
+		// Adjust due date if start is not set but due is
 		} else if (due.isValid()) {
 			diff = due.diff(moment().startOf('day'), 'days')
 			diff = diff < 0 ? 0 : diff
@@ -1454,9 +1460,9 @@ const actions = {
 				context.commit('setDue', { task, due: newDue })
 				context.dispatch('updateTask', task)
 			}
-		// Set the due date to appropriate value
+		// Set the start date to appropriate value (make start the default)
 		} else {
-			context.commit('setDue', { task, due: day })
+			context.commit('setStart', { task, start: day })
 			context.dispatch('updateTask', task)
 		}
 	},
@@ -1532,6 +1538,268 @@ const actions = {
 			}
 			// We have to send an update.
 			await context.dispatch('updateTask', task)
+		}
+	},
+
+	/**
+	 * Sets the recurrence rule for a task
+	 *
+	 * @param {object} context The store context
+	 * @param {object} data Destructuring object
+	 * @param {Task} data.task The task to update
+	 * @param {object} data.recurrenceRule The recurrence rule data
+	 */
+	async setRecurrenceRule(context, { task, recurrenceRule }) {
+		// Import required classes
+		const { RecurValue } = await import('@nextcloud/calendar-js')
+
+		// Create or update the RRULE property
+		const recurrenceValue = RecurValue.fromData({
+			freq: recurrenceRule.frequency,
+			interval: recurrenceRule.interval || 1,
+		})
+
+		// Set end condition
+		if (recurrenceRule.until) {
+			const { DateTimeValue } = await import('@nextcloud/calendar-js')
+			recurrenceValue.until = DateTimeValue.fromJSDate(new Date(recurrenceRule.until), { zone: 'utc' })
+		} else if (recurrenceRule.count) {
+			recurrenceValue.count = recurrenceRule.count
+		}
+
+		// Convert RecurValue to ICAL.Recur
+		const icalRecur = recurrenceValue.toICALJs()
+
+		// Add or update the RRULE property on the vtodo
+		task.vtodo.removeAllProperties('rrule')
+		task.vtodo.updatePropertyWithValue('rrule', icalRecur)
+
+		// Update the task model
+		task._recurrenceRule = {
+			recurrenceRuleValue: recurrenceValue,
+			frequency: recurrenceRule.frequency,
+			interval: recurrenceRule.interval || 1,
+			count: recurrenceRule.count || null,
+			until: recurrenceRule.until || null,
+			byDay: [],
+			byMonth: [],
+			byMonthDay: [],
+			bySetPosition: null,
+			isUnsupported: false,
+		}
+		task._hasMultipleRRules = false
+
+		await context.dispatch('updateTask', task)
+	},
+
+	/**
+	 * Removes the recurrence rule from a task
+	 *
+	 * @param {object} context The store context
+	 * @param {object} data Destructuring object
+	 * @param {Task} data.task The task to update
+	 */
+	async removeRecurrenceRule(context, { task }) {
+		const { getDefaultRecurrenceRuleObject } = await import('../models/recurrenceRule.js')
+		
+		// Remove the RRULE property from vtodo
+		task.vtodo.removeAllProperties('rrule')
+
+		// Reset the recurrence rule in the task model
+		task._recurrenceRule = getDefaultRecurrenceRuleObject()
+		task._hasMultipleRRules = false
+
+		await context.dispatch('updateTask', task)
+	},
+
+	/**
+	 * Handles completion of a recurring task by creating an exception instance with RECURRENCE-ID
+	 * This is compatible with Thunderbird and other CalDAV clients
+	 *
+	 * @param {object} context The store context
+	 * @param {object} data Destructuring object
+	 * @param {Task} data.task The task that was completed
+	 */
+	async handleRecurringTaskCompletion(context, { task }) {
+		// Only process if task is recurring
+		if (!task.isRecurring || !task.recurrenceRule.recurrenceRuleValue) {
+			return
+		}
+
+		try {
+			// Get the instance date (the current due/start date)
+			const instanceDate = task.due || task.start
+			
+			if (!instanceDate) {
+				// Task has no date - just mark it complete without creating exception
+				console.warn('Recurring task has no due/start date - cannot create exception or advance to next occurrence')
+				context.commit('setComplete', { task, complete: 100 })
+				context.dispatch('updateTask', task)
+				return
+			}
+
+			// Get the calendar
+			const calendar = task.calendar
+			if (!calendar) {
+				console.error('Cannot find calendar for task')
+				return
+			}
+
+			// Create a new exception VTODO for this completed instance
+			const comp = new ICAL.Component('vcalendar')
+			comp.updatePropertyWithValue('prodid', '-//Nextcloud Tasks')
+			comp.updatePropertyWithValue('version', '2.0')
+			
+			const vtodo = new ICAL.Component('vtodo')
+			comp.addSubcomponent(vtodo)
+
+			// Copy properties from master task
+			vtodo.updatePropertyWithValue('uid', task.uid)
+			vtodo.updatePropertyWithValue('summary', task.summary)
+			
+			if (task.description) {
+				vtodo.updatePropertyWithValue('description', task.description)
+			}
+			if (task.location) {
+				vtodo.updatePropertyWithValue('location', task.location)
+			}
+			if (task.url) {
+				vtodo.updatePropertyWithValue('url', task.url)
+			}
+			if (task.priority) {
+				vtodo.updatePropertyWithValue('priority', task.priority)
+			}
+			if (task.class) {
+				vtodo.updatePropertyWithValue('class', task.class)
+			}
+
+			// Set completion properties
+			vtodo.updatePropertyWithValue('status', 'COMPLETED')
+			vtodo.updatePropertyWithValue('percent-complete', 100)
+			const completedDate = ICAL.Time.now()
+			vtodo.updatePropertyWithValue('completed', completedDate)
+
+			// Set RECURRENCE-ID to mark this as an exception instance
+			// Use the ICAL.Time directly (don't convert to JS Date and back)
+			const recurrenceId = instanceDate.clone()
+			vtodo.updatePropertyWithValue('recurrence-id', recurrenceId)
+
+			// Set the original due/start date for this instance
+			if (task.due) {
+				const dueTime = task.due.clone()
+				if (task.allDay) {
+					dueTime.isDate = true
+				}
+				vtodo.updatePropertyWithValue('due', dueTime)
+			}
+			if (task.start) {
+				const startTime = task.start.clone()
+				if (task.allDay) {
+					startTime.isDate = true
+				}
+				vtodo.updatePropertyWithValue('dtstart', startTime)
+			}
+
+			// Set created and last-modified
+			vtodo.updatePropertyWithValue('created', ICAL.Time.now())
+			vtodo.updatePropertyWithValue('last-modified', ICAL.Time.now())
+			vtodo.updatePropertyWithValue('dtstamp', ICAL.Time.now())
+
+			// Create the exception task on the server
+			const vData = comp.toString()
+			await context.dispatch('appendTaskToCalendar', {
+				calendar,
+				taskData: vData,
+			})
+
+			// Reload the task to get fresh ETag after exception was created
+			const freshTask = context.getters.getTaskByUri(task.uri)
+			if (!freshTask) {
+				console.error('Cannot find task after creating exception')
+				return
+			}
+
+			// Now update the master task to show next occurrence
+			if (!freshTask.recurrenceRule?.recurrenceRuleValue) {
+				console.warn('Cannot advance recurring task: no recurrence rule value')
+				return
+			}
+
+			// Convert RecurValue to ICAL.Recur to get the iterator
+			const icalRecur = freshTask.recurrenceRule.recurrenceRuleValue.toICALJs()
+			
+			// Create a floating time (no timezone) from instanceDate to avoid timezone issues
+			const startTime = new ICAL.Time({
+				year: instanceDate.year,
+				month: instanceDate.month,
+				day: instanceDate.day,
+				hour: instanceDate.hour,
+				minute: instanceDate.minute,
+				second: instanceDate.second,
+				isDate: instanceDate.isDate,
+			})
+			
+			const iterator = icalRecur.iterator(startTime)
+			
+			// Skip current occurrence
+			iterator.next()
+			
+			// Get next occurrence (ical.js iterator returns ICAL.Time directly, or null when done)
+			const nextOccurrence = iterator.next()
+			if (nextOccurrence) {
+				const nextDate = nextOccurrence.toJSDate()
+				const nextMoment = moment(nextDate)
+				
+				// Calculate offset between start and due if both are set
+				let startOffset = null
+				if (freshTask.start && freshTask.due) {
+					const currentStart = freshTask.startMoment
+					const currentDue = freshTask.dueMoment
+					if (currentStart.isValid() && currentDue.isValid()) {
+						startOffset = currentDue.diff(currentStart)
+					}
+				}
+				
+				// Update the appropriate date field
+				if (freshTask.due) {
+					context.commit('setDue', { 
+						task: freshTask, 
+						due: nextMoment, 
+						allDay: freshTask.allDay 
+					})
+				} else if (freshTask.start) {
+					// If only start date exists, update that
+					context.commit('setStart', { 
+						task: freshTask, 
+						start: nextMoment, 
+						allDay: freshTask.allDay 
+					})
+				}
+				
+				// Update start date if both dates were set, maintaining the offset
+				if (freshTask.due && startOffset !== null) {
+					const nextStart = nextMoment.clone().subtract(startOffset, 'ms')
+					context.commit('setStart', { 
+						task: freshTask, 
+						start: nextStart, 
+						allDay: freshTask.allDay 
+					})
+				}
+
+				// Reset completion status on master task
+				freshTask.setComplete(0)
+				freshTask.setCompleted(false)
+				freshTask.setStatus(null)
+				
+				// Save the updated master task
+				await context.dispatch('updateTask', freshTask)
+			} else {
+				// No more occurrences - keep task completed
+				// The exception will show as completed, master can be left as-is
+			}
+		} catch (error) {
+			console.error('Error handling recurring task completion:', error)
+			showError(t('tasks', 'Error processing recurring task'))
 		}
 	},
 

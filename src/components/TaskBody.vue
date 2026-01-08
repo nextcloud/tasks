@@ -81,7 +81,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:title="t('tasks', 'Task has a note')"
 					@click="openAppSidebarTab($event, 'app-sidebar-tab-notes')"
 					@dblclick.stop="openAppSidebarTab($event, 'app-sidebar-tab-notes', true)" />
-				<div v-if="task.due || task.completed" :class="{'date--overdue': overdue(task.dueMoment) && !task.completed}" class="date">
+				<div v-if="task.start || task.due || task.completed" :class="{'date--overdue': overdue(task.startMoment || task.dueMoment) && !task.completed}" class="date">
 					<span class="date__short" :class="{ 'date__short--completed': task.completed }">{{ dueDateShort }}</span>
 					<span class="date__long" :class="{ 'date__long--date-only': task.allDay && !task.completed, 'date__long--completed': task.completed }">{{ dueDateLong }}</span>
 				</div>
@@ -275,9 +275,10 @@ export default {
 		}),
 
 		dueDateShort() {
+			const taskDate = this.task.startMoment.isValid() ? this.task.startMoment : this.task.dueMoment
 			if (!this.task.completed) {
-				return this.task.dueMoment.isValid()
-					? this.task.dueMoment.calendar(null, {
+				return taskDate.isValid()
+					? taskDate.calendar(null, {
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						lastDay: t('tasks', '[Yesterday]'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
@@ -313,9 +314,10 @@ export default {
 			if (this.task.allDay) {
 				return this.dueDateShort
 			}
+			const taskDate = this.task.startMoment.isValid() ? this.task.startMoment : this.task.dueMoment
 			if (!this.task.completed) {
-				return this.task.dueMoment.isValid()
-					? this.task.dueMoment.calendar(null, {
+				return taskDate.isValid()
+					? taskDate.calendar(null, {
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						lastDay: t('tasks', '[Yesterday at] LT'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.

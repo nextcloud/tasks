@@ -66,6 +66,9 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:read-only="readOnly"
 				:property-string="t('tasks', 'All day')"
 				@set-checked="toggleAllDay(task)" />
+			<RecurrenceItem v-show="!readOnly || task.isRecurring"
+				:task="task"
+				:read-only="readOnly" />
 			<CalendarPickerItem :disabled="readOnly"
 				:calendar="task.calendar"
 				:calendars="targetCalendars"
@@ -278,6 +281,7 @@ import CheckboxItem from '../components/AppSidebar/CheckboxItem.vue'
 import DateTimePickerItem from '../components/AppSidebar/DateTimePickerItem.vue'
 import CalendarPickerItem from '../components/AppSidebar/CalendarPickerItem.vue'
 import MultiselectItem from '../components/AppSidebar/MultiselectItem.vue'
+import RecurrenceItem from '../components/AppSidebar/RecurrenceItem.vue'
 import SliderItem from '../components/AppSidebar/SliderItem.vue'
 import TagsItem from '../components/AppSidebar/TagsItem.vue'
 import TextItem from '../components/AppSidebar/TextItem.vue'
@@ -329,6 +333,7 @@ export default {
 		AlarmList,
 		CheckboxItem,
 		DateTimePickerItem,
+		RecurrenceItem,
 		Bell,
 		Calendar,
 		CalendarEnd,

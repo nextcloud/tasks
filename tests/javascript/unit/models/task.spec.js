@@ -3,10 +3,62 @@ import Task from '../../../../src/models/task.js'
 import { loadICS } from '../../../assets/loadAsset.js'
 
 import ICAL from 'ical.js'
+import { RecurValue } from '@nextcloud/calendar-js'
 import { describe, expect, it } from 'vitest'
 
 describe('task', () => {
 	'use strict'
+	
+	it('RecurValue should be available', () => {
+		expect(RecurValue).toBeDefined()
+		expect(typeof RecurValue.fromData).toEqual('function')
+		
+		// Test creating a simple recurrence rule
+		const recurValue = RecurValue.fromData({ freq: 'DAILY', interval: 1 })
+		expect(recurValue).toBeDefined()
+		expect(recurValue.frequency).toEqual('DAILY')
+	})
+	
+	it('Should manually parse RRULE', () => {
+		const ics = loadICS('vcalendars/vcalendar-recurring-daily')
+		const jCal = ICAL.parse(ics)
+		const vCalendar = new ICAL.Component(jCal)
+		const vtodo = vCalendar.getFirstSubcomponent('vtodo')
+		const rruleProp = vtodo.getFirstProperty('rrule')
+		const icalRecur = rruleProp.getFirstValue()
+		
+		// Try to convert to RecurValue
+		const recurData = {
+			freq: icalRecur.freq,
+			interval: icalRecur.interval || 1,
+		}
+		const recurValue = RecurValue.fromData(recurData)
+		
+		expect(recurValue).toBeDefined()
+		expect(recurValue.frequency).toEqual('DAILY')
+	})
+	
+	it('Should parse RRULE when task is created', () => {
+		// Log to see what's happening
+		const origWarn = console.warn
+		const warnings = []
+		console.warn = (...args) => { warnings.push(args.join(' ')); origWarn(...args) }
+		
+		const task = new Task(loadICS('vcalendars/vcalendar-recurring-daily'), {})
+		
+		console.warn = origWarn
+		
+		// Check if there were warnings
+		if (warnings.length > 0) {
+			console.log('Warnings during task creation:', warnings)
+		}
+		
+		// The task should have recurrence parsed
+		console.log('Task isRecurring:', task.isRecurring)
+		console.log('Task recurrenceRule:', JSON.stringify(task.recurrenceRule, null, 2))
+		
+		expect(task.isRecurring).toEqual(true)
+	})
 
 	it('Should set status to "COMPLETED" on completion.', () => {
 		const task = new Task(loadICS('vcalendars/vcalendar-default'), {})
@@ -278,5 +330,113 @@ describe('task', () => {
 		const expected = 'www.nextcloud.com'
 		task.customUrl = expected
 		expect(task.customUrl).toEqual(expected)
+	})
+
+	describe('Recurring Tasks', () => {
+		it('Should load RRULE from ICS file', () => {
+			const task = new Task(loadICS('vcalendars/vcalendar-recurring-daily'), {})
+			// Debug: check what we actually got
+			const rruleProp = task.vtodo.getFirstProperty('rrule')
+			console.log('RRULE property:', rruleProp)
+			if (rruleProp) {
+				const rruleValue = rruleProp.getFirstValue()
+				console.log('RRULE value:', rruleValue)
+				console.log('RRULE value.freq:', rruleValue.freq)
+				console.log('RRULE value.interval:', rruleValue.interval)
+				console.log('RRULE value.parts:', rruleValue.parts)
+				console.log('RRULE value.toString():', rruleValue.toString())
+			}
+			console.log('Task due:', task.due)
+			console.log('Task _due:', task._due)
+			console.log('Task recurrenceRule:', task.recurrenceRule)
+			expect(rruleProp).toBeDefined()
+		})
+
+		it('Should parse daily recurrence rule', () => {
+			const task = new Task(loadICS('vcalendars/vcalendar-recurring-daily'), {})
+			expect(task.isRecurring).toEqual(true)
+			expect(task.recurrenceRule).toBeDefined()
+			expect(task.recurrenceRule.frequency).toEqual('DAILY')
+			expect(task.recurrenceRule.interval).toEqual(1)
+		})
+
+		it('Should parse weekly recurrence rule with interval', () => {
+			const task = new Task(loadICS('vcalendars/vcalendar-recurring-weekly'), {})
+			expect(task.isRecurring).toEqual(true)
+			expect(task.recurrenceRule.frequency).toEqual('WEEKLY')
+			expect(task.recurrenceRule.interval).toEqual(2)
+		})
+
+		it('Should parse recurrence rule with count', () => {
+			const task = new Task(loadICS('vcalendars/vcalendar-recurring-with-count'), {})
+			expect(task.isRecurring).toEqual(true)
+			expect(task.recurrenceRule.count).toEqual(5)
+		})
+
+		it('Should parse recurrence rule with until date', () => {
+			const task = new Task(loadICS('vcalendars/vcalendar-recurring-with-until'), {})
+			expect(task.isRecurring).toEqual(true)
+			expect(task.recurrenceRule.until).toBeDefined()
+		})
+
+		it('Should not be recurring without RRULE', () => {
+			const task = new Task(loadICS('vcalendars/vcalendar-default'), {})
+			expect(task.isRecurring).toEqual(false)
+			expect(task.recurrenceRule.frequency).toEqual('NONE')
+		})
+
+		it('Should have recurrenceRuleValue when recurring', () => {
+			const task = new Task(loadICS('vcalendars/vcalendar-recurring-daily'), {})
+			expect(task.isRecurring).toEqual(true)
+			expect(task.recurrenceRule.recurrenceRuleValue).toBeDefined()
+			expect(task.recurrenceRule.recurrenceRuleValue.frequency).toEqual('DAILY')
+		})
+
+		it('Should detect multiple RRULE properties', () => {
+			const task = new Task(loadICS('vcalendars/vcalendar-recurring-daily'), {})
+			expect(task.hasMultipleRRules).toEqual(false)
+		})
+
+		it('Should parse RRULE with DTSTART instead of DUE', () => {
+			const task = new Task(loadICS('vcalendars/vcalendar-recurring-dtstart'), {})
+			expect(task.isRecurring).toEqual(true)
+			expect(task.recurrenceRule.frequency).toEqual('DAILY')
+		})
+
+		it('Should parse RRULE even without due or start date (Thunderbird compatibility)', () => {
+			const task = new Task(loadICS('vcalendars/vcalendar-recurring-no-date'), {})
+			expect(task.isRecurring).toEqual(true)
+			expect(task.recurrenceRule.frequency).toEqual('DAILY')
+		})
+
+		it('Should be able to create recurrence exceptions when recurring', () => {
+			const task = new Task(loadICS('vcalendars/vcalendar-recurring-daily'), {})
+			expect(task.canCreateRecurrenceException).toEqual(true)
+		})
+
+		it('Should not be able to create recurrence exceptions when not recurring', () => {
+			const task = new Task(loadICS('vcalendars/vcalendar-default'), {})
+			expect(task.canCreateRecurrenceException).toEqual(false)
+		})
+	})
+
+	describe('RECURRENCE-ID Exception Instances', () => {
+		it('Should parse RECURRENCE-ID property', () => {
+			const task = new Task(loadICS('vcalendars/vcalendar-recurrence-exception'), {})
+			expect(task.isRecurrenceException).toEqual(true)
+			expect(task.recurrenceId).toBeTruthy()
+		})
+
+		it('Should NOT parse RRULE when RECURRENCE-ID is present', () => {
+			const task = new Task(loadICS('vcalendars/vcalendar-recurrence-exception'), {})
+			expect(task.isRecurrenceException).toEqual(true)
+			expect(task.isRecurring).toEqual(false)
+		})
+
+		it('Should not have RECURRENCE-ID on normal tasks', () => {
+			const task = new Task(loadICS('vcalendars/vcalendar-default'), {})
+			expect(task.isRecurrenceException).toEqual(false)
+			expect(task.recurrenceId).toBeNull()
+		})
 	})
 })
