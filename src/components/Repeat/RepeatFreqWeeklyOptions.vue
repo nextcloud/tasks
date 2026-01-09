@@ -9,8 +9,7 @@
 			{{ $t('calendar', 'on') }}
 		</span>
 		<div class="repeat-option-set-section__grid">
-			<NcButton
-				v-for="option in options"
+			<NcButton v-for="option in options"
 				:key="option.value"
 				class="repeat-option-set-section-grid-item"
 				:variant="option.selected ? 'primary' : 'secondary'"

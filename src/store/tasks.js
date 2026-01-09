@@ -1144,7 +1144,7 @@ const actions = {
 					await context.dispatch('setPercentComplete', { task: subTask, complete: 100 })
 				}
 			}))
-			
+
 			// Handle recurring tasks
 			if (task.isRecurring && task.recurrenceRule.recurrenceRuleValue) {
 				await context.dispatch('handleRecurringTaskCompletion', { task })
@@ -1601,7 +1601,7 @@ const actions = {
 	 */
 	async removeRecurrenceRule(context, { task }) {
 		const { getDefaultRecurrenceRuleObject } = await import('../models/recurrenceRule.js')
-		
+
 		// Remove the RRULE property from vtodo
 		task.vtodo.removeAllProperties('rrule')
 
@@ -1629,7 +1629,7 @@ const actions = {
 		try {
 			// Get the instance date (the current due/start date)
 			const instanceDate = task.due || task.start
-			
+
 			if (!instanceDate) {
 				// Task has no date - just mark it complete without creating exception
 				console.warn('Recurring task has no due/start date - cannot create exception or advance to next occurrence')
@@ -1649,14 +1649,14 @@ const actions = {
 			const comp = new ICAL.Component('vcalendar')
 			comp.updatePropertyWithValue('prodid', '-//Nextcloud Tasks')
 			comp.updatePropertyWithValue('version', '2.0')
-			
+
 			const vtodo = new ICAL.Component('vtodo')
 			comp.addSubcomponent(vtodo)
 
 			// Copy properties from master task
 			vtodo.updatePropertyWithValue('uid', task.uid)
 			vtodo.updatePropertyWithValue('summary', task.summary)
-			
+
 			if (task.description) {
 				vtodo.updatePropertyWithValue('description', task.description)
 			}
@@ -1727,7 +1727,7 @@ const actions = {
 
 			// Convert RecurValue to ICAL.Recur to get the iterator
 			const icalRecur = freshTask.recurrenceRule.recurrenceRuleValue.toICALJs()
-			
+
 			// Create a floating time (no timezone) from instanceDate to avoid timezone issues
 			const startTime = new ICAL.Time({
 				year: instanceDate.year,
@@ -1738,18 +1738,18 @@ const actions = {
 				second: instanceDate.second,
 				isDate: instanceDate.isDate,
 			})
-			
+
 			const iterator = icalRecur.iterator(startTime)
-			
+
 			// Skip current occurrence
 			iterator.next()
-			
+
 			// Get next occurrence (ical.js iterator returns ICAL.Time directly, or null when done)
 			const nextOccurrence = iterator.next()
 			if (nextOccurrence) {
 				const nextDate = nextOccurrence.toJSDate()
 				const nextMoment = moment(nextDate)
-				
+
 				// Calculate offset between start and due if both are set
 				let startOffset = null
 				if (freshTask.start && freshTask.due) {
@@ -1759,30 +1759,30 @@ const actions = {
 						startOffset = currentDue.diff(currentStart)
 					}
 				}
-				
+
 				// Update the appropriate date field
 				if (freshTask.due) {
-					context.commit('setDue', { 
-						task: freshTask, 
-						due: nextMoment, 
-						allDay: freshTask.allDay 
+					context.commit('setDue', {
+						task: freshTask,
+						due: nextMoment,
+						allDay: freshTask.allDay,
 					})
 				} else if (freshTask.start) {
 					// If only start date exists, update that
-					context.commit('setStart', { 
-						task: freshTask, 
-						start: nextMoment, 
-						allDay: freshTask.allDay 
+					context.commit('setStart', {
+						task: freshTask,
+						start: nextMoment,
+						allDay: freshTask.allDay,
 					})
 				}
-				
+
 				// Update start date if both dates were set, maintaining the offset
 				if (freshTask.due && startOffset !== null) {
 					const nextStart = nextMoment.clone().subtract(startOffset, 'ms')
-					context.commit('setStart', { 
-						task: freshTask, 
-						start: nextStart, 
-						allDay: freshTask.allDay 
+					context.commit('setStart', {
+						task: freshTask,
+						start: nextStart,
+						allDay: freshTask.allDay,
 					})
 				}
 
@@ -1790,7 +1790,7 @@ const actions = {
 				freshTask.setComplete(0)
 				freshTask.setCompleted(false)
 				freshTask.setStatus(null)
-				
+
 				// Save the updated master task
 				await context.dispatch('updateTask', freshTask)
 			} else {

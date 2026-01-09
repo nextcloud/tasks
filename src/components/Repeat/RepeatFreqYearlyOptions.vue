@@ -7,8 +7,7 @@
 	<div class="repeat-option-set repeat-option-set--yearly">
 		<div class="repeat-option-set-section">
 			<div class="repeat-option-set-section__grid">
-				<NcButton
-					v-for="option in byMonthOptions"
+				<NcButton v-for="option in byMonthOptions"
 					:key="option.value"
 					class="repeat-option-set-section-grid-item"
 					:variant="option.selected ? 'primary' : 'secondary'"
@@ -18,17 +17,15 @@
 			</div>
 		</div>
 		<div class="repeat-option-set-section">
-			<NcCheckboxRadioSwitch
-				class="repeat-option-set-section__title"
+			<NcCheckboxRadioSwitch class="repeat-option-set-section__title"
 				type="radio"
 				:name="radioInputId"
 				:model-value="byMonthDayEnabled"
-				@update:modelValue="enableByMonthDay">
+				@update:model-value="enableByMonthDay">
 				{{ $t('calendar', 'On specific day') }}
 			</NcCheckboxRadioSwitch>
 			<div class="repeat-option-set-section__grid">
-				<NcButton
-					v-for="option in byMonthDayOptions"
+				<NcButton v-for="option in byMonthDayOptions"
 					:key="option.value"
 					class="repeat-option-set-section-grid-item"
 					:variant="option.selected ? 'primary' : 'secondary'"
@@ -39,20 +36,17 @@
 			</div>
 		</div>
 		<div class="repeat-option-set-section repeat-option-set-section--on-the-select">
-			<NcCheckboxRadioSwitch
-				class="repeat-option-set-section__title"
+			<NcCheckboxRadioSwitch class="repeat-option-set-section__title"
 				type="radio"
 				:name="radioInputId"
 				:model-value="!byMonthDayEnabled"
-				@update:modelValue="enableBySetPosition">
+				@update:model-value="enableBySetPosition">
 				{{ $t('calendar', 'On the') }}
 			</NcCheckboxRadioSwitch>
-			<RepeatFirstLastSelect
-				:by-set-position="bySetPosition"
+			<RepeatFirstLastSelect :by-set-position="bySetPosition"
 				:disabled="byMonthDayEnabled"
 				@change="changeBySetPosition" />
-			<RepeatOnTheSelect
-				:by-day="byDay"
+			<RepeatOnTheSelect :by-day="byDay"
 				:disabled="byMonthDayEnabled"
 				@change="changeByDay" />
 		</div>

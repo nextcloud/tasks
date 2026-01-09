@@ -5,8 +5,7 @@
 
 <template>
 	<div class="repeat-option-set repeat-option-set--interval-freq">
-		<NcTextField
-			v-if="!isIntervalDisabled"
+		<NcTextField v-if="!isIntervalDisabled"
 			:label="repeatEveryLabel"
 			type="number"
 			class="repeat-option-set__interval"
@@ -14,8 +13,7 @@
 			max="366"
 			:value="interval"
 			@input="changeInterval" />
-		<RepeatFreqSelect
-			class="repeat-option-set__frequency"
+		<RepeatFreqSelect class="repeat-option-set__frequency"
 			:freq="frequency"
 			:count="interval"
 			@change="changeFrequency" />

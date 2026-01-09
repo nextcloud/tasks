@@ -133,17 +133,17 @@ export default class Task {
 		if (this.vtodo && !this._recurrenceId) {
 			const recurrenceRules = this.vtodo.getAllProperties('rrule')
 			const firstRecurrenceRule = recurrenceRules?.[0]
-			
+
 			if (firstRecurrenceRule) {
 				try {
 					// Get the ICAL.Recur value and convert directly to RecurValue
 					const icalRecur = firstRecurrenceRule.getFirstValue()
 					const recurValue = RecurValue.fromICALJs(icalRecur)
-					
+
 					// Get reference date for the mapping function
 					const referenceDate = this._due || this._start
 					const jsDate = referenceDate?.toJSDate() || null
-					
+
 					this._recurrenceRule = mapRecurrenceRuleValueToRecurrenceRuleObject(recurValue, jsDate)
 					this._hasMultipleRRules = recurrenceRules.length > 1
 				} catch (e) {
@@ -153,7 +153,7 @@ export default class Task {
 				}
 			}
 		}
-		
+
 		// Set default if not already set
 		if (!this._recurrenceRule) {
 			this._recurrenceRule = getDefaultRecurrenceRuleObject()

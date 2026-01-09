@@ -8,17 +8,17 @@ import { describe, expect, it } from 'vitest'
 
 describe('task', () => {
 	'use strict'
-	
+
 	it('RecurValue should be available', () => {
 		expect(RecurValue).toBeDefined()
 		expect(typeof RecurValue.fromData).toEqual('function')
-		
+
 		// Test creating a simple recurrence rule
 		const recurValue = RecurValue.fromData({ freq: 'DAILY', interval: 1 })
 		expect(recurValue).toBeDefined()
 		expect(recurValue.frequency).toEqual('DAILY')
 	})
-	
+
 	it('Should manually parse RRULE', () => {
 		const ics = loadICS('vcalendars/vcalendar-recurring-daily')
 		const jCal = ICAL.parse(ics)
@@ -26,37 +26,37 @@ describe('task', () => {
 		const vtodo = vCalendar.getFirstSubcomponent('vtodo')
 		const rruleProp = vtodo.getFirstProperty('rrule')
 		const icalRecur = rruleProp.getFirstValue()
-		
+
 		// Try to convert to RecurValue
 		const recurData = {
 			freq: icalRecur.freq,
 			interval: icalRecur.interval || 1,
 		}
 		const recurValue = RecurValue.fromData(recurData)
-		
+
 		expect(recurValue).toBeDefined()
 		expect(recurValue.frequency).toEqual('DAILY')
 	})
-	
+
 	it('Should parse RRULE when task is created', () => {
 		// Log to see what's happening
 		const origWarn = console.warn
 		const warnings = []
 		console.warn = (...args) => { warnings.push(args.join(' ')); origWarn(...args) }
-		
+
 		const task = new Task(loadICS('vcalendars/vcalendar-recurring-daily'), {})
-		
+
 		console.warn = origWarn
-		
+
 		// Check if there were warnings
 		if (warnings.length > 0) {
 			console.log('Warnings during task creation:', warnings)
 		}
-		
+
 		// The task should have recurrence parsed
 		console.log('Task isRecurring:', task.isRecurring)
 		console.log('Task recurrenceRule:', JSON.stringify(task.recurrenceRule, null, 2))
-		
+
 		expect(task.isRecurring).toEqual(true)
 	})
 

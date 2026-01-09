@@ -6,8 +6,7 @@
 <template>
 	<div class="repeat-option-set repeat-option-set--end">
 		<span class="repeat-option-end__label">{{ $t('calendar', 'End repeat') }}</span>
-		<NcSelect
-			class="repeat-option-end__end-type-select"
+		<NcSelect class="repeat-option-end__end-type-select"
 			:options="options"
 			:searchable="false"
 			:name="$t('calendar', 'Select to end repeat')"
@@ -16,23 +15,20 @@
 			input-id="value"
 			label="label"
 			@input="changeEndType" />
-		<DatePicker
-			v-if="isUntil"
+		<DatePicker v-if="isUntil"
 			class="repeat-option-end__until"
 			:min="minimumDate"
 			:date="until"
 			type="date"
 			@change="changeUntil" />
-		<input
-			v-if="isCount"
+		<input v-if="isCount"
 			class="repeat-option-end__count"
 			type="number"
 			min="1"
 			max="3500"
 			:value="count"
 			@input="changeCount">
-		<span
-			v-if="isCount"
+		<span v-if="isCount"
 			class="repeat-option-end__count">
 			{{ occurrencesLabel }}
 		</span>
@@ -167,17 +163,17 @@ export default {
 			}
 
 			switch (value.value) {
-				case 'until':
-					this.$emit('change-to-until')
-					break
+			case 'until':
+				this.$emit('change-to-until')
+				break
 
-				case 'count':
-					this.$emit('change-to-count')
-					break
+			case 'count':
+				this.$emit('change-to-count')
+				break
 
-				case 'never':
-				default:
-					this.$emit('set-infinite')
+			case 'never':
+			default:
+				this.$emit('set-infinite')
 			}
 		},
 

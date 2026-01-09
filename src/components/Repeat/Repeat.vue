@@ -6,18 +6,15 @@
 <template>
 	<div class="property-repeat" :class="{ 'property-repeat--readonly': isReadOnly, 'does-not-repeat': recurrenceRule.frequency === 'NONE' }">
 		<div class="property-repeat__summary">
-			<RepeatIcon
-				class="property-repeat__summary__icon"
+			<RepeatIcon class="property-repeat__summary__icon"
 				:name="$t('calendar', 'Repeat')"
 				:size="20" />
-			<RepeatSummary
-				class="property-repeat__summary__content"
+			<RepeatSummary class="property-repeat__summary__content"
 				:recurrence-rule="recurrenceRule" />
 			<Actions v-if="!isReadOnly">
 				<ActionButton @click="toggleOptions">
 					<template #icon>
-						<component
-							:is="toggleIcon"
+						<component :is="toggleIcon"
 							:size="20"
 							decorative />
 					</template>
@@ -26,22 +23,19 @@
 			</Actions>
 		</div>
 
-		<NcModal :show.sync="showOptions">
+		<NcModal v-model:show="showOptions">
 			<div class="property-repeat__options">
 				<h2>{{ $t('calendar', 'Repeat event') }}</h2>
-				<RepeatFreqInterval
-					v-if="!isRecurrenceException && !isReadOnly"
+				<RepeatFreqInterval v-if="!isRecurrenceException && !isReadOnly"
 					:frequency="recurrenceRule.frequency"
 					:interval="recurrenceRule.interval"
 					@change-interval="changeInterval"
 					@change-frequency="changeFrequency" />
-				<RepeatFreqWeeklyOptions
-					v-if="isFreqWeekly && !isRecurrenceException && !isReadOnly"
+				<RepeatFreqWeeklyOptions v-if="isFreqWeekly && !isRecurrenceException && !isReadOnly"
 					:by-day="recurrenceRule.byDay"
 					@add-by-day="addByDay"
 					@remove-by-day="removeByDay" />
-				<RepeatFreqMonthlyOptions
-					v-if="isFreqMonthly && !isRecurrenceException && !isReadOnly"
+				<RepeatFreqMonthlyOptions v-if="isFreqMonthly && !isRecurrenceException && !isReadOnly"
 					:by-day="recurrenceRule.byDay"
 					:by-month-day="recurrenceRule.byMonthDay"
 					:by-set-position="recurrenceRule.bySetPosition"
@@ -51,8 +45,7 @@
 					@change-by-set-position="setBySetPosition"
 					@change-to-by-set-position="changeToBySetPositionMonthly"
 					@change-to-by-month-day="changeToByDayMonthly" />
-				<RepeatFreqYearlyOptions
-					v-if="isFreqYearly && !isRecurrenceException && !isReadOnly"
+				<RepeatFreqYearlyOptions v-if="isFreqYearly && !isRecurrenceException && !isReadOnly"
 					:by-day="recurrenceRule.byDay"
 					:by-month="recurrenceRule.byMonth"
 					:by-month-day="recurrenceRule.byMonthDay"
@@ -65,8 +58,7 @@
 					@change-by-set-position="setBySetPosition"
 					@change-to-by-set-position="changeToBySetPositionYearly"
 					@change-to-by-month-day="changeToByDayYearly" />
-				<RepeatEndRepeat
-					v-if="isRepeating && !isRecurrenceException && !isReadOnly"
+				<RepeatEndRepeat v-if="isRepeating && !isRecurrenceException && !isReadOnly"
 					:calendar-object-instance="calendarObjectInstance"
 					:until="recurrenceRule.until"
 					:count="recurrenceRule.count"

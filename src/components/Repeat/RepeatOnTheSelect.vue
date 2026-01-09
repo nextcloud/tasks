@@ -4,8 +4,7 @@
 -->
 
 <template>
-	<NcSelect
-		:allow-empty="false"
+	<NcSelect :allow-empty="false"
 		:options="options"
 		:value="selected"
 		:disabled="disabled"

@@ -54,11 +54,21 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<div class="recurrence-editor__row">
 						<label>{{ t('tasks', 'Repeat') }}</label>
 						<select v-model="localFrequency" class="recurrence-select">
-							<option value="NONE">{{ t('tasks', 'Does not repeat') }}</option>
-							<option value="DAILY">{{ t('tasks', 'Daily') }}</option>
-							<option value="WEEKLY">{{ t('tasks', 'Weekly') }}</option>
-							<option value="MONTHLY">{{ t('tasks', 'Monthly') }}</option>
-							<option value="YEARLY">{{ t('tasks', 'Yearly') }}</option>
+							<option value="NONE">
+								{{ t('tasks', 'Does not repeat') }}
+							</option>
+							<option value="DAILY">
+								{{ t('tasks', 'Daily') }}
+							</option>
+							<option value="WEEKLY">
+								{{ t('tasks', 'Weekly') }}
+							</option>
+							<option value="MONTHLY">
+								{{ t('tasks', 'Monthly') }}
+							</option>
+							<option value="YEARLY">
+								{{ t('tasks', 'Yearly') }}
+							</option>
 						</select>
 					</div>
 
@@ -74,9 +84,15 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<div v-if="localFrequency !== 'NONE'" class="recurrence-editor__row">
 						<label>{{ t('tasks', 'End') }}</label>
 						<select v-model="endType" class="recurrence-select">
-							<option value="never">{{ t('tasks', 'Never') }}</option>
-							<option value="until">{{ t('tasks', 'On date') }}</option>
-							<option value="count">{{ t('tasks', 'After') }}</option>
+							<option value="never">
+								{{ t('tasks', 'Never') }}
+							</option>
+							<option value="until">
+								{{ t('tasks', 'On date') }}
+							</option>
+							<option value="count">
+								{{ t('tasks', 'After') }}
+							</option>
 						</select>
 					</div>
 
@@ -160,25 +176,25 @@ export default {
 			if (!this.isRecurring) {
 				return t('tasks', 'Does not repeat')
 			}
-			
+
 			const rule = this.task.recurrenceRule
 			const frequency = rule.frequency.toLowerCase()
 			const interval = rule.interval || 1
-			
+
 			let summary = ''
 			if (interval === 1) {
 				summary = t('tasks', `Repeats ${frequency}`)
 			} else {
 				summary = t('tasks', `Every {interval} ${frequency}`, { interval })
 			}
-			
+
 			if (rule.until) {
 				const date = new Date(rule.until).toLocaleDateString()
 				summary += ' ' + t('tasks', 'until {date}', { date })
 			} else if (rule.count) {
 				summary += ' ' + t('tasks', '{count} times', { count: rule.count })
 			}
-			
+
 			return summary
 		},
 	},
@@ -194,24 +210,24 @@ export default {
 	},
 	methods: {
 		t,
-		
+
 		openEditor() {
 			if (!this.readOnly) {
 				this.loadFromRule(this.task.recurrenceRule)
 				this.showEditor = true
 			}
 		},
-		
+
 		closeEditor() {
 			this.showEditor = false
 		},
-		
+
 		loadFromRule(rule) {
 			this.localFrequency = rule.frequency || 'NONE'
 			this.localInterval = rule.interval || 1
 			this.localUntil = rule.until ? new Date(rule.until) : null
 			this.localCount = rule.count || null
-			
+
 			if (rule.until) {
 				this.endType = 'until'
 			} else if (rule.count) {
@@ -220,35 +236,35 @@ export default {
 				this.endType = 'never'
 			}
 		},
-		
+
 		async saveRecurrence() {
 			if (this.localFrequency === 'NONE') {
 				await this.clearRecurrence()
 				this.closeEditor()
 				return
 			}
-			
+
 			// Build the recurrence rule
 			const recurrenceData = {
 				frequency: this.localFrequency,
 				interval: this.localInterval || 1,
 			}
-			
+
 			if (this.endType === 'until' && this.localUntil) {
 				recurrenceData.until = this.localUntil
 			} else if (this.endType === 'count' && this.localCount) {
 				recurrenceData.count = this.localCount
 			}
-			
+
 			// Dispatch to store
 			await this.$store.dispatch('setRecurrenceRule', {
 				task: this.task,
 				recurrenceRule: recurrenceData,
 			})
-			
+
 			this.closeEditor()
 		},
-		
+
 		async clearRecurrence() {
 			await this.$store.dispatch('removeRecurrenceRule', {
 				task: this.task,
