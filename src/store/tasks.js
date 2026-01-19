@@ -30,7 +30,7 @@ import Task from '../models/task.js'
 import { showError } from '@nextcloud/dialogs'
 import { emit } from '@nextcloud/event-bus'
 import { translate as t } from '@nextcloud/l10n'
-import moment from '@nextcloud/moment'
+import dayjs from 'dayjs'
 
 import ICAL from 'ical.js'
 
@@ -1433,12 +1433,12 @@ const actions = {
 	async setDate(context, { task, day }) {
 		const start = task.startMoment.startOf('day')
 		const due = task.dueMoment.startOf('day')
-		day = moment().startOf('day').add(day, 'days')
+		day = dayjs().startOf('day').add(day, 'days')
 
 		let diff
 		// Adjust start date
 		if (start.isValid()) {
-			diff = start.diff(moment().startOf('day'), 'days')
+			diff = start.diff(dayjs().startOf('day'), 'days')
 			diff = diff < 0 ? 0 : diff
 			if (diff !== day) {
 				const newStart = task.startMoment.year(day.year()).month(day.month()).date(day.date())
@@ -1447,7 +1447,7 @@ const actions = {
 			}
 		// Adjust due date
 		} else if (due.isValid()) {
-			diff = due.diff(moment().startOf('day'), 'days')
+			diff = due.diff(dayjs().startOf('day'), 'days')
 			diff = diff < 0 ? 0 : diff
 			if (diff !== day) {
 				const newDue = task.dueMoment.year(day.year()).month(day.month()).date(day.date())

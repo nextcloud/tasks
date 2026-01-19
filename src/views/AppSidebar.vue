@@ -289,7 +289,7 @@ import { startDateString, dueDateString } from '../utils/dateStrings.js'
 
 import { subscribe, unsubscribe } from '@nextcloud/event-bus'
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'
-import moment from '@nextcloud/moment'
+import dayjs from 'dayjs'
 import NcActionButton from '@nextcloud/vue/components/NcActionButton'
 import NcActionLink from '@nextcloud/vue/components/NcActionLink'
 import NcEmptyContent from '@nextcloud/vue/components/NcEmptyContent'
@@ -539,7 +539,7 @@ export default {
 				return start.toDate()
 			}
 			const due = this.task.dueMoment
-			let reference = moment().add(1, 'h')
+			let reference = dayjs().add(1, 'h')
 			if (due.isBefore(reference)) {
 				reference = due.subtract(1, 'm')
 			}
@@ -558,7 +558,7 @@ export default {
 				return due.toDate()
 			}
 			const start = this.task.startMoment
-			const reference = start.isAfter() ? start : moment()
+			const reference = start.isAfter() ? start : dayjs()
 			if (this.allDay) {
 				reference.startOf('day').add(1, 'd')
 			} else {

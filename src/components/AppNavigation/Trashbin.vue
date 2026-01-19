@@ -129,7 +129,6 @@ import { sort } from '../../store/storeHelper.js'
 
 import { showError } from '@nextcloud/dialogs'
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'
-import moment from '@nextcloud/moment'
 import NcAppNavigationItem from '@nextcloud/vue/components/NcAppNavigationItem'
 import NcActions from '@nextcloud/vue/components/NcActions'
 import NcActionButton from '@nextcloud/vue/components/NcActionButton'

@@ -21,7 +21,7 @@
  */
 
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'
-import moment from '@nextcloud/moment'
+import dayjs from 'dayjs'
 import { convertTimeZone } from './alarms.js'
 
 /**
