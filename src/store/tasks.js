@@ -653,7 +653,7 @@ const mutations = {
 	setCompletedDate(state, { task, completedDate }) {
 		if (completedDate !== null) {
 			// Check that the completed date is in the past.
-			const now = moment(ICAL.Time.fromJSDate(new Date(), true), 'YYYYMMDDTHHmmssZ')
+			const now = dayjs(ICAL.Time.fromJSDate(new Date(), true), 'YYYYMMDDTHHmmssZ')
 			if (completedDate.isAfter(now)) {
 				showError(t('tasks', 'Completion date must be in the past.'))
 				return

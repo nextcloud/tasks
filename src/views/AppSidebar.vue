@@ -290,6 +290,7 @@ import { startDateString, dueDateString } from '../utils/dateStrings.js'
 import { subscribe, unsubscribe } from '@nextcloud/event-bus'
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'
 import dayjs from 'dayjs'
+import calendar from 'dayjs/plugin/calendar'
 import NcActionButton from '@nextcloud/vue/components/NcActionButton'
 import NcActionLink from '@nextcloud/vue/components/NcActionLink'
 import NcEmptyContent from '@nextcloud/vue/components/NcEmptyContent'
@@ -318,6 +319,8 @@ import Undo from 'vue-material-design-icons/Undo.vue'
 import Web from 'vue-material-design-icons/Web.vue'
 
 import { mapGetters, mapActions } from 'vuex'
+
+dayjs.extend(calendar)
 
 export default {
 	components: {
@@ -543,7 +546,7 @@ export default {
 			if (due.isBefore(reference)) {
 				reference = due.subtract(1, 'm')
 			}
-			reference.startOf(this.allDay ? 'day' : 'hour')
+			reference = reference.startOf(this.allDay ? 'day' : 'hour')
 			return reference.toDate()
 		},
 
@@ -558,11 +561,11 @@ export default {
 				return due.toDate()
 			}
 			const start = this.task.startMoment
-			const reference = start.isAfter() ? start : dayjs()
+			let reference = start.isAfter() ? start : dayjs()
 			if (this.allDay) {
-				reference.startOf('day').add(1, 'd')
+				reference = reference.startOf('day').add(1, 'd')
 			} else {
-				reference.startOf('hour').add(1, 'h')
+				reference = reference.startOf('hour').add(1, 'h')
 			}
 			return reference.toDate()
 		},
@@ -824,7 +827,7 @@ export default {
 		 */
 		setStartDate({ task, value: start }) {
 			if (start) {
-				start = moment(start)
+				start = dayjs(start)
 			}
 			if (this.task.startMoment.isSame(start)) {
 				return
@@ -842,7 +845,7 @@ export default {
 		 */
 		setDueDate({ task, value: due }) {
 			if (due) {
-				due = moment(due)
+				due = dayjs(due)
 			}
 			if (this.task.dueMoment.isSame(due)) {
 				return
@@ -859,7 +862,7 @@ export default {
 		 */
 		 changeCompletedDate({ task, value: completedDate }) {
 			if (completedDate) {
-				completedDate = moment(completedDate)
+				completedDate = dayjs(completedDate)
 			}
 			if (this.task.completedDateMoment.isSame(completedDate)) {
 				return

@@ -209,9 +209,9 @@ export default {
 				if (vobject.isEvent) {
 					const event = toRaw(vobject?.calendarComponent.getFirstComponent('VEVENT'))
 					if (event?.startDate.jsDate && event?.isAllDay()) {
-						subline += ' · ' + moment(event.startDate.jsDate).format('LL')
+						subline += ' · ' + dayjs(event.startDate.jsDate).format('LL')
 					} else if (event?.startDate.jsDate) {
-						subline += ' · ' + moment(event?.startDate.jsDate).format('LLL')
+						subline += ' · ' + dayjs(event?.startDate.jsDate).format('LLL')
 					}
 				}
 				const color = vobject.calendarComponent.getComponentIterator().next().value?.color
