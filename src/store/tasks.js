@@ -586,7 +586,7 @@ const mutations = {
 	 * @param {object} state The store data
 	 * @param {object} data Destructuring object
 	 * @param {Task} data.task The task
-	 * @param {moment} data.due The due date moment
+	 * @param {dayjs} data.due The due date moment
 	 * @param {boolean} data.allDay Whether the date is all-day
 	 */
 	setDue(state, { task, due, allDay }) {
@@ -600,7 +600,7 @@ const mutations = {
 			if (start.isValid() && due.isBefore(start)) {
 				const currentdue = task.dueMoment
 				if (currentdue.isValid()) {
-					start.subtract(currentdue.diff(due), 'ms')
+					start = start.subtract(currentdue.diff(due), 'ms')
 				} else {
 					start = due.clone()
 				}
@@ -617,7 +617,7 @@ const mutations = {
 	 * @param {object} state The store data
 	 * @param {object} data Destructuring object
 	 * @param {Task} data.task The task
-	 * @param {moment} data.start The start date moment
+	 * @param {dayjs} data.start The start date moment
 	 * @param {boolean} data.allDay Whether the date is all-day
 	 */
 	setStart(state, { task, start, allDay }) {
@@ -631,7 +631,7 @@ const mutations = {
 			if (due.isValid() && start.isAfter(due)) {
 				const currentstart = task.startMoment
 				if (currentstart.isValid()) {
-					due.add(start.diff(currentstart), 'ms')
+					due = due.add(start.diff(currentstart), 'ms')
 				} else {
 					due = start.clone()
 				}

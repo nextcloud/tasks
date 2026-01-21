@@ -121,7 +121,7 @@ function isTaskToday(task) {
 /**
  * Checks if a date is today
  *
- * @param {moment} date The date as moment
+ * @param {dayjs} date The date as moment
  * @return {boolean}
  */
 function today(date) {
@@ -141,7 +141,7 @@ function isTaskWeek(task) {
 /**
  * Checks if a date lies within the next week
  *
- * @param {moment} date The date as moment
+ * @param {dayjs} date The date as moment
  * @return {boolean}
  */
 function week(date) {
@@ -197,7 +197,7 @@ function dayOfTask(task) {
 /**
  * Checks if a date is overdue
  *
- * @param {moment} date The date
+ * @param {dayjs} date The date
  * @return {boolean}
  */
 function overdue(date) {
@@ -467,7 +467,7 @@ function sortByDeletedAt(taskA, taskB) {
 /**
  * Function to convert a moment to a ICAL Time
  *
- * @param {moment} moment The moment to convert
+ * @param {dayjs} moment The moment to convert
  * @param {boolean} asDate Is the moment all day
  * @return {ICAL.Time}
  */
