@@ -84,6 +84,7 @@ OC.L10N.register(
     "Set due date" : "Definir data de expiração",
     "All day" : "Todo o dia",
     "Details" : "Detalhes",
+    "Selecting a classification is forbidden, because the task was shared with you." : "Não é possível selecionar uma classificação, uma vez que a tarefa foi partilhada consigo.",
     "Select tags" : "Selecione etiquetas",
     "Notes" : "Notas",
     "An error occurred" : "Ocorreu um erro"

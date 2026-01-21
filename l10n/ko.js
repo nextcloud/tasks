@@ -59,6 +59,7 @@ OC.L10N.register(
     "Restore" : "복원",
     "Delete permanently" : "영구히 삭제",
     "Cancel" : "취소",
+    "Notification" : "공지",
     "Email" : "이메일",
     "Audio notification" : "소리 알림",
     "Other notification" : "다른 알림",
