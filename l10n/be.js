@@ -88,6 +88,7 @@ OC.L10N.register(
     "Loading task from server." : "Загрузка задання з сервера.",
     "Task not found!" : "Заданне не знойдзена!",
     "All day" : "Увесь дзень",
+    "Unpin" : "Адмацаваць",
     "Details" : "Падрабязнасці",
     "Notes" : "Нататкі",
     "No upcoming tasks" : "Няма будучых заданняў",
@@ -104,7 +105,6 @@ OC.L10N.register(
     "Create a task" : "Стварыць заданне",
     "Message from {author} in {conversationName}" : "Паведамленне ад {author} у {conversationName}",
     "[Starts tomorrow]" : "[Пачынаецца заўтра]",
-    "[Starts tomorrow at] LT" : "[Пачынаецца заўтра ў]",
-    "never" : "ніколі"
+    "[Starts tomorrow at] LT" : "[Пачынаецца заўтра ў]"
 },
 "nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);");
