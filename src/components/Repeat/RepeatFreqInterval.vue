@@ -11,8 +11,8 @@
 			class="repeat-option-set__interval"
 			min="1"
 			max="366"
-			:value="interval"
-			@input="changeInterval" />
+			:model-value="String(interval)"
+			@update:model-value="changeInterval" />
 		<RepeatFreqSelect class="repeat-option-set__frequency"
 			:freq="frequency"
 			:count="interval"
@@ -67,14 +67,12 @@ export default {
 
 		/**
 		 *
-		 * @param {Event} event The Input-event triggered when modifying the input
+		 * @param {string} value The new interval value
 		 */
-		changeInterval(event) {
-			const minimumValue = parseInt(event.target.min, 10)
-			const maximumValue = parseInt(event.target.max, 10)
-			const selectedValue = parseInt(event.target.value, 10)
+		changeInterval(value) {
+			const selectedValue = parseInt(value, 10)
 
-			if (selectedValue >= minimumValue && selectedValue <= maximumValue) {
+			if (selectedValue >= 1 && selectedValue <= 366) {
 				this.$emit('change-interval', selectedValue)
 			}
 		},

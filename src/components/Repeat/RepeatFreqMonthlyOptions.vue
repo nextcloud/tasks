@@ -10,7 +10,6 @@
 				type="radio"
 				:name="radioInputId"
 				:model-value="byMonthDayEnabled"
-				@update:model-value="enableByMonthDay"
 				@update:model-value="enableByMonthDay">
 				{{ t('tasks', 'By day of the month') }}
 			</NcCheckboxRadioSwitch>
@@ -30,7 +29,6 @@
 				type="radio"
 				:name="radioInputId"
 				:model-value="!byMonthDayEnabled"
-				@update:model-value="enableBySetPosition"
 				@update:model-value="enableBySetPosition">
 				{{ t('tasks', 'On the') }}
 			</NcCheckboxRadioSwitch>
@@ -164,3 +162,37 @@ export default {
 	},
 }
 </script>
+
+<style lang="scss" scoped>
+.repeat-option-set--monthly {
+	display: flex;
+	flex-direction: column;
+	gap: calc(var(--default-grid-baseline) * 2);
+}
+
+.repeat-option-set-section {
+	display: flex;
+	flex-direction: column;
+	gap: calc(var(--default-grid-baseline) * 2);
+
+	&--on-the-select {
+		flex-direction: row;
+		align-items: center;
+		flex-wrap: wrap;
+	}
+}
+
+.repeat-option-set-section__title {
+	font-weight: bold;
+}
+
+.repeat-option-set-section__grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: calc(var(--default-grid-baseline) * 1);
+}
+
+.repeat-option-set-section-grid-item {
+	min-width: 44px;
+}
+</style>

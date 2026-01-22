@@ -68,7 +68,11 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				@set-checked="toggleAllDay(task)" />
 			<RecurrenceItem v-show="!readOnly || task.isRecurring"
 				:task="task"
-				:read-only="readOnly" />
+				:read-only="readOnly">
+				<template #icon>
+					<Repeat :size="20" />
+				</template>
+			</RecurrenceItem>
 			<CalendarPickerItem :disabled="readOnly"
 				:calendar="task.calendar"
 				:calendars="targetCalendars"
@@ -318,6 +322,7 @@ import Pin from 'vue-material-design-icons/PinOutline.vue'
 import PinOff from 'vue-material-design-icons/PinOffOutline.vue'
 import Star from 'vue-material-design-icons/StarOutline.vue'
 import TextBoxOutline from 'vue-material-design-icons/TextBoxOutline.vue'
+import Repeat from 'vue-material-design-icons/Repeat.vue'
 import Undo from 'vue-material-design-icons/Undo.vue'
 import Web from 'vue-material-design-icons/Web.vue'
 
@@ -347,6 +352,7 @@ export default {
 		Pencil,
 		Percent,
 		Pin,
+		Repeat,
 		PinOff,
 		Star,
 		TextBoxOutline,

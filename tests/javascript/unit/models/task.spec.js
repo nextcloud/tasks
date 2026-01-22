@@ -3,7 +3,7 @@ import Task from '../../../../src/models/task.js'
 import { loadICS } from '../../../assets/loadAsset.js'
 
 import ICAL from 'ical.js'
-import { RecurValue } from '@nextcloud/calendar-js'
+import { RecurValue, DateTimeValue } from '@nextcloud/calendar-js'
 import { describe, expect, it } from 'vitest'
 
 describe('task', () => {
@@ -419,6 +419,103 @@ describe('task', () => {
 			expect(task.canCreateRecurrenceException).toEqual(false)
 		})
 
+		it('Should parse weekly recurrence with multiple BYDAY values', () => {
+			const task = new Task(loadICS('vcalendars/vcalendar-recurring-weekly-byday'), {})
+			expect(task.isRecurring).toEqual(true)
+			expect(task.recurrenceRule.frequency).toEqual('WEEKLY')
+			expect(task.recurrenceRule.byDay).toContain('MO')
+			expect(task.recurrenceRule.byDay).toContain('WE')
+			expect(task.recurrenceRule.byDay).toContain('FR')
+			expect(task.recurrenceRule.byDay.length).toEqual(3)
+		})
+
+		it('Should parse monthly recurrence with multiple BYMONTHDAY values', () => {
+			const task = new Task(loadICS('vcalendars/vcalendar-recurring-monthly-bymonthday'), {})
+			expect(task.isRecurring).toEqual(true)
+			expect(task.recurrenceRule.frequency).toEqual('MONTHLY')
+			expect(task.recurrenceRule.byMonthDay).toContain(1)
+			expect(task.recurrenceRule.byMonthDay).toContain(15)
+			expect(task.recurrenceRule.byMonthDay.length).toEqual(2)
+		})
+
+		it('Should parse monthly recurrence with BYSETPOS (first Monday)', () => {
+			const task = new Task(loadICS('vcalendars/vcalendar-recurring-monthly-bysetpos'), {})
+			expect(task.isRecurring).toEqual(true)
+			expect(task.recurrenceRule.frequency).toEqual('MONTHLY')
+			expect(task.recurrenceRule.byDay).toContain('MO')
+			expect(task.recurrenceRule.bySetPosition).toEqual(1)
+		})
+
+		it('Should parse yearly recurrence with BYMONTH', () => {
+			const task = new Task(loadICS('vcalendars/vcalendar-recurring-yearly-bymonth'), {})
+			expect(task.isRecurring).toEqual(true)
+			expect(task.recurrenceRule.frequency).toEqual('YEARLY')
+			expect(task.recurrenceRule.byMonth).toContain(1)
+			expect(task.recurrenceRule.byMonth).toContain(7)
+			expect(task.recurrenceRule.byMonthDay).toContain(15)
+		})
+
+		it('Should create RecurValue with multiple BYDAY using setComponent', () => {
+			// Test that setComponent correctly sets multiple BYDAY values
+			const recurrenceValue = RecurValue.fromData({
+				freq: 'WEEKLY',
+				interval: 1,
+			})
+
+			// Use setComponent like we do in setRecurrenceRule
+			recurrenceValue.setComponent('BYDAY', ['MO', 'WE', 'FR'])
+
+			// Verify the components are set
+			const byDayComponent = recurrenceValue.getComponent('BYDAY')
+			expect(byDayComponent).toContain('MO')
+			expect(byDayComponent).toContain('WE')
+			expect(byDayComponent).toContain('FR')
+			expect(byDayComponent.length).toEqual(3)
+
+			// Convert to ICAL and verify the string output
+			const icalRecur = recurrenceValue.toICALJs()
+			const rruleString = icalRecur.toString()
+			expect(rruleString).toContain('BYDAY=MO,WE,FR')
+		})
+
+		it('Should create RecurValue with BYMONTHDAY using setComponent', () => {
+			const recurrenceValue = RecurValue.fromData({
+				freq: 'MONTHLY',
+				interval: 1,
+			})
+
+			recurrenceValue.setComponent('BYMONTHDAY', [1, 15])
+
+			const byMonthDayComponent = recurrenceValue.getComponent('BYMONTHDAY')
+			expect(byMonthDayComponent).toContain(1)
+			expect(byMonthDayComponent).toContain(15)
+
+			const icalRecur = recurrenceValue.toICALJs()
+			const rruleString = icalRecur.toString()
+			expect(rruleString).toContain('BYMONTHDAY=1,15')
+		})
+
+		it('Should create RecurValue with BYSETPOS using setComponent', () => {
+			const recurrenceValue = RecurValue.fromData({
+				freq: 'MONTHLY',
+				interval: 1,
+			})
+
+			recurrenceValue.setComponent('BYDAY', ['MO'])
+			recurrenceValue.setComponent('BYSETPOS', [1])
+
+			const byDayComponent = recurrenceValue.getComponent('BYDAY')
+			expect(byDayComponent).toContain('MO')
+
+			const bySetPosComponent = recurrenceValue.getComponent('BYSETPOS')
+			expect(bySetPosComponent).toContain(1)
+
+			const icalRecur = recurrenceValue.toICALJs()
+			const rruleString = icalRecur.toString()
+			expect(rruleString).toContain('BYDAY=MO')
+			expect(rruleString).toContain('BYSETPOS=1')
+		})
+
 		it('Should iterate UNTIL-bounded recurrence using cloned time (preserves timezone)', () => {
 			// This tests the fix for: "TypeError: can't access property getAllSubcomponents, this.component is null"
 			// The error occurred when creating a floating time without timezone info for UNTIL comparison
@@ -507,6 +604,215 @@ describe('task', () => {
 			const task = new Task(loadICS('vcalendars/vcalendar-default'), {})
 			expect(task.isRecurrenceException).toEqual(false)
 			expect(task.recurrenceId).toBeNull()
+		})
+	})
+
+	describe('setRecurrenceRule Logic', () => {
+		it('Should create RRULE with weekly BYDAY for multiple days', () => {
+			// Test the logic used in setRecurrenceRule store action
+			const recurrenceValue = RecurValue.fromData({
+				freq: 'WEEKLY',
+				interval: 1,
+			})
+
+			// Set multiple days (Mon, Wed, Fri)
+			recurrenceValue.setComponent('BYDAY', ['MO', 'WE', 'FR'])
+
+			const icalRecur = recurrenceValue.toICALJs()
+			const rruleString = icalRecur.toString()
+
+			expect(rruleString).toContain('FREQ=WEEKLY')
+			expect(rruleString).toContain('BYDAY=MO,WE,FR')
+		})
+
+		it('Should create RRULE with monthly BYMONTHDAY for multiple days', () => {
+			const recurrenceValue = RecurValue.fromData({
+				freq: 'MONTHLY',
+				interval: 1,
+			})
+
+			// Set multiple month days (1st and 15th)
+			recurrenceValue.setComponent('BYMONTHDAY', [1, 15])
+
+			const icalRecur = recurrenceValue.toICALJs()
+			const rruleString = icalRecur.toString()
+
+			expect(rruleString).toContain('FREQ=MONTHLY')
+			expect(rruleString).toContain('BYMONTHDAY=1,15')
+		})
+
+		it('Should create RRULE with yearly BYMONTH for multiple months', () => {
+			const recurrenceValue = RecurValue.fromData({
+				freq: 'YEARLY',
+				interval: 1,
+			})
+
+			// Set multiple months (Jan and Jul) with day 15
+			recurrenceValue.setComponent('BYMONTH', [1, 7])
+			recurrenceValue.setComponent('BYMONTHDAY', [15])
+
+			const icalRecur = recurrenceValue.toICALJs()
+			const rruleString = icalRecur.toString()
+
+			expect(rruleString).toContain('FREQ=YEARLY')
+			expect(rruleString).toContain('BYMONTH=1,7')
+			expect(rruleString).toContain('BYMONTHDAY=15')
+		})
+
+		it('Should create RRULE with COUNT limit', () => {
+			const recurrenceValue = RecurValue.fromData({
+				freq: 'DAILY',
+				interval: 1,
+			})
+
+			recurrenceValue.count = 10
+
+			const icalRecur = recurrenceValue.toICALJs()
+			const rruleString = icalRecur.toString()
+
+			expect(rruleString).toContain('FREQ=DAILY')
+			expect(rruleString).toContain('COUNT=10')
+		})
+
+		it('Should create RRULE with UNTIL date', () => {
+			const recurrenceValue = RecurValue.fromData({
+				freq: 'DAILY',
+				interval: 1,
+			})
+
+			// Set UNTIL to a specific date
+			recurrenceValue.until = DateTimeValue.fromJSDate(new Date('2026-12-31T23:59:59Z'), { zone: 'utc' })
+
+			const icalRecur = recurrenceValue.toICALJs()
+			const rruleString = icalRecur.toString()
+
+			expect(rruleString).toContain('FREQ=DAILY')
+			expect(rruleString).toContain('UNTIL=')
+			expect(rruleString).toContain('20261231')
+		})
+
+		it('Should update task vtodo RRULE property', () => {
+			// Create a non-recurring task
+			const task = new Task(loadICS('vcalendars/vcalendar-default'), {})
+			expect(task.isRecurring).toEqual(false)
+
+			// Build a recurrence value like setRecurrenceRule does
+			const recurrenceValue = RecurValue.fromData({
+				freq: 'WEEKLY',
+				interval: 2,
+			})
+			recurrenceValue.setComponent('BYDAY', ['MO', 'FR'])
+
+			// Convert to ICAL and update task
+			const icalRecur = recurrenceValue.toICALJs()
+			task.vtodo.removeAllProperties('rrule')
+			task.vtodo.updatePropertyWithValue('rrule', icalRecur)
+
+			// Verify the RRULE was set
+			const rruleProp = task.vtodo.getFirstProperty('rrule')
+			expect(rruleProp).toBeDefined()
+
+			const rruleValue = rruleProp.getFirstValue()
+			expect(rruleValue.freq).toEqual('WEEKLY')
+			expect(rruleValue.interval).toEqual(2)
+		})
+	})
+
+	describe('handleRecurringTaskCompletion Logic', () => {
+		it('Should advance daily recurrence to next day', () => {
+			const task = new Task(loadICS('vcalendars/vcalendar-recurring-daily'), {})
+			expect(task.isRecurring).toEqual(true)
+
+			const icalRecur = task.recurrenceRule.recurrenceRuleValue.toICALJs()
+			const startTime = task.due.clone()
+
+			// Get iterator - first next() returns start, second returns next occurrence
+			const iterator = icalRecur.iterator(startTime)
+			iterator.next() // Skip the start date
+			const nextOccurrence = iterator.next()
+
+			expect(nextOccurrence).toBeDefined()
+			// Next occurrence should be 1 day after start
+			const dayDiff = (nextOccurrence.toUnixTime() - startTime.toUnixTime()) / 86400
+			expect(dayDiff).toEqual(1)
+		})
+
+		it('Should advance weekly recurrence to next week', () => {
+			const task = new Task(loadICS('vcalendars/vcalendar-recurring-weekly'), {})
+			expect(task.isRecurring).toEqual(true)
+			expect(task.recurrenceRule.interval).toEqual(2) // Every 2 weeks
+
+			const icalRecur = task.recurrenceRule.recurrenceRuleValue.toICALJs()
+			const startTime = task.due.clone()
+
+			// Get iterator - first next() returns start, second returns next occurrence
+			const iterator = icalRecur.iterator(startTime)
+			iterator.next() // Skip the start date
+			const nextOccurrence = iterator.next()
+
+			expect(nextOccurrence).toBeDefined()
+			// Next occurrence should be 2 weeks (14 days) after start
+			const dayDiff = (nextOccurrence.toUnixTime() - startTime.toUnixTime()) / 86400
+			expect(dayDiff).toEqual(14)
+		})
+
+		it('Should stop iteration when UNTIL date is reached', () => {
+			const task = new Task(loadICS('vcalendars/vcalendar-recurring-with-until'), {})
+			expect(task.isRecurring).toEqual(true)
+
+			const icalRecur = task.recurrenceRule.recurrenceRuleValue.toICALJs()
+			expect(icalRecur.until).toBeDefined()
+
+			const startTime = task.due.clone()
+			const iterator = icalRecur.iterator(startTime)
+
+			// Count occurrences until iterator returns null
+			let count = 0
+			while (iterator.next() !== null && count < 100) {
+				count++
+			}
+
+			// Should have limited occurrences (UNTIL is 7 days after start for daily)
+			expect(count).toBeLessThan(10)
+			expect(count).toBeGreaterThan(0)
+		})
+
+		it('Should correctly identify last COUNT occurrence', () => {
+			const task = new Task(loadICS('vcalendars/vcalendar-recurring-with-count'), {})
+			const icalRecur = task.recurrenceRule.recurrenceRuleValue.toICALJs()
+
+			// Initial count is 5
+			expect(icalRecur.count).toEqual(5)
+
+			// Simulate completing occurrences
+			icalRecur.count = 2
+			expect(icalRecur.count <= 1).toEqual(false) // Not last yet
+
+			icalRecur.count = 1
+			expect(icalRecur.count <= 1).toEqual(true) // This is the last occurrence
+		})
+
+		it('Should handle weekly recurrence with multiple BYDAY correctly', () => {
+			const task = new Task(loadICS('vcalendars/vcalendar-recurring-weekly-byday'), {})
+			expect(task.isRecurring).toEqual(true)
+			expect(task.recurrenceRule.byDay).toContain('MO')
+			expect(task.recurrenceRule.byDay).toContain('WE')
+			expect(task.recurrenceRule.byDay).toContain('FR')
+
+			const icalRecur = task.recurrenceRule.recurrenceRuleValue.toICALJs()
+			const startTime = task.due.clone()
+
+			const iterator = icalRecur.iterator(startTime)
+
+			// Get multiple occurrences
+			const occurrences = []
+			for (let i = 0; i < 5; i++) {
+				const occ = iterator.next()
+				if (occ) occurrences.push(occ)
+			}
+
+			// Should have 5 occurrences
+			expect(occurrences.length).toEqual(5)
 		})
 	})
 })

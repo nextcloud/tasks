@@ -1573,11 +1573,32 @@ const actions = {
 	 * @param {object} data.recurrenceRule The recurrence rule data
 	 */
 	async setRecurrenceRule(context, { task, recurrenceRule }) {
-		// Create or update the RRULE property
+		// Create base RecurValue with frequency and interval
 		const recurrenceValue = RecurValue.fromData({
 			freq: recurrenceRule.frequency,
 			interval: recurrenceRule.interval || 1,
 		})
+
+		// Use setComponent() for by-parts (following Calendar app pattern)
+		// Add BYDAY if provided (for weekly, monthly, yearly)
+		if (recurrenceRule.byDay && recurrenceRule.byDay.length > 0) {
+			recurrenceValue.setComponent('BYDAY', recurrenceRule.byDay)
+		}
+
+		// Add BYMONTH if provided (for yearly)
+		if (recurrenceRule.byMonth && recurrenceRule.byMonth.length > 0) {
+			recurrenceValue.setComponent('BYMONTH', recurrenceRule.byMonth)
+		}
+
+		// Add BYMONTHDAY if provided (for monthly, yearly)
+		if (recurrenceRule.byMonthDay && recurrenceRule.byMonthDay.length > 0) {
+			recurrenceValue.setComponent('BYMONTHDAY', recurrenceRule.byMonthDay)
+		}
+
+		// Add BYSETPOS if provided (for "on the first/last" options)
+		if (recurrenceRule.bySetPosition !== null && recurrenceRule.bySetPosition !== undefined) {
+			recurrenceValue.setComponent('BYSETPOS', [recurrenceRule.bySetPosition])
+		}
 
 		// Set end condition
 		if (recurrenceRule.until) {
@@ -1600,10 +1621,10 @@ const actions = {
 			interval: recurrenceRule.interval || 1,
 			count: recurrenceRule.count || null,
 			until: recurrenceRule.until || null,
-			byDay: [],
-			byMonth: [],
-			byMonthDay: [],
-			bySetPosition: null,
+			byDay: recurrenceRule.byDay || [],
+			byMonth: recurrenceRule.byMonth || [],
+			byMonthDay: recurrenceRule.byMonthDay || [],
+			bySetPosition: recurrenceRule.bySetPosition || null,
 			isUnsupported: false,
 		}
 		task._hasMultipleRRules = false

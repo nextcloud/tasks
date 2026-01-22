@@ -10,17 +10,16 @@
 			:options="options"
 			:searchable="false"
 			:name="t('tasks', 'Select to end repeat')"
-			:value="selectedOption"
+			:model-value="selectedOption"
 			:clearable="false"
 			input-id="value"
 			label="label"
-			@input="changeEndType" />
-		<DatePicker v-if="isUntil"
+			@update:model-value="changeEndType" />
+		<NcDateTimePicker v-if="isUntil"
 			class="repeat-option-end__until"
-			:min="minimumDate"
-			:date="until"
+			:value="until"
 			type="date"
-			@change="changeUntil" />
+			@input="changeUntil" />
 		<input v-if="isCount"
 			class="repeat-option-end__count"
 			type="number"
@@ -36,16 +35,13 @@
 </template>
 
 <script>
-import { NcSelect } from '@nextcloud/vue'
+import { NcSelect, NcDateTimePicker } from '@nextcloud/vue'
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'
-import { mapStores } from 'pinia'
-import DatePicker from '../../Shared/DatePicker.vue'
-import useDavRestrictionsStore from '../../../store/davRestrictions.js'
 
 export default {
 	name: 'RepeatEndRepeat',
 	components: {
-		DatePicker,
+		NcDateTimePicker,
 		NcSelect,
 	},
 
@@ -70,7 +66,6 @@ export default {
 	},
 
 	computed: {
-		...mapStores(useDavRestrictionsStore),
 		/**
 		 * The minimum date the user can select in the until date-picker
 		 *
@@ -78,15 +73,6 @@ export default {
 		 */
 		minimumDate() {
 			return this.calendarObjectInstance.startDate
-		},
-
-		/**
-		 * The maximum date the user can select in the until date-picker
-		 *
-		 * @return {Date}
-		 */
-		maximumDate() {
-			return new Date(this.davRestrictionsStore.maximumDate)
 		},
 
 		/**

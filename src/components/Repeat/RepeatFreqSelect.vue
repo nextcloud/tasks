@@ -6,11 +6,11 @@
 <template>
 	<NcSelect :allow-empty="false"
 		:options="options"
-		:value="selected"
+		:model-value="selected"
 		:clearable="false"
 		input-id="freq"
 		label="label"
-		@input="select" />
+		@update:model-value="select" />
 </template>
 
 <script>

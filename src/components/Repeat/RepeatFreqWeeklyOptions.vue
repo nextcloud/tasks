@@ -88,3 +88,25 @@ export default {
 	},
 }
 </script>
+
+<style lang="scss" scoped>
+.repeat-option-set--weekly {
+	display: flex;
+	flex-direction: column;
+	gap: calc(var(--default-grid-baseline) * 2);
+}
+
+.repeat-option-set-section__title {
+	font-weight: bold;
+}
+
+.repeat-option-set-section__grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: calc(var(--default-grid-baseline) * 1);
+}
+
+.repeat-option-set-section-grid-item {
+	min-width: 44px;
+}
+</style>

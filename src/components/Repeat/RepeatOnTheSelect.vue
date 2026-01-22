@@ -6,13 +6,13 @@
 <template>
 	<NcSelect :allow-empty="false"
 		:options="options"
-		:value="selected"
+		:model-value="selected"
 		:disabled="disabled"
 		:placeholder="t('tasks', 'Monday')"
 		:clearable="false"
 		input-id="value"
 		label="label"
-		@input="select" />
+		@update:model-value="select" />
 </template>
 
 <script>

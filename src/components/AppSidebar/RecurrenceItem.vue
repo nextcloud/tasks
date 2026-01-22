@@ -47,79 +47,53 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 		<!-- Recurrence Editor Modal -->
 		<NcModal v-if="showEditor" @close="closeEditor">
-			<div class="recurrence-editor">
+			<div class="property-repeat__options">
 				<h2>{{ t('tasks', 'Repeat task') }}</h2>
-				<div class="recurrence-editor__content">
-					<!-- Frequency and Interval -->
-					<div class="recurrence-editor__row">
-						<label>{{ t('tasks', 'Repeat') }}</label>
-						<select v-model="localFrequency" class="recurrence-select">
-							<option value="NONE">
-								{{ t('tasks', 'Does not repeat') }}
-							</option>
-							<option value="DAILY">
-								{{ t('tasks', 'Daily') }}
-							</option>
-							<option value="WEEKLY">
-								{{ t('tasks', 'Weekly') }}
-							</option>
-							<option value="MONTHLY">
-								{{ t('tasks', 'Monthly') }}
-							</option>
-							<option value="YEARLY">
-								{{ t('tasks', 'Yearly') }}
-							</option>
-						</select>
-					</div>
-
-					<div v-if="localFrequency !== 'NONE'" class="recurrence-editor__row">
-						<label>{{ t('tasks', 'Interval') }}</label>
-						<input v-model.number="localInterval"
-							type="number"
-							min="1"
-							class="recurrence-input">
-					</div>
-
-					<!-- End conditions -->
-					<div v-if="localFrequency !== 'NONE'" class="recurrence-editor__row">
-						<label>{{ t('tasks', 'End') }}</label>
-						<select v-model="endType" class="recurrence-select">
-							<option value="never">
-								{{ t('tasks', 'Never') }}
-							</option>
-							<option value="until">
-								{{ t('tasks', 'On date') }}
-							</option>
-							<option value="count">
-								{{ t('tasks', 'After') }}
-							</option>
-						</select>
-					</div>
-
-					<div v-if="endType === 'until' && localFrequency !== 'NONE'" class="recurrence-editor__row">
-						<label>{{ t('tasks', 'Until') }}</label>
-						<NcDateTimePicker v-model="localUntil"
-							:clearable="false"
-							type="date"
-							class="recurrence-date" />
-					</div>
-
-					<div v-if="endType === 'count' && localFrequency !== 'NONE'" class="recurrence-editor__row">
-						<label>{{ t('tasks', 'Occurrences') }}</label>
-						<input v-model.number="localCount"
-							type="number"
-							min="1"
-							class="recurrence-input">
-					</div>
-
-					<div class="recurrence-editor__actions">
-						<NcButton @click="saveRecurrence">
-							{{ t('tasks', 'Save') }}
-						</NcButton>
-						<NcButton type="tertiary" @click="closeEditor">
-							{{ t('tasks', 'Cancel') }}
-						</NcButton>
-					</div>
+				<RepeatFreqInterval
+					:frequency="localRule.frequency"
+					:interval="localRule.interval"
+					@change-interval="changeInterval"
+					@change-frequency="changeFrequency" />
+				<RepeatFreqWeeklyOptions v-if="isFreqWeekly"
+					:by-day="localRule.byDay"
+					@add-by-day="addByDay"
+					@remove-by-day="removeByDay" />
+				<RepeatFreqMonthlyOptions v-if="isFreqMonthly"
+					:by-day="localRule.byDay"
+					:by-month-day="localRule.byMonthDay"
+					:by-set-position="localRule.bySetPosition"
+					@add-by-month-day="addByMonthDay"
+					@remove-by-month-day="removeByMonthDay"
+					@change-by-day="setByDay"
+					@change-by-set-position="setBySetPosition"
+					@change-to-by-set-position="changeToBySetPositionMonthly"
+					@change-to-by-month-day="changeToByDayMonthly" />
+				<RepeatFreqYearlyOptions v-if="isFreqYearly"
+					:by-day="localRule.byDay"
+					:by-month="localRule.byMonth"
+					:by-month-day="localRule.byMonthDay"
+					:by-set-position="localRule.bySetPosition"
+					@add-by-month="addByMonth"
+					@remove-by-month="removeByMonth"
+					@add-by-month-day="addByMonthDay"
+					@remove-by-month-day="removeByMonthDay"
+					@change-by-day="setByDay"
+					@change-by-set-position="setBySetPosition"
+					@change-to-by-set-position="changeToBySetPositionYearly"
+					@change-to-by-month-day="changeToByDayYearly" />
+				<RepeatEndRepeat v-if="isRepeating"
+					:calendar-object-instance="calendarObjectInstance"
+					:until="localRule.until"
+					:count="localRule.count"
+					@set-infinite="setInfinite"
+					@set-until="setUntil"
+					@set-count="setCount"
+					@change-to-count="changeToCount"
+					@change-to-until="changeToUntil" />
+				<div class="property-repeat__options__footer">
+					<NcButton type="primary" @click="saveRecurrence">
+						{{ t('tasks', 'Save') }}
+					</NcButton>
 				</div>
 			</div>
 		</NcModal>
@@ -127,10 +101,15 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 </template>
 
 <script>
-import { NcActions, NcActionButton, NcButton, NcDateTimePicker, NcModal } from '@nextcloud/vue'
+import { NcActions, NcActionButton, NcButton, NcModal } from '@nextcloud/vue'
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'
 import Delete from 'vue-material-design-icons/Delete.vue'
-import { RecurValue, Property } from '@nextcloud/calendar-js'
+import RepeatFreqInterval from '../Repeat/RepeatFreqInterval.vue'
+import RepeatFreqWeeklyOptions from '../Repeat/RepeatFreqWeeklyOptions.vue'
+import RepeatFreqMonthlyOptions from '../Repeat/RepeatFreqMonthlyOptions.vue'
+import RepeatFreqYearlyOptions from '../Repeat/RepeatFreqYearlyOptions.vue'
+import RepeatEndRepeat from '../Repeat/RepeatEndRepeat.vue'
+import moment from '@nextcloud/moment'
 
 export default {
 	name: 'RecurrenceItem',
@@ -138,9 +117,13 @@ export default {
 		NcActions,
 		NcActionButton,
 		NcButton,
-		NcDateTimePicker,
 		NcModal,
 		Delete,
+		RepeatFreqInterval,
+		RepeatFreqWeeklyOptions,
+		RepeatFreqMonthlyOptions,
+		RepeatFreqYearlyOptions,
+		RepeatEndRepeat,
 	},
 	props: {
 		/**
@@ -161,16 +144,43 @@ export default {
 	data() {
 		return {
 			showEditor: false,
-			localFrequency: 'NONE',
-			localInterval: 1,
-			localUntil: null,
-			localCount: null,
-			endType: 'never',
+			localRule: {
+				frequency: 'NONE',
+				interval: 1,
+				count: null,
+				until: null,
+				byDay: [],
+				byMonth: [],
+				byMonthDay: [],
+				bySetPosition: null,
+			},
 		}
 	},
 	computed: {
 		isRecurring() {
 			return this.task.recurrenceRule && this.task.recurrenceRule.frequency !== 'NONE'
+		},
+		isRepeating() {
+			return this.localRule.frequency !== 'NONE'
+		},
+		isFreqWeekly() {
+			return this.localRule.frequency === 'WEEKLY'
+		},
+		isFreqMonthly() {
+			return this.localRule.frequency === 'MONTHLY'
+		},
+		isFreqYearly() {
+			return this.localRule.frequency === 'YEARLY'
+		},
+		/**
+		 * Provide a minimal calendarObjectInstance for RepeatEndRepeat
+		 *
+		 * @return {object}
+		 */
+		calendarObjectInstance() {
+			return {
+				startDate: this.task.start ? new Date(this.task.start) : new Date(),
+			}
 		},
 		recurrenceSummary() {
 			if (!this.isRecurring) {
@@ -190,6 +200,12 @@ export default {
 				summary = t('tasks', 'Every {interval} {frequency}', { interval, frequency: frequencyText })
 			}
 
+			// Add by-day info for weekly
+			if (rule.frequency === 'WEEKLY' && rule.byDay && rule.byDay.length > 0) {
+				const dayNames = rule.byDay.map(day => this.getDayName(day)).join(', ')
+				summary += ' ' + t('tasks', 'on {days}', { days: dayNames })
+			}
+
 			if (rule.until) {
 				const date = new Date(rule.until).toLocaleDateString()
 				summary += ', ' + t('tasks', 'until {date}', { date })
@@ -203,7 +219,7 @@ export default {
 	watch: {
 		'task.recurrenceRule': {
 			handler(newRule) {
-				if (newRule && newRule.frequency !== 'NONE') {
+				if (newRule) {
 					this.loadFromRule(newRule)
 				}
 			},
@@ -213,6 +229,19 @@ export default {
 	methods: {
 		t,
 		n,
+
+		getDayName(day) {
+			const dayMap = {
+				MO: t('tasks', 'Monday'),
+				TU: t('tasks', 'Tuesday'),
+				WE: t('tasks', 'Wednesday'),
+				TH: t('tasks', 'Thursday'),
+				FR: t('tasks', 'Friday'),
+				SA: t('tasks', 'Saturday'),
+				SU: t('tasks', 'Sunday'),
+			}
+			return dayMap[day] || day
+		},
 
 		getTranslatedFrequency(frequency, interval) {
 			switch (frequency) {
@@ -241,22 +270,164 @@ export default {
 		},
 
 		loadFromRule(rule) {
-			this.localFrequency = rule.frequency || 'NONE'
-			this.localInterval = rule.interval || 1
-			this.localUntil = rule.until ? new Date(rule.until) : null
-			this.localCount = rule.count || null
+			const dayMap = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA']
+			let byDay = rule.byDay ? [...rule.byDay] : []
 
-			if (rule.until) {
-				this.endType = 'until'
-			} else if (rule.count) {
-				this.endType = 'count'
-			} else {
-				this.endType = 'never'
+			// Initialize byDay with current day if WEEKLY but no days selected
+			if (rule.frequency === 'WEEKLY' && byDay.length === 0) {
+				byDay = [dayMap[moment().day()]]
+			}
+
+			this.localRule = {
+				frequency: rule.frequency || 'NONE',
+				interval: rule.interval || 1,
+				count: rule.count || null,
+				until: rule.until ? new Date(rule.until) : null,
+				byDay,
+				byMonth: rule.byMonth ? [...rule.byMonth] : [],
+				byMonthDay: rule.byMonthDay ? [...rule.byMonthDay] : [],
+				bySetPosition: rule.bySetPosition || null,
 			}
 		},
 
+		// Frequency and interval changes
+		changeFrequency(frequency) {
+			this.localRule.frequency = frequency
+			// Reset options when changing frequency
+			if (frequency === 'WEEKLY') {
+				// Set current day as default (0=Sunday, 1=Monday, etc.)
+				const dayMap = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA']
+				const dayOfWeek = dayMap[moment().day()]
+				this.localRule.byDay = [dayOfWeek]
+				this.localRule.byMonthDay = []
+				this.localRule.byMonth = []
+				this.localRule.bySetPosition = null
+			} else if (frequency === 'MONTHLY') {
+				this.localRule.byDay = []
+				this.localRule.byMonthDay = [moment().date()]
+				this.localRule.byMonth = []
+				this.localRule.bySetPosition = null
+			} else if (frequency === 'YEARLY') {
+				this.localRule.byDay = []
+				this.localRule.byMonthDay = [moment().date()]
+				this.localRule.byMonth = [moment().month() + 1]
+				this.localRule.bySetPosition = null
+			} else {
+				this.localRule.byDay = []
+				this.localRule.byMonthDay = []
+				this.localRule.byMonth = []
+				this.localRule.bySetPosition = null
+			}
+		},
+
+		changeInterval(interval) {
+			this.localRule.interval = interval
+		},
+
+		// Weekly options
+		addByDay(day) {
+			if (!this.localRule.byDay.includes(day)) {
+				this.localRule.byDay.push(day)
+			}
+		},
+
+		removeByDay(day) {
+			const index = this.localRule.byDay.indexOf(day)
+			if (index > -1) {
+				this.localRule.byDay.splice(index, 1)
+			}
+		},
+
+		// Monthly options
+		addByMonthDay(day) {
+			if (!this.localRule.byMonthDay.includes(day)) {
+				this.localRule.byMonthDay.push(day)
+			}
+		},
+
+		removeByMonthDay(day) {
+			const index = this.localRule.byMonthDay.indexOf(day)
+			if (index > -1) {
+				this.localRule.byMonthDay.splice(index, 1)
+			}
+		},
+
+		setByDay(byDay) {
+			this.localRule.byDay = byDay
+		},
+
+		setBySetPosition(position) {
+			this.localRule.bySetPosition = position
+		},
+
+		changeToBySetPositionMonthly() {
+			this.localRule.byMonthDay = []
+			this.localRule.bySetPosition = 1
+			const dayMap = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA']
+			this.localRule.byDay = [dayMap[moment().day()]]
+		},
+
+		changeToByDayMonthly() {
+			this.localRule.bySetPosition = null
+			this.localRule.byDay = []
+			this.localRule.byMonthDay = [moment().date()]
+		},
+
+		// Yearly options
+		addByMonth(month) {
+			if (!this.localRule.byMonth.includes(month)) {
+				this.localRule.byMonth.push(month)
+			}
+		},
+
+		removeByMonth(month) {
+			const index = this.localRule.byMonth.indexOf(month)
+			if (index > -1) {
+				this.localRule.byMonth.splice(index, 1)
+			}
+		},
+
+		changeToBySetPositionYearly() {
+			this.localRule.byMonthDay = []
+			this.localRule.bySetPosition = 1
+			const dayMap = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA']
+			this.localRule.byDay = [dayMap[moment().day()]]
+		},
+
+		changeToByDayYearly() {
+			this.localRule.bySetPosition = null
+			this.localRule.byDay = []
+			this.localRule.byMonthDay = [moment().date()]
+		},
+
+		// End repeat options
+		setInfinite() {
+			this.localRule.count = null
+			this.localRule.until = null
+		},
+
+		changeToUntil() {
+			this.localRule.count = null
+			// Default to 1 month from now
+			const until = moment().add(1, 'month').toDate()
+			this.localRule.until = until
+		},
+
+		changeToCount() {
+			this.localRule.until = null
+			this.localRule.count = 10
+		},
+
+		setUntil(date) {
+			this.localRule.until = date
+		},
+
+		setCount(count) {
+			this.localRule.count = count
+		},
+
 		async saveRecurrence() {
-			if (this.localFrequency === 'NONE') {
+			if (this.localRule.frequency === 'NONE') {
 				await this.clearRecurrence()
 				this.closeEditor()
 				return
@@ -264,14 +435,30 @@ export default {
 
 			// Build the recurrence rule
 			const recurrenceData = {
-				frequency: this.localFrequency,
-				interval: this.localInterval || 1,
+				frequency: this.localRule.frequency,
+				interval: this.localRule.interval || 1,
 			}
 
-			if (this.endType === 'until' && this.localUntil) {
-				recurrenceData.until = this.localUntil
-			} else if (this.endType === 'count' && this.localCount) {
-				recurrenceData.count = this.localCount
+			if (this.localRule.byDay && this.localRule.byDay.length > 0) {
+				recurrenceData.byDay = this.localRule.byDay
+			}
+
+			if (this.localRule.byMonth && this.localRule.byMonth.length > 0) {
+				recurrenceData.byMonth = this.localRule.byMonth
+			}
+
+			if (this.localRule.byMonthDay && this.localRule.byMonthDay.length > 0) {
+				recurrenceData.byMonthDay = this.localRule.byMonthDay
+			}
+
+			if (this.localRule.bySetPosition !== null) {
+				recurrenceData.bySetPosition = this.localRule.bySetPosition
+			}
+
+			if (this.localRule.until) {
+				recurrenceData.until = this.localRule.until
+			} else if (this.localRule.count) {
+				recurrenceData.count = this.localRule.count
 			}
 
 			// Dispatch to store
@@ -356,53 +543,16 @@ export default {
 	}
 }
 
-.recurrence-editor {
-	padding: 20px;
-	min-width: 400px;
+.property-repeat__options {
+	padding: calc(var(--default-grid-baseline) * 4);
+	display: flex;
+	flex-direction: column;
+	gap: calc(var(--default-grid-baseline) * 2);
 
-	h2 {
-		margin-bottom: 20px;
-	}
-
-	&__warning {
-		color: var(--color-warning);
-		font-style: italic;
-	}
-
-	&__content {
+	&__footer {
 		display: flex;
-		flex-direction: column;
-		gap: 15px;
-	}
-
-	&__row {
-		display: flex;
-		align-items: center;
-		gap: 10px;
-
-		label {
-			min-width: 100px;
-			font-weight: bold;
-		}
-
-		.recurrence-select,
-		.recurrence-input {
-			flex: 1;
-			padding: 8px;
-			border: 1px solid var(--color-border);
-			border-radius: var(--border-radius);
-		}
-
-		.recurrence-date {
-			flex: 1;
-		}
-	}
-
-	&__actions {
-		display: flex;
-		gap: 10px;
-		margin-top: 20px;
 		justify-content: flex-end;
+		margin-top: calc(var(--default-grid-baseline) * 2);
 	}
 }
 </style>
