@@ -8,12 +8,13 @@
 		{{ recurrenceRule | formatRecurrenceRule(locale) }}
 	</span>
 	<span v-else>
-		{{ $t('calendar', 'Does not repeat') }}
+		{{ t('tasks', 'Does not repeat') }}
 	</span>
 </template>
 
 <script>
 import { mapState } from 'pinia'
+import { translate as t } from '@nextcloud/l10n'
 import formatRecurrenceRule from '../../../filters/recurrenceRuleFormat.js'
 import useSettingsStore from '../../../store/settings.js'
 
@@ -47,6 +48,10 @@ export default {
 		display() {
 			return this.recurrenceRule.frequency !== 'NONE'
 		},
+	},
+
+	methods: {
+		t,
 	},
 }
 </script>

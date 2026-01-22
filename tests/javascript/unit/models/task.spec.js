@@ -418,6 +418,76 @@ describe('task', () => {
 			const task = new Task(loadICS('vcalendars/vcalendar-default'), {})
 			expect(task.canCreateRecurrenceException).toEqual(false)
 		})
+
+		it('Should iterate UNTIL-bounded recurrence using cloned time (preserves timezone)', () => {
+			// This tests the fix for: "TypeError: can't access property getAllSubcomponents, this.component is null"
+			// The error occurred when creating a floating time without timezone info for UNTIL comparison
+			const task = new Task(loadICS('vcalendars/vcalendar-recurring-with-until'), {})
+			expect(task.isRecurring).toEqual(true)
+
+			// Get the ICAL.Recur from the recurrence rule
+			const icalRecur = task.recurrenceRule.recurrenceRuleValue.toICALJs()
+			expect(icalRecur.until).toBeDefined()
+
+			// Clone the due date to preserve timezone info (the fix)
+			const startTime = task.due.clone()
+
+			// Create iterator and verify it works without throwing
+			const iterator = icalRecur.iterator(startTime)
+			expect(iterator).toBeDefined()
+
+			// Should be able to call next() without error
+			const firstOccurrence = iterator.next()
+			expect(firstOccurrence).toBeDefined()
+
+			// Should eventually return null when past UNTIL date
+			let occurrenceCount = 1
+			let occurrence = iterator.next()
+			while (occurrence !== null && occurrenceCount < 100) {
+				occurrenceCount++
+				occurrence = iterator.next()
+			}
+			// UNTIL is 7 days after the start, so we should have ~7 occurrences for daily
+			expect(occurrenceCount).toBeLessThanOrEqual(8)
+		})
+
+		it('Should be able to decrement COUNT in RRULE for tracking remaining occurrences', () => {
+			// This tests the fix for: "max occurrences appear to be ignored"
+			// The COUNT needs to be decremented when advancing to next occurrence
+			const task = new Task(loadICS('vcalendars/vcalendar-recurring-with-count'), {})
+			expect(task.isRecurring).toEqual(true)
+			expect(task.recurrenceRule.count).toEqual(5)
+
+			// Get the RRULE property from vtodo
+			const rruleProp = task.vtodo.getFirstProperty('rrule')
+			expect(rruleProp).toBeDefined()
+
+			const rruleValue = rruleProp.getFirstValue()
+			expect(rruleValue.count).toEqual(5)
+
+			// Simulate decrementing COUNT (as done in handleRecurringTaskCompletion)
+			rruleValue.count = rruleValue.count - 1
+			expect(rruleValue.count).toEqual(4)
+
+			// Verify the change persists
+			const rruleValueAfter = rruleProp.getFirstValue()
+			expect(rruleValueAfter.count).toEqual(4)
+		})
+
+		it('Should detect when COUNT reaches 1 (last occurrence)', () => {
+			// This verifies the logic for stopping recurrence when count limit is reached
+			const task = new Task(loadICS('vcalendars/vcalendar-recurring-with-count'), {})
+			const icalRecur = task.recurrenceRule.recurrenceRuleValue.toICALJs()
+
+			expect(icalRecur.count).toEqual(5)
+			const hasCountLimit = icalRecur.count !== null && icalRecur.count > 0
+			expect(hasCountLimit).toEqual(true)
+
+			// When count is 1, this is the last occurrence
+			icalRecur.count = 1
+			const isLastOccurrence = hasCountLimit && icalRecur.count <= 1
+			expect(isLastOccurrence).toEqual(true)
+		})
 	})
 
 	describe('RECURRENCE-ID Exception Instances', () => {

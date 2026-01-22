@@ -24,15 +24,38 @@
 import { Calendar } from './calendars.js'
 import { findVTODObyUid } from './cdav-requests.js'
 import { isParentInList, momentToICALTime, parseString } from './storeHelper.js'
+import { getDefaultRecurrenceRuleObject } from '../models/recurrenceRule.js'
 import SyncStatus from '../models/syncStatus.js'
 import Task from '../models/task.js'
 
+import { DateTimeValue, RecurValue } from '@nextcloud/calendar-js'
 import { showError } from '@nextcloud/dialogs'
 import { emit } from '@nextcloud/event-bus'
 import { translate as t } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
 
 import ICAL from 'ical.js'
+
+/**
+ * Clone an ICAL.Time without triggering timezone lookups.
+ * ical.js may not have all timezones registered, causing errors when
+ * clone() tries to resolve timezone components.
+ *
+ * @param {ICAL.Time} time The ICAL.Time to clone
+ * @param {boolean} [isDate] Override isDate property (optional)
+ * @return {ICAL.Time} A new ICAL.Time with the same local values
+ */
+function cloneTimeWithoutTimezone(time, isDate = null) {
+	return new ICAL.Time({
+		year: time.year,
+		month: time.month,
+		day: time.day,
+		hour: time.hour,
+		minute: time.minute,
+		second: time.second,
+		isDate: isDate !== null ? isDate : time.isDate,
+	})
+}
 
 const state = {
 	tasks: {},
@@ -1550,9 +1573,6 @@ const actions = {
 	 * @param {object} data.recurrenceRule The recurrence rule data
 	 */
 	async setRecurrenceRule(context, { task, recurrenceRule }) {
-		// Import required classes
-		const { RecurValue } = await import('@nextcloud/calendar-js')
-
 		// Create or update the RRULE property
 		const recurrenceValue = RecurValue.fromData({
 			freq: recurrenceRule.frequency,
@@ -1561,7 +1581,6 @@ const actions = {
 
 		// Set end condition
 		if (recurrenceRule.until) {
-			const { DateTimeValue } = await import('@nextcloud/calendar-js')
 			recurrenceValue.until = DateTimeValue.fromJSDate(new Date(recurrenceRule.until), { zone: 'utc' })
 		} else if (recurrenceRule.count) {
 			recurrenceValue.count = recurrenceRule.count
@@ -1600,8 +1619,6 @@ const actions = {
 	 * @param {Task} data.task The task to update
 	 */
 	async removeRecurrenceRule(context, { task }) {
-		const { getDefaultRecurrenceRuleObject } = await import('../models/recurrenceRule.js')
-
 		// Remove the RRULE property from vtodo
 		task.vtodo.removeAllProperties('rrule')
 
@@ -1680,24 +1697,15 @@ const actions = {
 			vtodo.updatePropertyWithValue('completed', completedDate)
 
 			// Set RECURRENCE-ID to mark this as an exception instance
-			// Use the ICAL.Time directly (don't convert to JS Date and back)
-			const recurrenceId = instanceDate.clone()
+			const recurrenceId = cloneTimeWithoutTimezone(instanceDate)
 			vtodo.updatePropertyWithValue('recurrence-id', recurrenceId)
 
 			// Set the original due/start date for this instance
 			if (task.due) {
-				const dueTime = task.due.clone()
-				if (task.allDay) {
-					dueTime.isDate = true
-				}
-				vtodo.updatePropertyWithValue('due', dueTime)
+				vtodo.updatePropertyWithValue('due', cloneTimeWithoutTimezone(task.due, task.allDay))
 			}
 			if (task.start) {
-				const startTime = task.start.clone()
-				if (task.allDay) {
-					startTime.isDate = true
-				}
-				vtodo.updatePropertyWithValue('dtstart', startTime)
+				vtodo.updatePropertyWithValue('dtstart', cloneTimeWithoutTimezone(task.start, task.allDay))
 			}
 
 			// Set created and last-modified
@@ -1728,16 +1736,24 @@ const actions = {
 			// Convert RecurValue to ICAL.Recur to get the iterator
 			const icalRecur = freshTask.recurrenceRule.recurrenceRuleValue.toICALJs()
 
-			// Create a floating time (no timezone) from instanceDate to avoid timezone issues
-			const startTime = new ICAL.Time({
-				year: instanceDate.year,
-				month: instanceDate.month,
-				day: instanceDate.day,
-				hour: instanceDate.hour,
-				minute: instanceDate.minute,
-				second: instanceDate.second,
-				isDate: instanceDate.isDate,
-			})
+			// Check if recurrence rule has a COUNT limit
+			// When using COUNT, the iterator counts from startTime, which breaks when we
+			// advance the task's dates. We need to handle COUNT by decrementing it.
+			const hasCountLimit = icalRecur.count !== null && icalRecur.count > 0
+
+			// For COUNT-limited rules, check if we've reached the limit
+			if (hasCountLimit && icalRecur.count <= 1) {
+				// This is the last occurrence - mark master task as completed
+				freshTask.setComplete(100)
+				freshTask.setCompleted(true)
+				freshTask.setStatus('COMPLETED')
+				await context.dispatch('updateTask', freshTask)
+				return
+			}
+
+			// Create a floating time to avoid timezone lookup issues
+			// Recurrence rules operate on local time (e.g., "repeat daily" = same local time each day)
+			const startTime = cloneTimeWithoutTimezone(instanceDate)
 
 			const iterator = icalRecur.iterator(startTime)
 
@@ -1745,6 +1761,8 @@ const actions = {
 			iterator.next()
 
 			// Get next occurrence (ical.js iterator returns ICAL.Time directly, or null when done)
+			// For UNTIL rules, this correctly returns null when we've passed the end date
+			// For COUNT rules, we ignore the iterator's count tracking since we handle it separately
 			const nextOccurrence = iterator.next()
 			if (nextOccurrence) {
 				const nextDate = nextOccurrence.toJSDate()
@@ -1790,6 +1808,16 @@ const actions = {
 				freshTask.setComplete(0)
 				freshTask.setCompleted(false)
 				freshTask.setStatus(null)
+
+				// Decrement COUNT if the rule has a count limit
+				// This ensures the count reflects remaining occurrences
+				if (hasCountLimit) {
+					const rruleProp = freshTask.vtodo.getFirstProperty('rrule')
+					if (rruleProp) {
+						const rruleValue = rruleProp.getFirstValue()
+						rruleValue.count = rruleValue.count - 1
+					}
+				}
 
 				// Save the updated master task
 				await context.dispatch('updateTask', freshTask)
