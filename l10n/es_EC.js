@@ -248,26 +248,6 @@ OC.L10N.register(
     "[Starts tomorrow at] LT" : "[Comienza mañana a las] LT",
     "[Starts on] LL [at] LT" : "[Comienza el] LL [a las] LT",
     "[Started yesterday at] LT" : "[Comenzó ayer a las] LT",
-    "[Started on] LL [at] LT" : "[Comenzó el] LL [a las] LT",
-    "Repeat" : "Repetir",
-    "Repeat every" : "Repetir cada",
-    "never" : "nunca",
-    "on date" : "en la fecha",
-    "after" : "después",
-    "End repeat" : "Finalizar repetición",
-    "first" : "primero",
-    "second" : "segundo",
-    "third" : "tercero",
-    "fourth" : "cuarto",
-    "fifth" : "quinto",
-    "last" : "último",
-    "second to last" : "penúltimo",
-    "By day of the month" : "Por día del mes",
-    "On the" : "El",
-    "weekday" : "día de la semana",
-    "weekend day" : "día de fin de semana",
-    "_time_::_times_" : ["hora","veces","veces"],
-    "_month_::_months_" : ["mes","meses","meses"],
-    "_year_::_years_" : ["año","años","años"]
+    "[Started on] LL [at] LT" : "[Comenzó el] LL [a las] LT"
 },
 "nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");

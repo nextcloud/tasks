@@ -133,22 +133,6 @@ OC.L10N.register(
     "An error occurred" : "Gadījās kļūda",
     "[Was due today at] LT" : "[Beidzās šodien] LT",
     "[Starts today]" : "[Sāksies šodien]",
-    "[Starts today at] LT" : "[Sāksies šodien] LT",
-    "Repeat" : "Atkārtot",
-    "Repeat every" : "Atkārtot katru",
-    "never" : "nekad",
-    "on date" : "datumā",
-    "after" : "pēc",
-    "End repeat" : "Beigt atkārtošanu",
-    "first" : "pirmais",
-    "second" : "otrais",
-    "third" : "trešais",
-    "fourth" : "ceturtais",
-    "fifth" : "piektais",
-    "last" : "pēdējais",
-    "second to last" : "pirmspēdējais",
-    "By day of the month" : "Mēneša dienā",
-    "weekday" : "darba diena",
-    "weekend day" : "brīvdiena"
+    "[Starts today at] LT" : "[Sāksies šodien] LT"
 },
 "nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);");

@@ -20,10 +20,6 @@ OC.L10N.register(
     "Email" : "Էլ․փոստ",
     "Close" : "Փակել",
     "Details" : "Մանրամասներ",
-    "Notes" : "Notes",
-    "Repeat" : "Կրկնել",
-    "never" : "երբեք",
-    "after" : "հետո",
-    "second" : "երկրորդ"
+    "Notes" : "Notes"
 },
 "nplurals=2; plural=(n != 1);");

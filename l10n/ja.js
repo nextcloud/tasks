@@ -163,26 +163,6 @@ OC.L10N.register(
     "[Was due yesterday]" : "[昨日が期限]",
     "[Starts today]" : "[今日開始]",
     "[Starts tomorrow]" : "[明日開始]",
-    "[Started yesterday]" : "[昨日から]",
-    "Repeat" : "繰り返し",
-    "Repeat every" : "毎日繰り返す",
-    "never" : "なし",
-    "on date" : "日時指定",
-    "after" : "後",
-    "End repeat" : "繰り返し終了",
-    "first" : "初日",
-    "second" : "２週目",
-    "third" : "3日目",
-    "fourth" : "4日目",
-    "fifth" : "5日目",
-    "last" : "最後",
-    "second to last" : "2日目から最終日",
-    "By day of the month" : "日付",
-    "On the" : "On the",
-    "weekday" : "平日",
-    "weekend day" : "週末",
-    "_time_::_times_" : ["回数"],
-    "_month_::_months_" : ["月"],
-    "_year_::_years_" : ["年"]
+    "[Started yesterday]" : "[昨日から]"
 },
 "nplurals=1; plural=0;");
