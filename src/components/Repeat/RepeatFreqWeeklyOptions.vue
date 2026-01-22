@@ -94,6 +94,7 @@ export default {
 	display: flex;
 	flex-direction: column;
 	gap: calc(var(--default-grid-baseline) * 2);
+	width: 100%;
 }
 
 .repeat-option-set-section__title {
@@ -104,9 +105,11 @@ export default {
 	display: flex;
 	flex-wrap: wrap;
 	gap: calc(var(--default-grid-baseline) * 1);
+	width: 100%;
 }
 
 .repeat-option-set-section-grid-item {
 	min-width: 44px;
+	flex: 1;
 }
 </style>

@@ -168,28 +168,36 @@ export default {
 	display: flex;
 	flex-direction: column;
 	gap: calc(var(--default-grid-baseline) * 2);
+	width: 100%;
 }
 
 .repeat-option-set-section {
 	display: flex;
 	flex-direction: column;
 	gap: calc(var(--default-grid-baseline) * 2);
+	width: 100%;
 
 	&--on-the-select {
 		flex-direction: row;
-		align-items: center;
 		flex-wrap: wrap;
+		width: 100%;
+
+		:deep(.v-select.select) {
+			min-width: 140px;
+			flex: 1;
+		}
 	}
 }
 
 .repeat-option-set-section__title {
-	font-weight: bold;
+	font-weight: normal;
 }
 
 .repeat-option-set-section__grid {
 	display: flex;
 	flex-wrap: wrap;
 	gap: calc(var(--default-grid-baseline) * 1);
+	width: 100%;
 }
 
 .repeat-option-set-section-grid-item {
