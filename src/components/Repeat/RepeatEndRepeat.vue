@@ -5,11 +5,11 @@
 
 <template>
 	<div class="repeat-option-set repeat-option-set--end">
-		<span class="repeat-option-end__label">{{ $t('calendar', 'End repeat') }}</span>
+		<span class="repeat-option-end__label">{{ t('tasks', 'End repeat') }}</span>
 		<NcSelect class="repeat-option-end__end-type-select"
 			:options="options"
 			:searchable="false"
-			:name="$t('calendar', 'Select to end repeat')"
+			:name="t('tasks', 'Select to end repeat')"
 			:value="selectedOption"
 			:clearable="false"
 			input-id="value"
@@ -37,6 +37,7 @@
 
 <script>
 import { NcSelect } from '@nextcloud/vue'
+import { translate as t, translatePlural as n } from '@nextcloud/l10n'
 import { mapStores } from 'pinia'
 import DatePicker from '../../Shared/DatePicker.vue'
 import useDavRestrictionsStore from '../../../store/davRestrictions.js'
@@ -112,7 +113,7 @@ export default {
 		 * @return {string}
 		 */
 		occurrencesLabel() {
-			return this.$n('calendar', 'time', 'times', this.count)
+			return n('tasks', 'time', 'times', this.count)
 		},
 
 		/**
@@ -122,13 +123,13 @@ export default {
 		 */
 		options() {
 			return [{
-				label: this.$t('calendar', 'never'),
+				label: t('tasks', 'never'),
 				value: 'never',
 			}, {
-				label: this.$t('calendar', 'on date'),
+				label: t('tasks', 'on date'),
 				value: 'until',
 			}, {
-				label: this.$t('calendar', 'after'),
+				label: t('tasks', 'after'),
 				value: 'count',
 			}]
 		},
@@ -150,6 +151,9 @@ export default {
 	},
 
 	methods: {
+		t,
+		n,
+
 		/**
 		 * Changes the type of recurrence-end
 		 * Whether it ends never, on a given date or after an amount of occurrences

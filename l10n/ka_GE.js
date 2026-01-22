@@ -47,6 +47,9 @@ OC.L10N.register(
     "All day" : "მთელი დღე",
     "Details" : "დეტალები",
     "Select tags" : "აირჩიეთ ტეგები",
-    "Notes" : "ჩანაწერები"
+    "Notes" : "ჩანაწერები",
+    "Repeat" : "გამეორება",
+    "never" : "არასდროს",
+    "after" : "შემდეგ"
 },
 "nplurals=2; plural=(n!=1);");

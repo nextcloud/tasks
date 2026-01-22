@@ -8,7 +8,7 @@
 		:options="options"
 		:value="selected"
 		:disabled="disabled"
-		:placeholder="$t('calendar', 'Monday')"
+		:placeholder="t('tasks', 'Monday')"
 		:clearable="false"
 		input-id="value"
 		label="label"
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { getDayNames } from '@nextcloud/l10n'
+import { getDayNames, translate as t } from '@nextcloud/l10n'
 import { NcSelect } from '@nextcloud/vue'
 
 export default {
@@ -66,13 +66,13 @@ export default {
 				label: dayNames[0],
 				value: ['SU'],
 			}, {
-				label: this.$t('calendar', 'day'),
+				label: t('tasks', 'day'),
 				value: ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'],
 			}, {
-				label: this.$t('calendar', 'weekday'),
+				label: t('tasks', 'weekday'),
 				value: ['MO', 'TU', 'WE', 'TH', 'FR'],
 			}, {
-				label: this.$t('calendar', 'weekend day'),
+				label: t('tasks', 'weekend day'),
 				value: ['SU', 'SA'],
 			}]
 		},
@@ -83,6 +83,8 @@ export default {
 	},
 
 	methods: {
+		t,
+
 		select(value) {
 			if (!value) {
 				return

@@ -8,7 +8,7 @@
 		:options="options"
 		:value="selected"
 		:disabled="disabled"
-		:placeholder="$t('calendar', 'first')"
+		:placeholder="t('tasks', 'first')"
 		:clearable="false"
 		input-id="value"
 		label="label"
@@ -17,7 +17,8 @@
 
 <script>
 import { NcSelect } from '@nextcloud/vue'
-import { getTranslatedOrdinalNumber } from '../../../filters/recurrenceRuleFormat.js'
+import { translate as t } from '@nextcloud/l10n'
+import { getTranslatedOrdinalNumber } from '../../filters/recurrenceRuleFormat.js'
 
 export default {
 	name: 'RepeatFirstLastSelect',
@@ -57,6 +58,8 @@ export default {
 	},
 
 	methods: {
+		t,
+
 		select(value) {
 			if (!value) {
 				return

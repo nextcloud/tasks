@@ -125,6 +125,26 @@ OC.L10N.register(
     "Notes" : "Notes",
     "Mark as done" : "완료된 것으로 표시",
     "An error occurred" : "오류가 발생함",
-    "Message from {author} in {conversationName}" : "{conversationName}에서 {author}가 보낸 메시지"
+    "Message from {author} in {conversationName}" : "{conversationName}에서 {author}가 보낸 메시지",
+    "Repeat" : "반복",
+    "Repeat every" : "반복 주기",
+    "never" : "없음",
+    "on date" : "지정한 날짜에",
+    "after" : "이후",
+    "End repeat" : "반복 종료",
+    "first" : "첫 번째",
+    "second" : "두 번째",
+    "third" : "세 번째",
+    "fourth" : "네 번째",
+    "fifth" : "다섯 번째",
+    "last" : "마지막",
+    "second to last" : "끝에서 두 번째",
+    "By day of the month" : "일자 지정",
+    "On the" : "조건 지정",
+    "weekday" : "주중",
+    "weekend day" : "주말",
+    "_time_::_times_" : ["회"],
+    "_month_::_months_" : ["개월"],
+    "_year_::_years_" : ["년"]
 },
 "nplurals=1; plural=0;");

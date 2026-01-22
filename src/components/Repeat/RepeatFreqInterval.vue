@@ -22,6 +22,7 @@
 
 <script>
 import NcTextField from '@nextcloud/vue/components/NcTextField'
+import { translate as t } from '@nextcloud/l10n'
 import RepeatFreqSelect from './RepeatFreqSelect.vue'
 
 export default {
@@ -47,10 +48,10 @@ export default {
 		repeatEveryLabel() {
 			console.debug(this.frequency)
 			if (this.frequency === 'NONE') {
-				return this.$t('calendar', 'Repeat')
+				return t('tasks', 'Repeat')
 			}
 
-			return this.$t('calendar', 'Repeat every')
+			return t('tasks', 'Repeat every')
 		},
 
 		isIntervalDisabled() {
@@ -59,6 +60,7 @@ export default {
 	},
 
 	methods: {
+		t,
 		changeFrequency(value) {
 			this.$emit('change-frequency', value)
 		},

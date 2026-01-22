@@ -290,6 +290,26 @@ OC.L10N.register(
     "{time} before the task starts" : "{time} before the task starts",
     "{time} before the task is due" : "{time} before the task is due",
     "{time} after the task starts" : "{time} after the task starts",
-    "{time} after the task is due" : "{time} after the task is due"
+    "{time} after the task is due" : "{time} after the task is due",
+    "Repeat" : "Repeat",
+    "Repeat every" : "Repeat every",
+    "never" : "never",
+    "on date" : "on date",
+    "after" : "after",
+    "End repeat" : "End repeat",
+    "first" : "first",
+    "third" : "third",
+    "fourth" : "fourth",
+    "fifth" : "fifth",
+    "last" : "last",
+    "second to last" : "second to last",
+    "By day of the month" : "By day of the month",
+    "On the" : "On the",
+    "On specific day" : "On specific day",
+    "weekday" : "weekday",
+    "weekend day" : "weekend day",
+    "_time_::_times_" : ["time","times"],
+    "_month_::_months_" : ["month","months"],
+    "_year_::_years_" : ["year","years"]
 },
 "nplurals=2; plural=(n != 1);");

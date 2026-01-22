@@ -47,6 +47,10 @@ OC.L10N.register(
     "Set due date" : "ตั้งวันที่ครบกำหนด",
     "Details" : "รายละเอียด",
     "Notes" : "โน้ต",
-    "An error occurred" : "เกิดข้อผิดพลาด"
+    "An error occurred" : "เกิดข้อผิดพลาด",
+    "Repeat" : "ทำซ้ำ",
+    "never" : "ไม่ต้องเลย",
+    "after" : "หลังจาก",
+    "second" : "วินาที"
 },
 "nplurals=1; plural=0;");

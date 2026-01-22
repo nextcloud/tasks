@@ -12,7 +12,7 @@
 				:model-value="byMonthDayEnabled"
 				@update:model-value="enableByMonthDay"
 				@update:model-value="enableByMonthDay">
-				{{ $t('calendar', 'By day of the month') }}
+				{{ t('tasks', 'By day of the month') }}
 			</NcCheckboxRadioSwitch>
 			<div class="repeat-option-set-section__grid">
 				<NcButton v-for="option in byMonthDayOptions"
@@ -32,7 +32,7 @@
 				:model-value="!byMonthDayEnabled"
 				@update:model-value="enableBySetPosition"
 				@update:model-value="enableBySetPosition">
-				{{ $t('calendar', 'On the') }}
+				{{ t('tasks', 'On the') }}
 			</NcCheckboxRadioSwitch>
 			<RepeatFirstLastSelect :by-set-position="bySetPosition"
 				:disabled="byMonthDayEnabled"
@@ -49,6 +49,7 @@ import {
 	NcButton,
 	NcCheckboxRadioSwitch,
 } from '@nextcloud/vue'
+import { translate as t } from '@nextcloud/l10n'
 import RepeatFirstLastSelect from './RepeatFirstLastSelect.vue'
 import RepeatOnTheSelect from './RepeatOnTheSelect.vue'
 
@@ -121,6 +122,8 @@ export default {
 	},
 
 	methods: {
+		t,
+
 		/**
 		 *
 		 * @param {string} byMonthDay The month-day to toggle

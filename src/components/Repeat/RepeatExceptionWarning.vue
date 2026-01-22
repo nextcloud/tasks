@@ -6,13 +6,18 @@
 <template>
 	<div class="repeat-option-warning">
 		<strong>
-			{{ $t('calendar', 'This event is the recurrence-exception of a recurrence-set. You cannot add a recurrence-rule to it.') }}
+			{{ t('tasks', 'This task is the recurrence-exception of a recurrence-set. You cannot add a recurrence-rule to it.') }}
 		</strong>
 	</div>
 </template>
 
 <script>
+import { translate as t } from '@nextcloud/l10n'
+
 export default {
 	name: 'RepeatExceptionWarning',
+	methods: {
+		t,
+	},
 }
 </script>

@@ -28,6 +28,11 @@ OC.L10N.register(
     "When shared hide this event" : "Når delt, gøym denne hendinga",
     "Details" : "Detaljar",
     "Notes" : "Notat",
-    "An error occurred" : "Det oppstod ein feil"
+    "An error occurred" : "Det oppstod ein feil",
+    "Repeat" : "Gjenta",
+    "never" : "aldri",
+    "after" : "etter",
+    "second" : "andre",
+    "last" : "siste"
 },
 "nplurals=2; plural=(n != 1);");

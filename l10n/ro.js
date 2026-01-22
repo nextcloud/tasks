@@ -101,6 +101,26 @@ OC.L10N.register(
     "Notes" : "Notițe",
     "Mark as done" : "Marchează ca efectuat",
     "An error occurred" : "A apărut o eraore",
-    "Message from {author} in {conversationName}" : "Mesaj de la {author} în {conversationName}"
+    "Message from {author} in {conversationName}" : "Mesaj de la {author} în {conversationName}",
+    "Repeat" : "Repetă",
+    "Repeat every" : "Se repetă la fiecare",
+    "never" : "niciodată",
+    "on date" : "la data ",
+    "after" : "după",
+    "End repeat" : "Încheie seria",
+    "first" : "primul",
+    "second" : "secundă",
+    "third" : "al treilea",
+    "fourth" : "al patrulea",
+    "fifth" : "al cincilea",
+    "last" : "ultimul",
+    "second to last" : "penultimul",
+    "By day of the month" : "după ziua lunii",
+    "On the" : "Pe",
+    "weekday" : "zi din săptămână",
+    "weekend day" : "ziua din săptămână",
+    "_time_::_times_" : ["dată","ori","ori"],
+    "_month_::_months_" : ["lună","luni","luni"],
+    "_year_::_years_" : ["an","ani","ani"]
 },
 "nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));");

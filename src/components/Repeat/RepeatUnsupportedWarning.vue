@@ -6,13 +6,18 @@
 <template>
 	<div class="repeat-option-warning">
 		<strong>
-			{{ $t('calendar', 'The recurrence definition of this event is not fully supported by Nextcloud. If you edit the recurrence-options, certain recurrences may be lost.') }}
+			{{ t('tasks', 'The recurrence definition of this task is not fully supported by Nextcloud. If you edit the recurrence-options, certain recurrences may be lost.') }}
 		</strong>
 	</div>
 </template>
 
 <script>
+import { translate as t } from '@nextcloud/l10n'
+
 export default {
 	name: 'RepeatUnsupportedWarning',
+	methods: {
+		t,
+	},
 }
 </script>

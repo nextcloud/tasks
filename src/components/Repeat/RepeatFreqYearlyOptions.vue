@@ -22,7 +22,7 @@
 				:name="radioInputId"
 				:model-value="byMonthDayEnabled"
 				@update:model-value="enableByMonthDay">
-				{{ $t('calendar', 'On specific day') }}
+				{{ t('tasks', 'On specific day') }}
 			</NcCheckboxRadioSwitch>
 			<div class="repeat-option-set-section__grid">
 				<NcButton v-for="option in byMonthDayOptions"
@@ -41,7 +41,7 @@
 				:name="radioInputId"
 				:model-value="!byMonthDayEnabled"
 				@update:model-value="enableBySetPosition">
-				{{ $t('calendar', 'On the') }}
+				{{ t('tasks', 'On the') }}
 			</NcCheckboxRadioSwitch>
 			<RepeatFirstLastSelect :by-set-position="bySetPosition"
 				:disabled="byMonthDayEnabled"
@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { getMonthNamesShort } from '@nextcloud/l10n'
+import { getMonthNamesShort, translate as t } from '@nextcloud/l10n'
 import {
 	NcButton,
 	NcCheckboxRadioSwitch,
@@ -150,6 +150,8 @@ export default {
 	},
 
 	methods: {
+		t,
+
 		/**
 		 *
 		 * @param {string} byMonth The month to toggle

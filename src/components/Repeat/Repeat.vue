@@ -7,7 +7,7 @@
 	<div class="property-repeat" :class="{ 'property-repeat--readonly': isReadOnly, 'does-not-repeat': recurrenceRule.frequency === 'NONE' }">
 		<div class="property-repeat__summary">
 			<RepeatIcon class="property-repeat__summary__icon"
-				:name="$t('calendar', 'Repeat')"
+				:name="t('tasks', 'Repeat')"
 				:size="20" />
 			<RepeatSummary class="property-repeat__summary__content"
 				:recurrence-rule="recurrenceRule" />
@@ -25,7 +25,7 @@
 
 		<NcModal v-model:show="showOptions">
 			<div class="property-repeat__options">
-				<h2>{{ $t('calendar', 'Repeat event') }}</h2>
+				<h2>{{ t('tasks', 'Repeat task') }}</h2>
 				<RepeatFreqInterval v-if="!isRecurrenceException && !isReadOnly"
 					:frequency="recurrenceRule.frequency"
 					:interval="recurrenceRule.interval"
@@ -76,6 +76,7 @@
 
 <script>
 import { NcActionButton as ActionButton, NcActions as Actions, NcModal } from '@nextcloud/vue'
+import { translate as t } from '@nextcloud/l10n'
 import { mapStores } from 'pinia'
 import Check from 'vue-material-design-icons/Check.vue'
 import Pencil from 'vue-material-design-icons/PencilOutline.vue'
@@ -217,13 +218,14 @@ export default {
 		 */
 		toggleTitle() {
 			if (this.showOptions) {
-				return this.t('calendar', 'Save')
+				return t('tasks', 'Save')
 			}
-			return this.t('calendar', 'Edit')
+			return t('tasks', 'Edit')
 		},
 	},
 
 	methods: {
+		t,
 		/**
 		 * Changes the interval of recurrence
 		 *

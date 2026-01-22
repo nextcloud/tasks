@@ -21,6 +21,8 @@ OC.L10N.register(
     "Close" : "மூடுக",
     "Tags" : "சீட்டுகள்",
     "Details" : "விவரங்கள்",
-    "Notes" : "குறிப்புகள்"
+    "Notes" : "குறிப்புகள்",
+    "Repeat" : "மீண்டும்",
+    "never" : "ஒருபோதும்"
 },
 "nplurals=2; plural=(n != 1);");

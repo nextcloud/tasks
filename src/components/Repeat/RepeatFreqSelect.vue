@@ -15,6 +15,7 @@
 
 <script>
 import { NcSelect } from '@nextcloud/vue'
+import { translate as t, translatePlural as n } from '@nextcloud/l10n'
 
 export default {
 	name: 'RepeatFreqSelect',
@@ -37,19 +38,19 @@ export default {
 	computed: {
 		options() {
 			return [{
-				label: this.$t('calendar', 'never'),
+				label: t('tasks', 'never'),
 				freq: 'NONE',
 			}, {
-				label: this.$n('calendar', 'day', 'days', this.count),
+				label: n('tasks', 'day', 'days', this.count),
 				freq: 'DAILY',
 			}, {
-				label: this.$n('calendar', 'week', 'weeks', this.count),
+				label: n('tasks', 'week', 'weeks', this.count),
 				freq: 'WEEKLY',
 			}, {
-				label: this.$n('calendar', 'month', 'months', this.count),
+				label: n('tasks', 'month', 'months', this.count),
 				freq: 'MONTHLY',
 			}, {
-				label: this.$n('calendar', 'year', 'years', this.count),
+				label: n('tasks', 'year', 'years', this.count),
 				freq: 'YEARLY',
 			}]
 		},
@@ -60,6 +61,8 @@ export default {
 	},
 
 	methods: {
+		t,
+		n,
 		select(value) {
 			if (!value) {
 				return

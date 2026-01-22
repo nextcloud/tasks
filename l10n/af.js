@@ -45,6 +45,10 @@ OC.L10N.register(
     "All day" : "Heeldag",
     "Details" : "Besonderhede",
     "Notes" : "Notas",
-    "An error occurred" : "'n Fout het voorgekom"
+    "An error occurred" : "'n Fout het voorgekom",
+    "Repeat" : "Herhaal",
+    "never" : "nooit",
+    "after" : "na",
+    "second" : "sekonde"
 },
 "nplurals=2; plural=(n != 1);");

@@ -6,7 +6,7 @@
 <template>
 	<div class="repeat-option-set repeat-option-set--weekly">
 		<span class="repeat-option-set-section__title">
-			{{ $t('calendar', 'on') }}
+			{{ t('tasks', 'on') }}
 		</span>
 		<div class="repeat-option-set-section__grid">
 			<NcButton v-for="option in options"
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { getDayNamesMin } from '@nextcloud/l10n'
+import { getDayNamesMin, translate as t } from '@nextcloud/l10n'
 import { NcButton } from '@nextcloud/vue'
 
 export default {
@@ -74,6 +74,8 @@ export default {
 	},
 
 	methods: {
+		t,
+
 		toggleByDay(day) {
 			if (this.byDay.indexOf(day) === -1) {
 				this.$emit('add-by-day', day)

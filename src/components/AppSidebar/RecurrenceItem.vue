@@ -128,7 +128,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import { NcActions, NcActionButton, NcButton, NcDateTimePicker, NcModal } from '@nextcloud/vue'
-import { translate as t } from '@nextcloud/l10n'
+import { translate as t, translatePlural as n } from '@nextcloud/l10n'
 import Delete from 'vue-material-design-icons/Delete.vue'
 import { RecurValue, Property } from '@nextcloud/calendar-js'
 
@@ -178,21 +178,23 @@ export default {
 			}
 
 			const rule = this.task.recurrenceRule
-			const frequency = rule.frequency.toLowerCase()
 			const interval = rule.interval || 1
+
+			// Get translated frequency
+			const frequencyText = this.getTranslatedFrequency(rule.frequency, interval)
 
 			let summary = ''
 			if (interval === 1) {
-				summary = t('tasks', `Repeats ${frequency}`)
+				summary = frequencyText
 			} else {
-				summary = t('tasks', `Every {interval} ${frequency}`, { interval })
+				summary = t('tasks', 'Every {interval} {frequency}', { interval, frequency: frequencyText })
 			}
 
 			if (rule.until) {
 				const date = new Date(rule.until).toLocaleDateString()
-				summary += ' ' + t('tasks', 'until {date}', { date })
+				summary += ', ' + t('tasks', 'until {date}', { date })
 			} else if (rule.count) {
-				summary += ' ' + t('tasks', '{count} times', { count: rule.count })
+				summary += ', ' + t('tasks', '{count} times', { count: rule.count })
 			}
 
 			return summary
@@ -210,6 +212,22 @@ export default {
 	},
 	methods: {
 		t,
+		n,
+
+		getTranslatedFrequency(frequency, interval) {
+			switch (frequency) {
+			case 'DAILY':
+				return interval === 1 ? t('tasks', 'Daily') : n('tasks', 'day', 'days', interval)
+			case 'WEEKLY':
+				return interval === 1 ? t('tasks', 'Weekly') : n('tasks', 'week', 'weeks', interval)
+			case 'MONTHLY':
+				return interval === 1 ? t('tasks', 'Monthly') : n('tasks', 'month', 'months', interval)
+			case 'YEARLY':
+				return interval === 1 ? t('tasks', 'Yearly') : n('tasks', 'year', 'years', interval)
+			default:
+				return frequency
+			}
+		},
 
 		openEditor() {
 			if (!this.readOnly) {

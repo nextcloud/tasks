@@ -65,6 +65,26 @@ OC.L10N.register(
     "All day" : "Drwy'r dydd",
     "Details" : "Manylion",
     "Notes" : "Nodiadau",
-    "An error occurred" : "Digwyddodd gwall"
+    "An error occurred" : "Digwyddodd gwall",
+    "Repeat" : "Ailadrodd",
+    "Repeat every" : "Ailadrodd bob",
+    "never" : "byth",
+    "on date" : "ar ddyddiad",
+    "after" : "wedi",
+    "End repeat" : "Gorffen ailadrodd",
+    "first" : "cyntaf",
+    "second" : "ail",
+    "third" : "trydydd",
+    "fourth" : "pedwerydd",
+    "fifth" : "pumed",
+    "last" : "o;af",
+    "second to last" : "ail i olaf",
+    "By day of the month" : "Yn ôl dydd o'r mis",
+    "On the" : "Ar y",
+    "weekday" : "yn ystod yr wythnos",
+    "weekend day" : "diwrnod penwythnos",
+    "_time_::_times_" : ["amser","gwaith","gwaith","gwaith"],
+    "_month_::_months_" : ["mis","mis","mis","mis"],
+    "_year_::_years_" : ["blwyddyn","blwyddyn","flwyddyn","blwyddyn"]
 },
 "nplurals=4; plural=(n==1) ? 0 : (n==2) ? 1 : (n != 8 && n != 11) ? 2 : 3;");

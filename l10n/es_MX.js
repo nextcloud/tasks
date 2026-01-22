@@ -145,6 +145,26 @@ OC.L10N.register(
     "No upcoming tasks" : "No hay tareas próximas",
     "upcoming tasks" : "tareas próximas",
     "Synchronizing to the server." : "Sincronizando con el servidor.",
-    "An error occurred" : "Ha ocurrido un error"
+    "An error occurred" : "Ha ocurrido un error",
+    "Repeat" : "Repetir",
+    "Repeat every" : "Repetir cada",
+    "never" : "nunca",
+    "on date" : "en la fecha",
+    "after" : "después",
+    "End repeat" : "Terminar repetición",
+    "first" : "primero",
+    "second" : "segundo",
+    "third" : "tercero",
+    "fourth" : "cuarto",
+    "fifth" : "quinto",
+    "last" : "último",
+    "second to last" : "penúltimo",
+    "By day of the month" : "Por día del mes",
+    "On the" : "En el",
+    "weekday" : "día hábil",
+    "weekend day" : "día de fin de semana",
+    "_time_::_times_" : ["vez","veces","veces"],
+    "_month_::_months_" : ["mes","meses","meses"],
+    "_year_::_years_" : ["año","años","años"]
 },
 "nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");
