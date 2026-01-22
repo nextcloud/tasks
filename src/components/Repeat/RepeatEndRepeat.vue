@@ -18,6 +18,7 @@
 		<NcDateTimePicker v-if="isUntil"
 			class="repeat-option-end__until"
 			:value="until"
+			:append-to-body="true"
 			type="date"
 			@input="changeUntil" />
 		<input v-if="isCount"
