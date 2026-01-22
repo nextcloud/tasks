@@ -20,6 +20,11 @@ OC.L10N.register(
     "Close" : "បិទ",
     "Tags" : "ស្លាក",
     "Details" : "ព័ត៌មាន​លម្អិត",
-    "Notes" : "កំណត់​ចំណាំ"
+    "Notes" : "កំណត់​ចំណាំ",
+    "Repeat" : "ធ្វើម្ដងទៀត",
+    "never" : "មិនដែរ",
+    "first" : "ទីមួយ",
+    "second" : "ទីពីរ",
+    "last" : "ចុងក្រោយ"
 },
 "nplurals=1; plural=0;");

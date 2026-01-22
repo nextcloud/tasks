@@ -38,6 +38,10 @@ OC.L10N.register(
     "Set start date" : "Assigna le data de initio",
     "Set due date" : "Assignar data debite",
     "Details" : "Detalios",
-    "Notes" : "Notas"
+    "Notes" : "Notas",
+    "Repeat" : "Repeter",
+    "never" : "nunquam",
+    "after" : "post",
+    "second" : "secunda"
 },
 "nplurals=2; plural=(n != 1);");

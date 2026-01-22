@@ -54,6 +54,12 @@ OC.L10N.register(
     "All day" : "Todo el día",
     "Details" : "Detalles",
     "Notes" : "Notas",
-    "An error occurred" : "Ocurrió un error"
+    "An error occurred" : "Ocurrió un error",
+    "Repeat" : "Repetir",
+    "never" : "nunca",
+    "after" : "después",
+    "first" : "primero",
+    "second" : "segundo",
+    "last" : "último"
 },
 "nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");

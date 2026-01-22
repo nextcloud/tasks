@@ -250,6 +250,26 @@ OC.L10N.register(
     "[Starts tomorrow at] LT" : "[از فردا در] LT شروع می شود",
     "[Starts on] LL [at] LT" : "[شروع می شود] LL [در] LT",
     "[Started yesterday at] LT" : "[از دیروز در] LT شروع شد",
-    "[Started on] LL [at] LT" : "[شروع در] LL [در] LT"
+    "[Started on] LL [at] LT" : "[شروع در] LL [در] LT",
+    "Repeat" : "تکرار",
+    "Repeat every" : "همه را تکرار کنید",
+    "never" : "هرگز",
+    "on date" : "در تاریخ",
+    "after" : "بعد از",
+    "End repeat" : "پایان تکرار ",
+    "first" : "اولین",
+    "second" : "دومین",
+    "third" : "سوم",
+    "fourth" : "چهارم",
+    "fifth" : "پنجم",
+    "last" : "آخر",
+    "second to last" : "دوم تا آخرین",
+    "By day of the month" : "تا روز ماه",
+    "On the" : "در",
+    "weekday" : "روز هفته",
+    "weekend day" : " آخر  هفته",
+    "_time_::_times_" : ["بار","بارها"],
+    "_month_::_months_" : ["ماه","ماه ها"],
+    "_year_::_years_" : ["سال","سال ها"]
 },
 "nplurals=2; plural=(n > 1);");

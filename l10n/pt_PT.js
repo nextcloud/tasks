@@ -87,6 +87,23 @@ OC.L10N.register(
     "Selecting a classification is forbidden, because the task was shared with you." : "Não é possível selecionar uma classificação, uma vez que a tarefa foi partilhada consigo.",
     "Select tags" : "Selecione etiquetas",
     "Notes" : "Notas",
-    "An error occurred" : "Ocorreu um erro"
+    "An error occurred" : "Ocorreu um erro",
+    "Repeat" : "Repetir",
+    "Repeat every" : "Repetir a cada",
+    "never" : "nunca",
+    "after" : "depois",
+    "first" : "primeiro",
+    "second" : "segundo",
+    "third" : "terceiro",
+    "fourth" : "quarto",
+    "fifth" : "quinto",
+    "last" : "ultimo",
+    "second to last" : "do segundo ao último",
+    "By day of the month" : "Por dia do mês",
+    "On the" : "No",
+    "weekday" : "dia da semana",
+    "weekend day" : "dia do fim-de-semana",
+    "_month_::_months_" : ["mês","meses","meses"],
+    "_year_::_years_" : ["ano","anos","anos"]
 },
 "nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");

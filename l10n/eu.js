@@ -263,6 +263,26 @@ OC.L10N.register(
     "[Starts tomorrow at] LT" : "[Bihar hasten da ordu honetan] LT",
     "[Starts on] LL [at] LT" : "LL [hasiko da ordu honetan] LT",
     "[Started yesterday at] LT" : "[Atzo hasi zen ordu honetan] LT",
-    "[Started on] LL [at] LT" : "LL [hasi da ordu honetan] LT"
+    "[Started on] LL [at] LT" : "LL [hasi da ordu honetan] LT",
+    "Repeat" : "Errepikatu",
+    "Repeat every" : "Errepikatu zenbatero",
+    "never" : "inoiz ez",
+    "on date" : "epean",
+    "after" : "gero",
+    "End repeat" : "Amaitu errepikapena",
+    "first" : "lehena",
+    "second" : "bigarrean",
+    "third" : "hirugarrena",
+    "fourth" : "laugarrena",
+    "fifth" : "bosgarrena",
+    "last" : "azkena",
+    "second to last" : "bigarren azkena",
+    "By day of the month" : "Hileko egunaren arabera",
+    "On the" : "Honetan",
+    "weekday" : "asteguna",
+    "weekend day" : "asteburuko eguna",
+    "_time_::_times_" : ["aldiz","aldiz"],
+    "_month_::_months_" : ["hilabete","hilabete"],
+    "_year_::_years_" : ["urte","urte"]
 },
 "nplurals=2; plural=(n != 1);");

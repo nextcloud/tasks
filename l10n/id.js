@@ -72,6 +72,25 @@ OC.L10N.register(
     "Notes" : "Catatan",
     "Mark as done" : "Tandai sebagai selesai",
     "An error occurred" : "Terjadi kesalahan",
-    "[Starts today]" : "[Dimulai hari ini]"
+    "[Starts today]" : "[Dimulai hari ini]",
+    "Repeat" : "Ulang",
+    "Repeat every" : "Ulang setiap",
+    "never" : "tidak pernah",
+    "on date" : "pada tanggal",
+    "after" : "setelah",
+    "End repeat" : "Akhiri perulangan",
+    "first" : "pertama",
+    "second" : "detik",
+    "third" : "ke-3",
+    "fourth" : "ke-4",
+    "fifth" : "ke-5",
+    "last" : "terakhir",
+    "second to last" : "kedua terakhir",
+    "By day of the month" : "Berdasarkan hari pada bulan",
+    "On the" : "Pada",
+    "weekday" : "akhir pekan",
+    "weekend day" : "akhir pekan",
+    "_month_::_months_" : ["bulang"],
+    "_year_::_years_" : ["tahun"]
 },
 "nplurals=1; plural=0;");

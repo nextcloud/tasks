@@ -32,6 +32,9 @@ OC.L10N.register(
     "Set start date" : "আরম্ভের তারিখ নির্ধারণ করুন",
     "Set due date" : "কার্যকারিতার তারিখ নির্ধারণ করুন",
     "Details" : "বিসতারিত",
-    "Notes" : "নোট"
+    "Notes" : "নোট",
+    "Repeat" : "পূনঃসংঘটন",
+    "never" : "কখনোই নয়",
+    "second" : "সেকেন্ড"
 },
 "nplurals=2; plural=(n != 1);");

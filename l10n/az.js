@@ -34,6 +34,9 @@ OC.L10N.register(
     "Set start date" : "Başlanğıc tarixini işə sal",
     "Set due date" : "Vaxtı təyin et",
     "Details" : "Detallar",
-    "Notes" : "Qeydlər"
+    "Notes" : "Qeydlər",
+    "Repeat" : "Təkrar",
+    "never" : "heç vaxt",
+    "second" : "saniyə"
 },
 "nplurals=2; plural=(n != 1);");

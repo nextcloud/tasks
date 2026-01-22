@@ -203,6 +203,26 @@ OC.L10N.register(
     "[Starts tomorrow at] LT" : "[Prasidės rytoj] LT",
     "[Starts on] LL [at] LT" : "[Prasidės] LL, LT",
     "[Started yesterday at] LT" : "[Prasidėjo vakar] LT",
-    "[Started on] LL [at] LT" : "[Prasidėjo] LL, LT"
+    "[Started on] LL [at] LT" : "[Prasidėjo] LL, LT",
+    "Repeat" : "Kartoti",
+    "Repeat every" : "Kartoti kas",
+    "never" : "niekada",
+    "on date" : "tam tikrą datą",
+    "after" : "po",
+    "End repeat" : "Užbaigti kartojimą",
+    "first" : "pirmas",
+    "second" : "antras",
+    "third" : "trečias",
+    "fourth" : "ketvirtas",
+    "fifth" : "penktas",
+    "last" : "paskutinis",
+    "second to last" : "priešpaskutinis",
+    "By day of the month" : "Pagal mėnesio dienas",
+    "On the" : "Ties",
+    "weekday" : "savaitės darbo dienos",
+    "weekend day" : "savaitgalio diena",
+    "_time_::_times_" : ["karto","kartų","kartų","karto"],
+    "_month_::_months_" : ["mėnesis","mėnesiai","mėnesių","mėnesis"],
+    "_year_::_years_" : ["metai","metai","metų","metai"]
 },
 "nplurals=4; plural=(n % 10 == 1 && (n % 100 > 19 || n % 100 < 11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? 1 : n % 1 != 0 ? 2: 3);");
