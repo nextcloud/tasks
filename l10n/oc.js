@@ -58,20 +58,6 @@ OC.L10N.register(
     "No upcoming tasks" : "Cap de prètzfach venent",
     "upcoming tasks" : "prètzfaches venents",
     "No tasks today" : "Cap de prètzfach uèi",
-    "An error occurred" : "Una error s’es producha",
-    "Repeat" : "Repetir",
-    "never" : "pas jamai",
-    "after" : "aprèp",
-    "first" : "primièr",
-    "second" : "segonda",
-    "third" : "tresen",
-    "fourth" : "quatren",
-    "fifth" : "cinquen",
-    "last" : "darrièr",
-    "weekday" : "dimenjada",
-    "weekend day" : "jorn de la setmana",
-    "_time_::_times_" : ["còp","còps"],
-    "_month_::_months_" : ["mes","mese"],
-    "_year_::_years_" : ["annada","annadas"]
+    "An error occurred" : "Una error s’es producha"
 },
 "nplurals=2; plural=(n > 1);");

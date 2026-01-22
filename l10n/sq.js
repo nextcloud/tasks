@@ -52,10 +52,6 @@ OC.L10N.register(
     "All day" : "Gjithë ditën",
     "Details" : "Detajet",
     "Select tags" : "Përzgjidh etiketat",
-    "Notes" : "Shënime",
-    "Repeat" : "Përsërite",
-    "never" : "kurrë",
-    "after" : "pas",
-    "second" : "sekondë"
+    "Notes" : "Shënime"
 },
 "nplurals=2; plural=(n != 1);");

@@ -31,9 +31,6 @@ OC.L10N.register(
     "When shared show only busy" : "Түгээсэн тохиолдолд зөвхөн завгүй гэж харуул",
     "When shared hide this event" : "Түгээсэн тохиолдолд энэ үйл явдлыг нуу",
     "Details" : "Дэлгэрэнгүй",
-    "Notes" : "Шинэ ",
-    "Repeat" : "Давтах",
-    "never" : "хэзээ ч үгүй",
-    "after" : "дараа"
+    "Notes" : "Шинэ "
 },
 "nplurals=2; plural=(n != 1);");

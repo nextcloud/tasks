@@ -261,15 +261,6 @@ OC.L10N.register(
     "[Starts tomorrow at] LT" : "[Comienza mañana:] LT",
     "[Starts on] LL [at] LT" : "[Comienza'l] LL [:] LT",
     "[Started yesterday at] LT" : "[Comenzó ayeri:] LT",
-    "[Started on] LL [at] LT" : "[Comienza'l] LL [:] LT",
-    "Repeat" : "Repitir",
-    "never" : "enxamás",
-    "first" : "primer",
-    "second" : "segundu",
-    "third" : "tercer",
-    "fourth" : "cuartu",
-    "fifth" : "quintu",
-    "_month_::_months_" : ["mes","meses"],
-    "_year_::_years_" : ["añu","años"]
+    "[Started on] LL [at] LT" : "[Comienza'l] LL [:] LT"
 },
 "nplurals=2; plural=(n != 1);");

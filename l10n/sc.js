@@ -230,26 +230,6 @@ OC.L10N.register(
     "[Starts tomorrow at] LT" : "[Cumintzat cras a is] LT",
     "[Starts on] LL [at] LT" : "[Cumintzat su] LL [a is] LT",
     "[Started yesterday at] LT" : "[Cumintzadu eris a is] LT",
-    "[Started on] LL [at] LT" : "[Cumintzadu su] LL [a is] LT",
-    "Repeat" : "Repiti",
-    "Repeat every" : "Repite cada",
-    "never" : "mai",
-    "on date" : "in data",
-    "after" : "a pustis",
-    "End repeat" : "Acabba ripetitzione",
-    "first" : "primu",
-    "second" : "segundu",
-    "third" : "de tres",
-    "fourth" : "de bator",
-    "fifth" : "de chimbe",
-    "last" : "ùltimu",
-    "second to last" : "penùltimu",
-    "By day of the month" : "Pro die de su mese",
-    "On the" : "Su",
-    "weekday" : "die de fatu",
-    "weekend day" : "die de fine de chida",
-    "_time_::_times_" : ["borta","bortas"],
-    "_month_::_months_" : ["mese","meses"],
-    "_year_::_years_" : ["Annos","annos"]
+    "[Started on] LL [at] LT" : "[Cumintzadu su] LL [a is] LT"
 },
 "nplurals=2; plural=(n != 1);");

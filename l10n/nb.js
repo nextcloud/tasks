@@ -263,26 +263,6 @@ OC.L10N.register(
     "[Starts tomorrow at] LT" : "[Starter i morgen kl.] LT",
     "[Starts on] LL [at] LT" : "[Starter den] LL [kl.] LT",
     "[Started yesterday at] LT" : "[Startet i går kl.] LT",
-    "[Started on] LL [at] LT" : "[Startet den] LL [kl.] LT",
-    "Repeat" : "Gjenta",
-    "Repeat every" : "Gjenta hver",
-    "never" : "aldri",
-    "on date" : "på dato",
-    "after" : "etter",
-    "End repeat" : "Avslutt gjentakelse",
-    "first" : "første",
-    "second" : "sekund",
-    "third" : "tredje",
-    "fourth" : "fjerde",
-    "fifth" : "femte",
-    "last" : "siste",
-    "second to last" : "nest sist",
-    "By day of the month" : "På en dag i måneden",
-    "On the" : "På den",
-    "weekday" : "ukedag",
-    "weekend day" : "helgedag",
-    "_time_::_times_" : ["gang","ganger"],
-    "_month_::_months_" : ["måned","måneder"],
-    "_year_::_years_" : ["år","år"]
+    "[Started on] LL [at] LT" : "[Startet den] LL [kl.] LT"
 },
 "nplurals=2; plural=(n != 1);");

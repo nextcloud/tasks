@@ -227,26 +227,6 @@ OC.L10N.register(
     "[Starts tomorrow at] LT" : "[Počinje sutra u] LT",
     "[Starts on] LL [at] LT" : "[Počinje] LL [u] LT",
     "[Started yesterday at] LT" : "[Počeo jučer u] LT",
-    "[Started on] LL [at] LT" : "[Počeo] LL [u] LT",
-    "Repeat" : "Ponovi",
-    "Repeat every" : "Ponovi svakih",
-    "never" : "nikad",
-    "on date" : "na datum",
-    "after" : "nakon",
-    "End repeat" : "Završi ponavljanje",
-    "first" : "prvi",
-    "second" : "drugi",
-    "third" : "treći",
-    "fourth" : "četvrti",
-    "fifth" : "peti",
-    "last" : "zadnji",
-    "second to last" : "predzadnji",
-    "By day of the month" : "Do dana u mjesecu",
-    "On the" : "Na",
-    "weekday" : "dan u tjednu",
-    "weekend day" : "dan vikendom",
-    "_time_::_times_" : ["put","puta","puta"],
-    "_month_::_months_" : ["mjesec","mjeseci","mjeseci"],
-    "_year_::_years_" : ["godinu","godina","godina"]
+    "[Started on] LL [at] LT" : "[Počeo] LL [u] LT"
 },
 "nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;");

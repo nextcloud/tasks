@@ -286,26 +286,6 @@ OC.L10N.register(
     "{time} before the task starts" : "{time} áður en verk hefst",
     "{time} before the task is due" : "{time} áður en verkinu á að vera lokið",
     "{time} after the task starts" : "{time} eftir að verk hefst",
-    "{time} after the task is due" : "{time} eftir að verkinu á að vera lokið",
-    "Repeat" : "Endurtaka",
-    "Repeat every" : "Endurtaka",
-    "never" : "aldrei",
-    "on date" : "þann",
-    "after" : "eftir",
-    "End repeat" : "Hætta endurtekningu",
-    "first" : "fyrsta",
-    "second" : "sekúnda",
-    "third" : "þriðja",
-    "fourth" : "fjórða",
-    "fifth" : "fimmta",
-    "last" : "síðasta",
-    "second to last" : "næstsíðasta",
-    "By day of the month" : "Eftir degi mánaðarins",
-    "On the" : "Þann",
-    "weekday" : "vinnudagur",
-    "weekend day" : "helgardagur",
-    "_time_::_times_" : ["sinni","sinnum"],
-    "_month_::_months_" : ["mánuður","mánuðir"],
-    "_year_::_years_" : ["ár","ár"]
+    "{time} after the task is due" : "{time} eftir að verkinu á að vera lokið"
 },
 "nplurals=2; plural=(n % 10 != 1 || n % 100 == 11);");

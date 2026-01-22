@@ -287,26 +287,6 @@ OC.L10N.register(
     "{time} before the task starts" : "{time} kabla ya kazi kuanza",
     "{time} before the task is due" : "{time} kabla ya kazi kufaa",
     "{time} after the task starts" : "{time} baada ya kazi kuanza",
-    "{time} after the task is due" : "{time} baada ya kazi kukamilika",
-    "Repeat" : "Rudia",
-    "Repeat every" : "Rudia kila",
-    "never" : "kamwe",
-    "on date" : "kwa tarehe",
-    "after" : "baada ya",
-    "End repeat" : "Maliza kurudia",
-    "first" : "kwanza",
-    "third" : "tatu",
-    "fourth" : "nne",
-    "fifth" : "tano",
-    "last" : "mwisho",
-    "second to last" : "pili kutoka mwisho",
-    "By day of the month" : "Kwa siku ya mwezi",
-    "On the" : "Juu ya",
-    "On specific day" : "Kwa siku maalum",
-    "weekday" : "siku za wiki",
-    "weekend day" : "siku ya wikendi",
-    "_time_::_times_" : ["time","mara"],
-    "_month_::_months_" : ["month","miezi"],
-    "_year_::_years_" : ["year","miaka"]
+    "{time} after the task is due" : "{time} baada ya kazi kukamilika"
 },
 "nplurals=2; plural=(n != 1);");

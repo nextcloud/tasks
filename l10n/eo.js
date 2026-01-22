@@ -131,21 +131,6 @@ OC.L10N.register(
     "[Starts tomorrow at] LT" : "[Komenciĝos morgaŭ je] LT",
     "[Starts on] LL [at] LT" : "[Komenciĝas] LL [je] LT",
     "[Started yesterday at] LT" : "[Komenciĝis hieraŭ je] LT",
-    "[Started on] LL [at] LT" : "[Komenciĝis] LL [je] LT",
-    "Repeat" : "Ripeti",
-    "never" : "neniam",
-    "after" : "post",
-    "first" : "Una",
-    "second" : "sekundo",
-    "third" : "Tria",
-    "fourth" : "Kvara",
-    "fifth" : "Kvina",
-    "last" : "Lasta",
-    "By day of the month" : "Per tago de la monato",
-    "On the" : "Je la",
-    "weekday" : "Semajntago",
-    "weekend day" : "Semajnfintago",
-    "_month_::_months_" : ["Monato","Monatoj"],
-    "_year_::_years_" : ["Jaro","Jaroj"]
+    "[Started on] LL [at] LT" : "[Komenciĝis] LL [je] LT"
 },
 "nplurals=2; plural=(n != 1);");

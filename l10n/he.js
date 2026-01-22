@@ -176,26 +176,6 @@ OC.L10N.register(
     "[Starts tomorrow at] LT" : "[מתחילה מחר בשעה] LT",
     "[Starts on] LL [at] LT" : "[מתחילה ביום] LL [בשעה] LT",
     "[Started yesterday at] LT" : "[החלה אתמול בשעה] LT",
-    "[Started on] LL [at] LT" : "[החלה ביום] LL [בשעה] LT",
-    "Repeat" : "חזרה",
-    "Repeat every" : "חזור על כל",
-    "never" : "לעולם לא",
-    "on date" : "בתאריך",
-    "after" : "לאחר",
-    "End repeat" : "סיום חזרה",
-    "first" : "ראשון",
-    "second" : "שנייה",
-    "third" : "שלישי",
-    "fourth" : "רביעי",
-    "fifth" : "חמישי",
-    "last" : "אחרון",
-    "second to last" : "אחד לפני האחרון",
-    "By day of the month" : "לפי היום בחודש",
-    "On the" : "על",
-    "weekday" : "יום בשבוע",
-    "weekend day" : "יום בסופ״ש",
-    "_time_::_times_" : ["בשעה","בשעה","בשעות"],
-    "_month_::_months_" : ["חודש","חודשיים","חודשים","חודשים"],
-    "_year_::_years_" : ["שנה","שנתיים","שנים","שנים"]
+    "[Started on] LL [at] LT" : "[החלה ביום] LL [בשעה] LT"
 },
 "nplurals=3; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: 2;");

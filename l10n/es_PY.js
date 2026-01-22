@@ -48,9 +48,6 @@ OC.L10N.register(
     "Details" : "Detalles",
     "Select tags" : "Selecciona las etiquetas",
     "Notes" : "Notas",
-    "An error occurred" : "Se presentó un error",
-    "Repeat" : "Repetir",
-    "never" : "nunca",
-    "after" : "después"
+    "An error occurred" : "Se presentó un error"
 },
 "nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");

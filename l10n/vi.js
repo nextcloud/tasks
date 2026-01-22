@@ -81,26 +81,6 @@ OC.L10N.register(
     "Notes" : "Ghi chú",
     "Mark as done" : "Đánh dấu là đã hoàn thành",
     "An error occurred" : "Có lỗi đã xảy ra",
-    "Message from {author} in {conversationName}" : "Tin nhắn từ {author} trong {conversationName}",
-    "Repeat" : "Lặp lại",
-    "Repeat every" : "Lặp lại mỗi",
-    "never" : "không thay đổi",
-    "on date" : "vào ngày",
-    "after" : "sau khi",
-    "End repeat" : "Kết thúc lập lại",
-    "first" : "đầu tiên",
-    "second" : "Thứ hai",
-    "third" : "vị trí thứ ba",
-    "fourth" : "vị trí thứ tư",
-    "fifth" : "vị trí thứ năm",
-    "last" : "cuối cùng",
-    "second to last" : "kế cuối",
-    "By day of the month" : "Vào ngày của tháng",
-    "On the" : "Trên",
-    "weekday" : "ngày làm việc",
-    "weekend day" : "ngày cuối tuần",
-    "_time_::_times_" : ["lần"],
-    "_month_::_months_" : ["tháng"],
-    "_year_::_years_" : ["năm"]
+    "Message from {author} in {conversationName}" : "Tin nhắn từ {author} trong {conversationName}"
 },
 "nplurals=1; plural=0;");

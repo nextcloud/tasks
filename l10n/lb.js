@@ -37,10 +37,6 @@ OC.L10N.register(
     "Set start date" : "Setz en Ufanks Datum fest",
     "Set due date" : "Datum setzen bis wéini et fälleg ass",
     "Details" : "Detailer",
-    "Notes" : "Notizen",
-    "Repeat" : "Widderhuelen",
-    "never" : "Ni",
-    "after" : "No",
-    "second" : "zweet"
+    "Notes" : "Notizen"
 },
 "nplurals=2; plural=(n != 1);");
