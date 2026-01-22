@@ -7,7 +7,7 @@
 	<div class="repeat-option-warning">
 		<div class="repeat-option-warning__icon icon icon-info" />
 		<strong class="repeat-option-warning__info">
-			{{ $t('calendar', 'Changes to the recurrence-rule will only apply to this and all future occurrences.') }}
+			{{ $t('tasks', 'Changes to the recurrence-rule will only apply to this and all future occurrences.') }}
 		</strong>
 	</div>
 </template>
