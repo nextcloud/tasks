@@ -759,6 +759,7 @@ export default {
 			'setStatus',
 			'getTaskByUri',
 			'togglePinned',
+			'removeRecurrenceRule',
 		]),
 
 		async loadTask() {
@@ -839,6 +840,11 @@ export default {
 			}
 			if (this.task.startMoment.isSame(start)) {
 				return
+			}
+			// If the start date is being removed and the task is recurring,
+			// also remove the recurrence rule since it requires a start date.
+			if (!start && task.isRecurring) {
+				this.removeRecurrenceRule({ task })
 			}
 			this.setStart({ task, start, allDay: this.allDay })
 		},

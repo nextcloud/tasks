@@ -20,7 +20,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <template>
-	<div v-show="task.due || task.start || task.recurrenceRule.frequency !== 'NONE'"
+	<div v-show="task.start"
 		:class="{
 			'property__item--clearable': isRecurring && !readOnly,
 			'property__item--readonly': readOnly

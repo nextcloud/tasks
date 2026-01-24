@@ -75,6 +75,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				</div>
 				<SortVariant v-if="hasHiddenSubtasks" :size="20" :title="t('tasks', 'Task has hidden subtasks')" />
 				<CalendarClock v-if="!overdue(task.startMoment) && task.start" :size="20" :title="startDateString(task)" />
+				<Repeat v-if="task.isRecurring" :size="20" :title="t('tasks', 'Task is recurring')" />
 				<Pin v-if="task.pinned" :size="20" :title="t('tasks', 'Task is pinned')" />
 				<TextBoxOutline v-if="task.note!=''"
 					:size="20"
@@ -212,6 +213,7 @@ import Plus from 'vue-material-design-icons/Plus.vue'
 import TextBoxOutline from 'vue-material-design-icons/TextBoxOutline.vue'
 import SortVariant from 'vue-material-design-icons/SortVariant.vue'
 import CalendarClock from 'vue-material-design-icons/CalendarClock.vue'
+import Repeat from 'vue-material-design-icons/Repeat.vue'
 import Star from 'vue-material-design-icons/StarOutline.vue'
 import Undo from 'vue-material-design-icons/Undo.vue'
 
@@ -244,6 +246,7 @@ export default {
 		TextBoxOutline,
 		SortVariant,
 		CalendarClock,
+		Repeat,
 		Star,
 		Undo,
 	},
