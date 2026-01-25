@@ -41,18 +41,41 @@ import ICAL from 'ical.js'
  * ical.js may not have all timezones registered, causing errors when
  * clone() tries to resolve timezone components.
  *
+ * This function converts to local time first to handle the case where
+ * the ICAL.Time is stored in UTC - we need the local hour values, not UTC.
+ *
  * @param {ICAL.Time} time The ICAL.Time to clone
  * @param {boolean} [isDate] Override isDate property (optional)
  * @return {ICAL.Time} A new ICAL.Time with the same local values
  */
 function cloneTimeWithoutTimezone(time, isDate = null) {
+	let year = time.year
+	let month = time.month
+	let day = time.day
+	let hour = time.hour
+	let minute = time.minute
+	let second = time.second
+
+	// If the time is in UTC, convert to local time without triggering timezone lookups
+	// We check for UTC timezone by looking at the zone property
+	if (time.zone && time.zone.tzid === 'UTC') {
+		// Create a Date from UTC values, then extract local time components
+		const jsDate = new Date(Date.UTC(year, month - 1, day, hour, minute, second))
+		year = jsDate.getFullYear()
+		month = jsDate.getMonth() + 1
+		day = jsDate.getDate()
+		hour = jsDate.getHours()
+		minute = jsDate.getMinutes()
+		second = jsDate.getSeconds()
+	}
+
 	return new ICAL.Time({
-		year: time.year,
-		month: time.month,
-		day: time.day,
-		hour: time.hour,
-		minute: time.minute,
-		second: time.second,
+		year,
+		month,
+		day,
+		hour,
+		minute,
+		second,
 		isDate: isDate !== null ? isDate : time.isDate,
 	})
 }
@@ -1786,8 +1809,16 @@ const actions = {
 			// For COUNT rules, we ignore the iterator's count tracking since we handle it separately
 			const nextOccurrence = iterator.next()
 			if (nextOccurrence) {
-				const nextDate = nextOccurrence.toJSDate()
-				const nextMoment = moment(nextDate)
+				// Build moment directly from floating time components to preserve local time
+				// toJSDate() on floating times interprets values as UTC, causing timezone shift
+				const nextMoment = moment({
+					year: nextOccurrence.year,
+					month: nextOccurrence.month - 1, // moment months are 0-indexed
+					date: nextOccurrence.day,
+					hour: nextOccurrence.hour,
+					minute: nextOccurrence.minute,
+					second: nextOccurrence.second,
+				})
 
 				// Calculate offset between start and due if both are set
 				let startOffset = null
