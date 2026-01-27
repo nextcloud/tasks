@@ -1801,13 +1801,27 @@ const actions = {
 
 			const iterator = icalRecur.iterator(startTime)
 
-			// Skip current occurrence
-			iterator.next()
+			// Get the first occurrence from the iterator
+			// The iterator returns occurrences >= startTime
+			let nextOccurrence = iterator.next()
 
-			// Get next occurrence (ical.js iterator returns ICAL.Time directly, or null when done)
+			// Check if the first occurrence matches the current instance date
+			// This happens when the instance date IS a valid occurrence of the rule
+			// (e.g., task on Sunday with rule "every Sunday")
+			// If it matches, we need to skip it and get the actual next occurrence
+			// If it doesn't match, the instance date is NOT a valid occurrence
+			// (e.g., task on Tuesday with rule "every Sunday"), and the first
+			// result is already the next valid occurrence we want
+			if (nextOccurrence
+				&& nextOccurrence.year === startTime.year
+				&& nextOccurrence.month === startTime.month
+				&& nextOccurrence.day === startTime.day) {
+				// Current date is a valid occurrence, skip to next
+				nextOccurrence = iterator.next()
+			}
+
 			// For UNTIL rules, this correctly returns null when we've passed the end date
 			// For COUNT rules, we ignore the iterator's count tracking since we handle it separately
-			const nextOccurrence = iterator.next()
 			if (nextOccurrence) {
 				// Build moment directly from floating time components to preserve local time
 				// toJSDate() on floating times interprets values as UTC, causing timezone shift
