@@ -66,7 +66,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:read-only="readOnly"
 				:property-string="t('tasks', 'All day')"
 				@set-checked="toggleAllDay(task)" />
-			<RecurrenceItem v-show="!readOnly || task.isRecurring"
+			<RecurrenceItem v-show="(task.start || task.due) && (!readOnly || task.isRecurring)"
 				:task="task"
 				:read-only="readOnly">
 				<template #icon>
