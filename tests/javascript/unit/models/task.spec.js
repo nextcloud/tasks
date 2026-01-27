@@ -814,5 +814,145 @@ describe('task', () => {
 			// Should have 5 occurrences
 			expect(occurrences.length).toEqual(5)
 		})
+
+		it('Should find next Sunday when task starts on Tuesday with BYDAY=SU (bug fix)', () => {
+			// This tests the fix for: "start date Tuesday, recurrence Sunday -> next should be Feb 1, not Feb 8"
+			// The issue was that the iterator was unconditionally skipping the first occurrence,
+			// but when the start date is NOT a valid occurrence, the first iterator.next()
+			// already returns the correct next occurrence.
+			const task = new Task(loadICS('vcalendars/vcalendar-recurring-weekly-different-day'), {})
+			expect(task.isRecurring).toEqual(true)
+			expect(task.recurrenceRule.frequency).toEqual('WEEKLY')
+			expect(task.recurrenceRule.byDay).toContain('SU')
+
+			const icalRecur = task.recurrenceRule.recurrenceRuleValue.toICALJs()
+			const startTime = task.start.clone() // Jan 27, 2026 (Tuesday)
+
+			const iterator = icalRecur.iterator(startTime)
+
+			// First next() returns the first valid occurrence >= startTime
+			// Since Jan 27 is Tuesday and rule is BYDAY=SU, first occurrence is Feb 1 (Sunday)
+			const firstOccurrence = iterator.next()
+			expect(firstOccurrence).toBeDefined()
+
+			// Feb 1, 2026 is the next Sunday after Jan 27
+			expect(firstOccurrence.month).toEqual(2) // February
+			expect(firstOccurrence.day).toEqual(1) // 1st
+
+			// Verify Jan 27 is NOT a valid occurrence (it's Tuesday, not Sunday)
+			expect(firstOccurrence.year === startTime.year
+				&& firstOccurrence.month === startTime.month
+				&& firstOccurrence.day === startTime.day).toEqual(false)
+		})
+
+		it('Should find next 15th when task starts on 27th with BYMONTHDAY=15 (bug fix)', () => {
+			// Monthly: task on Jan 27 with recurrence on 15th -> next should be Feb 15
+			const task = new Task(loadICS('vcalendars/vcalendar-recurring-monthly-different-day'), {})
+			expect(task.isRecurring).toEqual(true)
+			expect(task.recurrenceRule.frequency).toEqual('MONTHLY')
+			expect(task.recurrenceRule.byMonthDay).toContain(15)
+
+			const icalRecur = task.recurrenceRule.recurrenceRuleValue.toICALJs()
+			const startTime = task.start.clone() // Jan 27, 2026
+
+			const iterator = icalRecur.iterator(startTime)
+
+			// First occurrence should be Feb 15, not March 15
+			const firstOccurrence = iterator.next()
+			expect(firstOccurrence).toBeDefined()
+			expect(firstOccurrence.month).toEqual(2) // February
+			expect(firstOccurrence.day).toEqual(15)
+		})
+
+		it('Should find next July when task starts in January with BYMONTH=7 (bug fix)', () => {
+			// Yearly: task in Jan with recurrence in July -> next should be July of same year
+			const task = new Task(loadICS('vcalendars/vcalendar-recurring-yearly-different-month'), {})
+			expect(task.isRecurring).toEqual(true)
+			expect(task.recurrenceRule.frequency).toEqual('YEARLY')
+			expect(task.recurrenceRule.byMonth).toContain(7)
+
+			const icalRecur = task.recurrenceRule.recurrenceRuleValue.toICALJs()
+			const startTime = task.start.clone() // Jan 27, 2026
+
+			const iterator = icalRecur.iterator(startTime)
+
+			// First occurrence should be July 15, 2026, not July 15, 2027
+			const firstOccurrence = iterator.next()
+			expect(firstOccurrence).toBeDefined()
+			expect(firstOccurrence.year).toEqual(2026)
+			expect(firstOccurrence.month).toEqual(7) // July
+			expect(firstOccurrence.day).toEqual(15)
+		})
+
+		it('Should still skip start when it IS a valid occurrence (BYDAY=SU on Sunday)', () => {
+			// When the start date IS a valid occurrence, we should still skip it
+			// to get the NEXT occurrence (one week later)
+			const task = new Task(loadICS('vcalendars/vcalendar-recurring-weekly-same-day'), {})
+			expect(task.isRecurring).toEqual(true)
+			expect(task.recurrenceRule.frequency).toEqual('WEEKLY')
+			expect(task.recurrenceRule.byDay).toContain('SU')
+
+			const icalRecur = task.recurrenceRule.recurrenceRuleValue.toICALJs()
+			const startTime = task.start.clone() // Jan 25, 2026 (Sunday)
+
+			const iterator = icalRecur.iterator(startTime)
+
+			// First next() returns Jan 25 (which equals startTime)
+			const firstOccurrence = iterator.next()
+			expect(firstOccurrence).toBeDefined()
+			expect(firstOccurrence.year).toEqual(startTime.year)
+			expect(firstOccurrence.month).toEqual(startTime.month)
+			expect(firstOccurrence.day).toEqual(startTime.day)
+
+			// In handleRecurringTaskCompletion, we would detect this and call next() again
+			// to get Feb 1 (the actual next occurrence)
+			const secondOccurrence = iterator.next()
+			expect(secondOccurrence).toBeDefined()
+			expect(secondOccurrence.month).toEqual(2) // February
+			expect(secondOccurrence.day).toEqual(1) // 1st (next Sunday)
+		})
+
+		it('Should correctly calculate next occurrence regardless of whether start is valid', () => {
+			// This simulates the exact logic from handleRecurringTaskCompletion
+			// to verify the fix works correctly
+
+			// Case 1: Start is NOT a valid occurrence (Tuesday with BYDAY=SU)
+			const task1 = new Task(loadICS('vcalendars/vcalendar-recurring-weekly-different-day'), {})
+			const icalRecur1 = task1.recurrenceRule.recurrenceRuleValue.toICALJs()
+			const startTime1 = task1.start.clone()
+			const iterator1 = icalRecur1.iterator(startTime1)
+
+			let nextOccurrence1 = iterator1.next()
+			// Check if first occurrence matches start - if so, skip it
+			if (nextOccurrence1
+				&& nextOccurrence1.year === startTime1.year
+				&& nextOccurrence1.month === startTime1.month
+				&& nextOccurrence1.day === startTime1.day) {
+				nextOccurrence1 = iterator1.next()
+			}
+
+			// Should be Feb 1, 2026 (first Sunday after Jan 27)
+			expect(nextOccurrence1.month).toEqual(2)
+			expect(nextOccurrence1.day).toEqual(1)
+
+			// Case 2: Start IS a valid occurrence (Sunday with BYDAY=SU)
+			const task2 = new Task(loadICS('vcalendars/vcalendar-recurring-weekly-same-day'), {})
+			const icalRecur2 = task2.recurrenceRule.recurrenceRuleValue.toICALJs()
+			const startTime2 = task2.start.clone()
+			const iterator2 = icalRecur2.iterator(startTime2)
+
+			let nextOccurrence2 = iterator2.next()
+			// Check if first occurrence matches start - if so, skip it
+			if (nextOccurrence2
+				&& nextOccurrence2.year === startTime2.year
+				&& nextOccurrence2.month === startTime2.month
+				&& nextOccurrence2.day === startTime2.day) {
+				nextOccurrence2 = iterator2.next()
+			}
+
+			// Should be Feb 1, 2026 (next Sunday after Jan 25)
+			expect(nextOccurrence2.month).toEqual(2)
+			expect(nextOccurrence2.day).toEqual(1)
+		})
 	})
 })

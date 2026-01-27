@@ -657,6 +657,66 @@ DUE:20260108T120000Z
 RRULE:FREQ=YEARLY;BYMONTH=1,7;BYMONTHDAY=15
 END:VTODO
 END:VCALENDAR`,
+		// Test case: Task starts on Tuesday (Jan 27, 2026) with recurrence on Sunday
+		// The next occurrence should be Feb 1, 2026 (next Sunday), not Feb 8
+		'vcalendars/vcalendar-recurring-weekly-different-day': `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Nextcloud Tasks 0.17.0
+BEGIN:VTODO
+CREATED:20260127T100000Z
+LAST-MODIFIED:20260127T100000Z
+DTSTAMP:20260127T100000Z
+UID:recurring-different-day-1
+SUMMARY:Task on Tuesday recurring on Sunday
+DTSTART:20260127T120000Z
+RRULE:FREQ=WEEKLY;BYDAY=SU
+END:VTODO
+END:VCALENDAR`,
+		// Test case: Task starts on Jan 27 with monthly recurrence on 15th
+		// The next occurrence should be Feb 15, not March 15
+		'vcalendars/vcalendar-recurring-monthly-different-day': `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Nextcloud Tasks 0.17.0
+BEGIN:VTODO
+CREATED:20260127T100000Z
+LAST-MODIFIED:20260127T100000Z
+DTSTAMP:20260127T100000Z
+UID:recurring-monthly-different-day-1
+SUMMARY:Task on 27th recurring on 15th
+DTSTART:20260127T120000Z
+RRULE:FREQ=MONTHLY;BYMONTHDAY=15
+END:VTODO
+END:VCALENDAR`,
+		// Test case: Task starts in January with yearly recurrence in July
+		// The next occurrence should be July of same year, not July of next year
+		'vcalendars/vcalendar-recurring-yearly-different-month': `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Nextcloud Tasks 0.17.0
+BEGIN:VTODO
+CREATED:20260127T100000Z
+LAST-MODIFIED:20260127T100000Z
+DTSTAMP:20260127T100000Z
+UID:recurring-yearly-different-month-1
+SUMMARY:Task in Jan recurring in Jul
+DTSTART:20260127T120000Z
+RRULE:FREQ=YEARLY;BYMONTH=7;BYMONTHDAY=15
+END:VTODO
+END:VCALENDAR`,
+		// Test case: Task starts on a valid occurrence (Sunday) with BYDAY=SU
+		// Used to verify we still skip correctly when start IS a valid occurrence
+		'vcalendars/vcalendar-recurring-weekly-same-day': `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Nextcloud Tasks 0.17.0
+BEGIN:VTODO
+CREATED:20260125T100000Z
+LAST-MODIFIED:20260125T100000Z
+DTSTAMP:20260125T100000Z
+UID:recurring-same-day-1
+SUMMARY:Task on Sunday recurring on Sunday
+DTSTART:20260125T120000Z
+RRULE:FREQ=WEEKLY;BYDAY=SU
+END:VTODO
+END:VCALENDAR`,
 	}
 	return vcalendars[assetName]
 }
