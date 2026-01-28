@@ -27,7 +27,7 @@
 
 import Task from '../models/task.js'
 
-import moment from '@nextcloud/moment'
+import dayjs from 'dayjs'
 
 import ICAL from 'ical.js'
 
@@ -105,7 +105,7 @@ function isTaskPriority(task) {
  * @return {boolean}
  */
 function isTaskCurrent(task) {
-	return !task.startMoment.isValid() || task.startMoment.diff(moment(), 'days', true) < 0 || task.dueMoment.diff(moment(), 'days', true) < 0
+	return !task.startMoment.isValid() || task.startMoment.diff(dayjs(), 'days', true) < 0 || task.dueMoment.diff(dayjs(), 'days', true) < 0
 }
 
 /**
@@ -121,11 +121,11 @@ function isTaskToday(task) {
 /**
  * Checks if a date is today
  *
- * @param {moment} date The date as moment
+ * @param {dayjs} date The date as moment
  * @return {boolean}
  */
 function today(date) {
-	return date.isValid() && date.diff(moment().startOf('day'), 'days', true) < 1
+	return date.isValid() && date.diff(dayjs().startOf('day'), 'days', true) < 1
 }
 
 /**
@@ -141,11 +141,11 @@ function isTaskWeek(task) {
 /**
  * Checks if a date lies within the next week
  *
- * @param {moment} date The date as moment
+ * @param {dayjs} date The date as moment
  * @return {boolean}
  */
 function week(date) {
-	return date.isValid() && date.diff(moment().startOf('day'), 'days', true) < 7
+	return date.isValid() && date.diff(dayjs().startOf('day'), 'days', true) < 7
 }
 
 /**
@@ -174,19 +174,19 @@ function dayOfTask(task) {
 
 	// Add all tasks whose start date will be reached at that day.
 	if (start.isValid() && !due.isValid()) {
-		diff = start.diff(moment().startOf('day'), 'days')
+		diff = start.diff(dayjs().startOf('day'), 'days')
 	}
 
 	// Add all tasks whose due date will be reached at that day.
 	if (due.isValid() && !start.isValid()) {
-		diff = due.diff(moment().startOf('day'), 'days')
+		diff = due.diff(dayjs().startOf('day'), 'days')
 	}
 
 	// Add all tasks whose due or start date will be reached at that day.
 	// Add the task to the day at which either due or start date are reached first.
 	if (start.isValid() && due.isValid()) {
-		startdiff = start.diff(moment().startOf('day'), 'days')
-		duediff = due.diff(moment().startOf('day'), 'days')
+		startdiff = start.diff(dayjs().startOf('day'), 'days')
+		duediff = due.diff(dayjs().startOf('day'), 'days')
 		// chose the date that is reached first
 		diff = (startdiff < duediff) ? startdiff : duediff
 	}
@@ -197,11 +197,11 @@ function dayOfTask(task) {
 /**
  * Checks if a date is overdue
  *
- * @param {moment} date The date
+ * @param {dayjs} date The date
  * @return {boolean}
  */
 function overdue(date) {
-	return date.isValid() && date.diff(moment()) < 0
+	return date.isValid() && date.diff(dayjs()) < 0
 }
 
 /**
@@ -467,7 +467,7 @@ function sortByDeletedAt(taskA, taskB) {
 /**
  * Function to convert a moment to a ICAL Time
  *
- * @param {moment} moment The moment to convert
+ * @param {dayjs} moment The moment to convert
  * @param {boolean} asDate Is the moment all day
  * @return {ICAL.Time}
  */
