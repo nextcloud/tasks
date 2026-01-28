@@ -16,7 +16,7 @@ OC.L10N.register(
     "Automatic" : "Automatický",
     "Tasks settings" : "Nastavení pro Úkoly",
     "Default list" : "Výchozí seznam",
-    "Visibility of Smart Collections" : "Viditelnost Inteligenžních kolekcí",
+    "Visibility of Smart Collections" : "Viditelnost Inteligentních kolekcí",
     "Share with users or groups" : "Sdílet s uživateli či skupinami",
     "No users or groups" : "Žádní uživatelé či skupiny",
     "Unable to delete the share." : "Sdílení se nedaří smazat.",

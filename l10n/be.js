@@ -88,6 +88,7 @@ OC.L10N.register(
     "Loading task from server." : "Загрузка задання з сервера.",
     "Task not found!" : "Заданне не знойдзена!",
     "All day" : "Увесь дзень",
+    "Unpin" : "Адмацаваць",
     "Details" : "Падрабязнасці",
     "Notes" : "Нататкі",
     "No upcoming tasks" : "Няма будучых заданняў",
