@@ -46,7 +46,7 @@ import { isTaskInList } from '../../store/storeHelper.js'
 import './task-list.scss'
 
 import { translate as t } from '@nextcloud/l10n'
-import moment from '@nextcloud/moment'
+import dayjs from 'dayjs'
 
 import { mapGetters } from 'vuex'
 
@@ -89,7 +89,7 @@ export default {
 	},
 	methods: {
 		dayString(day) {
-			const date = moment().add(day, 'day')
+			const date = dayjs().add(day, 'day')
 			let dayString
 			if (day === 0) {
 				dayString = t('tasks', 'Today')
