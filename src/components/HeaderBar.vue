@@ -29,7 +29,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:placeholder="placeholder"
 				autocomplete="off"
 				class="reactive"
-				trailing-button-icon="arrowRight"
+				trailing-button-icon="arrowEnd"
 				:show-trailing-button="newTaskName !== ''"
 				:trailing-button-label="placeholder"
 				@trailing-button-click="addTask"

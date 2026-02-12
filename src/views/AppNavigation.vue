@@ -70,7 +70,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 							v-model="newCalendarName"
 							type="text"
 							:show-trailing-button="newCalendarName !== ''"
-							trailing-button-icon="arrowRight"
+							trailing-button-icon="arrowEnd"
 							:error="nameError"
 							:label="t('tasks', 'New list')"
 							:placeholder="t('tasks', 'New list')"
