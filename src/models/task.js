@@ -23,7 +23,8 @@
  * License along with this library. If not, see <http://www.gnu.org/licenses/>.
  *
  */
-import dayjs from 'dayjs'
+
+import moment from '@nextcloud/moment'
 
 import ICAL from 'ical.js'
 import { randomUUID } from '../utils/crypto.js'
@@ -94,7 +95,7 @@ export default class Task {
 		this._priority = this.vtodo.getFirstPropertyValue('priority') || 0
 		this._complete = this.vtodo.getFirstPropertyValue('percent-complete') || 0
 		this._completedDate = this.vtodo.getFirstPropertyValue('completed')
-		this._completedDateMoment = dayjs(this._completedDate, 'YYYYMMDDTHHmmssZ')
+		this._completedDateMoment = moment(this._completedDate, 'YYYYMMDDTHHmmssZ')
 		this._completed = !!this._completedDate
 		this._status = this.vtodo.getFirstPropertyValue('status')
 		this._note = this.vtodo.getFirstPropertyValue('description') || ''
@@ -102,9 +103,9 @@ export default class Task {
 		this._hideSubtaks = +this.vtodo.getFirstPropertyValue('x-oc-hidesubtasks') || 0
 		this._hideCompletedSubtaks = +this.vtodo.getFirstPropertyValue('x-oc-hidecompletedsubtasks') || 0
 		this._start = this.vtodo.getFirstPropertyValue('dtstart')
-		this._startMoment = dayjs(this._start, 'YYYYMMDDTHHmmssZ')
+		this._startMoment = moment(this._start, 'YYYYMMDDTHHmmssZ')
 		this._due = this.vtodo.getFirstPropertyValue('due')
-		this._dueMoment = dayjs(this._due, 'YYYYMMDDTHHmmssZ')
+		this._dueMoment = moment(this._due, 'YYYYMMDDTHHmmssZ')
 		const start = this.vtodo.getFirstPropertyValue('dtstart')
 		const due = this.vtodo.getFirstPropertyValue('due')
 		const d = due || start
@@ -112,9 +113,9 @@ export default class Task {
 		this._loaded = false
 		this._tags = this.getTags()
 		this._modified = this.vtodo.getFirstPropertyValue('last-modified')
-		this._modifiedMoment = dayjs(this._modified, 'YYYYMMDDTHHmmssZ')
+		this._modifiedMoment = moment(this._modified, 'YYYYMMDDTHHmmssZ')
 		this._created = this.vtodo.getFirstPropertyValue('created')
-		this._createdMoment = dayjs(this._created, 'YYYYMMDDTHHmmssZ')
+		this._createdMoment = moment(this._created, 'YYYYMMDDTHHmmssZ')
 		this._class = this.vtodo.getFirstPropertyValue('class') || 'PUBLIC'
 		this._pinned = this.vtodo.getFirstPropertyValue('x-pinned') === 'true'
 		this._location = this.vtodo.getFirstPropertyValue('location') || ''
@@ -315,11 +316,11 @@ export default class Task {
 			}
 			this.vtodo.updatePropertyWithValue('completed', completedDate)
 			this._completedDate = completedDate
-			this._completedDateMoment = dayjs(completedDate, 'YYYYMMDDTHHmmssZ')
+			this._completedDateMoment = moment(completedDate, 'YYYYMMDDTHHmmssZ')
 		} else {
 			this.vtodo.removeProperty('completed')
 			this._completedDate = null
-			this._completedDateMoment = dayjs(null)
+			this._completedDateMoment = moment(null)
 		}
 		this._completed = completed
 		this.updateLastModified()
@@ -503,7 +504,7 @@ export default class Task {
 			this.vtodo.removeProperty('dtstart')
 		}
 		this._start = start
-		this._startMoment = dayjs(start, 'YYYYMMDDTHHmmssZ')
+		this._startMoment = moment(start, 'YYYYMMDDTHHmmssZ')
 		this.updateLastModified()
 		// Check all day setting
 		const d = this._due || this._start
@@ -529,7 +530,7 @@ export default class Task {
 			this.vtodo.removeProperty('due')
 		}
 		this._due = due
-		this._dueMoment = dayjs(due, 'YYYYMMDDTHHmmssZ')
+		this._dueMoment = moment(due, 'YYYYMMDDTHHmmssZ')
 		this.updateLastModified()
 		// Check all day setting
 		const d = this._due || this._start
@@ -550,7 +551,7 @@ export default class Task {
 			start.isDate = allDay
 			if (!allDay) {
 				// If we converted to datetime, we set the hour to zero in the current timezone.
-				this.setStart(ICAL.Time.fromJSDate(dayjs(start, 'YYYYMMDDTHHmmssZ').toDate(), true))
+				this.setStart(ICAL.Time.fromJSDate(moment(start, 'YYYYMMDDTHHmmssZ').toDate(), true))
 			} else {
 				this.setStart(ICAL.Time.fromDateString(this._startMoment.format('YYYY-MM-DD')))
 			}
@@ -560,7 +561,7 @@ export default class Task {
 			due.isDate = allDay
 			if (!allDay) {
 				// If we converted to datetime, we set the hour to zero in the current timezone.
-				this.setDue(ICAL.Time.fromJSDate(dayjs(due, 'YYYYMMDDTHHmmssZ').toDate(), true))
+				this.setDue(ICAL.Time.fromJSDate(moment(due, 'YYYYMMDDTHHmmssZ').toDate(), true))
 			} else {
 				this.setDue(ICAL.Time.fromDateString(this._dueMoment.format('YYYY-MM-DD')))
 			}
@@ -708,7 +709,7 @@ export default class Task {
 		this.vtodo.updatePropertyWithValue('last-modified', now)
 		this.vtodo.updatePropertyWithValue('dtstamp', now)
 		this._modified = now
-		this._modifiedMoment = dayjs(now, 'YYYYMMDDTHHmmssZ')
+		this._modifiedMoment = moment(now, 'YYYYMMDDTHHmmssZ')
 	}
 
 	get modified() {
@@ -730,7 +731,7 @@ export default class Task {
 	set created(createdDate) {
 		this.vtodo.updatePropertyWithValue('created', createdDate)
 		this._created = createdDate
-		this._createdMoment = dayjs(createdDate, 'YYYYMMDDTHHmmssZ')
+		this._createdMoment = moment(createdDate, 'YYYYMMDDTHHmmssZ')
 		// Update the sortorder if necessary
 		if (this.vtodo.getFirstPropertyValue('x-apple-sort-order') === null) {
 			this._sortOrder = this.getSortOrder()

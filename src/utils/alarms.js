@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import dayjs from 'dayjs'
+import moment from '@nextcloud/moment'
 
 /**
  * Get the factor for a given unit
@@ -215,7 +215,7 @@ export function getDefaultAlarms(allDay = false) {
  */
 export function getDefaultAbsoluteAlarms() {
 	return [
-		dayjs().add(1, 'day').startOf('day').add(9, 'hours').toDate(),
+		moment().add(1, 'day').startOf('day').add(9, 'hours').toDate(),
 	]
 }
 

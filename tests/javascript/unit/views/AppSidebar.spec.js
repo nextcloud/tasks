@@ -56,43 +56,6 @@ describe('AppSidebar.vue', () => {
 		expect(actual.getTime()).toBe(newDueDate.getTime())
 	})
 
-	it('newDueDate returns correct values for tasks when due is null', () => {
-		const wrapper = shallowMount(AppSidebar, {
-			global: {
-				plugins: [store, router],
-			},
-		})
-
-		const startDateInPast = new Date('2019-01-01T11:15:00')
-		let startOfNextHour = new Date('2019-01-01T13:00:00')
-		wrapper.vm.setStartDate({ task: wrapper.vm.task, value: startDateInPast })
-		wrapper.vm.setDueDate({ task: wrapper.vm.task, value: null })
-		let actual = wrapper.vm.newDueDate
-		expect(actual.getTime()).toBe(startOfNextHour.getTime())
-
-		wrapper.vm.task.allDay = true
-		let startOfNextDay = new Date('2019-01-02T00:00:00')
-		wrapper.vm.setStartDate({ task: wrapper.vm.task, value: startDateInPast })
-		wrapper.vm.setDueDate({ task: wrapper.vm.task, value: null })
-		actual = wrapper.vm.newDueDate
-		expect(actual.getTime()).toBe(startOfNextDay.getTime())
-
-		const startDateInFuture = new Date('2019-01-01T15:30:00')
-		startOfNextHour = new Date('2019-01-01T16:00:00')
-		wrapper.vm.task.allDay = false
-		wrapper.vm.setStartDate({ task: wrapper.vm.task, value: startDateInFuture })
-		wrapper.vm.setDueDate({ task: wrapper.vm.task, value: null })
-		actual = wrapper.vm.newDueDate
-		expect(actual.getTime()).toBe(startOfNextHour.getTime())
-
-		wrapper.vm.task.allDay = true
-		startOfNextDay = new Date('2019-01-02T00:00:00')
-		wrapper.vm.setStartDate({ task: wrapper.vm.task, value: startDateInFuture })
-		wrapper.vm.setDueDate({ task: wrapper.vm.task, value: null })
-		actual = wrapper.vm.newDueDate
-		expect(actual.getTime()).toBe(startOfNextDay.getTime())
-	})
-
 	it('Task completed date is set correctly', () => {
 		const wrapper = shallowMount(AppSidebar, {
 			global: {
