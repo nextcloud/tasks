@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { createStore } from 'vuex'
 import { loadICS } from '../../../assets/loadAsset.js'
 import tasksModule from '../../../../src/store/tasks.js'
