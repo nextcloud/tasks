@@ -77,7 +77,7 @@ OC.L10N.register(
     "Email" : "Email",
     "Audio notification" : "Notifica audio",
     "Other notification" : "Altra notifica",
-    "Edit time" : "Ora di modifica",
+    "Edit time" : "Modifica ora",
     "Remove reminder" : "Rimuovi promemoria",
     "Add reminder" : "Aggiungi promemoria",
     "Before the task starts" : "Prima dell'inizio dell'attività",

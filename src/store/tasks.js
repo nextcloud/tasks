@@ -30,7 +30,7 @@ import Task from '../models/task.js'
 import { showError } from '@nextcloud/dialogs'
 import { emit } from '@nextcloud/event-bus'
 import { translate as t } from '@nextcloud/l10n'
-import moment from '@nextcloud/moment'
+import dayjs from 'dayjs'
 
 import ICAL from 'ical.js'
 import { randomUUID } from '../utils/crypto.js'
@@ -587,7 +587,7 @@ const mutations = {
 	 * @param {object} state The store data
 	 * @param {object} data Destructuring object
 	 * @param {Task} data.task The task
-	 * @param {moment} data.due The due date moment
+	 * @param {dayjs} data.due The due date moment
 	 * @param {boolean} data.allDay Whether the date is all-day
 	 */
 	setDue(state, { task, due, allDay }) {
@@ -601,7 +601,7 @@ const mutations = {
 			if (start.isValid() && due.isBefore(start)) {
 				const currentdue = task.dueMoment
 				if (currentdue.isValid()) {
-					start.subtract(currentdue.diff(due), 'ms')
+					start = start.subtract(currentdue.diff(due), 'ms')
 				} else {
 					start = due.clone()
 				}
@@ -618,7 +618,7 @@ const mutations = {
 	 * @param {object} state The store data
 	 * @param {object} data Destructuring object
 	 * @param {Task} data.task The task
-	 * @param {moment} data.start The start date moment
+	 * @param {dayjs} data.start The start date moment
 	 * @param {boolean} data.allDay Whether the date is all-day
 	 */
 	setStart(state, { task, start, allDay }) {
@@ -632,7 +632,7 @@ const mutations = {
 			if (due.isValid() && start.isAfter(due)) {
 				const currentstart = task.startMoment
 				if (currentstart.isValid()) {
-					due.add(start.diff(currentstart), 'ms')
+					due = due.add(start.diff(currentstart), 'ms')
 				} else {
 					due = start.clone()
 				}
@@ -654,7 +654,7 @@ const mutations = {
 	setCompletedDate(state, { task, completedDate }) {
 		if (completedDate !== null) {
 			// Check that the completed date is in the past.
-			const now = moment(ICAL.Time.fromJSDate(new Date(), true), 'YYYYMMDDTHHmmssZ')
+			const now = dayjs(ICAL.Time.fromJSDate(new Date(), true), 'YYYYMMDDTHHmmssZ')
 			if (completedDate.isAfter(now)) {
 				showError(t('tasks', 'Completion date must be in the past.'))
 				return
@@ -1510,12 +1510,12 @@ const actions = {
 	async setDate(context, { task, day }) {
 		const start = task.startMoment.startOf('day')
 		const due = task.dueMoment.startOf('day')
-		day = moment().startOf('day').add(day, 'days')
+		day = dayjs().startOf('day').add(day, 'days')
 
 		let diff
 		// Adjust start date
 		if (start.isValid()) {
-			diff = start.diff(moment().startOf('day'), 'days')
+			diff = start.diff(dayjs().startOf('day'), 'days')
 			diff = diff < 0 ? 0 : diff
 			if (diff !== day) {
 				const newStart = task.startMoment.year(day.year()).month(day.month()).date(day.date())
@@ -1524,7 +1524,7 @@ const actions = {
 			}
 		// Adjust due date
 		} else if (due.isValid()) {
-			diff = due.diff(moment().startOf('day'), 'days')
+			diff = due.diff(dayjs().startOf('day'), 'days')
 			diff = diff < 0 ? 0 : diff
 			if (diff !== day) {
 				const newDue = task.dueMoment.year(day.year()).month(day.month()).date(day.date())

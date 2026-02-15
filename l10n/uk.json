@@ -36,7 +36,7 @@
     "List link copied to clipboard." : "Посилання на список скопійовано в буфер обміну.",
     "Calendar link could not be copied to clipboard." : "Посилання на календар не може бути зкопійоване до буфера обміну",
     "List link could not be copied to clipboard." : "Не вдалося скопіювати посилання на список до буфера обміну.",
-    "The name \"{calendar}\" is already used." : "Назва \"{календар}\" уже використовується.",
+    "The name \"{calendar}\" is already used." : "Назва \"{calendar}\" вже використовується.",
     "An empty name is not allowed." : "Порожнє поле не допускається.",
     "An error occurred, unable to delete the calendar." : "Помилка: не вдалося вилучити календар.",
     "An error occurred, unable to delete the list." : "Помилка: не вдалося вилучити список.",
