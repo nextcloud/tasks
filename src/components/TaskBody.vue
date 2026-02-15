@@ -197,7 +197,7 @@ import { startDateString } from '../utils/dateStrings.js'
 
 import { emit } from '@nextcloud/event-bus'
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'
-import dayjs from 'dayjs'
+import moment from '@nextcloud/moment'
 import NcActions from '@nextcloud/vue/components/NcActions'
 import NcActionButton from '@nextcloud/vue/components/NcActionButton'
 import NcProgressBar from '@nextcloud/vue/components/NcProgressBar'
@@ -694,10 +694,10 @@ export default {
 				taskProperties.priority = '1'
 			}
 			if (this.collectionId === 'today') {
-				taskProperties.due = dayjs().startOf('day').format('YYYY-MM-DDTHH:mm:ss')
+				taskProperties.due = moment().startOf('day').format('YYYY-MM-DDTHH:mm:ss')
 			}
 			if (this.collectionId === 'current') {
-				taskProperties.start = dayjs().format('YYYY-MM-DDTHH:mm:ss')
+				taskProperties.start = moment().format('YYYY-MM-DDTHH:mm:ss')
 			}
 			return taskProperties
 		},

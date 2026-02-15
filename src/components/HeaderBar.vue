@@ -58,7 +58,7 @@ import SortorderDropdown from './SortorderDropdown.vue'
 import openNewTask from '../mixins/openNewTask.js'
 
 import { translate as t } from '@nextcloud/l10n'
-import dayjs from 'dayjs'
+import moment from '@nextcloud/moment'
 import NcTextField from '@nextcloud/vue/components/NcTextField'
 
 import Plus from 'vue-material-design-icons/Plus.vue'
@@ -140,11 +140,11 @@ export default {
 			}
 			if (this.$route.params.collectionId === 'today'
 				|| this.$route.params.collectionId === 'week') {
-				taskProperties.due = dayjs().startOf('day').format('YYYY-MM-DDTHH:mm:ss')
+				taskProperties.due = moment().startOf('day').format('YYYY-MM-DDTHH:mm:ss')
 				taskProperties.allDay = this.$store.state.settings.settings.allDay
 			}
 			if (this.$route.params.collectionId === 'current') {
-				taskProperties.start = dayjs().format('YYYY-MM-DDTHH:mm:ss')
+				taskProperties.start = moment().format('YYYY-MM-DDTHH:mm:ss')
 			}
 			return taskProperties
 		},
