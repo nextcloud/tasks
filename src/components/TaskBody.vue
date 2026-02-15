@@ -120,6 +120,15 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 						{{ task.hideCompletedSubtasks ? t('tasks', 'Show closed subtasks') : t('tasks', 'Hide closed subtasks') }}
 					</NcActionButton>
 					<NcActionButton v-if="!readOnly"
+						:close-after-click="true"
+						class="reactive no-nav"
+						@click="duplicateTask({ task })">
+						<template #icon>
+							<ContentDuplicate :size="20" />
+						</template>
+						{{ t('tasks', 'Duplicate task') }}
+					</NcActionButton>
+					<NcActionButton v-if="!readOnly"
 						class="reactive no-nav"
 						@click="scheduleTaskDeletion(task)">
 						<template #icon>
@@ -206,6 +215,7 @@ import NcTextField from '@nextcloud/vue/components/NcTextField'
 import Linkify from '@nextcloud/vue/directives/Linkify'
 
 import Bell from 'vue-material-design-icons/BellOutline.vue'
+import ContentDuplicate from 'vue-material-design-icons/ContentDuplicate.vue'
 import Delete from 'vue-material-design-icons/TrashCanOutline.vue'
 import Eye from 'vue-material-design-icons/EyeOutline.vue'
 import Pin from 'vue-material-design-icons/PinOutline.vue'
@@ -239,6 +249,7 @@ export default {
 		NcProgressBar,
 		NcTextField,
 		Bell,
+		ContentDuplicate,
 		Delete,
 		Eye,
 		Pin,
@@ -492,6 +503,7 @@ export default {
 			'toggleCompleted',
 			'toggleStarred',
 			'createTask',
+			'duplicateTask',
 			'getTasksFromCalendar',
 			'toggleSubtasksVisibility',
 			'toggleCompletedSubtasksVisibility',
