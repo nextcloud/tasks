@@ -66,6 +66,13 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:read-only="readOnly"
 				:property-string="t('tasks', 'All day')"
 				@set-checked="toggleAllDay(task)" />
+			<RecurrenceItem v-show="(task.start || task.due) && (!readOnly || task.isRecurring)"
+				:task="task"
+				:read-only="readOnly">
+				<template #icon>
+					<Repeat :size="20" />
+				</template>
+			</RecurrenceItem>
 			<CalendarPickerItem :disabled="readOnly"
 				:calendar="task.calendar"
 				:calendars="targetCalendars"
@@ -278,6 +285,7 @@ import CheckboxItem from '../components/AppSidebar/CheckboxItem.vue'
 import DateTimePickerItem from '../components/AppSidebar/DateTimePickerItem.vue'
 import CalendarPickerItem from '../components/AppSidebar/CalendarPickerItem.vue'
 import MultiselectItem from '../components/AppSidebar/MultiselectItem.vue'
+import RecurrenceItem from '../components/AppSidebar/RecurrenceItem.vue'
 import SliderItem from '../components/AppSidebar/SliderItem.vue'
 import TagsItem from '../components/AppSidebar/TagsItem.vue'
 import TextItem from '../components/AppSidebar/TextItem.vue'
@@ -314,6 +322,7 @@ import Pin from 'vue-material-design-icons/PinOutline.vue'
 import PinOff from 'vue-material-design-icons/PinOffOutline.vue'
 import Star from 'vue-material-design-icons/StarOutline.vue'
 import TextBoxOutline from 'vue-material-design-icons/TextBoxOutline.vue'
+import Repeat from 'vue-material-design-icons/Repeat.vue'
 import Undo from 'vue-material-design-icons/Undo.vue'
 import Web from 'vue-material-design-icons/Web.vue'
 
@@ -329,6 +338,7 @@ export default {
 		AlarmList,
 		CheckboxItem,
 		DateTimePickerItem,
+		RecurrenceItem,
 		Bell,
 		Calendar,
 		CalendarEnd,
@@ -342,6 +352,7 @@ export default {
 		Pencil,
 		Percent,
 		Pin,
+		Repeat,
 		PinOff,
 		Star,
 		TextBoxOutline,
@@ -748,6 +759,7 @@ export default {
 			'setStatus',
 			'getTaskByUri',
 			'togglePinned',
+			'removeRecurrenceRule',
 		]),
 
 		async loadTask() {
@@ -828,6 +840,11 @@ export default {
 			}
 			if (this.task.startMoment.isSame(start)) {
 				return
+			}
+			// If the start date is being removed and the task is recurring,
+			// also remove the recurrence rule since it requires a start date.
+			if (!start && task.isRecurring) {
+				this.removeRecurrenceRule({ task })
 			}
 			this.setStart({ task, start, allDay: this.allDay })
 		},
