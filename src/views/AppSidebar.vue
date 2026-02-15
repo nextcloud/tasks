@@ -117,6 +117,14 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				{{ t('tasks', 'Export') }}
 			</NcActionLink>
 			<NcActionButton v-if="!readOnly"
+				:close-after-click="true"
+				@click="duplicateTask({ task })">
+				<template #icon>
+					<ContentDuplicate :size="20" />
+				</template>
+				{{ t('tasks', 'Duplicate task') }}
+			</NcActionButton>
+			<NcActionButton v-if="!readOnly"
 				@click="scheduleTaskDeletion(task)">
 				<template #icon>
 					<Delete :size="20" />
@@ -303,6 +311,7 @@ import Calendar from 'vue-material-design-icons/Calendar.vue'
 import CalendarCheck from 'vue-material-design-icons/CalendarCheck.vue'
 import CalendarEnd from 'vue-material-design-icons/CalendarEnd.vue'
 import CalendarStart from 'vue-material-design-icons/CalendarStart.vue'
+import ContentDuplicate from 'vue-material-design-icons/ContentDuplicate.vue'
 import Delete from 'vue-material-design-icons/TrashCanOutline.vue'
 import Download from 'vue-material-design-icons/TrayArrowDown.vue'
 import InformationOutline from 'vue-material-design-icons/InformationOutline.vue'
@@ -334,6 +343,7 @@ export default {
 		CalendarEnd,
 		CalendarStart,
 		CalendarCheck,
+		ContentDuplicate,
 		Delete,
 		Download,
 		InformationOutline,
@@ -748,6 +758,7 @@ export default {
 			'setStatus',
 			'getTaskByUri',
 			'togglePinned',
+			'duplicateTask',
 		]),
 
 		async loadTask() {
