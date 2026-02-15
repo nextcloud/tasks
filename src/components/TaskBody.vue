@@ -158,7 +158,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					:disabled="isAddingTask"
 					autocomplete="off"
 					class="reactive"
-					trailing-button-icon="arrowRight"
+					trailing-button-icon="arrowEnd"
 					:show-trailing-button="newTaskName !== ''"
 					:trailing-button-label="subtasksCreationPlaceholder"
 					@trailing-button-click="addTask"
