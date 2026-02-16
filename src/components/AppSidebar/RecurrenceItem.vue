@@ -48,8 +48,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 		<NcModal v-if="showEditor" @close="closeEditor">
 			<div class="property-repeat__options">
 				<h2>{{ t('tasks', 'Repeat task') }}</h2>
-				<RepeatFreqInterval
-					:frequency="localRule.frequency"
+				<RepeatFreqInterval :frequency="localRule.frequency"
 					:interval="localRule.interval"
 					@change-interval="changeInterval"
 					@change-frequency="changeFrequency" />

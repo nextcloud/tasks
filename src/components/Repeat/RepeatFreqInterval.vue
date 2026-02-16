@@ -44,6 +44,8 @@ export default {
 		},
 	},
 
+	emits: ['changeFrequency', 'changeInterval'],
+
 	computed: {
 		repeatEveryLabel() {
 			console.debug(this.frequency)
@@ -62,7 +64,7 @@ export default {
 	methods: {
 		t,
 		changeFrequency(value) {
-			this.$emit('change-frequency', value)
+			this.$emit('changeFrequency', value)
 		},
 
 		/**
@@ -73,7 +75,7 @@ export default {
 			const selectedValue = parseInt(value, 10)
 
 			if (selectedValue >= 1 && selectedValue <= 366) {
-				this.$emit('change-interval', selectedValue)
+				this.$emit('changeInterval', selectedValue)
 			}
 		},
 	},

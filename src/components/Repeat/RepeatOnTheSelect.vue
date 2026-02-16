@@ -40,6 +40,8 @@ export default {
 		},
 	},
 
+	emits: ['change'],
+
 	computed: {
 		options() {
 			const dayNames = getDayNames()

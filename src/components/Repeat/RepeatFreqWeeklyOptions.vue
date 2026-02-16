@@ -37,6 +37,8 @@ export default {
 		},
 	},
 
+	emits: ['addByDay', 'removeByDay'],
+
 	computed: {
 		options() {
 			const dayNamesMin = getDayNamesMin()
@@ -78,10 +80,10 @@ export default {
 
 		toggleByDay(day) {
 			if (this.byDay.indexOf(day) === -1) {
-				this.$emit('add-by-day', day)
+				this.$emit('addByDay', day)
 			} else {
 				if (this.byDay.length > 1) {
-					this.$emit('remove-by-day', day)
+					this.$emit('removeByDay', day)
 				}
 			}
 		},

@@ -2,6 +2,12 @@
  * SPDX-FileCopyrightText: 2020 Nextcloud GmbH and Nextcloud contributors
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
+
+/**
+ * @typedef {import('@nextcloud/calendar-js').RecurValue} RecurValue
+ * @typedef {import('@nextcloud/calendar-js').DateTimeValue} DateTimeValue
+ */
+
 import { getWeekDayFromDate } from '../utils/recurrence.js'
 
 /**
@@ -136,7 +142,7 @@ const SUPPORTED_BY_MONTH_YEARLY = [...Array(12).keys().map((i) => i + 1)]
 /**
  * Maps a daily calendar-js recurrence-rule-value to an recurrence-rule-object
  *
- * @param recurrenceRuleValue
+ * @param {RecurValue} recurrenceRuleValue The calendar-js recurrence rule value
  * @return {object}
  */
 function mapDailyRuleValueToRecurrenceRuleObject(recurrenceRuleValue) {

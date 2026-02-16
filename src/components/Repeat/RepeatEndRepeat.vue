@@ -21,17 +21,17 @@
 			:append-to-body="true"
 			type="date"
 			@input="changeUntil" />
-		<input v-if="isCount"
-			class="repeat-option-end__count"
-			type="number"
-			min="1"
-			max="3500"
-			:value="count"
-			@input="changeCount">
-		<span v-if="isCount"
-			class="repeat-option-end__count">
-			{{ occurrencesLabel }}
-		</span>
+		<div v-if="isCount" class="repeat-option-end__count-container">
+			<input class="repeat-option-end__count-input"
+				type="number"
+				min="1"
+				max="3500"
+				:value="count"
+				@input="changeCount">
+			<span class="repeat-option-end__count-label">
+				{{ occurrencesLabel }}
+			</span>
+		</div>
 	</div>
 </template>
 
@@ -65,6 +65,8 @@ export default {
 			default: null,
 		},
 	},
+
+	emits: ['changeToUntil', 'changeToCount', 'setInfinite', 'setUntil', 'setCount'],
 
 	computed: {
 		/**
@@ -155,16 +157,16 @@ export default {
 
 			switch (value.value) {
 			case 'until':
-				this.$emit('change-to-until')
+				this.$emit('changeToUntil')
 				break
 
 			case 'count':
-				this.$emit('change-to-count')
+				this.$emit('changeToCount')
 				break
 
 			case 'never':
 			default:
-				this.$emit('set-infinite')
+				this.$emit('setInfinite')
 			}
 		},
 
@@ -174,7 +176,7 @@ export default {
 		 * @param {Date} date The new date to set as end
 		 */
 		changeUntil(date) {
-			this.$emit('set-until', date)
+			this.$emit('setUntil', date)
 		},
 
 		/**
@@ -188,9 +190,32 @@ export default {
 			const selectedValue = parseInt(event.target.value, 10)
 
 			if (selectedValue >= minimumValue && selectedValue <= maximumValue) {
-				this.$emit('set-count', selectedValue)
+				this.$emit('setCount', selectedValue)
 			}
 		},
 	},
 }
 </script>
+
+<style lang="scss" scoped>
+.repeat-option-set--end {
+	display: flex;
+	flex-direction: column;
+	gap: var(--default-grid-baseline, 4px);
+}
+
+.repeat-option-end__label {
+	font-weight: bold;
+	margin-bottom: var(--default-grid-baseline, 4px);
+}
+
+.repeat-option-end__count-container {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.repeat-option-end__count-input {
+	width: 80px;
+}
+</style>

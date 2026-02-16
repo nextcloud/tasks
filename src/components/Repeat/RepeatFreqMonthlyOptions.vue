@@ -86,6 +86,15 @@ export default {
 		},
 	},
 
+	emits: [
+		'addByMonthDay',
+		'removeByMonthDay',
+		'changeToByMonthDay',
+		'changeToBySetPosition',
+		'changeByDay',
+		'changeBySetPosition',
+	],
+
 	computed: {
 		/**
 		 * @return {object[]}
@@ -128,10 +137,10 @@ export default {
 		 */
 		toggleByMonthDay(byMonthDay) {
 			if (this.byMonthDay.indexOf(byMonthDay) === -1) {
-				this.$emit('add-by-month-day', byMonthDay)
+				this.$emit('addByMonthDay', byMonthDay)
 			} else {
 				if (this.byMonthDay.length > 1) {
-					this.$emit('remove-by-month-day', byMonthDay)
+					this.$emit('removeByMonthDay', byMonthDay)
 				}
 			}
 		},
@@ -141,7 +150,7 @@ export default {
 				return
 			}
 
-			this.$emit('change-to-by-month-day')
+			this.$emit('changeToByMonthDay')
 		},
 
 		enableBySetPosition() {
@@ -149,15 +158,15 @@ export default {
 				return
 			}
 
-			this.$emit('change-to-by-set-position')
+			this.$emit('changeToBySetPosition')
 		},
 
 		changeByDay(value) {
-			this.$emit('change-by-day', value)
+			this.$emit('changeByDay', value)
 		},
 
 		changeBySetPosition(value) {
-			this.$emit('change-by-set-position', value)
+			this.$emit('changeBySetPosition', value)
 		},
 	},
 }

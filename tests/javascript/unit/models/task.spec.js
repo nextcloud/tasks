@@ -39,24 +39,7 @@ describe('task', () => {
 	})
 
 	it('Should parse RRULE when task is created', () => {
-		// Log to see what's happening
-		const origWarn = console.warn
-		const warnings = []
-		console.warn = (...args) => { warnings.push(args.join(' ')); origWarn(...args) }
-
 		const task = new Task(loadICS('vcalendars/vcalendar-recurring-daily'), {})
-
-		console.warn = origWarn
-
-		// Check if there were warnings
-		if (warnings.length > 0) {
-			console.log('Warnings during task creation:', warnings)
-		}
-
-		// The task should have recurrence parsed
-		console.log('Task isRecurring:', task.isRecurring)
-		console.log('Task recurrenceRule:', JSON.stringify(task.recurrenceRule, null, 2))
-
 		expect(task.isRecurring).toEqual(true)
 	})
 
@@ -335,20 +318,7 @@ describe('task', () => {
 	describe('Recurring Tasks', () => {
 		it('Should load RRULE from ICS file', () => {
 			const task = new Task(loadICS('vcalendars/vcalendar-recurring-daily'), {})
-			// Debug: check what we actually got
 			const rruleProp = task.vtodo.getFirstProperty('rrule')
-			console.log('RRULE property:', rruleProp)
-			if (rruleProp) {
-				const rruleValue = rruleProp.getFirstValue()
-				console.log('RRULE value:', rruleValue)
-				console.log('RRULE value.freq:', rruleValue.freq)
-				console.log('RRULE value.interval:', rruleValue.interval)
-				console.log('RRULE value.parts:', rruleValue.parts)
-				console.log('RRULE value.toString():', rruleValue.toString())
-			}
-			console.log('Task due:', task.due)
-			console.log('Task _due:', task._due)
-			console.log('Task recurrenceRule:', task.recurrenceRule)
 			expect(rruleProp).toBeDefined()
 		})
 
