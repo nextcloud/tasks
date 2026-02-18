@@ -78,7 +78,7 @@ OC.L10N.register(
     "Email" : "Email",
     "Audio notification" : "Notifikasi audio",
     "Other notification" : "Notifikasi lainnya",
-    "Edit time" : "Edit waktu",
+    "Edit time" : "Ubah waktu",
     "Remove reminder" : "Hapus pengingat",
     "Add reminder" : "Tambah pengingat",
     "Before the task starts" : "Sebelum tugas dimulai",

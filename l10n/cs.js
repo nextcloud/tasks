@@ -176,6 +176,7 @@ OC.L10N.register(
     "Hide subtasks" : "Skrýt dílčí úkoly",
     "Show closed subtasks" : "Zobrazit uzavřené dílčí úkoly",
     "Hide closed subtasks" : "Skrýt uzavřené dílčí úkoly",
+    "Duplicate task" : "Zduplikovat úkol",
     "Delete task" : "Smazat úkol",
     "Toggle starred" : "Přidat/odebrat označení hvězdičkou",
     "_Task has one reminder_::_Task has {n} reminders_" : ["Úkol má jednu připomínku","Úkol má {n} připomínky","Úkol má {n} připomínek","Úkol má {n} připomínky"],
