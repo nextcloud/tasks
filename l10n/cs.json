@@ -252,6 +252,8 @@
     "No tasks today" : "Na dnešek žádné úkoly",
     "Completion date must be in the past." : "Je třeba, aby datum skončení platnosti bylo v minulosti.",
     "Successfully created the task." : "Úkol úspěšně vytvořen.",
+    "Successfully duplicated the task." : "Úloha úspěšně zduplikována.",
+    "Could not duplicate the task." : "Nebylo možné zduplikovat úkol.",
     "Could not delete the task." : "Úkol se nedaří smazat.",
     "Synchronizing to the server." : "Synchronizování se serverem.",
     "Task successfully saved to server." : "Úkol úspěšně uložen na server.",

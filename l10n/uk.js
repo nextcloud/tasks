@@ -35,7 +35,7 @@ OC.L10N.register(
     "Share this calendar" : "Поділитися цим календарем",
     "Share this list" : "Поділітися цим списком",
     "Calendar link copied to clipboard." : "Посилання на календар зкопійовано до буфера обміну",
-    "List link copied to clipboard." : "Посилання на список скопійовано в буфер обміну.",
+    "List link copied to clipboard." : "Посилання на список скопійовано до буфера обміну.",
     "Calendar link could not be copied to clipboard." : "Посилання на календар не може бути зкопійоване до буфера обміну",
     "List link could not be copied to clipboard." : "Не вдалося скопіювати посилання на список до буфера обміну.",
     "The name \"{calendar}\" is already used." : "Назва \"{calendar}\" вже використовується.",

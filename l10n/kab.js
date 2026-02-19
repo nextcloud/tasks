@@ -8,6 +8,7 @@ OC.L10N.register(
     "Completed" : "Yemmed",
     "Edit" : "Ẓreg",
     "Delete" : "Kkes",
+    "Empty trash bin" : "Silem taqecwalt",
     "Name" : "Nom",
     "Deleted" : "Yettwakkes",
     "Delete permanently" : "Kkes-it i lebda",
