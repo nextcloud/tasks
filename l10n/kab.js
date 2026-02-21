@@ -7,6 +7,7 @@ OC.L10N.register(
     "Current" : "Amiran",
     "Completed" : "Yemmed",
     "Edit" : "Ẓreg",
+    "Copied" : "Yettwanɣel",
     "Delete" : "Kkes",
     "Empty trash bin" : "Silem taqecwalt",
     "Name" : "Nom",
