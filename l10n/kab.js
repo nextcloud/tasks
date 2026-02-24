@@ -8,6 +8,7 @@ OC.L10N.register(
     "Completed" : "Yemmed",
     "Edit" : "Ẓreg",
     "Copied" : "Yettwanɣel",
+    "Export" : "Sifeḍ",
     "Delete" : "Kkes",
     "Empty trash bin" : "Silem taqecwalt",
     "Name" : "Nom",
