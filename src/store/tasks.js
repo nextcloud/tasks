@@ -24,9 +24,11 @@
 import { Calendar } from './calendars.js'
 import { findVTODObyUid } from './cdav-requests.js'
 import { isParentInList, momentToICALTime, parseString } from './storeHelper.js'
+import { getDefaultRecurrenceRuleObject } from '../models/recurrenceRule.js'
 import SyncStatus from '../models/syncStatus.js'
 import Task from '../models/task.js'
 
+import { DateTimeValue, RecurValue } from '@nextcloud/calendar-js'
 import { showError } from '@nextcloud/dialogs'
 import { emit } from '@nextcloud/event-bus'
 import { translate as t } from '@nextcloud/l10n'
@@ -34,6 +36,50 @@ import moment from '@nextcloud/moment'
 
 import ICAL from 'ical.js'
 import { randomUUID } from '../utils/crypto.js'
+
+/**
+ * Clone an ICAL.Time without triggering timezone lookups.
+ * ical.js may not have all timezones registered, causing errors when
+ * clone() tries to resolve timezone components.
+ *
+ * This function converts to local time first to handle the case where
+ * the ICAL.Time is stored in UTC - we need the local hour values, not UTC.
+ *
+ * @param {ICAL.Time} time The ICAL.Time to clone
+ * @param {boolean} [isDate] Override isDate property (optional)
+ * @return {ICAL.Time} A new ICAL.Time with the same local values
+ */
+function cloneTimeWithoutTimezone(time, isDate = null) {
+	let year = time.year
+	let month = time.month
+	let day = time.day
+	let hour = time.hour
+	let minute = time.minute
+	let second = time.second
+
+	// If the time is in UTC, convert to local time without triggering timezone lookups
+	// We check for UTC timezone by looking at the zone property
+	if (time.zone && time.zone.tzid === 'UTC') {
+		// Create a Date from UTC values, then extract local time components
+		const jsDate = new Date(Date.UTC(year, month - 1, day, hour, minute, second))
+		year = jsDate.getFullYear()
+		month = jsDate.getMonth() + 1
+		day = jsDate.getDate()
+		hour = jsDate.getHours()
+		minute = jsDate.getMinutes()
+		second = jsDate.getSeconds()
+	}
+
+	return new ICAL.Time({
+		year,
+		month,
+		day,
+		hour,
+		minute,
+		second,
+		isDate: isDate !== null ? isDate : time.isDate,
+	})
+}
 
 const state = {
 	tasks: {},
@@ -1221,6 +1267,12 @@ const actions = {
 					await context.dispatch('setPercentComplete', { task: subTask, complete: 100 })
 				}
 			}))
+
+			// Handle recurring tasks
+			if (task.isRecurring && task.recurrenceRule.recurrenceRuleValue) {
+				await context.dispatch('handleRecurringTaskCompletion', { task })
+				return // The handler will update the task
+			}
 		}
 		context.commit('setComplete', { task, complete })
 		context.dispatch('updateTask', task)
@@ -1522,7 +1574,7 @@ const actions = {
 				context.commit('setStart', { task, start: newStart })
 				context.dispatch('updateTask', task)
 			}
-		// Adjust due date
+		// Adjust due date if start is not set but due is
 		} else if (due.isValid()) {
 			diff = due.diff(moment().startOf('day'), 'days')
 			diff = diff < 0 ? 0 : diff
@@ -1531,9 +1583,9 @@ const actions = {
 				context.commit('setDue', { task, due: newDue })
 				context.dispatch('updateTask', task)
 			}
-		// Set the due date to appropriate value
+		// Set the start date to appropriate value (make start the default)
 		} else {
-			context.commit('setDue', { task, due: day })
+			context.commit('setStart', { task, start: day })
 			context.dispatch('updateTask', task)
 		}
 	},
@@ -1609,6 +1661,316 @@ const actions = {
 			}
 			// We have to send an update.
 			await context.dispatch('updateTask', task)
+		}
+	},
+
+	/**
+	 * Sets the recurrence rule for a task
+	 *
+	 * @param {object} context The store context
+	 * @param {object} data Destructuring object
+	 * @param {Task} data.task The task to update
+	 * @param {object} data.recurrenceRule The recurrence rule data
+	 */
+	async setRecurrenceRule(context, { task, recurrenceRule }) {
+		// Create base RecurValue with frequency and interval
+		const recurrenceValue = RecurValue.fromData({
+			freq: recurrenceRule.frequency,
+			interval: recurrenceRule.interval || 1,
+		})
+
+		// Use setComponent() for by-parts (following Calendar app pattern)
+		// Add BYDAY if provided (for weekly, monthly, yearly)
+		if (recurrenceRule.byDay && recurrenceRule.byDay.length > 0) {
+			recurrenceValue.setComponent('BYDAY', recurrenceRule.byDay)
+		}
+
+		// Add BYMONTH if provided (for yearly)
+		if (recurrenceRule.byMonth && recurrenceRule.byMonth.length > 0) {
+			recurrenceValue.setComponent('BYMONTH', recurrenceRule.byMonth)
+		}
+
+		// Add BYMONTHDAY if provided (for monthly, yearly)
+		if (recurrenceRule.byMonthDay && recurrenceRule.byMonthDay.length > 0) {
+			recurrenceValue.setComponent('BYMONTHDAY', recurrenceRule.byMonthDay)
+		}
+
+		// Add BYSETPOS if provided (for "on the first/last" options)
+		if (recurrenceRule.bySetPosition !== null && recurrenceRule.bySetPosition !== undefined) {
+			recurrenceValue.setComponent('BYSETPOS', [recurrenceRule.bySetPosition])
+		}
+
+		// Set end condition
+		if (recurrenceRule.until) {
+			recurrenceValue.until = DateTimeValue.fromJSDate(new Date(recurrenceRule.until), { zone: 'utc' })
+		} else if (recurrenceRule.count) {
+			recurrenceValue.count = recurrenceRule.count
+		}
+
+		// Convert RecurValue to ICAL.Recur
+		const icalRecur = recurrenceValue.toICALJs()
+
+		// Add or update the RRULE property on the vtodo
+		task.vtodo.removeAllProperties('rrule')
+		task.vtodo.updatePropertyWithValue('rrule', icalRecur)
+
+		// Update the task model
+		task._recurrenceRule = {
+			recurrenceRuleValue: recurrenceValue,
+			frequency: recurrenceRule.frequency,
+			interval: recurrenceRule.interval || 1,
+			count: recurrenceRule.count || null,
+			until: recurrenceRule.until || null,
+			byDay: recurrenceRule.byDay || [],
+			byMonth: recurrenceRule.byMonth || [],
+			byMonthDay: recurrenceRule.byMonthDay || [],
+			bySetPosition: recurrenceRule.bySetPosition || null,
+			isUnsupported: false,
+		}
+		task._hasMultipleRRules = false
+
+		await context.dispatch('updateTask', task)
+	},
+
+	/**
+	 * Removes the recurrence rule from a task
+	 *
+	 * @param {object} context The store context
+	 * @param {object} data Destructuring object
+	 * @param {Task} data.task The task to update
+	 */
+	async removeRecurrenceRule(context, { task }) {
+		// Remove the RRULE property from vtodo
+		task.vtodo.removeAllProperties('rrule')
+
+		// Reset the recurrence rule in the task model
+		task._recurrenceRule = getDefaultRecurrenceRuleObject()
+		task._hasMultipleRRules = false
+
+		await context.dispatch('updateTask', task)
+	},
+
+	/**
+	 * Handles completion of a recurring task by creating an exception instance with RECURRENCE-ID
+	 * This is compatible with Thunderbird and other CalDAV clients
+	 *
+	 * @param {object} context The store context
+	 * @param {object} data Destructuring object
+	 * @param {Task} data.task The task that was completed
+	 */
+	async handleRecurringTaskCompletion(context, { task }) {
+		// Only process if task is recurring
+		if (!task.isRecurring || !task.recurrenceRule.recurrenceRuleValue) {
+			return
+		}
+
+		try {
+			// Get the instance date (the current due/start date)
+			const instanceDate = task.due || task.start
+
+			if (!instanceDate) {
+				// Task has no date - just mark it complete without creating exception
+				console.warn('Recurring task has no due/start date - cannot create exception or advance to next occurrence')
+				context.commit('setComplete', { task, complete: 100 })
+				context.dispatch('updateTask', task)
+				return
+			}
+
+			// Get the calendar
+			const calendar = task.calendar
+			if (!calendar) {
+				console.error('Cannot find calendar for task')
+				return
+			}
+
+			// Create a new exception VTODO for this completed instance
+			const comp = new ICAL.Component('vcalendar')
+			comp.updatePropertyWithValue('prodid', '-//Nextcloud Tasks')
+			comp.updatePropertyWithValue('version', '2.0')
+
+			const vtodo = new ICAL.Component('vtodo')
+			comp.addSubcomponent(vtodo)
+
+			// Copy properties from master task
+			vtodo.updatePropertyWithValue('uid', task.uid)
+			vtodo.updatePropertyWithValue('summary', task.summary)
+
+			if (task.description) {
+				vtodo.updatePropertyWithValue('description', task.description)
+			}
+			if (task.location) {
+				vtodo.updatePropertyWithValue('location', task.location)
+			}
+			if (task.url) {
+				vtodo.updatePropertyWithValue('url', task.url)
+			}
+			if (task.priority) {
+				vtodo.updatePropertyWithValue('priority', task.priority)
+			}
+			if (task.class) {
+				vtodo.updatePropertyWithValue('class', task.class)
+			}
+
+			// Set completion properties
+			vtodo.updatePropertyWithValue('status', 'COMPLETED')
+			vtodo.updatePropertyWithValue('percent-complete', 100)
+			const completedDate = ICAL.Time.now()
+			vtodo.updatePropertyWithValue('completed', completedDate)
+
+			// Set RECURRENCE-ID to mark this as an exception instance
+			const recurrenceId = cloneTimeWithoutTimezone(instanceDate)
+			vtodo.updatePropertyWithValue('recurrence-id', recurrenceId)
+
+			// Set the original due/start date for this instance
+			if (task.due) {
+				vtodo.updatePropertyWithValue('due', cloneTimeWithoutTimezone(task.due, task.allDay))
+			}
+			if (task.start) {
+				vtodo.updatePropertyWithValue('dtstart', cloneTimeWithoutTimezone(task.start, task.allDay))
+			}
+
+			// Set created and last-modified
+			vtodo.updatePropertyWithValue('created', ICAL.Time.now())
+			vtodo.updatePropertyWithValue('last-modified', ICAL.Time.now())
+			vtodo.updatePropertyWithValue('dtstamp', ICAL.Time.now())
+
+			// Create the exception task on the server
+			const vData = comp.toString()
+			await context.dispatch('appendTaskToCalendar', {
+				calendar,
+				taskData: vData,
+			})
+
+			// Reload the task to get fresh ETag after exception was created
+			const freshTask = context.getters.getTaskByUri(task.uri)
+			if (!freshTask) {
+				console.error('Cannot find task after creating exception')
+				return
+			}
+
+			// Now update the master task to show next occurrence
+			if (!freshTask.recurrenceRule?.recurrenceRuleValue) {
+				console.warn('Cannot advance recurring task: no recurrence rule value')
+				return
+			}
+
+			// Convert RecurValue to ICAL.Recur to get the iterator
+			const icalRecur = freshTask.recurrenceRule.recurrenceRuleValue.toICALJs()
+
+			// Check if recurrence rule has a COUNT limit
+			// When using COUNT, the iterator counts from startTime, which breaks when we
+			// advance the task's dates. We need to handle COUNT by decrementing it.
+			const hasCountLimit = icalRecur.count !== null && icalRecur.count > 0
+
+			// For COUNT-limited rules, check if we've reached the limit
+			if (hasCountLimit && icalRecur.count <= 1) {
+				// This is the last occurrence - mark master task as completed
+				freshTask.setComplete(100)
+				freshTask.setCompleted(true)
+				freshTask.setStatus('COMPLETED')
+				await context.dispatch('updateTask', freshTask)
+				return
+			}
+
+			// Create a floating time to avoid timezone lookup issues
+			// Recurrence rules operate on local time (e.g., "repeat daily" = same local time each day)
+			const startTime = cloneTimeWithoutTimezone(instanceDate)
+
+			const iterator = icalRecur.iterator(startTime)
+
+			// Get the first occurrence from the iterator
+			// The iterator returns occurrences >= startTime
+			let nextOccurrence = iterator.next()
+
+			// Check if the first occurrence matches the current instance date
+			// This happens when the instance date IS a valid occurrence of the rule
+			// (e.g., task on Sunday with rule "every Sunday")
+			// If it matches, we need to skip it and get the actual next occurrence
+			// If it doesn't match, the instance date is NOT a valid occurrence
+			// (e.g., task on Tuesday with rule "every Sunday"), and the first
+			// result is already the next valid occurrence we want
+			if (nextOccurrence
+				&& nextOccurrence.year === startTime.year
+				&& nextOccurrence.month === startTime.month
+				&& nextOccurrence.day === startTime.day) {
+				// Current date is a valid occurrence, skip to next
+				nextOccurrence = iterator.next()
+			}
+
+			// For UNTIL rules, this correctly returns null when we've passed the end date
+			// For COUNT rules, we ignore the iterator's count tracking since we handle it separately
+			if (nextOccurrence) {
+				// Build moment directly from floating time components to preserve local time
+				// toJSDate() on floating times interprets values as UTC, causing timezone shift
+				const nextMoment = moment({
+					year: nextOccurrence.year,
+					month: nextOccurrence.month - 1, // moment months are 0-indexed
+					date: nextOccurrence.day,
+					hour: nextOccurrence.hour,
+					minute: nextOccurrence.minute,
+					second: nextOccurrence.second,
+				})
+
+				// Calculate offset between start and due if both are set
+				let startOffset = null
+				if (freshTask.start && freshTask.due) {
+					const currentStart = freshTask.startMoment
+					const currentDue = freshTask.dueMoment
+					if (currentStart.isValid() && currentDue.isValid()) {
+						startOffset = currentDue.diff(currentStart)
+					}
+				}
+
+				// Update the appropriate date field
+				if (freshTask.due) {
+					context.commit('setDue', {
+						task: freshTask,
+						due: nextMoment,
+						allDay: freshTask.allDay,
+					})
+				} else if (freshTask.start) {
+					// If only start date exists, update that
+					context.commit('setStart', {
+						task: freshTask,
+						start: nextMoment,
+						allDay: freshTask.allDay,
+					})
+				}
+
+				// Update start date if both dates were set, maintaining the offset
+				if (freshTask.due && startOffset !== null) {
+					const nextStart = nextMoment.clone().subtract(startOffset, 'ms')
+					context.commit('setStart', {
+						task: freshTask,
+						start: nextStart,
+						allDay: freshTask.allDay,
+					})
+				}
+
+				// Reset completion status on master task
+				freshTask.setComplete(0)
+				freshTask.setCompleted(false)
+				freshTask.setStatus(null)
+
+				// Decrement COUNT if the rule has a count limit
+				// This ensures the count reflects remaining occurrences
+				if (hasCountLimit) {
+					const rruleProp = freshTask.vtodo.getFirstProperty('rrule')
+					if (rruleProp) {
+						const rruleValue = rruleProp.getFirstValue()
+						rruleValue.count = rruleValue.count - 1
+					}
+				}
+
+				// Save the updated master task
+				await context.dispatch('updateTask', freshTask)
+			} else {
+				// No more occurrences - keep task completed
+				// The exception will show as completed, master can be left as-is
+			}
+		} catch (error) {
+			console.error('Error handling recurring task completion:', error)
+			showError(t('tasks', 'Error processing recurring task'))
 		}
 	},
 
