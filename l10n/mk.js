@@ -21,7 +21,7 @@ OC.L10N.register(
     "No users or groups" : "Нема корисници или групи",
     "Unable to delete the share." : "Неможе да се избрише споделениот контакт",
     "Unable to change permissions." : "Неможе да се променат дозволите.",
-    "Can edit" : "Може да се уредува",
+    "Can edit" : "Може да уредува",
     "Unshare with {displayName}" : "Не споделувај со {displayName}",
     "This will delete the calendar \"{calendar}\" and all corresponding events and tasks." : "Ова ќе го избрише календарот \"{calendar}\" и сите настани и задачи во него.",
     "This will unshare the calendar \"{calendar}\"." : "Ова ќе направи да не се споделува повеќе календарот \"{calendar}\".",
