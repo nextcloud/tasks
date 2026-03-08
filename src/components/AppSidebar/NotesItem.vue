@@ -172,7 +172,7 @@ export default {
 					background: none repeat scroll 0 0 transparent;
 					border: medium none;
 					line-height: 26px;
-					padding: 0;
+					padding: 0 !important;
 					white-space: pre-wrap;
 					word-wrap: break-word;
 				}
@@ -221,6 +221,10 @@ export default {
 	a {
 		opacity: .5;
 		text-decoration: underline;
+	}
+
+	p {
+		margin-bottom: 26px;
 	}
 
 	s {
