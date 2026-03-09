@@ -27,10 +27,15 @@ OC.L10N.register(
     "Cancel" : "Anuloje",
     "Email" : "Emaili",
     "Go back" : "Shko prapa",
+    "Thursday" : "E enjte",
+    "Daily" : "Përditë",
+    "Weekly" : "Çdo javë",
+    "Save" : "Ruaje",
     "Close" : "Mbylleni",
     "No errors" : "Nuk ka gabime",
     "Open your browser console for more details" : "Hapni panelin e komandimit të shfletuesit tuaj për më shumë detaje",
     "Select tags to filter by" : "Përzgjidhni etiketa sipas të cilat të bëhet filtrimi",
+    "never" : "kurrë",
     "Start date" : "Datë nisjeje",
     "Due date" : "Datë përfundimi",
     "Last modified" : "Ndryshuar së fundmi",
@@ -52,6 +57,9 @@ OC.L10N.register(
     "All day" : "Gjithë ditën",
     "Details" : "Detajet",
     "Select tags" : "Përzgjidh etiketat",
-    "Notes" : "Shënime"
+    "Notes" : "Shënime",
+    "January" : "Janar",
+    "April" : "Prill",
+    "September" : "Shtator"
 },
 "nplurals=2; plural=(n != 1);");

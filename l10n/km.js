@@ -17,9 +17,16 @@ OC.L10N.register(
     "Delete permanently" : "លុប​ជា​អចិន្ត្រៃយ៍",
     "Cancel" : "បោះបង់",
     "Email" : "អ៊ីមែល",
+    "Daily" : "រាល់ថ្ងៃ",
+    "Save" : "រក្សាទុក",
     "Close" : "បិទ",
+    "never" : "មិនដែរ",
+    "first" : "ទីមួយ",
     "Tags" : "ស្លាក",
     "Details" : "ព័ត៌មាន​លម្អិត",
-    "Notes" : "កំណត់​ចំណាំ"
+    "Notes" : "កំណត់​ចំណាំ",
+    "last" : "ចុងក្រោយ",
+    "January" : "ខែមករា",
+    "September" : "ខែកញ្ញា"
 },
 "nplurals=1; plural=0;");

@@ -20,7 +20,10 @@ OC.L10N.register(
     "Delete permanently" : "Slett for godt",
     "Cancel" : "Avbryt",
     "Email" : "Epost",
+    "Daily" : "Kvar dag",
+    "Save" : "Lagre",
     "Close" : "Lukk",
+    "never" : "aldri",
     "Last modified" : "Siste endra",
     "Tags" : "Emneord",
     "When shared show full event" : "Når delt, vis heile hendinga",
@@ -28,6 +31,10 @@ OC.L10N.register(
     "When shared hide this event" : "Når delt, gøym denne hendinga",
     "Details" : "Detaljar",
     "Notes" : "Notat",
+    "last" : "siste",
+    "January" : "Januar",
+    "April" : "April",
+    "September" : "September",
     "An error occurred" : "Det oppstod ein feil"
 },
 "nplurals=2; plural=(n != 1);");

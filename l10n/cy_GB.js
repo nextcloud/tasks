@@ -52,6 +52,7 @@ OC.L10N.register(
     "Close" : "Cau",
     "No errors" : "Dim gwallau",
     "Open your browser console for more details" : "Agorwch eich consol porwr am fwy o fanylion",
+    "first" : "cyntaf",
     "Last modified" : "Newidiwyd diwethaf",
     "Alphabetically" : "Trefn yr Wyddor",
     "Tags" : "Tagiau",

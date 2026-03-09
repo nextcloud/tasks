@@ -35,6 +35,7 @@ OC.L10N.register(
     "No errors" : "Sin errores",
     "Open your browser console for more details" : "Abra la consola de su navegador para más detalles",
     "Select tags to filter by" : "Seleccione las etiquetas para el filtro",
+    "first" : "primero",
     "Start date" : "Fecha de inicio",
     "Due date" : "Fecha de vencimiento",
     "Last modified" : "Última modificación",
@@ -54,6 +55,8 @@ OC.L10N.register(
     "All day" : "Todo el día",
     "Details" : "Detalles",
     "Notes" : "Notas",
+    "January" : "Enero",
+    "September" : "Septiembre",
     "An error occurred" : "Ocurrió un error"
 },
 "nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");

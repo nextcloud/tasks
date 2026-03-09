@@ -26,8 +26,14 @@
     "Notification" : "การแจ้งเตือน",
     "Email" : "อีเมล",
     "Go back" : "กลับไป",
+    "Monday" : "วันจันทร์",
+    "Thursday" : "วันพฤหัสบดี",
+    "Daily" : "รายวัน",
+    "Weekly" : "รายสัปดาห์",
+    "Save" : "บันทึก",
     "Close" : "ปิด",
     "Select tags to filter by" : "เลือกแท็กที่จะกรอง",
+    "never" : "ไม่เคย",
     "Start date" : "วันที่เริ่มต้น",
     "Due date" : "วันที่ครบกำหนด",
     "Priority" : "ลำดับความสำคัญ",
@@ -45,6 +51,9 @@
     "Set due date" : "ตั้งวันที่ครบกำหนด",
     "Details" : "รายละเอียด",
     "Notes" : "โน้ต",
+    "January" : "มกราคม",
+    "April" : "เมษายน",
+    "September" : "กันยายน",
     "An error occurred" : "เกิดข้อผิดพลาด"
 },"pluralForm" :"nplurals=1; plural=0;"
 }

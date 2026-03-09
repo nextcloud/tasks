@@ -47,6 +47,7 @@ OC.L10N.register(
     "All day" : "Todo el día",
     "Details" : "Detalles",
     "Select tags" : "Selecciona las etiquetas",
-    "Notes" : "Notas"
+    "Notes" : "Notas",
+    "January" : "Enero"
 },
 "nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");

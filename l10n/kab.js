@@ -18,9 +18,12 @@ OC.L10N.register(
     "Notification" : "Ilɣa",
     "Email" : "Imayl",
     "Go back" : "Tuɣalin",
+    "Daily" : "S wass",
+    "Save" : "Sekles",
     "Close" : "Mdel",
     "Tags" : "Tibzimin",
     "Delete task" : "Kkes tawuri",
-    "Details" : "Talqayt"
+    "Details" : "Talqayt",
+    "January" : "Yennayer"
 },
 "nplurals=2; plural=(n != 1);");

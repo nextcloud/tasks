@@ -13,6 +13,7 @@ OC.L10N.register(
     "Cancel" : "Sguir dheth",
     "Email" : "Post-d",
     "Close" : "Dùin",
+    "never" : "chan ann idir",
     "Tags" : "Tagaichean",
     "Details" : "Mion-fhiosrachadh",
     "Notes" : "Nòtaichean"

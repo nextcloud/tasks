@@ -27,6 +27,7 @@ OC.L10N.register(
     "Go back" : "Regresar",
     "Close" : "Cerrar",
     "Select tags to filter by" : "Selecciona las etiquetas del filtro",
+    "never" : "nunca",
     "Start date" : "Fecha de inicio",
     "Due date" : "Fecha de vencimiento",
     "Last modified" : "Última modificación",
@@ -48,6 +49,8 @@ OC.L10N.register(
     "Details" : "Detalles",
     "Select tags" : "Selecciona las etiquetas",
     "Notes" : "Notas",
+    "January" : "Enero",
+    "September" : "Septiembre",
     "An error occurred" : "Se presentó un error"
 },
 "nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");

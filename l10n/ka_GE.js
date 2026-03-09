@@ -25,8 +25,11 @@ OC.L10N.register(
     "Delete permanently" : "სამუდამოდ წაშლა",
     "Cancel" : "უარყოფა",
     "Go back" : "უკან დაბრუნება",
+    "Daily" : "ყოველდღიური",
+    "Save" : "შენახვა",
     "Close" : "დახურვა",
     "Select tags to filter by" : "ფილტრაციისთვის აირჩიეთ ტეგები",
+    "never" : "არასდროს",
     "Start date" : "დაწყების თარიღი",
     "Due date" : "განპირობებულია თარიღისთვის",
     "Last modified" : "ბოლო ცვლილება",
@@ -47,6 +50,8 @@ OC.L10N.register(
     "All day" : "მთელი დღე",
     "Details" : "დეტალები",
     "Select tags" : "აირჩიეთ ტეგები",
-    "Notes" : "ჩანაწერები"
+    "Notes" : "ჩანაწერები",
+    "January" : "იანვარი",
+    "September" : "სექტემბერი"
 },
 "nplurals=2; plural=(n!=1);");

@@ -24,8 +24,10 @@ OC.L10N.register(
     "Delete permanently" : "Deler permanentemente",
     "Cancel" : "Cancellar",
     "Go back" : "Retornar",
+    "Daily" : "Cata die",
     "Close" : "Clauder",
     "Select tags to filter by" : "Selectionar etiquettas a filtrar per",
+    "never" : "nunquam",
     "Priority" : "Prioritate",
     "Alphabetically" : "Alphabeticamente",
     "Tags" : "Etiquettas",
@@ -38,6 +40,8 @@ OC.L10N.register(
     "Set start date" : "Assigna le data de initio",
     "Set due date" : "Assignar data debite",
     "Details" : "Detalios",
-    "Notes" : "Notas"
+    "Notes" : "Notas",
+    "January" : "Januario",
+    "September" : "Septembre"
 },
 "nplurals=2; plural=(n != 1);");

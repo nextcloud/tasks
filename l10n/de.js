@@ -131,6 +131,7 @@ OC.L10N.register(
     "Loading the completed tasks of all lists might slow down the app." : "Das Laden der abgeschlossenen Aufgaben aller Listen kann die App verlangsamen.",
     "Load the completed tasks of list \"{calendar}\"." : "Erledigte Aufgaben für die Liste \"{calendar}\" laden.",
     "Loading the completed tasks might slow down the app." : "Das Laden der abgeschlossenen Aufgaben kann die App verlangsamen.",
+    "first" : "erster",
     "Relevance" : "Wichtigkeit",
     "Sort by completed state, due date, priority, start date and summary." : "Sortieren nach Abgeschlossen-Status, Fälligskeitsdatum, Priorität, Startdatum und Zusammenfassung.",
     "Start date" : "Startdatum",

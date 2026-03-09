@@ -18,8 +18,12 @@ OC.L10N.register(
     "Cancel" : "Չեղարկել",
     "Notification" : "Ծանուցում",
     "Email" : "Էլ․փոստ",
+    "Daily" : "Օրական",
     "Close" : "Փակել",
+    "never" : "երբեք",
     "Details" : "Մանրամասներ",
-    "Notes" : "Notes"
+    "Notes" : "Notes",
+    "January" : "Հունվար",
+    "September" : "Սեպտեմբեր"
 },
 "nplurals=2; plural=(n != 1);");

@@ -26,7 +26,10 @@ OC.L10N.register(
     "Cancel" : "Ofbriechen",
     "Email" : "Email",
     "Go back" : "Zeréckgoen",
+    "Daily" : "All Dag",
+    "Save" : "Späicheren",
     "Close" : "Zoumaachen",
+    "never" : "Ni",
     "Tags" : "Tags",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n erfëllt Aufgab","%n erfëllten Aufgaben"],
     "Tomorrow" : "Muer",
@@ -37,6 +40,8 @@ OC.L10N.register(
     "Set start date" : "Setz en Ufanks Datum fest",
     "Set due date" : "Datum setzen bis wéini et fälleg ass",
     "Details" : "Detailer",
-    "Notes" : "Notizen"
+    "Notes" : "Notizen",
+    "January" : "Januar",
+    "September" : "September"
 },
 "nplurals=2; plural=(n != 1);");

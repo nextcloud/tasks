@@ -111,6 +111,8 @@ OC.L10N.register(
     "Add a task due today to \"{calendar}\"…" : "Agregar una tarea con vencimiento para hoy a \"{calendar}\"…",
     "Add a current task to \"{calendar}\"…" : "Agregar una tarea actual a \"{calendar}\"…",
     "Add a task to \"{calendar}\"…" : "Agregar una tarea a \"{calendar}\"…",
+    "never" : "nunca",
+    "first" : "primero",
     "Start date" : "Fecha de inicio",
     "Due date" : "Fecha de vencimiento",
     "Last modified" : "Última modificación",
@@ -144,6 +146,9 @@ OC.L10N.register(
     "No due date assigned" : "Fecha de vencimiento sin especificar",
     "No upcoming tasks" : "No hay tareas próximas",
     "upcoming tasks" : "tareas próximas",
+    "last" : "último",
+    "January" : "Enero",
+    "September" : "Septiembre",
     "Synchronizing to the server." : "Sincronizando con el servidor.",
     "An error occurred" : "Ha ocurrido un error"
 },

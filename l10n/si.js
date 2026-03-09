@@ -13,9 +13,14 @@ OC.L10N.register(
     "Restore" : "ප්‍රතිෂ්ථාපනය",
     "Cancel" : "අවලංගු කරන්න",
     "Go back" : "ආපසු යන්න",
+    "Thursday" : "බ්‍රහස්පතින්දා",
+    "Daily" : "දිනපතා",
     "Close" : "වසන්න",
     "Tomorrow" : "හෙට",
     "Details" : "විස්තර",
-    "Notes" : "සටහන්"
+    "Notes" : "සටහන්",
+    "January" : "ජනවාරි",
+    "April" : "අප්‍රේල්",
+    "September" : "සැප්තැම්බර්"
 },
 "nplurals=2; plural=(n != 1);");
