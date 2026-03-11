@@ -162,7 +162,7 @@ OC.L10N.register(
     "By day of the month" : "Pelo dia do mês",
     "On the" : "Em",
     "on" : "em",
-    "On specific day" : "Em um dia específico",
+    "On specific day" : "No dia específico",
     "weekday" : "dia da semana",
     "weekend day" : "dia de fim de semana",
     "Relevance" : "Relevância",
