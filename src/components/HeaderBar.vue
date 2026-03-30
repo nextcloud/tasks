@@ -193,6 +193,7 @@ $breakpoint-mobile: 1024px;
 	background-color: var(--color-background-dark);
 	z-index: 1000;
 	display: flex;
+	top: 0;
 
 	@media only screen and (max-width: $breakpoint-mobile) {
 		padding-right: 0;
