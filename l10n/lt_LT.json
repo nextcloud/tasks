@@ -237,6 +237,7 @@
     "Task successfully moved to new calendar." : "Užduotis sėkmingai perkelta į naują kalendorių.",
     "An error occurred" : "Įvyko klaida",
     "Create a task" : "Sukurti užduotį",
+    "Message from {author} in {conversationName}" : "{author} žinutės {conversationName}",
     "[Due on] LL" : "[Galutinis terminas] LL",
     "[Was due yesterday]" : "[Galutinis terminas buvo vakar]",
     "[Was due on] LL" : "[Galutinis terminas buvo] LL",
