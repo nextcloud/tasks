@@ -86,6 +86,7 @@ OC.L10N.register(
     "Set time" : "Nustatyti laiką",
     "Delete date" : "Ištrinti datą",
     "Does not repeat" : "Nekartojamas",
+    "on {days}" : " {days}",
     "until {date}" : "iki {date}",
     "{count} times" : "{count} kartus",
     "Monday" : "Pirmadienis",
