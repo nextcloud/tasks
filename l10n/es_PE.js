@@ -16,6 +16,7 @@ OC.L10N.register(
     "Can edit" : "Puede editar",
     "An empty name is not allowed." : "No se permite un nombre vacío.",
     "Edit" : "Editar",
+    "Copied" : "Copiado",
     "Export" : "Exportar",
     "Delete" : "Borrar",
     "Unshare" : "Dejar de compartir",
