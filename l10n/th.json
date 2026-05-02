@@ -50,6 +50,7 @@
     "Tags" : "แท็ก",
     "Manually" : "ด้วยตนเอง",
     "Change sort order" : "เปลี่ยนการเรียงลำดับ",
+    "Delete task" : "ลบงาน",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n งานที่เสร็จแล้ว"],
     "Tomorrow" : "พรุ่งนี้",
     "When shared show full event" : "เมื่อแชร์จะแสดงกิจกรรมเต็ม",
