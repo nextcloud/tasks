@@ -34,6 +34,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<pre><span>{{ newValue }}</span><br><br></pre>
 				<textarea ref="note__editor"
 					v-model="newValue"
+					:maxlength="100000"
 					@keyup.escape="setEditing(false)"
 					@keydown.enter.ctrl.prevent="setValue()"
 					@change="setValue()" />
@@ -48,12 +49,15 @@ import editableItem from '../../mixins/editableItem.js'
 import { subscribe, unsubscribe } from '@nextcloud/event-bus'
 import { translate as t } from '@nextcloud/l10n'
 
+import DOMPurify from 'dompurify'
 import MarkdownIt from 'markdown-it'
 import Mila from 'markdown-it-link-attributes'
 import { full as emoji } from 'markdown-it-emoji'
 import Mitl from 'markdown-it-task-lists'
 
 import { vOnClickOutside as ClickOutside } from '@vueuse/components'
+
+const MAX_NOTE_RENDER_SIZE = 100_000
 
 export default {
 	name: 'NotesItem',
@@ -93,7 +97,11 @@ export default {
 					if (!val.trim()) {
 						val = t('tasks', 'Click here to add a note.')
 					}
-					this.$refs.note__viewer.innerHTML = this.md.render(val)
+					if (val.length > MAX_NOTE_RENDER_SIZE) {
+						this.$refs.note__viewer.textContent = val.slice(0, MAX_NOTE_RENDER_SIZE)
+						return
+					}
+					this.$refs.note__viewer.innerHTML = DOMPurify.sanitize(this.md.render(val))
 				})
 			},
 		},
