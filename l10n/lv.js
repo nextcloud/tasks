@@ -124,6 +124,7 @@ OC.L10N.register(
     "Task is completed" : "Uzdevums ir pabeigts",
     "Task is not completed" : "Uzdevums nav pabeigts",
     "\"{task}\" was added to \"{calendar}\"" : "\"{task}\" tika pievienots \"{calendar}\"",
+    "Create a new task" : "Izveidot jaunu uzdevumu",
     "Open task" : "Atvērt uzdevumu",
     "_%n Completed Task_::_%n Completed Tasks_" : ["%n pabeigtu uzdevumu","%n pabeigts uzdevums","%n pabeigti uzvedumi"],
     "Tomorrow" : "Rīt",
