@@ -52,7 +52,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				</NcDashboardWidgetItem>
 			</template>
 			<template #emptyContentIcon>
-				<TaskIcon />
+				<Check :size="20" decorative />
 			</template>
 		</NcDashboardWidget>
 		<div v-if="!loading" class="center-button">
@@ -69,7 +69,6 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
 <script>
 import TaskCreateDialog from '../components/TaskCreateDialog.vue'
-import TaskIcon from '../components/TaskIcon.vue'
 import client from '../services/cdav.js'
 import { sort, isTaskInList } from '../store/storeHelper.js'
 
@@ -95,7 +94,6 @@ export default {
 		NcDashboardWidgetItem,
 		TaskCreateDialog,
 		Plus,
-		TaskIcon,
 	},
 	data() {
 		return {
