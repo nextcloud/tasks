@@ -266,7 +266,7 @@ OC.L10N.register(
     "Unpin" : "جدا کردن",
     "Pin" : "سنجاق کردن",
     "Show in Calendar" : "نمایش در تقویم",
-    "Show in Deck" : "نمایش در دک",
+    "Show in Deck" : "نمایش در کارتابل",
     "Edit summary" : "ویرایش خلاصه",
     "Details" : "جزئیات",
     "Selecting a classification is forbidden, because the task was shared with you." : "انتخاب یک دسته‌بندی ممنوع است، زیرا وظیفه با شما به اشتراک گذاشته شده است.",
