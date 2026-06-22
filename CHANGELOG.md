@@ -1,3 +1,19 @@
+## 0.18.0 - 2026-06-22
+
+### Added
+- Repeating Tasks #34
+- Task duplication #264
+
+### Changed
+- Updated translations
+- Updated dependencies
+
+### Fixed
+- Use proper trailing button icon for textfields #3053
+- Keep note rendering consistent with editor #3066
+- Set position sticky for header bar #3105
+- add DOMPurify and limit note render size #3132
+
 ## 0.17.1 - 2025-11-09
 
 ### Fixed
