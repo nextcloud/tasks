@@ -1,3 +1,9 @@
+## 0.18.1 - 2026-06-29
+
+### Fixed
+- fix(TaskBody): show due date instead of start date in task list #3190
+- fix: handle special keys only when IME is not compositing #3189
+
 ## 0.18.0 - 2026-06-22
 
 ### Added
