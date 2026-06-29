@@ -35,9 +35,9 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				<textarea ref="note__editor"
 					v-model="newValue"
 					:maxlength="100000"
-					@compositionstart="compositionstart($event)"
-					@compositionend="compositionend($event)"
-					@keydown.escape="escKeyDown($event)"
+					@compositionstart="compositionstart()"
+					@compositionend="compositionend()"
+					@keydown.escape="escKeyDown()"
 					@keydown.enter.ctrl.prevent="setValue()"
 					@change="setValue()" />
 			</div>
@@ -133,15 +133,15 @@ export default {
 			this.setEditing(true, $event)
 		},
 		// Inspired by https://gist.github.com/gotraveltoworld/ecbd2ddc6a0d9bcee8baf396d683e1ba
-		compositionstart($event) {
-			this.compositing = true;
+		compositionstart() {
+			this.compositing = true
 		},
-		compositionend($event) {
-			this.compositing = false;
+		compositionend() {
+			this.compositing = false
 		},
-		escKeyDown($event) {
+		escKeyDown() {
 			if (!this.compositing) {
-				this.setEditing(false);
+				this.setEditing(false)
 			}
 		},
 	},
