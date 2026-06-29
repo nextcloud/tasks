@@ -33,8 +33,8 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				:show-trailing-button="newTaskName !== ''"
 				:trailing-button-label="placeholder"
 				@trailing-button-click="addTask"
-				@compositionstart="compositionstart($event)"
-				@compositionend="compositionend($event)"
+				@compositionstart="compositionstart()"
+				@compositionend="compositionend()"
 				@keydown.esc="clearNewTask($event)"
 				@keydown.enter="addTask"
 				@paste.stop="addMultipleTasks">
@@ -115,16 +115,16 @@ export default {
 			'createTask',
 		]),
 
-		compositionstart($event) {
-			this.compositing = true;
+		compositionstart() {
+			this.compositing = true
 		},
-		compositionend($event) {
-			this.compositing = false;
+		compositionend() {
+			this.compositing = false
 		},
 
 		clearNewTask(event) {
 			if (this.compositing) {
-				return;
+				return
 			}
 
 			event.target.blur()
@@ -133,7 +133,7 @@ export default {
 
 		async addTask() {
 			if (this.compositing) {
-				return;
+				return
 			}
 
 			const data = {
