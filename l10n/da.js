@@ -69,6 +69,8 @@ OC.L10N.register(
     "Delete permanently" : "Slet permanent",
     "_Elements in the trash bin are deleted after {numDays} day_::_Elements in the trash bin are deleted after {numDays} days_" : ["Elementer i papirkurven slettes efter {numDays} dag","Elementer i papirkurven slettes efter {numDays} dage"],
     "Cancel" : "Annuller",
+    "No reminders" : "Ingen påmindelser",
+    "Notification" : "Meddelelse",
     "Email" : "E-mail",
     "Audio notification" : "Lydmeddelelse",
     "Other notification" : "Anden meddelelse",
