@@ -52,6 +52,7 @@ OC.L10N.register(
     "Restore" : "Restaurar",
     "Delete permanently" : "Eliminar permanentemente",
     "Cancel" : "Cancelar",
+    "No reminders" : "Nenhum lembrete",
     "Email" : "E-mail",
     "Audio notification" : "Notificação de áudio",
     "Other notification" : "Outras notificações",
