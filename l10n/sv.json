@@ -299,6 +299,7 @@
     "November" : "November",
     "December" : "December",
     "on day {days}" : "på dag {days}",
+    "in {months}" : "i {months}",
     "_{count} time_::_{count} times_" : ["{count} gång","{count} gånger"],
     "Completion date must be in the past." : "Slutdatum måste vara i det förflutna.",
     "Successfully created the task." : "Uppgiften skapad.",
