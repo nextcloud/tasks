@@ -115,6 +115,7 @@ OC.L10N.register(
     "_month_::_months_" : ["μήνας","μήνες"],
     "Yearly" : "Ετησίως",
     "_year_::_years_" : ["έτος","έτη"],
+    "Remove recurrence" : "Αφαίρεση επανάληψης",
     "Save" : "Αποθήκευση",
     "Set value" : "Ορισμός τιμής",
     "Delete value" : "Διαγραφή τιμής",
