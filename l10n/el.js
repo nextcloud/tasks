@@ -100,6 +100,7 @@ OC.L10N.register(
     "Delete date" : "Διαγραφή ημερομηνίας",
     "Click here to add a note." : "Κάντε κλικ εδώ για να προσθέσετε μια σημείωση.",
     "Does not repeat" : "Δεν επαναλαμβάνεται",
+    "on {days}" : "στις {days}",
     "until {date}" : "μέχρι {date}",
     "{count} times" : "{count} φορές",
     "Monday" : "Δευτέρα",
