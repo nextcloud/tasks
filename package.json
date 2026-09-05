@@ -59,7 +59,7 @@
     "@nextcloud/eslint-config": "8.4.2",
     "@nextcloud/stylelint-config": "^3.2.2",
     "@nextcloud/vite-config": "2.5.4",
-    "@vue/test-utils": "^2.4.11",
+    "@vue/test-utils": "^2.5.0",
     "happy-dom": "^20.12.2",
     "mockdate": "^3.0.5",
     "vitest": "^4.1.11"
