@@ -156,6 +156,7 @@ OC.L10N.register(
     "By day of the month" : "Eftir degi mánaðarins",
     "On the" : "Þann",
     "on" : "þann",
+    "On specific day" : "Á tilteknum degi",
     "weekday" : "vinnudagur",
     "weekend day" : "helgardagur",
     "Relevance" : "Samsvörun",
