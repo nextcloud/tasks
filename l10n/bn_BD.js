@@ -56,6 +56,7 @@ OC.L10N.register(
     "September" : "সেপ্টেম্বর",
     "October" : "অক্টোবর",
     "November" : "নভেম্বর",
-    "December" : "ডিসেম্বর"
+    "December" : "ডিসেম্বর",
+    "in {months}" : "{months} -এ"
 },
 "nplurals=2; plural=(n != 1);");

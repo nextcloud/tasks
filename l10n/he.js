@@ -49,6 +49,7 @@ OC.L10N.register(
     "Untitled item" : "פריט ללא כותרת",
     "Unknown calendar" : "לוח שנה לא ידוע",
     "Could not load deleted calendars and objects" : "לא ניתן לטעון לוחות שנה ופריטים מחוקים",
+    "Could not delete calendar or event" : "לא יכול למחוק יומן או ארועה",
     "Could not restore calendar or event" : "לא ניתן לשחזר לוח שנה או אירוע",
     "Do you really want to empty the trash bin?" : "האם אמת בכוונתך לרוקן את סל האשפה?",
     "Empty trash bin" : "פינוי סל האשפה",
