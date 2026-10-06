@@ -82,7 +82,7 @@ export default {
 			.use(Mila, {
 				attrs: {
 					target: '_blank',
-					rel: 'nofollow',
+					rel: 'nofollow noopener noreferrer',
 				},
 			})
 			.use(Mitl)
@@ -104,7 +104,7 @@ export default {
 						this.$refs.note__viewer.textContent = val.slice(0, MAX_NOTE_RENDER_SIZE)
 						return
 					}
-					this.$refs.note__viewer.innerHTML = DOMPurify.sanitize(this.md.render(val))
+					this.$refs.note__viewer.innerHTML = DOMPurify.sanitize(this.md.render(val), { ADD_ATTR: ['target'] })
 				})
 			},
 		},
