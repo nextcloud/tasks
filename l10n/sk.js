@@ -70,7 +70,7 @@ OC.L10N.register(
     "_Elements in the trash bin are deleted after {numDays} day_::_Elements in the trash bin are deleted after {numDays} days_" : ["Položky v odpadkovom koši budú odstránené po {numDays} dni","Položky v odpadkovom koši budú odstránené po {numDays} dňoch","Položky v odpadkovom koši budú odstránené po {numDays} dňoch","Položky v odpadkovom koši budú odstránené po {numDays} dňoch"],
     "Create reminder" : "Vytvoriť pripomienku",
     "Update reminder" : "Aktualizovať pipomienku",
-    "Set a reminder at a custom date and time:" : "Nastaviť pripomienku a vlastný dátum a čas:",
+    "Set a reminder at a custom date and time:" : "Nastaviť pripomienku na vlastný dátum a čas:",
     "Cancel" : "Zrušiť",
     "This is a todo reminder." : "Toto je pripomienka úloh.",
     "No reminders" : "Žiadne pripomienky",
