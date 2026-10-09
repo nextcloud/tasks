@@ -280,6 +280,7 @@ export default {
 			showCreateMultipleTasksModal: false,
 			multipleTasks: { numberOfTasks: 0, tasks: {} },
 			additionalTaskProperties: {},
+			now: Date.now(),
 		}
 	},
 	computed: {
@@ -291,7 +292,7 @@ export default {
 		dueDateShort() {
 			if (!this.task.completed) {
 				return this.task.dueMoment.isValid()
-					? this.task.dueMoment.calendar(null, {
+					? this.task.dueMoment.calendar(moment(this.now), {
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						lastDay: t('tasks', '[Yesterday]'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
@@ -305,7 +306,7 @@ export default {
 					: ''
 			} else {
 				return this.task.completedDateMoment.isValid()
-					? this.task.completedDateMoment.calendar(null, {
+					? this.task.completedDateMoment.calendar(moment(this.now), {
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						lastDay: t('tasks', '[Completed yesterday]'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
@@ -329,7 +330,7 @@ export default {
 			}
 			if (!this.task.completed) {
 				return this.task.dueMoment.isValid()
-					? this.task.dueMoment.calendar(null, {
+					? this.task.dueMoment.calendar(moment(this.now), {
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						lastDay: t('tasks', '[Yesterday at] LT'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
@@ -346,7 +347,7 @@ export default {
 					: ''
 			} else {
 				return this.task.completedDateMoment.isValid()
-					? this.task.completedDateMoment.calendar(null, {
+					? this.task.completedDateMoment.calendar(moment(this.now), {
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
 						lastDay: t('tasks', '[Completed yesterday at] LT'),
 						// TRANSLATORS This is a string for moment.js. The square brackets escape the string from moment.js. Please translate the string and keep the brackets.
@@ -490,6 +491,18 @@ export default {
 		if (!this.task.loadedCompleted && this.$route.params.taskId === this.task.uri) {
 			this.getTasksFromCalendar({ calendar: this.task.calendar, completed: true, related: this.task.uid })
 		}
+	},
+
+	mounted() {
+		// Keep the relative due date (e.g. "Today", "Yesterday") up to date
+		// even if the task itself isn't modified while the component stays mounted.
+		this.nowInterval = setInterval(() => {
+			this.now = Date.now()
+		}, 60000)
+	},
+
+	beforeUnmount() {
+		clearInterval(this.nowInterval)
 	},
 
 	methods: {
