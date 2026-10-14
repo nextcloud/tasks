@@ -17,10 +17,11 @@
 			@update:model-value="changeEndType" />
 		<NcDateTimePicker v-if="isUntil"
 			class="repeat-option-end__until"
-			:value="until"
+			:model-value="until"
+			:min="minimumDate"
 			:append-to-body="true"
 			type="date"
-			@input="changeUntil" />
+			@update:model-value="changeUntil" />
 		<div v-if="isCount" class="repeat-option-end__count-container">
 			<input class="repeat-option-end__count-input"
 				type="number"
