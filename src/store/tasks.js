@@ -36,6 +36,7 @@ import moment from '@nextcloud/moment'
 
 import ICAL from 'ical.js'
 import { randomUUID } from '../utils/crypto.js'
+import {markRaw} from "vue";
 
 /**
  * Clone an ICAL.Time without triggering timezone lookups.
@@ -1716,7 +1717,7 @@ const actions = {
 
 		// Update the task model
 		task._recurrenceRule = {
-			recurrenceRuleValue: recurrenceValue,
+			recurrenceRuleValue: markRaw(recurrenceValue),
 			frequency: recurrenceRule.frequency,
 			interval: recurrenceRule.interval || 1,
 			count: recurrenceRule.count || null,
