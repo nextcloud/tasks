@@ -300,6 +300,7 @@
     "November" : "Арван нэгдүгээр сар",
     "December" : "12-р сар",
     "on day {days}" : "{days} өдөр",
+    "in {months}" : "{months}-д",
     "_{count} time_::_{count} times_" : ["{count} удаа","{count} удаа"],
     "Completion date must be in the past." : "Дуусгасан огноо өнгөрсөн байх ёстой.",
     "Successfully created the task." : "Даалгавар амжилттай үүсгэгдлээ.",
