@@ -170,6 +170,13 @@
     "November" : "11월",
     "December" : "12월",
     "_{count} time_::_{count} times_" : ["{count}회"],
+    "When getting in the car" : "차에 탈 때",
+    "When getting out of the car" : "차에서 내릴 때",
+    "When arriving at {location}" : "{location}에 도착할 때",
+    "When arriving at a location" : "장소에 도착할 때",
+    "When leaving {location}" : "{location}에서 떠날 때",
+    "When leaving a location" : "장소에서 떠날 때",
+    "Location reminder" : "위치 알림",
     "An error occurred" : "오류가 발생함",
     "Message from {author} in {conversationName}" : "{conversationName}에서 {author}가 보낸 메시지"
 },"pluralForm" :"nplurals=1; plural=0;"

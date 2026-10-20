@@ -23,6 +23,7 @@
 import { translate as t, translatePlural as n } from '@nextcloud/l10n'
 import moment from '@nextcloud/moment'
 import { convertTimeZone } from './alarms.js'
+import { formatAppleProximityAlarm } from './appleProximity.js'
 
 /**
  * Returns a formatted string for the due date
@@ -156,6 +157,11 @@ export function startDateString(task) {
  * @return {string}
  */
 export function formatAlarm(alarm, isAllDay, currentUserTimezone, locale) {
+	const proximityText = formatAppleProximityAlarm(alarm.appleProximity, t)
+	if (proximityText) {
+		return proximityText
+	}
+
 	if (alarm.relativeTrigger !== null) {
 		// Relative trigger
 		if (isAllDay && alarm.relativeIsRelatedToStart && alarm.relativeTrigger < 86400) {

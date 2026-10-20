@@ -9,6 +9,7 @@ import {
 } from '../utils/alarms.js'
 import { AlarmComponent } from '@nextcloud/calendar-js'
 import ICAL from 'ical.js'
+import { getAppleProximityFromIcalAlarm } from '../utils/appleProximity.js'
 
 /**
  * Creates a complete alarm object based on given props
@@ -45,6 +46,8 @@ const getDefaultAlarmObject = (props = {}) => Object.assign({}, {
 	relativeMinutesAllDay: null,
 	// The total amount of seconds for a relative alarm
 	relativeTrigger: null,
+	// Apple location/car reminder (X-APPLE-PROXIMITY), or null
+	appleProximity: null,
 }, props)
 
 /**
@@ -104,7 +107,9 @@ const mapAlarmComponentToAlarmObject = (alarmComponent) => {
 export function mapICALAlarmsToAlarmObjects(alarms) {
 	return alarms.map((alarm) => {
 		try {
-			return mapAlarmComponentToAlarmObject(AlarmComponent.fromICALJs(alarm))
+			const mapped = mapAlarmComponentToAlarmObject(AlarmComponent.fromICALJs(alarm))
+			mapped.appleProximity = getAppleProximityFromIcalAlarm(alarm)
+			return mapped
 		} catch (e) {
 			// Instead of breaking the whole page when parsing an invalid alarm,
 			// we just print a warning on the console.

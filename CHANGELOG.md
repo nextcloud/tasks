@@ -1,3 +1,8 @@
+## 0.18.2 - 2026-10-20
+
+### Added
+- Show Apple location and car reminders (`X-APPLE-PROXIMITY`) instead of the dummy 1976-04-01 trigger date
+
 ## 0.18.1 - 2026-06-29
 
 ### Fixed

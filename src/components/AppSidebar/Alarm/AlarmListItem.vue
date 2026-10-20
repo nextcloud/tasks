@@ -138,6 +138,11 @@ export default {
 			return getCanonicalLocale().toLocaleLowerCase()
 		},
 		canEdit() {
+			// Apple location/car reminders are not a wall-clock time.
+			if (this.alarm.appleProximity) {
+				return false
+			}
+
 			// You can always edit an alarm if it's absolute
 			if (!this.isRelative) {
 				return true
