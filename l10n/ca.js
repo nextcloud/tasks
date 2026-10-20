@@ -115,6 +115,7 @@ OC.L10N.register(
     "_month_::_months_" : ["mes","mesos"],
     "Yearly" : "Anualment",
     "_year_::_years_" : ["any","anys"],
+    "Remove recurrence" : "Suprimeix la recurrència",
     "Save" : "Desa",
     "Set value" : "Establir valor",
     "Delete value" : "Suprimeix el valor",
