@@ -43,6 +43,23 @@ describe('task', () => {
 		expect(task.isRecurring).toEqual(true)
 	})
 
+	it('Should parse a BYMONTHDAY list with an empty value', () => {
+		const vcalendar = `BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VTODO
+UID:empty-month-day
+DTSTAMP:20261018T000000Z
+DTSTART:20261001T020000Z
+RRULE:FREQ=MONTHLY;BYMONTHDAY=,24;UNTIL=20261225T020000Z
+SUMMARY:Repro
+END:VTODO
+END:VCALENDAR`
+		const task = new Task(vcalendar, {})
+
+		expect(task.isRecurring).toEqual(true)
+		expect(task.recurrenceRule.byMonthDay).toEqual([24])
+	})
+
 	it('Should set status to "COMPLETED" on completion.', () => {
 		const task = new Task(loadICS('vcalendars/vcalendar-default'), {})
 		task.complete = 100
