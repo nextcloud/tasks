@@ -35,6 +35,7 @@ Then open the Tasks app from the app menu.
 * [planify](https://github.com/alainm23/planify) (Linux)
 * [jtx Board](https://jtx.techbee.at/) [(Android)](https://play.google.com/store/apps/details?id=at.techbee.jtx)
 * [NowThis](https://nowthis.app/) ([iOS & macOS](https://github.com/asecretcompany/nowthis-source))
+* [Todav](https://github.com/AperteDev/todav) (Linux, GNOME)
 
 ## ETag (or: problem with non-existing conflicts)
 
