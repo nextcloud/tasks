@@ -79,6 +79,7 @@ OC.L10N.register(
     "weekday" : "ish kuni",
     "weekend day" : "dam olish kuni",
     "Due date" : "Muddati",
+    "Priority" : "Ustuvorlik",
     "Tags" : "Tags",
     "[Yesterday]" : "[Kecha]",
     "[Today]" : "[Bugun]",

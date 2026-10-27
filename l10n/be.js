@@ -6,6 +6,7 @@ OC.L10N.register(
     "All" : "Усе",
     "Tasks" : "Заданні",
     "The Tasks app for Nextcloud" : "Праграма Заданні для Nextcloud",
+    "Automatic" : "Аўтаматычна",
     "Tasks settings" : "Налады Заданняў",
     "No users or groups" : "Няма карыстальнікаў або груп",
     "Can edit" : "Можа рэдагаваць",
