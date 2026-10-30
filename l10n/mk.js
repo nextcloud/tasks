@@ -31,7 +31,7 @@ OC.L10N.register(
     "_Unsharing the calendar in {countdown} second_::_Unsharing the calendar in {countdown} seconds_" : ["Отстранување на споделување на календар за {countdown} секунда","Отстранување на споделување на календар за {countdown} секунди"],
     "_Deleting the list in {countdown} second_::_Deleting the list in {countdown} seconds_" : ["Бришење на листата за {countdown} секунда","Бришење на листата за {countdown} секунди"],
     "_Unsharing the list in {countdown} second_::_Unsharing the list in {countdown} seconds_" : ["Отстранување на споделување на листа за {countdown} секунда","Отстранување на споделување на листа за {countdown} секунди"],
-    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Споделено со 1 лице","Споделено со {num} лица"],
+    "_Shared with {num} entity_::_Shared with {num} entities_" : ["Споделено со {num} лице","Споделено со {num} лица"],
     "Share this calendar" : "Сподели го овој календар",
     "Share this list" : "Сподели ја оваа листа",
     "Calendar link copied to clipboard." : "Линк до календарот е копиран во клипборд.",
