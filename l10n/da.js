@@ -249,7 +249,7 @@ OC.L10N.register(
     "[Created] L" : "[Oprettet] L",
     "[Created last] dddd [at] LT" : "[Oprettet sidste] dddd [kl.] LT",
     "[Created] dddd [at] LT" : "[Oprettet] dddd [kl.] LT",
-    "Needs action" : "Handling påkrævet",
+    "Needs action" : "Handling nødvendig",
     "In process" : "I gang",
     "Canceled" : "Annulleret",
     "Clear status" : "Ryd status",
