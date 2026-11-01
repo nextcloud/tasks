@@ -34,6 +34,21 @@ import {
 	mapRecurrenceRuleValueToRecurrenceRuleObject,
 } from './recurrenceRule.js'
 
+/**
+ * Removes empty values from BYMONTHDAY lists before parsing. Some CalDAV
+ * clients send values such as `BYMONTHDAY=,24`, which ical.js rejects.
+ * @param {string} vcalendar The vCalendar data
+ * @return {string}
+ */
+function normalizeEmptyByMonthDayValues(vcalendar) {
+	return vcalendar.replace(/(RRULE(?:;[^:\r\n]*)?:)([^\r\n]*)/gi, (line, prefix, rule) => {
+		return prefix + rule.replace(/(^|;)BYMONTHDAY=([^;]*)/i, (part, separator, days) => {
+			const normalizedDays = days.split(',').filter(Boolean).join(',')
+			return normalizedDays ? `${separator}BYMONTHDAY=${normalizedDays}` : ''
+		})
+	})
+}
+
 export default class Task {
 
 	/**
@@ -48,7 +63,7 @@ export default class Task {
 			throw new Error('Invalid vCalendar')
 		}
 
-		const jCal = ICAL.parse(vcalendar)
+		const jCal = ICAL.parse(normalizeEmptyByMonthDayValues(vcalendar))
 		if (jCal[0] !== 'vcalendar') {
 			throw new Error('Only one task is allowed in the vCalendar data')
 		}
