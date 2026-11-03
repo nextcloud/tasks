@@ -36,6 +36,7 @@ import moment from '@nextcloud/moment'
 
 import ICAL from 'ical.js'
 import { randomUUID } from '../utils/crypto.js'
+import {markRaw} from "vue";
 
 /**
  * Clone an ICAL.Time without triggering timezone lookups.
@@ -1716,7 +1717,7 @@ const actions = {
 
 		// Update the task model
 		task._recurrenceRule = {
-			recurrenceRuleValue: recurrenceValue,
+			recurrenceRuleValue: markRaw(recurrenceValue),
 			frequency: recurrenceRule.frequency,
 			interval: recurrenceRule.interval || 1,
 			count: recurrenceRule.count || null,
@@ -1965,8 +1966,11 @@ const actions = {
 				// Save the updated master task
 				await context.dispatch('updateTask', freshTask)
 			} else {
-				// No more occurrences - keep task completed
-				// The exception will show as completed, master can be left as-is
+				// No more occurrences - complete the master task
+				freshTask.setComplete(100)
+				freshTask.setCompleted(true)
+				freshTask.setStatus('COMPLETED')
+				await context.dispatch('updateTask', freshTask)
 			}
 		} catch (error) {
 			console.error('Error handling recurring task completion:', error)
