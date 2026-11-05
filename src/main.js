@@ -34,6 +34,7 @@ import Delete from 'vue-material-design-icons/TrashCanOutline.vue'
 import Eye from 'vue-material-design-icons/EyeOutline.vue'
 import EyeOff from 'vue-material-design-icons/EyeOffOutline.vue'
 import Pulse from 'vue-material-design-icons/Pulse.vue'
+import Star from 'vue-material-design-icons/Star.vue'
 import TrendingUp from 'vue-material-design-icons/TrendingUp.vue'
 
 import { createApp } from 'vue'
@@ -59,6 +60,7 @@ const Tasks = createApp(App)
 	.component('IconEye', Eye)
 	.component('IconEyeOff', EyeOff)
 	.component('IconPulse', Pulse)
+	.component('IconStar', Star)
 	.component('IconTrendingUp', TrendingUp)
 	.provide('$OCA', OCA)
 	.provide('$appVersion', appVersion)
