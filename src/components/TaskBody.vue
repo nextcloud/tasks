@@ -48,6 +48,7 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 				@toggle-completed="toggleCompleted(task)" />
 			<!-- Info: summary, progress & tags -->
 			<div class="task-body__info"
+				@click="toggleOpenTaskSubtasks($event)"
 				@dblclick="editSummary()">
 				<div class="summary">
 					<span v-linkify="{text: task.summary, linkify: true}" />
@@ -280,6 +281,7 @@ export default {
 			showCreateMultipleTasksModal: false,
 			multipleTasks: { numberOfTasks: 0, tasks: {} },
 			additionalTaskProperties: {},
+			subtasksFoldedWhileOpen: false,
 		}
 	},
 	computed: {
@@ -467,7 +469,7 @@ export default {
 		 * @return {boolean} If we show the subtasks
 		 */
 		showSubtasks() {
-			if (!this.task.hideSubtasks || this.searchQuery || this.isTaskOpen() || this.isDescendantOpen()) {
+			if (!this.task.hideSubtasks || this.searchQuery || (this.isTaskOpen() && !this.subtasksFoldedWhileOpen) || this.isDescendantOpen()) {
 				return true
 			} else {
 				return false
@@ -483,6 +485,13 @@ export default {
 		 */
 		readOnly() {
 			return this.task.calendar.readOnly || (this.task.calendar.isSharedWithMe && this.task.class !== 'PUBLIC')
+		},
+	},
+
+	watch: {
+		// Opening the task again shows its subtasks again
+		'$route.params.taskId'() {
+			this.subtasksFoldedWhileOpen = false
 		},
 	},
 
@@ -589,6 +598,25 @@ export default {
 				return false
 			}
 			return checkSubtasksOpen(task.subTasks)
+		},
+
+		/**
+		 * Shows or hides the subtasks when the task is clicked while
+		 * it is open in the details view
+		 *
+		 * @param {object} $event the click event
+		 */
+		toggleOpenTaskSubtasks($event) {
+			// The second click of a double click edits the summary instead
+			if ($event.detail > 1 || $event.target.closest('.no-nav')
+				|| !this.isTaskOpen() || !Object.values(this.task.subTasks).length) {
+				return
+			}
+			const fold = this.showSubtasks
+			if (!!this.task.hideSubtasks !== fold) {
+				this.toggleSubtasksVisibility(this.task)
+			}
+			this.subtasksFoldedWhileOpen = fold
 		},
 
 		/**
