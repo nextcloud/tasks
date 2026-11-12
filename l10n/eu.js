@@ -147,6 +147,7 @@ OC.L10N.register(
     "By day of the month" : "Hileko egunaren arabera",
     "On the" : "Honetan",
     "on" : "noiz",
+    "On specific day" : "Egun zehatz batean",
     "weekday" : "asteguna",
     "weekend day" : "asteburuko eguna",
     "Relevance" : "Garrantzia",
