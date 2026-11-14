@@ -39,13 +39,20 @@ License along with this library. If not, see <http://www.gnu.org/licenses/>.
 					<h3>
 						{{ n('tasks', 'This will delete {taskCount} completed task and its subtasks from calendar "{calendar}".', 'This will delete {taskCount} completed tasks and their subtasks from calendar "{calendar}".', initialCompletedRootTasksCount, {taskCount: initialCompletedRootTasksCount, calendar: calendar.displayName}, { sanitize: false, escape: false }) }}
 					</h3>
-					<NcButton variant="primary"
+					<NcButton v-if="!deleting"
+						variant="primary"
 						class="delete-completed__button"
 						@click="deleteCompletedTasks">
 						<template #icon>
 							<Delete :size="20" />
 						</template>
 						{{ t('tasks', 'Delete completed tasks.') }}
+					</NcButton>
+					<NcButton v-else
+						class="delete-completed__button"
+						:disabled="cancelRequested"
+						@click="cancelDeletion">
+						{{ t('tasks', 'Cancel') }}
 					</NcButton>
 				</div>
 				<div v-else>
@@ -98,6 +105,10 @@ export default {
 			modalOpen: false,
 			initialCompletedTasksCount: 0,
 			initialCompletedRootTasksCount: 0,
+			// Whether a bulk deletion is currently running
+			deleting: false,
+			// Whether the user asked to stop the running bulk deletion
+			cancelRequested: false,
 		}
 	},
 	computed: {
@@ -149,10 +160,30 @@ export default {
 		closeModal() {
 			this.modalOpen = false
 		},
-		deleteCompletedTasks() {
-			this.tasks.map(
-				(task) => this.deleteTask({ task, dav: true }),
-			)
+		/**
+		 * Deletes the completed tasks one by one, so the deletion can be
+		 * stopped between tasks via cancelDeletion().
+		 */
+		async deleteCompletedTasks() {
+			this.deleting = true
+			this.cancelRequested = false
+			// Snapshot the tasks to delete, as this.tasks shrinks while we go.
+			const tasksToDelete = [...this.tasks]
+			for (const task of tasksToDelete) {
+				if (this.cancelRequested) {
+					break
+				}
+				await this.deleteTask({ task, dav: true })
+			}
+			this.deleting = false
+		},
+		/**
+		 * Requests to stop the running bulk deletion.
+		 * Tasks already deleted, or currently being deleted, are not affected;
+		 * only the not-yet-started deletions in the batch are skipped.
+		 */
+		cancelDeletion() {
+			this.cancelRequested = true
 		},
 	},
 }
