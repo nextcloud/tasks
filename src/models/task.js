@@ -33,6 +33,7 @@ import {
 	getDefaultRecurrenceRuleObject,
 	mapRecurrenceRuleValueToRecurrenceRuleObject,
 } from './recurrenceRule.js'
+import {markRaw} from "vue";
 
 export default class Task {
 
@@ -138,7 +139,7 @@ export default class Task {
 				try {
 					// Get the ICAL.Recur value and convert directly to RecurValue
 					const icalRecur = firstRecurrenceRule.getFirstValue()
-					const recurValue = RecurValue.fromICALJs(icalRecur)
+					const recurValue = markRaw(RecurValue.fromICALJs(icalRecur))
 
 					// Get reference date for the mapping function
 					const referenceDate = this._due || this._start
