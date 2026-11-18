@@ -33,6 +33,7 @@ Then open the Tasks app from the app menu.
 * [Kalendar](https://apps.kde.org/kalendar/) (Linux)
 * [vdirsyncer](https://vdirsyncer.pimutils.org/en/stable/) (Linux and BSD)
 * [planify](https://github.com/alainm23/planify) (Linux)
+* [Errands](https://github.com/mrvladus/Errands) (Linux)
 * [jtx Board](https://jtx.techbee.at/) [(Android)](https://play.google.com/store/apps/details?id=at.techbee.jtx)
 * [NowThis](https://nowthis.app/) ([iOS & macOS](https://github.com/asecretcompany/nowthis-source))
 
