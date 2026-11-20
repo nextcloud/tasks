@@ -894,15 +894,42 @@ const actions = {
 		const vData = ICAL.stringify(task.jCal)
 
 		if (!task.dav) {
-			const response = await task.calendar.dav.createVObject(vData)
-			task.dav = response
-			task.syncStatus = new SyncStatus('success', t('tasks', 'Successfully created the task.'))
+			// Optimistically add the task to the store, so it shows up
+			// immediately while the request to the server is still running.
+			task.syncStatus = new SyncStatus('sync', t('tasks', 'Synchronizing to the server.'))
 			context.commit('appendTask', task)
 			context.commit('addTaskToCalendar', task)
 			const parent = context.getters.getTaskByUid(task.related)
 			context.commit('addTaskToParent', { task, parent })
 
-			return task
+			try {
+				const response = await task.calendar.dav.createVObject(vData)
+				// Write the dav object to the task through the reactive proxy
+				// of the store, so the components react to it.
+				const reactiveTask = context.getters.getTaskByUid(task.uid)
+				if (reactiveTask) {
+					reactiveTask.dav = response
+					reactiveTask.syncStatus = new SyncStatus('success', t('tasks', 'Successfully created the task.'))
+					// Send updates which were queued while the task was created.
+					if (reactiveTask.updateScheduled) {
+						context.dispatch('updateTask', reactiveTask)
+					}
+				} else {
+					// The task was deleted locally while it was created on the server.
+					// So delete it on the server as well.
+					await response.delete()
+				}
+
+				return task
+			} catch (error) {
+				console.error(error)
+				// Roll back the optimistic creation.
+				context.commit('deleteTaskFromParent', { task, parent })
+				context.commit('deleteTaskFromCalendar', task)
+				context.commit('deleteTask', task)
+				showError(t('tasks', 'Could not create the task.'))
+				throw error
+			}
 		}
 	},
 
@@ -959,17 +986,34 @@ const actions = {
 			}
 		}
 
+		// Optimistically add the duplicate to the store, so it shows up
+		// immediately while the request to the server is still running.
+		newTask.syncStatus = new SyncStatus('sync', t('tasks', 'Synchronizing to the server.'))
+		context.commit('appendTask', newTask)
+		context.commit('addTaskToCalendar', newTask)
+		const parentLocal = context.getters.getTaskByUid(newTask.related)
+		context.commit('addTaskToParent', { task: newTask, parent: parentLocal })
+
 		// Create the new vObject on the server
 		try {
 			const response = await calendar.dav.createVObject(ICAL.stringify(newTask.jCal))
-			newTask.dav = response
-			newTask.syncStatus = new SyncStatus('success', t('tasks', 'Successfully duplicated the task.'))
-			context.commit('appendTask', newTask)
-			context.commit('addTaskToCalendar', newTask)
-			const parentLocal = context.getters.getTaskByUid(newTask.related)
-			context.commit('addTaskToParent', { task: newTask, parent: parentLocal })
+			// Write the dav object to the task through the reactive proxy
+			// of the store, so the components react to it.
+			const reactiveNewTask = context.getters.getTaskByUid(newTask.uid)
+			if (reactiveNewTask) {
+				reactiveNewTask.dav = response
+				reactiveNewTask.syncStatus = new SyncStatus('success', t('tasks', 'Successfully duplicated the task.'))
+				// Send updates which were queued while the task was created.
+				if (reactiveNewTask.updateScheduled) {
+					context.dispatch('updateTask', reactiveNewTask)
+				}
+			}
 		} catch (error) {
 			console.error(error)
+			// Roll back the optimistic creation.
+			context.commit('deleteTaskFromParent', { task: newTask, parent: parentLocal })
+			context.commit('deleteTaskFromCalendar', newTask)
+			context.commit('deleteTask', newTask)
 			showError(t('tasks', 'Could not duplicate the task.'))
 			return null
 		}
@@ -1095,6 +1139,12 @@ const actions = {
 	 * @return {Promise}
 	 */
 	async updateTask(context, task) {
+		// If the task was not yet created on the server, we cannot update it.
+		// Schedule the update instead, it is sent once the task was created.
+		if (!task.dav) {
+			task.updateScheduled = true
+			return
+		}
 		// If an update is currently running, we schedule another one an return
 		if (task.updateRunning) {
 			task.updateScheduled = true
@@ -1270,6 +1320,9 @@ const actions = {
 
 			// Handle recurring tasks
 			if (task.isRecurring && task.recurrenceRule.recurrenceRuleValue) {
+				// Optimistically show the task as completed, the recurrence
+				// exception is created on the server in the background.
+				context.commit('setComplete', { task, complete })
 				await context.dispatch('handleRecurringTaskCompletion', { task })
 				return // The handler will update the task
 			}
@@ -1971,6 +2024,8 @@ const actions = {
 		} catch (error) {
 			console.error('Error handling recurring task completion:', error)
 			showError(t('tasks', 'Error processing recurring task'))
+			// Roll back the optimistic completion.
+			context.dispatch('setPercentComplete', { task, complete: 0 })
 		}
 	},
 
@@ -1995,26 +2050,39 @@ const actions = {
 		}
 		// Don't move if source and target calendar are the same.
 		if (task.dav && task.calendar !== calendar) {
+			const oldCalendar = task.calendar
+
+			// Optimistically move the task in the store, so the UI updates
+			// immediately. The move on the server is executed in the background,
+			// a failure rolls the optimistic move back.
+			context.commit('deleteTaskFromCalendar', task)
+			context.commit('deleteTask', task)
+			// Update the calendar of the task
+			context.commit('setTaskCalendar', { task, calendar })
+			// Remove the task from the calendar, add it to the new one
+			context.commit('addTaskToCalendar', task)
+			context.commit('appendTask', task)
+			task.syncStatus = new SyncStatus('sync', t('tasks', 'Synchronizing to the server.'))
+
 			// Move all subtasks first
 			await Promise.all(Object.values(task.subTasks).map(async (subTask) => {
 				await context.dispatch('moveTask', { task: subTask, calendar, parent: task })
 			}))
 
-			await task.dav.move(calendar.dav)
-				.then((response) => {
-					context.commit('deleteTaskFromCalendar', task)
-					context.commit('deleteTask', task)
-					// Update the calendar of the task
-					context.commit('setTaskCalendar', { task, calendar })
-					// Remove the task from the calendar, add it to the new one
-					context.commit('addTaskToCalendar', task)
-					context.commit('appendTask', task)
-					task.syncStatus = new SyncStatus('success', t('tasks', 'Task successfully moved to new calendar.'))
-				})
-				.catch((error) => {
-					console.error(error)
-					showError(t('tasks', 'An error occurred'))
-				})
+			try {
+				await task.dav.move(calendar.dav)
+				task.syncStatus = new SyncStatus('success', t('tasks', 'Task successfully moved to new calendar.'))
+			} catch (error) {
+				console.error(error)
+				// Roll back the optimistic move
+				context.commit('deleteTask', task)
+				context.commit('deleteTaskFromCalendar', task)
+				context.commit('setTaskCalendar', { task, calendar: oldCalendar })
+				context.commit('addTaskToCalendar', task)
+				context.commit('appendTask', task)
+				task.syncStatus = new SyncStatus('error', t('tasks', 'Could not move the task.'))
+				showError(t('tasks', 'An error occurred'))
+			}
 		}
 
 		// Set the new parent
